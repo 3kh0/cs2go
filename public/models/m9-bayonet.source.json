@@ -1,0 +1,8 @@
+{
+  "source": "M9_B.STL",
+  "sha256": "e69dffd131521215c4bd96564d3d41cef1baceaafd30bec8d2401434d5e491a2",
+  "triangles": 10994,
+  "lengthMeters": 0.31,
+  "materials": "Authored steel blade, steel guard and dark grip; STL has no textures or animation.",
+  "generator": "scripts/convert-knife.py"
+}

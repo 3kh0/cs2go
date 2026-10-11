@@ -1,0 +1,25 @@
+{
+  "author": "Valve",
+  "source": "Steam app 740 (Counter-Strike: Global Offensive - Dedicated Server), depot 731, anonymous SteamCMD access via DepotDownloader 3.4.0",
+  "depotManifest": "1224088799001669801 (2023-10-12, final CS:GO build)",
+  "version": "Final CS:GO Dust II (post-October-2017 rework), BSP v21 map revision 10535",
+  "contents": "maps/ is copied unchanged from the depot. materials/ and models/ are the 3,111 shared files de_dust2.bsp references (brush textures, skybox, detail sprites, static/entity prop models, and their materials), extracted from pak01 VPK archives and CRC-checked. Dust II-specific props and patched materials are embedded in the BSP pakfile.",
+  "knownMissing": [
+    "materials/sprites/light_glow02_360.vtf (not present in Valve's VPKs)",
+    "skybox/nukeblank_hdr* (map uses LDR sky only)"
+  ],
+  "files": {
+    "maps/de_dust2.bsp": "b91be410539fbbfc16300423f1e19c024f12addf1429c8cb2f72b53fe0fd6bcc",
+    "maps/de_dust2.nav": "82d46fb7d3618514e9897d87e5666c0c3f483c4a82060aac03313afad864b649"
+  },
+  "tools": {
+    "Blender": "4.5.9",
+    "SourceIOCommit": "259b68b25d7e0ae3533d14140448bd145071f5c0"
+  },
+  "input": "new_map/csgo",
+  "limitations": [
+    "Original geometry and albedo/normal textures; standard PBR approximation without Source lightmaps",
+    "Detailed static props simplified to 30 percent triangles; native NAV graph retained",
+    "Browser triangle collision approximates Source player hull and surface penetration"
+  ]
+}

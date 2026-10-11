@@ -1,0 +1,156 @@
+{
+  "repository": "https://github.com/sourcesounds/csgo",
+  "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+  "clips": [
+    {
+      "name": "step-sand-1",
+      "source": "sound/player/footsteps/sand1.wav",
+      "bytes": 4693
+    },
+    {
+      "name": "step-concrete-1",
+      "source": "sound/player/footsteps/concrete1.wav",
+      "bytes": 4615
+    },
+    {
+      "name": "step-sand-2",
+      "source": "sound/player/footsteps/sand2.wav",
+      "bytes": 5470
+    },
+    {
+      "name": "step-concrete-2",
+      "source": "sound/player/footsteps/concrete2.wav",
+      "bytes": 5080
+    },
+    {
+      "name": "step-sand-3",
+      "source": "sound/player/footsteps/sand3.wav",
+      "bytes": 7363
+    },
+    {
+      "name": "step-concrete-3",
+      "source": "sound/player/footsteps/concrete3.wav",
+      "bytes": 7184
+    },
+    {
+      "name": "step-sand-4",
+      "source": "sound/player/footsteps/sand4.wav",
+      "bytes": 4887
+    },
+    {
+      "name": "step-concrete-4",
+      "source": "sound/player/footsteps/concrete4.wav",
+      "bytes": 5444
+    },
+    {
+      "name": "damage-1",
+      "source": "sound/player/damage1.wav",
+      "bytes": 5629
+    },
+    {
+      "name": "death-1",
+      "source": "sound/player/death1.wav",
+      "bytes": 12372
+    },
+    {
+      "name": "gear-1",
+      "source": "sound/player/kevlar1.wav",
+      "bytes": 2582
+    },
+    {
+      "name": "damage-2",
+      "source": "sound/player/damage2.wav",
+      "bytes": 5959
+    },
+    {
+      "name": "death-2",
+      "source": "sound/player/death2.wav",
+      "bytes": 14268
+    },
+    {
+      "name": "gear-2",
+      "source": "sound/player/kevlar2.wav",
+      "bytes": 3486
+    },
+    {
+      "name": "damage-3",
+      "source": "sound/player/damage3.wav",
+      "bytes": 5305
+    },
+    {
+      "name": "death-3",
+      "source": "sound/player/death3.wav",
+      "bytes": 11485
+    },
+    {
+      "name": "gear-3",
+      "source": "sound/player/kevlar3.wav",
+      "bytes": 3556
+    },
+    {
+      "name": "land",
+      "source": "sound/player/land.wav",
+      "bytes": 6794
+    },
+    {
+      "name": "jump",
+      "source": "sound/player/jumplanding.wav",
+      "bytes": 4764
+    },
+    {
+      "name": "click",
+      "source": "sound/ui/buttonclick.wav",
+      "bytes": 1439
+    },
+    {
+      "name": "hover",
+      "source": "sound/ui/buttonrollover.wav",
+      "bytes": 847
+    },
+    {
+      "name": "buy",
+      "source": "sound/ui/panorama/radial_menu_buy_01.wav",
+      "bytes": 2415
+    },
+    {
+      "name": "ready",
+      "source": "sound/ui/panorama/game_ready_01.wav",
+      "bytes": 27128
+    },
+    {
+      "name": "music-menu",
+      "source": "sound/music/valve_csgo_01/mainmenu.mp3",
+      "bytes": 1321973
+    },
+    {
+      "name": "music-start",
+      "source": "sound/music/valve_csgo_01/startround_01.mp3",
+      "bytes": 261069
+    },
+    {
+      "name": "music-deathcam",
+      "source": "sound/music/valve_csgo_01/deathcam.mp3",
+      "bytes": 48320
+    },
+    {
+      "name": "music-win",
+      "source": "sound/music/valve_csgo_01/wonround.mp3",
+      "bytes": 333307
+    },
+    {
+      "name": "music-lose",
+      "source": "sound/music/valve_csgo_01/lostround.mp3",
+      "bytes": 178700
+    },
+    {
+      "name": "music-mvp",
+      "source": "sound/music/valve_csgo_01/roundmvpanthem_01.mp3",
+      "bytes": 333564
+    },
+    {
+      "name": "music-countdown",
+      "source": "sound/music/valve_csgo_01/roundtenseccount.mp3",
+      "bytes": 159598
+    }
+  ]
+}
