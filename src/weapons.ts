@@ -147,6 +147,31 @@ export function createGun(index: number, team: "t" | "ct" = "ct") {
         bone.quaternion.slerp(new T.Quaternion(), 0.3);
     });
   }
+  const fingers: FingerPose[] = [];
+  if (index === 4) {
+    arms.traverse((bone) => {
+      if (
+        bone instanceof T.Bone &&
+        (team === "t" ? /finger_.*_[012]_R/.test(bone.name) : /_R_Finger/.test(bone.name))
+      ) {
+        const thumb = team === "t" ? bone.name.includes("thumb") : /_Finger0/.test(bone.name);
+        const closed = bone.quaternion.clone().normalize();
+        const opened = closed.clone().slerp(new T.Quaternion(), thumb ? 0.28 : 0.9);
+        // Spread at the knuckles; distal joints straighten without fanning out.
+        let spread = 0;
+        if (team === "t" && bone.name.endsWith("_0_R")) {
+          if (bone.name.includes("index")) spread = 0.15;
+          if (bone.name.includes("ring")) spread = -0.1;
+          if (bone.name.includes("pinky")) spread = -0.22;
+        } else if (team === "ct") {
+          if (bone.name.endsWith("_Finger1")) spread = 0.25;
+          if (bone.name.endsWith("_Finger2")) spread = -0.12;
+        }
+        opened.multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0, 1, 0), spread));
+        fingers.push({ bone, closed, opened });
+      }
+    });
+  }
   arms.updateMatrixWorld(true);
   const rightRest = new T.Vector3(
     0.032,
@@ -175,7 +200,9 @@ export function createGun(index: number, team: "t" | "ct" = "ct") {
     // First-person forearms need reach without enlarging the palms. Extending
     // the hidden upper arm keeps the source mesh's cut sleeve below the frame.
     fore.position.multiplyScalar(1.45);
-    wrist.position.multiplyScalar(1.25);
+    // IDF has separate glove/cuff meshes: stretching its forearm bone opens a
+    // visible gap at the wrist. Ground Rebel has a continuous weighted forearm.
+    if (team === "t") wrist.position.multiplyScalar(1.25);
     arms.updateMatrixWorld(true);
     // Source 1 and Source 2 hands use different mirrored bone axes.
     // Build a palm frame explicitly: knuckles forward, palm toward the grip.
@@ -238,6 +265,7 @@ export function createGun(index: number, team: "t" | "ct" = "ct") {
     bolt,
     magazine,
     model: group.getObjectByName("weapon-model")!,
+    fingers,
   });
   animateGun(group, { reload: 0, draw: 0, bolt: 0, recoil: 0, bob: 0, sway: 0 });
   return group;
@@ -259,7 +287,9 @@ type Arm = {
   upperLength: number;
   foreLength: number;
 };
+type FingerPose = { bone: T.Bone; closed: T.Quaternion; opened: T.Quaternion };
 type Rig = {
+  fingers: FingerPose[];
   index: number;
   left: Arm;
   right: Arm;
@@ -423,6 +453,47 @@ const guardRotation = palmRotation(new T.Vector3(0.8, 0.15, -0.58), new T.Vector
 const pistolSupport = palmRotation(new T.Vector3(0, 0, -1), new T.Vector3(1, 0, 0));
 const reloadGrip = palmRotation(new T.Vector3(0.8, 0.55, 0), new T.Vector3(0, 0, -1));
 const actionGrip = palmRotation(new T.Vector3(0.3, 0, -1), new T.Vector3(0, -1, 0));
+// The supplied KaWiSo Bayonet video: rise, clockwise finger roll, catch,
+// follow-through, ready. Unwrapped roll angles preserve the complete revolution.
+// Reference beats are normalized to the existing 550 ms equip window.
+const knifeDraw = [
+  // time, wrist x/y/z offsets, palm pitch/yaw/roll, blade roll, fingers open
+  [0, 0.035, -0.38, 0.055, 0.2, 0.35, 0.45, 0.45, 0],
+  [0.1, 0.005, -0.035, 0, 0.15, 0.45, 0.15, 0.15, 0.12],
+  [0.22, -0.015, 0.085, -0.015, 0.1, 1.15, -0.65, -2.5, 0.9],
+  [0.4, -0.01, 0.12, -0.025, 0.1, 1.3, -0.75, -3.6, 1],
+  [0.58, -0.005, 0.13, -0.02, 0.12, 1.15, -0.45, -4.85, 1],
+  [0.72, 0, 0.085, -0.01, 0.2, 0.65, 0.5, -5.65, 0.65],
+  [0.82, 0, 0.015, 0, 0.2, 0.35, 0.72, 0.72 - Math.PI * 2, 0],
+  [0.92, -0.012, -0.025, 0.005, 0.22, 0.35, 1.12, 1.12 - Math.PI * 2, 0],
+  [1, 0, 0, 0, 0.2, 0.35, 0.98, 0.98 - Math.PI * 2, 0],
+];
+// Cubic Hermite sampling carries velocity through the roll rather than stopping
+// at every captured pose. Endpoints are stationary, so idle has no snap.
+function knifeDrawComponent(t: number, component: number) {
+  for (let i = 1; i < knifeDraw.length; i++) {
+    const a = knifeDraw[i - 1],
+      b = knifeDraw[i];
+    if (t > b[0]) continue;
+    const prev = knifeDraw[Math.max(0, i - 2)],
+      next = knifeDraw[Math.min(knifeDraw.length - 1, i + 1)];
+    const span = b[0] - a[0],
+      u = T.MathUtils.clamp((t - a[0]) / span, 0, 1);
+    const m0 = i === 1 ? 0 : (b[component] - prev[component]) / (b[0] - prev[0]);
+    const m1 = i === knifeDraw.length - 1 ? 0 : (next[component] - a[component]) / (next[0] - a[0]);
+    return (
+      (2 * u ** 3 - 3 * u * u + 1) * a[component] +
+      (u ** 3 - 2 * u * u + u) * span * m0 +
+      (-2 * u ** 3 + 3 * u * u) * b[component] +
+      (u ** 3 - u * u) * span * m1
+    );
+  }
+  return knifeDraw[knifeDraw.length - 1][component];
+}
+const knifeOpenPalm = new T.Quaternion().setFromEuler(new T.Euler(0.1, 1.3, -1.05, "ZYX"));
+const knifePivot = new T.Vector3(0, 0, -0.035);
+const knifeDrawRotation = new T.Quaternion();
+const knifeDrawEuler = new T.Euler();
 const knifeBasis = new T.Quaternion()
   .setFromAxisAngle(new T.Vector3(1, 0, 0), Math.PI / 2)
   .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0, 0, 1), Math.PI / 2));
@@ -571,52 +642,49 @@ export function animateGun(group: T.Group, pose: GunPose) {
     }
   }
   if (index === 4) {
-    const t = 1 - pose.draw;
-    // M9: lift the blade upright, turn the wrist, then settle in forward grip.
-    const lift =
-      pose.draw > 0
-        ? track(t, [
-            [0, -0.42],
-            [0.2, -0.3],
-            [0.48, 0.065],
-            [0.72, 0.015],
-            [1, 0],
-          ])
-        : 0;
-    const roll =
-      pose.draw > 0
-        ? track(t, [
-            [0, -0.35],
-            [0.25, -0.15],
-            [0.48, 0.05],
-            [0.8, 1.18],
-            [1, 1.12],
-          ])
-        : 1.12;
+    const t = 1 - drawing;
+    const lift = drawing > 0 ? knifeDrawComponent(t, 2) : 0;
+    const roll = drawing > 0 ? knifeDrawComponent(t, 6) : 0.98;
+    const release = drawing > 0 ? T.MathUtils.clamp(knifeDrawComponent(t, 8), 0, 1) : 0;
     // Impact poses coincide with the simulation's 100 ms slash / 180 ms stab.
     const strike = track(pose.knife ?? 0, pose.stab ? stabTrack : slashTrack);
     group.position.set(0.24 + pose.sway, -0.24 + pose.bob, -0.5);
     group.rotation.set(0, -0.045, 0);
     targetRight.set(
-      0.025 - strike * (pose.stab ? 0.2 : 0.26),
+      0.025 + (drawing > 0 ? knifeDrawComponent(t, 1) : 0) - strike * (pose.stab ? 0.2 : 0.26),
       0.035 + lift,
-      -0.035 - strike * (pose.stab ? 0.32 : 0.12),
+      -0.035 + (drawing > 0 ? knifeDrawComponent(t, 3) : 0) - strike * (pose.stab ? 0.32 : 0.12),
     );
-    right.hand.rotation.set(0.2 + strike * 0.35, 0.35, roll - strike * 0.9);
+    right.hand.rotation.set(
+      (drawing > 0 ? knifeDrawComponent(t, 4) : 0.2) + strike * 0.35,
+      drawing > 0 ? knifeDrawComponent(t, 5) : 0.35,
+      roll - strike * 0.9,
+    );
+    right.hand.quaternion.slerp(knifeOpenPalm, release);
     if (pose.stab) right.hand.quaternion.slerp(stabRotation, Math.max(0, strike));
     model.position.set(-0.018, 0, -0.055).applyQuaternion(right.hand.quaternion).add(targetRight);
     model.quaternion.copy(right.hand.quaternion).multiply(knifeBasis);
+    for (const finger of rig.fingers)
+      finger.bone.quaternion.copy(finger.closed).slerp(finger.opened, release);
+    if (drawing > 0 && t < 0.82) {
+      // Keep the handle's finger contact fixed while the blade rolls around it;
+      // rotating the entire arm gave the old animation its rigid wrist-flip look.
+      contact.copy(knifePivot).applyQuaternion(model.quaternion).add(model.position);
+      knifeDrawRotation.setFromEuler(knifeDrawEuler.set(0.2, 0.35, knifeDrawComponent(t, 7)));
+      model.quaternion.copy(knifeDrawRotation).multiply(knifeBasis);
+      model.position.copy(knifePivot).applyQuaternion(model.quaternion).negate().add(contact);
+    }
     // Relaxed guard hand returns a little behind the dominant wrist.
     const guard =
       pose.draw > 0
         ? track(t, [
             [0, 0.3],
-            [0.4, 0.3],
-            [0.8, -0.012],
+            [0.25, 0.3],
+            [0.65, -0.012],
             [1, 0],
           ])
         : 0;
-    targetLeft.set(-0.42, -0.04 - guard, -0.07);
+    targetLeft.set(-0.36, 0.02 - guard, -0.07);
     left.hand.quaternion.copy(guardRotation);
     targetLeft.y -= Math.max(0, strike) * 0.035;
   }

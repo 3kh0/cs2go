@@ -1238,7 +1238,7 @@ test("M9 slash and stab hit once, respect reach and cover, and cancel on switch"
   });
 });
 
-test("both view rigs keep skinned wrists on contacts and the M9 locked in its palm", async ({
+test("both view rigs keep wrists on contacts and the M9 attached after its catch", async ({
   page,
 }) => {
   await page.goto("/");
@@ -1288,7 +1288,7 @@ test("both view rigs keep skinned wrists on contacts and the M9 locked in its pa
                   .distanceTo(marker.getWorldPosition(g.position.clone())),
               );
             }
-            if (index === 4) {
+            if (index === 4 && (phase !== "draw" || p >= 0.82)) {
               const relative = right.matrixWorld.clone().invert().multiply(model.matrixWorld);
               if (first) grip.copy(relative);
               gripError = Math.max(
@@ -1319,4 +1319,79 @@ test("both view rigs keep skinned wrists on contacts and the M9 locked in its pa
   expect(result.gripError).toBeLessThan(0.001);
   expect(result.resetError).toBeLessThan(0.0001);
   expect(result.lensStable).toBe(true);
+});
+
+test("Bayonet draw rolls around the fingers, catches continuously and resets on switching", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.bringToFront();
+  await page.getByRole("button", { name: "PRACTICE", exact: true }).click();
+  await page.locator("#play").click();
+  await page.waitForFunction(() => window.__game.locked);
+  const results = await page.evaluate(() => {
+    const g = window.__game;
+    g.locked = false;
+    return (["ct", "t"] as const).map((team) => {
+      g.team = team;
+      g.equip(4);
+      g.drawTime = 0;
+      g.animateWeapon();
+      g.gun.updateMatrixWorld(true);
+      const model = g.gun.getObjectByName("weapon-model")!;
+      const hand = g.gun.getObjectByName("right-hand")!;
+      const finger = g.gun.getObjectByName(
+        team === "t" ? "finger_middle_1_R" : "ValveBipedBip01_R_Finger21",
+      )!;
+      const closed = finger.quaternion.clone();
+      const pivot = g.position.clone().set(0, 0, -0.035);
+      const contact = model.localToWorld(pivot.clone());
+      hand.worldToLocal(contact);
+      const ready = model.matrixWorld.clone();
+      let contactError = 0,
+        opening = 0,
+        sweep = 0,
+        lastAngle = 0,
+        maxStep = 0;
+      const previous = model.quaternion.clone();
+      for (let frame = 0; frame <= 120; frame++) {
+        const p = frame / 120;
+        g.drawTime = (1 - p) * 0.55;
+        g.animateWeapon();
+        g.gun.updateMatrixWorld(true);
+        contactError = Math.max(
+          contactError,
+          model.localToWorld(pivot.clone()).distanceTo(hand.localToWorld(contact.clone())),
+        );
+        opening = Math.max(opening, closed.angleTo(finger.quaternion));
+        const blade = pivot.clone().set(0, 0, -1).applyQuaternion(model.quaternion);
+        const angle = Math.atan2(blade.y, blade.x);
+        if (frame > 0) {
+          sweep += Math.atan2(Math.sin(angle - lastAngle), Math.cos(angle - lastAngle));
+          maxStep = Math.max(maxStep, previous.angleTo(model.quaternion));
+        }
+        previous.copy(model.quaternion);
+        lastAngle = angle;
+      }
+      const resetError = Math.max(
+        ...ready.elements.map((v, i) => Math.abs(v - model.matrixWorld.elements[i])),
+      );
+      const closedError = closed.angleTo(finger.quaternion);
+      g.drawTime = 0.3;
+      g.animateWeapon();
+      g.equip(2);
+      g.equip(4);
+      const restarted = g.drawTime === 0.55 && g.knifeTime === 0 && !g.knifePending;
+      return { contactError, opening, sweep, maxStep, resetError, closedError, restarted };
+    });
+  });
+  for (const result of results) {
+    expect(result.contactError).toBeLessThan(0.001);
+    expect(result.opening).toBeGreaterThan(0.3);
+    expect(result.sweep).toBeLessThan(-5);
+    expect(result.maxStep).toBeLessThan(0.35);
+    expect(result.resetError).toBeLessThan(0.0001);
+    expect(result.closedError).toBeLessThan(0.0001);
+    expect(result.restarted).toBe(true);
+  }
 });
