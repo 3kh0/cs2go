@@ -26,6 +26,8 @@ For the browser tests, install Chromium once with `bun run --bun playwright inst
 
 `vercel.json` marks Vite's content-hashed `/assets/` files immutable. Three.js builds into its own chunk so it stays cached when only game code changes. Unhashed files under `public/` use Vercel's default revalidation.
 
+Performance notes: collision and navigation use flat typed arrays and numeric grids. Bots stagger their 16 Hz thinking across simulation steps. Bot bodies animate once per rendered frame: off-screen bots update at 10 Hz and distant ones at 30 Hz. Bots are frustum-culled and share one skeleton per agent. Tracers and impact decals are pooled. Shaders are compiled before **LET’S PLAY** is enabled. Weapon and agent GLBs are meshopt-compressed with `scripts/compress-models.py` (native gltfpack 0.24; run it once after re-importing models).
+
 ## Play
 
 Casual: 10 T versus 10 CT (you, nine teammates, and ten opponents) on Dust II. First to eight rounds, two-minute rounds, no respawns until the next round. T carries and plants the bomb by holding **E** at A/B for 3.2 seconds. CT holds **E** within two meters to defuse for ten seconds; moving or releasing E cancels. The bomb detonates after 40 seconds. Eliminating a team or running out of time resolves the round; a planted bomb keeps the round active after T elimination. After death, the camera follows a living teammate. Friendly fire is disabled, purchases are free in every mode, and economy/grenades are not modeled. Every new spawn starts with a USP-S and M9 Bayonet. Press B to buy an AK-47, M4A1-S, or AWP; buying replaces your one primary weapon and equips it.
