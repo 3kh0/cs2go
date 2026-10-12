@@ -1,0 +1,95 @@
+{
+  "generator": "scripts/import-ground-rebel.py",
+  "source": "User-supplied CSGOSKINS.GG Ground Rebel mesh (2).glb and textures; Valve assets.",
+  "mesh_sha256": "23b73a17bb8cae0f955cd66eae458141d1d36fb98b37f0657057afcabbdb1682",
+  "textures": [
+    {
+      "file": "codex-clipboard-0v5UGB.png",
+      "url": null,
+      "sha256": "8272be0ddd8d869a12624bd03da51c0994301d47f3ddb45706f55927ca99c9ef"
+    },
+    {
+      "file": "codex-clipboard-CCIAAM.png",
+      "url": null,
+      "sha256": "81479b1ee9c06bb6e4616b76a3ee41be9ac1652734661289c1cc632e4e57cc9e"
+    },
+    {
+      "file": "codex-clipboard-Fnv55Q.png",
+      "url": null,
+      "sha256": "2c94f2828bb355d620bd45dae34f6bae2b18c33928beb68c3c5718b28f77a5e1"
+    },
+    {
+      "file": "codex-clipboard-fY5JNM.png",
+      "url": null,
+      "sha256": "a0ea54432c3406ce59f9c4cbe2a9a6dd0b269edf23ff60b36095fa64e3757bad"
+    },
+    {
+      "file": "codex-clipboard-vg87Ix.png",
+      "url": null,
+      "sha256": "05c36be64aadcf887f3a156440a608d4d330eb0024cd9b2e1f5f3d56dc50bae9"
+    },
+    {
+      "file": "codex-clipboard-UG0mpz.png",
+      "url": null,
+      "sha256": "d28dcd9e0444d1520decc635fc05ff781d0d2c1c4f1228d2cb6feac5143e9f55"
+    },
+    {
+      "file": "codex-clipboard-gIC3Dn.png",
+      "url": null,
+      "sha256": "5c140a5867809b521ef429e966e64db1ac790970f6361488ae04f42aa2945b8f"
+    },
+    {
+      "file": "codex-clipboard-PWpVtk.png",
+      "url": null,
+      "sha256": "091915875630f8234436ccf0cb459ce5daa621c703dd56738c66816d1a9dcf6d"
+    },
+    {
+      "file": "codex-clipboard-SN227E.png",
+      "url": null,
+      "sha256": "d2e07616cd1024f5aa38c416be6a5689fae714270cca4464d55b37bf0554a01e"
+    },
+    {
+      "file": "codex-clipboard-ZxdtHG.png",
+      "url": null,
+      "sha256": "c1e19c22939612e509c218e41bbf9e104c1576ab377a858c76355685f94bf539"
+    },
+    {
+      "file": "codex-clipboard-rZfeGs.png",
+      "url": null,
+      "sha256": "a4db30f6016b9a59a0fa2b8f8f9bbc6c880896759bf5dbfd9136904c343ff89f"
+    },
+    {
+      "file": "codex-clipboard-lrblw6.png",
+      "url": null,
+      "sha256": "0e19f3161a0aac31734fdd7b52555aefbfabaa62387943c592b4194e6d6297c1"
+    },
+    {
+      "file": "codex-clipboard-Ymg868.png",
+      "url": null,
+      "sha256": "63b3b0f1ca428e1d2fede0fc931ab31e013115f81724dc4b9ca2fdcdc1205f0e"
+    },
+    {
+      "file": "codex-clipboard-uWBvHs.png",
+      "url": null,
+      "sha256": "06d1610b5c2e86136789efbdcc8652a9d6e6aac00e7674e8edf6f5cd57735425"
+    },
+    {
+      "file": "codex-clipboard-bWtX7e.png",
+      "url": null,
+      "sha256": "4bd6969ddc4eab0acecc5c998c9ba6598618c8a14b4137acab80b4baea524622"
+    },
+    {
+      "file": "codex-clipboard-faxtAd.png",
+      "url": null,
+      "sha256": "3807df5a07d8e307a2c9ef12570c0163f02125435bbe8d0c1bdfaeaac75a2e1a"
+    },
+    {
+      "file": "codex-clipboard-cUpllk.png",
+      "url": null,
+      "sha256": "1ee4d748cbd4447af05e2a56b5edc399215428851f428e4452a42bd3c6bcaf57"
+    }
+  ],
+  "motion_source": "ground-rebel.glb; see source-manifest.json",
+  "motion_sha256": "07ddc58edadacc8a06430b4a713e16e436ef1e71ced9143180744899e3899a6b",
+  "motion": "Six existing idle/run/walk clips baked at 30 Hz to matching world-space bones. Original source rig and skin weights preserved."
+}

@@ -1,0 +1,46 @@
+{
+  "source": "User-supplied Bayonet viewmodel GLBs",
+  "clips": [
+    {
+      "clip": "idle1",
+      "source": "idle1_bayonet.glb",
+      "sha256": "4a984fbd3322a9797c4113ee81ceec718ba08ca57b3c84452b4fa3c2d8967e23"
+    },
+    {
+      "clip": "idle2",
+      "source": "idle2_bayonet.glb",
+      "sha256": "bce971adf3f6185e59233beaeee738002a692629fd849b3f61579573bee71d59"
+    },
+    {
+      "clip": "draw",
+      "source": "draw_bayonet.glb",
+      "sha256": "e3dd5c3c1c8c57304e88d1699eba0d5509b73cda2d4c02d0af06228129e83364"
+    },
+    {
+      "clip": "light_miss1",
+      "source": "light_miss1_bayonet.glb",
+      "sha256": "c9e40d8b8240b8b7a40002fb48f33f58aef44b61c2dd546ebe0776c01d2fed1f"
+    },
+    {
+      "clip": "light_miss2",
+      "source": "light_miss2_bayonet.glb",
+      "sha256": "81ad1727fc6a65bf6693f5038537f2df7444133fcc2ea5e195fd25594431bc30"
+    },
+    {
+      "clip": "heavy_miss1",
+      "source": "heavy_miss1_bayonet.glb",
+      "sha256": "f8824e72e27403b89cc4221c8cac3f9adaca2e1ae3f2a479b3f1b9a4054c0a82"
+    },
+    {
+      "clip": "lookat01",
+      "source": "lookat01_bayonet.glb",
+      "sha256": "784771dd02819542f87e24960523e748eab73ed09083388bc2a651d0fd05e7b5"
+    },
+    {
+      "clip": "lookat01_draw",
+      "source": "lookat01_draw_bayonet.glb",
+      "sha256": "023e30269ff475c098b4cef01a72bb17926a9e166558e2694c227d57b681743e"
+    }
+  ],
+  "generator": "scripts/import-knife-animations.py"
+}

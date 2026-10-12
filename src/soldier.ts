@@ -10,7 +10,7 @@ export async function loadSoldierModels() {
   await Promise.all(
     (["t", "ct"] as const).map(async (team) => {
       const model = await gltf.loadAsync(
-        `/models/agents/${team === "t" ? "ground-rebel" : "idf"}.glb`,
+        `/models/agents/${team === "t" ? "ground-rebel-native" : "idf"}.glb`,
       );
       templates.set(team, model);
     }),

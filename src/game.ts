@@ -1,3 +1,5 @@
+import { nativeShotDuration, nativeInspectDuration, nativeSoundCues } from "./weapon-motion";
+import { knifeInspectDuration } from "./knife-motion";
 import { dustRadarProjection, loadCalloutRadar, radarCrop } from "./radar";
 import * as T from "three";
 import { ballistics, rangeDamage, penetrate, SOURCE_UNITS_PER_METER } from "./ballistics";
@@ -5,7 +7,15 @@ import type { BulletMaterial } from "./ballistics";
 import { Soundscape } from "./soundscape";
 import { WeaponAudio } from "./audio";
 import type { WeaponSound } from "./audio";
-import { accelerate, blocked, weapons } from "./physics";
+import {
+  accelerate,
+  blocked,
+  fallStep,
+  limitJumpSpeed,
+  movement,
+  weapons,
+  WEAPON_ANIMATION_RATE,
+} from "./physics";
 import { loadDust2 } from "./dust2";
 import { enableTextureTranscoding } from "./gltf";
 import { detour } from "./local-navigation";
@@ -17,8 +27,6 @@ import {
   animateGun,
   DRAW_DURATION,
   VIEWMODEL_FOV,
-  DRAW_PULL_CUE,
-  DRAW_RELEASE_CUE,
 } from "./weapons";
 import {
   createSoldier,
@@ -207,6 +215,12 @@ export class Game {
   knifeDuration = 0.5;
   knifeStab = false;
   knifePending = false;
+  knifeAlternate = true;
+  inspectTime = 0;
+  inspectDraw = false;
+  weaponTime = 0;
+  shotTime = 0;
+  animationTime = 0;
   inventorySignature = "";
   ammo = 12;
   reserve = 48;
@@ -228,6 +242,7 @@ export class Game {
     musicVolume: 25,
     effectsVolume: 100,
     quality: "high",
+    autoBunnyhop: false,
   };
   audio: AudioContext | null = null;
   noise: AudioBuffer | null = null;
@@ -269,6 +284,7 @@ export class Game {
             k === "fov" ? 110 : k === "sensitivity" ? 3 : 100,
           );
       if (["high", "low"].includes(saved.quality)) this.settings.quality = saved.quality;
+      if (typeof saved.autoBunnyhop === "boolean") this.settings.autoBunnyhop = saved.autoBunnyhop;
     } catch {
       /* Optional browser storage. */
     }
@@ -321,7 +337,7 @@ export class Game {
       loadCalloutRadar().then((image) => {
         this.radarImage = image;
       }),
-      loadWeaponModels(),
+      loadWeaponModels(this.renderer),
       this.weaponAudio.load(),
       this.soundscape.load(),
       loadSoldierModels(),
@@ -441,7 +457,8 @@ export class Game {
       );
     });
     document.addEventListener("keydown", (e) => {
-      if (["Space", "Tab", "ArrowUp", "ArrowDown"].includes(e.code)) e.preventDefault();
+      if (this.locked && ["Space", "Tab", "ArrowUp", "ArrowDown"].includes(e.code))
+        e.preventDefault();
       if (e.code === "Tab" && this.active) {
         toggle("scoreboard", true);
         this.scoreboard();
@@ -453,6 +470,20 @@ export class Game {
       if (e.repeat) return;
       if (e.code === "Space") this.jumpQueued = true;
       if (e.code === "KeyR") this.beginReload();
+      if (
+        e.code === "KeyF" &&
+        !this.reload &&
+        !this.boltTime &&
+        !this.shotTime &&
+        !this.knifeTime &&
+        !this.inspectTime &&
+        (!this.drawTime || (this.selected === 4 && this.drawTime > DRAW_DURATION * 0.85))
+      ) {
+        this.inspectDraw = this.drawTime > 0;
+        this.inspectTime = this.inspectDuration();
+        this.setScope(0);
+        this.drawTime = this.weaponTime = 0;
+      }
       if (e.code === "Digit1") {
         if (this.primary !== null) this.equip(this.primary);
         else this.toast("Press B to buy a primary weapon", 1.5);
@@ -670,7 +701,19 @@ export class Game {
     this.bombMesh.visible = false;
     this.useWorld(true);
   }
+  inspectDuration() {
+    return this.selected === 4
+      ? knifeInspectDuration(this.inspectDraw)
+      : nativeInspectDuration(this.selected);
+  }
+  animationSounds(motion: "draw" | "reload" | "shoot1", before: number, after: number) {
+    if (this.dead) return;
+    for (const cue of nativeSoundCues(this.selected, motion)) {
+      if (before < cue.time && after >= cue.time) this.sound(cue.kind);
+    }
+  }
   setScope(level: number) {
+    if (level) this.inspectTime = 0;
     this.scopeLevel = level;
     this.scopeSettle = level ? 0.18 : 0;
     this.camera.fov = level === 2 ? 10 : level === 1 ? 40 : this.settings.fov;
@@ -705,6 +748,7 @@ export class Game {
     this.velocity = { x: 0, z: 0 };
     this.vertical = 0;
     this.grounded = true;
+    this.jumpQueued = false;
     this.health = this.armor = 100;
     this.yaw =
       this.mode === "casual"
@@ -740,7 +784,9 @@ export class Game {
   }
   equip(index: number) {
     if (!this.inventory().includes(index)) return;
-    this.knifeTime = 0;
+    this.knifeTime = this.inspectTime = this.weaponTime = 0;
+    this.knifeAlternate = true;
+    this.shotTime = 0;
     this.knifePending = false;
     this.setScope(0);
     this.rescope = this.boltTime = 0;
@@ -761,7 +807,7 @@ export class Game {
     this.view.add(this.gun);
     this.setScope(0);
     if (this.active) {
-      if (index < 2) this.sound("draw");
+      this.animationSounds("draw", -1, 0);
       this.soundscape.play("gear");
     }
     this.updateUI();
@@ -818,12 +864,14 @@ export class Game {
       (this.bomb?.carrier === "player" && this.bomb.plantProgress > 0)
     )
       return;
+    this.inspectTime = this.weaponTime = 0;
+    if (!stab) this.knifeAlternate = !this.knifeAlternate;
     this.knifeStab = stab;
-    this.knifeDuration = stab ? 0.85 : 0.5;
+    this.knifeDuration = (stab ? 0.85 : 0.5) / WEAPON_ANIMATION_RATE;
     this.knifeTime = this.knifeDuration;
     this.knifePending = true;
     this.cooldown = this.weaponCooldowns[4] = this.knifeDuration;
-    this.soundscape.play("gear");
+    this.soundscape.play(this.knifeAlternate ? "knife-swing1" : "knife-swing2");
   }
   meleeHit(stab: boolean) {
     this.camera.position.copy(this.position);
@@ -839,14 +887,14 @@ export class Game {
     if (!impact) return;
     const index = impact.object.userData.bot;
     if (typeof index !== "number") {
-      this.soundscape.play("gear");
+      this.soundscape.play("knife-wall");
       return;
     }
     const b = this.bots[index];
     // A narrow, non-penetrating melee trace: solid cover always blocks it.
     b.health -= stab ? 65 : 35;
     this.hit = 0.13;
-    this.sound("hit");
+    this.soundscape.play("knife-hit");
     el("hitmarker").style.color = "#fff";
     if (b.health <= 0) {
       this.kills++;
@@ -865,12 +913,12 @@ export class Game {
     const w = weapons[this.selected];
     if (!this.reserve && this.mode === "practice") this.reserve = w.reserve;
     if (this.reload || this.ammo === w.mag || !this.reserve) return;
-    this.drawTime = 0;
+    this.drawTime = this.inspectTime = this.shotTime = 0;
     this.setScope(0);
     this.rescope = 0;
     this.reload = w.reload;
     this.boltTime = 0;
-    this.sound("reload");
+    this.animationSounds("reload", -1, 0);
     this.updateUI();
   }
   sound(
@@ -889,31 +937,7 @@ export class Game {
       this.weaponAudio.play(this.audio, kind, weapon, 100, pan, distance);
       return;
     }
-    const a = this.audio,
-      now = a.currentTime,
-      gain = a.createGain(),
-      panner = a.createStereoPanner();
-    panner.pan.value = clamp(pan, -1, 1);
-    gain.connect(panner);
-    panner.connect(this.soundscape.effects || a.destination);
-    const vol = 1,
-      length = 0.12;
-    gain.gain.setValueAtTime(vol * 0.09, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + length);
-    {
-      const osc = a.createOscillator();
-      osc.type = kind === "head" ? "sine" : "triangle";
-      osc.frequency.setValueAtTime(kind === "head" ? 1400 : 700, now);
-      osc.frequency.exponentialRampToValueAtTime(kind === "head" ? 700 : 50, now + length);
-      osc.connect(gain);
-      osc.start(now);
-      osc.stop(now + length);
-      osc.onended = () => {
-        osc.disconnect();
-        gain.disconnect();
-        panner.disconnect();
-      };
-    }
+    this.soundscape.play(kind);
   }
   makeBot(index: number): Bot {
     const team =
@@ -1115,6 +1139,8 @@ export class Game {
     this.recovery = 0.25;
     this.shots++;
     this.kick = 0.07;
+    this.inspectTime = 0;
+    this.shotTime = this.selected === 3 ? 0 : nativeShotDuration(this.selected);
     const moving = Math.hypot(this.velocity.x, this.velocity.z) / w.speed,
       spread =
         this.selected === 3
@@ -1341,9 +1367,16 @@ export class Game {
       `${this.kills} eliminations · ${this.deaths} deaths · ${this.deaths ? (this.kills / this.deaths).toFixed(2) : this.kills.toFixed(2)} K/D`;
   }
   simulate(dt: number) {
+    this.animationTime += dt;
+    if (!this.drawTime && !this.knifeTime && !this.inspectTime) this.weaponTime += dt;
+    this.shotTime = Math.max(0, this.shotTime - dt);
+    this.inspectTime = Math.max(0, this.inspectTime - dt);
     this.cooldown = Math.max(0, this.cooldown - dt);
     this.knifeTime = Math.max(0, this.knifeTime - dt);
-    if (this.knifePending && this.knifeDuration - this.knifeTime >= (this.knifeStab ? 0.18 : 0.1)) {
+    if (
+      this.knifePending &&
+      this.knifeDuration - this.knifeTime >= (this.knifeStab ? 0.18 : 0.1) / WEAPON_ANIMATION_RATE
+    ) {
       this.knifePending = false;
       if (!this.dead && this.active && this.locked && this.roundPause === 0 && this.selected === 4)
         this.meleeHit(this.knifeStab);
@@ -1352,12 +1385,7 @@ export class Game {
       const before = 1 - this.drawTime / DRAW_DURATION;
       this.drawTime = Math.max(0, this.drawTime - dt);
       const after = 1 - this.drawTime / DRAW_DURATION;
-      if (!this.dead && !this.reload && this.selected < 3) {
-        if (before < DRAW_PULL_CUE && after >= DRAW_PULL_CUE) this.sound("bolt");
-        // The AK clip already includes the return stroke.
-        if (this.selected > 0 && before < DRAW_RELEASE_CUE && after >= DRAW_RELEASE_CUE)
-          this.sound("boltForward");
-      }
+      if (!this.reload) this.animationSounds("draw", before, after);
     }
     for (let i = 0; i < this.weaponCooldowns.length; i++)
       this.weaponCooldowns[i] = Math.max(0, this.weaponCooldowns[i] - dt);
@@ -1366,8 +1394,12 @@ export class Game {
       const previous = this.boltTime;
       this.boltTime = Math.max(0, this.boltTime - dt);
       if (!this.reload && !this.dead) {
-        if (previous > 0.9 && this.boltTime <= 0.9) this.sound("bolt");
-        if (previous > 0.35 && this.boltTime <= 0.35) this.sound("boltForward");
+        if (!this.drawTime)
+          this.animationSounds(
+            "shoot1",
+            1 - previous / weapons[3].delay,
+            1 - this.boltTime / weapons[3].delay,
+          );
       }
       if (!this.boltTime && this.rescope && !this.dead && !this.reload && this.selected === 3) {
         this.setScope(this.rescope);
@@ -1414,14 +1446,7 @@ export class Game {
       const previous = this.reload;
       this.reload = Math.max(0, this.reload - dt);
       const duration = weapons[this.selected].reload;
-      for (const [fraction, kind] of [
-        [0.5, "reloadIn"],
-        [0.22, "bolt"],
-        [0.1, "boltForward"],
-      ] as const) {
-        if (this.selected === 0 && kind === "boltForward") continue;
-        if (previous > duration * fraction && this.reload <= duration * fraction) this.sound(kind);
-      }
+      this.animationSounds("reload", 1 - previous / duration, 1 - this.reload / duration);
       if (!this.reload) {
         const amount = Math.min(weapons[this.selected].mag - this.ammo, this.reserve);
         this.ammo += amount;
@@ -1430,27 +1455,39 @@ export class Game {
       }
     }
     const crouch =
-        this.keys.has("ControlLeft") || this.keys.has("ControlRight") || this.keys.has("KeyC"),
+        this.keys.has("ControlLeft") ||
+        this.keys.has("ControlRight") ||
+        this.keys.has("KeyC") ||
+        (this.eye < 1.6 &&
+          this.isBlocked(this.position.x, this.position.z, this.position.y, 0.3, 1.65)),
       walk = this.keys.has("ShiftLeft") || this.keys.has("ShiftRight"),
-      speed =
-        weapons[this.selected].speed *
-        (this.scopeLevel ? 0.72 : 1) *
-        (crouch ? 0.42 : walk ? 0.5 : 1),
+      maxSpeed =
+        (this.scopeLevel && weapons[this.selected].scopedSpeed) || weapons[this.selected].speed,
+      speed = maxSpeed * (crouch ? movement.crouchModifier : walk ? movement.walkModifier : 1),
       right = (this.keys.has("KeyD") ? 1 : 0) - (this.keys.has("KeyA") ? 1 : 0),
       forward = (this.keys.has("KeyW") ? 1 : 0) - (this.keys.has("KeyS") ? 1 : 0),
       dx = right * Math.cos(this.yaw) - forward * Math.sin(this.yaw),
       dz = -right * Math.sin(this.yaw) - forward * Math.cos(this.yaw);
-    accelerate(this.velocity, dx, dz, speed, dt, this.grounded);
-    if (this.jumpQueued && this.grounded) {
-      this.vertical = 5.5;
+    // Source checks jump before ground friction. A jump on the landing tick
+    // therefore carries momentum instead of losing a tick of ground speed.
+    if (
+      (this.jumpQueued || (this.settings.autoBunnyhop && this.keys.has("Space"))) &&
+      this.grounded
+    ) {
+      limitJumpSpeed(this.velocity, maxSpeed);
+      this.vertical = movement.jumpImpulse;
       this.grounded = false;
       this.soundscape.play("jump");
     }
     this.jumpQueued = false;
+    // Walking/ducking limit the target speed, while ground acceleration keeps
+    // weapon-speed strength against stopspeed friction (especially in a crouch).
+    accelerate(this.velocity, dx, dz, speed, dt, this.grounded, this.grounded ? maxSpeed : speed);
     const previousY = this.position.y;
     const wasFalling = this.vertical < -2;
-    this.vertical -= 15.5 * dt;
-    this.position.y += this.vertical * dt;
+    const falling = fallStep(this.vertical, dt);
+    this.position.y += falling.distance;
+    this.vertical = falling.vertical;
     if (this.world.collision && this.vertical > 0) {
       const ceiling = this.world.collision.ceiling(
         this.position.x,
@@ -1680,7 +1717,7 @@ export class Game {
         this.bombMesh.position.copy(position).y += 0.08;
         this.bombMesh.visible = true;
         this.toast("BOMB PLANTED · 40 seconds · Hold E nearby to defuse", 4);
-        this.soundscape.play("ready");
+        this.soundscape.play("bomb-plant");
         this.bots.forEach((b) => {
           b.nav = 0;
         });
@@ -1688,8 +1725,12 @@ export class Game {
       return;
     }
     if (!bomb.planted) return;
+    const previousBombSecond = Math.ceil(bomb.timer);
     bomb.timer -= dt;
+    if (Math.ceil(bomb.timer) < previousBombSecond && bomb.timer > 0)
+      this.soundscape.play("bomb-beep", this.position.distanceTo(bomb.position) > 20);
     if (bomb.timer <= 0) {
+      this.soundscape.play("bomb-explode");
       this.endRound("t", "Bomb detonated");
       return;
     }
@@ -1721,7 +1762,10 @@ export class Game {
         this.velocity.x = this.velocity.z = 0;
         this.toast(`DEFUSING · ${Math.ceil(Math.max(0, 10 - bomb.progress))}s`, dt * 2);
       } else this.bots[defuser].moving = false;
-      if (bomb.progress >= 10) this.endRound("ct", "Bomb defused");
+      if (bomb.progress >= 10) {
+        this.soundscape.play("bomb-defuse");
+        this.endRound("ct", "Bomb defused");
+      }
     } else bomb.progress = 0;
   }
   spectate() {
@@ -1827,6 +1871,8 @@ export class Game {
                   this.deaths++;
                   b.kills++;
                   this.dead = Infinity;
+                  this.knifeTime = this.inspectTime = 0;
+                  this.knifePending = false;
                   this.setScope(0);
                   this.firing = false;
                   this.rescope = this.boltTime = this.reload = 0;
@@ -1950,6 +1996,8 @@ export class Game {
               this.deaths++;
               b.kills++;
               this.dead = 2.5;
+              this.knifeTime = this.inspectTime = 0;
+              this.knifePending = false;
               this.soundscape.play("death");
               this.soundscape.playMusic("deathcam");
               this.setScope(0);
@@ -2509,15 +2557,27 @@ export class Game {
   }
   animateWeapon(bob = 0, sway = 0) {
     animateGun(this.gun, {
+      clock: this.animationTime,
       reload: this.reload ? 1 - this.reload / weapons[this.selected].reload : 0,
       draw: this.drawTime / DRAW_DURATION,
       bolt: this.boltTime ? 1 - this.boltTime / weapons[3].delay : 0,
       recoil: this.kick,
+      reloadActive: this.reload > 0,
+      boltActive: this.boltTime > 0,
+      shot: this.shotTime ? 1 - this.shotTime / nativeShotDuration(this.selected) : 0,
+      shotActive: this.shotTime > 0,
       bob,
       sway,
       knife: this.knifeTime > 0 ? 1 - this.knifeTime / this.knifeDuration : 0,
       stab: this.knifeStab,
+      knifeActive: this.knifeTime > 0,
+      alternate: this.knifeAlternate,
+      time: this.weaponTime,
+      inspect: this.inspectTime ? 1 - this.inspectTime / this.inspectDuration() : 0,
+      inspectActive: this.inspectTime > 0,
+      inspectDraw: this.inspectDraw,
     });
+    this.flash.position.copy(this.gun.userData.muzzle);
   }
   frame(now: number) {
     const dt = Math.min((now - this.last) / 1000, 0.05);

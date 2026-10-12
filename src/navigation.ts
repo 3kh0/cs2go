@@ -8,6 +8,7 @@ export type NavArea = {
   links: number[];
   cover: number[][];
   place: string;
+  portals?: Record<number, number[]>;
 };
 export type MapNavigation = {
   areas: NavArea[];
@@ -15,6 +16,7 @@ export type MapNavigation = {
   spawnAngles?: Record<"t" | "ct", number[]>;
   sites: number[][];
   bounds: number[];
+  polygons?: boolean;
 };
 const navCell = 4;
 // The original Source navigation graph preserves stacked tunnels, ramps and
@@ -135,6 +137,7 @@ export class Navigation {
         z > area.rect[3] + 0.025
       )
         continue;
+      if (!this.contains(area, x, z)) continue;
       const y = this.height(area, x, z);
       if (y <= ceiling + 0.01 && y >= bottom && y > height) {
         best = area;
@@ -144,6 +147,19 @@ export class Navigation {
     return best ? { area: best, height } : undefined;
   }
   private height(area: NavArea, x: number, z: number) {
+    if (this.data.polygons) {
+      const a = area.corners[0];
+      for (let i = 1; i + 1 < area.corners.length; i++) {
+        const b = area.corners[i],
+          c = area.corners[i + 1];
+        const determinant = (b[0] - a[0]) * (c[2] - a[2]) - (c[0] - a[0]) * (b[2] - a[2]);
+        if (Math.abs(determinant) < 1e-8) continue;
+        const u = ((x - a[0]) * (c[2] - a[2]) - (z - a[2]) * (c[0] - a[0])) / determinant;
+        const v = ((b[0] - a[0]) * (z - a[2]) - (b[2] - a[2]) * (x - a[0])) / determinant;
+        return a[1] + u * (b[1] - a[1]) + v * (c[1] - a[1]);
+      }
+      return area.center[1];
+    }
     if (area.corners.length !== 4) return area.center[1];
     const [x0, z0, x1, z1] = area.rect;
     const u = T.MathUtils.clamp((x - x0) / Math.max(0.0001, x1 - x0), 0, 1),
@@ -153,6 +169,20 @@ export class Navigation {
       T.MathUtils.lerp(area.corners[0][1], area.corners[1][1], u),
       v,
     );
+  }
+  private contains(area: NavArea, x: number, z: number) {
+    if (!this.data.polygons) return true;
+    let positive = false,
+      negative = false;
+    for (let i = 0; i < area.corners.length; i++) {
+      const a = area.corners[i],
+        b = area.corners[(i + 1) % area.corners.length];
+      const cross = (b[0] - a[0]) * (z - a[2]) - (b[2] - a[2]) * (x - a[0]);
+      const tolerance = 0.025 * Math.hypot(b[0] - a[0], b[2] - a[2]);
+      positive ||= cross > tolerance;
+      negative ||= cross < -tolerance;
+    }
+    return !(positive && negative);
   }
   nearest(point: T.Vector3) {
     let best = 0,
@@ -167,8 +197,28 @@ export class Navigation {
       seen[i] = stamp;
       const area = areas[i],
         [x0, z0, x1, z1] = area.rect;
-      const dx = Math.max(x0 - point.x, 0, point.x - x1);
-      const dz = Math.max(z0 - point.z, 0, point.z - z1);
+      let dx = Math.max(x0 - point.x, 0, point.x - x1);
+      let dz = Math.max(z0 - point.z, 0, point.z - z1);
+      if (this.data.polygons && !this.contains(area, point.x, point.z)) {
+        let squared = Infinity;
+        for (let edge = 0; edge < area.corners.length; edge++) {
+          const a = area.corners[edge],
+            b = area.corners[(edge + 1) % area.corners.length];
+          const ex = b[0] - a[0],
+            ez = b[2] - a[2];
+          const t = T.MathUtils.clamp(
+            ((point.x - a[0]) * ex + (point.z - a[2]) * ez) / Math.max(1e-10, ex * ex + ez * ez),
+            0,
+            1,
+          );
+          squared = Math.min(
+            squared,
+            (point.x - a[0] - ex * t) ** 2 + (point.z - a[2] - ez * t) ** 2,
+          );
+        }
+        dx = Math.sqrt(squared);
+        dz = 0;
+      }
       const dy = point.y - this.height(area, point.x, point.z);
       const cost = dx * dx + dz * dz + dy * dy * 3;
       if (
@@ -362,7 +412,8 @@ export class Navigation {
         x1 = Math.min(a.rect[2], b.rect[2]);
       const z0 = Math.max(a.rect[1], b.rect[1]),
         z1 = Math.min(a.rect[3], b.rect[3]);
-      if (x0 <= x1 + 0.05 && z0 <= z1 + 0.05)
+      if (a.portals?.[b.id]) points.push(new T.Vector3().fromArray(a.portals[b.id]));
+      else if (x0 <= x1 + 0.05 && z0 <= z1 + 0.05)
         points.push(
           new T.Vector3((x0 + x1) / 2, this.height(b, (x0 + x1) / 2, (z0 + z1) / 2), (z0 + z1) / 2),
         );
@@ -375,6 +426,7 @@ export class Navigation {
       goal.x <= rect[2] &&
       goal.z >= rect[1] &&
       goal.z <= rect[3] &&
+      this.contains(this.areas[end], goal.x, goal.z) &&
       Math.abs(goal.y - this.areas[end].center[1]) < 1.2
     )
       points.push(goal.clone());

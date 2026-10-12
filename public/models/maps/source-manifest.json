@@ -1,34 +1,57 @@
 {
   "author": "Valve",
-  "source": "Steam app 740 (Counter-Strike: Global Offensive - Dedicated Server), depot 731, anonymous SteamCMD access via DepotDownloader 3.4.0",
-  "depotManifest": "1224088799001669801 (2023-10-12, final CS:GO build)",
-  "version": "Final CS:GO Dust II (post-October-2017 rework), BSP v21 map revision 10535",
-  "contents": "maps/ is copied unchanged from the depot. materials/ and models/ are the 3,111 shared files de_dust2.bsp references (brush textures, skybox, detail sprites, static/entity prop models, and their materials), extracted from pak01 VPK archives and CRC-checked. Dust II-specific props and patched materials are embedded in the BSP pakfile.",
-  "knownMissing": [
-    "materials/sprites/light_glow02_360.vtf (not present in Valve's VPKs)",
-    "skybox/nukeblank_hdr* (map uses LDR sky only)"
+  "version": "CS2 Dust II, Steam depot manifest dated 2026-10-08",
+  "source": "Anonymous Steam CDN download through DepotDownloader 3.4.0",
+  "app": 730,
+  "depot": 2347770,
+  "depotManifest": "4758919807587010422",
+  "references": [
+    "https://steamdb.info/depot/2347770/",
+    "https://github.com/SteamRE/DepotDownloader",
+    "https://github.com/ValveResourceFormat/ValveResourceFormat/releases/tag/20.0"
   ],
   "files": {
-    "maps/de_dust2.bsp": "b91be410539fbbfc16300423f1e19c024f12addf1429c8cb2f72b53fe0fd6bcc",
-    "maps/de_dust2.nav": "82d46fb7d3618514e9897d87e5666c0c3f483c4a82060aac03313afad864b649"
+    "de_dust2.vpk": "51d6bb432b6553bfae6c38219a527c5de2464a2b107080f2b8be7d8427ebb885",
+    "de_dust2.nav": "64bbc202edae8a92d432368e86948bbee3af9c56555e190dda251d28c64e1ea7"
   },
   "tools": {
-    "Blender": "4.5.9",
-    "gltfpack": "0.24",
-    "SourceIOCommit": "259b68b25d7e0ae3533d14140448bd145071f5c0"
+    "Source2Viewer": "20.0.6980",
+    "ValveResourceFormat": "20.0.6980",
+    "gltfpack": "0.24"
   },
-  "input": "new_map/csgo",
+  "optimization": {
+    "originalTriangles": 4546379,
+    "runtimeTriangles": 1919451,
+    "physicsTriangles": 433059,
+    "propTarget": 0.3,
+    "propRelativeErrorLimit": 0.005,
+    "textureMaxDimension": "1024 architecture / 512 props, ETC1S KTX2",
+    "geometry": "meshopt, 16-bit rendering positions/UV, 20-bit physics positions"
+  },
+  "navigation": {
+    "version": 36,
+    "areas": 2242,
+    "geometry": "Native convex polygons, directed links and edge portals"
+  },
+  "runtime": {
+    "dust2.glb.gz": {
+      "bytes": 36323377,
+      "sha256": "5b1cf8bd13afa29b4ecdf3584ae3452bace4e4b9c6d21fe33b630ea3abd965aa"
+    },
+    "dust2-physics.glb.gz": {
+      "bytes": 723794,
+      "sha256": "cd67e75d58a8f192376c0bb7e4601cd700637443918383821c54bf4d9faf66fb"
+    },
+    "dust2-nav.json": {
+      "bytes": 1162673,
+      "sha256": "c4880f1e16ab5694eea123bcf4412f9418aef7a7572bb1adda7fa39b49eba8c6"
+    }
+  },
   "limitations": [
-    "Original geometry and albedo/normal textures (ETC1S KTX2); standard PBR approximation without Source lightmaps",
-    "Detailed static props simplified to 30 percent triangles; native NAV graph retained",
-    "World player-clip brushes and solid tool faces are extracted from BSP planes for movement only; dynamic brush entities and original prop physics hulls are not imported",
-    "Browser triangle collision approximates Source player hull and surface penetration"
-  ],
-  "collision": {
-    "file": "dust2-collision.json.gz",
-    "sourceSha256": "b91be410539fbbfc16300423f1e19c024f12addf1429c8cb2f72b53fe0fd6bcc",
-    "brushes": 2023,
-    "triangles": 22057,
-    "selection": "World-model CONTENTS_PLAYERCLIP brushes and solid tool/nodraw faces; movement only"
-  }
+    "Standard PBR approximates Source 2 layered shaders; baked lightmaps, probe volumes and animated foliage are not reproduced. Source smoke/lightshaft effect cards are excluded from static geometry.",
+    "Distant geometry cropped beyond navigation bounds plus 40 m. Detailed props simplified; native world physics is not simplified.",
+    "Playerclip and passbullets surfaces affect movement only. Browser collision approximates the Source player hull; dynamic physics is not reproduced.",
+    "AI is authored, not Valve bot code. Native NAV cover annotations are not imported.",
+    "Missing dependencies are obsolete baker cubemap cache references; runtime uses local lighting."
+  ]
 }

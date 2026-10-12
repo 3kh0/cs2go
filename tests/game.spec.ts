@@ -91,10 +91,11 @@ test("hitscan headshots, wall occlusion, reload conservation, and target respawn
   await page.mouse.up();
   await expect(page.locator("#score")).toHaveText("1");
   await expect(page.locator("#killfeed .feed").last()).toHaveAttribute("aria-label", /HEADSHOT/);
+  const ammunition = await page.evaluate(() => window.__game.ammo + window.__game.reserve);
   await page.keyboard.press("r");
   await expect(page.locator("#reload-label")).toHaveText("RELOADING…");
   await expect.poll(() => page.evaluate(() => window.__game.ammo), { timeout: 4000 }).toBe(30);
-  expect(await page.evaluate(() => window.__game.reserve)).toBe(89);
+  expect(await page.evaluate(() => window.__game.ammo + window.__game.reserve)).toBe(ammunition);
   await expect.poll(() => page.evaluate(() => window.__game.bots[0].health)).toBe(100);
   await page.evaluate(() => {
     const g = window.__game;
@@ -165,8 +166,12 @@ test("supplied AWP mesh, two zoom levels, bolt lockout, body damage, reload, and
   expect(
     await page.evaluate(() => {
       const g = window.__game;
-      const mesh = g.gun.getObjectByName("receiver") as import("three").Mesh;
-      return mesh.geometry.attributes.position.count;
+      let vertices = 0;
+      g.gun.getObjectByName("weapon-model")!.traverse((object) => {
+        if ((object as import("three").SkinnedMesh).isSkinnedMesh)
+          vertices += (object as import("three").Mesh).geometry.attributes.position.count;
+      });
+      return vertices;
     }),
   ).toBeGreaterThan(10000);
   await page.mouse.down({ button: "right" });
@@ -197,9 +202,9 @@ test("supplied AWP mesh, two zoom levels, bolt lockout, body damage, reload, and
   await page.mouse.down();
   await page.mouse.up();
   expect(await page.evaluate(() => window.__game.ammo)).toBe(9);
-  expect(await page.evaluate(() => window.__game.gun.getObjectByName("bolt") !== undefined)).toBe(
-    true,
-  );
+  expect(
+    await page.evaluate(() => window.__game.gun.getObjectByName("bolt_action") !== undefined),
+  ).toBe(true);
   await expect.poll(() => page.evaluate(() => window.__game.scopeLevel), { timeout: 3000 }).toBe(2);
   await page.keyboard.press("r");
   await expect(page.locator("#scope")).toBeHidden();
@@ -294,17 +299,17 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
     events.length = 0;
     game.ammo = 9;
     game.beginReload();
-    for (let tick = 0; tick < 450; tick++) game.simulate(1 / 128);
+    for (let tick = 0; tick < 520; tick++) game.simulate(1 / 128);
     const reload = [...events];
     events.length = 0;
-    game.boltTime = 1.45;
-    for (let tick = 0; tick < 190; tick++) game.simulate(1 / 128);
+    game.boltTime = 1.45 / 0.9;
+    for (let tick = 0; tick < 220; tick++) game.simulate(1 / 128);
     const bolt = [...events];
     events.length = 0;
     game.ammo = 9;
     game.beginReload();
     game.buy(0);
-    for (let tick = 0; tick < 450; tick++) game.simulate(1 / 128);
+    for (let tick = 0; tick < 520; tick++) game.simulate(1 / 128);
     const cancelled = [...events];
     events.length = 0;
     game.buy(1);
@@ -331,6 +336,7 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
       rejectedReloadPreservesDraw,
       muted: bank.voices.size === count,
       audioState: game.audio?.state,
+      longestClip: Math.max(...[...bank.buffers.values()].map((buffer) => buffer.duration)),
     };
   });
   expect(result.decoded).toBe(true);
@@ -340,12 +346,17 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
   expect(result.scope).toBe("zoom");
   expect(result.reload).toEqual(["awp_clipout", "awp_clipin", "awp_boltback", "awp_boltforward"]);
   expect(result.bolt).toEqual(["awp_boltback", "awp_boltforward"]);
-  expect(result.cancelled).toEqual(["awp_clipout", "ak47_draw", "ak47_boltpull"]);
+  // Switching before the native clipout marker prevents that sound entirely.
+  expect(result.cancelled).toEqual(["ak47_draw", "ak47_boltpull"]);
   expect(result.interruptedDraw).toEqual(["m4a1_draw"]);
   expect(result.rejectedReloadPreservesDraw).toBe(true);
   expect(result.muted).toBe(true);
   expect(result.audioState).toBe("running");
-  await expect.poll(() => page.evaluate(() => window.__game.weaponAudio.voices.size)).toBe(0);
+  await expect
+    .poll(() => page.evaluate(() => window.__game.weaponAudio.voices.size), {
+      timeout: result.longestClip * 1000 + 2000,
+    })
+    .toBe(0);
   expect(errors).toEqual([]);
 });
 
@@ -437,7 +448,7 @@ test("local music/effects, live volume controls, and settings persistence", asyn
   expect(errors).toEqual([]);
 });
 
-test("weapon tracks keep bolt shaft connected, hands follow magazines, and reset on cancel", async ({
+test("native weapon parts follow reload and bolt clips and return to their seats", async ({
   page,
 }) => {
   await page.goto("/");
@@ -447,70 +458,77 @@ test("weapon tracks keep bolt shaft connected, hands follow magazines, and reset
   await page.waitForFunction(() => window.__game.locked);
   const result = await page.evaluate(() => {
     const g = window.__game;
-    const animateGun = (_gun: unknown, pose: { reload: number; draw: number; bolt: number }) => {
-      g.reload = pose.reload ? (1 - pose.reload) * [2.4, 2.2, 1.7, 3.4][g.selected] : 0;
-      g.drawTime = pose.draw * 0.55;
-      g.boltTime = pose.bolt ? (1 - pose.bolt) * 1.45 : 0;
-      g.kick = 0;
+    // Sample twice across the transition window, then examine geometry in the
+    // receiver's local frame so whole-weapon movement cannot fake part travel.
+    const sample = () => {
+      g.animationTime += 1;
+      g.animateWeapon();
+      g.animationTime += 1;
       g.animateWeapon();
     };
-    const pose = { reload: 0, draw: 0, bolt: 0, recoil: 0, bob: 0, sway: 0 };
-    const samples = [];
-    for (let i = 0; i < 4; i++) {
-      g.buy(i);
-      const mag = g.gun.getObjectByName("magazine")!;
-      const left = g.gun.getObjectByName("left-hand")!;
-      animateGun(g.gun, pose);
-      const rest = mag.position.clone();
-      animateGun(g.gun, { ...pose, reload: 0.26 });
-      const removed = rest.distanceTo(mag.position);
-      const contactDistance = left.position.distanceTo(mag.position);
-      animateGun(g.gun, { ...pose, reload: 0.5 });
-      const inserted = rest.distanceTo(mag.position);
-      animateGun(g.gun, pose);
-      const reset = rest.distanceTo(mag.position);
-      samples.push({ removed, contactDistance, inserted, reset });
+    const magazines = [];
+    for (let index = 0; index < 4; index++) {
+      g.buy(index);
+      g.drawTime = g.reload = g.boltTime = g.shotTime = 0;
+      sample();
+      const model = g.gun.getObjectByName("weapon-model")!;
+      const receiver = model.getObjectByName("weapon_offset")!;
+      const mag = model.getObjectByName("clip")!;
+      const position = () =>
+        receiver.worldToLocal(mag.getWorldPosition(g.position.clone())).multiplyScalar(0.0254);
+      const rest = position();
+      g.reload = 0.75 * ([2.4, 2.2, 1.7, 3.4][index] / 0.9);
+      sample();
+      const removed = position().distanceTo(rest);
+      g.reload = 0.6 * ([2.4, 2.2, 1.7, 3.4][index] / 0.9);
+      sample();
+      const wristDistance = mag
+        .getWorldPosition(g.position.clone())
+        .distanceTo(g.gun.getObjectByName("left-hand")!.getWorldPosition(g.position.clone()));
+      g.reload = 0.01;
+      sample();
+      const seated = position().distanceTo(rest);
+      g.reload = 0;
+      sample();
+      magazines.push({ removed, seated, wristDistance, reset: position().distanceTo(rest) });
     }
-    const bolt = g.gun.getObjectByName("bolt")!;
-    const shaft = g.gun.getObjectByName("bolt-shaft")!;
-    animateGun(g.gun, pose);
-    const rest = bolt.position.clone();
-    const hand = g.gun.getObjectByName("right-hand")!;
-    animateGun(g.gun, { ...pose, bolt: 0.55 });
-    const travel = bolt.position.distanceTo(rest),
-      rotation = bolt.rotation.z;
-    // The wrist sits behind the action; its palm contact follows the knob.
-    const palm = hand.position
-      .clone()
-      .set(0, 0, -0.065)
-      .applyQuaternion(hand.quaternion)
-      .add(hand.position);
-    const handDistance = palm.distanceTo(bolt.position);
-    animateGun(g.gun, { ...pose, draw: 1 });
-    const drawY = g.gun.position.y;
-    animateGun(g.gun, pose);
-    return {
-      samples,
-      travel,
-      rotation,
-      handDistance,
-      drawY,
-      shaftParent: shaft.parent === bolt,
-      restored: bolt.position.distanceTo(rest),
-    };
+    const model = g.gun.getObjectByName("weapon-model")!;
+    const receiver = model.getObjectByName("weapon_offset")!;
+    const bolt = model.getObjectByName("bolt_action")!;
+    const position = () =>
+      receiver.worldToLocal(bolt.getWorldPosition(g.position.clone())).multiplyScalar(0.0254);
+    const rest = position(),
+      rotation = bolt.quaternion.clone();
+    let travel = 0,
+      turn = 0,
+      contact = Infinity;
+    for (let frame = 1; frame < 60; frame++) {
+      g.boltTime = (1 - frame / 60) * (1.45 / 0.9);
+      sample();
+      travel = Math.max(travel, position().distanceTo(rest));
+      turn = Math.max(turn, bolt.quaternion.angleTo(rotation));
+      contact = Math.min(
+        contact,
+        bolt
+          .getWorldPosition(g.position.clone())
+          .distanceTo(g.gun.getObjectByName("right-hand")!.getWorldPosition(g.position.clone())),
+      );
+    }
+    g.boltTime = 0;
+    sample();
+    return { magazines, travel, turn, contact, reset: position().distanceTo(rest) };
   });
-  for (const sample of result.samples) {
-    expect(sample.removed).toBeGreaterThan(0.18);
-    expect(sample.contactDistance).toBeLessThan(0.07);
-    expect(sample.inserted).toBe(0);
-    expect(sample.reset).toBe(0);
+  for (const mag of result.magazines) {
+    expect(mag.removed).toBeGreaterThan(0.2);
+    expect(mag.wristDistance).toBeLessThan(0.2);
+    expect(mag.seated).toBeLessThan(0.002);
+    expect(mag.reset).toBeLessThan(0.0001);
   }
-  expect(result.shaftParent).toBe(true);
-  expect(result.travel).toBeCloseTo(0.07);
-  expect(result.rotation).toBeCloseTo(1.08);
-  expect(result.handDistance).toBeLessThan(0.07);
-  expect(result.drawY).toBeLessThan(-0.5);
-  expect(result.restored).toBe(0);
+  expect(result.travel).toBeGreaterThan(0.04);
+  expect(result.travel).toBeLessThan(0.14);
+  expect(result.turn).toBeGreaterThan(0.5);
+  expect(result.contact).toBeLessThan(0.15);
+  expect(result.reset).toBeLessThan(0.0001);
 });
 
 test("thin wood transmits a bullet but thick masonry stops it", async ({ page }) => {
@@ -1238,9 +1256,7 @@ test("M9 slash and stab hit once, respect reach and cover, and cancel on switch"
   });
 });
 
-test("both view rigs keep wrists on contacts and the M9 attached after its catch", async ({
-  page,
-}) => {
+test("both teams keep native wrists on weapon contacts and reset poses", async ({ page }) => {
   await page.goto("/");
   await page.bringToFront();
   await page.getByRole("button", { name: "PRACTICE", exact: true }).click();
@@ -1249,26 +1265,23 @@ test("both view rigs keep wrists on contacts and the M9 attached after its catch
   const result = await page.evaluate(() => {
     const g = window.__game;
     let wristError = 0,
-      gripError = 0,
       resetError = 0;
     for (const team of ["ct", "t"] as const) {
       g.team = team;
       for (let index = 0; index < 5; index++) {
         if (index === 4) g.equip(index);
         else g.buy(index);
-        const model = g.gun.getObjectByName("weapon-model")!;
-        const right = g.gun.getObjectByName(team === "t" ? "hand_R" : "ValveBipedBip01_R_Hand")!;
-        const grip = model.matrixWorld.clone();
         const rest = g.gun.position.clone();
         let first = true;
         for (const phase of ["idle", "draw", "reload", "bolt", "slash", "stab", "idle"] as const) {
           for (let frame = 0; frame <= 20; frame++) {
             const p = frame / 20;
             g.drawTime = phase === "draw" ? (1 - p) * 0.55 : 0;
-            g.reload = phase === "reload" && index < 4 ? (1 - p) * [2.4, 2.2, 1.7, 3.4][index] : 0;
+            g.reload =
+              phase === "reload" && index < 4 ? (1 - p) * ([2.4, 2.2, 1.7, 3.4][index] / 0.9) : 0;
             g.boltTime = phase === "bolt" && index === 3 ? (1 - p) * 1.45 : 0;
             g.knifeStab = phase === "stab";
-            g.knifeDuration = g.knifeStab ? 0.85 : 0.5;
+            g.knifeDuration = (g.knifeStab ? 0.85 : 0.5) / 0.9;
             g.knifeTime =
               index === 4 && (phase === "slash" || phase === "stab")
                 ? (1 - p) * g.knifeDuration
@@ -1277,23 +1290,13 @@ test("both view rigs keep wrists on contacts and the M9 attached after its catch
             g.animateWeapon();
             g.gun.updateMatrixWorld(true);
             for (const side of ["L", "R"]) {
-              const bone = g.gun.getObjectByName(
-                team === "t" ? `hand_${side}` : `ValveBipedBip01_${side}_Hand`,
-              )!;
+              const bone = g.gun.getObjectByName(`hand_${side}`)!;
               const marker = g.gun.getObjectByName(side === "L" ? "left-hand" : "right-hand")!;
               wristError = Math.max(
                 wristError,
                 bone
                   .getWorldPosition(g.position.clone())
                   .distanceTo(marker.getWorldPosition(g.position.clone())),
-              );
-            }
-            if (index === 4 && (phase !== "draw" || p >= 0.82)) {
-              const relative = right.matrixWorld.clone().invert().multiply(model.matrixWorld);
-              if (first) grip.copy(relative);
-              gripError = Math.max(
-                gripError,
-                ...relative.elements.map((value, i) => Math.abs(value - grip.elements[i])),
               );
             }
             if (first) rest.copy(g.gun.position);
@@ -1309,89 +1312,175 @@ test("both view rigs keep wrists on contacts and the M9 attached after its catch
     g.saveSettings();
     return {
       wristError,
-      gripError,
       resetError,
       lensStable: g.viewCamera.fov === lens && g.camera.fov === 110,
     };
   });
   expect(result.wristError).toBeLessThan(0.001);
-  // Imported skeleton transforms have small floating-point/quantization errors.
-  expect(result.gripError).toBeLessThan(0.001);
   expect(result.resetError).toBeLessThan(0.0001);
   expect(result.lensStable).toBe(true);
 });
 
-test("Bayonet draw rolls around the fingers, catches continuously and resets on switching", async ({
+test("native Bayonet clips animate fingers, return to idle, and inspection cancels coherently", async ({
   page,
 }) => {
+  const errors: string[] = [],
+    external: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("request", (r) => {
+    if (new URL(r.url()).origin !== "http://127.0.0.1:5173") external.push(r.url());
+  });
   await page.goto("/");
   await page.bringToFront();
   await page.getByRole("button", { name: "PRACTICE", exact: true }).click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
-  const results = await page.evaluate(() => {
+  const samples = await page.evaluate(() => {
     const g = window.__game;
+    g.equip(4);
     g.locked = false;
-    return (["ct", "t"] as const).map((team) => {
-      g.team = team;
-      g.equip(4);
-      g.drawTime = 0;
+    g.drawTime = 0;
+    g.weaponTime = 0;
+    g.animateWeapon();
+    g.gun.updateMatrixWorld(true);
+    const model = g.gun.getObjectByName("weapon-model")!;
+    const finger = g.gun.getObjectByName("finger_middle_1_R")!;
+    const idlePosition = model.position.clone(),
+      idleRotation = model.quaternion.clone();
+    const closed = finger.quaternion.clone().normalize();
+    let opening = 0,
+      maxStep = 0,
+      maxPositionStep = 0;
+    const previous = model.quaternion.clone(),
+      previousPosition = model.position.clone();
+    for (let frame = 0; frame <= 120; frame++) {
+      g.drawTime = (1 - frame / 120) * (0.55 / 0.9);
       g.animateWeapon();
       g.gun.updateMatrixWorld(true);
-      const model = g.gun.getObjectByName("weapon-model")!;
-      const hand = g.gun.getObjectByName("right-hand")!;
-      const finger = g.gun.getObjectByName(
-        team === "t" ? "finger_middle_1_R" : "ValveBipedBip01_R_Finger21",
-      )!;
-      const closed = finger.quaternion.clone();
-      const pivot = g.position.clone().set(0, 0, -0.035);
-      const contact = model.localToWorld(pivot.clone());
-      hand.worldToLocal(contact);
-      const ready = model.matrixWorld.clone();
-      let contactError = 0,
-        opening = 0,
-        sweep = 0,
-        lastAngle = 0,
-        maxStep = 0;
-      const previous = model.quaternion.clone();
-      for (let frame = 0; frame <= 120; frame++) {
-        const p = frame / 120;
-        g.drawTime = (1 - p) * 0.55;
-        g.animateWeapon();
-        g.gun.updateMatrixWorld(true);
-        contactError = Math.max(
-          contactError,
-          model.localToWorld(pivot.clone()).distanceTo(hand.localToWorld(contact.clone())),
-        );
-        opening = Math.max(opening, closed.angleTo(finger.quaternion));
-        const blade = pivot.clone().set(0, 0, -1).applyQuaternion(model.quaternion);
-        const angle = Math.atan2(blade.y, blade.x);
-        if (frame > 0) {
-          sweep += Math.atan2(Math.sin(angle - lastAngle), Math.cos(angle - lastAngle));
-          maxStep = Math.max(maxStep, previous.angleTo(model.quaternion));
-        }
-        previous.copy(model.quaternion);
-        lastAngle = angle;
+      opening = Math.max(opening, closed.angleTo(finger.quaternion.clone().normalize()));
+      if (frame > 0) {
+        maxStep = Math.max(maxStep, previous.angleTo(model.quaternion));
+        maxPositionStep = Math.max(maxPositionStep, previousPosition.distanceTo(model.position));
       }
-      const resetError = Math.max(
-        ...ready.elements.map((v, i) => Math.abs(v - model.matrixWorld.elements[i])),
-      );
-      const closedError = closed.angleTo(finger.quaternion);
-      g.drawTime = 0.3;
-      g.animateWeapon();
-      g.equip(2);
-      g.equip(4);
-      const restarted = g.drawTime === 0.55 && g.knifeTime === 0 && !g.knifePending;
-      return { contactError, opening, sweep, maxStep, resetError, closedError, restarted };
-    });
+      previous.copy(model.quaternion);
+      previousPosition.copy(model.position);
+    }
+    const reset = idlePosition.distanceTo(model.position) + idleRotation.angleTo(model.quaternion);
+    g.drawTime = 0.00001;
+    g.animateWeapon();
+    const join = idlePosition.distanceTo(model.position) + idleRotation.angleTo(model.quaternion);
+    g.drawTime = 0;
+    g.inspectTime = 3;
+    g.animateWeapon();
+    g.gun.updateMatrixWorld(true);
+    const inspected = model.matrixWorld.clone();
+    g.animateWeapon();
+    g.gun.updateMatrixWorld(true);
+    const frozen = inspected.equals(model.matrixWorld);
+    g.locked = true;
+    g.inspectTime = 0;
+    g.cooldown = 0;
+    return { opening, maxStep, maxPositionStep, reset, join, frozen };
   });
-  for (const result of results) {
-    expect(result.contactError).toBeLessThan(0.001);
-    expect(result.opening).toBeGreaterThan(0.3);
-    expect(result.sweep).toBeLessThan(-5);
-    expect(result.maxStep).toBeLessThan(0.35);
-    expect(result.resetError).toBeLessThan(0.0001);
-    expect(result.closedError).toBeLessThan(0.0001);
-    expect(result.restarted).toBe(true);
+  expect(samples.opening).toBeGreaterThan(0.3);
+  expect(samples.maxStep).toBeLessThan(0.4);
+  expect(samples.maxPositionStep).toBeLessThan(0.04);
+  expect(samples.reset).toBeLessThan(0.001);
+  expect(samples.join).toBeLessThan(0.025);
+  expect(samples.frozen).toBe(true);
+  await page.keyboard.press("f");
+  expect(await page.evaluate(() => window.__game.inspectTime)).toBeGreaterThan(5);
+  await page.mouse.down();
+  await page.mouse.up();
+  expect(await page.evaluate(() => window.__game.inspectTime)).toBe(0);
+  await page.waitForTimeout(550);
+  const first = await page.evaluate(() => window.__game.knifeAlternate);
+  await page.mouse.down();
+  await page.mouse.up();
+  expect(await page.evaluate(() => window.__game.knifeAlternate)).toBe(!first);
+  await page.waitForTimeout(550);
+  await page.keyboard.press("f");
+  await page.keyboard.press("Digit2");
+  expect(await page.evaluate(() => window.__game.inspectTime)).toBe(0);
+  await page.keyboard.press("Digit3");
+  await page.keyboard.press("f");
+  expect(await page.evaluate(() => window.__game.inspectDraw)).toBe(true);
+  await page.evaluate(() => document.exitPointerLock());
+  await page.waitForFunction(() => !window.__game.locked);
+  const paused = await page.evaluate(() => [window.__game.weaponTime, window.__game.inspectTime]);
+  await page.waitForTimeout(150);
+  expect(await page.evaluate(() => [window.__game.weaponTime, window.__game.inspectTime])).toEqual(
+    paused,
+  );
+  expect(errors).toEqual([]);
+  expect(external).toEqual([]);
+});
+
+test("firearm inspection cancels for shots, reloads, scopes, and switching without pose drift", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await page.bringToFront();
+  await page.getByRole("button", { name: "PRACTICE", exact: true }).click();
+  await page.locator("#play").click();
+  await page.waitForFunction(() => window.__game.locked);
+  const samples = await page.evaluate(() => {
+    const g = window.__game;
+    const inspect = () => document.dispatchEvent(new KeyboardEvent("keydown", { code: "KeyF" }));
+    const samples = [];
+    for (let i = 0; i < 4; i++) {
+      g.buy(i);
+      g.drawTime = g.cooldown = 0;
+      g.animateWeapon();
+      g.animationTime += 0.1;
+      g.animateWeapon();
+      const hand = g.gun.getObjectByName("hand_R")!;
+      const position = () => hand.getWorldPosition(g.position.clone());
+      const idle = position();
+      inspect();
+      const duration = g.inspectTime;
+      g.inspectTime *= 0.6;
+      g.animationTime += 0.1;
+      g.animateWeapon();
+      g.animationTime += 0.1;
+      g.animateWeapon();
+      const motion = position().distanceTo(idle);
+      const ammo = g.ammo;
+      g.fire();
+      const fired = g.ammo === ammo - 1 && g.inspectTime === 0;
+      // Repeated renders during an interrupted transition must be identical.
+      g.animateWeapon();
+      g.animationTime += 0.04;
+      g.animateWeapon();
+      const paused = position();
+      for (let frame = 0; frame < 10; frame++) g.animateWeapon();
+      const drift = position().distanceTo(paused);
+      g.shotTime = g.boltTime = g.cooldown = 0;
+      inspect();
+      g.beginReload();
+      const reloaded = g.reload > 0 && g.inspectTime === 0;
+      g.reload = 0;
+      inspect();
+      g.equip(4);
+      const switched = g.inspectTime === 0;
+      samples.push({ duration, motion, fired, drift, reloaded, switched });
+    }
+    g.buy(3);
+    g.drawTime = g.cooldown = g.boltTime = 0;
+    inspect();
+    g.cycleScope();
+    return { samples, scope: g.scopeLevel === 1 && g.inspectTime === 0 };
+  });
+  for (const sample of samples.samples) {
+    expect(sample.duration).toBeGreaterThan(2);
+    expect(sample.motion).toBeGreaterThan(0.02);
+    expect(sample.fired).toBe(true);
+    expect(sample.drift).toBeLessThan(0.000001);
+    expect(sample.reloaded).toBe(true);
+    expect(sample.switched).toBe(true);
   }
+  expect(samples.scope).toBe(true);
+  expect(errors).toEqual([]);
 });

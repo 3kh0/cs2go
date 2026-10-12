@@ -44,8 +44,10 @@
     },
     {
       "name": "damage-1",
-      "source": "sound/player/damage1.wav",
-      "bytes": 5629
+      "source": "player/damage2.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "b0b811b79be1949c659eb675112c2d2fa7fb2d544cac85dcf69c04c804b550cd",
+      "bytes": 8510
     },
     {
       "name": "death-1",
@@ -59,8 +61,10 @@
     },
     {
       "name": "damage-2",
-      "source": "sound/player/damage2.wav",
-      "bytes": 5959
+      "source": "player/kevlar2.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "d09b90eb83583b65b968c396d13c1674310be0c854b9b6d8d32b6e7b64910c06",
+      "bytes": 5152
     },
     {
       "name": "death-2",
@@ -74,8 +78,10 @@
     },
     {
       "name": "damage-3",
-      "source": "sound/player/damage3.wav",
-      "bytes": 5305
+      "source": "player/kevlar3.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "24ea6b660d7f61570df7235edb9f29e3ba425a074448c7ef9170dd9d218e9b40",
+      "bytes": 5196
     },
     {
       "name": "death-3",
@@ -109,8 +115,10 @@
     },
     {
       "name": "buy",
-      "source": "sound/ui/panorama/radial_menu_buy_01.wav",
-      "bytes": 2415
+      "source": "buttons/weapon_confirm.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "447741bf57c1611cba2c21667621fe6433c4e7a5bcf5099959a2816eaf113da2",
+      "bytes": 6062
     },
     {
       "name": "ready",
@@ -151,6 +159,76 @@
       "name": "music-countdown",
       "source": "sound/music/valve_csgo_01/roundtenseccount.mp3",
       "bytes": 159598
+    },
+    {
+      "name": "knife-swing1",
+      "source": "weapons/knife/knife_slash1.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "17926ea43a45cb8fabf424910f39c5abea7757370f58d227af220d8fe8146ac8",
+      "bytes": 3080
+    },
+    {
+      "name": "knife-swing2",
+      "source": "weapons/knife/knife_slash2.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "52b2ab637f53f25658f633cf8c0a3745a8c585fe688379676b158ee8b1013da0",
+      "bytes": 2972
+    },
+    {
+      "name": "knife-hit",
+      "source": "weapons/knife/knife_stab.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "53e3040ccc184db2a5a2e4a9d172f2d10e0a76906060d757517fb25dd6794475",
+      "bytes": 21328
+    },
+    {
+      "name": "knife-wall",
+      "source": "weapons/knife/knife_hitwall1.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "8b9c0a0e87f50beba5cc6625802a3919b6a71ee3d63305719ccf7cf8ef608cf3",
+      "bytes": 14824
+    },
+    {
+      "name": "hit",
+      "source": "player/kevlar1.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "30a5d02f336c6ce40204e4618cfc954d237b08e2977c7a10b6e8fe1351e98014",
+      "bytes": 3650
+    },
+    {
+      "name": "head",
+      "source": "player/headshot1.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "378cf1faf61024d7068466f071de4eb22f16a3697c75bfa88d0cc93206a574e3",
+      "bytes": 14494
+    },
+    {
+      "name": "bomb-plant",
+      "source": "weapons/c4/c4_plant.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "ceba8d2b7472782e70d6cfe940fd699f4d133760f537492dc07968fba61087bc",
+      "bytes": 7782
+    },
+    {
+      "name": "bomb-beep",
+      "source": "weapons/c4/c4_beep1.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "6ad92e8c32d0c604b933157a586f9083394ba7d95dda9fa50172a86300ae502f",
+      "bytes": 3430
+    },
+    {
+      "name": "bomb-defuse",
+      "source": "weapons/c4/c4_disarm.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "802ee3b19c42469c3757246124404cc0bb7387d0b14002eef6902f5c1036c4a4",
+      "bytes": 12734
+    },
+    {
+      "name": "bomb-explode",
+      "source": "weapons/c4/c4_explode1.wav",
+      "sourcePack": "User-supplied CS2 SOUNDS FOR SOURCE pack",
+      "sha256": "e60c19b323d9e4dbe7432dc36c0d664a2c1c12f74d4acdcb9b49a11919005e58",
+      "bytes": 66719
     }
   ]
 }

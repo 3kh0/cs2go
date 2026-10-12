@@ -8,6 +8,16 @@ export type Cue =
   | "click"
   | "hover"
   | "buy"
+  | "hit"
+  | "head"
+  | "knife-swing1"
+  | "knife-swing2"
+  | "knife-hit"
+  | "knife-wall"
+  | "bomb-plant"
+  | "bomb-beep"
+  | "bomb-defuse"
+  | "bomb-explode"
   | "ready";
 export type Music = "menu" | "start" | "deathcam" | "win" | "lose" | "mvp" | "countdown";
 export class Soundscape {

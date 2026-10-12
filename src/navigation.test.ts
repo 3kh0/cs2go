@@ -102,3 +102,26 @@ describe("Source navigation", () => {
     expect(nav.path(new Vector3(0, 0, 0), new Vector3(0, 3, 0))).toEqual([]);
   });
 });
+
+// Source 2 uses convex polygons, including sloped triangles, not NAV16 rectangles.
+it("keeps CS2 triangular ramps inside their actual polygon", () => {
+  const ramp = {
+    ...area(1, 0, 0, []),
+    rect: [0, 0, 2, 2],
+    center: [2 / 3, 2 / 3, 2 / 3],
+    corners: [
+      [0, 0, 0],
+      [2, 2, 0],
+      [0, 0, 2],
+    ],
+  };
+  const nav = new Navigation({
+    polygons: true,
+    areas: [ramp],
+    spawns: { t: [], ct: [] },
+    sites: [],
+    bounds: [0, 0, 2, 2],
+  });
+  expect(nav.support(0.5, 0.5, 3, -1)?.height).toBeCloseTo(0.5);
+  expect(nav.support(1.8, 1.8, 3, -1)).toBeUndefined();
+});

@@ -31,3 +31,10 @@ artifacts
 # Original map inputs and offline Python caches
 new_map/
 __pycache__/
+
+# Playwright MCP inspection captures
+.playwright-mcp/
+
+# Offline Source 2 NAV decoder build output
+scripts/cs2-mapdata/bin/
+scripts/cs2-mapdata/obj/
