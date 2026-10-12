@@ -1,13 +1,12 @@
 import * as T from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
+import { loadGzipped } from "./gltf";
 import { MapCollision } from "./map-collision";
 import { Navigation } from "./navigation";
 import type { MapNavigation } from "./navigation";
 import type { Wall } from "./physics";
 export async function loadDust2(scene: T.Scene) {
   const [asset, response] = await Promise.all([
-    new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync("/models/maps/dust2.glb"),
+    loadGzipped("/models/maps/dust2.glb.gz"),
     fetch("/models/maps/dust2-nav.json"),
   ]);
   if (!response.ok) throw new Error("Dust II navigation could not load");
@@ -36,6 +35,11 @@ export async function loadDust2(scene: T.Scene) {
     for (const tex of [material.map, material.normalMap]) if (tex) tex.anisotropy = 8;
     // Decorative foliage, cables and distant sky surfaces have no player hull.
     if (!/weed|grass|foliage|bush|wire|skybox|sky_dust/.test(name)) meshes.push(object);
+  });
+  // The imported architecture never moves; skip its per-frame matrix updates.
+  asset.scene.traverse((object) => {
+    object.matrixAutoUpdate = false;
+    object.matrixWorldAutoUpdate = false;
   });
   const collision = new MapCollision(meshes);
   const proxy = new T.Mesh(new T.BufferGeometry(), new T.MeshBasicMaterial());

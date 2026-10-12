@@ -14,11 +14,12 @@
   },
   "tools": {
     "Blender": "4.5.9",
+    "gltfpack": "0.24",
     "SourceIOCommit": "259b68b25d7e0ae3533d14140448bd145071f5c0"
   },
   "input": "new_map/csgo",
   "limitations": [
-    "Original geometry and albedo/normal textures; standard PBR approximation without Source lightmaps",
+    "Original geometry and albedo/normal textures (ETC1S KTX2); standard PBR approximation without Source lightmaps",
     "Detailed static props simplified to 30 percent triangles; native NAV graph retained",
     "Browser triangle collision approximates Source player hull and surface penetration"
   ]

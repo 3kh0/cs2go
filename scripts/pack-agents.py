@@ -47,17 +47,19 @@ for i, entry in enumerate(doc.get('images', [])):
     limit = 1024 if not map_asset or any(term in entry.get("name", "").lower() for term in ["wall", "floor", "ground", "sand", "stone", "blend", "brick", "roof"]) else 512
     image.thumbnail((limit, limit), Image.Resampling.LANCZOS)
     data = io.BytesIO()
-    image.save(data, format='WEBP', quality=90, method=4 if map_asset else 6)
+    # Map textures stay lossless here; gltfpack encodes them once as KTX2.
+    image.save(data, format='PNG') if map_asset else image.save(data, format='WEBP', quality=90, method=6)
     payload = data.getvalue()
     if map_asset and i % 50 == 0: print(f'Packed texture {i}/{len(doc["images"])}', flush=True)
     entry['bufferView'] = len(doc['bufferViews'])
-    entry['mimeType'] = 'image/webp'
+    entry['mimeType'] = 'image/png' if map_asset else 'image/webp'
     doc['bufferViews'].append({'buffer': 0, 'byteOffset': append(payload), 'byteLength': len(payload)})
-for texture in doc.get('textures', []):
-    if 'source' in texture:
-        texture.setdefault('extensions', {})['EXT_texture_webp'] = {'source': texture.pop('source')}
-doc['extensionsUsed'] = list(dict.fromkeys(doc.get('extensionsUsed', []) + ['EXT_texture_webp']))
-doc['extensionsRequired'] = list(dict.fromkeys(doc.get('extensionsRequired', []) + ['EXT_texture_webp']))
+if output.parent.name != 'maps':
+    for texture in doc.get('textures', []):
+        if 'source' in texture:
+            texture.setdefault('extensions', {})['EXT_texture_webp'] = {'source': texture.pop('source')}
+    doc['extensionsUsed'] = list(dict.fromkeys(doc.get('extensionsUsed', []) + ['EXT_texture_webp']))
+    doc['extensionsRequired'] = list(dict.fromkeys(doc.get('extensionsRequired', []) + ['EXT_texture_webp']))
 # Drop exporter metadata containing machine paths and unrelated weapon animation nodes.
 for nodes in [doc.get('nodes', []), doc.get('materials', []), doc.get('meshes', [])]:
     for n in nodes:

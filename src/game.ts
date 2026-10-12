@@ -6,9 +6,10 @@ import { WeaponAudio } from "./audio";
 import type { WeaponSound } from "./audio";
 import { accelerate, blocked, weapons } from "./physics";
 import { loadDust2 } from "./dust2";
+import { enableTextureTranscoding } from "./gltf";
 import { detour } from "./local-navigation";
 import { createWorld } from "./world";
-import { createGun, loadWeaponModels, animateGun } from "./weapons";
+import { createGun, createWorldGun, loadWeaponModels, animateGun } from "./weapons";
 import {
   createSoldier,
   animateSoldier,
@@ -17,6 +18,7 @@ import {
   setSoldierWeapon,
   disposeSoldier,
   soldierHeadHit,
+  agentBounds,
 } from "./soldier";
 import type { AgentTeam, Soldier } from "./soldier";
 type Mode = "casual" | "deathmatch" | "practice";
@@ -46,8 +48,25 @@ type Bot = {
   nav: number;
   facing: number;
   velocity: T.Vector2;
+  anim: number;
 };
-const el = (id: string) => document.getElementById(id)!;
+const nodes = new Map<string, HTMLElement>();
+const el = (id: string) => {
+  let node = nodes.get(id);
+  if (!node?.isConnected) nodes.set(id, (node = document.getElementById(id)!));
+  return node;
+};
+// HUD values are refreshed every frame or step; skip DOM writes that change nothing.
+const setText = (id: string, text: string) => {
+  const node = el(id);
+  if (node.textContent !== text) node.textContent = text;
+};
+const styles = new Map<string, string>();
+const setStyle = (id: string, property: string, value: string) => {
+  if (styles.get(id + property) === value) return;
+  styles.set(id + property, value);
+  el(id).style.setProperty(property, value);
+};
 const toggle = (id: string, show: boolean) => el(id).classList.toggle("hidden", !show);
 const clamp = T.MathUtils.clamp;
 const names = [
@@ -83,6 +102,33 @@ const spawns = [
 ];
 const step = 1 / 128;
 const botDesired = new T.Vector2();
+const botAway = new T.Vector2();
+const botAhead = new T.Vector2();
+const up = new T.Vector3(0, 1, 0);
+const scratch = new T.Vector3();
+const botSphere = new T.Sphere();
+const frustum = new T.Frustum();
+const projection = new T.Matrix4();
+// Shared effect resources: tracers scale a unit cylinder, and impact decals
+// occupy a bounded instanced ring buffer. Neither is disposed per effect.
+const tracerGeometry = new T.CylinderGeometry(0.009, 0.009, 1, 3);
+const tracerMaterials = new Map<number, T.MeshBasicMaterial>();
+const tracerMaterial = (color: number) => {
+  let material = tracerMaterials.get(color);
+  if (!material)
+    tracerMaterials.set(
+      color,
+      (material = new T.MeshBasicMaterial({ color, transparent: true, opacity: 0.6 })),
+    );
+  return material;
+};
+const decalLimit = 96;
+const hiddenDecal = new T.Matrix4().makeScale(0, 0, 0);
+const decalMatrix = new T.Matrix4();
+const decalRotation = new T.Quaternion();
+const forward = new T.Vector3(0, 0, 1);
+const unit = new T.Vector3(1, 1, 1);
+const decalPoint = new T.Vector3();
 export class Game {
   spectated: Bot | undefined;
   spectatorFocus = new T.Vector3();
@@ -177,7 +223,18 @@ export class Game {
   noise: AudioBuffer | null = null;
   weaponAudio = new WeaponAudio();
   soundscape = new Soundscape();
-  effects: { mesh: T.Mesh; life: number }[] = [];
+  tracers: { mesh: T.Mesh; life: number }[] = [];
+  decals = new T.InstancedMesh(
+    new T.CircleGeometry(0.045, 6),
+    new T.MeshBasicMaterial({ color: 0x3a3026, side: T.DoubleSide }),
+    decalLimit,
+  );
+  decalLife = new Float32Array(decalLimit);
+  decalNext = 0;
+  guns = new Map<string, T.Group>();
+  targets: T.Object3D[] = [];
+  radarLayers = new Map<string, HTMLCanvasElement>();
+  detours = 0;
   accumulator = 0;
   last = 0;
   uiTime = 0;
@@ -215,6 +272,7 @@ export class Game {
       this.supported = false;
       return;
     }
+    enableTextureTranscoding(this.renderer);
     this.renderer.setSize(innerWidth, innerHeight);
     this.renderer.autoClear = false;
     this.renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -222,6 +280,9 @@ export class Game {
     this.range = this.world = createWorld(this.scene);
     this.bombMesh.visible = false;
     this.scene.add(this.bombMesh);
+    this.decals.count = 0;
+    this.decals.visible = this.decals.frustumCulled = false;
+    this.scene.add(this.decals);
     this.camera.rotation.order = "YXZ";
     this.view.add(this.gun, new T.HemisphereLight(0xffffff, 0x554938, 2.5));
     const light = new T.DirectionalLight(0xffefd5, 3);
@@ -259,6 +320,9 @@ export class Game {
         this.assetsReady = true;
         this.useWorld(true);
         this.equip(this.selected);
+        return this.warmUp();
+      })
+      .then(() => {
         play.disabled = false;
         play.querySelector("span")!.textContent = "LET’S PLAY";
       })
@@ -449,7 +513,74 @@ export class Game {
     this.bots.forEach((b) => {
       b.group.visible = false;
     });
-    if (this.assetsReady) this.equip(this.selected);
+    if (this.assetsReady) {
+      this.equip(this.selected);
+      void this.warmUp();
+    }
+  }
+  viewGun(index: number) {
+    const key = `${this.team}:${index}`;
+    let gun = this.guns.get(key);
+    if (!gun) this.guns.set(key, (gun = createGun(index, this.team)));
+    return gun;
+  }
+  // Compile every program and upload every texture that play can reveal (both
+  // worlds' lighting, hidden agents, all weapons, effects) before the match.
+  warmUp() {
+    if (!this.dust) return;
+    const extras = new T.Group(),
+      viewExtras = new T.Group();
+    extras.add(
+      createWorldGun(0),
+      createWorldGun(1),
+      ...[0xffdda0, 0xffc881].map((color) => new T.Mesh(tracerGeometry, tracerMaterial(color))),
+    );
+    for (let index = 0; index < weapons.length; index++)
+      if (this.viewGun(index) !== this.gun) viewExtras.add(this.viewGun(index));
+    this.scene.add(extras);
+    this.view.add(viewExtras);
+    const range = this.range.root.visible,
+      dust = this.dust.root.visible;
+    for (const casual of [false, true]) {
+      this.range.root.visible = !casual;
+      this.dust.root.visible = casual;
+      this.renderer.compile(this.scene, this.camera);
+    }
+    this.range.root.visible = range;
+    this.dust.root.visible = dust;
+    this.renderer.compile(this.view, this.viewCamera);
+    const textures = new Set<T.Texture>();
+    for (const root of [this.scene, this.view])
+      root.traverse((object) => {
+        if (!(object instanceof T.Mesh)) return;
+        for (const material of Array.isArray(object.material) ? object.material : [object.material])
+          for (const value of Object.values(material))
+            if (value instanceof T.Texture) textures.add(value);
+      });
+    textures.forEach((texture) => this.renderer.initTexture(texture));
+    this.scene.remove(extras);
+    viewExtras.clear();
+    this.view.remove(viewExtras);
+    return this.finishPrograms();
+  }
+  // Let drivers link in parallel, then take each program's first use (uniform
+  // lookup) now rather than when an agent or weapon first comes into view.
+  async finishPrograms() {
+    const parallel = this.renderer.extensions.has("KHR_parallel_shader_compile"),
+      pending = new Set(this.renderer.info.programs ?? []),
+      deadline = performance.now() + 5000;
+    while (pending.size) {
+      for (const program of pending)
+        if (
+          !parallel ||
+          performance.now() > deadline ||
+          (program as T.WebGLProgram & { isReady(): boolean }).isReady()
+        ) {
+          program.getUniforms();
+          pending.delete(program);
+        }
+      if (pending.size) await new Promise((resolve) => setTimeout(resolve, 10));
+    }
   }
   start(mode: Mode) {
     if (!this.supported || matchMedia("(pointer: coarse)").matches) {
@@ -603,20 +734,9 @@ export class Game {
     this.drawTime = 0.55;
     this.cooldown = Math.max(0.55, this.weaponCooldowns[index]);
     if (index === 3 && this.weaponCooldowns[index] > 0) this.boltTime = this.weaponCooldowns[index];
+    // View models are cached per team and weapon; animateGun fully re-poses them.
     this.view.remove(this.gun);
-    const materials = new Set<T.Material>();
-    const skeletons = new Set<T.Skeleton>();
-    this.gun.traverse((o) => {
-      if (o instanceof T.SkinnedMesh) skeletons.add(o.skeleton);
-      if (o instanceof T.Mesh && o !== this.flash) {
-        o.geometry.dispose();
-        for (const material of Array.isArray(o.material) ? o.material : [o.material])
-          materials.add(material);
-      }
-    });
-    materials.forEach((m) => m.dispose());
-    skeletons.forEach((skeleton) => skeleton.dispose());
-    this.gun = createGun(index, this.team);
+    this.gun = this.viewGun(index);
     this.flash.position.copy(this.gun.userData.muzzle);
     this.gun.add(this.flash);
     this.view.add(this.gun);
@@ -691,19 +811,12 @@ export class Game {
     this.camera.position.y += this.eye;
     this.camera.rotation.set(this.pitch, this.yaw, 0);
     this.camera.updateMatrixWorld(true);
-    this.scene.updateMatrixWorld(true);
     this.ray.set(
       this.camera.position,
       new T.Vector3(0, 0, -1).applyQuaternion(this.camera.quaternion),
     );
     this.ray.far = stab ? 1.7 : 1.9;
-    const targets = [
-      ...this.world.solids,
-      ...this.bots
-        .filter((b) => b.health > 0 && (this.mode !== "casual" || b.team !== this.team))
-        .flatMap((b) => b.group.children),
-    ];
-    const impact = this.ray.intersectObjects(targets, true)[0];
+    const impact = this.ray.intersectObjects(this.shotTargets(), true)[0];
     if (!impact) return;
     const index = impact.object.userData.bot;
     if (typeof index !== "number") {
@@ -820,6 +933,7 @@ export class Game {
       nav: 0,
       facing: 0,
       velocity: new T.Vector2(),
+      anim: 0,
     };
   }
   spawnBot(b: Bot, index: number) {
@@ -855,6 +969,7 @@ export class Game {
     b.speed = 0;
     b.moving = b.tracking = false;
     resetSoldier(b.rig);
+    b.anim = 0;
     b.velocity.set(0, 0);
     b.facing = b.group.rotation.y;
     b.respawn = 0;
@@ -904,14 +1019,54 @@ export class Game {
   trace(from: T.Vector3, to: T.Vector3, color: number) {
     const distance = from.distanceTo(to);
     if (distance < 0.01) return;
-    const mesh = new T.Mesh(
-      new T.CylinderGeometry(0.009, 0.009, distance, 3),
-      new T.MeshBasicMaterial({ color, transparent: true, opacity: 0.6 }),
-    );
+    let tracer = this.tracers.find((t) => t.life <= 0);
+    if (!tracer && this.tracers.length >= 32)
+      tracer = this.tracers.reduce((a, b) => (b.life < a.life ? b : a));
+    if (!tracer) {
+      tracer = { mesh: new T.Mesh(tracerGeometry), life: 0 };
+      this.tracers.push(tracer);
+      this.scene.add(tracer.mesh);
+    }
+    const mesh = tracer.mesh;
+    mesh.material = tracerMaterial(color);
     mesh.position.copy(from).lerp(to, 0.5);
-    mesh.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), to.clone().sub(from).normalize());
-    this.scene.add(mesh);
-    this.effects.push({ mesh, life: 0.055 });
+    mesh.quaternion.setFromUnitVectors(up, scratch.copy(to).sub(from).normalize());
+    mesh.scale.set(1, distance, 1);
+    mesh.visible = true;
+    tracer.life = 0.055;
+  }
+  decal(point: T.Vector3, normal: T.Vector3) {
+    const slot = this.decalNext;
+    this.decalNext = (slot + 1) % decalLimit;
+    decalRotation.setFromUnitVectors(forward, normal);
+    this.decals.setMatrixAt(slot, decalMatrix.compose(point, decalRotation, unit));
+    this.decals.instanceMatrix.needsUpdate = true;
+    this.decalLife[slot] = 8;
+    this.decals.count = Math.max(this.decals.count, slot + 1);
+    this.decals.visible = true;
+  }
+  // Rays test the world plus living enemies whose agent sphere the ray reaches;
+  // only those rigs need fresh world matrices for skinned picking.
+  shotTargets() {
+    const targets = this.targets,
+      ray = this.ray.ray;
+    targets.length = 0;
+    for (const solid of this.world.solids) {
+      solid.updateWorldMatrix(true, false);
+      targets.push(solid);
+    }
+    for (const b of this.bots) {
+      if (b.health <= 0 || (this.mode === "casual" && b.team === this.team)) continue;
+      botSphere.copy(agentBounds).center.add(b.group.position);
+      if (
+        !ray.intersectsSphere(botSphere) ||
+        ray.origin.distanceTo(botSphere.center) > this.ray.far + botSphere.radius
+      )
+        continue;
+      b.group.updateMatrixWorld(true);
+      targets.push(...b.group.children);
+    }
+    return targets;
   }
   fire() {
     if (this.dead || !this.active || this.reload || this.cooldown > 0 || !this.locked) return;
@@ -962,14 +1117,7 @@ export class Game {
     this.ray.set(this.camera.position, direction);
     const stats = ballistics[this.selected];
     this.ray.far = stats.range / SOURCE_UNITS_PER_METER;
-    const targets = [
-      ...this.world.solids,
-      ...this.bots
-        .filter((b) => b.health > 0 && (this.mode !== "casual" || b.team !== this.team))
-        .flatMap((b) => b.group.children),
-    ];
-    this.scene.updateMatrixWorld(true);
-    const impacts = this.ray.intersectObjects(targets, true);
+    const impacts = this.ray.intersectObjects(this.shotTargets(), true);
     const seenBots = new Set<number>(),
       seenSolids = new Set<T.Object3D>();
     let damage = stats.damage as number,
@@ -1025,33 +1173,27 @@ export class Game {
       } else {
         seenSolids.add(impact.object);
         material = impact.object.userData.bulletMaterial || "concrete";
-        const mesh = impact.object as T.Mesh;
-        mesh.geometry.computeBoundingBox();
-        const bounds = mesh.geometry.boundingBox!.clone().applyMatrix4(mesh.matrixWorld);
-        const origin = this.ray.ray.origin;
-        let exit = Infinity;
-        for (const axis of ["x", "y", "z"] as const) {
-          if (Math.abs(direction[axis]) > 1e-8)
-            exit = Math.min(
-              exit,
-              ((direction[axis] > 0 ? bounds.max[axis] : bounds.min[axis]) - origin[axis]) /
-                direction[axis],
-            );
+        if (this.world.collision) thickness = this.world.collision.thickness(impact, direction);
+        else {
+          const mesh = impact.object as T.Mesh;
+          if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox();
+          const bounds = mesh.geometry.boundingBox!.clone().applyMatrix4(mesh.matrixWorld);
+          const origin = this.ray.ray.origin;
+          let exit = Infinity;
+          for (const axis of ["x", "y", "z"] as const) {
+            if (Math.abs(direction[axis]) > 1e-8)
+              exit = Math.min(
+                exit,
+                ((direction[axis] > 0 ? bounds.max[axis] : bounds.min[axis]) - origin[axis]) /
+                  direction[axis],
+              );
+          }
+          thickness = Math.max(0, exit - impact.distance);
         }
-        thickness = this.world.collision
-          ? this.world.collision.thickness(impact, direction)
-          : Math.max(0, exit - impact.distance);
-        const dot = new T.Mesh(
-          new T.CircleGeometry(0.045, 6),
-          new T.MeshBasicMaterial({ color: 0x3a3026, side: T.DoubleSide }),
+        this.decal(
+          decalPoint.copy(impact.point).addScaledVector(direction, -0.015),
+          scratch.copy(impact.face!.normal).transformDirection(impact.object.matrixWorld),
         );
-        dot.position.copy(impact.point).addScaledVector(direction, -0.015);
-        dot.quaternion.setFromUnitVectors(
-          new T.Vector3(0, 0, 1),
-          impact.face!.normal.clone().transformDirection(impact.object.matrixWorld),
-        );
-        this.scene.add(dot);
-        this.effects.push({ mesh: dot, life: 8 });
       }
       if (!remaining || impact.distance * SOURCE_UNITS_PER_METER > 3000) break;
       damage = penetrate(damage, stats.power, thickness, material);
@@ -1087,9 +1229,13 @@ export class Game {
     wallbang = false,
   ) {
     const container = el("killfeed");
-    const before = new Map(
-      [...container.children].map((child) => [child, child.getBoundingClientRect().top]),
-    );
+    // Rows only shift when the oldest is trimmed; measure layout just then.
+    const before =
+      container.children.length >= 6
+        ? new Map(
+            [...container.children].map((child) => [child, child.getBoundingClientRect().top]),
+          )
+        : undefined;
     const row = document.createElement("div");
     row.className = "feed" + (killer === "YOU" || victim === "YOU" ? " feed-local" : "");
     row.setAttribute("role", "listitem");
@@ -1130,17 +1276,18 @@ export class Game {
     );
     container.append(row);
     while (container.children.length > 6) container.firstElementChild?.remove();
-    for (const child of container.children) {
-      const old = before.get(child);
-      if (old !== undefined) {
-        const offset = old - child.getBoundingClientRect().top;
-        if (offset)
-          child.animate(
-            [{ transform: `translateY(${offset}px)` }, { transform: "translateY(0)" }],
-            { duration: 160, easing: "ease-out" },
-          );
+    if (before)
+      for (const child of container.children) {
+        const old = before.get(child);
+        if (old !== undefined) {
+          const offset = old - child.getBoundingClientRect().top;
+          if (offset)
+            child.animate(
+              [{ transform: `translateY(${offset}px)` }, { transform: "translateY(0)" }],
+              { duration: 160, easing: "ease-out" },
+            );
+        }
       }
-    }
     setTimeout(() => {
       if (!row.isConnected) return;
       row.classList.add("feed-exit");
@@ -1148,7 +1295,7 @@ export class Game {
     }, 6500);
   }
   toast(text: string, time = 3) {
-    el("toast").textContent = text;
+    setText("toast", text);
     this.toastTime = time;
   }
   finish() {
@@ -1183,7 +1330,8 @@ export class Game {
         this.meleeHit(this.knifeStab);
     }
     this.drawTime = Math.max(0, this.drawTime - dt);
-    this.weaponCooldowns = this.weaponCooldowns.map((time) => Math.max(0, time - dt));
+    for (let i = 0; i < this.weaponCooldowns.length; i++)
+      this.weaponCooldowns[i] = Math.max(0, this.weaponCooldowns[i] - dt);
     this.scopeSettle = Math.max(0, this.scopeSettle - dt);
     if (this.boltTime > 0) {
       const previous = this.boltTime;
@@ -1204,7 +1352,7 @@ export class Game {
     this.recovery -= dt;
     if (this.recovery <= 0) this.shots = Math.max(0, this.shots - dt * 25);
     this.toastTime -= dt;
-    if (this.toastTime <= 0) el("toast").textContent = "";
+    if (this.toastTime <= 0) setText("toast", "");
     if (this.mode === "deathmatch") {
       const previousTime = this.time;
       this.time -= dt;
@@ -1219,7 +1367,7 @@ export class Game {
       if (!this.active || this.roundPause > 0) return;
       if (this.dead) {
         this.tick++;
-        if (this.tick % 8 === 0) this.updateBots(dt * 8);
+        this.updateBots(dt * 8, this.tick % 8);
         this.moveBots(dt);
         return;
       }
@@ -1341,7 +1489,7 @@ export class Game {
     }
     if (this.grounded && wasFalling) this.soundscape.play("land");
     this.tick++;
-    if (this.tick % 8 === 0) this.updateBots(dt * 8);
+    this.updateBots(dt * 8, this.tick % 8);
     this.moveBots(dt);
   }
   useWorld(dust: boolean) {
@@ -1430,9 +1578,11 @@ export class Game {
     this.time = Math.max(0, this.time - dt);
     const bomb = this.bomb!;
     const stationary = !["KeyW", "KeyA", "KeyS", "KeyD", "Space"].some((key) => this.keys.has(key));
-    const alive = (team: AgentTeam) =>
-      this.bots.filter((b) => b.team === team && b.health > 0).length +
-      (this.team === team && !this.dead ? 1 : 0);
+    const alive = (team: AgentTeam) => {
+      let count = this.team === team && !this.dead ? 1 : 0;
+      for (const b of this.bots) if (b.team === team && b.health > 0) count++;
+      return count;
+    };
     if (!alive("ct")) {
       this.endRound("t", "Counter-Terrorists eliminated");
       return;
@@ -1546,10 +1696,10 @@ export class Game {
     this.camera.lookAt(this.spectatorFocus);
     this.toast(`SPECTATING ${teammate.name} · Next round in play`, 0.2);
   }
-  updateCasualBots(dt: number) {
+  updateCasualBots(dt: number, phase: number) {
     const nav = this.dust!.navigation,
       bomb = this.bomb!;
-    for (let i = 0; i < this.bots.length; i++) {
+    for (let i = phase; i < this.bots.length; i += 8) {
       const b = this.bots[i];
       if (b.health <= 0) continue;
       const pos = b.group.position,
@@ -1691,19 +1841,22 @@ export class Game {
       }
     }
   }
-  updateBots(dt: number) {
-    for (const b of this.bots) {
+  // Each bot thinks at 16 Hz on its own phase of the 128 Hz step, spreading
+  // visibility rays and path searches (including mass re-paths) over 8 steps.
+  updateBots(dt: number, phase: number) {
+    for (let i = phase; i < this.bots.length; i += 8) {
+      const b = this.bots[i];
       if (b.health <= 0 || b.buyTime <= 0) continue;
       b.buyTime -= dt;
       if (b.buyTime <= 0) setSoldierWeapon(b.rig, b.team === "t" ? 0 : 1);
     }
     if (this.mode === "casual") {
-      this.updateCasualBots(dt);
+      this.updateCasualBots(dt, phase);
       return;
     }
     const player = this.position.clone();
     player.y += 1.3;
-    for (let i = 0; i < this.bots.length; i++) {
+    for (let i = phase; i < this.bots.length; i += 8) {
       const b = this.bots[i];
       if (b.health <= 0) {
         b.respawn -= dt;
@@ -1770,16 +1923,37 @@ export class Game {
       }
     }
   }
+  botSupport(b: Bot, x: number, z: number, ceiling: number, bottom: number) {
+    const nav = this.mode === "casual" ? this.dust!.navigation : undefined;
+    return nav?.support(x, z, ceiling, bottom, nav.areas[b.navArea]);
+  }
+  stepBot(b: Bot, x: number, z: number) {
+    const nav = this.mode === "casual" ? this.dust!.navigation : undefined,
+      pos = b.group.position;
+    const ground = this.botSupport(b, x, z, pos.y + 0.46, pos.y - 8);
+    // The original NAV regions already include Source's player hull and
+    // smooth clip ramps. Only cross a region's authored outgoing links.
+    if (ground) {
+      pos.x = x;
+      pos.z = z;
+      b.navArea = nav!.index.get(ground.area.id)!;
+      return;
+    }
+    if (!this.isBlocked(x, z, pos.y, 0.35)) {
+      pos.x = x;
+      pos.z = z;
+      if (nav) b.navArea = nav.nearest(pos);
+    }
+  }
   moveBots(dt: number) {
+    this.detours = 0;
     for (const b of this.bots) {
+      // Visual animation accumulates simulated time and is applied per rendered frame.
       if (b.health <= 0) {
-        if (b.group.visible) animateSoldier(b.rig, 0, dt, false);
+        if (b.group.visible) b.anim += dt;
         continue;
       }
       const desired = botDesired.set(0, 0);
-      const nav = this.mode === "casual" ? this.dust!.navigation : undefined;
-      const support = (x: number, z: number, ceiling: number, bottom: number) =>
-        nav?.support(x, z, ceiling, bottom, nav.areas[b.navArea]);
       const pos = b.group.position,
         previousX = pos.x,
         previousY = pos.y,
@@ -1811,21 +1985,24 @@ export class Game {
           const sx = pos.x - other.group.position.x,
             sz = pos.z - other.group.position.z,
             distance = Math.hypot(sx, sz);
-          if (distance > 0.01 && distance < 0.85)
-            desired.add(new T.Vector2(sx, sz).multiplyScalar(((0.85 - distance) * 4) / distance));
+          if (distance > 0.01 && distance < 0.85) {
+            const push = ((0.85 - distance) * 4) / distance;
+            desired.x += sx * push;
+            desired.y += sz * push;
+          }
         }
         if (!this.dead && Math.abs(pos.y - this.position.y) < 1.2) {
           const sx = pos.x - this.position.x,
             sz = pos.z - this.position.z,
             distance = Math.hypot(sx, sz);
           if (distance > 0.01 && distance < 1.5) {
-            const away = new T.Vector2(sx / distance, sz / distance),
+            const away = botAway.set(sx / distance, sz / distance),
               inward = desired.dot(away);
             if (inward < 0) {
+              const side = b.group.id % 2 ? 3.6 : -3.6;
               desired.addScaledVector(away, -inward);
-              desired.add(
-                new T.Vector2(-away.y, away.x).multiplyScalar(b.group.id % 2 ? 3.6 : -3.6),
-              );
+              desired.x -= away.y * side;
+              desired.y += away.x * side;
             }
             desired.addScaledVector(away, Math.max(0, 1.1 - distance) * 6).clampLength(0, 3.6);
           }
@@ -1834,9 +2011,9 @@ export class Game {
       b.velocity.x = T.MathUtils.damp(b.velocity.x, desired.x, 12, dt);
       b.velocity.y = T.MathUtils.damp(b.velocity.y, desired.y, 12, dt);
       if (this.world.collision && b.moving && b.vertical === 0 && desired.lengthSq() > 0) {
-        const ahead = desired.clone().normalize().multiplyScalar(0.7);
+        const ahead = botAhead.copy(desired).normalize().multiplyScalar(0.7);
         const raised =
-          support(pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1)?.height ??
+          this.botSupport(b, pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1)?.height ??
           this.world.collision.floor(pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1);
         const target = b.path[0];
         if (
@@ -1866,28 +2043,13 @@ export class Game {
       }
       const dx = b.velocity.x * dt,
         dz = b.velocity.y * dt;
-      const move = (x: number, z: number) => {
-        const ground = support(x, z, pos.y + 0.46, pos.y - 8);
-        // The original NAV regions already include Source's player hull and
-        // smooth clip ramps. Only cross a region's authored outgoing links.
-        if (ground) {
-          pos.x = x;
-          pos.z = z;
-          b.navArea = nav!.index.get(ground.area.id)!;
-          return;
-        }
-        if (!this.isBlocked(x, z, pos.y, 0.35)) {
-          pos.x = x;
-          pos.z = z;
-          if (nav) b.navArea = nav.nearest(pos);
-        }
-      };
-      if (dx) move(pos.x + dx, pos.z);
-      if (dz) move(pos.x, pos.z + dz);
+      if (dx) this.stepBot(b, pos.x + dx, pos.z);
+      if (dz) this.stepBot(b, pos.x, pos.z + dz);
 
       if (this.world.collision) {
         const floor =
-          support(pos.x, pos.z, pos.y + (b.vertical > 0 ? 0 : 0.46), pos.y - 8)?.height ??
+          this.botSupport(b, pos.x, pos.z, pos.y + (b.vertical > 0 ? 0 : 0.46), pos.y - 8)
+            ?.height ??
           this.world.collision.floor(pos.x, pos.z, pos.y + (b.vertical > 0 ? 0 : 0.45), pos.y - 8);
         if (Number.isFinite(floor)) {
           if (b.vertical <= 0 && pos.y <= floor + 0.45) {
@@ -1904,7 +2066,9 @@ export class Game {
           b.moving && Math.hypot(pos.x - previousX, pos.z - previousZ) < dt * 0.25
             ? b.stuck + dt
             : 0;
-        if (b.stuck > 0.8) {
+        // Local detours are synchronous searches; allow one per simulation step.
+        if (b.stuck > 0.8 && !this.detours) {
+          this.detours++;
           const route = b.path.filter((p): p is T.Vector3 => p instanceof T.Vector3);
           const goalIndex = route.findIndex((p) => Math.hypot(p.x - pos.x, p.z - pos.z) > 4);
           const index = goalIndex >= 0 ? goalIndex : route.length - 1;
@@ -1936,20 +2100,109 @@ export class Game {
         vz = (pos.z - previousZ) / dt;
       b.rig.moveX = vx * Math.cos(b.group.rotation.y) - vz * Math.sin(b.group.rotation.y);
       b.rig.moveZ = vx * Math.sin(b.group.rotation.y) + vz * Math.cos(b.group.rotation.y);
-      animateSoldier(b.rig, b.speed, dt, true);
+      b.anim += dt;
     }
   }
+  // Apply simulated time to agent rigs once per rendered frame. On-screen
+  // agents animate every frame; distant ones at 30 Hz and off-screen ones at
+  // 10 Hz, which keeps any visible shadows moving. Without bot shadows (casual),
+  // off-screen bodies also skip render-list traversal of their skeletons.
+  animateBots() {
+    this.camera.updateMatrixWorld();
+    frustum.setFromProjectionMatrix(
+      projection.multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse),
+    );
+    const shadows = this.mode !== "casual" && this.renderer.shadowMap.enabled;
+    for (const b of this.bots) {
+      if (!b.group.visible) continue;
+      botSphere.copy(agentBounds).center.add(b.group.position);
+      const onScreen = frustum.intersectsSphere(botSphere);
+      b.rig.model.visible = onScreen || shadows;
+      if (b.anim <= 0) continue;
+      const interval = !onScreen
+        ? 0.1
+        : botSphere.center.distanceToSquared(this.camera.position) > 40 * 40
+          ? 1 / 30
+          : 0;
+      if (b.anim < interval) continue;
+      animateSoldier(b.rig, b.speed, b.anim, b.health > 0);
+      b.anim = 0;
+    }
+  }
+  // The static radar layer (nav areas or range walls) is drawn once per world,
+  // canvas size and style, then composited under the live markers.
   drawMap(canvas: HTMLCanvasElement, live: boolean) {
     const ctx = canvas.getContext("2d")!,
       w = canvas.width,
-      h = canvas.height;
+      h = canvas.height,
+      key = `${this.world === this.range ? "range" : "dust"}:${live}:${w}x${h}`;
+    let layer = this.radarLayers.get(key);
+    if (!layer) {
+      layer = document.createElement("canvas");
+      layer.width = w;
+      layer.height = h;
+      this.drawMapLayer(layer.getContext("2d")!, w, h, live);
+      this.radarLayers.set(key, layer);
+    }
     ctx.clearRect(0, 0, w, h);
+    ctx.drawImage(layer, 0, 0);
+    if (!live) return;
+    if (this.world.navigation) {
+      const { px, pz } = this.mapProjection(w, h);
+      const spotted = new Set<number | "player" | null>();
+      for (const ally of this.bots) if (ally.team === this.team) spotted.add(ally.target);
+      this.bots.forEach((b, i) => {
+        if (b.health <= 0) return;
+        if (b.team !== this.team && !spotted.has(i)) return;
+        ctx.beginPath();
+        ctx.arc(px(b.group.position.x), pz(b.group.position.z), 2.4, 0, Math.PI * 2);
+        ctx.fillStyle = b.team === this.team ? "#8fc9ed" : "#eca755";
+        ctx.fill();
+      });
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.arc(px(this.position.x), pz(this.position.z), 3, 0, Math.PI * 2);
+      ctx.fill();
+      if (this.bomb && (this.bomb.planted || this.bomb.carrier === -1)) {
+        ctx.fillStyle = "#ff5c4e";
+        ctx.fillRect(px(this.bomb.position.x) - 3, pz(this.bomb.position.z) - 3, 6, 6);
+      }
+      return;
+    }
+    const s = Math.min(w, h) / 50;
+    ctx.save();
+    ctx.translate(w / 2, h / 2);
+    for (const b of this.bots) {
+      if (b.health <= 0) continue;
+      ctx.beginPath();
+      ctx.arc(b.group.position.x * s, b.group.position.z * s, 2.8, 0, Math.PI * 2);
+      ctx.fillStyle = "#eca755";
+      ctx.fill();
+    }
+    ctx.translate(this.position.x * s, this.position.z * s);
+    ctx.rotate(-this.yaw);
+    ctx.beginPath();
+    ctx.moveTo(0, -6);
+    ctx.lineTo(-4, 4);
+    ctx.lineTo(4, 4);
+    ctx.closePath();
+    ctx.fillStyle = "#b7e9fc";
+    ctx.fill();
+    ctx.restore();
+  }
+  mapProjection(w: number, h: number) {
+    const [x0, z0, x1, z1] = this.world.navigation!.data.bounds;
+    const scale = Math.min((w - 20) / (x1 - x0), (h - 20) / (z1 - z0));
+    return {
+      scale,
+      px: (x: number) => w / 2 + (x - (x0 + x1) / 2) * scale,
+      pz: (z: number) => h / 2 + (z - (z0 + z1) / 2) * scale,
+    };
+  }
+  drawMapLayer(ctx: CanvasRenderingContext2D, w: number, h: number, live: boolean) {
     if (this.world.navigation) {
       const data = this.world.navigation.data;
-      const [x0, z0, x1, z1] = data.bounds;
-      const scale = Math.min((w - 20) / (x1 - x0), (h - 20) / (z1 - z0));
-      const px = (x: number) => w / 2 + (x - (x0 + x1) / 2) * scale;
-      const pz = (z: number) => h / 2 + (z - (z0 + z1) / 2) * scale;
+      const { scale, px, pz } = this.mapProjection(w, h);
       for (const area of data.areas) {
         ctx.fillStyle = area.center[1] > 2 ? "#c7baa877" : "#87938b88";
         ctx.fillRect(
@@ -1964,28 +2217,6 @@ export class Game {
         ctx.fillStyle = "#efac51";
         ctx.fillText(i === 0 ? "A" : "B", px(site[0]), pz(site[2]));
       });
-      if (live) {
-        this.bots.forEach((b, i) => {
-          if (b.health <= 0) return;
-          if (
-            b.team !== this.team &&
-            !this.bots.some((ally) => ally.team === this.team && ally.target === i)
-          )
-            return;
-          ctx.beginPath();
-          ctx.arc(px(b.group.position.x), pz(b.group.position.z), 2.4, 0, Math.PI * 2);
-          ctx.fillStyle = b.team === this.team ? "#8fc9ed" : "#eca755";
-          ctx.fill();
-        });
-        ctx.fillStyle = "#fff";
-        ctx.beginPath();
-        ctx.arc(px(this.position.x), pz(this.position.z), 3, 0, Math.PI * 2);
-        ctx.fill();
-        if (this.bomb && (this.bomb.planted || this.bomb.carrier === -1)) {
-          ctx.fillStyle = "#ff5c4e";
-          ctx.fillRect(px(this.bomb.position.x) - 3, pz(this.bomb.position.z) - 3, 6, 6);
-        }
-      }
       return;
     }
     const s = Math.min(w, h) / 50;
@@ -2005,26 +2236,7 @@ export class Game {
     ctx.fillText("A", 13 * s, 17 * s);
     ctx.fillStyle = "#a3c1cf";
     ctx.fillText("B", -10 * s, 18 * s);
-    if (live) {
-      for (const b of this.bots) {
-        if (b.health <= 0) continue;
-        ctx.beginPath();
-        ctx.arc(b.group.position.x * s, b.group.position.z * s, 2.8, 0, Math.PI * 2);
-        ctx.fillStyle = "#eca755";
-        ctx.fill();
-      }
-      ctx.save();
-      ctx.translate(this.position.x * s, this.position.z * s);
-      ctx.rotate(-this.yaw);
-      ctx.beginPath();
-      ctx.moveTo(0, -6);
-      ctx.lineTo(-4, 4);
-      ctx.lineTo(4, 4);
-      ctx.closePath();
-      ctx.fillStyle = "#b7e9fc";
-      ctx.fill();
-      ctx.restore();
-    } else {
+    if (!live) {
       ctx.strokeStyle = "#efac5180";
       ctx.setLineDash([3, 4]);
       ctx.strokeRect(-24 * s, -24 * s, 48 * s, 48 * s);
@@ -2202,42 +2414,48 @@ export class Game {
   }
 
   updateUI() {
-    el("health").textContent = String(Math.max(0, this.health));
-    el("armor").textContent = String(this.armor);
-    el("ammo").textContent = this.selected === 4 ? "" : String(this.ammo);
+    setText("health", String(Math.max(0, this.health)));
+    setText("armor", String(this.armor));
+    setText("ammo", this.selected === 4 ? "" : String(this.ammo));
     el("ammo").parentElement!.classList.toggle("knife-equipped", this.selected === 4);
     this.updateInventory();
-    el("reserve").textContent = String(this.reserve);
-    el("gun-name").textContent = weapons[this.selected].name;
-    el("reload-label").textContent = this.reload
-      ? "RELOADING…"
-      : this.boltTime > 0
-        ? "CYCLING BOLT…"
-        : this.ammo === 0 && this.selected !== 4
-          ? "R · RELOAD"
-          : "";
-    el("score").textContent = String(
-      this.mode === "casual" ? this.teamScores[this.team] : this.kills,
+    setText("reserve", String(this.reserve));
+    setText("gun-name", weapons[this.selected].name);
+    setText(
+      "reload-label",
+      this.reload
+        ? "RELOADING…"
+        : this.boltTime > 0
+          ? "CYCLING BOLT…"
+          : this.ammo === 0 && this.selected !== 4
+            ? "R · RELOAD"
+            : "",
     );
-    el("enemy-score").textContent = String(
-      this.mode === "casual"
-        ? this.teamScores[this.team === "t" ? "ct" : "t"]
-        : Math.max(...this.bots.map((b) => b.kills), 0),
+    setText("score", String(this.mode === "casual" ? this.teamScores[this.team] : this.kills));
+    setText(
+      "enemy-score",
+      String(
+        this.mode === "casual"
+          ? this.teamScores[this.team === "t" ? "ct" : "t"]
+          : Math.max(...this.bots.map((b) => b.kills), 0),
+      ),
     );
     if (this.mode === "casual") {
       const friendCount =
         this.bots.filter((b) => b.team === this.team && b.health > 0).length + (this.dead ? 0 : 1);
       const enemyCount = this.bots.filter((b) => b.team !== this.team && b.health > 0).length;
-      el("match-goal").textContent = `ROUND ${this.round} · ${friendCount} VS ${enemyCount} ALIVE`;
+      setText("match-goal", `ROUND ${this.round} · ${friendCount} VS ${enemyCount} ALIVE`);
     }
     const sec = Math.max(
       0,
       Math.ceil(this.mode === "casual" && this.bomb?.planted ? this.bomb.timer : this.time),
     );
-    el("clock").textContent =
+    setText(
+      "clock",
       this.mode === "practice"
         ? "∞"
-        : `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`;
+        : `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`,
+    );
     if (!el("scoreboard").classList.contains("hidden")) this.scoreboard();
   }
   animateWeapon(bob = 0, sway = 0) {
@@ -2261,7 +2479,7 @@ export class Game {
       this.fps = Math.round(this.frames / this.fpsTime);
       this.frames = 0;
       this.fpsTime = 0;
-      el("telemetry").textContent = `${this.fps} FPS · 128 TICK · LOCAL`;
+      setText("telemetry", `${this.fps} FPS · 128 TICK · LOCAL`);
     }
     if (this.active && this.locked) {
       this.accumulator += dt;
@@ -2288,14 +2506,25 @@ export class Game {
         }
       }
     }
-    for (let i = this.effects.length - 1; i >= 0; i--) {
-      const e = this.effects[i];
-      e.life -= dt;
-      if (e.life <= 0) {
-        this.scene.remove(e.mesh);
-        e.mesh.geometry.dispose();
-        (e.mesh.material as T.Material).dispose();
-        this.effects.splice(i, 1);
+    for (const tracer of this.tracers) {
+      if (tracer.life <= 0) continue;
+      tracer.life -= dt;
+      if (tracer.life <= 0) tracer.mesh.visible = false;
+    }
+    if (this.decals.visible) {
+      let live = 0;
+      for (let i = 0; i < this.decals.count; i++) {
+        if (this.decalLife[i] <= 0) continue;
+        this.decalLife[i] -= dt;
+        if (this.decalLife[i] > 0) live++;
+        else {
+          this.decals.setMatrixAt(i, hiddenDecal);
+          this.decals.instanceMatrix.needsUpdate = true;
+        }
+      }
+      if (!live) {
+        this.decals.visible = false;
+        this.decals.count = this.decalNext = 0;
       }
     }
     const speed = Math.hypot(this.velocity.x, this.velocity.z),
@@ -2304,14 +2533,16 @@ export class Game {
 
     this.flash.visible = this.kick > 0.048;
     this.flash.rotation.z = Math.random() * 6;
-    el("crosshair").style.setProperty(
+    setStyle(
+      "crosshair",
       "--gap",
       `${4 + speed * 2 + Math.min(this.shots, 20) * 0.5 + (this.grounded ? 0 : 14)}px`,
     );
-    el("hitmarker").style.opacity = String(this.hit > 0 ? 1 : 0);
-    el("damage").style.opacity = String(this.damage * 3);
+    setStyle("hitmarker", "opacity", this.hit > 0 ? "1" : "0");
+    setStyle("damage", "opacity", String(this.damage * 3));
     if (this.active && this.locked && this.dead && this.mode === "casual") this.spectate();
     if (!this.dead || !this.active) this.spectated = undefined;
+    this.animateBots();
     // A close wall can compress the chase camera into the followed body. Hide
     // that body only for this render, retaining visibility for game state.
     const followed = this.spectated?.group;

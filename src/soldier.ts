@@ -1,16 +1,15 @@
 import * as T from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { gltf } from "./gltf";
 import { clone } from "three/addons/utils/SkeletonUtils.js";
-import { createWorldGun } from "./weapons";
+import { createWorldGun, shareSkeletons } from "./weapons";
 
 export type AgentTeam = "t" | "ct";
 type Template = { scene: T.Group; animations: T.AnimationClip[] };
 const templates = new Map<AgentTeam, Template>();
 export async function loadSoldierModels() {
-  const loader = new GLTFLoader();
   await Promise.all(
     (["t", "ct"] as const).map(async (team) => {
-      const model = await loader.loadAsync(
+      const model = await gltf.loadAsync(
         `/models/agents/${team === "t" ? "ground-rebel" : "idf"}.glb`,
       );
       templates.set(team, model);
@@ -75,12 +74,11 @@ export function createSoldier(index: number, team: AgentTeam = "t"): Soldier {
     bone("leg_upper_L", "ValveBipedBip01_L_Thigh"),
     bone("leg_upper_R", "ValveBipedBip01_R_Thigh"),
   ];
+  shareSkeletons(model);
   model.traverse((o) => {
     if (o instanceof T.Mesh) {
       o.castShadow = o.receiveShadow = true;
       o.userData.bot = index;
-      // Animated bounds differ from the bind pose, particularly while falling.
-      o.frustumCulled = false;
     }
   });
   const mixer = new T.AnimationMixer(model);
@@ -98,6 +96,13 @@ export function createSoldier(index: number, team: AgentTeam = "t"): Soldier {
   const scale = 1.8 / (bounds.max.y - bounds.min.y);
   model.scale.setScalar(scale);
   model.position.y = -bounds.min.y * scale;
+  // Animated bounds differ from the bind pose, particularly while falling. A
+  // fixed agent-sized sphere keeps culling and ray rejection valid in any pose.
+  group.updateMatrixWorld(true);
+  model.traverse((o) => {
+    if (o instanceof T.SkinnedMesh)
+      o.boundingSphere = agentBounds.clone().applyMatrix4(o.matrixWorld.clone().invert());
+  });
 
   const weapon = createWorldGun(2);
   const rightHand = bone("hand_R", "ValveBipedBip01_R_Hand");
@@ -171,6 +176,7 @@ export function createSoldier(index: number, team: AgentTeam = "t"): Soldier {
   poseWeapon(soldier);
   return soldier;
 }
+export const agentBounds = new T.Sphere(new T.Vector3(0, 0.9, 0), 1.5);
 const looseRotation = new T.Euler();
 const looseQuaternion = new T.Quaternion();
 const contactPosition = new T.Vector3();
@@ -188,8 +194,8 @@ const movementClips = [
   ["walk_e_rifle", 1, 0],
   ["walk_w_rifle", -1, 0],
 ] as const;
+// getWorldPosition refreshes only each hand's ancestor chain, not the whole rig.
 function poseWeapon(soldier: Soldier) {
-  soldier.group.updateMatrixWorld(true);
   soldier.group.worldToLocal(soldier.rightHand.getWorldPosition(soldier.grip));
   soldier.group.worldToLocal(soldier.leftHand.getWorldPosition(soldier.support));
   weaponMatrix.lookAt(soldier.grip, soldier.support, up);
@@ -250,36 +256,11 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
       }
     }
     // Bounded spring motion gives the frozen gait inertia, loose limbs and a
-    // small landing rebound. Sleeping corpses incur no skeletal updates.
+    // small landing rebound. Sleeping corpses incur no skeletal updates. Long
+    // frames are integrated in short substeps to keep the springs stable.
     if (soldier.fallTime >= 2.5) return;
-    soldier.fallTime += dt;
-    soldier.stride = 0;
-    const group = soldier.group;
-    soldier.fallVelocity += ((1.48 - group.rotation.x) * 45 - soldier.fallVelocity * 7) * dt;
-    group.rotation.x += soldier.fallVelocity * dt;
-    if (group.rotation.x > 1.56) {
-      group.rotation.x = 1.56;
-      soldier.fallVelocity = -Math.abs(soldier.fallVelocity) * 0.22;
-    }
-    group.rotation.z = T.MathUtils.damp(group.rotation.z, soldier.fallRoll, 5, dt);
-    for (const joint of soldier.joints) {
-      joint.velocity
-        .addScaledVector(joint.target, 32 * dt)
-        .addScaledVector(joint.angle, -32 * dt)
-        .multiplyScalar(Math.exp(-5 * dt));
-      joint.angle.addScaledVector(joint.velocity, dt);
-      looseRotation.set(joint.angle.x, joint.angle.y, joint.angle.z);
-      joint.bone.quaternion.copy(joint.base).multiply(looseQuaternion.setFromEuler(looseRotation));
-    }
-    const ground = group.userData.groundY ?? group.position.y;
-    group.position.y = T.MathUtils.damp(group.position.y, ground + 0.08, 10, dt);
-    group.updateMatrixWorld(true);
-    let penetration = 0;
-    for (const contact of soldier.contacts) {
-      contact.getWorldPosition(contactPosition);
-      penetration = Math.max(penetration, ground + 0.07 - contactPosition.y);
-    }
-    group.position.y += penetration;
+    for (let remaining = dt; remaining > 0 && soldier.fallTime < 2.5; remaining -= fallStep)
+      fall(soldier, Math.min(remaining, fallStep));
     poseWeapon(soldier);
     return;
   }
@@ -299,4 +280,34 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
   soldier.recoil = Math.max(0, soldier.recoil - dt * 7);
   soldier.spine.rotateZ(-soldier.recoil * 0.045 + Math.sin(soldier.time * 1.8) * 0.002);
   poseWeapon(soldier);
+}
+const fallStep = 1 / 60;
+function fall(soldier: Soldier, dt: number) {
+  soldier.fallTime += dt;
+  soldier.stride = 0;
+  const group = soldier.group;
+  soldier.fallVelocity += ((1.48 - group.rotation.x) * 45 - soldier.fallVelocity * 7) * dt;
+  group.rotation.x += soldier.fallVelocity * dt;
+  if (group.rotation.x > 1.56) {
+    group.rotation.x = 1.56;
+    soldier.fallVelocity = -Math.abs(soldier.fallVelocity) * 0.22;
+  }
+  group.rotation.z = T.MathUtils.damp(group.rotation.z, soldier.fallRoll, 5, dt);
+  for (const joint of soldier.joints) {
+    joint.velocity
+      .addScaledVector(joint.target, 32 * dt)
+      .addScaledVector(joint.angle, -32 * dt)
+      .multiplyScalar(Math.exp(-5 * dt));
+    joint.angle.addScaledVector(joint.velocity, dt);
+    looseRotation.set(joint.angle.x, joint.angle.y, joint.angle.z);
+    joint.bone.quaternion.copy(joint.base).multiply(looseQuaternion.setFromEuler(looseRotation));
+  }
+  const ground = group.userData.groundY ?? group.position.y;
+  group.position.y = T.MathUtils.damp(group.position.y, ground + 0.08, 10, dt);
+  let penetration = 0;
+  for (const contact of soldier.contacts) {
+    contact.getWorldPosition(contactPosition);
+    penetration = Math.max(penetration, ground + 0.07 - contactPosition.y);
+  }
+  group.position.y += penetration;
 }

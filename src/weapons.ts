@@ -1,18 +1,18 @@
 import * as T from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { gltf } from "./gltf";
 import { clone as cloneSkeleton } from "three/addons/utils/SkeletonUtils.js";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 const templates: T.Group[] = [];
 const armTemplates = new Map<string, { scene: T.Group; clip: T.AnimationClip }>();
 export async function loadWeaponModels() {
-  const loader = new GLTFLoader();
   const models = await Promise.all(
     ["ak-47", "m4a1_s", "usp-s", "awp", "m9-bayonet"].map((name) =>
-      loader.loadAsync(`/models/${name}.glb`),
+      gltf.loadAsync(`/models/${name}.glb`),
     ),
   );
   await Promise.all(
     ["ground-rebel", "idf"].map(async (name) => {
-      const asset = await loader.loadAsync(`/models/agents/${name}-arms.glb`);
+      const asset = await gltf.loadAsync(`/models/agents/${name}-arms.glb`);
       armTemplates.set(name, {
         scene: asset.scene,
         clip: asset.animations.find((a) => a.name.endsWith("idle_rifle")) || asset.animations[0],
@@ -23,8 +23,64 @@ export async function loadWeaponModels() {
     templates[index] = model.scene;
   });
 }
+// SkeletonUtils gives every skinned part its own skeleton copy. Parts bound to
+// identical bones share one, so each rig uploads a single bone texture per frame.
+export function shareSkeletons(root: T.Object3D) {
+  const skeletons: T.Skeleton[] = [];
+  root.traverse((object) => {
+    if (!(object instanceof T.SkinnedMesh)) return;
+    const own = object.skeleton;
+    const match = skeletons.find(
+      (s) =>
+        s.bones.length === own.bones.length &&
+        s.bones.every(
+          (bone, i) => bone === own.bones[i] && s.boneInverses[i].equals(own.boneInverses[i]),
+        ),
+    );
+    if (!match) skeletons.push(own);
+    else {
+      own.dispose();
+      object.bind(match, object.bindMatrix);
+    }
+  });
+}
+// Carried guns are rigid, so their parts are merged into one draw per material.
+const worldGuns: T.Group[] = [];
+const relative = new T.Matrix4();
+function mergeWorldGun(source: T.Group) {
+  source.updateMatrixWorld(true);
+  const inverse = source.matrixWorld.clone().invert();
+  const parts = new Map<T.Material, T.BufferGeometry[]>();
+  let plain = true;
+  source.traverse((object) => {
+    if (!(object instanceof T.Mesh)) return;
+    const position = object.geometry.getAttribute("position");
+    if (
+      Array.isArray(object.material) ||
+      !(position instanceof T.BufferAttribute) ||
+      position.normalized
+    )
+      plain = false;
+    else {
+      relative.multiplyMatrices(inverse, object.matrixWorld);
+      const list = parts.get(object.material) ?? [];
+      list.push(object.geometry.clone().applyMatrix4(relative));
+      parts.set(object.material, list);
+    }
+  });
+  const meshes = [...parts].map(([material, list]) => {
+    const geometry = list.length > 1 ? mergeGeometries(list) : list[0];
+    return geometry && new T.Mesh(geometry, material);
+  });
+  if (!plain || meshes.some((mesh) => !mesh)) return source;
+  const group = new T.Group();
+  source.matrix.decompose(group.position, group.quaternion, group.scale);
+  group.add(...(meshes as T.Mesh[]));
+  return group;
+}
 export function createWorldGun(index: number) {
-  return templates[index].clone(true);
+  worldGuns[index] ??= mergeWorldGun(templates[index]);
+  return worldGuns[index].clone(true);
 }
 export function createGun(index: number, team: "t" | "ct" = "ct") {
   const group = new T.Group();
@@ -55,6 +111,7 @@ export function createGun(index: number, team: "t" | "ct" = "ct") {
   arms.name = "agent-view-arms";
   arms.rotation.y = Math.PI;
   arms.scale.multiplyScalar(1.35);
+  shareSkeletons(arms);
   arms.traverse((object) => {
     if (object instanceof T.Mesh) {
       object.geometry = object.geometry.clone();

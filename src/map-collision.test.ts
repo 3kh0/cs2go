@@ -61,3 +61,102 @@ describe("imported map collision", () => {
     expect(c.visible(new T.Vector3(-2, 1, 0), new T.Vector3(2, 1, 0))).toBe(true);
   });
 });
+describe("map collision geometry input", () => {
+  // Quantized glTF positions: normalized int16 with the node scale restoring metres.
+  function quantized(points: number[], extent: number) {
+    const g = new T.BufferGeometry();
+    g.setAttribute(
+      "position",
+      new T.Int16BufferAttribute(
+        points.map((v) => Math.round((v / extent) * 32767)),
+        3,
+        true,
+      ),
+    );
+    const mesh = new T.Mesh(g, new T.MeshBasicMaterial({ side: T.DoubleSide }));
+    mesh.scale.setScalar(extent);
+    return mesh;
+  }
+  function random(seed: number) {
+    return () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32) * 2 - 1;
+  }
+  it("matches brute-force raycasts on transformed, quantized and indexed meshes", () => {
+    const next = random(7),
+      parent = new T.Group();
+    parent.position.set(4, 1, -3);
+    parent.rotation.set(0.3, 0.8, -0.2);
+    // Small detail triangles exercise per-cell height culling; large ones span cells.
+    const a = quantized(
+      Array.from({ length: 400 }, () => {
+        const center = [next() * 5, next() * 3, next() * 5];
+        return [0, 1, 2].flatMap(() => center.map((v) => v + next() * 0.6));
+      }).flat(),
+      6,
+    );
+    a.position.set(-2, 0.5, 1);
+    a.rotation.y = 0.6;
+    const indexed = new T.BufferGeometry();
+    indexed.setAttribute(
+      "position",
+      new T.Float32BufferAttribute(
+        Array.from({ length: 60 }, () => next() * 5),
+        3,
+      ),
+    );
+    indexed.setIndex(Array.from({ length: 45 }, (_, i) => (i * 7) % 20));
+    const b = new T.Mesh(indexed, new T.MeshBasicMaterial({ side: T.DoubleSide }));
+    parent.add(b);
+    const scene = new T.Scene().add(a, parent);
+    scene.updateMatrixWorld(true);
+    const c = new MapCollision([a, b]),
+      raycaster = new T.Raycaster();
+    let compared = 0;
+    for (let i = 0; i < 600; i++) {
+      const from = new T.Vector3(next() * 12, next() * 6, next() * 12),
+        to = new T.Vector3(next() * 12, next() * 6, next() * 12);
+      const far = from.distanceTo(to),
+        direction = to.clone().sub(from).normalize();
+      raycaster.set(from, direction);
+      raycaster.far = far;
+      const expected = raycaster.intersectObjects([a, b], false).filter((h) => h.distance >= 0.002);
+      const hits = c.intersections(new T.Ray(from, direction), far);
+      expect(hits.map((h) => h.distance)).toEqual(
+        expected.map((h) => expect.closeTo(h.distance, 3)),
+      );
+      hits.forEach((hit, j) => {
+        expect(hit.object).toBe(expected[j].object);
+        expect(hit.point.distanceTo(expected[j].point)).toBeLessThan(1e-3);
+        const normal = expected[j]
+          .face!.normal.clone()
+          .transformDirection(expected[j].object.matrixWorld);
+        expect(Math.abs(hit.face!.normal.dot(normal))).toBeCloseTo(1, 3);
+      });
+      expect(c.visible(from, to)).toBe(expected.length === 0);
+      compared += expected.length;
+    }
+    expect(compared).toBeGreaterThan(200);
+  });
+  it("supports, blocks and measures a rotated quantized floor and wall in world space", () => {
+    const floor = quantized([-4, 0, -4, 4, 0, -4, 4, 0, 4, -4, 0, -4, 4, 0, 4, -4, 0, 4], 4);
+    floor.position.set(10, 2, -6);
+    floor.rotation.y = Math.PI / 4;
+    const wall = quantized([0, 0, -3, 0, 3, -3, 0, 3, 3, 0, 0, -3, 0, 3, 3, 0, 0, 3], 3);
+    wall.position.set(10, 2, -6);
+    const back = wall.clone();
+    back.position.x = 10.2;
+    const c = new MapCollision([floor, wall, back]);
+    expect(c.floor(9, -5, 4)).toBeCloseTo(2, 3);
+    expect(c.floor(16, -6, 4)).toBe(-Infinity);
+    expect(c.floor(500, 500, 4)).toBe(-Infinity);
+    expect(c.ceiling(9, -5, 0, 4)).toBeCloseTo(2, 3);
+    expect(c.blocked(10.2, -6, 2)).toBe(true);
+    expect(c.blocked(11, -6, 2)).toBe(false);
+    const hit = c.intersections(new T.Ray(new T.Vector3(8, 3, -6), new T.Vector3(1, 0, 0)), 10)[0];
+    expect(hit.object).toBe(wall);
+    expect(hit.distance).toBeCloseTo(2, 3);
+    expect(Math.abs(hit.face!.normal.x)).toBeCloseTo(1, 3);
+    expect(c.thickness(hit, new T.Vector3(1, 0, 0))).toBeCloseTo(0.2, 3);
+    expect(c.visible(new T.Vector3(8, 3, -6), new T.Vector3(12, 3, -6))).toBe(false);
+    expect(c.visible(new T.Vector3(8, 6, -6), new T.Vector3(12, 6, -6))).toBe(true);
+  });
+});

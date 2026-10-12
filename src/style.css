@@ -679,6 +679,8 @@ footer button {
   inset: 0;
   box-shadow: inset 0 0 180px 30px #ca341aaa;
   opacity: 0;
+  /* Keep the wide blurred shadow on its own layer; fades only recomposite. */
+  will-change: opacity;
 }
 #toast {
   position: absolute;

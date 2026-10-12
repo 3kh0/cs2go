@@ -230,6 +230,11 @@ export function createWorld(scene: T.Scene) {
     instances.computeBoundingSphere();
     root.add(instances);
   }
+  // The range never moves; skip its per-frame matrix work.
+  root.updateMatrixWorld(true);
+  root.traverse((object) => {
+    object.matrixAutoUpdate = object.matrixWorldAutoUpdate = false;
+  });
   return {
     walls,
     solids,

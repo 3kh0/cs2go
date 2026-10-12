@@ -16,35 +16,117 @@ export type MapNavigation = {
   sites: number[][];
   bounds: number[];
 };
+const navCell = 4;
 // The original Source navigation graph preserves stacked tunnels, ramps and
 // one-way connections. A* searches this graph rather than a flattened grid.
 export class Navigation {
   readonly areas: NavArea[];
   readonly index = new Map<number, number>();
-  private readonly connected = new Set<number>();
-  private readonly cells = new Map<string, NavArea[]>();
   readonly data: MapNavigation;
+  // Areas with links in either direction; empty when the graph has no links.
+  private readonly connected: Uint8Array;
+  private readonly anyConnected: boolean;
+  // Dense 4 m grid of area indices in CSR form, keyed by floor(x / 4).
+  private readonly x0: number;
+  private readonly z0: number;
+  private readonly width: number;
+  private readonly depth: number;
+  private readonly cellOffsets: Int32Array;
+  private readonly cellAreas: Int32Array;
+  // Areas whose rectangles cannot be gridded are always scanned.
+  private readonly loose: number[] = [];
+  private readonly linkOffsets: Int32Array;
+  private readonly linkTargets: Int32Array;
+  private readonly seen: Int32Array;
+  private stamp = 0;
+  private readonly sites = new Map<number, NavArea[]>();
+  // Reused A* buffers; path() is not re-entrant.
+  private readonly costs: Float32Array;
+  private readonly previous: Int32Array;
+  private readonly closed: Uint8Array;
+  private readonly heapArea: Int32Array;
+  private readonly heapScore: Float64Array;
   constructor(data: MapNavigation) {
     this.data = data;
-    this.areas = data.areas;
-    this.areas.forEach((area, i) => this.index.set(area.id, i));
-    this.areas.forEach((area) => {
-      if (area.links.length) this.connected.add(area.id);
-      area.links.forEach((id) => this.connected.add(id));
-      for (let z = Math.floor(area.rect[1] / 4); z <= Math.floor(area.rect[3] / 4); z++)
-        for (let x = Math.floor(area.rect[0] / 4); x <= Math.floor(area.rect[2] / 4); x++) {
-          const key = `${x},${z}`,
-            cell = this.cells.get(key) ?? [];
-          cell.push(area);
-          this.cells.set(key, cell);
-        }
-    });
+    const areas = (this.areas = data.areas),
+      count = areas.length;
+    areas.forEach((area, i) => this.index.set(area.id, i));
+    const connected = (this.connected = new Uint8Array(count));
+    let links = 0;
+    for (let i = 0; i < count; i++) {
+      if (areas[i].links.length) connected[i] = 1;
+      for (const id of areas[i].links) {
+        const j = this.index.get(id);
+        if (j !== undefined) connected[j] = 1;
+      }
+      links += areas[i].links.length;
+    }
+    this.anyConnected = connected.includes(1);
+    this.linkOffsets = new Int32Array(count + 1);
+    this.linkTargets = new Int32Array(links);
+    for (let i = 0, n = 0; i < count; i++) {
+      for (const id of areas[i].links) this.linkTargets[n++] = this.index.get(id) ?? -1;
+      this.linkOffsets[i + 1] = n;
+    }
+    let minX = Infinity,
+      maxX = -Infinity,
+      minZ = Infinity,
+      maxZ = -Infinity;
+    const gridded = areas.map(
+      ({ rect: [x0, z0, x1, z1] }) => Number.isFinite(x0 + z0 + x1 + z1) && x0 <= x1 && z0 <= z1,
+    );
+    for (let i = 0; i < count; i++) {
+      if (!gridded[i]) {
+        this.loose.push(i);
+        continue;
+      }
+      const [x0, z0, x1, z1] = areas[i].rect;
+      minX = Math.min(minX, Math.floor(x0 / navCell));
+      maxX = Math.max(maxX, Math.floor(x1 / navCell));
+      minZ = Math.min(minZ, Math.floor(z0 / navCell));
+      maxZ = Math.max(maxZ, Math.floor(z1 / navCell));
+    }
+    this.x0 = minX <= maxX ? minX : 0;
+    this.z0 = minZ <= maxZ ? minZ : 0;
+    this.width = minX <= maxX ? maxX - minX + 1 : 0;
+    this.depth = minZ <= maxZ ? maxZ - minZ + 1 : 0;
+    const cells = this.width * this.depth,
+      offsets = (this.cellOffsets = new Int32Array(cells + 1));
+    const each = (visit: (cell: number, i: number) => void) => {
+      for (let i = 0; i < count; i++) {
+        if (!gridded[i]) continue;
+        const rect = areas[i].rect;
+        for (let z = Math.floor(rect[1] / navCell); z <= Math.floor(rect[3] / navCell); z++)
+          for (let x = Math.floor(rect[0] / navCell); x <= Math.floor(rect[2] / navCell); x++)
+            visit((z - this.z0) * this.width + x - this.x0, i);
+      }
+    };
+    each((cell) => offsets[cell + 1]++);
+    for (let c = 0; c < cells; c++) offsets[c + 1] += offsets[c];
+    const cursor = offsets.slice(0, cells);
+    this.cellAreas = new Int32Array(offsets[cells]);
+    each((cell, i) => (this.cellAreas[cursor[cell]++] = i));
+    this.seen = new Int32Array(count);
+    this.costs = new Float32Array(count);
+    this.previous = new Int32Array(count);
+    this.closed = new Uint8Array(count);
+    this.heapArea = new Int32Array(links + 1);
+    this.heapScore = new Float64Array(links + 1);
+  }
+  private cell(x: number, z: number) {
+    const cx = Math.floor(x / navCell) - this.x0,
+      cz = Math.floor(z / navCell) - this.z0;
+    return cx >= 0 && cz >= 0 && cx < this.width && cz < this.depth ? cz * this.width + cx : -1;
   }
   support(x: number, z: number, ceiling: number, bottom: number, from?: NavArea) {
     let best: NavArea | undefined,
       height = -Infinity;
-    for (const area of this.cells.get(`${Math.floor(x / 4)},${Math.floor(z / 4)}`) ?? []) {
-      if (this.connected.size && !this.connected.has(area.id)) continue;
+    const cell = this.cell(x, z);
+    if (cell < 0) return undefined;
+    for (let e = this.cellOffsets[cell], end = this.cellOffsets[cell + 1]; e < end; e++) {
+      const i = this.cellAreas[e],
+        area = this.areas[i];
+      if (this.anyConnected && !this.connected[i]) continue;
       if (from && area.id !== from.id && !from.links.includes(area.id)) continue;
       if (
         x < area.rect[0] - 0.025 ||
@@ -77,26 +159,71 @@ export class Navigation {
       distance = Infinity,
       connectedBest = 0,
       connectedDistance = Infinity;
-    this.areas.forEach((area, i) => {
-      const [x0, z0, x1, z1] = area.rect;
+    const stamp = ++this.stamp,
+      { areas, connected, seen, cellOffsets, cellAreas, width, depth } = this;
+    // Ties resolve to the lowest area index, as a linear scan would.
+    const consider = (i: number) => {
+      if (seen[i] === stamp) return;
+      seen[i] = stamp;
+      const area = areas[i],
+        [x0, z0, x1, z1] = area.rect;
       const dx = Math.max(x0 - point.x, 0, point.x - x1);
       const dz = Math.max(z0 - point.z, 0, point.z - z1);
       const dy = point.y - this.height(area, point.x, point.z);
       const cost = dx * dx + dz * dz + dy * dy * 3;
-      if (this.connected.has(area.id) && cost < connectedDistance) {
+      if (
+        connected[i] &&
+        (cost < connectedDistance || (cost === connectedDistance && i < connectedBest))
+      ) {
         connectedDistance = cost;
         connectedBest = i;
       }
-      if (cost < distance) {
+      if (cost < distance || (cost === distance && i < best)) {
         distance = cost;
         best = i;
       }
-    });
+    };
+    for (const i of this.loose) consider(i);
+    // Search rings of grid cells outward. Areas outside the searched square
+    // are at least its edge distance away horizontally, which bounds their cost.
+    const cx = Math.floor(point.x / navCell) - this.x0,
+      cz = Math.floor(point.z / navCell) - this.z0;
+    const rings = Math.max(
+      Math.abs(cx),
+      Math.abs(width - 1 - cx),
+      Math.abs(cz),
+      Math.abs(depth - 1 - cz),
+    );
+    for (let r = 0; r <= rings && width && depth; r++) {
+      if (r > 0) {
+        const gap =
+          Math.min(
+            point.x - (cx + this.x0 - r + 1) * navCell,
+            (cx + this.x0 + r) * navCell - point.x,
+            point.z - (cz + this.z0 - r + 1) * navCell,
+            (cz + this.z0 + r) * navCell - point.z,
+          ) - 1e-6;
+        const bound = gap > 0 ? gap * gap : 0;
+        if (
+          bound > distance &&
+          (connected[best] || bound > Math.min(connectedDistance, distance + 2))
+        )
+          break;
+      }
+      for (let z = Math.max(0, cz - r); z <= Math.min(depth - 1, cz + r); z++) {
+        // Interior rows of the ring contribute only their two end cells.
+        const step = z === cz - r || z === cz + r ? 1 : 2 * r;
+        for (let x = cx - r; x <= cx + r; x += step) {
+          if (x < 0 || x >= width) continue;
+          const cell = z * width + x;
+          for (let e = cellOffsets[cell], end = cellOffsets[cell + 1]; e < end; e++)
+            consider(cellAreas[e]);
+        }
+      }
+    }
     // Native NAV files retain orphaned regions overlapping spawn floors. Use
     // an adjacent connected region when it is on the same physical floor.
-    return !this.connected.has(this.areas[best].id) && connectedDistance - distance < 2
-      ? connectedBest
-      : best;
+    return !connected[best] && connectedDistance - distance < 2 ? connectedBest : best;
   }
   site(index: number, offsetX = 0, offsetZ = 0) {
     const center = this.data.sites[index];
@@ -105,11 +232,17 @@ export class Navigation {
     goal.z += offsetZ;
     // Bomb trigger centers are above the ground. Prefer the site's ordinary
     // walking areas rather than nearby one-way jump links on top of crates.
-    const label = index === 0 ? "BombsiteA" : "BombsiteB";
+    let candidates = this.sites.get(index);
+    if (!candidates) {
+      const label = index === 0 ? "BombsiteA" : "BombsiteB";
+      candidates = this.areas.filter(
+        (area) => area.place === label && !(area.flags & 2) && !(area.center[1] > center[1] - 0.3),
+      );
+      this.sites.set(index, candidates);
+    }
     let cost = Infinity,
       best: NavArea | undefined;
-    for (const area of this.areas) {
-      if (area.place !== label || area.flags & 2 || area.center[1] > center[1] - 0.3) continue;
+    for (const area of candidates) {
       const distance = Math.hypot(area.center[0] - goal.x, area.center[2] - goal.z);
       if (distance < cost) {
         cost = distance;
@@ -149,62 +282,65 @@ export class Navigation {
   path(from: T.Vector3, goal: T.Vector3, avoid: T.Vector3[] = [], blocked?: ReadonlySet<number>) {
     const start = this.nearest(from),
       end = this.nearest(goal);
-    const costs = new Float32Array(this.areas.length).fill(Infinity);
-    const previous = new Int32Array(this.areas.length).fill(-1);
-    const closed = new Uint8Array(this.areas.length);
-    const heap: { i: number; score: number }[] = [];
+    const { costs, previous, closed, heapArea, heapScore, linkOffsets, linkTargets } = this,
+      areas = this.areas,
+      target = areas[end].center;
+    costs.fill(Infinity);
+    previous.fill(-1);
+    closed.fill(0);
+    let size = 0;
     const heuristic = (i: number) => {
-      const a = this.areas[i].center,
-        b = this.areas[end].center;
-      return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+      const a = areas[i].center;
+      return Math.hypot(a[0] - target[0], a[1] - target[1], a[2] - target[2]);
     };
     const push = (i: number, score: number) => {
-      let n = heap.length;
-      heap.push({ i, score });
+      let n = size++;
       while (n > 0) {
         const p = (n - 1) >> 1;
-        if (heap[p].score <= score) break;
-        heap[n] = heap[p];
+        if (heapScore[p] <= score) break;
+        heapArea[n] = heapArea[p];
+        heapScore[n] = heapScore[p];
         n = p;
       }
-      heap[n] = { i, score };
+      heapArea[n] = i;
+      heapScore[n] = score;
     };
     costs[start] = 0;
     push(start, heuristic(start));
-    while (heap.length) {
-      const current = heap[0],
-        last = heap.pop()!;
-      if (heap.length) {
+    while (size) {
+      const i = heapArea[0],
+        lastArea = heapArea[--size],
+        lastScore = heapScore[size];
+      if (size) {
         let n = 0;
-        while (n * 2 + 1 < heap.length) {
+        while (n * 2 + 1 < size) {
           let c = n * 2 + 1;
-          if (c + 1 < heap.length && heap[c + 1].score < heap[c].score) c++;
-          if (last.score <= heap[c].score) break;
-          heap[n] = heap[c];
+          if (c + 1 < size && heapScore[c + 1] < heapScore[c]) c++;
+          if (lastScore <= heapScore[c]) break;
+          heapArea[n] = heapArea[c];
+          heapScore[n] = heapScore[c];
           n = c;
         }
-        heap[n] = last;
+        heapArea[n] = lastArea;
+        heapScore[n] = lastScore;
       }
-      const i = current.i;
       if (closed[i]) continue;
       if (i === end) break;
       closed[i] = 1;
-      const area = this.areas[i];
-      for (const id of area.links) {
-        const j = this.index.get(id);
-        if (j === undefined || closed[j]) continue;
-        const next = this.areas[j];
+      const a = areas[i].center;
+      for (let l = linkOffsets[i]; l < linkOffsets[i + 1]; l++) {
+        const j = linkTargets[l];
+        if (j < 0 || closed[j]) continue;
+        const next = areas[j],
+          b = next.center;
         if (blocked?.has(next.id) && j !== end) continue;
-        const distance = Math.hypot(...next.center.map((v, k) => v - area.center[k]));
+        const distance = Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
         // Reject ladders/jumps this walking controller cannot traverse.
-        const horizontal = Math.hypot(
-          next.center[0] - area.center[0],
-          next.center[2] - area.center[2],
-        );
-        if (next.center[1] - area.center[1] > 1.35 + horizontal * 0.8) continue;
+        const horizontal = Math.hypot(b[0] - a[0], b[2] - a[2]);
+        if (b[1] - a[1] > 1.35 + horizontal * 0.8) continue;
         let congestion = 0;
         for (const point of avoid) {
-          const d = Math.hypot(point.x - next.center[0], point.z - next.center[2]);
+          const d = Math.hypot(point.x - b[0], point.z - b[2]);
           if (d < 2.5) congestion += (2.5 - d) * 0.35;
         }
         const cost = costs[i] + distance + congestion;
