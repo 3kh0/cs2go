@@ -306,6 +306,15 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
     game.buy(0);
     for (let tick = 0; tick < 450; tick++) game.simulate(1 / 128);
     const cancelled = [...events];
+    events.length = 0;
+    game.buy(1);
+    const drawBeforeReload = game.drawTime;
+    game.beginReload(); // A full magazine must not snap an unfinished draw to idle.
+    const rejectedReloadPreservesDraw = game.drawTime === drawBeforeReload;
+    game.equip(4); // No delayed M4 action sounds may survive this switch.
+    for (let tick = 0; tick < 90; tick++) game.simulate(1 / 128);
+    const interruptedDraw = [...events];
+    game.buy(0);
     game.settings.volume = 0;
     const count = bank.voices.size;
     game.sound("shot");
@@ -318,6 +327,8 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
       reload,
       bolt,
       cancelled,
+      interruptedDraw,
+      rejectedReloadPreservesDraw,
       muted: bank.voices.size === count,
       audioState: game.audio?.state,
     };
@@ -329,7 +340,9 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
   expect(result.scope).toBe("zoom");
   expect(result.reload).toEqual(["awp_clipout", "awp_clipin", "awp_boltback", "awp_boltforward"]);
   expect(result.bolt).toEqual(["awp_boltback", "awp_boltforward"]);
-  expect(result.cancelled).toEqual(["awp_clipout", "ak47_draw"]);
+  expect(result.cancelled).toEqual(["awp_clipout", "ak47_draw", "ak47_boltpull"]);
+  expect(result.interruptedDraw).toEqual(["m4a1_draw"]);
+  expect(result.rejectedReloadPreservesDraw).toBe(true);
   expect(result.muted).toBe(true);
   expect(result.audioState).toBe("running");
   await expect.poll(() => page.evaluate(() => window.__game.weaponAudio.voices.size)).toBe(0);
@@ -466,7 +479,13 @@ test("weapon tracks keep bolt shaft connected, hands follow magazines, and reset
     animateGun(g.gun, { ...pose, bolt: 0.55 });
     const travel = bolt.position.distanceTo(rest),
       rotation = bolt.rotation.z;
-    const handDistance = hand.position.distanceTo(bolt.position);
+    // The wrist sits behind the action; its palm contact follows the knob.
+    const palm = hand.position
+      .clone()
+      .set(0, 0, -0.065)
+      .applyQuaternion(hand.quaternion)
+      .add(hand.position);
+    const handDistance = palm.distanceTo(bolt.position);
     animateGun(g.gun, { ...pose, draw: 1 });
     const drawY = g.gun.position.y;
     animateGun(g.gun, pose);
@@ -1015,4 +1034,87 @@ test("M9 slash and stab hit once, respect reach and cover, and cancel on switch"
     ammo: 0,
     pending: false,
   });
+});
+
+test("both view rigs keep skinned wrists on contacts and the M9 locked in its palm", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.bringToFront();
+  await page.getByRole("button", { name: "PRACTICE", exact: true }).click();
+  await page.locator("#play").click();
+  await page.waitForFunction(() => window.__game.locked);
+  const result = await page.evaluate(() => {
+    const g = window.__game;
+    let wristError = 0,
+      gripError = 0,
+      resetError = 0;
+    for (const team of ["ct", "t"] as const) {
+      g.team = team;
+      for (let index = 0; index < 5; index++) {
+        if (index === 4) g.equip(index);
+        else g.buy(index);
+        const model = g.gun.getObjectByName("weapon-model")!;
+        const right = g.gun.getObjectByName(team === "t" ? "hand_R" : "ValveBipedBip01_R_Hand")!;
+        const grip = model.matrixWorld.clone();
+        const rest = g.gun.position.clone();
+        let first = true;
+        for (const phase of ["idle", "draw", "reload", "bolt", "slash", "stab", "idle"] as const) {
+          for (let frame = 0; frame <= 20; frame++) {
+            const p = frame / 20;
+            g.drawTime = phase === "draw" ? (1 - p) * 0.55 : 0;
+            g.reload = phase === "reload" && index < 4 ? (1 - p) * [2.4, 2.2, 1.7, 3.4][index] : 0;
+            g.boltTime = phase === "bolt" && index === 3 ? (1 - p) * 1.45 : 0;
+            g.knifeStab = phase === "stab";
+            g.knifeDuration = g.knifeStab ? 0.85 : 0.5;
+            g.knifeTime =
+              index === 4 && (phase === "slash" || phase === "stab")
+                ? (1 - p) * g.knifeDuration
+                : 0;
+            g.kick = 0;
+            g.animateWeapon();
+            g.gun.updateMatrixWorld(true);
+            for (const side of ["L", "R"]) {
+              const bone = g.gun.getObjectByName(
+                team === "t" ? `hand_${side}` : `ValveBipedBip01_${side}_Hand`,
+              )!;
+              const marker = g.gun.getObjectByName(side === "L" ? "left-hand" : "right-hand")!;
+              wristError = Math.max(
+                wristError,
+                bone
+                  .getWorldPosition(g.position.clone())
+                  .distanceTo(marker.getWorldPosition(g.position.clone())),
+              );
+            }
+            if (index === 4) {
+              const relative = right.matrixWorld.clone().invert().multiply(model.matrixWorld);
+              if (first) grip.copy(relative);
+              gripError = Math.max(
+                gripError,
+                ...relative.elements.map((value, i) => Math.abs(value - grip.elements[i])),
+              );
+            }
+            if (first) rest.copy(g.gun.position);
+            if (phase === "idle")
+              resetError = Math.max(resetError, rest.distanceTo(g.gun.position));
+            first = false;
+          }
+        }
+      }
+    }
+    const lens = g.viewCamera.fov;
+    g.settings.fov = 110;
+    g.saveSettings();
+    return {
+      wristError,
+      gripError,
+      resetError,
+      lensStable: g.viewCamera.fov === lens && g.camera.fov === 110,
+    };
+  });
+  expect(result.wristError).toBeLessThan(0.001);
+  // Imported skeleton transforms have small floating-point/quantization errors.
+  expect(result.gripError).toBeLessThan(0.001);
+  expect(result.resetError).toBeLessThan(0.0001);
+  expect(result.lensStable).toBe(true);
 });

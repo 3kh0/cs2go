@@ -9,7 +9,16 @@ import { loadDust2 } from "./dust2";
 import { enableTextureTranscoding } from "./gltf";
 import { detour } from "./local-navigation";
 import { createWorld } from "./world";
-import { createGun, createWorldGun, loadWeaponModels, animateGun } from "./weapons";
+import {
+  createGun,
+  createWorldGun,
+  loadWeaponModels,
+  animateGun,
+  DRAW_DURATION,
+  VIEWMODEL_FOV,
+  DRAW_PULL_CUE,
+  DRAW_RELEASE_CUE,
+} from "./weapons";
 import {
   createSoldier,
   animateSoldier,
@@ -139,7 +148,7 @@ export class Game {
   scene = new T.Scene();
   view = new T.Scene();
   camera = new T.PerspectiveCamera(90, innerWidth / innerHeight, 0.05, 110);
-  viewCamera = new T.PerspectiveCamera(90, innerWidth / innerHeight, 0.01, 10);
+  viewCamera = new T.PerspectiveCamera(VIEWMODEL_FOV, innerWidth / innerHeight, 0.01, 10);
   world!: ReturnType<typeof createWorld>;
   range!: ReturnType<typeof createWorld>;
   dust?: Awaited<ReturnType<typeof loadDust2>>;
@@ -347,7 +356,8 @@ export class Game {
     if (!this.supported || !this.renderer) return;
     this.camera.fov = this.scopeLevel === 2 ? 10 : this.scopeLevel === 1 ? 40 : this.settings.fov;
     this.camera.updateProjectionMatrix();
-    this.viewCamera.fov = this.settings.fov;
+    // Viewmodel lens is independent of world FOV, as in Source.
+    this.viewCamera.fov = VIEWMODEL_FOV;
     this.viewCamera.updateProjectionMatrix();
     this.scene.traverse((object) => {
       if (object instanceof T.DirectionalLight && object.castShadow)
@@ -731,8 +741,8 @@ export class Game {
     this.reserve = this.magazines[index].reserve;
     this.reload = 0;
     this.shots = 0;
-    this.drawTime = 0.55;
-    this.cooldown = Math.max(0.55, this.weaponCooldowns[index]);
+    this.drawTime = DRAW_DURATION;
+    this.cooldown = Math.max(DRAW_DURATION, this.weaponCooldowns[index]);
     if (index === 3 && this.weaponCooldowns[index] > 0) this.boltTime = this.weaponCooldowns[index];
     // View models are cached per team and weapon; animateGun fully re-poses them.
     this.view.remove(this.gun);
@@ -742,7 +752,7 @@ export class Game {
     this.view.add(this.gun);
     this.setScope(0);
     if (this.active) {
-      this.sound("draw");
+      if (index < 2) this.sound("draw");
       this.soundscape.play("gear");
     }
     this.updateUI();
@@ -844,9 +854,9 @@ export class Game {
   beginReload() {
     if (this.selected === 4) return;
     const w = weapons[this.selected];
-    this.drawTime = 0;
     if (!this.reserve && this.mode === "practice") this.reserve = w.reserve;
     if (this.reload || this.ammo === w.mag || !this.reserve) return;
+    this.drawTime = 0;
     this.setScope(0);
     this.rescope = 0;
     this.reload = w.reload;
@@ -1329,7 +1339,17 @@ export class Game {
       if (!this.dead && this.active && this.locked && this.roundPause === 0 && this.selected === 4)
         this.meleeHit(this.knifeStab);
     }
-    this.drawTime = Math.max(0, this.drawTime - dt);
+    if (this.drawTime > 0) {
+      const before = 1 - this.drawTime / DRAW_DURATION;
+      this.drawTime = Math.max(0, this.drawTime - dt);
+      const after = 1 - this.drawTime / DRAW_DURATION;
+      if (!this.dead && !this.reload && this.selected < 3) {
+        if (before < DRAW_PULL_CUE && after >= DRAW_PULL_CUE) this.sound("bolt");
+        // The AK clip already includes the return stroke.
+        if (this.selected > 0 && before < DRAW_RELEASE_CUE && after >= DRAW_RELEASE_CUE)
+          this.sound("boltForward");
+      }
+    }
     for (let i = 0; i < this.weaponCooldowns.length; i++)
       this.weaponCooldowns[i] = Math.max(0, this.weaponCooldowns[i] - dt);
     this.scopeSettle = Math.max(0, this.scopeSettle - dt);
@@ -2461,7 +2481,7 @@ export class Game {
   animateWeapon(bob = 0, sway = 0) {
     animateGun(this.gun, {
       reload: this.reload ? 1 - this.reload / weapons[this.selected].reload : 0,
-      draw: this.drawTime / 0.55,
+      draw: this.drawTime / DRAW_DURATION,
       bolt: this.boltTime ? 1 - this.boltTime / weapons[3].delay : 0,
       recoil: this.kick,
       bob,
