@@ -11,14 +11,16 @@ export function enableTextureTranscoding(renderer: T.WebGLRenderer) {
 }
 // Vercel compresses only text-like MIME types, so large GLBs ship pre-gzipped.
 // A server that adds Content-Encoding has already decoded it; check the magic.
-export async function loadGzipped(url: string) {
+export async function fetchGzipped(url: string) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${url} could not load`);
   const blob = await response.blob();
   const [a, b] = new Uint8Array(await blob.slice(0, 2).arrayBuffer());
-  const data =
-    a === 0x1f && b === 0x8b
-      ? await new Response(blob.stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer()
-      : await blob.arrayBuffer();
+  return a === 0x1f && b === 0x8b
+    ? await new Response(blob.stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer()
+    : await blob.arrayBuffer();
+}
+export async function loadGzipped(url: string) {
+  const data = await fetchGzipped(url);
   return gltf.parseAsync(data, url.slice(0, url.lastIndexOf("/") + 1));
 }

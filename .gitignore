@@ -27,3 +27,7 @@ artifacts
 *.sw?
 .vercel
 .env*
+
+# Original map inputs and offline Python caches
+new_map/
+__pycache__/

@@ -1,3 +1,4 @@
+import { dustRadarProjection, loadCalloutRadar, radarCrop } from "./radar";
 import * as T from "three";
 import { ballistics, rangeDamage, penetrate, SOURCE_UNITS_PER_METER } from "./ballistics";
 import type { BulletMaterial } from "./ballistics";
@@ -242,6 +243,7 @@ export class Game {
   decalNext = 0;
   guns = new Map<string, T.Group>();
   targets: T.Object3D[] = [];
+  radarImage?: HTMLImageElement;
   radarLayers = new Map<string, HTMLCanvasElement>();
   detours = 0;
   accumulator = 0;
@@ -316,6 +318,9 @@ export class Game {
     play.disabled = true;
     play.querySelector("span")!.textContent = "LOADING ARMORY…";
     void Promise.all([
+      loadCalloutRadar().then((image) => {
+        this.radarImage = image;
+      }),
       loadWeaponModels(),
       this.weaponAudio.load(),
       this.soundscape.load(),
@@ -408,6 +413,7 @@ export class Game {
     document.addEventListener("pointerlockchange", () => {
       this.locked = document.pointerLockElement === this.canvas;
       this.keys.clear();
+      document.querySelector(".radar-wrap")!.classList.remove("expanded");
       this.jumpQueued = false;
       this.firing = false;
       if (!this.locked) {
@@ -440,6 +446,8 @@ export class Game {
         toggle("scoreboard", true);
         this.scoreboard();
       }
+      if (e.code === "KeyM" && this.active && this.locked && this.world.navigation)
+        document.querySelector(".radar-wrap")!.classList.add("expanded");
       if (!this.locked || this.dead) return;
       this.keys.add(e.code);
       if (e.repeat) return;
@@ -459,6 +467,7 @@ export class Game {
     });
     document.addEventListener("keyup", (e) => {
       this.keys.delete(e.code);
+      if (e.code === "KeyM") document.querySelector(".radar-wrap")!.classList.remove("expanded");
       if (e.code === "Tab") toggle("scoreboard", false);
     });
     document.addEventListener(
@@ -627,7 +636,7 @@ export class Game {
       mode === "practice"
         ? "TARGET RANGE"
         : mode === "casual"
-          ? "DUST II · TEAM RADAR"
+          ? "DUST II · TEAM RADAR · HOLD M"
           : "YOU VS BOTS";
     this.magazines = weapons.map((w) => ({ ammo: w.mag, reserve: w.reserve }));
     this.spawnPlayer();
@@ -1486,6 +1495,16 @@ export class Game {
       this.vertical = 0;
       this.grounded = true;
     }
+    if (
+      this.world.collision &&
+      !this.world.collision.resolveHorizontal(this.position, 0.3, this.eye)
+    ) {
+      // A tight corner may have no horizontal escape. Keep the last clear
+      // height so input can still move away instead of embedding the player.
+      this.position.y = previousY;
+      this.grounded = this.vertical <= 0;
+      this.vertical = 0;
+    }
     const nextX = this.position.x + this.velocity.x * dt;
     if (!this.isBlocked(nextX, this.position.z, this.position.y, 0.3, this.eye))
       this.position.x = nextX;
@@ -1494,7 +1513,12 @@ export class Game {
     if (!this.isBlocked(this.position.x, nextZ, this.position.y, 0.3, this.eye))
       this.position.z = nextZ;
     else this.velocity.z = 0;
-    this.eye = T.MathUtils.damp(this.eye, crouch ? 1.1 : 1.65, 15, dt);
+    const nextEye = T.MathUtils.damp(this.eye, crouch ? 1.1 : 1.65, 15, dt);
+    if (
+      nextEye <= this.eye ||
+      !this.isBlocked(this.position.x, this.position.z, this.position.y, 0.3, nextEye)
+    )
+      this.eye = nextEye;
     this.camera.position.copy(this.position);
     this.camera.position.y += this.eye;
     this.camera.rotation.set(this.pitch, this.yaw, 0);
@@ -1516,6 +1540,10 @@ export class Game {
     this.range.root.visible = !dust || !this.dust;
     if (this.dust) this.dust.root.visible = dust;
     this.world = dust && this.dust ? this.dust : this.range;
+    const radar = el("radar") as HTMLCanvasElement;
+    radar.width = this.world.navigation ? 900 : 180;
+    radar.height = this.world.navigation ? 948 : 180;
+    document.querySelector(".radar-wrap")!.classList.toggle("callouts", !!this.world.navigation);
     el("location").textContent = this.world.collision ? "DUST II" : "DUST YARD · RANGE";
     this.scene.background = new T.Color("#c7d6df");
     this.scene.fog = new T.Fog(
@@ -2169,23 +2197,29 @@ export class Game {
     if (!live) return;
     if (this.world.navigation) {
       const { px, pz } = this.mapProjection(w, h);
+      const marker = Math.min(w, h) / 300;
       const spotted = new Set<number | "player" | null>();
       for (const ally of this.bots) if (ally.team === this.team) spotted.add(ally.target);
       this.bots.forEach((b, i) => {
         if (b.health <= 0) return;
         if (b.team !== this.team && !spotted.has(i)) return;
         ctx.beginPath();
-        ctx.arc(px(b.group.position.x), pz(b.group.position.z), 2.4, 0, Math.PI * 2);
+        ctx.arc(px(b.group.position.x), pz(b.group.position.z), 2.4 * marker, 0, Math.PI * 2);
         ctx.fillStyle = b.team === this.team ? "#8fc9ed" : "#eca755";
         ctx.fill();
       });
       ctx.fillStyle = "#fff";
       ctx.beginPath();
-      ctx.arc(px(this.position.x), pz(this.position.z), 3, 0, Math.PI * 2);
+      ctx.arc(px(this.position.x), pz(this.position.z), 3 * marker, 0, Math.PI * 2);
       ctx.fill();
       if (this.bomb && (this.bomb.planted || this.bomb.carrier === -1)) {
         ctx.fillStyle = "#ff5c4e";
-        ctx.fillRect(px(this.bomb.position.x) - 3, pz(this.bomb.position.z) - 3, 6, 6);
+        ctx.fillRect(
+          px(this.bomb.position.x) - 3 * marker,
+          pz(this.bomb.position.z) - 3 * marker,
+          6 * marker,
+          6 * marker,
+        );
       }
       return;
     }
@@ -2211,32 +2245,27 @@ export class Game {
     ctx.restore();
   }
   mapProjection(w: number, h: number) {
-    const [x0, z0, x1, z1] = this.world.navigation!.data.bounds;
-    const scale = Math.min((w - 20) / (x1 - x0), (h - 20) / (z1 - z0));
-    return {
-      scale,
-      px: (x: number) => w / 2 + (x - (x0 + x1) / 2) * scale,
-      pz: (z: number) => h / 2 + (z - (z0 + z1) / 2) * scale,
-    };
+    return dustRadarProjection(w, h);
   }
+
   drawMapLayer(ctx: CanvasRenderingContext2D, w: number, h: number, live: boolean) {
     if (this.world.navigation) {
-      const data = this.world.navigation.data;
-      const { scale, px, pz } = this.mapProjection(w, h);
-      for (const area of data.areas) {
-        ctx.fillStyle = area.center[1] > 2 ? "#c7baa877" : "#87938b88";
-        ctx.fillRect(
-          px(area.rect[0]),
-          pz(area.rect[1]),
-          Math.max(0.5, (area.rect[2] - area.rect[0]) * scale),
-          Math.max(0.5, (area.rect[3] - area.rect[1]) * scale),
+      if (this.radarImage) {
+        const { scale, left, top } = dustRadarProjection(w, h);
+        const { x, y, width, height, referenceSize } = radarCrop;
+        const sourceScale = this.radarImage.naturalWidth / referenceSize;
+        ctx.drawImage(
+          this.radarImage,
+          x * sourceScale,
+          y * sourceScale,
+          width * sourceScale,
+          height * sourceScale,
+          left,
+          top,
+          width * scale,
+          height * scale,
         );
       }
-      ctx.font = "bold 12px Arial";
-      data.sites.forEach((site, i) => {
-        ctx.fillStyle = "#efac51";
-        ctx.fillText(i === 0 ? "A" : "B", px(site[0]), pz(site[2]));
-      });
       return;
     }
     const s = Math.min(w, h) / 50;

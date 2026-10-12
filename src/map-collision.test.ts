@@ -7,6 +7,27 @@ function surface(points: number[]) {
   return new T.Mesh(g, new T.MeshBasicMaterial());
 }
 describe("imported map collision", () => {
+  it("uses invisible brushes for movement without blocking sight or bullets", () => {
+    const ramp = new T.Mesh(new T.BoxGeometry(4, 1, 4));
+    ramp.position.y = 0.5;
+    const wall = new T.Mesh(new T.BoxGeometry(0.2, 3, 4));
+    wall.position.set(3, 1.5, 0);
+    const c = new MapCollision([], [ramp, wall]);
+    expect(c.floor(0, 0, 2)).toBeCloseTo(1);
+    expect(c.floor(0, 0, 0.5)).toBe(-Infinity);
+    expect(c.ceiling(0, 0, -1, 2)).toBeCloseTo(0);
+    expect(c.blocked(0, 0, 1)).toBe(false);
+    expect(c.blocked(2.8, 0, 0)).toBe(true);
+    const from = new T.Vector3(2, 1, 0),
+      to = new T.Vector3(4, 1, 0);
+    expect(c.visible(from, to)).toBe(true);
+    expect(c.intersections(new T.Ray(from, new T.Vector3(1, 0, 0)), 2)).toEqual([]);
+    const solid = new MapCollision([wall], [ramp]);
+    expect(solid.visible(from, to)).toBe(false);
+    expect(solid.intersections(new T.Ray(from, new T.Vector3(1, 0, 0)), 2).length).toBeGreaterThan(
+      0,
+    );
+  });
   it("orders diagonal ray hits across cells in both directions", () => {
     const c = new MapCollision([
       surface([0, 0, -4, 0, 3, -4, 0, 3, 4, 0, 0, -4, 0, 3, 4, 0, 0, 4]),
@@ -59,6 +80,51 @@ describe("imported map collision", () => {
     expect(c.blocked(0.2, 0, 0)).toBe(false);
     expect(c.visible(new T.Vector3(-2, 1, -2), new T.Vector3(2, 1, -2))).toBe(false);
     expect(c.visible(new T.Vector3(-2, 1, 0), new T.Vector3(2, 1, 0))).toBe(true);
+  });
+  it("slides a falling player clear of a ledge's side without changing their height", () => {
+    const c = new MapCollision([
+      surface([0, 0, -2, 0, 1, -2, 0, 1, 2, 0, 0, -2, 0, 1, 2, 0, 0, 2]),
+    ]);
+    const p = new T.Vector3(0.2, 1, 0);
+    expect(c.blocked(p.x, p.z, p.y)).toBe(false);
+    p.y = 0.5;
+    expect(c.blocked(p.x, p.z, p.y)).toBe(true);
+    expect(c.resolveHorizontal(p)).toBe(true);
+    expect(p.y).toBe(0.5);
+    expect(p.x).toBeGreaterThan(0.2);
+    expect(p.x).toBeLessThan(0.31);
+    expect(c.blocked(p.x, p.z, p.y)).toBe(false);
+    expect(c.blocked(p.x + 0.05, p.z, p.y)).toBe(false);
+  });
+  it("resolves both sides of a corner and refuses to eject through a narrow gap", () => {
+    const wall = surface([0, 0, -2, 0, 3, -2, 0, 3, 2, 0, 0, -2, 0, 3, 2, 0, 0, 2]);
+    const cross = wall.clone();
+    cross.rotation.y = Math.PI / 2;
+    const c = new MapCollision([wall, cross]),
+      p = new T.Vector3(0.29, 0, 0.29);
+    expect(c.resolveHorizontal(p)).toBe(true);
+    expect(p.x).toBeGreaterThanOrEqual(0.3);
+    expect(p.z).toBeGreaterThanOrEqual(0.3);
+    expect(c.blocked(p.x, p.z, p.y)).toBe(false);
+    const opposite = wall.clone();
+    opposite.position.x = 0.4;
+    const narrow = new MapCollision([wall, opposite]);
+    p.set(0.2, 0, 0);
+    expect(narrow.resolveHorizontal(p)).toBe(false);
+    expect(p.toArray()).toEqual([0.2, 0, 0]);
+  });
+  it("keeps a rising player on the same side of a sloped wall", () => {
+    const c = new MapCollision([
+      surface([0, 0, -2, 0.6, 3, -2, 0.6, 3, 2, 0, 0, -2, 0.6, 3, 2, 0, 0, 2]),
+    ]);
+    const p = new T.Vector3(0.59, 0, 0);
+    expect(c.blocked(p.x, p.z, p.y)).toBe(false);
+    p.y = 0.2;
+    expect(c.blocked(p.x, p.z, p.y)).toBe(true);
+    expect(c.resolveHorizontal(p)).toBe(true);
+    expect(p.x).toBeGreaterThan(0.59);
+    expect(p.y).toBe(0.2);
+    expect(c.blocked(p.x, p.z, p.y)).toBe(false);
   });
 });
 describe("map collision geometry input", () => {

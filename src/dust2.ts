@@ -1,13 +1,14 @@
 import * as T from "three";
-import { loadGzipped } from "./gltf";
+import { fetchGzipped, loadGzipped } from "./gltf";
 import { MapCollision } from "./map-collision";
 import { Navigation } from "./navigation";
 import type { MapNavigation } from "./navigation";
 import type { Wall } from "./physics";
 export async function loadDust2(scene: T.Scene) {
-  const [asset, response] = await Promise.all([
+  const [asset, response, clipData] = await Promise.all([
     loadGzipped("/models/maps/dust2.glb.gz"),
     fetch("/models/maps/dust2-nav.json"),
+    fetchGzipped("/models/maps/dust2-collision.json.gz"),
   ]);
   if (!response.ok) throw new Error("Dust II navigation could not load");
   const navigation = new Navigation((await response.json()) as MapNavigation);
@@ -41,7 +42,20 @@ export async function loadDust2(scene: T.Scene) {
     object.matrixAutoUpdate = false;
     object.matrixWorldAutoUpdate = false;
   });
-  const collision = new MapCollision(meshes);
+  const clips = JSON.parse(new TextDecoder().decode(clipData)) as {
+    version: number;
+    positions: number[];
+  };
+  if (clips.version !== 1 || !clips.positions.length || clips.positions.length % 9)
+    throw new Error("Dust II collision brushes could not load");
+  const clipGeometry = new T.BufferGeometry();
+  clipGeometry.setAttribute("position", new T.Float32BufferAttribute(clips.positions, 3));
+  // This mesh is never attached to the scene or bullet raycast proxy.
+  const clipMaterial = new T.MeshBasicMaterial();
+  const clipMesh = new T.Mesh(clipGeometry, clipMaterial);
+  const collision = new MapCollision(meshes, [clipMesh]);
+  clipGeometry.dispose();
+  clipMaterial.dispose();
   const proxy = new T.Mesh(new T.BufferGeometry(), new T.MeshBasicMaterial());
   proxy.raycast = (raycaster, hits) => {
     const far = Math.min(raycaster.far, 250);

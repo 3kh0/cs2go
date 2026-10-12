@@ -1,0 +1,16 @@
+{
+  "source": "User-supplied callout diagram",
+  "input": "2026_10_11_0zj_Kleki.png",
+  "author": "Not supplied",
+  "sha256": "0f9dcc6a898842677c9b5e05beb007505d2a7b97887fe4083eb83879277bfc7e",
+  "dimensions": [2048, 2048],
+  "displayCrop": [145, 200, 1315, 1385],
+  "calibration": {
+    "worldXZBounds": [-56.515, -79.375, 45.72, 29.845],
+    "imageXYBounds": [176, 220, 1446, 1572]
+  },
+  "limitations": [
+    "Illustrated overview; small layout differences from the 2023 Dust II map remain. Landmark/outline calibration is approximate."
+  ],
+  "referenceGridSize": 1600
+}

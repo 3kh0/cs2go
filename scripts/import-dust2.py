@@ -16,6 +16,7 @@ manifest=json.loads((source/'source-manifest.json').read_text())
 for name,digest in manifest['files'].items():
  if hashlib.sha256((source/'csgo'/name).read_bytes()).hexdigest()!=digest:
   raise ValueError(f'Dust II source checksum mismatch: {name}')
+subprocess.run([sys.executable,str(root/'scripts/extract-dust-collision.py'),str(source/'csgo/maps/de_dust2.bsp')],check=True)
 subprocess.run([args.blender,'-b','-t','2','--python',str(root/'scripts/convert-dust2.py'),'--',str(source/'csgo'),args.sourceio,str(cache/'dust2.glb')],check=True)
 if not (cache/'dust2.glb').exists():raise RuntimeError('Blender did not export the map; inspect its error output')
 subprocess.run([sys.executable,str(root/'scripts/extract-dust-nav.py'),str(source/'csgo/maps')],check=True)
@@ -29,5 +30,7 @@ glb=root/'public/models/maps/dust2.glb'
 (root/'public/models/maps/dust2.glb.gz').write_bytes(gzip.compress(glb.read_bytes(),9,mtime=0));glb.unlink()
 manifest['tools']={'Blender':'4.5.9','gltfpack':'0.24','SourceIOCommit':json.loads((root/'public/models/agents/source-manifest.json').read_text())['tools']['SourceIOCommit']}
 manifest['input']='new_map/csgo'
-manifest['limitations']=['Original geometry and albedo/normal textures (ETC1S KTX2); standard PBR approximation without Source lightmaps','Detailed static props simplified to 30 percent triangles; native NAV graph retained','Browser triangle collision approximates Source player hull and surface penetration']
+manifest['limitations']=['Original geometry and albedo/normal textures (ETC1S KTX2); standard PBR approximation without Source lightmaps','Detailed static props simplified to 30 percent triangles; native NAV graph retained','World player-clip brushes and solid tool faces are extracted from BSP planes for movement only; dynamic brush entities and original prop physics hulls are not imported', 'Browser triangle collision approximates Source player hull and surface penetration']
+clips=json.loads(gzip.decompress((root/'public/models/maps/dust2-collision.json.gz').read_bytes()))
+manifest['collision']={'file':'dust2-collision.json.gz','sourceSha256':clips['sourceSha256'],'brushes':len(clips['brushes']),'triangles':len(clips['positions'])//9,'selection':'World-model CONTENTS_PLAYERCLIP brushes and solid tool/nodraw faces; movement only'}
 (root/'public/models/maps/source-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

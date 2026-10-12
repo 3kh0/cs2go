@@ -21,6 +21,14 @@
   "limitations": [
     "Original geometry and albedo/normal textures (ETC1S KTX2); standard PBR approximation without Source lightmaps",
     "Detailed static props simplified to 30 percent triangles; native NAV graph retained",
+    "World player-clip brushes and solid tool faces are extracted from BSP planes for movement only; dynamic brush entities and original prop physics hulls are not imported",
     "Browser triangle collision approximates Source player hull and surface penetration"
-  ]
+  ],
+  "collision": {
+    "file": "dust2-collision.json.gz",
+    "sourceSha256": "b91be410539fbbfc16300423f1e19c024f12addf1429c8cb2f72b53fe0fd6bcc",
+    "brushes": 2023,
+    "triangles": 22057,
+    "selection": "World-model CONTENTS_PLAYERCLIP brushes and solid tool/nodraw faces; movement only"
+  }
 }

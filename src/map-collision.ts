@@ -10,7 +10,8 @@ const baseCellSize = 1.5,
   yMargin = 1e-3;
 const triangle = new T.Triangle(),
   sample = new T.Vector3(),
-  closest = new T.Vector3();
+  closest = new T.Vector3(),
+  correction = new T.Vector3();
 
 // Woop/Benthin/Wald watertight ray-triangle test, mirroring three's
 // Ray.intersectTriangle without backface culling. Returns the ray parameter,
@@ -152,6 +153,7 @@ type Cast = typeof Collect | typeof Blocked | typeof Exit;
 // touches, so point queries read one cell and rays walk cells exactly.
 export class MapCollision {
   private readonly meshes: T.Mesh[];
+  private readonly raycastMeshCount: number;
   private readonly vertices: Float32Array;
   private readonly normals: Float32Array;
   private readonly minY: Float32Array;
@@ -168,7 +170,9 @@ export class MapCollision {
   private readonly width: number;
   private readonly depth: number;
   private query = 0;
-  constructor(meshes: T.Mesh[]) {
+  constructor(meshes: T.Mesh[], movementMeshes: T.Mesh[] = []) {
+    this.raycastMeshCount = meshes.length;
+    meshes = meshes.concat(movementMeshes);
     this.meshes = meshes.slice();
     let total = 0;
     for (const mesh of meshes) {
@@ -312,6 +316,7 @@ export class MapCollision {
       origin = ceiling + 0.01;
     for (let e = groundOffsets[cell], end = groundOffsets[cell + 1]; e < end; e++) {
       const k = ground[e];
+      if (this.owner[k] >= this.raycastMeshCount && this.normals[k * 3 + 1] < 0.6) continue;
       if (minY[k] > ceiling || maxY[k] < bottom) continue;
       if (outside(vertices, k * 9, x, z, 0)) continue;
       const t = intersect(vertices, k * 9, x, origin, z, 0, -1, 0);
@@ -322,6 +327,36 @@ export class MapCollision {
     return height;
   }
   blocked(x: number, z: number, feet: number, radius = 0.3, height = 1.65) {
+    return this.overlap(x, z, feet, radius, height);
+  }
+  // Falling beside a ledge (or rising beside a sloped wall) can intersect its
+  // side even when the preceding horizontal move was clear. Slide out of that
+  // contact before testing horizontal input, otherwise every direction fails.
+  resolveHorizontal(position: T.Vector3, radius = 0.3, height = 1.65) {
+    const { x, z } = position;
+    for (let i = 0; i < 8; i++) {
+      correction.set(0, 0, 0);
+      if (!this.overlap(position.x, position.z, position.y, radius, height, correction))
+        return true;
+      if (correction.lengthSq() === 0) break;
+      position.x += correction.x;
+      position.z += correction.z;
+      // Bound correction to a local contact instead of searching for a
+      // distant escape from conflicting surfaces.
+      if (Math.hypot(position.x - x, position.z - z) > radius) break;
+    }
+    position.x = x;
+    position.z = z;
+    return false;
+  }
+  private overlap(
+    x: number,
+    z: number,
+    feet: number,
+    radius: number,
+    height: number,
+    offset?: T.Vector3,
+  ) {
     const { entries, normals, minY, maxY, vertices, visit, offsets, cellSize } = this,
       query = this.stamp(),
       step = feet + 0.46,
@@ -330,6 +365,7 @@ export class MapCollision {
     const low = feet + radius + 0.12,
       middle = feet + height / 2,
       high = feet + height - radius;
+    let hit = false;
     for (
       let cz = Math.floor((z - radius) / cellSize);
       cz <= Math.floor((z + radius) / cellSize);
@@ -360,15 +396,24 @@ export class MapCollision {
           triangle.a.fromArray(vertices, o);
           triangle.b.fromArray(vertices, o + 3);
           triangle.c.fromArray(vertices, o + 6);
-          if (
-            this.touches(x, low, z, radius, limit, k) ||
-            this.touches(x, middle, z, radius, limit, k) ||
-            this.touches(x, high, z, radius, limit, k)
-          )
-            return true;
+          // When resolving, visit every sample and retain the deepest contact.
+          for (let s = 0; s < 3; s++) {
+            if (!this.touches(x, s === 0 ? low : s === 1 ? middle : high, z, radius, limit, k))
+              continue;
+            if (!offset) return true;
+            hit = true;
+            const dx = x - closest.x,
+              dz = z - closest.z,
+              dy = sample.y - closest.y,
+              horizontal = Math.hypot(dx, dz);
+            if (horizontal < 1e-6) continue;
+            const depth = Math.sqrt(Math.max(0, limit - dy * dy)) - horizontal + 1e-4;
+            if (depth * depth > offset.lengthSq())
+              offset.set((dx / horizontal) * depth, 0, (dz / horizontal) * depth);
+          }
         }
       }
-    return false;
+    return hit;
   }
   // Sphere test against the triangle loaded into the scratch triangle.
   private touches(x: number, y: number, z: number, radius: number, limit: number, k: number) {
@@ -383,6 +428,7 @@ export class MapCollision {
     const { ground, groundOffsets, minY, maxY, vertices } = this;
     for (let e = groundOffsets[cell], end = groundOffsets[cell + 1]; e < end; e++) {
       const k = ground[e];
+      if (this.owner[k] >= this.raycastMeshCount && this.normals[k * 3 + 1] > -0.6) continue;
       if (maxY[k] < bottom || minY[k] > top) continue;
       if (outside(vertices, k * 9, x, z, 0)) continue;
       const t = intersect(vertices, k * 9, x, bottom, z, 0, 1, 0);
@@ -431,6 +477,8 @@ export class MapCollision {
           high = Math.max(a, b) + yMargin;
         for (let e = offsets[cell], end = offsets[cell + 1]; e < end; e++) {
           const k = entries[e];
+          // Source player clips affect movement, not bullets or visibility.
+          if (owner[k] >= this.raycastMeshCount) continue;
           // A hit lies in the cell crossed at that distance, so a triangle
           // outside this segment's height range is retested in later cells.
           if (visit[k] === query || maxY[k] < low || minY[k] > high) continue;

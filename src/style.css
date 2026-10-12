@@ -438,6 +438,11 @@ footer button {
   border: 1px solid #ffffff60;
   background: #111c2299;
 }
+.radar-wrap.callouts #radar {
+  width: 230px;
+  height: auto;
+  border-radius: 6px;
+}
 .radar-caption {
   font-size: 8px;
   letter-spacing: 2px;
@@ -1418,4 +1423,18 @@ kbd {
   .inventory-weapon {
     min-height: 55px;
   }
+}
+
+.radar-wrap.expanded {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  padding: 12px;
+  background: #070b13f2;
+  border-radius: 8px;
+}
+.radar-wrap.callouts.expanded #radar {
+  width: min(78vw, 74vh);
 }

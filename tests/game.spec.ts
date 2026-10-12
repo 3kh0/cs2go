@@ -600,6 +600,208 @@ test("agent side selection, independent rigs, and paused animation", async ({ pa
   expect(errors).toEqual([]);
   expect(external).toEqual([]);
 });
+test("Dust II ledges release the player and A ramp's wall stays solid", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/");
+  await page.locator("#play").click();
+  await page.waitForFunction(() => window.__game.locked);
+  const { routes, seams } = await page.evaluate(() => {
+    const g = window.__game,
+      c = g.world.collision!;
+    // Keep the actual map and player simulation, with deterministic ticks and
+    // no combat. These starts are on the raised edge beside A ramp.
+    g.locked = false;
+    g.mode = "practice";
+    g.bots.forEach((b) => {
+      b.health = 0;
+      b.respawn = Infinity;
+    });
+    const routes = [
+      [32.5, -68.7, (3 * Math.PI) / 2],
+      [32.5, -69.3, (5 * Math.PI) / 4],
+      [40, -64, (3 * Math.PI) / 2],
+      [36, -58, 0],
+    ].map(([x, z, yaw]) => {
+      g.position.set(x, c.floor(x, z, 4, -1), z);
+      g.velocity.x = g.velocity.z = g.vertical = g.dead = 0;
+      g.grounded = true;
+      g.eye = 1.65;
+      g.yaw = yaw;
+      g.keys.clear();
+      g.keys.add("KeyW");
+      let overlaps = 0;
+      for (let i = 0; i < 256; i++) {
+        g.simulate(1 / 128);
+        if (c.blocked(g.position.x, g.position.z, g.position.y, 0.3, g.eye)) overlaps++;
+      }
+      const end = g.position.toArray();
+      // Reverse away from contact; checking only for overlap would miss a
+      // controller that avoids penetration by freezing the player in place.
+      g.keys.clear();
+      g.keys.add("KeyS");
+      for (let i = 0; i < 128; i++) g.simulate(1 / 128);
+      return { end, overlaps, escape: Math.hypot(g.position.x - end[0], g.position.z - end[2]) };
+    });
+    // Long A, Long Doors and Tunnel Stairs have narrow gaps beside their
+    // decorative edges. Gravity must settle beside them, not trap the hull.
+    const seams = [
+      [32.9565, -0.04, -29.2735],
+      [33.0835, -0.22, -23.8125],
+      [-27.88, -1.03, -27.8765],
+    ].map(([x, y, z]) => {
+      g.position.set(x, y, z);
+      g.velocity.x = g.velocity.z = g.vertical = 0;
+      g.grounded = false;
+      g.keys.clear();
+      for (let i = 0; i < 256; i++) g.simulate(1 / 128);
+      return {
+        drop: y - g.position.y,
+        grounded: g.grounded,
+        blocked: c.blocked(g.position.x, g.position.z, g.position.y),
+      };
+    });
+    return { routes, seams };
+  });
+  for (const route of routes) {
+    expect(route.overlaps).toBe(0);
+    expect(route.escape).toBeGreaterThan(1);
+    expect(route.end[1]).toBeGreaterThan(0);
+  }
+  expect(routes[0].end[0]).toBeGreaterThan(38);
+  expect(routes[1].end[0]).toBeGreaterThan(37);
+  // The restored clip brush stops the hull before the decorative wall.
+  expect(routes[2].end[0]).toBeGreaterThan(40.7);
+  expect(routes[2].end[0]).toBeLessThan(40.9);
+  expect(routes[3].end[2]).toBeLessThan(-68);
+  expect(routes[3].end[1]).toBeGreaterThan(2);
+  for (const seam of seams) {
+    expect(seam.drop).toBeLessThan(0.3);
+    expect(seam.grounded).toBe(true);
+    expect(seam.blocked).toBe(false);
+  }
+  expect(errors).toEqual([]);
+});
+test("releasing crouch under cover waits for enough room to stand", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "PRACTICE", exact: true }).click();
+  await page.locator("#play").click();
+  await page.waitForFunction(() => window.__game.locked);
+  const result = await page.evaluate(() => {
+    const g = window.__game;
+    g.locked = false;
+    g.world.walls.push({ x: 100, z: 100, w: 4, d: 4, y: 1.3, h: 4 });
+    g.position.set(100, 0, 100);
+    g.velocity.x = g.velocity.z = g.vertical = 0;
+    g.eye = 1.1;
+    g.keys.clear();
+    for (let i = 0; i < 128; i++) g.simulate(1 / 128);
+    const underCover = g.eye;
+    g.yaw = 0;
+    g.keys.add("KeyW");
+    for (let i = 0; i < 256; i++) g.simulate(1 / 128);
+    return { underCover, standing: g.eye, z: g.position.z };
+  });
+  expect(result.underCover).toBeLessThanOrEqual(1.3);
+  expect(result.standing).toBeCloseTo(1.65);
+  expect(result.z).toBeLessThan(97);
+});
+test("CT ramp traversal and the local callout radar", async ({ page }) => {
+  const errors: string[] = [],
+    external: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("request", (r) => {
+    if (new URL(r.url()).origin !== "http://127.0.0.1:5173") external.push(r.url());
+  });
+  await page.goto("/");
+  await page.locator("#play").click();
+  await page.waitForFunction(() => window.__game.locked);
+  const routes = await page.evaluate(() => {
+    const g = window.__game,
+      c = g.world.collision!;
+    g.locked = false;
+    g.mode = "practice";
+    g.bots.forEach((b) => {
+      b.health = 0;
+      b.respawn = Infinity;
+    });
+    const routes = [-53, -54, -55, -56, -57].map((z) => {
+      g.position.set(14, c.floor(14, z, -2, -4), z);
+      g.velocity.x = g.velocity.z = g.vertical = 0;
+      g.grounded = true;
+      g.eye = 1.65;
+      g.yaw = -Math.PI / 2;
+      g.keys.clear();
+      g.keys.add("KeyW");
+      let blocked = 0;
+      for (let i = 0; i < 384; i++) {
+        g.simulate(1 / 128);
+        if (c.blocked(g.position.x, g.position.z, g.position.y)) blocked++;
+      }
+      const top = g.position.toArray();
+      g.keys.clear();
+      g.keys.add("KeyS");
+      for (let i = 0; i < 384; i++) g.simulate(1 / 128);
+      return { top, bottom: g.position.toArray(), blocked };
+    });
+    g.keys.clear();
+    g.position.set(9, c.floor(9, -57, -2, -4), -57);
+    g.velocity.x = g.velocity.z = g.vertical = 0;
+    g.invulnerable = 1000;
+    g.locked = true;
+    return routes;
+  });
+  for (const route of routes) {
+    expect(route.blocked).toBe(0);
+    expect(route.top[0]).toBeGreaterThan(31);
+    expect(route.top[1]).toBeGreaterThan(-0.1);
+    expect(route.bottom[0]).toBeLessThan(17);
+    expect(route.bottom[1]).toBeLessThan(-2);
+  }
+  await page.keyboard.down("m");
+  await expect(page.locator(".radar-wrap")).toHaveClass(/expanded/);
+  expect(await page.evaluate(() => window.__game.locked)).toBe(true);
+  // Independently check the artwork: both site coordinates must land inside
+  // its red bombsite regions, not merely agree with our marker projection.
+  expect(
+    await page.evaluate(() => {
+      const g = window.__game,
+        canvas = document.createElement("canvas");
+      canvas.width = 900;
+      canvas.height = 948;
+      const ctx = canvas.getContext("2d")!;
+      g.drawMapLayer(ctx, canvas.width, canvas.height, true);
+      const { px, pz } = g.mapProjection(canvas.width, canvas.height);
+      return g.world.navigation!.data.sites.map(([x, , z]) => {
+        const [r, green, b] = ctx.getImageData(Math.round(px(x)), Math.round(pz(z)), 1, 1).data;
+        return r > green * 2 && r > b * 2;
+      });
+    }),
+  ).toEqual([true, true]);
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const g = window.__game,
+          canvas = document.querySelector<HTMLCanvasElement>("#radar")!;
+        const { px, pz } = g.mapProjection(canvas.width, canvas.height);
+        return [
+          ...canvas
+            .getContext("2d")!
+            .getImageData(Math.round(px(g.position.x)), Math.round(pz(g.position.z)), 1, 1).data,
+        ];
+      }),
+    )
+    .toEqual([255, 255, 255, 255]);
+  await page.screenshot({ path: "artifacts/callout-radar-expanded.png" });
+  await page.keyboard.up("m");
+  await expect(page.locator(".radar-wrap")).not.toHaveClass(/expanded/);
+  await page.screenshot({ path: "artifacts/callout-radar-hud.png" });
+  await page.keyboard.down("m");
+  await page.evaluate(() => document.exitPointerLock());
+  await expect(page.locator(".radar-wrap")).not.toHaveClass(/expanded/);
+  expect(errors).toEqual([]);
+  expect(external).toEqual([]);
+});
 test("Dust II casual lobby has balanced teams, textured view arms, and navigation over real floors", async ({
   page,
 }) => {

@@ -19,7 +19,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 </div>
 <div id="hud" class="hidden">
  <div id="scope" class="hidden" aria-label="AWP scope"><div class="scope-lens"><i class="scope-horizontal"></i><i class="scope-vertical"></i><span id="scope-zoom">ZOOM I</span></div></div>
- <div class="radar-wrap"><div id="location">DUST II</div><canvas id="radar" width="180" height="180"></canvas><div class="radar-caption" id="radar-caption">YOU VS BOTS</div></div>
+ <div class="radar-wrap"><div id="location">DUST II</div><canvas id="radar" width="900" height="948" aria-label="Tactical radar; hold M to enlarge callouts"></canvas><div class="radar-caption" id="radar-caption">YOU VS BOTS</div></div>
  <div class="match-top"><span class="score" id="score">0</span><div><small id="match-mode">DEATHMATCH</small><strong id="clock">5:00</strong><small id="match-goal">FIRST TO 20</small></div><span class="score enemy" id="enemy-score">0</span></div>
  <div id="killfeed" role="list" aria-label="Eliminations" aria-live="polite"></div><div id="crosshair"><i></i><i></i><i></i><i></i><b></b></div><div id="hitmarker">×</div><div id="damage"></div>
  <div id="toast"></div><div id="inventory" role="list" aria-label="Weapon inventory"></div><div class="hud-bottom"><div class="vitals"><span>✚ <b id="health">100</b></span><span class="armor">⬡ <b id="armor">100</b></span></div><div class="bottom-tip">WASD MOVE &nbsp; · &nbsp; R RELOAD &nbsp; · &nbsp; B BUY MENU &nbsp; · &nbsp; ESC PAUSE</div><div class="ammo"><div id="gun-name">USP-S</div><b id="ammo">12</b><span>/ <span id="reserve">48</span></span><small id="reload-label"></small></div></div>
