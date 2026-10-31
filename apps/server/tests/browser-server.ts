@@ -91,6 +91,13 @@ const control = Bun.serve({
       room.state.phase = "live";
       room.state.remaining = 100;
     }
+    if (command.op === "empty-owned") {
+      for (const player of room.players.values()) {
+        player.ammo = player.reserve = 0;
+        for (const magazine of Object.values(player.magazines))
+          magazine.ammo = magazine.reserve = 0;
+      }
+    }
     if (command.op === "observer-reload") {
       const player = [...room.players.values()].find(
         (player) => player.team === "ct" && player.health > 0,

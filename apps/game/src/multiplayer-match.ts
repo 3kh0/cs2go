@@ -336,7 +336,8 @@ export class MultiplayerMatch {
       g.utility.blind.clear();
       g.deathBannerUntil = 0;
       document.getElementById("death-banner")!.classList.add("hidden");
-      g.groundInventory.reset(false);
+      // The authoritative instances and sidearm state were just applied above.
+      g.groundInventory.reset(true);
       hideRoundBanner();
     }
     if (

@@ -176,6 +176,22 @@ test("headshot audio, shared skins, refunds and grenade effects retain the norma
       )
       .toBe(true);
     await a.screenshot({ path: "artifacts/multiplayer-shared-smoke.png" });
+    const captured = await a.evaluate(() => ({
+      serial: window.__game.network!.connection.local!.appearances[0].serial,
+      round: window.__game.round,
+    }));
+    await command(request, room, "empty-owned");
+    await a.waitForFunction(() => window.__game.ammo === 0 && window.__game.reserve === 0);
+    await command(request, room, "timeout");
+    await a.waitForFunction((round) => window.__game.round > round, captured.round, {
+      timeout: 20000,
+    });
+    await expect(a.locator("#ammo")).toHaveText("30");
+    await expect(a.locator("#reserve")).toHaveText("90");
+    expect(await a.evaluate(() => window.__game.groundInventory.playerWeapon(0).serial)).toBe(
+      captured.serial,
+    );
+    await expect(a.locator("#inventory")).toContainText("Asiimov");
     await a.evaluate(() => window.__game.menu());
     await b.evaluate(() => window.__game.menu());
     expect(errors).toEqual([]);
