@@ -94,7 +94,7 @@ import { ballistics, SOURCE_UNITS_PER_METER } from "./ballistics";
 import { fleshThickness, hitgroupMultiplier, meshThickness, solveBullet } from "./bullet-solver";
 import type { BulletSurface } from "./bullet-solver";
 import { Soundscape } from "./soundscape";
-import { WeaponAudio } from "./audio";
+import { WeaponAudio, weaponSoundRange } from "./audio";
 import type { WeaponSound } from "./audio";
 import {
   accelerate,
@@ -1867,7 +1867,7 @@ export class Game {
   }
   worldSound(kind: "bot" | "step", position: T.Vector3, weapon = 0, suppressed = true) {
     if (!this.audio || !this.settings.volume || !this.settings.effectsVolume) return;
-    const range = kind === "bot" ? 150 : 35;
+    const range = kind === "bot" ? weaponSoundRange(weapon, suppressed).maxDistance : 35;
     if (position.distanceToSquared(this.camera.position) > range * range) return;
     if (kind === "bot")
       this.weaponAudio.play(this.audio, "bot", weapon, 100, 0, 0, position, suppressed);

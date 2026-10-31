@@ -1,6 +1,14 @@
 import { Vector3, type Camera } from "three";
 import { NativeAcoustics, roomImpulse } from "./room-acoustics";
 
+export type SoundRange = { refDistance: number; maxDistance: number };
+// An inverse panner clamps attenuation at maxDistance; this envelope fades to
+// actual silence instead of leaving distant voices at a constant audible gain.
+export function audibleGain(distance: number, range: SoundRange) {
+  const t = Math.max(0, (distance - range.refDistance) / (range.maxDistance - range.refDistance));
+  return Math.max(0, 1 - t * t) ** 2;
+}
+
 // Native path connectivity supports obstructed sounds; HRTF direction, spectral
 // diffraction and geometry-driven convolution sends are browser reconstructions.
 export class SpatialAudio {
@@ -88,6 +96,7 @@ export class SpatialAudio {
     panner: PannerNode;
     nextCheck: number;
     sourceProbe: number;
+    range: SoundRange;
   }>();
   obstructed?: (from: Vector3, to: Vector3) => boolean;
   update(context: AudioContext, camera: Camera) {
@@ -158,7 +167,11 @@ export class SpatialAudio {
       voice.panner.positionY.setTargetAtTime(apparent.y, context.currentTime, 0.04);
       voice.panner.positionZ.setTargetAtTime(apparent.z, context.currentTime, 0.04);
       voice.filter.frequency.setTargetAtTime(cutoff, context.currentTime, 0.04);
-      voice.gain.gain.setTargetAtTime(level, context.currentTime, 0.04);
+      voice.gain.gain.setTargetAtTime(
+        level * audibleGain(this.position.distanceTo(voice.position), voice.range),
+        context.currentTime,
+        0.04,
+      );
     }
   }
   connect(
@@ -166,13 +179,17 @@ export class SpatialAudio {
     input: AudioNode,
     output: AudioNode,
     position: Vector3,
-    loud = false,
+    loud: boolean | SoundRange = false,
   ) {
     const panner = context.createPanner();
     panner.panningModel = "HRTF";
     panner.distanceModel = "inverse";
-    panner.refDistance = loud ? 5 : 1.5;
-    panner.maxDistance = loud ? 150 : 35;
+    const range =
+      typeof loud === "object"
+        ? loud
+        : { refDistance: loud ? 5 : 1.5, maxDistance: loud ? 150 : 35 };
+    panner.refDistance = range.refDistance;
+    panner.maxDistance = range.maxDistance;
     panner.rolloffFactor = 1;
     panner.positionX.value = position.x;
     panner.positionY.value = position.y;
@@ -181,10 +198,15 @@ export class SpatialAudio {
     filter.type = "lowpass";
     filter.frequency.value = 18000;
     const gain = context.createGain();
+    const blocked = this.obstructed?.(this.position, position) ?? false;
+    filter.frequency.value = blocked ? 700 : 18000;
+    gain.gain.value =
+      (blocked ? 0.065 : 1) * audibleGain(this.position.distanceTo(position), range);
     input.connect(filter).connect(gain).connect(panner).connect(output);
     this.connectRoom(context, panner, output);
     const voice = {
       position: position.clone(),
+      range,
       filter,
       gain,
       panner,

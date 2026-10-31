@@ -45,3 +45,9 @@ python3 scripts/pack-audio.py
 All 282 packed effects now have direct CS2 depot provenance; the 11 music tracks stream separately from the native CS2 soundtrack. The source manifests and startup bank are checked against the actual bundled bytes. Historical community/source import scripts and manifests are retained for history, not current regeneration; running them would overwrite native clips.
 
 Modern knife swish/contact/draw, Panorama UI, player damage and footstep events replace the old cue mappings. Butterfly animation cues retain their named native events. The browser still has only two walking surfaces, shared equipment sounds and representative single-layer knife, impact and bomb cues. CS2's full sound graph, faction-specific gear layers, variant selection and gains are not reproduced. Some recordings used by native CS2 events are themselves retained from older games.
+
+## Remote shot audibility
+
+Single-player bots and multiplayer players use the same distance mix. Suppressed USP-S shots fade out by 26 meters; suppressed M4A1-S and MP5-SD shots fade out by 45 meters. Removing a detachable suppressor restores the ordinary 150-meter gunshot range. These are browser mix tuning values, not extracted Source 2 attenuation curves. An explicit smooth range envelope reaches zero because Web Audio inverse-distance attenuation alone clamps to a nonzero gain. Out-of-range weapon shots allocate no audio voices. Geometry muffling applies before playback starts, then bounded acoustic path updates refine occlusion/diffraction; room sends follow the attenuated signal.
+
+Chromium offline-audio regressions measure near/edge/distant USP output, a distant unsuppressed comparison, and the first 31 ms behind a wall, in addition to direction, distance, acoustic probe and room-tail checks.

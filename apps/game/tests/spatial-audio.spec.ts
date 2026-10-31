@@ -27,10 +27,10 @@ test("rendered spatial audio follows listener direction, distance, and obstructi
   expect(errors).toEqual([]);
 });
 
-test("expanded firearm clips decode locally and voices stay bounded", async ({ page }) => {
+test("expanded firearm clips decode locally and voices stay bounded", async ({ page, baseURL }) => {
   const external: string[] = [];
   page.on("request", (request) => {
-    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
   });
   await page.goto("/audio/source/manifest.json");
   const result = await page.evaluate(async () => {
@@ -110,12 +110,13 @@ test("native Dust II acoustic probe coordinates and path matrix agree with map c
 
 test("all native CS2 player and UI effects decode from the local startup bank", async ({
   page,
+  baseURL,
 }) => {
   const errors: string[] = [],
     external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("request", (request) => {
-    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
   });
   await page.goto("/audio/source/manifest.json");
   const result = await page.evaluate(async () => {
@@ -145,7 +146,7 @@ test("HE blast carries at distance and survives a burst of quieter cues", async 
   await page.goto("/audio/source/manifest.json");
   const result = await page.evaluate(async () => {
     const soundPath = "/src/soundscape.ts",
-      threePath = "/node_modules/three/build/three.module.js";
+      threePath = "/tests/spatial-audio-fixture.ts";
     const { Soundscape } = await import(soundPath);
     const { Vector3 } = await import(threePath);
     const loaded = new Soundscape();
@@ -175,4 +176,26 @@ test("HE blast carries at distance and survives a burst of quieter cues", async 
   expect(result.near.bounded && result.far.bounded).toBe(true);
   expect(result.near.energy).toBeGreaterThan(0.01);
   expect(result.far.energy / result.near.energy).toBeGreaterThan(0.2);
+});
+
+test("suppressed USP shots fade out nearby and cannot leak across Dust II or through walls on attack", async ({
+  page,
+}) => {
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/spatial-audio-fixture.ts";
+    const { renderWeaponRange } = await import(path);
+    return {
+      near: await renderWeaponRange(3, true, false),
+      edge: await renderWeaponRange(25, true, false),
+      distant: await renderWeaponRange(70, true, false),
+      loud: await renderWeaponRange(70, false, false),
+      blocked: await renderWeaponRange(3, true, true),
+    };
+  });
+  expect(result.near.energy).toBeGreaterThan(0.01);
+  expect(result.edge.energy).toBeLessThan(result.near.energy * 0.001);
+  expect(result.distant).toEqual({ energy: 0, attack: 0, allocated: 0 });
+  expect(result.loud.energy).toBeGreaterThan(0.001);
+  expect(result.blocked.attack).toBeLessThan(result.near.attack * 0.01);
 });

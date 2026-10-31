@@ -1,6 +1,6 @@
 import { loadAudioClip } from "./audio-bank";
 import type { Vector3 } from "three";
-import type { SpatialAudio } from "./spatial-audio";
+import type { SpatialAudio, SoundRange } from "./spatial-audio";
 export type WeaponSound =
   | `silencerscrew${"onstart" | "offend" | 1 | 2 | 3 | 4 | 5}`
   | "shot"
@@ -300,6 +300,13 @@ const kits = [
     draw: "negev_draw",
   },
 ];
+/** Browser mix tuning in meters; these are not extracted Source 2 attenuation curves. */
+export function weaponSoundRange(weapon: number, suppressed: boolean): SoundRange {
+  if (weapon === 2 && suppressed) return { refDistance: 1.5, maxDistance: 26 };
+  if ((weapon === 1 && suppressed) || kits[weapon]?.shot === "mp5_01")
+    return { refDistance: 2, maxDistance: 45 };
+  return { refDistance: 5, maxDistance: 150 };
+}
 export class WeaponAudio {
   buffers = new Map<string, AudioBuffer>();
   voices = new Set<AudioBufferSourceNode>();
@@ -341,6 +348,13 @@ export class WeaponAudio {
     position?: Vector3,
     suppressed = true,
   ) {
+    const range = weaponSoundRange(weapon, suppressed);
+    if (
+      position &&
+      this.spatial &&
+      position.distanceToSquared(this.spatial.position) >= range.maxDistance ** 2
+    )
+      return;
     const name = kind.startsWith("silencerscrew")
       ? `suppressor-${weapon}-${kind}`
       : !suppressed && (weapon === 1 || weapon === 2) && (kind === "shot" || kind === "bot")
@@ -388,7 +402,7 @@ export class WeaponAudio {
     source.connect(gain);
     const disconnectSpatial =
       position && this.spatial
-        ? this.spatial.connect(context, gain, this.output || context.destination, position, true)
+        ? this.spatial.connect(context, gain, this.output || context.destination, position, range)
         : undefined;
     if (!disconnectSpatial) {
       gain.connect(panner).connect(this.output || context.destination);

@@ -1,5 +1,6 @@
 import { PerspectiveCamera, Vector3 } from "three";
 import { SpatialAudio } from "../src/spatial-audio";
+export { Vector3 };
 
 export async function renderProbe(x: number, distance: number, blocked: boolean, yaw = 0) {
   const offline = new OfflineAudioContext(2, 24000, 48000);
@@ -155,4 +156,35 @@ export async function auditNativePathing() {
     }
   }
   return { count, upperAgreement, lowerAgreement, floorMatches, probes: native.count };
+}
+
+export async function renderWeaponRange(distance: number, suppressed: boolean, blocked: boolean) {
+  const { WeaponAudio } = await import("../src/audio");
+  const offline = new OfflineAudioContext(2, 24000, 48000);
+  const context = offline as unknown as AudioContext;
+  const spatial = new SpatialAudio();
+  spatial.obstructed = () => blocked;
+  const camera = new PerspectiveCamera();
+  camera.updateMatrixWorld();
+  spatial.update(context, camera);
+  const bank = new WeaponAudio();
+  bank.spatial = spatial;
+  const clip = offline.createBuffer(1, 12000, 48000);
+  const signal = clip.getChannelData(0);
+  for (let i = 0; i < signal.length; i++) signal[i] = Math.sin((i * Math.PI) / 12) * 0.3;
+  bank.buffers.set("usp1", clip);
+  bank.buffers.set("suppressor-2-single", clip);
+  bank.play(context, "bot", 2, 100, 0, 0, new Vector3(0, 0, -distance), suppressed);
+  const allocated = bank.voices.size;
+  const rendered = await offline.startRendering();
+  let energy = 0,
+    attack = 0;
+  for (let c = 0; c < 2; c++) {
+    const data = rendered.getChannelData(c);
+    for (let i = 0; i < data.length; i++) {
+      energy += data[i] * data[i];
+      if (i < 1500) attack += data[i] * data[i];
+    }
+  }
+  return { energy, attack, allocated };
 }
