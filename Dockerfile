@@ -16,8 +16,9 @@ RUN bun run --cwd apps/server build
 
 FROM dhi.io/bun:1.4.4@sha256:b1485d173e9915b167a3f6dd761a874d6067abba95c8855462db36031a5dc5e3 AS runtime
 WORKDIR /app
-ENV NODE_ENV=production PORT=3001 ALLOWED_ORIGINS=https://cs2go.3kh0.net
+ENV NODE_ENV=production PORT=3001 ALLOWED_ORIGINS=https://cs2go.3kh0.net MAP_DIRECTORY=/app/maps
 COPY --from=build --chown=65532:65532 /app/apps/server/dist/index.js ./server.js
+COPY --chown=65532:65532 packages/assets/public/models/maps/dust2-physics.glb.gz packages/assets/public/models/maps/dust2-nav.json packages/assets/public/models/maps/dust2-bomb.bin.gz ./maps/
 USER 65532:65532
 EXPOSE 3001
 HEALTHCHECK --interval=15s --timeout=3s --start-period=5s --retries=3 \

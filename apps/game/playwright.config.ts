@@ -16,7 +16,7 @@ export default defineConfig({
       reuseExistingServer: true,
     },
     {
-      command: "bun run --cwd ../server start",
+      command: "bun ../server/tests/browser-server.ts",
       url: "http://127.0.0.1:3002/healthz",
       env: { PORT: "3002", ALLOWED_ORIGINS: "http://127.0.0.1:5173,http://127.0.0.1:5183" },
       reuseExistingServer: false,

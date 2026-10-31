@@ -10,6 +10,9 @@ import { buyMenuMarkup } from "./buy-menu";
 import { setupSettingsTabs } from "./settings-tabs";
 import { setupControlSettings } from "./control-settings";
 import { Game } from "./game";
+import { MultiplayerMatch } from "./multiplayer-match";
+import { disposeSoldier } from "./soldier";
+import { validRoom } from "@cs2go/protocol";
 import { openTeamSelector } from "./team-select";
 import { setupSteamAccount } from "./steam-account";
 import { startIntro } from "./intro";
@@ -82,14 +85,87 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-mode]")
         ),
       );
   };
-el("play").onclick = () =>
+let session: "single" | "multi" = "single";
+const server = el("match-server") as HTMLInputElement;
+const room = el("match-room") as HTMLInputElement;
+const password = el("match-password") as HTMLInputElement;
+const invitation = new URLSearchParams(location.search);
+server.value =
+  invitation.get("server") ||
+  import.meta.env.VITE_MULTIPLAYER_URL ||
+  (import.meta.env.DEV ? "ws://127.0.0.1:3001/ws" : "");
+room.value = validRoom(invitation.get("room"))
+  ? invitation.get("room")!
+  : [...crypto.getRandomValues(new Uint8Array(9))]
+      .map((v) => v.toString(16).padStart(2, "0"))
+      .join("");
+for (const button of document.querySelectorAll<HTMLButtonElement>("[data-session]"))
+  button.onclick = () => {
+    session = button.dataset.session as typeof session;
+    el("multiplayer-options").hidden = session !== "multi";
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-session]")
+      .forEach((node) => node.setAttribute("aria-pressed", String(node === button)));
+  };
+if (invitation.has("room"))
+  document.querySelector<HTMLButtonElement>('[data-session="multi"]')!.click();
+el("match-invite").onclick = async () => {
+  const url = new URL(location.origin + "/");
+  url.searchParams.set("room", room.value);
+  url.searchParams.set("server", server.value);
+  url.searchParams.set("mode", selectedMode);
+  try {
+    await navigator.clipboard.writeText(url.href);
+    el("match-status").textContent = "Invite copied";
+  } catch {
+    el("match-status").textContent = url.href;
+  }
+};
+if (invitation.get("mode") === "competitive")
+  document.querySelector<HTMLButtonElement>('[data-mode="competitive"]')!.click();
+el("play").onclick = () => {
+  if (session === "multi") {
+    try {
+      const url = new URL(server.value);
+      if (
+        !["ws:", "wss:"].includes(url.protocol) ||
+        (location.protocol === "https:" && url.protocol !== "wss:") ||
+        url.pathname !== "/ws" ||
+        url.username ||
+        url.password ||
+        url.search ||
+        url.hash
+      )
+        throw new Error("Enter a secure game server address ending in /ws.");
+      if (!validRoom(room.value)) throw new Error("Room codes use 12–32 letters, numbers, - or _.");
+    } catch (error) {
+      el("match-status").textContent = (error as Error).message;
+      return;
+    }
+  }
   openTeamSelector(
     (team) => {
       game.setTeam(team);
       game.start(selectedMode);
+      if (session === "multi" && game.active) {
+        for (const bot of game.bots) {
+          game.scene.remove(bot.group);
+          disposeSoldier(bot.rig);
+        }
+        game.bots = [];
+        game.network = new MultiplayerMatch(
+          game,
+          server.value,
+          room.value,
+          password.value,
+          selectedMode,
+        );
+        game.toast("Connecting to Dust II…", 5);
+      }
     },
     selectedMode === "competitive" ? 5 : 10,
   );
+};
 el("resume").onclick = () => game.lock();
 el("leave").onclick = el("result-menu").onclick = () => game.menu();
 el("again").onclick = () => game.start(selectedMode);

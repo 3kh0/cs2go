@@ -488,17 +488,52 @@
   }
 }
 
-.home-online-link {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 16px;
-  color: #c7d8e1;
+#multiplayer-options {
+  padding: 12px;
   background: #1c2a35df;
-  text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 1px;
 }
-.home-online-link:hover {
-  background: #344a5c;
-  color: #fff;
+#multiplayer-options[hidden] {
+  display: none;
+}
+#multiplayer-options label {
+  display: block;
+  font-size: 12px;
+  color: #c7d8e1;
+  margin: 6px 0;
+}
+#multiplayer-options input {
+  width: 100%;
+  background: #15202a;
+  border: 1px solid #ffffff30;
+  color: white;
+  font: inherit;
+  padding: 6px;
+}
+#match-status {
+  display: block;
+  color: #e7c875;
+}
+
+#menu .home-cards:has([data-session="multi"][aria-pressed="true"]) .home-loadout-card,
+#menu .home-cards:has([data-session="multi"][aria-pressed="true"]) .home-collection-card {
+  display: none;
+}
+#menu[data-page="play"] .home-match-card {
+  grid-template-rows: 48px 48px 1fr 64px;
+  overflow: auto;
+}
+#menu[data-page="play"] .session-options {
+  grid-row: 2;
+}
+#menu[data-page="play"] .home-map-art {
+  grid-row: 3;
+}
+#menu[data-page="play"] #multiplayer-options {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: start;
+}
+#menu[data-page="play"] .mode-description,
+#menu[data-page="play"] #play {
+  grid-row: 4;
 }

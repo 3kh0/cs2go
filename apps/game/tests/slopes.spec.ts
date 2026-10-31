@@ -8,7 +8,7 @@ test("Dust II ramps retain ground friction, stop, and allow jumping", async ({ p
     const g = (window as unknown as { __game: Game }).__game;
     g.start("practice");
     g.locked = false;
-    g.useWorld(true);
+    g.useWorld();
     g.updateBots = () => {};
     g.moveBots = () => {};
     const collision = g.world.collision!;
@@ -75,7 +75,7 @@ test("Shift-jumping onto Xbox's native side lip lands and holds without crouchin
     const g = (window as unknown as { __game: Game }).__game;
     g.start("practice");
     g.locked = false;
-    g.useWorld(true);
+    g.useWorld();
     g.updateBots = () => {};
     g.moveBots = () => {};
     g.equip(4);
@@ -184,7 +184,7 @@ test("real Shift + Space input reaches Xbox's side ledge", async ({ page }) => {
   await page.waitForFunction(() => (window as unknown as { __game: Game }).__game.locked);
   await page.evaluate(() => {
     const g = (window as unknown as { __game: Game }).__game;
-    g.useWorld(true);
+    g.useWorld();
     g.equip(4);
     g.settings.autoBunnyhop = false;
     g.position.set(-7.8, g.world.collision!.support(-7.8, -33.4, -2, -4), -33.4);

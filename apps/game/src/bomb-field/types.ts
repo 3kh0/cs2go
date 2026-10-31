@@ -1,5 +1,1 @@
-export interface Vec3 {
-  readonly x: number;
-  readonly y: number;
-  readonly z: number;
-}
+export * from "@cs2go/simulation/bomb-field/types";

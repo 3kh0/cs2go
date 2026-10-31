@@ -18,12 +18,17 @@ test("survivors move and use weapons after rounds, stay locked at halftime, and 
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);
-  const results = await page.evaluate(() => {
+  const results = await page.evaluate(async () => {
+    const path = "/tests/flat-collision-fixture.ts";
+    const { flatCollisionFixture } = (await import(
+      path
+    )) as typeof import("./flat-collision-fixture");
     const g = window.__game;
     const run = (mode: "casual" | "competitive", round: number) => {
       g.start(mode);
-      // Use the flat practice floor to isolate actual fixed-step input and physics.
-      g.useWorld(false);
+      // Isolate the round gate with a synthetic collision surface.
+      g.useWorld();
+      flatCollisionFixture(g);
       g.round = round;
       g.freezeTime = 0;
       g.invulnerable = 100;
@@ -154,11 +159,16 @@ test("post-round corpses keep falling for survivors and dead spectators", async 
   test.setTimeout(120_000);
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
-  const results = await page.evaluate(() => {
+  const results = await page.evaluate(async () => {
+    const path = "/tests/flat-collision-fixture.ts";
+    const { flatCollisionFixture } = (await import(
+      path
+    )) as typeof import("./flat-collision-fixture");
     const g = window.__game;
     const run = (dead: boolean, halftime: boolean) => {
       g.start(halftime ? "competitive" : "casual");
-      g.useWorld(false);
+      g.useWorld();
+      flatCollisionFixture(g);
       g.round = halftime ? 12 : 1;
       g.freezeTime = 0;
       g.invulnerable = 100;

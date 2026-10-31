@@ -8,7 +8,7 @@ test("Xbox wall stops forward travel while allowing diagonal sliding and retreat
   await page.waitForFunction(() => (window as unknown as { __game: Game }).__game?.assetsReady);
   const result = await page.evaluate(() => {
     const g = (window as unknown as { __game: Game }).__game;
-    g.useWorld(true);
+    g.useWorld();
     const c = g.world.collision!;
     const p = g.position.clone().set(-7.8, c.support(-7.8, -33.4, -2, -4), -33.4);
     for (let i = 0; i < 128; i++) c.moveHorizontal(p, { x: 0, z: -4 }, 1 / 128);

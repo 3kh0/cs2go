@@ -2,7 +2,7 @@
 
 ## Scope and stack
 
-CS2GO is a desktop, single-player Counter-Strike-inspired browser FPS. Use TypeScript, Three.js, Bun, and Vite. Keep gameplay responsive. Development/offline assets stay local; production may load pinned asset releases from R2 (see docs/deployment.md). The game supports CS2 Dust II casual 10v10 and competitive 5v5 bomb rounds, Dust Yard practice/deathmatch, all 34 firearms, and three knives. Competitive uses paid armor, friendly fire, round economy and halftime; casual grants armor/helmets and CT kits. See docs/weapon-data.md for pinned current values.
+CS2GO is a desktop Counter-Strike-inspired browser FPS with single-player and private multiplayer Dust II rounds. Use TypeScript, Three.js, Bun, and Vite. Keep gameplay responsive. Development/offline assets stay local; production may load pinned asset releases from R2 (see docs/deployment.md). The game supports CS2 Dust II casual 10v10 and competitive 5v5 bomb rounds, Dust II practice/deathmatch, all 34 firearms, and three knives. Competitive uses paid armor, friendly fire, round economy and halftime; casual grants armor/helmets and CT kits. See docs/weapon-data.md for pinned current values.
 
 Read the relevant implementation before editing. Preserve the user's changes and existing gameplay unless the task calls for a change. Do not add multiplayer, services, major dependencies, or a new engine as a routine implementation choice.
 
@@ -32,7 +32,9 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 - `apps/game/src/game.ts`: fixed-step simulation, input, bot AI, hitscan, state transitions, scope, kill feed, and rendering.
 - `apps/game/src/physics.ts`: movement, collision, and weapon definitions.
 - `apps/game/src/ballistics.ts`: archived weapon attributes, range attenuation, and penetration damage loss.
-- `apps/game/src/world.ts`: map geometry, materials, colliders, and instanced static rendering.
+- `apps/game/src/dust2.ts`: native Dust II rendering and lighting.
+- `packages/simulation/src/`: shared Dust II collision, movement, C4, weapon and round rules.
+- `apps/server/src/`: authoritative Bun match server; deploy with the root DHI Dockerfile.
 - `apps/game/src/weapons.ts`: GLB loading, first-person hands, and sampled weapon animation tracks.
 - `apps/game/src/soldier.ts`: articulated soldiers and walking/death animation.
 - `apps/game/src/audio.ts`: weapon clips and bounded Web Audio voices.

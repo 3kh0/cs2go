@@ -264,6 +264,7 @@ export class GameInventory {
     );
   }
   refundEquipment(kind: EquipmentKind) {
+    if (this.game.network) return false;
     if (!this.canRefundEquipment(kind)) return false;
     const receipt = this.equipmentReceipts.findLast((r) => r.kind === kind)!;
     this.equipmentReceipts.splice(this.equipmentReceipts.indexOf(receipt), 1);
@@ -324,6 +325,7 @@ export class GameInventory {
     );
   }
   refund(id: number) {
+    if (this.game.network) return false;
     if (!this.canRefund(id)) return false;
     const g = this.game,
       receipt = this.receipts.get(id)!;
@@ -377,6 +379,7 @@ export class GameInventory {
     return drop;
   }
   drop(id = this.game.selected, toss = false) {
+    if (this.game.network) return false;
     const g = this.game;
     if (!g.active || g.dead || isKnife(id) || !g.inventory().includes(id)) return false;
     const state = g.selected === id ? g : g.magazines[id];
@@ -416,6 +419,7 @@ export class GameInventory {
     return true;
   }
   pickup(use = false) {
+    if (this.game.network) return false;
     const g = this.game;
     if (g.dead || !g.active) return false;
     this.pickupCenter.copy(g.position).y += 0.3;

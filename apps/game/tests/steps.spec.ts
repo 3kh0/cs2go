@@ -33,7 +33,7 @@ for (const fixture of [
       const g = (window as unknown as { __game: Game }).__game;
       g.start("practice");
       g.locked = false;
-      g.useWorld(true);
+      g.useWorld();
       g.updateBots = () => {};
       g.moveBots = () => {};
       g.equip(4);

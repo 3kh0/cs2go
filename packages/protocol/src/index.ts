@@ -1,10 +1,11 @@
 // Version every wire-format or simulation compatibility change together.
-export const PROTOCOL_VERSION = 1;
+export const PROTOCOL_VERSION = 2;
 export const TICK_RATE = 128;
 export const SNAPSHOT_RATE = 32;
-export const MAX_PLAYERS = 10;
+export const MAX_PLAYERS = 20;
 export const MAX_PENDING_INPUTS = 128;
 export const MAX_BATCH = 8;
+export type MatchMode = "casual" | "competitive";
 export type Team = "ct" | "t";
 export type Vec3 = { x: number; y: number; z: number };
 export type Input = {
@@ -18,6 +19,11 @@ export type Input = {
   walk: boolean;
   fire: boolean;
   reload: boolean;
+  use: boolean;
+  select: number;
+  buy: number;
+  equipment: "" | "vest" | "helmet" | "kit";
+  dropBomb: boolean;
 };
 export type PlayerState = Vec3 & {
   id: string;
@@ -38,19 +44,72 @@ export type PlayerState = Vec3 & {
   respawnTime: number;
   spawn: number;
   kills: number;
+  mvps: number;
   deaths: number;
   ack: number;
+  weapon: number;
+  primary: number | null;
+  secondary: number;
+  magazines: Record<number, { ammo: number; reserve: number }>;
+  money: number;
+  armor: number;
+  helmet: boolean;
+  kit: boolean;
+  waiting: boolean;
 };
 export type MatchEvent =
-  | { kind: "shot"; shooter: string; from: Vec3; to: Vec3 }
-  | { kind: "kill"; killer: string; victim: string; headshot: boolean };
+  | { kind: "shot"; shooter: string; from: Vec3; to: Vec3; weapon: number }
+  | { kind: "kill"; killer: string; victim: string; headshot: boolean; weapon: number }
+  | { kind: "plant" | "defuse" | "explode"; actor: string };
+export type RoundState = {
+  mode: MatchMode;
+  phase: "waiting" | "freeze" | "live" | "post" | "halftime" | "finished";
+  round: number;
+  scores: Record<Team, number>;
+  remaining: number;
+  buyRemaining: number;
+  pause: number;
+  elapsed: number;
+  result: {
+    winner: Team;
+    reason: string;
+    fact?: string;
+    mvp?: { name: string; reason: string };
+  } | null;
+  bomb: {
+    x: number;
+    y: number;
+    z: number;
+    carrier: string | null;
+    planted: boolean;
+    timer: number;
+    plantProgress: number;
+    defuser: string | null;
+    progress: number;
+    planter: string | null;
+  };
+};
 export type ServerMessage =
-  | { type: "welcome"; version: number; id: string; room: string; map: "yard" }
-  | { type: "snapshot"; tick: number; players: PlayerState[]; events: MatchEvent[] }
+  | { type: "welcome"; version: number; id: string; room: string; map: "dust2"; mode: MatchMode }
+  | {
+      type: "snapshot";
+      tick: number;
+      players: PlayerState[];
+      events: MatchEvent[];
+      round: RoundState;
+    }
   | { type: "pong"; time: number }
   | { type: "error"; message: string };
 export type ClientMessage =
-  | { type: "join"; version: number; room: string; name: string; password: string }
+  | {
+      type: "join";
+      version: number;
+      room: string;
+      name: string;
+      password: string;
+      mode: MatchMode;
+      team: Team;
+    }
   | { type: "inputs"; inputs: Input[] }
   | { type: "ping"; time: number };
 export function validRoom(value: unknown): value is string {
@@ -73,7 +132,16 @@ export function validInput(value: unknown): value is Input {
     Math.abs(value.yaw) <= Math.PI &&
     finite(value.pitch) &&
     Math.abs(value.pitch) <= 1.5 &&
-    ["jump", "duck", "walk", "fire", "reload"].every((key) => typeof value[key] === "boolean")
+    Number.isInteger(value.select) &&
+    (value.select as number) >= -1 &&
+    (value.select as number) <= 36 &&
+    Number.isInteger(value.buy) &&
+    (value.buy as number) >= -1 &&
+    (value.buy as number) <= 36 &&
+    ["", "vest", "helmet", "kit"].includes(value.equipment as string) &&
+    ["jump", "duck", "walk", "fire", "reload", "use", "dropBomb"].every(
+      (key) => typeof value[key] === "boolean",
+    )
   );
 }
 export function parseClientMessage(raw: string): ClientMessage | null {
@@ -95,7 +163,9 @@ export function parseClientMessage(raw: string): ClientMessage | null {
       (character) => character.charCodeAt(0) < 32 || character.charCodeAt(0) === 127,
     ) &&
     typeof value.password === "string" &&
-    value.password.length <= 128
+    value.password.length <= 128 &&
+    (value.mode === "casual" || value.mode === "competitive") &&
+    (value.team === "ct" || value.team === "t")
   )
     return value as ClientMessage;
   if (
@@ -121,5 +191,10 @@ export function neutralInput(seq = 0): Input {
     walk: false,
     fire: false,
     reload: false,
+    use: false,
+    select: -1,
+    buy: -1,
+    equipment: "",
+    dropBomb: false,
   };
 }

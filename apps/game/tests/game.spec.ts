@@ -2007,9 +2007,9 @@ test("source agent poses animate both factions and crouch lowers the body", asyn
   await page.evaluate(() => {
     const g = window.__game;
     g.locked = false;
-    g.useWorld(false);
+    g.useWorld();
     g.scopeLevel = 1;
-    g.range.root.traverse((object) => {
+    g.world.root.traverse((object) => {
       if ("isMesh" in object) object.visible = false;
     });
     g.camera.fov = 50;
@@ -2374,7 +2374,7 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
     // This fixture advances ragdoll physics directly between screenshots.
     g.simulate = () => {};
     g.locked = false;
-    g.useWorld(false);
+    g.useWorld();
     g.scopeLevel = 1;
     g.camera.fov = 48;
     g.camera.updateProjectionMatrix();
@@ -2406,7 +2406,7 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
       const g = window.__game;
       return (["t", "ct"] as const).map((team) => {
         const b = g.bots.find((b) => b.team === team)!;
-        for (let i = 0; i < steps; i++) stepSoldierRagdoll(b.rig, -1, 1 / 128, g.range);
+        for (let i = 0; i < steps; i++) stepSoldierRagdoll(b.rig, -1, 1 / 128, g.world);
         animateSoldier(b.rig, 0, 0, false);
         return Math.max(...b.rig.ragdoll!.points.map((p) => p.position.y));
       });
@@ -2426,14 +2426,17 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
     rig.group.rotation.set(0, 0, 0);
     rig.group.userData.groundY = 4.7;
     rig.moveX = 3;
-    for (let i = 0; i < 1024; i++) stepSoldierRagdoll(rig, 0, 1 / 128, g.range);
+    for (let i = 0; i < 1024; i++) stepSoldierRagdoll(rig, 0, 1 / 128, g.world);
     const ledge = Math.max(...rig.ragdoll!.points.map((p) => p.position.y));
     resetSoldier(rig);
     rig.group.position.set(0, 12, 10);
     rig.moveX = rig.moveZ = 0;
-    const collisionPath = "/src/map-collision.ts";
-    const { MapCollision } = (await import(collisionPath)) as typeof import("../src/map-collision");
-    const collision = new MapCollision([g.range.solids[0]]);
+    const fixturePath = "/tests/flat-collision-fixture.ts";
+    const { flatCollisionFixture } = (await import(
+      fixturePath
+    )) as typeof import("./flat-collision-fixture");
+    flatCollisionFixture(g);
+    const collision = g.world.collision;
     for (let i = 0; i < 1024; i++) stepSoldierRagdoll(rig, 0, 1 / 128, { collision, walls: [] });
     return {
       ledge,
@@ -2451,7 +2454,7 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
       path
     )) as typeof import("../src/soldier");
     const g = window.__game;
-    g.useWorld(true);
+    g.useWorld();
     return (["t", "ct"] as const).map((team) => {
       const rig = g.bots.find((b) => b.team === team)!.rig;
       resetSoldier(rig);

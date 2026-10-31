@@ -135,7 +135,7 @@ test("suppressor native action, cancellation, sounds, pickup state and dynamic p
   await page.screenshot({ path: "artifacts/usp-detached.png" });
   const ball = await page.evaluate(() => {
     const g = window.__game;
-    g.useWorld(true);
+    g.useWorld();
     const ball = g.dust!.ball;
     if (!ball.mesh) return null;
     ball.reset();

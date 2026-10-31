@@ -6,12 +6,18 @@ import {
   type Input,
   type PlayerState,
   type ServerMessage,
+  type RoundState,
+  type MatchMode,
+  type Team,
 } from "@cs2go/protocol";
 import { movePlayer } from "@cs2go/simulation/movement";
+import type { DustMap } from "@cs2go/simulation/dust-map";
 import { STEP } from "@cs2go/simulation/match";
 
-export class OnlineConnection {
+export class MatchConnection {
   socket: WebSocket;
+  round?: RoundState;
+  map: DustMap;
   id = "";
   local?: PlayerState;
   players: PlayerState[] = [];
@@ -28,16 +34,28 @@ export class OnlineConnection {
     url: string,
     room: string,
     name: string,
+    mode: MatchMode,
+    team: Team,
+    map: DustMap,
     password: string,
     onMessage: (message: ServerMessage) => void,
     onClose: (reason: string) => void,
   ) {
+    this.map = map;
     this.onMessage = onMessage;
     this.onClose = onClose;
     this.socket = new WebSocket(url);
     this.socket.onopen = () =>
       this.socket.send(
-        JSON.stringify({ type: "join", version: PROTOCOL_VERSION, room, name, password }),
+        JSON.stringify({
+          type: "join",
+          version: PROTOCOL_VERSION,
+          room,
+          name,
+          password,
+          mode,
+          team,
+        }),
       );
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data) as ServerMessage;
@@ -48,6 +66,7 @@ export class OnlineConnection {
         }
         this.id = message.id;
       } else if (message.type === "snapshot") {
+        this.round = message.round;
         this.lastSnapshot = performance.now();
         this.players = message.players;
         this.history.push({ at: this.lastSnapshot, players: message.players });
@@ -58,15 +77,15 @@ export class OnlineConnection {
           this.pending = changedSpawn ? [] : this.pending.filter((input) => input.seq > state.ack);
           this.local = { ...state };
           // Never replay movement across death or a respawn boundary.
-          if (!changedSpawn && state.health > 0)
-            for (const input of this.pending) movePlayer(this.local, input, STEP);
+          if (!changedSpawn && state.health > 0 && ["live", "post"].includes(message.round.phase))
+            for (const input of this.pending) movePlayer(this.local, input, STEP, this.map);
         }
       } else if (message.type === "pong") this.ping = Math.round(performance.now() - message.time);
       this.onMessage(message);
     };
     this.socket.onclose = (event) => {
       clearInterval(this.monitor);
-      this.onClose(event.reason || "Connection lost. You can rejoin the room below.");
+      this.onClose(event.reason || "Connection lost. Return to Play to rejoin.");
     };
     this.socket.onerror = () => {
       /* Close supplies the actionable error once. */
@@ -83,7 +102,8 @@ export class OnlineConnection {
     const frame: Input = { ...input, seq: ++this.seq };
     this.pending.push(frame);
     this.batch.push(frame);
-    movePlayer(this.local, frame, STEP);
+    if (this.round && ["live", "post"].includes(this.round.phase))
+      movePlayer(this.local, frame, STEP, this.map);
     if (this.pending.length > MAX_PENDING_INPUTS || this.socket.bufferedAmount > 64 * 1024) {
       this.close("Connection is too far behind. Rejoin to resynchronize.");
       return;

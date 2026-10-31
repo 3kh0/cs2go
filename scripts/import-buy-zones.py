@@ -61,6 +61,6 @@ for values in re.findall(r'values\s*=\s*\{([^{}]*)\}',entities):
 assert sorted(s['site'] for s in sites)==[0,1]
 assert {z['team'] for z in zones}=={'t','ct'} and len(zones)==2
 out={'source':{'author':'Valve','mapVersion':manifest['version'],'depotManifest':manifest['depotManifest'],'vpkSha256':manifest['files']['de_dust2.vpk'],'resources':sources,'generator':'scripts/import-buy-zones.py','decoder':'Source2Viewer 20.0.6980','geometry':'Exact eight-vertex, six-plane native convex boxes; identity entity transforms; meters, Y up, negative Source Y becomes Z.','references':['https://github.com/SteamTracking/GameTracking-CS2/blob/master/game/csgo/csgo.fgd','https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/triggers.cpp']},'zones':zones,'sites':sites}
-(ROOT/'apps/game/src/dust2-buy-zones.json').write_text(json.dumps(out,indent=2)+'\n')
-subprocess.run(['bun','run','--bun','oxfmt',str(ROOT/'apps/game/src/dust2-buy-zones.json')],check=True)
+(ROOT/'packages/simulation/src/dust2-buy-zones.json').write_text(json.dumps(out,indent=2)+'\n')
+subprocess.run(['bun','run','--bun','oxfmt',str(ROOT/'packages/simulation/src/dust2-buy-zones.json')],check=True)
 print(json.dumps({'zones':zones,'sites':sites},indent=2))

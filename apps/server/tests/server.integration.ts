@@ -1,5 +1,6 @@
 // Exercise Bun's real HTTP/WebSocket runtime rather than mocking its upgrade API.
 import assert from "node:assert/strict";
+import { loadServerMap } from "../src/map";
 import { startServer } from "../src/server";
 import {
   PROTOCOL_VERSION,
@@ -8,6 +9,7 @@ import {
   type ServerMessage,
 } from "@cs2go/protocol";
 const app = startServer({
+  map: await loadServerMap(),
   port: 0,
   hostname: "127.0.0.1",
   origins: ["http://localhost:5173"],
@@ -23,7 +25,12 @@ async function until(predicate: () => boolean, label: string) {
     await Bun.sleep(10);
   }
 }
-async function client(name: string, room = "private-room-123", password = "test-password") {
+async function client(
+  name: string,
+  room = "private-room-123",
+  password = "test-password",
+  team: "ct" | "t" = "ct",
+) {
   const socket = new WebSocket(origin.replace("http:", "ws:") + "/ws", {
     headers: { Origin: "http://localhost:5173" },
   });
@@ -31,7 +38,17 @@ async function client(name: string, room = "private-room-123", password = "test-
   const messages: ServerMessage[] = [];
   socket.onmessage = (event) => messages.push(JSON.parse(String(event.data)));
   await until(() => socket.readyState === WebSocket.OPEN, "open");
-  socket.send(JSON.stringify({ type: "join", version: PROTOCOL_VERSION, room, name, password }));
+  socket.send(
+    JSON.stringify({
+      type: "join",
+      version: PROTOCOL_VERSION,
+      room,
+      name,
+      password,
+      mode: "casual",
+      team,
+    }),
+  );
   return {
     socket,
     messages,
@@ -52,10 +69,13 @@ try {
   );
   assert.equal(app.rooms.size, 0);
   const a = await client("Alpha"),
-    b = await client("Bravo");
+    b = await client("Bravo", "private-room-123", "test-password", "t");
   await until(() => a.players().length === 2 && b.players().length === 2, "two peers");
   const aId = a.messages.find((message) => message.type === "welcome")!.id;
   const bId = b.messages.find((message) => message.type === "welcome")!.id;
+  const shared = app.rooms.get("private-room-123")!;
+  shared.state.phase = "live";
+  shared.state.remaining = 100;
   const before = a.players().find((player) => player.id === aId)!;
   for (let batch = 0; batch < 12; batch++) {
     a.socket.send(
@@ -83,16 +103,19 @@ try {
   // Arrange a clear shot; the wire still carries only inputs, never damage.
   const shooter = room.players.get(aId)!,
     victim = room.players.get(bId)!;
-  Object.assign(shooter, { x: 17, y: 0, z: 17, vx: 0, vz: 0, cooldown: 0 });
-  Object.assign(victim, { x: 17, y: 0, z: 10, vx: 0, vz: 0 });
+  Object.assign(shooter, { x: 4.6, y: -3.08, z: -61, vx: 0, vz: 0, cooldown: 0 });
+  Object.assign(victim, { x: 6.5, y: -3.08, z: -61, vx: 0, vz: 0 });
   a.socket.send(
-    JSON.stringify({ type: "inputs", inputs: [{ ...neutralInput(49), fire: true, pitch: 0.05 }] }),
+    JSON.stringify({
+      type: "inputs",
+      inputs: [{ ...neutralInput(49), fire: true, yaw: -Math.PI / 2, pitch: 0.15 }],
+    }),
   );
   await until(
     () => b.players().some((player: PlayerState) => player.id === bId && player.health < 100),
     "server damage",
   );
-  assert(shooter.ammo < 30);
+  assert(shooter.ammo < 12);
   assert(
     a.messages.some(
       (message) =>
@@ -102,6 +125,17 @@ try {
   const isolated = await client("Isolated", "different-room-123");
   await until(() => isolated.players().length === 1, "isolated room");
   assert.equal(a.players().length, 2);
+  // A transport/scheduler stall may release more than 250 ms of valid inputs
+  // together. Buffer them, but consume at most one per elapsed simulation tick.
+  for (let batch = 0; batch < 8; batch++)
+    isolated.socket.send(
+      JSON.stringify({
+        type: "inputs",
+        inputs: Array.from({ length: 8 }, (_, i) => neutralInput(batch * 8 + i + 1)),
+      }),
+    );
+  await until(() => isolated.players()[0]?.ack === 64, "buffered input burst drained");
+
   // A repeated sequence cannot replay commands or accelerate simulation.
   a.socket.send(JSON.stringify({ type: "inputs", inputs: [neutralInput(49)] }));
   await until(() => a.socket.readyState === WebSocket.CLOSED, "duplicate sequence rejected");

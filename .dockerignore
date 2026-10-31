@@ -11,6 +11,12 @@
 !packages/
 !packages/assets/
 !packages/assets/package.json
+!packages/assets/public/
+!packages/assets/public/models/
+!packages/assets/public/models/maps/
+!packages/assets/public/models/maps/dust2-physics.glb.gz
+!packages/assets/public/models/maps/dust2-nav.json
+!packages/assets/public/models/maps/dust2-bomb.bin.gz
 !packages/protocol/
 !packages/protocol/**
 !packages/simulation/

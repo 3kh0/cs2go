@@ -9,7 +9,6 @@ export default defineConfig({
   build: {
     // Three.js changes rarely; a separate chunk stays cached across game deploys.
     rolldownOptions: {
-      input: { main: "index.html", online: "online.html" },
       output: { codeSplitting: { groups: [{ name: "three", test: /node_modules[\\/]three/ }] } },
     },
     chunkSizeWarningLimit: 700,

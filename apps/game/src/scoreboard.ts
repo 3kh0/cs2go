@@ -11,6 +11,7 @@ export type ScorePlayer = {
   kills: number;
   deaths: number;
   mvps: number;
+  bot?: boolean;
   money?: number;
   weapon?: number;
   kit?: boolean;
@@ -80,8 +81,7 @@ function history(board: Board) {
 export function renderScoreboard(board: Board) {
   const root = document.getElementById("scoreboard")!;
   root.dataset.mode = board.mode;
-  root.querySelector("h2")!.textContent =
-    `${board.mode.toUpperCase()} | ${board.teamMode ? "Dust II" : "Dust Yard"}`;
+  root.querySelector("h2")!.textContent = `${board.mode.toUpperCase()} | Dust II`;
   document.getElementById("scoreboard-clock")!.textContent =
     board.mode === "practice"
       ? "∞"
@@ -134,7 +134,8 @@ export function renderScoreboard(board: Board) {
         image((player.id === "player" && playerAvatar()) || `/icons/team-${team}.png`, ""),
       );
       const name = make("span", "score-player", player.name);
-      if (player.id !== "player") name.prepend(image("/ui/match/bot.svg", "Bot", "score-bot"));
+      if (player.bot ?? player.id !== "player")
+        name.prepend(image("/ui/match/bot.svg", "Bot", "score-bot"));
       if (board.teamMode && !board.planted && board.carrier === player.id && player.alive) {
         const bomb = image("/icons/buy/c4.svg", "Bomb carrier", "score-bomb");
         bomb.title = "Bomb carrier";

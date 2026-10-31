@@ -123,7 +123,7 @@ import { hideRoundBanner, showRoundBanner } from "./round-banner";
 import type { LoadProgress } from "./intro";
 import { enableTextureTranscoding } from "./gltf";
 import { detour } from "./local-navigation";
-import { createWorld } from "./world";
+import type { MultiplayerMatch } from "./multiplayer-match";
 import {
   createGun,
   createWorldGun,
@@ -244,16 +244,6 @@ const names = [
   "Raven",
   "Ace",
 ].map((name) => `BOT ${name}`);
-const spawns = [
-  [-17, 17],
-  [17, -17],
-  [-17, -17],
-  [17, 17],
-  [0, -17],
-  [0, 17],
-  [-17, 0],
-  [17, 5],
-];
 const step = 1 / 128;
 const botDesired = new T.Vector2();
 const botAway = new T.Vector2();
@@ -297,8 +287,8 @@ export class Game {
   probeInverse = new T.Quaternion();
   camera = new T.PerspectiveCamera(90, innerWidth / innerHeight, 0.05, 110);
   viewCamera = new T.PerspectiveCamera(VIEWMODEL_FOV, innerWidth / innerHeight, 0.01, 10);
-  world!: ReturnType<typeof createWorld>;
-  range!: ReturnType<typeof createWorld>;
+  world!: Awaited<ReturnType<typeof loadDust2>>;
+  network?: MultiplayerMatch;
   dust?: Awaited<ReturnType<typeof loadDust2>>;
   round = 1;
   teamScores = { t: 0, ct: 0 };
@@ -545,7 +535,6 @@ export class Game {
   sway = 0;
   footsteps = 0;
   supported = true;
-  navGrid: boolean[] = [];
   constructor(onLoad: LoadProgress = () => {}) {
     try {
       const saved = JSON.parse(localStorage.getItem("cs2go-settings") || "{}");
@@ -587,7 +576,7 @@ export class Game {
     this.renderer.autoClear = false;
     this.renderer.toneMapping = T.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1;
-    this.range = this.world = createWorld(this.scene);
+
     this.bombMesh.visible = false;
     this.scene.add(this.bombMesh);
     this.decals.count = 0;
@@ -606,9 +595,6 @@ export class Game {
     this.gun.add(this.flash);
     this.flash.visible = false;
 
-    for (let z = 0; z < 22; z++)
-      for (let x = 0; x < 22; x++)
-        this.navGrid.push(!blocked(x * 2 - 21, z * 2 - 21, 0, this.world.walls, 0.55));
     this.saveSettings();
     this.events();
     const play = el("play") as HTMLButtonElement;
@@ -628,7 +614,7 @@ export class Game {
       this.bombMesh.load(this.renderer).then(() => registerActorLighting(this.bombMesh)),
       loadDust2(this.scene).then((world) => {
         gradeMapColors(world.root);
-        this.dust = world;
+        this.world = this.dust = world;
       }),
     ];
     const loadSteps = assets.length + 1; // GPU warm-up is the final step.
@@ -644,7 +630,7 @@ export class Game {
       .then(async () => {
         for (let i = 0; i < 5; i++) this.bots.push(this.makeBot(i));
         this.assetsReady = true;
-        this.useWorld(true);
+        this.useWorld();
         this.equip(this.selected);
         await this.bombView.load(this.renderer);
         this.view.add(this.bombView);
@@ -874,9 +860,13 @@ export class Game {
       if (e.repeat) return;
       if (code === "Space") this.jumpQueued = true;
       if (code === "KeyR" && !this.utility.selected) this.beginReload();
-      if (code === "KeyG") this.groundInventory.drop(this.selected, true);
-      if (code === "Digit4") this.utility.selectNext();
-      if (code === "KeyE" && this.groundInventory.pickup(true)) this.keys.delete("KeyE");
+      if (code === "KeyG") {
+        if (this.network) this.network.request.dropBomb = true;
+        else this.groundInventory.drop(this.selected, true);
+      }
+      if (code === "Digit4" && !this.network) this.utility.selectNext();
+      if (code === "KeyE" && !this.network && this.groundInventory.pickup(true))
+        this.keys.delete("KeyE");
       if (
         code === "KeyF" &&
         !this.suppressors[this.selected].action &&
@@ -1050,14 +1040,9 @@ export class Game {
       if (this.viewGun(index) !== this.gun) viewExtras.add(this.viewGun(index));
     this.scene.add(extras);
     this.view.add(viewExtras);
-    const range = this.range.root.visible,
-      dust = this.dust.root.visible;
-    for (const casual of [false, true]) {
-      this.range.root.visible = !casual;
-      this.dust.root.visible = casual;
-      this.renderer.compile(this.scene, this.camera);
-    }
-    this.range.root.visible = range;
+    const dust = this.dust.root.visible;
+    this.dust.root.visible = true;
+    this.renderer.compile(this.scene, this.camera);
     this.dust.root.visible = dust;
     this.bombView.visible = true;
     this.defuseView.visible = true;
@@ -1067,7 +1052,7 @@ export class Game {
     const textures = new Set<T.Texture>();
     for (const uniform of Object.values(warmTracer.material.uniforms))
       if (uniform.value instanceof T.Texture) textures.add(uniform.value);
-    this.range.root.visible = this.dust.root.visible = true;
+    this.dust.root.visible = true;
     for (const root of [this.scene, this.view])
       root.traverseVisible((object) => {
         if (!(object instanceof T.Mesh)) return;
@@ -1075,7 +1060,6 @@ export class Game {
           for (const value of Object.values(material))
             if (value instanceof T.Texture) textures.add(value);
       });
-    this.range.root.visible = range;
     this.dust.root.visible = dust;
     this.scene.remove(extras);
     viewExtras.clear();
@@ -1110,6 +1094,8 @@ export class Game {
     }
   }
   start(mode: Mode) {
+    this.network?.disconnect();
+    this.network = undefined;
     hideRoundBanner();
     this.notices.reset();
     if (!this.supported || matchMedia("(pointer: coarse)").matches) {
@@ -1123,7 +1109,7 @@ export class Game {
     this.groundInventory.roundLoadout = null;
     this.freezeTime = this.buyRemaining = 0;
     this.revolverCharge = 0;
-    this.useWorld(this.teamMode);
+    this.useWorld();
     this.configureBots(this.teamMode);
     this.utility.reset();
     this.utility.botInventories.clear();
@@ -1168,6 +1154,8 @@ export class Game {
     this.updateUI();
   }
   menu() {
+    this.network?.disconnect();
+    this.network = undefined;
     this.notices.reset();
     document.body.classList.remove("match-menu-open");
     el("menu").dataset.page = "home";
@@ -1192,7 +1180,7 @@ export class Game {
     this.soundscape.playMusic("menu");
     this.bots.forEach((b) => (b.group.visible = false));
     this.bombMesh.visible = false;
-    this.useWorld(true);
+    this.useWorld();
     setAssetCacheMatchActive(false);
   }
   inspectDuration() {
@@ -1275,8 +1263,7 @@ export class Game {
     this.rescope = this.boltTime = 0;
     this.weaponCooldowns = weapons.map(() => 0);
     this.reloadLockouts.fill(0);
-    this.position.set(-17, 0, 17);
-    if (this.teamMode && this.dust) {
+    if (this.dust) {
       this.position.fromArray(this.dust.navigation.data.spawns[this.team][0]);
       this.position.y = this.dust.collision.floor(
         this.position.x,
@@ -1357,6 +1344,7 @@ export class Game {
     this.camera.updateMatrixWorld(true);
   }
   buy(index: number) {
+    if (this.network) return this.network.buy(index);
     if (
       !this.active ||
       this.dead ||
@@ -1410,6 +1398,7 @@ export class Game {
     });
   }
   buyEquipment(kind: "kevlar" | "helmet" | "kit") {
+    if (this.network) return this.network.equipment(kind);
     if (!this.canBuy() || (kind === "kit" && (this.team !== "ct" || this.defuseKit))) return false;
     if (kind !== "kit" && this.armor >= 100 && (kind === "kevlar" || this.helmet)) return false;
     const price = this.teamMode
@@ -1539,6 +1528,10 @@ export class Game {
     }
   }
   equip(index: number) {
+    if (this.network && !this.network.applying) {
+      this.network.request.select = index;
+      return;
+    }
     if (!this.inventory().includes(index)) return;
     this.suppressors[this.selected].cancel();
     this.utility.cancelThrow();
@@ -1684,6 +1677,10 @@ export class Game {
   }
 
   fireKnife(stab = false) {
+    if (this.network) {
+      this.network.request.fire = true;
+      return;
+    }
     if (
       !this.active ||
       !this.locked ||
@@ -1808,6 +1805,10 @@ export class Game {
     return start + (end - start) * (1 - this.reload / this.shellDuration());
   }
   beginReload() {
+    if (this.network) {
+      this.network.request.reload = true;
+      return;
+    }
     if (this.planting || this.suppressors[this.selected].action) return;
     const w = weapons[this.selected];
     if (!this.reserve && this.mode === "practice") this.reserve = w.reserve;
@@ -1869,9 +1870,10 @@ export class Game {
     else this.soundscape.play("step", false, this.teamMode ? "concrete" : "sand", position);
   }
   private audioSteps = new WeakMap<Bot, { position: T.Vector3; distance: number }>();
-  makeBot(index: number): Bot {
+  makeBot(index: number, override?: AgentTeam): Bot {
     const team =
-      this.teamMode && index >= this.teamSize ? this.team : this.team === "ct" ? "t" : "ct";
+      override ??
+      (this.teamMode && index >= this.teamSize ? this.team : this.team === "ct" ? "t" : "ct");
     const rig = createSoldier(index, team);
     // Dust II caches static sun shadows; moving agents must not become frozen
     // silhouettes when graphics settings rebuild that cache mid-round.
@@ -1940,20 +1942,7 @@ export class Game {
           kit: b.defuseKit,
         }
       : null;
-    const practice = [
-        [-17, 4],
-        [-1, 16],
-        [13, 17],
-        [17, 5],
-        [0, -17],
-      ],
-      safe = spawns.filter((s) => Math.hypot(s[0] - this.position.x, s[1] - this.position.z) > 12);
-    const p =
-      this.mode === "practice"
-        ? practice[index % 5]
-        : safe[Math.floor(Math.random() * safe.length)] || spawns[(index + 1) % spawns.length];
-    b.group.position.set(p[0], 0, p[1]);
-    if (this.teamMode && this.dust) {
+    if (this.dust) {
       const points = this.dust.navigation.data.spawns[b.team];
       const slot = b.team === this.team ? index - this.teamSize + 1 : index;
       b.group.position.fromArray(points[slot % points.length]);
@@ -2008,30 +1997,7 @@ export class Game {
     b.nav = 0;
   }
   findPath(from: T.Vector3, to: T.Vector3) {
-    const cell = (x: number, z: number) =>
-        clamp(Math.floor((z + 22) / 2), 0, 21) * 22 + clamp(Math.floor((x + 22) / 2), 0, 21),
-      start = cell(from.x, from.z),
-      end = cell(to.x, to.z),
-      queue = [start],
-      previous = new Int16Array(484).fill(-1);
-    previous[start] = start;
-    for (let i = 0; i < queue.length; i++) {
-      const n = queue[i];
-      if (n === end) break;
-      for (const v of [n - 22, n + 22, n % 22 > 0 ? n - 1 : -1, n % 22 < 21 ? n + 1 : -1]) {
-        if (v < 0 || v >= 484 || !this.navGrid[v] || previous[v] !== -1) continue;
-        previous[v] = n;
-        queue.push(v);
-      }
-    }
-    if (previous[end] === -1) return [];
-    const path: T.Vector2[] = [];
-    let n = end;
-    while (n !== start) {
-      path.unshift(new T.Vector2((n % 22) * 2 - 21, Math.floor(n / 22) * 2 - 21));
-      n = previous[n];
-    }
-    return path;
+    return this.world.navigation.path(from, to);
   }
   visible(from: T.Vector3, to: T.Vector3) {
     if (this.world.collision) return this.world.collision.visible(from, to);
@@ -2137,6 +2103,10 @@ export class Game {
     };
   }
   fire(continuingBurst = false, alternate = false) {
+    if (this.network) {
+      this.network.request.fire = true;
+      return;
+    }
     if (this.utility.selected || this.utility.throwingKind) return;
     if (
       this.reload &&
@@ -2543,6 +2513,10 @@ export class Game {
     );
   }
   simulate(dt: number) {
+    if (this.network) {
+      this.network.simulate(dt);
+      return;
+    }
     this.utility.update(dt);
     this.groundInventory.update(dt);
     if (this.active && this.world === this.dust) {
@@ -3135,22 +3109,22 @@ export class Game {
     this.updateBots(dt * 8, this.tick % 8);
     this.moveBots(dt);
   }
-  useWorld(dust: boolean) {
+  useWorld() {
     this.groundInventory.clearDrops();
     for (const tracer of this.tracers) {
       tracer.life = 0;
       tracer.mesh.visible = false;
     }
-    this.range.root.visible = !dust || !this.dust;
-    if (this.dust) this.dust.root.visible = dust;
-    this.world = dust && this.dust ? this.dust : this.range;
+    if (!this.dust) return;
+    this.dust.root.visible = true;
+    this.world = this.dust;
     const radar = el("radar") as HTMLCanvasElement;
     radar.width = this.world.navigation ? 900 : 180;
     radar.height = this.world.navigation ? 948 : 180;
     document.querySelector(".radar-wrap")!.classList.toggle("callouts", !!this.world.navigation);
-    el("location").textContent = this.world.collision ? "DUST II" : "DUST YARD · RANGE";
-    this.scene.background = dust && this.dust ? this.dust.sky : new T.Color("#c7d6df");
-    this.scene.environment = dust && this.dust ? this.dust.sky : null;
+    el("location").textContent = "DUST II";
+    this.scene.background = this.dust.sky;
+    this.scene.environment = this.dust.sky;
     // Native sky exposure bias for the background. Keep reflections restrained:
     // the hemisphere already approximates diffuse sky/bounce illumination.
     this.scene.backgroundIntensity = 2 ** 0.765;
@@ -3572,6 +3546,7 @@ export class Game {
     } else bomb.progress = 0;
   }
   takeOverBot() {
+    if (this.network) return;
     const bot = this.spectated;
     if (
       !this.active ||
@@ -4320,13 +4295,14 @@ export class Game {
         b.nav = 0.9 + (i % 3) * 0.15;
         // Patrol fixed routes when no contact is known, rather than pursuing
         // the hidden player's current position through walls.
-        const patrol = spawns[(i + Math.floor(this.time / 9)) % spawns.length];
+        const routes = this.world.navigation.areas;
+        const patrol = routes[(i + Math.floor(this.time / 9)) % routes.length].center;
         const goal =
           b.reposition && b.tactic > 0
             ? b.cover
             : b.alert > 0
               ? b.memory
-              : new T.Vector3(patrol[0], 0, patrol[1]);
+              : new T.Vector3().fromArray(patrol);
         b.path = this.findPath(b.group.position, goal);
       }
     }
@@ -4591,13 +4567,13 @@ export class Game {
       b.anim = 0;
     }
   }
-  // The static radar layer (nav areas or range walls) is drawn once per world,
+  // The Dust II radar layer is drawn once per world,
   // canvas size and style, then composited under the live markers.
   drawMap(canvas: HTMLCanvasElement, live: boolean) {
     const ctx = canvas.getContext("2d")!,
       w = canvas.width,
       h = canvas.height,
-      key = `${this.world === this.range ? "range" : "dust"}:${live}:${w}x${h}`;
+      key = `dust:${live}:${w}x${h}`;
     let layer = this.radarLayers.get(key);
     if (!layer) {
       layer = document.createElement("canvas");
@@ -4670,33 +4646,13 @@ export class Game {
       ctx.restore();
       return;
     }
-    const s = Math.min(w, h) / 50;
-    ctx.save();
-    ctx.translate(w / 2, h / 2);
-    for (const b of this.bots) {
-      if (b.health <= 0) continue;
-      ctx.beginPath();
-      ctx.arc(b.group.position.x * s, b.group.position.z * s, 2.8, 0, Math.PI * 2);
-      ctx.fillStyle = b.team === "ct" ? "#a1c9e0" : "#e6cb7d";
-      ctx.fill();
-    }
-    ctx.translate(this.position.x * s, this.position.z * s);
-    ctx.rotate(-this.yaw);
-    ctx.beginPath();
-    ctx.moveTo(0, -6);
-    ctx.lineTo(-4, 4);
-    ctx.lineTo(4, 4);
-    ctx.closePath();
-    ctx.fillStyle = this.team === "ct" ? "#a1c9e0" : "#e6cb7d";
-    ctx.fill();
-    ctx.restore();
     ctx.restore();
   }
   mapProjection(w: number, h: number) {
     return dustRadarProjection(w, h);
   }
 
-  drawMapLayer(ctx: CanvasRenderingContext2D, w: number, h: number, live: boolean) {
+  drawMapLayer(ctx: CanvasRenderingContext2D, w: number, h: number, _live: boolean) {
     if (this.world.navigation) {
       if (this.radarImage) {
         const { scale, left, top } = dustRadarProjection(w, h);
@@ -4717,29 +4673,6 @@ export class Game {
       ctx.restore();
       return;
     }
-    const s = Math.min(w, h) / 50;
-    ctx.save();
-    ctx.translate(w / 2, h / 2);
-    ctx.fillStyle = live ? "#5c6b6970" : "#8c9e8a13";
-    ctx.fillRect(-22 * s, -22 * s, 44 * s, 44 * s);
-    for (const b of this.world.walls) {
-      ctx.fillStyle = b.h > 4 ? (live ? "#a8b3a6" : "#b5c5b450") : "#dfbe8640";
-      ctx.fillRect((b.x - b.w / 2) * s, (b.z - b.d / 2) * s, b.w * s, b.d * s);
-      ctx.strokeStyle = "#dbe5ca30";
-      ctx.lineWidth = 0.5;
-      ctx.strokeRect((b.x - b.w / 2) * s, (b.z - b.d / 2) * s, b.w * s, b.d * s);
-    }
-    ctx.font = `bold ${live ? 12 : 15}px "Stratum2 Monodigit"`;
-    ctx.fillStyle = "#efac51";
-    ctx.fillText("A", 13 * s, 17 * s);
-    ctx.fillStyle = "#a3c1cf";
-    ctx.fillText("B", -10 * s, 18 * s);
-    if (!live) {
-      ctx.strokeStyle = "#efac5180";
-      ctx.setLineDash([3, 4]);
-      ctx.strokeRect(-24 * s, -24 * s, 48 * s, 48 * s);
-    }
-    ctx.restore();
   }
   scoreboard() {
     const rows = [
@@ -4760,6 +4693,7 @@ export class Game {
       ...this.bots.map((b, id) => ({
         id,
         name: b.name,
+        bot: !this.network,
         kills: b.kills,
         deaths: b.deaths,
         team: b.team,
@@ -4782,6 +4716,9 @@ export class Game {
             : this.time,
       ),
     );
+    const footer = el("scoreboard").querySelector("small");
+    if (footer)
+      footer.textContent = `HOLD TAB TO VIEW SCOREBOARD · ${this.network ? "MULTIPLAYER" : "SINGLE PLAYER"}`;
     const data = {
       rows,
       seconds,
@@ -5073,7 +5010,10 @@ export class Game {
       this.fps = Math.round(this.frames / this.fpsTime);
       this.frames = 0;
       this.fpsTime = 0;
-      setText("telemetry", `${this.fps} FPS · 128 TICK · LOCAL`);
+      setText(
+        "telemetry",
+        `${this.fps} FPS · 128 TICK · ${this.network ? `${this.network.connection.ping} MS` : "LOCAL"}`,
+      );
     }
     if (this.simulationRunning) {
       this.accumulator += dt;

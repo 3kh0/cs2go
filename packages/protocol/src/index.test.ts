@@ -7,6 +7,8 @@ test("rejects incompatible versions, malformed payloads and impossible inputs", 
     room: "abcd1234abcd",
     name: "PLAYER",
     password: "",
+    mode: "casual",
+    team: "ct",
   };
   expect(parseClientMessage(JSON.stringify(join))).toEqual(join);
   for (const value of [

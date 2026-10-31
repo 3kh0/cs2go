@@ -17,7 +17,7 @@ test("native T-ramp trash bins allow retreat after crossing lids and contacting 
   const result = await page.evaluate(() => {
     const g = window.__game;
     g.start("practice");
-    g.useWorld(true);
+    g.useWorld();
     g.bots.forEach((b) => {
       b.health = 0;
       b.respawn = Infinity;

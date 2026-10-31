@@ -1,6 +1,7 @@
 import type { ServerWebSocket } from "bun";
 import {
   MAX_PLAYERS,
+  MAX_PENDING_INPUTS,
   PROTOCOL_VERSION,
   SNAPSHOT_RATE,
   TICK_RATE,
@@ -11,9 +12,17 @@ import {
   type PlayerState,
   type ServerMessage,
 } from "@cs2go/protocol";
-import { createPlayer, respawn, stepMatch, STEP } from "@cs2go/simulation/match";
+import {
+  createPlayer,
+  createMatch,
+  joinMatch,
+  leaveMatch,
+  stepMatch,
+  STEP,
+  type Match,
+} from "@cs2go/simulation/match";
 
-type Room = {
+type Room = Match & {
   players: Map<string, PlayerState>;
   connections: Set<ServerWebSocket<Connection>>;
   events: MatchEvent[];
@@ -30,7 +39,10 @@ type Connection = {
   messages: number;
   window: number;
 };
+import type { DustMap } from "@cs2go/simulation/dust-map";
+import { rulesFor } from "@cs2go/simulation/economy";
 export type ServerOptions = {
+  map: DustMap;
   port: number;
   hostname?: string;
   origins: string[];
@@ -125,18 +137,24 @@ export function startServer(options: ServerOptions) {
           let room = rooms.get(message.room);
           if (!room) {
             if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
-            room = { players: new Map(), connections: new Set(), events: [], tick: 0 };
+            room = {
+              ...createMatch(message.mode, options.map),
+              connections: new Set(),
+              events: [],
+              tick: 0,
+            };
             rooms.set(message.room, room);
           }
-          if (room.players.size >= MAX_PLAYERS) return reject(socket, "Room full");
-          const team =
-            [...room.players.values()].filter((player) => player.team === "ct").length <=
-            room.players.size / 2
-              ? "ct"
-              : "t";
-          const player = createPlayer(connection.id, message.name.trim(), team);
-          respawn(player, room.players.values());
-          room.players.set(player.id, player);
+          if (room.state.mode !== message.mode)
+            return reject(socket, "Room uses a different game mode");
+          if (
+            room.players.size >= MAX_PLAYERS ||
+            [...room.players.values()].filter((p) => p.team === message.team).length >=
+              rulesFor(message.mode).teamSize
+          )
+            return reject(socket, "Team is full");
+          const player = createPlayer(connection.id, message.name.trim(), message.team);
+          joinMatch(room, player);
           room.connections.add(socket);
           connection.room = room;
           connection.last = { ...neutralInput(), yaw: player.yaw, pitch: player.pitch };
@@ -145,12 +163,13 @@ export function startServer(options: ServerOptions) {
             version: PROTOCOL_VERSION,
             id: player.id,
             room: message.room,
-            map: "yard",
+            map: "dust2",
+            mode: room.state.mode,
           });
         } else if (!connection.room) return reject(socket, "Join a room first");
         else if (message.type === "ping") send(socket, { type: "pong", time: message.time });
         else {
-          if (connection.queue.length + message.inputs.length > 32)
+          if (connection.queue.length + message.inputs.length > MAX_PENDING_INPUTS)
             return reject(socket, "Input backlog exceeded");
           for (const input of message.inputs) {
             if (input.seq !== connection.lastSeq + 1)
@@ -166,7 +185,7 @@ export function startServer(options: ServerOptions) {
         const room = socket.data.room;
         if (!room) return;
         room.connections.delete(socket);
-        room.players.delete(socket.data.id);
+        leaveMatch(room, socket.data.id);
         if (!room.players.size)
           for (const [key, value] of rooms) if (value === room) rooms.delete(key);
       },
@@ -176,11 +195,14 @@ export function startServer(options: ServerOptions) {
     accumulator = 0;
   const timer = setInterval(() => {
     const now = performance.now();
-    accumulator += Math.min((now - previous) / 1000, STEP * 16);
+    // Keep elapsed ticks through scheduler stalls; draining buffered inputs must
+    // not discard time or advance faster than the authoritative wall clock.
+    accumulator = Math.min(1, accumulator + (now - previous) / 1000);
     previous = now;
     for (const socket of connections)
       if (!socket.data.room && now - socket.data.joinedAt > 10000) reject(socket, "Join timed out");
-    while (accumulator >= STEP) {
+    let catchup = 0;
+    while (accumulator >= STEP && catchup++ < 32) {
       accumulator -= STEP;
       for (const room of rooms.values()) {
         const inputs = new Map<string, Input>();
@@ -193,11 +215,19 @@ export function startServer(options: ServerOptions) {
           }
           const held =
             now - connection.lastInput < 250
-              ? { ...connection.last, jump: !!input?.jump, reload: !!input?.reload }
+              ? {
+                  ...connection.last,
+                  jump: !!input?.jump,
+                  reload: !!input?.reload,
+                  buy: input?.buy ?? -1,
+                  select: input?.select ?? -1,
+                  equipment: input?.equipment ?? "",
+                  dropBomb: !!input?.dropBomb,
+                }
               : { ...neutralInput(), yaw: connection.last.yaw, pitch: connection.last.pitch };
           inputs.set(connection.id, held);
         }
-        room.events.push(...stepMatch(room.players, inputs));
+        room.events.push(...stepMatch(room, inputs));
         room.tick++;
         if (room.tick % (TICK_RATE / SNAPSHOT_RATE) === 0) {
           const message: ServerMessage = {
@@ -205,6 +235,7 @@ export function startServer(options: ServerOptions) {
             tick: room.tick,
             players: [...room.players.values()],
             events: room.events,
+            round: room.state,
           };
           for (const socket of room.connections) send(socket, message);
           room.events = [];

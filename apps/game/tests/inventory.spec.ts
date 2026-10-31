@@ -46,7 +46,7 @@ test("world guns preserve ammunition, drops vacate slots, refunds and loadouts c
     g.money = 10000;
     g.buyRemaining = 30;
     g.roundPause = 0;
-    // Dust Yard is an isolated inventory fixture. Place the player at a native
+    // Place the Dust II inventory fixture at a native
     // buy-zone spawn to exercise actual buy-zone eligibility.
     g.position.fromArray(g.dust!.navigation.data.spawns[g.team][0]);
     const id = g.team === "ct" ? 1 : 0;

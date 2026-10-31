@@ -97,6 +97,7 @@ export class GameUtility {
     this.game = game;
   }
   buy(kind: GrenadeKind) {
+    if (this.game.network) return false;
     const g = this.game,
       price = g.teamMode ? grenadeData[kind].price : 0;
     if (
@@ -115,6 +116,7 @@ export class GameUtility {
     return true;
   }
   refund(kind: GrenadeKind) {
+    if (this.game.network) return false;
     if (!this.game.canBuy() || !this.receipts[kind] || !this.inventory[kind]) return false;
     this.receipts[kind]--;
     this.inventory[kind]--;
@@ -263,6 +265,7 @@ export class GameUtility {
       refund.hidden = !this.receipts[kind] || !this.game.canBuy();
 
       button.disabled =
+        !!this.game.network ||
         !this.game.canBuy() ||
         !canCarryGrenade(this.inventory, kind, !this.game.teamMode || this.game.competitive) ||
         (this.game.teamMode && this.game.money < grenadeData[kind].price);

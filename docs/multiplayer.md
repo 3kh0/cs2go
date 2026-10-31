@@ -1,64 +1,59 @@
-# Private multiplayer preview
+# Dust II multiplayer
 
-The browser stays on Vercel and models/audio stay on the existing revisioned R2 CDN. A separate persistent Bun server owns each private Dust Yard room. Nothing in this setup requires moving the website or copying the art tree to Coolify.
+Single-player and multiplayer use the same main-menu Play flow, Dust II scene, HUD, buy menu, scoreboard, pause menu, and round banners. Choose Casual or Competitive, choose Single Player or Multiplayer, and choose a team. The standalone preview page and procedural training map have been removed. Practice/deathmatch developer modes also use Dust II.
 
-This is the first playable networking milestone, not multiplayer parity with the single-player game. Up to ten guests can join a room, move/jump/walk/crouch, fire and reload a default AK-47, see other animated agents, score eliminations and respawn after three seconds. Tab displays the room scoreboard; Escape releases the mouse without pausing the server. Disconnect and rejoin preserve the invite, but create a new player and reset that player's score.
+Multiplayer is server-authoritative. Casual rooms have up to ten players per team; Competitive rooms have five. A match waits for players on both sides, then starts freeze time. Late arrivals wait until the next round. Eliminated players spectate until the next round; they do not automatically respawn mid-round. Disconnecting a bomb carrier drops C4 at their last position.
 
-The preview is free-for-all: CT/T appearances alternate, but both can damage everyone. Names are unverified guest labels. Steam authentication, inventory/skin ownership, weapon selection, grenades, Dust II, armor, penetration, recoil/spread, lag compensation, player-body collision, competitive rounds and persistent matches are not implemented for online play. The existing single-player modes remain available on the main page.
+Round rules share the existing pinned single-player economy data: Casual has free armor/helmets and CT kits; Competitive charges for equipment and applies friendly fire. Buying is limited by the native faction buy triggers, time, balance, weapon faction and occupied slot. Firearm purchases and switching, ammo, reloads, health, armor, kills, money and round results belong to the server. The current server accepts the faction weapon catalog rather than enforcing a cosmetic/loadout entitlement from a client.
 
-## Workspaces and authority
+T holds E while grounded and stationary inside a native bomb target to plant for 3.2 seconds. CT holds E nearby to defuse in five seconds with a kit or ten without. Moving or releasing E cancels progress. C4 detonates after 40 seconds. CT elimination, T elimination without a planted bomb, timeout, defuse and detonation settle the round once. A planted bomb keeps the round live after T elimination. C4 health damage uses the same imported baked field and query code as single-player.
 
-- `apps/server`: Bun HTTP/WebSocket server, room lifecycle, connection limits and shutdown.
-- `packages/protocol`: versioned, bounded JSON messages and validation. Clients send sequenced input, never positions, health, damage or kills.
-- `packages/simulation`: headless weapon/movement data, shared Dust Yard collision boxes, movement prediction and authoritative arena combat. The original browser `physics.ts` re-exports these rules. Weapon-data regeneration now targets this package.
-- `apps/game/online.html`: separate browser entry; the regular game does not open a network connection. Main-menu **PRIVATE MULTIPLAYER** opens the preview.
+Survivors can move and fire during the normal post-round interval. Competitive halftime freezes play, swaps sides and scores, and resets equipment/economy. Casual ends at eight wins; Competitive ends at thirteen wins or the twenty-four-round limit, including a 12–12 draw. Objective winners receive objective MVP reasons; other MVPs use that round's elimination totals.
 
-Authority runs at 128 Hz and broadcasts full snapshots at 32 Hz. A player can consume at most one queued input per authoritative step. The browser predicts movement with the same controller, discards acknowledged inputs and replays the remainder against server snapshots. Remote agents interpolate approximately 100 ms behind incoming state. Firing feedback is server-confirmed in this preview. Input stops after 250 ms without new commands; pending input and slow-socket buffers are bounded. A death/respawn boundary resets prediction instead of replaying old movement across it.
+## Networking and scope
 
-The shared controller uses the range's AABB collision and Source-style acceleration, friction and jump constants. It does not claim exact Dust II/controller parity. Hits use simplified unarmored player hulls and solid cover blocks shots. The wire format is JSON for this milestone; bandwidth and tick performance need measurement before public/full-capacity use. Changing simulation or protocol compatibility requires incrementing `PROTOCOL_VERSION` and deploying both ends together.
+- `apps/server`: persistent Bun HTTP/WebSocket server and isolated private rooms.
+- `packages/protocol`: versioned, bounded messages; clients submit sequenced inputs, never positions, damage, balances or results.
+- `packages/simulation`: shared native Dust II collision, movement, spawn data interfaces, trigger volumes, weapon/economy/armor rules, C4 field query and round state machine.
+- `apps/game/src/multiplayer-match.ts`: integrates network snapshots into the regular game presentation. No second renderer/page or separate multiplayer HUD.
 
-Rooms are isolated, held in memory, and deleted when their last player leaves. Limits are 10 players per room, 16 rooms, and 128 total sockets per process. Room codes generated in the browser have 72 bits of randomness. Joining an unused code creates that room. Optional server-wide passwords are sent in the WebSocket join message, never in invite URLs or application logs. Origin checks restrict browser access; they are not identity verification or protection against custom clients. A join deadline, message/payload/queue limits, and ordered input checks bound common abuse. This is intended for private testing, not an unrestricted public server.
+Authority runs at 128 Hz, snapshots at 32 Hz. Local movement predicts with the same native triangle/hull queries and reconciles acknowledged inputs. Remote actors interpolate approximately 100 ms behind snapshots. Browser blur/unlock sends neutral input; stale input expires after 250 ms. Input queues, connection buffers, payloads and message rates are bounded. Protocol version 2 requires deploying the new frontend and server together.
 
-## Run locally
+The round port does not imply complete online combat parity. Server hits currently use simplified player hulls without penetration, spread/recoil, pellet patterns or lag compensation. Reloads commit at the end rather than reproducing every native animation marker. Network weapon drops, carried/dropped skin identity and grenade simulation remain unported; utility purchases and client-only weapon drop/refund actions are disabled for multiplayer instead of changing only one client's state. Single-player keeps those existing features. Steam login/inventory remain available on the website, but room names are guest labels and are not authenticated Steam identities. Native blast filtering/wave timing retain the single-player documented limitations.
 
-From the repository root:
+Rooms are in memory and disappear when empty. Restarting loses rooms/scores. Limits are sixteen rooms and 128 connections per process, with faction capacity enforced per game mode. Use one server replica until room routing is implemented. The full snapshot JSON protocol needs capacity/bandwidth measurement before unrestricted public use; automated integration currently validates two real peers.
+
+## Local development
 
 ```sh
 bun install --frozen-lockfile
-bun run --cwd apps/server start
-bun run --cwd apps/game dev --host 127.0.0.1
+bun run dev
 ```
 
-Open `http://127.0.0.1:5173/online.html`. The default local server is `ws://127.0.0.1:3001/ws`. Generate a room, join, and use **COPY INVITE** to give another browser the same server and room code. Both browsers must be able to reach that server; a localhost invite only works on the same computer.
+The normal frontend is `http://127.0.0.1:5173/`; the development game server is `ws://127.0.0.1:3001/ws`. Choose Multiplayer in the match card. The card contains the server address, room code and optional password. Copy Invite produces a link to the normal homepage with the selected room/mode; passwords are excluded. The invitation does not connect until the user chooses Play and a team. A localhost invite only works on the same computer.
 
-`bun run dev` also runs both development workspaces through Turbo. Server environment variables pass through Turbo. For a different local frontend port, add its exact origin to `ALLOWED_ORIGINS`.
+## Coolify / Docker
 
-## Docker / Coolify
+Use the root `Dockerfile` with repository root as build context. Both build/runtime stages use digest-pinned DHI Bun 1.4.4 images. The runtime is shell-free, non-root UID/GID 65532, and contains the bundled server plus exactly three native gameplay inputs: `dust2-physics.glb.gz`, `dust2-nav.json`, and `dust2-bomb.bin.gz`. Visual models, sky, textures, fonts and audio remain on R2 and are not sent in the Docker context. The server loads those gameplay files once at startup, not over the network per match.
 
-The root `Dockerfile` uses both DHI Bun **1.4.4-dev** and **1.4.4** images, pinned by multi-platform digest. Build stage installs from the root Bun lockfile and typechecks/bundles the server. The final shell-free runtime runs as UID/GID 65532 and contains only the bundled server, not source, node_modules, Steam/R2 secrets, or game assets. `.dockerignore` allowlists the small build context.
+Authenticate the machine/user performing the Coolify build with `docker login dhi.io` if needed; do not put registry credentials in the Dockerfile or repository. See [Docker's Bun guide](https://docs.docker.com/guides/bun/) and [Coolify build-server registry configuration](https://coolify.io/docs/core/infrastructure/servers/build-servers).
 
-Docker's DHI instructions require registry authentication. On the machine/user performing the Coolify build, run `docker login dhi.io` with Docker credentials if pulls require authentication. Do not put registry credentials in build arguments, this repository, or the Dockerfile. See [Docker's Bun guide](https://docs.docker.com/guides/bun/) and [Coolify build-server registry configuration](https://coolify.io/docs/core/infrastructure/servers/build-servers).
+| Coolify setting           | Value                                                 |
+| ------------------------- | ----------------------------------------------------- |
+| Build method              | Dockerfile                                            |
+| Base/build directory      | `/`                                                   |
+| Dockerfile                | `/Dockerfile`                                         |
+| Build stage               | `runtime` or leave empty                              |
+| Ports Exposes             | `3001`                                                |
+| Domain                    | Your HTTPS game-server domain                         |
+| Runtime `PORT`            | `3001`                                                |
+| Runtime `ALLOWED_ORIGINS` | `https://cs2go.3kh0.net`                              |
+| Runtime `ROOM_PASSWORD`   | Optional server-wide password, at most 128 characters |
+| Runtime `MAP_DIRECTORY`   | `/app/maps` (already set in the image)                |
 
-In Coolify, create a **Dockerfile** application for this repository after reviewing/publishing the changes:
+`ALLOWED_ORIGINS` accepts comma-separated exact HTTP(S) frontend origins without trailing slashes. Add preview origins explicitly. The Coolify proxy terminates TLS and forwards WebSocket upgrades to the container's HTTP `/ws` route. No persistent volume/database is needed. `/healthz` becomes available only after native gameplay data loads; the Docker health check invokes Bun fetch, not curl or a shell. See [Coolify Dockerfile applications](https://coolify.io/docs/applications/builds/dockerfile) and [health checks](https://coolify.io/docs/applications/configuration/health-checks).
 
-| Setting                   | Value                                                                  |
-| ------------------------- | ---------------------------------------------------------------------- |
-| Base/build directory      | `/` (repository root)                                                  |
-| Dockerfile                | `/Dockerfile`                                                          |
-| Build stage               | `runtime` (or leave empty; it is the final stage)                      |
-| Ports Exposes             | `3001`                                                                 |
-| Domain                    | Your HTTPS game-server domain, for example `https://mp.cs2go.3kh0.net` |
-| Runtime `PORT`            | `3001`                                                                 |
-| Runtime `ALLOWED_ORIGINS` | `https://cs2go.3kh0.net`                                               |
-| Runtime `ROOM_PASSWORD`   | Optional private-server password; at most 128 characters               |
-
-`ALLOWED_ORIGINS` accepts comma-separated exact HTTP(S) origins, including scheme and any port, without a trailing slash. Add a preview deployment's exact origin when testing that frontend. The game-server domain is not the frontend origin. Keep the proxy's WebSocket upgrade handling enabled. TLS terminates at the Coolify proxy; the container listens on HTTP internally. No persistent volume or database is required. Scale this application to **one replica**: room ownership/routing across replicas is not implemented.
-
-The image supplies a shell-free health check against `/healthz`; it uses Bun's fetch instead of assuming curl/sh exist. Coolify detects image health checks for Dockerfile applications. See [Coolify Dockerfile applications](https://coolify.io/docs/applications/builds/dockerfile) and [health checks](https://coolify.io/docs/applications/configuration/health-checks).
-
-On Vercel, set the public **build-time** variable `VITE_MULTIPLAYER_URL=wss://mp.cs2go.3kh0.net/ws`, then rebuild the frontend. This address is public, not a credential. An HTTPS frontend requires WSS. Until configured, the preview lets you enter the server address manually. If using the existing GitHub deployment workflow, set the repository variable `MULTIPLAYER_URL`; the workflow forwards it to Vercel's build process as `VITE_MULTIPLAYER_URL`.
-
-Manual local container check:
+Set public build-time `VITE_MULTIPLAYER_URL=wss://your-game-server/ws` on the Vercel frontend, then rebuild. With the existing GitHub deployment workflow, repository variable `MULTIPLAYER_URL` can supply it. It is a public address, not a credential. The HTTPS frontend requires WSS.
 
 ```sh
 docker build -t cs2go-server .
@@ -68,10 +63,10 @@ docker run --rm --name cs2go-server -p 127.0.0.1:3001:3001 \
   cs2go-server
 ```
 
-The process handles SIGTERM/SIGINT, closes sockets with a restart notice, and stops its tick timer. Restarting currently loses rooms and scores; users rejoin using the same invite. Seamless reconnects, drain-to-completion deployment, region selection and durable matchmaking remain future work. Do not configure a deployment to restart the server for unrelated art or frontend changes.
+SIGTERM/SIGINT stop the tick timer and close sockets with a restart notice. Users can rejoin the same invite, but seamless reconnects, persistent identity, match draining and multi-region routing are not implemented.
 
 ## Validation
 
-`bun run check`, `bun run test`, and `ASSET_CDN_URL=https://a.cs2go.3kh0.net bun run build` cover all workspaces. Simulation tests check prediction/authority agreement, collision, crouching, fire cadence, cover, reloads, deaths and respawns. `apps/server/tests/server.integration.ts` exercises real Bun sockets, origin/password rejection, two peers, authoritative movement/damage, isolated rooms, duplicate-input rejection and cleanup. The server package's `test` command invokes this integration program through Bun because it requires Bun's native server runtime.
+Run `bun run check`, `bun run test`, and `ASSET_CDN_URL=https://a.cs2go.3kh0.net bun run build`. Round tests exercise freeze time, prediction agreement, post-round movement/fire, respawns between rounds, timeout economy, halftime, plant/defuse cancellation, planted-bomb elimination exceptions, MVP reasons and match completion. The real Bun socket integration loads native Dust II physics and checks origin/password handling, movement/damage, isolation, input replay rejection and cleanup.
 
-`bun run test:browser --filter=@cs2go/game` runs the existing browser suite plus `multiplayer.spec.ts`; the Playwright config starts a dedicated multiplayer server on port 3002 for the integration test. The multiplayer test uses two separate Chromium contexts, actual input and network snapshots, a shared scoreboard, death/respawn, disconnect and rejoin. It adds no production debug hooks.
+Playwright's `multiplayer.spec.ts` joins two clients through the normal menu, checks Dust II, buys a firearm, verifies freeze/live/post-round movement and firing, holds plant/defuse input, checks both clients' result banners, then switches back to a local bot match. Local-only round/position controls live in `apps/server/tests/browser-server.ts`, listen only on loopback, and are not imported into the production server bundle.

@@ -33,7 +33,8 @@ export function homeMenuMarkup() {
           <div class="mode-options"><button data-mode="casual" aria-pressed="true">CASUAL · 10v10</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE · 5v5</button></div>
           <div class="mode-description" id="mode-description">10 × 10 · Plant or defuse · First to 8</div>
           <button class="deploy" id="play" disabled><span>PLAY CASUAL</span><span class="arrow">›</span></button>
-          <a class="home-online-link" href="/online.html">PRIVATE MULTIPLAYER <span>›</span></a>
+          <div class="mode-options session-options"><button data-session="single" aria-pressed="true">SINGLE PLAYER</button><button data-session="multi" aria-pressed="false">MULTIPLAYER</button></div>
+          <div id="multiplayer-options" hidden><label>SERVER<input id="match-server" placeholder="wss://your-server/ws"></label><label>ROOM CODE<input id="match-room" minlength="12" maxlength="32"></label><label>SERVER PASSWORD<input id="match-password" type="password" maxlength="128"></label><button id="match-invite">COPY INVITE</button><small id="match-status" role="status"></small></div>
         </section>
         <button class="home-loadout-card" id="home-loadout"><span class="home-card-kicker">YOUR LOADOUT</span><span class="home-guns"><img src="/icons/buy/ak47.svg" alt=""><img src="/icons/buy/m4a1_silencer.svg" alt=""></span><strong>Ready for the next round</strong><small>Customize your buy slots <span>›</span></small></button>
         <button class="home-collection-card" id="home-collection"><span class="home-card-kicker">NEW &amp; POPULAR</span><img src="/icons/buy/awp.svg" alt=""><strong>Weapon finishes</strong><small>Explore your collection <span>›</span></small></button>

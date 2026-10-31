@@ -5,7 +5,7 @@ import { loadBombDamage } from "./bomb-damage";
 import * as T from "three";
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 import { loadGzipped } from "./gltf";
-import { MapCollision } from "./map-collision";
+import { dustCollision } from "@cs2go/simulation/dust-map";
 import { Navigation } from "./navigation";
 import type { MapNavigation } from "./navigation";
 import type { Wall } from "./physics";
@@ -50,43 +50,8 @@ export async function loadDust2(scene: T.Scene) {
     object.matrixAutoUpdate = false;
     object.matrixWorldAutoUpdate = false;
   });
-  const meshes: T.Mesh[] = [],
-    movementOnly: T.Mesh[] = [],
-    grenadeOnly: T.Mesh[] = [];
-  // Native Source 2 world physics is independent of simplified render props.
-  // Player clips and pass-bullet surfaces block movement but not weapon traces.
-  physics.scene.updateMatrixWorld(true);
-  physics.scene.traverse((object) => {
-    if (!(object instanceof T.Mesh)) return;
-    let metadata: T.Object3D = object;
-    while (metadata.parent && !metadata.userData.InteractAs) metadata = metadata.parent;
-    const interactions = metadata.userData.InteractAs as string[] | undefined;
-    if (interactions?.includes("csgo_grenadeclip")) {
-      grenadeOnly.push(object);
-      return;
-    }
-    if (interactions?.includes("sky")) return;
-    const surface = String(metadata.userData.SurfaceProperty || "concrete");
-    object.userData.bulletMaterial = /glass|chainlink/.test(surface)
-      ? "glass"
-      : /wood/.test(surface)
-        ? "wood"
-        : /metal/.test(surface)
-          ? "metal"
-          : "concrete";
-    if (
-      interactions?.some(
-        (flag) => flag === "playerclip" || flag === "npcclip" || flag === "passbullets",
-      )
-    )
-      movementOnly.push(object);
-    else meshes.push(object);
-  });
-  if (!meshes.length || !movementOnly.length)
-    throw new Error("Dust II native physics could not load");
-  const collision = new MapCollision(meshes, movementOnly);
+  const { collision, grenadeCollision } = dustCollision(physics.scene);
   const ball = new WorldBall(root, collision);
-  const grenadeCollision = grenadeOnly.length ? new MapCollision(grenadeOnly) : undefined;
   physics.scene.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
     object.geometry.dispose();

@@ -18,7 +18,7 @@ test("Nova inserts sound once per shell and Karambit contact changes its recover
   await page.waitForFunction(() => window.__game.locked);
   const result = await page.evaluate(async () => {
     const g = window.__game;
-    g.useWorld(false);
+    g.useWorld();
     g.freezeTime = 0;
     g.roundPause = 100;
     g.invulnerable = 100;

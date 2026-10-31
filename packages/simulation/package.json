@@ -6,18 +6,20 @@
   "exports": {
     "./physics": "./src/physics.ts",
     "./weapon-stats": "./src/data/weapon-stats.json",
-    "./yard": "./src/yard.ts",
     "./movement": "./src/movement.ts",
-    "./match": "./src/match.ts"
+    "./match": "./src/match.ts",
+    "./*": "./src/*.ts"
   },
   "scripts": {
     "check": "tsc --noEmit && oxlint --type-aware --type-check src",
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@cs2go/protocol": "workspace:*"
+    "@cs2go/protocol": "workspace:*",
+    "three": "^0.186.1"
   },
   "devDependencies": {
+    "@types/three": "^0.186.0",
     "typescript": "~6.0.3"
   }
 }

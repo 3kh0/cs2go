@@ -1,8 +1,9 @@
 import { afterEach, expect, test, vi } from "vitest";
 import { neutralInput, type ServerMessage } from "@cs2go/protocol";
-import { createPlayer, STEP } from "@cs2go/simulation/match";
+import { createPlayer, createMatch, STEP } from "@cs2go/simulation/match";
+import { testMap } from "@cs2go/simulation/test-map";
 import { movePlayer } from "@cs2go/simulation/movement";
-import { OnlineConnection } from "./online-connection";
+import { MatchConnection } from "./multiplayer-connection";
 
 class TestSocket {
   static OPEN = 1;
@@ -30,19 +31,35 @@ afterEach(() => {
 function setup() {
   vi.useFakeTimers();
   vi.stubGlobal("WebSocket", TestSocket);
-  const connection = new OnlineConnection(
+  const connection = new MatchConnection(
     "ws://localhost/ws",
     "test-room-123",
     "Player",
+    "casual",
+    "ct",
+    testMap(),
     "",
     () => {},
     () => {},
   );
   const socket = connection.socket as unknown as TestSocket;
-  socket.receive({ type: "welcome", version: 1, id: "player", room: "test-room-123", map: "yard" });
+  socket.receive({
+    type: "welcome",
+    version: 2,
+    id: "player",
+    room: "test-room-123",
+    map: "dust2",
+    mode: "casual",
+  });
   const player = createPlayer("player", "Player", "ct");
   Object.assign(player, { x: -17, z: 17, spawn: 1 });
-  socket.receive({ type: "snapshot", tick: 0, players: [player], events: [] });
+  socket.receive({
+    type: "snapshot",
+    tick: 0,
+    players: [player],
+    events: [],
+    round: { ...createMatch("casual", testMap()).state, phase: "live" },
+  });
   return { connection, socket, player };
 }
 test("latency reconciliation replays only unacknowledged movement and clears old prediction at respawn", () => {
@@ -50,14 +67,32 @@ test("latency reconciliation replays only unacknowledged movement and clears old
   const input = { ...neutralInput(), forward: 1 };
   for (let index = 0; index < 4; index++) connection.step(input);
   const predictedZ = connection.local!.z;
-  for (let index = 0; index < 2; index++) movePlayer(player, input, STEP);
+  for (let index = 0; index < 2; index++) movePlayer(player, input, STEP, testMap());
   player.ack = 2;
-  socket.receive({ type: "snapshot", tick: 2, players: [player], events: [] });
+  socket.receive({
+    type: "snapshot",
+    tick: 2,
+    players: [player],
+    events: [],
+    round: { ...createMatch("casual", testMap()).state, phase: "live" },
+  });
   expect(connection.local!.z).toBe(predictedZ);
   expect(connection.pending).toHaveLength(2);
   const respawned = { ...player, x: 17, z: -17, vx: 0, vz: 0, spawn: 2 };
-  socket.receive({ type: "snapshot", tick: 6, players: [respawned], events: [] });
-  socket.receive({ type: "snapshot", tick: 10, players: [respawned], events: [] });
+  socket.receive({
+    type: "snapshot",
+    tick: 6,
+    players: [respawned],
+    events: [],
+    round: { ...createMatch("casual", testMap()).state, phase: "live" },
+  });
+  socket.receive({
+    type: "snapshot",
+    tick: 10,
+    players: [respawned],
+    events: [],
+    round: { ...createMatch("casual", testMap()).state, phase: "live" },
+  });
   expect(connection.local!.z).toBe(-17);
   expect(connection.pending).toHaveLength(0);
   connection.close();
