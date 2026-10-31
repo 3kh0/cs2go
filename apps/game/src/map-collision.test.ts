@@ -443,3 +443,31 @@ describe("ragdoll sphere contacts", () => {
     expect(point.toArray()).toEqual([1.5, 0.15, 0]);
   });
 });
+
+it("repairs shallow floor overlaps without pulling falls upward or through low ceilings", () => {
+  const floor = new T.Mesh(
+    new T.PlaneGeometry(20, 20).rotateX(-Math.PI / 2),
+    new T.MeshBasicMaterial(),
+  );
+  floor.updateMatrixWorld();
+  const collision = new MapCollision([floor]);
+  const position = new T.Vector3(0, -0.06, 0);
+  expect(collision.recoverGround(position)).toBe(true);
+  expect(position.y).toBeCloseTo(0);
+  position.y = 0.05;
+  expect(collision.recoverGround(position)).toBe(false);
+  expect(position.y).toBe(0.05);
+  position.y = -0.3;
+  expect(collision.recoverGround(position)).toBe(false);
+  expect(position.y).toBe(-0.3);
+  const roof = new T.Mesh(
+    new T.PlaneGeometry(20, 20).rotateX(Math.PI / 2),
+    new T.MeshBasicMaterial(),
+  );
+  roof.position.y = 1.62;
+  roof.updateMatrixWorld();
+  const confined = new MapCollision([floor, roof]);
+  position.y = -0.06;
+  expect(confined.recoverGround(position)).toBe(false);
+  expect(position.y).toBe(-0.06);
+});

@@ -14,6 +14,18 @@ export function movePlayer(
 ) {
   if (player.health <= 0 || player.waiting) return;
   const collision = map.collision;
+  position.set(player.x, player.y, player.z);
+  if (
+    collision.recoverGround(
+      position,
+      movement.hullRadius,
+      player.eye + movement.standingHeight - movement.standingEye,
+    )
+  ) {
+    player.y = position.y;
+    player.grounded = player.vertical <= 0;
+    if (player.grounded) player.vertical = 0;
+  }
   const start = { x: player.x, y: player.y, z: player.z };
   const actors = others
     .filter((other) => other.id !== player.id && other.health > 0 && !other.waiting)
@@ -105,9 +117,14 @@ export function movePlayer(
       (1 - Math.exp(-15 * dt));
   const feet = position.y + (player.grounded ? 0 : player.eye - eye);
   hull = eye + movement.standingHeight - movement.standingEye;
+  const floorInExtension =
+    !player.grounded && feet < position.y
+      ? collision.support(position.x, position.z, position.y, feet, radius)
+      : -Infinity;
   if (
     eye <= player.eye ||
-    (!collision.blocked(position.x, position.z, feet, radius, hull) &&
+    (!Number.isFinite(floorInExtension) &&
+      !collision.blocked(position.x, position.z, feet, radius, hull) &&
       !Number.isFinite(
         collision.ceiling(
           position.x,
@@ -120,6 +137,16 @@ export function movePlayer(
   ) {
     position.y = feet;
     player.eye = eye;
+  }
+  if (
+    collision.recoverGround(
+      position,
+      radius,
+      player.eye + movement.standingHeight - movement.standingEye,
+    )
+  ) {
+    player.grounded = player.vertical <= 0;
+    if (player.grounded) player.vertical = 0;
   }
   player.x = position.x;
   player.y = position.y;

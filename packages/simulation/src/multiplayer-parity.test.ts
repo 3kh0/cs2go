@@ -352,3 +352,20 @@ test("the selected CT starting pistol and knife initialize from the configured l
   expect(ct.magazines[12].ammo).toBe(weapons[12].mag);
   expect(ct.magazines[2]).toBeUndefined();
 });
+
+test("airborne unducking cannot extend feet through the floor, and shallow overlaps recover", () => {
+  const { match, ct } = fixture();
+  live(match);
+  Object.assign(ct, { x: 0, y: 0.01, z: 0, eye: 1.1, grounded: false, vertical: 0 });
+  // Expanding the hull used to lower the feet after the only landing query.
+  command(match, ct.id, {});
+  expect(ct.y).toBeGreaterThanOrEqual(0);
+  for (let i = 0; i < 1200; i++) {
+    command(match, ct.id, { jump: i % 64 === 0, duck: i % 24 < 12, forward: 1 });
+    expect(ct.y).toBeGreaterThanOrEqual(-0.000001);
+  }
+  Object.assign(ct, { y: -0.06, grounded: false, vertical: -1 });
+  command(match, ct.id, {});
+  expect(ct.y).toBeCloseTo(0, 6);
+  expect(ct.grounded).toBe(true);
+});

@@ -6,6 +6,7 @@ import "./scoreboard.css";
 export type ScorePlayer = {
   id: number | "player";
   name: string;
+  avatar?: string | null;
   team: "ct" | "t";
   alive: boolean;
   kills: number;
@@ -130,9 +131,16 @@ export function renderScoreboard(board: Board) {
       const status = make("span", "score-life");
       if (!player.alive) status.append(image("/ui/match/dead.svg", "Dead"));
       const avatar = make("span", "score-avatar");
-      avatar.append(
-        image((player.id === "player" && playerAvatar()) || `/icons/team-${team}.png`, ""),
+      const fallback = assetUrl(`/icons/team-${team}.png`);
+      const portrait = image(
+        player.avatar || (player.id === "player" && playerAvatar()) || fallback,
       );
+      portrait.referrerPolicy = "no-referrer";
+      portrait.onerror = () => {
+        portrait.onerror = null;
+        portrait.src = fallback;
+      };
+      avatar.append(portrait);
       const name = make("span", "score-player", player.name);
       if (player.bot ?? player.id !== "player")
         name.prepend(image("/ui/match/bot.svg", "Bot", "score-bot"));

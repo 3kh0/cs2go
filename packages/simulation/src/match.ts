@@ -206,6 +206,10 @@ export function configurePlayer(
   const first = !match.configurations.has(player.id);
   configuration = { ...configuration, loadouts: readLoadouts(configuration.loadouts) };
   match.configurations.set(player.id, configuration);
+  if (configuration.profile) {
+    player.name = configuration.profile.name.trim();
+    player.avatar = configuration.profile.avatar;
+  }
   player.agent = configuration.agents[player.team];
   if (first) player.allowedWeapons = [...configuration.loadouts[player.team]];
   if (

@@ -553,19 +553,6 @@ footer button {
   width: 20px;
   height: 21px;
 }
-.inventory-art.inventory-finish {
-  background: none;
-  mask-image: none;
-}
-.inventory-art.inventory-finish img {
-  opacity: 1;
-  object-fit: contain;
-  object-position: right center;
-}
-.inventory-weapon:has(.inventory-finish) .inventory-art {
-  width: 150px;
-  height: 44px;
-}
 .inventory-name {
   max-width: 250px;
   overflow: hidden;

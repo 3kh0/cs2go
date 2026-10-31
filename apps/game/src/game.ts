@@ -1,9 +1,9 @@
-import { bindWeaponInstance, skinImage } from "./skins";
+import { bindWeaponInstance } from "./skins";
 import { createWeaponInstance, weaponInstanceName } from "./weapon-instance";
 import { grenadeData, grenadeIcons, grenadeTypes, type GrenadeKind } from "./utility";
 import { setAssetCacheMatchActive } from "./asset-cache";
 import { assetUrl } from "./asset-url";
-import { playerName } from "./player-profile";
+import { playerName, playerAvatar } from "./player-profile";
 import {
   createTracer,
   launchTracer,
@@ -1605,7 +1605,7 @@ export class Game {
         : this.utility.inventory);
     const utility = observer ? null : (this.utility.selected ?? this.utility.throwingKind);
     const owned = grenadeTypes.filter((kind) => inventory[kind] > 0);
-    const signature = `${indices.map((id) => `${id}:${instances(id).serial}:${skinImage(instances(id).skin.id)}`).join(",")}:${utility ?? selected}:${owned.map((kind) => `${kind}:${inventory[kind]}`).join(",")}`;
+    const signature = `${indices.map((id) => `${id}:${instances(id).serial}:${instances(id).skin.id}`).join(",")}:${utility ?? selected}:${owned.map((kind) => `${kind}:${inventory[kind]}`).join(",")}`;
     if (signature === this.inventorySignature) return;
     this.inventorySignature = signature;
     const fragment = document.createDocumentFragment();
@@ -1622,31 +1622,13 @@ export class Game {
       );
       if (active) row.setAttribute("aria-current", "true");
       const image = document.createElement("img");
-      const finishImage = skinImage(instances(index).skin.id);
       const silhouette = assetUrl(`/icons/${weaponIcons[index]}.png`);
       image.alt = "";
-      // Use the same CORS mode as CSS masks when preloading CDN silhouettes.
       image.crossOrigin = "anonymous";
+      image.src = silhouette;
       const art = document.createElement("span");
       art.className = "inventory-art";
       art.style.maskImage = `url("${silhouette}")`;
-      let painted = !!finishImage;
-      image.onload = () => {
-        if (painted && image.naturalWidth) {
-          art.style.removeProperty("mask-image");
-          art.classList.add("inventory-finish");
-        }
-      };
-      image.onerror = () => {
-        // Keep the weapon identifiable even when an optional finish thumbnail
-        // is unavailable. Its captured finish/name still belong to the gun.
-        if (!painted) return;
-        painted = false;
-        art.classList.remove("inventory-finish");
-        art.style.maskImage = `url("${silhouette}")`;
-        image.src = silhouette;
-      };
-      image.src = assetUrl(finishImage || `/icons/${weaponIcons[index]}.png`);
       art.append(image);
       const key = document.createElement("span");
       key.className = "inventory-key";
@@ -2909,6 +2891,10 @@ export class Game {
       this.soundscape.play("jump");
     }
     this.jumpQueued = false;
+    if (this.world.collision?.recoverGround(this.position, movement.hullRadius, this.hullHeight)) {
+      this.grounded = this.vertical <= 0;
+      if (this.grounded) this.vertical = 0;
+    }
     const followGround = this.grounded;
     this.actorStart.copy(this.position);
     // Walking/ducking limit the target speed, while ground acceleration keeps
@@ -3120,6 +3106,10 @@ export class Game {
     ) {
       this.position.y = nextFeet;
       this.eye = nextEye;
+    }
+    if (this.world.collision?.recoverGround(this.position, movement.hullRadius, this.hullHeight)) {
+      this.grounded = this.vertical <= 0;
+      if (this.grounded) this.vertical = 0;
     }
     this.updateAimCamera();
     if (this.burstRemaining && this.burstMode && !this.reload) this.fire(true);
@@ -4697,6 +4687,7 @@ export class Game {
       {
         id: "player" as number | "player",
         name: playerName(),
+        avatar: playerAvatar(),
         kills: this.kills,
         deaths: this.deaths,
         team: this.team,
@@ -4711,6 +4702,7 @@ export class Game {
       ...this.bots.map((b, id) => ({
         id,
         name: b.name,
+        avatar: this.network?.stateForBot(b)?.avatar,
         bot: !this.network,
         kills: b.kills,
         deaths: b.deaths,

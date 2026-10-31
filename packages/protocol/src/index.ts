@@ -40,6 +40,7 @@ export type WeaponAppearance = {
   skin: SkinChoice;
 };
 export type PlayerConfiguration = {
+  profile?: { name: string; avatar: string | null };
   knife?: number;
   skins: Record<number, SkinChoice>;
   agents: Record<Team, string>;
@@ -82,6 +83,7 @@ export type Input = {
 export type PlayerState = Vec3 & {
   id: string;
   name: string;
+  avatar?: string | null;
   team: Team;
   vx: number;
   vz: number;
@@ -311,6 +313,25 @@ export function parseClientMessage(raw: string): ClientMessage | null {
   if (value.type === "stop") return { type: "stop" };
   if (value.type === "configure" && record(value.configuration)) {
     const config = value.configuration;
+    if (config.profile !== undefined) {
+      const profile = config.profile;
+      if (
+        !record(profile) ||
+        typeof profile.name !== "string" ||
+        !profile.name.trim() ||
+        profile.name.length > 24 ||
+        Array.from(profile.name).some(
+          (character) => character.charCodeAt(0) < 32 || character.charCodeAt(0) === 127,
+        ) ||
+        (profile.avatar !== null &&
+          (typeof profile.avatar !== "string" ||
+            !/^https:\/\/avatars\.(?:fastly\.|akamai\.|cloudflare\.)?steamstatic\.com\/[a-f0-9]{40}(?:_full|_medium)?\.jpg$/.test(
+              profile.avatar,
+            )))
+      )
+        return null;
+    }
+
     if (config.knife !== undefined && ![4, 5, 6].includes(config.knife as number)) return null;
     if (
       !record(config.skins) ||

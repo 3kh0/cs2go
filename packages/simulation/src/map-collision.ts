@@ -565,6 +565,20 @@ export class MapCollision {
     position.y = floor;
     return true;
   }
+  /** Repair a shallow floor overlap without searching above a step or through ceilings. */
+  recoverGround(position: T.Vector3, radius = 0.3, height = 1.65) {
+    const floor = this.support(position.x, position.z, position.y + 0.1, position.y + 1e-6, radius);
+    if (
+      !Number.isFinite(floor) ||
+      this.blocked(position.x, position.z, floor, radius, height) ||
+      Number.isFinite(
+        this.ceiling(position.x, position.z, position.y + height, floor + height, radius),
+      )
+    )
+      return false;
+    position.y = floor;
+    return true;
+  }
   sweepSphere(from: T.Vector3, delta: T.Vector3, radius: number, normal: T.Vector3) {
     const query = this.stamp();
     const { cellSize, offsets, entries, vertices, visit } = this;

@@ -252,3 +252,87 @@ test("a human teammate's spectator camera, ammunition, reload and scope replicat
     await Promise.all(contexts.map((context) => context.close()));
   }
 });
+
+test("Steam portraits sync across clients and reset to faction icons on sign-out", async ({
+  browser,
+}) => {
+  test.setTimeout(180000);
+  const contexts = await Promise.all([browser.newContext(), browser.newContext()]);
+  const [a, b] = await Promise.all(contexts.map((c) => c.newPage()));
+  const urls = ["a", "b"].map(
+    (c) => `https://avatars.fastly.steamstatic.com/${c.repeat(40)}_full.jpg`,
+  );
+  const room = `portraits-${Date.now()}`;
+  try {
+    for (const [i, page] of [a, b].entries()) {
+      await page.route("**/api/steam?*", (route) => {
+        const action = new URL(route.request().url()).searchParams.get("action");
+        if (action === "avatar")
+          return route.fulfill({
+            path: "packages/assets/public/icons/team-ct.png",
+            contentType: "image/png",
+          });
+        return route.fulfill({
+          json:
+            action === "session"
+              ? {
+                  profile: {
+                    steamId: `7656119952828562${i}`,
+                    name: `Portrait ${i}`,
+                    avatar: "/api/steam?action=avatar",
+                    publicAvatar: urls[i],
+                    profileUrl: "https://steamcommunity.com/",
+                  },
+                }
+              : { items: [], reportedTotal: 0, syncedAt: Date.now() },
+        });
+      });
+      await page.route("https://avatars.fastly.steamstatic.com/**", (route) =>
+        route.fulfill({
+          path: "packages/assets/public/icons/team-ct.png",
+          contentType: "image/png",
+        }),
+      );
+    }
+    await join(a, room, "ct");
+    await join(b, room, "t");
+    for (const [page, other] of [
+      [a, 1],
+      [b, 0],
+    ] as const) {
+      await focus(page);
+      await page.keyboard.down("Tab");
+      await expect(page.locator("#scoreboard")).toBeVisible();
+      const row = page
+        .locator(".score-row")
+        .filter({ has: page.locator(".score-player", { hasText: `Portrait ${other}` }) });
+      await expect(row.locator(".score-avatar img")).toHaveAttribute("src", urls[other]);
+      await expect
+        .poll(() =>
+          row
+            .locator(".score-avatar img")
+            .evaluate((img) => (img as HTMLImageElement).naturalWidth),
+        )
+        .toBeGreaterThan(0);
+      await page.screenshot({ path: `artifacts/multiplayer-avatar-${other}.png` });
+      await page.keyboard.up("Tab");
+    }
+    await a.evaluate(async () => {
+      const path = "/src/player-profile.ts";
+      const { setPlayerProfile } = await import(path);
+      setPlayerProfile(null);
+    });
+    await focus(b);
+    await b.keyboard.down("Tab");
+    const guest = b
+      .locator(".score-row")
+      .filter({ has: b.locator(".score-player", { hasText: /^PLAYER$/ }) });
+    await expect(guest.locator(".score-avatar img")).toHaveAttribute(
+      "src",
+      /\/icons\/team-ct.png$/,
+    );
+    await b.screenshot({ path: "artifacts/multiplayer-avatar-sync.png" });
+  } finally {
+    await Promise.all(contexts.map((c) => c.close()));
+  }
+});

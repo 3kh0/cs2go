@@ -34,3 +34,32 @@ test("rejects incompatible versions, malformed payloads and impossible inputs", 
   ).toBeNull();
   expect(parseClientMessage("{invalid")).toBeNull();
 });
+
+test("shared profile pictures accept only public Steam avatar resources", () => {
+  const configuration = {
+    skins: {},
+    agents: { ct: "default-ct", t: "default-t" },
+    loadouts: { ct: [], t: [] },
+    profile: {
+      name: "Steam Player",
+      avatar: `https://avatars.fastly.steamstatic.com/${"a".repeat(40)}_full.jpg`,
+    },
+  };
+  const parse = (avatar: unknown) =>
+    parseClientMessage(
+      JSON.stringify({
+        type: "configure",
+        configuration: { ...configuration, profile: { ...configuration.profile, avatar } },
+      }),
+    );
+  expect(parse(configuration.profile.avatar)).not.toBeNull();
+  expect(parse(null)).not.toBeNull();
+  for (const avatar of [
+    "/api/steam?action=avatar",
+    "javascript:alert(1)",
+    "https://evil.test/pfp.jpg",
+    configuration.profile.avatar + "?track=1",
+    "https://avatars.fastly.steamstatic.com.evil.test/abc.jpg",
+  ])
+    expect(parse(avatar)).toBeNull();
+});

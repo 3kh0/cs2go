@@ -105,6 +105,9 @@ test("verifies OpenID server-side, syncs all pages with exact properties, and si
   const session = await (await handle(request("session", cookie))).json();
   expect(session.profile.name).toBe("<Test Player>");
   expect(session.profile.avatar).toBe("/api/steam?action=avatar");
+  expect(session.profile.publicAvatar).toBe(
+    `https://avatars.fastly.steamstatic.com/${"a".repeat(40)}_full.jpg`,
+  );
   const response = await handle(request("sync", cookie, "POST"));
   const data = await response.json();
   expect(data.items).toHaveLength(2);

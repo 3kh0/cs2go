@@ -10,7 +10,7 @@ import { advanceWeaponAccuracy } from "./accuracy";
 import { selectedAgentId, acquireAgentAppearance } from "./agent-roster";
 import { setSoldierWeapon, disposeSoldier, resetSoldier, stepSoldierRagdoll } from "./soldier";
 import { showRoundBanner, hideRoundBanner } from "./round-banner";
-import { playerName } from "./player-profile";
+import { playerName, playerProfile } from "./player-profile";
 import { createWorldGun, disposeWorldGun, weaponDrawDuration } from "./weapons";
 import { grenadeData } from "./utility";
 import { nativeShotDuration } from "./weapon-motion";
@@ -60,14 +60,26 @@ export class MultiplayerMatch {
         document.getElementById("multiplayer-options")!.hidden = false;
       },
       {
+        profile: this.profileConfiguration(),
         skins: Object.fromEntries(skinChoices.map((skin, index) => [index, { ...skin }])),
         agents: { ct: selectedAgentId("ct"), t: selectedAgentId("t") },
         loadouts: privateGame.groundInventory.loadouts,
         knife: privateGame.knife,
       },
     );
-    for (const event of ["cs2go-skins-change", "cs2go-agent-selection", "cs2go-loadouts-change"])
+    for (const event of [
+      "cs2go-skins-change",
+      "cs2go-agent-selection",
+      "cs2go-loadouts-change",
+      "cs2go-profile-change",
+    ])
       window.addEventListener(event, this.configurationChanged);
+  }
+  private profileConfiguration() {
+    return {
+      name: (playerName() === "YOU" ? "PLAYER" : playerName()).slice(0, 24),
+      avatar: playerProfile()?.publicAvatar ?? null,
+    };
   }
   private configurationChanged = () => {
     if (this.connection.socket.readyState === WebSocket.OPEN)
@@ -75,6 +87,7 @@ export class MultiplayerMatch {
         JSON.stringify({
           type: "configure",
           configuration: {
+            profile: this.profileConfiguration(),
             skins: Object.fromEntries(skinChoices.map((skin, index) => [index, { ...skin }])),
             agents: { ct: selectedAgentId("ct"), t: selectedAgentId("t") },
             loadouts: this.game.groundInventory.loadouts,
@@ -86,7 +99,12 @@ export class MultiplayerMatch {
   disconnect() {
     if (this.closed) return;
     this.closed = true;
-    for (const event of ["cs2go-skins-change", "cs2go-agent-selection", "cs2go-loadouts-change"])
+    for (const event of [
+      "cs2go-skins-change",
+      "cs2go-agent-selection",
+      "cs2go-loadouts-change",
+      "cs2go-profile-change",
+    ])
       window.removeEventListener(event, this.configurationChanged);
     this.game.groundInventory.drops = [];
     this.connection.close();

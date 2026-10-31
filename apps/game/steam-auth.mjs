@@ -290,7 +290,13 @@ export function createSteamHandler({ secret, origin, fetcher = fetch, now = Date
         );
       if (action === "session") {
         const p = await profile(session.steamId);
-        return json({ profile: { ...p, avatar: p.avatar ? "/api/steam?action=avatar" : null } });
+        return json({
+          profile: {
+            ...p,
+            publicAvatar: p.avatar,
+            avatar: p.avatar ? "/api/steam?action=avatar" : null,
+          },
+        });
       }
       if (action === "sync") {
         const last = attempts.get(session.steamId) || 0;
