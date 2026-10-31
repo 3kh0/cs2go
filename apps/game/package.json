@@ -12,6 +12,8 @@
     "check": "oxlint --type-aware --type-check src tests vite.config.ts vitest.config.ts playwright.config.ts"
   },
   "dependencies": {
+    "@cs2go/protocol": "workspace:*",
+    "@cs2go/simulation": "workspace:*",
     "three": "^0.186.1"
   },
   "devDependencies": {

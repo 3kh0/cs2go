@@ -33,6 +33,7 @@ export function homeMenuMarkup() {
           <div class="mode-options"><button data-mode="casual" aria-pressed="true">CASUAL · 10v10</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE · 5v5</button></div>
           <div class="mode-description" id="mode-description">10 × 10 · Plant or defuse · First to 8</div>
           <button class="deploy" id="play" disabled><span>PLAY CASUAL</span><span class="arrow">›</span></button>
+          <a class="home-online-link" href="/online.html">PRIVATE MULTIPLAYER <span>›</span></a>
         </section>
         <button class="home-loadout-card" id="home-loadout"><span class="home-card-kicker">YOUR LOADOUT</span><span class="home-guns"><img src="/icons/buy/ak47.svg" alt=""><img src="/icons/buy/m4a1_silencer.svg" alt=""></span><strong>Ready for the next round</strong><small>Customize your buy slots <span>›</span></small></button>
         <button class="home-collection-card" id="home-collection"><span class="home-card-kicker">NEW &amp; POPULAR</span><img src="/icons/buy/awp.svg" alt=""><strong>Weapon finishes</strong><small>Explore your collection <span>›</span></small></button>

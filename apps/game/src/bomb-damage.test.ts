@@ -1,6 +1,4 @@
-// @ts-expect-error The Node test runner provides fs; browser source excludes Node typings.
 import { readFileSync } from "node:fs";
-// @ts-expect-error The Node test runner provides zlib; browser source excludes Node typings.
 import { gunzipSync } from "node:zlib";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { BakedBombDamage, loadBombDamage } from "./bomb-damage";

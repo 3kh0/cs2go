@@ -1,7 +1,5 @@
 import { beforeAll, expect, test, vi } from "vitest";
-// @ts-expect-error Node is provided by the test runner.
 import { readFile } from "node:fs/promises";
-// @ts-expect-error Node is provided by the test runner.
 import { Buffer } from "node:buffer";
 import * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";

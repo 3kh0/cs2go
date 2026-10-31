@@ -1,0 +1,16 @@
+{
+  "name": "@cs2go/protocol",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit && oxlint --type-aware --type-check src",
+    "test": "vitest run --passWithNoTests"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.3"
+  }
+}

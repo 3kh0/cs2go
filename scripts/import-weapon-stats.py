@@ -37,7 +37,7 @@ def main():
             weapon[key] = json.loads(fields.get(field, 'false' if key == 'reserveAsClips' else '0'))
         weapons.append(weapon)
     root = Path(__file__).resolve().parent.parent
-    out = root / 'apps/game/src/data/weapon-stats.json'
+    out = root / 'packages/simulation/src/data/weapon-stats.json'
     out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps({"source":BASE+source_path,"commit":COMMIT,"sha256":hashlib.sha256(source.encode()).hexdigest(),"weapons":weapons}, indent=2)+'\n')
     print(f"Extracted {len(weapons)} stable inventory entries to {out}")

@@ -1,4 +1,3 @@
-// @ts-expect-error The Node test runner provides fs; browser source intentionally excludes Node typings.
 import { readFile } from "node:fs/promises";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import * as T from "three";

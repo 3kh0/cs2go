@@ -1,4 +1,4 @@
-import stats from "./data/weapon-stats.json";
+import stats from "@cs2go/simulation/weapon-stats";
 export type MatchMode = "casual" | "competitive";
 export type Team = "ct" | "t";
 export type RoundReason = "elimination" | "bomb" | "defuse" | "timeout";

@@ -7,15 +7,24 @@
         "$TURBO_ROOT$/scripts/build-assets.mjs",
         "$TURBO_ROOT$/scripts/service-worker.js",
         "$TURBO_ROOT$/packages/assets/manifest.json",
-        "$TURBO_ROOT$/packages/assets/pipeline.mjs"
+        "$TURBO_ROOT$/packages/assets/pipeline.mjs",
+        "$TURBO_ROOT$/packages/protocol/src/**",
+        "$TURBO_ROOT$/packages/simulation/src/**"
       ],
       "outputs": ["dist/**"],
-      "env": ["ASSET_CDN_URL", "VERCEL"]
+      "env": ["ASSET_CDN_URL", "VERCEL", "VITE_MULTIPLAYER_URL"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "passThroughEnv": ["STEAM_ORIGIN", "STEAM_SESSION_SECRET"]
+      "passThroughEnv": [
+        "STEAM_ORIGIN",
+        "STEAM_SESSION_SECRET",
+        "PORT",
+        "ALLOWED_ORIGINS",
+        "ROOM_PASSWORD",
+        "VITE_MULTIPLAYER_URL"
+      ]
     },
     "preview": {
       "cache": false,

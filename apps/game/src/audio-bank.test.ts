@@ -1,5 +1,4 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
-// @ts-expect-error Node is provided by the test runner.
 import { readFileSync } from "node:fs";
 import { parseAudioPack } from "./audio-bank";
 

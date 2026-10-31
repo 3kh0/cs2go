@@ -1,7 +1,5 @@
 import { expect, it } from "vitest";
-// @ts-expect-error Node is provided by the test runner.
 import { readFileSync } from "node:fs";
-// @ts-expect-error Node is provided by the test runner.
 import { runInNewContext } from "node:vm";
 
 it.each(["", "https://cdn.test/releases/abc"])(

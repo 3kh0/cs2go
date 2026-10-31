@@ -1,4 +1,4 @@
-import stats from "./data/weapon-stats.json";
+import stats from "@cs2go/simulation/weapon-stats";
 // Current shipped CS2 weapons.vdata, pinned provenance in the imported snapshot.
 export const SOURCE_UNITS_PER_METER = 1 / 0.0254;
 export const ballistics = stats.weapons.map(({ damage, power, range, modifier }, index) =>

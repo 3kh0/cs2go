@@ -1,0 +1,22 @@
+# Allowlist: never send the multi-GB art tree, credentials, or local artifacts.
+**
+!package.json
+!bun.lock
+!bunfig.toml
+!apps/
+!apps/game/
+!apps/game/package.json
+!apps/server/
+!apps/server/**
+!packages/
+!packages/assets/
+!packages/assets/package.json
+!packages/protocol/
+!packages/protocol/**
+!packages/simulation/
+!packages/simulation/**
+**/node_modules
+**/dist
+**/.env*
+**/*.local
+**/.turbo

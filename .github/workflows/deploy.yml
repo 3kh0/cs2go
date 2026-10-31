@@ -71,6 +71,7 @@ jobs:
       VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       ASSET_CDN_URL: ${{ vars.ASSET_CDN_URL }}
+      MULTIPLAYER_URL: ${{ vars.MULTIPLAYER_URL }}
     steps:
       # Code-only deployments never check out the 3.1 GB public tree.
       - uses: actions/checkout@v4
@@ -83,6 +84,8 @@ jobs:
             /bun.lock
             /bunfig.toml
             /turbo.json
+            /packages/protocol/
+            /packages/simulation/
             /packages/assets/package.json
             /packages/assets/manifest.json
             /packages/assets/pipeline.mjs
@@ -101,5 +104,9 @@ jobs:
           key: turbo-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-${{ runner.os }}-
       - run: bunx --bun vercel@65.8.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
-      - run: bunx --bun vercel@65.8.0 build --prod --token="$VERCEL_TOKEN"
+      - run: |
+          if [ -n "$MULTIPLAYER_URL" ]; then
+            export VITE_MULTIPLAYER_URL="$MULTIPLAYER_URL"
+          fi
+          bunx --bun vercel@65.8.0 build --prod --token="$VERCEL_TOKEN"
       - run: bunx --bun vercel@65.8.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"

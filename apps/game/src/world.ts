@@ -1,4 +1,5 @@
 import * as T from "three";
+import { yardBoxes } from "@cs2go/simulation/yard";
 import type { MapCollision } from "./map-collision";
 import type { Navigation } from "./navigation";
 import type { Wall } from "./physics";
@@ -85,23 +86,9 @@ export function createWorld(scene: T.Scene) {
     false,
   );
   solids.push(floor);
-  box(-22, 0, 0, 2, 7, 46, sand);
-  box(22, 0, 0, 2, 7, 46, sand);
-  box(0, 0, -22, 46, 7, 2, sand);
-  box(0, 0, 22, 46, 7, 2, sand);
-  // Three connected lanes, open courtyard, and a covered passage.
-  box(-9, 0, -3, 8, 6, 13, plaster);
-  box(8, 0, 8, 9, 6, 10, sand);
-  box(8, 0, -14, 9, 6, 5, plaster);
-  box(-9, 0, 14, 8, 5, 4, sand);
-  box(-17, 3, -8, 7, 0.6, 4, sand);
-  box(-17, 0, -8, 0.7, 3, 4, sand);
-  box(1, 0, -5, 3, 2.5, 3, wood);
-  box(-1, 0, 4, 3, 2.5, 3, wood);
-  box(15, 0, -3, 3, 2.5, 3, wood);
-  box(-15, 0, 6, 3, 2, 3, wood);
-  box(1, 2.5, -5, 2.6, 2.2, 2.6, wood);
-  box(15, 2.5, -3, 2.6, 2.2, 2.6, wood);
+  const yardMaterials = { sand, plaster, wood };
+  for (const [x, y, z, w, h, d, material] of yardBoxes)
+    box(x, y, z, w, h, d, yardMaterials[material]);
   // Crate reinforcing strips.
   for (const b of [...walls].filter((b) => b.h < 5 && b.w === 3)) {
     for (const offset of [-1.3, 1.3]) {

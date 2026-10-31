@@ -1,0 +1,23 @@
+{
+  "name": "@cs2go/simulation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./physics": "./src/physics.ts",
+    "./weapon-stats": "./src/data/weapon-stats.json",
+    "./yard": "./src/yard.ts",
+    "./movement": "./src/movement.ts",
+    "./match": "./src/match.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit && oxlint --type-aware --type-check src",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@cs2go/protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.3"
+  }
+}

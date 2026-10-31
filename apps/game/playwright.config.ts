@@ -9,9 +9,17 @@ export default defineConfig({
     viewport: { width: 1440, height: 900 },
     channel: "chromium",
   },
-  webServer: {
-    command: "bun run dev --host 127.0.0.1",
-    url: "http://127.0.0.1:5173",
-    reuseExistingServer: true,
-  },
+  webServer: [
+    {
+      command: "bun run dev --host 127.0.0.1",
+      url: "http://127.0.0.1:5173",
+      reuseExistingServer: true,
+    },
+    {
+      command: "bun run --cwd ../server start",
+      url: "http://127.0.0.1:3002/healthz",
+      env: { PORT: "3002", ALLOWED_ORIGINS: "http://127.0.0.1:5173,http://127.0.0.1:5183" },
+      reuseExistingServer: false,
+    },
+  ],
 });

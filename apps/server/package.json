@@ -1,0 +1,21 @@
+{
+  "name": "@cs2go/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "build": "tsc --noEmit && bun build src/index.ts --target=bun --outdir=dist",
+    "check": "tsc --noEmit && oxlint --type-aware --type-check src tests",
+    "test": "bun tests/server.integration.ts"
+  },
+  "dependencies": {
+    "@cs2go/protocol": "workspace:*",
+    "@cs2go/simulation": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "typescript": "~6.0.3"
+  }
+}

@@ -1,5 +1,4 @@
 import { expect, it, vi } from "vitest";
-// @ts-expect-error Node is provided by the test runner.
 import { readFileSync } from "node:fs";
 import * as T from "three";
 import { loadNativeWeapons, nativeSoundCues } from "./weapon-motion";

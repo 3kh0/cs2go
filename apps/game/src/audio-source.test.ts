@@ -1,7 +1,5 @@
 import { expect, it } from "vitest";
-// @ts-expect-error Node is provided by the test runner.
 import { readFileSync } from "node:fs";
-// @ts-expect-error Node is provided by the test runner.
 import { createHash } from "node:crypto";
 import bindings from "../../../scripts/cs2-weapon-audio.json";
 
