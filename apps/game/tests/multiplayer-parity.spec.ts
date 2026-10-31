@@ -336,3 +336,71 @@ test("Steam portraits sync across clients and reset to faction icons on sign-out
     await Promise.all(contexts.map((c) => c.close()));
   }
 });
+
+test("nearby opponents hear reload markers and stationary recoil does not accumulate", async ({
+  browser,
+  request,
+}) => {
+  test.setTimeout(180000);
+  const contexts = await Promise.all([browser.newContext(), browser.newContext()]);
+  const [a, b] = await Promise.all(contexts.map((c) => c.newPage()));
+  const room = `reload-audio-${Date.now()}`;
+  try {
+    await join(a, room, "ct");
+    await join(b, room, "t");
+    await command(request, room, "duel");
+    await b.evaluate(() => {
+      const g = window.__game,
+        play = g.weaponAudio.play.bind(g.weaponAudio);
+      g.scene.userData.remoteReload = [];
+      g.weaponAudio.play = (...args) => {
+        if (args[6] && ["reload", "reloadIn", "bolt", "boltForward"].includes(args[1]))
+          g.scene.userData.remoteReload.push(args[1]);
+        play(...args);
+      };
+    });
+    await command(request, room, "observer-reload");
+    await focus(a);
+    await a.keyboard.press("KeyR");
+    await a.waitForFunction(() => window.__game.reload > 0);
+    await b.bringToFront();
+    await expect
+      .poll(() => b.evaluate(() => window.__game.scene.userData.remoteReload), { timeout: 10000 })
+      .toContain("reloadIn");
+    const pose = await b.evaluate(async () => {
+      const path = "/src/soldier.ts";
+      const { animateSoldier } = await import(path);
+      const rig = window.__game.bots[0].rig;
+      rig.moveX = rig.moveZ = rig.crouch = 0;
+      rig.airborne = false;
+      rig.recoil = rig.shotTime = rig.drawTime = 0;
+      animateSoldier(rig, 0, 1 / 128, true);
+      const base = rig.spine.quaternion.clone();
+      let maxAngle = 0;
+      for (let i = 0; i < 2400; i++) {
+        if (i % 16 === 0) {
+          rig.recoil = 1;
+          rig.shotTime = 0.25;
+        }
+        animateSoldier(rig, 0, 1 / 128, true);
+        maxAngle = Math.max(maxAngle, base.angleTo(rig.spine.quaternion));
+      }
+      rig.shotTime = 0;
+      for (let i = 0; i < 256; i++) animateSoldier(rig, 0, 1 / 128, true);
+      return { maxAngle, restAngle: base.angleTo(rig.spine.quaternion) };
+    });
+    expect(pose.maxAngle).toBeLessThan(0.5);
+    expect(pose.restAngle).toBeLessThan(0.03);
+    await b.evaluate(() => {
+      const g = window.__game,
+        peer = g.bots[0].group.position;
+      g.yaw = Math.atan2(g.position.x - peer.x, g.position.z - peer.z);
+      g.pitch = -0.1;
+      g.updateAimCamera();
+    });
+    await b.waitForTimeout(100);
+    await b.screenshot({ path: "artifacts/multiplayer-recoil-recovered.png" });
+  } finally {
+    await Promise.all(contexts.map((c) => c.close()));
+  }
+});

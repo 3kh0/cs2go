@@ -187,9 +187,9 @@ test("suppressed USP shots fade out nearby and cannot leak across Dust II or thr
     const { renderWeaponRange } = await import(path);
     return {
       near: await renderWeaponRange(3, true, false),
-      edge: await renderWeaponRange(25, true, false),
+      edge: await renderWeaponRange(35.5, true, false),
       distant: await renderWeaponRange(70, true, false),
-      loud: await renderWeaponRange(70, false, false),
+      loud: await renderWeaponRange(50, false, false),
       blocked: await renderWeaponRange(3, true, true),
     };
   });

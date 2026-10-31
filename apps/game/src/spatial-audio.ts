@@ -1,10 +1,28 @@
 import { Vector3, type Camera } from "three";
 import { NativeAcoustics, roomImpulse } from "./room-acoustics";
 
-export type SoundRange = { refDistance: number; maxDistance: number };
+export type SoundRange = {
+  refDistance: number;
+  maxDistance: number;
+  curve?: readonly (readonly [number, number])[];
+  occlusion?: number;
+};
 // An inverse panner clamps attenuation at maxDistance; this envelope fades to
 // actual silence instead of leaving distant voices at a constant audible gain.
 export function audibleGain(distance: number, range: SoundRange) {
+  if (range.curve) {
+    if (distance >= range.maxDistance) return 0;
+    const points = range.curve;
+    if (distance <= points[0][0]) return points[0][1];
+    for (let i = 1; i < points.length; i++) {
+      const [x, y] = points[i],
+        [previousX, previousY] = points[i - 1];
+      if (distance <= x)
+        return previousY + ((y - previousY) * (distance - previousX)) / (x - previousX);
+    }
+    return 0;
+  }
+
   const t = Math.max(0, (distance - range.refDistance) / (range.maxDistance - range.refDistance));
   return Math.max(0, 1 - t * t) ** 2;
 }
@@ -190,7 +208,7 @@ export class SpatialAudio {
         : { refDistance: loud ? 5 : 1.5, maxDistance: loud ? 150 : 35 };
     panner.refDistance = range.refDistance;
     panner.maxDistance = range.maxDistance;
-    panner.rolloffFactor = 1;
+    panner.rolloffFactor = range.curve ? 0 : 1;
     panner.positionX.value = position.x;
     panner.positionY.value = position.y;
     panner.positionZ.value = position.z;

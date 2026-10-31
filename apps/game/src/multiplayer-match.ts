@@ -1,5 +1,11 @@
 import * as T from "three";
-import { neutralInput, type Input, type MatchMode, type ServerMessage } from "@cs2go/protocol";
+import {
+  neutralInput,
+  type Input,
+  type MatchMode,
+  type ServerMessage,
+  type PlayerState,
+} from "@cs2go/protocol";
 import { MatchConnection } from "./multiplayer-connection";
 import type { Game } from "./game";
 import { weapons, movement, isKnife } from "./physics";
@@ -13,7 +19,9 @@ import { showRoundBanner, hideRoundBanner } from "./round-banner";
 import { playerName, playerProfile } from "./player-profile";
 import { createWorldGun, disposeWorldGun, weaponDrawDuration } from "./weapons";
 import { grenadeData } from "./utility";
-import { nativeShotDuration } from "./weapon-motion";
+import { nativeShotDuration, nativeSoundCues, nativeReloadPhases } from "./weapon-motion";
+
+import { reloadProgress as remoteReloadProgress } from "@cs2go/simulation/weapon-actions";
 
 type Bot = Game["bots"][number];
 export class MultiplayerMatch {
@@ -33,6 +41,54 @@ export class MultiplayerMatch {
   private finished = false;
   private stepDistance = 0;
   private spectatingView = false;
+  private reloadSounds = new Map<
+    string,
+    { weapon: number; spawn: number; time: number; phase: string; progress: number }
+  >();
+  private playRemoteReload(player: PlayerState) {
+    const previous = this.reloadSounds.get(player.id);
+    const progress = remoteReloadProgress(player, { shell: player.reloadPhase });
+    const same = previous?.weapon === player.weapon && previous.spawn === player.spawn;
+    const emit = (before: number, after: number) => {
+      const variant = nativeSoundCues(
+        player.weapon,
+        player.reloadEmpty ? "reload_empty" : "reload",
+      );
+      const cues = variant.length ? variant : nativeSoundCues(player.weapon, "reload");
+      for (const cue of cues)
+        if (before < cue.time && cue.time <= after && this.game.audio)
+          this.game.weaponAudio.play(
+            this.game.audio,
+            cue.kind,
+            player.weapon,
+            100,
+            0,
+            0,
+            new T.Vector3(player.x, player.y + player.eye * 0.65, player.z),
+            player.suppressed,
+          );
+    };
+    if (player.health > 0 && player.reloadTime > 0) {
+      if (!same || !previous.time) emit(-Number.EPSILON, progress);
+      else if (progress >= previous.progress) emit(previous.progress, progress);
+      else {
+        const phases = nativeReloadPhases(player.weapon);
+        if (phases) {
+          emit(previous.progress, previous.phase === "intro" ? phases.introEnd : phases.loopEnd);
+          emit(phases.introEnd - Number.EPSILON, progress);
+        }
+      }
+    } else if (same && player.health > 0 && previous.time > 0 && previous.time < 0.08)
+      emit(previous.progress, 1);
+    this.reloadSounds.set(player.id, {
+      weapon: player.weapon,
+      spawn: player.spawn,
+      time: player.reloadTime,
+      phase: player.reloadPhase,
+      progress,
+    });
+  }
+
   constructor(privateGame: Game, url: string, room: string, password: string, mode: MatchMode) {
     this.game = privateGame;
     const world = privateGame.dust!;
@@ -109,6 +165,7 @@ export class MultiplayerMatch {
     this.game.groundInventory.drops = [];
     this.connection.close();
     this.peers.clear();
+    this.reloadSounds.clear();
     for (const mesh of this.drops.values()) disposeWorldGun(mesh);
     this.drops.clear();
   }
@@ -168,6 +225,7 @@ export class MultiplayerMatch {
         this.peers.delete(id);
         this.peerSpawns.delete(id);
         this.peerAgents.delete(id);
+        this.reloadSounds.delete(id);
       }
     for (const player of message.players)
       if (player.id !== local.id) {
@@ -225,6 +283,7 @@ export class MultiplayerMatch {
         bot.recoilWeapon = player.weapon;
         bot.ammo = player.ammo;
         bot.reserve = player.reserve;
+        this.playRemoteReload(player);
         bot.reloadTime = player.reloadTime;
         bot.respawn = player.health > 0 ? 0 : Infinity;
         if (

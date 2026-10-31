@@ -1,3 +1,4 @@
+import soundRanges from "./data/sound-ranges.json";
 import { loadAudioClip } from "./audio-bank";
 import type { Vector3 } from "three";
 import type { SpatialAudio, SoundRange } from "./spatial-audio";
@@ -300,12 +301,23 @@ const kits = [
     draw: "negev_draw",
   },
 ];
-/** Browser mix tuning in meters; these are not extracted Source 2 attenuation curves. */
+const ranges = soundRanges.clips as Record<
+  string,
+  { volume: number; occlusion: number; curve: number[][] }
+>;
+export function clipSoundRange(name: string): SoundRange {
+  const event = ranges[name];
+  if (!event) return { refDistance: 1.5, maxDistance: 35 };
+  const curve = event.curve.map(([x, y]) => [x * 0.0254, y] as const);
+  return { refDistance: 1, maxDistance: curve.at(-1)![0], curve, occlusion: event.occlusion };
+}
+function shotClip(weapon: number, suppressed: boolean) {
+  return !suppressed && (weapon === 1 || weapon === 2)
+    ? `suppressor-${weapon}-single`
+    : (kits[weapon]?.shot ?? "");
+}
 export function weaponSoundRange(weapon: number, suppressed: boolean): SoundRange {
-  if (weapon === 2 && suppressed) return { refDistance: 1.5, maxDistance: 26 };
-  if ((weapon === 1 && suppressed) || kits[weapon]?.shot === "mp5_01")
-    return { refDistance: 2, maxDistance: 45 };
-  return { refDistance: 5, maxDistance: 150 };
+  return clipSoundRange(shotClip(weapon, suppressed));
 }
 export class WeaponAudio {
   buffers = new Map<string, AudioBuffer>();
@@ -348,13 +360,6 @@ export class WeaponAudio {
     position?: Vector3,
     suppressed = true,
   ) {
-    const range = weaponSoundRange(weapon, suppressed);
-    if (
-      position &&
-      this.spatial &&
-      position.distanceToSquared(this.spatial.position) >= range.maxDistance ** 2
-    )
-      return;
     const name = kind.startsWith("silencerscrew")
       ? `suppressor-${weapon}-${kind}`
       : !suppressed && (weapon === 1 || weapon === 2) && (kind === "shot" || kind === "bot")
@@ -376,6 +381,13 @@ export class WeaponAudio {
                   | "draw"
               ];
     if (!name) return;
+    const range = clipSoundRange(name);
+    if (
+      position &&
+      this.spatial &&
+      position.distanceToSquared(this.spatial.position) >= range.maxDistance ** 2
+    )
+      return;
     const buffer = this.buffers.get(name);
     if (!buffer || !volume) return;
     if (this.voices.size >= 32) {
@@ -391,6 +403,7 @@ export class WeaponAudio {
     source.buffer = buffer;
     gain.gain.value =
       (volume / 100) *
+      (position ? (ranges[name]?.volume ?? 1) : 1) *
       (kind === "shot"
         ? 0.65
         : kind === "bot"
