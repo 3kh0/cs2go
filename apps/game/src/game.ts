@@ -532,6 +532,7 @@ export class Game {
   fpsTime = 0;
   tick = 0;
   toastTime = 0;
+  deathBannerUntil = 0;
   sway = 0;
   footsteps = 0;
   supported = true;
@@ -2361,6 +2362,7 @@ export class Game {
       toggle("death-weapon-icon", true);
       (el("death-weapon-icon") as HTMLImageElement).src = assetUrl(weaponIcon);
       toggle("death-banner", true);
+      this.deathBannerUntil = performance.now() + 3000;
     }
     const container = el("killfeed");
     // Rows only shift when the oldest is trimmed; measure layout just then.
@@ -5005,6 +5007,10 @@ export class Game {
     this.updateTextureQuality();
     const dt = Math.min((now - this.last) / 1000, 0.05);
     this.last = now;
+    if (this.deathBannerUntil > 0 && now >= this.deathBannerUntil) {
+      this.deathBannerUntil = 0;
+      toggle("death-banner", false);
+    }
     this.fpsTime += dt;
     if (this.fpsTime > 1) {
       this.fps = Math.round(this.frames / this.fpsTime);

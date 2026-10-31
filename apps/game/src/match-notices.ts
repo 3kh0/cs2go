@@ -2,7 +2,7 @@ import { assetUrl } from "./asset-url";
 import "./match-notices.css";
 
 export function matchNoticesMarkup() {
-  return `<div id="bomb-action" class="hidden" role="progressbar" aria-label="Bomb action" aria-valuemin="0" aria-valuemax="100"><i class="bomb-action-side"></i><div class="bomb-action-circle"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="bomb-action-track" cx="50" cy="50" r="45"></circle><circle class="bomb-action-ring" cx="50" cy="50" r="45"></circle></svg><img id="bomb-action-icon" src="/icons/buy/defuser.svg" alt=""></div><div class="bomb-action-info"><strong id="bomb-action-label"></strong><span id="bomb-action-time" aria-hidden="true"></span></div><i class="bomb-action-side"></i></div><div id="hud-alert" class="hidden" role="status"><span id="hud-alert-text"></span><small id="hud-alert-detail"></small></div>`;
+  return `<div id="match-waiting" class="hidden" role="status">Waiting for players</div><div id="bomb-action" class="hidden" role="progressbar" aria-label="Bomb action" aria-valuemin="0" aria-valuemax="100"><i class="bomb-action-side"></i><div class="bomb-action-circle"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="bomb-action-track" cx="50" cy="50" r="45"></circle><circle class="bomb-action-ring" cx="50" cy="50" r="45"></circle></svg><img id="bomb-action-icon" src="/icons/buy/defuser.svg" alt=""></div><div class="bomb-action-info"><strong id="bomb-action-label"></strong><span id="bomb-action-time" aria-hidden="true"></span></div><i class="bomb-action-side"></i></div><div id="hud-alert" class="hidden" role="status"><span id="hud-alert-text"></span><small id="hud-alert-detail"></small></div>`;
 }
 type Action = { kind: "plant" | "defuse"; elapsed: number; duration: number; kit: boolean };
 export class MatchNotices {
@@ -14,6 +14,9 @@ export class MatchNotices {
   private label = document.getElementById("bomb-action-label")!;
   private countdown = document.getElementById("bomb-action-time")!;
   private icon = document.getElementById("bomb-action-icon") as HTMLImageElement;
+  setWaiting(waiting: boolean) {
+    document.getElementById("match-waiting")!.classList.toggle("hidden", !waiting);
+  }
   updateAction(action?: Action) {
     if (!action) {
       if (this.action) {
@@ -84,6 +87,7 @@ export class MatchNotices {
     if (this.alertTime > 0 && (this.alertTime -= dt) <= 0) this.clearAlert();
   }
   reset() {
+    this.setWaiting(false);
     this.action = undefined;
     this.actionTime = 0;
     this.progress.classList.add("hidden");

@@ -20,6 +20,20 @@ const control = Bun.serve({
       room.state.phase = "live";
       room.state.remaining = 100;
     }
+    if (command.op === "kill-ct") {
+      const victim = [...room.players.values()].find((p) => p.team === "ct")!;
+      const killer = [...room.players.values()].find((p) => p.team === "t")!;
+      victim.health = 0;
+      victim.deaths++;
+      killer.kills++;
+      room.events.push({
+        kind: "kill",
+        killer: killer.id,
+        victim: victim.id,
+        headshot: false,
+        weapon: killer.weapon,
+      });
+    }
     if (command.op === "timeout") {
       room.state.phase = "live";
       room.state.remaining = 0.001;

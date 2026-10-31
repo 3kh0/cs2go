@@ -158,3 +158,24 @@ test("holstering preserves shot/reload lockouts and empty teams cannot farm roun
   expect(match.state.phase).toBe("waiting");
   expect(match.state.scores.ct).toBe(score);
 });
+
+test("waiting players can move without spending ammo or starting a round", () => {
+  const match = createMatch("casual", testMap());
+  const ct = createPlayer("ct", "CT", "ct");
+  joinMatch(match, ct);
+  const predicted = structuredClone(ct);
+  const input = { ...neutralInput(), forward: 1, jump: true, fire: true };
+  const start = ct.z;
+  for (let i = 0; i < 64; i++) {
+    movePlayer(predicted, input, STEP, match.map);
+    expect(stepMatch(match, new Map([[ct.id, input]]))).toEqual([]);
+  }
+  expect(ct.z).toBeLessThan(start);
+  expect(ct).toEqual(predicted);
+  expect(ct.ammo).toBe(12);
+  expect(match.state.phase).toBe("waiting");
+  expect(match.state.elapsed).toBe(0);
+  joinMatch(match, createPlayer("t", "T", "t"));
+  stepMatch(match, new Map());
+  expect(match.state.phase).toBe("freeze");
+});

@@ -77,7 +77,11 @@ export class MatchConnection {
           this.pending = changedSpawn ? [] : this.pending.filter((input) => input.seq > state.ack);
           this.local = { ...state };
           // Never replay movement across death or a respawn boundary.
-          if (!changedSpawn && state.health > 0 && ["live", "post"].includes(message.round.phase))
+          if (
+            !changedSpawn &&
+            state.health > 0 &&
+            ["waiting", "live", "post"].includes(message.round.phase)
+          )
             for (const input of this.pending) movePlayer(this.local, input, STEP, this.map);
         }
       } else if (message.type === "pong") this.ping = Math.round(performance.now() - message.time);
@@ -102,7 +106,7 @@ export class MatchConnection {
     const frame: Input = { ...input, seq: ++this.seq };
     this.pending.push(frame);
     this.batch.push(frame);
-    if (this.round && ["live", "post"].includes(this.round.phase))
+    if (this.round && ["waiting", "live", "post"].includes(this.round.phase))
       movePlayer(this.local, frame, STEP, this.map);
     if (this.pending.length > MAX_PENDING_INPUTS || this.socket.bufferedAmount > 64 * 1024) {
       this.close("Connection is too far behind. Rejoin to resynchronize.");

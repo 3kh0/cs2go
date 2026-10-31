@@ -5,7 +5,7 @@ import type { Game } from "./game";
 import { weapons, movement } from "./physics";
 import { createWeaponInstance } from "./weapon-instance";
 import { bindWeaponInstance } from "./skins";
-import { setSoldierWeapon, disposeSoldier } from "./soldier";
+import { setSoldierWeapon, disposeSoldier, resetSoldier, stepSoldierRagdoll } from "./soldier";
 import { showRoundBanner, hideRoundBanner } from "./round-banner";
 import { playerName } from "./player-profile";
 
@@ -15,6 +15,7 @@ export class MultiplayerMatch {
   request = neutralInput();
   applying = false;
   private peers = new Map<string, Bot>();
+  private peerSpawns = new Map<string, number>();
   private lastSpawn = 0;
   private resultRound = 0;
   private closed = false;
@@ -91,6 +92,7 @@ export class MultiplayerMatch {
         g.scene.remove(bot.group);
         disposeSoldier(bot.rig);
         this.peers.delete(id);
+        this.peerSpawns.delete(id);
       }
     for (const player of message.players)
       if (player.id !== local.id) {
@@ -98,6 +100,17 @@ export class MultiplayerMatch {
         if (!bot) {
           bot = g.makeBot(this.peers.size, player.team);
           this.peers.set(player.id, bot);
+        }
+        const previousSpawn = this.peerSpawns.get(player.id);
+        if (previousSpawn !== player.spawn) {
+          resetSoldier(bot.rig);
+          bot.group.visible = player.health > 0;
+          this.peerSpawns.set(player.id, player.spawn);
+        } else if (bot.health > 0 && player.health <= 0) {
+          // Capture the final authoritative pose once; the corpse then owns its transform.
+          bot.group.position.set(player.x, player.y, player.z);
+          bot.group.rotation.y = player.yaw + Math.PI;
+          bot.group.visible = true;
         }
         bot.name = player.name;
         bot.health = player.health;
@@ -144,6 +157,8 @@ export class MultiplayerMatch {
       g.setScope(0);
       g.spectated = undefined;
       g.notices.reset();
+      g.deathBannerUntil = 0;
+      document.getElementById("death-banner")!.classList.add("hidden");
       g.groundInventory.reset(false);
       hideRoundBanner();
     }
@@ -233,10 +248,8 @@ export class MultiplayerMatch {
       g.roundHistory.push({ winner: state.result.winner, reason: state.result.reason });
       g.soundscape.playMusic(state.result.winner === g.team ? "win" : "lose");
     }
-    if (state.phase === "waiting") {
-      hideRoundBanner();
-      g.toast("Waiting for players on both teams", 1);
-    }
+    g.notices.setWaiting(state.phase === "waiting");
+    if (state.phase === "waiting") hideRoundBanner();
     if (state.phase === "finished" && !this.finished) {
       this.finished = true;
       g.finish();
@@ -283,6 +296,13 @@ export class MultiplayerMatch {
     g.animationTime += dt;
     g.sway += Math.hypot(local.vx, local.vz) * dt * 1.8;
     for (const [id, bot] of this.peers) {
+      if (bot.health <= 0) {
+        if (bot.group.visible) {
+          stepSoldierRagdoll(bot.rig, bot.vertical, dt, g.world);
+          bot.anim += dt;
+        }
+        continue;
+      }
       const history = this.connection.history,
         target = performance.now() - 100;
       let before = history[0],
@@ -306,7 +326,8 @@ export class MultiplayerMatch {
         T.MathUtils.lerp(a.z, b.z, t),
       );
       bot.group.rotation.y = b.yaw + Math.PI;
-      bot.group.visible = b.health > 0;
+      bot.group.visible = true;
+      bot.vertical = b.vertical;
       bot.velocity.set(b.vx, b.vz);
       bot.speed = Math.hypot(b.vx, b.vz);
       bot.anim += dt;

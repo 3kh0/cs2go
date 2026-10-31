@@ -1,4 +1,5 @@
 import { expect, test, type Page, type APIRequestContext } from "@playwright/test";
+import { writeFileSync } from "node:fs";
 async function join(page: Page, room: string, team: "ct" | "t") {
   await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=${room}`);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100000 });
@@ -28,7 +29,33 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
   for (const page of [a, b]) page.on("pageerror", (e) => errors.push(e.message));
   try {
     await join(a, room, "ct");
+    await expect(a.locator("#match-waiting")).toBeVisible();
+    const waiting = await a.locator("#match-waiting").boundingBox();
+    const actionPosition = await a.locator("#bomb-action").evaluate((node) => {
+      const element = node as HTMLElement;
+      element.style.visibility = "hidden";
+      element.classList.remove("hidden");
+      const rect = element.getBoundingClientRect();
+      element.classList.add("hidden");
+      element.style.removeProperty("visibility");
+      return { top: rect.y, left: rect.x + rect.width / 2 };
+    });
+    expect(waiting!.y).toBeCloseTo(actionPosition.top, 0);
+    expect(waiting!.x + waiting!.width / 2).toBeCloseTo(actionPosition.left, 0);
+    await a.bringToFront();
+    if (!(await a.evaluate(() => window.__game.locked))) await a.locator("#game").click();
+    const waitingStart = await a.evaluate(() => window.__game.network!.connection.local!.z);
+    await a.keyboard.down("KeyW");
+    await a.waitForTimeout(500);
+    await a.keyboard.up("KeyW");
+    await expect
+      .poll(() =>
+        a.evaluate((z) => Math.abs(window.__game.network!.connection.local!.z - z), waitingStart),
+      )
+      .toBeGreaterThan(0.1);
+    await a.screenshot({ path: "artifacts/dust2-waiting.png" });
     await join(b, room, "t");
+    await expect(a.locator("#match-waiting")).toBeHidden();
     await a.waitForFunction(() => window.__game.network?.connection.round?.phase === "freeze");
     expect(await a.evaluate(() => window.__game.world === window.__game.dust)).toBe(true);
     expect(await a.evaluate(() => "range" in window.__game)).toBe(false);
@@ -119,6 +146,45 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     await expect(a.locator("#round-mvp-reason")).toContainText("defusing");
     await a.waitForTimeout(400);
     await a.screenshot({ path: "artifacts/dust2-multiplayer-round.png" });
+    await command(request, room, "reset");
+    await a.waitForFunction(() => window.__game.round === 3);
+    await command(request, room, "live");
+    await command(request, room, "kill-ct");
+    await expect(a.locator("#death-banner")).toBeVisible();
+    await b.waitForFunction(() =>
+      window.__game.bots.some((bot) => bot.health <= 0 && bot.group.visible && !!bot.rig.ragdoll),
+    );
+    const corpseStart = await b.evaluate(
+      () => window.__game.bots[0].rig.ragdoll!.points[0].position.y,
+    );
+    await b.waitForTimeout(750);
+    expect(
+      await b.evaluate(() => window.__game.bots[0].rig.ragdoll!.points[0].position.y),
+    ).toBeLessThan(corpseStart);
+    const corpseImage = await b.evaluate(() => {
+      const g = window.__game;
+      const center = g.bots[0].rig.ragdoll!.points[0].position;
+      const oldPosition = g.camera.position.clone(),
+        oldRotation = g.camera.quaternion.clone();
+      g.camera.position.set(center.x + 1.5, center.y + 2.5, center.z + 2.5);
+      g.camera.lookAt(center);
+      g.camera.updateMatrixWorld();
+      g.renderer.render(g.scene, g.camera);
+      const image = g.renderer.domElement.toDataURL("image/png");
+      g.camera.position.copy(oldPosition);
+      g.camera.quaternion.copy(oldRotation);
+      return image;
+    });
+    writeFileSync(
+      "artifacts/dust2-multiplayer-ragdoll.png",
+      Buffer.from(corpseImage.split(",")[1], "base64"),
+    );
+    await expect(a.locator("#death-banner")).toBeHidden({ timeout: 3300 });
+    await expect.poll(() => a.evaluate(() => window.__game.health)).toBe(0);
+    await command(request, room, "reset");
+    await b.waitForFunction(
+      () => window.__game.bots[0]?.health > 0 && !window.__game.bots[0]?.rig.ragdoll,
+    );
     await a.evaluate(() => window.__game.menu());
     await expect(a.locator("#menu")).toBeVisible();
     await a.locator('[data-session="single"]').click();

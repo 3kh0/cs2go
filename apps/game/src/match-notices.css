@@ -1,7 +1,8 @@
 #hud {
   --notice-unit: min(1px, 0.092593vh);
 }
-#bomb-action {
+#bomb-action,
+#match-waiting {
   position: absolute;
   top: calc(100% - 450 * var(--notice-unit));
   left: 50%;
@@ -16,6 +17,14 @@
   backdrop-filter: blur(2px);
   color: white;
   pointer-events: none;
+}
+#match-waiting {
+  justify-content: center;
+  height: auto;
+  min-height: calc(70 * var(--notice-unit));
+  border-inline: calc(2 * var(--notice-unit)) solid #fff9;
+  font-size: calc(22 * var(--notice-unit));
+  text-align: center;
 }
 .bomb-action-side {
   position: absolute;
@@ -140,6 +149,7 @@
 body:has(#scoreboard:not(.hidden)) #round-banner {
   opacity: 0;
 }
+body:has(#scoreboard:not(.hidden)) #match-waiting,
 body:has(#scoreboard:not(.hidden)) #bomb-action,
 body:has(#scoreboard:not(.hidden)) #hud-alert,
 body:has(#loadout:not(.hidden)) #hud-alert {

@@ -471,6 +471,14 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
       [...match.players.values()].some((p) => p.team === "t")
     )
       startRound(match);
+    else
+      for (const player of match.players.values())
+        movePlayer(
+          player,
+          inputs.get(player.id) ?? { ...neutralInput(), yaw: player.yaw, pitch: player.pitch },
+          STEP,
+          match.map,
+        );
     return events;
   }
   if (state.phase === "finished") return events;

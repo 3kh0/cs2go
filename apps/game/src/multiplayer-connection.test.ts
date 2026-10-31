@@ -107,3 +107,19 @@ test("losing input focus immediately flushes a neutral command even between pack
   expect(packet.inputs.at(-1)).toMatchObject({ forward: 0, fire: false });
   connection.close();
 });
+
+test("waiting movement is predicted and replayed until the round starts", () => {
+  const { connection, socket, player } = setup();
+  const round = createMatch("casual", testMap()).state;
+  socket.receive({ type: "snapshot", tick: 1, players: [player], events: [], round });
+  const input = { ...neutralInput(), forward: 1 };
+  const start = player.z;
+  for (let i = 0; i < 4; i++) connection.step(input);
+  const predicted = connection.local!.z;
+  expect(predicted).toBeLessThan(start);
+  movePlayer(player, input, STEP, testMap());
+  player.ack = 1;
+  socket.receive({ type: "snapshot", tick: 2, players: [player], events: [], round });
+  expect(connection.local!.z).toBe(predicted);
+  connection.close();
+});
