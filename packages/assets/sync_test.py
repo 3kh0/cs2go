@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from botocore.exceptions import ClientError
-from sync import publish, RetryingClient
+from sync import publish, seed_cache, RetryingClient
 
 
 class Bucket:
@@ -27,7 +27,8 @@ class Bucket:
         self.heads.append(Key)
         self.get_object(Bucket=Bucket, Key=Key)
         item = self.objects[Key]
-        return {'ContentLength': len(item['Body']), 'Metadata': item.get('Metadata', {})}
+        return {'ContentLength': len(item['Body']), 'Metadata': item.get('Metadata', {}),
+                'ContentEncoding': item.get('ContentEncoding')}
 
     def list_objects_v2(self, Bucket, Prefix, ContinuationToken=None):
         self.listings += 1
@@ -80,6 +81,65 @@ class PublishTests(unittest.TestCase):
                 publish(bucket, 'test', third, root)
             self.assertNotIn('releases/third/manifest.json', bucket.objects)
             self.assertEqual(json.loads(bucket.objects['latest.json']['Body'])['release'], 'second')
+
+    def test_brotli_wire_hash_encoding_copy_and_resume(self):
+        bucket = Bucket()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / '.cache').mkdir()
+            logical = b'logical gzip bytes are unchanged'
+            wire = b'opaque Brotli payload (fixture)'
+            logical_hash = hashlib.sha256(logical).hexdigest()
+            entry = {'sha256': logical_hash, 'bytes': len(logical), 'transport': {
+                'encoding': 'br', 'quality': 11, 'sha256': hashlib.sha256(wire).hexdigest(), 'bytes': len(wire)}}
+            (root / '.cache' / f'{logical_hash}.q11.br').write_bytes(wire)
+            def manifest(release):
+                data = {'release': release, 'files': {'asset.bin.gz': entry}}
+                (root / 'manifest.json').write_text(json.dumps(data))
+                return data
+            publish(bucket, 'test', manifest('first'), root)
+            stored = bucket.objects['releases/first/asset.bin.gz']
+            self.assertEqual(stored['Body'], wire)
+            self.assertEqual(stored['ContentEncoding'], 'br')
+            self.assertEqual(stored['ContentType'], 'application/octet-stream')
+            self.assertEqual(stored['Metadata']['sha256'], entry['transport']['sha256'])
+            publish(bucket, 'test', manifest('second'), root)
+            self.assertIn('releases/second/asset.bin.gz', bucket.copies)
+            self.assertEqual(bucket.objects['releases/second/asset.bin.gz']['ContentEncoding'], 'br')
+            # Valid wire bytes with a lost encoding header would make clients see
+            # compressed data; retries must refuse that immutable object.
+            third = manifest('third')
+            bucket.objects['releases/third/asset.bin.gz'] = dict(stored)
+            bucket.objects['releases/third/asset.bin.gz'].pop('ContentEncoding')
+            with self.assertRaises(ValueError):
+                publish(bucket, 'test', third, root)
+            self.assertNotIn('releases/third/manifest.json', bucket.objects)
+
+    def test_cache_seeding_requires_complete_release_and_verified_wire_bytes(self):
+        bucket = Bucket()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            wire = b'compressed fixture'
+            entry = {'sha256': 'a' * 64, 'bytes': 200, 'transport': {
+                'encoding': 'br', 'quality': 11, 'sha256': hashlib.sha256(wire).hexdigest(), 'bytes': len(wire)}}
+            manifest = {'release': 'seed', 'files': {'asset.bin': entry, 'same.bin': entry}}
+            body = json.dumps(manifest).encode()
+            (root / 'manifest.json').write_bytes(body)
+            seed_cache(bucket, 'test', manifest, root)
+            self.assertFalse((root / '.cache').exists())
+            bucket.objects['releases/seed/manifest.json'] = {'Body': body}
+            bucket.objects['releases/seed/same.bin'] = {'Body': wire}
+            seed_cache(bucket, 'test', manifest, root)
+            target = root / '.cache' / f"{entry['sha256']}.q11.br"
+            self.assertEqual(target.read_bytes(), wire)
+            target.write_bytes(b'corrupt cache')
+            bucket.objects['releases/seed/same.bin'] = {'Body': b'wrong wire bytes'}
+            with self.assertRaises(ValueError):
+                seed_cache(bucket, 'test', manifest, root)
+            self.assertEqual(target.read_bytes(), b'corrupt cache')
+            bucket.objects['releases/seed/manifest.json'] = {'Body': b'other manifest'}
+            with self.assertRaises(ValueError):
+                seed_cache(bucket, 'test', manifest, root)
 
     def test_hash_mismatch_never_publishes_marker(self):
         bucket = Bucket()

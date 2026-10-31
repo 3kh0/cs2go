@@ -50,11 +50,21 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: packages/assets/.cache
-          key: asset-compression-${{ runner.os }}-${{ hashFiles('packages/assets/manifest.json') }}
-          restore-keys: asset-compression-${{ runner.os }}-
+          key: asset-compression-br11-${{ runner.os }}-${{ hashFiles('packages/assets/manifest.json') }}
+          restore-keys: |
+            asset-compression-br11-${{ runner.os }}-
+            asset-compression-${{ runner.os }}-
+      # A locally published immutable release can seed the exact q11 wire bytes;
+      # the pipeline still verifies their logical hashes by Brotli round-trip.
+      - run: python -m pip install boto3==1.40.61
+      - run: python packages/assets/sync.py seed
+        env:
+          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
       # No JS dependency installation or app build is needed for asset verification.
       - run: bun run assets:verify
-      - run: python -m pip install boto3==1.40.61
       - run: python packages/assets/sync_test.py
       - run: bun run assets:sync
         env:

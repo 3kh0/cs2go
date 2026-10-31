@@ -1,8 +1,14 @@
 import { createHash } from "node:crypto";
-import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
+import { readdir, readFile, writeFile, mkdir, rename } from "node:fs/promises";
 import { join, relative } from "node:path";
-import { gzipSync, gunzipSync } from "node:zlib";
+import { gzipSync, gunzipSync, brotliCompress, brotliDecompressSync, constants } from "node:zlib";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
+
+export const BROTLI_QUALITY = 11;
+const compressBrotli = promisify(brotliCompress);
+export const transportPath = (directory, hash) =>
+  join(directory, ".cache", `${hash}.q${BROTLI_QUALITY}.br`);
 
 export const root = fileURLToPath(new URL("./", import.meta.url));
 export const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -18,12 +24,14 @@ export async function files(directory) {
   return found.sort();
 }
 export const releaseId = (entries) => sha256(JSON.stringify(entries));
-export async function prepare(directory = root) {
+export async function prepare(directory = root, expectedEntries) {
   const publicDir = join(directory, "public");
   const cache = join(directory, ".cache");
   await mkdir(cache, { recursive: true });
   const entries = {};
-  for (const file of await files(publicDir)) {
+  let writeId = 0;
+  const compressions = new Map();
+  const processFile = async (file) => {
     const path = relative(publicDir, file).replaceAll("\\", "/");
     let bytes = await readFile(file);
     const raw = bytes;
@@ -52,9 +60,67 @@ export async function prepare(directory = root) {
       entry.input = path;
       entry.inputSha256 = input;
     } else if (path.endsWith(".gz")) entry.decodedSha256 = sha256(gunzipSync(bytes));
+    // Verification need not re-prove that unchanged bytes did not benefit from
+    // Brotli. Generation always tests every candidate; logical/source metadata
+    // still regenerates here and the CLI compares the complete manifest below.
+    const expected = expectedEntries?.[target];
+    if (!expected || expected.transport || expected.sha256 !== entry.sha256) {
+      // HTTP transport compression is independent of the file format. A .gz
+      // response still decodes to the exact gzip bytes expected by game loaders.
+      let work = compressions.get(entry.sha256);
+      if (!work) {
+        work = (async () => {
+          const packed = transportPath(directory, entry.sha256);
+          try {
+            const encoded = await readFile(packed);
+            if (sha256(brotliDecompressSync(encoded)) !== entry.sha256)
+              throw new Error("Invalid cached Brotli compression");
+            return encoded;
+          } catch {
+            const encoded = await compressBrotli(bytes, {
+              params: {
+                [constants.BROTLI_PARAM_QUALITY]: BROTLI_QUALITY,
+                [constants.BROTLI_PARAM_SIZE_HINT]: bytes.length,
+              },
+            });
+            const temporary = `${packed}.tmp-${process.pid}-${writeId++}`;
+            await writeFile(temporary, encoded);
+            await rename(temporary, packed);
+            return encoded;
+          }
+        })();
+        compressions.set(entry.sha256, work);
+      }
+      const encoded = await work;
+      compressions.delete(entry.sha256);
+      // Already compressed media occasionally grows; never increase wire size.
+      // Every candidate is tested at quality 11, including gzip and KTX2 payloads.
+      if (encoded.length < bytes.length)
+        entry.transport = {
+          encoding: "br",
+          quality: BROTLI_QUALITY,
+          sha256: sha256(encoded),
+          bytes: encoded.length,
+        };
+    }
     if (entries[target]) throw new Error(`Duplicate generated asset: ${target}`);
     entries[target] = entry;
-  }
+    if (
+      process.argv[1] === fileURLToPath(import.meta.url) &&
+      Object.keys(entries).length % 250 === 0
+    )
+      console.log(
+        `${expectedEntries ? "Verified" : "Compressed"} ${Object.keys(entries).length} assets (Brotli quality ${BROTLI_QUALITY})`,
+      );
+  };
+  const inputs = await files(publicDir);
+  let cursor = 0;
+  // Bound CPU and peak buffers while preserving a deterministic sorted manifest.
+  await Promise.all(
+    Array.from({ length: 6 }, async () => {
+      while (cursor < inputs.length) await processFile(inputs[cursor++]);
+    }),
+  );
   // Filesystem enumeration order never affects the release identity.
   const ordered = Object.fromEntries(
     Object.entries(entries).sort(([a], [b]) => a.localeCompare(b, "en")),
@@ -62,12 +128,13 @@ export async function prepare(directory = root) {
   return { version: 1, release: releaseId(ordered), files: ordered };
 }
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const manifest = await prepare();
-  const bytes = JSON.stringify(manifest, null, 2) + "\n";
   const destination = join(root, "manifest.json");
-  if (process.argv[2] === "verify") {
-    const expectedBytes = await readFile(destination, "utf8");
-    const expected = JSON.parse(expectedBytes);
+  const verifying = process.argv[2] === "verify";
+  const expectedBytes = verifying ? await readFile(destination, "utf8") : undefined;
+  const expected = expectedBytes ? JSON.parse(expectedBytes) : undefined;
+  const manifest = await prepare(root, expected?.files);
+  const bytes = JSON.stringify(manifest, null, 2) + "\n";
+  if (verifying) {
     if (expectedBytes !== bytes) {
       const changed = Object.keys({ ...expected.files, ...manifest.files }).filter(
         (path) => JSON.stringify(expected.files[path]) !== JSON.stringify(manifest.files[path]),
@@ -82,6 +149,10 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
         "Asset manifest is stale. Run bun run assets:prepare and commit manifest.json.",
       );
     }
-  } else await writeFile(destination, bytes);
+  } else {
+    const temporary = `${destination}.tmp-${process.pid}`;
+    await writeFile(temporary, bytes);
+    await rename(temporary, destination);
+  }
   console.log(`${Object.keys(manifest.files).length} assets; release ${manifest.release}`);
 }

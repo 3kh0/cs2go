@@ -4,6 +4,7 @@ import json
 import mimetypes
 import os
 import random
+import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -52,6 +53,47 @@ class RetryingClient:
         return request
 
 
+def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
+    """Reuse a complete immutable release's verified wire bytes before CI encoding."""
+    client = RetryingClient(client, pause)
+    prefix = f"releases/{manifest['release']}/"
+    try:
+        marker = client.get_object(Bucket=bucket, Key=prefix + 'manifest.json')['Body'].read()
+    except ClientError as error:
+        if not missing(error):
+            raise
+        print('Release not published yet; verification will generate compression locally')
+        return
+    if marker != (root / 'manifest.json').read_bytes():
+        raise ValueError('Published release manifest differs; refusing cache seeding')
+    cache = root / '.cache'
+    cache.mkdir(exist_ok=True)
+    # Repeated logical payloads share one compression result.
+    entries = {entry['sha256']: (path, entry) for path, entry in manifest['files'].items()
+               if entry.get('transport', {}).get('encoding') == 'br'}
+
+    def seed(item):
+        path, entry = item
+        wire = entry['transport']
+        target = cache / f"{entry['sha256']}.q11.br"
+        if target.exists():
+            payload = target.read_bytes()
+            if len(payload) == wire['bytes'] and hashlib.sha256(payload).hexdigest() == wire['sha256']:
+                return
+        payload = client.get_object(Bucket=bucket, Key=prefix + path)['Body'].read()
+        if len(payload) != wire['bytes'] or hashlib.sha256(payload).hexdigest() != wire['sha256']:
+            raise ValueError(f'Published Brotli payload differs: {path}')
+        temporary = target.with_suffix(f'.tmp-{os.getpid()}')
+        temporary.write_bytes(payload)
+        temporary.replace(target)
+
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for completed, _ in enumerate(pool.map(seed, entries.values()), 1):
+            if completed % 250 == 0:
+                print(f'Seeded {completed}/{len(entries)} Brotli cache payloads', flush=True)
+    print(f'Verified {len(entries)} immutable Brotli cache payloads; local round-trip verification follows')
+
+
 def publish(client, bucket, manifest, root=ROOT, pause=time.sleep):
     client = RetryingClient(client, pause)
     # The exact checked-in bytes are the completion marker.
@@ -93,18 +135,21 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep):
     # Never use ETags as content hashes: multipart uploads have different ETag semantics.
     old_by_hash = {}
     for path, entry in previous['files'].items():
-        old_by_hash[(entry['sha256'], Path(path).suffix)] = path
+        wire = entry.get('transport', entry)
+        old_by_hash[(wire['sha256'], Path(path).suffix, wire.get('encoding'))] = path
 
     def transfer(item):
         path, entry = item
         target = prefix + path
-        expected = entry['sha256']
+        wire = entry.get('transport', entry)
+        expected = wire['sha256']
+        encoding = wire.get('encoding')
         if target in existing:
             head = client.head_object(Bucket=bucket, Key=target)
-            if head.get('Metadata', {}).get('sha256') == expected and head['ContentLength'] == entry['bytes']:
+            if head.get('Metadata', {}).get('sha256') == expected and head['ContentLength'] == wire['bytes'] and head.get('ContentEncoding') == encoding:
                 return 'skipped'
             raise ValueError(f'Existing immutable object differs: {target}')
-        old_path = old_by_hash.get((expected, Path(path).suffix))
+        old_path = old_by_hash.get((expected, Path(path).suffix, encoding))
         if old_path is not None:
             source = f"releases/{previous['release']}/{old_path}"
             # Copy preserves source metadata; the destination HEAD below verifies
@@ -115,18 +160,22 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep):
             source = root / 'public' / path
             if 'input' in entry:
                 source = root / '.cache' / f"{entry['inputSha256']}.glb.gz"
+            if encoding == 'br':
+                source = root / '.cache' / f"{entry['sha256']}.q11.br"
             payload = source.read_bytes()
-            if hashlib.sha256(payload).hexdigest() != expected or len(payload) != entry['bytes']:
+            if hashlib.sha256(payload).hexdigest() != expected or len(payload) != wire['bytes']:
                 raise ValueError(f'Local asset changed after verification: {source}')
-            # .gz siblings are decoded explicitly in the game; do NOT set Content-Encoding.
+            # Brotli is an HTTP wrapper; browser decoding yields the logical file bytes.
+            # A .gz logical file remains gzip and is then decoded by the game.
             mime = 'application/octet-stream' if path.endswith('.gz') else mimetypes.guess_type(path)[0]
             mime = {'.wgsl': 'text/plain', '.hdr': 'application/octet-stream', '.ktx2': 'image/ktx2'}.get(Path(path).suffix, mime)
+            headers = {'ContentEncoding': encoding} if encoding else {}
             client.put_object(Bucket=bucket, Key=target, Body=payload,
                               ContentType=mime or 'application/octet-stream',
-                              CacheControl='public, max-age=31536000, immutable', Metadata={'sha256': expected})
+                              CacheControl='public, max-age=31536000, immutable', Metadata={'sha256': expected}, **headers)
             result = 'uploaded'
         head = client.head_object(Bucket=bucket, Key=target)
-        if head.get('Metadata', {}).get('sha256') != expected or head['ContentLength'] != entry['bytes']:
+        if head.get('Metadata', {}).get('sha256') != expected or head['ContentLength'] != wire['bytes'] or head.get('ContentEncoding') != encoding:
             raise ValueError(f'Uploaded object failed metadata verification: {target}')
         return result
 
@@ -149,4 +198,5 @@ if __name__ == '__main__':
                           aws_access_key_id=os.environ['R2_ACCESS_KEY_ID'],
                           aws_secret_access_key=os.environ['R2_SECRET_ACCESS_KEY'], region_name='auto',
                           config=Config(retries={'max_attempts': 5, 'mode': 'adaptive'}, max_pool_connections=4))
-    publish(client, os.environ['R2_BUCKET'], json.loads((ROOT / 'manifest.json').read_text()))
+    operation = seed_cache if len(sys.argv) > 1 and sys.argv[1] == 'seed' else publish
+    operation(client, os.environ['R2_BUCKET'], json.loads((ROOT / 'manifest.json').read_text()))
