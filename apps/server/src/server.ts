@@ -18,6 +18,7 @@ import {
   joinMatch,
   leaveMatch,
   stepMatch,
+  configurePlayer,
   STEP,
   type Match,
 } from "@cs2go/simulation/match";
@@ -167,7 +168,23 @@ export function startServer(options: ServerOptions) {
             mode: room.state.mode,
           });
         } else if (!connection.room) return reject(socket, "Join a room first");
-        else if (message.type === "ping") send(socket, { type: "pong", time: message.time });
+        else if (message.type === "configure")
+          configurePlayer(
+            connection.room,
+            connection.room.players.get(connection.id)!,
+            message.configuration,
+          );
+        else if (message.type === "stop") {
+          const player = connection.room.players.get(connection.id)!;
+          connection.queue = [];
+          player.ack = connection.lastSeq;
+          connection.last = {
+            ...neutralInput(connection.lastSeq),
+            yaw: player.yaw,
+            pitch: player.pitch,
+          };
+          connection.lastInput = now;
+        } else if (message.type === "ping") send(socket, { type: "pong", time: message.time });
         else {
           if (connection.queue.length + message.inputs.length > MAX_PENDING_INPUTS)
             return reject(socket, "Input backlog exceeded");
@@ -226,6 +243,12 @@ export function startServer(options: ServerOptions) {
                   drop: !!input?.drop,
                   pickup: !!input?.pickup,
                   stab: !!input?.stab,
+                  toggleSuppressor: !!input?.toggleSuppressor,
+                  refund: input?.refund ?? -1,
+                  refundEquipment: input?.refundEquipment ?? "",
+                  grenadeBuy: input?.grenadeBuy ?? "",
+                  grenadeRefund: input?.grenadeRefund ?? "",
+                  throwKind: input?.throwKind ?? "",
                 }
               : { ...neutralInput(), yaw: connection.last.yaw, pitch: connection.last.pitch };
           inputs.set(connection.id, held);

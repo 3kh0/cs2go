@@ -44,7 +44,7 @@ for kind, slug in {'he': 'hegrenade', 'flash': 'flashbang', 'smoke': 'smokegrena
         match = re.search(r'^\t\t' + key + r' = ([0-9.]+)', block, re.M)
         if not match: raise ValueError(f'Missing {slug}:{key}')
         weapons[kind][key] = float(match[1])
-out = ROOT / 'apps/game/src/data/utility.json'
+out = ROOT / 'packages/simulation/src/data/utility.json'
 out.write_text(json.dumps({'commit': stats.COMMIT, 'sources': sources, 'convars': convars, 'modes': modes, 'weapons': weapons,
     'scope': 'Explicit shipped parameters. Weapon damage/armor/range fields are recorded as evidence but do not establish native blast falloff or armor dispatch. Projectile integration, bounce solver, fire layout and damage sampling remain browser reconstructions.'}, indent=2) + '\n')
 print(f'Imported {len(convars)} convars, {len(weapons)} grenades and two mode overrides')

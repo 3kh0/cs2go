@@ -44,7 +44,7 @@ def main():
     defaults = {}
     for key in ['weapon_air_spread_scale', 'weapon_accuracy_stack_boost_limit', 'weapon_accuracy_reset_on_deploy', 'weapon_accuracy_shotgun_spread_patterns', 'sv_jump_impulse']:
         defaults[key] = json.loads(re.search(r'^' + key + r' ([^ ]+) ', convars, re.M).group(1))
-    out = ROOT / 'apps/game/src/data/accuracy.json'
+    out = ROOT / 'packages/simulation/src/data/accuracy.json'
     out.write_text(json.dumps({
         'source': url, 'commit': stats.COMMIT,
         'sourceSha256': hashlib.sha256(source_bytes).hexdigest(),

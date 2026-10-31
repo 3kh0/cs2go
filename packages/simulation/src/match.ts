@@ -9,27 +9,52 @@ import {
   type MatchMode,
   type Team,
   type Vec3,
+  type PlayerConfiguration,
 } from "@cs2go/protocol";
 import { roundFact } from "./round-facts";
 import nativeStrings from "./data/round-strings.json";
+import {
+  createWeaponActions,
+  advanceWeaponActions,
+  cancelWeaponActions,
+  canTrigger,
+  commitTrigger,
+  type WeaponActions,
+} from "./weapon-actions";
+import { shoot, advanceCombat, createCombatMemory, type CombatMemory } from "./combat";
+import {
+  createUtilityMemory,
+  playerUtility,
+  stepUtility,
+  type UtilityMemory,
+} from "./match-utility";
+import { createReceipts, equipmentState, publishReceipts, refund, type Receipts } from "./receipts";
+import { emptyGrenades } from "./utility";
+import { advanceDroppedWeapon } from "./dropped-weapon";
 import { movePlayer } from "./movement";
-import { isKnife, movement, reloadMagazine, weaponSlot, weapons } from "./physics";
+import { isKnife, movement, weaponSlot, weapons } from "./physics";
 import {
   rulesFor,
   addMoney,
   equipmentPrice,
   weaponAvailable,
   weaponPrice,
-  killReward,
   roundReward,
   nextLossLevel,
 } from "./economy";
-import { applyArmorDamage, friendlyFireScale } from "./damage";
 import { dust2BombSites, dust2BuyZones } from "./buy-zones";
 import { groundCorrectedBombSample } from "./bomb-damage";
 import type { DustMap } from "./dust-map";
 export const STEP = 1 / TICK_RATE;
 export type Match = {
+  highlights: Map<string, { headshots: number; knives: number; grenades: number }>;
+  receipts: Map<string, Receipts>;
+  configurations: Map<string, PlayerConfiguration>;
+  nextAppearance: number;
+  utility: Map<string, UtilityMemory>;
+  nextUtility: number;
+  actions: Map<string, WeaponActions>;
+  combat: Map<string, CombatMemory>;
   nextDrop: number;
   players: Map<string, PlayerState>;
   state: RoundState;
@@ -41,6 +66,14 @@ export type Match = {
 };
 export function createMatch(mode: MatchMode, map: DustMap): Match {
   return {
+    highlights: new Map(),
+    receipts: new Map(),
+    configurations: new Map(),
+    nextAppearance: 1,
+    utility: new Map(),
+    nextUtility: 1,
+    actions: new Map(),
+    combat: new Map(),
     nextDrop: 1,
     players: new Map(),
     map,
@@ -49,6 +82,9 @@ export function createMatch(mode: MatchMode, map: DustMap): Match {
     shotsHeld: new Set(),
     weaponCooldowns: new Map(),
     state: {
+      clock: 0,
+      projectiles: [],
+      effects: [],
       drops: [],
       mode,
       phase: "waiting",
@@ -90,6 +126,22 @@ export function createPlayer(id: string, name: string, team: Team): PlayerState 
     grounded: true,
     yaw: 0,
     pitch: 0,
+    refundableWeapons: [],
+    refundableEquipment: [],
+    grenadeReceipts: emptyGrenades(),
+    appearances: {},
+    agent: `default-${team}`,
+    grenades: emptyGrenades(),
+    blind: 0,
+    scope: 0,
+    suppressed: weapons[secondary].suppressed,
+    reloadPhase: "intro",
+    reloadEmpty: false,
+    suppressorAction: "",
+    suppressorTime: 0,
+    suppressorDuration: 0,
+    charge: 0,
+    punch: { pitch: 0, yaw: 0, pitchVelocity: 0, yawVelocity: 0 },
     health: 100,
     ammo: weapons[secondary].mag,
     reserve: weapons[secondary].reserve,
@@ -103,6 +155,7 @@ export function createPlayer(id: string, name: string, team: Team): PlayerState 
     ack: 0,
     weapon: secondary,
     primary: null,
+    knife: 4,
     secondary,
     magazines: {},
     money: 0,
@@ -112,8 +165,46 @@ export function createPlayer(id: string, name: string, team: Team): PlayerState 
     waiting: false,
   };
 }
+export function newAppearance(match: Match, player: PlayerState, weapon: number) {
+  const skin = match.configurations.get(player.id)?.skins[weapon] ?? {
+    id: "",
+    wear: 0.01,
+    seed: 1,
+  };
+  return (player.appearances[weapon] = {
+    serial: match.nextAppearance++,
+    weapon,
+    creator: player.id,
+    skin: { ...skin },
+  });
+}
+export function configurePlayer(
+  match: Match,
+  player: PlayerState,
+  configuration: PlayerConfiguration,
+) {
+  match.configurations.set(player.id, configuration);
+  player.agent = configuration.agents[player.team];
+  if (
+    match.state.phase === "waiting" ||
+    (match.state.round === 1 && match.state.phase === "freeze")
+  )
+    for (const id of Object.keys(player.magazines)) newAppearance(match, player, Number(id));
+}
 export function respawn(player: PlayerState, match: Match, preserve = false) {
   match.weaponCooldowns.set(player.id, {});
+  match.combat.set(player.id, createCombatMemory());
+  match.actions.set(player.id, createWeaponActions());
+  match.utility.set(player.id, createUtilityMemory());
+  match.receipts.set(player.id, createReceipts());
+  match.highlights.set(player.id, { headshots: 0, knives: 0, grenades: 0 });
+  player.refundableWeapons = [];
+  player.refundableEquipment = [];
+  player.blind = 0;
+  player.scope = 0;
+  player.agent =
+    match.configurations.get(player.id)?.agents[player.team] ?? `default-${player.team}`;
+  player.punch = match.combat.get(player.id)!.punch;
   const points = match.map.spawns[player.team];
   const team = [...match.players.values()].filter((other) => other.team === player.team);
   const slot = Math.max(0, team.indexOf(player)) % points.length;
@@ -138,15 +229,18 @@ export function respawn(player: PlayerState, match: Match, preserve = false) {
     waiting: false,
   });
   if (!preserve) {
+    player.grenades = emptyGrenades();
     player.primary = null;
     player.secondary = player.team === "t" ? 7 : 2;
     player.weapon = player.secondary;
     player.magazines = Object.fromEntries(
-      [player.secondary, 4].map((id) => [
+      [player.secondary, player.knife].map((id) => [
         id,
         { ammo: weapons[id].mag, reserve: weapons[id].reserve },
       ]),
     );
+    player.appearances = {};
+    for (const id of [player.secondary, player.knife]) newAppearance(match, player, id);
     player.armor = 0;
     player.helmet = player.kit = false;
   }
@@ -185,9 +279,17 @@ export function leaveMatch(match: Match, id: string) {
   match.players.delete(id);
   match.shotsHeld.delete(id);
   match.weaponCooldowns.delete(id);
+  match.combat.delete(id);
+  match.actions.delete(id);
+  match.utility.delete(id);
+  match.configurations.delete(id);
+  match.receipts.delete(id);
+  match.highlights.delete(id);
 }
 export function startRound(match: Match) {
   match.state.drops = [];
+  match.state.projectiles = [];
+  match.state.effects = [];
   const state = match.state,
     rules = rulesFor(state.mode);
   if (
@@ -306,9 +408,7 @@ export function endRound(
     players: ranked.map((p) => ({
       name: p.name,
       kills: Math.max(0, p.kills - (match.startingKills.get(p.id) ?? p.kills)),
-      headshots: 0,
-      knives: 0,
-      grenades: 0,
+      ...(match.highlights.get(p.id) ?? { headshots: 0, knives: 0, grenades: 0 }),
     })),
   });
   match.loss = {
@@ -342,103 +442,28 @@ export function rayBox(origin: Vec3, direction: Vec3, min: Vec3, max: Vec3): num
   }
   return near;
 }
-function shoot(match: Match, shooter: PlayerState, stab = false): MatchEvent[] {
-  const weapon = weapons[shooter.weapon],
-    from = new T.Vector3(shooter.x, shooter.y + shooter.eye, shooter.z);
-  const direction = new T.Vector3(
-    -Math.sin(shooter.yaw) * Math.cos(shooter.pitch),
-    -Math.sin(shooter.pitch),
-    -Math.cos(shooter.yaw) * Math.cos(shooter.pitch),
-  );
-  let distance = Math.min(
-    isKnife(shooter.weapon) ? (stab ? 32 : 48) * 0.0254 : 250,
-    match.map.collision.intersections(new T.Ray(from, direction), 250)[0]?.distance ?? 250,
-  );
-  let victim: PlayerState | undefined;
-  for (const other of match.players.values()) {
-    if (
-      other === shooter ||
-      other.health <= 0 ||
-      (other.team === shooter.team && match.state.mode === "casual")
-    )
-      continue;
-    const r = movement.hullRadius;
-    const hit = rayBox(
-      from,
-      direction,
-      { x: other.x - r, y: other.y, z: other.z - r },
-      { x: other.x + r, y: other.y + other.eye + 0.2, z: other.z + r },
-    );
-    if (hit < distance) {
-      distance = hit;
-      victim = other;
-    }
-  }
-  const to = from.clone().addScaledVector(direction, distance);
-  const events: MatchEvent[] = [
-    isKnife(shooter.weapon)
-      ? { kind: "melee", shooter: shooter.id, stab, hit: !!victim }
-      : { kind: "shot", shooter: shooter.id, from, to, weapon: shooter.weapon },
-  ];
-  if (victim) {
-    const headshot = !isKnife(shooter.weapon) && to.y > victim.y + victim.eye - 0.15;
-    const damage =
-      (isKnife(shooter.weapon) ? (stab ? 65 : 40) : weapon.damage) *
-      (headshot ? weapon.head : 1) *
-      (victim.team === shooter.team ? friendlyFireScale(match.state.mode, "bullet") : 1);
-    const hit = applyArmorDamage(
-      damage,
-      headshot ? "head" : "chest",
-      victim.armor,
-      victim.helmet,
-      weapon.armorRatio,
-    );
-    victim.armor = hit.armor;
-    victim.health = Math.max(0, victim.health - Math.floor(hit.healthDamage));
-    if (victim.health === 0) {
-      victim.deaths++;
-      victim.reloadTime = 0;
-      victim.vx = victim.vz = 0;
-      shooter.kills += victim.team === shooter.team ? -1 : 1;
-      shooter.money = addMoney(
-        shooter.money,
-        victim.team === shooter.team ? -300 : killReward(shooter.weapon, match.state.mode),
-        match.state.mode,
-      );
-      if (match.state.bomb.carrier === victim.id)
-        Object.assign(match.state.bomb, {
-          x: victim.x,
-          y: victim.y,
-          z: victim.z,
-          carrier: null,
-          plantProgress: 0,
-        });
-      events.push({
-        kind: "kill",
-        killer: shooter.id,
-        victim: victim.id,
-        headshot,
-        weapon: shooter.weapon,
-      });
-    }
-  }
-  return events;
-}
-function dropWeapon(match: Match, player: PlayerState) {
+export function dropWeapon(match: Match, player: PlayerState, toss = false) {
   if (isKnife(player.weapon)) return;
-  const from = new T.Vector3(player.x, player.y + 0.4, player.z);
-  const direction = new T.Vector3(-Math.sin(player.yaw), 0, -Math.cos(player.yaw));
-  const distance = Math.max(
-    0,
-    Math.min(
-      1.2,
-      (match.map.collision.intersections(new T.Ray(from, direction), 1.3)[0]?.distance ?? 1.3) -
-        0.1,
-    ),
-  );
-  const x = player.x + direction.x * distance,
-    z = player.z + direction.z * distance;
-  const floor = match.map.collision.floor(x, z, player.y + 0.5);
+  match.receipts.get(player.id)!.weapons.delete(player.weapon);
+  const position = new T.Vector3(player.x, player.y + 0.7, player.z);
+  const velocity = new T.Vector3(-Math.sin(player.yaw) * 2.5, 1, -Math.cos(player.yaw) * 2.5);
+  if (toss) {
+    const forward = new T.Vector3(
+      -Math.sin(player.yaw) * Math.cos(player.pitch),
+      -Math.sin(player.pitch),
+      -Math.cos(player.yaw) * Math.cos(player.pitch),
+    );
+    const eye = new T.Vector3(player.x, player.y + player.eye - 0.25, player.z);
+    const release = eye
+      .clone()
+      .addScaledVector(forward, 0.55)
+      .add(new T.Vector3(Math.cos(player.yaw) * 0.18, 0, -Math.sin(player.yaw) * 0.18));
+    position.copy(match.map.collision.visible(eye, release) ? release : eye);
+    velocity.copy(forward).multiplyScalar(5);
+    velocity.x += player.vx * 0.5;
+    velocity.z += player.vz * 0.5;
+    velocity.y += 1.4;
+  }
   const id = match.nextDrop++;
   match.state.drops.push({
     id,
@@ -446,16 +471,27 @@ function dropWeapon(match: Match, player: PlayerState) {
     ammo: player.ammo,
     reserve: player.reserve,
     owner: player.id,
-    x,
-    y: Number.isFinite(floor) ? floor : player.y,
-    z,
+    appearance: player.appearances[player.weapon] ?? newAppearance(match, player, player.weapon),
+    suppressed: match.actions.get(player.id)!.attached[player.weapon],
+    x: position.x,
+    y: position.y,
+    z: position.z,
+    vx: velocity.x,
+    vy: velocity.y,
+    vz: velocity.z,
+    rx: 0,
+    rz: 0,
+    sleeping: false,
+    tossed: toss,
     yaw: player.yaw,
     age: 0,
   });
   if (match.state.drops.length > 64) match.state.drops.shift();
   if (player.primary === player.weapon) player.primary = null;
   delete player.magazines[player.weapon];
-  player.weapon = player.primary ?? (player.magazines[player.secondary] ? player.secondary : 4);
+  delete player.appearances[player.weapon];
+  player.weapon =
+    player.primary ?? (player.magazines[player.secondary] ? player.secondary : player.knife);
   Object.assign(player, player.magazines[player.weapon]);
   player.reloadTime = 0;
   player.cooldown = weapons[player.weapon].deploy;
@@ -491,6 +527,8 @@ function pickupWeapon(match: Match, player: PlayerState, manual: boolean) {
   } else player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
   if (slot === 1) player.primary = drop.weapon;
   else player.secondary = drop.weapon;
+  player.appearances[drop.weapon] = drop.appearance;
+  match.actions.get(player.id)!.attached[drop.weapon] = drop.suppressed;
   player.magazines[drop.weapon] = { ammo: drop.ammo, reserve: drop.reserve };
   player.weapon = drop.weapon;
   player.ammo = drop.ammo;
@@ -510,19 +548,48 @@ function buy(match: Match, player: PlayerState, input: Input) {
     })
   )
     return;
+  refund(match, player, input);
   const index = input.buy;
+  if (isKnife(index)) {
+    delete player.magazines[player.knife];
+    delete player.appearances[player.knife];
+    player.knife = index;
+    player.weapon = index;
+    player.magazines[index] = { ammo: 1, reserve: 0 };
+    player.ammo = 1;
+    player.reserve = 0;
+    newAppearance(match, player, index);
+    cancelWeaponActions(player, match.actions.get(player.id)!);
+    player.cooldown = weapons[index].deploy;
+    return;
+  }
+
   if (
     index >= 0 &&
     !isKnife(index) &&
+    (!match.configurations.has(player.id) ||
+      match.configurations.get(player.id)!.loadouts[player.team].includes(index)) &&
     weaponAvailable(index, player.team) &&
     !player.magazines[index] &&
     player.money >= weaponPrice(index)
   ) {
     const previous = weaponSlot(index) === 1 ? player.primary : player.secondary;
-    if (previous !== null) delete player.magazines[previous];
+    if (previous !== null && player.magazines[previous]) {
+      player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
+      player.weapon = previous;
+      Object.assign(player, player.magazines[previous]);
+      dropWeapon(match, player);
+    }
+    cancelWeaponActions(player, match.actions.get(player.id)!);
     if (weaponSlot(index) === 1) player.primary = index;
     else player.secondary = index;
+    newAppearance(match, player, index);
     player.magazines[index] = { ammo: weapons[index].mag, reserve: weapons[index].reserve };
+    match.receipts.get(player.id)!.weapons.set(index, {
+      price: weaponPrice(index),
+      ammo: weapons[index].mag,
+      reserve: weapons[index].reserve,
+    });
     player.money = addMoney(player.money, -weaponPrice(index), state.mode);
     player.weapon = index;
     player.cooldown = weapons[index].deploy;
@@ -532,12 +599,19 @@ function buy(match: Match, player: PlayerState, input: Input) {
   if (input.equipment && (input.equipment !== "kit" || player.team === "ct")) {
     const price = equipmentPrice(input.equipment, player.armor, player.helmet);
     if (price > 0 && player.money >= price && !(input.equipment === "kit" && player.kit)) {
+      const before = equipmentState(player);
       player.money = addMoney(player.money, -price, state.mode);
       if (input.equipment === "kit") player.kit = true;
       else {
         player.armor = 100;
         if (input.equipment === "helmet") player.helmet = true;
       }
+      match.receipts.get(player.id)!.equipment.push({
+        kind: input.equipment === "vest" ? "kevlar" : input.equipment,
+        price,
+        before,
+        after: equipmentState(player),
+      });
     }
   }
 }
@@ -554,7 +628,20 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
     if (state.phase !== "waiting") return events;
   }
   if (state.phase === "finished") return events;
-  for (const drop of state.drops) drop.age += STEP;
+  for (const drop of state.drops) {
+    const position = new T.Vector3(drop.x, drop.y, drop.z),
+      velocity = new T.Vector3(drop.vx, drop.vy, drop.vz),
+      rotation = { x: drop.rx, z: drop.rz };
+    advanceDroppedWeapon(position, velocity, rotation, drop, STEP, match.map.collision);
+    drop.x = position.x;
+    drop.y = position.y;
+    drop.z = position.z;
+    drop.vx = velocity.x;
+    drop.vy = velocity.y;
+    drop.vz = velocity.z;
+    drop.rx = rotation.x;
+    drop.rz = rotation.z;
+  }
   if (["post", "halftime"].includes(state.phase)) {
     state.pause = Math.max(0, state.pause - STEP);
     if (state.pause === 0) {
@@ -581,61 +668,67 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
     player.yaw = input.yaw;
     player.pitch = input.pitch;
     if (player.health <= 0) continue;
+    advanceCombat(player, match.combat.get(player.id)!, STEP);
+    const action = match.actions.get(player.id)!;
     const locks = match.weaponCooldowns.get(player.id) ?? {};
     for (const id of Object.keys(locks)) locks[Number(id)] = Math.max(0, locks[Number(id)] - STEP);
     match.weaponCooldowns.set(player.id, locks);
-    if (input.drop) dropWeapon(match, player);
+    if (input.drop) dropWeapon(match, player, true);
     pickupWeapon(match, player, input.pickup);
     buy(match, player, input);
+    playerUtility(match, player, input, STEP);
+    if (input.utility) cancelWeaponActions(player, action);
     if (input.select >= 0 && player.magazines[input.select] && input.select !== player.weapon) {
       player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
       locks[player.weapon] = Math.max(
         locks[player.weapon] ?? 0,
         player.cooldown,
-        player.reloadTime,
+        action.inserted ? player.reloadTime : 0,
       );
+      cancelWeaponActions(player, action);
       player.weapon = input.select;
       Object.assign(player, player.magazines[player.weapon]);
       player.reloadTime = 0;
       player.cooldown = Math.max(weapons[player.weapon].deploy, locks[player.weapon] ?? 0);
     }
-    if (!frozen) movePlayer(player, input, STEP, match.map);
+    if (!frozen) movePlayer(player, input, STEP, match.map, [...match.players.values()]);
     else {
       player.vx = player.vz = player.vertical = 0;
     }
     player.cooldown = Math.max(0, player.cooldown - STEP);
-    if (player.reloadTime > 0) {
-      player.reloadTime = Math.max(0, player.reloadTime - STEP);
-      if (player.reloadTime === 0)
-        Object.assign(player, reloadMagazine(player.weapon, player.ammo, player.reserve));
-    }
-    const weapon = weapons[player.weapon];
+    player.scope = Math.min(weapons[player.weapon].zoomLevels, input.scope);
+    advanceWeaponActions(
+      player,
+      action,
+      frozen
+        ? { ...input, fire: false, stab: false, alternate: false, toggleSuppressor: false }
+        : input,
+      STEP,
+    );
+    player.suppressed = action.attached[player.weapon];
+    player.reloadPhase = action.shell;
+    player.reloadEmpty = action.empty;
+    player.suppressorAction = action.suppressor;
+    player.suppressorTime = action.suppressorTime;
+    player.suppressorDuration = action.suppressorDuration;
+    player.charge = action.charge;
     if (
       !frozen &&
-      input.reload &&
-      !isKnife(player.weapon) &&
-      !player.reloadTime &&
-      player.ammo < weapon.mag &&
-      player.reserve > 0
-    )
-      player.reloadTime = weapon.reload;
-    if (
-      !frozen &&
-      (input.fire || (input.stab && isKnife(player.weapon))) &&
-      (weapon.auto || isKnife(player.weapon) || !match.shotsHeld.has(player.id)) &&
-      player.reloadTime === 0 &&
-      player.cooldown === 0 &&
-      (player.ammo > 0 || isKnife(player.weapon))
+      !input.utility &&
+      !input.throwKind &&
+      canTrigger(player, action, input, match.shotsHeld.has(player.id))
     ) {
-      if (!isKnife(player.weapon)) player.ammo--;
-      player.cooldown = isKnife(player.weapon) ? (input.stab ? 1 : 0.4) : weapon.delay;
+      match.receipts.get(player.id)!.weapons.delete(player.weapon);
+      const shot = commitTrigger(player, action, input);
       locks[player.weapon] = player.cooldown;
-      events.push(...shoot(match, player, input.stab));
+      events.push(...shoot(match, player, input.stab, shot.alternate, input.burst));
     }
-    if (input.fire) match.shotsHeld.add(player.id);
+    if (input.fire || input.alternate) match.shotsHeld.add(player.id);
     else match.shotsHeld.delete(player.id);
     player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
+    publishReceipts(match, player);
   }
+  stepUtility(match, STEP, events);
   if (state.phase !== "live") return events;
   state.elapsed += STEP;
   state.remaining = Math.max(0, state.remaining - STEP);

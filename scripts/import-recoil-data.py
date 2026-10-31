@@ -44,7 +44,7 @@ def main():
             if not isinstance(row[key], list):
                 row[key] = [row[key], row[key]]
         entries.append(row)
-    out = ROOT / 'apps/game/src/data/recoil.json'
+    out = ROOT / 'packages/simulation/src/data/recoil.json'
     out.write_text(json.dumps({
         'source': url, 'commit': stats.COMMIT,
         'sourceSha256': hashlib.sha256(source_bytes).hexdigest(),

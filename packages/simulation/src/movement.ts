@@ -2,17 +2,35 @@ import type { Input, PlayerState } from "@cs2go/protocol";
 import { accelerate, fallStep, limitJumpSpeed, movement, weapons } from "./physics";
 import type { DustMap } from "./dust-map";
 import * as T from "three";
+import { actorLanding, actorSupport, slideActors } from "./actor-collision";
 const position = new T.Vector3();
 /** The same native Dust II hull queries run in prediction and authority. */
-export function movePlayer(player: PlayerState, input: Input, dt: number, map: DustMap) {
+export function movePlayer(
+  player: PlayerState,
+  input: Input,
+  dt: number,
+  map: DustMap,
+  others: readonly PlayerState[] = [],
+) {
   if (player.health <= 0 || player.waiting) return;
   const collision = map.collision;
+  const start = { x: player.x, y: player.y, z: player.z };
+  const actors = others
+    .filter((other) => other.id !== player.id && other.health > 0 && !other.waiting)
+    .map((other) => ({
+      x: other.x,
+      y: other.y,
+      z: other.z,
+      height: other.eye + movement.standingHeight - movement.standingEye,
+      radius: movement.hullRadius,
+    }));
   player.yaw = input.yaw;
   player.pitch = input.pitch;
   const radius = movement.hullRadius;
   let hull = player.eye + movement.standingHeight - movement.standingEye;
   const velocity = { x: player.vx, z: player.vz };
-  const maxSpeed = weapons[player.weapon].speed;
+  const maxSpeed =
+    (player.scope && weapons[player.weapon].scopedSpeed) || weapons[player.weapon].speed;
   const speed =
     maxSpeed *
     (player.eye < 1.4 ? movement.crouchModifier : input.walk ? movement.walkModifier : 1);
@@ -42,12 +60,9 @@ export function movePlayer(player: PlayerState, input: Input, dt: number, map: D
       player.vertical = 0;
     }
   }
-  const floor = collision.support(
-    player.x,
-    player.z,
-    oldY + (follow ? 0.46 : 0.001),
-    position.y - 0.2,
-    radius,
+  const floor = Math.max(
+    actorSupport(player.x, player.z, oldY, position.y, actors, radius, follow),
+    collision.support(player.x, player.z, oldY + (follow ? 0.46 : 0.001), position.y - 0.2, radius),
   );
   player.grounded = player.vertical <= 0 && position.y <= floor;
   if (player.grounded) {
@@ -69,6 +84,19 @@ export function movePlayer(player: PlayerState, input: Input, dt: number, map: D
   if (player.vertical <= 0 && (follow || player.grounded)) {
     player.grounded = collision.followGround(position, radius, hull);
     if (player.grounded) player.vertical = 0;
+  }
+  if (actors.length) {
+    const hit = slideActors(start, position, hull, actors, radius);
+    if (hit.hitX) velocity.x = 0;
+    if (hit.hitZ) velocity.z = 0;
+    const landing = actorLanding(start, position, actors, radius);
+    const support = actorSupport(position.x, position.z, oldY, position.y, actors, radius, follow);
+    const actorFloor = Math.max(landing, support);
+    if (player.vertical <= 0 && position.y <= actorFloor + 0.04 && Number.isFinite(actorFloor)) {
+      position.y = actorFloor;
+      player.vertical = 0;
+      player.grounded = true;
+    }
   }
   const eye =
     player.eye +

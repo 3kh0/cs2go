@@ -20,6 +20,77 @@ const control = Bun.serve({
       room.state.phase = "live";
       room.state.remaining = 100;
     }
+    if (command.op === "rich") for (const player of room.players.values()) player.money = 10000;
+    if (command.op === "at-buy") {
+      room.state.phase = "freeze";
+      room.state.remaining = 1000;
+      room.state.buyRemaining = 1000;
+      for (const player of room.players.values()) {
+        const point = map.spawns[player.team][0];
+        Object.assign(player, {
+          x: point[0],
+          y: map.collision.floor(point[0], point[2], point[1] + 0.5),
+          z: point[2],
+          vx: 0,
+          vz: 0,
+          vertical: 0,
+          cooldown: 0,
+          health: 100,
+          blind: 0,
+        });
+      }
+    }
+    if (command.op === "duel") {
+      const nav = await Bun.file(
+        new URL("../../../packages/assets/public/models/maps/dust2-nav.json", import.meta.url),
+      ).json();
+      const point = nav.sites[1],
+        floor = map.collision.floor(point[0], point[2], point[1] + 0.5);
+      const ct = [...room.players.values()].find((p) => p.team === "ct")!;
+      const t = [...room.players.values()].find((p) => p.team === "t")!;
+      let yaw = 0;
+      const { Vector3, Ray } = await import("three");
+      for (let i = 0; i < 16; i++) {
+        const angle = (i * Math.PI) / 8,
+          direction = new Vector3(-Math.sin(angle), 0, -Math.cos(angle));
+        const from = new Vector3(point[0], floor + 1.65, point[2]);
+        const x = point[0] + direction.x * 3,
+          z = point[2] + direction.z * 3;
+        if (
+          !map.collision.intersections(new Ray(from, direction), 4).length &&
+          Math.abs(map.collision.floor(x, z, floor + 0.5) - floor) < 0.05
+        ) {
+          yaw = angle;
+          break;
+        }
+      }
+      Object.assign(ct, {
+        x: point[0],
+        y: floor,
+        z: point[2],
+        yaw,
+        pitch: 0,
+        health: 100,
+        vx: 0,
+        vz: 0,
+        vertical: 0,
+        cooldown: 0,
+      });
+      Object.assign(t, {
+        x: ct.x - Math.sin(yaw) * 3,
+        y: floor,
+        z: ct.z - Math.cos(yaw) * 3,
+        yaw: Math.atan2(Math.sin(yaw + Math.PI), Math.cos(yaw + Math.PI)),
+        pitch: 0,
+        health: 100,
+        vx: 0,
+        vz: 0,
+        vertical: 0,
+        cooldown: 0,
+      });
+      room.state.phase = "live";
+      room.state.remaining = 100;
+    }
     if (command.op === "kill-ct") {
       const victim = [...room.players.values()].find((p) => p.team === "ct")!;
       const killer = [...room.players.values()].find((p) => p.team === "t")!;

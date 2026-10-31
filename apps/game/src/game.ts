@@ -431,6 +431,10 @@ export class Game {
       : weapons[index].suppressed;
   }
   toggleSuppressor() {
+    if (this.network) {
+      this.network.request.toggleSuppressor = true;
+      return;
+    }
     const state = this.suppressors[this.selected];
     if (
       !removableSuppressor(this.selected) ||
@@ -862,7 +866,7 @@ export class Game {
         if (this.network) this.network.request.drop = true;
         else this.groundInventory.drop(this.selected, true);
       }
-      if (code === "Digit4" && !this.network) this.utility.selectNext();
+      if (code === "Digit4") this.utility.selectNext();
       if (code === "KeyE" && this.network) this.network.request.pickup = true;
       if (code === "KeyE" && !this.network && this.groundInventory.pickup(true))
         this.keys.delete("KeyE");
@@ -1522,6 +1526,8 @@ export class Game {
   }
   equip(index: number) {
     if (this.network && !this.network.applying) {
+      this.utility.cancelThrow();
+      this.utility.selected = null;
       this.network.request.select = index;
       return;
     }
@@ -1863,11 +1869,15 @@ export class Game {
     else this.soundscape.play("step", false, this.teamMode ? "concrete" : "sand", position);
   }
   private audioSteps = new WeakMap<Bot, { position: T.Vector3; distance: number }>();
-  makeBot(index: number, override?: AgentTeam): Bot {
+  makeBot(
+    index: number,
+    override?: AgentTeam,
+    appearance?: Parameters<typeof createSoldier>[2],
+  ): Bot {
     const team =
       override ??
       (this.teamMode && index >= this.teamSize ? this.team : this.team === "ct" ? "t" : "ct");
-    const rig = createSoldier(index, team);
+    const rig = createSoldier(index, team, appearance, !this.network);
     // Dust II caches static sun shadows; moving agents must not become frozen
     // silhouettes when graphics settings rebuild that cache mid-round.
     if (this.teamMode)
@@ -2001,6 +2011,22 @@ export class Game {
     this.ray.far = Infinity;
     return result;
   }
+  muzzlePosition() {
+    const muzzle = (this.gun.userData.muzzle as T.Vector3).clone();
+    if (this.scopeLevel && weapons[this.selected].zoomLevels > 1) muzzle.set(0, -0.02, -0.25);
+    else {
+      this.gun.localToWorld(muzzle);
+      // Match the viewmodel's on-screen barrel despite its independent FOV.
+      const scale =
+        Math.tan(T.MathUtils.degToRad(this.camera.fov / 2)) /
+        Math.tan(T.MathUtils.degToRad(this.viewCamera.fov / 2));
+      muzzle.x *= scale;
+      muzzle.y *= scale;
+    }
+    muzzle.applyQuaternion(this.camera.quaternion).add(this.camera.position);
+    if (!this.visible(this.camera.position, muzzle)) muzzle.copy(this.camera.position);
+    return muzzle;
+  }
   trace(
     from: T.Vector3,
     to: T.Vector3,
@@ -2098,6 +2124,7 @@ export class Game {
   fire(continuingBurst = false, alternate = false) {
     if (this.network) {
       this.network.request.fire = true;
+      this.network.request.alternate = alternate;
       return;
     }
     if (this.utility.selected || this.utility.throwingKind) return;
@@ -2263,19 +2290,7 @@ export class Game {
           this.decal(decalPoint.copy(data.point).addScaledVector(direction, -0.015), data.normal);
         }
       }
-      const muzzle = (this.gun.userData.muzzle as T.Vector3).clone();
-      if (this.scopeLevel && weapons[this.selected].zoomLevels > 1) muzzle.set(0, -0.02, -0.25);
-      else {
-        this.gun.localToWorld(muzzle);
-        // Match the viewmodel's on-screen barrel despite its independent FOV.
-        const scale =
-          Math.tan(T.MathUtils.degToRad(this.camera.fov / 2)) /
-          Math.tan(T.MathUtils.degToRad(this.viewCamera.fov / 2));
-        muzzle.x *= scale;
-        muzzle.y *= scale;
-      }
-      muzzle.applyQuaternion(this.camera.quaternion).add(this.camera.position);
-      if (!this.visible(this.camera.position, muzzle)) muzzle.copy(this.camera.position);
+      const muzzle = this.muzzlePosition();
       this.trace(muzzle, end, this.selected);
     }
     applyFiringInaccuracy(
@@ -2302,8 +2317,13 @@ export class Game {
     noScope = false,
     wallbang = false,
     label?: string,
+    metadata?: {
+      appearance?: import("./weapon-instance").WeaponInstance;
+      killerTeam?: AgentTeam;
+      victimTeam?: AgentTeam;
+    },
   ) {
-    if (this.teamMode && !this.roundPause && !this.freezeTime) {
+    if (!this.network && this.teamMode && !this.roundPause && !this.freezeTime) {
       const id: RoundActor =
         killer === "YOU" ? "player" : this.bots.findIndex((bot) => bot.name === killer);
       const killerTeam = id === "player" ? this.team : this.bots[id]?.team;
@@ -2323,9 +2343,10 @@ export class Game {
     }
     const utilityKind = grenadeTypes.find((kind) => grenadeData[kind].name === label);
     const killerInstance =
-      killer === "YOU"
+      metadata?.appearance ??
+      (killer === "YOU"
         ? this.groundInventory.playerWeapon(weapon >= 0 ? weapon : this.selected)
-        : this.bots.find((bot) => bot.name === killer)?.rig.weaponInstance;
+        : this.bots.find((bot) => bot.name === killer)?.rig.weaponInstance);
     const weaponName =
       label ??
       (weapon < 0
@@ -2348,7 +2369,9 @@ export class Game {
     if (victim === "YOU") {
       setText("death-killer", killer);
       el("death-killer").className =
-        this.bots.find((b) => b.name === killer)?.team === "ct" ? "feed-ct" : "feed-t";
+        (metadata?.killerTeam ?? this.bots.find((b) => b.name === killer)?.team) === "ct"
+          ? "feed-ct"
+          : "feed-t";
       setText("death-weapon", weaponName);
       toggle("death-weapon-icon", true);
       (el("death-weapon-icon") as HTMLImageElement).src = assetUrl(weaponIcon);
@@ -2366,13 +2389,14 @@ export class Game {
     const row = document.createElement("div");
     row.className = "feed" + (killer === "YOU" || victim === "YOU" ? " feed-local" : "");
     row.setAttribute("role", "listitem");
-    const name = (text: string) => {
+    const name = (text: string, team?: AgentTeam) => {
       const node = document.createElement("span");
       node.className =
-        (text === "YOU"
-          ? this.team
-          : (this.bots.find((b) => b.name === text)?.team ?? (this.team === "ct" ? "t" : "ct"))) ===
-        "ct"
+        (team ??
+          (text === "YOU"
+            ? this.team
+            : (this.bots.find((b) => b.name === text)?.team ??
+              (this.team === "ct" ? "t" : "ct")))) === "ct"
           ? "feed-ct"
           : "feed-t";
       node.textContent = text === "YOU" ? playerName() : text;
@@ -2385,7 +2409,7 @@ export class Game {
       img.className = className;
       return img;
     };
-    row.append(name(killer));
+    row.append(name(killer, metadata?.killerTeam));
     const icons = document.createElement("span");
     icons.className = "feed-icons";
     if (utilityKind === "molotov" || utilityKind === "incendiary") {
@@ -2408,7 +2432,7 @@ export class Game {
     if (wallbang) icons.append(icon("wallbang", "PENETRATION", "feed-modifier"));
     if (head) icons.append(icon("headshot", "HEADSHOT", "feed-modifier"));
     row.append(icons);
-    row.append(name(victim));
+    row.append(name(victim, metadata?.victimTeam));
     row.setAttribute(
       "aria-label",
       `${killer} eliminated ${victim} with ${weaponName}${head ? ", HEADSHOT" : ""}${noScope ? ", NO SCOPE" : ""}`,

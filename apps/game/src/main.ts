@@ -71,10 +71,7 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-mode]")
   button.onclick = () => {
     selectedMode = button.dataset.mode as typeof selectedMode;
     el("mode-title").textContent = selectedMode.toUpperCase();
-    el("mode-description").textContent =
-      selectedMode === "competitive"
-        ? "5 × 5 · Friendly fire · First to 13 · Halftime after 12"
-        : "10 × 10 · Plant or defuse · First to 8";
+    el("mode-description").textContent = "";
     el("play").firstElementChild!.textContent = `PLAY ${selectedMode.toUpperCase()}`;
     document
       .querySelectorAll("[data-mode]")

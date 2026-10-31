@@ -58,7 +58,7 @@ that current CS2 still uses the same runtime calculations.
 
 ## Accuracy reconstruction evidence
 
-`apps/game/src/data/accuracy.json` imports current weapon inputs and five relevant convar defaults from the same pinned revision, recording both source hashes. `weapon_air_spread_scale=1`, `sv_jump_impulse=301.99338`, `weapon_accuracy_stack_boost_limit=2`, `weapon_accuracy_reset_on_deploy=false` and `weapon_accuracy_shotgun_spread_patterns=true` are shipped defaults, not inferred runtime algorithms.
+`packages/simulation/src/data/accuracy.json` imports current weapon inputs and five relevant convar defaults from the same pinned revision, recording both source hashes. `weapon_air_spread_scale=1`, `sv_jump_impulse=301.99338`, `weapon_accuracy_stack_boost_limit=2`, `weapon_accuracy_reset_on_deploy=false` and `weapon_accuracy_shotgun_spread_patterns=true` are shipped defaults, not inferred runtime algorithms.
 
 The historical mirror's `weapon_csbase.cpp` supplies movement remapping, persistent posture floors, integer recovery-index interpolation, four-times-crouch airborne recovery, landing velocity impulses and square-root jump-speed remapping. `fx_cs_shared.cpp` supplies shared shot inaccuracy and R8-secondary/early-Negev radius transforms. These source formulas are implemented with current shipped inputs. The newer jump-apex field has no counterpart in that historical implementation; interpolating its endpoint using the historical curve remains a documented inference. Historical scope mode transitions use ordinary accuracy recovery plus an alternate-switch field absent from the current pinned weapon file. No authored scope timer or camera zoom-duration constant is presented as native accuracy evidence.
 

@@ -1,4 +1,6 @@
 import { expect, test } from "vitest";
+import * as T from "three";
+import { MapCollision } from "./map-collision";
 import { neutralInput, type Input } from "@cs2go/protocol";
 import { createPlayer, createMatch, joinMatch, endRound, STEP, stepMatch } from "./match";
 import { movePlayer } from "./movement";
@@ -225,4 +227,37 @@ test("sidearm drops preserve ammo, leave the knife usable and can be picked up b
   expect(other.ammo).toBe(3);
   expect(match.state.drops.some((drop) => drop.owner === "other")).toBe(true);
   expect(match.state.drops.some((drop) => drop.owner === "p")).toBe(false);
+});
+
+test("shot feedback distinguishes wall impacts, sky misses and confirmed player hits", () => {
+  const { match, ct, t } = fixture();
+  live(match);
+  Object.assign(ct, { x: 4, z: -61, y: 0, yaw: 0, pitch: 0, cooldown: 0 });
+  Object.assign(t, { x: 4, z: -65, y: 0 });
+  const wall = new T.Mesh(new T.BoxGeometry(4, 4, 0.2), new T.MeshBasicMaterial());
+  wall.position.set(4, 2, -63);
+  wall.updateMatrixWorld();
+  match.map.collision = new MapCollision([wall]);
+  const fire = (pitch = 0) =>
+    stepMatch(match, new Map([[ct.id, { ...neutralInput(), pitch, fire: true }]])).find(
+      (event) => event.kind === "shot",
+    );
+  const impact = fire();
+  expect(impact?.normal?.z).toBeCloseTo(1);
+  expect(impact?.victim).toBeUndefined();
+  expect(t.health).toBe(100);
+  match.map = testMap();
+  ct.cooldown = 0;
+  match.shotsHeld.clear();
+  const hit = fire();
+  expect(hit).toMatchObject({ victim: t.id, headshot: true });
+  expect(hit?.normal).toBeUndefined();
+  expect(t.health).toBeLessThan(100);
+  t.x = 20;
+  ct.cooldown = 0;
+  match.shotsHeld.clear();
+  const miss = fire(-0.25);
+  expect(miss?.normal).toBeUndefined();
+  expect(miss?.victim).toBeUndefined();
+  expect(Math.hypot(miss!.to.x - ct.x, miss!.to.z - ct.z)).toBeLessThanOrEqual(90);
 });

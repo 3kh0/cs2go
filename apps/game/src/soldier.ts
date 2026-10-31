@@ -123,8 +123,9 @@ export function createSoldier(
   index: number,
   team: AgentTeam = "t",
   appearance?: { scene: T.Group; animationTeam: AgentTeam; release?: () => void },
+  useSelection = true,
 ): Soldier {
-  appearance ??= peekSelectedAgent(team);
+  if (useSelection) appearance ??= peekSelectedAgent(team);
   const animationTeam = appearance?.animationTeam ?? team;
   const template = templates.get(animationTeam)!;
   const group = new T.Group();

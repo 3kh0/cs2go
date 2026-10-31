@@ -3,6 +3,7 @@ import { MapCollision } from "./map-collision";
 import type { BakedBombDamage } from "./bomb-damage";
 export type DustMap = {
   collision: MapCollision;
+  grenadeCollision?: MapCollision;
   spawns: Record<"t" | "ct", number[][]>;
   spawnAngles?: Record<"t" | "ct", number[]>;
   bombDamage?: BakedBombDamage;

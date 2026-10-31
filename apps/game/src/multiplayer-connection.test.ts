@@ -45,7 +45,7 @@ function setup() {
   const socket = connection.socket as unknown as TestSocket;
   socket.receive({
     type: "welcome",
-    version: 3,
+    version: 4,
     id: "player",
     room: "test-room-123",
     map: "dust2",
@@ -103,8 +103,8 @@ test("losing input focus immediately flushes a neutral command even between pack
   expect(socket.sent).toHaveLength(0);
   connection.stopInput();
   const packet = JSON.parse(socket.sent[0]);
-  expect(packet.inputs).toHaveLength(2);
-  expect(packet.inputs.at(-1)).toMatchObject({ forward: 0, fire: false });
+  expect(packet.inputs).toHaveLength(1);
+  expect(JSON.parse(socket.sent[1])).toEqual({ type: "stop" });
   connection.close();
 });
 
@@ -121,5 +121,23 @@ test("waiting movement is predicted and replayed until the round starts", () => 
   player.ack = 1;
   socket.receive({ type: "snapshot", tick: 2, players: [player], events: [], round });
   expect(connection.local!.z).toBe(predicted);
+  connection.close();
+});
+
+test("a temporary acknowledgement stall bounds input and resumes without disconnecting", () => {
+  const { connection, socket, player } = setup();
+  for (let i = 0; i < 256; i++) connection.step({ ...neutralInput(), forward: 1 });
+  expect(socket.readyState).toBe(TestSocket.OPEN);
+  expect(connection.pending).toHaveLength(128);
+  player.ack = 128;
+  socket.receive({
+    type: "snapshot",
+    tick: 128,
+    players: [player],
+    events: [],
+    round: { ...createMatch("casual", testMap()).state, phase: "live" },
+  });
+  expect(connection.step({ ...neutralInput(), forward: 1 })).toBe(true);
+  expect(connection.pending).toHaveLength(1);
   connection.close();
 });

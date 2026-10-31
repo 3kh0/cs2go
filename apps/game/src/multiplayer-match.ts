@@ -4,11 +4,13 @@ import { MatchConnection } from "./multiplayer-connection";
 import type { Game } from "./game";
 import { weapons, movement, isKnife } from "./physics";
 import { createWeaponInstance } from "./weapon-instance";
-import { bindWeaponInstance } from "./skins";
+import { bindWeaponInstance, skinChoices } from "./skins";
+import { selectedAgentId, acquireAgentAppearance } from "./agent-roster";
 import { setSoldierWeapon, disposeSoldier, resetSoldier, stepSoldierRagdoll } from "./soldier";
 import { showRoundBanner, hideRoundBanner } from "./round-banner";
 import { playerName } from "./player-profile";
 import { createWorldGun, disposeWorldGun, weaponDrawDuration } from "./weapons";
+import { grenadeData } from "./utility";
 import { nativeShotDuration } from "./weapon-motion";
 
 type Bot = Game["bots"][number];
@@ -18,6 +20,7 @@ export class MultiplayerMatch {
   applying = false;
   private drops = new Map<number, T.Group>();
   private peers = new Map<string, Bot>();
+  private peerAgents = new Map<string, string>();
   private peerSpawns = new Map<string, number>();
   private lastSpawn = 0;
   private resultRound = 0;
@@ -25,6 +28,7 @@ export class MultiplayerMatch {
   private health = 100;
   private beep = 0;
   private finished = false;
+  private stepDistance = 0;
   constructor(privateGame: Game, url: string, room: string, password: string, mode: MatchMode) {
     this.game = privateGame;
     const world = privateGame.dust!;
@@ -39,6 +43,7 @@ export class MultiplayerMatch {
         spawns: world.navigation.data.spawns,
         spawnAngles: world.navigation.data.spawnAngles,
         bombDamage: world.bombDamage,
+        grenadeCollision: world.grenadeCollision,
       },
       password,
       (message) => this.receive(message),
@@ -49,6 +54,11 @@ export class MultiplayerMatch {
         this.game.menu();
         document.getElementById("match-status")!.textContent = reason;
         document.getElementById("multiplayer-options")!.hidden = false;
+      },
+      {
+        skins: Object.fromEntries(skinChoices.map((skin, index) => [index, { ...skin }])),
+        agents: { ct: selectedAgentId("ct"), t: selectedAgentId("t") },
+        loadouts: privateGame.groundInventory.loadouts,
       },
     );
   }
@@ -98,6 +108,7 @@ export class MultiplayerMatch {
         disposeSoldier(bot.rig);
         this.peers.delete(id);
         this.peerSpawns.delete(id);
+        this.peerAgents.delete(id);
       }
     for (const player of message.players)
       if (player.id !== local.id) {
@@ -117,6 +128,32 @@ export class MultiplayerMatch {
           bot.group.rotation.y = player.yaw + Math.PI;
           bot.group.visible = true;
         }
+        if (this.peerAgents.get(player.id) !== player.agent) {
+          this.peerAgents.set(player.id, player.agent);
+          if (!player.agent.startsWith("default-"))
+            void acquireAgentAppearance(player.agent)
+              .then((appearance) => {
+                const current = this.peers.get(player.id);
+                if (!appearance) return;
+                if (
+                  !current ||
+                  this.closed ||
+                  this.peerAgents.get(player.id) !== player.agent ||
+                  current.health <= 0
+                ) {
+                  appearance.release();
+                  return;
+                }
+                const replacement = g.makeBot(g.bots.indexOf(current), player.team, appearance);
+                replacement.group.position.copy(current.group.position);
+                replacement.group.rotation.copy(current.group.rotation);
+                g.scene.remove(current.group);
+                disposeSoldier(current.rig);
+                current.group = replacement.group;
+                current.rig = replacement.rig;
+              })
+              .catch(() => {});
+        }
         bot.name = player.name;
         bot.health = player.health;
         bot.armor = player.armor;
@@ -125,27 +162,38 @@ export class MultiplayerMatch {
         bot.kills = player.kills;
         bot.deaths = player.deaths;
         bot.money = player.money;
+        Object.assign(bot.aimPunch, player.punch);
+        bot.recoilWeapon = player.weapon;
         bot.ammo = player.ammo;
         bot.reserve = player.reserve;
         bot.reloadTime = player.reloadTime;
         bot.respawn = player.health > 0 ? 0 : Infinity;
-        if (bot.rig.weaponIndex !== player.weapon)
+        if (
+          bot.rig.weaponIndex !== player.weapon ||
+          bot.rig.suppressed !== player.suppressed ||
+          bot.rig.weaponInstance.serial !== player.appearances[player.weapon]?.serial
+        )
           setSoldierWeapon(
             bot.rig,
             player.weapon,
-            weapons[player.weapon].suppressed,
-            createWeaponInstance(player.weapon, player.id),
+            player.suppressed,
+            player.appearances[player.weapon] ?? createWeaponInstance(player.weapon, player.id),
           );
+        bot.rig.weapon.visible = player.health > 0;
       }
     g.bots = [...this.peers.values()];
+    g.utility.syncNetwork(state, message.players, local.id);
     g.mvpCounts.set("player", local.mvps);
     g.bots.forEach((bot, index) =>
       g.mvpCounts.set(index, message.players.find((p) => this.peers.get(p.id) === bot)?.mvps ?? 0),
     );
+    g.groundInventory.instances = new Map(
+      Object.entries(local.appearances).map(([id, appearance]) => [Number(id), appearance]),
+    );
     g.primary = local.primary;
     g.secondary = local.secondary;
     g.groundInventory.sidearmDropped = !local.magazines[local.secondary];
-    g.knife = 4;
+    g.knife = local.knife;
     g.health = local.health;
     g.dead = local.health > 0 ? 0 : Infinity;
     g.armor = local.armor;
@@ -163,6 +211,9 @@ export class MultiplayerMatch {
       g.setScope(0);
       g.spectated = undefined;
       g.notices.reset();
+      g.utility.cancelThrow();
+      g.utility.selected = null;
+      g.utility.blind.clear();
       g.deathBannerUntil = 0;
       document.getElementById("death-banner")!.classList.add("hidden");
       g.groundInventory.reset(false);
@@ -171,18 +222,36 @@ export class MultiplayerMatch {
     if (
       g.selected !== local.weapon ||
       previousTeam !== local.team ||
-      g.gun.userData.networkSpawn !== local.spawn
+      g.gun.userData.networkSpawn !== local.spawn ||
+      g.gun.userData.networkAppearance !== local.appearances[local.weapon]?.serial
     ) {
       this.applying = true;
       g.equip(local.weapon);
       this.applying = false;
-      bindWeaponInstance(g.gun, createWeaponInstance(local.weapon, local.id));
+      bindWeaponInstance(
+        g.gun,
+        local.appearances[local.weapon] ?? createWeaponInstance(local.weapon, local.id),
+      );
+      g.gun.userData.networkAppearance = local.appearances[local.weapon]?.serial;
       g.gun.userData.networkSpawn = local.spawn;
     }
+    Object.assign(g.aimPunch, local.punch);
     g.ammo = local.ammo;
     g.reserve = local.reserve;
     g.cooldown = local.cooldown;
+    if (local.reloadTime > 0 && !g.reload) {
+      g.drawTime = g.inspectTime = g.shotTime = 0;
+      g.setScope(0);
+    }
     g.reload = local.reloadTime;
+    g.shellPhase = local.reloadPhase;
+    g.emptyReload = local.reloadEmpty;
+    g.revolverCharge = local.charge;
+    const suppressor = g.suppressors[local.weapon];
+    suppressor.attached = local.suppressed;
+    suppressor.action = local.suppressorAction || null;
+    suppressor.elapsed = local.suppressorTime;
+    suppressor.duration = local.suppressorDuration;
 
     const indexFor = (id: string | null) =>
       id === local.id ? ("player" as const) : id ? g.bots.indexOf(this.peers.get(id)!) : -1;
@@ -202,32 +271,74 @@ export class MultiplayerMatch {
     g.bombMesh.visible = state.phase !== "waiting" && (bomb.planted || !bomb.carrier);
     g.bombMesh.position.set(bomb.x, bomb.y + 0.005, bomb.z);
     if (local.health < this.health) g.damage = 0.3;
+    if (this.health > 0 && local.health <= 0) {
+      g.soundscape.play("death");
+      g.firing = false;
+      g.reload = g.knifeTime = g.inspectTime = g.boltTime = g.rescope = 0;
+      g.setScope(0);
+    }
     this.health = local.health;
     for (const event of message.events) {
       if (event.kind === "shot") {
-        if (event.shooter === local.id && event.weapon === local.weapon) {
+        if (event.shooter === local.id && event.weapon === local.weapon && !event.pellet) {
+          g.alternateShot = !!event.alternate;
           g.lastShot = local.ammo === 0;
-          g.shotTime = nativeShotDuration(event.weapon, false, g.lastShot);
+          if (weapons[event.weapon].unzoomsAfterShot) {
+            g.rescope = g.scopeLevel;
+            g.setScope(0);
+            g.boltTime = weapons[event.weapon].delay;
+          }
+          g.shotTime = nativeShotDuration(event.weapon, event.alternate, g.lastShot);
           g.weaponTime = g.inspectTime = 0;
           g.drawTime = 0;
           g.kick = 0.07;
           g.sound("shot");
-        } else {
+        } else if (!event.pellet) {
           const peer = this.peers.get(event.shooter);
           if (peer) {
             peer.rig.shotTime = 0.25;
+            peer.rig.recoil = 1;
+            if (g.spectated === peer) {
+              g.spectatorShotAt = g.animationTime;
+              g.spectatorLastShot = event.weapon === 8 && peer.ammo === 0;
+            }
             g.worldSound(
               "bot",
               new T.Vector3(event.from.x, event.from.y, event.from.z),
               event.weapon,
+              event.suppressed,
             );
           }
         }
-        g.trace(
-          new T.Vector3(event.from.x, event.from.y, event.from.z),
-          new T.Vector3(event.to.x, event.to.y, event.to.z),
-          event.weapon,
-        );
+        const end = new T.Vector3(event.to.x, event.to.y, event.to.z);
+        const muzzle =
+          event.shooter === local.id && event.weapon === local.weapon
+            ? g.muzzlePosition()
+            : new T.Vector3(event.from.x, event.from.y, event.from.z);
+        const remote = this.peers.get(event.shooter);
+        const remoteMuzzle = remote?.rig.weapon.userData.muzzle as T.Vector3 | undefined;
+        if (remote && remoteMuzzle) remote.rig.weapon.localToWorld(muzzle.copy(remoteMuzzle));
+        g.trace(muzzle, end, event.weapon, event.suppressed);
+        for (const impact of event.impacts ??
+          (event.normal ? [{ point: event.to, normal: event.normal }] : [])) {
+          const normal = new T.Vector3(
+            impact.normal.x,
+            impact.normal.y,
+            impact.normal.z,
+          ).normalize();
+          g.decal(
+            new T.Vector3(impact.point.x, impact.point.y, impact.point.z).addScaledVector(
+              normal,
+              0.01,
+            ),
+            normal,
+          );
+        }
+        if (event.shooter === local.id && event.victim) {
+          g.hit = 0.13;
+          g.sound(event.headshot ? "head" : "hit");
+          document.getElementById("hitmarker")!.style.color = event.headshot ? "#efac51" : "#fff";
+        }
       } else if (event.kind === "melee") {
         const peer = this.peers.get(event.shooter);
         if (event.shooter === local.id && isKnife(local.weapon)) {
@@ -235,6 +346,10 @@ export class MultiplayerMatch {
           g.knifeAlternate = !g.knifeAlternate;
           g.knifeDuration = event.stab ? 1 : 0.5;
           g.knifeTime = g.knifeDuration;
+          if (event.hit) {
+            g.hit = 0.13;
+            document.getElementById("hitmarker")!.style.color = "#fff";
+          }
           g.weaponTime = g.inspectTime = g.drawTime = 0;
           g.soundscape.play(
             event.hit
@@ -253,12 +368,35 @@ export class MultiplayerMatch {
             peer.group.position,
           );
         }
+      } else if (event.kind === "utility-sound") {
+        const point = new T.Vector3(event.point.x, event.point.y, event.point.z);
+        if (event.sound === "decoy-shot") g.worldSound("bot", point, event.weapon);
+        else
+          g.soundscape.play(
+            event.sound === "bounce" ? `utility-${event.utility}-bounce` : "utility-decoy-explode",
+            false,
+            "sand",
+            point,
+          );
       } else if (event.kind === "kill") {
         const killer =
           event.killer === local.id ? "YOU" : (this.peers.get(event.killer)?.name ?? event.killer);
         const victim =
           event.victim === local.id ? "YOU" : (this.peers.get(event.victim)?.name ?? event.victim);
-        g.feed(killer, victim, event.headshot, event.weapon);
+        g.feed(
+          killer,
+          victim,
+          event.headshot,
+          event.weapon,
+          !!event.noScope,
+          !!event.wallbang,
+          event.utility ? grenadeData[event.utility].name : undefined,
+          {
+            appearance: event.appearance,
+            killerTeam: message.players.find((p) => p.id === event.killer)?.team,
+            victimTeam: message.players.find((p) => p.id === event.victim)?.team,
+          },
+        );
       } else if (event.kind === "plant") {
         g.notices.showBombPlanted(bomb.timer);
         g.soundscape.play("bomb-plant", false, "concrete", g.bomb.position);
@@ -297,21 +435,18 @@ export class MultiplayerMatch {
     for (const drop of state.drops) {
       let mesh = this.drops.get(drop.id);
       if (!mesh) {
-        mesh = createWorldGun(
-          drop.weapon,
-          weapons[drop.weapon].suppressed,
-          createWeaponInstance(drop.weapon, drop.owner),
-        );
+        mesh = createWorldGun(drop.weapon, drop.suppressed, drop.appearance);
         this.drops.set(drop.id, mesh);
         g.scene.add(mesh);
       }
-      mesh.position.set(drop.x, drop.y + 0.08, drop.z);
-      mesh.rotation.set(0, drop.yaw, Math.PI / 2);
+      mesh.position.set(drop.x, drop.y, drop.z);
+      mesh.rotation.set(drop.rx, drop.yaw, drop.rz + Math.PI / 2);
     }
     g.updateUI();
   }
   simulate(dt: number) {
     const g = this.game;
+    g.utility.update(dt);
     const base = neutralInput();
     const locked = g.locked && !g.dead;
     const input: Omit<Input, "seq"> = {
@@ -325,14 +460,30 @@ export class MultiplayerMatch {
       duck: locked && (g.keys.has("ControlLeft") || g.keys.has("KeyC")),
       walk: locked && g.keys.has("ShiftLeft"),
       // Preserve a short click even if press/release both precede this frame.
-      fire: locked && (g.firing || this.request.fire),
+      fire:
+        locked && !g.utility.selected && !g.utility.throwingKind && (g.firing || this.request.fire),
+      alternate: locked && this.request.alternate,
+      burst: g.burstMode,
+      utility: g.utility.selected ?? "",
+      scope: g.scopeLevel,
       use: locked && g.keys.has("KeyE"),
     };
-    this.connection.step(input);
-    this.request = neutralInput();
-    g.jumpQueued = false;
+    const grounded = this.connection.local?.grounded;
+    if (this.connection.step(input)) {
+      this.request = neutralInput();
+      g.jumpQueued = false;
+    }
     const local = this.connection.local;
     if (!local) return;
+    if (grounded && !local.grounded && local.vertical > 0) g.soundscape.play("jump");
+    if (grounded === false && local.grounded) g.soundscape.play("land");
+    if (local.grounded && Math.hypot(local.vx, local.vz) > 1.5 && !input.walk && !input.duck) {
+      this.stepDistance += Math.hypot(local.vx, local.vz) * dt;
+      if (this.stepDistance >= 1.8) {
+        this.stepDistance %= 1.8;
+        g.sound("step");
+      }
+    } else this.stepDistance = 0;
     g.position.set(local.x, local.y, local.z);
     g.velocity.x = local.vx;
     g.velocity.z = local.vz;
@@ -359,7 +510,37 @@ export class MultiplayerMatch {
     }
     g.knifeTime = Math.max(0, g.knifeTime - dt);
     g.inspectTime = Math.max(0, g.inspectTime - dt);
-    g.weaponTime += dt;
+    if (g.reload > 0) {
+      const before = g.reloadProgress();
+      g.reload = Math.max(0, g.reload - dt);
+      g.animationSounds("reload", before, g.reloadProgress());
+    }
+    if (g.suppressors[g.selected].action) {
+      const action = g.suppressors[g.selected];
+      const before = action.progress;
+      action.elapsed = Math.min(action.duration, action.elapsed + dt);
+      g.animationSounds(action.action!, before, action.progress);
+    }
+    if (g.boltTime > 0) {
+      const before = g.boltTime;
+      g.boltTime = Math.max(0, g.boltTime - dt);
+      g.animationSounds(
+        "shoot1",
+        1 - before / weapons[g.selected].delay,
+        1 - g.boltTime / weapons[g.selected].delay,
+      );
+      if (!g.boltTime && g.rescope) {
+        g.setScope(g.rescope);
+        g.rescope = 0;
+      }
+    }
+    if (g.scopeTransition > 0) {
+      g.scopeTransition = Math.max(0, g.scopeTransition - dt);
+      g.camera.fov =
+        g.scopeTarget + ((g.scopeFrom - g.scopeTarget) * g.scopeTransition) / g.scopeDuration;
+      g.camera.updateProjectionMatrix();
+    }
+    if (!g.drawTime && !g.knifeTime && !g.inspectTime) g.weaponTime += dt;
     g.animationTime += dt;
     g.sway += Math.hypot(local.vx, local.vz) * dt * 1.8;
     for (const [id, bot] of this.peers) {
@@ -405,6 +586,7 @@ export class MultiplayerMatch {
     }
     if (!g.dead) g.updateAimCamera();
     else if (g.spectatorMode === "free") g.moveSpectator(dt);
+    else g.spectate();
     if (g.bomb?.planted && this.connection.round?.phase === "live") {
       this.beep -= dt;
       if (this.beep <= 0) {

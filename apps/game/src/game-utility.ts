@@ -1,4 +1,5 @@
 import * as T from "three";
+import type { RoundState, PlayerState } from "@cs2go/protocol";
 import type { Game } from "./game";
 import {
   SmokeRenderer,
@@ -9,14 +10,13 @@ import {
 } from "./smoke-renderer";
 import { UtilityVisual } from "./utility-effects";
 import { GrenadeHandling } from "./grenade-handling";
-import { grenadeLaunch, grenadePhysics, bounceGrenade } from "./grenade-physics";
+import { grenadeLaunch, grenadePhysics, advanceGrenade } from "./grenade-physics";
 import { GrenadeView } from "./grenade-view";
 import { createGrenadeModel, grenadeMotionDuration } from "./grenade-models";
 import { applyArmorDamage } from "./damage";
 import {
   canCarryGrenade,
   fireParameters,
-  fireImpactAllowed,
   fireTickDamage,
   fireCellCandidates,
   utilityDamageScale,
@@ -31,6 +31,7 @@ import {
 import type { GrenadeInventory, GrenadeKind } from "./utility";
 type Owner = number | "player";
 type Projectile = {
+  networkId?: number;
   kind: GrenadeKind;
   owner: Owner;
   team: "t" | "ct";
@@ -43,6 +44,7 @@ type Projectile = {
   lastBounce: number;
 };
 type Effect = {
+  networkId?: number;
   kind: GrenadeKind;
   owner: Owner;
   team: "t" | "ct";
@@ -97,7 +99,10 @@ export class GameUtility {
     this.game = game;
   }
   buy(kind: GrenadeKind) {
-    if (this.game.network) return false;
+    if (this.game.network) {
+      this.game.network.request.grenadeBuy = kind;
+      return true;
+    }
     const g = this.game,
       price = g.teamMode ? grenadeData[kind].price : 0;
     if (
@@ -116,7 +121,10 @@ export class GameUtility {
     return true;
   }
   refund(kind: GrenadeKind) {
-    if (this.game.network) return false;
+    if (this.game.network) {
+      this.game.network.request.grenadeRefund = kind;
+      return true;
+    }
     if (!this.game.canBuy() || !this.receipts[kind] || !this.inventory[kind]) return false;
     this.receipts[kind]--;
     this.inventory[kind]--;
@@ -265,7 +273,6 @@ export class GameUtility {
       refund.hidden = !this.receipts[kind] || !this.game.canBuy();
 
       button.disabled =
-        !!this.game.network ||
         !this.game.canBuy() ||
         !canCarryGrenade(this.inventory, kind, !this.game.teamMode || this.game.competitive) ||
         (this.game.teamMode && this.game.money < grenadeData[kind].price);
@@ -307,6 +314,15 @@ export class GameUtility {
       !g.locked
     )
       return;
+    if (g.network) {
+      g.network.request.throwKind = kind;
+      g.network.request.throwStrength = typeof weak === "number" ? weak : weak ? 0 : 1;
+      this.throwingKind = kind;
+      this.selected = null;
+      this.cooldown = 0.7;
+      g.firing = false;
+      return;
+    }
     const direction = new T.Vector3();
     g.camera.getWorldDirection(direction);
     const strength = typeof weak === "number" ? weak : weak ? 0 : 1;
@@ -469,63 +485,57 @@ export class GameUtility {
       if (duration <= dt) this.blind.delete(id);
       else this.blind.set(id, duration - dt);
     }
-    if (g.weaponsFrozen) return;
+    if (g.weaponsFrozen || g.network) return;
     for (let i = this.projectiles.length - 1; i >= 0; i--) {
       const p = this.projectiles[i];
       p.age += dt;
       let fireContact = false;
       if (!p.resting) {
-        p.velocity.y -= grenadePhysics.gravity * dt * 0.5;
-        let remaining = dt;
-        for (let contact = 0; contact < 4 && remaining > 1e-8 && !p.resting; contact++) {
-          const from = this.projectileFrom.copy(p.position);
-          const delta = this.projectileDelta.copy(p.velocity).multiplyScalar(remaining);
-          const distance = delta.length();
-          if (distance < 1e-8) break;
-          const normal = this.projectileNormal;
-          let fraction = Infinity;
-          if (g.world.collision) {
-            fraction = g.world.collision.sweepSphere(from, delta, grenadePhysics.radius, normal);
-            const clipped = g.teamMode
-              ? g.dust?.grenadeCollision?.sweepSphere(
-                  from,
-                  delta,
-                  grenadePhysics.radius,
-                  this.projectileClipNormal,
-                )
-              : undefined;
-            if (clipped !== undefined && clipped < fraction) {
-              fraction = clipped;
-              normal.copy(this.projectileClipNormal);
+        const result = advanceGrenade(
+          p.position,
+          p.velocity,
+          dt,
+          (from, delta, normal) => {
+            const distance = delta.length();
+            if (g.world.collision) {
+              let fraction = g.world.collision.sweepSphere(
+                from,
+                delta,
+                grenadePhysics.radius,
+                normal,
+              );
+              const clipped = g.teamMode
+                ? g.dust?.grenadeCollision?.sweepSphere(
+                    from,
+                    delta,
+                    grenadePhysics.radius,
+                    this.projectileClipNormal,
+                  )
+                : undefined;
+              if (clipped !== undefined && clipped < fraction) {
+                fraction = clipped;
+                normal.copy(this.projectileClipNormal);
+              }
+              return fraction;
             }
-          } else {
             this.projectileCaster.set(from, this.projectileRay.direction.copy(delta).normalize());
             this.projectileCaster.far = distance + grenadePhysics.radius;
             const hit = this.projectileCaster.intersectObjects(g.world.solids, false)[0];
-            if (hit) {
-              fraction = Math.max(0, (hit.distance - grenadePhysics.radius) / distance);
-              normal
-                .copy(hit.face?.normal ?? T.Object3D.DEFAULT_UP)
-                .transformDirection(hit.object.matrixWorld);
-              if (normal.dot(p.velocity) > 0) normal.negate();
-            }
-          }
-          if (fraction > 1) {
-            p.position.add(delta);
-            break;
-          }
-          p.position.addScaledVector(delta, Math.max(0, fraction)).addScaledVector(normal, 1e-4);
-          const bounce = bounceGrenade(p.velocity, normal);
-          p.resting = bounce.resting;
-          if (bounce.impact > 1.5 && p.age - p.lastBounce >= 0.08) {
-            g.soundscape.play(`utility-${p.kind}-bounce`, false, "sand", p.position);
-            p.lastBounce = p.age;
-          }
-          fireContact ||= fireImpactAllowed(normal.y);
-          remaining *= 1 - Math.max(0, fraction);
-          if (fireContact && (p.kind === "molotov" || p.kind === "incendiary")) break;
+            if (!hit) return Infinity;
+            normal
+              .copy(hit.face?.normal ?? T.Object3D.DEFAULT_UP)
+              .transformDirection(hit.object.matrixWorld);
+            if (normal.dot(p.velocity) > 0) normal.negate();
+            return Math.max(0, (hit.distance - grenadePhysics.radius) / distance);
+          },
+          p.kind === "molotov" || p.kind === "incendiary",
+        );
+        p.resting = result.resting;
+        fireContact = result.fireContact;
+        if (result.impact > 1.5 && p.age - p.lastBounce >= 0.08) {
+          g.soundscape.play(`utility-${p.kind}-bounce`, false, "sand", p.position);
+          p.lastBounce = p.age;
         }
-        if (!p.resting) p.velocity.y -= grenadePhysics.gravity * dt * 0.5;
       }
       p.mesh.position.copy(p.position);
       p.mesh.rotation.x += p.velocity.length() * dt;
@@ -610,7 +620,7 @@ export class GameUtility {
           g.visible(p.position, e.position)
         )
           e.cleared = 2;
-    } else if (p.kind === "flash") {
+    } else if (p.kind === "flash" && !g.network) {
       const test = (id: Owner, position: T.Vector3, facing: T.Vector3) => {
         const delta = p.position.clone().sub(position),
           distance = delta.length();
@@ -694,6 +704,7 @@ export class GameUtility {
     g.scene.add(effect.mesh);
   }
   areaDamage(effect: Effect, fixedDamage: number, radius: number) {
+    if (this.game.network) return;
     const g = this.game;
     const hurt = (id: Owner, position: T.Vector3) => {
       const actor = id === "player" ? g : g.bots[id];
@@ -769,6 +780,74 @@ export class GameUtility {
     };
     hurt("player", g.position);
     g.bots.forEach((b, i) => hurt(i, b.group.position));
+  }
+  syncNetwork(state: RoundState, players: PlayerState[], localId: string) {
+    const g = this.game;
+    const owner = (id: string): Owner =>
+      id === localId
+        ? "player"
+        : players.filter((p) => p.id !== localId).findIndex((p) => p.id === id);
+    for (const p of this.projectiles.slice())
+      if (!state.projectiles.some((wire) => wire.id === p.networkId)) {
+        this.removeProjectile(p);
+        this.projectiles.splice(this.projectiles.indexOf(p), 1);
+      }
+    for (const wire of state.projectiles) {
+      let p = this.projectiles.find((p) => p.networkId === wire.id);
+      if (!p) {
+        if (
+          !this.launch(
+            wire.kind,
+            owner(wire.owner),
+            wire.team,
+            new T.Vector3(wire.x, wire.y, wire.z),
+            new T.Vector3(wire.vx, wire.vy, wire.vz),
+            wire.weapon,
+          )
+        )
+          continue;
+        p = this.projectiles.at(-1)!;
+        p.networkId = wire.id;
+      }
+      p.position.set(wire.x, wire.y, wire.z);
+      p.velocity.set(wire.vx, wire.vy, wire.vz);
+      p.age = wire.age;
+      p.resting = wire.resting;
+      p.mesh.position.copy(p.position);
+    }
+    for (const effect of this.effects.slice())
+      if (!state.effects.some((wire) => wire.id === effect.networkId)) {
+        this.removeEffect(effect);
+        this.effects.splice(this.effects.indexOf(effect), 1);
+      }
+    for (const wire of state.effects) {
+      let effect = this.effects.find((effect) => effect.networkId === wire.id);
+      if (!effect) {
+        this.detonate({
+          kind: wire.kind,
+          owner: owner(wire.owner),
+          team: wire.team,
+          position: new T.Vector3(wire.x, wire.y, wire.z),
+          velocity: new T.Vector3(),
+          mesh: new T.Group(),
+          age: 0,
+          resting: true,
+          lastBounce: 0,
+          weapon: wire.weapon,
+        });
+        effect = this.effects.at(-1)!;
+        effect.networkId = wire.id;
+      }
+      effect.age = wire.age;
+      effect.cleared = wire.cleared;
+    }
+    const local = players.find((p) => p.id === localId)!;
+    this.inventory = { ...local.grenades };
+    this.receipts = { ...local.grenadeReceipts };
+    this.blind.set("player", local.blind);
+    this.clock = state.clock;
+    if (this.selected && !this.inventory[this.selected]) this.selected = null;
+    g.updateBuyMenu();
   }
   takeover(index: number) {
     this.cancelThrow();

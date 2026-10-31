@@ -1,10 +1,49 @@
 // Version every wire-format or simulation compatibility change together.
-export const PROTOCOL_VERSION = 3;
+export const PROTOCOL_VERSION = 4;
 export const TICK_RATE = 128;
 export const SNAPSHOT_RATE = 32;
 export const MAX_PLAYERS = 20;
 export const MAX_PENDING_INPUTS = 128;
 export const MAX_BATCH = 8;
+export type GrenadeKind = "he" | "flash" | "smoke" | "molotov" | "incendiary" | "decoy";
+export type GrenadeInventory = Record<GrenadeKind, number>;
+export type UtilityProjectile = Vec3 & {
+  id: number;
+  kind: GrenadeKind;
+  owner: string;
+  team: Team;
+  weapon: number;
+  vx: number;
+  vy: number;
+  vz: number;
+  age: number;
+  resting: boolean;
+  lastBounce: number;
+};
+export type UtilityEffect = Vec3 & {
+  id: number;
+  kind: GrenadeKind;
+  owner: string;
+  team: Team;
+  weapon: number;
+  age: number;
+  pulse: number;
+  cleared: number;
+  cells: Vec3[];
+  holes: number[];
+};
+export type SkinChoice = { id: string; wear: number; seed: number };
+export type WeaponAppearance = {
+  serial: number;
+  weapon: number;
+  creator: string;
+  skin: SkinChoice;
+};
+export type PlayerConfiguration = {
+  skins: Record<number, SkinChoice>;
+  agents: Record<Team, string>;
+  loadouts: Record<Team, number[]>;
+};
 export type MatchMode = "casual" | "competitive";
 export type Team = "ct" | "t";
 export type Vec3 = { x: number; y: number; z: number };
@@ -18,6 +57,15 @@ export type Input = {
   duck: boolean;
   walk: boolean;
   fire: boolean;
+  utility: "" | GrenadeKind;
+  grenadeBuy: "" | GrenadeKind;
+  grenadeRefund: "" | GrenadeKind;
+  throwKind: "" | GrenadeKind;
+  throwStrength: number;
+  alternate: boolean;
+  burst: boolean;
+  scope: number;
+  toggleSuppressor: boolean;
   stab: boolean;
   drop: boolean;
   pickup: boolean;
@@ -26,6 +74,8 @@ export type Input = {
   select: number;
   buy: number;
   equipment: "" | "vest" | "helmet" | "kit";
+  refund: number;
+  refundEquipment: "" | "kevlar" | "helmet" | "kit";
   dropBomb: boolean;
 };
 export type PlayerState = Vec3 & {
@@ -39,6 +89,22 @@ export type PlayerState = Vec3 & {
   grounded: boolean;
   yaw: number;
   pitch: number;
+  refundableWeapons: number[];
+  refundableEquipment: ("kevlar" | "helmet" | "kit")[];
+  grenadeReceipts: GrenadeInventory;
+  appearances: Record<number, WeaponAppearance>;
+  agent: string;
+  grenades: GrenadeInventory;
+  blind: number;
+  scope: number;
+  suppressed: boolean;
+  reloadPhase: "intro" | "loop" | "outro";
+  reloadEmpty: boolean;
+  suppressorAction: "" | "silencer_attach" | "silencer_detach";
+  suppressorTime: number;
+  suppressorDuration: number;
+  charge: number;
+  punch: { pitch: number; yaw: number; pitchVelocity: number; yawVelocity: number };
   health: number;
   ammo: number;
   reserve: number;
@@ -52,6 +118,7 @@ export type PlayerState = Vec3 & {
   ack: number;
   weapon: number;
   primary: number | null;
+  knife: number;
   secondary: number;
   magazines: Record<number, { ammo: number; reserve: number }>;
   money: number;
@@ -61,17 +128,60 @@ export type PlayerState = Vec3 & {
   waiting: boolean;
 };
 export type MatchEvent =
-  | { kind: "shot"; shooter: string; from: Vec3; to: Vec3; weapon: number }
+  | {
+      kind: "shot";
+      shooter: string;
+      from: Vec3;
+      to: Vec3;
+      weapon: number;
+      alternate?: boolean;
+      suppressed?: boolean;
+      pellet?: number;
+      impacts?: { point: Vec3; normal: Vec3 }[];
+      hits?: { victim: string; headshot: boolean; passed: boolean }[];
+      normal?: Vec3;
+      victim?: string;
+      headshot?: boolean;
+    }
   | { kind: "melee"; shooter: string; stab: boolean; hit: boolean }
-  | { kind: "kill"; killer: string; victim: string; headshot: boolean; weapon: number }
+  | {
+      kind: "kill";
+      killer: string;
+      victim: string;
+      headshot: boolean;
+      weapon: number;
+      utility?: GrenadeKind;
+      noScope?: boolean;
+      wallbang?: boolean;
+      appearance?: WeaponAppearance;
+    }
+  | {
+      kind: "utility-sound";
+      sound: "bounce" | "decoy-shot" | "decoy-explode";
+      utility: GrenadeKind;
+      point: Vec3;
+      weapon: number;
+    }
   | { kind: "plant" | "defuse" | "explode"; actor: string };
 export type RoundState = {
+  clock: number;
+  projectiles: UtilityProjectile[];
+  effects: UtilityEffect[];
   drops: (Vec3 & {
     id: number;
     weapon: number;
     ammo: number;
     reserve: number;
     owner: string;
+    vx: number;
+    vy: number;
+    vz: number;
+    rx: number;
+    rz: number;
+    sleeping: boolean;
+    tossed: boolean;
+    appearance: WeaponAppearance;
+    suppressed: boolean;
     yaw: number;
     age: number;
   })[];
@@ -123,7 +233,9 @@ export type ClientMessage =
       mode: MatchMode;
       team: Team;
     }
+  | { type: "configure"; configuration: PlayerConfiguration }
   | { type: "inputs"; inputs: Input[] }
+  | { type: "stop" }
   | { type: "ping"; time: number };
 export function validRoom(value: unknown): value is string {
   return typeof value === "string" && /^[a-zA-Z0-9_-]{12,32}$/.test(value);
@@ -145,16 +257,41 @@ export function validInput(value: unknown): value is Input {
     Math.abs(value.yaw) <= Math.PI &&
     finite(value.pitch) &&
     Math.abs(value.pitch) <= 1.5 &&
+    ["utility", "grenadeBuy", "grenadeRefund", "throwKind"].every((key) =>
+      ["", "he", "flash", "smoke", "molotov", "incendiary", "decoy"].includes(value[key] as string),
+    ) &&
+    finite(value.throwStrength) &&
+    value.throwStrength >= 0 &&
+    value.throwStrength <= 1 &&
+    Number.isInteger(value.scope) &&
+    (value.scope as number) >= 0 &&
+    (value.scope as number) <= 2 &&
     Number.isInteger(value.select) &&
     (value.select as number) >= -1 &&
     (value.select as number) <= 36 &&
     Number.isInteger(value.buy) &&
     (value.buy as number) >= -1 &&
     (value.buy as number) <= 36 &&
+    Number.isInteger(value.refund) &&
+    (value.refund as number) >= -1 &&
+    (value.refund as number) <= 36 &&
+    ["", "kevlar", "helmet", "kit"].includes(value.refundEquipment as string) &&
     ["", "vest", "helmet", "kit"].includes(value.equipment as string) &&
-    ["jump", "duck", "walk", "fire", "stab", "drop", "pickup", "reload", "use", "dropBomb"].every(
-      (key) => typeof value[key] === "boolean",
-    )
+    [
+      "jump",
+      "duck",
+      "walk",
+      "fire",
+      "alternate",
+      "burst",
+      "toggleSuppressor",
+      "stab",
+      "drop",
+      "pickup",
+      "reload",
+      "use",
+      "dropBomb",
+    ].every((key) => typeof value[key] === "boolean")
   );
 }
 export function parseClientMessage(raw: string): ClientMessage | null {
@@ -165,6 +302,49 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     return null;
   }
   if (!record(value)) return null;
+  if (value.type === "stop") return { type: "stop" };
+  if (value.type === "configure" && record(value.configuration)) {
+    const config = value.configuration;
+    if (
+      !record(config.skins) ||
+      Object.keys(config.skins).length > 37 ||
+      !record(config.agents) ||
+      !record(config.loadouts)
+    )
+      return null;
+    for (const [key, skin] of Object.entries(config.skins)) {
+      if (
+        !/^\d{1,2}$/.test(key) ||
+        Number(key) > 36 ||
+        !record(skin) ||
+        typeof skin.id !== "string" ||
+        !/^[a-zA-Z0-9_-]{0,128}$/.test(skin.id) ||
+        !finite(skin.wear) ||
+        skin.wear < 0 ||
+        skin.wear > 1 ||
+        !Number.isInteger(skin.seed) ||
+        (skin.seed as number) < 0 ||
+        (skin.seed as number) > 1000
+      )
+        return null;
+    }
+    for (const team of ["ct", "t"]) {
+      if (
+        typeof config.agents[team] !== "string" ||
+        !/^[a-zA-Z0-9_-]{1,96}$/.test(config.agents[team] as string)
+      )
+        return null;
+      const list = config.loadouts[team];
+      if (
+        !Array.isArray(list) ||
+        list.length > 15 ||
+        list.some((id) => !Number.isInteger(id) || id < 0 || id > 36) ||
+        new Set(list).size !== list.length
+      )
+        return null;
+    }
+    return value as ClientMessage;
+  }
   if (
     value.type === "join" &&
     value.version === PROTOCOL_VERSION &&
@@ -203,6 +383,15 @@ export function neutralInput(seq = 0): Input {
     duck: false,
     walk: false,
     fire: false,
+    utility: "",
+    grenadeBuy: "",
+    grenadeRefund: "",
+    throwKind: "",
+    throwStrength: 1,
+    alternate: false,
+    burst: false,
+    toggleSuppressor: false,
+    scope: 0,
     stab: false,
     drop: false,
     pickup: false,
@@ -211,6 +400,8 @@ export function neutralInput(seq = 0): Input {
     select: -1,
     buy: -1,
     equipment: "",
+    refund: -1,
+    refundEquipment: "",
     dropBomb: false,
   };
 }

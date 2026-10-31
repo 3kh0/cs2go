@@ -1,4 +1,5 @@
 import * as T from "three";
+import { advanceDroppedWeapon } from "@cs2go/simulation/dropped-weapon";
 import type { Game } from "./game";
 import { weapons, weaponIcons, isKnife, weaponSlot } from "./physics";
 import { createWeaponInstance, type WeaponInstance } from "./weapon-instance";
@@ -65,7 +66,6 @@ export class GameInventory {
   private playerAlive = true;
   private alive = new WeakMap<object, boolean>();
   private clock = 0;
-  private dropPrevious = new T.Vector3();
   private pickupCenter = new T.Vector3();
   private pickupEye = new T.Vector3();
   private dropEye = new T.Vector3();
@@ -252,6 +252,11 @@ export class GameInventory {
     );
   }
   canRefundEquipment(kind: EquipmentKind) {
+    if (this.game.network)
+      return (
+        this.game.canBuy() &&
+        !!this.game.network.connection.local?.refundableEquipment.includes(kind)
+      );
     const receipt = this.equipmentReceipts.findLast((r) => r.kind === kind);
     if (!receipt || !this.game.canBuy()) return false;
     if (kind === "kit") return this.game.defuseKit && this.game.bomb?.defuser !== "player";
@@ -263,7 +268,10 @@ export class GameInventory {
     );
   }
   refundEquipment(kind: EquipmentKind) {
-    if (this.game.network) return false;
+    if (this.game.network) {
+      this.game.network.request.refundEquipment = kind;
+      return true;
+    }
     if (!this.canRefundEquipment(kind)) return false;
     const receipt = this.equipmentReceipts.findLast((r) => r.kind === kind)!;
     this.equipmentReceipts.splice(this.equipmentReceipts.indexOf(receipt), 1);
@@ -312,6 +320,10 @@ export class GameInventory {
     this.receipts.delete(id);
   }
   canRefund(id: number) {
+    if (this.game.network)
+      return (
+        this.game.canBuy() && !!this.game.network.connection.local?.refundableWeapons.includes(id)
+      );
     const g = this.game,
       receipt = this.receipts.get(id);
     const state = g.selected === id ? g : g.magazines[id];
@@ -324,7 +336,10 @@ export class GameInventory {
     );
   }
   refund(id: number) {
-    if (this.game.network) return false;
+    if (this.game.network) {
+      this.game.network.request.refund = id;
+      return true;
+    }
     if (!this.canRefund(id)) return false;
     const g = this.game,
       receipt = this.receipts.get(id)!;
@@ -493,33 +508,7 @@ export class GameInventory {
       this.alive.set(bot, living);
     });
     for (const d of this.drops) {
-      d.age += dt;
-      if (d.sleeping || d.age > 5) continue;
-      if (d.tossed) {
-        d.mesh.rotation.x += dt * 5;
-        d.mesh.rotation.z += dt * 2;
-      }
-      d.velocity.y -= 20.32 * dt;
-      const previous = this.dropPrevious.copy(d.mesh.position);
-      d.mesh.position.addScaledVector(d.velocity, dt);
-      const floor =
-        g.world.collision?.support(
-          d.mesh.position.x,
-          d.mesh.position.z,
-          previous.y + 0.1,
-          d.mesh.position.y - 0.2,
-          0.08,
-        ) ?? 0;
-      if (Number.isFinite(floor) && d.mesh.position.y <= floor + 0.06) {
-        d.mesh.position.y = floor + 0.06;
-        d.velocity.set(0, 0, 0);
-        d.sleeping = true;
-        d.mesh.rotation.x = d.mesh.rotation.z = 0;
-      }
-      if (g.world.collision && !g.world.collision.resolveHorizontal(d.mesh.position, 0.1, 0.15)) {
-        d.mesh.position.copy(previous);
-        d.velocity.x = d.velocity.z = 0;
-      }
+      advanceDroppedWeapon(d.mesh.position, d.velocity, d.mesh.rotation, d, dt, g.world.collision);
     }
     this.clock += dt;
     if (this.clock < 0.15) return;

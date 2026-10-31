@@ -60,6 +60,7 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     await a.waitForFunction(() => window.__game.network?.connection.local?.cooldown === 0);
     await a.mouse.click(700, 400);
     await expect.poll(() => a.evaluate(() => window.__game.ammo)).toBe(11);
+    await expect.poll(() => a.evaluate(() => window.__game.decals.count)).toBeGreaterThan(0);
     await a.keyboard.press("KeyG");
     await a.waitForFunction(() => window.__game.selected === 4);
     await expect
@@ -114,8 +115,13 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     await b.bringToFront();
     if (!(await b.evaluate(() => window.__game.locked))) await b.locator("#game").click();
     await b.waitForFunction(() => window.__game.network?.connection.local?.cooldown === 0);
+    const beforeImpacts = await a.evaluate(() => window.__game.decals.count);
     await b.mouse.click(700, 400);
     await expect.poll(() => b.evaluate(() => window.__game.ammo)).toBe(19);
+    await expect.poll(() => b.evaluate(() => window.__game.decals.count)).toBeGreaterThan(0);
+    await expect
+      .poll(() => a.evaluate(() => window.__game.decals.count))
+      .toBeGreaterThan(beforeImpacts);
     await expect.poll(() => b.evaluate(() => window.__game.shotTime)).toBeGreaterThan(0.15);
     await b.keyboard.press("Digit3");
     await b.waitForFunction(

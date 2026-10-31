@@ -1,0 +1,925 @@
+{
+  "source": "Imported local viewmodel GLBs; regenerate with scripts/import-weapon-action-data.py",
+  "weapons": [
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {
+          "WPN_INSPECT_USE_DRAW_VERSION": 0,
+          "WPN_INSPECT_USE_FIXUP_VERSION": 0.1666666716337204
+        },
+        "loopDuration": 0,
+        "sha256": "7fbe33aff1e83f7dbec8ec6ea64b5f06f5f74c5da602f9581b9a36f9b26ad39e"
+      },
+      "reload": {
+        "duration": 2.4004175662994385,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.45205479860305786
+        },
+        "loopDuration": 0,
+        "sha256": "3be0e529d2e3f6a46e9d891f43f7f32f7b614c041787c83c4d45f99222663a2f"
+      },
+      "shoot1": {
+        "duration": 0.7347541451454163,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "7f99ec53434e133527ae761ebbba516d360b7c83ac37f5186e35947d4ed07d90"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.1009199619293213,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "bb60d903aae8f75b33ae8959c3afa082959f64808e35f4a48893f7f0d99f497e"
+      },
+      "reload": {
+        "duration": 3.033724784851074,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.44565218687057495
+        },
+        "loopDuration": 0,
+        "sha256": "31e37cfce42326cb61cae2474d14b758553ec66e0ef5adc50d1d31f3af355386"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "a019eeff9ebcd163e66edac45787be5c2034389b023431c80bf4f32c20f7c3b6"
+      },
+      "silencer_attach": {
+        "duration": 4.8333001136779785,
+        "markers": {
+          "WPN_SHOW_SILENCER": 0.12413793057203293,
+          "WPN_SILENCER_ATTACH": 0.7103448510169983
+        },
+        "loopDuration": 0,
+        "sha256": "46e2c4bfe28777a13f9465bf201aa6a363902c0d43e7664ad5c4d7ca88962b73"
+      },
+      "silencer_detach": {
+        "duration": 4.8333001136779785,
+        "markers": {
+          "WPN_SHOW_SILENCER": 0.6068965792655945,
+          "WPN_SILENCER_DETACH": 0.6758620738983154
+        },
+        "loopDuration": 0,
+        "sha256": "21fc51cc9eeebc972591a04c1a2101038255f7b8f758451a68a6e3225bf17fcd"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "ecaf9dbbdaee763558143ae71dc59bb5dfd7198cd0d2460615bd0f39d6db61a5"
+      },
+      "reload": {
+        "duration": 2.133871078491211,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.4153846204280853
+        },
+        "loopDuration": 0,
+        "sha256": "426685b8998454527a5fbfa16ce98e06a897e041e37fff03e686b85ac6a5c07d"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "31b562fac2a7f5cf012652a998431f266c0f29ae48d288be434734906c04a3ff"
+      },
+      "silencer_attach": {
+        "duration": 4.8333001136779785,
+        "markers": {
+          "WPN_SHOW_SILENCER": 0.08275862038135529,
+          "WPN_SILENCER_ATTACH": 0.6965517401695251
+        },
+        "loopDuration": 0,
+        "sha256": "bd3aa63f5cd921885f16967052f5734aeb67bc9a60a0c3574f14c01472daf106"
+      },
+      "silencer_detach": {
+        "duration": 4.8333001136779785,
+        "markers": {
+          "WPN_SHOW_SILENCER": 0.48275861144065857,
+          "WPN_SILENCER_DETACH": 0.6965517401695251
+        },
+        "loopDuration": 0,
+        "sha256": "b0aad24ea5c91a9803674061ac305a6319911ee6c1066d736f0746cae5e27072"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.2342203855514526,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "2cae24f95f9aee642c28354164d5b8a2f89ac65817bbbd68c1f7220d1d117f71"
+      },
+      "reload": {
+        "duration": 3.633666515350342,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.5454545617103577
+        },
+        "loopDuration": 0,
+        "sha256": "ea97da5b7aa6de4304aba6782a31913d5773e04c6278bb9c1938c1fa03201192"
+      },
+      "shoot1": {
+        "duration": 1.5673468112945557,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "c6ba69a59e30867844f638a3d19e95954c102d5ac2c124fedc2a0e336e264523"
+      }
+    },
+    {},
+    {},
+    {},
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "8ee7fccfeda90b1af9516d51c87fdaa1782f847f76d939b3ba1ca28a96d226e3"
+      },
+      "reload": {
+        "duration": 2.233849287033081,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.4117647111415863
+        },
+        "loopDuration": 0,
+        "sha256": "7d0d91c12827cbb133a310cf197384fe00a5c6f62697bc2a0797a97b99f386ff"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "ae12c19919ba29b573f2bb921b6e842d995e5f21b185805a119159d789a59536"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {
+          "WPN_INSPECT_USE_DRAW_VERSION": 0,
+          "WPN_BLOCK_INSPECT": 0.06666667014360428
+        },
+        "loopDuration": 0,
+        "sha256": "1d4f0664ac32e20bdbc771f5740582ab5016ec66b7af6a01f6a4b543316411bc"
+      },
+      "reload": {
+        "duration": 2.200000047683716,
+        "markers": {
+          "WPN_RELOAD_SILENT": 0.0,
+          "WPN_DROP_MAG": 0.181818,
+          "WPN_RELOAD_ADD_AMMO": 0.348485
+        },
+        "loopDuration": 0,
+        "sha256": "c5cdc4c8e640d3bd22466e327b92663315266920363f5a3f9c301e85a5eee24a"
+      },
+      "reload_empty": {
+        "duration": 2.200000047683716,
+        "markers": {
+          "WPN_RELOAD_SILENT": 0.0,
+          "WPN_DROP_MAG": 0.227273,
+          "WPN_RELOAD_ADD_AMMO": 0.469697
+        },
+        "loopDuration": 0,
+        "sha256": "7e31ba727982fa5680bb3bf0cc7064f7c69b6e6b1204b71ea1cf95a6748f0ed0"
+      },
+      "shoot1": {
+        "duration": 0.699999988079071,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "b21a4313fbe3a7b086377355e4d55f2b7a21fd3e90ae05825ddedfecc9456240"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.1009199619293213,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "8147e438ba4da7e8da822ac29272295ef257ac13f0f1aea775982c037caaef26"
+      },
+      "reload": {
+        "duration": 3.033724784851074,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.44565218687057495
+        },
+        "loopDuration": 0,
+        "sha256": "0d0faba37f01a346ea4835e51bfb7fce8f60a21fb7de349663a2939f8e8cf228"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "2e4d103014bc40bbec3a21c1092f94fc320650560cc8a9fe1b6a752975a9335e"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "b27e5dccb48d3f0eea6ef02b7d5c94772dc5d44de78009952dc34e8620af7095"
+      },
+      "reload": {
+        "duration": 1.6332999467849731,
+        "markers": {
+          "WPN_RELOAD_INTRO": 0,
+          "WPN_RELOAD_LOOP": 0.22448979318141937,
+          "WPN_RELOAD_ADD_AMMO": 0.40816327929496765,
+          "WPN_RELOAD_OUTRO": 0.4897959232330322
+        },
+        "loopDuration": 0.26530611515045166,
+        "sha256": "b44e0b22a327ef5549fe2b79c98ae909ef1f56002b612704e51d42fdf1106b3f"
+      },
+      "shoot1": {
+        "duration": 0.7679999470710754,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "67c2245503f58b301bc61f702ea917bbb09b1a760408c41c394b1208d76b7545"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.167567491531372,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "89344e7fd22aa7fc3f01b4f5a8f0ee7c344e2e249a9c77f37d386fe4be786632"
+      },
+      "reload": {
+        "duration": 2.1004798412323,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.40625
+        },
+        "loopDuration": 0,
+        "sha256": "aec940aad9025d6ef7a8ade409f43defbde73ea5ce85508d8906d7eb1b1334d9"
+      },
+      "shoot1": {
+        "duration": 0.8012499809265137,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "a23dd96f8ece1ce247d2a873da73b6426248fa3d72bc1e06f7cff772c1e941e6"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "03f1cdda638f800b5150b1ba9208910fc0677b2112d3dae01ea42b59f2c95d92"
+      },
+      "reload": {
+        "duration": 2.233849287033081,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.4117647111415863
+        },
+        "loopDuration": 0,
+        "sha256": "e292eec8b3901c0c76fd8b650e4b7c0cdfd3f77bd54365e6b7efe3fa899bfcf9"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "83ef62e9d3c55e6cca868caab980440ec2205962e1f7c05de599a781050a43aa"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "a6a047c585c5c756af697e754dae69dd2af6d69f36d4e326d7e81076e5f01982"
+      },
+      "reload": {
+        "duration": 2.233849287033081,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.4117647111415863
+        },
+        "loopDuration": 0,
+        "sha256": "abab2c2de1c6253b2ad8edcf7758711829bc1c1b751dec6fe32ec1fbb5cf45a8"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "4a5c02cec3f9776ef4cccbb517417debb8fd35fd067a9c81fb227d3e14c2eaed"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "e9782a698c8912536984de0e555c655ad23951d896594c1c19f6c85a077d3147"
+      },
+      "reload": {
+        "duration": 2.233849287033081,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.4264705777168274
+        },
+        "loopDuration": 0,
+        "sha256": "74f0a4c3b2a2673d2cfe511fb3452bb1b8206a5fdc2f03a37c78b7491e776ac6"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "101cdb62fe4b327740604c3338a0151f55a6e3b4380f1eb3ddd01246bc6f0301"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "05cddc2294c731124b30a5bcd41d7a8e1f32d6d0025d1e307f7157d781debbfe"
+      },
+      "reload": {
+        "duration": 2.5337936878204346,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.5584415793418884
+        },
+        "loopDuration": 0,
+        "sha256": "a94d15b3356786d4e6a24a83f3cf65c734255e41edf8f2a867ac0d9b8fc016d2"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "d3979249d80cf674c4b3aeb7d4cfa721e1021f548e55d68d1e10a607b9903105"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.8005623817443848,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "3bfc94c246d976aa5e659ed99fd9d4043498c0d7ad8291136186ff37dfcd57c3"
+      },
+      "reload": {
+        "duration": 2.700368642807007,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.5731707215309143
+        },
+        "loopDuration": 0,
+        "sha256": "44ecd51eaba556b564573e2365fbbb533aa79b944aa30d63fd3eba50bbc312e3"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "7020ffb962ca207a4179b20efab0e7f16480d692cf577a0209e9005e3002ce3f"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.134291648864746,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0,
+          "WPN_INSPECT_USE_DRAW_VERSION": 0
+        },
+        "loopDuration": 0,
+        "sha256": "8214def80f5055bc4f5cde751ff1df2057a26eb8a110c757524dd8344d0fb4be"
+      },
+      "reload": {
+        "duration": 2.233849287033081,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.8676470518112183
+        },
+        "loopDuration": 0,
+        "sha256": "9d4d9b4923c40168162b6cc71322fe747dbb7a9788498a4e7a93ba8f1c784cca"
+      },
+      "shoot1": {
+        "duration": 0.668181836605072,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "14f65b3c979752ee4de1f1bf992166d24ae7b879721abb25dafd3502c1d9089c"
+      },
+      "shoot2": {
+        "duration": 0.9677419066429138,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "551e0707f028939c0e19b4823eb7b02ee00e9df252fd0b3676041babf5df80d6"
+      },
+      "prepare": {
+        "duration": 0.9344766139984131,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "ce163be59b6c706efdbfa2973750289be73ed945b361fb0ed5addf3dd2fd5f7c"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "72431618f6039f46394b9aa86b1dd10f7702cf1d60b0e5e07065d85df3c48919"
+      },
+      "reload": {
+        "duration": 3.7336585521698,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.778761088848114
+        },
+        "loopDuration": 0,
+        "sha256": "0464e8fde473ea97b9c69f409cb9b1bb63c792d45af6475cdc4ef7d01208e43f"
+      },
+      "shoot1": {
+        "duration": 0.8012499809265137,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "2f6574b5f96220d1e8e9c244a22e6a17a0c92451b20c54e8bb7f6526a068c9ea"
+      },
+      "shoot2": {
+        "duration": 0.8012499809265137,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "da449dee35e04dffff534ad7cae900dc5531de293eb71f193116341d9874326d"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "4ac90429cb30d63d705567470c273216cef8ea45965b3c4ebdff8c34db8d19a3"
+      },
+      "reload": {
+        "duration": 3.2669999599456787,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.5050504803657532
+        },
+        "loopDuration": 0,
+        "sha256": "45062a1af28270ddd00f1f0b1545c50f4e95181bb3f2778b370dc45365fb424e"
+      },
+      "shoot1": {
+        "duration": 0.8345999717712402,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "7f67cdf52c2f07c3554992428291946d0c6f5cc27a0c6b5e0630aa391e26d639"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.067647099494934,
+        "markers": {
+          "WPN_INSPECT_USE_DRAW_VERSION": 0
+        },
+        "loopDuration": 0,
+        "sha256": "f42fa0c2bd134e65b2a29ab20f804a40e29fbc7e96d17306725696620143f45e"
+      },
+      "reload": {
+        "duration": 3.0003292560577393,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.38461539149284363
+        },
+        "loopDuration": 0,
+        "sha256": "48759fd1266ed1f42a04fef113d6dcea4bf76cf2b5e8d6a7dfb2c39519b957b8"
+      },
+      "shoot1": {
+        "duration": 0.7679999470710754,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "cf685cca82df4ee10530b0c517098a1623e4a977a2cb3df70f33a872fb5d560a"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.134291648864746,
+        "markers": {
+          "WPN_INSPECT_USE_DRAW_VERSION": 0
+        },
+        "loopDuration": 0,
+        "sha256": "d8c02ace336d44047d8b31481338cf040c7816c4a112ef7c2611a421e088489c"
+      },
+      "reload": {
+        "duration": 3.7336585521698,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.4159291982650757
+        },
+        "loopDuration": 0,
+        "sha256": "af466c87525843ca4b98017f9bd37650f1280863ed59840606ce077f978ba7f9"
+      },
+      "shoot1": {
+        "duration": 0.901117205619812,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "ad81aa34b85f14967d6e0947f60b5e10cd19f2298f85dcf8d63cbdf130f503b4"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "e6dedcd01cb6e5d7183c007615b97f528ea6ed4f3866186885bf3e6e2ad5b932"
+      },
+      "reload": {
+        "duration": 2.7337629795074463,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.3734939694404602
+        },
+        "loopDuration": 0,
+        "sha256": "aa981c1d49b474e7a4879d377ce9359baa78fe30afee83f1e61cbf13b2b4fda5"
+      },
+      "shoot1": {
+        "duration": 0.668181836605072,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "d85dbc29e0a53b7e2b7356034f00f55647ef7ed9c3850dbe041191a17e2cd5fc"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "dc16a78dcf875de7a9448400a1c948976552d55b8c7dfa93b7a9541ec083cc6c"
+      },
+      "reload": {
+        "duration": 3.666964054107666,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.5405405163764954
+        },
+        "loopDuration": 0,
+        "sha256": "5173218502a9fd2ea1068de30cbe8f8a040e9d3727e4662a954b05fdab1012fb"
+      },
+      "shoot1": {
+        "duration": 1.6340196132659912,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "a00a072ff0f515fa6434a898dd54d69524d55d6165ed65e66f4d872bacf8c14f"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "d20037cdeaf0618a9de6293512718e98882a2716f88de652361c329d1012e7c3"
+      },
+      "reload": {
+        "duration": 3.033724784851074,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.5
+        },
+        "loopDuration": 0,
+        "sha256": "5f640880d5663a71046f51b89ac8ca95c50445f43eeb2e7d3c0eb09455389ce1"
+      },
+      "shoot1": {
+        "duration": 0.8012499809265137,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "41055f322202675b9d4107089a4c1fdd21713bc0a9876d2ed5c48eac0683dd94"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "f0ba4ff9db5828f9a11558ccf128dc6acaac39e4cc431882f2ce05899d9776de"
+      },
+      "reload": {
+        "duration": 4.633602619171143,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.5714285969734192
+        },
+        "loopDuration": 0,
+        "sha256": "d7fbd22c349cdb7c737a216396216016a0976e872e8f251c2e0b9de52737562d"
+      },
+      "shoot1": {
+        "duration": 0.7014173865318298,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "d32f228a96f6a11ed2eb37fa00ddd5721e506673853e0fd381a822fa16bc9b1a"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "a27a04b97ce8bee98016a1f6b20331b7e37417366bc918147ef95ec8810a4de9"
+      },
+      "reload": {
+        "duration": 2.5337936878204346,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.4675324559211731
+        },
+        "loopDuration": 0,
+        "sha256": "72adca7a007160e91e7f8f5183fc2bc50ee1490c8ab5c20d9523c6bd473c2c5b"
+      },
+      "shoot1": {
+        "duration": 0.7679999470710754,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "42a12245aa19acfde8fed7d6b6be5646623f8c692d7a274cefb39f69b3792298"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "7a075d464c91fc64a5d4d88298a1b0fe2088b5a4451af4997b3d10900d22851e"
+      },
+      "reload": {
+        "duration": 3.1003177165985107,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.457446813583374
+        },
+        "loopDuration": 0,
+        "sha256": "5188a3d877a25a3156f18aaed0c6ca8def068fb4c2ed53b026231a8dd547001f"
+      },
+      "shoot1": {
+        "duration": 0.7679999470710754,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "8734b2a39bbb47f5327833a47669aa99db4c923427882019408488ae8e08dd71"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "5706112102901b4cc53fd9fb12d11b1fa17132d20c992838cf8d9e2c4a3d1f90"
+      },
+      "reload": {
+        "duration": 2.933736562728882,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.6741573214530945
+        },
+        "loopDuration": 0,
+        "sha256": "47b9b5ccd0c74dabf65342cd968c84cbe1076c2374c44c76fff87fe49a6dc59a"
+      },
+      "shoot1": {
+        "duration": 0.369230717420578,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "fbe574ba14bed5cd00fcb5e00cd06f12d75738b4027a253403fa00e639b4bb86"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "8d08c096c1b1d349d5467e88de68001b4b4256527cbe39eedcee4d42151d97d3"
+      },
+      "reload": {
+        "duration": 3.400287628173828,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.446601927280426
+        },
+        "loopDuration": 0,
+        "sha256": "43bf9bfd34656952ffce3ca1e8738de08209a2ba3b50522716e630229ff3c6cb"
+      },
+      "shoot1": {
+        "duration": 0.9677419066429138,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "0413cad93eee52a0a52fc533fa4cddfe1c77991bfe78dd894847198f2d3a5040"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "eafe2cf67b57001f314870c39eac6075f6b8e450a9932e30118ca963018d8116"
+      },
+      "reload": {
+        "duration": 3.333693027496338,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.594059407711029
+        },
+        "loopDuration": 0,
+        "sha256": "cc57b5adc82855f663dde098c856b37a5830a2d48bbaba68c5e3e3fc64b2d2c8"
+      },
+      "shoot1": {
+        "duration": 0.8012499809265137,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "b262bde237cc99bb5f4f5c3fd69b9ff825b0625412aebe5f12ce65c237626c7f"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.067647099494934,
+        "markers": {
+          "WPN_INSPECT_USE_DRAW_VERSION": 0,
+          "WPN_INSPECT_USE_FIXUP_VERSION": 0.21212121844291687
+        },
+        "loopDuration": 0,
+        "sha256": "40f7fd4ed30b70d5c48448c5ff66e31350602761456fdc68326021fa3af40764"
+      },
+      "reload": {
+        "duration": 2.4004175662994385,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.465753436088562
+        },
+        "loopDuration": 0,
+        "sha256": "6647aa4e967a36a5c397ea91afeace6fed5e9ddae75fcc3f9b8a923d582d2629"
+      },
+      "shoot1": {
+        "duration": 0.8345999717712402,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "14e9cb1af2ae86343373a41bac5e8e805f3e5517317afecdad345e60ab3387e0"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "cc8e4421d44b7ead256de99a1e512dcdffe4092de31e4ec6ac5791ccc5cf2535"
+      },
+      "reload": {
+        "duration": 1.7005962133407593,
+        "markers": {
+          "WPN_RELOAD_INTRO": 0,
+          "WPN_RELOAD_LOOP": 0.4038461446762085,
+          "WPN_RELOAD_ADD_AMMO": 0.5961538553237915,
+          "WPN_RELOAD_OUTRO": 0.75
+        },
+        "loopDuration": 0.3461538553237915,
+        "sha256": "14b813327bc4aee0449edf82939acf4ad938d7ddd638163b49c0addf92d08499"
+      },
+      "shoot1": {
+        "duration": 0.8345999717712402,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "1e267fc0f5c7af3627fb0b2639db726956e4391f3eed453c302d3ca84fe2ba7c"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "2683a90469ac6b0229ed941ecadb3a5479dd5e6a00b684c1063a2ece29cf09c5"
+      },
+      "reload": {
+        "duration": 2.4338104724884033,
+        "markers": {
+          "WPN_RELOAD_ADD_AMMO": 0.4324324429035187
+        },
+        "loopDuration": 0,
+        "sha256": "22d66b0e5ec44f884e071916f496c8e41a62533f3ef0983b2444ef59d808c856"
+      },
+      "shoot1": {
+        "duration": 1.167567491531372,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "093f0778fed9cdf1da70d5821486a82ca94a0b3f5d7514db4d0727589796e0fa"
+      }
+    },
+    {
+      "draw": {
+        "duration": 0.9677419066429138,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "35d7113b9e67dba541e8222421faeadeb300180ba3f58e69edd1d22131493dca"
+      },
+      "reload": {
+        "duration": 1.7005962133407593,
+        "markers": {
+          "WPN_RELOAD_INTRO": 0,
+          "WPN_RELOAD_LOOP": 0.23076923191547394,
+          "WPN_RELOAD_ADD_AMMO": 0.38461539149284363,
+          "WPN_RELOAD_OUTRO": 0.5384615659713745
+        },
+        "loopDuration": 0.3076923191547394,
+        "sha256": "d1084a7c42240ea884430ae86deffea629aa6c6b2593a10397e17daaea42879c"
+      },
+      "shoot1": {
+        "duration": 0.7679999470710754,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "a3efbdb532202640b89e9a4a3aa15d46266c983e53ee7d55d3bfc794e1cb7980"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.067647099494934,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "184d0eda5da9aa879b1d79e24955e690eb2cc97867a5dab0dbe68d187ec142f0"
+      },
+      "reload": {
+        "duration": 5.6833815574646,
+        "markers": {
+          "WPN_SHOW_BULLETS": 0.3040935695171356,
+          "WPN_RELOAD_ADD_AMMO": 0.6549707651138306
+        },
+        "loopDuration": 0,
+        "sha256": "492ea928a101166e94f0a494254eb022af5bff83dec2ce462c5d6896a6270cd9"
+      },
+      "shoot1": {
+        "duration": 1.7005962133407593,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "b7ebb8149ec6fb9552cdca1dc8d937617af9fcc650aa416653f900c387dc568e"
+      }
+    },
+    {
+      "draw": {
+        "duration": 1.067647099494934,
+        "markers": {},
+        "loopDuration": 0,
+        "sha256": "ca09ba7b13aeac639046206a5988da9016425f3044913e248afdfe81877635b3"
+      },
+      "reload": {
+        "duration": 5.666860103607178,
+        "markers": {
+          "WPN_SHOW_BULLETS": 0.3040935695171356,
+          "WPN_RELOAD_ADD_AMMO": 0.6725146174430847
+        },
+        "loopDuration": 0,
+        "sha256": "90c9626772e5e31a30eb709005ba40e65572e83e38bdc5013e7ee0b23c6e0ae6"
+      },
+      "shoot1": {
+        "duration": 0.8345999717712402,
+        "markers": {
+          "WPN_BLOCK_INSPECT": 0
+        },
+        "loopDuration": 0,
+        "sha256": "297951cd5b116a8518e5d2dc117753cfb10d9a223ad023c48f87a5987a0615a1"
+      }
+    }
+  ]
+}
