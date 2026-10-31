@@ -68,7 +68,7 @@ export class MultiplayerMatch {
   }
   private receive(message: ServerMessage) {
     if (message.type === "error") {
-      this.game.toast(message.message, 4);
+      this.game.notices.showAlert(message.message);
       return;
     }
     if (message.type !== "snapshot" || !this.connection.local) return;
@@ -258,8 +258,6 @@ export class MultiplayerMatch {
   }
   simulate(dt: number) {
     const g = this.game;
-    g.toastTime = Math.max(0, g.toastTime - dt);
-    if (g.toastTime === 0) document.getElementById("toast")!.textContent = "";
     const base = neutralInput();
     const locked = g.locked && !g.dead;
     const input: Omit<Input, "seq"> = {

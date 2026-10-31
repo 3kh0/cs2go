@@ -24,7 +24,7 @@ test("spectator E takes over a teammate without duplicating lives or ammunition"
     g.spectate();
     g.updateUI();
   });
-  await expect(page.locator("#toast")).toContainText("E: take control");
+  await expect(page.locator("#toast")).toHaveCount(0);
   await page.screenshot({ path: "artifacts/bot-takeover-prompt.png" });
   const result = await page.evaluate(() => {
     const g = window.__game;

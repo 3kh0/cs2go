@@ -21,9 +21,13 @@
 #match-waiting {
   justify-content: center;
   height: auto;
-  min-height: calc(70 * var(--notice-unit));
+  width: max-content;
+  max-width: calc(100% - 32px);
+  min-height: 0;
+  padding: calc(8 * var(--notice-unit)) calc(16 * var(--notice-unit));
+  border-radius: 3px;
   border-inline: calc(2 * var(--notice-unit)) solid #fff9;
-  font-size: calc(22 * var(--notice-unit));
+  font-size: calc(18 * var(--notice-unit));
   text-align: center;
 }
 .bomb-action-side {
@@ -124,26 +128,6 @@
   font-family: "Stratum2 Monodigit", sans-serif;
 }
 #hud-alert-detail:empty {
-  display: none;
-}
-#toast {
-  top: calc(100% - 214 * var(--notice-unit));
-  width: max-content;
-  max-width: calc(450 * var(--notice-unit));
-  padding: calc(10 * var(--notice-unit)) calc(22 * var(--notice-unit));
-  border-inline: calc(2 * var(--notice-unit)) solid #fff8;
-  border-radius: 3px;
-  color: #fff;
-  background: #0008;
-  backdrop-filter: blur(2px);
-  font:
-    400 calc(18 * var(--notice-unit))/1.3 "Stratum2",
-    sans-serif;
-  letter-spacing: 0;
-  text-shadow: 1px 1px 2px #000;
-  pointer-events: none;
-}
-#toast:empty {
   display: none;
 }
 body:has(#scoreboard:not(.hidden)) #round-banner {

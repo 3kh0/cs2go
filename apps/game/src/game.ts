@@ -451,7 +451,6 @@ export class Game {
     this.cooldown = native.duration;
     this.weaponCooldowns[this.selected] = native.duration;
     this.groundInventory.used(this.selected);
-    this.toast(state.attached ? "REMOVING SUPPRESSOR" : "ATTACHING SUPPRESSOR", native.duration);
   }
   glockBurst = false;
   famasBurst = false;
@@ -531,7 +530,6 @@ export class Game {
   fps = 0;
   fpsTime = 0;
   tick = 0;
-  toastTime = 0;
   deathBannerUntil = 0;
   sway = 0;
   footsteps = 0;
@@ -805,7 +803,6 @@ export class Game {
         toggle("scoreboard", true);
         document.body.classList.add("match-menu-open");
         this.scoreboard();
-        this.toast("Click RESUME GAME to capture your mouse.");
       }
     });
     document.addEventListener("mousemove", (e) => {
@@ -893,7 +890,6 @@ export class Game {
       }
       if (code === "Digit1") {
         if (this.primary !== null) this.equip(this.primary);
-        else this.toast("Press B to buy a primary weapon", 1.5);
       }
       if (code === "Digit2") this.equip(this.secondary);
       if (code === "Digit3") this.equip(this.knife);
@@ -957,10 +953,6 @@ export class Game {
           else this.famasBurst = !this.famasBurst;
           this.cooldown = 0.3;
           this.weaponCooldowns[this.selected] = this.cooldown;
-          this.toast(
-            `${weapons[this.selected].name} · ${this.burstMode ? "BURST FIRE" : this.selected === 7 ? "SEMI-AUTOMATIC" : "AUTOMATIC"}`,
-            1.5,
-          );
         }
       }
       if (e.button === 0 && this.locked && !this.dead) {
@@ -1151,7 +1143,6 @@ export class Game {
     this.soundscape.playMusic("start");
     this.soundscape.play("ready");
     void this.lock();
-    this.toast("", 0);
     this.updateUI();
   }
   menu() {
@@ -1771,7 +1762,6 @@ export class Game {
       b.respawn = this.teamMode ? Infinity : this.mode === "practice" ? 1.8 : 3;
       if (this.teamMode) this.dropBomb(index);
       this.feed("YOU", b.name, false, this.selected);
-      this.toast("KNIFE ELIMINATION +1", 1);
       if (this.mode === "deathmatch" && this.kills >= 20) this.finish();
     }
     this.updateUI();
@@ -2265,7 +2255,6 @@ export class Game {
               weapons[this.selected].zoomLevels > 1 && !this.scopeLevel,
               passed,
             );
-            this.toast(head ? "HEADSHOT +1" : "ELIMINATION +1", 1);
             if (this.mode === "deathmatch" && this.kills >= 20) this.finish();
           }
         } else if (data.normal) {
@@ -2441,10 +2430,6 @@ export class Game {
       row.classList.add("feed-exit");
       setTimeout(() => row.remove(), 240);
     }, 6000);
-  }
-  toast(text: string, time = 3) {
-    setText("toast", text);
-    this.toastTime = time;
   }
   finish() {
     hideRoundBanner();
@@ -2668,8 +2653,6 @@ export class Game {
       advanceWeaponRecoil(bot.weaponRecoil, bot.recoilWeapon, dt);
     }
     this.notices.tick(dt);
-    this.toastTime -= dt;
-    if (this.toastTime <= 0) setText("toast", "");
     if (this.mode === "deathmatch") {
       const previousTime = this.time;
       this.time -= dt;
@@ -2722,10 +2705,8 @@ export class Game {
     }
     if (this.dead) {
       this.dead -= dt;
-      this.toast(`ELIMINATED · Respawning in ${Math.ceil(this.dead)}`, dt * 2);
       if (this.dead <= 0) {
         this.spawnPlayer();
-        this.toast("BACK IN · 2 seconds of spawn protection", 2);
       }
       return;
     }
@@ -3210,7 +3191,6 @@ export class Game {
       ["player", this.kills],
       ...this.bots.map((bot, id) => [id, bot.kills] as [number, number]),
     ]);
-    this.toast("", 0);
     this.updateUI();
   }
   endRound(winner: AgentTeam, reason: string) {
@@ -3660,7 +3640,6 @@ export class Game {
     this.spectatorShotAt = -Infinity;
     this.spectatorLastShot = false;
     toggle("death-banner", false);
-    this.toast(`CONTROLLING ${bot.name} · ${weapons[weapon].name}`, 3);
     this.updateUI();
     if (!el("scoreboard").classList.contains("hidden")) this.scoreboard();
     return true;
@@ -3699,10 +3678,6 @@ export class Game {
   spectate(cycle = 0) {
     if (this.spectatorMode === "free") {
       this.camera.rotation.set(this.spectatorPitch, this.spectatorYaw, 0);
-      this.toast(
-        "FREE FLIGHT · WASD move · Space / Ctrl rise / fall · Shift boost · Wheel: view",
-        0.2,
-      );
       return;
     }
     let teammate = this.spectated;
@@ -3726,7 +3701,6 @@ export class Game {
     }
     this.spectated = teammate;
     if (!teammate) {
-      this.toast("NO LIVING TEAMMATES · Scroll to free flight", 0.2);
       return;
     }
     const p = teammate.group.position,
@@ -3745,10 +3719,6 @@ export class Game {
       } else this.camera.rotation.set(0, yaw + Math.PI, 0);
       this.camera.rotation.x += teammate.aimPunch.pitch * RECOIL_VIEW_SCALE;
       this.camera.rotation.y += teammate.aimPunch.yaw * RECOIL_VIEW_SCALE;
-      this.toast(
-        `FIRST PERSON · ${teammate.name}${this.roundPause ? "" : " · E: take control"} · Left / right click: player · Wheel: view`,
-        0.2,
-      );
       return;
     }
     this.spectatorFocus.copy(p).y += 1.4;
@@ -3769,10 +3739,6 @@ export class Game {
         obstruction ? Math.max(0, obstruction.distance - 0.25) : distance,
       );
     this.camera.lookAt(this.spectatorFocus);
-    this.toast(
-      `THIRD PERSON · ${teammate.name}${this.roundPause ? "" : " · E: take control"} · Mouse: orbit · Left / right click: player · Wheel: view`,
-      0.2,
-    );
   }
   perceiveBot(b: Bot, dt: number) {
     const pos = b.group.position;
