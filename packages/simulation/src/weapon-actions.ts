@@ -19,11 +19,11 @@ export function createWeaponActions() {
   };
 }
 export type WeaponActions = ReturnType<typeof createWeaponActions>;
-export function shellDuration(player: PlayerState, state: WeaponActions) {
+export function shellDuration(player: PlayerState, state: Pick<WeaponActions, "shell">) {
   const w = weapons[player.weapon];
   return state.shell === "intro" ? 0.4 : state.shell === "loop" ? w.reload : 0.9;
 }
-export function reloadProgress(player: PlayerState, state: WeaponActions) {
+export function reloadProgress(player: PlayerState, state: Pick<WeaponActions, "shell">) {
   if (weapons[player.weapon].reloadStyle !== "shell")
     return 1 - player.reloadTime / weapons[player.weapon].reload;
   const clip = actionClips[player.weapon].reload;

@@ -1,5 +1,6 @@
 // Local-only browser fixture controls. This file is never bundled into the server.
 import { startServer } from "../src/server";
+import { respawn } from "@cs2go/simulation/match";
 import { loadServerMap } from "../src/map";
 const map = await loadServerMap();
 const app = startServer({
@@ -20,6 +21,8 @@ const control = Bun.serve({
       room.state.phase = "live";
       room.state.remaining = 100;
     }
+    if (command.op === "admit-late")
+      for (const player of room.players.values()) if (player.waiting) respawn(player, room);
     if (command.op === "rich") for (const player of room.players.values()) player.money = 10000;
     if (command.op === "at-buy") {
       room.state.phase = "freeze";
@@ -41,10 +44,7 @@ const control = Bun.serve({
       }
     }
     if (command.op === "duel") {
-      const nav = await Bun.file(
-        new URL("../../../packages/assets/public/models/maps/dust2-nav.json", import.meta.url),
-      ).json();
-      const point = nav.sites[1],
+      const point = map.spawns.ct[0],
         floor = map.collision.floor(point[0], point[2], point[1] + 0.5);
       const ct = [...room.players.values()].find((p) => p.team === "ct")!;
       const t = [...room.players.values()].find((p) => p.team === "t")!;
@@ -90,6 +90,15 @@ const control = Bun.serve({
       });
       room.state.phase = "live";
       room.state.remaining = 100;
+    }
+    if (command.op === "observer-reload") {
+      const player = [...room.players.values()].find(
+        (player) => player.team === "ct" && player.health > 0,
+      )!;
+      player.ammo = 1;
+      player.reserve = 24;
+      player.magazines[player.weapon] = { ammo: 1, reserve: 24 };
+      player.cooldown = 0;
     }
     if (command.op === "kill-ct") {
       const victim = [...room.players.values()].find((p) => p.team === "ct")!;

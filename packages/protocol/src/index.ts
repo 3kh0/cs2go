@@ -40,6 +40,7 @@ export type WeaponAppearance = {
   skin: SkinChoice;
 };
 export type PlayerConfiguration = {
+  knife?: number;
   skins: Record<number, SkinChoice>;
   agents: Record<Team, string>;
   loadouts: Record<Team, number[]>;
@@ -89,6 +90,7 @@ export type PlayerState = Vec3 & {
   grounded: boolean;
   yaw: number;
   pitch: number;
+  allowedWeapons: number[];
   refundableWeapons: number[];
   refundableEquipment: ("kevlar" | "helmet" | "kit")[];
   grenadeReceipts: GrenadeInventory;
@@ -96,6 +98,9 @@ export type PlayerState = Vec3 & {
   agent: string;
   grenades: GrenadeInventory;
   blind: number;
+  accuracy: { penalty: number; baseline?: number; mode: 0 | 1 };
+  recoilIndex: number;
+  burstRemaining: number;
   scope: number;
   suppressed: boolean;
   reloadPhase: "intro" | "loop" | "outro";
@@ -164,6 +169,7 @@ export type MatchEvent =
     }
   | { kind: "plant" | "defuse" | "explode"; actor: string };
 export type RoundState = {
+  ball: Vec3 & { qx: number; qy: number; qz: number; qw: number };
   clock: number;
   projectiles: UtilityProjectile[];
   effects: UtilityEffect[];
@@ -305,6 +311,7 @@ export function parseClientMessage(raw: string): ClientMessage | null {
   if (value.type === "stop") return { type: "stop" };
   if (value.type === "configure" && record(value.configuration)) {
     const config = value.configuration;
+    if (config.knife !== undefined && ![4, 5, 6].includes(config.knife as number)) return null;
     if (
       !record(config.skins) ||
       Object.keys(config.skins).length > 37 ||

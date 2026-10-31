@@ -302,7 +302,7 @@ function poseWeapon(soldier: Soldier) {
       .negate()
       .add(soldier.grip);
   }
-  soldier.weapon.visible = soldier.plant === 0;
+  soldier.weapon.visible = soldier.plant === 0 && !soldier.dying;
   soldier.carriedBomb.visible = soldier.plant > 0;
   if (soldier.carriedBomb.visible) {
     soldier.carriedBomb.position.copy(soldier.grip).lerp(soldier.support, 0.5);

@@ -133,6 +133,7 @@ test("captured paint and original creator survive drops, pickup and death", () =
   live(match);
   command(match, ct.id, { drop: true });
   command(match, t.id, { drop: true });
+  run(match, 0.6);
   const drop = match.state.drops.find((drop) => drop.owner === ct.id)!;
   Object.assign(t, { x: drop.x, y: drop.y, z: drop.z });
   command(match, t.id, { pickup: true });
@@ -174,4 +175,180 @@ test("throws are swept by shared physics, replicated, and require a purchased gr
   run(match, 1.5);
   expect(match.state.projectiles).toHaveLength(0);
   expect(match.state.effects.some((effect) => effect.kind === "he")).toBe(true);
+});
+
+test("flash exposure is authoritative and depends on facing the explosion", () => {
+  const { match, ct, t } = fixture();
+  live(match);
+  Object.assign(ct, { x: 0, z: 0, yaw: 0 });
+  Object.assign(t, { x: 0, z: -4, yaw: 0 });
+  match.state.projectiles.push({
+    id: 1,
+    kind: "flash",
+    owner: ct.id,
+    team: ct.team,
+    weapon: ct.weapon,
+    x: 0,
+    y: 1.5,
+    z: -2,
+    vx: 0,
+    vy: 0,
+    vz: 0,
+    age: 1.5,
+    resting: true,
+    lastBounce: 0,
+  });
+  command(match, ct.id, {});
+  expect(ct.blind).toBeGreaterThan(1);
+  expect(t.blind).toBeGreaterThan(0);
+  expect(ct.blind).toBeGreaterThan(t.blind);
+});
+test("fire damages on its cells and a smoke grenade extinguishes that fire", () => {
+  const { match, ct, t } = fixture();
+  live(match);
+  Object.assign(t, { x: 0.4, z: 0 });
+  match.state.projectiles.push({
+    id: 1,
+    kind: "molotov",
+    owner: ct.id,
+    team: ct.team,
+    weapon: ct.weapon,
+    x: 0,
+    y: 0.1,
+    z: 0,
+    vx: 0,
+    vy: 0,
+    vz: 0,
+    age: 2,
+    resting: true,
+    lastBounce: 0,
+  });
+  command(match, ct.id, {});
+  const fire = match.state.effects.find((effect) => effect.kind === "molotov")!;
+  expect(fire.cells.length).toBeGreaterThan(0);
+  run(match, 0.3);
+  expect(t.health).toBeLessThan(100);
+  match.state.projectiles.push({
+    id: 2,
+    kind: "smoke",
+    owner: ct.id,
+    team: ct.team,
+    weapon: ct.weapon,
+    x: 0,
+    y: 0.1,
+    z: 0,
+    vx: 0,
+    vy: 0,
+    vz: 0,
+    age: 1.5,
+    resting: true,
+    lastBounce: 0,
+  });
+  command(match, ct.id, {});
+  expect(match.state.effects.some((effect) => effect.kind === "molotov")).toBe(false);
+  expect(match.state.effects.some((effect) => effect.kind === "smoke")).toBe(true);
+});
+test("HE applies armor and temporarily clears nearby smoke", () => {
+  const { match, ct, t } = fixture();
+  live(match);
+  match.state.effects.push({
+    id: 1,
+    kind: "smoke",
+    owner: ct.id,
+    team: ct.team,
+    weapon: ct.weapon,
+    x: 0,
+    y: 0.1,
+    z: 0,
+    age: 1,
+    pulse: 0,
+    cleared: -1,
+    cells: [],
+    holes: [],
+  });
+  match.state.projectiles.push({
+    id: 2,
+    kind: "he",
+    owner: ct.id,
+    team: ct.team,
+    weapon: ct.weapon,
+    x: 0,
+    y: 0.1,
+    z: -2,
+    vx: 0,
+    vy: 0,
+    vz: 0,
+    age: 1.5,
+    resting: true,
+    lastBounce: 0,
+  });
+  command(match, ct.id, {});
+  expect(ct.health).toBe(100);
+  Object.assign(t, { x: 0.4, z: 0 });
+  match.state.projectiles.push({
+    id: 3,
+    kind: "he",
+    owner: ct.id,
+    team: ct.team,
+    weapon: ct.weapon,
+    x: 0,
+    y: 0.1,
+    z: -2,
+    vx: 0,
+    vy: 0,
+    vz: 0,
+    age: 1.5,
+    resting: true,
+    lastBounce: 0,
+  });
+  command(match, ct.id, {});
+  expect(t.health).toBeLessThan(100);
+  expect(t.armor).toBeLessThan(100);
+  expect(match.state.effects.find((effect) => effect.kind === "smoke")!.cleared).toBeGreaterThan(1);
+});
+test("decoys emit their weapon audio and expire with their small blast", () => {
+  const { match, ct } = fixture();
+  live(match);
+  match.state.projectiles.push({
+    id: 1,
+    kind: "decoy",
+    owner: ct.id,
+    team: ct.team,
+    weapon: ct.weapon,
+    x: 0,
+    y: 0.1,
+    z: -0.5,
+    vx: 0,
+    vy: 0,
+    vz: 0,
+    age: 1.5,
+    resting: true,
+    lastBounce: 0,
+  });
+  const born = command(match, ct.id, {});
+  expect(born.some((event) => event.kind === "utility-sound" && event.sound === "decoy-shot")).toBe(
+    true,
+  );
+  const events = run(match, 15.1);
+  expect(
+    events.some((event) => event.kind === "utility-sound" && event.sound === "decoy-explode"),
+  ).toBe(true);
+  expect(match.state.effects).toHaveLength(0);
+});
+
+test("the selected CT starting pistol and knife initialize from the configured loadout", () => {
+  const { match, ct } = fixture();
+  const loadouts = defaultLoadouts();
+  loadouts.ct[0] = 12;
+  configurePlayer(match, ct, {
+    skins: {},
+    agents: { ct: "default-ct", t: "default-t" },
+    loadouts,
+    knife: 5,
+  });
+  expect(ct.secondary).toBe(12);
+  expect(ct.weapon).toBe(12);
+  expect(ct.knife).toBe(5);
+  expect(ct.magazines[12].ammo).toBe(weapons[12].mag);
+  expect(ct.magazines[2]).toBeUndefined();
 });

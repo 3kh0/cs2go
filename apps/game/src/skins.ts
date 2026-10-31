@@ -509,6 +509,7 @@ export async function setSkin(index: number, raw: SkinChoice) {
       if (model.index === index && model.instance === undefined) apply(model, finish);
     collectFinish(old);
     skinChoices[index] = choice;
+    if (typeof window !== "undefined") window.dispatchEvent(new Event("cs2go-skins-change"));
     try {
       localStorage.setItem(KEY, JSON.stringify(skinChoices));
     } catch {

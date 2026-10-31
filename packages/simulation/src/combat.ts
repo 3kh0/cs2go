@@ -47,7 +47,12 @@ export function accuracyPose(player: PlayerState, mode: 0 | 1): AccuracyPose {
     reloading: player.reloadTime > 0,
   };
 }
-export function advanceCombat(player: PlayerState, state: CombatMemory, dt: number) {
+export function advanceCombat(
+  player: PlayerState,
+  state: CombatMemory,
+  dt: number,
+  mode: 0 | 1 = 0,
+) {
   advanceAimPunch(state.punch, dt);
   state.knifeAge += dt;
   for (let i = 0; i < weapons.length; i++) {
@@ -57,7 +62,7 @@ export function advanceCombat(player: PlayerState, state: CombatMemory, dt: numb
       state.recoil[i].index,
       player.eye < 1.4,
       dt,
-      accuracyPose(player, 0),
+      accuracyPose(player, i === player.weapon ? mode : state.accuracy[i].mode),
     );
     advanceWeaponRecoil(state.recoil[i], i, dt);
   }
@@ -97,6 +102,7 @@ export function damagePlayer(
   if (shooter && shooter !== victim) {
     shooter.kills += victim.team === shooter.team ? -1 : 1;
     if (victim.team !== shooter.team) {
+      match.firstKill ??= { name: shooter.name, seconds: match.state.elapsed };
       const highlights = match.highlights.get(shooter.id)!;
       if (headshot) highlights.headshots++;
       if (isKnife(weapon)) highlights.knives++;
@@ -243,6 +249,7 @@ export function shoot(
       });
     }
     const result = solveBullet(stats, surfaces);
+    match.ball.shoot(ray, result.endDistance);
     const impacts: { point: T.Vector3; normal: T.Vector3 }[] = [];
     const hits: { victim: string; headshot: boolean; passed: boolean }[] = [];
     const kills: MatchEvent[] = [];

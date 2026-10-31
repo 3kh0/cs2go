@@ -5,6 +5,8 @@ import type { Game } from "./game";
 import { weapons, movement, isKnife } from "./physics";
 import { createWeaponInstance } from "./weapon-instance";
 import { bindWeaponInstance, skinChoices } from "./skins";
+import { advanceAimPunch, RECOIL_VIEW_SCALE } from "./recoil";
+import { advanceWeaponAccuracy } from "./accuracy";
 import { selectedAgentId, acquireAgentAppearance } from "./agent-roster";
 import { setSoldierWeapon, disposeSoldier, resetSoldier, stepSoldierRagdoll } from "./soldier";
 import { showRoundBanner, hideRoundBanner } from "./round-banner";
@@ -23,12 +25,14 @@ export class MultiplayerMatch {
   private peerAgents = new Map<string, string>();
   private peerSpawns = new Map<string, number>();
   private lastSpawn = 0;
+  private previousPhase = "waiting";
   private resultRound = 0;
   private closed = false;
   private health = 100;
   private beep = 0;
   private finished = false;
   private stepDistance = 0;
+  private spectatingView = false;
   constructor(privateGame: Game, url: string, room: string, password: string, mode: MatchMode) {
     this.game = privateGame;
     const world = privateGame.dust!;
@@ -59,20 +63,45 @@ export class MultiplayerMatch {
         skins: Object.fromEntries(skinChoices.map((skin, index) => [index, { ...skin }])),
         agents: { ct: selectedAgentId("ct"), t: selectedAgentId("t") },
         loadouts: privateGame.groundInventory.loadouts,
+        knife: privateGame.knife,
       },
     );
+    for (const event of ["cs2go-skins-change", "cs2go-agent-selection", "cs2go-loadouts-change"])
+      window.addEventListener(event, this.configurationChanged);
   }
+  private configurationChanged = () => {
+    if (this.connection.socket.readyState === WebSocket.OPEN)
+      this.connection.socket.send(
+        JSON.stringify({
+          type: "configure",
+          configuration: {
+            skins: Object.fromEntries(skinChoices.map((skin, index) => [index, { ...skin }])),
+            agents: { ct: selectedAgentId("ct"), t: selectedAgentId("t") },
+            loadouts: this.game.groundInventory.loadouts,
+          },
+        }),
+      );
+  };
   private game: Game;
   disconnect() {
     if (this.closed) return;
     this.closed = true;
+    for (const event of ["cs2go-skins-change", "cs2go-agent-selection", "cs2go-loadouts-change"])
+      window.removeEventListener(event, this.configurationChanged);
+    this.game.groundInventory.drops = [];
     this.connection.close();
     this.peers.clear();
     for (const mesh of this.drops.values()) disposeWorldGun(mesh);
     this.drops.clear();
   }
   buy(index: number) {
-    if (!this.game.canBuy() || !Number.isInteger(index) || !weapons[index]) return false;
+    if (
+      (!isKnife(index) && !this.game.canBuy()) ||
+      this.game.dead ||
+      !Number.isInteger(index) ||
+      !weapons[index]
+    )
+      return false;
     this.request.buy = index;
     return true;
   }
@@ -81,7 +110,12 @@ export class MultiplayerMatch {
     this.request.equipment = kind === "kevlar" ? "vest" : kind;
     return true;
   }
+  stateForBot(bot: Bot) {
+    const id = [...this.peers].find(([, peer]) => peer === bot)?.[0];
+    return this.connection.players.find((player) => player.id === id);
+  }
   private receive(message: ServerMessage) {
+    if (this.closed) return;
     if (message.type === "error") {
       this.game.notices.showAlert(message.message);
       return;
@@ -91,6 +125,9 @@ export class MultiplayerMatch {
       local = this.connection.local,
       state = message.round;
     const previousTeam = g.team;
+    if (this.previousPhase === "freeze" && state.phase === "live") g.soundscape.playMusic(null);
+    this.previousPhase = state.phase;
+    const previousBombTime = g.bomb?.timer ?? 40;
     g.team = local.team;
     g.round = state.round;
     g.teamScores = { ...state.scores };
@@ -101,6 +138,10 @@ export class MultiplayerMatch {
       ? Math.max(0.01, state.pause)
       : 0;
     g.roundElapsed = state.elapsed;
+    if (g.dust?.ball.mesh) {
+      g.dust.ball.mesh.position.set(state.ball.x, state.ball.y, state.ball.z);
+      g.dust.ball.mesh.quaternion.set(state.ball.qx, state.ball.qy, state.ball.qz, state.ball.qw);
+    }
     const peerIds = new Set(message.players.filter((p) => p.id !== local.id).map((p) => p.id));
     for (const [id, bot] of this.peers)
       if (!peerIds.has(id) || message.players.find((p) => p.id === id)?.team !== bot.team) {
@@ -190,6 +231,7 @@ export class MultiplayerMatch {
     g.groundInventory.instances = new Map(
       Object.entries(local.appearances).map(([id, appearance]) => [Number(id), appearance]),
     );
+    if (local.allowedWeapons.length) g.groundInventory.roundLoadout = [...local.allowedWeapons];
     g.primary = local.primary;
     g.secondary = local.secondary;
     g.groundInventory.sidearmDropped = !local.magazines[local.secondary];
@@ -211,6 +253,7 @@ export class MultiplayerMatch {
       g.setScope(0);
       g.spectated = undefined;
       g.notices.reset();
+      g.soundscape.playMusic(null);
       g.utility.cancelThrow();
       g.utility.selected = null;
       g.utility.blind.clear();
@@ -239,14 +282,21 @@ export class MultiplayerMatch {
     g.ammo = local.ammo;
     g.reserve = local.reserve;
     g.cooldown = local.cooldown;
-    if (local.reloadTime > 0 && !g.reload) {
+    if (local.reloadTime > 0 && !g.reload && local.reloadPhase === "intro") {
       g.drawTime = g.inspectTime = g.shotTime = 0;
+      g.emptyReload = local.reloadEmpty;
+      g.animationSounds("reload", -1, 0);
       g.setScope(0);
     }
     g.reload = local.reloadTime;
     g.shellPhase = local.reloadPhase;
     g.emptyReload = local.reloadEmpty;
+    if (local.charge > 0 && !g.revolverCharge) g.soundscape.play("revolver-prepare");
     g.revolverCharge = local.charge;
+    g.burstRemaining = local.burstRemaining;
+    Object.assign(g.weaponAccuracy[local.weapon], local.accuracy);
+    g.weaponRecoil[local.weapon].index = local.recoilIndex;
+    g.shots = local.recoilIndex;
     const suppressor = g.suppressors[local.weapon];
     suppressor.attached = local.suppressed;
     suppressor.action = local.suppressorAction || null;
@@ -256,6 +306,8 @@ export class MultiplayerMatch {
     const indexFor = (id: string | null) =>
       id === local.id ? ("player" as const) : id ? g.bots.indexOf(this.peers.get(id)!) : -1;
     const bomb = state.bomb;
+    if (bomb.planted && previousBombTime > 10 && bomb.timer <= 10)
+      g.soundscape.playMusic("bomb-countdown");
     g.bomb = {
       position: new T.Vector3(bomb.x, bomb.y, bomb.z),
       planted: bomb.planted,
@@ -361,6 +413,13 @@ export class MultiplayerMatch {
                 : "knife-swing2",
           );
         } else if (peer) {
+          const previous = peer.group.userData.networkMelee as { alternate: boolean } | undefined;
+          peer.group.userData.networkMelee = {
+            at: g.animationTime,
+            stab: event.stab,
+            alternate: !previous?.alternate,
+          };
+          peer.rig.shotTime = event.stab ? 1 : 0.5;
           g.soundscape.play(
             event.hit ? "knife-hit" : "knife-swing1",
             false,
@@ -442,7 +501,66 @@ export class MultiplayerMatch {
       mesh.position.set(drop.x, drop.y, drop.z);
       mesh.rotation.set(drop.rx, drop.yaw, drop.rz + Math.PI / 2);
     }
+    g.groundInventory.drops = state.drops.flatMap((drop) => {
+      const mesh = this.drops.get(drop.id);
+      return mesh
+        ? [
+            {
+              id: drop.weapon,
+              instance: drop.appearance,
+              ammo: drop.ammo,
+              reserve: drop.reserve,
+              suppressed: drop.suppressed,
+              mesh,
+              velocity: new T.Vector3(drop.vx, drop.vy, drop.vz),
+              tossed: drop.tossed,
+              age: drop.age,
+              sleeping: drop.sleeping,
+              owner: drop.owner === local.id ? ("player" as const) : indexFor(drop.owner),
+            },
+          ]
+        : [];
+    });
     g.updateUI();
+  }
+  syncSpectatorView() {
+    const g = this.game;
+    const followed =
+      g.dead && g.spectatorMode === "first" && g.spectated
+        ? this.stateForBot(g.spectated)
+        : undefined;
+    if (followed) {
+      g.camera.rotation.set(
+        -followed.pitch + followed.punch.pitch * RECOIL_VIEW_SCALE,
+        followed.yaw + followed.punch.yaw * RECOIL_VIEW_SCALE,
+        0,
+        "YXZ",
+      );
+      const weapon = weapons[followed.weapon];
+      document.getElementById("crosshair")!.classList.toggle("hidden", weapon.zoomLevels >= 2);
+      const fov =
+        followed.scope === 2
+          ? weapon.zoomFov2
+          : followed.scope === 1
+            ? weapon.zoomFov1
+            : g.settings.fov;
+      if (g.camera.fov !== fov) {
+        g.camera.fov = fov;
+        g.camera.updateProjectionMatrix();
+      }
+      document
+        .getElementById("scope")!
+        .classList.toggle("hidden", !(followed.scope && weapon.zoomLevels > 1));
+      this.spectatingView = true;
+    } else if (this.spectatingView) {
+      document
+        .getElementById("crosshair")!
+        .classList.toggle("hidden", weapons[g.selected].zoomLevels >= 2);
+      document.getElementById("scope")!.classList.add("hidden");
+      g.camera.fov = g.settings.fov;
+      g.camera.updateProjectionMatrix();
+      this.spectatingView = false;
+    }
   }
   simulate(dt: number) {
     const g = this.game;
@@ -457,8 +575,9 @@ export class MultiplayerMatch {
       yaw: Math.atan2(Math.sin(g.yaw), Math.cos(g.yaw)),
       pitch: -g.pitch,
       jump: locked && (g.jumpQueued || (g.settings.autoBunnyhop && g.keys.has("Space"))),
-      duck: locked && (g.keys.has("ControlLeft") || g.keys.has("KeyC")),
-      walk: locked && g.keys.has("ShiftLeft"),
+      duck:
+        locked && (g.keys.has("ControlLeft") || g.keys.has("ControlRight") || g.keys.has("KeyC")),
+      walk: locked && (g.keys.has("ShiftLeft") || g.keys.has("ShiftRight")),
       // Preserve a short click even if press/release both precede this frame.
       fire:
         locked && !g.utility.selected && !g.utility.throwingKind && (g.firing || this.request.fire),
@@ -542,6 +661,15 @@ export class MultiplayerMatch {
     }
     if (!g.drawTime && !g.knifeTime && !g.inspectTime) g.weaponTime += dt;
     g.animationTime += dt;
+    advanceAimPunch(g.aimPunch, dt);
+    advanceWeaponAccuracy(
+      g.weaponAccuracy[g.selected],
+      g.selected,
+      g.weaponRecoil[g.selected].index,
+      g.crouching,
+      dt,
+      g.playerAccuracyPose(g.selected),
+    );
     g.sway += Math.hypot(local.vx, local.vz) * dt * 1.8;
     for (const [id, bot] of this.peers) {
       if (bot.health <= 0) {
@@ -587,6 +715,7 @@ export class MultiplayerMatch {
     if (!g.dead) g.updateAimCamera();
     else if (g.spectatorMode === "free") g.moveSpectator(dt);
     else g.spectate();
+    this.syncSpectatorView();
     if (g.bomb?.planted && this.connection.round?.phase === "live") {
       this.beep -= dt;
       if (this.beep <= 0) {

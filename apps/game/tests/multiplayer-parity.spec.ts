@@ -66,6 +66,7 @@ test("headshot audio, shared skins, refunds and grenade effects retain the norma
     );
     await join(a, room, "ct");
     await join(b, room, "t");
+    await command(request, room, "at-buy");
     await a.waitForFunction(() => window.__game.network?.connection.round?.phase === "freeze");
     expect(
       await a.evaluate(() => window.__game.network!.connection.local!.appearances[2].skin.id),
@@ -88,12 +89,14 @@ test("headshot audio, shared skins, refunds and grenade effects retain the norma
     await expect
       .poll(() => a.evaluate(() => window.__game.scene.userData.networkSounds))
       .toContain("head");
+    await expect.poll(() => a.evaluate(() => window.__game.audio?.state)).toBe("running");
     await expect.poll(() => b.evaluate(() => window.__game.health)).toBeLessThan(100);
     await expect(a.locator("#inventory")).toContainText("Ticket to Hell");
 
     await command(request, room, "at-buy");
     await command(request, room, "rich");
     await focus(b);
+    await b.waitForFunction(() => window.__game.canBuy() && window.__game.money >= 2700);
     await b.keyboard.press("KeyB");
     await b.locator('[data-weapon="0"]').click();
     await b.waitForFunction(() => window.__game.selected === 0);
@@ -106,6 +109,7 @@ test("headshot audio, shared skins, refunds and grenade effects retain the norma
     await b.locator('[data-weapon="0"]').click();
     await b.waitForFunction(() => window.__game.selected === 0);
     await focus(a);
+    await a.waitForFunction(() => window.__game.canBuy());
     await a.keyboard.press("KeyB");
     await a.locator('[data-grenade="flash"]').click();
     await a.waitForFunction(() => window.__game.utility.inventory.flash === 1);
@@ -122,20 +126,29 @@ test("headshot audio, shared skins, refunds and grenade effects retain the norma
     await b.keyboard.press("KeyG");
     await expect
       .poll(() =>
-        a.evaluate(() =>
+        b.evaluate(() =>
           window.__game.network!.connection.round!.drops.some(
             (drop) => drop.weapon === 0 && drop.appearance.skin.id !== "",
           ),
         ),
       )
       .toBe(true);
+    await b.keyboard.down("KeyS");
+    await b.waitForTimeout(750);
+    await b.keyboard.up("KeyS");
     await focus(a);
-    await aim(a, duel2.players.find((p: { team: string }) => p.team === "ct").yaw);
-    await a.keyboard.down("KeyW");
-    await a.waitForTimeout(250);
-    await a.keyboard.up("KeyW");
-    await a.keyboard.press("KeyE");
-    await a.waitForFunction(() => window.__game.primary === 0);
+    if (!(await a.evaluate(() => window.__game.primary === 0))) {
+      await a.waitForTimeout(800);
+      await a.evaluate(() => {
+        const g = window.__game,
+          drop = g.network!.connection.round!.drops.find((drop) => drop.weapon === 0);
+        if (drop) g.yaw = Math.atan2(g.position.x - drop.x, g.position.z - drop.z);
+      });
+      await a.keyboard.down("KeyW");
+      await a.keyboard.press("Space");
+      await a.waitForFunction(() => window.__game.primary === 0, {}, { timeout: 6000 });
+      await a.keyboard.up("KeyW");
+    }
     expect(await a.evaluate(() => window.__game.groundInventory.playerWeapon(0).skin.id)).toBe(
       ak.id,
     );
@@ -169,5 +182,73 @@ test("headshot audio, shared skins, refunds and grenade effects retain the norma
   } finally {
     await ac.close();
     await bc.close();
+  }
+});
+
+test("a human teammate's spectator camera, ammunition, reload and scope replicate", async ({
+  browser,
+  request,
+}) => {
+  test.setTimeout(240000);
+  const contexts = await Promise.all([
+    browser.newContext(),
+    browser.newContext(),
+    browser.newContext(),
+  ]);
+  const [a, b, c] = await Promise.all(contexts.map((context) => context.newPage()));
+  const room = `spectate-${Date.now()}`,
+    errors: string[] = [];
+  for (const page of [a, b, c]) page.on("pageerror", (error) => errors.push(error.message));
+  try {
+    await join(a, room, "ct");
+    await join(b, room, "t");
+    await join(c, room, "ct");
+    await command(request, room, "reset");
+    await command(request, room, "at-buy");
+    await command(request, room, "rich");
+    // A late joiner is admitted at the next round boundary.
+    await request.post("http://127.0.0.1:3004", { data: { room, op: "admit-late" } });
+    await focus(c);
+    await c.waitForFunction(() => !window.__game.dead && window.__game.canBuy());
+    await c.keyboard.press("KeyB");
+    await c.locator('[data-weapon="3"]').click();
+    await c.waitForFunction(() => window.__game.selected === 3);
+    await command(request, room, "live");
+    await command(request, room, "kill-ct");
+    await c.evaluate(() => {
+      window.__game.yaw = 0.6;
+      window.__game.pitch = 0.25;
+    });
+    await c.waitForTimeout(100);
+    await focus(a);
+    await a.waitForFunction(() => !!window.__game.dead);
+    await a.evaluate(() => {
+      window.__game.spectatorMode = "first";
+      window.__game.spectate();
+    });
+    await expect.poll(() => a.evaluate(() => window.__game.camera.rotation.x)).toBeCloseTo(0.25, 2);
+    await expect(a.locator("#health")).toHaveText("100");
+    await expect(a.locator("#ammo")).toHaveText("5");
+    await expect(a.locator("#ammo")).toBeVisible();
+    await command(request, room, "observer-reload");
+    await focus(c);
+    await c.keyboard.press("KeyR");
+    await c.waitForFunction(() => window.__game.reload > 0);
+    await focus(a);
+    await a.waitForFunction(() => !!window.__game.spectated?.reloadTime);
+    await a.screenshot({ path: "artifacts/multiplayer-spectator-reload.png" });
+    await c.waitForFunction(() => window.__game.reload === 0);
+    await focus(c);
+    await c.mouse.down({ button: "right" });
+    await c.mouse.up({ button: "right" });
+    await c.waitForFunction(() => window.__game.scopeLevel === 1);
+    await focus(a);
+    await expect(a.locator("#scope")).toBeVisible();
+    await expect(a.locator("#crosshair")).toBeHidden();
+    expect(await a.evaluate(() => window.__game.camera.fov)).toBeLessThan(60);
+    await a.screenshot({ path: "artifacts/multiplayer-spectator-scope.png" });
+    expect(errors).toEqual([]);
+  } finally {
+    await Promise.all(contexts.map((context) => context.close()));
   }
 });

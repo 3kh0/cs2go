@@ -27,5 +27,5 @@ surface=texts[1].split('surfacePropertyName = "soccerball"')[1].split('surfacePr
 surface_hash=int(value(surface,'m_nameHash'))
 assert f'm_surfacePropertyHashes = [ {surface_hash} ]' in physics
 out={'source':{'depot':2347770,'manifest':'4758919807587010422','generator':'scripts/import-world-ball.py','decoder':'Source2Viewer 20','resources':hashes},'sphereRadiusSource':value(physics,'m_flRadius'),'mass':value(physics,'m_flMass'),'linearDamping':value(physics,'m_flLinearDamping'),'angularDamping':value(physics,'m_flAngularDamping'),'surface':{'name':'soccerball','hash':surface_hash,**{k:value(surface,k) for k in ['density','elasticity','friction','dampening']}}}
-(ROOT/'apps/game/src/data/world-ball.json').write_text(json.dumps(out,indent=2)+'\n')
+(ROOT/'packages/simulation/src/data/world-ball.json').write_text(json.dumps(out,indent=2)+'\n')
 print(json.dumps(out,indent=2))

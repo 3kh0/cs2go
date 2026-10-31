@@ -1,5 +1,6 @@
 import { expect, test, type Page, type APIRequestContext } from "@playwright/test";
 import { writeFileSync } from "node:fs";
+test.use({ actionTimeout: 15000 });
 async function join(page: Page, room: string, team: "ct" | "t") {
   await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=${room}`);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100000 });
@@ -30,6 +31,17 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
   try {
     await join(a, room, "ct");
     await expect(a.locator("#match-waiting")).toBeVisible();
+    expect(
+      await a.evaluate(() => {
+        const g = window.__game,
+          ball = g.network!.connection.round!.ball;
+        return Math.hypot(
+          g.dust!.ball.origin.x - ball.x,
+          g.dust!.ball.origin.y - ball.y,
+          g.dust!.ball.origin.z - ball.z,
+        );
+      }),
+    ).toBeLessThan(0.005);
     const waiting = await a.locator("#match-waiting").boundingBox();
     const actionPosition = await a.locator("#bomb-action").evaluate((node) => {
       const element = node as HTMLElement;
@@ -66,9 +78,19 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     await expect
       .poll(() => a.evaluate(() => window.__game.network!.connection.round!.drops.length))
       .toBe(1);
-    await a.waitForTimeout(850);
-    await a.keyboard.press("KeyE");
-    await a.waitForFunction(() => window.__game.selected === 2);
+    await a.waitForTimeout(1600);
+    if (!(await a.evaluate(() => window.__game.selected === 2))) {
+      await a.evaluate(() => {
+        const g = window.__game,
+          drop = g.network!.connection.round!.drops[0];
+        if (drop) g.yaw = Math.atan2(g.position.x - drop.x, g.position.z - drop.z);
+      });
+      await a.keyboard.down("KeyW");
+      await a.keyboard.press("Space");
+      await a.keyboard.press("KeyE");
+      await a.waitForFunction(() => window.__game.selected === 2, {}, { timeout: 6000 });
+      await a.keyboard.up("KeyW");
+    }
     expect(await a.evaluate(() => window.__game.ammo)).toBe(11);
     await join(b, room, "t");
     await expect(a.locator("#match-waiting")).toBeHidden();

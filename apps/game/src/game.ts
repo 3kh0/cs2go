@@ -66,6 +66,7 @@ import {
   advanceWeaponRecoil,
   RECOIL_VIEW_SCALE,
 } from "./recoil";
+import { reloadProgress as networkReloadProgress } from "@cs2go/simulation/weapon-actions";
 import { ActorReflections } from "./actor-reflections";
 import { registerActorLighting, updateActorLighting } from "./actor-lighting";
 import { sampleSourceProbe, sampleSourceProbeSun } from "./source-lighting";
@@ -1579,27 +1580,49 @@ export class Game {
     this.updateUI();
   }
   updateInventory() {
-    const indices = this.inventory();
-    const utility = this.utility.selected ?? this.utility.throwingKind;
-    const owned = grenadeTypes.filter((kind) => this.utility.inventory[kind] > 0);
-    const signature = `${indices.map((id) => `${id}:${this.groundInventory.playerWeapon(id).serial}:${skinImage(this.groundInventory.playerWeapon(id).skin.id)}`).join(",")}:${utility ?? this.selected}:${owned.map((kind) => `${kind}:${this.utility.inventory[kind]}`).join(",")}`;
+    const observer =
+      this.dead && this.teamMode && this.spectatorMode === "first" ? this.spectated : undefined;
+    const remote = observer ? this.network?.stateForBot(observer) : undefined;
+    const selected = observer?.rig.weaponIndex ?? this.selected;
+    const instances = (index: number) =>
+      remote?.appearances[index] ??
+      (observer?.rig.weaponIndex === index
+        ? observer.rig.weaponInstance
+        : this.groundInventory.playerWeapon(index));
+    const indices = remote
+      ? [
+          remote.primary,
+          remote.magazines[remote.secondary] ? remote.secondary : null,
+          remote.knife,
+        ].filter((id): id is number => id !== null)
+      : observer
+        ? [...new Set([selected, 4])]
+        : this.inventory();
+    const inventory =
+      remote?.grenades ??
+      (observer
+        ? (this.utility.botInventories.get(this.bots.indexOf(observer)) ?? this.utility.inventory)
+        : this.utility.inventory);
+    const utility = observer ? null : (this.utility.selected ?? this.utility.throwingKind);
+    const owned = grenadeTypes.filter((kind) => inventory[kind] > 0);
+    const signature = `${indices.map((id) => `${id}:${instances(id).serial}:${skinImage(instances(id).skin.id)}`).join(",")}:${utility ?? selected}:${owned.map((kind) => `${kind}:${inventory[kind]}`).join(",")}`;
     if (signature === this.inventorySignature) return;
     this.inventorySignature = signature;
     const fragment = document.createDocumentFragment();
     for (const index of indices) {
       const slot = weaponSlot(index);
       const row = document.createElement("div");
-      const active = !utility && index === this.selected;
+      const active = !utility && index === selected;
       row.className = `inventory-weapon ${active ? "active" : ""}`;
       row.dataset.weaponIndex = String(index);
       row.setAttribute("role", "listitem");
       row.setAttribute(
         "aria-label",
-        `${weaponInstanceName(this.groundInventory.playerWeapon(index))}${active ? ", equipped" : ""}`,
+        `${weaponInstanceName(instances(index))}${active ? ", equipped" : ""}`,
       );
       if (active) row.setAttribute("aria-current", "true");
       const image = document.createElement("img");
-      const finishImage = skinImage(this.groundInventory.playerWeapon(index).skin.id);
+      const finishImage = skinImage(instances(index).skin.id);
       const silhouette = assetUrl(`/icons/${weaponIcons[index]}.png`);
       image.alt = "";
       // Use the same CORS mode as CSS masks when preloading CDN silhouettes.
@@ -1630,7 +1653,7 @@ export class Game {
       key.textContent = String(slot);
       const name = document.createElement("span");
       name.className = "inventory-name";
-      name.textContent = weaponInstanceName(this.groundInventory.playerWeapon(index));
+      name.textContent = weaponInstanceName(instances(index));
       row.append(art, key, name);
       fragment.append(row);
     }
@@ -1645,20 +1668,20 @@ export class Game {
         const item = document.createElement("span");
         item.className = `inventory-grenade ${utility === kind ? "active" : ""}`;
         item.dataset.grenadeKind = kind;
-        item.dataset.count = String(this.utility.inventory[kind]);
+        item.dataset.count = String(inventory[kind]);
         item.setAttribute("role", "img");
         item.setAttribute(
           "aria-label",
-          `${grenadeData[kind].name}, ${this.utility.inventory[kind]} owned${utility === kind ? ", equipped" : ""}`,
+          `${grenadeData[kind].name}, ${inventory[kind]} owned${utility === kind ? ", equipped" : ""}`,
         );
         if (utility === kind) item.setAttribute("aria-current", "true");
         const art = document.createElement("span");
         art.className = "inventory-art inventory-grenade-art";
         art.style.maskImage = `url("${assetUrl(`/icons/buy/${grenadeIcons[kind]}.svg`)}")`;
         item.append(art);
-        if (this.utility.inventory[kind] > 1) {
+        if (inventory[kind] > 1) {
           const count = document.createElement("small");
-          count.textContent = String(this.utility.inventory[kind]);
+          count.textContent = String(inventory[kind]);
           item.append(count);
         }
         icons.append(item);
@@ -3745,6 +3768,7 @@ export class Game {
       } else this.camera.rotation.set(0, yaw + Math.PI, 0);
       this.camera.rotation.x += teammate.aimPunch.pitch * RECOIL_VIEW_SCALE;
       this.camera.rotation.y += teammate.aimPunch.yaw * RECOIL_VIEW_SCALE;
+      this.network?.syncSpectatorView();
       return;
     }
     this.spectatorFocus.copy(p).y += 1.4;
@@ -4735,6 +4759,9 @@ export class Game {
   }
 
   updateUI() {
+    const observer =
+      this.dead && this.teamMode && this.spectatorMode === "first" ? this.spectated : undefined;
+    const selected = observer?.rig.weaponIndex ?? this.selected;
     if (this.bomb?.planted) this.notices.updateBombTimer(this.bomb.timer);
     const freezeTint = el("buy-phase-tint");
     freezeTint.dataset.team = this.team;
@@ -4743,13 +4770,18 @@ export class Game {
         ? 0.14 * T.MathUtils.clamp(this.freezeTime / 2, 0, 1)
         : 0,
     );
-    el("hud").classList.toggle("spectating", this.teamMode && this.dead > 0);
-    setText("health", String(Math.ceil(Math.max(0, this.health))));
-    setText("armor", String(Math.ceil(this.armor)));
-    setText("money", this.teamMode ? `$${this.money.toLocaleString()}` : "");
+    el("hud").classList.toggle("spectating", this.teamMode && this.dead > 0 && !observer);
+    setText("health", String(Math.ceil(Math.max(0, observer?.health ?? this.health))));
+    setText("armor", String(Math.ceil(observer?.armor ?? this.armor)));
+    setText("money", this.teamMode ? `$${(observer?.money ?? this.money).toLocaleString()}` : "");
     setText(
       "equipment-status",
-      [this.helmet ? "HELMET" : "", this.defuseKit ? "DEFUSE KIT" : ""].filter(Boolean).join(" · "),
+      [
+        (observer?.helmet ?? this.helmet) ? "HELMET" : "",
+        (observer?.defuseKit ?? this.defuseKit) ? "DEFUSE KIT" : "",
+      ]
+        .filter(Boolean)
+        .join(" · "),
     );
     setText(
       "buy-status",
@@ -4762,34 +4794,33 @@ export class Game {
         : "",
     );
     this.updateBuyMenu();
-    el("health-fill").style.width = `${clamp(this.health, 0, 100)}%`;
+    el("health-fill").style.width = `${clamp(observer?.health ?? this.health, 0, 100)}%`;
     const teamIcon = el("hud-team-icon") as HTMLImageElement;
     if (teamIcon.dataset.team !== this.team) {
       teamIcon.dataset.team = this.team;
       teamIcon.src = assetUrl(`/icons/team-${this.team}.png`);
       teamIcon.alt = this.team === "ct" ? "Counter-Terrorists" : "Terrorists";
     }
-    const utility = this.utility.selected ?? this.utility.throwingKind;
+    const utility = observer ? null : (this.utility.selected ?? this.utility.throwingKind);
     setText(
       "ammo",
       utility
         ? String(this.utility.inventory[utility])
-        : isKnife(this.selected)
+        : isKnife(selected)
           ? ""
-          : String(this.ammo),
+          : String(observer?.ammo ?? this.ammo),
     );
-    el("ammo").parentElement!.classList.toggle(
-      "knife-equipped",
-      !utility && isKnife(this.selected),
-    );
+    el("ammo").parentElement!.classList.toggle("knife-equipped", !utility && isKnife(selected));
     el("ammo").parentElement!.classList.toggle("utility-equipped", !!utility);
     this.updateInventory();
-    setText("reserve", String(this.reserve));
+    setText("reserve", String(observer?.reserve ?? this.reserve));
     setText(
       "gun-name",
       utility
         ? grenadeData[utility].name
-        : weaponInstanceName(this.groundInventory.playerWeapon(this.selected)),
+        : weaponInstanceName(
+            observer?.rig.weaponInstance ?? this.groundInventory.playerWeapon(this.selected),
+          ),
     );
     for (const team of ["ct", "t"] as const) {
       const alive =
@@ -4862,19 +4893,32 @@ export class Game {
   }
   renderSpectatorWeapon(bot: Bot) {
     const index = bot.rig.weaponIndex;
+    const state = this.network?.stateForBot(bot);
+    if (state?.scope && weapons[index].zoomLevels > 1) {
+      this.flash.visible = false;
+      return;
+    }
+    const melee = bot.group.userData.networkMelee as
+      | { at: number; stab: boolean; alternate: boolean }
+      | undefined;
+    const meleeTime = melee ? this.animationTime - melee.at : Infinity;
+    const meleeDuration = melee?.stab ? 1 : 0.5;
     const gun = this.viewGun(index);
     bindWeaponInstance(gun, bot.rig.weaponInstance);
     const elapsed = this.animationTime - this.spectatorShotAt;
     const duration = nativeShotDuration(index, false, this.spectatorLastShot);
     this.gun.visible = false;
-    this.flash.visible = false;
+    this.flash.visible = elapsed < 0.08 && !bot.rig.suppressed;
+    this.flash.position.copy(gun.userData.muzzle);
     if (gun !== this.gun) this.view.add(gun);
     gun.visible = true;
     animateGun(gun, {
       suppressed: bot.rig.suppressed,
       clock: this.animationTime,
       time: this.animationTime,
-      reload: 0,
+      reload: state?.reloadTime ? networkReloadProgress(state, { shell: state.reloadPhase }) : 0,
+      reloadActive: !!state?.reloadTime,
+      emptyReload: state?.reloadEmpty,
       draw: 0,
       bolt: 0,
       recoil: bot.rig.recoil * 0.03,
@@ -4883,6 +4927,10 @@ export class Game {
       lastShot: this.spectatorLastShot && elapsed < duration,
       bob: Math.sin(bot.rig.time * 8) * bot.speed * 0.0017,
       sway: 0,
+      knife: Math.min(1, meleeTime / meleeDuration),
+      knifeActive: !!this.network && isKnife(index) && meleeTime < meleeDuration,
+      stab: melee?.stab,
+      alternate: melee?.alternate,
     });
     this.renderer.clearDepth();
     this.renderer.render(this.view, this.viewCamera);

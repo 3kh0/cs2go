@@ -29,6 +29,7 @@ export function movePlayer(
   const radius = movement.hullRadius;
   let hull = player.eye + movement.standingHeight - movement.standingEye;
   const velocity = { x: player.vx, z: player.vz };
+  player.scope = Math.min(weapons[player.weapon].zoomLevels, input.scope);
   const maxSpeed =
     (player.scope && weapons[player.weapon].scopedSpeed) || weapons[player.weapon].speed;
   const speed =

@@ -1,4 +1,5 @@
-import { expect, test } from "vitest";
+import { afterEach, expect, test, vi } from "vitest";
+afterEach(() => vi.restoreAllMocks());
 import * as T from "three";
 import { MapCollision } from "./map-collision";
 import { neutralInput, type Input } from "@cs2go/protocol";
@@ -230,6 +231,7 @@ test("sidearm drops preserve ammo, leave the knife usable and can be picked up b
 });
 
 test("shot feedback distinguishes wall impacts, sky misses and confirmed player hits", () => {
+  vi.spyOn(Math, "random").mockReturnValue(0);
   const { match, ct, t } = fixture();
   live(match);
   Object.assign(ct, { x: 4, z: -61, y: 0, yaw: 0, pitch: 0, cooldown: 0 });

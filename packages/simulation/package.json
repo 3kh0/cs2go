@@ -8,7 +8,8 @@
     "./weapon-stats": "./src/data/weapon-stats.json",
     "./movement": "./src/movement.ts",
     "./match": "./src/match.ts",
-    "./*": "./src/*.ts"
+    "./*": "./src/*.ts",
+    "./world-ball-data": "./src/data/world-ball.json"
   },
   "scripts": {
     "check": "tsc --noEmit && oxlint --type-aware --type-check src",

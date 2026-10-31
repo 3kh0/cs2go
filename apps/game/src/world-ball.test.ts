@@ -2,7 +2,7 @@ import { expect, test } from "vitest";
 import * as T from "three";
 import { WorldBall } from "./world-ball";
 import { MapCollision } from "./map-collision";
-import native from "./data/world-ball.json";
+import native from "@cs2go/simulation/world-ball-data";
 test("dynamic ball bounces off cover, sleeps and resets to its native position", () => {
   const root = new T.Group();
   const material = new T.MeshStandardMaterial();

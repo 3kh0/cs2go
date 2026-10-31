@@ -1,5 +1,5 @@
 import * as T from "three";
-import { advanceDroppedWeapon } from "@cs2go/simulation/dropped-weapon";
+import { advanceDroppedWeapon, canPickupDroppedWeapon } from "@cs2go/simulation/dropped-weapon";
 import type { Game } from "./game";
 import { weapons, weaponIcons, isKnife, weaponSlot } from "./physics";
 import { createWeaponInstance, type WeaponInstance } from "./weapon-instance";
@@ -66,8 +66,6 @@ export class GameInventory {
   private playerAlive = true;
   private alive = new WeakMap<object, boolean>();
   private clock = 0;
-  private pickupCenter = new T.Vector3();
-  private pickupEye = new T.Vector3();
   private dropEye = new T.Vector3();
   private botEye = new T.Vector3();
   private game: Game;
@@ -114,6 +112,7 @@ export class GameInventory {
         } else if (existing < 0) list.push(id);
         try {
           localStorage.setItem("cs2go-loadouts", JSON.stringify(this.loadouts));
+          window.dispatchEvent(new Event("cs2go-loadouts-change"));
         } catch {
           /* Session selection remains usable. */
         }
@@ -436,16 +435,14 @@ export class GameInventory {
     if (this.game.network) return false;
     const g = this.game;
     if (g.dead || !g.active) return false;
-    this.pickupCenter.copy(g.position).y += 0.3;
-    this.pickupEye.copy(g.position).y += 0.6;
     const drop = this.drops.find(
       (d) =>
-        d.age > 0.4 &&
-        (d.owner !== "player" || d.age > 1.5) &&
-        d.mesh.position.distanceToSquared(this.pickupCenter) < 2.25 &&
-        g.visible(
-          this.pickupEye,
-          this.dropEye.copy(d.mesh.position).setY(d.mesh.position.y + 0.15),
+        canPickupDroppedWeapon(
+          d.mesh.position,
+          d.age,
+          d.owner === "player",
+          g.position,
+          (from, to) => g.visible(from, to),
         ) &&
         (use || (weaponSlot(d.id) === 1 ? g.primary === null : this.sidearmDropped)),
     );

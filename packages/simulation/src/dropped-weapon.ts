@@ -32,3 +32,23 @@ export function advanceDroppedWeapon(
     velocity.x = velocity.z = 0;
   }
 }
+
+const pickupFrom = new T.Vector3(),
+  pickupTo = new T.Vector3();
+export function canPickupDroppedWeapon(
+  drop: { x: number; y: number; z: number },
+  age: number,
+  own: boolean,
+  player: { x: number; y: number; z: number },
+  visible: (from: T.Vector3, to: T.Vector3) => boolean,
+) {
+  if (
+    age <= 0.4 ||
+    (own && age <= 1.5) ||
+    Math.hypot(drop.x - player.x, drop.y - player.y - 0.3, drop.z - player.z) >= 1.5
+  )
+    return false;
+  pickupFrom.set(player.x, player.y + 0.6, player.z);
+  pickupTo.set(drop.x, drop.y + 0.15, drop.z);
+  return visible(pickupFrom, pickupTo);
+}
