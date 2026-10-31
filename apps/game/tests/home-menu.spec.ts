@@ -63,7 +63,7 @@ test("native homepage presents both agents, local navigation and a working match
   await page.locator("#store-button").click();
   await expect(page.locator("#home-panel-title")).toHaveText("Store unavailable");
   await expect(page.locator("#home-panel-content p")).toHaveText(
-    "The Store is currently unavailable.",
+    "The Store is not available in this version.",
   );
   await page.screenshot({ path: "artifacts/home-store-unavailable.png" });
   await page.locator("#home-panel-close").click();

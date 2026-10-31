@@ -1,3 +1,4 @@
+import { readAssetBody } from "./asset-stream";
 import { assetFetch } from "./asset-url";
 import { createLoadQueue } from "./loading";
 import type * as T from "three";
@@ -17,16 +18,10 @@ export function enableTextureTranscoding(renderer: T.WebGLRenderer) {
 }
 // Vercel compresses only text-like MIME types, so large GLBs ship pre-gzipped.
 // A server that adds Content-Encoding has already decoded it; check the magic.
-export async function fetchGzipped(url: string) {
-  const response = await assetFetch(url);
+export async function fetchGzipped(url: string, init?: RequestInit) {
+  const response = await assetFetch(url, init);
   if (!response.ok) throw new Error(`${url} could not load`);
-  const bytes = await response.arrayBuffer();
-  const [a, b] = new Uint8Array(bytes, 0, Math.min(2, bytes.byteLength));
-  return a === 0x1f && b === 0x8b
-    ? await new Response(
-        new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip")),
-      ).arrayBuffer()
-    : bytes;
+  return readAssetBody(response);
 }
 export function loadModel(url: string, priority = 0) {
   // The production build creates lossless gzip siblings; originals remain the
@@ -35,7 +30,7 @@ export function loadModel(url: string, priority = 0) {
 }
 export function loadGzipped(url: string, priority = 0) {
   return load(async () => {
-    const data = await fetchGzipped(url);
+    const data = await fetchGzipped(url, priority > 0 ? { priority: "high" } : undefined);
     return parse(() => gltf.parseAsync(data, url.slice(0, url.lastIndexOf("/") + 1)), priority);
   }, priority);
 }

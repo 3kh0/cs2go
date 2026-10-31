@@ -106,3 +106,25 @@ describe("packed startup audio", () => {
     expect(decode).toHaveBeenCalledTimes(9);
   });
 });
+
+it("retries a failed streamed response without occupying or wedging the decode queue", async () => {
+  vi.resetModules();
+  const data = new Uint8Array(fixture([entry]));
+  const fetcher = vi
+    .fn()
+    .mockResolvedValueOnce(new Response(data.slice(0, -1)))
+    .mockResolvedValueOnce(new Response(data));
+  vi.stubGlobal("fetch", fetcher);
+  const decode = vi.fn(async () => ({}) as AudioBuffer);
+  vi.stubGlobal(
+    "OfflineAudioContext",
+    class {
+      decodeAudioData = decode;
+    },
+  );
+  const { loadAudioClip } = await import("./audio-bank");
+  await expect(loadAudioClip(entry.url)).rejects.toThrow("Truncated audio pack");
+  await expect(loadAudioClip(entry.url)).resolves.toBeDefined();
+  expect(fetcher).toHaveBeenCalledTimes(2);
+  expect(decode).toHaveBeenCalledTimes(1);
+});

@@ -25,3 +25,23 @@ An unthrottled Chromium measurement on the development Mac, using a fresh browse
 | Service worker controlling the page |      No |     Yes |
 
 These are observations, not a network-independent performance guarantee. The repeat baseline still suffered failed worker installation; it was not a functioning offline-cache baseline. Detailed local profiles are in ignored `artifacts/startup-baseline.json` and `artifacts/startup-after.json`. The intro sequence remains unchanged for users without reduced motion.
+
+## Streaming and shared scenery
+
+Production HTML preconnects to the pinned asset origin and preloads the exact CORS URL for the critical Dust II model at high priority. The model loader reuses that request. Local/offline development adds no CDN hints.
+
+Gzip model data is decompressed as response chunks arrive, including when the gzip signature spans chunks. Responses already decompressed by HTTP Content-Encoding remain supported. The startup audio bank resolves individual clips as they arrive, allowing bounded audio decoding to overlap the remaining download. Decode slots are occupied only by ready clips; malformed/truncated streams reject and failed bank loads can retry.
+
+The homepage now clones the game map's scene graph while sharing its geometry, materials, textures and native lighting. This removes the separate panorama map download and GPU upload. The native game map's surface details and lighting therefore also appear in the panorama. Separate scene graphs preserve menu/match visibility. Original local panorama assets remain available as source inputs.
+
+A subsequent Chromium test used fresh browser contexts, blocked service workers, reduced motion, 80 ms added latency and a 5 MiB/s download limit against the same R2 release:
+
+| Measurement           | Earlier loader | Streaming + shared scenery |
+| --------------------- | -------------: | -------------------------: |
+| CDN transfer bytes    |       173.6 MB |                   153.3 MB |
+| Error-free ready menu |        36.79 s |          33.19 s / 32.82 s |
+| Main map fetches      |              1 |                          1 |
+
+The earlier loader also had a 62.61 s run with an initialization error. Streaming alone measured 45.02 s / 36.63 s; it did not establish a reliable speedup on this connection. Removing the duplicate map provides the measurable byte saving. One shared-map run timed out while another browser suite was running; the two reported shared-map runs were repeated without concurrent browser tests and had no page errors. These small samples are observations, not a universal latency guarantee. CDP reported HTTP/2; this change does not assume HTTP/3 or add host sharding. Detailed local request logs are in ignored `artifacts/streaming-before.json`, `artifacts/streaming-after.json` and `artifacts/shared-map-after.json`.
+
+The production startup test checks that only one Dust II model is requested, including preload reuse, and still verifies repeated/offline startup. Unit tests exercise incremental gzip output, cancellation, malformed gzip, streamed audio byte integrity, early clip readiness and failed-stream retries. Play remains disabled until required assets, objective viewmodels and GPU warm-up finish.

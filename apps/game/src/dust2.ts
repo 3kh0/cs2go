@@ -135,6 +135,7 @@ export async function loadDust2(scene: T.Scene) {
   scene.add(root);
   return {
     root,
+    scenery: asset.scene,
     ball,
     walls: [] as Wall[],
     solids: [proxy],

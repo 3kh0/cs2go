@@ -8,6 +8,12 @@ test("cold startup begins asset loading even if service-worker registration neve
       value: () => new Promise(() => {}),
     });
   });
+  const maps: string[] = [];
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("request", (request) => {
+    if (/\/models\/(?:maps|home)\/dust2\.glb\.gz$/.test(request.url())) maps.push(request.url());
+  });
   const started = Date.now();
   const firstAsset = page.waitForRequest((request) =>
     /\/(?:models\/|audio\/startup\.bin)/.test(request.url()),
@@ -18,6 +24,10 @@ test("cold startup begins asset loading even if service-worker registration neve
   expect(Date.now() - started).toBeLessThan(4000);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });
   await expect(page.locator("#startup")).toHaveCount(0);
+  // The menu and match share one map; the early preload is reused by the loader.
+  expect(maps).toHaveLength(1);
+  expect(maps[0]).toContain("/models/maps/dust2.glb.gz");
+  expect(errors).toEqual([]);
 });
 
 test("cold cache installs, repeated startup reuses it, and the ready menu survives offline", async ({

@@ -13,7 +13,7 @@ import {
   constants,
 } from "node:zlib";
 import { prepare, releaseId, transportPath, sha256, BROTLI_QUALITY } from "./pipeline.mjs";
-import { assetBase } from "../../scripts/build-assets.mjs";
+import { assetBase, startupHints } from "../../scripts/build-assets.mjs";
 
 test("asset releases are deterministic, hash content, and cache lossless compression", async () => {
   const root = await mkdtemp(join(tmpdir(), "cs2go-assets-"));
@@ -154,4 +154,17 @@ test("verification reuses unchanged no-transport decisions but generation and ch
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test("startup hints warm the CDN and preload the exact CORS map URL only in production", () => {
+  assert.deepEqual(startupHints(""), []);
+  const base = assetBase("https://cdn.example/game", "abc");
+  const [connection, map] = startupHints(base);
+  assert.equal(connection.attrs.href, "https://cdn.example");
+  assert.equal(connection.attrs.rel, "preconnect");
+  assert.equal(map.attrs.href, `${base}/models/maps/dust2.glb.gz`);
+  assert.equal(map.attrs.rel, "preload");
+  assert.equal(map.attrs.as, "fetch");
+  assert.equal(map.attrs.crossorigin, "anonymous");
+  assert.equal(map.attrs.fetchpriority, "high");
 });

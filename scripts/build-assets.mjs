@@ -17,6 +17,27 @@ export function rewriteAssetUrls(source, base) {
     .replace(/\/(audio|effects|fonts|icons|licenses|maps|models|skins|ui)\//g, `${base}/$1/`)
     .replaceAll('"/icon.svg"', `"${base}/icon.svg"`);
 }
+export function startupHints(base) {
+  if (!base) return [];
+  return [
+    {
+      tag: "link",
+      attrs: { rel: "preconnect", href: new URL(base).origin, crossorigin: "anonymous" },
+      injectTo: "head-prepend",
+    },
+    {
+      tag: "link",
+      attrs: {
+        rel: "preload",
+        as: "fetch",
+        href: `${base}/models/maps/dust2.glb.gz`,
+        crossorigin: "anonymous",
+        fetchpriority: "high",
+      },
+      injectTo: "head-prepend",
+    },
+  ];
+}
 export function buildAssets() {
   let output, manifest, base;
   return {
@@ -43,7 +64,7 @@ export function buildAssets() {
         );
     },
     transformIndexHtml(html) {
-      return base ? rewriteAssetUrls(html, base) : html;
+      return { html: base ? rewriteAssetUrls(html, base) : html, tags: startupHints(base) };
     },
     async configResolved(config) {
       output = resolve(config.root, config.build.outDir);

@@ -8,12 +8,11 @@ import {
   type AgentAppearance,
 } from "./agent-roster";
 import * as T from "three";
-import { fetchGzipped, loadModel } from "./gltf";
+import { fetchGzipped } from "./gltf";
 import { createSoldier, disposeSoldier, type Soldier, type AgentTeam } from "./soldier";
 import { applyBuyPose, buyPoseToken } from "./buy-poses";
 import { unregisterSkinModel } from "./skins";
 import { createNativeWorldGun } from "./weapon-motion";
-import { gradeMapColors } from "./map-color";
 import { armoryReflections } from "./reflections";
 import { reachPreviewHand } from "./preview-arm";
 
@@ -65,28 +64,25 @@ export class HomeScene {
       this.pointer.set(event.clientX / innerWidth - 0.5, event.clientY / innerHeight - 0.5);
     });
   }
-  async load(renderer: T.WebGLRenderer) {
+  async load(renderer: T.WebGLRenderer, scenery: Promise<T.Group>) {
     const [data, world] = await Promise.all([
       fetchGzipped("/models/animations/home/poses.json.gz"),
-      loadModel("/models/home/dust2.glb"),
+      scenery,
       document.fonts.load('700 16px "Stratum2 Monodigit"'),
       document.fonts.load('700 16px "Stratum2 Mono"'),
     ]);
     this.poses = JSON.parse(new TextDecoder().decode(data));
-    // VRF exports (Source y,z,x); agents/camera use (Source x,z,-y).
-    world.scene.rotation.y = Math.PI / 2;
-    world.scene.traverse((object) => {
-      if (object instanceof T.Mesh) object.receiveShadow = true;
-    });
-    gradeMapColors(world.scene);
-    this.scene.add(world.scene);
-    world.scene.updateMatrixWorld(true);
+    // Separate scene graph, shared immutable geometry/materials and native map lighting.
+    // Avoid downloading/uploading a second Dust II just for the panorama.
+    const background = world.clone(true);
+    this.scene.add(background);
+    background.updateMatrixWorld(true);
     const ground = new T.Raycaster(
       new T.Vector3(1355.757812 * 0.0254, 2, -925.05896 * 0.0254),
       new T.Vector3(0, -1, 0),
       0,
       5,
-    ).intersectObject(world.scene, true)[0];
+    ).intersectObject(background, true)[0];
     if (ground) this.floor = ground.point.y;
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 64;

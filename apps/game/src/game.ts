@@ -605,6 +605,11 @@ export class Game {
     play.disabled = true;
     play.querySelector("span")!.textContent = "LOADING ARMORY…";
     let loaded = 0;
+    const worldReady = loadDust2(this.scene).then((world) => {
+      gradeMapColors(world.root);
+      this.world = this.dust = world;
+      return world;
+    });
     const assets = [
       loadCalloutRadar().then((image) => {
         this.radarImage = image;
@@ -614,12 +619,16 @@ export class Game {
       this.weaponAudio.load(),
       this.soundscape.load(),
       loadTracerTextures(),
-      Promise.all([loadSoldierModels(), loadBuyPoses(), this.homeScene.load(this.renderer)]),
+      Promise.all([
+        loadSoldierModels(),
+        loadBuyPoses(),
+        this.homeScene.load(
+          this.renderer,
+          worldReady.then((world) => world.scenery),
+        ),
+      ]),
       this.bombMesh.load(this.renderer).then(() => registerActorLighting(this.bombMesh)),
-      loadDust2(this.scene).then((world) => {
-        gradeMapColors(world.root);
-        this.world = this.dust = world;
-      }),
+      worldReady,
     ];
     const loadSteps = assets.length + 1; // GPU warm-up is the final step.
     onLoad(loaded, loadSteps);
@@ -633,7 +642,6 @@ export class Game {
     )
       .then(async () => {
         for (let i = 0; i < 5; i++) this.bots.push(this.makeBot(i));
-        this.assetsReady = true;
         this.useWorld();
         this.equip(this.selected);
         await this.bombView.load(this.renderer);
@@ -644,6 +652,7 @@ export class Game {
         return this.warmUp();
       })
       .then(() => {
+        this.assetsReady = true;
         play.disabled = false;
         play.querySelector("span")!.textContent = "PLAY CASUAL";
         onLoad(loadSteps, loadSteps);
