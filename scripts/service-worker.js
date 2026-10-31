@@ -39,10 +39,19 @@ self.addEventListener("install", (event) => {
       await Promise.all(
         Array.from({ length: 4 }, async () => {
           for (let path = paths.shift(); path; path = paths.shift()) {
-            let response = await fetch(networkUrl(path), {
-              cache: path === "/" ? "reload" : "force-cache",
-            });
-            if (!response.ok || !(await verified(response, path)).valid) {
+            let response;
+            try {
+              response = await fetch(networkUrl(path), {
+                cache:
+                  path === "/" || networkUrl(path).startsWith("https://")
+                    ? "reload"
+                    : "force-cache",
+              });
+            } catch {
+              // A previous no-CORS favicon/image request can leave an unreadable
+              // HTTP-cache entry. Retry with Origin rather than aborting install.
+            }
+            if (!response?.ok || !(await verified(response, path)).valid) {
               response = await fetch(networkUrl(path), { cache: "reload" });
               if (!response.ok || !(await verified(response, path)).valid)
                 throw new Error("Shell revision unavailable");
@@ -198,11 +207,14 @@ self.addEventListener("fetch", (event) => {
     if (!network) {
       // Public CDN responses must be readable, including CSS/background images,
       // so the same byte verification and offline cache work for every asset.
-      network = fetch(
+      const readable =
         assetBase && url.href.startsWith(`${assetBase}/`)
           ? new Request(request, { mode: "cors", credentials: "omit" })
-          : request,
-      );
+          : request;
+      network = fetch(readable).catch((error) => {
+        if (readable === request) throw error;
+        return fetch(readable, { cache: "reload" });
+      });
       pending.set(path, network);
       void network.finally(() => pending.delete(path)).catch(() => {});
     }

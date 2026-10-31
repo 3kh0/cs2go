@@ -87,10 +87,12 @@ it.each(["", "https://cdn.test/releases/abc"])(
         Headers,
         Request,
         Response,
-        fetch: async (request: string | Request) => {
+        fetch: async (request: string | Request, options?: RequestInit) => {
           fetches++;
           if (!online) throw new Error("offline");
           const path = new URL(key(request)).pathname.replace("/releases/abc", "");
+          if (base && path === "/model.bin" && options?.cache !== "reload")
+            throw new TypeError("Cached no-CORS response is unreadable");
           if (base && typeof request !== "string" && request.url.startsWith(base)) {
             expect(request.mode).toBe("cors");
           }

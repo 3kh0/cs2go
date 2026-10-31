@@ -19,7 +19,7 @@ import { startIntro } from "./intro";
 import { startAssetCache } from "./asset-cache";
 
 const loadProgress = startIntro();
-await startAssetCache();
+startAssetCache();
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 <canvas id="game"></canvas>
 ${homeMenuMarkup()}

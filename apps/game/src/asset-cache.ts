@@ -37,8 +37,8 @@ function currentShellMatches(worker: ServiceWorker): Promise<boolean> {
     }
   });
 }
-/** Register before downloads; new navigations fetch fresh HTML, with offline fallback. */
-export async function startAssetCache(): Promise<void> {
+/** Cache installation runs alongside startup; storage/network delays never gate assets. */
+export function startAssetCache(): void {
   if (!import.meta.env.PROD || !("serviceWorker" in navigator)) return;
   const serviceWorker = navigator.serviceWorker;
   let controlled = !!serviceWorker.controller;
@@ -55,7 +55,7 @@ export async function startAssetCache(): Promise<void> {
         }
       });
   });
-  const registration = serviceWorker
+  void serviceWorker
     .register("/sw.js", { updateViaCache: "none" })
     .then((reg) => {
       let lastCheck = Date.now();
@@ -71,29 +71,4 @@ export async function startAssetCache(): Promise<void> {
       return reg;
     })
     .catch(() => undefined);
-  if (serviceWorker.controller) return;
-  let finished = false;
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  let listener: (() => void) | undefined;
-  try {
-    await Promise.race([
-      registration.then(async (reg) => {
-        if (finished || !reg || serviceWorker.controller) return;
-        await new Promise<void>((resolve) => {
-          listener = () => {
-            if (serviceWorker.controller) resolve();
-          };
-          serviceWorker.addEventListener("controllerchange", listener);
-          listener();
-        });
-      }),
-      new Promise<void>((resolve) => {
-        timer = setTimeout(resolve, 8000);
-      }),
-    ]);
-  } finally {
-    finished = true;
-    if (timer) clearTimeout(timer);
-    if (listener) serviceWorker.removeEventListener("controllerchange", listener);
-  }
 }

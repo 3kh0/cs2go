@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:browser": "playwright test",
-    "check": "oxlint --type-aware --type-check src tests vite.config.ts vitest.config.ts playwright.config.ts"
+    "check": "oxlint --type-aware --type-check src tests startup-tests vite.config.ts vitest.config.ts playwright.config.ts playwright.startup.config.ts",
+    "test:startup": "playwright test --config playwright.startup.config.ts"
   },
   "dependencies": {
     "@cs2go/protocol": "workspace:*",
