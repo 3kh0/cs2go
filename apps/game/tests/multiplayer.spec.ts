@@ -54,6 +54,21 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
       )
       .toBeGreaterThan(0.1);
     await a.screenshot({ path: "artifacts/dust2-waiting.png" });
+    await expect(a.locator("#toast")).toHaveCount(0);
+    expect(waiting!.width).toBeLessThan(340);
+    expect(waiting!.height).toBeLessThan(40);
+    await a.waitForFunction(() => window.__game.network?.connection.local?.cooldown === 0);
+    await a.mouse.click(700, 400);
+    await expect.poll(() => a.evaluate(() => window.__game.ammo)).toBe(11);
+    await a.keyboard.press("KeyG");
+    await a.waitForFunction(() => window.__game.selected === 4);
+    await expect
+      .poll(() => a.evaluate(() => window.__game.network!.connection.round!.drops.length))
+      .toBe(1);
+    await a.waitForTimeout(850);
+    await a.keyboard.press("KeyE");
+    await a.waitForFunction(() => window.__game.selected === 2);
+    expect(await a.evaluate(() => window.__game.ammo)).toBe(11);
     await join(b, room, "t");
     await expect(a.locator("#match-waiting")).toBeHidden();
     await a.waitForFunction(() => window.__game.network?.connection.round?.phase === "freeze");
@@ -96,6 +111,31 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
       )
       .toBeGreaterThan(0.1);
 
+    await b.bringToFront();
+    if (!(await b.evaluate(() => window.__game.locked))) await b.locator("#game").click();
+    await b.waitForFunction(() => window.__game.network?.connection.local?.cooldown === 0);
+    await b.mouse.click(700, 400);
+    await expect.poll(() => b.evaluate(() => window.__game.ammo)).toBe(19);
+    await expect.poll(() => b.evaluate(() => window.__game.shotTime)).toBeGreaterThan(0.15);
+    await b.keyboard.press("Digit3");
+    await b.waitForFunction(
+      () =>
+        window.__game.selected === 4 &&
+        window.__game.drawTime === 0 &&
+        window.__game.network?.connection.local?.cooldown === 0,
+    );
+    await b.mouse.click(700, 400);
+    await expect.poll(() => b.evaluate(() => window.__game.knifeTime)).toBeGreaterThan(0);
+    expect(await b.evaluate(() => window.__game.shotTime)).toBe(0);
+    await b.waitForTimeout(600);
+    await b.mouse.click(700, 400, { button: "right" });
+    await expect
+      .poll(() => b.evaluate(() => window.__game.knifeStab && window.__game.knifeTime > 0))
+      .toBe(true);
+    await b.keyboard.press("Digit2");
+    await b.waitForFunction(() => window.__game.selected === 7);
+    await a.bringToFront();
+    if (!(await a.evaluate(() => window.__game.locked))) await a.locator("#game").click();
     await command(request, room, "timeout");
     await expect(a.locator("#round-banner-title")).toHaveText("ROUND WON");
     await expect(b.locator("#round-banner-title")).toHaveText("ROUND LOST");

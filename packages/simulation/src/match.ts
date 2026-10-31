@@ -30,6 +30,7 @@ import { groundCorrectedBombSample } from "./bomb-damage";
 import type { DustMap } from "./dust-map";
 export const STEP = 1 / TICK_RATE;
 export type Match = {
+  nextDrop: number;
   players: Map<string, PlayerState>;
   state: RoundState;
   map: DustMap;
@@ -40,6 +41,7 @@ export type Match = {
 };
 export function createMatch(mode: MatchMode, map: DustMap): Match {
   return {
+    nextDrop: 1,
     players: new Map(),
     map,
     loss: { ct: rulesFor(mode).startingLossLevel, t: rulesFor(mode).startingLossLevel },
@@ -47,6 +49,7 @@ export function createMatch(mode: MatchMode, map: DustMap): Match {
     shotsHeld: new Set(),
     weaponCooldowns: new Map(),
     state: {
+      drops: [],
       mode,
       phase: "waiting",
       round: 1,
@@ -184,6 +187,7 @@ export function leaveMatch(match: Match, id: string) {
   match.weaponCooldowns.delete(id);
 }
 export function startRound(match: Match) {
+  match.state.drops = [];
   const state = match.state,
     rules = rulesFor(state.mode);
   if (
@@ -338,7 +342,7 @@ export function rayBox(origin: Vec3, direction: Vec3, min: Vec3, max: Vec3): num
   }
   return near;
 }
-function shoot(match: Match, shooter: PlayerState): MatchEvent[] {
+function shoot(match: Match, shooter: PlayerState, stab = false): MatchEvent[] {
   const weapon = weapons[shooter.weapon],
     from = new T.Vector3(shooter.x, shooter.y + shooter.eye, shooter.z);
   const direction = new T.Vector3(
@@ -347,7 +351,7 @@ function shoot(match: Match, shooter: PlayerState): MatchEvent[] {
     -Math.cos(shooter.yaw) * Math.cos(shooter.pitch),
   );
   let distance = Math.min(
-    isKnife(shooter.weapon) ? 1.8 : 250,
+    isKnife(shooter.weapon) ? (stab ? 32 : 48) * 0.0254 : 250,
     match.map.collision.intersections(new T.Ray(from, direction), 250)[0]?.distance ?? 250,
   );
   let victim: PlayerState | undefined;
@@ -372,12 +376,14 @@ function shoot(match: Match, shooter: PlayerState): MatchEvent[] {
   }
   const to = from.clone().addScaledVector(direction, distance);
   const events: MatchEvent[] = [
-    { kind: "shot", shooter: shooter.id, from, to, weapon: shooter.weapon },
+    isKnife(shooter.weapon)
+      ? { kind: "melee", shooter: shooter.id, stab, hit: !!victim }
+      : { kind: "shot", shooter: shooter.id, from, to, weapon: shooter.weapon },
   ];
   if (victim) {
-    const headshot = to.y > victim.y + victim.eye - 0.15;
+    const headshot = !isKnife(shooter.weapon) && to.y > victim.y + victim.eye - 0.15;
     const damage =
-      weapon.damage *
+      (isKnife(shooter.weapon) ? (stab ? 65 : 40) : weapon.damage) *
       (headshot ? weapon.head : 1) *
       (victim.team === shooter.team ? friendlyFireScale(match.state.mode, "bullet") : 1);
     const hit = applyArmorDamage(
@@ -417,6 +423,80 @@ function shoot(match: Match, shooter: PlayerState): MatchEvent[] {
     }
   }
   return events;
+}
+function dropWeapon(match: Match, player: PlayerState) {
+  if (isKnife(player.weapon)) return;
+  const from = new T.Vector3(player.x, player.y + 0.4, player.z);
+  const direction = new T.Vector3(-Math.sin(player.yaw), 0, -Math.cos(player.yaw));
+  const distance = Math.max(
+    0,
+    Math.min(
+      1.2,
+      (match.map.collision.intersections(new T.Ray(from, direction), 1.3)[0]?.distance ?? 1.3) -
+        0.1,
+    ),
+  );
+  const x = player.x + direction.x * distance,
+    z = player.z + direction.z * distance;
+  const floor = match.map.collision.floor(x, z, player.y + 0.5);
+  const id = match.nextDrop++;
+  match.state.drops.push({
+    id,
+    weapon: player.weapon,
+    ammo: player.ammo,
+    reserve: player.reserve,
+    owner: player.id,
+    x,
+    y: Number.isFinite(floor) ? floor : player.y,
+    z,
+    yaw: player.yaw,
+    age: 0,
+  });
+  if (match.state.drops.length > 64) match.state.drops.shift();
+  if (player.primary === player.weapon) player.primary = null;
+  delete player.magazines[player.weapon];
+  player.weapon = player.primary ?? (player.magazines[player.secondary] ? player.secondary : 4);
+  Object.assign(player, player.magazines[player.weapon]);
+  player.reloadTime = 0;
+  player.cooldown = weapons[player.weapon].deploy;
+}
+function pickupWeapon(match: Match, player: PlayerState, manual: boolean) {
+  const index = match.state.drops.findIndex((drop) => {
+    const empty =
+      weaponSlot(drop.weapon) === 1 ? player.primary === null : !player.magazines[player.secondary];
+    if (
+      (!empty && !manual) ||
+      (drop.owner === player.id && drop.age < 0.75) ||
+      Math.hypot(drop.x - player.x, drop.y - player.y, drop.z - player.z) > (manual ? 1.7 : 0.9)
+    )
+      return false;
+    const from = new T.Vector3(player.x, player.y + 0.4, player.z);
+    const delta = new T.Vector3(drop.x, drop.y + 0.1, drop.z).sub(from);
+    const distance = delta.length();
+    return (
+      (match.map.collision.intersections(new T.Ray(from, delta.normalize()), distance)[0]
+        ?.distance ?? Infinity) >= distance
+    );
+  });
+  if (index < 0) return;
+  const [drop] = match.state.drops.splice(index, 1);
+  const slot = weaponSlot(drop.weapon);
+  const previous =
+    slot === 1 ? player.primary : player.magazines[player.secondary] ? player.secondary : null;
+  if (previous !== null) {
+    player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
+    player.weapon = previous;
+    Object.assign(player, player.magazines[previous]);
+    dropWeapon(match, player);
+  } else player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
+  if (slot === 1) player.primary = drop.weapon;
+  else player.secondary = drop.weapon;
+  player.magazines[drop.weapon] = { ammo: drop.ammo, reserve: drop.reserve };
+  player.weapon = drop.weapon;
+  player.ammo = drop.ammo;
+  player.reserve = drop.reserve;
+  player.cooldown = weapons[drop.weapon].deploy;
+  player.reloadTime = 0;
 }
 function buy(match: Match, player: PlayerState, input: Input) {
   const state = match.state;
@@ -471,17 +551,10 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
       [...match.players.values()].some((p) => p.team === "t")
     )
       startRound(match);
-    else
-      for (const player of match.players.values())
-        movePlayer(
-          player,
-          inputs.get(player.id) ?? { ...neutralInput(), yaw: player.yaw, pitch: player.pitch },
-          STEP,
-          match.map,
-        );
-    return events;
+    if (state.phase !== "waiting") return events;
   }
   if (state.phase === "finished") return events;
+  for (const drop of state.drops) drop.age += STEP;
   if (["post", "halftime"].includes(state.phase)) {
     state.pause = Math.max(0, state.pause - STEP);
     if (state.pause === 0) {
@@ -511,6 +584,8 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
     const locks = match.weaponCooldowns.get(player.id) ?? {};
     for (const id of Object.keys(locks)) locks[Number(id)] = Math.max(0, locks[Number(id)] - STEP);
     match.weaponCooldowns.set(player.id, locks);
+    if (input.drop) dropWeapon(match, player);
+    pickupWeapon(match, player, input.pickup);
     buy(match, player, input);
     if (input.select >= 0 && player.magazines[input.select] && input.select !== player.weapon) {
       player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
@@ -546,16 +621,16 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
       player.reloadTime = weapon.reload;
     if (
       !frozen &&
-      input.fire &&
-      (weapon.auto || !match.shotsHeld.has(player.id)) &&
+      (input.fire || (input.stab && isKnife(player.weapon))) &&
+      (weapon.auto || isKnife(player.weapon) || !match.shotsHeld.has(player.id)) &&
       player.reloadTime === 0 &&
       player.cooldown === 0 &&
       (player.ammo > 0 || isKnife(player.weapon))
     ) {
       if (!isKnife(player.weapon)) player.ammo--;
-      player.cooldown = weapon.delay;
-      locks[player.weapon] = weapon.delay;
-      events.push(...shoot(match, player));
+      player.cooldown = isKnife(player.weapon) ? (input.stab ? 1 : 0.4) : weapon.delay;
+      locks[player.weapon] = player.cooldown;
+      events.push(...shoot(match, player, input.stab));
     }
     if (input.fire) match.shotsHeld.add(player.id);
     else match.shotsHeld.delete(player.id);

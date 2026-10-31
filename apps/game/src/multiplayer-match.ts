@@ -2,18 +2,21 @@ import * as T from "three";
 import { neutralInput, type Input, type MatchMode, type ServerMessage } from "@cs2go/protocol";
 import { MatchConnection } from "./multiplayer-connection";
 import type { Game } from "./game";
-import { weapons, movement } from "./physics";
+import { weapons, movement, isKnife } from "./physics";
 import { createWeaponInstance } from "./weapon-instance";
 import { bindWeaponInstance } from "./skins";
 import { setSoldierWeapon, disposeSoldier, resetSoldier, stepSoldierRagdoll } from "./soldier";
 import { showRoundBanner, hideRoundBanner } from "./round-banner";
 import { playerName } from "./player-profile";
+import { createWorldGun, disposeWorldGun, weaponDrawDuration } from "./weapons";
+import { nativeShotDuration } from "./weapon-motion";
 
 type Bot = Game["bots"][number];
 export class MultiplayerMatch {
   connection: MatchConnection;
   request = neutralInput();
   applying = false;
+  private drops = new Map<number, T.Group>();
   private peers = new Map<string, Bot>();
   private peerSpawns = new Map<string, number>();
   private lastSpawn = 0;
@@ -41,7 +44,7 @@ export class MultiplayerMatch {
       (message) => this.receive(message),
       (reason) => {
         if (this.closed) return;
-        this.closed = true;
+        this.disconnect();
         this.game.network = undefined;
         this.game.menu();
         document.getElementById("match-status")!.textContent = reason;
@@ -55,6 +58,8 @@ export class MultiplayerMatch {
     this.closed = true;
     this.connection.close();
     this.peers.clear();
+    for (const mesh of this.drops.values()) disposeWorldGun(mesh);
+    this.drops.clear();
   }
   buy(index: number) {
     if (!this.game.canBuy() || !Number.isInteger(index) || !weapons[index]) return false;
@@ -139,6 +144,7 @@ export class MultiplayerMatch {
     );
     g.primary = local.primary;
     g.secondary = local.secondary;
+    g.groundInventory.sidearmDropped = !local.magazines[local.secondary];
     g.knife = 4;
     g.health = local.health;
     g.dead = local.health > 0 ? 0 : Infinity;
@@ -177,7 +183,7 @@ export class MultiplayerMatch {
     g.reserve = local.reserve;
     g.cooldown = local.cooldown;
     g.reload = local.reloadTime;
-    g.drawTime = Math.min(g.drawTime, local.cooldown);
+
     const indexFor = (id: string | null) =>
       id === local.id ? ("player" as const) : id ? g.bots.indexOf(this.peers.get(id)!) : -1;
     const bomb = state.bomb;
@@ -199,10 +205,12 @@ export class MultiplayerMatch {
     this.health = local.health;
     for (const event of message.events) {
       if (event.kind === "shot") {
-        if (event.shooter === local.id) {
-          g.shotTime = 0.15;
-          g.kick = 0.08;
+        if (event.shooter === local.id && event.weapon === local.weapon) {
           g.lastShot = local.ammo === 0;
+          g.shotTime = nativeShotDuration(event.weapon, false, g.lastShot);
+          g.weaponTime = g.inspectTime = 0;
+          g.drawTime = 0;
+          g.kick = 0.07;
           g.sound("shot");
         } else {
           const peer = this.peers.get(event.shooter);
@@ -220,6 +228,31 @@ export class MultiplayerMatch {
           new T.Vector3(event.to.x, event.to.y, event.to.z),
           event.weapon,
         );
+      } else if (event.kind === "melee") {
+        const peer = this.peers.get(event.shooter);
+        if (event.shooter === local.id && isKnife(local.weapon)) {
+          g.knifeStab = event.stab;
+          g.knifeAlternate = !g.knifeAlternate;
+          g.knifeDuration = event.stab ? 1 : 0.5;
+          g.knifeTime = g.knifeDuration;
+          g.weaponTime = g.inspectTime = g.drawTime = 0;
+          g.soundscape.play(
+            event.hit
+              ? event.stab
+                ? "knife-stab"
+                : "knife-hit"
+              : g.knifeAlternate
+                ? "knife-swing1"
+                : "knife-swing2",
+          );
+        } else if (peer) {
+          g.soundscape.play(
+            event.hit ? "knife-hit" : "knife-swing1",
+            false,
+            "concrete",
+            peer.group.position,
+          );
+        }
       } else if (event.kind === "kill") {
         const killer =
           event.killer === local.id ? "YOU" : (this.peers.get(event.killer)?.name ?? event.killer);
@@ -253,6 +286,27 @@ export class MultiplayerMatch {
     if (state.phase === "finished" && !this.finished) {
       this.finished = true;
       g.finish();
+    }
+    const dropIds = new Set(state.drops.map((drop) => drop.id));
+    for (const [id, mesh] of this.drops) {
+      if (!dropIds.has(id)) {
+        disposeWorldGun(mesh);
+        this.drops.delete(id);
+      }
+    }
+    for (const drop of state.drops) {
+      let mesh = this.drops.get(drop.id);
+      if (!mesh) {
+        mesh = createWorldGun(
+          drop.weapon,
+          weapons[drop.weapon].suppressed,
+          createWeaponInstance(drop.weapon, drop.owner),
+        );
+        this.drops.set(drop.id, mesh);
+        g.scene.add(mesh);
+      }
+      mesh.position.set(drop.x, drop.y + 0.08, drop.z);
+      mesh.rotation.set(0, drop.yaw, Math.PI / 2);
     }
     g.updateUI();
   }
@@ -288,8 +342,23 @@ export class MultiplayerMatch {
     g.damage = Math.max(0, g.damage - dt);
     g.hit = Math.max(0, g.hit - dt);
     g.kick = Math.max(0, g.kick - dt);
+    if (g.shotTime > 0 && !isKnife(g.selected)) {
+      const duration = nativeShotDuration(g.selected, false, g.lastShot);
+      g.animationSounds(
+        "shoot1",
+        1 - g.shotTime / duration,
+        1 - Math.max(0, g.shotTime - dt) / duration,
+      );
+    }
     g.shotTime = Math.max(0, g.shotTime - dt);
-    g.drawTime = Math.max(0, g.drawTime - dt);
+    if (!g.shotTime) g.lastShot = false;
+    if (g.drawTime > 0) {
+      const before = 1 - g.drawTime / weaponDrawDuration(g.selected);
+      g.drawTime = Math.max(0, g.drawTime - dt);
+      g.animationSounds("draw", before, 1 - g.drawTime / weaponDrawDuration(g.selected));
+    }
+    g.knifeTime = Math.max(0, g.knifeTime - dt);
+    g.inspectTime = Math.max(0, g.inspectTime - dt);
     g.weaponTime += dt;
     g.animationTime += dt;
     g.sway += Math.hypot(local.vx, local.vz) * dt * 1.8;

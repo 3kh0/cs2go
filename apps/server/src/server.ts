@@ -223,6 +223,9 @@ export function startServer(options: ServerOptions) {
                   select: input?.select ?? -1,
                   equipment: input?.equipment ?? "",
                   dropBomb: !!input?.dropBomb,
+                  drop: !!input?.drop,
+                  pickup: !!input?.pickup,
+                  stab: !!input?.stab,
                 }
               : { ...neutralInput(), yaw: connection.last.yaw, pitch: connection.last.pitch };
           inputs.set(connection.id, held);

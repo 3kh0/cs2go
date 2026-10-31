@@ -1,7 +1,7 @@
 import * as T from "three";
 import type { Game } from "./game";
 import { weapons, weaponIcons, isKnife, weaponSlot } from "./physics";
-import { createWeaponInstance, weaponInstanceName, type WeaponInstance } from "./weapon-instance";
+import { createWeaponInstance, type WeaponInstance } from "./weapon-instance";
 import { disposeWorldGun, createWorldGun } from "./weapons";
 import { setSoldierWeapon } from "./soldier";
 import { addMoney, weaponPrice } from "./economy";
@@ -154,7 +154,6 @@ export class GameInventory {
   }
   showLoadout() {
     if (!this.game.assetsReady) {
-      this.game.toast("Loadout unavailable while the armory is loading", 2);
       return;
     }
     this.closeLoadout();
@@ -457,7 +456,6 @@ export class GameInventory {
     g.reserve = drop.reserve;
     g.magazines[drop.id] = { ammo: drop.ammo, reserve: drop.reserve };
     this.receipts.delete(drop.id);
-    g.toast(`PICKED UP ${weaponInstanceName(drop.instance)}`, 1.5);
     g.updateUI();
     return true;
   }

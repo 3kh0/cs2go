@@ -159,23 +159,70 @@ test("holstering preserves shot/reload lockouts and empty teams cannot farm roun
   expect(match.state.scores.ct).toBe(score);
 });
 
-test("waiting players can move without spending ammo or starting a round", () => {
+test("waiting players can move and fire without starting a round", () => {
   const match = createMatch("casual", testMap());
   const ct = createPlayer("ct", "CT", "ct");
   joinMatch(match, ct);
+  ct.cooldown = 0;
   const predicted = structuredClone(ct);
   const input = { ...neutralInput(), forward: 1, jump: true, fire: true };
   const start = ct.z;
   for (let i = 0; i < 64; i++) {
     movePlayer(predicted, input, STEP, match.map);
-    expect(stepMatch(match, new Map([[ct.id, input]]))).toEqual([]);
+    stepMatch(match, new Map([[ct.id, input]]));
   }
   expect(ct.z).toBeLessThan(start);
-  expect(ct).toEqual(predicted);
-  expect(ct.ammo).toBe(12);
+  expect(ct.z).toBe(predicted.z);
+  expect(ct.ammo).toBeLessThan(12);
   expect(match.state.phase).toBe("waiting");
   expect(match.state.elapsed).toBe(0);
   joinMatch(match, createPlayer("t", "T", "t"));
   stepMatch(match, new Map());
   expect(match.state.phase).toBe("freeze");
+});
+
+test("both sidearms fire in waiting; knives emit melee events and never bullet tracers", () => {
+  for (const team of ["ct", "t"] as const) {
+    const match = createMatch("casual", testMap());
+    const player = createPlayer("p", "Player", team);
+    joinMatch(match, player);
+    player.cooldown = 0;
+    const ammo = player.ammo;
+    const events = stepMatch(match, new Map([[player.id, { ...neutralInput(), fire: true }]]));
+    expect(events.some((event) => event.kind === "shot")).toBe(true);
+    expect(player.ammo).toBe(ammo - 1);
+    stepMatch(match, new Map([[player.id, { ...neutralInput(), select: 4 }]]));
+    advance(match, 2);
+    const swing = stepMatch(match, new Map([[player.id, { ...neutralInput(), fire: true }]]));
+    expect(swing).toEqual([{ kind: "melee", shooter: player.id, stab: false, hit: false }]);
+    advance(match, 1);
+    const stab = stepMatch(match, new Map([[player.id, { ...neutralInput(), stab: true }]]));
+    expect(stab).toEqual([{ kind: "melee", shooter: player.id, stab: true, hit: false }]);
+    expect(player.weapon).toBe(4);
+  }
+});
+test("sidearm drops preserve ammo, leave the knife usable and can be picked up by another player", () => {
+  const match = createMatch("casual", testMap());
+  const player = createPlayer("p", "Player", "ct");
+  joinMatch(match, player);
+  player.ammo = 3;
+  stepMatch(match, new Map([[player.id, { ...neutralInput(), drop: true }]]));
+  expect(player.weapon).toBe(4);
+  expect(player.magazines[2]).toBeUndefined();
+  expect(match.state.drops).toHaveLength(1);
+  expect(match.state.drops[0]).toMatchObject({ weapon: 2, ammo: 3, owner: "p" });
+  advance(match, 1);
+  expect(player.weapon).toBe(4);
+  const other = createPlayer("other", "Other", "ct");
+  joinMatch(match, other);
+  Object.assign(other, {
+    x: match.state.drops[0].x,
+    y: match.state.drops[0].y,
+    z: match.state.drops[0].z,
+  });
+  stepMatch(match, new Map([[other.id, { ...neutralInput(), pickup: true }]]));
+  expect(other.weapon).toBe(2);
+  expect(other.ammo).toBe(3);
+  expect(match.state.drops.some((drop) => drop.owner === "other")).toBe(true);
+  expect(match.state.drops.some((drop) => drop.owner === "p")).toBe(false);
 });

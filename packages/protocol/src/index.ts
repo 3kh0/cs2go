@@ -1,5 +1,5 @@
 // Version every wire-format or simulation compatibility change together.
-export const PROTOCOL_VERSION = 2;
+export const PROTOCOL_VERSION = 3;
 export const TICK_RATE = 128;
 export const SNAPSHOT_RATE = 32;
 export const MAX_PLAYERS = 20;
@@ -18,6 +18,9 @@ export type Input = {
   duck: boolean;
   walk: boolean;
   fire: boolean;
+  stab: boolean;
+  drop: boolean;
+  pickup: boolean;
   reload: boolean;
   use: boolean;
   select: number;
@@ -59,9 +62,19 @@ export type PlayerState = Vec3 & {
 };
 export type MatchEvent =
   | { kind: "shot"; shooter: string; from: Vec3; to: Vec3; weapon: number }
+  | { kind: "melee"; shooter: string; stab: boolean; hit: boolean }
   | { kind: "kill"; killer: string; victim: string; headshot: boolean; weapon: number }
   | { kind: "plant" | "defuse" | "explode"; actor: string };
 export type RoundState = {
+  drops: (Vec3 & {
+    id: number;
+    weapon: number;
+    ammo: number;
+    reserve: number;
+    owner: string;
+    yaw: number;
+    age: number;
+  })[];
   mode: MatchMode;
   phase: "waiting" | "freeze" | "live" | "post" | "halftime" | "finished";
   round: number;
@@ -139,7 +152,7 @@ export function validInput(value: unknown): value is Input {
     (value.buy as number) >= -1 &&
     (value.buy as number) <= 36 &&
     ["", "vest", "helmet", "kit"].includes(value.equipment as string) &&
-    ["jump", "duck", "walk", "fire", "reload", "use", "dropBomb"].every(
+    ["jump", "duck", "walk", "fire", "stab", "drop", "pickup", "reload", "use", "dropBomb"].every(
       (key) => typeof value[key] === "boolean",
     )
   );
@@ -190,6 +203,9 @@ export function neutralInput(seq = 0): Input {
     duck: false,
     walk: false,
     fire: false,
+    stab: false,
+    drop: false,
+    pickup: false,
     reload: false,
     use: false,
     select: -1,

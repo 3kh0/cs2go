@@ -45,7 +45,7 @@ function setup() {
   const socket = connection.socket as unknown as TestSocket;
   socket.receive({
     type: "welcome",
-    version: 2,
+    version: 3,
     id: "player",
     room: "test-room-123",
     map: "dust2",

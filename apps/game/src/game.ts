@@ -859,10 +859,11 @@ export class Game {
       if (code === "Space") this.jumpQueued = true;
       if (code === "KeyR" && !this.utility.selected) this.beginReload();
       if (code === "KeyG") {
-        if (this.network) this.network.request.dropBomb = true;
+        if (this.network) this.network.request.drop = true;
         else this.groundInventory.drop(this.selected, true);
       }
       if (code === "Digit4" && !this.network) this.utility.selectNext();
+      if (code === "KeyE" && this.network) this.network.request.pickup = true;
       if (code === "KeyE" && !this.network && this.groundInventory.pickup(true))
         this.keys.delete("KeyE");
       if (
@@ -1670,7 +1671,8 @@ export class Game {
 
   fireKnife(stab = false) {
     if (this.network) {
-      this.network.request.fire = true;
+      if (stab) this.network.request.stab = true;
+      else this.network.request.fire = true;
       return;
     }
     if (

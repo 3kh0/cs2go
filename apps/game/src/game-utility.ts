@@ -277,14 +277,9 @@ export class GameUtility {
   selectNext() {
     const owned = grenadeTypes.filter((kind) => this.inventory[kind] > 0);
     if (!owned.length) {
-      this.game.toast("No grenades · buy utility with B", 2);
       return;
     }
     this.select(owned[(owned.indexOf(this.selected!) + 1) % owned.length]);
-    this.game.toast(
-      `${grenadeData[this.selected!].name} · Hold/release: overhand · Right: underhand · Both: medium · 4: cycle`,
-      4,
-    );
   }
   select(kind: GrenadeKind) {
     if (!this.inventory[kind]) return;
@@ -357,7 +352,6 @@ export class GameUtility {
     this.selected = null;
     this.cooldown = 0.7;
     g.firing = false;
-    g.toast(`${grenadeData[kind].name} thrown`, 1);
     g.updateUI();
   }
   launch(
@@ -766,10 +760,6 @@ export class GameUtility {
         false,
         false,
         grenadeData[effect.kind].name,
-      );
-      g.toast(
-        `${grenadeData[effect.kind].name} · ${id === "player" ? "YOU" : g.bots[id].name} eliminated`,
-        2,
       );
       if (
         g.mode === "deathmatch" &&
