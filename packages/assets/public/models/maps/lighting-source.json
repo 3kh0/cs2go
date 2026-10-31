@@ -1,0 +1,63 @@
+{
+  "author": "Valve",
+  "app": 730,
+  "depot": 2347770,
+  "depotManifest": "4758919807587010422",
+  "source": "Native CS2 Dust II resources, downloaded anonymously with DepotDownloader 3.4.0; decoded with Source2Viewer 20.0.6980",
+  "sha256": {
+    "materials/skybox/sky_de_dust2.vmat_c": "94c8b64483b82f7799f5979c1bfa9af0171c21edd8e7a106ec65c9c4035f6f56",
+    "materials/skybox/sky_de_dust2_exr_908a35ba.vtex_c": "02823df7a05ed61bbd9bde18db4b58e31c06fd687f5724ade737874e81a6e450",
+    "lighting/postprocessing/de_dust2_prefab/de_dust2_prefab.vpost_c": "643f38baae5a3e066b47c890ab1e80efd9859d176139a82ede83d85eee830d75",
+    "maps/de_dust2/entities/default_ents.vents_c": "515efdfc1e452b3d7052c5ffb1801a05e23b2395fb90586ff2dc9d14ae7ef80a"
+  },
+  "native": {
+    "sun": {
+      "color": [255, 222, 189],
+      "brightness": 2.5,
+      "bouncescale": 1.75,
+      "skycolor": [211, 226, 248],
+      "skyintensity": 0.960784,
+      "skytexturescale": 1.2,
+      "skyambientbounce": [151, 151, 151],
+      "skybouncescale": 1.7,
+      "angles": [50.0, 43.0, 0.0],
+      "hammerUniqueId": "2:23513:19679"
+    },
+    "ctRamp": {
+      "bouncescale": 2.0,
+      "range": 168.903,
+      "brightness_lumens": 4500.0,
+      "colortemperature": 3400.0,
+      "color": [255, 190, 135],
+      "colormode": "1",
+      "classname": "light_barn",
+      "origin": [325.308746, 2371.635986, 31.464579],
+      "hammerUniqueId": "2:23513:20086"
+    },
+    "skyMaterial": "materials/skybox/sky_de_dust2.vmat",
+    "skyExposureBias": 0.765,
+    "postProcessExposure": {
+      "min": 0.925,
+      "max": 1.1
+    },
+    "postProcessWhitePoint": 1.648926
+  },
+  "runtime": {
+    "file": "dust2-sky.hdr",
+    "bytes": 496801,
+    "sha256": "dc6abd927c0c86025d5bb5c90a08993fd0bb0a5ab69abcef25474c972ef960ff",
+    "conversion": "Native 2048x1024 linear EXR resized to 1024x512 RGBE HDR with scripts/prepare-dust2-sky.py; original exposure retained"
+  },
+  "adaptation": {
+    "hemisphereIntensity": 2.4,
+    "environmentIntensity": 0.35,
+    "mapAlbedoSaturation": 1.25,
+    "mapPostToneContrastExponent": 1.08,
+    "ctRampLight": "Bounded 22-intensity point at native fixture position, 8 m radius, decay 1.5"
+  },
+  "limitations": [
+    "Native lightmap and spatial probe data are not reproduced; hemisphere and CT ramp fill approximate bounced light.",
+    "Native sun color and direction, sky colors and CT fixture position guide the rendering. Three.js light units, ACES tone mapping, color enhancement and fill strengths are authored adaptations, not exact Source 2 output.",
+    "CT fixture approximates an area light with a bounded unshadowed point; no extra shadow render passes."
+  ]
+}

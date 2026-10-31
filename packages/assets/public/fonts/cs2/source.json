@@ -1,0 +1,557 @@
+{
+  "source": "panorama/fonts/stratum2.uifont",
+  "sourceSha256": "6a9d50938a37631bc49164aa1964a0fc33340b216880f212b95f171c8b48ebaf",
+  "build": "26144732",
+  "attribution": "Stratum2 by Process Type Foundry; native package licensed to Valve Corporation.",
+  "conversion": "fontTools WOFF2 compression; glyphs and native naming/license records retained",
+  "fonts": [
+    {
+      "output": "stratum2-black.woff2",
+      "sha256": "25e138878c1fff359b629cff6e344d30e08ebe2141f00416790772880b5a0eaa",
+      "bytes": 79152,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Black"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Black"],
+          "6": ["Stratum2-Black"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-black.otf",
+      "outputSha256": "e1ee290df62b919d17e06ab46a92afaddef9f8c3f41b9b43bccb3bc404136121",
+      "outputBytes": 31196,
+      "family": "Stratum2",
+      "weight": 900,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2-blackitalic.woff2",
+      "sha256": "7e6e2cf92a6d4254d077aa7d4485dccca9bca39720a1c98166568893722853fe",
+      "bytes": 69900,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Black Italic"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Black Italic"],
+          "6": ["Stratum2-BlackItalic"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2008 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-blackitalic.otf",
+      "outputSha256": "036d6dcb02131ac8583707683e462aa6dae8da0d13b7912f828088bc0786ab15",
+      "outputBytes": 31304,
+      "family": "Stratum2",
+      "weight": 900,
+      "style": "italic"
+    },
+    {
+      "output": "stratum2-bold.woff2",
+      "sha256": "9c755aea2cd521482294b61dee5f74b25072d492698581f8cd7bd52020da5cbc",
+      "bytes": 82340,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2"],
+          "2": ["Bold"],
+          "4": ["Stratum2 Bold"],
+          "6": ["Stratum2-Bold"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-bold.otf",
+      "outputSha256": "aba93d358b46f32a95f05d5765549a88823e9695ead76e9a3638d9a0f52f616e",
+      "outputBytes": 33316,
+      "family": "Stratum2",
+      "weight": 700,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2-bolditalic.woff2",
+      "sha256": "210f7d94edc9d173f2178a653e9d74ed24b7d258b5ac08ff304094568f9f6eab",
+      "bytes": 71492,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2"],
+          "2": ["Bold Italic"],
+          "4": ["Stratum2 Bold Italic"],
+          "6": ["Stratum2-BoldItalic"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2008 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-bolditalic.otf",
+      "outputSha256": "35614a29bb1725ed99def4f7e7abf7d6c8590400514b9e9e46d35e313c76620b",
+      "outputBytes": 31896,
+      "family": "Stratum2",
+      "weight": 700,
+      "style": "italic"
+    },
+    {
+      "output": "stratum2-light.woff2",
+      "sha256": "3d71f582ee66d6dc13bcaeb5302009093958beb45ddb10ccc1ce28551d13dc4a",
+      "bytes": 81548,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Light"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Light"],
+          "6": ["Stratum2-Light"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-light.otf",
+      "outputSha256": "4ceb0ce4b8a15517991d0d6b56a20013b613cfe6bc367c96a7724fddb88c8034",
+      "outputBytes": 32724,
+      "family": "Stratum2",
+      "weight": 300,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2-lightitalic.woff2",
+      "sha256": "d298b2e774f6f48062042803ccb369a8f4dc3eaaf530b78ec44e55b533501601",
+      "bytes": 73128,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Light Italic"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Light Italic"],
+          "6": ["Stratum2-LightItalic"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2008 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-lightitalic.otf",
+      "outputSha256": "f7d319de9b98ec9b80abfb74e6a3281aa91484ec81e4935c638127683aa80237",
+      "outputBytes": 33256,
+      "family": "Stratum2",
+      "weight": 300,
+      "style": "italic"
+    },
+    {
+      "output": "stratum2-medium.woff2",
+      "sha256": "9e806f0fae5fd340c3fa21c0200668ef110d5790f71c92bc6217720e3f595b99",
+      "bytes": 82480,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Medium"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Medium"],
+          "6": ["Stratum2-Medium"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-medium.otf",
+      "outputSha256": "c8bd90ced1173d6d50b4997ba9208afa61d75537cace05982900aceb18ed826a",
+      "outputBytes": 33744,
+      "family": "Stratum2",
+      "weight": 500,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2-mediumitalic.woff2",
+      "sha256": "f4e2679b4ef9882db3c7e20387c91513c929b5f242e8987fcd2ae380623ae857",
+      "bytes": 70756,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Medium Italic"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Medium Italic"],
+          "6": ["Stratum2-MediumItalic"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2008 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-mediumitalic.otf",
+      "outputSha256": "e3a76da1ee73584c84237ac468a3ab593174e5241bf3e296f0b676b1fc1ce270",
+      "outputBytes": 32112,
+      "family": "Stratum2",
+      "weight": 500,
+      "style": "italic"
+    },
+    {
+      "output": "stratum2-regular.woff2",
+      "sha256": "90ecdd027715d2132467e0fbe74052cbc04188771c932b1a3a86d0cf957ecce7",
+      "bytes": 80172,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Regular"],
+          "6": ["Stratum2-Regular"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-regular.otf",
+      "outputSha256": "5e5ddb329dea679192b3a62a6132f60fb5c38e2de58ef4d575b292db8878302b",
+      "outputBytes": 32400,
+      "family": "Stratum2",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2-regularitalic.woff2",
+      "sha256": "056a7bb73b6d6a2ad08a36cf92876dbb6fdab9db84f992e7b21327117511993b",
+      "bytes": 71704,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2"],
+          "2": ["Italic"],
+          "4": ["Stratum2 Regular Italic"],
+          "6": ["Stratum2-RegularItalic"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2008 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-regularitalic.otf",
+      "outputSha256": "002c956b41adac2cfab3cad901c0349f8a81fda7162d5578849d379c8d96f266",
+      "outputBytes": 32740,
+      "family": "Stratum2",
+      "weight": 400,
+      "style": "italic"
+    },
+    {
+      "output": "stratum2-thin.woff2",
+      "sha256": "3602392d0a57f588b670fe9812a7cd6564d2e1d2196e84cbe9ea223a6a5143d8",
+      "bytes": 77792,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Thin"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Thin"],
+          "6": ["Stratum2-Thin"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-thin.otf",
+      "outputSha256": "87d715e206554f0d10a817bb2a3a0f3a92201063135034b60b029dcd6f9cf779",
+      "outputBytes": 30620,
+      "family": "Stratum2",
+      "weight": 100,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2-thinitalic.woff2",
+      "sha256": "65d6977a80a410c80eb85c6cb5c91ba3b668aabc8fe2c32c937b9f0e6cbb0376",
+      "bytes": 67348,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Thin Italic"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Thin Italic"],
+          "6": ["Stratum2-ThinItalic"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2008 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2-thinitalic.otf",
+      "outputSha256": "b3fe365129f04e39e0a0dbed554350f22c89a3a17d0f8da33081a7c59f7fd5be",
+      "outputBytes": 30220,
+      "family": "Stratum2",
+      "weight": 100,
+      "style": "italic"
+    },
+    {
+      "output": "stratum2bold_monodigit.woff2",
+      "sha256": "a261f7a5b6fde8e6639aea3a6d42f6b710566b90b38e27ba0a0022fcb9f29e6f",
+      "bytes": 3184,
+      "metadata": {
+        "names": {
+          "0": ["Copyright (c) 2008 by Process Type Foundry. All rights reserved."],
+          "1": ["Stratum2 Bold Monodigit"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Monodigit Bold"],
+          "6": ["Stratum2Monodigit-Bold"],
+          "8": ["Process Type Foundry"]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2bold_monodigit.ttf",
+      "outputSha256": "c0e1dd959659ca3aef22c3bd999e3d881fd807dc82618be11cf900c29d8f98b2",
+      "outputBytes": 1348,
+      "family": "Stratum2 Monodigit",
+      "weight": 700,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2condensed-black.woff2",
+      "sha256": "9af773ec1bdc5bc99959e69b85a6ef79b4c8268c1c2fe6682a5ac638348eb8f0",
+      "bytes": 98928,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Black Condensed"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Black Condensed"],
+          "6": ["Stratum2-BlackCondensed"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2023 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2condensed-black.otf",
+      "outputSha256": "74ef5e7d93de50bb720b5f3313d7e0b386448b9ff87f71ee40095750958279ab",
+      "outputBytes": 36068,
+      "family": "Stratum2 Condensed",
+      "weight": 900,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2condensed-bold.woff2",
+      "sha256": "477da0d5e5d8be8765ecb9f347b431666527794dda589f0bba45fe0fa25d17cb",
+      "bytes": 101072,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Bold Condensed"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Bold Condensed"],
+          "6": ["Stratum2-BoldCondensed"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2023 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2condensed-bold.otf",
+      "outputSha256": "c6cefb3aa80c66365bb625ffed61f93f869f8fc126346a8a21cd5800af12f6b1",
+      "outputBytes": 38060,
+      "family": "Stratum2 Condensed",
+      "weight": 700,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2condensed-light.woff2",
+      "sha256": "8fd48839905fcd61ac4d7228b2bef990f093c34d6fef1ff27e43d34c2539f53f",
+      "bytes": 98244,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Light Condensed"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Light Condensed"],
+          "6": ["Stratum2-LightCondensed"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2023 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2condensed-light.otf",
+      "outputSha256": "d2c16f7d7c89a9f0e44b0195457639641c31018f49decffc0af51a8b7551d81b",
+      "outputBytes": 36720,
+      "family": "Stratum2 Condensed",
+      "weight": 300,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2condensed-medium.woff2",
+      "sha256": "38a8a3e5d56bbf1eb85a239e7077924e42e286caa5a110d40b48afa96ab2aa24",
+      "bytes": 100424,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Medium Condensed"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Medium Condensed"],
+          "6": ["Stratum2-MediumCondensed"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2023 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2condensed-medium.otf",
+      "outputSha256": "7d1b258bc5afb2608ad0bac895a1b795e0ee7a6d32ce37855734e05e47d6dcf6",
+      "outputBytes": 38304,
+      "family": "Stratum2 Condensed",
+      "weight": 500,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2condensed-regular.woff2",
+      "sha256": "47798f417aaa728a5f61822659f91960214a9313074db06791c3f850431e544c",
+      "bytes": 100184,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Condensed"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Regular Condensed"],
+          "6": ["Stratum2-RegularCondensed"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2023 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2condensed-regular.otf",
+      "outputSha256": "a819ad891f9a6575bbc3de3464ad1d394dfc6947e579324b944e49b7e0f71474",
+      "outputBytes": 37872,
+      "family": "Stratum2 Condensed",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2condensed-thin.woff2",
+      "sha256": "a262a0df80b342561bcf04d596b07120098cc418d736b1e54791f80d27cc9655",
+      "bytes": 85880,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Thin Condensed"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Thin Condensed"],
+          "6": ["Stratum2-ThinCondensed"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2023 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2condensed-thin.otf",
+      "outputSha256": "12f61daf4daeb03d13ed2c2015f860999ea89026ea94a131e2d6d48f6f5dd0c5",
+      "outputBytes": 32184,
+      "family": "Stratum2 Condensed",
+      "weight": 100,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2mono-bold.woff2",
+      "sha256": "1c4cd53140d54b00dcbdbf5a85d689b7b1ccb357c4118c05acc72ed03731fa22",
+      "bytes": 43976,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Mono"],
+          "2": ["Bold"],
+          "4": ["Stratum2 Mono Bold"],
+          "6": ["Stratum2Mono-Bold"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2mono-bold.otf",
+      "outputSha256": "1cd73fcc871b20875f23671afdb94c9633d09cd33411471d8b049e53b7c33008",
+      "outputBytes": 26496,
+      "family": "Stratum2 Mono",
+      "weight": 700,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2mono-light.woff2",
+      "sha256": "cd4e8f00df557a4d5b5b156264812c40dcbb4a2c53b985b6b90b5a05df6bf864",
+      "bytes": 40340,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Mono Light"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Mono Light"],
+          "6": ["Stratum2Mono-Light"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2mono-light.otf",
+      "outputSha256": "d82eb945b3b7d85479fe96065bec24002347e284ed23759ab1aa658d58e6d061",
+      "outputBytes": 24852,
+      "family": "Stratum2 Mono",
+      "weight": 300,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2mono-regular.woff2",
+      "sha256": "ceff4f681953e8059e032d16134824016daf1ec53c1dc69f77ed75a02a14faba",
+      "bytes": 43360,
+      "metadata": {
+        "names": {
+          "1": ["Stratum2 Mono"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Mono Regular"],
+          "6": ["Stratum2Mono-Regular"],
+          "14": ["https://processtypefoundry.com/help/base/desktop-license-agreement/"],
+          "0": ["Copyright (c) 2022 by Process Type Foundry. All rights reserved."],
+          "8": ["Process Type Foundry"],
+          "13": ["Licensed to Valve Corporation."]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2mono-regular.otf",
+      "outputSha256": "d9e271990973958c9d82cef1a971ecfd831af2c8425ebe06414260283c8254bc",
+      "outputBytes": 26852,
+      "family": "Stratum2 Mono",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "output": "stratum2regular_monodigit.woff2",
+      "sha256": "ab5c86cc488115e72d01aef8642323ae9bfb9d2ee9d1b18bb9ec9e4baec489ab",
+      "bytes": 3292,
+      "metadata": {
+        "names": {
+          "0": ["Copyright (c) 2008 by Process Type Foundry. All rights reserved."],
+          "1": ["Stratum2 Regular Monodigit"],
+          "2": ["Regular"],
+          "4": ["Stratum2 Monodigit Regular"],
+          "6": ["Stratum2Monodigit-Regular"],
+          "8": ["Process Type Foundry"]
+        },
+        "os2FsType": 4
+      },
+      "decoded": "stratum2regular_monodigit.ttf",
+      "outputSha256": "eecc82c77caa8e73dc1505ec36048718749799eddc615d94c55f773f4bf5cca9",
+      "outputBytes": 1412,
+      "family": "Stratum2 Monodigit",
+      "weight": 400,
+      "style": "normal"
+    }
+  ]
+}

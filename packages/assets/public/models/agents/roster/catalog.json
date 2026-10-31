@@ -1,0 +1,1412 @@
+[
+  {
+    "id": "agent-5036-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5037-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5038-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5039-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5040-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5041-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5042-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5043-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5044-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5045-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5046-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5047-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5048-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5049-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5050-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5051-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5052-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5053-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5054-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5055-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5056-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5057-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5058-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5059-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5060-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5061-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5062-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5063-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5064-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5065-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5066-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5067-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5068-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5069-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5070-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5071-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5072-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5073-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5074-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5075-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5076-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5077-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5078-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5079-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5080-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5081-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5082-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5083-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5084-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5085-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5086-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5087-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5088-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5089-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5090-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5091-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5092-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5093-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5094-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5095-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5096-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5097-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5100-t",
+    "name": "Elite Crew | Default · Variant A",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-varianta.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_varianta.vmdl_c",
+    "bytes": 2563804
+  },
+  {
+    "id": "agent-5101-t",
+    "name": "Elite Crew | Default · Variant B",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantb.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantb.vmdl_c",
+    "bytes": 2628260
+  },
+  {
+    "id": "agent-5102-t",
+    "name": "Elite Crew | Default · Variant C",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantc.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantc.vmdl_c",
+    "bytes": 2598772
+  },
+  {
+    "id": "agent-5103-t",
+    "name": "Elite Crew | Default · Variant D",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantd.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantd.vmdl_c",
+    "bytes": 2734848
+  },
+  {
+    "id": "agent-5104-t",
+    "name": "Elite Crew | Default · Variant E",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variante.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variante.vmdl_c",
+    "bytes": 2757236
+  },
+  {
+    "id": "agent-5105-t",
+    "name": "Ground Rebel  | Elite Crew",
+    "nativeName": "Ground Rebel  | Elite Crew",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantg.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantg.vmdl_c",
+    "bytes": 2826776
+  },
+  {
+    "id": "agent-5106-t",
+    "name": "Osiris | Elite Crew",
+    "nativeName": "Osiris | Elite Crew",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-varianth.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_varianth.vmdl_c",
+    "bytes": 2576216
+  },
+  {
+    "id": "agent-5107-t",
+    "name": "Prof. Shahmat | Elite Crew",
+    "nativeName": "Prof. Shahmat | Elite Crew",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-varianti.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_varianti.vmdl_c",
+    "bytes": 2627136
+  },
+  {
+    "id": "agent-5108-t",
+    "name": "The Elite Mr. Muhlik | Elite Crew",
+    "nativeName": "The Elite Mr. Muhlik | Elite Crew",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantf.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantf.vmdl_c",
+    "bytes": 2660876
+  },
+  {
+    "id": "agent-5109-t",
+    "name": "Jungle Rebel | Elite Crew",
+    "nativeName": "Jungle Rebel | Elite Crew",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantj.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantj.vmdl_c",
+    "bytes": 2569372
+  },
+  {
+    "id": "agent-5200-t",
+    "name": "Phoenix | Default",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "bytes": 2396472
+  },
+  {
+    "id": "agent-5201-t",
+    "name": "Phoenix | Default · Variant A",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-varianta.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_varianta.vmdl_c",
+    "bytes": 2358044
+  },
+  {
+    "id": "agent-5202-t",
+    "name": "Phoenix | Default · Variant B",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-variantb.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantb.vmdl_c",
+    "bytes": 2310872
+  },
+  {
+    "id": "agent-5203-t",
+    "name": "Phoenix | Default · Variant C",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-variantc.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantc.vmdl_c",
+    "bytes": 2379936
+  },
+  {
+    "id": "agent-5204-t",
+    "name": "Phoenix | Default · Variant D",
+    "nativeName": "Default T Agent",
+    "category": "base",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-variantd.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantd.vmdl_c",
+    "bytes": 2383088
+  },
+  {
+    "id": "agent-5205-t",
+    "name": "Soldier | Phoenix",
+    "nativeName": "Soldier | Phoenix",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-varianth.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_varianth.vmdl_c",
+    "bytes": 2369512
+  },
+  {
+    "id": "agent-5206-t",
+    "name": "Enforcer | Phoenix",
+    "nativeName": "Enforcer | Phoenix",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-variantf.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantf.vmdl_c",
+    "bytes": 2350244
+  },
+  {
+    "id": "agent-5207-t",
+    "name": "Slingshot | Phoenix",
+    "nativeName": "Slingshot | Phoenix",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-variantg.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantg.vmdl_c",
+    "bytes": 2368636
+  },
+  {
+    "id": "agent-5208-t",
+    "name": "Street Soldier | Phoenix",
+    "nativeName": "Street Soldier | Phoenix",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-varianti.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_varianti.vmdl_c",
+    "bytes": 2362364
+  },
+  {
+    "id": "agent-5300-ct",
+    "name": "FBI | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi.vmdl_c",
+    "bytes": 2510088
+  },
+  {
+    "id": "agent-5301-ct",
+    "name": "FBI | Default · Variant A",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-varianta.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_varianta.vmdl_c",
+    "bytes": 2452376
+  },
+  {
+    "id": "agent-5302-ct",
+    "name": "FBI | Default · Variant C",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variantc.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantc.vmdl_c",
+    "bytes": 2509768
+  },
+  {
+    "id": "agent-5303-ct",
+    "name": "FBI | Default · Variant D",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variantd.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantd.vmdl_c",
+    "bytes": 2692664
+  },
+  {
+    "id": "agent-5304-ct",
+    "name": "FBI | Default · Variant E",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variante.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variante.vmdl_c",
+    "bytes": 2685724
+  },
+  {
+    "id": "agent-5305-ct",
+    "name": "Operator | FBI SWAT",
+    "nativeName": "Operator | FBI SWAT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variantf.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantf.vmdl_c",
+    "bytes": 2667668
+  },
+  {
+    "id": "agent-5306-ct",
+    "name": "Markus Delrow | FBI HRT",
+    "nativeName": "Markus Delrow | FBI HRT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variantg.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantg.vmdl_c",
+    "bytes": 2567484
+  },
+  {
+    "id": "agent-5307-ct",
+    "name": "Michael Syfers  | FBI Sniper",
+    "nativeName": "Michael Syfers  | FBI Sniper",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-varianth.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_varianth.vmdl_c",
+    "bytes": 2517296
+  },
+  {
+    "id": "agent-5308-ct",
+    "name": "Special Agent Ava | FBI",
+    "nativeName": "Special Agent Ava | FBI",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variantb.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantb.vmdl_c",
+    "bytes": 2577112
+  },
+  {
+    "id": "agent-5400-ct",
+    "name": "3rd Commando Company | KSK",
+    "nativeName": "3rd Commando Company | KSK",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantk.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantk.vmdl_c",
+    "bytes": 2451424
+  },
+  {
+    "id": "agent-5401-ct",
+    "name": "Seal Team 6 Soldier | NSWC SEAL",
+    "nativeName": "Seal Team 6 Soldier | NSWC SEAL",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variante.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variante.vmdl_c",
+    "bytes": 2496500
+  },
+  {
+    "id": "agent-5402-ct",
+    "name": "Buckshot | NSWC SEAL",
+    "nativeName": "Buckshot | NSWC SEAL",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantg.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantg.vmdl_c",
+    "bytes": 2936456
+  },
+  {
+    "id": "agent-5403-ct",
+    "name": "'Two Times' McCoy | USAF TACP",
+    "nativeName": "'Two Times' McCoy | USAF TACP",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantm.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantm.vmdl_c",
+    "bytes": 2849124
+  },
+  {
+    "id": "agent-5404-ct",
+    "name": "Lt. Commander Ricksaw | NSWC SEAL",
+    "nativeName": "Lt. Commander Ricksaw | NSWC SEAL",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-varianti.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_varianti.vmdl_c",
+    "bytes": 2857160
+  },
+  {
+    "id": "agent-4619-ct",
+    "name": "'Blueberries' Buckshot | NSWC SEAL",
+    "nativeName": "'Blueberries' Buckshot | NSWC SEAL",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantj.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantj.vmdl_c",
+    "bytes": 2941004
+  },
+  {
+    "id": "agent-4680-ct",
+    "name": "'Two Times' McCoy | TACP Cavalry",
+    "nativeName": "'Two Times' McCoy | TACP Cavalry",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantl.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantl.vmdl_c",
+    "bytes": 2905136
+  },
+  {
+    "id": "agent-5405-ct",
+    "name": "Primeiro Tenente | Brazilian 1st Battalion",
+    "nativeName": "Primeiro Tenente | Brazilian 1st Battalion",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantn.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantn.vmdl_c",
+    "bytes": 2593444
+  },
+  {
+    "id": "agent-5500-t",
+    "name": "Dragomir | Sabre",
+    "nativeName": "Dragomir | Sabre",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantf.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantf.vmdl_c",
+    "bytes": 2549116
+  },
+  {
+    "id": "agent-5501-t",
+    "name": "Maximus | Sabre",
+    "nativeName": "Maximus | Sabre",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-varianti.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_varianti.vmdl_c",
+    "bytes": 2500816
+  },
+  {
+    "id": "agent-5502-t",
+    "name": "Rezan The Ready | Sabre",
+    "nativeName": "Rezan The Ready | Sabre",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantg.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantg.vmdl_c",
+    "bytes": 2517936
+  },
+  {
+    "id": "agent-5503-t",
+    "name": "Blackwolf | Sabre",
+    "nativeName": "Blackwolf | Sabre",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantj.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantj.vmdl_c",
+    "bytes": 2619908
+  },
+  {
+    "id": "agent-5504-t",
+    "name": "'The Doctor' Romanov | Sabre",
+    "nativeName": "'The Doctor' Romanov | Sabre",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-varianth.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_varianth.vmdl_c",
+    "bytes": 2532544
+  },
+  {
+    "id": "agent-4718-t",
+    "name": "Rezan the Redshirt | Sabre",
+    "nativeName": "Rezan the Redshirt | Sabre",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantk.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantk.vmdl_c",
+    "bytes": 2473088
+  },
+  {
+    "id": "agent-5505-t",
+    "name": "Dragomir | Sabre Footsoldier",
+    "nativeName": "Dragomir | Sabre Footsoldier",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantl.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantl.vmdl_c",
+    "bytes": 2563884
+  },
+  {
+    "id": "agent-5600-ct",
+    "name": "SAS | Default",
+    "nativeName": "Default CT Agent",
+    "category": "base",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "bytes": 1925412
+  },
+  {
+    "id": "agent-5601-ct",
+    "name": "B Squadron Officer | SAS",
+    "nativeName": "B Squadron Officer | SAS",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas-variantf.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas_variantf.vmdl_c",
+    "bytes": 1959800
+  },
+  {
+    "id": "agent-5602-ct",
+    "name": "D Squadron Officer | NZSAS",
+    "nativeName": "D Squadron Officer | NZSAS",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas-variantg.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas_variantg.vmdl_c",
+    "bytes": 1972924
+  },
+  {
+    "id": "agent-4711-ct",
+    "name": "Cmdr. Mae 'Dead Cold' Jamison | SWAT",
+    "nativeName": "Cmdr. Mae 'Dead Cold' Jamison | SWAT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variante.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variante.vmdl_c",
+    "bytes": 3016876
+  },
+  {
+    "id": "agent-4712-ct",
+    "name": "1st Lieutenant Farlow | SWAT",
+    "nativeName": "1st Lieutenant Farlow | SWAT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variantf.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variantf.vmdl_c",
+    "bytes": 2617100
+  },
+  {
+    "id": "agent-4713-ct",
+    "name": "John 'Van Healen' Kask | SWAT",
+    "nativeName": "John 'Van Healen' Kask | SWAT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variantg.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variantg.vmdl_c",
+    "bytes": 2542684
+  },
+  {
+    "id": "agent-4714-ct",
+    "name": "Bio-Haz Specialist | SWAT",
+    "nativeName": "Bio-Haz Specialist | SWAT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-varianth.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_varianth.vmdl_c",
+    "bytes": 2257848
+  },
+  {
+    "id": "agent-4715-ct",
+    "name": "Sergeant Bombson | SWAT",
+    "nativeName": "Sergeant Bombson | SWAT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-varianti.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_varianti.vmdl_c",
+    "bytes": 2411620
+  },
+  {
+    "id": "agent-4716-ct",
+    "name": "Chem-Haz Specialist | SWAT",
+    "nativeName": "Chem-Haz Specialist | SWAT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variantj.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variantj.vmdl_c",
+    "bytes": 2241652
+  },
+  {
+    "id": "agent-4756-ct",
+    "name": "Lieutenant 'Tree Hugger' Farlow | SWAT",
+    "nativeName": "Lieutenant 'Tree Hugger' Farlow | SWAT",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variantk.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variantk.vmdl_c",
+    "bytes": 2602012
+  },
+  {
+    "id": "agent-4726-t",
+    "name": "Sir Bloody Miami Darryl | The Professionals",
+    "nativeName": "Sir Bloody Miami Darryl | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf.vmdl_c",
+    "bytes": 2937188
+  },
+  {
+    "id": "agent-4733-t",
+    "name": "Sir Bloody Silent Darryl | The Professionals",
+    "nativeName": "Sir Bloody Silent Darryl | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf1.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf1.vmdl_c",
+    "bytes": 2929524
+  },
+  {
+    "id": "agent-4734-t",
+    "name": "Sir Bloody Skullhead Darryl | The Professionals",
+    "nativeName": "Sir Bloody Skullhead Darryl | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf2.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf2.vmdl_c",
+    "bytes": 2904384
+  },
+  {
+    "id": "agent-4735-t",
+    "name": "Sir Bloody Darryl Royale | The Professionals",
+    "nativeName": "Sir Bloody Darryl Royale | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf3.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf3.vmdl_c",
+    "bytes": 2862732
+  },
+  {
+    "id": "agent-4736-t",
+    "name": "Sir Bloody Loudmouth Darryl | The Professionals",
+    "nativeName": "Sir Bloody Loudmouth Darryl | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf4.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf4.vmdl_c",
+    "bytes": 2876204
+  },
+  {
+    "id": "agent-4727-t",
+    "name": "Safecracker Voltzmann | The Professionals",
+    "nativeName": "Safecracker Voltzmann | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varg.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varg.vmdl_c",
+    "bytes": 2445572
+  },
+  {
+    "id": "agent-4728-t",
+    "name": "Little Kev | The Professionals",
+    "nativeName": "Little Kev | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varh.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varh.vmdl_c",
+    "bytes": 2520276
+  },
+  {
+    "id": "agent-4732-t",
+    "name": "Number K | The Professionals",
+    "nativeName": "Number K | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-vari.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_vari.vmdl_c",
+    "bytes": 2155776
+  },
+  {
+    "id": "agent-4730-t",
+    "name": "Getaway Sally | The Professionals",
+    "nativeName": "Getaway Sally | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varj.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varj.vmdl_c",
+    "bytes": 2271204
+  },
+  {
+    "id": "agent-4613-t",
+    "name": "Bloody Darryl The Strapped | The Professionals",
+    "nativeName": "Bloody Darryl The Strapped | The Professionals",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf5.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf5.vmdl_c",
+    "bytes": 2952636
+  },
+  {
+    "id": "agent-4749-ct",
+    "name": "Sous-Lieutenant Medic | Gendarmerie Nationale",
+    "nativeName": "Sous-Lieutenant Medic | Gendarmerie Nationale",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-varianta.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_varianta.vmdl_c",
+    "bytes": 2135436
+  },
+  {
+    "id": "agent-4750-ct",
+    "name": "Chem-Haz Capitaine | Gendarmerie Nationale",
+    "nativeName": "Chem-Haz Capitaine | Gendarmerie Nationale",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-variantb.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantb.vmdl_c",
+    "bytes": 2053124
+  },
+  {
+    "id": "agent-4751-ct",
+    "name": "Chef d'Escadron Rouchard | Gendarmerie Nationale",
+    "nativeName": "Chef d'Escadron Rouchard | Gendarmerie Nationale",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-variantc.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantc.vmdl_c",
+    "bytes": 2122196
+  },
+  {
+    "id": "agent-4752-ct",
+    "name": "Aspirant | Gendarmerie Nationale",
+    "nativeName": "Aspirant | Gendarmerie Nationale",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-variantd.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantd.vmdl_c",
+    "bytes": 2138096
+  },
+  {
+    "id": "agent-4753-ct",
+    "name": "Officer Jacques Beltram | Gendarmerie Nationale",
+    "nativeName": "Officer Jacques Beltram | Gendarmerie Nationale",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-variante.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variante.vmdl_c",
+    "bytes": 2138148
+  },
+  {
+    "id": "agent-4757-ct",
+    "name": "Cmdr. Davida 'Goggles' Fernandez | SEAL Frogman",
+    "nativeName": "Cmdr. Davida 'Goggles' Fernandez | SEAL Frogman",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-diver-varianta.glb",
+    "nativeModel": "agents/models/ctm_diver/ctm_diver_varianta.vmdl_c",
+    "bytes": 2672328
+  },
+  {
+    "id": "agent-4771-ct",
+    "name": "Cmdr. Frank 'Wet Sox' Baroud | SEAL Frogman",
+    "nativeName": "Cmdr. Frank 'Wet Sox' Baroud | SEAL Frogman",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-diver-variantb.glb",
+    "nativeModel": "agents/models/ctm_diver/ctm_diver_variantb.vmdl_c",
+    "bytes": 2262724
+  },
+  {
+    "id": "agent-4772-ct",
+    "name": "Lieutenant Rex Krikey | SEAL Frogman",
+    "nativeName": "Lieutenant Rex Krikey | SEAL Frogman",
+    "category": "cosmetic",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-diver-variantc.glb",
+    "nativeModel": "agents/models/ctm_diver/ctm_diver_variantc.vmdl_c",
+    "bytes": 3415644
+  },
+  {
+    "id": "agent-4773-t",
+    "name": "Elite Trapper Solman | Guerrilla Warfare",
+    "nativeName": "Elite Trapper Solman | Guerrilla Warfare",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-varianta.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_varianta.vmdl_c",
+    "bytes": 2468760
+  },
+  {
+    "id": "agent-4774-t",
+    "name": "Crasswater The Forgotten | Guerrilla Warfare",
+    "nativeName": "Crasswater The Forgotten | Guerrilla Warfare",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantb.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantb.vmdl_c",
+    "bytes": 3085500
+  },
+  {
+    "id": "agent-4775-t",
+    "name": "Arno The Overgrown | Guerrilla Warfare",
+    "nativeName": "Arno The Overgrown | Guerrilla Warfare",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantc.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantc.vmdl_c",
+    "bytes": 2328344
+  },
+  {
+    "id": "agent-4776-t",
+    "name": "Col. Mangos Dabisi | Guerrilla Warfare",
+    "nativeName": "Col. Mangos Dabisi | Guerrilla Warfare",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantd.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantd.vmdl_c",
+    "bytes": 2983944
+  },
+  {
+    "id": "agent-4777-t",
+    "name": "Vypa Sista of the Revolution | Guerrilla Warfare",
+    "nativeName": "Vypa Sista of the Revolution | Guerrilla Warfare",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variante.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variante.vmdl_c",
+    "bytes": 2301128
+  },
+  {
+    "id": "agent-4778-t",
+    "name": "Trapper Aggressor | Guerrilla Warfare",
+    "nativeName": "Trapper Aggressor | Guerrilla Warfare",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantf.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantf.vmdl_c",
+    "bytes": 2559380
+  },
+  {
+    "id": "agent-4780-t",
+    "name": "'Medium Rare' Crasswater | Guerrilla Warfare",
+    "nativeName": "'Medium Rare' Crasswater | Guerrilla Warfare",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantb2.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantb2.vmdl_c",
+    "bytes": 2924140
+  },
+  {
+    "id": "agent-4781-t",
+    "name": "Trapper | Guerrilla Warfare",
+    "nativeName": "Trapper | Guerrilla Warfare",
+    "category": "cosmetic",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantf2.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantf2.vmdl_c",
+    "bytes": 2572552
+  }
+]

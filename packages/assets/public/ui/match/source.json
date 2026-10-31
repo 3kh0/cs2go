@@ -1,0 +1,97 @@
+{
+  "author": "Valve",
+  "build": "26144732",
+  "depotManifest": "67499503218971311",
+  "generator": "scripts/import-match-hud.py",
+  "processing": "Native SVG paths preserved; XML/DTD/comments stripped. PNGs losslessly optimized. Dead status aliases the native elimination icon.",
+  "files": [
+    {
+      "resource": "panorama/images/backgrounds/bluedots_large_png.vtex_c",
+      "sourceSha256": "5021da9bb0c0fd542625abef4fc83b5da1c265a587212fbea55c46ff4bf34c91",
+      "outputSha256": "cd1b24ddf365d84584b7317fbcc7ce8d04245be7c899b88efaea06768f73087b",
+      "file": "bluedots.png",
+      "sha256": "b53f3f2cff54192c5a6715030dd5934eafdb9f3010897902e3d189c43e294fd3",
+      "bytes": 191020
+    },
+    {
+      "resource": "panorama/images/hud/double_arrows.vsvg_c",
+      "sourceSha256": "2b6c9c49175e454166a290c1eecaab089de77f49e5a6c0b4a07b7a4f94de5719",
+      "outputSha256": "c60736143571d54466f0b8733389ee57ee9756b314607eabc69aa97f47180503",
+      "file": "double-arrows.svg",
+      "sha256": "c60736143571d54466f0b8733389ee57ee9756b314607eabc69aa97f47180503",
+      "bytes": 267
+    },
+    {
+      "resource": "panorama/images/icons/ui/alert.vsvg_c",
+      "sourceSha256": "f02897777f86944d186d2237fef8ca4f962187c08110a9b24e38fc6ee0807100",
+      "outputSha256": "ed722dbc0afa7663f3c227046b8ecaffb4d531e7b7f78efd65e6dbdec2c0687c",
+      "file": "alert.svg",
+      "sha256": "09bf864fc7b663427b74cdaa5604f877cd1f95cb8043df4f5f2bb36ad37af648",
+      "bytes": 516
+    },
+    {
+      "resource": "panorama/images/icons/ui/bot.vsvg_c",
+      "sourceSha256": "824727dd77c141edd8024178622e66da569737efe5334711564694c50f5264af",
+      "outputSha256": "8363ca6cc0039f71954de20e266e04a8ef6a369d656bcd296e0120c1d7368695",
+      "file": "bot.svg",
+      "sha256": "8363ca6cc0039f71954de20e266e04a8ef6a369d656bcd296e0120c1d7368695",
+      "bytes": 1524
+    },
+    {
+      "resource": "panorama/images/icons/ui/elimination.vsvg_c",
+      "sourceSha256": "4a96a4bf1bf7fa8580be16683f276d476e0dcd4f3458b9ab4c871da3a7a58cb8",
+      "outputSha256": "c2e766a9be1eb72d63f9841b73a03534b1c3df47dfbb208a763b68147090b795",
+      "file": "elimination.svg",
+      "sha256": "c2e766a9be1eb72d63f9841b73a03534b1c3df47dfbb208a763b68147090b795",
+      "bytes": 251
+    },
+    {
+      "resource": "panorama/images/icons/ui/elimination.vsvg_c",
+      "sourceSha256": "4a96a4bf1bf7fa8580be16683f276d476e0dcd4f3458b9ab4c871da3a7a58cb8",
+      "outputSha256": "c2e766a9be1eb72d63f9841b73a03534b1c3df47dfbb208a763b68147090b795",
+      "file": "dead.svg",
+      "sha256": "c2e766a9be1eb72d63f9841b73a03534b1c3df47dfbb208a763b68147090b795",
+      "bytes": 251
+    },
+    {
+      "resource": "panorama/images/icons/ui/star.vsvg_c",
+      "sourceSha256": "f4348ce9fbe2b8af35e06941b910252e72a8123e44861c5cca4d638595aaf27b",
+      "outputSha256": "4d39a4fcdc5cf009052868783019e3f1bb6e43bb92a84cedc5d06fc60b8fd87b",
+      "file": "star.svg",
+      "sha256": "4b11568f608b1ec99a942d603f407fa393d6410dada71559640e25636345caf2",
+      "bytes": 418
+    },
+    {
+      "resource": "panorama/images/masks/mvp_banner_fade-both-right-left_png.vtex_c",
+      "sourceSha256": "70faa654bb8dc63a571ccf3bcdff3b400b1b31972cca6e311520203c5403ba8d",
+      "outputSha256": "255c44eb62a98b515c7aa310a4a7ff72941f1cc15fb5b3dd26ac1e839b66485b",
+      "file": "mvp-mask.png",
+      "sha256": "98f17ca3d7035288c6ddb7bde97266a6451a2825e8b44c4b4d420658c85a41ac",
+      "bytes": 6910
+    },
+    {
+      "resource": "panorama/images/icons/ui/ct_logo_1c.vsvg_c",
+      "sourceSha256": "22d6e6ed11d30b9ee8ea098853f1bd96a1203c142bf5b348d321c0e5b8deb07a",
+      "outputSha256": "3eb8e5f9bbb233cd6053de8bd625143dbabbbbc5ee95379409dad64a15fab8e5",
+      "file": "ct.svg",
+      "sha256": "9b3ad87d14ee27ae8865c7bb3defde1a7669520c40d9885b3bef076d8be14bde",
+      "bytes": 12291
+    },
+    {
+      "resource": "panorama/images/icons/ui/t_logo_1c.vsvg_c",
+      "sourceSha256": "5a3c252c94dc561cae044139e13bcb75a2c3e9da8f5712c8828070b29fad96d7",
+      "outputSha256": "8e78ab0037873e618c63b984098c38a0b487aeaeca36ea8bb19a718a3afdd83b",
+      "file": "t.svg",
+      "sha256": "784863c0a4646ea980ed11a6b928f4a32c431992a2e6baf19b4e753fd42e15a1",
+      "bytes": 5177
+    },
+    {
+      "resource": "panorama/images/icons/ui/timer.vsvg_c",
+      "sourceSha256": "2882dc9f8f39c66bdb4aafc8bcd70949e0af59d98a3f45abf315218723a5e94c",
+      "outputSha256": "e6447a2d1f923e5f6c8acd6d12465b968b13b5e1e12dbe1e8c73d533c35a0e93",
+      "file": "timer.svg",
+      "sha256": "619478204c172ed4499647c5106fa45cc0fd43edbe9f4a99f5d146d88a1a3fde",
+      "bytes": 1424
+    }
+  ]
+}

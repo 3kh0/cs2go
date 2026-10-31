@@ -1,0 +1,93 @@
+{
+  "commit": "5278de99318192d682ec7f0e1cc3ea9449f10c6e",
+  "sources": {
+    "convars": {
+      "url": "https://raw.githubusercontent.com/SteamTracking/GameTracking-CS2/5278de99318192d682ec7f0e1cc3ea9449f10c6e/DumpSource2/convars.txt",
+      "sha256": "19892dd6fcdbb1540bb0b57cfb47af6d4640983b76f5547402aa610b51100bb5"
+    },
+    "weapons": {
+      "url": "https://raw.githubusercontent.com/SteamTracking/GameTracking-CS2/5278de99318192d682ec7f0e1cc3ea9449f10c6e/game/csgo/pak01_dir/scripts/weapons.vdata",
+      "sha256": "46e7a84b46c620e8daf11c403ee9152a5faa1a033407748b527862aa3147236b"
+    },
+    "competitive": {
+      "url": "https://raw.githubusercontent.com/SteamTracking/GameTracking-CS2/5278de99318192d682ec7f0e1cc3ea9449f10c6e/game/csgo/cfg/gamemode_competitive.cfg",
+      "sha256": "7608d4b1ac19a8b849fdc8a83f3eedeba608442cf38ff591f0cd9f88c0b3e954"
+    },
+    "casual": {
+      "url": "https://raw.githubusercontent.com/SteamTracking/GameTracking-CS2/5278de99318192d682ec7f0e1cc3ea9449f10c6e/game/csgo/cfg/gamemode_casual.cfg",
+      "sha256": "e393fe3cc1862c6fbcf000ba7ad3fb2cc81e6a1ee1788cf247ff3ff0e0121337"
+    }
+  },
+  "convars": {
+    "inferno_damage": 40.0,
+    "inferno_damage_ct": 40.0,
+    "inferno_damage_timer": 0.2,
+    "inferno_flame_lifetime": 7.0,
+    "inferno_flame_lifetime_incendiary": 5.5,
+    "inferno_flame_spacing": 42.0,
+    "inferno_max_flames": 16.0,
+    "inferno_max_range": 150.0,
+    "inferno_max_range_ct": 110.0,
+    "molotov_throw_detonate_time": 2.0,
+    "weapon_molotov_maxdetonateslope": 30.0,
+    "inferno_friendly_fire_duration": 6.0,
+    "ff_damage_decoy_explosion": false
+  },
+  "modes": {
+    "competitive": {
+      "ff_damage_reduction_grenade": 0.85,
+      "ff_damage_reduction_grenade_self": 1.0,
+      "ff_damage_reduction_other": 0.4
+    },
+    "casual": {
+      "ff_damage_reduction_grenade": 0.0,
+      "ff_damage_reduction_grenade_self": 0.0,
+      "ff_damage_reduction_other": 0.0
+    }
+  },
+  "weapons": {
+    "he": {
+      "m_nPrice": 300.0,
+      "m_nDamage": 99.0,
+      "m_flRange": 350.0,
+      "m_flArmorRatio": 1.2,
+      "m_flThrowVelocity": 750.0
+    },
+    "flash": {
+      "m_nPrice": 200.0,
+      "m_nDamage": 50.0,
+      "m_flRange": 4096.0,
+      "m_flArmorRatio": 1.0,
+      "m_flThrowVelocity": 750.0
+    },
+    "smoke": {
+      "m_nPrice": 300.0,
+      "m_nDamage": 50.0,
+      "m_flRange": 4096.0,
+      "m_flArmorRatio": 1.0,
+      "m_flThrowVelocity": 750.0
+    },
+    "molotov": {
+      "m_nPrice": 400.0,
+      "m_nDamage": 40.0,
+      "m_flRange": 4096.0,
+      "m_flArmorRatio": 1.8,
+      "m_flThrowVelocity": 750.0
+    },
+    "incendiary": {
+      "m_nPrice": 500.0,
+      "m_nDamage": 40.0,
+      "m_flRange": 4096.0,
+      "m_flArmorRatio": 1.475,
+      "m_flThrowVelocity": 750.0
+    },
+    "decoy": {
+      "m_nPrice": 50.0,
+      "m_nDamage": 50.0,
+      "m_flRange": 4096.0,
+      "m_flArmorRatio": 1.0,
+      "m_flThrowVelocity": 750.0
+    }
+  },
+  "scope": "Explicit shipped parameters. Weapon damage/armor/range fields are recorded as evidence but do not establish native blast falloff or armor dispatch. Projectile integration, bounce solver, fire layout and damage sampling remain browser reconstructions."
+}

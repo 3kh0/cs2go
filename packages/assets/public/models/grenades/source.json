@@ -1,0 +1,46 @@
+{
+  "author": "Valve",
+  "depot": 2347770,
+  "manifest": "4758919807587010422",
+  "generator": "scripts/import-grenades.py",
+  "processing": "Source2Viewer exports in meters; self-contained WebP textures capped at 1024px.",
+  "limitations": "Native grenade body meshes and materials; first-person hands are retargeted to separately imported native clips. Animation graph transitions and gameplay release scheduling remain reconstructed. Three.js PBR approximates native materials.",
+  "models": [
+    {
+      "kind": "he",
+      "resource": "weapons/models/grenade/hegrenade/weapon_hegrenade.vmdl_c",
+      "sourceSha256": "238f8193573eed2d4d4afba1f7c4f116be0de9f8a0335ad181f508a7078e6155",
+      "runtimeSha256": "f47d6601872d5c54fa92eaffb56d73c965388c3af6cb31dfb0269cce6b61b730"
+    },
+    {
+      "kind": "flash",
+      "resource": "weapons/models/grenade/flashbang/weapon_flashbang.vmdl_c",
+      "sourceSha256": "b5c827a29363e4c2fe989d7ddbec0839159b0b4e49f61039df8caea02b2d536d",
+      "runtimeSha256": "343e38d441c7036cc6564348fe207e30a423e485af8b7343546806e571d085f7"
+    },
+    {
+      "kind": "smoke",
+      "resource": "weapons/models/grenade/smokegrenade/weapon_smokegrenade.vmdl_c",
+      "sourceSha256": "ffa693e499fd9efe4b5d29539280ad1072c95dc451f7de7af62a29b308f6366e",
+      "runtimeSha256": "64c5b7c216b6c49006b719845e89cc7692d99beab835e796b4eb7d889ebc667c"
+    },
+    {
+      "kind": "molotov",
+      "resource": "weapons/models/grenade/molotov/weapon_molotov.vmdl_c",
+      "sourceSha256": "8a42b429f5bf191b72844419d46ac48d1542892485911009f0cb93cc38290762",
+      "runtimeSha256": "5467efa82f4a7b7c1c6a843625da8d49c7cc4f6a568e70d6056e68c728a94d7d"
+    },
+    {
+      "kind": "incendiary",
+      "resource": "weapons/models/grenade/incendiary/weapon_incendiarygrenade.vmdl_c",
+      "sourceSha256": "74fafc966f64c839a9fe5d51de6b6ee79764f910ed30da758e59758dd06dd743",
+      "runtimeSha256": "49ac1b157b78a10e145d89323ec063be0a8e0cb1a9b34019a569e7445e82008d"
+    },
+    {
+      "kind": "decoy",
+      "resource": "weapons/models/grenade/decoy/weapon_decoy.vmdl_c",
+      "sourceSha256": "ededef6e845eb48f6fb63034c180ed64b0fd4db958e8fca72be4dc377af94bab",
+      "runtimeSha256": "f3a561a7038281b70b936a72cc15d2633fc0a8c05ec13032852f198bd80b5515"
+    }
+  ]
+}

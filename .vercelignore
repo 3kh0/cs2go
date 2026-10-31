@@ -1,0 +1,6 @@
+packages/assets/public/
+packages/assets/.cache/
+artifacts/
+.turbo/
+test-results/
+apps/game/test-results/

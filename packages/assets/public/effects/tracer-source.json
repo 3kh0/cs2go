@@ -1,0 +1,32 @@
+{
+  "source": "Valve CS2 Steam depot",
+  "app": 730,
+  "depot": 2347770,
+  "manifest": "67499503218971311",
+  "manifestDate": "2026-10-22T21:23:12Z",
+  "vpkDirectorySha256": "562972293ed7a5d40e341c4df7d6b0ee06430452694177142f0c1239dd3f2c8b",
+  "resources": {
+    "particles/weapons/cs_weapon_fx/weapon_tracers_assrifle.vpcf_c": "17ba62e80e75ef3edf252792918ec9a65a83e2018814d1ba3bc34401b76caf6b",
+    "particles/weapons/cs_weapon_fx/weapon_tracers_assrifle_aug.vpcf_c": "a13c233b5b90e29375a1ae85c8e471115c0a777a05cf6f264cb077fecfdb3216",
+    "particles/weapons/cs_weapon_fx/weapon_tracers_pistol.vpcf_c": "1e54ce8fdc194dff3bcb5723f91514278b2c67565f847572407116bf54761ae0",
+    "particles/weapons/cs_weapon_fx/weapon_tracers_rifle.vpcf_c": "f705029a35920b7eb0b56cef2c3d697d5b85b03c322e76b1949b46fe2b5bed38",
+    "particles/weapons/cs_weapon_fx/weapon_tracers_rifle_ssg.vpcf_c": "8de297d7e15c1a2b482012ef5b80b9bd5684a2fa0a5899cbc309136f1b94bcb8",
+    "particles/weapons/cs_weapon_fx/weapon_tracers_shot.vpcf_c": "07babe2e06a13f76b6fb2f7483fb2e2eefd8d7f8e070b0b6fcce1165f6358f12",
+    "particles/weapons/cs_weapon_fx/weapon_tracers_smg.vpcf_c": "da30a8f084b58f1404b31559676286ec4e512df2a2d818fa6433104e26cd649a",
+    "particles/weapons/cs_weapon_fx/weapon_tracers_mach.vpcf_c": "b500984ebb228a953c42d9681396e5545d90f6051be866fa0e06b6bf8eaffb83",
+    "materials/effects/spark.vtex_c": "0829eea2a98df4c0da4080b0ec7027c55c2dc30b68a090a504c635a9c0e56348",
+    "materials/particle/sparks/sparks.vtex_c": "18032aad16f4e263a7439540418279f8487b334fde1d8b965936def54e38f145"
+  },
+  "outputs": {
+    "tracer-core.png": {
+      "decoded": "materials/effects/spark.png",
+      "sha256": "40f26247efa28592c0d3f08d2df19c58bcec89d244280fd808d87167fc87056b"
+    },
+    "tracer-glow.png": {
+      "decoded": "materials/particle/sparks/sparks_seq4.png",
+      "sha256": "ed617060791678259c685e5d9b0a5d4dbea50f76693ce76ee8396ca6c0299583"
+    }
+  },
+  "reference": "Native C_INIT_MoveBetweenPoints, C_OP_FadeAndKillForTracers and C_OP_RenderTrails; spark core plus sparks sequence 4 glow. Source2Viewer CLI 20.1.",
+  "limits": "Browser reconstruction: two texture layers combined in one additive shader; no Source 2 bloom/gradient LUT graph or sniper smoke wisp. SMGs, machine guns, AUG and SG 553 use the assault-rifle trail approximation instead of their native rope/noise graphs. Every non-suppressed shot emits a trail; native per-mode frequency is not applied because cadence phase/reset and view overrides are unverified. Short flights receive one sub-frame sample; hitscan damage is unchanged."
+}

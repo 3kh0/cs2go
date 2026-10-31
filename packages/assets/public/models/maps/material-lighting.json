@@ -1,0 +1,13 @@
+{
+  "exporter": "Source2Viewer 20.0",
+  "depotManifest": "4758919807587010422",
+  "parameter": "g_flAmbientOcclusionScale",
+  "materials": [
+    {
+      "name": "street_lantern_02_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_color.vmat",
+      "sha256": "61aea8bb857651a59c55e4f79bcc8da54748ac4f6fd79a4a0d14028caf5ec588",
+      "ambientOcclusionScale": 0.0
+    }
+  ]
+}

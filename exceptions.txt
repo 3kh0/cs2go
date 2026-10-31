@@ -1,0 +1,1148 @@
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/c4-import/depot/game/csgo/pak01_dir.vpk
+File: materials/de_dust/hr_dust/hr_dust_decal_road_striping.vmat_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/c4-import/depot/game/csgo/pak01_386.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/c4-import/depot/game/csgo/pak01_386.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_ak.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_aug.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_awp.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_bizon.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_cz75.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_deagle.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_elite.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_famas.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_fiveseven.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_g3sg1.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_galilar.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_glock18.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_hkp2000.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_m249_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_m4a1.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_m4a4.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mac10.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mag7_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mp5sd.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mp7.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mp9.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_negev_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_nova_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_p250.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_p90.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_revolver.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_sawedoff.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_scar20.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_sg556.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_ssg08.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_taser.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_tec9.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_ump45.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_usp_silencer.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/ct/ct_buymenu_xm1014.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_armor_helmet.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_c4.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_decoy.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_defuser.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_flash.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_hegrenade.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_incendiary.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_knife.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_molotov.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_push.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/shared/sh_buymenu_smoke.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_ak_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_aug.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_awp_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_bizon_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_cz75.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_deagle_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_elite.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_famas.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_fiveseven.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_g3sg1_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_galilar_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_glock18_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_hkp2000.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_m249_02.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_m4a1.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_m4a4.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_mac10_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_mag7_02.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_mp5sd_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_mp7_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_mp9_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_negev_02.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_nova_02.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_p250_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_p90_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_revolver_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_sawedoff_02.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_scar20.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_sg556_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_ssg08_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_taser.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_tec9_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_ump45_03.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_usp_silencer.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+
+---------------
+Parent file: /Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_dir.vpk
+File: animation/anims/ui_anims/buy_menu/t/t_buymenu_xm1014_02.vnmclip_c
+Exception: System.IO.FileNotFoundException: Could not find file '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'.
+File name: '/Users/sh/Documents/GitHub/cs2go/artifacts/cs2-effects/depot/game/csgo/pak01_498.vpk'
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at SteamDatabase.ValvePak.Package.GetFileStream(UInt16 archiveIndex) in /_/ValvePak/ValvePak/Package.Read.cs:line 360
+   at SteamDatabase.ValvePak.Package.ReadEntry(PackageEntry entry, Byte[] output, Boolean validateCrc) in /_/ValvePak/ValvePak/Package.Read.cs:line 132
+   at CLI.Decompiler.ProcessVPKEntries(String parentPath, Package package, IFileLoader fileLoader, String type, Dictionary`2 manifestData, Boolean useOutputAsDirectory) in /_/CLI/Decompiler.cs:line 1301
+

@@ -1,0 +1,3 @@
+[run]
+# Run local JavaScript CLIs with Bun when using bun run.
+bun = true

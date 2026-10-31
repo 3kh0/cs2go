@@ -1,0 +1,12 @@
+{
+  "author": "Valve",
+  "source": "User-supplied weapon_c4.glb; CS2 Inspects viewer export",
+  "reference": "https://cs2inspects.com/3d-viewer",
+  "input": "weapon_c4.glb",
+  "sha256": "12651b11a9493d3c2e4a5e7723e6e26e5f5b867a440421d1613d66b716b5ff0f",
+  "generator": "scripts/import-c4-animation.py",
+  "clip": "animation/anims/viewmodel/equipment/c4/plant_c4",
+  "timing": "Native 3.8667-second clip sampled across the existing 3.2-second plant.",
+  "materials": "Existing local c4.glb textures with UV quantization transforms removed; existing Phoenix hands retargeted in world space.",
+  "limitations": "Source shaders and Panorama overlay are not reproduced. First-person only; no defuse clip."
+}

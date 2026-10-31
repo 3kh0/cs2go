@@ -1,0 +1,111 @@
+{
+  "author": "Valve",
+  "version": "CS2 Dust II, Steam depot manifest dated 2026-10-08",
+  "source": "Anonymous Steam CDN download through DepotDownloader 3.4.0",
+  "app": 730,
+  "depot": 2347770,
+  "depotManifest": "4758919807587010422",
+  "references": [
+    "https://steamdb.info/depot/2347770/",
+    "https://github.com/SteamRE/DepotDownloader",
+    "https://github.com/ValveResourceFormat/ValveResourceFormat/releases/tag/20.0"
+  ],
+  "files": {
+    "de_dust2.vpk": "51d6bb432b6553bfae6c38219a527c5de2464a2b107080f2b8be7d8427ebb885",
+    "de_dust2.nav": "64bbc202edae8a92d432368e86948bbee3af9c56555e190dda251d28c64e1ea7"
+  },
+  "tools": {
+    "Source2Viewer": "20.0.6980",
+    "ValveResourceFormat": "20.0.6980",
+    "gltfpack": "0.24"
+  },
+  "optimization": {
+    "originalTriangles": 4546379,
+    "runtimeTriangles": 1919451,
+    "physicsTriangles": 433059,
+    "propTarget": 0.3,
+    "propRelativeErrorLimit": 0.005,
+    "textureMaxDimension": "1024 architecture / 512 props, ETC1S KTX2; repaired street lantern ORM is native lossless 1024x512 PNG",
+    "geometry": "meshopt, 16-bit rendering positions/UV, 20-bit physics positions"
+  },
+  "navigation": {
+    "version": 36,
+    "areas": 2242,
+    "geometry": "Native convex polygons, directed links and edge portals"
+  },
+  "runtime": {
+    "dust2.glb.gz": {
+      "bytes": 36756531,
+      "sha256": "ae93fa04543d7ecb4c4a6878320b7f5ff1d639052bf8c123860dd662247ffe44"
+    },
+    "dust2-physics.glb.gz": {
+      "bytes": 723794,
+      "sha256": "cd67e75d58a8f192376c0bb7e4601cd700637443918383821c54bf4d9faf66fb"
+    },
+    "dust2-nav.json": {
+      "bytes": 1162673,
+      "sha256": "c4880f1e16ab5694eea123bcf4412f9418aef7a7572bb1adda7fa39b49eba8c6"
+    }
+  },
+  "limitations": [
+    "Standard PBR approximates Source 2 layered shaders; reduced native lightmaps and probe volumes are restored through matching lighting sidecars. Native octree validity, directional lightmap response and animated foliage remain approximations. Source smoke/lightshaft effect cards are excluded from static geometry.",
+    "Distant geometry cropped beyond navigation bounds plus 40 m. Detailed props simplified; native world physics is not simplified.",
+    "Playerclip and passbullets surfaces affect movement only. Browser collision approximates the Source player hull; dynamic physics is not reproduced.",
+    "AI is authored, not Valve bot code. Native NAV cover annotations are not imported.",
+    "Missing dependencies are obsolete baker cubemap cache references; runtime uses local lighting."
+  ],
+  "overlayCorrection": {
+    "manifest": "overlay-correction.json",
+    "nativeMaterialsAudited": 242,
+    "materialFamilies": 14,
+    "meshPrimitives": 23,
+    "exporterOffsetMeters": 0.3937007874015748,
+    "correctedOffsetMeters": 0.01,
+    "reason": "Correct Source2Viewer 20.0 overlay offset units; preserve native surface detail and original texture bytes."
+  },
+  "lanternCorrection": {
+    "date": "2026-10-30",
+    "importer": "scripts/patch-cs2-lantern.py",
+    "scope": "Only material 703 street_lantern_02_color metallicFactor 0 -> 1 and texture/image/bufferView 544 ORM replacement. The other 690 zero-factor ORM materials are not validated by this repair and remain unchanged.",
+    "source": "Read-only installed csgo/pak01_dir.vpk, selected model freshly exported with Source2Viewer 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304; selected resources match the prior native audit. This does not repin the whole map depot.",
+    "vpkDirectorySha256": "562972293ed7a5d40e341c4df7d6b0ee06430452694177142f0c1239dd3f2c8b",
+    "source2ViewerCliSha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830",
+    "resources": {
+      "models/props/de_dust/hr_dust/dust_lights/dust_street_lantern_02.vmdl_c": "d24f7769780b09ddb40d1900a6f8aa01a163d5066aa7ed7452174bbae27b11dd",
+      "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_color.vmat_c": "61aea8bb857651a59c55e4f79bcc8da54748ac4f6fd79a4a0d14028caf5ec588",
+      "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_metal_psd_7f9854e4.vtex_c": "8d96d001ce562cd17df6c887d561b2a6109d558e78c09ffedcafaaf7ef32f83b",
+      "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_normal_psd_da8d778a.vtex_c": "29d72240b7d16495733927ebce3d1e91bb13965881df961f5f87c781b7ed6692",
+      "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_ao_psd_bd8305af.vtex_c": "b67af808b46fad25b33c43026338ba68b5ed29657b43705983c13868eefba089"
+    },
+    "nativeOrm": {
+      "file": "street_lantern_02_ao_psd_bd8305af_orm_285388804.png",
+      "sha256": "0da39a0354e4280e44db39daab19db40b59945ba73aee63a139d8d88b1830408",
+      "bytes": 336163,
+      "dimensions": [1024, 512],
+      "minRGB": [16, 0, 0],
+      "maxRGB": [255, 254, 255],
+      "meanRGB": [238.5809154510498, 131.96349334716797, 207.81847953796387],
+      "adaptation": "Source2Viewer --gltf_textures_adapt packs AO, roughness, metalness into linear RGB. Fresh PNG bytes match the retained prior-audit lantern-native-orm.png exactly. No resize, padding, color conversion or additional channel remapping."
+    },
+    "original": {
+      "revision": "7ffb7e35518eb3860cad479f19a222c9c2be397b",
+      "gzipSha256": "de5b27a731ddddfd4b9771bd6449f0678f0cf0406b2730a80a5cc108c02a8090",
+      "glbSha256": "d4d1852424bf7ce4290ad08566f0386dd872a1a0fd650f4debbec197379572ef",
+      "ormSha256": "b5b9bf3939846d936a0b5f406a50ee1ed0e96d29957877bf4ab98b0767bc369a"
+    },
+    "output": {
+      "glbBytes": 43194104,
+      "glbSha256": "04a4c945b476548a19599a059bd6d203f141d63da25e8be3f2df181af7def03f",
+      "gzipDeltaBytes": 336392,
+      "glbDeltaBytes": 336124
+    },
+    "preservation": "Surgical substitutions of five JSON objects, plus append-only BIN data. All original 41,978,544 BIN bytes, 563 other images, all geometry/accessors/meshopt ranges, and all texture transforms are byte-identical. Old 17,171-byte ORM remains unreferenced to avoid relocating any other payload.",
+    "uv": "Keep KHR_texture_transform offset [0.00958281197,0.0105594043], scale [0.980101943,0.979186416] on ORM and AO. It decodes quantized mesh UVs to native UVs, not image padding. Native PNG spans native UVs, so do not bake another decode into it or remove the existing slot transform.",
+    "regeneration": [
+      "Retrieve packages/assets/public/models/maps/dust2.glb.gz from original.revision into a separate original.glb.gz using a binary-safe Git reader.",
+      "Source2Viewer-CLI.exe -i GAME/csgo/pak01_dir.vpk --vpk_filepath models/props/de_dust/hr_dust/dust_lights/dust_street_lantern_02.vmdl_c -d --gltf_export_format gltf --gltf_export_materials --gltf_textures_adapt --gltf_export_extras -o SCRATCH/lantern.gltf",
+      "python scripts/patch-cs2-lantern.py original.glb.gz SCRATCH/street_lantern_02_ao_psd_bd8305af_orm_285388804.png packages/assets/public/models/maps/dust2.glb.gz --evidence SCRATCH/repair.json"
+    ],
+    "limitations": "PNG intentionally replaces only this corrupt ORM without another lossy encode. Native AO scale 0 is still supplied by material-lighting.json at runtime. This is not Source 2 renderer parity; the historical stage corrupting the old ORM remains unidentified. A full map rebuild now preserves adapted factors but must re-audit other material families before updating their bundled factors."
+  }
+}

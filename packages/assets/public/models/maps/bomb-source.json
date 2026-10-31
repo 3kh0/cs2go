@@ -1,0 +1,25 @@
+{
+  "author": "Valve",
+  "map": "de_dust2",
+  "depot": 2347770,
+  "depotManifest": "4758919807587010422",
+  "sourceResource": "maps/de_dust2/baked_bomb_damage.vdata_c",
+  "resourceVersion": 1,
+  "vpkSha256": "51d6bb432b6553bfae6c38219a527c5de2464a2b107080f2b8be7d8427ebb885",
+  "resourceSha256": "b43732dffda94cc0ebc24a9dfe0fe5f51f94fd2baf41406cff1f32e01216d42a",
+  "decompiledSha256": "95ecaddfbb7e15d755390df71572e0b83f20e97fdd63eb3d74f74ffc0d7e301c",
+  "positions": 85697,
+  "bombsites": [
+    [976.0, 2336.0, 96.0, 1248.0, 2624.0, 192.0, 1929.0],
+    [-1728.0, 2496.0, 0.0, -1344.0, 2864.0, 96.0, 3234.0]
+  ],
+  "runtime": {
+    "file": "dust2-bomb.bin.gz",
+    "bytes": 929136,
+    "sha256": "b06b5a91301b715b6caf6ad60bbeec6b4a0b38765afe1f818a6b30a2ce3ada83",
+    "decodedBytes": 1199830
+  },
+  "decoderReference": "https://github.com/ValveResourceFormat/ValveResourceFormat/blob/108ec505021af108c7f69dbd4d3a64f89d74304e/ValveResourceFormat/Resource/ResourceTypes/GenericData/CS2/BombDamage.cs",
+  "queryReference": "https://github.com/Starfie1d1272/cs2-c4-damage/tree/4e288d3c986183b5357c1264bc4793cd3d394688",
+  "qualification": "Exact extracted field bytes; query is independently audited static native reconstruction, not matched-build live qualification."
+}

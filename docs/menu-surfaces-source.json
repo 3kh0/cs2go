@@ -1,0 +1,32 @@
+{
+  "author": "Valve",
+  "build": "26144732",
+  "manifest": "67499503218971311",
+  "references": [
+    {
+      "resource": "styles/settings/settings.css",
+      "decodedSha256": "e54ef0de478315953b9b0ca829cccb47d69b48f1678a393d360b2dc51c488e49"
+    },
+    {
+      "resource": "styles/settings/settings_slider.css",
+      "decodedSha256": "25695f3241abd217b62b4eec11377535dbf2c767e75f6ed4af106455dc00deba"
+    },
+    {
+      "resource": "styles/settings/settings_enum.css",
+      "decodedSha256": "e43bcfab5d53cb0e56b94df874fa53226bca522c4979932bbd595ae3d3168ed4"
+    },
+    {
+      "resource": "styles/popups/popups_shared.css",
+      "decodedSha256": "7e4f31350cb09bed0473c916146537dbad204a8df83c38fb137117070e8d1e3e"
+    },
+    {
+      "resource": "styles/popups/popup_generic.css",
+      "decodedSha256": "38f421f81c3566f9192807e5e7303b843857d91c2a16c836e1ca20c5c3d761a7"
+    },
+    {
+      "resource": "styles/mainmenu.css",
+      "decodedSha256": "1617e98956bead34c80a809aa1ae07e9f8a0e490094a306c98b75e075b104fa3"
+    }
+  ],
+  "implementation": "Native layout and color contracts adapted to DOM/CSS; local settings and unavailable-feature messages."
+}

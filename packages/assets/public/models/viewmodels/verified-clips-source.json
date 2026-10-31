@@ -1,0 +1,458 @@
+{
+  "generator": "python3 scripts/import-verified-viewmodel-clips.py",
+  "buildId": 26144732,
+  "steamInf": "ClientVersion=2000935\nServerVersion=2000935\nPatchVersion=1.41.9.2\nProductName=cs2\nappID=730\nServerAppID=2347773\nSourceRevision=11162119\nVersionDate=Oct 22 2026\nVersionTime=14:13:16\n",
+  "cliSha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830",
+  "skeletons": [
+    {
+      "resource": "animation/skeletons/characters/viewmodel.vnmskel_c",
+      "sha256": "927aac076b950de13735e7baa4c1223c65ebf54fea774938baf03ffc42ee2c86"
+    },
+    {
+      "resource": "animation/skeletons/weapons/deagle.vnmskel_c",
+      "sha256": "7da957e87c0d43ad263485b8f51e1d5c26aed294f374457e07e677490aae4c12"
+    }
+  ],
+  "source": "Valve CS2 installed compiled clips; six viewer exports retain poses/events and only repair input times.",
+  "conversion": "Undo VRF20.1 BakeConversion for native gun skeletons; all translations back to Source inches, inverse root basis only. Native primary and secondary channels retained. Runtime 0.9 speed unchanged.",
+  "limits": "Existing Phoenix forearm helper remains authored (1/3, 2/3); native constraints and full native graph scheduling are not implemented.",
+  "clips": [
+    {
+      "file": "models/viewmodels/deagle/reload.glb",
+      "resource": "animation/anims/viewmodel/pistol/pistol_deagle/reload_deagle.vnmclip_c",
+      "resourceSha256": "3966fb59252703eaf905a5cbda2c0c778a2837f0ab27e14a819a155a14ff8f3e",
+      "crc32": "05d10c92",
+      "duration": 2.2,
+      "frames": 67,
+      "operation": "native-export-source-inch-space",
+      "exportSha256": "09639b6967f4e5f49cb3f7e906fb92c5d420e6030cf38ae18106e0a26f7eb311",
+      "rootBones": [
+        "root_motion",
+        "weapon"
+      ],
+      "events": [
+        {
+          "_class": "CNmIDEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.0
+          },
+          "m_flDuration": {
+            "m_flValue": 0.757576
+          },
+          "m_syncID": "WPN_RELOAD_SILENT",
+          "m_ID": "WPN_RELOAD_SILENT",
+          "m_secondaryID": ""
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.151515
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.Clipout",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        },
+        {
+          "_class": "CNmIDEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.181818
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "WPN_DROP_MAG",
+          "m_ID": "WPN_DROP_MAG",
+          "m_secondaryID": "clip"
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.318182
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.Clipin",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.348485
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.AddAmmo",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        },
+        {
+          "_class": "CNmIDEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.348485
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "WPN_RELOAD_ADD_AMMO",
+          "m_ID": "WPN_RELOAD_ADD_AMMO",
+          "m_secondaryID": ""
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.621212
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.Slideback",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.712121
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.Slideforward",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        }
+      ],
+      "outputSha256": "c5cdc4c8e640d3bd22466e327b92663315266920363f5a3f9c301e85a5eee24a"
+    },
+    {
+      "file": "models/viewmodels/deagle/reload_empty.glb",
+      "resource": "animation/anims/viewmodel/pistol/pistol_deagle/reload_empty_deagle.vnmclip_c",
+      "resourceSha256": "a8247ccc4900080169aab16fe01b7535ace37d2c9aa64e875d09f4fcedcfca9d",
+      "crc32": "18ad7a33",
+      "duration": 2.2,
+      "frames": 67,
+      "operation": "native-export-source-inch-space",
+      "exportSha256": "0832cb24cb5733d9187f5345c67bb2bc2108f3b1f52bd3da410d9db39fc79e0b",
+      "rootBones": [
+        "root_motion",
+        "weapon"
+      ],
+      "events": [
+        {
+          "_class": "CNmIDEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.0
+          },
+          "m_flDuration": {
+            "m_flValue": 0.742424
+          },
+          "m_syncID": "WPN_RELOAD_SILENT",
+          "m_ID": "WPN_RELOAD_SILENT",
+          "m_secondaryID": ""
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.090909
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.Clipout",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        },
+        {
+          "_class": "CNmIDEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.227273
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "WPN_DROP_MAG",
+          "m_ID": "WPN_DROP_MAG",
+          "m_secondaryID": "clip"
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.424242
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.Clipin",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.469697
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.AddAmmo",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        },
+        {
+          "_class": "CNmIDEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.469697
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "WPN_RELOAD_ADD_AMMO",
+          "m_ID": "WPN_RELOAD_ADD_AMMO",
+          "m_secondaryID": ""
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.681818
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.Slideforward",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        },
+        {
+          "_class": "CNmSoundEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.69697
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientAndServer",
+          "m_name": "Weapon_DEagle.Slideback",
+          "m_position": "EntityEyePos",
+          "m_attachmentName": "",
+          "m_tags": "",
+          "m_bContinuePlayingSoundAtDurationEnd": false,
+          "m_flDurationInterruptionThreshold": 0.9
+        }
+      ],
+      "outputSha256": "7e31ba727982fa5680bb3bf0cc7064f7c69b6e6b1204b71ea1cf95a6748f0ed0"
+    },
+    {
+      "file": "models/viewmodels/deagle/shoot_empty.glb",
+      "resource": "animation/anims/viewmodel/pistol/pistol_deagle/shoot_empty_deagle.vnmclip_c",
+      "resourceSha256": "6616b3a62daf2e007bdefbd8749a09cbe3ed9688208041b57b9ff43df75dcc1b",
+      "crc32": "24c50f80",
+      "duration": 0.7,
+      "frames": 22,
+      "operation": "native-export-source-inch-space",
+      "exportSha256": "f0885cd9af600a45beb85b9d2429b9522827d223677265b7c2e6ec830724f434",
+      "rootBones": [
+        "root_motion",
+        "weapon"
+      ],
+      "events": [
+        {
+          "_class": "CNmIDEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.0
+          },
+          "m_flDuration": {
+            "m_flValue": 0.47619
+          },
+          "m_syncID": "WPN_BLOCK_INSPECT",
+          "m_ID": "WPN_BLOCK_INSPECT",
+          "m_secondaryID": ""
+        },
+        {
+          "_class": "CNmParticleEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.0
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientOnly",
+          "m_type": "Create_CFG",
+          "m_target": "Self",
+          "m_hParticleSystem": "resource:\"particles/weapons/cs_weapon_fx/weapon_shell_casing_deagle.vpcf\"",
+          "m_tags": "muzzleflash",
+          "m_bStopImmediately": false,
+          "m_bDetachFromOwner": false,
+          "m_bPlayEndCap": false,
+          "m_attachmentPoint0": "",
+          "m_attachmentType0": "PATTACH_INVALID",
+          "m_attachmentPoint1": "",
+          "m_attachmentType1": "PATTACH_INVALID",
+          "m_config": "shell_eject",
+          "m_effectForConfig": ""
+        },
+        {
+          "_class": "CNmParticleEvent",
+          "m_flStartTime": {
+            "m_flValue": 0.0
+          },
+          "m_flDuration": {
+            "m_flValue": 0.0
+          },
+          "m_syncID": "",
+          "m_relevance": "ClientOnly",
+          "m_type": "Create_CFG",
+          "m_target": "Self",
+          "m_hParticleSystem": "resource:\"particles/unified_weapon_fx/uweapon_muzflsh_deagle_fps.vpcf\"",
+          "m_tags": "muzzleflash",
+          "m_bStopImmediately": false,
+          "m_bDetachFromOwner": false,
+          "m_bPlayEndCap": false,
+          "m_attachmentPoint0": "",
+          "m_attachmentType0": "PATTACH_INVALID",
+          "m_attachmentPoint1": "",
+          "m_attachmentType1": "PATTACH_INVALID",
+          "m_config": "fps_view",
+          "m_effectForConfig": ""
+        }
+      ],
+      "outputSha256": "6bbe1561f4886b9cdc65904e41743c550bd163a26a316baf33a40d6aac6aff35"
+    },
+    {
+      "file": "models/viewmodels/deagle/shoot1.glb",
+      "resource": "animation/anims/viewmodel/pistol/pistol_deagle/shoot1_deagle.vnmclip_c",
+      "resourceSha256": "c6348f085999abda88d01150bfb3ce14aa34ca5421964235e5fa7cc7a927f605",
+      "crc32": "a4474643",
+      "duration": 0.7,
+      "frames": 22,
+      "operation": "time-inputs-only",
+      "inputSha256": "cbcdd910e1b1456e0bded2aefa29c08d1bd04bd7d83b55d6dc4e0bd0e8a584a4",
+      "previousDuration": 0.668181836605072,
+      "timeScale": 1.047619018733869,
+      "inputAccessors": 26,
+      "outputSha256": "b21a4313fbe3a7b086377355e4d55f2b7a21fd3e90ae05825ddedfecc9456240"
+    },
+    {
+      "file": "models/viewmodels/nova/reload.glb",
+      "resource": "animation/anims/viewmodel/rifle/rifle_nova/reload_nova.vnmclip_c",
+      "resourceSha256": "c940bdad00e71020a1451a073f73690355a6dc462e8179624e1818774a6cddab",
+      "crc32": "6cd754b6",
+      "duration": 1.6333,
+      "frames": 50,
+      "operation": "time-inputs-only",
+      "inputSha256": "b527ba5b03b5b9c738fb2347935f0b55ae24acc77dd0b4f754ebb6c7a33cff18",
+      "previousDuration": 1.600633978843689,
+      "timeScale": 1.0204081767525073,
+      "inputAccessors": 34,
+      "outputSha256": "b44e0b22a327ef5549fe2b79c98ae909ef1f56002b612704e51d42fdf1106b3f"
+    },
+    {
+      "file": "models/viewmodels/m4a1_s/silencer_attach.glb",
+      "resource": "animation/anims/viewmodel/rifle/_default_rifle/silencer_attach_rifle.vnmclip_c",
+      "resourceSha256": "8a79c21e813bc5affd209e1a20fe6e9019e4dad042b4a2f4f6c69ac9af0897f5",
+      "crc32": "3c14bbb2",
+      "duration": 4.8333,
+      "frames": 146,
+      "operation": "time-inputs-only",
+      "inputSha256": "0cb70ddae4bbdd162d0fd06db4adb813a7e570e937efa6db9fa1bdd6d771340a",
+      "previousDuration": 4.800195217132568,
+      "timeScale": 1.006896549279762,
+      "inputAccessors": 37,
+      "outputSha256": "46e2c4bfe28777a13f9465bf201aa6a363902c0d43e7664ad5c4d7ca88962b73"
+    },
+    {
+      "file": "models/viewmodels/m4a1_s/silencer_detach.glb",
+      "resource": "animation/anims/viewmodel/rifle/_default_rifle/silencer_detach_rifle.vnmclip_c",
+      "resourceSha256": "f1b1d252f4893da82dc4529e283529a038b3f3753e881b11912c673a68d271a9",
+      "crc32": "2405bcbb",
+      "duration": 4.8333,
+      "frames": 146,
+      "operation": "time-inputs-only",
+      "inputSha256": "304dbed9a42823a41b31a1afee583e6c148f3bf9af2565a2b0200115d35f7b33",
+      "previousDuration": 4.800195217132568,
+      "timeScale": 1.006896549279762,
+      "inputAccessors": 44,
+      "outputSha256": "21fc51cc9eeebc972591a04c1a2101038255f7b8f758451a68a6e3225bf17fcd"
+    },
+    {
+      "file": "models/viewmodels/usp-s/silencer_attach.glb",
+      "resource": "animation/anims/viewmodel/pistol/_default_pistol/silencer_attach_pistol.vnmclip_c",
+      "resourceSha256": "aa9e9cac54e1d8198b6bf80668a889190ae9ee5bab2f7847e27cf492ab02ec10",
+      "crc32": "a748027c",
+      "duration": 4.8333,
+      "frames": 146,
+      "operation": "time-inputs-only",
+      "inputSha256": "1ddd756a0beebb72732a86b1877f542a64baf775ec3d4cbc605e778ad9962995",
+      "previousDuration": 4.800195217132568,
+      "timeScale": 1.006896549279762,
+      "inputAccessors": 54,
+      "outputSha256": "bd3aa63f5cd921885f16967052f5734aeb67bc9a60a0c3574f14c01472daf106"
+    },
+    {
+      "file": "models/viewmodels/usp-s/silencer_detach.glb",
+      "resource": "animation/anims/viewmodel/pistol/_default_pistol/silencer_detach_pistol.vnmclip_c",
+      "resourceSha256": "408062c92c38d7570d53d27b8b363fcf8e16718ac0f69646588cef3f516b7911",
+      "crc32": "820f6a52",
+      "duration": 4.8333,
+      "frames": 146,
+      "operation": "time-inputs-only",
+      "inputSha256": "5a2cd8a178d1a72677529308c94facf6cd7a10db4bc70cab7ee03d5016dfe92c",
+      "previousDuration": 4.800195217132568,
+      "timeScale": 1.006896549279762,
+      "inputAccessors": 57,
+      "outputSha256": "b0aad24ea5c91a9803674061ac305a6319911ee6c1066d736f0746cae5e27072"
+    }
+  ]
+}

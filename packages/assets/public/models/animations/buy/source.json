@@ -1,0 +1,434 @@
+{
+  "author": "Valve",
+  "source": "Native CS2 buy-menu clips extracted from the user's installed game on Windows",
+  "build": "26144732",
+  "depot": "2347770",
+  "depotManifest": "67499503218971311",
+  "decoder": "Source2Viewer 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "extractionArchiveSha256": "36a08486d67fa6261bdc11ec3ac16167719370ae079d3b32326afbab6bbc7bf9",
+  "nativeResources": [
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_ak.vnmclip_c",
+      "sha256": "93ac3b1c6575997b65228d5a9f2f09c0721ac7a8cea3d764f75654f75bfe244d",
+      "bytes": 4958
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_aug.vnmclip_c",
+      "sha256": "5d25847f743f4b3d98305fd878b1e80568e5acd709ff5a4ddf3b8fa2a60fbf6c",
+      "bytes": 4920
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_awp.vnmclip_c",
+      "sha256": "3e1b4c8911d807dc739f52121d334875e80a6b330b42c7d066c7fdccf9bb2518",
+      "bytes": 4957
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_bizon.vnmclip_c",
+      "sha256": "ba6636f5afc0b987c9ea48c0922d5ff9fa19f6aca8d2ff6d1e2a29e238e56dd0",
+      "bytes": 4914
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_cz75.vnmclip_c",
+      "sha256": "195f0a26c041ba5463377eefdd8563b5164e8893b51867aac33689c44061582a",
+      "bytes": 4955
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_deagle.vnmclip_c",
+      "sha256": "258eaf9db4cdda1641d0fe72f928e28977fec34408489510aa55dd375c825481",
+      "bytes": 4934
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_elite.vnmclip_c",
+      "sha256": "fd373ab8067442f9f94c90439f27dcc0f955d9c892f8594a0ccd50515749d4b1",
+      "bytes": 5248
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_famas.vnmclip_c",
+      "sha256": "33cd02adb37f1eee4502e2a8a6090a50101a1939eb8b0c3cee865d53c1d477c1",
+      "bytes": 4925
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_fiveseven.vnmclip_c",
+      "sha256": "f9dd359cdf6785c0d4155ba088576ff205034e4364a691e371bc4e2ec2ffdc96",
+      "bytes": 4908
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_g3sg1.vnmclip_c",
+      "sha256": "0cb592c5f8925573d18c3751c10ea1aacdc9ed0df7b0921610b6bbcca4dbc1c2",
+      "bytes": 5001
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_galilar.vnmclip_c",
+      "sha256": "3cc6736bc7c03eb3d46d15848c8d72db96d1df9a14816693267f434121a61398",
+      "bytes": 4933
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_glock18.vnmclip_c",
+      "sha256": "5b2a6d9a68f8244f5ecfef4efcf1d9ccb606d3550e1e3b1eb6e20bda3cad47b3",
+      "bytes": 4931
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_hkp2000.vnmclip_c",
+      "sha256": "cc4f2571f4710c52ec9904f93adc31426bf287ed6b3c0af8b4bf5da0615e89fc",
+      "bytes": 4935
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_m249_03.vnmclip_c",
+      "sha256": "7a0b4db07a487b091a5d7367522b07ed50ee0e9548f18324d722ffbaa39ffba0",
+      "bytes": 5360
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_m4a1.vnmclip_c",
+      "sha256": "d30d238ee3ef1dbea4c0267f24ff1d70ad36a513de777a146610414373560efe",
+      "bytes": 4968
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_m4a4.vnmclip_c",
+      "sha256": "40acac77d389b1063afe9a69e5b3d16052cc9da911c8534ddf1d7cf57a4574bb",
+      "bytes": 4913
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mac10.vnmclip_c",
+      "sha256": "62ba65aa8f55bf45c6b52c75cc394e84527537bbeeece244e0282b29664fbf30",
+      "bytes": 5167
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mag7_03.vnmclip_c",
+      "sha256": "baa4b76eaad725630829b776f5e6c11a218e71707331ff0f27eb760a39a62320",
+      "bytes": 4923
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mp5sd.vnmclip_c",
+      "sha256": "590a94c6b01159491fb8e2e57cf80476cce941a7aff50af1f633a27e3d5767a0",
+      "bytes": 4917
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mp7.vnmclip_c",
+      "sha256": "f91abacc3a5a2cc6ccb90fa9d28fa9704974f9a35b4d8345abdb2003ac9fa512",
+      "bytes": 4882
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_mp9.vnmclip_c",
+      "sha256": "8c1b861d0b91ac13745d3628afe65ab3ed34a82a600b77c950495aa4cbb3de78",
+      "bytes": 4900
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_negev_03.vnmclip_c",
+      "sha256": "6b75d22f1262413cd530357cf93f43bfdaf4737411f394b1c47361b050291405",
+      "bytes": 5383
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_nova_03.vnmclip_c",
+      "sha256": "ace112a56070f450e0225c95ad29be0af977e780cd7a1941ca55695f59e81a09",
+      "bytes": 4949
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_p250.vnmclip_c",
+      "sha256": "de190cc4c493036e93039301628dd1367c05eda1c59ca629377fe014acb434f7",
+      "bytes": 4914
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_p90.vnmclip_c",
+      "sha256": "4c4377a989d676c6cba89f29ce57d7fcb4370ef01b59c92fadf631f6d6f3f2da",
+      "bytes": 4914
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_revolver.vnmclip_c",
+      "sha256": "a066cdeed14b48044581f0726de9b78f16f4c1e635c49b91274991427e1df20a",
+      "bytes": 5170
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_sawedoff.vnmclip_c",
+      "sha256": "542d7bd675dcd3880adaa351e958907865e774390344d82f10d26335179cca21",
+      "bytes": 4976
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_scar20.vnmclip_c",
+      "sha256": "2dba8ac0a93669dc2664f2592a8e69cb18bde6c734942cd101d1b440ddd0cb91",
+      "bytes": 4940
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_sg556.vnmclip_c",
+      "sha256": "a26f01b52b6b86530e5f85d8bf296785c2642acf0d7d92af73e7978c639232df",
+      "bytes": 4915
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_ssg08.vnmclip_c",
+      "sha256": "0c323bc45f182e7f31bdda4e1845df56d3e0df9b9a5236b713dce5dcd502d503",
+      "bytes": 4927
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_taser.vnmclip_c",
+      "sha256": "a617207a63822e9e609763fc2d0d134d66085d8c06d8b4a16f2b0620994691ab",
+      "bytes": 4880
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_tec9.vnmclip_c",
+      "sha256": "4995bee82cc2a6651dd067f4774dae0cd10ec09495d8e4d9aa38863d78ec78a7",
+      "bytes": 4910
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_ump45.vnmclip_c",
+      "sha256": "7330b2039a97d46a7430f782bbeff618a9ce6038f99da81da3598c96a96ce949",
+      "bytes": 4973
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_usp_silencer.vnmclip_c",
+      "sha256": "767d66d26ddbf2d7324ed2aca2aa61098bd79457007d37b3e1ee4ab7af2ddbb4",
+      "bytes": 5000
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/ct/ct_buymenu_xm1014.vnmclip_c",
+      "sha256": "8358952499f617ccec6f5f867f4927400371e6e99045a8b657750768a8b5f56e",
+      "bytes": 4909
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_armor_helmet.vnmclip_c",
+      "sha256": "fdc894d148322bf026e39b3d542f852850a7f5d2c909055b1af8ce1573d72197",
+      "bytes": 4624
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_c4.vnmclip_c",
+      "sha256": "54252518d2e3fb677998ec58f559dd0deb2e999446553210247ff09fa952c610",
+      "bytes": 4857
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_decoy.vnmclip_c",
+      "sha256": "7a10ce8f717b28a54a312cbf46954b4c4b624eb210df4ea4adc930432a36f89c",
+      "bytes": 4864
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_defuser.vnmclip_c",
+      "sha256": "6a3b77b450dea088fe6195f7a4291707001c1808a187e33166d3368d40dcb06e",
+      "bytes": 4618
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_flash.vnmclip_c",
+      "sha256": "b445d45e00024ec5ae666eaf97731842687cddd071fbd90d56edf80af41160c3",
+      "bytes": 4868
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_hegrenade.vnmclip_c",
+      "sha256": "2786522d2ea90951c0f243291be992aeecfd48b9f6c92567537aa1b8fa10d9ca",
+      "bytes": 4853
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_incendiary.vnmclip_c",
+      "sha256": "000ed8765d8dee41983a7d0905f3aaa8774ca7e20bb60a8bcba734aba6ca1cae",
+      "bytes": 4913
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_knife.vnmclip_c",
+      "sha256": "cddd0f03b44f11d6a24c3790efc4d7dc92a5325bf23ee8e0636dc5cd4513bde2",
+      "bytes": 4588
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_molotov.vnmclip_c",
+      "sha256": "7c19646fb1695c433638aacc82b43ffd6d0ca89e4c2fd4a902aae294b278026d",
+      "bytes": 5104
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_push.vnmclip_c",
+      "sha256": "c125bb4b5a116cd058096f96267224995503e08af2169053b9aad46674dd08e5",
+      "bytes": 5014
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/shared/sh_buymenu_smoke.vnmclip_c",
+      "sha256": "4961b7bc0d433aedc3e442b32e34cae9314c38f0bafd680e4787b0e4cd2b9b9f",
+      "bytes": 4903
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_ak_03.vnmclip_c",
+      "sha256": "7f8f219ada2a22d53576ad2d7f21dac57323221f9fc8385524af1a7d2e5509e0",
+      "bytes": 4958
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_aug.vnmclip_c",
+      "sha256": "2053e155a22c5b138d4d5793a47d51cc355412de26c9ff676c19b198f01293c1",
+      "bytes": 4939
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_awp_03.vnmclip_c",
+      "sha256": "658afa14955b5ca540e6cf53153f832cd5a002606c26f993617d2fcd5f3bf9c2",
+      "bytes": 4964
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_bizon_03.vnmclip_c",
+      "sha256": "4e1f50081b3ca7a0fb8b009dd694b76cd4937aedbd316227dc394950a7ab1d1f",
+      "bytes": 4915
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_cz75.vnmclip_c",
+      "sha256": "90bf70d5a32439aca6871a58ad3e9d0eb38cbae13cc3bda7e21df337b1e0e8e4",
+      "bytes": 4962
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_deagle_03.vnmclip_c",
+      "sha256": "8b34ae92a85584d3731b124ff51619a6c2a8a501104181c603612078ed021dfe",
+      "bytes": 4948
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_elite.vnmclip_c",
+      "sha256": "4081bb6bb4a24007a1d8ae6f5ca2e2e85fb3ed1285d655f525fa29cda63bd3d9",
+      "bytes": 5205
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_famas.vnmclip_c",
+      "sha256": "457eedcbf22a6121fad788f2d29306d8c89cfa0783ce233090103eba53b7b65b",
+      "bytes": 4929
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_fiveseven.vnmclip_c",
+      "sha256": "fd387a6aaae94b039afe6ef1b5c7eba61419587eba354fdf2564dc5611ba2555",
+      "bytes": 4919
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_g3sg1_03.vnmclip_c",
+      "sha256": "1ade8030ac30b70264d95fd1d0a957588ac25eb26a830eb1ea8058844cf8a8cf",
+      "bytes": 5009
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_galilar_03.vnmclip_c",
+      "sha256": "ff5476fcee1535e2957d24173b78f73897ca7e270379c845094f66570ebfd889",
+      "bytes": 4951
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_glock18_03.vnmclip_c",
+      "sha256": "b9abcaba87d255536415bc04b2e44ba3bbdc5d6758cff3d084212ec9f27d39b6",
+      "bytes": 4938
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_hkp2000.vnmclip_c",
+      "sha256": "58d3a938a1419a2df33919f9f8882f89ff1a0510205ff2a57fd9e96af7019f8e",
+      "bytes": 4953
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_m249_02.vnmclip_c",
+      "sha256": "88084f29023b6ed6ed871b9040438dd8c6004a5753ccc63b087a8d4fb17d835d",
+      "bytes": 5337
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_m4a1.vnmclip_c",
+      "sha256": "202d8f0ac38d61ba0feb39e11a0703b543c07a42e64cf6c26fd58e041292da48",
+      "bytes": 4975
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_m4a4.vnmclip_c",
+      "sha256": "e508061a19e690647baa61abff41eb460b43b0fed392b6cdd7d8b39a22d7a90f",
+      "bytes": 4918
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_mac10_03.vnmclip_c",
+      "sha256": "30eb87e7cd1609adf90788a97c631ee621f09076b981ec2b323256d221cc84ad",
+      "bytes": 5198
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_mag7_02.vnmclip_c",
+      "sha256": "6454c6e20d122502447d897c93a6a30b7fff3ac54c576698078d283c3633f926",
+      "bytes": 4908
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_mp5sd_03.vnmclip_c",
+      "sha256": "3d63004ab0b2a1ca5ed8b645a65303492e5058a859433a71acc6e6f297936ed4",
+      "bytes": 4924
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_mp7_03.vnmclip_c",
+      "sha256": "736b2659335aaf2626912883fca48c613bccbece317f7372ab8da24aef8042af",
+      "bytes": 4893
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_mp9_03.vnmclip_c",
+      "sha256": "8746b5e774b79135d2f2ee146c9b12803825d02669dc0db1fb512f4c111b3012",
+      "bytes": 4912
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_negev_02.vnmclip_c",
+      "sha256": "3efb4046bc602adb8474814c66d9b2ffdc81345e3e8fdb0fb11cad35caf2e9a4",
+      "bytes": 5335
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_nova_02.vnmclip_c",
+      "sha256": "3d2c43739fee6bc6032ca5295850476779447e8e749486a7bf4b5ab4a18c2eea",
+      "bytes": 4982
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_p250_03.vnmclip_c",
+      "sha256": "149784a0a97d5931ba7e9d2319c53fca06a5b7aae194ffc9a19fd42167ad3597",
+      "bytes": 4929
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_p90_03.vnmclip_c",
+      "sha256": "d7b8cc44f6b1d26bf8c76eab09adf94ca655ecf080020aae201beb41e8ee9320",
+      "bytes": 4947
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_revolver_03.vnmclip_c",
+      "sha256": "50bc214b5f692fb724bd35e854a8d365abdee3a1c653d3ec9453130116f57cca",
+      "bytes": 5179
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_sawedoff_02.vnmclip_c",
+      "sha256": "cdf313f0acbc8d3f3a3fe4db1753bf0c1e12a881c7ec9342461b0563478d0c68",
+      "bytes": 4942
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_scar20.vnmclip_c",
+      "sha256": "7b3adc9fef09d6c34015bb14422d7712b71c9724fcdb5cd1fd710f90ad06c4dc",
+      "bytes": 4923
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_sg556_03.vnmclip_c",
+      "sha256": "dff15995a72982a73cbd0604dee11d42c577d9088589a0db7841d9b39886c7aa",
+      "bytes": 4929
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_ssg08_03.vnmclip_c",
+      "sha256": "487da0250f63179adedcaf7c88bae14b34c9950260f7ccfe47c195007d64962a",
+      "bytes": 4962
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_taser.vnmclip_c",
+      "sha256": "ccf01bf80c3bcbd1054008d586ad8f9e109744dcd60fe783e3d1f899afc38e12",
+      "bytes": 4868
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_tec9_03.vnmclip_c",
+      "sha256": "23739f388972f4a752ae56e06ed6ba747eaa8440f2c53f23038e8c21fc39d59f",
+      "bytes": 4926
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_ump45_03.vnmclip_c",
+      "sha256": "236a04d188db8c2bcf1c8cd23561117d4bd45501b2d651827b0e2c43912b5ccf",
+      "bytes": 4959
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_usp_silencer.vnmclip_c",
+      "sha256": "eec822117ebe94ef41087672767ee71b56995e07a0203eb0ad8aa4eea239acb3",
+      "bytes": 5015
+    },
+    {
+      "path": "native/animation/anims/ui_anims/buy_menu/t/t_buymenu_xm1014_02.vnmclip_c",
+      "sha256": "6afac9254945b280a3d3b149b5701e489762b85757a51f371c90e4fb597ece84",
+      "bytes": 4969
+    }
+  ],
+  "generator": "bun scripts/import-buy-poses.mjs",
+  "inputs": [
+    {
+      "url": "https://cs2.cs2inspects.com/data/agentanims/world/rifle/_default_rifle.glb",
+      "sha256": "8ab1645ff996a7469a6e1dc802e1d19dca103272b3d641efb3d16110e2822ff5",
+      "bytes": 966580
+    },
+    {
+      "target": "public/models/agents/ground-rebel-native.glb",
+      "sha256": "3ea2077cbced126f9aad79166a9d0bbbfb0462243a53e1d11d26fbdbeb1d6bc4"
+    },
+    {
+      "target": "public/models/agents/idf.glb",
+      "sha256": "1c134938bece73608596af01b60993e1b84cb38a5a6f03dcac1112bfc9241bcb"
+    }
+  ],
+  "processing": "First nonnegative sample per native buy-menu clip decoded on Windows; Source inches converted to meters, Z up to Y up; world-space rotations calibrated to each bundled agent rifle reference. Source wpn attachment retained relative to retargeted right hand, without weapon bounding-box placement.",
+  "limitations": "IDF retargeting retains its Source 1 proportions. Native graph idle layering and SnapWeapon graph evaluation are not reproduced. Static scale channels are restored from the compiled clips; native root vertical motion is verified as zero. The first sample is held rather than playing the few moving buy clips. This is not a capture of the final game UI graph."
+}

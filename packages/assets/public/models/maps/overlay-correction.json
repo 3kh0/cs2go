@@ -1,0 +1,177 @@
+{
+  "exporter": "Source2Viewer 20.0",
+  "reference": "https://github.com/ValveResourceFormat/ValveResourceFormat/blob/20.0/ValveResourceFormat/IO/GltfModelExporter.Mesh.cs#L23",
+  "inputSha256": "5b1cf8bd13afa29b4ecdf3584ae3452bace4e4b9c6d21fe33b630ea3abd965aa",
+  "exportedOffsetMeters": 0.3937007874015748,
+  "correctedOffsetMeters": 0.01,
+  "materials": [
+    {
+      "name": "bombsite_x_spray",
+      "resource": "materials/decals/bombsite_x_spray.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_SPECULAR_DIRECT": 1,
+        "F_SPECULAR_INDIRECT": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "8ef23b84c1f6f5a65459b1b6cc58296fac3b55e761f0a018a2e45ad869a9a1e6"
+    },
+    {
+      "name": "dust_kasbah_window_insets_01",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_window_insets_01.vmat",
+      "flags": {
+        "F_ALPHA_TEST": 1,
+        "F_DEPTH_BIAS": 1
+      },
+      "shader": "csgo_vertexlitgeneric.vfx",
+      "sha256": "adef90f9c7c7c1095917a895b469783e7be28136a959a2d4a2d52f948a2d025e"
+    },
+    {
+      "name": "dust_manhole_concrete_color",
+      "resource": "materials/decals/hr_decals/dust_manhole_concrete_color.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "eab6a90dab31dc0869c29dfd8c406010153099b9b3a4a4eef33ea234e76fbee8"
+    },
+    {
+      "name": "dust_panel_paint_patch",
+      "resource": "materials/decals/hr_decals/dust_panel_paint_patch.vmat",
+      "flags": {
+        "F_LAYERS": 0,
+        "F_OVERLAY": 1,
+        "F_TEXTURETRANSFORMS": 0,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "13bfdff762a6094d969b407cc04033447d7ccfb3cdfb50f3c0bdd6f1bce04fdf"
+    },
+    {
+      "name": "hr_dust_decal_mudbrick_wear_01",
+      "resource": "materials/de_dust/hr_dust/hr_dust_decal_mudbrick_wear_01.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "d253901853b68032da4c434822cf95e0ccf1027f92e32e7178c1822972fa6e82"
+    },
+    {
+      "name": "hr_dust_decal_road_striping",
+      "resource": "materials/de_dust/hr_dust/hr_dust_decal_road_striping.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "0f7cfcf6432506243422ec38cdbafa82701edc3904b70576ab94ded351495fa0"
+    },
+    {
+      "name": "hr_dust_overlay_sign_01",
+      "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_01.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "7383f441e18cecb9d2c805abb0233bd8ea84e80583f7f449601e4f942f5628ba"
+    },
+    {
+      "name": "hr_dust_overlay_sign_02",
+      "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_02.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "669e434aa2870728be2b1e9c831e1c1e22eac3fd6071ae6fadde40c23863d656"
+    },
+    {
+      "name": "hr_dust_overlay_sign_03",
+      "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_03.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "964485c3a3652ee7d69ac36c586b97eb8ec0d12de8d99de021314f3a11e681ab"
+    },
+    {
+      "name": "hr_dust_overlay_sign_04",
+      "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_04.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "ef05c381c953ce68ad76c3f5ee82b64232693d1042d90cb8d4539f425b4796b7"
+    },
+    {
+      "name": "hr_dust_overlay_sign_05",
+      "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_05.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "6c0143095efa778ab55742151c6e7df5213a8807167b6be98e43334090fe3451"
+    },
+    {
+      "name": "wall_stain001",
+      "resource": "materials/overlays/wall_stain001.vmat",
+      "flags": {
+        "F_OVERLAY": 1,
+        "F_TRANSLUCENT": 1
+      },
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "sha256": "1234758d9d78a3356d69a6134c677b57ca5bffa7cc877ee04cd083fc1eb390f0"
+    },
+    {
+      "name": "dust_mudbrick_transition_overlay",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_transition_overlay.vmat",
+      "flags": {
+        "F_BLEND_MODE": 3,
+        "g_bFogEnabled": 1,
+        "g_nScaleTexCoordUByModelScaleAxis": 0,
+        "g_nScaleTexCoordVByModelScaleAxis": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0,
+        "RepresentativeTextureHeight": 1,
+        "RepresentativeTextureWidth": 1
+      },
+      "shader": "csgo_static_overlay.vfx",
+      "sha256": "6432c3b15e56c2d7044877b1c92b9b9ed36b6cfbf7aac38454af700aebb25e6c"
+    },
+    {
+      "name": "hr_dust_overlay_sign_03b",
+      "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_03b.vmat",
+      "flags": {
+        "F_BLEND_MODE": 1,
+        "F_LIT": 1,
+        "F_PAINT_VERTEX_COLORS": 1,
+        "g_bFogEnabled": 1,
+        "g_nScaleTexCoordUByModelScaleAxis": 0,
+        "g_nScaleTexCoordVByModelScaleAxis": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0,
+        "RepresentativeTextureHeight": 2048,
+        "RepresentativeTextureWidth": 2048
+      },
+      "shader": "csgo_static_overlay.vfx",
+      "sha256": "b472fad9a21e7f178cf7cb2ccb0d00c9b2ec3726abccc9ecbfb536d25ce08465"
+    }
+  ],
+  "nativeMaterialsAudited": 242,
+  "alphaCorrections": [
+    {
+      "name": "hr_dust_overlay_sign_03b",
+      "nativeShader": "csgo_static_overlay.vfx",
+      "nativeBlendMode": 1,
+      "gltfAlphaMode": "BLEND",
+      "reference": "https://github.com/ValveResourceFormat/ValveResourceFormat/blob/20.0/Renderer/Renderer/Materials/RenderMaterial.cs#L370"
+    }
+  ]
+}

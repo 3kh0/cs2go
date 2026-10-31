@@ -1,0 +1,42 @@
+{
+  "author": "Valve",
+  "source": "CS2 Steam depot; inspect.skin does not list C4 and the CSGOSKINS page was blocked during Playwright discovery.",
+  "app": 730,
+  "depot": 2347770,
+  "depotManifest": "4758919807587010422",
+  "resource": "weapons/models/c4/weapon_c4.vmdl_c",
+  "generator": "scripts/import-c4.py",
+  "tools": {
+    "Source2Viewer": "20.0.6980",
+    "gltfpack": "0.24"
+  },
+  "inputs": {
+    "dev/helper/testgrid_color_tga_6cdaf30d.vtex_c": "9c8b4a1608887bce2932d150489fccf737d165963e4f34d5b38014081bb477f3",
+    "materials/default/default_ao_tga_559f1ac6.vtex_c": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+    "materials/default/default_normal_tga_4fc2d3dd.vtex_c": "62f9620b6406055534ea44654221fbf1ac018b2d874d032463761cd5d162c8fc",
+    "materials/default/stickers/default_holomask_tga_daef1ed1.vtex_c": "f9cba010b176b9d5e84ab5d5d607af5d5918bfad23398646b85a5ef88cf0c0e2",
+    "materials/default/stickers/default_holospectrum_tga_e12c79bd.vtex_c": "36fe9c78514f9ca5fc79357fc3297d95dae987f75b3eab75d6b9c529b1009f6b",
+    "materials/default/stickers/sticker_default_psd_7f7731d3.vtex_c": "cbe5970bd3c9a92bfb01c67e4a7e9032bb11e07cc62f2e041f9021e4c48a15ff",
+    "materials/default/stickers/sticker_default_scratches_psd_a9ad199b.vtex_c": "3cda3839bbdae7af1321b33a69adf4ea0be3c692b22c2d04641861e4538c9c5c",
+    "materials/models/weapons/v_models/c4/c4_panorama_control_panel.vmat_c": "2cbb3b763ab8335aecaaaf583b7849a658cf32452f24152f94e7173481968a74",
+    "weapons/models/c4/materials/c4_ao_tga_bb64a00d.vtex_c": "2ee4d5e97b497324ad947246be40f4543f0a0d3a7812fe5a57a6e90602f4d303",
+    "weapons/models/c4/materials/c4_color_psd_75da6dec.vtex_c": "b4bb514e58b6dd1920a1acba22d104d2090e8008975103ba375634a7da0182f4",
+    "weapons/models/c4/materials/c4_digits_psd_52746c2d.vtex_c": "6132bda52e0d154328dc05ef49b7ad55b02c0c87a23dd5967e1e54f5b61b8ccf",
+    "weapons/models/c4/materials/c4_led_selfillum_psd_d8363a2a.vtex_c": "4dc789a6d8fe37620ded9f166d99fa082df2bcc435e89d8af66978e6a3d06e57",
+    "weapons/models/c4/materials/c4_normal_tga_389762e7.vtex_c": "925f85f0f292b0e38053ba4a3057d5d37edc667f17d205be8c679af5f5d48fe3",
+    "weapons/models/c4/materials/c4_normal_tga_4e48d437.vtex_c": "9cb1e732987251aee3dbc777624530e4b733ba12fcbd93b552716d22a9c8a7f9",
+    "weapons/models/c4/materials/c4_normal_tga_b08be45.vtex_c": "c7593112097d1bdd6d0f0765ac35308838cb46105ac19e8800805e025450d754",
+    "weapons/models/c4/materials/c4_rough_tga_53c5f087.vtex_c": "8f0ff0581897404ff39d27067b8a18829687cfb77cdfd0d972b24129dcf4b340",
+    "weapons/models/c4/materials/stickers/weapon_c4_sticker_mask_psd_a9cf6509.vtex_c": "7eebac54a3d10b8e3cf4d597fd6dbbb5b84b2339bd0e428330c871736441e050",
+    "weapons/models/c4/materials/weapon_c4.vmat_c": "4b25597e6147e86bfc16e5fd59376126719d6efcc2bed9e86340325438486a8a",
+    "weapons/models/c4/materials/weapon_c4_digits.vmat_c": "459c1f71a142b06ae717959a2b30494f99fb51f66ef0934ad4e3d92a7851ac1e",
+    "weapons/models/c4/materials/weapon_c4_digits_vmat_g_tmetalness_5818ca09.vtex_c": "5c3b784d1d2d378d150b1b387e313f324a4bfee89693bcb48ce5f8d238014064",
+    "weapons/models/c4/weapon_c4.vmdl_c": "c69ae32db84f766a5edb56422aafa87c5bb186b814a3b3d46874ecadaeadb449"
+  },
+  "runtime": {
+    "bytes": 587140,
+    "sha256": "0ab57e56ecfdd8fc4551b200c932f2e0e7174d5079f84e429ffa5a3c5f330e85"
+  },
+  "processing": "Source2Viewer exports in meters with glTF texture adaptation; embedded WebP at up to 1024px; meshopt geometry compression. Developer Panorama overlay removed; native LCD retained with default AO corrected.",
+  "limitations": "Three.js PBR approximates Source 2 materials; native LCD atlas selects the planted code, and the LED pulses on the existing game beep clock. No first-person planting animation."
+}

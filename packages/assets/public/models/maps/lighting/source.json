@@ -1,0 +1,887 @@
+{
+  "author": "Valve",
+  "depotManifest": "4758919807587010422",
+  "sourceHashes": {
+    "maps/de_dust2/lightmaps/irradiance.vtex_c": "f99bd63780e02db2ed14f163fd80b5b700733c9c69a3f9ae29c6cc0922a11f2b",
+    "maps/de_dust2/lightmaps/direct_light_shadows.vtex_c": "a6e57eb491abd8997bba4ad9ab24f9b0f86f3f47b40b92c18110c7fbd174784d",
+    "maps/de_dust2/lightmaps/lightmap_query_data.kv3": "bdcd801c1934678b765413581ebc2c1fb93095bf77c5e254359e9913898660f3",
+    "maps/de_dust2/lightmaps/env_light_probe_volume_atlas.vtex_c": "a063075e48e39e55cd2c7903a9e6e9bade331f0797e4eab84e0a2a4d534058f0",
+    "maps/de_dust2/lightmaps/env_light_probe_volume_atlas_dlshd.vtex_c": "a99bec5085e9785547c5939fd70d884604279afc6b5c77444b9449ab4120f8a5",
+    "maps/de_dust2/cubemaps/env_cubemap_array.vtex_c": "71a1e197e33acd95d4e4351f1e26580da66d062cf2af8b24db90a9dc50d7e5e0",
+    "maps/de_dust2/world.vwrld_c": "59e3af56979ce9dc2038099c32f4dec2107d6763196010d1afcef33064e7b130",
+    "maps/de_dust2/entities/default_ents.vents_c": "515efdfc1e452b3d7052c5ffb1801a05e23b2395fb90586ff2dc9d14ae7ef80a"
+  },
+  "runtime": {
+    "lightmapSize": 2048,
+    "lightmapEncoding": "RGB8 sqrt(linear irradiance /16), lossless WebP",
+    "probeVoxels": 158902,
+    "probeFormat": "RGB float16 six native-axis lobes",
+    "reflectionSize": [256, 128],
+    "shadowChannel": 0,
+    "irradianceScale": "Multiply by pi for Three Lambert BRDF",
+    "fallbackFormat": "RGBA8 sqrt(linear irradiance /16) RGB, sun visibility A",
+    "staticProbeCoverage": 0.9970706551202888,
+    "lightmapTriangleCoverage": 0.149496427545963,
+    "runtimeTriangles": 1918989,
+    "lightmapWeldMeters": 0.012,
+    "lightmapNormalDot": 0.985,
+    "lightmapEffectiveTriangleCoverage": 0.07033807906142245,
+    "lightmapBoundaryBlend": "Native atlas fades to shared fallback endpoints; verified coplanar native chart boundary samples replace probes when their UV, irradiance and shadows agree",
+    "nativeChartRecoveredTriangles": 18208,
+    "nativeChartMinimumSurfaceArea": 1,
+    "nativeChartBoundaryEndpoints": 3821
+  },
+  "limitations": [
+    "Native lightmap query UVs transferred by triangle projection and accepted only across consistently mapped connected surfaces; chart boundaries blend to shared native probe samples.",
+    "Atlas spatial filtering, 1.5m probe resampling, and reduced reflection resolution differ from Source2.",
+    "Probe overlap priority uses smallest volumes with native edge_fade_dists smoothstep feathering and up to four blended volumes; native octree validity is not yet ported."
+  ],
+  "runtimeGeometrySha256": "de5b27a731ddddfd4b9771bd6449f0678f0cf0406b2730a80a5cc108c02a8090",
+  "nativeGeometryTransfer": {
+    "inputHashes": {
+      "artifacts/map-geometry/native.gltf": "d2c8a2a41e2c27815a806d288210b3a1c94da81a447b99c18a1e2e30016845a2",
+      "public/models/maps/dust2.glb.gz": "de5b27a731ddddfd4b9771bd6449f0678f0cf0406b2730a80a5cc108c02a8090",
+      "artifacts/map-geometry/native.bin": "d407d99bfbba40ad8b3a48de7bd1cb90bc469ec52ad0cb3d36f20799fa40101b",
+      "artifacts/parity-lighting/native-lightmap-vertices.bin": "32ee8bf84f103692d2b909a3706ea0985c52014552fcb1610ef9ffd08f459e8d",
+      "artifacts/parity-lighting/native-lightmap-indices.bin": "aabf277dbb66ee68e3d6f26326461206413cfabcacadab10ec04e1d0b9ffbd07"
+    },
+    "worldUvScale": [1.14284, 1.14284],
+    "verifiedExportUvConvention": "Unscaled UV1, cross-checked against native query vertices per material",
+    "samples": "Corners, edge midpoints, centroid; matching affine UV derivatives; reject conflicting coplanar overlapping chart interiors unless irradiance and sun agree within one encoding step across a 2cm plane neighborhood; complete welded surface acceptance",
+    "materials": [
+      {
+        "material": "dust_300d_color",
+        "candidates": 238,
+        "accepted": 115,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_ac_unit_color",
+        "candidates": 20,
+        "accepted": 2,
+        "verifiedUvFraction": 0.828125
+      },
+      {
+        "material": "dust_arch_02_color",
+        "candidates": 93,
+        "accepted": 13,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_arch_03",
+        "candidates": 234,
+        "accepted": 72,
+        "verifiedUvFraction": 0.671875
+      },
+      {
+        "material": "dust_awning_fabric_01",
+        "candidates": 330,
+        "accepted": 17,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_awning_fabric_frame_01",
+        "candidates": 3,
+        "accepted": 0,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_awning_fabric_ripped_01",
+        "candidates": 9,
+        "accepted": 0,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_breeze_blocks_01",
+        "candidates": 585,
+        "accepted": 419,
+        "verifiedUvFraction": 0.9765625
+      },
+      {
+        "material": "dust_car_wreck_color",
+        "candidates": 76,
+        "accepted": 61,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_car_wreck_interior_color",
+        "candidates": 63,
+        "accepted": 41,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_chainlink_fence_cover_001",
+        "candidates": 859,
+        "accepted": 632,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_chainlink_fence_wire_001",
+        "candidates": 141,
+        "accepted": 141,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_detruis_sacks_color",
+        "candidates": 281,
+        "accepted": 214,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_46x106_01",
+        "candidates": 19,
+        "accepted": 9,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_46x106_02",
+        "candidates": 446,
+        "accepted": 152,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_46x106_04",
+        "candidates": 746,
+        "accepted": 243,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_46x106_05",
+        "candidates": 40,
+        "accepted": 25,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_46x106_07",
+        "candidates": 89,
+        "accepted": 9,
+        "verifiedUvFraction": 0.8359375
+      },
+      {
+        "material": "dust_door_80x128_01",
+        "candidates": 116,
+        "accepted": 83,
+        "verifiedUvFraction": 0.9921875
+      },
+      {
+        "material": "dust_door_80x128_02",
+        "candidates": 103,
+        "accepted": 63,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_80x128_03",
+        "candidates": 252,
+        "accepted": 149,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_80x128_04",
+        "candidates": 52,
+        "accepted": 10,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_80x128_04_frame",
+        "candidates": 198,
+        "accepted": 196,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_door_arch_01",
+        "candidates": 2634,
+        "accepted": 1892,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_doorframes_03",
+        "candidates": 130,
+        "accepted": 69,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_flatbed_truck_color",
+        "candidates": 45,
+        "accepted": 32,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_garbage_container_color",
+        "candidates": 107,
+        "accepted": 40,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_garbage_dumpster_color",
+        "candidates": 249,
+        "accepted": 175,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_hotel_arch001_color",
+        "candidates": 1562,
+        "accepted": 252,
+        "verifiedUvFraction": 0.40625
+      },
+      {
+        "material": "dust_kasbah_ceiling",
+        "candidates": 800,
+        "accepted": 73,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_kasbah_mudbrick_piles",
+        "candidates": 46,
+        "accepted": 19,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_kasbah_rooftrim_01",
+        "candidates": 21676,
+        "accepted": 1662,
+        "verifiedUvFraction": 0.5625
+      },
+      {
+        "material": "dust_kasbah_tarp_04",
+        "candidates": 335,
+        "accepted": 74,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_kasbah_window_insets_01",
+        "candidates": 1552,
+        "accepted": 15,
+        "verifiedUvFraction": 0.7734375
+      },
+      {
+        "material": "dust_kasbah_wood_forms",
+        "candidates": 115,
+        "accepted": 55,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_kasbah_wood_planks",
+        "candidates": 1574,
+        "accepted": 770,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_kasbah_wood_platform",
+        "candidates": 16,
+        "accepted": 1,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_metal_panels_01",
+        "candidates": 808,
+        "accepted": 51,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_metal_panels_rusty_01",
+        "candidates": 219,
+        "accepted": 16,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_metal_panels_rusty_alpha_01",
+        "candidates": 47,
+        "accepted": 39,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_mudbrick_bombsite_gap",
+        "candidates": 105,
+        "accepted": 45,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_mudbrick_crumbling_wall",
+        "candidates": 199,
+        "accepted": 104,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_mudbrick_transition",
+        "candidates": 255,
+        "accepted": 240,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_r5_color",
+        "candidates": 22,
+        "accepted": 4,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_restaurant_sign_02_color",
+        "candidates": 35,
+        "accepted": 3,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_rollupdoor_frame_01",
+        "candidates": 78,
+        "accepted": 15,
+        "verifiedUvFraction": 0.8828125
+      },
+      {
+        "material": "dust_rooftop_01_color",
+        "candidates": 330,
+        "accepted": 114,
+        "verifiedUvFraction": 0.9921875
+      },
+      {
+        "material": "dust_shipping_crate_tarp_01",
+        "candidates": 38,
+        "accepted": 17,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_shipping_crate_tarp_02",
+        "candidates": 39,
+        "accepted": 8,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_shop_sign_02_color",
+        "candidates": 54,
+        "accepted": 44,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_trim_decoractive_01",
+        "candidates": 913,
+        "accepted": 98,
+        "verifiedUvFraction": 0.5390625
+      },
+      {
+        "material": "dust_vehicle_glass_opaque_color",
+        "candidates": 203,
+        "accepted": 201,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_weeds_01",
+        "candidates": 8,
+        "accepted": 0,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_window_bars_metal_01b_alpha",
+        "candidates": 828,
+        "accepted": 0,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_window_frame_plaster_01",
+        "candidates": 60,
+        "accepted": 53,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "dust_windows_01",
+        "candidates": 760,
+        "accepted": 180,
+        "verifiedUvFraction": 0.8046875
+      },
+      {
+        "material": "hr_dust_blend_asphalt_06",
+        "candidates": 2420,
+        "accepted": 1930,
+        "verifiedUvFraction": 0.8828125
+      },
+      {
+        "material": "hr_dust_blend_asphalt_07",
+        "candidates": 955,
+        "accepted": 942,
+        "verifiedUvFraction": 0.953125
+      },
+      {
+        "material": "hr_dust_blend_floortile_01",
+        "candidates": 1780,
+        "accepted": 1702,
+        "verifiedUvFraction": 0.9375
+      },
+      {
+        "material": "hr_dust_blend_floortile_03",
+        "candidates": 1730,
+        "accepted": 1511,
+        "verifiedUvFraction": 0.984375
+      },
+      {
+        "material": "hr_dust_blend_groundrough01-groundrough02",
+        "candidates": 628,
+        "accepted": 563,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_blend_groundrough01-groundsmooth01",
+        "candidates": 1694,
+        "accepted": 1573,
+        "verifiedUvFraction": 0.9921875
+      },
+      {
+        "material": "hr_dust_blend_groundrough01-groundsweeds01",
+        "candidates": 320,
+        "accepted": 320,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_blend_groundrough02-groundsmooth01",
+        "candidates": 512,
+        "accepted": 510,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_blend_groundstone01-groundrough01",
+        "candidates": 230,
+        "accepted": 89,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_blend_groundstone01-groundsmooth01",
+        "candidates": 1018,
+        "accepted": 904,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_blend_plaster01_rough01",
+        "candidates": 4631,
+        "accepted": 4228,
+        "verifiedUvFraction": 0.859375
+      },
+      {
+        "material": "hr_dust_blend_plaster01_rough01_bounce",
+        "candidates": 179,
+        "accepted": 178,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_blend_plaster01b_rough01",
+        "candidates": 2140,
+        "accepted": 1805,
+        "verifiedUvFraction": 0.8828125
+      },
+      {
+        "material": "hr_dust_blend_plaster01b_rough01_bounce",
+        "candidates": 308,
+        "accepted": 306,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_blend_plaster_white_01b2",
+        "candidates": 3990,
+        "accepted": 3639,
+        "verifiedUvFraction": 0.9609375
+      },
+      {
+        "material": "hr_dust_blend_plaster_white_01c",
+        "candidates": 4539,
+        "accepted": 3402,
+        "verifiedUvFraction": 0.828125
+      },
+      {
+        "material": "hr_dust_blend_plaster_white_02",
+        "candidates": 4599,
+        "accepted": 3764,
+        "verifiedUvFraction": 0.78125
+      },
+      {
+        "material": "hr_dust_blend_rollupdoor_metal_01",
+        "candidates": 256,
+        "accepted": 224,
+        "verifiedUvFraction": 0.875
+      },
+      {
+        "material": "hr_dust_blend_rollupdoor_metal_02",
+        "candidates": 224,
+        "accepted": 224,
+        "verifiedUvFraction": 0.8671875
+      },
+      {
+        "material": "hr_dust_blend_rollupdoor_metal_03",
+        "candidates": 302,
+        "accepted": 295,
+        "verifiedUvFraction": 0.59375
+      },
+      {
+        "material": "hr_dust_blend_sand02_sand03",
+        "candidates": 266,
+        "accepted": 266,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_brick_ground_02",
+        "candidates": 2678,
+        "accepted": 2600,
+        "verifiedUvFraction": 0.984375
+      },
+      {
+        "material": "hr_dust_brick_ground_04",
+        "candidates": 334,
+        "accepted": 275,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_building_ornament_color",
+        "candidates": 280,
+        "accepted": 97,
+        "verifiedUvFraction": 0.359375
+      },
+      {
+        "material": "hr_dust_concrete_02",
+        "candidates": 250,
+        "accepted": 181,
+        "verifiedUvFraction": 0.5859375
+      },
+      {
+        "material": "hr_dust_concrete_04",
+        "candidates": 395,
+        "accepted": 279,
+        "verifiedUvFraction": 0.8828125
+      },
+      {
+        "material": "hr_dust_kasbah_arch002_color",
+        "candidates": 3301,
+        "accepted": 1968,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_kasbah_arch003_color",
+        "candidates": 1322,
+        "accepted": 612,
+        "verifiedUvFraction": 0.8984375
+      },
+      {
+        "material": "hr_dust_kasbah_column001_color",
+        "candidates": 1709,
+        "accepted": 846,
+        "verifiedUvFraction": 0.8515625
+      },
+      {
+        "material": "hr_dust_kasbah_merlon003_color",
+        "candidates": 203,
+        "accepted": 72,
+        "verifiedUvFraction": 0.703125
+      },
+      {
+        "material": "hr_dust_kasbah_niche001_color",
+        "candidates": 183,
+        "accepted": 31,
+        "verifiedUvFraction": 0.859375
+      },
+      {
+        "material": "hr_dust_kasbah_stairs002_color",
+        "candidates": 207,
+        "accepted": 86,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_metal_trim_01",
+        "candidates": 267,
+        "accepted": 36,
+        "verifiedUvFraction": 0.3359375
+      },
+      {
+        "material": "hr_dust_mudbrick_wall_plaster_smooth_01",
+        "candidates": 158,
+        "accepted": 158,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_plaster_06",
+        "candidates": 5513,
+        "accepted": 5092,
+        "verifiedUvFraction": 0.9296875
+      },
+      {
+        "material": "hr_dust_plaster_06b",
+        "candidates": 2011,
+        "accepted": 1873,
+        "verifiedUvFraction": 0.9765625
+      },
+      {
+        "material": "hr_dust_plaster_06c",
+        "candidates": 6388,
+        "accepted": 4832,
+        "verifiedUvFraction": 0.7890625
+      },
+      {
+        "material": "hr_dust_plaster_09",
+        "candidates": 2557,
+        "accepted": 1769,
+        "verifiedUvFraction": 0.78125
+      },
+      {
+        "material": "hr_dust_plaster_09b",
+        "candidates": 744,
+        "accepted": 696,
+        "verifiedUvFraction": 0.9375
+      },
+      {
+        "material": "hr_dust_plaster_09c",
+        "candidates": 641,
+        "accepted": 90,
+        "verifiedUvFraction": 0.359375
+      },
+      {
+        "material": "hr_dust_plaster_11b",
+        "candidates": 1568,
+        "accepted": 1500,
+        "verifiedUvFraction": 0.9765625
+      },
+      {
+        "material": "hr_dust_plaster_13b",
+        "candidates": 430,
+        "accepted": 390,
+        "verifiedUvFraction": 0.734375
+      },
+      {
+        "material": "hr_dust_plaster_15",
+        "candidates": 1060,
+        "accepted": 423,
+        "verifiedUvFraction": 0.6796875
+      },
+      {
+        "material": "hr_dust_plaster_15b2",
+        "candidates": 128,
+        "accepted": 128,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_plaster_15b",
+        "candidates": 677,
+        "accepted": 529,
+        "verifiedUvFraction": 0.578125
+      },
+      {
+        "material": "hr_dust_plaster_15c",
+        "candidates": 1241,
+        "accepted": 839,
+        "verifiedUvFraction": 0.609375
+      },
+      {
+        "material": "hr_dust_plaster_17",
+        "candidates": 1201,
+        "accepted": 835,
+        "verifiedUvFraction": 0.8046875
+      },
+      {
+        "material": "hr_dust_plaster_17b",
+        "candidates": 903,
+        "accepted": 729,
+        "verifiedUvFraction": 0.75
+      },
+      {
+        "material": "hr_dust_plaster_17c",
+        "candidates": 1435,
+        "accepted": 951,
+        "verifiedUvFraction": 0.84375
+      },
+      {
+        "material": "hr_dust_plaster_18",
+        "candidates": 3408,
+        "accepted": 3131,
+        "verifiedUvFraction": 0.9765625
+      },
+      {
+        "material": "hr_dust_plaster_18_bounce",
+        "candidates": 877,
+        "accepted": 796,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_plaster_18b",
+        "candidates": 2725,
+        "accepted": 2557,
+        "verifiedUvFraction": 0.9296875
+      },
+      {
+        "material": "hr_dust_plaster_18b_bounce",
+        "candidates": 1015,
+        "accepted": 1002,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_plaster_18c",
+        "candidates": 3861,
+        "accepted": 2814,
+        "verifiedUvFraction": 0.875
+      },
+      {
+        "material": "hr_dust_plaster_18c_bounce",
+        "candidates": 795,
+        "accepted": 792,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_plaster_19",
+        "candidates": 464,
+        "accepted": 422,
+        "verifiedUvFraction": 0.921875
+      },
+      {
+        "material": "hr_dust_plaster_19_bounce",
+        "candidates": 1231,
+        "accepted": 1114,
+        "verifiedUvFraction": 0.8203125
+      },
+      {
+        "material": "hr_dust_plaster_19b",
+        "candidates": 452,
+        "accepted": 439,
+        "verifiedUvFraction": 0.9375
+      },
+      {
+        "material": "hr_dust_plaster_19b_bounce",
+        "candidates": 65,
+        "accepted": 65,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_plaster_20b",
+        "candidates": 1129,
+        "accepted": 1010,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_plaster_20c",
+        "candidates": 185,
+        "accepted": 163,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_roof_trim001_color",
+        "candidates": 606,
+        "accepted": 0,
+        "verifiedUvFraction": 0.6484375
+      },
+      {
+        "material": "hr_dust_sand_02",
+        "candidates": 752,
+        "accepted": 606,
+        "verifiedUvFraction": 0.8984375
+      },
+      {
+        "material": "hr_dust_stairs003_color",
+        "candidates": 66,
+        "accepted": 0,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_stone_ground_01",
+        "candidates": 637,
+        "accepted": 484,
+        "verifiedUvFraction": 0.9921875
+      },
+      {
+        "material": "hr_dust_tile_01",
+        "candidates": 175,
+        "accepted": 174,
+        "verifiedUvFraction": 0.9609375
+      },
+      {
+        "material": "hr_dust_tile_02",
+        "candidates": 208,
+        "accepted": 208,
+        "verifiedUvFraction": 0.96875
+      },
+      {
+        "material": "hr_dust_tile_03",
+        "candidates": 612,
+        "accepted": 611,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "hr_dust_wall_trim001_color",
+        "candidates": 1763,
+        "accepted": 579,
+        "verifiedUvFraction": 0.8125
+      },
+      {
+        "material": "nuke_concrete_barrier_color",
+        "candidates": 305,
+        "accepted": 35,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "olive_branch_01",
+        "candidates": 606,
+        "accepted": 0,
+        "verifiedUvFraction": 0.984375
+      },
+      {
+        "material": "palm_bark_01",
+        "candidates": 111,
+        "accepted": 4,
+        "verifiedUvFraction": 0.765625
+      },
+      {
+        "material": "palm_frond_01",
+        "candidates": 3641,
+        "accepted": 1620,
+        "verifiedUvFraction": 0.8125
+      },
+      {
+        "material": "power_pole_02_color",
+        "candidates": 8,
+        "accepted": 0,
+        "verifiedUvFraction": 0.734375
+      },
+      {
+        "material": "power_pole_color",
+        "candidates": 476,
+        "accepted": 92,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "sagebrush_01",
+        "candidates": 54,
+        "accepted": 0,
+        "verifiedUvFraction": 0.9375
+      },
+      {
+        "material": "sign006_color",
+        "candidates": 16,
+        "accepted": 16,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "sign_bracket001_color",
+        "candidates": 56,
+        "accepted": 33,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "sign_directional001_color",
+        "candidates": 499,
+        "accepted": 363,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "sign_streets001_color",
+        "candidates": 624,
+        "accepted": 111,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "weeds_cressa_01",
+        "candidates": 12,
+        "accepted": 0,
+        "verifiedUvFraction": 1.0
+      },
+      {
+        "material": "zebra_grass_01",
+        "candidates": 211,
+        "accepted": 0,
+        "verifiedUvFraction": 1.0
+      }
+    ],
+    "equivalentBakeAtlasHashes": {
+      "irradiance.webp": "5008ef09433c8002809841782467c1a3e4a662e71eb9203d6db31b64c438f147",
+      "shadows.webp": "06fd286be2d47be3a652f7920db905366166b50eee2e0e481aca489e103072d4"
+    },
+    "equivalentBakeTolerance": "At most one RGB8 square-root irradiance or sun encoding step, bilinear samples over a 3x3 grid spanning 2cm"
+  }
+}

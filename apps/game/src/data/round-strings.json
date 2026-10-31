@@ -1,0 +1,50 @@
+{
+  "source": {
+    "file": "resource/csgo_english.txt",
+    "build": "26144732",
+    "sha256": "0d87903259b8fcc17a16b899424df8c25c5db348f9d54d5a0d343e7f34bc6ac5"
+  },
+  "strings": {
+    "winpanel_mvp_award_kills": "MVP: %s1 for most eliminations",
+    "winpanel_mvp_award_ace": "MVP: %s1 for an ACE round",
+    "winpanel_mvp_award_bombplant": "MVP: %s1 for planting the bomb",
+    "winpanel_mvp_award_bombdefuse": "MVP: %s1 for defusing the bomb",
+    "funfact_short_round:f": {
+      "one": "That round took only {d1} second!",
+      "other": "That round took only {d1} seconds!"
+    },
+    "funfact_ace:f": "Ace!  {player} killed the entire enemy team.",
+    "funfact_killed_enemies:f": {
+      "one": "{player} killed {d1} opponent.",
+      "other": "{player} killed {d1} opponents."
+    },
+    "funfact_kills_headshots:f": {
+      "one": "{player} killed {d1} enemy with headshots that round.",
+      "other": "{player} killed {d1} enemies with headshots that round."
+    },
+    "funfact_knife_kills:f": {
+      "one": "{player} killed an enemy with the knife.",
+      "other": "{player} had {d1} knife kills this round."
+    },
+    "funfact_kills_grenades:f": {
+      "one": "{player} killed {d1} enemy with grenades.",
+      "other": "{player} killed {d1} enemies with grenades."
+    },
+    "funfact_first_kill:f": {
+      "one": "{d1} second into the round, {player} got the first kill.",
+      "other": "{d1} seconds into the round, {player} got the first kill."
+    },
+    "funfact_ct_win_no_kills:f": "Counter-Terrorists won without killing any Terrorists.",
+    "funfact_t_win_no_kills:f": "Terrorists won without killing any Counter-Terrorists.",
+    "funfact_t_win_no_casualties:f": "Terrorists won without taking any casualties.",
+    "funfact_ct_win_no_casualties:f": "Counter-Terrorists won without taking any casualties.",
+    "funfact_ct_win_time:f": {
+      "one": "The CT team eliminated the T team in {d1} second.",
+      "other": "The CT team eliminated the T team in {d1} seconds."
+    },
+    "funfact_ter_win_time:f": {
+      "one": "The Terrorist team eliminated the CT team in {d1} second.",
+      "other": "The Terrorist team eliminated the CT team in {d1} seconds."
+    }
+  }
+}

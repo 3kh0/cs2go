@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+test-results
+playwright-report
+artifacts
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vercel
+.env*
+
+# Original map inputs and offline Python caches
+new_map/
+__pycache__/
+
+# Playwright MCP inspection captures
+.playwright-mcp/
+
+# Offline Source 2 NAV decoder build output
+scripts/cs2-mapdata/bin/
+scripts/cs2-mapdata/obj/
+.vitest/
+
+# Monorepo task cache and generated asset compression
+.turbo
+packages/assets/.cache

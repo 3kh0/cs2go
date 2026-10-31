@@ -1,0 +1,156 @@
+{
+  "hover": {
+    "clip": "hover",
+    "gain": 0.1,
+    "pitch": 1.4,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "main-hover": {
+    "clip": "ui-main-hover",
+    "gain": 0.1,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "select": {
+    "clip": "click",
+    "gain": 0.3,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "radio": {
+    "clip": "ui-radio",
+    "gain": 0.2,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "confirm": {
+    "clip": "ui-confirm",
+    "gain": 0.3,
+    "pitch": 1.2,
+    "blockSeconds": 0.1,
+    "children": ["inspect-close"]
+  },
+  "back": {
+    "clip": "click",
+    "gain": 0.3,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "inspect-close": {
+    "clip": "ui-inspect-close",
+    "gain": 0.15,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "change": {
+    "clip": "ui-change",
+    "gain": 0.4,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "home": {
+    "clip": "ui-home",
+    "gain": 0.2,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "quit": {
+    "clip": "ui-quit",
+    "gain": 0.2,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "inventory": {
+    "clip": "ui-inventory",
+    "gain": 0.2,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "loadout": {
+    "clip": "ui-loadout",
+    "gain": 0.2,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "play": {
+    "clip": "ui-play",
+    "gain": 0.3,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "store": {
+    "clip": "ui-store",
+    "gain": 0.25,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "news": {
+    "clip": "ui-news",
+    "gain": 0.25,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "settings-layer": {
+    "clip": "ui-settings-layer",
+    "gain": 0.1,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "settings": {
+    "clip": "ui-settings",
+    "gain": 0.2,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": ["settings-layer"]
+  },
+  "watch": {
+    "clip": "ui-watch",
+    "gain": 0.35,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "go": {
+    "clip": "ui-go",
+    "gain": 0.3,
+    "pitch": 1.0,
+    "blockSeconds": 2.0,
+    "children": []
+  },
+  "buy": {
+    "clip": "buy",
+    "gain": 0.3,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "buy-select": {
+    "clip": "ui-buy-select",
+    "gain": 0.5,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  },
+  "buy-hover": {
+    "clip": "ui-buy-hover",
+    "gain": 0.3,
+    "pitch": 1.0,
+    "blockSeconds": 0.01,
+    "children": []
+  }
+}

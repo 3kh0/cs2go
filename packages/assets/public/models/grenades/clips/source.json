@@ -1,0 +1,637 @@
+{
+  "author": "Valve",
+  "depot": 2347770,
+  "manifest": "4758919807587010422",
+  "generator": "scripts/import-grenade-clips.py",
+  "inputs": [
+    {
+      "kind": "he",
+      "action": "idle",
+      "resource": "animation/anims/viewmodel/grenade/grenade_hegrenade/idle_hegrenade.vnmclip_c",
+      "sha256": "6e400dffe8684ad617f24ae9159b00a42e522a1fe4711f46e5fa815239db4462",
+      "runtimeSha256": "21cefd2f95ecc38fd6082b4ec4fbd00ae6940fee4a1fc1410e897627a3bac2cd",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "he",
+      "action": "draw",
+      "resource": "animation/anims/viewmodel/grenade/grenade_hegrenade/draw_hegrenade.vnmclip_c",
+      "sha256": "f804eeafe080d71a60c4352d588343585715a806ab49fe7b4c8dec50cbd8eb3a",
+      "runtimeSha256": "5588c81f351372fb9e29a740edfaef6a86bc360c1d1b8ec56bc2f4970fd13e09",
+      "duration": 1.0,
+      "events": [
+        {
+          "name": "Draw.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "HEGrenade.Draw",
+          "time": 0.066667
+        }
+      ]
+    },
+    {
+      "kind": "he",
+      "action": "pullpin",
+      "resource": "animation/anims/viewmodel/grenade/grenade_hegrenade/pullpin_hegrenade.vnmclip_c",
+      "sha256": "13e7afaf100f77d82818764eaa7d663eba509bfd30aaa3d406110430d4d6f988",
+      "runtimeSha256": "299f9521878899a47c8504b9f04b6cf043ee98f19c2adb7b23ced8bdc3161e38",
+      "duration": 0.9667,
+      "events": [
+        {
+          "name": "HEGrenade.PullPin",
+          "time": 0.0
+        }
+      ]
+    },
+    {
+      "kind": "he",
+      "action": "throw_overhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_hegrenade/throw_overhand_hegrenade.vnmclip_c",
+      "sha256": "54ba3567ecb2fc2a9038916c687e1f92d58fbefbe45759b9201c153de04e05d5",
+      "runtimeSha256": "c1c664dbd97f0fb514ee031f32d234c631666789897ee4b11be1e364c606c014",
+      "duration": 0.7667,
+      "events": [
+        {
+          "name": "Grenade.PreThrow.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "HEGrenade.Throw",
+          "time": 0.0666699319
+        }
+      ]
+    },
+    {
+      "kind": "he",
+      "action": "throw_underhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_hegrenade/throw_underhand_hegrenade.vnmclip_c",
+      "sha256": "252633e778f294621bd70a04cbca2038cc9c6e77db96cfd49b31201706ef321d",
+      "runtimeSha256": "78d9efba85ab376e47a06f7b7ac94b1a7ecde9382af6738419923afc13c27c9d",
+      "duration": 0.5,
+      "events": [
+        {
+          "name": "Grenade.ThrowUnder.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "HEGrenade.Throw",
+          "time": 0.1333335
+        }
+      ]
+    },
+    {
+      "kind": "he",
+      "action": "throwcharge_high",
+      "resource": "animation/anims/viewmodel/grenade/grenade_hegrenade/throwcharge_high_hegrenade.vnmclip_c",
+      "sha256": "79f933a5df1983758d2783ed81b36808987eef00b9afeec90924bea94dd134a0",
+      "runtimeSha256": "2a98170259fa76edfc74f8c7f791aaf13b5ccb8a1ae999cc5fb9c3697de7355a",
+      "duration": 0.0,
+      "events": []
+    },
+    {
+      "kind": "he",
+      "action": "throwcharge_mid",
+      "resource": "animation/anims/viewmodel/grenade/grenade_hegrenade/throwcharge_mid_hegrenade.vnmclip_c",
+      "sha256": "2800fdb85551bf11697b97271b4d1cf7939774845959da6dea7f4a214da9b059",
+      "runtimeSha256": "2a4e49872524446c76adafa5d4b7f83ddd009acdf6a0b27cbf4c1fc117196ff2",
+      "duration": 0.0,
+      "events": []
+    },
+    {
+      "kind": "he",
+      "action": "throwcharge_low",
+      "resource": "animation/anims/viewmodel/grenade/grenade_hegrenade/throwcharge_low_hegrenade.vnmclip_c",
+      "sha256": "fc59b6019709529f0a560ba1c959acb20fc52f3409336be5b57ae5d119c859ee",
+      "runtimeSha256": "4cc7d1c9a7f8d8d3301498e72ae296d106eb8676ba034512eb348a2b17e4b5df",
+      "duration": 0.0,
+      "events": []
+    },
+    {
+      "kind": "flash",
+      "action": "idle",
+      "resource": "animation/anims/viewmodel/grenade/grenade_flashbang/idle_flashbang.vnmclip_c",
+      "sha256": "f8e6f18e1d2892daef8b0c8ad082237d87d4c22f942c764b29ef9094b173a4e8",
+      "runtimeSha256": "407f7f61f7274180f5571e44ecf1f30c3d304066598921efd58c03fbd566ac1d",
+      "duration": 0.3333,
+      "events": []
+    },
+    {
+      "kind": "flash",
+      "action": "draw",
+      "resource": "animation/anims/viewmodel/grenade/grenade_flashbang/draw_flashbang.vnmclip_c",
+      "sha256": "506b944358daba086c1bba864885c8dc4a88f5b851286cc4914b71e6f573effd",
+      "runtimeSha256": "138cbe1045fc0b6730032fb51867c04976777b27c6d301fbd4dff8eb54b0e968",
+      "duration": 1.0,
+      "events": [
+        {
+          "name": "Draw.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Flashbang.Draw",
+          "time": 0.066667
+        }
+      ]
+    },
+    {
+      "kind": "flash",
+      "action": "pullpin",
+      "resource": "animation/anims/viewmodel/grenade/grenade_flashbang/pullpin_flashbang.vnmclip_c",
+      "sha256": "3f3013190ec9c0ae6093544cac816728713eb7d09257db2a12237efe69f713f1",
+      "runtimeSha256": "429ddcbfb6365a0a5a9e8ba36575be4742759a92b7e637e1d54e8c198f930212",
+      "duration": 0.9667,
+      "events": [
+        {
+          "name": "Flashbang.PullPin",
+          "time": 0.0
+        }
+      ]
+    },
+    {
+      "kind": "flash",
+      "action": "throw_overhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_flashbang/throw_overhand_flashbang.vnmclip_c",
+      "sha256": "83853ed640fb4d45676774d3bc65ca92df6c3fc1c1801f5d16b9764ee5bcbaa9",
+      "runtimeSha256": "48cae2330e4af4c006d258e6346ee1117a125970487de18d46f7ff0f32f5bf02",
+      "duration": 0.7667,
+      "events": [
+        {
+          "name": "Grenade.PreThrow.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Flashbang.Throw",
+          "time": 0.0666699319
+        }
+      ]
+    },
+    {
+      "kind": "flash",
+      "action": "throw_underhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_flashbang/throw_underhand_flashbang.vnmclip_c",
+      "sha256": "57e6e572327d88a156d63340e231b69a41bc90477027bcc932d221142b493996",
+      "runtimeSha256": "5e698788b30317d24838b79dab93c01e6af308eba761ac9553723bdebabeff33",
+      "duration": 0.5,
+      "events": [
+        {
+          "name": "Grenade.ThrowUnder.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Flashbang.Throw",
+          "time": 0.1333335
+        }
+      ]
+    },
+    {
+      "kind": "flash",
+      "action": "throwcharge_high",
+      "resource": "animation/anims/viewmodel/grenade/grenade_flashbang/throwcharge_high_flashbang.vnmclip_c",
+      "sha256": "f85120acca252b0d30bdb6f652c9731ba7f90ec3e00073bee8c96017634608a3",
+      "runtimeSha256": "48e8ec578cf5daf7dd9355c8f056199b8b89d750cb2cb570e1a2292e13e722f0",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "flash",
+      "action": "throwcharge_mid",
+      "resource": "animation/anims/viewmodel/grenade/grenade_flashbang/throwcharge_mid_flashbang.vnmclip_c",
+      "sha256": "998b35d79fcc56ec487a3cf0446db82e0deb455f6f00f5775f32c694490ccfa4",
+      "runtimeSha256": "a26165b2921f810ec0ce6aa87cb3cf4973057f354e1f0cda6f25af8e124861a2",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "flash",
+      "action": "throwcharge_low",
+      "resource": "animation/anims/viewmodel/grenade/grenade_flashbang/throwcharge_low_flashbang.vnmclip_c",
+      "sha256": "133ccd03b9c4c33097d8d7c41ce6fd31a3c2a6f564c36f184b1d289eb6ca4579",
+      "runtimeSha256": "2d21235aa43ffeeb21470b9d199687f525a8d7c91bd3cd347f3e028be6826f65",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "smoke",
+      "action": "idle",
+      "resource": "animation/anims/viewmodel/grenade/grenade_smokegrenade/idle_smoke.vnmclip_c",
+      "sha256": "0f6df5a7f680e0188418580b0d7ffcdfbb073c5562b4b15ca92ff47659790ddf",
+      "runtimeSha256": "4499af8ae400b01d6bbfa57669b8e2ebf422ccb1ead247dfa449f91340c347d6",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "smoke",
+      "action": "draw",
+      "resource": "animation/anims/viewmodel/grenade/grenade_smokegrenade/draw_smoke.vnmclip_c",
+      "sha256": "07aa405789ff7b2c9d63c5de2eae977d5e43594bb99f45ee036672bc3a37425b",
+      "runtimeSha256": "7430a423d6887b7b979f6924d30cb8c71b2b9894e3808885fd5ad93f4ccd2bb8",
+      "duration": 1.0,
+      "events": [
+        {
+          "name": "SmokeGrenade.Draw",
+          "time": 0.1
+        }
+      ]
+    },
+    {
+      "kind": "smoke",
+      "action": "pullpin",
+      "resource": "animation/anims/viewmodel/grenade/grenade_smokegrenade/pullpin_smoke.vnmclip_c",
+      "sha256": "fe4d9f8cb4c9facbefebcff6efcf82547bba045b3011ea09bf7054b07d2513a7",
+      "runtimeSha256": "0540ec8a968b166c9ebea5e3474206af12ea7ecb094556e721d17a4709812b22",
+      "duration": 0.9667,
+      "events": [
+        {
+          "name": "SmokeGrenade.PullPin",
+          "time": 0.0
+        }
+      ]
+    },
+    {
+      "kind": "smoke",
+      "action": "throw_overhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_smokegrenade/throw_overhand_smoke.vnmclip_c",
+      "sha256": "054b510e6f2275369d14f941889dfbcdf96be0967d6036c071fae36c60faa299",
+      "runtimeSha256": "a7292ad2eb4c39c9eba4e7f6d286256021e5f9485c05cc0d87bd206e6f3d1ab1",
+      "duration": 0.7667,
+      "events": [
+        {
+          "name": "Grenade.PreThrow.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "SmokeGrenade.Throw",
+          "time": 0.0666699319
+        }
+      ]
+    },
+    {
+      "kind": "smoke",
+      "action": "throw_underhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_smokegrenade/throw_underhand_smoke.vnmclip_c",
+      "sha256": "086092f0f7f3660ab21c4ff7252d5e5fca0e704d8df110bb631d7096dfd9d966",
+      "runtimeSha256": "117862533b6e1d2372667da0e46bd926a3e60070e57f325eedcc7eafe41abc72",
+      "duration": 0.5,
+      "events": [
+        {
+          "name": "Grenade.ThrowUnder.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "SmokeGrenade.Throw",
+          "time": 0.0
+        }
+      ]
+    },
+    {
+      "kind": "smoke",
+      "action": "throwcharge_high",
+      "resource": "animation/anims/viewmodel/grenade/grenade_smokegrenade/throwcharge_high_smoke.vnmclip_c",
+      "sha256": "5bee5a88693c9c7fcad0e614d090c516cfef65563bd785b739cf2dbdda1750e1",
+      "runtimeSha256": "a8acf695961fb0a943c8513e8855370af59b70b7f2359d85354fa49e47bbe794",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "smoke",
+      "action": "throwcharge_mid",
+      "resource": "animation/anims/viewmodel/grenade/grenade_smokegrenade/throwcharge_mid_smoke.vnmclip_c",
+      "sha256": "21508b09abbf58b7b46db13ac5d307dd4cd56653f710e842c5e65ec2a04601be",
+      "runtimeSha256": "313de0121e8b43c8cc6b733166ab767dfaaf08b335089114333bb66706ecd74d",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "smoke",
+      "action": "throwcharge_low",
+      "resource": "animation/anims/viewmodel/grenade/grenade_smokegrenade/throwcharge_low_smoke.vnmclip_c",
+      "sha256": "556b3602cfc179960478772e3d95e068ee6c7db9243b3bfa34cd6e40524d246c",
+      "runtimeSha256": "88758df26fa8a4629e3a954677311deecc3fc7d85cc96aba15654d69c2ac6848",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "molotov",
+      "action": "idle",
+      "resource": "animation/anims/viewmodel/grenade/grenade_molotov/idle_molotov.vnmclip_c",
+      "sha256": "1748e004deb9aa5bbefd4d8a69098f4b8a7e6958a5d1360c6020ff9591779b0b",
+      "runtimeSha256": "b32697c39931a4dd315e4d923ec28208ec2028c88f3fd7e5fe7caad2ac679603",
+      "duration": 0.0,
+      "events": []
+    },
+    {
+      "kind": "molotov",
+      "action": "draw",
+      "resource": "animation/anims/viewmodel/grenade/grenade_molotov/draw_molotov.vnmclip_c",
+      "sha256": "51bc13d5a7188789de6c955149b6ea49fabb0e29b92bf3a8eff1572914b17874",
+      "runtimeSha256": "17c5ab537776cc6f420906521d2a741c11777714a1524aa29e5cda12b930a2b3",
+      "duration": 1.0,
+      "events": [
+        {
+          "name": "Draw.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Molotov.Draw",
+          "time": 0.066667
+        }
+      ]
+    },
+    {
+      "kind": "molotov",
+      "action": "pullpin",
+      "resource": "animation/anims/viewmodel/grenade/grenade_molotov/pullpin_molotov.vnmclip_c",
+      "sha256": "ea9ab9b4fe4897a3053acb386eafdf64466ca54bc194132d79faff84e1858153",
+      "runtimeSha256": "84b3ec7515f76a6d422c0a034c40b3b55ed97a3232a888ce4e88530b1b23d7ad",
+      "duration": 1.1333,
+      "events": [
+        {
+          "name": "Molotov.IdleLoop",
+          "time": 0.1127622167
+        }
+      ]
+    },
+    {
+      "kind": "molotov",
+      "action": "throw_overhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_molotov/throw_overhand_molotov.vnmclip_c",
+      "sha256": "1c2f73d5fccf6270cbcfbc0bc538f1b74738fbeb06007b665967c18be8e85026",
+      "runtimeSha256": "752b31bdd558323227bb1b432e003d9062cca5d1730825dcfc0d31cdc6a18669",
+      "duration": 0.7667,
+      "events": [
+        {
+          "name": "Grenade.PreThrow.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Molotov.Throw",
+          "time": 0.0333345826
+        }
+      ]
+    },
+    {
+      "kind": "molotov",
+      "action": "throw_underhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_molotov/throw_underhand_molotov.vnmclip_c",
+      "sha256": "de398aaae38fa7660b013acfe23bd84457bdfcb8054d0ce79dd1cf62bac45215",
+      "runtimeSha256": "11659a8673acb59d60f817574d3ad28e86c01f06a424897bbe3f74e68d83d475",
+      "duration": 0.5,
+      "events": [
+        {
+          "name": "Grenade.ThrowUnder.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Molotov.Throw",
+          "time": 0.0
+        }
+      ]
+    },
+    {
+      "kind": "molotov",
+      "action": "throwcharge_high",
+      "resource": "animation/anims/viewmodel/grenade/grenade_molotov/throwcharge_high_molotov.vnmclip_c",
+      "sha256": "b8ab8cda5f61b3c62628e721ca4ab356adc0a00912a7ee8e5edbe75001e59244",
+      "runtimeSha256": "a366d4517c536856a547417d485f658b32d7544c79f82e0942ce196d300111ab",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "molotov",
+      "action": "throwcharge_mid",
+      "resource": "animation/anims/viewmodel/grenade/grenade_molotov/throwcharge_mid_molotov.vnmclip_c",
+      "sha256": "f748efe403e4b117573cfdc4fc183d70ce160d641b70f24a3de4194e2c2cc3c9",
+      "runtimeSha256": "ff0bbc450cbb035cf8194f7114425012a337bf53519dfa479f760c8471609013",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "molotov",
+      "action": "throwcharge_low",
+      "resource": "animation/anims/viewmodel/grenade/grenade_molotov/throwcharge_low_molotov.vnmclip_c",
+      "sha256": "b4484f427a90aa14b314e4a2374aa85920e331324e4327dc1f67f2c1a6706ea6",
+      "runtimeSha256": "f1191efeb3ed16231e28e321fbf63870d2753e296abb1cea4cfff8f398cf4806",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "incendiary",
+      "action": "idle",
+      "resource": "animation/anims/viewmodel/grenade/grenade_incendiary/idle_incendiary.vnmclip_c",
+      "sha256": "27d0c24a368a9e4333aa4f6038b4189929c0ecb6f4b36f129807876d05c7e63b",
+      "runtimeSha256": "80bbdd74879280d4ee1860947bc5b812ae11a7ece19232cf8602a5e00d53f2d4",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "incendiary",
+      "action": "draw",
+      "resource": "animation/anims/viewmodel/grenade/grenade_incendiary/draw_incendiary.vnmclip_c",
+      "sha256": "ea6bec529e36969376d61ca090ba9a5dc35630e5fb92e784eb076983674d83ce",
+      "runtimeSha256": "340e0c7d0329f7ff2643fbf7e7a79d00556db9cef5ddf84735df313ccc275e50",
+      "duration": 1.0,
+      "events": [
+        {
+          "name": "Draw.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "IncGrenade.Draw",
+          "time": 0.066667
+        },
+        {
+          "name": "IncGrenade.Draw.Ring",
+          "time": 0.233333
+        }
+      ]
+    },
+    {
+      "kind": "incendiary",
+      "action": "pullpin",
+      "resource": "animation/anims/viewmodel/grenade/grenade_incendiary/pullpin_incendiary.vnmclip_c",
+      "sha256": "75ed544bf353ff939cc935b80a05836a58da166ef430cbc3c3a79290ee63e84c",
+      "runtimeSha256": "45a5f8882a8e22cecc26d8ae6f1430bdbde865700a3a478171dc3dce944faa0e",
+      "duration": 0.9667,
+      "events": [
+        {
+          "name": "IncGrenade.PullPin",
+          "time": 0.0
+        }
+      ]
+    },
+    {
+      "kind": "incendiary",
+      "action": "throw_overhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_incendiary/throw_overhand_incendiary.vnmclip_c",
+      "sha256": "6944333bfa93cd25d17998cbc318a6bfc2344f0e8e9c25c490d8b70031568d4a",
+      "runtimeSha256": "a11f588705662bd9351ae70ba6a9f39e44a7b3e9db3c2bd6e5f30b29cea9f46d",
+      "duration": 0.7667,
+      "events": [
+        {
+          "name": "Grenade.PreThrow.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "IncGrenade.Throw",
+          "time": 0.0333345826
+        }
+      ]
+    },
+    {
+      "kind": "incendiary",
+      "action": "throw_underhand",
+      "resource": "animation/anims/viewmodel/grenade/grenade_incendiary/throw_underhand_incendiary.vnmclip_c",
+      "sha256": "b980d7a8dda64942ce4980db2a702f7277e9a48df099dea8a4b43f8f6355f3a4",
+      "runtimeSha256": "60c28ead1a355af019cb78081364d35ed7945ffc70a69bb67f0625035de48852",
+      "duration": 0.5,
+      "events": [
+        {
+          "name": "Grenade.ThrowUnder.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "IncGrenade.Throw",
+          "time": 0.0
+        }
+      ]
+    },
+    {
+      "kind": "incendiary",
+      "action": "throwcharge_high",
+      "resource": "animation/anims/viewmodel/grenade/grenade_incendiary/throwcharge_high_incendiary.vnmclip_c",
+      "sha256": "a181f3a730484ae758261c87d1328ac17c3e29c64fdd650157890e2c0f65d347",
+      "runtimeSha256": "2a58a174c169f2d7eca33ed9d998ee24e781a64762e229d2faedf9eb53652782",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "incendiary",
+      "action": "throwcharge_mid",
+      "resource": "animation/anims/viewmodel/grenade/grenade_incendiary/throwcharge_mid_incendiary.vnmclip_c",
+      "sha256": "515226b17fad7f5b316dfcd5f5203271f9b36c991fdc0ab91ef002a1c47b1a0d",
+      "runtimeSha256": "429c42d661721ece9e45276fcb7a2ac6f4622d8b38f348f59ca869f08a6913d6",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "incendiary",
+      "action": "throwcharge_low",
+      "resource": "animation/anims/viewmodel/grenade/grenade_incendiary/throwcharge_low_incendiary.vnmclip_c",
+      "sha256": "643d3d89f75ca4e6b1c7cf55b98bfa1af8e0f50f6c7babdda678db5a8ccefd87",
+      "runtimeSha256": "983e2c0437d31f83b5c3d4f3479ff47ddbad5f912dae72a72c56f9b56a3745ac",
+      "duration": 1.0,
+      "events": []
+    },
+    {
+      "kind": "decoy",
+      "action": "idle",
+      "resource": "animation/anims/viewmodel/grenade/_default_grenade/idle_grenade.vnmclip_c",
+      "sha256": "013576b3847d184c0a904f11121a1ad9b012e92e60f542531a63d6f9bbd04bb5",
+      "runtimeSha256": "898c7a9eccb60274514592285ffff14f7ffccaf211e8abba75084bcd986c035d",
+      "duration": 0.0,
+      "events": []
+    },
+    {
+      "kind": "decoy",
+      "action": "draw",
+      "resource": "animation/anims/viewmodel/grenade/_default_grenade/draw_grenade.vnmclip_c",
+      "sha256": "a3ea8624250ad337f986b0c296c2a0f3df4653bc7da8e5f3bd37c8a2d12761be",
+      "runtimeSha256": "8134f88a63a0566fce498345bfed6124058f0e05e31f3d4754844b11719a6569",
+      "duration": 1.0,
+      "events": [
+        {
+          "name": "Draw.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Decoy.Draw",
+          "time": 0.6
+        }
+      ]
+    },
+    {
+      "kind": "decoy",
+      "action": "pullpin",
+      "resource": "animation/anims/viewmodel/grenade/_default_grenade/pullpin_grenade.vnmclip_c",
+      "sha256": "dd2561fc57a7b3ab863325f8e66e0ec87ea8dbdad161d071edad6ef76dbcacdb",
+      "runtimeSha256": "2085c0d3c0451fcf1f4b45c93dfdc83f841a4fddcd774cd328d3110e59863d72",
+      "duration": 0.9667,
+      "events": [
+        {
+          "name": "Decoy.PullPin",
+          "time": 0.1666726138
+        },
+        {
+          "name": "Grenade.PullPin.Gear",
+          "time": 0.2000073299
+        }
+      ]
+    },
+    {
+      "kind": "decoy",
+      "action": "throw_overhand",
+      "resource": "animation/anims/viewmodel/grenade/_default_grenade/throw_overhand_grenade.vnmclip_c",
+      "sha256": "5dd04542f3c3567b6ccd214aa9a8fea9d076e725a270a0cb017a605eadd0feaa",
+      "runtimeSha256": "c2b46e3e191c5eb56affb965249083a322fda83a36f921e3477c71de259b7cdf",
+      "duration": 0.7667,
+      "events": [
+        {
+          "name": "Grenade.PreThrow.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Decoy.Throw",
+          "time": 0.0666699319
+        }
+      ]
+    },
+    {
+      "kind": "decoy",
+      "action": "throw_underhand",
+      "resource": "animation/anims/viewmodel/grenade/_default_grenade/throw_underhand_grenade.vnmclip_c",
+      "sha256": "fb9fe90ac429daf9d1780cd0e938075e85b22f390f0515d26bcf40a036dd38dc",
+      "runtimeSha256": "c9f38585e11d40f3041cb33cedc680ecc5777dc55cdd2640202a3cc044293165",
+      "duration": 0.5,
+      "events": [
+        {
+          "name": "Grenade.ThrowUnder.Gear",
+          "time": 0.0
+        },
+        {
+          "name": "Decoy.Throw",
+          "time": 0.0
+        }
+      ]
+    },
+    {
+      "kind": "decoy",
+      "action": "throwcharge_high",
+      "resource": "animation/anims/viewmodel/grenade/_default_grenade/throwcharge_high_grenade.vnmclip_c",
+      "sha256": "3dfe746b7e7855c52728c597a13ee4a575e667c633fc039d52f1047ca8871e63",
+      "runtimeSha256": "0bf1ddfd05be9032b03487c71f3401411b649c3cdee47cf843c70c2ba89b11e9",
+      "duration": 0.0,
+      "events": []
+    },
+    {
+      "kind": "decoy",
+      "action": "throwcharge_mid",
+      "resource": "animation/anims/viewmodel/grenade/_default_grenade/throwcharge_mid_grenade.vnmclip_c",
+      "sha256": "36515567b67a696b02c7876ee74260d47f84d0c024aedf0cc3b20007bcd9c1ef",
+      "runtimeSha256": "8c7262f1239d3d2e063d0936a20f9ae96fb07a1f2bd7ce2706c72da0bcaf0f63",
+      "duration": 0.0,
+      "events": []
+    },
+    {
+      "kind": "decoy",
+      "action": "throwcharge_low",
+      "resource": "animation/anims/viewmodel/grenade/_default_grenade/throwcharge_low_grenade.vnmclip_c",
+      "sha256": "0f404aa9c54a7873db876c7f75dd3145cdc067e04bc9ba8afd855332eda29ea3",
+      "runtimeSha256": "b4b6ade34210482a5b76d4b315d067ec8897f17cfb1126925b150aa94c3f8a24",
+      "duration": 0.0,
+      "events": []
+    }
+  ],
+  "limitations": "Native viewmodel and weapon skeleton motion. Decoy uses the shared default grenade animation; exact native game animation graph blending and gameplay event scheduling are reconstructed."
+}

@@ -1,0 +1,88 @@
+{
+  "source": "Valve CS2 Steam depot",
+  "app": 730,
+  "depot": 2347770,
+  "manifest": "67499503218971311",
+  "build": "26144732",
+  "vpkDirectorySha256": "562972293ed7a5d40e341c4df7d6b0ee06430452694177142f0c1239dd3f2c8b",
+  "soundEventsSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+  "tools": {
+    "Source2Viewer": "20.1.7467",
+    "Source2ViewerSha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830",
+    "FFmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "encoding": "libopus mono 48kHz 96kbps"
+  },
+  "slideAlias": {
+    "event": "Weapon_ELITE.Clipin.Slide",
+    "packagedEvent": "weapon_galilar.clipin",
+    "resource": "sounds/weapons/magazine_slide_01.vsnd_c",
+    "resourceSha256": "d593f8b111e9e1bbe81416e3b4e6be2b05f57b7fe65affd8dc8f176943739a7a",
+    "runtimeClip": "galil_clipin",
+    "nativeGain": 0.2,
+    "nativePitch": 1.01
+  },
+  "clips": [
+    {
+      "name": "elite_lclipin",
+      "event": "Weapon_ELITE.Lclipin",
+      "resource": "sounds/weapons/elite/elite_leftclipin.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/elite/elite_leftclipin.vsnd"
+      ],
+      "resourceSha256": "b89ee98c057a7c5431e48febc4ff3d13f01eea10011f37bbc1f96a60929bc5af",
+      "decodedSha256": "e242d5130bac59e69a80a39af19bc906ed9e6e69d1c6594cfe935ded2d0c9ef6",
+      "decodedBytes": 22898,
+      "nativeGain": 0.75,
+      "nativePitch": 1.0,
+      "outputSha256": "e49e8da1a84360b0eb4136d1e50b0dfa5fbdabb8e35741952d1ba561922183a1",
+      "bytes": 4697
+    },
+    {
+      "name": "elite_rclipin",
+      "event": "Weapon_ELITE.Rclipin",
+      "resource": "sounds/weapons/elite/elite_rightclipin.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/elite/elite_rightclipin.vsnd"
+      ],
+      "resourceSha256": "2c6f735bfc906c5d9eb2bdaf2dc5366977e930f981ce3c05b4ef134095f71185",
+      "decodedSha256": "929ef71e41efac64927c0a2b5e3e1f07965b68d955cd4da146a54701df039f48",
+      "decodedBytes": 24334,
+      "nativeGain": 0.75,
+      "nativePitch": 1.0,
+      "outputSha256": "afb39db6be0b5c1de6ccf4c84e73ca3a47394426c02dbdbf0164cc69f4d70083",
+      "bytes": 5041
+    }
+  ],
+  "reusedClips": [
+    {
+      "name": "elite_leftclipin",
+      "event": "Weapon_ELITE.Clipin",
+      "resource": "sounds/weapons/elite/elites_clipin_07.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/elite/elites_clipin_07.vsnd",
+        "sounds/weapons/elite/elites_clipin_08.vsnd",
+        "sounds/weapons/elite/elites_clipin_09.vsnd",
+        "sounds/weapons/elite/elites_clipin_10.vsnd"
+      ],
+      "eventVolume": "0.75",
+      "resourceSha256": "e0339d33d75046e24e2fdadc510930386125d74925f4609d8facebe8a931128b",
+      "decodedSha256": "2bcd687167367f9d48bb1785e01c4794c3f7adcb348f7f7663858b7e8a412f49",
+      "outputSha256": "2bc5205b59e6c0309a81b8aa00d0b01b242818c5ddb83ef2e69b4799e559f6fb",
+      "bytes": 4878
+    },
+    {
+      "name": "galil_clipin",
+      "event": "Weapon_GalilAR.Clipin",
+      "resource": "sounds/weapons/magazine_slide_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/magazine_slide_01.vsnd"
+      ],
+      "eventVolume": "0.5",
+      "resourceSha256": "d593f8b111e9e1bbe81416e3b4e6be2b05f57b7fe65affd8dc8f176943739a7a",
+      "decodedSha256": "35ba947e463a69f402730f3e5889c79618d62ca83c14a9c237750b556b3e7441",
+      "outputSha256": "d182bd4a08745aafd77ebcad2edd722a790977a28a71b4f4e9607f3540a7c21f",
+      "bytes": 2102
+    }
+  ],
+  "limitations": "Two bounded native exports encoded with the existing firearm Opus settings. Slide reuses galil_clipin (magazine_slide_01); legacy elite_leftclipin remains ordinary Weapon_ELITE.Clipin, not Lclipin. Native event gain/pitch are retained as evidence only; browser action gain/spatial processing remains authored."
+}

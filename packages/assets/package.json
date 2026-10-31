@@ -1,0 +1,10 @@
+{
+  "name": "@cs2go/assets",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify": "bun pipeline.mjs verify",
+    "sync": "python3 sync.py",
+    "generate": "bun pipeline.mjs prepare"
+  }
+}

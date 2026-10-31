@@ -1,0 +1,3046 @@
+{
+  "selection": {
+    "method": "First listed source recording from each native weapon event; original event variant lists retained for audit. Existing runtime sound-marker phases preserved.",
+    "events": "soundevents/game_sounds_weapons.vsndevts_c",
+    "coverage": [
+      {
+        "weaponId": 0,
+        "kind": "shot",
+        "name": "ak47-1",
+        "event": "Weapon_AK47.Single"
+      },
+      {
+        "weaponId": 0,
+        "kind": "reload",
+        "name": "ak47_clipout",
+        "event": "Weapon_AK47.Clipout"
+      },
+      {
+        "weaponId": 0,
+        "kind": "reloadIn",
+        "name": "ak47_clipin",
+        "event": "Weapon_AK47.Clipin"
+      },
+      {
+        "weaponId": 0,
+        "kind": "bolt",
+        "name": "ak47_boltpull",
+        "event": "Weapon_AK47.BoltPull"
+      },
+      {
+        "weaponId": 0,
+        "kind": "boltForward",
+        "name": "ak47_boltpull",
+        "event": "Weapon_AK47.BoltPull"
+      },
+      {
+        "weaponId": 0,
+        "kind": "draw",
+        "name": "ak47_draw",
+        "event": "Weapon_AK47.Draw"
+      },
+      {
+        "weaponId": 1,
+        "kind": "shot",
+        "name": "m4a1-1-single",
+        "event": "Weapon_M4A1.Silenced"
+      },
+      {
+        "weaponId": 1,
+        "kind": "reload",
+        "name": "m4a1_clipout",
+        "event": "Weapon_M4A1.Clipout"
+      },
+      {
+        "weaponId": 1,
+        "kind": "reloadIn",
+        "name": "m4a1_clipin",
+        "event": "Weapon_M4A1.Clipin"
+      },
+      {
+        "weaponId": 1,
+        "kind": "bolt",
+        "name": "m4a1_silencer_boltback",
+        "event": "Weapon_M4A1S.BoltBack"
+      },
+      {
+        "weaponId": 1,
+        "kind": "boltForward",
+        "name": "m4a1_silencer_boltforward",
+        "event": "Weapon_M4A1S.BoltForward"
+      },
+      {
+        "weaponId": 1,
+        "kind": "draw",
+        "name": "m4a1_draw",
+        "event": "Weapon_M4A1.Draw"
+      },
+      {
+        "weaponId": 2,
+        "kind": "shot",
+        "name": "usp1",
+        "event": "Weapon_USP.SilencedShot"
+      },
+      {
+        "weaponId": 2,
+        "kind": "reload",
+        "name": "usp_clipout",
+        "event": "Weapon_USP.Clipout"
+      },
+      {
+        "weaponId": 2,
+        "kind": "reloadIn",
+        "name": "usp_clipin",
+        "event": "Weapon_USP.Clipin"
+      },
+      {
+        "weaponId": 2,
+        "kind": "bolt",
+        "name": "usp_slideback",
+        "event": "Weapon_USP.Slideback"
+      },
+      {
+        "weaponId": 2,
+        "kind": "boltForward",
+        "name": "usp_sliderelease",
+        "event": "Weapon_USP.Sliderelease"
+      },
+      {
+        "weaponId": 2,
+        "kind": "draw",
+        "name": "usp_draw",
+        "event": "Weapon_USP.Draw"
+      },
+      {
+        "weaponId": 3,
+        "kind": "shot",
+        "name": "awp1",
+        "event": "Weapon_AWP.Single"
+      },
+      {
+        "weaponId": 3,
+        "kind": "reload",
+        "name": "awp_clipout",
+        "event": "Weapon_AWP.Clipout"
+      },
+      {
+        "weaponId": 3,
+        "kind": "reloadIn",
+        "name": "awp_clipin",
+        "event": "Weapon_AWP.Clipin"
+      },
+      {
+        "weaponId": 3,
+        "kind": "bolt",
+        "name": "awp_boltback",
+        "event": "Weapon_AWP.BoltBack"
+      },
+      {
+        "weaponId": 3,
+        "kind": "boltForward",
+        "name": "awp_boltforward",
+        "event": "Weapon_AWP.BoltForward"
+      },
+      {
+        "weaponId": 3,
+        "kind": "draw",
+        "name": "awp_draw",
+        "event": "Weapon_AWP.Draw"
+      },
+      {
+        "weaponId": 7,
+        "kind": "shot",
+        "name": "glock18-1",
+        "event": "Weapon_Glock.Single"
+      },
+      {
+        "weaponId": 7,
+        "kind": "reload",
+        "name": "glock_clipout",
+        "event": "Weapon_Glock.Clipout"
+      },
+      {
+        "weaponId": 7,
+        "kind": "reloadIn",
+        "name": "glock_clipin",
+        "event": "Weapon_Glock.Clipin"
+      },
+      {
+        "weaponId": 7,
+        "kind": "bolt",
+        "name": "glock_slideback",
+        "event": "Weapon_Glock.Slideback"
+      },
+      {
+        "weaponId": 7,
+        "kind": "boltForward",
+        "name": "glock_sliderelease",
+        "event": "Weapon_Glock.Sliderelease"
+      },
+      {
+        "weaponId": 7,
+        "kind": "draw",
+        "name": "glock_draw",
+        "event": "Weapon_Glock.Draw"
+      },
+      {
+        "weaponId": 8,
+        "kind": "shot",
+        "name": "deagle-1",
+        "event": "Weapon_DEagle.Single"
+      },
+      {
+        "weaponId": 8,
+        "kind": "reload",
+        "name": "de_clipout",
+        "event": "Weapon_DEagle.Clipout"
+      },
+      {
+        "weaponId": 8,
+        "kind": "reloadIn",
+        "name": "de_clipin",
+        "event": "Weapon_DEagle.Clipin"
+      },
+      {
+        "weaponId": 8,
+        "kind": "bolt",
+        "name": "de_slideback",
+        "event": "Weapon_DEagle.Slideback"
+      },
+      {
+        "weaponId": 8,
+        "kind": "boltForward",
+        "name": "de_slideforward",
+        "event": "Weapon_DEagle.Slideforward"
+      },
+      {
+        "weaponId": 8,
+        "kind": "draw",
+        "name": "de_draw",
+        "event": "Weapon_DEagle.Draw"
+      },
+      {
+        "weaponId": 9,
+        "kind": "shot",
+        "name": "m4a1-1",
+        "event": "Weapon_M4A4.Single"
+      },
+      {
+        "weaponId": 9,
+        "kind": "reload",
+        "name": "m4a1_clipout",
+        "event": "Weapon_M4A1.Clipout"
+      },
+      {
+        "weaponId": 9,
+        "kind": "reloadIn",
+        "name": "m4a1_clipin",
+        "event": "Weapon_M4A1.Clipin"
+      },
+      {
+        "weaponId": 9,
+        "kind": "bolt",
+        "name": "m4a1_boltback",
+        "event": "Weapon_M4A1.BoltBack"
+      },
+      {
+        "weaponId": 9,
+        "kind": "boltForward",
+        "name": "m4a1_boltforward",
+        "event": "Weapon_M4A1.BoltForward"
+      },
+      {
+        "weaponId": 9,
+        "kind": "draw",
+        "name": "m4a1_draw",
+        "event": "Weapon_M4A1.Draw"
+      },
+      {
+        "weaponId": 10,
+        "kind": "shot",
+        "name": "nova-1",
+        "event": "Weapon_Nova.Single"
+      },
+      {
+        "weaponId": 10,
+        "kind": "reload",
+        "name": "nova_insertshell",
+        "event": "Weapon_Nova.Insertshell"
+      },
+      {
+        "weaponId": 10,
+        "kind": "reloadIn",
+        "name": "nova_insertshell",
+        "event": "Weapon_Nova.Insertshell"
+      },
+      {
+        "weaponId": 10,
+        "kind": "bolt",
+        "name": "nova_pump",
+        "event": "Weapon_Nova.Pump"
+      },
+      {
+        "weaponId": 10,
+        "kind": "boltForward",
+        "name": "nova_pump",
+        "event": "Weapon_Nova.Pump"
+      },
+      {
+        "weaponId": 10,
+        "kind": "draw",
+        "name": "nova_draw",
+        "event": "Weapon_Nova.Draw"
+      },
+      {
+        "weaponId": 11,
+        "kind": "shot",
+        "name": "mp9-1",
+        "event": "Weapon_MP9.Single"
+      },
+      {
+        "weaponId": 11,
+        "kind": "reload",
+        "name": "mp9_clipout",
+        "event": "Weapon_MP9.Clipout"
+      },
+      {
+        "weaponId": 11,
+        "kind": "reloadIn",
+        "name": "mp9_clipin",
+        "event": "Weapon_MP9.Clipin"
+      },
+      {
+        "weaponId": 11,
+        "kind": "bolt",
+        "name": "mp9_boltback",
+        "event": "Weapon_MP9.BoltBack"
+      },
+      {
+        "weaponId": 11,
+        "kind": "boltForward",
+        "name": "mp9_boltforward",
+        "event": "Weapon_MP9.BoltForward"
+      },
+      {
+        "weaponId": 11,
+        "kind": "draw",
+        "name": "mp9_draw",
+        "event": "Weapon_MP9.Draw"
+      },
+      {
+        "weaponId": 12,
+        "kind": "shot",
+        "name": "hkp2000-1",
+        "event": "Weapon_hkp2000.Single"
+      },
+      {
+        "weaponId": 12,
+        "kind": "reload",
+        "name": "hkp2000_clipout",
+        "event": "Weapon_hkp2000.Clipout"
+      },
+      {
+        "weaponId": 12,
+        "kind": "reloadIn",
+        "name": "hkp2000_clipin",
+        "event": "Weapon_hkp2000.Clipin"
+      },
+      {
+        "weaponId": 12,
+        "kind": "bolt",
+        "name": "hkp2000_slideback",
+        "event": "Weapon_hkp2000.Slideback"
+      },
+      {
+        "weaponId": 12,
+        "kind": "boltForward",
+        "name": "hkp2000_sliderelease",
+        "event": "Weapon_hkp2000.Sliderelease"
+      },
+      {
+        "weaponId": 12,
+        "kind": "draw",
+        "name": "hkp2000_draw",
+        "event": "Weapon_hkp2000.Draw"
+      },
+      {
+        "weaponId": 13,
+        "kind": "shot",
+        "name": "p250-1",
+        "event": "Weapon_P250.Single"
+      },
+      {
+        "weaponId": 13,
+        "kind": "reload",
+        "name": "p250_clipout",
+        "event": "Weapon_P250.Clipout"
+      },
+      {
+        "weaponId": 13,
+        "kind": "reloadIn",
+        "name": "p250_clipin",
+        "event": "Weapon_P250.Clipin"
+      },
+      {
+        "weaponId": 13,
+        "kind": "bolt",
+        "name": "p250_slideback",
+        "event": "Weapon_P250.Slideback"
+      },
+      {
+        "weaponId": 13,
+        "kind": "boltForward",
+        "name": "p250_sliderelease",
+        "event": "Weapon_P250.Sliderelease"
+      },
+      {
+        "weaponId": 13,
+        "kind": "draw",
+        "name": "p250_draw",
+        "event": "Weapon_P250.Draw"
+      },
+      {
+        "weaponId": 14,
+        "kind": "shot",
+        "name": "fiveseven-1",
+        "event": "Weapon_FiveSeven.Single"
+      },
+      {
+        "weaponId": 14,
+        "kind": "reload",
+        "name": "fiveseven_clipout",
+        "event": "Weapon_FiveSeven.Clipout"
+      },
+      {
+        "weaponId": 14,
+        "kind": "reloadIn",
+        "name": "fiveseven_clipin",
+        "event": "Weapon_FiveSeven.Clipin"
+      },
+      {
+        "weaponId": 14,
+        "kind": "bolt",
+        "name": "fiveseven_slideback",
+        "event": "Weapon_FiveSeven.Slideback"
+      },
+      {
+        "weaponId": 14,
+        "kind": "boltForward",
+        "name": "fiveseven_sliderelease",
+        "event": "Weapon_FiveSeven.Sliderelease"
+      },
+      {
+        "weaponId": 14,
+        "kind": "draw",
+        "name": "fiveseven_draw",
+        "event": "Weapon_FiveSeven.Draw"
+      },
+      {
+        "weaponId": 15,
+        "kind": "shot",
+        "name": "tec9-1",
+        "event": "Weapon_tec9.Single"
+      },
+      {
+        "weaponId": 15,
+        "kind": "reload",
+        "name": "tec9_clipout",
+        "event": "Weapon_tec9.Clipout"
+      },
+      {
+        "weaponId": 15,
+        "kind": "reloadIn",
+        "name": "tec9_clipin",
+        "event": "Weapon_tec9.Clipin"
+      },
+      {
+        "weaponId": 15,
+        "kind": "bolt",
+        "name": "tec9_boltpull",
+        "event": "Weapon_tec9.Boltpull"
+      },
+      {
+        "weaponId": 15,
+        "kind": "boltForward",
+        "name": "tec9_boltrelease",
+        "event": "Weapon_tec9.Boltrelease"
+      },
+      {
+        "weaponId": 15,
+        "kind": "draw",
+        "name": "tec9_draw",
+        "event": "Weapon_tec9.Draw"
+      },
+      {
+        "weaponId": 16,
+        "kind": "shot",
+        "name": "cz75a-1",
+        "event": "Weapon_CZ75A.Single"
+      },
+      {
+        "weaponId": 16,
+        "kind": "reload",
+        "name": "p250_clipout",
+        "event": "Weapon_CZ.Clipout"
+      },
+      {
+        "weaponId": 16,
+        "kind": "reloadIn",
+        "name": "cz75_clipin",
+        "event": "Weapon_CZ.Clipin"
+      },
+      {
+        "weaponId": 16,
+        "kind": "bolt",
+        "name": "p250_slideback",
+        "event": "Weapon_CZ.Slideback"
+      },
+      {
+        "weaponId": 16,
+        "kind": "boltForward",
+        "name": "p250_sliderelease",
+        "event": "Weapon_CZ.Sliderelease"
+      },
+      {
+        "weaponId": 16,
+        "kind": "draw",
+        "name": "p250_draw",
+        "event": "Weapon_CZ.Draw"
+      },
+      {
+        "weaponId": 17,
+        "kind": "shot",
+        "name": "revolver-1_01",
+        "event": "Weapon_Revolver.Single"
+      },
+      {
+        "weaponId": 17,
+        "kind": "reload",
+        "name": "revolver_clipout",
+        "event": "Weapon_Revolver.Clipout"
+      },
+      {
+        "weaponId": 17,
+        "kind": "reloadIn",
+        "name": "revolver_clipin",
+        "event": "Weapon_Revolver.Clipin"
+      },
+      {
+        "weaponId": 17,
+        "kind": "bolt",
+        "name": "revolver_sideback",
+        "event": "Weapon_Revolver.Sideback"
+      },
+      {
+        "weaponId": 17,
+        "kind": "boltForward",
+        "name": "revolver_siderelease",
+        "event": "Weapon_Revolver.Siderelease"
+      },
+      {
+        "weaponId": 17,
+        "kind": "draw",
+        "name": "revolver_draw",
+        "event": "Weapon_Revolver.Draw"
+      },
+      {
+        "weaponId": 18,
+        "kind": "shot",
+        "name": "elite-1",
+        "event": "Weapon_ELITE.Single"
+      },
+      {
+        "weaponId": 18,
+        "kind": "reload",
+        "name": "elite_clipout",
+        "event": "Weapon_ELITE.Clipout"
+      },
+      {
+        "weaponId": 18,
+        "kind": "reloadIn",
+        "name": "elite_leftclipin",
+        "event": "Weapon_ELITE.Clipin"
+      },
+      {
+        "weaponId": 18,
+        "kind": "bolt",
+        "name": "elite_sliderelease",
+        "event": "Weapon_ELITE.Sliderelease"
+      },
+      {
+        "weaponId": 18,
+        "kind": "boltForward",
+        "name": "elite_sliderelease",
+        "event": "Weapon_ELITE.Sliderelease"
+      },
+      {
+        "weaponId": 18,
+        "kind": "draw",
+        "name": "elite_draw",
+        "event": "Weapon_ELITE.Draw"
+      },
+      {
+        "weaponId": 19,
+        "kind": "shot",
+        "name": "famas-1",
+        "event": "Weapon_FAMAS.Single"
+      },
+      {
+        "weaponId": 19,
+        "kind": "reload",
+        "name": "famas_clipout",
+        "event": "Weapon_FAMAS.Clipout"
+      },
+      {
+        "weaponId": 19,
+        "kind": "reloadIn",
+        "name": "famas_clipin",
+        "event": "Weapon_FAMAS.Clipin"
+      },
+      {
+        "weaponId": 19,
+        "kind": "bolt",
+        "name": "famas_boltback",
+        "event": "Weapon_FAMAS.BoltBack"
+      },
+      {
+        "weaponId": 19,
+        "kind": "boltForward",
+        "name": "famas_boltforward",
+        "event": "Weapon_FAMAS.BoltForward"
+      },
+      {
+        "weaponId": 19,
+        "kind": "draw",
+        "name": "famas_draw",
+        "event": "Weapon_FAMAS.Draw"
+      },
+      {
+        "weaponId": 20,
+        "kind": "shot",
+        "name": "galil-1",
+        "event": "Weapon_GalilAR.Single"
+      },
+      {
+        "weaponId": 20,
+        "kind": "reload",
+        "name": "galil_clipout",
+        "event": "Weapon_GalilAR.Clipout"
+      },
+      {
+        "weaponId": 20,
+        "kind": "reloadIn",
+        "name": "galil_clipin",
+        "event": "Weapon_GalilAR.Clipin"
+      },
+      {
+        "weaponId": 20,
+        "kind": "bolt",
+        "name": "galil_boltback",
+        "event": "Weapon_GalilAR.BoltBack"
+      },
+      {
+        "weaponId": 20,
+        "kind": "boltForward",
+        "name": "galil_boltforward",
+        "event": "Weapon_GalilAR.BoltForward"
+      },
+      {
+        "weaponId": 20,
+        "kind": "draw",
+        "name": "galil_draw",
+        "event": "Weapon_GalilAR.Draw"
+      },
+      {
+        "weaponId": 21,
+        "kind": "shot",
+        "name": "aug-1",
+        "event": "Weapon_AUG.Single"
+      },
+      {
+        "weaponId": 21,
+        "kind": "reload",
+        "name": "aug_clipout",
+        "event": "Weapon_AUG.Clipout"
+      },
+      {
+        "weaponId": 21,
+        "kind": "reloadIn",
+        "name": "aug_clipin",
+        "event": "Weapon_AUG.Clipin"
+      },
+      {
+        "weaponId": 21,
+        "kind": "bolt",
+        "name": "aug_boltpull",
+        "event": "Weapon_AUG.Boltpull"
+      },
+      {
+        "weaponId": 21,
+        "kind": "boltForward",
+        "name": "aug_boltrelease",
+        "event": "Weapon_AUG.Boltrelease"
+      },
+      {
+        "weaponId": 21,
+        "kind": "draw",
+        "name": "aug_draw",
+        "event": "Weapon_AUG.Draw"
+      },
+      {
+        "weaponId": 22,
+        "kind": "shot",
+        "name": "sg556-1",
+        "event": "Weapon_sg556.Single"
+      },
+      {
+        "weaponId": 22,
+        "kind": "reload",
+        "name": "sg556_clipout",
+        "event": "Weapon_sg556.Clipout"
+      },
+      {
+        "weaponId": 22,
+        "kind": "reloadIn",
+        "name": "sg556_clipin",
+        "event": "Weapon_sg556.Clipin"
+      },
+      {
+        "weaponId": 22,
+        "kind": "bolt",
+        "name": "sg556_boltback",
+        "event": "Weapon_sg556.BoltBack"
+      },
+      {
+        "weaponId": 22,
+        "kind": "boltForward",
+        "name": "sg556_boltforward",
+        "event": "Weapon_sg556.BoltForward"
+      },
+      {
+        "weaponId": 22,
+        "kind": "draw",
+        "name": "sg556_draw",
+        "event": "Weapon_SG556.Draw"
+      },
+      {
+        "weaponId": 23,
+        "kind": "shot",
+        "name": "ssg08-1",
+        "event": "Weapon_SSG08.Single"
+      },
+      {
+        "weaponId": 23,
+        "kind": "reload",
+        "name": "ssg08_clipout",
+        "event": "Weapon_SSG08.Clipout"
+      },
+      {
+        "weaponId": 23,
+        "kind": "reloadIn",
+        "name": "ssg08_clipin",
+        "event": "Weapon_SSG08.Clipin"
+      },
+      {
+        "weaponId": 23,
+        "kind": "bolt",
+        "name": "ssg08_boltback",
+        "event": "Weapon_SSG08.BoltBack"
+      },
+      {
+        "weaponId": 23,
+        "kind": "boltForward",
+        "name": "ssg08_boltforward",
+        "event": "Weapon_SSG08.BoltForward"
+      },
+      {
+        "weaponId": 23,
+        "kind": "draw",
+        "name": "ssg08_draw",
+        "event": "Weapon_SSG08.Draw"
+      },
+      {
+        "weaponId": 24,
+        "kind": "shot",
+        "name": "scar20_01",
+        "event": "Weapon_SCAR20.Single"
+      },
+      {
+        "weaponId": 24,
+        "kind": "reload",
+        "name": "scar20_clipout",
+        "event": "Weapon_SCAR20.Clipout"
+      },
+      {
+        "weaponId": 24,
+        "kind": "reloadIn",
+        "name": "scar20_clipin",
+        "event": "Weapon_SCAR20.Clipin"
+      },
+      {
+        "weaponId": 24,
+        "kind": "bolt",
+        "name": "scar20_boltback",
+        "event": "Weapon_SCAR20.BoltBack"
+      },
+      {
+        "weaponId": 24,
+        "kind": "boltForward",
+        "name": "scar20_boltforward",
+        "event": "Weapon_SCAR20.BoltForward"
+      },
+      {
+        "weaponId": 24,
+        "kind": "draw",
+        "name": "scar20_draw",
+        "event": "Weapon_SCAR20.Draw"
+      },
+      {
+        "weaponId": 25,
+        "kind": "shot",
+        "name": "g3sg1-1",
+        "event": "Weapon_G3SG1.Single"
+      },
+      {
+        "weaponId": 25,
+        "kind": "reload",
+        "name": "g3sg1_clipout",
+        "event": "Weapon_G3SG1.Clipout"
+      },
+      {
+        "weaponId": 25,
+        "kind": "reloadIn",
+        "name": "g3sg1_clipin",
+        "event": "Weapon_G3SG1.Clipin"
+      },
+      {
+        "weaponId": 25,
+        "kind": "bolt",
+        "name": "g3sg1_slideback",
+        "event": "Weapon_G3SG1.SlideBack"
+      },
+      {
+        "weaponId": 25,
+        "kind": "boltForward",
+        "name": "g3sg1_slideforward",
+        "event": "Weapon_G3SG1.SlideForward"
+      },
+      {
+        "weaponId": 25,
+        "kind": "draw",
+        "name": "g3sg1_draw",
+        "event": "Weapon_G3SG1.Draw"
+      },
+      {
+        "weaponId": 26,
+        "kind": "shot",
+        "name": "mac10-1",
+        "event": "Weapon_MAC10.Single"
+      },
+      {
+        "weaponId": 26,
+        "kind": "reload",
+        "name": "mac10_clipout",
+        "event": "Weapon_MAC10.Clipout"
+      },
+      {
+        "weaponId": 26,
+        "kind": "reloadIn",
+        "name": "mac10_clipin",
+        "event": "Weapon_MAC10.Clipin"
+      },
+      {
+        "weaponId": 26,
+        "kind": "bolt",
+        "name": "mac10_boltback",
+        "event": "Weapon_MAC10.BoltBack"
+      },
+      {
+        "weaponId": 26,
+        "kind": "boltForward",
+        "name": "mac10_boltforward",
+        "event": "Weapon_MAC10.BoltForward"
+      },
+      {
+        "weaponId": 26,
+        "kind": "draw",
+        "name": "mac10_draw",
+        "event": "Weapon_MAC10.Draw"
+      },
+      {
+        "weaponId": 27,
+        "kind": "shot",
+        "name": "mp7-1",
+        "event": "Weapon_MP7.Single"
+      },
+      {
+        "weaponId": 27,
+        "kind": "reload",
+        "name": "mp7_clipout",
+        "event": "Weapon_MP7.Clipout"
+      },
+      {
+        "weaponId": 27,
+        "kind": "reloadIn",
+        "name": "mp7_clipin",
+        "event": "Weapon_MP7.Clipin"
+      },
+      {
+        "weaponId": 27,
+        "kind": "bolt",
+        "name": "mp7_slideback",
+        "event": "Weapon_MP7.Slideback"
+      },
+      {
+        "weaponId": 27,
+        "kind": "boltForward",
+        "name": "mp7_slideforward",
+        "event": "Weapon_MP7.SlideForward"
+      },
+      {
+        "weaponId": 27,
+        "kind": "draw",
+        "name": "mp7_draw",
+        "event": "Weapon_MP7.Draw"
+      },
+      {
+        "weaponId": 28,
+        "kind": "shot",
+        "name": "mp5_01",
+        "event": "Weapon_MP5.Single"
+      },
+      {
+        "weaponId": 28,
+        "kind": "reload",
+        "name": "mp5_clipout",
+        "event": "Weapon_MP5.Clipout"
+      },
+      {
+        "weaponId": 28,
+        "kind": "reloadIn",
+        "name": "mp5_clipin",
+        "event": "Weapon_MP5.Clipin"
+      },
+      {
+        "weaponId": 28,
+        "kind": "bolt",
+        "name": "mp5_slideback",
+        "event": "Weapon_MP5.Slideback"
+      },
+      {
+        "weaponId": 28,
+        "kind": "boltForward",
+        "name": "mp5_slideforward",
+        "event": "Weapon_MP5.SlideForward"
+      },
+      {
+        "weaponId": 28,
+        "kind": "draw",
+        "name": "mp5_draw",
+        "event": "Weapon_MP5.Draw"
+      },
+      {
+        "weaponId": 29,
+        "kind": "shot",
+        "name": "ump45-1",
+        "event": "Weapon_UMP45.Single"
+      },
+      {
+        "weaponId": 29,
+        "kind": "reload",
+        "name": "ump45_clipout",
+        "event": "Weapon_UMP45.Clipout"
+      },
+      {
+        "weaponId": 29,
+        "kind": "reloadIn",
+        "name": "ump45_clipin",
+        "event": "Weapon_UMP45.Clipin"
+      },
+      {
+        "weaponId": 29,
+        "kind": "bolt",
+        "name": "ump45_boltback",
+        "event": "Weapon_UMP45.BoltBack"
+      },
+      {
+        "weaponId": 29,
+        "kind": "boltForward",
+        "name": "ump45_boltforward",
+        "event": "Weapon_UMP45.BoltForward"
+      },
+      {
+        "weaponId": 29,
+        "kind": "draw",
+        "name": "ump45_draw",
+        "event": "Weapon_UMP45.Draw"
+      },
+      {
+        "weaponId": 30,
+        "kind": "shot",
+        "name": "p90-1",
+        "event": "Weapon_P90.Single"
+      },
+      {
+        "weaponId": 30,
+        "kind": "reload",
+        "name": "p90_clipout",
+        "event": "Weapon_P90.Clipout"
+      },
+      {
+        "weaponId": 30,
+        "kind": "reloadIn",
+        "name": "p90_clipin",
+        "event": "Weapon_P90.Clipin"
+      },
+      {
+        "weaponId": 30,
+        "kind": "bolt",
+        "name": "p90_boltback",
+        "event": "Weapon_P90.BoltBack"
+      },
+      {
+        "weaponId": 30,
+        "kind": "boltForward",
+        "name": "p90_boltforward",
+        "event": "Weapon_P90.BoltForward"
+      },
+      {
+        "weaponId": 30,
+        "kind": "draw",
+        "name": "p90_draw",
+        "event": "Weapon_P90.Draw"
+      },
+      {
+        "weaponId": 31,
+        "kind": "shot",
+        "name": "bizon-1",
+        "event": "Weapon_bizon.Single"
+      },
+      {
+        "weaponId": 31,
+        "kind": "reload",
+        "name": "bizon_clipout",
+        "event": "Weapon_bizon.Clipout"
+      },
+      {
+        "weaponId": 31,
+        "kind": "reloadIn",
+        "name": "bizon_clipin",
+        "event": "Weapon_bizon.Clipin"
+      },
+      {
+        "weaponId": 31,
+        "kind": "bolt",
+        "name": "bizon_boltback",
+        "event": "Weapon_bizon.BoltBack"
+      },
+      {
+        "weaponId": 31,
+        "kind": "boltForward",
+        "name": "bizon_boltforward",
+        "event": "Weapon_bizon.BoltForward"
+      },
+      {
+        "weaponId": 31,
+        "kind": "draw",
+        "name": "bizon_draw",
+        "event": "Weapon_bizon.Draw"
+      },
+      {
+        "weaponId": 32,
+        "kind": "shot",
+        "name": "xm1014-1",
+        "event": "Weapon_XM1014.Single"
+      },
+      {
+        "weaponId": 32,
+        "kind": "reload",
+        "name": "xm1014_insertshell",
+        "event": "Weapon_XM1014.InsertShell"
+      },
+      {
+        "weaponId": 32,
+        "kind": "reloadIn",
+        "name": "xm1014_insertshell",
+        "event": "Weapon_XM1014.InsertShell"
+      },
+      {
+        "weaponId": 32,
+        "kind": "bolt",
+        "name": "xm1014_pump",
+        "event": "Weapon_XM1014.Grab"
+      },
+      {
+        "weaponId": 32,
+        "kind": "boltForward",
+        "name": "xm1014_pump",
+        "event": "Weapon_XM1014.Grab"
+      },
+      {
+        "weaponId": 32,
+        "kind": "draw",
+        "name": "xm1014_draw",
+        "event": "Weapon_XM1014.Draw"
+      },
+      {
+        "weaponId": 33,
+        "kind": "shot",
+        "name": "mag7-1",
+        "event": "Weapon_Mag7.Single"
+      },
+      {
+        "weaponId": 33,
+        "kind": "reload",
+        "name": "mag7_clipout",
+        "event": "Weapon_Mag7.Clipout"
+      },
+      {
+        "weaponId": 33,
+        "kind": "reloadIn",
+        "name": "mag7_clipin",
+        "event": "Weapon_Mag7.Clipin"
+      },
+      {
+        "weaponId": 33,
+        "kind": "bolt",
+        "name": "mag7_pump_back",
+        "event": "Weapon_Mag7.PumpBack"
+      },
+      {
+        "weaponId": 33,
+        "kind": "boltForward",
+        "name": "mag7_pump_forward",
+        "event": "Weapon_Mag7.PumpForward"
+      },
+      {
+        "weaponId": 33,
+        "kind": "draw",
+        "name": "mag7_draw",
+        "event": "Weapon_Mag7.Draw"
+      },
+      {
+        "weaponId": 34,
+        "kind": "shot",
+        "name": "sawedoff-1",
+        "event": "Weapon_Sawedoff.Single"
+      },
+      {
+        "weaponId": 34,
+        "kind": "reload",
+        "name": "sawedoff_insertshell",
+        "event": "Weapon_Sawedoff.Insertshell"
+      },
+      {
+        "weaponId": 34,
+        "kind": "reloadIn",
+        "name": "sawedoff_insertshell",
+        "event": "Weapon_Sawedoff.Insertshell"
+      },
+      {
+        "weaponId": 34,
+        "kind": "bolt",
+        "name": "sawedoff_pump",
+        "event": "Weapon_Sawedoff.Pump"
+      },
+      {
+        "weaponId": 34,
+        "kind": "boltForward",
+        "name": "sawedoff_pump",
+        "event": "Weapon_Sawedoff.Pump"
+      },
+      {
+        "weaponId": 34,
+        "kind": "draw",
+        "name": "sawedoff_draw",
+        "event": "Weapon_Sawedoff.Draw"
+      },
+      {
+        "weaponId": 35,
+        "kind": "shot",
+        "name": "m249-1",
+        "event": "Weapon_M249.Single"
+      },
+      {
+        "weaponId": 35,
+        "kind": "reload",
+        "name": "m249_boxout",
+        "event": "Weapon_M249.Boxout"
+      },
+      {
+        "weaponId": 35,
+        "kind": "reloadIn",
+        "name": "m249_boxin",
+        "event": "Weapon_M249.Boxin"
+      },
+      {
+        "weaponId": 35,
+        "kind": "bolt",
+        "name": "m249_pump",
+        "event": "Weapon_M249.Pump"
+      },
+      {
+        "weaponId": 35,
+        "kind": "boltForward",
+        "name": "m249_pump",
+        "event": "Weapon_M249.Pump"
+      },
+      {
+        "weaponId": 35,
+        "kind": "draw",
+        "name": "m249_draw",
+        "event": "Weapon_M249.Draw"
+      },
+      {
+        "weaponId": 36,
+        "kind": "shot",
+        "name": "negev-1",
+        "event": "Weapon_Negev.Single"
+      },
+      {
+        "weaponId": 36,
+        "kind": "reload",
+        "name": "negev_boxout",
+        "event": "Weapon_Negev.Boxout"
+      },
+      {
+        "weaponId": 36,
+        "kind": "reloadIn",
+        "name": "negev_boxin",
+        "event": "Weapon_Negev.Boxin"
+      },
+      {
+        "weaponId": 36,
+        "kind": "bolt",
+        "name": "negev_pump",
+        "event": "Weapon_Negev.Pump"
+      },
+      {
+        "weaponId": 36,
+        "kind": "boltForward",
+        "name": "negev_pump",
+        "event": "Weapon_Negev.Pump"
+      },
+      {
+        "weaponId": 36,
+        "kind": "draw",
+        "name": "negev_draw",
+        "event": "Weapon_Negev.Draw"
+      },
+      {
+        "weaponId": 21,
+        "kind": "scope",
+        "name": "aug_zoom",
+        "event": "Weapon_AUG.ZoomIn"
+      },
+      {
+        "weaponId": 22,
+        "kind": "scope",
+        "name": "sg556_zoom",
+        "event": "Weapon_sg556.ZoomIn"
+      },
+      {
+        "weaponId": 23,
+        "kind": "scope",
+        "name": "ssg08_zoom",
+        "event": "Weapon_SSG08.Zoom"
+      },
+      {
+        "weaponId": 24,
+        "kind": "scope",
+        "name": "scar20_zoom",
+        "event": "Weapon_SCAR20.Zoom"
+      },
+      {
+        "weaponId": 25,
+        "kind": "scope",
+        "name": "g3sg1_zoom",
+        "event": "Weapon_G3SG1.Zoom"
+      }
+    ]
+  },
+  "limitations": [
+    "The pinned CS2 depot contains some recordings retained from CS:GO; these are selected by current CS2 soundevents, not relabeled historical source downloads.",
+    "One native variation per event; random selection, per-event sound-operator gain/pitch/distance layers and Source 2 mixer are not reproduced.",
+    "Mono Opus conversion and browser HRTF/room processing preserve existing browser mixing, not exact native output.",
+    "The existing six callback phases approximate complex reloads (e.g. belt covers and dual magazines). XM1014 Grab supplies its action marker; CZ uses the native event-mapped shared P250 actions with its own clip-in."
+  ],
+  "clips": [
+    {
+      "name": "ak47-1",
+      "event": "Weapon_AK47.Single",
+      "resource": "sounds/weapons/ak47/ak47_02.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/ak47/ak47_02.vsnd",
+        "sounds/weapons/ak47/ak47_01.vsnd",
+        "sounds/weapons/ak47/ak47_04.vsnd"
+      ],
+      "eventVolume": "1.1"
+    },
+    {
+      "name": "ak47_clipout",
+      "event": "Weapon_AK47.Clipout",
+      "resource": "sounds/weapons/ak47/ak47_clipout_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ak47/ak47_clipout_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "ak47_clipin",
+      "event": "Weapon_AK47.Clipin",
+      "resource": "sounds/weapons/magazine_slide_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/magazine_slide_01.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "ak47_boltpull",
+      "event": "Weapon_AK47.BoltPull",
+      "resource": "sounds/weapons/ak47/ak47_boltpull_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ak47/ak47_boltpull_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "ak47_draw",
+      "event": "Weapon_AK47.Draw",
+      "resource": "sounds/weapons/ak47/ak47_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ak47/ak47_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "m4a1-1-single",
+      "event": "Weapon_M4A1.Silenced",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_01.vsnd"],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "m4a1_clipout",
+      "event": "Weapon_M4A1.Clipout",
+      "resource": "sounds/weapons/m4a1/m4a1_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_clipout.vsnd"],
+      "eventVolume": "0.6"
+    },
+    {
+      "name": "m4a1_clipin",
+      "event": "Weapon_M4A1.Clipin",
+      "resource": "sounds/weapons/m4a1/m4a1_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_clipin.vsnd"],
+      "eventVolume": "0.35"
+    },
+    {
+      "name": "m4a1_silencer_boltback",
+      "event": "Weapon_M4A1S.BoltBack",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_boltback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "m4a1_silencer_boltforward",
+      "event": "Weapon_M4A1S.BoltForward",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_boltforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "m4a1_draw",
+      "event": "Weapon_M4A1.Draw",
+      "resource": "sounds/weapons/m4a1/m4a1_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_draw.vsnd"],
+      "eventVolume": "0.2"
+    },
+    {
+      "name": "usp1",
+      "event": "Weapon_USP.SilencedShot",
+      "resource": "sounds/weapons/usp/usp_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/usp/usp_01.vsnd",
+        "sounds/weapons/usp/usp_02.vsnd",
+        "sounds/weapons/usp/usp_03.vsnd"
+      ],
+      "eventVolume": "0.6"
+    },
+    {
+      "name": "usp_clipout",
+      "event": "Weapon_USP.Clipout",
+      "resource": "sounds/weapons/usp/usp_clipout_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_clipout_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "usp_clipin",
+      "event": "Weapon_USP.Clipin",
+      "resource": "sounds/weapons/usp/usp_clipin_02.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_clipin_02.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "usp_slideback",
+      "event": "Weapon_USP.Slideback",
+      "resource": "sounds/weapons/usp/usp_slideback_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_slideback_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "usp_sliderelease",
+      "event": "Weapon_USP.Sliderelease",
+      "resource": "sounds/weapons/usp/usp_sliderelease_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_sliderelease_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "usp_draw",
+      "event": "Weapon_USP.Draw",
+      "resource": "sounds/weapons/usp/usp_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_draw.vsnd"],
+      "eventVolume": "0.2"
+    },
+    {
+      "name": "awp1",
+      "event": "Weapon_AWP.Single",
+      "resource": "sounds/weapons/awp/awp_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/awp/awp_01.vsnd", "sounds/weapons/awp/awp_02.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "awp_clipout",
+      "event": "Weapon_AWP.Clipout",
+      "resource": "sounds/weapons/awp/awp_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/awp/awp_clipout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "awp_clipin",
+      "event": "Weapon_AWP.Clipin",
+      "resource": "sounds/weapons/awp/awp_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/awp/awp_clipin.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "awp_boltback",
+      "event": "Weapon_AWP.BoltBack",
+      "resource": "sounds/weapons/awp/awp_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/awp/awp_boltback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "awp_boltforward",
+      "event": "Weapon_AWP.BoltForward",
+      "resource": "sounds/weapons/awp/awp_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/awp/awp_boltforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "awp_draw",
+      "event": "Weapon_AWP.Draw",
+      "resource": "sounds/weapons/awp/awp_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/awp/awp_draw.vsnd"],
+      "eventVolume": "0.05"
+    },
+    {
+      "name": "glock18-1",
+      "event": "Weapon_Glock.Single",
+      "resource": "sounds/weapons/glock18/glock_02.vsnd_c",
+      "nativeVariants": ["sounds/weapons/glock18/glock_02.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "glock_clipout",
+      "event": "Weapon_Glock.Clipout",
+      "resource": "sounds/weapons/glock18/glock_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/glock18/glock_clipout.vsnd"],
+      "eventVolume": "0.599976"
+    },
+    {
+      "name": "glock_clipin",
+      "event": "Weapon_Glock.Clipin",
+      "resource": "sounds/weapons/glock18/glock_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/glock18/glock_clipin.vsnd"],
+      "eventVolume": "0.599976"
+    },
+    {
+      "name": "glock_slideback",
+      "event": "Weapon_Glock.Slideback",
+      "resource": "sounds/weapons/glock18/glock_slideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/glock18/glock_slideback.vsnd"],
+      "eventVolume": "0.599976"
+    },
+    {
+      "name": "glock_sliderelease",
+      "event": "Weapon_Glock.Sliderelease",
+      "resource": "sounds/weapons/glock18/glock_sliderelease.vsnd_c",
+      "nativeVariants": ["sounds/weapons/glock18/glock_sliderelease.vsnd"],
+      "eventVolume": "0.7"
+    },
+    {
+      "name": "glock_draw",
+      "event": "Weapon_Glock.Draw",
+      "resource": "sounds/weapons/glock18/glock_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/glock18/glock_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "deagle-1",
+      "event": "Weapon_DEagle.Single",
+      "resource": "sounds/weapons/deagle/deagle_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/deagle/deagle_01.vsnd",
+        "sounds/weapons/deagle/deagle_02.vsnd"
+      ],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "de_clipout",
+      "event": "Weapon_DEagle.Clipout",
+      "resource": "sounds/weapons/deagle/de_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/deagle/de_clipout.vsnd"],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "de_clipin",
+      "event": "Weapon_DEagle.Clipin",
+      "resource": "sounds/weapons/magazine_slide_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/magazine_slide_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "de_slideback",
+      "event": "Weapon_DEagle.Slideback",
+      "resource": "sounds/weapons/deagle/de_slideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/deagle/de_slideback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "de_slideforward",
+      "event": "Weapon_DEagle.Slideforward",
+      "resource": "sounds/weapons/deagle/de_slideforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/deagle/de_slideforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "de_draw",
+      "event": "Weapon_DEagle.Draw",
+      "resource": "sounds/weapons/deagle/de_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/deagle/de_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "m4a1-1",
+      "event": "Weapon_M4A4.Single",
+      "resource": "sounds/weapons/m4a1/m4a1_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_01.vsnd", "sounds/weapons/m4a1/m4a1_02.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "m4a1_boltback",
+      "event": "Weapon_M4A1.BoltBack",
+      "resource": "sounds/weapons/m4a1/m4a1_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_boltback.vsnd"],
+      "eventVolume": "0.799805"
+    },
+    {
+      "name": "m4a1_boltforward",
+      "event": "Weapon_M4A1.BoltForward",
+      "resource": "sounds/weapons/m4a1/m4a1_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_boltforward.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "nova-1",
+      "event": "Weapon_Nova.Single",
+      "resource": "sounds/weapons/nova/nova-1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/nova/nova-1.vsnd"],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "nova_insertshell",
+      "event": "Weapon_Nova.Insertshell",
+      "resource": "sounds/weapons/nova/nova_insertshell_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/nova/nova_insertshell_01.vsnd",
+        "sounds/weapons/nova/nova_insertshell_02.vsnd",
+        "sounds/weapons/nova/nova_insertshell_03.vsnd"
+      ],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "nova_pump",
+      "event": "Weapon_Nova.Pump",
+      "resource": "sounds/weapons/nova/nova_pump.vsnd_c",
+      "nativeVariants": ["sounds/weapons/nova/nova_pump.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "nova_draw",
+      "event": "Weapon_Nova.Draw",
+      "resource": "sounds/weapons/nova/nova_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/nova/nova_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "mp9-1",
+      "event": "Weapon_MP9.Single",
+      "resource": "sounds/weapons/mp9/mp9_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/mp9/mp9_01.vsnd",
+        "sounds/weapons/mp9/mp9_02.vsnd",
+        "sounds/weapons/mp9/mp9_03.vsnd",
+        "sounds/weapons/mp9/mp9_04.vsnd"
+      ],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "mp9_clipout",
+      "event": "Weapon_MP9.Clipout",
+      "resource": "sounds/weapons/mp9/mp9_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp9/mp9_clipout.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp9_clipin",
+      "event": "Weapon_MP9.Clipin",
+      "resource": "sounds/weapons/mp9/mp9_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp9/mp9_clipin.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "mp9_boltback",
+      "event": "Weapon_MP9.BoltBack",
+      "resource": "sounds/weapons/mp9/mp9_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp9/mp9_boltback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp9_boltforward",
+      "event": "Weapon_MP9.BoltForward",
+      "resource": "sounds/weapons/mp9/mp9_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp9/mp9_boltforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp9_draw",
+      "event": "Weapon_MP9.Draw",
+      "resource": "sounds/weapons/mp9/mp9_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp9/mp9_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "hkp2000-1",
+      "event": "Weapon_hkp2000.Single",
+      "resource": "sounds/weapons/hkp2000/hkp2000_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/hkp2000/hkp2000_01.vsnd",
+        "sounds/weapons/hkp2000/hkp2000_02.vsnd",
+        "sounds/weapons/hkp2000/hkp2000_03.vsnd"
+      ],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "hkp2000_clipout",
+      "event": "Weapon_hkp2000.Clipout",
+      "resource": "sounds/weapons/hkp2000/hkp2000_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hkp2000/hkp2000_clipout.vsnd"],
+      "eventVolume": "0.599976"
+    },
+    {
+      "name": "hkp2000_clipin",
+      "event": "Weapon_hkp2000.Clipin",
+      "resource": "sounds/weapons/hkp2000/hkp2000_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hkp2000/hkp2000_clipin.vsnd"],
+      "eventVolume": "0.599976"
+    },
+    {
+      "name": "hkp2000_slideback",
+      "event": "Weapon_hkp2000.Slideback",
+      "resource": "sounds/weapons/hkp2000/hkp2000_slideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hkp2000/hkp2000_slideback.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "hkp2000_sliderelease",
+      "event": "Weapon_hkp2000.Sliderelease",
+      "resource": "sounds/weapons/hkp2000/hkp2000_sliderelease.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hkp2000/hkp2000_sliderelease.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "hkp2000_draw",
+      "event": "Weapon_hkp2000.Draw",
+      "resource": "sounds/weapons/hkp2000/hkp2000_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hkp2000/hkp2000_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "p250-1",
+      "event": "Weapon_P250.Single",
+      "resource": "sounds/weapons/p250/p250_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p250/p250_01.vsnd"],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "p250_clipout",
+      "event": "Weapon_CZ.Clipout",
+      "resource": "sounds/weapons/p250/p250_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p250/p250_clipout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "p250_clipin",
+      "event": "Weapon_P250.Clipin",
+      "resource": "sounds/weapons/p250/p250_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p250/p250_clipin.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "p250_slideback",
+      "event": "Weapon_CZ.Slideback",
+      "resource": "sounds/weapons/p250/p250_slideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p250/p250_slideback.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "p250_sliderelease",
+      "event": "Weapon_CZ.Sliderelease",
+      "resource": "sounds/weapons/p250/p250_sliderelease.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p250/p250_sliderelease.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "p250_draw",
+      "event": "Weapon_CZ.Draw",
+      "resource": "sounds/weapons/p250/p250_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p250/p250_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "fiveseven-1",
+      "event": "Weapon_FiveSeven.Single",
+      "resource": "sounds/weapons/fiveseven/fiveseven_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/fiveseven/fiveseven_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "fiveseven_clipout",
+      "event": "Weapon_FiveSeven.Clipout",
+      "resource": "sounds/weapons/fiveseven/fiveseven_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/fiveseven/fiveseven_clipout.vsnd"],
+      "eventVolume": "0.699707"
+    },
+    {
+      "name": "fiveseven_clipin",
+      "event": "Weapon_FiveSeven.Clipin",
+      "resource": "sounds/weapons/fiveseven/fiveseven_clipin_02.vsnd_c",
+      "nativeVariants": ["sounds/weapons/fiveseven/fiveseven_clipin_02.vsnd"],
+      "eventVolume": "0.4"
+    },
+    {
+      "name": "fiveseven_slideback",
+      "event": "Weapon_FiveSeven.Slideback",
+      "resource": "sounds/weapons/fiveseven/fiveseven_slideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/fiveseven/fiveseven_slideback.vsnd"],
+      "eventVolume": "0.6"
+    },
+    {
+      "name": "fiveseven_sliderelease",
+      "event": "Weapon_FiveSeven.Sliderelease",
+      "resource": "sounds/weapons/fiveseven/fiveseven_sliderelease.vsnd_c",
+      "nativeVariants": ["sounds/weapons/fiveseven/fiveseven_sliderelease.vsnd"],
+      "eventVolume": "0.6"
+    },
+    {
+      "name": "fiveseven_draw",
+      "event": "Weapon_FiveSeven.Draw",
+      "resource": "sounds/weapons/fiveseven/fiveseven_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/fiveseven/fiveseven_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "tec9-1",
+      "event": "Weapon_tec9.Single",
+      "resource": "sounds/weapons/tec9/tec9_02.vsnd_c",
+      "nativeVariants": ["sounds/weapons/tec9/tec9_02.vsnd"],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "tec9_clipout",
+      "event": "Weapon_tec9.Clipout",
+      "resource": "sounds/weapons/tec9/tec9_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/tec9/tec9_clipout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "tec9_clipin",
+      "event": "Weapon_tec9.Clipin",
+      "resource": "sounds/weapons/tec9/tec9_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/tec9/tec9_clipin.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "tec9_boltpull",
+      "event": "Weapon_tec9.Boltpull",
+      "resource": "sounds/weapons/tec9/tec9_boltpull.vsnd_c",
+      "nativeVariants": ["sounds/weapons/tec9/tec9_boltpull.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "tec9_boltrelease",
+      "event": "Weapon_tec9.Boltrelease",
+      "resource": "sounds/weapons/tec9/tec9_boltrelease.vsnd_c",
+      "nativeVariants": ["sounds/weapons/tec9/tec9_boltrelease.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "tec9_draw",
+      "event": "Weapon_tec9.Draw",
+      "resource": "sounds/weapons/tec9/tec9_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/tec9/tec9_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "cz75a-1",
+      "event": "Weapon_CZ75A.Single",
+      "resource": "sounds/weapons/cz75a/cz75_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/cz75a/cz75_01.vsnd",
+        "sounds/weapons/cz75a/cz75_02.vsnd",
+        "sounds/weapons/cz75a/cz75_03.vsnd"
+      ],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "cz75_clipin",
+      "event": "Weapon_CZ.Clipin",
+      "resource": "sounds/weapons/cz75a/cz75_clipin_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/cz75a/cz75_clipin_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "revolver-1_01",
+      "event": "Weapon_Revolver.Single",
+      "resource": "sounds/weapons/revolver/revolver-1_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/revolver/revolver-1_01.vsnd"],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "revolver_clipout",
+      "event": "Weapon_Revolver.Clipout",
+      "resource": "sounds/weapons/revolver/revolver_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/revolver/revolver_clipout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "revolver_clipin",
+      "event": "Weapon_Revolver.Clipin",
+      "resource": "sounds/weapons/revolver/revolver_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/revolver/revolver_clipin.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "revolver_sideback",
+      "event": "Weapon_Revolver.Sideback",
+      "resource": "sounds/weapons/revolver/revolver_sideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/revolver/revolver_sideback.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "revolver_siderelease",
+      "event": "Weapon_Revolver.Siderelease",
+      "resource": "sounds/weapons/revolver/revolver_siderelease.vsnd_c",
+      "nativeVariants": ["sounds/weapons/revolver/revolver_siderelease.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "revolver_draw",
+      "event": "Weapon_Revolver.Draw",
+      "resource": "sounds/weapons/revolver/revolver_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/revolver/revolver_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "elite-1",
+      "event": "Weapon_ELITE.Single",
+      "resource": "sounds/weapons/elite/elites_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/elite/elites_01.vsnd",
+        "sounds/weapons/elite/elites_02.vsnd",
+        "sounds/weapons/elite/elites_03.vsnd",
+        "sounds/weapons/elite/elites_04.vsnd"
+      ],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "elite_clipout",
+      "event": "Weapon_ELITE.Clipout",
+      "resource": "sounds/weapons/elite/elite_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/elite/elite_clipout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "elite_leftclipin",
+      "event": "Weapon_ELITE.Clipin",
+      "resource": "sounds/weapons/elite/elites_clipin_07.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/elite/elites_clipin_07.vsnd",
+        "sounds/weapons/elite/elites_clipin_08.vsnd",
+        "sounds/weapons/elite/elites_clipin_09.vsnd",
+        "sounds/weapons/elite/elites_clipin_10.vsnd"
+      ],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "elite_sliderelease",
+      "event": "Weapon_ELITE.Sliderelease",
+      "resource": "sounds/weapons/elite/elite_sliderelease.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/elite/elite_sliderelease.vsnd",
+        "sounds/weapons/elite/elite_sliderelease_02.vsnd"
+      ],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "elite_draw",
+      "event": "Weapon_ELITE.Draw",
+      "resource": "sounds/weapons/elite/elite_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/elite/elite_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "famas-1",
+      "event": "Weapon_FAMAS.Single",
+      "resource": "sounds/weapons/famas/famas_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/famas/famas_01.vsnd",
+        "sounds/weapons/famas/famas_02.vsnd",
+        "sounds/weapons/famas/famas_03.vsnd"
+      ],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "famas_clipout",
+      "event": "Weapon_FAMAS.Clipout",
+      "resource": "sounds/weapons/famas/famas_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/famas/famas_clipout.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "famas_clipin",
+      "event": "Weapon_FAMAS.Clipin",
+      "resource": "sounds/weapons/famas/famas_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/famas/famas_clipin.vsnd"],
+      "eventVolume": "0.2"
+    },
+    {
+      "name": "famas_boltback",
+      "event": "Weapon_FAMAS.BoltBack",
+      "resource": "sounds/weapons/famas/famas_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/famas/famas_boltback.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "famas_boltforward",
+      "event": "Weapon_FAMAS.BoltForward",
+      "resource": "sounds/weapons/famas/famas_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/famas/famas_boltforward.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "famas_draw",
+      "event": "Weapon_FAMAS.Draw",
+      "resource": "sounds/weapons/famas/famas_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/famas/famas_draw.vsnd"],
+      "eventVolume": "0.15"
+    },
+    {
+      "name": "galil-1",
+      "event": "Weapon_GalilAR.Single",
+      "resource": "sounds/weapons/galilar/galil_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/galilar/galil_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "galil_clipout",
+      "event": "Weapon_GalilAR.Clipout",
+      "resource": "sounds/weapons/galilar/galil_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/galilar/galil_clipout.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "galil_clipin",
+      "event": "Weapon_GalilAR.Clipin",
+      "resource": "sounds/weapons/magazine_slide_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/magazine_slide_01.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "galil_boltback",
+      "event": "Weapon_GalilAR.BoltBack",
+      "resource": "sounds/weapons/galilar/galil_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/galilar/galil_boltback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "galil_boltforward",
+      "event": "Weapon_GalilAR.BoltForward",
+      "resource": "sounds/weapons/galilar/galil_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/galilar/galil_boltforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "galil_draw",
+      "event": "Weapon_GalilAR.Draw",
+      "resource": "sounds/weapons/galilar/galil_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/galilar/galil_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "aug-1",
+      "event": "Weapon_AUG.Single",
+      "resource": "sounds/weapons/aug/aug_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/aug/aug_01.vsnd",
+        "sounds/weapons/aug/aug_02.vsnd",
+        "sounds/weapons/aug/aug_03.vsnd",
+        "sounds/weapons/aug/aug_04.vsnd"
+      ],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "aug_clipout",
+      "event": "Weapon_AUG.Clipout",
+      "resource": "sounds/weapons/aug/aug_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/aug/aug_clipout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "aug_clipin",
+      "event": "Weapon_AUG.Clipin",
+      "resource": "sounds/weapons/aug/aug_clipin_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/aug/aug_clipin_01.vsnd"],
+      "eventVolume": "0.2"
+    },
+    {
+      "name": "aug_boltpull",
+      "event": "Weapon_AUG.Boltpull",
+      "resource": "sounds/weapons/aug/aug_boltpull.vsnd_c",
+      "nativeVariants": ["sounds/weapons/aug/aug_boltpull.vsnd"],
+      "eventVolume": "0.6"
+    },
+    {
+      "name": "aug_boltrelease",
+      "event": "Weapon_AUG.Boltrelease",
+      "resource": "sounds/weapons/aug/aug_boltrelease.vsnd_c",
+      "nativeVariants": ["sounds/weapons/aug/aug_boltrelease.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "aug_draw",
+      "event": "Weapon_AUG.Draw",
+      "resource": "sounds/weapons/aug/aug_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/aug/aug_draw.vsnd"],
+      "eventVolume": "0.2"
+    },
+    {
+      "name": "sg556-1",
+      "event": "Weapon_sg556.Single",
+      "resource": "sounds/weapons/sg556/sg556_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/sg556/sg556_01.vsnd",
+        "sounds/weapons/sg556/sg556_02.vsnd",
+        "sounds/weapons/sg556/sg556_03.vsnd",
+        "sounds/weapons/sg556/sg556_04.vsnd"
+      ],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "sg556_clipout",
+      "event": "Weapon_sg556.Clipout",
+      "resource": "sounds/weapons/sg556/sg556_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/sg556/sg556_clipout.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "sg556_clipin",
+      "event": "Weapon_sg556.Clipin",
+      "resource": "sounds/weapons/sg556/sg556_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/sg556/sg556_clipin.vsnd"],
+      "eventVolume": "0.4"
+    },
+    {
+      "name": "sg556_boltback",
+      "event": "Weapon_sg556.BoltBack",
+      "resource": "sounds/weapons/sg556/sg556_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/sg556/sg556_boltback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "sg556_boltforward",
+      "event": "Weapon_sg556.BoltForward",
+      "resource": "sounds/weapons/sg556/sg556_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/sg556/sg556_boltforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "sg556_draw",
+      "event": "Weapon_SG556.Draw",
+      "resource": "sounds/weapons/sg556/sg556_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/sg556/sg556_draw.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "ssg08-1",
+      "event": "Weapon_SSG08.Single",
+      "resource": "sounds/weapons/ssg08/ssg08_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ssg08/ssg08_01.vsnd"],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "ssg08_clipout",
+      "event": "Weapon_SSG08.Clipout",
+      "resource": "sounds/weapons/ssg08/ssg08_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ssg08/ssg08_clipout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "ssg08_clipin",
+      "event": "Weapon_SSG08.Clipin",
+      "resource": "sounds/weapons/ssg08/ssg08_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ssg08/ssg08_clipin.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "ssg08_boltback",
+      "event": "Weapon_SSG08.BoltBack",
+      "resource": "sounds/weapons/ssg08/ssg08_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ssg08/ssg08_boltback.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "ssg08_boltforward",
+      "event": "Weapon_SSG08.BoltForward",
+      "resource": "sounds/weapons/ssg08/ssg08_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ssg08/ssg08_boltforward.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "ssg08_draw",
+      "event": "Weapon_SSG08.Draw",
+      "resource": "sounds/weapons/ssg08/ssg08_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ssg08/ssg08_draw.vsnd"],
+      "eventVolume": "0.15"
+    },
+    {
+      "name": "scar20_01",
+      "event": "Weapon_SCAR20.Single",
+      "resource": "sounds/weapons/scar20/scar20_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/scar20/scar20_01.vsnd",
+        "sounds/weapons/scar20/scar20_02.vsnd",
+        "sounds/weapons/scar20/scar20_03.vsnd"
+      ],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "scar20_clipout",
+      "event": "Weapon_SCAR20.Clipout",
+      "resource": "sounds/weapons/scar20/scar20_clipout_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/scar20/scar20_clipout_01.vsnd"],
+      "eventVolume": "0.4"
+    },
+    {
+      "name": "scar20_clipin",
+      "event": "Weapon_SCAR20.Clipin",
+      "resource": "sounds/weapons/scar20/scar20_clipin_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/scar20/scar20_clipin_01.vsnd"],
+      "eventVolume": "0.15"
+    },
+    {
+      "name": "scar20_boltback",
+      "event": "Weapon_SCAR20.BoltBack",
+      "resource": "sounds/weapons/scar20/scar20_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/scar20/scar20_boltback.vsnd"],
+      "eventVolume": "0.699707"
+    },
+    {
+      "name": "scar20_boltforward",
+      "event": "Weapon_SCAR20.BoltForward",
+      "resource": "sounds/weapons/scar20/scar20_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/scar20/scar20_boltforward.vsnd"],
+      "eventVolume": "0.699707"
+    },
+    {
+      "name": "scar20_draw",
+      "event": "Weapon_SCAR20.Draw",
+      "resource": "sounds/weapons/scar20/scar20_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/scar20/scar20_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "g3sg1-1",
+      "event": "Weapon_G3SG1.Single",
+      "resource": "sounds/weapons/g3sg1/g3sg1_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/g3sg1/g3sg1_01.vsnd",
+        "sounds/weapons/g3sg1/g3sg1_02.vsnd",
+        "sounds/weapons/g3sg1/g3sg1_03.vsnd"
+      ],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "g3sg1_clipout",
+      "event": "Weapon_G3SG1.Clipout",
+      "resource": "sounds/weapons/g3sg1/g3sg1_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/g3sg1/g3sg1_clipout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "g3sg1_clipin",
+      "event": "Weapon_G3SG1.Clipin",
+      "resource": "sounds/weapons/g3sg1/g3sg1_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/g3sg1/g3sg1_clipin.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "g3sg1_slideback",
+      "event": "Weapon_G3SG1.SlideBack",
+      "resource": "sounds/weapons/g3sg1/g3sg1_slideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/g3sg1/g3sg1_slideback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "g3sg1_slideforward",
+      "event": "Weapon_G3SG1.SlideForward",
+      "resource": "sounds/weapons/g3sg1/g3sg1_slideforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/g3sg1/g3sg1_slideforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "g3sg1_draw",
+      "event": "Weapon_G3SG1.Draw",
+      "resource": "sounds/weapons/g3sg1/g3sg1_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/g3sg1/g3sg1_draw.vsnd"],
+      "eventVolume": "0.1"
+    },
+    {
+      "name": "mac10-1",
+      "event": "Weapon_MAC10.Single",
+      "resource": "sounds/weapons/mac10/mac10_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/mac10/mac10_01.vsnd",
+        "sounds/weapons/mac10/mac10_02.vsnd"
+      ],
+      "eventVolume": "0.65"
+    },
+    {
+      "name": "mac10_clipout",
+      "event": "Weapon_MAC10.Clipout",
+      "resource": "sounds/weapons/mac10/mac10_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mac10/mac10_clipout.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mac10_clipin",
+      "event": "Weapon_MAC10.Clipin",
+      "resource": "sounds/weapons/mac10/mac10_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mac10/mac10_clipin.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "mac10_boltback",
+      "event": "Weapon_MAC10.BoltBack",
+      "resource": "sounds/weapons/mac10/mac10_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mac10/mac10_boltforward.vsnd"],
+      "eventVolume": "0.7"
+    },
+    {
+      "name": "mac10_boltforward",
+      "event": "Weapon_MAC10.BoltForward",
+      "resource": "sounds/weapons/mac10/mac10_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mac10/mac10_boltback.vsnd"],
+      "eventVolume": "0.7"
+    },
+    {
+      "name": "mac10_draw",
+      "event": "Weapon_MAC10.Draw",
+      "resource": "sounds/weapons/mac10/mac10_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mac10/mac10_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "mp7-1",
+      "event": "Weapon_MP7.Single",
+      "resource": "sounds/weapons/mp7/mp7_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/mp7/mp7_01.vsnd",
+        "sounds/weapons/mp7/mp7_02.vsnd",
+        "sounds/weapons/mp7/mp7_03.vsnd"
+      ],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp7_clipout",
+      "event": "Weapon_MP7.Clipout",
+      "resource": "sounds/weapons/mp7/mp7_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp7/mp7_clipout.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp7_clipin",
+      "event": "Weapon_MP7.Clipin",
+      "resource": "sounds/weapons/mp7/mp7_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp7/mp7_clipin.vsnd"],
+      "eventVolume": "0.7"
+    },
+    {
+      "name": "mp7_slideback",
+      "event": "Weapon_MP7.Slideback",
+      "resource": "sounds/weapons/mp7/mp7_slideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp7/mp7_slideback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp7_slideforward",
+      "event": "Weapon_MP7.SlideForward",
+      "resource": "sounds/weapons/mp7/mp7_slideforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp7/mp7_slideforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp7_draw",
+      "event": "Weapon_MP7.Draw",
+      "resource": "sounds/weapons/mp7/mp7_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp7/mp7_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "mp5_01",
+      "event": "Weapon_MP5.Single",
+      "resource": "sounds/weapons/mp5/mp5_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp5/mp5_01.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp5_clipout",
+      "event": "Weapon_MP5.Clipout",
+      "resource": "sounds/weapons/mp5/mp5_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp5/mp5_clipout.vsnd"],
+      "eventVolume": "0.699707"
+    },
+    {
+      "name": "mp5_clipin",
+      "event": "Weapon_MP5.Clipin",
+      "resource": "sounds/weapons/mp5/mp5_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp5/mp5_clipin.vsnd"],
+      "eventVolume": "0.4"
+    },
+    {
+      "name": "mp5_slideback",
+      "event": "Weapon_MP5.Slideback",
+      "resource": "sounds/weapons/mp5/mp5_slideback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp5/mp5_slideback.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "mp5_slideforward",
+      "event": "Weapon_MP5.SlideForward",
+      "resource": "sounds/weapons/mp5/mp5_slideforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp5/mp5_slideforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "mp5_draw",
+      "event": "Weapon_MP5.Draw",
+      "resource": "sounds/weapons/mp5/mp5_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mp5/mp5_draw.vsnd"],
+      "eventVolume": "0.05"
+    },
+    {
+      "name": "ump45-1",
+      "event": "Weapon_UMP45.Single",
+      "resource": "sounds/weapons/ump45/ump45_02.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ump45/ump45_02.vsnd"],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "ump45_clipout",
+      "event": "Weapon_UMP45.Clipout",
+      "resource": "sounds/weapons/ump45/ump45_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ump45/ump45_clipout.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "ump45_clipin",
+      "event": "Weapon_UMP45.Clipin",
+      "resource": "sounds/weapons/ump45/ump45_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ump45/ump45_clipin.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "ump45_boltback",
+      "event": "Weapon_UMP45.BoltBack",
+      "resource": "sounds/weapons/ump45/ump45_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ump45/ump45_boltback.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "ump45_boltforward",
+      "event": "Weapon_UMP45.BoltForward",
+      "resource": "sounds/weapons/ump45/ump45_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ump45/ump45_boltforward.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "ump45_draw",
+      "event": "Weapon_UMP45.Draw",
+      "resource": "sounds/weapons/ump45/ump45_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ump45/ump45_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "p90-1",
+      "event": "Weapon_P90.Single",
+      "resource": "sounds/weapons/p90/p90_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p90/p90_01.vsnd", "sounds/weapons/p90/p90_02.vsnd"],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "p90_clipout",
+      "event": "Weapon_P90.Clipout",
+      "resource": "sounds/weapons/p90/p90_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p90/p90_clipout.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "p90_clipin",
+      "event": "Weapon_P90.Clipin",
+      "resource": "sounds/weapons/p90/p90_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p90/p90_clipin.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "p90_boltback",
+      "event": "Weapon_P90.BoltBack",
+      "resource": "sounds/weapons/p90/p90_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p90/p90_boltback.vsnd"],
+      "eventVolume": "0.4"
+    },
+    {
+      "name": "p90_boltforward",
+      "event": "Weapon_P90.BoltForward",
+      "resource": "sounds/weapons/p90/p90_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p90/p90_boltforward.vsnd"],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "p90_draw",
+      "event": "Weapon_P90.Draw",
+      "resource": "sounds/weapons/p90/p90_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/p90/p90_draw.vsnd"],
+      "eventVolume": "0.1"
+    },
+    {
+      "name": "bizon-1",
+      "event": "Weapon_bizon.Single",
+      "resource": "sounds/weapons/bizon/bizon_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/bizon/bizon_01.vsnd",
+        "sounds/weapons/bizon/bizon_02.vsnd"
+      ],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "bizon_clipout",
+      "event": "Weapon_bizon.Clipout",
+      "resource": "sounds/weapons/bizon/bizon_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/bizon/bizon_clipout.vsnd"],
+      "eventVolume": "0.7"
+    },
+    {
+      "name": "bizon_clipin",
+      "event": "Weapon_bizon.Clipin",
+      "resource": "sounds/weapons/bizon/bizon_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/bizon/bizon_clipin.vsnd"],
+      "eventVolume": "0.25"
+    },
+    {
+      "name": "bizon_boltback",
+      "event": "Weapon_bizon.BoltBack",
+      "resource": "sounds/weapons/bizon/bizon_boltback.vsnd_c",
+      "nativeVariants": ["sounds/weapons/bizon/bizon_boltback.vsnd"],
+      "eventVolume": "0.899902"
+    },
+    {
+      "name": "bizon_boltforward",
+      "event": "Weapon_bizon.BoltForward",
+      "resource": "sounds/weapons/bizon/bizon_boltforward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/bizon/bizon_boltforward.vsnd"],
+      "eventVolume": "0.899902"
+    },
+    {
+      "name": "bizon_draw",
+      "event": "Weapon_bizon.Draw",
+      "resource": "sounds/weapons/bizon/bizon_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/bizon/bizon_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "xm1014-1",
+      "event": "Weapon_XM1014.Single",
+      "resource": "sounds/weapons/xm1014/xm1014-1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/xm1014/xm1014-1.vsnd"],
+      "eventVolume": "0.8"
+    },
+    {
+      "name": "xm1014_insertshell",
+      "event": "Weapon_XM1014.InsertShell",
+      "resource": "sounds/weapons/xm1014/xm1014_insertshell_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/xm1014/xm1014_insertshell_01.vsnd",
+        "sounds/weapons/xm1014/xm1014_insertshell_02.vsnd",
+        "sounds/weapons/xm1014/xm1014_insertshell_03.vsnd"
+      ],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "xm1014_pump",
+      "event": "Weapon_XM1014.Grab",
+      "resource": "sounds/weapons/xm1014/xm1014_catch_03.vsnd_c",
+      "nativeVariants": ["sounds/weapons/xm1014/xm1014_catch_03.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "xm1014_draw",
+      "event": "Weapon_XM1014.Draw",
+      "resource": "sounds/weapons/xm1014/xm1014_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/xm1014/xm1014_draw.vsnd"],
+      "eventVolume": "0.2"
+    },
+    {
+      "name": "mag7-1",
+      "event": "Weapon_Mag7.Single",
+      "resource": "sounds/weapons/mag7/mag7_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mag7/mag7_01.vsnd", "sounds/weapons/mag7/mag7_02.vsnd"],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "mag7_clipout",
+      "event": "Weapon_Mag7.Clipout",
+      "resource": "sounds/weapons/mag7/mag7_clipout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mag7/mag7_clipout.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "mag7_clipin",
+      "event": "Weapon_Mag7.Clipin",
+      "resource": "sounds/weapons/mag7/mag7_clipin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mag7/mag7_clipin.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "mag7_pump_back",
+      "event": "Weapon_Mag7.PumpBack",
+      "resource": "sounds/weapons/mag7/mag7_pump_back.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mag7/mag7_pump_back.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "mag7_pump_forward",
+      "event": "Weapon_Mag7.PumpForward",
+      "resource": "sounds/weapons/mag7/mag7_pump_forward.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mag7/mag7_pump_forward.vsnd"],
+      "eventVolume": "0.5"
+    },
+    {
+      "name": "mag7_draw",
+      "event": "Weapon_Mag7.Draw",
+      "resource": "sounds/weapons/mag7/mag7_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/mag7/mag7_draw.vsnd"],
+      "eventVolume": "0.2"
+    },
+    {
+      "name": "sawedoff-1",
+      "event": "Weapon_Sawedoff.Single",
+      "resource": "sounds/weapons/sawedoff/sawedoff-1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/sawedoff/sawedoff-1.vsnd"],
+      "eventVolume": "0.9"
+    },
+    {
+      "name": "sawedoff_insertshell",
+      "event": "Weapon_Sawedoff.Insertshell",
+      "resource": "sounds/weapons/sawedoff/sawedoff_insertshell_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/sawedoff/sawedoff_insertshell_01.vsnd",
+        "sounds/weapons/sawedoff/sawedoff_insertshell_02.vsnd"
+      ],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "sawedoff_pump",
+      "event": "Weapon_Sawedoff.Pump",
+      "resource": "sounds/weapons/sawedoff/sawedoff_pump.vsnd_c",
+      "nativeVariants": ["sounds/weapons/sawedoff/sawedoff_pump.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "sawedoff_draw",
+      "event": "Weapon_Sawedoff.Draw",
+      "resource": "sounds/weapons/sawedoff/sawedoff_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/sawedoff/sawedoff_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "m249-1",
+      "event": "Weapon_M249.Single",
+      "resource": "sounds/weapons/m249/m249_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/m249/m249_01.vsnd",
+        "sounds/weapons/m249/m249_02.vsnd",
+        "sounds/weapons/m249/m249_03.vsnd"
+      ],
+      "eventVolume": "1.7"
+    },
+    {
+      "name": "m249_boxout",
+      "event": "Weapon_M249.Boxout",
+      "resource": "sounds/weapons/m249/m249_boxout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m249/m249_boxout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "m249_boxin",
+      "event": "Weapon_M249.Boxin",
+      "resource": "sounds/weapons/m249/m249_boxin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m249/m249_boxin.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "m249_pump",
+      "event": "Weapon_M249.Pump",
+      "resource": "sounds/weapons/m249/m249_pump.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m249/m249_pump.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "m249_draw",
+      "event": "Weapon_M249.Draw",
+      "resource": "sounds/weapons/m249/m249_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m249/m249_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "negev-1",
+      "event": "Weapon_Negev.Single",
+      "resource": "sounds/weapons/negev/negev_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/negev/negev_01.vsnd",
+        "sounds/weapons/negev/negev_02.vsnd"
+      ],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "negev_boxout",
+      "event": "Weapon_Negev.Boxout",
+      "resource": "sounds/weapons/negev/negev_boxout.vsnd_c",
+      "nativeVariants": ["sounds/weapons/negev/negev_boxout.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "negev_boxin",
+      "event": "Weapon_Negev.Boxin",
+      "resource": "sounds/weapons/negev/negev_boxin.vsnd_c",
+      "nativeVariants": ["sounds/weapons/negev/negev_boxin.vsnd"],
+      "eventVolume": "0.75"
+    },
+    {
+      "name": "negev_pump",
+      "event": "Weapon_Negev.Pump",
+      "resource": "sounds/weapons/negev/negev_pump.vsnd_c",
+      "nativeVariants": ["sounds/weapons/negev/negev_pump.vsnd"],
+      "eventVolume": "1.0"
+    },
+    {
+      "name": "negev_draw",
+      "event": "Weapon_Negev.Draw",
+      "resource": "sounds/weapons/negev/negev_draw.vsnd_c",
+      "nativeVariants": ["sounds/weapons/negev/negev_draw.vsnd"],
+      "eventVolume": "0.3"
+    },
+    {
+      "name": "zoom",
+      "event": "Weapon_AWP.Zoom",
+      "resource": "sounds/weapons/awp/zoom.vsnd_c",
+      "nativeVariants": ["sounds/weapons/awp/zoom.vsnd"],
+      "eventVolume": "0.1"
+    },
+    {
+      "name": "aug_zoom",
+      "event": "Weapon_AUG.ZoomIn",
+      "resource": "sounds/weapons/aug/aug_zoom_in.vsnd_c",
+      "nativeVariants": ["sounds/weapons/aug/aug_zoom_in.vsnd"],
+      "eventVolume": "0.05"
+    },
+    {
+      "name": "sg556_zoom",
+      "event": "Weapon_sg556.ZoomIn",
+      "resource": "sounds/weapons/aug/aug_zoom_in.vsnd_c",
+      "nativeVariants": ["sounds/weapons/aug/aug_zoom_in.vsnd"],
+      "eventVolume": "0.1"
+    },
+    {
+      "name": "ssg08_zoom",
+      "event": "Weapon_SSG08.Zoom",
+      "resource": "sounds/weapons/ssg08/ssg08_zoom_in.vsnd_c",
+      "nativeVariants": ["sounds/weapons/ssg08/ssg08_zoom_in.vsnd"],
+      "eventVolume": "0.1"
+    },
+    {
+      "name": "scar20_zoom",
+      "event": "Weapon_SCAR20.Zoom",
+      "resource": "sounds/weapons/g3sg1/g3sg1_zoom_in.vsnd_c",
+      "nativeVariants": ["sounds/weapons/g3sg1/g3sg1_zoom_in.vsnd"],
+      "eventVolume": "0.07"
+    },
+    {
+      "name": "g3sg1_zoom",
+      "event": "Weapon_G3SG1.Zoom",
+      "resource": "sounds/weapons/scar20/scar20_zoom_in.vsnd_c",
+      "nativeVariants": ["sounds/weapons/scar20/scar20_zoom_in.vsnd"],
+      "eventVolume": "0.05"
+    },
+    {
+      "name": "suppressor-1-single",
+      "event": "Weapon_M4A1.Single",
+      "resource": "sounds/weapons/m4a1/m4a1_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/m4a1/m4a1_01.vsnd",
+        "sounds/weapons/m4a1/m4a1_02.vsnd",
+        "sounds/weapons/m4a1/m4a1_03.vsnd",
+        "sounds/weapons/m4a1/m4a1_04.vsnd"
+      ]
+    },
+    {
+      "name": "suppressor-1-silencerscrewonstart",
+      "event": "Weapon_M4A1.SilencerScrewOnStart",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_screw_on_start.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_screw_on_start.vsnd"]
+    },
+    {
+      "name": "suppressor-1-silencerscrewoffend",
+      "event": "Weapon_M4A1.SilencerScrewOffEnd",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_screw_off_end.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_screw_off_end.vsnd"]
+    },
+    {
+      "name": "suppressor-1-silencerscrew1",
+      "event": "Weapon_M4A1.SilencerScrew1",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_screw_1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_screw_1.vsnd"]
+    },
+    {
+      "name": "suppressor-1-silencerscrew2",
+      "event": "Weapon_M4A1.SilencerScrew2",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_screw_2.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_screw_2.vsnd"]
+    },
+    {
+      "name": "suppressor-1-silencerscrew3",
+      "event": "Weapon_M4A1.SilencerScrew3",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_screw_3.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_screw_3.vsnd"]
+    },
+    {
+      "name": "suppressor-1-silencerscrew4",
+      "event": "Weapon_M4A1.SilencerScrew4",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_screw_4.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_screw_4.vsnd"]
+    },
+    {
+      "name": "suppressor-1-silencerscrew5",
+      "event": "Weapon_M4A1.SilencerScrew5",
+      "resource": "sounds/weapons/m4a1/m4a1_silencer_screw_5.vsnd_c",
+      "nativeVariants": ["sounds/weapons/m4a1/m4a1_silencer_screw_5.vsnd"]
+    },
+    {
+      "name": "suppressor-2-single",
+      "event": "Weapon_USP.Single",
+      "resource": "sounds/weapons/usp/usp_unsilenced_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/usp/usp_unsilenced_01.vsnd",
+        "sounds/weapons/usp/usp_unsilenced_02.vsnd",
+        "sounds/weapons/usp/usp_unsilenced_03.vsnd"
+      ]
+    },
+    {
+      "name": "suppressor-2-silencerscrewonstart",
+      "event": "Weapon_USP.SilencerScrewOnStart",
+      "resource": "sounds/weapons/usp/usp_silencer_screw_on_start.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_silencer_screw_on_start.vsnd"]
+    },
+    {
+      "name": "suppressor-2-silencerscrewoffend",
+      "event": "Weapon_USP.SilencerScrewOffEnd",
+      "resource": "sounds/weapons/usp/usp_silencer_screw_off_end.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_silencer_screw_off_end.vsnd"]
+    },
+    {
+      "name": "suppressor-2-silencerscrew1",
+      "event": "Weapon_USP.SilencerScrew1",
+      "resource": "sounds/weapons/usp/usp_silencer_screw1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_silencer_screw1.vsnd"]
+    },
+    {
+      "name": "suppressor-2-silencerscrew2",
+      "event": "Weapon_USP.SilencerScrew2",
+      "resource": "sounds/weapons/usp/usp_silencer_screw2.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_silencer_screw2.vsnd"]
+    },
+    {
+      "name": "suppressor-2-silencerscrew3",
+      "event": "Weapon_USP.SilencerScrew3",
+      "resource": "sounds/weapons/usp/usp_silencer_screw3.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_silencer_screw3.vsnd"]
+    },
+    {
+      "name": "suppressor-2-silencerscrew4",
+      "event": "Weapon_USP.SilencerScrew4",
+      "resource": "sounds/weapons/usp/usp_silencer_screw4.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_silencer_screw4.vsnd"]
+    },
+    {
+      "name": "suppressor-2-silencerscrew5",
+      "event": "Weapon_USP.SilencerScrew5",
+      "resource": "sounds/weapons/usp/usp_silencer_screw5.vsnd_c",
+      "nativeVariants": ["sounds/weapons/usp/usp_silencer_screw5.vsnd"]
+    },
+    {
+      "name": "utility-he-pin",
+      "event": "HEGrenade.PullPin_Grenade",
+      "resource": "sounds/weapons/hegrenade/pinpull.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hegrenade/pinpull.vsnd"]
+    },
+    {
+      "name": "utility-he-throw",
+      "event": "HEGrenade.Throw",
+      "resource": "sounds/items/weapon_hegrenade_throw.vsnd_c",
+      "nativeVariants": ["sounds/items/weapon_hegrenade_throw.vsnd"]
+    },
+    {
+      "name": "utility-he-bounce",
+      "event": "HEGrenade.Bounce",
+      "resource": "sounds/weapons/hegrenade/he_bounce-1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hegrenade/he_bounce-1.vsnd"]
+    },
+    {
+      "name": "utility-he-explode",
+      "event": "BaseGrenade.Explode",
+      "resource": "sounds/weapons/hegrenade/hegrenade_detonate_02.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/hegrenade/hegrenade_detonate_02.vsnd",
+        "sounds/weapons/hegrenade/hegrenade_detonate_03.vsnd"
+      ]
+    },
+    {
+      "name": "utility-he-draw",
+      "event": "HEGrenade.Draw",
+      "resource": "sounds/weapons/hegrenade/hegrenade_draw_06.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hegrenade/hegrenade_draw_06.vsnd"]
+    },
+    {
+      "name": "utility-flash-pin",
+      "event": "Flashbang.PullPin_Grenade",
+      "resource": "sounds/weapons/flashbang/pinpull.vsnd_c",
+      "nativeVariants": ["sounds/weapons/flashbang/pinpull.vsnd"]
+    },
+    {
+      "name": "utility-flash-throw",
+      "event": "Flashbang.Throw",
+      "resource": "sounds/weapons/flashbang/flashbang_throw_03.vsnd_c",
+      "nativeVariants": ["sounds/weapons/flashbang/flashbang_throw_03.vsnd"]
+    },
+    {
+      "name": "utility-flash-bounce",
+      "event": "Flashbang.Bounce",
+      "resource": "sounds/weapons/flashbang/grenade_hit1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/flashbang/grenade_hit1.vsnd"]
+    },
+    {
+      "name": "utility-flash-explode",
+      "event": "Flashbang.Explode",
+      "resource": "sounds/weapons/flashbang/flashbang_explode1.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/flashbang/flashbang_explode1.vsnd",
+        "sounds/weapons/flashbang/flashbang_explode2.vsnd"
+      ]
+    },
+    {
+      "name": "utility-flash-draw",
+      "event": "Flashbang.Draw",
+      "resource": "sounds/weapons/flashbang/flashbang_throw_03.vsnd_c",
+      "nativeVariants": ["sounds/weapons/flashbang/flashbang_throw_03.vsnd"]
+    },
+    {
+      "name": "utility-smoke-pin",
+      "event": "SmokeGrenade.PullPin_Grenade",
+      "resource": "sounds/weapons/smokegrenade/pinpull.vsnd_c",
+      "nativeVariants": ["sounds/weapons/smokegrenade/pinpull.vsnd"]
+    },
+    {
+      "name": "utility-smoke-throw",
+      "event": "SmokeGrenade.Throw",
+      "resource": "sounds/weapons/smokegrenade/smoke_grenade_throw_04.vsnd_c",
+      "nativeVariants": ["sounds/weapons/smokegrenade/smoke_grenade_throw_04.vsnd"]
+    },
+    {
+      "name": "utility-smoke-bounce",
+      "event": "SmokeGrenade.Bounce",
+      "resource": "sounds/weapons/smokegrenade/grenade_hit1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/smokegrenade/grenade_hit1.vsnd"]
+    },
+    {
+      "name": "utility-smoke-draw",
+      "event": "SmokeGrenade.Draw",
+      "resource": "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_01.vsnd",
+        "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_03.vsnd",
+        "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_04.vsnd",
+        "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_05.vsnd",
+        "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_06.vsnd",
+        "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_08.vsnd",
+        "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_09.vsnd",
+        "sounds/weapons/smokegrenade/smoke_grenade_draw_exp_11.vsnd"
+      ]
+    },
+    {
+      "name": "utility-decoy-pin",
+      "event": "Decoy.PullPin_Grenade",
+      "resource": "sounds/weapons/decoy/pinpull.vsnd_c",
+      "nativeVariants": ["sounds/weapons/decoy/pinpull.vsnd"]
+    },
+    {
+      "name": "utility-decoy-throw",
+      "event": "Decoy.Throw",
+      "resource": "sounds/weapons/decoy/decoy_throw_06.vsnd_c",
+      "nativeVariants": ["sounds/weapons/decoy/decoy_throw_06.vsnd"]
+    },
+    {
+      "name": "utility-decoy-bounce",
+      "event": "HEGrenade.Bounce",
+      "resource": "sounds/weapons/hegrenade/he_bounce-1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hegrenade/he_bounce-1.vsnd"]
+    },
+    {
+      "name": "utility-decoy-explode",
+      "event": "BaseGrenade.Explode",
+      "resource": "sounds/weapons/hegrenade/hegrenade_detonate_02.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/hegrenade/hegrenade_detonate_02.vsnd",
+        "sounds/weapons/hegrenade/hegrenade_detonate_03.vsnd"
+      ]
+    },
+    {
+      "name": "utility-decoy-draw",
+      "event": "Decoy.Draw",
+      "resource": "sounds/weapons/decoy/decoy_draw_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/decoy/decoy_draw_01.vsnd",
+        "sounds/weapons/decoy/decoy_draw_02.vsnd",
+        "sounds/weapons/decoy/decoy_draw_03.vsnd"
+      ]
+    },
+    {
+      "name": "utility-molotov-pin",
+      "event": "Molotov.PreThrow",
+      "resource": "sounds/weapons/molotov/molotov_throw_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/molotov/molotov_throw_01.vsnd",
+        "sounds/weapons/molotov/molotov_throw_02.vsnd",
+        "sounds/weapons/molotov/molotov_throw_03.vsnd",
+        "sounds/weapons/molotov/molotov_throw_04.vsnd",
+        "sounds/weapons/molotov/molotov_throw_05.vsnd",
+        "sounds/weapons/molotov/molotov_throw_06.vsnd"
+      ]
+    },
+    {
+      "name": "utility-molotov-throw",
+      "event": "Molotov.Throw",
+      "resource": "sounds/weapons/molotov/molotov_throw_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/molotov/molotov_throw_01.vsnd",
+        "sounds/weapons/molotov/molotov_throw_02.vsnd",
+        "sounds/weapons/molotov/molotov_throw_03.vsnd",
+        "sounds/weapons/molotov/molotov_throw_04.vsnd",
+        "sounds/weapons/molotov/molotov_throw_05.vsnd",
+        "sounds/weapons/molotov/molotov_throw_06.vsnd"
+      ]
+    },
+    {
+      "name": "utility-molotov-bounce",
+      "event": "Molotov.Bounce",
+      "resource": "sounds/physics/glass/glass_bottle_impact_hard1.vsnd_c",
+      "nativeVariants": [
+        "sounds/physics/glass/glass_bottle_impact_hard1.vsnd",
+        "sounds/physics/glass/glass_bottle_impact_hard2.vsnd",
+        "sounds/physics/glass/glass_bottle_impact_hard3.vsnd"
+      ]
+    },
+    {
+      "name": "utility-molotov-draw",
+      "event": "Molotov.Draw",
+      "resource": "sounds/weapons/molotov/molotov_draw_03.vsnd_c",
+      "nativeVariants": ["sounds/weapons/molotov/molotov_draw_03.vsnd"]
+    },
+    {
+      "name": "utility-incendiary-pin",
+      "event": "IncGrenade.PullPin_Grenade",
+      "resource": "sounds/weapons/incgrenade/pinpull.vsnd_c",
+      "nativeVariants": ["sounds/weapons/incgrenade/pinpull.vsnd"]
+    },
+    {
+      "name": "utility-incendiary-throw",
+      "event": "IncGrenade.Throw",
+      "resource": "sounds/weapons/incgrenade/inc_grenade_throw_fire_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/incgrenade/inc_grenade_throw_fire_01.vsnd",
+        "sounds/weapons/incgrenade/inc_grenade_throw_fire_02.vsnd",
+        "sounds/weapons/incgrenade/inc_grenade_throw_fire_03.vsnd"
+      ]
+    },
+    {
+      "name": "utility-incendiary-bounce",
+      "event": "IncGrenade.Bounce",
+      "resource": "sounds/physics/weapons/weapon_incendiary_impact_01.vsnd_c",
+      "nativeVariants": [
+        "sounds/physics/weapons/weapon_incendiary_impact_01.vsnd",
+        "sounds/physics/weapons/weapon_incendiary_impact_02.vsnd",
+        "sounds/physics/weapons/weapon_incendiary_impact_03.vsnd",
+        "sounds/physics/weapons/weapon_incendiary_impact_04.vsnd"
+      ]
+    },
+    {
+      "name": "utility-incendiary-draw",
+      "event": "IncGrenade.Draw",
+      "resource": "sounds/weapons/hegrenade/hegrenade_draw_01.vsnd_c",
+      "nativeVariants": ["sounds/weapons/hegrenade/hegrenade_draw_01.vsnd"]
+    },
+    {
+      "name": "utility-smoke-explode",
+      "event": "BaseSmokeEffect.Sound",
+      "resource": "sounds/weapons/smokegrenade/smoke_emit.vsnd_c",
+      "nativeVariants": ["sounds/weapons/smokegrenade/smoke_emit.vsnd"]
+    },
+    {
+      "name": "utility-molotov-explode",
+      "event": "Molotov.Start",
+      "resource": "sounds/weapons/molotov/molotov_detonate_1.vsnd_c",
+      "nativeVariants": ["sounds/weapons/molotov/molotov_detonate_1.vsnd"]
+    },
+    {
+      "name": "utility-incendiary-explode",
+      "event": "IncGrenade.Start",
+      "resource": "sounds/weapons/incgrenade/inc_grenade_detonate_1.vsnd_c",
+      "nativeVariants": [
+        "sounds/weapons/incgrenade/inc_grenade_detonate_1.vsnd",
+        "sounds/weapons/incgrenade/inc_grenade_detonate_2.vsnd",
+        "sounds/weapons/incgrenade/inc_grenade_detonate_3.vsnd"
+      ]
+    }
+  ]
+}

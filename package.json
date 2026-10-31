@@ -1,0 +1,38 @@
+{
+  "name": "cs2go",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "preview": "turbo run preview",
+    "test": "turbo run test",
+    "test:browser": "turbo run test:browser",
+    "check": "oxfmt --check . && oxlint scripts packages/assets && turbo run check",
+    "assets:prepare": "bun run --cwd packages/assets generate",
+    "assets:verify": "bun run --cwd packages/assets verify",
+    "assets:sync": "bun run --cwd packages/assets sync",
+    "test:tools": "vitest run",
+    "format": "oxfmt ."
+  },
+  "devDependencies": {
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "oxlint-tsgolint": "^7.0.2005",
+    "turbo": "^2.11.10",
+    "vitest": "^5.0.5"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.4.4",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "bun@1.4.4"
+}

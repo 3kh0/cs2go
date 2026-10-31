@@ -1,0 +1,126 @@
+{
+  "source": {
+    "author": "Valve",
+    "mapVersion": "CS2 Dust II, Steam depot manifest dated 2026-10-08",
+    "depotManifest": "4758919807587010422",
+    "vpkSha256": "51d6bb432b6553bfae6c38219a527c5de2464a2b107080f2b8be7d8427ebb885",
+    "resources": {
+      "maps/de_dust2/entities/default_ents.vents_c": "515efdfc1e452b3d7052c5ffb1801a05e23b2395fb90586ff2dc9d14ae7ef80a",
+      "maps/de_dust2/entities/unnamed_2_23316.vmdl_c": "141229c734ce8bf81e4e940ab7f9909bcb2be410b27276190cd01c0804b59670",
+      "maps/de_dust2/entities/unnamed_2_23326.vmdl_c": "f0b25ba8d6c0df5177de86b60c0ae1d82d55a0bd4483e6040badbaa22710566d",
+      "maps/de_dust2/entities/unnamed_2_23465.vmdl_c": "90842fa678e0a5658cf4b212d4934412751003216b5cb3c0f0454733652adf0f",
+      "maps/de_dust2/entities/unnamed_2_23467.vmdl_c": "a7e880764338710ea5dfa4c15888ef5291132c25428b943bdb123e4fcf716ea1"
+    },
+    "generator": "scripts/import-buy-zones.py",
+    "decoder": "Source2Viewer 20.0.6980",
+    "geometry": "Exact eight-vertex, six-plane native convex boxes; identity entity transforms; meters, Y up, negative Source Y becomes Z.",
+    "references": [
+      "https://github.com/SteamTracking/GameTracking-CS2/blob/master/game/csgo/csgo.fgd",
+      "https://github.com/ValveSoftware/source-sdk-2013/blob/master/src/game/server/triggers.cpp"
+    ]
+  },
+  "zones": [
+    {
+      "team": "t",
+      "entity": "2:23465",
+      "model": "maps/de_dust2/entities/unnamed_2_23465.vmdl_c",
+      "sourceBounds": [
+        [-1196.0, -1016.0, 0.0],
+        [-312.0, -632.0, 288.0]
+      ],
+      "sourcePlanes": [
+        [0.0, 1.0, 0.0, -632.0],
+        [0.0, 0.0, -1.0, 0.0],
+        [0.0, -1.0, 0.0, 1016.0],
+        [1.0, 0.0, 0.0, -312.0],
+        [0.0, 0.0, 1.0, 288.0],
+        [-1.0, 0.0, 0.0, 1196.0]
+      ],
+      "min": [-30.3784, 0.0, 16.0528],
+      "max": [-7.9248, 7.3152, 25.8064]
+    },
+    {
+      "team": "ct",
+      "entity": "2:23467",
+      "model": "maps/de_dust2/entities/unnamed_2_23467.vmdl_c",
+      "sourceBounds": [
+        [-192.0, 1984.0, -128.0],
+        [592.0, 2560.0, -32.0]
+      ],
+      "sourcePlanes": [
+        [0.0, 1.0, 0.0, 2560.0],
+        [0.0, 0.0, -1.0, 128.0],
+        [0.0, -1.0, 0.0, -1984.0],
+        [1.0, 0.0, 0.0, 592.0],
+        [0.0, 0.0, 1.0, -32.0],
+        [-1.0, 0.0, 0.0, 192.0]
+      ],
+      "min": [-4.8768, -3.2512, -65.024],
+      "max": [15.0368, -0.8128, -50.3936]
+    }
+  ],
+  "sites": [
+    {
+      "site": 0,
+      "entity": "2:23316",
+      "model": "maps/de_dust2/entities/unnamed_2_23316.vmdl_c",
+      "hulls": [
+        {
+          "sourceBounds": [
+            [976.0, 2448.0, 96.0],
+            [1072.0, 2624.0, 136.0]
+          ],
+          "sourcePlanes": [
+            [0.0, 1.0, 0.0, 2624.0],
+            [0.0, 0.0, -1.0, -96.0],
+            [0.0, -1.0, 0.0, -2448.0],
+            [1.0, 0.0, 0.0, 1072.0],
+            [0.0, 0.0, 1.0, 136.0],
+            [-1.0, 0.0, 0.0, -976.0]
+          ],
+          "min": [24.7904, 2.4384, -66.6496],
+          "max": [27.2288, 3.4544, -62.1792]
+        },
+        {
+          "sourceBounds": [
+            [1072.0, 2336.0, 96.0],
+            [1248.0, 2624.0, 192.0]
+          ],
+          "sourcePlanes": [
+            [0.0, 1.0, 0.0, 2624.0],
+            [0.0, 0.0, -1.0, -96.0],
+            [0.0, -1.0, 0.0, -2336.0],
+            [1.0, 0.0, 0.0, 1248.0],
+            [0.0, 0.0, 1.0, 192.0],
+            [-1.0, 0.0, 0.0, -1072.0]
+          ],
+          "min": [27.2288, 2.4384, -66.6496],
+          "max": [31.6992, 4.8768, -59.3344]
+        }
+      ]
+    },
+    {
+      "site": 1,
+      "entity": "2:23326",
+      "model": "maps/de_dust2/entities/unnamed_2_23326.vmdl_c",
+      "hulls": [
+        {
+          "sourceBounds": [
+            [-1728.0, 2496.0, 0.0],
+            [-1344.0, 2864.0, 96.0]
+          ],
+          "sourcePlanes": [
+            [0.0, 1.0, 0.0, 2864.0],
+            [0.0, 0.0, -1.0, 0.0],
+            [0.0, -1.0, 0.0, -2496.0],
+            [1.0, 0.0, 0.0, -1344.0],
+            [0.0, 0.0, 1.0, 96.0],
+            [-1.0, 0.0, 0.0, 1728.0]
+          ],
+          "min": [-43.8912, 0.0, -72.7456],
+          "max": [-34.1376, 2.4384, -63.3984]
+        }
+      ]
+    }
+  ]
+}

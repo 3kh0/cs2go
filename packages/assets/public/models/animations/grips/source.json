@@ -1,0 +1,2282 @@
+{
+  "source": "Valve CS2 native gameplay idle grip components, extracted read-only from installed game",
+  "generator": "bun scripts/import-world-grips.mjs path/to/export-directory",
+  "inputs": [
+    {
+      "url": "https://cs2.cs2inspects.com/data/agentanims/world/rifle/_default_rifle.glb",
+      "sha256": "8ab1645ff996a7469a6e1dc802e1d19dca103272b3d641efb3d16110e2822ff5",
+      "bytes": 966580
+    },
+    {
+      "target": "packages/assets/public/models/agents/ground-rebel-native.glb",
+      "sha256": "3ea2077cbced126f9aad79166a9d0bbbfb0462243a53e1d11d26fbdbeb1d6bc4"
+    },
+    {
+      "target": "packages/assets/public/models/agents/idf.glb",
+      "sha256": "1c134938bece73608596af01b60993e1b84cb38a5a6f03dcac1112bfc9241bcb"
+    }
+  ],
+  "installedSource": {
+    "cs2Build": 26144732,
+    "depot": 2347770,
+    "depotManifest": "67499503218971311",
+    "cliVersion": "20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "gameArchive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+    "gameArchiveDirectorySha256": "562972293ed7a5d40e341c4df7d6b0ee06430452694177142f0c1239dd3f2c8b",
+    "gameFilesModified": false,
+    "repoGameChanges": false,
+    "runtimeGraphEvaluated": false,
+    "tool": {
+      "path": "tools/Source2Viewer-CLI.exe",
+      "sha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830",
+      "bytes": 113264360
+    },
+    "vendorVersion": "srctools 2.7.0",
+    "sourceFiles": [
+      {
+        "path": "source/ValveResourceFormat-ValveResourceFormat-9e2e6c7/ValveResourceFormat/IO/NmClipExtract.cs",
+        "sha256": "15a8cad9edfbeb1b308ff896dcfd74544c372045ad94333319c6545b8e13f232",
+        "bytes": 11207
+      },
+      {
+        "path": "source/ValveResourceFormat-ValveResourceFormat-9e2e6c7/ValveResourceFormat/IO/NmSkeletonExtract.cs",
+        "sha256": "1cdb559642e2de046f47b51733c89530a61c12b2d379bdf94cc8beaeb4a4b960",
+        "bytes": 2505
+      },
+      {
+        "path": "source/ValveResourceFormat-ValveResourceFormat-9e2e6c7/ValveResourceFormat/IO/ModelExtract.Anim.cs",
+        "sha256": "9062858964c65286427547452977a93b0927840f46f58fa2561eff5eb9c6a519",
+        "bytes": 18334
+      },
+      {
+        "path": "source/ValveResourceFormat-ValveResourceFormat-9e2e6c7/ValveResourceFormat/Resource/ResourceTypes/ModelAnimation2/AnimationClip.cs",
+        "sha256": "2afb0e744258ba565b69c79e0f7f49a2798b6eff20a5bb85de4463ff1bf907ed",
+        "bytes": 15115
+      },
+      {
+        "path": "source/ValveResourceFormat-ValveResourceFormat-9e2e6c7/ValveResourceFormat/Resource/ResourceTypes/ModelAnimation/ClipAnimation.cs",
+        "sha256": "4888ea44aee69682a7052bd20f9fa602b7022aa5673117a5819d2474b23e0d19",
+        "bytes": 3110
+      },
+      {
+        "path": "source/ValveResourceFormat-ValveResourceFormat-9e2e6c7/ValveResourceFormat/Resource/ResourceTypes/ModelAnimation/Animation.cs",
+        "sha256": "c99c3fd22774b5e01c50a5dd35147872dea9543ab7d0b4b3d5a121ff8ba519ee",
+        "bytes": 9290
+      }
+    ],
+    "existingSupportingFiles": [
+      {
+        "path": "fast-output/export_poses.py",
+        "sha256": "8b31af92a8ec045cd3d817de302a23306fc80a06af734b55bf150f1869114b20",
+        "bytes": 10058
+      },
+      {
+        "path": "fast-output/ground-rebel-attachments.json",
+        "sha256": "9146d7cb9754a31bb169f4fd3e29eb566faae649b41e2b631c962a3af1e135d4",
+        "bytes": 14063
+      },
+      {
+        "path": "fast-output/ground-rebel-attachments.kv3.txt",
+        "sha256": "a3b2ebc0445b4c024794c3ba1584ae1ca133b27f1f0dc65c2eabb19f581a476e",
+        "bytes": 9242
+      },
+      {
+        "path": "fast-output/weapon-mesh-binds.json",
+        "sha256": "217c9f871bf1320c1337cf228968897bbd76850e890c66a088eda5be1528b1a5",
+        "bytes": 18037
+      }
+    ],
+    "downloadPrivacy": "Private temporary thread_file_url, no public artifact",
+    "sampleLabel": "Native components and absolute reference companions; NOT final runtime graph poses"
+  },
+  "nativeManifestSha256": "392f2251453d4df6e33bb5d8d2c00d77ccc5b323ca2449305939346b0c7be3ff",
+  "nativeInputs": [
+    {
+      "file": "poses/rifle/rifle_ak/draw_ak.json",
+      "sha256": "81419bfd1cf5891ce779656ba97a47151c27fa8736761c6e89c68d3830602a35",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ak/draw_ak.vnmclip_c",
+          "sha256": "0ffaaeb7f10e08d159e5caf16488cf6ae70bf450b46664ad486e15cb6cea3232",
+          "bytes": 15548
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ak/draw_ak.dmx",
+          "sha256": "209aa64e8b08ee7c1f4a15005150896fb4c1cd60e3d91be61137bc0601b92a07",
+          "bytes": 156100
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ak/draw_ak.vnmclip",
+          "sha256": "faa22b0650795176790551bcf7c6aa437f590e9d85dd7b7f517c3613be7666dd",
+          "bytes": 859
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_ak/idle_ak.vnmclip+non_additive.json",
+      "sha256": "96ac094b73f0663736fd57e147f30d1646bd0ba3d827881dc479b9bb06842cdc",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ak/idle_ak.vnmclip+non_additive.vnmclip_c",
+          "sha256": "2416995cc8c1c3e319dc08e45b7759f7a17d4837e3445b807163e10bcc99abf0",
+          "bytes": 4581
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ak/idle_ak.vnmclip+non_additive.dmx",
+          "sha256": "5f77b07cddd237a9dc260e365bc94cb9d7874077ab2e1ba0bf3b142814029e93",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ak/idle_ak.vnmclip+non_additive.vnmclip",
+          "sha256": "078061f97357c842a4f52716113322cf564d6770457fe6520a1a6ec1f6567f53",
+          "bytes": 465
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_ak/idle_crouch_ak.vnmclip+non_additive.json",
+      "sha256": "9e4d8a1955e17cc1eed0bf16266f525652356f5cf19f042b0cf70d4d2535b1e2",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ak/idle_crouch_ak.vnmclip+non_additive.vnmclip_c",
+          "sha256": "2a54314f5a0978b0c739cbfe6976c8b92ff1536990f5d40676398d068b6cce39",
+          "bytes": 4575
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ak/idle_crouch_ak.vnmclip+non_additive.dmx",
+          "sha256": "efd12f13eefeb0b3104fe32aa3b4af6bf1bc052a5e444a09c9170733155a3700",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ak/idle_crouch_ak.vnmclip+non_additive.vnmclip",
+          "sha256": "cfbeb68e11629ece843a57a8fa7a1d0c9eadb926f87b28e80ca9914000e55e9b",
+          "bytes": 472
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m4a1_silencer/draw_m4a1s.json",
+      "sha256": "be9ec0d2f463d8527d30b56c0e4981f7410ab9281527f003772c202bf6e837f7",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m4a1_silencer/draw_m4a1s.vnmclip_c",
+          "sha256": "3bee577d02cf8d1eaaf9862f8b78ded9765b92bb0b6b1f6e4cbe8ae8e095b748",
+          "bytes": 19393
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a1_silencer/draw_m4a1s.dmx",
+          "sha256": "e08587e1a2fa1de3d97cb544359ab0dd8cac3abe6775c1ced1d6506ce87e1219",
+          "bytes": 169878
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a1_silencer/draw_m4a1s.vnmclip",
+          "sha256": "fa4e414b5a86e8e46a5577329be147bc7b6020392d628cf0e057d6675b5e307b",
+          "bytes": 882
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m4a1_silencer/idle_m4a1s.vnmclip+non_additive.json",
+      "sha256": "da96a7fd038f12c88045cff1b50850a03d283eb0599d23d916abe13c34dfee31",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m4a1_silencer/idle_m4a1s.vnmclip+non_additive.vnmclip_c",
+          "sha256": "a2d8c0e93158681deaed7c3d6511810010ee025a036adce9da3a5e9a1482125f",
+          "bytes": 4559
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a1_silencer/idle_m4a1s.vnmclip+non_additive.dmx",
+          "sha256": "6d16025a400930c7672a0541b2854a3d69b28b59089889afcacf66862b1a7a75",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a1_silencer/idle_m4a1s.vnmclip+non_additive.vnmclip",
+          "sha256": "5ef2113cb03318a338ad176840f26aeeb3ffe6316603127898ed4692462b83b4",
+          "bytes": 479
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m4a1_silencer/idle_crouch_m4a1s.vnmclip+non_additive.json",
+      "sha256": "37ef91cd4ea091125a0d3465fb33ae9f1b8a0544d41c4b8941be608140a196d3",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m4a1_silencer/idle_crouch_m4a1s.vnmclip+non_additive.vnmclip_c",
+          "sha256": "286e125bdce712b80590e0835020e4cec0cf2dac084a31eedf9bd73fcc604453",
+          "bytes": 4553
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a1_silencer/idle_crouch_m4a1s.vnmclip+non_additive.dmx",
+          "sha256": "3447e68cb8f31bebbc4b5f62b460096dd9b884496f9557ee2797124374c3849a",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a1_silencer/idle_crouch_m4a1s.vnmclip+non_additive.vnmclip",
+          "sha256": "83725ae495331f3ef6d839dedd001dc43c23c2cdebec54b20bed927d78515650",
+          "bytes": 486
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/_default_rifle/idle_crouch_rifle.json",
+      "sha256": "ef8a2125a3d1b8664461760532efe3dea8d1ea4a7e48e5ae143ef075878a8d11",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/_default_rifle/idle_crouch_rifle.vnmclip_c",
+          "sha256": "b8e350222bc1bb2ef3ff44f2ff3d1e983458525e7df87a47ce15a5181a38e48d",
+          "bytes": 4632
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/_default_rifle/idle_crouch_rifle.dmx",
+          "sha256": "ca6904fa5d8ce2a0bd3b018f76aec425376b706e10b132cab30fb85758d97e54",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/_default_rifle/idle_crouch_rifle.vnmclip",
+          "sha256": "185a97b275bbb2fb1832fc9da3eed5e0944df08573e864e59531253936357d8e",
+          "bytes": 460
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m4a1_silencer/idle_m4a1s.json",
+      "sha256": "3c90db1ede75760e333a2e1a790e43a37ea3d6d5e9670956d9d2e2320540c347",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m4a1_silencer/idle_m4a1s.vnmclip_c",
+          "sha256": "6a1fa831d947e12021d5be2168dc9ad8a792b067f53a8dd58e2bf3b00ea1de15",
+          "bytes": 2619
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a1_silencer/idle_m4a1s.dmx",
+          "sha256": "e3c9f159706736a90f0915115e2f10dfc44dec7c091418d939bedb5d8209d032",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a1_silencer/idle_m4a1s.vnmclip",
+          "sha256": "2894360ba1fb89a3cb10dba9cd3e0921ff743fd704ae2310c187f400f9c6766c",
+          "bytes": 588
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_usp/draw_usp.json",
+      "sha256": "7bc79784546c5f35ff44f66bdcf07f4bb68a5e1bffdaf24d696c19bc266e8423",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_usp/draw_usp.vnmclip_c",
+          "sha256": "6d4baf1f44fbdcde9593c9ae954455af742bcc8c3e1165335ffcb3d3dfdd67a3",
+          "bytes": 17117
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_usp/draw_usp.dmx",
+          "sha256": "79b36b12451d270af87f847026e3057642cd655e3874d914783bf34d2ac82df8",
+          "bytes": 159665
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_usp/draw_usp.vnmclip",
+          "sha256": "d2d9a2a788fd8297ed30f22f3a3fc9de7f6fd04a8d8962d31a792abe7140c3cb",
+          "bytes": 870
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_usp/idle_usp.vnmclip+non_additive.json",
+      "sha256": "3ba4420ec06f2b7439ff17a6142359505a43714c342d86b07f8a67d1ddc84cc2",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_usp/idle_usp.vnmclip+non_additive.vnmclip_c",
+          "sha256": "093e88e9631d9377a188311a49fe954c64c53d991fdc691aea9b252c1d812485",
+          "bytes": 4972
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_usp/idle_usp.vnmclip+non_additive.dmx",
+          "sha256": "5847971f1a8e7a916183ec0a51c1b7d9d801a1656d98940dabd729452ed93f00",
+          "bytes": 71213
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_usp/idle_usp.vnmclip+non_additive.vnmclip",
+          "sha256": "45a373bb2733b7537c2b279dee66842cfa0a5bf093e5ca05df0ac190ddf62ec0",
+          "bytes": 567
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_usp/idle_crouch_usp.vnmclip+non_additive.json",
+      "sha256": "c9489b7a7c7adf0a0596019be34904d09b0fc0fab69b1d02df61dda21c7c8447",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_usp/idle_crouch_usp.vnmclip+non_additive.vnmclip_c",
+          "sha256": "928b899af78f23c6fafc938784e4a2ade50b94a0f78b67b8bf228cc430dce338",
+          "bytes": 4982
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_usp/idle_crouch_usp.vnmclip+non_additive.dmx",
+          "sha256": "3b63e377a3ae3ed2117d018dffbb4e3c46fde7414af926a889c1110b5a838b8a",
+          "bytes": 71213
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_usp/idle_crouch_usp.vnmclip+non_additive.vnmclip",
+          "sha256": "ede58aafae9839a0fbf0a5f98cf1a635501ee1cf7cd0f3539f79cf7335399cb3",
+          "bytes": 574
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_awp/draw_awp.json",
+      "sha256": "52791761ac46e401bf65638906247e398413ee1a6484f57ed2724e4c01b18313",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_awp/draw_awp.vnmclip_c",
+          "sha256": "951107f0c7fbf72795f58da58a7dced400f51b20d02dca510683ac374012e01b",
+          "bytes": 19262
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_awp/draw_awp.dmx",
+          "sha256": "bff04f372a99ace95820fe324d21b0447e3d4d4b118cdc959631548885f898e8",
+          "bytes": 179908
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_awp/draw_awp.vnmclip",
+          "sha256": "ad8c82922ef431daf72c8e08c0dbc3d4e735f05bec653e365bed0dc0dfdcb343",
+          "bytes": 860
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_awp/idle_awp.vnmclip+non_additive.json",
+      "sha256": "6ebe0fcb9bae0b7b43a65c6c28e04c6924b486f989e535863f2e1fe5526ad8ec",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_awp/idle_awp.vnmclip+non_additive.vnmclip_c",
+          "sha256": "6f74fea034f2e56af6678c3a25f6ed5925ee3dd0a2b21f4f638d286c6f4d1207",
+          "bytes": 4550
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_awp/idle_awp.vnmclip+non_additive.dmx",
+          "sha256": "12345b634bc61d3e1e8029b41f5a50ca53f4fec5f9157e9b37c3423ff59e4536",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_awp/idle_awp.vnmclip+non_additive.vnmclip",
+          "sha256": "e25e6aecfb3d84718113b16175e49ffb1639ee7f8bbf8c1a48b1b76d8578a5b6",
+          "bytes": 467
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_awp/idle_crouch_awp.vnmclip+non_additive.json",
+      "sha256": "e50741b385da6a17e5175e24d65157fe0e5b8850a8d418ff31af622aaf8fadb3",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_awp/idle_crouch_awp.vnmclip+non_additive.vnmclip_c",
+          "sha256": "bb04f333ff6ef449a24720ba759496c7f9a7bfe0a498fe2759ca6b44ccb3d5a5",
+          "bytes": 4564
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_awp/idle_crouch_awp.vnmclip+non_additive.dmx",
+          "sha256": "6e5f42c72bbfacd774ddebce2dc490a21e1310141700d57a194ca14730045687",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_awp/idle_crouch_awp.vnmclip+non_additive.vnmclip",
+          "sha256": "2f9b2e6cfe740dbb985899afd5dce3cf01b6e580c4bd22a9c3ff913ff441067e",
+          "bytes": 474
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_glock/draw_glock.json",
+      "sha256": "30125a20afc4f750b52db561a8c35ce6acf508801ce02a8c694caa30b7509e2e",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_glock/draw_glock.vnmclip_c",
+          "sha256": "01b6a8834b5c55b941f4dfd334dc0cdb37bb5e1a9e0c3a1569c2c64db33ca85c",
+          "bytes": 16696
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_glock/draw_glock.dmx",
+          "sha256": "f9ed6adf19a0a453baa79348948e7a2d6844fae59fd266accc5dcedb583f8f03",
+          "bytes": 154188
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_glock/draw_glock.vnmclip",
+          "sha256": "e0a8eacb778ce60b38c3ae548c157b1a1851eb7a25f7f962da5dbba84efa1080",
+          "bytes": 870
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_glock/idle_glock.vnmclip+non_additive.json",
+      "sha256": "96064fd73c0135c043d1a644c9a338647d587d075afdb3b52ab5eaf44cea86e7",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_glock/idle_glock.vnmclip+non_additive.vnmclip_c",
+          "sha256": "6217d3c38b5b57e6e6224dc14f5aca3e30a4eef330c8c649e992ce965142b37d",
+          "bytes": 4576
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_glock/idle_glock.vnmclip+non_additive.dmx",
+          "sha256": "bdfca7df0071ee6f477dd7be0d4558a55e7b459a382b37d3e977c75cb263f4bd",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_glock/idle_glock.vnmclip+non_additive.vnmclip",
+          "sha256": "7499bb454f44416d74d20157aa97cbffb38fbfdf4741154200c4315d36927e03",
+          "bytes": 473
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_glock/idle_crouch_glock.vnmclip+non_additive.json",
+      "sha256": "e0cb6194b431ad8cae833f89b3545d7ec7a387a3b8a88f5b1ec2f474a150f17a",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_glock/idle_crouch_glock.vnmclip+non_additive.vnmclip_c",
+          "sha256": "037c6076e2edcde567242f626081dc9b1afb75053ba781e7b1de60f12852e832",
+          "bytes": 4570
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_glock/idle_crouch_glock.vnmclip+non_additive.dmx",
+          "sha256": "7237fd150d0711144a15c9f3b52170958f6385b8db00a94687bff25d5ae49865",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_glock/idle_crouch_glock.vnmclip+non_additive.vnmclip",
+          "sha256": "0662dfc484165db4401c18f3a136f2f1bd29d12d20ef73c5ee7cfd8651996cd3",
+          "bytes": 480
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_deagle/draw_deagle.json",
+      "sha256": "198c54499ff09c56c02951d8c968f4d77ed5cdc5cc1deca545eba0c1024edc2b",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_deagle/draw_deagle.vnmclip_c",
+          "sha256": "c394fcb5e0e706e942c2e224386509f76d9d5d0f5619fb45a3467808b90a6b3e",
+          "bytes": 15729
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_deagle/draw_deagle.dmx",
+          "sha256": "7afbf56abce4cc0dd3561d19284bf278506836d01673b83a39e79cb19d3c5a31",
+          "bytes": 155992
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_deagle/draw_deagle.vnmclip",
+          "sha256": "6d601d0bfc66f39df098610a67308fb25c08b93a742d9b407156eb4bb6f18ed6",
+          "bytes": 870
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_deagle/idle_deagle.vnmclip+non_additive.json",
+      "sha256": "1301650cbf41fbd7f86402f72b30f9a8a2549e29c5ce9a0c4b11173e76481993",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_deagle/idle_deagle.vnmclip+non_additive.vnmclip_c",
+          "sha256": "684bc52156bdc62ed6518e8362c3743b1dd760aa3edf1e7754e809d0acf71a64",
+          "bytes": 4580
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_deagle/idle_deagle.vnmclip+non_additive.dmx",
+          "sha256": "bcbb09922e009142135309c249013c873a780d1e600495b175981598a6ba30ce",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_deagle/idle_deagle.vnmclip+non_additive.vnmclip",
+          "sha256": "56b70ec6b5d34278cbb1ac6f480b8c03765c7b71924e07d06f6eb3bf7219ee0b",
+          "bytes": 475
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_deagle/idle_crouch_deagle.vnmclip+non_additive.json",
+      "sha256": "84c46b63b56e8b1b5bff99498665117a66ebc7f5ef6b77b631765b623ef161c7",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_deagle/idle_crouch_deagle.vnmclip+non_additive.vnmclip_c",
+          "sha256": "fd17bf1d890ac12c8d45a1733cf8fd2bc2c1cdd1170b57cd776eedce45718a2f",
+          "bytes": 4557
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_deagle/idle_crouch_deagle.vnmclip+non_additive.dmx",
+          "sha256": "87d79af51c1d616c1e4a9b24759979a71f22c408526827562f9c45085bd3c955",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_deagle/idle_crouch_deagle.vnmclip+non_additive.vnmclip",
+          "sha256": "6b19d91b62c31860f46d7ba0f626426c092256e0bc0ed9a9d3872c4a33eb707e",
+          "bytes": 482
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m4a4/draw_m4a4.json",
+      "sha256": "59cbff6ce4309c8f69438ebad91e5a74a376e28814f34ae90c2fa92c7e48b9a8",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m4a4/draw_m4a4.vnmclip_c",
+          "sha256": "65590d5b08a7fafacae531e8d12dcc3ba416a4d0a2259f93229eeaf6edd32938",
+          "bytes": 15815
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a4/draw_m4a4.dmx",
+          "sha256": "caec5faf1d430d3eb74132dd683825ff6c7ba71c99cc317900cafda82b127aa6",
+          "bytes": 165981
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a4/draw_m4a4.vnmclip",
+          "sha256": "12c1d4e437f9b68c055d1e989d9b4d19486878776f7b74e500784b68a6539016",
+          "bytes": 863
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m4a4/idle_m4a4.vnmclip+non_additive.json",
+      "sha256": "c10aa90b26dd485ad521321e1b7f14718f47dcab5a6b8aee4250236f3247b913",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m4a4/idle_m4a4.vnmclip+non_additive.vnmclip_c",
+          "sha256": "86d60532585a74d30e926388ba53c0d2ae13248790812556c473a9b69a7ddb50",
+          "bytes": 4553
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a4/idle_m4a4.vnmclip+non_additive.dmx",
+          "sha256": "7b8e7e2e14aefe609101d46d2aff39c8c5c8f615a6ebe378f34496b612c9a439",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a4/idle_m4a4.vnmclip+non_additive.vnmclip",
+          "sha256": "b959766d9595e121e3e7c3dd0d5eaf27ade52f4223556584fb98a1d8c68285e1",
+          "bytes": 469
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m4a4/idle_crouch_m4a4.vnmclip+non_additive.json",
+      "sha256": "43aa51ff28149659eba46f9e2ae5c45b7f53514eaefe34a5c318e25beeab0110",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m4a4/idle_crouch_m4a4.vnmclip+non_additive.vnmclip_c",
+          "sha256": "c02980731d4cdc0e31efec397f97bc00508642180c045d05f48c64abef1b7b35",
+          "bytes": 4563
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a4/idle_crouch_m4a4.vnmclip+non_additive.dmx",
+          "sha256": "0c197b173a36006be7288fe58d43f59ded098f911313207a2be604eec4856e67",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m4a4/idle_crouch_m4a4.vnmclip+non_additive.vnmclip",
+          "sha256": "fa2e4fd0c5e9ccf1b688b66e07982ebae6e22f468ee5ea5827720adbe5a7070e",
+          "bytes": 476
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_nova/draw_nova.json",
+      "sha256": "bab4042dd6d7d766a05ede89e29d436e209315f766fa6b7b137298f096b5c30a",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_nova/draw_nova.vnmclip_c",
+          "sha256": "32a792a9f167612c8185fcef283f7a00e66e4097905474ca2922fb9e4d94205e",
+          "bytes": 13425
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_nova/draw_nova.dmx",
+          "sha256": "01cec1d687abeba3aa82f7aed3fc85bf74233392bd1200987f2ddad8d8008f18",
+          "bytes": 157869
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_nova/draw_nova.vnmclip",
+          "sha256": "e42efd0e6e6a79b13152d947dfd7b2aa89334cab45d927f2205347dc4e7c13ef",
+          "bytes": 863
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_nova/idle_nova.vnmclip+non_additive.json",
+      "sha256": "ff172951d7e92657aa510df017d785db38a7114e932474daa17045da67163bfb",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_nova/idle_nova.vnmclip+non_additive.vnmclip_c",
+          "sha256": "952d4b0ef050f3ba2eb914f5363baab41ca579edb5d5685219a2de18eefc36ae",
+          "bytes": 4576
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_nova/idle_nova.vnmclip+non_additive.dmx",
+          "sha256": "901c4d9f99c8aee82b477806ffb7169ae847119b5f86c2e34ab0ff1013dbf6c6",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_nova/idle_nova.vnmclip+non_additive.vnmclip",
+          "sha256": "b6f4fa33346771cc3327ddc7c42e7c92ebcd805ef652e7c56f84fc96788143c2",
+          "bytes": 469
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_nova/idle_crouch_nova.vnmclip+non_additive.json",
+      "sha256": "b2024445ed57fe3ba612032db9727e239191528129141fdb5bb93e8a4fc5b382",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_nova/idle_crouch_nova.vnmclip+non_additive.vnmclip_c",
+          "sha256": "af38ea6c9329583784132f5d22752257ed73746d5e5d03fa75358c3efe1562e3",
+          "bytes": 4577
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_nova/idle_crouch_nova.vnmclip+non_additive.dmx",
+          "sha256": "58cd204205b2a7a13928228ce47524e7a453600eba7bdb7861bae171cef89a2e",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_nova/idle_crouch_nova.vnmclip+non_additive.vnmclip",
+          "sha256": "4e025fdc84ca7737b60e8e36cbc38005c736efef6e55fa11f0afd3b6b096b6b3",
+          "bytes": 476
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp9/draw_mp9.json",
+      "sha256": "b78e47d74852da6f8fda67842b0461ce1e44478415f5f027ca151f071cdf721a",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp9/draw_mp9.vnmclip_c",
+          "sha256": "47b4bdd05f73f8b2f577957b82ade07feea12670e8e4895b3a04b7a678105dd1",
+          "bytes": 16854
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp9/draw_mp9.dmx",
+          "sha256": "486d4e7cfde20e820256a6b79583fdd48fa92621fe414214d4df84776af7a39f",
+          "bytes": 162989
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp9/draw_mp9.vnmclip",
+          "sha256": "79c7c37bbd9c8ec73aca19b666da534f70a0d47cc48c57f547169e09dd92e45b",
+          "bytes": 860
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp9/idle_mp9.vnmclip+non_additive.json",
+      "sha256": "f72507b56a02281ad15a290f26dc6c516ba91e538d46d28cbb9c42f512d0334e",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp9/idle_mp9.vnmclip+non_additive.vnmclip_c",
+          "sha256": "e6f6e290c84dfe976c5ca55b441aa1befc4659e6c59c8db3b7c8632ed0f01759",
+          "bytes": 4569
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp9/idle_mp9.vnmclip+non_additive.dmx",
+          "sha256": "35c554686271b7659c4735c976c2770ac58cf1ea962ef63440daf7e292ff40a2",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp9/idle_mp9.vnmclip+non_additive.vnmclip",
+          "sha256": "46ce9b8bc009f814d8d58c10c7f3878756bfe179edc31ccf0fc10184e4af559c",
+          "bytes": 467
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp9/idle_crouch_mp9.vnmclip+non_additive.json",
+      "sha256": "bd672be9d8d47ba25b34088a2fb019f744d912928ce96da3101196dc0b77807f",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp9/idle_crouch_mp9.vnmclip+non_additive.vnmclip_c",
+          "sha256": "fdbbc2039d064db28b4ae7280e50edb5790ada4d38def75bc3dfc6e332ca0b29",
+          "bytes": 4576
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp9/idle_crouch_mp9.vnmclip+non_additive.dmx",
+          "sha256": "7ac8ab154bba8c17b6656293a8be3028387493a5f0495a953b477a67014962cc",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp9/idle_crouch_mp9.vnmclip+non_additive.vnmclip",
+          "sha256": "38564c3b7ac3451d74c9e55956700ac6ed88d4d7b46f692de1d8a8d081a72b12",
+          "bytes": 474
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_hkp2000/draw_hkp.json",
+      "sha256": "2cf32801e85e2365d443ae88b4d09e3bc533260a7841ebc944f8d248ee906064",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_hkp2000/draw_hkp.vnmclip_c",
+          "sha256": "be9b007421eddc32a78650c9a35c0a4bdb472e0e3b406f4c0bef7326cc4500bf",
+          "bytes": 14024
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_hkp2000/draw_hkp.dmx",
+          "sha256": "3c85b5f5c85fd2a5efc977528da8797d8f39d5cb7a7a0ac895991edf143e1ba7",
+          "bytes": 155992
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_hkp2000/draw_hkp.vnmclip",
+          "sha256": "ea9cb6e2e16ad74fad49145a5f9c794d0f06169f2284c7789263c8945eca29c7",
+          "bytes": 869
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_hkp2000/idle_hkp.vnmclip+non_additive.json",
+      "sha256": "6d91306c666937e1dfef5f54fb1c318d1ed8f47060810b5546b592f8a812414c",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_hkp2000/idle_hkp.vnmclip+non_additive.vnmclip_c",
+          "sha256": "6989f9debf475b502df54e3e246a7304795625dd319b385db3366bbaf6ab61dc",
+          "bytes": 4562
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_hkp2000/idle_hkp.vnmclip+non_additive.dmx",
+          "sha256": "157c74a2603ef0631a8426950dc6083adf7de6b5c9f2822367d6e363a9cad1f0",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_hkp2000/idle_hkp.vnmclip+non_additive.vnmclip",
+          "sha256": "e993a5e8d48be58afc3b1e6eab48cb1d5d25b4b1f8b6816b6e2f62f50de5af37",
+          "bytes": 473
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_hkp2000/idle_crouch_hkp.vnmclip+non_additive.json",
+      "sha256": "ab309dda45101c5768b6a527fad935e407cbd567687c42930920752eca85d725",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_hkp2000/idle_crouch_hkp.vnmclip+non_additive.vnmclip_c",
+          "sha256": "43a96d217e746fd454f415af16b1805e4d5207c5e0af0d3a5734f0007b103c77",
+          "bytes": 4588
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_hkp2000/idle_crouch_hkp.vnmclip+non_additive.dmx",
+          "sha256": "52a7bcdf7673dc8477b645efc418d25805f9e54dc66af621f4ceb0ddf2a938ea",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_hkp2000/idle_crouch_hkp.vnmclip+non_additive.vnmclip",
+          "sha256": "3b5ba574a8840833da1041855f5e5357c22d2c30a6b0f01d7c525537dc8b6fb4",
+          "bytes": 480
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_p250/draw_p250.json",
+      "sha256": "86aa8db160d232da78bcb2e1764899ca667490677fe632a629542b13ed5ee1b9",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_p250/draw_p250.vnmclip_c",
+          "sha256": "992cd69fdab02af8172f37e68665f1d1874b3c7b86df3971d5bdcbe7eff2daad",
+          "bytes": 16671
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_p250/draw_p250.dmx",
+          "sha256": "93906220dc7d93c60434f9de4f0347ca0999ed6df86e7f9535612e436dd9c6b2",
+          "bytes": 156036
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_p250/draw_p250.vnmclip",
+          "sha256": "fc1cf34385c2360deb7c2370ad77ca2d7f59d98a23e456dde06ae99d35c04b7e",
+          "bytes": 864
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_p250/idle_p250.vnmclip+non_additive.json",
+      "sha256": "ba8963e52486aadc4d86a3b0d5d6d7dceadcc01cc4b0db86f0d17a059da66927",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_p250/idle_p250.vnmclip+non_additive.vnmclip_c",
+          "sha256": "2189bfc1449b1e911ac6852b5517fa0ed6bd30e50aa0cd28529e88065499c9a3",
+          "bytes": 4581
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_p250/idle_p250.vnmclip+non_additive.dmx",
+          "sha256": "41543bd1bdb79081864a86bb524583375f731c898300bfb38d0796f822231849",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_p250/idle_p250.vnmclip+non_additive.vnmclip",
+          "sha256": "8757df8d7724d70670a27b89262ffc15059d9e965e64ef3f050def6fd959872b",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_p250/idle_crouch_p250.vnmclip+non_additive.json",
+      "sha256": "7e60b27ca694bb2aa1a16f8412d9be03805864bbf7b0b2024042c58ab696ee2e",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_p250/idle_crouch_p250.vnmclip+non_additive.vnmclip_c",
+          "sha256": "698f278a9908cfa388f48ab555c523708ab1701b600407d6248d7f6288ecc01a",
+          "bytes": 4560
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_p250/idle_crouch_p250.vnmclip+non_additive.dmx",
+          "sha256": "85cfaed45bcd80f64f7a3847d8f660dae13dd45996a7f4f042e613fef988cdf0",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_p250/idle_crouch_p250.vnmclip+non_additive.vnmclip",
+          "sha256": "b43e84fc2bdcd828a7696dce9c9c67c48112bf3f2acfe105cba4f56840dc985c",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_fiveseven/draw_fiveseven.json",
+      "sha256": "8236f9807df40b8d330f8bf0b5b6877fd5a6dc6b917205be86a43ec18b949498",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_fiveseven/draw_fiveseven.vnmclip_c",
+          "sha256": "f23bd5c67bab29ed7532572964362ad916301b83645bce14708d558095268674",
+          "bytes": 16823
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_fiveseven/draw_fiveseven.dmx",
+          "sha256": "ac698d7d802c9cdb9e4bc4efa022b459f5d2ff9f14b063bc9fc4e9eef047dba5",
+          "bytes": 154156
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_fiveseven/draw_fiveseven.vnmclip",
+          "sha256": "cc2714bb335c273cc9c312b48aa0d7d4afec3f72a365e564331c93d09a389f03",
+          "bytes": 879
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_fiveseven/idle_fiveseven.vnmclip+non_additive.json",
+      "sha256": "361d34ede479d00318eae56587e9bb849782fee4a16b0620117dacfa505077ba",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_fiveseven/idle_fiveseven.vnmclip+non_additive.vnmclip_c",
+          "sha256": "bbc8057b9e1af1e53e77f5938025be338e4a8df6edf4a10c096bc434d8f38f78",
+          "bytes": 4573
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_fiveseven/idle_fiveseven.vnmclip+non_additive.dmx",
+          "sha256": "ff5b66f41d10c08542eef307c2820049fc4c8afa0fe11ab29723e650922f2214",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_fiveseven/idle_fiveseven.vnmclip+non_additive.vnmclip",
+          "sha256": "d3b74e45d7b118040c8e90d803c8832c6a599b0bc7518148cf198fbfbc105a1e",
+          "bytes": 481
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_fiveseven/idle_crouch_fiveseven.vnmclip+non_additive.json",
+      "sha256": "7fc9c617b811f020efbbd7098f72b8c0215f6b8f1f11d81f9d7c46fed5ded080",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_fiveseven/idle_crouch_fiveseven.vnmclip+non_additive.vnmclip_c",
+          "sha256": "cf5665f753b623a70bf468586bf16c4ae74cab8e8a175576920982411499e3d1",
+          "bytes": 4584
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_fiveseven/idle_crouch_fiveseven.vnmclip+non_additive.dmx",
+          "sha256": "dd5566995f83e3f83ec28bf4bb0e5c08fb619c2ad68d6ffde17955555f3e2559",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_fiveseven/idle_crouch_fiveseven.vnmclip+non_additive.vnmclip",
+          "sha256": "9eec12b0c0a563ff3c00c3e45b94cb6f3412fcfe84ba3a3609b96463bc01f320",
+          "bytes": 488
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_tec9/draw_tec9.json",
+      "sha256": "22c20bb8f85f136db6524985fcc3da1a2b3f4e4aa836c01e11d716b7aac23f0b",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_tec9/draw_tec9.vnmclip_c",
+          "sha256": "7de0fd01fae184daa0992e7dbc6784cc4fca814be3ff9a06715b99fbc6b766f4",
+          "bytes": 16831
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_tec9/draw_tec9.dmx",
+          "sha256": "0c06ccb4bdad58e539333d3735617e96336efc08a064c2962dcce78e6088c3ec",
+          "bytes": 154176
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_tec9/draw_tec9.vnmclip",
+          "sha256": "fc8e642add7dbbd548cc3672ad9bfc661247ab5886e5194eda8e206ed9d51b33",
+          "bytes": 865
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_tec9/idle_tec9.vnmclip+non_additive.json",
+      "sha256": "6d64d36a12c703d2d0399ba032e18d8325488050b6049a2abd58576bcbfb7810",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_tec9/idle_tec9.vnmclip+non_additive.vnmclip_c",
+          "sha256": "bb27c545bbd35fa0ab7508d469d15ff7c0080be0ef74a971c25f64c714663666",
+          "bytes": 4565
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_tec9/idle_tec9.vnmclip+non_additive.dmx",
+          "sha256": "96cf7038a52c8f4f256077caf97b2cd3e7bdd1a3f09b9f24c2184b20be159229",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_tec9/idle_tec9.vnmclip+non_additive.vnmclip",
+          "sha256": "b4349fa5ef35be247a75e52fbf37103450ba28f98ea3d8e96b1338434bfb3370",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_tec9/idle_crouch_tec9.vnmclip+non_additive.json",
+      "sha256": "280e052f97efd1f911c8f8dcf27f0e8b7c0c05dcc0252f5685b92b19ef622e9f",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_tec9/idle_crouch_tec9.vnmclip+non_additive.vnmclip_c",
+          "sha256": "dc30bcc5a4596c8274e5af85bf03e073919f21347c9dea2769dde0a94e385139",
+          "bytes": 4558
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_tec9/idle_crouch_tec9.vnmclip+non_additive.dmx",
+          "sha256": "fad4f80e3fcb0e296f9f89753d0c7ff9823ad3fdebeca7c14ceb7a3c8b323cb4",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_tec9/idle_crouch_tec9.vnmclip+non_additive.vnmclip",
+          "sha256": "7b424df9bf1424a8ba3a0d93f96dcaf3388e7b49f08aad66b939ba314b826321",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_cz75a/draw_cz75a.json",
+      "sha256": "b969f9d575b602a70b09881992e264b5736422b8610d5a7e73738daa48a53a9a",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_cz75a/draw_cz75a.vnmclip_c",
+          "sha256": "228bdde4e4173f7518ac4181a49b5e60c69a0597095cdf324be69e4c3f04fe75",
+          "bytes": 26801
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_cz75a/draw_cz75a.dmx",
+          "sha256": "175ae2cd5702f147f233bab09f7d8baa44b78af72e2d7e6c8c71d22cb2b2b389",
+          "bytes": 233461
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_cz75a/draw_cz75a.vnmclip",
+          "sha256": "4e10615d3d2f32fe096946456009c6923caf4dd11cf7fb04ad239e651afac2b7",
+          "bytes": 868
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_cz75a/idle_cz75a.vnmclip+non_additive.json",
+      "sha256": "f4c436928452c25edea0d78afe1b915e24cee5ce115d891fbbc40c9543591c79",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_cz75a/idle_cz75a.vnmclip+non_additive.vnmclip_c",
+          "sha256": "e6871f4be3365ec7977ad98cb8436377867352c0ab8f269557ce7efbcee04548",
+          "bytes": 4574
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_cz75a/idle_cz75a.vnmclip+non_additive.dmx",
+          "sha256": "f31d6c1b8069fafd90dd7bbd3cc492a487eea127e17dd9ccf1986e9ceca1479b",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_cz75a/idle_cz75a.vnmclip+non_additive.vnmclip",
+          "sha256": "1906b0928f57433d6e336f687ae2cdec1cd70454b69f6dc65108c004b07501c0",
+          "bytes": 473
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_cz75a/idle_crouch_cz75a.vnmclip+non_additive.json",
+      "sha256": "be75c651f38c8c835a192945cd0f912ddc4771acff5973a66542a2a8ab8450e2",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_cz75a/idle_crouch_cz75a.vnmclip+non_additive.vnmclip_c",
+          "sha256": "3ddd283c6705b044e81b2934c14b321f30e4c37a58494e3c83b8448a207a7b97",
+          "bytes": 4562
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_cz75a/idle_crouch_cz75a.vnmclip+non_additive.dmx",
+          "sha256": "7865abe80bba4d5b41164acc6eb8dcf9eeb377713725243eb2a6fed4d9b08299",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_cz75a/idle_crouch_cz75a.vnmclip+non_additive.vnmclip",
+          "sha256": "16f60fc3f0950affdab087e9fe7619103b1cd94fcc1f3519654eb33d98be160b",
+          "bytes": 480
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_revolver/draw_revolver.json",
+      "sha256": "978b4eb60a6d6c5e997d07ecf06e582d61584d2464371634675f355b8907e8c6",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_revolver/draw_revolver.vnmclip_c",
+          "sha256": "34c19e9e1411610d610fa33a2e15905f517a02512145b913848d397f498f1d9f",
+          "bytes": 16314
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_revolver/draw_revolver.dmx",
+          "sha256": "e5e4d58d2c85c6df3c791edf82248c67b1aaa6d24339f28de0a8b86b4bf2d6de",
+          "bytes": 178324
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_revolver/draw_revolver.vnmclip",
+          "sha256": "e259e91b35f1bb9425304d04eaf2b152bee0ffd4202ff244d78e514b3c7ea7cd",
+          "bytes": 876
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_revolver/idle_revolver.vnmclip+non_additive.json",
+      "sha256": "ae01c8617761132f02b3e7b818bbe8f81a815e408396f27b3f40ebd4782ab1c9",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_revolver/idle_revolver.vnmclip+non_additive.vnmclip_c",
+          "sha256": "c9c604a467fc31d1138415357e1fefcd0bb7f2fdaee1e662e5f30e1dd70b81d6",
+          "bytes": 5115
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_revolver/idle_revolver.vnmclip+non_additive.dmx",
+          "sha256": "84491d147edf88a8a8da7c5de290c299c00d1a979318ce553c9b110011c50de5",
+          "bytes": 79400
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_revolver/idle_revolver.vnmclip+non_additive.vnmclip",
+          "sha256": "002d308f39b33becefe5806eaef54d57988fc3458c2065dcb439e7cd978529a5",
+          "bytes": 573
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_revolver/idle_crouch_revolver.vnmclip+non_additive.json",
+      "sha256": "f6e0680695209634da391f659b1ff03a62afcb6d9b3b57385c0b4203c4d2febd",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_revolver/idle_crouch_revolver.vnmclip+non_additive.vnmclip_c",
+          "sha256": "9dd072a991107340cfe1de689ccfca818e54c3e021a3108737e6c23ac4ad4e63",
+          "bytes": 5071
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_revolver/idle_crouch_revolver.vnmclip+non_additive.dmx",
+          "sha256": "f22e5f274adc319e74164e76f0df25d2291e048105bca123f47f33104212e517",
+          "bytes": 79400
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_revolver/idle_crouch_revolver.vnmclip+non_additive.vnmclip",
+          "sha256": "ce994036a80db4beaf82f2e8ccf301e40eb6b36ca0594a6552db22cf95a48721",
+          "bytes": 580
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_elite/draw_elite.json",
+      "sha256": "7fb73f6345efd9c665066b2dad1f25bea62c09e7048adf5850828be0a4d64bd0",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_elite/draw_elite.vnmclip_c",
+          "sha256": "0e1958ca84807648eeabdc62b2e36560ee031156ed9c070a1d160a1d8c75b8b6",
+          "bytes": 16029
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_elite/draw_elite.dmx",
+          "sha256": "03e99ccf59052a7121e687d108e8f502fa20484c99fe70049274a87f39f50259",
+          "bytes": 174557
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_elite/draw_elite.vnmclip",
+          "sha256": "0580f3c0743b7bba51da5ba61cfcbb3f163c5a137002f2abeade711a20242b40",
+          "bytes": 867
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_elite/idle_elite.vnmclip+non_additive.json",
+      "sha256": "713e8a13894ffccbb090a03c08c9237919774e0bdb7024d9733a87d6c8fbbb7f",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_elite/idle_elite.vnmclip+non_additive.vnmclip_c",
+          "sha256": "0f1a9f6522dafbdb7912d89b9e60f22413007c5a1cca8a89882f3c4282ad2510",
+          "bytes": 5139
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_elite/idle_elite.vnmclip+non_additive.dmx",
+          "sha256": "8c2295eb33e9a86e10dbee2f5f909404f6f282d72ca10b9af7ce7a29c751ccdc",
+          "bytes": 77753
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_elite/idle_elite.vnmclip+non_additive.vnmclip",
+          "sha256": "fc0093642684de53de860bb558a86e4edd02df05538e46bc4914f4dfc6851fff",
+          "bytes": 564
+        }
+      ]
+    },
+    {
+      "file": "poses/pistol/pistol_elite/idle_crouch_elite.vnmclip+non_additive.json",
+      "sha256": "2956e3ced9057ede3056d8d6e4df14c7bebda9ab887c8db5504a8cbc1010b987",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/pistol/pistol_elite/idle_crouch_elite.vnmclip+non_additive.vnmclip_c",
+          "sha256": "ebe4ab65c10835901e9d459cfb4903551c6f5ac64dbe6f86935846673ce72c45",
+          "bytes": 5137
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_elite/idle_crouch_elite.vnmclip+non_additive.dmx",
+          "sha256": "c0cf5d57df4771ffb6c87d4fe3c925eaac23cbcc94d635921c3b81f40399c85b",
+          "bytes": 77753
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/pistol/pistol_elite/idle_crouch_elite.vnmclip+non_additive.vnmclip",
+          "sha256": "bf67ea4c0f9e0bb2ef56f27311ef90109778c64f6429076da91d82248186baef",
+          "bytes": 571
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_famas/draw_famas.json",
+      "sha256": "09d7b74ebe0dbc8d14d9557fe7d859a7852c65bdc320d6d4e798c71df1f60333",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_famas/draw_famas.vnmclip_c",
+          "sha256": "5a1872e2bb22b341c7cffdf8fe18f79ad838822696404afb104edb0c3f11c8c7",
+          "bytes": 16123
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_famas/draw_famas.dmx",
+          "sha256": "170002c843a8dbe4db5316ce68d8d4d0b63c2f3f1e13957dd4f48eb8b9ee7200",
+          "bytes": 154153
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_famas/draw_famas.vnmclip",
+          "sha256": "ddd7ee5e4b62ff095b4b43c8601116e34c2bed148baaaa519cc05266f8532810",
+          "bytes": 866
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_famas/idle_famas.vnmclip+non_additive.json",
+      "sha256": "7b0c8989e3a92359e7242fefd8cdc4ecf01879fe67a287751891e8fd9b5ebe08",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_famas/idle_famas.vnmclip+non_additive.vnmclip_c",
+          "sha256": "30aa3ed8a36ab92d34d5b2c8ae36232f752a2962ed420d808411685691562315",
+          "bytes": 4554
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_famas/idle_famas.vnmclip+non_additive.dmx",
+          "sha256": "cff7f16a2e3b991a455426bb7530a7c6964bf4255a379795efbfdd70cdffafff",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_famas/idle_famas.vnmclip+non_additive.vnmclip",
+          "sha256": "33bd2b7b139d9382d3dafa25610f997a9507a3a21280d6360bf165512db93d86",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_famas/idle_crouch_famas.vnmclip+non_additive.json",
+      "sha256": "70d259be21fd4654b178702392d33f5ac16ba6cd34d1441c56a5c11b6eef91ec",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_famas/idle_crouch_famas.vnmclip+non_additive.vnmclip_c",
+          "sha256": "52774a9c6227250a2231f285e1989b128fd09c83edafcc2d0c063cc3668c74da",
+          "bytes": 4574
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_famas/idle_crouch_famas.vnmclip+non_additive.dmx",
+          "sha256": "8400e39b667c1ccc7e0e65b535e887ac57d90b11261443cd67e1d04562e4cace",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_famas/idle_crouch_famas.vnmclip+non_additive.vnmclip",
+          "sha256": "4f67ac5ae92709482d2e78feeee0c6ba726d1981bd28f89abbb92cf1f97e8d73",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_galilar/draw_galilar.json",
+      "sha256": "8fddd3601f095a588dd953813c0b93568e37c47c8ee9adfc9ea5aca7a40b462d",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_galilar/draw_galilar.vnmclip_c",
+          "sha256": "ad03f0096ebbe8498036dce9687a69eee70aec5085dbf22dc2445e03db519c7b",
+          "bytes": 16480
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_galilar/draw_galilar.dmx",
+          "sha256": "d605b6fe3190ac0eec64284e1731fedd58c0de89ff63bc849bdc21133c43dfef",
+          "bytes": 164962
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_galilar/draw_galilar.vnmclip",
+          "sha256": "687c4f7d229ecc0830bd744e8a2d3fa4cf79af8aa040ac7a3d6457c9d289b56c",
+          "bytes": 870
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_galilar/idle_galilar.vnmclip+non_additive.json",
+      "sha256": "a8a1ab59f7a202d4052185b7a24e4e409d1dce2d034761b5fc1a77d2420dafaa",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_galilar/idle_galilar.vnmclip+non_additive.vnmclip_c",
+          "sha256": "e8fc67ae74f394b9b232d185200834871eca3f709a878a18d583660de353e1d0",
+          "bytes": 4575
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_galilar/idle_galilar.vnmclip+non_additive.dmx",
+          "sha256": "ba2fbcea8bea5986b7c0c7933b133e90407eeea44835a6ddba85cf95d75ffecc",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_galilar/idle_galilar.vnmclip+non_additive.vnmclip",
+          "sha256": "323713e9278b3c734620bdfa87b7841530c89fdb45e7993f9fed19b1b17101d9",
+          "bytes": 475
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_galilar/idle_crouch_galilar.vnmclip+non_additive.json",
+      "sha256": "7bcc4692e7e6df4cafcf57d148ad9021999e5f04cda47326c24d374fcbaa5a33",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_galilar/idle_crouch_galilar.vnmclip+non_additive.vnmclip_c",
+          "sha256": "697bb019c8739b5c65b05aeaa05b5745412b3bb007e5b70476e8c72d4a3fc89f",
+          "bytes": 4574
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_galilar/idle_crouch_galilar.vnmclip+non_additive.dmx",
+          "sha256": "1643dd21f85dd3d66236fd35b8ee2dca9951f3df2780a0eb54f754abfa7a98b7",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_galilar/idle_crouch_galilar.vnmclip+non_additive.vnmclip",
+          "sha256": "e3aa478f2aab99d01417f748ce0c6f254bd391d667c43d459e86a5c2355ecc25",
+          "bytes": 482
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_aug/draw_aug.json",
+      "sha256": "29610c03fa4f59fc3324f971e581ec00568390915bfe304866e3abcccfc6f888",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_aug/draw_aug.vnmclip_c",
+          "sha256": "16c16a3923f8995b7ab0b82df518fd0568a66d26f2d21423cf81de7497b7360c",
+          "bytes": 17341
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_aug/draw_aug.dmx",
+          "sha256": "1b76c60af8072d556714fc182ad8f4bdc8432ddbfc066c25f1ae552f139f69ce",
+          "bytes": 168869
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_aug/draw_aug.vnmclip",
+          "sha256": "123f6111523fb89666c42f61a23d314ba25a8fa886563251d5a7215e56149bf8",
+          "bytes": 860
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_aug/idle_aug.vnmclip+non_additive.json",
+      "sha256": "4f9403b275520327a2b74ea26c8fcc75ab12a27e10af6562dca03e7880e4336c",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_aug/idle_aug.vnmclip+non_additive.vnmclip_c",
+          "sha256": "ae340f7f7e39ccd5a425252f307156847e2170f4e827621574b477b0db734d13",
+          "bytes": 4579
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_aug/idle_aug.vnmclip+non_additive.dmx",
+          "sha256": "14f1dace48dd24ece20ea2d89cddb2bb154753639e170ac5b5d49d66bdfb6a31",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_aug/idle_aug.vnmclip+non_additive.vnmclip",
+          "sha256": "0b7318a15f6851753a0e2c9914aaab4640fb810f158a9f88b11f73769ca28ee4",
+          "bytes": 467
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_aug/idle_crouch_aug.vnmclip+non_additive.json",
+      "sha256": "1191ba3b5c7c9fb251c3c0ad5f296afb0af90468f304139ccdf6ef674d8c4582",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_aug/idle_crouch_aug.vnmclip+non_additive.vnmclip_c",
+          "sha256": "7771b2e8c5a8d8ccf99d901682ce8d1936b0b7d9b1743b10c34212a7eef93b20",
+          "bytes": 4559
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_aug/idle_crouch_aug.vnmclip+non_additive.dmx",
+          "sha256": "bbc65b153f2a5bf1523b1f5168c4844f77aa74ff16ad2a2d9590fae210fb410c",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_aug/idle_crouch_aug.vnmclip+non_additive.vnmclip",
+          "sha256": "de3c2b3f077ab28716d6a66c79ec2900b6ad695703ea3b597c003f9e3b560088",
+          "bytes": 474
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_sg556/draw_sg556.json",
+      "sha256": "a1ff3b4436072ab2c6887e45b0cfd034e9d2097a82eca214b781ef55086b7d1f",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_sg556/draw_sg556.vnmclip_c",
+          "sha256": "93efac04ea04f72c41d588d5750d77693340bebca18df975228cf7837741252e",
+          "bytes": 13958
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sg556/draw_sg556.dmx",
+          "sha256": "27df46ad8e3ad5f6142235cfc801ef16bc15c29c1e550c9e509e5b6748d99313",
+          "bytes": 154118
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sg556/draw_sg556.vnmclip",
+          "sha256": "77e4337296d15511868f523f7a13c7802785c9f94c6e848681eb0243c6d92d44",
+          "bytes": 866
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_sg556/idle_sg556.vnmclip+non_additive.json",
+      "sha256": "c44564be6297f86ed7ba1289a3ebb39ab1897f54bfe8236cacf31559c74eaf3c",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_sg556/idle_sg556.vnmclip+non_additive.vnmclip_c",
+          "sha256": "59894a5df8785c338d89479623ea58289e113982e9e98f304709df50af37a572",
+          "bytes": 4564
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sg556/idle_sg556.vnmclip+non_additive.dmx",
+          "sha256": "25f8da75719fd9eda91c4d625f54e482aa4627e445b93e934b415f0832d62cc1",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sg556/idle_sg556.vnmclip+non_additive.vnmclip",
+          "sha256": "49933e5e8a53a2a448152699a98a4a643995d07a76408b70f046d31e46cbe190",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_sg556/idle_crouch_sg556.vnmclip+non_additive.json",
+      "sha256": "c6a016335d52295d69b3cac3c4fa495d49cb8716c6c31dbe63e5c64d6507f53a",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_sg556/idle_crouch_sg556.vnmclip+non_additive.vnmclip_c",
+          "sha256": "4ce59db338c1d1ed0cb07fd36577c67b6126eeb1a29319f264c1c492e31dea6f",
+          "bytes": 4574
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sg556/idle_crouch_sg556.vnmclip+non_additive.dmx",
+          "sha256": "0192f20300152100604cadf91c4636084d7a3d4dd64ae0bb3e758d8cf23dece7",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sg556/idle_crouch_sg556.vnmclip+non_additive.vnmclip",
+          "sha256": "8540b3aa2bf51c1494577e1921854abcd0b93d603bf7c071e2822f80400635c1",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_ssg08/draw_ssg08.json",
+      "sha256": "0ad20a6e85e8ce3f0c935c5946de9db44d8ff387c8effbecd621c5a299086fca",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ssg08/draw_ssg08.vnmclip_c",
+          "sha256": "0cb99601f1dc07e9d8b4276668da6d67af05350dbf4579642ae636372edb9821",
+          "bytes": 17140
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ssg08/draw_ssg08.dmx",
+          "sha256": "7b310ff1276517e0cba998cf713f4169f4358b95852aa43cf35dcd89886efa15",
+          "bytes": 155922
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ssg08/draw_ssg08.vnmclip",
+          "sha256": "301a183fc8d015a748698dc8e5672b42d00d716f007f32a109b7e5b84164861d",
+          "bytes": 866
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_ssg08/idle_ssg08.vnmclip+non_additive.json",
+      "sha256": "9aa74be2f44dc25362b37732af282aa4907316b54f390223658b0f161e4bdee0",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ssg08/idle_ssg08.vnmclip+non_additive.vnmclip_c",
+          "sha256": "511241cab67302934e0b72168e24ff656b8fdc511c21563787c83e1d70591333",
+          "bytes": 4575
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ssg08/idle_ssg08.vnmclip+non_additive.dmx",
+          "sha256": "7815213cba2d290fe2f955a666c946b3e0e703a84255ec74b448d406c091a3e2",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ssg08/idle_ssg08.vnmclip+non_additive.vnmclip",
+          "sha256": "e9a494e461b586a907489a98af44507c9afac251aec7806c32c34b77cc3d0924",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_ssg08/idle_crouch_ssg08.vnmclip+non_additive.json",
+      "sha256": "8d3906005d9837cd46c1f1157aeca47db2f425bf32eb0653115fd6e40d3022ec",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ssg08/idle_crouch_ssg08.vnmclip+non_additive.vnmclip_c",
+          "sha256": "9769ce35b65954f19cd4b736181149cebcd8803b22811a7d18480d0fb8f0b52c",
+          "bytes": 4568
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ssg08/idle_crouch_ssg08.vnmclip+non_additive.dmx",
+          "sha256": "b0e8f7a73861ccc8dc6d0a5fecce4635269682a790fab9276eaa4ef8011b9fcf",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ssg08/idle_crouch_ssg08.vnmclip+non_additive.vnmclip",
+          "sha256": "8f680235ac367a1fed5121fac628a3c35a9427f610c48dca8039eb08f4368bc5",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_scar/draw_scar20.json",
+      "sha256": "e3368746460b7d75f8fd410dc6b6c9fa3380216a73559fc5b2345fc8a25a3fc5",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_scar/draw_scar20.vnmclip_c",
+          "sha256": "506ecb49faed505b2b0565f78ee0a86d0a36b7f5143aded9314cc2e9e528083b",
+          "bytes": 13115
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_scar/draw_scar20.dmx",
+          "sha256": "24abb43224583ec603f3bdbe26aac186ed8c6a5f9b4556b57f2ad46b0a8f75ba",
+          "bytes": 154141
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_scar/draw_scar20.vnmclip",
+          "sha256": "226eaa7c1d49f1dbcb4a539e8da044dbc96357a9f41df7b5d3bb1472b234e94b",
+          "bytes": 867
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_scar/idle_scar20.vnmclip+non_additive.json",
+      "sha256": "d9ad5a7d178b1dd4b27a4cd92f4b8902deef631fe0de1ca504e74493a6d31e5b",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_scar/idle_scar20.vnmclip+non_additive.vnmclip_c",
+          "sha256": "103ac807ca3cae83119b9898ce9b3a460e6555047fa420e61a6bb0c54319e7a9",
+          "bytes": 4566
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_scar/idle_scar20.vnmclip+non_additive.dmx",
+          "sha256": "8abffde4e3357ba8d6785420f48573f4d0e378b179cac0d9f3700f1913c47fab",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_scar/idle_scar20.vnmclip+non_additive.vnmclip",
+          "sha256": "2e3dd7d788df570aa80c4743ad9af67e98688239ffe5dd19a4f2091b92ac88a0",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_scar/idle_crouch_scar20.vnmclip+non_additive.json",
+      "sha256": "3f9f910dd56cefb86c2b49374a97331a4e2f4897cdcefe6e1a3969d97bfaf4a8",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_scar/idle_crouch_scar20.vnmclip+non_additive.vnmclip_c",
+          "sha256": "7a56178fa7d534bb6a24ca97faf98efc870addbc7aeb8734f2fda06ff669b7cd",
+          "bytes": 4564
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_scar/idle_crouch_scar20.vnmclip+non_additive.dmx",
+          "sha256": "fe48868cc2a6cb3d5ce4b67429d4e40c4619136d6384a18db6cf8eb39e4c4372",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_scar/idle_crouch_scar20.vnmclip+non_additive.vnmclip",
+          "sha256": "6b10dd5321c8af9cbfbe7624b9da94ccf96bf905e3c0ae1399ae4ee1eb6d00f1",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_g3sg1/draw_g3sg1.json",
+      "sha256": "6e0f681c161c8aeb23581d85f8b7db955632671a609d711bfe80c6641c6bb72e",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_g3sg1/draw_g3sg1.vnmclip_c",
+          "sha256": "ad762e2e5cbc11e442245c37b806f17c368540c3af8bdc5d6fe55387694ddeb5",
+          "bytes": 17620
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_g3sg1/draw_g3sg1.dmx",
+          "sha256": "e09ef48ad2b38a51c16eedabb2235186173052d5bd5c7e9e517c04bee9bf230c",
+          "bytes": 159661
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_g3sg1/draw_g3sg1.vnmclip",
+          "sha256": "7eee5f07020b7b7f0cd6e22f89f4aa185fe5ed4789984e8dcd261f137b1ad32c",
+          "bytes": 865
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_g3sg1/idle_g3sg1.vnmclip+non_additive.json",
+      "sha256": "c9337239043e8828d1ec0e49455616f93e1eb4c9ba7246c51882181826d64d96",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_g3sg1/idle_g3sg1.vnmclip+non_additive.vnmclip_c",
+          "sha256": "baa269180b1ac62e8d9890641e128dba3f4da7817ee7212328118d1b86903106",
+          "bytes": 4569
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_g3sg1/idle_g3sg1.vnmclip+non_additive.dmx",
+          "sha256": "aa1a5c23eb642706b5399340bcd6e494e932e20ea2d6b6730b901508327219a8",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_g3sg1/idle_g3sg1.vnmclip+non_additive.vnmclip",
+          "sha256": "5f1872352768546fdcbae5f3717bba2f59e913c5e0f0d3365691dc3cb5f7797d",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_g3sg1/idle_crouch_g3sg1.vnmclip+non_additive.json",
+      "sha256": "43166f892083cba802b18be6c133725b6af51e0c97247c1b5fced2473d0858da",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_g3sg1/idle_crouch_g3sg1.vnmclip+non_additive.vnmclip_c",
+          "sha256": "d76149ecf4b06dfb70765fa7a3d6a21eeb85cc7e52bb2f9f1c1fdf755c26c7ff",
+          "bytes": 4560
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_g3sg1/idle_crouch_g3sg1.vnmclip+non_additive.dmx",
+          "sha256": "37b7a73784a0e65907dd456764f7cc5bb183b85c4f93b88cd1d736cff00bcf4f",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_g3sg1/idle_crouch_g3sg1.vnmclip+non_additive.vnmclip",
+          "sha256": "0082c1d523abf8a5a2b8e440bd5a2cb50b420ac95ff36fca49f8bfd24c747e0f",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mac10/draw_mac10.json",
+      "sha256": "6f2602440b87ebb4fee1303caa513b18ece9bb03d9fb7bfcc3f38a8a8c21abab",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mac10/draw_mac10.vnmclip_c",
+          "sha256": "9656d19e8cfefdbf860f0c5acbac78a52e44806e41ca5a643823a3b782b5f542",
+          "bytes": 17362
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mac10/draw_mac10.dmx",
+          "sha256": "91d697ae66f7ab60bbe29781b0a81cbdf52b113fc96999972e636e7e813ea093",
+          "bytes": 181869
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mac10/draw_mac10.vnmclip",
+          "sha256": "c6eabfd99f24362fbbe8992f3f0a7c234cea9b76f5803e4d1a5270e48e0dccaa",
+          "bytes": 865
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mac10/idle_mac10.vnmclip+non_additive.json",
+      "sha256": "7f76582789a220ff14b11926c0b728476060e7bf8983368c18d35c86a84cdeaf",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mac10/idle_mac10.vnmclip+non_additive.vnmclip_c",
+          "sha256": "828bda5df6652b940932e5c3273149c0d55667caa344b94b3b79b9ddceac2138",
+          "bytes": 4572
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mac10/idle_mac10.vnmclip+non_additive.dmx",
+          "sha256": "6ae10842ff77f3f11cde2b19c9b1d97f41f61b2f55e7416e6d032d4d5c0615c9",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mac10/idle_mac10.vnmclip+non_additive.vnmclip",
+          "sha256": "992ef38c7f732d7e1a391116effa9a588d59025451e7aeb797026cb12726b82b",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mac10/idle_crouch_mac10.vnmclip+non_additive.json",
+      "sha256": "d311bb4b6d81bc6826512f1d2245257a690c29aed8bae3dd68921729b3b4c8b0",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mac10/idle_crouch_mac10.vnmclip+non_additive.vnmclip_c",
+          "sha256": "13593f7a143cd760bd18edc3d823c26f5d3699381601414e91d1b05f9e3556b0",
+          "bytes": 4570
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mac10/idle_crouch_mac10.vnmclip+non_additive.dmx",
+          "sha256": "7e5a8506cb19ba91c4cd0a415b362f41257d3a75a67b34af7698ab76d7a6f230",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mac10/idle_crouch_mac10.vnmclip+non_additive.vnmclip",
+          "sha256": "07eeaffbb62134cc5af09d5f23183e1fd7c7feced3e7f661bb69495b9b5239b0",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp7/draw_mp7.json",
+      "sha256": "cac486ef2a753b5463b2bee70f45a87fcb7a845be97db832eb22a39e3e468521",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp7/draw_mp7.vnmclip_c",
+          "sha256": "4bd860e0f030def41cb402e3010650e063f718ad0c416ac5ac683ea79c519add",
+          "bytes": 15383
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp7/draw_mp7.dmx",
+          "sha256": "8cbaabbf0bd1d8a992891a8ad1e315a811c318278845031c81f6ae67521315f2",
+          "bytes": 154109
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp7/draw_mp7.vnmclip",
+          "sha256": "c5431e6c7c3f1c91cccb8042c31650d5e8dd51461de85d04fe94f1bef32ff844",
+          "bytes": 860
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp7/idle_mp7.vnmclip+non_additive.json",
+      "sha256": "af39244c22551cec3fdfdfb3640e2373294427b5ee334068ae2baf74d02a1d9d",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp7/idle_mp7.vnmclip+non_additive.vnmclip_c",
+          "sha256": "5b76af7656fcd855ebedecba81c0cd68d37b4785ac5c5e3f3511dcfa5a84fe8c",
+          "bytes": 4531
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp7/idle_mp7.vnmclip+non_additive.dmx",
+          "sha256": "a2d7fbe7388db31af29a3d0d18a4494556f257a4a09bf1493b04039d9d7ae2da",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp7/idle_mp7.vnmclip+non_additive.vnmclip",
+          "sha256": "b907fd0aeab6d44b256af856338b6326dcc15fdfdb479001b6fdba085221868b",
+          "bytes": 467
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp7/idle_crouch_mp7.vnmclip+non_additive.json",
+      "sha256": "2f2121cdbe772956e840c3a7045719e9bf8a16481afc78d5d98ce29bfd12b1ac",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp7/idle_crouch_mp7.vnmclip+non_additive.vnmclip_c",
+          "sha256": "a8932e68a31697f2953035ef4d967514f9674fe5ac2f4fdd351e42d844dc383f",
+          "bytes": 4552
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp7/idle_crouch_mp7.vnmclip+non_additive.dmx",
+          "sha256": "8e68fc2fa25f68c496dd1e7c9c7d1011061371a62e2263b47151ff02ce160824",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp7/idle_crouch_mp7.vnmclip+non_additive.vnmclip",
+          "sha256": "90669b4d0556cede1516c74fd44240f7ef61abf9a4f1cfffd729a2be6c47ad8f",
+          "bytes": 474
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp5sd/draw_mp5sd.json",
+      "sha256": "12673a40fd81ac73597e427afef5f3caf147921b1a8c0bf69e2868945c84b05e",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp5sd/draw_mp5sd.vnmclip_c",
+          "sha256": "2bc12f8bb9cdcec96f17b95b92cdd87a7c22b7487ee0dce25c242bc18276e931",
+          "bytes": 13638
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp5sd/draw_mp5sd.dmx",
+          "sha256": "3f33775e96d6f6847c181f87b07c952a30bc3b0920242ff82c68f70225126a4f",
+          "bytes": 154106
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp5sd/draw_mp5sd.vnmclip",
+          "sha256": "89ea14b3da7f83ddcae207181bddc0b5d2d7ede036be608e4d5a6b1607f87728",
+          "bytes": 866
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp5sd/idle_mp5sd.vnmclip+non_additive.json",
+      "sha256": "0b4dd7e0eaca39db64bd8940143ab6799a7ee4e47191f2189e8c2d1d2e63f7ff",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp5sd/idle_mp5sd.vnmclip+non_additive.vnmclip_c",
+          "sha256": "13b256838adea06434bca1cd5296386d31a9158e5ac98781465633cf78771246",
+          "bytes": 4560
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp5sd/idle_mp5sd.vnmclip+non_additive.dmx",
+          "sha256": "6993a1a66aa7cca400176378614d0a795758b9fbfa58978eb15f5905d67368ca",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp5sd/idle_mp5sd.vnmclip+non_additive.vnmclip",
+          "sha256": "cb60bbb310d7d11194ca7fa716c16041c76fd54b2c57f413ab3d7ecd32908459",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mp5sd/idle_crouch_mp5sd.vnmclip+non_additive.json",
+      "sha256": "e82cf4d6e1c7b1d344fdcb329a0b77ad496590c069161e9438206fffe502d587",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mp5sd/idle_crouch_mp5sd.vnmclip+non_additive.vnmclip_c",
+          "sha256": "1c02c0a928c2f24d8e1e52bad9ac41a330dd222cfaf4c76e6213fb3ee18d2e21",
+          "bytes": 4567
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp5sd/idle_crouch_mp5sd.vnmclip+non_additive.dmx",
+          "sha256": "41206704d7c53e94410f87c92ab65f161effabfe38a1ac61fe867869134ff578",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mp5sd/idle_crouch_mp5sd.vnmclip+non_additive.vnmclip",
+          "sha256": "19cc00f6871f65839f0a4c922ed0e472cd62b5eaaff0f001546b8170dac317ef",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_ump45/draw_ump45.json",
+      "sha256": "b663bb9a93ca4d4a29ac5533c5df76340f9db8a01427b787693909383d32040f",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ump45/draw_ump45.vnmclip_c",
+          "sha256": "2fab27cdc793ee733cb0c4461629283fc666d16bebae472a270ea41894ac7927",
+          "bytes": 17503
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ump45/draw_ump45.dmx",
+          "sha256": "e9fcff6cb2c7c848ea07686e6963f89d672054641f30df193f490f0b88b57ebf",
+          "bytes": 159665
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ump45/draw_ump45.vnmclip",
+          "sha256": "f631d27d7d901e392640389363dcb29e7e9d0bb5af282c5c633436defc2d71b8",
+          "bytes": 866
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_ump45/idle_ump45.vnmclip+non_additive.json",
+      "sha256": "67fe40adc62289b91a0574823916f820240a55ffe757f579d3b6c06dfbe3ecb8",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ump45/idle_ump45.vnmclip+non_additive.vnmclip_c",
+          "sha256": "26f7fd2deb5101916eaf83278c4f1ea4615fb4def818ae7474cfcfb53877c457",
+          "bytes": 4550
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ump45/idle_ump45.vnmclip+non_additive.dmx",
+          "sha256": "cf061d249cdf0b392799ba91d29afe7621e839c1ef4a3fb476c3d5c848721c06",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ump45/idle_ump45.vnmclip+non_additive.vnmclip",
+          "sha256": "62e39a086fce3a28e8b4785aeb30bd0e0cbadc6e1f6295e5a17abe907f43c111",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_ump45/idle_crouch_ump45.vnmclip+non_additive.json",
+      "sha256": "fc21154f2a0fa9f760628ee035c7f113bb5c3ca4f8199a4b289429f585fc5abd",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_ump45/idle_crouch_ump45.vnmclip+non_additive.vnmclip_c",
+          "sha256": "dbd4800b201740ef852da0077a1139c3ee0517bc005644f9022473480eae4ed2",
+          "bytes": 4580
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ump45/idle_crouch_ump45.vnmclip+non_additive.dmx",
+          "sha256": "4f4d429c20e413e16a2ee0aba924bd9101d27fe571461da6ba854bc9150ef563",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_ump45/idle_crouch_ump45.vnmclip+non_additive.vnmclip",
+          "sha256": "ea098c929d057b35180d8276454dc6b895bad297a044fe4e4fc3c5f03114598c",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_p90/draw_p90.json",
+      "sha256": "f17c0d905e47cbfc48377e4a6bff885f5a8ded833611bf8eb773def8bf921b21",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_p90/draw_p90.vnmclip_c",
+          "sha256": "89c4442c8a1c21da2b154dd6da1e0ea52f0dd6bf05f70e4b047c9ade8c7516f4",
+          "bytes": 17155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_p90/draw_p90.dmx",
+          "sha256": "0bec0191aef78dc67e90e6a6c5e968894b8ccae371a746183cdc378303f2d76b",
+          "bytes": 155984
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_p90/draw_p90.vnmclip",
+          "sha256": "e02679bf8dcc804ae1fa705dc97c793b17a3d2fe1afc28b4f8e0db883a3d8ab9",
+          "bytes": 860
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_p90/idle_p90.vnmclip+non_additive.json",
+      "sha256": "e7c624e22d83fb65e71de6abeabbf1116b9b555e309cda349a135ad7bafd7f5c",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_p90/idle_p90.vnmclip+non_additive.vnmclip_c",
+          "sha256": "df763cfce61e44d32c26ef87b3cacefed0e9df71fd67d6f9eca2935318e221f0",
+          "bytes": 4559
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_p90/idle_p90.vnmclip+non_additive.dmx",
+          "sha256": "bc7b57e6133940875470251cad8215cc12e31fe7cbb4fb699a7de778a8718815",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_p90/idle_p90.vnmclip+non_additive.vnmclip",
+          "sha256": "e9bde79bac02d77aa887b3df3eada61926b087e35bd2098ce2f3cbca2a275402",
+          "bytes": 467
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_p90/idle_crouch_p90.vnmclip+non_additive.json",
+      "sha256": "584f9488274c65a4fdf5f88e797a1998705c6414ea7f3cd0190448d2bca5281b",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_p90/idle_crouch_p90.vnmclip+non_additive.vnmclip_c",
+          "sha256": "a6ce9cb38c70c6e779800d7d2afa9ff90b9ab461563235a5dd12930e5d612fe7",
+          "bytes": 4578
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_p90/idle_crouch_p90.vnmclip+non_additive.dmx",
+          "sha256": "b284d959873f57d4dfbdcbe32471058f8e4d564ad5edf065749bb11d4e82c12e",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_p90/idle_crouch_p90.vnmclip+non_additive.vnmclip",
+          "sha256": "98514b59c72e5523c1915b34bb22cf730005e9693e356b82ee8a79fcc115c828",
+          "bytes": 474
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_bizon/draw_bizon.json",
+      "sha256": "9e3b4b14b4a9b1698568c6f6ed7bf1b4da95c6bbb1d37ba567fb1458258bdfb9",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_bizon/draw_bizon.vnmclip_c",
+          "sha256": "74db4c62ee67a2f6432f8a77af103d0a273d1a5bed9b757e969d0b66e264beeb",
+          "bytes": 16757
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_bizon/draw_bizon.dmx",
+          "sha256": "a89695ea3be28153014b78b2d338173fd718a4536367c8cf7889c3d1603311a4",
+          "bytes": 163061
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_bizon/draw_bizon.vnmclip",
+          "sha256": "37652e2d3f86d72cbc09d0eae81e9dee0346224e7c4e1d324bf46c19570f1053",
+          "bytes": 865
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_bizon/idle_bizon.vnmclip+non_additive.json",
+      "sha256": "957019ee752ca621b5d16180aff9cce1f7e1bece8d84d5a0141ba7498164f1d1",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_bizon/idle_bizon.vnmclip+non_additive.vnmclip_c",
+          "sha256": "07afec01cfcfad20773f02f662611306f5adbd74d670ab34df7d0755ec78b866",
+          "bytes": 4566
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_bizon/idle_bizon.vnmclip+non_additive.dmx",
+          "sha256": "80c85ab94afb8291473625a0dfd4fad0a4626c4d544de7f137b005c009aee197",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_bizon/idle_bizon.vnmclip+non_additive.vnmclip",
+          "sha256": "ab46162976e51dcb4e65757a1211737e8583a94e13f013cf37f9ac01017dcd4d",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_bizon/idle_crouch_bizon.vnmclip+non_additive.json",
+      "sha256": "8c822e0b3fe8b730a1258883cdbd32a9728773304fcb0a5fa2c2cba334685091",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_bizon/idle_crouch_bizon.vnmclip+non_additive.vnmclip_c",
+          "sha256": "8325117e686ca3ea0f48a96b9887e4fdc0da192b0133f13459fd2533a0d02b1d",
+          "bytes": 4577
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_bizon/idle_crouch_bizon.vnmclip+non_additive.dmx",
+          "sha256": "8a56eabe82e427fb6089657809ea6eac15583d3a20379cb5e41a12a0770e6bfc",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_bizon/idle_crouch_bizon.vnmclip+non_additive.vnmclip",
+          "sha256": "94c7a2fd027317b5255afc68ba383f5209b59fbcac7c160c70c6f32eb53dca51",
+          "bytes": 478
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_xm1014/draw_xm1014.json",
+      "sha256": "6eb2ae896a8cad22f368158407dc2dcab3d8c9d33a2bb9bf5f55fe112d541b03",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_xm1014/draw_xm1014.vnmclip_c",
+          "sha256": "e461b9dc3a2d702d278c011ddb36d7dd6e16cd0d718764458f29dd806e0edff5",
+          "bytes": 11615
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_xm1014/draw_xm1014.dmx",
+          "sha256": "2086d0613cab40c04cb548afe3049871638a949b3489ee7b20a31a185e81a5ff",
+          "bytes": 157910
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_xm1014/draw_xm1014.vnmclip",
+          "sha256": "1dfca3ca99aa9c684f1a705a392401dfc38429695bac23ae42e5e00ae6f48e1c",
+          "bytes": 869
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_xm1014/idle_xm1014.vnmclip+non_additive.json",
+      "sha256": "45617cd852113f94d628ec92b33d7dd3553bbf9ae675a78dc5640e05fb400dc9",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_xm1014/idle_xm1014.vnmclip+non_additive.vnmclip_c",
+          "sha256": "23c20f9311de772dad5627e1e1ed2dd04d01d3ead364a59e2f8a0bd7554e632c",
+          "bytes": 4898
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_xm1014/idle_xm1014.vnmclip+non_additive.dmx",
+          "sha256": "95172e802195ef2971fb2bb3103b1a0e87e8e2b547951eca49da95dabc012cfd",
+          "bytes": 70406
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_xm1014/idle_xm1014.vnmclip+non_additive.vnmclip",
+          "sha256": "1d66ff549f345ddcb04b603c5a5660c8e759a6c4cb5d5f85b99e4644355b2a29",
+          "bytes": 565
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_xm1014/idle_crouch_xm1014.vnmclip+non_additive.json",
+      "sha256": "831e57ad7eeebd6dd5cce8fab5fee0207a9c4c4655b0969b7a97eef7c1ee5a03",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_xm1014/idle_crouch_xm1014.vnmclip+non_additive.vnmclip_c",
+          "sha256": "966cca158f6be753afebd71b6cd902a8de1010a25b782d903c324d07339a623a",
+          "bytes": 4896
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_xm1014/idle_crouch_xm1014.vnmclip+non_additive.dmx",
+          "sha256": "726be3bd49d885c080252c57c8fd1692b80dfa7cfe8c6d202ad26ad00f4bda6e",
+          "bytes": 70406
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_xm1014/idle_crouch_xm1014.vnmclip+non_additive.vnmclip",
+          "sha256": "f0ba8ad5baf0e92b43a6aec1c9ec99583b5199d2d8b95705aa23c53b5efab343",
+          "bytes": 572
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mag7/draw_mag7.json",
+      "sha256": "fe693f1dc2714027e09d9e63b553b762eecb74721854fd10a0dac6efd0206dca",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mag7/draw_mag7.vnmclip_c",
+          "sha256": "c62a83a4d8f623c926defea2c8c4f2c383429f3e50b4cea1438e240902907c4a",
+          "bytes": 12732
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mag7/draw_mag7.dmx",
+          "sha256": "a61375f3b24e413ed4e0dd6d60e2c249e491c344c16170fedadd0d4c5ec21149",
+          "bytes": 154217
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mag7/draw_mag7.vnmclip",
+          "sha256": "20a857cb4c6cf9a8be209abf1cd96be3fcf144e260dfb69d81bf05de643cfb78",
+          "bytes": 863
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mag7/idle_mag7.vnmclip+non_additive.json",
+      "sha256": "43c33b618aa31ff713b0de416b2ecc04059ea1a45e2bc92043a58bb86a4fa41b",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mag7/idle_mag7.vnmclip+non_additive.vnmclip_c",
+          "sha256": "4b78295352f270afdf453b5659686b30ad3d8fe145156768b7f8492dac1d53b3",
+          "bytes": 4557
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mag7/idle_mag7.vnmclip+non_additive.dmx",
+          "sha256": "f52b806c647940693407922fd1c913ca0db5b23936eaadd9250f96d3540df21f",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mag7/idle_mag7.vnmclip+non_additive.vnmclip",
+          "sha256": "b2108eb7c93f708e4882cd7e18a27f5a93c7a8ff5f4b5919f11448596d800bda",
+          "bytes": 469
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_mag7/idle_crouch_mag7.vnmclip+non_additive.json",
+      "sha256": "f92958b9312f158912bd542d56e62086581f1b707db580843a9aa9140bef45b4",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_mag7/idle_crouch_mag7.vnmclip+non_additive.vnmclip_c",
+          "sha256": "ce2017efe94efaaca50d4d70a90f669c07679ae021781d5e7700a4aab53f7ea3",
+          "bytes": 4567
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mag7/idle_crouch_mag7.vnmclip+non_additive.dmx",
+          "sha256": "4a1e2dc0b60cdcbe72f91d7853d86281312301954f3e0fbb9393eb2206e2b1a4",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_mag7/idle_crouch_mag7.vnmclip+non_additive.vnmclip",
+          "sha256": "4feb919577e985c88d60c1f5de1861b9ded337b2ee344b49bbbde4c1655f9deb",
+          "bytes": 476
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_sawedoff/draw_sawedoff.json",
+      "sha256": "c163c1398982d4c6f8a2cfaf5fa1830c5b3449e6fabd2e6b7b3e93eff0a719e3",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_sawedoff/draw_sawedoff.vnmclip_c",
+          "sha256": "f2d91e6dd6f26b6794ed64f4a0afaf25f83e463ca716b026953733063a71d47d",
+          "bytes": 16500
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sawedoff/draw_sawedoff.dmx",
+          "sha256": "b961d552d0ebd38af5bd66c5490942ce24f43959079c0cbaba681364e1b02e6e",
+          "bytes": 154144
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sawedoff/draw_sawedoff.vnmclip",
+          "sha256": "d7e34b80c68344a02d89a9022438bcb3691b8e60f073e97518abdadff29ffd10",
+          "bytes": 875
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_sawedoff/idle_sawedoff.vnmclip+non_additive.json",
+      "sha256": "2b6bb8e358e7dba3fa63d55eb0aea80954a7c0b98eb6ea9130d2b3ff378dde61",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_sawedoff/idle_sawedoff.vnmclip+non_additive.vnmclip_c",
+          "sha256": "d22efa2817cab93181c297edbab72de40dc198c0a7673faf62a94e01dd188e9d",
+          "bytes": 4574
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sawedoff/idle_sawedoff.vnmclip+non_additive.dmx",
+          "sha256": "e9524bd4212077b4dd010082689c32606c3a71f3a3ea9d56ca6f6a192a3f3208",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sawedoff/idle_sawedoff.vnmclip+non_additive.vnmclip",
+          "sha256": "e5a2c16c491c8d97bcb477c5790fa755b7af2229fdbce1bd967c9e9cc5bf4b78",
+          "bytes": 477
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_sawedoff/idle_crouch_sawedoff.vnmclip+non_additive.json",
+      "sha256": "5dfd47e9b2b17b723e9fd8cf3fac8112c27f5d8e6720d6a017d9677d1530cd16",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_sawedoff/idle_crouch_sawedoff.vnmclip+non_additive.vnmclip_c",
+          "sha256": "4772c04b8e8613cfca273a8aec182942a357b455a570fe394aa016094b7dded3",
+          "bytes": 4584
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sawedoff/idle_crouch_sawedoff.vnmclip+non_additive.dmx",
+          "sha256": "93d81c7e7829f4a7f88c165db9f3aefae93662457d104d99eb736425e7c34524",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_sawedoff/idle_crouch_sawedoff.vnmclip+non_additive.vnmclip",
+          "sha256": "03f4936f3162c1c75261c9c5445167d723cc0f82a19c450a34089530fa61f612",
+          "bytes": 484
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m249/draw_m249.json",
+      "sha256": "100747184eea9ed46795adb84ca38c8bb1ca7fd32a58e7e1d658bdecc6e75d3c",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m249/draw_m249.vnmclip_c",
+          "sha256": "b530d2c5f157ecbbfbd1fca2a37abb63a553c455c996a049f1a6ed5f1f971479",
+          "bytes": 14892
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m249/draw_m249.dmx",
+          "sha256": "97ba9054625bb0f60573ebc50cebfbefa95c08f76b47bd0d492e5a1644a96b90",
+          "bytes": 226251
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m249/draw_m249.vnmclip",
+          "sha256": "d0ce8268769450802061fd28dac8b821aa7b8aeb56df36b9d94d7540b7dcda5b",
+          "bytes": 863
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m249/idle_m249.vnmclip+non_additive.json",
+      "sha256": "24459fa989917c35bbcbadb7a79d4ecf2d606ddfc2e9ba4b0cae24cf4a2a8288",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m249/idle_m249.vnmclip+non_additive.vnmclip_c",
+          "sha256": "7a382193064dc3319931e4a7bcc98f1d3341f1bb472c4c547bbb462e9cd2b46e",
+          "bytes": 4568
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m249/idle_m249.vnmclip+non_additive.dmx",
+          "sha256": "b10e29be017a0d64519dde14678831003423d2e7d42e4d81d7e2505fff9042fc",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m249/idle_m249.vnmclip+non_additive.vnmclip",
+          "sha256": "a20b1ebd34a401a5afa03d28c876ae00e5c9ecb0a23b8a0afef1b2d2024026e0",
+          "bytes": 469
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_m249/idle_crouch_m249.vnmclip+non_additive.json",
+      "sha256": "ac4ecc6dd4eccd352c6f82e38f2286b8ff057bf5d2f982670b36cc40ad78bc7f",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_m249/idle_crouch_m249.vnmclip+non_additive.vnmclip_c",
+          "sha256": "dae00748361afce0e3d5a455ddeda558fa8b28c87eadcde559be68e44d9899c8",
+          "bytes": 4572
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m249/idle_crouch_m249.vnmclip+non_additive.dmx",
+          "sha256": "d13a4aeb30f912bb7921674d124e2ada8f4500c77fc5ba2d6f9aa30bc88b7687",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_m249/idle_crouch_m249.vnmclip+non_additive.vnmclip",
+          "sha256": "37d27dccabdfc4898d89d27dc9a911dd4ad430e798df6c384fab5951dd74297e",
+          "bytes": 476
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_negev/draw_negev.json",
+      "sha256": "c2c5c5e1ee84fcc07c8174caf1eea48f0fa954800bf59998a43094da24215270",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_negev/draw_negev.vnmclip_c",
+          "sha256": "9d657c8652a446f3881aa37f037d8ffde5d7736c653b46837afaf548c927e49e",
+          "bytes": 16309
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_negev/draw_negev.dmx",
+          "sha256": "6575c5b481337f8ca617e473deac6ca650fa0d22f8f407ee9ef3038c873ac83f",
+          "bytes": 230266
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_negev/draw_negev.vnmclip",
+          "sha256": "39a0154f088276a43b8c67ccf28dbbbf9b29f68bde45f2d7af7e89d795161195",
+          "bytes": 866
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_negev/idle_negev.vnmclip+non_additive.json",
+      "sha256": "65d62caab5eacf240415d55b049fb242bfb057172a243558f6fd383cd027ad4c",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_negev/idle_negev.vnmclip+non_additive.vnmclip_c",
+          "sha256": "cb6007d98e14b53df37c4de55506f7f6d9cc6357979f61d9fd498e8205083d19",
+          "bytes": 4560
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_negev/idle_negev.vnmclip+non_additive.dmx",
+          "sha256": "0c641694c7283fd894b13f55e28822ead3f56b4d7ec7976d3961544e84db63e5",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_negev/idle_negev.vnmclip+non_additive.vnmclip",
+          "sha256": "4003c4efe4d0efe3439b2b6bd4f2ad7020a2449c571b063a76b3b1e2887efb02",
+          "bytes": 471
+        }
+      ]
+    },
+    {
+      "file": "poses/rifle/rifle_negev/idle_crouch_negev.vnmclip+non_additive.json",
+      "sha256": "51b9283c4a43101755c5fb4f16333ac99de44ff2c1f82d7fa59ad45b3853e011",
+      "provenance": [
+        {
+          "path": "fast-output/gameplay/native/animation/anims/world/rifle/rifle_negev/idle_crouch_negev.vnmclip+non_additive.vnmclip_c",
+          "sha256": "7a4bb78f126485dc04726b3772576bfe02c464f517d6da892ccec720758d4bd9",
+          "bytes": 4567
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_negev/idle_crouch_negev.vnmclip+non_additive.dmx",
+          "sha256": "e6554359f91a5773a0c19686058f801f88b6ca3576c4294b09b4e31c8b16177e",
+          "bytes": 63155
+        },
+        {
+          "path": "fast-output/gameplay/decoded/animation/anims/world/rifle/rifle_negev/idle_crouch_negev.vnmclip+non_additive.vnmclip",
+          "sha256": "c61c4f70983059ace39b217d87eaf4e7a2fd7b9d3d198e715e7b979f32fda910",
+          "bytes": 478
+        }
+      ]
+    }
+  ],
+  "count": 34,
+  "processing": "Absolute standing/crouching weapon idle samples retargeted to existing calibrated rigs; runtime converts upper-body tracks to additive deltas against matching locomotion stance. Native secondary skeleton reference pose retains weapon mesh binding. Native wpn attachment is calibrated relative to the target right hand. No hand-to-hand barrel guess.",
+  "limitations": "Static grip layer plus existing locomotion/recoil; this is not the full executable Source2 animation graph. IDF Source1 proportions/retargeting remain approximate. No new draw/reload animations are claimed."
+}

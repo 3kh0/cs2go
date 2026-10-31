@@ -1,0 +1,1821 @@
+{
+  "format": 1,
+  "generator": "python3 scripts/pack-audio.py",
+  "description": "Lossless concatenation of existing local Opus clips. Original attribution remains in cs2-weapons-source.json for current firearms, cs2-elite-source.json for supplemental ELITE reload cues, cs2-effects-source.json for other cues, and cs2-ui-source.json for additional UI events. Music streams separately.",
+  "bytes": 3234590,
+  "sha256": "466a89d629019e4b1d6fdc214ee8cc100da53b074f65460bd2e676050debc742",
+  "clips": [
+    {
+      "url": "/audio/ak47-1.ogg",
+      "offset": 0,
+      "length": 20018,
+      "sha256": "cb42bd2d1f7f7435730eb0cbd2ef6cb3b98b604b9a25419aa427fe06ed593e8d"
+    },
+    {
+      "url": "/audio/ak47_boltpull.ogg",
+      "offset": 20018,
+      "length": 6881,
+      "sha256": "8f1b33a9fad249a11d5dc242be1c5b4bfe51ec4b4d15fd257c855379f5a0ee15"
+    },
+    {
+      "url": "/audio/ak47_clipin.ogg",
+      "offset": 26899,
+      "length": 2102,
+      "sha256": "8b601238e5b2fe19cebc796557012294226668f9ed31d42105940f3c58c05283"
+    },
+    {
+      "url": "/audio/ak47_clipout.ogg",
+      "offset": 29001,
+      "length": 7136,
+      "sha256": "cb3032ba22174bb6d14ef153c611103e9f53aea2bed4e33e8d17d06f1dd0bf9c"
+    },
+    {
+      "url": "/audio/ak47_draw.ogg",
+      "offset": 36137,
+      "length": 7881,
+      "sha256": "26fc1ab9dae4b69193e5ce2d9902ae42e1a1acbbcc6cb6de4aa621af24a4121b"
+    },
+    {
+      "url": "/audio/aug-1.ogg",
+      "offset": 44018,
+      "length": 26627,
+      "sha256": "01de6e16806f86f28baebbc4a39094b09390984e1e03ba8ecf3ed2eef1687fd5"
+    },
+    {
+      "url": "/audio/aug_boltpull.ogg",
+      "offset": 70645,
+      "length": 3930,
+      "sha256": "1d3712c105c635d5f9aaf704fc25673c935c7cd6f01c616ebdef35685d8276f0"
+    },
+    {
+      "url": "/audio/aug_boltrelease.ogg",
+      "offset": 74575,
+      "length": 6225,
+      "sha256": "a92a76b0a7c9e5de49230d98a539beece055596472b9a7537e46771b16e8d80b"
+    },
+    {
+      "url": "/audio/aug_clipin.ogg",
+      "offset": 80800,
+      "length": 4200,
+      "sha256": "f91d339c3410aa817e6b3aa2556960867d9ff410dce19663919d7f3de6926865"
+    },
+    {
+      "url": "/audio/aug_clipout.ogg",
+      "offset": 85000,
+      "length": 3226,
+      "sha256": "d1722b3285a787539ab43bc303d7ad515e609a30df12e564e1df92b48b99e47e"
+    },
+    {
+      "url": "/audio/aug_draw.ogg",
+      "offset": 88226,
+      "length": 12833,
+      "sha256": "6605f4ee2577599bc773633662adedc7087737a4ceeaefd2b3a5178acf0e794b"
+    },
+    {
+      "url": "/audio/aug_zoom.ogg",
+      "offset": 101059,
+      "length": 6048,
+      "sha256": "704ae37eac87bea465066ffaef3e79e7f5b6699710e56b9e467b9c00bd7b0b74"
+    },
+    {
+      "url": "/audio/awp1.ogg",
+      "offset": 107107,
+      "length": 41022,
+      "sha256": "2964374fdf3ed24f1a1c9a547dff0f4fc7ebe36af47a4a696d192fb6c0b3942d"
+    },
+    {
+      "url": "/audio/awp_boltback.ogg",
+      "offset": 148129,
+      "length": 5473,
+      "sha256": "fc2e646e88fd4eada7a6547b560bcc93429b125a1f881ed3cd1da3210d32df5e"
+    },
+    {
+      "url": "/audio/awp_boltforward.ogg",
+      "offset": 153602,
+      "length": 3687,
+      "sha256": "3ddcb97cac7b9695b0de8e091b7ae76d5f31f944ac723f679853ca6c09ab2d98"
+    },
+    {
+      "url": "/audio/awp_clipin.ogg",
+      "offset": 157289,
+      "length": 5679,
+      "sha256": "2254a4aa365d4da51bd0009217ddb19941c9b5a4b5d8063de8779b1de026d1ea"
+    },
+    {
+      "url": "/audio/awp_clipout.ogg",
+      "offset": 162968,
+      "length": 3015,
+      "sha256": "d330d3636bdd936816ca3ac8fdb7d65278596218f527bdf981ef8d6263d56cc5"
+    },
+    {
+      "url": "/audio/awp_draw.ogg",
+      "offset": 165983,
+      "length": 12375,
+      "sha256": "531e6e49223442eb673af10075f58b0446e2c2b9d11c3bf2da2eb013808501e1"
+    },
+    {
+      "url": "/audio/bizon-1.ogg",
+      "offset": 178358,
+      "length": 15651,
+      "sha256": "ae5a64d2e55524a70f353b02570dd9b88cfb4584158cb75575eae1018815ad80"
+    },
+    {
+      "url": "/audio/bizon_boltback.ogg",
+      "offset": 194009,
+      "length": 3812,
+      "sha256": "56ecf892007b5d35f79f680f65f5c5568ebe6244dd799e44c63a92f637f1ae77"
+    },
+    {
+      "url": "/audio/bizon_boltforward.ogg",
+      "offset": 197821,
+      "length": 6458,
+      "sha256": "a9ca1e2a393440b8ac9aa580dc0601eeeddf12c04ddb2744b41aacd5a92227cd"
+    },
+    {
+      "url": "/audio/bizon_clipin.ogg",
+      "offset": 204279,
+      "length": 1900,
+      "sha256": "d6204f63bc238679bb5e1fa660d81debf93bfd98e51cb0ac2a0045fadedf364a"
+    },
+    {
+      "url": "/audio/bizon_clipout.ogg",
+      "offset": 206179,
+      "length": 4876,
+      "sha256": "84dc44683153d3956b5d41e26321ca7924cfcdd962fe188702b2c13ec2e1c9f0"
+    },
+    {
+      "url": "/audio/bizon_draw.ogg",
+      "offset": 211055,
+      "length": 12996,
+      "sha256": "622ad3bb6256ba9d647bd525b800d868ec2cd30b7234c18c48a60258aaaf71cf"
+    },
+    {
+      "url": "/audio/cz75_clipin.ogg",
+      "offset": 224051,
+      "length": 2675,
+      "sha256": "1d0a8b39d2ab75594c3e8b8f0104c15f8259c8d5557d1ebb851b7efa2d86eea2"
+    },
+    {
+      "url": "/audio/cz75a-1.ogg",
+      "offset": 226726,
+      "length": 16648,
+      "sha256": "2b38db5f3bfa2396d635c4d9bc4f30d3de06c7a229b7bcd91b7a18a336f3a588"
+    },
+    {
+      "url": "/audio/de_clipin.ogg",
+      "offset": 243374,
+      "length": 2102,
+      "sha256": "d574c747c99b69e4ad104cea124b8dfd8db7c3dc5feab6491e913a4e3200fec8"
+    },
+    {
+      "url": "/audio/de_clipout.ogg",
+      "offset": 245476,
+      "length": 4596,
+      "sha256": "8d6f724bfd8f177033e45afe9ce36a1ff26936e297e76e125b4de7e51ce5ce36"
+    },
+    {
+      "url": "/audio/de_draw.ogg",
+      "offset": 250072,
+      "length": 13966,
+      "sha256": "b779b07db613034a56c1d6f4008ca146c15ed6be05f23f7cc3a46892ad1a3c1a"
+    },
+    {
+      "url": "/audio/de_slideback.ogg",
+      "offset": 264038,
+      "length": 3343,
+      "sha256": "30baa7591aa411cc3f150017ce964fc391eac803be5e82d938aa1d8f5033d00c"
+    },
+    {
+      "url": "/audio/de_slideforward.ogg",
+      "offset": 267381,
+      "length": 2629,
+      "sha256": "ed545f7faab71c63c3400a8eed2821664e27117d44cbf9f322d33a6c185948aa"
+    },
+    {
+      "url": "/audio/deagle-1.ogg",
+      "offset": 270010,
+      "length": 30686,
+      "sha256": "5dc71a7c53984fa5d1743e9841d63db096c21d8a23f3b375b3550ddbb7700831"
+    },
+    {
+      "url": "/audio/elite-1.ogg",
+      "offset": 300696,
+      "length": 32707,
+      "sha256": "8c20b62adc4af49a4e6e1fcf1f31adbcc15c4ce9cef69ce1669c4ce5830aa3bf"
+    },
+    {
+      "url": "/audio/elite_clipout.ogg",
+      "offset": 333403,
+      "length": 8749,
+      "sha256": "7bf654d665e78b023b2bb0216e895bffb24f68e8941f0827cd76b0cd8bd7cdb0"
+    },
+    {
+      "url": "/audio/elite_draw.ogg",
+      "offset": 342152,
+      "length": 16084,
+      "sha256": "4e004af044460ac3a3a5ced89091434e1c0e2b1e66dd81a517b93ecc0ada2525"
+    },
+    {
+      "url": "/audio/elite_lclipin.ogg",
+      "offset": 358236,
+      "length": 4697,
+      "sha256": "e49e8da1a84360b0eb4136d1e50b0dfa5fbdabb8e35741952d1ba561922183a1"
+    },
+    {
+      "url": "/audio/elite_leftclipin.ogg",
+      "offset": 362933,
+      "length": 4878,
+      "sha256": "2bc5205b59e6c0309a81b8aa00d0b01b242818c5ddb83ef2e69b4799e559f6fb"
+    },
+    {
+      "url": "/audio/elite_rclipin.ogg",
+      "offset": 367811,
+      "length": 5041,
+      "sha256": "afb39db6be0b5c1de6ccf4c84e73ca3a47394426c02dbdbf0164cc69f4d70083"
+    },
+    {
+      "url": "/audio/elite_sliderelease.ogg",
+      "offset": 372852,
+      "length": 7663,
+      "sha256": "1125cb1a1ec85f2277fc68166351e67b49e397ca9b9393fc94f3203ab39b8c6f"
+    },
+    {
+      "url": "/audio/famas-1.ogg",
+      "offset": 380515,
+      "length": 23187,
+      "sha256": "66ddae6faf8b530de1a9b1eab05307a46c43b17187816b50225700937984ea95"
+    },
+    {
+      "url": "/audio/famas_boltback.ogg",
+      "offset": 403702,
+      "length": 4076,
+      "sha256": "b453d9147ab2ab18a34b1ad84136f519364da242e36053ce225269e7b4983568"
+    },
+    {
+      "url": "/audio/famas_boltforward.ogg",
+      "offset": 407778,
+      "length": 3427,
+      "sha256": "2045f6dce67251efbfc9a0bcb9ede139a531553aaafb9c35c7c9a9f6922624ad"
+    },
+    {
+      "url": "/audio/famas_clipin.ogg",
+      "offset": 411205,
+      "length": 6191,
+      "sha256": "f4f35494a4d15f3a8b149c4d4a74d9d83890c4d82ca90231d6e34ee4ff5255e4"
+    },
+    {
+      "url": "/audio/famas_clipout.ogg",
+      "offset": 417396,
+      "length": 7793,
+      "sha256": "dcf9af8181ec70cfe6f7233e549313757518aca9e2a6cadd3cf0dd0aff8c6d3d"
+    },
+    {
+      "url": "/audio/famas_draw.ogg",
+      "offset": 425189,
+      "length": 11176,
+      "sha256": "cea93c8e9faad417a1d30e6cb6abb082e523bd352f849293f3a41e17bb66adc1"
+    },
+    {
+      "url": "/audio/fiveseven-1.ogg",
+      "offset": 436365,
+      "length": 16098,
+      "sha256": "6178d7253677df52058ac328a12842dfd1f6e2eb91ddaaa985e970be076096a2"
+    },
+    {
+      "url": "/audio/fiveseven_clipin.ogg",
+      "offset": 452463,
+      "length": 4768,
+      "sha256": "3b87acaaa98a309c9a79b10c7df86079975875f49ce39b8a6c06278f6318232f"
+    },
+    {
+      "url": "/audio/fiveseven_clipout.ogg",
+      "offset": 457231,
+      "length": 3478,
+      "sha256": "04ad0bdb48ee08ea325ab2820fc8d28e3186c3a0e962cfccd627e230ec4fc172"
+    },
+    {
+      "url": "/audio/fiveseven_draw.ogg",
+      "offset": 460709,
+      "length": 13966,
+      "sha256": "64a4d5d2686de2f11cfddb541221896152e95073565c54ea2b66df2dcafc3d79"
+    },
+    {
+      "url": "/audio/fiveseven_slideback.ogg",
+      "offset": 474675,
+      "length": 3975,
+      "sha256": "b6dc24b8d2015663d95b41552f8d646e73ee007f068aa1d9d7153a6a6ed30776"
+    },
+    {
+      "url": "/audio/fiveseven_sliderelease.ogg",
+      "offset": 478650,
+      "length": 3579,
+      "sha256": "a11fbe560f5e0ed8fccec2d95293bcd740580d731423b8eca4716545714ad1d5"
+    },
+    {
+      "url": "/audio/g3sg1-1.ogg",
+      "offset": 482229,
+      "length": 26883,
+      "sha256": "bc2475e127c516b4a4e23f83ad496c3efed20a3bfa1fe195a90dc7d228c6dcb0"
+    },
+    {
+      "url": "/audio/g3sg1_clipin.ogg",
+      "offset": 509112,
+      "length": 3817,
+      "sha256": "b2935ad765c17515344073bf1a5f26c026d37174f20fd26870fe1034120b9613"
+    },
+    {
+      "url": "/audio/g3sg1_clipout.ogg",
+      "offset": 512929,
+      "length": 6458,
+      "sha256": "6c7af356f7bb65a9c0471a28124d9e59545c2b9b3b606a9c7942a9ef00520b14"
+    },
+    {
+      "url": "/audio/g3sg1_draw.ogg",
+      "offset": 519387,
+      "length": 12054,
+      "sha256": "cf894d5570abf4bc12eaca19d8b0eec3ee79b64c3e38f3735aee3ceb556e9ad5"
+    },
+    {
+      "url": "/audio/g3sg1_slideback.ogg",
+      "offset": 531441,
+      "length": 3659,
+      "sha256": "b9e0ae588814f3784ec975310d6e0f04f977f27b0861158e5b57fec568b059bd"
+    },
+    {
+      "url": "/audio/g3sg1_slideforward.ogg",
+      "offset": 535100,
+      "length": 7419,
+      "sha256": "e54ca74c450dbe38631bbaf152a272d76b0c76643a280a7e67b595d92d2958d0"
+    },
+    {
+      "url": "/audio/g3sg1_zoom.ogg",
+      "offset": 542519,
+      "length": 5464,
+      "sha256": "ff7cf920028e236f6d5433044a1ddac89343ab43f82eed83e141b35fe1c0e4f4"
+    },
+    {
+      "url": "/audio/galil-1.ogg",
+      "offset": 547983,
+      "length": 31336,
+      "sha256": "9109a015729e72726e4eef7849f8736b173b98f51a64e08bb22feab464332e72"
+    },
+    {
+      "url": "/audio/galil_boltback.ogg",
+      "offset": 579319,
+      "length": 3919,
+      "sha256": "d98c90fd43b4218156eb45fad825280293700d408d6af6fc141e9f51a5e924cb"
+    },
+    {
+      "url": "/audio/galil_boltforward.ogg",
+      "offset": 583238,
+      "length": 4402,
+      "sha256": "a2ee17fb39b351990b840e78bc8ab72adb176a9a7f185091e16765f9a05fcd6a"
+    },
+    {
+      "url": "/audio/galil_clipin.ogg",
+      "offset": 587640,
+      "length": 2102,
+      "sha256": "d182bd4a08745aafd77ebcad2edd722a790977a28a71b4f4e9607f3540a7c21f"
+    },
+    {
+      "url": "/audio/galil_clipout.ogg",
+      "offset": 589742,
+      "length": 4559,
+      "sha256": "26faef76c8bd27698343be8aab74e910b707cfe97a51eb4e9647f4b1a2b7ddd8"
+    },
+    {
+      "url": "/audio/galil_draw.ogg",
+      "offset": 594301,
+      "length": 12642,
+      "sha256": "ad3442a150e24ad9f4b9ce7950f2f776d3a2f3fa35254d2659e24f0ed9fc4ce6"
+    },
+    {
+      "url": "/audio/glock18-1.ogg",
+      "offset": 606943,
+      "length": 19197,
+      "sha256": "f8aa19a61078f67427a5780dbafd7fc31e75975fedb95f4f078fb17836442973"
+    },
+    {
+      "url": "/audio/glock_clipin.ogg",
+      "offset": 626140,
+      "length": 5097,
+      "sha256": "a462d9c8e2590eff2ba28ba934c51bb5ea3dd47c83470fa73927060f1d3f7707"
+    },
+    {
+      "url": "/audio/glock_clipout.ogg",
+      "offset": 631237,
+      "length": 5097,
+      "sha256": "a4b881073d7e4d82c95d504a2ab4a7b0e299f23819424b305710d21f70349edf"
+    },
+    {
+      "url": "/audio/glock_draw.ogg",
+      "offset": 636334,
+      "length": 13966,
+      "sha256": "ec7a9b4919516a5c5fad38d2a098d1b1b3b8373ce26fde51c294620091c9e6b6"
+    },
+    {
+      "url": "/audio/glock_slideback.ogg",
+      "offset": 650300,
+      "length": 4911,
+      "sha256": "0d753bae8f81a994e5059697a1c96b5616ed154657226a19d2c0c2983dd2d9b3"
+    },
+    {
+      "url": "/audio/glock_sliderelease.ogg",
+      "offset": 655211,
+      "length": 4673,
+      "sha256": "0516be9ca5ded53ad363489d48adb3666abeafe2aa0d0da8c3496f4486ffd13f"
+    },
+    {
+      "url": "/audio/hkp2000-1.ogg",
+      "offset": 659884,
+      "length": 21381,
+      "sha256": "8dc058cf868a9faefac9165a62588b1f6947b01e4b4b352b967735e4a384be0d"
+    },
+    {
+      "url": "/audio/hkp2000_clipin.ogg",
+      "offset": 681265,
+      "length": 2121,
+      "sha256": "567a63199cf3192ed0e165064f5ab6bda5fd8614ebf41a759f8c36986ecfd559"
+    },
+    {
+      "url": "/audio/hkp2000_clipout.ogg",
+      "offset": 683386,
+      "length": 4804,
+      "sha256": "419a366205b2ad50d25fc601a87511d1ad555642cd333943351f2ffee12d98cc"
+    },
+    {
+      "url": "/audio/hkp2000_draw.ogg",
+      "offset": 688190,
+      "length": 13966,
+      "sha256": "aaeae91250ca217dae2190094fdc4dedaf3b1948c95ce441bdb74d1ddcca7ae7"
+    },
+    {
+      "url": "/audio/hkp2000_slideback.ogg",
+      "offset": 702156,
+      "length": 4919,
+      "sha256": "ca26b13c3b631f2ab04c67a0cf303972f623e561af0ba2a890b9c7b342502860"
+    },
+    {
+      "url": "/audio/hkp2000_sliderelease.ogg",
+      "offset": 707075,
+      "length": 3111,
+      "sha256": "0f6ddf8a0be4cbe9a9eec26c83bffc0d6ebdb702f1c033292421c6b986bd9b67"
+    },
+    {
+      "url": "/audio/m249-1.ogg",
+      "offset": 710186,
+      "length": 15411,
+      "sha256": "33f5c17e8065842c9125c6fa02f5fa686c13f5ce3f7301a4e1fe6c8703a701fe"
+    },
+    {
+      "url": "/audio/m249_boxin.ogg",
+      "offset": 725597,
+      "length": 13886,
+      "sha256": "556d0ff7e96fd05e4f28e17c03f71adf4ab2ebbb35ea6d771f3200e2a678ec84"
+    },
+    {
+      "url": "/audio/m249_boxout.ogg",
+      "offset": 739483,
+      "length": 4290,
+      "sha256": "a0354af370a23b5df314d29b516d6d4b51baed381aec3fd04d0fcf1bd577fe4a"
+    },
+    {
+      "url": "/audio/m249_draw.ogg",
+      "offset": 743773,
+      "length": 5259,
+      "sha256": "29b56116d60c33332198f441a9676ad1185e8074694c201126bcfbdaf806449b"
+    },
+    {
+      "url": "/audio/m249_pump.ogg",
+      "offset": 749032,
+      "length": 6747,
+      "sha256": "5cf192babdecdfc5f23fb878113f4a02d7cf93fcc2fec6a06da9ed85e9fefe2e"
+    },
+    {
+      "url": "/audio/m4a1-1-single.ogg",
+      "offset": 755779,
+      "length": 15017,
+      "sha256": "97d31e09ab59feaf113155387cbad246b9a5000bf6a70bda21dfbab95ee13a18"
+    },
+    {
+      "url": "/audio/m4a1-1.ogg",
+      "offset": 770796,
+      "length": 31259,
+      "sha256": "eadc02745090b9b8f22e1ed57f4b29d632ed999fe37ddf575d0b1a1b628d794b"
+    },
+    {
+      "url": "/audio/m4a1_boltback.ogg",
+      "offset": 802055,
+      "length": 5901,
+      "sha256": "c5343d4542538c0b21d3bc21229f5f5e3ae891662157114c161b70f63146914d"
+    },
+    {
+      "url": "/audio/m4a1_boltforward.ogg",
+      "offset": 807956,
+      "length": 6171,
+      "sha256": "94f9cc5ecb490c3d3af641cef4ae9a5f276349f41137417e67a6e709b4a64622"
+    },
+    {
+      "url": "/audio/m4a1_clipin.ogg",
+      "offset": 814127,
+      "length": 2241,
+      "sha256": "821d5b28b9ea4c69bbf0f31e2a1cdfb81701940410b509c35949fa62e2d093f4"
+    },
+    {
+      "url": "/audio/m4a1_clipout.ogg",
+      "offset": 816368,
+      "length": 6313,
+      "sha256": "4f886bb332389498262082b16ed844c2d24469b573d67f49f7629a13ca8a8584"
+    },
+    {
+      "url": "/audio/m4a1_draw.ogg",
+      "offset": 822681,
+      "length": 14657,
+      "sha256": "f94511885b81eb2463fc6a89cee4229971822edf6721193350aa6f11799ecc52"
+    },
+    {
+      "url": "/audio/m4a1_silencer_boltback.ogg",
+      "offset": 837338,
+      "length": 7257,
+      "sha256": "0a1106d3250ffdb807c4dba37e7cc1105891091d84dab85d893047831d555744"
+    },
+    {
+      "url": "/audio/m4a1_silencer_boltforward.ogg",
+      "offset": 844595,
+      "length": 5772,
+      "sha256": "4369a6f0fcac4d78042ed8f6afcebcaa453190247c30863b58b5738073e286ad"
+    },
+    {
+      "url": "/audio/mac10-1.ogg",
+      "offset": 850367,
+      "length": 20449,
+      "sha256": "1771f16b7dcd486c08cc17426e30c9aefa15a5d710fca6e04a45ccca09f0a798"
+    },
+    {
+      "url": "/audio/mac10_boltback.ogg",
+      "offset": 870816,
+      "length": 3258,
+      "sha256": "81760c815855c540ccbe51aaf6810deeea5b8d15c76aa62fe1ece815e233000b"
+    },
+    {
+      "url": "/audio/mac10_boltforward.ogg",
+      "offset": 874074,
+      "length": 5742,
+      "sha256": "c73cb86da3169aaf29e25a78ee7138a92060af5a482c9f316f259690c7ddb546"
+    },
+    {
+      "url": "/audio/mac10_clipin.ogg",
+      "offset": 879816,
+      "length": 1798,
+      "sha256": "ce140cd8ed63d65bb36c7b99abc9848e0a1bd7b8c4b8e00ef5e703e8ffd54395"
+    },
+    {
+      "url": "/audio/mac10_clipout.ogg",
+      "offset": 881614,
+      "length": 4587,
+      "sha256": "0120352f03572ab17d73c069bdc304f3782ace2e24cbc2e42d6f613ee54ad7b1"
+    },
+    {
+      "url": "/audio/mac10_draw.ogg",
+      "offset": 886201,
+      "length": 10399,
+      "sha256": "dce867d9b1c5d8af113300c039f9dd812d146207c462cce2d04c3944fbcef880"
+    },
+    {
+      "url": "/audio/mag7-1.ogg",
+      "offset": 896600,
+      "length": 28630,
+      "sha256": "a2517f4fbc6aaa3351f3a8f8de36756b0e5cdbf156b4755c8b3649d5d44bf992"
+    },
+    {
+      "url": "/audio/mag7_clipin.ogg",
+      "offset": 925230,
+      "length": 3829,
+      "sha256": "94350f9a46af3ce5886ac492733a0af46f4a7fe67bd2b7b832c5768363b96eea"
+    },
+    {
+      "url": "/audio/mag7_clipout.ogg",
+      "offset": 929059,
+      "length": 5126,
+      "sha256": "ea51faf653b3a0d389d9b8f1a1235f6ed95b942a75262414db27503edeab43bb"
+    },
+    {
+      "url": "/audio/mag7_draw.ogg",
+      "offset": 934185,
+      "length": 8088,
+      "sha256": "52b2f3710a30b7b4f4ccec4be79923a60a7baa310477a92bfed74e376eb10c9d"
+    },
+    {
+      "url": "/audio/mag7_pump_back.ogg",
+      "offset": 942273,
+      "length": 2872,
+      "sha256": "ebbd8f3bd72ec8dc637a5b7f6e18ca745a265768082a8eec1ffba615efbef1e5"
+    },
+    {
+      "url": "/audio/mag7_pump_forward.ogg",
+      "offset": 945145,
+      "length": 2180,
+      "sha256": "39e8e7eb23f2c077e7dc4182beebb6d18037b53e383545e42a2c8e1f5712e16f"
+    },
+    {
+      "url": "/audio/mp5_01.ogg",
+      "offset": 947325,
+      "length": 14659,
+      "sha256": "874ee39439767e7efb107800580b5bda4efc888bf0774364eafb56b160f697da"
+    },
+    {
+      "url": "/audio/mp5_clipin.ogg",
+      "offset": 961984,
+      "length": 1405,
+      "sha256": "8d6492a00f0d2879e8238a10da062408b0b5a8803b59285c85dd74adc57c3d8b"
+    },
+    {
+      "url": "/audio/mp5_clipout.ogg",
+      "offset": 963389,
+      "length": 4494,
+      "sha256": "a03c036389a5e40039afc320c992656aec17492a408f16f1f7a4bc84925dd9d5"
+    },
+    {
+      "url": "/audio/mp5_draw.ogg",
+      "offset": 967883,
+      "length": 11317,
+      "sha256": "dbf5dc2a74e7e5aff41d95f577731840e192207fee5a16e9f613b7e3c16e6f10"
+    },
+    {
+      "url": "/audio/mp5_slideback.ogg",
+      "offset": 979200,
+      "length": 2679,
+      "sha256": "0c35843064fa865c977240330955f14f1d9d6d1b0e870f1d7e0d649c35ae5e1a"
+    },
+    {
+      "url": "/audio/mp5_slideforward.ogg",
+      "offset": 981879,
+      "length": 5885,
+      "sha256": "747007e8978fd0fc335d906ccdbbf90ad2199d15253598c2b3e8791ad0652b3a"
+    },
+    {
+      "url": "/audio/mp7-1.ogg",
+      "offset": 987764,
+      "length": 21619,
+      "sha256": "f749e38cf9afc87a01539181e6201b8d0dc90ebe340100de21f87ec5bb5dd8e0"
+    },
+    {
+      "url": "/audio/mp7_clipin.ogg",
+      "offset": 1009383,
+      "length": 2720,
+      "sha256": "00b69ff9116a73264e5a4d87e0a73be66a80c1f24f58dbafa0ef8779198bb257"
+    },
+    {
+      "url": "/audio/mp7_clipout.ogg",
+      "offset": 1012103,
+      "length": 8007,
+      "sha256": "c15a854662749568ba24b952308b1e858273ab51b9416aef9ed45812334040a4"
+    },
+    {
+      "url": "/audio/mp7_draw.ogg",
+      "offset": 1020110,
+      "length": 13442,
+      "sha256": "70de53b7692d4779fe9269d6a06f7e73918ffc2400b61b74e16f95168736a200"
+    },
+    {
+      "url": "/audio/mp7_slideback.ogg",
+      "offset": 1033552,
+      "length": 3028,
+      "sha256": "357af048b621e7e4b69e8f7ae673967cb3e79fbf2a290bf7c78eb2680df85996"
+    },
+    {
+      "url": "/audio/mp7_slideforward.ogg",
+      "offset": 1036580,
+      "length": 3416,
+      "sha256": "b4f5b2b713a2a924da69b78898f158e78a881fc7485b42701ef4ca26add6bf6d"
+    },
+    {
+      "url": "/audio/mp9-1.ogg",
+      "offset": 1039996,
+      "length": 17423,
+      "sha256": "6abc8191b5bcd29313e3c2bc6574729182100e32f4d62620f8cb0c13b909c9b7"
+    },
+    {
+      "url": "/audio/mp9_boltback.ogg",
+      "offset": 1057419,
+      "length": 2924,
+      "sha256": "95988e0bce717f82d89b3e9f35c9c445bdf570643d90df9e1d649076d2771622"
+    },
+    {
+      "url": "/audio/mp9_boltforward.ogg",
+      "offset": 1060343,
+      "length": 2791,
+      "sha256": "be727e4094fb41e2cb0535788b399d9ef2211587a208aa1f03352c4e2823ae48"
+    },
+    {
+      "url": "/audio/mp9_clipin.ogg",
+      "offset": 1063134,
+      "length": 2472,
+      "sha256": "32ecdcb5965f2c0bffdea8ad1d2ed2ddb0f9a7ea11959001eafc007d7e7f4f8e"
+    },
+    {
+      "url": "/audio/mp9_clipout.ogg",
+      "offset": 1065606,
+      "length": 5119,
+      "sha256": "f2bfd2c33eb90acc6fdd70f9f3a79970ec3a080922ca769e68e7ac03f75f5a20"
+    },
+    {
+      "url": "/audio/mp9_draw.ogg",
+      "offset": 1070725,
+      "length": 9511,
+      "sha256": "e8d13473c2fc8fd79ab7bc5d66f9a61fb3d61afb3ffcdcd2b17294719c46fde4"
+    },
+    {
+      "url": "/audio/negev-1.ogg",
+      "offset": 1080236,
+      "length": 40951,
+      "sha256": "0a9f13f6560ff52e6bd704a26e349c8886e87c3be607af41060c277fbea4356d"
+    },
+    {
+      "url": "/audio/negev_boxin.ogg",
+      "offset": 1121187,
+      "length": 14060,
+      "sha256": "e8dc61a08b5ad12e9e6d679d197755536d99c5c1c16c6b0784b6cade0063ac79"
+    },
+    {
+      "url": "/audio/negev_boxout.ogg",
+      "offset": 1135247,
+      "length": 4290,
+      "sha256": "ea6b37660decabf1a8e63f0847878d3ac49780b8263e6e458d6193991d5999ad"
+    },
+    {
+      "url": "/audio/negev_draw.ogg",
+      "offset": 1139537,
+      "length": 5259,
+      "sha256": "12e32da215a5b4255437af0f968337f87120152445c01c23b95f094a1741f453"
+    },
+    {
+      "url": "/audio/negev_pump.ogg",
+      "offset": 1144796,
+      "length": 6747,
+      "sha256": "27d692e4806157d14f0d9f486d79fd7b8d2a6d86c21566f1c62de2b7242525a2"
+    },
+    {
+      "url": "/audio/nova-1.ogg",
+      "offset": 1151543,
+      "length": 28430,
+      "sha256": "100f658618d86f5e1e6703af665727276354e7b7da2582c3be2af9029455a69e"
+    },
+    {
+      "url": "/audio/nova_draw.ogg",
+      "offset": 1179973,
+      "length": 13125,
+      "sha256": "2195da1a1625f200e2b7aa9fbf2172993803798a48cc4782282f23a803f51927"
+    },
+    {
+      "url": "/audio/nova_insertshell.ogg",
+      "offset": 1193098,
+      "length": 6111,
+      "sha256": "860b6230dec51551362df024b4b62b56cf56cecd372c4d574cbbe2d1f2f5b6e8"
+    },
+    {
+      "url": "/audio/nova_pump.ogg",
+      "offset": 1199209,
+      "length": 8210,
+      "sha256": "c106e839305edcc21087fc013e07a6d137c3e0467e612a27a1a715aef9cbf460"
+    },
+    {
+      "url": "/audio/p250-1.ogg",
+      "offset": 1207419,
+      "length": 18014,
+      "sha256": "8261cf69b35ba7ec0e4ba4843d228d494b5a549db61a0da9b0b03322ca014f58"
+    },
+    {
+      "url": "/audio/p250_clipin.ogg",
+      "offset": 1225433,
+      "length": 2945,
+      "sha256": "d8de4ed5ae3aa1809f3c0a29a5ce549ded0e7553923cc467b66d3dbda80b3551"
+    },
+    {
+      "url": "/audio/p250_clipout.ogg",
+      "offset": 1228378,
+      "length": 4824,
+      "sha256": "d9b712fce6ae5c23438a3668c476370ca38fec1fd04e3b0974036edadb5cc6e9"
+    },
+    {
+      "url": "/audio/p250_draw.ogg",
+      "offset": 1233202,
+      "length": 13966,
+      "sha256": "5bdb758197fd0d0dd88f41a59ce139018d150583ccfa7382d716a560f06af450"
+    },
+    {
+      "url": "/audio/p250_slideback.ogg",
+      "offset": 1247168,
+      "length": 2917,
+      "sha256": "613a5c1a71a42517c0ab8157df9e1a054469c83a500190c11e6ded3d9e681c57"
+    },
+    {
+      "url": "/audio/p250_sliderelease.ogg",
+      "offset": 1250085,
+      "length": 3189,
+      "sha256": "0d231a5dda157e07d4cfa60c47fa98e17f11f083e4ca58233e26fa9e12616551"
+    },
+    {
+      "url": "/audio/p90-1.ogg",
+      "offset": 1253274,
+      "length": 15401,
+      "sha256": "d67916fcdaf9bb3df39cd276653a8ffe477f099f63fa8a1a64468c84880eb50b"
+    },
+    {
+      "url": "/audio/p90_boltback.ogg",
+      "offset": 1268675,
+      "length": 3293,
+      "sha256": "e83b7f34130b47f97db74d2cc6e14b547e04f1370462fabe2846b8e7f2a39078"
+    },
+    {
+      "url": "/audio/p90_boltforward.ogg",
+      "offset": 1271968,
+      "length": 3715,
+      "sha256": "26fbb9dc8126e001236b72c42a906ce254ff89a0981f148f65e2549709ad9ee9"
+    },
+    {
+      "url": "/audio/p90_clipin.ogg",
+      "offset": 1275683,
+      "length": 7980,
+      "sha256": "5e4911bd0f0c8b258a0b2b26ca1c6b7e6442852e147bb56809bf2fd831b4210e"
+    },
+    {
+      "url": "/audio/p90_clipout.ogg",
+      "offset": 1283663,
+      "length": 5098,
+      "sha256": "b744861165e8eecbb84e451278132e6fc93fc44280f03b0d568e793a5ca1fd47"
+    },
+    {
+      "url": "/audio/p90_draw.ogg",
+      "offset": 1288761,
+      "length": 12347,
+      "sha256": "969200e868d68398082fd7df71b96babd7129bd2c585e7a5369fbfc7bcf0bd7c"
+    },
+    {
+      "url": "/audio/revolver-1_01.ogg",
+      "offset": 1301108,
+      "length": 33857,
+      "sha256": "b34aba51f881b408b1394b0879e2f54c0127b583978c97c69560a1cd568be72d"
+    },
+    {
+      "url": "/audio/revolver_clipin.ogg",
+      "offset": 1334965,
+      "length": 8342,
+      "sha256": "3577027f111b4c9dc478f9a7804355ff2aa5eacc9f438c25516d065ba8d1a696"
+    },
+    {
+      "url": "/audio/revolver_clipout.ogg",
+      "offset": 1343307,
+      "length": 9588,
+      "sha256": "9b56e6263ae7c9b240eb6a0c92e7ab4c6f6a2f72e077fc276827f9464d9df9b9"
+    },
+    {
+      "url": "/audio/revolver_draw.ogg",
+      "offset": 1352895,
+      "length": 9873,
+      "sha256": "73367b0876d36a77290910883041ffcda5c60ec1916205846de0f5f58afe09f9"
+    },
+    {
+      "url": "/audio/revolver_sideback.ogg",
+      "offset": 1362768,
+      "length": 7964,
+      "sha256": "a5854141933bc35b78db43fd40d8d31a1d0bf578934769bd97a58453c1fd32bf"
+    },
+    {
+      "url": "/audio/revolver_siderelease.ogg",
+      "offset": 1370732,
+      "length": 5022,
+      "sha256": "1a83d83191a5e93334a54fdedb4ad22da80ae43bd825458f39fb41227977df82"
+    },
+    {
+      "url": "/audio/sawedoff-1.ogg",
+      "offset": 1375754,
+      "length": 28645,
+      "sha256": "50111b738eec62dec11ff7d82f72419a71dc34140ba4d40fee8ac7d1bc5623f3"
+    },
+    {
+      "url": "/audio/sawedoff_draw.ogg",
+      "offset": 1404399,
+      "length": 8096,
+      "sha256": "fffb7cd1a52124263b5449d7415136a78d420f78553e7e1ea5f1909baa7e567a"
+    },
+    {
+      "url": "/audio/sawedoff_insertshell.ogg",
+      "offset": 1412495,
+      "length": 7496,
+      "sha256": "553db14dbe30aa3da03aebd62ae4c99733f3de5df9ed93d37f7b1e5a84e33c17"
+    },
+    {
+      "url": "/audio/sawedoff_pump.ogg",
+      "offset": 1419991,
+      "length": 7185,
+      "sha256": "00136686296f8bb198fd273384db28df38dca8afdd18a02d8c2b8bcb4cdfa7bb"
+    },
+    {
+      "url": "/audio/scar20_01.ogg",
+      "offset": 1427176,
+      "length": 31579,
+      "sha256": "e5474cde1a0a5811d985fd86230f67a171c7084e37b85f40ac9dba0da3a1c98c"
+    },
+    {
+      "url": "/audio/scar20_boltback.ogg",
+      "offset": 1458755,
+      "length": 4790,
+      "sha256": "10bc0c110914d0404cb8186cce9bf4a54b0cdde0bc8b2b1a8680a80c6903c21a"
+    },
+    {
+      "url": "/audio/scar20_boltforward.ogg",
+      "offset": 1463545,
+      "length": 5795,
+      "sha256": "0ae7c6b6b9d35631b9aeaac828965dd0f8f263e52328d931452500a6644b7332"
+    },
+    {
+      "url": "/audio/scar20_clipin.ogg",
+      "offset": 1469340,
+      "length": 6347,
+      "sha256": "9bcd5b31373f03e17ba4fffe9fc88eac0793e12fa30b6cfc1f2da44ef2b276c4"
+    },
+    {
+      "url": "/audio/scar20_clipout.ogg",
+      "offset": 1475687,
+      "length": 11650,
+      "sha256": "97ec773c90d4b0ae3956a81ed659e0e198a316d29fbb52a6b1aa4e7a60c64dea"
+    },
+    {
+      "url": "/audio/scar20_draw.ogg",
+      "offset": 1487337,
+      "length": 12479,
+      "sha256": "975063d283fb79f9cae7195b613ee097cfc052c1ca636d1c585ce356fc4e871a"
+    },
+    {
+      "url": "/audio/scar20_zoom.ogg",
+      "offset": 1499816,
+      "length": 5043,
+      "sha256": "2c0cded0f276712fd8674bd84cafefc38f5e4f8175ae324c80364687b91d35c2"
+    },
+    {
+      "url": "/audio/sg556-1.ogg",
+      "offset": 1504859,
+      "length": 22829,
+      "sha256": "9439c07291d391057f1037124499419d4d5300593fe7ed4fcfcd303d669a7bfc"
+    },
+    {
+      "url": "/audio/sg556_boltback.ogg",
+      "offset": 1527688,
+      "length": 5573,
+      "sha256": "de512e4d9e2125c8156de9a50bd4286fa591280bf400243dd4d0aa7564010521"
+    },
+    {
+      "url": "/audio/sg556_boltforward.ogg",
+      "offset": 1533261,
+      "length": 5468,
+      "sha256": "745d2d8c5faecaf37bbda9b2e50e2771368fe43b1695dc92e279b10a2735ef02"
+    },
+    {
+      "url": "/audio/sg556_clipin.ogg",
+      "offset": 1538729,
+      "length": 5496,
+      "sha256": "4b301c840b35d94ff0ffa9a2e2455777c9be7c10f2061be79cb46758f4c53cba"
+    },
+    {
+      "url": "/audio/sg556_clipout.ogg",
+      "offset": 1544225,
+      "length": 4991,
+      "sha256": "f575f0a0c81500ff586205dadcaeb4ccff92f3527852ed41e026935a8053d103"
+    },
+    {
+      "url": "/audio/sg556_draw.ogg",
+      "offset": 1549216,
+      "length": 9488,
+      "sha256": "bb1847a720d6744d82b60ed1d25c4d54626ec8b1c54f967d48b85b96acb635dc"
+    },
+    {
+      "url": "/audio/sg556_zoom.ogg",
+      "offset": 1558704,
+      "length": 6048,
+      "sha256": "216813754cd1a2fc498bb9e565adf39ac61fe8bdbd3937d97396c4a96a7122f3"
+    },
+    {
+      "url": "/audio/source/bomb-beep.ogg",
+      "offset": 1564752,
+      "length": 3218,
+      "sha256": "211264338b0e0d26f16d1ad0e98ab58125ece817cc93f547f36c04cb14f6d0aa"
+    },
+    {
+      "url": "/audio/source/bomb-defuse.ogg",
+      "offset": 1567970,
+      "length": 17354,
+      "sha256": "64c450fef2cbc291b6d0c602bc09348b6ced700c0b8b95fede5bf16ede93510b"
+    },
+    {
+      "url": "/audio/source/bomb-explode.ogg",
+      "offset": 1585324,
+      "length": 64870,
+      "sha256": "a4a992eeba48737f5cc38aacca6a9d43bee4d586fdffef36203be2c97d482ed1"
+    },
+    {
+      "url": "/audio/source/bomb-plant.ogg",
+      "offset": 1650194,
+      "length": 6886,
+      "sha256": "75afdb43caf0f83ff781be69bfc75deaa2b20b7bd88f6a9a6c5d4b16d75e98ba"
+    },
+    {
+      "url": "/audio/source/butterfly-draw.ogg",
+      "offset": 1657080,
+      "length": 8368,
+      "sha256": "132d00acecbee7fbc44e5f46e37a3fd1791a7f29d1d5e682a226f82988bb2365"
+    },
+    {
+      "url": "/audio/source/butterfly-look1-a.ogg",
+      "offset": 1665448,
+      "length": 12629,
+      "sha256": "ec464d2822846c7cee952b4ee0b1f3da3687991211db093ef8a1305fd30fc3a3"
+    },
+    {
+      "url": "/audio/source/butterfly-look1-b.ogg",
+      "offset": 1678077,
+      "length": 13745,
+      "sha256": "362a3652b56e51a4e62a0c5cae1bdd29fd3af35e86219a1a31febc4cdb4f65ee"
+    },
+    {
+      "url": "/audio/source/butterfly-look2-a.ogg",
+      "offset": 1691822,
+      "length": 17568,
+      "sha256": "a83dc1f999ae03b56747c13e3e97b039a51db038f5e138fa5ee20a1a169c8c85"
+    },
+    {
+      "url": "/audio/source/butterfly-look2-b.ogg",
+      "offset": 1709390,
+      "length": 12119,
+      "sha256": "e2753f542f5a37377fa11d760c0ea9e3fb8878310d16e2bc4959edf1466b41f4"
+    },
+    {
+      "url": "/audio/source/butterfly-look3-a.ogg",
+      "offset": 1721509,
+      "length": 19653,
+      "sha256": "67a2221eead12a94fda8a8b476eb4c7aa9b12d9cb1a49696aa7d3aaef88c5dd6"
+    },
+    {
+      "url": "/audio/source/butterfly-look3-b.ogg",
+      "offset": 1741162,
+      "length": 11265,
+      "sha256": "be866afabe9f984af28e6d6f743f6ecd2e63d6c1a08940e1097dfa2cc1bdf80f"
+    },
+    {
+      "url": "/audio/source/buy.ogg",
+      "offset": 1752427,
+      "length": 6313,
+      "sha256": "809f02af5ba1ce87954edcba4ab4966e78346527a470323261a1d41b9bf42cd7"
+    },
+    {
+      "url": "/audio/source/click.ogg",
+      "offset": 1758740,
+      "length": 4300,
+      "sha256": "c4694bb5e1d2d425cba1411af061796868412ca9f85c8d3348828e24995c6657"
+    },
+    {
+      "url": "/audio/source/damage-1.ogg",
+      "offset": 1763040,
+      "length": 7147,
+      "sha256": "52eef3a42a82954a33400c4abf481bf243730dab459264b612f1311bec8a691f"
+    },
+    {
+      "url": "/audio/source/damage-2.ogg",
+      "offset": 1770187,
+      "length": 5437,
+      "sha256": "fb75c623805284304f68772319bb7b25ebbfab9dba8567757d9cbbb699aeba5e"
+    },
+    {
+      "url": "/audio/source/damage-3.ogg",
+      "offset": 1775624,
+      "length": 4751,
+      "sha256": "1ef9aa46ef724aaa9e4c62510862c019480676a939bf371994ef6f3c378c9d14"
+    },
+    {
+      "url": "/audio/source/death-1.ogg",
+      "offset": 1780375,
+      "length": 16392,
+      "sha256": "17c2c5e6a40a3b663cea350246e56eb8a0bf2b7b9f8d4a5cdaafefc7f0516081"
+    },
+    {
+      "url": "/audio/source/death-2.ogg",
+      "offset": 1796767,
+      "length": 18159,
+      "sha256": "530316b42184e573d46327238692b1545e622a0bcafee166a45e71bcbea7e395"
+    },
+    {
+      "url": "/audio/source/death-3.ogg",
+      "offset": 1814926,
+      "length": 15785,
+      "sha256": "09b4147ba8665f309a755371e9781003c7bc8a1dc99957ceb0f871c37c4c2f2b"
+    },
+    {
+      "url": "/audio/source/gear-1.ogg",
+      "offset": 1830711,
+      "length": 9145,
+      "sha256": "68869eeff7a345cf8a83d24bd9f42879339111dd1ed15dc7efdce162da1aab0c"
+    },
+    {
+      "url": "/audio/source/gear-2.ogg",
+      "offset": 1839856,
+      "length": 5366,
+      "sha256": "174cec8614bb6e810751ca54e7d5dea9d49b23aeac46a7058f1d9aea4909c3f9"
+    },
+    {
+      "url": "/audio/source/gear-3.ogg",
+      "offset": 1845222,
+      "length": 8781,
+      "sha256": "ad555f84204f24b8f383a4b67faa6951e9d250541eac6425489d73428b46beda"
+    },
+    {
+      "url": "/audio/source/head.ogg",
+      "offset": 1854003,
+      "length": 13179,
+      "sha256": "e32e041cf8dcb867a042a65f1a67f559eb17b699ad72e20d0b2fc8896467732b"
+    },
+    {
+      "url": "/audio/source/hit.ogg",
+      "offset": 1867182,
+      "length": 8013,
+      "sha256": "e2406c741d8d8df0b19099562607f9c88db2e44e5ae3da9aa74c2c49bb905821"
+    },
+    {
+      "url": "/audio/source/hover.ogg",
+      "offset": 1875195,
+      "length": 1370,
+      "sha256": "e39c39076c6a02c11077ee0c6e99e0b1ff0d2537297d6c29bacd7fad7fb8636c"
+    },
+    {
+      "url": "/audio/source/jump.ogg",
+      "offset": 1876565,
+      "length": 7351,
+      "sha256": "c04ab3554c8ae2106497f3a770d338fc0ee329c149f85da4d7b9641d6994ea43"
+    },
+    {
+      "url": "/audio/source/knife-deploy.ogg",
+      "offset": 1883916,
+      "length": 6899,
+      "sha256": "b9f855c523b7bfec375569b33913bc99dcccd049c42875135a27e63d91ca7df9"
+    },
+    {
+      "url": "/audio/source/knife-hit.ogg",
+      "offset": 1890815,
+      "length": 3975,
+      "sha256": "95ff7d7d35c3441e6d415fd99d11a6829e5c2fe59b891792c7f40ee2936c5390"
+    },
+    {
+      "url": "/audio/source/knife-stab.ogg",
+      "offset": 1894790,
+      "length": 8421,
+      "sha256": "38a74aff740d11ed9f4110c5252267a7406a0563b8c22051488ab79bf08e1abb"
+    },
+    {
+      "url": "/audio/source/knife-swing1.ogg",
+      "offset": 1903211,
+      "length": 2697,
+      "sha256": "a64d1e2c7c27a5c8550543b08ad02f5271cdc065dd16eda8e0ce67973e4aa356"
+    },
+    {
+      "url": "/audio/source/knife-swing2.ogg",
+      "offset": 1905908,
+      "length": 3435,
+      "sha256": "8101cbed2a6728a88b06e14aeed654853d98d7ff9d9d0fe01d6ed2e068994525"
+    },
+    {
+      "url": "/audio/source/knife-wall.ogg",
+      "offset": 1909343,
+      "length": 11911,
+      "sha256": "3c57625131039daa467a362e377e08e16cc915c397aa42d1ec3bf8edb820f283"
+    },
+    {
+      "url": "/audio/source/land.ogg",
+      "offset": 1921254,
+      "length": 5273,
+      "sha256": "233240eb036fc19e649ecee48c86ac3b8375fc07276a020fa692d05d7f8f08cc"
+    },
+    {
+      "url": "/audio/source/ready.ogg",
+      "offset": 1926527,
+      "length": 30712,
+      "sha256": "a6c040d119306771fb402ea5f959857fa83a2a63b91aa7186d6a7429c55d166d"
+    },
+    {
+      "url": "/audio/source/revolver-prepare.ogg",
+      "offset": 1957239,
+      "length": 5725,
+      "sha256": "8c3d41ecd699eda2562886e874c24003ebeb806d4c17c8e574af967fa2e688b7"
+    },
+    {
+      "url": "/audio/source/step-concrete-1.ogg",
+      "offset": 1962964,
+      "length": 6297,
+      "sha256": "e971d8ea0f39450987fb58fdd2db2b9ad2f362b30caa9632f1c8d9089a076433"
+    },
+    {
+      "url": "/audio/source/step-concrete-2.ogg",
+      "offset": 1969261,
+      "length": 5692,
+      "sha256": "e80d4d8ffeb9b418d5a780a10b1dfaafbd9e8b0d3b39f226d850ccb2aaadddda"
+    },
+    {
+      "url": "/audio/source/step-concrete-3.ogg",
+      "offset": 1974953,
+      "length": 6120,
+      "sha256": "a2dc82baa00ffb84c9945c104fb9e145a3f7feeaa4332568f08ea1ceb4c18996"
+    },
+    {
+      "url": "/audio/source/step-concrete-4.ogg",
+      "offset": 1981073,
+      "length": 5978,
+      "sha256": "5ac3a6036cca5b1542bd2c7f74586a039eefa28861c3f736b8e430b454a64e3d"
+    },
+    {
+      "url": "/audio/source/step-sand-1.ogg",
+      "offset": 1987051,
+      "length": 5846,
+      "sha256": "45f307378a73bc4a487e2ddefed7fb6fa36416592f03159c1719e22bb3b8cb95"
+    },
+    {
+      "url": "/audio/source/step-sand-2.ogg",
+      "offset": 1992897,
+      "length": 5819,
+      "sha256": "646a04f62e7e139459924156bbd1df4617d32efc267ef5aa9ad543e1a9d57ac4"
+    },
+    {
+      "url": "/audio/source/step-sand-3.ogg",
+      "offset": 1998716,
+      "length": 8333,
+      "sha256": "63c7e223efd925c109eba31413bfa779f1cfa6581d77b434a49a9f550dc34f37"
+    },
+    {
+      "url": "/audio/source/step-sand-4.ogg",
+      "offset": 2007049,
+      "length": 8817,
+      "sha256": "8426f1ac305dccb1c9696421ad40510ff81be898a76bf7c5ef8d2b22a9e1807d"
+    },
+    {
+      "url": "/audio/source/ui-buy-hover.ogg",
+      "offset": 2015866,
+      "length": 1035,
+      "sha256": "336e07dd7e58ac91251340bd5752d9b87c92d89ff972cd8cb28e13e2ce5530a2"
+    },
+    {
+      "url": "/audio/source/ui-buy-select.ogg",
+      "offset": 2016901,
+      "length": 5223,
+      "sha256": "fa2a7f54a70a4a32221d41650f578df172a16f4ac8b187df653e507cbf90061e"
+    },
+    {
+      "url": "/audio/source/ui-change.ogg",
+      "offset": 2022124,
+      "length": 5587,
+      "sha256": "9c3751c3aa8489d980fee9c87f9cc4f2d179e44d09755d081f71b4efe695bcb5"
+    },
+    {
+      "url": "/audio/source/ui-confirm.ogg",
+      "offset": 2027711,
+      "length": 2637,
+      "sha256": "db456c13061b11b46bd19223d09d38b0f76b3cbbb86a5b380eace8a4b5821ca8"
+    },
+    {
+      "url": "/audio/source/ui-go.ogg",
+      "offset": 2030348,
+      "length": 55874,
+      "sha256": "54a09f7dcb2a3f84d55b67e1e16993b094a21134e4e13e9a0fbfdcc3ea35b6fc"
+    },
+    {
+      "url": "/audio/source/ui-home.ogg",
+      "offset": 2086222,
+      "length": 5695,
+      "sha256": "0ca6e5d013cac67f9484f3e1c6241b64da5e6e5055ed43126e86b2a56790be64"
+    },
+    {
+      "url": "/audio/source/ui-inspect-close.ogg",
+      "offset": 2091917,
+      "length": 18508,
+      "sha256": "93bbe4a99041e81a82bd97cb348fa92e4e00371f73a7e89d086f5df755c39721"
+    },
+    {
+      "url": "/audio/source/ui-inventory.ogg",
+      "offset": 2110425,
+      "length": 18017,
+      "sha256": "9059cac6626b413e4d86b06df1fe6999b0e92310ad5af58d91b12cf0ba0466e0"
+    },
+    {
+      "url": "/audio/source/ui-loadout.ogg",
+      "offset": 2128442,
+      "length": 13543,
+      "sha256": "07c1ec448f3258b247016f26da69a5f31f6581e102583bf2569b3fe5736c0f33"
+    },
+    {
+      "url": "/audio/source/ui-main-hover.ogg",
+      "offset": 2141985,
+      "length": 1382,
+      "sha256": "5816e6cf668e3cfbbf83dd351c44a43b9b0cc1c95ff6069042eef55fc4f993bc"
+    },
+    {
+      "url": "/audio/source/ui-news.ogg",
+      "offset": 2143367,
+      "length": 15969,
+      "sha256": "80e7297b1ff8b05bea1f22bea484bf3e725434e78860ddafc79f8af478df0d3d"
+    },
+    {
+      "url": "/audio/source/ui-play.ogg",
+      "offset": 2159336,
+      "length": 19373,
+      "sha256": "254a7dacb802cdf3d6794713b651f9e6fa18672ef12f8bdc5ccbb414eec146bc"
+    },
+    {
+      "url": "/audio/source/ui-quit.ogg",
+      "offset": 2178709,
+      "length": 18113,
+      "sha256": "97f0b72637176c52f200fa1db23a23f89d844371ceed3d6697ba5b3272284fd3"
+    },
+    {
+      "url": "/audio/source/ui-radio.ogg",
+      "offset": 2196822,
+      "length": 2434,
+      "sha256": "f5a2d32670a0ab081fce243ea3be28f2fbc77f29d66a7a5997a163a21bbd6862"
+    },
+    {
+      "url": "/audio/source/ui-settings-layer.ogg",
+      "offset": 2199256,
+      "length": 18113,
+      "sha256": "c962705a2021123a60aad874bbad7551503ddc60234a334d5bbdcfd00150ef72"
+    },
+    {
+      "url": "/audio/source/ui-settings.ogg",
+      "offset": 2217369,
+      "length": 10657,
+      "sha256": "1f9f2ab84bdd872cfb399518a66cf161cf81f11b3a623e33fdad82147868f7cb"
+    },
+    {
+      "url": "/audio/source/ui-store.ogg",
+      "offset": 2228026,
+      "length": 14533,
+      "sha256": "48e25ba74367c9673bbdf03a2cd5b0e53b18428b6fa15a6bc13595dc411a4ec1"
+    },
+    {
+      "url": "/audio/source/ui-watch.ogg",
+      "offset": 2242559,
+      "length": 11618,
+      "sha256": "b7f588be54cdcca8029e505546f28ddae631332bd3fb80c3c2d31a562e62743a"
+    },
+    {
+      "url": "/audio/ssg08-1.ogg",
+      "offset": 2254177,
+      "length": 21742,
+      "sha256": "64e7ee8b4a87148b94ad10726ccfc6c6ed797e5f28354f67ffb5a5048fe49891"
+    },
+    {
+      "url": "/audio/ssg08_boltback.ogg",
+      "offset": 2275919,
+      "length": 5326,
+      "sha256": "6bf1a643d40f4388dc8d4450e26d143a6abd09d8501ecf28ec05629895d74219"
+    },
+    {
+      "url": "/audio/ssg08_boltforward.ogg",
+      "offset": 2281245,
+      "length": 5305,
+      "sha256": "7414113ef0e2bcc1fc68d21fedf4dd4a307f5526831615709a5e549345b1664b"
+    },
+    {
+      "url": "/audio/ssg08_clipin.ogg",
+      "offset": 2286550,
+      "length": 2286,
+      "sha256": "513a4407ac70beea59e72082d5fc531dbcee30d0e7f9675d55c10cf930a65588"
+    },
+    {
+      "url": "/audio/ssg08_clipout.ogg",
+      "offset": 2288836,
+      "length": 5585,
+      "sha256": "b4c1544b57739caef56fcfb32543d38da0f2f2be32a38db9bb0718dc78414c50"
+    },
+    {
+      "url": "/audio/ssg08_draw.ogg",
+      "offset": 2294421,
+      "length": 16323,
+      "sha256": "788136c50291719559803f1b774a563bde248df3357417134e43dcd8d5d85e29"
+    },
+    {
+      "url": "/audio/ssg08_zoom.ogg",
+      "offset": 2310744,
+      "length": 4992,
+      "sha256": "872eaf21e67bb5a0f4abeb659b5d4e3dc814a1ed7dd6c0f11e37fa3dc9c0b0bc"
+    },
+    {
+      "url": "/audio/suppressor-1-silencerscrew1.ogg",
+      "offset": 2315736,
+      "length": 4707,
+      "sha256": "df6fd216b22f0869285152774ba9150b772eda491c4ac7e0ddc4e1c1f511a771"
+    },
+    {
+      "url": "/audio/suppressor-1-silencerscrew2.ogg",
+      "offset": 2320443,
+      "length": 4494,
+      "sha256": "6e71b69d2df8a4488d1e3450da63552f39588b817c802fa942e5d90182c235d1"
+    },
+    {
+      "url": "/audio/suppressor-1-silencerscrew3.ogg",
+      "offset": 2324937,
+      "length": 5052,
+      "sha256": "03284fd3cc15c1a9b8cded2fdd1c481b1ea7061290154b0eeef0b5a048531443"
+    },
+    {
+      "url": "/audio/suppressor-1-silencerscrew4.ogg",
+      "offset": 2329989,
+      "length": 5601,
+      "sha256": "0acc5e07ab444bdc649b08b46348c700cd021c0f32f6faf6162dd12afa7098f5"
+    },
+    {
+      "url": "/audio/suppressor-1-silencerscrew5.ogg",
+      "offset": 2335590,
+      "length": 3643,
+      "sha256": "06c351d8d8e326361789b095f6abe07265d50e1334d53275123ddfd688cfc611"
+    },
+    {
+      "url": "/audio/suppressor-1-silencerscrewoffend.ogg",
+      "offset": 2339233,
+      "length": 4490,
+      "sha256": "f79f0d72b3f7edee5894d5244cf9f9c4335f4567030f39aafe75043b7b7eeb0c"
+    },
+    {
+      "url": "/audio/suppressor-1-silencerscrewonstart.ogg",
+      "offset": 2343723,
+      "length": 6907,
+      "sha256": "dd8b8b50862700fa942df9262d67f46a022ce3dabffde89f2f1ab8ff210cd731"
+    },
+    {
+      "url": "/audio/suppressor-1-single.ogg",
+      "offset": 2350630,
+      "length": 31259,
+      "sha256": "235fd23995baf4c3947d9ccace7bc8761f67528376ecde63ce26da820d656384"
+    },
+    {
+      "url": "/audio/suppressor-2-silencerscrew1.ogg",
+      "offset": 2381889,
+      "length": 5448,
+      "sha256": "7f252cc71a7f76163c55c128a6c0bb05dbffe1ae8e0d1461bb0af20322a406ff"
+    },
+    {
+      "url": "/audio/suppressor-2-silencerscrew2.ogg",
+      "offset": 2387337,
+      "length": 4766,
+      "sha256": "86ea4b846aa6dc47601d902aac88bc25a36b0e87e421e90c19b2437239829642"
+    },
+    {
+      "url": "/audio/suppressor-2-silencerscrew3.ogg",
+      "offset": 2392103,
+      "length": 4479,
+      "sha256": "7622b226369924a9e3a9066e299dfc4178b6a99dfa9bd21ba67ecde054ed0e0f"
+    },
+    {
+      "url": "/audio/suppressor-2-silencerscrew4.ogg",
+      "offset": 2396582,
+      "length": 5075,
+      "sha256": "afa39c7aa4685b46362d00b8eb31c6e4f76e9f26d1417241c9a77c36a478fde0"
+    },
+    {
+      "url": "/audio/suppressor-2-silencerscrew5.ogg",
+      "offset": 2401657,
+      "length": 5013,
+      "sha256": "b6df7477841d7bedcd4a420b205cfb70d4e3ddf6aaa48c15c124cf1431c45b9a"
+    },
+    {
+      "url": "/audio/suppressor-2-silencerscrewoffend.ogg",
+      "offset": 2406670,
+      "length": 2869,
+      "sha256": "ad84c5f10d13383356da75d60b6dd6ff378f121e346ba4cd6f6660e153c0d579"
+    },
+    {
+      "url": "/audio/suppressor-2-silencerscrewonstart.ogg",
+      "offset": 2409539,
+      "length": 5160,
+      "sha256": "65c7b62c76ad60813777b111463352f1cc3b126ef1b2b501e11535e6c1fb2888"
+    },
+    {
+      "url": "/audio/suppressor-2-single.ogg",
+      "offset": 2414699,
+      "length": 20734,
+      "sha256": "16bc490ef3ce44f0c683e4bff5b3d23fc76557b0bb136d8d8bd24150ed43fd2b"
+    },
+    {
+      "url": "/audio/tec9-1.ogg",
+      "offset": 2435433,
+      "length": 24693,
+      "sha256": "3dc5b18e746b6e0f3d3ae85acee17ec84e78e755f5f957abf35761bc25a080ae"
+    },
+    {
+      "url": "/audio/tec9_boltpull.ogg",
+      "offset": 2460126,
+      "length": 4737,
+      "sha256": "90dce614d84031a3dddb0fc5d3aa209158526127f358130a19d9c6923a9e6a36"
+    },
+    {
+      "url": "/audio/tec9_boltrelease.ogg",
+      "offset": 2464863,
+      "length": 6354,
+      "sha256": "aa92aec49ca603744fe5da36184ab01d1f1e7b75593f4e752fd62ce8b8dc0ec9"
+    },
+    {
+      "url": "/audio/tec9_clipin.ogg",
+      "offset": 2471217,
+      "length": 2887,
+      "sha256": "50cd261f011e3dcb9ab0a372fb5595ff58e4cbc7208c89bc803e104865ce8565"
+    },
+    {
+      "url": "/audio/tec9_clipout.ogg",
+      "offset": 2474104,
+      "length": 5708,
+      "sha256": "261e242d8c47f6610f717e453b0610f80bc1bc688c56de746c5cd729503af497"
+    },
+    {
+      "url": "/audio/tec9_draw.ogg",
+      "offset": 2479812,
+      "length": 16338,
+      "sha256": "b027d5383af14636f533a70614b3ff4113dc1fb3db8d92367e454b0f87d2841a"
+    },
+    {
+      "url": "/audio/ump45-1.ogg",
+      "offset": 2496150,
+      "length": 20540,
+      "sha256": "528ce6ff5788642b262ddee49686f3429395a07f200718c6848be84ddeeb8907"
+    },
+    {
+      "url": "/audio/ump45_boltback.ogg",
+      "offset": 2516690,
+      "length": 3626,
+      "sha256": "eaf04f459d0662810fc3de6e3301dfedaab05ce95837bcb39aae320e26059145"
+    },
+    {
+      "url": "/audio/ump45_boltforward.ogg",
+      "offset": 2520316,
+      "length": 3352,
+      "sha256": "0c40c503ca575be4c63796a0fd9e45e2345847021ba79d6a057895ce95e59e99"
+    },
+    {
+      "url": "/audio/ump45_clipin.ogg",
+      "offset": 2523668,
+      "length": 2989,
+      "sha256": "ea7ea237e49cfb0685e6f7fbe1f9ba3ade264862493999278fe672abef19a6f1"
+    },
+    {
+      "url": "/audio/ump45_clipout.ogg",
+      "offset": 2526657,
+      "length": 5327,
+      "sha256": "36a944d3d17f74187eb94ebfbe22ee044fba1d95d84e54f04d0b4682c4a89749"
+    },
+    {
+      "url": "/audio/ump45_draw.ogg",
+      "offset": 2531984,
+      "length": 14137,
+      "sha256": "c62416f1ec98a0ddc51ee7ede33fed7878fe11a513854ce186ac5ecab654a37d"
+    },
+    {
+      "url": "/audio/usp1.ogg",
+      "offset": 2546121,
+      "length": 16830,
+      "sha256": "3475d10101a2a028f71ac523b82eaf67917e8435f466ab9cddbbf3f4386062b8"
+    },
+    {
+      "url": "/audio/usp_clipin.ogg",
+      "offset": 2562951,
+      "length": 4274,
+      "sha256": "1e03734769c30af810ed83e2693ef4376f79f3dcfe2e372a1a518c27688df5c0"
+    },
+    {
+      "url": "/audio/usp_clipout.ogg",
+      "offset": 2567225,
+      "length": 4302,
+      "sha256": "91b68b0a4b831ab15982bedbc4fac58a811d2cca526e5172cdb3832238700b67"
+    },
+    {
+      "url": "/audio/usp_draw.ogg",
+      "offset": 2571527,
+      "length": 13966,
+      "sha256": "08037c388ccf1a640de1790a21ddacb337f1f36c34c68e2f11d25ba7cdb53ed9"
+    },
+    {
+      "url": "/audio/usp_slideback.ogg",
+      "offset": 2585493,
+      "length": 2444,
+      "sha256": "3eb1db1ec693bac703e9aef5f37658587c3c977d4820b7f17684eb973f40db49"
+    },
+    {
+      "url": "/audio/usp_sliderelease.ogg",
+      "offset": 2587937,
+      "length": 4030,
+      "sha256": "30dd679e20fffa5764b428b080cca9c6f685b7095feafa02ae026483a431fcc2"
+    },
+    {
+      "url": "/audio/utility-decoy-bounce.ogg",
+      "offset": 2591967,
+      "length": 9774,
+      "sha256": "92fed766ba2a44efc810680413cd97b48f57556638d25b3438587464e1832040"
+    },
+    {
+      "url": "/audio/utility-decoy-draw.ogg",
+      "offset": 2601741,
+      "length": 6658,
+      "sha256": "8b506d43b30261649c7a7cfb2315e6895273817d73292467429991a596f82fa5"
+    },
+    {
+      "url": "/audio/utility-decoy-explode.ogg",
+      "offset": 2608399,
+      "length": 48293,
+      "sha256": "8b8d5b95523703e378fee0eb494d645235107b5f9b48b1391503acc02c8585a7"
+    },
+    {
+      "url": "/audio/utility-decoy-pin.ogg",
+      "offset": 2656692,
+      "length": 9830,
+      "sha256": "4fb4dfd3fb01f957d2df529dce42b73494f10c0db90b24baf1dac4e527b37057"
+    },
+    {
+      "url": "/audio/utility-decoy-throw.ogg",
+      "offset": 2666522,
+      "length": 8378,
+      "sha256": "14ca7e99a0130b0d098bc9fbb564837a5b7dd1a830fc3f4fb748a64ecbca74c4"
+    },
+    {
+      "url": "/audio/utility-flash-bounce.ogg",
+      "offset": 2674900,
+      "length": 6149,
+      "sha256": "6101aa5c78dcf34c946a078071a413b5f49e179c5bfe8e9429c26d8e17709991"
+    },
+    {
+      "url": "/audio/utility-flash-draw.ogg",
+      "offset": 2681049,
+      "length": 8739,
+      "sha256": "8a38a072126eaf23cde52b4b9984369bd7694b8a7b6e040b011d0c1630c74ba5"
+    },
+    {
+      "url": "/audio/utility-flash-explode.ogg",
+      "offset": 2689788,
+      "length": 22708,
+      "sha256": "6fe36d62fb1d372c8815feb7586015ef77bd4470989096636a9f48de4d9cbebc"
+    },
+    {
+      "url": "/audio/utility-flash-pin.ogg",
+      "offset": 2712496,
+      "length": 9830,
+      "sha256": "fe8d3d002499d50ab56c898546ef71f5714f37ebbfc8803f50d4407c1ed4e714"
+    },
+    {
+      "url": "/audio/utility-flash-throw.ogg",
+      "offset": 2722326,
+      "length": 8739,
+      "sha256": "5e9da3dbf51dad7f047ee684813f22490ad021a44201e956e03adcf016cc3dda"
+    },
+    {
+      "url": "/audio/utility-he-bounce.ogg",
+      "offset": 2731065,
+      "length": 9774,
+      "sha256": "0c9091f1efe851c5a8d1c97c7f8fa334f7c8a7700837cd366b3704557a575a63"
+    },
+    {
+      "url": "/audio/utility-he-draw.ogg",
+      "offset": 2740839,
+      "length": 7245,
+      "sha256": "de6c72bd4269424c95585bdb22b55531da65408213a560b35ca733a6f7c07d8f"
+    },
+    {
+      "url": "/audio/utility-he-explode.ogg",
+      "offset": 2748084,
+      "length": 48293,
+      "sha256": "2dee1623be41b9a83f33c8d11d895b25fc983b97547c87a642121a2d1b5033a8"
+    },
+    {
+      "url": "/audio/utility-he-pin.ogg",
+      "offset": 2796377,
+      "length": 9830,
+      "sha256": "eb4b1b74ab1fa5383c0415dd2b49968f0ce45cbb9d068ad552a6b61628b09943"
+    },
+    {
+      "url": "/audio/utility-he-throw.ogg",
+      "offset": 2806207,
+      "length": 4009,
+      "sha256": "0f1fff03c5f2762de0f9e60a20103d0ad22296984c3fbe924df3a8ad0994832a"
+    },
+    {
+      "url": "/audio/utility-incendiary-bounce.ogg",
+      "offset": 2810216,
+      "length": 3833,
+      "sha256": "a5269aa5b3e89bb504a70564ef903f799ea9aac9cdd29f5ea9d3e60244952094"
+    },
+    {
+      "url": "/audio/utility-incendiary-draw.ogg",
+      "offset": 2814049,
+      "length": 6382,
+      "sha256": "40495ae6c54e2a865a2b4dd2589f8b3bfeab04a765d47cb6bfc43d187d4a97f9"
+    },
+    {
+      "url": "/audio/utility-incendiary-explode.ogg",
+      "offset": 2820431,
+      "length": 33866,
+      "sha256": "7e2a2e97b9b6221c91593fcc55385f204cf9f8ac3d6ff0054a8d710ccc6ee172"
+    },
+    {
+      "url": "/audio/utility-incendiary-pin.ogg",
+      "offset": 2854297,
+      "length": 9830,
+      "sha256": "5808ec3ee2cfeb77acd8be9ddaa28a1596ead1e27cdf24ebc8107bae5a29bd33"
+    },
+    {
+      "url": "/audio/utility-incendiary-throw.ogg",
+      "offset": 2864127,
+      "length": 19649,
+      "sha256": "5617fce1cdbc6b271414950dd4e49723d7e980ac7907be31603c5fa293c1a02c"
+    },
+    {
+      "url": "/audio/utility-molotov-bounce.ogg",
+      "offset": 2883776,
+      "length": 7217,
+      "sha256": "0af43798b7422be1d2c406db836451cabdea3e47c58d3efeec3735665393565d"
+    },
+    {
+      "url": "/audio/utility-molotov-draw.ogg",
+      "offset": 2890993,
+      "length": 9892,
+      "sha256": "908ff97332cb9b1b4c066090b92330dbcbba6d2f7e34b0866d16cecb596cc898"
+    },
+    {
+      "url": "/audio/utility-molotov-explode.ogg",
+      "offset": 2900885,
+      "length": 35488,
+      "sha256": "b7e40be811ed11801790b204b07ab9c5437997112b77a873efa56594403ac5fe"
+    },
+    {
+      "url": "/audio/utility-molotov-pin.ogg",
+      "offset": 2936373,
+      "length": 8545,
+      "sha256": "208d79ce11155598d98809e024fc1d11577c5e7b254f3e03363b61acb4c2430c"
+    },
+    {
+      "url": "/audio/utility-molotov-throw.ogg",
+      "offset": 2944918,
+      "length": 8545,
+      "sha256": "4dd5189250e000a554c59bcbfe0f59deae921923ea5af0a1f8d2a5e94b77730b"
+    },
+    {
+      "url": "/audio/utility-smoke-bounce.ogg",
+      "offset": 2953463,
+      "length": 6149,
+      "sha256": "832751ccedb75d4d3591f23ed05e41f0638d77886c8908353710c699766c3d23"
+    },
+    {
+      "url": "/audio/utility-smoke-draw.ogg",
+      "offset": 2959612,
+      "length": 10378,
+      "sha256": "a8be62d3dc8cc3a185c73102e6f081a646b3d4e9e08a2afcb0b7131a8a8e01bc"
+    },
+    {
+      "url": "/audio/utility-smoke-explode.ogg",
+      "offset": 2969990,
+      "length": 151677,
+      "sha256": "ff9e0ff965c15be99a8950ae4e12eabc330b56e4a397ce120c155b1b218a469d"
+    },
+    {
+      "url": "/audio/utility-smoke-pin.ogg",
+      "offset": 3121667,
+      "length": 9830,
+      "sha256": "55408833f26811bd512f157b3cffbbb9bb59043b88aca741187dc1e2baa1bbaa"
+    },
+    {
+      "url": "/audio/utility-smoke-throw.ogg",
+      "offset": 3131497,
+      "length": 6981,
+      "sha256": "ba2a0870de223f4f34a272fbfce817a3310496b5c0d98dbe98c44dc9e035ecb4"
+    },
+    {
+      "url": "/audio/xm1014-1.ogg",
+      "offset": 3138478,
+      "length": 32785,
+      "sha256": "8f5774094cd19cbf88041bca91ab143009c9fa7549c518e56b404bde735aaa13"
+    },
+    {
+      "url": "/audio/xm1014_draw.ogg",
+      "offset": 3171263,
+      "length": 6141,
+      "sha256": "fd37deaba555b38ade473dce9e4832c66175fd4b606a2b7d79ceabd06e210519"
+    },
+    {
+      "url": "/audio/xm1014_insertshell.ogg",
+      "offset": 3177404,
+      "length": 4898,
+      "sha256": "fe3053c9c1fa44714a1bbe411735ef1ea28df9c2bbad28268f04270eb3e68473"
+    },
+    {
+      "url": "/audio/xm1014_pump.ogg",
+      "offset": 3182302,
+      "length": 4316,
+      "sha256": "f456f782311b5631030f9d1a02c19acce3efad436769d59e7c0325a2f46714a0"
+    },
+    {
+      "url": "/audio/zoom.ogg",
+      "offset": 3186618,
+      "length": 4656,
+      "sha256": "83e9bdbb3513692a52f76794470fab5ec44e5b0eb81963464030178eb6171f75"
+    }
+  ]
+}

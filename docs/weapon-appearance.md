@@ -1,0 +1,11 @@
+# Weapon appearance ownership
+
+A firearm receives an immutable weapon-instance identity when created. Player purchases and fresh spawn weapons capture that player's selected paint, wear and seed. Bot purchases and fresh bot spawns use default finishes. Creator identity is independent of the current holder or the most recent person to drop it.
+
+Dropping, picking up, bot scavenging, surviving a round, dying and teammate takeover transfer the same identity with the existing ammunition and suppressor state. The ground model, a bot's carried model, first-person/spectator model and HUD resolve that identity. An owned bot gun is not repainted when the player picks it up. Changing a loadout finish affects previews and subsequently created weapons; it does not repaint existing guns, including those already on the ground.
+
+HUD weapon labels include the finish name (`USP-S | Ticket to Hell`) and use the catalog thumbnail for painted guns. The 3D weapon uses the captured exact wear and seed; the HUD thumbnail is the catalog illustration, not a new bake of that particular pattern. Default weapons retain the ordinary name and silhouette. While a finish thumbnail loads, or if it fails, the HUD retains the default silhouette without changing the captured finish name. Finish metadata loads from the existing bundled catalog.
+
+Default world guns keep the shared geometry/material templates. Painted ground and carried guns own their baked geometry/material views and register against the weapon instance. Their decoded/baked paint resources are shared where possible. A finish replaced in the loadout remains alive while an instance model uses it; the last binding releases its textures. Removing drops, replacing bot weapons and disposing soldiers release owned meshes without disposing shared default templates. HD bodies remain lazy and use the existing alignment normalization. A failed paint/body load leaves a default visual fallback while retaining the captured identity.
+
+The killfeed uses compact regular Stratum text, native firearm/utility silhouettes, a fire glyph for inferno kills, and grouped headshot/penetration/no-scope indicators. Five rows are retained, fading after six seconds; local eliminations/deaths retain the red outline. Skin names appear in accessible/death descriptions without replacing the weapon silhouette with text.

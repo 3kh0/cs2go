@@ -1,0 +1,965 @@
+{
+  "source": "Valve HD weapon meshes from the public CSGOSKINS.GG v6 viewer. Matching CS2 Inspects HD paint UV layouts.",
+  "generator": "python3 scripts/import-skin-models.py",
+  "textureResolution": 512,
+  "weapons": [
+    {
+      "weapon": "ak-47",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/ak47/mesh.glb",
+      "sha256": "5903159869b6bb32be97761f7697a57393de4e8a03a7e4ef53bcb38cc7554f73",
+      "textures": [
+        {
+          "file": "ak47_default_ao_png_b00f6e2e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ak47_default_ao_png_b00f6e2e.png",
+          "sha256": "11bb24ce2276c7e68a9b18c48891c023ef59cbc90488dab583f06c6d1b3ceb24"
+        },
+        {
+          "file": "ak47_default_color_psd_5b66a23b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ak47_default_color_psd_5b66a23b.png",
+          "sha256": "ac79158311f7d4a1c042c950abf2091c05cbbadff73ed7e7b26ae07cd7f3fa3b"
+        },
+        {
+          "file": "ak47_default_rough_psd_469dc584.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ak47_default_rough_psd_469dc584.png",
+          "sha256": "0053fee9828119fb22d0696a496dc1c9fd9e34e94f4530ce664c91c114726826"
+        },
+        {
+          "file": "ak47_default_normal_png_c8c5793e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ak47_default_normal_png_c8c5793e.png",
+          "sha256": "f5d0eea21bd6dcafbc36ed67e1897b806094c75f4befbea1eb3e02d7080abc9e"
+        }
+      ]
+    },
+    {
+      "weapon": "m4a1_s",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/m4a1_silencer/mesh.glb",
+      "sha256": "10158c678bec0a113c07317e67c4a7275102fc8d7a8f710f7f4293eea543afd3",
+      "textures": [
+        {
+          "file": "m4a1_silencer_default_ao_tga_9a4bb8ca.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m4a1_silencer_default_ao_tga_9a4bb8ca.png",
+          "sha256": "5bb8bca130c34385afb7365624c5c7d9fe7b8c404ee5d681ed1252ccb396729c"
+        },
+        {
+          "file": "m4a1_silencer_default_color_psd_ee3b9cfe.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m4a1_silencer_default_color_psd_ee3b9cfe.png",
+          "sha256": "8aefb976d38bc62f4a0faedc8d80053bad75012d06cc0119feabc90c0d3c1cd8"
+        },
+        {
+          "file": "m4a1_silencer_default_rough_psd_ba5e1173.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m4a1_silencer_default_rough_psd_ba5e1173.png",
+          "sha256": "f61509ccd3fc127032c7c32ade47adca1a902ec79401fdb95e573fcdd50b5cb5"
+        },
+        {
+          "file": "m4a1_silencer_default_normal_psd_46b09176.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m4a1_silencer_default_normal_psd_46b09176.png",
+          "sha256": "6deed363d732366e58c1696b2e8c3c84fa765ac9433e9f8c50b0f456302b5899"
+        }
+      ]
+    },
+    {
+      "weapon": "usp-s",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/usp_silencer/mesh.glb",
+      "sha256": "289b597cba55b84275b94fe4e61b8770f545fb0e8d62e54f53997b3a5512a40c",
+      "textures": [
+        {
+          "file": "usp_silencer_default_ao_tga_dcc4bd00.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/usp_silencer_default_ao_tga_dcc4bd00.png",
+          "sha256": "43746dc814d5047e2cbb385d833453c4b42c6bc674946cbe42b895daa674af61"
+        },
+        {
+          "file": "usp_silencer_default_color_psd_eff328d8.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/usp_silencer_default_color_psd_eff328d8.png",
+          "sha256": "e91a9eb0324f0043cc7176d0b1fb6d27b8f38e8ebdf40123124902f9c87b31d0"
+        },
+        {
+          "file": "usp_silencer_default_rough_psd_5a307155.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/usp_silencer_default_rough_psd_5a307155.png",
+          "sha256": "03b0aaf941ab5b8764dbcc3697d203c60a5879e4053abf1b0ff9410972bccbfa"
+        },
+        {
+          "file": "usp_silencer_default_normal_tga_61d8e869.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/usp_silencer_default_normal_tga_61d8e869.png",
+          "sha256": "0345af8deca5e2329867f356a3e542920a9e2cafd74a26b6eee80185ad89714c"
+        }
+      ]
+    },
+    {
+      "weapon": "awp",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/awp/mesh.glb",
+      "sha256": "9e1ab55a5bc15a8143d7d49f93969165c3b45ddd8fbc3b306b64d18403f6dcde",
+      "textures": [
+        {
+          "file": "awp_default_ao_png_38865673.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/awp_default_ao_png_38865673.png",
+          "sha256": "0676daa23bd33d0f1ade904eb55642641d1fb0ce510b068c5ff8f9ce93923165"
+        },
+        {
+          "file": "awp_default_color_psd_2bf6ba1e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/awp_default_color_psd_2bf6ba1e.png",
+          "sha256": "cf026e3e34501fd9b77f9bcf3426fcc09d9145d9cbc498debe5e4846aa4246a2"
+        },
+        {
+          "file": "awp_default_rough_psd_4e233c92.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/awp_default_rough_psd_4e233c92.png",
+          "sha256": "4dc6f4c36ca61d9882e5198dd2ef6373df3a29649db7a3c259b5ab2bd619647e"
+        },
+        {
+          "file": "awp_default_normal_png_e882fc00.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/awp_default_normal_png_e882fc00.png",
+          "sha256": "8e5e815c75155617aab064577f1af492602087702aede6b9d95d5a297ed5abf2"
+        }
+      ]
+    },
+    {
+      "weapon": "glock",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/glock18/mesh.glb",
+      "sha256": "d4fd0fcee2f70d4fdc90aa1b84a03890d351a4c9cf91ca82aae2a24438f4be81",
+      "textures": [
+        {
+          "file": "glock_ao_png_6634e9ae.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/glock_ao_png_6634e9ae.png",
+          "sha256": "c836061e9592823fccc3be9f76663364481388a45b6bbfb87acbbfdba9a660ea"
+        },
+        {
+          "file": "glock_default_color_psd_6b5512bd.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/glock_default_color_psd_6b5512bd.png",
+          "sha256": "700cfaaa73b2cd3388bcd48b66bea74bd08eedad8a724b46bb19480451b75ca0"
+        },
+        {
+          "file": "glock_default_rough_psd_9f47a69a.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/glock_default_rough_psd_9f47a69a.png",
+          "sha256": "75e5deb2e27a3cd6ae9e5cfeb3c021fda640942f209633709dc8861629e07de6"
+        },
+        {
+          "file": "glock_default_normal_png_377c3eb8.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/glock_default_normal_png_377c3eb8.png",
+          "sha256": "a7cd4dfa0892d7dfe2d7fb94c860194bc739bb2db5036f35758ea3d3c2321fec"
+        }
+      ]
+    },
+    {
+      "weapon": "deagle",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/deagle/mesh.glb",
+      "sha256": "7dc074ab203e513eb36d6f635f461f6d564b6a3b2019fe5a77aded40b2cca412",
+      "textures": [
+        {
+          "file": "deagle_default_ao_tga_b7d74bd.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/deagle_default_ao_tga_b7d74bd.png",
+          "sha256": "3fd252b9b44430be4147dce415ad733d1f158a84aa5c0240dfc884b59cada49c"
+        },
+        {
+          "file": "deagle_default_color_psd_51a7b347.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/deagle_default_color_psd_51a7b347.png",
+          "sha256": "ace3ac662d897a02f20df1c699845a6001df4499298e1318c2857a86a90e6721"
+        },
+        {
+          "file": "deagle_default_rough_tga_b238a11a.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/deagle_default_rough_tga_b238a11a.png",
+          "sha256": "75a143f7447377ea078a69c32dd22bac17da89c46b55c491c331a483858f9b0e"
+        },
+        {
+          "file": "deagle_default_normal_tga_f25ac800.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/deagle_default_normal_tga_f25ac800.png",
+          "sha256": "db3818a0a656d08f8a530360bcb9f097d79a5acbc049b8b955b01c66a56e635a"
+        }
+      ]
+    },
+    {
+      "weapon": "m4a4",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/m4a4/mesh.glb",
+      "sha256": "ea115f21f3be6bdbae8f74e727fa61cd084368cbe16ff4c3898c4c63d2c78bff",
+      "textures": [
+        {
+          "file": "m4a4_default_ao_png_2daf8909.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m4a4_default_ao_png_2daf8909.png",
+          "sha256": "32154c55b157d52de1dc18b3a3824d6bff8af8191d572edb95a877315e1365b1"
+        },
+        {
+          "file": "m4a4_default_color_psd_3b0b391e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m4a4_default_color_psd_3b0b391e.png",
+          "sha256": "66ef29eacd5a2133cfc934dfd827cbd3495ce21065f33568d441dfa8af93ef43"
+        },
+        {
+          "file": "m4a4_default_rough_psd_be175f5f.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m4a4_default_rough_psd_be175f5f.png",
+          "sha256": "cdc0e0a731abeae64a101fef30444a0a408e923d5a2bfbd7e5f3bd9132217194"
+        },
+        {
+          "file": "m4a4_default_normal_png_d39c4b9a.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m4a4_default_normal_png_d39c4b9a.png",
+          "sha256": "e313d2807de1fb22e4f951f0f6ba82331076ab0ef7cda26248632eed54c1702c"
+        }
+      ]
+    },
+    {
+      "weapon": "nova",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/nova/mesh.glb",
+      "sha256": "01b660138dbb3c87851c4695818c844215cfe35d283272bcfe781df851c39cea",
+      "textures": [
+        {
+          "file": "nova_ao_tga_8216cb2b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/nova_ao_tga_8216cb2b.png",
+          "sha256": "c102903230c7c8a0f985640a8b17d039e9399196f1c611bba8350e7b225fcc62"
+        },
+        {
+          "file": "nova_default_color_psd_fa500254.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/nova_default_color_psd_fa500254.png",
+          "sha256": "faaa9a504082a0996755c4c09258bdfa30b3d9bb6adb65b75f35f2cafaa2e8fd"
+        },
+        {
+          "file": "nova_default_rough_psd_d43f1ea1.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/nova_default_rough_psd_d43f1ea1.png",
+          "sha256": "a7dbab3dcc2273c15739bf0a279fdd34815b5cb57d9f01b57020925441e2862c"
+        },
+        {
+          "file": "nova_default_normal_tga_5dda54a9.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/nova_default_normal_tga_5dda54a9.png",
+          "sha256": "65bdff2fa5f92ac1bc11ba23e1426639b7916c198732edde6b81688fc464808e"
+        },
+        {
+          "file": "xm1014_bullet_ao_tga_43327b54.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/xm1014_bullet_ao_tga_43327b54.png",
+          "sha256": "2fad7ac74d0322cc0845fdf9d3028fa87bad9cb9e3e54eab3f239cbb6bd715d6"
+        },
+        {
+          "file": "nova_bullet_color_psd_987eaec3.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/nova_bullet_color_psd_987eaec3.png",
+          "sha256": "c91a83ed95974832a5ebb6fd170e979d393cc3850898677d9ed9441fd3476996"
+        },
+        {
+          "file": "xm1014_bullet_normal_tga_7889dcd2.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/xm1014_bullet_normal_tga_7889dcd2.png",
+          "sha256": "67cdef209484b9c5872c7174dbab5025d253a421414eed0dd9523afd3a4f168b"
+        }
+      ]
+    },
+    {
+      "weapon": "mp9",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/mp9/mesh.glb",
+      "sha256": "ffa19a83c1cd93fe1926a9bb7e4228f4270d9e22e4637b83930e7a8c2c45e5be",
+      "textures": [
+        {
+          "file": "mp9_ao_tga_28e27e99.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp9_ao_tga_28e27e99.png",
+          "sha256": "07045c5dc819b93f0443316b68a67554d3959288cc45a6bce85475144395b69e"
+        },
+        {
+          "file": "mp9_default_color_psd_3b99a749.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp9_default_color_psd_3b99a749.png",
+          "sha256": "1579df0c8e290583de4f768354ac1c151ba3e9804e4baf0f765d5dfa8f292742"
+        },
+        {
+          "file": "mp9_default_rough_psd_ee7a1ed7.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp9_default_rough_psd_ee7a1ed7.png",
+          "sha256": "6b0aa8425be777685659d6a1ed3e4c3237a3db6631475f7c5496d84d7f89b588"
+        },
+        {
+          "file": "mp9_default_normal_tga_ae48a197.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp9_default_normal_tga_ae48a197.png",
+          "sha256": "75f67ebb005fbdd7cec61adeb6bbdfb2723008547e407603254461d958079dd6"
+        }
+      ]
+    },
+    {
+      "weapon": "hkp2000",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/hkp2000/mesh.glb",
+      "sha256": "7bae47e14df1e18c12dbfcb9f5e0b010697ab7abf638e4d575bcdc6d888411c0",
+      "textures": [
+        {
+          "file": "p2000_ao_tga_152597f4.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p2000_ao_tga_152597f4.png",
+          "sha256": "acf046c9092411d7f5c8d7fcaa03cac32c001d37d712cca228aab9fbb2a71c24"
+        },
+        {
+          "file": "p2000_default_color_psd_c5adf1ca.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p2000_default_color_psd_c5adf1ca.png",
+          "sha256": "bd782acc19f668004d4e5222182a93bb927077ae85d8909e75ad34cc029f49a3"
+        },
+        {
+          "file": "p2000_default_rough_psd_437bee93.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p2000_default_rough_psd_437bee93.png",
+          "sha256": "76e6658465a48bae67dc9b6eae4e3319bb8524ecb40739dc8d51d00c5ebcda36"
+        },
+        {
+          "file": "p2000_default_normal_tga_22200730.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p2000_default_normal_tga_22200730.png",
+          "sha256": "088109f24034231b2a5762ec7da1509c6d34f8ce678f8f869d9d4dceb7ddd156"
+        }
+      ]
+    },
+    {
+      "weapon": "p250",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/p250/mesh.glb",
+      "sha256": "926995bff9ade2ede7cdd56a3668a415c064759159118c944f8629a63effc478",
+      "textures": [
+        {
+          "file": "p250_default_ao_tga_e102ee66.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p250_default_ao_tga_e102ee66.png",
+          "sha256": "8bff64f80d8381aa2924b771bbe2e5e72ad519479b0959fecb0f1ea1a466d1ff"
+        },
+        {
+          "file": "p250_default_color_psd_71b567f1.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p250_default_color_psd_71b567f1.png",
+          "sha256": "67a2644568a3eb6097154554a520a7020d025e094c7f801a0c6cdc4fc81ec3ad"
+        },
+        {
+          "file": "p250_default_rough_psd_7d274363.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p250_default_rough_psd_7d274363.png",
+          "sha256": "05b6bfc14f620b9eac548371f99cb808bb2292e5a6d90313e41263ebbb659917"
+        },
+        {
+          "file": "p250_default_normal_tga_c897b0d4.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p250_default_normal_tga_c897b0d4.png",
+          "sha256": "d3e933a6acd238143c05c725cf7da10463022905a38a87919b8c47b5d33dbb1e"
+        }
+      ]
+    },
+    {
+      "weapon": "fiveseven",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/fiveseven/mesh.glb",
+      "sha256": "4c0ceac306f0bdbae45ec03447e3bd84265f06eba0af5bbbb3d2b397913dbcc7",
+      "textures": [
+        {
+          "file": "fiveseven_ao_tga_5892665d.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/fiveseven_ao_tga_5892665d.png",
+          "sha256": "7475f47c0c3f8dee091586fac8a5f4788dc2f71bb28ee3f4aafe72b0c024e8fe"
+        },
+        {
+          "file": "fiveseven_default_color_psd_c3712633.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/fiveseven_default_color_psd_c3712633.png",
+          "sha256": "760fb11c8d329ae40278230d1510b434764d5683b1fc3003df2ec647d4b65eab"
+        },
+        {
+          "file": "fiveseven_default_rough_psd_d429506e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/fiveseven_default_rough_psd_d429506e.png",
+          "sha256": "6f781eac6ab3eed362b24a2361e5df2a99edcb4fe4e140c6127de9c2809208ef"
+        },
+        {
+          "file": "fiveseven_default_normal_tga_a23e62b7.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/fiveseven_default_normal_tga_a23e62b7.png",
+          "sha256": "5d188e02ef7f118cac485e5925a58e98972328e8d750575d30fefdd2d9793202"
+        }
+      ]
+    },
+    {
+      "weapon": "tec9",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/tec9/mesh.glb",
+      "sha256": "df29138245e5ff60a61f9532480ffa044ac5a5cb52e83fa8163d7d63eccda91e",
+      "textures": [
+        {
+          "file": "tec9_default_ao_tga_42bd270b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/tec9_default_ao_tga_42bd270b.png",
+          "sha256": "c11b3b19eaf710e6d1e4107e2db057fa6560214ab6efa21742ca770e34de636f"
+        },
+        {
+          "file": "tec9_default_color_psd_3d06c5df.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/tec9_default_color_psd_3d06c5df.png",
+          "sha256": "d90a08379c6249076b243c024e315bbb6f1178cf2d739a0fc100cb28bc8ad75e"
+        },
+        {
+          "file": "tec9_default_rough_psd_f4601ada.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/tec9_default_rough_psd_f4601ada.png",
+          "sha256": "d5bf14714c4e06d968ddb784066b6d66d8c851b9387e286173b5e99d28d1cfea"
+        },
+        {
+          "file": "tec9_default_normal_tga_28a2b684.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/tec9_default_normal_tga_28a2b684.png",
+          "sha256": "6ffb40cc90e25f5feb73c8950db832dbd95d0f403a29572351621664ed4489a8"
+        }
+      ]
+    },
+    {
+      "weapon": "cz75a",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/cz75a/mesh.glb",
+      "sha256": "a8629f0d083d6ff8b5cd31f756938a50fe731e28e8acc3a8ce9d9ed7565594dd",
+      "textures": [
+        {
+          "file": "cz75a_default_ao_tga_3e38964.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/cz75a_default_ao_tga_3e38964.png",
+          "sha256": "d14be2d4d49716e1d7b0a5f4432cb348c3e17bb63ca8b0c8bb03f38869bf8ac0"
+        },
+        {
+          "file": "cz75a_default_color_psd_1932cdb1.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/cz75a_default_color_psd_1932cdb1.png",
+          "sha256": "2f2d6222a99a17b84df5317b88691047e64d122cc3f9ef578c8889d401d4b507"
+        },
+        {
+          "file": "cz75a_default_rough_psd_3e0650b8.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/cz75a_default_rough_psd_3e0650b8.png",
+          "sha256": "7c57523432bcc431f1908f2403088356de409951226a0980717a1c150eea64b1"
+        },
+        {
+          "file": "cz75a_default_normal_tga_aad5beae.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/cz75a_default_normal_tga_aad5beae.png",
+          "sha256": "503b5004739d792b126989955b941566c87eae02ed3cdd977a880a1638829681"
+        }
+      ]
+    },
+    {
+      "weapon": "revolver",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/revolver/mesh.glb",
+      "sha256": "5a6eabd6234de6eb230a8fcb141d615d4e9885006aef541dfbd9e8f2047402c9",
+      "textures": [
+        {
+          "file": "revolver_default_ao_tga_e0095109.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/revolver_default_ao_tga_e0095109.png",
+          "sha256": "dadd1bffb0b6717e58950d5b0ba10d0024ad7d67022b86a85ec5707ba5667b0f"
+        },
+        {
+          "file": "revolver_default_color_psd_78d0a6cf.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/revolver_default_color_psd_78d0a6cf.png",
+          "sha256": "5106fca7b9d95c8482def672e790983ae72a901859b69ed1b87a6cb410e0d297"
+        },
+        {
+          "file": "revolver_default_rough_tga_d4c668b8.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/revolver_default_rough_tga_d4c668b8.png",
+          "sha256": "402834a18ed6af0cdd7bf892b52c1232cac1a4a288af9446f870312bc5d2c950"
+        },
+        {
+          "file": "revolver_default_normal_tga_c23bd52e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/revolver_default_normal_tga_c23bd52e.png",
+          "sha256": "2afccbacbf45799b1c15c05fe49610e110aef623cad239985780a1038439cb7f"
+        }
+      ]
+    },
+    {
+      "weapon": "elite",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/elite/mesh.glb",
+      "sha256": "8898f65686de4422665926653714b8874226f262df14633b00fb4b9cd7318a4e",
+      "textures": [
+        {
+          "file": "beretta_default_ao_tga_970901f0.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/beretta_default_ao_tga_970901f0.png",
+          "sha256": "e3e22708fd59c064ef37fec29a7ff62487fed2d3b493ef01573efd3b1190bc66"
+        },
+        {
+          "file": "beretta_default_color_psd_29bcc8c3.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/beretta_default_color_psd_29bcc8c3.png",
+          "sha256": "032d70ced9ff5516d115b0af548d40d386a4115158b159d2289fc1e39f386d1f"
+        },
+        {
+          "file": "beretta_default_rough_psd_9df2d6ab.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/beretta_default_rough_psd_9df2d6ab.png",
+          "sha256": "81fce51ea1fa2245546b70905f05dc618b2a81b8c1d75ab377b1483114127654"
+        },
+        {
+          "file": "beretta_default_normal_tga_7f8f8b07.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/beretta_default_normal_tga_7f8f8b07.png",
+          "sha256": "fe434acc91edd485efb962f983d77a925b4c8f4b9c0b8f947ce394221bca4204"
+        },
+        {
+          "file": "w_eq_eholster_color_tga_1c8da8fc.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/w_eq_eholster_color_tga_1c8da8fc.png",
+          "sha256": "0e90fe67f90b471a1a509ee89677e0c3d2b1ffa20b3c2bf7cb892f982d85b03f"
+        }
+      ]
+    },
+    {
+      "weapon": "famas",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/famas/mesh.glb",
+      "sha256": "b4a36d4c06e75c4b0d4225997ecf07d9024dfeeeca900922329027d7c0e453f6",
+      "textures": [
+        {
+          "file": "famas_default_ao_tga_15f5b4ff.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/famas_default_ao_tga_15f5b4ff.png",
+          "sha256": "5871a639eb02f6a826a5c546dc81ecbbe5506d0785caa3bd68c6441ba0aef822"
+        },
+        {
+          "file": "famas_default_color_psd_b6c40e92.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/famas_default_color_psd_b6c40e92.png",
+          "sha256": "d65e29ec7542c3a178837666ef72f9481edc744dbe56ae1a309f4fc2d5973471"
+        },
+        {
+          "file": "famas_default_rough_psd_e4f589c7.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/famas_default_rough_psd_e4f589c7.png",
+          "sha256": "3c9ed5010f9bb0e30932db879f4bd8cb938c5a1e5f16674039485f4f99c558e7"
+        },
+        {
+          "file": "famas_default_normal_tga_40462e7f.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/famas_default_normal_tga_40462e7f.png",
+          "sha256": "c249f9a63dc52a1f46510ccabbde81b7ba220b860e1e8271b84b9a04357d5317"
+        }
+      ]
+    },
+    {
+      "weapon": "galilar",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/galilar/mesh.glb",
+      "sha256": "fd562a2f6081ba3c7fb5a0319564593fe8f7888e2948f0df1f81b4c13748586a",
+      "textures": [
+        {
+          "file": "galilar_default_ao_tga_ae769e7.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/galilar_default_ao_tga_ae769e7.png",
+          "sha256": "06f5a60f87bbbe70289f0a8c5f89866718bc11c69f9f3e5b0a1a452bf2d84369"
+        },
+        {
+          "file": "galilar_default_color_psd_4713cfed.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/galilar_default_color_psd_4713cfed.png",
+          "sha256": "7cc08aa476db520064f029ecb63940d357dcea74b4c3a32c4466133635e42b83"
+        },
+        {
+          "file": "galilar_default_rough_psd_875185b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/galilar_default_rough_psd_875185b.png",
+          "sha256": "689293d1307f17b5e07bfdb1dd7dd41e26a6706908d736dfb143a286d5933365"
+        },
+        {
+          "file": "galilar_default_normal_tga_1be8b3dd.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/galilar_default_normal_tga_1be8b3dd.png",
+          "sha256": "4323a1163ccf1963c3e1956e6c6229073b7bf270a293d9b9fb272012517f8b83"
+        }
+      ]
+    },
+    {
+      "weapon": "aug",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/aug/mesh.glb",
+      "sha256": "bd94680d229bc52fce54c1617848ee0c94a531753709868bf70f45225425edfe",
+      "textures": [
+        {
+          "file": "aug_ao_tga_c1ddac19.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/aug_ao_tga_c1ddac19.png",
+          "sha256": "c05269ef50d2bd308073ed080f719f36bcb3c69f6b59b3532ba292a5fc6577b0"
+        },
+        {
+          "file": "aug_default_color_psd_e209ca89.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/aug_default_color_psd_e209ca89.png",
+          "sha256": "d34f88c391796b3b85d3d2a7ead882abd82b9022942dfca05aa8564cf7bb35bc"
+        },
+        {
+          "file": "aug_default_rough_psd_3b83f877.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/aug_default_rough_psd_3b83f877.png",
+          "sha256": "bda1b29eef4cad55b167d3fe88973531ab9cb73c14a07619dba85c1c31e10682"
+        },
+        {
+          "file": "aug_default_normal_tga_31e3d49f.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/aug_default_normal_tga_31e3d49f.png",
+          "sha256": "172f75b1f64647775e75049a66c8ce0487f5cf101a4d3f63d10a6c41cc8f27a7"
+        },
+        {
+          "file": "shared_scope_lens_mask_psd_b968845b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/shared_scope_lens_mask_psd_b968845b.png",
+          "sha256": "2c515a4bf9dee1eebb76201c5f7d5eb54d99a635c1ff0a078e20fd79e31bab85"
+        },
+        {
+          "file": "shared_scope_lens_mask_psd_93b45a68.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/shared_scope_lens_mask_psd_93b45a68.png",
+          "sha256": "15b70e96990e1e9c9bcd7ff24f82d404592d3479063eb69dd6b1bb244a3ccc19"
+        }
+      ]
+    },
+    {
+      "weapon": "sg556",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/sg556/mesh.glb",
+      "sha256": "150e7952999fff67a1dd90fa5cfaf689de7d72b4a3ef348f0fede057221cb8e9",
+      "textures": [
+        {
+          "file": "sg556_ao_tga_48b8d899.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/sg556_ao_tga_48b8d899.png",
+          "sha256": "58f75ffcf25b27726999c31674d8a1e4472e7337b58ceba97e4e1727219fe775"
+        },
+        {
+          "file": "sg556_default_color_psd_296d1bd7.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/sg556_default_color_psd_296d1bd7.png",
+          "sha256": "b179039baf64a846d99ed2731c950a21de47a63c169e0b8c873ed5f352edb453"
+        },
+        {
+          "file": "sg556_default_rough_psd_ee6613f7.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/sg556_default_rough_psd_ee6613f7.png",
+          "sha256": "ff8e0d5107b37b627a02e110ad7f6b6719064c2920f628ad3fd9a872f0fdb697"
+        },
+        {
+          "file": "sg556_default_normal_tga_d6ad5c53.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/sg556_default_normal_tga_d6ad5c53.png",
+          "sha256": "f162a5d6f23fd172bfcb0c857147cf5a9e29bfc7ce70cc9bbb9ba8733126ccda"
+        },
+        {
+          "file": "shared_scope_lens_mask_psd_b968845b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/shared_scope_lens_mask_psd_b968845b.png",
+          "sha256": "2c515a4bf9dee1eebb76201c5f7d5eb54d99a635c1ff0a078e20fd79e31bab85"
+        },
+        {
+          "file": "shared_scope_lens_mask_psd_93b45a68.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/shared_scope_lens_mask_psd_93b45a68.png",
+          "sha256": "15b70e96990e1e9c9bcd7ff24f82d404592d3479063eb69dd6b1bb244a3ccc19"
+        }
+      ]
+    },
+    {
+      "weapon": "ssg08",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/ssg08/mesh.glb",
+      "sha256": "3fe5ece5145b515ecfdf2316d06d1f1c28f0ace5988231582bd8fe76ede6b427",
+      "textures": [
+        {
+          "file": "ssg08_default_ao_tga_4dd4c5c.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ssg08_default_ao_tga_4dd4c5c.png",
+          "sha256": "59c7d60eb4b513fe34d626ba9788c25b50745e3e1ceb73c38a987e68973753cd"
+        },
+        {
+          "file": "ssg08_default_color_psd_2d736a5f.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ssg08_default_color_psd_2d736a5f.png",
+          "sha256": "1009f48249a4578e031873cd21f373a65bf527ce67bc7d55da74caa979a533f5"
+        },
+        {
+          "file": "ssg08_default_rough_psd_b6130e00.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ssg08_default_rough_psd_b6130e00.png",
+          "sha256": "d25bd84fd29cdbc15d16713e09e19c4642c787d2953ee727f762a1169dd38eff"
+        },
+        {
+          "file": "ssg08_default_normal_tga_239d8f4e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ssg08_default_normal_tga_239d8f4e.png",
+          "sha256": "d9764c0765b0ebfa65949d40d9ae41804d4c7f7833ca522466b66e203168e110"
+        }
+      ]
+    },
+    {
+      "weapon": "scar20",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/scar20/mesh.glb",
+      "sha256": "646ae6ac5e3e8ce4342d2f4d3a7e2df272ecc2892c1c3d135b4eb48186309a8f",
+      "textures": [
+        {
+          "file": "scar20_default_ao_tga_ae60e13b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/scar20_default_ao_tga_ae60e13b.png",
+          "sha256": "5d24de7374cfe412a2d6db76d45197759208caab1e2f8c74ae2a0d52af171404"
+        },
+        {
+          "file": "scar20_default_color_psd_24a39c92.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/scar20_default_color_psd_24a39c92.png",
+          "sha256": "5d2a6cf66c6286efbb858534556a38a83a1eb72d1d899a4046ff01c38f0dc040"
+        },
+        {
+          "file": "scar20_default_rough_psd_a3c74000.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/scar20_default_rough_psd_a3c74000.png",
+          "sha256": "5f7c772359187d1cc52046fab8ae416bbc6a1421378662e284d81865e05257a2"
+        },
+        {
+          "file": "scar20_default_normal_tga_cbf11dcc.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/scar20_default_normal_tga_cbf11dcc.png",
+          "sha256": "2d2b72e989ebbac6d1846e8b3075c2c7f8c891251652cb0de6569c97f3cf0bab"
+        }
+      ]
+    },
+    {
+      "weapon": "g3sg1",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/g3sg1/mesh.glb",
+      "sha256": "32d8d816e7b9f592d1e7c8ebe16d2aca9535c3be9f96d0b14989a56990c1cd6b",
+      "textures": [
+        {
+          "file": "g3sg1_default_ao_tga_2bf432b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/g3sg1_default_ao_tga_2bf432b.png",
+          "sha256": "1d3dd151cc45e13c0289bf0db3bbc091e577dbd4fb31d2163837451ef4016c85"
+        },
+        {
+          "file": "g3sg1_default_color_psd_28024d3b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/g3sg1_default_color_psd_28024d3b.png",
+          "sha256": "d1c4bfd13cf018b2bf15f4086733069e169ce348f9ed0dac06e39d3d093efea3"
+        },
+        {
+          "file": "g3sg1_default_rough_psd_d26efdac.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/g3sg1_default_rough_psd_d26efdac.png",
+          "sha256": "e03b04d8c7cfbc213a8720aeb8548fd001b9484b7e53577de957757511f1cd75"
+        },
+        {
+          "file": "g3sg1_default_normal_tga_bfdc6592.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/g3sg1_default_normal_tga_bfdc6592.png",
+          "sha256": "8f336a9b4edd8722c766d26e739f841fa936e28e3e838a79dfd45920244d5755"
+        }
+      ]
+    },
+    {
+      "weapon": "mac10",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/mac10/mesh.glb",
+      "sha256": "b3ea699500aa23909ca6d7095f7f306d35053be8e19f6df0c8547d098f0d7dc3",
+      "textures": [
+        {
+          "file": "mac10_ao_tga_1f515219.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mac10_ao_tga_1f515219.png",
+          "sha256": "979734ab82015b619bca4eab7201584689ebc4bed2746e0203c9e96adebc6501"
+        },
+        {
+          "file": "mac10_default_color_psd_307e41e2.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mac10_default_color_psd_307e41e2.png",
+          "sha256": "3aad895885af4d0a2c1081756ea15bac2ea3777d6e5c6980f1e375a341684db3"
+        },
+        {
+          "file": "mac10_default_rough_psd_6fc50dc6.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mac10_default_rough_psd_6fc50dc6.png",
+          "sha256": "13e95e785dbf46299cbd33f3bae7c3c841a16edc16b872e034ccba863122b400"
+        },
+        {
+          "file": "mac10_default_normal_tga_1d6aa2c.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mac10_default_normal_tga_1d6aa2c.png",
+          "sha256": "857998ea372287de71cd1b781e97368f501657d00f6c45078d54e6ea550b00f7"
+        }
+      ]
+    },
+    {
+      "weapon": "mp7",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/mp7/mesh.glb",
+      "sha256": "bf434abfbd199b850a81ab9d99ac1d5ac8dc648ec6ea7111cdcd52e1c07a6b81",
+      "textures": [
+        {
+          "file": "mp7_ao_tga_f4f3d03.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp7_ao_tga_f4f3d03.png",
+          "sha256": "cd40928fc531fc2a3d38011c7381b05bd7287ad875a900e10db1f0f20db84b9a"
+        },
+        {
+          "file": "mp7_default_color_psd_bb9711a3.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp7_default_color_psd_bb9711a3.png",
+          "sha256": "2acf4b61918df24f47d190cd34f14f808d5893495901986adeba8bbccb84bdfe"
+        },
+        {
+          "file": "mp7_default_rough_psd_9b8c4775.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp7_default_rough_psd_9b8c4775.png",
+          "sha256": "f402991d0093bc61f7180de7ffd6ad8251f8a836ee2529b2804ddb5c3b96fdbe"
+        },
+        {
+          "file": "mp7_default_normal_tga_86060c88.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp7_default_normal_tga_86060c88.png",
+          "sha256": "8871df69653aa564ac69097c85bb552891cdff5cf67617fad1d3d7ed5908bfc9"
+        }
+      ]
+    },
+    {
+      "weapon": "mp5sd",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/mp5sd/mesh.glb",
+      "sha256": "abf7b67be0fb118ff2452da36fc32faa5668f679ba0783869c01d809e3612a7a",
+      "textures": [
+        {
+          "file": "mp5sd_default_ao_tga_7fca7a43.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp5sd_default_ao_tga_7fca7a43.png",
+          "sha256": "1d5c4560f4fbd8a9b291c8c177376f6ec9a63eb23dee0c266b61fddf883daf3e"
+        },
+        {
+          "file": "mp5sd_default_color_psd_da539acd.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp5sd_default_color_psd_da539acd.png",
+          "sha256": "b7e123c22c8be4023c41a0fb2dd91568998fc29d28485c5b19971cd7b8140bc4"
+        },
+        {
+          "file": "mp5sd_default_rough_tga_e787f53e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp5sd_default_rough_tga_e787f53e.png",
+          "sha256": "049314742800078cd43d9fbd7c3f1d623d5ae319b1debb8d7b1e9c3393555894"
+        },
+        {
+          "file": "mp5sd_default_normal_tga_ce466e67.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mp5sd_default_normal_tga_ce466e67.png",
+          "sha256": "ec79f427fd2a7ebb694fcf28201d45332c3a283aabd16a95b7373ae487d9be65"
+        }
+      ]
+    },
+    {
+      "weapon": "ump45",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/ump45/mesh.glb",
+      "sha256": "c239449c2dc0e96a28a42fd0ac7ac63009d616eb52739944af53c23dd708fa48",
+      "textures": [
+        {
+          "file": "ump45_default_ao_tga_dffa903b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ump45_default_ao_tga_dffa903b.png",
+          "sha256": "4b4c38e766a897e7fb1eff99057bc3e6f450081fd83dca1ce69bf1ab64ef3422"
+        },
+        {
+          "file": "ump45_default_color_psd_ab81330e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ump45_default_color_psd_ab81330e.png",
+          "sha256": "1c4fb7e9c2f0baed0b68d3c189b8f91a927bdd4f549f99f68de303f5e000fd0b"
+        },
+        {
+          "file": "ump45_default_rough_psd_f42749d3.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ump45_default_rough_psd_f42749d3.png",
+          "sha256": "4e8c50a3e2b53e9700fdca5aabf2b78feac8d124b9b15b9dfb858a5013f06245"
+        },
+        {
+          "file": "ump45_default_normal_tga_4b7ce1d2.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/ump45_default_normal_tga_4b7ce1d2.png",
+          "sha256": "ffb532baaae73d51e0d37b436262dda2fdf13709bf2c82048e77a1b5b2fbf8b0"
+        }
+      ]
+    },
+    {
+      "weapon": "p90",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/p90/mesh.glb",
+      "sha256": "a1408920ae94944b6f006423a3209b9bfe877642dee8c8127caa83f518fc6390",
+      "textures": [
+        {
+          "file": "p90_default_ao_tga_839baa85.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p90_default_ao_tga_839baa85.png",
+          "sha256": "7afb51ca44c96bce547ff610a8811cc090f898db9945f5daa14b1d52baf18ae2"
+        },
+        {
+          "file": "p90_default_color_psd_2727e8c1.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p90_default_color_psd_2727e8c1.png",
+          "sha256": "cd4db3076fa7dcae93253ef4e259deec6042a40c8d186edba48bf96a89740fc9"
+        },
+        {
+          "file": "p90_default_rough_psd_7ac6dedb.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p90_default_rough_psd_7ac6dedb.png",
+          "sha256": "4574e6ab2045d7211ec1a96998b4926a58d8ec7a723e0f2820a1e6d09f863b2f"
+        },
+        {
+          "file": "p90_default_normal_tga_ce606f21.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/p90_default_normal_tga_ce606f21.png",
+          "sha256": "f3db8b33e159f77ae72832b28cb88531250efcb8b782b3ca66f9ca0a61d61076"
+        }
+      ]
+    },
+    {
+      "weapon": "bizon",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/bizon/mesh.glb",
+      "sha256": "15a06127110faf6858d5e86b26d611a59b3b98fbe4de466e2a325217e074aaba",
+      "textures": [
+        {
+          "file": "bizon_default_ao_tga_b0793b57.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/bizon_default_ao_tga_b0793b57.png",
+          "sha256": "dad0e507c12d44f6b543ca3f5fca41b253ea82bb36d81b87cd682b05b0801e0e"
+        },
+        {
+          "file": "bizon_default_color_psd_6feb41a7.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/bizon_default_color_psd_6feb41a7.png",
+          "sha256": "7d7481bbf8f704394655b546a81ef2b413f3f0985cc1d757a4b47d976425df96"
+        },
+        {
+          "file": "bizon_default_rough_psd_746e3e8a.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/bizon_default_rough_psd_746e3e8a.png",
+          "sha256": "9eac78df93b4b6d7d2cf9fd1125c43c17008bb8d46b83d9d48ea0b81c67afb81"
+        },
+        {
+          "file": "bizon_default_normal_tga_d1c78744.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/bizon_default_normal_tga_d1c78744.png",
+          "sha256": "a49d2afff8fdca4a90c2d603a48387177e4aa04c7301606b545c899fc7abf6f2"
+        }
+      ]
+    },
+    {
+      "weapon": "xm1014",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/xm1014/mesh.glb",
+      "sha256": "15f81f6115aa3afede806bbc7d7665cd1e92930e225d7c91cb95c33c83241f09",
+      "textures": [
+        {
+          "file": "xm1014_default_ao_tga_35f22dd8.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/xm1014_default_ao_tga_35f22dd8.png",
+          "sha256": "7abb6d73fcd63492798bae9071d8146ef8ae211de46da0bc154d9914e7c9d382"
+        },
+        {
+          "file": "xm1014_default_color_psd_9f802d5c.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/xm1014_default_color_psd_9f802d5c.png",
+          "sha256": "48e4e6364db2b75ee72e4c23bd153911cb34f14f94d85b599d4ded65787431a9"
+        },
+        {
+          "file": "xm1014_default_rough_psd_1b824282.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/xm1014_default_rough_psd_1b824282.png",
+          "sha256": "8c60aaf9acb95b64eb6bb776cc3aa6ac6de3f8a0ed44bf88f069d3b969bd42b8"
+        },
+        {
+          "file": "xm1014_default_normal_tga_7a777fd0.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/xm1014_default_normal_tga_7a777fd0.png",
+          "sha256": "3d9ff37eea7c0177a6a7a5408144f6aa9e90b5fffe6b443ce39c94699ff4746e"
+        }
+      ]
+    },
+    {
+      "weapon": "mag7",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/mag7/mesh.glb",
+      "sha256": "b4e926d9610629507d4206bea074422c5573911f58c989c76bf6a60203071780",
+      "textures": [
+        {
+          "file": "mag7_default_ao_tga_de56f869.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mag7_default_ao_tga_de56f869.png",
+          "sha256": "3397d741e3a5445bb4857c233326d92f00c8dc015a5142b3d4bc08ed2aeccdc5"
+        },
+        {
+          "file": "mag7_default_color_psd_534a1bfa.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mag7_default_color_psd_534a1bfa.png",
+          "sha256": "5be64161fb61d2bd8db005717ae004efb846d5dcff490019534059f9d196615d"
+        },
+        {
+          "file": "mag7_default_rough_tga_3ae223a5.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mag7_default_rough_tga_3ae223a5.png",
+          "sha256": "63f0a1ab7a209d556493e7019afe276aab4308e4297c9fc927fcd4c597b17026"
+        },
+        {
+          "file": "mag7_default_normal_tga_dade06c1.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/mag7_default_normal_tga_dade06c1.png",
+          "sha256": "8faa000a3734b947b0c951e0285cb5f1b6a563c1e550c6954e65d5c0ba25f3ba"
+        }
+      ]
+    },
+    {
+      "weapon": "sawedoff",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/sawedoff/mesh.glb",
+      "sha256": "94537a021f3f3de6454b851b4106ce6bbbddfea3b087c5b76e0b68b831c8ce1c",
+      "textures": [
+        {
+          "file": "sawedoff_ao_tga_98a0522f.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/sawedoff_ao_tga_98a0522f.png",
+          "sha256": "530844eab715dfb87888b55eb35d92fab29fe498906f1ec9214e3de462b00cde"
+        },
+        {
+          "file": "sawedoff_default_color_psd_9e64d53e.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/sawedoff_default_color_psd_9e64d53e.png",
+          "sha256": "f6a07d391996230ece92c1954ec8baf21aaa95b9eeb30bb4a2a74415658fab8f"
+        },
+        {
+          "file": "sawedoff_default_rough_psd_bd2a9747.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/sawedoff_default_rough_psd_bd2a9747.png",
+          "sha256": "f0beaf6a872cf83398b181af7a6df19ebdfba91bd277e250426da3aca7886c80"
+        },
+        {
+          "file": "sawedoff_default_normal_tga_92f6e3bb.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/sawedoff_default_normal_tga_92f6e3bb.png",
+          "sha256": "ad28f6982063c97e3bb980b125fefb2b9bab8ca5fb028241104c6f8bd33a59d6"
+        }
+      ]
+    },
+    {
+      "weapon": "m249",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/m249/mesh.glb",
+      "sha256": "ef06ccbe64690261e2a7b924660a1358e42c74f1fd424b1e2a0172832a83e7dd",
+      "textures": [
+        {
+          "file": "m249_default_ao_tga_89e61e1b.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m249_default_ao_tga_89e61e1b.png",
+          "sha256": "bc1f7f63b9b1990771a64e6139ff7bbdc6803ab31c16fc74452c0830bcf9d6fa"
+        },
+        {
+          "file": "m249_default_color_psd_8ab04656.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m249_default_color_psd_8ab04656.png",
+          "sha256": "76dea758199f61b3bfcf0e86f29a0fb972cdeb6c054b065a411b5e5aa984b983"
+        },
+        {
+          "file": "m249_default_rough_psd_aca41f58.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m249_default_rough_psd_aca41f58.png",
+          "sha256": "1bd365698f6c2ff3533604b6bbe23e0b979e72e07f499efd1fa289d84205c8c1"
+        },
+        {
+          "file": "m249_default_normal_tga_6450d68a.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/m249_default_normal_tga_6450d68a.png",
+          "sha256": "9d9c1d9adb7c2cbd51c708aea8dcd177a6ade80f42e474f1ce94b27d6d548f96"
+        }
+      ]
+    },
+    {
+      "weapon": "negev",
+      "model": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/models/negev/mesh.glb",
+      "sha256": "d936dcf7b34f0aac357f1db4ebce8ba4df1d35bed32e184a108981d4176d1acd",
+      "textures": [
+        {
+          "file": "negev_default_ao_tga_44f4fb11.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/negev_default_ao_tga_44f4fb11.png",
+          "sha256": "c88ac619e10a955ed8870e3e767083c9aa81fecbb789b4617729276228d890a7"
+        },
+        {
+          "file": "negev_default_color_psd_61eb2634.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/negev_default_color_psd_61eb2634.png",
+          "sha256": "206b7dee8c13b9a1d28f5edfc818751299d3551f7b8f84b971b70a033ef13cae"
+        },
+        {
+          "file": "negev_default_rough_psd_81bea48d.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/negev_default_rough_psd_81bea48d.png",
+          "sha256": "35f60ea1a978abcbc66a9b72d3d2e62058d3c55ebfc2b81aba1caa0346b76bc2"
+        },
+        {
+          "file": "negev_default_normal_tga_ffe47.png",
+          "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/vanilla/negev_default_normal_tga_ffe47.png",
+          "sha256": "1911be5e40f4592271e165977a4daf7daa9e030e11496f425725dbdb6151cd61"
+        }
+      ]
+    }
+  ]
+}

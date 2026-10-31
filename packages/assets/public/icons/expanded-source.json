@@ -1,0 +1,155 @@
+{
+  "source": "https://bindgenerator.app/wp-content/themes/bind-generator-app/assets/css/killfeed.css",
+  "icons": [
+    {
+      "weapon": "glock",
+      "url": "https://i.imgur.com/SnbXHrD.png",
+      "sha256": "2e7f54befa1bd4ab3c826103ec4dc79ae9dd6e5e25946c5b638f657153fb1efa"
+    },
+    {
+      "weapon": "deagle",
+      "url": "https://i.imgur.com/2ZSgEly.png",
+      "sha256": "cff8d10df611119d457146feb0ee0d20dbfdc7b332476692f77584e2f5e31dfa"
+    },
+    {
+      "weapon": "m4a4",
+      "url": "https://i.imgur.com/0D6YVWy.png",
+      "sha256": "a49074f514395a95f400e7455d6f2e882f0ba947a58c784d67f4b7c3978cc8bb"
+    },
+    {
+      "weapon": "nova",
+      "url": "https://i.imgur.com/ezMFzTo.png",
+      "sha256": "67b9a28c64f555d35eff9bc52e1a51896c86cae98c1bcd3d873b2e9e66fb3ce1"
+    },
+    {
+      "weapon": "mp9",
+      "url": "https://i.imgur.com/vavr8uJ.png",
+      "sha256": "1fa92aceb6d4d5df8a0ef345545a539b74ec74607f69a21a1185b2572a1758c3"
+    },
+    {
+      "weapon": "hkp2000",
+      "url": "https://i.imgur.com/drZc4cx.png",
+      "sha256": "408501558b8ba1968eed31df0628b38574dc1a778afbff6c8170f50dbb30292e"
+    },
+    {
+      "weapon": "p250",
+      "url": "https://i.imgur.com/zCq4FjH.png",
+      "sha256": "20d7268f0798c99e3953b171cde334b94d8d9514a35bc622c6b856fbfad531ac"
+    },
+    {
+      "weapon": "fiveseven",
+      "url": "https://i.imgur.com/eHov88Z.png",
+      "sha256": "a2f51cde7f1f66fd139e3ef422aa8dcb866e5c49a9a8fba095b6cb9d923c9464"
+    },
+    {
+      "weapon": "tec9",
+      "url": "https://i.imgur.com/SQ0aWr4.png",
+      "sha256": "06f027c020205d70737c06363b4392902dd3c8fd8e9c311d27e88386cc33a570"
+    },
+    {
+      "weapon": "cz75a",
+      "url": "https://i.imgur.com/DGIif9C.png",
+      "sha256": "c0b06133b3d6699d98d708abbd905dc9d5e4b3cd461c40013c1ed901127faa52"
+    },
+    {
+      "weapon": "revolver",
+      "url": "https://i.imgur.com/3b16UZQ.png",
+      "sha256": "1cfa4ae41c54d10c67f85c98d06969e3a8d851f4eaf496fb6d7870410b3a2fb9"
+    },
+    {
+      "weapon": "elite",
+      "url": "https://i.imgur.com/qK87puj.png",
+      "sha256": "9c8951c31ee615f37802e97268836e3cf3f153f0244eedb5d59528f9873bfd1c"
+    },
+    {
+      "weapon": "famas",
+      "url": "https://i.imgur.com/ZGeKmW2.png",
+      "sha256": "7b21f021cb81255a742929e3f74adbc749cd2a3b65a22014be54144db93f7997"
+    },
+    {
+      "weapon": "galilar",
+      "url": "https://i.imgur.com/CiqqMAZ.png",
+      "sha256": "4da85adff01e46a953a1eea0790e39b96cc51b88ab94a95c1d4f0e86da262f50"
+    },
+    {
+      "weapon": "aug",
+      "url": "https://i.imgur.com/knYDHsC.png",
+      "sha256": "8b46e617ef71ccf10e7554c6f6b31d48c79119db44c8be97738c4d262ae01ab9"
+    },
+    {
+      "weapon": "sg556",
+      "url": "https://i.imgur.com/NuBGmf1.png",
+      "sha256": "f0e0180ab3004e8a1e1d560c27879db29214ce923a73a8223b4c93f5b50d0336"
+    },
+    {
+      "weapon": "ssg08",
+      "url": "https://i.imgur.com/eSxUUSY.png",
+      "sha256": "7bf936d20774649618d84ee7aac16ab36fb868d370ee1736a8cc78c3227e1285"
+    },
+    {
+      "weapon": "scar20",
+      "url": "https://i.imgur.com/NQ2ERTq.png",
+      "sha256": "879698d4369a45a4da65cb29f45f3ac978f28741be5f2477a93d23502957a2bc"
+    },
+    {
+      "weapon": "g3sg1",
+      "url": "https://i.imgur.com/hPlVVMi.png",
+      "sha256": "ba7269451796757f8d35e9486b79655587f198b56aa32db5d2ce909b3fc204fe"
+    },
+    {
+      "weapon": "mac10",
+      "url": "https://i.imgur.com/0THSHsK.png",
+      "sha256": "ff963db9221a0a57c9b30d66f8f27461fba0bf96d8545d191d5ba2e6a21b1970"
+    },
+    {
+      "weapon": "mp7",
+      "url": "https://i.imgur.com/2evhcwS.png",
+      "sha256": "4b9ac4bf4d2a3eefacb3eedf6c8c7aa05ef7130dc23cfc3c7acb93541d0eee71"
+    },
+    {
+      "weapon": "mp5sd",
+      "url": "https://i.imgur.com/gF792he.png",
+      "sha256": "82ed14bb5a01aae724b4702a32c8f2c219aabc10c11031d5fba3dc96a96b26ba"
+    },
+    {
+      "weapon": "ump45",
+      "url": "https://i.imgur.com/Zdoak0E.png",
+      "sha256": "dceb2fe0439dfb2d9449c775f7a85a1da207f11a128879280b370bb298eac2bf"
+    },
+    {
+      "weapon": "p90",
+      "url": "https://i.imgur.com/4vgrucM.png",
+      "sha256": "e1bdaf10afbf569aa218c2dda25ce125411afdb99668e2c30f47eeba654207e4"
+    },
+    {
+      "weapon": "bizon",
+      "url": "https://i.imgur.com/TOoppTV.png",
+      "sha256": "82cc1d266166e2d376fdc54078cd2b13d139ebbad0e841794681eb1ae5c4adf2"
+    },
+    {
+      "weapon": "xm1014",
+      "url": "https://i.imgur.com/1jjEovN.png",
+      "sha256": "6990add487624b0c81933aeb553bc82a41efe9c76022818cb735a9a02b7013a3"
+    },
+    {
+      "weapon": "mag7",
+      "url": "https://i.imgur.com/RLD7mmF.png",
+      "sha256": "4fdc5c8af3e68cb90caea30000f7da177d71294b4f29696fb4fe5bc7a15640ec"
+    },
+    {
+      "weapon": "sawedoff",
+      "url": "https://i.imgur.com/M33patu.png",
+      "sha256": "31e66608a70806508a9e55a501fb4e1148c68ba01c2a3d74e6dba8cff37c365f"
+    },
+    {
+      "weapon": "m249",
+      "url": "https://i.imgur.com/YLurl0m.png",
+      "sha256": "957dfbf22488e766101bc8d84b672e0052742c00282b3a59523ae1177b5a9507"
+    },
+    {
+      "weapon": "negev",
+      "url": "https://i.imgur.com/uZbhk2g.png",
+      "sha256": "64bb9c66ee0fd052c54de7de72d4eaf4921608677c5251c9884cd5b832a1f1b4"
+    }
+  ]
+}

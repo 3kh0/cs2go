@@ -1,0 +1,26 @@
+{
+  "inputs": [
+    {
+      "file": "mesh.glb",
+      "sha256": "1786b7bdd2fb794595420d0ad5de28b4be4308e5f7e7c86d50618edbceb574af"
+    },
+    {
+      "file": "csgoskins.webp",
+      "sha256": "ecb644d937daa230ea4c43849ff4bf0df1820e442a21249541dbf059a8ef3d5e"
+    },
+    {
+      "file": "codex-clipboard-Gn5RNt.png",
+      "sha256": "b2cf77a54127467ea1efb8b6b7f4a82e73f3df3e247b94a40926611a3130e07a"
+    },
+    {
+      "file": "codex-clipboard-aJkoCF.png",
+      "sha256": "e7ac72ea6dad2f50b10329123af1a025cc2e039daaa5517dcf38240e9e86c8a4"
+    }
+  ],
+  "triangles": 2202,
+  "lengthMeters": 0.31,
+  "gripCenterSourceZ": -1.15,
+  "materials": "Supplied color and AO; source packed R roughness / G metalness repacked to glTF ORM. Neutral placeholder normal omitted.",
+  "animation": "Native clips imported separately by scripts/import-knife-animations.py. meshToSource restores source coordinates for the animated attachment.",
+  "generator": "scripts/import-bayonet.py"
+}

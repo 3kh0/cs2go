@@ -1,0 +1,36 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "tasks": {
+    "build": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/scripts/build-assets.mjs",
+        "$TURBO_ROOT$/scripts/service-worker.js",
+        "$TURBO_ROOT$/packages/assets/manifest.json",
+        "$TURBO_ROOT$/packages/assets/pipeline.mjs"
+      ],
+      "outputs": ["dist/**"],
+      "env": ["ASSET_CDN_URL", "VERCEL"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "passThroughEnv": ["STEAM_ORIGIN", "STEAM_SESSION_SECRET"]
+    },
+    "preview": {
+      "cache": false,
+      "persistent": true,
+      "passThroughEnv": ["STEAM_ORIGIN", "STEAM_SESSION_SECRET"]
+    },
+    "check": {
+      "cache": false
+    },
+    "test": {
+      "cache": false
+    },
+    "test:browser": {
+      "cache": false,
+      "passThroughEnv": ["CI"]
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "source": "Valve CS2 Steam depot",
+  "app": 730,
+  "depot": 2347770,
+  "manifest": "4758919807587010422",
+  "vpkDirectorySha256": "48018be3f8da306ce9b48bf746bce08ceff19fe4dff15c9d5e2e53b3c3e9bbad",
+  "encoding": "stereo Opus 128kbps 48kHz",
+  "clips": [
+    {
+      "name": "music-menu",
+      "resource": "sounds/music/valve_cs2_01/mainmenu.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/mainmenu.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "838db0a6159a86b9a0f029d1da2d81c34dedb83c347346a163578afc5a666d38",
+      "outputSha256": "1863f77453e455e0548915757ac114ec4c448f27559c3bc7c280388833f04581",
+      "bytes": 3294148
+    },
+    {
+      "name": "music-start",
+      "resource": "sounds/music/valve_cs2_01/startround_01.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/startround_01.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "d5c49d37ee8e2d2dde80e2edb03452877d894723aff3469b0751fed0a3194fda",
+      "outputSha256": "956dba9ed6f0b6d4e7f12ab273fc18ee1c993e55799b7f37e62c407797623e5c",
+      "bytes": 564800
+    },
+    {
+      "name": "music-deathcam",
+      "resource": "sounds/music/valve_cs2_01/deathcam.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/deathcam.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "b68a5296b205ca0f5388767b479639f8c6078fecb214a4f5f2916fb4b4803fd7",
+      "outputSha256": "14f4de690673868fbcc3c44790e548d5cf174cb230f7e38e8f3507571869f197",
+      "bytes": 137247
+    },
+    {
+      "name": "music-win",
+      "resource": "sounds/music/valve_cs2_01/wonround.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/wonround.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "95c73fc293d5ab5153578531f81feb34da2c79b4de8ded642ecc302941218fe3",
+      "outputSha256": "094183538aaea24802807561f97cc2da67fe10522e5d4173362c901e4b86582c",
+      "bytes": 97433
+    },
+    {
+      "name": "music-lose",
+      "resource": "sounds/music/valve_cs2_01/lostround.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/lostround.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "665457546a7a9f8375e7de899d618d383a9279831e8b8f2aadbbfad624748da5",
+      "outputSha256": "b2011d0ebcad648d1ab463bc4098960b8532f9b6a13a56d7745f0a0d568850e3",
+      "bytes": 131245
+    },
+    {
+      "name": "music-mvp",
+      "resource": "sounds/music/valve_cs2_01/roundmvpanthem_01.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/roundmvpanthem_01.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "5bca5d9666c57829379ce91dc5e1ce89921f3977777fca8e5a26e9c82dacac62",
+      "outputSha256": "eb66190d6b1592499d112e94d2811f774c5c0d90f5e1d9ba87f3765477e3dc37",
+      "bytes": 162490
+    },
+    {
+      "name": "music-countdown",
+      "resource": "sounds/music/valve_cs2_01/roundtenseccount.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/roundtenseccount.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "8da802a89b09108ba207aa21f62157de3f66fe78460836987c929ea7ffafe4e6",
+      "outputSha256": "c56eab3dbad7519c1d156f840115c39001263ab01c9b5dc6d92475536f46be82",
+      "bytes": 199728
+    },
+    {
+      "name": "music-bomb",
+      "resource": "sounds/music/valve_cs2_01/bombplanted.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/bombplanted.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "5edef6123770a0919e0cbebf704aefcf6dc3f37b5d84597647fe40ca41071137",
+      "outputSha256": "04ff47c47fe65872ed3403a6d63b2c60970ee115ac04b101414bf99ebe0a1c1e",
+      "bytes": 602606
+    },
+    {
+      "name": "music-bomb-countdown",
+      "resource": "sounds/music/valve_cs2_01/bombtenseccount.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/bombtenseccount.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "cd66043e16ee89eed3a2a7ebf7f2a83821db4fb5e733cffd1541b7ee5a8b2e66",
+      "outputSha256": "a0692cb1eeb02e1748003b32d82f3fb0d7abb927c42176943b98055d85baaa46",
+      "bytes": 199728
+    },
+    {
+      "name": "music-match",
+      "resource": "sounds/music/valve_cs2_01/startofmatch.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/startofmatch.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "b3971d8a9bb1a332f8fc4922022b1c0843c24bdfd018761c9f370a5508b5ead5",
+      "outputSha256": "b817a49fba845054cb557be0bf1fe752522b357b5cff999e1365f197b1894b1e",
+      "bytes": 238516
+    },
+    {
+      "name": "music-end",
+      "resource": "sounds/music/valve_cs2_01/endofmatch.vsnd_c",
+      "source": "sounds/music/valve_cs2_01/endofmatch.vsnd_c",
+      "sourcePack": "Valve CS2 default soundtrack",
+      "resourceSha256": "477a79367da7d86ae6b35f88f485661766209fc64dd67a72a52a046ee9ceb3ee",
+      "outputSha256": "1f38a4c4374471423b16a7bfbfe9787cf7af7e13c63ea37ee97aa2ae83e8a11b",
+      "bytes": 743273
+    }
+  ]
+}

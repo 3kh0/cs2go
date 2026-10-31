@@ -1,0 +1,155 @@
+{
+  "author": "Valve",
+  "build": "26144732",
+  "depot": "2347770",
+  "manifest": "67499503218971311",
+  "vpkDirectorySha256": "562972293ed7a5d40e341c4df7d6b0ee06430452694177142f0c1239dd3f2c8b",
+  "toolVersion": "Version: 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "toolSha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830",
+  "referenceResources": [
+    {
+      "resource": "panorama/layout/hud/hudalerts.vxml_c",
+      "sourceBytes": 1710,
+      "sourceSha256": "25fbb239676b1b1e89fbba6cc2fa13447fae547575fc132d13aeadf4be7a2e44",
+      "crc32Verified": true,
+      "output": "decoded/panorama/layout/hud/hudalerts.xml",
+      "outputBytes": 708,
+      "outputSha256": "97a50d2c36eb5f1c000a3e6a8215f4f08b7109f505d01a466ede9deac0fca026"
+    },
+    {
+      "resource": "panorama/layout/hud/hudhinttext.vxml_c",
+      "sourceBytes": 2073,
+      "sourceSha256": "f880382d658805da03bbf2ad9450e1049f1a34d128f345265f6608b3258e1306",
+      "crc32Verified": true,
+      "output": "decoded/panorama/layout/hud/hudhinttext.xml",
+      "outputBytes": 1120,
+      "outputSha256": "699129dce00919f72fc94944afc580630b2519b61489cc2188d53d2bc24c6e10"
+    },
+    {
+      "resource": "panorama/layout/hud/hudprogressbar.vxml_c",
+      "sourceBytes": 2284,
+      "sourceSha256": "1a4b226578fce3f7dfdb332a13cb74752bb80fad705d78c11e2a691313d70637",
+      "crc32Verified": true,
+      "output": "decoded/panorama/layout/hud/hudprogressbar.xml",
+      "outputBytes": 1478,
+      "outputSha256": "6dde61c89da5a489eadf4b1890e50e6e43317a199982a1bfabc219af4a0c517e"
+    },
+    {
+      "resource": "panorama/layout/hud/hudwinpanel.vxml_c",
+      "sourceBytes": 3675,
+      "sourceSha256": "7b6544a2c9890efe2844fc405df5fc4f77f6fe5b195d72671ff94dd59e28b26a",
+      "crc32Verified": true,
+      "output": "decoded/panorama/layout/hud/hudwinpanel.xml",
+      "outputBytes": 3711,
+      "outputSha256": "99e8f6cfd3cf32e5fac7ab56abf5d6abf0a4228671241646175bc8bb77c626eb"
+    },
+    {
+      "resource": "panorama/layout/scoreboard.vxml_c",
+      "sourceBytes": 12332,
+      "sourceSha256": "c4e47209ad9d7d4481d7ea8e81b95b90d485bc6cf00e601ff44439f5c44aa881",
+      "crc32Verified": true,
+      "output": "decoded/panorama/layout/scoreboard.xml",
+      "outputBytes": 39874,
+      "outputSha256": "fbde6c6c20b9d9a948d5c6bec58971c76d91c646ecb4db44a2d284f66deabcf8"
+    },
+    {
+      "resource": "panorama/layout/scoreboard_owner.vxml_c",
+      "sourceBytes": 1520,
+      "sourceSha256": "7d9b25b8e0ebd67ae2be6314beae6f16206e4f76a7490b6b9485ffee25c20d34",
+      "crc32Verified": true,
+      "output": "decoded/panorama/layout/scoreboard_owner.xml",
+      "outputBytes": 437,
+      "outputSha256": "728b67e37111da53dc867e64a0d4299c7bc1af932abcd5ec7d2ea50dc3201aab"
+    },
+    {
+      "resource": "panorama/scripts/hud/hudwinpanel.vts_c",
+      "sourceBytes": 50062,
+      "sourceSha256": "d72117083ce840552ea1f807d6ac04bb7bff2c53c876b6731242b2d1b7856273",
+      "crc32Verified": true,
+      "output": "decoded/panorama/scripts/hud/hudwinpanel.js",
+      "outputBytes": 49019,
+      "outputSha256": "3e82e1e56c62c79f9182442c927cca030c62dbbb3c73ea9e314e9e9e9056fc3c"
+    },
+    {
+      "resource": "panorama/scripts/hud/hudwinpanel_background_map.vts_c",
+      "sourceBytes": 37646,
+      "sourceSha256": "97f46ee537d8213d595c22afbd8122d0c5a8f0780db01168c756c721ee642a10",
+      "crc32Verified": true,
+      "output": "decoded/panorama/scripts/hud/hudwinpanel_background_map.js",
+      "outputBytes": 36584,
+      "outputSha256": "75986d85eab54494abc3aacd0ddafb4a6abb143456004c0cbfb29ac7f209c724"
+    },
+    {
+      "resource": "panorama/scripts/scoreboard.vts_c",
+      "sourceBytes": 225326,
+      "sourceSha256": "b72cbf5ca652e8ff84e4835f82251fe9e9bf403d70af643ae911e20ef72e5e1b",
+      "crc32Verified": true,
+      "output": "decoded/panorama/scripts/scoreboard.js",
+      "outputBytes": 224278,
+      "outputSha256": "2bff88966047057aebb3b9994a6a9c29c7e59e55decbacb0e01e57bcbe171966"
+    },
+    {
+      "resource": "panorama/styles/csgostyles.vcss_c",
+      "sourceBytes": 141888,
+      "sourceSha256": "eb93cad5509380266b198a38d6e69cc7812201838139bde985699c059a67af32",
+      "crc32Verified": true,
+      "output": "decoded/panorama/styles/csgostyles.css",
+      "outputBytes": 79426,
+      "outputSha256": "754138449edfb265ce1f9f05f99a09ea02b0acd6a010abf94164b3f3971a80cf"
+    },
+    {
+      "resource": "panorama/styles/hud/hudalerts.vcss_c",
+      "sourceBytes": 9584,
+      "sourceSha256": "9ac3ebf1717d17059f3d026edf3515443296919c27bba038ad7be32e9102ae1a",
+      "crc32Verified": true,
+      "output": "decoded/panorama/styles/hud/hudalerts.css",
+      "outputBytes": 4464,
+      "outputSha256": "0e333136afb6cf92bf64ad647b5e81f4fb7b9a18f25cbb22c773315f8f1aafaa"
+    },
+    {
+      "resource": "panorama/styles/hud/hudhinttext.vcss_c",
+      "sourceBytes": 8043,
+      "sourceSha256": "9981b2eed3f9464635210e35dacf6418209f392cffa1b28c970220bb95206cfc",
+      "crc32Verified": true,
+      "output": "decoded/panorama/styles/hud/hudhinttext.css",
+      "outputBytes": 3914,
+      "outputSha256": "2a03382a082367578baf5b426c43932ffb2401b481b0faf53a7ec5a12022a2c4"
+    },
+    {
+      "resource": "panorama/styles/hud/hudprogressbar.vcss_c",
+      "sourceBytes": 12481,
+      "sourceSha256": "6457e4ce1244fe445ffa476aa68108f7429a288cf11e53f29a60bc193b79eedf",
+      "crc32Verified": true,
+      "output": "decoded/panorama/styles/hud/hudprogressbar.css",
+      "outputBytes": 6206,
+      "outputSha256": "75f4a056772e5e87e71a734fe7a221c38c0de13e911740f71f0439c3baeeed42"
+    },
+    {
+      "resource": "panorama/styles/hud/hudwinpanel.vcss_c",
+      "sourceBytes": 22733,
+      "sourceSha256": "80b7422da9e29f91ef05344762906279ae9f2e02148cd2b7f38e8e4dcabe8988",
+      "crc32Verified": true,
+      "output": "decoded/panorama/styles/hud/hudwinpanel.css",
+      "outputBytes": 12169,
+      "outputSha256": "33ad923b9d7b2c55a628f5add851b6872cca8f7072ed8d805564405e0f4f1c0d"
+    },
+    {
+      "resource": "panorama/styles/hud/hudwinpanel_roundimpactscore.vcss_c",
+      "sourceBytes": 23848,
+      "sourceSha256": "26c38dfb1664a4a133ebb8d0e909c65361c4c4bb5bcafee34b0cda8090f6115c",
+      "crc32Verified": true,
+      "output": "decoded/panorama/styles/hud/hudwinpanel_roundimpactscore.css",
+      "outputBytes": 11728,
+      "outputSha256": "5c27be3ae5d2b3c9d01f164736dbec623c14599a6d7f78594723e16849d55863"
+    },
+    {
+      "resource": "panorama/styles/scoreboard.vcss_c",
+      "sourceBytes": 50893,
+      "sourceSha256": "99dae05612bb1ad70588e15efc5bdbdbc92bd00b5873f05ff4cacdb653531c2b",
+      "crc32Verified": true,
+      "output": "decoded/panorama/styles/scoreboard.css",
+      "outputBytes": 31005,
+      "outputSha256": "33521daaa8ca3461c9b40abe763591566bb3aa7ae575fce47129186696d05941"
+    }
+  ]
+}

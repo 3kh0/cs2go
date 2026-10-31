@@ -1,0 +1,201 @@
+/* Panorama mainmenu-content__container + settings row layout. */
+#settings {
+  inset: clamp(48px, 6vh, 68px) 0 0;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #000000bf;
+  backdrop-filter: blur(16px);
+}
+#settings::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url(/ui/match/bluedots.png) repeat;
+  opacity: 0.01;
+  pointer-events: none;
+}
+#settings .dialog.settings {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  padding: 24px max(32px, calc((100vw - 1280px) / 2)) 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  overflow: hidden;
+  color: #ccc;
+}
+#settings .dialog-heading {
+  align-items: center;
+}
+#settings .eyebrow {
+  display: none;
+}
+#settings h2 {
+  margin: 0 0 16px;
+  font:
+    500 32px "Stratum2",
+    sans-serif;
+}
+#settings .settings-tabs {
+  flex: 0 0 auto;
+  justify-content: flex-start;
+  gap: 32px;
+  margin-bottom: 0;
+  border-color: #ffffff18;
+}
+#settings .settings-tabs button {
+  flex: 0 0 auto;
+  font:
+    400 22px "Stratum2",
+    sans-serif;
+  text-transform: none;
+  color: #ccc;
+  padding: 14px 4px;
+}
+#settings .settings-tabs button[aria-selected="true"] {
+  color: white;
+  box-shadow: inset 0 -3px white;
+}
+#settings .settings-panel {
+  min-height: 0;
+  overflow: auto;
+  flex: 1;
+  padding: 30px max(12px, calc((100% - 946px) / 2)) 64px;
+}
+#settings .settings-panel[hidden] {
+  display: none;
+}
+#settings .settings-section-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #eee;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ffffff20;
+}
+#settings .settings-panel > label {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  gap: 18px;
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #ccc;
+}
+#settings .settings-panel > label:hover {
+  background: #ffffff08;
+}
+#settings .settings-panel > label > input[type="range"] {
+  order: 1;
+  width: 25.5%;
+  margin: 0 0 0 auto;
+  accent-color: #b5d4ee;
+}
+#settings .settings-panel > label > output {
+  order: 2;
+  flex: 0 0 80px;
+  float: none;
+  text-align: center;
+  color: #ccc;
+  font:
+    700 20px "Stratum2",
+    sans-serif;
+  border: 2px solid #cccccc15;
+  border-radius: 2px;
+  padding: 4px;
+}
+#settings select {
+  margin-left: auto;
+  min-width: 260px;
+  max-width: 55%;
+  font-size: 17px;
+  background: #141c27;
+  color: #ccc;
+  border: 0;
+  padding: 8px 12px;
+}
+#settings .toggle-label input,
+#settings input[type="color"] {
+  margin-left: auto;
+}
+#settings .toggle-label small {
+  font-size: 13px;
+  color: #999;
+}
+#settings .hint {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+}
+#settings .controls {
+  display: none;
+}
+#settings .secondary {
+  width: auto;
+  font-size: 15px;
+}
+#settings .crosshair-preview-stage {
+  height: 170px;
+  background: #141c2780;
+}
+#settings .key-bindings {
+  grid-template-columns: 1fr 1fr;
+}
+#settings .key-bindings label {
+  font-size: 16px;
+}
+@media (max-width: 720px) {
+  #settings .dialog.settings {
+    padding-inline: 16px;
+  }
+  #settings .settings-tabs {
+    gap: 14px;
+    overflow-x: auto;
+  }
+  #settings .settings-tabs button {
+    font-size: 18px;
+  }
+  #settings .settings-panel {
+    padding-inline: 0;
+  }
+  #settings .settings-panel > label {
+    font-size: 15px;
+    gap: 8px;
+  }
+  #settings select {
+    min-width: 0;
+    max-width: 50%;
+    font-size: 14px;
+  }
+  #settings .settings-panel > label > output {
+    flex-basis: 54px;
+    font-size: 16px;
+  }
+}
+
+body:has(#menu.hidden) #settings {
+  inset: 0;
+}
+#settings .key-bindings button {
+  min-width: 120px;
+  padding: 7px 12px;
+  border: 1px solid #cccccc26;
+  border-radius: 2px;
+  background: #ffffff0d;
+  color: #ccc;
+  font:
+    400 17px "Stratum2",
+    sans-serif;
+}
+#settings .key-bindings button:hover,
+#settings .key-bindings button:focus-visible {
+  background: #141c27;
+  color: white;
+}

@@ -1,0 +1,24 @@
+{
+  "source": {
+    "depot": 2347770,
+    "manifest": "4758919807587010422",
+    "generator": "scripts/import-world-ball.py",
+    "decoder": "Source2Viewer 20",
+    "resources": {
+      "models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.vmdl_c": "72b149b94058ae4955cb82c87901c5027d29bfb32596fe751630a5be1f8018d2",
+      "surfaceproperties/surfaceproperties.vsurf_c": "c016cb447cc801660475c82bc21b7ac943bfcf9c75d52a92d88daf6b5decf912"
+    }
+  },
+  "sphereRadiusSource": 7.9,
+  "mass": 1.0,
+  "linearDamping": 0.0,
+  "angularDamping": 1.0,
+  "surface": {
+    "name": "soccerball",
+    "hash": 2367662767,
+    "density": 900.0,
+    "elasticity": 0.25,
+    "friction": 0.8,
+    "dampening": 0.0
+  }
+}

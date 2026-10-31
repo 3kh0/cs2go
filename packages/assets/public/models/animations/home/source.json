@@ -1,0 +1,38 @@
+{
+  "author": "Valve",
+  "source": "Native CS2 homepage idle clips extracted from the user's installed game on Windows",
+  "build": "26144732",
+  "depot": "2347770",
+  "depotManifest": "67499503218971311",
+  "decoder": "Source2Viewer 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "nativeResources": [
+    {
+      "path": "native/animation/anims/ui_anims/main_menu/t/t_main_menu_rifle02_idle.vnmclip_c",
+      "bytes": 40228,
+      "sha256": "9df84ddd6132b7262e19d07da80d8e958ee61e69802822be74e2157e11ba5cf2"
+    },
+    {
+      "path": "native/animation/anims/ui_anims/main_menu/ct/ct_main_menu_rifle_idle_handrepo_m4.vnmclip_c",
+      "bytes": 98405,
+      "sha256": "0c12bb3417399755e0a141ac0138342e6e183d72d64efc29e629432c2d41f802"
+    }
+  ],
+  "generator": "bun scripts/import-buy-poses.mjs",
+  "inputs": [
+    {
+      "url": "https://cs2.cs2inspects.com/data/agentanims/world/rifle/_default_rifle.glb",
+      "sha256": "8ab1645ff996a7469a6e1dc802e1d19dca103272b3d641efb3d16110e2822ff5",
+      "bytes": 966580
+    },
+    {
+      "target": "public/models/agents/ground-rebel-native.glb",
+      "sha256": "3ea2077cbced126f9aad79166a9d0bbbfb0462243a53e1d11d26fbdbeb1d6bc4"
+    },
+    {
+      "target": "public/models/agents/idf.glb",
+      "sha256": "1c134938bece73608596af01b60993e1b84cb38a5a6f03dcac1112bfc9241bcb"
+    }
+  ],
+  "processing": "All nonnegative native homepage idle samples;  Source inches converted to meters, Z up to Y up; world-space rotations calibrated to each bundled agent rifle reference. Source wpn attachment retained relative to retargeted right hand, without weapon bounding-box placement.",
+  "limitations": "IDF retargeting retains its Source 1 proportions. Native graph idle layering and SnapWeapon graph evaluation are not reproduced. Static scale channels are restored from the compiled clips; native root vertical motion is verified as zero. Clips loop at their decoded final key; final native graph sequencing is not reproduced. This is not a capture of the final game UI graph."
+}

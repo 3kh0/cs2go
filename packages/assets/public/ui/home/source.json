@@ -1,0 +1,65 @@
+{
+  "author": "Valve",
+  "build": "26144732",
+  "depotManifest": "67499503218971311",
+  "generator": "scripts/import-home-media.py",
+  "processing": "Native SVG geometry retained; XML declarations/DTDs/comments removed. Native screenshot encoded as WebP; navbar texture lossless PNG.",
+  "files": [
+    {
+      "resource": "panorama/images/icons/ui/home.vsvg_c",
+      "sourceSha256": "33675d0c0c8ac45a5c34c9d894e25fbba1c4704e39378d406d9af905d03a256e",
+      "outputSha256": "47000d2e2d5fb42414870c1399a8a27987178f694d9c2128f79015c73f10765a",
+      "file": "home.svg",
+      "sha256": "ad42526ec730a9c5fc1c15c5bbda0cba6127255452c2be4b3517eeae45e8094f",
+      "bytes": 347
+    },
+    {
+      "resource": "panorama/images/icons/ui/watch_tv.vsvg_c",
+      "sourceSha256": "a04c806c9063934d298995ff1cc8b6b6d13d3de561a2faa521a230f65a6e188e",
+      "outputSha256": "bf0e21410b1b8e78f2a1eb11ef5d5f290fe2bb9c38284ca47d2209204d6c3e77",
+      "file": "watch_tv.svg",
+      "sha256": "5808e89d307d2b493094ffccb37276e229173aca792055c06efa7f97f023b9bd",
+      "bytes": 1256
+    },
+    {
+      "resource": "panorama/images/icons/ui/settings.vsvg_c",
+      "sourceSha256": "5ab59f4258232ab463327b7c014eb803eaab5d8eb32a75869c2e38153c9dc72b",
+      "outputSha256": "65fa15b1aa8b5b318c4a7bebc52190021cebe5c8844baa0f4e1406a912254f28",
+      "file": "settings.svg",
+      "sha256": "10b2eb84a1502451edadd860dcdca9121a960968d3e9831a73b4e0a5d94b1295",
+      "bytes": 704
+    },
+    {
+      "resource": "panorama/images/icons/ui/power.vsvg_c",
+      "sourceSha256": "ab1095067c9d69937d642dd3b31441701ff1a0c0902d7bd9c118476632ec2135",
+      "outputSha256": "d444b5944776fd621dd85b885583de502e6ba3f5481ee5abf5e429794b00cfc2",
+      "file": "power.svg",
+      "sha256": "1307bb2b72a54c538310741f6567882b482edbcca31794b3fd099689874b5ec2",
+      "bytes": 653
+    },
+    {
+      "resource": "panorama/images/map_icons/screenshots/720p/de_dust2_png.vtex_c",
+      "sourceSha256": "c7af24ad14459e96edcdfb11321b102e4623f69b404f3a610960f6e1cb62372b",
+      "outputSha256": "66ff2d8bc5a780c20fcf58f7eb1d5fa905ad88849666dcb757e4fa1a862b2d0b",
+      "file": "dust2.webp",
+      "sha256": "fec0412791801e053ff33788bfe707acc12b19f0d2aeb1862d02bcd8ddd69e3f",
+      "bytes": 177008
+    },
+    {
+      "resource": "panorama/images/backgrounds/linemap_png.vtex_c",
+      "sourceSha256": "78ee23353b00786aeca4879735ac04224d58a74dcdcf1ffdc71b118e705a2448",
+      "outputSha256": "75cafa606ea4ccd1c14ff0df32d9e99c01433b5ef0587bd3cf3600f244122cad",
+      "file": "linemap.png",
+      "sha256": "cbbe86cc4da39b2ca3365c97b68d054e9951e26830c31d50af0517136d46302a",
+      "bytes": 133470
+    },
+    {
+      "resource": "panorama/images/icons/ui/settings_sliders.vsvg_c",
+      "sourceSha256": "ba8746a25edde92880d1a4378b82aa8ff3e12f6bf7ab2573049398f4017d43c9",
+      "outputSha256": "11386e6e21ef7489dc45bbe193fcd082219b04369be4420d748abd821563e57a",
+      "file": "settings_sliders.svg",
+      "sha256": "11386e6e21ef7489dc45bbe193fcd082219b04369be4420d748abd821563e57a",
+      "bytes": 2223
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "generator": "python3 scripts/import-suppressors.py",
+  "clips": [
+    {
+      "weapon": "m4a1_s",
+      "action": "silencer_attach",
+      "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/anims/m4a1_silencer/silencer_attach_rifle.glb",
+      "sha256": "0cb70ddae4bbdd162d0fd06db4adb813a7e570e937efa6db9fa1bdd6d771340a"
+    },
+    {
+      "weapon": "m4a1_s",
+      "action": "silencer_detach",
+      "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/anims/m4a1_silencer/silencer_detach_rifle.glb",
+      "sha256": "304dbed9a42823a41b31a1afee583e6c148f3bf9af2565a2b0200115d35f7b33"
+    },
+    {
+      "weapon": "usp-s",
+      "action": "silencer_attach",
+      "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/anims/usp_silencer/silencer_attach_pistol.glb",
+      "sha256": "1ddd756a0beebb72732a86b1877f542a64baf775ec3d4cbc605e778ad9962995"
+    },
+    {
+      "weapon": "usp-s",
+      "action": "silencer_detach",
+      "url": "https://cdn.csgoskins.gg/public/images/objects/v6/static/assets/weapons/anims/usp_silencer/silencer_detach_pistol.glb",
+      "sha256": "5a2cd8a178d1a72677529308c94facf6cd7a10db4bc70cab7ee03d5016dfe92c"
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+#scoreboard {
+  --sb-unit: min(1px, 0.092593vh);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(960 * var(--sb-unit));
+  max-width: 96vw;
+  max-height: 92vh;
+  padding: calc(20 * var(--sb-unit));
+  overflow: auto;
+  border: 0;
+  border-radius: 5px;
+  background: #000000e0;
+  color: #ccc;
+  font-family: "Stratum2", sans-serif;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 8px 35px #0003;
+  isolation: isolate;
+}
+#scoreboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url(/ui/match/bluedots.png) center / 360px;
+  opacity: 0.015;
+  pointer-events: none;
+}
+.scoreboard-title {
+  height: calc(40 * var(--sb-unit));
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff14;
+}
+.scoreboard-title h2 {
+  margin: 0;
+  font-family: "Stratum2 Condensed", sans-serif;
+  font-size: calc(25 * var(--sb-unit));
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #ccc;
+}
+#scoreboard-clock {
+  font-family: "Stratum2 Monodigit", sans-serif;
+  font-size: calc(24 * var(--sb-unit));
+}
+#scoreboard-summary {
+  display: flex;
+  align-items: center;
+  min-height: calc(35 * var(--sb-unit));
+  color: #929292;
+  font-size: calc(15 * var(--sb-unit));
+}
+.score-team {
+  --team: #b5d4ee;
+  display: grid;
+  grid-template-columns: calc(80 * var(--sb-unit)) minmax(0, 1fr);
+  gap: calc(10 * var(--sb-unit));
+  color: var(--team);
+}
+.score-team.t {
+  --team: #ead18a;
+}
+.score-team-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.team-score {
+  position: relative;
+  isolation: isolate;
+  width: calc(80 * var(--sb-unit));
+  height: calc(80 * var(--sb-unit));
+  display: grid;
+  place-items: center;
+  font-family: "Stratum2", sans-serif;
+  font-size: calc(70 * var(--sb-unit));
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 2px 2px 3px #0008;
+}
+.team-score::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: currentColor;
+  mask: url(/ui/match/ct.svg) center / contain no-repeat;
+  opacity: 0.2;
+}
+.t .team-score::before {
+  mask-image: url(/ui/match/t.svg);
+}
+.team-name {
+  margin: calc(4 * var(--sb-unit)) 0;
+  font-family: "Stratum2 Condensed", sans-serif;
+  font-weight: 400;
+  font-size: calc(18 * var(--sb-unit));
+  line-height: 1;
+}
+.team-alive {
+  font-size: calc(12 * var(--sb-unit));
+  opacity: 0.5;
+}
+.scoreboard-head,
+.score-row {
+  display: grid;
+  grid-template-columns: calc(24 * var(--sb-unit)) calc(24 * var(--sb-unit)) minmax(0, 1fr) calc(
+      66 * var(--sb-unit)
+    ) calc(160 * var(--sb-unit)) repeat(4, calc(50 * var(--sb-unit)));
+  gap: 0;
+  align-items: center;
+}
+.scoreboard-head {
+  height: calc(28 * var(--sb-unit));
+  font-size: calc(16 * var(--sb-unit));
+  color: #aaa;
+}
+.scoreboard-head > span {
+  text-align: center;
+}
+.scoreboard-head > :nth-child(3) {
+  text-align: left;
+  padding-left: calc(6 * var(--sb-unit));
+}
+.score-row {
+  min-height: calc(24 * var(--sb-unit));
+  margin-block: calc(1 * var(--sb-unit));
+  font-size: calc(18 * var(--sb-unit));
+}
+.score-row > span {
+  height: calc(24 * var(--sb-unit));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff08;
+  min-width: 0;
+}
+.score-row > :nth-child(-n + 3) {
+  background: #ffffff05;
+}
+.score-row > .score-player {
+  justify-content: flex-start;
+  gap: calc(6 * var(--sb-unit));
+  padding-inline: calc(6 * var(--sb-unit));
+  overflow: hidden;
+  white-space: nowrap;
+}
+.score-row.you {
+  background: #00a6ff12;
+}
+.t .score-row.you {
+  background: #ffee0012;
+}
+.score-row.dead {
+  color: #999;
+}
+.score-row.dead > span {
+  background: transparent;
+}
+.score-avatar img {
+  width: calc(22 * var(--sb-unit));
+  height: calc(22 * var(--sb-unit));
+  padding: 2px;
+  background: #ffffff0a;
+}
+.score-life img,
+.score-bot {
+  height: calc(16 * var(--sb-unit));
+  width: calc(16 * var(--sb-unit));
+  opacity: 0.7;
+  object-fit: contain;
+}
+.score-bomb {
+  width: calc(16 * var(--sb-unit));
+  height: calc(20 * var(--sb-unit));
+  margin-left: auto;
+  object-fit: contain;
+}
+.score-cash {
+  color: #9cbd83;
+  font-family: "Stratum2 Monodigit", sans-serif;
+  font-size: calc(16 * var(--sb-unit));
+}
+.score-equipment {
+  gap: calc(5 * var(--sb-unit));
+  padding: calc(3 * var(--sb-unit));
+}
+.score-weapon {
+  width: calc(90 * var(--sb-unit));
+  height: calc(18 * var(--sb-unit));
+  object-fit: contain;
+}
+.score-gear {
+  width: calc(16 * var(--sb-unit));
+  height: calc(18 * var(--sb-unit));
+  object-fit: contain;
+  opacity: 0.65;
+}
+.score-mvps {
+  position: relative;
+  gap: 2px;
+}
+.score-mvps img {
+  width: calc(16 * var(--sb-unit));
+  height: calc(16 * var(--sb-unit));
+}
+.score-mvps > span {
+  align-self: flex-start;
+  font-size: calc(10 * var(--sb-unit));
+}
+.score-progress {
+  margin: calc(16 * var(--sb-unit)) 0 calc(8 * var(--sb-unit)) calc(90 * var(--sb-unit));
+  padding: calc(6 * var(--sb-unit)) 0;
+  border-block: 1px solid #ffffff10;
+}
+.round-slots {
+  display: grid;
+  grid-template-columns: repeat(var(--rounds), minmax(0, 1fr));
+  gap: calc(3 * var(--sb-unit));
+}
+.round-slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: calc(42 * var(--sb-unit));
+  color: #ffffff35;
+  border-top: calc(2 * var(--sb-unit)) solid #ffffff20;
+}
+.round-slot.ct {
+  color: #b5d4ee;
+  border-color: #b5d4ee;
+}
+.round-slot.t {
+  color: #ead18a;
+  border-color: #ead18a;
+}
+.round-slot.current {
+  color: white;
+  border-color: white;
+  background: #ffffff08;
+}
+.round-slot img {
+  width: calc(16 * var(--sb-unit));
+  height: calc(17 * var(--sb-unit));
+  object-fit: contain;
+  margin-bottom: calc(3 * var(--sb-unit));
+}
+.round-number {
+  font-size: calc(10 * var(--sb-unit));
+}
+.round-slot.halftime::before {
+  content: "";
+  position: absolute;
+  left: calc(-3 * var(--sb-unit));
+  height: 100%;
+  border-left: 1px solid #ffffff40;
+}
+#scoreboard > small {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: calc(40 * var(--sb-unit));
+  margin: 0;
+  color: #ffffff50;
+  font-size: calc(12 * var(--sb-unit));
+  letter-spacing: 0;
+}

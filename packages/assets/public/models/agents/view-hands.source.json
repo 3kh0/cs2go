@@ -1,0 +1,51 @@
+{
+  "source": "User-supplied Phoenix first-person gloves, bare arms and sleeves",
+  "inputs": [
+    {
+      "file": "mesh (1).glb",
+      "sha256": "0af3a1fecd9ca5f5175411fd72a3ee79cb6db2be919f90fb9cc7366dab95a660"
+    },
+    {
+      "file": "codex-clipboard-SQ7B2D.png",
+      "sha256": "c5d1b7a6786953af6775c5ef328f3256fb77b43e8273b9196abea667b0e60975"
+    },
+    {
+      "file": "codex-clipboard-ISH2Zf.png",
+      "sha256": "ee0665d5f134cd399a775a31b5dfba78cbf1991c35f9c9f9f8c72f1165f67cc3"
+    },
+    {
+      "file": "codex-clipboard-gt68s5.png",
+      "sha256": "1cb783613e383f4601e1ad87d6b12f043b6d8cf6bc12ec6ccb5710783819a7a5"
+    },
+    {
+      "file": "codex-clipboard-N7u7EO.png",
+      "sha256": "38746ca6d6ee38f23b704b6fa434756efe859037dfd8a465caeaa99a8e5478ab"
+    },
+    {
+      "file": "codex-clipboard-iFCMwv.png",
+      "sha256": "63b3b0f1ca428e1d2fede0fc931ab31e013115f81724dc4b9ca2fdcdc1205f0e"
+    },
+    {
+      "file": "codex-clipboard-xJ8rpe.png",
+      "sha256": "06d1610b5c2e86136789efbdcc8652a9d6e6aac00e7674e8edf6f5cd57735425"
+    },
+    {
+      "file": "codex-clipboard-Sj6ucr.png",
+      "sha256": "2caa2f9c4822091a5352f000a8bb3ef92f29688f58fef500285ac3718edede94"
+    },
+    {
+      "file": "codex-clipboard-ygfj06.png",
+      "sha256": "c72abb0f71c1ea1d7a5a0dce85922778fcd9d11b809e0a2f5742a2bbf11cf9d3"
+    },
+    {
+      "file": "codex-clipboard-XUvZ7G.png",
+      "sha256": "a67c5a602612ebeeacf680810e57cf66815f235d1f023590cc779076a78cf4fe"
+    },
+    {
+      "file": "codex-clipboard-LAXWXS.png",
+      "sha256": "1fa4753718f473db512881f01c0b35f8197439244038ca3f628f5ddc7072b632"
+    }
+  ],
+  "normals": "Source 2 hemi-octahedral RG decoded to XYZ; blue used as roughness; metal mask green channel.",
+  "generator": "scripts/import-view-hands.py"
+}

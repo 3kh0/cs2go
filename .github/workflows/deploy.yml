@@ -1,0 +1,105 @@
+name: Publish assets and deploy game
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: production-release
+  cancel-in-progress: false
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      assets: ${{ steps.diff.outputs.assets }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          sparse-checkout: .github
+      - id: diff
+        env:
+          BEFORE: ${{ github.event.before }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = workflow_dispatch ] || [ "$BEFORE" = 0000000000000000000000000000000000000000 ]; then
+            echo 'assets=true' >> "$GITHUB_OUTPUT"
+          elif ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            echo 'assets=true' >> "$GITHUB_OUTPUT"
+          elif git diff --name-only "$BEFORE" HEAD -- packages/assets .github/workflows/deploy.yml | grep -q .; then
+            echo 'assets=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'assets=false' >> "$GITHUB_OUTPUT"
+          fi
+  assets:
+    needs: changes
+    if: needs.changes.outputs.assets == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            packages/assets
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: packages/assets/.cache
+          key: asset-compression-${{ runner.os }}-${{ hashFiles('packages/assets/manifest.json') }}
+          restore-keys: asset-compression-${{ runner.os }}-
+      # No JS dependency installation or app build is needed for asset verification.
+      - run: bun run assets:verify
+      - run: python -m pip install boto3==1.40.61
+      - run: python packages/assets/sync_test.py
+      - run: bun run assets:sync
+        env:
+          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+  deploy:
+    needs: [changes, assets]
+    if: always() && !cancelled() && needs.changes.result == 'success' && (needs.assets.result == 'success' || needs.assets.result == 'skipped')
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      ASSET_CDN_URL: ${{ vars.ASSET_CDN_URL }}
+    steps:
+      # Code-only deployments never check out the 3.1 GB public tree.
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /apps/
+            /scripts/
+            /package.json
+            /bun.lock
+            /bunfig.toml
+            /turbo.json
+            /packages/assets/package.json
+            /packages/assets/manifest.json
+            /packages/assets/pipeline.mjs
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - run: |
+          test -n "$VERCEL_TOKEN" && test -n "$VERCEL_ORG_ID" && test -n "$VERCEL_PROJECT_ID" && test -n "$ASSET_CDN_URL" || {
+            echo 'Configure Vercel and R2 repository variables/secrets; see docs/deployment.md.'
+            exit 1
+          }
+      - run: bun install --frozen-lockfile
+      - uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-${{ runner.os }}-
+      - run: bunx --bun vercel@65.8.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
+      - run: bunx --bun vercel@65.8.0 build --prod --token="$VERCEL_TOKEN"
+      - run: bunx --bun vercel@65.8.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"

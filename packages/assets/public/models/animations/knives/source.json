@@ -1,0 +1,31 @@
+{
+  "viewer": "https://cs2inspects.com/3d-viewer",
+  "generator": "scripts/import-inspects-knives.py",
+  "processing": "Original mesh, skeleton and animation tracks; vanilla color and R roughness/G metalness repacked to glTF. Neutral normal and AO omitted.",
+  "inputs": [
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_butterfly/weapon_knife_butterfly.glb",
+      "sha256": "756a4b7c45e52f94ad9e5e5f3a9568fab086681d4c710ae73a2c3cc9dcc27c01"
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_butterfly/knife_butterfly_color_psd_5a5a48d7.avif",
+      "sha256": "1999fc337789a8e1086f30be80be3632aef4b1e9813979dcaeca360ef1399e72"
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_butterfly/knife_butterfly_rough_psd_80f06397.avif",
+      "sha256": "f7be88ee0ea28042b938faab5f70bcdb1c23cd179e6b49eaf42568cff75125e2"
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_karambit/weapon_knife_karambit.glb",
+      "sha256": "5c1d04fedf2485ea4f9721b4ebe763ff4749af585d268f8a44e4190acfbb6712"
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_karam/karam_color_psd_fd5024ca.avif",
+      "sha256": "ba567a141589a1de974a99cf989680378656e6f6d877baaa609404653f2902f6"
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_karam/karam_rough_psd_b223c31d.avif",
+      "sha256": "36ca5322eb846d208fcd6a770764028151298ac867cf0ea0276b781530389a85"
+    }
+  ]
+}

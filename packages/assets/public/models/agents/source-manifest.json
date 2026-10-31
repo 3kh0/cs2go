@@ -1,0 +1,1666 @@
+{
+  "originalAuthor": "Valve",
+  "groundRebel": {
+    "model": "agents/models/tm_leet/tm_leet_variantg.vmdl_c",
+    "mirror": "https://assets.cs.money/skin-viewer/cs2/native-vtex/vpk/",
+    "gameVersion": "25000182",
+    "resources": {
+      "animation/anims/world/rifle/_default_rifle/run_n_rifle.vnmclip_c": {
+        "version": "b8a4e2ee",
+        "bytes": 8356,
+        "kind": "vnmclip_c",
+        "sha256": "99b3c6612c8b7bcc6931719baedc591e02a54b11d3049b87ae387dba46f2ff2a"
+      },
+      "animation/skeletons/characters/worldmodel.vnmskel_c": {
+        "version": "7b7b14b0",
+        "bytes": 7456,
+        "kind": "vnmskel_c",
+        "sha256": "f39c55b85529d627aa653744ea6e6e23d8addb396f1faa2119fbfdc8d6663e0b"
+      },
+      "animation/skeletons/weapons/elite.vnmskel_c": {
+        "version": "d4705adf",
+        "bytes": 1912,
+        "kind": "vnmskel_c",
+        "sha256": "5053af3cc7d13a6ba0ccafe9bd3ed8bf2a77fe6aaf1cc98936a96198ecf44da1"
+      },
+      "animation/anims/world/rifle/_default_rifle/walk_w_rifle.vnmclip_c": {
+        "version": "b54b5437",
+        "bytes": 9633,
+        "kind": "vnmclip_c",
+        "sha256": "87f060cfa80c6664f962d8daaf8e7c37c800fb94facf5b33faae61536f1469f2"
+      },
+      "animation/anims/world/rifle/_default_rifle/walk_e_rifle.vnmclip_c": {
+        "version": "b822fbaa",
+        "bytes": 9728,
+        "kind": "vnmclip_c",
+        "sha256": "0a65cab44e4509f73bf9eaf67dc71e43b7f71a30a1903da94f459e89fe2c0fc9"
+      },
+      "animation/anims/world/rifle/_default_rifle/walk_s_rifle.vnmclip_c": {
+        "version": "b491d559",
+        "bytes": 10226,
+        "kind": "vnmclip_c",
+        "sha256": "b2a953b615cfb77ee65cef995d61129d4eb916eff3db076715dc89da2372eef5"
+      },
+      "animation/anims/world/rifle/_default_rifle/walk_n_rifle.vnmclip_c": {
+        "version": "27cb2006",
+        "bytes": 9653,
+        "kind": "vnmclip_c",
+        "sha256": "942546a206f7f859cf5cdf92cc9f8fe186c5e02bb1132e710a2edd5b15d9617b"
+      },
+      "animation/anims/world/rifle/_default_rifle/idle_rifle.vnmclip_c": {
+        "version": "62b9c5fd",
+        "bytes": 4526,
+        "kind": "vnmclip_c",
+        "sha256": "e89472fc0383d3476cf11f5a298da507cb60ee35bcde2724705de69b0877d131"
+      },
+      "agents/models/tm_leet/tm_leet_variantg.vmdl_c": {
+        "version": "8f352717",
+        "bytes": 610399,
+        "kind": "vmdl_c",
+        "sha256": "0c3e5feeb8b5899f9ecfbfd850bb95e1afd0e9d9d02679d8e7472736fec13583"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_shemagh_variantg.vmat_c": {
+        "version": "44886a22",
+        "bytes": 4848,
+        "kind": "vmat_c",
+        "sha256": "19fb7bb11e5a86a9e78ffaf29d807ff84cbbff569599061cf46366f40cf4fc31"
+      },
+      "materials/default/default_black_mask_tga_77728888.vtex_c": {
+        "version": "4adb2597",
+        "bytes": 2228,
+        "kind": "vtex_c",
+        "sha256": "76a9eb7a968d4c67d4758eeb5b50486e0419a45872ae4808799c18bc1849752a"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_shemagh_variantg_color_psd_3f622e5b.vtex_c": {
+        "version": "c6cea0a1",
+        "bytes": 1254957,
+        "kind": "vtex_c",
+        "sha256": "d13184dacf0f7cae34f2953a52512629940b1c7e7436325f686ef85d33f30daf"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_shemagh_variantd_metal_psd_3a3f2dd.vtex_c": {
+        "version": "bc8b93fc",
+        "bytes": 33661,
+        "kind": "vtex_c",
+        "sha256": "50e0033cc87581257f367e5557eae0b130d622c3d3487177aba36723655b87dc"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_shemagh_variantd_ao_psd_3e81ca5d.vtex_c": {
+        "version": "d60e82e3",
+        "bytes": 602238,
+        "kind": "vtex_c",
+        "sha256": "d5d386ad006510e3d4c76e8e27e4ab30d14d5606a6f57417fd51aa6574c855ed"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_shemagh_normal_psd_7146eb94.vtex_c": {
+        "version": "1f2f1e7b",
+        "bytes": 1260644,
+        "kind": "vtex_c",
+        "sha256": "fcc29d80e3816d914f5a3fb53a578050c8017d057594521a2d4ad42c04fe2794"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_lower_body_variantg.vmat_c": {
+        "version": "196853a2",
+        "bytes": 4656,
+        "kind": "vmat_c",
+        "sha256": "b951276951772d0bf28f51c109bd4f55b5dc43a845653f58bcfa3bc6f567d193"
+      },
+      "materials/default/default_mask_tga_6201fa36.vtex_c": {
+        "version": "926c5a12",
+        "bytes": 2232,
+        "kind": "vtex_c",
+        "sha256": "c751ba368a4987c469a54fb70ffce68ce17e86558dc6872680b6a1ec1ecdb4ca"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_lower_body_variantg_color_psd_103c1bbc.vtex_c": {
+        "version": "88a1993e",
+        "bytes": 590382,
+        "kind": "vtex_c",
+        "sha256": "648d03c7e73ef1c5dc229b277c10806a7a8c360189beb17d360ac0a40d2ca3d6"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_lower_body_varianta_normal_psd_6a03c69b.vtex_c": {
+        "version": "912fdf85",
+        "bytes": 1344763,
+        "kind": "vtex_c",
+        "sha256": "90eb7f986b2553457eae58b1559812a410821d67d0f0ce623d1479c614f5872b"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_lower_body_varianta_ao_psd_4b65ec27.vtex_c": {
+        "version": "f7c3c9cb",
+        "bytes": 453824,
+        "kind": "vtex_c",
+        "sha256": "5f4aaf263653e739ae78f4d580392d1f3485c7107a3e3dfdbd0018381642bc76"
+      },
+      "characters/models/tm_leet/materials/tm_leet_lowerbody_varianta_metal_psd_31e000fe.vtex_c": {
+        "version": "f687f019",
+        "bytes": 101262,
+        "kind": "vtex_c",
+        "sha256": "1f54c023bcf18c0af77f2a08ac6fde585f0c48b0f503255c9bf4f10db690ec55"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_body_variantg.vmat_c": {
+        "version": "83c45b64",
+        "bytes": 5360,
+        "kind": "vmat_c",
+        "sha256": "241e254182c5ac1642252a13fcdbfe469ff7ccfa8bbb7b922bc534e4e1ee02ba"
+      },
+      "patches/default/patch_backing_yellowcloth_psd_4c41d341.vtex_c": {
+        "version": "8e307759",
+        "bytes": 307898,
+        "kind": "vtex_c",
+        "sha256": "070339c882dbfb1e6b40f15eea686896fa8da021d96f2a1a8df3907c6814de8c"
+      },
+      "patches/case01/patch_teamstitch_t_psd_6bd2e303.vtex_c": {
+        "version": "3ebe2d40",
+        "bytes": 281071,
+        "kind": "vtex_c",
+        "sha256": "bf5b37881507964d47eee45b2e96709f9686b97d66b82f2053f40e6cd2775d1f"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_body_variantg_normal_psd_c9f36c86.vtex_c": {
+        "version": "1ccc285c",
+        "bytes": 5202190,
+        "kind": "vtex_c",
+        "sha256": "096b880a8d3379b0ae28637b45023ef6d015bd1c08ad247568cb2a19b52d64da"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_body_variantg_color_psd_9d2961d5.vtex_c": {
+        "version": "2aa26842",
+        "bytes": 2266235,
+        "kind": "vtex_c",
+        "sha256": "857ae36dce228a0351a00570970f0e1804337fd4559ad92d5ab5eb572c258d31"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_body_variantf_metal_psd_e7fb6c0e.vtex_c": {
+        "version": "2376b362",
+        "bytes": 496930,
+        "kind": "vtex_c",
+        "sha256": "cd7acfba4af2862206a3da6d64a90ec59e03d6d70b220573af7a1c335d26ae39"
+      },
+      "characters/models/tm_leet/materials/tm_leet_v2_body_variantb_ao_psd_beaf9153.vtex_c": {
+        "version": "bd9a92cc",
+        "bytes": 1833960,
+        "kind": "vtex_c",
+        "sha256": "76ff98b28b0e6d22c54989c0ef5551120bc741475f445561a96efc0584117280"
+      },
+      "characters/models/shared/arms/glove_fingerless/materials/glove_fingerless.vmat_c": {
+        "version": "9277a1d6",
+        "bytes": 4207,
+        "kind": "vmat_c",
+        "sha256": "3de8cd1718de78dbc9f7f8fa6d8657bd098e56270104a8201e6dbce36512090e"
+      },
+      "materials/default/default_metal_tga_dbfb4d6e.vtex_c": {
+        "version": "f996f9dd",
+        "bytes": 2560,
+        "kind": "vtex_c",
+        "sha256": "f5bfb8b944db40f30a02fb7fbbff94d406d352515b4dddffac223bb82747ecc4"
+      },
+      "characters/models/shared/arms/glove_fingerless/materials/glove_fingerless_normal_tga_5acd72d3.vtex_c": {
+        "version": "8c919c09",
+        "bytes": 4881406,
+        "kind": "vtex_c",
+        "sha256": "e3c342e2eb324e92914c16e3ea7427e39facfc864b4ea895a9121e417d062502"
+      },
+      "characters/models/shared/arms/glove_fingerless/materials/glove_fingerless_color_psd_19aa3701.vtex_c": {
+        "version": "3830f5a4",
+        "bytes": 1607053,
+        "kind": "vtex_c",
+        "sha256": "a32858687b381ba4c09c17fea332b1f62d970a8a8486e41d68808ca5de5cef5c"
+      },
+      "characters/models/shared/arms/glove_fingerless/materials/glove_fingerless_ao_psd_ce290e8d.vtex_c": {
+        "version": "7f380852",
+        "bytes": 403149,
+        "kind": "vtex_c",
+        "sha256": "dc0aa99a32f76a64f7ea6dcb0ec501dcca41ee23cf628d518cc44c524a1e6280"
+      },
+      "characters/models/shared/arms/bare_arms/materials/bare_arm_133.vmat_c": {
+        "version": "0fb91f56",
+        "bytes": 5082,
+        "kind": "vmat_c",
+        "sha256": "4a53ca9321aec79f4735d598d0ae340152b3cc9a7333790acaea66549f9ccf24"
+      },
+      "materials/default/default_skin_diffusewarp_tga_e58a9ed.vtex_c": {
+        "version": "2e047c85",
+        "bytes": 132320,
+        "kind": "vtex_c",
+        "sha256": "6fd9c48c79a45650f36c35333e98042d7af156fd4c39513a622bd739b9aba540"
+      },
+      "characters/models/shared/arms/bare_arms/materials/bare_arm_sss_mask_psd_cb8cf1bb.vtex_c": {
+        "version": "8b367f54",
+        "bytes": 135200,
+        "kind": "vtex_c",
+        "sha256": "35f7400cb6ddd9abb3df15934f13c94bdc1e2fa30df563a25665c8a6e5f1feee"
+      },
+      "characters/models/shared/arms/bare_arms/materials/bare_arm_normal_tga_c9fefc2d.vtex_c": {
+        "version": "9ead7945",
+        "bytes": 2315064,
+        "kind": "vtex_c",
+        "sha256": "9fb22387faec5e63b9aea0198d9e84a5cc84ef1481a00ceaac728212875766fa"
+      },
+      "characters/models/shared/arms/bare_arms/materials/bare_arm_133_vmat_g_tambientocclusion_9782fd5c.vtex_c": {
+        "version": "8ddff2ff",
+        "bytes": 1944,
+        "kind": "vtex_c",
+        "sha256": "73d0a762e4096daae5f74e9c81e62423e9eb86b0e0972a78b26978549dd28934"
+      },
+      "characters/models/shared/arms/bare_arms/materials/bare_arm_133_color_psd_5b76e0cf.vtex_c": {
+        "version": "0ca56de2",
+        "bytes": 972869,
+        "kind": "vtex_c",
+        "sha256": "bbcd5e28c8acc55efab30cb6fb19e77bd9d07f8631aa299abc89315c2920db05"
+      },
+      "animation/skeletons/characters/viewmodel.vnmskel_c": {
+        "version": "88d9e1c4",
+        "bytes": 7300,
+        "kind": "vnmskel_c",
+        "sha256": "b6a732897a94b6b4d78440f390abc462a366a6151c11d45b2119e8ddae396de3"
+      },
+      "animation/skeletons/weapons/xm1014.vnmskel_c": {
+        "version": "51bf72ad",
+        "bytes": 1630,
+        "kind": "vnmskel_c",
+        "sha256": "16e8bec863d324d062f89dabaaffa5a5f42c02ad6257323429f065098a81a2a1"
+      },
+      "animation/skeletons/weapons/usp_silencer.vnmskel_c": {
+        "version": "e6a11785",
+        "bytes": 1720,
+        "kind": "vnmskel_c",
+        "sha256": "74c0a871cca074f391e7b0e00c08fb455f7121cf45db6a61a93292bdcf60c8d6"
+      },
+      "animation/skeletons/weapons/scar20.vnmskel_c": {
+        "version": "368333ed",
+        "bytes": 1562,
+        "kind": "vnmskel_c",
+        "sha256": "e5cba8e4d9e3dc4f47c9b5f8af5a3aad454ed578c3890817f4e8d2324f2ea088"
+      },
+      "animation/skeletons/weapons/revolver.vnmskel_c": {
+        "version": "d47bf7fc",
+        "bytes": 2061,
+        "kind": "vnmskel_c",
+        "sha256": "a6d4245488874f6e8b0742c27958c29488bd8b975949c502991df55d80a6e0b5"
+      },
+      "animation/skeletons/weapons/p250.vnmskel_c": {
+        "version": "776eefcd",
+        "bytes": 1563,
+        "kind": "vnmskel_c",
+        "sha256": "969504244505c704b1bc8c38092511b38165d9616bcb88078078a271d698da2d"
+      },
+      "animation/skeletons/weapons/m4a1_silencer.vnmskel_c": {
+        "version": "88b41a70",
+        "bytes": 1667,
+        "kind": "vnmskel_c",
+        "sha256": "db2b704f439154996441af532b182ec322662d1c28fbd5758fe41aed59916024"
+      },
+      "animation/skeletons/weapons/hkp2000.vnmskel_c": {
+        "version": "dfe5234e",
+        "bytes": 1603,
+        "kind": "vnmskel_c",
+        "sha256": "6fa33daa69ac74a06f4dfaf37cfba83fbd8d15b57edab3ed3000106d79c4c5b9"
+      },
+      "animation/skeletons/weapons/glock18.vnmskel_c": {
+        "version": "551c54eb",
+        "bytes": 1546,
+        "kind": "vnmskel_c",
+        "sha256": "7e7e63757ba122fe46507c1f83c3b72aae737897f20b4e56a556d4ccc2ba2b01"
+      },
+      "animation/skeletons/weapons/fiveseven.vnmskel_c": {
+        "version": "17b60396",
+        "bytes": 1545,
+        "kind": "vnmskel_c",
+        "sha256": "b7db376462c7e9c6480619b8db0922b0f19b35e625f2e92fd4d0df51fab3a3ed"
+      },
+      "animation/skeletons/weapons/deagle.vnmskel_c": {
+        "version": "977706f3",
+        "bytes": 1558,
+        "kind": "vnmskel_c",
+        "sha256": "a03f081641aac9fefd7d3e9f4a8e67a8bd029969c00353875c8c8aa321117ca6"
+      },
+      "animation/skeletons/weapons/cz75a.vnmskel_c": {
+        "version": "37e1473e",
+        "bytes": 1647,
+        "kind": "vnmskel_c",
+        "sha256": "923ed34de6cd754b673e41a5e81d7ea6432ca5aaada9392440a5c299be48f604"
+      },
+      "animation/skeletons/weapons/ak47.vnmskel_c": {
+        "version": "f7b0e7be",
+        "bytes": 1604,
+        "kind": "vnmskel_c",
+        "sha256": "401da5c8f8437a68c9b1548a9577ec518578ca1684a980a4e9e958dc05d2b959"
+      },
+      "animation/graphs/worldmodel/worldmodel.vnmgraph_c": {
+        "version": "bbd58c08",
+        "bytes": 73095,
+        "kind": "vnmgraph_c",
+        "sha256": "99c1d2b4ee7ed9f0d722fd0f9299a145b7a5ac6e236fb761b32a00d3846316b7"
+      },
+      "animation/graphs/worldmodel/worldmodel_locomotion.vnmgraph+rifle.vnmgraph_c": {
+        "version": "c3f00f04",
+        "bytes": 34723,
+        "kind": "vnmgraph_c",
+        "sha256": "5599aaf34c92bec31ef133250a9ac0be859409d7ca930f94c6e18106c9c3e573"
+      },
+      "animation/graphs/worldmodel/worldmodel_locomotion.vnmgraph+pistol.vnmgraph_c": {
+        "version": "6d97e09b",
+        "bytes": 35196,
+        "kind": "vnmgraph_c",
+        "sha256": "b8c611f5b7c71edea94acbe9fcc2805805f0dcd1ceec0ab1e6c6320ef63deef8"
+      },
+      "animation/graphs/worldmodel/worldmodel_locomotion.vnmgraph+knife.vnmgraph_c": {
+        "version": "e9170af8",
+        "bytes": 34875,
+        "kind": "vnmgraph_c",
+        "sha256": "0fcdfd2fe06825b64359798a73099a6efb4f84969822eef24abdb21653a7b94e"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+ursus.vnmgraph_c": {
+        "version": "fd4d5c60",
+        "bytes": 9132,
+        "kind": "vnmgraph_c",
+        "sha256": "65b0259a0971afb9c3dfac92f0136a1c10d916d9973cbaadd68a1bd9d07cf561"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+talon.vnmgraph_c": {
+        "version": "e7dd962d",
+        "bytes": 8899,
+        "kind": "vnmgraph_c",
+        "sha256": "104faa1ea3518bc654e5bafe5c5a7335cd46008851032b6f053aaafbc61fd410"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+tactical.vnmgraph_c": {
+        "version": "0dfe3b09",
+        "bytes": 8954,
+        "kind": "vnmgraph_c",
+        "sha256": "f4149aaaeef509ea9652999e14edaa15bb9697d9442d89c5e1807ef73054ee25"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+stiletto.vnmgraph_c": {
+        "version": "f92adaa6",
+        "bytes": 8955,
+        "kind": "vnmgraph_c",
+        "sha256": "b162aecf9a0f88d224e14127e68733bdaf99e1ca59537c29982bdddc33515923"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+skeleton.vnmgraph_c": {
+        "version": "3bc54e0b",
+        "bytes": 9146,
+        "kind": "vnmgraph_c",
+        "sha256": "94dfe2fb84f7995687fed1361fd39d553869b855d59af50dbb48373133d738a0"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+push.vnmgraph_c": {
+        "version": "9052c044",
+        "bytes": 9441,
+        "kind": "vnmgraph_c",
+        "sha256": "55e0768d42d22a2beeb1f02d18605228aac88e184b9d35b677c2ce08b92cb104"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+outdoor.vnmgraph_c": {
+        "version": "883c5fcd",
+        "bytes": 9150,
+        "kind": "vnmgraph_c",
+        "sha256": "af64b59e2a8562b3926215884fd52f5c55b40699fc9545ef2cb1ec2b7368fee7"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+navajo.vnmgraph_c": {
+        "version": "1ab608ee",
+        "bytes": 8950,
+        "kind": "vnmgraph_c",
+        "sha256": "03f3c767bdba5531d526848c6f494ea6b4a2bd9fe7747b01f6f13dbaee2883b1"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+m9.vnmgraph_c": {
+        "version": "43785104",
+        "bytes": 8922,
+        "kind": "vnmgraph_c",
+        "sha256": "afb34af3b15b5101e5c933ca18fa5830962191110cc89877f6da4f6bbbb2c6a4"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+kukri.vnmgraph_c": {
+        "version": "09cb3ae8",
+        "bytes": 9122,
+        "kind": "vnmgraph_c",
+        "sha256": "d37fa73b0a0c89a2ba74b831731d683daa6319039ea8be7ea6fcd6f8cfa11604"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+karambit.vnmgraph_c": {
+        "version": "9fe49c86",
+        "bytes": 8917,
+        "kind": "vnmgraph_c",
+        "sha256": "7be4f8b80f15c4a2e270364e9c0035de71c71cef3e8a6fc529a730a17603b200"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+gut.vnmgraph_c": {
+        "version": "59779583",
+        "bytes": 8916,
+        "kind": "vnmgraph_c",
+        "sha256": "22bb378bd6e2d39c3756ef8b03bed380dbf0d07874271cda838083252423585d"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+flip.vnmgraph_c": {
+        "version": "9bc6264c",
+        "bytes": 8935,
+        "kind": "vnmgraph_c",
+        "sha256": "d13c01e61468eeebf3df05f64758861afb8954ee2668299330d78696f3af7747"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+falchion.vnmgraph_c": {
+        "version": "cb7a8e74",
+        "bytes": 8955,
+        "kind": "vnmgraph_c",
+        "sha256": "6b127e0f4e8daa48531a38186d78738e88022dad29a8072af61ab8e09edeff15"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+default_t.vnmgraph_c": {
+        "version": "c95d0a64",
+        "bytes": 8941,
+        "kind": "vnmgraph_c",
+        "sha256": "12d2900c59742da0557fbddcccc716c89c05f2f56c91c398382a5e9461ac086d"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+default_ct.vnmgraph_c": {
+        "version": "6cd28d9d",
+        "bytes": 8934,
+        "kind": "vnmgraph_c",
+        "sha256": "c7c53bb555fec095edcb3cb928f050ecc2321dbaf1b9ed9f5590f57154f5b150"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+css.vnmgraph_c": {
+        "version": "6126ab77",
+        "bytes": 8916,
+        "kind": "vnmgraph_c",
+        "sha256": "5d65ec1eb332676f523cce92258e062c683d05b1db5e43c7ee25e4f6fb0a396b"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+cord.vnmgraph_c": {
+        "version": "3e50c314",
+        "bytes": 9116,
+        "kind": "vnmgraph_c",
+        "sha256": "1553c50ab00ce2558f676d8139f937dd893a5e8df37492efc63c0388822c0de8"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+canis.vnmgraph_c": {
+        "version": "8684d255",
+        "bytes": 9132,
+        "kind": "vnmgraph_c",
+        "sha256": "b6a18c0f65a63610b6935c2ac0d6880fe1fed6e6bbd53dfa3f666c6c6b1e43df"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+butterfly.vnmgraph_c": {
+        "version": "0a1a975c",
+        "bytes": 9168,
+        "kind": "vnmgraph_c",
+        "sha256": "734959e316bd8151a5fa80a7a5718bbb5342341dfec540a488af3272ccaf3e83"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+bowie.vnmgraph_c": {
+        "version": "8f7313db",
+        "bytes": 8948,
+        "kind": "vnmgraph_c",
+        "sha256": "2356f506369f6dc2db0463cdfcecaecacf0e078f25319d09cb99b7dcdfd0edf4"
+      },
+      "animation/graphs/worldmodel/worldmodel_knife.vnmgraph+bayonet.vnmgraph_c": {
+        "version": "823974f8",
+        "bytes": 8938,
+        "kind": "vnmgraph_c",
+        "sha256": "c0e713057efdc92412f39a1061eeccc8fe09e78030445447577bf0cce4c6d458"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun_cz75.vnmgraph_c": {
+        "version": "d6e28972",
+        "bytes": 5516,
+        "kind": "vnmgraph_c",
+        "sha256": "7e3c9937d8f2ef0dc7902f728cb9b6ddd76c8d9e168d3f22f193cd2ccce9c5cb"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+xm1014.vnmgraph_c": {
+        "version": "4aee820b",
+        "bytes": 5861,
+        "kind": "vnmgraph_c",
+        "sha256": "a82cd6548635da8248dc9d90173e736bcf3a35cdf23b2f652405242525abd4e1"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+usp.vnmgraph_c": {
+        "version": "69935776",
+        "bytes": 6249,
+        "kind": "vnmgraph_c",
+        "sha256": "8400334489e9e2430ff4da297742a00530f6f322093b3183f53c535435f5bd8e"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+ump45.vnmgraph_c": {
+        "version": "9d8e9b50",
+        "bytes": 5846,
+        "kind": "vnmgraph_c",
+        "sha256": "bb26a2f2e44871685d6e96d1731ab6f70807e4d0b2dc5c73dbd6848b5783cead"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+tec9.vnmgraph_c": {
+        "version": "f4888c3a",
+        "bytes": 5844,
+        "kind": "vnmgraph_c",
+        "sha256": "dc15d177fb7949ec7ff7789f9614dc23268c74682479395f88f2a91e4cef0deb"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+taser.vnmgraph_c": {
+        "version": "068edb29",
+        "bytes": 5666,
+        "kind": "vnmgraph_c",
+        "sha256": "f69032c746ef5c3b1e91e4778238499abbbbc89cd781b9fb5816aeb37d625e58"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+ssg08.vnmgraph_c": {
+        "version": "a656b47f",
+        "bytes": 5846,
+        "kind": "vnmgraph_c",
+        "sha256": "ecf6ef6a8540e683b28b99dbc301fda7ffdf8af9feceb8cfd2fac4f023a9be37"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+sg556.vnmgraph_c": {
+        "version": "e64fb6d4",
+        "bytes": 5846,
+        "kind": "vnmgraph_c",
+        "sha256": "2ea5e28ab6276af88e6ff08b2513337649289dd0ffb44de5300392c1670d8b9f"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+scar20.vnmgraph_c": {
+        "version": "8efea112",
+        "bytes": 5845,
+        "kind": "vnmgraph_c",
+        "sha256": "508bb361eb2fbbd46e81ecc5bc748bb468f79b707cd78203198bd942c8d93e6d"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+sawedoff.vnmgraph_c": {
+        "version": "dc3661a7",
+        "bytes": 5879,
+        "kind": "vnmgraph_c",
+        "sha256": "1c2049b506cc8ed7fe34b2fd5a1474f9288ab8100a836f956bb710f49b82d865"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+revolver.vnmgraph_c": {
+        "version": "a0bd367d",
+        "bytes": 6083,
+        "kind": "vnmgraph_c",
+        "sha256": "04caff6d4ecadece895c2021289b163b86a8049e583450415cc187988c59a157"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+p90.vnmgraph_c": {
+        "version": "104e300e",
+        "bytes": 5826,
+        "kind": "vnmgraph_c",
+        "sha256": "60fc1daad1d737ea6d85e5f7cc2a380b47e4db3ac9fde1d5d6faf249d6244239"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+p250.vnmgraph_c": {
+        "version": "481de913",
+        "bytes": 6055,
+        "kind": "vnmgraph_c",
+        "sha256": "8c11b7906a01475e830540706e7f6b3051a5122d6820c5c58a6a55df7039de7a"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+nova.vnmgraph_c": {
+        "version": "d933c975",
+        "bytes": 5843,
+        "kind": "vnmgraph_c",
+        "sha256": "4786a0e4b37a929f8ef4cf92372b140cc1f741f2eb312b30932c778917c9099f"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+negev.vnmgraph_c": {
+        "version": "7c3f1cfb",
+        "bytes": 5960,
+        "kind": "vnmgraph_c",
+        "sha256": "dddfe8d2d2a507ce20c338e46de8e39c07de07932205318e49d0c971e222e58e"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+mp9.vnmgraph_c": {
+        "version": "5a72d5cb",
+        "bytes": 5843,
+        "kind": "vnmgraph_c",
+        "sha256": "17d05f211be203d63be25046040318613ec2c386db4c6b49bf9276b368917aab"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+mp7.vnmgraph_c": {
+        "version": "4ef908a9",
+        "bytes": 5827,
+        "kind": "vnmgraph_c",
+        "sha256": "2ae32d05d90c896a766753f653b2954392d9461c7526c17ef6820de9ce0356dd"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+mp5sd.vnmgraph_c": {
+        "version": "faa614dc",
+        "bytes": 6032,
+        "kind": "vnmgraph_c",
+        "sha256": "b2d6740a66f7c0c6f6e95fcd4f5b705c1dfc87ad8db7146da03d0f63576ac515"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+mag7.vnmgraph_c": {
+        "version": "69ce4756",
+        "bytes": 5843,
+        "kind": "vnmgraph_c",
+        "sha256": "0a21e94aac46e0615133618a89e3fff27d55f9c9248886fc2bd6290fb4fe4b49"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+mac10.vnmgraph_c": {
+        "version": "edc9cae7",
+        "bytes": 5861,
+        "kind": "vnmgraph_c",
+        "sha256": "fc17665998e15e60091598e15090449f33ef16836787b264979660285e72081b"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+m4a4.vnmgraph_c": {
+        "version": "3dcc9466",
+        "bytes": 5844,
+        "kind": "vnmgraph_c",
+        "sha256": "08cb62918101898686d81f84624878c2e140c2ff5c448d2cdf3259b1cc8f3b5c"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+m4a1s.vnmgraph_c": {
+        "version": "be182fc5",
+        "bytes": 6108,
+        "kind": "vnmgraph_c",
+        "sha256": "6b389ffad5baaef08c2a8c0782feab5913780d5cb7b43b41793de196f7d953e8"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+m249.vnmgraph_c": {
+        "version": "d30a8cbc",
+        "bytes": 5843,
+        "kind": "vnmgraph_c",
+        "sha256": "ba39f79fd0b412d610a3216aba654893e1b1f872612326b617960c3eb41be9de"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+hkp2000.vnmgraph_c": {
+        "version": "569172a1",
+        "bytes": 6071,
+        "kind": "vnmgraph_c",
+        "sha256": "4ace5eed7eeff46e2bf14fe8eed4eb7680eaad04101c1718c2cb273272db2310"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+glock.vnmgraph_c": {
+        "version": "501b6906",
+        "bytes": 6070,
+        "kind": "vnmgraph_c",
+        "sha256": "0db1d141785f82a1b8ae131c783af431ae3087fe84723f756264ff2958b070f9"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+galil.vnmgraph_c": {
+        "version": "d756b46e",
+        "bytes": 5862,
+        "kind": "vnmgraph_c",
+        "sha256": "da893375c41263bbc8edcadeb3aca16536d08208917f727deb555943fec06e86"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+g3sg1.vnmgraph_c": {
+        "version": "0d1955ab",
+        "bytes": 5846,
+        "kind": "vnmgraph_c",
+        "sha256": "06ca4b48db8cd6e8ff2f6b0508a1ca6517e471ac37e2d9845321405f25e4b96d"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+five_seven.vnmgraph_c": {
+        "version": "be5920d7",
+        "bytes": 6125,
+        "kind": "vnmgraph_c",
+        "sha256": "47fc465931191816b1d43ac46ef0d312b8a43a97ebab556d116445806accbe3f"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+famas.vnmgraph_c": {
+        "version": "77bdecf4",
+        "bytes": 5846,
+        "kind": "vnmgraph_c",
+        "sha256": "c1ec161d9e10a144eb14f57637d79d2320e8efadbcb06707b54f635a254d7a17"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+elites.vnmgraph_c": {
+        "version": "72858639",
+        "bytes": 5862,
+        "kind": "vnmgraph_c",
+        "sha256": "c9372762483340a2e3417bb4f39b36ed3cca5757ba27721f212ced9c37461645"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+deagle.vnmgraph_c": {
+        "version": "ef99560b",
+        "bytes": 6089,
+        "kind": "vnmgraph_c",
+        "sha256": "428ce5fd0cd561df5b026b8406228c106977cf3ced97e5b8b3194e447ada9f4f"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+bizon.vnmgraph_c": {
+        "version": "31b3db7b",
+        "bytes": 5846,
+        "kind": "vnmgraph_c",
+        "sha256": "45479dd96ae3e50bec768c92c94bba3a82e1837406c1851405856a063385684f"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+awp.vnmgraph_c": {
+        "version": "f4e81ced",
+        "bytes": 5826,
+        "kind": "vnmgraph_c",
+        "sha256": "47847b2f279829048c0fdc0a75ef41dfeb007f5ccd7395c878c19203ec044c0c"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+aug.vnmgraph_c": {
+        "version": "710c3c50",
+        "bytes": 5825,
+        "kind": "vnmgraph_c",
+        "sha256": "f94df3472c122fff73c3e5c2d0d9a4f476722bfafe3deb7785891410e6d8af88"
+      },
+      "animation/graphs/worldmodel/worldmodel_gun.vnmgraph+ak47.vnmgraph_c": {
+        "version": "5d29efc5",
+        "bytes": 5824,
+        "kind": "vnmgraph_c",
+        "sha256": "674aab96f04d5186ef6131d81fa6feb6cc5b05d83e841fb6b0bce424819e5be7"
+      },
+      "animation/graphs/worldmodel/worldmodel_grenade.vnmgraph+smoke.vnmgraph_c": {
+        "version": "02f8c726",
+        "bytes": 5313,
+        "kind": "vnmgraph_c",
+        "sha256": "2b52700c5deba49f4e035bda55bf59e8fd78cdeb57f288eaeb15521b8f6c075a"
+      },
+      "animation/graphs/worldmodel/worldmodel_grenade.vnmgraph+molotov.vnmgraph_c": {
+        "version": "5a990bcc",
+        "bytes": 5317,
+        "kind": "vnmgraph_c",
+        "sha256": "67d43330707da45d16b03d8389b13e4f20f596fe217fa19c0a5adfdcf2e4a3dd"
+      },
+      "animation/graphs/worldmodel/worldmodel_grenade.vnmgraph+incendiary.vnmgraph_c": {
+        "version": "44bfc536",
+        "bytes": 5319,
+        "kind": "vnmgraph_c",
+        "sha256": "a24112fa539e3fad75b8c86fb5e570b5f3e19b0433843327e8032b94955e6646"
+      },
+      "animation/graphs/worldmodel/worldmodel_grenade.vnmgraph+he.vnmgraph_c": {
+        "version": "6f790dc2",
+        "bytes": 5311,
+        "kind": "vnmgraph_c",
+        "sha256": "27a5564766589a8596cc4dbf5c200c220636b9a008184503761640d8eea37aad"
+      },
+      "animation/graphs/worldmodel/worldmodel_grenade.vnmgraph+flash.vnmgraph_c": {
+        "version": "e879d270",
+        "bytes": 5315,
+        "kind": "vnmgraph_c",
+        "sha256": "457888229473dce2c75683a89a5c606af49639eee7a48111d44712edc8d3d343"
+      },
+      "animation/graphs/worldmodel/worldmodel_grenade.vnmgraph+decoy.vnmgraph_c": {
+        "version": "8065ce30",
+        "bytes": 5313,
+        "kind": "vnmgraph_c",
+        "sha256": "396a33b695c71cdd280f458b7a97bc058e8743bf25a03b1b3a2083b6ad2b0ae9"
+      },
+      "animation/graphs/viewmodel/viewmodel.vnmgraph_c": {
+        "version": "ba5c9def",
+        "bytes": 20690,
+        "kind": "vnmgraph_c",
+        "sha256": "fca2740dfb8ebd4154ab9142023843c23d54db42c046a6efa15454a28281739b"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife_talon.vnmgraph_c": {
+        "version": "92514c48",
+        "bytes": 8249,
+        "kind": "vnmgraph_c",
+        "sha256": "528ee25632dd698821f0fc9773a744cca992783dda67f54bbfd931c440e8b28f"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife_karambit.vnmgraph_c": {
+        "version": "a460498e",
+        "bytes": 8333,
+        "kind": "vnmgraph_c",
+        "sha256": "9d9296f81d99397fd4b9e0640809d2538743732b1bb3bb5f674f22c13527555b"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife_butterfly.vnmgraph_c": {
+        "version": "d8a1d1f2",
+        "bytes": 8335,
+        "kind": "vnmgraph_c",
+        "sha256": "ea36cc189b007b16d607f9c972f44a547bc7b5096e4ef28670dc164961b4aa04"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+ursus.vnmgraph_c": {
+        "version": "dc47a489",
+        "bytes": 8072,
+        "kind": "vnmgraph_c",
+        "sha256": "4c53de1028743a2d46a318098e8abe534f5f5a176863df7f534f51b3bb0da9fb"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_ursus.vnmgraph_c": {
+        "version": "606f9c1f",
+        "bytes": 4825,
+        "kind": "vnmgraph_c",
+        "sha256": "495e5a5a5cdbccebbe280aefd5e4a0c00c2807bcb0a2e55a71f7909713e84d70"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+tactical.vnmgraph_c": {
+        "version": "63c47435",
+        "bytes": 8063,
+        "kind": "vnmgraph_c",
+        "sha256": "5ba2c0d3becc59f67d3173a7ad9bfe1d9b9b5f1891b37d1f94d422fd48d443dd"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_tactical.vnmgraph_c": {
+        "version": "19c4ce08",
+        "bytes": 4738,
+        "kind": "vnmgraph_c",
+        "sha256": "f55c3cbfd86d14c0aedde722249b0434fe5def07ea83e1d2a94391ba2f9de36f"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+stiletto.vnmgraph_c": {
+        "version": "e6ca7719",
+        "bytes": 8063,
+        "kind": "vnmgraph_c",
+        "sha256": "c0a286537792d018ae857eb61fe4b9e6112db5a8cce494a2cdb07b10e72aa27a"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_stiletto.vnmgraph_c": {
+        "version": "badd5c4c",
+        "bytes": 4843,
+        "kind": "vnmgraph_c",
+        "sha256": "357da4683066e1826ac499f0c880e501879ee9895bd44235373074d01b056213"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+skeleton.vnmgraph_c": {
+        "version": "e2c2062f",
+        "bytes": 8149,
+        "kind": "vnmgraph_c",
+        "sha256": "89f154d41a6fe8b1f35a2b830fb28d0de9370e69e08c6dd5d2c513be07569bfd"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_skeleton.vnmgraph_c": {
+        "version": "aa3b4609",
+        "bytes": 4838,
+        "kind": "vnmgraph_c",
+        "sha256": "f7050a6bf0b0aacd364340c10c5bcfb47bbb1f1276771c79ab37962267816e46"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+push.vnmgraph_c": {
+        "version": "1d10f926",
+        "bytes": 7866,
+        "kind": "vnmgraph_c",
+        "sha256": "53f1309ba223015e16a2a926c9f0faa044b7558a98d33717fe9a102ec96704a2"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_push.vnmgraph_c": {
+        "version": "ca2fb5c3",
+        "bytes": 4734,
+        "kind": "vnmgraph_c",
+        "sha256": "bedf8b4f4d8628b2cb35b5592c3541528a276e2f9cff7c3350a6eb77aec6eb24"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+outdoor.vnmgraph_c": {
+        "version": "b035c692",
+        "bytes": 8123,
+        "kind": "vnmgraph_c",
+        "sha256": "b40ce90fdb5c417a8cefc0cfa57da93a69078e605114e3452a273eb081514844"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_outdoor.vnmgraph_c": {
+        "version": "516f58ec",
+        "bytes": 4829,
+        "kind": "vnmgraph_c",
+        "sha256": "8b24efbd6eb2cce1eacc1adafeb46d467d0c3557f21212153c2443c50771aecc"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+navajo.vnmgraph_c": {
+        "version": "f3efbaaa",
+        "bytes": 7908,
+        "kind": "vnmgraph_c",
+        "sha256": "4d385a800edea2d19a300bba17ffc8b20365441c14b14aee756c29fe8612c494"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_navajo.vnmgraph_c": {
+        "version": "9ba01e40",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "9d8201206ee3af691e2e87e2897231d900d213eaba2685ef15d77bf665f465a6"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+m9.vnmgraph_c": {
+        "version": "d2dabe66",
+        "bytes": 7896,
+        "kind": "vnmgraph_c",
+        "sha256": "802c655b6831d71e932a0f5d173d417aaa699f533401495dcb8fc58fe6ad1105"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_m9.vnmgraph_c": {
+        "version": "a11d2300",
+        "bytes": 4816,
+        "kind": "vnmgraph_c",
+        "sha256": "a29991f2b849ec11a23fe0e93f17ed2b63a27984a1bb77fa7b9d9d0e717ff2dd"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+kukri.vnmgraph_c": {
+        "version": "9d17c65e",
+        "bytes": 8054,
+        "kind": "vnmgraph_c",
+        "sha256": "8f13508ff4ec9c0a5eb4bab4079d56f7e359a3523b6291ad2d82d4f8bbf30cf0"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_kukri.vnmgraph_c": {
+        "version": "1488ad1c",
+        "bytes": 4839,
+        "kind": "vnmgraph_c",
+        "sha256": "d829fe3579910245bf432f46efb9d423cd2fc0e29c42aea7eecf944213445465"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+gut.vnmgraph_c": {
+        "version": "8d3c85e8",
+        "bytes": 7927,
+        "kind": "vnmgraph_c",
+        "sha256": "d6cf471153f1ce6cf041d1536c1a085ed9d9d4738d6ffcae5a9af6a0c3d28510"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_gut.vnmgraph_c": {
+        "version": "a7ca8e45",
+        "bytes": 4716,
+        "kind": "vnmgraph_c",
+        "sha256": "1493179d2e1fb69cf5ef686373e2725e175d4b2a10855ee716f7545babd7a22e"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+flip.vnmgraph_c": {
+        "version": "6626c989",
+        "bytes": 7947,
+        "kind": "vnmgraph_c",
+        "sha256": "51445315a54820823355c3158da0ff0a3c6a31a18ac0ed8a1122a88232a0b66a"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_flip.vnmgraph_c": {
+        "version": "3398b3c5",
+        "bytes": 4832,
+        "kind": "vnmgraph_c",
+        "sha256": "45628e33c991b66d4097ee10c2f90f9fae039b365cdfbb51ebe342b80142b024"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+falchion.vnmgraph_c": {
+        "version": "39b085e5",
+        "bytes": 7950,
+        "kind": "vnmgraph_c",
+        "sha256": "8f43535c390616700ca4b28b467732542b17db9b89915f122b01bec02277e004"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_falchion.vnmgraph_c": {
+        "version": "63f4b4e2",
+        "bytes": 4845,
+        "kind": "vnmgraph_c",
+        "sha256": "2d4ae35deb86f58757fdc2f113986011384b25d2ba345da7c297a0c19614795c"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+default_t.vnmgraph_c": {
+        "version": "e5449948",
+        "bytes": 8075,
+        "kind": "vnmgraph_c",
+        "sha256": "09e786210fb641b9903994bdda5394a9c1775ddb879f6029e651ece69dd298ba"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_default_t.vnmgraph_c": {
+        "version": "c8756a6c",
+        "bytes": 4737,
+        "kind": "vnmgraph_c",
+        "sha256": "87b921552da3a4dff2257cf2dc20260b696e699c8654a5ee7bfd43c18a392529"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+default_ct.vnmgraph_c": {
+        "version": "622f1668",
+        "bytes": 8038,
+        "kind": "vnmgraph_c",
+        "sha256": "acf0976582ea4d0b7dc162a7d2dbfd748c659261f6d7501e78059fcb4753eb47"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_default_ct.vnmgraph_c": {
+        "version": "c31863df",
+        "bytes": 4740,
+        "kind": "vnmgraph_c",
+        "sha256": "0ce64b781f17e44b8548ebb1b7741e8b2f45b17b724a086a6ce2f30b0fc6ef74"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+css.vnmgraph_c": {
+        "version": "f295672f",
+        "bytes": 7926,
+        "kind": "vnmgraph_c",
+        "sha256": "6400cc63cb94b93a5fa764e40365f45e6eb90e9a8e24c3b6c268ae04aad68267"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_css.vnmgraph_c": {
+        "version": "001e0fbf",
+        "bytes": 5348,
+        "kind": "vnmgraph_c",
+        "sha256": "2b4b9304c728134244f62a788f32d7db4074e938601ff326e0799285af418f2d"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+cord.vnmgraph_c": {
+        "version": "14adaf50",
+        "bytes": 8040,
+        "kind": "vnmgraph_c",
+        "sha256": "45e2a76f5bba73fa8502d0fe1663686fd8c73ecdf6310746d6f094965ecdbf29"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_cord.vnmgraph_c": {
+        "version": "d0be7d12",
+        "bytes": 4825,
+        "kind": "vnmgraph_c",
+        "sha256": "957614e3a93808611559f6d359b7a10da74072617b6f0145fd7949fe677a82e4"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+canis.vnmgraph_c": {
+        "version": "1d9932bc",
+        "bytes": 8072,
+        "kind": "vnmgraph_c",
+        "sha256": "c873e311cf7e97e0249997cbeacc2c2ba1c19b80d40acab4acbe733eb65f6ed2"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_canis.vnmgraph_c": {
+        "version": "b1d10473",
+        "bytes": 4825,
+        "kind": "vnmgraph_c",
+        "sha256": "00b30d12bde3d320d7e8336b9db612c35e4db0785cc0843253a5b7bf635d79cd"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+bowie.vnmgraph_c": {
+        "version": "c6923a70",
+        "bytes": 7883,
+        "kind": "vnmgraph_c",
+        "sha256": "afed594d66dcd789493e6661d6420f3d3764399ea15c493172ab86fe4b3e2e50"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_bowie.vnmgraph_c": {
+        "version": "52c127d4",
+        "bytes": 4736,
+        "kind": "vnmgraph_c",
+        "sha256": "a64df7ae691620b6d46ff2f6d90829a0c65c936df326d9691502683b326bb162"
+      },
+      "animation/graphs/viewmodel/viewmodel_knife.vnmgraph+bayonet.vnmgraph_c": {
+        "version": "c6b18ee9",
+        "bytes": 8027,
+        "kind": "vnmgraph_c",
+        "sha256": "5fb97d216f7354d7b78e339b388892bcb3861fbfac1dd6d33d0178a4ae6f1f39"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+knife_bayonet.vnmgraph_c": {
+        "version": "9de38a72",
+        "bytes": 4852,
+        "kind": "vnmgraph_c",
+        "sha256": "2d1cc25406918f4fe262737c20e13deddf6dd2efc51f05d266a4944ddbbbf117"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+c4.vnmgraph_c": {
+        "version": "0f919b39",
+        "bytes": 4896,
+        "kind": "vnmgraph_c",
+        "sha256": "fed72e79c1c42e09d2e3f58f774299fe185fbcef7b1dca631dc7dea033416488"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun_revolver.vnmgraph_c": {
+        "version": "780732c8",
+        "bytes": 9890,
+        "kind": "vnmgraph_c",
+        "sha256": "6d700bc0c40b0e51ca86150788644d6ce036a252c372cdb223565d94fcb6751e"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+revolver.vnmgraph_c": {
+        "version": "966a2cf2",
+        "bytes": 4737,
+        "kind": "vnmgraph_c",
+        "sha256": "9ed688ebc8234cbbdd0cea405d01b25469c41fb3163536dbd1add263be8b4aa0"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun_elites.vnmgraph_c": {
+        "version": "17685682",
+        "bytes": 8766,
+        "kind": "vnmgraph_c",
+        "sha256": "7f897d385b22a3a45677b309d29ea58ef9b0eb2800feca2db8338f45b7150b9b"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+elite.vnmgraph_c": {
+        "version": "c35de774",
+        "bytes": 4736,
+        "kind": "vnmgraph_c",
+        "sha256": "146695d51bf5b06240ad0b15945b9ed3713d525f19ea9237fe63f8129900b662"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun_cz75.vnmgraph_c": {
+        "version": "b732f7ea",
+        "bytes": 7524,
+        "kind": "vnmgraph_c",
+        "sha256": "bf55f6577783bd0c8dd34209b9f03ee1874cad66f2b8c7bcf613fcc63f36d974"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+cz75a.vnmgraph_c": {
+        "version": "9f43788e",
+        "bytes": 4735,
+        "kind": "vnmgraph_c",
+        "sha256": "86d2164d24f17218fff6c26e895062da9eb3e77285f930fc78d2b0b5c8f61b1f"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+xm1014.vnmgraph_c": {
+        "version": "c9e4f61c",
+        "bytes": 11353,
+        "kind": "vnmgraph_c",
+        "sha256": "f6266ad5b878b9334d127d5507849414e53d3b7b059824411c02596bda1d4bd8"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+xm1014.vnmgraph_c": {
+        "version": "04eaa653",
+        "bytes": 4735,
+        "kind": "vnmgraph_c",
+        "sha256": "8807d84650fc98973bb3cdc953a46fb4e6a2f35dfd5b1d97d6ff41bde1e5d7a0"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+usp.vnmgraph_c": {
+        "version": "ec0c1581",
+        "bytes": 11824,
+        "kind": "vnmgraph_c",
+        "sha256": "fb3d333fb6492021cbb6b1d971fcf11c8b1eee1abdd8b8a6401d6be7df3e13d5"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+usp.vnmgraph_c": {
+        "version": "230ffff6",
+        "bytes": 4734,
+        "kind": "vnmgraph_c",
+        "sha256": "d941b3ed3caf40c31bb563624d7bda98f68884450ee1d15a5ed27d655ad4a3c3"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+ump45.vnmgraph_c": {
+        "version": "0e8496f6",
+        "bytes": 11232,
+        "kind": "vnmgraph_c",
+        "sha256": "724bce2d87868a34f17b0066c88a4d256a65977c72ec9f21bc4cd6e05971c92f"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+ump45.vnmgraph_c": {
+        "version": "8ff1b056",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "eb0bd1752512d2c26a07ed3b2daaf5c8b94cbd7ab4beb2e091525c0a9c190f8e"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+tec9.vnmgraph_c": {
+        "version": "4b690363",
+        "bytes": 11332,
+        "kind": "vnmgraph_c",
+        "sha256": "6e480ce46b25fb00ce04a744933853ec71bcacfd8bc2c8a483a484c5119ea51b"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+tec9.vnmgraph_c": {
+        "version": "3018d83a",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "64e5af8d50f489549baca5bb0f5c99b34f57d8107c10851a52cb49aeee9d29a3"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+taser.vnmgraph_c": {
+        "version": "496e9e16",
+        "bytes": 11137,
+        "kind": "vnmgraph_c",
+        "sha256": "9b8b08b18fb1d9359ab08a5ca9f7a4c59c1a589ada4127df917627d060baeb1e"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+taser.vnmgraph_c": {
+        "version": "1f162245",
+        "bytes": 4736,
+        "kind": "vnmgraph_c",
+        "sha256": "244609dabb783d8e4fa56fd49520104c543bbffe3e32ffe508be9cc6d3ec0c96"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+ssg08_legacy.vnmgraph_c": {
+        "version": "8a62754a",
+        "bytes": 11262,
+        "kind": "vnmgraph_c",
+        "sha256": "e2c4707882f0f77491a2c227bfb202387de6e845384ff5fccd55e702727b1976"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+ssg08_legacy.vnmgraph_c": {
+        "version": "838d709c",
+        "bytes": 4749,
+        "kind": "vnmgraph_c",
+        "sha256": "219990ac806b2538d9f714a017050169e68ccbcb9237c895d1ad9872bf7fc81a"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+ssg08.vnmgraph_c": {
+        "version": "94e93f9a",
+        "bytes": 11232,
+        "kind": "vnmgraph_c",
+        "sha256": "15f9c616f3d8cf90e75dc1f96abc261f7e378ba6ba62eadbfbfc5f54c5b02719"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+ssg08.vnmgraph_c": {
+        "version": "08a76d4f",
+        "bytes": 4738,
+        "kind": "vnmgraph_c",
+        "sha256": "635c236a399363fe467ff040ac92cc17348b94bc13798d35efd0a4ddd2557a1b"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+sg556.vnmgraph_c": {
+        "version": "11561493",
+        "bytes": 11449,
+        "kind": "vnmgraph_c",
+        "sha256": "9f32774bef773d209da1bbfd5ad7ae29d1ed780a3044ffaeac0dda9e23cdf18e"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+sg556.vnmgraph_c": {
+        "version": "562a5635",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "6ab6e2231b7dbd6ddf53ea4e323d415a23120ab41f51bafc70cfff30e66baa8d"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+scar20.vnmgraph_c": {
+        "version": "616f4536",
+        "bytes": 11562,
+        "kind": "vnmgraph_c",
+        "sha256": "b14bceac0b2536356eba29251f926dca982b7d153c94359da303a8a6e2064c30"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+scar20.vnmgraph_c": {
+        "version": "887ca84c",
+        "bytes": 4735,
+        "kind": "vnmgraph_c",
+        "sha256": "9b48ab568e204b1a15d1fe39d9565629e6956b6b7615796940415be1a6c0d6cd"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+sawedoff.vnmgraph_c": {
+        "version": "650ca8ed",
+        "bytes": 11254,
+        "kind": "vnmgraph_c",
+        "sha256": "4c1817beff1a966e7a1598e05bd5d4df683a67d7e63d59efa36fbdf1892cd5bf"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+sawedoff.vnmgraph_c": {
+        "version": "641ac826",
+        "bytes": 4735,
+        "kind": "vnmgraph_c",
+        "sha256": "ce9fd56b077fe265f830073e80dc80f0aa4cc4212da46978fb5cef4945ac49e7"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+p90.vnmgraph_c": {
+        "version": "65ecc891",
+        "bytes": 11198,
+        "kind": "vnmgraph_c",
+        "sha256": "dc102a644e2b1026792c88e2baaf56046ba65e3a5f20084e753d5fe65f358144"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+p90.vnmgraph_c": {
+        "version": "6fc265b6",
+        "bytes": 4717,
+        "kind": "vnmgraph_c",
+        "sha256": "2161457ab3979ab0bd53850a8b16c43641f7b406e6024d013398f5c7ec178fc2"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+p250.vnmgraph_c": {
+        "version": "bc09a09e",
+        "bytes": 11553,
+        "kind": "vnmgraph_c",
+        "sha256": "932d34fbf542c342d00cf56dc22a0563396264877ea4cb3f06683554837d55b6"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+p250.vnmgraph_c": {
+        "version": "d5539a43",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "d88d683ee220dca4ee64f774fb4a672666a753ab46785ecdfb406e4572c29a1e"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+nova.vnmgraph_c": {
+        "version": "97db50b5",
+        "bytes": 11218,
+        "kind": "vnmgraph_c",
+        "sha256": "ff44374d997741fe09b569d4705f2dc3f445e42cdcf86f85f2e22f774c51bf67"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+nova.vnmgraph_c": {
+        "version": "fb958cab",
+        "bytes": 4731,
+        "kind": "vnmgraph_c",
+        "sha256": "407f9816b1406b3372c4668a04fa89f9b1276bdc9651cc1b7b3729661833e64d"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+negev.vnmgraph_c": {
+        "version": "d0bed9f4",
+        "bytes": 11429,
+        "kind": "vnmgraph_c",
+        "sha256": "7527d1eb73a697f9d845f49d45d8ab881e05205bc02beb86dd3276fc6aae1c7e"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+negev.vnmgraph_c": {
+        "version": "25cfc8f3",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "4bbf619dd82abcfc06ce8044f2f102679460c0759fadee28a1f704471c1888e5"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+mp9.vnmgraph_c": {
+        "version": "1b467d6f",
+        "bytes": 11198,
+        "kind": "vnmgraph_c",
+        "sha256": "1fd1d28e3f52f6b1ecd9ed58428ca416ff89b626dca5d28d3a7d42256dcf1439"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+mp9.vnmgraph_c": {
+        "version": "1d2a21d1",
+        "bytes": 4717,
+        "kind": "vnmgraph_c",
+        "sha256": "709c74672b278bf1c7ac6df7e9920e2b6b5ef31c3c1d7d868ccf9152f0a84dbb"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+mp7.vnmgraph_c": {
+        "version": "51bd0e66",
+        "bytes": 11198,
+        "kind": "vnmgraph_c",
+        "sha256": "63baf74a3eb40214e878dc97d7b16aab8a2b98c570390bdb73fe6faa01e2a187"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+mp7.vnmgraph_c": {
+        "version": "2698c370",
+        "bytes": 4717,
+        "kind": "vnmgraph_c",
+        "sha256": "41de1b77e32840de44bb357c83c9633d9e89f8472250eb444d5a531ede27e2cc"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+mp5sd.vnmgraph_c": {
+        "version": "eb6befff",
+        "bytes": 11325,
+        "kind": "vnmgraph_c",
+        "sha256": "5daaa521b6e78e72a36c205919549a604dd4f3acc44e943b602248c7dcd27d31"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+mp5sd.vnmgraph_c": {
+        "version": "49ddb395",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "567d4bd9ad2504b7494f62f75f69fdc1c94bdfe5798717694755a51a08dcdf80"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+mag7.vnmgraph_c": {
+        "version": "836fb0dd",
+        "bytes": 11218,
+        "kind": "vnmgraph_c",
+        "sha256": "bdc1657dc934efe2a7fe455276a9ec1703893a2cfc37e7285b99eeb6f19b3ba5"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+mag7.vnmgraph_c": {
+        "version": "8766d2e6",
+        "bytes": 4731,
+        "kind": "vnmgraph_c",
+        "sha256": "46d9c096f93c480a6d65553c03f57e02a51bb63127d0f08b10e1f9a7dc96b618"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+mac10.vnmgraph_c": {
+        "version": "b5cd16c0",
+        "bytes": 11232,
+        "kind": "vnmgraph_c",
+        "sha256": "2b62e85748b8fc0cbd947f68e3f9d9285ad737be0e7220a6d2060042542d72e4"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+mac10.vnmgraph_c": {
+        "version": "89ebd9d6",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "afb236fa1511d434c30151c570618ca1b13d9b4a24e224ae547286d35b44c564"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+m4a4.vnmgraph_c": {
+        "version": "880896f7",
+        "bytes": 11218,
+        "kind": "vnmgraph_c",
+        "sha256": "8903d242d8f10a34ad868dcc9789d926449501fae4592dad91a9edb4e67d9455"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+m4a4.vnmgraph_c": {
+        "version": "876fb93b",
+        "bytes": 4731,
+        "kind": "vnmgraph_c",
+        "sha256": "9248d9026730d1027fb271288b3fcc1acc1c343ec12fffb1accdee31458cdce9"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+m4a1s.vnmgraph_c": {
+        "version": "e26bca0a",
+        "bytes": 11467,
+        "kind": "vnmgraph_c",
+        "sha256": "d7b113f9028007003568005e8b56a7938aa1f6b6f0c1f3d59eca9efd2beaa143"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+m4a1s.vnmgraph_c": {
+        "version": "cf9a245b",
+        "bytes": 4736,
+        "kind": "vnmgraph_c",
+        "sha256": "d35bce7186d94b9ef9d8e4c976b1d4ac223f61e5f408259a4f606f201c81d74f"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+m249.vnmgraph_c": {
+        "version": "ebf9bfe1",
+        "bytes": 11319,
+        "kind": "vnmgraph_c",
+        "sha256": "51d62a70d332083ecab388932f0ae050231bd3fd5ad2c621832171746571608b"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+m249.vnmgraph_c": {
+        "version": "57187861",
+        "bytes": 4731,
+        "kind": "vnmgraph_c",
+        "sha256": "17a8cb0b666966776f5de89d01dd11a917d05d0237a554e1aaac1287e8d8ad33"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+hkp2000.vnmgraph_c": {
+        "version": "44c7a1c1",
+        "bytes": 11572,
+        "kind": "vnmgraph_c",
+        "sha256": "689c8a04b25c0fea1d4be35a3c302937013aeac7529253ee1700ba94d654f813"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+hkp2000.vnmgraph_c": {
+        "version": "616e0aa1",
+        "bytes": 4735,
+        "kind": "vnmgraph_c",
+        "sha256": "f76ec55764798b07876001e5c356af3cc505013e18a0141bac19bd853b1f437f"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+glock.vnmgraph_c": {
+        "version": "cd967e37",
+        "bytes": 11589,
+        "kind": "vnmgraph_c",
+        "sha256": "a18d1e5a124246c8dccf0b28635c7b0a8be770be6a5c7f987e1b237a03ec01ee"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+glock.vnmgraph_c": {
+        "version": "c394daa5",
+        "bytes": 4735,
+        "kind": "vnmgraph_c",
+        "sha256": "283c7e26f503be61f58a1a370520774ed712b041db0194b5f1e13d9395827d9e"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+galil.vnmgraph_c": {
+        "version": "21d6f472",
+        "bytes": 11250,
+        "kind": "vnmgraph_c",
+        "sha256": "4c348c0d940b36f2252c4a394a3bf9aca01256d7f863e3f2b1ac446ee41a9031"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+galil.vnmgraph_c": {
+        "version": "d4613883",
+        "bytes": 4854,
+        "kind": "vnmgraph_c",
+        "sha256": "b2edcf3155f31b1257b2bbee502ead51aee1c88857ca1fdcb7ee5feb518f03f3"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+g3sg1.vnmgraph_c": {
+        "version": "e12be741",
+        "bytes": 11232,
+        "kind": "vnmgraph_c",
+        "sha256": "b495d2be6d0ccc3f8fac872c9668924719d49e982cfba7d8e81183f2c14ef74d"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+g3sg1.vnmgraph_c": {
+        "version": "ca61c07d",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "376b399c58f27b9c6788b5c6c74360ef7d17d66478fdf0902ba8e3bc08d0bf1a"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+five_seven.vnmgraph_c": {
+        "version": "354ce169",
+        "bytes": 11642,
+        "kind": "vnmgraph_c",
+        "sha256": "a9944641efabb027d4a86aa8e214c263cb387f692f36faf1ab18a38cd310cebd"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+five_seven.vnmgraph_c": {
+        "version": "bf4085b2",
+        "bytes": 4742,
+        "kind": "vnmgraph_c",
+        "sha256": "20bc2edb4f7e35ee693be990d7bf45506a097bae4e7eacab84fbfdbf1df5db0f"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+famas.vnmgraph_c": {
+        "version": "02c9e9af",
+        "bytes": 11231,
+        "kind": "vnmgraph_c",
+        "sha256": "ce8dc40d8ad2bfaee5f4154ba68b72c97b5681f9d7495e92df273f6294bc70df"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+famas.vnmgraph_c": {
+        "version": "3b92f690",
+        "bytes": 4733,
+        "kind": "vnmgraph_c",
+        "sha256": "ae9c7089a9a265d97dcf45909f17c6f1f4ea5fc70e6e736354977969637e6603"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+deagle.vnmgraph_c": {
+        "version": "e8f24784",
+        "bytes": 11587,
+        "kind": "vnmgraph_c",
+        "sha256": "a33894aec546bf6a3ef5560fd44792f8695db13fbe5112c80c47237d218868d2"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+deagle.vnmgraph_c": {
+        "version": "51b69944",
+        "bytes": 4826,
+        "kind": "vnmgraph_c",
+        "sha256": "9d18fee14c310d40e911593aaacaec09a0c7e92af5de17623df8a08057dc8f2b"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+bizon.vnmgraph_c": {
+        "version": "5976b76a",
+        "bytes": 11231,
+        "kind": "vnmgraph_c",
+        "sha256": "ec7aea6a4b0c18778ff808b8ac5f1273cf02d32f8697127624cd19f4171bca50"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+bizon.vnmgraph_c": {
+        "version": "70a06c1d",
+        "bytes": 4951,
+        "kind": "vnmgraph_c",
+        "sha256": "6357b180a5e6363db69f1057f1e1468747cc0969135a8cec1bda265f43dddbec"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+awp.vnmgraph_c": {
+        "version": "34787a61",
+        "bytes": 11198,
+        "kind": "vnmgraph_c",
+        "sha256": "09dca837fd8c87e784ee37e69e3a1ac30b542508a67df4c547d3d561551fee32"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+awp.vnmgraph_c": {
+        "version": "0fc973b7",
+        "bytes": 4717,
+        "kind": "vnmgraph_c",
+        "sha256": "663ec01790040c905cc198490ba4815fa9fda440f9f04de8f496107a8dd99f2c"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+aug.vnmgraph_c": {
+        "version": "85a69e92",
+        "bytes": 11417,
+        "kind": "vnmgraph_c",
+        "sha256": "62007d4b85e40b8ac8d2075bffd2a5043fb000d6ee8951213cd0b72bf8a63177"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+aug.vnmgraph_c": {
+        "version": "8697b68f",
+        "bytes": 4834,
+        "kind": "vnmgraph_c",
+        "sha256": "185b7ccbd4669a1d6d0025480f0c48dfc9a3b13f60fac1746975c4bfc7bcc338"
+      },
+      "animation/graphs/viewmodel/viewmodel_gun.vnmgraph+ak47.vnmgraph_c": {
+        "version": "b00b55ae",
+        "bytes": 11201,
+        "kind": "vnmgraph_c",
+        "sha256": "1a9e88b8e1367ddb554c50e9a49b90f9673a76bd5ff7d6bc6e14a00568045cdd"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+ak47.vnmgraph_c": {
+        "version": "75b3940a",
+        "bytes": 5223,
+        "kind": "vnmgraph_c",
+        "sha256": "824cae4182b335accf45bbf9ef95f70943fa7c324c00b5c4274e1001f087593b"
+      },
+      "animation/graphs/viewmodel/viewmodel_grenade.vnmgraph+smoke.vnmgraph_c": {
+        "version": "eca3c255",
+        "bytes": 5918,
+        "kind": "vnmgraph_c",
+        "sha256": "a1603a224fff098189af9e6705f32a8e3771cb8e6dd002dd2468b6daaf0a8968"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+smoke_grenade.vnmgraph_c": {
+        "version": "cc1a4b57",
+        "bytes": 4848,
+        "kind": "vnmgraph_c",
+        "sha256": "e1e8d7e43c3413c0d6505faf18a7f8191fddec8a6ded9ed9b020c2131bdd30dd"
+      },
+      "animation/graphs/viewmodel/viewmodel_grenade.vnmgraph+molotov.vnmgraph_c": {
+        "version": "b1c592fb",
+        "bytes": 5881,
+        "kind": "vnmgraph_c",
+        "sha256": "9faa72ae0f0902385aeb6df837b0613aa2f1f173db0231ff18fd5dcf43210b67"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+molotov.vnmgraph_c": {
+        "version": "79945a16",
+        "bytes": 4845,
+        "kind": "vnmgraph_c",
+        "sha256": "e2edc8b97a3cd45cbda8137ca66395911d2db6a245325a4475266dd7d2e95e73"
+      },
+      "animation/graphs/viewmodel/viewmodel_grenade.vnmgraph+incendiary.vnmgraph_c": {
+        "version": "543a10bf",
+        "bytes": 5949,
+        "kind": "vnmgraph_c",
+        "sha256": "12df8c514c6f7e86ae3cc0e9e93c274b6f4035e4ce4c69775732a4c7d5e98a60"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+incendiary_grenade.vnmgraph_c": {
+        "version": "895271cf",
+        "bytes": 4869,
+        "kind": "vnmgraph_c",
+        "sha256": "10943fe3046cb2510f24d77bba7727b0aec514c090eac12d44e1ff9ef85e4ac8"
+      },
+      "animation/graphs/viewmodel/viewmodel_grenade.vnmgraph+he.vnmgraph_c": {
+        "version": "5df9a83f",
+        "bytes": 5911,
+        "kind": "vnmgraph_c",
+        "sha256": "991ffa7e2b7d0a46de013600e7300d876994b42340e0b436da58a82cf3ab79ff"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+he_grenade.vnmgraph_c": {
+        "version": "834be295",
+        "bytes": 4845,
+        "kind": "vnmgraph_c",
+        "sha256": "f3d9a5e4c69946289ef8faf367ca3f19b19bc2c0c7f829fde6758ede30dc36de"
+      },
+      "animation/graphs/viewmodel/viewmodel_grenade.vnmgraph+flash.vnmgraph_c": {
+        "version": "fa787522",
+        "bytes": 5935,
+        "kind": "vnmgraph_c",
+        "sha256": "d82b2b9b766ffada4d07b7282f22f4a153c5a2fc2e35012003495a3a9381d270"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+flashbang_grenade.vnmgraph_c": {
+        "version": "e7817926",
+        "bytes": 4852,
+        "kind": "vnmgraph_c",
+        "sha256": "965f8fac91862c020e24dc9773cb234c9346796fbb756872534120f22a5ea98a"
+      },
+      "animation/graphs/viewmodel/viewmodel_grenade.vnmgraph+decoy.vnmgraph_c": {
+        "version": "41c9ed34",
+        "bytes": 5903,
+        "kind": "vnmgraph_c",
+        "sha256": "c6ee134cefa8f0474707963b5c4d65843179d762d64db298645f74d1e33fca4a"
+      },
+      "animation/graphs/viewmodel/viewmodel_inspects.vnmgraph+decoy_grenade.vnmgraph_c": {
+        "version": "bcc7fe43",
+        "bytes": 4848,
+        "kind": "vnmgraph_c",
+        "sha256": "c48ba08393a97151beef27322f1c38f2042a0ad41c7cc7b563176905d6359c85"
+      },
+      "animation/graphs/ui/uimodel.vnmgraph_c": {
+        "version": "bfb681d6",
+        "bytes": 38594,
+        "kind": "vnmgraph_c",
+        "sha256": "2d5e41571612e8f353f657e6f7cac51a593a36e9bc93128f159a295a8e2fbbe3"
+      },
+      "animation/graphs/ui/uimodel_walkup.vnmgraph_c": {
+        "version": "65d99c82",
+        "bytes": 15554,
+        "kind": "vnmgraph_c",
+        "sha256": "4a0829bbd4ca8bd309a5ac82a02985d0e599fa2a5056fa27d3e4402f08896604"
+      },
+      "animation/graphs/ui/uimodel_idles.vnmgraph_c": {
+        "version": "ba3e508c",
+        "bytes": 40430,
+        "kind": "vnmgraph_c",
+        "sha256": "39d4d35276134fe681cb40d3a72ffbddf632dad41f7a64de0ad905c4e283171c"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_wet_sox.vnmgraph_c": {
+        "version": "cc39e859",
+        "bytes": 3378,
+        "kind": "vnmgraph_c",
+        "sha256": "c8c8a42d1e6f8ed6ce8747a2ed4d8fcc4e211503c79c409c18c4ae1111d47ab3"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_vypa.vnmgraph_c": {
+        "version": "2f52f0dd",
+        "bytes": 3267,
+        "kind": "vnmgraph_c",
+        "sha256": "9afdea05c478fd9b7606b49ad1aa5dcac3e4b00e25269ee7e4e39bf3b4e770fe"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_rouchard.vnmgraph_c": {
+        "version": "1d0e0f8a",
+        "bytes": 3286,
+        "kind": "vnmgraph_c",
+        "sha256": "c1de2c2ce9bc480f48d0f20658aa117b615625d8c3d0a3b73185f9ff4780fbfb"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_ricksaw.vnmgraph_c": {
+        "version": "1c6bdebc",
+        "bytes": 3288,
+        "kind": "vnmgraph_c",
+        "sha256": "7d2a189ca2724d6b32a3aa5204d5ee011f244902a41a3d11ea426565513df56e"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_muhlik.vnmgraph_c": {
+        "version": "6a3c8239",
+        "bytes": 3269,
+        "kind": "vnmgraph_c",
+        "sha256": "6295bd904b911696cda5b5450916a04ff4b26c6c9ca065c8b40cfdc21453fdf3"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_mae.vnmgraph_c": {
+        "version": "698f8e15",
+        "bytes": 3359,
+        "kind": "vnmgraph_c",
+        "sha256": "1bbf882331d8389109ea6ec44eadc78c5f4e6e3709bad1ee1f4fd5a02f3951c7"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_goggles.vnmgraph_c": {
+        "version": "9ce8e8f9",
+        "bytes": 3287,
+        "kind": "vnmgraph_c",
+        "sha256": "5df887218f21d0053d2d61705ea139a3278caf5c0651a70144ef498ce673c9e4"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_doctor.vnmgraph_c": {
+        "version": "d59ac30f",
+        "bytes": 3267,
+        "kind": "vnmgraph_c",
+        "sha256": "6da5378bd5573baef92a48fb5897fbcb48963691a129ce0c2b9d099c2e89921d"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_darryl.vnmgraph_c": {
+        "version": "3f4ec054",
+        "bytes": 3269,
+        "kind": "vnmgraph_c",
+        "sha256": "d75613e18848c8787e0907f8ee42801e194665ecce4d0d2a7ff09fee20acb027"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_crasswater.vnmgraph_c": {
+        "version": "7ef92b4c",
+        "bytes": 3289,
+        "kind": "vnmgraph_c",
+        "sha256": "99ade896700dd83a97844387eea22639cc0090da5283061153c09eef4c74e751"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+defeat_ava.vnmgraph_c": {
+        "version": "32260ddf",
+        "bytes": 3268,
+        "kind": "vnmgraph_c",
+        "sha256": "5d5f82f93fbea28e5493ce0f05617a4185248a566c3fd11d1c92e1f81d5a6dc2"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_wet_sox.vnmgraph_c": {
+        "version": "140706b2",
+        "bytes": 3414,
+        "kind": "vnmgraph_c",
+        "sha256": "0af1179578fb475f82dfc80d255242f83c0dd72e0632a86d30363a367f781da4"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_vypa.vnmgraph_c": {
+        "version": "dc0b5063",
+        "bytes": 3507,
+        "kind": "vnmgraph_c",
+        "sha256": "b227327fa473ee1e79ba474ced933c7cddf6dd532929f499dad64686f40627e8"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_rouchard.vnmgraph_c": {
+        "version": "66e5c55f",
+        "bytes": 3525,
+        "kind": "vnmgraph_c",
+        "sha256": "6fa812ddd1e0f9717cf88a441115a31abbd70e72a33faa60ab6d19ec06907922"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_ricksaw.vnmgraph_c": {
+        "version": "58decdec",
+        "bytes": 3524,
+        "kind": "vnmgraph_c",
+        "sha256": "92f0446a067bfe28029b503cb5ad4fdb823ad1785abb57841c052b965373b82a"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_muhlik.vnmgraph_c": {
+        "version": "bfe29ad0",
+        "bytes": 3509,
+        "kind": "vnmgraph_c",
+        "sha256": "35b9a45c186ed9987ac769201cc6c20e72fc7246c72cf3daeb7bce980a26a5f6"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_mae.vnmgraph_c": {
+        "version": "c90da80d",
+        "bytes": 3504,
+        "kind": "vnmgraph_c",
+        "sha256": "0b9d2b6963b06eb72f00e59fb4be19e2c505211e54dc4dac69cae72579333b92"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_goggles.vnmgraph_c": {
+        "version": "a18594d2",
+        "bytes": 3633,
+        "kind": "vnmgraph_c",
+        "sha256": "e40dc10e13ef872f29d396ace7d2d7f9aebafd780667c3e67427041f108340ff"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_doctor.vnmgraph_c": {
+        "version": "cf6f2be3",
+        "bytes": 3611,
+        "kind": "vnmgraph_c",
+        "sha256": "d908d7794c233624734f82fb9ee456af5f7e03af3306f9a517c53d90c885786c"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_darryl.vnmgraph_c": {
+        "version": "fb18b698",
+        "bytes": 3726,
+        "kind": "vnmgraph_c",
+        "sha256": "13ed9585d5a720bb1ec29b6ac7aceb2be8d9a455eb86a4f9f8d786ac088fbf21"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_crasswater.vnmgraph_c": {
+        "version": "b0df2491",
+        "bytes": 3650,
+        "kind": "vnmgraph_c",
+        "sha256": "e3e4013c6e35bc259e29220c2ea2d7c58e73f646c91aed054bf2fa8ef171d25c"
+      },
+      "animation/graphs/ui/uimodel_celebration.vnmgraph+celebrate_ava.vnmgraph_c": {
+        "version": "c7940161",
+        "bytes": 3504,
+        "kind": "vnmgraph_c",
+        "sha256": "9fe1d9ffe9a6dc02d76d0092b71b56f1ef5656c138a228608b528e341a6897db"
+      }
+    }
+  },
+  "idf": {
+    "porter": "TALENT | d",
+    "workshop": "https://steamcommunity.com/sharedfiles/filedetails/?id=600219026",
+    "mirror": "https://dlcfun.com/en/garrys-mod/csgo-idf-playermodels-mod",
+    "archiveSha256": "1e63ace63334dc61c848b046610b3081a0ac34a131407ec80b2c161809043e89",
+    "model": "models/csgoidf1pm.mdl"
+  },
+  "tools": {
+    "Source2Viewer": "20.0",
+    "SourceIOCommit": "259b68b25d7e0ae3533d14140448bd145071f5c0",
+    "Blender": "4.5.9"
+  },
+  "clips": [
+    "idle_rifle",
+    "walk_n_rifle",
+    "walk_s_rifle",
+    "walk_e_rifle",
+    "walk_w_rifle",
+    "run_n_rifle"
+  ],
+  "limitations": [
+    "Ground Rebel uses the Source 2 version of the original agent mesh and rifle animation clips.",
+    "IDF uses a CS:GO community port; rifle movement is retargeted, not original Source 1 animation playback.",
+    "Death, aim response, breathing and first-person weapon IK are authored reconstructions; PBR materials approximate Source shaders."
+  ],
+  "viewArms": {
+    "groundRebel": "Native firstperson_default_gloves_arms and trimmed firstperson_sleeves meshes, original UVs and fingerless gloves",
+    "idf": "Arm surfaces extracted from the original skinned IDF uniform/hand mesh",
+    "animation": "Original weighted meshes follow authored weapon tracks through two-bone IK; these are not native Valve viewmodel animation clips"
+  }
+}
