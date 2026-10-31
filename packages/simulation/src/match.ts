@@ -308,6 +308,11 @@ export function respawn(player: PlayerState, match: Match, preserve = false) {
     player.armor = 0;
     player.helmet = player.kit = false;
   }
+  if (preserve) {
+    for (const id of Object.keys(player.magazines).map(Number)) {
+      player.magazines[id] = { ammo: weapons[id].mag, reserve: weapons[id].reserve };
+    }
+  }
   const rules = rulesFor(match.state.mode);
   if (rules.freeArmor) {
     player.armor = 100;

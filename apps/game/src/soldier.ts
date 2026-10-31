@@ -79,6 +79,7 @@ export type Soldier = {
   animationTeam: AgentTeam;
   releaseAppearance?: () => void;
   recoil: number;
+  proceduralSpineBase?: T.Quaternion;
   stride: number;
   moveX: number;
   moveZ: number;
@@ -350,6 +351,10 @@ export function setSoldierWeapon(
   poseWeapon(soldier);
 }
 export function resetSoldier(soldier: Soldier) {
+  if (soldier.proceduralSpineBase) {
+    soldier.spine.quaternion.copy(soldier.proceduralSpineBase);
+    soldier.proceduralSpineBase = undefined;
+  }
   soldier.dying = false;
   soldier.ragdoll?.reset();
   soldier.ragdoll = undefined;
@@ -401,6 +406,7 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
     poseWeapon(soldier);
     return;
   }
+  if (soldier.proceduralSpineBase) soldier.spine.quaternion.copy(soldier.proceduralSpineBase);
   soldier.stride = T.MathUtils.damp(soldier.stride, Math.min(speed / 2.1, 1), 12, dt);
   const magnitude = Math.hypot(soldier.moveX, soldier.moveZ);
   const x = magnitude > 0.01 ? soldier.moveX / magnitude : 0;
@@ -461,6 +467,7 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
   }
   soldier.mixer.update(0);
   soldier.recoil = Math.max(0, soldier.recoil - dt * 7);
+  (soldier.proceduralSpineBase ??= new T.Quaternion()).copy(soldier.spine.quaternion);
   soldier.spine.rotateZ(-soldier.recoil * 0.045 + Math.sin(soldier.time * 1.8) * 0.002);
   poseWeapon(soldier);
 }

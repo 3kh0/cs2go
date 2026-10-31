@@ -1,6 +1,14 @@
 import { expect, test } from "vitest";
 import { neutralInput, type Input } from "@cs2go/protocol";
-import { configurePlayer, createMatch, createPlayer, joinMatch, STEP, stepMatch } from "./match";
+import {
+  configurePlayer,
+  createMatch,
+  createPlayer,
+  joinMatch,
+  STEP,
+  stepMatch,
+  respawn,
+} from "./match";
 import { testMap } from "./test-map";
 import { dust2BuyZones } from "./buy-zones";
 import { weapons } from "./physics";
@@ -368,4 +376,27 @@ test("airborne unducking cannot extend feet through the floor, and shallow overl
   command(match, ct.id, {});
   expect(ct.y).toBeCloseTo(0, 6);
   expect(ct.grounded).toBe(true);
+});
+
+test("surviving captured weapons refill every magazine next round without changing identity", () => {
+  const { match, ct } = fixture();
+  arm(ct, 30, 0);
+  const captured = {
+    serial: 987,
+    creator: "t",
+    weapon: 30,
+    skin: { id: "", wear: 0, seed: 1 },
+  };
+  ct.appearances[30] = captured;
+  ct.reserve = 0;
+  ct.magazines[30] = { ammo: 0, reserve: 0 };
+  ct.magazines[ct.secondary] = { ammo: 0, reserve: 0 };
+  respawn(ct, match, true);
+  expect(ct.ammo).toBe(weapons[30].mag);
+  expect(ct.reserve).toBe(weapons[30].reserve);
+  expect(ct.magazines[ct.secondary]).toEqual({
+    ammo: weapons[ct.secondary].mag,
+    reserve: weapons[ct.secondary].reserve,
+  });
+  expect(ct.appearances[30]).toBe(captured);
 });
