@@ -14,7 +14,7 @@ import { applyBuyPose, buyPoseToken, poseBuyProp } from "./buy-poses";
 import { unregisterSkinModel } from "./skins";
 import { createNativeWorldGun } from "./weapon-motion";
 import { armoryReflections } from "./reflections";
-import { reachPreviewHand } from "./preview-arm";
+import { movePreviewHands } from "./preview-arm";
 import {
   acquireAgentAnimation,
   agentAnimationWeaponIndex,
@@ -321,7 +321,6 @@ export class HomeScene {
       // Imported vests/plate carriers extend beyond the reference agent's
       // chest. Retarget both arm contacts together, rather than moving the gun
       // away from the sampled fingers or scaling the weapon down.
-      const forward = new T.Vector3(0, 0, 0.12);
       for (const frame of pose.frames) {
         for (const [name, transform] of Object.entries(frame.bones)) {
           const bone = soldier.model.getObjectByName(name);
@@ -330,8 +329,7 @@ export class HomeScene {
           bone.quaternion.fromArray(transform.q);
         }
         soldier.group.updateMatrixWorld(true);
-        reachPreviewHand(soldier.rightHand, forward);
-        reachPreviewHand(soldier.leftHand, forward);
+        movePreviewHands(soldier.group, [soldier.rightHand, soldier.leftHand], 0.14);
         for (const hand of [soldier.rightHand, soldier.leftHand]) {
           for (const bone of [hand, hand.parent!, hand.parent!.parent!]) {
             frame.bones[bone.name] = { p: bone.position.toArray(), q: bone.quaternion.toArray() };

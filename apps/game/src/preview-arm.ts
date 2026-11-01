@@ -1,5 +1,33 @@
 import * as T from "three";
 
+export function movePreviewHands(root: T.Object3D, hands: readonly T.Object3D[], distance: number) {
+  if (!(distance > 0)) return new T.Vector3();
+  root.updateWorldMatrix(true, true);
+  const offset = new T.Vector3(0, 0, distance).applyQuaternion(
+    root.getWorldQuaternion(new T.Quaternion()),
+  );
+  let fraction = 1;
+  for (const hand of hands) {
+    const lower = hand.parent!,
+      upper = lower.parent!;
+    const shoulder = upper.getWorldPosition(new T.Vector3());
+    const elbow = lower.getWorldPosition(new T.Vector3());
+    const wrist = hand.getWorldPosition(new T.Vector3());
+    const reach = shoulder.distanceTo(elbow) + elbow.distanceTo(wrist) - 0.0002;
+    const relative = wrist.sub(shoulder);
+    const a = offset.lengthSq(),
+      b = 2 * relative.dot(offset),
+      c = relative.lengthSq() - reach * reach;
+    fraction = Math.min(
+      fraction,
+      Math.max(0, (-b + Math.sqrt(Math.max(0, b * b - 4 * a * c))) / (2 * a)),
+    );
+  }
+  offset.multiplyScalar(fraction);
+  hands.forEach((hand) => reachPreviewHand(hand, offset));
+  return offset;
+}
+
 /** Two-bone correction for bulky showcase bodies. Keep wrist orientation and
  * finger poses intact while moving both contacts clear of the vest. */
 export function reachPreviewHand(hand: T.Object3D, offset: T.Vector3) {
@@ -11,7 +39,7 @@ export function reachPreviewHand(hand: T.Object3D, offset: T.Vector3) {
   const shoulder = upper.getWorldPosition(new T.Vector3());
   const elbow = lower.getWorldPosition(new T.Vector3());
   const wrist = hand.getWorldPosition(new T.Vector3());
-  const wristRotation = hand.getWorldQuaternion(new T.Quaternion());
+  const wristRotation = hand.getWorldQuaternion(new T.Quaternion()).normalize();
   const target = wrist.clone().add(offset);
   const a = shoulder.distanceTo(elbow),
     b = elbow.distanceTo(wrist);
@@ -27,10 +55,10 @@ export function reachPreviewHand(hand: T.Object3D, offset: T.Vector3) {
     .addScaledVector(direction, along)
     .addScaledVector(bend, Math.sqrt(Math.max(0, a * a - along * along)));
   const rotate = (bone: T.Object3D, from: T.Vector3, to: T.Vector3) => {
-    const world = bone.getWorldQuaternion(new T.Quaternion());
+    const world = bone.getWorldQuaternion(new T.Quaternion()).normalize();
     world.premultiply(new T.Quaternion().setFromUnitVectors(from.normalize(), to.normalize()));
     bone.quaternion.copy(
-      bone.parent!.getWorldQuaternion(new T.Quaternion()).invert().multiply(world),
+      bone.parent!.getWorldQuaternion(new T.Quaternion()).normalize().invert().multiply(world),
     );
     bone.updateWorldMatrix(false, true);
   };
@@ -41,7 +69,7 @@ export function reachPreviewHand(hand: T.Object3D, offset: T.Vector3) {
     target.clone().sub(nextElbow),
   );
   hand.quaternion.copy(
-    lower.getWorldQuaternion(new T.Quaternion()).invert().multiply(wristRotation),
+    lower.getWorldQuaternion(new T.Quaternion()).normalize().invert().multiply(wristRotation),
   );
   hand.updateWorldMatrix(false, true);
 }

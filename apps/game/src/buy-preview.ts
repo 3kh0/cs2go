@@ -9,6 +9,7 @@ import { createInspectsWorldKnife } from "./inspects-knife";
 import { bayonetWorldGrip } from "./knife-motion";
 import { createGrenadeModel } from "./grenade-models";
 import { type GrenadeKind } from "./utility";
+import { movePreviewHands } from "./preview-arm";
 import { unregisterSkinModel, skinChoices, skinName, skinRarityColor } from "./skins";
 
 /** Uses the game's context and loaded templates; no extra model requests or render loop. */
@@ -152,6 +153,8 @@ export class BuyPreview {
           : (kind ??
             (equipment ? (equipment === "kit" ? "defuser" : "armor_helmet") : buyPoseToken(index)));
       this.attachment = applyBuyPose(soldier, token);
+      if (!kind && !equipment && !isKnife(index))
+        movePreviewHands(soldier.group, [soldier.rightHand, soldier.leftHand], 0.14);
       document.getElementById(this.stageId)!.dataset.pose = this.attachment.clip;
       if (!equipment) {
         const itemKey = `${team}:${soldier.animationTeam}:${kind ?? String(index)}`;
