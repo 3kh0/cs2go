@@ -50,6 +50,7 @@ export type ServerOptions = {
   password?: string;
   maxRooms?: number;
   maxConnections?: number;
+  log?: (message: string) => void;
 };
 
 export function startServer(options: ServerOptions) {
@@ -66,6 +67,11 @@ export function startServer(options: ServerOptions) {
   const rooms = new Map<string, Room>();
   const connections = new Set<ServerWebSocket<Connection>>();
   let stopping = false;
+  const roomLabels = new WeakMap<Room, number>();
+  const rejected = new WeakSet<ServerWebSocket<Connection>>();
+  let nextRoomLabel = 1;
+  const log = (message: string) => options.log?.(message);
+  const clientLabel = (socket: ServerWebSocket<Connection>) => socket.data.id.slice(0, 8);
   function send(socket: ServerWebSocket<Connection>, message: ServerMessage) {
     if (socket.readyState !== 1) return;
     if (socket.getBufferedAmount() > 512 * 1024) {
@@ -75,6 +81,10 @@ export function startServer(options: ServerOptions) {
     socket.send(JSON.stringify(message));
   }
   function reject(socket: ServerWebSocket<Connection>, message: string) {
+    if (!rejected.has(socket)) {
+      rejected.add(socket);
+      log(`Client ${clientLabel(socket)} rejected - ${message}`);
+    }
     send(socket, { type: "error", message });
     socket.close(1008, message);
   }
@@ -119,6 +129,7 @@ export function startServer(options: ServerOptions) {
       perMessageDeflate: false,
       open(socket) {
         connections.add(socket);
+        log(`Client ${clientLabel(socket)} connected - ${connections.size} sockets`);
       },
       message(socket, raw) {
         const connection = socket.data;
@@ -145,6 +156,10 @@ export function startServer(options: ServerOptions) {
               tick: 0,
             };
             rooms.set(message.room, room);
+            roomLabels.set(room, nextRoomLabel++);
+            log(
+              `Room #${roomLabels.get(room)} created - Dust II - ${message.mode} - ${rulesFor(message.mode).teamSize}v${rulesFor(message.mode).teamSize}`,
+            );
           }
           if (room.state.mode !== message.mode)
             return reject(socket, "Room uses a different game mode");
@@ -158,6 +173,9 @@ export function startServer(options: ServerOptions) {
           joinMatch(room, player);
           room.connections.add(socket);
           connection.room = room;
+          log(
+            `Client ${clientLabel(socket)} joined room #${roomLabels.get(room)} - ${message.team.toUpperCase()} - ${room.players.size} players`,
+          );
           connection.last = { ...neutralInput(), yaw: player.yaw, pitch: player.pitch };
           send(socket, {
             type: "welcome",
@@ -197,19 +215,29 @@ export function startServer(options: ServerOptions) {
           connection.lastInput = now;
         }
       },
-      close(socket) {
+      close(socket, code) {
         connections.delete(socket);
+        log(
+          `Client ${clientLabel(socket)} disconnected - code ${code} - ${connections.size} sockets`,
+        );
         const room = socket.data.room;
         if (!room) return;
         room.connections.delete(socket);
         leaveMatch(room, socket.data.id);
         if (!room.players.size)
-          for (const [key, value] of rooms) if (value === room) rooms.delete(key);
+          for (const [key, value] of rooms)
+            if (value === room) {
+              rooms.delete(key);
+              log(`Room #${roomLabels.get(room)} removed - empty`);
+            }
       },
     },
   });
   let previous = performance.now(),
     accumulator = 0;
+  let statusAt = previous,
+    ticks = 0,
+    peakCatchup = 0;
   const timer = setInterval(() => {
     const now = performance.now();
     // Keep elapsed ticks through scheduler stalls; draining buffered inputs must
@@ -221,6 +249,7 @@ export function startServer(options: ServerOptions) {
     let catchup = 0;
     while (accumulator >= STEP && catchup++ < 32) {
       accumulator -= STEP;
+      ticks++;
       for (const room of rooms.values()) {
         const inputs = new Map<string, Input>();
         for (const socket of room.connections) {
@@ -253,7 +282,13 @@ export function startServer(options: ServerOptions) {
               : { ...neutralInput(), yaw: connection.last.yaw, pitch: connection.last.pitch };
           inputs.set(connection.id, held);
         }
+        const phase = room.state.phase,
+          round = room.state.round;
         room.events.push(...stepMatch(room, inputs));
+        if (phase !== room.state.phase || round !== room.state.round)
+          log(
+            `Room #${roomLabels.get(room)} - round ${room.state.round} - ${room.state.phase} - CT ${room.state.scores.ct} : T ${room.state.scores.t}`,
+          );
         room.tick++;
         if (room.tick % (TICK_RATE / SNAPSHOT_RATE) === 0) {
           const message: ServerMessage = {
@@ -268,12 +303,23 @@ export function startServer(options: ServerOptions) {
         }
       }
     }
+    peakCatchup = Math.max(peakCatchup, Math.min(catchup, 32));
+    if (options.log && now - statusAt >= 30000) {
+      let players = 0;
+      for (const room of rooms.values()) players += room.players.size;
+      log(
+        `Status - ${rooms.size} rooms - ${players} players - ${connections.size} sockets - ${Math.round((ticks * 1000) / (now - statusAt))} ticks/s - peak catch-up ${peakCatchup}`,
+      );
+      statusAt = now;
+      ticks = peakCatchup = 0;
+    }
   }, 1000 / TICK_RATE);
   return {
     server,
     rooms,
     async stop() {
       stopping = true;
+      log(`Stopping ${rooms.size} rooms and closing ${connections.size} sockets`);
       clearInterval(timer);
       for (const socket of connections) socket.close(1012, "Server restarting; rejoin your room");
       await server.stop(true);

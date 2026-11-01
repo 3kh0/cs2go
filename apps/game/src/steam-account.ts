@@ -11,7 +11,7 @@ export function setupSteamAccount() {
   overlay.className = "overlay hidden";
   overlay.setAttribute("role", "region");
   overlay.setAttribute("aria-labelledby", "steam-account-title");
-  overlay.innerHTML = `<div class="steam-account-page"><div class="dialog-heading"><div><div class="eyebrow">STEAM ACCOUNT</div><h2 id="steam-account-title">INVENTORY</h2></div><button id="steam-account-close" class="close" aria-label="Close Steam account">×</button></div><div class="steam-account-actions"><a class="secondary" id="steam-login" href="/api/steam?action=login">SIGN IN THROUGH STEAM</a><button id="steam-sync" class="secondary" hidden>SYNC INVENTORY</button><button id="steam-logout" class="secondary" hidden>SIGN OUT</button></div><p id="steam-status" role="status" aria-live="polite"></p><details id="steam-local-import" hidden><summary>IMPORT FROM THIS DEVICE</summary><p>Open your inventory on Steam, save the JSON page, then select the saved file here. Importing runs on your device.</p><a id="steam-local-open" class="secondary" target="_blank" rel="noopener noreferrer">OPEN STEAM INVENTORY</a><label class="secondary">IMPORT JSON<input id="steam-local-file" type="file" accept=".json,application/json" multiple></label><small>If Steam returns more_items, save every page using last_assetid as start_assetid, then import all pages together in order.</small></details><div class="steam-inventory-toolbar"><input id="steam-item-search" type="search" aria-label="Search inventory" placeholder="Search inventory…"><nav id="steam-item-filters" aria-label="Inventory categories"><button data-item-filter="Everything" aria-pressed="true">EVERYTHING</button><button data-item-filter="Equipment">EQUIPMENT</button><button data-item-filter="Graphic Art">GRAPHIC ART</button><button data-item-filter="Containers">CONTAINERS</button><button data-item-filter="Display">DISPLAY</button></nav><label>Sort <select id="steam-item-sort"><option value="newest">Newest</option><option value="name">Name</option><option value="type">Type</option></select></label></div><div id="steam-items" aria-label="Owned Steam items"></div><p class="steam-inventory-footer">Your Steam inventory · Equipping applies the exact available wear and pattern locally.</p></div>`;
+  overlay.innerHTML = `<div class="steam-account-page"><div class="dialog-heading"><div><div class="eyebrow">STEAM ACCOUNT</div><h2 id="steam-account-title">INVENTORY</h2></div><button id="steam-account-close" class="close" aria-label="Close Steam account">×</button></div><div class="steam-account-actions"><a class="secondary" id="steam-login" href="/api/steam?action=login">SIGN IN THROUGH STEAM</a><button id="steam-sync" class="secondary" hidden>SYNC INVENTORY</button><button id="steam-logout" class="secondary" hidden>SIGN OUT</button></div><p id="steam-status" role="status" aria-live="polite"></p><details id="steam-local-import" hidden><summary>IMPORT FROM THIS DEVICE</summary><p>Open your inventory on Steam, save the JSON page, then select the saved file here. Importing runs on your device.</p><a id="steam-local-open" class="secondary" target="_blank" rel="noopener noreferrer">OPEN STEAM INVENTORY</a><label class="secondary">IMPORT JSON<input id="steam-local-file" type="file" accept=".json,application/json" multiple></label><small>If Steam returns more_items, save every page using last_assetid as start_assetid, then import all pages together in order.</small></details><div class="steam-inventory-toolbar"><input id="steam-item-search" type="search" aria-label="Search inventory" placeholder="Search inventory…"><nav id="steam-item-filters" aria-label="Inventory categories"><button data-item-filter="Everything" aria-pressed="true">EVERYTHING</button><button data-item-filter="Equipment">EQUIPMENT</button><button data-item-filter="Graphic Art">GRAPHIC ART</button><button data-item-filter="Containers">CONTAINERS</button><button data-item-filter="Display">DISPLAY</button></nav><label>Sort <select id="steam-item-sort"><option value="newest">Newest</option><option value="name">Name</option><option value="type">Type</option></select></label></div><div id="steam-items" aria-label="Owned Steam items"></div><p class="steam-inventory-footer">Your Steam inventory - Equipping applies the exact available wear and pattern locally.</p></div>`;
   document.body.append(overlay);
   const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const status = el("steam-status");
@@ -170,11 +170,11 @@ export function setupSteamAccount() {
       const description = document.createElement("div");
       const name = document.createElement("strong");
       name.textContent = item.weaponName ? item.name.split(" | ")[0] : item.name;
-      row.title = `${item.name}\n${item.type ?? ""}${item.rarity ? ` · ${item.rarity}` : ""}`;
+      row.title = `${item.name}\n${item.type ?? ""}${item.rarity ? ` - ${item.rarity}` : ""}`;
       const detail = document.createElement("small");
       detail.textContent = item.finish || item.type || item.rarity || "";
       row.title += choice
-        ? `\nWear ${item.wear} · Pattern ${item.seed}`
+        ? `\nWear ${item.wear} - Pattern ${item.seed}`
         : skin
           ? "\nSteam did not return exact wear and pattern for this item."
           : "";
@@ -229,7 +229,7 @@ export function setupSteamAccount() {
       empty.textContent = "No items match your filters.";
       grid.append(empty);
     }
-    status.textContent = `${profile?.name}: ${items.length} visible Steam items synced · ${supported} finishes ready to equip.${reportedTotal > items.length ? ` Steam reports ${reportedTotal} total items; the remaining items were not exposed by Steam.` : ""}`;
+    status.textContent = `${profile?.name}: ${items.length} visible Steam items synced - ${supported} finishes ready to equip.${reportedTotal > items.length ? ` Steam reports ${reportedTotal} total items; the remaining items were not exposed by Steam.` : ""}`;
   }
   el("steam-item-search").oninput = () => void renderItems();
   el("steam-item-sort").onchange = () => void renderItems();

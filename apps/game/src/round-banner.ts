@@ -28,8 +28,8 @@ export function showRoundBanner(
   document.getElementById("round-banner-title")!.textContent =
     winner === playerTeam ? "ROUND WON" : "ROUND LOST";
   document.getElementById("round-banner-reason")!.textContent =
-    fact || `${winner === "ct" ? "Counter-Terrorists" : "Terrorists"} win · ${reason}`;
-  node.title = `${winner === "ct" ? "Counter-Terrorists" : "Terrorists"} win · ${reason}`;
+    fact || `${winner === "ct" ? "Counter-Terrorists" : "Terrorists"} win - ${reason}`;
+  node.title = `${winner === "ct" ? "Counter-Terrorists" : "Terrorists"} win - ${reason}`;
   document.getElementById("round-mvp")!.hidden = !mvp;
   if (mvp) {
     (document.getElementById("round-mvp-avatar") as HTMLImageElement).src = assetUrl(

@@ -10,7 +10,7 @@ export function openTeamSelector(onSelect: (team: AgentTeam) => void, size = 10)
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", "Choose your team");
-  overlay.innerHTML = `<div class="team-heading"><button id="team-back">← BACK</button><span>CHOOSE YOUR TEAM</span><span>DUST II · ${size} × ${size}</span></div><div class="team-options">${(["t", "ct"] as const).map((team) => `<button class="team-choice team-${team}" data-team="${team}"><img class="team-emblem" src="/icons/team-${team}.png" alt="" width="76" height="76"><h2>${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"}</h2><p>${team === "t" ? "Plant the bomb. Hold the site." : "Defend the sites. Defuse the bomb."}</p><div class="agent-preview"></div><span class="team-join">JOIN ${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"} ↗</span></button>`).join("")}</div>`;
+  overlay.innerHTML = `<div class="team-heading"><button id="team-back">← BACK</button><span>CHOOSE YOUR TEAM</span><span>DUST II - ${size} × ${size}</span></div><div class="team-options">${(["t", "ct"] as const).map((team) => `<button class="team-choice team-${team}" data-team="${team}"><img class="team-emblem" src="/icons/team-${team}.png" alt="" width="76" height="76"><h2>${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"}</h2><p>${team === "t" ? "Plant the bomb. Hold the site." : "Defend the sites. Defuse the bomb."}</p><div class="agent-preview"></div><span class="team-join">JOIN ${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"} ↗</span></button>`).join("")}</div>`;
   document.body.append(overlay);
   menu.inert = true;
   const renderer = new T.WebGLRenderer({ alpha: true, antialias: true });

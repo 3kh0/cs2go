@@ -19,6 +19,6 @@ export function setPlayerProfile(value: SteamProfile | null) {
   else avatar.removeAttribute("src");
   document.getElementById("steam-account-label")!.textContent = value ? "STEAM" : "SIGN IN";
   document.getElementById("steam-account-button")!.title = value
-    ? `${value.name} · Steam account`
+    ? `${value.name} - Steam account`
     : "Sign in with Steam";
 }

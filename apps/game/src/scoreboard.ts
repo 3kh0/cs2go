@@ -60,7 +60,7 @@ function history(board: Board) {
       `round-slot ${outcome?.winner ?? ""} ${!outcome && i === board.round - 1 ? "current" : ""}`,
     );
     if (board.competitive && i === 12) slot.classList.add("halftime");
-    slot.title = `Round ${i + 1}: ${outcome ? `${outcome.winner.toUpperCase()} won · ${outcome.reason}` : i === board.round - 1 ? "In progress" : "Unplayed"}`;
+    slot.title = `Round ${i + 1}: ${outcome ? `${outcome.winner.toUpperCase()} won - ${outcome.reason}` : i === board.round - 1 ? "In progress" : "Unplayed"}`;
     slot.setAttribute("aria-label", slot.title);
     if (outcome) {
       const icon =
@@ -88,10 +88,10 @@ export function renderScoreboard(board: Board) {
       ? "∞"
       : `${Math.floor(board.seconds / 60)}:${String(board.seconds % 60).padStart(2, "0")}`;
   document.getElementById("scoreboard-summary")!.textContent = board.teamMode
-    ? `${board.teamSize} VS ${board.teamSize} · FIRST TO ${board.winTarget} · ${board.roundPause ? "ROUND COMPLETE" : `ROUND ${board.round}`}${board.planted ? " · BOMB PLANTED" : ""}`
+    ? `${board.teamSize} VS ${board.teamSize} - FIRST TO ${board.winTarget} - ${board.roundPause ? "ROUND COMPLETE" : `ROUND ${board.round}`}${board.planted ? " - BOMB PLANTED" : ""}`
     : board.mode === "deathmatch"
-      ? "DEATHMATCH · FIRST TO 20 KILLS"
-      : "TARGET PRACTICE · UNLIMITED TIME";
+      ? "DEATHMATCH - FIRST TO 20 KILLS"
+      : "TARGET PRACTICE - UNLIMITED TIME";
   const fragment = document.createDocumentFragment();
   for (const team of ["ct", "t"] as const) {
     if (team === "t" && board.teamMode) fragment.append(history(board));

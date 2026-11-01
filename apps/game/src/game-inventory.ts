@@ -190,7 +190,7 @@ export class GameInventory {
       )
       .join(
         "",
-      )}</div><footer class="loadout-candidates"><div class="loadout-filter"><label>Category <select id="loadout-category">${["Pistols", "Mid-Tier", "Rifles"].map((c) => `<option ${c === this.editorCategory ? "selected" : ""}>${c}</option>`).join("")}</select></label><span>${this.editorTeam.toUpperCase()} · ${this.editorCategory === "Pistols" && this.editorSlot === 0 ? "Starting pistol" : `Slot ${this.editorSlot + 1}`} · Select a weapon to replace this slot</span></div><div class="inventory-choices">${loadoutChoices(
+      )}</div><footer class="loadout-candidates"><div class="loadout-filter"><label>Category <select id="loadout-category">${["Pistols", "Mid-Tier", "Rifles"].map((c) => `<option ${c === this.editorCategory ? "selected" : ""}>${c}</option>`).join("")}</select></label><span>${this.editorTeam.toUpperCase()} - ${this.editorCategory === "Pistols" && this.editorSlot === 0 ? "Starting pistol" : `Slot ${this.editorSlot + 1}`} - Select a weapon to replace this slot</span></div><div class="inventory-choices">${loadoutChoices(
       this.editorTeam,
       this.editorCategory,
       this.editorSlot,

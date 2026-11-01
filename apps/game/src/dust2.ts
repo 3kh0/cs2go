@@ -22,7 +22,7 @@ export async function loadDust2(scene: T.Scene) {
   if (!response.ok) throw new Error("Dust II navigation could not load");
   const navigation = new Navigation((await response.json()) as MapNavigation);
   const root = new T.Group();
-  root.name = "Dust II · CS2";
+  root.name = "Dust II - CS2";
   root.add(asset.scene);
   asset.scene.updateMatrixWorld(true);
   asset.scene.traverse((object) => {

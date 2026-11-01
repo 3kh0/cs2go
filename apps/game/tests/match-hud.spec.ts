@@ -98,7 +98,7 @@ test("native defuse countdown, cancellation, kit variant, MVP and full competiti
   await expect(page.locator(".round-slot")).toHaveCount(24);
   await expect(page.locator(".round-slot").nth(16)).toHaveAttribute(
     "aria-label",
-    "Round 17: CT won · Bomb defused",
+    "Round 17: CT won - Bomb defused",
   );
   await expect(page.locator(".score-row.you .score-mvps")).toHaveText("1");
   expect(await page.locator(".score-team.t .score-cash").allTextContents()).toEqual([

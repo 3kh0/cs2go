@@ -1553,7 +1553,7 @@ test("Tab scoreboard groups teams, tracks alive players and records match progre
   await expect(page.locator(".round-slot.ct")).toHaveCount(1);
   await expect(page.locator(".round-slot.ct")).toHaveAttribute(
     "aria-label",
-    "Round 1: CT won · Bomb defused",
+    "Round 1: CT won - Bomb defused",
   );
   await page.screenshot({ path: "artifacts/scoreboard-casual.png" });
   await page.setViewportSize({ width: 1280, height: 720 });

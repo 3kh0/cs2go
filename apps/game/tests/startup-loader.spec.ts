@@ -36,7 +36,7 @@ test("startup shows filenames and percentage before revealing the menu", async (
   await expect(page.getByRole("progressbar", { name: "Loading progress" })).toBeVisible();
   await expect(page.locator(".startup-percent")).toHaveText(/^\d{1,3}%$/);
   await expect(page.locator(".startup-percent")).toHaveAttribute("aria-valuenow", /^\d{1,3}$/);
-  expect(filenames.some((name) => name.includes(" · "))).toBe(false);
+  expect(filenames.some((name) => name.includes(" - "))).toBe(false);
   const line = await page.locator(".startup-loading").evaluate((node) => {
     const label = node.querySelector(".startup-label")!.getBoundingClientRect();
     const percent = node.querySelector(".startup-percent")!.getBoundingClientRect();

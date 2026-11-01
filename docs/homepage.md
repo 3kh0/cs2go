@@ -1,6 +1,6 @@
 # CS2 homepage
 
-The homepage follows the installed CS2 Panorama layout from build **26144732**, depot **2347770**, manifest **67499503218971311**. Its center navigation is **Inventory · Loadout · Play · Store · News**, with native Home, Watch, Settings and Quit icons on the left. The navbar uses the native linemap texture, condensed type, separators and translucent backdrop. Conditional account-only Overwatch/VACNet controls are omitted.
+The homepage follows the installed CS2 Panorama layout from build **26144732**, depot **2347770**, manifest **67499503218971311**. Its center navigation is **Inventory - Loadout - Play - Store - News**, with native Home, Watch, Settings and Quit icons on the left. The navbar uses the native linemap texture, condensed type, separators and translucent backdrop. Conditional account-only Overwatch/VACNet controls are omitted.
 
 The background is the actual static visual export of `maps/de_dust2_vanity.vpk`, rather than a gameplay-map flyover or a background photograph. The authored `cam_default` supplies the 30° vertical FOV, position and view direction; `vanity_character` supplies player position and yaw. VRF exports `(Source y,z,x)` in metres. The runtime rotates the scene Y +90° to align it with the agents' `(Source x,z,-y)` coordinates, without scaling the scene twice. The nameplate projects the animated pelvis into the viewport, following the native placement method.
 

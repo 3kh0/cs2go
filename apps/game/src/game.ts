@@ -1471,7 +1471,7 @@ export class Game {
     setText(
       "buy-rules",
       !this.teamMode
-        ? "Practice · Unlimited buying"
+        ? "Practice - Unlimited buying"
         : `Buy Time Remaining  ${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`,
     );
     setText("buy-wallet", this.teamMode ? `$${this.money.toLocaleString()}` : "");
@@ -1485,7 +1485,7 @@ export class Game {
       dropped.innerHTML = nearby
         .map(
           (drop) =>
-            `<div title="${weapons[drop.id].name} · Pick up nearby with E"><img src="/icons/${weaponIcons[drop.id]}.png" alt="${weapons[drop.id].name}"></div>`,
+            `<div title="${weapons[drop.id].name} - Pick up nearby with E"><img src="/icons/${weaponIcons[drop.id]}.png" alt="${weapons[drop.id].name}"></div>`,
         )
         .join("");
     }
@@ -1511,7 +1511,7 @@ export class Game {
         : "FREE";
       button.setAttribute(
         "aria-label",
-        `${weapons[index].name} · ${owned ? "Owned, equip" : price ? `$${price}, buy` : "Free, equip"}`,
+        `${weapons[index].name} - ${owned ? "Owned, equip" : price ? `$${price}, buy` : "Free, equip"}`,
       );
     }
     for (const button of document.querySelectorAll<HTMLButtonElement>("[data-refund]")) {
@@ -2507,7 +2507,7 @@ export class Game {
       ? `${this.teamScores[this.team]} : ${this.teamScores[this.team === "ct" ? "t" : "ct"]}`
       : "";
     el("result-stats").textContent =
-      `${this.kills} eliminations · ${this.deaths} deaths · ${this.deaths ? (this.kills / this.deaths).toFixed(2) : this.kills.toFixed(2)} K/D`;
+      `${this.kills} eliminations - ${this.deaths} deaths - ${this.deaths ? (this.kills / this.deaths).toFixed(2) : this.kills.toFixed(2)} K/D`;
   }
   updateDuckInput(dt: number) {
     this.duckCooldown = Math.max(0, this.duckCooldown - dt);
@@ -4733,7 +4733,7 @@ export class Game {
     );
     const footer = el("scoreboard").querySelector("small");
     if (footer)
-      footer.textContent = `HOLD TAB TO VIEW SCOREBOARD · ${this.network ? "MULTIPLAYER" : "SINGLE PLAYER"}`;
+      footer.textContent = `HOLD TAB TO VIEW SCOREBOARD - ${this.network ? "MULTIPLAYER" : "SINGLE PLAYER"}`;
     const data = {
       rows,
       seconds,
@@ -4778,15 +4778,15 @@ export class Game {
         (observer?.defuseKit ?? this.defuseKit) ? "DEFUSE KIT" : "",
       ]
         .filter(Boolean)
-        .join(" · "),
+        .join(" - "),
     );
     setText(
       "buy-status",
       this.teamMode
         ? this.freezeTime > 0
-          ? `FREEZE TIME · ${Math.ceil(this.freezeTime)}s · B TO BUY`
+          ? `FREEZE TIME - ${Math.ceil(this.freezeTime)}s - B TO BUY`
           : this.canBuy()
-            ? "B · BUY EQUIPMENT"
+            ? "B - BUY EQUIPMENT"
             : ""
         : "",
     );
@@ -5054,7 +5054,7 @@ export class Game {
       this.fpsTime = 0;
       setText(
         "telemetry",
-        `${this.fps} FPS · 128 TICK · ${this.network ? `${this.network.connection.ping} MS` : "LOCAL"}`,
+        `${this.fps} FPS - 128 TICK - ${this.network ? `${this.network.connection.ping} MS` : "LOCAL"}`,
       );
     }
     if (this.simulationRunning) {
