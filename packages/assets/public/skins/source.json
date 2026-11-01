@@ -1,7 +1,7 @@
 {
   "source": "https://cs2inspects.com/3d-viewer",
   "generator": "python3 scripts/import-skins.py",
-  "catalogEntries": 1551,
+  "catalogEntries": 2005,
   "textureSize": 1024,
   "notes": "Valve paint data and composite WGSL shaders served by CS2 Inspects. Local gzip RGBA textures preserving transparent RGB channels; original downloads retained in artifacts. API paint descriptions include original seeded roll order and dynamic expressions.",
   "sha256": {
@@ -5697,5 +5697,6 @@
     "https://cdn.cs2inspects.com/econ/default_generated/weapon_bayonet_aa_fade_light_png.webp": "c704c73ff0df399a3da38be6003b0b04d9d3fd2e9f3c9daf2759c0be6345d79a",
     "https://cdn.cs2inspects.com/econ/default_generated/weapon_bayonet_hy_webs_light_png.webp": "06bdb5b5f35532bae3a75cdaffbb32ea8ad30ea274a1bd3a8ce0de48d7eb8fe2",
     "https://cdn.cs2inspects.com/econ/default_generated/weapon_bayonet_hy_ddpat_light_png.webp": "976aa42ac5c5b45d10af693f4c2f7d4894ba3ba813ddb828877d032712473b81"
-  }
+  },
+  "inventorySource": "inventory-source.json"
 }

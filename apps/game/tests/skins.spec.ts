@@ -44,6 +44,7 @@ test("skin catalog customizes wear and seed, persists, and restores default", as
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => window.__game.buy(0));
@@ -132,7 +133,7 @@ test("every bundled skin bakes locally and wear and pattern visibly change textu
       }
     }
     const variations = [];
-    for (const item of [7, 500, 515, 507]) {
+    for (const item of [7, 500, 515, 507, 508, 516, 525, 526]) {
       const paint = await (await fetch(`/skins/paints/${item}_44.json`)).json();
       const fresh = (await bakeSkin(paint, 661, 0.01))[0].maps.g_tColor;
       const worn = (await bakeSkin(paint, 661, 0.95))[0].maps.g_tColor;
@@ -158,13 +159,13 @@ test("every bundled skin bakes locally and wear and pattern visibly change textu
     };
   });
   expect(result.failures).toEqual([]);
-  expect(result.count).toBe(1551);
-  expect(result.unique).toBe(1551);
+  expect(result.count).toBe(2005);
+  expect(result.unique).toBe(2005);
   expect(
     Object.keys(result.perWeapon)
       .map(Number)
       .sort((a, b) => a - b),
-  ).toEqual(Array.from({ length: 37 }, (_, i) => i));
+  ).toEqual(Array.from({ length: 56 }, (_, i) => i).filter((id) => id !== 37 && id !== 38));
   expect([7, 8, 9, 10, 11].map((index) => result.perWeapon[index])).toEqual([59, 45, 52, 47, 47]);
   expect([13, 21, 36].map((index) => result.perWeapon[index])).toEqual([58, 46, 25]);
   expect(result.retained).toBeLessThanOrEqual(64 * 1024 * 1024);
@@ -212,6 +213,7 @@ test("knife finishes persist independently, animate, and restore their defaults"
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   for (const [index, item, material] of [
@@ -353,6 +355,7 @@ test("new gun finishes persist independently and paint both model variants", asy
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   for (const skin of variants) {

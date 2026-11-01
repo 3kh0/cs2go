@@ -17,6 +17,7 @@ test("native mode blast scales and fixed-rate inferno damage use the actual util
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible())
     await page.locator('#team-select [data-team="ct"]').click();

@@ -17,7 +17,7 @@ Hashes, source URLs, depot/tool versions and processing notes live beside their 
 
 Original weapon OBJs and initial WAVs came from supplied Downloads folders. Additional historical sounds came from pinned `sourcesounds/csgo`; native CS2 sound manifests supersede selected recordings. Weapon viewers supply pinned mesh/animation exports. Native Steam/Windows extractions supply map, agent, pose, interface and audio resources. Kill-feed silhouettes use the supplied Killfeed Generator reference. Exact inputs remain recorded in the corresponding manifests.
 
-Imported geometry and clip samples do not reproduce the complete Source 2 renderer or evaluated animation graphs. Three.js materials, lighting, retargeting, procedural constraints, sound mixing and effects retain documented approximations. The old IDF uses Source 1 proportions. New knife imports provide vanilla finishes; skin compatibility is catalog-dependent.
+Imported geometry and clip samples do not reproduce the complete Source 2 renderer or evaluated animation graphs. Three.js materials, lighting, retargeting, procedural constraints, sound mixing and effects retain documented approximations. The old IDF uses Source 1 proportions. The catalog includes all 556 listed finishes across twenty cosmetic knife models; team-default knives have no paint kits. Pattern/wear use the existing local paint renderer.
 
 ## Maintained scripts
 
@@ -33,6 +33,7 @@ Run scripts from the repository root. Python tools use Python 3; check each tool
 | `import-bomb-damage.py`, `import-buy-zones.py`, `import-world-ball.py`                                 | Extract pinned map/physics inputs with Source2Viewer and matching cached VPKs                               |
 | `import-sound-ranges.py`                                                                               | Extract distance curves from matching compiled/decoded weapon sound events                                  |
 | `import-all-knives.py`                                                                                 | Import nineteen additional knife models/icons from the pinned viewer; Bun, curl, Pillow and NumPy           |
+| `import-inventory.py`                                                                                  | Add missing knife finishes and full-color default inventory renders; Bun, curl and Pillow                   |
 | `extract-knife-timings.py`, `import-knife-timings.py`                                                  | Audit installed native clips and bind their timings to bundled GLBs                                         |
 
 `scripts/cs2-weapon-audio.json` remains the input for audio packing, range extraction and source-integrity tests. Do not discard it as an old report.

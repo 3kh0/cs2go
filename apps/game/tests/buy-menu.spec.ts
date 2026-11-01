@@ -27,7 +27,9 @@ test("CS2 buy menu previews items, filters teams, buys and refunds without custo
     { timeout: 100_000 },
   );
   await expect(page.locator("#play")).toBeEnabled();
+  await page.locator("#home-play").click();
   await page.locator('[data-mode="competitive"]').click();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);
@@ -202,6 +204,7 @@ test("main menu Inventory replaces ordered buy slots for each side and persists 
   );
   await page.locator("#close-loadout-editor").click();
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);

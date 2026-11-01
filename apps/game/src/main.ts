@@ -104,8 +104,10 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-session
       .querySelectorAll<HTMLButtonElement>("[data-session]")
       .forEach((node) => node.setAttribute("aria-pressed", String(node === button)));
   };
-if (invitation.has("room"))
+if (invitation.has("room")) {
   document.querySelector<HTMLButtonElement>('[data-session="multi"]')!.click();
+  el("menu").dataset.page = "play";
+}
 el("match-invite").onclick = async () => {
   const url = new URL(location.origin + "/");
   url.searchParams.set("room", room.value);

@@ -180,6 +180,7 @@ test("real Shift + Space input reaches Xbox's side ledge", async ({ page }) => {
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => (window as unknown as { __game: Game }).__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => (window as unknown as { __game: Game }).__game.locked);
   await page.evaluate(() => {

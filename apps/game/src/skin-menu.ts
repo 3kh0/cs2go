@@ -1,6 +1,6 @@
 import { assetUrl } from "./asset-url";
 import { skinCatalog, skinChoices, setSkin, type Skin, type SkinChoice } from "./skins";
-import { weapons as definitions, weaponIcons, isKnife } from "./physics";
+import { weapons as definitions, isKnife } from "./physics";
 import { playerProfile } from "./player-profile";
 
 const weapons = definitions.map((weapon) => weapon.name);
@@ -42,8 +42,8 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
     get("skin-title").textContent = skin?.name ?? "Default";
     get("skin-rarity").textContent = skin?.rarity ?? "Default finish";
     const img = get<HTMLImageElement>("skin-image");
-    const image = skin?.image ?? `/icons/${weaponIcons[weapon]}.png`;
-    if (img.getAttribute("src") !== image) img.src = assetUrl(image);
+    const image = assetUrl(skin?.image ?? `/skins/defaults/${weapon}.webp`);
+    if (img.getAttribute("src") !== image) img.src = image;
     img.alt = `${weapons[weapon]} ${skin?.name ?? "default finish"}`;
     wear.value = float.value = String(draft.wear);
     seed.value = String(draft.seed);
@@ -68,7 +68,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
   function list() {
     grid.replaceChildren();
     const entries: [string, string, string][] = [
-      ["", "Default", ""],
+      ["", "Default", `/skins/defaults/${weapon}.webp`],
       ...catalog
         .filter((s) => s.weapon === weapon)
         .sort((a, b) => a.name.localeCompare(b.name))

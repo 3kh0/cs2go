@@ -42,6 +42,7 @@ test("key rebinding persists, rejects conflicts and drives gameplay; fullscreen 
   await page.getByRole("tab", { name: "Controls", exact: true }).click();
   await expect(jump).toHaveText("J");
   await page.locator("#close-settings").click();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);

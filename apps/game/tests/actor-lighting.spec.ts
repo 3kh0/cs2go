@@ -42,6 +42,7 @@ test("native map and every cached viewmodel compile without shader errors", asyn
       external.push(request.url());
   });
   await page.goto("/");
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);

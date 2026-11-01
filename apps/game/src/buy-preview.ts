@@ -175,7 +175,7 @@ export class BuyPreview {
               model.userData.buyGrip = poseBuyProp(model, this.attachment.weaponBones).toArray();
           }
           if (model) {
-            model.userData.previewOwned = !kind && (!isKnife(index) || index !== 4);
+            model.userData.previewOwned = !kind;
             this.items.set(itemKey, model);
             this.scene.add(model);
           }

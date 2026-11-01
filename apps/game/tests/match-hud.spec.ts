@@ -9,7 +9,9 @@ declare global {
 async function start(page: Page, team: "t" | "ct") {
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await page.locator("#home-play").click();
   await page.locator('[data-mode="competitive"]').click();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator(`#team-select [data-team="${team}"]`).click();
   await page.waitForFunction(() => window.__game.locked);

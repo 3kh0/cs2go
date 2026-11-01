@@ -7,6 +7,7 @@ async function join(page: Page, room: string, team: "ct" | "t") {
   await expect(page.locator("#startup")).toHaveCount(0);
 
   await expect(page.locator("#multiplayer-options")).toBeVisible();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator(`#team-select [data-team="${team}"]`).click();
   await page.waitForFunction(() => !!window.__game.network?.connection.local);
@@ -255,6 +256,7 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     );
     await a.evaluate(() => window.__game.menu());
     await expect(a.locator("#menu")).toBeVisible();
+    await a.locator("#home-play").click();
     await a.locator('[data-session="single"]').click();
     await a.locator("#play").click();
     await a.locator('#team-select [data-team="ct"]').click();

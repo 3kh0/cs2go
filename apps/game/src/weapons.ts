@@ -131,7 +131,18 @@ function mergeWorldGun(source: T.Group) {
 }
 // The menu needs the authored grip metadata retained on the original knife node.
 export function createWorldBayonet() {
-  return templates[4].clone(true);
+  const model = templates[4].clone(true);
+  model.traverse((object) => {
+    if (object instanceof T.Mesh) {
+      object.geometry = object.geometry.clone();
+      object.material = Array.isArray(object.material)
+        ? object.material.map((material) => material.clone())
+        : object.material.clone();
+    }
+  });
+  model.userData.ownedWorldGun = true;
+  registerSkinModel(model, 4);
+  return model;
 }
 export function disposeWorldGun(root: T.Object3D) {
   root.removeFromParent();
@@ -148,7 +159,11 @@ export function disposeWorldGun(root: T.Object3D) {
   skeletons.forEach((skeleton) => skeleton.dispose());
 }
 export function createWorldGun(index: number, suppressed = true, instance?: WeaponInstance) {
-  if (isKnife(index)) return index === 4 ? createWorldBayonet() : createInspectsWorldKnife(index);
+  if (isKnife(index)) {
+    const model = index === 4 ? createWorldBayonet() : createInspectsWorldKnife(index);
+    bindWeaponInstance(model, instance ?? null);
+    return model;
+  }
   if (instance?.skin.id && !isKnife(index)) {
     const gun = createNativeWorldGun(
       index,

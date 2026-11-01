@@ -12,6 +12,7 @@ test("bomb pulses accelerate and stop on round completion", async ({ page }) => 
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="t"]').click();
   await page.waitForFunction(() => window.__game.locked);

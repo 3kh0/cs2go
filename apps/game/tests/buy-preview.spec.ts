@@ -27,6 +27,7 @@ test("native buy poses preview every firearm and utility on both agents without 
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {

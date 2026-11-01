@@ -13957,5 +13957,4091 @@
     "rarity": "Covert",
     "body": "legacy",
     "image": "/skins/thumbs/500_5.webp"
+  },
+  {
+    "id": "525_98",
+    "weapon": 54,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_98.webp"
+  },
+  {
+    "id": "525_414",
+    "weapon": 54,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_414.webp"
+  },
+  {
+    "id": "525_410",
+    "weapon": 54,
+    "paint": 410,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_410.webp"
+  },
+  {
+    "id": "525_409",
+    "weapon": 54,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_409.webp"
+  },
+  {
+    "id": "525_416",
+    "weapon": 54,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_416.webp"
+  },
+  {
+    "id": "525_415",
+    "weapon": 54,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_415.webp"
+  },
+  {
+    "id": "525_413",
+    "weapon": 54,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_413.webp"
+  },
+  {
+    "id": "525_421",
+    "weapon": 54,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_421.webp"
+  },
+  {
+    "id": "525_420",
+    "weapon": 54,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_420.webp"
+  },
+  {
+    "id": "525_419",
+    "weapon": 54,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_419.webp"
+  },
+  {
+    "id": "525_418",
+    "weapon": 54,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_418.webp"
+  },
+  {
+    "id": "525_417",
+    "weapon": 54,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_417.webp"
+  },
+  {
+    "id": "521_98",
+    "weapon": 51,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_98.webp"
+  },
+  {
+    "id": "521_414",
+    "weapon": 51,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_414.webp"
+  },
+  {
+    "id": "521_410",
+    "weapon": 51,
+    "paint": 410,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_410.webp"
+  },
+  {
+    "id": "521_409",
+    "weapon": 51,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_409.webp"
+  },
+  {
+    "id": "521_416",
+    "weapon": 51,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_416.webp"
+  },
+  {
+    "id": "521_415",
+    "weapon": 51,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_415.webp"
+  },
+  {
+    "id": "521_413",
+    "weapon": 51,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_413.webp"
+  },
+  {
+    "id": "521_421",
+    "weapon": 51,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_421.webp"
+  },
+  {
+    "id": "521_420",
+    "weapon": 51,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_420.webp"
+  },
+  {
+    "id": "521_419",
+    "weapon": 51,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_419.webp"
+  },
+  {
+    "id": "521_418",
+    "weapon": 51,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_418.webp"
+  },
+  {
+    "id": "521_417",
+    "weapon": 51,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_417.webp"
+  },
+  {
+    "id": "517_621",
+    "weapon": 47,
+    "paint": 621,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_621.webp"
+  },
+  {
+    "id": "517_414",
+    "weapon": 47,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_414.webp"
+  },
+  {
+    "id": "517_410",
+    "weapon": 47,
+    "paint": 410,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_410.webp"
+  },
+  {
+    "id": "517_409",
+    "weapon": 47,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_409.webp"
+  },
+  {
+    "id": "517_416",
+    "weapon": 47,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_416.webp"
+  },
+  {
+    "id": "517_415",
+    "weapon": 47,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_415.webp"
+  },
+  {
+    "id": "517_413",
+    "weapon": 47,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_413.webp"
+  },
+  {
+    "id": "517_421",
+    "weapon": 47,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_421.webp"
+  },
+  {
+    "id": "517_420",
+    "weapon": 47,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_420.webp"
+  },
+  {
+    "id": "517_419",
+    "weapon": 47,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_419.webp"
+  },
+  {
+    "id": "517_418",
+    "weapon": 47,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_418.webp"
+  },
+  {
+    "id": "517_417",
+    "weapon": 47,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_417.webp"
+  },
+  {
+    "id": "518_98",
+    "weapon": 48,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_98.webp"
+  },
+  {
+    "id": "518_414",
+    "weapon": 48,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_414.webp"
+  },
+  {
+    "id": "518_410",
+    "weapon": 48,
+    "paint": 410,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_410.webp"
+  },
+  {
+    "id": "518_409",
+    "weapon": 48,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_409.webp"
+  },
+  {
+    "id": "518_416",
+    "weapon": 48,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_416.webp"
+  },
+  {
+    "id": "518_415",
+    "weapon": 48,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_415.webp"
+  },
+  {
+    "id": "518_413",
+    "weapon": 48,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_413.webp"
+  },
+  {
+    "id": "518_421",
+    "weapon": 48,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_421.webp"
+  },
+  {
+    "id": "518_420",
+    "weapon": 48,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_420.webp"
+  },
+  {
+    "id": "518_419",
+    "weapon": 48,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_419.webp"
+  },
+  {
+    "id": "518_418",
+    "weapon": 48,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_418.webp"
+  },
+  {
+    "id": "518_417",
+    "weapon": 48,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_417.webp"
+  },
+  {
+    "id": "526_735",
+    "weapon": 55,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_735.webp"
+  },
+  {
+    "id": "526_175",
+    "weapon": 55,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_175.webp"
+  },
+  {
+    "id": "526_143",
+    "weapon": 55,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_143.webp"
+  },
+  {
+    "id": "526_77",
+    "weapon": 55,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_77.webp"
+  },
+  {
+    "id": "526_72",
+    "weapon": 55,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_72.webp"
+  },
+  {
+    "id": "526_59",
+    "weapon": 55,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_59.webp"
+  },
+  {
+    "id": "526_44",
+    "weapon": 55,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_44.webp"
+  },
+  {
+    "id": "526_43",
+    "weapon": 55,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_43.webp"
+  },
+  {
+    "id": "526_42",
+    "weapon": 55,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_42.webp"
+  },
+  {
+    "id": "526_38",
+    "weapon": 55,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_38.webp"
+  },
+  {
+    "id": "526_12",
+    "weapon": 55,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_12.webp"
+  },
+  {
+    "id": "526_5",
+    "weapon": 55,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/526_5.webp"
+  },
+  {
+    "id": "525_735",
+    "weapon": 54,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_735.webp"
+  },
+  {
+    "id": "525_175",
+    "weapon": 54,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_175.webp"
+  },
+  {
+    "id": "525_143",
+    "weapon": 54,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_143.webp"
+  },
+  {
+    "id": "525_77",
+    "weapon": 54,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_77.webp"
+  },
+  {
+    "id": "525_72",
+    "weapon": 54,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_72.webp"
+  },
+  {
+    "id": "525_59",
+    "weapon": 54,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_59.webp"
+  },
+  {
+    "id": "525_44",
+    "weapon": 54,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_44.webp"
+  },
+  {
+    "id": "525_43",
+    "weapon": 54,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_43.webp"
+  },
+  {
+    "id": "525_42",
+    "weapon": 54,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_42.webp"
+  },
+  {
+    "id": "525_38",
+    "weapon": 54,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_38.webp"
+  },
+  {
+    "id": "525_12",
+    "weapon": 54,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_12.webp"
+  },
+  {
+    "id": "525_5",
+    "weapon": 54,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/525_5.webp"
+  },
+  {
+    "id": "523_858",
+    "weapon": 53,
+    "paint": 858,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_858.webp"
+  },
+  {
+    "id": "523_856",
+    "weapon": 53,
+    "paint": 856,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_856.webp"
+  },
+  {
+    "id": "523_855",
+    "weapon": 53,
+    "paint": 855,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_855.webp"
+  },
+  {
+    "id": "523_854",
+    "weapon": 53,
+    "paint": 854,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_854.webp"
+  },
+  {
+    "id": "523_853",
+    "weapon": 53,
+    "paint": 853,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_853.webp"
+  },
+  {
+    "id": "523_852",
+    "weapon": 53,
+    "paint": 852,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_852.webp"
+  },
+  {
+    "id": "523_735",
+    "weapon": 53,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_735.webp"
+  },
+  {
+    "id": "523_417",
+    "weapon": 53,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_417.webp"
+  },
+  {
+    "id": "523_416",
+    "weapon": 53,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_416.webp"
+  },
+  {
+    "id": "523_415",
+    "weapon": 53,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_415.webp"
+  },
+  {
+    "id": "523_414",
+    "weapon": 53,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_414.webp"
+  },
+  {
+    "id": "523_409",
+    "weapon": 53,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_409.webp"
+  },
+  {
+    "id": "523_175",
+    "weapon": 53,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_175.webp"
+  },
+  {
+    "id": "523_143",
+    "weapon": 53,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_143.webp"
+  },
+  {
+    "id": "523_98",
+    "weapon": 53,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_98.webp"
+  },
+  {
+    "id": "523_77",
+    "weapon": 53,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_77.webp"
+  },
+  {
+    "id": "523_72",
+    "weapon": 53,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_72.webp"
+  },
+  {
+    "id": "523_59",
+    "weapon": 53,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_59.webp"
+  },
+  {
+    "id": "523_44",
+    "weapon": 53,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_44.webp"
+  },
+  {
+    "id": "523_43",
+    "weapon": 53,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_43.webp"
+  },
+  {
+    "id": "523_42",
+    "weapon": 53,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_42.webp"
+  },
+  {
+    "id": "523_38",
+    "weapon": 53,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_38.webp"
+  },
+  {
+    "id": "523_12",
+    "weapon": 53,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_12.webp"
+  },
+  {
+    "id": "523_5",
+    "weapon": 53,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/523_5.webp"
+  },
+  {
+    "id": "522_857",
+    "weapon": 52,
+    "paint": 857,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_857.webp"
+  },
+  {
+    "id": "522_735",
+    "weapon": 52,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_735.webp"
+  },
+  {
+    "id": "522_421",
+    "weapon": 52,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_421.webp"
+  },
+  {
+    "id": "522_420",
+    "weapon": 52,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_420.webp"
+  },
+  {
+    "id": "522_419",
+    "weapon": 52,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_419.webp"
+  },
+  {
+    "id": "522_418",
+    "weapon": 52,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_418.webp"
+  },
+  {
+    "id": "522_417",
+    "weapon": 52,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_417.webp"
+  },
+  {
+    "id": "522_416",
+    "weapon": 52,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_416.webp"
+  },
+  {
+    "id": "522_415",
+    "weapon": 52,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_415.webp"
+  },
+  {
+    "id": "522_414",
+    "weapon": 52,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_414.webp"
+  },
+  {
+    "id": "522_413",
+    "weapon": 52,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_413.webp"
+  },
+  {
+    "id": "522_409",
+    "weapon": 52,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_409.webp"
+  },
+  {
+    "id": "522_175",
+    "weapon": 52,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_175.webp"
+  },
+  {
+    "id": "522_143",
+    "weapon": 52,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_143.webp"
+  },
+  {
+    "id": "522_98",
+    "weapon": 52,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_98.webp"
+  },
+  {
+    "id": "522_77",
+    "weapon": 52,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_77.webp"
+  },
+  {
+    "id": "522_72",
+    "weapon": 52,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_72.webp"
+  },
+  {
+    "id": "522_59",
+    "weapon": 52,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_59.webp"
+  },
+  {
+    "id": "522_44",
+    "weapon": 52,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_44.webp"
+  },
+  {
+    "id": "522_43",
+    "weapon": 52,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_43.webp"
+  },
+  {
+    "id": "522_42",
+    "weapon": 52,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_42.webp"
+  },
+  {
+    "id": "522_38",
+    "weapon": 52,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_38.webp"
+  },
+  {
+    "id": "522_12",
+    "weapon": 52,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_12.webp"
+  },
+  {
+    "id": "522_5",
+    "weapon": 52,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/522_5.webp"
+  },
+  {
+    "id": "521_735",
+    "weapon": 51,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_735.webp"
+  },
+  {
+    "id": "521_175",
+    "weapon": 51,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_175.webp"
+  },
+  {
+    "id": "521_143",
+    "weapon": 51,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_143.webp"
+  },
+  {
+    "id": "521_77",
+    "weapon": 51,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_77.webp"
+  },
+  {
+    "id": "521_72",
+    "weapon": 51,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_72.webp"
+  },
+  {
+    "id": "521_59",
+    "weapon": 51,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_59.webp"
+  },
+  {
+    "id": "521_44",
+    "weapon": 51,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_44.webp"
+  },
+  {
+    "id": "521_43",
+    "weapon": 51,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_43.webp"
+  },
+  {
+    "id": "521_42",
+    "weapon": 51,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_42.webp"
+  },
+  {
+    "id": "521_38",
+    "weapon": 51,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_38.webp"
+  },
+  {
+    "id": "521_12",
+    "weapon": 51,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_12.webp"
+  },
+  {
+    "id": "521_5",
+    "weapon": 51,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/521_5.webp"
+  },
+  {
+    "id": "520_857",
+    "weapon": 50,
+    "paint": 857,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_857.webp"
+  },
+  {
+    "id": "520_735",
+    "weapon": 50,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_735.webp"
+  },
+  {
+    "id": "520_421",
+    "weapon": 50,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_421.webp"
+  },
+  {
+    "id": "520_420",
+    "weapon": 50,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_420.webp"
+  },
+  {
+    "id": "520_419",
+    "weapon": 50,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_419.webp"
+  },
+  {
+    "id": "520_418",
+    "weapon": 50,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_418.webp"
+  },
+  {
+    "id": "520_417",
+    "weapon": 50,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_417.webp"
+  },
+  {
+    "id": "520_416",
+    "weapon": 50,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_416.webp"
+  },
+  {
+    "id": "520_415",
+    "weapon": 50,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_415.webp"
+  },
+  {
+    "id": "520_414",
+    "weapon": 50,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_414.webp"
+  },
+  {
+    "id": "520_413",
+    "weapon": 50,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_413.webp"
+  },
+  {
+    "id": "520_409",
+    "weapon": 50,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_409.webp"
+  },
+  {
+    "id": "520_175",
+    "weapon": 50,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_175.webp"
+  },
+  {
+    "id": "520_143",
+    "weapon": 50,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_143.webp"
+  },
+  {
+    "id": "520_98",
+    "weapon": 50,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_98.webp"
+  },
+  {
+    "id": "520_77",
+    "weapon": 50,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_77.webp"
+  },
+  {
+    "id": "520_72",
+    "weapon": 50,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_72.webp"
+  },
+  {
+    "id": "520_59",
+    "weapon": 50,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_59.webp"
+  },
+  {
+    "id": "520_44",
+    "weapon": 50,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_44.webp"
+  },
+  {
+    "id": "520_43",
+    "weapon": 50,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_43.webp"
+  },
+  {
+    "id": "520_42",
+    "weapon": 50,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_42.webp"
+  },
+  {
+    "id": "520_38",
+    "weapon": 50,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_38.webp"
+  },
+  {
+    "id": "520_12",
+    "weapon": 50,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_12.webp"
+  },
+  {
+    "id": "520_5",
+    "weapon": 50,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/520_5.webp"
+  },
+  {
+    "id": "519_857",
+    "weapon": 49,
+    "paint": 857,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_857.webp"
+  },
+  {
+    "id": "519_735",
+    "weapon": 49,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_735.webp"
+  },
+  {
+    "id": "519_421",
+    "weapon": 49,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_421.webp"
+  },
+  {
+    "id": "519_420",
+    "weapon": 49,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_420.webp"
+  },
+  {
+    "id": "519_419",
+    "weapon": 49,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_419.webp"
+  },
+  {
+    "id": "519_418",
+    "weapon": 49,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_418.webp"
+  },
+  {
+    "id": "519_417",
+    "weapon": 49,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_417.webp"
+  },
+  {
+    "id": "519_416",
+    "weapon": 49,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_416.webp"
+  },
+  {
+    "id": "519_415",
+    "weapon": 49,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_415.webp"
+  },
+  {
+    "id": "519_414",
+    "weapon": 49,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_414.webp"
+  },
+  {
+    "id": "519_413",
+    "weapon": 49,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_413.webp"
+  },
+  {
+    "id": "519_409",
+    "weapon": 49,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_409.webp"
+  },
+  {
+    "id": "519_175",
+    "weapon": 49,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_175.webp"
+  },
+  {
+    "id": "519_143",
+    "weapon": 49,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_143.webp"
+  },
+  {
+    "id": "519_98",
+    "weapon": 49,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_98.webp"
+  },
+  {
+    "id": "519_77",
+    "weapon": 49,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_77.webp"
+  },
+  {
+    "id": "519_72",
+    "weapon": 49,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_72.webp"
+  },
+  {
+    "id": "519_59",
+    "weapon": 49,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_59.webp"
+  },
+  {
+    "id": "519_44",
+    "weapon": 49,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_44.webp"
+  },
+  {
+    "id": "519_43",
+    "weapon": 49,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_43.webp"
+  },
+  {
+    "id": "519_42",
+    "weapon": 49,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_42.webp"
+  },
+  {
+    "id": "519_38",
+    "weapon": 49,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_38.webp"
+  },
+  {
+    "id": "519_12",
+    "weapon": 49,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_12.webp"
+  },
+  {
+    "id": "519_5",
+    "weapon": 49,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/519_5.webp"
+  },
+  {
+    "id": "518_735",
+    "weapon": 48,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_735.webp"
+  },
+  {
+    "id": "518_175",
+    "weapon": 48,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_175.webp"
+  },
+  {
+    "id": "518_143",
+    "weapon": 48,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_143.webp"
+  },
+  {
+    "id": "518_77",
+    "weapon": 48,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_77.webp"
+  },
+  {
+    "id": "518_72",
+    "weapon": 48,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_72.webp"
+  },
+  {
+    "id": "518_59",
+    "weapon": 48,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_59.webp"
+  },
+  {
+    "id": "518_44",
+    "weapon": 48,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_44.webp"
+  },
+  {
+    "id": "518_43",
+    "weapon": 48,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_43.webp"
+  },
+  {
+    "id": "518_42",
+    "weapon": 48,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_42.webp"
+  },
+  {
+    "id": "518_38",
+    "weapon": 48,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_38.webp"
+  },
+  {
+    "id": "518_12",
+    "weapon": 48,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_12.webp"
+  },
+  {
+    "id": "518_5",
+    "weapon": 48,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/518_5.webp"
+  },
+  {
+    "id": "517_735",
+    "weapon": 47,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_735.webp"
+  },
+  {
+    "id": "517_175",
+    "weapon": 47,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_175.webp"
+  },
+  {
+    "id": "517_143",
+    "weapon": 47,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_143.webp"
+  },
+  {
+    "id": "517_77",
+    "weapon": 47,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_77.webp"
+  },
+  {
+    "id": "517_72",
+    "weapon": 47,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_72.webp"
+  },
+  {
+    "id": "517_59",
+    "weapon": 47,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_59.webp"
+  },
+  {
+    "id": "517_44",
+    "weapon": 47,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_44.webp"
+  },
+  {
+    "id": "517_43",
+    "weapon": 47,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_43.webp"
+  },
+  {
+    "id": "517_42",
+    "weapon": 47,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_42.webp"
+  },
+  {
+    "id": "517_38",
+    "weapon": 47,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_38.webp"
+  },
+  {
+    "id": "517_12",
+    "weapon": 47,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_12.webp"
+  },
+  {
+    "id": "517_5",
+    "weapon": 47,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/517_5.webp"
+  },
+  {
+    "id": "516_1118",
+    "weapon": 46,
+    "paint": 1118,
+    "name": "Autotronic",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_1118.webp"
+  },
+  {
+    "id": "516_1113",
+    "weapon": 46,
+    "paint": 1113,
+    "name": "Black Laminate",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_1113.webp"
+  },
+  {
+    "id": "516_1108",
+    "weapon": 46,
+    "paint": 1108,
+    "name": "Lore",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_1108.webp"
+  },
+  {
+    "id": "516_619",
+    "weapon": 46,
+    "paint": 619,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_619.webp"
+  },
+  {
+    "id": "516_618",
+    "weapon": 46,
+    "paint": 618,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_618.webp"
+  },
+  {
+    "id": "516_617",
+    "weapon": 46,
+    "paint": 617,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_617.webp"
+  },
+  {
+    "id": "516_581",
+    "weapon": 46,
+    "paint": 581,
+    "name": "Freehand",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_581.webp"
+  },
+  {
+    "id": "516_579",
+    "weapon": 46,
+    "paint": 579,
+    "name": "Bright Water",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_579.webp"
+  },
+  {
+    "id": "516_572",
+    "weapon": 46,
+    "paint": 572,
+    "name": "Gamma Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_572.webp"
+  },
+  {
+    "id": "516_571",
+    "weapon": 46,
+    "paint": 571,
+    "name": "Gamma Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_571.webp"
+  },
+  {
+    "id": "516_570",
+    "weapon": 46,
+    "paint": 570,
+    "name": "Gamma Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_570.webp"
+  },
+  {
+    "id": "516_569",
+    "weapon": 46,
+    "paint": 569,
+    "name": "Gamma Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_569.webp"
+  },
+  {
+    "id": "516_568",
+    "weapon": 46,
+    "paint": 568,
+    "name": "Gamma Doppler | Emerald",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_568.webp"
+  },
+  {
+    "id": "516_421",
+    "weapon": 46,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_421.webp"
+  },
+  {
+    "id": "516_420",
+    "weapon": 46,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_420.webp"
+  },
+  {
+    "id": "516_418",
+    "weapon": 46,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_418.webp"
+  },
+  {
+    "id": "516_415",
+    "weapon": 46,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_415.webp"
+  },
+  {
+    "id": "516_414",
+    "weapon": 46,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_414.webp"
+  },
+  {
+    "id": "516_413",
+    "weapon": 46,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_413.webp"
+  },
+  {
+    "id": "516_411",
+    "weapon": 46,
+    "paint": 411,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_411.webp"
+  },
+  {
+    "id": "516_409",
+    "weapon": 46,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_409.webp"
+  },
+  {
+    "id": "516_175",
+    "weapon": 46,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_175.webp"
+  },
+  {
+    "id": "516_143",
+    "weapon": 46,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_143.webp"
+  },
+  {
+    "id": "516_98",
+    "weapon": 46,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_98.webp"
+  },
+  {
+    "id": "516_77",
+    "weapon": 46,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_77.webp"
+  },
+  {
+    "id": "516_72",
+    "weapon": 46,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_72.webp"
+  },
+  {
+    "id": "516_59",
+    "weapon": 46,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_59.webp"
+  },
+  {
+    "id": "516_44",
+    "weapon": 46,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_44.webp"
+  },
+  {
+    "id": "516_43",
+    "weapon": 46,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_43.webp"
+  },
+  {
+    "id": "516_42",
+    "weapon": 46,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_42.webp"
+  },
+  {
+    "id": "516_40",
+    "weapon": 46,
+    "paint": 40,
+    "name": "Night",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_40.webp"
+  },
+  {
+    "id": "516_38",
+    "weapon": 46,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_38.webp"
+  },
+  {
+    "id": "516_12",
+    "weapon": 46,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_12.webp"
+  },
+  {
+    "id": "516_5",
+    "weapon": 46,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/516_5.webp"
+  },
+  {
+    "id": "514_1114",
+    "weapon": 45,
+    "paint": 1114,
+    "name": "Autotronic",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_1114.webp"
+  },
+  {
+    "id": "514_1109",
+    "weapon": 45,
+    "paint": 1109,
+    "name": "Black Laminate",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_1109.webp"
+  },
+  {
+    "id": "514_1104",
+    "weapon": 45,
+    "paint": 1104,
+    "name": "Lore",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_1104.webp"
+  },
+  {
+    "id": "514_581",
+    "weapon": 45,
+    "paint": 581,
+    "name": "Freehand",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_581.webp"
+  },
+  {
+    "id": "514_579",
+    "weapon": 45,
+    "paint": 579,
+    "name": "Bright Water",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_579.webp"
+  },
+  {
+    "id": "514_572",
+    "weapon": 45,
+    "paint": 572,
+    "name": "Gamma Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_572.webp"
+  },
+  {
+    "id": "514_571",
+    "weapon": 45,
+    "paint": 571,
+    "name": "Gamma Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_571.webp"
+  },
+  {
+    "id": "514_570",
+    "weapon": 45,
+    "paint": 570,
+    "name": "Gamma Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_570.webp"
+  },
+  {
+    "id": "514_569",
+    "weapon": 45,
+    "paint": 569,
+    "name": "Gamma Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_569.webp"
+  },
+  {
+    "id": "514_568",
+    "weapon": 45,
+    "paint": 568,
+    "name": "Gamma Doppler | Emerald",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_568.webp"
+  },
+  {
+    "id": "514_421",
+    "weapon": 45,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_421.webp"
+  },
+  {
+    "id": "514_420",
+    "weapon": 45,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_420.webp"
+  },
+  {
+    "id": "514_419",
+    "weapon": 45,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_419.webp"
+  },
+  {
+    "id": "514_418",
+    "weapon": 45,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_418.webp"
+  },
+  {
+    "id": "514_417",
+    "weapon": 45,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_417.webp"
+  },
+  {
+    "id": "514_416",
+    "weapon": 45,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_416.webp"
+  },
+  {
+    "id": "514_415",
+    "weapon": 45,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_415.webp"
+  },
+  {
+    "id": "514_414",
+    "weapon": 45,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_414.webp"
+  },
+  {
+    "id": "514_413",
+    "weapon": 45,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_413.webp"
+  },
+  {
+    "id": "514_411",
+    "weapon": 45,
+    "paint": 411,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_411.webp"
+  },
+  {
+    "id": "514_409",
+    "weapon": 45,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_409.webp"
+  },
+  {
+    "id": "514_175",
+    "weapon": 45,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_175.webp"
+  },
+  {
+    "id": "514_143",
+    "weapon": 45,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_143.webp"
+  },
+  {
+    "id": "514_98",
+    "weapon": 45,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_98.webp"
+  },
+  {
+    "id": "514_77",
+    "weapon": 45,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_77.webp"
+  },
+  {
+    "id": "514_72",
+    "weapon": 45,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_72.webp"
+  },
+  {
+    "id": "514_59",
+    "weapon": 45,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_59.webp"
+  },
+  {
+    "id": "514_44",
+    "weapon": 45,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_44.webp"
+  },
+  {
+    "id": "514_43",
+    "weapon": 45,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_43.webp"
+  },
+  {
+    "id": "514_42",
+    "weapon": 45,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_42.webp"
+  },
+  {
+    "id": "514_40",
+    "weapon": 45,
+    "paint": 40,
+    "name": "Night",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_40.webp"
+  },
+  {
+    "id": "514_38",
+    "weapon": 45,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_38.webp"
+  },
+  {
+    "id": "514_12",
+    "weapon": 45,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_12.webp"
+  },
+  {
+    "id": "514_5",
+    "weapon": 45,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/514_5.webp"
+  },
+  {
+    "id": "512_1116",
+    "weapon": 44,
+    "paint": 1116,
+    "name": "Autotronic",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_1116.webp"
+  },
+  {
+    "id": "512_1111",
+    "weapon": 44,
+    "paint": 1111,
+    "name": "Black Laminate",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_1111.webp"
+  },
+  {
+    "id": "512_1106",
+    "weapon": 44,
+    "paint": 1106,
+    "name": "Lore",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_1106.webp"
+  },
+  {
+    "id": "512_621",
+    "weapon": 44,
+    "paint": 621,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_621.webp"
+  },
+  {
+    "id": "512_581",
+    "weapon": 44,
+    "paint": 581,
+    "name": "Freehand",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_581.webp"
+  },
+  {
+    "id": "512_579",
+    "weapon": 44,
+    "paint": 579,
+    "name": "Bright Water",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_579.webp"
+  },
+  {
+    "id": "512_572",
+    "weapon": 44,
+    "paint": 572,
+    "name": "Gamma Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_572.webp"
+  },
+  {
+    "id": "512_571",
+    "weapon": 44,
+    "paint": 571,
+    "name": "Gamma Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_571.webp"
+  },
+  {
+    "id": "512_570",
+    "weapon": 44,
+    "paint": 570,
+    "name": "Gamma Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_570.webp"
+  },
+  {
+    "id": "512_569",
+    "weapon": 44,
+    "paint": 569,
+    "name": "Gamma Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_569.webp"
+  },
+  {
+    "id": "512_568",
+    "weapon": 44,
+    "paint": 568,
+    "name": "Gamma Doppler | Emerald",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_568.webp"
+  },
+  {
+    "id": "512_421",
+    "weapon": 44,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_421.webp"
+  },
+  {
+    "id": "512_420",
+    "weapon": 44,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_420.webp"
+  },
+  {
+    "id": "512_419",
+    "weapon": 44,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_419.webp"
+  },
+  {
+    "id": "512_418",
+    "weapon": 44,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_418.webp"
+  },
+  {
+    "id": "512_417",
+    "weapon": 44,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_417.webp"
+  },
+  {
+    "id": "512_416",
+    "weapon": 44,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_416.webp"
+  },
+  {
+    "id": "512_415",
+    "weapon": 44,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_415.webp"
+  },
+  {
+    "id": "512_414",
+    "weapon": 44,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_414.webp"
+  },
+  {
+    "id": "512_413",
+    "weapon": 44,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_413.webp"
+  },
+  {
+    "id": "512_411",
+    "weapon": 44,
+    "paint": 411,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_411.webp"
+  },
+  {
+    "id": "512_409",
+    "weapon": 44,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_409.webp"
+  },
+  {
+    "id": "512_175",
+    "weapon": 44,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_175.webp"
+  },
+  {
+    "id": "512_143",
+    "weapon": 44,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_143.webp"
+  },
+  {
+    "id": "512_77",
+    "weapon": 44,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_77.webp"
+  },
+  {
+    "id": "512_72",
+    "weapon": 44,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_72.webp"
+  },
+  {
+    "id": "512_59",
+    "weapon": 44,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_59.webp"
+  },
+  {
+    "id": "512_44",
+    "weapon": 44,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_44.webp"
+  },
+  {
+    "id": "512_43",
+    "weapon": 44,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_43.webp"
+  },
+  {
+    "id": "512_42",
+    "weapon": 44,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_42.webp"
+  },
+  {
+    "id": "512_40",
+    "weapon": 44,
+    "paint": 40,
+    "name": "Night",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_40.webp"
+  },
+  {
+    "id": "512_38",
+    "weapon": 44,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_38.webp"
+  },
+  {
+    "id": "512_12",
+    "weapon": 44,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_12.webp"
+  },
+  {
+    "id": "512_5",
+    "weapon": 44,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/512_5.webp"
+  },
+  {
+    "id": "509_1117",
+    "weapon": 43,
+    "paint": 1117,
+    "name": "Autotronic",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_1117.webp"
+  },
+  {
+    "id": "509_1112",
+    "weapon": 43,
+    "paint": 1112,
+    "name": "Black Laminate",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_1112.webp"
+  },
+  {
+    "id": "509_1107",
+    "weapon": 43,
+    "paint": 1107,
+    "name": "Lore",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_1107.webp"
+  },
+  {
+    "id": "509_620",
+    "weapon": 43,
+    "paint": 620,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_620.webp"
+  },
+  {
+    "id": "509_581",
+    "weapon": 43,
+    "paint": 581,
+    "name": "Freehand",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_581.webp"
+  },
+  {
+    "id": "509_579",
+    "weapon": 43,
+    "paint": 579,
+    "name": "Bright Water",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_579.webp"
+  },
+  {
+    "id": "509_572",
+    "weapon": 43,
+    "paint": 572,
+    "name": "Gamma Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_572.webp"
+  },
+  {
+    "id": "509_571",
+    "weapon": 43,
+    "paint": 571,
+    "name": "Gamma Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_571.webp"
+  },
+  {
+    "id": "509_570",
+    "weapon": 43,
+    "paint": 570,
+    "name": "Gamma Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_570.webp"
+  },
+  {
+    "id": "509_569",
+    "weapon": 43,
+    "paint": 569,
+    "name": "Gamma Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_569.webp"
+  },
+  {
+    "id": "509_568",
+    "weapon": 43,
+    "paint": 568,
+    "name": "Gamma Doppler | Emerald",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_568.webp"
+  },
+  {
+    "id": "509_421",
+    "weapon": 43,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_421.webp"
+  },
+  {
+    "id": "509_420",
+    "weapon": 43,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_420.webp"
+  },
+  {
+    "id": "509_419",
+    "weapon": 43,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_419.webp"
+  },
+  {
+    "id": "509_418",
+    "weapon": 43,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_418.webp"
+  },
+  {
+    "id": "509_417",
+    "weapon": 43,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_417.webp"
+  },
+  {
+    "id": "509_416",
+    "weapon": 43,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_416.webp"
+  },
+  {
+    "id": "509_415",
+    "weapon": 43,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_415.webp"
+  },
+  {
+    "id": "509_414",
+    "weapon": 43,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_414.webp"
+  },
+  {
+    "id": "509_413",
+    "weapon": 43,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_413.webp"
+  },
+  {
+    "id": "509_411",
+    "weapon": 43,
+    "paint": 411,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_411.webp"
+  },
+  {
+    "id": "509_409",
+    "weapon": 43,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_409.webp"
+  },
+  {
+    "id": "509_175",
+    "weapon": 43,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_175.webp"
+  },
+  {
+    "id": "509_143",
+    "weapon": 43,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_143.webp"
+  },
+  {
+    "id": "509_77",
+    "weapon": 43,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_77.webp"
+  },
+  {
+    "id": "509_72",
+    "weapon": 43,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_72.webp"
+  },
+  {
+    "id": "509_59",
+    "weapon": 43,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_59.webp"
+  },
+  {
+    "id": "509_44",
+    "weapon": 43,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_44.webp"
+  },
+  {
+    "id": "509_43",
+    "weapon": 43,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_43.webp"
+  },
+  {
+    "id": "509_42",
+    "weapon": 43,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_42.webp"
+  },
+  {
+    "id": "509_40",
+    "weapon": 43,
+    "paint": 40,
+    "name": "Night",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_40.webp"
+  },
+  {
+    "id": "509_38",
+    "weapon": 43,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_38.webp"
+  },
+  {
+    "id": "509_12",
+    "weapon": 43,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_12.webp"
+  },
+  {
+    "id": "509_5",
+    "weapon": 43,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/509_5.webp"
+  },
+  {
+    "id": "508_581",
+    "weapon": 42,
+    "paint": 581,
+    "name": "Freehand",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_581.webp"
+  },
+  {
+    "id": "508_579",
+    "weapon": 42,
+    "paint": 579,
+    "name": "Bright Water",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_579.webp"
+  },
+  {
+    "id": "508_577",
+    "weapon": 42,
+    "paint": 577,
+    "name": "Autotronic",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_577.webp"
+  },
+  {
+    "id": "508_572",
+    "weapon": 42,
+    "paint": 572,
+    "name": "Gamma Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_572.webp"
+  },
+  {
+    "id": "508_571",
+    "weapon": 42,
+    "paint": 571,
+    "name": "Gamma Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_571.webp"
+  },
+  {
+    "id": "508_570",
+    "weapon": 42,
+    "paint": 570,
+    "name": "Gamma Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_570.webp"
+  },
+  {
+    "id": "508_569",
+    "weapon": 42,
+    "paint": 569,
+    "name": "Gamma Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_569.webp"
+  },
+  {
+    "id": "508_568",
+    "weapon": 42,
+    "paint": 568,
+    "name": "Gamma Doppler | Emerald",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_568.webp"
+  },
+  {
+    "id": "508_567",
+    "weapon": 42,
+    "paint": 567,
+    "name": "Black Laminate",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_567.webp"
+  },
+  {
+    "id": "508_562",
+    "weapon": 42,
+    "paint": 562,
+    "name": "Lore",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_562.webp"
+  },
+  {
+    "id": "508_421",
+    "weapon": 42,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_421.webp"
+  },
+  {
+    "id": "508_420",
+    "weapon": 42,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_420.webp"
+  },
+  {
+    "id": "508_419",
+    "weapon": 42,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_419.webp"
+  },
+  {
+    "id": "508_418",
+    "weapon": 42,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_418.webp"
+  },
+  {
+    "id": "508_417",
+    "weapon": 42,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_417.webp"
+  },
+  {
+    "id": "508_416",
+    "weapon": 42,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_416.webp"
+  },
+  {
+    "id": "508_415",
+    "weapon": 42,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_415.webp"
+  },
+  {
+    "id": "508_414",
+    "weapon": 42,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_414.webp"
+  },
+  {
+    "id": "508_413",
+    "weapon": 42,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_413.webp"
+  },
+  {
+    "id": "508_411",
+    "weapon": 42,
+    "paint": 411,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_411.webp"
+  },
+  {
+    "id": "508_409",
+    "weapon": 42,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_409.webp"
+  },
+  {
+    "id": "508_175",
+    "weapon": 42,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_175.webp"
+  },
+  {
+    "id": "508_143",
+    "weapon": 42,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_143.webp"
+  },
+  {
+    "id": "508_98",
+    "weapon": 42,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_98.webp"
+  },
+  {
+    "id": "508_77",
+    "weapon": 42,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_77.webp"
+  },
+  {
+    "id": "508_72",
+    "weapon": 42,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_72.webp"
+  },
+  {
+    "id": "508_59",
+    "weapon": 42,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_59.webp"
+  },
+  {
+    "id": "508_44",
+    "weapon": 42,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_44.webp"
+  },
+  {
+    "id": "508_43",
+    "weapon": 42,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_43.webp"
+  },
+  {
+    "id": "508_42",
+    "weapon": 42,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_42.webp"
+  },
+  {
+    "id": "508_40",
+    "weapon": 42,
+    "paint": 40,
+    "name": "Night",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_40.webp"
+  },
+  {
+    "id": "508_38",
+    "weapon": 42,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_38.webp"
+  },
+  {
+    "id": "508_12",
+    "weapon": 42,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_12.webp"
+  },
+  {
+    "id": "508_5",
+    "weapon": 42,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/508_5.webp"
+  },
+  {
+    "id": "506_580",
+    "weapon": 41,
+    "paint": 580,
+    "name": "Freehand",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_580.webp"
+  },
+  {
+    "id": "506_578",
+    "weapon": 41,
+    "paint": 578,
+    "name": "Bright Water",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_578.webp"
+  },
+  {
+    "id": "506_575",
+    "weapon": 41,
+    "paint": 575,
+    "name": "Autotronic",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_575.webp"
+  },
+  {
+    "id": "506_572",
+    "weapon": 41,
+    "paint": 572,
+    "name": "Gamma Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_572.webp"
+  },
+  {
+    "id": "506_571",
+    "weapon": 41,
+    "paint": 571,
+    "name": "Gamma Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_571.webp"
+  },
+  {
+    "id": "506_570",
+    "weapon": 41,
+    "paint": 570,
+    "name": "Gamma Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_570.webp"
+  },
+  {
+    "id": "506_569",
+    "weapon": 41,
+    "paint": 569,
+    "name": "Gamma Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_569.webp"
+  },
+  {
+    "id": "506_568",
+    "weapon": 41,
+    "paint": 568,
+    "name": "Gamma Doppler | Emerald",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_568.webp"
+  },
+  {
+    "id": "506_565",
+    "weapon": 41,
+    "paint": 565,
+    "name": "Black Laminate",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_565.webp"
+  },
+  {
+    "id": "506_560",
+    "weapon": 41,
+    "paint": 560,
+    "name": "Lore",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_560.webp"
+  },
+  {
+    "id": "506_421",
+    "weapon": 41,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_421.webp"
+  },
+  {
+    "id": "506_420",
+    "weapon": 41,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_420.webp"
+  },
+  {
+    "id": "506_419",
+    "weapon": 41,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_419.webp"
+  },
+  {
+    "id": "506_418",
+    "weapon": 41,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_418.webp"
+  },
+  {
+    "id": "506_417",
+    "weapon": 41,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_417.webp"
+  },
+  {
+    "id": "506_416",
+    "weapon": 41,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_416.webp"
+  },
+  {
+    "id": "506_415",
+    "weapon": 41,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_415.webp"
+  },
+  {
+    "id": "506_414",
+    "weapon": 41,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_414.webp"
+  },
+  {
+    "id": "506_413",
+    "weapon": 41,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_413.webp"
+  },
+  {
+    "id": "506_410",
+    "weapon": 41,
+    "paint": 410,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_410.webp"
+  },
+  {
+    "id": "506_409",
+    "weapon": 41,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_409.webp"
+  },
+  {
+    "id": "506_175",
+    "weapon": 41,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_175.webp"
+  },
+  {
+    "id": "506_143",
+    "weapon": 41,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_143.webp"
+  },
+  {
+    "id": "506_98",
+    "weapon": 41,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_98.webp"
+  },
+  {
+    "id": "506_77",
+    "weapon": 41,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_77.webp"
+  },
+  {
+    "id": "506_72",
+    "weapon": 41,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_72.webp"
+  },
+  {
+    "id": "506_59",
+    "weapon": 41,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_59.webp"
+  },
+  {
+    "id": "506_44",
+    "weapon": 41,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_44.webp"
+  },
+  {
+    "id": "506_43",
+    "weapon": 41,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_43.webp"
+  },
+  {
+    "id": "506_42",
+    "weapon": 41,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_42.webp"
+  },
+  {
+    "id": "506_40",
+    "weapon": 41,
+    "paint": 40,
+    "name": "Night",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_40.webp"
+  },
+  {
+    "id": "506_38",
+    "weapon": 41,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_38.webp"
+  },
+  {
+    "id": "506_12",
+    "weapon": 41,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_12.webp"
+  },
+  {
+    "id": "506_5",
+    "weapon": 41,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/506_5.webp"
+  },
+  {
+    "id": "505_580",
+    "weapon": 40,
+    "paint": 580,
+    "name": "Freehand",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_580.webp"
+  },
+  {
+    "id": "505_578",
+    "weapon": 40,
+    "paint": 578,
+    "name": "Bright Water",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_578.webp"
+  },
+  {
+    "id": "505_574",
+    "weapon": 40,
+    "paint": 574,
+    "name": "Autotronic",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_574.webp"
+  },
+  {
+    "id": "505_572",
+    "weapon": 40,
+    "paint": 572,
+    "name": "Gamma Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_572.webp"
+  },
+  {
+    "id": "505_571",
+    "weapon": 40,
+    "paint": 571,
+    "name": "Gamma Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_571.webp"
+  },
+  {
+    "id": "505_570",
+    "weapon": 40,
+    "paint": 570,
+    "name": "Gamma Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_570.webp"
+  },
+  {
+    "id": "505_569",
+    "weapon": 40,
+    "paint": 569,
+    "name": "Gamma Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_569.webp"
+  },
+  {
+    "id": "505_568",
+    "weapon": 40,
+    "paint": 568,
+    "name": "Gamma Doppler | Emerald",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_568.webp"
+  },
+  {
+    "id": "505_564",
+    "weapon": 40,
+    "paint": 564,
+    "name": "Black Laminate",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_564.webp"
+  },
+  {
+    "id": "505_559",
+    "weapon": 40,
+    "paint": 559,
+    "name": "Lore",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_559.webp"
+  },
+  {
+    "id": "505_421",
+    "weapon": 40,
+    "paint": 421,
+    "name": "Doppler | Phase 4",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_421.webp"
+  },
+  {
+    "id": "505_420",
+    "weapon": 40,
+    "paint": 420,
+    "name": "Doppler | Phase 3",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_420.webp"
+  },
+  {
+    "id": "505_419",
+    "weapon": 40,
+    "paint": 419,
+    "name": "Doppler | Phase 2",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_419.webp"
+  },
+  {
+    "id": "505_418",
+    "weapon": 40,
+    "paint": 418,
+    "name": "Doppler | Phase 1",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_418.webp"
+  },
+  {
+    "id": "505_417",
+    "weapon": 40,
+    "paint": 417,
+    "name": "Doppler | Black Pearl",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_417.webp"
+  },
+  {
+    "id": "505_416",
+    "weapon": 40,
+    "paint": 416,
+    "name": "Doppler | Sapphire",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_416.webp"
+  },
+  {
+    "id": "505_415",
+    "weapon": 40,
+    "paint": 415,
+    "name": "Doppler | Ruby",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_415.webp"
+  },
+  {
+    "id": "505_414",
+    "weapon": 40,
+    "paint": 414,
+    "name": "Rust Coat",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_414.webp"
+  },
+  {
+    "id": "505_413",
+    "weapon": 40,
+    "paint": 413,
+    "name": "Marble Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_413.webp"
+  },
+  {
+    "id": "505_410",
+    "weapon": 40,
+    "paint": 410,
+    "name": "Damascus Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_410.webp"
+  },
+  {
+    "id": "505_409",
+    "weapon": 40,
+    "paint": 409,
+    "name": "Tiger Tooth",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_409.webp"
+  },
+  {
+    "id": "505_175",
+    "weapon": 40,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_175.webp"
+  },
+  {
+    "id": "505_143",
+    "weapon": 40,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_143.webp"
+  },
+  {
+    "id": "505_98",
+    "weapon": 40,
+    "paint": 98,
+    "name": "Ultraviolet",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_98.webp"
+  },
+  {
+    "id": "505_77",
+    "weapon": 40,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_77.webp"
+  },
+  {
+    "id": "505_72",
+    "weapon": 40,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_72.webp"
+  },
+  {
+    "id": "505_59",
+    "weapon": 40,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_59.webp"
+  },
+  {
+    "id": "505_44",
+    "weapon": 40,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_44.webp"
+  },
+  {
+    "id": "505_43",
+    "weapon": 40,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_43.webp"
+  },
+  {
+    "id": "505_42",
+    "weapon": 40,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_42.webp"
+  },
+  {
+    "id": "505_40",
+    "weapon": 40,
+    "paint": 40,
+    "name": "Night",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_40.webp"
+  },
+  {
+    "id": "505_38",
+    "weapon": 40,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_38.webp"
+  },
+  {
+    "id": "505_12",
+    "weapon": 40,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_12.webp"
+  },
+  {
+    "id": "505_5",
+    "weapon": 40,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/505_5.webp"
+  },
+  {
+    "id": "503_735",
+    "weapon": 39,
+    "paint": 735,
+    "name": "Night Stripe",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_735.webp"
+  },
+  {
+    "id": "503_175",
+    "weapon": 39,
+    "paint": 175,
+    "name": "Scorched",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_175.webp"
+  },
+  {
+    "id": "503_143",
+    "weapon": 39,
+    "paint": 143,
+    "name": "Urban Masked",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_143.webp"
+  },
+  {
+    "id": "503_77",
+    "weapon": 39,
+    "paint": 77,
+    "name": "Boreal Forest",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_77.webp"
+  },
+  {
+    "id": "503_72",
+    "weapon": 39,
+    "paint": 72,
+    "name": "Safari Mesh",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_72.webp"
+  },
+  {
+    "id": "503_59",
+    "weapon": 39,
+    "paint": 59,
+    "name": "Slaughter",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_59.webp"
+  },
+  {
+    "id": "503_44",
+    "weapon": 39,
+    "paint": 44,
+    "name": "Case Hardened",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_44.webp"
+  },
+  {
+    "id": "503_43",
+    "weapon": 39,
+    "paint": 43,
+    "name": "Stained",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_43.webp"
+  },
+  {
+    "id": "503_42",
+    "weapon": 39,
+    "paint": 42,
+    "name": "Blue Steel",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_42.webp"
+  },
+  {
+    "id": "503_38",
+    "weapon": 39,
+    "paint": 38,
+    "name": "Fade",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_38.webp"
+  },
+  {
+    "id": "503_12",
+    "weapon": 39,
+    "paint": 12,
+    "name": "Crimson Web",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_12.webp"
+  },
+  {
+    "id": "503_5",
+    "weapon": 39,
+    "paint": 5,
+    "name": "Forest DDPAT",
+    "rarity": "Covert",
+    "body": "legacy",
+    "image": "/skins/thumbs/503_5.webp"
   }
 ]

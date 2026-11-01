@@ -1,6 +1,6 @@
 # Private multiplayer
 
-Use the normal Play card to choose Casual/Competitive, Multiplayer, server address, room code and optional password, then select a team. Copy Invite excludes the password and does not connect until Play. Localhost invitations only work on the same machine.
+Open the Play tab to choose Casual/Competitive, Multiplayer, server address, room code and optional password, then select a team. Copy Invite excludes the password and opens the configured Play page without connecting automatically. Localhost invitations only work on the same machine.
 
 ## Architecture and limits
 

@@ -38,6 +38,7 @@ test("real pointer lock, movement, jump, crouch, pause, and loadout", async ({ p
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -95,6 +96,7 @@ test("hitscan headshots, wall occlusion, spare-magazine reload, and target respa
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -151,6 +153,7 @@ test("bots navigate, damage the player, and respawn resets health and ammunition
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("deathmatch");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -201,6 +204,7 @@ test("supplied AWP mesh, two zoom levels, bolt lockout, body damage, reload, and
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -288,6 +292,7 @@ test("skinned agent gait, head tracking, and corpse poses", async ({ page }) => 
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("deathmatch");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -358,6 +363,7 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -476,6 +482,7 @@ test("wheel cycles and wraps; AWP hits aligned enemies once each with penetratio
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -576,6 +583,7 @@ test("native weapon parts follow reload and bolt clips and return to their seats
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -669,6 +677,7 @@ test("thin wood transmits a bullet but thick masonry stops it", async ({ page })
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -732,6 +741,7 @@ test("agent side selection, independent rigs, and live menu animation", async ({
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("deathmatch");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -768,6 +778,7 @@ test("agent side selection, independent rigs, and live menu animation", async ({
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -787,6 +798,7 @@ test("Dust II ledges release the player and A ramp's wall stays solid", async ({
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -878,6 +890,7 @@ test("releasing crouch under cover waits for enough room to stand", async ({ pag
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -914,6 +927,7 @@ test("CT ramp traversal and the local callout radar", async ({ page }) => {
     if (new URL(r.url()).origin !== "http://127.0.0.1:5173") external.push(r.url());
   });
   await page.goto("/");
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1020,6 +1034,7 @@ test("Dust II casual lobby has balanced teams, textured view arms, and navigatio
   });
   await page.goto("/");
   await page.bringToFront();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1117,6 +1132,7 @@ test("casual bomb interaction, defuse cancellation, elimination and round reset"
   await page.getByRole("tab", { name: "Gameplay", exact: true }).click();
   await page.locator("#agent-team").selectOption("t");
   await page.locator("#close-settings").click();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1253,6 +1269,7 @@ test("spectator clicks cycle living teammates, wrap, and recover when the target
 }) => {
   await page.goto("/");
   await page.bringToFront();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1308,6 +1325,7 @@ test("spectator chase avoids walls and corpses settle without losing visibility"
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.bringToFront();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1431,6 +1449,7 @@ test("spectator wheel modes provide first person, mouse orbit, and independent p
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.bringToFront();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1517,6 +1536,7 @@ test("Tab scoreboard groups teams, tracks alive players and records match progre
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.bringToFront();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1590,6 +1610,7 @@ test("Bayonet default inventory, free primary purchases, slot switching and resp
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1662,6 +1683,7 @@ test("Bayonet slash and stab hit once, respect reach and cover, and cancel on sw
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1740,6 +1762,7 @@ test("both teams keep native wrists on weapon contacts and reset poses", async (
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1825,6 +1848,7 @@ test("native Bayonet clips animate fingers, return to idle, and inspection cance
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1925,6 +1949,7 @@ test("firearm inspection cancels for shots, reloads, scopes, and switching witho
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);
@@ -1998,6 +2023,7 @@ test("source agent poses animate both factions and crouch lowers the body", asyn
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.bringToFront();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('[data-team="t"]').click();
   await page.waitForFunction(() => window.__game.locked);
@@ -2092,6 +2118,7 @@ test("default Butterfly and Karambit share knife slot and play source actions", 
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {
@@ -2183,6 +2210,7 @@ test("R F reverses knife inspections without skipping draw or attack lockouts", 
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {
@@ -2249,6 +2277,7 @@ test("Karambit wrist roll deforms the forearm smoothly through inspection", asyn
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {
@@ -2288,6 +2317,7 @@ test("inspect rewind preserves the pose on R and F and returns to idle", async (
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {
@@ -2361,6 +2391,7 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="t"]').click();
   await page.waitForFunction(() => window.__game.locked);

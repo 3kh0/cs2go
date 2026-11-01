@@ -46,6 +46,7 @@ test("startup badge stays visible until all assets finish loading", async ({ pag
   expect(await page.locator("#app").evaluate((el) => (el as HTMLElement).inert)).toBe(false);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 15000 });
   await page.bringToFront();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);

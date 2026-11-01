@@ -16,7 +16,9 @@ async function start(page: Page) {
     { timeout: 100_000 },
   );
   await expect(page.locator("#play")).toBeEnabled();
+  await page.locator("#home-play").click();
   await page.locator('[data-mode="competitive"]').click();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);

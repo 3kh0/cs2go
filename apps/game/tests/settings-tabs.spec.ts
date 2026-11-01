@@ -85,6 +85,7 @@ test("tabbed settings apply crosshair and video detail, persist and keep the mat
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("deathmatch");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => document.exitPointerLock());

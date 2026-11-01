@@ -27,6 +27,8 @@ test("native homepage presents both agents, local navigation and a working match
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
   await expect(page.locator("#startup")).toHaveCount(0);
+  await expect(page.locator(".home-match-card")).toBeHidden();
+  await expect(page.locator("#play")).toBeHidden();
   await expect(page.locator(".home-nav button")).toHaveText([
     "INVENTORY",
     "LOADOUT",
@@ -84,8 +86,15 @@ test("native homepage presents both agents, local navigation and a working match
   expect(nav!.x + nav!.width).toBeLessThan(1280 - 52);
   await page.locator("#home-play").click();
   await expect(page.locator("#menu")).toHaveAttribute("data-page", "play");
+  await expect(page.locator(".home-match-card")).toBeVisible();
+  await page.locator('[data-session="multi"]').click();
+  await expect(page.locator("#multiplayer-options")).toBeVisible();
+  await page.locator('[data-session="single"]').click();
+  await expect(page.locator("#multiplayer-options")).toBeHidden();
   await page.screenshot({ path: "artifacts/home-play-1280.png" });
+  await page.locator("#home-play").click();
   await page.locator('[data-mode="competitive"]').click();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page

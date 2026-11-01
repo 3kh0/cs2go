@@ -11,6 +11,7 @@ async function join(page: Page, room: string, team: "ct" | "t") {
   await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=${room}`);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });
   await expect(page.locator("#startup")).toHaveCount(0);
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator(`#team-select [data-team="${team}"]`).click();
   await page.waitForFunction(() => !!window.__game.network?.connection.local);

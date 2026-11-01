@@ -35,7 +35,9 @@ WASD moves, Space jumps, Shift walks, Ctrl crouches, R reloads, F inspects, B bu
 
 Slots 1/2/3 select primary/sidearm/knife; 4 cycles utility, and the wheel wraps through owned slots. Left/right knife attacks slash/stab. Grenades support overhand, underhand and combined-button medium throws. AWP has two scope levels; M4A1-S/USP-S right-click toggles the suppressor.
 
-Inventory selects faction buy slots and cosmetic finishes. All 22 knives use **Inventory → Weapon Skins → Equip Knife**, never buy cards. Changing a finish affects previews and newly created weapons; carried/dropped guns keep their original appearance, ammo and attachment state. Steam import is described in [steam-login.md](steam-login.md).
+Open **Play** for mode selection, single-player/multiplayer and server/room settings; Home keeps the agent showcase and inventory shortcuts. Invite links open the configured Play page without connecting automatically.
+
+Inventory selects faction buy slots and cosmetic finishes, with full-color default weapon previews. All 22 knives use **Inventory → Weapon Skins → Equip Knife**, never buy cards. Equipping a knife captures its selected finish. Changing a firearm finish affects previews and newly created weapons; carried/dropped guns keep their original appearance, ammo and attachment state. Steam import is described in [steam-login.md](steam-login.md).
 
 ## Validation
 

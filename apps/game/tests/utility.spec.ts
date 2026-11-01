@@ -24,6 +24,7 @@ test("utility purchases, refunds, throws, smoke obstruction and flash exposure",
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible())
     await page.locator('#team-select [data-team="ct"]').click();
@@ -127,6 +128,7 @@ test("a lethal enemy HE plays its blast alongside death and renders a visible fl
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   const result = await page.evaluate(() => {

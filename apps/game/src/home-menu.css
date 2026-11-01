@@ -73,6 +73,9 @@
 #menu[data-page="play"] #home-play {
   color: #82d8ff;
 }
+#menu[data-page="home"] .home-match-card {
+  display: none;
+}
 #menu[data-page="play"] .home-cards {
   z-index: 1;
   inset: 6% 8% 7%;
@@ -514,10 +517,6 @@
   color: #e7c875;
 }
 
-#menu .home-cards:has([data-session="multi"][aria-pressed="true"]) .home-loadout-card,
-#menu .home-cards:has([data-session="multi"][aria-pressed="true"]) .home-collection-card {
-  display: none;
-}
 #menu[data-page="play"] .home-match-card {
   grid-template-rows: 48px 48px 1fr 64px;
   overflow: auto;

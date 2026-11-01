@@ -123,6 +123,7 @@ test("full-page native settings and saved showcase weapons share equipped legacy
       await page.locator("#play").evaluate((button) => {
         button.onclick = () => window.__game.start("practice");
       });
+      await page.locator("#home-play").click();
       await page.locator("#play").click();
       await page.waitForFunction(() => window.__game.locked);
       await page.evaluate(() => {

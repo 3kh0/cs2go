@@ -15,6 +15,7 @@ test("survivors move and use weapons after rounds, stay locked at halftime, and 
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await expect(page.locator("#startup")).toHaveCount(0);
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);

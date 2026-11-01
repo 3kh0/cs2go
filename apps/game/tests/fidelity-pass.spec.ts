@@ -96,6 +96,7 @@ test("hovered buy weapons use saved finishes at metre scale", async ({ page }) =
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.keyboard.press("b");
@@ -238,6 +239,7 @@ test("native idle motion continues with non-default showcase weapons and fire re
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   const fire = await page.evaluate(() => {

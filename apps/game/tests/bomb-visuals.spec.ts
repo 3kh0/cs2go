@@ -27,6 +27,7 @@ test("CT defuse tools and connected wires reflect kit ownership and cancel with 
   });
   // The old full-clip mapping reached the held recovery tail before 90%.
   expect(latePlantMotion).toBeGreaterThan(0.0001);
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);

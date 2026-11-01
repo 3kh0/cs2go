@@ -15,6 +15,7 @@ test("shipped deploy, reload, burst and zoom clocks drive gameplay", async ({ pa
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game?.locked);
   const result = await page.evaluate(() => {

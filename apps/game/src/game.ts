@@ -1384,7 +1384,10 @@ export class Game {
         this.competitive ? "competitive" : "casual",
       );
     }
-    if (isKnife(index)) this.knife = index;
+    if (isKnife(index)) {
+      this.knife = index;
+      this.groundInventory.newPlayerWeapon(index);
+    }
     const slot = weaponSlot(index);
     if (!owned && !isKnife(index)) {
       const previous =

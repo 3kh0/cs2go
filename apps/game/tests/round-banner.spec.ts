@@ -10,6 +10,7 @@ test("round winner banner follows winning team and resets for the next round", a
   test.setTimeout(120_000);
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);

@@ -9,6 +9,12 @@ import { registerSkinModel } from "./skins";
 
 type Template = { scene: T.Group; clips: Map<string, T.AnimationClip> };
 const templates = new Map<number, Template>();
+function knifeMaterial(material: T.Material, index: number) {
+  const own = material.clone();
+  if (index === 5 || index === 6)
+    own.name = index === 5 ? "weapon_knife_butterfly" : "weapon_knife_karambit";
+  return own;
+}
 function motionName(name: string) {
   // Defaults call their first idle "idle", while other knives call it "idle1".
   const short = name.split("/").at(-1)!;
@@ -87,15 +93,9 @@ function makeRig(index: number, group: T.Group) {
     if (target instanceof T.Mesh) {
       target.frustumCulled = false;
       // Each viewmodel owns its materials; painting must not mutate templates.
-      const copy = (material: T.Material) => {
-        const own = material.clone();
-        if (index === 5 || index === 6)
-          own.name = index === 5 ? "weapon_knife_butterfly" : "weapon_knife_karambit";
-        return own;
-      };
       target.material = Array.isArray(target.material)
-        ? target.material.map(copy)
-        : copy(target.material);
+        ? target.material.map((material) => knifeMaterial(material, index))
+        : knifeMaterial(target.material, index);
     }
     if (target instanceof T.Bone && !target.name.startsWith("vmrig_"))
       weaponBindings.push({ target, source: source.getObjectByName(target.name)! });
@@ -216,8 +216,8 @@ export function createInspectsWorldKnife(index: number) {
       object.frustumCulled = false;
       object.geometry = object.geometry.clone();
       object.material = Array.isArray(object.material)
-        ? object.material.map((m) => m.clone())
-        : object.material.clone();
+        ? object.material.map((material) => knifeMaterial(material, index))
+        : knifeMaterial(object.material, index);
     }
   });
   const idle = template.clips.get("idle1")!;
@@ -230,6 +230,7 @@ export function createInspectsWorldKnife(index: number) {
   const group = new T.Group();
   group.add(model);
   group.userData.ownedWorldGun = true;
+  registerSkinModel(group, index);
   group.userData.buyGrip = new T.Matrix4()
     .compose(position, rotation, new T.Vector3(1, 1, 1))
     .toArray();

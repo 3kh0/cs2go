@@ -15,6 +15,7 @@ test("bots react to visible contacts, remember lost contacts, and conserve reloa
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("deathmatch");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);

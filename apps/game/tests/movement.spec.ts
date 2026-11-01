@@ -32,6 +32,7 @@ test("held jump hops on landing without friction, while manual jumping requires 
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   const result = await page.evaluate(() => {
@@ -100,6 +101,7 @@ test("real held Space repeats hops and pointer-lock loss clears it", async ({ pa
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.keyboard.down("Space");

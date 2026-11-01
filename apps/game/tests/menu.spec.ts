@@ -17,6 +17,7 @@ test("casual lobby showcases the map and starts a full match", async ({ page }) 
   await page.getByRole("tab", { name: "Gameplay", exact: true }).click();
   await page.locator("#agent-team").selectOption("t");
   await page.locator("#close-settings").click();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await expect(page.getByRole("dialog", { name: "Choose your team" })).toBeVisible();
   expect(await page.evaluate(() => document.pointerLockElement)).toBeNull();
@@ -24,6 +25,7 @@ test("casual lobby showcases the map and starts a full match", async ({ page }) 
   await page.screenshot({ path: "artifacts/team-selector.png" });
   await page.locator("#team-back").click();
   await expect(page.locator("#team-select")).toHaveCount(0);
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="t"]').click();
   await page.waitForFunction(() => window.__game.locked);

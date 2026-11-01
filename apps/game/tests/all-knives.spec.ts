@@ -14,6 +14,7 @@ test("Inventory knife selection reaches the authoritative private match", async 
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=knives-${Date.now()}`);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => !!window.__game.network?.connection.local);
@@ -74,6 +75,7 @@ test("all CS2 knives equip through inventory and render their native action vari
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {

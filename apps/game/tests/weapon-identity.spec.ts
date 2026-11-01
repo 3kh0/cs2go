@@ -20,6 +20,7 @@ test("weapon finish survives ground, bot carry, death and pickup without repaint
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {
@@ -247,6 +248,7 @@ test("HD paint is visible on a dropped world gun and survives clearing the curre
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(async () => {
