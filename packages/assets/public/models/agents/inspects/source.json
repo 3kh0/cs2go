@@ -16,7 +16,7 @@
     "reason": "Pets are not agent animations"
   },
   "processing": "All published agent animation GLBs retained byte-identically, including secondary weapon tracks. All65 viewer agent native model paths resolve to the existing pinned installed native body roster. No duplicate bodies or per-agent animation copies. Full model API descriptions retain first-person part/texture references; runtime thumbnails are local WebP.",
-  "limits": "Source clip samples and static bind metadata, not the full evaluated native graph. Existing body/material/eye approximations retained. Runtime converts animation positions to existing Source-inch skeleton basis; old Source1 IDF still needs retargeting.",
+  "limits": "Source clip samples and static bind metadata, not the full evaluated native graph. Existing body/material/eye approximations retained. Runtime converts animation positions to the shared native Source-inch skeleton basis. Default CT uses the native SAS body and first-person arms.",
   "inputs": {
     "https://3d.cs2inspects.com/": {
       "sha256": "d039e54890cc718c220bb8dce74425bb77f4cf5e5c0d6d7a3de8d81cc803f87c",

@@ -1,6 +1,6 @@
 import { registerActorLighting, disposeActorLighting } from "./actor-lighting";
 import { loadWorldGrips, worldGrip, worldGripClips } from "./world-grips";
-import { peekSelectedAgent, defaultAgent } from "./agent-roster";
+import { peekSelectedAgent, defaultAgent, acquireAgentAppearance } from "./agent-roster";
 import {
   loadAgentGameplayClips,
   acquireAgentAnimationPack,
@@ -14,7 +14,7 @@ import { weaponSlot } from "./physics";
 import * as T from "three";
 import { Ragdoll } from "./ragdoll";
 import type { RagdollWorld } from "./ragdoll";
-import { fetchGzipped, loadModel } from "./gltf";
+import { loadModel } from "./gltf";
 import { clone } from "three/addons/utils/SkeletonUtils.js";
 import { createWeaponInstance, type WeaponInstance } from "./weapon-instance";
 import { disposeWorldGun, createWorldGun, shareSkeletons } from "./weapons";
@@ -33,48 +33,27 @@ export async function loadSoldierModels() {
       bombTemplate = model.scene;
     }),
     ...(["t", "ct"] as const).map(async (team) => {
-      const [model, data] = await Promise.all([
-        loadModel(`/models/agents/${team === "t" ? "ground-rebel-native" : "idf"}.glb`),
-        fetchGzipped(`/models/animations/agents/${team}.json.gz`),
+      const [model, sourceAnimations] = await Promise.all([
+        team === "ct"
+          ? // Startup owns this lease for the lifetime of its shared body template.
+            acquireAgentAppearance("default-ct").then((appearance) => ({
+              scene: appearance!.scene,
+            }))
+          : loadModel("/models/agents/ground-rebel-native.glb"),
+        nativeLoad,
       ]);
-      const clips = JSON.parse(new TextDecoder().decode(data)) as ReturnType<
-        typeof T.AnimationClip.toJSON
-      >[];
-      const sourceAnimations =
-        team === "t" ? await nativeLoad : clips.map((clip) => T.AnimationClip.parse(clip));
-      if (team === "t") {
-        const binding = await acquireAgentAnimationPack("world/rifle/_default_rifle");
-        ensureAgentAnimationBones(model.scene, binding.scene);
-        binding.release();
-      }
+      const binding = await acquireAgentAnimationPack("world/rifle/_default_rifle");
+      ensureAgentAnimationBones(model.scene, binding.scene);
+      binding.release();
       const animations = sourceAnimations.map((clip) =>
-        team === "t"
-          ? completeAgentClip(agentClipForModel(clip, model.scene), model.scene)
-          : agentClipForModel(clip, model.scene),
+        completeAgentClip(agentClipForModel(clip, model.scene), model.scene),
       );
       await gripLoad;
-      const gripClips = worldGripClips(team);
+      const gripClips = worldGripClips();
       actionReferences.set(
-        team,
+        "t",
         gripClips.map((clip) => clip.clone()),
       );
-      const actionWeapon: Record<string, number> = { ak: 0, m4a1s: 1, usp: 2, awp: 3 };
-      for (const motion of animations) {
-        if (!/^(shoot_|draw_)/.test(motion.name)) continue;
-        motion.tracks = motion.tracks.filter((track) =>
-          /^(spine_|clavicle_|arm_|hand_|finger_|ValveBipedBip01_(?:Spine|[LR]_(?:Clavicle|UpperArm|Forearm|Hand|Finger)))/.test(
-            track.name,
-          ),
-        );
-        T.AnimationUtils.makeClipAdditive(
-          motion,
-          0,
-          gripClips.find(
-            (clip) =>
-              clip.name === `grip_stand_${actionWeapon[motion.name.split("_")[1].split(".")[0]]}`,
-          ) ?? animations.find((clip) => clip.name === "idle_rifle")!,
-        );
-      }
       for (const clip of gripClips) {
         const index = Number(clip.name.split("_")[2]);
         const stance = clip.name.includes("_crouch_") ? "idle_crouch_" : "idle_";
@@ -103,7 +82,7 @@ export type Soldier = {
   spine: T.Object3D;
   hips: T.Object3D[];
   team: AgentTeam;
-  animationTeam: AgentTeam;
+  animationTeam: "t";
   releaseAppearance?: () => void;
   recoil: number;
   proceduralSpineBase?: T.Quaternion;
@@ -165,23 +144,20 @@ export function disposeSoldier(soldier: Soldier) {
 export function createSoldier(
   index: number,
   team: AgentTeam = "t",
-  appearance?: { scene: T.Group; animationTeam: AgentTeam; release?: () => void; agentId?: string },
+  appearance?: { scene: T.Group; animationTeam: "t"; release?: () => void; agentId?: string },
   useSelection = true,
 ): Soldier {
   if (useSelection) appearance ??= peekSelectedAgent(team);
-  const animationTeam = appearance?.animationTeam ?? team;
-  const template = templates.get(animationTeam)!;
+  const animationTeam = "t";
+  const template = templates.get(team)!;
   const group = new T.Group();
-  group.name = team === "t" ? "Ground Rebel | Elite Crew" : "IDF";
+  group.name = defaultAgent(team).name;
   const model = clone(appearance?.scene ?? template.scene) as T.Group;
   group.add(model);
-  const bone = (t: string, ct: string) => model.getObjectByName(t) ?? model.getObjectByName(ct)!;
-  const head = bone("head_0", "ValveBipedBip01_Head1");
-  const spine = bone("spine_3", "ValveBipedBip01_Spine4");
-  const hips = [
-    bone("leg_upper_L", "ValveBipedBip01_L_Thigh"),
-    bone("leg_upper_R", "ValveBipedBip01_R_Thigh"),
-  ];
+  const bone = (name: string) => model.getObjectByName(name)!;
+  const head = bone("head_0");
+  const spine = bone("spine_3");
+  const hips = [bone("leg_upper_L"), bone("leg_upper_R")];
   shareSkeletons(model);
   model.traverse((o) => {
     if (o instanceof T.Mesh) {
@@ -213,8 +189,8 @@ export function createSoldier(
   });
 
   const weapon = createWorldGun(2);
-  const rightHand = bone("hand_R", "ValveBipedBip01_R_Hand");
-  const leftHand = bone("hand_L", "ValveBipedBip01_L_Hand");
+  const rightHand = bone("hand_R");
+  const leftHand = bone("hand_L");
   weapon.traverse((o) => {
     if (o instanceof T.Mesh) {
       o.castShadow = true;
@@ -249,21 +225,21 @@ export function createSoldier(
     time: index,
     dying: false,
     ragdollBones: [
-      bone("pelvis", "ValveBipedBip01_Pelvis"),
+      bone("pelvis"),
       spine,
       head,
-      bone("arm_upper_L", "ValveBipedBip01_L_UpperArm"),
-      bone("arm_lower_L", "ValveBipedBip01_L_Forearm"),
+      bone("arm_upper_L"),
+      bone("arm_lower_L"),
       leftHand,
-      bone("arm_upper_R", "ValveBipedBip01_R_UpperArm"),
-      bone("arm_lower_R", "ValveBipedBip01_R_Forearm"),
+      bone("arm_upper_R"),
+      bone("arm_lower_R"),
       rightHand,
       hips[0],
-      bone("leg_lower_L", "ValveBipedBip01_L_Calf"),
-      bone("ankle_L", "ValveBipedBip01_L_Foot"),
+      bone("leg_lower_L"),
+      bone("ankle_L"),
       hips[1],
-      bone("leg_lower_R", "ValveBipedBip01_R_Calf"),
-      bone("ankle_R", "ValveBipedBip01_R_Foot"),
+      bone("leg_lower_R"),
+      bone("ankle_R"),
     ],
     phase: index * 0.19,
     weapon,
@@ -303,7 +279,6 @@ export function createSoldier(
   return soldier;
 }
 function prepareNativeActions(soldier: Soldier) {
-  if (soldier.animationTeam !== "t") return;
   const generation = ++soldier.nativeGeneration;
   for (const action of Object.values(soldier.nativeActions ?? {})) {
     action.stop();
@@ -373,7 +348,7 @@ const movementClips = [
 function poseWeapon(soldier: Soldier) {
   soldier.group.worldToLocal(soldier.rightHand.getWorldPosition(soldier.grip));
   soldier.group.worldToLocal(soldier.leftHand.getWorldPosition(soldier.support));
-  const native = worldGrip(soldier.animationTeam, soldier.weaponIndex);
+  const native = worldGrip(soldier.weaponIndex);
   if (native && soldier.weaponGripInverse) {
     const stand = native.stand.attachmentPose!,
       crouched = native.crouch.attachmentPose!;
@@ -558,7 +533,7 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
       pose(`crouch_${direction}_${family}`, weight * crouch, soldier.phase % 1);
     }
   }
-  if (soldier.plant === 0 && worldGrip(soldier.animationTeam, soldier.weaponIndex)) {
+  if (soldier.plant === 0 && worldGrip(soldier.weaponIndex)) {
     pose(`grip_stand_${soldier.weaponIndex}`, 1 - crouch, 0);
     pose(`grip_crouch_${soldier.weaponIndex}`, crouch, 0);
   }
@@ -586,16 +561,11 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
     return true;
   };
   if (soldier.plant === 0) {
-    const shown =
-      nativePose("shoot", soldier.nativeShotElapsed) ||
-      nativePose("reload", soldier.nativeReloadElapsed) ||
+    if (
+      !nativePose("shoot", soldier.nativeShotElapsed) &&
+      !nativePose("reload", soldier.nativeReloadElapsed)
+    )
       nativePose("draw", soldier.nativeDrawElapsed);
-    if (!shown && !native) {
-      const weapon = ["ak", "m4a1s", "usp", "awp"][soldier.weaponIndex];
-      if (soldier.shotTime > 0)
-        pose(`shoot_${weapon}.vnmclip+non_additive`, 1, 1 - soldier.shotTime / 0.25);
-      else if (soldier.drawTime > 0) pose(`draw_${weapon}`, 1, 1 - soldier.drawTime / 0.55);
-    }
   }
   soldier.nativeShotElapsed += dt;
   soldier.nativeDrawElapsed += dt;

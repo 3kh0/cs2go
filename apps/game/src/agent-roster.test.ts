@@ -32,6 +32,18 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 
+test("existing default CT selections resolve to native SAS with the shared Source 2 rig", async () => {
+  localStorage.setItem("cs2go-agents", JSON.stringify({ ct: "default-ct", t: "default-t" }));
+  const roster = await import("./agent-roster");
+  const appearance = await roster.acquireAgentAppearance("default-ct");
+  expect(roster.selectedAgentId("ct")).toBe("default-ct");
+  expect(roster.defaultAgent("ct").itemId).toBe(5600);
+  expect(mocks.model).toHaveBeenCalledWith("/models/agents/roster/ctm-sas.glb", 1);
+  expect(appearance?.animationTeam).toBe("t");
+  expect(appearance?.agentId).toBe("default-ct");
+  appearance!.release();
+});
+
 test("catalog and agent geometry stay lazy, and team selection is validated", async () => {
   const roster = await import("./agent-roster");
   expect(roster.selectedAgentId("ct")).toBe("default-ct");

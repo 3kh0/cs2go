@@ -1,6 +1,6 @@
 import * as T from "three";
 import { fetchGzipped } from "./gltf";
-import type { AgentTeam, Soldier } from "./soldier";
+import type { Soldier } from "./soldier";
 import { isKnife, knifeDefinitions } from "./physics";
 
 type Pose = {
@@ -10,7 +10,7 @@ type Pose = {
   hand: string;
   attachment: number[];
 };
-let poses: Record<AgentTeam, Record<string, Pose>>;
+let poses: Record<"t", Record<string, Pose>>;
 const tokens = [
   "ak",
   "m4a1",
@@ -61,7 +61,7 @@ export function buyPoseToken(index: number) {
 }
 /** Static native buy poses own their fingers and attachment; world AI poses stay separate. */
 export function applyBuyPose(soldier: Soldier, token: string) {
-  const pose = poses[soldier.animationTeam ?? soldier.team][token];
+  const pose = poses[soldier.animationTeam][token];
   if (!pose) throw new Error(`Missing native buy pose: ${soldier.team}/${token}`);
   soldier.mixer.stopAllAction();
   for (const [name, transform] of Object.entries(pose.bones)) {

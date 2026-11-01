@@ -116,7 +116,7 @@ def main():
                       'All65 viewer agent native model paths resolve to the existing pinned installed native body roster. '
                       'No duplicate bodies or per-agent animation copies. Full model API descriptions retain first-person part/texture references; runtime thumbnails are local WebP.',
         'limits': 'Source clip samples and static bind metadata, not the full evaluated native graph. Existing body/material/eye approximations retained. '
-                  'Runtime converts animation positions to existing Source-inch skeleton basis; old Source1 IDF still needs retargeting.',
+                  'Runtime converts animation positions to the shared native Source-inch skeleton basis. Default CT uses the native SAS body and first-person arms.',
         'inputs': dict(sorted(inputs.items()))}, indent=2) + '\n')
     print(f'{len(models)} agents, {len(reports)} packs, {sum(counts.values())} clips: {counts}', flush=True)
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "76c20ff06dd6d7026843070de622ddae97826dc64b2fae3b4d08cfbcb459e8a1",
+  "release": "58760a7025cdee4c150e3bb756a475e1e1ec66ed30d17db11e50364d39c48db5",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -4172,20 +4172,6 @@
       "input": "models/agents/ground-rebel.glb",
       "inputSha256": "07ddc58edadacc8a06430b4a713e16e436ef1e71ced9143180744899e3899a6b"
     },
-    "models/agents/idf-arms.glb.gz": {
-      "sha256": "11bf5f62081a42ddb5fadfba4f67c8b7cd0220e31cdf53f7cb6deecf35fc7c0b",
-      "bytes": 213054,
-      "decodedSha256": "e3137e295a45ad6b9053e4c2c2dc9c70a5482bab9865943c0a9ca0e10a58b125",
-      "input": "models/agents/idf-arms.glb",
-      "inputSha256": "e3137e295a45ad6b9053e4c2c2dc9c70a5482bab9865943c0a9ca0e10a58b125"
-    },
-    "models/agents/idf.glb.gz": {
-      "sha256": "7171be3971043c8d448a3fcbce02465352390decedd80c50ea3cb65b5633e73c",
-      "bytes": 691366,
-      "decodedSha256": "1c134938bece73608596af01b60993e1b84cb38a5a6f03dcac1112bfc9241bcb",
-      "input": "models/agents/idf.glb",
-      "inputSha256": "1c134938bece73608596af01b60993e1b84cb38a5a6f03dcac1112bfc9241bcb"
-    },
     "models/agents/inspects/agents-source.json": {
       "sha256": "dd9a9f9f2ac0d80e889af6c32d17ecccaebde7081b233c5e80299ae897769392",
       "bytes": 22822,
@@ -6554,13 +6540,13 @@
       }
     },
     "models/agents/inspects/source.json": {
-      "sha256": "e6df95c595c7f5da16c0703fb17d2bda98cae6c7244990c68c9a5d1d3b2d614f",
-      "bytes": 54748,
+      "sha256": "f9be1ad806d142d2937792f6d047c6c5ec2c937f6d43cce92b57c7763fb08e36",
+      "bytes": 54775,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "4b1567d96a24c6d039563fd8478b7f0754e2db518d9b02e90358f999260a2796",
-        "bytes": 12592
+        "sha256": "144b69b0ad51f67cd8fa7bc891e0cb0c0efd56d38cf4f3ec0e22d76463676641",
+        "bytes": 12576
       }
     },
     "models/agents/inspects/thumbs/4613.webp": {
@@ -7404,13 +7390,13 @@
       "inputSha256": "f753234558ea060bb9c7444edf66b5c3e3be3ed6a527b318fc134e178e8cc249"
     },
     "models/agents/source-manifest.json": {
-      "sha256": "b31191fdb5d369796a7e7c0428347fdcf3755cc15f740b2fe63707691ca39c09",
-      "bytes": 71871,
+      "sha256": "7f91c794ae584dc00ee440c87434079c6dc9915e3bb5e743a1143e1d31360bf1",
+      "bytes": 71687,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "0872a116da4e9baacae9b55a5a6e7c39d8b4d5d98037b45b152ce349cfd7c64e",
-        "bytes": 13873
+        "sha256": "f6ec994b33b76efcc4e0b64213e83db89d4f2d0be661b87f2493b01ab48630ca",
+        "bytes": 13758
       }
     },
     "models/agents/view-hands.glb.gz": {
@@ -7436,26 +7422,6 @@
       "decodedSha256": "53c78ca6e3606b311a39aedca20363261abc91810efd71ba6019ed23ab427146",
       "input": "models/ak-47.glb",
       "inputSha256": "53c78ca6e3606b311a39aedca20363261abc91810efd71ba6019ed23ab427146"
-    },
-    "models/animations/agents/ct.json.gz": {
-      "sha256": "fc8eacb4e4cdc7f54b5c9e57586b450e6bdf823bdeca4db864dfa795cbafc188",
-      "bytes": 893537,
-      "decodedSha256": "8ea8189e9553e425fdb55ee4b338a9bda00c6afb0a47a6116606fbde5fc0004a"
-    },
-    "models/animations/agents/source.json": {
-      "sha256": "cbc76466a9f6de2a7e5f06031a4a0e4fa3fe6d3e56d400ea600727bbe15a119c",
-      "bytes": 3499,
-      "transport": {
-        "encoding": "br",
-        "quality": 11,
-        "sha256": "5bb39c1e2b7694c41b99d88143e96412fe682a8f81873946fedb8e33acf9ed90",
-        "bytes": 1100
-      }
-    },
-    "models/animations/agents/t.json.gz": {
-      "sha256": "406d15ee854b4452069300830fdfab1303e64f93994b15db43fda28b1070374d",
-      "bytes": 1134432,
-      "decodedSha256": "bc837425e23ada978a7b5cfa01859ba4c01331d292ffc97168ce1ef406af1daa"
     },
     "models/animations/bayonet/draw.glb.gz": {
       "sha256": "d5ae9981c57dd009ecd4a8ca9c9995d8d7d3d79eb263e8d08c86057d199aab77",
@@ -7560,24 +7526,18 @@
       }
     },
     "models/animations/buy/poses.json.gz": {
-      "sha256": "5f6f9df1cd85f78e7bdebc354b67ab0a6c504ea5c7c60a1c8a1d7a7d3ccc9c31",
-      "bytes": 80080,
-      "decodedSha256": "78417f53ea57a835c510684cc256c576ad3612fa3aec1c520fa164592a9df626",
-      "transport": {
-        "encoding": "br",
-        "quality": 11,
-        "sha256": "fd6d70762c714e6a637b6fead045922d417eeb08b8d037fbbb9f1887f60e5ab9",
-        "bytes": 79735
-      }
+      "sha256": "e5610af5b66760a4674c6de4b8c731da1c33fab7228ed4f99a407c8e688b05ba",
+      "bytes": 47701,
+      "decodedSha256": "cdd5a7bdff507be1cf856e9b44bc54a6207f66224c6da0f92a766d3cc8d05698"
     },
     "models/animations/buy/source.json": {
-      "sha256": "7be7dae4b17a39a5bcdd28d142b9dae767a95ebacf10c12a69dda6304ee64329",
-      "bytes": 18373,
+      "sha256": "6e947e603422f3b356d87043d772a7d0b61ef9a562119e48b885f19a023f14e5",
+      "bytes": 18270,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "9260f3d700d3f33a324f8a5b1b721bae2c265dc8e0bf768cf2ecb85342f38b80",
-        "bytes": 4251
+        "sha256": "ff2b1bf21dca12668d3bcb8a3731fdf834839f6859d83c9ba1ef08a51028e284",
+        "bytes": 4214
       }
     },
     "models/animations/c4/plant.glb.gz": {
@@ -7604,33 +7564,39 @@
       }
     },
     "models/animations/grips/poses.json.gz": {
-      "sha256": "a5c3152158fc84b3c9c4d50da388de8a4089baf5b71484353582b997087f4b02",
-      "bytes": 293060,
-      "decodedSha256": "74bf3948aff5600c69eb4375c23720aa5edbc7b9a3fc41e45f728bb047139c5a"
+      "sha256": "92e00d4e8981ac2b86a53f53ab3e642b4cdfb96a4315f3c46d7244fc60517345",
+      "bytes": 178681,
+      "decodedSha256": "39266b81e6b22179fc6bb76ea72af8eaf688044fdcc6340b46b8b667f9881ff3"
     },
     "models/animations/grips/source.json": {
-      "sha256": "e1ffac9ca632fc15db74817357c6c50d49e2a087e9b647d22aad62ad01c87819",
-      "bytes": 105934,
+      "sha256": "e764f4283ec9ff4e6dadce47c96b47114b8c8c8bdc9821c0c5e2f8ee3b17f1e2",
+      "bytes": 105809,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "1647eaebbbbb6c74c3e46cf9d72446b4be6d45817a62060b25c2b4f9d35f37aa",
-        "bytes": 18650
+        "sha256": "ea1043944b34ae521064ad66625fd154794d586518b4254aadcb05b066e2cf4e",
+        "bytes": 18632
       }
     },
     "models/animations/home/poses.json.gz": {
-      "sha256": "249493bc527c7157b5832fc5b169cbeb895a8e3029a2d708d819f33221f01195",
-      "bytes": 210640,
-      "decodedSha256": "0eca470abb9d5cd833bb6dc0336d4018af895e5e06923a8fde41cdac92e09f2a"
-    },
-    "models/animations/home/source.json": {
-      "sha256": "0bc6c80f446bcfa186080a03657f22eacb316804161b73de4208fc6f6dc3ecbe",
-      "bytes": 2026,
+      "sha256": "925d351a1defd1f389bc0aca66a4a41ecf64722b12ea324a76012b6c368923cf",
+      "bytes": 72940,
+      "decodedSha256": "315e046a95370ce2e77c60a3659e43aba26396916d5566fd46e9be23d2c62eda",
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "fefff4a33e357900857b0834f917d325aa2f4fcf2b50629374dcfa68af3aa2ae",
-        "bytes": 881
+        "sha256": "380907ea947c53e6798d74f6eaaf9982639cbce8b3024cd2d262606932d1b712",
+        "bytes": 71949
+      }
+    },
+    "models/animations/home/source.json": {
+      "sha256": "5329199e743cf7c44c1be1c150128622d2888bd7fa81ce2ab1c83115c3282a75",
+      "bytes": 1923,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "cc167d7add86470fbeb481b5e533aa53ebe20111616dc8741e03569a1a0247cc",
+        "bytes": 848
       }
     },
     "models/animations/knives/bowie.glb.gz": {

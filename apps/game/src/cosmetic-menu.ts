@@ -164,15 +164,12 @@ export function setupCosmeticMenu(game: Game) {
       element.disabled = busy || loading || game.active;
     if (!animationSelect.value) get<HTMLButtonElement>("play-agent-animation").disabled = true;
     const needsEquip = draftAgent !== selectedAgentId(team);
-    const legacyAgent = selectedAgentId(team) === "default-ct";
-    if (needsEquip || legacyAgent) get<HTMLButtonElement>("play-agent-animation").disabled = true;
+    if (needsEquip) get<HTMLButtonElement>("play-agent-animation").disabled = true;
     get("agent-animation-hint").textContent = game.active
       ? "Animation previews are available from the main menu."
-      : legacyAgent
-        ? "Equip a CS2 agent to preview these animations."
-        : needsEquip
-          ? "Equip this agent to preview its animations."
-          : "Animations preview here only. Match movement stays under your control.";
+      : needsEquip
+        ? "Equip this agent to preview its animations."
+        : "Animations preview here only. Match movement stays under your control.";
   }
   function list() {
     const query = search.value.toLocaleLowerCase().trim();

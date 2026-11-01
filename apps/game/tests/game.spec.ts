@@ -752,7 +752,7 @@ test("agent side selection, independent rigs, and live menu animation", async ({
     window.__game.freezeTime = 0;
   });
   expect(await page.evaluate(() => window.__game.bots.map((b) => b.group.name))).toEqual(
-    Array(5).fill("IDF"),
+    Array(5).fill("SAS | Counter-Terrorists"),
   );
   expect(
     await page.evaluate(() => window.__game.bots[0].rig.head === window.__game.bots[1].rig.head),

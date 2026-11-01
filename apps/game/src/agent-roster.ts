@@ -23,7 +23,16 @@ export type AgentAppearance = {
   release: () => void;
 };
 const defaults: Record<AgentTeam, AgentDefinition> = {
-  ct: { id: "default-ct", name: "IDF | Counter-Terrorists", team: "ct", model: "" },
+  ct: {
+    id: "default-ct",
+    name: "SAS | Counter-Terrorists",
+    team: "ct",
+    model: "/models/agents/roster/ctm-sas.glb",
+    nativeModel: "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    itemId: 5600,
+    image: "/models/agents/inspects/thumbs/5600.webp",
+    sourcePose: "cu_ct_pose01",
+  },
   t: { id: "default-t", name: "Ground Rebel | Elite Crew", team: "t", model: "" },
 };
 const choices: Record<AgentTeam, string> = { ct: "default-ct", t: "default-t" };
@@ -154,7 +163,7 @@ function lease(entry: Cached, reserved = false, agentId?: string): AgentAppearan
 }
 /** Every returned scene is a shared template; release only after its clones are removed. */
 export async function acquireAgentAppearance(id: string): Promise<AgentAppearance | undefined> {
-  if (id === "default-ct" || id === "default-t") return undefined;
+  if (id === "default-t") return undefined;
   const agent = (await loadAgentCatalog()).find((item) => item.id === id);
   if (!agent?.model) throw new Error("Agent not found in the installed roster");
   let entry = models.get(agent.model);

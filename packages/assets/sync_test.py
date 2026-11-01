@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from botocore.exceptions import ClientError
-from sync import publish, seed_cache, RetryingClient
+from sync import publish, seed_cache, published_status, create_once, guard_copy_destination, RetryingClient
 
 
 class Bucket:
@@ -42,6 +42,8 @@ class Bucket:
     def put_object(self, **kwargs):
         if self.fail and kwargs['Key'].endswith('.bin'):
             raise RuntimeError('transfer failed')
+        if kwargs.get('IfNoneMatch') == '*' and kwargs['Key'] in self.objects:
+            raise ClientError({'Error': {'Code': 'PreconditionFailed'}}, 'PutObject')
         self.objects[kwargs['Key']] = kwargs
         self.uploads.append(kwargs['Key'])
 
@@ -51,6 +53,111 @@ class Bucket:
 
 
 class PublishTests(unittest.TestCase):
+    def test_preflight_requires_receipt_for_exact_asset_tree(self):
+        bucket = Bucket()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = {'release': 'release', 'files': {}}
+            body = json.dumps(manifest).encode()
+            (root / 'manifest.json').write_bytes(body)
+            tree = 'a' * 40
+            self.assertFalse(published_status(bucket, 'test', manifest, root, tree))
+            bucket.objects['releases/release/manifest.json'] = {'Body': body}
+            self.assertFalse(published_status(bucket, 'test', manifest, root, tree))
+            publish(bucket, 'test', manifest, root, tree=tree)
+            self.assertEqual(bucket.uploads, [f'releases/release/verified/{tree}.json'])
+            self.assertTrue(published_status(bucket, 'test', manifest, root, tree))
+            # A changed public file with a stale manifest changes Git's tree:
+            # no receipt means normal verification must run, never a false skip.
+            self.assertFalse(published_status(bucket, 'test', manifest, root, 'b' * 40))
+            self.assertFalse(published_status(bucket, 'test', manifest, root))
+            publish(bucket, 'test', manifest, root, tree=tree)
+            self.assertEqual(len(bucket.uploads), 1)
+            bucket.objects[f'releases/release/verified/{tree}.json']['Body'] = b'corrupt'
+            with self.assertRaises(ValueError):
+                published_status(bucket, 'test', manifest, root, tree)
+            self.assertNotIn('latest.json', bucket.objects)
+
+    def test_create_once_handles_racing_identical_writes_and_rejects_conflicts(self):
+        bucket = Bucket()
+        create_once(bucket, Bucket='test', Key='immutable', Body=b'first')
+        create_once(bucket, Bucket='test', Key='immutable', Body=b'first')
+        with self.assertRaises(ValueError):
+            create_once(bucket, Bucket='test', Key='immutable', Body=b'changed')
+        self.assertEqual(bucket.objects['immutable']['Body'], b'first')
+        self.assertEqual(bucket.uploads, ['immutable'])
+
+    def test_copy_guard_sets_destination_condition_before_signing(self):
+        import boto3
+        client = boto3.client('s3', endpoint_url='https://example.invalid',
+                              aws_access_key_id='fixture', aws_secret_access_key='fixture', region_name='auto')
+        client.meta.events.register('before-call.s3.CopyObject', guard_copy_destination)
+        class RequestCaptured(Exception):
+            pass
+        def capture(request, **kwargs):
+            self.assertEqual(request.headers['cf-copy-destination-if-none-match'], b'*')
+            self.assertIn('cf-copy-destination-if-none-match', request.headers['Authorization'].decode())
+            raise RequestCaptured()
+        client.meta.events.register('before-send.s3.CopyObject', capture)
+        with self.assertRaises(RequestCaptured):
+            client.copy_object(Bucket='fixture', Key='target', CopySource={'Bucket': 'fixture', 'Key': 'source'})
+        def capture_upload(request, **kwargs):
+            self.assertEqual(request.headers['If-None-Match'], b'*')
+            raise RequestCaptured()
+        client.meta.events.register('before-send.s3.PutObject', capture_upload)
+        with self.assertRaises(RequestCaptured):
+            create_once(client, Bucket='fixture', Key='target', Body=b'payload')
+
+    def test_copy_race_verifies_winner_without_overwriting(self):
+        class RacingBucket(Bucket):
+            winner = b'one'
+            def copy_object(self, Bucket, Key, CopySource):
+                self.objects[Key] = {'Body': self.winner, 'Metadata': {
+                    'sha256': hashlib.sha256(self.winner).hexdigest()}}
+                raise ClientError({'Error': {'Code': 'PreconditionFailed'}}, 'CopyObject')
+        for winner, succeeds in [(b'one', True), (b'conflict', False)]:
+            with self.subTest(winner=winner), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                entry = {'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}
+                manifest = {'release': 'new', 'files': {'a.bin': entry}}
+                (root / 'manifest.json').write_text(json.dumps(manifest))
+                bucket = RacingBucket()
+                bucket.winner = winner
+                bucket.objects['latest.json'] = {'Body': json.dumps({
+                    'release': 'old', 'files': {'a.bin': entry}}).encode()}
+                if succeeds:
+                    publish(bucket, 'test', manifest, root)
+                    self.assertIn('releases/new/manifest.json', bucket.objects)
+                else:
+                    with self.assertRaises(ValueError):
+                        publish(bucket, 'test', manifest, root)
+                    self.assertNotIn('releases/new/manifest.json', bucket.objects)
+                self.assertEqual(bucket.objects['releases/new/a.bin']['Body'], winner)
+                self.assertEqual(bucket.copies, [])
+
+    def test_latest_pointer_is_not_rewritten_when_identical(self):
+        bucket = Bucket()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = {'release': 'empty', 'files': {}}
+            body = json.dumps(manifest).encode()
+            (root / 'manifest.json').write_bytes(body)
+            bucket.objects['latest.json'] = {'Body': body}
+            publish(bucket, 'test', manifest, root)
+            self.assertEqual(bucket.uploads, ['releases/empty/manifest.json'])
+            self.assertEqual(bucket.objects['latest.json']['Body'], body)
+
+    def test_preflight_permission_errors_fail_closed(self):
+        class DeniedBucket(Bucket):
+            def get_object(self, **kwargs):
+                raise ClientError({'Error': {'Code': 'AccessDenied'}}, 'GetObject')
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = {'release': 'blocked', 'files': {}}
+            (root / 'manifest.json').write_text(json.dumps(manifest))
+            with self.assertRaises(ClientError):
+                published_status(DeniedBucket(), 'test', manifest, root, 'a' * 40)
+
     def test_incremental_immutable_release_and_failure(self):
         bucket = Bucket()
         with tempfile.TemporaryDirectory() as directory:

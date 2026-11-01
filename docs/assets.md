@@ -17,7 +17,7 @@ Hashes, source URLs, depot/tool versions and processing notes live beside their 
 
 Original weapon OBJs and initial WAVs came from supplied Downloads folders. Additional historical sounds came from pinned `sourcesounds/csgo`; native CS2 sound manifests supersede selected recordings. Weapon viewers supply pinned mesh/animation exports. Native Steam/Windows extractions supply map, agent, pose, interface and audio resources. Kill-feed silhouettes use the supplied Killfeed Generator reference. Exact inputs remain recorded in the corresponding manifests.
 
-Imported geometry and clip samples do not reproduce the complete Source 2 renderer or evaluated animation graphs. Three.js materials, lighting, retargeting, procedural constraints, sound mixing and effects retain documented approximations. The old IDF uses Source 1 proportions. The catalog includes all 556 listed finishes across twenty cosmetic knife models; team-default knives have no paint kits. Pattern/wear use the existing local paint renderer.
+Imported geometry and clip samples do not reproduce the complete Source 2 renderer or evaluated animation graphs. Three.js materials, lighting, retargeting, procedural constraints, sound mixing and effects retain documented approximations. The catalog includes all 556 listed finishes across twenty cosmetic knife models; team-default knives have no paint kits. Pattern/wear use the existing local paint renderer.
 
 ## Maintained scripts
 
@@ -48,7 +48,7 @@ The same revision contains the detailed extraction notes under `docs/`. No dupli
 
 ## Updating assets
 
-`python3 scripts/import-agent-animations.py` imports the pinned CS2 Inspects agent catalog and 153 deduplicated animation packs (1,221 agent clips; pet clips are excluded). All 65 source agents map to the existing native roster, preserving saved aliases and avoiding duplicate body models. Provenance is under `models/agents/inspects/`. Common movement loads at startup; weapon actions and searchable preview packs load on demand. Clips do not execute the complete native graph, IK or procedural masks; secondary weapon tracks remain preserved as data while world props retain their existing mechanical rendering.
+`python3 scripts/import-agent-animations.py` imports the pinned CS2 Inspects agent catalog and 153 deduplicated animation packs (1,221 agent clips; pet clips are excluded). All 65 source agents map to the existing native roster, preserving saved aliases and avoiding duplicate body models. Default CT uses native SAS (item 5600); the former Source 1 body, arms, compatibility code and sampled retargets have been removed. Provenance is under `models/agents/inspects/`. Common movement loads at startup; weapon actions and searchable preview packs load on demand. Clips do not execute the complete native graph, IK or procedural masks; secondary weapon tracks remain preserved as data while world props retain their existing mechanical rendering.
 
 `python3 scripts/import-gloves.py` imports 96 glove entries (94 paints and two defaults), ten native models, local shader/mask assets and thumbnails. `python3 scripts/import-gloves.py --agent-arms` imports the 65 agents' first-person sleeve/default-glove variants. Model/finish caches retain active leases plus two idle entries. Provenance is under `models/gloves/` and `skins/gloves/`. The importer needs Bun, curl, Pillow and NumPy; original inputs remain cached/read-only under `artifacts/`.
 

@@ -13,41 +13,69 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       assets: ${{ steps.diff.outputs.assets }}
+      deploy: ${{ steps.diff.outputs.deploy }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
+          filter: blob:none
           sparse-checkout: .github
       - id: diff
         env:
           BEFORE: ${{ github.event.before }}
           EVENT: ${{ github.event_name }}
         run: |
-          if [ "$EVENT" = workflow_dispatch ] || [ "$BEFORE" = 0000000000000000000000000000000000000000 ]; then
-            echo 'assets=true' >> "$GITHUB_OUTPUT"
-          elif ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
-            echo 'assets=true' >> "$GITHUB_OUTPUT"
+          assets=false
+          deploy=false
+          if [ "$EVENT" = workflow_dispatch ] || [ "$BEFORE" = 0000000000000000000000000000000000000000 ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            assets=true
+            deploy=true
           elif git diff --name-only "$BEFORE" HEAD -- packages/assets .github/workflows/deploy.yml | grep -q .; then
-            echo 'assets=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'assets=false' >> "$GITHUB_OUTPUT"
+            assets=true
+            deploy=true
+          elif git diff --name-only "$BEFORE" HEAD -- apps packages/protocol packages/simulation package.json bun.lock bunfig.toml turbo.json scripts/build-assets.mjs scripts/service-worker.js | grep -q .; then
+            deploy=true
           fi
+          echo "assets=$assets" >> "$GITHUB_OUTPUT"
+          echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
   assets:
     needs: changes
     if: needs.changes.outputs.assets == 'true'
     runs-on: ubuntu-latest
     steps:
+      # Fetch metadata first; public blobs are expanded only when verification is needed.
       - uses: actions/checkout@v4
         with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            packages/assets
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.4.4
+            /packages/assets/manifest.json
+            /packages/assets/sync.py
+            /packages/assets/sync_test.py
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: python -m pip install boto3==1.40.61
+      - run: python packages/assets/sync_test.py
+      - id: identity
+        run: echo "tree=$(git rev-parse HEAD:packages/assets)" >> "$GITHUB_OUTPUT"
+      - id: published
+        run: python packages/assets/sync.py status
+        env:
+          ASSET_TREE: ${{ steps.identity.outputs.tree }}
+          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+      - if: steps.published.outputs.complete != 'true'
+        run: |
+          git sparse-checkout set --no-cone '/packages/assets/' '/package.json' '/bunfig.toml'
+      - uses: oven-sh/setup-bun@v2
+        if: steps.published.outputs.complete != 'true'
+        with:
+          bun-version: 1.4.4
       - uses: actions/cache@v4
+        if: steps.published.outputs.complete != 'true'
         with:
           path: packages/assets/.cache
           key: asset-compression-br11-${{ runner.os }}-${{ hashFiles('packages/assets/manifest.json') }}
@@ -56,8 +84,8 @@ jobs:
             asset-compression-${{ runner.os }}-
       # A locally published immutable release can seed the exact q11 wire bytes;
       # the pipeline still verifies their logical hashes by Brotli round-trip.
-      - run: python -m pip install boto3==1.40.61
       - run: python packages/assets/sync.py seed
+        if: steps.published.outputs.complete != 'true'
         env:
           R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -65,16 +93,18 @@ jobs:
           R2_BUCKET: ${{ vars.R2_BUCKET }}
       # No JS dependency installation or app build is needed for asset verification.
       - run: bun run assets:verify
-      - run: python packages/assets/sync_test.py
+        if: steps.published.outputs.complete != 'true'
       - run: bun run assets:sync
+        if: steps.published.outputs.complete != 'true'
         env:
+          ASSET_TREE: ${{ steps.identity.outputs.tree }}
           R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET: ${{ vars.R2_BUCKET }}
   deploy:
     needs: [changes, assets]
-    if: always() && !cancelled() && needs.changes.result == 'success' && (needs.assets.result == 'success' || needs.assets.result == 'skipped')
+    if: always() && !cancelled() && needs.changes.result == 'success' && needs.changes.outputs.deploy == 'true' && (needs.assets.result == 'success' || needs.assets.result == 'skipped')
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}

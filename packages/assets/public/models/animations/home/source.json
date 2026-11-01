@@ -27,12 +27,8 @@
     {
       "target": "public/models/agents/ground-rebel-native.glb",
       "sha256": "3ea2077cbced126f9aad79166a9d0bbbfb0462243a53e1d11d26fbdbeb1d6bc4"
-    },
-    {
-      "target": "public/models/agents/idf.glb",
-      "sha256": "1c134938bece73608596af01b60993e1b84cb38a5a6f03dcac1112bfc9241bcb"
     }
   ],
-  "processing": "All nonnegative native homepage idle samples;  Source inches converted to meters, Z up to Y up; world-space rotations calibrated to each bundled agent rifle reference. Source wpn attachment retained relative to retargeted right hand, without weapon bounding-box placement.",
-  "limitations": "IDF retargeting retains its Source 1 proportions. Native graph idle layering and SnapWeapon graph evaluation are not reproduced. Static scale channels are restored from the compiled clips; native root vertical motion is verified as zero. Clips loop at their decoded final key; final native graph sequencing is not reproduced. This is not a capture of the final game UI graph."
+  "processing": "All nonnegative native homepage idle samples;  Source inches converted to meters, Z up to Y up; world-space rotations calibrated to each bundled agent rifle reference. Source wpn attachment retained relative to retargeted right hand, without weapon bounding-box placement. Source 1 CT retarget removed; the shared native Source 2 pose layer is used by both teams.",
+  "limitations": "Native graph idle layering and SnapWeapon graph evaluation are not reproduced. Static scale channels are restored from the compiled clips; native root vertical motion is verified as zero. Clips loop at their decoded final key; final native graph sequencing is not reproduced. This is not a capture of the final game UI graph."
 }

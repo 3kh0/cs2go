@@ -79,8 +79,12 @@ test("inventory equips gloves per team, previews agent animations and restores d
   await page.locator('[data-cosmetic-category="agents"]').click();
   await expect(page.locator("#cosmetic-search")).toBeFocused({ timeout: 30_000 });
   await page.locator("#cosmetic-team").selectOption("ct");
-  await expect(page.locator("#play-agent-animation")).toBeDisabled();
-  await expect(page.locator("#agent-animation-hint")).toContainText("Equip a CS2 agent");
+  await expect(page.locator("#play-agent-animation")).toBeEnabled();
+  await page.locator("#agent-animation").selectOption("weapon/ak::ct_buymenu_ak");
+  await page.locator("#play-agent-animation").click();
+  await expect(page.locator("#cosmetic-status")).toContainText("Playing", { timeout: 45_000 });
+  await page.screenshot({ path: "artifacts/inventory-default-sas.png" });
+  await page.locator("#stop-agent-animation").click();
   await page.locator("#cosmetic-team").selectOption("t");
   const agent = await page.evaluate(async () => {
     const path = "/src/agent-roster.ts";

@@ -71,7 +71,7 @@ export class HomeScene {
   private framing = new WeakMap<Preview, T.Box3>();
   private framingPoint = new T.Vector3();
   private camera = new T.PerspectiveCamera(30, 1, 0.1016, 254);
-  private poses!: Record<AgentTeam, { rifle: Pose }>;
+  private poses!: Record<"t", { rifle: Pose }>;
   private previews = new Map<AgentTeam, Preview>();
   private namePosition = new T.Vector3();
   private reduced = matchMedia("(prefers-reduced-motion: reduce)");
@@ -122,10 +122,6 @@ export class HomeScene {
       animation.release();
       appearance?.release();
       return;
-    }
-    if (!appearance && team === "ct") {
-      animation.release();
-      throw new Error("Equip an agent from the catalog to preview this animation.");
     }
     this.clearPreview(team);
     const preview = this.create(team, appearance, wanted);
@@ -284,7 +280,7 @@ export class HomeScene {
   ): Preview {
     const index = this.weapons[team];
     const soldier = createSoldier(-1, team, appearance);
-    const poseTeam = soldier.animationTeam ?? team;
+    const poseTeam = soldier.animationTeam;
     const idle = this.poses[poseTeam].rifle;
     let pose = appearance ? structuredClone(idle) : idle;
     soldier.mixer.stopAllAction();
@@ -567,11 +563,7 @@ export class HomeScene {
     this.camera.updateProjectionMatrix();
     renderer.clear();
     renderer.render(this.scene, this.camera);
-    preview.soldier.model
-      .getObjectByName(
-        preview.soldier.model.getObjectByName("pelvis") ? "pelvis" : "ValveBipedBip01_Pelvis",
-      )!
-      .getWorldPosition(this.namePosition);
+    preview.soldier.model.getObjectByName("pelvis")!.getWorldPosition(this.namePosition);
     this.namePosition.project(this.camera);
     const profile = document.querySelector<HTMLElement>(".home-profile")!;
     profile.style.visibility = showAgent ? "" : "hidden";

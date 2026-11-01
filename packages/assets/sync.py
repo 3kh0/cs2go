@@ -53,6 +53,55 @@ class RetryingClient:
         return request
 
 
+def guard_copy_destination(params, **kwargs):
+    # R2's destination condition is checked at commit, unlike CopySourceIfNoneMatch.
+    params['headers']['cf-copy-destination-if-none-match'] = '*'
+
+
+def published_status(client, bucket, manifest, root=ROOT, tree=None):
+    """Read-only fast path requires a receipt from verification of this exact Git tree."""
+    body = (root / 'manifest.json').read_bytes()
+    prefix = f"releases/{manifest['release']}/"
+    keys = [prefix + 'manifest.json']
+    if tree:
+        if len(tree) not in (40, 64) or any(c not in '0123456789abcdef' for c in tree):
+            raise ValueError('Invalid asset Git tree identity')
+        keys.append(prefix + f'verified/{tree}.json')
+    for key in keys:
+        try:
+            published = client.get_object(Bucket=bucket, Key=key)['Body'].read()
+        except ClientError as error:
+            if not missing(error):
+                raise
+            return False
+        if published != body:
+            raise ValueError(f'Published verification differs; refusing to overwrite {key}')
+    return bool(tree)
+
+
+def create_once(client, **kwargs):
+    """Only accept an existing exact marker; never overwrite immutable release data."""
+    try:
+        client.put_object(IfNoneMatch='*', **kwargs)
+    except ClientError as error:
+        if error.response['Error']['Code'] not in ('412', 'PreconditionFailed'):
+            raise
+        stored = client.get_object(Bucket=kwargs['Bucket'], Key=kwargs['Key'])['Body'].read()
+        if stored != kwargs['Body']:
+            raise ValueError(f"Existing immutable object differs: {kwargs['Key']}") from error
+
+
+def verification_receipt(client, bucket, manifest, root, tree):
+    if tree:
+        # The workflow supplies this only after verifying the checked-out asset tree.
+        if len(tree) not in (40, 64) or any(c not in '0123456789abcdef' for c in tree):
+            raise ValueError('Invalid asset Git tree identity')
+        create_once(client, Bucket=bucket,
+                    Key=f"releases/{manifest['release']}/verified/{tree}.json",
+                    Body=(root / 'manifest.json').read_bytes(), ContentType='application/json',
+                    CacheControl='public, max-age=31536000, immutable')
+
+
 def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
     """Reuse a complete immutable release's verified wire bytes before CI encoding."""
     client = RetryingClient(client, pause)
@@ -94,7 +143,7 @@ def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
     print(f'Verified {len(entries)} immutable Brotli cache payloads; local round-trip verification follows')
 
 
-def publish(client, bucket, manifest, root=ROOT, pause=time.sleep):
+def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None):
     client = RetryingClient(client, pause)
     # The exact checked-in bytes are the completion marker.
     body = (root / 'manifest.json').read_bytes()
@@ -103,17 +152,20 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep):
         published = client.get_object(Bucket=bucket, Key=prefix + 'manifest.json')['Body'].read()
         if published != body:
             raise ValueError('Published release manifest differs; refusing to overwrite it')
+        verification_receipt(client, bucket, manifest, root, tree)
         print('Release already complete; no uploads needed')
         return
     except ClientError as error:
         if not missing(error):
             raise
     try:
-        previous = json.loads(client.get_object(Bucket=bucket, Key='latest.json')['Body'].read())
+        previous_body = client.get_object(Bucket=bucket, Key='latest.json')['Body'].read()
+        previous = json.loads(previous_body)
     except ClientError as error:
         if not missing(error):
             raise
         previous = {'files': {}}
+        previous_body = None
 
     # List once to avoid one doomed HEAD per missing key in a new snapshot.
     # Existing keys still require SHA-256 metadata verification before reuse.
@@ -154,8 +206,15 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep):
             source = f"releases/{previous['release']}/{old_path}"
             # Copy preserves source metadata; the destination HEAD below verifies
             # that same SHA-256 and size, avoiding a redundant source HEAD.
-            client.copy_object(Bucket=bucket, Key=target, CopySource={'Bucket': bucket, 'Key': source})
-            result = 'copied'
+            try:
+                client.copy_object(Bucket=bucket, Key=target, CopySource={'Bucket': bucket, 'Key': source})
+                result = 'copied'
+            except ClientError as error:
+                if error.response['Error']['Code'] not in ('412', 'PreconditionFailed'):
+                    raise
+                # A competing writer won; the same metadata verification below
+                # accepts identical content and rejects a different immutable key.
+                result = 'skipped'
         else:
             source = root / 'public' / path
             if 'input' in entry:
@@ -170,7 +229,7 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep):
             mime = 'application/octet-stream' if path.endswith('.gz') else mimetypes.guess_type(path)[0]
             mime = {'.wgsl': 'text/plain', '.hdr': 'application/octet-stream', '.ktx2': 'image/ktx2'}.get(Path(path).suffix, mime)
             headers = {'ContentEncoding': encoding} if encoding else {}
-            client.put_object(Bucket=bucket, Key=target, Body=payload,
+            create_once(client, Bucket=bucket, Key=target, Body=payload,
                               ContentType=mime or 'application/octet-stream',
                               CacheControl='public, max-age=31536000, immutable', Metadata={'sha256': expected}, **headers)
             result = 'uploaded'
@@ -186,10 +245,12 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep):
             if completed % 250 == 0:
                 print(f"Synced {completed}/{len(manifest['files'])}: {counts}", flush=True)
     # Commit marker is written only after ALL transfers succeed. Failed runs are resumable.
-    client.put_object(Bucket=bucket, Key=prefix + 'manifest.json', Body=body,
+    create_once(client, Bucket=bucket, Key=prefix + 'manifest.json', Body=body,
                       ContentType='application/json', CacheControl='public, max-age=31536000, immutable')
-    client.put_object(Bucket=bucket, Key='latest.json', Body=body,
-                      ContentType='application/json', CacheControl='no-store')
+    verification_receipt(client, bucket, manifest, root, tree)
+    if previous_body != body:
+        client.put_object(Bucket=bucket, Key='latest.json', Body=body,
+                          ContentType='application/json', CacheControl='no-store')
     print(f"Release {manifest['release']}: {counts}")
 
 
@@ -198,5 +259,19 @@ if __name__ == '__main__':
                           aws_access_key_id=os.environ['R2_ACCESS_KEY_ID'],
                           aws_secret_access_key=os.environ['R2_SECRET_ACCESS_KEY'], region_name='auto',
                           config=Config(retries={'max_attempts': 5, 'mode': 'adaptive'}, max_pool_connections=4))
-    operation = seed_cache if len(sys.argv) > 1 and sys.argv[1] == 'seed' else publish
-    operation(client, os.environ['R2_BUCKET'], json.loads((ROOT / 'manifest.json').read_text()))
+    client.meta.events.register('before-call.s3.CopyObject', guard_copy_destination)
+    mode = sys.argv[1] if len(sys.argv) > 1 else 'publish'
+    manifest = json.loads((ROOT / 'manifest.json').read_text())
+    tree = os.environ.get('ASSET_TREE')
+    if mode == 'status':
+        complete = published_status(RetryingClient(client), os.environ['R2_BUCKET'], manifest, tree=tree)
+        print(f'Exact asset tree already verified and published: {complete}')
+        if os.environ.get('GITHUB_OUTPUT'):
+            with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+                output.write(f'complete={str(complete).lower()}\n')
+    elif mode == 'seed':
+        seed_cache(client, os.environ['R2_BUCKET'], manifest)
+    elif mode == 'publish':
+        publish(client, os.environ['R2_BUCKET'], manifest, tree=tree)
+    else:
+        raise ValueError(f'Unknown operation: {mode}')

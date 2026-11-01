@@ -167,12 +167,7 @@ export function createWorldGun(index: number, suppressed = true, instance?: Weap
     return model;
   }
   if (instance?.skin.id && !isKnife(index)) {
-    const gun = createNativeWorldGun(
-      index,
-      suppressed,
-      worldGrip("t", index)?.stand.weaponBones,
-      true,
-    );
+    const gun = createNativeWorldGun(index, suppressed, worldGrip(index)?.stand.weaponBones, true);
     gun.userData.ownedWorldGun = true;
     bindWeaponInstance(gun, instance);
     return gun;
@@ -181,7 +176,7 @@ export function createWorldGun(index: number, suppressed = true, instance?: Weap
   let template = worldGuns.get(key);
   if (!template) {
     template = mergeWorldGun(
-      createNativeWorldGun(index, suppressed, worldGrip("t", index)?.stand.weaponBones),
+      createNativeWorldGun(index, suppressed, worldGrip(index)?.stand.weaponBones),
     );
     worldGuns.set(key, template);
   }

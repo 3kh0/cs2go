@@ -10,10 +10,6 @@
     {
       "target": "packages/assets/public/models/agents/ground-rebel-native.glb",
       "sha256": "3ea2077cbced126f9aad79166a9d0bbbfb0462243a53e1d11d26fbdbeb1d6bc4"
-    },
-    {
-      "target": "packages/assets/public/models/agents/idf.glb",
-      "sha256": "1c134938bece73608596af01b60993e1b84cb38a5a6f03dcac1112bfc9241bcb"
     }
   ],
   "installedSource": {
@@ -2277,6 +2273,6 @@
     }
   ],
   "count": 34,
-  "processing": "Absolute standing/crouching weapon idle samples retargeted to existing calibrated rigs; runtime converts upper-body tracks to additive deltas against matching locomotion stance. Native secondary skeleton reference pose retains weapon mesh binding. Native wpn attachment is calibrated relative to the target right hand. No hand-to-hand barrel guess.",
-  "limitations": "Static grip layer plus existing locomotion/recoil; this is not the full executable Source2 animation graph. IDF Source1 proportions/retargeting remain approximate. No new draw/reload animations are claimed."
+  "processing": "Absolute standing/crouching weapon idle samples retargeted to existing calibrated rigs; runtime converts upper-body tracks to additive deltas against matching locomotion stance. Native secondary skeleton reference pose retains weapon mesh binding. Native wpn attachment is calibrated relative to the target right hand. No hand-to-hand barrel guess. Source 1 CT retarget removed; the shared native Source 2 pose layer is used by both teams.",
+  "limitations": "Static grip layer plus existing locomotion/recoil; this is not the full executable Source2 animation graph. No new draw/reload animations are claimed."
 }

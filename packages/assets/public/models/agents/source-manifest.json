@@ -1633,13 +1633,6 @@
       }
     }
   },
-  "idf": {
-    "porter": "TALENT | d",
-    "workshop": "https://steamcommunity.com/sharedfiles/filedetails/?id=600219026",
-    "mirror": "https://dlcfun.com/en/garrys-mod/csgo-idf-playermodels-mod",
-    "archiveSha256": "1e63ace63334dc61c848b046610b3081a0ac34a131407ec80b2c161809043e89",
-    "model": "models/csgoidf1pm.mdl"
-  },
   "tools": {
     "Source2Viewer": "20.0",
     "SourceIOCommit": "259b68b25d7e0ae3533d14140448bd145071f5c0",
@@ -1655,12 +1648,17 @@
   ],
   "limitations": [
     "Ground Rebel uses the Source 2 version of the original agent mesh and rifle animation clips.",
-    "IDF uses a CS:GO community port; rifle movement is retargeted, not original Source 1 animation playback.",
     "Death, aim response, breathing and first-person weapon IK are authored reconstructions; PBR materials approximate Source shaders."
   ],
   "viewArms": {
     "groundRebel": "Native firstperson_default_gloves_arms and trimmed firstperson_sleeves meshes, original UVs and fingerless gloves",
-    "idf": "Arm surfaces extracted from the original skinned IDF uniform/hand mesh",
     "animation": "Original weighted meshes follow authored weapon tracks through two-bone IK; these are not native Valve viewmodel animation clips"
+  },
+  "counterTerrorist": {
+    "itemId": 5600,
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "firstPerson": "/models/gloves/agents/5600.glb",
+    "source": "/models/agents/inspects/catalog.json",
+    "processing": "Native SAS replaces the retired Source 1 IDF body, arms and retarget. Existing default-ct selections resolve to SAS."
   }
 }

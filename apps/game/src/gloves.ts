@@ -400,7 +400,7 @@ function attach(
 }
 let agentIndex: Promise<Record<string, { nativeModel: string }>> | undefined;
 async function agentArms(id: string) {
-  if (id.startsWith("default-")) return;
+  if (id === "default-t") return;
   const agent = (await loadAgentCatalog()).find((agent) => agent.id === id);
   if (!agent) return;
   let item = agent.itemId;

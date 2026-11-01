@@ -440,7 +440,7 @@ test("native agents and team gloves replicate, survive agent replacement, and fo
       "utf8",
     ),
   ) as { id: string; name: string }[];
-  const ct = agents.find((agent) => agent.team === "ct" && agent.name === "SAS | Default")!,
+  const ct = { id: "default-ct" },
     t = agents.find((agent) => agent.team === "t" && /Little Kev/.test(agent.name))!,
     observerT = agents.find((agent) => agent.team === "t" && /Jungle Rebel/.test(agent.name))!;
   const choice = (name: RegExp, seed: number): CosmeticChoice => ({
