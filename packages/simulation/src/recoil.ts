@@ -10,7 +10,7 @@ export const recoilParameters = weapons.map((_, id) => ({
 /**
  * Reconstruction constants, NOT verified current CS2 convars. The October 2026
  * binary/convar dumps expose the weapon inputs and aim-punch state, but do not
- * expose this algorithm. See docs/recoil-provenance.md for evidence boundaries.
+ * expose this algorithm. See docs/weapon-data.md for evidence boundaries.
  */
 export const RECOIL_VIEW_SCALE = 0.45;
 const SCALE = 2;

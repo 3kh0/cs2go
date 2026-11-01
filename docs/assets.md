@@ -1,0 +1,72 @@
+# Assets and maintenance tools
+
+Runtime assets are checked in under `packages/assets/public/`. Development and ordinary local builds use those files; production can use an immutable R2 release. No conversion tool or installed CS2 copy is needed to run or build the checked-in game. Keep original supplied files and installed game files read-only.
+
+## Provenance
+
+Hashes, source URLs, depot/tool versions and processing notes live beside their outputs in `source.json`, `*-source.json` and `source-manifest.json`. The release-wide SHA-256 index is `packages/assets/manifest.json`. Preserve these and all bundled licenses when changing assets.
+
+| Asset family                                   | Provenance location under `packages/assets/public/`                                     |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Dust II, collision, lighting and baked C4      | `models/maps/` and `models/maps/lighting/`                                              |
+| Agents, first-person hands and optional roster | `models/agents/` and `models/agents/roster/`                                            |
+| Weapon models, actions, skins and suppressors  | `models/viewmodels/`, `models/animations/` and `skins/`                                 |
+| Knives                                         | `models/animations/knives/`, `models/animations/bayonet/`, `models/bayonet.source.json` |
+| Audio, event mappings and startup bank         | `audio/` and `audio/source/manifest.json`                                               |
+| Menu media, icons, fonts and tracers           | `ui/`, `icons/`, `fonts/cs2/` and `effects/`                                            |
+
+Original weapon OBJs and initial WAVs came from supplied Downloads folders. Additional historical sounds came from pinned `sourcesounds/csgo`; native CS2 sound manifests supersede selected recordings. Weapon viewers supply pinned mesh/animation exports. Native Steam/Windows extractions supply map, agent, pose, interface and audio resources. Kill-feed silhouettes use the supplied Killfeed Generator reference. Exact inputs remain recorded in the corresponding manifests.
+
+Imported geometry and clip samples do not reproduce the complete Source 2 renderer or evaluated animation graphs. Three.js materials, lighting, retargeting, procedural constraints, sound mixing and effects retain documented approximations. The old IDF uses Source 1 proportions. New knife imports provide vanilla finishes; skin compatibility is catalog-dependent.
+
+## Maintained scripts
+
+Run scripts from the repository root. Python tools use Python 3; check each tool's docstring/arguments for external inputs.
+
+| Scripts                                                                                                | Purpose and requirements                                                                                    |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `build-assets.mjs`, `service-worker.js`                                                                | Vite asset integration and production cache worker; required by builds/tests                                |
+| `check-asset-cache.mjs`, `check-cache-update.mjs`, `benchmark-loading.mjs`                             | Chromium production cache/update checks and local loading measurements; use `CACHE_URL` for the preview URL |
+| `pack-audio.py`                                                                                        | Repack existing encoded clips into the startup bank, without re-encoding                                    |
+| `import-weapon-stats.py`, `import-accuracy-data.py`, `import-recoil-data.py`, `import-utility-data.py` | Pinned shipped gameplay inputs; Python and curl                                                             |
+| `import-weapon-action-data.py`, `import-world-ball-origin.py`                                          | Derive small simulation metadata from local GLBs                                                            |
+| `import-bomb-damage.py`, `import-buy-zones.py`, `import-world-ball.py`                                 | Extract pinned map/physics inputs with Source2Viewer and matching cached VPKs                               |
+| `import-sound-ranges.py`                                                                               | Extract distance curves from matching compiled/decoded weapon sound events                                  |
+| `import-all-knives.py`                                                                                 | Import nineteen additional knife models/icons from the pinned viewer; Bun, curl, Pillow and NumPy           |
+| `extract-knife-timings.py`, `import-knife-timings.py`                                                  | Audit installed native clips and bind their timings to bundled GLBs                                         |
+
+`scripts/cs2-weapon-audio.json` remains the input for audio packing, range extraction and source-integrity tests. Do not discard it as an old report.
+
+One-off model/map/audio converters, patches and investigation reports were retired in this cleanup. Their generator names in asset manifests are historical provenance, not promises of a currently installed command. To rerun one, restore the required script and its helper chain from the last pre-cleanup revision:
+
+```sh
+git restore --source=9aca152cb6f8e3fefd15b1beaacefb19bc0f74a4 -- scripts/<file>
+```
+
+The same revision contains the detailed extraction notes under `docs/`. No duplicate archive is kept in the working tree.
+
+## Updating assets
+
+Run the relevant maintained tool, review changed outputs/provenance, then:
+
+```sh
+bun run assets:prepare
+bun run assets:verify
+bun run test:tools
+```
+
+Include changed assets, provenance and release manifest together. Do not regenerate unrelated assets just for a code change. R2 publication and rollback behavior are covered in [deployment.md](deployment.md).
+
+## Knife timing
+
+Stable IDs and the complete 22-model roster live in `packages/protocol/src/armory.ts`; append new IDs rather than renumbering old skins. All knives are equipped through Inventory.
+
+The Windows audit used build 26144732 / patch 1.41.9.2 and Source2Viewer 20.1.7467. `packages/simulation/src/data/knife-animations.json` binds 225 bundled actions to native hashes and GLB fingerprints. Eight old Bayonet clips used duration/frames instead of duration/(frames−1); runtime restores the correct interval once, preserving optimized trailing holds. Bayonet draw/slash/stab clips last 1.1667 seconds and inspect lasts 6.2 seconds. Knife base playback is 1.0; visual duration is independent of melee recovery and the 1.0-second deploy readiness.
+
+```sh
+python3 scripts/import-all-knives.py
+python3 scripts/extract-knife-timings.py --game /path/to/game/csgo --tool /path/to/Source2Viewer-CLI --vendor /path/to/srctools --out artifacts/native-knife-timing
+python3 scripts/import-knife-timings.py artifacts/native-knife-timing/timing-roster.json
+```
+
+Timing extraction needs scratch-local srctools 2.7.0 and the matching CLI. The importer verifies native resource hashes and GLB time grids. A viewer refresh requires explicit `--refresh` and review; rerun timing binding after model regeneration. Native rare branches, inspect looping, conditional blends and live `weapon_action_speedscale` values are not fully reproduced.

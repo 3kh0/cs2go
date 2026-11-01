@@ -134,7 +134,7 @@ export class BakedBombDamage {
 
   /** Final health-damage byte from the reconstructed player query; do not apply
    * ballistic armor a second time. Native armor depletion and wave timing remain
-   * unqualified; see docs/bomb-damage.md. Forward must be a unit direction. */
+   * unqualified; see docs/weapon-data.md. Forward must be a unit direction. */
   playerDamage(hit: BombFieldHit, forward: Vec3, crouched: boolean): number {
     return staticPlayerDamage(
       hit.damage,

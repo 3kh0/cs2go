@@ -35,9 +35,6 @@ __pycache__/
 # Playwright MCP inspection captures
 .playwright-mcp/
 
-# Offline Source 2 NAV decoder build output
-scripts/cs2-mapdata/bin/
-scripts/cs2-mapdata/obj/
 .vitest/
 
 # Monorepo task cache and generated asset compression

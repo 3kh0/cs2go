@@ -1,73 +1,51 @@
-# App builds and R2 asset releases
+# Deployment
 
-CS2GO is a Bun/Turborepo workspace:
-
-- `apps/game`: Vite app, Steam API, unit and browser tests. Vercel deploys this workspace.
-- `packages/assets/public`: original runtime assets and provenance. Importers in `scripts/` write here.
-- `packages/assets/manifest.json`: checked-in SHA-256 manifest, decoded gzip hashes, maximum-quality Brotli transport hashes/sizes and immutable release ID. This small file is the app build's only dependency on the asset collection.
-
-The asset collection is about 3.3 GiB. Moving directories alone does not make Git cloning faster. The deployment workflow uses **sparse checkout**: code-only deploys never check out the asset payload. It builds on GitHub and uploads Vercel's prebuilt output. The workspace `vercel.json` disables automatic Git deployments to avoid duplicate full-repository builds.
+Vercel serves `apps/game`, R2 serves pinned asset releases, and the Bun multiplayer server deploys separately. Ordinary local builds retain local/offline assets.
 
 ## Configuration
 
-The R2 bucket is `cs2go`, account `1084af893db6194b4efdf2d48c729bc6`, public custom domain `https://a.cs2go.3kh0.net`. The S3 endpoint is `https://1084af893db6194b4efdf2d48c729bc6.r2.cloudflarestorage.com`; this authenticated API endpoint is not a browser asset URL.
+| Location                  | Configuration                                                                                                   |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| GitHub secrets            | `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `VERCEL_TOKEN`                                                      |
+| GitHub variables          | `R2_ACCOUNT_ID`, `R2_BUCKET`, `ASSET_CDN_URL`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`; optional `MULTIPLAYER_URL` |
+| Vercel server environment | `STEAM_ORIGIN`, `STEAM_SESSION_SECRET`; see [steam-login.md](steam-login.md)                                    |
+| Public frontend build     | `ASSET_CDN_URL`, optional `VITE_MULTIPLAYER_URL`                                                                |
 
-GitHub repository secrets:
+The existing bucket is `cs2go`, account `1084af893db6194b4efdf2d48c729bc6`, public domain `https://a.cs2go.3kh0.net`. Its authenticated S3 endpoint is `https://1084af893db6194b4efdf2d48c729bc6.r2.cloudflarestorage.com`; browsers use the public domain.
 
-- `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY`: bucket-scoped Object Read & Write S3 credentials.
-- `VERCEL_TOKEN`: token authorized to deploy the existing project.
+Use bucket-scoped Object Read & Write credentials. Set the Vercel root to `apps/game`, allow sources outside that root, retain the existing project/domains, and configure the public CDN origin. `apps/game/vercel.json` supplies build settings and disables duplicate automatic Git deployments. Credentials must never enter frontend `VITE_` variables, asset manifests or task caches.
 
-GitHub repository variables:
+Activate the R2 custom domain, apply `packages/assets/cors.json` and enable caching. These public assets use GET/HEAD with readable CORS responses and no cookies. Regional redirects/rules can masquerade as CORS failures; inspect the actual response before changing bucket policy.
 
-- `R2_ACCOUNT_ID`, `R2_BUCKET`, `ASSET_CDN_URL`: account, bucket and public URL above.
-- `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`: existing Vercel team/user and project IDs.
+## Publishing
 
-The Cloudflare API token is not needed by this S3 pipeline. Credentials never enter the app bundle, task cache or manifest.
-
-In the Vercel project, set Root Directory to `apps/game` and enable source files outside the root directory. Set production `ASSET_CDN_URL=https://a.cs2go.3kh0.net`; retain the existing server-only `STEAM_ORIGIN` and `STEAM_SESSION_SECRET`. The workspace's `vercel.json` supplies install/build/output settings. Keep the same project so existing domains and Steam configuration remain attached.
-
-Activate the R2 custom domain and apply `packages/assets/cors.json` in the bucket CORS settings. These are public game files: wildcard origin permits production, previews and local browser verification without cookies. Only GET/HEAD are allowed. Enable caching for the custom domain as described in [Cloudflare's public-bucket documentation](https://developers.cloudflare.com/r2/buckets/public-buckets/). The sync job sets `Content-Encoding: br` only for manifest entries with a Brotli transport. Browser HTTP decoding produces the manifest's logical bytes; `.gz` logical files remain gzip and are then explicitly decompressed by the game. Do not replace this header with `gzip`, strip it, or add a second manual decompression layer.
-
-## Updating assets
-
-From the repository root:
+After an intentional asset change:
 
 ```sh
-# Run the relevant importer first, then regenerate the release manifest.
 bun run assets:prepare
 bun run assets:verify
 bun run test:tools
-# Commit changed assets, importer/provenance and packages/assets/manifest.json together.
 ```
 
-Push to `main` or run **Publish assets and deploy game** manually after configuring the variables/secrets. Asset changes run the asset job first. Code-only changes skip it. Manual dispatch always verifies and syncs assets, which also seeds a new bucket.
+Include assets, provenance and the manifest together. The **Publish assets and deploy game** GitHub workflow runs on pushes to main or manual dispatch. Asset changes verify/sync before deploying; code-only changes skip that job and sparse-check out code without the multi-gigabyte asset payload. Manual dispatch also verifies/syncs assets.
 
-The asset job independently hashes every input and verifies the checked-in manifest. Generated GLBs use the neutral gzip OS header (255), so macOS and Linux produce matching wire hashes. GLB gzip compression is cached by input SHA-256; existing compressed assets retain their logical bytes. Every runtime asset format is also tested with Brotli quality **11** (the maximum), including gzip/KTX2/audio/image inputs. The transport is kept only when smaller, so already compressed media never becomes larger on the wire. Brotli work runs at most six assets at a time and caches `.cache/<logical-sha256>.q11.br`, making cold passes CPU-bound but subsequent verification/resume incremental. Corrupt cache files are regenerated after lossless round-trip/hash validation. When a release was already published locally, CI can seed the exact immutable Brotli payloads from R2 before verification (`python packages/assets/sync.py seed`); it checks the complete release marker and each wire hash/size, then the normal pipeline verifies decompression and logical hashes. An unpublished release simply falls back to cold encoding. Verification reuses a committed no-transport decision only when its freshly regenerated logical hash is unchanged; it still regenerates every size/gzip/source field and compares the complete manifest. Preparation always tries quality 11 for every candidate, and changed/new content is encoded again even during verification. There is no timestamp in the release identity. The S3 sync compares the stored transport SHA-256, wire size and `Content-Encoding`, not multipart ETags or mtimes. Logical SHA-256 hashes remain unchanged for the browser/service-worker integrity checks; transport fields are part of the immutable release identity. It uploads changed payloads, copies unchanged objects server-side from the previous successful release, and skips already completed objects when retrying. A paginated destination inventory avoids a missing-object HEAD for every new key; copied content is checked once at its destination for SHA-256 metadata and size, rather than repeating the same metadata read at its source. Transfers use four workers, SDK adaptive retries and explicit bounded backoff for R2 numeric `429`/SlowDown responses, including retries during completion-marker writes. Persistent throttling leaves the release incomplete so the next run can resume; authentication and hash mismatches fail immediately.
+Each release is a complete immutable snapshot at `releases/<manifest SHA-256>/`. Only successful transfers publish its `manifest.json` completion marker and update `latest.json`. App builds verify the pinned completion marker; clients never follow latest at runtime. Sync is resumable, hashes every payload and uses server-side copies for unchanged objects. Old releases remain available for open tabs and rollback. Copies still consume full snapshot storage; no automatic deletion/lifecycle policy is applied.
 
-Every release lives at `releases/<manifest SHA-256>/...`. Only after every transfer succeeds does the job publish that release's `manifest.json` completion marker. Failed transfers never publish a ready marker or update `latest.json`. App builds fetch and compare the marker before emitting code. Old releases are retained for open tabs and rollbacks; the app never reads `latest.json` at runtime.
+The pipeline emits deterministic gzip logical files and retains Brotli quality-11 transport only when smaller. R2 serves that transport with `Content-Encoding: br`; browser HTTP decoding restores logical bytes. Logical `.gz` files then receive the game's own gzip decoding. Do not relabel Brotli as gzip or double-decompress. Compression results cache under `packages/assets/.cache/`; a cold pass can take time, while a code-only CDN build never scans/compresses the asset tree.
 
-**Storage tradeoff:** releases are complete immutable snapshots. R2 server-side copies avoid re-uploading unchanged bytes, but each distinct release consumes a full snapshot's storage. No automatic deletion runs. Retire old releases only after deciding your rollback/offline support window; do not apply a short bucket-wide lifecycle policy to live releases.
-
-## App builds and local play
+## Builds and cache checks
 
 ```sh
-bun install --frozen-lockfile
-bun run dev
-bun run check
-bun run test
-bun run test:tools
-bun run --cwd apps/game test:browser -- tests/home-menu.spec.ts
 bun run build
-```
-
-Local development and an ordinary local production build use local assets, retaining offline/local play. Local files retain their logical format; maximum-quality Brotli transport is served by R2 after syncing the generated manifest. The first cold quality-11 pass can take tens of minutes for the multi-gigabyte tree; it is never repeated during a code-only CDN build. After changing asset bytes, regenerate the manifest before a cached build. For a small production build against an already published release:
-
-```sh
+bun run preview
+# Build against an already published asset release:
 ASSET_CDN_URL=https://a.cs2go.3kh0.net bun run build
+# Production startup/offline integration:
+bun run --cwd apps/game test:startup
 ```
 
-The CDN mode disables Vite's public-directory copy and never walks, compresses or hashes the public tree. Turborepo caches the app output using app/build-tool inputs, the manifest and CDN origin. The browser loads models, audio, skin JSON/textures, icons, fonts and UI assets directly from the pinned R2 release; authenticated Steam requests stay on the app origin. The service worker verifies CDN response bytes and keeps its bounded core/skin caches. Online navigation fetches fresh HTML. Completed updates activate without closing tabs, refreshing the menu automatically and deferring live-match refreshes until returning to the menu. CORS must permit readable responses; opaque responses cannot be hash-verified.
+Vercel builds reject a missing CDN origin or incomplete release. Local builds use local assets. The worker verifies revision hashes, bounds core/cosmetic caches to 384/64 MiB and fetches fresh HTML online. Menu updates refresh automatically; live matches defer refresh until returning to the menu. Offline startup requires a prior complete cache fill, and unvisited skins/music may still require networking.
 
-Vercel builds fail clearly if the CDN URL is missing or the release is incomplete. Build timing depends on the runner and cache state; local measurements do not establish a hosted Vercel speedup.
+Startup never waits for service-worker registration to resolve. All required assets, decoding and GPU warm-up finish before Play. The homepage shares map resources with gameplay. Use the cache/loading tools listed in [assets.md](assets.md) for local measurements; historical workstation timings are not production performance guarantees.
 
-References: [Turborepo task inputs/outputs and environment configuration](https://turborepo.com/docs/reference/configuration), [Vercel monorepo root configuration](https://vercel.com/docs/monorepos/monorepo-faq), [R2 S3 compatibility](https://developers.cloudflare.com/r2/api/s3/api/), [R2 CORS](https://developers.cloudflare.com/r2/buckets/cors/).
+Multiplayer container configuration is in [multiplayer.md](multiplayer.md).

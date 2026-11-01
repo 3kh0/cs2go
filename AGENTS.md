@@ -46,7 +46,7 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 - `packages/assets/manifest.json`: checked-in SHA-256 release manifest; regenerate with `bun run assets:prepare` after asset changes.
 - `apps/game/`: Vite app workspace and Vercel project root.
 - `turbo.json`: task inputs, cache outputs, and environment configuration.
-- `scripts/`: asset conversion/import utilities.
+- `scripts/`: maintained build/cache tools and gameplay-data importers; see docs/assets.md for the tool list and recovery of retired converters.
 - `apps/game/tests/game.spec.ts`: browser integration checks. Unit tests live beside source files.
 
 ## Gameplay and performance
@@ -64,9 +64,9 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 
 Read `README.md` and `packages/assets/public/audio/source/manifest.json` before modifying imported assets. Weapon OBJs and the first sound pack came from user-supplied Downloads folders. Those original source files are external inputs; leave them intact and keep converted runtime assets in `packages/assets/public/`.
 
-The additional sound library comes from `sourcesounds/csgo`; its importer pins a repository commit. Kill-feed icons come from the user's Killfeed Generator reference. Keep attribution and regeneration instructions accurate, and retain local assets for development/offline play; production may use the pinned R2 CDN and optional Steam API.
+The additional historical sound library comes from pinned `sourcesounds/csgo` inputs. Kill-feed icons come from the user's Killfeed Generator reference. Provenance and licenses remain beside runtime assets; docs/assets.md covers maintained tools and historical converter recovery. Keep attribution and regeneration instructions accurate, and retain local assets for development/offline play; production may use the pinned R2 CDN and optional Steam API.
 
-The supplied OBJs are static meshes. Current draw/reload/walk animations are authored reconstructions, not exact Valve animation clips. Ballistic and economy attributes use the documented current pinned shipped-data snapshot, while body thickness and map surfaces are simplified. Distinguish verified source values from approximations when changing or describing behavior.
+The supplied OBJs are static meshes. Runtime combines imported native clips with reconstructed playback, retargeting and procedural behavior; imported samples do not establish complete native animation-graph parity. Ballistic and economy attributes use the documented pinned shipped-data snapshot, while body thickness and collision behavior retain approximations. Distinguish verified source values from approximations when changing or describing behavior.
 
 ## Validation and delivery
 
