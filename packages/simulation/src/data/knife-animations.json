@@ -1,0 +1,2269 @@
+{
+  "source": "Installed CS2 native knife clip timing audit on the Windows Amp runner",
+  "nativeManifestSha256": "900f31d37712d5530578759c3f5c6d0555fcdbe67a6e16f85851f427111c4c9b",
+  "generator": "python3 scripts/import-knife-timings.py /path/to/timing-roster.json",
+  "provenance": {
+    "steam_buildid": "26144732",
+    "steam_inf": "ClientVersion=2000935\nServerVersion=2000935\nPatchVersion=1.41.9.2\nProductName=cs2\nappID=730\nServerAppID=2347773\nSourceRevision=11162119\nVersionDate=Oct 22 2026\nVersionTime=14:13:16\n",
+    "pak01_dir_sha256": "562972293ed7a5d40e341c4df7d6b0ee06430452694177142f0c1239dd3f2c8b",
+    "tool_version": "Version: 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304\r\nOS: Microsoft Windows 10.0.26200 (X64)\r\nWebsite: https://valveresourceformat.github.io\r\nGitHub: https://github.com/ValveResourceFormat/ValveResourceFormat",
+    "tool_sha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830",
+    "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "srctools_metadata_sha256": "70cd8d48bdf49b2363199d9617b3611c6f7c832a20d42a38680bdbff075c9d9c",
+    "script_sha256": "a4dda896cb6c962eedeae0b3792c42de58fd36ef69870e037f6a79dedd89b735",
+    "asset_count": 363
+  },
+  "processing": "Restore native duration/(frames-1) sample intervals where older exporters used duration/frames. Preserve optimized trailing holds and synchronize primary/secondary tracks. Base clip speed 1.0; combat recovery is independent. Native conditional graph transitions are not fully reproduced.",
+  "clips": {
+    "4/draw": {
+      "duration": 1.1667,
+      "timeScale": 1.0285714285714285,
+      "frames": 36,
+      "inspectBlockedUntil": 0.4000112619,
+      "resource": "animation/anims/viewmodel/knife/knife_bayonet/draw_bayonet.vnmclip_c",
+      "nativeSha256": "1633507ea1fed091d342b1bea3e6d0691b9c38d1fe21707dc32dd237986baff6",
+      "input": "packages/assets/public/models/animations/bayonet/draw.glb",
+      "inputSha256": "e3dd5c3c1c8c57304e88d1699eba0d5509b73cda2d4c02d0af06228129e83364"
+    },
+    "4/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1.0285714285714285,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_bayonet/heavy_miss1_bayonet.vnmclip_c",
+      "nativeSha256": "9e711a444121eeee05ef18ce05a09e117b83602e2237707fa28a948553deff6e",
+      "input": "packages/assets/public/models/animations/bayonet/heavy_miss1.glb",
+      "inputSha256": "f8824e72e27403b89cc4221c8cac3f9adaca2e1ae3f2a479b3f1b9a4054c0a82"
+    },
+    "4/idle1": {
+      "duration": 2.0,
+      "timeScale": 1.0166666666666666,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_bayonet/idle1_bayonet.vnmclip_c",
+      "nativeSha256": "0c3b9e34ae61384a98752a434a67afd38fcd83d8e16645de889304c9c68508c9",
+      "input": "packages/assets/public/models/animations/bayonet/idle1.glb",
+      "inputSha256": "4a984fbd3322a9797c4113ee81ceec718ba08ca57b3c84452b4fa3c2d8967e23"
+    },
+    "4/idle2": {
+      "duration": 1.0,
+      "timeScale": 1.0333333333333334,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_bayonet/idle2_bayonet.vnmclip_c",
+      "nativeSha256": "839e02b87ba5c97905eda518070cc75fe1eaa3540714336cd517fb908557360a",
+      "input": "packages/assets/public/models/animations/bayonet/idle2.glb",
+      "inputSha256": "bce971adf3f6185e59233beaeee738002a692629fd849b3f61579573bee71d59"
+    },
+    "4/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1.0285714285714285,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_bayonet/light_miss1_bayonet.vnmclip_c",
+      "nativeSha256": "97865343d77995ea6c1710f788009396ba25593dcfd05a92c0828a4767a84ef0",
+      "input": "packages/assets/public/models/animations/bayonet/light_miss1.glb",
+      "inputSha256": "c9e40d8b8240b8b7a40002fb48f33f58aef44b61c2dd546ebe0776c01d2fed1f"
+    },
+    "4/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1.0285714285714285,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_bayonet/light_miss2_bayonet.vnmclip_c",
+      "nativeSha256": "afa6dbf6b5072afe12effdd3e83eb356cc711bfd379511aac6cf5642b2d76569",
+      "input": "packages/assets/public/models/animations/bayonet/light_miss2.glb",
+      "inputSha256": "81ad1727fc6a65bf6693f5038537f2df7444133fcc2ea5e195fd25594431bc30"
+    },
+    "4/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1.0053763440860215,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_bayonet/lookat01_bayonet.vnmclip_c",
+      "nativeSha256": "a3b5009940ed4988f37a6045bb3887006dec9b3d7c58c5e34f2f4bea93b0557e",
+      "input": "packages/assets/public/models/animations/bayonet/lookat01.glb",
+      "inputSha256": "784771dd02819542f87e24960523e748eab73ed09083388bc2a651d0fd05e7b5"
+    },
+    "4/lookat01_draw": {
+      "duration": 6.2,
+      "timeScale": 1.0053763440860215,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_bayonet/lookat01_draw_bayonet.vnmclip_c",
+      "nativeSha256": "49acc773019b2691b34897151f456d56562ceef8f839f1a295a6942031975137",
+      "input": "packages/assets/public/models/animations/bayonet/lookat01_draw.glb",
+      "inputSha256": "023e30269ff475c098b4cef01a72bb17926a9e166558e2694c227d57b681743e"
+    },
+    "5/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/idle1_butterfly.vnmclip_c",
+      "nativeSha256": "5ac3b648293b4bdab1eca483af827c3bca254f8d126a34dc209dabd59284604c",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/idle2": {
+      "duration": 4.0,
+      "timeScale": 1,
+      "frames": 121,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/idle2_butterfly.vnmclip_c",
+      "nativeSha256": "59ec47adffb3aee3c1d045d6feda4c7845e7f7d1ddd74e90b591bda091c7dde2",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/draw_butterfly.vnmclip_c",
+      "nativeSha256": "7ae196a3a06873e8ff3e109ed25c23e8b3e29524024334cca83b1b289c19c66b",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/light_hit1_butterfly.vnmclip_c",
+      "nativeSha256": "83cd39bfd141b7b1645fe962d5c1b75c8f19cf6252fb5a721ef76eeec2a6161d",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/light_hit2_butterfly.vnmclip_c",
+      "nativeSha256": "d902d77db7821a5f6f2fa4e836734cbc0ca9dbb6d4134b2664a3cc859c148e03",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/light_miss1_butterfly.vnmclip_c",
+      "nativeSha256": "537f44ede5a7a1853de3a0fa4f46f9f81ad2e97f8b56bd060ad7a6ce484a4753",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/light_miss2_butterfly.vnmclip_c",
+      "nativeSha256": "aba70b916d2ec828e60b9c40381929f3c8114a351cbc23c41cef5916e1f38657",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.4000112619,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/heavy_hit1_butterfly.vnmclip_c",
+      "nativeSha256": "4196195fc648b4710d54f94f0e41119d20a53ff917098efffde6ad9889533650",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.4000112619,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/heavy_miss1_butterfly.vnmclip_c",
+      "nativeSha256": "6f2d08b4971bad11edb2bbf12514923c4be44156de61c7556747354050c58139",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/lookat01": {
+      "duration": 4.1,
+      "timeScale": 1,
+      "frames": 124,
+      "inspectBlockedUntil": 0.6666681999999999,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/lookat01_butterfly.vnmclip_c",
+      "nativeSha256": "683839908e03d70d9d39ba726c43dd4e9a139a83cd2b9e37dde9ff9756e7421a",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/lookat02": {
+      "duration": 4.5,
+      "timeScale": 1,
+      "frames": 136,
+      "inspectBlockedUntil": 0.999999,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/lookat02_butterfly.vnmclip_c",
+      "nativeSha256": "2fffbb60f09f61f0ec64db60c84a732b2c1313d6abcebdb35efa3df9147bcbcd",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "5/lookat03": {
+      "duration": 4.8667,
+      "timeScale": 1,
+      "frames": 147,
+      "inspectBlockedUntil": 1.1666793909000002,
+      "resource": "animation/anims/viewmodel/knife/knife_butterfly/lookat03_butterfly.vnmclip_c",
+      "nativeSha256": "dae43b2da4347efb12e6c6a742e9955b8faa95e05365b8e3feb7b3f1725504e5",
+      "input": "packages/assets/public/models/animations/knives/butterfly.glb",
+      "inputSha256": "8be88766afa354e7bb804906b1c1d0e8c576b9395c17283e74dd4782fc6c3d2e"
+    },
+    "6/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/idle1_karambit.vnmclip_c",
+      "nativeSha256": "db2d629b7fe166afe7731cf976cf1522dc0ad69a3e7509a58a55126aa76e72a9",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/idle2": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/idle2_karambit.vnmclip_c",
+      "nativeSha256": "8f0e07e9e6f05dda89b2dec58de6679b3718ba10d6ac90d70b2b95fbd543cb9d",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/draw_karambit.vnmclip_c",
+      "nativeSha256": "ff944b903d9b07b54cbcbdb250081b6712abe245d1e65caeba7b1dfb22f57d53",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/light_hit1_karambit.vnmclip_c",
+      "nativeSha256": "da4d2419d5a4e54fe1889ed65aa769a6182b72feffb51eddc8b3c8ba7b894267",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/light_hit2_karambit.vnmclip_c",
+      "nativeSha256": "e084d003fa41f7315f6df30575d5d3a5cfb4d42e12b37983d37ba23de836734d",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/light_miss1_karambit.vnmclip_c",
+      "nativeSha256": "841b5fa2c430557d11f83f439a88f4f691080c070dbbc18eb33a0d161525fb1f",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.2666737857,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/light_miss2_karambit.vnmclip_c",
+      "nativeSha256": "54a949bd460f4d18278092a8e8aa7a530a8a4493b4e41a08192644cd7b0f8e9d",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.5333487381,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/heavy_hit1_karambit.vnmclip_c",
+      "nativeSha256": "e37489b8af2fc1fcdaab7e5812b062674194b310e55c4e59ecf67589ba9c8b70",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.5333487381,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/heavy_miss1_karambit.vnmclip_c",
+      "nativeSha256": "84a298aa0748838670a18179ce47ada96c58db17b9eebccc8ca9f934e55b1f4e",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "6/lookat01": {
+      "duration": 4.8667,
+      "timeScale": 1,
+      "frames": 147,
+      "inspectBlockedUntil": 0.5666688146,
+      "resource": "animation/anims/viewmodel/knife/knife_karambit/lookat01_karambit.vnmclip_c",
+      "nativeSha256": "c43c4cb00f5fe3abdb4041959e6e8a9f36fb181aa405eed24e821b7d74fcda8b",
+      "input": "packages/assets/public/models/animations/knives/karambit.glb",
+      "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "37/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/idle_knife.vnmclip_c",
+      "nativeSha256": "90fe37c71ae20d2652e4a6977754839b3ea137a39cfb06968ceab744c6a082d2",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/idle2_knife.vnmclip_c",
+      "nativeSha256": "d07e3b61e25472837f6b2ab6359779d87800e11151353aea49c161397164c8b9",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/draw_knife.vnmclip_c",
+      "nativeSha256": "45e866b1b94e292896d61794222e3284669366a1c33bd48ae5e5ba63aa2b2f0d",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/light_hit1_knife.vnmclip_c",
+      "nativeSha256": "e13e202ad09921d5b1ecbce47a692a2f681363a824532a3163353a9b7b78266f",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.33334252380000007,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/light_hit2_knife.vnmclip_c",
+      "nativeSha256": "5119d676c17ba964f81a5a5af8ec93ad6f476d64623830c916a178f096f759a9",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.2666737857,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/light_miss1_knife.vnmclip_c",
+      "nativeSha256": "6cd32a034e02e289686dbd950021dec6ba78b5621a127e2768d30b1fab6e08e7",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.3666774762,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/light_miss2_knife.vnmclip_c",
+      "nativeSha256": "eb3109233ae8a029cc7daed2eddcf95bb5c8cdf92c2210c859db17ca9018fa47",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/heavy_hit1_knife.vnmclip_c",
+      "nativeSha256": "9ab92394478958460cd68829abc2983a394d54bd8066423f88ff64a5a3f548e6",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.4000112619,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/heavy_miss1_knife.vnmclip_c",
+      "nativeSha256": "997d5929ef571c28595680ac56a6dc08b801ef582ef655983303e7d6f6aa0533",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "37/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/_default_knife/lookat01_knife.vnmclip_c",
+      "nativeSha256": "4c91e6cbb600372fc216764981b1afe45e35aaea63b0534d50761afabb21b03b",
+      "input": "packages/assets/public/models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "38/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/idle_default_t.vnmclip_c",
+      "nativeSha256": "03e4da8d823b7e5e886682725a6add7a8a1cc7397756d7d5423a4458965017d1",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/idle2_default_t.vnmclip_c",
+      "nativeSha256": "e56602d0c4626f2ad9a6b6392d5ad528521b2264d8cb701c969b3fdae0d7f7f5",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/draw_default_t.vnmclip_c",
+      "nativeSha256": "970efe7904523448dd4cc3cd044dcfc7d576d9ee2e739ef2496e82ecbe691227",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/light_hit1_default_t.vnmclip_c",
+      "nativeSha256": "32bed505a7d1b6a0133ed6090250a19778a4f2f2879f829605a8bab822cac4b4",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/light_hit2_default_t.vnmclip_c",
+      "nativeSha256": "b50b6673fb485f670bbf20281ba0b318c90ab5dc41a1432d05463aa5b64ec754",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/light_miss1_default_t.vnmclip_c",
+      "nativeSha256": "0d32f841765c42736a34cebe10564fa91037c289b00b300dcb6d2d3d1dd7cb73",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/light_miss2_default_t.vnmclip_c",
+      "nativeSha256": "38041b2dbe7931b55ece43c31c11ba5a3d27845432913f669f6c96f4fc724608",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/heavy_hit1_default_t.vnmclip_c",
+      "nativeSha256": "1da52da633b6d13f35cd20c6918b5a53a990da6e0137cb284a72af1b2c21b071",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/heavy_miss1_default_t.vnmclip_c",
+      "nativeSha256": "7aba056a96af6bdebbfb196af8e456def61d72e9c9a1ff0a52032efc62530a9c",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "38/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_default_t/lookat01_default_t.vnmclip_c",
+      "nativeSha256": "468feb9d8cde56f8b5055f4f9dc00665609bbee7e25da7d6351bb746ae6cb667",
+      "input": "packages/assets/public/models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "39/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_css/idle1_css.vnmclip_c",
+      "nativeSha256": "d94cd5dc3ad0c9badb967114eb4c02f76893ec4e219911c6fd7bb6a3d56cb5e9",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/idle2": {
+      "duration": 3.9667,
+      "timeScale": 1,
+      "frames": 120,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_css/idle2_css.vnmclip_c",
+      "nativeSha256": "7a14a952efecba00745e992443fc86964163557e64e188b80388c6fed1524083",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_css/draw_css.vnmclip_c",
+      "nativeSha256": "f73c96ddc0def62f342d940e5ad1cc280c0c4a61f6228f5dd390425f0e8db117",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_css/light_hit1_css.vnmclip_c",
+      "nativeSha256": "0624df6702c2d98b3591488fde8ffec0ca77a272d4bcc3ee7b2834806ee91667",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_css/light_hit2_css.vnmclip_c",
+      "nativeSha256": "60eb8b0331fca1555e2ca1b238aef6d28d27ef043b7f258877ef78497863f30d",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_css/light_miss1_css.vnmclip_c",
+      "nativeSha256": "113ac5baa03adf53a78cc52ccf76fea7a9a86c628126219c0aa364a19883f9e8",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_css/light_miss2_css.vnmclip_c",
+      "nativeSha256": "5ffd489f3025d1803e6d46e5d6ee478d69958d30939ede5743c783652b0fa562",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_css/heavy_hit1_css.vnmclip_c",
+      "nativeSha256": "ee89f11d0c4a9e6012198d8a96688088d941b935a8ae84ed52ed98c0ff2fcad4",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_css/heavy_miss1_css.vnmclip_c",
+      "nativeSha256": "b69e305a5cd1e09af00f8911601bbf042836d55599b1b56bb01d5e6ed198e413",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_css/lookat01_css.vnmclip_c",
+      "nativeSha256": "a864c021aa739c481f6bc986db658f9262e45b716a89bc0c43f351ae75630be5",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "39/lookat02": {
+      "duration": 3.9667,
+      "timeScale": 1,
+      "frames": 120,
+      "inspectBlockedUntil": 2.7666899493000003,
+      "resource": "animation/anims/viewmodel/knife/knife_css/lookat02_css.vnmclip_c",
+      "nativeSha256": "57c7fefdde95948c024c7ab1c82227f38d21ea79fde8c6dce50aada089d02d06",
+      "input": "packages/assets/public/models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "40/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/idle1_flip.vnmclip_c",
+      "nativeSha256": "6a7ef20331c661580315dd939ae0186a827b80aa0f7fe94d84cf827bd8bf4959",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/idle2_flip.vnmclip_c",
+      "nativeSha256": "73943cee46c67d6c60e7212d02258b1e8f32c902257bacbfa93cf9d8bb4a4d87",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/draw_flip.vnmclip_c",
+      "nativeSha256": "46528706d164b3b29e62736b81470dc894ad16d31376f6ac78623b78b4ee0441",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/light_hit1_flip.vnmclip_c",
+      "nativeSha256": "c7c3308a94c091c8b4a73fb6b34bf071ba3b5c3446166a9c0f0e7c287870aebe",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/light_hit2_flip.vnmclip_c",
+      "nativeSha256": "cb32b5d4a52cdc0a144291e025a8c6e19a8da0d39ece9d2133cdb5ffd8bf7ca9",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/light_miss1_flip.vnmclip_c",
+      "nativeSha256": "bc90a4cc6ce89e5d54fb4dae93caa5e1e14c10fd6b8ce8286181a89b25716f13",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/light_miss2_flip.vnmclip_c",
+      "nativeSha256": "bfb8a16d4dcdc504dde8364b398f409a3fc437b4c4589abb7393f84728ca368b",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/heavy_hit1_flip.vnmclip_c",
+      "nativeSha256": "eb955da5f6e553b78cebc8e0fbbc4a96b6c995e0883afc8d493777aeeec9b783",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/heavy_miss1_flip.vnmclip_c",
+      "nativeSha256": "96a7ec14024d7555b509dff4365b7783bdb349a4a5b06aa450e6db6ff30752dc",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "40/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_flip/lookat01_flip.vnmclip_c",
+      "nativeSha256": "04f64387256d7888202b14a88a37b1d3eea21c18f0509ac79fe2c26f2c402ab4",
+      "input": "packages/assets/public/models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "41/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/idle1_gut.vnmclip_c",
+      "nativeSha256": "cf2ad9307017bcf12d907bb901266f221ecd6ccc953ef65e4e179dfbc744d0c6",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/idle2_gut.vnmclip_c",
+      "nativeSha256": "8564372fed8b1cceaa7491405c23aa14520a5ac086155513dcf001212e520cfe",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/draw_gut.vnmclip_c",
+      "nativeSha256": "0f4e34c3c327238c78a1327b1204af7a1f48e40110849e4d90d12aa86a3c00ff",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/light_hit1_gut.vnmclip_c",
+      "nativeSha256": "ce12dede2ce3ddacd0bf555085d4e41427d677c6eabb0cc1f040065dd9d674d4",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/light_hit2_gut.vnmclip_c",
+      "nativeSha256": "8e0cae7485aceebc3c1b2beb30437756aa937dbefc4a175fe3ac752ad75c2c53",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/light_miss1_gut.vnmclip_c",
+      "nativeSha256": "e1ceddd8eb161667a1fc42c49dc527b27d99940a68b42d7fc39af1601850f8c1",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/light_miss2_gut.vnmclip_c",
+      "nativeSha256": "285b29f18414a72bff7056e1ad003db15eefd03e280e06e42feec3d49b567fa4",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/heavy_hit1_gut.vnmclip_c",
+      "nativeSha256": "857506a06dfefeb1661ca65e202292ffffef6f4f6efe6e75129ab8624cc0c281",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/heavy_miss1_gut.vnmclip_c",
+      "nativeSha256": "4f624b11b241110feb7d980f883a94e0af16b8f04bbadb5dd77960041b86748b",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "41/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_gut/lookat01_gut.vnmclip_c",
+      "nativeSha256": "64ba646753325bb2f7f49a38dc74050240a46ed7f1b5401284363872d281d961",
+      "input": "packages/assets/public/models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "42/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/idle1_m9.vnmclip_c",
+      "nativeSha256": "a77d2b6b8027eb4e09f35769fad683a57ade205c87ce7615667096a1652be597",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/idle2_m9.vnmclip_c",
+      "nativeSha256": "6fe085249f9ef11235dcb50061a97b7d15b519233d03067c6ac50c68cd9d349a",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/draw_m9.vnmclip_c",
+      "nativeSha256": "942fe7c1ac35660253d195c5958b585568e90ae77cb83909926d86486be45911",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/light_hit1_m9.vnmclip_c",
+      "nativeSha256": "8af6d8d938c679a49d736c62628995edc00b00885facf0a1d721981b2e73ecc8",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/light_hit2_m9.vnmclip_c",
+      "nativeSha256": "38b1ad93928cafb170d0c77143fc5e8c3f003baca26830a64445b621a2f73a9b",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/light_miss1_m9.vnmclip_c",
+      "nativeSha256": "51da66abe606183c35b1c0989c15446f34c48d12c747c11f45ba5996615956c3",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/light_miss2_m9.vnmclip_c",
+      "nativeSha256": "f52bd0afdacce746f47c3067ff85d51afada9da2ea50d93a3196e021db7b5883",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/heavy_hit1_m9.vnmclip_c",
+      "nativeSha256": "cbdbd97defbb4f568d016906c5d7e8d7285173385aa069b64b515e9705a76f21",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/heavy_miss1_m9.vnmclip_c",
+      "nativeSha256": "41da06b4c0fe21dd1172b27c075bcee4b6e404d6d077c7036aad228314411d0f",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "42/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_m9/lookat01_m9.vnmclip_c",
+      "nativeSha256": "48d96e17ea7986e0617d811e6d2e03fef6c1ab0b85ae71d7c97f86f3a36a575a",
+      "input": "packages/assets/public/models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "43/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/idle1_tactical.vnmclip_c",
+      "nativeSha256": "e291577da3381e7b255ac29aca3ae50c1ad1c1deeb6514f88eb75dabc86d9964",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/idle2_tactical.vnmclip_c",
+      "nativeSha256": "ef13b33f076e871d9633ac1472d4dd73a41a9f38a794e7fe8df1f3b2c5c45bf4",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/draw_tactical.vnmclip_c",
+      "nativeSha256": "1985323a799e91d94071c38bfc1203abed2813713faf697ef200269e080c7f25",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/light_hit1_tactical.vnmclip_c",
+      "nativeSha256": "45cb56e41e7dcdb533ffbaf86f0a6f1fa6a8a097ef6d989c76f96b7d8a70c439",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/light_hit2_tactical.vnmclip_c",
+      "nativeSha256": "e4ecaf5aa1544aba996cf57902b15d20e755c57d76e8aea92b42cd9babbac924",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/light_miss1_tactical.vnmclip_c",
+      "nativeSha256": "a06f2bbe983d92626352170462823694d85778e5bac92f599c727bf973433f76",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/light_miss2_tactical.vnmclip_c",
+      "nativeSha256": "6dc13c9cd1be0b2d08315c95bb7a51fd7d483951d27b61a5df92892595e1bdbc",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.4000112619,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/heavy_hit1_tactical.vnmclip_c",
+      "nativeSha256": "915644470b016902f5f59169d87f977129ab438910bb7416d599a69e0f9b2623",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.4000112619,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/heavy_miss1_tactical.vnmclip_c",
+      "nativeSha256": "55f04cb58b6e85df81b423df488b2974bd09f6b5006c85b7a7c7c94a27cec164",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "43/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_tactical/lookat01_tactical.vnmclip_c",
+      "nativeSha256": "9358a53634fbf1b34771fe245d0c12d37cda6076ca00f5ad08703aad23b074a4",
+      "input": "packages/assets/public/models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b"
+    },
+    "44/idle1": {
+      "duration": 4.0,
+      "timeScale": 1,
+      "frames": 121,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/idle1_falchion.vnmclip_c",
+      "nativeSha256": "4104e82e903913e4a5c86ba58001c6109c697d04952b2e3826ede427ecc9ac89",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/draw": {
+      "duration": 0.9667,
+      "timeScale": 1,
+      "frames": 30,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/draw_falchion.vnmclip_c",
+      "nativeSha256": "4b5785e7db035497df0b30f4e1b5fd9c14162a848ea81fa9a3ab245476acf192",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/light_hit1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.19999458429999997,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/light_hit1_falchion.vnmclip_c",
+      "nativeSha256": "0ca09008306642b9873b44af91af57f3c83ffd040a5ae5679336a568af0120d0",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/light_hit2": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.19999458429999997,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/light_hit2_falchion.vnmclip_c",
+      "nativeSha256": "ee899a6292fb3f80ed9403ae1dcafa9c7e3291f7925fcb6bf7f1d4d4bc4c6ec2",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/light_miss1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.19999458429999997,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/light_miss1_falchion.vnmclip_c",
+      "nativeSha256": "d3375f5431983cf198c1c66aa0d4e1fbb74fa50c102593db46fded9e334511a6",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/light_miss2": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.19999458429999997,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/light_miss2_falchion.vnmclip_c",
+      "nativeSha256": "f517c5b051c0c356f61775e317a040b2dbb268fbc030e652b31bd03f4b9ee82f",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/heavy_hit1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.19999458429999997,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/heavy_hit1_falchion.vnmclip_c",
+      "nativeSha256": "ab02c8041446b6dacbfd46e1c28a1131d9b14ce462f6965a6febd65348739a8a",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/heavy_miss1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.19999458429999997,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/heavy_miss1_falchion.vnmclip_c",
+      "nativeSha256": "e61511caacf50e1c21e2282b0fa8df74440ed2b5bcc5502ecde4849cfd8e16c1",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/lookat01": {
+      "duration": 5.9667,
+      "timeScale": 1,
+      "frames": 180,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/lookat01_falchion.vnmclip_c",
+      "nativeSha256": "a41266d39576c8c825dc43d62ea015f94085b639c713ca2806fbb662b3ea3593",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "44/lookat02": {
+      "duration": 5.9667,
+      "timeScale": 1,
+      "frames": 180,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_falchion/lookat02_falchion.vnmclip_c",
+      "nativeSha256": "cd7ab2785a54b133948fa7805adf1e5abb86999f3f7e2c3108156eb165daada9",
+      "input": "packages/assets/public/models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "45/idle1": {
+      "duration": 4.0,
+      "timeScale": 1,
+      "frames": 121,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/idle1_bowie.vnmclip_c",
+      "nativeSha256": "90c8d1dcef97ace5888749771298c5fbfee12909ff55ce8c4c6870050e609304",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "45/draw": {
+      "duration": 1.1,
+      "timeScale": 1,
+      "frames": 34,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/draw_bowie.vnmclip_c",
+      "nativeSha256": "58849fd9589080ac69b559dfc5d09919e3dd28ad12b8900eaf4c53b1dba115d6",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "45/light_hit1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.23332607060000002,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/light_hit1_bowie.vnmclip_c",
+      "nativeSha256": "b99b6686c996fa0677f58f1d27a248f3f6c08b780a35096ff5eae38397dfcd9d",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "45/light_hit2": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.19999458429999997,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/light_hit2_bowie.vnmclip_c",
+      "nativeSha256": "7f7c20dc04090a41f879583b7ef3349a7f9890675cefb3d04d095e6f35c6341c",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "45/light_miss1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.23332607060000002,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/light_miss1_bowie.vnmclip_c",
+      "nativeSha256": "411d2952a40e7886aab91299b2f21aeb3f7d82b52899aecdda55eb00b33497e0",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "45/light_miss2": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.19999458429999997,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/light_miss2_bowie.vnmclip_c",
+      "nativeSha256": "685b04ab00139f83cbe41429a274d6e5c9dee6d850c31d90587af9016fbcf6a6",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "45/heavy_hit1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.4666532745,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/heavy_hit1_bowie.vnmclip_c",
+      "nativeSha256": "b27c28ee488e93c13564a718f0a8e1976a3cc63162c87e35557375eef26b0b6b",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "45/heavy_miss1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.4333206549,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/heavy_miss1_bowie.vnmclip_c",
+      "nativeSha256": "62e4c920c58bb33b7375c06aa68a4907b1680e72f485ac122b9b01484cdfe633",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "45/lookat01": {
+      "duration": 6.1667,
+      "timeScale": 1,
+      "frames": 186,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_bowie/lookat01_bowie.vnmclip_c",
+      "nativeSha256": "c8ab6a1826de9dd9a4c635c29a2eb0f7028de7b84b21d069f93d4deed80256ee",
+      "input": "packages/assets/public/models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb"
+    },
+    "46/idle1": {
+      "duration": 2.6667,
+      "timeScale": 1,
+      "frames": 81,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_push/idle1_push.vnmclip_c",
+      "nativeSha256": "e5e7ed89651abd10408bb2bd09a8fa371d84a038686a65ff6114a11cc5117346",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "46/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_push/draw_push.vnmclip_c",
+      "nativeSha256": "f3d24289dbdecd0910aa9b1c84879ed3300992bf3212c4ee445db95abc17b33a",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "46/light_hit1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.3333239294,
+      "resource": "animation/anims/viewmodel/knife/knife_push/light_hit1_push.vnmclip_c",
+      "nativeSha256": "db9d93f09229ccd7c6f22f3b15b826a07f434a815262251a86a2337ca11cbe83",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "46/light_hit2": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.3333239294,
+      "resource": "animation/anims/viewmodel/knife/knife_push/light_hit2_push.vnmclip_c",
+      "nativeSha256": "a3857b867997c5e92f1c9f4dd7408d24a5f0ef29f0b04ab24bd41407cb3cb87d",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "46/light_miss1": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.3666554157,
+      "resource": "animation/anims/viewmodel/knife/knife_push/light_miss1_push.vnmclip_c",
+      "nativeSha256": "8304e17d0df0915f40c26fd467d0dc2aafc84e9a9efd2bc8b22443bf84c86371",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "46/light_miss2": {
+      "duration": 1.1333,
+      "timeScale": 1,
+      "frames": 35,
+      "inspectBlockedUntil": 0.3333239294,
+      "resource": "animation/anims/viewmodel/knife/knife_push/light_miss2_push.vnmclip_c",
+      "nativeSha256": "69d871cd85766733c944474f01532925c60e077cfee78b859cfe33be82df20bf",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "46/heavy_hit1": {
+      "duration": 0.7667,
+      "timeScale": 1,
+      "frames": 24,
+      "inspectBlockedUntil": 0.3666827087,
+      "resource": "animation/anims/viewmodel/knife/knife_push/heavy_hit1_push.vnmclip_c",
+      "nativeSha256": "1ef4de29cbfa0791f98574eb2ea37e71c7a9c1f33a581aaef2edf5f4540be9de",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "46/heavy_miss1": {
+      "duration": 0.7667,
+      "timeScale": 1,
+      "frames": 24,
+      "inspectBlockedUntil": 0.3666827087,
+      "resource": "animation/anims/viewmodel/knife/knife_push/heavy_miss1_push.vnmclip_c",
+      "nativeSha256": "602a0cc13bb4fc057f831d685b543a0e40f5f5e0fe0cb79a7c1d03f48dcade48",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "46/lookat01": {
+      "duration": 3.7333,
+      "timeScale": 1,
+      "frames": 113,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_push/lookat01_push.vnmclip_c",
+      "nativeSha256": "ede11b96c5a13184c47b8cc4b0fe08c8d1c0aa8b2f178ee5717051b1b0e0af14",
+      "input": "packages/assets/public/models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "47/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/idle1_cord.vnmclip_c",
+      "nativeSha256": "4efeffcbf4a6d687ab7a13d6cd4760ddfb5ef47dada9376bf25eb92d711351c6",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/idle2_cord.vnmclip_c",
+      "nativeSha256": "188be62f363cb565cb5734457e0f4a890323e643b11f59065e5b8f442627927a",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.333333,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/draw_cord.vnmclip_c",
+      "nativeSha256": "dd517ead499c723a697ffa87738647fd18a6b01c6609feab1fbb7564762b31af",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/light_hit1_cord.vnmclip_c",
+      "nativeSha256": "3206d5f4bffc03c333f142b0b8f7f3a18f1650f78166a501c650850512719a4b",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/light_hit2_cord.vnmclip_c",
+      "nativeSha256": "c6170a0db70795345dbf01dd47c58a778f1e4abd1df35d79218697ba3087cd52",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/light_miss1_cord.vnmclip_c",
+      "nativeSha256": "b1fdf844f041e31d0785c7f30c340e1e30103057c81c9ab41623d3f09361a2b1",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/light_miss2_cord.vnmclip_c",
+      "nativeSha256": "3722bb1b5e808b4cc42656963e2a43adefb60fff84bcd664b00426a4910d8f42",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/heavy_hit1_cord.vnmclip_c",
+      "nativeSha256": "f38a1f4d7f26036a59a6c06cc3540fcccd2b6f4cbbd7d3b63cc0282033295af7",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/heavy_miss1_cord.vnmclip_c",
+      "nativeSha256": "6ed3c5b299f84f3c2795be464f856987c8d357f5bd868649bb513f3e59909961",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/lookat01_cord.vnmclip_c",
+      "nativeSha256": "8be7b1ad1ca248a7caadbb9806d1cd70de11fa83e329ea49ed7a81b20f75330d",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "47/lookat02": {
+      "duration": 4.5,
+      "timeScale": 1,
+      "frames": 136,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_cord/lookat02_cord.vnmclip_c",
+      "nativeSha256": "4f88dc01e3db579bac50576e0ce9e04abcfd2dd709fbb0436fe5fe081f21eed1",
+      "input": "packages/assets/public/models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "48/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/idle1_canis.vnmclip_c",
+      "nativeSha256": "8676d3fffdf954448741eba1e796781aa84fe547d2b7826d103e57116e03b433",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/idle2_canis.vnmclip_c",
+      "nativeSha256": "29767e0909abe97d9d9ea0d1c1317413a64832a89ee39c5c70bc4003086328bf",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.4,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/draw_canis.vnmclip_c",
+      "nativeSha256": "ad96ef9af20fc71375ca27064a34f2f4f862a650263cf73155b3f7e46e7b6a21",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/light_hit1_canis.vnmclip_c",
+      "nativeSha256": "151a832d27974c2fa1caf4e02b9c4f088372951ed230a9adfaa2b14d140374d2",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/light_hit2_canis.vnmclip_c",
+      "nativeSha256": "a5166ee3cfa66b0bd01929ec442c2cb57c135e5f9f2251888424b3385d4b9215",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/light_miss1_canis.vnmclip_c",
+      "nativeSha256": "d3b3dd94f3f276501e070eae9d45b8d7e7a860c83e30b20c6b017feba8daca7f",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/light_miss2_canis.vnmclip_c",
+      "nativeSha256": "8066407f581fb375b0ecf1c345b0eb83b48cd173cac0ce78abc4ac993505c7b3",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/heavy_hit1_canis.vnmclip_c",
+      "nativeSha256": "a98c68c857dc9f5ca91ed3d32e545bf63149fbd3e32e0226ffba36d78179bee2",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/heavy_miss1_canis.vnmclip_c",
+      "nativeSha256": "cacafbeb6449941e8082b775421535aa095f570b9a12b357264f0bb9fec0445a",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/lookat01": {
+      "duration": 8.3333,
+      "timeScale": 1,
+      "frames": 251,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/lookat01_canis.vnmclip_c",
+      "nativeSha256": "30fef2dfbd6b9fcf99491eb205f738ebbbed54ea6c8c0a89edc4c55676d9ba3e",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "48/lookat02": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_canis/lookat02_canis.vnmclip_c",
+      "nativeSha256": "f273c3c40217531a452bd41dee91d526feeb11aedf702a4a8cc673ff4fc74f2c",
+      "input": "packages/assets/public/models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "49/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/idle1_ursus.vnmclip_c",
+      "nativeSha256": "b199778ee74551f0a8850fa9ac540a21a2533e19677a11b58a43c1f137c2a11d",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/idle2_ursus.vnmclip_c",
+      "nativeSha256": "8a3362223c8e6778020fffb544108fadf932dc85ea6f66dd2df5eb2e9f698478",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.3,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/draw_ursus.vnmclip_c",
+      "nativeSha256": "7f0b0a0a5a663dfdb9fd5808172eaaba395fd684d6081823e49d367407687dce",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/light_hit1_ursus.vnmclip_c",
+      "nativeSha256": "f8bfc89103914c0328c0b8405881d769d0d16998642f660fa31cd02ca41944a6",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/light_hit2_ursus.vnmclip_c",
+      "nativeSha256": "18b66fe65b3b9e75b813feaa35378b54cb61858cd9ffc11273c09a64cd5af1c0",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/light_miss1_ursus.vnmclip_c",
+      "nativeSha256": "a3c57bbbd78272fe868efbc04f8c02d96e0e0091215a7a709d92a1e85733a530",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/light_miss2_ursus.vnmclip_c",
+      "nativeSha256": "247d93f45d3ddc8a35ef2c78455fb7501e2ed718d4ebc6867fa55a7b20b3bd4a",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/heavy_hit1_ursus.vnmclip_c",
+      "nativeSha256": "1140b52ed44525c904f8d7449ada264ddd229f116dde5ace3c66685c848e7580",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/heavy_miss1_ursus.vnmclip_c",
+      "nativeSha256": "2d2813acba7186e177974251e3c085d8dfdae8ea47c65b818651034efff475f9",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/lookat01_ursus.vnmclip_c",
+      "nativeSha256": "5a08ff41e6907a7620ef2f61ae964487fb3b2a9bdd0419baccba2b2c2bd21db7",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "49/lookat02": {
+      "duration": 5.0,
+      "timeScale": 1,
+      "frames": 151,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_ursus/lookat02_ursus.vnmclip_c",
+      "nativeSha256": "2dfb556cb8b280250b199ba9b907dcbacb958459364da99b6becef0bb96a0685",
+      "input": "packages/assets/public/models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
+    },
+    "50/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/idle1_navaja.vnmclip_c",
+      "nativeSha256": "b2ca80662b90862293ee15d0e4e366c347fe7d5e52c4b0770f5d84e704c3c004",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "50/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/idle2_navaja.vnmclip_c",
+      "nativeSha256": "013541f5a9b991d0c6efd2a8ca5195de6f5c6de28f5e34565675364e86272265",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "50/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/draw_navaja.vnmclip_c",
+      "nativeSha256": "ee61743777a98dbea2493ddf1498a3ac82a1908fd92459313443a5ec0148d7a2",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "50/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/light_hit1_navaja.vnmclip_c",
+      "nativeSha256": "ff7e78be1e2144e4fc8a9fd1971a8caf56eaf5d6981751d021ccf895d13886ed",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "50/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/light_hit2_navaja.vnmclip_c",
+      "nativeSha256": "7097651b67974746c598e7eb0c9e3ee88e2b3cb4548fbc839ee8525dbcae2d89",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "50/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/light_miss1_navaja.vnmclip_c",
+      "nativeSha256": "0acfc7b4ecada89f1c6603ea50034eabf7b6f1c48a3720cad2814385b4999480",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "50/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/light_miss2_navaja.vnmclip_c",
+      "nativeSha256": "bc6bad031d3c739b0a23569da493e0fa38ed9c2ade37c13bea827afe4b8e7a1f",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "50/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/heavy_miss1_navaja.vnmclip_c",
+      "nativeSha256": "4b36f46186506a0731ca6902e8ec59d46d1d4a6687cdd6811e9f786b8217af16",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "50/lookat01": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_navaja/lookat01_navaja.vnmclip_c",
+      "nativeSha256": "3422169b222f21e0154a3b95624e11e60cbd6ff3c32b8d7f590d093d0e3e7043",
+      "input": "packages/assets/public/models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "51/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/idle1_outdoor.vnmclip_c",
+      "nativeSha256": "61e5397fa1badf7afc34208057f905a73f5c3d9355226d8fb78c268ec29be73b",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/idle2_outdoor.vnmclip_c",
+      "nativeSha256": "c8cd6553b9defcbb75d549f2aa44140357ccecc4b3568a249af4e7cf7a3b28f8",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/draw": {
+      "duration": 2.2667,
+      "timeScale": 1,
+      "frames": 69,
+      "inspectBlockedUntil": 0.5333409098,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/draw_outdoor.vnmclip_c",
+      "nativeSha256": "9b969a6313dba16c7c141e6939f666feeb09d72345deed2234a845f8e74b09b9",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/light_hit1_outdoor.vnmclip_c",
+      "nativeSha256": "0b87e3d69a962360d181b6dd333b34f8191b2a4266305ce64ddc3eaddb64e613",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/light_hit2_outdoor.vnmclip_c",
+      "nativeSha256": "478f6d4010d34be9707862303964964de8b8a2e372e1c30f8fce953c0c12a6de",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/light_miss1_outdoor.vnmclip_c",
+      "nativeSha256": "3c79110efe65c1dce5fd4a4caed00d1a5fdadeca3325838e9243a0a1cb8bd467",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/light_miss2_outdoor.vnmclip_c",
+      "nativeSha256": "5439867a70f617949b7dbf8b1485c95169a2daad85c7b14eb7eab3cec621d29a",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/heavy_hit1_outdoor.vnmclip_c",
+      "nativeSha256": "d646011641a0ce876006e2ff0ad89ef560d38d098c8a2b8b065da70278f1f75e",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/heavy_miss1_outdoor.vnmclip_c",
+      "nativeSha256": "dcfeb1383b0d0fd4a91ecff20a71dc04fb02c886d201fc2755866ec14249f1ac",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/lookat01": {
+      "duration": 5.0,
+      "timeScale": 1,
+      "frames": 151,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/lookat01_outdoor.vnmclip_c",
+      "nativeSha256": "bf0b5694b8567e0acc6cc8fe92fd71f0faf564678d7d00ea716afce4fd5c6289",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "51/lookat02": {
+      "duration": 6.2,
+      "timeScale": 1,
+      "frames": 187,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_outdoor/lookat02_outdoor.vnmclip_c",
+      "nativeSha256": "fac874801782af0e7afd3095c6227b57c0c739704b5a185ef830fe50dc62f555",
+      "input": "packages/assets/public/models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "52/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/idle1_stiletto.vnmclip_c",
+      "nativeSha256": "cea1caff78cd3b16ad0de075c911b795a3b74b54077dbb78bca77b5a2836fa0c",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/idle2_stiletto.vnmclip_c",
+      "nativeSha256": "065e5ef5124704aed7772ce8728e6f58c44888519ae521aab697cd1dd9811aed",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/draw_stiletto.vnmclip_c",
+      "nativeSha256": "495dfdbd90d3d78152b32b5abb50f0cd5f79dd0a80f0aeba27aad2c5bd2dfaa4",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/light_hit1_stiletto.vnmclip_c",
+      "nativeSha256": "5776fd1efd765de28238d2d182f01e87e38ee49c4d88a9187368b3dcc7f67891",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/light_hit2_stiletto.vnmclip_c",
+      "nativeSha256": "27b8bc4bfc7ce679313d3f80768336f6b5dbba2aca0d7d6e734ccf5b19c1cfd3",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/light_miss1_stiletto.vnmclip_c",
+      "nativeSha256": "dab4148659d484af9b10343e991745f929efb8343e183644d05a2a740f83d6c3",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/light_miss2_stiletto.vnmclip_c",
+      "nativeSha256": "ce988c2e014764786f67590bbbee338c5694bcd3c473c245af7fd308f4101c9a",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/heavy_hit1_stiletto.vnmclip_c",
+      "nativeSha256": "d64394b9782cdd41fff1002767f5efd9da68cca53efb948fa2eb10b0b71eddae",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.43334621430000003,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/heavy_miss1_stiletto.vnmclip_c",
+      "nativeSha256": "a4a29e60446c81686d6b0dd7021346e20d7acbbcf1dfb25478d3e575bfe262ad",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/lookat01": {
+      "duration": 4.0,
+      "timeScale": 1,
+      "frames": 121,
+      "inspectBlockedUntil": 3.166668,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/lookat01_stiletto.vnmclip_c",
+      "nativeSha256": "94f4646371a702af23ad381d4c2401505954a2ff8e0d9ac3283d805447f90d03",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "52/lookat02": {
+      "duration": 5.0,
+      "timeScale": 1,
+      "frames": 151,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_stiletto/lookat02_stiletto.vnmclip_c",
+      "nativeSha256": "eae8dc3df4cf5804eacb6199a4d598e64fa8ebaf78b0e15bad8eb07e516017e8",
+      "input": "packages/assets/public/models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "53/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/idle1_talon.vnmclip_c",
+      "nativeSha256": "37cc665114ce38baff180defedce69481b542c3e6f8a9ab5b2ad1e0ec8538e07",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/idle2": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/idle2_talon.vnmclip_c",
+      "nativeSha256": "8bedb700aefe3e9bcd31169a8709bb656174048f0d2a1d9fecbedaf86d900238",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.5,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/draw_talon.vnmclip_c",
+      "nativeSha256": "6413e97b032799dc39091e94a18ecf475602d3d01e9d6af8e4bdb68b103fcdc7",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.2666737857,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/light_hit1_talon.vnmclip_c",
+      "nativeSha256": "2db9a10f62fcf0bb808ac774369785aec8a06eb5d72bb9b3c3d5b7dd96648d16",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.2666737857,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/light_hit2_talon.vnmclip_c",
+      "nativeSha256": "fbf3f3ae4122e6ffcb2cd15ed2ed9e890185dc4511263c1ce62bacd9885048e3",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/light_miss1_talon.vnmclip_c",
+      "nativeSha256": "ee54b5f33be38f43eb555293ae063f29d5d30c468bca51233f07ae22b6c0e763",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.2666737857,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/light_miss2_talon.vnmclip_c",
+      "nativeSha256": "a7d75fb7966b4dcb73ba6e1b6d74da5ab1b4814bb019790023cded2ad93a3179",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.6000174762,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/heavy_hit1_talon.vnmclip_c",
+      "nativeSha256": "035be0182e579c6ac34f247630ac248a4ee08d57104d0787e05581ebe51b5f18",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.6000174762,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/heavy_miss1_talon.vnmclip_c",
+      "nativeSha256": "891ea8bddd2851a1411902296d76b8b8a232f248934c5795b0b415db5aaead59",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/lookat01": {
+      "duration": 4.8667,
+      "timeScale": 1,
+      "frames": 147,
+      "inspectBlockedUntil": 0.5666688146000001,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/lookat01_talon.vnmclip_c",
+      "nativeSha256": "9cc82c2515a5fbed76ec47bcd3b59f2aa022f7a39384bc1912eaf39ac8bf1237",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "53/lookat02": {
+      "duration": 2.7,
+      "timeScale": 1,
+      "frames": 82,
+      "inspectBlockedUntil": 2.0999979000000004,
+      "resource": "animation/anims/viewmodel/knife/knife_talon/lookat02_talon.vnmclip_c",
+      "nativeSha256": "40ffbf6184300b48d14cdd2a6999b737d298c8d1cbef718494ab3174da134c3b",
+      "input": "packages/assets/public/models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "54/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/idle1_skeleton.vnmclip_c",
+      "nativeSha256": "300acd333c8d2c87f367f2a43b69733fcf94409cecd99098527b245e52d224a3",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/idle2_skeleton.vnmclip_c",
+      "nativeSha256": "3d2aaa03fec9b695b3409144594cfa9dd09333f077efec80fbd05b071c2746d4",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/draw_skeleton.vnmclip_c",
+      "nativeSha256": "81360498e897a70283e894405d431cacf9ee1ab3b3b09f9263a0edd4dd123767",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/light_hit1_skeleton.vnmclip_c",
+      "nativeSha256": "b7579a8fdd727b0469ba44199d50e009a46b809c2ee1d72b32a47739f71826cf",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/light_hit2_skeleton.vnmclip_c",
+      "nativeSha256": "4391720c05bb9c49b3df8575172382fff7c81ada410ef217b69d4db0fcf75855",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/light_miss1_skeleton.vnmclip_c",
+      "nativeSha256": "f57c78e86b6b92622573dce907a32c9868af86f0239efb2eaf1c1b0f93b62a8b",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.23334000000000002,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/light_miss2_skeleton.vnmclip_c",
+      "nativeSha256": "00c9f22bce1f1419830089ef1f21152b63067dbeae5acd978eb626b621a1f670",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.4000112619,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/heavy_hit1_skeleton.vnmclip_c",
+      "nativeSha256": "e31a3f0e1d020beeedb67aae675d1d431cebd5c1660b3bd58b37329d0743ffd9",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.4000112619,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/heavy_miss1_skeleton.vnmclip_c",
+      "nativeSha256": "f3b86df18f2e774a9e34420ce75c39c5fc6b68dae882153c20ec63ffbca210fc",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/lookat01": {
+      "duration": 6.1333,
+      "timeScale": 1,
+      "frames": 185,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/lookat01_skeleton.vnmclip_c",
+      "nativeSha256": "73848a946e7c3d65413e7c781ac003ad6191cc83c82ea87d1d56ff021c193c6a",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "54/lookat02": {
+      "duration": 2.2667,
+      "timeScale": 1,
+      "frames": 69,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_skeleton/lookat02_skeleton.vnmclip_c",
+      "nativeSha256": "c821e6ff6960a2c63d1bd6081f5c80d1ff111c105dcc4830e729a3439996e7c6",
+      "input": "packages/assets/public/models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
+    },
+    "55/idle1": {
+      "duration": 2.0,
+      "timeScale": 1,
+      "frames": 61,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/idle1_kukri.vnmclip_c",
+      "nativeSha256": "8473765ae2ea013da5809f4c1ad4a2b5fd88dbbb8b0f790413bd7f030306e4f0",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/idle2": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/idle2_kukri.vnmclip_c",
+      "nativeSha256": "3a56f57f53f017e4cf6d47244c2f57e4ed8ffcb9d59f7cd4cf23a309dd5fd3af",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/draw": {
+      "duration": 1.0,
+      "timeScale": 1,
+      "frames": 31,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/draw_kukri.vnmclip_c",
+      "nativeSha256": "533411d9910c027062d720d7f82991f48ee3f6df078a7e63d2821f4df5ea12ed",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/light_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/light_hit1_kukri.vnmclip_c",
+      "nativeSha256": "6e721411e9df5f467ca7e25451a64741ab6e32cb40742af01eb56c59a1494767",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/light_hit2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/light_hit2_kukri.vnmclip_c",
+      "nativeSha256": "004ec9f68f500b6be0ccebf8baa1fcfe50cec2d5decb947c90cdb56e69f91b1c",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/light_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/light_miss1_kukri.vnmclip_c",
+      "nativeSha256": "b930d187860284181c04fb95b9595d4aa52e7e822a37427bdab24de1c87bdc05",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/light_miss2": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/light_miss2_kukri.vnmclip_c",
+      "nativeSha256": "43ffcb5bcfef1bac5a2cf291f14a5a917337794e44b0392c194dda220314d92e",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/heavy_hit1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.1000025238,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/heavy_hit1_kukri.vnmclip_c",
+      "nativeSha256": "4c4b98fe83bffb5022f41e1b63a49464a2e425bb8eaa52017bbfec7e33127ba1",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/heavy_miss1": {
+      "duration": 1.1667,
+      "timeScale": 1,
+      "frames": 36,
+      "inspectBlockedUntil": 0.1000025238,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/heavy_miss1_kukri.vnmclip_c",
+      "nativeSha256": "b1fd22ce3097df19dfb0fc99c7a900dfe95915f50ab8126b5b9fb5709f289eb1",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "55/lookat01": {
+      "duration": 7.5667,
+      "timeScale": 1,
+      "frames": 228,
+      "inspectBlockedUntil": 0.0,
+      "resource": "animation/anims/viewmodel/knife/knife_kukri/lookat01_kukri.vnmclip_c",
+      "nativeSha256": "1a142b680ac14ce59bf32c118c669e1d62c5a583865f71ea4d8ebed989b1bd0a",
+      "input": "packages/assets/public/models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    }
+  }
+}

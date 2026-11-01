@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { knifeDefinitions } from "@cs2go/protocol";
 import type { Game } from "../src/game";
 declare global {
   interface Window {
@@ -126,7 +127,7 @@ test("native buy poses preview every firearm and utility on both agents without 
   await expect(page.locator("#buy-preview-name")).toHaveText("SG 553 | Pulse");
   await expect(page.locator("#buy-preview-name")).toHaveCSS("color", "rgb(136, 71, 255)");
   await page.screenshot({ path: "artifacts/buy-preview-sg553-pulse.png" });
-  for (const knife of [4, 5, 6]) {
+  for (const { id: knife } of knifeDefinitions) {
     await page.locator("#close-loadout").click();
     await page.waitForFunction(() => window.__game.locked);
     await page.evaluate((index) => {
@@ -135,7 +136,7 @@ test("native buy poses preview every firearm and utility on both agents without 
     await page.keyboard.press("b");
     await expect(page.locator("#buy-preview-stage")).toHaveAttribute(
       "data-pose",
-      "sh_buymenu_knife",
+      knife === 46 ? "sh_buymenu_push" : "sh_buymenu_knife",
     );
     await page.screenshot({ path: `artifacts/buy-pose-knife-${knife}.png` });
   }

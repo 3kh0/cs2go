@@ -331,7 +331,7 @@ test("new gun finishes persist independently and paint both model variants", asy
     );
   });
   await page.locator("#skins-button").click();
-  await expect(page.locator("[data-skin-weapon]")).toHaveCount(37);
+  await expect(page.locator("[data-skin-weapon]")).toHaveCount(56);
   for (const skin of variants.filter((entry) => entry.body === "legacy")) {
     await page.locator(`[data-skin-weapon="${skin.weapon}"]`).click();
     // The default preview must load for all expanded slots, including at desktop widths.

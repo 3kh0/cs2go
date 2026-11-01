@@ -1,5 +1,7 @@
 // Version every wire-format or simulation compatibility change together.
-export const PROTOCOL_VERSION = 4;
+import { isKnife, WEAPON_COUNT } from "./armory";
+export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
+export const PROTOCOL_VERSION = 5;
 export const TICK_RATE = 128;
 export const SNAPSHOT_RATE = 32;
 export const MAX_PLAYERS = 20;
@@ -276,13 +278,13 @@ export function validInput(value: unknown): value is Input {
     (value.scope as number) <= 2 &&
     Number.isInteger(value.select) &&
     (value.select as number) >= -1 &&
-    (value.select as number) <= 36 &&
+    (value.select as number) < WEAPON_COUNT &&
     Number.isInteger(value.buy) &&
     (value.buy as number) >= -1 &&
-    (value.buy as number) <= 36 &&
+    (value.buy as number) < WEAPON_COUNT &&
     Number.isInteger(value.refund) &&
     (value.refund as number) >= -1 &&
-    (value.refund as number) <= 36 &&
+    (value.refund as number) < WEAPON_COUNT &&
     ["", "kevlar", "helmet", "kit"].includes(value.refundEquipment as string) &&
     ["", "vest", "helmet", "kit"].includes(value.equipment as string) &&
     [
@@ -332,10 +334,10 @@ export function parseClientMessage(raw: string): ClientMessage | null {
         return null;
     }
 
-    if (config.knife !== undefined && ![4, 5, 6].includes(config.knife as number)) return null;
+    if (config.knife !== undefined && !isKnife(config.knife as number)) return null;
     if (
       !record(config.skins) ||
-      Object.keys(config.skins).length > 37 ||
+      Object.keys(config.skins).length > WEAPON_COUNT ||
       !record(config.agents) ||
       !record(config.loadouts)
     )
@@ -343,7 +345,7 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     for (const [key, skin] of Object.entries(config.skins)) {
       if (
         !/^\d{1,2}$/.test(key) ||
-        Number(key) > 36 ||
+        Number(key) >= WEAPON_COUNT ||
         !record(skin) ||
         typeof skin.id !== "string" ||
         !/^[a-zA-Z0-9_-]{0,128}$/.test(skin.id) ||

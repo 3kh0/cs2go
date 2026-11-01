@@ -1,5 +1,47 @@
 import { expect, test } from "vitest";
-import { MAX_BATCH, PROTOCOL_VERSION, neutralInput, parseClientMessage } from "./index";
+import {
+  MAX_BATCH,
+  PROTOCOL_VERSION,
+  WEAPON_COUNT,
+  knifeDefinitions,
+  neutralInput,
+  parseClientMessage,
+} from "./index";
+
+test("every knife can be configured and selected without accepting invalid weapon IDs", () => {
+  const configuration = {
+    skins: Object.fromEntries(
+      Array.from({ length: WEAPON_COUNT }, (_, id) => [id, { id: "", wear: 0.01, seed: 1 }]),
+    ),
+    agents: { ct: "default-ct", t: "default-t" },
+    loadouts: { ct: [], t: [] },
+  };
+  for (const { id } of knifeDefinitions) {
+    expect(
+      parseClientMessage(
+        JSON.stringify({ type: "configure", configuration: { ...configuration, knife: id } }),
+      ),
+    ).not.toBeNull();
+    expect(
+      parseClientMessage(
+        JSON.stringify({ type: "inputs", inputs: [{ ...neutralInput(1), select: id, buy: id }] }),
+      ),
+    ).not.toBeNull();
+  }
+  for (const id of [-1, 0, 36, WEAPON_COUNT, 37.5, "55"]) {
+    expect(
+      parseClientMessage(
+        JSON.stringify({ type: "configure", configuration: { ...configuration, knife: id } }),
+      ),
+    ).toBeNull();
+  }
+  for (const id of [WEAPON_COUNT, -2, 37.5, "55"])
+    expect(
+      parseClientMessage(
+        JSON.stringify({ type: "inputs", inputs: [{ ...neutralInput(1), select: id }] }),
+      ),
+    ).toBeNull();
+});
 test("rejects incompatible versions, malformed payloads and impossible inputs", () => {
   const join = {
     type: "join",

@@ -1,9 +1,9 @@
-import stats from "@cs2go/simulation/weapon-stats";
+import { isKnife, weapons } from "./physics";
 // Current shipped CS2 weapons.vdata, pinned provenance in the imported snapshot.
 export const SOURCE_UNITS_PER_METER = 1 / 0.0254;
-export const ballistics = stats.weapons.map(({ damage, power, range, modifier }, index) =>
+export const ballistics = weapons.map(({ damage, power, range, modifier }, index) =>
   // Knife vdata inherits firearm defaults that do not describe melee tracing.
-  index >= 4 && index <= 6
+  isKnife(index)
     ? { damage: 35, power: 0, range: 0, modifier: 1 }
     : { damage, power, range, modifier },
 );

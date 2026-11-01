@@ -106,7 +106,7 @@ test("complete local armory loads real meshes and exercises distinctive firearm 
         `${weapons[id].name} has invalid muzzle`,
       );
       models.push({ id, vertices: geometry(g.gun), worldVertices: world ? geometry(world) : 0 });
-      if (id >= 12) {
+      if (id >= 12 && !isKnife(id)) {
         g.revolverCharge = id === 17 ? REVOLVER_COCK_TIME : 0;
         const before = g.ammo;
         g.weaponAudio.lastClip = "";
@@ -219,7 +219,7 @@ test("complete local armory loads real meshes and exercises distinctive firearm 
     g.firing = false;
     return { models, selected: g.selected, audioCount: g.weaponAudio.buffers.size };
   });
-  expect(result.models).toHaveLength(37);
+  expect(result.models).toHaveLength(56);
   expect(result.selected).toBe(33);
   expect(result.audioCount).toBeGreaterThan(100);
   expect(failedAssets).toEqual([]);

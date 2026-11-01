@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import { isKnife } from "./physics";
 import {
   accuracyRecovery,
   accuracyDefaults,
@@ -27,7 +28,7 @@ it("keeps all diagonal samples within the circular cone", () => {
 
 it("treats negative final recovery values as the starting recovery", () => {
   for (let weapon = 0; weapon < accuracyParameters.length; weapon++) {
-    if (weapon >= 4 && weapon <= 6) continue;
+    if (isKnife(weapon)) continue;
     for (const crouched of [false, true]) {
       expect(accuracyRecovery(weapon, 100, crouched)).toBeGreaterThan(0);
     }

@@ -9,7 +9,7 @@ import {
   weaponAvailable,
   weaponPrice,
 } from "./economy";
-import { isKnife, weapons, weaponSlot } from "./physics";
+import { isKnife, knifeDefinitions, weapons, weaponSlot } from "./physics";
 
 describe("CS2 round economy", () => {
   it("starts competitive with a pistol-round budget and charges armor separately", () => {
@@ -55,8 +55,14 @@ describe("CS2 round economy", () => {
     expect(weaponPrice(27)).toBe(1400);
   });
   it("preserves saved IDs while classifying the complete firearm roster", () => {
-    expect(weapons).toHaveLength(37);
+    expect(weapons).toHaveLength(56);
     expect(weapons.filter((_, id) => !isKnife(id))).toHaveLength(34);
+    expect(weapons.filter((_, id) => isKnife(id))).toHaveLength(22);
+    for (const knife of knifeDefinitions) {
+      expect(weapons[knife.id].name).toBe(knife.name);
+      expect(weaponSlot(knife.id)).toBe(3);
+      expect(killReward(knife.id, "competitive")).toBe(1500);
+    }
     expect(weapons[4]!.name).toBe("Bayonet");
     expect(weapons[11]!.name).toBe("MP9");
     expect(weaponSlot(18)).toBe(2);

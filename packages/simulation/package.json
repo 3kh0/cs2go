@@ -6,6 +6,7 @@
   "exports": {
     "./physics": "./src/physics.ts",
     "./weapon-stats": "./src/data/weapon-stats.json",
+    "./knife-animations": "./src/data/knife-animations.json",
     "./movement": "./src/movement.ts",
     "./match": "./src/match.ts",
     "./*": "./src/*.ts",

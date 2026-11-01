@@ -17,7 +17,12 @@ import { selectedAgentId, acquireAgentAppearance } from "./agent-roster";
 import { setSoldierWeapon, disposeSoldier, resetSoldier, stepSoldierRagdoll } from "./soldier";
 import { showRoundBanner, hideRoundBanner } from "./round-banner";
 import { playerName, playerProfile } from "./player-profile";
-import { createWorldGun, disposeWorldGun, weaponDrawDuration } from "./weapons";
+import {
+  createWorldGun,
+  disposeWorldGun,
+  weaponDrawDuration,
+  weaponKnifeAttackDuration,
+} from "./weapons";
 import { grenadeData } from "./utility";
 import { nativeShotDuration, nativeSoundCues, nativeReloadPhases } from "./weapon-motion";
 
@@ -474,7 +479,8 @@ export class MultiplayerMatch {
         if (event.shooter === local.id && isKnife(local.weapon)) {
           g.knifeStab = event.stab;
           g.knifeAlternate = !g.knifeAlternate;
-          g.knifeDuration = event.stab ? 1 : 0.5;
+          g.knifeContact = event.hit;
+          g.knifeDuration = weaponKnifeAttackDuration(local.weapon, event.stab, g.knifeAlternate);
           g.knifeTime = g.knifeDuration;
           if (event.hit) {
             g.hit = 0.13;
@@ -496,6 +502,7 @@ export class MultiplayerMatch {
             at: g.animationTime,
             stab: event.stab,
             alternate: !previous?.alternate,
+            hit: event.hit,
           };
           peer.rig.shotTime = event.stab ? 1 : 0.5;
           g.soundscape.play(

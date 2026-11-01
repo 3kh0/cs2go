@@ -1,7 +1,11 @@
 import data from "./data/recoil.json";
+import { isKnife, weapons } from "./physics";
 
 /** Shipped CS2 inputs. RecoveryTime* describe accuracy recovery, not aim-punch decay. */
-export const recoilParameters = data.weapons;
+export const recoilParameters = weapons.map((_, id) => ({
+  ...data.weapons[isKnife(id) ? 4 : id],
+  id,
+}));
 
 /**
  * Reconstruction constants, NOT verified current CS2 convars. The October 2026

@@ -4,7 +4,7 @@ On October 30, 2026, the Windows Amp runner, in **Fast mode**, inspected install
 
 ## Shipped changes
 
-- [Buy poses](buy-poses.md): 81 native clips supply body, fingers and secondary weapon tracks, retargeted to the bundled agents. The first nonnegative sample is held while previewing. Molotov uses its actual secondary bottle/hand chain; all three knives retain their model grip frames.
+- [Buy poses](buy-poses.md): 81 native clips supply body, fingers and secondary weapon tracks, retargeted to the bundled agents. The first nonnegative sample is held while previewing. Molotov uses its actual secondary bottle/hand chain; the original three knives retain their model grip frames. The expanded [22-knife roster](knives.md) uses the same native generic buy pose with each model’s own grip frame.
 - Buy icons: 50 native equipment SVGs under `packages/assets/public/icons/buy/`, including all 34 firearms, six grenades and equipment aliases. The card reserves separate name, image and price rows, retains each native viewBox, and contains the silhouette without stretching it. Existing kill-feed artwork remains separate.
 
 Regenerate icons from the Windows decoded export with:

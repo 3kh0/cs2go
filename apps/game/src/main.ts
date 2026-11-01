@@ -43,7 +43,7 @@ ${buyMenuMarkup()}
 
 setupSkinMenu((index) => {
   game.knife = index;
-  if (game.active && !game.dead) game.equip(index);
+  if (game.active && !game.dead) game.buy(index);
   game.updateUI();
 });
 const game = new Game(loadProgress);

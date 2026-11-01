@@ -1,4 +1,6 @@
 import stats from "./data/weapon-stats.json";
+import { isKnife, knifeDefinitions } from "@cs2go/protocol";
+export { isKnife, knifeDefinitions } from "@cs2go/protocol";
 // CS2 console defaults, converted from Source inches to the scene's meters.
 // Source SDK movement order/formulas and pinned data references: README.md.
 export const SOURCE_UNIT = 0.0254;
@@ -95,7 +97,7 @@ export function accelerate(
   v.x += dx * amount;
   v.z += dz * amount;
 }
-// Saved inventory IDs 0-11 are stable; new firearms append to the catalog.
+// Saved inventory IDs 0–36 are stable; new entries append to the catalog.
 export const weaponIcons = [
   "ak-47",
   "m4a1-s",
@@ -135,9 +137,7 @@ export const weaponIcons = [
   "m249",
   "negev",
 ];
-export function isKnife(index: number) {
-  return index >= 4 && index <= 6;
-}
+weaponIcons.push(...knifeDefinitions.filter((knife) => knife.id >= 37).map((knife) => knife.icon));
 export function weaponSlot(index: number): 1 | 2 | 3 {
   return isKnife(index)
     ? 3
@@ -145,7 +145,19 @@ export function weaponSlot(index: number): 1 | 2 | 3 {
       ? 2
       : 1;
 }
-export const weapons = stats.weapons.map((weapon, index) => {
+// All cosmetic knife variants share weapon_knife's pinned vdata. Preserve the
+// original snapshot and append variants without renumbering guns or saved skins.
+const roster = [
+  ...stats.weapons,
+  ...knifeDefinitions
+    .filter((knife) => knife.id >= 37)
+    .map((knife) => ({
+      ...stats.weapons[4],
+      id: knife.id,
+      name: knife.name,
+    })),
+];
+export const weapons = roster.map((weapon, index) => {
   const knife = isKnife(index);
   const shell = index === 10 || index === 32 || index === 34;
   const speed = Array.isArray(weapon.maxSpeed)

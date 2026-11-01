@@ -4,7 +4,7 @@ import { createSoldier, disposeSoldier, type Soldier, type AgentTeam } from "./s
 import { weapons, isKnife } from "./physics";
 import { applyBuyPose, buyPoseToken, poseBuyProp, metricBuyGrip } from "./buy-poses";
 import { createNativeWorldGun } from "./weapon-motion";
-import { createWorldBayonet } from "./weapons";
+import { createWorldBayonet, disposeWorldGun } from "./weapons";
 import { createInspectsWorldKnife } from "./inspects-knife";
 import { bayonetWorldGrip } from "./knife-motion";
 import { createGrenadeModel } from "./grenade-models";
@@ -88,7 +88,8 @@ export class BuyPreview {
     if (this.soldier) disposeSoldier(this.soldier);
     for (const item of this.items.values()) {
       unregisterSkinModel(item);
-      if (item.userData.previewOwned)
+      if (item.userData.ownedWorldGun) disposeWorldGun(item);
+      else if (item.userData.previewOwned)
         item.traverse((object) => {
           if (!(object instanceof T.Mesh)) return;
           object.geometry.dispose();
@@ -168,9 +169,13 @@ export class BuyPreview {
           else if (index === 4) {
             model = createWorldBayonet();
             model.userData.buyGrip = bayonetWorldGrip(model).toArray();
-          } else model = createInspectsWorldKnife(index);
+          } else {
+            model = createInspectsWorldKnife(index);
+            if (token === "push")
+              model.userData.buyGrip = poseBuyProp(model, this.attachment.weaponBones).toArray();
+          }
           if (model) {
-            model.userData.previewOwned = !kind && !isKnife(index);
+            model.userData.previewOwned = !kind && (!isKnife(index) || index !== 4);
             this.items.set(itemKey, model);
             this.scene.add(model);
           }

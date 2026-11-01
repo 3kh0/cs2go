@@ -1,8 +1,11 @@
 import data from "./data/accuracy.json";
-import { SOURCE_UNIT } from "./physics";
+import { SOURCE_UNIT, isKnife, weapons } from "./physics";
 import { recoilParameters } from "./recoil";
 
-export const accuracyParameters = data.weapons;
+export const accuracyParameters = weapons.map((_, id) => ({
+  ...data.weapons[isKnife(id) ? 4 : id],
+  id,
+}));
 export const accuracyDefaults = data.defaults;
 
 /** Shipped recovery endpoints; historical Source truncates the recoil index. */

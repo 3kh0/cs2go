@@ -1,7 +1,7 @@
 import * as T from "three";
 import { fetchGzipped } from "./gltf";
 import type { AgentTeam, Soldier } from "./soldier";
-import { isKnife } from "./physics";
+import { isKnife, knifeDefinitions } from "./physics";
 
 type Pose = {
   clip: string;
@@ -56,6 +56,7 @@ export async function loadBuyPoses() {
   );
 }
 export function buyPoseToken(index: number) {
+  if (knifeDefinitions.find((knife) => knife.id === index)?.token === "knife_push") return "push";
   return isKnife(index) ? "knife" : tokens[index];
 }
 /** Static native buy poses own their fingers and attachment; world AI poses stay separate. */

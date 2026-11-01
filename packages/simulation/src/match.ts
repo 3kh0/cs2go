@@ -36,7 +36,7 @@ import { readLoadouts } from "./loadouts";
 import { WorldBallPhysics } from "./world-ball";
 import ballOrigin from "./data/world-ball-origin.json";
 import { movePlayer } from "./movement";
-import { isKnife, movement, weaponSlot, weapons } from "./physics";
+import { isKnife, knifeDefinitions, movement, weaponSlot, weapons } from "./physics";
 import {
   rulesFor,
   addMoney,
@@ -620,7 +620,10 @@ function buy(match: Match, player: PlayerState, input: Input) {
     player.reserve = 0;
     newAppearance(match, player, index);
     cancelWeaponActions(player, match.actions.get(player.id)!);
-    player.cooldown = Math.max(weapons[index].deploy, locks[4] ?? 0, locks[5] ?? 0, locks[6] ?? 0);
+    player.cooldown = Math.max(
+      weapons[index].deploy,
+      ...knifeDefinitions.map(({ id }) => locks[id] ?? 0),
+    );
     const configuration = match.configurations.get(player.id);
     if (configuration) configuration.knife = index;
     return;
@@ -811,7 +814,8 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
       match.receipts.get(player.id)!.weapons.delete(player.weapon);
       const shot = commitTrigger(player, action, input);
       locks[player.weapon] = player.cooldown;
-      if (isKnife(player.weapon)) for (const id of [4, 5, 6]) locks[id] = player.cooldown;
+      if (isKnife(player.weapon))
+        for (const { id } of knifeDefinitions) locks[id] = player.cooldown;
       events.push(...shoot(match, player, input.stab, shot.alternate, input.burst));
     }
     if (input.fire || input.alternate) match.shotsHeld.add(player.id);

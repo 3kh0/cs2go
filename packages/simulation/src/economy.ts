@@ -1,4 +1,4 @@
-import stats from "./data/weapon-stats.json";
+import { weapons } from "./physics";
 export type MatchMode = "casual" | "competitive";
 export type Team = "ct" | "t";
 export type RoundReason = "elimination" | "bomb" | "defuse" | "timeout";
@@ -42,13 +42,13 @@ export function rulesFor(mode: MatchMode) {
   return rules[mode];
 }
 export function weaponPrice(id: number) {
-  return stats.weapons[id]?.price ?? Infinity;
+  return weapons[id]?.price ?? Infinity;
 }
 export function killReward(id: number, mode: MatchMode) {
-  return (stats.weapons[id]?.killAward ?? 300) * (mode === "casual" ? 0.5 : 1);
+  return (weapons[id]?.killAward ?? 300) * (mode === "casual" ? 0.5 : 1);
 }
 export function weaponAvailable(id: number, team: Team) {
-  const weapon = stats.weapons[id];
+  const weapon = weapons[id];
   return !!weapon && (weapon.team === "both" || weapon.team === team);
 }
 /** Helmet purchase is the assault suit: upgrades a full vest for $350;

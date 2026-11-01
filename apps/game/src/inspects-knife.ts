@@ -3,37 +3,69 @@ import * as T from "three";
 import { clone } from "three/addons/utils/SkeletonUtils.js";
 import { loadModel } from "./gltf";
 import { viewHandsTemplate, type KnifePose } from "./knife-motion";
-import { WEAPON_ANIMATION_RATE } from "./physics";
+import { knifeDefinitions } from "./physics";
+import { KNIFE_ANIMATION_RATE, knifeTiming, restoreKnifeTiming } from "./knife-timing";
 import { registerSkinModel } from "./skins";
 
-const templates: { scene: T.Group; animations: T.AnimationClip[] }[] = [];
+type Template = { scene: T.Group; clips: Map<string, T.AnimationClip> };
+const templates = new Map<number, Template>();
+function motionName(name: string) {
+  // Defaults call their first idle "idle", while other knives call it "idle1".
+  const short = name.split("/").at(-1)!;
+  const motion =
+    /^(idle\d*|draw\d*|lookat\d+(?:_draw)?|(?:light|heavy)_(?:hit|miss)\d+)(?:_|$)/.exec(
+      short,
+    )?.[1];
+  return motion === "idle" ? "idle1" : motion;
+}
 export async function loadInspectsKnives(reflections: T.Texture) {
   await Promise.all(
-    ["butterfly", "karambit"].map(async (name, i) => {
-      const asset = await loadModel(`/models/animations/knives/${name}.glb`);
-      asset.scene.traverse((o) => {
-        if (o instanceof T.Mesh && o.material instanceof T.MeshStandardMaterial) {
-          o.material.envMap = reflections;
-          o.material.envMapIntensity = 1.2;
+    knifeDefinitions
+      .filter(({ id }) => id !== 4)
+      .map(async ({ icon, id }) => {
+        const asset = await loadModel(`/models/animations/knives/${icon}.glb`);
+        asset.scene.traverse((o) => {
+          if (o instanceof T.Mesh && o.material instanceof T.MeshStandardMaterial) {
+            o.material.envMap = reflections;
+            o.material.envMapIntensity = 1.2;
+          }
+        });
+        const clips = new Map<string, T.AnimationClip>();
+        for (const clip of asset.animations) {
+          const name = clip.name.includes("/") && motionName(clip.name);
+          if (name) clips.set(name, restoreKnifeTiming(clip, knifeTiming(id, name)));
         }
-      });
-      templates[i] = asset;
-    }),
+        for (const name of ["idle1", "draw", "light_miss1", "heavy_miss1"])
+          if (!clips.has(name)) throw new Error(`Missing ${icon} knife motion: ${name}`);
+        if (![...clips.keys()].some((name) => name.startsWith("lookat")))
+          throw new Error(`Missing ${icon} knife inspection`);
+        templates.set(id, { scene: asset.scene, clips });
+      }),
   );
 }
 export function sourceKnifeDrawDuration(index: number) {
-  return (
-    (templates[index - 5]?.animations.find((c) => c.name.includes("/draw_"))?.duration ?? 1) /
-    WEAPON_ANIMATION_RATE
-  );
+  return (templates.get(index)?.clips.get("draw")?.duration ?? 1) / KNIFE_ANIMATION_RATE;
 }
 export function sourceKnifeInspectDuration(index: number, variant: number) {
-  const clips = templates[index - 5].animations.filter((c) => c.name.includes("/lookat"));
-  return clips[variant % clips.length].duration / WEAPON_ANIMATION_RATE;
+  const clips = [...templates.get(index)!.clips]
+    .filter(([name]) => name.startsWith("lookat"))
+    .map(([, clip]) => clip);
+  return clips[variant % clips.length].duration / KNIFE_ANIMATION_RATE;
+}
+export function sourceKnifeAttackDuration(index: number, stab: boolean, alternate: boolean) {
+  const clips = templates.get(index)!.clips;
+  const prefix = stab ? "heavy" : "light";
+  const variant = stab ? 1 : alternate ? 2 : 1;
+  return (
+    Math.max(
+      clips.get(`${prefix}_miss${variant}`)!.duration,
+      clips.get(`${prefix}_hit${variant}`)?.duration ?? 0,
+    ) / KNIFE_ANIMATION_RATE
+  );
 }
 const rigs = new WeakMap<T.Group, ReturnType<typeof makeRig>>();
 function makeRig(index: number, group: T.Group) {
-  const template = templates[index - 5];
+  const template = templates.get(index)!;
   const source = clone(template.scene) as T.Group;
   const model = clone(template.scene) as T.Group;
   model.name = "weapon-model";
@@ -57,7 +89,8 @@ function makeRig(index: number, group: T.Group) {
       // Each viewmodel owns its materials; painting must not mutate templates.
       const copy = (material: T.Material) => {
         const own = material.clone();
-        own.name = index === 5 ? "weapon_knife_butterfly" : "weapon_knife_karambit";
+        if (index === 5 || index === 6)
+          own.name = index === 5 ? "weapon_knife_butterfly" : "weapon_knife_karambit";
         return own;
       };
       target.material = Array.isArray(target.material)
@@ -81,20 +114,12 @@ function makeRig(index: number, group: T.Group) {
   const modelBasis = source.getObjectByName("weapon")!.matrixWorld.clone().invert();
   const mixer = new T.AnimationMixer(source);
   const actions = new Map(
-    template.animations
-      .filter((c) => c.name.includes("/"))
-      .map((c) => {
-        const action = mixer.clipAction(c);
-        action.setLoop(T.LoopOnce, 1);
-        action.clampWhenFinished = true;
-        return [
-          c.name
-            .split("/")
-            .at(-1)!
-            .replace(/_(butterfly|karambit)$/, ""),
-          action,
-        ] as const;
-      }),
+    [...template.clips].map(([name, c]) => {
+      const action = mixer.clipAction(c);
+      action.setLoop(T.LoopOnce, 1);
+      action.clampWhenFinished = true;
+      return [name, action] as const;
+    }),
   );
   return {
     source,
@@ -139,12 +164,14 @@ export function animateInspectsKnife(
     progress = pose.inspect ?? 0;
   } else {
     const a = rig.actions.get("idle1")!.getClip().duration,
-      b = rig.actions.get("idle2")!.getClip().duration,
-      t = ((pose.time ?? 0) * WEAPON_ANIMATION_RATE) % (a + b);
+      b = rig.actions.get("idle2")?.getClip().duration ?? 0,
+      t = ((pose.time ?? 0) * KNIFE_ANIMATION_RATE) % (a + b);
     name = t < a ? "idle1" : "idle2";
     progress = t < a ? t / a : (t - a) / b;
   }
   const action = rig.actions.get(name)!;
+  if (pose.knifeActive && pose.knifeElapsed !== undefined)
+    progress = (pose.knifeElapsed * KNIFE_ANIMATION_RATE) / action.getClip().duration;
   if (rig.current !== name) {
     rig.mixer.stopAllAction();
     action.reset().play();
@@ -182,17 +209,18 @@ export function animateInspectsKnife(
 
 /** A frozen native knife model for the menu; it never includes the view arms. */
 export function createInspectsWorldKnife(index: number) {
-  const template = templates[index - 5];
+  const template = templates.get(index)!;
   const model = clone(template.scene) as T.Group;
   model.traverse((object) => {
     if (object instanceof T.Mesh) {
       object.frustumCulled = false;
+      object.geometry = object.geometry.clone();
       object.material = Array.isArray(object.material)
         ? object.material.map((m) => m.clone())
         : object.material.clone();
     }
   });
-  const idle = template.animations.find((clip) => clip.name.includes("/idle1_"))!;
+  const idle = template.clips.get("idle1")!;
   new T.AnimationMixer(model).clipAction(idle).play().getMixer().update(0);
   model.updateMatrixWorld(true);
   const position = new T.Vector3(),
@@ -201,6 +229,7 @@ export function createInspectsWorldKnife(index: number) {
   model.getObjectByName("weapon")!.matrixWorld.decompose(position, rotation, scale);
   const group = new T.Group();
   group.add(model);
+  group.userData.ownedWorldGun = true;
   group.userData.buyGrip = new T.Matrix4()
     .compose(position, rotation, new T.Vector3(1, 1, 1))
     .toArray();

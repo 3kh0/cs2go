@@ -76,7 +76,7 @@ test("native draw durations, revolver trigger cancellation and knife mechanical 
     };
   });
   expect(result.revolverDraw).toBeCloseTo(1.134291648864746 / 0.9, 3);
-  expect(result.butterflyDraw).toBeCloseTo(1 / 0.9, 3);
+  expect(result.butterflyDraw).toBeCloseTo(1, 3);
   for (const key of [
     "drawBlocks",
     "cocked",

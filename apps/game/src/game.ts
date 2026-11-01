@@ -80,6 +80,7 @@ import {
   targetPriority,
 } from "./bot-tactics";
 import { sourceKnifeInspectDuration } from "./inspects-knife";
+import { knifeInspectBlockDuration } from "./knife-timing";
 import {
   nativeSuppressor,
   nativeShotDuration,
@@ -132,6 +133,7 @@ import {
   loadWeaponModels,
   animateGun,
   weaponDrawDuration,
+  weaponKnifeAttackDuration,
   VIEWMODEL_FOV,
 } from "./weapons";
 import {
@@ -877,13 +879,24 @@ export class Game {
         !this.reload &&
         !this.boltTime &&
         !this.shotTime &&
-        !this.knifeTime &&
+        (!this.knifeTime ||
+          (isKnife(this.selected) &&
+            this.cooldown <= 0 &&
+            !this.knifePending &&
+            this.knifeDuration - this.knifeTime >=
+              knifeInspectBlockDuration(
+                this.selected,
+                this.knifeStab,
+                this.knifeAlternate,
+                this.knifeContact,
+              ))) &&
         (!this.inspectTime || this.inspectRewinding) &&
         (!this.drawTime ||
           (isKnife(this.selected) && this.drawTime > weaponDrawDuration(this.selected) * 0.85))
       ) {
         // During a rewind, F changes direction at the current pose.
         if (!this.inspectTime) {
+          this.knifeTime = 0;
           this.inspectVariant = (this.inspectVariant + 1) % 3;
           this.inspectDraw = this.drawTime > 0;
           this.inspectTime = this.inspectDuration();
@@ -1187,7 +1200,7 @@ export class Game {
     setAssetCacheMatchActive(false);
   }
   inspectDuration() {
-    return this.selected === 5 || this.selected === 6
+    return isKnife(this.selected) && this.selected !== 4
       ? sourceKnifeInspectDuration(this.selected, this.inspectVariant)
       : this.selected === 4
         ? knifeInspectDuration(this.inspectDraw)
@@ -1711,7 +1724,7 @@ export class Game {
     this.knifeContact = false;
     this.knifeFirstSwing = this.animationTime - this.knifeLastAttack > 0.9;
     this.knifeLastAttack = this.animationTime;
-    this.knifeDuration = stab ? 1 : 0.5;
+    this.knifeDuration = weaponKnifeAttackDuration(this.selected, stab, this.knifeAlternate);
     this.knifeTime = this.knifeDuration;
     this.knifePending = true;
     this.cooldown = stab ? 1 : 0.4;
@@ -4876,6 +4889,7 @@ export class Game {
       bob,
       sway,
       knife: this.knifeTime > 0 ? 1 - this.knifeTime / this.knifeDuration : 0,
+      knifeElapsed: this.knifeDuration - this.knifeTime,
       stab: this.knifeStab,
       knifeActive: this.knifeTime > 0,
       knifeContact: this.knifeContact,
@@ -4896,10 +4910,12 @@ export class Game {
       return;
     }
     const melee = bot.group.userData.networkMelee as
-      | { at: number; stab: boolean; alternate: boolean }
+      | { at: number; stab: boolean; alternate: boolean; hit: boolean }
       | undefined;
     const meleeTime = melee ? this.animationTime - melee.at : Infinity;
-    const meleeDuration = melee?.stab ? 1 : 0.5;
+    const meleeDuration = isKnife(index)
+      ? weaponKnifeAttackDuration(index, !!melee?.stab, !!melee?.alternate)
+      : 1;
     const gun = this.viewGun(index);
     bindWeaponInstance(gun, bot.rig.weaponInstance);
     const elapsed = this.animationTime - this.spectatorShotAt;
@@ -4925,6 +4941,8 @@ export class Game {
       bob: Math.sin(bot.rig.time * 8) * bot.speed * 0.0017,
       sway: 0,
       knife: Math.min(1, meleeTime / meleeDuration),
+      knifeElapsed: meleeTime,
+      knifeContact: melee?.hit,
       knifeActive: !!this.network && isKnife(index) && meleeTime < meleeDuration,
       stab: melee?.stab,
       alternate: melee?.alternate,

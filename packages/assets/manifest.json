@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "e3731f2f4951b57c7e5db3e3eb9c5fae63e96c84b80f2c633aa6b41491ccd55b",
+  "release": "4dba48c046a110542474367704e16f15f1788426832f2e9a53f3a236d6ff3dca",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -3309,6 +3309,10 @@
       "sha256": "82cc1d266166e2d376fdc54078cd2b13d139ebbad0e841794681eb1ae5c4adf2",
       "bytes": 851
     },
+    "icons/bowie.png": {
+      "sha256": "3d6deea1674795f570bbf2bc0fc1a2a865bf1b1468b28560559dd9f3c14c7b19",
+      "bytes": 3360
+    },
     "icons/butterfly.png": {
       "sha256": "9007a5c0798e40a07c94bff7f7a55f2e8fa32ea5409caed987531f3749f47a63",
       "bytes": 672
@@ -3823,6 +3827,10 @@
         "bytes": 2045
       }
     },
+    "icons/classic.png": {
+      "sha256": "5bd9c965f4052c6657dbab8b440cb0d0512990de0c245c079eea080de3c03bc3",
+      "bytes": 2920
+    },
     "icons/cz75a.png": {
       "sha256": "c0b06133b3d6699d98d708abbd905dc9d5e4b3cd461c40013c1ed901127faa52",
       "bytes": 714
@@ -3845,6 +3853,10 @@
         "bytes": 1598
       }
     },
+    "icons/falchion.png": {
+      "sha256": "48a1ac45745b726b7591f785baa03abba479168467b33674342cbe817b7b4392",
+      "bytes": 3389
+    },
     "icons/famas.png": {
       "sha256": "7b21f021cb81255a742929e3f74adbc749cd2a3b65a22014be54144db93f7997",
       "bytes": 796
@@ -3852,6 +3864,16 @@
     "icons/fiveseven.png": {
       "sha256": "a2f51cde7f1f66fd139e3ef422aa8dcb866e5c49a9a8fba095b6cb9d923c9464",
       "bytes": 504
+    },
+    "icons/flip.png": {
+      "sha256": "8694267af64cce9f93c62d283965c1000707a254aa6c8df65a25fa16cf81f8c1",
+      "bytes": 3110,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "cab57eebc8e69afd8d4a9c329204c9b02fe5e569252d8296505774d4eafa2a79",
+        "bytes": 3107
+      }
     },
     "icons/g3sg1.png": {
       "sha256": "ba7269451796757f8d35e9486b79655587f198b56aa32db5d2ce909b3fc204fe",
@@ -3865,6 +3887,10 @@
       "sha256": "2e7f54befa1bd4ab3c826103ec4dc79ae9dd6e5e25946c5b638f657153fb1efa",
       "bytes": 3409
     },
+    "icons/gut.png": {
+      "sha256": "00c81a650a1039bc5a716ba447cd758439e3f198fbd9ce5fe64d9c04221e2541",
+      "bytes": 3396
+    },
     "icons/headshot.png": {
       "sha256": "3b7736630b66bd6d2e227e260455451cc0364ebe09f54e4e2554d3bd3a8b0d3a",
       "bytes": 1307
@@ -3872,6 +3898,10 @@
     "icons/hkp2000.png": {
       "sha256": "408501558b8ba1968eed31df0628b38574dc1a778afbff6c8170f50dbb30292e",
       "bytes": 3617
+    },
+    "icons/huntsman.png": {
+      "sha256": "1cba4adf823a0077b760c4ca76d6e796ba8fdda35dd5f3747342da5aa70408c5",
+      "bytes": 3958
     },
     "icons/karambit.png": {
       "sha256": "2a758f9d2d7a571682316ca70248bca956cc08e2984b9bab053556822cfbc818",
@@ -3882,6 +3912,18 @@
         "sha256": "da3fd0ef40e8962e2d5f482f485901f087df0bc5f4875a095bcf52669f117833",
         "bytes": 1355
       }
+    },
+    "icons/knife-ct.png": {
+      "sha256": "706a0291d75c777dde3ad8deee4b2b22d1ce4feef586ec4c3b7d20b3c75c6f09",
+      "bytes": 3069
+    },
+    "icons/knife-t.png": {
+      "sha256": "6477f004b9a794865ac47bbadcaf5373bfa9e170bbd653fea816f9b1cb05d114",
+      "bytes": 2948
+    },
+    "icons/kukri.png": {
+      "sha256": "8581da8b3ddac4b9c2bc972e40a685b40c5da2ed7d7534700007d4395957fb1c",
+      "bytes": 4109
     },
     "icons/m249.png": {
       "sha256": "957dfbf22488e766101bc8d84b672e0052742c00282b3a59523ae1177b5a9507",
@@ -3894,6 +3936,16 @@
     "icons/m4a4.png": {
       "sha256": "a49074f514395a95f400e7455d6f2e882f0ba947a58c784d67f4b7c3978cc8bb",
       "bytes": 4170
+    },
+    "icons/m9-bayonet.png": {
+      "sha256": "21db3648671bd8761c6758b33a216c9a1cd8bad20dcc4b4909d038b5448eea8b",
+      "bytes": 2976,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "507f9d757bb2ed60fa634ab2e0a7b1663e71c4680a4fde03912691a8a36eb7ba",
+        "bytes": 2924
+      }
     },
     "icons/mac10.png": {
       "sha256": "ff963db9221a0a57c9b30d66f8f27461fba0bf96d8545d191d5ba2e6a21b1970",
@@ -3915,9 +3967,17 @@
       "sha256": "1fa92aceb6d4d5df8a0ef345545a539b74ec74607f69a21a1185b2572a1758c3",
       "bytes": 736
     },
+    "icons/navaja.png": {
+      "sha256": "0d97473966d6fa8a1669b674c3e893f87cd90cf4f2d3a1d718263d844ee1094f",
+      "bytes": 2817
+    },
     "icons/negev.png": {
       "sha256": "64bb9c66ee0fd052c54de7de72d4eaf4921608677c5251c9884cd5b832a1f1b4",
       "bytes": 861
+    },
+    "icons/nomad.png": {
+      "sha256": "eaf2471a0fe0d86738bf7cffe869608f8ebbd163c209c208e074c2b903228f9d",
+      "bytes": 3167
     },
     "icons/noscope.png": {
       "sha256": "735b17f1444deb32f9e0cb115a9d771d3e851316145519a1d26dd233a4993d10",
@@ -3935,6 +3995,10 @@
       "sha256": "e1bdaf10afbf569aa218c2dda25ce125411afdb99668e2c30f47eeba654207e4",
       "bytes": 760
     },
+    "icons/paracord.png": {
+      "sha256": "d3a98bb94f16f41731019d933ea6d6c40802d6b9c3c01734c6eeff3555210efb",
+      "bytes": 2480
+    },
     "icons/revolver.png": {
       "sha256": "1cfa4ae41c54d10c67f85c98d06969e3a8d851f4eaf496fb6d7870410b3a2fb9",
       "bytes": 620
@@ -3951,9 +4015,41 @@
       "sha256": "f0e0180ab3004e8a1e1d560c27879db29214ce923a73a8223b4c93f5b50d0336",
       "bytes": 931
     },
+    "icons/shadow-daggers.png": {
+      "sha256": "aa261a41c65b7eae78f90d2a0fcc1ce72dc7a7706acac4f89c4a64ae0b9f13be",
+      "bytes": 12270,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "08bd3917f341aebee91f5135d1afafcd8b2345c87be0809606c2f916a2693e09",
+        "bytes": 12247
+      }
+    },
+    "icons/skeleton.png": {
+      "sha256": "12a61db9a3088a9153a7ad5c56fe179f0b8f8033a3c72d5d7ab9e8f639df19f8",
+      "bytes": 3565
+    },
     "icons/ssg08.png": {
       "sha256": "7bf936d20774649618d84ee7aac16ab36fb868d370ee1736a8cc78c3227e1285",
       "bytes": 839
+    },
+    "icons/stiletto.png": {
+      "sha256": "135bea1e022cfb07c437da651047389f33bdb0350e6832bf28b425e9b49b1a15",
+      "bytes": 1813
+    },
+    "icons/survival.png": {
+      "sha256": "7689d01ce983ffe5a20784e7a4947bb21d8dd748b6ab24a4b5e51d1a8c89c69d",
+      "bytes": 3319
+    },
+    "icons/talon.png": {
+      "sha256": "669277fd1abda898daf4acf34cd715a29243b03c7d4f02646d7c2b7949cb5921",
+      "bytes": 6957,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "859c9656e41b8472934c6d63e9af524c4dbfe3c43d4bdac2a7a64ff5a0f9bd12",
+        "bytes": 6929
+      }
     },
     "icons/team-ct.png": {
       "sha256": "652c44ac69d7deb530a804824697cdb23502cab770cd3fec3e4485ff707c5806",
@@ -3982,6 +4078,10 @@
     "icons/ump45.png": {
       "sha256": "dceb2fe0439dfb2d9449c775f7a85a1da207f11a128879280b370bb298eac2bf",
       "bytes": 1034
+    },
+    "icons/ursus.png": {
+      "sha256": "0f2d643f6f3ad5a7c9604a906223495d05ce961fbe857901181bb3898ede4170",
+      "bytes": 2832
     },
     "icons/usp-s.png": {
       "sha256": "b5723d1af974d16ed5d360bfc5d18999f230e207487ce0bfd70de2a4e50b5ff8",
@@ -4896,6 +4996,19 @@
         "bytes": 881
       }
     },
+    "models/animations/knives/bowie.glb.gz": {
+      "sha256": "b296086cfc1f78681d291ce0375bae2df3b0452e16d96a3f9e818e6f869056a0",
+      "bytes": 2125857,
+      "decodedSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb",
+      "input": "models/animations/knives/bowie.glb",
+      "inputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "5e144cdc4295049a7512444b80bd09477eab0f38af92583971f7e4aa51c3e0c4",
+        "bytes": 2114584
+      }
+    },
     "models/animations/knives/butterfly.glb.gz": {
       "sha256": "364e02b87139ad9afed3ec9b3caa38f04cf5b3515a362f7931cf28a933d7dbab",
       "bytes": 2876940,
@@ -4909,12 +5022,126 @@
         "bytes": 2867674
       }
     },
+    "models/animations/knives/classic.glb.gz": {
+      "sha256": "2742b0c051a5c0c4b3225c47b91252ff0c02b884544ad3337ce37469b57651cf",
+      "bytes": 2055575,
+      "decodedSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0",
+      "input": "models/animations/knives/classic.glb",
+      "inputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0"
+    },
+    "models/animations/knives/expanded-source.json": {
+      "sha256": "df3a6e304cbec189d7ce5be382b22c9c5c2ab74ff90054aa7cefe2bc0679418e",
+      "bytes": 47578,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "79d2b98c99480eb247a72e6ecd26be3f6f33d40ab9a0afbdeb3e206bf7fe8778",
+        "bytes": 7384
+      }
+    },
+    "models/animations/knives/falchion.glb.gz": {
+      "sha256": "567d4586d71ce360f694c0d6afae767ff8860d87158dfc45088328c67afd3215",
+      "bytes": 1417575,
+      "decodedSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b",
+      "input": "models/animations/knives/falchion.glb",
+      "inputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b"
+    },
+    "models/animations/knives/flip.glb.gz": {
+      "sha256": "c1c7e6eb4d0f36f02ce249e29f55af480e84d83978cb96c9b5e96b411fc3b5cc",
+      "bytes": 1572864,
+      "decodedSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d",
+      "input": "models/animations/knives/flip.glb",
+      "inputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d"
+    },
+    "models/animations/knives/gut.glb.gz": {
+      "sha256": "387088f951ca2f25818393698fa13119d773fa7b548f68db0e39a533753afb4d",
+      "bytes": 2307302,
+      "decodedSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190",
+      "input": "models/animations/knives/gut.glb",
+      "inputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190"
+    },
+    "models/animations/knives/huntsman.glb.gz": {
+      "sha256": "141ddcd8eddf0b716c0b363a9e1c239b24e99bb489201997b2b75974e185e3ce",
+      "bytes": 2384618,
+      "decodedSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b",
+      "input": "models/animations/knives/huntsman.glb",
+      "inputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "0feb8e15ff347994006d35d658b1ffed65bc301ca6fd37fff8df31cffbce3d78",
+        "bytes": 2375076
+      }
+    },
     "models/animations/knives/karambit.glb.gz": {
       "sha256": "f03e74a92de4c161464dd016d47d66295d9b9d0f4b89d6f85f6af1553f35baa9",
       "bytes": 3388993,
       "decodedSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e",
       "input": "models/animations/knives/karambit.glb",
       "inputSha256": "2f16cd7b31d72e0b7492f2bf0cf89696718b0f49ae98071e4c555caee9354c1e"
+    },
+    "models/animations/knives/knife-ct.glb.gz": {
+      "sha256": "e277d1916183e39eb17f365b2b9e89292c5d0c37796d5df52108f2665669cb7b",
+      "bytes": 1822118,
+      "decodedSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874",
+      "input": "models/animations/knives/knife-ct.glb",
+      "inputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874"
+    },
+    "models/animations/knives/knife-t.glb.gz": {
+      "sha256": "64ecb1368011559dd0ea9c17cc574b5526a5ed180eae91c0412c2a5a0d5bcf37",
+      "bytes": 2024031,
+      "decodedSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399",
+      "input": "models/animations/knives/knife-t.glb",
+      "inputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399"
+    },
+    "models/animations/knives/kukri.glb.gz": {
+      "sha256": "38467fa1460bab377268b0df3a15359bd7f1291e8e12ed696b09aa5f85dca9c4",
+      "bytes": 1481420,
+      "decodedSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1",
+      "input": "models/animations/knives/kukri.glb",
+      "inputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1"
+    },
+    "models/animations/knives/m9-bayonet.glb.gz": {
+      "sha256": "6b86d324cb9b8271701961a2917e04d39b5c2ddadea98dd7c8478e653d7295f5",
+      "bytes": 2081888,
+      "decodedSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773",
+      "input": "models/animations/knives/m9-bayonet.glb",
+      "inputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773"
+    },
+    "models/animations/knives/navaja.glb.gz": {
+      "sha256": "b72567518d7433b3ea6a1a3ab9ee42b2d55a9c12600e00428c682966a08503b0",
+      "bytes": 2189847,
+      "decodedSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72",
+      "input": "models/animations/knives/navaja.glb",
+      "inputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72"
+    },
+    "models/animations/knives/nomad.glb.gz": {
+      "sha256": "6120a860ac57685157af4b24c99b721f0fec69dace78db07424106ffb6bf00f8",
+      "bytes": 2411578,
+      "decodedSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0",
+      "input": "models/animations/knives/nomad.glb",
+      "inputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0"
+    },
+    "models/animations/knives/paracord.glb.gz": {
+      "sha256": "48dbc3c6378f5e92cdc27d26445fbd9d1bb5e65ae94630de52a35c59c7516c42",
+      "bytes": 3554505,
+      "decodedSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c",
+      "input": "models/animations/knives/paracord.glb",
+      "inputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c"
+    },
+    "models/animations/knives/shadow-daggers.glb.gz": {
+      "sha256": "1fcdccd9cc8b5bfb6e7b047900ab1f7eaa9cb37f972c84b79132bf04b7b86ff8",
+      "bytes": 1418194,
+      "decodedSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b",
+      "input": "models/animations/knives/shadow-daggers.glb",
+      "inputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b"
+    },
+    "models/animations/knives/skeleton.glb.gz": {
+      "sha256": "722d390fd0cef73161c01251bbccfc2be199855496ad0ca19ede676a655b3e4e",
+      "bytes": 1560390,
+      "decodedSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa",
+      "input": "models/animations/knives/skeleton.glb",
+      "inputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa"
     },
     "models/animations/knives/source.json": {
       "sha256": "520c70b4563bbaa6aad9396a1f96e024b20725c86ed97cc90cbf3755d929a06c",
@@ -4925,6 +5152,34 @@
         "sha256": "8baad02db0390d2881b5f28189c8407aa317c7bdcc2e691536ef0dcc4c1b41ad",
         "bytes": 581
       }
+    },
+    "models/animations/knives/stiletto.glb.gz": {
+      "sha256": "0357feadcb88e6421feb9eae56237ec6fa04c5b04d93a6edba2fb0c75330f0a4",
+      "bytes": 2280209,
+      "decodedSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f",
+      "input": "models/animations/knives/stiletto.glb",
+      "inputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f"
+    },
+    "models/animations/knives/survival.glb.gz": {
+      "sha256": "2eab31f576715ceec37eb5771cfe907c9915ca9ea3d8ea9af7879fdc2fd4e5cc",
+      "bytes": 1550631,
+      "decodedSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053",
+      "input": "models/animations/knives/survival.glb",
+      "inputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053"
+    },
+    "models/animations/knives/talon.glb.gz": {
+      "sha256": "26dcc068081ce04e6f970b527a732c255d35eadb928d6dbcbd1fb942ddc07b97",
+      "bytes": 1716127,
+      "decodedSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de",
+      "input": "models/animations/knives/talon.glb",
+      "inputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de"
+    },
+    "models/animations/knives/ursus.glb.gz": {
+      "sha256": "fc30ad8d2b6b75ea2fd27b3344e2bc03d421c40c46fcbc6e59b5ff9dc6c1762b",
+      "bytes": 1689433,
+      "decodedSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855",
+      "input": "models/animations/knives/ursus.glb",
+      "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855"
     },
     "models/awp.glb.gz": {
       "sha256": "e1dcd1266cb83bfab51bbbd77e5b9e46f4dbbbde71a75040a5610c371834c6c3",

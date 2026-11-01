@@ -396,7 +396,8 @@ test("competitive purchases, armor parity, friendly fire, round economy, kits an
       };
     }),
   ).toEqual({ money: 300, weapon: 13, ammo: 4, reserve: 13 });
-  await expect(page.locator("[data-weapon]")).toHaveCount(37);
+  // Knives live in Inventory; the buy screen contains the 34 firearms only.
+  await expect(page.locator("[data-weapon]")).toHaveCount(34);
   expect(
     await page
       .locator("[data-weapon] img")

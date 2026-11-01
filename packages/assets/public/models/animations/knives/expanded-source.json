@@ -1,0 +1,987 @@
+{
+  "source": "Valve models and animation clips served by CS2 Inspects",
+  "reference": "https://cs2inspects.com/3d-viewer",
+  "generator": "python3 scripts/import-all-knives.py",
+  "processing": "Original meshes, skeletons, inverse binds and animation channels retained. Vanilla color and AO/roughness/metalness repacked as lossless WebP at most 1024px. Non-neutral octahedral normals decoded to glTF tangent-space XYZ; neutral normal maps omitted. Silhouettes projected from original mesh triangles.",
+  "limitations": "Viewer exports are hash-pinned, not asserted to match the current installed game build. Native animation-graph variant probabilities and rare draw transitions are not reproduced. Playback restores separately audited native clip intervals at base speed 1.0; melee impact/audio phases remain reconstructed. Only vanilla finishes are added for the new knives.",
+  "knives": [
+    {
+      "id": 37,
+      "item": 42,
+      "name": "CT Knife",
+      "icon": "knife-ct",
+      "token": "knife",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_default_ct/weapon_knife_default_ct.glb",
+      "material": "weapon_knife_default_ct",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/_default_knife/idle_knife",
+        "animation/anims/viewmodel/knife/_default_knife/idle2_knife",
+        "animation/anims/viewmodel/knife/_default_knife/draw_knife",
+        "animation/anims/viewmodel/knife/_default_knife/light_hit1_knife",
+        "animation/anims/viewmodel/knife/_default_knife/light_hit2_knife",
+        "animation/anims/viewmodel/knife/_default_knife/light_miss1_knife",
+        "animation/anims/viewmodel/knife/_default_knife/light_miss2_knife",
+        "animation/anims/viewmodel/knife/_default_knife/heavy_hit1_knife",
+        "animation/anims/viewmodel/knife/_default_knife/heavy_miss1_knife",
+        "animation/anims/viewmodel/knife/_default_knife/lookat01_knife"
+      ],
+      "outputSha256": "59fbd44d81526ec15aac374aee2b64bfb3985384502d28bf8509b15f0dabb874",
+      "bytes": 2447900
+    },
+    {
+      "id": 38,
+      "item": 59,
+      "name": "T Knife",
+      "icon": "knife-t",
+      "token": "knife_t",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_default_t/weapon_knife_default_t.glb",
+      "material": "weapon_knife_default_t",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_default_t/idle_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/idle2_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/draw_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/light_hit1_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/light_hit2_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/light_miss1_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/light_miss2_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/heavy_hit1_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/heavy_miss1_default_t",
+        "animation/anims/viewmodel/knife/knife_default_t/lookat01_default_t"
+      ],
+      "outputSha256": "94b01f1dd776f1bb4fd9ee20f322534e6851b108080dea8c35b20256d7f98399",
+      "bytes": 2503900
+    },
+    {
+      "id": 39,
+      "item": 503,
+      "name": "Classic Knife",
+      "icon": "classic",
+      "token": "knife_css",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_css/weapon_knife_css.glb",
+      "material": "weapon_knife_css",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_css/idle1_css",
+        "animation/anims/viewmodel/knife/knife_css/idle2_css",
+        "animation/anims/viewmodel/knife/knife_css/draw_css",
+        "animation/anims/viewmodel/knife/knife_css/light_hit1_css",
+        "animation/anims/viewmodel/knife/knife_css/light_hit2_css",
+        "animation/anims/viewmodel/knife/knife_css/light_miss1_css",
+        "animation/anims/viewmodel/knife/knife_css/light_miss2_css",
+        "animation/anims/viewmodel/knife/knife_css/heavy_hit1_css",
+        "animation/anims/viewmodel/knife/knife_css/heavy_miss1_css",
+        "animation/anims/viewmodel/knife/knife_css/lookat01_css",
+        "animation/anims/viewmodel/knife/knife_css/lookat02_css"
+      ],
+      "outputSha256": "4b0d9835cdc60f8acc638543531714f37b83e3999c0aecf86d20d66da313f9d0",
+      "bytes": 2590116
+    },
+    {
+      "id": 40,
+      "item": 505,
+      "name": "Flip Knife",
+      "icon": "flip",
+      "token": "knife_flip",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_flip/weapon_knife_flip.glb",
+      "material": "weapon_knife_flip",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_flip/idle1_flip",
+        "animation/anims/viewmodel/knife/knife_flip/idle2_flip",
+        "animation/anims/viewmodel/knife/knife_flip/draw_flip",
+        "animation/anims/viewmodel/knife/knife_flip/light_hit1_flip",
+        "animation/anims/viewmodel/knife/knife_flip/light_hit2_flip",
+        "animation/anims/viewmodel/knife/knife_flip/light_miss1_flip",
+        "animation/anims/viewmodel/knife/knife_flip/light_miss2_flip",
+        "animation/anims/viewmodel/knife/knife_flip/heavy_hit1_flip",
+        "animation/anims/viewmodel/knife/knife_flip/heavy_miss1_flip",
+        "animation/anims/viewmodel/knife/knife_flip/lookat01_flip"
+      ],
+      "outputSha256": "7462190db8579c61623c9650e26d184d01ce17debc685f16d754724620bd8c8d",
+      "bytes": 2171832
+    },
+    {
+      "id": 41,
+      "item": 506,
+      "name": "Gut Knife",
+      "icon": "gut",
+      "token": "knife_gut",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_gut/weapon_knife_gut.glb",
+      "material": "weapon_knife_gut",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_gut/idle1_gut",
+        "animation/anims/viewmodel/knife/knife_gut/idle2_gut",
+        "animation/anims/viewmodel/knife/knife_gut/draw_gut",
+        "animation/anims/viewmodel/knife/knife_gut/light_hit1_gut",
+        "animation/anims/viewmodel/knife/knife_gut/light_hit2_gut",
+        "animation/anims/viewmodel/knife/knife_gut/light_miss1_gut",
+        "animation/anims/viewmodel/knife/knife_gut/light_miss2_gut",
+        "animation/anims/viewmodel/knife/knife_gut/heavy_hit1_gut",
+        "animation/anims/viewmodel/knife/knife_gut/heavy_miss1_gut",
+        "animation/anims/viewmodel/knife/knife_gut/lookat01_gut"
+      ],
+      "outputSha256": "dd6fded8bf91f871003841bdfc3618dac62da6c567e668f308c83e36fb921190",
+      "bytes": 3088400
+    },
+    {
+      "id": 42,
+      "item": 508,
+      "name": "M9 Bayonet",
+      "icon": "m9-bayonet",
+      "token": "knife_m9_bayonet",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_m9/weapon_knife_m9.glb",
+      "material": "weapon_knife_m9",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_m9/idle1_m9",
+        "animation/anims/viewmodel/knife/knife_m9/idle2_m9",
+        "animation/anims/viewmodel/knife/knife_m9/draw_m9",
+        "animation/anims/viewmodel/knife/knife_m9/light_hit1_m9",
+        "animation/anims/viewmodel/knife/knife_m9/light_hit2_m9",
+        "animation/anims/viewmodel/knife/knife_m9/light_miss1_m9",
+        "animation/anims/viewmodel/knife/knife_m9/light_miss2_m9",
+        "animation/anims/viewmodel/knife/knife_m9/heavy_hit1_m9",
+        "animation/anims/viewmodel/knife/knife_m9/heavy_miss1_m9",
+        "animation/anims/viewmodel/knife/knife_m9/lookat01_m9"
+      ],
+      "outputSha256": "0cbfec9c58e3b8b9e71b1f4073e0427e275ffe65f365f28e7b43db438bf3c773",
+      "bytes": 3011500
+    },
+    {
+      "id": 43,
+      "item": 509,
+      "name": "Huntsman Knife",
+      "icon": "huntsman",
+      "token": "knife_tactical",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_tactical/weapon_knife_tactical.glb",
+      "material": "weapon_knife_tactical",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_tactical/idle1_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/idle2_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/draw_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/light_hit1_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/light_hit2_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/light_miss1_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/light_miss2_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/heavy_hit1_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/heavy_miss1_tactical",
+        "animation/anims/viewmodel/knife/knife_tactical/lookat01_tactical"
+      ],
+      "outputSha256": "1c6387eefa37fdd355153ac3f95adf2731d7b8a344072236ce908cab8f87021b",
+      "bytes": 3603064
+    },
+    {
+      "id": 44,
+      "item": 512,
+      "name": "Falchion Knife",
+      "icon": "falchion",
+      "token": "knife_falchion",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_falchion/weapon_knife_falchion.glb",
+      "material": "weapon_knife_falchion",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_falchion/idle1_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/draw_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/light_hit1_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/light_hit2_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/light_miss1_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/light_miss2_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/heavy_hit1_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/heavy_miss1_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/lookat01_falchion",
+        "animation/anims/viewmodel/knife/knife_falchion/lookat02_falchion"
+      ],
+      "outputSha256": "8f09736b9e688ef88788eda2c1a3fc502d09797767aba9a21b39dea871d9a97b",
+      "bytes": 2464324
+    },
+    {
+      "id": 45,
+      "item": 514,
+      "name": "Bowie Knife",
+      "icon": "bowie",
+      "token": "knife_survival_bowie",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_bowie/weapon_knife_bowie.glb",
+      "material": "weapon_knife_bowie",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_bowie/idle1_bowie",
+        "animation/anims/viewmodel/knife/knife_bowie/draw_bowie",
+        "animation/anims/viewmodel/knife/knife_bowie/light_hit1_bowie",
+        "animation/anims/viewmodel/knife/knife_bowie/light_hit2_bowie",
+        "animation/anims/viewmodel/knife/knife_bowie/light_miss1_bowie",
+        "animation/anims/viewmodel/knife/knife_bowie/light_miss2_bowie",
+        "animation/anims/viewmodel/knife/knife_bowie/heavy_hit1_bowie",
+        "animation/anims/viewmodel/knife/knife_bowie/heavy_miss1_bowie",
+        "animation/anims/viewmodel/knife/knife_bowie/lookat01_bowie"
+      ],
+      "outputSha256": "ec2888671517f579c7e8846ac3dd17163317095ea4085701716200ecfdc33cbb",
+      "bytes": 3378164
+    },
+    {
+      "id": 46,
+      "item": 516,
+      "name": "Shadow Daggers",
+      "icon": "shadow-daggers",
+      "token": "knife_push",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_push/weapon_knife_push.glb",
+      "material": "weapon_knife_push",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_push/idle1_push",
+        "animation/anims/viewmodel/knife/knife_push/draw_push",
+        "animation/anims/viewmodel/knife/knife_push/light_hit1_push",
+        "animation/anims/viewmodel/knife/knife_push/light_hit2_push",
+        "animation/anims/viewmodel/knife/knife_push/light_miss1_push",
+        "animation/anims/viewmodel/knife/knife_push/light_miss2_push",
+        "animation/anims/viewmodel/knife/knife_push/heavy_hit1_push",
+        "animation/anims/viewmodel/knife/knife_push/heavy_miss1_push",
+        "animation/anims/viewmodel/knife/knife_push/lookat01_push"
+      ],
+      "outputSha256": "b83a833cbfb585211c946eb0f729ac26bd57894400fbce2921a339b34ac3e44b",
+      "bytes": 2148236
+    },
+    {
+      "id": 47,
+      "item": 517,
+      "name": "Paracord Knife",
+      "icon": "paracord",
+      "token": "knife_cord",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_cord/weapon_knife_cord.glb",
+      "material": "weapon_knife_cord",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_cord/idle1_cord",
+        "animation/anims/viewmodel/knife/knife_cord/idle2_cord",
+        "animation/anims/viewmodel/knife/knife_cord/draw_cord",
+        "animation/anims/viewmodel/knife/knife_cord/light_hit1_cord",
+        "animation/anims/viewmodel/knife/knife_cord/light_hit2_cord",
+        "animation/anims/viewmodel/knife/knife_cord/light_miss1_cord",
+        "animation/anims/viewmodel/knife/knife_cord/light_miss2_cord",
+        "animation/anims/viewmodel/knife/knife_cord/heavy_hit1_cord",
+        "animation/anims/viewmodel/knife/knife_cord/heavy_miss1_cord",
+        "animation/anims/viewmodel/knife/knife_cord/lookat01_cord",
+        "animation/anims/viewmodel/knife/knife_cord/lookat02_cord"
+      ],
+      "outputSha256": "483de0b9c67b67e25b3448f6d1aaf6fdd1dd56550debce859c6332a6c5942b8c",
+      "bytes": 4217008
+    },
+    {
+      "id": 48,
+      "item": 518,
+      "name": "Survival Knife",
+      "icon": "survival",
+      "token": "knife_canis",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_canis/weapon_knife_canis.glb",
+      "material": "weapon_knife_canis",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_canis/idle1_canis",
+        "animation/anims/viewmodel/knife/knife_canis/idle2_canis",
+        "animation/anims/viewmodel/knife/knife_canis/draw_canis",
+        "animation/anims/viewmodel/knife/knife_canis/light_hit1_canis",
+        "animation/anims/viewmodel/knife/knife_canis/light_hit2_canis",
+        "animation/anims/viewmodel/knife/knife_canis/light_miss1_canis",
+        "animation/anims/viewmodel/knife/knife_canis/light_miss2_canis",
+        "animation/anims/viewmodel/knife/knife_canis/heavy_hit1_canis",
+        "animation/anims/viewmodel/knife/knife_canis/heavy_miss1_canis",
+        "animation/anims/viewmodel/knife/knife_canis/lookat01_canis",
+        "animation/anims/viewmodel/knife/knife_canis/lookat02_canis"
+      ],
+      "outputSha256": "eea0f8c860278f744dbd1b8c43799a88a3f6e180321ef81a69dd9a7014c03053",
+      "bytes": 2276176
+    },
+    {
+      "id": 49,
+      "item": 519,
+      "name": "Ursus Knife",
+      "icon": "ursus",
+      "token": "knife_ursus",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_ursus/weapon_knife_ursus.glb",
+      "material": "weapon_knife_ursus",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_ursus/idle1_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/idle2_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/draw_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/light_hit1_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/light_hit2_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/light_miss1_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/light_miss2_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/heavy_hit1_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/heavy_miss1_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/lookat01_ursus",
+        "animation/anims/viewmodel/knife/knife_ursus/lookat02_ursus"
+      ],
+      "outputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855",
+      "bytes": 2314760
+    },
+    {
+      "id": 50,
+      "item": 520,
+      "name": "Navaja Knife",
+      "icon": "navaja",
+      "token": "knife_gypsy_jackknife",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_navaja/weapon_knife_navaja.glb",
+      "material": "weapon_knife_navaja",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_navaja/idle1_navaja",
+        "animation/anims/viewmodel/knife/knife_navaja/idle2_navaja",
+        "animation/anims/viewmodel/knife/knife_navaja/draw_navaja",
+        "animation/anims/viewmodel/knife/knife_navaja/light_hit1_navaja",
+        "animation/anims/viewmodel/knife/knife_navaja/light_hit2_navaja",
+        "animation/anims/viewmodel/knife/knife_navaja/light_miss1_navaja",
+        "animation/anims/viewmodel/knife/knife_navaja/light_miss2_navaja",
+        "animation/anims/viewmodel/knife/knife_navaja/heavy_miss1_navaja",
+        "animation/anims/viewmodel/knife/knife_navaja/lookat01_navaja"
+      ],
+      "outputSha256": "14ac2ea52ba23b616cddcc833d84ce4c77e848da7a3a82f16402485d6d646c72",
+      "bytes": 2835792
+    },
+    {
+      "id": 51,
+      "item": 521,
+      "name": "Nomad Knife",
+      "icon": "nomad",
+      "token": "knife_outdoor",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_outdoor/weapon_knife_outdoor.glb",
+      "material": "weapon_knife_outdoor",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_outdoor/idle1_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/idle2_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/draw_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/light_hit1_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/light_hit2_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/light_miss1_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/light_miss2_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/heavy_hit1_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/heavy_miss1_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/lookat01_outdoor",
+        "animation/anims/viewmodel/knife/knife_outdoor/lookat02_outdoor"
+      ],
+      "outputSha256": "19b0923f0f8fdce61277f59f444d7e693bf824d3a183376992dd0cd80b56bee0",
+      "bytes": 3566344
+    },
+    {
+      "id": 52,
+      "item": 522,
+      "name": "Stiletto Knife",
+      "icon": "stiletto",
+      "token": "knife_stiletto",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_stiletto/weapon_knife_stiletto.glb",
+      "material": "weapon_knife_stiletto",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_stiletto/idle1_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/idle2_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/draw_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/light_hit1_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/light_hit2_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/light_miss1_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/light_miss2_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/heavy_hit1_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/heavy_miss1_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/lookat01_stiletto",
+        "animation/anims/viewmodel/knife/knife_stiletto/lookat02_stiletto"
+      ],
+      "outputSha256": "bab09f8f4ed33dc156e949d6d62758964549a561a510aef50a31dd058715a29f",
+      "bytes": 3098296
+    },
+    {
+      "id": 53,
+      "item": 523,
+      "name": "Talon Knife",
+      "icon": "talon",
+      "token": "knife_widowmaker",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_talon/weapon_knife_talon.glb",
+      "material": "weapon_knife_talon",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_talon/idle1_talon",
+        "animation/anims/viewmodel/knife/knife_talon/idle2_talon",
+        "animation/anims/viewmodel/knife/knife_talon/draw_talon",
+        "animation/anims/viewmodel/knife/knife_talon/light_hit1_talon",
+        "animation/anims/viewmodel/knife/knife_talon/light_hit2_talon",
+        "animation/anims/viewmodel/knife/knife_talon/light_miss1_talon",
+        "animation/anims/viewmodel/knife/knife_talon/light_miss2_talon",
+        "animation/anims/viewmodel/knife/knife_talon/heavy_hit1_talon",
+        "animation/anims/viewmodel/knife/knife_talon/heavy_miss1_talon",
+        "animation/anims/viewmodel/knife/knife_talon/lookat01_talon",
+        "animation/anims/viewmodel/knife/knife_talon/lookat02_talon"
+      ],
+      "outputSha256": "bf244c82b177cc4e84d2394e11c72a5dc885e69bf087e56252f0fe4ffe6a53de",
+      "bytes": 2484416
+    },
+    {
+      "id": 54,
+      "item": 525,
+      "name": "Skeleton Knife",
+      "icon": "skeleton",
+      "token": "knife_skeleton",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_skeleton/weapon_knife_skeleton.glb",
+      "material": "weapon_knife_skeleton",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_skeleton/idle1_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/idle2_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/draw_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/light_hit1_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/light_hit2_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/light_miss1_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/light_miss2_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/heavy_hit1_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/heavy_miss1_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/lookat01_skeleton",
+        "animation/anims/viewmodel/knife/knife_skeleton/lookat02_skeleton"
+      ],
+      "outputSha256": "9566b04f5f34f66705158d5a0a29c47642bb72ec0fe63495fc0648d1e2b370fa",
+      "bytes": 2189452
+    },
+    {
+      "id": 55,
+      "item": 526,
+      "name": "Kukri Knife",
+      "icon": "kukri",
+      "token": "knife_kukri",
+      "mesh": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_kukri/weapon_knife_kukri.glb",
+      "material": "weapon_knife_kukri",
+      "clips": [
+        "inventory_inspect",
+        "animation/anims/viewmodel/knife/knife_kukri/idle1_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/idle2_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/draw_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/light_hit1_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/light_hit2_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/light_miss1_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/light_miss2_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/heavy_hit1_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/heavy_miss1_kukri",
+        "animation/anims/viewmodel/knife/knife_kukri/lookat01_kukri"
+      ],
+      "outputSha256": "35ee7aae98dff2e231164ef3fef5cc8943160f3dd8182f9f3109d0c6e9befee1",
+      "bytes": 2124916
+    }
+  ],
+  "inputs": [
+    {
+      "url": "https://3d.cs2inspects.com/",
+      "sha256": "d039e54890cc718c220bb8dce74425bb77f4cf5e5c0d6d7a3de8d81cc803f87c",
+      "bytes": 1019
+    },
+    {
+      "url": "https://3d.cs2inspects.com/assets/index-CXUheY2V.js",
+      "sha256": "724899da942ccf6d0ec3864caeee02e5bcbe3f8d28c8375d1e128bb77d6e6ba4",
+      "bytes": 3054353
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/42",
+      "sha256": "d14b50917a6571d40bd6b8b68d1bf11ceae0c7c974f7f6d71a1dc6c6663c420c",
+      "bytes": 1980
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/503",
+      "sha256": "fb35690585da7bf8d2e5440994bdeeed9ff0329db911d16da3a37a7283d9a690",
+      "bytes": 2068
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/505",
+      "sha256": "25291b4e87d10ce5c2fe9014973aec317942556d63150b59ad0181868952bc10",
+      "bytes": 2091
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/506",
+      "sha256": "8d58ff3a3f625840fcc2e259e51f38d3f94224b180b557ae5e8d27d130a43d87",
+      "bytes": 2012
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/508",
+      "sha256": "9fe2404d79fcb0c84591d0c75d732a7be5fb8602e8d853564591c11081f2c2b0",
+      "bytes": 1992
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/509",
+      "sha256": "13272f5154e3729204babe376349bd17ede244e15547960bafd29adc9ef34d93",
+      "bytes": 2183
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/512",
+      "sha256": "709564e16e5b07440294918452cdf96a819c1a8dc7395aa276ad42bae0baad94",
+      "bytes": 2213
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/514",
+      "sha256": "c99a43f8c6d905e12dea6e1e9522ba4fd5bb7efc1ee93e88e603b55a1e043f9b",
+      "bytes": 2167
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/516",
+      "sha256": "4186d6e511be4a6487854e7d03af7ec487383644e1cfa1ce26809d302b41963d",
+      "bytes": 2029
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/517",
+      "sha256": "83e5ac0566c591e02bb6ce0bd4b45c89a8a7a528de7aab96267f66cff0d742ba",
+      "bytes": 2034
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/518",
+      "sha256": "18e10a2ea8b5368d8c1db1b8c8d304269c4be73444acef6c19360574a53c3377",
+      "bytes": 2050
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/519",
+      "sha256": "068be64cdba18353b0d87f4938b43d936a18e904cb28e6984247d15137b0d80d",
+      "bytes": 2114
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/520",
+      "sha256": "0d80c6226b694d8901fa3ef636ae3058d78b84f0bc48ff9a198756c305919d2d",
+      "bytes": 2124
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/521",
+      "sha256": "adb242332bb135689a9f90937f5264fb5e802a84b5ab224365552d4eabdc95dd",
+      "bytes": 2160
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/522",
+      "sha256": "e7daa7405334aceda2df49bcf516564033b3d90090fe7c4ce6c49fb5a2cabeda",
+      "bytes": 2105
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/523",
+      "sha256": "c2d2d4da55dd250938f11c549fb25b037295121a16131f32c3c0dd1de0909b2a",
+      "bytes": 2058
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/525",
+      "sha256": "4198f0cfa763eee95be4de390cd3822536ce504afaa09ff9fb2642a8a093c432",
+      "bytes": 2107
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/526",
+      "sha256": "9229b28e2075f36f8973076896c48502cb0ac03f900db55f8405e5039fcc7b42",
+      "bytes": 2050
+    },
+    {
+      "url": "https://3dapi.cs2inspects.com/model/59",
+      "sha256": "4c270791f6bc29c0100b825eb78ba408fdecbd8559630cccbadb5b39026151c8",
+      "bytes": 1973
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/default/default_ao_tga_559f1ac6.avif",
+      "sha256": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+      "bytes": 36
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_canis/knife_canis_ao_psd_ca31fd08.avif",
+      "sha256": "68ba17ebbd9861ffb2d4fa75854f1f08fa6633e7d86099efed87f5cd5e0abe76",
+      "bytes": 38272
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_canis/knife_canis_color_psd_f661931d.avif",
+      "sha256": "778f37fd8634da78c82204d8516429d1972e6d09135a1c50a314a5ad3fc33acb",
+      "bytes": 1007548
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_canis/knife_canis_rough_psd_5aea1c6c.avif",
+      "sha256": "c6878563e04491a164f325791fd425f484c4d2a1bc8063e85b419592f69e05e7",
+      "bytes": 522841
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_cord/knife_cord_ao_psd_bdd79594.avif",
+      "sha256": "a36a3b4fb8847654ee357ed9d721a5ef85f9c071335fb6b81e51f5d7ea44d488",
+      "bytes": 383445
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_cord/knife_cord_color_psd_7a7f7a34.avif",
+      "sha256": "a81f5c3d337f308f5cb98888c80fb4a977562c1d88600464f0643361f1743445",
+      "bytes": 2030318
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_cord/knife_cord_normal_psd_9fb1ea77.avif",
+      "sha256": "75e433785c57deba81519dd2bf0792c9b4d71818a5d32befbdde6673648b14bc",
+      "bytes": 1366209
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_cord/knife_cord_rough_psd_41b03a75.avif",
+      "sha256": "1e90f77ce95ae84eb241faa62274e13a6b354f4514d13ab29727ed1258cfc4d5",
+      "bytes": 777245
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_css/knife_css_ao_psd_4cecd446.avif",
+      "sha256": "411f8109b96b3e4b5b1bc92ef4e59900855e7e11355066430f331d5cc8138600",
+      "bytes": 83922
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_css/knife_css_color_psd_cdd67dae.avif",
+      "sha256": "c9eddfa1f50c04f32b75325ea6a3f2c05f6f3784bed9cfa1423dec4f38dab4d4",
+      "bytes": 493012
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_css/knife_css_normal_psd_9a8ff53e.avif",
+      "sha256": "fc2e6b84d3441bd618ebb5f8876880dcf495ffadf74996dd128086c2b5121389",
+      "bytes": 111229
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_css/knife_css_rough_psd_f3092984.avif",
+      "sha256": "6de465525fe6385e4d78900b844099b4cdd82d7d0c0c8d15d6393d2bf5ff19ff",
+      "bytes": 116137
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_ct/knife_ct_ao_psd_e90468db.avif",
+      "sha256": "8aff807347106d09002d82dc8875f3111cbf2d88505d73ac32fd8a69611d78c1",
+      "bytes": 139081
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_ct/knife_ct_color_psd_123faa81.avif",
+      "sha256": "deadaacdea0903c2d52408c0063213427056f6d01cf9f92a8a474ef543a86d11",
+      "bytes": 812115
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_ct/knife_ct_rough_psd_8c860d48.avif",
+      "sha256": "2046140f60eada957431127f1347ed4f4beecc85c4630f6223806955ec6002ea",
+      "bytes": 110888
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_falchion_advanced/knife_falchion_advanced_ao_psd_aec80317.avif",
+      "sha256": "c26e109e366c37255cf2b3bcf103de43d103b93afadd4df096ac37e0bbb6b580",
+      "bytes": 86548
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_falchion_advanced/knife_falchion_advanced_color_psd_5ef467d6.avif",
+      "sha256": "c84dd2e2c65ab0842b8e0d7eb9048e1a9128ce50638a015a7e96a18bf4410393",
+      "bytes": 1666322
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_falchion_advanced/knife_falchion_advanced_rough_psd_2c53fc9.avif",
+      "sha256": "627fe8b4227294e0ad3366cd2e3997d9ebbd51079aa6e9c1a0b19e63fc66e958",
+      "bytes": 252732
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_flip/knife_flip_ao_psd_6ab44393.avif",
+      "sha256": "37084c64fcd8c868983fb17adb563c0759c37924c1b12e04dc5a61ed97575530",
+      "bytes": 44078
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_flip/knife_flip_color_psd_1067d194.avif",
+      "sha256": "75b56c7e7e89623c8cf9c04efd755993315a8f2d4cd4f25955246697687c7c71",
+      "bytes": 318959
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_flip/knife_flip_normal_psd_925de8ab.avif",
+      "sha256": "a698714ff6664e0d2bc8d78572e5bfefb4509a507ffb6a43846f3456cfe16d7f",
+      "bytes": 139489
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_flip/knife_flip_rough_psd_a6e13a6b.avif",
+      "sha256": "e5c6140128a2f404b5eb496b4b8cf6639d4800c632c4f139514d2590156b34b9",
+      "bytes": 52264
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_gut/knife_gut_ao_psd_25e5aba5.avif",
+      "sha256": "69ac2a3b57b90428bf4923bbb58e008ddfe4c5a4ac76030793a01cc1f31cce23",
+      "bytes": 58148
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_gut/knife_gut_color_psd_ec0947b4.avif",
+      "sha256": "a16d36bd5a00bca0bdcc1bad0fe7b621d4d0502a8f359b15aca684472d6969ed",
+      "bytes": 1887830
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_gut/knife_gut_rough_psd_88b83b19.avif",
+      "sha256": "289fadfa9b2e683747f5e00d3cbb6131d999940b518da4ad30fbf8ae6437bd65",
+      "bytes": 754353
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_gypsy_jack/knife_gypsy_jack_ao_psd_19d57047.avif",
+      "sha256": "9d2a56da207f6c33c957bfe75068c88cf9d50e3048e264ce37f67c4e0ee84362",
+      "bytes": 144577
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_gypsy_jack/knife_gypsy_jack_color_psd_f485284f.avif",
+      "sha256": "f2f9a13e0919a95a995424069d93df975dc448eb8dd7360ce56020c09de7973d",
+      "bytes": 2099276
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_gypsy_jack/knife_gypsy_jack_rough_psd_8743bf1.avif",
+      "sha256": "002d7dfaeaad4b4dd29fbc3e4aed8fe0d0ab7c5a9c9049e5a126158180f668ea",
+      "bytes": 386973
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_kukri/knife_kukri_ao_psd_9fb1f6b0.avif",
+      "sha256": "1415a714c353a40b2c0213f5e181ab0e38e967466469c42bd38e1c9f054fc96b",
+      "bytes": 105743
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_kukri/knife_kukri_color_psd_76a12234.avif",
+      "sha256": "bb00e7e9bb784e2ae269993bd3d75c14c33c3e4a9196f6577f9a9d62e6fac37b",
+      "bytes": 1544645
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_kukri/knife_kukri_rough_psd_d7014a4f.avif",
+      "sha256": "90e64abaab05a3dd6f8f250e8ff51e3c0ddde4e8de02ca9e8fc4f108fe928de0",
+      "bytes": 96191
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_m9_bay/knife_m9_bay_ao_psd_1c49e1c8.avif",
+      "sha256": "9789a6b713e8e30dacc87df2900c0dd23ec341d91c8e730a229cb5c573254dac",
+      "bytes": 137538
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_m9_bay/knife_m9_bay_color_psd_a4b8e53b.avif",
+      "sha256": "c9f6a823c1793f53525c838f424c2085d43b4b6e81832fc183b09b9c491e20e0",
+      "bytes": 780910
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_m9_bay/knife_m9_bay_rough_psd_2cd44509.avif",
+      "sha256": "863597e7863ae991c4e65149c3f8e6804e996dd5663f35611f8c9025f5888848",
+      "bytes": 237588
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_outdoor/knife_outdoor_ao_psd_1257ab4c.avif",
+      "sha256": "84ad0ba10eef838a365b07c631548b7b0b0ef9ef9ce8e9fe1b96ba850c68e294",
+      "bytes": 194503
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_outdoor/knife_outdoor_color_psd_2875a13e.avif",
+      "sha256": "b4fd10e7f913755081d0f6b6ab412d71f6dd5a34368327a210b5f0b3c534c629",
+      "bytes": 1972677
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_outdoor/knife_outdoor_normal_psd_e6ff987b.avif",
+      "sha256": "d38c24531878dcb0e441a444e4e3510507a1c88bce7fc39a9884f43ef3e0c7fd",
+      "bytes": 284820
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_outdoor/knife_outdoor_rough_psd_a9ca0ca9.avif",
+      "sha256": "ba57c7062cde51b1d5d1a39c31f0f0cc93b3802ef82981f6d10504e222456a1b",
+      "bytes": 530346
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_push/knife_push_ao_psd_5c37918c.avif",
+      "sha256": "2aed5dbd3055164b755d722b858032d38cb30071d14b6443c82366a0c369361b",
+      "bytes": 24349
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_push/knife_push_color_psd_6f45baff.avif",
+      "sha256": "009bdc27f332b200245ccdc6c87ca3357e6a7c22092ce96e1d70915a16363782",
+      "bytes": 1480451
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_push/knife_push_rough_psd_d0e691f.avif",
+      "sha256": "7e24c0fbdffce061aa3ce5993a16bbedc732e9ee237aea5a3284927b5b2db99b",
+      "bytes": 509727
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_skeleton/knife_skeleton_ao_psd_16e197dd.avif",
+      "sha256": "a4420f6d12033cb9623335aa299a908b8a86dcab599cf621582f9f3662f87a82",
+      "bytes": 46244
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_skeleton/knife_skeleton_color_psd_b6b3dcd3.avif",
+      "sha256": "78b0c7d6ab730556097f73f1e798ffc33acda77307af2fc03fe80c66e3b1f0e8",
+      "bytes": 1427609
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_skeleton/knife_skeleton_rough_psd_21feb3ec.avif",
+      "sha256": "c9d6e311d93af598371cd3d3853eb6b307c71eb1dd4508bfd49377d3e623ea39",
+      "bytes": 356458
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_stiletto/knife_stiletto_ao_psd_6b38e058.avif",
+      "sha256": "3d0f113b2af12aa528ff360e1c8caaa6f5003559d628dbb257711c847d63479c",
+      "bytes": 148528
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_stiletto/knife_stiletto_color_psd_7814d7a.avif",
+      "sha256": "e897a38760f13d91ad4c7c999990cec72c266bb061932c0d5f752bea425198fa",
+      "bytes": 2487626
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_stiletto/knife_stiletto_rough_psd_85024b89.avif",
+      "sha256": "8e354527be90781f980431ba95774fb4423fd80bb4885654430f430da326810b",
+      "bytes": 439511
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_survival_bowie/knife_survival_bowie_ao_psd_d8f3f5d1.avif",
+      "sha256": "8b1d8cb1155d8585cca39a7c69027c073f426bf4550b9b3b97daff2dc2ffb7bf",
+      "bytes": 163293
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_survival_bowie/knife_survival_bowie_color_psd_fa33bf5d.avif",
+      "sha256": "24c1ac70eca1faf12f17f710963518cdbb5295422b5bbeeee13b2eb63639d173",
+      "bytes": 2496037
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_survival_bowie/knife_survival_bowie_rough_psd_f6cf88c6.avif",
+      "sha256": "130a34942efe6e1928b1c6a888401bd6424426697acc2c0561631c151217f988",
+      "bytes": 422567
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_t/knife_t_color_psd_7db66182.avif",
+      "sha256": "d3439cfc62adff0b4790ce324453779fcb2a2c693c41f23d652053b6da4701ea",
+      "bytes": 722019
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_t/knife_t_rough_psd_bb4cad6e.avif",
+      "sha256": "b00e832516a26cd6b998572b719e79210c604fe3601464f699bba1d8f6272362",
+      "bytes": 239463
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_tactical/knife_tactical_ao_psd_4c52d720.avif",
+      "sha256": "7a705ab23b2ac2524ff36518ede2ecf774f0e8c5d466f5c90b8fb7efaf9a680a",
+      "bytes": 116879
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_tactical/knife_tactical_color_psd_1d7430f8.avif",
+      "sha256": "81ca4ad0e04020b12d228ab037d8cd9a9b83014f6be4adf98ee0d5fc4c7fef46",
+      "bytes": 1706041
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_tactical/knife_tactical_normal_psd_fe9b6431.avif",
+      "sha256": "1c64ad5186a016c1839939cc36ab1423d4bb3b9f99c12c569476cdb9b717acc6",
+      "bytes": 148067
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_tactical/knife_tactical_rough_psd_e738a352.avif",
+      "sha256": "7d744fa62609627ef3a76d1ddf4561a95f8c7e5c5b1157dd5a76efd8821099d9",
+      "bytes": 503280
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_ursus/knife_ursus_ao_psd_c822f961.avif",
+      "sha256": "5c24554955ff9a7be2b8197778e93d6c6db107847d8ed691695f86f058b3dd8f",
+      "bytes": 106966
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_ursus/knife_ursus_color_psd_308a2c50.avif",
+      "sha256": "ae6c45ee9627a36c483e4c3f2d58905ab7ebb38848c9569ce5abca1085f40f14",
+      "bytes": 1459129
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_ursus/knife_ursus_normal_psd_41a9c5c4.avif",
+      "sha256": "f45ef02f7ebea5da347b1a3b51b8cf1a2f3a60c312af2798c865541925ef10fa",
+      "bytes": 286640
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_ursus/knife_ursus_rough_psd_caa640d2.avif",
+      "sha256": "14908f375855cf47d625a14e9730c437c18d9150e229a5d4a46eab58f0da14df",
+      "bytes": 53376
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_widowmaker/knife_widowmaker_ao_psd_b3d2a22a.avif",
+      "sha256": "2e666c75e0e71911acb432ba752b2ac7d678f097444690bb172dad4f9f1e88f9",
+      "bytes": 157561
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_widowmaker/knife_widowmaker_color_psd_6870975e.avif",
+      "sha256": "3468f1ef74f10836bf53c44830f9e7d210ee60bc5e8103293a8acf5b35fd6668",
+      "bytes": 1713050
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/v_models/knife_widowmaker/knife_widowmaker_rough_psd_4a0ba78a.avif",
+      "sha256": "803a1c5a41476c7530166ddfbee16632cac4c4320af194bce3fd91d3d8617f67",
+      "bytes": 281960
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_bowie/weapon_knife_bowie.glb",
+      "sha256": "56db098895df676f0eff02277657be809cb63fc5327be7d119ba948dbcf6a10d",
+      "bytes": 1881196
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_canis/weapon_knife_canis.glb",
+      "sha256": "b8e078360d3da1626b77c0ec360e1c5025b95b24ac9879382e5b1c3236744a6d",
+      "bytes": 1165688
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_cord/weapon_knife_cord.glb",
+      "sha256": "537a591fe080d9acd8bc8e25bd04ade19e87db43ed08cea43aa34990489aa151",
+      "bytes": 997524
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_css/weapon_knife_css.glb",
+      "sha256": "7fb0205b2f31d7664eaf5089343338c82ceeb1fe5aeb45726b58a3f53eb2cc9e",
+      "bytes": 821456
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_default_ct/weapon_knife_default_ct.glb",
+      "sha256": "47bfeb7e61b57ddcc2aef47f6e6dbcec53886c75e192d7b82933f845d3110d78",
+      "bytes": 959232
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_default_t/weapon_knife_default_t.glb",
+      "sha256": "ce2e16408dde70eec3e357023b586e903a88484ef52ccf142db332a732eb6571",
+      "bytes": 719384
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_falchion/weapon_knife_falchion.glb",
+      "sha256": "8a29b4b985a578272f0eebf4d64fd2e47cdd9536121531ab8d30c0eb6986c30a",
+      "bytes": 1607880
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_flip/weapon_knife_flip.glb",
+      "sha256": "3afb4c801d01e556647eda50157e1b25345908b2f6bae13757af8e6f1dbd6c07",
+      "bytes": 873408
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_gut/weapon_knife_gut.glb",
+      "sha256": "e9d53f2dae5b5468388ccda3345031fdd782f16d51fadeedc2a10474eabab207",
+      "bytes": 1270196
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_kukri/weapon_knife_kukri.glb",
+      "sha256": "f5930d85f7263dc5df4d60f1131774879358dbd00be73a8e322ab875d7365610",
+      "bytes": 1053576
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_m9/weapon_knife_m9.glb",
+      "sha256": "643f4cfb7ebe756df3f65cd2f38f5dee4339f2a0fbacaad0860ce0daa11f2fca",
+      "bytes": 1363256
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_navaja/weapon_knife_navaja.glb",
+      "sha256": "3a5aa29743b9beb438fc0ee3c20296111e4b48da6d0c35ed2a65d6461ac730d1",
+      "bytes": 1007424
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_outdoor/weapon_knife_outdoor.glb",
+      "sha256": "8c43fcc13d1027374b468d4c81e2ea11c3df5816af1d81c86771790c05a4fec0",
+      "bytes": 1812896
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_push/weapon_knife_push.glb",
+      "sha256": "0b9c1d1b0840216ebecd65f7c42071ccef2462471619dd2447186050236860c7",
+      "bytes": 1115268
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_skeleton/weapon_knife_skeleton.glb",
+      "sha256": "855968c8a93547edfa44f40f6e4dcfb3f7774e5586705d85c9f143ce4181d257",
+      "bytes": 951984
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_stiletto/weapon_knife_stiletto.glb",
+      "sha256": "717dc5ad614806e74b4d84cf3c06ef83ef2ad0df4df531b428994d7f71ae30b6",
+      "bytes": 1245320
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_tactical/weapon_knife_tactical.glb",
+      "sha256": "c68a005a2b7835792797069a3f2092d43f2d237f11a7c725e9e240bede067b51",
+      "bytes": 1773356
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_talon/weapon_knife_talon.glb",
+      "sha256": "cde95089464f65844a33f35019f0d3363369b5c9deaacca92911a00b4b093ab6",
+      "bytes": 1176820
+    },
+    {
+      "url": "https://cs2.cs2inspects.com/data/weapons/models/knife/knife_ursus/weapon_knife_ursus.glb",
+      "sha256": "4399924dc5bd99ddc441888cbb0644242e75a161fa939d5c59617676ea14660c",
+      "bytes": 1008936
+    }
+  ]
+}

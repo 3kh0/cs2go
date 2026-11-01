@@ -11,7 +11,7 @@ import {
 } from "./match";
 import { testMap } from "./test-map";
 import { dust2BuyZones } from "./buy-zones";
-import { weapons } from "./physics";
+import { knifeDefinitions, weapons } from "./physics";
 import { emptyGrenades } from "./utility";
 import { defaultLoadouts } from "./loadouts";
 function fixture() {
@@ -59,6 +59,34 @@ function arm(player: ReturnType<typeof createPlayer>, index: number, ammo = weap
   if (weapons[index].slot === 1) player.primary = index;
   else player.secondary = index;
 }
+
+test("all knife variants survive authoritative configure, combat, switching and respawn", () => {
+  for (const { id } of knifeDefinitions) {
+    const { match, ct } = fixture();
+    configurePlayer(match, ct, {
+      skins: {},
+      agents: { ct: "default-ct", t: "default-t" },
+      loadouts: defaultLoadouts(),
+      knife: id,
+    });
+    live(match);
+    command(match, ct.id, { select: id });
+    expect(ct.weapon).toBe(id);
+    run(match, 1.5);
+    const events = command(match, ct.id, { fire: true, alternate: true });
+    expect(events.some((event) => event.kind === "melee")).toBe(true);
+    const recovery = ct.cooldown;
+    const other = id === 55 ? 4 : 55;
+    command(match, ct.id, { buy: other });
+    expect(ct.weapon).toBe(other);
+    expect(ct.cooldown).toBeGreaterThanOrEqual(recovery - STEP * 2);
+    expect(ct.ammo).toBe(1);
+    expect(ct.reserve).toBe(0);
+    respawn(ct, match);
+    expect(ct.knife).toBe(other);
+    expect(ct.magazines[other]).toEqual({ ammo: weapons[other].mag, reserve: 0 });
+  }
+});
 
 test("burst and revolver preserve their trigger timing instead of behaving as ordinary pistols", () => {
   const { match, t } = fixture();

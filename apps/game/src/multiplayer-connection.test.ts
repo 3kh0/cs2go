@@ -1,5 +1,5 @@
 import { afterEach, expect, test, vi } from "vitest";
-import { neutralInput, type ServerMessage } from "@cs2go/protocol";
+import { neutralInput, PROTOCOL_VERSION, type ServerMessage } from "@cs2go/protocol";
 import { createPlayer, createMatch, STEP } from "@cs2go/simulation/match";
 import { testMap } from "@cs2go/simulation/test-map";
 import { movePlayer } from "@cs2go/simulation/movement";
@@ -45,7 +45,7 @@ function setup() {
   const socket = connection.socket as unknown as TestSocket;
   socket.receive({
     type: "welcome",
-    version: 4,
+    version: PROTOCOL_VERSION,
     id: "player",
     room: "test-room-123",
     map: "dust2",

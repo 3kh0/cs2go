@@ -2,7 +2,7 @@
 
 ## Scope and stack
 
-CS2GO is a desktop Counter-Strike-inspired browser FPS with single-player and private multiplayer Dust II rounds. Use TypeScript, Three.js, Bun, and Vite. Keep gameplay responsive. Development/offline assets stay local; production may load pinned asset releases from R2 (see docs/deployment.md). The game supports CS2 Dust II casual 10v10 and competitive 5v5 bomb rounds, Dust II practice/deathmatch, all 34 firearms, and three knives. Competitive uses paid armor, friendly fire, round economy and halftime; casual grants armor/helmets and CT kits. See docs/weapon-data.md for pinned current values.
+CS2GO is a desktop Counter-Strike-inspired browser FPS with single-player and private multiplayer Dust II rounds. Use TypeScript, Three.js, Bun, and Vite. Keep gameplay responsive. Development/offline assets stay local; production may load pinned asset releases from R2 (see docs/deployment.md). The game supports CS2 Dust II casual 10v10 and competitive 5v5 bomb rounds, Dust II practice/deathmatch, all 34 firearms, and 22 knives. Competitive uses paid armor, friendly fire, round economy and halftime; casual grants armor/helmets and CT kits. See docs/weapon-data.md for pinned current values.
 
 Read the relevant implementation before editing. Preserve the user's changes and existing gameplay unless the task calls for a change. Do not add multiplayer, services, major dependencies, or a new engine as a routine implementation choice.
 
@@ -54,6 +54,7 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 - Keep the fixed 128 Hz simulation independent of render frame rate. Bot movement runs every simulation step; navigation/targeting update at 16 Hz.
 - Preserve counter-strafing, grounded/air movement, movement-dependent accuracy, and weapon cooldowns across switching. Mouse-wheel cycling wraps through owned primary, sidearm, knife, and carried grenade slots. Weapon IDs 0–6 remain stable for saved skins; use `isKnife` and `weaponSlot`, not numeric range assumptions.
 - Keep camera/scoping, ammo transfer, animation phases, and sound cues synchronized with simulation state. Switching, death, respawn, and pause must handle cancellation coherently.
+- Knives are equipped through Inventory, not purchased in the buy menu. Preserve native knife clip seconds and frame intervals; melee recovery must not compress animation playback.
 - Maintain the AWP's two zoom levels, bolt lockout, and automatic rescope. The moving bolt shaft must remain inside the receiver, and reload hands must follow the magazine/action.
 - Penetration must account for material, thickness, range attenuation, and the four-barrier budget. Damage each enemy once per shot despite overlapping decorative meshes. Thick cover must stop bullets.
 - Use instancing/batching for static geometry. Avoid unnecessary per-frame work, bound transient audio/effect resources, and dispose owned GPU resources without disposing shared templates.

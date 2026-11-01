@@ -1,4 +1,4 @@
-import { WEAPON_ANIMATION_RATE } from "./physics";
+import { KNIFE_ANIMATION_RATE, knifeTiming, restoreKnifeTiming } from "./knife-timing";
 import * as T from "three";
 import { clone as cloneSkeleton } from "three/addons/utils/SkeletonUtils.js";
 import { loadModel } from "./gltf";
@@ -29,20 +29,29 @@ export async function loadKnifeMotion() {
     // The secondary skeleton contains the knife's independent finger roll.
     clips.set(
       names[i],
-      new T.AnimationClip(
-        names[i],
-        motion.animations[0].duration,
-        motion.animations.flatMap((clip) => clip.tracks),
-      ).optimize(),
+      restoreKnifeTiming(
+        new T.AnimationClip(
+          names[i],
+          motion.animations[0].duration,
+          motion.animations.flatMap((clip) => clip.tracks),
+        ).optimize(),
+        knifeTiming(4, names[i]),
+      ),
     );
   });
 }
 
 export function knifeDrawDuration() {
-  return (clips.get("draw")?.duration ?? 0.75) / WEAPON_ANIMATION_RATE;
+  return (clips.get("draw")?.duration ?? 0.75) / KNIFE_ANIMATION_RATE;
 }
 export function knifeInspectDuration(draw = false) {
-  return clips.get(draw ? "lookat01_draw" : "lookat01")!.duration / WEAPON_ANIMATION_RATE;
+  return clips.get(draw ? "lookat01_draw" : "lookat01")!.duration / KNIFE_ANIMATION_RATE;
+}
+export function knifeAttackDuration(stab: boolean, alternate: boolean) {
+  return (
+    (clips.get(stab ? "heavy_miss1" : alternate ? "light_miss2" : "light_miss1")?.duration ?? 1) /
+    KNIFE_ANIMATION_RATE
+  );
 }
 
 export function viewHandsTemplate() {
@@ -147,6 +156,7 @@ const position = new T.Vector3(),
 export type KnifePose = {
   draw: number;
   knife?: number;
+  knifeElapsed?: number;
   stab?: boolean;
   knifeActive?: boolean;
   knifeContact?: boolean;
@@ -175,11 +185,13 @@ export function animateKnifeMotion(group: T.Group, pose: KnifePose) {
   } else {
     const idle1 = clips.get("idle1")!.duration,
       idle2 = clips.get("idle2")!.duration;
-    const t = ((pose.time ?? 0) * WEAPON_ANIMATION_RATE) % (idle1 + idle2);
+    const t = ((pose.time ?? 0) * KNIFE_ANIMATION_RATE) % (idle1 + idle2);
     name = t < idle1 ? "idle1" : "idle2";
     progress = t < idle1 ? t / idle1 : (t - idle1) / idle2;
   }
   const action = rig.actions.get(name)!;
+  if (pose.knifeActive && pose.knifeElapsed !== undefined)
+    progress = (pose.knifeElapsed * KNIFE_ANIMATION_RATE) / action.getClip().duration;
   if (rig.current !== name) {
     rig.mixer.stopAllAction();
     action.reset().play();

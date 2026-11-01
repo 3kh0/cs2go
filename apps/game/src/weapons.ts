@@ -2,8 +2,10 @@ import { worldGrip } from "./world-grips";
 import {
   loadInspectsKnives,
   createInspectsKnife,
+  createInspectsWorldKnife,
   animateInspectsKnife,
   sourceKnifeDrawDuration,
+  sourceKnifeAttackDuration,
 } from "./inspects-knife";
 import { isKnife } from "./physics";
 import {
@@ -21,6 +23,7 @@ import {
   createKnifeMotion,
   animateKnifeMotion,
   knifeDrawDuration,
+  knifeAttackDuration,
 } from "./knife-motion";
 import { armoryReflections } from "./reflections";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
@@ -32,6 +35,11 @@ export function weaponDrawDuration(index: number) {
     : isKnife(index)
       ? sourceKnifeDrawDuration(index)
       : nativeDrawDuration(index);
+}
+export function weaponKnifeAttackDuration(index: number, stab: boolean, alternate: boolean) {
+  return index === 4
+    ? knifeAttackDuration(stab, alternate)
+    : sourceKnifeAttackDuration(index, stab, alternate);
 }
 export const VIEWMODEL_FOV = 60;
 const templates: T.Group[] = [];
@@ -127,16 +135,20 @@ export function createWorldBayonet() {
 }
 export function disposeWorldGun(root: T.Object3D) {
   root.removeFromParent();
+  const skeletons = new Set<T.Skeleton>();
   root.traverse((object) => {
     if (object instanceof T.Group && object.userData.ownedWorldGun) unregisterSkinModel(object);
     if (object instanceof T.Mesh && root.userData.ownedWorldGun) {
+      if (object instanceof T.SkinnedMesh) skeletons.add(object.skeleton);
       object.geometry.dispose();
       for (const material of Array.isArray(object.material) ? object.material : [object.material])
         material.dispose();
     }
   });
+  skeletons.forEach((skeleton) => skeleton.dispose());
 }
 export function createWorldGun(index: number, suppressed = true, instance?: WeaponInstance) {
+  if (isKnife(index)) return index === 4 ? createWorldBayonet() : createInspectsWorldKnife(index);
   if (instance?.skin.id && !isKnife(index)) {
     const gun = createNativeWorldGun(
       index,
@@ -152,9 +164,7 @@ export function createWorldGun(index: number, suppressed = true, instance?: Weap
   let template = worldGuns.get(key);
   if (!template) {
     template = mergeWorldGun(
-      !isKnife(index)
-        ? createNativeWorldGun(index, suppressed, worldGrip("t", index)?.stand.weaponBones)
-        : templates[index],
+      createNativeWorldGun(index, suppressed, worldGrip("t", index)?.stand.weaponBones),
     );
     worldGuns.set(key, template);
   }
@@ -164,7 +174,7 @@ export function createGun(index: number, team: "t" | "ct" = "ct") {
   const group = new T.Group();
   group.userData.team = team;
   group.userData.muzzle = new T.Vector3(0, 0.015, -0.9);
-  if (index === 5 || index === 6) {
+  if (isKnife(index) && index !== 4) {
     createInspectsKnife(group, index);
     animateGun(group, { reload: 0, draw: 0, bolt: 0, recoil: 0, bob: 0, sway: 0 });
     return group;
@@ -214,6 +224,7 @@ export type GunPose = {
   bob: number;
   sway: number;
   knife?: number;
+  knifeElapsed?: number;
   stab?: boolean;
   knifeActive?: boolean;
   knifeContact?: boolean;
