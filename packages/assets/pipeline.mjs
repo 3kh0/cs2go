@@ -24,7 +24,7 @@ export async function files(directory) {
   return found.sort();
 }
 export const releaseId = (entries) => sha256(JSON.stringify(entries));
-export async function prepare(directory = root, expectedEntries) {
+export async function prepare(directory = root, expectedEntries, onProgress) {
   const publicDir = join(directory, "public");
   const cache = join(directory, ".cache");
   await mkdir(cache, { recursive: true });
@@ -114,11 +114,17 @@ export async function prepare(directory = root, expectedEntries) {
       );
   };
   const inputs = await files(publicDir);
-  let cursor = 0;
+  let cursor = 0,
+    completed = 0;
+  onProgress?.({ completed, total: inputs.length });
   // Bound CPU and peak buffers while preserving a deterministic sorted manifest.
   await Promise.all(
     Array.from({ length: 6 }, async () => {
-      while (cursor < inputs.length) await processFile(inputs[cursor++]);
+      while (cursor < inputs.length) {
+        const file = inputs[cursor++];
+        await processFile(file);
+        onProgress?.({ completed: ++completed, total: inputs.length });
+      }
     }),
   );
   // Filesystem enumeration order never affects the release identity.

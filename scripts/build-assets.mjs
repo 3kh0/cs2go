@@ -67,6 +67,7 @@ export function buildAssets() {
       return { html: base ? rewriteAssetUrls(html, base) : html, tags: startupHints(base) };
     },
     async configResolved(config) {
+      const started = performance.now();
       output = resolve(config.root, config.build.outDir);
       if (process.env.VERCEL && !process.env.ASSET_CDN_URL)
         throw new Error(
@@ -78,6 +79,7 @@ export function buildAssets() {
           throw new Error("Invalid asset manifest");
         base = assetBase(process.env.ASSET_CDN_URL, manifest.release);
         // Published last by the sync job. Never deploy a shell pointing at a partial release.
+        config.logger.info("[assets] Checking published R2 release before bundling...");
         const response = await fetch(`${base}/manifest.json`, {
           signal: AbortSignal.timeout(30000),
         });
@@ -87,8 +89,24 @@ export function buildAssets() {
           );
       } else {
         base = "";
-        manifest = await prepare();
+        let progress;
+        const report = () =>
+          config.logger.info(
+            `[assets] ${progress ? `${progress.completed}/${progress.total} checked` : "Scanning local asset tree"} - ${((performance.now() - started) / 1000).toFixed(1)}s (hashes, gzip and Brotli quality 11)`,
+          );
+        report();
+        const heartbeat = setInterval(report, 2000);
+        try {
+          manifest = await prepare(assetRoot, undefined, (value) => {
+            progress = value;
+          });
+        } finally {
+          clearInterval(heartbeat);
+        }
       }
+      config.logger.info(
+        `[assets] Ready: ${Object.keys(manifest.files).length} assets in ${((performance.now() - started) / 1000).toFixed(1)}s - starting Vite bundling`,
+      );
     },
     async closeBundle() {
       const revisions = {},
