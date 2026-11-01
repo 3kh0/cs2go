@@ -14,5 +14,16 @@ for (const signal of ["SIGTERM", "SIGINT"] as const)
   process.on(signal, () => {
     if (stopping) return;
     stopping = true;
-    void app.stop();
+    const deadline = setTimeout(() => {
+      console.error("Multiplayer shutdown timed out");
+      process.exit(1);
+    }, 5000);
+    deadline.unref();
+    void app.stop().then(
+      () => process.exit(0),
+      (error: unknown) => {
+        console.error("Multiplayer shutdown failed", error);
+        process.exit(1);
+      },
+    );
   });
