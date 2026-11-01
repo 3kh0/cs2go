@@ -187,7 +187,7 @@ export class GameUtility {
       this.game.scene,
       this.game.camera,
       this.visibleSmoke,
-      this.game.settings.quality === "low",
+      this.game.settings.effectsDetail === "low",
     );
   }
   renderEffects() {
@@ -216,7 +216,7 @@ export class GameUtility {
         (count, effect) => count + Number(!!effect.smoke && effect.cleared <= 0),
         0,
       ),
-      g.settings.quality === "low",
+      g.settings.effectsDetail === "low",
     );
     for (const e of this.effects) {
       const fade = Math.min(1, e.age * 2, Math.max(0, grenadeData[e.kind].duration - e.age));

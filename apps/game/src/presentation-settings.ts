@@ -1,9 +1,8 @@
 import * as T from "three";
+import { graphicsDefaults, readGraphicsSettings } from "./graphics-settings";
 
 export const presentationDefaults = {
-  fpsCap: 0,
-  resolutionScale: 100,
-  textureQuality: "high",
+  ...graphicsDefaults,
   crosshairColor: "#a8ff80",
   crosshairLength: 7,
   crosshairThickness: 2,
@@ -15,10 +14,8 @@ export const presentationDefaults = {
 };
 export type PresentationSettings = typeof presentationDefaults;
 export function readPresentationSettings(saved: Record<string, unknown>): PresentationSettings {
-  const settings = { ...presentationDefaults };
+  const settings = { ...presentationDefaults, ...readGraphicsSettings(saved) };
   for (const [key, min, max] of [
-    ["fpsCap", 0, 500],
-    ["resolutionScale", 50, 100],
     ["crosshairLength", 1, 30],
     ["crosshairThickness", 1, 8],
     ["crosshairGap", 0, 20],
@@ -28,14 +25,10 @@ export function readPresentationSettings(saved: Record<string, unknown>): Presen
     if (typeof value === "number" && Number.isFinite(value))
       settings[key] = Math.max(min, Math.min(max, value));
   }
-  // A nonzero cap below 30 would discard simulation time under the frame guard.
-  if (settings.fpsCap) settings.fpsCap = Math.max(30, settings.fpsCap);
   for (const key of ["crosshairDot", "crosshairOutline", "crosshairDynamic"] as const)
     if (typeof saved[key] === "boolean") settings[key] = saved[key];
   if (typeof saved.crosshairColor === "string" && /^#[\da-f]{6}$/i.test(saved.crosshairColor))
     settings.crosshairColor = saved.crosshairColor;
-  if (["low", "medium", "high"].includes(String(saved.textureQuality)))
-    settings.textureQuality = String(saved.textureQuality);
   return settings;
 }
 export function applyCrosshair(settings: PresentationSettings) {
@@ -56,7 +49,13 @@ const textureSources = new WeakMap<T.Texture["source"], TextureSource>();
 const textureLevels = new WeakMap<T.Texture, string>();
 const sourceLevels = new WeakMap<T.Texture["source"], string>();
 /** Retain immutable source references so selecting High restores original detail. */
-export function applyTextureQuality(roots: T.Object3D[], quality: string, maxAnisotropy: number) {
+export function applyTextureQuality(
+  roots: T.Object3D[],
+  quality: string,
+  maxAnisotropy: number,
+  filtering = quality === "high" ? 8 : quality === "medium" ? 4 : 1,
+) {
+  const signature = `${quality}:${Math.min(maxAnisotropy, filtering)}`;
   const seen = new Set<T.Texture>();
   for (const root of roots)
     root.traverse((object) => {
@@ -65,7 +64,7 @@ export function applyTextureQuality(roots: T.Object3D[], quality: string, maxAni
         // Don't touch lightmaps, reflection render targets or shader data textures.
         for (const key of ["map", "normalMap", "roughnessMap", "metalnessMap"] as const) {
           const texture = (material as T.MeshStandardMaterial)[key];
-          if (!texture || seen.has(texture) || textureLevels.get(texture) === quality) continue;
+          if (!texture || seen.has(texture) || textureLevels.get(texture) === signature) continue;
           seen.add(texture);
           let source = textureSources.get(texture.source);
           if (!source) {
@@ -131,15 +130,12 @@ export function applyTextureQuality(roots: T.Object3D[], quality: string, maxAni
               }
             }
           }
-          texture.anisotropy = Math.min(
-            maxAnisotropy,
-            quality === "high" ? 8 : quality === "medium" ? 4 : 1,
-          );
+          texture.anisotropy = Math.min(maxAnisotropy, filtering);
           if (texture.generateMipmaps || texture.mipmaps.length > 1)
             texture.minFilter =
-              quality === "low" ? T.LinearMipmapNearestFilter : T.LinearMipmapLinearFilter;
+              filtering === 1 ? T.LinearMipmapNearestFilter : T.LinearMipmapLinearFilter;
           texture.needsUpdate = true;
-          textureLevels.set(texture, quality);
+          textureLevels.set(texture, signature);
           sourceLevels.set(texture.source, quality);
         }
       }

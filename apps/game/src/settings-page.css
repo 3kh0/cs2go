@@ -199,3 +199,7 @@ body:has(#menu.hidden) #settings {
   background: #141c27;
   color: white;
 }
+
+#settings .settings-panel > .settings-section-title:not(:first-child) {
+  margin-top: 28px;
+}

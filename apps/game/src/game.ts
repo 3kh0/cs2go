@@ -1,3 +1,4 @@
+import { applyShadowDetail, graphicsPixelRatio } from "./graphics-settings";
 import { bindWeaponInstance } from "./skins";
 import { createWeaponInstance, weaponInstanceName } from "./weapon-instance";
 import { grenadeData, grenadeIcons, grenadeTypes, type GrenadeKind } from "./utility";
@@ -507,7 +508,6 @@ export class Game {
     volume: 60,
     musicVolume: 25,
     effectsVolume: 100,
-    quality: "high",
     autoBunnyhop: false,
     bindings: defaultBindings(),
   };
@@ -539,6 +539,7 @@ export class Game {
   sway = 0;
   footsteps = 0;
   supported = true;
+  antialiasAtStartup = false;
   constructor(onLoad: LoadProgress = () => {}) {
     try {
       const saved = JSON.parse(localStorage.getItem("cs2go-settings") || "{}");
@@ -556,7 +557,6 @@ export class Game {
             k === "fov" ? 75 : k === "sensitivity" ? 0.2 : 0,
             k === "fov" ? 110 : k === "sensitivity" ? 3 : k === "hudHue" ? 360 : 100,
           );
-      if (["high", "low"].includes(saved.quality)) this.settings.quality = saved.quality;
       if (typeof saved.autoBunnyhop === "boolean") this.settings.autoBunnyhop = saved.autoBunnyhop;
       this.settings.bindings = readBindings(saved.bindings);
       Object.assign(this.settings, readPresentationSettings(saved));
@@ -564,9 +564,10 @@ export class Game {
       /* Optional browser storage. */
     }
     try {
+      this.antialiasAtStartup = this.settings.antialias === "msaa";
       this.renderer = new T.WebGLRenderer({
         canvas: this.canvas,
-        antialias: false,
+        antialias: this.antialiasAtStartup,
         powerPreference: "high-performance",
       });
     } catch {
@@ -653,6 +654,7 @@ export class Game {
       })
       .then(() => {
         this.assetsReady = true;
+        this.updateGraphics();
         play.disabled = false;
         play.querySelector("span")!.textContent = "PLAY CASUAL";
         onLoad(loadSteps, loadSteps);
@@ -693,34 +695,28 @@ export class Game {
     // Viewmodel lens is independent of world FOV, as in Source.
     this.viewCamera.fov = VIEWMODEL_FOV;
     this.viewCamera.updateProjectionMatrix();
-    const shadows = this.settings.quality === "high";
-    if (this.renderer.shadowMap.enabled !== shadows) {
-      this.scene.traverse((object) => {
-        if (!(object instanceof T.DirectionalLight)) return;
-        object.shadow.needsUpdate = shadows;
-        if (!shadows) {
-          object.shadow.map?.dispose();
-          object.shadow.map = null;
-          object.shadow.mapPass?.dispose();
-          object.shadow.mapPass = null;
-        }
-      });
-    }
+    this.updateGraphics();
+  }
+  updateGraphics() {
+    const roots = [this.scene, this.homeScene.graphicsRoot];
+    applyShadowDetail(roots, this.settings, this.renderer.capabilities.maxTextureSize);
+    this.renderer.shadowMap.enabled = this.settings.shadowDetail !== "off";
+    this.renderer.shadowMap.type =
+      this.settings.shadowFilter === "hard" ? T.BasicShadowMap : T.PCFShadowMap;
     this.resizeRenderer();
     this.updateTextureQuality();
-    this.renderer.shadowMap.enabled = shadows;
-    this.renderer.shadowMap.type = T.PCFShadowMap;
   }
   updateTextureQuality() {
     if (!this.assetsReady) return;
-    const changed = this.textureQualityApplied !== this.settings.textureQuality;
+    const signature = `${this.settings.textureQuality}:${this.settings.textureFiltering}`;
+    const changed = this.textureQualityApplied !== signature;
     const now = performance.now();
     if (!changed && now - this.textureViewCheck < 1000) return;
     // Cached guns are detached from the view scene. Refresh them on a quality
     // change; ordinary checks inspect only the current view and spectator gun.
     const roots: T.Object3D[] = changed
-      ? [this.scene, this.view, ...this.guns.values()]
-      : [this.view];
+      ? [this.scene, this.homeScene.graphicsRoot, this.view, ...this.guns.values()]
+      : [this.view, ...this.homeScene.previewRoots];
     if (
       this.active &&
       this.dead &&
@@ -733,21 +729,14 @@ export class Game {
       roots,
       this.settings.textureQuality,
       this.renderer.capabilities.getMaxAnisotropy(),
+      this.settings.textureFiltering,
     );
-    this.textureQualityApplied = this.settings.textureQuality;
+    this.textureQualityApplied = signature;
     this.textureViewCheck = now;
   }
   renderSize = new T.Vector2();
   resizeRenderer() {
-    // Cap total framebuffer area too: DPR alone leaves 4K laptops expensive.
-    const budget = this.settings.quality === "high" ? 2560 * 1440 : 1280 * 720;
-    const ratio =
-      (this.settings.resolutionScale / 100) *
-      Math.min(
-        devicePixelRatio,
-        this.settings.quality === "high" ? 1.5 : 1,
-        Math.sqrt(budget / (innerWidth * innerHeight)),
-      );
+    const ratio = graphicsPixelRatio(this.settings, innerWidth, innerHeight, devicePixelRatio);
     if (this.renderer.getPixelRatio() !== ratio) this.renderer.setPixelRatio(ratio);
     this.renderer.getSize(this.renderSize);
     if (this.renderSize.x !== innerWidth || this.renderSize.y !== innerHeight)
@@ -1048,6 +1037,13 @@ export class Game {
       if (this.viewGun(index) !== this.gun) viewExtras.add(this.viewGun(index));
     this.scene.add(extras);
     this.view.add(viewExtras);
+    this.updateGraphics();
+    applyTextureQuality(
+      [this.scene, this.view, this.homeScene.graphicsRoot],
+      this.settings.textureQuality,
+      this.renderer.capabilities.getMaxAnisotropy(),
+      this.settings.textureFiltering,
+    );
     const dust = this.dust.root.visible;
     this.dust.root.visible = true;
     this.renderer.compile(this.scene, this.camera);
@@ -5044,7 +5040,6 @@ export class Game {
       this.last = now;
       return;
     }
-    if (!this.simulationRunning && now - this.last < 1000 / 30 - 1) return;
     this.updateTextureQuality();
     const dt = Math.min((now - this.last) / 1000, 0.05);
     this.last = now;
@@ -5110,7 +5105,7 @@ export class Game {
     const renderClock = advanceRenderClock(
       this.lastRender,
       now,
-      this.active ? this.settings.fpsCap : 0,
+      this.active ? this.settings.fpsCap : this.settings.menuFpsCap,
     );
     if (renderClock === null) return;
     const renderDt = Math.min((now - this.lastRender) / 1000, 0.1);

@@ -36,9 +36,18 @@ type Preview = {
   agentName: string;
 };
 
-/** The home scene shares the game's renderer and 30 Hz menu clock. */
+/** The home scene shares the game's renderer and configurable menu clock. */
 export class HomeScene {
   private scene = new T.Scene();
+  get graphicsRoot() {
+    return this.scene;
+  }
+  get previewRoots() {
+    return Array.from(this.previews.values()).flatMap((preview) => [
+      preview.soldier.model,
+      preview.weapon,
+    ]);
+  }
   private camera = new T.PerspectiveCamera(30, 1, 0.1016, 254);
   private poses!: Record<AgentTeam, { rifle: Pose }>;
   private previews = new Map<AgentTeam, Preview>();

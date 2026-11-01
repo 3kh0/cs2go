@@ -64,3 +64,22 @@ it("preserves full source data when material texture clones share a Source", () 
   expect(original.image.data).toBe(pixels);
   expect(clone.image.data).toBe(pixels);
 });
+
+it("changes filtering independently from resolution and clamps it to GPU support", () => {
+  const mips = [16, 8, 4, 2, 1].map((size) => ({
+    width: size,
+    height: size,
+    data: new Uint8Array(64),
+  }));
+  const texture = new T.CompressedTexture(mips, 16, 16);
+  const mesh = new T.Mesh(new T.BoxGeometry(), new T.MeshStandardMaterial({ map: texture }));
+  applyTextureQuality([mesh], "medium", 16, 2);
+  expect(texture.image.width).toBe(8);
+  expect(texture.anisotropy).toBe(2);
+  applyTextureQuality([mesh], "medium", 4, 16);
+  expect(texture.image.width).toBe(8);
+  expect(texture.anisotropy).toBe(4);
+  applyTextureQuality([mesh], "high", 16, 1);
+  expect(texture.image.width).toBe(16);
+  expect(texture.anisotropy).toBe(1);
+});

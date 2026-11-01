@@ -1,3 +1,4 @@
+import { setupGraphicsSettings } from "./graphics-controls";
 import type { Game } from "./game";
 import { applyCrosshair } from "./presentation-settings";
 
@@ -63,10 +64,7 @@ export function setupSettingsTabs(game: Game) {
   });
   host.querySelector(":scope > .hint")?.remove();
   const video = panels.get("Video")!;
-  video.insertAdjacentHTML(
-    "beforeend",
-    `<label class="select-label">Frame rate limit<select id="fps-cap"><option value="0">Unlimited</option>${[30, 60, 90, 120, 144, 165, 240, 360].map((n) => `<option value="${n}">${n} FPS</option>`).join("")}</select></label><label>Render resolution <output id="resolutionScale-value"></output><input id="resolutionScale" type="range" min="50" max="100" step="5"></label><label class="select-label">Texture quality<select id="texture-quality"><option value="high">High · full resolution, 8× filtering</option><option value="medium">Medium · half resolution, 4× filtering</option><option value="low">Low · quarter resolution, 1× filtering</option></select></label><p class="hint">Texture quality reduces uploaded color and surface-map resolution; High restores the original detail. Baked lighting and shader data retain their original resolution. Render resolution scales the graphics preset's pixel budget. Display refresh rate may limit FPS.</p>`,
-  );
+  setupGraphicsSettings(video, game);
   const crosshair = panels.get("Crosshair")!;
   crosshair.innerHTML = `<div class="crosshair-preview-stage"><div id="crosshair-preview" class="crosshair-shape"><i></i><i></i><i></i><i></i><b></b></div><span>LIVE PREVIEW</span></div><label class="select-label">Color<input id="crosshairColor" type="color"></label>${[
     ["crosshairLength", "Length", 1, 30],
@@ -89,7 +87,6 @@ export function setupSettingsTabs(game: Game) {
     )
     .join("")}`;
   for (const id of [
-    "resolutionScale",
     "crosshairLength",
     "crosshairThickness",
     "crosshairGap",
@@ -98,7 +95,7 @@ export function setupSettingsTabs(game: Game) {
     const input = document.getElementById(id) as HTMLInputElement;
     const sync = () => {
       document.getElementById(`${id}-value`)!.textContent =
-        `${input.value}${id === "resolutionScale" || id === "crosshairOpacity" ? "%" : "px"}`;
+        `${input.value}${id === "crosshairOpacity" ? "%" : "px"}`;
     };
     input.value = String(game.settings[id]);
     sync();
@@ -120,18 +117,6 @@ export function setupSettingsTabs(game: Game) {
   color.value = game.settings.crosshairColor;
   color.oninput = () => {
     game.settings.crosshairColor = color.value;
-    game.saveSettings();
-  };
-  const fps = document.getElementById("fps-cap") as HTMLSelectElement;
-  fps.value = String(game.settings.fpsCap);
-  fps.onchange = () => {
-    game.settings.fpsCap = Number(fps.value);
-    game.saveSettings();
-  };
-  const textures = document.getElementById("texture-quality") as HTMLSelectElement;
-  textures.value = game.settings.textureQuality;
-  textures.onchange = () => {
-    game.settings.textureQuality = textures.value;
     game.saveSettings();
   };
   for (const [name, panel] of panels) {

@@ -16,7 +16,7 @@ test("texture quality follows cached weapon switches and newly applied skin maps
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await page.waitForFunction(() => window.__game?.assetsReady);
-  // assetsReady precedes asynchronous GPU warm-up; wait for the actual UI gate.
+  // Wait for the UI gate as well as the loaded scene.
   await expect(page.locator("#play")).toBeEnabled({ timeout: 90000 });
   await expect(page.locator("#startup")).toBeHidden();
   const fullWidth = await page.evaluate(() => {
@@ -59,6 +59,12 @@ test("texture quality follows cached weapon switches and newly applied skin maps
   await page.locator('[data-skin="7_44"]').click();
   await page.locator("#apply-skin").click();
   await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 45000 });
+  // Existing weapon instances intentionally keep their original finish. Create
+  // a new player weapon, as a purchase would, before checking its painted maps.
+  await page.evaluate(() => {
+    window.__game.groundInventory.newPlayerWeapon(0);
+    window.__game.equip(0);
+  });
   await expect.poll(async () => (await mapWidths()).bakedWidth).toBe(256);
   await page.evaluate(() => {
     window.__game.settings.textureQuality = "high";

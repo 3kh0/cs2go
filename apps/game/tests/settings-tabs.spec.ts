@@ -8,6 +8,7 @@ declare global {
 
 test("tabbed settings apply crosshair and video detail, persist and keep the match live", async ({
   page,
+  baseURL,
 }) => {
   test.setTimeout(180_000);
   const errors: string[] = [];
@@ -17,7 +18,7 @@ test("tabbed settings apply crosshair and video detail, persist and keep the mat
   });
   const external: string[] = [];
   page.on("request", (request) => {
-    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
   });
   // Keep this long asset/interaction test stable during local development edits.
   await page.routeWebSocket("**", (socket) => {
@@ -32,7 +33,8 @@ test("tabbed settings apply crosshair and video detail, persist and keep the mat
   await expect(page.locator("#startup")).toHaveCount(0);
   await page.locator("#settings-button").click();
   await expect(page.getByRole("tab")).toHaveCount(5);
-  await page.locator("#quality").selectOption("low");
+  await page.locator("#quality").selectOption("performance");
+  await page.locator("#texture-quality").selectOption("high");
   await page.locator("#fps-cap").selectOption("30");
   await page.locator("#resolutionScale").fill("75");
   const source = await page.evaluate(() => {
