@@ -37,6 +37,8 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 - `apps/server/src/`: authoritative Bun match server; deploy with the root DHI Dockerfile.
 - `apps/game/src/weapons.ts`: GLB loading, first-person hands, and sampled weapon animation tracks.
 - `apps/game/src/soldier.ts`: articulated soldiers and walking/death animation.
+- `apps/game/src/agent-animations.ts`, `gloves.ts`, `cosmetic-menu.ts`: native animation packs, per-team gloves/arms and Inventory cosmetics.
+- `apps/game/src/viewmodel-settings.ts`, `viewmodel-controls.ts`: Source viewmodel projection and saved preview controls.
 - `apps/game/src/audio.ts`: weapon clips and bounded Web Audio voices.
 - `apps/game/src/spatial-audio.ts`: camera-relative HRTF positioning and bounded wall-occlusion filtering.
 - `apps/game/src/bot-tactics.ts`: perception, aim, hit-region, burst, and defuser helpers.

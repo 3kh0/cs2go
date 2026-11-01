@@ -211,6 +211,7 @@ export function configurePlayer(
     player.avatar = configuration.profile.avatar;
   }
   player.agent = configuration.agents[player.team];
+  player.glove = { ...(configuration.gloves?.[player.team] ?? { id: "", wear: 0.01, seed: 1 }) };
   if (first) player.allowedWeapons = [...configuration.loadouts[player.team]];
   if (
     first &&
@@ -263,6 +264,13 @@ export function respawn(player: PlayerState, match: Match, preserve = false) {
   player.scope = 0;
   player.agent =
     match.configurations.get(player.id)?.agents[player.team] ?? `default-${player.team}`;
+  player.glove = {
+    ...(match.configurations.get(player.id)?.gloves?.[player.team] ?? {
+      id: "",
+      wear: 0.01,
+      seed: 1,
+    }),
+  };
   player.punch = match.combat.get(player.id)!.punch;
   const points = match.map.spawns[player.team];
   const team = [...match.players.values()].filter((other) => other.team === player.team);

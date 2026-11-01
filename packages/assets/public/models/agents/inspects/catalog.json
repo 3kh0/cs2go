@@ -1,0 +1,835 @@
+{
+  "5200": {
+    "name": "T Agent (Default)",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix.glb",
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "pose": "cu_ct_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5600": {
+    "name": "CT Agent (Default)",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas.glb",
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "pose": "cu_ct_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5602": {
+    "name": "D Squadron Officer | NZSAS",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas-variantg.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas_variantg.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas_variantg.glb",
+    "image": "/models/agents/inspects/thumbs/5602.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5601": {
+    "name": "B Squadron Officer | SAS",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-sas-variantf.glb",
+    "nativeModel": "agents/models/ctm_sas/ctm_sas_variantf.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas_variantf.glb",
+    "image": "/models/agents/inspects/thumbs/5601.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5505": {
+    "name": "Dragomir | Sabre Footsoldier",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantl.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantl.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantl.glb",
+    "image": "/models/agents/inspects/thumbs/5505.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5504": {
+    "name": "'The Doctor' Romanov | Sabre",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-varianth.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_varianth.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_varianth.glb",
+    "image": "/models/agents/inspects/thumbs/5504.webp",
+    "pose": "cu_t_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5503": {
+    "name": "Blackwolf | Sabre",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantj.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantj.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantj.glb",
+    "image": "/models/agents/inspects/thumbs/5503.webp",
+    "pose": "cu_t_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5502": {
+    "name": "Rezan The Ready | Sabre",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantg.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantg.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantg.glb",
+    "image": "/models/agents/inspects/thumbs/5502.webp",
+    "pose": "cu_t_pose03",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5501": {
+    "name": "Maximus | Sabre",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-varianti.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_varianti.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_varianti.glb",
+    "image": "/models/agents/inspects/thumbs/5501.webp",
+    "pose": "cu_t_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5500": {
+    "name": "Dragomir | Sabre",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantf.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantf.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantf.glb",
+    "image": "/models/agents/inspects/thumbs/5500.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5405": {
+    "name": "Primeiro Tenente | Brazilian 1st Battalion",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantn.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantn.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantn.glb",
+    "image": "/models/agents/inspects/thumbs/5405.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5404": {
+    "name": "Lt. Commander Ricksaw | NSWC SEAL",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-varianti.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_varianti.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_varianti.glb",
+    "image": "/models/agents/inspects/thumbs/5404.webp",
+    "pose": "cu_ct_pose03",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "5403": {
+    "name": "'Two Times' McCoy | USAF TACP",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantm.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantm.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantm.glb",
+    "image": "/models/agents/inspects/thumbs/5403.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5402": {
+    "name": "Buckshot | NSWC SEAL",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantg.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantg.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantg.glb",
+    "image": "/models/agents/inspects/thumbs/5402.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5401": {
+    "name": "Seal Team 6 Soldier | NSWC SEAL",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variante.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variante.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variante.glb",
+    "image": "/models/agents/inspects/thumbs/5401.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5400": {
+    "name": "3rd Commando Company | KSK",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantk.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantk.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantk.glb",
+    "image": "/models/agents/inspects/thumbs/5400.webp",
+    "pose": "cu_ct_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5308": {
+    "name": "Special Agent Ava | FBI",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variantb.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantb.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantb.glb",
+    "image": "/models/agents/inspects/thumbs/5308.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5307": {
+    "name": "Michael Syfers  | FBI Sniper",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-varianth.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_varianth.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_varianth.glb",
+    "image": "/models/agents/inspects/thumbs/5307.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5306": {
+    "name": "Markus Delrow | FBI HRT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variantg.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantg.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantg.glb",
+    "image": "/models/agents/inspects/thumbs/5306.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5305": {
+    "name": "Operator | FBI SWAT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-fbi-variantf.glb",
+    "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantf.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantf.glb",
+    "image": "/models/agents/inspects/thumbs/5305.webp",
+    "pose": "cu_ct_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5208": {
+    "name": "Street Soldier | Phoenix",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-varianti.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_varianti.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_varianti.glb",
+    "image": "/models/agents/inspects/thumbs/5208.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5207": {
+    "name": "Slingshot | Phoenix",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-variantg.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantg.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_variantg.glb",
+    "image": "/models/agents/inspects/thumbs/5207.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5206": {
+    "name": "Enforcer | Phoenix",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-variantf.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantf.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_variantf.glb",
+    "image": "/models/agents/inspects/thumbs/5206.webp",
+    "pose": "cu_t_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5205": {
+    "name": "Soldier | Phoenix",
+    "team": "t",
+    "model": "/models/agents/roster/tm-phoenix-varianth.glb",
+    "nativeModel": "agents/models/tm_phoenix/tm_phoenix_varianth.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_varianth.glb",
+    "image": "/models/agents/inspects/thumbs/5205.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5109": {
+    "name": "Jungle Rebel | Elite Crew",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantj.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantj.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantj.glb",
+    "image": "/models/agents/inspects/thumbs/5109.webp",
+    "pose": "cu_t_pose03",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5108": {
+    "name": "The Elite Mr. Muhlik | Elite Crew",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantf.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantf.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantf.glb",
+    "image": "/models/agents/inspects/thumbs/5108.webp",
+    "pose": "cu_t_pose03",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5107": {
+    "name": "Prof. Shahmat | Elite Crew",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-varianti.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_varianti.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_varianti.glb",
+    "image": "/models/agents/inspects/thumbs/5107.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "5106": {
+    "name": "Osiris | Elite Crew",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-varianth.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_varianth.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_varianth.glb",
+    "image": "/models/agents/inspects/thumbs/5106.webp",
+    "pose": "cu_t_pose03",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "5105": {
+    "name": "Ground Rebel  | Elite Crew",
+    "team": "t",
+    "model": "/models/agents/roster/tm-leet-variantg.glb",
+    "nativeModel": "agents/models/tm_leet/tm_leet_variantg.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantg.glb",
+    "image": "/models/agents/inspects/thumbs/5105.webp",
+    "pose": "cu_t_pose03",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4781": {
+    "name": "Trapper | Guerrilla Warfare",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantf2.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantf2.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantf2.glb",
+    "image": "/models/agents/inspects/thumbs/4781.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4780": {
+    "name": "'Medium Rare' Crasswater | Guerrilla Warfare",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantb2.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantb2.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantb2.glb",
+    "image": "/models/agents/inspects/thumbs/4780.webp",
+    "pose": "cu_t_jungle_male",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4778": {
+    "name": "Trapper Aggressor | Guerrilla Warfare",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantf.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantf.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantf.glb",
+    "image": "/models/agents/inspects/thumbs/4778.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4777": {
+    "name": "Vypa Sista of the Revolution | Guerrilla Warfare",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variante.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variante.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variante.glb",
+    "image": "/models/agents/inspects/thumbs/4777.webp",
+    "pose": "cu_t_jungle_female",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4776": {
+    "name": "Col. Mangos Dabisi | Guerrilla Warfare",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantd.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantd.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantd.glb",
+    "image": "/models/agents/inspects/thumbs/4776.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4775": {
+    "name": "Arno The Overgrown | Guerrilla Warfare",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantc.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantc.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantc.glb",
+    "image": "/models/agents/inspects/thumbs/4775.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4774": {
+    "name": "Crasswater The Forgotten | Guerrilla Warfare",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-variantb.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantb.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantb.glb",
+    "image": "/models/agents/inspects/thumbs/4774.webp",
+    "pose": "cu_t_jungle_male",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4773": {
+    "name": "Elite Trapper Solman | Guerrilla Warfare",
+    "team": "t",
+    "model": "/models/agents/roster/tm-jungle-raider-varianta.glb",
+    "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_varianta.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_varianta.glb",
+    "image": "/models/agents/inspects/thumbs/4773.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4772": {
+    "name": "Lieutenant Rex Krikey | SEAL Frogman",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-diver-variantc.glb",
+    "nativeModel": "agents/models/ctm_diver/ctm_diver_variantc.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_variantc.glb",
+    "image": "/models/agents/inspects/thumbs/4772.webp",
+    "pose": "cu_ct_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4771": {
+    "name": "Cmdr. Frank 'Wet Sox' Baroud | SEAL Frogman",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-diver-variantb.glb",
+    "nativeModel": "agents/models/ctm_diver/ctm_diver_variantb.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_variantb.glb",
+    "image": "/models/agents/inspects/thumbs/4771.webp",
+    "pose": "cu_scuba_male",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4757": {
+    "name": "Cmdr. Davida 'Goggles' Fernandez | SEAL Frogman",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-diver-varianta.glb",
+    "nativeModel": "agents/models/ctm_diver/ctm_diver_varianta.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_varianta.glb",
+    "image": "/models/agents/inspects/thumbs/4757.webp",
+    "pose": "cu_scuba_female",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4756": {
+    "name": "Lieutenant 'Tree Hugger' Farlow | SWAT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variantk.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variantk.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantk.glb",
+    "image": "/models/agents/inspects/thumbs/4756.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4753": {
+    "name": "Officer Jacques Beltram | Gendarmerie Nationale",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-variante.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variante.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variante.glb",
+    "image": "/models/agents/inspects/thumbs/4753.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4752": {
+    "name": "Aspirant | Gendarmerie Nationale",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-variantd.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantd.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantd.glb",
+    "image": "/models/agents/inspects/thumbs/4752.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4751": {
+    "name": "Chef d'Escadron Rouchard | Gendarmerie Nationale",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-variantc.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantc.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantc.glb",
+    "image": "/models/agents/inspects/thumbs/4751.webp",
+    "pose": "cu_ct_gendarmerie01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4750": {
+    "name": "Chem-Haz Capitaine | Gendarmerie Nationale",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-variantb.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantb.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantb.glb",
+    "image": "/models/agents/inspects/thumbs/4750.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4749": {
+    "name": "Sous-Lieutenant Medic | Gendarmerie Nationale",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-gendarmerie-varianta.glb",
+    "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_varianta.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_varianta.glb",
+    "image": "/models/agents/inspects/thumbs/4749.webp",
+    "pose": "cu_ct_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4736": {
+    "name": "Sir Bloody Loudmouth Darryl | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf4.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf4.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf4.glb",
+    "image": "/models/agents/inspects/thumbs/4736.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4735": {
+    "name": "Sir Bloody Darryl Royale | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf3.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf3.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf3.glb",
+    "image": "/models/agents/inspects/thumbs/4735.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4734": {
+    "name": "Sir Bloody Skullhead Darryl | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf2.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf2.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf2.glb",
+    "image": "/models/agents/inspects/thumbs/4734.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4733": {
+    "name": "Sir Bloody Silent Darryl | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf1.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf1.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf1.glb",
+    "image": "/models/agents/inspects/thumbs/4733.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4732": {
+    "name": "Number K | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-vari.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_vari.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_vari.glb",
+    "image": "/models/agents/inspects/thumbs/4732.webp",
+    "pose": "cu_t_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4730": {
+    "name": "Getaway Sally | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varj.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varj.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varj.glb",
+    "image": "/models/agents/inspects/thumbs/4730.webp",
+    "pose": "cu_t_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4728": {
+    "name": "Little Kev | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varh.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varh.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varh.glb",
+    "image": "/models/agents/inspects/thumbs/4728.webp",
+    "pose": "cu_t_pose03",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4727": {
+    "name": "Safecracker Voltzmann | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varg.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varg.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varg.glb",
+    "image": "/models/agents/inspects/thumbs/4727.webp",
+    "pose": "cu_t_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default"
+    ]
+  },
+  "4726": {
+    "name": "Sir Bloody Miami Darryl | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf.glb",
+    "image": "/models/agents/inspects/thumbs/4726.webp",
+    "pose": "cu_t_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4718": {
+    "name": "Rezan the Redshirt | Sabre",
+    "team": "t",
+    "model": "/models/agents/roster/tm-balkan-variantk.glb",
+    "nativeModel": "agents/models/tm_balkan/tm_balkan_variantk.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantk.glb",
+    "image": "/models/agents/inspects/thumbs/4718.webp",
+    "pose": "cu_t_pose03",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4716": {
+    "name": "Chem-Haz Specialist | SWAT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variantj.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variantj.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantj.glb",
+    "image": "/models/agents/inspects/thumbs/4716.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4715": {
+    "name": "Sergeant Bombson | SWAT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-varianti.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_varianti.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_varianti.glb",
+    "image": "/models/agents/inspects/thumbs/4715.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4714": {
+    "name": "Bio-Haz Specialist | SWAT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-varianth.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_varianth.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_varianth.glb",
+    "image": "/models/agents/inspects/thumbs/4714.webp",
+    "pose": "cu_ct_pose01",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4713": {
+    "name": "John 'Van Healen' Kask | SWAT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variantg.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variantg.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantg.glb",
+    "image": "/models/agents/inspects/thumbs/4713.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4712": {
+    "name": "1st Lieutenant Farlow | SWAT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variantf.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variantf.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantf.glb",
+    "image": "/models/agents/inspects/thumbs/4712.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4711": {
+    "name": "Cmdr. Mae 'Dead Cold' Jamison | SWAT",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-swat-variante.glb",
+    "nativeModel": "agents/models/ctm_swat/ctm_swat_variante.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variante.glb",
+    "image": "/models/agents/inspects/thumbs/4711.webp",
+    "pose": "cu_ct_pose05",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4680": {
+    "name": "'Two Times' McCoy | TACP Cavalry",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantl.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantl.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantl.glb",
+    "image": "/models/agents/inspects/thumbs/4680.webp",
+    "pose": "cu_ct_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4619": {
+    "name": "'Blueberries' Buckshot | NSWC SEAL",
+    "team": "ct",
+    "model": "/models/agents/roster/ctm-st6-variantj.glb",
+    "nativeModel": "agents/models/ctm_st6/ctm_st6_variantj.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantj.glb",
+    "image": "/models/agents/inspects/thumbs/4619.webp",
+    "pose": "cu_ct_pose02",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  },
+  "4613": {
+    "name": "Bloody Darryl The Strapped | The Professionals",
+    "team": "t",
+    "model": "/models/agents/roster/tm-professional-varf5.glb",
+    "nativeModel": "agents/models/tm_professional/tm_professional_varf5.vmdl_c",
+    "viewerModel": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf5.glb",
+    "image": "/models/agents/inspects/thumbs/4613.webp",
+    "pose": "cu_t_pose04",
+    "firstPerson": [
+      "first_or_third_person_@2_#&firstperson_default",
+      "first_or_third_person_@3_#&firstperson_hide_default_gloves"
+    ]
+  }
+}

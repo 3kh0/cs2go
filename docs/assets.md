@@ -48,6 +48,12 @@ The same revision contains the detailed extraction notes under `docs/`. No dupli
 
 ## Updating assets
 
+`python3 scripts/import-agent-animations.py` imports the pinned CS2 Inspects agent catalog and 153 deduplicated animation packs (1,221 agent clips; pet clips are excluded). All 65 source agents map to the existing native roster, preserving saved aliases and avoiding duplicate body models. Provenance is under `models/agents/inspects/`. Common movement loads at startup; weapon actions and searchable preview packs load on demand. Clips do not execute the complete native graph, IK or procedural masks; secondary weapon tracks remain preserved as data while world props retain their existing mechanical rendering.
+
+`python3 scripts/import-gloves.py` imports 96 glove entries (94 paints and two defaults), ten native models, local shader/mask assets and thumbnails. `python3 scripts/import-gloves.py --agent-arms` imports the 65 agents' first-person sleeve/default-glove variants. Model/finish caches retain active leases plus two idle entries. Provenance is under `models/gloves/` and `skins/gloves/`. The importer needs Bun, curl, Pillow and NumPy; original inputs remain cached/read-only under `artifacts/`.
+
+Viewmodel controls follow the viewer's native 4:3 horizontal-FOV conversion, Source-inch offsets and aspect stretch, verified against viewer bundle `index-CXUheY2V.js` (SHA-256 `724899da942ccf6d0ec3864caeee02e5bcbe3f8d28c8375d1e128bb77d6e6ba4`). This matches projection/settings, not the complete Source 2 renderer or animation graph.
+
 Run the relevant maintained tool, review changed outputs/provenance, then:
 
 ```sh

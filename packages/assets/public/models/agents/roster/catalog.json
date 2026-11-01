@@ -7,7 +7,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5037-ct",
@@ -17,7 +20,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5038-t",
@@ -27,7 +33,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5039-t",
@@ -37,7 +46,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5040-t",
@@ -47,7 +59,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5041-t",
@@ -57,7 +72,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5042-t",
@@ -67,7 +85,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5043-t",
@@ -77,7 +98,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5044-t",
@@ -87,7 +111,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5045-t",
@@ -97,7 +124,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5046-t",
@@ -107,7 +137,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5047-t",
@@ -117,7 +150,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5048-t",
@@ -127,7 +163,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5049-t",
@@ -137,7 +176,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5050-t",
@@ -147,7 +189,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5051-t",
@@ -157,7 +202,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5052-t",
@@ -167,7 +215,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5053-t",
@@ -177,7 +228,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5054-t",
@@ -187,7 +241,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5055-t",
@@ -197,7 +254,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5056-t",
@@ -207,7 +267,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5057-t",
@@ -217,7 +280,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5058-ct",
@@ -227,7 +293,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5059-ct",
@@ -237,7 +306,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5060-ct",
@@ -247,7 +319,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5061-ct",
@@ -257,7 +332,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5062-ct",
@@ -267,7 +345,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5063-ct",
@@ -277,7 +358,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5064-ct",
@@ -287,7 +371,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5065-ct",
@@ -297,7 +384,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5066-ct",
@@ -307,7 +397,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5067-ct",
@@ -317,7 +410,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5068-ct",
@@ -327,7 +423,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5069-ct",
@@ -337,7 +436,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5070-ct",
@@ -347,7 +449,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5071-ct",
@@ -357,7 +462,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5072-ct",
@@ -367,7 +475,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5073-ct",
@@ -377,7 +488,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5074-ct",
@@ -387,7 +501,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5075-ct",
@@ -397,7 +514,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5076-ct",
@@ -407,7 +527,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5077-ct",
@@ -417,7 +540,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5078-ct",
@@ -427,7 +553,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5079-ct",
@@ -437,7 +566,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5080-ct",
@@ -447,7 +579,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5081-ct",
@@ -457,7 +592,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5082-ct",
@@ -467,7 +605,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5083-ct",
@@ -477,7 +618,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5084-ct",
@@ -487,7 +631,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5085-ct",
@@ -497,7 +644,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5086-ct",
@@ -507,7 +657,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5087-ct",
@@ -517,7 +670,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5088-t",
@@ -527,7 +683,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5089-t",
@@ -537,7 +696,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5090-t",
@@ -547,7 +709,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5091-t",
@@ -557,7 +722,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5092-t",
@@ -567,7 +735,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5093-t",
@@ -577,7 +748,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5094-t",
@@ -587,7 +761,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5095-t",
@@ -597,7 +774,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5096-t",
@@ -607,7 +787,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5097-ct",
@@ -617,11 +800,14 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5100-t",
-    "name": "Elite Crew | Default · Variant A",
+    "name": "Elite Crew | Default \u00b7 Variant A",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -631,7 +817,7 @@
   },
   {
     "id": "agent-5101-t",
-    "name": "Elite Crew | Default · Variant B",
+    "name": "Elite Crew | Default \u00b7 Variant B",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -641,7 +827,7 @@
   },
   {
     "id": "agent-5102-t",
-    "name": "Elite Crew | Default · Variant C",
+    "name": "Elite Crew | Default \u00b7 Variant C",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -651,7 +837,7 @@
   },
   {
     "id": "agent-5103-t",
-    "name": "Elite Crew | Default · Variant D",
+    "name": "Elite Crew | Default \u00b7 Variant D",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -661,7 +847,7 @@
   },
   {
     "id": "agent-5104-t",
-    "name": "Elite Crew | Default · Variant E",
+    "name": "Elite Crew | Default \u00b7 Variant E",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -677,7 +863,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-leet-variantg.glb",
     "nativeModel": "agents/models/tm_leet/tm_leet_variantg.vmdl_c",
-    "bytes": 2826776
+    "bytes": 2826776,
+    "itemId": 5105,
+    "image": "/models/agents/inspects/thumbs/5105.webp",
+    "sourcePose": "cu_t_pose03"
   },
   {
     "id": "agent-5106-t",
@@ -687,7 +876,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-leet-varianth.glb",
     "nativeModel": "agents/models/tm_leet/tm_leet_varianth.vmdl_c",
-    "bytes": 2576216
+    "bytes": 2576216,
+    "itemId": 5106,
+    "image": "/models/agents/inspects/thumbs/5106.webp",
+    "sourcePose": "cu_t_pose03"
   },
   {
     "id": "agent-5107-t",
@@ -697,7 +889,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-leet-varianti.glb",
     "nativeModel": "agents/models/tm_leet/tm_leet_varianti.vmdl_c",
-    "bytes": 2627136
+    "bytes": 2627136,
+    "itemId": 5107,
+    "image": "/models/agents/inspects/thumbs/5107.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-5108-t",
@@ -707,7 +902,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-leet-variantf.glb",
     "nativeModel": "agents/models/tm_leet/tm_leet_variantf.vmdl_c",
-    "bytes": 2660876
+    "bytes": 2660876,
+    "itemId": 5108,
+    "image": "/models/agents/inspects/thumbs/5108.webp",
+    "sourcePose": "cu_t_pose03"
   },
   {
     "id": "agent-5109-t",
@@ -717,7 +915,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-leet-variantj.glb",
     "nativeModel": "agents/models/tm_leet/tm_leet_variantj.vmdl_c",
-    "bytes": 2569372
+    "bytes": 2569372,
+    "itemId": 5109,
+    "image": "/models/agents/inspects/thumbs/5109.webp",
+    "sourcePose": "cu_t_pose03"
   },
   {
     "id": "agent-5200-t",
@@ -727,11 +928,14 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
-    "bytes": 2396472
+    "bytes": 2396472,
+    "itemId": 5200,
+    "image": "/models/agents/inspects/thumbs/5200.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5201-t",
-    "name": "Phoenix | Default · Variant A",
+    "name": "Phoenix | Default \u00b7 Variant A",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -741,7 +945,7 @@
   },
   {
     "id": "agent-5202-t",
-    "name": "Phoenix | Default · Variant B",
+    "name": "Phoenix | Default \u00b7 Variant B",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -751,7 +955,7 @@
   },
   {
     "id": "agent-5203-t",
-    "name": "Phoenix | Default · Variant C",
+    "name": "Phoenix | Default \u00b7 Variant C",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -761,7 +965,7 @@
   },
   {
     "id": "agent-5204-t",
-    "name": "Phoenix | Default · Variant D",
+    "name": "Phoenix | Default \u00b7 Variant D",
     "nativeName": "Default T Agent",
     "category": "base",
     "team": "t",
@@ -777,7 +981,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix-varianth.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix_varianth.vmdl_c",
-    "bytes": 2369512
+    "bytes": 2369512,
+    "itemId": 5205,
+    "image": "/models/agents/inspects/thumbs/5205.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-5206-t",
@@ -787,7 +994,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix-variantf.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantf.vmdl_c",
-    "bytes": 2350244
+    "bytes": 2350244,
+    "itemId": 5206,
+    "image": "/models/agents/inspects/thumbs/5206.webp",
+    "sourcePose": "cu_t_pose02"
   },
   {
     "id": "agent-5207-t",
@@ -797,7 +1007,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix-variantg.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix_variantg.vmdl_c",
-    "bytes": 2368636
+    "bytes": 2368636,
+    "itemId": 5207,
+    "image": "/models/agents/inspects/thumbs/5207.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-5208-t",
@@ -807,7 +1020,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-phoenix-varianti.glb",
     "nativeModel": "agents/models/tm_phoenix/tm_phoenix_varianti.vmdl_c",
-    "bytes": 2362364
+    "bytes": 2362364,
+    "itemId": 5208,
+    "image": "/models/agents/inspects/thumbs/5208.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-5300-ct",
@@ -821,7 +1037,7 @@
   },
   {
     "id": "agent-5301-ct",
-    "name": "FBI | Default · Variant A",
+    "name": "FBI | Default \u00b7 Variant A",
     "nativeName": "Default CT Agent",
     "category": "base",
     "team": "ct",
@@ -831,7 +1047,7 @@
   },
   {
     "id": "agent-5302-ct",
-    "name": "FBI | Default · Variant C",
+    "name": "FBI | Default \u00b7 Variant C",
     "nativeName": "Default CT Agent",
     "category": "base",
     "team": "ct",
@@ -841,7 +1057,7 @@
   },
   {
     "id": "agent-5303-ct",
-    "name": "FBI | Default · Variant D",
+    "name": "FBI | Default \u00b7 Variant D",
     "nativeName": "Default CT Agent",
     "category": "base",
     "team": "ct",
@@ -851,7 +1067,7 @@
   },
   {
     "id": "agent-5304-ct",
-    "name": "FBI | Default · Variant E",
+    "name": "FBI | Default \u00b7 Variant E",
     "nativeName": "Default CT Agent",
     "category": "base",
     "team": "ct",
@@ -867,7 +1083,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-fbi-variantf.glb",
     "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantf.vmdl_c",
-    "bytes": 2667668
+    "bytes": 2667668,
+    "itemId": 5305,
+    "image": "/models/agents/inspects/thumbs/5305.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5306-ct",
@@ -877,7 +1096,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-fbi-variantg.glb",
     "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantg.vmdl_c",
-    "bytes": 2567484
+    "bytes": 2567484,
+    "itemId": 5306,
+    "image": "/models/agents/inspects/thumbs/5306.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-5307-ct",
@@ -887,7 +1109,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-fbi-varianth.glb",
     "nativeModel": "agents/models/ctm_fbi/ctm_fbi_varianth.vmdl_c",
-    "bytes": 2517296
+    "bytes": 2517296,
+    "itemId": 5307,
+    "image": "/models/agents/inspects/thumbs/5307.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-5308-ct",
@@ -897,7 +1122,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-fbi-variantb.glb",
     "nativeModel": "agents/models/ctm_fbi/ctm_fbi_variantb.vmdl_c",
-    "bytes": 2577112
+    "bytes": 2577112,
+    "itemId": 5308,
+    "image": "/models/agents/inspects/thumbs/5308.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-5400-ct",
@@ -907,7 +1135,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-st6-variantk.glb",
     "nativeModel": "agents/models/ctm_st6/ctm_st6_variantk.vmdl_c",
-    "bytes": 2451424
+    "bytes": 2451424,
+    "itemId": 5400,
+    "image": "/models/agents/inspects/thumbs/5400.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5401-ct",
@@ -917,7 +1148,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-st6-variante.glb",
     "nativeModel": "agents/models/ctm_st6/ctm_st6_variante.vmdl_c",
-    "bytes": 2496500
+    "bytes": 2496500,
+    "itemId": 5401,
+    "image": "/models/agents/inspects/thumbs/5401.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-5402-ct",
@@ -927,7 +1161,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-st6-variantg.glb",
     "nativeModel": "agents/models/ctm_st6/ctm_st6_variantg.vmdl_c",
-    "bytes": 2936456
+    "bytes": 2936456,
+    "itemId": 5402,
+    "image": "/models/agents/inspects/thumbs/5402.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-5403-ct",
@@ -937,7 +1174,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-st6-variantm.glb",
     "nativeModel": "agents/models/ctm_st6/ctm_st6_variantm.vmdl_c",
-    "bytes": 2849124
+    "bytes": 2849124,
+    "itemId": 5403,
+    "image": "/models/agents/inspects/thumbs/5403.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-5404-ct",
@@ -947,7 +1187,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-st6-varianti.glb",
     "nativeModel": "agents/models/ctm_st6/ctm_st6_varianti.vmdl_c",
-    "bytes": 2857160
+    "bytes": 2857160,
+    "itemId": 5404,
+    "image": "/models/agents/inspects/thumbs/5404.webp",
+    "sourcePose": "cu_ct_pose03"
   },
   {
     "id": "agent-4619-ct",
@@ -957,7 +1200,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-st6-variantj.glb",
     "nativeModel": "agents/models/ctm_st6/ctm_st6_variantj.vmdl_c",
-    "bytes": 2941004
+    "bytes": 2941004,
+    "itemId": 4619,
+    "image": "/models/agents/inspects/thumbs/4619.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-4680-ct",
@@ -967,7 +1213,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-st6-variantl.glb",
     "nativeModel": "agents/models/ctm_st6/ctm_st6_variantl.vmdl_c",
-    "bytes": 2905136
+    "bytes": 2905136,
+    "itemId": 4680,
+    "image": "/models/agents/inspects/thumbs/4680.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-5405-ct",
@@ -977,7 +1226,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-st6-variantn.glb",
     "nativeModel": "agents/models/ctm_st6/ctm_st6_variantn.vmdl_c",
-    "bytes": 2593444
+    "bytes": 2593444,
+    "itemId": 5405,
+    "image": "/models/agents/inspects/thumbs/5405.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-5500-t",
@@ -987,7 +1239,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-balkan-variantf.glb",
     "nativeModel": "agents/models/tm_balkan/tm_balkan_variantf.vmdl_c",
-    "bytes": 2549116
+    "bytes": 2549116,
+    "itemId": 5500,
+    "image": "/models/agents/inspects/thumbs/5500.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-5501-t",
@@ -997,7 +1252,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-balkan-varianti.glb",
     "nativeModel": "agents/models/tm_balkan/tm_balkan_varianti.vmdl_c",
-    "bytes": 2500816
+    "bytes": 2500816,
+    "itemId": 5501,
+    "image": "/models/agents/inspects/thumbs/5501.webp",
+    "sourcePose": "cu_t_pose04"
   },
   {
     "id": "agent-5502-t",
@@ -1007,7 +1265,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-balkan-variantg.glb",
     "nativeModel": "agents/models/tm_balkan/tm_balkan_variantg.vmdl_c",
-    "bytes": 2517936
+    "bytes": 2517936,
+    "itemId": 5502,
+    "image": "/models/agents/inspects/thumbs/5502.webp",
+    "sourcePose": "cu_t_pose03"
   },
   {
     "id": "agent-5503-t",
@@ -1017,7 +1278,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-balkan-variantj.glb",
     "nativeModel": "agents/models/tm_balkan/tm_balkan_variantj.vmdl_c",
-    "bytes": 2619908
+    "bytes": 2619908,
+    "itemId": 5503,
+    "image": "/models/agents/inspects/thumbs/5503.webp",
+    "sourcePose": "cu_t_pose04"
   },
   {
     "id": "agent-5504-t",
@@ -1027,7 +1291,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-balkan-varianth.glb",
     "nativeModel": "agents/models/tm_balkan/tm_balkan_varianth.vmdl_c",
-    "bytes": 2532544
+    "bytes": 2532544,
+    "itemId": 5504,
+    "image": "/models/agents/inspects/thumbs/5504.webp",
+    "sourcePose": "cu_t_pose02"
   },
   {
     "id": "agent-4718-t",
@@ -1037,7 +1304,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-balkan-variantk.glb",
     "nativeModel": "agents/models/tm_balkan/tm_balkan_variantk.vmdl_c",
-    "bytes": 2473088
+    "bytes": 2473088,
+    "itemId": 4718,
+    "image": "/models/agents/inspects/thumbs/4718.webp",
+    "sourcePose": "cu_t_pose03"
   },
   {
     "id": "agent-5505-t",
@@ -1047,7 +1317,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-balkan-variantl.glb",
     "nativeModel": "agents/models/tm_balkan/tm_balkan_variantl.vmdl_c",
-    "bytes": 2563884
+    "bytes": 2563884,
+    "itemId": 5505,
+    "image": "/models/agents/inspects/thumbs/5505.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-5600-ct",
@@ -1057,7 +1330,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas.vmdl_c",
-    "bytes": 1925412
+    "bytes": 1925412,
+    "itemId": 5600,
+    "image": "/models/agents/inspects/thumbs/5600.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-5601-ct",
@@ -1067,7 +1343,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas-variantf.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas_variantf.vmdl_c",
-    "bytes": 1959800
+    "bytes": 1959800,
+    "itemId": 5601,
+    "image": "/models/agents/inspects/thumbs/5601.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-5602-ct",
@@ -1077,7 +1356,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-sas-variantg.glb",
     "nativeModel": "agents/models/ctm_sas/ctm_sas_variantg.vmdl_c",
-    "bytes": 1972924
+    "bytes": 1972924,
+    "itemId": 5602,
+    "image": "/models/agents/inspects/thumbs/5602.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-4711-ct",
@@ -1087,7 +1369,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-swat-variante.glb",
     "nativeModel": "agents/models/ctm_swat/ctm_swat_variante.vmdl_c",
-    "bytes": 3016876
+    "bytes": 3016876,
+    "itemId": 4711,
+    "image": "/models/agents/inspects/thumbs/4711.webp",
+    "sourcePose": "cu_ct_pose05"
   },
   {
     "id": "agent-4712-ct",
@@ -1097,7 +1382,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-swat-variantf.glb",
     "nativeModel": "agents/models/ctm_swat/ctm_swat_variantf.vmdl_c",
-    "bytes": 2617100
+    "bytes": 2617100,
+    "itemId": 4712,
+    "image": "/models/agents/inspects/thumbs/4712.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-4713-ct",
@@ -1107,7 +1395,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-swat-variantg.glb",
     "nativeModel": "agents/models/ctm_swat/ctm_swat_variantg.vmdl_c",
-    "bytes": 2542684
+    "bytes": 2542684,
+    "itemId": 4713,
+    "image": "/models/agents/inspects/thumbs/4713.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-4714-ct",
@@ -1117,7 +1408,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-swat-varianth.glb",
     "nativeModel": "agents/models/ctm_swat/ctm_swat_varianth.vmdl_c",
-    "bytes": 2257848
+    "bytes": 2257848,
+    "itemId": 4714,
+    "image": "/models/agents/inspects/thumbs/4714.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-4715-ct",
@@ -1127,7 +1421,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-swat-varianti.glb",
     "nativeModel": "agents/models/ctm_swat/ctm_swat_varianti.vmdl_c",
-    "bytes": 2411620
+    "bytes": 2411620,
+    "itemId": 4715,
+    "image": "/models/agents/inspects/thumbs/4715.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-4716-ct",
@@ -1137,7 +1434,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-swat-variantj.glb",
     "nativeModel": "agents/models/ctm_swat/ctm_swat_variantj.vmdl_c",
-    "bytes": 2241652
+    "bytes": 2241652,
+    "itemId": 4716,
+    "image": "/models/agents/inspects/thumbs/4716.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-4756-ct",
@@ -1147,7 +1447,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-swat-variantk.glb",
     "nativeModel": "agents/models/ctm_swat/ctm_swat_variantk.vmdl_c",
-    "bytes": 2602012
+    "bytes": 2602012,
+    "itemId": 4756,
+    "image": "/models/agents/inspects/thumbs/4756.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-4726-t",
@@ -1157,7 +1460,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varf.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varf.vmdl_c",
-    "bytes": 2937188
+    "bytes": 2937188,
+    "itemId": 4726,
+    "image": "/models/agents/inspects/thumbs/4726.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4733-t",
@@ -1167,7 +1473,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varf1.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varf1.vmdl_c",
-    "bytes": 2929524
+    "bytes": 2929524,
+    "itemId": 4733,
+    "image": "/models/agents/inspects/thumbs/4733.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4734-t",
@@ -1177,7 +1486,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varf2.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varf2.vmdl_c",
-    "bytes": 2904384
+    "bytes": 2904384,
+    "itemId": 4734,
+    "image": "/models/agents/inspects/thumbs/4734.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4735-t",
@@ -1187,7 +1499,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varf3.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varf3.vmdl_c",
-    "bytes": 2862732
+    "bytes": 2862732,
+    "itemId": 4735,
+    "image": "/models/agents/inspects/thumbs/4735.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4736-t",
@@ -1197,7 +1512,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varf4.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varf4.vmdl_c",
-    "bytes": 2876204
+    "bytes": 2876204,
+    "itemId": 4736,
+    "image": "/models/agents/inspects/thumbs/4736.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4727-t",
@@ -1207,7 +1525,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varg.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varg.vmdl_c",
-    "bytes": 2445572
+    "bytes": 2445572,
+    "itemId": 4727,
+    "image": "/models/agents/inspects/thumbs/4727.webp",
+    "sourcePose": "cu_t_pose04"
   },
   {
     "id": "agent-4728-t",
@@ -1217,7 +1538,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varh.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varh.vmdl_c",
-    "bytes": 2520276
+    "bytes": 2520276,
+    "itemId": 4728,
+    "image": "/models/agents/inspects/thumbs/4728.webp",
+    "sourcePose": "cu_t_pose03"
   },
   {
     "id": "agent-4732-t",
@@ -1227,7 +1551,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-vari.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_vari.vmdl_c",
-    "bytes": 2155776
+    "bytes": 2155776,
+    "itemId": 4732,
+    "image": "/models/agents/inspects/thumbs/4732.webp",
+    "sourcePose": "cu_t_pose04"
   },
   {
     "id": "agent-4730-t",
@@ -1237,7 +1564,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varj.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varj.vmdl_c",
-    "bytes": 2271204
+    "bytes": 2271204,
+    "itemId": 4730,
+    "image": "/models/agents/inspects/thumbs/4730.webp",
+    "sourcePose": "cu_t_pose02"
   },
   {
     "id": "agent-4613-t",
@@ -1247,7 +1577,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-professional-varf5.glb",
     "nativeModel": "agents/models/tm_professional/tm_professional_varf5.vmdl_c",
-    "bytes": 2952636
+    "bytes": 2952636,
+    "itemId": 4613,
+    "image": "/models/agents/inspects/thumbs/4613.webp",
+    "sourcePose": "cu_t_pose04"
   },
   {
     "id": "agent-4749-ct",
@@ -1257,7 +1590,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-gendarmerie-varianta.glb",
     "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_varianta.vmdl_c",
-    "bytes": 2135436
+    "bytes": 2135436,
+    "itemId": 4749,
+    "image": "/models/agents/inspects/thumbs/4749.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-4750-ct",
@@ -1267,7 +1603,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-gendarmerie-variantb.glb",
     "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantb.vmdl_c",
-    "bytes": 2053124
+    "bytes": 2053124,
+    "itemId": 4750,
+    "image": "/models/agents/inspects/thumbs/4750.webp",
+    "sourcePose": "cu_ct_pose02"
   },
   {
     "id": "agent-4751-ct",
@@ -1277,7 +1616,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-gendarmerie-variantc.glb",
     "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantc.vmdl_c",
-    "bytes": 2122196
+    "bytes": 2122196,
+    "itemId": 4751,
+    "image": "/models/agents/inspects/thumbs/4751.webp",
+    "sourcePose": "cu_ct_gendarmerie01"
   },
   {
     "id": "agent-4752-ct",
@@ -1287,7 +1629,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-gendarmerie-variantd.glb",
     "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantd.vmdl_c",
-    "bytes": 2138096
+    "bytes": 2138096,
+    "itemId": 4752,
+    "image": "/models/agents/inspects/thumbs/4752.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-4753-ct",
@@ -1297,7 +1642,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-gendarmerie-variante.glb",
     "nativeModel": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variante.vmdl_c",
-    "bytes": 2138148
+    "bytes": 2138148,
+    "itemId": 4753,
+    "image": "/models/agents/inspects/thumbs/4753.webp",
+    "sourcePose": "cu_ct_pose04"
   },
   {
     "id": "agent-4757-ct",
@@ -1307,7 +1655,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-diver-varianta.glb",
     "nativeModel": "agents/models/ctm_diver/ctm_diver_varianta.vmdl_c",
-    "bytes": 2672328
+    "bytes": 2672328,
+    "itemId": 4757,
+    "image": "/models/agents/inspects/thumbs/4757.webp",
+    "sourcePose": "cu_scuba_female"
   },
   {
     "id": "agent-4771-ct",
@@ -1317,7 +1668,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-diver-variantb.glb",
     "nativeModel": "agents/models/ctm_diver/ctm_diver_variantb.vmdl_c",
-    "bytes": 2262724
+    "bytes": 2262724,
+    "itemId": 4771,
+    "image": "/models/agents/inspects/thumbs/4771.webp",
+    "sourcePose": "cu_scuba_male"
   },
   {
     "id": "agent-4772-ct",
@@ -1327,7 +1681,10 @@
     "team": "ct",
     "model": "/models/agents/roster/ctm-diver-variantc.glb",
     "nativeModel": "agents/models/ctm_diver/ctm_diver_variantc.vmdl_c",
-    "bytes": 3415644
+    "bytes": 3415644,
+    "itemId": 4772,
+    "image": "/models/agents/inspects/thumbs/4772.webp",
+    "sourcePose": "cu_ct_pose01"
   },
   {
     "id": "agent-4773-t",
@@ -1337,7 +1694,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-jungle-raider-varianta.glb",
     "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_varianta.vmdl_c",
-    "bytes": 2468760
+    "bytes": 2468760,
+    "itemId": 4773,
+    "image": "/models/agents/inspects/thumbs/4773.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4774-t",
@@ -1347,7 +1707,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-jungle-raider-variantb.glb",
     "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantb.vmdl_c",
-    "bytes": 3085500
+    "bytes": 3085500,
+    "itemId": 4774,
+    "image": "/models/agents/inspects/thumbs/4774.webp",
+    "sourcePose": "cu_t_jungle_male"
   },
   {
     "id": "agent-4775-t",
@@ -1357,7 +1720,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-jungle-raider-variantc.glb",
     "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantc.vmdl_c",
-    "bytes": 2328344
+    "bytes": 2328344,
+    "itemId": 4775,
+    "image": "/models/agents/inspects/thumbs/4775.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4776-t",
@@ -1367,7 +1733,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-jungle-raider-variantd.glb",
     "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantd.vmdl_c",
-    "bytes": 2983944
+    "bytes": 2983944,
+    "itemId": 4776,
+    "image": "/models/agents/inspects/thumbs/4776.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4777-t",
@@ -1377,7 +1746,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-jungle-raider-variante.glb",
     "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variante.vmdl_c",
-    "bytes": 2301128
+    "bytes": 2301128,
+    "itemId": 4777,
+    "image": "/models/agents/inspects/thumbs/4777.webp",
+    "sourcePose": "cu_t_jungle_female"
   },
   {
     "id": "agent-4778-t",
@@ -1387,7 +1759,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-jungle-raider-variantf.glb",
     "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantf.vmdl_c",
-    "bytes": 2559380
+    "bytes": 2559380,
+    "itemId": 4778,
+    "image": "/models/agents/inspects/thumbs/4778.webp",
+    "sourcePose": "cu_t_pose01"
   },
   {
     "id": "agent-4780-t",
@@ -1397,7 +1772,10 @@
     "team": "t",
     "model": "/models/agents/roster/tm-jungle-raider-variantb2.glb",
     "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantb2.vmdl_c",
-    "bytes": 2924140
+    "bytes": 2924140,
+    "itemId": 4780,
+    "image": "/models/agents/inspects/thumbs/4780.webp",
+    "sourcePose": "cu_t_jungle_male"
   },
   {
     "id": "agent-4781-t",
@@ -1407,6 +1785,9 @@
     "team": "t",
     "model": "/models/agents/roster/tm-jungle-raider-variantf2.glb",
     "nativeModel": "agents/models/tm_jungle_raider/tm_jungle_raider_variantf2.vmdl_c",
-    "bytes": 2572552
+    "bytes": 2572552,
+    "itemId": 4781,
+    "image": "/models/agents/inspects/thumbs/4781.webp",
+    "sourcePose": "cu_t_pose01"
   }
 ]

@@ -10,11 +10,22 @@ import {
 import * as T from "three";
 import { fetchGzipped } from "./gltf";
 import { createSoldier, disposeSoldier, type Soldier, type AgentTeam } from "./soldier";
-import { applyBuyPose, buyPoseToken } from "./buy-poses";
+import { applyBuyPose, buyPoseToken, poseBuyProp } from "./buy-poses";
 import { unregisterSkinModel } from "./skins";
 import { createNativeWorldGun } from "./weapon-motion";
 import { armoryReflections } from "./reflections";
 import { reachPreviewHand } from "./preview-arm";
+import {
+  acquireAgentAnimation,
+  agentAnimationWeaponIndex,
+  ensureAgentAnimationBones,
+  agentClipForModel,
+  agentAnimationEquipment,
+} from "./agent-animations";
+import { createWorldGun, disposeWorldGun } from "./weapons";
+import { createWeaponInstance } from "./weapon-instance";
+import { isKnife } from "./physics";
+import { createGrenadeModel } from "./grenade-models";
 
 type Pose = {
   clip: string;
@@ -34,6 +45,15 @@ type Preview = {
   index: number;
   agentId: string;
   agentName: string;
+  animation?: {
+    id: string;
+    release: () => void;
+    equipped: string;
+    gripInverse: T.Matrix4;
+    hand: T.Object3D;
+    attachment: T.Matrix4;
+    equipment?: string;
+  };
 };
 
 /** The home scene shares the game's renderer and configurable menu clock. */
@@ -48,6 +68,8 @@ export class HomeScene {
       preview.weapon,
     ]);
   }
+  private framing = new WeakMap<Preview, T.Box3>();
+  private framingPoint = new T.Vector3();
   private camera = new T.PerspectiveCamera(30, 1, 0.1016, 254);
   private poses!: Record<AgentTeam, { rifle: Pose }>;
   private previews = new Map<AgentTeam, Preview>();
@@ -64,6 +86,111 @@ export class HomeScene {
   private pendingAgents = new Map<AgentTeam, string>();
   private failedAgents = new Set<string>();
   private agentPlayLock = false;
+  private animationRequests = new Map<AgentTeam, number>();
+  private animationFrame = new T.Matrix4();
+  private animationParentInverse = new T.Matrix4();
+  private animationPosition = new T.Vector3();
+  private animationRotation = new T.Quaternion();
+  private animationScale = new T.Vector3();
+  selectedAnimation(team: AgentTeam) {
+    return this.previews.get(team)?.animation?.id;
+  }
+  async playAnimation(team: AgentTeam, id: string) {
+    const generation = (this.animationRequests.get(team) ?? 0) + 1;
+    this.animationRequests.set(team, generation);
+    const wanted = selectedAgentId(team);
+    const results = await Promise.allSettled([
+      acquireAgentAnimation(id),
+      acquireAgentAppearance(wanted),
+      agentAnimationWeaponIndex(id, this.weapons[team]),
+    ]);
+    if (results.some((result) => result.status === "rejected")) {
+      if (results[0].status === "fulfilled") results[0].value.release();
+      if (results[1].status === "fulfilled") results[1].value?.release();
+      throw (results.find((result) => result.status === "rejected") as PromiseRejectedResult)
+        .reason;
+    }
+    const animation = (
+      results[0] as PromiseFulfilledResult<Awaited<ReturnType<typeof acquireAgentAnimation>>>
+    ).value;
+    const appearance = (
+      results[1] as PromiseFulfilledResult<Awaited<ReturnType<typeof acquireAgentAppearance>>>
+    ).value;
+    const index = (results[2] as PromiseFulfilledResult<number>).value;
+    const equipment = await agentAnimationEquipment(id);
+    if (this.animationRequests.get(team) !== generation || selectedAgentId(team) !== wanted) {
+      animation.release();
+      appearance?.release();
+      return;
+    }
+    if (!appearance && team === "ct") {
+      animation.release();
+      throw new Error("Equip an agent from the catalog to preview this animation.");
+    }
+    this.clearPreview(team);
+    const preview = this.create(team, appearance, wanted);
+    const buy = applyBuyPose(
+      preview.soldier,
+      equipment === "he" ? "hegrenade" : (equipment ?? buyPoseToken(index)),
+    );
+    this.disposeWeapon(preview.weapon);
+    if (equipment) {
+      const model =
+        equipment === "c4"
+          ? preview.soldier.carriedBomb.clone(true)
+          : createGrenadeModel(equipment)!;
+      model.traverse((object) => {
+        if (object instanceof T.Mesh) {
+          object.geometry = object.geometry.clone();
+          object.material = Array.isArray(object.material)
+            ? object.material.map((material) => material.clone())
+            : object.material.clone();
+        }
+      });
+      preview.weapon = new T.Group();
+      preview.weapon.add(model);
+      preview.weapon.userData.buyGrip = (
+        equipment === "c4" ? new T.Matrix4() : poseBuyProp(model, buy.weaponBones)
+      ).toArray();
+    } else
+      preview.weapon = isKnife(index)
+        ? createWorldGun(index, true, createWeaponInstance(index, "player", true))
+        : createNativeWorldGun(index, true, buy.weaponBones, true);
+    preview.soldier.group.add(preview.weapon);
+    preview.mixer.stopAllAction();
+    ensureAgentAnimationBones(preview.soldier.model, animation.pack.scene);
+    preview.action = preview.mixer
+      .clipAction(agentClipForModel(animation.clip, preview.soldier.model))
+      .reset();
+    preview.action.setLoop(
+      animation.definition.loop ? T.LoopRepeat : T.LoopOnce,
+      animation.definition.loop ? Infinity : 1,
+    );
+    preview.action.clampWhenFinished = true;
+    preview.action.play();
+    preview.mixer.update(0);
+    preview.animation = {
+      id,
+      release: animation.release,
+      equipped: animation.definition.equipped,
+      gripInverse: new T.Matrix4().fromArray(preview.weapon.userData.buyGrip).invert(),
+      hand: buy.hand,
+      attachment: buy.matrix,
+      equipment,
+    };
+    preview.soldier.group.updateMatrixWorld(true);
+    preview.soldier.group.position.y +=
+      this.floor - new T.Box3().setFromObject(preview.soldier.model, true).min.y;
+    this.framing.set(preview, new T.Box3().setFromObject(preview.soldier.model, true));
+    this.current = undefined;
+  }
+  stopAnimation(team: AgentTeam) {
+    this.animationRequests.set(team, (this.animationRequests.get(team) ?? 0) + 1);
+    if (!this.previews.get(team)?.animation) return;
+    const ready = peekSelectedAgent(team);
+    this.clearPreview(team);
+    this.create(team, ready, selectedAgentId(team));
+  }
   setWeapon(team: AgentTeam, index: number) {
     this.weapons[team] = index;
   }
@@ -150,7 +277,11 @@ export class HomeScene {
     this.camera.getWorldDirection(this.cameraDirection);
     this.cameraRotation.copy(this.camera.quaternion);
   }
-  private create(team: AgentTeam, appearance?: AgentAppearance, agentId = defaultAgent(team).id) {
+  private create(
+    team: AgentTeam,
+    appearance?: AgentAppearance,
+    agentId = defaultAgent(team).id,
+  ): Preview {
     const index = this.weapons[team];
     const soldier = createSoldier(-1, team, appearance);
     const poseTeam = soldier.animationTeam ?? team;
@@ -271,6 +402,7 @@ export class HomeScene {
     const agentName =
       agentId === defaultAgent(team).id ? defaultAgent(team).name : selectedAgent(team).name;
     const preview = { soldier, mixer, action, weapon, index, agentId, agentName };
+    this.framing.set(preview, new T.Box3().setFromObject(soldier.model, true));
     this.previews.set(team, preview);
     return preview;
   }
@@ -278,19 +410,27 @@ export class HomeScene {
     const previous = this.previews.get(team);
     if (!previous) return;
     this.scene.remove(previous.soldier.group);
-    unregisterSkinModel(previous.weapon);
-    previous.weapon.removeFromParent();
-    previous.weapon.traverse((object) => {
-      if (!(object instanceof T.Mesh)) return;
-      object.geometry.dispose();
-      for (const material of Array.isArray(object.material) ? object.material : [object.material])
-        material.dispose();
-    });
+    previous.animation?.release();
+    this.disposeWeapon(previous.weapon);
     previous.mixer.stopAllAction();
     previous.mixer.uncacheRoot(previous.soldier.model);
     disposeSoldier(previous.soldier);
     this.previews.delete(team);
     this.current = undefined;
+  }
+  private disposeWeapon(weapon: T.Group) {
+    if (weapon.userData.ownedWorldGun) {
+      disposeWorldGun(weapon);
+      return;
+    }
+    unregisterSkinModel(weapon);
+    weapon.removeFromParent();
+    weapon.traverse((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      object.geometry.dispose();
+      for (const material of Array.isArray(object.material) ? object.material : [object.material])
+        material.dispose();
+    });
   }
   private preview(team: AgentTeam) {
     const wanted = selectedAgentId(team);
@@ -306,6 +446,10 @@ export class HomeScene {
         void acquireAgentAppearance(wanted)
           .then((appearance) => {
             if (selectedAgentId(team) !== wanted) {
+              appearance?.release();
+              return;
+            }
+            if (this.previews.get(team)?.animation && this.previews.get(team)?.agentId === wanted) {
               appearance?.release();
               return;
             }
@@ -363,6 +507,31 @@ export class HomeScene {
     if (!this.reduced.matches) {
       preview.mixer.update(dt);
     }
+    if (preview.animation) {
+      preview.weapon.visible = preview.animation.equipped !== "none";
+      const anchor = preview.animation.hand;
+      preview.soldier.group.updateMatrixWorld(true);
+      const p = this.animationPosition,
+        q = this.animationRotation,
+        s = this.animationScale;
+      const frame = this.animationFrame
+        .copy(anchor.matrixWorld)
+        .multiply(preview.animation.attachment);
+      frame.decompose(p, q, s);
+      frame.compose(p, q, s.set(1, 1, 1));
+      frame
+        .premultiply(this.animationParentInverse.copy(preview.soldier.group.matrixWorld).invert())
+        .multiply(preview.animation.gripInverse);
+      frame.decompose(preview.weapon.position, preview.weapon.quaternion, preview.weapon.scale);
+      if (preview.animation.equipment === "c4") {
+        preview.soldier.rightHand.getWorldPosition(p);
+        preview.soldier.leftHand.getWorldPosition(s);
+        p.lerp(s, 0.5);
+        preview.soldier.group.worldToLocal(p);
+        preview.weapon.position.copy(p);
+        preview.weapon.position.y -= 0.025;
+      }
+    }
     this.camera.position.copy(this.cameraPosition);
     this.camera.quaternion.copy(this.cameraRotation);
     if (!this.reduced.matches) {
@@ -373,6 +542,28 @@ export class HomeScene {
     if ((document.getElementById("home-background") as HTMLSelectElement).value === "close")
       this.camera.position.addScaledVector(this.cameraDirection, 1.2);
     this.camera.aspect = innerWidth / innerHeight;
+    // Bounds are sampled only when the appearance/pose changes. Fit their eight
+    // corners cheaply so close backgrounds and tall agents retain headroom.
+    const bounds = this.framing.get(preview);
+    this.camera.updateMatrixWorld(true);
+    let tangent = Math.tan(T.MathUtils.degToRad(15));
+    if (bounds)
+      for (let corner = 0; corner < 8; corner++) {
+        const point = this.framingPoint
+          .set(
+            corner & 1 ? bounds.max.x : bounds.min.x,
+            corner & 2 ? bounds.max.y : bounds.min.y,
+            corner & 4 ? bounds.max.z : bounds.min.z,
+          )
+          .applyMatrix4(this.camera.matrixWorldInverse);
+        if (point.z < 0)
+          tangent = Math.max(
+            tangent,
+            Math.abs(point.y) / (-point.z * 0.72),
+            Math.abs(point.x) / (-point.z * this.camera.aspect * 0.8),
+          );
+      }
+    this.camera.fov = T.MathUtils.radToDeg(2 * Math.atan(tangent));
     this.camera.updateProjectionMatrix();
     renderer.clear();
     renderer.render(this.scene, this.camera);
@@ -383,6 +574,7 @@ export class HomeScene {
       .getWorldPosition(this.namePosition);
     this.namePosition.project(this.camera);
     const profile = document.querySelector<HTMLElement>(".home-profile")!;
+    profile.style.visibility = showAgent ? "" : "hidden";
     profile.style.left = `${(this.namePosition.x + 1) * 50}%`;
     profile.style.top = `${((1 - this.namePosition.y) * innerHeight) / 2 - document.querySelector(".home-header")!.clientHeight}px`;
     profile.style.bottom = "auto";

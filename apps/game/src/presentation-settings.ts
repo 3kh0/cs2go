@@ -1,8 +1,10 @@
 import * as T from "three";
 import { graphicsDefaults, readGraphicsSettings } from "./graphics-settings";
+import { viewmodelDefaults, readViewmodelSettings } from "./viewmodel-settings";
 
 export const presentationDefaults = {
   ...graphicsDefaults,
+  ...viewmodelDefaults,
   crosshairColor: "#a8ff80",
   crosshairLength: 7,
   crosshairThickness: 2,
@@ -14,7 +16,11 @@ export const presentationDefaults = {
 };
 export type PresentationSettings = typeof presentationDefaults;
 export function readPresentationSettings(saved: Record<string, unknown>): PresentationSettings {
-  const settings = { ...presentationDefaults, ...readGraphicsSettings(saved) };
+  const settings = {
+    ...presentationDefaults,
+    ...readGraphicsSettings(saved),
+    ...readViewmodelSettings(saved),
+  };
   for (const [key, min, max] of [
     ["crosshairLength", 1, 30],
     ["crosshairThickness", 1, 8],

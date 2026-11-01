@@ -1,0 +1,683 @@
+{
+  "source": "https://cs2inspects.com/3d-viewer",
+  "generator": "python3 scripts/import-gloves.py --agent-arms",
+  "agents": {
+    "4613": {
+      "file": "/models/gloves/agents/4613.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf5.glb",
+      "bytes": 4807428,
+      "sha256": "78a23e966e87decb57aa3fcc4e39758ed0311e6875a718f012d59bea4dfb6bd0",
+      "clips": []
+    },
+    "4619": {
+      "file": "/models/gloves/agents/4619.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantj.glb",
+      "bytes": 5275332,
+      "sha256": "a748ee888b2bc72575433163aa74566dbedf65717dce1dc4f524cf765927b9fa",
+      "clips": []
+    },
+    "4680": {
+      "file": "/models/gloves/agents/4680.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantl.glb",
+      "bytes": 5234568,
+      "sha256": "96ba83317daff66cbe9be9fcc71e4eb7984b1b8cc4f9e9b39cd64d717b5da362",
+      "clips": []
+    },
+    "4711": {
+      "file": "/models/gloves/agents/4711.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variante.glb",
+      "bytes": 9851764,
+      "sha256": "a900a4c19018dbd3791e594f02268d50645a64d27c44472e4bba070193bf0562",
+      "clips": []
+    },
+    "4712": {
+      "file": "/models/gloves/agents/4712.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantf.glb",
+      "bytes": 9729316,
+      "sha256": "4eaffe1c71810c42d0ccd387b8827aa5496d4aa99f1b60b138de372cca67e491",
+      "clips": []
+    },
+    "4713": {
+      "file": "/models/gloves/agents/4713.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantg.glb",
+      "bytes": 9724484,
+      "sha256": "ffe87743d306f9741cfb8872f197c67dc617735c16f2e36457f63f79e5118f94",
+      "clips": []
+    },
+    "4714": {
+      "file": "/models/gloves/agents/4714.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_varianth.glb",
+      "bytes": 9696000,
+      "sha256": "37c742f1a38cc1992da21ab7913f073009b876f97747d3d22b611c6eb97f8430",
+      "clips": []
+    },
+    "4715": {
+      "file": "/models/gloves/agents/4715.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_varianti.glb",
+      "bytes": 9707172,
+      "sha256": "cc3f393d673d6143919d3692bbb5468fb24ad7fe1faba483d87b1521f80be7bf",
+      "clips": []
+    },
+    "4716": {
+      "file": "/models/gloves/agents/4716.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantj.glb",
+      "bytes": 9724872,
+      "sha256": "ea45a398c737489dde08c157271f0e609efcae502733a55bfb213752c24a386e",
+      "clips": []
+    },
+    "4718": {
+      "file": "/models/gloves/agents/4718.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantk.glb",
+      "bytes": 7160812,
+      "sha256": "d526fdc7bebf86139352993a9f3f1e5e83f918a9366ac18f714cde8844c31e1d",
+      "clips": []
+    },
+    "4726": {
+      "file": "/models/gloves/agents/4726.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf.glb",
+      "bytes": 4807420,
+      "sha256": "e42e657f8129b74bdfa8e16c68d863bbf75bf79b7d588fe81ed752fdfdf626d3",
+      "clips": []
+    },
+    "4727": {
+      "file": "/models/gloves/agents/4727.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varg.glb",
+      "bytes": 4069252,
+      "sha256": "a64e849b3c52428cf7cd590988dda6313768873de0a1124e638da65bbb55da53",
+      "clips": []
+    },
+    "4728": {
+      "file": "/models/gloves/agents/4728.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varh.glb",
+      "bytes": 4089996,
+      "sha256": "02c1a850bcf2289e3532e0f4552f55719a90ad2ada447c2a7ec1d2fb81ee556b",
+      "clips": []
+    },
+    "4730": {
+      "file": "/models/gloves/agents/4730.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varj.glb",
+      "bytes": 5740096,
+      "sha256": "1b1ea040bc71a5c294114ad6b682cc6d4b139bf35fdf91c668b2e8a2a2a32522",
+      "clips": []
+    },
+    "4732": {
+      "file": "/models/gloves/agents/4732.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_vari.glb",
+      "bytes": 5738860,
+      "sha256": "b3c20d2f1bdbcd5259f0bdc73f13fb2cbc93407d2fb5490e0146ee4e0d44e20f",
+      "clips": []
+    },
+    "4733": {
+      "file": "/models/gloves/agents/4733.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf1.glb",
+      "bytes": 5792004,
+      "sha256": "92afe53d576068775ffe5afe5aae61adc2e91682a53c90df527e2a2daa8545cb",
+      "clips": []
+    },
+    "4734": {
+      "file": "/models/gloves/agents/4734.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf2.glb",
+      "bytes": 4807428,
+      "sha256": "580b794b610112158bc1398a5689ec1d72ecbd09504cedca006073ca9c0fdb3a",
+      "clips": []
+    },
+    "4735": {
+      "file": "/models/gloves/agents/4735.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf3.glb",
+      "bytes": 4807424,
+      "sha256": "b0ef226ddcf54f892dc371f6c423077f23adf0b1d52010be5c5b946f29a816d1",
+      "clips": []
+    },
+    "4736": {
+      "file": "/models/gloves/agents/4736.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf4.glb",
+      "bytes": 4704472,
+      "sha256": "6da38050be7c749bf8ab1e654cef4276d3325ce8950f83b7592feb57973a7f67",
+      "clips": []
+    },
+    "4749": {
+      "file": "/models/gloves/agents/4749.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_varianta.glb",
+      "bytes": 5008072,
+      "sha256": "87541ef32b172774e3c39170fd866130e4b5a884668fe75f9ba68b598bca2ca3",
+      "clips": []
+    },
+    "4750": {
+      "file": "/models/gloves/agents/4750.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantb.glb",
+      "bytes": 5008008,
+      "sha256": "4abcd22141f12386545919d1a42b7518f4f107cfd1efccb7d96f1a92e6c0cc95",
+      "clips": []
+    },
+    "4751": {
+      "file": "/models/gloves/agents/4751.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantc.glb",
+      "bytes": 4987324,
+      "sha256": "bf3d337fb8a7c62f4ca6c6869f0c9ee56572b28c8db029abdf9e42d1806827a9",
+      "clips": []
+    },
+    "4752": {
+      "file": "/models/gloves/agents/4752.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantd.glb",
+      "bytes": 4987320,
+      "sha256": "89040c10b7fab473c2fa3ec03c8ce4361b0075b98dcf72f2554d40437ce3be53",
+      "clips": []
+    },
+    "4753": {
+      "file": "/models/gloves/agents/4753.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variante.glb",
+      "bytes": 5008060,
+      "sha256": "781056aca73ac61278ac7c421d358bf76ad169ceb47c026043109887d8212388",
+      "clips": []
+    },
+    "4756": {
+      "file": "/models/gloves/agents/4756.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantk.glb",
+      "bytes": 10162428,
+      "sha256": "d8b0ab6ccd8a1bf69df8ee3951d76dab02274ef797ce98d9b07f17d7643bba19",
+      "clips": []
+    },
+    "4757": {
+      "file": "/models/gloves/agents/4757.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_varianta.glb",
+      "bytes": 4496672,
+      "sha256": "4f393168ae23eefb45cf6fd85980b07fc55032780206e9053c1da477bf3787a3",
+      "clips": []
+    },
+    "4771": {
+      "file": "/models/gloves/agents/4771.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_variantb.glb",
+      "bytes": 4496684,
+      "sha256": "a37a8da0af5fe5e0c9fffadea71e941245397c3ce7350f3f362a2661a62e14ce",
+      "clips": []
+    },
+    "4772": {
+      "file": "/models/gloves/agents/4772.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_variantc.glb",
+      "bytes": 3804744,
+      "sha256": "18f7b76ba93cdab8057e345bb46084965e6e3f9faeb066163efc8ec4af86ad31",
+      "clips": []
+    },
+    "4773": {
+      "file": "/models/gloves/agents/4773.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_varianta.glb",
+      "bytes": 6502356,
+      "sha256": "4d7eaa0e9c69fd7a8537c704dd4a9de32b8332da99ca19260af2b6f54864367d",
+      "clips": []
+    },
+    "4774": {
+      "file": "/models/gloves/agents/4774.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantb.glb",
+      "bytes": 3353616,
+      "sha256": "26748bb41b33d61c6655ef382d79df7e750e2352ba50c3fcdf9d52f66056799f",
+      "clips": []
+    },
+    "4775": {
+      "file": "/models/gloves/agents/4775.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantc.glb",
+      "bytes": 3286448,
+      "sha256": "48953ce6cf8b11559304b6115dfd18f19e457ba1ae575ad62c85996bf92b54d3",
+      "clips": []
+    },
+    "4776": {
+      "file": "/models/gloves/agents/4776.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantd.glb",
+      "bytes": 3340468,
+      "sha256": "9b94123ccff67917997d21a3b73682b67f44ac75846c1c47c9e9b7a0b252072f",
+      "clips": []
+    },
+    "4777": {
+      "file": "/models/gloves/agents/4777.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variante.glb",
+      "bytes": 3488848,
+      "sha256": "ce8cda7f539c17e4ea1557fefdc1fa9aa60ca80dfc8abb717b2c71233df495ba",
+      "clips": []
+    },
+    "4778": {
+      "file": "/models/gloves/agents/4778.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantf.glb",
+      "bytes": 3353604,
+      "sha256": "49fe9d17cd7e9791ea50d9b5ce7855d3c2b04b78fa92e3052a2600209ae1f2c2",
+      "clips": []
+    },
+    "4780": {
+      "file": "/models/gloves/agents/4780.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantb2.glb",
+      "bytes": 3353612,
+      "sha256": "f34b979479879d19abc909b3fe551698886795ef92263ad6e5b3971a33264c01",
+      "clips": []
+    },
+    "4781": {
+      "file": "/models/gloves/agents/4781.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantf2.glb",
+      "bytes": 3353604,
+      "sha256": "6f4dc29efeddeeb564ca8cd4169f3d3564b9fb30d1e2231ac24ad5ca9f2f2945",
+      "clips": []
+    },
+    "5105": {
+      "file": "/models/gloves/agents/5105.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantg.glb",
+      "bytes": 7020256,
+      "sha256": "53592507c3c086a8983e94453287313bcbf2504e3fbcf9e6b7c0e1e12c47a927",
+      "clips": []
+    },
+    "5106": {
+      "file": "/models/gloves/agents/5106.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_varianth.glb",
+      "bytes": 6676832,
+      "sha256": "4e8c4904d9bd7e6b375b306a0ec185f513ff4d387a5b2c53e964fb3dd2c07bec",
+      "clips": []
+    },
+    "5107": {
+      "file": "/models/gloves/agents/5107.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_varianti.glb",
+      "bytes": 3464380,
+      "sha256": "ed03d765a6bc740f13ee2bed71975e9fdf168d42afa4ef0b15ce775e196a6516",
+      "clips": []
+    },
+    "5108": {
+      "file": "/models/gloves/agents/5108.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantf.glb",
+      "bytes": 7268756,
+      "sha256": "52f7c0d5e3c8bf87200a7e0c5ab8708daad89694e418857a155efdf5a86a98c3",
+      "clips": []
+    },
+    "5109": {
+      "file": "/models/gloves/agents/5109.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantj.glb",
+      "bytes": 7103904,
+      "sha256": "c28c68879490cf347c0e842f4712cb9ad6004a4a86645daa7c2c7928f2fea7e7",
+      "clips": []
+    },
+    "5200": {
+      "file": "/models/gloves/agents/5200.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix.glb",
+      "bytes": 7207160,
+      "sha256": "c3b949fba5e9b5eac951ae37fdd717db8cef6a3844eba9187b714184d480e963",
+      "clips": []
+    },
+    "5205": {
+      "file": "/models/gloves/agents/5205.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_varianth.glb",
+      "bytes": 7096612,
+      "sha256": "5b7d9592d85b0bbc430cca1dcd3894f4182aeaa7c83f470afe908ce7de8ca695",
+      "clips": []
+    },
+    "5206": {
+      "file": "/models/gloves/agents/5206.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_variantf.glb",
+      "bytes": 6963024,
+      "sha256": "f28400d825840894b11de7fa5cc6e51c8a6bba5f706a7a12cf070c5c7afd96b6",
+      "clips": []
+    },
+    "5207": {
+      "file": "/models/gloves/agents/5207.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_variantg.glb",
+      "bytes": 6937832,
+      "sha256": "f798cdede69b054e9df1ffacb64e69ee570ecc44523248565bcb5ae8d95d3b63",
+      "clips": []
+    },
+    "5208": {
+      "file": "/models/gloves/agents/5208.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_varianti.glb",
+      "bytes": 7078988,
+      "sha256": "d8c2d0ff070be727f10a0793c4705e603b5c442d8c9a7a949e41b8e83139b135",
+      "clips": []
+    },
+    "5305": {
+      "file": "/models/gloves/agents/5305.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantf.glb",
+      "bytes": 4836324,
+      "sha256": "b297b6d1f4b281bb308c263cf3bf6f64a923b646dd6354f7c8e685bf8e5aacac",
+      "clips": []
+    },
+    "5306": {
+      "file": "/models/gloves/agents/5306.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantg.glb",
+      "bytes": 4763148,
+      "sha256": "c24c4480183132cc9675495aac6204255982a734bb0db45d0a475b71356afbf7",
+      "clips": []
+    },
+    "5307": {
+      "file": "/models/gloves/agents/5307.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_varianth.glb",
+      "bytes": 4836788,
+      "sha256": "bb940b7b04f630ebcec1a01bb302fec25caaa8617831e0f1614941746c4644d4",
+      "clips": []
+    },
+    "5308": {
+      "file": "/models/gloves/agents/5308.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantb.glb",
+      "bytes": 4836788,
+      "sha256": "eef93a8b761e7b3db8565460ddc4aa853b14aa00793e78a998167ef8b969ea6f",
+      "clips": []
+    },
+    "5400": {
+      "file": "/models/gloves/agents/5400.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantk.glb",
+      "bytes": 5057612,
+      "sha256": "44623f7ba323d057ffa9806d010291c4fc51b3f032047e20086434ba97449769",
+      "clips": []
+    },
+    "5401": {
+      "file": "/models/gloves/agents/5401.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variante.glb",
+      "bytes": 5326924,
+      "sha256": "1a0d7c1aee6f5f102534091651f9e9b8b33a6972a01a2c2ec55cd9f559205c9f",
+      "clips": []
+    },
+    "5402": {
+      "file": "/models/gloves/agents/5402.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantg.glb",
+      "bytes": 5210844,
+      "sha256": "20effe24bb6561a709c6f42581cb311f4b90cc7374fbfc0f591075cc96ba0cf0",
+      "clips": []
+    },
+    "5403": {
+      "file": "/models/gloves/agents/5403.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantm.glb",
+      "bytes": 5275092,
+      "sha256": "1ddf38b24b5be9a576f3bd190f6cc4e04e1d4e7e3dd3cbcb6de14cd48f1347ad",
+      "clips": []
+    },
+    "5404": {
+      "file": "/models/gloves/agents/5404.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_varianti.glb",
+      "bytes": 3744428,
+      "sha256": "fcbdace0cbfec53332e36adf868ef29ac281b22249142ac1cea4a27e372d8980",
+      "clips": []
+    },
+    "5405": {
+      "file": "/models/gloves/agents/5405.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantn.glb",
+      "bytes": 5273432,
+      "sha256": "8fa039f7c68905956b0a73232e56cf8e8c37d4bae1da428901d7ec86114f2063",
+      "clips": []
+    },
+    "5500": {
+      "file": "/models/gloves/agents/5500.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantf.glb",
+      "bytes": 5813928,
+      "sha256": "6631ccdacb10d9cb8de6ec0082ad10e26718d18ec7c59972a113cdf15af73015",
+      "clips": []
+    },
+    "5501": {
+      "file": "/models/gloves/agents/5501.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_varianti.glb",
+      "bytes": 5703088,
+      "sha256": "bf1751d93217b85a60d515c724dfc53a4fd652dafbdcdb36501cc820af310356",
+      "clips": []
+    },
+    "5502": {
+      "file": "/models/gloves/agents/5502.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantg.glb",
+      "bytes": 7128864,
+      "sha256": "e2f52c6f925592398c65557935f9d7e119a3af98304c5c5fada4632ca3080917",
+      "clips": []
+    },
+    "5503": {
+      "file": "/models/gloves/agents/5503.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantj.glb",
+      "bytes": 5715520,
+      "sha256": "58f3d06c2a134a537b4ebad4db7796a9daf0f2e62f09a9caab158be3af8ee53b",
+      "clips": []
+    },
+    "5504": {
+      "file": "/models/gloves/agents/5504.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_varianth.glb",
+      "bytes": 5274356,
+      "sha256": "d42303691ef005f25e894a536d5eae06768ddebe49f989f465984ebdf0c5dfae",
+      "clips": []
+    },
+    "5505": {
+      "file": "/models/gloves/agents/5505.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantl.glb",
+      "bytes": 5520796,
+      "sha256": "c91c8f5a1f6d303edccb1cf059dd3ba3de791ac6f717958e64eaa95c96342bcb",
+      "clips": []
+    },
+    "5600": {
+      "file": "/models/gloves/agents/5600.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas.glb",
+      "bytes": 5249116,
+      "sha256": "82f9adc04e718666f3752fa9ef2c3b8e1622cc32c7861629fee9cc95edf89ab5",
+      "clips": []
+    },
+    "5601": {
+      "file": "/models/gloves/agents/5601.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas_variantf.glb",
+      "bytes": 4913424,
+      "sha256": "463f8545b5dcf0d87e22891f6c91f939499dc3a6ccb5a858bd03e6abfb36b9e6",
+      "clips": []
+    },
+    "5602": {
+      "file": "/models/gloves/agents/5602.glb",
+      "nativeMesh": "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas_variantg.glb",
+      "bytes": 5212128,
+      "sha256": "055c93564ec5165e008f2a3ce3adf25ecce706f38244c52c934041098ca072ad",
+      "clips": []
+    }
+  },
+  "processing": "Native firstperson_default and firstperson_hide_default_gloves meshgroups with skinbindings and original textures. Body/animation bufferpayloads omitted; animation library is imported separately. TexturePBR pack at1024px. Runtime rebinds source-inch geometry to existing viewmodel arm/finger poses.",
+  "inputs": {
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_varianta.glb": "1712a56b219f443c23067b4a79a800f37c80f8a9f3cac66438b4b258087901cf",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_variantb.glb": "6117b36d9ed750b8e6f66246e0447962d6dceafe23a90a56fe9e8d725806e795",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_diver/ctm_diver_variantc.glb": "3f799eb951dfbb4975d5f6bf763e42246d3a98320c2c6b03e8aa7858feebb066",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantb.glb": "0ba8f6eb1d77bc7d91d486700a6163ba5c86a752ffe94271a5f828a3fcc3a09d",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantf.glb": "4bc7915282416f4fad41bd8af572acf807e808e60f386ed270dd0d65e0b73c90",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_variantg.glb": "39e32a5ab955391e2cdad8ce47b971f3ea3eb4cace202d1ee259801d256b544d",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_fbi/ctm_fbi_varianth.glb": "619ba288793d57337859777895be84a5af4ee13ca8b1b111a25fcb6f64cd2422",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_varianta.glb": "b5a3d3e0df6a204874b6b7f5cd81c085fa3b0b3dbf4eebddf189d34a95b11698",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantb.glb": "b7e5eff5edb743489b364000899cd7f15556bd294e55eee390b65fc999b0d950",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantc.glb": "4b3a14be8163049ca6b88dc255dddd8567ea446a6b452fe461e487a2421f9cc4",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variantd.glb": "26b35f0be3d0eaba5454a19ab96023a952adbb57a99a5bfd418c16f7d69c6780",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_gendarmerie/ctm_gendarmerie_variante.glb": "8cff3897b626e91081ec625806916e62b1c66f3e147fa628539cbe2f2f28f823",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas.glb": "7887e577840962eae53c5f153d6a121967979b58bab0c136979bb40b96c4b0f4",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas_variantf.glb": "908e7f9c1146c9de95e6b8b46e5066994e20e1e76c90576ecc22c7c2d1862f34",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_sas/ctm_sas_variantg.glb": "6762b7931ce5fe6cd41efaa611b6ceb73ce93c27f25dbe62aa650efe877a3e85",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variante.glb": "b88463edfea4badaa8112652f0cc4fdfb1b7c548cd3e714bfc1d22677585dc43",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantg.glb": "c6d307ea5de5970de0980b6f5dfcb6baf238f2fff3732191735e049c8fc5a644",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_varianti.glb": "c16c5caf18eabb08a9a159cb4ff96b650e7e7741401155f54562259cf0df0170",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantj.glb": "26cf17b3e2521d5c578a7befbbfa5e9ef52aaf98f27b2586f70de307778172dd",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantk.glb": "268588b29c21d115d120236aff15209064b0be8fe0a027a1ee45f290b6974476",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantl.glb": "0aeb0bbb518fbe5b045716019955881b3b594026b1fea149362cee177503a08b",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantm.glb": "c313515ef179a6309f8099f6c60ffdf17b3ed95682a14bc58f32e9e40a7959b5",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_st6/ctm_st6_variantn.glb": "c98310111db458414eacb419ff2424b283f9ad6e538d572c0917b0d9df2b7fcc",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variante.glb": "413d194e84b123ae3bffa61ba4ca7592aad831fc9d34f24a5a81821e2d999f8b",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantf.glb": "7259a2d85234e0d01a75f5809e6a6872893a4164843aef846a73bb5fe73dfb8c",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantg.glb": "ecdbf7b0194c7b045e0e395af70787aaed6ccdd270d649b2cfe5c803f4d5910d",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_varianth.glb": "0688c8e60ec8c444173001381fba88b235db86b6ff2f99737b4c54a675b7bfe1",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_varianti.glb": "6a2555209660cafabaae1604d4c23422fd1a4b9e63999a429907548ba020ba14",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantj.glb": "f1abcae88746eff243120511c9f868fbae10e4b5955ee3911ada797f19e0898e",
+    "https://cs2.cs2inspects.com/data/agents/models/ctm_swat/ctm_swat_variantk.glb": "b50d1ff8ab157d4d1aeaffb4830ed85e4de291d1ef739794fd1c258bcb115003",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantf.glb": "7d42ce7f3f2abb9d8f0e0afdecb98228e2e3393c77bfffffb9884a94f53e866f",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantg.glb": "6a5bdc85125570e688853a9edf7c803522d8d83a37b53fa3938040cfff511ee5",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_varianth.glb": "0954c26d16988e43a3a3c65d6c9abd73dca3d83f06f76b456b51bc891c290ab8",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_varianti.glb": "358e2512d9742781404812ba52f849059b31a2823763a550040dc507ace0a609",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantj.glb": "ffcdac09ff00eabaf2ea0ca23db5688e34bfa903a42a7ef50e9d900a6e75803a",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantk.glb": "ffada15d81ace82b5f39e62a5ce57c3feaf6af8c1412577130daca4e6e9d7b72",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_balkan/tm_balkan_variantl.glb": "e9dd9df75730704013b9106ee83e3f8663d19b6819a6f96b3ed8876252e873f7",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_varianta.glb": "e5bfdbec558d395d35f1048273e096aac68a83de4040d599fa47e7cb1f71f3ba",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantb.glb": "32aea5ba7a2b07c16524b85ca14e546c73d2dc8a61b0f01cec8cfdef7cbce446",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantb2.glb": "407181cc13b1ffc00bcdd64b471dd8103352f249e7b937cc3f14235958d49b1b",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantc.glb": "966768306ad31bdc0dc848cfe465d5c311eda37e5cc0b06c96981a046f23f774",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantd.glb": "243cc5533afe458be429d5c2fd265f0181d3027e94f58079ddc6e73afc5ddbbc",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variante.glb": "51c63fea9e8bd0aa18f62922a98b49c7569ba05635d1f4f56f410f2c058c51be",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantf.glb": "7a061deb2ca96a559ee60c0e24e763540d10d2bb20b6511553a11a8e6946f06e",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_jungle_raider/tm_jungle_raider_variantf2.glb": "7ee570914319f60f9706429dcbf0c66d9e000fa5e7ae50453993bec485949963",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantf.glb": "8ad325559c34cc7e97a79480f2e2a33ad92ce482f2fd0a396cb5b385601280e7",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantg.glb": "23da5eae6e7c209c7c6987989dea2c52ec57af1e117158430f1bf00d83b82cfc",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_varianth.glb": "e9f4038321948db9345b08a7f75bff6535c56a99e86fcbe4aac308cd4aed2b77",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_varianti.glb": "a8221c0288503d743455e40de3bb1f6eb399d4918b3f41cdce2fb74f2d802dbd",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_leet/tm_leet_variantj.glb": "7af2dd184cd8d1e936842add2f0fa27846561bd5d59c4d0bbe9919c51f3ca76b",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix.glb": "6fff7fb228be279236b8ed6646be033a9c7efb9e429104448cb5f469925c103e",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_variantf.glb": "9183596d045cfb168e4c5ceeb288d611ecbbea0452a8ddbe123e275ee0233ebc",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_variantg.glb": "b5a87319c586eb00c96cef9f84341909b87ee994649649f89ab561ca3451371f",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_varianth.glb": "9468c7a710f23518a2e7ba8f17af337790047637356e857a6db805d575373481",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_phoenix/tm_phoenix_varianti.glb": "10869c8b5d8c4299a3bc998cd2a6633ed4a92bc1c805382e6c337c5915fe8f5d",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf.glb": "37cc3a0c93b5fc105c911c3f610b6daddaf2d132b177dd715ea8b3659920651e",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf1.glb": "c867d4ce6d05e1eef9e99f03f0634d53477dcab1acc211f98b5d63b32f0a26c5",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf2.glb": "73e2aab426f63375cb8bdf20fba6776d011dc48f46f773200880dcc1cc1648c4",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf3.glb": "7335da3888e63431f95e745c2ad82e8e9a6181cb0bb46597e1991bd172408e69",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf4.glb": "23d05700fd31377b1dea1e61c7d346d6acd0a9b663d9970d8513cfd650892cf7",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varf5.glb": "4899a22454786c49a6974563989826d0cb5a45765bfc277397f882ac1d1a8b8d",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varg.glb": "57eb00b5fce978f18cedc61cb8acad8a6ab16155aacfbb70960b52ebb29b3eeb",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varh.glb": "1b3e4b703203a036eac39581581e41c1615a62dd72cedf20cb074b786a2a48b2",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_vari.glb": "be3cba3809f2020bb6bcadf9844c784d07c60736ebbbd6607b5d6ec755f2d586",
+    "https://cs2.cs2inspects.com/data/agents/models/tm_professional/tm_professional_varj.glb": "129df4462a92d67661757238008371515403bbc059425e51f592f08e3bf558cb",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_diver/sleeve/materials/sleeve_ctm_diver_vmat_g_tmetalness_b70f8f59.avif": "674a1a5f57c9070f0af3b423c10ab4aab7ec5d2fddaa557464e72ae304686a96",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_diver/sleeve/materials/sleeve_diver_wetsuit_ao_psd_306e0f16.avif": "68a1e8bbc38111853aa1533f5ccd313ce181155a90dab6061eaea3a36a875558",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_diver/sleeve/materials/sleeve_diver_wetsuit_color_psd_39dd7bc9.avif": "5bc426cf12d6700e8f1924cea215ae3b54b67bd580e876582390595b8a1febdd",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_diver/sleeve/materials/sleeve_diver_wetsuit_normal_psd_270b549f.avif": "d2d4cc776a0c7a40ca43209361a364cdfc9327d085ebf20deff6a3708222cff4",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_fbi/sleeve/materials/sleeve_fbi_color_psd_46dce074.avif": "43aab8de58b1fb3079cfc541b4182e85ba98101342567e23686ed5080ea12a53",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_fbi/sleeve/materials/sleeve_fbi_dark_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_fbi/sleeve/materials/sleeve_fbi_gray_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_fbi/sleeve/materials/sleeve_fbi_green_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_fbi/sleeve/materials/sleeve_fbi_light_green_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_fbi/sleeve/materials/sleeve_fbi_metal_psd_cc15e4fe.avif": "cecfe018cdd03f24ed7b59b9094ea1aa9eb21be32218c495ce25af80a0972855",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_fbi/sleeve/materials/sleeve_fbi_normal_psd_4491e813.avif": "7e10c801ffaea92cfc96baa0cdda726e299bb65b38497d67441cc64a0f86fe28",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_gendarmerie/sleeve/materials/sleeve_gendarmerie_ao_psd_3ea5af4f.avif": "e3f493ce36b04e661649bfe2693f0177bfbf7aed148f853367859deeb98ea682",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_gendarmerie/sleeve/materials/sleeve_gendarmerie_color_psd_eab713b5.avif": "068e0436c5bd44f891adf7be459973678f786c30e059550b0839ae5caf0fed9a",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_gendarmerie/sleeve/materials/sleeve_gendarmerie_metal_psd_d3c96176.avif": "1355fa382642931d9d8969359337275f92c8fc922b12c1130827623f9df5b9d0",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_gendarmerie/sleeve/materials/sleeve_gendarmerie_normal_psd_1187e989.avif": "51cc8fdc38211165b28ab0d6381de905bf73567eacfee26639da06a829ffdb3b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_sas/sleeve/materials/sleeve_sas_ao_psd_e8317d98.avif": "6c2550115c575ba1eca8b7bf974965bc41727ae1c90b9a477c44077c95f72670",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_sas/sleeve/materials/sleeve_sas_cloth_psd_9a3db1cf.avif": "39d15f4b369255341d6152ac4ca5208f67c5d6ad8146eb0647fb0392e1139f5c",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_sas/sleeve/materials/sleeve_sas_color_psd_b45d8ff2.avif": "a830a65d11192f9e0ddc771f5752787346112bffb67c089166e312d71cfc12f6",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_sas/sleeve/materials/sleeve_sas_normal_psd_b5d490b7.avif": "7bd7e45d1371e64f4c97902c4af4feea08b27881f0441c1c2e2dbe7bf15cb772",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_sas/sleeve/materials/sleeve_sas_ukmtp_color_psd_940c1276.avif": "37ae1e243fceab0be930461ed177e80c2c1e108f77b769ee80280c64e72c55db",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_sas/sleeve/materials/sleeve_sas_variantg_color_psd_e035072c.avif": "380e1aa3c35d391948340d7745667b8be69ee9252c4ea8fad9293e0563f389c9",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_ao_psd_74ef3e2d.avif": "959e1c0be47f1b09c7c697aaed0fb96e322471c45e6a8c92a81362ba99d6f12b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_cloth_psd_356ac541.avif": "88de8735e30a81c97e84d812bd399b3da65d938314267ed48921e231f0e68429",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_v2_normal_psd_38b232db.avif": "f420d15d08ecf9b36ed2708e99f0c4da0c352e4504796a7a358051a979e60605",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_v2_normal_psd_4f46d59a.avif": "41360d7ace78b66b1afc73a6db2b30f8fcafb6a4bf97e3933337caa1b94c9e16",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_variante_color_psd_fd2a1724.avif": "87c84ebc9afa96115d45f4cb13029120073054f685c7d2dd6d26cc8fe401cda2",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_variantg_color_psd_e86f964e.avif": "9b02f2c703058c528982712b4bf4bd98f43ad516e73f9f47fa4094c004feed14",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_variantj_color_psd_a5c5f431.avif": "8bec374535cdb8c0992974bb54fd3dc213bdaf8b5da682330061ffa4c37252f3",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_variantk_color_psd_28e90cf0.avif": "a123958847ae02610a53a9eb685df671d3d0f74a1a74f082620dbbb25851f38a",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_variantl_color_psd_5fd667f6.avif": "3470302b64bd5fb87b82faf7c46235987b16d792f5b9565a1344d6c4742a80b5",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_variantm_color_psd_b5359ab6.avif": "2ef6625287c7ae184f676cf2555f9fe1e73d482311f62c8268f354e87469e4af",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_st6/sleeve/materials/sleeve_st6_variantn_color_psd_6ebe9b6.avif": "f6809098c49c69450ba2af2dd68fec277802e69731ae17c072988984bddefcaf",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_ctm_swat_variante_vmat_g_tmetalness_8a7cc089.avif": "71d05baa8036e2aa25378f27952a2bcdc97aaa62b5b6101eb8f274580dccebd3",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_ctm_swat_variantf_vmat_g_tmetalness_8a7cc089.avif": "71d05baa8036e2aa25378f27952a2bcdc97aaa62b5b6101eb8f274580dccebd3",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_ctm_swat_variantg_vmat_g_tmetalness_8a7cc089.avif": "71d05baa8036e2aa25378f27952a2bcdc97aaa62b5b6101eb8f274580dccebd3",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_ctm_swat_varianth_vmat_g_tmetalness_8a7cc089.avif": "71d05baa8036e2aa25378f27952a2bcdc97aaa62b5b6101eb8f274580dccebd3",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_ctm_swat_varianti_vmat_g_tmetalness_8a7cc089.avif": "71d05baa8036e2aa25378f27952a2bcdc97aaa62b5b6101eb8f274580dccebd3",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_ctm_swat_variantj_vmat_g_tmetalness_8a7cc089.avif": "71d05baa8036e2aa25378f27952a2bcdc97aaa62b5b6101eb8f274580dccebd3",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_ctm_swat_variantk_vmat_g_tmetalness_8a7cc089.avif": "71d05baa8036e2aa25378f27952a2bcdc97aaa62b5b6101eb8f274580dccebd3",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_breecher_color_psd_9f96a1fc.avif": "a84e29898742236eb897afb5fc2fc4a040e0aee4da0d5c7473b94493d67ffd85",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_breecher_gear_color_psd_b1344be9.avif": "21b130394da5ddd4f97ebab18c02b29afd225b4e4cb96104c83b1963bdbcbb77",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_breecher_gear_variantk_color_psd_6eced726.avif": "2d0fea446076e5794143e781743ce8c09666d3c4bd2213bc0c55411a429818b8",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_breecher_variantk_color_psd_6deaba5.avif": "ee8c8a0a5c1641e2e357b59723d42f59ae20a8acccfbf9a820a8bbbd185e5635",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_gasmask_blue_color_psd_82af3a89.avif": "2f36d8c23e0d69ef2f3205777b07b903fcafa8bfca75450fc3c8bfbf4b7ec98d",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_gasmask_blue_gear_color_psd_e024013b.avif": "55e134e5db48ba36f46368516485d0f9bf059a35ab0c7132027ee16da28c81ca",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_gasmask_green_color_psd_4c44cfb4.avif": "9085580d4582e2da946a5c5ffdba72991b69454b6f9a7a5713a96fa1667f0afb",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_gasmask_green_gear_color_psd_eb714d7a.avif": "24f3f9c0b5747eea38ca5a073313e20a12e316782ec8795fede1055007fcd380",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_generic_color_psd_d05eea21.avif": "9f4faf1e8f91526b0ff16482e7e1de19f954ec961c27f45ed8f54d986833c151",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_generic_gear_color_psd_e227c67e.avif": "e1322f02aba7ec1e629073f75f0103fed96d0aef6e3daa20cfa250baf451925a",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_leader_ao_psd_933a08f3.avif": "8ea7af53d7e1b538d8d50eda5ab1213d7c46328710f8aadf041153984f91771c",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_leader_color_psd_7bd8f3c6.avif": "d879710d91b0d83d16749123fbaf13a65249b92b7d3afc1bb4b32e3134c23d94",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_leader_gear_ao_psd_751cced7.avif": "f8f0fb0537953ebcdaea4e3b144ab12327ad0531f684783f3806650949faec9b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_leader_gear_color_psd_12b16385.avif": "ced5f2726b77add60911a4fb505d91efee68dc654405e0abf7f67f9bdfca38e2",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_leader_gear_metal_psd_9bd42b2b.avif": "8a21102849c179f3ab2538e3986345f2cdf7e055d16b11e32a803f955ceae7c1",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_leader_gear_metal_psd_ef10ec35.avif": "97db4d70a5ed5f785b076fbfecb63ce60880eec2eb7846dc9fcb658671550adb",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_leader_gear_normal_psd_c26eafe.avif": "a87253c8561afe517be0fe13e2a260c733892cb0cf4d5a17ec8c6d8a024bd064",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_leader_normal_psd_ac9f009c.avif": "0d18bb9cb9aa1b5516024af73433ac7bd01dc2900ca8bdad3bbe5a14cd1a8331",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_medic_color_psd_dbbe9217.avif": "cb850216572a4d956f566d3042aaa5eb1134afb900107fec88727cd82f5f384c",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/ctm_swat/sleeve/materials/sleeve_swat_medic_gear_color_psd_4ce5ba9b.avif": "b7866fdc17524bdc297c257ce37ad2526f0ac40116ea888e5df7d009285bec4b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_103_color_psd_17721baf.avif": "05fd203b7da6c397e36d4701092280651e19caaea8609ad246208d1574fad709",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_103_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_107_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_113_color_psd_2668e514.avif": "379794e4141273024550a4c786279c1297b420b288982b901ac1e3db7028e7a0",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_113_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_125_color_psd_177e13d9.avif": "fb0d8461665d2ac2061e04ff7fcf2e4e0ffc9473943684e4f2af728d2339cd3b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_125_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_133_color_psd_5b76e0cf.avif": "c9c4d2ecbdd082d13a917fc5e30b521cfc6c9cb64cd56d718afc79d1d2cea955",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_133_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_135_color_tga_98d341ab.avif": "b39abaf665b676984f5d0d92689b95d91cbb308672477a2377e8c7e52d761f73",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_44_color_tga_2dc90e77.avif": "478b1cf92b073042ff947405787942419ab835cf150adf519c2efa73165ed940",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_44_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_55_color_tga_e0d53991.avif": "6583c4748c5ca32cf018f175103699a06203f216d8ffe3d6c4d73d4b9dd1530c",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_55_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_66_color_psd_147ed941.avif": "1febeb9a724a3bb0d49121a98010e36744198eb10b505699f6fd58898596ebc4",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_78_color_tga_a4830562.avif": "6323b6108528b1cff2c66966e71c8d8d0e8fa5ccf07687af984d919e829c1526",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_ao_tga_d61b9f8.avif": "50d8409baef67c43750b8872d17c3f9fc5710900e7b63354b24e250288d5d3f1",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_jngl_vare_color_psd_9744d45e.avif": "e48ffaa66b474e14f91abc720bd3756c75b98e8b7f519a3e9b861563e11062ef",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_normal_tga_c9fefc2d.avif": "9ff5ea411c189a4c90b91c8e5197db437c6dd89ea7b004666a58495bea1838d1",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/bare_arms/materials/bare_arm_pro_varf_color_tga_e41008be.avif": "599ff302f4bd618bef05b659ef22a49edd539fa6edb11962754230ed1b4931fa",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_fingerless/materials/glove_fingerless_ao_psd_ce290e8d.avif": "552d37ab2db9f5f76236ffd969a947dc7ceb21db5d5910a6bb4dcb75b8477ed7",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_fingerless/materials/glove_fingerless_color_psd_19aa3701.avif": "ea470a8e07e03ab9dcd26df8f745d770a129dff7db3af1954524b03ee1557e44",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_fingerless/materials/glove_fingerless_normal_tga_5acd72d3.avif": "b8232b187924af0bcbe169cb3bdcca83528308410f8cdaf5e87f02ae842aa6f2",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_fullfinger/materials/glove_fullfinger_ao_psd_37541d21.avif": "03a4a2fa8c81607535fa8ccb97572ad5fb9a3915ee9f5e6ec82b20569ecce5eb",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_fullfinger/materials/glove_fullfinger_color_psd_935f70c2.avif": "7a23d05552796342df334cd95a35d23952275b6d5262a281c5a5b71000ba933f",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_fullfinger/materials/glove_fullfinger_metal_tga_19fb60a.avif": "e4c8793a7ef84b3bbcdea8f90e7ba424ed9c5982fd602a8d2ae5e8b3547d49f6",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_fullfinger/materials/glove_fullfinger_normal_tga_c013e034.avif": "d50af14370a3e5b7d62d20ce90dd720c9230226cbc3faf444822414e4fe6c21d",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_hardknuckle/materials/glove_hardknuckle_ao_psd_5be17a0d.avif": "4cffca9cec67f436de69f7179def5b6370edfe9a91a6e2ee2607fde588273106",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_hardknuckle/materials/glove_hardknuckle_black_color_psd_8f00aa00.avif": "b4aa9ad5192a38fa6085a1e0057a7ae02238ed3f20444230de39b7b28bf69de8",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/shared/arms/glove_hardknuckle/materials/glove_hardknuckle_normal_tga_a8df881b.avif": "079aa8a4685768b2a059eb16e51c119635cc4d30d3a1a755f56cd071e899116b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantf_ao_psd_15a70497.avif": "121c357dde6612f247b7858b7a6271305ddaeff82e41de17de66331461f38db2",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantf_color_psd_49361ae8.avif": "abf26cdf68741d937ecec3ea9319fceb25e8cd38130b5eb5f1b441753d0aafab",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantf_metal_psd_75740a37.avif": "6ead1ee41be699bb83a41cdbf9bcc58bf90ced73a7f51895fc939ad95fac1d1c",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantf_normal_psd_d36666a3.avif": "0d346c90c8f102aac41f7411d7f9410ff0092d38c66941612bc388bdc1ed8252",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantf_normal_psd_e280488e.avif": "1e694a9b7cd49148e9a1965a9b65fb78f5e7f3f87055694f48e616813d05ec08",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantg_ao_psd_3de8bcc4.avif": "0819702bfaca563ea4eb460a9c0a1a70621137dfc226d1158682b177ec58c094",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantg_cloth_psd_c4179f36.avif": "e76975966db81b5679c67fcd3bf51e25bb193f89f6355cf9afc626b666b1e187",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantg_color_psd_16de0e2a.avif": "9d476bcfe9949067461b142fdc43641ff5c11209e44805d7bdb3d57799342ec9",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantg_normal_psd_fba20801.avif": "9087981249f0721cd80a6095357ff6b9972a6c4d919c5496c13ea6c8b45e932b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_varianth_ao_psd_3b9a228e.avif": "15867fabe28d21ae91c80cc6d35e49016b7b766369d0dead73d37cf0f05b9f98",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_varianth_color_psd_1573c28.avif": "b06073791fb50a02b90a586891d6afc24d3defb7ead68ec5d1e8e5fa29dfdc8a",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_varianth_normal_psd_402f0035.avif": "3947163475ca66717db3bf8d37d663abe975ec399e29564cb21161aafe18b5eb",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_varianth_vmat_g_tmetalness_b70f8f59.avif": "674a1a5f57c9070f0af3b423c10ab4aab7ec5d2fddaa557464e72ae304686a96",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantj_ao_psd_d1f6e1e7.avif": "3716f7d31fd2c60c0104d0522e125c958cb0ae8709b78a1605d7634430eaacaf",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantj_color_psd_c229e405.avif": "b5a3756eb50e955785ffad02b4300e092b6e021c898e4d5c85035f0e95963d6c",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantj_metal_psd_aef3b41d.avif": "eda78282b1ee586c2549ffcbb35c179a76a6f9a2d0721ebb645c62f46902e783",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantj_normal_psd_972df12d.avif": "76ce10bd79b5517c97a2656a222fb48f294bc59d06da8df961574e8556200ddd",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantk_color_psd_1fcbc66b.avif": "9ee3913fb505ea5a6e9b0fd466c082d92da81be341d1d7ac278cb770d648396a",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantl_color_psd_f7113d41.avif": "98e3e6fdf76ee60557d1f70b16f5af16957ce32940ab0f37dbdde420dd27ed33",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_balkan/sleeve/materials/sleeve_balkan_variantl_vmat_g_tmetalness_b70f8f59.avif": "674a1a5f57c9070f0af3b423c10ab4aab7ec5d2fddaa557464e72ae304686a96",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_jumpsuit/sleeve/materials/sleeve_jumpsuit_ao_psd_1dc6f5a6.avif": "98677e84975cc061d2c7e05965b7bcfdfeb3d5951e1c819e411a82a93c761aee",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_jungle_raider/materials/tm_jungle_raider_body_varianta_ao_psd_28f8662d.avif": "3ae33b8c5104503f3d6edb90abe14d27f138d1f7bd2ed7e49113b2147e18a44d",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_jungle_raider/materials/tm_jungle_raider_body_varianta_color_psd_24f8330a.avif": "00e0ab32edf927b036bd86407b0f01e8c20070b4e24a2d0771aa38c72f9d156e",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_jungle_raider/materials/tm_jungle_raider_body_varianta_metal_psd_59a03fe5.avif": "daf3b791b639104beec759109f69438bc846486d1b242722a7eae3e89ff4f40c",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_jungle_raider/materials/tm_jungle_raider_body_varianta_normal_psd_a24a5eb9.avif": "6541e37e167543d1abdebdab68a9a6c4bbfe957915c0bb6cad5560278e16bb41",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_varianta_ao_psd_8630e862.avif": "b037cb5eafe5c8071792b5df8982d784fdc572159ed7009f5114db556be9a624",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_varianta_metal_psd_ee15d4a5.avif": "90d366736e2de9ec2a48010efb1533c0cde455f31e6fb3ae9c43314f2442ce2b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantb_ao_psd_beaf9153.avif": "c252816ffb4e3974e2963990ab398c224325f0236807a992c44defeb7ad3e55e",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantb_metal_psd_e39156c8.avif": "cca0a49a26da16575f860b3318e45b2d424c66d52660baa96ae5e8c91a14883c",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantb_normal_psd_b613ee64.avif": "4ebb9823f90311e269457825a8a73894951d7f8ef5aad2b268ca16b374424687",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantf_color_psd_ee1874c2.avif": "2bfc8393e40ab24925561e294a555eb5d312ff0b16ccb318ac19d8e6653a4a87",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantf_metal_psd_c7c12246.avif": "f0e228ff607a39f6e5aa6af900fbef2cef4730b91406ab78c73e61040036c72a",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantf_metal_psd_e7fb6c0e.avif": "1f5fd43f25cdb2f154eb7dd934be2d35cbb712a987d8241b2f6684312dca1966",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantf_normal_psd_850e9a69.avif": "2d7af1891b748690d1da8b7bc2fbc355e893b26fb55ef6c78e465f6bb4c718c6",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantg_color_psd_9d2961d5.avif": "5d5314f03514c573b7c2b8fbc85cdb77d93d96bb59ce8cb76662ec1552ed0bd4",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantg_normal_psd_c9f36c86.avif": "497a1fcd172c912097a0e456b31c9346997d91d89c5ba5a119efe6aae357cb1b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_varianth_color_psd_8873e42c.avif": "c36487e168cb58bf96e135d8743284388a389908de96684d9ad21ce6786fafad",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_varianth_normal_psd_e024109c.avif": "236038aa8cf3c91f1c57f385fb1305bdda542c0cb256e34845de31cad66af0a9",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_leet/materials/tm_leet_v2_body_variantj_color_psd_6f093823.avif": "f1eb4ac4b2edc9f3dcf6eda60822d169a0957f3dc5484c231f2037bd7d8a2c1b",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_body_normal_psd_2bafb86a.avif": "731ae68a0078a224d6b537680f12f64ecf771d052ac3e13bff953802d7d6b7b9",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_body_normal_psd_7ae602a7.avif": "5e1f900182b459ebbf6dbcf868aacdf645d6a754856894b5d2026d4d76c0528a",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_body_normal_psd_bdeb78fa.avif": "8402fdd9a147d5057f6485ae7032c2b1d9dfccf74878607d36e7c8814fd58900",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_body_normal_psd_fe55c2b.avif": "cfe94876510b9b8d9de7718e7adf29dd6e06097095eb823b7b066434f93306b2",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_v2_body_ao_psd_3f117e67.avif": "190071889e3bd03bdb12d180722dd5b6716671094f900b0436ec52ad40c91767",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_v2_body_metal_psd_651cee3b.avif": "30b1d1213ce61653bc0a09c4f299f5c0f1de8bc25960749e5429f1517af232b4",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_v2_body_variante_color_psd_a036cb51.avif": "3bcaf1b15f02b475222e2f0e970ee78f67964ee4ec123dc7f2ef6314a766b5c6",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_v2_body_variantf_color_psd_2d8f36b4.avif": "2f478f9c645821e85505f3e174dbef4f2ebf6530874e73575a7d89e5d94d529e",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_v2_body_variantg_color_psd_7a8ed293.avif": "4dfcf56c9d12981b1da8c8a15e034b8186e0f3a52926da01a7ef6e4d71d81e5a",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_v2_body_varianth_color_psd_33e44533.avif": "24c00b442d8a8fb937b0c2b6b95a29ed39baf8823dcdb4e14e1c812aea1d4bce",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_v2_body_varianti_color_psd_76bf396a.avif": "444308a0ba2cc9aeb5031aed2d96a788921f5a6b7d2291dd655a354840197ba0",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_phoenix/materials/tm_phoenix_v2_body_varianti_normal_psd_783eda6b.avif": "98ed00c2ccf241a548f44dfa873f0fdb582cf37b2f42e7261fae774a0cd73a40",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_bronze_psd_1b184b74.avif": "f896d9bdc4d21cff0a5293a3970876178c360352cb67f418d228b67ee9393039",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_bronze_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_bronze_vmat_g_tmetalness_bd906efe.avif": "9e749dabad345efabe09e73876c15b4fa9a67d8e1aa5b49a6481ed76d5a25685",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_gold_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_gold_vmat_g_tmetalness_bd906efe.avif": "9e749dabad345efabe09e73876c15b4fa9a67d8e1aa5b49a6481ed76d5a25685",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_normal_psd_ecc7343b.avif": "e7156f603b80dacee2e57b5a4f9571625e7c72f685b7676da73c7a28a9d08e70",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_psd_51120a19.avif": "cbc2ec34b085105fd0f5bd1030fab337ba612d74935bbb1be921182fbb15dbe6",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_silver_psd_1799018.avif": "0765373fb8cb2b5b9e91f92969df6eb5748fd7824921457693dc277d28e12f7d",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_silver_vmat_g_tambientocclusion_9782fd5c.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/professional_watch_silver_vmat_g_tmetalness_bd906efe.avif": "9e749dabad345efabe09e73876c15b4fa9a67d8e1aa5b49a6481ed76d5a25685",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/sleeve_professional_normal_psd_e74fdc62.avif": "5882f7eebdaead11b57f88cdc096031aa2ea7a7a79dec81681db14179a1f4310",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/sleeve_professional_psd_b2f1e30a.avif": "2437dd3adf441348f3d27248184f4b9fb3a9df83faf4e656ff01a4ee808332ad",
+    "https://cs2.cs2inspects.com/data/high2/characters/models/tm_professional/sleeve/materials/sleeve_professional_vmat_g_tmetalness_8a7cc089.avif": "71d05baa8036e2aa25378f27952a2bcdc97aaa62b5b6101eb8f274580dccebd3",
+    "https://cs2.cs2inspects.com/data/high2/materials/default/default_metal_tga_dbfb4d6e.avif": "674a1a5f57c9070f0af3b423c10ab4aab7ec5d2fddaa557464e72ae304686a96"
+  }
+}

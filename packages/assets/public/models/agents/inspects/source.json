@@ -1,0 +1,1170 @@
+{
+  "author": "Valve; resources served by CS2 Inspects",
+  "reference": "https://cs2inspects.com/3d-viewer",
+  "generator": "python3 scripts/import-agent-animations.py",
+  "agents": 65,
+  "packs": 153,
+  "clips": 1221,
+  "categories": {
+    "additive": 3,
+    "base": 15,
+    "weapon": 1082,
+    "taunt": 121
+  },
+  "excluded": {
+    "petClips": 23,
+    "reason": "Pets are not agent animations"
+  },
+  "processing": "All published agent animation GLBs retained byte-identically, including secondary weapon tracks. All65 viewer agent native model paths resolve to the existing pinned installed native body roster. No duplicate bodies or per-agent animation copies. Full model API descriptions retain first-person part/texture references; runtime thumbnails are local WebP.",
+  "limits": "Source clip samples and static bind metadata, not the full evaluated native graph. Existing body/material/eye approximations retained. Runtime converts animation positions to existing Source-inch skeleton basis; old Source1 IDF still needs retargeting.",
+  "inputs": {
+    "https://3d.cs2inspects.com/": {
+      "sha256": "d039e54890cc718c220bb8dce74425bb77f4cf5e5c0d6d7a3de8d81cc803f87c",
+      "bytes": 1019
+    },
+    "https://3d.cs2inspects.com/assets/index-CXUheY2V.js": {
+      "sha256": "724899da942ccf6d0ec3864caeee02e5bcbe3f8d28c8375d1e128bb77d6e6ba4",
+      "bytes": 3054353
+    },
+    "https://3dapi.cs2inspects.com/model/4613": {
+      "sha256": "8a085c47ae180ae5d22c6ecba68eb1fab4409f9243bb530abbdd845dc7a62c60",
+      "bytes": 27810
+    },
+    "https://3dapi.cs2inspects.com/model/4619": {
+      "sha256": "3ff0ec79b9d1a3ec91800b6755250a100823a5f2d4da811622b0ccb4cd934895",
+      "bytes": 28597
+    },
+    "https://3dapi.cs2inspects.com/model/4680": {
+      "sha256": "1fdc31a2be7cb5952701c0571b21c1d7936f061465118fee698f188a7ee24de3",
+      "bytes": 33252
+    },
+    "https://3dapi.cs2inspects.com/model/4711": {
+      "sha256": "0f2a4c8c0f09d614f54d017e525b97dbc6b87d807ea396a92f60d6964af87386",
+      "bytes": 36390
+    },
+    "https://3dapi.cs2inspects.com/model/4712": {
+      "sha256": "60b7ca8b71d39b21775a3ceabe76b4c964824d1e3de96c5d56113586c05724cb",
+      "bytes": 31501
+    },
+    "https://3dapi.cs2inspects.com/model/4713": {
+      "sha256": "d1daafe69b14ddf91fd21872e46abe3b98cf048aa5737127a4a0d1574a3a235b",
+      "bytes": 30028
+    },
+    "https://3dapi.cs2inspects.com/model/4714": {
+      "sha256": "66fee118594665fb505deb3302234ae3e34733f1418f52bf736f92a9f28a88aa",
+      "bytes": 29840
+    },
+    "https://3dapi.cs2inspects.com/model/4715": {
+      "sha256": "69d2cc0720ae9facf6beadad9d12bd56b718edd36399c33aa432d39faa6d81f2",
+      "bytes": 30593
+    },
+    "https://3dapi.cs2inspects.com/model/4716": {
+      "sha256": "e3e9dfcb518c508eaab80294bb8cc9ac55197df398a21ee73444fecf732b3091",
+      "bytes": 30153
+    },
+    "https://3dapi.cs2inspects.com/model/4718": {
+      "sha256": "46d8114825eed9b4e35506df1dcc792061601427b1ef02f801e590075c58a7c5",
+      "bytes": 27054
+    },
+    "https://3dapi.cs2inspects.com/model/4726": {
+      "sha256": "31fcde80570d56c8030c9a90fd028c0587e6ecf56630f0a2dd459f0d45a8af30",
+      "bytes": 27294
+    },
+    "https://3dapi.cs2inspects.com/model/4727": {
+      "sha256": "314798e16a9903f085c99103f33293774b06c694283877f6033a00549a802c51",
+      "bytes": 25671
+    },
+    "https://3dapi.cs2inspects.com/model/4728": {
+      "sha256": "07835ef096493d9a980b2f4787b6b3a4d706a0c6880ac26a7cb2b57fef45b41c",
+      "bytes": 23695
+    },
+    "https://3dapi.cs2inspects.com/model/4730": {
+      "sha256": "149d3e2d765c24876fe1add03282208e219f8e39db403dc724d045e8c8c97587",
+      "bytes": 24163
+    },
+    "https://3dapi.cs2inspects.com/model/4732": {
+      "sha256": "7749e325d343fe852cd079f69194ccc803ae29eeaff4dde6ef9f92d9a83d400e",
+      "bytes": 24777
+    },
+    "https://3dapi.cs2inspects.com/model/4733": {
+      "sha256": "e73636a057a657e1caadbe0f2972f47dd7e3e0118696ab6ebab0ade0b4ce44b9",
+      "bytes": 27462
+    },
+    "https://3dapi.cs2inspects.com/model/4734": {
+      "sha256": "c48f00b58ea3dadc05f49dc4f0ec536a0e68d12f1c4caefa10da13f42bcff1ee",
+      "bytes": 27438
+    },
+    "https://3dapi.cs2inspects.com/model/4735": {
+      "sha256": "4d05ba513097db6a73bef2a8385d3fc54cc44134d599b868988765cc3a40876f",
+      "bytes": 27752
+    },
+    "https://3dapi.cs2inspects.com/model/4736": {
+      "sha256": "1000f1016d41c7bde7297a00776f443db78e36cceee0df8377e948ea3bfdb517",
+      "bytes": 27879
+    },
+    "https://3dapi.cs2inspects.com/model/4749": {
+      "sha256": "54f41779381f97533f38f7888a5149e5642c9f46ecc4084b74959a81205dbdda",
+      "bytes": 33333
+    },
+    "https://3dapi.cs2inspects.com/model/4750": {
+      "sha256": "7ef2d51e642d4b6a37ed4bb3a9a0cf2ca9dc354ab467359fd4118ded34a30f97",
+      "bytes": 31387
+    },
+    "https://3dapi.cs2inspects.com/model/4751": {
+      "sha256": "ab1ea21816ae3a7433b0e0fc463185549e0b7d5d229d7e3a3ac27d5a111793f6",
+      "bytes": 30391
+    },
+    "https://3dapi.cs2inspects.com/model/4752": {
+      "sha256": "91c9083749e52d2d929a1ec72ab400d2e5be8eabd4762acd515fda620bbb1f82",
+      "bytes": 32543
+    },
+    "https://3dapi.cs2inspects.com/model/4753": {
+      "sha256": "851683962b839c7c6d5e19e90b10f257204976317c173c4d609be9cebefeb912",
+      "bytes": 29919
+    },
+    "https://3dapi.cs2inspects.com/model/4756": {
+      "sha256": "611fea5b516b461bec1d8707378c987e98b25bdd67ca5c6d0587624688fc266f",
+      "bytes": 32117
+    },
+    "https://3dapi.cs2inspects.com/model/4757": {
+      "sha256": "05d14b0d804a083a2db9b2e97a9e55c0fba273ecdf82a3e52a2ab761d2bafe40",
+      "bytes": 32889
+    },
+    "https://3dapi.cs2inspects.com/model/4771": {
+      "sha256": "322f28cf4bcf8ddc30f387ec3dfa71e9e7a5cf724056ecad2ced8d288633a696",
+      "bytes": 27387
+    },
+    "https://3dapi.cs2inspects.com/model/4772": {
+      "sha256": "e4e2854d6483b6f62be0dcd1b969b12c1f0a322f3f0de29a5f021945ea816b54",
+      "bytes": 37792
+    },
+    "https://3dapi.cs2inspects.com/model/4773": {
+      "sha256": "7084e5cda545fe2d31c6b98c0b418f87aa4fde494d56af38d4522a1472d0c90a",
+      "bytes": 30004
+    },
+    "https://3dapi.cs2inspects.com/model/4774": {
+      "sha256": "5ac710ff847e949982590ef567831a3291e7738d9c3207143a6e7da686247645",
+      "bytes": 26154
+    },
+    "https://3dapi.cs2inspects.com/model/4775": {
+      "sha256": "640e424b7b3ceada11457fcc97580625f65b9db78a745a7871843e0f589523f0",
+      "bytes": 25975
+    },
+    "https://3dapi.cs2inspects.com/model/4776": {
+      "sha256": "21542ad9a51c04390ddf0ea526ac071b4682fce1f548b6b09f5b8f8bb38d4f7a",
+      "bytes": 30630
+    },
+    "https://3dapi.cs2inspects.com/model/4777": {
+      "sha256": "2a1a351aeb663f3e1ed9cbf7d977956b69471838e4a2904b3ee32125b20a5b2a",
+      "bytes": 27524
+    },
+    "https://3dapi.cs2inspects.com/model/4778": {
+      "sha256": "56265ae7b4ea8367ff05e5f2faf7bae67c17dee1c67ce4df0d555fdf8ee293fb",
+      "bytes": 23172
+    },
+    "https://3dapi.cs2inspects.com/model/4780": {
+      "sha256": "2556c11e278c8270709bdc2adcb52eec51528af95b97cd2ff877512b0e1a1122",
+      "bytes": 27038
+    },
+    "https://3dapi.cs2inspects.com/model/4781": {
+      "sha256": "87ae92865736a5d80a2c99a51a8df0e8d03b0fc497de416a8c5fc77760d147e3",
+      "bytes": 23750
+    },
+    "https://3dapi.cs2inspects.com/model/5105": {
+      "sha256": "2f6ba8c2d06a04842db9e5e28500c5e86194df2593f1c0b23b3fd24ee4cb6b87",
+      "bytes": 28888
+    },
+    "https://3dapi.cs2inspects.com/model/5106": {
+      "sha256": "d3cf14fa3db2f589afd8f7575b5d6613ee7ae5f940fe86b143ee39f7fbf9db7f",
+      "bytes": 29896
+    },
+    "https://3dapi.cs2inspects.com/model/5107": {
+      "sha256": "007f29453ab150f26e97ff04fd036ea0c6f80958a1f71ec6a044020c32385ff5",
+      "bytes": 22738
+    },
+    "https://3dapi.cs2inspects.com/model/5108": {
+      "sha256": "5e135d4d20369584f4fd0879dcfdc719069df0d61123663a764dc5bed6d27e77",
+      "bytes": 30893
+    },
+    "https://3dapi.cs2inspects.com/model/5109": {
+      "sha256": "3ea9b3cd776489d1cdeb741e7579e0e3fbfc4c61f5990bdc1a4cccec16eb1a0a",
+      "bytes": 29463
+    },
+    "https://3dapi.cs2inspects.com/model/5200": {
+      "sha256": "55ddd177cc17047a3eaf98e3ef5f132a8e3dba8f152fb3bb781b5f869a4fb448",
+      "bytes": 26375
+    },
+    "https://3dapi.cs2inspects.com/model/5205": {
+      "sha256": "c38a6f5b94e3d01ff2d053335b5e2da286626e0dc1621fa9bb636a34104c0d29",
+      "bytes": 30111
+    },
+    "https://3dapi.cs2inspects.com/model/5206": {
+      "sha256": "9dc060ba184b9b6e1ed9bac112cf71aad0fea243ccb8c0c4892f1cdc87e6827f",
+      "bytes": 29888
+    },
+    "https://3dapi.cs2inspects.com/model/5207": {
+      "sha256": "ff5981363386769a1382192db792ff596219de36c5adc36208a6b7a6393e57c2",
+      "bytes": 30084
+    },
+    "https://3dapi.cs2inspects.com/model/5208": {
+      "sha256": "1cfa2e05fa00f44cd71877d3f4aea4d33b0aa3115c535e73404d9d49b9043a84",
+      "bytes": 30167
+    },
+    "https://3dapi.cs2inspects.com/model/5305": {
+      "sha256": "63764b535835a022f5d527f7bc825f9664e551436a33a240c6b9c62dbe140daa",
+      "bytes": 29483
+    },
+    "https://3dapi.cs2inspects.com/model/5306": {
+      "sha256": "839691f0abdbd4f7f876875f49a580b5483618acdec291143c8535ed634236ae",
+      "bytes": 28007
+    },
+    "https://3dapi.cs2inspects.com/model/5307": {
+      "sha256": "ddb7d0ed6ff2aacb047a8cfd8bc5410a171afa727c69ec0a88ba2f8f40249aa7",
+      "bytes": 28605
+    },
+    "https://3dapi.cs2inspects.com/model/5308": {
+      "sha256": "c4eb98a1cc6cd0e2a3b75c6eb308b9ed95832a2aed40984170e7ec4a172fdec2",
+      "bytes": 29657
+    },
+    "https://3dapi.cs2inspects.com/model/5400": {
+      "sha256": "a61b57fe2a7b6a665221a0ce7413425b8a231b53afcc5f54c49432dc30765726",
+      "bytes": 23998
+    },
+    "https://3dapi.cs2inspects.com/model/5401": {
+      "sha256": "b098ebcec0058d28c0ec062d65fdd835d3b95bc6ceb0ddd3a0a2838edab05d11",
+      "bytes": 25560
+    },
+    "https://3dapi.cs2inspects.com/model/5402": {
+      "sha256": "f98eaf4cdcc244e4fd7bbddd78442b374ef8adb0bbc5c036e2c73b1b633579a2",
+      "bytes": 28347
+    },
+    "https://3dapi.cs2inspects.com/model/5403": {
+      "sha256": "383bb5efb342187084457a238059d55f5171f90d9728a9043b806ee9f4a25ebf",
+      "bytes": 33888
+    },
+    "https://3dapi.cs2inspects.com/model/5404": {
+      "sha256": "335d02f7defdcf7927bf5835b6e21e310f846304073f4f1584e0fb2853adeaae",
+      "bytes": 30822
+    },
+    "https://3dapi.cs2inspects.com/model/5405": {
+      "sha256": "94777af2e7a33d88c8ee8e5bca7b462b37ead74bddf31dc64e568946c068af16",
+      "bytes": 28823
+    },
+    "https://3dapi.cs2inspects.com/model/5500": {
+      "sha256": "9a84f9cd27b06653d5526154ec8af0b4b5eef7fdda2cc1a8b982e02d87b3ea14",
+      "bytes": 24486
+    },
+    "https://3dapi.cs2inspects.com/model/5501": {
+      "sha256": "a8245935e89d19d500c1e7ccef2c9030b3111152c7c5e48b1677f21641103b49",
+      "bytes": 26187
+    },
+    "https://3dapi.cs2inspects.com/model/5502": {
+      "sha256": "1eb79071c305d44082b15110e51b2fdb874d36c0339b39a173c613a6c17fe0fa",
+      "bytes": 26982
+    },
+    "https://3dapi.cs2inspects.com/model/5503": {
+      "sha256": "480ac2b7c29954496074a170630f167502ecf3b70ac61d2e9e6a804ed68f7a24",
+      "bytes": 26802
+    },
+    "https://3dapi.cs2inspects.com/model/5504": {
+      "sha256": "b67b91abcfac6433450c89a70c2ba1112587174c657e58a371a101eac05ab7bb",
+      "bytes": 24182
+    },
+    "https://3dapi.cs2inspects.com/model/5505": {
+      "sha256": "f55f61660b36a0fc52a4dda6e2f7a9ea69cbe923a881c0918c0bb6844762a2e1",
+      "bytes": 24920
+    },
+    "https://3dapi.cs2inspects.com/model/5600": {
+      "sha256": "2ae5311dc705f4c60839c19eae8c6301e0817938dccc620f372ff0d3d2a205d3",
+      "bytes": 24487
+    },
+    "https://3dapi.cs2inspects.com/model/5601": {
+      "sha256": "d082536321a319c203d8a674738c4073bbf6832793229c85e594eb6a2e5bb7ae",
+      "bytes": 26908
+    },
+    "https://3dapi.cs2inspects.com/model/5602": {
+      "sha256": "703cda47d69d1d19af0218091d52b47868d10cda998e707c47fa83733a15e2ce",
+      "bytes": 26849
+    },
+    "https://api.cs2inspects.com/items/agents2": {
+      "sha256": "dd9a9f9f2ac0d80e889af6c32d17ecccaebde7081b233c5e80299ae897769392",
+      "bytes": 22822
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_diver_varianta_png.webp": {
+      "sha256": "422a960e603528d30cd0decc1bbcd6464d46a5c9696d7ff80d936b091cca40c2",
+      "bytes": 139284
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_diver_variantb_png.webp": {
+      "sha256": "954e3ea2875078f1df02ee78b1852f177b42c54368fb013e81e66ea2df20f783",
+      "bytes": 155358
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_diver_variantc_png.webp": {
+      "sha256": "3a1a9e9a058a81e88b6f36159f6b527ed50ed3ae1a44916fb508fb8ba55f914b",
+      "bytes": 110250
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_fbi_variantb_png.webp": {
+      "sha256": "a7a78edbff70d4129d58a1c9a1bbf518963c4dd9c59a3000e6b55c714abf7a29",
+      "bytes": 108930
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_fbi_variantf_png.webp": {
+      "sha256": "70a9ace472ff9d01a9075ae07f361e19a3f7b6706e7ccc2f3229e71eda99eb2c",
+      "bytes": 91924
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_fbi_variantg_png.webp": {
+      "sha256": "d53b563ba5504bd01150fa11904048112472aa2acf2b6f84a0ecd73237e73930",
+      "bytes": 87770
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_fbi_varianth_png.webp": {
+      "sha256": "2f37ccaab2fd28b41bd0b0182cc36b95eaaf4ceb32eb466a55389b513c47e2c3",
+      "bytes": 109596
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_gendarmerie_varianta_png.webp": {
+      "sha256": "f877cbf9909c817fc069252b52d5d5012e0acc2621ba51b8d46f47b308c6cbe6",
+      "bytes": 101732
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_gendarmerie_variantb_png.webp": {
+      "sha256": "e53b635d0b4f521b92e3f2bfc2feaa932a3bedb75f68c4f586a26fb8c2584b26",
+      "bytes": 105242
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_gendarmerie_variantc_png.webp": {
+      "sha256": "a4d46b2c2d6278d50b4e7e7110c29a9b1aedcdb7039219d3d8b064946a462215",
+      "bytes": 107544
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_gendarmerie_variantd_png.webp": {
+      "sha256": "76e0f2b63c9c6aafd875421be2fab8f3d10cacf37c0086c8bf858b0917c5be06",
+      "bytes": 117026
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_gendarmerie_variante_png.webp": {
+      "sha256": "9af0d6b63c5785cca7adf3012291217e8e4da54d42e12dc891cd3df48865a3a0",
+      "bytes": 104418
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_sas_png.webp": {
+      "sha256": "b6767efc4182b3d47175daa35a637e7e37ac770035042a6811b3a8192c3eecdc",
+      "bytes": 109376
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_sas_variantf_png.webp": {
+      "sha256": "eaa17083a916a30ada653f4ad08a49c6c039d6f5f0c448ab0fd87d1079682f0a",
+      "bytes": 100960
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_sas_variantg_png.webp": {
+      "sha256": "da2edfed80699b894734ae142c96129437cdce83e8e74426c31b8b8c8dd39927",
+      "bytes": 99540
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_st6_variante_png.webp": {
+      "sha256": "9da165088faabf9a96bc4fab1a5d487d0b5fa58d8a741fcc86b8962ede493633",
+      "bytes": 115558
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_st6_variantg_png.webp": {
+      "sha256": "db5b97b5a4f87871c0872bb37062b84bc1d8c43f539f93bf4c9ac6908b5c52d9",
+      "bytes": 127852
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_st6_varianti_png.webp": {
+      "sha256": "2e31624de95334e3c106bdf734335689cb81f170071d5e3407aaf4930f4a1d30",
+      "bytes": 127678
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_st6_variantj_png.webp": {
+      "sha256": "cc05dc38a14e7191027421b62283c5d6bb4bba047bc419c7d6f7b753e840f204",
+      "bytes": 135750
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_st6_variantk_png.webp": {
+      "sha256": "174074b421c4e79179f9ff0bc0b8f47522e67496565033b0c189c629667755b5",
+      "bytes": 120780
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_st6_variantl_png.webp": {
+      "sha256": "453d38017bd7f8761f168a76b2bd47408439ce3a7fb9c9ff91bc84a8e40a7152",
+      "bytes": 148800
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_st6_variantm_png.webp": {
+      "sha256": "ef9a4e7426e4c7a9d7596515fe5be3fc9dd60c4f48b88b50c8e02647fccb8141",
+      "bytes": 139458
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_st6_variantn_png.webp": {
+      "sha256": "f4113645c725e2e226150ad7497bef6a2351d078cd8e1caa19540fd39c97b707",
+      "bytes": 102868
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_swat_variante_png.webp": {
+      "sha256": "a45fabf4275584d5ca4e471213903111ead05e0ccb5260d47c546beb857fed0e",
+      "bytes": 121900
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_swat_variantf_png.webp": {
+      "sha256": "af64737543fa3d70c7d5fb29ea7b46928f35c6795523d2fb13db4a249e54c8cc",
+      "bytes": 117564
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_swat_variantg_png.webp": {
+      "sha256": "49844096e7ca1991606b21b282f8eff182b02df03b003f9284f86703910bad13",
+      "bytes": 103718
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_swat_varianth_png.webp": {
+      "sha256": "5fa879796f71d63c70c1582df85368d3da6d132bc768c27748ffb4c7721c1cf4",
+      "bytes": 115546
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_swat_varianti_png.webp": {
+      "sha256": "9be1fbae4c6402a8b87e29208005e328de6c028de3b4aa9d7e9ec0acfcb107fe",
+      "bytes": 118194
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_swat_variantj_png.webp": {
+      "sha256": "177bb76830fe4ffb2dd8bfa2503abb1e3d991f4ec074165a7d54edca95060760",
+      "bytes": 119066
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_ctm_swat_variantk_png.webp": {
+      "sha256": "a93887c2423595df404b8085baebac279345f185be264086866c33cc25372419",
+      "bytes": 142992
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_balkan_variantf_png.webp": {
+      "sha256": "ee2d4beac5a00466b02fab208272d5df90316004aa474a5169ccb084a46e0745",
+      "bytes": 124642
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_balkan_variantg_png.webp": {
+      "sha256": "24a4162915a38c13eb7e9b81fbeb9b9e028bdf23e4f6723171de987a4460c8ab",
+      "bytes": 127328
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_balkan_varianth_png.webp": {
+      "sha256": "21ebf3f7deb6892f122b15a2f2f232735469072246f955dbcb46551afb9b4c51",
+      "bytes": 114464
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_balkan_varianti_png.webp": {
+      "sha256": "b52d5844a1d4c0b10741feb4719663ddabc330917bf39f480083663bac7061be",
+      "bytes": 115574
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_balkan_variantj_png.webp": {
+      "sha256": "d5c20a7c490e08df90b55a4dafc8a354302df579dea24708eed8556d197a420e",
+      "bytes": 110630
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_balkan_variantk_png.webp": {
+      "sha256": "ec6d490b764b9040f63b5723cee81c5675d8a42c52cd484c81cb3fdac30de0e7",
+      "bytes": 118016
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_balkan_variantl_png.webp": {
+      "sha256": "cd24e44e5fb9fe4be974de33bf02f7a531bb88cb40a5456bbbcfc68c6746ffd9",
+      "bytes": 115442
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_jungle_raider_varianta_png.webp": {
+      "sha256": "134c4324a07a77e1307fcbd8604750292e6121aac8a9d51688e9e92c08d86c61",
+      "bytes": 121706
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_jungle_raider_variantb2_png.webp": {
+      "sha256": "0610ff893d70bef6f70fb7586e5ee2a3dc11852766543f3d987b170a97865524",
+      "bytes": 119462
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_jungle_raider_variantb_png.webp": {
+      "sha256": "7d5e7c62c2dae0d1f2634befed88ad4d1d09032f72442a14a3b092286c5bf537",
+      "bytes": 124690
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_jungle_raider_variantc_png.webp": {
+      "sha256": "a7c9f787a7d19e38745b7bcfa5d85db10984d441a4184a2eacf59a485e09d895",
+      "bytes": 119848
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_jungle_raider_variantd_png.webp": {
+      "sha256": "57d28f8df3fb950a27188936472df5b65358e276265ecd15743ba5bfc55d539d",
+      "bytes": 111556
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_jungle_raider_variante_png.webp": {
+      "sha256": "3a9c5b953cc7891ee0de7ae6d46da768915f28a28cd0dd5d3f21c0c20732aebc",
+      "bytes": 109182
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_jungle_raider_variantf2_png.webp": {
+      "sha256": "7824f5e7e5eea63fbb1bd62eca9df98c499880f0ac5015ccb1ad540d11fe4942",
+      "bytes": 119292
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_jungle_raider_variantf_png.webp": {
+      "sha256": "9ed3db00639e0716941d0b8be18406e255552bf884713c69e0f210a8355d0a3f",
+      "bytes": 114934
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_leet_variantf_png.webp": {
+      "sha256": "25f5ce1ec4aa940b4ea3cb1965f86ed22f830c452567f897ca4113bc0bbff146",
+      "bytes": 117714
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_leet_variantg_png.webp": {
+      "sha256": "a7d0f3b251fe620325ae84e95d86d84fbf57e96624b289c54dcca6e1f911806f",
+      "bytes": 131730
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_leet_varianth_png.webp": {
+      "sha256": "9b23a679f12a225af2878745632d52491e9e8874e7cf1fab76c028bf3df51085",
+      "bytes": 116930
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_leet_varianti_png.webp": {
+      "sha256": "afa2d1bda4ef78750106872be42f0a58f14135097638cd6f904245d77e680645",
+      "bytes": 119638
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_leet_variantj_png.webp": {
+      "sha256": "221690c3d3f224097c4f8a15c5d60fb1dc02ca164913eee221af1b0ab88aa224",
+      "bytes": 107314
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_phoenix_png.webp": {
+      "sha256": "fd9c0f959cb7b79c39df5c9d07709c9a7f63891aeb70009dd28b5a6013c9d04d",
+      "bytes": 111702
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_phoenix_variantf_png.webp": {
+      "sha256": "f03e86e3e94ba4acc8bc64326fcff2db817c0c66bdd50dace3b51ccadfef0105",
+      "bytes": 98530
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_phoenix_variantg_png.webp": {
+      "sha256": "28380a1a87bfe581187e0b71e0bfc581e89e286486c00245f76c3857f624bc5a",
+      "bytes": 106632
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_phoenix_varianth_png.webp": {
+      "sha256": "bed71c4465f33d4c95703cd0cfd4f6a51f8f08e610f451d2d680f1fb5e488b57",
+      "bytes": 106554
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_phoenix_varianti_png.webp": {
+      "sha256": "42093cfb97b83ec61ffad3e377f2d491ee039c9ee5bf14b3c86ba1680a61917b",
+      "bytes": 104096
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varf1_png.webp": {
+      "sha256": "3f1db1e7a02400dc99b2ee0a4de00ed34c8ed8f1cad31e0ba49738765a0d2fd8",
+      "bytes": 102804
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varf2_png.webp": {
+      "sha256": "526e30f01cd9e6c4d4b168df691d74c932344574b843240b296f4ebfb4b6d6fa",
+      "bytes": 107722
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varf3_png.webp": {
+      "sha256": "b041f08ce0e08b74258315be0c97ef271ac126a77d79c941dd2855d9387c8130",
+      "bytes": 113638
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varf4_png.webp": {
+      "sha256": "2cde7931681bd47534bceafec41e8e6e03bc4355b73718aea646ab8b8dfa00b7",
+      "bytes": 110404
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varf5_png.webp": {
+      "sha256": "11bb030d891e887a5cca919ad6745fe674cec756b56e7fe98ea0fee6fc9ee2bf",
+      "bytes": 129606
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varf_png.webp": {
+      "sha256": "2954a5d6c63efcd80dbdf6d4a38e91a7115fbbc62a4a0abb4bad1a34a80ac93e",
+      "bytes": 128158
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varg_png.webp": {
+      "sha256": "51b563e0a57a40361d497dbe06c704ddc08f1483dda65324836f3e6a64340007",
+      "bytes": 99512
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varh_png.webp": {
+      "sha256": "22cdb1e9a835776a164a77bbc96c694d5d6b1302971294b0d1268df965386de4",
+      "bytes": 113618
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_vari_png.webp": {
+      "sha256": "02f52897f0327cebb932aa6a4b60a26ea309fd73e056cad1fbaee579ac619ebf",
+      "bytes": 106576
+    },
+    "https://cdn.cs2inspects.com/econ/characters/customplayer_tm_professional_varj_png.webp": {
+      "sha256": "69ed094562c1d424c3f7db71f1e89f5fba0db609ace893ba3497106bb1dc1f31",
+      "bytes": 101028
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/base.glb": {
+      "sha256": "de8b5babf2baf465670fe0f18c8291397759d80657a9afe6d044bbae15fa9fe6",
+      "bytes": 663868
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/manifest.json": {
+      "sha256": "dced78f281ebe8f357c8f80f8329a0f64fbaeaf7d4eb50a7dc7dfb8b9d7ea1df",
+      "bytes": 1647356
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_ava.glb": {
+      "sha256": "95208555e02e0c7870f0be7d042efe9267fe60f1916e1f4bb0f95510a5acb64d",
+      "bytes": 1451168
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_crasswater.glb": {
+      "sha256": "776e058425e2912a224ab05b1832876d4fbdf1c5bd43d0ec78c9d3a1840fe034",
+      "bytes": 1316472
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_darryl.glb": {
+      "sha256": "759bf16cec2eb92e07dfab72231d75e7b64fa1c7c0ec4a7dfd6c6e1bb35cf1c7",
+      "bytes": 1694780
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_doctor.glb": {
+      "sha256": "9e9b754202a166fdfe4ea28bca98d959b14ca5e31eae2e20b2946e098d0fea50",
+      "bytes": 1519972
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_goggles.glb": {
+      "sha256": "e28e215a91fd44160cd981739535a05ab5b2039d28903c2b48df577df47ee3b6",
+      "bytes": 1264748
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_mae.glb": {
+      "sha256": "7ce16a43e34a22ac445bfccf17d0f59f1e67c5939c37885b53cb6fdae03c7220",
+      "bytes": 1202740
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_muhlik.glb": {
+      "sha256": "1e6e486a3e26064af47c3a86a041e7178ec9cb9b3e10165f121c60f9804d8d4d",
+      "bytes": 1133140
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_ricksaw.glb": {
+      "sha256": "7e594d1593a0812ce5a4950638071aaa99c67e68465ff3411f8bce00eadc7eea",
+      "bytes": 918300
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_rouchard.glb": {
+      "sha256": "d68a6cf7470112b10421f87d6378a07fe6e7a3815a15d950304ae646296d5e9c",
+      "bytes": 967000
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_vypa.glb": {
+      "sha256": "e4660cd8796f5195bfc5ccadd7f4f64c8028a8b05b0729157166961e01fe7caf",
+      "bytes": 1110208
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/celebrate_wet_sox.glb": {
+      "sha256": "9a26cac3483e97b77e8e33b757748267becf46a10890d7bac1c8f54c996e54d1",
+      "bytes": 842332
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_ava.glb": {
+      "sha256": "e19dc10bd8d5d39a1c9d0e34c7b5be71d1ab8f9d9050d799542d673a2952dfe2",
+      "bytes": 923564
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_crasswater.glb": {
+      "sha256": "ef8c9b659aa1d6a191e639725a6a0d525ea1e9069142533e4f40f979f79ae866",
+      "bytes": 918476
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_darryl.glb": {
+      "sha256": "49afb3b657c18e6fdd4d32ffd482d7f3b1897dd0cd28c7d1ce74bde4ee70f081",
+      "bytes": 903744
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_doctor.glb": {
+      "sha256": "b7318f0401a65e3743a46a3179953086c10a496e0d92e77348ae638e7687500a",
+      "bytes": 575144
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_goggles.glb": {
+      "sha256": "778c6654875efee33e8125e008b010b687090e9839a5ff4444b3936e6fe72c5e",
+      "bytes": 501320
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_mae.glb": {
+      "sha256": "7f3e6608fc798f6011aaa97cd8f2a028d70e21b1b9766a8d9d2c4bd6b284d299",
+      "bytes": 586480
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_muhlik.glb": {
+      "sha256": "a9cc705584d02fa10258e43ba6ea637c1d77260009401c6543c02d44d275b1c0",
+      "bytes": 655488
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_ricksaw.glb": {
+      "sha256": "0c471ae74b6437e55d2d368c9354fd89fe2e5015defb7135bf9966b4cac2c440",
+      "bytes": 809796
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_rouchard.glb": {
+      "sha256": "fed85b6a0f14786709a853743815b8e3f7dcda61072d2a55de7d70c79a58c647",
+      "bytes": 652856
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_vypa.glb": {
+      "sha256": "1d1305eaceba94dd5d98892ead625445e606b1fb96bd96fc6835b8b54b4ad952",
+      "bytes": 694272
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/defeat_wet_sox.glb": {
+      "sha256": "a20d5cfe585a96bc321eb8acf945aa3c605bb99ae797a7efdb042c920cfed449",
+      "bytes": 1025516
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/taunt/mvp.glb": {
+      "sha256": "2edadcbc0077fb1850570fac2a498fdd78aeafc3130436a6540e08d039af185e",
+      "bytes": 5042804
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/ak.glb": {
+      "sha256": "121efaf89e786d8f9032b61c0b1482ffd941fa368f71a4292beae8a1d44c9a38",
+      "bytes": 426652
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/ak47.glb": {
+      "sha256": "4d85f7367d67163777cf9639b20207ac46b30c917b99447ec713ce6074c041d6",
+      "bytes": 346744
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/armor_helmet.glb": {
+      "sha256": "bca3864b1f787423abb38e4dbd53c094a209717d7fd49c96039020895d9d37bc",
+      "bytes": 44540
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/aug.glb": {
+      "sha256": "c6549c51c7cebc07f72965eefd949c0858f610a4b6794252abd9459a00170029",
+      "bytes": 889332
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/awp.glb": {
+      "sha256": "be1042d5f335a768318edf1326239e8bab9c5f8f1906a95aa6dfd6ec6e0eef3c",
+      "bytes": 956180
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/bizon.glb": {
+      "sha256": "f14549204a1aabaf0c72a42c877a8f19ccc2506d67baf937fb4202cb5799d574",
+      "bytes": 962636
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/c4.glb": {
+      "sha256": "7a6dd61eb0e5332e66d700e5accdda5caab5bfa1c052f2e912d71a6d6ab2c08b",
+      "bytes": 1052476
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/cz75.glb": {
+      "sha256": "73f03f9dd9a042e1423be96b9b16ed892a98c084e17cf9f2a58620741ed3081b",
+      "bytes": 78160
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/deagle.glb": {
+      "sha256": "76e8423ea094fa8316a18e1e08730ad5c5e28f491d6a6d65dc8a3f3c06ed99e4",
+      "bytes": 656544
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/decoy.glb": {
+      "sha256": "1af3bb9f9c989e84465a4d0c5201b8cfa21f28348c47f5e63e9b6266330a2757",
+      "bytes": 42348
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/defuser.glb": {
+      "sha256": "ea3a88cb8e98146a993f98fe2f825c67020fcec493bb06f7642709365a613745",
+      "bytes": 44944
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/elite.glb": {
+      "sha256": "f3f68b55e98b4ec0b4198a5f71a8b29fcad1d1aeb3619df4c78cf73e4c48be3c",
+      "bytes": 2712032
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/elites.glb": {
+      "sha256": "aa4a1f158b26b0fd24133c7c89068fa938e55d8934e1868acf1228e8f3bd8a13",
+      "bytes": 329900
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/famas.glb": {
+      "sha256": "cdcbdbfdcd704c56b37eba352d683ebf34e020e2ff2b46b67bd51d76e740e245",
+      "bytes": 907756
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/fiveseven.glb": {
+      "sha256": "c47230fd5281355d13ac79bd7b9f40888fd834c10527339d563f0106d1c80292",
+      "bytes": 76064
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/flash.glb": {
+      "sha256": "b059798c825d7173765560d6b2b7ec2ad219d59adcb4e5106401f286babf1014",
+      "bytes": 42344
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/frag.glb": {
+      "sha256": "7c82c87b170ca2125ea7a073677aba5d5b9ff0e44d39e833b61fd50274f69467",
+      "bytes": 1418224
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/frag01.glb": {
+      "sha256": "dfecbba210e83016d2a8b47835854ce81f2d16a9a120690c533b4cb396659c53",
+      "bytes": 1363416
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/frag02.glb": {
+      "sha256": "84e4239f8c4f9f6ba7df4f69f7ff4853e0b942a7d2e106591a75ca9272708895",
+      "bytes": 1364148
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/g3sg1.glb": {
+      "sha256": "c30bab295df8c9ff599112b2a55d9c4f8e749f591b98d319b7200d2035f5f879",
+      "bytes": 77936
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/galil.glb": {
+      "sha256": "d80491f8629ad92cc199fd0a026cf637933a5385e16a73f0d45cbf2bf8d846cf",
+      "bytes": 187492
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/galilar.glb": {
+      "sha256": "2d705119e48aa839908aa30ac82d5a230540443df33d9cd9bc451a30ab5a09e8",
+      "bytes": 76348
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/glock18.glb": {
+      "sha256": "a7682393b588a502f0d17056b3a17c9b8349c66737259737ba234e1b1d272615",
+      "bytes": 76060
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/hegrenade.glb": {
+      "sha256": "63507611b53faca0513da213a7124f393da33db28abc022ed073b921ef2bbf22",
+      "bytes": 42432
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/hkp2000.glb": {
+      "sha256": "cff1850ea943d0c7752f82893a9fe775109cd33323728a76364747361d390f84",
+      "bytes": 76184
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/incendiary.glb": {
+      "sha256": "7d6b60e262ceb2b81ee4a2d12d3efc5a333543c066e9a8729dccf51317e28c6f",
+      "bytes": 42364
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/knife.glb": {
+      "sha256": "9f9c0e9a02afc1ad9adf964dcac79bbc6f62fc662ceb77bd95eb9be19d881fbb",
+      "bytes": 4410740
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/m249.glb": {
+      "sha256": "48a263a0ab8c032f89441dc6f0a72c2ce2b5dbda71224e1fbc6e17bf4c41666c",
+      "bytes": 2494272
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/m4.glb": {
+      "sha256": "cd2f845b59845ba5ec069f1b26efbf6651ca0f4dc6cc046a007e1d26f269e8e3",
+      "bytes": 617932
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/m4a1.glb": {
+      "sha256": "cac860e4fba235d5523cd3777758947cc80dcc6014577867b5b119018f1a0e39",
+      "bytes": 516380
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/m4a1s.glb": {
+      "sha256": "ea7c53f4a114b1983b3fa2f90dd15d8ae0d54ffb2eee756a8792594556962125",
+      "bytes": 161420
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/m4a4.glb": {
+      "sha256": "e345e1a739279f3b3bceb99f0ebef43d1260448cea32a2fab3070b7b58476f4c",
+      "bytes": 78072
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/mac10.glb": {
+      "sha256": "0e1a88833851659525d7b7d36a7a0e1f9cd1d74c38369ec4d9ef903cd6f7d840",
+      "bytes": 78076
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/mag7.glb": {
+      "sha256": "78479c7ab2c4b935cc76aff8ccaaece2488329ff647734f3d413298f00cddea6",
+      "bytes": 730188
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/molotov.glb": {
+      "sha256": "a855c2fbf55d3ef7c7dcfa6bfd2877bfa246b910dad109846ec3b677f5d673bf",
+      "bytes": 1694260
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/mp5sd.glb": {
+      "sha256": "b462f9bb970a257c8fcfee810a21d4d4e3f885debd40aa789b55efd5d0271bfc",
+      "bytes": 251588
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/mp7.glb": {
+      "sha256": "fe55d76d265d33dc232f8b94c8045798d1297eadf80969c049382cebb68fb7a0",
+      "bytes": 2012920
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/mp9.glb": {
+      "sha256": "8b96230ab585be6fd5ea2b51e2157eb582311bda084e9c7ebae85f65d4de9aee",
+      "bytes": 422888
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/negev.glb": {
+      "sha256": "bd6662dfd6e885f5881f8346633c8ed6f6b08ae70ae76ea9d1d2d2ffc441723d",
+      "bytes": 2393660
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/nova.glb": {
+      "sha256": "627a31902afa5697191c70cd533e6b2a9f2dcec9e2c2663518846b8bdd4140e4",
+      "bytes": 927700
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/p250.glb": {
+      "sha256": "7becffb2a02a179a3df0dba8686c732101bdfec5c31bda6a4def2a61d436186c",
+      "bytes": 76132
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/p90.glb": {
+      "sha256": "6073e5386750c2cb5713acdde2624518731798a841e82dcf10f405b236747fef",
+      "bytes": 1776332
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/pistol.glb": {
+      "sha256": "4952c0269a92536f4987c4ffa960f1c066d1bceb2811cb3d1d0bb7cee6979502",
+      "bytes": 987860
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/pistol01.glb": {
+      "sha256": "e4386c1b4245fb5fef6f8b5fa3c52bb23aab11f569510df34e259456e2e218eb",
+      "bytes": 964316
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/push.glb": {
+      "sha256": "17ef33dec7cc252d0f6b5a416112a60943ebf59a6a168ad9790d2b0a6dbe8de1",
+      "bytes": 49504
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/pushknife.glb": {
+      "sha256": "491c1419a013d6f4cab10a0a9fea63a0d9acc8ef22a7103624e4de5f1c861764",
+      "bytes": 3534632
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/revolver.glb": {
+      "sha256": "06da3d4d49fedc3e393ed5a609b84fae200fb845f1ce926d1adbaa8fe021180f",
+      "bytes": 1923548
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/rifle.glb": {
+      "sha256": "f465bd9a9eeaf0d7c86456228a2612bfa3d3cfe05e8eb7c62772ad5c89fa7115",
+      "bytes": 231240
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/rifle02.glb": {
+      "sha256": "3b5a511c1107c105fe28806e1c0b112d4a9936332c1b653117ff7f2728b57185",
+      "bytes": 2371428
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/rifle_awp.glb": {
+      "sha256": "5188566fb37dc49027cf11267b31fcc4917487928876d1455e1b53a187c753eb",
+      "bytes": 599716
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/rifle_scar.glb": {
+      "sha256": "bd55eaa542ef95863d3fcb60c1c1360841d3216c7a3d052b34a63b64c65217c8",
+      "bytes": 622380
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/rifle_ssg08.glb": {
+      "sha256": "ea29348e20ab4564ff9fad617af08983376ae006f91c955452f506c261442139",
+      "bytes": 625968
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/sawedoff.glb": {
+      "sha256": "b724d7bfad59dface70ca854452610acf93e59f2d804eef1c520e31dc0cdd93f",
+      "bytes": 109808
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/scar20.glb": {
+      "sha256": "03ccef38c7cf192aca0c5941a488789414d6de59854a84cfee977787e2278e48",
+      "bytes": 76252
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/sg553.glb": {
+      "sha256": "82d0b4515e94fa9dc7529e142cdfafd21e0202df78ca00fad3c5065bf56f96a9",
+      "bytes": 202372
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/sg556.glb": {
+      "sha256": "e94c4f4668d3eac35661b9542e30b2c6ee03fa5f073b4a4932ba35413f714724",
+      "bytes": 76252
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/shotgun.glb": {
+      "sha256": "23eb0c24071ddd4120694c7e7586139f8b0299fa4db2aaf7f505e51d8f217cc3",
+      "bytes": 1289216
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/smoke.glb": {
+      "sha256": "50cf37d97ecef24a89f309fade64613509a118bde69fa3fdf047591f92d46c4a",
+      "bytes": 42356
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/smoke_incen.glb": {
+      "sha256": "d757a2ef013958fdee4748e27b76a171e87e1d778114a3a71b36bb629b53b3a6",
+      "bytes": 238320
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/ssg08.glb": {
+      "sha256": "1f751751d3b9056b1483d636f01aa62f3d98488200cb55b30eb3639365205669",
+      "bytes": 76340
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/taser.glb": {
+      "sha256": "1f7cc0ef69a9299cc642a482a1fc97da3bd3f07ea8504f3e20f67e5d3ababb3b",
+      "bytes": 76412
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/tec9.glb": {
+      "sha256": "d1fb1e4d1e32ff791ceb379c1c1b7573370501f40bc78d3df5cb106398178220",
+      "bytes": 231324
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/ump.glb": {
+      "sha256": "d2c2d854aa6dcf093a2954474b11166ee917556d0655986f1c159a2002c9ba89",
+      "bytes": 177008
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/ump45.glb": {
+      "sha256": "ef72fce2c9ac103af6f4f9a38178d4f3c951728084204ed6d652f302f4145073",
+      "bytes": 1163060
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/usp_silencer.glb": {
+      "sha256": "15bebacb9f0be2764450ad7fc4c8cb61db10cc7d26046ae8fa9ebb214de40ee7",
+      "bytes": 78248
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/weapon/xm1014.glb": {
+      "sha256": "286488207076a2b338babc17ba3aaa2af04b247a81de65e403c5a2cfda2f1054",
+      "bytes": 2387944
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/equipment/c4.glb": {
+      "sha256": "eb65c4ddc427402c274dfa30a69f83c1c45b3beb2efccaf5fde0faa1c171eb88",
+      "bytes": 1248016
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/grenade/_default_grenade.glb": {
+      "sha256": "01e62b3fa6f5e53d900f0c9a172935f57b64c39e9e357c797d3d91281b1f8fac",
+      "bytes": 181996
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/grenade/grenade_molotov.glb": {
+      "sha256": "ec073f54bbdb0c30ecf6b3f19a8a00ab3d2c3604b5abfe46eeee3381631f083a",
+      "bytes": 391616
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/_default_knife.glb": {
+      "sha256": "426eb74357ee43fbb821ce7dbdb9006ee95512d35679fab1e8ef2862d9e71e82",
+      "bytes": 2056748
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/default_ct.glb": {
+      "sha256": "eae6eeae263cbbcfd6c35c50639f55012b022ffc79512c9f2afb5e15a07162b6",
+      "bytes": 208488
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/default_t.glb": {
+      "sha256": "749d1d0f8d5ada31781e6dfe3e4d7d6a3cdfee20f243e4706d2dd12f599ca210",
+      "bytes": 207480
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_bayonet.glb": {
+      "sha256": "ef305e26a24b1a0386f8ddbbb836bfc917eff955a8f1bc54845c99e4f35c13ea",
+      "bytes": 246852
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_bowie.glb": {
+      "sha256": "2c51c76f597cb85e7dac9024afb0a7bd5a73823fa0c2bf09b7ca1f79648b2368",
+      "bytes": 255012
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_butterfly.glb": {
+      "sha256": "b87518d85bf53e4cbd9b010035da45eeaa1d32cafcc43765d3312cfbf19c0d32",
+      "bytes": 392556
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_canis.glb": {
+      "sha256": "67f0bb8c214a76c4932340faf55cdb8ea79af43fa75abff4c97d2d393b9c435d",
+      "bytes": 386428
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_cord.glb": {
+      "sha256": "47b3edc2b150c9ffc2c7a41bcbcad691d53931e024c57143d6598b2b00e3253b",
+      "bytes": 375516
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_css.glb": {
+      "sha256": "282be152b78124f9a99b68bec7c36d898d9d10b182738ab30f8c0922e642f5bb",
+      "bytes": 250796
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_falchion.glb": {
+      "sha256": "658b929af75f53e5edbd0e434b4f1e98c7b608b4dac426891fa9184f56e32d6b",
+      "bytes": 252584
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_flip.glb": {
+      "sha256": "43c9d3fae1c5b1cb2220b4bb06d5069ff326339d2e22d53672821d5cc90a4c4d",
+      "bytes": 244060
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_gut.glb": {
+      "sha256": "c9e326d58a915e75b3acc446c82d0837bf2a4b53523fb78d611fd457051d92d9",
+      "bytes": 244448
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_karambit.glb": {
+      "sha256": "4f2b543647ecb3cc813bd532221d19e981d11ad43c7147bcd38cbc5691c6e1ad",
+      "bytes": 247736
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_kukri.glb": {
+      "sha256": "05df9025178fdbf34a319d696ab7de1a4c8d4b303bbb451620ce5ffe62add6c6",
+      "bytes": 382996
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_m9.glb": {
+      "sha256": "fd71914ef7f3ac02d93eb7f406792df463360d6625ee2e29437b4e3f3cc32adc",
+      "bytes": 249092
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_navaja.glb": {
+      "sha256": "7c77771087702c32f864a3a61d9a8deba3d458bbde1713cef745de681c67bcd5",
+      "bytes": 250812
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_outdoor.glb": {
+      "sha256": "d43201dee0fac529593386b2681aaa5c6d8dbbd8c1fa5ea0ece30a24f1a243bb",
+      "bytes": 430336
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_push.glb": {
+      "sha256": "5857c36bfdca7d7ba323fe56e006f05621f1acb873d42e575a5fc239e73739cf",
+      "bytes": 1241980
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_skeleton.glb": {
+      "sha256": "10851879e611889d416b1ef5416f9c1f56f7f88362b6d8cd775c6b11119ce43d",
+      "bytes": 377680
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_stiletto.glb": {
+      "sha256": "84a264f4eb21fd17cac552c7284c01551553dbe29156b6a8a47c595382f64636",
+      "bytes": 245516
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_tactical.glb": {
+      "sha256": "b03adaa5efe8065990166c63aa5ced06230fc5ff02e6a1043922fd42967f3bbc",
+      "bytes": 249440
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_talon.glb": {
+      "sha256": "d732dbb0c944b0089f90893db1df586c4fb88e19a1da3d61c9d55537f2f3b76c",
+      "bytes": 816896
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/knife/knife_ursus.glb": {
+      "sha256": "da6b543de584ad20a17047296802b82db96fd63020882d31923561227a858487",
+      "bytes": 382420
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/_default_pistol.glb": {
+      "sha256": "f516cc1e193a799963c110b651005604f74eda7d0ce9163b186e562d783d1d91",
+      "bytes": 987560
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_cz75a.glb": {
+      "sha256": "abd3eec16b49421f99253b2286eb07e337cbe8166b719a65d8f28e47196d6812",
+      "bytes": 1497580
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_deagle.glb": {
+      "sha256": "eaaa37720289869a033dc8be9655f2ea970462985ae54c40e329ab2ea1dc245a",
+      "bytes": 710316
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_elite.glb": {
+      "sha256": "d440e0a16cffd8e7eea3df684feaf5312e5559c17a8754ec3b9d622277c29d60",
+      "bytes": 800320
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_fiveseven.glb": {
+      "sha256": "85996e551c35b0d607e2e9ec90893217657eae3bb65596cfde0749c3a4afb50c",
+      "bytes": 713716
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_glock.glb": {
+      "sha256": "69fc38f83ed1b4d759bc6a897c839b72af22497bc7fa63af9fa2922d62bca245",
+      "bytes": 675852
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_hkp2000.glb": {
+      "sha256": "98ba675009e6e5fc1c82aac9eae37e5db92ce43843eec053c9806a4b0cd17a0c",
+      "bytes": 674332
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_p250.glb": {
+      "sha256": "aa951d72c2eb3f65145d573cdcbe50aad7df8a81a48d4d207f756733c0fb400f",
+      "bytes": 696588
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_revolver.glb": {
+      "sha256": "6a71aed272669f28dd1de943b4140e09506e4e13618dc0cedb621a4bed4dd441",
+      "bytes": 888940
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_taser.glb": {
+      "sha256": "205affa148d11f7539c3d7719fd31ec827f78f6c3c9e8f18fb83f079388f4f21",
+      "bytes": 334960
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_tec9.glb": {
+      "sha256": "b2c920d53405448750f8c03e88b07b3b127789b9139b4a72b84f1a672579b197",
+      "bytes": 543204
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/pistol/pistol_usp.glb": {
+      "sha256": "660d9870b40902968d6f337716ca6692123a27956849a979dbe101fc20fb63ff",
+      "bytes": 1014960
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/_default_rifle.glb": {
+      "sha256": "8ab1645ff996a7469a6e1dc802e1d19dca103272b3d641efb3d16110e2822ff5",
+      "bytes": 966580
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_ak.glb": {
+      "sha256": "ebbe81b47754f31bbc96585743fdf6532c79d3ba73bedddd2dddb95eb8760e3e",
+      "bytes": 519076
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_aug.glb": {
+      "sha256": "309c972a23c59c3cdcbdfcfd6d5a32192009d8792ab5d3db0aa7ef0120b3a59f",
+      "bytes": 606120
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_awp.glb": {
+      "sha256": "a0118a2092816d3ae39cc6c21e64f044f6285484e9fcb9be14499499e3dcfbd6",
+      "bytes": 678604
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_bizon.glb": {
+      "sha256": "503ca2321aaedc4a78e04ec2873d98efb634ac71df18bd5602a6e73480b55ad8",
+      "bytes": 533796
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_famas.glb": {
+      "sha256": "017b1e85ba19bee2f17518b816bd3286bef875a69d65752df82493707455cb7f",
+      "bytes": 646704
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_g3sg1.glb": {
+      "sha256": "fe2c36457d50da7ae7cf2aa900be4be8959c3539999cd45325e4a0fd7e25762c",
+      "bytes": 641580
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_galilar.glb": {
+      "sha256": "f353fc084094c8f0d16f4021ac2ed73bc5f8e8a8aefddb5a67d5179f0c9b2e3a",
+      "bytes": 596508
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_m249.glb": {
+      "sha256": "a62f153c30c1cfae3aa86be3e2e62b5acfedeb7c91ca564e2adb023306524fd1",
+      "bytes": 1230760
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_m4a1_silencer.glb": {
+      "sha256": "5b2eb54d1e091c20160db93508d15bdd69f5bb1afc976738b90f5751b0c03e13",
+      "bytes": 798008
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_m4a4.glb": {
+      "sha256": "f3909cb6c60c6ceb3fad8729d2a5a29632fad1be4e10ce5f7f76aa454c3e079c",
+      "bytes": 541436
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_mac10.glb": {
+      "sha256": "5fbe0a68a7683d820b181d44dcc313cf2f1456052048dc8363681680b33ffe1d",
+      "bytes": 584256
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_mag7.glb": {
+      "sha256": "b6f0e09fdd3cca099062789df674f5e68d8c2e2d05d7e82093dc628cbae37228",
+      "bytes": 501600
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_mp5sd.glb": {
+      "sha256": "44b8dd14919105710af507e604d89730455174802be9802ec70160c1417cba94",
+      "bytes": 642960
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_mp7.glb": {
+      "sha256": "960b220b04f3b26d3f404ec11e0795c971d36399238c88b9691ea9702bf2b7ed",
+      "bytes": 538664
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_mp9.glb": {
+      "sha256": "cc5a52b0f945f8b5a10c0967e15f429a8522680317f8c6d493f5b985d7611cd3",
+      "bytes": 526488
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_negev.glb": {
+      "sha256": "e1c824b21c892921066de17672468c26eb2c95d419dbadb27a1cabee7c6a22d8",
+      "bytes": 1002968
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_nova.glb": {
+      "sha256": "c95fa376317ae41ed82dd69fadcf63095e9e952e7ef28382b89a03e23b5c61fd",
+      "bytes": 492568
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_p90.glb": {
+      "sha256": "bf8b706d43b6fa16644d82e46ff980675be85578cedf997f79439c44571f42bf",
+      "bytes": 620820
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_sawedoff.glb": {
+      "sha256": "b85dc28762dddaab806250740d5925fc7754f7470dd6938373603381c65bc320",
+      "bytes": 487404
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_scar.glb": {
+      "sha256": "0bb54a1eed747c38997e92a0006f8e63986c32e0102f94a28ee9acbaf0bd172b",
+      "bytes": 548700
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_sg556.glb": {
+      "sha256": "fbb9775c8311761ae0e289119ba9b00a9fa6e7c1f3ec7e2fcd0549a0dbb600bb",
+      "bytes": 535488
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_ssg08.glb": {
+      "sha256": "66eaf6348a6442da261b1783e05cfb6b6015c0267bc0bf9787167d602496e63d",
+      "bytes": 645712
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_ump45.glb": {
+      "sha256": "14d916c9ed447fb7b8b8c58e1dc9fffd12f387e4e8cd6de4f81ed6bbfdd832bd",
+      "bytes": 581552
+    },
+    "https://cs2.cs2inspects.com/data/agentanims/world/rifle/rifle_xm1014.glb": {
+      "sha256": "e021d8b8aafb425012c033cd8fbe46269729bf4b2e8a9f51d26d79c07c1179e0",
+      "bytes": 503488
+    }
+  }
+}

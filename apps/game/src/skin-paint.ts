@@ -81,7 +81,7 @@ function binary(a: Value, b: Value, fn: (a: number, b: number) => number): Value
   );
 }
 const argc = [
-  1, 1, 1, 1, 1, 1, 1, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 4, 3, 2, 0, 2, 2,
+  1, 1, 1, 1, 1, 1, 1, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 4, 3, 2, 0, 2, 2, 1, 1,
 ];
 function call(id: number, args: Value[]): Value {
   const [a = 0, b = 0, c = 0] = args.map(scalar);
@@ -146,6 +146,15 @@ function call(id: number, args: Value[]): Value {
       return Math.min(a, b);
     case 29:
       return Math.max(a, b);
+    case 30:
+    case 31: {
+      // Source converts RGB only; alpha remains linear.
+      const convert =
+        id === 30
+          ? (x: number) => (x <= 0.0031308 ? x * 12.92 : 1.055 * x ** (1 / 2.4) - 0.055)
+          : (x: number) => (x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
+      return Array.isArray(args[0]) ? args[0].map((x, i) => (i < 3 ? convert(x) : x)) : convert(a);
+    }
     default:
       throw new Error(`Unsupported paint expression function ${id}`);
   }

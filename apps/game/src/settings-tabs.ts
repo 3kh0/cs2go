@@ -1,6 +1,7 @@
 import { setupGraphicsSettings } from "./graphics-controls";
 import type { Game } from "./game";
 import { applyCrosshair } from "./presentation-settings";
+import { setupViewmodelSettings } from "./viewmodel-controls";
 
 export function setupSettingsTabs(game: Game) {
   const host = document.querySelector<HTMLElement>("#settings .settings")!;
@@ -11,6 +12,7 @@ export function setupSettingsTabs(game: Game) {
   host.querySelector(".dialog-heading")!.after(tabs);
   const groups = {
     Video: ["quality", "fov", "fullscreen-toggle"],
+    Viewmodel: [],
     Audio: ["volume", "musicVolume", "effectsVolume"],
     Gameplay: ["agent-team", "hudHue", "auto-bunnyhop"],
     Controls: ["sensitivity"],
@@ -39,6 +41,7 @@ export function setupSettingsTabs(game: Game) {
     tabs.append(button);
   }
   function activate(name: string) {
+    document.getElementById("settings")!.dataset.category = name.toLowerCase();
     for (const [key, panel] of panels) {
       panel.hidden = key !== name;
       const button = document.getElementById(`tab-${key.toLowerCase()}`)!;
@@ -65,6 +68,7 @@ export function setupSettingsTabs(game: Game) {
   host.querySelector(":scope > .hint")?.remove();
   const video = panels.get("Video")!;
   setupGraphicsSettings(video, game);
+  setupViewmodelSettings(panels.get("Viewmodel")!, game);
   const crosshair = panels.get("Crosshair")!;
   crosshair.innerHTML = `<div class="crosshair-preview-stage"><div id="crosshair-preview" class="crosshair-shape"><i></i><i></i><i></i><i></i><b></b></div><span>LIVE PREVIEW</span></div><label class="select-label">Color<input id="crosshairColor" type="color"></label>${[
     ["crosshairLength", "Length", 1, 30],

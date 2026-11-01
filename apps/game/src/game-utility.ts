@@ -146,7 +146,7 @@ export class GameUtility {
     }
     const kind = this.selected ?? this.throwingKind;
     this.grenadeView.group.visible = !!kind && !this.game.dead && !this.game.planting;
-    if (kind) this.grenadeView.update(kind, this.handling, this.clock);
+    if (kind) this.grenadeView.update(kind, this.handling, this.clock, this.game.team);
   }
   cancelThrow() {
     this.handling.cancel();

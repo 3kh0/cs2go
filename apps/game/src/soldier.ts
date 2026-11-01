@@ -1,6 +1,15 @@
 import { registerActorLighting, disposeActorLighting } from "./actor-lighting";
 import { loadWorldGrips, worldGrip, worldGripClips } from "./world-grips";
-import { peekSelectedAgent } from "./agent-roster";
+import { peekSelectedAgent, defaultAgent } from "./agent-roster";
+import {
+  loadAgentGameplayClips,
+  acquireAgentAnimationPack,
+  ensureAgentAnimationBones,
+  loadAgentWeaponActions,
+  agentClipForModel,
+  completeAgentClip,
+} from "./agent-animations";
+import { updateGloveModel, unregisterGloveModel, type GloveChoice } from "./gloves";
 import { weaponSlot } from "./physics";
 import * as T from "three";
 import { Ragdoll } from "./ragdoll";
@@ -13,9 +22,12 @@ import { disposeWorldGun, createWorldGun, shareSkeletons } from "./weapons";
 export type AgentTeam = "t" | "ct";
 type Template = { scene: T.Group; animations: T.AnimationClip[] };
 const templates = new Map<AgentTeam, Template>();
+const actionReferences = new Map<AgentTeam, T.AnimationClip[]>();
+const nativeWeaponActions = new Map<number, Promise<Record<string, T.AnimationClip>>>();
 let bombTemplate: T.Group;
 export async function loadSoldierModels() {
   const gripLoad = loadWorldGrips();
+  const nativeLoad = loadAgentGameplayClips();
   await Promise.all([
     loadModel("/models/c4.glb").then((model) => {
       bombTemplate = model.scene;
@@ -28,9 +40,24 @@ export async function loadSoldierModels() {
       const clips = JSON.parse(new TextDecoder().decode(data)) as ReturnType<
         typeof T.AnimationClip.toJSON
       >[];
-      const animations = clips.map((clip) => T.AnimationClip.parse(clip));
+      const sourceAnimations =
+        team === "t" ? await nativeLoad : clips.map((clip) => T.AnimationClip.parse(clip));
+      if (team === "t") {
+        const binding = await acquireAgentAnimationPack("world/rifle/_default_rifle");
+        ensureAgentAnimationBones(model.scene, binding.scene);
+        binding.release();
+      }
+      const animations = sourceAnimations.map((clip) =>
+        team === "t"
+          ? completeAgentClip(agentClipForModel(clip, model.scene), model.scene)
+          : agentClipForModel(clip, model.scene),
+      );
       await gripLoad;
       const gripClips = worldGripClips(team);
+      actionReferences.set(
+        team,
+        gripClips.map((clip) => clip.clone()),
+      );
       const actionWeapon: Record<string, number> = { ak: 0, m4a1s: 1, usp: 2, awp: 3 };
       for (const motion of animations) {
         if (!/^(shoot_|draw_)/.test(motion.name)) continue;
@@ -104,11 +131,26 @@ export type Soldier = {
   plant: number;
   shotTime: number;
   drawTime: number;
+  reloadTime: number;
+  gloveChoice?: GloveChoice;
+  agentId?: string;
+  nativeActions?: Record<string, T.AnimationAction>;
+  nativeGeneration: number;
+  disposed: boolean;
+  nativeShotElapsed: number;
+  nativeDrawElapsed: number;
+  nativeReloadElapsed: number;
+  previousShotTime: number;
+  previousDrawTime: number;
+  previousReloadTime: number;
   activeActions: Set<T.AnimationAction>;
   carriedBomb: T.Group;
   airTime: number;
 };
 export function disposeSoldier(soldier: Soldier) {
+  soldier.disposed = true;
+  soldier.nativeGeneration++;
+  unregisterGloveModel(soldier.group);
   disposeWorldGun(soldier.weapon);
   disposeActorLighting(soldier.group);
   soldier.mixer.stopAllAction();
@@ -123,7 +165,7 @@ export function disposeSoldier(soldier: Soldier) {
 export function createSoldier(
   index: number,
   team: AgentTeam = "t",
-  appearance?: { scene: T.Group; animationTeam: AgentTeam; release?: () => void },
+  appearance?: { scene: T.Group; animationTeam: AgentTeam; release?: () => void; agentId?: string },
   useSelection = true,
 ): Soldier {
   if (useSelection) appearance ??= peekSelectedAgent(team);
@@ -150,7 +192,7 @@ export function createSoldier(
   const mixer = new T.AnimationMixer(model);
   const actions: Record<string, T.AnimationAction> = {};
   for (const clip of template.animations) {
-    const action = mixer.clipAction(clip);
+    const action = mixer.clipAction(agentClipForModel(clip, model));
     action.setEffectiveWeight(0);
     actions[clip.name] = action;
   }
@@ -188,7 +230,7 @@ export function createSoldier(
   group.add(carriedBomb);
   group.visible = false;
   registerActorLighting(group, true);
-  const soldier = {
+  const soldier: Soldier = {
     group,
     model,
     mixer,
@@ -198,6 +240,7 @@ export function createSoldier(
     hips,
     team,
     animationTeam,
+    agentId: appearance?.agentId ?? defaultAgent(team).id,
     releaseAppearance: appearance?.release,
     recoil: 0,
     stride: 0,
@@ -234,6 +277,15 @@ export function createSoldier(
     plant: 0,
     shotTime: 0,
     drawTime: 0,
+    reloadTime: 0,
+    nativeGeneration: 0,
+    disposed: false,
+    nativeShotElapsed: Infinity,
+    nativeDrawElapsed: Infinity,
+    nativeReloadElapsed: Infinity,
+    previousShotTime: 0,
+    previousDrawTime: 0,
+    previousReloadTime: 0,
     activeActions: new Set([actions.idle_rifle]),
     carriedBomb,
     airTime: 0,
@@ -246,7 +298,57 @@ export function createSoldier(
     support: new T.Vector3(),
   };
   poseWeapon(soldier);
+  prepareNativeActions(soldier);
+  updateGloveModel(soldier.group, team, soldier.gloveChoice, true, soldier.agentId);
   return soldier;
+}
+function prepareNativeActions(soldier: Soldier) {
+  if (soldier.animationTeam !== "t") return;
+  const generation = ++soldier.nativeGeneration;
+  for (const action of Object.values(soldier.nativeActions ?? {})) {
+    action.stop();
+    soldier.activeActions.delete(action);
+    soldier.mixer.uncacheAction(action.getClip());
+    soldier.mixer.uncacheClip(action.getClip());
+  }
+  soldier.nativeActions = undefined;
+  const index = soldier.weaponIndex;
+  let pending = nativeWeaponActions.get(index);
+  if (!pending) {
+    pending = loadAgentWeaponActions(index).catch((error) => {
+      nativeWeaponActions.delete(index);
+      throw error;
+    });
+    nativeWeaponActions.set(index, pending);
+  }
+  void pending
+    .then((clips) => {
+      if (soldier.disposed || generation !== soldier.nativeGeneration) return;
+      const actions: Record<string, T.AnimationAction> = {};
+      for (const [name, source] of Object.entries(clips)) {
+        const clip = source.clone();
+        clip.tracks = clip.tracks.filter((track) =>
+          /^(spine_|clavicle_|arm_|hand_|finger_)/.test(track.name),
+        );
+        if (!clip.tracks.length) continue;
+        const reference =
+          actionReferences
+            .get("t")!
+            .find(
+              (clip) =>
+                clip.name === `grip_${name.includes("crouch") ? "crouch" : "stand"}_${index}`,
+            ) ?? templates.get("t")!.animations.find((clip) => clip.name === "idle_rifle")!;
+        T.AnimationUtils.makeClipAdditive(clip, 0, reference);
+        const action = soldier.mixer.clipAction(clip);
+        action.setLoop(T.LoopOnce, 1);
+        action.clampWhenFinished = true;
+        actions[name] = action;
+      }
+      soldier.nativeActions = actions;
+    })
+    .catch(() => {
+      /* Existing locomotion remains responsive; a later switch retries. */
+    });
 }
 export const agentBounds = new T.Sphere(new T.Vector3(0, 0.9, 0), 1.5);
 const weaponMatrix = new T.Matrix4();
@@ -336,6 +438,10 @@ export function setSoldierWeapon(
   soldier.weapon = createWorldGun(index, suppressed, identity);
   soldier.weaponInstance = identity;
   soldier.weaponIndex = index;
+  soldier.nativeShotElapsed = soldier.nativeReloadElapsed = Infinity;
+  soldier.nativeDrawElapsed = 0;
+  soldier.previousDrawTime = 0;
+  prepareNativeActions(soldier);
   soldier.weaponGripInverse = soldier.weapon.userData.buyGrip
     ? new T.Matrix4().fromArray(soldier.weapon.userData.buyGrip).invert()
     : undefined;
@@ -366,6 +472,9 @@ export function resetSoldier(soldier: Soldier) {
   soldier.activeActions.clear();
   soldier.activeActions.add(soldier.actions.idle_rifle);
   soldier.crouch = soldier.plant = soldier.shotTime = soldier.drawTime = 0;
+  soldier.reloadTime = 0;
+  soldier.nativeShotElapsed = soldier.nativeDrawElapsed = soldier.nativeReloadElapsed = Infinity;
+  soldier.previousShotTime = soldier.previousDrawTime = soldier.previousReloadTime = 0;
   soldier.airborne = soldier.jumping = false;
   soldier.airTime = 0;
   soldier.mixer.update(0);
@@ -396,6 +505,7 @@ export function soldierHitHeight(soldier: Soldier, point: T.Vector3) {
 }
 export function animateSoldier(soldier: Soldier, speed: number, dt: number, alive: boolean) {
   soldier.time += dt;
+  updateGloveModel(soldier.group, soldier.team, soldier.gloveChoice, true, soldier.agentId);
   if (!alive) {
     soldier.plant = 0;
     if (soldier.ragdoll) {
@@ -452,14 +562,49 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
     pose(`grip_stand_${soldier.weaponIndex}`, 1 - crouch, 0);
     pose(`grip_crouch_${soldier.weaponIndex}`, crouch, 0);
   }
-  const weapon = ["ak", "m4a1s", "usp", "awp"][soldier.weaponIndex];
-  if (soldier.plant === 0 && soldier.shotTime > 0) {
-    pose(`shoot_${weapon}.vnmclip+non_additive`, 1, 1 - soldier.shotTime / 0.25);
-  } else if (soldier.plant === 0 && soldier.drawTime > 0) {
-    pose(`draw_${weapon}`, 1, 1 - soldier.drawTime / 0.55);
+  if (soldier.shotTime > soldier.previousShotTime + 0.0001) {
+    soldier.nativeShotElapsed = 0;
+    soldier.nativeDrawElapsed = soldier.nativeReloadElapsed = Infinity;
   }
+  if (soldier.drawTime > soldier.previousDrawTime + 0.0001) {
+    soldier.nativeDrawElapsed = 0;
+    soldier.nativeShotElapsed = soldier.nativeReloadElapsed = Infinity;
+  }
+  if (soldier.reloadTime > soldier.previousReloadTime + 0.0001) {
+    soldier.nativeReloadElapsed = 0;
+    soldier.nativeShotElapsed = soldier.nativeDrawElapsed = Infinity;
+  } else if (soldier.reloadTime === 0 && soldier.previousReloadTime > dt * 2) {
+    soldier.nativeReloadElapsed = Infinity;
+  }
+  const native = soldier.nativeActions;
+  const nativePose = (name: string, elapsed: number) => {
+    const action = native?.[crouch > 0.5 ? `${name}_crouch` : name] ?? native?.[name];
+    if (!action || elapsed >= action.getClip().duration) return false;
+    action.play().setEffectiveWeight(1);
+    action.time = elapsed;
+    soldier.activeActions.add(action);
+    return true;
+  };
+  if (soldier.plant === 0) {
+    const shown =
+      nativePose("shoot", soldier.nativeShotElapsed) ||
+      nativePose("reload", soldier.nativeReloadElapsed) ||
+      nativePose("draw", soldier.nativeDrawElapsed);
+    if (!shown && !native) {
+      const weapon = ["ak", "m4a1s", "usp", "awp"][soldier.weaponIndex];
+      if (soldier.shotTime > 0)
+        pose(`shoot_${weapon}.vnmclip+non_additive`, 1, 1 - soldier.shotTime / 0.25);
+      else if (soldier.drawTime > 0) pose(`draw_${weapon}`, 1, 1 - soldier.drawTime / 0.55);
+    }
+  }
+  soldier.nativeShotElapsed += dt;
+  soldier.nativeDrawElapsed += dt;
+  soldier.nativeReloadElapsed += dt;
   soldier.shotTime = Math.max(0, soldier.shotTime - dt);
   soldier.drawTime = Math.max(0, soldier.drawTime - dt);
+  soldier.previousShotTime = soldier.shotTime;
+  soldier.previousDrawTime = soldier.drawTime;
+  soldier.previousReloadTime = soldier.reloadTime;
   for (const action of soldier.activeActions) {
     if (action.getEffectiveWeight() > 0) continue;
     action.stop();

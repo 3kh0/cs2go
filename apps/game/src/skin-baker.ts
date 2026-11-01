@@ -21,7 +21,12 @@ async function device() {
     const adapter = await navigator.gpu?.requestAdapter();
     if (!adapter)
       throw new Error("Skin customization needs WebGPU. Open the game in current Chrome or Edge.");
-    const gpu = await adapter.requestDevice();
+    // Native glove composites bind more than WebGPU's default 16 textures.
+    const gpu = await adapter.requestDevice({
+      requiredLimits: {
+        maxSampledTexturesPerShaderStage: adapter.limits.maxSampledTexturesPerShaderStage,
+      },
+    });
     void gpu.lost.then(() => {
       releaseCache(gpu);
       devicePromise = undefined;
@@ -180,6 +185,8 @@ function trimTextures(cache: BakeCache) {
   }
 }
 function program(gpu: GPUDevice, cache: BakeCache, pass: PaintPass) {
+  if (pass.shader.textures_layout.length > gpu.limits.maxSampledTexturesPerShaderStage)
+    throw new Error("This finish needs more texture bindings than this graphics adapter supports.");
   const key = JSON.stringify(pass.shader);
   const existing = cache.programs.get(key);
   if (existing) {

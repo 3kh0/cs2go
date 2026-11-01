@@ -11,6 +11,7 @@ import type { Game } from "./game";
 import { weapons, movement, isKnife } from "./physics";
 import { createWeaponInstance } from "./weapon-instance";
 import { bindWeaponInstance, skinChoices } from "./skins";
+import { gloveChoices } from "./gloves";
 import { advanceAimPunch, RECOIL_VIEW_SCALE } from "./recoil";
 import { advanceWeaponAccuracy } from "./accuracy";
 import { selectedAgentId, acquireAgentAppearance } from "./agent-roster";
@@ -124,6 +125,7 @@ export class MultiplayerMatch {
         profile: this.profileConfiguration(),
         skins: Object.fromEntries(skinChoices.map((skin, index) => [index, { ...skin }])),
         agents: { ct: selectedAgentId("ct"), t: selectedAgentId("t") },
+        gloves: { ct: { ...gloveChoices.ct }, t: { ...gloveChoices.t } },
         loadouts: privateGame.groundInventory.loadouts,
         knife: privateGame.knife,
       },
@@ -131,6 +133,7 @@ export class MultiplayerMatch {
     for (const event of [
       "cs2go-skins-change",
       "cs2go-agent-selection",
+      "cs2go-gloves-change",
       "cs2go-loadouts-change",
       "cs2go-profile-change",
     ])
@@ -151,6 +154,7 @@ export class MultiplayerMatch {
             profile: this.profileConfiguration(),
             skins: Object.fromEntries(skinChoices.map((skin, index) => [index, { ...skin }])),
             agents: { ct: selectedAgentId("ct"), t: selectedAgentId("t") },
+            gloves: { ct: { ...gloveChoices.ct }, t: { ...gloveChoices.t } },
             loadouts: this.game.groundInventory.loadouts,
           },
         }),
@@ -163,6 +167,7 @@ export class MultiplayerMatch {
     for (const event of [
       "cs2go-skins-change",
       "cs2go-agent-selection",
+      "cs2go-gloves-change",
       "cs2go-loadouts-change",
       "cs2go-profile-change",
     ])
@@ -252,31 +257,35 @@ export class MultiplayerMatch {
         }
         if (this.peerAgents.get(player.id) !== player.agent) {
           this.peerAgents.set(player.id, player.agent);
-          if (!player.agent.startsWith("default-"))
-            void acquireAgentAppearance(player.agent)
-              .then((appearance) => {
-                const current = this.peers.get(player.id);
-                if (!appearance) return;
-                if (
-                  !current ||
-                  this.closed ||
-                  this.peerAgents.get(player.id) !== player.agent ||
-                  current.health <= 0
-                ) {
-                  appearance.release();
-                  return;
-                }
-                const replacement = g.makeBot(g.bots.indexOf(current), player.team, appearance);
-                replacement.group.position.copy(current.group.position);
-                replacement.group.rotation.copy(current.group.rotation);
-                g.scene.remove(current.group);
-                disposeSoldier(current.rig);
-                current.group = replacement.group;
-                current.rig = replacement.rig;
-              })
-              .catch(() => {});
+          void (
+            player.agent.startsWith("default-")
+              ? Promise.resolve(undefined)
+              : acquireAgentAppearance(player.agent)
+          )
+            .then((appearance) => {
+              const current = this.peers.get(player.id);
+              if (
+                !current ||
+                this.closed ||
+                this.peerAgents.get(player.id) !== player.agent ||
+                current.health <= 0
+              ) {
+                appearance?.release();
+                return;
+              }
+              const replacement = g.makeBot(g.bots.indexOf(current), player.team, appearance);
+              replacement.group.position.copy(current.group.position);
+              replacement.group.rotation.copy(current.group.rotation);
+              g.scene.remove(current.group);
+              disposeSoldier(current.rig);
+              current.group = replacement.group;
+              current.rig = replacement.rig;
+              current.rig.gloveChoice = player.glove ?? { id: "", wear: 0.01, seed: 1 };
+            })
+            .catch(() => {});
         }
         bot.name = player.name;
+        bot.rig.gloveChoice = player.glove ?? { id: "", wear: 0.01, seed: 1 };
         bot.health = player.health;
         bot.armor = player.armor;
         bot.helmet = player.helmet;

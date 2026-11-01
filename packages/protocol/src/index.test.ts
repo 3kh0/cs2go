@@ -105,3 +105,33 @@ test("shared profile pictures accept only public Steam avatar resources", () => 
   ])
     expect(parse(avatar)).toBeNull();
 });
+
+test("glove selections retain per-team wear and seed while rejecting malformed cosmetic inputs", () => {
+  const choice = { id: "5030_10018", wear: 0.123456, seed: 749 };
+  const configuration = {
+    skins: {},
+    agents: { ct: "default-ct", t: "default-t" },
+    loadouts: { ct: [], t: [] },
+  };
+  const parse = (gloves: unknown) =>
+    parseClientMessage(
+      JSON.stringify({ type: "configure", configuration: { ...configuration, gloves } }),
+    );
+  expect(parse({ ct: choice, t: { id: "", wear: 0.01, seed: 1 } })?.type).toBe("configure");
+  for (const invalid of [
+    null,
+    [],
+    {},
+    { ct: choice },
+    { ct: choice, t: choice, extra: choice },
+    ...[
+      { id: "../../etc" },
+      { wear: -1 },
+      { wear: 1.01 },
+      { seed: 1001 },
+      { seed: 0.5 },
+      { id: "x".repeat(129) },
+    ].map((value) => ({ ct: { ...choice, ...value }, t: choice })),
+  ])
+    expect(parse(invalid)).toBeNull();
+});

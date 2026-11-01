@@ -4,6 +4,7 @@ import { clone } from "three/addons/utils/SkeletonUtils.js";
 import { loadModel } from "./gltf";
 import { viewHandsTemplate } from "./knife-motion";
 import { armoryReflections } from "./reflections";
+import { updateGloveModel } from "./gloves";
 
 export const PLANT_DURATION = 3.2;
 // The weapon attachment stops changing at frame 89 (30 fps), then holds its
@@ -132,5 +133,6 @@ export class BombPlantModel extends T.Group {
     this.source.rotation.y = Math.PI;
     this.source.updateMatrixWorld(true);
     this.arms.updateMatrixWorld(true);
+    updateGloveModel(this.arms, this.userData.gloveTeam ?? "ct");
   }
 }

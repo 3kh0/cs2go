@@ -88,6 +88,27 @@ test("all knife variants survive authoritative configure, combat, switching and 
   }
 });
 
+test("glove appearance follows team configuration through respawn and halftime team changes", () => {
+  const { match, ct } = fixture();
+  const gloves = {
+    ct: { id: "5030_10018", wear: 0.18, seed: 749 },
+    t: { id: "5031_10016", wear: 0.3, seed: 12 },
+  };
+  configurePlayer(match, ct, {
+    skins: {},
+    agents: { ct: "default-ct", t: "default-t" },
+    loadouts: defaultLoadouts(),
+    gloves,
+  });
+  expect(ct.glove).toEqual(gloves.ct);
+  expect(ct.glove).not.toBe(gloves.ct);
+  respawn(ct, match);
+  expect(ct.glove).toEqual(gloves.ct);
+  ct.team = "t";
+  respawn(ct, match);
+  expect(ct.glove).toEqual(gloves.t);
+});
+
 test("burst and revolver preserve their trigger timing instead of behaving as ordinary pistols", () => {
   const { match, t } = fixture();
   live(match);

@@ -29,6 +29,8 @@ import { armoryReflections } from "./reflections";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { WeaponInstance } from "./weapon-instance";
 import { bindWeaponInstance, unregisterSkinModel, registerSkinModel } from "./skins";
+import { updateGloveModel } from "./gloves";
+import type { GloveChoice, Team } from "@cs2go/protocol";
 export function weaponDrawDuration(index: number) {
   return index === 4
     ? knifeDrawDuration()
@@ -220,6 +222,9 @@ export function createGun(index: number, team: "t" | "ct" = "ct") {
 }
 
 export type GunPose = {
+  gloveChoice?: GloveChoice;
+  gloveTeam?: Team;
+  gloveAgent?: string;
   suppressed?: boolean;
   suppressorAction?: "silencer_attach" | "silencer_detach" | null;
   suppressorProgress?: number;
@@ -251,10 +256,13 @@ export type GunPose = {
   inspectVariant?: number;
 };
 export function animateGun(group: T.Group, pose: GunPose) {
-  if (
-    animateInspectsKnife(group, pose) ||
-    animateKnifeMotion(group, pose) ||
-    animateNativeWeapon(group, pose)
-  )
-    return;
+  if (!animateInspectsKnife(group, pose) && !animateKnifeMotion(group, pose))
+    animateNativeWeapon(group, pose);
+  updateGloveModel(
+    group,
+    pose.gloveTeam ?? group.userData.team ?? "ct",
+    pose.gloveChoice,
+    false,
+    pose.gloveAgent,
+  );
 }

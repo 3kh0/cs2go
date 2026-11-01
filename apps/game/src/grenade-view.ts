@@ -5,6 +5,8 @@ import { createGrenadeModel, createGrenadeMotion } from "./grenade-models";
 import type { GrenadeKind } from "./utility";
 import type { GrenadeHandling } from "./grenade-handling";
 import { forearmTwists, updateForearmTwists } from "./forearm-twist";
+import { updateGloveModel } from "./gloves";
+import type { Team } from "@cs2go/protocol";
 
 type Rig = {
   group: T.Group;
@@ -80,7 +82,7 @@ export class GrenadeView {
     this.rigs.set(kind, rig);
     return rig;
   }
-  update(kind: GrenadeKind, handling: GrenadeHandling, clock = 0) {
+  update(kind: GrenadeKind, handling: GrenadeHandling, clock = 0, team: Team = "ct") {
     if (this.selected !== kind) {
       this.selected = kind;
       this.selectedAt = clock;
@@ -134,5 +136,6 @@ export class GrenadeView {
     this.scratch.decompose(rig.model.position, rig.model.quaternion, rig.model.scale);
     rig.model.visible = !handling.released;
     rig.group.updateMatrixWorld(true);
+    updateGloveModel(rig.arms, team);
   }
 }

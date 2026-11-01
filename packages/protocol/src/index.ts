@@ -1,7 +1,7 @@
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 5;
+export const PROTOCOL_VERSION = 6;
 export const TICK_RATE = 128;
 export const SNAPSHOT_RATE = 32;
 export const MAX_PLAYERS = 20;
@@ -35,6 +35,7 @@ export type UtilityEffect = Vec3 & {
   holes: number[];
 };
 export type SkinChoice = { id: string; wear: number; seed: number };
+export type GloveChoice = { id: string; wear: number; seed: number };
 export type WeaponAppearance = {
   serial: number;
   weapon: number;
@@ -46,6 +47,7 @@ export type PlayerConfiguration = {
   knife?: number;
   skins: Record<number, SkinChoice>;
   agents: Record<Team, string>;
+  gloves?: Record<Team, GloveChoice>;
   loadouts: Record<Team, number[]>;
 };
 export type MatchMode = "casual" | "competitive";
@@ -100,6 +102,7 @@ export type PlayerState = Vec3 & {
   grenadeReceipts: GrenadeInventory;
   appearances: Record<number, WeaponAppearance>;
   agent: string;
+  glove?: GloveChoice;
   grenades: GrenadeInventory;
   blind: number;
   accuracy: { penalty: number; baseline?: number; mode: 0 | 1 };
@@ -254,6 +257,19 @@ const record = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
 const finite = (value: unknown): value is number =>
   typeof value === "number" && Number.isFinite(value);
+function validCosmeticChoice(value: unknown): value is SkinChoice {
+  return (
+    record(value) &&
+    typeof value.id === "string" &&
+    /^[a-zA-Z0-9_-]{0,128}$/.test(value.id) &&
+    finite(value.wear) &&
+    value.wear >= 0 &&
+    value.wear <= 1 &&
+    Number.isInteger(value.seed) &&
+    (value.seed as number) >= 0 &&
+    (value.seed as number) <= 1000
+  );
+}
 export function validInput(value: unknown): value is Input {
   if (!record(value)) return false;
   return (
@@ -336,6 +352,14 @@ export function parseClientMessage(raw: string): ClientMessage | null {
 
     if (config.knife !== undefined && !isKnife(config.knife as number)) return null;
     if (
+      config.gloves !== undefined &&
+      (!record(config.gloves) ||
+        Object.keys(config.gloves).length !== 2 ||
+        !validCosmeticChoice(config.gloves.ct) ||
+        !validCosmeticChoice(config.gloves.t))
+    )
+      return null;
+    if (
       !record(config.skins) ||
       Object.keys(config.skins).length > WEAPON_COUNT ||
       !record(config.agents) ||
@@ -343,19 +367,7 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     )
       return null;
     for (const [key, skin] of Object.entries(config.skins)) {
-      if (
-        !/^\d{1,2}$/.test(key) ||
-        Number(key) >= WEAPON_COUNT ||
-        !record(skin) ||
-        typeof skin.id !== "string" ||
-        !/^[a-zA-Z0-9_-]{0,128}$/.test(skin.id) ||
-        !finite(skin.wear) ||
-        skin.wear < 0 ||
-        skin.wear > 1 ||
-        !Number.isInteger(skin.seed) ||
-        (skin.seed as number) < 0 ||
-        (skin.seed as number) > 1000
-      )
+      if (!/^\d{1,2}$/.test(key) || Number(key) >= WEAPON_COUNT || !validCosmeticChoice(skin))
         return null;
     }
     for (const team of ["ct", "t"]) {

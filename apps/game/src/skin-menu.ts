@@ -1,7 +1,6 @@
 import { assetUrl } from "./asset-url";
 import { skinCatalog, skinChoices, setSkin, type Skin, type SkinChoice } from "./skins";
 import { weapons as definitions, isKnife } from "./physics";
-import { playerProfile } from "./player-profile";
 
 const weapons = definitions.map((weapon) => weapon.name);
 export function setupSkinMenu(selectKnife: (index: number) => void) {
@@ -10,6 +9,16 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
   overlay.className = "overlay hidden";
   overlay.innerHTML = `<section class="skin-dialog"><div class="dialog-heading"><div><div class="eyebrow">YOUR LOADOUT</div><h2>WEAPON SKINS</h2><button id="steam-owned-button" type="button">STEAM INVENTORY</button></div><button class="close" id="close-skins" aria-label="Close skins">×</button></div><div class="skin-tabs" role="group" aria-label="Weapon">${weapons.map((w, i) => `<button data-skin-weapon="${i}">${w}</button>`).join("")}</div><div class="skin-layout"><div class="skin-browser"><label class="skin-search">Find a finish<input id="skin-search" type="search" placeholder="Search skins…" autocomplete="off"></label><div id="skin-grid" role="group" aria-label="Finishes"></div></div><form id="skin-form" class="skin-details"><div class="eyebrow" id="skin-rarity">DEFAULT FINISH</div><h3 id="skin-title">Default</h3><img id="skin-image" alt="Catalog preview"/><p class="skin-preview-note">Catalog preview - apply to see your wear and pattern in game.</p><label for="skin-wear">Wear <output id="skin-condition">Factory New</output></label><input id="skin-wear" type="range" min="0" max="1" step="0.000001"/><label class="skin-number">Wear float<input id="skin-float" type="number" min="0" max="1" step="0.000001" required/></label><label class="skin-number">Paint seed<input id="skin-seed" type="number" min="0" max="1000" step="1" required/></label><button type="button" id="random-seed" class="secondary">RANDOMIZE SEED</button><p class="hint">The same seed keeps the same pattern. Some finishes have fixed artwork; their seed changes wear placement.</p><button type="submit" class="deploy" id="apply-skin">APPLY FINISH</button><button type="button" id="equip-knife" class="secondary hidden">EQUIP KNIFE</button><p id="skin-status" role="status" aria-live="polite"></p></form></div></section>`;
   document.body.append(overlay);
+  const sections = document.createElement("nav");
+  sections.className = "inventory-sections";
+  sections.setAttribute("aria-label", "Inventory category");
+  sections.innerHTML = `<button type="button" aria-current="page">WEAPONS</button><button type="button" id="inventory-agents">AGENTS</button><button type="button" id="inventory-gloves">GLOVES</button>`;
+  overlay.querySelector(".dialog-heading")!.after(sections);
+  for (const category of ["agents", "gloves"])
+    sections.querySelector<HTMLButtonElement>(`#inventory-${category}`)!.onclick = () => {
+      overlay.classList.add("hidden");
+      document.dispatchEvent(new CustomEvent("cs2go-cosmetic-menu", { detail: category }));
+    };
   const get = <E extends HTMLElement>(id: string) => document.getElementById(id) as E;
   get("steam-owned-button").onclick = () => {
     overlay.classList.add("hidden");
@@ -174,10 +183,6 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
   });
   for (const id of ["skins-button", "pause-skins"])
     get(id).onclick = async () => {
-      if (playerProfile()) {
-        document.dispatchEvent(new Event("steam-account-open"));
-        return;
-      }
       overlay.classList.remove("hidden");
       status.textContent = "Loading finishes…";
       try {

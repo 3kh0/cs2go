@@ -1,6 +1,6 @@
 // Local-only browser fixture controls. This file is never bundled into the server.
 import { startServer } from "../src/server";
-import { respawn } from "@cs2go/simulation/match";
+import { configurePlayer, respawn } from "@cs2go/simulation/match";
 import { loadServerMap } from "../src/map";
 const map = await loadServerMap();
 const app = startServer({
@@ -119,6 +119,24 @@ const control = Bun.serve({
         victim: victim.id,
         headshot: false,
         weapon: killer.weapon,
+      });
+    }
+    if (command.op === "cosmetic-spectate") {
+      // Two peers can exercise teammate spectating without a third browser.
+      const observer = [...room.players.values()].find((player) => player.team === "ct")!;
+      const followed = [...room.players.values()].find((player) => player.team === "t")!;
+      observer.team = followed.team;
+      const configuration = room.configurations.get(observer.id);
+      if (configuration) configurePlayer(room, observer, configuration);
+      observer.health = 0;
+      room.state.phase = "freeze";
+      room.state.remaining = 1000;
+      room.events.push({
+        kind: "kill",
+        killer: followed.id,
+        victim: observer.id,
+        headshot: false,
+        weapon: followed.weapon,
       });
     }
     if (command.op === "timeout") {

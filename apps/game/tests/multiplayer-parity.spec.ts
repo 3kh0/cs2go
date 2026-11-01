@@ -7,6 +7,7 @@ const catalog = JSON.parse(
     "utf8",
   ),
 ) as { id: string; name: string; weapon: number }[];
+type CosmeticChoice = { id: string; wear: number; seed: number };
 async function join(page: Page, room: string, team: "ct" | "t") {
   await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=${room}`);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });
@@ -419,5 +420,188 @@ test("nearby opponents hear reload markers and stationary recoil does not accumu
     await b.screenshot({ path: "artifacts/multiplayer-recoil-recovered.png" });
   } finally {
     await Promise.all(contexts.map((c) => c.close()));
+  }
+});
+
+test("native agents and team gloves replicate, survive agent replacement, and follow the spectated player", async ({
+  browser,
+  request,
+}) => {
+  test.setTimeout(240_000);
+  const agents = JSON.parse(
+    readFileSync(
+      new URL("../../../packages/assets/public/models/agents/roster/catalog.json", import.meta.url),
+      "utf8",
+    ),
+  ) as { id: string; name: string; team: "ct" | "t" }[];
+  const gloves = JSON.parse(
+    readFileSync(
+      new URL("../../../packages/assets/public/skins/gloves/catalog.json", import.meta.url),
+      "utf8",
+    ),
+  ) as { id: string; name: string }[];
+  const ct = agents.find((agent) => agent.team === "ct" && agent.name === "SAS | Default")!,
+    t = agents.find((agent) => agent.team === "t" && /Little Kev/.test(agent.name))!,
+    observerT = agents.find((agent) => agent.team === "t" && /Jungle Rebel/.test(agent.name))!;
+  const choice = (name: RegExp, seed: number): CosmeticChoice => ({
+    id: gloves.find((glove) => name.test(glove.name))!.id,
+    wear: 0.123456,
+    seed,
+  });
+  const first = { ct: choice(/Pandora/, 749), t: choice(/Amphibious/, 121) },
+    second = { ct: choice(/Amphibious/, 432), t: choice(/Hedge Maze/, 661) },
+    updated = choice(/Superconductor/, 242);
+  const contexts = await Promise.all([browser.newContext(), browser.newContext()]);
+  const [a, b] = await Promise.all(contexts.map((context) => context.newPage()));
+  const room = `cosmetics-${Date.now()}`,
+    errors: string[] = [];
+  for (const page of [a, b]) {
+    page.on("pageerror", (error) => errors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error") errors.push(message.text());
+    });
+  }
+  const bindings = async (page: Page) =>
+    page.evaluate(() => {
+      const g = window.__game,
+        local = g.network!.connection.local!,
+        peer = g.bots[0];
+      const glove = (root: import("three").Object3D) => {
+        const model = root.getObjectByName("equipped-gloves");
+        let vertices = 0;
+        model?.traverse((object) => {
+          const mesh = object as import("three").Mesh;
+          if (mesh.isMesh) vertices += mesh.geometry.getAttribute("position").count;
+        });
+        return { choice: model?.userData.gloveChoice, agent: model?.userData.agentId, vertices };
+      };
+      return {
+        localAgent: local.agent,
+        localChoice: local.glove,
+        localGlove: glove(g.gun),
+        peerAgent: peer?.rig.agentId,
+        peerChoice: peer?.rig.gloveChoice,
+        peerModel: peer?.rig.model.userData.agentModel ?? "",
+        peerGlove: peer ? glove(peer.group) : undefined,
+      };
+    });
+  async function expectBindings(
+    page: Page,
+    localAgent: string,
+    localGlove: CosmeticChoice,
+    peerAgent: string,
+    peerGlove: CosmeticChoice,
+  ) {
+    await page.bringToFront();
+    await expect
+      .poll(
+        async () => {
+          const state = await bindings(page);
+          return {
+            localAgent: state.localAgent,
+            localChoice: state.localChoice,
+            localGlove: state.localGlove.choice,
+            peerAgent: state.peerAgent,
+            peerChoice: state.peerChoice,
+            peerGlove: state.peerGlove?.choice,
+          };
+        },
+        { timeout: 45_000 },
+      )
+      .toEqual({
+        localAgent,
+        localChoice: localGlove,
+        localGlove,
+        peerAgent,
+        peerChoice: peerGlove,
+        peerGlove,
+      });
+    const state = await bindings(page);
+    expect(state.localGlove.vertices).toBeGreaterThan(100);
+    expect(state.peerGlove!.vertices).toBeGreaterThan(100);
+    expect(state.localGlove.agent).toBe(localAgent);
+    expect(state.peerGlove!.agent).toBe(peerAgent);
+  }
+  try {
+    for (const [page, selection, selectedT] of [
+      [a, first, observerT],
+      [b, second, t],
+    ] as const)
+      await page.addInitScript(
+        ({ agents, gloves }) => {
+          localStorage.setItem("cs2go-agents", JSON.stringify(agents));
+          localStorage.setItem("cs2go-gloves", JSON.stringify(gloves));
+        },
+        { agents: { ct: ct.id, t: selectedT.id }, gloves: selection },
+      );
+    await join(a, room, "ct");
+    await join(b, room, "t");
+    await command(request, room, "at-buy");
+    await expectBindings(a, ct.id, first.ct, t.id, second.t);
+    await expectBindings(b, t.id, second.t, ct.id, first.ct);
+    const nativeModel = (await bindings(a)).peerModel;
+    expect(nativeModel).toContain("/models/agents/roster/");
+    // An explicit reset must replace a remote native body, not reuse our own saved T selection.
+    await focus(b);
+    await b.evaluate(() => document.exitPointerLock());
+    await b.locator("#pause-skins").click();
+    await b.locator("#inventory-agents").click();
+    await expect(b.locator("#cosmetic-search")).toBeFocused();
+    await b.locator("#reset-cosmetic").click();
+    await expect(b.locator("#cosmetic-status")).toContainText("equipped for Terrorists");
+    await expectBindings(a, ct.id, first.ct, "default-t", second.t);
+    expect((await bindings(a)).peerModel).not.toBe(nativeModel);
+    await b.bringToFront();
+    await b.locator(`[data-cosmetic-item="${t.id}"]`).click();
+    await b.locator("#equip-cosmetic").click();
+    await expect(b.locator("#cosmetic-status")).toContainText("equipped for Terrorists");
+    await expectBindings(a, ct.id, first.ct, t.id, second.t);
+    // Changing gloves in a live connection must publish the updated team choice to the peer.
+    await b.bringToFront();
+    await b.locator('[data-cosmetic-category="gloves"]').click();
+    await expect(b.locator("#cosmetic-search")).toBeFocused();
+    await b.locator(`[data-cosmetic-item="${updated.id}"]`).click();
+    await b.locator("#glove-float").fill(String(updated.wear));
+    await b.locator("#glove-seed").fill(String(updated.seed));
+    await b.locator("#equip-cosmetic").click();
+    await expect(b.locator("#cosmetic-status")).toContainText("equipped for Terrorists", {
+      timeout: 30_000,
+    });
+    await b.locator("#close-cosmetics").click();
+    await expectBindings(a, ct.id, first.ct, t.id, updated);
+    await expectBindings(b, t.id, updated, ct.id, first.ct);
+    await focus(a);
+    await command(request, room, "cosmetic-spectate");
+    await a.waitForFunction(() => window.__game.dead && window.__game.team === "t");
+    await a.evaluate(() => {
+      const g = window.__game;
+      g.spectatorMode = "first";
+      g.spectate();
+    });
+    await expect
+      .poll(
+        () =>
+          a.evaluate(() => {
+            const g = window.__game,
+              target = g.spectated;
+            if (!target) return null;
+            const glove = g.viewGun(target.rig.weaponIndex).getObjectByName("equipped-gloves");
+            return {
+              target: g.network!.stateForBot(target)?.agent,
+              glove: glove?.userData.gloveChoice,
+              agent: glove?.userData.agentId,
+            };
+          }),
+        { timeout: 45_000 },
+      )
+      .toEqual({ target: t.id, glove: updated, agent: t.id });
+    expect(await a.evaluate(() => window.__game.network!.connection.local!.glove)).toEqual(first.t);
+    expect(await a.evaluate(() => window.__game.network!.connection.local!.agent)).toBe(
+      observerT.id,
+    );
+    await a.screenshot({ path: "artifacts/multiplayer-cosmetic-spectator.png" });
+    expect(errors).toEqual([]);
+  } finally {
+    await Promise.all(contexts.map((context) => context.close()));
   }
 });

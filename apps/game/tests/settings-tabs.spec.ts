@@ -32,7 +32,7 @@ test("tabbed settings apply crosshair and video detail, persist and keep the mat
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await expect(page.locator("#startup")).toHaveCount(0);
   await page.locator("#settings-button").click();
-  await expect(page.getByRole("tab")).toHaveCount(5);
+  await expect(page.getByRole("tab")).toHaveCount(6);
   await page.locator("#quality").selectOption("performance");
   await page.locator("#texture-quality").selectOption("high");
   await page.locator("#fps-cap").selectOption("30");

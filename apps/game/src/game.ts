@@ -1,4 +1,6 @@
 import { applyShadowDetail, graphicsPixelRatio } from "./graphics-settings";
+import { applyViewmodelCamera, viewmodelPointToWorld } from "./viewmodel-settings";
+import { unregisterGloveModel } from "./gloves";
 import { bindWeaponInstance } from "./skins";
 import { createWeaponInstance, weaponInstanceName } from "./weapon-instance";
 import { grenadeData, grenadeIcons, grenadeTypes, type GrenadeKind } from "./utility";
@@ -291,6 +293,9 @@ export class Game {
   probeInverse = new T.Quaternion();
   camera = new T.PerspectiveCamera(90, innerWidth / innerHeight, 0.05, 110);
   viewCamera = new T.PerspectiveCamera(VIEWMODEL_FOV, innerWidth / innerHeight, 0.01, 10);
+  viewmodelPreviewWeapon = 4;
+  private lastViewmodelPreview?: T.Group;
+  private lastSpectatorViewmodel?: T.Group;
   world!: Awaited<ReturnType<typeof loadDust2>>;
   network?: MultiplayerMatch;
   dust?: Awaited<ReturnType<typeof loadDust2>>;
@@ -672,6 +677,14 @@ export class Game {
   }
   textureQualityApplied = "";
   textureViewCheck = -Infinity;
+  saveViewmodelSettings() {
+    applyViewmodelCamera(this.viewCamera, innerWidth, innerHeight, this.settings);
+    try {
+      localStorage.setItem("cs2go-settings", JSON.stringify(this.settings));
+    } catch {
+      /* Session controls still work. */
+    }
+  }
   saveSettings() {
     applyCrosshair(this.settings);
     document.documentElement.style.setProperty("--hud-hue", String(this.settings.hudHue));
@@ -695,8 +708,7 @@ export class Game {
           : this.settings.fov;
     this.camera.updateProjectionMatrix();
     // Viewmodel lens is independent of world FOV, as in Source.
-    this.viewCamera.fov = VIEWMODEL_FOV;
-    this.viewCamera.updateProjectionMatrix();
+    applyViewmodelCamera(this.viewCamera, innerWidth, innerHeight, this.settings);
     this.updateGraphics();
   }
   updateGraphics() {
@@ -836,6 +848,7 @@ export class Game {
     document.addEventListener("keydown", (e) => {
       if (
         !el("settings").classList.contains("hidden") ||
+        document.getElementById("cosmetic-menu")?.classList.contains("hidden") === false ||
         document.getElementById("steam-account")?.classList.contains("hidden") === false
       )
         return;
@@ -993,9 +1006,9 @@ export class Game {
     document.addEventListener("contextmenu", (e) => e.preventDefault());
     window.addEventListener("resize", () => {
       this.resizeRenderer();
-      this.camera.aspect = this.viewCamera.aspect = innerWidth / innerHeight;
+      this.camera.aspect = innerWidth / innerHeight;
       this.camera.updateProjectionMatrix();
-      this.viewCamera.updateProjectionMatrix();
+      applyViewmodelCamera(this.viewCamera, innerWidth, innerHeight, this.settings);
     });
   }
   async lock() {
@@ -1150,6 +1163,7 @@ export class Game {
       "loadout",
       "settings",
       "skin-menu",
+      "cosmetic-menu",
       "steam-account",
     ])
       toggle(id, false);
@@ -1189,6 +1203,7 @@ export class Game {
       "settings",
       "loadout",
       "skin-menu",
+      "cosmetic-menu",
       "steam-account",
     ])
       toggle(id, false);
@@ -1585,6 +1600,7 @@ export class Game {
     if (weapons[index].unzoomsAfterShot && this.weaponCooldowns[index] > 0)
       this.boltTime = this.weaponCooldowns[index];
     // View models are cached per team and weapon; animateGun fully re-poses them.
+    unregisterGloveModel(this.gun);
     bindWeaponInstance(this.gun, null);
     this.view.remove(this.gun);
     this.gun = this.viewGun(index);
@@ -2043,11 +2059,9 @@ export class Game {
     else {
       this.gun.localToWorld(muzzle);
       // Match the viewmodel's on-screen barrel despite its independent FOV.
-      const scale =
-        Math.tan(T.MathUtils.degToRad(this.camera.fov / 2)) /
-        Math.tan(T.MathUtils.degToRad(this.viewCamera.fov / 2));
-      muzzle.x *= scale;
-      muzzle.y *= scale;
+      viewmodelPointToWorld(muzzle, this.viewCamera, this.camera);
+      if (!this.visible(this.camera.position, muzzle)) muzzle.copy(this.camera.position);
+      return muzzle;
     }
     muzzle.applyQuaternion(this.camera.quaternion).add(this.camera.position);
     if (!this.visible(this.camera.position, muzzle)) muzzle.copy(this.camera.position);
@@ -2488,7 +2502,14 @@ export class Game {
     this.notices.reset();
     document.body.classList.remove("match-menu-open");
     document.getElementById("loadout-editor")?.remove();
-    for (const id of ["scoreboard", "settings", "skin-menu", "loadout", "steam-account"])
+    for (const id of [
+      "scoreboard",
+      "settings",
+      "skin-menu",
+      "cosmetic-menu",
+      "loadout",
+      "steam-account",
+    ])
       toggle(id, false);
     this.utility.blind.clear();
     if (this.utility.overlay) this.utility.overlay.style.opacity = "0";
@@ -4592,6 +4613,7 @@ export class Game {
           ? 1 / 30
           : 0;
       if (b.anim < interval) continue;
+      b.rig.reloadTime = b.reloadTime;
       animateSoldier(b.rig, b.speed, b.anim, b.health > 0);
       b.anim = 0;
     }
@@ -4905,6 +4927,45 @@ export class Game {
     });
     this.flash.position.copy(this.gun.userData.muzzle);
   }
+  get previewingViewmodel() {
+    return (
+      this.assetsReady &&
+      !el("settings").classList.contains("hidden") &&
+      el("settings").dataset.category === "viewmodel"
+    );
+  }
+  renderViewmodelPreview(clock: number) {
+    const preview = this.viewGun(this.viewmodelPreviewWeapon);
+    if (this.lastViewmodelPreview && this.lastViewmodelPreview !== preview)
+      unregisterGloveModel(this.lastViewmodelPreview);
+    this.lastViewmodelPreview = preview;
+    const parent = preview.parent;
+    const visibility = this.view.children.map((child) => [child, child.visible] as const);
+    for (const child of this.view.children) if (!(child instanceof T.Light)) child.visible = false;
+    this.view.add(preview);
+    preview.visible = true;
+    const flashVisible = this.flash.visible;
+    this.flash.visible = false;
+    animateGun(preview, {
+      reload: 0,
+      draw: 0,
+      bolt: 0,
+      recoil: 0,
+      bob: 0,
+      sway: 0,
+      time: clock,
+      clock,
+    });
+    this.updateViewLighting(preview, 1 / 60);
+    this.renderer.clearDepth();
+    this.renderer.render(this.view, this.viewCamera);
+    this.flash.visible = flashVisible;
+    if (parent !== this.view) {
+      preview.removeFromParent();
+      parent?.add(preview);
+    }
+    for (const [child, visible] of visibility) child.visible = visible;
+  }
   renderSpectatorWeapon(bot: Bot) {
     const index = bot.rig.weaponIndex;
     const state = this.network?.stateForBot(bot);
@@ -4920,6 +4981,9 @@ export class Game {
       ? weaponKnifeAttackDuration(index, !!melee?.stab, !!melee?.alternate)
       : 1;
     const gun = this.viewGun(index);
+    if (this.lastSpectatorViewmodel && this.lastSpectatorViewmodel !== gun)
+      unregisterGloveModel(this.lastSpectatorViewmodel);
+    this.lastSpectatorViewmodel = gun;
     bindWeaponInstance(gun, bot.rig.weaponInstance);
     const elapsed = this.animationTime - this.spectatorShotAt;
     const duration = nativeShotDuration(index, false, this.spectatorLastShot);
@@ -4929,6 +4993,9 @@ export class Game {
     if (gun !== this.gun) this.view.add(gun);
     gun.visible = true;
     animateGun(gun, {
+      gloveTeam: bot.team,
+      gloveChoice: state?.glove ?? bot.rig.gloveChoice,
+      gloveAgent: state?.agent ?? bot.rig.agentId,
       suppressed: bot.rig.suppressed,
       clock: this.animationTime,
       time: this.animationTime,
@@ -5132,10 +5199,22 @@ export class Game {
     const renderDt = Math.min((now - this.lastRender) / 1000, 0.1);
     this.lastRender = renderClock;
     this.frames++;
+    if (!this.previewingViewmodel && this.lastViewmodelPreview) {
+      unregisterGloveModel(this.lastViewmodelPreview);
+      this.lastViewmodelPreview = undefined;
+    }
+    if (
+      (!this.active || !this.dead || this.spectatorMode !== "first") &&
+      this.lastSpectatorViewmodel
+    ) {
+      unregisterGloveModel(this.lastSpectatorViewmodel);
+      this.lastSpectatorViewmodel = undefined;
+    }
     if (!this.active && !el("menu").classList.contains("hidden")) {
       if (document.getElementById("loadout-editor"))
         this.groundInventory.renderPreviews(this.renderer);
-      else this.homeScene.render(this.renderer, this.team, renderDt);
+      else this.homeScene.render(this.renderer, this.team, renderDt, !this.previewingViewmodel);
+      if (this.previewingViewmodel) this.renderViewmodelPreview(now / 1000);
       return;
     }
     this.notices.updateAction(
@@ -5174,11 +5253,13 @@ export class Game {
     this.gun.visible =
       !planting && !defusing && !this.utility.selected && !this.utility.throwingKind;
     if (defusing) {
+      this.defuseView.userData.gloveTeam = this.team;
       this.defuseView.sample(this.bomb!.progress / (this.defuseKit ? 5 : 10), this.defuseKit);
       this.defuseView.connect(this.bomb!.position, this.camera, this.viewCamera);
       this.flash.visible = false;
     }
     if (planting) {
+      this.bombView.userData.gloveTeam = this.team;
       this.bombView.sample(this.bomb!.plantProgress / PLANT_DURATION);
       this.flash.visible = false;
     }
@@ -5227,7 +5308,8 @@ export class Game {
     for (const group of this.buyHiddenBots) group.visible = true;
     this.buyHiddenBots.length = 0;
     if (followed && hideFollowed) followed.visible = wasVisible!;
-    if (
+    if (this.previewingViewmodel) this.renderViewmodelPreview(now / 1000);
+    else if (
       !buying &&
       this.active &&
       !this.dead &&

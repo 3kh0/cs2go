@@ -39,6 +39,10 @@ Open **Play** for mode selection, single-player/multiplayer and server/room sett
 
 Inventory selects faction buy slots and cosmetic finishes, with full-color default weapon previews. All 22 knives use **Inventory → Weapon Skins → Equip Knife**, never buy cards. Equipping a knife captures its selected finish. Changing a firearm finish affects previews and newly created weapons; carried/dropped guns keep their original appearance, ammo and attachment state. Steam import is described in [steam-login.md](steam-login.md).
 
+Inventory's **Agents** and **Gloves** categories select appearances separately for T and CT. Glove wear/seed are saved locally; **Restore default** resets the selected team's choice. Agent animations can be searched and previewed in the main menu; round gameplay continues to choose movement/actions automatically. The legacy Source 1 IDF keeps its existing retarget and world hands; equip a native CS2 agent for world gloves and the Source 2 animation preview library.
+
+**Settings → Viewmodel** adjusts FOV (54–68), X/right, Y/forward and Z/up offsets, and 16:9/16:10/4:3/5:4 stretch. The live preview uses actual weapon/hand models without changing inventory or world-camera FOV. Reset restores source defaults: FOV 60, offsets 1/1/−1, aspect 16:9. Values persist through reloads and resize with the viewport.
+
 ## Validation
 
 Run checks/build for code changes, relevant unit tests for shared rules, and browser tests for input/UI/gameplay. Inspect meaningful rendering or animation changes in Chromium and check browser errors and asset requests. Keep screenshots and extraction scratch files under ignored `artifacts/`. Production must not expose `window.__game`.

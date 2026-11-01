@@ -1,4 +1,42 @@
 /* Panorama mainmenu-content__container + settings row layout. */
+#settings[data-category="viewmodel"] {
+  background: transparent;
+  backdrop-filter: none;
+}
+#settings[data-category="viewmodel"] .settings-panel {
+  align-self: flex-start;
+  width: min(440px, 48vw);
+  padding: 22px;
+  margin: 12px 0;
+  background: #17212fec;
+  border: 1px solid #ffffff25;
+}
+#settings[data-category="viewmodel"] :is(.dialog-heading, .settings-tabs) {
+  background: #17212fe8;
+}
+.viewmodel-aspect {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+.viewmodel-aspect [role="group"] {
+  display: flex;
+  gap: 5px;
+}
+#settings .viewmodel-aspect button {
+  flex: 1;
+  padding: 10px 4px;
+  background: #263241;
+  color: #d8dce2;
+  border: 1px solid #ffffff25;
+}
+#settings .viewmodel-aspect button[aria-pressed="true"] {
+  background: #d1a14c;
+  color: #111;
+}
+#reset-viewmodel {
+  width: 100%;
+}
 #settings {
   inset: clamp(48px, 6vh, 68px) 0 0;
   align-items: stretch;

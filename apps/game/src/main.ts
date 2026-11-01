@@ -1,5 +1,6 @@
 import { homeMenuMarkup, setupHomeMenu } from "./home-menu";
 import { setupSkinMenu } from "./skin-menu";
+import { setupCosmeticMenu } from "./cosmetic-menu";
 import "./fonts.css";
 import "./style.css";
 import "./home-menu.css";
@@ -50,6 +51,7 @@ const game = new Game(loadProgress);
 setupControlSettings(game);
 setupSettingsTabs(game);
 setupHomeMenu(game);
+const cosmeticMenu = setupCosmeticMenu(game);
 setupSteamAccount();
 // Panorama navigation switches full pages; it must not stack their overlays.
 document.addEventListener(
@@ -57,6 +59,8 @@ document.addEventListener(
   (event) => {
     if (!(event.target instanceof Element) || !event.target.closest(".home-header button")) return;
     game.groundInventory.closeLoadout();
+    if (!document.getElementById("cosmetic-menu")!.classList.contains("hidden"))
+      cosmeticMenu.close();
     for (const id of ["steam-account", "skin-menu", "settings", "home-panel"])
       document.getElementById(id)?.classList.add("hidden");
   },

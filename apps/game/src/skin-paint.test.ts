@@ -1,8 +1,31 @@
 import { describe, expect, it } from "vitest";
 import sourcePaint from "../../../packages/assets/public/skins/paints/7_44.json";
-import { paintVariables, type Paint } from "./skin-paint";
+import { expression, paintVariables, type Paint } from "./skin-paint";
 
 const paint = sourcePaint as Paint;
+function colorExpression(values: number[], conversion: number) {
+  const bytes: number[] = [];
+  for (const value of values) {
+    const buffer = new ArrayBuffer(4);
+    new DataView(buffer).setFloat32(0, value, true);
+    bytes.push(7, ...new Uint8Array(buffer));
+  }
+  bytes.push(6, 24, 0, 6, conversion, 0, 0);
+  return expression(bytes.map((x) => x.toString(16).padStart(2, "0")).join(""), {}, []) as number[];
+}
+
+it("evaluates Source sRGB tint functions without converting alpha", () => {
+  const gamma = colorExpression([0.001, 0.18, 1, 0.25], 30);
+  expect(gamma[0]).toBeCloseTo(0.01292, 6);
+  expect(gamma[1]).toBeCloseTo(0.4613561295, 6);
+  expect(gamma[2]).toBeCloseTo(1, 6);
+  expect(gamma[3]).toBe(0.25);
+  const linear = colorExpression([0.02, 0.5, 1, 0.25], 31);
+  expect(linear[0]).toBeCloseTo(0.0015479876, 7);
+  expect(linear[1]).toBeCloseTo(0.2140411405, 7);
+  expect(linear[2]).toBeCloseTo(1, 6);
+  expect(linear[3]).toBe(0.25);
+});
 describe("native paint seeds", () => {
   it("matches the viewer reference for AK Case Hardened seed 661", () => {
     const t = paint.targets[0],

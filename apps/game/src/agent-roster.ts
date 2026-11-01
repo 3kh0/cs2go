@@ -12,10 +12,14 @@ export type AgentDefinition = {
   nativeModel?: string;
   bytes?: number;
   category?: "base" | "cosmetic";
+  itemId?: number;
+  image?: string;
+  sourcePose?: string;
 };
 export type AgentAppearance = {
   scene: T.Group;
   animationTeam: "t";
+  agentId?: string;
   release: () => void;
 };
 const defaults: Record<AgentTeam, AgentDefinition> = {
@@ -132,13 +136,14 @@ function prune() {
     disposeTemplate(entry.scene!);
   }
 }
-function lease(entry: Cached, reserved = false): AgentAppearance {
+function lease(entry: Cached, reserved = false, agentId?: string): AgentAppearance {
   if (!reserved) entry.references++;
   entry.used = ++clock;
   let released = false;
   return {
     scene: entry.scene!,
     animationTeam: "t",
+    agentId,
     release() {
       if (released) return;
       released = true;
@@ -193,7 +198,7 @@ export async function acquireAgentAppearance(id: string): Promise<AgentAppearanc
   entry.used = ++clock;
   try {
     await entry.pending;
-    return lease(entry, true);
+    return lease(entry, true, agent.id);
   } catch (error) {
     entry.references--;
     prune();
@@ -204,5 +209,5 @@ export async function acquireAgentAppearance(id: string): Promise<AgentAppearanc
 export function peekSelectedAgent(team: AgentTeam): AgentAppearance | undefined {
   const agent = selectedAgent(team);
   const entry = agent.model ? models.get(agent.model) : undefined;
-  return entry?.scene ? lease(entry) : undefined;
+  return entry?.scene ? lease(entry, false, agent.id) : undefined;
 }

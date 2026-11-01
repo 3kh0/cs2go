@@ -26,6 +26,40 @@ type State = {
   reflections: Map<T.MeshStandardMaterial, { map: T.Texture | null; intensity: number }>;
 };
 const actors = new WeakMap<T.Object3D, State>();
+const patches = new WeakMap<
+  T.Material,
+  {
+    lighting: State;
+    compile: T.Material["onBeforeCompile"];
+    key: string;
+  }
+>();
+function lightingRoot(root: T.Object3D) {
+  let candidate: T.Object3D | null = root;
+  while (candidate) {
+    if (actors.has(candidate)) return candidate;
+    candidate = candidate.parent;
+  }
+  return root;
+}
+/** Release dynamically replaced cosmetic materials without retaining dead shader state. */
+export function releaseActorLightingMaterials(root: T.Object3D, removed: T.Object3D) {
+  const state = actors.get(lightingRoot(root));
+  if (!state) return;
+  const materials = new Set<T.Material>();
+  removed.traverse((object) => {
+    if (object instanceof T.Mesh)
+      for (const material of Array.isArray(object.material) ? object.material : [object.material])
+        materials.add(material);
+  });
+  for (const material of materials) {
+    state.patched.delete(material);
+    state.reflections.delete(material as T.MeshStandardMaterial);
+    state.owned.delete(material);
+  }
+  for (const [source, material] of state.materials)
+    if (materials.has(source) || materials.has(material)) state.materials.delete(source);
+}
 function makeState(): State {
   return {
     enabled: { value: 0 },
@@ -47,6 +81,11 @@ function makeState(): State {
 // Agents share template materials. Clone only materials, retaining all geometry,
 // textures and skeleton sharing. First-person models already own their materials.
 export function registerActorLighting(root: T.Object3D, cloneMaterials = false) {
+  const owner = lightingRoot(root);
+  if (owner !== root) {
+    registerActorLighting(owner, cloneMaterials);
+    return;
+  }
   let state = actors.get(root);
   if (!state) {
     state = makeState();
@@ -55,8 +94,9 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
   const lighting = state;
   const patch = (source: T.Material) => {
     if (!(source instanceof T.MeshStandardMaterial) || lighting.patched.has(source)) return source;
+    const prior = patches.get(source);
     let material = source;
-    if (cloneMaterials) {
+    if (cloneMaterials || (prior && prior.lighting !== lighting)) {
       const existing = lighting.materials.get(source);
       if (existing) return existing;
       material = source.clone();
@@ -68,10 +108,12 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
       map: material.envMap,
       intensity: material.envMapIntensity,
     });
-    const previous = material.onBeforeCompile.bind(material);
-    const key = material.customProgramCacheKey();
+    // oxlint-disable-next-line typescript/unbound-method -- Called with the owning material via .call below.
+    const previous = prior?.compile ?? material.onBeforeCompile;
+    const key = prior?.key ?? material.customProgramCacheKey();
+    patches.set(material, { lighting, compile: previous, key });
     material.onBeforeCompile = function (shader, renderer) {
-      previous(shader, renderer);
+      previous.call(material, shader, renderer);
       Object.assign(shader.uniforms, {
         sourceActorProbeEnabled: lighting.enabled,
         sourceActorProbeCube: lighting.cube,
