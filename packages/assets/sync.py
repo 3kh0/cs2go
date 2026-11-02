@@ -6,14 +6,17 @@ import os
 import random
 import sys
 import time
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from threading import BoundedSemaphore, Lock
 
 import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
 
 ROOT = Path(__file__).resolve().parent
+TRANSFER_WORKERS = 32
+UPLOAD_WORKERS = 4
 
 
 def missing(error):
@@ -25,16 +28,37 @@ class RetryingClient:
     def __init__(self, client, pause=time.sleep):
         self.client = client
         self.pause = pause
+        self.lock = Lock()
+        self.operations = {}
+        self.throttle_retries = 0
+
+    def record(self, operation, started, response):
+        with self.lock:
+            stats = self.operations.setdefault(operation, {'calls': 0, 'seconds': 0, 'sdk_retries': 0})
+            stats['calls'] += 1
+            stats['seconds'] += time.monotonic() - started
+            stats['sdk_retries'] += response.get('ResponseMetadata', {}).get('RetryAttempts', 0)
+
+    def summary(self):
+        with self.lock:
+            operations = '; '.join(
+                f"{name}: {stats['calls']} calls, {stats['seconds'] / stats['calls']:.3f}s average, "
+                f"{stats['sdk_retries']} SDK retries" for name, stats in sorted(self.operations.items()))
+            return f'R2 requests: {operations}; {self.throttle_retries} outer throttle retries'
 
     def __getattr__(self, operation):
         method = getattr(self.client, operation)
 
         def request(**kwargs):
             for attempt in range(8):
+                started = time.monotonic()
                 try:
-                    return method(**kwargs)
+                    result = method(**kwargs)
+                    self.record(operation, started, result or {})
+                    return result
                 except ClientError as error:
                     response = error.response
+                    self.record(operation, started, response)
                     status = response.get('ResponseMetadata', {}).get('HTTPStatusCode')
                     code = response.get('Error', {}).get('Code')
                     retryable = status in (429, 503) or code in (
@@ -48,6 +72,8 @@ class RetryingClient:
                     except (TypeError, ValueError):
                         retry_after = 0
                     delay = max(retry_after, min(30, 2 ** attempt + random.random()))
+                    with self.lock:
+                        self.throttle_retries += 1
                     print(f'R2 {operation} throttled; retry {attempt + 1}/7 in {delay:.1f}s', flush=True)
                     self.pause(delay)
         return request
@@ -143,7 +169,10 @@ def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
     print(f'Verified {len(entries)} immutable Brotli cache payloads; local round-trip verification follows')
 
 
-def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None):
+def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None,
+            workers=TRANSFER_WORKERS, upload_workers=UPLOAD_WORKERS):
+    if workers < 1 or upload_workers < 1:
+        raise ValueError('Transfer and upload concurrency must be positive')
     client = RetryingClient(client, pause)
     # The exact checked-in bytes are the completion marker.
     body = (root / 'manifest.json').read_bytes()
@@ -190,6 +219,29 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None):
         wire = entry.get('transport', entry)
         old_by_hash[(wire['sha256'], Path(path).suffix, wire.get('encoding'))] = path
 
+    # Copy/HEAD requests wait on remote latency without buffering payloads.
+    # Keep the smaller upload budget separate so large assets cannot exhaust RAM.
+    upload_slots = BoundedSemaphore(upload_workers)
+
+    def upload(path, entry, wire, target):
+        source = root / 'public' / path
+        if 'input' in entry:
+            source = root / '.cache' / f"{entry['inputSha256']}.glb.gz"
+        encoding = wire.get('encoding')
+        if encoding == 'br':
+            source = root / '.cache' / f"{entry['sha256']}.q11.br"
+        payload = source.read_bytes()
+        if hashlib.sha256(payload).hexdigest() != wire['sha256'] or len(payload) != wire['bytes']:
+            raise ValueError(f'Local asset changed after verification: {source}')
+        # Brotli is an HTTP wrapper; browser decoding yields the logical file bytes.
+        # A .gz logical file remains gzip and is then decoded by the game.
+        mime = 'application/octet-stream' if path.endswith('.gz') else mimetypes.guess_type(path)[0]
+        mime = {'.wgsl': 'text/plain', '.hdr': 'application/octet-stream', '.ktx2': 'image/ktx2'}.get(Path(path).suffix, mime)
+        headers = {'ContentEncoding': encoding} if encoding else {}
+        create_once(client, Bucket=bucket, Key=target, Body=payload,
+                    ContentType=mime or 'application/octet-stream',
+                    CacheControl='public, max-age=31536000, immutable', Metadata={'sha256': wire['sha256']}, **headers)
+
     def transfer(item):
         path, entry = item
         target = prefix + path
@@ -216,22 +268,8 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None):
                 # accepts identical content and rejects a different immutable key.
                 result = 'skipped'
         else:
-            source = root / 'public' / path
-            if 'input' in entry:
-                source = root / '.cache' / f"{entry['inputSha256']}.glb.gz"
-            if encoding == 'br':
-                source = root / '.cache' / f"{entry['sha256']}.q11.br"
-            payload = source.read_bytes()
-            if hashlib.sha256(payload).hexdigest() != expected or len(payload) != wire['bytes']:
-                raise ValueError(f'Local asset changed after verification: {source}')
-            # Brotli is an HTTP wrapper; browser decoding yields the logical file bytes.
-            # A .gz logical file remains gzip and is then decoded by the game.
-            mime = 'application/octet-stream' if path.endswith('.gz') else mimetypes.guess_type(path)[0]
-            mime = {'.wgsl': 'text/plain', '.hdr': 'application/octet-stream', '.ktx2': 'image/ktx2'}.get(Path(path).suffix, mime)
-            headers = {'ContentEncoding': encoding} if encoding else {}
-            create_once(client, Bucket=bucket, Key=target, Body=payload,
-                              ContentType=mime or 'application/octet-stream',
-                              CacheControl='public, max-age=31536000, immutable', Metadata={'sha256': expected}, **headers)
+            with upload_slots:
+                upload(path, entry, wire, target)
             result = 'uploaded'
         head = client.head_object(Bucket=bucket, Key=target)
         if head.get('Metadata', {}).get('sha256') != expected or head['ContentLength'] != wire['bytes'] or head.get('ContentEncoding') != encoding:
@@ -239,11 +277,26 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None):
         return result
 
     counts = {'uploaded': 0, 'copied': 0, 'skipped': 0}
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        for completed, result in enumerate(pool.map(transfer, manifest['files'].items()), 1):
-            counts[result] += 1
-            if completed % 250 == 0:
-                print(f"Synced {completed}/{len(manifest['files'])}: {counts}", flush=True)
+    started = time.monotonic()
+    print(f"Syncing {len(manifest['files'])} assets with {workers} transfer workers "
+          f'and at most {upload_workers} buffered uploads', flush=True)
+    try:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            pending = [pool.submit(transfer, item) for item in manifest['files'].items()]
+            try:
+                # Report actual completions, rather than waiting for earlier slow files.
+                for completed, future in enumerate(as_completed(pending), 1):
+                    counts[future.result()] += 1
+                    if completed % 250 == 0:
+                        elapsed = time.monotonic() - started
+                        print(f"Synced {completed}/{len(manifest['files'])}: {counts}; "
+                              f'{completed / elapsed:.1f} assets/s, {elapsed:.1f}s elapsed', flush=True)
+            except BaseException:
+                for future in pending:
+                    future.cancel()
+                raise
+    finally:
+        print(client.summary(), flush=True)
     # Commit marker is written only after ALL transfers succeed. Failed runs are resumable.
     create_once(client, Bucket=bucket, Key=prefix + 'manifest.json', Body=body,
                       ContentType='application/json', CacheControl='public, max-age=31536000, immutable')
@@ -258,7 +311,7 @@ if __name__ == '__main__':
     client = boto3.client('s3', endpoint_url=f"https://{os.environ['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com",
                           aws_access_key_id=os.environ['R2_ACCESS_KEY_ID'],
                           aws_secret_access_key=os.environ['R2_SECRET_ACCESS_KEY'], region_name='auto',
-                          config=Config(retries={'max_attempts': 5, 'mode': 'adaptive'}, max_pool_connections=4))
+                          config=Config(retries={'max_attempts': 5, 'mode': 'adaptive'}, max_pool_connections=TRANSFER_WORKERS))
     client.meta.events.register('before-call.s3.CopyObject', guard_copy_destination)
     mode = sys.argv[1] if len(sys.argv) > 1 else 'publish'
     manifest = json.loads((ROOT / 'manifest.json').read_text())

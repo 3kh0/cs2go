@@ -4,7 +4,9 @@ import io
 import json
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from threading import Event, Lock
 from botocore.exceptions import ClientError
 from sync import publish, seed_cache, published_status, create_once, guard_copy_destination, RetryingClient
 
@@ -53,6 +55,78 @@ class Bucket:
 
 
 class PublishTests(unittest.TestCase):
+    def test_parallel_transfers_bound_uploads_and_wait_for_all_verifications(self):
+        for copying, limit, total in [(True, 32, 40), (False, 4, 12)]:
+            with self.subTest(copying=copying), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / 'public').mkdir()
+                entry = {'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}
+                entries = {f'{index}.bin': entry for index in range(total)}
+                manifest = {'release': 'parallel', 'files': entries}
+                body = json.dumps(manifest).encode()
+                (root / 'manifest.json').write_bytes(body)
+                for path in entries:
+                    (root / 'public' / path).write_bytes(b'one')
+
+                class BlockingBucket(Bucket):
+                    def __init__(self):
+                        super().__init__()
+                        self.lock = Lock()
+                        self.release = Event()
+                        self.at_capacity = Event()
+                        self.over_budget = Event()
+                        self.active = 0
+                        self.peak = 0
+                        self.verified = set()
+
+                    def block_transfer(self):
+                        with self.lock:
+                            self.active += 1
+                            self.peak = max(self.peak, self.active)
+                            if self.active == limit:
+                                self.at_capacity.set()
+                            if self.active > limit:
+                                self.over_budget.set()
+                        if not self.release.wait(5):
+                            raise RuntimeError('Test transfer gate timed out')
+                        with self.lock:
+                            self.active -= 1
+
+                    def copy_object(self, **kwargs):
+                        self.block_transfer()
+                        return super().copy_object(**kwargs)
+
+                    def put_object(inner, **kwargs):
+                        if kwargs['Key'].endswith('.bin'):
+                            inner.block_transfer()
+                        else:
+                            self.assertEqual(len(inner.verified), total)
+                        return super(BlockingBucket, inner).put_object(**kwargs)
+
+                    def head_object(self, **kwargs):
+                        result = super().head_object(**kwargs)
+                        with self.lock:
+                            self.verified.add(kwargs['Key'])
+                        return result
+
+                bucket = BlockingBucket()
+                if copying:
+                    bucket.objects['latest.json'] = {'Body': json.dumps({
+                        'release': 'old', 'files': {'source.bin': entry}}).encode()}
+                    bucket.objects['releases/old/source.bin'] = {
+                        'Body': b'one', 'Metadata': {'sha256': entry['sha256']}}
+                with ThreadPoolExecutor(max_workers=1) as pool:
+                    work = pool.submit(publish, bucket, 'test', manifest, root)
+                    try:
+                        self.assertTrue(bucket.at_capacity.wait(5))
+                        self.assertFalse(bucket.over_budget.wait(0.1))
+                        self.assertNotIn('releases/parallel/manifest.json', bucket.objects)
+                    finally:
+                        bucket.release.set()
+                    work.result(timeout=5)
+                self.assertEqual(bucket.peak, limit)
+                self.assertEqual(bucket.objects['releases/parallel/manifest.json']['Body'], body)
+
     def test_preflight_requires_receipt_for_exact_asset_tree(self):
         bucket = Bucket()
         with tempfile.TemporaryDirectory() as directory:
@@ -296,6 +370,16 @@ class PublishTests(unittest.TestCase):
 
 
 class RetryTests(unittest.TestCase):
+    def test_sdk_retries_are_visible_even_when_request_succeeds(self):
+        class Retried:
+            def head_object(self, **kwargs):
+                return {'ResponseMetadata': {'RetryAttempts': 3}}
+        client = RetryingClient(Retried())
+        client.head_object(Bucket='test', Key='asset')
+        self.assertIn('head_object: 1 calls', client.summary())
+        self.assertIn('3 SDK retries', client.summary())
+        self.assertIn('0 outer throttle retries', client.summary())
+
     def test_numeric_r2_throttle_retries_and_respects_retry_after(self):
         class Throttled:
             attempts = 0

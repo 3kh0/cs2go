@@ -1,0 +1,504 @@
+{
+  "generator": "scripts/import-default-weapons.py",
+  "source": "https://cs2inspects.com/3d-viewer",
+  "notes": "Finished HD default color, AO, roughness, metalness and octahedral normals. Native mesh, bind pose, animation and quantized UV transforms retained. 512px lossless WebP, matching the existing runtime texture resolution; Three.js lighting remains an approximation. Legacy substrates remain for compatible paints.",
+  "weapons": [
+    {
+      "weapon": "ak-47",
+      "item": 7,
+      "file": "ak-47-hd.glb",
+      "sha256": "b102ab31bd990de4338da1e6ded29303097e026257792aa9ce9a40d75636d5bd",
+      "materials": [
+        "weapon_rif_ak47",
+        "sticker_gaps"
+      ]
+    },
+    {
+      "weapon": "m4a1_s",
+      "item": 60,
+      "file": "m4a1_s-hd.glb",
+      "sha256": "39593f68ecc0e00c22295f2651b0398644ef33eb2b77abb231a9d7ff33b6647d",
+      "materials": [
+        "weapon_rif_m4a1_silencer"
+      ]
+    },
+    {
+      "weapon": "usp-s",
+      "item": 61,
+      "file": "usp-s-hd.glb",
+      "sha256": "6ae9411badd25f1d395e48263883ef66e028de9fb6b220746f9fdb00e038ec85",
+      "materials": [
+        "weapon_pist_usp_silencer"
+      ]
+    },
+    {
+      "weapon": "awp",
+      "item": 9,
+      "file": "awp-hd.glb",
+      "sha256": "4a7a603372889b53396c2c548ed6b2f4abc689585716dc31dd63a5ab7514ac81",
+      "materials": [
+        "weapon_snip_awp"
+      ]
+    },
+    {
+      "weapon": "glock",
+      "item": 4,
+      "file": "glock-hd.glb",
+      "sha256": "92ee3e73aaf6acef3556c02889da7278ff3427a4fb2713ff3a80650e673ee9c7",
+      "materials": [
+        "weapon_pist_glock"
+      ]
+    },
+    {
+      "weapon": "deagle",
+      "item": 1,
+      "file": "deagle-hd.glb",
+      "sha256": "5667f4da1910520658d525f7a9beede14f8320b55375cc2e3ba5a6b882660708",
+      "materials": [
+        "weapon_pist_deagle"
+      ]
+    },
+    {
+      "weapon": "m4a4",
+      "item": 16,
+      "file": "m4a4-hd.glb",
+      "sha256": "4c97497cba809d1b89e289e2cb0de791a157df92485f914bc29582136f7882aa",
+      "materials": [
+        "weapon_rif_m4a4"
+      ]
+    },
+    {
+      "weapon": "nova",
+      "item": 35,
+      "file": "nova-hd.glb",
+      "sha256": "a84d7bcec788ff2c730e70332d2bbd8a93fe23978dbd8b0941e73fb0f4e5498d",
+      "materials": [
+        "weapon_shot_nova",
+        "nova_bullet"
+      ]
+    },
+    {
+      "weapon": "mp9",
+      "item": 34,
+      "file": "mp9-hd.glb",
+      "sha256": "cf88e6e95ff76a681173cf58078b664b0675e930026bf3c94072fb991831d5e1",
+      "materials": [
+        "weapon_smg_mp9"
+      ]
+    },
+    {
+      "weapon": "hkp2000",
+      "item": 32,
+      "file": "hkp2000-hd.glb",
+      "sha256": "6f4228d4f5b28765d4f8c7b305af6d65a94b3af32a0e44c7342d59969f96689d",
+      "materials": [
+        "weapon_pist_hkp2000"
+      ]
+    },
+    {
+      "weapon": "p250",
+      "item": 36,
+      "file": "p250-hd.glb",
+      "sha256": "fea9faf256aeaff4add54222c699d148349e3984d8b28ce3213c1d03a4acaaab",
+      "materials": [
+        "weapon_pist_p250"
+      ]
+    },
+    {
+      "weapon": "fiveseven",
+      "item": 3,
+      "file": "fiveseven-hd.glb",
+      "sha256": "b948c08795486aef2d3518201a5327cc81e8d76390aad032321d23344aec2d3c",
+      "materials": [
+        "weapon_pist_fiveseven"
+      ]
+    },
+    {
+      "weapon": "tec9",
+      "item": 30,
+      "file": "tec9-hd.glb",
+      "sha256": "b901832c44b931ff359f162a5901d34257c082ffeb7c334d87605ff426e4e0da",
+      "materials": [
+        "weapon_pist_tec9"
+      ]
+    },
+    {
+      "weapon": "cz75a",
+      "item": 63,
+      "file": "cz75a-hd.glb",
+      "sha256": "470eea321b73e6285309e5641f099f5498d727dd6704d8c93680f24ea857608c",
+      "materials": [
+        "weapon_pist_cz75a"
+      ]
+    },
+    {
+      "weapon": "revolver",
+      "item": 64,
+      "file": "revolver-hd.glb",
+      "sha256": "50023f58a44c7f665c00d7869db7dd452c619358c91472c2dd39647e7f392204",
+      "materials": [
+        "weapon_pist_revolver"
+      ]
+    },
+    {
+      "weapon": "elite",
+      "item": 2,
+      "file": "elite-hd.glb",
+      "sha256": "1fb2bd37dd134d6fc768995a7748441a14ba438797929d5b0fe65615ec68e3df",
+      "materials": [
+        "weapon_pist_elite",
+        "w_eq_eholster"
+      ]
+    },
+    {
+      "weapon": "famas",
+      "item": 10,
+      "file": "famas-hd.glb",
+      "sha256": "df73e5b1ba41a0b1f14216e7b5d6720196931073ae601f461330eae7c821ded8",
+      "materials": [
+        "weapon_rif_famas"
+      ]
+    },
+    {
+      "weapon": "galilar",
+      "item": 13,
+      "file": "galilar-hd.glb",
+      "sha256": "9c4b9675b9ecc61d8e1dd94a0d90011f7dfcbebfd321f8df221392a4bba1361c",
+      "materials": [
+        "weapon_rif_galilar"
+      ]
+    },
+    {
+      "weapon": "aug",
+      "item": 8,
+      "file": "aug-hd.glb",
+      "sha256": "44f83fc3ad0968e84846b5141250a0a1e0edb117af07547f523769ad89807345",
+      "materials": [
+        "weapon_rif_aug",
+        "shared_scope_lens"
+      ]
+    },
+    {
+      "weapon": "sg556",
+      "item": 39,
+      "file": "sg556-hd.glb",
+      "sha256": "a503fb7a8278abc7e1d453b82ddac4ae6b9ba80f295addbcc1fcd4a958d83f00",
+      "materials": [
+        "weapon_rif_sg556",
+        "shared_scope_lens"
+      ]
+    },
+    {
+      "weapon": "ssg08",
+      "item": 40,
+      "file": "ssg08-hd.glb",
+      "sha256": "db785aa473abc9edba6a988be520419d4f66bf63c124407c52c05cbe931fcc29",
+      "materials": [
+        "weapon_snip_ssg08"
+      ]
+    },
+    {
+      "weapon": "scar20",
+      "item": 38,
+      "file": "scar20-hd.glb",
+      "sha256": "d3b5b8c07c4de2df70cbdab8eb2eb254f5dd6345183f93bc9de760b5d12eba7a",
+      "materials": [
+        "weapon_snip_scar20"
+      ]
+    },
+    {
+      "weapon": "g3sg1",
+      "item": 11,
+      "file": "g3sg1-hd.glb",
+      "sha256": "81c0a28fd111eb78cc050342b1c4bac66bb8fff0330b9fdae6ce5035eba24442",
+      "materials": [
+        "weapon_snip_g3sg1"
+      ]
+    },
+    {
+      "weapon": "mac10",
+      "item": 17,
+      "file": "mac10-hd.glb",
+      "sha256": "2a763f90f96ac68cd1e626cf0fb61dc20d20d50e311cf1f9bd6be3cb1fea4d43",
+      "materials": [
+        "weapon_smg_mac10"
+      ]
+    },
+    {
+      "weapon": "mp7",
+      "item": 33,
+      "file": "mp7-hd.glb",
+      "sha256": "8fb3b9d7d8b1bc3775b905bc4d8fed3af6a6f526a76c48c9237a7c038dfb84e2",
+      "materials": [
+        "weapon_smg_mp7"
+      ]
+    },
+    {
+      "weapon": "mp5sd",
+      "item": 23,
+      "file": "mp5sd-hd.glb",
+      "sha256": "e6d6737d680da6bbd7610c8987d8525d191835a98765cd6dc10b9f78a7891932",
+      "materials": [
+        "weapon_smg_mp5sd"
+      ]
+    },
+    {
+      "weapon": "ump45",
+      "item": 24,
+      "file": "ump45-hd.glb",
+      "sha256": "5f68aba918d2364980cded412876834f4b27b039a37f41462f3561d440715bf8",
+      "materials": [
+        "weapon_smg_ump45"
+      ]
+    },
+    {
+      "weapon": "p90",
+      "item": 19,
+      "file": "p90-hd.glb",
+      "sha256": "e9fde88677c1575228dbcd9205c6bd2fc8e2b783649d32fca4e9d9add73bf83b",
+      "materials": [
+        "weapon_smg_p90"
+      ]
+    },
+    {
+      "weapon": "bizon",
+      "item": 26,
+      "file": "bizon-hd.glb",
+      "sha256": "9422b9960cb089409596cb2eeb5841fb67379cd9932d1bc7b9c2e44b0c5a90d9",
+      "materials": [
+        "weapon_smg_bizon"
+      ]
+    },
+    {
+      "weapon": "xm1014",
+      "item": 25,
+      "file": "xm1014-hd.glb",
+      "sha256": "db4fa1537bc8aeffbee0d1896cac4740240ec35cb1901115f1d9f801a7c8b963",
+      "materials": [
+        "weapon_shot_xm1014"
+      ]
+    },
+    {
+      "weapon": "mag7",
+      "item": 27,
+      "file": "mag7-hd.glb",
+      "sha256": "68479c342f957a325c4472b3ff3f9f0ce5ff9b2f6535a1c8b2b08d00375fe55c",
+      "materials": [
+        "weapon_shot_mag7"
+      ]
+    },
+    {
+      "weapon": "sawedoff",
+      "item": 29,
+      "file": "sawedoff-hd.glb",
+      "sha256": "affd5aef1e7fec320159a735b70aff00a7b91cef1be7e5e5f45be2a468ab55a7",
+      "materials": [
+        "weapon_shot_sawedoff"
+      ]
+    },
+    {
+      "weapon": "m249",
+      "item": 14,
+      "file": "m249-hd.glb",
+      "sha256": "5a4ba2ef4de43cd395a8adfc3af5dc6692a82d160c58c9698c863ad48a13fffd",
+      "materials": [
+        "weapon_mach_m249"
+      ]
+    },
+    {
+      "weapon": "negev",
+      "item": 28,
+      "file": "negev-hd.glb",
+      "sha256": "00d3c69952478b881b07b3a696a0fa215f104ca6eacd74fb645ad2edd5721052",
+      "materials": [
+        "weapon_mach_negev"
+      ]
+    }
+  ],
+  "inputs": {
+    "https://3d.cs2inspects.com/": "d039e54890cc718c220bb8dce74425bb77f4cf5e5c0d6d7a3de8d81cc803f87c",
+    "https://3d.cs2inspects.com/assets/index-CXUheY2V.js": "724899da942ccf6d0ec3864caeee02e5bcbe3f8d28c8375d1e128bb77d6e6ba4",
+    "https://3dapi.cs2inspects.com/model/1": "7668ef52c02b2e4e680f467b4b88ef72edfd0cf8d85f696e8d7f1757bf42f444",
+    "https://3dapi.cs2inspects.com/model/10": "f3cefbf7109f06f61824c37a9f610a9d870b1b07c106b69362b6dc038a34d2d9",
+    "https://3dapi.cs2inspects.com/model/11": "84140dfb5efacbde56a39e53f43dfb48c59a32408a65d64777fb0a36ef1ba815",
+    "https://3dapi.cs2inspects.com/model/13": "6609a3118770dc5ce8f1b46e6a833496dbc6fd2941bc00bd8d039f9e193b51c7",
+    "https://3dapi.cs2inspects.com/model/14": "b3948c5c4b136c44b35e20257f4ea689d3412c06b15740efedd387d0d97aa689",
+    "https://3dapi.cs2inspects.com/model/16": "5777fb7cc761688d6db3e06f5709ee3d886b0facabd27dd35fecca8e5bf4207b",
+    "https://3dapi.cs2inspects.com/model/17": "cbc370e697167cfd5c2b70de50137b7eb779f7e397048b3b3aabfb06411e67ad",
+    "https://3dapi.cs2inspects.com/model/19": "d06f3bbe4be26196e17f87c321266dc0d7d2fd75c595cef38834ba4d51a21274",
+    "https://3dapi.cs2inspects.com/model/2": "d3074a7f91dce5bf4e6e06566b97d2b283b8219c957a82cae8b14a72c4d5acce",
+    "https://3dapi.cs2inspects.com/model/23": "2da460d498ec4e745a0710c6346ffd4ae6b22359dc52b91d3d43434bc2e9e3f3",
+    "https://3dapi.cs2inspects.com/model/24": "372a7ebfb0c775cb7eb23af355cd86074d4283adc6597601e661d27f48fd06b4",
+    "https://3dapi.cs2inspects.com/model/25": "420bccdb524e539c4034c7174ced9398c5526285030ab7ebf5d093734b8e96be",
+    "https://3dapi.cs2inspects.com/model/26": "98daca213ec7a1679147411b262dd32cc8b68ad045d3dedd5b1df7d7e4f0da20",
+    "https://3dapi.cs2inspects.com/model/27": "b41adfa5de3aeffafee63c47752f5ec58fc5c3f6ba01f949607e91567d5e0ed7",
+    "https://3dapi.cs2inspects.com/model/28": "aa933b2929e333a7821df78beca1072d8134bfa62f29598faa37bbd29040656e",
+    "https://3dapi.cs2inspects.com/model/29": "47982e348d6510cc0fa6869d6fde05d8d219efaa0af1c3f0a3863c2b67620ede",
+    "https://3dapi.cs2inspects.com/model/3": "4e2a9ca103d8d1b8ae010273cfe1a4de24b350486c89200579b7022cd9540161",
+    "https://3dapi.cs2inspects.com/model/30": "20e842a6adf5efd5f0de6b1e7addf270448673e9bd5b50c162bd595ba038aa3f",
+    "https://3dapi.cs2inspects.com/model/32": "ec18cf307d3461b44a4a8aaaddbd9093630c21561e38f0326fd4594bf1d55a91",
+    "https://3dapi.cs2inspects.com/model/33": "788e7aae2b489e7449f3839ce6c21e5c9ae7af2a7e248dc56c44b887b3dc2ae2",
+    "https://3dapi.cs2inspects.com/model/34": "260268b69cdfe154ed3dc1793235a636db6f90c9163d71c666dc1faeb6e36707",
+    "https://3dapi.cs2inspects.com/model/35": "ddbbbf2adfc3621db6585c2ef25a4e60c87b774ffc5499330fd446089d0c331a",
+    "https://3dapi.cs2inspects.com/model/36": "8df207c8206dcecd589914cbded83766e56172cb9e658dc6de761dbe5bfa1ecc",
+    "https://3dapi.cs2inspects.com/model/38": "b7ad067e32456d3019979874de876cec34fe0512ef8e44f2ba1a042065b02c0b",
+    "https://3dapi.cs2inspects.com/model/39": "1b1714c5b42fc3f8a218ceec89fe3493203de9f51f1eafca2664a7f52624d960",
+    "https://3dapi.cs2inspects.com/model/4": "3a124ad859d1704adf6b98887eaf37a44499826c3c8a333c56e7d38c43f8a1d7",
+    "https://3dapi.cs2inspects.com/model/40": "0a9a52ea0e53df9c2d5eaec3b814fd757119967203acf04af4016dde9fa6d90b",
+    "https://3dapi.cs2inspects.com/model/60": "892da9dc83b4fe81445ba8b943f454adbb87840856ed3b5a1d8b588d1a96e986",
+    "https://3dapi.cs2inspects.com/model/61": "99c8861dfd22f4002cd38c086931cd0f5243b9c1806aea3cd3614626a1820ecf",
+    "https://3dapi.cs2inspects.com/model/63": "4af94b8215b2e92e2eec9d057213973da1e9cfada2a642e90215d616d1d232bf",
+    "https://3dapi.cs2inspects.com/model/64": "4386a541ec338ff0212b9a42098ef8e6cc0c59e19f100abe5b8cb9fea281e77d",
+    "https://3dapi.cs2inspects.com/model/7": "dc24bf8c096c71944826ab042a4a97ee11997b4b7e7750dfb97b0cc6ae31dbd7",
+    "https://3dapi.cs2inspects.com/model/8": "fe141024c4be6b2b8d2499099472d3d899cbcda060552795169b17f593cd529d",
+    "https://3dapi.cs2inspects.com/model/9": "3972a3413363800841ab8152a3eafcd856db639095d7a9f132af46882c77dd49",
+    "https://cs2.cs2inspects.com/data/high2/materials/default/default_ao_tga_559f1ac6.avif": "882e5be149e09bb13b740230d48f462be51f3b4f8c4bcc051506e7bc419520ac",
+    "https://cs2.cs2inspects.com/data/high2/materials/default/default_normal_tga_4fc2d3dd.avif": "740fed060b05f6026157d0d9c9b2a68492f07a2a6305dd382ae822326d66de57",
+    "https://cs2.cs2inspects.com/data/high2/materials/default/default_rough_tga_30b0ca31.avif": "2ba71b370c7499004a84cd8945c0deb0290f0f89e5ee8956314410384fcd8be6",
+    "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/w_models/w_eq_eholster/w_eq_eholster_color_tga_1c8da8fc.avif": "65b1acda0190e9dc7fd0012e90dd838ea2a7a4942c704e2c8443c79edc2cb269",
+    "https://cs2.cs2inspects.com/data/high2/materials/models/weapons/w_models/w_eq_eholster/w_eq_eholster_vmat_g_tmetalness_f9488ba3.avif": "5a0c4f03ebaa0e7f9f0fe179b879bc3cb3e3c42f5c36fee2bbc1f3e2c21ba530",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ak47/materials/ak47_default_ao_png_b00f6e2e.avif": "7abd25be4b0f2e59e2c75b3e866a5ff911f5ce0943fc101fdf8dfd714af1d852",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ak47/materials/ak47_default_color_psd_5b66a23b.avif": "88709547f5c3440cb2166bffe143d1786d0765ed2605307e8753e192f2c4d274",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ak47/materials/ak47_default_normal_png_c8c5793e.avif": "2cd287f7f7dc709ed8360cedefa6e2556ed503de608c8b36ed4934d1ad755992",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ak47/materials/ak47_default_rough_psd_469dc584.avif": "7b50197127c3a2ae578a3e376789c56c7f5a27d90f7c905fbbbef9add785cfce",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/aug/materials/aug_ao_tga_c1ddac19.avif": "17844a746ada4aef71f4ff52779be01f8574c0796866222aa27ad313447e2905",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/aug/materials/aug_default_color_psd_e209ca89.avif": "0414866d31065ad357d7f7cb1c414de0398a4ec1c372bda53b1ed2b9c319acce",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/aug/materials/aug_default_normal_tga_31e3d49f.avif": "65d08ee9cca19e641a90d4238daf95320d04c58b065c3f938aa8c35e2328f7f3",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/aug/materials/aug_default_rough_psd_3b83f877.avif": "26ba2954f2f5584522c072edce361979a3aa47ddb5566cc7af5f023f1e809d3b",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/awp/materials/awp_default_ao_png_38865673.avif": "59dfdd07135ebaf6115f7150cb19eeb07f78fd634e042571d41a6cf6d29c88ee",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/awp/materials/awp_default_color_psd_2bf6ba1e.avif": "c1a8e9a99181b3e76eaf51853cef4af97ad402a7e705ffb7bf73ab9a9a354410",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/awp/materials/awp_default_normal_png_e882fc00.avif": "bc029abbac30f0c1b46c67e6e4dbd099c57466d329bf50b6fa36ae16fa1c8276",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/awp/materials/awp_default_rough_psd_4e233c92.avif": "0e173cd2de19ee6e4013aef61df24493f3999aaa3f4247a3a88095eb4a31ca77",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/bizon/materials/bizon_default_ao_tga_b0793b57.avif": "f2f0c92b8397af9f4b00e50fb2056331d270e94a0c5c14d1db4b8779e2f148f8",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/bizon/materials/bizon_default_color_psd_6feb41a7.avif": "2332f799122c22c99ac241fac5a508d8cd4275388412ed80888f87a786fbc8ad",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/bizon/materials/bizon_default_normal_tga_d1c78744.avif": "1103a1300cc4abf39d9c3d3f48f3ef3ca3eba6d55f080dbaddeca59463b0fdb7",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/bizon/materials/bizon_default_rough_psd_746e3e8a.avif": "503aac8696e2bfc72b07615f0deb54edfabcd18e3aa84303f10bace07fdbe278",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/cz75a/materials/cz75a_default_ao_tga_3e38964.avif": "7240ae64f8873bbeb9a5192df0c7d70d7002d7ac8a0d73b5a9a5749039b8b622",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/cz75a/materials/cz75a_default_color_psd_1932cdb1.avif": "0698f11117c14e53272db339aebdafaf3b7b7dbc96dd3ddf0ffaad159ad6f229",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/cz75a/materials/cz75a_default_normal_tga_aad5beae.avif": "60c02d42deb0eea894b1c950021e9c2f8b48cce54e46fbfa136df811ee0eb25c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/cz75a/materials/cz75a_default_rough_psd_3e0650b8.avif": "203f8482cb5b2528152be5c84aae33d2f9fa2075fd924c6c2877e30983b26a5f",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/deagle/materials/deagle_default_ao_tga_b7d74bd.avif": "cfb1192b8bb66b29798d25b316f4349d267868c859ff5fca2402ea96fbb77978",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/deagle/materials/deagle_default_color_psd_51a7b347.avif": "640e983ab77849bf5cd85f50e671e70f3ab038f5e852a25cc7c91e19478c237f",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/deagle/materials/deagle_default_normal_tga_f25ac800.avif": "85d4396f3e9589543e9b4a6d58988352b411a9289ffe081208051be1408b31f0",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/deagle/materials/deagle_default_rough_tga_b238a11a.avif": "af45978dd78bfe16bbe4da1d7868ae89d282058e09d5c3e5613d7019b486d2ce",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/elite/materials/beretta_default_ao_tga_970901f0.avif": "417c4e082f6a0bd4f1f3334bc2d76278c3af7f4acf0ceaa08a771e42bceeeb5a",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/elite/materials/beretta_default_color_psd_29bcc8c3.avif": "b4d8dbc684cab9405a9a96cce9b6039445212fe33248bc7b1edd1f640e49ef25",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/elite/materials/beretta_default_normal_tga_7f8f8b07.avif": "efa98efab8d0d2a7e883e21fa0738e76d34b82494a5daaedb799d9c562d8ee22",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/elite/materials/beretta_default_rough_psd_9df2d6ab.avif": "4bd304addcc25182873c6e2e76311ae9bc989991878fa10eae69d74bedf0e901",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/famas/materials/famas_default_ao_tga_15f5b4ff.avif": "7646b1bf7ddf94af7dbb8102dff4af76e5e091c7e92a6d0391be3f7570e231a0",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/famas/materials/famas_default_color_psd_b6c40e92.avif": "83b71e7c39bbb59536dcd9335ad4c3a81a56267d9c1f2d5ca15fca97c623e8ae",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/famas/materials/famas_default_normal_tga_40462e7f.avif": "45f2bca5ff21bb3b20c51e1be5a8c6cba91d091a2a6b0fb5bcd3bfc1b90dce12",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/famas/materials/famas_default_rough_psd_e4f589c7.avif": "9857ae9a52c600268ca72bb470cced2fc694e2697202253d4b0f906355c69b8c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/fiveseven/materials/fiveseven_ao_tga_5892665d.avif": "309efbc2f94afa974bf4bbffbba09aeaa24c8ddfb96b42895dedc853d83ffe8f",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/fiveseven/materials/fiveseven_default_color_psd_c3712633.avif": "d4ea8e1ffbf2c61fdbac58d8c89517141cf4b9a91b7b97847e3ec18560847cd0",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/fiveseven/materials/fiveseven_default_normal_tga_a23e62b7.avif": "40b9b4015c23d0b45d086b7c28b2f35363f9416c049950fc48401cbf6f53cadd",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/fiveseven/materials/fiveseven_default_rough_psd_d429506e.avif": "bec500d5afbb85dd811e9f82fa8079e6fa8b418323e8bd95f2fa1b8e7fef5f49",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/g3sg1/materials/g3sg1_default_ao_tga_2bf432b.avif": "7be2d688b9a241940a2f08a7459e6ab31638c3db20a3d36c9ae89b237a915f5d",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/g3sg1/materials/g3sg1_default_color_psd_28024d3b.avif": "2e0fd70af7782e2286d0e352c1aa25c932f65a37131483535c7a5e01ec650488",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/g3sg1/materials/g3sg1_default_normal_tga_bfdc6592.avif": "6fdd8746de445824a37238f7d2b4f882161bac0ca8c44d0854c3452b8e6bb2c6",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/g3sg1/materials/g3sg1_default_rough_psd_d26efdac.avif": "91ee5bc7533c911e5d577b233b5c14208aef867922f6de393955330cc944cc63",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/galilar/materials/galilar_default_ao_tga_ae769e7.avif": "175a204935c9061636982a1f3bfe1de8e18601861eb187159b9580d90647a7c4",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/galilar/materials/galilar_default_color_psd_4713cfed.avif": "54a5bdbbf64bd4b7404c1c87b60b2a0cf89a43dc97e1f8eca4fb322725bdb770",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/galilar/materials/galilar_default_normal_tga_1be8b3dd.avif": "50360e2709c1034ce4534a2a258ed0d55aee8810ac78b20e10036aa651421b96",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/galilar/materials/galilar_default_rough_psd_875185b.avif": "0ad2b340cbae207c45af8cd71893eddb12f57a4e4d6617ab603383e217c388c4",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/glock18/materials/glock_ao_png_6634e9ae.avif": "f63e001dcce7f0b71a4ab09769bc927161836726fbae7c9c0c88988c95ee79ac",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/glock18/materials/glock_default_color_psd_6b5512bd.avif": "663f619ef446bfe53d242ab382567ce8240b704be7674b5dacc12edc712ff96f",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/glock18/materials/glock_default_normal_png_377c3eb8.avif": "5d28627b3af18be66f38ff19012dbc35c94ae718a41440a217f150005bc56e03",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/glock18/materials/glock_default_rough_psd_9f47a69a.avif": "32ba43eceedda461585b1b1c9e6c09ca4004def9b800caa8cd14a20f40060f18",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/hkp2000/materials/p2000_ao_tga_152597f4.avif": "b9457d7e4c43b107476510703afbd257d4dfa05cfbc66d8c7dd37f1122b33f1b",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/hkp2000/materials/p2000_default_color_psd_c5adf1ca.avif": "38aa0d9329c765e76271459dc972d17addd91f12a1fcde1eef0e019414523a81",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/hkp2000/materials/p2000_default_normal_tga_22200730.avif": "6c38e7fc034fec37673ba97b544d2e5640859db2da7c162048f2fcd692c3649a",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/hkp2000/materials/p2000_default_rough_psd_437bee93.avif": "ff6a3e03e9f1eeed7fb9bab0cc37464099926cc7d83b51c1e0c697e15e6b2402",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m249/materials/m249_default_ao_tga_89e61e1b.avif": "e0b5bbdc84ef63bc36130b9ec20c593f1c95310d0283f52015c46c06d82c40e7",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m249/materials/m249_default_color_psd_8ab04656.avif": "f602796a67f236e17cbc0de345c326ce6175016db013ffac1eceb07c7401588d",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m249/materials/m249_default_normal_tga_6450d68a.avif": "76c838999b961b959193dbfe7f39192758d2efdcb5bb24fe43853d3ca671820f",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m249/materials/m249_default_rough_psd_aca41f58.avif": "c59b414ac4444e146e1da7900cf21ea91d5b6596a212a578bf15204f901b6af1",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m4a1_silencer/materials/m4a1_silencer_default_ao_tga_9a4bb8ca.avif": "fa30d9e1747cd850c4162c04f7e3c271a44499ffdb4d3bdc16196958edfe09d7",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m4a1_silencer/materials/m4a1_silencer_default_color_psd_ee3b9cfe.avif": "e76cc65b89fc1e09d68ffe4eb5a9c2ab32f9ef433a4a7c7c0fc2c124bb88f35e",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m4a1_silencer/materials/m4a1_silencer_default_normal_psd_46b09176.avif": "386769eb8f0728174aba1455e25ecdb79a9e23f38dfd368b2e9adadd14b66a33",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m4a1_silencer/materials/m4a1_silencer_default_rough_psd_ba5e1173.avif": "a7a3d22cbb0cfa3f3ba9e7453fa7aed20f5f146abe873ea1b5248ed3781a0d4e",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m4a4/materials/m4a4_default_ao_png_2daf8909.avif": "8be495e06abdb40d29757e034f110e55d48bd4d2473d31dc18868430d4136f72",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m4a4/materials/m4a4_default_color_psd_3b0b391e.avif": "a72cfdc56a1bfb0251090083a68a0a323d766d9d15dddb6ef0f79edea3636420",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m4a4/materials/m4a4_default_normal_png_d39c4b9a.avif": "0cc07765fb25cfcf4c912b5c275070a283df77bb2e0a03ba8141db1a47e5df0a",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/m4a4/materials/m4a4_default_rough_psd_be175f5f.avif": "b7a2a45a71921af88d9bef3b2435a23501431acd4949906706f241872016fe2e",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mac10/materials/mac10_ao_tga_1f515219.avif": "1a592722bb6a7a6d24efa7ab3617dccec26e24df8874b8210940357d3c37814d",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mac10/materials/mac10_default_color_psd_307e41e2.avif": "cc17c13eb9f9d8996b5e4b35524778d0287dfb23e1ca899a00eadb822973ad6e",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mac10/materials/mac10_default_normal_tga_1d6aa2c.avif": "84ce3d320bb7f772bf581c6350d3f9e7d55365a7aa188b5d72f45d6e60bacd4c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mac10/materials/mac10_default_rough_psd_6fc50dc6.avif": "82e636c675dceb45d6321470379f4decfac35dfd0ead900270d447efe88d5d69",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mag7/materials/mag7_default_ao_tga_de56f869.avif": "e50dc10568949ec042a9b6a71dd7c14994f9222889c1db40dddff91448c8c94e",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mag7/materials/mag7_default_color_psd_534a1bfa.avif": "8317deccdf9fd3653cf8fada3c1324301a7144a3db9c624ebf66b551cbed3451",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mag7/materials/mag7_default_normal_tga_dade06c1.avif": "ea7143cf3c6c3269bff8b9412e45b36212f6e6751a60ff2475d6072070d11030",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mag7/materials/mag7_default_rough_tga_3ae223a5.avif": "b6faa26847330c298454ab7f7402dc58b52315f5aff5b42e265659a6c6575610",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp5sd/materials/mp5sd_default_ao_tga_7fca7a43.avif": "ee0356e7aaa29f956e68f81c849b53643783c1aedecf4c9ccdaf0987f282c9e2",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp5sd/materials/mp5sd_default_color_psd_da539acd.avif": "ce79b02e34b855dc612590eeea0ed9fa0e338d7a28125eb355dda1e2d62f1892",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp5sd/materials/mp5sd_default_normal_tga_ce466e67.avif": "680d758a5a3b5ef890022253e33aac6b3badc7e78dca8b665282e120e85c68af",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp5sd/materials/mp5sd_default_rough_tga_e787f53e.avif": "409df21394c4866efbb81da966746543151e1faf22c41efc8f234f38f32d0673",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp7/materials/mp7_ao_tga_f4f3d03.avif": "55eda0e3d4b308fb9071eee9bb90f22800cb4dfa5f37bc5108d0ca40f8a586e3",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp7/materials/mp7_default_color_psd_bb9711a3.avif": "acc63c6e08b147b84bf6333f89f3b0445062774c1b8d1aad8be5738dd45533e5",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp7/materials/mp7_default_normal_tga_86060c88.avif": "b29480dceb337b0a056077d2ccdc2422cabad25f909e1f8a79633c221c7fc655",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp7/materials/mp7_default_rough_psd_9b8c4775.avif": "fc5c31523ff200035319f4c329dca59ca2f52e4cccc630625608649bbc3fcd52",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp9/materials/mp9_ao_tga_28e27e99.avif": "8ec9b15f2fbc222be43d90631c2661f0452fdcc2e2c40554ade32dcc1d0559f3",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp9/materials/mp9_default_color_psd_3b99a749.avif": "3a721ca4041a7b44e4ebf6906b3a1ea09b60b3227d5ddef8e6ca9ff5fa2f646d",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp9/materials/mp9_default_normal_tga_ae48a197.avif": "570faadc8c0a66f307c659cb824539f19f0da5c9a219673eba105227fa6ee0b5",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/mp9/materials/mp9_default_rough_psd_ee7a1ed7.avif": "fb07dcfd673f4cc31b8bff9b034c11e64ad7204bf40b1c9d8ce436d2caa7f6f7",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/negev/materials/negev_default_ao_tga_44f4fb11.avif": "940d6100c328ccf76e012777388c3e2418432089c37ef9229a971c8a86c8f7e4",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/negev/materials/negev_default_color_psd_61eb2634.avif": "2739ba8e78b8078e738a7302e53c44f2ff7841d7f16f263b5eb24c548f099664",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/negev/materials/negev_default_normal_tga_ffe47.avif": "06d243beb7871bcb9dd8f8f170c19b5dcdca152aca95ee829c24b1788d60d7c6",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/negev/materials/negev_default_rough_psd_81bea48d.avif": "fee6a4f822a2e8e4e56912214b5c722c88b9ecb866afe59797e199f28de270d8",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/nova/materials/nova_ao_tga_8216cb2b.avif": "a7eda656cb803ce158cb3377d1e4fee8a8a89e25632e16757722a689edf5c310",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/nova/materials/nova_default_color_psd_fa500254.avif": "5caf8bc5894922de3a00390e59edefae34b22ff4897e6764965bcde94a22a9b2",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/nova/materials/nova_default_normal_tga_5dda54a9.avif": "e4fb7ab7eb0695d64a26df18a09ce06ef9602bfba8169bea524be7e1eeb1b155",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/nova/materials/nova_default_rough_psd_d43f1ea1.avif": "76a79b438d2e3ec5a241953086bded97a7443eeec6a0c83cf95eeb593b142573",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/p250/materials/p250_default_ao_tga_e102ee66.avif": "fbf64f1971e5d2d7f72c5e4e4f4486f8b2e12a088feac73c94864a7728348bcf",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/p250/materials/p250_default_color_psd_71b567f1.avif": "75cb741ffef07e95eeeb4f94a972339a1fc26b2c3cebc475fbbbd74daa94973b",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/p250/materials/p250_default_normal_tga_c897b0d4.avif": "4c74ef23a15b9e801bb350ed94bbfa4378b6d7d9fcb9d0fb26a65cc3c6617b25",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/p250/materials/p250_default_rough_psd_7d274363.avif": "26d86a4ce3eef11d5b4ff5c0e9d6d3f284d73d038d3ba4cc31681230d8e647ee",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/p90/materials/p90_default_ao_tga_839baa85.avif": "118f7dff710e62f999d36bc05d143c7624c1a1e3c973b1b2421838b761a475a3",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/p90/materials/p90_default_color_psd_2727e8c1.avif": "c0ce945febbc4cd9cb2028d73848dbaee8e0246084f080f67098b21d0a844811",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/p90/materials/p90_default_normal_tga_ce606f21.avif": "082f7be9032e6dc9eb4ff6547addff38f05cbf133773f54bda68ccdb1b657e1a",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/p90/materials/p90_default_rough_psd_7ac6dedb.avif": "263a66cd61ae8881267497ee7623eea110982d2e97dfd80b2a164c9d6aa1bcdb",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/revolver/materials/revolver_default_ao_tga_e0095109.avif": "b13c5858494bb7fecd91079ae1b0b7841966c5237921723fe8dee624b55986aa",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/revolver/materials/revolver_default_color_psd_78d0a6cf.avif": "3261cbecdc117f49f9853b943c2a1951abc278e7918ec9fd2f83f86251226306",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/revolver/materials/revolver_default_normal_tga_c23bd52e.avif": "1cdfff5580ae02193ab036ece52250ca4ecbbe1e1556502b3d459b5defbf095c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/revolver/materials/revolver_default_rough_tga_d4c668b8.avif": "1d50afd63c057b019c76a621d05b22d15426d27f4e0025d9de165dacd1ee2ca9",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/sawedoff/materials/sawedoff_ao_tga_98a0522f.avif": "eb38aeebe1820fe0b0619047c4f8ae40dce548280b6a64ed919c7ec2372b6b92",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/sawedoff/materials/sawedoff_default_color_psd_9e64d53e.avif": "79247e06764e443642d74a01886ea6378d609b937de8af11f44ca11b87b1e1a1",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/sawedoff/materials/sawedoff_default_normal_tga_92f6e3bb.avif": "95304471150269acc7a9f9ca5f117693f63be2cec2b4e665f3af81effc6f828c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/sawedoff/materials/sawedoff_default_rough_psd_bd2a9747.avif": "34fae2213a9c89e984a458ecd5a9d79e5063a80f1d2d024c6ba6c5bccc7b0c4b",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/scar20/materials/scar20_default_ao_tga_ae60e13b.avif": "8f3549c341bd45c952c356ad0c6eabc56d6d7142f6e3b7238d86e7a76cd84b4d",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/scar20/materials/scar20_default_color_psd_24a39c92.avif": "822d5069afaaf860e7975605622f14248d52e8d9ca8fff0f622d58f8ccec455c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/scar20/materials/scar20_default_normal_tga_cbf11dcc.avif": "66519640b0ade5e24a9238e4c0f1f40e6d617bd5cb8bd0441a328321bfa1837a",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/scar20/materials/scar20_default_rough_psd_a3c74000.avif": "cf202c0328641ed5890007c6b73f3716416675ad2a71f0fe8afcc3eca37c29af",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/sg556/materials/sg556_ao_tga_48b8d899.avif": "19bbb210f34e4675ff2d8eaa0416e7c5f220bfefaf8529c14b45b2ddd970c2be",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/sg556/materials/sg556_default_color_psd_296d1bd7.avif": "cbd7130baa7e2293afc3fcbbabd6aa1c93009b7f4fa8deacf58495b8ff8422a4",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/sg556/materials/sg556_default_normal_tga_d6ad5c53.avif": "2d124f9abbd886a79259d90b6365a58fbcff2277d12afab9e8c73e652b014bcb",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/sg556/materials/sg556_default_rough_psd_ee6613f7.avif": "55367b936684578b0cf1eca3ca187873006956341e2b26deb9274d06e048b622",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/shared/materials/scope/shared_scope_lens_mask_psd_93b45a68.avif": "996acbbf1b1975d8e07dd0d4db2968c160d688af03bbd67e8f728f07b8ca2bd5",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/shared/materials/scope/shared_scope_lens_mask_psd_b968845b.avif": "12a86170d01206b5dbaef4988ffa9103533e4544f1289fe140ab593a9e049387",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/shared/materials/scope/shared_scope_lens_vmat_g_tmetalness_20bf6136.avif": "e608aa480bd1e00589c3189137a2e54f61b181b395943a76aea0088ec35fed9a",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/shared/materials/scope/shared_scope_lens_vmat_g_tnormal_f8264e14.avif": "740fed060b05f6026157d0d9c9b2a68492f07a2a6305dd382ae822326d66de57",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/shared/materials/sticker_gaps/sticker_gaps_vmat_g_tcolor_44181499.avif": "429833b83c0188a6ffd9bc593db78c34d22207c7ec5306ed15e0d39dc9e9eb7a",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/shared/shells/shotgun/nova_bullet_color_psd_987eaec3.avif": "599b2d572733146e898d95f5c9a6075906964ad191997fe777c9eb414f3aa91d",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/shared/shells/shotgun/xm1014_bullet_normal_tga_7889dcd2.avif": "71f6cbda300efeef25ee13aa87311e31458fbed567571e495b748eab0eff900e",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ssg08/materials/ssg08_default_ao_tga_4dd4c5c.avif": "0690fa134df8b645e168c6f3dc31dcc1d8125bd860fc0a25961490cb2bd28b73",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ssg08/materials/ssg08_default_color_psd_2d736a5f.avif": "d7155562f5edacdc25339968f89f2f722cde278cca0cd422634fcee0dc636a2f",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ssg08/materials/ssg08_default_normal_tga_239d8f4e.avif": "926a036381a424b8fcc14792e7389776ea53a9ddd6e8227c5a11f41d174e2325",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ssg08/materials/ssg08_default_rough_psd_b6130e00.avif": "f47b5f62ca24f7b289c229c4df45726b07b29c28b58f4e6456cebb9f4cd8f805",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/tec9/materials/tec9_default_ao_tga_42bd270b.avif": "9622edb506a728e5b3ce848739dc6c74ecdeca7591a9ef2bace5e42a24af30d5",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/tec9/materials/tec9_default_color_psd_3d06c5df.avif": "31e29a65fb28171573e8c3743a021083c0ce4bea0b9908bd9a3aa964fef79373",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/tec9/materials/tec9_default_normal_tga_28a2b684.avif": "5baf1df58fccbb788039569844c47104020aefea56b6ed6e598b01e8b8cd7dfa",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/tec9/materials/tec9_default_rough_psd_f4601ada.avif": "f6a2e75127fb483ec331ada98d5293d0ebd0e3e188a84c960792dc51cdd920cc",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ump45/materials/ump45_default_ao_tga_dffa903b.avif": "887e9885bf5ff97b7d9b8dafa6a83eaadfbfbe0792cb776249481ef7c30f43c8",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ump45/materials/ump45_default_color_psd_ab81330e.avif": "e8dcdc05bf9121eb2b1414af87d0983df904585452ec5aff04e1b0f946f60a6c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ump45/materials/ump45_default_normal_tga_4b7ce1d2.avif": "d5e7eff2366d8bd11158ef84ab0b5a1d9c61852c93f60f463e5d4f403cadd364",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/ump45/materials/ump45_default_rough_psd_f42749d3.avif": "32bf5ec9d789d1aaa60472d7cb42fb11f709f4ed0023a185538f2691c85aee27",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/usp_silencer/materials/usp_silencer_default_ao_tga_dcc4bd00.avif": "bc77e999cc395f367010e94b8290dadd14c98d2f812b57c1eb3404cd3c39ddbb",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/usp_silencer/materials/usp_silencer_default_color_psd_eff328d8.avif": "fa13da05ce8ab5b2a4f9ca4575f723e2d0d2a0b71dca666d3f6384c29129c0b7",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/usp_silencer/materials/usp_silencer_default_normal_tga_61d8e869.avif": "f69152b77d4901806a1a4b2b8d5c333323be6990322a0c1f8f0b61fc6b72130c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/usp_silencer/materials/usp_silencer_default_rough_psd_5a307155.avif": "4f61dc528acd05f293f1657a40fb6b98f70a4b67859e732e916a2eab7208d6cd",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/xm1014/materials/xm1014_default_ao_tga_35f22dd8.avif": "2ea8f34a9d14388eb97f6f5c2b0ed4b34fa57951dca056e9142679cf5841bbf2",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/xm1014/materials/xm1014_default_color_psd_9f802d5c.avif": "1deeb089aca77cf7741c5375426022e1403e23327ee53add627590bcb80803c4",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/xm1014/materials/xm1014_default_normal_tga_7a777fd0.avif": "ca7631cf561a9fd7356b26369185a25cebe4739e958e321baeeff66dc381fa4c",
+    "https://cs2.cs2inspects.com/data/high2/weapons/models/xm1014/materials/xm1014_default_rough_psd_1b824282.avif": "f3d07d7d022cf2150effe8e1fb98dde39762fe9ee8e6fc841176e61d5779ceb7"
+  }
+}

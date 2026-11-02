@@ -207,3 +207,21 @@ test("a captured HD weapon survives a loadout change while its body is still loa
   expect(skins.skinChoices[0].id).toBe("");
   expect(instance.skin).toEqual(choice);
 });
+
+test("native firearms restore the finished HD default after clearing a paint", async () => {
+  const skins = await import("./skins");
+  const root = new T.Group(),
+    legacy = body("skin-legacy"),
+    hd = body("skin-hd");
+  const native = hd.material.map;
+  root.add(legacy.root, hd.root);
+  skins.registerSkinModel(root, 0, undefined, true);
+  expect(hd.root.visible).toBe(true);
+  expect(legacy.root.visible).toBe(false);
+  await skins.setSkin(0, choice);
+  expect(hd.material.map).not.toBe(native);
+  await skins.setSkin(0, { ...choice, id: "" });
+  expect(hd.material.map).toBe(native);
+  expect(hd.root.visible).toBe(true);
+  expect(legacy.root.visible).toBe(false);
+});

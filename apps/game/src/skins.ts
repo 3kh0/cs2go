@@ -79,16 +79,19 @@ type Model = {
   index: number;
   original: Map<T.MeshStandardMaterial, Maps>;
   loadHD?: () => Promise<T.Group>;
+  loadLegacy?: () => Promise<T.Group>;
+  loadingLegacy?: Promise<void>;
   loadingHD?: Promise<void>;
   instance?: WeaponInstance | null;
   finish?: Finish;
   bindingVersion: number;
+  defaultHD: boolean;
   pendingKey?: string;
   retryAt?: number;
 };
 const models: Model[] = [];
 type Finish = {
-  body: string;
+  body: Skin["body"];
   key: string;
   disposed?: boolean;
   materials: Map<string, Maps>;
@@ -127,18 +130,24 @@ function materialName(path: string) {
 function apply(model: Model, finish?: Finish) {
   const hd = model.root.getObjectByName("skin-hd");
   const legacy = model.root.getObjectByName("skin-legacy");
-  if (finish?.body === "hd" && !hd && model.loadHD) {
-    void ensureHD(model)
+  const missingBody = finish?.body === "legacy" ? "legacy" : "hd";
+  if (
+    finish &&
+    !(missingBody === "hd" ? hd : legacy) &&
+    (missingBody === "hd" ? model.loadHD : model.loadLegacy)
+  ) {
+    void ensureBody(model, missingBody)
       .then(() => {
         if (models.includes(model)) apply(model, modelFinish(model));
       })
       .catch(() => {
-        /* Keep the legacy fallback visible; selecting again retries the load. */
+        /* Keep the native fallback visible; selecting again retries the load. */
       });
     finish = undefined;
   }
-  if (hd) hd.visible = finish?.body === "hd";
-  if (legacy) legacy.visible = finish?.body !== "hd";
+  const useHD = finish ? finish.body === "hd" : model.defaultHD;
+  if (hd) hd.visible = useHD;
+  if (legacy) legacy.visible = !useHD || !hd;
   for (const [material, original] of model.original) {
     const painted = finish?.materials.get(material.name);
     let maps = original;
@@ -190,10 +199,11 @@ function rememberMaterials(root: T.Group, original: Model["original"]) {
           });
   });
 }
-function ensureHD(model: Model): Promise<void> {
-  if (model.root.getObjectByName("skin-hd") || !model.loadHD) return Promise.resolve();
-  model.loadingHD ??= model
-    .loadHD()
+function ensureBody(model: Model, variant: "hd" | "legacy" = "hd"): Promise<void> {
+  const loader = variant === "hd" ? model.loadHD : model.loadLegacy;
+  const loading = variant === "hd" ? "loadingHD" : "loadingLegacy";
+  if (model.root.getObjectByName(`skin-${variant}`) || !loader) return Promise.resolve();
+  model[loading] ??= loader()
     .then((body) => {
       if (!models.includes(model)) {
         // Factories return owned geometry/material/skeleton clones. Their
@@ -212,20 +222,26 @@ function ensureHD(model: Model): Promise<void> {
         skeletons.forEach((skeleton) => skeleton.dispose());
         return;
       }
-      body.name = "skin-hd";
+      body.name = `skin-${variant}`;
       body.visible = false;
       model.root.add(body);
       rememberMaterials(body, model.original);
     })
     .finally(() => {
-      model.loadingHD = undefined;
+      model[loading] = undefined;
     });
-  return model.loadingHD;
+  return model[loading];
 }
-export function registerSkinModel(root: T.Group, index: number, loadHD?: () => Promise<T.Group>) {
+export function registerSkinModel(
+  root: T.Group,
+  index: number,
+  loadHD?: () => Promise<T.Group>,
+  defaultHD = false,
+  loadLegacy?: () => Promise<T.Group>,
+) {
   const original = new Map<T.MeshStandardMaterial, Maps>();
   rememberMaterials(root, original);
-  const model: Model = { root, index, original, loadHD, bindingVersion: 0 };
+  const model: Model = { root, index, original, loadHD, loadLegacy, defaultHD, bindingVersion: 0 };
   models.push(model);
   apply(model, modelFinish(model));
   if (skinChoices[index].id && !finishes.has(index) && !pending.has(index))
@@ -468,10 +484,10 @@ export async function setSkin(index: number, raw: SkinChoice) {
     current.seed === choice.seed &&
     current.wear === choice.wear
   ) {
-    if (finishes.get(index)?.body === "hd")
+    if (finishes.has(index))
       for (const model of models)
         if (model.index === index && model.instance === undefined) {
-          await ensureHD(model);
+          await ensureBody(model, finishes.get(index)!.body);
           if (models.includes(model)) apply(model, modelFinish(model));
         }
     return;
@@ -483,10 +499,12 @@ export async function setSkin(index: number, raw: SkinChoice) {
       const skin = (await skinCatalog()).find((s) => s.id === choice.id && s.weapon === index);
       if (!skin) throw new Error("This skin does not belong to this weapon");
       if (versions[index] !== version) return;
-      if (skin.body === "hd") {
+      {
         try {
           await Promise.all(
-            models.filter((m) => m.index === index && m.instance === undefined).map(ensureHD),
+            models
+              .filter((m) => m.index === index && m.instance === undefined)
+              .map((model) => ensureBody(model, skin.body)),
           );
         } catch (error) {
           if (versions[index] !== version) return;

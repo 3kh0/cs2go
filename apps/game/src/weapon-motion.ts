@@ -81,24 +81,24 @@ type Template = {
   suppressor?: Record<string, { commit: number; show: number; hide: number }>;
 };
 const templates: Template[] = [];
-const hdBodies = new Map<number, Promise<T.Group>>();
+const legacyBodies = new Map<number, Promise<T.Group>>();
 let reflections: T.Texture | undefined;
-function loadHdBody(index: number) {
-  let pending = hdBodies.get(index);
+function loadLegacyBody(index: number) {
+  let pending = legacyBodies.get(index);
   if (!pending) {
-    pending = loadModel(`/models/viewmodels/${weapons[index]}-hd.glb`)
+    pending = loadModel(`/models/viewmodels/${weapons[index]}.glb`)
       .then(({ scene }) => {
-        scene.name = "skin-hd";
+        scene.name = "skin-legacy";
         scene.visible = false;
         if (reflections) applyReflections(scene, reflections);
         templates[index].model.add(scene);
         return scene;
       })
       .catch((error: unknown) => {
-        hdBodies.delete(index);
+        legacyBodies.delete(index);
         throw error;
       });
-    hdBodies.set(index, pending);
+    legacyBodies.set(index, pending);
   }
   return pending;
 }
@@ -112,11 +112,11 @@ export async function loadNativeWeapons() {
       if (index === 17) weaponMotions.push("prepare");
       if (index === 1 || index === 2) weaponMotions.push("silencer_attach", "silencer_detach");
       const [model, ...animations] = await Promise.all([
-        loadModel(`/models/viewmodels/${name}.glb`),
+        loadModel(`/models/viewmodels/${name}-hd.glb`),
         ...weaponMotions.map((m) => loadModel(`/models/viewmodels/${name}/${m}.glb`)),
       ]);
       const variants = new T.Group();
-      model.scene.name = "skin-legacy";
+      model.scene.name = "skin-hd";
       variants.add(model.scene);
       const reloadData = animations[2].parser.json as {
         animations: { extras?: { events?: ClipEvent[] } }[];
@@ -343,7 +343,7 @@ export function createNativeWeapon(
       body ??
         (register || skinBodies
           ? template.model
-          : (template.model.getObjectByName("skin-legacy") as T.Group)),
+          : (template.model.getObjectByName("skin-hd") as T.Group)),
     ),
     source = template.source.clone(true);
   arms.name = "agent-view-arms";
@@ -403,12 +403,12 @@ export function createNativeWeapon(
     blend,
   });
   if (register)
-    registerSkinModel(model, index, async () => {
-      const hd = prepare(await loadHdBody(index));
-      const bindings = bind(hd, () => true);
+    registerSkinModel(model, index, undefined, true, async () => {
+      const legacy = prepare(await loadLegacyBody(index));
+      const bindings = bind(legacy, () => true);
       const rig = rigs.get(group)!;
       rig.weaponBindings.push(...bindings);
-      model.add(hd);
+      model.add(legacy);
       group.updateWorldMatrix(true, true);
       // Match animateNativeWeapon's attachment-space binding immediately: a
       // finish can become visible before the next animation sample runs.
@@ -426,7 +426,7 @@ export function createNativeWeapon(
         target.updateWorldMatrix(false, false);
       }
       registerActorLighting(group);
-      return hd;
+      return legacy;
     });
   return true;
 }
@@ -584,9 +584,9 @@ export function createNativeWorldGun(
 ) {
   const result = bakeWorldGun(index, suppressed, buyPose, customizable);
   if (customizable)
-    registerSkinModel(result, index, async () => {
-      const hd = bakeWorldGun(index, suppressed, buyPose, false, await loadHdBody(index));
-      // Both bodies must use the original legacy normalization/grip, not each
+    registerSkinModel(result, index, undefined, true, async () => {
+      const hd = bakeWorldGun(index, suppressed, buyPose, false, await loadLegacyBody(index));
+      // Both bodies must use the finished default normalization/grip, not each
       // mesh's own bounds, or changing finish moves the showcase off its hand.
       const offset = new T.Vector3()
         .setFromMatrixPosition(new T.Matrix4().fromArray(result.userData.buyGrip))
@@ -594,7 +594,7 @@ export function createNativeWorldGun(
       hd.traverse((object) => {
         if (object instanceof T.Mesh) object.geometry.translate(offset.x, offset.y, offset.z);
       });
-      hd.name = "skin-hd";
+      hd.name = "skin-legacy";
       return hd;
     });
   return result;

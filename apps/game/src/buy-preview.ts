@@ -11,6 +11,7 @@ import { createGrenadeModel } from "./grenade-models";
 import { type GrenadeKind } from "./utility";
 import { movePreviewHands } from "./preview-arm";
 import { unregisterSkinModel, skinChoices, skinName, skinRarityColor } from "./skins";
+import { previewBounds, framePreview } from "./preview-framing";
 
 /** Uses the game's context and loaded templates; no extra model requests or render loop. */
 export class BuyPreview {
@@ -31,6 +32,9 @@ export class BuyPreview {
   private scissor = new T.Vector4();
   private size = new T.Vector2();
   private rect?: DOMRect;
+  private bounds = new T.Box3();
+  private boundsDirty = true;
+  private fittedAspect = 0;
   private open = false;
   private resizeObserver?: ResizeObserver;
   private menuObserver?: MutationObserver;
@@ -145,6 +149,7 @@ export class BuyPreview {
       kind ?? equipment ?? `${index}:${skinChoices[index].id}:${skinName(skinChoices[index].id)}`;
     if (identity !== this.current) {
       this.current = identity;
+      this.boundsDirty = true;
       this.item = undefined;
       for (const model of this.items.values()) model.visible = false;
       const token =
@@ -215,6 +220,14 @@ export class BuyPreview {
     }
     const rect = (this.rect ??= document.getElementById(this.stageId)!.getBoundingClientRect());
     if (rect.width < 1 || rect.height < 1) return;
+    const aspect = rect.width / rect.height;
+    if (this.boundsDirty || aspect !== this.fittedAspect) {
+      if (this.boundsDirty)
+        previewBounds(this.item ? [soldier.group, this.item] : [soldier.group], this.bounds);
+      framePreview(this.camera, this.bounds, aspect);
+      this.boundsDirty = false;
+      this.fittedAspect = aspect;
+    }
     // Renderer coordinates use its logical size, which may be capped for quality.
     renderer.getSize(this.size);
     const sx = this.size.x / window.innerWidth,
@@ -227,8 +240,6 @@ export class BuyPreview {
     renderer.setViewport(x, y, rect.width * sx, rect.height * sy);
     renderer.setScissor(x, y, rect.width * sx, rect.height * sy);
     renderer.setScissorTest(true);
-    this.camera.aspect = rect.width / rect.height;
-    this.camera.updateProjectionMatrix();
     renderer.getClearColor(this.clearColor);
     const clearAlpha = renderer.getClearAlpha();
     renderer.clearDepth();
