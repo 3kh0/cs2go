@@ -51,7 +51,7 @@ jobs:
             /packages/assets/manifest.json
             /packages/assets/sync.py
             /packages/assets/sync_test.py
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: python -m pip install boto3==1.40.61
