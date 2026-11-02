@@ -41,6 +41,18 @@ export class BuyPreview {
   private stageId: string;
   private menuId: string;
   private previewTeam?: AgentTeam;
+  private menu?: HTMLElement;
+  private stage?: HTMLElement;
+  private emphasis = 1;
+  private inspect = (event: Event) => {
+    if (this.previewTeam) return;
+    const card = (event.target as HTMLElement).closest<HTMLElement>(
+      ".buy-card, [data-loadout-slot]",
+    );
+    if (card && (!this.previewTeam || card.dataset.previewTeam === this.previewTeam)) {
+      this.hovered = card;
+    }
+  };
   constructor(stageId = "buy-preview-stage", menuId = "loadout", previewTeam?: AgentTeam) {
     this.stageId = stageId;
     this.menuId = menuId;
@@ -66,28 +78,42 @@ export class BuyPreview {
     this.scene.add(key, rim);
     this.camera.position.set(0, 1.05, 3.7);
     this.camera.lookAt(0, 0.96, 0);
+    this.refreshLayout();
+  }
+  refreshLayout() {
+    this.resizeObserver?.disconnect();
+    this.menuObserver?.disconnect();
+    this.menu?.removeEventListener("pointerover", this.inspect);
+    this.menu?.removeEventListener("focusin", this.inspect);
     const stage = document.getElementById(this.stageId)!;
-    this.resizeObserver = new ResizeObserver(() => {
+    if (this.stage)
+      for (const [key, value] of Object.entries(this.stage.dataset)) stage.dataset[key] = value;
+    this.stage = stage;
+    this.menu = document.getElementById(this.menuId)!;
+    this.rect = undefined;
+    this.resizeObserver ??= new ResizeObserver(() => {
       this.rect = undefined;
     });
     this.resizeObserver.observe(stage);
-    const menu = document.getElementById(this.menuId)!;
-    this.menuObserver = new MutationObserver(() => {
-      if (menu.classList.contains("hidden")) this.open = false;
+    this.menuObserver ??= new MutationObserver(() => {
+      if (this.menu?.classList.contains("hidden")) this.open = false;
     });
-    this.menuObserver.observe(menu, { attributes: true, attributeFilter: ["class"] });
-    const inspect = (event: Event) => {
-      const card = (event.target as HTMLElement).closest<HTMLElement>(
-        ".buy-card, [data-loadout-slot]",
-      );
-      if (card && (!this.previewTeam || card.dataset.previewTeam === this.previewTeam))
-        this.hovered = card;
-    };
-    // Delegation also previews unaffordable cards, without enabling purchases.
-    menu.addEventListener("pointerover", inspect);
-    menu.addEventListener("focusin", inspect);
+    this.menuObserver.observe(this.menu, { attributes: true, attributeFilter: ["class"] });
+    const weapon = this.hovered?.dataset.weapon;
+    this.hovered =
+      weapon === undefined
+        ? undefined
+        : (this.menu.querySelector<HTMLElement>(
+            `[data-preview-team="${this.previewTeam}"][data-weapon="${weapon}"]`,
+          ) ?? undefined);
+    this.menu.addEventListener("pointerover", this.inspect);
+    this.menu.addEventListener("focusin", this.inspect);
   }
   dispose() {
+    this.menu?.removeEventListener("pointerover", this.inspect);
+    this.menu?.removeEventListener("focusin", this.inspect);
+    this.menu = undefined;
+    this.stage = undefined;
     this.resizeObserver?.disconnect();
     this.menuObserver?.disconnect();
     if (this.soldier) disposeSoldier(this.soldier);
@@ -112,7 +138,12 @@ export class BuyPreview {
     });
     this.items.clear();
   }
-  render(renderer: T.WebGLRenderer, team: AgentTeam, selected: number) {
+  render(renderer: T.WebGLRenderer, team: AgentTeam, selected: number, emphasis = 1) {
+    if (emphasis !== this.emphasis) {
+      for (const light of this.scene.children)
+        if (light instanceof T.Light) light.intensity *= emphasis / this.emphasis;
+      this.emphasis = emphasis;
+    }
     const menu = document.getElementById(this.menuId)!;
     if (menu.classList.contains("hidden")) {
       this.open = false;

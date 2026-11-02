@@ -195,14 +195,14 @@ test("main menu Inventory replaces ordered buy slots for each side and persists 
   await expect(page.locator('[data-loadout-weapon="12"]')).toHaveCount(0);
   await page.locator('[data-inventory-team="ct"]').click();
   await page.screenshot({ path: "artifacts/inventory-buy-slots.png" });
-  await page.locator("#close-loadout-editor").click();
+  await page.evaluate(() => window.__game.groundInventory.closeLoadout());
   await page.reload();
   await page.locator("#inventory-button").click();
   await page.locator('[data-inventory-team="ct"]').click();
   await expect(page.locator('[data-category="Pistols"][data-inventory-slot="0"]')).toContainText(
     "R8 Revolver",
   );
-  await page.locator("#close-loadout-editor").click();
+  await page.evaluate(() => window.__game.groundInventory.closeLoadout());
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -220,7 +220,7 @@ test("main menu Inventory replaces ordered buy slots for each side and persists 
   await page.evaluate(() => window.__game.groundInventory.showLoadout());
   await page.locator('[data-category="Pistols"][data-inventory-slot="0"]').click();
   await page.locator('[data-loadout-weapon="8"]').click();
-  await page.locator("#close-loadout-editor").click();
+  await page.evaluate(() => window.__game.groundInventory.closeLoadout());
   await expect(page.locator('[data-weapon="17"]')).toBeVisible();
   await expect(page.locator('[data-weapon="8"]')).toBeHidden();
   await page.evaluate(() => {

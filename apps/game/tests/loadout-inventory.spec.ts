@@ -15,6 +15,20 @@ test("separate team loadouts filter, accept drops and persist spawned skins", as
   );
   await page.locator("#inventory-button").click();
   await expect(page.locator(".loadout-team")).toHaveCount(1);
+  await expect(page.locator("#loadout-category")).toHaveValue("All Items");
+  await expect(page.locator("#close-loadout-editor")).toHaveCount(0);
+  await page.locator('[data-filter-category="Pistols"][data-filter-slot="0"]').click();
+  await expect(page.locator("[data-loadout-weapon]")).toHaveCount(2);
+  await page.locator('[data-filter-category="Pistols"][data-filter-slot="0"]').click();
+  await expect(page.locator("#loadout-category")).toHaveValue("All Items");
+  await expect(page.locator('[data-loadout-weapon="3"]')).toBeAttached();
+  const inactive = await page.locator(".loadout-opponent").evaluate((panel) => ({
+    background: getComputedStyle(panel).backgroundColor,
+    overlay: getComputedStyle(panel, "::after").content,
+  }));
+  expect(inactive.background).toBe("rgba(0, 0, 0, 0)");
+  expect(inactive.overlay).toBe("none");
+  await page.screenshot({ path: "artifacts/loadout-default-all.png" });
   await expect(page.locator("#inventory-button")).toHaveAttribute("aria-current", "page");
   const header = await page.locator(".home-header").boundingBox();
   expect(header!.height).toBeCloseTo((64 * 1200) / 1080, 0);
@@ -22,7 +36,41 @@ test("separate team loadouts filter, accept drops and persist spawned skins", as
     .locator('.loadout-team [data-loadout-cosmetic="agents"]')
     .boundingBox();
   expect(cosmeticSlot!.width).toBeCloseTo((64 * 1200) / 1080, 0);
-  await page.locator('.loadout-opponent [data-inventory-team="t"]').click();
+  const fixedLayout = async () =>
+    page
+      .locator("#loadout-agent-ct, #loadout-agent-t, .loadout-slot-columns")
+      .evaluateAll((nodes) =>
+        nodes
+          .map((node) => {
+            const box = node.getBoundingClientRect();
+            return {
+              id: node.id || "grid",
+              x: box.x,
+              y: box.y,
+              width: box.width,
+              height: box.height,
+            };
+          })
+          .sort((a, b) => a.id.localeCompare(b.id)),
+      );
+  const beforeSwitch = await fixedLayout();
+  await expect(page.locator("#loadout-agent-ct")).toHaveAttribute("data-item", "9");
+  const showcase = await page.locator("#loadout-agent-ct").getAttribute("data-pose");
+  for (const id of [2, 3, 18]) {
+    await page.locator(`.loadout-slot[data-weapon="${id}"]`).hover();
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+        ),
+    );
+    await expect(page.locator("#loadout-agent-ct")).toHaveAttribute("data-item", "9");
+    await expect(page.locator("#loadout-agent-ct")).toHaveAttribute("data-pose", showcase!);
+    expect(await fixedLayout()).toEqual(beforeSwitch);
+  }
+
+  await page.locator(".loadout-opponent .loadout-agent").click();
+  expect(await fixedLayout()).toEqual(beforeSwitch);
   await expect(page.locator(".loadout-team")).toHaveAttribute("data-team", "t");
   await page.locator('[data-filter-category="Rifles"]').click();
   await expect(page.locator("#loadout-category")).toHaveValue("Rifles");
@@ -44,12 +92,12 @@ test("separate team loadouts filter, accept drops and persist spawned skins", as
     "data-weapon",
     "7",
   );
-  await page.locator('.loadout-opponent [data-inventory-team="ct"]').click();
+  await page.locator(".loadout-opponent").click({ position: { x: 12, y: 160 } });
   await expect(page.locator('[data-category="Rifles"][data-inventory-slot="0"]')).toHaveAttribute(
     "data-weapon",
     "1",
   );
-  await page.locator('.loadout-opponent [data-inventory-team="t"]').click();
+  await page.locator(".loadout-opponent .loadout-agent").click();
   await expect(page.locator("#loadout-agent-t")).toHaveAttribute("data-agent", /.+/);
   await expect(page.locator("#home-scenery-button")).toBeHidden();
   const bounds = await page.locator("#loadout-editor").boundingBox();
@@ -75,27 +123,31 @@ test("separate team loadouts filter, accept drops and persist spawned skins", as
   const compact = await page.locator("#loadout-editor").boundingBox();
   const compactRail = await page.locator(".home-social").boundingBox();
   expect(compact!.x + compact!.width).toBeLessThanOrEqual(compactRail!.x + 1);
-  await page.locator('[data-filter-category="Rifles"]').click();
+  await page.locator("#loadout-category").selectOption("Rifles");
   const wideCard = await page
     .locator('[data-category="Rifles"][data-inventory-slot="0"]')
     .boundingBox();
   expect(wideCard!.width).toBeCloseTo((160 * 900) / 1080, 0);
   await page.screenshot({ path: "artifacts/loadout-widescreen.png" });
   await page.setViewportSize({ width: 1600, height: 1200 });
-  await page.locator("#close-loadout-editor").click();
+  await page.locator("#home-button").click();
   await page.locator("#skins-button").click();
   await expect(page.locator("#skins-button")).toHaveAttribute("aria-current", "page");
   const animation = await page
     .locator("#skins-button")
-    .evaluate((button) => getComputedStyle(button, "::before").animationName);
+    .evaluate((button) => getComputedStyle(button.querySelector(".nav-cell")!).animationName);
   expect(animation).not.toBe("none");
-  const initialTransform = await page
+  const cells = await page
+    .locator("#skins-button .nav-cell")
+    .evaluateAll((nodes) => nodes.map((node) => getComputedStyle(node).animationDelay));
+  expect(new Set(cells).size).toBeGreaterThan(10);
+  const initialOpacity = await page
     .locator("#skins-button")
-    .evaluate((button) => getComputedStyle(button, "::before").transform);
+    .evaluate((button) => getComputedStyle(button.querySelector(".nav-cell")!).opacity);
   await page.waitForFunction(
     (initial) =>
-      getComputedStyle(document.getElementById("skins-button")!, "::before").transform !== initial,
-    initialTransform,
+      getComputedStyle(document.querySelector("#skins-button .nav-cell")!).opacity !== initial,
+    initialOpacity,
   );
   await page.screenshot({
     path: "artifacts/menu-header-motion.png",
@@ -105,7 +157,7 @@ test("separate team loadouts filter, accept drops and persist spawned skins", as
   expect(
     await page
       .locator("#skins-button")
-      .evaluate((button) => getComputedStyle(button, "::before").animationName),
+      .evaluate((button) => getComputedStyle(button.querySelector(".nav-cell")!).animationName),
   ).toBe("none");
   await page.emulateMedia({ reducedMotion: "no-preference" });
   const defaults = await page.locator("#skin-grid [data-skin]").count();

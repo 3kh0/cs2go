@@ -42,7 +42,6 @@ function lightingRoot(root: T.Object3D) {
   }
   return root;
 }
-/** Release dynamically replaced cosmetic materials without retaining dead shader state. */
 export function releaseActorLightingMaterials(root: T.Object3D, removed: T.Object3D) {
   const state = actors.get(lightingRoot(root));
   if (!state) return;

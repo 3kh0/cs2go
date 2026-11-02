@@ -5,8 +5,20 @@ export class MenuBackdrop {
   private target = new T.WebGLRenderTarget(320, 180, { depthBuffer: true });
   private scene = new T.Scene();
   private blurred = new T.WebGLRenderTarget(320, 180, { depthBuffer: false });
-  private display = new T.MeshBasicMaterial({
-    map: this.blurred.texture,
+  private display = new T.ShaderMaterial({
+    uniforms: {
+      image: { value: this.blurred.texture },
+      panel: { value: new T.Vector4() },
+      tint: { value: new T.Color() },
+    },
+    vertexShader: "varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}",
+    fragmentShader: `uniform sampler2D image; uniform vec4 panel; uniform vec3 tint; varying vec2 vUv;
+      void main(){
+        vec3 color = texture2D(image, vUv).rgb;
+        if(vUv.x >= panel.x && vUv.x <= panel.z && vUv.y >= panel.y && vUv.y <= panel.w) color = mix(color, tint, .42);
+        gl_FragColor = vec4(color, 1.);
+        #include <colorspace_fragment>
+      }`,
     depthTest: false,
     depthWrite: false,
     toneMapped: false,
@@ -32,7 +44,7 @@ export class MenuBackdrop {
   constructor() {
     this.scene.add(this.quad);
   }
-  render(renderer: T.WebGLRenderer, capture: () => void) {
+  render(renderer: T.WebGLRenderer, capture: () => void, team: "ct" | "t", panel?: DOMRect) {
     if (!this.captured) {
       const previous = renderer.getRenderTarget();
       try {
@@ -47,6 +59,14 @@ export class MenuBackdrop {
         renderer.setRenderTarget(previous);
       }
     }
+    if (panel)
+      this.display.uniforms.panel.value.set(
+        panel.left / innerWidth,
+        1 - panel.bottom / innerHeight,
+        panel.right / innerWidth,
+        1 - panel.top / innerHeight,
+      );
+    this.display.uniforms.tint.value.set(team === "ct" ? 0x285c8c : 0x847031);
     renderer.clear();
     renderer.render(this.scene, this.camera);
   }

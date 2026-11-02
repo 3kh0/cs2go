@@ -69,7 +69,7 @@ test("loadout is a full page with separate team previews, starting pistol choice
   page.on("pageerror", (e) => errors.push(e.message));
   await ready(page);
   await page.locator("#inventory-button").click();
-  await expect(page.locator(".loadout-slot")).toHaveCount(30);
+  await expect(page.locator(".loadout-slot")).toHaveCount(15);
   await page
     .locator('[data-preview-team="ct"][data-category="Pistols"][data-inventory-slot="0"]')
     .click();
@@ -82,7 +82,7 @@ test("loadout is a full page with separate team previews, starting pistol choice
   await page.screenshot({ path: "artifacts/cs2-loadout-page.png" });
   const saved = await page.evaluate(() => window.__game.groundInventory.loadouts.ct);
   expect(saved.filter((id) => id === 2 || id === 12)).toEqual([12]);
-  await page.locator("#close-loadout-editor").click();
+  await page.locator("#home-button").click();
   await page.evaluate(() => {
     window.__game.team = "ct";
     window.__game.start("competitive");

@@ -65,7 +65,6 @@ export function steamInventoryPage(data) {
   };
 }
 
-/** Refuse partial snapshots, including a file saved before the final page. */
 export function importSteamInventory(pages, syncedAt = Date.now()) {
   if (!Array.isArray(pages) || !pages.length || pages.length > 50)
     throw new Error("Select every inventory page (up to 50 JSON files).");

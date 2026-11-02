@@ -5,7 +5,7 @@ import { weapons, isKnife, weaponSlot } from "./physics";
 import { createWeaponInstance, type WeaponInstance } from "./weapon-instance";
 import { disposeWorldGun, createWorldGun } from "./weapons";
 import { setSoldierWeapon } from "./soldier";
-import { addMoney, weaponPrice } from "./economy";
+import { addMoney, weaponPrice, weaponAvailable } from "./economy";
 import { defaultLoadouts, loadoutCategory, readLoadouts, loadoutChoices } from "./loadouts";
 import { BuyPreview } from "./buy-preview";
 import { assetUrl } from "./asset-url";
@@ -71,8 +71,10 @@ export class GameInventory {
   private editorTeam: "t" | "ct" = "ct";
   private editorCategory = "Pistols";
   private editorSlot = 0;
+  private editorFilter = "All Items";
   private previews: BuyPreview[] = [];
   private backdrop?: MenuBackdrop;
+  private panelRect?: DOMRect;
   private gloveCatalog: GloveDefinition[] = [];
   private agentCatalog: AgentDefinition[] = [];
   private skinCatalog: Skin[] = [];
@@ -89,28 +91,46 @@ export class GameInventory {
     } catch {
       /* Defaults when storage is unavailable. */
     }
+    window.addEventListener("resize", () => {
+      this.panelRect = document
+        .querySelector<HTMLElement>("#loadout-editor .loadout-team")
+        ?.getBoundingClientRect();
+    });
     document.addEventListener("click", (event) => {
       const target = (event.target as HTMLElement).closest<HTMLElement>(
-        "[data-refund], #inventory-button, [data-inventory-team], [data-inventory-slot], [data-loadout-weapon], #close-loadout-editor, [data-grenade]",
+        "[data-refund], #inventory-button, [data-inventory-team], .loadout-opponent, [data-inventory-slot], [data-loadout-weapon], [data-grenade]",
       );
       if (!target) return;
       if (target.dataset.grenade)
         game.utility.buy(target.dataset.grenade as import("./utility").GrenadeKind);
       else if (target.id === "inventory-button") {
         this.editorTeam = game.team;
+        this.editorFilter = "All Items";
         this.showLoadout();
-      } else if (target.dataset.inventoryTeam) {
-        this.editorTeam = target.dataset.inventoryTeam as "t" | "ct";
+      } else if (target.dataset.inventoryTeam || target.classList.contains("loadout-opponent")) {
+        const team = (target.dataset.inventoryTeam ?? target.dataset.team) as "t" | "ct";
+        if (team === this.editorTeam) return;
+        this.editorTeam = team;
         this.showLoadout();
       } else if (target.dataset.inventorySlot !== undefined) {
         this.editorTeam = target.dataset.previewTeam as "t" | "ct";
         this.editorCategory = target.dataset.category!;
         this.editorSlot = Number(target.dataset.inventorySlot);
+        this.editorFilter = this.editorCategory;
         this.showLoadout();
-      } else if (target.id === "close-loadout-editor") this.closeLoadout();
-      else if (target.dataset.refund !== undefined) this.refund(Number(target.dataset.refund));
+      } else if (target.dataset.refund !== undefined) this.refund(Number(target.dataset.refund));
       else if (target.dataset.loadoutWeapon !== undefined) {
         const id = Number(target.dataset.loadoutWeapon);
+        if (
+          this.editorFilter === "All Items" &&
+          !loadoutChoices(this.editorTeam, this.editorCategory, this.editorSlot).includes(id)
+        ) {
+          this.editorCategory = loadoutCategory(id);
+          this.editorSlot =
+            [0, 1].find((slot) =>
+              loadoutChoices(this.editorTeam, this.editorCategory, slot).includes(id),
+            ) ?? 0;
+        }
         const list = this.loadouts[this.editorTeam];
         if (!loadoutChoices(this.editorTeam, this.editorCategory, this.editorSlot).includes(id))
           return;
@@ -146,6 +166,7 @@ export class GameInventory {
     this.previews = [];
     this.backdrop?.dispose();
     this.backdrop = undefined;
+    this.panelRect = undefined;
     document.getElementById("loadout-editor")?.remove();
   }
   renderPreviews(renderer: T.WebGLRenderer) {
@@ -155,21 +176,26 @@ export class GameInventory {
     }
     const clear = renderer.getClearColor(new T.Color()),
       alpha = renderer.getClearAlpha();
-    (this.backdrop ??= new MenuBackdrop()).render(renderer, () =>
-      this.game.homeScene.render(renderer, this.editorTeam, 0, false),
-    );
-    for (const [i, team] of [
+    (this.backdrop ??= new MenuBackdrop()).render(
+      renderer,
+      () => this.game.homeScene.render(renderer, this.editorTeam, 0, false),
       this.editorTeam,
-      this.editorTeam === "ct" ? ("t" as const) : ("ct" as const),
-    ].entries())
-      this.previews[i]?.render(renderer, team, team === "ct" ? 9 : 0);
+      this.panelRect,
+    );
+    for (const [i, team] of (["ct", "t"] as const).entries())
+      this.previews[i]?.render(
+        renderer,
+        team,
+        team === "ct" ? 9 : 0,
+        this.editorTeam === team ? 1 : 0.55,
+      );
     renderer.setClearColor(clear, alpha);
   }
   showLoadout() {
     if (!this.game.assetsReady) {
       return;
     }
-    this.closeLoadout();
+    document.getElementById("loadout-editor")?.remove();
     document.getElementById("home-scenery")!.hidden = true;
     const overlay = document.createElement("section");
     overlay.id = "loadout-editor";
@@ -190,52 +216,53 @@ export class GameInventory {
         <button data-loadout-cosmetic="knives" data-cosmetic-team="${team}" title="Knife" aria-label="Choose ${team.toUpperCase()} knife"><img src="${assetUrl(finish?.image ?? `/skins/defaults/${knife}.webp`)}" alt="${weapons[knife].name}"></button>
       </aside>`;
     };
-    const cosmeticCategory = ["Agents", "Gloves", "Knives"].includes(this.editorCategory);
-    const candidateItems =
-      this.editorCategory === "Agents"
-        ? this.agentCatalog
-            .filter((agent) => agent.team === this.editorTeam)
-            .map((agent) => ({
-              id: agent.id,
-              name: agent.name,
-              image: agent.image ?? "",
-              active: selectedAgentId(this.editorTeam) === agent.id,
-            }))
-        : this.editorCategory === "Gloves"
+    const cosmeticCategory = ["Agents", "Gloves", "Knives"].includes(this.editorFilter);
+    const candidateItems = [
+      ...this.agentCatalog
+        .filter((agent) => agent.team === this.editorTeam)
+        .map((agent) => ({
+          category: "Agents",
+          id: agent.id,
+          name: agent.name,
+          image: agent.image ?? "",
+          active: selectedAgentId(this.editorTeam) === agent.id,
+        })),
+      {
+        category: "Gloves",
+        id: "",
+        name: "Default gloves",
+        image: "",
+        active: !gloveChoices[this.editorTeam].id,
+      },
+      ...this.gloveCatalog.map((glove) => ({
+        ...glove,
+        category: "Gloves",
+        active: gloveChoices[this.editorTeam].id === glove.id,
+      })),
+      ...weapons.flatMap((weapon, id) =>
+        isKnife(id)
           ? [
               {
-                id: "",
-                name: "Default gloves",
-                image: "",
-                active: !gloveChoices[this.editorTeam].id,
+                category: "Knives",
+                id: String(id),
+                name: weapon.name,
+                image:
+                  this.skinCatalog.find(
+                    (skin) => skin.weapon === id && skin.id === skinChoices[id].id,
+                  )?.image ?? `/skins/defaults/${id}.webp`,
+                active: this.game.knife === id,
               },
-              ...this.gloveCatalog.map((glove) => ({
-                ...glove,
-                active: gloveChoices[this.editorTeam].id === glove.id,
-              })),
             ]
-          : weapons.flatMap((weapon, id) =>
-              isKnife(id)
-                ? [
-                    {
-                      id: String(id),
-                      name: weapon.name,
-                      image:
-                        this.skinCatalog.find(
-                          (skin) => skin.weapon === id && skin.id === skinChoices[id].id,
-                        )?.image ?? `/skins/defaults/${id}.webp`,
-                      active: this.game.knife === id,
-                    },
-                  ]
-                : [],
-            );
+          : [],
+      ),
+    ].filter((item) => this.editorFilter === "All Items" || item.category === this.editorFilter);
     const cosmeticCandidates = candidateItems
       .map(
         (item) =>
-          `<button draggable="true" data-cosmetic-choice="${item.id}" aria-pressed="${item.active}">${item.image ? `<img src="${assetUrl(item.image)}" alt="">` : '<span class="default-item-image">DEFAULT</span>'}<b></b></button>`,
+          `<button draggable="true" data-cosmetic-choice="${item.id}" data-choice-category="${item.category}" aria-pressed="${item.active}">${item.image ? `<img loading="lazy" src="${assetUrl(item.image)}" alt="">` : '<span class="default-item-image">DEFAULT</span>'}<b></b></button>`,
       )
       .join("");
-    overlay.innerHTML = `<header class="loadout-page-heading"><span>LOADOUT</span><nav aria-label="Loadout team">${(["ct", "t"] as const).map((team) => `<button data-inventory-team="${team}" aria-pressed="${this.editorTeam === team}">${team === "ct" ? "COUNTER-TERRORISTS" : "TERRORISTS"}</button>`).join("")}</nav><small>Changes apply next round</small><button id="close-loadout-editor" aria-label="Close loadout">×</button></header><div class="loadout-teams">${[
+    overlay.innerHTML = `<header class="loadout-page-heading"><span>LOADOUT</span><nav aria-label="Loadout team">${(["ct", "t"] as const).map((team) => `<button data-inventory-team="${team}" aria-pressed="${this.editorTeam === team}">${team === "ct" ? "COUNTER-TERRORISTS" : "TERRORISTS"}</button>`).join("")}</nav><small>Changes apply next round</small></header><div class="loadout-teams">${[
       this.editorTeam,
     ]
       .map(
@@ -247,7 +274,7 @@ export class GameInventory {
           ]
             .map((category) => {
               const choices = this.loadouts[team].filter((id) => loadoutCategory(id) === category);
-              return `<section><h3><button data-filter-category="${category}" aria-pressed="${this.editorCategory === category}">${category === "Pistols" ? "STARTING PISTOL" : category.toUpperCase()}</button></h3>${Array.from(
+              return `<section><h3><button data-filter-category="${category}" data-filter-slot="0" aria-pressed="${this.editorFilter === category && (category !== "Pistols" || this.editorSlot === 0)}">${category === "Pistols" ? "STARTING PISTOL" : category.toUpperCase()}</button></h3>${Array.from(
                 { length: 5 },
                 (_, slot) => {
                   const id = choices[slot];
@@ -257,7 +284,7 @@ export class GameInventory {
                       : this.skinCatalog.find(
                           (s) => s.weapon === id && s.id === skinChoices[id].id,
                         );
-                  return `${category === "Pistols" && slot === 1 ? '<h3 class="loadout-other-pistols"><button data-filter-category="Pistols">OTHER PISTOLS</button></h3>' : ""}<button class="loadout-slot" data-loadout-slot data-inventory-slot="${slot}" data-preview-team="${team}" data-category="${category}" ${id === undefined ? "" : `data-weapon="${id}"`} aria-pressed="${this.editorTeam === team && this.editorCategory === category && this.editorSlot === slot}">${id === undefined ? "<span>Empty slot</span>" : `<img src="${assetUrl(skin?.image ?? `/skins/defaults/${id}.webp`)}" alt=""><small>$${weaponPrice(id).toLocaleString()}</small><b>${weapons[id].name}</b>`}</button>`;
+                  return `${category === "Pistols" && slot === 1 ? `<h3 class="loadout-other-pistols"><button data-filter-category="Pistols" data-filter-slot="1" aria-pressed="${this.editorFilter === "Pistols" && this.editorSlot > 0}">OTHER PISTOLS</button></h3>` : ""}<button class="loadout-slot" data-loadout-slot data-inventory-slot="${slot}" data-preview-team="${team}" data-category="${category}" ${id === undefined ? "" : `data-weapon="${id}"`} aria-pressed="${this.editorFilter !== "All Items" && this.editorTeam === team && this.editorCategory === category && this.editorSlot === slot}">${id === undefined ? "<span>Empty slot</span>" : `<img src="${assetUrl(skin?.image ?? `/skins/defaults/${id}.webp`)}" alt=""><small>$${weaponPrice(id).toLocaleString()}</small><b>${weapons[id].name}</b>`}</button>`;
                 },
               ).join("")}</section>`;
             })
@@ -265,27 +292,39 @@ export class GameInventory {
       )
       .join(
         "",
-      )}<section class="loadout-opponent" data-team="${otherTeam}"><button class="loadout-team-title" data-inventory-team="${otherTeam}">EQUIP ${otherTeam.toUpperCase()}</button><div class="loadout-agent" id="loadout-agent-${otherTeam}"></div>${cosmetics(otherTeam)}</section></div><footer class="loadout-candidates"><div class="loadout-filter"><label>Category <select id="loadout-category">${["Pistols", "Mid-Tier", "Rifles", "Agents", "Gloves", "Knives"].map((c) => `<option ${c === this.editorCategory ? "selected" : ""}>${c}</option>`).join("")}</select></label><span>${this.editorTeam.toUpperCase()} - ${this.editorCategory === "Pistols" && this.editorSlot === 0 ? "Starting pistol" : `Slot ${this.editorSlot + 1}`} - Click or drag an item to equip</span></div><div class="inventory-choices">${
+      )}<section class="loadout-opponent" data-team="${otherTeam}"><button class="loadout-team-title" data-inventory-team="${otherTeam}">EQUIP ${otherTeam.toUpperCase()}</button><div class="loadout-agent" id="loadout-agent-${otherTeam}"></div>${cosmetics(otherTeam)}</section></div><footer class="loadout-candidates"><div class="loadout-filter"><label>Category <select id="loadout-category">${["All Items", "Pistols", "Mid-Tier", "Rifles", "Agents", "Gloves", "Knives"].map((c) => `<option ${c === this.editorFilter ? "selected" : ""}>${c}</option>`).join("")}</select></label><span>${this.editorFilter === "All Items" ? "All equipment" : this.editorTeam.toUpperCase()} - ${this.editorFilter === "All Items" ? "Choose an item" : this.editorCategory === "Pistols" && this.editorSlot === 0 ? "Starting pistol" : `Slot ${this.editorSlot + 1}`} - Click or drag an item to equip</span></div><div class="inventory-choices">${
       cosmeticCategory
         ? cosmeticCandidates
-        : loadoutChoices(this.editorTeam, this.editorCategory, this.editorSlot)
+        : (this.editorFilter === "All Items"
+            ? weapons.flatMap((_, id) =>
+                !isKnife(id) && weaponAvailable(id, this.editorTeam) ? [id] : [],
+              )
+            : loadoutChoices(this.editorTeam, this.editorCategory, this.editorSlot)
+          )
             .map((id) => {
               const skin = this.skinCatalog.find(
                 (s) => s.weapon === id && s.id === skinChoices[id].id,
               );
-              return `<button draggable="true" data-loadout-weapon="${id}" aria-pressed="${this.loadouts[this.editorTeam].filter((other) => loadoutCategory(other) === this.editorCategory)[this.editorSlot] === id}"><img src="${assetUrl(skin?.image ?? `/skins/defaults/${id}.webp`)}" alt=""><b>${weapons[id].name}</b><small>$${weaponPrice(id).toLocaleString()}</small></button>`;
+              return `<button draggable="true" data-loadout-weapon="${id}" aria-pressed="${this.loadouts[this.editorTeam].filter((other) => loadoutCategory(other) === this.editorCategory)[this.editorSlot] === id}"><img loading="lazy" src="${assetUrl(skin?.image ?? `/skins/defaults/${id}.webp`)}" alt=""><b>${weapons[id].name}</b><small>$${weaponPrice(id).toLocaleString()}</small></button>`;
             })
             .join("")
     }</div></footer>`;
+    if (this.editorFilter === "All Items")
+      overlay
+        .querySelector(".inventory-choices")!
+        .insertAdjacentHTML("beforeend", cosmeticCandidates);
     document.body.append(overlay);
-    this.previews = [
-      new BuyPreview(`loadout-agent-${this.editorTeam}`, "loadout-editor", this.editorTeam),
-      new BuyPreview(`loadout-agent-${otherTeam}`, "loadout-editor", otherTeam),
-    ];
-    const equipCosmetic = async (id: string) => {
+    this.panelRect = overlay.querySelector<HTMLElement>(".loadout-team")!.getBoundingClientRect();
+    if (!this.previews.length)
+      this.previews = [
+        new BuyPreview("loadout-agent-ct", "loadout-editor", "ct"),
+        new BuyPreview("loadout-agent-t", "loadout-editor", "t"),
+      ];
+    else for (const preview of this.previews) preview.refreshLayout();
+    const equipCosmetic = async (id: string, category: string) => {
       const team = this.editorTeam;
       try {
-        if (this.editorCategory === "Agents") {
+        if (category === "Agents") {
           if (!this.agentCatalog.some((agent) => agent.team === team && agent.id === id)) return;
           const appearance = await acquireAgentAppearance(id);
           try {
@@ -293,10 +332,10 @@ export class GameInventory {
           } finally {
             appearance?.release();
           }
-        } else if (this.editorCategory === "Gloves") {
+        } else if (category === "Gloves") {
           if (id && !this.gloveCatalog.some((glove) => glove.id === id)) return;
           await setGloves(team, { id, wear: 0.01, seed: 1 });
-        } else if (this.editorCategory === "Knives" && /^\d+$/.test(id) && isKnife(Number(id))) {
+        } else if (category === "Knives" && /^\d+$/.test(id) && isKnife(Number(id))) {
           this.game.knife = Number(id);
           this.game.updateUI();
         }
@@ -310,12 +349,15 @@ export class GameInventory {
     overlay.querySelectorAll<HTMLButtonElement>("[data-cosmetic-choice]").forEach((button, i) => {
       button.querySelector("b")!.textContent = candidateItems[i].name;
       button.onclick = () => {
-        void equipCosmetic(button.dataset.cosmeticChoice!);
+        void equipCosmetic(button.dataset.cosmeticChoice!, button.dataset.choiceCategory!);
       };
       button.ondragstart = (event) => {
         event.dataTransfer?.setData(
           "application/x-cs2go-cosmetic",
-          JSON.stringify({ category: this.editorCategory, id: button.dataset.cosmeticChoice }),
+          JSON.stringify({
+            category: button.dataset.choiceCategory,
+            id: button.dataset.cosmeticChoice,
+          }),
         );
       };
     });
@@ -325,6 +367,8 @@ export class GameInventory {
         this.editorCategory = { agents: "Agents", gloves: "Gloves", knives: "Knives" }[
           button.dataset.loadoutCosmetic!
         ]!;
+        this.editorFilter =
+          this.editorFilter === this.editorCategory ? "All Items" : this.editorCategory;
         this.showLoadout();
       };
       button.ondragover = (event) => {
@@ -346,21 +390,28 @@ export class GameInventory {
             typeof item.id !== "string"
           )
             return;
-          void equipCosmetic(item.id);
+          void equipCosmetic(item.id, item.category);
         } catch {
           /* Ignore unrelated dragged data. */
         }
       };
     });
     overlay.querySelector<HTMLSelectElement>("#loadout-category")!.onchange = (event) => {
-      this.editorCategory = (event.target as HTMLSelectElement).value;
+      this.editorFilter = (event.target as HTMLSelectElement).value;
+      this.editorCategory = this.editorFilter;
       this.editorSlot = this.editorCategory === "Pistols" ? 1 : 0;
       this.showLoadout();
     };
     overlay.querySelectorAll<HTMLButtonElement>("[data-filter-category]").forEach((button) => {
       button.onclick = () => {
-        this.editorCategory = button.dataset.filterCategory!;
-        this.editorSlot = this.editorCategory === "Pistols" ? 1 : 0;
+        const category = button.dataset.filterCategory!;
+        const slot = Number(button.dataset.filterSlot ?? 0);
+        this.editorFilter =
+          this.editorFilter === category && (category !== "Pistols" || this.editorSlot === slot)
+            ? "All Items"
+            : category;
+        this.editorCategory = category;
+        this.editorSlot = slot;
         this.showLoadout();
       };
     });

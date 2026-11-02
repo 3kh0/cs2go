@@ -31,7 +31,7 @@ body:has(#skin-menu:not(.hidden))
   grid-template-rows: minmax(0, 56fr) minmax(0, 44fr);
   align-items: stretch;
   justify-content: stretch;
-  background: #29343d38;
+  background: transparent;
   backdrop-filter: none;
   z-index: 30;
   overflow: hidden;
@@ -50,14 +50,7 @@ body:has(#skin-menu:not(.hidden))
 .loadout-page-heading > small {
   display: none;
 }
-#close-loadout-editor {
-  position: absolute;
-  right: 8px;
-  top: 5px;
-  padding: 0 6px;
-  font-size: 22px;
-  background: #18212b50;
-}
+
 .loadout-teams {
   display: flex;
   min-height: 0;
@@ -72,10 +65,10 @@ body:has(#skin-menu:not(.hidden))
   padding-right: 5.5%;
   gap: 0 8px;
   border-right: 3px solid #78b9e6;
-  background: linear-gradient(90deg, #477da451, #285c8c88);
+  background: transparent;
 }
 .loadout-team[data-team="t"] {
-  background: linear-gradient(90deg, #8c77394d, #84703188);
+  background: transparent;
   border-color: #d9bf6f;
 }
 .loadout-team-title {
@@ -217,6 +210,7 @@ body:has(#skin-menu:not(.hidden))
   outline: 2px solid #b5e0ff;
 }
 .loadout-opponent {
+  cursor: pointer;
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) clamp(45px, 4.6vw, 74px);
@@ -224,7 +218,7 @@ body:has(#skin-menu:not(.hidden))
   padding: 12px 1.6% 20px 8px;
   gap: 0 8px;
   width: 25.5%;
-  background: #171b2280;
+  background: transparent;
 }
 .loadout-opponent .loadout-team-title {
   grid-column: 1;
@@ -240,13 +234,7 @@ body:has(#skin-menu:not(.hidden))
   grid-column: 2;
   opacity: 0.45;
 }
-.loadout-opponent::after {
-  content: "";
-  position: absolute;
-  inset: 48px 0 0;
-  background: #12191f45;
-  pointer-events: none;
-}
+
 #loadout-editor[data-active-team="t"] .loadout-teams {
   flex-direction: row-reverse;
 }
@@ -556,4 +544,60 @@ body:has(#loadout-editor) #inventory-button {
 }
 #loadout-editor .loadout-slot:last-child {
   margin-bottom: 0;
+}
+#loadout-editor .loadout-teams {
+  position: relative;
+}
+#loadout-editor .loadout-team,
+#loadout-editor .loadout-opponent {
+  position: static;
+}
+#loadout-editor .loadout-agent {
+  position: absolute;
+  top: calc(40 * var(--menu-unit));
+  bottom: calc(20 * var(--menu-unit));
+  width: calc(332 * var(--menu-unit));
+  height: auto;
+}
+#loadout-editor #loadout-agent-ct {
+  left: calc(96 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  right: auto;
+}
+#loadout-editor #loadout-agent-t {
+  right: calc(96 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  left: auto;
+}
+#loadout-editor .loadout-slot-columns {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(512 * var(--menu-unit));
+}
+#loadout-editor .loadout-cosmetics {
+  position: absolute;
+  top: calc(40 * var(--menu-unit));
+  width: calc(64 * var(--menu-unit));
+}
+#loadout-editor [data-team="ct"] > .loadout-cosmetics {
+  left: calc(24 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  right: auto;
+}
+#loadout-editor [data-team="t"] > .loadout-cosmetics {
+  right: calc(24 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  left: auto;
+}
+#loadout-editor .loadout-team-title {
+  position: absolute;
+  top: calc(12 * var(--menu-unit));
+}
+#loadout-editor [data-team="ct"] > .loadout-team-title {
+  left: calc(262 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  right: auto;
+  transform: translateX(-50%);
+}
+#loadout-editor [data-team="t"] > .loadout-team-title {
+  right: calc(262 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  left: auto;
+  transform: translateX(50%);
 }

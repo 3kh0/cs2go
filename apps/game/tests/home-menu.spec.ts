@@ -36,7 +36,7 @@ test("native homepage presents both agents, local navigation and a working match
     "STORE",
     "NEWS",
   ]);
-  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", /^ct_main_menu_/);
+  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", "t_buymenu_m4a4");
   expect(await page.evaluate(() => getComputedStyle(document.body).fontFamily)).toContain(
     "Stratum2",
   );
@@ -58,7 +58,7 @@ test("native homepage presents both agents, local navigation and a working match
   await page.screenshot({ path: "artifacts/home-t-1440.png" });
   await page.locator("#inventory-button").click();
   await expect(page.locator("#loadout-editor")).toBeVisible();
-  await page.locator("#close-loadout-editor").click();
+  await page.locator("#home-button").click();
   await page.locator("#skins-button").click();
   await expect(page.locator("#skin-menu")).toBeVisible();
   await page.locator("#close-skins").click();
@@ -111,7 +111,7 @@ test("native homepage presents both agents, local navigation and a working match
   await page.locator("#leave").click();
   await expect(page.locator("#menu")).toBeVisible();
   await expect(page.locator("#menu")).toHaveAttribute("data-page", "home");
-  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", /^ct_main_menu_/);
+  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", "t_buymenu_m4a4");
   expect(
     await page.evaluate(
       () =>
@@ -129,7 +129,7 @@ test("reduced motion holds the native homepage idle without advancing its clock"
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
-  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", /^ct_main_menu_/);
+  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", "t_buymenu_m4a4");
   const clock = () =>
     page.evaluate(
       () =>

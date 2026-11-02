@@ -30,7 +30,7 @@ test("native UI cues route trusted nested, forwarded and keyboard actions once a
   expect(await page.evaluate(() => window.uiCalls.filter((cue) => cue === "loadout"))).toEqual([
     "loadout",
   ]);
-  await page.locator("#close-loadout-editor").click();
+  await page.locator("#home-button").click();
   await page.mouse.move(0, 0);
   await page.waitForTimeout(80);
   await page.evaluate(() => {

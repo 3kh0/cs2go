@@ -1,5 +1,4 @@
 import { defineConfig } from "@playwright/test";
-/** Run against a completed production build; development has no service worker. */
 export default defineConfig({
   testDir: "./startup-tests",
   testMatch: "startup.spec.ts",

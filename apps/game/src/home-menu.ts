@@ -52,6 +52,20 @@ export function setupHomeMenu(game: Game) {
   const el = (id: string) => document.getElementById(id)!;
   const panel = el("home-panel");
   const navButtons = [...document.querySelectorAll<HTMLButtonElement>(".home-header button")];
+  for (const button of navButtons.filter((button) => button.closest(".home-nav"))) {
+    const field = document.createElement("span");
+    field.className = "nav-cell-field";
+    field.setAttribute("aria-hidden", "true");
+    for (let index = 0; index < 24; index++) {
+      const cell = document.createElement("i");
+      cell.className = "nav-cell";
+      cell.style.setProperty("--cell-duration", `${1800 + ((index * 739) % 2300)}ms`);
+      cell.style.setProperty("--cell-delay", `${-((index * 997) % 4200)}ms`);
+      cell.style.setProperty("--cell-peak", String(0.12 + ((index * 13) % 19) / 100));
+      field.append(cell);
+    }
+    button.append(field);
+  }
   const syncNavigation = () => {
     const visible = (id: string) => {
       const node = document.getElementById(id);
