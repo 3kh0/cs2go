@@ -1,3 +1,4 @@
+import { setupSettingsTooltips } from "./settings-tooltips";
 import { setupGraphicsSettings } from "./graphics-controls";
 import type { Game } from "./game";
 import { applyCrosshair } from "./presentation-settings";
@@ -136,6 +137,7 @@ export function setupSettingsTabs(game: Game) {
             : name;
     panel.prepend(heading);
   }
+  setupSettingsTooltips(host);
   applyCrosshair(game.settings);
   activate("Video");
 }

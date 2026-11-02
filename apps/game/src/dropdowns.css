@@ -64,7 +64,7 @@ select:not([multiple]):not([size]) option {
   text-align: left;
   text-transform: none;
 }
-select:not([multiple]):not([size]) option:is(:hover, :focus, :checked) {
+select:not([multiple]):not([size]) option:hover {
   background: #101010;
   color: white;
 }

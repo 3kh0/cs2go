@@ -241,3 +241,22 @@ body:has(#menu.hidden) #settings {
 #settings .settings-panel > .settings-section-title:not(:first-child) {
   margin-top: 28px;
 }
+
+.settings-tooltip {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  width: max-content;
+  max-width: min(390px, calc(100vw - 24px));
+  padding: 16px 18px;
+  border: 0;
+  border-radius: 5px;
+  background: #101010f5;
+  color: #c8c8c8;
+  box-shadow: 0 2px 7px #0008;
+  font:
+    400 15px/1.4 "Stratum2",
+    sans-serif;
+  white-space: normal;
+  pointer-events: none;
+}
