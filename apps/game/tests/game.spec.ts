@@ -13,6 +13,7 @@ test("menu, saved settings, and offline assets", async ({ page }) => {
   });
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
+  await expect(page.getByRole("dialog", { name: "Browser not supported" })).toBeHidden();
   await expect(page.getByRole("heading", { name: "CASUAL", exact: true })).toBeVisible();
   await page.locator("#settings-button").click();
   await page.getByRole("tab", { name: "Controls", exact: true }).click();

@@ -5,6 +5,8 @@
 
 A browser port of Counter-Strike 2, powered by Three.js. This is in early beta but is playable. Not affliated with Valve or Counter-Strike.
 
+Firefox is not supported because Firefox decides to be special and not support many of the cool APIs we use.
+
 ## How to play
 
 <https://en.wikipedia.org/wiki/Counter-Strike_2>
