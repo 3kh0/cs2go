@@ -41,6 +41,7 @@ test("native map and every cached viewmodel compile without shader errors", asyn
     if (!/^(http:\/\/127\.0\.0\.1:5173|blob:|data:)/.test(request.url()))
       external.push(request.url());
   });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
   await page.goto("/");
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -58,4 +59,28 @@ test("native map and every cached viewmodel compile without shader errors", asyn
   expect(cacheSize).toBeLessThanOrEqual(8);
   expect(errors).toEqual([]);
   expect(external).toEqual([]);
+});
+
+test("native local reflection azimuth is corrected and preview rotation is restored", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/actor-lighting-fixture.ts";
+    return (await import(path)).renderActorReflections();
+  });
+  expect(result.native[0]).toBeGreaterThan(150);
+  expect(result.native[2]).toBeLessThan(10);
+  expect(result.preview[2]).toBeGreaterThan(150);
+  expect(result.preview[0]).toBeLessThan(10);
+  expect(result.restored).toEqual(result.preview);
+  expect(result.restoredRotation).toEqual([0, 0.1, 0, "XYZ"]);
+  expect(result.restoredIntensity).toBe(0.75);
+  expect(errors).toEqual([]);
 });

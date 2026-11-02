@@ -17,16 +17,20 @@
   "tools": {
     "Source2Viewer": "20.0.6980",
     "ValveResourceFormat": "20.0.6980",
-    "gltfpack": "0.24"
+    "gltfpack": "0.24",
+    "lightingExtractor": "Source2Viewer 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "lightingGltfpack": "1.1.1 / b22872835dbabc56a6e4a366ea9917f62b7daf1a"
   },
   "optimization": {
     "originalTriangles": 4546379,
-    "runtimeTriangles": 1919451,
+    "runtimeTriangles": 1918989,
     "physicsTriangles": 433059,
     "propTarget": 0.3,
     "propRelativeErrorLimit": 0.005,
     "textureMaxDimension": "1024 architecture / 512 props, ETC1S KTX2; repaired street lantern ORM is native lossless 1024x512 PNG",
-    "geometry": "meshopt, 16-bit rendering positions/UV, 20-bit physics positions"
+    "geometry": "meshopt, 16-bit rendering positions/UV, 20-bit physics positions",
+    "lighting": "Native UV seams and RGBA8 probe fallback preserved in indexed meshopt geometry; original runtime textures remain byte-identical",
+    "runtimeVertices": 2419114
   },
   "navigation": {
     "version": 36,
@@ -35,8 +39,8 @@
   },
   "runtime": {
     "dust2.glb.gz": {
-      "bytes": 36756531,
-      "sha256": "ae93fa04543d7ecb4c4a6878320b7f5ff1d639052bf8c123860dd662247ffe44"
+      "bytes": 41986494,
+      "sha256": "c9480a6ca12521ac7f1226cd1a8f061cb9baef61864a78d0d27d15c90b7bd80d"
     },
     "dust2-physics.glb.gz": {
       "bytes": 723794,
@@ -81,10 +85,25 @@
       "file": "street_lantern_02_ao_psd_bd8305af_orm_285388804.png",
       "sha256": "0da39a0354e4280e44db39daab19db40b59945ba73aee63a139d8d88b1830408",
       "bytes": 336163,
-      "dimensions": [1024, 512],
-      "minRGB": [16, 0, 0],
-      "maxRGB": [255, 254, 255],
-      "meanRGB": [238.5809154510498, 131.96349334716797, 207.81847953796387],
+      "dimensions": [
+        1024,
+        512
+      ],
+      "minRGB": [
+        16,
+        0,
+        0
+      ],
+      "maxRGB": [
+        255,
+        254,
+        255
+      ],
+      "meanRGB": [
+        238.5809154510498,
+        131.96349334716797,
+        207.81847953796387
+      ],
       "adaptation": "Source2Viewer --gltf_textures_adapt packs AO, roughness, metalness into linear RGB. Fresh PNG bytes match the retained prior-audit lantern-native-orm.png exactly. No resize, padding, color conversion or additional channel remapping."
     },
     "original": {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "06eedf931f586f201baf37654641ad353de44062341b9a619f57bda74345c078",
+  "release": "9ca45f6436cc2c9c142d4e5894ebc114c1e6f5b220e81a6b71464901be6da10e",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -9056,10 +9056,25 @@
         "bytes": 649
       }
     },
+    "models/maps/cables-source.json": {
+      "sha256": "469487b23a7d6721e81a90bdf07cfbff64fde23ee26c23be534c5964bcb8e9bd",
+      "bytes": 2028,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "c4ee142b0b8c6a196fc95ca5c29404f1f6f0c599a0f7c5f483a03562a35ddad4",
+        "bytes": 949
+      }
+    },
     "models/maps/dust2-bomb.bin.gz": {
       "sha256": "b06b5a91301b715b6caf6ad60bbeec6b4a0b38765afe1f818a6b30a2ce3ada83",
       "bytes": 929136,
       "decodedSha256": "74b4c2dc678cd32854374cb5ab34033dc19a534833d272cebddf6cd16fbe8eed"
+    },
+    "models/maps/dust2-cables.glb.gz": {
+      "sha256": "56fb77d936dc9ecc1279b5e5e61f7ff0abf829ba08179a55619b8b71133f33aa",
+      "bytes": 64358,
+      "decodedSha256": "0687d26b3aafb3d894df6972ba392585ac7106270aecb9849fbf3c85d2173c30"
     },
     "models/maps/dust2-nav.json": {
       "sha256": "c4880f1e16ab5694eea123bcf4412f9418aef7a7572bb1adda7fa39b49eba8c6",
@@ -9087,18 +9102,39 @@
       }
     },
     "models/maps/dust2.glb.gz": {
-      "sha256": "ae93fa04543d7ecb4c4a6878320b7f5ff1d639052bf8c123860dd662247ffe44",
-      "bytes": 36756531,
-      "decodedSha256": "04a4c945b476548a19599a059bd6d203f141d63da25e8be3f2df181af7def03f"
+      "sha256": "c9480a6ca12521ac7f1226cd1a8f061cb9baef61864a78d0d27d15c90b7bd80d",
+      "bytes": 41986494,
+      "decodedSha256": "2ed6fea65950da6450217692d412abcb6d2a1dd3e5616b5fdb039aaad872ddd6"
     },
-    "models/maps/lighting-source.json": {
-      "sha256": "6352d44cc43a48f7a509736020ac207abd65a52119d1bcefa39faebfff82c6e7",
-      "bytes": 2667,
+    "models/maps/licenses/ValveResourceFormat-MIT.txt": {
+      "sha256": "19549e9b3203eaf3938f35f98e63fc6b166a16af29936affa3df6ec7e2ae7f8d",
+      "bytes": 1100,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "5d2261e5185d696edb5dafb85e6715a052e6caac3eac5c125ae27faaf47c72d9",
-        "bytes": 1167
+        "sha256": "98a3d59b63a2abe5ba07d785350e7c330bc4016c00ff19d81fa8f4a26bf1b326",
+        "bytes": 485
+      }
+    },
+    "models/maps/lighting-source.json": {
+      "sha256": "a50cff66c73c5dd3702032184e12a0af224244a07151083ec884a39a8fa32825",
+      "bytes": 4063,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "6d4a30641cfc8ea884cfb8b073c24eb3c3738f2a55575f28389d3032363f2e95",
+        "bytes": 1636
+      }
+    },
+    "models/maps/lighting/color-correction.bin.gz": {
+      "sha256": "f5ebe751e8f1fcbfbaa5b23ca55a282c1b9be32fc0a71f51304aba407b4b04bc",
+      "bytes": 51338,
+      "decodedSha256": "bd4d38bc13fcb4c53ec6d19e0ca37428332d0ab264198b561085b18f5c2d7c01",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "16aa818a6d4f140d588a2bfa0c71457023cfd886a207762827423a909cacc66f",
+        "bytes": 32361
       }
     },
     "models/maps/lighting/confidence.bin.gz": {
@@ -9140,6 +9176,32 @@
         "quality": 11,
         "sha256": "563a715d3f09a80c92c68dfbb9fb4ef6f804886e422b385a072b467551f63be8",
         "bytes": 7677
+      }
+    },
+    "models/maps/lighting/native/direct_light_shadows-4096.bin.gz": {
+      "sha256": "b732c38bb4c276740200895b67e39de5557762415c7e2bc7be1fa3ac7966badb",
+      "bytes": 2510790,
+      "decodedSha256": "9d83d6de7d71621665cc47525bc2ef7575242a5332d8bce23ddb79fa2e20a8b3"
+    },
+    "models/maps/lighting/native/directional_irradiance-4096.bin.gz": {
+      "sha256": "858aebe96cab68b1643554b33d36056a84c462fd5d9db355600df98bce7407e9",
+      "bytes": 6858602,
+      "decodedSha256": "531b41f01776cfb258ff4bcbd88f4f68985638bcd9e8ef85e8497140795f79c1"
+    },
+    "models/maps/lighting/native/irradiance-4096.bin.gz": {
+      "sha256": "defd60fc7a6af90309117be950dca63d82df3595c2912fe7a2b0b614e20da970",
+      "bytes": 15761092,
+      "decodedSha256": "191352f452d794f70a2a6d86d85bf940f1e684800bcb911526299a5971ba2eca"
+    },
+    "models/maps/lighting/native/sky.bin.gz": {
+      "sha256": "f04b7b00660fe46007940c2891e123a21fefec5c894294ae4761f82cbf5d53c7",
+      "bytes": 1248375,
+      "decodedSha256": "6a389b8654ab451eaa43012fdaf94ced001b2f62973625461327492d8110f5ba",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "5581ad38355712691f3e0afee0a0ecf551ff5dc8840b7c1eec45c14dd1661584",
+        "bytes": 1236662
       }
     },
     "models/maps/lighting/probe-shadows.bin.gz": {
@@ -9388,13 +9450,13 @@
       "bytes": 921466
     },
     "models/maps/lighting/source.json": {
-      "sha256": "f5ad3fe8f2bdf35c2df64f67632c7436bbfc9de6c0dbfb059fe309235e2cfeb2",
-      "bytes": 25169,
+      "sha256": "3d8062ad0e75b8654a9b5e004d5367b09a9d5643879654689beee590c1a544bb",
+      "bytes": 5440,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "c3c689c5235187167cd8399c529a70809346d1ffa73ebae9cbdd83ad5af30212",
-        "bytes": 3616
+        "sha256": "c2017d048531995e8e8dc72c77d8b383f0670e99bdc99da11cef6a42022cb5e7",
+        "bytes": 2089
       }
     },
     "models/maps/lighting/triangle-valid.bin.gz": {
@@ -9429,13 +9491,13 @@
       }
     },
     "models/maps/source-manifest.json": {
-      "sha256": "cde3944ea081bf4b6c469c67d3e58880403efcffafb025dd9259b7c5f5572ce1",
-      "bytes": 7442,
+      "sha256": "de91e0abe5db58c6b601b4296cf740d4b0e0c873e0b4e9e8f5eab17e562f3311",
+      "bytes": 7910,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "bdb1903642c68284487e0eb6981c44ff0b72918688d88825ccfa3a4752c8cbfb",
-        "bytes": 2904
+        "sha256": "3417347bd636a415a2afd899d532fe5cf2d2ec201d1075a1340364e45a352bae",
+        "bytes": 3032
       }
     },
     "models/usp-s.glb.gz": {

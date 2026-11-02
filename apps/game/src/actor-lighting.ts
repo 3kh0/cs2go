@@ -1,4 +1,6 @@
 import * as T from "three";
+import { applySourceColorCorrection } from "./map-color";
+import { applySourceFog } from "./source-fog";
 
 type Position = { x: number; y: number; z: number };
 export type ProbeSampler = (position: Position, normal: Position, out: T.Color) => boolean;
@@ -23,7 +25,10 @@ type State = {
   materials: Map<T.Material, T.MeshStandardMaterial>;
   patched: Set<T.Material>;
   owned: Set<T.Material>;
-  reflections: Map<T.MeshStandardMaterial, { map: T.Texture | null; intensity: number }>;
+  reflections: Map<
+    T.MeshStandardMaterial,
+    { map: T.Texture | null; intensity: number; rotation: T.Euler }
+  >;
 };
 const actors = new WeakMap<T.Object3D, State>();
 const patches = new WeakMap<
@@ -106,6 +111,7 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
     lighting.reflections.set(material, {
       map: material.envMap,
       intensity: material.envMapIntensity,
+      rotation: material.envMapRotation.clone(),
     });
     // oxlint-disable-next-line typescript/unbound-method -- Called with the owning material via .call below.
     const previous = prior?.compile ?? material.onBeforeCompile;
@@ -164,8 +170,10 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
           }
         #endif`,
       );
+      applySourceFog(shader, "sourceActorProbeEnabled");
+      applySourceColorCorrection(shader, "sourceActorProbeEnabled");
     };
-    material.customProgramCacheKey = () => `${key}:source-actor-probe-v1`;
+    material.customProgramCacheKey = () => `${key}:source-actor-probe-v3`;
     material.needsUpdate = true;
     return material;
   };
@@ -243,5 +251,9 @@ export function setActorReflection(root: T.Object3D, texture?: T.Texture) {
       material.envMap = next;
     }
     material.envMapIntensity = texture ? 1 : original.intensity;
+    // VRF latlongs start at +X (u=0) we can use three's equirectangular lookup puts +X at u=.5
+    // the local PMREMs use the material rotation, independent of scene.environmentRotation which is sweet
+    if (texture) material.envMapRotation.set(0, Math.PI, 0);
+    else material.envMapRotation.copy(original.rotation);
   }
 }
