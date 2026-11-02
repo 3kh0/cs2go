@@ -2,6 +2,7 @@ import { assetFetch, assetUrl } from "./asset-url";
 import { WorldBall } from "./world-ball";
 import { applySourceMapLighting, loadSourceMapLighting } from "./source-map-lighting";
 import { loadBombDamage } from "./bomb-damage";
+import { loadSourceSky } from "./source-sky";
 import * as T from "three";
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 import { loadGzipped } from "./gltf";
@@ -9,21 +10,26 @@ import { dustCollision } from "@cs2go/simulation/dust-map";
 import { Navigation } from "./navigation";
 import type { MapNavigation } from "./navigation";
 import type { Wall } from "./physics";
-export async function loadDust2(scene: T.Scene) {
-  const [asset, response, physics, sky, bombDamage, lighting] = await Promise.all([
+export async function loadDust2(scene: T.Scene, renderer: T.WebGLRenderer) {
+  const [asset, response, physics, sky, bombDamage, lighting, skybox, cables] = await Promise.all([
     loadGzipped("/models/maps/dust2.glb.gz", 1),
     assetFetch("/models/maps/dust2-nav.json"),
     loadGzipped("/models/maps/dust2-physics.glb.gz", 1),
     new HDRLoader().loadAsync(assetUrl("/models/maps/dust2-sky.hdr")),
     loadBombDamage(),
-    loadSourceMapLighting(),
+    loadSourceMapLighting(renderer),
+    loadSourceSky(renderer),
+    loadGzipped("/models/maps/dust2-cables.glb.gz", 1),
   ]);
+  // Native particle ropes are absent from the world export. Their settled tubes are baked offline and share static map lighting; native static_collision=false!
+  asset.scene.add(cables.scene);
   sky.mapping = T.EquirectangularReflectionMapping;
   if (!response.ok) throw new Error("Dust II navigation could not load");
   const navigation = new Navigation((await response.json()) as MapNavigation);
   const root = new T.Group();
   root.name = "Dust II - CS2";
   root.add(asset.scene);
+  if (skybox) root.add(skybox);
   asset.scene.updateMatrixWorld(true);
   asset.scene.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
@@ -44,7 +50,7 @@ export async function loadDust2(scene: T.Scene) {
     // Preserve the native albedo. The shared scenery grade runs once, after lighting.
     for (const tex of [material.map, material.normalMap]) if (tex) tex.anisotropy = 8;
   });
-  await applySourceMapLighting(asset.scene, lighting);
+  applySourceMapLighting(asset.scene, lighting);
   // The imported architecture never moves; skip its per-frame matrix updates.
   asset.scene.traverse((object) => {
     object.matrixAutoUpdate = false;
@@ -67,9 +73,8 @@ export async function loadDust2(scene: T.Scene) {
         .filter((hit) => hit.distance >= raycaster.near),
     );
   };
-  // Native light_environment: warm sun, cool sky and neutral bounced light.
-  // Source 2 bakes spatial bounce into lightmaps/probes. This inexpensive fill
-  // approximates that missing contribution; it is not a lightmap reconstruction.
+  // Compatibility fill for unregistered transient objects. Native map materials
+  // and registered actors replace diffuse fill with their baked atlas/probe data.
   const bounce = new T.Color(0x979797).multiplyScalar(1.7);
   root.add(new T.HemisphereLight(0xd3e2f8, bounce, 2.4));
   // CT ramp's native warm light_barn (2:23513:20086). A bounded point
@@ -78,7 +83,8 @@ export async function loadDust2(scene: T.Scene) {
   ramp.name = "CT ramp warm fixture";
   ramp.position.set(325.308746 * 0.0254, 31.464579 * 0.0254, -2371.635986 * 0.0254);
   root.add(ramp);
-  const sun = new T.DirectionalLight(0xffdebd, 2.5);
+  // Source direct diffuse omits Lambert's 1/pi; Three.js includes it.
+  const sun = new T.DirectionalLight(0xffdebd, 2.5 * Math.PI);
   sun.target.position.set(0, 0, -30);
   // Source pitch/yaw 50/43 degrees, Z-up inches -> Three.js Y-up meters.
   const pitch = T.MathUtils.degToRad(50),
@@ -143,6 +149,7 @@ export async function loadDust2(scene: T.Scene) {
     grenadeCollision,
     navigation,
     sky,
+    skybox,
     bombDamage,
   };
 }

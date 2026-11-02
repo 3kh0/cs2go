@@ -616,7 +616,7 @@ export class Game {
     play.disabled = true;
     play.querySelector("span")!.textContent = "LOADING ARMORY…";
     let loaded = 0;
-    const worldReady = loadDust2(this.scene).then((world) => {
+    const worldReady = loadDust2(this.scene, this.renderer).then((world) => {
       gradeMapColors(world.root);
       this.world = this.dust = world;
       return world;
@@ -3218,17 +3218,18 @@ export class Game {
     radar.height = this.world.navigation ? 948 : 180;
     document.querySelector(".radar-wrap")!.classList.toggle("callouts", !!this.world.navigation);
     el("location").textContent = "DUST II";
-    this.scene.background = this.dust.sky;
+    this.scene.background = this.dust.skybox ? null : this.dust.sky;
     this.scene.environment = this.dust.sky;
-    // Native sky exposure bias for the background. Keep reflections restrained:
-    // the hemisphere already approximates diffuse sky/bounce illumination.
+    // VRF panoramas start at +X, whereas Three's equirectangular lookup starts
+    // half a turn earlier. The native sky mesh samples the original cube directly.
+    this.scene.backgroundRotation.y = Math.PI;
+    this.scene.environmentRotation.y = Math.PI;
+    // Retain the bounded global specular fallback; actors use local native probes.
     this.scene.backgroundIntensity = 2 ** 0.765;
     this.scene.environmentIntensity = 0.35;
-    this.scene.fog = new T.Fog(
-      "#c7d6df",
-      this.world.collision ? 100 : 30,
-      this.world.collision ? 240 : 90,
-    );
+    this.scene.fog = this.dust.skybox
+      ? null
+      : new T.Fog("#c7d6df", this.world.collision ? 100 : 30, this.world.collision ? 240 : 90);
     this.camera.far = this.world.collision ? 250 : 110;
     this.camera.updateProjectionMatrix();
   }
@@ -5131,7 +5132,7 @@ export class Game {
       const pitch = T.MathUtils.degToRad(50),
         yaw = T.MathUtils.degToRad(43);
       this.viewSun.color.setHex(0xffdebd);
-      this.viewSun.intensity = 2.5;
+      this.viewSun.intensity = 2.5 * Math.PI;
       this.viewSun.position
         .set(-Math.cos(pitch) * Math.cos(yaw), Math.sin(pitch), Math.cos(pitch) * Math.sin(yaw))
         .applyQuaternion(this.probeInverse.copy(this.camera.quaternion).invert());
@@ -5266,6 +5267,7 @@ export class Game {
       this.lastSpectatorViewmodel = undefined;
     }
     if (!this.active && !el("menu").classList.contains("hidden")) {
+      this.renderer.toneMapping = T.ACESFilmicToneMapping;
       if (document.getElementById("loadout-editor"))
         this.groundInventory.renderPreviews(this.renderer);
       else this.homeScene.render(this.renderer, this.team, renderDt, !this.previewingViewmodel);
@@ -5351,6 +5353,7 @@ export class Game {
     const wasVisible = followed?.visible;
     if (hideFollowed) followed.visible = false;
     const buying = !el("loadout").classList.contains("hidden");
+    this.renderer.toneMapping = T.CustomToneMapping;
     this.renderer.clear();
     this.utility.renderWorld();
     if (followed && hideFollowed) followed.visible = wasVisible!;
