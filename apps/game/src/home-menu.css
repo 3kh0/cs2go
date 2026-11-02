@@ -357,33 +357,68 @@
   color: #37434a;
   font-size: 23px;
 }
+#home-scenery-button svg {
+  width: 22px;
+  height: 22px;
+  fill: #e6e9e7;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
 #home-scenery {
   position: absolute;
-  bottom: 50px;
-  right: 72px;
-  padding: 18px;
-  width: min(340px, calc(100vw - 110px));
-  max-height: calc(100vh - 150px);
-  overflow-y: auto;
-  background: #27333bef;
-  box-shadow: 0 2px 12px #0006;
+  bottom: 26px;
+  right: 112px;
+  width: 238px;
+  padding: 10px 0;
+  border-radius: 3px;
+  background: #202020;
+  box-shadow: 0 2px 5px #0004;
+  color: #c8c8c8;
+  font-family: Stratum2, sans-serif;
 }
-#home-scenery label {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-size: 12px;
-}
-#home-scenery select {
-  min-width: 0;
-  width: 100%;
-  padding: 8px;
-}
-#home-agent-status:not(:empty) {
+#home-scenery button {
   display: block;
-  margin: -8px 0 16px;
-  color: #d5c18a;
-  font-size: 12px;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+#home-scenery button:hover,
+#home-scenery button:focus-visible,
+#home-scenery button[aria-expanded="true"] {
+  background: #101010;
+  color: #fff;
+}
+#home-view-loadout {
+  border-top: 1px solid #ffffff18 !important;
+}
+.home-scenery-branch {
+  position: relative;
+}
+.home-scenery-options {
+  position: absolute;
+  bottom: 0;
+  right: 100%;
+  width: max-content;
+  min-width: 205px;
+  max-width: min(300px, 45vw);
+  max-height: min(480px, 70vh);
+  overflow-y: auto;
+  padding: 6px 0;
+  border-radius: 3px;
+  background: #202020;
+  box-shadow: 0 2px 5px #0004;
+}
+#home-scenery .home-scenery-options button[aria-pressed="true"] {
+  background: #101010;
+  color: #fff;
 }
 
 #ammo,

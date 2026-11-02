@@ -1,3 +1,4 @@
+import { selectHomeWeapon, selectHomeScenery, equipHomeAgent } from "./home-controls";
 import { expect, test } from "@playwright/test";
 
 test("bulky homepage agents keep their grips and use repaired cloth materials", async ({
@@ -9,17 +10,15 @@ test("bulky homepage agents keep their grips and use repaired cloth materials", 
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await expect(page.locator("#startup")).toHaveCount(0);
-  await page.locator("#home-scenery-button").click();
-  await page.locator("#home-showcase-team").selectOption("ct");
-  await page.locator("#home-showcase-agent").selectOption("agent-5305-ct");
+  await page.getByRole("button", { name: "Show Counter-Terrorist", exact: true }).click();
+  await equipHomeAgent(page, "ct", "agent-5305-ct");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-agent", "agent-5305-ct", {
     timeout: 30000,
   });
-  await page.locator("#home-background").selectOption("close");
+  await selectHomeScenery(page, "Dust II - Close-up");
   // Render each grip, including the native home idle and handgun poses.
-  await page.locator("#home-scenery-button").click();
   for (const index of [9, 1, 2]) {
-    await page.locator("#home-showcase-weapon").selectOption(String(index));
+    await selectHomeWeapon(page, String(index));
     await expect(page.locator("#home-agent-stage")).toHaveAttribute(
       "data-showcase-weapon",
       String(index),
@@ -65,7 +64,7 @@ test("bulky homepage agents keep their grips and use repaired cloth materials", 
     ).toBe(true);
     await page.screenshot({ path: `artifacts/agent-presentation-fbi-${index}.png` });
   }
-  await page.locator("#home-showcase-weapon").selectOption("9");
+  await selectHomeWeapon(page, "9");
   // Side view exposes receiver/vest intersections that a front view can hide.
   await page.evaluate(async () => {
     const source = await (await fetch("/src/home-scene.ts")).text();

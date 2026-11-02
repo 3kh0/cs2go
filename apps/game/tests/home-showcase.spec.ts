@@ -1,3 +1,4 @@
+import { selectHomeWeapon } from "./home-controls";
 import { expect, test } from "@playwright/test";
 import type { Game } from "../src/game";
 import type * as T from "three";
@@ -31,17 +32,13 @@ test("full-page native settings and saved showcase weapons share equipped legacy
   await page.screenshot({ path: "artifacts/settings-full-page-audio.png" });
   await page.keyboard.press("Escape");
   await expect(page.locator("#settings")).toBeHidden();
-  await page.locator("#home-scenery-button").click();
-  await page.locator("#home-showcase-team").selectOption("t");
+  await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "0");
-  await page.locator("#home-showcase-weapon").selectOption("7");
+  await selectHomeWeapon(page, "7");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "7");
-  await page.locator("#home-scenery-button").click();
   await page.screenshot({ path: "artifacts/home-showcase-glock.png" });
-  await page.locator("#home-scenery-button").click();
-  await page.locator("#home-showcase-weapon").selectOption("0");
+  await selectHomeWeapon(page, "0");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "0");
-  await page.locator("#home-scenery-button").click();
   for (const id of ["7_44", "7_1466", ""]) {
     await page.locator("#skins-button").click();
     await page.locator("#skin-search").fill("");
@@ -140,8 +137,7 @@ test("full-page native settings and saved showcase weapons share equipped legacy
       await page.evaluate(() => window.__game.menu());
     }
   }
-  await page.locator("#home-scenery-button").click();
-  await page.locator("#home-showcase-weapon").selectOption("3");
+  await selectHomeWeapon(page, "3");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "3");
   await page.reload();
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });

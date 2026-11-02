@@ -1,3 +1,4 @@
+import { selectHomeWeapon } from "./home-controls";
 import { test, expect } from "@playwright/test";
 import type { Group } from "three";
 
@@ -219,9 +220,8 @@ test("native idle motion continues with non-default showcase weapons and fire re
     if (m.type() === "error") errors.push(m.text());
   });
   await ready(page);
-  await page.locator("#home-scenery-button").click();
-  await page.locator("#home-showcase-team").selectOption("t");
-  await page.locator("#home-showcase-weapon").selectOption("7");
+  await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
+  await selectHomeWeapon(page, "7");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "7");
   const idle = await page.evaluate(() => {
     const home = window.__game.homeScene as unknown as {
@@ -234,7 +234,6 @@ test("native idle motion continues with non-default showcase weapons and fire re
     return before.angleTo(head.quaternion);
   });
   expect(idle).toBeGreaterThan(0.001);
-  await page.locator("#home-scenery-button").click();
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });

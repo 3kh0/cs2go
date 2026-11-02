@@ -76,8 +76,38 @@ test("native homepage presents both agents, local navigation and a working match
   await expect(page.locator("#home-panel")).toBeHidden();
   await expect(page.locator("#news-button")).toBeFocused();
   await page.locator("#home-scenery-button").click();
-  await page.locator("#home-background").selectOption("close");
+  await expect(page.locator("#home-showcase-agent")).toHaveCount(0);
+  await expect(page.locator("#home-scenery")).toBeVisible();
+  await page.screenshot({ path: "artifacts/home-context-menu.png" });
+  await page.getByRole("button", { name: "Change Weapon", exact: true }).click();
+  await expect(page.locator("#home-weapon-options")).toBeVisible();
+  await page.screenshot({ path: "artifacts/home-context-weapons.png" });
+  await page
+    .locator("#home-weapon-options")
+    .getByRole("button", { name: "AK-47", exact: true })
+    .click();
   await expect(page.locator("#home-scenery")).toBeHidden();
+  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "0");
+  await page.locator("#home-scenery-button").click();
+  await page.getByRole("button", { name: "Change Main Menu Scenery", exact: true }).click();
+  await page
+    .locator("#home-background-options")
+    .getByRole("button", { name: "Dust II - Close-up", exact: true })
+    .click();
+  await expect(page.locator("#home-scenery")).toBeHidden();
+  await page.locator("#home-scenery-button").click();
+  await page.locator("#home-switch-team").click();
+  await expect(page.locator("#home-scenery")).toBeHidden();
+  await page.locator("#home-scenery-button").click();
+  await expect(page.locator("#home-switch-team")).toHaveText("Show Equipped T Agent");
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#home-scenery")).toBeHidden();
+  await page.locator("#home-scenery-button").click();
+  await page.locator("#home-switch-team").click();
+  await page.locator("#home-scenery-button").click();
+  await page.locator("#home-view-loadout").click();
+  await expect(page.locator('.loadout-team[data-team="t"]')).toBeVisible();
+  await page.locator("#home-button").click();
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.screenshot({ path: "artifacts/home-t-close-1280.png" });
   const nav = await page.locator(".home-nav").boundingBox();

@@ -1,13 +1,6 @@
 import { weapons, isKnife } from "./physics";
 import { weaponAvailable } from "./economy";
 import type { Game } from "./game";
-import {
-  defaultAgent,
-  loadAgentCatalog,
-  selectedAgentId,
-  setSelectedAgent,
-  type AgentDefinition,
-} from "./agent-roster";
 
 const icon = (name: string) => `<img src="/ui/home/${name}.svg" alt="">`;
 
@@ -41,8 +34,14 @@ export function homeMenuMarkup() {
       </aside>
       <div class="home-profile"><strong id="home-player-name">PLAYER</strong><span id="home-agent-name">SAS</span><div class="home-team-choice" role="group" aria-label="Showcase team"><button data-home-team="ct" aria-label="Show Counter-Terrorist" aria-pressed="true"><img src="/icons/team-ct.png" alt=""></button><button data-home-team="t" aria-label="Show Terrorist" aria-pressed="false"><img src="/icons/team-t.png" alt=""></button></div></div>
       <aside class="home-social" aria-label="Local session"><img id="home-profile-icon" src="/icons/team-ct.png" alt="Your team"><span class="home-status-dot" title="Local session"></span><button id="steam-account-button" aria-label="Steam account" title="Sign in with Steam"><img id="steam-avatar" alt="Steam avatar" hidden><span id="steam-account-label">SIGN IN</span></button></aside>
-      <button id="home-scenery-button" aria-label="Change main menu scenery" title="Change main menu scenery">☷</button>
-      <div id="home-scenery" hidden><label>SHOWCASE TEAM<select id="home-showcase-team"><option value="ct">Counter-Terrorists</option><option value="t">Terrorists</option></select></label><label>SHOWCASE AGENT<select id="home-showcase-agent"><option value="default-ct">SAS | Counter-Terrorists</option></select></label><small id="home-agent-status" role="status"></small><label>SHOWCASE WEAPON<select id="home-showcase-weapon"></select></label><label>MAIN MENU SCENERY<select id="home-background"><option value="dust2">Dust II</option><option value="close">Dust II - Close-up</option></select></label></div>
+      <button id="home-scenery-button" aria-label="Configure main menu" aria-expanded="false" aria-controls="home-scenery" title="Configure main menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></button>
+      <div id="home-scenery" hidden>
+        <div class="home-scenery-branch"><button aria-expanded="false" aria-controls="home-background-options">Change Main Menu Scenery</button><div id="home-background-options" class="home-scenery-options" hidden></div></div>
+        <div class="home-scenery-branch"><button aria-expanded="false" aria-controls="home-weapon-options">Change Weapon</button><div id="home-weapon-options" class="home-scenery-options" hidden></div></div>
+        <button id="home-switch-team">Show Equipped T Agent</button>
+        <button id="home-view-loadout">View Agent in Loadout</button>
+        <select id="home-background" hidden><option value="dust2">Dust II</option><option value="close">Dust II - Close-up</option></select>
+      </div>
     </main>
     <section id="home-panel" class="hidden" role="dialog" aria-modal="true" aria-labelledby="home-panel-title"><div class="home-popup"><div id="home-panel-content"></div><div class="home-popup-actions"><button id="home-panel-close">OK</button></div></div></section>
   </div>`;
@@ -168,9 +167,48 @@ export function setupHomeMenu(game: Game) {
       "EXIT GAME",
       `<p class="home-panel-lead">Thanks for playing! I hope you have enjoyed this :)</p><p>You can just close your browser for this lol</p>`,
     );
-  el("home-scenery-button").onclick = () => {
-    el("home-scenery").hidden = !el("home-scenery").hidden;
-    if (!el("home-scenery").hidden) void populateAgents();
+  const scenery = el("home-scenery");
+  const sceneryButton = el("home-scenery-button");
+  function closeScenery() {
+    scenery.hidden = true;
+    sceneryButton.setAttribute("aria-expanded", "false");
+    for (const button of scenery.querySelectorAll<HTMLButtonElement>("[aria-controls]")) {
+      button.setAttribute("aria-expanded", "false");
+      el(button.getAttribute("aria-controls")!).hidden = true;
+    }
+  }
+  sceneryButton.onclick = () => {
+    const opening = scenery.hidden;
+    closeScenery();
+    scenery.hidden = !opening;
+    sceneryButton.setAttribute("aria-expanded", String(opening));
+    if (opening) scenery.querySelector<HTMLButtonElement>("button")!.focus();
+  };
+  for (const button of scenery.querySelectorAll<HTMLButtonElement>("[aria-controls]")) {
+    button.onclick = () => {
+      const options = el(button.getAttribute("aria-controls")!);
+      const opening = options.hidden;
+      for (const other of scenery.querySelectorAll<HTMLButtonElement>("[aria-controls]")) {
+        other.setAttribute("aria-expanded", "false");
+        el(other.getAttribute("aria-controls")!).hidden = true;
+      }
+      options.hidden = !opening;
+      button.setAttribute("aria-expanded", String(opening));
+    };
+  }
+  document.addEventListener("click", (event) => {
+    if (!(event.target as Element).closest("#home-scenery, #home-scenery-button")) closeScenery();
+  });
+  scenery.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.stopPropagation();
+      closeScenery();
+      sceneryButton.focus();
+    }
+  });
+  el("home-view-loadout").onclick = () => {
+    closeScenery();
+    el("inventory-button").click();
   };
   const background = el("home-background") as HTMLSelectElement;
   try {
@@ -185,44 +223,19 @@ export function setupHomeMenu(game: Game) {
     } catch {
       /* Session choice works. */
     }
-    el("home-scenery").hidden = true;
+    closeScenery();
   };
-  const showcaseTeam = el("home-showcase-team") as HTMLSelectElement;
-  const showcaseWeapon = el("home-showcase-weapon") as HTMLSelectElement;
-  const showcaseAgent = el("home-showcase-agent") as HTMLSelectElement;
-  let agentCatalog: AgentDefinition[] | undefined;
-  function syncAgents() {
-    const seen = new Set<string>();
-    const agents = (
-      agentCatalog?.filter((agent) => agent.team === game.team) ?? [defaultAgent(game.team)]
-    ).filter((agent) => {
-      const key = agent.model || agent.id;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-    showcaseAgent.replaceChildren(...agents.map((agent) => new Option(agent.name, agent.id)));
-    showcaseAgent.value = selectedAgentId(game.team);
-    if (!showcaseAgent.value) showcaseAgent.value = defaultAgent(game.team).id;
-  }
-  async function populateAgents() {
-    showcaseAgent.disabled = true;
-    try {
-      agentCatalog = await loadAgentCatalog();
-      syncAgents();
-      if (el("home-agent-status").dataset.owner === "catalog")
-        el("home-agent-status").textContent = "";
-    } catch (error) {
-      console.error("Agent catalog failed to load", error);
-      el("home-agent-status").dataset.owner = "catalog";
-      el("home-agent-status").textContent = "Agent catalog unavailable. Open this menu to retry.";
-    } finally {
-      showcaseAgent.disabled = false;
-    }
-  }
-  showcaseAgent.onchange = () => {
-    setSelectedAgent(game.team, showcaseAgent.value);
-  };
+  el("home-background-options").replaceChildren(
+    ...[...background.options].map((option) => {
+      const button = document.createElement("button");
+      button.textContent = option.text;
+      button.onclick = () => {
+        background.value = option.value;
+        background.dispatchEvent(new Event("change"));
+      };
+      return button;
+    }),
+  );
   const choices = { ct: 9, t: 0 };
   try {
     const stored = JSON.parse(localStorage.getItem("cs2go-home-weapons") ?? "{}");
@@ -238,30 +251,34 @@ export function setupHomeMenu(game: Game) {
     /* Defaults work without storage. */
   }
   function syncShowcase() {
-    showcaseTeam.value = game.team;
-    syncAgents();
-    showcaseWeapon.replaceChildren(
+    el("home-switch-team").textContent = `Show Equipped ${game.team === "ct" ? "T" : "CT"} Agent`;
+    el("home-weapon-options").replaceChildren(
       ...weapons.flatMap((weapon, index) => {
         if (isKnife(index) || !weaponAvailable(index, game.team)) return [];
-        return [new Option(weapon.name, String(index))];
+        const button = document.createElement("button");
+        button.textContent = weapon.name;
+        button.dataset.homeWeapon = String(index);
+        button.setAttribute("aria-pressed", String(index === choices[game.team]));
+        button.onclick = () => {
+          choices[game.team] = index;
+          try {
+            localStorage.setItem("cs2go-home-weapons", JSON.stringify(choices));
+          } catch {
+            /* Session choice works. */
+          }
+          syncShowcase();
+          closeScenery();
+        };
+        return [button];
       }),
     );
-    showcaseWeapon.value = String(choices[game.team]);
     game.homeScene.setWeapon(game.team, choices[game.team]);
   }
-  showcaseTeam.onchange = () => {
-    game.setTeam(showcaseTeam.value as "ct" | "t");
+  el("home-switch-team").onclick = () => {
+    game.setTeam(game.team === "ct" ? "t" : "ct");
     (el("agent-team") as HTMLSelectElement).value = game.team;
     syncShowcase();
-  };
-  showcaseWeapon.onchange = () => {
-    choices[game.team] = Number(showcaseWeapon.value);
-    game.homeScene.setWeapon(game.team, choices[game.team]);
-    try {
-      localStorage.setItem("cs2go-home-weapons", JSON.stringify(choices));
-    } catch {
-      /* Session choice works. */
-    }
+    closeScenery();
   };
   new MutationObserver(syncShowcase).observe(el("home-agent-stage"), {
     attributes: true,

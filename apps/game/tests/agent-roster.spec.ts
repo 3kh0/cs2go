@@ -1,3 +1,4 @@
+import { equipHomeAgent } from "./home-controls";
 import { expect, test } from "@playwright/test";
 import type { Game } from "../src/game";
 import type { AgentDefinition } from "../src/agent-roster";
@@ -15,13 +16,16 @@ test("agent roster is lazy, saved per team, and used by previews and newly spawn
   const models: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("request", (request) => {
-    if (/\/agents\/roster\/[^/]+\.glb/.test(request.url())) models.push(request.url());
+    if (
+      /\/agents\/roster\/[^/]+\.glb/.test(request.url()) &&
+      !request.url().endsWith("/ctm-sas.glb")
+    )
+      models.push(request.url());
   });
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await expect(page.locator("#startup")).toHaveCount(0);
   expect(models).toEqual([]);
-  await page.locator("#home-scenery-button").click();
   const catalog = await page.evaluate(async () => {
     const { loadAgentCatalog } = await import("../src/agent-roster");
     return loadAgentCatalog();
@@ -29,11 +33,10 @@ test("agent roster is lazy, saved per team, and used by previews and newly spawn
   expect(catalog.length).toBeGreaterThan(60);
   expect(models).toEqual([]);
   const choose = async (team: "ct" | "t", preferred: RegExp) => {
-    await page.locator("#home-showcase-team").selectOption(team);
     const options = catalog.filter((agent: AgentDefinition) => agent.team === team && agent.model);
     const agent =
       options.find((entry: AgentDefinition) => preferred.test(entry.name)) ?? options[0]!;
-    await page.locator("#home-showcase-agent").selectOption(agent.id);
+    await equipHomeAgent(page, team, agent.id);
     await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-agent", agent.id, {
       timeout: 30_000,
     });
@@ -45,7 +48,6 @@ test("agent roster is lazy, saved per team, and used by previews and newly spawn
   const ct = await choose("ct", /\bava\b|\bmae\b/i);
   const t = await choose("t", /darryl/i);
   expect(models.length).toBe(2);
-  await page.locator("#home-scenery-button").click();
   await page.locator("#home-play").click();
   await page.locator("#play").click();
   await expect(page.locator("#team-select")).not.toHaveAttribute("aria-busy", "true");
@@ -71,10 +73,8 @@ test("agent roster is lazy, saved per team, and used by previews and newly spawn
     document.exitPointerLock();
     window.__game.menu();
   });
-  await page.locator("#home-scenery-button").click();
   const replacement = await choose("ct", /\bava\b/i);
   expect(replacement.id).not.toBe(ct.id);
-  await page.locator("#home-scenery-button").click();
   await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
