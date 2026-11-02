@@ -280,7 +280,11 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
       overlay.classList.remove("hidden");
       status.textContent = "Loading finishes…";
       try {
-        catalog = await skinCatalog();
+        catalog = (await skinCatalog()).flatMap((skin) => {
+          const family = /^(Gamma Doppler|Doppler) \| (.+)$/.exec(skin.name);
+          if (!family) return [skin];
+          return family[2] === "Phase 1" ? [{ ...skin, name: family[1] }] : [];
+        });
         draft = { ...skinChoices[weapon] };
         status.textContent = "";
         refresh();
