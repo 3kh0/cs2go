@@ -1,5 +1,4 @@
 # syntax=docker/dockerfile:1
-# DHI multi-platform image digests; both stages use the repository's pinned Bun.
 FROM dhi.io/bun:1 AS build
 WORKDIR /app
 COPY package.json bun.lock bunfig.toml ./
