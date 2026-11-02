@@ -1688,13 +1688,13 @@ export class Game {
       );
       if (active) row.setAttribute("aria-current", "true");
       const image = document.createElement("img");
-      const silhouette = assetUrl(`/icons/${weaponIcons[index]}.png`);
+      const silhouette = isKnife(index)
+        ? assetUrl(`/icons/${weaponIcons[index]}.png`)
+        : weaponBuyIcon(index);
       image.alt = "";
-      image.crossOrigin = "anonymous";
       image.src = silhouette;
       const art = document.createElement("span");
       art.className = "inventory-art";
-      art.style.maskImage = `url("${silhouette}")`;
       art.append(image);
       const key = document.createElement("span");
       key.className = "inventory-key";
@@ -1725,7 +1725,10 @@ export class Game {
         if (utility === kind) item.setAttribute("aria-current", "true");
         const art = document.createElement("span");
         art.className = "inventory-art inventory-grenade-art";
-        art.style.maskImage = `url("${assetUrl(`/icons/buy/${grenadeIcons[kind]}.svg`)}")`;
+        const image = document.createElement("img");
+        image.alt = "";
+        image.src = assetUrl(`/icons/buy/${grenadeIcons[kind]}.svg`);
+        art.append(image);
         item.append(art);
         if (inventory[kind] > 1) {
           const count = document.createElement("small");

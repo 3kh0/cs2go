@@ -36,10 +36,35 @@ test("owned grenades show icons and counts and cycle in both wheel directions", 
   expect(purchased).toEqual([true, true, true, true]);
   const icons = page.locator("#inventory [data-grenade-kind]");
   await expect(icons).toHaveCount(3);
+  for (const kind of ["he", "flash", "smoke"]) {
+    const image = page.locator(`#inventory [data-grenade-kind="${kind}"] img`);
+    await expect(image).toBeVisible();
+    await expect
+      .poll(() => image.evaluate((img) => (img as HTMLImageElement).naturalWidth))
+      .toBeGreaterThan(0);
+  }
   await expect(page.locator('#inventory [data-grenade-kind="flash"]')).toHaveAttribute(
     "data-count",
     "2",
   );
+  // Images work without CORS headers, unlike the old CSS masks.
+  await page.route("https://hud-icons.test/**", async (route) => {
+    const path = new URL(route.request().url()).pathname;
+    const response = await page.request.get(path);
+    await route.fulfill({
+      body: await response.body(),
+      contentType: response.headers()["content-type"],
+    });
+  });
+  await page.evaluate(async () => {
+    await Promise.all(
+      [...document.querySelectorAll<HTMLImageElement>("#inventory img")].map(async (image) => {
+        image.src = "https://hud-icons.test" + new URL(image.src).pathname;
+        await image.decode();
+      }),
+    );
+  });
+  await page.screenshot({ path: "artifacts/hud-icons-cross-origin.png" });
   const selected = () => page.evaluate(() => window.__game.utility.selected);
   const wheel = async (delta: number) => {
     await page.waitForTimeout(120);

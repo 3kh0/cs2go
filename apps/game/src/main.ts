@@ -25,6 +25,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 <canvas id="game"></canvas>
 ${homeMenuMarkup()}
 <div id="hud" class="hidden">
+ <svg class="hud-icon-filter" width="0" height="0" aria-hidden="true"><defs><filter id="hud-icon-tint" color-interpolation-filters="sRGB"><feFlood flood-color="var(--hud-accent)"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs></svg>
  <div id="buy-phase-tint" aria-hidden="true"></div>
  <div id="scope" class="hidden" aria-label="AWP scope"><div class="scope-lens"><i class="scope-horizontal"></i><i class="scope-vertical"></i></div></div>
  <div class="radar-wrap"><div id="location">DUST II</div><canvas id="radar" width="900" height="948" aria-label="Player-centered heading-up radar; hold M for the full north-up map"></canvas><div id="economy-hud"><strong id="money"></strong></div></div>

@@ -1074,15 +1074,17 @@ kbd {
 .inventory-art {
   width: 150px;
   height: 32px;
-  background: currentColor;
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: right center;
+}
+.hud-icon-filter {
+  position: absolute;
+  pointer-events: none;
 }
 .inventory-art img {
   width: 100%;
   height: 100%;
-  opacity: 0;
+  object-fit: contain;
+  object-position: right center;
+  filter: url(#hud-icon-tint);
 }
 .inventory-weapon.active {
   opacity: 1;
@@ -1121,7 +1123,9 @@ kbd {
   display: block;
   width: 26px;
   height: 32px;
-  mask-position: center;
+}
+.inventory-grenade-art img {
+  object-position: center;
 }
 .inventory-grenade small {
   position: absolute;

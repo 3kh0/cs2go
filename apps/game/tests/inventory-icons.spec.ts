@@ -33,11 +33,14 @@ test("HUD keeps default silhouettes and skin names for painted weapons", async (
   for (const { weapon } of choices) {
     const art = page.locator(`#inventory [data-weapon-index="${weapon}"] .inventory-art`);
     await expect(art).not.toHaveClass(/inventory-finish/);
-    await expect(art).toHaveCSS("mask-image", /\/icons\//);
+    await expect(art.locator("img")).toBeVisible();
   }
   for (const { weapon, name } of choices) {
     const row = page.locator(`#inventory [data-weapon-index="${weapon}"]`);
-    await expect(row.locator("img")).toHaveAttribute("src", /\/icons\/[^/]+\.png$/);
+    await expect(row.locator("img")).toHaveAttribute(
+      "src",
+      /\/icons\/(?:buy\/)?[^/]+\.(?:png|svg)$/,
+    );
     await expect
       .poll(() => row.locator("img").evaluate((image) => (image as HTMLImageElement).naturalWidth))
       .toBeGreaterThan(0);
@@ -45,6 +48,12 @@ test("HUD keeps default silhouettes and skin names for painted weapons", async (
   }
   await expect(page.locator("#inventory img[src*='/skins/']")).toHaveCount(0);
   await expect(page.locator("#inventory [data-grenade-kind]")).toHaveCount(2);
+  for (const icon of await page.locator("#inventory [data-grenade-kind] img").all()) {
+    await expect(icon).toBeVisible();
+    await expect
+      .poll(() => icon.evaluate((image) => (image as HTMLImageElement).naturalWidth))
+      .toBeGreaterThan(0);
+  }
   await page.screenshot({ path: "artifacts/inventory-icons-fallback.png" });
   expect(errors).toEqual([]);
 });
