@@ -541,7 +541,6 @@ export function updateGloveModel(
     }
   });
 }
-export const registerGloveModel = updateGloveModel;
 export async function setGloves(team: Team, raw: GloveChoice) {
   const choice = sanitizeGloveChoice(raw);
   await prepare(choice);

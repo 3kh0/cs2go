@@ -15,11 +15,7 @@ export type SteamItem = {
 };
 
 const normalize = (name: string) =>
-  name
-    .normalize("NFKC")
-    .replace(/[™★]/g, "")
-    .trim()
-    .toLowerCase();
+  name.normalize("NFKC").replace(/[™★]/g, "").trim().toLowerCase();
 export function matchSteamSkin(item: SteamItem, catalog: Skin[]) {
   const weapon = weapons.findIndex((w) => normalize(w.name) === normalize(item.weaponName));
   return catalog.find(

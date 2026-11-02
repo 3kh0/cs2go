@@ -1,3 +1,4 @@
+import { wearCondition } from "./cosmetic-wear";
 import type { Game } from "./game";
 import type { AgentTeam } from "./soldier";
 import { assetUrl } from "./asset-url";
@@ -22,16 +23,6 @@ import "./cosmetic-menu.css";
 type Category = "agents" | "gloves";
 type AgentCard = AgentDefinition & { image?: string };
 const teamName = (team: AgentTeam) => (team === "ct" ? "Counter-Terrorists" : "Terrorists");
-const condition = (wear: number) =>
-  wear < 0.07
-    ? "Factory New"
-    : wear < 0.15
-      ? "Minimal Wear"
-      : wear < 0.38
-        ? "Field-Tested"
-        : wear < 0.45
-          ? "Well-Worn"
-          : "Battle-Scarred";
 const groups: Record<string, string> = {
   base: "Movement and poses",
   weapon: "Weapon actions",
@@ -133,7 +124,7 @@ export function setupCosmeticMenu(game: Game) {
             : "Equip an agent to see it in the main menu.";
     wear.value = float.value = String(draftGloves.wear);
     seed.value = String(draftGloves.seed);
-    get("glove-condition").textContent = condition(draftGloves.wear);
+    get("glove-condition").textContent = wearCondition(draftGloves.wear);
     for (const element of [wear, float, seed, get<HTMLButtonElement>("glove-random-seed")])
       element.disabled = busy || loading || !glove;
     get<HTMLButtonElement>("equip-cosmetic").disabled = busy || loading;
@@ -366,14 +357,14 @@ export function setupCosmeticMenu(game: Game) {
   wear.oninput = () => {
     draftGloves.wear = Number(wear.value);
     float.value = wear.value;
-    get("glove-condition").textContent = condition(draftGloves.wear);
+    get("glove-condition").textContent = wearCondition(draftGloves.wear);
     status.textContent = "";
   };
   float.oninput = () => {
     if (float.validity.valid) {
       draftGloves.wear = Number(float.value);
       wear.value = float.value;
-      get("glove-condition").textContent = condition(draftGloves.wear);
+      get("glove-condition").textContent = wearCondition(draftGloves.wear);
     }
     status.textContent = "";
   };

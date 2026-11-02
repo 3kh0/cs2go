@@ -65,26 +65,7 @@ header {
   border-bottom: 1px solid #ffffff1c;
   gap: 32px;
 }
-.brand {
-  font-family: "Stratum2 Condensed", Impact, sans-serif;
-  font-style: italic;
-  font-size: 38px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  color: #f0ede4;
-  text-decoration: none;
-}
-.brand > span:first-child {
-  color: var(--orange);
-}
-.brand-mark {
-  font-size: 20px;
-  color: var(--orange);
-  margin-left: 14px;
-  font-style: normal;
-  letter-spacing: -4px;
-}
-.header-caption,
+
 .online {
   font-size: 10px;
   letter-spacing: 1.7px;
@@ -156,24 +137,7 @@ h1 em {
   color: #b5bab1;
   margin: 0 0 34px;
 }
-.mode-tabs {
-  display: flex;
-  gap: 26px;
-  border-bottom: 1px solid #ffffff25;
-}
-.mode-tabs button {
-  background: none;
-  padding: 0 0 15px;
-  font-size: 11px;
-  letter-spacing: 1.7px;
-  font-weight: 700;
-  color: #8e988f;
-  border-bottom: 2px solid transparent;
-}
-.mode-tabs button.active {
-  color: var(--orange);
-  border-color: var(--orange);
-}
+
 .mode-description {
   font-size: 12px;
   color: #b9bcb2;
@@ -200,13 +164,7 @@ h1 em {
   font-weight: 400;
   line-height: 0.7;
 }
-.play-note {
-  font-size: 8px;
-  letter-spacing: 1.65px;
-  color: #7e8b82;
-  margin-top: 13px;
-  text-align: center;
-}
+
 .map-card {
   position: absolute;
   right: 0;
@@ -217,26 +175,7 @@ h1 em {
   border: 1px solid #ffffff26;
   backdrop-filter: blur(12px);
 }
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  background: #ffffff06;
-  padding: 13px 20px;
-  border-bottom: 1px solid #ffffff17;
-  font-size: 9px;
-  letter-spacing: 1.4px;
-  color: #aab3a7;
-}
-.card-top span:last-child {
-  opacity: 0.5;
-}
-.map-title {
-  padding: 23px 22px 0;
-}
-.map-title .eyebrow {
-  font-size: 8px;
-  color: var(--orange);
-}
+
 h2 {
   font-family: "Stratum2 Condensed", Impact, sans-serif;
   font-weight: 700;
@@ -244,62 +183,19 @@ h2 {
   letter-spacing: 0.3px;
   margin: 8px 0;
 }
-.map-title p {
-  font-size: 12px;
-  color: #a7b1a6;
-  margin: 4px 0;
-}
+
 .map-card canvas {
   width: 100%;
   height: 165px;
   opacity: 0.85;
   padding: 15px;
 }
-.map-meta {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px 17px;
-  font-size: 8px;
-  letter-spacing: 0.8px;
-  color: #a7b3a6;
-}
+
 .dot {
   margin-right: 5px;
   background: var(--orange);
 }
-.map-tags {
-  display: flex;
-  gap: 5px;
-  padding: 15px 15px;
-  border-top: 1px solid #ffffff17;
-}
-.map-tags span {
-  font-size: 7px;
-  letter-spacing: 0.5px;
-  background: #ffffff08;
-  padding: 6px;
-  color: #adb7ac;
-}
-.world-label {
-  position: absolute;
-  right: 330px;
-  bottom: 35px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  font-size: 8px;
-  color: #ffffff91;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 10px #000;
-}
-.world-label strong {
-  font-size: 10px;
-  color: #fff;
-}
-.world-label strong span {
-  color: #ffffff91;
-  font-weight: 400;
-}
+
 footer {
   height: 82px;
   border-top: 1px solid #ffffff20;
@@ -321,27 +217,14 @@ footer strong {
 footer > div > span:last-child {
   color: #8e9b90;
 }
-.footer-index {
-  border: 1px solid #ffffff30;
-  padding: 8px;
-  color: var(--orange);
-  font-size: 9px;
-}
+
 footer button {
   background: none;
   font-size: 9px;
   letter-spacing: 1.2px;
   color: #bcc2b7;
 }
-.footer-end {
-  font-size: 8px;
-  letter-spacing: 1.2px;
-  color: #929e92;
-}
-.footer-end span {
-  color: var(--orange);
-  margin-left: 10px;
-}
+
 #hud {
   position: fixed;
   inset: 0;
@@ -1005,10 +888,6 @@ kbd {
   }
 }
 @media (max-width: 1050px) {
-  .header-caption,
-  .footer-end {
-    display: none;
-  }
   .intro {
     width: 410px;
   }
@@ -1018,19 +897,9 @@ kbd {
   .map-card {
     width: 260px;
   }
-  .map-tags span {
-    font-size: 6px;
-  }
-  .world-label {
-    right: 280px;
-  }
-  .bottom-tip {
-    display: none;
-  }
 }
 @media (max-width: 720px) {
-  .map-card,
-  .world-label {
+  .map-card {
     display: none;
   }
   .lobby {
@@ -1042,9 +911,7 @@ kbd {
   header {
     height: 70px;
   }
-  .brand {
-    font-size: 32px;
-  }
+
   .online {
     font-size: 7px;
   }
@@ -1620,24 +1487,7 @@ kbd {
     700 36px "Stratum2 Condensed",
     sans-serif;
 }
-.skin-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 20px 0;
-}
-.skin-tabs button {
-  flex: 1 0 110px;
-  background: #252e37;
-  border: 1px solid #46515c;
-  padding: 12px;
-  color: #eee;
-}
-.skin-tabs button[aria-pressed="true"] {
-  background: #d7a34b;
-  color: #14191e;
-  border-color: #d7a34b;
-}
+
 .skin-layout {
   display: grid;
   grid-template-columns: 1fr 310px;
@@ -1773,14 +1623,8 @@ kbd {
   color: #aeb8c2;
   margin: 0;
 }
-.skin-tabs button[aria-pressed="true"] {
-  background-color: #d7a34b;
-  color: #14191e;
-}
 
-.mode-options,
-.equipment-options,
-.buy-summary {
+.mode-options {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
@@ -1811,27 +1655,11 @@ kbd {
   object-fit: contain;
   margin-bottom: 8px;
 }
-.weapon-options button:disabled,
-.equipment-options button:disabled {
+.weapon-options button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
-.equipment-options button {
-  flex: 1;
-  background: #263238;
-  color: white;
-  border: 1px solid #637079;
-  padding: 15px;
-  cursor: pointer;
-}
-.equipment-options small {
-  display: block;
-  margin-top: 6px;
-}
-.buy-summary {
-  justify-content: space-between;
-  color: #e9bd68;
-}
+
 #economy-hud {
   margin-top: 10px;
   color: #d5e8b9;
@@ -1839,11 +1667,6 @@ kbd {
 }
 #money {
   font-size: 25px;
-}
-.skin-tabs {
-  max-height: 150px;
-  overflow-y: auto;
-  flex-shrink: 0;
 }
 
 /* The match menu releases input while the world and scoreboard remain live. */
@@ -1870,13 +1693,7 @@ kbd {
 .pause-toolbar .deploy {
   padding: 14px 20px;
 }
-.pause-live {
-  margin-right: auto;
-  font-size: 11px;
-  color: #a8ff80;
-  letter-spacing: 2px;
-  white-space: nowrap;
-}
+
 .match-menu-open #scoreboard {
   top: calc(50% + 35px);
   max-height: calc(100vh - 115px);
@@ -1952,51 +1769,13 @@ kbd {
     font-size: 11px;
     padding: 10px;
   }
-  .pause-live {
-    display: none;
-  }
 }
 
 #loadout-editor {
   z-index: 14;
   background: #1c221ef5;
 }
-.inventory-dialog {
-  width: min(1150px, 94vw);
-  max-height: 92vh;
-  overflow-y: auto;
-  padding: 28px;
-}
-.inventory-heading {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-}
-.inventory-heading > div {
-  flex: 1;
-}
-.inventory-heading h2 {
-  margin: 8px 0;
-  font-size: 32px;
-}
-.inventory-heading p {
-  color: #bdc4bd;
-  font-size: 13px;
-  max-width: 680px;
-  line-height: 1.5;
-}
-.inventory-heading .secondary {
-  width: auto;
-  margin: 0;
-}
-.inventory-teams {
-  display: flex;
-  gap: 12px;
-  margin: 18px 0;
-}
-.inventory-teams button {
-  padding: 12px 20px;
-}
+
 .inventory-slots {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

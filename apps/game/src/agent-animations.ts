@@ -20,7 +20,6 @@ type Manifest = {
   packs: Record<string, { url: string; clips: SourceClip[] }>;
   weapon_packs: Record<string, string[]>;
   weapon_skeletons: Record<string, string>;
-  weapon_rest: Record<string, { bones: Record<string, { t?: number[]; r?: number[] }> }>;
 };
 let manifestRequest: Promise<Manifest> | undefined;
 async function manifest() {
@@ -264,10 +263,6 @@ export async function loadAgentWeaponActions(index: number) {
   } finally {
     packs.forEach((pack) => pack.release());
   }
-}
-export async function agentAnimationWeaponRest(index: number) {
-  const data = await manifest();
-  return data.weapon_rest[data.weapon_skeletons[String(itemIds[index])]]?.bones;
 }
 export async function agentAnimationWeaponIndex(id: string, current: number) {
   const data = await manifest();

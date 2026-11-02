@@ -1,3 +1,4 @@
+import { wearCondition } from "./cosmetic-wear";
 import "./inventory-page.css";
 import { assetUrl } from "./asset-url";
 import {
@@ -95,16 +96,6 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
     status.textContent = "";
     refresh();
   };
-  const condition = (n: number) =>
-    n < 0.07
-      ? "Factory New"
-      : n < 0.15
-        ? "Minimal Wear"
-        : n < 0.38
-          ? "Field-Tested"
-          : n < 0.45
-            ? "Well-Worn"
-            : "Battle-Scarred";
   function detail() {
     get("equip-knife").classList.toggle("hidden", !isKnife(weapon));
     const skin = catalog.find((s) => s.id === draft.id && s.weapon === weapon);
@@ -116,7 +107,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
     img.alt = `${weapons[weapon]} ${skin?.name ?? "default finish"}`;
     wear.value = float.value = String(draft.wear);
     seed.value = String(draft.seed);
-    get("skin-condition").textContent = condition(draft.wear);
+    get("skin-condition").textContent = wearCondition(draft.wear);
     wear.disabled =
       float.disabled =
       seed.disabled =
@@ -219,14 +210,14 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
   wear.oninput = () => {
     draft.wear = Number(wear.value);
     float.value = wear.value;
-    get("skin-condition").textContent = condition(draft.wear);
+    get("skin-condition").textContent = wearCondition(draft.wear);
     status.textContent = "";
   };
   float.oninput = () => {
     if (float.validity.valid) {
       draft.wear = Number(float.value);
       wear.value = float.value;
-      get("skin-condition").textContent = condition(draft.wear);
+      get("skin-condition").textContent = wearCondition(draft.wear);
     }
     status.textContent = "";
   };

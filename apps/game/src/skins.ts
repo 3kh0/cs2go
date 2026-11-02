@@ -36,7 +36,6 @@ function read(): SkinChoice[] {
 export const skinChoices = read();
 let catalog: Promise<Skin[]> | undefined;
 let catalogItems: Skin[] = [];
-export const skinImage = (id: string) => catalogItems.find((skin) => skin.id === id)?.image ?? "";
 export const skinName = (id: string) => catalogItems.find((skin) => skin.id === id)?.name ?? "";
 export function skinRarityColor(id: string) {
   const rarity = catalogItems.find((skin) => skin.id === id)?.rarity;
