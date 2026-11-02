@@ -36,7 +36,7 @@ Recoil follows researched legacy Source formulas; current proprietary constants 
 
 Ground Rebel uses its imported native bone-local bullet capsules; the older CT rig and server/player hulls retain simplified hit regions. Penetration has a four-barrier budget, and an actor takes damage once per shot despite overlapping meshes.
 
-Knife rules follow the historical implementation: front initial/repeated slash 40/25, front stab 65, rear slash/stab 90/180, 85% armor penetration and 48/32-Source-unit reach. Miss/hit recovery is 0.4/0.5 seconds for slash and 1/1.1 for stab. Impact phases and the forgiving trace fan remain reconstructed. Native visual clip seconds are independent; see [assets.md](assets.md#knife-timing). Knives are Inventory equipment, never buy-menu purchases.
+Knife rules follow the historical implementation: front initial/repeated slash 40/25, front stab 65, rear slash/stab 90/180 (153 heavy backstab damage through full armor), 85% armor penetration and 48/32-Source-unit reach. Miss/hit recovery is 0.4/0.5 seconds for slash and 1/1.1 for stab. Impact phases and the forgiving trace fan remain reconstructed. Native visual clip seconds are independent; see [assets.md](assets.md#knife-timing). Rear hits use the victim’s visible body direction rather than an AI turn target. Heavy hits use the native `Weapon_Knife.Hit.Heavy` cue for local and remote players. Knives are Inventory equipment, never buy-menu purchases.
 
 ## Native Dust II data
 

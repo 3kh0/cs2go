@@ -825,7 +825,13 @@ export class Game {
     document.addEventListener("mousemove", (e) => {
       if (!this.locked) return;
       if (this.dead) {
-        if (this.teamMode && this.spectatorMode !== "first") {
+        if (this.teamMode && this.competitive && !this.spectated) {
+          this.spectatorPitch = clamp(
+            this.spectatorPitch - e.movementY * 0.002 * this.settings.sensitivity,
+            0.35,
+            1.55,
+          );
+        } else if (this.teamMode && !this.competitive && this.spectatorMode !== "first") {
           this.spectatorYaw -= e.movementX * 0.002 * this.settings.sensitivity;
           this.spectatorPitch = clamp(
             this.spectatorPitch - e.movementY * 0.002 * this.settings.sensitivity,
@@ -1816,7 +1822,7 @@ export class Game {
     const b = this.bots[index];
     if (this.mode === "casual" && b.team === this.team) return;
     // A narrow, non-penetrating melee trace: solid cover always blocks it.
-    const back = knifeBackstab(this.position, b.group.position, b.facing);
+    const back = knifeBackstab(this.position, b.group.position, b.group.rotation.y);
     const damage = knifeDamage(stab, this.knifeFirstSwing, back);
     this.damageActor(b, damage, { height: 1.1 }, this.selected, this.team, "other");
     {
@@ -3752,6 +3758,12 @@ export class Game {
     return true;
   }
   cycleSpectatorMode(direction: number) {
+    if (this.competitive) {
+      this.spectatorMode = "first";
+      this.keys.clear();
+      this.spectate();
+      return;
+    }
     const current = spectatorModes.indexOf(this.spectatorMode);
     this.spectatorMode =
       spectatorModes[(current + direction + spectatorModes.length) % spectatorModes.length];
@@ -3769,6 +3781,10 @@ export class Game {
     this.spectate();
   }
   moveSpectator(dt: number) {
+    if (this.competitive) {
+      this.spectate();
+      return;
+    }
     const right = Number(this.keys.has("KeyD")) - Number(this.keys.has("KeyA"));
     const forward = Number(this.keys.has("KeyW")) - Number(this.keys.has("KeyS"));
     const up =
@@ -3783,20 +3799,27 @@ export class Game {
     this.camera.position.addScaledVector(this.spectatorOffset.normalize(), speed * dt);
   }
   spectate(cycle = 0) {
+    if (this.competitive) this.spectatorMode = "first";
     if (this.spectatorMode === "free") {
       this.camera.rotation.set(this.spectatorPitch, this.spectatorYaw, 0);
       return;
     }
     let teammate = this.spectated;
     const current = teammate ? this.bots.indexOf(teammate) : -1;
-    if (cycle || current < 0 || !teammate || teammate.team !== this.team || teammate.health <= 0) {
+    if (
+      cycle ||
+      current < 0 ||
+      !teammate ||
+      (this.competitive && teammate.team !== this.team) ||
+      teammate.health <= 0
+    ) {
       teammate = undefined;
       const direction = cycle < 0 ? -1 : 1;
       const start = current < 0 && direction < 0 ? 0 : current;
       for (let offset = 1; offset <= this.bots.length; offset++) {
         const index = (start + direction * offset + this.bots.length) % this.bots.length;
         const candidate = this.bots[index];
-        if (candidate.team === this.team && candidate.health > 0) {
+        if ((!this.competitive || candidate.team === this.team) && candidate.health > 0) {
           teammate = candidate;
           break;
         }
@@ -3808,6 +3831,26 @@ export class Game {
     }
     this.spectated = teammate;
     if (!teammate) {
+      if (this.competitive) {
+        const bomb = this.bomb;
+        const carrier =
+          bomb && !bomb.planted && typeof bomb.carrier === "number"
+            ? this.bots[bomb.carrier]
+            : undefined;
+        this.spectatorFocus.copy(carrier?.group.position ?? bomb?.position ?? this.position).y +=
+          0.1;
+        const pitch = clamp(this.spectatorPitch, 0.35, 1.55);
+        this.spectatorOffset.set(0, Math.sin(pitch), Math.cos(pitch));
+        this.spectatorRay.set(this.spectatorFocus, this.spectatorOffset);
+        const obstruction = this.world.collision?.intersections(this.spectatorRay, 3)[0];
+        this.camera.position
+          .copy(this.spectatorFocus)
+          .addScaledVector(
+            this.spectatorOffset,
+            obstruction ? Math.max(0.15, obstruction.distance - 0.15) : 3,
+          );
+        this.camera.lookAt(this.spectatorFocus);
+      }
       return;
     }
     const p = teammate.group.position,

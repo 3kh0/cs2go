@@ -9,6 +9,7 @@ import {
   stepMatch,
   respawn,
 } from "./match";
+import { shoot } from "./combat";
 import { testMap } from "./test-map";
 import { dust2BuyZones } from "./buy-zones";
 import { knifeDefinitions, weapons } from "./physics";
@@ -491,4 +492,24 @@ test("surviving captured weapons refill every magazine next round without changi
     reserve: weapons[ct.secondary].reserve,
   });
   expect(ct.appearances[30]).toBe(captured);
+});
+
+test("every knife heavy backstab kills an armored enemy while front and side stabs do not", () => {
+  for (const { id } of knifeDefinitions) {
+    for (const [yaw, health] of [
+      [0, 0],
+      [Math.PI, 45],
+      [Math.PI / 2, 45],
+    ]) {
+      const { match, ct, t } = fixture();
+      live(match);
+      arm(ct, id);
+      Object.assign(ct, { x: 0, y: 0, z: 0.6, yaw: 0, pitch: 0 });
+      Object.assign(t, { x: 0, y: 0, z: 0, yaw, health: 100, armor: 100, helmet: true });
+      const events = shoot(match, ct, true);
+      expect(events[0]).toEqual({ kind: "melee", shooter: ct.id, stab: true, hit: true });
+      expect(t.health, `knife ${id}, victim yaw ${yaw}`).toBe(health);
+      expect(events.some((event) => event.kind === "kill")).toBe(health === 0);
+    }
+  }
 });

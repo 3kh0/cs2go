@@ -1270,6 +1270,8 @@ test("spectator clicks cycle living teammates, wrap, and recover when the target
   await page.goto("/");
   await page.bringToFront();
   await page.locator("#home-play").click();
+  await page.locator('[data-mode="competitive"]').click();
+  await page.locator("#home-play").click();
   await page.locator("#play").click();
   if (await page.locator("#team-select").isVisible()) {
     const team = await page.evaluate(() => window.__game.team);

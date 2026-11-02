@@ -518,7 +518,7 @@ export class MultiplayerMatch {
           };
           peer.rig.shotTime = event.stab ? 1 : 0.5;
           g.soundscape.play(
-            event.hit ? "knife-hit" : "knife-swing1",
+            event.hit ? (event.stab ? "knife-stab" : "knife-hit") : "knife-swing1",
             false,
             "concrete",
             peer.group.position,
