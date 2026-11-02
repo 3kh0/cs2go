@@ -79,3 +79,5 @@ python3 scripts/import-knife-timings.py artifacts/native-knife-timing/timing-ros
 ```
 
 Timing extraction needs scratch-local srctools 2.7.0 and the matching CLI. The importer verifies native resource hashes and GLB time grids. A viewer refresh requires explicit `--refresh` and review; rerun timing binding after model regeneration. Native rare branches, inspect looping, conditional blends and live `weapon_action_speedscale` values are not fully reproduced.
+
+Menu geometry follows the decoded shipped Panorama styles at [GameTracking-CS2 `00037586`](https://github.com/SteamTracking/GameTracking-CS2/tree/00037586b57e4f3efabf50076a15ce2a6c2f3004/game/csgo/pak01_dir/panorama): `loadout_grid.css`, `itemtile.css`, `mainmenu.css`, and the 192×190 cell declaration in `loadout_grid.xml`. A shared viewport-height / 1080 scale matches the supplied 1600×1200 recording; the engine-side scaling declaration was not available. The top bar uses the shipped typography and transition durations, with a lightweight CSS approximation of the native selection particles.

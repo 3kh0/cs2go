@@ -51,6 +51,52 @@ export function homeMenuMarkup() {
 export function setupHomeMenu(game: Game) {
   const el = (id: string) => document.getElementById(id)!;
   const panel = el("home-panel");
+  const navButtons = [...document.querySelectorAll<HTMLButtonElement>(".home-header button")];
+  const syncNavigation = () => {
+    const visible = (id: string) => {
+      const node = document.getElementById(id);
+      return !!node && !node.classList.contains("hidden");
+    };
+    const active = visible("loadout-editor")
+      ? "inventory-button"
+      : visible("skin-menu") || visible("cosmetic-menu")
+        ? "skins-button"
+        : visible("settings")
+          ? "settings-button"
+          : visible("home-panel")
+            ? el("menu").dataset.navPopup
+            : el("menu").dataset.page === "play"
+              ? "home-play"
+              : "home-button";
+    navButtons.forEach((button) => {
+      if (button.id === active) button.setAttribute("aria-current", "page");
+      else button.removeAttribute("aria-current");
+    });
+  };
+  navButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      el("menu").dataset.navPopup = button.id;
+      queueMicrotask(syncNavigation);
+    }),
+  );
+  const navigationObserver = new MutationObserver((records) => {
+    for (const record of records)
+      for (const node of record.addedNodes)
+        if (node instanceof HTMLElement && ["skin-menu", "cosmetic-menu"].includes(node.id))
+          navigationObserver.observe(node, { attributes: true, attributeFilter: ["class"] });
+    syncNavigation();
+  });
+  navigationObserver.observe(document.body, { childList: true });
+  for (const id of ["menu", "skin-menu", "cosmetic-menu", "settings", "home-panel"]) {
+    const node = document.getElementById(id);
+    if (node)
+      navigationObserver.observe(node, {
+        attributes: true,
+        attributeFilter: ["class", "data-page"],
+      });
+  }
+  syncNavigation();
+
   document.querySelector(".home-header")!.addEventListener("click", (event) => {
     if (!(event.target as Element).closest("#settings-button"))
       el("settings").classList.add("hidden");

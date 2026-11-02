@@ -1,3 +1,8 @@
+:root {
+  --menu-unit: calc(100vh / 1080);
+  --menu-header: calc(64 * var(--menu-unit));
+  --social-rail: calc(64 * var(--menu-unit));
+}
 #menu {
   background: linear-gradient(0deg, #19222b45, transparent 45%);
 }
@@ -5,10 +10,10 @@
   position: absolute;
   inset: 0 0 auto;
   z-index: 2;
-  height: clamp(48px, 6vh, 68px);
+  height: var(--menu-header);
   margin: 0;
   gap: 0;
-  background: #35414c66;
+  background: #293238c9;
   backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 #ffffff0d;
 }
@@ -16,7 +21,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url(/ui/home/linemap.png) center / cover;
+  background: url(/ui/home/linemap.png) center / calc(514 * var(--menu-unit))
+    calc(513 * var(--menu-unit));
   opacity: 0.05;
   pointer-events: none;
 }
@@ -535,4 +541,129 @@
 #menu[data-page="play"] .mode-description,
 #menu[data-page="play"] #play {
   grid-row: 4;
+}
+
+/* Panorama nav typography and 150/250 ms selection timing. The block shimmer
+   approximates the native particle strip using bounded compositor animations. */
+#menu .home-nav {
+  gap: 0;
+  overflow: visible;
+}
+#menu .home-nav button {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  padding: 0 calc(18 * var(--menu-unit));
+  font-size: calc(28 * var(--menu-unit));
+  letter-spacing: calc(1 * var(--menu-unit));
+  display: grid;
+  place-items: center;
+  color: #d2d5d6;
+  transition:
+    color 0.15s ease-in-out,
+    text-shadow 0.15s ease-in-out,
+    background-color 0.25s ease-in-out;
+}
+#menu .home-nav #home-play {
+  width: calc(128 * var(--menu-unit));
+  font-size: calc(36 * var(--menu-unit));
+  padding: 0;
+}
+#menu .home-nav i {
+  height: 30%;
+}
+#menu .home-nav button::before,
+#menu .home-nav button::after {
+  content: "";
+  position: absolute;
+  inset: 0 calc(-20 * var(--menu-unit));
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+#menu .home-nav button::before {
+  background: repeating-linear-gradient(
+    90deg,
+    #78c5ef55 0 calc(18 * var(--menu-unit)),
+    transparent calc(18 * var(--menu-unit)) calc(21 * var(--menu-unit))
+  );
+  mask-image: linear-gradient(transparent, #0008 25%, #000 75%, transparent);
+  transform: scaleY(0.65);
+}
+#menu .home-nav button::after {
+  background: radial-gradient(ellipse, #70bfe447, transparent 70%);
+}
+#menu .home-nav button:hover,
+#menu .home-nav button:focus-visible {
+  color: #fff;
+  text-shadow: 0 0 8px #a4d6ed55;
+  background-color: #91b7c20c;
+  filter: none;
+}
+#menu .home-nav button:hover::after {
+  opacity: 0.6;
+}
+#menu .home-nav button[aria-current="page"] {
+  color: #82d8ff;
+}
+#menu .home-nav button[aria-current="page"]::before {
+  opacity: 0.35;
+  animation: nav-blocks-breathe 4s ease-in-out infinite alternate;
+}
+#menu .home-nav button[aria-current="page"]::after {
+  opacity: 0.5;
+}
+#menu .home-tools {
+  gap: calc(4 * var(--menu-unit));
+  padding-left: calc(12 * var(--menu-unit));
+}
+#menu .home-tools button {
+  width: calc(44 * var(--menu-unit));
+  height: calc(44 * var(--menu-unit));
+  padding: calc(11 * var(--menu-unit));
+  transition: background-color 0.25s ease-in-out;
+}
+#menu .home-tools img {
+  width: calc(22 * var(--menu-unit));
+  height: calc(22 * var(--menu-unit));
+  transition:
+    opacity 0.15s ease-in-out,
+    filter 0.15s ease-in-out;
+}
+#menu .home-tools button:hover {
+  background: #add3e316;
+}
+#menu .home-tools button[aria-current="page"] img {
+  filter: brightness(0) saturate(100%) invert(81%) sepia(21%) saturate(902%) hue-rotate(162deg);
+  opacity: 1;
+}
+@keyframes nav-blocks-breathe {
+  from {
+    transform: scaleY(0.65);
+    opacity: 0.22;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #menu .home-nav button[aria-current="page"]::before {
+    animation: none;
+  }
+  #menu .home-nav button,
+  #menu .home-nav button::before,
+  #menu .home-nav button::after,
+  #menu .home-tools button,
+  #menu .home-tools img {
+    transition: none;
+  }
+}
+#menu #home-play:not([aria-current="page"]) {
+  color: #d2d5d6;
+}
+#menu #home-button:not([aria-current="page"]) img {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
 }
