@@ -180,6 +180,16 @@ el("close-loadout").onclick = () => {
   el("loadout").classList.add("hidden");
   void game.lock();
 };
+document.addEventListener(
+  "mousedown",
+  (event) => {
+    if (event.button !== 2 || el("loadout").classList.contains("hidden")) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    el("close-loadout").click();
+  },
+  { capture: true },
+);
 document.querySelectorAll<HTMLButtonElement>("[data-weapon]").forEach(
   (b) =>
     (b.onclick = (event) => {

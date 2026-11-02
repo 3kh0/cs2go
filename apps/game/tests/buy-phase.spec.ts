@@ -189,3 +189,33 @@ test("buy and Escape menus keep freeze, round, bomb and bots running", async ({ 
   await expect(page.locator("#scoreboard")).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+test("right click closes the buy menu without buying or triggering weapon secondary fire", async ({
+  page,
+}) => {
+  await start(page);
+  const before = await page.evaluate(() => {
+    const game = window.__game;
+    game.freezeTime = 100;
+    game.buyRemaining = 120;
+    game.money = 10000;
+    game.buy(3);
+    return { money: game.money, ammo: game.ammo, selected: game.selected };
+  });
+  await page.waitForFunction(() => window.__game.drawTime === 0);
+  await page.keyboard.press("b");
+  await expect(page.locator("#loadout")).toBeVisible();
+  await page.locator('#loadout [data-weapon="3"]').click({ button: "right" });
+  await expect(page.locator("#loadout")).toBeHidden();
+  await page.waitForFunction(() => window.__game.locked);
+  expect(
+    await page.evaluate(() => ({
+      money: window.__game.money,
+      ammo: window.__game.ammo,
+      selected: window.__game.selected,
+    })),
+  ).toEqual(before);
+  expect(await page.evaluate(() => window.__game.scopeLevel)).toBe(0);
+  await page.mouse.click(720, 450, { button: "right" });
+  await expect.poll(() => page.evaluate(() => window.__game.scopeLevel)).toBe(1);
+});
