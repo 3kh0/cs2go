@@ -185,18 +185,21 @@ export function createPlayer(id: string, name: string, team: Team): PlayerState 
     waiting: false,
   };
 }
-export function newAppearance(match: Match, player: PlayerState, weapon: number) {
+function freshAppearance(match: Match, player: PlayerState, weapon: number) {
   const skin = match.configurations.get(player.id)?.skins[weapon] ?? {
     id: "",
     wear: 0.01,
     seed: 1,
   };
-  return (player.appearances[weapon] = {
+  return {
     serial: match.nextAppearance++,
     weapon,
     creator: player.id,
     skin: { ...skin },
-  });
+  };
+}
+export function newAppearance(match: Match, player: PlayerState, weapon: number) {
+  return (player.appearances[weapon] = freshAppearance(match, player, weapon));
 }
 export function configurePlayer(
   match: Match,
@@ -522,9 +525,16 @@ export function rayBox(origin: Vec3, direction: Vec3, min: Vec3, max: Vec3): num
   }
   return near;
 }
-export function dropWeapon(match: Match, player: PlayerState, toss = false) {
-  if (isKnife(player.weapon)) return;
-  match.receipts.get(player.id)!.weapons.delete(player.weapon);
+function spawnWeaponDrop(
+  match: Match,
+  player: PlayerState,
+  item: Pick<
+    RoundState["drops"][number],
+    "weapon" | "ammo" | "reserve" | "appearance" | "suppressed"
+  >,
+  toss = false,
+  buyDrop = false,
+) {
   const position = new T.Vector3(player.x, player.y + 0.7, player.z);
   const velocity = new T.Vector3(-Math.sin(player.yaw) * 2.5, 1, -Math.cos(player.yaw) * 2.5);
   if (toss) {
@@ -547,12 +557,9 @@ export function dropWeapon(match: Match, player: PlayerState, toss = false) {
   const id = match.nextDrop++;
   match.state.drops.push({
     id,
-    weapon: player.weapon,
-    ammo: player.ammo,
-    reserve: player.reserve,
+    ...item,
     owner: player.id,
-    appearance: player.appearances[player.weapon] ?? newAppearance(match, player, player.weapon),
-    suppressed: match.actions.get(player.id)!.attached[player.weapon],
+    buyDrop,
     x: position.x,
     y: position.y,
     z: position.z,
@@ -567,6 +574,22 @@ export function dropWeapon(match: Match, player: PlayerState, toss = false) {
     age: 0,
   });
   if (match.state.drops.length > 64) match.state.drops.shift();
+}
+export function dropWeapon(match: Match, player: PlayerState, toss = false) {
+  if (isKnife(player.weapon)) return;
+  match.receipts.get(player.id)!.weapons.delete(player.weapon);
+  spawnWeaponDrop(
+    match,
+    player,
+    {
+      weapon: player.weapon,
+      ammo: player.ammo,
+      reserve: player.reserve,
+      appearance: player.appearances[player.weapon] ?? newAppearance(match, player, player.weapon),
+      suppressed: match.actions.get(player.id)!.attached[player.weapon],
+    },
+    toss,
+  );
   if (player.primary === player.weapon) player.primary = null;
   delete player.magazines[player.weapon];
   delete player.appearances[player.weapon];
@@ -582,6 +605,7 @@ function pickupWeapon(match: Match, player: PlayerState, manual: boolean) {
       weaponSlot(drop.weapon) === 1 ? player.primary === null : !player.magazines[player.secondary];
     return (
       (empty || manual) &&
+      (manual || !drop.buyDrop || drop.owner !== player.id) &&
       canPickupDroppedWeapon(drop, drop.age, drop.owner === player.id, player, (from, to) =>
         match.map.collision.visible(from, to),
       )
@@ -611,6 +635,7 @@ function pickupWeapon(match: Match, player: PlayerState, manual: boolean) {
 }
 function buy(match: Match, player: PlayerState, input: Input) {
   const index = input.buy;
+  if (input.buyDrop && isKnife(index)) return;
   if (isKnife(index) && player.health > 0 && match.state.phase !== "finished") {
     const locks = match.weaponCooldowns.get(player.id)!;
     locks[player.weapon] = Math.max(
@@ -655,9 +680,26 @@ function buy(match: Match, player: PlayerState, input: Input) {
     !isKnife(index) &&
     (!match.configurations.has(player.id) || player.allowedWeapons.includes(index)) &&
     weaponAvailable(index, player.team) &&
-    !player.magazines[index] &&
+    (!player.magazines[index] || input.buyDrop) &&
     player.money >= weaponPrice(index)
   ) {
+    if (input.buyDrop) {
+      spawnWeaponDrop(
+        match,
+        player,
+        {
+          weapon: index,
+          ammo: weapons[index].mag,
+          reserve: weapons[index].reserve,
+          appearance: freshAppearance(match, player, index),
+          suppressed: true,
+        },
+        false,
+        true,
+      );
+      player.money = addMoney(player.money, -weaponPrice(index), state.mode);
+      return;
+    }
     const previous = weaponSlot(index) === 1 ? player.primary : player.secondary;
     if (previous !== null && player.magazines[previous]) {
       player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };

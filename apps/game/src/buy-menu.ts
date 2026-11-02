@@ -1,6 +1,7 @@
 import { midTier } from "./loadouts";
 import { grenadeData, grenadeIcons } from "./utility";
 import { weapons, weaponIcons, isKnife, weaponSlot } from "./physics";
+import { assetUrl } from "./asset-url";
 
 const equipment = [
   ["kevlar", "Kevlar", "kevlar"],
@@ -13,9 +14,12 @@ const nativeWeaponIcons: Record<string, string> = {
   "usp-s": "usp_silencer",
   m4a4: "m4a1",
 };
+export function weaponBuyIcon(index: number) {
+  return assetUrl(`/icons/buy/${nativeWeaponIcons[weaponIcons[index]] ?? weaponIcons[index]}.svg`);
+}
 function weaponCard(index: number) {
   const weapon = weapons[index];
-  return `<div class="buy-weapon-entry"><button class="buy-card" data-weapon="${index}"><b>${weapon.name}</b><img src="/icons/buy/${nativeWeaponIcons[weaponIcons[index]] ?? weaponIcons[index]}.svg" decoding="async" alt=""><span>${isKnife(index) ? "Knife" : weapon.label}</span><small class="buy-state"></small></button><button class="buy-refund" data-refund="${index}" aria-label="Refund ${weapon.name}" title="Refund ${weapon.name}" hidden>↶</button></div>`;
+  return `<div class="buy-weapon-entry"><button class="buy-card" data-weapon="${index}" title="Click to buy and equip. Cmd/Ctrl-click to buy and drop."><b>${weapon.name}</b><img src="${weaponBuyIcon(index)}" decoding="async" alt=""><span>${isKnife(index) ? "Knife" : weapon.label}</span><small class="buy-state"></small></button><button class="buy-refund" data-refund="${index}" aria-label="Refund ${weapon.name}" title="Refund ${weapon.name}" hidden>↶</button></div>`;
 }
 function category(title: string, key: string, content: string) {
   return `<section class="buy-category" data-category="${key}" aria-label="${title}"><h3><span>${["equipment", "pistols", "mid-tier", "rifles", "grenades"].indexOf(key) + 1}</span>${title}</h3><div class="buy-category-items weapon-options">${content}</div></section>`;

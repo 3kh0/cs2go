@@ -41,6 +41,74 @@ async function throwUnderhand(page: Page, kind: "flash" | "smoke" | "molotov") {
   await page.waitForTimeout(1300);
   await page.mouse.up({ button: "right" });
 }
+test("Cmd-click purchases one authoritative ground weapon without replacing the player's loadout", async ({
+  browser,
+  request,
+}) => {
+  test.setTimeout(150_000);
+  const contexts = await Promise.all([browser.newContext(), browser.newContext()]);
+  const [a, b] = await Promise.all(contexts.map((context) => context.newPage()));
+  const room = `buy-drop-${Date.now()}`,
+    errors: string[] = [];
+  for (const page of [a, b]) page.on("pageerror", (error) => errors.push(error.message));
+  try {
+    await join(a, room, "ct");
+    await join(b, room, "t");
+    await command(request, room, "at-buy");
+    await command(request, room, "rich");
+    await a.bringToFront();
+    await expect
+      .poll(() => a.evaluate(() => window.__game.network!.connection.local!.money))
+      .toBe(10000);
+    await focus(a);
+    await a.keyboard.press("b");
+    const before = await a.evaluate(() => {
+      const player = window.__game.network!.connection.local!;
+      return {
+        weapon: player.weapon,
+        primary: player.primary,
+        secondary: player.secondary,
+        money: player.money,
+      };
+    });
+    await a.locator('#loadout [data-weapon="9"]').click({ modifiers: ["Meta"] });
+    await expect(a.locator("#loadout")).toBeVisible();
+    await expect
+      .poll(() => a.evaluate(() => window.__game.network!.connection.local!.money))
+      .toBe(before.money - 2900);
+    await expect(a.locator("#buy-dropped-items > div")).toHaveCount(1);
+    await a.waitForTimeout(1800);
+    const state = await a.evaluate(() => {
+      const network = window.__game.network!,
+        player = network.connection.local!;
+      return {
+        weapon: player.weapon,
+        primary: player.primary,
+        secondary: player.secondary,
+        drops: network.connection.round!.drops,
+      };
+    });
+    expect({ weapon: state.weapon, primary: state.primary, secondary: state.secondary }).toEqual({
+      weapon: before.weapon,
+      primary: before.primary,
+      secondary: before.secondary,
+    });
+    expect(state.drops).toHaveLength(1);
+    expect(state.drops[0].weapon).toBe(9);
+    expect(state.drops[0].buyDrop).toBe(true);
+    await expect
+      .poll(() =>
+        b.evaluate(() =>
+          window.__game.network!.connection.round!.drops.map((drop) => drop.appearance.serial),
+        ),
+      )
+      .toEqual(state.drops.map((drop) => drop.appearance.serial));
+    expect(errors).toEqual([]);
+  } finally {
+    await Promise.all(contexts.map((context) => context.close()));
+  }
+});
+
 test("headshot audio, shared skins, refunds and grenade effects retain the normal gameplay presentation", async ({
   browser,
   request,

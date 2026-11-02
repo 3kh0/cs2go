@@ -6,6 +6,7 @@ import { createWeaponInstance, weaponInstanceName } from "./weapon-instance";
 import { grenadeData, grenadeIcons, grenadeTypes, type GrenadeKind } from "./utility";
 import { setAssetCacheMatchActive } from "./asset-cache";
 import { assetUrl } from "./asset-url";
+import { weaponBuyIcon } from "./buy-menu";
 import { playerName, playerAvatar } from "./player-profile";
 import {
   createTracer,
@@ -279,7 +280,6 @@ export class Game {
   takeoverUseHeld = false;
   buyPreview = new BuyPreview();
   homeScene = new HomeScene();
-  private buyHiddenBots: T.Group[] = [];
   canvas = el("game") as HTMLCanvasElement;
   renderer!: T.WebGLRenderer;
   scene = new T.Scene();
@@ -1374,8 +1374,8 @@ export class Game {
     );
     this.camera.updateMatrixWorld(true);
   }
-  buy(index: number) {
-    if (this.network) return this.network.buy(index);
+  buy(index: number, drop = false) {
+    if (this.network) return this.network.buy(index, drop);
     if (
       !this.active ||
       this.dead ||
@@ -1384,6 +1384,32 @@ export class Game {
       index >= weapons.length
     )
       return false;
+    if (drop) {
+      if (
+        isKnife(index) ||
+        !this.canBuy() ||
+        (this.teamMode &&
+          (!weaponAvailable(index, this.team) || !this.groundInventory.allowed(index)))
+      )
+        return false;
+      const price = this.teamMode ? weaponPrice(index) : 0;
+      if (this.money < price) return false;
+      const dropped = this.groundInventory.spawn(
+        index,
+        weapons[index].mag,
+        weapons[index].reserve,
+        this.position,
+        this.yaw,
+        "player",
+        true,
+        createWeaponInstance(index, "player", true),
+      );
+      if (!dropped) return false;
+      dropped.buyDrop = true;
+      this.money = addMoney(this.money, -price, this.competitive ? "competitive" : "casual");
+      this.updateUI();
+      return true;
+    }
     const owned = this.inventory().includes(index);
     if (!owned && !isKnife(index) && this.teamMode) {
       if (
@@ -1516,7 +1542,7 @@ export class Game {
       dropped.innerHTML = nearby
         .map(
           (drop) =>
-            `<div title="${weapons[drop.id].name} - Pick up nearby with E"><img src="/icons/${weaponIcons[drop.id]}.png" alt="${weapons[drop.id].name}"></div>`,
+            `<div title="${weapons[drop.id].name} - Pick up nearby with E"><img src="${weaponBuyIcon(drop.id)}" alt="${weapons[drop.id].name}"></div>`,
         )
         .join("");
     }
@@ -4809,25 +4835,6 @@ export class Game {
     setText("health", String(Math.ceil(Math.max(0, observer?.health ?? this.health))));
     setText("armor", String(Math.ceil(observer?.armor ?? this.armor)));
     setText("money", this.teamMode ? `$${(observer?.money ?? this.money).toLocaleString()}` : "");
-    setText(
-      "equipment-status",
-      [
-        (observer?.helmet ?? this.helmet) ? "HELMET" : "",
-        (observer?.defuseKit ?? this.defuseKit) ? "DEFUSE KIT" : "",
-      ]
-        .filter(Boolean)
-        .join(" - "),
-    );
-    setText(
-      "buy-status",
-      this.teamMode
-        ? this.freezeTime > 0
-          ? `FREEZE TIME - ${Math.ceil(this.freezeTime)}s - B TO BUY`
-          : this.canBuy()
-            ? "B - BUY EQUIPMENT"
-            : ""
-        : "",
-    );
     this.updateBuyMenu();
     el("health-fill").style.width = `${clamp(observer?.health ?? this.health, 0, 100)}%`;
     const teamIcon = el("hud-team-icon") as HTMLImageElement;
@@ -5296,17 +5303,8 @@ export class Game {
     const wasVisible = followed?.visible;
     if (hideFollowed) followed.visible = false;
     const buying = !el("loadout").classList.contains("hidden");
-    if (buying) {
-      for (const bot of this.bots) {
-        if (!bot.group.visible) continue;
-        this.buyHiddenBots.push(bot.group);
-        bot.group.visible = false;
-      }
-    }
     this.renderer.clear();
     this.utility.renderWorld();
-    for (const group of this.buyHiddenBots) group.visible = true;
-    this.buyHiddenBots.length = 0;
     if (followed && hideFollowed) followed.visible = wasVisible!;
     if (this.previewingViewmodel) this.renderViewmodelPreview(now / 1000);
     else if (

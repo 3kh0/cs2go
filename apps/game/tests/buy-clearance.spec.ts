@@ -67,7 +67,9 @@ test("the diver holds M4A4 clear of chest equipment with both hands on the same 
     applyBuyPose(s, "m4a4");
     const moves = hands.map((h, i) => after[i].clone().sub(h.getWorldPosition(point.clone())));
     const wristError = Math.max(
-      ...hands.map((h, i) => h.getWorldQuaternion(h.quaternion.clone()).angleTo(rotations[i])),
+      ...hands.map((h, i) =>
+        h.getWorldQuaternion(h.quaternion.clone()).normalize().angleTo(rotations[i]),
+      ),
     );
     bones.forEach(({ bone, position, rotation }) => {
       bone.position.copy(position);
@@ -128,5 +130,41 @@ test("the diver holds M4A4 clear of chest equipment with both hands on the same 
   expect(result.wristError).toBeLessThan(0.0001);
   expect(await page.evaluate(() => window.__game.inventory())).toEqual(inventory);
   await page.screenshot({ path: "artifacts/buy-diver-clearance.png" });
+  await page.locator('#loadout [data-weapon="2"]').hover();
+  await expect(page.locator("#buy-preview-stage")).toHaveAttribute("data-item", "2");
+  const pistol = await page.evaluate(async () => {
+    const s = (window.__game.buyPreview as unknown as { soldier: Soldier }).soldier;
+    const hands = [s.rightHand, s.leftHand],
+      point = window.__game.position.clone();
+    const after = hands.map((hand) => hand.getWorldPosition(point.clone()));
+    const bones: { bone: T.Bone; position: T.Vector3; rotation: T.Quaternion }[] = [];
+    s.model.traverse((object) => {
+      if ((object as T.Bone).isBone)
+        bones.push({
+          bone: object as T.Bone,
+          position: object.position.clone(),
+          rotation: object.quaternion.clone(),
+        });
+    });
+    const path = performance
+      .getEntriesByType("resource")
+      .map((entry) => entry.name)
+      .reverse()
+      .find((url) => new URL(url).pathname === "/src/buy-poses.ts")!;
+    const { applyBuyPose } = (await import(path)) as typeof import("../src/buy-poses");
+    applyBuyPose(s, "usp_silencer");
+    const movement = hands.map((hand, i) =>
+      hand.getWorldPosition(point.clone()).distanceTo(after[i]),
+    );
+    bones.forEach(({ bone, position, rotation }) => {
+      bone.position.copy(position);
+      bone.quaternion.copy(rotation);
+    });
+    s.group.updateMatrixWorld(true);
+    return movement;
+  });
+  expect(pistol[0]).toBeGreaterThan(0.05);
+  expect(pistol[1]).toBeLessThan(0.001);
+  await page.screenshot({ path: "artifacts/buy-diver-pistol-clearance.png" });
   expect(errors).toEqual([]);
 });

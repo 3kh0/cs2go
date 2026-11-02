@@ -24,7 +24,7 @@ import {
 } from "./agent-animations";
 import { createWorldGun, disposeWorldGun } from "./weapons";
 import { createWeaponInstance } from "./weapon-instance";
-import { isKnife } from "./physics";
+import { isKnife, weaponSlot } from "./physics";
 import { createGrenadeModel } from "./grenade-models";
 
 type Pose = {
@@ -329,7 +329,13 @@ export class HomeScene {
           bone.quaternion.fromArray(transform.q);
         }
         soldier.group.updateMatrixWorld(true);
-        movePreviewHands(soldier.group, [soldier.rightHand, soldier.leftHand], 0.14);
+        movePreviewHands(
+          soldier.group,
+          weaponSlot(index) === 1 || buyPoseToken(index) === "elite"
+            ? [soldier.rightHand, soldier.leftHand]
+            : [soldier.rightHand],
+          0.14,
+        );
         for (const hand of [soldier.rightHand, soldier.leftHand]) {
           for (const bone of [hand, hand.parent!, hand.parent!.parent!]) {
             frame.bones[bone.name] = { p: bone.position.toArray(), q: bone.quaternion.toArray() };

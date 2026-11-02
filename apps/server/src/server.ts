@@ -266,6 +266,7 @@ export function startServer(options: ServerOptions) {
                   jump: !!input?.jump,
                   reload: !!input?.reload,
                   buy: input?.buy ?? -1,
+                  buyDrop: !!input?.buyDrop,
                   select: input?.select ?? -1,
                   equipment: input?.equipment ?? "",
                   dropBomb: !!input?.dropBomb,

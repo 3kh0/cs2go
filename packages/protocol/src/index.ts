@@ -1,7 +1,7 @@
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 6;
+export const PROTOCOL_VERSION = 7;
 export const TICK_RATE = 128;
 export const SNAPSHOT_RATE = 32;
 export const MAX_PLAYERS = 20;
@@ -79,6 +79,7 @@ export type Input = {
   use: boolean;
   select: number;
   buy: number;
+  buyDrop: boolean;
   equipment: "" | "vest" | "helmet" | "kit";
   refund: number;
   refundEquipment: "" | "kevlar" | "helmet" | "kit";
@@ -186,6 +187,7 @@ export type RoundState = {
     ammo: number;
     reserve: number;
     owner: string;
+    buyDrop?: boolean;
     vx: number;
     vy: number;
     vz: number;
@@ -317,6 +319,7 @@ export function validInput(value: unknown): value is Input {
       "reload",
       "use",
       "dropBomb",
+      "buyDrop",
     ].every((key) => typeof value[key] === "boolean")
   );
 }
@@ -441,6 +444,7 @@ export function neutralInput(seq = 0): Input {
     use: false,
     select: -1,
     buy: -1,
+    buyDrop: false,
     equipment: "",
     refund: -1,
     refundEquipment: "",

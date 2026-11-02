@@ -117,7 +117,7 @@ test("freeze blocks movement and jumping, allows crouch and look, and fades team
   });
   await expect(page.locator("#buy-phase-tint")).toHaveCSS("opacity", "0");
   expect(await page.evaluate(() => window.__game.canBuy())).toBe(true);
-  await expect(page.locator("#buy-status")).toHaveText("B - BUY EQUIPMENT");
+  await expect(page.locator("#economy-hud")).toHaveText(/^\$[\d,]+$/);
   expect(errors).toEqual([]);
 });
 

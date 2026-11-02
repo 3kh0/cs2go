@@ -33,6 +33,8 @@ Simulation runs at 128 Hz independently of rendering. Bot movement runs each sim
 
 WASD moves, Space jumps, Shift walks, Ctrl crouches, R reloads, F inspects, B buys, E uses/plants/defuses, G drops a firearm, Tab shows the scoreboard and Escape releases pointer lock. Bindings, graphics, audio and crosshair settings are saved locally.
 
+Cmd-click (Ctrl-click on Windows/Linux) a firearm in the buy menu to purchase a fresh copy directly onto the ground, keeping the menu and current loadout open. These purchases appear under Dropped Weapons; the buyer uses E to collect them. Money appears directly below the radar.
+
 Slots 1/2/3 select primary/sidearm/knife; 4 cycles utility, and the wheel wraps through owned slots. Left/right knife attacks slash/stab. Grenades support overhand, underhand and combined-button medium throws. AWP has two scope levels; M4A1-S/USP-S right-click toggles the suppressor.
 
 Open **Play** for mode selection, single-player/multiplayer and server/room settings; Home keeps the agent showcase and inventory shortcuts. Invite links open the configured Play page without connecting automatically.

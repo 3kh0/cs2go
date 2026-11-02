@@ -31,6 +31,49 @@ function fixture() {
   });
   return { match, ct, t };
 }
+
+test("buy-and-drop charges a fresh copy without replacing the held weapon or its receipt", () => {
+  const { match, ct } = fixture();
+  command(match, ct.id, { buy: 9 });
+  ct.ammo = 7;
+  const serial = ct.appearances[9].serial,
+    money = ct.money,
+    receipt = match.receipts.get(ct.id)!.weapons.get(9);
+  command(match, ct.id, { buy: 9, buyDrop: true });
+  expect(ct.money).toBe(money - 2900);
+  expect(ct.weapon).toBe(9);
+  expect(ct.ammo).toBe(7);
+  expect(ct.primary).toBe(9);
+  expect(ct.appearances[9].serial).toBe(serial);
+  expect(match.receipts.get(ct.id)!.weapons.get(9)).toEqual(receipt);
+  expect(match.state.drops).toHaveLength(1);
+  const drop = match.state.drops[0];
+  expect(drop.weapon).toBe(9);
+  expect(drop.ammo).toBe(weapons[9].mag);
+  expect(drop.appearance.serial).not.toBe(serial);
+  expect(drop.buyDrop).toBe(true);
+  const count = match.state.drops.length;
+  ct.money = 0;
+  command(match, ct.id, { buy: 9, buyDrop: true });
+  expect(match.state.drops).toHaveLength(count);
+});
+
+test("ground purchases stay on the ground for their buyer until an explicit pickup", () => {
+  const { match, ct } = fixture();
+  const inventory = Object.keys(ct.magazines),
+    weapon = ct.weapon;
+  command(match, ct.id, { buy: 9, buyDrop: true });
+  run(match, 2);
+  expect(Object.keys(ct.magazines)).toEqual(inventory);
+  expect(ct.weapon).toBe(weapon);
+  expect(ct.primary).toBeNull();
+  expect(match.state.drops).toHaveLength(1);
+  const drop = match.state.drops[0];
+  Object.assign(drop, { x: ct.x, y: ct.y + 0.3, z: ct.z, sleeping: true });
+  command(match, ct.id, { pickup: true });
+  expect(ct.primary).toBe(9);
+  expect(match.state.drops).toHaveLength(0);
+});
 function command(match: ReturnType<typeof createMatch>, id: string, input: Partial<Input>) {
   return stepMatch(match, new Map([[id, { ...neutralInput(), ...input }]]));
 }

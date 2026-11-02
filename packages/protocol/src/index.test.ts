@@ -8,6 +8,15 @@ import {
   parseClientMessage,
 } from "./index";
 
+test("buy-and-drop is a bounded one-shot boolean input", () => {
+  const input = { ...neutralInput(1), buy: 9, buyDrop: true };
+  expect(parseClientMessage(JSON.stringify({ type: "inputs", inputs: [input] }))).not.toBeNull();
+  expect(
+    parseClientMessage(JSON.stringify({ type: "inputs", inputs: [{ ...input, buyDrop: "true" }] })),
+  ).toBeNull();
+  expect(neutralInput().buyDrop).toBe(false);
+});
+
 test("every knife can be configured and selected without accepting invalid weapon IDs", () => {
   const configuration = {
     skins: Object.fromEntries(

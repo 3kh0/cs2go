@@ -25,6 +25,7 @@ type Drop = {
   age: number;
   sleeping: boolean;
   owner: number | "player";
+  buyDrop?: boolean;
 };
 type EquipmentKind = "kevlar" | "helmet" | "kit";
 type EquipmentState = { armor: number; helmet: boolean; kit: boolean };
@@ -437,6 +438,7 @@ export class GameInventory {
     if (g.dead || !g.active) return false;
     const drop = this.drops.find(
       (d) =>
+        (use || !d.buyDrop || d.owner !== "player") &&
         canPickupDroppedWeapon(
           d.mesh.position,
           d.age,

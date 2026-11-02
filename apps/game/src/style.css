@@ -1833,21 +1833,12 @@ kbd {
   color: #e9bd68;
 }
 #economy-hud {
-  position: absolute;
-  left: 28px;
-  bottom: 105px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  margin-top: 10px;
   color: #d5e8b9;
   text-shadow: 0 2px 4px #000;
 }
 #money {
   font-size: 25px;
-}
-#equipment-status,
-#buy-status {
-  font-size: 12px;
 }
 .skin-tabs {
   max-height: 150px;

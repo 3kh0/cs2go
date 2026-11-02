@@ -1,7 +1,7 @@
 import * as T from "three";
 import { selectedAgentId } from "./agent-roster";
 import { createSoldier, disposeSoldier, type Soldier, type AgentTeam } from "./soldier";
-import { weapons, isKnife } from "./physics";
+import { weapons, isKnife, weaponSlot } from "./physics";
 import { applyBuyPose, buyPoseToken, poseBuyProp, metricBuyGrip } from "./buy-poses";
 import { createNativeWorldGun } from "./weapon-motion";
 import { createWorldBayonet, disposeWorldGun } from "./weapons";
@@ -48,7 +48,7 @@ export class BuyPreview {
         new T.MeshBasicMaterial({
           color: 0x24231f,
           transparent: true,
-          opacity: 0.8,
+          opacity: 0.45,
           depthTest: false,
           depthWrite: false,
         }),
@@ -154,7 +154,13 @@ export class BuyPreview {
             (equipment ? (equipment === "kit" ? "defuser" : "armor_helmet") : buyPoseToken(index)));
       this.attachment = applyBuyPose(soldier, token);
       if (!kind && !equipment && !isKnife(index))
-        movePreviewHands(soldier.group, [soldier.rightHand, soldier.leftHand], 0.14);
+        movePreviewHands(
+          soldier.group,
+          weaponSlot(index) === 1 || token === "elite"
+            ? [soldier.rightHand, soldier.leftHand]
+            : [soldier.rightHand],
+          0.14,
+        );
       document.getElementById(this.stageId)!.dataset.pose = this.attachment.clip;
       if (!equipment) {
         const itemKey = `${team}:${soldier.animationTeam}:${kind ?? String(index)}`;

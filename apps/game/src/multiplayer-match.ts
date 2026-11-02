@@ -1,3 +1,4 @@
+import { weaponPrice } from "./economy";
 import * as T from "three";
 import {
   neutralInput,
@@ -179,7 +180,7 @@ export class MultiplayerMatch {
     for (const mesh of this.drops.values()) disposeWorldGun(mesh);
     this.drops.clear();
   }
-  buy(index: number) {
+  buy(index: number, drop = false) {
     if (
       (!isKnife(index) && !this.game.canBuy()) ||
       this.game.dead ||
@@ -187,7 +188,9 @@ export class MultiplayerMatch {
       !weapons[index]
     )
       return false;
+    if (drop && (isKnife(index) || this.game.money < weaponPrice(index))) return false;
     this.request.buy = index;
+    this.request.buyDrop = drop;
     return true;
   }
   equipment(kind: "kevlar" | "helmet" | "kit") {
@@ -611,6 +614,7 @@ export class MultiplayerMatch {
               age: drop.age,
               sleeping: drop.sleeping,
               owner: drop.owner === local.id ? ("player" as const) : indexFor(drop.owner),
+              buyDrop: drop.buyDrop,
             },
           ]
         : [];
