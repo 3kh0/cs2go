@@ -24,6 +24,19 @@ export function bindSourceMapAttributes(geometry: T.BufferGeometry) {
     new T.BufferAttribute(new Uint16Array(bytes.buffer, bytes.byteOffset, count * 2), 2, true),
   );
   geometry.setAttribute("sourceProbe", probe);
+  const backProbe = geometry.getAttribute("color_3");
+  if (backProbe) {
+    if (
+      !(backProbe instanceof T.BufferAttribute) ||
+      !(backProbe.array instanceof Uint8Array) ||
+      !backProbe.normalized ||
+      backProbe.itemSize !== 4 ||
+      backProbe.count !== count
+    )
+      throw new Error("Dust II foliage back-probe attributes are invalid; regenerate the map");
+    geometry.setAttribute("sourceBackProbe", backProbe);
+    geometry.deleteAttribute("color_3");
+  }
   geometry.deleteAttribute("color_1");
   geometry.deleteAttribute("color_2");
 }

@@ -8,6 +8,194 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_color.vmat",
       "sha256": "61aea8bb857651a59c55e4f79bcc8da54748ac4f6fd79a4a0d14028caf5ec588",
       "ambientOcclusionScale": 0.0
+    },
+    {
+      "name": "palm_bark_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/palm_bark_01.vmat",
+      "foliage": {
+        "nonDirectional": true
+      }
+    },
+    {
+      "name": "agave_plant_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/agave_plant_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "alphaCoverage": {
+          "reference": 0.371,
+          "grazingAngleMask": 0,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "dust_awning_fabric_01",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_awnings/dust_awning_fabric_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        }
+      }
+    },
+    {
+      "name": "dust_awning_fabric_ripped_01",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_awnings/dust_awning_fabric_ripped_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.5,
+          "grazingAngleMask": 0,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "dust_patio_umbrella_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_patio_set/dust_patio_umbrella_color.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        }
+      }
+    },
+    {
+      "name": "dust_weeds_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/dust_weeds_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.285,
+          "grazingAngleMask": 0.069,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "grape_leaves_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/grape_leaves_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "alphaCoverage": {
+          "reference": 0.401,
+          "grazingAngleMask": 0,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "olive_bark_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/olive_bark_01.vmat",
+      "foliage": {
+        "nonDirectional": true
+      }
+    },
+    {
+      "name": "olive_branch_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/olive_branch_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.713,
+          "grazingAngleMask": 0.084,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "palm_frond_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/palm_frond_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": false,
+          "texture": "/models/maps/lighting/palm-transmission.webp"
+        },
+        "alphaCoverage": {
+          "reference": 0.442,
+          "grazingAngleMask": 0.035,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "sagebrush_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/sagebrush_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "alphaCoverage": {
+          "reference": 0.549,
+          "grazingAngleMask": 0.317,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "sumac_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/sumac_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.3,
+          "grazingAngleMask": 0,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "weeds_cressa_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/weeds_cressa_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "alphaCoverage": {
+          "reference": 0.635,
+          "grazingAngleMask": 0,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "zebra_grass_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/zebra_grass_01.vmat",
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.518,
+          "grazingAngleMask": 0,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
     }
-  ]
+  ],
+  "foliageSource": {
+    "nativeGltfSha256": "4d3e62e46fd747cf4fb85997630c1c55002ea14ac2de7956d52125bd28768f3b",
+    "shader": "csgo_foliage.vfx",
+    "interpretation": "ValveResourceFormat csgo_foliage.frag.slang at 5564866c7f2a6b2ee54a9195b7963147e24da94e"
+  }
 }

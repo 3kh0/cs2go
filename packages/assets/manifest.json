@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "9ca45f6436cc2c9c142d4e5894ebc114c1e6f5b220e81a6b71464901be6da10e",
+  "release": "c51ef2fea4ae6eee9e4f3578ccb434ab46407fbe43fc3f85fc7c765e862c68f4",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -9471,13 +9471,13 @@
       }
     },
     "models/maps/material-lighting.json": {
-      "sha256": "5212bdd7d18fc81baeb50bd23939a173d2dd029afdc384904e73a8d5ba6eded7",
-      "bytes": 438,
+      "sha256": "5cb04d9a3ec9e05c6b2a2b6628db85afc01d2b8d368c8e61a687ba61843b162d",
+      "bytes": 5149,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "11043175ac0249a7ef230f3d7f40663e92d19ea7260e6b9fb8f3df8903633655",
-        "bytes": 253
+        "sha256": "69e6c2b92ebb717323a7d2d1242585faabdb52685aeb90159b581f5aaf8ef3ec",
+        "bytes": 738
       }
     },
     "models/maps/overlay-correction.json": {

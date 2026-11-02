@@ -26,7 +26,7 @@
     "fallbackFormat": "RGBA8 sqrt(linear irradiance /16) RGB, sun visibility A",
     "staticProbeCoverage": 0.9970706551202888,
     "runtimeTriangles": 1918989,
-    "geometryLightingEncoding": "COLOR_1: little-endian normalized uint16 UV in RGBA8 (zero means probe); COLOR_2: sqrt(irradiance/16) RGB and sun visibility A",
+    "geometryLightingEncoding": "COLOR_1: little-endian normalized uint16 UV in RGBA8 (zero means probe); COLOR_2: sqrt(irradiance/16) RGB and sun visibility A; foliage COLOR_3: opposite-normal probe in the same RGBA8 encoding",
     "runtimeVertices": 2419114,
     "materialBatches": 691,
     "atlasGpuBytes": 41943040,
@@ -37,14 +37,15 @@
       32
     ],
     "skyGpuBytes": 2097120,
-    "cubemapFog": "Pinned env_cubemap_fog, native 8.2 distance/height product and authored sky mips; no added texture allocation or render pass"
+    "cubemapFog": "Pinned env_cubemap_fog, native 8.2 distance/height product and authored sky mips; no added texture allocation or render pass",
+    "foliageBackProbeGpuBytes": 629860
   },
   "limitations": [
     "The authored native 4096 mip is used for 8192 irradiance and shadow atlases; directional irradiance retains its full 4096 resolution. Unsupported GPU compression uses the existing bounded 2048 WebP fallback.",
     "Source layered materials, transmissive foliage, local barn-light shading, screen-space occlusion, effect-specific fog, bloom, specular cubemap blending and complete native postprocess/exposure evaluation are not fully reproduced.",
     "Native lightmap UVs and baked-lighting selection survive simplification. Probe-lit geometry still uses the existing resampled native ambient-cube grid; native octree validity is not ported."
   ],
-  "runtimeGeometrySha256": "c9480a6ca12521ac7f1226cd1a8f061cb9baef61864a78d0d27d15c90b7bd80d",
+  "runtimeGeometrySha256": "f442ee44f05d741d7d3aaa1cfb61e21c0449253e9873f68476c19b7df146c86d",
   "nativeImport": {
     "extractor": "Source2Viewer 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
     "runner": "Windows Amp runner, DESKTOP-IUQV7N6, 2026-11-02",

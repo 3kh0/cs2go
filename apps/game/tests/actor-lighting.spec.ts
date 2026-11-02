@@ -46,7 +46,7 @@ test("native map and every cached viewmodel compile without shader errors", asyn
   await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
-  await page.waitForFunction(() => window.__game.locked);
+  await page.waitForFunction(() => window.__game?.locked);
   await page.waitForFunction(() => {
     const reflections = window.__game.actorReflections as unknown as {
       cache: Map<number, unknown>;

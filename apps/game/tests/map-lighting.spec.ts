@@ -1,6 +1,54 @@
 import { expect, test } from "@playwright/test";
 import { mkdir, writeFile } from "node:fs/promises";
 
+test("foliage transmits backlighting and opposite-side probes while retaining sun occlusion", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/source-foliage-fixture.ts";
+    return (await import(path)).renderSourceTransmission();
+  });
+  expect(result.throughLeaf[1]).toBeGreaterThan(240);
+  expect(result.throughLeaf[0]).toBeLessThan(10);
+  expect(result.throughAlbedo[0]).toBeGreaterThan(240);
+  expect(result.throughAlbedo[1]).toBeLessThan(10);
+  expect(result.frontLit[0]).toBeGreaterThan(240);
+  expect(result.frontLit[1]).toBeLessThan(100);
+  expect(result.blocked.slice(0, 3)).toEqual([0, 0, 0]);
+  expect(result.oppositeProbe[1]).toBeGreaterThan(240);
+  expect(result.oppositeProbe[0]).toBeLessThan(10);
+  expect(result.oppositeProbeWithAO).toEqual(result.oppositeProbe);
+  expect(result.backFace.slice(0, 3)).toEqual([0, 0, 0]);
+  expect(errors).toEqual([]);
+});
+
+test("native foliage preserves distant alpha coverage and masks grazing edges", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/source-foliage-fixture.ts";
+    return (await import(path)).renderSourceFoliage();
+  });
+  expect(result.near).toBeGreaterThan(25);
+  expect(result.far).toBeGreaterThan(result.near * 1.4);
+  expect(result.grazing).toBeLessThan(result.near / 2);
+  expect(errors).toEqual([]);
+});
+
 test("Dust II retains native light and shadow contrast with bounded static rendering", async ({
   page,
 }) => {
