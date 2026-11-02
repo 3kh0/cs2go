@@ -1,4 +1,4 @@
-name: Publish assets and deploy game
+name: deploy
 on:
   push:
     branches: [main]
@@ -15,7 +15,7 @@ jobs:
       assets: ${{ steps.diff.outputs.assets }}
       deploy: ${{ steps.diff.outputs.deploy }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 2
           filter: blob:none
@@ -43,8 +43,7 @@ jobs:
     if: needs.changes.outputs.assets == 'true'
     runs-on: ubuntu-latest
     steps:
-      # Fetch metadata first; public blobs are expanded only when verification is needed.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           filter: blob:none
           sparse-checkout-cone-mode: false
@@ -72,9 +71,7 @@ jobs:
           git sparse-checkout set --no-cone '/packages/assets/' '/package.json' '/bunfig.toml'
       - uses: oven-sh/setup-bun@v2
         if: steps.published.outputs.complete != 'true'
-        with:
-          bun-version: 1.4.4
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         if: steps.published.outputs.complete != 'true'
         with:
           path: packages/assets/.cache
@@ -82,8 +79,6 @@ jobs:
           restore-keys: |
             asset-compression-br11-${{ runner.os }}-
             asset-compression-${{ runner.os }}-
-      # A locally published immutable release can seed the exact q11 wire bytes;
-      # the pipeline still verifies their logical hashes by Brotli round-trip.
       - run: python packages/assets/sync.py seed
         if: steps.published.outputs.complete != 'true'
         env:
@@ -91,7 +86,6 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET: ${{ vars.R2_BUCKET }}
-      # No JS dependency installation or app build is needed for asset verification.
       - run: bun run assets:verify
         if: steps.published.outputs.complete != 'true'
       - run: bun run assets:sync
@@ -113,8 +107,7 @@ jobs:
       ASSET_CDN_URL: ${{ vars.ASSET_CDN_URL }}
       MULTIPLAYER_URL: ${{ vars.MULTIPLAYER_URL }}
     steps:
-      # Code-only deployments never check out the 3.1 GB public tree.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
@@ -130,15 +123,13 @@ jobs:
             /packages/assets/manifest.json
             /packages/assets/pipeline.mjs
       - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.4.4
       - run: |
           test -n "$VERCEL_TOKEN" && test -n "$VERCEL_ORG_ID" && test -n "$VERCEL_PROJECT_ID" && test -n "$ASSET_CDN_URL" || {
             echo 'Configure Vercel and R2 repository variables/secrets; see docs/deployment.md.'
             exit 1
           }
       - run: bun install --frozen-lockfile
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: .turbo
           key: turbo-${{ runner.os }}-${{ github.sha }}
