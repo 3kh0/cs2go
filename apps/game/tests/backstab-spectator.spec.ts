@@ -142,3 +142,51 @@ for (const mode of ["competitive", "casual"] as const)
     expect(aim.mode).toBe("first");
     await page.screenshot({ path: "artifacts/competitive-bomb-spectator.png" });
   });
+
+for (const mode of ["competitive", "casual"] as const)
+  test(`${mode} spectator camera follows live bots while the pause menu is open`, async ({
+    page,
+  }) => {
+    test.setTimeout(120_000);
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await start(page, mode);
+    await page.evaluate(() => {
+      const g = window.__game;
+      g.dead = Infinity;
+      g.health = 0;
+      g.freezeTime = 0;
+      g.roundPause = 1000;
+      for (const bot of g.bots) bot.health = 100_000;
+      g.spectate();
+    });
+    await page.evaluate(() => document.exitPointerLock());
+    await expect(page.locator("#pause")).toBeVisible();
+    const tick = await page.evaluate(() => window.__game.tick);
+    for (const camera of mode === "casual" ? (["first", "third"] as const) : (["first"] as const)) {
+      await page.evaluate((camera) => {
+        const g = window.__game;
+        g.spectatorMode = camera;
+        // Move the observed actor after opening the menu. Following must keep
+        // working without pointer lock, independently of AI route selection.
+        g.spectated!.group.position.x += 1;
+        g.spectated!.group.rotation.y += 0.4;
+      }, camera);
+      await expect
+        .poll(() =>
+          page.evaluate(() => {
+            const g = window.__game;
+            const expected = g.spectated!.group.position.clone();
+            expected.y += g.spectatorMode === "first" ? 1.6 : 1.4;
+            return expected.distanceTo(
+              g.spectatorMode === "first" ? g.camera.position : g.spectatorFocus,
+            );
+          }),
+        )
+        .toBeLessThan(0.0001);
+    }
+    await expect.poll(() => page.evaluate(() => window.__game.tick)).toBeGreaterThan(tick);
+    expect(await page.evaluate(() => window.__game.locked)).toBe(false);
+    await page.screenshot({ path: `artifacts/${mode}-spectator-paused.png` });
+    expect(errors).toEqual([]);
+  });

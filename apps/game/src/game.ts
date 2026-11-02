@@ -5326,7 +5326,7 @@ export class Game {
     );
     setStyle("hitmarker", "opacity", this.hit > 0 ? "1" : "0");
     setStyle("damage", "opacity", String(this.damage * 3));
-    if (this.active && this.locked && this.dead && this.teamMode) this.spectate();
+    if (this.active && this.dead && this.teamMode) this.spectate();
     if (!this.dead || !this.active) this.spectated = undefined;
     if (this.audio) {
       this.soundscape.spatial.useNativeProbes = this.teamMode;
