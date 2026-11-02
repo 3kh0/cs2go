@@ -4799,13 +4799,17 @@ export class Game {
         id: "player" as number | "player",
         name: playerName(),
         avatar: playerAvatar(),
+        ping: this.network ? this.network.connection.ping : 0,
         kills: this.kills,
         deaths: this.deaths,
         team: this.team,
         alive: !this.dead,
         mvps: this.mvpCounts.get("player") ?? 0,
         money: this.teamMode ? this.money : undefined,
-        weapon: this.selected,
+        weapon: isKnife(this.selected)
+          ? this.inventory().find((weapon) => !isKnife(weapon))
+          : this.selected,
+        weaponHolstered: isKnife(this.selected) || !!this.utility.selected,
         armor: this.armor,
         helmet: this.helmet,
         kit: this.defuseKit,

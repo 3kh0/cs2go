@@ -13,8 +13,10 @@ export type ScorePlayer = {
   deaths: number;
   mvps: number;
   bot?: boolean;
+  ping?: number;
   money?: number;
   weapon?: number;
+  weaponHolstered?: boolean;
   kit?: boolean;
   armor?: number;
   helmet?: boolean;
@@ -82,16 +84,13 @@ function history(board: Board) {
 export function renderScoreboard(board: Board) {
   const root = document.getElementById("scoreboard")!;
   root.dataset.mode = board.mode;
-  root.querySelector("h2")!.textContent = `${board.mode.toUpperCase()} | Dust II`;
+  root.querySelector("h2")!.textContent =
+    `${board.mode.charAt(0).toUpperCase()}${board.mode.slice(1).toLowerCase()} | Dust II`;
   document.getElementById("scoreboard-clock")!.textContent =
     board.mode === "practice"
       ? "∞"
       : `${Math.floor(board.seconds / 60)}:${String(board.seconds % 60).padStart(2, "0")}`;
-  document.getElementById("scoreboard-summary")!.textContent = board.teamMode
-    ? `${board.teamSize} VS ${board.teamSize} - FIRST TO ${board.winTarget} - ${board.roundPause ? "ROUND COMPLETE" : `ROUND ${board.round}`}${board.planted ? " - BOMB PLANTED" : ""}`
-    : board.mode === "deathmatch"
-      ? "DEATHMATCH - FIRST TO 20 KILLS"
-      : "TARGET PRACTICE - UNLIMITED TIME";
+  const localTeam = board.rows.find((player) => player.id === "player")?.team;
   const fragment = document.createDocumentFragment();
   for (const team of ["ct", "t"] as const) {
     if (team === "t" && board.teamMode) fragment.append(history(board));
@@ -116,7 +115,7 @@ export function renderScoreboard(board: Board) {
     );
     const table = make("div", "score-team-table");
     const header = make("div", "scoreboard-head");
-    for (const label of ["", "", "PLAYER", "$", "EQUIPMENT", "K", "D", "K/D", "★"])
+    for (const label of ["", "", "", "", "Equipment", "Money", "Kills", "Deaths", "K/D", "MVPs"])
       header.append(make("span", "", label));
     table.append(header);
     for (const player of players) {
@@ -128,8 +127,17 @@ export function renderScoreboard(board: Board) {
         "aria-label",
         `${player.name}, ${player.alive ? "alive" : "dead"}, ${player.kills} kills, ${player.deaths} deaths`,
       );
-      const status = make("span", "score-life");
-      if (!player.alive) status.append(image("/ui/match/dead.svg", "Dead"));
+      const kit = make("span", "score-life");
+      if (!player.alive) kit.append(image("/ui/match/dead.svg", "Dead"));
+      else if (player.kit) kit.append(image("/icons/buy/defuser.svg", "Defuse kit", "score-gear"));
+      const status = make("span", "score-connection");
+      if (player.bot ?? player.id !== "player")
+        status.append(image("/ui/match/bot.svg", "Bot", "score-bot"));
+      else {
+        status.textContent = player.ping === undefined ? "—" : String(player.ping);
+        status.title = player.ping === undefined ? "Ping unavailable" : `${player.ping} ms ping`;
+        status.setAttribute("aria-label", status.title);
+      }
       const avatar = make("span", "score-avatar");
       const fallback = assetUrl(`/icons/team-${team}.png`);
       const portrait = image(
@@ -142,9 +150,13 @@ export function renderScoreboard(board: Board) {
       };
       avatar.append(portrait);
       const name = make("span", "score-player", player.name);
-      if (player.bot ?? player.id !== "player")
-        name.prepend(image("/ui/match/bot.svg", "Bot", "score-bot"));
-      if (board.teamMode && !board.planted && board.carrier === player.id && player.alive) {
+      if (
+        board.teamMode &&
+        player.team === localTeam &&
+        !board.planted &&
+        board.carrier === player.id &&
+        player.alive
+      ) {
         const bomb = image("/icons/buy/c4.svg", "Bomb carrier", "score-bomb");
         bomb.title = "Bomb carrier";
         name.append(bomb);
@@ -161,7 +173,7 @@ export function renderScoreboard(board: Board) {
           image(
             `/icons/buy/${icons[weaponIcons[player.weapon]] ?? weaponIcons[player.weapon]}.svg`,
             weapons[player.weapon].name,
-            "score-weapon",
+            `score-weapon${player.weaponHolstered ? " holstered" : ""}`,
           ),
         );
       }
@@ -173,8 +185,6 @@ export function renderScoreboard(board: Board) {
             "score-gear",
           ),
         );
-      if (player.alive && player.kit)
-        equipment.append(image("/icons/buy/defuser.svg", "Defuse kit", "score-gear"));
       const cash = make(
         "span",
         "score-cash",
@@ -186,11 +196,12 @@ export function renderScoreboard(board: Board) {
         mvps.title = `${player.mvps} round MVP${player.mvps === 1 ? "" : "s"}`;
       }
       row.append(
+        kit,
         status,
         avatar,
         name,
-        cash,
         equipment,
+        cash,
         make("span", "score-number", String(player.kills)),
         make("span", "score-number", String(player.deaths)),
         make("span", "score-ratio", (player.kills / Math.max(1, player.deaths)).toFixed(1)),

@@ -1587,7 +1587,28 @@ test("Tab scoreboard groups teams, tracks alive players and records match progre
   await expect(page.locator(".score-team.ct .team-alive")).toHaveText("Alive: 10/10");
   await expect(page.locator(".score-team.t .team-alive")).toHaveText("Alive: 10/10");
   await expect(page.locator(".score-row.you")).toHaveCount(1);
-  await expect(page.locator(".score-bomb")).toHaveCount(1);
+  const playerGun = page.locator(".score-row.you .score-weapon");
+  await page.evaluate(() => window.__game.equip(window.__game.secondary));
+  await expect(playerGun).toHaveAttribute("alt", "USP-S");
+  await expect(playerGun).toHaveCSS("opacity", "1");
+  await page.evaluate(() => window.__game.equip(window.__game.knife));
+  await expect(playerGun).toHaveAttribute("alt", "USP-S");
+  await expect(playerGun).toHaveCSS("opacity", "0.4");
+  await page.screenshot({ path: "artifacts/scoreboard-holstered.png" });
+  await page.evaluate(() => window.__game.equip(window.__game.secondary));
+  await expect(playerGun).toHaveCSS("opacity", "1");
+  await expect(page.locator(".score-bomb")).toHaveCount(0);
+  const originalCarrier = await page.evaluate(() => {
+    const g = window.__game;
+    const carrier = g.bomb!.carrier;
+    g.bomb!.carrier = g.bots.findIndex((bot) => bot.team === g.team);
+    return carrier;
+  });
+  await expect(page.locator(".score-team.ct .score-bomb")).toHaveCount(1);
+  await page.evaluate((carrier) => {
+    window.__game.bomb!.carrier = carrier;
+  }, originalCarrier);
+  await expect(page.locator(".score-bomb")).toHaveCount(0);
   await page.evaluate(() => {
     const g = window.__game;
     for (const team of ["t", "ct"] as const) {

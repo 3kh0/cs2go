@@ -48,13 +48,6 @@
   font-family: "Stratum2 Monodigit", sans-serif;
   font-size: calc(24 * var(--sb-unit));
 }
-#scoreboard-summary {
-  display: flex;
-  align-items: center;
-  min-height: calc(35 * var(--sb-unit));
-  color: #929292;
-  font-size: calc(15 * var(--sb-unit));
-}
 .score-team {
   --team: #b5d4ee;
   display: grid;
@@ -111,23 +104,24 @@
 .scoreboard-head,
 .score-row {
   display: grid;
-  grid-template-columns: calc(24 * var(--sb-unit)) calc(24 * var(--sb-unit)) minmax(0, 1fr) calc(
-      66 * var(--sb-unit)
-    ) calc(160 * var(--sb-unit)) repeat(4, calc(50 * var(--sb-unit)));
+  grid-template-columns:
+    calc(24 * var(--sb-unit)) calc(36 * var(--sb-unit)) calc(24 * var(--sb-unit))
+    minmax(0, 1fr) calc(104 * var(--sb-unit)) calc(76 * var(--sb-unit))
+    repeat(4, calc(50 * var(--sb-unit)));
   gap: 0;
   align-items: center;
 }
 .scoreboard-head {
   height: calc(28 * var(--sb-unit));
+  font-family: "Stratum2 Condensed", sans-serif;
   font-size: calc(16 * var(--sb-unit));
-  color: #aaa;
+  color: #ccc;
 }
 .scoreboard-head > span {
   text-align: center;
 }
-.scoreboard-head > :nth-child(3) {
-  text-align: left;
-  padding-left: calc(6 * var(--sb-unit));
+.score-team.t .scoreboard-head {
+  display: none;
 }
 .score-row {
   min-height: calc(24 * var(--sb-unit));
@@ -139,11 +133,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff08;
+  background: #ffffff12;
   min-width: 0;
 }
 .score-row > :nth-child(-n + 3) {
-  background: #ffffff05;
+  background: #ffffff08;
+}
+.score-row > :nth-child(n + 5) {
+  border-left: 1px solid #ffffff05;
 }
 .score-row > .score-player {
   justify-content: flex-start;
@@ -153,10 +150,10 @@
   white-space: nowrap;
 }
 .score-row.you {
-  background: #00a6ff12;
+  background: #77b9eb26;
 }
 .t .score-row.you {
-  background: #ffee0012;
+  background: #ead18a26;
 }
 .score-row.dead {
   color: #999;
@@ -169,6 +166,10 @@
   height: calc(22 * var(--sb-unit));
   padding: 2px;
   background: #ffffff0a;
+}
+.score-connection {
+  font-family: "Stratum2 Monodigit", sans-serif;
+  font-size: calc(14 * var(--sb-unit));
 }
 .score-life img,
 .score-bot {
@@ -184,18 +185,22 @@
   object-fit: contain;
 }
 .score-cash {
-  color: #9cbd83;
+  color: inherit;
   font-family: "Stratum2 Monodigit", sans-serif;
   font-size: calc(16 * var(--sb-unit));
 }
-.score-equipment {
-  gap: calc(5 * var(--sb-unit));
+.score-row > .score-equipment {
+  justify-content: flex-end;
+  gap: calc(4 * var(--sb-unit));
   padding: calc(3 * var(--sb-unit));
 }
 .score-weapon {
-  width: calc(90 * var(--sb-unit));
+  width: calc(52 * var(--sb-unit));
   height: calc(18 * var(--sb-unit));
   object-fit: contain;
+}
+.score-weapon.holstered {
+  opacity: 0.4;
 }
 .score-gear {
   width: calc(16 * var(--sb-unit));
