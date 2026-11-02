@@ -1,7 +1,7 @@
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 7;
+export const PROTOCOL_VERSION = 8;
 export const TICK_RATE = 128;
 export const SNAPSHOT_RATE = 32;
 export const MAX_PLAYERS = 20;
@@ -228,7 +228,15 @@ export type RoundState = {
   };
 };
 export type ServerMessage =
-  | { type: "welcome"; version: number; id: string; room: string; map: "dust2"; mode: MatchMode }
+  | {
+      type: "welcome";
+      version: number;
+      id: string;
+      room: string;
+      map: "dust2";
+      mode: MatchMode;
+      resume?: string;
+    }
   | {
       type: "snapshot";
       tick: number;
@@ -241,6 +249,7 @@ export type ServerMessage =
 export type ClientMessage =
   | {
       type: "join";
+      resume?: string;
       version: number;
       room: string;
       name: string;
@@ -393,6 +402,8 @@ export function parseClientMessage(raw: string): ClientMessage | null {
   if (
     value.type === "join" &&
     value.version === PROTOCOL_VERSION &&
+    (value.resume === undefined ||
+      (typeof value.resume === "string" && /^[a-f0-9-]{36}$/.test(value.resume))) &&
     validRoom(value.room) &&
     typeof value.name === "string" &&
     value.name.trim().length > 0 &&

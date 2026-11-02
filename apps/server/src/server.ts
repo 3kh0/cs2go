@@ -31,6 +31,7 @@ type Room = Match & {
 };
 type Connection = {
   id: string;
+  resume?: string;
   room?: Room;
   queue: Input[];
   last: Input;
@@ -67,18 +68,19 @@ export function startServer(options: ServerOptions) {
   const rooms = new Map<string, Room>();
   const connections = new Set<ServerWebSocket<Connection>>();
   let stopping = false;
+  const detached = new Map<string, { connection: Connection; expires: number }>();
   const roomLabels = new WeakMap<Room, number>();
   const rejected = new WeakSet<ServerWebSocket<Connection>>();
   let nextRoomLabel = 1;
   const log = (message: string) => options.log?.(message);
   const clientLabel = (socket: ServerWebSocket<Connection>) => socket.data.id.slice(0, 8);
-  function send(socket: ServerWebSocket<Connection>, message: ServerMessage) {
+  function send(socket: ServerWebSocket<Connection>, message: ServerMessage | string) {
     if (socket.readyState !== 1) return;
     if (socket.getBufferedAmount() > 512 * 1024) {
       socket.close(1013, "Connection too slow");
       return;
     }
-    socket.send(JSON.stringify(message));
+    socket.send(typeof message === "string" ? message : JSON.stringify(message));
   }
   function reject(socket: ServerWebSocket<Connection>, message: string) {
     if (!rejected.has(socket)) {
@@ -147,6 +149,7 @@ export function startServer(options: ServerOptions) {
           if (options.password && message.password !== options.password)
             return reject(socket, "Incorrect server password");
           let room = rooms.get(message.room);
+          if (!room && message.resume) return reject(socket, "Session expired; rejoin from Play");
           if (!room) {
             if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
             room = {
@@ -164,13 +167,37 @@ export function startServer(options: ServerOptions) {
           if (room.state.mode !== message.mode)
             return reject(socket, "Room uses a different game mode");
           if (
-            room.players.size >= MAX_PLAYERS ||
-            [...room.players.values()].filter((p) => p.team === message.team).length >=
-              rulesFor(message.mode).teamSize
+            !message.resume &&
+            (room.players.size >= MAX_PLAYERS ||
+              [...room.players.values()].filter((p) => p.team === message.team).length >=
+                rulesFor(message.mode).teamSize)
           )
             return reject(socket, "Team is full");
-          const player = createPlayer(connection.id, message.name.trim(), message.team);
-          joinMatch(room, player);
+          const previousSocket = message.resume
+            ? [...room.connections].find((peer) => peer.data.resume === message.resume)
+            : undefined;
+          const saved = message.resume
+            ? (detached.get(message.resume) ??
+              (previousSocket
+                ? { connection: previousSocket.data, expires: now + 20000 }
+                : undefined))
+            : undefined;
+          if (message.resume && (!saved || saved.expires <= now || saved.connection.room !== room))
+            return reject(socket, "Session expired; rejoin from Play");
+          const player = saved
+            ? room.players.get(saved.connection.id)!
+            : createPlayer(connection.id, message.name.trim(), message.team);
+          if (saved) {
+            detached.delete(message.resume!);
+            if (previousSocket) {
+              room.connections.delete(previousSocket);
+              previousSocket.data.room = undefined;
+              previousSocket.close(1000, "Session recovered on a new connection");
+            }
+            connection.id = player.id;
+            player.ack = 0;
+          } else joinMatch(room, player);
+          connection.resume = crypto.randomUUID();
           room.connections.add(socket);
           connection.room = room;
           log(
@@ -181,6 +208,7 @@ export function startServer(options: ServerOptions) {
             type: "welcome",
             version: PROTOCOL_VERSION,
             id: player.id,
+            resume: connection.resume,
             room: message.room,
             map: "dust2",
             mode: room.state.mode,
@@ -223,6 +251,16 @@ export function startServer(options: ServerOptions) {
         const room = socket.data.room;
         if (!room) return;
         room.connections.delete(socket);
+        if (!stopping && socket.data.resume && [1006, 1012, 1013, 4000].includes(code)) {
+          socket.data.queue = [];
+          socket.data.last = neutralInput();
+          detached.set(socket.data.resume, {
+            connection: socket.data,
+            expires: performance.now() + 20000,
+          });
+          log(`Client ${clientLabel(socket)} awaiting reconnect (20s)`);
+          return;
+        }
         leaveMatch(room, socket.data.id);
         if (!room.players.size)
           for (const [key, value] of rooms)
@@ -246,6 +284,14 @@ export function startServer(options: ServerOptions) {
     previous = now;
     for (const socket of connections)
       if (!socket.data.room && now - socket.data.joinedAt > 10000) reject(socket, "Join timed out");
+    for (const [token, saved] of detached) {
+      if (saved.expires > now) continue;
+      detached.delete(token);
+      const room = saved.connection.room!;
+      leaveMatch(room, saved.connection.id);
+      if (!room.players.size)
+        for (const [key, value] of rooms) if (value === room) rooms.delete(key);
+    }
     let catchup = 0;
     while (accumulator >= STEP && catchup++ < 32) {
       accumulator -= STEP;
@@ -299,7 +345,8 @@ export function startServer(options: ServerOptions) {
             events: room.events,
             round: room.state,
           };
-          for (const socket of room.connections) send(socket, message);
+          const encoded = JSON.stringify(message);
+          for (const socket of room.connections) send(socket, encoded);
           room.events = [];
         }
       }

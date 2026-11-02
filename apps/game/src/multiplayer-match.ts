@@ -46,6 +46,7 @@ export class MultiplayerMatch {
   private health = 100;
   private beep = 0;
   private finished = false;
+  private wasReconnecting = false;
   private stepDistance = 0;
   private spectatingView = false;
   private reloadSounds = new Map<
@@ -663,6 +664,18 @@ export class MultiplayerMatch {
   simulate(dt: number) {
     const g = this.game;
     g.utility.update(dt);
+    if (this.connection.reconnecting) {
+      if (!this.wasReconnecting) g.notices.showAlert("Connection interrupted. Reconnecting…");
+      this.wasReconnecting = true;
+      this.request = neutralInput();
+      g.jumpQueued = false;
+      return;
+    }
+    if (this.wasReconnecting) {
+      this.wasReconnecting = false;
+      this.request = neutralInput();
+      g.notices.showAlert("Connection restored");
+    }
     const base = neutralInput();
     const locked = g.locked && !g.dead;
     const input: Omit<Input, "seq"> = {
@@ -799,7 +812,8 @@ export class MultiplayerMatch {
         T.MathUtils.lerp(a.y, b.y, t),
         T.MathUtils.lerp(a.z, b.z, t),
       );
-      bot.group.rotation.y = b.yaw + Math.PI;
+      bot.group.rotation.y =
+        a.yaw + Math.atan2(Math.sin(b.yaw - a.yaw), Math.cos(b.yaw - a.yaw)) * t + Math.PI;
       bot.group.visible = true;
       bot.vertical = b.vertical;
       bot.velocity.set(b.vx, b.vz);

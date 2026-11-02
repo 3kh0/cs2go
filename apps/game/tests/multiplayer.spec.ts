@@ -269,3 +269,30 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     await bc.close();
   }
 });
+
+test("a transport interruption recovers the same player and resumes acknowledged input", async ({
+  page,
+}) => {
+  test.setTimeout(120000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await join(page, `reconnect-${Date.now()}`, "ct");
+  const id = await page.evaluate(() => {
+    const connection = window.__game.network!.connection;
+    const id = connection.id;
+    connection.socket.close(4000, "Snapshot timeout");
+    return id;
+  });
+  await page.waitForFunction((id) => {
+    const connection = window.__game.network?.connection;
+    return (
+      connection?.id === id &&
+      !connection.reconnecting &&
+      connection.socket.readyState === WebSocket.OPEN &&
+      !!connection.local
+    );
+  }, id);
+  expect(await page.evaluate(() => window.__game.network!.connection.players.length)).toBe(1);
+  await page.waitForFunction(() => window.__game.network!.connection.local!.ack > 0);
+  expect(errors).toEqual([]);
+});

@@ -7,18 +7,19 @@ import { MatchConnection } from "./multiplayer-connection";
 
 class TestSocket {
   static OPEN = 1;
+  static CLOSING = 2;
   readyState = 1;
   bufferedAmount = 0;
   sent: string[] = [];
   onopen?: () => void;
   onmessage?: (event: { data: string }) => void;
-  onclose?: (event: { reason: string }) => void;
+  onclose?: (event: { reason: string; code: number }) => void;
   send(data: string) {
     this.sent.push(data);
   }
   close(_code: number, reason: string) {
     this.readyState = 3;
-    this.onclose?.({ reason });
+    this.onclose?.({ reason, code: _code });
   }
   receive(message: ServerMessage) {
     this.onmessage?.({ data: JSON.stringify(message) });
@@ -139,5 +140,61 @@ test("a temporary acknowledgement stall bounds input and resumes without disconn
   });
   expect(connection.step({ ...neutralInput(), forward: 1 })).toBe(true);
   expect(connection.pending).toHaveLength(1);
+  connection.close();
+});
+
+test("transport interruption retries with the session token and cancels cleanly on leave", () => {
+  const { connection, socket } = setup();
+  socket.receive({
+    type: "welcome",
+    version: PROTOCOL_VERSION,
+    id: "player",
+    room: "test-room-123",
+    map: "dust2",
+    mode: "casual",
+    resume: "secret-session",
+  });
+  socket.close(1006, "");
+  expect(connection.reconnecting).toBe(true);
+  expect(connection.step(neutralInput())).toBe(false);
+  vi.advanceTimersByTime(450);
+  const retry = connection.socket as unknown as TestSocket;
+  expect(retry).not.toBe(socket);
+  retry.onopen?.();
+  expect(JSON.parse(retry.sent[0]).resume).toBe("secret-session");
+  connection.close();
+  vi.advanceTimersByTime(10000);
+  expect(connection.socket).toBe(retry);
+});
+
+test("packet arrival jitter does not become uneven interpolation spacing", () => {
+  const { connection, socket, player } = setup();
+  const round = createMatch("casual", testMap()).state;
+  vi.advanceTimersByTime(70);
+  socket.receive({ type: "snapshot", tick: 4, players: [player], events: [], round });
+  vi.advanceTimersByTime(2);
+  socket.receive({ type: "snapshot", tick: 8, players: [player], events: [], round });
+  const history = connection.history;
+  expect(history[2].at - history[1].at).toBeCloseTo(31.25, 0);
+  connection.close();
+});
+
+test("an unresponsive transport starts recovery without waiting for its close handshake", () => {
+  const { connection, socket } = setup();
+  socket.receive({
+    type: "welcome",
+    version: PROTOCOL_VERSION,
+    id: "player",
+    room: "test-room-123",
+    map: "dust2",
+    mode: "casual",
+    resume: "secret-session",
+  });
+  socket.close = () => {
+    socket.readyState = TestSocket.CLOSING;
+  };
+  vi.advanceTimersByTime(6500);
+  expect(connection.reconnecting).toBe(true);
+  expect(connection.socket).not.toBe(socket);
   connection.close();
 });

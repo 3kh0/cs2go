@@ -1,0 +1,78 @@
+select:not([multiple]):not([size]),
+select:not([multiple]):not([size])::picker(select) {
+  appearance: base-select;
+}
+select:not([multiple]):not([size]),
+#settings select {
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #eee;
+  font:
+    700 20px "Stratum2 Condensed",
+    sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+#settings select {
+  min-width: 0;
+  width: max-content;
+  text-align: right;
+}
+select:not([multiple]):not([size]):is(:hover, :open) {
+  background: #00000026;
+}
+select:not([multiple]):not([size]):focus-visible {
+  outline: 2px solid #cccccc80;
+  outline-offset: 2px;
+}
+select:not([multiple]):not([size])::picker-icon {
+  content: "";
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  margin: -5px 2px 0 0;
+  border: solid currentColor;
+  border-width: 0 3px 3px 0;
+  rotate: 45deg;
+}
+select:not([multiple]):not([size])::picker(select) {
+  width: max-content;
+  min-width: anchor-size(width);
+  max-width: min(440px, calc(100vw - 24px));
+  max-height: min(480px, 60vh);
+  overflow: auto;
+  margin: 0;
+  padding: 6px 0;
+  border: 0;
+  border-radius: 3px;
+  background: #202020;
+  color: #c8c8c8;
+  box-shadow: 0 2px 5px #0004;
+}
+select:not([multiple]):not([size]) option {
+  min-height: 38px;
+  padding: 8px 18px;
+  background: transparent;
+  color: #c8c8c8;
+  font:
+    400 14px "Stratum2",
+    sans-serif;
+  text-align: left;
+  text-transform: none;
+}
+select:not([multiple]):not([size]) option:is(:hover, :focus, :checked) {
+  background: #101010;
+  color: white;
+}
+select:not([multiple]):not([size]) option::checkmark {
+  display: none;
+}
+select:not([multiple]):not([size]):disabled,
+select:not([multiple]):not([size]) option:disabled {
+  color: #888;
+  cursor: default;
+}

@@ -30,6 +30,7 @@ async function client(
   room = "private-room-123",
   password = "test-password",
   team: "ct" | "t" = "ct",
+  resume?: string,
 ) {
   const socket = new WebSocket(origin.replace("http:", "ws:") + "/ws", {
     headers: { Origin: "http://localhost:5173" },
@@ -41,6 +42,7 @@ async function client(
   socket.send(
     JSON.stringify({
       type: "join",
+      resume,
       version: PROTOCOL_VERSION,
       room,
       name,
@@ -135,6 +137,37 @@ try {
       }),
     );
   await until(() => isolated.players()[0]?.ack === 64, "buffered input burst drained");
+
+  const welcome = isolated.messages.find((message) => message.type === "welcome")!;
+  const preserved = app.rooms.get("different-room-123")!.players.get(welcome.id)!;
+  preserved.money = 1234;
+  isolated.socket.close(4000, "Snapshot timeout");
+  await until(() => isolated.socket.readyState === WebSocket.CLOSED, "interruption");
+  const recovered = await client(
+    "Isolated",
+    "different-room-123",
+    "test-password",
+    "ct",
+    welcome.resume,
+  );
+  await until(() => recovered.players().length === 1, "session recovered");
+  const recoveredWelcome = recovered.messages.find((message) => message.type === "welcome")!;
+  assert.equal(recoveredWelcome.id, welcome.id);
+  assert.notEqual(recoveredWelcome.resume, welcome.resume);
+  assert.equal(recovered.players()[0].money, 1234);
+  recovered.socket.send(JSON.stringify({ type: "inputs", inputs: [neutralInput(1)] }));
+  await until(() => recovered.players()[0]?.ack === 1, "fresh sequence after recovery");
+  const takeover = await client(
+    "Isolated",
+    "different-room-123",
+    "test-password",
+    "ct",
+    recoveredWelcome.resume,
+  );
+  await until(() => takeover.players().length === 1, "half-open session takeover");
+  assert.equal(takeover.players()[0].id, welcome.id);
+  await until(() => recovered.socket.readyState === WebSocket.CLOSED, "old transport retired");
+  takeover.socket.close();
 
   // A repeated sequence cannot replay commands or accelerate simulation.
   a.socket.send(JSON.stringify({ type: "inputs", inputs: [neutralInput(49)] }));

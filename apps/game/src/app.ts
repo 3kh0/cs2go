@@ -6,6 +6,7 @@ import "./style.css";
 import "./home-menu.css";
 import "./settings-page.css";
 import "./pause-menu.css";
+import "./dropdowns.css";
 import { matchNoticesMarkup } from "./match-notices";
 import { buyMenuMarkup } from "./buy-menu";
 import { setupSettingsTabs } from "./settings-tabs";
@@ -18,6 +19,14 @@ import { openTeamSelector } from "./team-select";
 import { setupSteamAccount } from "./steam-account";
 import { startIntro } from "./intro";
 import { startAssetCache } from "./asset-cache";
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+    if (event.code === "Escape" && document.querySelector("select:open")) event.stopPropagation();
+  },
+  true,
+);
 
 const loadProgress = startIntro();
 startAssetCache();

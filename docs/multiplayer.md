@@ -6,7 +6,7 @@ Open the Play tab to choose Casual/Competitive, Multiplayer, server address, roo
 
 `apps/server` is authoritative over movement, combat, inventories, economy, utility, C4 and round results. Clients send sequenced inputs, never trusted positions/damage/balances. `packages/protocol` bounds/version-checks messages; `packages/simulation` shares local gameplay rules. `apps/game/src/multiplayer-match.ts` feeds snapshots into the normal renderer/HUD.
 
-The server runs at 128 Hz and snapshots at 32 Hz. Clients predict/reconcile local movement and interpolate remote actors about 100 ms behind. Stale input expires after 250 ms; queues, payloads and connection rates are bounded. Protocol version 7 requires matching frontend/server deployments. Team-specific glove finish, wear and seed travel with cosmetic configuration and snapshots; peer models and first-person spectators use the observed player's choice. Buy-and-drop requests are charged and spawned atomically by the server while preserving the held loadout.
+The server runs at 128 Hz and snapshots at 32 Hz. Clients predict/reconcile local movement and interpolate remote actors about 100 ms behind. Stale input expires after 250 ms; queues, payloads and connection rates are bounded. Protocol version 8 requires matching frontend/server deployments. Team-specific glove finish, wear and seed travel with cosmetic configuration and snapshots; peer models and first-person spectators use the observed player's choice. Buy-and-drop requests are charged and spawned atomically by the server while preserving the held loadout.
 
 Casual supports 10v10 and Competitive 5v5. Both sides must arrive before a round starts; late joins wait for the next round. Eliminated players spectate until the next round. Competitive spectators can only use living teammates’ first-person views; when none remain, the camera stays focused on C4 with a limited downward viewing angle. Casual spectators can follow either team and retain chase/free cameras. Disconnecting drops carried C4. Shared rules cover freeze/post-round play, halftime, planted-bomb elimination exceptions, MVPs, refunds, scopes, suppressors, dropped appearance identity and grenade effects.
 
@@ -43,8 +43,10 @@ docker run --rm --name cs2go-server -p 127.0.0.1:3001:3001 \
   --read-only --cap-drop=ALL --security-opt=no-new-privileges cs2go-server
 ```
 
-SIGTERM/SIGINT stop ticking and close sockets with a restart notice. Persistent identity, seamless reconnect, match draining, multi-region routing and unrestricted-public capacity qualification remain unimplemented.
+SIGTERM/SIGINT stop ticking and close sockets with a restart notice. Persistent identity across server restarts, match draining, multi-region routing and unrestricted-public capacity qualification remain unimplemented.
 
 ## Verification
 
 Run `bun run check`, `bun run test`, `bun run build` and relevant multiplayer Playwright tests. Real socket tests load the native gameplay inputs; browser tests use multiple peers through the ordinary menu. Loopback-only round/position controls in `apps/server/tests/browser-server.ts` are test fixtures and must stay out of production.
+
+Temporary transport failures retry automatically for up to 15 seconds. The server reserves the player for 20 seconds with a rotating in-memory session token; position, inventory and economy survive, but the match keeps running and disconnected players remain vulnerable. Explicit leave and policy rejection remove the player immediately. Server restarts and expired sessions require rejoining from Play. Connection transitions log with the [network] prefix without room passwords or session tokens. Peer interpolation uses server tick spacing and interpolated heading.

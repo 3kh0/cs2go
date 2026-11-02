@@ -346,6 +346,10 @@
 }
 
 #home-scenery-button {
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  border: 0;
   position: absolute;
   right: 72px;
   bottom: 10px;
@@ -358,6 +362,7 @@
   font-size: 23px;
 }
 #home-scenery-button svg {
+  display: block;
   width: 22px;
   height: 22px;
   fill: #e6e9e7;
