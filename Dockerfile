@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 # DHI multi-platform image digests; both stages use the repository's pinned Bun.
-FROM dhi.io/bun:1.4.4-dev@sha256:5ac1bb579e27c32bc31c087066b9a6aff3520a1bd6cb782dbd02d2a7e5319006 AS build
+FROM dhi.io/bun:1.4.4-dev@sha256:0550d846f578c40a5b05345abc7582a069f8070716a2a4282a3edbc3e9adcd0d AS build
 WORKDIR /app
 COPY package.json bun.lock bunfig.toml ./
 COPY apps/game/package.json ./apps/game/package.json
@@ -14,7 +14,7 @@ COPY packages/protocol ./packages/protocol
 COPY packages/simulation ./packages/simulation
 RUN bun run --cwd apps/server build
 
-FROM dhi.io/bun:1.4.4@sha256:b1485d173e9915b167a3f6dd761a874d6067abba95c8855462db36031a5dc5e3 AS runtime
+FROM dhi.io/bun:1.4.4@sha256:174c829c9d54c54f71e52fc10009120eb620ec10901e0f047f7cf670abda1d29 AS runtime
 WORKDIR /app
 ENV NODE_ENV=production PORT=3001 ALLOWED_ORIGINS=https://cs2go.3kh0.net MAP_DIRECTORY=/app/maps
 COPY --from=build --chown=65532:65532 /app/apps/server/dist/index.js ./server.js
