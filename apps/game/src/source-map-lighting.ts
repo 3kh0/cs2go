@@ -1,88 +1,83 @@
 import { assetFetch, assetUrl } from "./asset-url";
 import * as T from "three";
 import { fetchGzipped } from "./gltf";
-import { applyCornerLightmap } from "./lightmap-geometry";
+import { bindSourceMapAttributes } from "./source-map-attributes";
 import { loadSourceLighting } from "./source-lighting";
+import { loadSourceColorCorrection } from "./map-color";
+import { applySourceFog } from "./source-fog";
 
-// Native 8.2 lightmaps and volume irradiance. Geometry processing retained
-// world positions but dropped native UV1; the offline linker restores atlas
-// coordinates where Valve's query mesh covers the surface, and samples native
-// spatial probes for the remaining props. No runtime rays or GPU bake passes.
-export function loadSourceMapLighting() {
-  return Promise.all([
-    fetchGzipped("/models/maps/lighting/corner-uv.bin.gz"),
-    fetchGzipped("/models/maps/lighting/triangle-valid.bin.gz"),
-    fetchGzipped("/models/maps/lighting/fallback.bin.gz"),
-    fetchGzipped("/models/maps/lighting/confidence.bin.gz"),
-    assetFetch("/models/maps/lighting/meshes.json").then(async (r) => {
-      if (!r.ok) throw new Error("Native map lighting layout unavailable");
-      return (await r.json()) as {
-        count: number;
-        offset: number;
-        indexOffset: number;
-        indexCount: number;
-      }[];
-    }),
-    new T.TextureLoader().loadAsync(assetUrl("/models/maps/lighting/irradiance.webp")),
-    new T.TextureLoader().loadAsync(assetUrl("/models/maps/lighting/shadows.webp")),
+async function loadNativeAtlas(name: string, format: T.CompressedPixelFormat, bytes: number) {
+  const data = await fetchGzipped(`/models/maps/lighting/native/${name}-4096.bin.gz`);
+  if (data.byteLength !== bytes) throw new Error(`Invalid native Dust II atlas: ${name}`);
+  const texture = new T.CompressedTexture(
+    [{ data: new Uint8Array(data), width: 4096, height: 4096 }],
+    4096,
+    4096,
+    format,
+  );
+  texture.colorSpace = T.NoColorSpace;
+  texture.minFilter = texture.magFilter = T.LinearFilter;
+  texture.needsUpdate = true;
+  return texture;
+}
+
+export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
+  const native =
+    renderer.capabilities.maxTextureSize >= 4096 &&
+    renderer.extensions.has("EXT_texture_compression_bptc") &&
+    renderer.extensions.has("WEBGL_compressed_texture_s3tc");
+  const [irradiance, shadows, directional, materialLighting] = await Promise.all([
+    native
+      ? loadNativeAtlas("irradiance", T.RGB_BPTC_UNSIGNED_Format, 16777216)
+      : new T.TextureLoader().loadAsync(assetUrl("/models/maps/lighting/irradiance.webp")),
+    native
+      ? loadNativeAtlas("direct_light_shadows", T.RGBA_BPTC_Format, 16777216)
+      : new T.TextureLoader().loadAsync(assetUrl("/models/maps/lighting/shadows.webp")),
+    native ? loadNativeAtlas("directional_irradiance", T.RGB_S3TC_DXT1_Format, 8388608) : undefined,
     assetFetch("/models/maps/material-lighting.json").then(async (r) => {
       if (!r.ok) throw new Error("Native map material lighting unavailable");
-      return (await r.json()) as {
-        materials: { name: string; ambientOcclusionScale: number }[];
-      };
+      return (await r.json()) as { materials: { name: string; ambientOcclusionScale: number }[] };
     }),
     loadSourceLighting(),
+    loadSourceColorCorrection(),
   ]);
-}
-export async function applySourceMapLighting(
-  root: T.Object3D,
-  data: Awaited<ReturnType<typeof loadSourceMapLighting>>,
-) {
-  const [
-    uvBuffer,
-    validBuffer,
-    fallbackBuffer,
-    confidenceBuffer,
-    meshes,
-    irradiance,
-    shadows,
-    materialLighting,
-  ] = data;
-  // WebP carries square-root encoded linear irradiance data, not display-referred albedo.
   for (const texture of [irradiance, shadows]) {
     texture.colorSpace = T.NoColorSpace;
     texture.flipY = false;
-    texture.minFilter = T.LinearMipmapLinearFilter;
+    texture.minFilter = native ? T.LinearFilter : T.LinearMipmapLinearFilter;
     texture.magFilter = T.LinearFilter;
     texture.needsUpdate = true;
   }
-  let index = 0;
+  return { irradiance, shadows, directional, materialLighting, native };
+}
+
+// Coordinates, lightmap/probe selection and probe fallbacks survive offline simplification.
+// Native GPU blocks retain HDR and chart borders; no runtime vertex splitting or ray tracing.
+export function applySourceMapLighting(
+  root: T.Object3D,
+  data: Awaited<ReturnType<typeof loadSourceMapLighting>>,
+) {
+  const { irradiance, shadows, directional, materialLighting, native } = data;
   const patched = new Set<T.Material>();
   root.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
-    const layout = meshes[index++];
-    if (!layout || object.geometry.attributes.position.count !== layout.count)
-      throw new Error("Native map lighting geometry mismatch; regenerate lighting assets");
-    const splits = applyCornerLightmap(
-      object.geometry,
-      new Uint16Array(uvBuffer, layout.indexOffset * 4, layout.indexCount * 2),
-      new Uint8Array(validBuffer, layout.indexOffset / 3, layout.indexCount / 3),
-      new Uint8Array(fallbackBuffer, layout.offset * 4, layout.count * 4),
-      new Uint8Array(confidenceBuffer, layout.offset, layout.count),
-    );
-    root.userData.sourceLightmapSplits = (root.userData.sourceLightmapSplits ?? 0) + splits;
-    // The native shadow atlas already contains stationary sun occlusion.
-    object.receiveShadow = false;
+    bindSourceMapAttributes(object.geometry);
+    // Source multiplies baked visibility by the cached real-time sun shadow.
+    object.receiveShadow = true;
     for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
       if (patched.has(material)) continue;
       patched.add(material);
-      // Restore explicit native material AO strength omitted by the glTF export.
-      // A zero native scale is essential for the decorative street lantern.
       const nativeMaterial = materialLighting.materials.find(
         (entry) => entry.name === material.name,
       );
       if (nativeMaterial && material instanceof T.MeshStandardMaterial)
         material.aoMapIntensity = nativeMaterial.ambientOcclusionScale;
+      const cable = material.name === "csgo_placeholder_cable";
+      const cableViewport = { value: 1 };
+      if (cable)
+        material.onBeforeRender = (renderer: T.WebGLRenderer) => {
+          cableViewport.value = renderer.getRenderTarget()?.height ?? renderer.domElement.height;
+        };
       const prior = material.onBeforeCompile.bind(material);
       const priorKey = material.customProgramCacheKey();
       material.onBeforeCompile = (
@@ -90,17 +85,44 @@ export async function applySourceMapLighting(
         renderer: T.WebGLRenderer,
       ) => {
         prior(shader, renderer);
+        if (cable) {
+          shader.uniforms.sourceCableViewport = cableViewport;
+          shader.vertexShader = "uniform float sourceCableViewport;\n" + shader.vertexShader;
+          shader.vertexShader = shader.vertexShader.replace(
+            "#include <color_vertex>",
+            `#include <color_vertex>
+            #if defined(USE_COLOR) || defined(USE_COLOR_ALPHA)
+              vColor.rgb = vec3(1.0);
+            #endif`,
+          );
+          // F_CLAMP_MIN_RADIUS is enabled in the native material. A 0.75-pixel
+          // radial floor keeps its four-sided tube continuous without MSAA;
+          // the exact engine floor is not exposed by the compiled material.
+          shader.vertexShader = shader.vertexShader.replace(
+            "#include <project_vertex>",
+            `#include <project_vertex>
+            float sourceCableRadius = color.r * 0.0254;
+            vec3 sourceCableNormal = normalize(transformedNormal);
+            vec3 sourceCableCenter = mvPosition.xyz - sourceCableNormal * sourceCableRadius;
+            float sourceCableMinRadius = 1.5 * abs(sourceCableCenter.z) / (max(sourceCableViewport, 1.0) * projectionMatrix[1][1]);
+            mvPosition.xyz = sourceCableCenter + sourceCableNormal * max(sourceCableRadius, sourceCableMinRadius);
+            gl_Position = projectionMatrix * mvPosition;`,
+          );
+        }
+        applySourceFog(shader);
         shader.uniforms.sourceIrradiance = { value: irradiance };
         shader.uniforms.sourceShadows = { value: shadows };
+        shader.uniforms.sourceNative = { value: native ? 1 : 0 };
+        shader.uniforms.sourceDirectional = { value: directional ?? irradiance };
         shader.vertexShader =
-          `attribute vec3 sourceUv; attribute vec4 sourceProbe; varying vec3 vSourceUv; varying vec4 vSourceProbe;\n` +
+          `attribute vec2 sourceUv; attribute vec4 sourceProbe; varying vec3 vSourceUv; varying vec4 vSourceProbe;\n` +
           shader.vertexShader;
         shader.vertexShader = shader.vertexShader.replace(
           "#include <begin_vertex>",
-          "#include <begin_vertex>\nvSourceUv=sourceUv; vSourceProbe=sourceProbe;",
+          `#include <begin_vertex>\nvSourceUv=vec3(sourceUv, step(0.5 / 65535.0, sourceUv.x + sourceUv.y)); vSourceProbe=sourceProbe;`,
         );
         shader.fragmentShader =
-          `uniform sampler2D sourceIrradiance; uniform sampler2D sourceShadows; varying vec3 vSourceUv; varying vec4 vSourceProbe;\n` +
+          `uniform sampler2D sourceDirectional; uniform float sourceNative; uniform sampler2D sourceIrradiance; uniform sampler2D sourceShadows; varying vec3 vSourceUv; varying vec4 vSourceProbe;\n` +
           shader.fragmentShader;
         const direct =
           "float sourceCoverage = vSourceUv.z;\n" +
@@ -116,15 +138,33 @@ export async function applySourceMapLighting(
           "#include <lights_fragment_maps>",
           `#include <lights_fragment_maps>
           vec4 sourceLight = texture2D(sourceIrradiance, vSourceUv.xy);
-          irradiance = mix(vSourceProbe.rgb * vSourceProbe.rgb * 16.0, sourceLight.rgb * sourceLight.rgb * 16.0, sourceCoverage) * PI;
+          vec3 sourceDiffuse = sourceLight.rgb * sourceLight.rgb * 16.0;
+          if (sourceNative > 0.5) {
+            vec3 sourceDirection = texture2D(sourceDirectional, vSourceUv.xy).rgb;
+            vec2 directionXY = sourceDirection.xy * 2.0 - 1.0;
+            const float maxXY = 0.996190805;
+            directionXY *= maxXY / max(maxXY, length(directionXY));
+            float directionZ = sqrt(max(1.0 - dot(directionXY, directionXY), 0.0));
+            float curvature = length(fwidth(nonPerturbedNormal)) * 0.0254 / max(length(fwidth(vViewPosition)), 1e-6);
+            float flatness = (1.0 - smoothstep(0.01, 0.1, curvature)) * 0.8;
+            float zScale = mix(1.0, mix(0.1, 2.0, clamp((1.0-directionZ)*1.5, 0.0, 1.0)), flatness);
+            vec3 lightTs = normalize(vec3(directionXY, directionZ * zScale));
+            vec3 normalTs = vec3(0.0, 0.0, 1.0);
+            #ifdef USE_NORMALMAP_TANGENTSPACE
+              normalTs = normalize(mapN);
+            #endif
+            vec3 nonDirectional = sourceLight.rgb * sourceDirection.z;
+            sourceDiffuse = nonDirectional + max(dot(lightTs, normalTs), 0.0) * (sourceLight.rgb - nonDirectional) / lightTs.z;
+          }
+          irradiance = mix(vSourceProbe.rgb * vSourceProbe.rgb * 16.0, sourceDiffuse, sourceCoverage) * PI;
           iblIrradiance = vec3(0.0);
         `,
         );
       };
-      material.customProgramCacheKey = () => priorKey + "-native-source-lighting-v1";
+      material.customProgramCacheKey = () =>
+        priorKey + "-native-source-lighting-v4" + (cable ? ":cable-radius" : "");
       material.needsUpdate = true;
     }
   });
-  if (index !== meshes.length) throw new Error("Native map lighting mesh count mismatch");
-  return { irradiance, shadows };
+  return { irradiance, shadows, directional };
 }
