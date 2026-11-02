@@ -5172,20 +5172,22 @@ export class Game {
       return;
     }
     this.updateTextureQuality();
-    const dt = Math.min((now - this.last) / 1000, 0.05);
+    const elapsed = (now - this.last) / 1000;
+    const dt = Math.min(elapsed, 0.05);
     this.last = now;
     if (this.deathBannerUntil > 0 && now >= this.deathBannerUntil) {
       this.deathBannerUntil = 0;
       toggle("death-banner", false);
     }
-    this.fpsTime += dt;
+    this.fpsTime += elapsed;
     if (this.fpsTime > 1) {
       this.fps = Math.round(this.frames / this.fpsTime);
+      const frameMs = this.frames ? ((this.fpsTime * 1000) / this.frames).toFixed(1) : "–";
       this.frames = 0;
       this.fpsTime = 0;
       setText(
         "telemetry",
-        `${this.fps} FPS - 128 TICK - ${this.network ? `${this.network.connection.ping} MS` : "LOCAL"}`,
+        `${this.fps} FPS | ${frameMs} MS FRAME ${this.network ? ` | ${this.network.connection.ping} MS PING` : ""}`,
       );
     }
     if (this.simulationRunning) {

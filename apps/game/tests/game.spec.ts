@@ -30,6 +30,33 @@ test("menu, saved settings, and offline assets", async ({ page }) => {
   expect(errors).toEqual([]);
   expect(external).toEqual([]);
 });
+test("leave match confirmation keeps or ends the match", async ({ page }) => {
+  await page.goto("/");
+  await page.bringToFront();
+  await page.locator("#play").evaluate((button) => {
+    button.onclick = () => window.__game.start("practice");
+  });
+  await page.locator("#home-play").click();
+  await page.locator("#play").click();
+  await page.waitForFunction(() => window.__game.locked);
+  await page.evaluate(() => document.exitPointerLock());
+  await expect(page.locator("#pause")).toBeVisible();
+  await page.locator("#leave").click();
+  const leaveDialog = page.getByRole("dialog", { name: "LEAVE MATCH" });
+  await expect(leaveDialog).toBeVisible();
+  await page.screenshot({ path: "artifacts/leave-confirmation.png" });
+  await expect(page.locator("#leave-no")).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(leaveDialog).toBeHidden();
+  await expect(page.locator("#leave")).toBeFocused();
+  await page.locator("#leave").click();
+  await page.locator("#leave-no").click();
+  await expect(page.locator("#pause")).toBeVisible();
+  await page.locator("#leave").click();
+  await page.locator("#leave-yes").click();
+  await expect(leaveDialog).toBeHidden();
+  await expect(page.locator("#menu")).toBeVisible();
+});
 test("real pointer lock, movement, jump, crouch, pause, and loadout", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -771,6 +798,7 @@ test("agent side selection, independent rigs, and live menu animation", async ({
   await page.waitForTimeout(250);
   expect(await page.evaluate(() => window.__game.animationTime)).toBeGreaterThan(pose);
   await page.locator("#leave").click();
+  await page.locator("#leave-yes").click();
   await page.locator("#settings-button").click();
   await page.getByRole("tab", { name: "Gameplay", exact: true }).click();
   await page.locator("#agent-team").selectOption("ct");

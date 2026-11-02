@@ -586,10 +586,12 @@ footer button {
 }
 #telemetry {
   position: absolute;
-  bottom: 5px;
-  left: 30px;
-  font-size: 8px;
-  color: #ffffff85;
+  top: 8px;
+  right: 12px;
+  font-size: 11px;
+  color: #9ee65a;
+  text-shadow: 0 1px 3px #000;
+  pointer-events: none;
 }
 #crosshair,
 .crosshair-shape {
