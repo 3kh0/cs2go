@@ -59,7 +59,7 @@ import {
   nextLossLevel,
   addMoney,
 } from "./economy";
-import { applyArmorDamage, friendlyFireScale } from "./damage";
+import { applyArmorDamage, friendlyFireScale, hitRegion } from "./damage";
 import { dust2BuyZones, dust2BombSites } from "./buy-zones";
 import { groundCorrectedBombSample } from "./bomb-damage";
 import {
@@ -1505,8 +1505,7 @@ export class Game {
     const victim = actor === "player" ? this : actor;
     if (this.teamMode && victim.team === attackerTeam)
       damage *= friendlyFireScale(this.competitive ? "competitive" : "casual", kind);
-    const height = (data.height ?? 1.1) * (data.crouch ? 1.65 / 1.1 : 1);
-    const region = data.head ? "head" : height < 0.85 ? "leg" : height < 1.08 ? "stomach" : "chest";
+    const region = hitRegion(!!data.head, data.height ?? 1.1, data.crouch);
     const result = applyArmorDamage(
       damage,
       region,

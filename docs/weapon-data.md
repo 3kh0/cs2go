@@ -38,6 +38,14 @@ Ground Rebel uses its imported native bone-local bullet capsules; the older CT r
 
 Knife rules follow the historical implementation: front initial/repeated slash 40/25, front stab 65, rear slash/stab 90/180 (153 heavy backstab damage through full armor), 85% armor penetration and 48/32-Source-unit reach. Miss/hit recovery is 0.4/0.5 seconds for slash and 1/1.1 for stab. Impact phases and the forgiving trace fan remain reconstructed. Native visual clip seconds are independent; see [assets.md](assets.md#knife-timing). Rear hits use the victim’s visible body direction rather than an AI turn target. Heavy hits use the native `Weapon_Knife.Hit.Heavy` cue for local and remote players. Knives are Inventory equipment, never buy-menu purchases.
 
+## Damage regression audit
+
+All 34 firearm damage values, head multipliers, armor ratios, penetration powers, ranges, range modifiers and pellet counts were checked against the pinned `weapons.vdata` SHA-256. `packages/simulation/src/damage-audit.test.ts` exercises authoritative damage for standing/crouched head, chest, stomach and leg hits, armor/helmet states, shotgun pellets, friendly-fire scaling and AK range/cover cases. Offline A-site back-to-ramp traces are covered by `apps/game/tests/damage-audit.spec.ts`.
+
+A clean enemy AK helmet headshot deals 111 damage at point-blank range and about 109 at 12.7 m. It is lethal at normal A-site distances; cover penetration, very long range (roughly 69 m onward against full armor) or competitive team damage can make a headshot survivable. The headshot cue confirms a head hit, not a kill. No unconditional one-shot override is applied.
+
+The audit corrected multiplayer vest protection on leg hits, knife friendly-fire scaling (other damage rather than bullet damage), and offline utility health rounding to match the authoritative server. Fire bypasses armor; HE/decoy use their shared armor calculation. C4's baked query already returns health damage and is not armor-reduced twice. Utility falloff/propagation and native-body hitbox approximations remain as documented above.
+
 ## Native Dust II data
 
 `dust2-buy-zones.json` retains the pinned map's buy and bomb-target hulls. The importer verifies box vertices/planes before reducing them to bounds. Membership uses actor-hull contact; time, team, balance and loadout checks remain separate.

@@ -738,7 +738,7 @@ export class GameUtility {
         damage = result.healthDamage;
         actor.armor = result.armor;
       }
-      actor.health = Math.max(0, actor.health - damage);
+      actor.health = Math.max(0, actor.health - Math.floor(damage));
       if (id === "player") {
         g.damage = 0.2;
         if (damage > 0) g.groundInventory.invalidateEquipment();

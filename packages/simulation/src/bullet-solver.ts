@@ -1,6 +1,7 @@
 import * as T from "three";
 import { penetrate, rangeDamage, SOURCE_UNITS_PER_METER } from "./ballistics";
 import type { BulletMaterial } from "./ballistics";
+import { hitRegion, hitRegionMultiplier } from "./damage";
 
 export type BulletStats = { damage: number; power: number; range: number; modifier: number };
 export type BulletSurface<Data> = {
@@ -70,8 +71,7 @@ export function hitgroupMultiplier(
   headMultiplier: number,
   crouch = false,
 ) {
-  const standingHeight = crouch ? height * (1.65 / 1.1) : height;
-  return head ? headMultiplier : standingHeight < 0.85 ? 0.75 : standingHeight < 1.08 ? 1.25 : 1;
+  return hitRegionMultiplier(hitRegion(head, height, crouch), headMultiplier);
 }
 
 export function fleshThickness(direction: T.Vector3, yaw: number, head: boolean) {

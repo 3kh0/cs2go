@@ -1,5 +1,16 @@
 export type HitRegion = "head" | "chest" | "stomach" | "arm" | "leg";
 
+export function hitRegion(head: boolean, height: number, crouch = false): HitRegion {
+  const standingHeight = crouch ? height * (1.65 / 1.1) : height;
+  return head
+    ? "head"
+    : standingHeight < 0.85
+      ? "leg"
+      : standingHeight < 1.08
+        ? "stomach"
+        : "chest";
+}
+
 export function hitRegionMultiplier(region: HitRegion, headMultiplier = 4) {
   return region === "head"
     ? headMultiplier

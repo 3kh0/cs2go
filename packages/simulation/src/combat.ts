@@ -3,7 +3,7 @@ import type { MatchEvent, PlayerState } from "@cs2go/protocol";
 import type { Match } from "./match";
 import { rayBox, dropWeapon } from "./match";
 import { weapons, movement, isKnife } from "./physics";
-import { applyArmorDamage, friendlyFireScale } from "./damage";
+import { applyArmorDamage, friendlyFireScale, hitRegion, type HitRegion } from "./damage";
 import { addMoney, killReward } from "./economy";
 import { ballistics } from "./ballistics";
 import {
@@ -76,17 +76,12 @@ export function damagePlayer(
   weapon: number,
   armorRatio = weapons[weapon]?.armorRatio ?? 1,
   ignoreArmor = false,
+  region: HitRegion = headshot ? "head" : "chest",
 ): MatchEvent[] {
   if (victim.health <= 0 || damage <= 0) return [];
   const result = ignoreArmor
     ? { armor: victim.armor, healthDamage: damage }
-    : applyArmorDamage(
-        damage,
-        headshot ? "head" : "chest",
-        victim.armor,
-        victim.helmet,
-        armorRatio,
-      );
+    : applyArmorDamage(damage, region, victim.armor, victim.helmet, armorRatio);
   if (result.healthDamage > 0)
     match.receipts.get(victim.id)!.equipment = match.receipts
       .get(victim.id)!
@@ -194,7 +189,7 @@ export function shoot(
             stab,
             memory.knifeAge > 0.9,
             knifeBackstab(shooter, victim, victim.yaw + Math.PI),
-          ) * (victim.team === shooter.team ? friendlyFireScale(match.state.mode, "bullet") : 1),
+          ) * (victim.team === shooter.team ? friendlyFireScale(match.state.mode, "other") : 1),
           false,
           shooter.weapon,
           1.7,
@@ -269,6 +264,9 @@ export function shoot(
           damage,
           !!data.head,
           shooter.weapon,
+          weapon.armorRatio,
+          false,
+          hitRegion(!!data.head, data.height!, data.victim.eye < 1.4),
         );
         for (const death of deaths)
           if (death.kind === "kill") {
