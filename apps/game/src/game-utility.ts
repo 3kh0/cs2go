@@ -205,7 +205,7 @@ export class GameUtility {
       this.overlay.id = "flash-blindness";
       this.overlay.style.cssText =
         "position:fixed;inset:0;background:white;pointer-events:none;z-index:15;opacity:0";
-      document.body.append(this.overlay);
+      document.getElementById("app")!.append(this.overlay);
     }
     this.overlay.style.opacity = g.dead
       ? "0"

@@ -23,7 +23,7 @@
   backdrop-filter: none;
 }
 .cosmetic-dialog {
-  width: min(1400px, 96vw);
+  width: min(1400px, calc(96 * var(--game-vw, 1vw)));
   height: min(850px, 94vh);
   color: #f1f0e9;
   display: grid;

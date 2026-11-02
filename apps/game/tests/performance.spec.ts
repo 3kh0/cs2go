@@ -49,9 +49,12 @@ test("render budgets survive resizing and quality changes without external asset
   await expect(page.locator("#shadowFilter")).toBeDisabled();
   await page.locator("#quality").selectOption("quality");
   expect(await page.evaluate(() => window.__game.renderer.shadowMap.enabled)).toBe(true);
-  await expect(page.locator("#graphics-reload")).toBeVisible();
+  expect(await page.evaluate(() => window.__game.antialiasAtStartup)).toBe(false);
+  await expect(page.getByRole("dialog", { name: "RELOAD REQUIRED" })).toBeVisible();
+  await page.locator("#settings-reload-later").click();
+  await expect(page.locator("#settings")).toBeVisible();
   await page.locator("#antialias").selectOption("off");
-  await expect(page.locator("#graphics-reload")).toBeHidden();
+  await expect(page.locator("#settings-reload")).toHaveCount(0);
   await expect.poll(pixels).toBe(2560 * 1440);
   // High retains the idle render limit as well as its framebuffer budget.
   const draws = await page.evaluate(async () => {
@@ -72,7 +75,8 @@ test("render budgets survive resizing and quality changes without external asset
   await page.screenshot({ path: "artifacts/high-default-menu.png" });
   await page.locator("#settings-button").click();
   await page.locator("#antialias").selectOption("msaa");
-  await page.locator("#graphics-reload").click();
+  await expect(page.getByRole("dialog", { name: "RELOAD REQUIRED" })).toBeVisible();
+  await Promise.all([page.waitForEvent("load"), page.locator("#settings-reload-now").click()]);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });
   expect(await page.evaluate(() => window.__game.antialiasAtStartup)).toBe(true);
   expect(
@@ -81,7 +85,7 @@ test("render budgets survive resizing and quality changes without external asset
     ),
   ).toBe(true);
   await page.locator("#settings-button").click();
-  await expect(page.locator("#graphics-reload")).toBeHidden();
+  await expect(page.locator("#settings-reload")).toHaveCount(0);
   await expect(page.locator("#shadowDetail")).toHaveValue("high");
   expect(errors).toEqual([]);
   expect(external).toEqual([]);

@@ -541,7 +541,7 @@ export class HomeScene {
     }
     if ((document.getElementById("home-background") as HTMLSelectElement).value === "close")
       this.camera.position.addScaledVector(this.cameraDirection, 1.2);
-    this.camera.aspect = innerWidth / innerHeight;
+    this.camera.aspect = renderer.domElement.width / renderer.domElement.height;
     // Bounds are sampled only when the appearance/pose changes. Fit their eight
     // corners cheaply so close backgrounds and tall agents retain headroom.
     const bounds = this.framing.get(preview);

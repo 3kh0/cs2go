@@ -251,7 +251,10 @@ export class BuyPreview {
     }
     const rect = (this.rect ??= document.getElementById(this.stageId)!.getBoundingClientRect());
     if (rect.width < 1 || rect.height < 1) return;
-    const aspect = rect.width / rect.height;
+    renderer.getSize(this.size);
+    const sx = this.size.x / window.innerWidth,
+      sy = this.size.y / window.innerHeight;
+    const aspect = (rect.width * sx) / (rect.height * sy);
     if (this.boundsDirty || aspect !== this.fittedAspect) {
       if (this.boundsDirty)
         previewBounds(this.item ? [soldier.group, this.item] : [soldier.group], this.bounds);
@@ -260,9 +263,6 @@ export class BuyPreview {
       this.fittedAspect = aspect;
     }
     // Renderer coordinates use its logical size, which may be capped for quality.
-    renderer.getSize(this.size);
-    const sx = this.size.x / window.innerWidth,
-      sy = this.size.y / window.innerHeight;
     renderer.getViewport(this.viewport);
     renderer.getScissor(this.scissor);
     const scissorTest = renderer.getScissorTest();

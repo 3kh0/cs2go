@@ -63,6 +63,7 @@ test("startup finishes automatically and respects reduced motion", async ({ page
   expect(await page.evaluate(() => window.__game.active)).toBe(false);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 15000 });
   await expect(page.locator("#startup")).toHaveCount(0, { timeout: 15000 });
   expect(await page.evaluate(() => document.pointerLockElement)).toBeNull();
   expect(await page.locator("#app").evaluate((el) => (el as HTMLElement).inert)).toBe(false);

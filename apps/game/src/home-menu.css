@@ -58,7 +58,7 @@
   display: flex;
   align-items: center;
   height: 100%;
-  gap: clamp(10px, 1.5vw, 26px);
+  gap: clamp(10px, calc(1.5 * var(--game-vw, 1vw)), 26px);
 }
 #menu .home-nav button {
   margin: 0;
@@ -157,7 +157,7 @@
   position: absolute;
   left: 16px;
   bottom: 16px;
-  width: clamp(210px, 18vw, 285px);
+  width: clamp(210px, calc(18 * var(--game-vw, 1vw)), 285px);
   display: grid;
   gap: 6px;
 }
@@ -413,7 +413,7 @@
   right: 100%;
   width: max-content;
   min-width: 205px;
-  max-width: min(300px, 45vw);
+  max-width: min(300px, calc(45 * var(--game-vw, 1vw)));
   max-height: min(480px, 70vh);
   overflow-y: auto;
   padding: 6px 0;

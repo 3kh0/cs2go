@@ -1,9 +1,11 @@
 import * as T from "three";
+import { displayDefaults, readDisplaySettings } from "./display-settings";
 import { graphicsDefaults, readGraphicsSettings } from "./graphics-settings";
 import { viewmodelDefaults, readViewmodelSettings } from "./viewmodel-settings";
 
 export const presentationDefaults = {
   ...graphicsDefaults,
+  ...displayDefaults,
   ...viewmodelDefaults,
   crosshairColor: "#a8ff80",
   crosshairLength: 7,
@@ -19,6 +21,7 @@ export function readPresentationSettings(saved: Record<string, unknown>): Presen
   const settings = {
     ...presentationDefaults,
     ...readGraphicsSettings(saved),
+    ...readDisplaySettings(saved),
     ...readViewmodelSettings(saved),
   };
   for (const [key, min, max] of [

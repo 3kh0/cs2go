@@ -313,7 +313,7 @@ export class GameInventory {
       overlay
         .querySelector(".inventory-choices")!
         .insertAdjacentHTML("beforeend", cosmeticCandidates);
-    document.body.append(overlay);
+    document.getElementById("app")!.append(overlay);
     this.panelRect = overlay.querySelector<HTMLElement>(".loadout-team")!.getBoundingClientRect();
     if (!this.previews.length)
       this.previews = [

@@ -33,6 +33,8 @@ test("styled dropdowns retain keyboard selection and the scenery icon is centere
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Enter");
   await expect(quality).toHaveValue("quality");
+  await expect(page.getByRole("dialog", { name: "RELOAD REQUIRED" })).toBeVisible();
+  await page.locator("#settings-reload-later").click();
   await page.reload();
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100000 });
   await expect(quality).toHaveValue("quality");

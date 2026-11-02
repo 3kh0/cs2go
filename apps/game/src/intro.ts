@@ -1,9 +1,13 @@
+import { applyDisplayViewport, savedDisplayAspect } from "./display-settings";
 import { watchAssetLoads, watchLoadingWork } from "./loading";
 import { DefaultLoadingManager } from "three";
 export type LoadProgress = (completed: number, total: number, error?: boolean) => void;
 
-/** Load behind the badge, then play the title sequence before revealing the menu. */
 export function startIntro(): LoadProgress {
+  const aspect = savedDisplayAspect();
+  const resize = () => applyDisplayViewport(aspect, innerWidth, innerHeight);
+  resize();
+  window.addEventListener("resize", resize);
   const root = document.createElement("section");
   root.id = "startup";
   root.setAttribute("aria-label", "CS2GO loading");
@@ -53,6 +57,7 @@ export function startIntro(): LoadProgress {
   function close(immediate = false) {
     if (closed) return;
     closed = true;
+    window.removeEventListener("resize", resize);
     stopWatching();
     stopWork();
     if (DefaultLoadingManager.onProgress === onProgress)

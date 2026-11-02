@@ -3,7 +3,7 @@
   --pause-unit: min(1px, 0.092593vh);
 }
 #pause .pause-toolbar {
-  width: min(calc(960 * var(--pause-unit)), 96vw);
+  width: min(calc(960 * var(--pause-unit)), calc(96 * var(--game-vw, 1vw)));
   margin-top: calc(96 * var(--pause-unit));
   height: calc(64 * var(--pause-unit));
   padding: 0;

@@ -1,5 +1,6 @@
 import { expect, test } from "vitest";
 import * as T from "three";
+import { displayViewport } from "./display-settings";
 import {
   applyViewmodelCamera,
   readViewmodelSettings,
@@ -7,7 +8,7 @@ import {
   viewmodelPointToWorld,
   viewmodelVerticalFov,
 } from "./viewmodel-settings";
-test("saved viewmodel controls clamp invalid values and retain independent aspect selection", () => {
+test("saved viewmodel controls clamp invalid values without owning the display aspect", () => {
   expect(
     readViewmodelSettings({
       viewmodelFov: 999,
@@ -20,7 +21,6 @@ test("saved viewmodel controls clamp invalid values and retain independent aspec
     ...viewmodelDefaults,
     viewmodelFov: 68,
     viewmodelOffsetX: -2,
-    viewmodelAspect: "4:3",
   });
   expect(readViewmodelSettings({ viewmodelAspect: "constructor" })).toEqual(viewmodelDefaults);
 });
@@ -31,10 +31,12 @@ test("native horizontal lens and stretched aspect preserve barrel screen alignme
   world.rotation.set(0.12, 0.8, 0);
   world.updateMatrixWorld(true);
   for (const aspect of ["16:9", "16:10", "4:3", "5:4"] as const) {
-    applyViewmodelCamera(view, 1920, 1080, {
+    const size = displayViewport(aspect, 1920, 1080);
+    world.aspect = size.width / size.height;
+    world.updateProjectionMatrix();
+    applyViewmodelCamera(view, size.width, size.height, {
       ...viewmodelDefaults,
       viewmodelFov: 68,
-      viewmodelAspect: aspect,
     });
     const point = new T.Vector3(0.2, -0.15, -0.7);
     const expected = point.clone().project(view);
@@ -51,6 +53,6 @@ test("native horizontal lens and stretched aspect preserve barrel screen alignme
   };
   applyViewmodelCamera(view, 1920, 1080, settings);
   const normal = new T.Vector3(0.2, 0, -1).project(view).x;
-  applyViewmodelCamera(view, 1920, 1080, { ...settings, viewmodelAspect: "4:3" });
+  applyViewmodelCamera(view, 1440, 1080, settings);
   expect(new T.Vector3(0.2, 0, -1).project(view).x / normal).toBeCloseTo(4 / 3, 9);
 });

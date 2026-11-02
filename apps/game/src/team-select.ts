@@ -11,7 +11,7 @@ export function openTeamSelector(onSelect: (team: AgentTeam) => void, size = 10)
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", "Choose your team");
   overlay.innerHTML = `<div class="team-heading"><button id="team-back">← BACK</button><span>CHOOSE YOUR TEAM</span><span>DUST II - ${size} × ${size}</span></div><div class="team-options">${(["t", "ct"] as const).map((team) => `<button class="team-choice team-${team}" data-team="${team}"><img class="team-emblem" src="/icons/team-${team}.png" alt="" width="76" height="76"><h2>${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"}</h2><p>${team === "t" ? "Plant the bomb. Hold the site." : "Defend the sites. Defuse the bomb."}</p><div class="agent-preview"></div><span class="team-join">JOIN ${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"} ↗</span></button>`).join("")}</div>`;
-  document.body.append(overlay);
+  document.getElementById("app")!.append(overlay);
   menu.inert = true;
   const renderer = new T.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
@@ -82,7 +82,7 @@ export function openTeamSelector(onSelect: (team: AgentTeam) => void, size = 10)
       renderer.domElement.clientWidth !== renderer.domElement.width / renderer.getPixelRatio() ||
       renderer.domElement.clientHeight !== renderer.domElement.height / renderer.getPixelRatio()
     ) {
-      renderer.setSize(innerWidth, innerHeight, false);
+      renderer.setSize(overlay.clientWidth, overlay.clientHeight, false);
     }
     renderer.setScissorTest(false);
     renderer.clear();
@@ -93,10 +93,21 @@ export function openTeamSelector(onSelect: (team: AgentTeam) => void, size = 10)
         soldier.group.visible = index === i;
       });
       animateSoldier(soldiers[i]!, 0, dt, true);
-      camera.aspect = rect.width / rect.height;
+      const scaleX = overlay.clientWidth / innerWidth;
+      camera.aspect = (rect.width * scaleX) / rect.height;
       camera.updateProjectionMatrix();
-      renderer.setViewport(rect.left, innerHeight - rect.bottom, rect.width, rect.height);
-      renderer.setScissor(rect.left, innerHeight - rect.bottom, rect.width, rect.height);
+      renderer.setViewport(
+        rect.left * scaleX,
+        innerHeight - rect.bottom,
+        rect.width * scaleX,
+        rect.height,
+      );
+      renderer.setScissor(
+        rect.left * scaleX,
+        innerHeight - rect.bottom,
+        rect.width * scaleX,
+        rect.height,
+      );
       renderer.render(scene, camera);
     });
   });

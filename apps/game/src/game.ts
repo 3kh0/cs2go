@@ -1,4 +1,5 @@
 import { applyShadowDetail, graphicsPixelRatio } from "./graphics-settings";
+import { applyDisplayViewport, type DisplayAspect } from "./display-settings";
 import { applyViewmodelCamera, viewmodelPointToWorld } from "./viewmodel-settings";
 import { unregisterGloveModel } from "./gloves";
 import { bindWeaponInstance } from "./skins";
@@ -547,6 +548,7 @@ export class Game {
   footsteps = 0;
   supported = true;
   antialiasAtStartup = false;
+  aspectAtStartup: DisplayAspect = "native";
   constructor(onLoad: LoadProgress = () => {}) {
     try {
       const saved = JSON.parse(localStorage.getItem("cs2go-settings") || "{}");
@@ -571,6 +573,7 @@ export class Game {
       /* Optional browser storage. */
     }
     try {
+      this.aspectAtStartup = this.settings.aspectRatio;
       this.antialiasAtStartup = this.settings.antialias === "msaa";
       this.renderer = new T.WebGLRenderer({
         canvas: this.canvas,
@@ -678,7 +681,7 @@ export class Game {
   textureQualityApplied = "";
   textureViewCheck = -Infinity;
   saveViewmodelSettings() {
-    applyViewmodelCamera(this.viewCamera, innerWidth, innerHeight, this.settings);
+    applyViewmodelCamera(this.viewCamera, this.renderSize.x, this.renderSize.y, this.settings);
     try {
       localStorage.setItem("cs2go-settings", JSON.stringify(this.settings));
     } catch {
@@ -708,7 +711,7 @@ export class Game {
           : this.settings.fov;
     this.camera.updateProjectionMatrix();
     // Viewmodel lens is independent of world FOV, as in Source.
-    applyViewmodelCamera(this.viewCamera, innerWidth, innerHeight, this.settings);
+    applyViewmodelCamera(this.viewCamera, this.renderSize.x, this.renderSize.y, this.settings);
     this.updateGraphics();
   }
   updateGraphics() {
@@ -750,12 +753,18 @@ export class Game {
   }
   renderSize = new T.Vector2();
   resizeRenderer() {
-    const ratio = graphicsPixelRatio(this.settings, innerWidth, innerHeight, devicePixelRatio);
+    const { width, height } = applyDisplayViewport(this.aspectAtStartup, innerWidth, innerHeight);
+    const ratio = graphicsPixelRatio(this.settings, width, height, devicePixelRatio);
     if (this.renderer.getPixelRatio() !== ratio) this.renderer.setPixelRatio(ratio);
     this.renderer.getSize(this.renderSize);
-    if (this.renderSize.x !== innerWidth || this.renderSize.y !== innerHeight)
-      this.renderer.setSize(innerWidth, innerHeight);
+    if (this.renderSize.x !== width || this.renderSize.y !== height)
+      this.renderer.setSize(width, height);
+    this.renderSize.set(width, height);
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+    applyViewmodelCamera(this.viewCamera, width, height, this.settings);
   }
+
   ensureAudio() {
     if (!this.audio) {
       this.audio = new AudioContext();
@@ -1012,9 +1021,6 @@ export class Game {
     document.addEventListener("contextmenu", (e) => e.preventDefault());
     window.addEventListener("resize", () => {
       this.resizeRenderer();
-      this.camera.aspect = innerWidth / innerHeight;
-      this.camera.updateProjectionMatrix();
-      applyViewmodelCamera(this.viewCamera, innerWidth, innerHeight, this.settings);
     });
   }
   async lock() {

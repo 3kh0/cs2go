@@ -40,9 +40,15 @@ select:not([multiple]):not([size])::picker-icon {
   rotate: 45deg;
 }
 select:not([multiple]):not([size])::picker(select) {
+  position: fixed;
+  position-area: block-end span-inline-start;
+  inset: auto;
+  position-try-fallbacks: flip-block;
+  transform: scaleX(var(--game-stretch, 1));
+  transform-origin: top right;
   width: max-content;
-  min-width: anchor-size(width);
-  max-width: min(440px, calc(100vw - 24px));
+  min-width: calc(anchor-size(width) / var(--game-stretch, 1));
+  max-width: min(440px, calc((100vw - 24px) / var(--game-stretch, 1)));
   max-height: min(480px, 60vh);
   overflow: auto;
   margin: 0;

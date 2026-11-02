@@ -53,7 +53,7 @@ export function setupCosmeticMenu(game: Game) {
       <div id="agent-animation-controls" class="cosmetic-animation-controls"><label>Find an animation<input id="agent-animation-search" type="search" placeholder="Search animations…" autocomplete="off"></label><label>Category<select id="agent-animation-group"><option value="">All animations</option><option value="base">Movement and poses</option><option value="weapon">Weapon actions</option><option value="taunt">Taunts</option><option value="additive">Additional poses</option></select></label><label>Animation<select id="agent-animation" size="7"></select></label><p id="agent-animation-count"></p><div class="cosmetic-animation-actions"><button id="play-agent-animation" type="button">PLAY ANIMATION</button><button id="stop-agent-animation" type="button">RESTORE IDLE</button></div><p id="agent-animation-hint">Preview animations in the main menu.</p></div>
     </aside><footer id="cosmetic-status" role="status" aria-live="polite"></footer>
   </section>`;
-  document.body.append(overlay);
+  document.getElementById("app")!.append(overlay);
   const get = <E extends HTMLElement>(id: string) => document.getElementById(id) as E;
   const teamSelect = get<HTMLSelectElement>("cosmetic-team"),
     search = get<HTMLInputElement>("cosmetic-search"),

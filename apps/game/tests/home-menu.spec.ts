@@ -139,6 +139,8 @@ test("native homepage presents both agents, local navigation and a working match
   await page.evaluate(() => document.exitPointerLock());
   await expect(page.locator("#pause")).toBeVisible();
   await page.locator("#leave").click();
+  await expect(page.locator("#leave-confirm")).toBeVisible();
+  await page.locator("#leave-yes").click();
   await expect(page.locator("#menu")).toBeVisible();
   await expect(page.locator("#menu")).toHaveAttribute("data-page", "home");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", "t_buymenu_m4a4");

@@ -1,13 +1,10 @@
 import * as T from "three";
 
-export const viewmodelAspects = { "16:9": 16 / 9, "16:10": 16 / 10, "4:3": 4 / 3, "5:4": 5 / 4 };
-export type ViewmodelAspect = keyof typeof viewmodelAspects;
 export const viewmodelDefaults = {
   viewmodelFov: 60,
   viewmodelOffsetX: 1,
   viewmodelOffsetY: 1,
   viewmodelOffsetZ: -1,
-  viewmodelAspect: "16:9" as ViewmodelAspect,
 };
 export type ViewmodelSettings = typeof viewmodelDefaults;
 export const viewmodelRanges = {
@@ -23,11 +20,6 @@ export function readViewmodelSettings(saved: Record<string, unknown>): Viewmodel
     if (typeof value === "number" && Number.isFinite(value))
       result[key as keyof typeof viewmodelRanges] = T.MathUtils.clamp(value, min, max);
   }
-  if (
-    typeof saved.viewmodelAspect === "string" &&
-    Object.hasOwn(viewmodelAspects, saved.viewmodelAspect)
-  )
-    result.viewmodelAspect = saved.viewmodelAspect as ViewmodelAspect;
   return result;
 }
 /** Source's horizontal 4:3 reference lens, not Three.js's vertical FOV. */
@@ -40,9 +32,8 @@ export function applyViewmodelCamera(
   height: number,
   settings: ViewmodelSettings,
 ) {
-  const stretch = 16 / 9 / viewmodelAspects[settings.viewmodelAspect];
   camera.fov = viewmodelVerticalFov(settings.viewmodelFov);
-  camera.aspect = Math.max(1, width) / Math.max(1, height) / stretch;
+  camera.aspect = Math.max(1, width) / Math.max(1, height);
   camera.near = 0.01;
   camera.far = 100;
   // Moving the camera oppositely applies Source offsets to every viewmodel,

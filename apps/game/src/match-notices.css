@@ -190,7 +190,7 @@ body:has(#loadout:not(.hidden)) #hud-alert {
   --match-color: #ccc;
 }
 #result .dialog {
-  width: min(560px, 86vw);
+  width: min(560px, calc(86 * var(--game-vw, 1vw)));
   padding: 36px;
   border: 0;
   border-inline: 4px solid var(--match-color);
@@ -205,7 +205,7 @@ body:has(#loadout:not(.hidden)) #hud-alert {
 }
 #result-title {
   font:
-    500 clamp(40px, 5vw, 64px)/1.2 "Stratum2 Condensed",
+    500 clamp(40px, calc(5 * var(--game-vw, 1vw)), 64px)/1.2 "Stratum2 Condensed",
     sans-serif;
   letter-spacing: 6px;
   color: var(--match-color);

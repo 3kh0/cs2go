@@ -9,6 +9,7 @@ import "./pause-menu.css";
 import "./dropdowns.css";
 import { matchNoticesMarkup } from "./match-notices";
 import { buyMenuMarkup } from "./buy-menu";
+import { saveAndCloseSettings } from "./settings-reload";
 import { setupSettingsTabs } from "./settings-tabs";
 import { setupControlSettings } from "./control-settings";
 import { Game } from "./game";
@@ -213,7 +214,7 @@ el("settings-button").onclick = el("pause-settings").onclick = () => {
   el("settings").classList.remove("hidden");
   (el("settings").querySelector('[role="tab"][aria-selected="true"]') as HTMLElement).focus();
 };
-el("close-settings").onclick = () => el("settings").classList.add("hidden");
+el("close-settings").onclick = () => saveAndCloseSettings(game);
 el("close-loadout").onclick = () => {
   el("loadout").classList.add("hidden");
   void game.lock();

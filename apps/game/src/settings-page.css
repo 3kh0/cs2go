@@ -5,7 +5,7 @@
 }
 #settings[data-category="viewmodel"] .settings-panel {
   align-self: flex-start;
-  width: min(440px, 48vw);
+  width: min(440px, calc(48 * var(--game-vw, 1vw)));
   padding: 22px;
   margin: 12px 0;
   background: #17212fec;
@@ -13,26 +13,6 @@
 }
 #settings[data-category="viewmodel"] :is(.dialog-heading, .settings-tabs) {
   background: #17212fe8;
-}
-.viewmodel-aspect {
-  display: grid;
-  gap: 12px;
-  margin: 20px 0;
-}
-.viewmodel-aspect [role="group"] {
-  display: flex;
-  gap: 5px;
-}
-#settings .viewmodel-aspect button {
-  flex: 1;
-  padding: 10px 4px;
-  background: #263241;
-  color: #d8dce2;
-  border: 1px solid #ffffff25;
-}
-#settings .viewmodel-aspect button[aria-pressed="true"] {
-  background: #d1a14c;
-  color: #111;
 }
 #reset-viewmodel {
   width: 100%;
@@ -60,7 +40,7 @@
   max-width: none;
   height: 100%;
   max-height: none;
-  padding: 24px max(32px, calc((100vw - 1280px) / 2)) 0;
+  padding: 24px max(32px, calc((calc(100 * var(--game-vw, 1vw)) - 1280px) / 2)) 0;
   border: 0;
   box-shadow: none;
   background: transparent;
@@ -247,7 +227,9 @@ body:has(#menu.hidden) #settings {
   inset: auto;
   margin: 0;
   width: max-content;
-  max-width: min(390px, calc(100vw - 24px));
+  max-width: min(390px, calc((100vw - 24px) / var(--game-stretch, 1)));
+  transform: scaleX(var(--game-stretch, 1));
+  transform-origin: top left;
   padding: 16px 18px;
   border: 0;
   border-radius: 5px;

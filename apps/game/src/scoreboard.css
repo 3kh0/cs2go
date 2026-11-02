@@ -5,7 +5,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: calc(960 * var(--sb-unit));
-  max-width: 96vw;
+  max-width: calc(96 * var(--game-vw, 1vw));
   max-height: 92vh;
   padding: calc(20 * var(--sb-unit));
   overflow: auto;

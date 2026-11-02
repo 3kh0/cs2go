@@ -1,3 +1,5 @@
+import { saveAndCloseSettings, promptSettingsReload } from "./settings-reload";
+import { displayAspects, type DisplayAspect } from "./display-settings";
 import type { Game } from "./game";
 import { graphicsPreset, graphicsPresets } from "./graphics-settings";
 
@@ -8,13 +10,17 @@ export function setupGraphicsSettings(panel: HTMLElement, game: Game) {
   panel.insertAdjacentHTML(
     "beforeend",
     `
+    <label class="select-label">Aspect ratio<select id="aspect-ratio"><option value="native">Native - display aspect</option>${Object.keys(
+      displayAspects,
+    )
+      .map((aspect) => `<option value="${aspect}">${aspect} - stretched</option>`)
+      .join("")}</select></label>
     <h3 class="settings-section-title">Frame pacing</h3>
     <label class="select-label">VSync<select disabled aria-label="VSync"><option>Browser controlled</option></select></label>
     <label class="select-label">Gameplay frame limit<select id="fps-cap"><option value="0">Display refresh - no extra cap</option>${[30, 60, 90, 120, 144, 165, 240, 360, 500].map((n) => `<option value="${n}">${n} FPS</option>`).join("")}</select></label>
     <label class="select-label">Menu frame limit<select id="menuFpsCap"><option value="30">30 FPS - recommended</option><option value="60">60 FPS</option><option value="120">120 FPS</option></select></label>
     <h3 class="settings-section-title">Rendering detail</h3>
     <label class="select-label">Anti-aliasing<select id="antialias"><option value="off">Off - fastest</option><option value="msaa">MSAA - browser selected samples</option></select></label>
-    <button id="graphics-reload" class="secondary" hidden>Reload to apply anti-aliasing</button>
     <label class="select-label">Resolution budget<select id="resolutionLimit">${[720, 1080, 1440, 2160].map((n) => `<option value="${n}">Up to ${n}p</option>`).join("")}<option value="0">Native - up to 2× pixel density</option></select></label>
     <label>Render scale<output id="resolutionScale-value"></output><input id="resolutionScale" type="range" min="50" max="100" step="5"></label>
     <label class="select-label">Shadow detail<select id="shadowDetail"><option value="off">Off</option><option value="low">Low - 1024</option><option value="medium">Medium - 2048</option><option value="high">High - 4096</option></select></label>
@@ -25,12 +31,14 @@ export function setupGraphicsSettings(panel: HTMLElement, game: Game) {
   `,
   );
   const help = {
+    "aspect-ratio":
+      "Render the entire game, including the world, weapons, HUD and menus, at this ratio and stretch it to fill your display. Requires a reload.",
     quality: "Apply a graphics preset. Individual changes switch the preset to Custom.",
     "fps-cap":
       "Set an upper limit for the frame rate while playing. Frame limits reduce GPU usage without changing the 128 Hz simulation.",
     menuFpsCap: "Set an upper limit for the frame rate in menus to reduce GPU usage.",
     antialias:
-      "Smooth geometry edges. Changing anti-aliasing requires a reload; other video changes apply immediately.",
+      "Smooth geometry edges. Changing anti-aliasing requires a reload; aspect ratio also requires a reload. Other video changes apply immediately.",
     resolutionLimit: "Limit the rendering resolution while keeping the HUD sharp.",
     resolutionScale:
       "Render scale adjusts the resolution budget, keeping the HUD sharp. Lower this first if the game is slow at high screen resolutions.",
@@ -59,10 +67,19 @@ export function setupGraphicsSettings(panel: HTMLElement, game: Game) {
     effectsDetail: "effectsDetail",
   } as const;
   const scale = panel.querySelector<HTMLInputElement>("#resolutionScale")!;
-  const reload = panel.querySelector<HTMLButtonElement>("#graphics-reload")!;
-  reload.onclick = () => location.reload();
+  const aspect = panel.querySelector<HTMLSelectElement>("#aspect-ratio")!;
+  aspect.value = game.settings.aspectRatio;
+  aspect.onchange = () => {
+    game.settings.aspectRatio = aspect.value as DisplayAspect;
+    promptSettingsReload(game);
+  };
+  panel.insertAdjacentHTML(
+    "beforeend",
+    '<button id="graphics-save" class="secondary">SAVE CHANGES</button>',
+  );
+  panel.querySelector<HTMLButtonElement>("#graphics-save")!.onclick = () =>
+    saveAndCloseSettings(game, true);
   function sync() {
-    reload.hidden = (game.settings.antialias === "msaa") === game.antialiasAtStartup;
     graphics.value = graphicsPreset(game.settings);
     for (const [key, id] of Object.entries(controls)) {
       const select = panel.querySelector<HTMLSelectElement>(`#${id}`)!;
@@ -81,9 +98,11 @@ export function setupGraphicsSettings(panel: HTMLElement, game: Game) {
   graphics.onchange = () => {
     const selected = graphicsPresets[graphics.value as keyof typeof graphicsPresets];
     if (!selected) return;
+    const previousAntialias = game.settings.antialias;
     Object.assign(game.settings, selected);
     game.saveSettings();
     sync();
+    if (game.settings.antialias !== previousAntialias) promptSettingsReload(game);
   };
   for (const [key, id] of Object.entries(controls)) {
     panel.querySelector<HTMLSelectElement>(`#${id}`)!.onchange = (event) => {
@@ -94,6 +113,7 @@ export function setupGraphicsSettings(panel: HTMLElement, game: Game) {
       });
       game.saveSettings();
       sync();
+      if (key === "antialias") promptSettingsReload(game);
     };
   }
   scale.oninput = () => {

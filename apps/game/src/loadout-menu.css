@@ -58,7 +58,10 @@ body:has(#skin-menu:not(.hidden))
 }
 .loadout-team {
   display: grid;
-  grid-template-columns: clamp(45px, 4.6vw, 74px) minmax(130px, 30%) minmax(0, 1fr);
+  grid-template-columns: clamp(45px, calc(4.6 * var(--game-vw, 1vw)), 74px) minmax(
+      130px,
+      30%
+    ) minmax(0, 1fr);
   grid-template-rows: 40px minmax(0, 1fr);
   width: 74.5%;
   padding: 12px 5.5% 20px 1.6%;
@@ -81,7 +84,7 @@ body:has(#skin-menu:not(.hidden))
   padding: 7px 12px;
   font-style: italic;
   font-weight: 700;
-  font-size: clamp(12px, 1.2vw, 18px);
+  font-size: clamp(12px, calc(1.2 * var(--game-vw, 1vw)), 18px);
   white-space: nowrap;
 }
 .loadout-team[data-team="t"] .loadout-team-title {
@@ -131,7 +134,7 @@ body:has(#skin-menu:not(.hidden))
   grid-row: 1 / -1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(6px, 1.1vw, 18px);
+  gap: clamp(6px, calc(1.1 * var(--game-vw, 1vw)), 18px);
   min-height: 0;
 }
 .loadout-slot-columns > section {
@@ -146,7 +149,7 @@ body:has(#skin-menu:not(.hidden))
   flex: 0 0 22px;
   color: #a8d4f2;
   font-weight: 400;
-  font-size: clamp(9px, 1vw, 15px);
+  font-size: clamp(9px, calc(1 * var(--game-vw, 1vw)), 15px);
   white-space: nowrap;
 }
 .loadout-slot-columns h3 button {
@@ -191,7 +194,7 @@ body:has(#skin-menu:not(.hidden))
 .loadout-slot b {
   position: absolute;
   bottom: 3px;
-  font-size: clamp(7px, 0.7vw, 10px);
+  font-size: clamp(7px, calc(0.7 * var(--game-vw, 1vw)), 10px);
   font-weight: 400;
   opacity: 0.6;
 }
@@ -213,7 +216,7 @@ body:has(#skin-menu:not(.hidden))
   cursor: pointer;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(45px, 4.6vw, 74px);
+  grid-template-columns: minmax(0, 1fr) clamp(45px, calc(4.6 * var(--game-vw, 1vw)), 74px);
   grid-template-rows: 40px minmax(0, 1fr);
   padding: 12px 1.6% 20px 8px;
   gap: 0 8px;
@@ -239,7 +242,11 @@ body:has(#skin-menu:not(.hidden))
   flex-direction: row-reverse;
 }
 #loadout-editor[data-active-team="t"] .loadout-team {
-  grid-template-columns: minmax(0, 1fr) minmax(130px, 30%) clamp(45px, 4.6vw, 74px);
+  grid-template-columns: minmax(0, 1fr) minmax(130px, 30%) clamp(
+      45px,
+      calc(4.6 * var(--game-vw, 1vw)),
+      74px
+    );
   border-right: 0;
   border-left: 3px solid #d9bf6f;
   padding: 12px 1.6% 20px 5.5%;
@@ -251,7 +258,7 @@ body:has(#skin-menu:not(.hidden))
   grid-column: 1;
 }
 #loadout-editor[data-active-team="t"] .loadout-opponent {
-  grid-template-columns: clamp(45px, 4.6vw, 74px) minmax(0, 1fr);
+  grid-template-columns: clamp(45px, calc(4.6 * var(--game-vw, 1vw)), 74px) minmax(0, 1fr);
   padding: 12px 8px 20px 1.6%;
 }
 #loadout-editor[data-active-team="t"] .loadout-opponent .loadout-cosmetics {
@@ -527,14 +534,20 @@ body:has(#loadout-editor) #inventory-button {
 
 #loadout-editor .loadout-team {
   width: calc(50% + 334 * var(--menu-unit));
-  padding-left: max(calc(24 * var(--menu-unit)), calc(50vw - 696 * var(--menu-unit)));
+  padding-left: max(
+    calc(24 * var(--menu-unit)),
+    calc(calc(50 * var(--game-vw, 1vw)) - 696 * var(--menu-unit))
+  );
 }
 #loadout-editor .loadout-opponent {
   width: calc(50% - 334 * var(--menu-unit));
 }
 #loadout-editor[data-active-team="t"] .loadout-team {
   padding-left: calc(76 * var(--menu-unit));
-  padding-right: max(calc(24 * var(--menu-unit)), calc(50vw - 696 * var(--menu-unit)));
+  padding-right: max(
+    calc(24 * var(--menu-unit)),
+    calc(calc(50 * var(--game-vw, 1vw)) - 696 * var(--menu-unit))
+  );
 }
 #loadout-editor .inventory-choices {
   margin-right: calc(64 * var(--menu-unit));
@@ -560,11 +573,15 @@ body:has(#loadout-editor) #inventory-button {
   height: auto;
 }
 #loadout-editor #loadout-agent-ct {
-  left: calc(96 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  left: calc(
+    96 * var(--menu-unit) + max(0px, calc(50 * var(--game-vw, 1vw)) - 720 * var(--menu-unit))
+  );
   right: auto;
 }
 #loadout-editor #loadout-agent-t {
-  right: calc(96 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  right: calc(
+    96 * var(--menu-unit) + max(0px, calc(50 * var(--game-vw, 1vw)) - 720 * var(--menu-unit))
+  );
   left: auto;
 }
 #loadout-editor .loadout-slot-columns {
@@ -580,11 +597,15 @@ body:has(#loadout-editor) #inventory-button {
   width: calc(64 * var(--menu-unit));
 }
 #loadout-editor [data-team="ct"] > .loadout-cosmetics {
-  left: calc(24 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  left: calc(
+    24 * var(--menu-unit) + max(0px, calc(50 * var(--game-vw, 1vw)) - 720 * var(--menu-unit))
+  );
   right: auto;
 }
 #loadout-editor [data-team="t"] > .loadout-cosmetics {
-  right: calc(24 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  right: calc(
+    24 * var(--menu-unit) + max(0px, calc(50 * var(--game-vw, 1vw)) - 720 * var(--menu-unit))
+  );
   left: auto;
 }
 #loadout-editor .loadout-team-title {
@@ -592,12 +613,16 @@ body:has(#loadout-editor) #inventory-button {
   top: calc(12 * var(--menu-unit));
 }
 #loadout-editor [data-team="ct"] > .loadout-team-title {
-  left: calc(262 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  left: calc(
+    262 * var(--menu-unit) + max(0px, calc(50 * var(--game-vw, 1vw)) - 720 * var(--menu-unit))
+  );
   right: auto;
   transform: translateX(-50%);
 }
 #loadout-editor [data-team="t"] > .loadout-team-title {
-  right: calc(262 * var(--menu-unit) + max(0px, 50vw - 720 * var(--menu-unit)));
+  right: calc(
+    262 * var(--menu-unit) + max(0px, calc(50 * var(--game-vw, 1vw)) - 720 * var(--menu-unit))
+  );
   left: auto;
   transform: translateX(50%);
 }

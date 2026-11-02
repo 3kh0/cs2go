@@ -9,7 +9,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: calc(640 * var(--round-unit));
-  max-width: 90vw;
+  max-width: calc(90 * var(--game-vw, 1vw));
   text-align: center;
   pointer-events: none;
   z-index: 2;
