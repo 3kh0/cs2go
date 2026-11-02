@@ -61,7 +61,7 @@ document.addEventListener(
     game.groundInventory.closeLoadout();
     if (!document.getElementById("cosmetic-menu")!.classList.contains("hidden"))
       cosmeticMenu.close();
-    for (const id of ["steam-account", "skin-menu", "settings", "home-panel"])
+    for (const id of ["skin-menu", "settings", "home-panel"])
       document.getElementById(id)?.classList.add("hidden");
   },
   true,

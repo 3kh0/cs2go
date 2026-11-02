@@ -89,8 +89,15 @@ test("Steam profile and owned skin UI preserve exact wear and seed and handle si
   );
   await page.locator("#steam-account-button").click();
   await expect(page.locator("#steam-status")).toContainText("1 finishes ready to equip");
+  await expect(page.locator("#skin-menu")).toBeVisible();
+  await expect(page.locator("#skin-grid > #steam-items")).toHaveCount(1);
+  await expect(page.locator('#skin-grid > button[data-skin=""]')).not.toHaveCount(0);
+  await page.locator("#skin-search").fill("Case Hardened");
+  await expect(page.locator('[data-steam-asset="1"]')).toBeVisible();
+  await expect(page.locator('#skin-grid > button[data-skin=""]')).toHaveCount(0);
+  await page.locator("#skin-search").fill("");
   await expect(page.locator("#steam-status")).toContainText("3 total items");
-  await expect(page.locator("#steam-login")).toBeHidden();
+  await expect(page.locator("#steam-logout")).toBeVisible();
   await page.screenshot({ path: "artifacts/steam-account-inventory.png" });
   await page.locator('[data-steam-asset="1"]').click();
   await expect(page.locator("#steam-status")).toContainText("Equipped AK-47", { timeout: 30_000 });
@@ -102,14 +109,13 @@ test("Steam profile and owned skin UI preserve exact wear and seed and handle si
   await expect(page.locator('[data-steam-asset="1"]')).toBeVisible();
   await page.locator("#steam-logout").click();
   await expect(page.locator("#steam-status")).toContainText("Signed out");
-  await expect(page.locator("#steam-login")).toBeVisible();
+  await expect(page.locator("#steam-sync")).toBeVisible();
   await expect(page.locator("#steam-avatar")).toBeHidden();
   await expect(page.locator("#home-player-name")).toHaveText("PLAYER");
   await page.keyboard.press("Escape");
   await expect(page.locator("#steam-account")).toBeHidden();
-  await expect(page.locator("#steam-account-button")).toBeFocused();
   await page.locator("#skins-button").click();
-  await page.locator("#steam-owned-button").click();
+  await page.locator("#steam-account-button").click();
   await expect(page.locator("#steam-account")).toBeVisible();
   expect(errors).toEqual([]);
 });
@@ -196,4 +202,68 @@ test("rate-limited sync offers a local import and reuses its snapshot after relo
   await selectJSON({ ...data, more_items: 1, last_assetid: "5" });
   await expect(page.locator("#steam-status")).toContainText("Incomplete inventory");
   await expect(page.locator('[data-steam-asset="5"]')).toBeVisible();
+});
+
+test("Steam popup signs in without navigating the game", async ({ page, context }) => {
+  test.setTimeout(120000);
+  let signedIn = false;
+  await context.route("**/api/steam?*", async (route) => {
+    const action = new URL(route.request().url()).searchParams.get("action");
+    if (action === "complete") return route.continue();
+    if (action === "login") {
+      signedIn = true;
+      return route.fulfill({
+        status: 302,
+        headers: { location: "/api/steam?action=complete&steam=connected" },
+      });
+    }
+    return route.fulfill({
+      json:
+        action === "sync"
+          ? { items: [], reportedTotal: 0, syncedAt: Date.now() }
+          : {
+              profile: signedIn
+                ? { steamId: "76561199528285628", name: "Popup Player", avatar: "", profileUrl: "" }
+                : null,
+            },
+    });
+  });
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100000 });
+  await page.locator("#steam-account-button").click();
+  const url = page.url();
+  const opened = page.waitForEvent("popup");
+  await page.locator("#steam-sync").click();
+  const popup = await opened;
+  await expect.poll(() => popup.isClosed(), { timeout: 30000 }).toBe(true);
+  await expect(page.locator("#home-player-name")).toHaveText("Popup Player");
+  await expect(page.locator("#steam-logout")).toBeVisible();
+  expect(page.url()).toBe(url);
+});
+
+test("Steam popup cancellation and popup blocking leave sign-in available", async ({
+  page,
+  context,
+}) => {
+  test.setTimeout(120000);
+  await context.route("**/api/steam?*", (route) =>
+    new URL(route.request().url()).searchParams.get("action") === "login"
+      ? route.fulfill({ contentType: "text/html", body: "Waiting for Steam sign-in" })
+      : route.fulfill({ json: { profile: null } }),
+  );
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100000 });
+  await page.locator("#steam-account-button").click();
+  const opened = page.waitForEvent("popup");
+  await page.locator("#steam-sync").click();
+  const popup = await opened;
+  await popup.close();
+  await expect(page.locator("#steam-status")).toContainText("cancelled");
+  await expect(page.locator("#steam-sync")).toBeVisible();
+  await page.evaluate(() => {
+    window.open = () => null;
+  });
+  await page.locator("#steam-sync").click();
+  await expect(page.locator("#steam-status")).toContainText("Allow popups");
+  await expect(page.locator("#steam-sync")).toBeVisible();
 });

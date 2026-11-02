@@ -1,6 +1,6 @@
 # Steam login and inventory
 
-Use **SIGN IN → SIGN IN THROUGH STEAM** on the homepage. Steam OpenID verifies the SteamID; CS2GO separately reads its public profile and public CS2 inventory. Inventory must be Public. No Steam API key, password, session cookie or trade token is collected.
+Open **Inventory → Sync with Steam**. Steam OpenID verifies the SteamID; CS2GO separately reads its public profile and public CS2 inventory. Inventory must be Public. No Steam API key, password, session cookie or trade token is collected.
 
 Sync imports cosmetics read-only. It never changes Steam items or CS2's equipped loadout. Equip applies exact public wear/seed only when the bundled catalog supports the item; unsupported items remain listed, and missing values are not invented. Duplicate skins require a choice. Stickers, charms, name tags and StatTrak counters are not rendered. Local cosmetic selection remains available to guests.
 
@@ -26,3 +26,7 @@ Hosted requests respect Steam's Retry-After, default to a two-minute cooldown, c
 If Steam blocks the hosting network, use **IMPORT FROM THIS DEVICE → OPEN STEAM INVENTORY**, save the public JSON, then choose **IMPORT JSON**. For pagination, save every page in order using `last_assetid` as the next `start_assetid`. Normalization stays in the browser; no inventory JSON is uploaded. Incomplete, repeated, malformed or oversized sets are rejected. This cosmetic import does not prove ownership or replace OpenID verification.
 
 Sources: [Steam OpenID](https://steamcommunity.com/dev), [OpenID 2.0 verification](https://openid.net/specs/openid-authentication-2_0.html). The account owner completes Steam's sign-in flow.
+
+Steam sign-in opens a separate popup so the game stays open. After Steam returns to the verified callback, the popup closes and the existing game refreshes its account and inventory. Allow popups for the game host if your browser blocks the window.
+
+The main **Inventory** page combines local items and synced Steam items in one grid. **Sync with Steam** signs guests in through the popup, then imports their inventory; signed-in players can use the same button to refresh. Search and weapon filters apply to both sources. The sidebar account shortcut opens this same page.

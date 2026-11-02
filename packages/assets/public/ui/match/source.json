@@ -3,7 +3,7 @@
   "build": "26144732",
   "depotManifest": "67499503218971311",
   "generator": "scripts/import-match-hud.py",
-  "processing": "Native SVG paths preserved; XML/DTD/comments stripped. PNGs losslessly optimized. Dead status aliases the native elimination icon.",
+  "processing": "Native SVG paths preserved; XML/DTD/comments stripped. PNGs losslessly optimized. Dead status and elimination share the native elimination icon in dead.svg.",
   "files": [
     {
       "resource": "panorama/images/backgrounds/bluedots_large_png.vtex_c",
@@ -36,14 +36,6 @@
       "file": "bot.svg",
       "sha256": "8363ca6cc0039f71954de20e266e04a8ef6a369d656bcd296e0120c1d7368695",
       "bytes": 1524
-    },
-    {
-      "resource": "panorama/images/icons/ui/elimination.vsvg_c",
-      "sourceSha256": "4a96a4bf1bf7fa8580be16683f276d476e0dcd4f3458b9ab4c871da3a7a58cb8",
-      "outputSha256": "c2e766a9be1eb72d63f9841b73a03534b1c3df47dfbb208a763b68147090b795",
-      "file": "elimination.svg",
-      "sha256": "c2e766a9be1eb72d63f9841b73a03534b1c3df47dfbb208a763b68147090b795",
-      "bytes": 251
     },
     {
       "resource": "panorama/images/icons/ui/elimination.vsvg_c",

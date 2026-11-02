@@ -8,20 +8,26 @@ import { importSteamInventory } from "../steam-inventory-data.mjs";
 export function setupSteamAccount() {
   const overlay = document.createElement("section");
   overlay.id = "steam-account";
-  overlay.className = "overlay hidden";
-  overlay.setAttribute("role", "region");
-  overlay.setAttribute("aria-labelledby", "steam-account-title");
-  overlay.innerHTML = `<div class="steam-account-page"><div class="dialog-heading"><div><div class="eyebrow">STEAM ACCOUNT</div><h2 id="steam-account-title">INVENTORY</h2></div><button id="steam-account-close" class="close" aria-label="Close Steam account">×</button></div><div class="steam-account-actions"><a class="secondary" id="steam-login" href="/api/steam?action=login">SIGN IN THROUGH STEAM</a><button id="steam-sync" class="secondary" hidden>SYNC INVENTORY</button><button id="steam-logout" class="secondary" hidden>SIGN OUT</button></div><p id="steam-status" role="status" aria-live="polite"></p><details id="steam-local-import" hidden><summary>IMPORT FROM THIS DEVICE</summary><p>Open your inventory on Steam, save the JSON page, then select the saved file here. Importing runs on your device.</p><a id="steam-local-open" class="secondary" target="_blank" rel="noopener noreferrer">OPEN STEAM INVENTORY</a><label class="secondary">IMPORT JSON<input id="steam-local-file" type="file" accept=".json,application/json" multiple></label><small>If Steam returns more_items, save every page using last_assetid as start_assetid, then import all pages together in order.</small></details><div class="steam-inventory-toolbar"><input id="steam-item-search" type="search" aria-label="Search inventory" placeholder="Search inventory…"><nav id="steam-item-filters" aria-label="Inventory categories"><button data-item-filter="Everything" aria-pressed="true">EVERYTHING</button><button data-item-filter="Equipment">EQUIPMENT</button><button data-item-filter="Graphic Art">GRAPHIC ART</button><button data-item-filter="Containers">CONTAINERS</button><button data-item-filter="Display">DISPLAY</button></nav><label>Sort <select id="steam-item-sort"><option value="newest">Newest</option><option value="name">Name</option><option value="type">Type</option></select></label></div><div id="steam-items" aria-label="Owned Steam items"></div><p class="steam-inventory-footer">Your Steam inventory - Equipping applies the exact available wear and pattern locally.</p></div>`;
-  document.body.append(overlay);
+  overlay.setAttribute("aria-label", "Steam sync");
+  overlay.innerHTML = `<p id="steam-status" role="status" aria-live="polite"></p><details id="steam-local-import" hidden><summary>IMPORT FROM THIS DEVICE</summary><p>Open your inventory on Steam, save the JSON page, then select the saved file here. Importing runs on your device.</p><a id="steam-local-open" class="secondary" target="_blank" rel="noopener noreferrer">OPEN STEAM INVENTORY</a><label class="secondary">IMPORT JSON<input id="steam-local-file" type="file" accept=".json,application/json" multiple></label><small>If Steam returns more_items, save every page using last_assetid as start_assetid, then import all pages together in order.</small></details>`;
+  document.querySelector("#skin-menu .inventory-toolbar")!.after(overlay);
+  const actions = document.createElement("div");
+  actions.className = "steam-account-actions";
+  actions.innerHTML = `<button id="steam-sync" type="button">SYNC WITH STEAM</button><button id="steam-logout" type="button" hidden>SIGN OUT</button>`;
+  document.querySelector("#skin-menu .dialog-heading > div")!.prepend(actions);
+  const steamGrid = document.createElement("div");
+  steamGrid.id = "steam-items";
+  steamGrid.setAttribute("aria-label", "Owned Steam items");
+  document.getElementById("skin-grid")!.append(steamGrid);
   const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const status = el("steam-status");
   let profile: SteamProfile | null = null;
   let busy = false;
   let items: SteamItem[] = [];
   let reportedTotal = 0;
-  let filter = "Everything";
+  let adding = false;
+  let filter = "all";
   let renderVersion = 0;
-  let returnFocus: HTMLElement | null = null;
   let retryUntil = 0;
   let retryTimer = 0;
   try {
@@ -71,9 +77,8 @@ export function setupSteamAccount() {
     retryTimer = window.setTimeout(controls, seconds * 1000 + 50);
   }
   function controls() {
-    el("steam-login").hidden = !!profile;
-    el("steam-sync").hidden = el("steam-logout").hidden = !profile;
-    el<HTMLButtonElement>("steam-sync").disabled = busy || Date.now() < retryUntil;
+    el("steam-logout").hidden = !profile;
+    el<HTMLButtonElement>("steam-sync").disabled = busy || (!!profile && Date.now() < retryUntil);
     el("steam-local-import").hidden = !profile;
     el<HTMLInputElement>("steam-local-file").disabled = busy;
     if (profile)
@@ -102,7 +107,7 @@ export function setupSteamAccount() {
         profile = null;
         setPlayerProfile(null);
         items = [];
-        el("steam-items").replaceChildren();
+        steamGrid.replaceChildren();
       }
       throw new Error(
         (data.error || "Steam could not be reached.") +
@@ -114,40 +119,33 @@ export function setupSteamAccount() {
     return data;
   }
   async function renderItems() {
-    const grid = el("steam-items");
+    const grid = steamGrid;
     const version = ++renderVersion;
-    if (!items.length) {
+    if (!items.length || adding) {
       grid.replaceChildren();
+      el("inventory-count").textContent =
+        `${el("skin-grid").querySelectorAll(":scope > button").length} items`;
       return;
     }
     const catalog = await skinCatalog().catch(() => []);
     if (version !== renderVersion) return;
     grid.replaceChildren();
     let supported = 0;
-    const query = el<HTMLInputElement>("steam-item-search").value.trim().toLowerCase();
-    const sort = el<HTMLSelectElement>("steam-item-sort").value;
-    const category = (item: SteamItem) =>
-      /container|case|capsule|package/i.test(item.type ?? "")
-        ? "Containers"
-        : /sticker|graffiti|patch|music/i.test(item.type ?? "")
-          ? "Graphic Art"
-          : /medal|coin|pin|collectible|trophy/i.test(item.type ?? "")
-            ? "Display"
-            : "Equipment";
+    const query = el<HTMLInputElement>("skin-search").value.trim().toLowerCase();
+    const sort = el<HTMLSelectElement>("inventory-sort").value;
     const visible = items
       .filter(
         (item) =>
-          (filter === "Everything" || category(item) === filter) &&
+          (filter === "all" ||
+            (filter === "knives"
+              ? /knife|bayonet|karambit|daggers/i.test(item.weaponName)
+              : matchSteamSkin(item, catalog)?.weapon === Number(filter))) &&
           `${item.name} ${item.type ?? ""}`.toLowerCase().includes(query),
       )
-      .toSorted((a, b) =>
-        sort === "name"
-          ? a.name.localeCompare(b.name)
-          : sort === "type"
-            ? (a.type ?? "").localeCompare(b.type ?? "") || a.name.localeCompare(b.name)
-            : a.assetId.length === b.assetId.length
-              ? b.assetId.localeCompare(a.assetId)
-              : b.assetId.length - a.assetId.length,
+      .toSorted(
+        (a, b) =>
+          (sort === "weapon" ? a.weaponName.localeCompare(b.weaponName) : 0) ||
+          a.name.localeCompare(b.name),
       );
     for (const item of visible) {
       const skin = matchSteamSkin(item, catalog);
@@ -223,6 +221,10 @@ export function setupSteamAccount() {
       }
       grid.append(row);
     }
+    el("inventory-count").textContent =
+      `${el("skin-grid").querySelectorAll(":scope > button").length + visible.length} items`;
+    const empty = el("skin-grid").firstChild;
+    if (visible.length && empty?.nodeType === Node.TEXT_NODE) empty.remove();
     if (!visible.length) {
       const empty = document.createElement("p");
       empty.className = "steam-inventory-empty";
@@ -231,17 +233,13 @@ export function setupSteamAccount() {
     }
     status.textContent = `${profile?.name}: ${items.length} visible Steam items synced - ${supported} finishes ready to equip.${reportedTotal > items.length ? ` Steam reports ${reportedTotal} total items; the remaining items were not exposed by Steam.` : ""}`;
   }
-  el("steam-item-search").oninput = () => void renderItems();
-  el("steam-item-sort").onchange = () => void renderItems();
-  el("steam-item-filters").onclick = (event) => {
-    const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-item-filter]");
-    if (!button) return;
-    filter = button.dataset.itemFilter!;
-    el("steam-item-filters")
-      .querySelectorAll("button")
-      .forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+  document.addEventListener("cs2go-inventory-render", (event) => {
+    const state = (event as CustomEvent<{ adding: boolean; filter: string }>).detail;
+    adding = state.adding;
+    filter = state.filter;
+    el("skin-grid").append(steamGrid);
     void renderItems();
-  };
+  });
   async function sync() {
     if (busy || !profile || Date.now() < retryUntil) return;
     busy = true;
@@ -292,29 +290,14 @@ export function setupSteamAccount() {
     }
   };
   const open = () => {
-    returnFocus = document.activeElement as HTMLElement;
-    overlay.classList.remove("hidden");
-    el("steam-account-close").focus();
-  };
-  const close = () => {
-    overlay.classList.add("hidden");
-    (returnFocus?.getClientRects().length ? returnFocus : el("steam-account-button")).focus();
+    if (el("skin-menu").classList.contains("hidden")) el("skins-button").click();
+    el("steam-sync").focus();
   };
   el("steam-account-button").onclick = open;
-  el("steam-account-close").onclick = close;
-  document.addEventListener("steam-account-open", open);
-  document.addEventListener(
-    "keydown",
-    (event) => {
-      if (overlay.classList.contains("hidden")) return;
-      if (event.key === "Escape") {
-        event.stopPropagation();
-        close();
-      }
-    },
-    true,
-  );
-  el("steam-sync").onclick = sync;
+  el("steam-sync").onclick = () => {
+    if (profile) void sync();
+    else signIn();
+  };
   el("steam-logout").onclick = async () => {
     if (busy) return;
     busy = true;
@@ -327,7 +310,7 @@ export function setupSteamAccount() {
       } catch {}
       setPlayerProfile(null);
       items = [];
-      el("steam-items").replaceChildren();
+      steamGrid.replaceChildren();
       status.textContent = "Signed out. Applied local finishes are saved.";
     } catch (error) {
       status.textContent = error instanceof Error ? error.message : "Sign out failed.";
@@ -336,14 +319,53 @@ export function setupSteamAccount() {
       controls();
     }
   };
-  controls();
-  void (async () => {
-    const url = new URL(location.href);
-    const result = url.searchParams.get("steam");
-    if (result) {
-      url.searchParams.delete("steam");
-      history.replaceState(null, "", url);
+  let popup: Window | null = null;
+  let popupTimer = 0;
+  const finishSignIn = (result: string) => {
+    window.clearInterval(popupTimer);
+    popup?.close();
+    popup = null;
+    void refreshSession(result);
+  };
+  window.addEventListener("message", (event) => {
+    if (
+      event.origin !== location.origin ||
+      !popup ||
+      event.source !== popup ||
+      event.data?.type !== "cs2go-steam-auth"
+    )
+      return;
+    finishSignIn(event.data.result === "connected" ? "connected" : "failed");
+  });
+  const signIn = () => {
+    if (popup && !popup.closed) {
+      popup.focus();
+      return;
     }
+    popup = window.open(
+      "/api/steam?action=login&popup=1",
+      "cs2go-steam-login",
+      `popup,width=720,height=800,left=${Math.round(window.screenX + (window.outerWidth - 720) / 2)},top=${Math.round(window.screenY + (window.outerHeight - 800) / 2)}`,
+    );
+    if (!popup) {
+      status.textContent = "Allow popups for this site, then try signing in again.";
+      return;
+    }
+    status.textContent = "Complete Steam sign-in in the popup window.";
+    const deadline = Date.now() + 600000;
+    popupTimer = window.setInterval(() => {
+      let result: string | null = null;
+      try {
+        if (popup && popup.location.origin === location.origin)
+          result = new URL(popup.location.href).searchParams.get("steam");
+      } catch {
+        // Steam's page is cross-origin; wait for its verified callback to return here.
+      }
+      if (!result && popup && !popup.closed && Date.now() < deadline) return;
+      finishSignIn(result ?? "cancelled");
+    }, 250);
+  };
+  async function refreshSession(result: string | null) {
     try {
       profile = (await api("session")).profile;
       setPlayerProfile(profile);
@@ -358,7 +380,7 @@ export function setupSteamAccount() {
         if (!saved || Date.now() - saved.syncedAt > 600000) await sync();
       } else
         status.textContent =
-          result === "failed"
+          result === "failed" || result === "cancelled"
             ? "Steam sign-in was cancelled or could not be verified. Please try again."
             : "Sign in to sync your Steam name, avatar and public CS2 inventory.";
     } catch (error) {
@@ -366,5 +388,13 @@ export function setupSteamAccount() {
         error instanceof Error ? error.message : "Steam is unavailable. Local play is ready.";
     }
     if (result) open();
-  })();
+  }
+  controls();
+  const url = new URL(location.href);
+  const result = url.searchParams.get("steam");
+  if (result) {
+    url.searchParams.delete("steam");
+    history.replaceState(null, "", url);
+  }
+  void refreshSession(result);
 }

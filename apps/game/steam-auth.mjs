@@ -222,8 +222,22 @@ export function createSteamHandler({ secret, origin, fetcher = fetch, now = Date
     if (isPost && request.headers.get("origin") !== base)
       return json({ error: "Invalid request origin." }, 403);
     try {
+      if (action === "complete") {
+        headers.set("Content-Type", "text/html; charset=utf-8");
+        return new Response(
+          `<!doctype html><title>Steam sign-in</title><p>Returning to CS2GO… You can close this window.</p><script>if(window.opener){window.opener.postMessage({type:"cs2go-steam-auth",result:${JSON.stringify(url.searchParams.get("steam") === "connected" ? "connected" : "failed")}},${JSON.stringify(base)});window.close();}</script>`,
+          { headers },
+        );
+      }
       if (action === "login") {
-        const state = token({ type: "state", nonce: randomBytes(32).toString("hex") }, 600);
+        const state = token(
+          {
+            type: "state",
+            nonce: randomBytes(32).toString("hex"),
+            popup: url.searchParams.get("popup") === "1",
+          },
+          600,
+        );
         cookie("state", state, 600);
         const destination = new URL(provider);
         destination.search = new URLSearchParams({
@@ -240,7 +254,10 @@ export function createSteamHandler({ secret, origin, fetcher = fetch, now = Date
         const state = url.searchParams.get("state");
         const claims = verify(state, "state");
         cookie("state", "", 0);
-        const fail = () => redirect(`${base}/?steam=failed`);
+        const destination = claims?.popup
+          ? `${base}/api/steam?action=complete&steam=`
+          : `${base}/?steam=`;
+        const fail = () => redirect(`${destination}failed`);
         if (!claims || state !== cookies.get(cookieName("state"))) return fail();
         const p = url.searchParams;
         for (const name of new Set(p.keys())) if (p.getAll(name).length !== 1) return fail();
@@ -275,7 +292,7 @@ export function createSteamHandler({ secret, origin, fetcher = fetch, now = Date
         const checked = await (await upstream(provider, { method: "POST", body })).text();
         if (!checked.split(/\r?\n/).includes("is_valid:true")) return fail();
         cookie("session", token({ type: "session", steamId: id }, 86400), 86400);
-        return redirect(`${base}/?steam=connected`);
+        return redirect(`${destination}connected`);
       }
       if (action === "logout") {
         cookie("session", "", 0);

@@ -58,8 +58,8 @@ function harness() {
     throw new Error("Unexpected upstream");
   };
   const handle = createSteamHandler({ origin, secret, fetcher });
-  async function begin() {
-    const response = await handle(request("login"));
+  async function begin(popup = false) {
+    const response = await handle(request(popup ? "login&popup=1" : "login"));
     const login = new URL(response.headers.get("location")!);
     expect(login.origin).toBe("https://steamcommunity.com");
     const callback = new URL(login.searchParams.get("openid.return_to")!);
@@ -192,4 +192,23 @@ test("Steam 429s expose a real cooldown, suppress repeat upstream work and recov
   expect(recovered.status).toBe(200);
   expect((await recovered.json()).items).toEqual([]);
   expect(calls).toBe(2);
+});
+
+test("popup callbacks use a lightweight completion page after provider verification", async () => {
+  for (const valid of [true, false]) {
+    const { handle, begin, invalidate } = harness();
+    const { callback, cookie } = await begin(true);
+    if (!valid) invalidate();
+    const response = await handle(new Request(callback, { headers: { cookie } }));
+    const location = response.headers.get("location")!;
+    expect(location).toBe(
+      `${origin}/api/steam?action=complete&steam=${valid ? "connected" : "failed"}`,
+    );
+    const complete = await handle(new Request(location));
+    expect(complete.headers.get("content-type")).toContain("text/html");
+    expect(await complete.text()).toContain("cs2go-steam-auth");
+    expect(
+      response.headers.getSetCookie().some((c: string) => c.startsWith("cs2go-steam-session=")),
+    ).toBe(valid);
+  }
 });

@@ -3,6 +3,7 @@
 python3 scripts/import-gloves.py [--refresh]
 Requires Bun, curl, Pillow and NumPy. Originals stay in ignored artifacts/gloves.
 """
+from asset_dedup import deduplicate
 import concurrent.futures
 import gzip
 import hashlib
@@ -261,3 +262,4 @@ def main():
 if __name__=='__main__':
     if '--agent-arms' in sys.argv:import_agent_arms()
     else:main()
+    deduplicate()

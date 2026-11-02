@@ -70,7 +70,7 @@ function history(board: Board) {
             ? "/icons/buy/c4.svg"
             : outcome.reason === "Time expired"
               ? "/ui/match/timer.svg"
-              : "/ui/match/elimination.svg";
+              : "/ui/match/dead.svg";
       slot.append(image(icon));
     }
     slot.append(make("span", "round-number", String(i + 1)));

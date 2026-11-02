@@ -4,6 +4,7 @@ python3 scripts/import-inventory.py [--refresh]
 Requires Bun, curl and Pillow. Existing paints/optimized textures stay intact.
 Inputs cache under artifacts; --refresh deliberately updates catalog snapshots.
 """
+from asset_dedup import deduplicate
 import concurrent.futures
 import gzip
 import hashlib
@@ -168,3 +169,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    deduplicate()

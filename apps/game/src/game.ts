@@ -855,7 +855,7 @@ export class Game {
       if (
         !el("settings").classList.contains("hidden") ||
         document.getElementById("cosmetic-menu")?.classList.contains("hidden") === false ||
-        document.getElementById("steam-account")?.classList.contains("hidden") === false
+        document.getElementById("skin-menu")?.classList.contains("hidden") === false
       )
         return;
       const code = canonicalKey(e.code, this.settings.bindings);
@@ -1170,7 +1170,6 @@ export class Game {
       "settings",
       "skin-menu",
       "cosmetic-menu",
-      "steam-account",
     ])
       toggle(id, false);
     toggle("hud", true);
@@ -1210,7 +1209,6 @@ export class Game {
       "loadout",
       "skin-menu",
       "cosmetic-menu",
-      "steam-account",
     ])
       toggle(id, false);
     toggle("menu", true);
@@ -2533,14 +2531,7 @@ export class Game {
     this.notices.reset();
     document.body.classList.remove("match-menu-open");
     document.getElementById("loadout-editor")?.remove();
-    for (const id of [
-      "scoreboard",
-      "settings",
-      "skin-menu",
-      "cosmetic-menu",
-      "loadout",
-      "steam-account",
-    ])
+    for (const id of ["scoreboard", "settings", "skin-menu", "cosmetic-menu", "loadout"])
       toggle(id, false);
     this.utility.blind.clear();
     if (this.utility.overlay) this.utility.overlay.style.opacity = "0";

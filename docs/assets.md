@@ -56,6 +56,8 @@ The same revision contains the detailed extraction notes under `docs/`. No dupli
 
 Viewmodel controls follow the viewer's native 4:3 horizontal-FOV conversion, Source-inch offsets and aspect stretch, verified against viewer bundle `index-CXUheY2V.js` (SHA-256 `724899da942ccf6d0ec3864caeee02e5bcbe3f8d28c8375d1e128bb77d6e6ba4`). This matches projection/settings, not the complete Source 2 renderer or animation graph.
 
+`python3 scripts/asset_dedup.py` consolidates byte-identical paint masks, shaders and match icons, updates their local references, and removes redundant copies. Inventory and glove imports run this step automatically. Shared weapon/glove resources use the common `skins/` directories.
+
 Run the relevant maintained tool, review changed outputs/provenance, then:
 
 ```sh
