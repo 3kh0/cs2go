@@ -2,6 +2,9 @@ import * as T from "three";
 import data from "./data/agent-hitboxes.json";
 import type { Soldier } from "./soldier";
 
+export const agentBounds = new T.Sphere(new T.Vector3(0, 0.9, 0), 1.5);
+const broadBounds = new T.Sphere();
+
 const axis = new T.Vector3();
 const fromStart = new T.Vector3();
 const closest = new T.Vector3();
@@ -39,37 +42,65 @@ export function rayCapsule(ray: T.Ray, start: T.Vector3, end: T.Vector3, radius:
   return nearest;
 }
 
-const cache = new WeakMap<
-  T.Object3D,
-  { bone: T.Object3D; start: T.Vector3; end: T.Vector3; radius: number; group: number }[]
->();
+type BoundCapsule = {
+  bone: T.Object3D;
+  start: T.Vector3;
+  end: T.Vector3;
+  radius: number;
+  group: number;
+};
+const cache = new WeakMap<T.Object3D, BoundCapsule[]>();
+const sets = data.sets.map((boxes) =>
+  boxes.map((box) => ({
+    name: box.bone.replace(/_([lr])(?=_|$)/g, (_, side: string) => `_${side.toUpperCase()}`),
+    start: new T.Vector3(...box.min),
+    end: new T.Vector3(...box.max),
+    radius: box.radius,
+    group: box.group,
+  })),
+);
 const inverse = new T.Matrix4();
 const localRay = new T.Ray();
 const point = new T.Vector3();
 
-type HitboxSoldier = Pick<Soldier, "model" | "group" | "team">;
-/** Only the native Ground Rebel rig matches this imported hitbox set. */
+type HitboxSoldier = Pick<Soldier, "model" | "group" | "team"> &
+  Partial<Pick<Soldier, "agentId" | "crouch">>;
+function reachesSoldier(soldier: HitboxSoldier, ray: T.Ray, maxDistance: number) {
+  broadBounds.copy(agentBounds).center.add(soldier.group.position);
+  return (
+    ray.intersectsSphere(broadBounds) &&
+    ray.origin.distanceToSquared(broadBounds.center) <= (maxDistance + broadBounds.radius) ** 2
+  );
+}
+/** Bind the model's authored damage capsules once, before entering play.
+ * All installed agents currently share the same set; retain model coverage so a
+ * future asset cannot silently acquire an unrelated model's hitboxes.
+ */
+export function prepareSoldierHitboxes(soldier: HitboxSoldier) {
+  if (cache.has(soldier.model)) return;
+  const path: string =
+    soldier.model.userData.agentModel ??
+    (soldier.team === "ct"
+      ? "/models/agents/roster/ctm-sas.glb"
+      : "/models/agents/ground-rebel-native.glb");
+  const source = (data.models as Record<string, { set: number }>)[path];
+  if (!source) throw new Error(`Native hitboxes missing for agent model: ${path}`);
+  const boxes = sets[source.set].map(({ name, ...shape }) => {
+    const bone = soldier.model.getObjectByName(name);
+    if (!bone) throw new Error(`Native hitbox bone missing in ${path}: ${name}`);
+    return { ...shape, bone };
+  });
+  cache.set(soldier.model, boxes);
+}
+/** The actual bound volumes, also used by the development comparison view. */
+export function soldierHitboxes(soldier: HitboxSoldier): readonly BoundCapsule[] {
+  prepareSoldierHitboxes(soldier);
+  return cache.get(soldier.model)!;
+}
+/** Animated actor picking without CPU skinning or decorative equipment hits. */
 export function nativeSoldierHit(soldier: HitboxSoldier, ray: T.Ray, maxDistance = Infinity) {
-  if (soldier.team !== "t") return null;
-  let boxes = cache.get(soldier.model);
-  if (!boxes) {
-    boxes = data.hitboxes.map((box) => {
-      const name = box.bone.replace(
-        /_([lr])(?=_|$)/g,
-        (_, side: string) => `_${side.toUpperCase()}`,
-      );
-      const bone = soldier.model.getObjectByName(name);
-      if (!bone) throw new Error(`Native hitbox bone missing: ${name}`);
-      return {
-        bone,
-        start: new T.Vector3(...box.min),
-        end: new T.Vector3(...box.max),
-        radius: box.radius,
-        group: box.group,
-      };
-    });
-    cache.set(soldier.model, boxes);
-  }
+  if (!reachesSoldier(soldier, ray, maxDistance)) return null;
+  const boxes = soldierHitboxes(soldier);
   soldier.group.updateMatrixWorld(true);
   let nearest = maxDistance;
   let hit: { point: T.Vector3; head: boolean; height: number; group: number } | null = null;
@@ -92,3 +123,5 @@ export function nativeSoldierHit(soldier: HitboxSoldier, ray: T.Ray, maxDistance
   }
   return hit;
 }
+
+export { nativeSoldierHit as soldierHit };

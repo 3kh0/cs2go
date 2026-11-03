@@ -1,0 +1,298 @@
+{
+  "materials": {},
+  "textures": {
+    "cloud1": {
+      "resource": "materials/models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_clouds_003_color_psd_bf351c08.vtex",
+      "sourceSha256": "5d04ff18b61478761b8e69896f5dc3ce0e03dca3bccba4bbe083448ee108bfd9",
+      "format": "BC7",
+      "srgb": true,
+      "file": "cloud1.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "ab715d70ada8e6a4ce02179dc33a740acc8d868d5ee73eba98736871beafedc9",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16
+        }
+      ],
+      "fallbackFile": "cloud1-rgba.bin.gz",
+      "fallbackGpuBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64
+        }
+      ]
+    },
+    "cloud2": {
+      "resource": "materials/models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_clouds_001_color_psd_667c572e.vtex",
+      "sourceSha256": "30239229d222e3445fca9e14ae5076502c3d02be85692e1dd9f89a0b2e15e23d",
+      "format": "BC7",
+      "srgb": true,
+      "file": "cloud2.bin.gz",
+      "gpuBytes": 87376,
+      "gpuSha256": "d9b51f54d30e4b7e327fa7e9a80e6fb3a0c7baf8fd3f6b3787c65632cd9ba883",
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16
+        }
+      ],
+      "fallbackFile": "cloud2-rgba.bin.gz",
+      "fallbackGpuBytes": 349504,
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64
+        }
+      ]
+    }
+  },
+  "clouds": {
+    "vertices": 454,
+    "triangles": 248,
+    "nativeDraws": 14,
+    "batches": 1,
+    "primaryScale": 3.5,
+    "scrollRate": 0.0020000000949949026,
+    "skyOrigin": [
+      -8,
+      202,
+      308
+    ],
+    "skyScale": 16
+  },
+  "sourceRevision": "5564866c7f2a6b2ee54a9195b7963147e24da94e",
+  "geometrySha256": "2fd3dbe355942bd71f7ddefe44fd05bd4a16f285176ab9a71e86c8f5290872dd",
+  "contract": {
+    "source_revision": "5564866c7f2a6b2ee54a9195b7963147e24da94e",
+    "evidence_scope": "Compiled authored inputs plus pinned VRF interpretation, not original engine GPU proof",
+    "cloud_uv": {
+      "primary": "3.5*UV0 + frac([0,rate]*time_seconds)",
+      "secondary": "UV0, not UV1 and not the transformed primary UV",
+      "rate_float32_as_float64": 0.0020000000949949026,
+      "addressing": "repeat U and V",
+      "dynamic_evaluation_limit": "Authored VMAT expression; pinned RenderMaterial.cs:454 does not evaluate dynamics"
+    },
+    "cloud_color": {
+      "texture_rgb": "sRGB decode before filtering and multiplication",
+      "texture_alpha": "linear opacity",
+      "unpremultiplied_rgb": "texture1.linearRGB * texture2.linearRGB * native_linear_tint",
+      "native_linear_tint_from_text_dump": [
+        0.26585252775994916,
+        0.28019035576721263,
+        0.24187256863038223
+      ],
+      "alpha": "texture1.alpha * texture2.alpha; vertex alpha and opacity scale are 1 here",
+      "rgb_composite": "destination.linearRGB + source.linearRGB*source.alpha",
+      "fog": "disabled by authored g_bFogEnabled=0",
+      "lighting": "unlit, no PI/LPV/lightmap/BRDF"
+    },
+    "pinned_vrf_render_state": {
+      "source_blend": "SRC_ALPHA",
+      "destination_blend": "ONE",
+      "equation": "ADD",
+      "depth_test": true,
+      "depth_write": false,
+      "culling": "backface",
+      "alpha_test": false,
+      "qualification": "VRF hardcoded material/pass interpretation; original engine blend state not independently observed"
+    },
+    "coordinate_contract": {
+      "source_to_original_gltf_meters": ".0254*[Y,Z,X]",
+      "source_to_browser_meters": ".0254*[X,Z,-Y]",
+      "sky_eye": "(eye-reference)/16+[-8,-308,202]",
+      "virtual_world_vertex": "(skyVertex-[-8,-308,202])*16+reference",
+      "orientation": "same view orientation and FOV; sky_camera angles do not rotate view at this pin"
+    },
+    "background": {
+      "native_material": {
+        "original_path": "C:\\tmp\\cs2go-dust2-lighting-20261102\\dependencies-raw\\materials\\skybox\\sky_de_dust2.vmat_c",
+        "sha256": "94c8b64483b82f7799f5979c1bfa9af0171c21edd8e7a106ec65c9c4035f6f56",
+        "bytes": 2076,
+        "DATA": {
+          "m_materialName": "materials/skybox/sky_de_dust2.vmat",
+          "m_shaderName": "sky.vfx",
+          "m_intParams": [],
+          "m_floatParams": [
+            {
+              "m_name": "g_flBrightnessExposureBias",
+              "m_flValue": 0.765
+            },
+            {
+              "m_name": "g_flRenderOnlyExposureBias",
+              "m_flValue": 0.0
+            }
+          ],
+          "m_vectorParams": [],
+          "m_textureParams": [
+            {
+              "m_name": "g_tSkyTexture",
+              "m_pValue": "materials/skybox/sky_de_dust2_exr_908a35ba.vtex"
+            }
+          ],
+          "m_dynamicParams": [],
+          "m_dynamicTextureParams": [],
+          "m_intAttributes": [],
+          "m_floatAttributes": [],
+          "m_vectorAttributes": [],
+          "m_textureAttributes": [],
+          "m_stringAttributes": [],
+          "m_renderAttributesUsed": []
+        }
+      },
+      "linear_multiplier": 1.6993699982773005,
+      "bias_units": "exposure stops",
+      "scope": "2D sky cube only, not an automatic cloud multiplier"
+    },
+    "pinned_hdr_order": [
+      "main opaque",
+      "3D sky opaque",
+      "2D background cube",
+      "3D sky translucent",
+      "main translucent/viewmodel",
+      "shared HDR postprocess, tone/LUT/output conversion"
+    ],
+    "separate_sky_framebuffer": "Not required by pinned source; same HDR/depth framebuffer with reserved far sky range",
+    "precision_limits": [
+      "Tint vectors are existing CLI text DATA values; float64 reference math is not bitwise shader evaluation",
+      "Bilinear references are LOD0 with sRGB-before-filtering; no derivative/trilinear/anisotropic GPU proof",
+      "Dynamic expression time is not synchronized to an observed engine frame"
+    ]
+  },
+  "limitations": "Pinned VRF render interpretation and authored input recovery; original-engine GPU equality and time phase unproven."
+}

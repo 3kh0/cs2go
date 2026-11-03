@@ -1,142 +1,557 @@
 {
-  "source": "https://assets.cs.money/skin-viewer/cs2/native-vtex/vpk/agents/models/tm_leet/tm_leet_variantg.8f352717.vmdl_c",
-  "sourceSha256": "0c3e5feeb8b5899f9ecfbfd850bb95e1afd0e9d9d02679d8e7472736fec13583",
-  "gameVersion": "25000182",
-  "agent": "Ground Rebel",
   "units": "Source inches in native bone-local space",
-  "hitboxes": [
-    {
-      "bone": "head_0",
-      "min": [-1.0, 1.8, 0.0],
-      "max": [3.5, 0.2, 0.0],
-      "radius": 4.3,
-      "group": 1
+  "hitboxSet": "cstrike",
+  "shape": "capsule (m_nShapeType=2, m_bTranslationOnly=false)",
+  "generator": "tools/agents/import-hitboxes.py",
+  "tool": "Version: 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "game": {
+    "ClientVersion": "2000939",
+    "ServerVersion": "2000939",
+    "PatchVersion": "1.41.9.4",
+    "ProductName": "cs2",
+    "appID": "730",
+    "ServerAppID": "2347773",
+    "SourceRevision": "11191540",
+    "VersionDate": "Oct 30 2026",
+    "VersionTime": "13:55:25"
+  },
+  "models": {
+    "/models/agents/ground-rebel-native.glb": {
+      "source": "agents/models/tm_leet/tm_leet_variantg.vmdl_c",
+      "sha256": "0c3e5feeb8b5899f9ecfbfd850bb95e1afd0e9d9d02679d8e7472736fec13583",
+      "set": 0
     },
-    {
-      "bone": "neck_0",
-      "min": [0.0, -0.4, 0.0],
-      "max": [1.4, -0.2, 0.0],
-      "radius": 3.5,
-      "group": 8
+    "/models/agents/roster/ctm-diver-varianta.glb": {
+      "source": "agents/models/ctm_diver/ctm_diver_varianta.vmdl_c",
+      "sha256": "ca838dac9a05969ee6ed03f9201670d4ea4f5bf9d549d56926fefcac10ab3db7",
+      "set": 0
     },
-    {
-      "bone": "pelvis",
-      "min": [-2.7, 1.1, -3.2],
-      "max": [-2.7, 1.1, 3.2],
-      "radius": 6.0,
-      "group": 3
+    "/models/agents/roster/ctm-diver-variantb.glb": {
+      "source": "agents/models/ctm_diver/ctm_diver_variantb.vmdl_c",
+      "sha256": "49abba065d433dbf0942aa9c2acff5ac1cabced748a338885a2ae33dfeb7d10c",
+      "set": 0
     },
-    {
-      "bone": "spine_0",
-      "min": [1.4, 0.8, 3.1],
-      "max": [1.4, 0.8, -3.1],
-      "radius": 6.0,
-      "group": 3
+    "/models/agents/roster/ctm-diver-variantc.glb": {
+      "source": "agents/models/ctm_diver/ctm_diver_variantc.vmdl_c",
+      "sha256": "e8209d5d513ed335a00dc2893490d0d4f24aab60b3d01d173fad5fbd7a629184",
+      "set": 0
     },
-    {
-      "bone": "spine_1",
-      "min": [3.8, 0.8, -2.4],
-      "max": [3.8, 0.4, 2.4],
-      "radius": 6.5,
-      "group": 2
+    "/models/agents/roster/ctm-fbi-varianta.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi_varianta.vmdl_c",
+      "sha256": "c81bfe123724acabf1efb28f18612565ba487d4799a6982ca4c9dc9b4313adf8",
+      "set": 0
     },
-    {
-      "bone": "spine_2",
-      "min": [4.8, 0.15, -4.1],
-      "max": [4.8, 0.15, 4.1],
-      "radius": 6.2,
-      "group": 2
+    "/models/agents/roster/ctm-fbi-variantb.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi_variantb.vmdl_c",
+      "sha256": "37d673ef1cf8e1575b0a6e32f47dcdf14e42599ca22555c6db8ba9ac6acc4abf",
+      "set": 0
     },
-    {
-      "bone": "spine_3",
-      "min": [2.5, -0.6, -6.0],
-      "max": [2.5, -0.6, 6.0],
-      "radius": 5.0,
-      "group": 2
+    "/models/agents/roster/ctm-fbi-variantc.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi_variantc.vmdl_c",
+      "sha256": "0023c4c9f14b48248e5fa61a86eb2244ea3e30a771e7cdd9688df4843e36d648",
+      "set": 0
     },
-    {
-      "bone": "leg_upper_l",
-      "min": [1.3, -0.2, 0.0],
-      "max": [16.5, -0.7, 0.0],
-      "radius": 5.0,
-      "group": 6
+    "/models/agents/roster/ctm-fbi-variantd.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi_variantd.vmdl_c",
+      "sha256": "5f745bb0cee5621c3fbe5cc1c19db7d0e1e8e034b9b547034289a242b48262b1",
+      "set": 0
     },
-    {
-      "bone": "leg_upper_r",
-      "min": [-1.3, 0.0, -0.6],
-      "max": [-16.5, 0.0, -0.7],
-      "radius": 5.0,
-      "group": 7
+    "/models/agents/roster/ctm-fbi-variante.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi_variante.vmdl_c",
+      "sha256": "a35a20ede8d7d4209befbf8973c09d65ecddb3d80625178cb9efab15680ff278",
+      "set": 0
     },
-    {
-      "bone": "leg_lower_l",
-      "min": [0.1, -0.4, 0.2],
-      "max": [17.0, -0.4, 0.7],
-      "radius": 4.0,
-      "group": 6
+    "/models/agents/roster/ctm-fbi-variantf.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi_variantf.vmdl_c",
+      "sha256": "585d9547b1687b45b2c46013a78a5e2d96ce8fdc2195b0fe79e4a3a295ad3687",
+      "set": 0
     },
-    {
-      "bone": "leg_lower_r",
-      "min": [-0.1, 0.0, -0.2],
-      "max": [-17.0, 0.4, -0.7],
-      "radius": 4.0,
-      "group": 7
+    "/models/agents/roster/ctm-fbi-variantg.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi_variantg.vmdl_c",
+      "sha256": "2f4f3051eb34686e33966296f90239507fb6011d5b0ca782058a32195923ff06",
+      "set": 0
     },
-    {
-      "bone": "ankle_l",
-      "min": [-0.0, -3.43, -0.52],
-      "max": [8.0, 0.74, 0.33],
-      "radius": 2.6,
-      "group": 6
+    "/models/agents/roster/ctm-fbi-varianth.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi_varianth.vmdl_c",
+      "sha256": "86e2c184b9f4d7f62a2c78572b9fc24a251f55ef6e9abc3beda141b3518a5a77",
+      "set": 0
     },
-    {
-      "bone": "ankle_r",
-      "min": [-7.98, -0.75, -0.27],
-      "max": [-0.02, 3.44, 0.58],
-      "radius": 2.6,
-      "group": 7
+    "/models/agents/roster/ctm-fbi.glb": {
+      "source": "agents/models/ctm_fbi/ctm_fbi.vmdl_c",
+      "sha256": "ce6356fddababe713571d13713e6afbe1aa4d09a447aa7090b7c6c7936e129f8",
+      "set": 0
     },
-    {
-      "bone": "hand_l",
-      "min": [0.0, 0.3, 0.0],
-      "max": [3.59, 1.15, 0.11],
-      "radius": 2.3,
-      "group": 4
+    "/models/agents/roster/ctm-gendarmerie-varianta.glb": {
+      "source": "agents/models/ctm_gendarmerie/ctm_gendarmerie_varianta.vmdl_c",
+      "sha256": "45b17f93520acea58761efb6cc247396593db1cc50d7cc308f3a0afc652f4df0",
+      "set": 0
     },
-    {
-      "bone": "hand_r",
-      "min": [0.0, -0.3, 0.02],
-      "max": [-3.44, -1.17, -0.09],
-      "radius": 2.3,
-      "group": 5
+    "/models/agents/roster/ctm-gendarmerie-variantb.glb": {
+      "source": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantb.vmdl_c",
+      "sha256": "09f5319a60dc5f0ec0e5b38272da0b1454004a349800b02e46dfff3d5bd7844d",
+      "set": 0
     },
-    {
-      "bone": "arm_upper_l",
-      "min": [0.0, 0.0, 0.0],
-      "max": [11.2, 0.0, 0.0],
-      "radius": 3.3,
-      "group": 4
+    "/models/agents/roster/ctm-gendarmerie-variantc.glb": {
+      "source": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantc.vmdl_c",
+      "sha256": "fd63aaa19c0a21ce23b3361c6f37b19a182699f22c97725d24037eadefd6669c",
+      "set": 0
     },
-    {
-      "bone": "arm_lower_l",
-      "min": [0.0, 0.0, 0.0],
-      "max": [10.0, 0.0, 0.0],
-      "radius": 3.0,
-      "group": 4
+    "/models/agents/roster/ctm-gendarmerie-variantd.glb": {
+      "source": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variantd.vmdl_c",
+      "sha256": "4c7a5332fe1f7d416cae471f773f6aeb7bc115de6d5d6122ba2d0a8e903842d0",
+      "set": 0
     },
-    {
-      "bone": "arm_upper_r",
-      "min": [0.0, 0.0, 0.0],
-      "max": [-11.2, 0.0, 0.0],
-      "radius": 3.3,
-      "group": 5
+    "/models/agents/roster/ctm-gendarmerie-variante.glb": {
+      "source": "agents/models/ctm_gendarmerie/ctm_gendarmerie_variante.vmdl_c",
+      "sha256": "0651d86296142b54845b527531f2bc505756a9da0608692beba97605ba2912f4",
+      "set": 0
     },
-    {
-      "bone": "arm_lower_r",
-      "min": [0.0, 0.0, 0.0],
-      "max": [-10.0, 0.0, -0.5],
-      "radius": 3.0,
-      "group": 5
+    "/models/agents/roster/ctm-sas-variantf.glb": {
+      "source": "agents/models/ctm_sas/ctm_sas_variantf.vmdl_c",
+      "sha256": "b26154e99d80870b9571dabb09633e081adf3b8f42ebb84de405469863f68813",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-sas-variantg.glb": {
+      "source": "agents/models/ctm_sas/ctm_sas_variantg.vmdl_c",
+      "sha256": "90cbf5a56d58f4f3df58ea77137688583336c5daf3762ffb594f3fe046cd05a3",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-sas.glb": {
+      "source": "agents/models/ctm_sas/ctm_sas.vmdl_c",
+      "sha256": "7312ab88d05bea67b06f3a945d06dc1e5fc5511d4849bc05bc05aec25380eb22",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-st6-variante.glb": {
+      "source": "agents/models/ctm_st6/ctm_st6_variante.vmdl_c",
+      "sha256": "ec5c7dff7683df7f76c6e75c13420112c62cb2781403b59b26699713c14e8922",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-st6-variantg.glb": {
+      "source": "agents/models/ctm_st6/ctm_st6_variantg.vmdl_c",
+      "sha256": "bd8058d33d25cc035a7ef7852bf22df2dcb2a2e155a535332ec55acafa9f3e57",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-st6-varianti.glb": {
+      "source": "agents/models/ctm_st6/ctm_st6_varianti.vmdl_c",
+      "sha256": "03edbc03d9508b77d893dd48c45a320a8a4a74cc2cbb17af72ab0c44267326a0",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-st6-variantj.glb": {
+      "source": "agents/models/ctm_st6/ctm_st6_variantj.vmdl_c",
+      "sha256": "b59d9390bfbd9c030c25c204bf48c3366f0047d957570a90b1aaba2d789f4b49",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-st6-variantk.glb": {
+      "source": "agents/models/ctm_st6/ctm_st6_variantk.vmdl_c",
+      "sha256": "33beeec1963118bc4161886aace6abd08e4ee87201b41b5c4b77b4e76d8d08cb",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-st6-variantl.glb": {
+      "source": "agents/models/ctm_st6/ctm_st6_variantl.vmdl_c",
+      "sha256": "675e73fef27ca3b60c893b3379bfb350d4fb9cb7d0d8974e07192b5091f65311",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-st6-variantm.glb": {
+      "source": "agents/models/ctm_st6/ctm_st6_variantm.vmdl_c",
+      "sha256": "7b8b37302e8d692302dfc4d78280e722f0ee8a99302c266dd512c3871855feaa",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-st6-variantn.glb": {
+      "source": "agents/models/ctm_st6/ctm_st6_variantn.vmdl_c",
+      "sha256": "2992a6f0827c7785cb9eb5fa21cd9055930ab7102cad9dce8d7480314c47280b",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-swat-variante.glb": {
+      "source": "agents/models/ctm_swat/ctm_swat_variante.vmdl_c",
+      "sha256": "54cb1b5faf7065db84f304b6bc9d77ab6cf3cc2a61b9fb42e289e497e6358dde",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-swat-variantf.glb": {
+      "source": "agents/models/ctm_swat/ctm_swat_variantf.vmdl_c",
+      "sha256": "5e566f35425b725a35400e846a8a2890619547ff2263774cd1d67cd342da5ddc",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-swat-variantg.glb": {
+      "source": "agents/models/ctm_swat/ctm_swat_variantg.vmdl_c",
+      "sha256": "d7286e944600aa995315d75b0f2114e312b06a097197172b9711a943a3a93051",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-swat-varianth.glb": {
+      "source": "agents/models/ctm_swat/ctm_swat_varianth.vmdl_c",
+      "sha256": "c70e1a3b1bb5eeb3fbf159bf1a4d8ed585f0adf1900d65b0ab388d0de2dd89c1",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-swat-varianti.glb": {
+      "source": "agents/models/ctm_swat/ctm_swat_varianti.vmdl_c",
+      "sha256": "2325481ade994eaf40f1aa9e77b3235723d8cc26843b7fbf6aac0ad24be67558",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-swat-variantj.glb": {
+      "source": "agents/models/ctm_swat/ctm_swat_variantj.vmdl_c",
+      "sha256": "35df6188dee6b1223d9dbe5335035ca52fad9e4004abd5317a091614a2c2be48",
+      "set": 0
+    },
+    "/models/agents/roster/ctm-swat-variantk.glb": {
+      "source": "agents/models/ctm_swat/ctm_swat_variantk.vmdl_c",
+      "sha256": "79230f4cd24afcb59ff8c6c99d73a1ac8107b35b9ffec8dff70ccf89ee107ad2",
+      "set": 0
+    },
+    "/models/agents/roster/tm-balkan-variantf.glb": {
+      "source": "agents/models/tm_balkan/tm_balkan_variantf.vmdl_c",
+      "sha256": "67221175b57c6086ba4adee113d45910275659834eb33ba24b984c56b1ab19ef",
+      "set": 0
+    },
+    "/models/agents/roster/tm-balkan-variantg.glb": {
+      "source": "agents/models/tm_balkan/tm_balkan_variantg.vmdl_c",
+      "sha256": "e8a0c059824c4200a3bf054db8eaa2bf89124494b6cc7943622ddbb5edb8618a",
+      "set": 0
+    },
+    "/models/agents/roster/tm-balkan-varianth.glb": {
+      "source": "agents/models/tm_balkan/tm_balkan_varianth.vmdl_c",
+      "sha256": "c544383b1aa78a70cd1b0070f1e5b92ac0a0ea341d9fd93bdb566876bf045c80",
+      "set": 0
+    },
+    "/models/agents/roster/tm-balkan-varianti.glb": {
+      "source": "agents/models/tm_balkan/tm_balkan_varianti.vmdl_c",
+      "sha256": "b90adcb6cf91ab56197f6390f43c78dd83babe52ba70d42e97784ecee639b931",
+      "set": 0
+    },
+    "/models/agents/roster/tm-balkan-variantj.glb": {
+      "source": "agents/models/tm_balkan/tm_balkan_variantj.vmdl_c",
+      "sha256": "aa7126e81a8b90d2279665344622a086658abf9f27c0b9c0c5d16e0f39b22540",
+      "set": 0
+    },
+    "/models/agents/roster/tm-balkan-variantk.glb": {
+      "source": "agents/models/tm_balkan/tm_balkan_variantk.vmdl_c",
+      "sha256": "90ddbfc7d7c6afda56452a2a4d847e3b8982ee92870e625e5db9d235758c663f",
+      "set": 0
+    },
+    "/models/agents/roster/tm-balkan-variantl.glb": {
+      "source": "agents/models/tm_balkan/tm_balkan_variantl.vmdl_c",
+      "sha256": "07be48f991185bb1a112239eb7b053572604d1b6101b95537e2feadd3adb2b18",
+      "set": 0
+    },
+    "/models/agents/roster/tm-jungle-raider-varianta.glb": {
+      "source": "agents/models/tm_jungle_raider/tm_jungle_raider_varianta.vmdl_c",
+      "sha256": "c5c4d92b5b25e80d3f1f77a5ab4169ff0d68edbf37b3fe89d6c2ff83693be844",
+      "set": 0
+    },
+    "/models/agents/roster/tm-jungle-raider-variantb.glb": {
+      "source": "agents/models/tm_jungle_raider/tm_jungle_raider_variantb.vmdl_c",
+      "sha256": "03d586318aea97ddeb3803fbef05dbe4b87cafe4c2a3bcd6b30d8e53544482b9",
+      "set": 0
+    },
+    "/models/agents/roster/tm-jungle-raider-variantb2.glb": {
+      "source": "agents/models/tm_jungle_raider/tm_jungle_raider_variantb2.vmdl_c",
+      "sha256": "ab0ecbe9f4a146df26d72b08aea81499c2174f8010065e3d6001f60f9dae9315",
+      "set": 0
+    },
+    "/models/agents/roster/tm-jungle-raider-variantc.glb": {
+      "source": "agents/models/tm_jungle_raider/tm_jungle_raider_variantc.vmdl_c",
+      "sha256": "272982b8dc2f946e9395c896f616465ac98691ad68c2b516d4338f989a1a21be",
+      "set": 0
+    },
+    "/models/agents/roster/tm-jungle-raider-variantd.glb": {
+      "source": "agents/models/tm_jungle_raider/tm_jungle_raider_variantd.vmdl_c",
+      "sha256": "39a059fbbe8173babd1a7791b743843b3e211fce0668d08f9234a98b29cfc678",
+      "set": 0
+    },
+    "/models/agents/roster/tm-jungle-raider-variante.glb": {
+      "source": "agents/models/tm_jungle_raider/tm_jungle_raider_variante.vmdl_c",
+      "sha256": "cb3a58643875d5c2b7e5ef00566f9a0ad04f34fe90e8911d9d4c5b5406ab2cd1",
+      "set": 0
+    },
+    "/models/agents/roster/tm-jungle-raider-variantf.glb": {
+      "source": "agents/models/tm_jungle_raider/tm_jungle_raider_variantf.vmdl_c",
+      "sha256": "fd88d1f93f85ebc92356b07a1123026c6495040fcdcfde7e08662347d3dbf611",
+      "set": 0
+    },
+    "/models/agents/roster/tm-jungle-raider-variantf2.glb": {
+      "source": "agents/models/tm_jungle_raider/tm_jungle_raider_variantf2.vmdl_c",
+      "sha256": "8a2f432237bbe062d3af5572ee20aecd92be86d9487a4b2094288dd3dbcd62d4",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-varianta.glb": {
+      "source": "agents/models/tm_leet/tm_leet_varianta.vmdl_c",
+      "sha256": "04f2aa82f33c99b4e1c502f6227d28355aa863b3831931ceabda6f58a0d2ebe8",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-variantb.glb": {
+      "source": "agents/models/tm_leet/tm_leet_variantb.vmdl_c",
+      "sha256": "860a6db60612f905ce1ce44c67a04fcc91e08a59395d86470f1e0274744d2c36",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-variantc.glb": {
+      "source": "agents/models/tm_leet/tm_leet_variantc.vmdl_c",
+      "sha256": "17dcec97c1001d80d1e5e0fd311946652870f356eedf108d80710215b9135341",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-variantd.glb": {
+      "source": "agents/models/tm_leet/tm_leet_variantd.vmdl_c",
+      "sha256": "f40ec808d93745f54b2aaf4d2de651475f1dced8f1d3c298660949f4c1b58120",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-variante.glb": {
+      "source": "agents/models/tm_leet/tm_leet_variante.vmdl_c",
+      "sha256": "ac111afead3de302cace53568bbf45c064e44d750ed99677302c1c2f69f48776",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-variantf.glb": {
+      "source": "agents/models/tm_leet/tm_leet_variantf.vmdl_c",
+      "sha256": "d0f350a5435eb748880c0efa4b0dee9f7bda525d95ca305fc2e6cc6ec23f859d",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-variantg.glb": {
+      "source": "agents/models/tm_leet/tm_leet_variantg.vmdl_c",
+      "sha256": "0c3e5feeb8b5899f9ecfbfd850bb95e1afd0e9d9d02679d8e7472736fec13583",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-varianth.glb": {
+      "source": "agents/models/tm_leet/tm_leet_varianth.vmdl_c",
+      "sha256": "735146d5525b27cbcfaceae26cb12153035b7880203c5a4e8701d53d9640fbe7",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-varianti.glb": {
+      "source": "agents/models/tm_leet/tm_leet_varianti.vmdl_c",
+      "sha256": "d86b3acceca0c8c2ac15809eccd924b2d055b3a4d7657fcbc0c22a76fc2b18b3",
+      "set": 0
+    },
+    "/models/agents/roster/tm-leet-variantj.glb": {
+      "source": "agents/models/tm_leet/tm_leet_variantj.vmdl_c",
+      "sha256": "5aca01f6a382a4ed05d827044c7abaee3f079be7f84ac801ee3504ba2850d2c0",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix-varianta.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix_varianta.vmdl_c",
+      "sha256": "c484736205b326736baa26a7dd33a7e29afe1de98c81ab96af9df51c9cc49936",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix-variantb.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix_variantb.vmdl_c",
+      "sha256": "41c042d8336602e625f7a0e2c0a0906c6d7e95bb751f912ee55f63b7634eacf5",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix-variantc.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix_variantc.vmdl_c",
+      "sha256": "b0f15e5a805bba3dd81ed131d51a62d9a18c4473212d447c2fb21cded353a41e",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix-variantd.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix_variantd.vmdl_c",
+      "sha256": "6d126a6b56df3da4e65fef9775c237fcdd56d0d32858c89a005863022c2c9365",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix-variantf.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix_variantf.vmdl_c",
+      "sha256": "db6b024b6dfd7704b1e21cdb66fad7e69d6dc1afdf89dc9cdf6fbcb7e47b27b2",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix-variantg.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix_variantg.vmdl_c",
+      "sha256": "fd16354a5e13232e9905d63e920a734c2424e8673cb2fe330e907b8e6f824789",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix-varianth.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix_varianth.vmdl_c",
+      "sha256": "59e738f9526c06e01b00bbbe9930b871e5d0f334a52020c58289edf4ee524e6b",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix-varianti.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix_varianti.vmdl_c",
+      "sha256": "d733394baf0542a1083f096e0a9daa275086126357cd565bbc18f324dc2c2ad8",
+      "set": 0
+    },
+    "/models/agents/roster/tm-phoenix.glb": {
+      "source": "agents/models/tm_phoenix/tm_phoenix.vmdl_c",
+      "sha256": "3c29d019e52266df983884abf0ab5e6f351d7c5ee2f2f6b9e8bda367e6e044c6",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varf.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varf.vmdl_c",
+      "sha256": "6b597d52f7a0809d772245647f3e98ec12a31053eb95ab29bca54d6e0d14d067",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varf1.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varf1.vmdl_c",
+      "sha256": "6ea97533b4ede9ccd485655acffe83026ff548fc63425191d9a2fdea1e56b23a",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varf2.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varf2.vmdl_c",
+      "sha256": "f7ea87dab7457b11cd4beec5783805391df11bf79850417cceb3cb4cc7db2f52",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varf3.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varf3.vmdl_c",
+      "sha256": "ddbd323c4a8113882d13127580ae2c80847969d0157b30ca77bf3f1e479ce078",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varf4.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varf4.vmdl_c",
+      "sha256": "8df86fa1b0c298c1c1008f7874ee3c3d704ecfb7e258ca12adab5315271c7e30",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varf5.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varf5.vmdl_c",
+      "sha256": "009bd15c86c952861c26d70ba8ddb4d796cfdf5a0e2e4f004638493d8d630cbd",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varg.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varg.vmdl_c",
+      "sha256": "e3033721bd84ec5ea10eb782f2e45778c74a88b6ad7567d931a3b98a4fdc46ad",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varh.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varh.vmdl_c",
+      "sha256": "5c358af287c93d3f242ff6dc92fc943ca9914bed69ea8539044eeca1fd5c97a1",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-vari.glb": {
+      "source": "agents/models/tm_professional/tm_professional_vari.vmdl_c",
+      "sha256": "25a749a814cea6af4103ed30cae678f8dbcf5a7f32e4498edb256d997e5fbd1d",
+      "set": 0
+    },
+    "/models/agents/roster/tm-professional-varj.glb": {
+      "source": "agents/models/tm_professional/tm_professional_varj.vmdl_c",
+      "sha256": "8c18b20ebb1a3adcde27b614cfa72537385dd0db2a022bd06f27227af2807020",
+      "set": 0
     }
+  },
+  "sets": [
+    [
+      {
+        "bone": "head_0",
+        "min": [-1.0, 1.8, 0.0],
+        "max": [3.5, 0.2, 0.0],
+        "radius": 4.3,
+        "group": 1
+      },
+      {
+        "bone": "neck_0",
+        "min": [0.0, -0.4, 0.0],
+        "max": [1.4, -0.2, 0.0],
+        "radius": 3.5,
+        "group": 8
+      },
+      {
+        "bone": "pelvis",
+        "min": [-2.7, 1.1, -3.2],
+        "max": [-2.7, 1.1, 3.2],
+        "radius": 6.0,
+        "group": 3
+      },
+      {
+        "bone": "spine_0",
+        "min": [1.4, 0.8, 3.1],
+        "max": [1.4, 0.8, -3.1],
+        "radius": 6.0,
+        "group": 3
+      },
+      {
+        "bone": "spine_1",
+        "min": [3.8, 0.8, -2.4],
+        "max": [3.8, 0.4, 2.4],
+        "radius": 6.5,
+        "group": 2
+      },
+      {
+        "bone": "spine_2",
+        "min": [4.8, 0.15, -4.1],
+        "max": [4.8, 0.15, 4.1],
+        "radius": 6.2,
+        "group": 2
+      },
+      {
+        "bone": "spine_3",
+        "min": [2.5, -0.6, -6.0],
+        "max": [2.5, -0.6, 6.0],
+        "radius": 5.0,
+        "group": 2
+      },
+      {
+        "bone": "leg_upper_l",
+        "min": [1.3, -0.2, 0.0],
+        "max": [16.5, -0.7, 0.0],
+        "radius": 5.0,
+        "group": 6
+      },
+      {
+        "bone": "leg_upper_r",
+        "min": [-1.3, 0.0, -0.6],
+        "max": [-16.5, 0.0, -0.7],
+        "radius": 5.0,
+        "group": 7
+      },
+      {
+        "bone": "leg_lower_l",
+        "min": [0.1, -0.4, 0.2],
+        "max": [17.0, -0.4, 0.7],
+        "radius": 4.0,
+        "group": 6
+      },
+      {
+        "bone": "leg_lower_r",
+        "min": [-0.1, 0.0, -0.2],
+        "max": [-17.0, 0.4, -0.7],
+        "radius": 4.0,
+        "group": 7
+      },
+      {
+        "bone": "ankle_l",
+        "min": [-0.0, -3.43, -0.52],
+        "max": [8.0, 0.74, 0.33],
+        "radius": 2.6,
+        "group": 6
+      },
+      {
+        "bone": "ankle_r",
+        "min": [-7.98, -0.75, -0.27],
+        "max": [-0.02, 3.44, 0.58],
+        "radius": 2.6,
+        "group": 7
+      },
+      {
+        "bone": "hand_l",
+        "min": [0.0, 0.3, 0.0],
+        "max": [3.59, 1.15, 0.11],
+        "radius": 2.3,
+        "group": 4
+      },
+      {
+        "bone": "hand_r",
+        "min": [0.0, -0.3, 0.02],
+        "max": [-3.44, -1.17, -0.09],
+        "radius": 2.3,
+        "group": 5
+      },
+      {
+        "bone": "arm_upper_l",
+        "min": [0.0, 0.0, 0.0],
+        "max": [11.2, 0.0, 0.0],
+        "radius": 3.3,
+        "group": 4
+      },
+      {
+        "bone": "arm_lower_l",
+        "min": [0.0, 0.0, 0.0],
+        "max": [10.0, 0.0, 0.0],
+        "radius": 3.0,
+        "group": 4
+      },
+      {
+        "bone": "arm_upper_r",
+        "min": [0.0, 0.0, 0.0],
+        "max": [-11.2, 0.0, 0.0],
+        "radius": 3.3,
+        "group": 5
+      },
+      {
+        "bone": "arm_lower_r",
+        "min": [0.0, 0.0, 0.0],
+        "max": [-10.0, 0.0, -0.5],
+        "radius": 3.0,
+        "group": 5
+      }
+    ]
   ]
 }

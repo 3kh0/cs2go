@@ -12,15 +12,31 @@
   },
   "native": {
     "sun": {
-      "color": [255, 222, 189],
+      "color": [
+        255,
+        222,
+        189
+      ],
       "brightness": 2.5,
       "bouncescale": 1.75,
-      "skycolor": [211, 226, 248],
+      "skycolor": [
+        211,
+        226,
+        248
+      ],
       "skyintensity": 0.960784,
       "skytexturescale": 1.2,
-      "skyambientbounce": [151, 151, 151],
+      "skyambientbounce": [
+        151,
+        151,
+        151
+      ],
       "skybouncescale": 1.7,
-      "angles": [50.0, 43.0, 0.0],
+      "angles": [
+        50.0,
+        43.0,
+        0.0
+      ],
       "hammerUniqueId": "2:23513:19679"
     },
     "ctRamp": {
@@ -28,10 +44,18 @@
       "range": 168.903,
       "brightness_lumens": 4500.0,
       "colortemperature": 3400.0,
-      "color": [255, 190, 135],
+      "color": [
+        255,
+        190,
+        135
+      ],
       "colormode": "1",
       "classname": "light_barn",
-      "origin": [325.308746, 2371.635986, 31.464579],
+      "origin": [
+        325.308746,
+        2371.635986,
+        31.464579
+      ],
       "hammerUniqueId": "2:23513:20086"
     },
     "skyMaterial": "materials/skybox/sky_de_dust2.vmat",
@@ -40,7 +64,20 @@
       "min": 0.925,
       "max": 1.1
     },
-    "postProcessWhitePoint": 1.648926
+    "postProcessWhitePoint": 1.648926,
+    "cubemapFog": {
+      "hammerUniqueId": "2:23513:20125",
+      "startDistance": 512,
+      "endDistance": 9000,
+      "heightStart": 0,
+      "heightEnd": 21054.800781,
+      "heightExponent": 1,
+      "falloffExponent": 1.3,
+      "lodBias": 1,
+      "maxOpacity": 0.5,
+      "units": "Source inches",
+      "source": "Named env_sky with native HDR cube and material exposure"
+    }
   },
   "runtime": {
     "file": "dust2-sky.hdr",
@@ -49,15 +86,19 @@
     "conversion": "Native 2048x1024 linear EXR resized to 1024x512 RGBE HDR with scripts/prepare-dust2-sky.py; original exposure retained"
   },
   "adaptation": {
-    "hemisphereIntensity": 2.4,
+    "sunIntensity": "2.5 * pi to account for Three.js Lambert diffuse normalization",
     "environmentIntensity": 0.35,
-    "mapAlbedoSaturation": 1.25,
-    "mapPostToneContrastExponent": 1.08,
-    "ctRampLight": "Bounded 22-intensity point at native fixture position, 8 m radius, decay 1.5"
+    "mapLighting": "Native 8.2 BC6H irradiance, BC7 sun occlusion and BC1 directional response; see lighting/source.json",
+    "toneMapping": "Native vpost coefficients, white point interpreted as exp2(stops) following VRF 5564866; bounded exposure 1.0, native 32-cubed LUT",
+    "ctRampLight": "Bounded 22-intensity point at native fixture position, 8 m radius, decay 1.5",
+    "sky": "Unmodified native 512 BC6H cube and authored mips; legacy HDR retained for IBL and unsupported compression fallback",
+    "fog": "Native 8.2 cubemap distance/height product before tonemapping, reusing the existing sky cube; legacy generic fog on unsupported compression",
+    "localReflections": "Material yaw pi accounts for the VRF panorama +X/u=0 convention; original preview rotation/intensity restored on detach"
   },
   "limitations": [
-    "Native lightmap and spatial probe data are not reproduced; hemisphere and CT ramp fill approximate bounced light.",
-    "Native sun color and direction, sky colors and CT fixture position guide the rendering. Three.js light units, ACES tone mapping, color enhancement and fill strengths are authored adaptations, not exact Source 2 output.",
-    "CT fixture approximates an area light with a bounded unshadowed point; no extra shadow render passes."
+    "Source local barn lights remain bounded point approximations without additional shadow passes.",
+    "Material families, native probe octree, reflection blending, adaptive exposure, effect-specific fog, bloom and screen-space occlusion retain approximations; this is not verified one-to-one renderer parity.",
+    "Native atlases use authored 4096 mips to bound GPU memory; unsupported compression uses 2048 WebP atlases and the legacy HDR sky.",
+    "The extraction-version VRF renderer and newer VRF renderer differ in white-point interpretation; see docs/dust2-lighting.md."
   ]
 }

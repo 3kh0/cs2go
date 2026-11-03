@@ -1,7 +1,13 @@
 import { readFile } from "node:fs/promises";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import * as T from "three";
-import { loadSourceLighting, sampleSourceProbe, sampleSourceProbeSun } from "./source-lighting";
+import {
+  loadSourceLighting,
+  sampleSourceProbe,
+  sampleSourceProbeSun,
+  sampleSourceProbeLocalShadows,
+  nearestSourceProbe,
+} from "./source-lighting";
 
 describe("native probe boundaries", () => {
   beforeAll(async () => {
@@ -15,6 +21,78 @@ describe("native probe boundaries", () => {
     await loadSourceLighting();
   });
   afterAll(() => vi.unstubAllGlobals());
+  it("uses native priority and original cell data at actual overlaps", () => {
+    // Native entity boxes/priorities select 26 over 31, 10 over 11, and 5 over 7.
+    // Independent native-cell crop references, without claiming original GPU equivalence.
+    const references = [
+      { volume: 26, p: [284, 2336, -36], rgb: [15.7574070456, 7.9902829091, 3.8753465827] },
+      { volume: 10, p: [364, 1552, 256], rgb: [3.4090966392, 2.795356984, 2.3971386051] },
+      { volume: 5, p: [-284, -191.644165, 148], rgb: [0.0854181678, 0.1609429854, 0.255686593] },
+    ];
+    for (const { volume, p, rgb } of references) {
+      const point = { x: p[0] * 0.0254, y: p[2] * 0.0254, z: -p[1] * 0.0254 };
+      expect(nearestSourceProbe(point)).toBe(volume);
+      const color = new T.Color();
+      expect(sampleSourceProbe(point, { x: 1, y: 0, z: 0 }, color)).toBe(true);
+      for (let channel = 0; channel < 3; channel++)
+        expect(Math.abs(color.toArray()[channel] - rgb[channel])).toBeLessThan(1e-5);
+    }
+  });
+  it("retains a zero-fade volume inside its native 0.1-inch extended boundary", () => {
+    // Volume42's authored minX is516. This point is 0.05 inches outside its box,
+    // inside the native skin; the old min/max rejection instead selected volume30.
+    // The equality case follows the independently recorded float32 transform.
+    for (const x of [515.9, 515.95, 516]) {
+      const point = { x: x * 0.0254, y: 100.140793 * 0.0254, z: -1612.362427 * 0.0254 };
+      const color = new T.Color();
+      expect(sampleSourceProbe(point, { x: 1, y: 0, z: 0 }, color)).toBe(true);
+      for (const [channel, value] of [1.2563283902, 0.8045718316, 0.563353602].entries())
+        expect(Math.abs(color.toArray()[channel] - value)).toBeLessThan(1e-5);
+      expect(sampleSourceProbeSun(point)).toBeCloseTo(0.2764710562, 7);
+    }
+  });
+  it("uses source-derived directional sky ambient outside all LPVs", () => {
+    const point = { x: 10000, y: 10000, z: 10000 };
+    const color = new T.Color();
+    // Independent Windows float32 metadata, from the pinned sky/bounce/sun rules.
+    const sky = [
+      [-0.0802456886, 0.7061057091],
+      [0.0358253866, 0.694874227],
+      [0.1605874896, 0.7412867546],
+    ];
+    for (const up of [-1, 0, 1]) {
+      expect(sampleSourceProbe(point, { x: up === 0 ? 1 : 0, y: up, z: 0 }, color)).toBe(true);
+      for (const [channel, [vertical, constant]] of sky.entries())
+        expect(
+          Math.abs(color.toArray()[channel] - (constant + up * vertical) * Math.PI),
+        ).toBeLessThan(2e-6);
+    }
+    expect(sampleSourceProbeSun(point)).toBe(1);
+    const local = new T.Vector2(1, 1);
+    sampleSourceProbeLocalShadows(point, local);
+    expect(local.toArray()).toEqual([0, 0]);
+  });
+  it("retains all six positive volumes at the native CT-boundary witness", () => {
+    // Windows input-derived selection at this point reaches indices
+    // 26,31,28,11,12,30. Four contributions cover only 0.5095446 of the point.
+    // Expected values come from original atlas cells and all native weights.
+    const point = { x: 488 * 0.0254, y: 72 * 0.0254, z: -2297.9 * 0.0254 };
+    const color = new T.Color();
+    expect(sampleSourceProbe(point, { x: 0, y: 1, z: 0 }, color)).toBe(true);
+    for (const [channel, expected] of [0.737338976, 0.7879639227, 0.9897597449].entries())
+      expect(Math.abs(color.toArray()[channel] - expected)).toBeLessThan(1e-5);
+    expect(sampleSourceProbeSun(point)).toBeCloseTo(0.1939504411, 6);
+  });
+  it("retains independent native G/B occlusion under the two tunnel fixtures", () => {
+    const first = new T.Vector2(),
+      second = new T.Vector2();
+    sampleSourceProbeLocalShadows({ x: -1040 * 0.0254, y: 0, z: -1424 * 0.0254 }, first);
+    sampleSourceProbeLocalShadows({ x: -692 * 0.0254, y: 0, z: -1424 * 0.0254 }, second);
+    expect(first.x).toBeLessThan(0.01);
+    expect(first.y).toBeCloseTo(0.4729725074, 7);
+    expect(second.x).toBeCloseTo(0.2459241776, 7);
+    expect(second.y).toBeLessThan(0.01);
+  });
   it("keeps the actual mid-underpass indoor/exterior boundary continuous", () => {
     // Native indoor volume18 extends through the doorway facade. Choosing only
     // its box used to turn this exterior wall nearly black, then jump at its edge.
@@ -29,73 +107,51 @@ describe("native probe boundaries", () => {
     expect(Math.abs(samples[0].color.r - samples[2].color.r)).toBeLessThan(0.01);
     expect(Math.abs(samples[0].sun - samples[2].sun)).toBeLessThan(0.01);
   });
-  it("retains irradiance on baked vertical T-spawn walls", async () => {
-    const packed = await readFile(
-      new URL(
-        "../../../packages/assets/public/models/maps/lighting/fallback.bin.gz",
-        import.meta.url,
-      ),
-    );
-    const bytes = new Uint8Array(
-      await new Response(
-        new Blob([packed]).stream().pipeThrough(new DecompressionStream("gzip")),
-      ).arrayBuffer(),
-    );
-    // Actual +X plaster vertex. A reused normal-axis weight previously zeroed
-    // every vertical wall even though the dynamic probe sampler was correct.
-    const index = 1080471;
-    const dynamic = new T.Color();
-    sampleSourceProbe(
-      { x: -14.660554885864258, y: 4.518736839294434, z: 27.4834041595459 },
-      { x: 1, y: 0, z: 0 },
-      dynamic,
-    );
-    const baked = (bytes[index * 4] / 255) ** 2 * 16 * Math.PI;
-    expect(baked).toBeGreaterThan(0.1);
-    expect(baked / dynamic.r).toBeGreaterThan(0.5);
-    expect(baked / dynamic.r).toBeLessThan(2);
-  });
-  it("fades the actual CT plaster chart boundary to matching probe lighting", async () => {
-    const packed = await readFile(
-      new URL(
-        "../../../packages/assets/public/models/maps/lighting/confidence.bin.gz",
-        import.meta.url,
-      ),
-    );
-    const confidence = new Uint8Array(
-      await new Response(
-        new Blob([packed]).stream().pipeThrough(new DecompressionStream("gzip")),
-      ).arrayBuffer(),
-    );
-    // Ray-identified faces 1449996 and 1450040 on either side of the visible
-    // CT plaster patch: one rejected chart, one accepted chart. Both must use
-    // the shared probe endpoint instead of making a sharp triangular seam.
-    for (const vertex of [1868275, 1868277, 1868278, 1868292, 1868312, 1868290])
-      expect(confidence[vertex]).toBe(0);
-  });
-  it("retains native chart lighting on the formerly black garage facade", async () => {
-    const [valid, fallback] = await Promise.all(
-      ["triangle-valid.bin.gz", "fallback.bin.gz"].map(async (file) => {
-        const packed = await readFile(
-          new URL(`../../../packages/assets/public/models/maps/lighting/${file}`, import.meta.url),
-        );
-        return new Uint8Array(
-          await new Response(
-            new Blob([packed]).stream().pipeThrough(new DecompressionStream("gzip")),
-          ).arrayBuffer(),
-        );
-      }),
-    );
-    // Ray-identified wall faces at [11.02, 2.03, 16.26]. Simplification spans
-    // multiple native triangles; rejecting their shared chart selected an
-    // almost-black indoor probe on the outdoor garage facade.
-    expect(valid[1557547]).toBe(1);
-    expect(valid[1557541]).toBe(1);
-    // Farther street facade: equivalent baked charts once caused the complete
-    // 221-face surface to fall back to an almost-black indoor probe.
-    for (const face of [1541911, 1548927, 1548954, 1548955]) expect(valid[face]).toBe(1);
-    const boundaryIrradiance = (fallback[1958757 * 4] / 255) ** 2 * 16;
-    expect(boundaryIrradiance).toBeGreaterThan(0.4);
-    expect(boundaryIrradiance).toBeLessThan(0.8);
+  it("matches all 19 independent native atlas cases for six axes, oblique normals and masks", async () => {
+    const reference = JSON.parse(
+      await readFile(new URL("./fixtures/native-probe-reference.json", import.meta.url), "utf8"),
+    ) as {
+      cases: {
+        name: string;
+        position_source_inches: number[];
+        faces_including_sky_rgb: number[][];
+        shadow_rgba: number[];
+        ambient_oblique: { normal: number[]; including_sky_rgb: number[] };
+      }[];
+    };
+    const axes = [
+      [1, 0, 0],
+      [0, 1, 0],
+      [0, 0, 1],
+      [-1, 0, 0],
+      [0, -1, 0],
+      [0, 0, -1],
+    ];
+    const color = new T.Color(),
+      local = new T.Vector2();
+    for (const r of reference.cases) {
+      const [x, y, z] = r.position_source_inches;
+      const point = { x: x * 0.0254, y: z * 0.0254, z: -y * 0.0254 };
+      for (let axis = 0; axis < 7; axis++) {
+        const normal = axis < 6 ? axes[axis] : r.ambient_oblique.normal;
+        const expected =
+          axis < 6 ? r.faces_including_sky_rgb[axis] : r.ambient_oblique.including_sky_rgb;
+        expect(
+          sampleSourceProbe(point, { x: normal[0], y: normal[2], z: -normal[1] }, color),
+          r.name,
+        ).toBe(true);
+        for (let channel = 0; channel < 3; channel++)
+          expect(
+            Math.abs(color.toArray()[channel] / Math.PI - expected[channel]),
+            r.name,
+          ).toBeLessThan(5e-6);
+      }
+      expect(Math.abs(sampleSourceProbeSun(point) - (1 - r.shadow_rgba[0])), r.name).toBeLessThan(
+        5e-6,
+      );
+      sampleSourceProbeLocalShadows(point, local);
+      expect(Math.abs(local.x - r.shadow_rgba[1]), r.name).toBeLessThan(5e-6);
+      expect(Math.abs(local.y - r.shadow_rgba[2]), r.name).toBeLessThan(5e-6);
+    }
   });
 });

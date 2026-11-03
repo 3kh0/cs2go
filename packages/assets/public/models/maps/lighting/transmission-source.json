@@ -1,0 +1,15 @@
+{
+  "resource": "materials/models/props/de_dust/hr_dust/foliage/palm_frond_01_trans_color_psd_a65631ac.vtex_c",
+  "sourceSha256": "f5523d44cb0d8e626e85b0e1fa2e0b1879842bb5c306d33cf7e75e3ecc7f685e",
+  "nativeFormat": "BC7",
+  "nativeMip": 1,
+  "width": 512,
+  "height": 512,
+  "rgbSha256": "22ed120a7dced98e6aff2a32d4c0c1980737e1404a88e49083e3e291e0a07532",
+  "file": "palm-transmission.webp",
+  "sha256": "d513aa52fbf7475fa3cca1d5128a3f9431019034a9d3b3505a119d142f6f846e",
+  "bytes": 280274,
+  "gpuBytesWithRgba8Mips": 1398100,
+  "colorSpace": "sRGB; shader samples decoded linear RGB",
+  "rebuild": "PYTHONPATH=<offline-lz4> python3 scripts/import-dust2-transmission.py <palm-transmission.vtex_c> packages/assets/public/models/maps/lighting"
+}

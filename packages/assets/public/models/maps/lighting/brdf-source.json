@@ -1,0 +1,22 @@
+{
+  "resource": "textures/dev/brdf_lut.vtex_c",
+  "sourceSha256": "2b234525df00b01659f9bbbefc4a8a2fb47f315f0508a5852fe3f8e426f707ee",
+  "sourceArchive": "Installed CS2 game/core/pak01_dir.vpk; extracted read-only by Windows Amp runner",
+  "matchingVrfResourceSha256": "c51ff7434edec5f760f3430daa19da438ca1b620aa5f729590bb56e3b7bec72e",
+  "matchingNativeAndVrfPayloadSha256": "d85680797fc0da5115cfb1aac0ea1555d01855ae5b53eb7185558f2f013795b9",
+  "interpretation": "ValveResourceFormat 5564866c7f2a6b2ee54a9195b7963147e24da94e pbr.slang SampleBrdfLut / envmap.slang EnvBRDF; native CS2 lightmap 8.2 multiscatter profile",
+  "layer": 1,
+  "channels": "RG: reflectance for F0=0 and F0=1, respectively",
+  "format": "RG16F, linear, row order unchanged, no mipmaps",
+  "dimensions": [
+    64,
+    64
+  ],
+  "gpuBytes": 16384,
+  "gpuSha256": "133adc49222ea9d4293b16456be3e4b6e086e06607896f2402d0d2f8cc853e6a",
+  "file": "brdf-ggx.bin.gz",
+  "bytes": 12897,
+  "sha256": "c5a1b45d856f37c359bf6b6d243c3f2d3d7b97dabb507cc94e128379321318e9",
+  "lookup": "[roughness,sqrt(1-NoV)] * 63/64 + 1/128; bilinear clamp",
+  "rebuild": "python3 scripts/import-dust2-brdf.py <brdf_lut.vtex_c> packages/assets/public/models/maps/lighting"
+}

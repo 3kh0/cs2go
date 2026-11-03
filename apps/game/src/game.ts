@@ -20,7 +20,7 @@ import { HomeScene } from "./home-scene";
 import { BuyPreview } from "./buy-preview";
 import { loadBuyPoses } from "./buy-poses";
 import { loadoutCategory } from "./loadouts";
-import { nativeSoldierHit } from "./soldier-hitboxes";
+import { soldierHit } from "./soldier-hitboxes";
 import {
   actorCarry,
   actorLanding,
@@ -74,7 +74,11 @@ import {
 import { reloadProgress as networkReloadProgress } from "@cs2go/simulation/weapon-actions";
 import { ActorReflections } from "./actor-reflections";
 import { registerActorLighting, updateActorLighting } from "./actor-lighting";
-import { sampleSourceProbe, sampleSourceProbeSun } from "./source-lighting";
+import {
+  sampleSourceProbe,
+  sampleSourceProbeSun,
+  sampleSourceProbeLocalShadows,
+} from "./source-lighting";
 import {
   botAimSpread,
   botBodyHit,
@@ -116,6 +120,7 @@ import {
   WEAPON_ANIMATION_RATE,
 } from "./physics";
 import { loadDust2 } from "./dust2";
+import { warmSourceSky } from "./source-sky";
 import { BombModel } from "./bomb";
 import { BombPlantModel, PLANT_DURATION } from "./bomb-motion";
 import { BombDefuseModel } from "./bomb-defuse";
@@ -148,7 +153,6 @@ import {
   resetSoldier,
   setSoldierWeapon,
   disposeSoldier,
-  soldierHeadHit,
   soldierHitHeight,
   agentBounds,
 } from "./soldier";
@@ -616,7 +620,7 @@ export class Game {
     play.disabled = true;
     play.querySelector("span")!.textContent = "LOADING ARMORY…";
     let loaded = 0;
-    const worldReady = loadDust2(this.scene).then((world) => {
+    const worldReady = loadDust2(this.scene, this.renderer).then((world) => {
       gradeMapColors(world.root);
       this.world = this.dust = world;
       return world;
@@ -799,30 +803,7 @@ export class Game {
       else if (!this.active && !el("menu").classList.contains("hidden"))
         this.soundscape.playMusic("menu");
     });
-    document.addEventListener("pointerlockchange", () => {
-      this.locked = document.pointerLockElement === this.canvas;
-      this.keys.clear();
-      document.querySelector(".radar-wrap")!.classList.remove("expanded");
-      this.jumpQueued = false;
-      this.firing = false;
-      this.revolverCharge = 0;
-      if (!this.locked) {
-        this.suppressors[this.selected].cancel();
-        this.utility.cancelThrow();
-        this.burstRemaining = 0;
-        this.weaponAudio.stop();
-        this.soundscape.stop();
-        this.rescope = 0;
-        this.setScope(0);
-      }
-      if (this.active) {
-        const menuOpen = !this.locked && el("loadout").classList.contains("hidden");
-        toggle("pause", menuOpen);
-        toggle("scoreboard", menuOpen);
-        document.body.classList.toggle("match-menu-open", menuOpen);
-        if (menuOpen) this.scoreboard();
-      }
-    });
+    document.addEventListener("pointerlockchange", () => this.syncPointerLock());
     document.addEventListener("pointerlockerror", () => {
       if (this.active) {
         toggle("pause", true);
@@ -832,7 +813,7 @@ export class Game {
       }
     });
     document.addEventListener("mousemove", (e) => {
-      if (!this.locked) return;
+      if (!this.locked || this.matchLoading) return;
       if (this.dead) {
         if (this.teamMode && this.competitive && !this.spectated) {
           this.spectatorPitch = clamp(
@@ -861,6 +842,7 @@ export class Game {
       );
     });
     document.addEventListener("keydown", (e) => {
+      if (this.matchLoading) return;
       if (
         !el("settings").classList.contains("hidden") ||
         document.getElementById("cosmetic-menu")?.classList.contains("hidden") === false ||
@@ -954,7 +936,7 @@ export class Game {
     document.addEventListener(
       "wheel",
       (e) => {
-        if (!this.active || !this.locked || !e.deltaY) return;
+        if (this.matchLoading || !this.active || !this.locked || !e.deltaY) return;
         e.preventDefault();
         const now = performance.now();
         if (now - this.wheelTime < 100) return;
@@ -968,6 +950,7 @@ export class Game {
       { passive: false },
     );
     document.addEventListener("mousedown", (e) => {
+      if (this.matchLoading) return;
       if (
         this.active &&
         this.locked &&
@@ -1023,6 +1006,37 @@ export class Game {
       this.resizeRenderer();
     });
   }
+  syncPointerLock() {
+    // Reserve pointer lock during the click gesture, but do not enable controls
+    // until the prepared match replaces the loader.
+    if (this.matchLoading) {
+      this.locked = false;
+      this.keys.clear();
+      return;
+    }
+    this.locked = document.pointerLockElement === this.canvas;
+    this.keys.clear();
+    document.querySelector(".radar-wrap")!.classList.remove("expanded");
+    this.jumpQueued = false;
+    this.firing = false;
+    this.revolverCharge = 0;
+    if (!this.locked) {
+      this.suppressors[this.selected].cancel();
+      this.utility.cancelThrow();
+      this.burstRemaining = 0;
+      this.weaponAudio.stop();
+      this.soundscape.stop();
+      this.rescope = 0;
+      this.setScope(0);
+    }
+    if (this.active) {
+      const menuOpen = !this.locked && el("loadout").classList.contains("hidden");
+      toggle("pause", menuOpen);
+      toggle("scoreboard", menuOpen);
+      document.body.classList.toggle("match-menu-open", menuOpen);
+      if (menuOpen) this.scoreboard();
+    }
+  }
   async lock() {
     if (!this.active) return;
     try {
@@ -1032,9 +1046,10 @@ export class Game {
     }
     if (this.audio?.state === "suspended") void this.audio.resume();
   }
-  setTeam(team: AgentTeam) {
+  setTeam(team: AgentTeam, prepare = true) {
     if (this.active || team === this.team) return;
     this.team = team;
+    if (!prepare) return;
     this.bots.forEach((b) => {
       disposeSoldier(b.rig);
       this.scene.remove(b.group);
@@ -1045,7 +1060,7 @@ export class Game {
     });
     if (this.assetsReady) {
       this.equip(this.selected);
-      void this.warmUp();
+      // Match entry awaits its warm-up with the actual roster and lighting.
     }
   }
   viewGun(index: number) {
@@ -1059,7 +1074,8 @@ export class Game {
   }
   // Compile both worlds and weapon programs; upload visible finishes only.
   // Hidden HD skin variants upload on first use instead of occupying GPU memory.
-  async warmUp() {
+  async warmUp(signal?: AbortSignal) {
+    signal?.throwIfAborted();
     if (!this.dust) return;
     const extras = new T.Group(),
       viewExtras = new T.Group();
@@ -1082,60 +1098,81 @@ export class Game {
       this.renderer.capabilities.getMaxAnisotropy(),
       this.settings.textureFiltering,
     );
-    const dust = this.dust.root.visible;
-    this.dust.root.visible = true;
-    this.renderer.compile(this.scene, this.camera);
-    this.dust.root.visible = dust;
-    this.bombView.visible = true;
-    this.defuseView.visible = true;
-    this.renderer.compile(this.view, this.viewCamera);
-    this.bombView.visible = false;
-    this.defuseView.visible = false;
+    const dust = this.dust.root.visible,
+      bomb = this.bombView.visible,
+      defuse = this.defuseView.visible,
+      previousToneMapping = this.renderer.toneMapping;
     const textures = new Set<T.Texture>();
-    for (const uniform of Object.values(warmTracer.material.uniforms))
-      if (uniform.value instanceof T.Texture) textures.add(uniform.value);
-    this.dust.root.visible = true;
-    for (const root of [this.scene, this.view])
-      root.traverseVisible((object) => {
-        if (!(object instanceof T.Mesh)) return;
-        for (const material of Array.isArray(object.material) ? object.material : [object.material])
-          for (const value of Object.values(material))
-            if (value instanceof T.Texture) textures.add(value);
-      });
-    this.dust.root.visible = dust;
-    this.scene.remove(extras);
-    viewExtras.clear();
-    this.view.remove(viewExtras);
+    try {
+      this.dust.root.visible = true;
+      this.renderer.toneMapping = T.CustomToneMapping;
+      this.renderer.compile(this.scene, this.camera);
+      this.bombView.visible = true;
+      this.defuseView.visible = true;
+      this.renderer.compile(this.view, this.viewCamera);
+      for (const uniform of Object.values(warmTracer.material.uniforms))
+        if (uniform.value instanceof T.Texture) textures.add(uniform.value);
+      for (const root of [this.scene, this.view])
+        root.traverseVisible((object) => {
+          if (!(object instanceof T.Mesh)) return;
+          for (const material of Array.isArray(object.material)
+            ? object.material
+            : [object.material])
+            for (const value of Object.values(material))
+              if (value instanceof T.Texture) textures.add(value);
+        });
+    } finally {
+      this.dust.root.visible = dust;
+      this.bombView.visible = bomb;
+      this.defuseView.visible = defuse;
+      this.renderer.toneMapping = previousToneMapping;
+      this.scene.remove(extras);
+      viewExtras.clear();
+      this.view.remove(viewExtras);
+      warmTracer.visible = false;
+      this.scene.add(warmTracer);
+    }
     // Yield between uploads so input/painting can run during GPU warm-up.
     let uploaded = 0;
     for (const texture of textures) {
+      signal?.throwIfAborted();
       this.renderer.initTexture(texture);
       if (++uploaded % 8 === 0) await new Promise((resolve) => setTimeout(resolve, 0));
     }
-    await this.finishPrograms();
-    warmTracer.visible = false;
-    this.scene.add(warmTracer);
+    if (!this.assetsReady) await this.homeScene.prepare(this.renderer);
+    await warmSourceSky(this.dust.skybox, signal);
+    await this.finishPrograms(signal);
   }
   // Let drivers link in parallel, then take each program's first use (uniform
   // lookup) now rather than when an agent or weapon first comes into view.
-  async finishPrograms() {
+  async finishPrograms(signal?: AbortSignal) {
     const parallel = this.renderer.extensions.has("KHR_parallel_shader_compile"),
-      pending = new Set(this.renderer.info.programs ?? []),
-      deadline = performance.now() + 5000;
+      pending = new Set(this.renderer.info.programs ?? []);
     while (pending.size) {
+      signal?.throwIfAborted();
+      if (this.renderer.getContext().isContextLost())
+        throw new Error("Graphics context lost during preparation");
       for (const program of pending)
-        if (
-          !parallel ||
-          performance.now() > deadline ||
-          (program as T.WebGLProgram & { isReady(): boolean }).isReady()
-        ) {
+        if (!parallel || (program as T.WebGLProgram & { isReady(): boolean }).isReady()) {
           program.getUniforms();
           pending.delete(program);
         }
       if (pending.size) await new Promise((resolve) => setTimeout(resolve, 10));
     }
   }
-  start(mode: Mode) {
+  prepareMatchFrame() {
+    this.updateAimCamera(1);
+    this.animateWeapon(0, 0);
+    this.animateBots();
+    this.updateSceneLighting(0);
+    this.renderer.toneMapping = T.CustomToneMapping;
+    this.renderer.clear();
+    this.utility.renderWorld();
+    this.renderer.clearDepth();
+    this.renderer.render(this.view, this.viewCamera);
+  }
+  matchLoading = false;
+  start(mode: Mode, options: { bots?: boolean; lock?: boolean } = {}) {
     this.network?.disconnect();
     this.network = undefined;
     hideRoundBanner();
@@ -1152,7 +1189,7 @@ export class Game {
     this.freezeTime = this.buyRemaining = 0;
     this.revolverCharge = 0;
     this.useWorld();
-    this.configureBots(this.teamMode);
+    this.configureBots(this.teamMode, options.bots === false ? 0 : undefined);
     this.utility.reset();
     this.utility.botInventories.clear();
     this.round = 1;
@@ -1181,17 +1218,19 @@ export class Game {
     toggle("hud", true);
     el("killfeed").replaceChildren();
     this.magazines = weapons.map((w) => ({ ammo: w.mag, reserve: w.reserve }));
-    this.spawnPlayer();
-    this.bots.forEach((b, i) => {
+    this.bots.forEach((b) => {
       b.kills = b.deaths = 0;
       b.money = this.rules.startMoney;
-      this.spawnBot(b, i);
     });
     if (this.teamMode) this.startRound();
+    else {
+      this.spawnPlayer();
+      this.bots.forEach((b, i) => this.spawnBot(b, i));
+    }
     this.ensureAudio();
     this.soundscape.playMusic("start");
     this.soundscape.play("ready");
-    void this.lock();
+    if (options.lock !== false) void this.lock();
     this.updateUI();
   }
   menu() {
@@ -1206,7 +1245,7 @@ export class Game {
     this.active = false;
     this.setScope(0);
     this.rescope = 0;
-    if (this.locked) document.exitPointerLock();
+    if (document.pointerLockElement === this.canvas) document.exitPointerLock();
     for (const id of [
       "hud",
       "pause",
@@ -1796,7 +1835,7 @@ export class Game {
       new T.Vector3(0, 0, -1).applyQuaternion(this.camera.quaternion),
     );
     this.ray.far = knifeRange(stab);
-    let impact = this.ray.intersectObjects(this.shotTargets(), true)[0];
+    let impact = this.meleeTrace();
     if (!impact) {
       // Short fan approximates the forgiving melee hull while each candidate
       // remains cover-occluded. A central wall hit never searches around it.
@@ -1808,10 +1847,10 @@ export class Game {
         [0, 0.12],
       ]) {
         this.ray.ray.direction.set(x, y, -1).normalize().applyQuaternion(this.camera.quaternion);
-        const candidate = this.ray.intersectObjects(this.shotTargets(), true)[0];
+        const candidate = this.meleeTrace();
         if (
           candidate &&
-          typeof candidate.object.userData.bot === "number" &&
+          candidate.actor !== undefined &&
           (!impact || candidate.distance < impact.distance)
         )
           impact = candidate;
@@ -1820,8 +1859,8 @@ export class Game {
     }
     if (!impact) return;
     this.knifeContact = true;
-    const index = impact.object.userData.bot;
-    if (typeof index !== "number") {
+    const index = impact.actor;
+    if (index === undefined) {
       this.soundscape.play("knife-wall");
       return;
     }
@@ -1958,12 +1997,6 @@ export class Game {
       override ??
       (this.teamMode && index >= this.teamSize ? this.team : this.team === "ct" ? "t" : "ct");
     const rig = createSoldier(index, team, appearance, !this.network);
-    // Dust II caches static sun shadows; moving agents must not become frozen
-    // silhouettes when graphics settings rebuild that cache mid-round.
-    if (this.teamMode)
-      rig.group.traverse((object) => {
-        if (object instanceof T.Mesh) object.castShadow = false;
-      });
     this.scene.add(rig.group);
     return {
       name: names[index],
@@ -2135,28 +2168,29 @@ export class Game {
     this.decals.count = Math.max(this.decals.count, slot + 1);
     this.decals.visible = true;
   }
-  // Rays test the world plus living enemies whose agent sphere the ray reaches;
-  // only those rigs need fresh world matrices for skinned picking.
-  shotTargets(skipNativeHitboxes = false) {
-    const targets = this.targets,
-      ray = this.ray.ray;
+  // Cover remains authoritative; animated actors use separate small hitboxes.
+  coverTargets() {
+    const targets = this.targets;
     targets.length = 0;
     for (const solid of this.world.solids) {
       solid.updateWorldMatrix(true, false);
       targets.push(solid);
     }
-    for (const b of this.bots) {
-      if (b.health <= 0 || (skipNativeHitboxes && b.team === "t")) continue;
-      botSphere.copy(agentBounds).center.add(b.group.position);
-      if (
-        !ray.intersectsSphere(botSphere) ||
-        ray.origin.distanceTo(botSphere.center) > this.ray.far + botSphere.radius
-      )
-        continue;
-      b.group.updateMatrixWorld(true);
-      targets.push(...b.group.children);
-    }
     return targets;
+  }
+  meleeTrace() {
+    const cover = this.ray.intersectObjects(this.coverTargets(), true)[0];
+    let nearest: { distance: number; actor?: number } | undefined = cover
+      ? { distance: cover.distance }
+      : undefined;
+    this.bots.forEach((bot, index) => {
+      if (bot.health <= 0) return;
+      const hit = soldierHit(bot.rig, this.ray.ray, nearest?.distance ?? this.ray.far);
+      if (!hit) return;
+      const distance = hit.point.distanceTo(this.ray.ray.origin);
+      if (!nearest || distance < nearest.distance) nearest = { distance, actor: index };
+    });
+    return nearest;
   }
   bulletCover(impact: T.Intersection, ray: T.Ray): BulletSurface<BulletImpactData> {
     // MapCollision already reports world normals; ordinary mesh picking uses
@@ -2304,25 +2338,14 @@ export class Game {
         .applyQuaternion(this.camera.quaternion);
       this.ray.set(this.camera.position, direction);
       this.ray.far = stats.range / SOURCE_UNITS_PER_METER;
-      const impacts = this.ray.intersectObjects(this.shotTargets(true), true);
+      const impacts = this.ray.intersectObjects(this.coverTargets(), true);
       const surfaces: BulletSurface<BulletImpactData>[] = [];
       for (const impact of impacts) {
-        const index = impact.object.userData.bot;
-        if (typeof index === "number") {
-          if (this.bots[index].health <= 0) continue;
-          surfaces.push(
-            this.bulletBody(
-              index,
-              impact.point,
-              soldierHeadHit(this.bots[index].rig, impact.point),
-              this.ray.ray,
-            ),
-          );
-        } else surfaces.push(this.bulletCover(impact, this.ray.ray));
+        surfaces.push(this.bulletCover(impact, this.ray.ray));
       }
       this.bots.forEach((bot, index) => {
-        if (bot.health <= 0 || bot.team !== "t") return;
-        const hit = nativeSoldierHit(bot.rig, this.ray.ray, this.ray.far);
+        if (bot.health <= 0) return;
+        const hit = soldierHit(bot.rig, this.ray.ray, this.ray.far);
         if (hit)
           surfaces.push(this.bulletBody(index, hit.point, hit.head, this.ray.ray, hit.height));
       });
@@ -3218,28 +3241,27 @@ export class Game {
     radar.height = this.world.navigation ? 948 : 180;
     document.querySelector(".radar-wrap")!.classList.toggle("callouts", !!this.world.navigation);
     el("location").textContent = "DUST II";
-    this.scene.background = this.dust.sky;
+    this.scene.background = this.dust.skybox ? null : this.dust.sky;
     this.scene.environment = this.dust.sky;
-    // Native sky exposure bias for the background. Keep reflections restrained:
-    // the hemisphere already approximates diffuse sky/bounce illumination.
+    // VRF panoramas start at +X, whereas Three's equirectangular lookup starts
+    // half a turn earlier. The native sky mesh samples the original cube directly.
+    this.scene.backgroundRotation.y = Math.PI;
+    this.scene.environmentRotation.y = Math.PI;
+    // Retain the bounded global specular fallback; actors use local native probes.
     this.scene.backgroundIntensity = 2 ** 0.765;
     this.scene.environmentIntensity = 0.35;
-    this.scene.fog = new T.Fog(
-      "#c7d6df",
-      this.world.collision ? 100 : 30,
-      this.world.collision ? 240 : 90,
-    );
+    this.scene.fog = this.dust.skybox
+      ? null
+      : new T.Fog("#c7d6df", this.world.collision ? 100 : 30, this.world.collision ? 240 : 90);
     this.camera.far = this.world.collision ? 250 : 110;
     this.camera.updateProjectionMatrix();
   }
-  configureBots(casual: boolean) {
+  configureBots(casual: boolean, count = casual ? this.teamSize * 2 - 1 : 5) {
     for (const bot of this.bots) {
       this.scene.remove(bot.group);
       disposeSoldier(bot.rig);
     }
-    this.bots = Array.from({ length: casual ? this.teamSize * 2 - 1 : 5 }, (_, i) =>
-      this.makeBot(i),
-    );
+    this.bots = Array.from({ length: count }, (_, i) => this.makeBot(i));
   }
   isBlocked(x: number, z: number, y: number, radius = 0.3, height = 1.65) {
     return this.world.collision
@@ -4122,10 +4144,10 @@ export class Game {
         : caster.intersectObjects(this.world.solids, false);
       const surfaces = cover.map((impact) => this.bulletCover(impact, ray));
       const intersect = (id: number | "player", feet: T.Vector3, crouch = false) => {
-        const native = typeof id === "number" && this.bots[id].team === "t";
-        const hit = native
-          ? nativeSoldierHit(this.bots[id as number].rig, ray, caster.far)
-          : botBodyHit(ray, feet, crouch);
+        const hit =
+          typeof id === "number"
+            ? soldierHit(this.bots[id].rig, ray, caster.far)
+            : botBodyHit(ray, feet, crouch);
         if (!hit) return;
         const surface = this.bulletBody(
           id,
@@ -5086,6 +5108,7 @@ export class Game {
       dt,
       this.probeRotation,
       sampleSourceProbeSun,
+      sampleSourceProbeLocalShadows,
     );
   }
   updateSceneLighting(dt: number) {
@@ -5101,6 +5124,7 @@ export class Game {
         dt,
         undefined,
         sampleSourceProbeSun,
+        sampleSourceProbeLocalShadows,
       );
     }
     if (this.bombMesh.visible) {
@@ -5113,6 +5137,7 @@ export class Game {
         dt,
         undefined,
         sampleSourceProbeSun,
+        sampleSourceProbeLocalShadows,
       );
     }
     const ball = this.dust?.ball?.mesh;
@@ -5124,6 +5149,7 @@ export class Game {
         dt,
         undefined,
         sampleSourceProbeSun,
+        sampleSourceProbeLocalShadows,
       );
     if (source) {
       // Viewmodels render in their own camera space; keep the map sun fixed in
@@ -5131,7 +5157,7 @@ export class Game {
       const pitch = T.MathUtils.degToRad(50),
         yaw = T.MathUtils.degToRad(43);
       this.viewSun.color.setHex(0xffdebd);
-      this.viewSun.intensity = 2.5;
+      this.viewSun.intensity = 2.5 * Math.PI;
       this.viewSun.position
         .set(-Math.cos(pitch) * Math.cos(yaw), Math.sin(pitch), Math.cos(pitch) * Math.sin(yaw))
         .applyQuaternion(this.probeInverse.copy(this.camera.quaternion).invert());
@@ -5170,14 +5196,14 @@ export class Game {
     this.actorReflections.update(this.renderer, reflectionActors);
   }
   get simulationRunning() {
-    return this.active;
+    return this.active && !this.matchLoading;
   }
   lastRender = 0;
   frame(now: number) {
     requestAnimationFrame((t) => this.frame(t));
     // No scene work behind the loading overlay or in a background tab. Menus
     // keep their camera animation at 30 Hz without burning gameplay-level GPU.
-    if (document.hidden || !this.assetsReady) {
+    if (document.hidden || !this.assetsReady || this.matchLoading) {
       this.last = now;
       return;
     }
@@ -5266,6 +5292,7 @@ export class Game {
       this.lastSpectatorViewmodel = undefined;
     }
     if (!this.active && !el("menu").classList.contains("hidden")) {
+      this.renderer.toneMapping = T.ACESFilmicToneMapping;
       if (document.getElementById("loadout-editor"))
         this.groundInventory.renderPreviews(this.renderer);
       else this.homeScene.render(this.renderer, this.team, renderDt, !this.previewingViewmodel);
@@ -5351,6 +5378,7 @@ export class Game {
     const wasVisible = followed?.visible;
     if (hideFollowed) followed.visible = false;
     const buying = !el("loadout").classList.contains("hidden");
+    this.renderer.toneMapping = T.CustomToneMapping;
     this.renderer.clear();
     this.utility.renderWorld();
     if (followed && hideFollowed) followed.visible = wasVisible!;

@@ -23,7 +23,7 @@ test("native Ground Rebel capsules follow standing and crouched head bones", asy
     const hitboxModule = "/src/soldier-hitboxes.ts";
     const soldierModule = "/src/soldier.ts";
     const dataModule = "/src/data/agent-hitboxes.json";
-    const threeModule = "/node_modules/three/build/three.module.js";
+    const threeModule = "/tests/three-fixture.ts";
     const { nativeSoldierHit } = (await import(
       hitboxModule
     )) as typeof import("../src/soldier-hitboxes");
@@ -61,7 +61,7 @@ test("native Ground Rebel capsules follow standing and crouched head bones", asy
     const crouched = traceHead();
     bot.rig.crouch = 0;
     animateSoldier(bot.rig, 0, 0.016, true);
-    for (const box of data.hitboxes) {
+    for (const box of data.sets[0]) {
       const name = box.bone.replace(
         /_([lr])(?=_|$)/g,
         (_, side: string) => `_${side.toUpperCase()}`,

@@ -1,0 +1,257 @@
+{
+  "materials": {
+    "dust_arch_01_color": {
+      "color": "arch-color",
+      "normal": "arch-normal",
+      "normalStrength": 1
+    }
+  },
+  "textures": {
+    "arch-color": {
+      "resource": "materials/models/props/de_dust/hr_dust/dust_arches/dust_arch_01_color_tga_fb22148.vtex",
+      "sourceSha256": "e9cb2aef1e06ab82ee1fdc9f9fbeb719d52011c6b781c285ec007c06ea256498",
+      "format": "BC1",
+      "srgb": true,
+      "file": "arch-color.bin.gz",
+      "gpuBytes": 2796200,
+      "gpuSha256": "da03b0ae54317535da152be38a2061665242b79ec255b75c4d8507f4ad785158",
+      "nativeMip": 0,
+      "mips": [
+        {
+          "width": 2048,
+          "height": 2048,
+          "bytes": 2097152,
+          "sha256": "70360091736655fd6d10d5d9da88cc6cda9b6c16a03ea5fffdc8010793ae7d78"
+        },
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "aef99616d352fa2ad7f9b206a2159d9bec1285c1538d55aaf0cb623399003305"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "1cfc36153b001c1b191466dd2c698f17f1b41ee43d89d0190c866e750fd79802"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "4ed0e7c63844ed6a5f2215275aacef3f37d0c607ca528d0ccdbf7df6dfb0cdd8"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "6daddb521fe244654d928eeb21c97204c5416f52c0106f2cbf1efc00ba843ed0"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "f501d862bbd94436f440ba00d7e143a3c40dd49aa66444173287ff69cbfdae78"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "ecd1efe1efbb0b267b92e8384b895fb6ecb9c568585246b670a2a1cf309799c9"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "bf1ba1235881bacaef3a55fe1af401d759116b2a2e723040c846e217af7fd626"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "c15512b4770cb61cce862d3629b94100f36773586e73973817db7c2b9db8b979"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "d89b67efde1c8a85b4828fdb62a3c1bfa86396182169da9d3d400c811f24ee31"
+        }
+      ],
+      "fallbackFile": "arch-color-rgba.bin.gz",
+      "fallbackGpuBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "08e22264bd0f9c698119feb14e8bff71e6c9f40e779b491f2572406ce78346ff"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "b84be893e86ef44e0dc70c319eb97b9cc8e03835997fdf7ec70a15ac360d717c"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "5d3c1b1c99a13b95af61fd970b9d4ecc49c55c289efb9654d807a1a056ce63e0"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "cf786edc0384ea57ffd2187d5b81d50b487eafe60e69556402c85dee676fd202"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "f3efbb8a82a4026c2db0dfa63c9224661b4b3ab57e858b725e03115ee362ca78"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "3a58590a51e2d4982cda605638ab6980d80fe32f656053538610d12c33e363b9"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "2bb9c685363bea2a8586bb8f278d19d8c00a236159624c5319ef177e57e66627"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "cb16b913bd3f60ea9958ca16f18750fdf66dc417c0ee664c316a8a89beb4f186"
+        }
+      ]
+    },
+    "arch-normal": {
+      "resource": "materials/models/props/de_dust/hr_dust/dust_arches/dust_arch_01_normal_tga_aed07b7d.vtex",
+      "sourceSha256": "48658ab3b9224f23ecb759e93844081a3f6ad42a04f3a8a0d58944f2fdd085c1",
+      "format": "BC7",
+      "srgb": false,
+      "file": "arch-normal.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "8e69d89eb70458fdcb0dad787f92160f5d9a59713c7b001e3bfe5dda41d58b4c",
+      "nativeMip": 0,
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "60016caab85516d5f0d3f68f70d7873f59ac7cb57c1b2a1a396c4847422e2867"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "7800af6f73f2b256daccd4f8a86ff65e960de212c5773dc5716113eef7086545"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "d1a8e4486a4af0ad3607b01f4dee517926482a197b02190c983cf4ee4f28c6ae"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "bf9e57c249fc483b0744405ae8eefb2a5f3a1983fa946ee7464967e9ea66ebab"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "53d6f2234db30cb790b4244cfd28f758f3ac21277b6e385748ddf159d0d7088f"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "15f3f88ee5c568607090bb07333ec76b54ca76e61505d97a1abe6589e16bc8a4"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "a064f82189bc04d77e45c255cd1f5a42fd66f6fccce0aab6e2d9c1e5080425c8"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "08821a4215f944809664b72f7c73bca642d0caa12204f0ca00c92fecc6ccd26e"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "ad3301550932ce94cfec5998059be85927b8cfb1a12d6d435ba3b2dde3292521"
+        }
+      ],
+      "fallbackFile": "arch-normal-rgba.bin.gz",
+      "fallbackGpuBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "a4d1477257c5cb3dfe330f9e6596b62c673718e5d7d7609612a82b00082d6fac"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "6a2aa32d40dd4e7f9a64a1443a5aac4cab995977e1c66ecc84792d34432e5396"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "af91b63edcc4032a448c1e1607253ac66dcecb35084ac9e604f5542f603bcb62"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "6b1c75babcad9a4e3c66d89a042350e1fba5bf268c7cd6d949883c44b1a22d5f"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "70ae209938aaa01c2144b4a37f9fd146f9b014a7108b68ef9b79a7c87aca35c1"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "5be0401a92577dd3a5d97adf5b3f256ccced250c58444c4aa05bd3d06b89a4ea"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "03053ef48b3cd540674f893dc050b5617cefbd7bf406af5f77d0cc8605d8ab5e"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "6e93bff5683b6c97f9137c0223e2052c313125f1e486df1b57fbcc0528e34e6e"
+        }
+      ]
+    }
+  },
+  "revision": "5564866c7f2a6b2ee54a9195b7963147e24da94e",
+  "nativeGltfSha256": "4d3e62e46fd747cf4fb85997630c1c55002ea14ac2de7956d52125bd28768f3b",
+  "interpretation": "Original authored color sRGB and linear hemi-octahedral normal RG/perceptual roughness B; filter packed RG before normal decode. Retain GLTF per-draw tint and packing transforms, and unchanged AO/metalness inputs.",
+  "limitations": "Original-engine GPU decode/filter parity remains unproven. RGBA8 fallback uses authored <=512px mips; only the independently audited arch material is upgraded."
+}

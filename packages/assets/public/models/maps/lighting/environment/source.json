@@ -1,0 +1,175 @@
+{
+  "materials": {},
+  "textures": {
+    "color": {
+      "resource": "models/generic/tarp_kit_01/tarpkit_01_color_tga_18d62141.vtex",
+      "sourceSha256": "9527b2c035c6753ba9c376068c5ba01d94678236c9cb144c549adaa4f9f60f93",
+      "format": "BC7",
+      "srgb": true,
+      "file": "color.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "40c5305fbfb74c7f10a2ab4276d696cd000a76e103e239e5795eb2f13c5b1a18",
+      "nativeMip": 1,
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16
+        }
+      ],
+      "fallback": "color.webp",
+      "fallbackWidth": 256,
+      "fallbackHeight": 256,
+      "fallbackGpuBytes": 349524
+    },
+    "height": {
+      "resource": "models/generic/tarp_kit_01/tarpkit_01_mask_tga_300433d.vtex",
+      "sourceSha256": "3e7acf143cd2800b1b84ab8302b4329343c8fc8bc6ec383dd310e19e24b29d62",
+      "format": "BC7",
+      "srgb": false,
+      "file": "height.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "115e113c614a4234526934d7915821a92fd198d870bd986c87ebf7ef2f7a95ea",
+      "nativeMip": 1,
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16
+        }
+      ],
+      "fallback": "height.webp",
+      "fallbackWidth": 256,
+      "fallbackHeight": 256,
+      "fallbackGpuBytes": 349524
+    },
+    "normal": {
+      "resource": "models/generic/tarp_kit_01/tarpkit_01_normal_tga_664d5611.vtex",
+      "sourceSha256": "705e967e7fa67d72fc8db550a9c28b9ba814c8cc357f734082db39c91201ef57",
+      "format": "BC7",
+      "srgb": false,
+      "file": "normal.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "32829c04e047fd161fb5f611fe696d8f4a913474271015b5873b8aedec7a1326",
+      "nativeMip": 2,
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16
+        }
+      ],
+      "fallback": "normal.webp",
+      "fallbackWidth": 256,
+      "fallbackHeight": 256,
+      "fallbackGpuBytes": 349524
+    }
+  },
+  "interpretation": "VRF 5564866 csgo_environment/surface_height_layers: color sRGB RGB + linear AO alpha; raw normal RG + roughness B; raw height G tint mask + A metalness. Neutral color correction, no wetness/detail/vertex paint on this draw.",
+  "limits": "Authored <=512px native mips, decoded <=256px fallback; not full-resolution Source 2 GPU parity."
+}

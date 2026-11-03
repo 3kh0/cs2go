@@ -70,7 +70,7 @@ it.each(["", "https://cdn.test/releases/abc"])(
     };
     runInNewContext(
       readFileSync("../../scripts/service-worker.js", "utf8").replace(
-        "(skin ? 64 : 384) * 1024 * 1024",
+        "(skin ? 64 : 448) * 1024 * 1024",
         "(skin ? 3 : 20)",
       ),
       {

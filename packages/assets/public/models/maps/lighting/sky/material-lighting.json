@@ -1,0 +1,536 @@
+{
+  "materials": [
+    {
+      "name": "palm_treecard_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/palm_treecard_01.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
+    },
+    {
+      "name": "hr_dust_plaster_18",
+      "resource": "materials/de_dust/hr_dust/hr_dust_plaster_18.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "satellite_dish_card",
+      "resource": "materials/de_dust/hr_dust/satellite_dish_card.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "antenna_card",
+      "resource": "materials/de_dust/hr_dust/antenna_card.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "skybox_bushes_color",
+      "resource": "materials/models/props/de_inferno/hr_i/inferno_skybox/skybox_bushes_color.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
+    },
+    {
+      "name": "skybox_trees_color",
+      "resource": "materials/models/props/de_inferno/hr_i/inferno_skybox/skybox_trees_color.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      },
+      "foliage": {
+        "nonDirectional": true,
+        "dontFlipBackfaceNormals": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.5,
+          "grazingAngleMask": 0,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "hr_dust_blend_asphalt_07",
+      "resource": "materials/de_dust/hr_dust/hr_dust_blend_asphalt_07.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_blend_floortile_01",
+      "resource": "materials/de_dust/hr_dust/hr_dust_blend_floortile_01.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_blend_plaster_white_01b2",
+      "resource": "materials/de_dust/hr_dust/hr_dust_blend_plaster_white_01b2.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_blend_rollupdoor_metal_03",
+      "resource": "materials/de_dust/hr_dust/hr_dust_blend_rollupdoor_metal_03.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_plaster_06b",
+      "resource": "materials/de_dust/hr_dust/hr_dust_plaster_06b.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_breeze_block_01",
+      "resource": "materials/de_dust/hr_dust/hr_dust_breeze_block_01.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_metal_trim_01",
+      "resource": "materials/de_dust/hr_dust/hr_dust_metal_trim_01.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_windows_01",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_windows_01.vmat",
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_vehicle_glass_opaque_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_vehicle_glass_opaque_color.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": true,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_plaster_06c",
+      "resource": "materials/de_dust/hr_dust/hr_dust_plaster_06c.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_plaster_09",
+      "resource": "materials/de_dust/hr_dust/hr_dust_plaster_09.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_plaster_09b",
+      "resource": "materials/de_dust/hr_dust/hr_dust_plaster_09b.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_plaster_09c",
+      "resource": "materials/de_dust/hr_dust/hr_dust_plaster_09c.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_blend_asphalt_06",
+      "resource": "materials/de_dust/hr_dust/hr_dust_blend_asphalt_06.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_plaster_06",
+      "resource": "materials/de_dust/hr_dust/hr_dust_plaster_06.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_curbs_001",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_curbs_001/dust_curbs_001.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_curbs_001_painted",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_curbs_001/dust_curbs_001_painted.vmat",
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_door_46x106_04",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_04.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_kasbah_block_lifter",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_block_lifter.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dome001_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_skybox/dome001_color.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_kasbah_wood_crane",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_skybox/dust_kasbah_wood_crane.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_mudbrick_plaster_skybox",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_skybox/dust_mudbrick_plaster_skybox.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_ground_sand_skybox",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_skybox/hr_dust_ground_sand_skybox.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_skybox_buildings_02",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_skybox/hr_dust_skybox_buildings_02.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "hr_dust_wall_trim001_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_wall_trim001_color.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_window_frame_wood_01",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_window_frame_wood_01.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_windows_low",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_windows_low.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "olive_bark_01_nomotion",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/olive_bark_01_nomotion.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      },
+      "foliage": {
+        "nonDirectional": true
+      }
+    },
+    {
+      "name": "olive_branch_01",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/olive_branch_01.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      },
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.713,
+          "grazingAngleMask": 0.084,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "olive_branch_01_nomotion",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/olive_branch_01_nomotion.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      },
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.713,
+          "grazingAngleMask": 0.084,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "nuke_concrete_barrier_color",
+      "resource": "materials/models/props/de_nuke/hr_nuke/nuke_concrete_barrier/nuke_concrete_barrier_color.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
+    },
+    {
+      "name": "dust_light_pole_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_light_pole/dust_light_pole_color.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": true,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_300d_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_300d_color.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": true,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_300d_interior_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_300d_interior_color.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "dust_300d_wheel_color",
+      "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_300d_wheel_color.vmat",
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "power_pole_color",
+      "resource": "materials/models/props/de_dust/hr_dust/power_pole_insulators/power_pole_color.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "power_pole_insulators_color",
+      "resource": "materials/models/props/de_dust/hr_dust/power_pole_insulators/power_pole_insulators_color.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": true,
+        "nativeAO": true
+      }
+    },
+    {
+      "name": "palm_bark_01_nomotion",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/palm_bark_01_nomotion.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      },
+      "foliage": {
+        "nonDirectional": true
+      }
+    },
+    {
+      "name": "sumac_01_nomotion",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/sumac_01_nomotion.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      },
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.3,
+          "grazingAngleMask": 0,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "palm_frond_01_nomotion",
+      "resource": "materials/models/props/de_dust/hr_dust/foliage/palm_frond_01_nomotion.vmat",
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      },
+      "foliage": {
+        "nonDirectional": true,
+        "transmission": {
+          "useAlbedo": true
+        },
+        "alphaCoverage": {
+          "reference": 0.442,
+          "grazingAngleMask": 0.035,
+          "boostStrength": 3,
+          "boostDistanceMeters": 508.0
+        }
+      }
+    },
+    {
+      "name": "hr_dust_plaster_18c",
+      "resource": "materials/de_dust/hr_dust/hr_dust_plaster_18c.vmat",
+      "surface": {
+        "directSpecular": false,
+        "indirectSpecular": false,
+        "nativeAO": true
+      }
+    }
+  ],
+  "foliageSource": {
+    "nativeGltfSha256": "c1a02721e55138817e3a715e2bba0c85a41b5c1efdc28dfd9334b92c760cb3cc",
+    "shader": "csgo_foliage.vfx",
+    "interpretation": "ValveResourceFormat csgo_foliage.frag.slang at 5564866c7f2a6b2ee54a9195b7963147e24da94e"
+  },
+  "selfIlluminationSource": {
+    "nativeGltfSha256": "c1a02721e55138817e3a715e2bba0c85a41b5c1efdc28dfd9334b92c760cb3cc",
+    "interpretation": "ValveResourceFormat self_illum_ps.slang and surface_material.slang at 5564866c7f2a6b2ee54a9195b7963147e24da94e; sRGB mask/tint, exp2 brightness, albedo modulation; existing GLTF mask/UV transform retained"
+  },
+  "surfaceSource": {
+    "nativeGltfSha256": "c1a02721e55138817e3a715e2bba0c85a41b5c1efdc28dfd9334b92c760cb3cc",
+    "interpretation": "ValveResourceFormat csgo_vertexlitgeneric/lightmappedgeneric, surface_material.slang, surface_shading.slang, pbr.slang and envmap.slang at 5564866c7f2a6b2ee54a9195b7963147e24da94e; native CS2 8.2 generic specular gates plus always-enabled foliage/complex/environment specular, Schlick-Smith GGX and indirect multiscatter energy; generic/foliage/complex material AO bypasses direct diffuse; zero vertexlit AO scale uses raw texture AO; map-only, original shader equivalence remains unverified"
+  },
+  "localReflectionSource": {
+    "nativeGltfSha256": "c1a02721e55138817e3a715e2bba0c85a41b5c1efdc28dfd9334b92c760cb3cc",
+    "alwaysEnabledShaders": [
+      "csgo_foliage.vfx",
+      "csgo_complex.vfx",
+      "csgo_environment.vfx"
+    ],
+    "interpretation": "IBL=1 in the pinned 5564866 native shader families; generic families retain their authored indirect-specular switch. Actors use their separate existing reflection path."
+  }
+}
