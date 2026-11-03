@@ -32,12 +32,13 @@
     "triangles": 20800,
     "vertices": 10864,
     "batches": 1,
-    "bytes": 64358,
-    "sha256": "56fb77d936dc9ecc1279b5e5e61f7ff0abf829ba08179a55619b8b71133f33aa",
+    "bytes": 64449,
+    "sha256": "14b2c9be1af6f7b40c01dde37587ed355f218a1cb2fc0ca8240a0cb685232160",
     "simulation": "None",
     "collision": false,
     "textures": 0,
-    "radiusEncoding": "COLOR_0.r = radius / 0.0254; runtime restores white tint"
+    "radiusEncoding": "COLOR_0.r = radius / 0.0254; runtime restores white tint",
+    "probeShadowEncoding": "COLOR_1 U=0; V bytes retain native G/B local occlusion"
   },
   "limits": {
     "triangles": 25000,

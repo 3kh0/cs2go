@@ -23,14 +23,14 @@
   },
   "optimization": {
     "originalTriangles": 4546379,
-    "runtimeTriangles": 1918989,
+    "runtimeTriangles": 1955891,
     "physicsTriangles": 433059,
     "propTarget": 0.3,
     "propRelativeErrorLimit": 0.005,
     "textureMaxDimension": "1024 architecture / 512 props, ETC1S KTX2; repaired street lantern ORM is native lossless 1024x512 PNG",
     "geometry": "meshopt, 16-bit rendering positions/UV, 20-bit physics positions",
-    "lighting": "Native UV seams and RGBA8 probe fallback preserved in indexed meshopt geometry; original runtime textures remain byte-identical",
-    "runtimeVertices": 2419114
+    "lighting": "Native UV seams, linear layer weights and RGBA8 probe fallback preserved in indexed meshopt geometry; original runtime textures remain byte-identical",
+    "runtimeVertices": 2446727
   },
   "navigation": {
     "version": 36,
@@ -39,8 +39,8 @@
   },
   "runtime": {
     "dust2.glb.gz": {
-      "bytes": 42301121,
-      "sha256": "f442ee44f05d741d7d3aaa1cfb61e21c0449253e9873f68476c19b7df146c86d"
+      "bytes": 42578517,
+      "sha256": "f0214094b18e53b01105b303e87c077bafca31bc71915b347ebc565955544601"
     },
     "dust2-physics.glb.gz": {
       "bytes": 723794,

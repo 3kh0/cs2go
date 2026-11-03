@@ -25,9 +25,9 @@
     "irradianceScale": "Multiply by pi for Three Lambert BRDF",
     "fallbackFormat": "RGBA8 sqrt(linear irradiance /16) RGB, sun visibility A",
     "staticProbeCoverage": 0.9970706551202888,
-    "runtimeTriangles": 1918989,
-    "geometryLightingEncoding": "COLOR_1: little-endian normalized uint16 UV in RGBA8 (zero means probe); COLOR_2: sqrt(irradiance/16) RGB and sun visibility A; foliage COLOR_3: opposite-normal probe in the same RGBA8 encoding",
-    "runtimeVertices": 2419114,
+    "runtimeTriangles": 1955891,
+    "geometryLightingEncoding": "COLOR_1: RGBA8 lightmap UV uint16 pair when U>0; U=0 marks probes and V bytes store local G/B occlusion; COLOR_2: sqrt(irradiance/16) RGB and sun visibility A; foliage COLOR_3: opposite-normal probe in the same RGBA8 encoding; layered COLOR_4: native linear UNORM8 blend weights",
+    "runtimeVertices": 2446727,
     "materialBatches": 691,
     "atlasGpuBytes": 41943040,
     "runtimeVertexSplits": 0,
@@ -38,14 +38,27 @@
     ],
     "skyGpuBytes": 2097120,
     "cubemapFog": "Pinned env_cubemap_fog, native 8.2 distance/height product and authored sky mips; no added texture allocation or render pass",
-    "foliageBackProbeGpuBytes": 629860
+    "foliageBackProbeGpuBytes": 629860,
+    "layerWeightGpuBytes": 321512,
+    "probeLocalShadowBytes": 317804,
+    "probeLocalShadowChannels": [
+      1,
+      2
+    ],
+    "stationaryBarnLights": 2,
+    "fullyBakedBarnsExcludedFromRuntime": 2,
+    "selfIlluminatedMaterials": 1,
+    "controlledSurfaceMaterials": 250,
+    "nativeBrdfGpuBytes": 16384,
+    "nativeReflectionGpuBytes": 22543008,
+    "nativeReflectionVolumes": 43
   },
   "limitations": [
     "The authored native 4096 mip is used for 8192 irradiance and shadow atlases; directional irradiance retains its full 4096 resolution. Unsupported GPU compression uses the existing bounded 2048 WebP fallback.",
-    "Source layered materials, transmissive foliage, local barn-light shading, screen-space occlusion, effect-specific fog, bloom, specular cubemap blending and complete native postprocess/exposure evaluation are not fully reproduced.",
+    "Native BRDF/local reflection response, foliage wind/height-gradient tint/shadow-depth alpha coverage, dynamic caster shadows for stationary barn lights, screen-space occlusion, effect-specific fog, bloom, specular cubemap blending and complete native postprocess/exposure evaluation are not fully reproduced.",
     "Native lightmap UVs and baked-lighting selection survive simplification. Probe-lit geometry still uses the existing resampled native ambient-cube grid; native octree validity is not ported."
   ],
-  "runtimeGeometrySha256": "f442ee44f05d741d7d3aaa1cfb61e21c0449253e9873f68476c19b7df146c86d",
+  "runtimeGeometrySha256": "f0214094b18e53b01105b303e87c077bafca31bc71915b347ebc565955544601",
   "nativeImport": {
     "extractor": "Source2Viewer 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
     "runner": "Windows Amp runner, DESKTOP-IUQV7N6, 2026-11-02",
@@ -53,9 +66,14 @@
       "dust2-native.gltf": "4d3e62e46fd747cf4fb85997630c1c55002ea14ac2de7956d52125bd28768f3b",
       "primitive-lighting.json": "c52772d9e258a830d5fd504538c631477f222b847315ce351755603391ea2b68",
       "postprocess.txt": "54f0b51e245d0c4c23d2e225e09b83e3624a4ae52d71efcf906d94f92484ba32",
-      "dust2-native.bin": "b61926b496c15e2fecddf80808266f3860f2000eaabfbf120a385b57642a77aa"
+      "probe-local-shadows.bin.gz": "0efbdf364f6bb68fe4ec73462477b9d6a43ad44914675959eaf1b001601ae1bf",
+      "barn-source.json": "3870d1164c29b864c68d17f759ac8c5f1468f82fa16fdc3c4aac1f9a19efb5c1",
+      "dust2-native.bin": "b61926b496c15e2fecddf80808266f3860f2000eaabfbf120a385b57642a77aa",
+      "brdf-source.json": "e54b05f28e2706e4dfe1b4d1f558a392c3205507ed5aa2203c8b9b0845f50b14",
+      "brdf-ggx.bin.gz": "c5a1b45d856f37c359bf6b6d243c3f2d3d7b97dabb507cc94e128379321318e9",
+      "reflections/source.json": "7089f36fbb01baaf3a42b1965802dd89745318523e2cecb14910cf31e707190b"
     },
-    "referenceMapSha256": "c9480a6ca12521ac7f1226cd1a8f061cb9baef61864a78d0d27d15c90b7bd80d",
+    "referenceMapSha256": "107ebc469f7869511a05db6bc41e4f324852d68b2bd74c8a93a7f1eb7685aa7f",
     "preservedTextureCount": 564,
     "atlasLevels": [
       {
