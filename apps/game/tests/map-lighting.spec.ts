@@ -370,6 +370,11 @@ test("Dust II retains native light and shadow contrast with bounded static rende
   expect(result.sun[0]).toBeGreaterThan(result.sun[2]);
   expect(result.shade[2]).toBeGreaterThan(result.shade[0]);
   expect(result.vertices).toBeLessThan(2500000);
+  expect(result.normalScales).toEqual({
+    dust_shipping_crate_02_painted_decals: -1,
+    dust_arch_01_color: -1,
+    hr_dust_brick_ground_02: -1,
+  });
   expect(result.invalid).toBe(0);
   expect(result.calls).toBeLessThan(350);
   expect(result.triangles).toBeLessThan(1400000);
@@ -414,6 +419,11 @@ test("Dust II loads bounded fallback lighting without native compression support
   expect(requests.some((url) => url.includes("/lighting/native/"))).toBe(false);
   expect(requests.some((url) => /\/lighting\/layers\/.*\.bin\.gz/.test(url))).toBe(false);
   expect(requests.some((url) => /\/lighting\/layers\/.*\.webp/.test(url))).toBe(true);
+  expect(result.normalScales).toEqual({
+    dust_shipping_crate_02_painted_decals: -1,
+    dust_arch_01_color: -1,
+    hr_dust_brick_ground_02: -1,
+  });
   expect(result.invalid).toBe(0);
   expect(result.sun[0] + result.sun[1] + result.sun[2]).toBeGreaterThan(100);
   expect(errors).toEqual([]);
@@ -461,6 +471,11 @@ test("baked native cables follow the supplied reference curves without exceeding
   for (const sample of result.referenceCables)
     expect(sample.darkness, `Native cable at ${sample.expected.join(",")}`).toBeGreaterThan(15);
   expect(result.vertices).toBeLessThan(2500000);
+  expect(result.normalScales).toEqual({
+    dust_shipping_crate_02_painted_decals: -1,
+    dust_arch_01_color: -1,
+    hr_dust_brick_ground_02: -1,
+  });
   expect(result.invalid).toBe(0);
   const directory = new URL("../../../artifacts/", import.meta.url);
   await mkdir(directory, { recursive: true });

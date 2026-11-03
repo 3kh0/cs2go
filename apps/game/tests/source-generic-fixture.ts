@@ -13,23 +13,34 @@ export function renderSourceGenericTextures() {
     "tangent",
     new T.Float32BufferAttribute([1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1], 4),
   );
-  geometry.setAttribute(
-    "uv",
-    new T.Float32BufferAttribute([0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], 2),
-  );
-  const sample = (bytes: number[], strength: number, mode: "normal" | "roughness") => {
+  const tangent = geometry.getAttribute("tangent");
+  const sample = (
+    bytes: number[],
+    strength: number,
+    mode: "normal" | "roughness",
+    derivative = false,
+    converted = false,
+  ) => {
+    if (derivative) geometry.deleteAttribute("tangent");
+    else geometry.setAttribute("tangent", tangent);
     const texture = new T.DataTexture(new Uint8Array(bytes), bytes.length / 4, 1);
     texture.minFilter = texture.magFilter = T.LinearFilter;
+    // Sample the exact midpoint while retaining UV derivatives for the TBN.
+    texture.offset.set(-1 / 64, -1 / 64);
     texture.needsUpdate = true;
     const material = new T.MeshStandardMaterial({ normalMap: texture });
+    // GLTFLoader uses -Y for meshes without stored tangents. Native packed
+    // shaders own their decode and must not apply that converted-map scale twice.
+    material.normalScale.y = -1;
     material.onBeforeCompile = (shader) => {
-      applySourceGenericTextures(shader, { color: "", normal: "", normalStrength: strength });
+      if (!converted)
+        applySourceGenericTextures(shader, { color: "", normal: "", normalStrength: strength });
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <opaque_fragment>",
         `outgoingLight = ${mode === "normal" ? "normal * 0.5 + 0.5" : "vec3(roughnessFactor)"};\n#include <opaque_fragment>`,
       );
     };
-    material.customProgramCacheKey = () => `generic-${mode}-${strength}`;
+    material.customProgramCacheKey = () => `generic-${mode}-${strength}-${derivative}-${converted}`;
     const mesh = new T.Mesh(geometry, material);
     scene.add(mesh);
     renderer.render(scene, camera);
@@ -49,6 +60,10 @@ export function renderSourceGenericTextures() {
     filteredRoughness: sample(filtered, 1, "roughness"),
     flattened: sample([180, 100, 204, 255], 0, "normal"),
     roughness: sample([180, 100, 51, 0], 1, "roughness"),
+    nativeExplicit: sample([160, 96, 128, 255], 1, "normal"),
+    nativeDerivative: sample([160, 96, 128, 255], 1, "normal", true),
+    convertedDerivative: sample([127, 168, 248, 255], 1, "normal", true, true),
+    convertedExplicit: sample([127, 168, 248, 255], 1, "normal", false, true),
   };
   geometry.dispose();
   renderer.dispose();

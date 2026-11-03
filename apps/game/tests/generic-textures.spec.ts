@@ -26,5 +26,17 @@ test("native generic normals decode after filtering and preserve perceptual roug
     );
   expect(result.filteredRoughness).toEqual([128, 128, 128]);
   expect(result.roughness).toEqual([51, 51, 51]);
+  // Independent Windows audit: packed RG=(160,96) decodes to native
+  // (-0.00000055,-0.31771684,0.94818564); old CPU RGB is (127,168,248).
+  for (const pixel of [
+    result.nativeExplicit,
+    result.nativeDerivative,
+    result.convertedDerivative,
+    result.convertedExplicit,
+  ])
+    pixel.forEach((value: number, channel: number) =>
+      expect(Math.abs(value - [128, 87, 248][channel])).toBeLessThanOrEqual(2),
+    );
+  expect(result.nativeDerivative).toEqual(result.nativeExplicit);
   expect(errors).toEqual([]);
 });

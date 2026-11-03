@@ -177,12 +177,23 @@ export async function renderMapLighting(
         referenceCables.push({ expected: [x, y], darkness: sky - wire });
       }
   }
+  const normalScales: Record<string, number> = {};
   let vertices = 0;
   let invalid = 0;
   let backProbeBytes = 0;
   let layerWeightBytes = 0;
   dust.scenery.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
+    for (const material of Array.isArray(object.material) ? object.material : [object.material])
+      if (
+        material instanceof T.MeshStandardMaterial &&
+        [
+          "dust_shipping_crate_02_painted_decals",
+          "dust_arch_01_color",
+          "hr_dust_brick_ground_02",
+        ].includes(material.name)
+      )
+        normalScales[material.name] = material.normalScale.y;
     vertices += object.geometry.getAttribute("position").count;
     const backProbe = object.geometry.getAttribute("sourceBackProbe");
     if (backProbe) backProbeBytes += backProbe.count * 4;
@@ -193,6 +204,7 @@ export async function renderMapLighting(
   });
   return {
     referenceCables,
+    normalScales,
     raySamples,
     surfaceQuality,
     genericQuality,
