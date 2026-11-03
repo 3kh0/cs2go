@@ -485,11 +485,11 @@
       }
     }
   ],
-  "probeShadowBytes": 317804,
+  "probeShadowBytes": 9117388,
   "probeShadowGpuBytes": 0,
   "limitations": [
-    "Existing bounded LPV resampling and volume blending remain approximations; native octree validity is not reproduced.",
+    "Native cell/halo coordinates are preserved; actor-origin and static vertex evaluation still approximate per-fragment native shading.",
     "The native static shadow masks are used; additional dynamic actor/caster shadow maps and their Gaussian PCF are not yet reproduced."
   ],
-  "shadowSampling": "Same bounded grid/volume priority as retained sun masks; sun grid is byte-identical. G/B occlusion is sampled offline for map vertices and at the existing actor probe cadence."
+  "shadowSampling": "Native RGBA8 shadow cells with one-cell halo; byte-identical to original atlas crops"
 }

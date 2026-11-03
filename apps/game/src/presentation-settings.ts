@@ -95,11 +95,15 @@ export function applyTextureQuality(
           const dataImage = source.image as T.DataTexture["image"];
           const sourceChanged = sourceLevels.get(texture.source) !== quality;
           const skip = quality === "high" ? 0 : quality === "medium" ? 1 : 2;
-          if (texture instanceof T.CompressedTexture && source.mipmaps.length > 1) {
+          if (
+            (texture instanceof T.CompressedTexture || texture instanceof T.DataTexture) &&
+            source.mipmaps.length > 1
+          ) {
             const level = Math.min(skip, source.mipmaps.length - 1);
             texture.mipmaps = (source.mipmaps as T.CompressedTexture["mipmaps"]).slice(level);
             const mip = texture.mipmaps[0];
-            texture.image = { width: mip.width, height: mip.height };
+            texture.image =
+              texture instanceof T.DataTexture ? mip : { width: mip.width, height: mip.height };
           } else if (
             sourceChanged &&
             texture instanceof T.DataTexture &&

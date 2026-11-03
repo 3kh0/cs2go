@@ -32,6 +32,7 @@ interface SourceMaterialLighting {
     surface?: SourceSurface;
     localReflections?: boolean;
     environment?: SourceEnvironment;
+    nativeAOTexture?: string;
   }[];
 }
 
@@ -44,6 +45,7 @@ interface SourceMapLighting {
   transmissionTextures: Map<string, T.Texture>;
   layers?: Awaited<ReturnType<typeof loadSourceLayers>>;
   environmentTextures?: Map<string, T.Texture>;
+  occlusionTextures?: Map<string, T.Texture>;
   barns?: T.Box3[];
   surfaceLookup?: T.DataTexture;
   reflections?: SourceReflections;
@@ -79,6 +81,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     surfaceLookup,
     reflections,
     environmentBundle,
+    occlusionBundle,
   ] = await Promise.all([
     native
       ? loadNativeAtlas("irradiance", T.RGB_BPTC_UNSIGNED_Format, 16777216)
@@ -96,6 +99,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     loadSourceSurfaceLookup(),
     loadSourceReflections(renderer),
     loadSourceMaterialBundle(renderer, "/models/maps/lighting/environment/"),
+    loadSourceMaterialBundle(renderer, "/models/maps/lighting/occlusion/"),
     loadSourceLighting(),
     loadSourceColorCorrection(),
   ]);
@@ -130,6 +134,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     surfaceLookup,
     reflections,
     environmentTextures: environmentBundle.textures,
+    occlusionTextures: occlusionBundle.textures,
   };
 }
 
@@ -148,6 +153,7 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
     surfaceLookup,
     reflections,
     environmentTextures,
+    occlusionTextures,
   } = data;
   const barnMasks = new Map<T.Material, number>();
   const reflectionCandidates = new Map<T.Material, Set<number>>();
@@ -194,6 +200,19 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
           material.alphaTest = nativeMaterial.foliage.alphaCoverage.reference;
       }
       const foliage = nativeMaterial?.foliage;
+      let nativeAOTexture: T.Texture | undefined;
+      if (nativeMaterial?.nativeAOTexture && material instanceof T.MeshStandardMaterial) {
+        const original = material.aoMap;
+        const texture = occlusionTextures?.get(nativeMaterial.nativeAOTexture);
+        if (!texture || !original) throw new Error("Native material AO texture/UV mapping missing");
+        nativeAOTexture = texture.clone();
+        nativeAOTexture.offset.copy(original.offset);
+        nativeAOTexture.repeat.copy(original.repeat);
+        nativeAOTexture.center.copy(original.center);
+        nativeAOTexture.rotation = original.rotation;
+        nativeAOTexture.channel = original.channel;
+        material.aoMap = nativeAOTexture;
+      }
       const surface = nativeMaterial?.surface;
       const environment = nativeMaterial?.environment;
       if (environment && material instanceof T.MeshStandardMaterial) {
@@ -212,6 +231,7 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
       const barnMask = barnMasks.get(material) ?? 0;
       const layered = layers?.materials[material.name];
       const surfaceTextures: T.Texture[] = environment ? [...environmentTextures!.values()] : [];
+      if (nativeAOTexture) surfaceTextures.push(nativeAOTexture);
       if (layered && layers)
         for (const key of [
           layered.normal1,

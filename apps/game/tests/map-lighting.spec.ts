@@ -612,3 +612,32 @@ test("native environment textures retain channel color spaces, compression fallb
   }
   expect(errors).toEqual([]);
 });
+
+test("native generic AO retains six authored mips in BC4 and RGBA fallback with reversible quality", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("console", (m) => {
+    if (m.type() === "error") errors.push(m.text());
+  });
+  await page.route("**/favicon.ico", (r) => r.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/source-occlusion-fixture.ts";
+    return (await import(path)).renderSourceOcclusion();
+  });
+  expect(result.compressed).toBe(result.nativeSupported);
+  expect(result.levels).toHaveLength(6);
+  for (const level of result.levels) {
+    expect(level.maxDifference).toBeLessThanOrEqual(2);
+    expect(level.min).toBeLessThan(250);
+    expect(level.max).toBeGreaterThan(240);
+  }
+  for (const quality of result.quality) {
+    expect(quality.original).toEqual([256, 128, 6]);
+    expect(quality.low).toEqual([64, 32, 4]);
+    expect(quality.restored).toEqual(quality.original);
+  }
+  expect(errors).toEqual([]);
+});

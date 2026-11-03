@@ -11,7 +11,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "nativeAOTexture": "street_lantern_02_color"
     },
     {
       "name": "palm_bark_01",

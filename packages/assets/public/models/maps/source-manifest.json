@@ -39,8 +39,8 @@
   },
   "runtime": {
     "dust2.glb.gz": {
-      "bytes": 42763540,
-      "sha256": "9ad8429d60b4923748553421bb95278efaed4464ac3c37bfd177d19dc3d52945"
+      "bytes": 42836105,
+      "sha256": "00924251006747788e162779e92c09ccb62989120f5a2f588fc0076ba1b653a8"
     },
     "dust2-physics.glb.gz": {
       "bytes": 723794,

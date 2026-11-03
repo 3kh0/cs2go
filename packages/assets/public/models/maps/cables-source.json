@@ -4,7 +4,13 @@
   "inputs": {
     "decodedEntitiesSha256": "c7f40aceee417cb27aa1cb2e1f555df5feb2e449a66a4cdcb86e5a176b3c8e41",
     "staticEffectSha256": "ab8ac2c9fb02b6e0dda278114ca0b943208018f51f8d708dd280f3ca2d86fe0c",
-    "materialSha256": "cc4666781d7c76b025188b0c1e996529488e5bd0ab5841a044fad8750dcdf8a3"
+    "materialSha256": "cc4666781d7c76b025188b0c1e996529488e5bd0ab5841a044fad8750dcdf8a3",
+    "probeInputs": {
+      "probes.json": "797f1bc44f43c6ea7fee1cbd9df61fc079c5161d05d3d8ed57273cb56e1f0901",
+      "probes.bin.gz": "1d1978ee06e84cdd8c713becc389d30625b0ab1464e6e0782857126ff5b3fb89",
+      "probe-shadows.bin.gz": "5da477a281bc2fd414216c1cf207a28638dfdc43bacae600cf297f4ed8819c01",
+      "probe-local-shadows.bin.gz": "0efbdf364f6bb68fe4ec73462477b9d6a43ad44914675959eaf1b001601ae1bf"
+    }
   },
   "algorithm": "VRF 5564866c7f2a6b2ee54a9195b7963147e24da94e CableMeshBuilder, BasicMovement and RopeSpringConstraint; offline only",
   "constraintPassBasis": "Inferred: one effective pass fits 20 samples across four native reference cables within one pixel; VRF default three does not",
@@ -32,8 +38,8 @@
     "triangles": 20800,
     "vertices": 10864,
     "batches": 1,
-    "bytes": 64449,
-    "sha256": "14b2c9be1af6f7b40c01dde37587ed355f218a1cb2fc0ca8240a0cb685232160",
+    "bytes": 64492,
+    "sha256": "e1a7bab24b796a4e867d666865830e595fdb81dcfa3c15ecb163f521f5af5570",
     "simulation": "None",
     "collision": false,
     "textures": 0,

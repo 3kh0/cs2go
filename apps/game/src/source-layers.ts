@@ -4,10 +4,12 @@ import { fetchGzipped } from "./gltf";
 import { createLoadQueue } from "./loading";
 
 interface LayerTexture {
-  format?: "BC1" | "BC7";
+  format?: "BC1" | "BC7" | "BC4";
   srgb: boolean;
   file?: string;
   fallback?: string;
+  fallbackFile?: string;
+  fallbackMips?: { width: number; height: number; bytes: number }[];
   gpuBytes?: number;
   mips?: { width: number; height: number; bytes: number }[];
   constant?: number;
@@ -54,9 +56,13 @@ export async function loadSourceMaterialBundle(renderer: T.WebGLRenderer, direct
         const supported =
           entry.format === "BC7"
             ? renderer.extensions.has("EXT_texture_compression_bptc")
-            : renderer.extensions.has(
-                entry.srgb ? "WEBGL_compressed_texture_s3tc_srgb" : "WEBGL_compressed_texture_s3tc",
-              );
+            : entry.format === "BC4"
+              ? renderer.extensions.has("EXT_texture_compression_rgtc")
+              : renderer.extensions.has(
+                  entry.srgb
+                    ? "WEBGL_compressed_texture_s3tc_srgb"
+                    : "WEBGL_compressed_texture_s3tc",
+                );
         let texture: T.Texture;
         if (supported && entry.file && entry.mips) {
           const bytes = await fetchGzipped(directory + entry.file);
@@ -72,9 +78,27 @@ export async function loadSourceMaterialBundle(renderer: T.WebGLRenderer, direct
             mips,
             mips[0].width,
             mips[0].height,
-            entry.format === "BC7" ? T.RGBA_BPTC_Format : T.RGB_S3TC_DXT1_Format,
+            entry.format === "BC7"
+              ? T.RGBA_BPTC_Format
+              : entry.format === "BC4"
+                ? T.RED_RGTC1_Format
+                : T.RGB_S3TC_DXT1_Format,
           );
           texture.minFilter = mips.length > 1 ? T.LinearMipmapLinearFilter : T.LinearFilter;
+        } else if (entry.fallbackFile && entry.fallbackMips) {
+          const bytes = await fetchGzipped(directory + entry.fallbackFile);
+          let offset = 0;
+          const mips = entry.fallbackMips.map((mip) => {
+            const data = new Uint8Array(bytes, offset, mip.bytes);
+            offset += mip.bytes;
+            return { data, width: mip.width, height: mip.height };
+          });
+          if (offset !== bytes.byteLength || !mips.length)
+            throw new Error("Invalid material fallback mip lengths");
+          texture = new T.DataTexture(mips[0].data, mips[0].width, mips[0].height);
+          texture.mipmaps = mips;
+          texture.generateMipmaps = false;
+          texture.minFilter = T.LinearMipmapLinearFilter;
         } else {
           if (!entry.fallback) throw new Error("Missing native layer fallback");
           texture = await new T.TextureLoader().loadAsync(assetUrl(directory + entry.fallback));
