@@ -46,12 +46,26 @@ export async function prepareTeamAgent(soldier: Soldier, knife: number, signal: 
     const gripInverse = new T.Matrix4().fromArray(soldier.weapon.userData.buyGrip).invert();
     const anchor = soldier.model.getObjectByName("wpn");
     if (!anchor) throw new Error(`Missing native selection weapon anchor: ${name}`);
+    let handGrip: T.Matrix4 | undefined;
+    if (soldier.team === "t" && !daggers) {
+      const reference = animation.pack.scene.clone(true);
+      ensureAgentAnimationBones(reference, animation.pack.scene);
+      const referenceMixer = new T.AnimationMixer(reference);
+      referenceMixer.clipAction(animation.pack.clips.get("sh_buymenu_knife")!).play();
+      referenceMixer.update(0);
+      handGrip = metricAttachment(reference.getObjectByName("hand_R")!)
+        .invert()
+        .multiply(metricAttachment(reference.getObjectByName("wpn")!));
+      referenceMixer.stopAllAction();
+      referenceMixer.uncacheRoot(reference);
+    }
     const placement = new T.Matrix4(),
       parentInverse = new T.Matrix4(),
       weaponFrame = new T.Matrix4();
     const attach = () => {
       soldier.group.updateMatrixWorld(true);
-      weaponFrame.copy(metricAttachment(anchor));
+      if (handGrip) weaponFrame.copy(metricAttachment(soldier.rightHand)).multiply(handGrip);
+      else weaponFrame.copy(metricAttachment(anchor));
       placement
         .copy(weaponFrame)
         .premultiply(parentInverse.copy(soldier.group.matrixWorld).invert())

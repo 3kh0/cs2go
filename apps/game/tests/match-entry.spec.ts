@@ -235,6 +235,7 @@ test("native selection preserves both wrists, clip timing and dagger contacts", 
     const { createSoldier, disposeSoldier } = await import("../src/soldier.ts");
     const { prepareTeamAgent } = await import("../src/team-pose.ts");
     const { knifeDefinitions } = await import("../src/physics.ts");
+    const { previewBounds } = await import("../src/preview-framing.ts");
     const knives = [
       window.__game.knife,
       knifeDefinitions.find((knife) => knife.token === "knife_push")!.id,
@@ -246,7 +247,20 @@ test("native selection preserves both wrists, clip timing and dagger contacts", 
         const pose = await prepareTeamAgent(soldier, knife, new AbortController().signal);
         try {
           const wrists: number[] = [];
+          const knifeDistances: number[] = [];
           const sampleWrists = () => {
+            if (knife === knives[0]) {
+              const center = previewBounds([soldier.weapon]).getCenter(
+                soldier.weapon.position.clone(),
+              );
+              knifeDistances.push(
+                Math.min(
+                  ...[soldier.leftHand, soldier.rightHand].map((hand) =>
+                    center.distanceTo(hand.getWorldPosition(hand.position.clone())),
+                  ),
+                ),
+              );
+            }
             if (team !== "ct" || knife !== knives[0]) return;
             for (const [side, hand] of [
               ["L", soldier.leftHand],
@@ -295,6 +309,7 @@ test("native selection preserves both wrists, clip timing and dagger contacts", 
             animationMoves,
             contacts,
             wrists,
+            knifeDistances,
             held,
             ended: soldier.head.quaternion.toArray(),
           });
@@ -309,6 +324,8 @@ test("native selection preserves both wrists, clip timing and dagger contacts", 
     expect(pose.elapsed).toBeCloseTo(0.5, 5);
     expect(pose.animationMoves).toBe(true);
     expect(pose.ended).toEqual(pose.held);
+    for (const distance of pose.knifeDistances)
+      expect(distance, `${pose.name}: knife stays in hand`).toBeLessThan(0.25);
     for (const distance of [...pose.contacts, ...pose.wrists])
       expect(distance, pose.name).toBeLessThan(0.001);
   }
