@@ -30,7 +30,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "agave_plant_01",
@@ -50,7 +51,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_awning_fabric_01",
@@ -67,7 +69,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_awning_fabric_ripped_01",
@@ -90,7 +93,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_patio_umbrella_color",
@@ -107,7 +111,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_weeds_01",
@@ -130,7 +135,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "grape_leaves_01",
@@ -151,7 +157,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "olive_bark_01",
@@ -165,7 +172,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "olive_branch_01",
@@ -188,7 +196,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "palm_frond_01",
@@ -237,7 +246,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "sumac_01",
@@ -260,7 +270,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "weeds_cressa_01",
@@ -285,7 +296,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "zebra_grass_01",
@@ -312,7 +324,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_hanging_light_02_on",
@@ -331,7 +344,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_overlay_sign_03",
@@ -439,7 +453,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_electric_panel_cover_color",
@@ -448,7 +463,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_metal_trim_01",
@@ -511,7 +527,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_plaster_18",
@@ -547,7 +564,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_sidewalk01b_color",
@@ -556,7 +574,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_plaster_18b",
@@ -574,7 +593,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "antenna_card",
@@ -592,7 +612,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_300d_color",
@@ -601,7 +622,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_300d_wheel_color",
@@ -610,7 +632,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_ac_unit_color",
@@ -619,7 +642,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_access_panel_01_color",
@@ -628,7 +652,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_access_panel_02_color",
@@ -637,7 +662,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_arch_01_color",
@@ -646,7 +672,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_arch_01_pattern_color",
@@ -655,7 +682,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_arch_02_color",
@@ -664,7 +692,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_arch_03",
@@ -673,7 +702,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_awning_02",
@@ -682,7 +712,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_awning_fabric_frame_01",
@@ -691,7 +722,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_bicycle_color",
@@ -700,7 +732,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_breeze_blocks_01",
@@ -709,7 +742,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_car_wreck_color",
@@ -718,7 +752,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_car_wreck_interior_color",
@@ -727,7 +762,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_cart_cloth_color",
@@ -736,7 +772,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_cart_color",
@@ -745,7 +782,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_ceiling_light_01",
@@ -754,7 +792,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_cell_tower_color",
@@ -763,7 +802,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_chainlink_fence_001",
@@ -772,7 +812,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_chainlink_fence_cover_001",
@@ -781,7 +822,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_chainlink_fence_wire_001",
@@ -790,7 +832,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_construction_site_01",
@@ -799,7 +842,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_curbs_001",
@@ -808,7 +852,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_curbs_001_painted",
@@ -817,7 +862,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_curbs_001_painted_notint",
@@ -826,7 +872,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_detruis_sacks_02_color",
@@ -835,7 +882,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_detruis_sacks_color",
@@ -844,7 +892,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_46x106_01",
@@ -853,7 +902,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_46x106_02",
@@ -862,7 +912,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_46x106_03_",
@@ -871,7 +922,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_46x106_04",
@@ -880,7 +932,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_46x106_05",
@@ -889,7 +942,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_46x106_06",
@@ -898,7 +952,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_46x106_06b",
@@ -907,7 +962,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_46x106_07",
@@ -916,7 +972,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_80x128_01",
@@ -925,7 +982,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_80x128_02",
@@ -934,7 +992,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_80x128_03",
@@ -943,7 +1002,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_80x128_04",
@@ -952,7 +1012,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_80x128_04_frame",
@@ -961,7 +1022,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_door_arch_01",
@@ -970,7 +1032,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_doorframes_01",
@@ -979,7 +1042,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_doorframes_02",
@@ -988,7 +1052,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_doorframes_03",
@@ -997,7 +1062,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_electric_panel_color",
@@ -1006,7 +1072,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_electrical_powerbox_color",
@@ -1015,7 +1082,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_flatbed_truck_color",
@@ -1024,7 +1092,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_flatbed_truck_wheels_color",
@@ -1033,7 +1102,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_garbage_container_color",
@@ -1042,7 +1112,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_grain_basket_color",
@@ -1051,7 +1122,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_hanging_light_02_off",
@@ -1060,7 +1132,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_hotel_arch001_color",
@@ -1069,7 +1142,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_hr_oil_drum_color",
@@ -1078,7 +1152,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_block_lifter",
@@ -1087,7 +1162,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_ceiling",
@@ -1096,7 +1172,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_ladder",
@@ -1105,7 +1182,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_mudbrick_piles",
@@ -1114,7 +1192,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_rock_wall",
@@ -1123,7 +1202,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_rooftrim_01",
@@ -1132,7 +1212,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_small_rocks",
@@ -1141,7 +1222,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_tarp_04",
@@ -1150,7 +1232,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_window_insets_01",
@@ -1159,7 +1242,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_windows_01",
@@ -1168,7 +1252,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_wood_forms",
@@ -1177,7 +1262,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_wood_planks",
@@ -1186,7 +1272,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_kasbah_wood_platform",
@@ -1195,7 +1282,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_laundry_pole_01",
@@ -1204,7 +1292,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_light_pole_02_color",
@@ -1213,7 +1302,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_light_pole_color",
@@ -1222,7 +1312,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_metal_panels_01",
@@ -1231,7 +1322,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_metal_panels_rusty_01",
@@ -1240,7 +1332,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_metal_panels_rusty_alpha_01",
@@ -1249,7 +1342,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_bombsite_gap",
@@ -1258,7 +1352,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_crumbling_wall",
@@ -1267,7 +1362,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_tower_01_edges",
@@ -1276,7 +1372,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_tower_01_plaster",
@@ -1285,7 +1382,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_tower_02_edges",
@@ -1294,7 +1392,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_tower_02_plaster",
@@ -1303,7 +1402,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_tower_03_edges",
@@ -1312,7 +1412,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_tower_03_plaster",
@@ -1321,7 +1422,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_mudbrick_transition",
@@ -1330,7 +1432,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_ornate_lanterns_01",
@@ -1339,7 +1442,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_patio_chair_color",
@@ -1348,7 +1452,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_pottery_color",
@@ -1357,7 +1462,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_propane_cylinder_01_color",
@@ -1366,7 +1472,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_propane_cylinder_02_color",
@@ -1375,7 +1482,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_r5_color",
@@ -1384,7 +1492,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_restaurant_sign_02_color",
@@ -1393,7 +1502,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_rollupdoor_frame_01",
@@ -1402,7 +1512,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_rooftop_01_color",
@@ -1411,7 +1522,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_rooftop_shingles_color",
@@ -1420,7 +1532,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_satellite_dish_color",
@@ -1429,7 +1542,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shelf_01",
@@ -1438,7 +1552,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_01_painted_color",
@@ -1447,7 +1562,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_01_painted_decals",
@@ -1456,7 +1572,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_01_wood_color",
@@ -1465,7 +1582,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_01_wood_decals",
@@ -1474,7 +1592,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_02_painted_color",
@@ -1483,7 +1602,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_02_painted_decals",
@@ -1492,7 +1612,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_02_wood_color",
@@ -1501,7 +1622,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_02_wood_decals",
@@ -1510,7 +1632,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_tarp_01",
@@ -1519,7 +1642,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shipping_crate_tarp_02",
@@ -1528,7 +1652,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_shop_sign_02_color",
@@ -1537,7 +1662,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_terracotta_02_color",
@@ -1546,7 +1672,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_terracotta_03_color",
@@ -1555,7 +1682,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_terracotta_color",
@@ -1564,7 +1692,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_trap_door_color",
@@ -1573,7 +1702,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_trash_bag_02_color",
@@ -1582,7 +1712,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_trash_bag_color",
@@ -1591,7 +1722,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_trim_decoractive_01",
@@ -1600,7 +1732,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_vehicle_glass_opaque_color",
@@ -1609,7 +1742,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_wall_braces_arch_color",
@@ -1618,7 +1752,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_wall_braces_color",
@@ -1627,7 +1762,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_wall_braces_rope_color",
@@ -1636,7 +1772,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_wall_vents_01",
@@ -1645,7 +1782,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_window_bars_metal_01",
@@ -1654,7 +1792,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_window_bars_metal_01_alpha",
@@ -1663,7 +1802,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_window_bars_metal_01b",
@@ -1672,7 +1812,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_window_bars_metal_01b_alpha",
@@ -1681,7 +1822,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_window_frame_plaster_01",
@@ -1690,7 +1832,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_window_frame_stone_01",
@@ -1699,7 +1842,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_window_frame_wood_01",
@@ -1708,7 +1852,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_windows_01",
@@ -1717,7 +1862,8 @@
         "directSpecular": true,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_windows_low",
@@ -1726,7 +1872,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_wire_attachments_01",
@@ -1735,7 +1882,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_wires_01",
@@ -1744,7 +1892,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_wood_pallet",
@@ -1753,7 +1902,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_blend_asphalt_07",
@@ -1942,7 +2092,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_brick_ground_02",
@@ -1996,7 +2147,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_kasbah_arch003_color",
@@ -2005,7 +2157,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_kasbah_column001_color",
@@ -2014,7 +2167,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_kasbah_merlon001_color",
@@ -2023,7 +2177,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_kasbah_merlon002_color",
@@ -2032,7 +2187,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_kasbah_merlon003_color",
@@ -2041,7 +2197,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_kasbah_niche001_color",
@@ -2050,7 +2207,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_kasbah_stairs001_color",
@@ -2059,7 +2217,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_kasbah_stairs002_color",
@@ -2068,7 +2227,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_mudbrick_wall_plaster_smooth_01",
@@ -2293,7 +2453,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_rooftop_ornament_color",
@@ -2302,7 +2463,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_sand_02",
@@ -2320,7 +2482,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_stairs002_color",
@@ -2329,7 +2492,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_stairs003_color",
@@ -2338,7 +2502,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_stone_ground_01",
@@ -2383,7 +2548,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_wall_trim001_color",
@@ -2392,7 +2558,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "metal_corrugated03b",
@@ -2401,7 +2568,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "power_pole_02_color",
@@ -2410,7 +2578,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "power_pole_03_color",
@@ -2419,7 +2588,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "power_pole_color",
@@ -2428,7 +2598,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "power_pole_insulators_color",
@@ -2437,7 +2608,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "satellite_dish_card",
@@ -2455,7 +2627,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "sign006_color",
@@ -2464,7 +2637,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "sign_bracket001_color",
@@ -2473,7 +2647,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "sign_directional001_color",
@@ -2482,7 +2657,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "sign_streets001_color",
@@ -2491,7 +2667,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "street_lamp_01_color",
@@ -2500,7 +2677,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "street_lamp_02_color",
@@ -2509,7 +2687,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "street_lamp_03_color",
@@ -2518,7 +2697,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "street_lantern_01_color",
@@ -2527,7 +2707,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "street_lantern_03_color",
@@ -2536,7 +2717,8 @@
         "directSpecular": false,
         "indirectSpecular": true,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "wooden_fruit_crate_01_color",
@@ -2545,7 +2727,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "dust_broken_building_color",
@@ -2554,7 +2737,8 @@
         "directSpecular": false,
         "indirectSpecular": false,
         "nativeAO": true
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "hr_dust_wood_ceiling01_color",
@@ -2574,7 +2758,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     },
     {
       "name": "nuke_concrete_barrier_color",
@@ -2622,7 +2807,8 @@
         "indirectSpecular": true,
         "nativeAO": true,
         "metalness": 0
-      }
+      },
+      "constantAO": 1
     }
   ],
   "foliageSource": {

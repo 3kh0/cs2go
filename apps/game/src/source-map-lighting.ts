@@ -2,7 +2,13 @@ import { assetFetch, assetUrl } from "./asset-url";
 import * as T from "three";
 import { fetchGzipped } from "./gltf";
 import { bindSourceMapAttributes } from "./source-map-attributes";
+import { applySourceSunShadows } from "./source-sun";
 import { loadSourceLighting } from "./source-lighting";
+import {
+  loadSourceGpuProbes,
+  applySourceGpuProbes,
+  type SourceGpuProbes,
+} from "./source-gpu-probes";
 import { loadSourceColorCorrection } from "./map-color";
 import { applySourceFog } from "./source-fog";
 import { loadSourceLayers, loadSourceMaterialBundle, applySourceLayers } from "./source-layers";
@@ -38,6 +44,7 @@ interface SourceMaterialLighting {
     localReflections?: boolean;
     environment?: SourceEnvironment;
     nativeAOTexture?: string;
+    constantAO?: 1;
   }[];
 }
 
@@ -55,6 +62,7 @@ interface SourceMapLighting {
   barns?: T.Box3[];
   surfaceLookup?: T.DataTexture;
   reflections?: SourceReflections;
+  gpuProbes?: SourceGpuProbes;
 }
 
 async function loadNativeAtlas(name: string, format: T.CompressedPixelFormat, bytes: number) {
@@ -89,6 +97,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     environmentBundle,
     occlusionBundle,
     generic,
+    gpuProbes,
   ] = await Promise.all([
     native
       ? loadNativeAtlas("irradiance", T.RGB_BPTC_UNSIGNED_Format, 16777216)
@@ -104,11 +113,12 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     loadSourceLayers(renderer),
     loadSourceBarns(),
     loadSourceSurfaceLookup(),
-    loadSourceReflections(renderer),
+    loadSourceReflections(renderer, true),
     loadSourceMaterialBundle(renderer, "/models/maps/lighting/environment/"),
     loadSourceMaterialBundle(renderer, "/models/maps/lighting/occlusion/"),
     loadSourceMaterialBundle<SourceGenericTextures>(renderer, "/models/maps/lighting/generic/"),
-    loadSourceLighting(),
+    loadSourceGpuProbes(renderer),
+    loadSourceGpuProbes(renderer).then((probes) => loadSourceLighting(!!probes)),
     loadSourceColorCorrection(),
   ]);
   for (const texture of [irradiance, shadows]) {
@@ -144,6 +154,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     environmentTextures: environmentBundle.textures,
     occlusionTextures: occlusionBundle.textures,
     generic,
+    gpuProbes,
   };
 }
 
@@ -164,6 +175,7 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
     environmentTextures,
     occlusionTextures,
     generic,
+    gpuProbes: availableGpuProbes,
   } = data;
   const barnMasks = new Map<T.Material, number>();
   const reflectionCandidates = new Map<T.Material, Set<number>>();
@@ -189,21 +201,44 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
       }
     });
   }
+  const materialPaths = new Map<T.Material, { probe: boolean; lightmap: boolean }>();
+  root.traverse((object) => {
+    if (!(object instanceof T.Mesh)) return;
+    if (!object.geometry.hasAttribute("sourceUv")) bindSourceMapAttributes(object.geometry);
+    const uv = object.geometry.getAttribute("sourceUv");
+    let probe = false,
+      lightmap = false;
+    for (let i = 0; i < uv.count && !(probe && lightmap); i++) {
+      if (uv.getX(i) < 0.5 / 65535) probe = true;
+      else lightmap = true;
+    }
+    for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+      const previous = materialPaths.get(material);
+      materialPaths.set(material, {
+        probe: probe || !!previous?.probe,
+        lightmap: lightmap || !!previous?.lightmap,
+      });
+    }
+  });
   const patched = new Set<T.Material>();
   root.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
-    bindSourceMapAttributes(object.geometry);
     // Source multiplies baked visibility by the cached real-time sun shadow.
     object.receiveShadow = true;
     for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
       if (patched.has(material)) continue;
       patched.add(material);
+      const lightingPath = materialPaths.get(material)!;
+      const gpuProbes = lightingPath.probe ? availableGpuProbes : undefined;
       const nativeMaterial = materialLighting.materials.find(
         (entry) => entry.name === material.name,
       );
       if (material instanceof T.MeshStandardMaterial) {
         if (nativeMaterial?.surface?.metalness !== undefined)
           material.metalness = nativeMaterial.surface.metalness;
+        if (nativeMaterial?.surface?.metalness !== undefined || material.metalness === 0)
+          material.metalnessMap = null;
+        if (nativeMaterial?.constantAO === 1) material.aoMap = null;
         if (nativeMaterial?.selfIllumination)
           applySourceSelfIllumination(material, nativeMaterial.selfIllumination);
         if (nativeMaterial?.foliage?.alphaCoverage)
@@ -360,10 +395,16 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
           `uniform sampler2D sourceDirectional; uniform float sourceNative; uniform sampler2D sourceIrradiance; uniform sampler2D sourceShadows; varying vec3 vSourceUv; varying vec4 vSourceProbe;\n` +
           shader.fragmentShader;
         let direct =
-          "float sourceCoverage = vSourceUv.z;\nvec4 sourceBakedShadows = texture2D(sourceShadows, vSourceUv.xy);\n" +
+          `float sourceCoverage = ${lightingPath.probe && lightingPath.lightmap ? "vSourceUv.z" : lightingPath.probe ? "0.0" : "1.0"};\nvec4 sourceBakedShadows = ${lightingPath.lightmap ? "texture2D(sourceShadows, vSourceUv.xy)" : "vec4(0.0)"};\n` +
+          (gpuProbes
+            ? `SourceGpuProbe sourceFragmentProbe;
+sourceFragmentProbe.irradiance=vec3(0.0);sourceFragmentProbe.occlusion=vec4(0.0);
+if(sourceCoverage<0.5) sourceFragmentProbe=sourceGpuSample(cameraPosition+transpose(mat3(viewMatrix))*(-vViewPosition), inverseTransformDirection(normal,viewMatrix));
+`
+            : "") +
           T.ShaderChunk.lights_fragment_begin.replace(
             "getDirectionalLightInfo( directionalLight, directLight );",
-            "getDirectionalLightInfo( directionalLight, directLight );\ndirectLight.color *= mix(vSourceProbe.a, 1.0-sourceBakedShadows.r, sourceCoverage);",
+            `getDirectionalLightInfo( directionalLight, directLight );\ndirectLight.color *= mix(${gpuProbes ? "1.0-sourceFragmentProbe.occlusion.r" : "vSourceProbe.a"}, 1.0-sourceBakedShadows.r, sourceCoverage);`,
           );
         if (foliage?.transmission)
           direct = direct.replaceAll(
@@ -377,7 +418,9 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
         );
         applySourceBarns(shader, {
           mask: barnMask,
-          shadows: "mix(vSourceUv.xy, sourceBakedShadows.gb, sourceCoverage)",
+          shadows: gpuProbes
+            ? "mix(sourceFragmentProbe.occlusion.gb, sourceBakedShadows.gb, sourceCoverage)"
+            : "mix(vSourceUv.xy, sourceBakedShadows.gb, sourceCoverage)",
           transmission: foliage?.transmission ? "sourceTransmissionColor" : undefined,
         });
         shader.fragmentShader = shader.fragmentShader.replace(
@@ -409,22 +452,36 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
             }
           }
           vec3 sourceSurfaceProbe = ${foliage && !foliage.dontFlipBackfaceNormals ? "gl_FrontFacing ? vSourceProbe.rgb : vSourceBackProbe.rgb" : "vSourceProbe.rgb"};
-          irradiance = mix(sourceSurfaceProbe * sourceSurfaceProbe * 16.0, sourceDiffuse, sourceCoverage) * PI;
+          irradiance = mix(${gpuProbes ? "sourceFragmentProbe.irradiance" : "sourceSurfaceProbe * sourceSurfaceProbe * 16.0"}, sourceDiffuse, sourceCoverage) * PI;
           ${
             foliage?.transmission
               ? `vec3 sourceOppositeProbe = ${foliage.dontFlipBackfaceNormals ? "vSourceBackProbe.rgb" : "gl_FrontFacing ? vSourceBackProbe.rgb : vSourceProbe.rgb"};
-          sourceTransmittedLight += sourceOppositeProbe * sourceOppositeProbe * 16.0 * sourceTransmissionColor * (1.0 - sourceCoverage);`
+          ${gpuProbes ? "if(sourceCoverage<0.5) sourceTransmittedLight += sourceGpuSample(cameraPosition+transpose(mat3(viewMatrix))*(-vViewPosition), -inverseTransformDirection(normal,viewMatrix)).irradiance * sourceTransmissionColor;" : "sourceTransmittedLight += sourceOppositeProbe * sourceOppositeProbe * 16.0 * sourceTransmissionColor * (1.0 - sourceCoverage);"}`
               : ""
           }
           iblIrradiance = vec3(0.0);
         `,
         );
+        if (!lightingPath.lightmap) {
+          const start = shader.fragmentShader.indexOf(
+            "vec4 sourceLight = texture2D(sourceIrradiance,",
+          );
+          const end = shader.fragmentShader.indexOf("vec3 sourceSurfaceProbe =", start);
+          if (start < 0 || end < 0) throw new Error("Native probe shader lighting block missing");
+          shader.fragmentShader =
+            shader.fragmentShader.slice(0, start) +
+            "vec3 sourceDiffuse=vec3(0.0);\n" +
+            shader.fragmentShader.slice(end);
+        }
         if (reflections && environmentCandidates)
           applySourceReflections(shader, reflections, environmentCandidates);
+        if (gpuProbes) applySourceGpuProbes(shader, gpuProbes);
+        applySourceSunShadows(shader);
       };
       material.customProgramCacheKey = () =>
         priorKey +
-        "-native-source-lighting-v11" +
+        "-native-source-lighting-v12" +
+        (gpuProbes ? ":fragment-probes" : "") +
         `:barns-${barnMask}` +
         (surface
           ? `:surface-${surface.directSpecular}-${surface.indirectSpecular}-${!!surface.nativeAO}`

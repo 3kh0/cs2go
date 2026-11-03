@@ -27,6 +27,7 @@ interface Manifest {
 }
 export interface SourceReflections {
   textures: T.CompressedArrayTexture[];
+  combined?: boolean;
   volumes: Manifest["volumes"];
   uniforms: {
     origin: T.Vector3;
@@ -40,6 +41,7 @@ export interface SourceReflections {
 const directory = "/models/maps/lighting/reflections/";
 export async function loadSourceReflections(
   renderer: T.WebGLRenderer,
+  preferCombined = false,
 ): Promise<SourceReflections | undefined> {
   if (
     !renderer.extensions.has("EXT_texture_compression_bptc") ||
@@ -56,7 +58,7 @@ export async function loadSourceReflections(
     manifest.lastLod !== 5
   )
     throw new Error("Invalid native reflection budget/layout");
-  const textures = await Promise.all(
+  let textures = await Promise.all(
     manifest.arrays.map(async (entry) => {
       const bytes = await fetchGzipped(directory + entry.file);
       if (bytes.byteLength !== entry.gpuBytes || entry.layers > 256)
@@ -83,8 +85,27 @@ export async function loadSourceReflections(
       return texture;
     }),
   );
+  const gl = renderer.getContext() as WebGL2RenderingContext;
+  const combined = preferCombined && gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) >= 258;
+  if (combined) {
+    const mips = textures[0].mipmaps.map((mip, index) => {
+      const first = mip.data as Uint8Array,
+        last = textures[1].mipmaps[index].data as Uint8Array;
+      const data = new Uint8Array(first.byteLength + last.byteLength);
+      data.set(first);
+      data.set(last, first.byteLength);
+      return { data, width: mip.width, height: mip.height };
+    });
+    const texture = new T.CompressedArrayTexture(mips, 256, 256, 258, T.RGB_BPTC_UNSIGNED_Format);
+    texture.colorSpace = T.NoColorSpace;
+    texture.minFilter = T.LinearMipmapLinearFilter;
+    texture.magFilter = T.LinearFilter;
+    texture.needsUpdate = true;
+    textures = [texture];
+  }
   return {
     textures,
+    combined,
     volumes: manifest.volumes,
     uniforms: manifest.volumes.map((v) => ({
       origin: new T.Vector3().fromArray(v.origin),
@@ -121,7 +142,9 @@ export function sourceReflectionCandidates(bounds: T.Box3, data: SourceReflectio
 // hardware replacements. This does not promise bit-identical cube corners.
 export const sourceCubeSampling = `
 uniform highp sampler2DArray sourceReflectionCubes0;
+#ifndef SOURCE_REFLECTION_SINGLE_ARRAY
 uniform highp sampler2DArray sourceReflectionCubes1;
+#endif
 vec3 sourceCubeAddress(vec3 d) {
   vec3 a=abs(d); vec2 uv; float face;
   if(a.x>=a.y && a.x>=a.z) {face=d.x>0.0?0.0:1.0;uv=vec2(d.x>0.0?-d.z:d.z,-d.y)/a.x;}
@@ -139,8 +162,12 @@ vec3 sourceCubeDirection(vec2 uv,int face) {
   return vec3(-p.x,-p.y,-1.0);
 }
 vec3 sourceCubeFetch(ivec2 xy,int face,int cube,int level) {
+  #ifdef SOURCE_REFLECTION_SINGLE_ARRAY
+  return texelFetch(sourceReflectionCubes0,ivec3(xy,cube*6+face),level).rgb;
+  #else
   return cube<42 ? texelFetch(sourceReflectionCubes0,ivec3(xy,cube*6+face),level).rgb
     : texelFetch(sourceReflectionCubes1,ivec3(xy,face),level).rgb;
+  #endif
 }
 vec3 sourceCubeCrossTap(ivec2 pixel,int face,int cube,int level,int size) {
   vec3 a=sourceCubeAddress(sourceCubeDirection((vec2(pixel)+0.5)/float(size),face));
@@ -166,8 +193,12 @@ vec3 sourceCubeSample(vec3 direction,int cube,float lod) {
   vec3 a=sourceCubeAddress(direction);
   int upper=int(ceil(lod));float inset=0.5/float(256>>upper);
   if(all(greaterThanEqual(a.xy,vec2(inset))) && all(lessThanEqual(a.xy,vec2(1.0-inset)))) {
+    #ifdef SOURCE_REFLECTION_SINGLE_ARRAY
+    return textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb;
+    #else
     return cube<42 ? textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb
       : textureLod(sourceReflectionCubes1,vec3(a.xy,a.z),lod).rgb;
+    #endif
   }
   return mix(sourceCubeLevel(a,cube,int(floor(lod))),sourceCubeLevel(a,cube,upper),fract(lod));
 }
@@ -180,13 +211,14 @@ export function applySourceReflections(
   candidates: number[],
 ) {
   shader.uniforms.sourceReflectionCubes0 = { value: data.textures[0] };
-  shader.uniforms.sourceReflectionCubes1 = { value: data.textures[1] };
+  shader.uniforms.sourceReflectionCubes1 = { value: data.textures[1] ?? data.textures[0] };
   shader.uniforms.sourceEnvironments = { value: data.uniforms };
   const indices = new Int32Array(43);
   indices.set(candidates);
   shader.uniforms.sourceEnvironmentCandidates = { value: indices };
   shader.uniforms.sourceEnvironmentCount = { value: candidates.length };
   shader.fragmentShader =
+    (data.combined ? "#define SOURCE_REFLECTION_SINGLE_ARRAY\n" : "") +
     sourceCubeSampling +
     `
 struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEdge;vec4 sh;};

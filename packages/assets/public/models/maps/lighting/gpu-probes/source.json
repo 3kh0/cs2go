@@ -1,0 +1,31 @@
+{
+  "revision": "5564866c7f2a6b2ee54a9195b7963147e24da94e",
+  "arrays": [
+    {
+      "file": "irradiance.bin.gz",
+      "format": "BC6H",
+      "width": 192,
+      "height": 176,
+      "layers": 720,
+      "gpuBytes": 24330240,
+      "gpuSha256": "60fca255d396774fc6dcbf2e6006753d8d32d7c0e82b78be1e4e02b31c6efde8",
+      "downloadBytes": 14075480
+    },
+    {
+      "file": "shadows.bin.gz",
+      "format": "BC7",
+      "width": 192,
+      "height": 176,
+      "layers": 120,
+      "gpuBytes": 4055040,
+      "gpuSha256": "06e810382e9fe653e863505a877d739afb892c5ea6d6e14b12c110a1c44a1127",
+      "downloadBytes": 480273
+    }
+  ],
+  "sourceHashes": {
+    "env_light_probe_volume_atlas.vtex_c": "a063075e48e39e55cd2c7903a9e6e9bade331f0797e4eab84e0a2a4d534058f0",
+    "env_light_probe_volume_atlas_dlshd.vtex_c": "a99bec5085e9785547c5939fd70d884604279afc6b5c77444b9449ab4120f8a5"
+  },
+  "interpretation": "Untouched native z-major BC slices; hardware XY filtering plus manual adjacent-layer Z filtering. No crop, resampling, gamma, irradiance encoding or mask-channel loss.",
+  "gpuBytes": 28385280
+}

@@ -1962,12 +1962,6 @@ export class Game {
       override ??
       (this.teamMode && index >= this.teamSize ? this.team : this.team === "ct" ? "t" : "ct");
     const rig = createSoldier(index, team, appearance, !this.network);
-    // Dust II caches static sun shadows; moving agents must not become frozen
-    // silhouettes when graphics settings rebuild that cache mid-round.
-    if (this.teamMode)
-      rig.group.traverse((object) => {
-        if (object instanceof T.Mesh) object.castShadow = false;
-      });
     this.scene.add(rig.group);
     return {
       name: names[index],

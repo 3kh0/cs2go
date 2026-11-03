@@ -2,6 +2,9 @@ import * as T from "three";
 import { applySourceColorCorrection } from "./map-color";
 import { applySourceFog } from "./source-fog";
 import { applySourceBarns } from "./source-barn";
+import { sourceGpuProbes, applySourceGpuProbes } from "./source-gpu-probes";
+import { sampleSourceProbe } from "./source-lighting";
+import { sourceSunCaster, applySourceSunShadows } from "./source-sun";
 
 type Position = { x: number; y: number; z: number };
 export type ProbeSampler = (position: Position, normal: Position, out: T.Color) => boolean;
@@ -16,6 +19,8 @@ const axes = [
 type State = {
   enabled: { value: number };
   worldEnabled: { value: number };
+  gpuEnabled: { value: number };
+  gpuAvailable: boolean;
   cube: { value: T.Color[] };
   target: T.Color[];
   rotation: { value: T.Matrix3 };
@@ -74,6 +79,8 @@ function makeState(): State {
   return {
     enabled: { value: 0 },
     worldEnabled: { value: 0 },
+    gpuEnabled: { value: 0 },
+    gpuAvailable: false,
     cube: { value: axes.map(() => new T.Color()) },
     target: axes.map(() => new T.Color()),
     rotation: { value: new T.Matrix3() },
@@ -107,6 +114,7 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
     actors.set(root, state);
   }
   const lighting = state;
+  sourceSunCaster(root, true);
   const patch = (source: T.Material) => {
     if (!(source instanceof T.MeshStandardMaterial) || lighting.patched.has(source)) return source;
     const prior = patches.get(source);
@@ -130,8 +138,11 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
     patches.set(material, { lighting, compile: previous, key });
     material.onBeforeCompile = function (shader, renderer) {
       previous.call(material, shader, renderer);
+      const gpuProbes = sourceGpuProbes(renderer);
+      lighting.gpuAvailable = !!gpuProbes;
       Object.assign(shader.uniforms, {
         sourceActorProbeEnabled: lighting.enabled,
+        sourceActorGpuEnabled: lighting.gpuEnabled,
         sourceActorWorldEnabled: lighting.worldEnabled,
         sourceActorProbeCube: lighting.cube,
         sourceActorProbeRotation: lighting.rotation,
@@ -143,6 +154,7 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
       shader.fragmentShader =
         `
         uniform float sourceActorProbeEnabled;
+        uniform float sourceActorGpuEnabled;
         uniform float sourceActorWorldEnabled;
         uniform vec3 sourceActorProbeCube[6];
         uniform mat3 sourceActorProbeRotation;
@@ -174,32 +186,46 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
       // use their own G/B masks and world/viewmodel coordinate frames below.
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <lights_fragment_begin>",
-        T.ShaderChunk.lights_fragment_begin.replace(
-          "getDirectionalLightInfo( directionalLight, directLight );",
-          "getDirectionalLightInfo( directionalLight, directLight );\n directLight.color *= mix(1.0, sourceActorProbeSun, sourceActorProbeEnabled);",
-        ),
+        (gpuProbes
+          ? `SourceGpuProbe sourceActorFragmentProbe;
+sourceActorFragmentProbe.irradiance=vec3(0.0);sourceActorFragmentProbe.occlusion=vec4(0.0);
+if(sourceActorGpuEnabled>0.5){
+vec3 sourceActorRelative=transpose(mat3(viewMatrix))*(-vViewPosition);
+vec3 sourceActorWorld=mix(cameraPosition+sourceActorRelative,sourceActorProbeOrigin+sourceActorProbeRotation*sourceActorRelative,sourceActorLocalFrame);
+sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotation*inverseTransformDirection(normal,viewMatrix));
+}
+`
+          : "") +
+          T.ShaderChunk.lights_fragment_begin.replace(
+            "getDirectionalLightInfo( directionalLight, directLight );",
+            `getDirectionalLightInfo( directionalLight, directLight );\n directLight.color *= mix(1.0, ${gpuProbes ? "mix(sourceActorProbeSun,1.0-sourceActorFragmentProbe.occlusion.r,sourceActorGpuEnabled)" : "sourceActorProbeSun"}, sourceActorProbeEnabled);`,
+          ),
       );
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <lights_fragment_maps>",
         `#include <lights_fragment_maps>
         #if defined(RE_IndirectDiffuse)
           if (sourceActorProbeEnabled > 0.5) {
-            irradiance = sourceActorIrradiance(geometryNormal);
+            irradiance = ${gpuProbes ? "mix(sourceActorIrradiance(geometryNormal),sourceActorFragmentProbe.irradiance*PI,sourceActorGpuEnabled)" : "sourceActorIrradiance(geometryNormal)"};
             iblIrradiance = vec3(0.0);
           }
         #endif`,
       );
       applySourceBarns(shader, {
         enabled: "sourceActorWorldEnabled",
-        shadows: "sourceActorLocalShadows",
+        shadows: gpuProbes
+          ? "mix(sourceActorLocalShadows,sourceActorFragmentProbe.occlusion.gb,sourceActorGpuEnabled)"
+          : "sourceActorLocalShadows",
         worldPosition:
           "mix(cameraPosition + sourceBarnWorldRelative, sourceActorProbeOrigin + sourceActorProbeRotation*sourceBarnWorldRelative, sourceActorLocalFrame)",
         worldToLighting: "transpose(sourceActorProbeRotation)",
       });
       applySourceFog(shader, "sourceActorWorldEnabled");
       applySourceColorCorrection(shader, "sourceActorWorldEnabled");
+      if (gpuProbes) applySourceGpuProbes(shader, gpuProbes);
+      applySourceSunShadows(shader);
     };
-    material.customProgramCacheKey = () => `${key}:source-actor-probe-v4`;
+    material.customProgramCacheKey = () => `${key}:source-actor-probe-v5`;
     material.needsUpdate = true;
     return material;
   };
@@ -223,6 +249,7 @@ export function updateActorLighting(
   const state = actors.get(root);
   if (!state) return;
   if (!sample) {
+    state.gpuEnabled.value = 0;
     state.enabled.value = 0;
     state.worldEnabled.value = 0;
     state.ready = false;
@@ -233,6 +260,12 @@ export function updateActorLighting(
   state.rotation.value.copy(rotation ?? identity);
   state.localFrame.value = rotation ? 1 : 0;
   state.origin.value.set(position.x, position.y, position.z);
+  state.gpuEnabled.value = state.gpuAvailable && sample === sampleSourceProbe ? 1 : 0;
+  if (state.gpuEnabled.value) {
+    state.enabled.value = 1;
+    state.ready = true;
+    return;
+  }
   state.timer -= dt;
   const teleported = state.position.distanceToSquared(position) > 16;
   if (state.timer <= 0 || teleported) {

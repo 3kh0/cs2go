@@ -3,6 +3,7 @@ import { WorldBall } from "./world-ball";
 import { applySourceMapLighting, loadSourceMapLighting } from "./source-map-lighting";
 import { loadBombDamage } from "./bomb-damage";
 import { loadSourceSky } from "./source-sky";
+import { addSourceDynamicSun } from "./source-sun";
 import * as T from "three";
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 import { loadGzipped } from "./gltf";
@@ -133,6 +134,7 @@ export async function loadDust2(scene: T.Scene, renderer: T.WebGLRenderer) {
     });
     sun.shadow.camera.updateProjectionMatrix();
   }
+  addSourceDynamicSun(root, sun, asset.scene);
   root.visible = false;
   scene.add(root);
   return {

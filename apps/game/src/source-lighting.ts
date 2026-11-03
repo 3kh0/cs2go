@@ -35,12 +35,31 @@ let manifest: Manifest | undefined;
 let values: Uint16Array;
 let shadows: Uint8Array;
 let pending: Promise<void> | undefined;
-export function loadSourceLighting() {
+let metadataPending: Promise<Manifest> | undefined;
+function loadMetadata() {
+  metadataPending ??= assetFetch("/models/maps/lighting/probes.json").then(async (r) => {
+    if (!r.ok) throw new Error("Native lighting metadata unavailable");
+    const data = (await r.json()) as Manifest;
+    if (
+      data.sampling !== "native-cells-v1" ||
+      data.volumes.length !== 43 ||
+      data.skySH?.length !== 3 ||
+      data.volumes.some((v) => v.boundsExtend !== 0.1 || v.normalizedScale?.length !== 3)
+    )
+      throw new Error("Native LPV selection metadata invalid");
+    manifest = data;
+    blendedWeights = new Float32Array(data.volumes.length);
+    return data;
+  });
+  return metadataPending;
+}
+export function sourceProbeMetadata() {
+  return manifest!;
+}
+export function loadSourceLighting(metadataOnly = false) {
+  if (metadataOnly) return loadMetadata().then(() => {});
   pending ??= Promise.all([
-    assetFetch("/models/maps/lighting/probes.json").then(async (r) => {
-      if (!r.ok) throw new Error("Native lighting metadata unavailable");
-      return (await r.json()) as Manifest;
-    }),
+    loadMetadata(),
     fetchGzipped("/models/maps/lighting/probes.bin.gz"),
     fetchGzipped("/models/maps/lighting/probe-shadows.bin.gz"),
   ]).then(([data, rgb, mask]) => {
@@ -204,7 +223,7 @@ function blendVolumes(p: Point) {
   }
 }
 export function sampleSourceProbe(p: Point, normal: Point, out: T.Color) {
-  if (!manifest) return false;
+  if (!manifest || !values) return false;
   blendVolumes(p);
   const nx = normal.x,
     ny = -normal.z,
@@ -246,6 +265,7 @@ export function sampleSourceProbe(p: Point, normal: Point, out: T.Color) {
   return true;
 }
 export function sampleSourceProbeSun(p: Point) {
+  if (!shadows) return 1;
   blendVolumes(p);
   let visibility = 1 - blendedCoverage;
   for (let i = 0; i < blendedVolumes.length; i++)
@@ -253,6 +273,10 @@ export function sampleSourceProbeSun(p: Point) {
   return visibility;
 }
 export function sampleSourceProbeLocalShadows(p: Point, out: T.Vector2) {
+  if (!shadows) {
+    out.set(0, 0);
+    return;
+  }
   blendVolumes(p);
   out.set(0, 0);
   for (let i = 0; i < blendedVolumes.length; i++) {
