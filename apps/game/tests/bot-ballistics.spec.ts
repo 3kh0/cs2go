@@ -44,13 +44,30 @@ test("bot rounds penetrate thin cover and flesh, stop at thick cover, and bound 
     shooter.speed = shooter.reaction = shooter.reloadTime = 0;
     shooter.aim.set(-17, 1.2, 5);
     shooter.facing = Math.PI;
-    const cover = game.world.solids[0].clone();
+    // The native world's first solid is a collision proxy, not a drawable box.
+    // Use real cover geometry so MapCollision can build its triangle BVH.
+    const three = "/tests/three-fixture.ts";
+    const T = (await import(three)) as typeof import("three");
+    const cover = new T.Mesh(new T.BoxGeometry(1, 1, 1), new T.MeshBasicMaterial());
     cover.position.set(-17, 1.5, 11);
     cover.scale.set(3, 3, 0.12);
     cover.userData.bulletMaterial = "wood";
     cover.updateMatrixWorld(true);
-    game.world.solids.push(cover);
+    // Isolate this synthetic firing lane from the surrounding native Dust II
+    // walls; exercise ordinary meshes first and the triangle BVH below.
+    const originalSolids = game.world.solids;
+    const originalCollision = game.world.collision;
+    const fixtureWorld: { collision?: typeof originalCollision } = game.world;
+    fixtureWorld.collision = undefined;
+    game.world.solids = [cover];
+    const recoilModule = "/src/recoil.ts",
+      accuracyModule = "/src/accuracy.ts";
+    const { createAimPunch, createWeaponRecoil } = await import(recoilModule);
+    const { createWeaponAccuracy } = await import(accuracyModule);
     const restoreTargets = () => {
+      shooter.aimPunch = createAimPunch();
+      shooter.weaponRecoil = createWeaponRecoil();
+      shooter.weaponAccuracy = createWeaponAccuracy();
       first.health = second.health = 200;
       first.team = second.team = "ct";
       first.group.position.set(-17, 0, 8);
@@ -96,12 +113,12 @@ test("bot rounds penetrate thin cover and flesh, stop at thick cover, and bound 
     cover.scale.z = 0.12;
     cover.userData.bulletMaterial = "wood";
     cover.updateMatrixWorld(true);
-    const oldCollision = game.world.collision;
+    const oldCollision = fixtureWorld.collision;
     game.world.collision = new MapCollision([cover]);
     restoreTargets();
     game.botCombat(shooter, target, 1 / 16);
     const nativeThin = [first.health, second.health];
-    game.world.collision = oldCollision;
+    fixtureWorld.collision = oldCollision;
     // LOS must exist before suppression is available. Team/hearing reports
     // alone cannot start it, even if an enemy happens to be behind thin wood.
     game.mode = "deathmatch";
@@ -140,6 +157,8 @@ test("bot rounds penetrate thin cover and flesh, stop at thick cover, and bound 
     const suppressed = 30 - shooter.ammo;
     const expiredAmmo = shooter.ammo;
     for (let step = 0; step < 16; step++) game.botCombat(shooter, undefined, 1 / 16);
+    game.world.solids = originalSolids;
+    game.world.collision = originalCollision;
     return {
       thin,
       thick,

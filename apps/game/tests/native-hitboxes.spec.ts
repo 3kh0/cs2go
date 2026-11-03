@@ -23,7 +23,7 @@ test("native Ground Rebel capsules follow standing and crouched head bones", asy
     const hitboxModule = "/src/soldier-hitboxes.ts";
     const soldierModule = "/src/soldier.ts";
     const dataModule = "/src/data/agent-hitboxes.json";
-    const threeModule = "/node_modules/three/build/three.module.js";
+    const threeModule = "/tests/three-fixture.ts";
     const { nativeSoldierHit } = (await import(
       hitboxModule
     )) as typeof import("../src/soldier-hitboxes");

@@ -1,3 +1,5 @@
+import { agentBounds, prepareSoldierHitboxes } from "./soldier-hitboxes";
+export { agentBounds } from "./soldier-hitboxes";
 import { registerActorLighting, disposeActorLighting } from "./actor-lighting";
 import { loadWorldGrips, worldGrip, worldGripClips } from "./world-grips";
 import { peekSelectedAgent, defaultAgent, acquireAgentAppearance } from "./agent-roster";
@@ -276,6 +278,7 @@ export function createSoldier(
   poseWeapon(soldier);
   prepareNativeActions(soldier);
   updateGloveModel(soldier.group, team, soldier.gloveChoice, true, soldier.agentId);
+  prepareSoldierHitboxes(soldier);
   return soldier;
 }
 function prepareNativeActions(soldier: Soldier) {
@@ -325,7 +328,6 @@ function prepareNativeActions(soldier: Soldier) {
       /* Existing locomotion remains responsive; a later switch retries. */
     });
 }
-export const agentBounds = new T.Sphere(new T.Vector3(0, 0.9, 0), 1.5);
 const weaponMatrix = new T.Matrix4();
 const up = new T.Vector3(0, 1, 0);
 const pistolGripOffset = new T.Vector3(0.018, -0.065, 0.085);

@@ -20,7 +20,7 @@ import { HomeScene } from "./home-scene";
 import { BuyPreview } from "./buy-preview";
 import { loadBuyPoses } from "./buy-poses";
 import { loadoutCategory } from "./loadouts";
-import { nativeSoldierHit } from "./soldier-hitboxes";
+import { soldierHit } from "./soldier-hitboxes";
 import {
   actorCarry,
   actorLanding,
@@ -153,7 +153,6 @@ import {
   resetSoldier,
   setSoldierWeapon,
   disposeSoldier,
-  soldierHeadHit,
   soldierHitHeight,
   agentBounds,
 } from "./soldier";
@@ -1836,7 +1835,7 @@ export class Game {
       new T.Vector3(0, 0, -1).applyQuaternion(this.camera.quaternion),
     );
     this.ray.far = knifeRange(stab);
-    let impact = this.ray.intersectObjects(this.shotTargets(), true)[0];
+    let impact = this.meleeTrace();
     if (!impact) {
       // Short fan approximates the forgiving melee hull while each candidate
       // remains cover-occluded. A central wall hit never searches around it.
@@ -1848,10 +1847,10 @@ export class Game {
         [0, 0.12],
       ]) {
         this.ray.ray.direction.set(x, y, -1).normalize().applyQuaternion(this.camera.quaternion);
-        const candidate = this.ray.intersectObjects(this.shotTargets(), true)[0];
+        const candidate = this.meleeTrace();
         if (
           candidate &&
-          typeof candidate.object.userData.bot === "number" &&
+          candidate.actor !== undefined &&
           (!impact || candidate.distance < impact.distance)
         )
           impact = candidate;
@@ -1860,8 +1859,8 @@ export class Game {
     }
     if (!impact) return;
     this.knifeContact = true;
-    const index = impact.object.userData.bot;
-    if (typeof index !== "number") {
+    const index = impact.actor;
+    if (index === undefined) {
       this.soundscape.play("knife-wall");
       return;
     }
@@ -2169,28 +2168,29 @@ export class Game {
     this.decals.count = Math.max(this.decals.count, slot + 1);
     this.decals.visible = true;
   }
-  // Rays test the world plus living enemies whose agent sphere the ray reaches;
-  // only those rigs need fresh world matrices for skinned picking.
-  shotTargets(skipNativeHitboxes = false) {
-    const targets = this.targets,
-      ray = this.ray.ray;
+  // Cover remains authoritative; animated actors use separate small hitboxes.
+  coverTargets() {
+    const targets = this.targets;
     targets.length = 0;
     for (const solid of this.world.solids) {
       solid.updateWorldMatrix(true, false);
       targets.push(solid);
     }
-    for (const b of this.bots) {
-      if (b.health <= 0 || (skipNativeHitboxes && b.team === "t")) continue;
-      botSphere.copy(agentBounds).center.add(b.group.position);
-      if (
-        !ray.intersectsSphere(botSphere) ||
-        ray.origin.distanceTo(botSphere.center) > this.ray.far + botSphere.radius
-      )
-        continue;
-      b.group.updateMatrixWorld(true);
-      targets.push(...b.group.children);
-    }
     return targets;
+  }
+  meleeTrace() {
+    const cover = this.ray.intersectObjects(this.coverTargets(), true)[0];
+    let nearest: { distance: number; actor?: number } | undefined = cover
+      ? { distance: cover.distance }
+      : undefined;
+    this.bots.forEach((bot, index) => {
+      if (bot.health <= 0) return;
+      const hit = soldierHit(bot.rig, this.ray.ray, nearest?.distance ?? this.ray.far);
+      if (!hit) return;
+      const distance = hit.point.distanceTo(this.ray.ray.origin);
+      if (!nearest || distance < nearest.distance) nearest = { distance, actor: index };
+    });
+    return nearest;
   }
   bulletCover(impact: T.Intersection, ray: T.Ray): BulletSurface<BulletImpactData> {
     // MapCollision already reports world normals; ordinary mesh picking uses
@@ -2338,25 +2338,14 @@ export class Game {
         .applyQuaternion(this.camera.quaternion);
       this.ray.set(this.camera.position, direction);
       this.ray.far = stats.range / SOURCE_UNITS_PER_METER;
-      const impacts = this.ray.intersectObjects(this.shotTargets(true), true);
+      const impacts = this.ray.intersectObjects(this.coverTargets(), true);
       const surfaces: BulletSurface<BulletImpactData>[] = [];
       for (const impact of impacts) {
-        const index = impact.object.userData.bot;
-        if (typeof index === "number") {
-          if (this.bots[index].health <= 0) continue;
-          surfaces.push(
-            this.bulletBody(
-              index,
-              impact.point,
-              soldierHeadHit(this.bots[index].rig, impact.point),
-              this.ray.ray,
-            ),
-          );
-        } else surfaces.push(this.bulletCover(impact, this.ray.ray));
+        surfaces.push(this.bulletCover(impact, this.ray.ray));
       }
       this.bots.forEach((bot, index) => {
-        if (bot.health <= 0 || bot.team !== "t") return;
-        const hit = nativeSoldierHit(bot.rig, this.ray.ray, this.ray.far);
+        if (bot.health <= 0) return;
+        const hit = soldierHit(bot.rig, this.ray.ray, this.ray.far);
         if (hit)
           surfaces.push(this.bulletBody(index, hit.point, hit.head, this.ray.ray, hit.height));
       });
@@ -4155,10 +4144,10 @@ export class Game {
         : caster.intersectObjects(this.world.solids, false);
       const surfaces = cover.map((impact) => this.bulletCover(impact, ray));
       const intersect = (id: number | "player", feet: T.Vector3, crouch = false) => {
-        const native = typeof id === "number" && this.bots[id].team === "t";
-        const hit = native
-          ? nativeSoldierHit(this.bots[id as number].rig, ray, caster.far)
-          : botBodyHit(ray, feet, crouch);
+        const hit =
+          typeof id === "number"
+            ? soldierHit(this.bots[id].rig, ray, caster.far)
+            : botBodyHit(ray, feet, crouch);
         if (!hit) return;
         const surface = this.bulletBody(
           id,
