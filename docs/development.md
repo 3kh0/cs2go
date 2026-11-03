@@ -14,6 +14,10 @@ bun run build
 
 The frontend runs on port 5173 and the local multiplayer server on 3001. Use `bun run test`, not bare `bun test`. Install Chromium with `bun run --bun playwright install chromium` when needed. Format with `bun run format`; keep one Bun lockfile.
 
+## Build disk usage
+
+The game build copies the full local asset tree into `apps/game/dist/`. Its workspace Turbo configuration disables caching that build output, because every source change would otherwise archive another multi-gigabyte asset copy. The build still uses the content-addressed compression cache in `packages/assets/.cache/`; other workspace build tasks retain their existing Turbo behavior. `apps/game/dist/`, `.turbo/cache/` and experimental files under `artifacts/` are regenerable. Keep original supplied assets and required extraction inputs intact when cleaning up.
+
 ## Code map
 
 | Location                                                          | Responsibility                                             |

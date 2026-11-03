@@ -36,6 +36,8 @@ Run scripts from the repository root. Python tools use Python 3; check each tool
 | `import-inventory.py`                                                                                  | Add missing knife finishes and full-color default inventory renders; Bun, curl and Pillow                   |
 | `extract-knife-timings.py`, `import-knife-timings.py`                                                  | Audit installed native clips and bind their timings to bundled GLBs                                         |
 
+The maintained native Dust II import uses `import-dust2-cables.py`, `settle-dust2-cables.mjs`, `extract-dust2-metadata.py`, `import-dust2-lighting.py`, `import-dust2-materials.py`, `import-dust2-transmission.py`, `import-dust2-layers.py`, `import-dust2-environment.py`, `import-dust2-occlusion.py`, `import-dust2-generic-textures.py`, `import-dust2-probe-volumes.py`, `prepare-dust2-native-probes.py`, `import-dust2-native-probes.py`, `import-dust2-barns.py`, `import-dust2-brdf.py`, `import-dust2-reflections.py`, `simplify-dust2-map.mjs`, `prepare-dust2-map.py`, `_dust2_vtex.py` and `_dust2_probes.py`. See [Dust II lighting](dust2-lighting.md) for pinned inputs, offline dependencies and reproduction.
+
 `scripts/cs2-weapon-audio.json` remains the input for audio packing, range extraction and source-integrity tests. Do not discard it as an old report.
 
 One-off model/map/audio converters, patches and investigation reports were retired in this cleanup. Their generator names in asset manifests are historical provenance, not promises of a currently installed command. To rerun one, restore the required script and its helper chain from the last pre-cleanup revision:
@@ -45,6 +47,8 @@ git restore --source=9aca152cb6f8e3fefd15b1beaacefb19bc0f74a4 -- scripts/<file>
 ```
 
 The same revision contains the detailed extraction notes under `docs/`. No duplicate archive is kept in the working tree.
+
+The final probe/sky importers are `import-dust2-gpu-probes.py`, `import-dust2-sky-clouds.py` and `import-dust2-sky-world.py`. They preserve original inputs and require the source audits described in [Dust II lighting](dust2-lighting.md); the sky world also needs Basis-enabled gltfpack.
 
 ## Updating assets
 

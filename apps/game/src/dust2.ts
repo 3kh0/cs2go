@@ -2,7 +2,7 @@ import { assetFetch, assetUrl } from "./asset-url";
 import { WorldBall } from "./world-ball";
 import { applySourceMapLighting, loadSourceMapLighting } from "./source-map-lighting";
 import { loadBombDamage } from "./bomb-damage";
-import { loadSourceSky } from "./source-sky";
+import { loadSourceSky, bindSourceSky } from "./source-sky";
 import { addSourceDynamicSun } from "./source-sun";
 import * as T from "three";
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
@@ -137,6 +137,7 @@ export async function loadDust2(scene: T.Scene, renderer: T.WebGLRenderer) {
   addSourceDynamicSun(root, sun, asset.scene);
   root.visible = false;
   scene.add(root);
+  if (skybox) bindSourceSky(scene, skybox, root);
   return {
     root,
     scenery: asset.scene,

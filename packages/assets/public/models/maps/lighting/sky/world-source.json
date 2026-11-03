@@ -1,0 +1,520 @@
+{
+  "sourceRevision": "5564866c7f2a6b2ee54a9195b7963147e24da94e",
+  "arrays": [
+    {
+      "file": "env_light_probe_volume_atlas.bin.gz",
+      "format": "BC6H_UF16",
+      "width": 56,
+      "height": 104,
+      "layers": 336,
+      "gpuBytes": 1956864,
+      "sourceSha256": "0095a71a86eea685b376ed8ccf0e4a135c30ff222a2e989763e2671b86e0d696"
+    },
+    {
+      "file": "env_light_probe_volume_atlas_dlshd.bin.gz",
+      "format": "BC7_UNORM",
+      "width": 56,
+      "height": 104,
+      "layers": 56,
+      "gpuBytes": 326144,
+      "sourceSha256": "7fd90c3dd336ff6e0aad137f5569e4f1c73680e22b363f702ad53fbb86fdc5a5"
+    }
+  ],
+  "atlases": {
+    "direct_light_shadows": {
+      "file": "direct_light_shadows.bin.gz",
+      "format": "BC4_UNORM",
+      "width": 512,
+      "height": 512,
+      "layers": 1,
+      "gpuBytes": 131072,
+      "sourceSha256": "0b098b2f43a6323da914b24d9ba081e35f08689f66788d83a7efab51a983dc9c",
+      "fallbackFile": "direct_light_shadows-rgba.bin.gz"
+    },
+    "directional_irradiance": {
+      "file": "directional_irradiance.bin.gz",
+      "format": "BC1",
+      "width": 512,
+      "height": 512,
+      "layers": 1,
+      "gpuBytes": 131072,
+      "sourceSha256": "bdf27da51b6ef2130e687a8ff7f18a0a4016d6f13b6d65f0f693f91ac8727875",
+      "fallbackFile": "directional_irradiance-rgba.bin.gz"
+    },
+    "irradiance": {
+      "file": "irradiance.bin.gz",
+      "format": "BC6H_UF16",
+      "width": 512,
+      "height": 512,
+      "layers": 1,
+      "gpuBytes": 262144,
+      "sourceSha256": "0ce3115205a3b639a20cd264222e791132740734e58913cb0bf3be54fcd34608"
+    }
+  },
+  "metadata": {
+    "volumes": [
+      {
+        "shaderIndex": 0,
+        "arrayIndex": 1,
+        "handshake": 2038922814,
+        "priority": 0,
+        "entity": {
+          "lightprobetexture": "maps\\prefabs\\de_dust2\\de_dust2_skybox/lightmaps/env_light_probe_volume_atlas.vtex",
+          "useLocalOffset": false,
+          "StartDisabled": false,
+          "cubemaptexture": "maps/prefabs/de_dust2/de_dust2_skybox/cubemaps/env_cubemap_array.vtex",
+          "bakefarz": 64000.0,
+          "box_mins": [
+            -640.0,
+            -371.28833,
+            -480.0
+          ],
+          "box_maxs": [
+            576.0,
+            236.71167,
+            416.0
+          ],
+          "voxel_size": "24.000000",
+          "flood_fill": true,
+          "voxelize": true,
+          "indoor_outdoor_level": "0",
+          "edge_fade_dists": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "clientSideEntity": "1",
+          "classname": "env_combined_light_probe_volume",
+          "origin": "-17.000000 -425.000000 223.000000",
+          "angles": "0.000000 0.000000 0.000000",
+          "scales": "0.062500 0.062500 0.062500",
+          "hammerUniqueId": "424",
+          "handshake": "2038922814",
+          "light_probe_size_x": "51",
+          "light_probe_size_y": "26",
+          "light_probe_size_z": "38",
+          "lightprobetexture_dlshd": "maps\\prefabs\\de_dust2\\de_dust2_skybox/lightmaps/env_light_probe_volume_atlas_dlshd.vtex",
+          "array_index": "1",
+          "light_probe_atlas_x": "1",
+          "light_probe_atlas_Y": "1",
+          "light_probe_atlas_Z": "1"
+        },
+        "normalizedScale": [
+          0.0008223684271797538,
+          0.0016447368543595076,
+          0.0011160714784637094
+        ],
+        "normalizedOffset": [
+          0.5402960777282715,
+          1.3096847534179688,
+          0.2868303656578064
+        ],
+        "worldToNormalizedColumnRows": [
+          [
+            0.0008223684271797538,
+            0.0,
+            0.0,
+            0.5402960777282715
+          ],
+          [
+            0.0,
+            0.0016447368543595076,
+            0.0,
+            1.3096847534179688
+          ],
+          [
+            0.0,
+            0.0,
+            0.0011160714784637094,
+            0.2868303656578064
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "authoredEntityScales": [
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "effectiveRigidScale": [
+          1,
+          1,
+          1
+        ],
+        "entityScaleIgnored": true,
+        "worldMin": [
+          -657.0,
+          -796.288330078125,
+          -257.0
+        ],
+        "worldMax": [
+          559.0,
+          -188.288330078125,
+          639.0
+        ],
+        "grid": [
+          51,
+          26,
+          38
+        ],
+        "atlasOffsetCells": [
+          1,
+          1,
+          1
+        ],
+        "fadeSourceUnits": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "invEdgeWidth": [
+          3.4028234663852886e+38,
+          3.4028234663852886e+38,
+          3.4028234663852886e+38
+        ],
+        "boundsExtend": [
+          8.223684562835842e-05,
+          0.00016447369125671685,
+          0.00011160714348079637
+        ],
+        "atlasScale": [
+          0.9107142686843872,
+          0.25,
+          0.6785714030265808
+        ],
+        "atlasOffset": [
+          0.01785714365541935,
+          0.009615384973585606,
+          0.01785714365541935
+        ],
+        "borderMin": [
+          0.009803921915590763,
+          0.01923076994717121,
+          0.0021929824724793434
+        ],
+        "borderMax": [
+          0.9901960492134094,
+          0.9807692170143127,
+          0.16447368264198303
+        ],
+        "fromAssociatedEnvmap": false,
+        "inverseEdge": [
+          3.4028234663852886e+38,
+          3.4028234663852886e+38,
+          3.4028234663852886e+38
+        ],
+        "normalizedSkin": [
+          8.223684562835842e-05,
+          0.00016447369125671685,
+          0.00011160714348079637
+        ]
+      },
+      {
+        "shaderIndex": 1,
+        "arrayIndex": 0,
+        "handshake": 2038922813,
+        "priority": 0,
+        "entity": {
+          "lightprobetexture": "maps\\prefabs\\de_dust2\\de_dust2_skybox/lightmaps/env_light_probe_volume_atlas.vtex",
+          "edge_fade_dists": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "StartDisabled": false,
+          "useLocalOffset": false,
+          "cubemaptexture": "maps/prefabs/de_dust2/de_dust2_skybox/cubemaps/env_cubemap_array.vtex",
+          "bakefarz": 4096.0,
+          "box_mins": [
+            -2161.698486,
+            -5216.0,
+            -122.0
+          ],
+          "box_maxs": [
+            2464.000244,
+            5626.969727,
+            1374.0
+          ],
+          "voxel_size": "108.000000",
+          "flood_fill": true,
+          "voxelize": true,
+          "indoor_outdoor_level": "0",
+          "clientSideEntity": "1",
+          "classname": "env_combined_light_probe_volume",
+          "origin": "25.698586 -290.969727 242.000000",
+          "angles": "0.000000 0.000000 0.000000",
+          "scales": "1.000000 1.000000 1.000000",
+          "hammerUniqueId": "251",
+          "handshake": "2038922813",
+          "light_probe_size_x": "43",
+          "light_probe_size_y": "101",
+          "light_probe_size_z": "14",
+          "lightprobetexture_dlshd": "maps\\prefabs\\de_dust2\\de_dust2_skybox/lightmaps/env_light_probe_volume_atlas_dlshd.vtex",
+          "array_index": "0",
+          "light_probe_atlas_x": "1",
+          "light_probe_atlas_Y": "1",
+          "light_probe_atlas_Z": "41"
+        },
+        "normalizedScale": [
+          0.00021618355822283775,
+          9.222565859090537e-05,
+          0.000668449210934341
+        ],
+        "normalizedOffset": [
+          0.46176809072494507,
+          0.5078839063644409,
+          -0.08021390438079834
+        ],
+        "worldToNormalizedColumnRows": [
+          [
+            0.00021618355822283775,
+            0.0,
+            0.0,
+            0.46176809072494507
+          ],
+          [
+            0.0,
+            9.222565859090537e-05,
+            0.0,
+            0.5078839063644409
+          ],
+          [
+            0.0,
+            0.0,
+            0.000668449210934341,
+            -0.08021390438079834
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "authoredEntityScales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "effectiveRigidScale": [
+          1,
+          1,
+          1
+        ],
+        "entityScaleIgnored": true,
+        "worldMin": [
+          -2136.0,
+          -5506.9697265625,
+          120.0
+        ],
+        "worldMax": [
+          2489.69873046875,
+          5336.0,
+          1616.0
+        ],
+        "grid": [
+          43,
+          101,
+          14
+        ],
+        "atlasOffsetCells": [
+          1,
+          1,
+          41
+        ],
+        "fadeSourceUnits": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "invEdgeWidth": [
+          3.4028234663852886e+38,
+          3.4028234663852886e+38,
+          3.4028234663852886e+38
+        ],
+        "boundsExtend": [
+          2.1618356186081655e-05,
+          9.222565495292656e-06,
+          6.68449210934341e-05
+        ],
+        "atlasScale": [
+          0.7678571343421936,
+          0.9711538553237915,
+          0.25
+        ],
+        "atlasOffset": [
+          0.01785714365541935,
+          0.009615384973585606,
+          0.7321428656578064
+        ],
+        "borderMin": [
+          0.011627906933426857,
+          0.004950494971126318,
+          0.0059523810632526875
+        ],
+        "borderMax": [
+          0.9883720874786377,
+          0.9950494766235352,
+          0.1607142835855484
+        ],
+        "fromAssociatedEnvmap": false,
+        "inverseEdge": [
+          3.4028234663852886e+38,
+          3.4028234663852886e+38,
+          3.4028234663852886e+38
+        ],
+        "normalizedSkin": [
+          2.1618356186081655e-05,
+          9.222565495292656e-06,
+          6.68449210934341e-05
+        ]
+      }
+    ],
+    "skySH": [
+      [
+        0.0,
+        0.0,
+        -0.08024568855762482,
+        0.7061057090759277
+      ],
+      [
+        0.0,
+        0.0,
+        0.03582538664340973,
+        0.6948742270469666
+      ],
+      [
+        0.0,
+        0.0,
+        0.16058748960494995,
+        0.7412867546081543
+      ]
+    ]
+  },
+  "environmentLight": {
+    "bakedshadowindex": "0",
+    "brightness_legacy": "-nan(ind)",
+    "brightness_lumens": "0",
+    "useLocalOffset": false,
+    "enabled": true,
+    "color": [
+      255,
+      222,
+      189
+    ],
+    "brightness": 2.5,
+    "castshadows": "1",
+    "shadowpriority": "-1",
+    "style": "0",
+    "rendertocubemaps": true,
+    "bouncescale": 1.75,
+    "directlight": "1",
+    "angulardiameter": 0.25,
+    "skycolor": [
+      211,
+      226,
+      248
+    ],
+    "skyintensity": 0.960784,
+    "skytexture": "[PR#]dust_sky",
+    "skytexturescale": 1.2,
+    "skyambientbounce": [
+      151,
+      151,
+      151
+    ],
+    "skybouncescale": 1.7,
+    "brightnessscale": 1.0,
+    "baked_light_indexing": true,
+    "minroughness": 0.0,
+    "clientSideEntity": "1",
+    "classname": "light_environment",
+    "origin": "4.008423 -412.145264 244.419678",
+    "angles": "49.999996 42.999992 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "496"
+  },
+  "sunColorLinear": [
+    2.499999761581421,
+    1.8261514902114868,
+    1.272202968597412
+  ],
+  "geometrySourceSha256": "2fd3dbe355942bd71f7ddefe44fd05bd4a16f285176ab9a71e86c8f5290872dd",
+  "worldBytes": 6610796,
+  "counts": {
+    "meshes": 162,
+    "primitives": 171,
+    "lighting": {
+      "lpv": 91,
+      "lightmap": 80
+    },
+    "materials": 73,
+    "litSurfaceLighting": {
+      "lpv": 54,
+      "lightmap": 80
+    },
+    "instances": 197,
+    "frames": 2,
+    "sortedFrameArrayIndices": [
+      1,
+      0
+    ],
+    "originalTextureCopies": 7,
+    "originalInputsUnchanged": 116,
+    "unresolvedPrimitiveJoins": 0
+  },
+  "lightmapUvScale": [
+    1.015858,
+    1.015858
+  ],
+  "scaleAlreadyBaked": true,
+  "effectDraws": 17,
+  "effectTextures": {
+    "dust_001_skybox_vmat_g_tcolor_37c55b5d": {
+      "file": "dust_001_skybox_vmat_g_tcolor_37c55b5d.webp",
+      "srgb": true,
+      "sourcePixelSha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+      "width": 1,
+      "height": 1
+    },
+    "dust_001_mask_psd_1b6f7fa5": {
+      "file": "dust_001_mask_psd_1b6f7fa5.webp",
+      "srgb": false,
+      "sourcePixelSha256": "2a49feffd89275b19a540a8529999e6ff01116ce2c6b8b91766bbc95c436261e",
+      "width": 512,
+      "height": 64
+    },
+    "dust_002_mask_psd_d8512b51": {
+      "file": "dust_002_mask_psd_d8512b51.webp",
+      "srgb": false,
+      "sourcePixelSha256": "e855af0639f128f40ba7b3248f3f1454ee9d222acccaed2650f5ccac778ef492",
+      "width": 512,
+      "height": 512
+    },
+    "default_mask_tga_344101f8": {
+      "file": "default_mask_tga_344101f8.webp",
+      "srgb": false,
+      "sourcePixelSha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+      "width": 1,
+      "height": 1
+    },
+    "sun_disk_glow_001_trans_psd_e0699c26": {
+      "file": "sun_disk_glow_001_trans_psd_e0699c26.webp",
+      "srgb": true,
+      "sourcePixelSha256": "fa8f5b35b84885942426970db12ed34ebe641960e8058dcf849ebd8aa96792e2",
+      "width": 512,
+      "height": 512
+    },
+    "steam_001_vmat_g_tcolor_37c55b5d": {
+      "file": "steam_001_vmat_g_tcolor_37c55b5d.webp",
+      "srgb": true,
+      "sourcePixelSha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+      "width": 1,
+      "height": 1
+    }
+  }
+}

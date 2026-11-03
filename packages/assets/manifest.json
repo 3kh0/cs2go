@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "d6dbdd07cb18e1e99b24a704dcc579948f0ee784df70f0cee629086d0fd9e0a3",
+  "release": "8c2ab1ddbaca4b43eddd11d914d5598a29027c0a0bb82aa65d1a666f9cb15cbb",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -9274,6 +9274,32 @@
         "bytes": 2174
       }
     },
+    "models/maps/lighting/gpu-probes/irradiance.bin.gz": {
+      "sha256": "8e755f4cfac790c38b7c301f1b9c564058343ed6d91698f9a8d65d80507b0fd2",
+      "bytes": 14075480,
+      "decodedSha256": "60fca255d396774fc6dcbf2e6006753d8d32d7c0e82b78be1e4e02b31c6efde8"
+    },
+    "models/maps/lighting/gpu-probes/shadows.bin.gz": {
+      "sha256": "57355b752036888c0471307da46636489d991ecf8722136aaa9acfb01bf17a9e",
+      "bytes": 480273,
+      "decodedSha256": "06e810382e9fe653e863505a877d739afb892c5ea6d6e14b12c110a1c44a1127",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "3af1b74e05a278fba8f413d566bf239e5933525d1e8f6532c32ab4158ad25d48",
+        "bytes": 470712
+      }
+    },
+    "models/maps/lighting/gpu-probes/source.json": {
+      "sha256": "e8b34b4e7e3ddddec85908eee0169af9017ee565ec545b790fee19c9b1c16ec6",
+      "bytes": 1101,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "89a9b8e05861b48f1e4cf13827d135db671659ceba77fad44cd46f49bdd8e0ad",
+        "bytes": 514
+      }
+    },
     "models/maps/lighting/irradiance.webp": {
       "sha256": "5008ef09433c8002809841782467c1a3e4a662e71eb9203d6db31b64c438f147",
       "bytes": 3271130
@@ -10476,6 +10502,181 @@
       "sha256": "06fd286be2d47be3a652f7920db905366166b50eee2e0e481aca489e103072d4",
       "bytes": 921466
     },
+    "models/maps/lighting/sky/cloud1-rgba.bin.gz": {
+      "sha256": "7d1958bf0b69c82c9d52074f9a4f065873f94f4429219f9553890f0be4f0b5b2",
+      "bytes": 243117,
+      "decodedSha256": "1c4bad90351fd0c795b06121e61fa68ef37cc5fe96d1241d12e5fcbd807980f2"
+    },
+    "models/maps/lighting/sky/cloud1.bin.gz": {
+      "sha256": "ff0c163b46586a4395802854b26bc4219b98f7b827dbdc77b267109da47117ed",
+      "bytes": 200379,
+      "decodedSha256": "ab715d70ada8e6a4ce02179dc33a740acc8d868d5ee73eba98736871beafedc9"
+    },
+    "models/maps/lighting/sky/cloud2-rgba.bin.gz": {
+      "sha256": "4e7f89e95a93f524eb1f614baa4fd5b9f4d5bfb92d6276d521c73d06d34e0ed5",
+      "bytes": 92028,
+      "decodedSha256": "7f30a3f5cb4e0f8769b9a84933bf62974e47cb3baf039dbbba422ec7ed5728f9",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "dc600b0f23d7516596ec76c18b1333be90e21bcb5c35b1c69e85fee560ef4607",
+        "bytes": 91465
+      }
+    },
+    "models/maps/lighting/sky/cloud2.bin.gz": {
+      "sha256": "fba0ea4b192290d6bab46cf80d475da32cdbb6aeed4651ff019f001d0d679f8e",
+      "bytes": 53120,
+      "decodedSha256": "d9b51f54d30e4b7e327fa7e9a80e6fb3a0c7baf8fd3f6b3787c65632cd9ba883"
+    },
+    "models/maps/lighting/sky/clouds.json.gz": {
+      "sha256": "3b2ea9f5711e0ade84dd8f37c0cf913f99b80e9a1d05fd419c9c5068437d7548",
+      "bytes": 7604,
+      "decodedSha256": "ee9a28fb747f8ad6a8ef979df0b9253fadbfe2bf6548f148f7f910eac3d8724a",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "4df47436990c50502205766644fd99bbaddbf7cb1d0013103df873cb5f6e6940",
+        "bytes": 7474
+      }
+    },
+    "models/maps/lighting/sky/default_mask_tga_344101f8.webp": {
+      "sha256": "52dc24c0429ea6ccc5b579a6da8bb79bf41e471fe5108a62009f3c2e195551c0",
+      "bytes": 38
+    },
+    "models/maps/lighting/sky/direct_light_shadows-rgba.bin.gz": {
+      "sha256": "96df08fcc0d40d3da5287f121129a5ec7128b51fbb57de53a3cc09fc2eae8290",
+      "bytes": 83547,
+      "decodedSha256": "04bbd37ba760fbd059f7b1cac744e11e4c829ff5e19f665224e73dd5a4732990",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "c2d1299c8ebf1c309a0cd655c5818912c61215c223d6950af8c6cbf38bf865a1",
+        "bytes": 81411
+      }
+    },
+    "models/maps/lighting/sky/direct_light_shadows.bin.gz": {
+      "sha256": "26428cea49d47e39e83dadac21514d8024be4f9788840cf7a2bf161d23886256",
+      "bytes": 39220,
+      "decodedSha256": "5407928307feaa2106aa0a786e7b51e435833279827dc1721c04376cdb979c7e"
+    },
+    "models/maps/lighting/sky/directional_irradiance-rgba.bin.gz": {
+      "sha256": "8fd945aadf3d70678f4a811eb8af4bd84bcee81ac7d79f4dbdc269ea8060f7b6",
+      "bytes": 235535,
+      "decodedSha256": "c3c772ce248a1cb161cb8548b5a03e86fee5c60d86aaf336fa78f4d37e784125",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "8ef0b6f90a514ab203e36750615431ff777d715968ef29eaf6507f90b85dfb25",
+        "bytes": 223692
+      }
+    },
+    "models/maps/lighting/sky/directional_irradiance.bin.gz": {
+      "sha256": "89833eacf3ec76edd41407ab7dec905d2b30129ad056b42d525377b734402e0b",
+      "bytes": 101678,
+      "decodedSha256": "1585f94a13d36a3bc64683e258b5798bdf8510f1559db7ee47cb86cd22ec7c18"
+    },
+    "models/maps/lighting/sky/dust_001_mask_psd_1b6f7fa5.webp": {
+      "sha256": "33d02cc28fb376f3c957029c17f9cb22610811bbb851af7bd33bd256d368010b",
+      "bytes": 7568,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "5d22c16cba9e97289e2291afce40e1122f177a3fcb5fee155e1fc48140dec384",
+        "bytes": 7478
+      }
+    },
+    "models/maps/lighting/sky/dust_001_skybox_vmat_g_tcolor_37c55b5d.webp": {
+      "sha256": "52dc24c0429ea6ccc5b579a6da8bb79bf41e471fe5108a62009f3c2e195551c0",
+      "bytes": 38
+    },
+    "models/maps/lighting/sky/dust_002_mask_psd_d8512b51.webp": {
+      "sha256": "911efd38b5429b47ca15d3b6507647c813864616ac6e8d7689772d8f6704cae3",
+      "bytes": 135982
+    },
+    "models/maps/lighting/sky/effects.json.gz": {
+      "sha256": "7eb771d4a3b7295b18ff3914eeb8b5dcd67e190d8f5715b06ccba6f36533bdb8",
+      "bytes": 4835,
+      "decodedSha256": "945a213a9303042f309c3c7976e9dbafe6b44b83d701c7275dfcdce2bb47b207"
+    },
+    "models/maps/lighting/sky/env_cubemap_array.bin.gz": {
+      "sha256": "9d0006bbc29bc5fec0620bcd283cc88fabbda00ee17288aa2f12edea2f066e97",
+      "bytes": 990583,
+      "decodedSha256": "dcac4b0b04732debc6f21731bc0139992e142ee441c6755a50cb1b46cfa428c9"
+    },
+    "models/maps/lighting/sky/env_light_probe_volume_atlas_dlshd.bin.gz": {
+      "sha256": "58a32409e300eda9e09f11bc22a8465a7a4b738d97373ed4dbeb3a368acbbb53",
+      "bytes": 8351,
+      "decodedSha256": "fbd94e9edf77089012618ffeee59fd77006c1aab68d5ce029c1b0b5592f2fcf9",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "16edbdad7b31646d4f18f514fdff7f5f1d4cd343096d3110ff76d9f511122044",
+        "bytes": 7467
+      }
+    },
+    "models/maps/lighting/sky/env_light_probe_volume_atlas.bin.gz": {
+      "sha256": "a9d05d2e0b195659649e37379f1cd7de6affda384ff456ee5c23162622221183",
+      "bytes": 637502,
+      "decodedSha256": "2399fdb424ea206a8b1922f20e4a78391b9b5cfcfd45f46a0d782d2d073838c2"
+    },
+    "models/maps/lighting/sky/irradiance.bin.gz": {
+      "sha256": "e2a8f2706a75ae2987dfc04640ae317321a08e1797a4b7a639f0415f958d730b",
+      "bytes": 229722,
+      "decodedSha256": "6b807ca28aa240f2c87e235eedee42e7db7ca9493ac6eabdb2afc10d6709681d"
+    },
+    "models/maps/lighting/sky/material-lighting.json": {
+      "sha256": "e071cacf231557a70268b4bb0113187799e8cd932afe44fbfa29a91e3401c7b6",
+      "bytes": 16239,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f35ee0f9dc25a371911eaffbf548ee6ec115bb893cff9031f056e35e50d5ff18",
+        "bytes": 1546
+      }
+    },
+    "models/maps/lighting/sky/reflections.json": {
+      "sha256": "74a50e33c5f7b96688853fdb35da531407528633ca038fced5a959aac382983e",
+      "bytes": 1815,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "a633d59baeab5aa336fe0fd0f9405127f9784a63e24bbc8c6431ce28c6ec6b5c",
+        "bytes": 457
+      }
+    },
+    "models/maps/lighting/sky/source.json": {
+      "sha256": "d5359064fc49724587569c5e2e37efe14696ae64bd92046d80bf30dbc0632e71",
+      "bytes": 8475,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "ef71f2592b413c31e6a804d8b6356b706717dcc0c4a1ba03ffab7bb7f62b6ec6",
+        "bytes": 2185
+      }
+    },
+    "models/maps/lighting/sky/steam_001_vmat_g_tcolor_37c55b5d.webp": {
+      "sha256": "52dc24c0429ea6ccc5b579a6da8bb79bf41e471fe5108a62009f3c2e195551c0",
+      "bytes": 38
+    },
+    "models/maps/lighting/sky/sun_disk_glow_001_trans_psd_e0699c26.webp": {
+      "sha256": "8f34f3d44511eac05859a592816d7d7df04aca058dc6383536ceafafaf857163",
+      "bytes": 12488
+    },
+    "models/maps/lighting/sky/world-source.json": {
+      "sha256": "ae2633f530d12cf1c6f71a28a7a7d1cbecb792e533cf799f85e03f93e75e2714",
+      "bytes": 13493,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f491f16f293d1a9ab062fca045f0bd0b9b25995629c9407bb9e9cb456fa178e6",
+        "bytes": 2797
+      }
+    },
+    "models/maps/lighting/sky/world.glb.gz": {
+      "sha256": "83eb6603f6f88d236d2f1445183f7149bffb644097b87a90a6e0258be49eb7c7",
+      "bytes": 6121478,
+      "decodedSha256": "83ddcfb65ce6931b3978ccba8a461a0063459c01c6328abe640ed0a7131293b3"
+    },
     "models/maps/lighting/source.json": {
       "sha256": "1271d68ea6f2341e12940520b0c8c6f88d2e204cc65820519a7917f5bc9ad7aa",
       "bytes": 8078,
@@ -10508,13 +10709,13 @@
       }
     },
     "models/maps/material-lighting.json": {
-      "sha256": "8343a5a9ffeeb988b09287d1d278fca75f2eb0949468892b32401b25561e58fb",
-      "bytes": 79224,
+      "sha256": "35a783dd59993adabd070c0cf6cd4826ad29b848183a88646b1a425a7954c31b",
+      "bytes": 83502,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "6f1f9b55c35bb3add00d7bdeed8e3150745a2c90cc38e55ba281e4b624dd0d46",
-        "bytes": 4212
+        "sha256": "6e4783b767a47e15d38ad8f383a7edf509de5392a3f6321d6fd2afea52e388a4",
+        "bytes": 4282
       }
     },
     "models/maps/overlay-correction.json": {

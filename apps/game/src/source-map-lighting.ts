@@ -48,7 +48,7 @@ interface SourceMaterialLighting {
   }[];
 }
 
-interface SourceMapLighting {
+export interface SourceMapLighting {
   irradiance: T.Texture;
   shadows: T.Texture;
   directional?: T.Texture;
@@ -63,6 +63,7 @@ interface SourceMapLighting {
   surfaceLookup?: T.DataTexture;
   reflections?: SourceReflections;
   gpuProbes?: SourceGpuProbes;
+  skySpace?: boolean;
 }
 
 async function loadNativeAtlas(name: string, format: T.CompressedPixelFormat, bytes: number) {
@@ -80,7 +81,16 @@ async function loadNativeAtlas(name: string, format: T.CompressedPixelFormat, by
   return texture;
 }
 
-export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
+const pendingLighting = new WeakMap<T.WebGLRenderer, Promise<SourceMapLighting>>();
+export function loadSourceMapLighting(renderer: T.WebGLRenderer) {
+  let pending = pendingLighting.get(renderer);
+  if (!pending) {
+    pending = loadMapLighting(renderer);
+    pendingLighting.set(renderer, pending);
+  }
+  return pending;
+}
+async function loadMapLighting(renderer: T.WebGLRenderer) {
   const native =
     renderer.capabilities.maxTextureSize >= 4096 &&
     renderer.extensions.has("EXT_texture_compression_bptc") &&
@@ -375,7 +385,7 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
             gl_Position = projectionMatrix * mvPosition;`,
           );
         }
-        applySourceFog(shader);
+        applySourceFog(shader, "1.0", data.skySpace);
         shader.uniforms.sourceIrradiance = { value: irradiance };
         shader.uniforms.sourceShadows = { value: shadows };
         shader.uniforms.sourceNative = { value: native ? 1 : 0 };
@@ -480,7 +490,9 @@ if(sourceCoverage<0.5) sourceFragmentProbe=sourceGpuSample(cameraPosition+transp
       };
       material.customProgramCacheKey = () =>
         priorKey +
-        "-native-source-lighting-v12" +
+        "-native-source-lighting-v13" +
+        (data.skySpace ? ":sky" : "") +
+        (gpuProbes ? `:lpv-${gpuProbes.count}-${gpuProbes.depth}` : "") +
         (gpuProbes ? ":fragment-probes" : "") +
         `:barns-${barnMask}` +
         (surface

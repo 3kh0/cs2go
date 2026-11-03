@@ -9,7 +9,11 @@ export function setSourceFogSky(texture?: T.CubeTexture | T.CompressedCubeTextur
   ready.value = texture ? 1 : 0;
 }
 
-export function applySourceFog(shader: T.WebGLProgramParametersWithUniforms, enabled = "1.0") {
+export function applySourceFog(
+  shader: T.WebGLProgramParametersWithUniforms,
+  enabled = "1.0",
+  skySpace = false,
+) {
   if (shader.uniforms.sourceFogReady) return;
   shader.uniforms.sourceFogSky = sky;
   shader.uniforms.sourceFogReady = ready;
@@ -19,8 +23,8 @@ export function applySourceFog(shader: T.WebGLProgramParametersWithUniforms, ena
     "#include <tonemapping_fragment>",
     `if (${enabled} > 0.5 && sourceFogReady > 0.5) {
       vec3 sourceFogRelative = inverseTransformDirection(-vViewPosition, viewMatrix) * length(vViewPosition);
-      float sourceFogDistance = length(vViewPosition);
-      float sourceFogHeight = cameraPosition.y + sourceFogRelative.y;
+      float sourceFogDistance = length(vViewPosition) * ${skySpace ? "16.0" : "1.0"};
+      float sourceFogHeight = ${skySpace ? "(cameraPosition.y + sourceFogRelative.y - 202.0 * 0.0254) * 16.0" : "cameraPosition.y + sourceFogRelative.y"};
       const float sourceFogStart = 512.0 * 0.0254;
       const float sourceFogEnd = 9000.0 * 0.0254;
       const float sourceFogHeightEnd = 21054.800781 * 0.0254;

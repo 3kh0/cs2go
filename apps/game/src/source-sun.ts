@@ -9,8 +9,8 @@ export function sourceSunCaster(root: T.Object3D, dynamic: boolean) {
     if (dynamic) object.castShadow = true;
     if (configured.has(object)) return;
     configured.add(object);
-    const before = object.onBeforeShadow,
-      after = object.onAfterShadow;
+    const before = object.onBeforeShadow.bind(object),
+      after = object.onAfterShadow.bind(object);
     let skipped = false,
       start = 0,
       count = Infinity;
@@ -59,6 +59,10 @@ export function addSourceDynamicSun(
 // The first light supplies native sunlight. The zero-intensity second light
 // renders only moving casters; its visibility also gates the first light.
 export function applySourceSunShadows(shader: T.WebGLProgramParametersWithUniforms) {
+  shader.fragmentShader = shader.fragmentShader.replace(
+    "#include <lights_fragment_begin>",
+    T.ShaderChunk.lights_fragment_begin,
+  );
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <shadowmap_pars_fragment>",
     `#include <shadowmap_pars_fragment>

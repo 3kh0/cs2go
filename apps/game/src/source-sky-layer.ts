@@ -1,12 +1,15 @@
 import * as T from "three";
 import { fetchGzipped } from "./gltf";
 import { loadSourceMaterialBundle } from "./source-layers";
+import { loadSourceSkyWorld } from "./source-sky-world";
+import { loadSourceSkyEffects } from "./source-sky-effects";
 
 /** Linear HDR composition for the native sky world, before the existing tone/LUT. */
 export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.CompressedCubeTexture) {
-  const [bundle, bytes] = await Promise.all([
+  const [bundle, bytes, world] = await Promise.all([
     loadSourceMaterialBundle(renderer, "/models/maps/lighting/sky/"),
     fetchGzipped("/models/maps/lighting/sky/clouds.json.gz"),
+    loadSourceSkyWorld(renderer),
   ]);
   const data = JSON.parse(new TextDecoder().decode(bytes)) as {
     positions: number[];
@@ -15,6 +18,7 @@ export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.Compress
     indices: number[];
   };
   const scene = new T.Scene();
+  scene.add(world.root);
   const skyCamera = new T.PerspectiveCamera();
   const background = new T.ShaderMaterial({
     uniforms: { sky: { value: cube } },
@@ -51,16 +55,34 @@ export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.Compress
     depthWrite: false,
     toneMapped: false,
   });
-  scene.add(new T.Mesh(geometry, clouds));
+  const overlay = new T.Scene();
+  overlay.add(new T.Mesh(geometry, clouds));
   const target = new T.WebGLRenderTarget(1, 1, {
     type: renderer.extensions.has("EXT_color_buffer_float") ? T.HalfFloatType : T.UnsignedByteType,
     depthBuffer: true,
   });
+  target.depthTexture = new T.DepthTexture(1, 1, T.UnsignedIntType);
+  // A depth-only blit avoids feedback while effects sample opaque sky depth.
+  // The copy target has just an R8 color attachment, never a second HDR color.
+  const depthCopy = new T.WebGLRenderTarget(1, 1, {
+    format: T.RedFormat,
+    type: T.UnsignedByteType,
+    depthTexture: new T.DepthTexture(1, 1, T.UnsignedIntType),
+  });
+  const resolution = new T.Vector2(1, 1);
+  const effects = await loadSourceSkyEffects(
+    depthCopy.depthTexture!,
+    resolution,
+    skyCamera.projectionMatrixInverse,
+    time,
+  );
+  overlay.add(effects.root);
   target.texture.colorSpace = T.LinearSRGBColorSpace;
   target.texture.generateMipmaps = false;
   target.texture.minFilter = target.texture.magFilter = T.LinearFilter;
   const viewport = new T.Vector4(),
     logicalViewport = new T.Vector4();
+  const skyOrigin = new T.Vector3(-8, 202, 308).multiplyScalar(0.0254);
   const position = new T.Vector3(),
     rotation = new T.Quaternion(),
     scale = new T.Vector3();
@@ -89,7 +111,12 @@ export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.Compress
       sameProjection
     )
       return;
-    if (width !== lastWidth || height !== lastHeight) target.setSize(width, height);
+    if (width !== lastWidth || height !== lastHeight) {
+      target.setSize(width, height);
+      depthCopy.setSize(width, height);
+      renderer.initRenderTarget(depthCopy);
+      resolution.set(width, height);
+    }
     lastWorld.copy(camera.matrixWorld);
     lastProjection.copy(camera.projectionMatrix);
     lastBucket = bucket;
@@ -99,7 +126,7 @@ export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.Compress
     skyCamera.position
       .copy(position)
       .multiplyScalar(1 / 16)
-      .add(new T.Vector3(-8, 202, 308).multiplyScalar(0.0254));
+      .add(skyOrigin);
     skyCamera.quaternion.copy(rotation);
     skyCamera.projectionMatrix.copy(camera.projectionMatrix);
     const near = 0.01,
@@ -117,6 +144,10 @@ export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.Compress
       renderer.toneMapping = T.NoToneMapping;
       renderer.setRenderTarget(target);
       renderer.render(scene, skyCamera);
+      renderer.copyTextureToTexture(target.depthTexture!, depthCopy.depthTexture!);
+      renderer.setRenderTarget(target);
+      renderer.autoClear = false;
+      renderer.render(overlay, skyCamera);
     } finally {
       renderer.setRenderTarget(destination);
       renderer.setViewport(logicalViewport);
@@ -126,6 +157,9 @@ export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.Compress
   }
   function dispose() {
     target.dispose();
+    depthCopy.dispose();
+    effects.dispose();
+    world.dispose();
     geometry.dispose();
     clouds.dispose();
     base.geometry.dispose();

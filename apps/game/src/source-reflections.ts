@@ -42,25 +42,26 @@ const directory = "/models/maps/lighting/reflections/";
 export async function loadSourceReflections(
   renderer: T.WebGLRenderer,
   preferCombined = false,
+  bundle = { directory, manifest: "source.json", volumes: 43 },
 ): Promise<SourceReflections | undefined> {
   if (
     !renderer.extensions.has("EXT_texture_compression_bptc") ||
     renderer.capabilities.maxFragmentUniforms < 512
   )
     return undefined;
-  const response = await assetFetch(directory + "source.json");
+  const response = await assetFetch(bundle.directory + bundle.manifest);
   if (!response.ok) throw new Error("Native reflection metadata unavailable");
   const manifest = (await response.json()) as Manifest;
   if (
-    manifest.volumes.length !== 43 ||
-    manifest.arrays.length !== 2 ||
+    manifest.volumes.length !== bundle.volumes ||
+    manifest.arrays.length !== (bundle.volumes === 43 ? 2 : 1) ||
     manifest.gpuBytes > 32 * 1024 * 1024 ||
     manifest.lastLod !== 5
   )
     throw new Error("Invalid native reflection budget/layout");
   let textures = await Promise.all(
     manifest.arrays.map(async (entry) => {
-      const bytes = await fetchGzipped(directory + entry.file);
+      const bytes = await fetchGzipped(bundle.directory + entry.file);
       if (bytes.byteLength !== entry.gpuBytes || entry.layers > 256)
         throw new Error("Invalid native reflection array");
       let offset = 0;
@@ -86,8 +87,10 @@ export async function loadSourceReflections(
     }),
   );
   const gl = renderer.getContext() as WebGL2RenderingContext;
-  const combined = preferCombined && gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) >= 258;
-  if (combined) {
+  const combined =
+    textures.length === 1 ||
+    (preferCombined && gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) >= 258);
+  if (combined && textures.length === 2) {
     const mips = textures[0].mipmaps.map((mip, index) => {
       const first = mip.data as Uint8Array,
         last = textures[1].mipmaps[index].data as Uint8Array;
@@ -213,7 +216,7 @@ export function applySourceReflections(
   shader.uniforms.sourceReflectionCubes0 = { value: data.textures[0] };
   shader.uniforms.sourceReflectionCubes1 = { value: data.textures[1] ?? data.textures[0] };
   shader.uniforms.sourceEnvironments = { value: data.uniforms };
-  const indices = new Int32Array(43);
+  const indices = new Int32Array(data.uniforms.length);
   indices.set(candidates);
   shader.uniforms.sourceEnvironmentCandidates = { value: indices };
   shader.uniforms.sourceEnvironmentCount = { value: candidates.length };
@@ -222,8 +225,8 @@ export function applySourceReflections(
     sourceCubeSampling +
     `
 struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEdge;vec4 sh;};
-uniform SourceEnvironment sourceEnvironments[43];
-uniform int sourceEnvironmentCandidates[43];
+uniform SourceEnvironment sourceEnvironments[${data.uniforms.length}];
+uniform int sourceEnvironmentCandidates[${data.uniforms.length}];
 uniform int sourceEnvironmentCount;
 vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,vec3 irradiance) {
   vec3 R=reflect(-viewDir,normal);float r2=roughness*roughness;
@@ -231,7 +234,7 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
   R=normalize(mix(normal,R,smoothness*(sqrt(smoothness)+r2)));
   roughness=clamp(roughness,0.0,1.0);
   float coverage=0.01;vec3 color=vec3(0.0);vec4 sh=vec4(0.0);
-  for(int i=0;i<43;i++) {
+  for(int i=0;i<${data.uniforms.length};i++) {
     if(i>=sourceEnvironmentCount)break;
     SourceEnvironment env=sourceEnvironments[sourceEnvironmentCandidates[i]];vec3 local=position-env.origin;
     vec3 fromMin=clamp((local-env.mins)*env.invEdge,0.0,1.0);

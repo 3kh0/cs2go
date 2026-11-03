@@ -15,6 +15,8 @@ export interface SourceGpuProbes {
   textures: T.CompressedArrayTexture[];
   frames: Float32Array[];
   sky: T.Vector4[];
+  depth: number;
+  count: number;
 }
 const states = new WeakMap<T.WebGLRenderer, SourceGpuProbes>();
 const pending = new WeakMap<T.WebGLRenderer, Promise<SourceGpuProbes | undefined>>();
@@ -43,55 +45,72 @@ export function loadSourceGpuProbes(renderer: T.WebGLRenderer) {
     ]);
     if (metadata.volumes.length !== 43 || manifest.arrays.length !== 2)
       throw new Error("Invalid native GPU probe scope");
-    const textures = await Promise.all(
-      manifest.arrays.map(async (entry, index) => {
-        const bytes = await fetchGzipped(directory + entry.file);
-        const layers = index === 0 ? 720 : 120;
-        if (
-          entry.width !== 192 ||
-          entry.height !== 176 ||
-          entry.layers !== layers ||
-          bytes.byteLength !== 192 * 176 * layers ||
-          entry.gpuBytes !== bytes.byteLength
-        )
-          throw new Error("Invalid native GPU probe blocks");
-        const texture = new T.CompressedArrayTexture(
-          [{ data: new Uint8Array(bytes), width: 192, height: 176 }],
-          192,
-          176,
-          layers,
-          index === 0 ? T.RGB_BPTC_UNSIGNED_Format : T.RGBA_BPTC_Format,
-        );
-        texture.colorSpace = T.NoColorSpace;
-        texture.minFilter = texture.magFilter = T.LinearFilter;
-        texture.generateMipmaps = false;
-        texture.flipY = false;
-        texture.needsUpdate = true;
-        return texture;
-      }),
-    );
-    const keys = [
-      "normalizedScale",
-      "normalizedOffset",
-      "inverseEdge",
-      "normalizedSkin",
-      "atlasScale",
-      "atlasOffset",
-      "borderMin",
-      "borderMax",
-    ] as const;
-    const result = {
-      textures,
-      frames: keys.map(
-        (key) => new Float32Array(metadata.volumes.flatMap((volume) => volume[key])),
-      ),
-      sky: metadata.skySH.map((row) => new T.Vector4().fromArray(row)),
-    };
+    const result = await createSourceGpuProbes(directory, manifest.arrays, metadata);
     states.set(renderer, result);
     return result;
   })();
   pending.set(renderer, task);
   return task;
+}
+
+export async function createSourceGpuProbes(
+  directory: string,
+  arrays: ArrayRecord[],
+  metadata: {
+    volumes: {
+      normalizedScale: number[];
+      normalizedOffset: number[];
+      inverseEdge: number[];
+      normalizedSkin: number[];
+      atlasScale: number[];
+      atlasOffset: number[];
+      borderMin: number[];
+      borderMax: number[];
+    }[];
+    skySH: number[][];
+  },
+): Promise<SourceGpuProbes> {
+  const depth = arrays[1].layers;
+  if (arrays.length !== 2 || arrays[0].layers !== depth * 6 || !metadata.volumes.length)
+    throw new Error("Invalid native GPU probe layout");
+  const textures = await Promise.all(
+    arrays.map(async (entry, index) => {
+      const bytes = await fetchGzipped(directory + entry.file);
+      const expected = Math.ceil(entry.width / 4) * Math.ceil(entry.height / 4) * 16 * entry.layers;
+      if (bytes.byteLength !== expected || entry.gpuBytes !== expected)
+        throw new Error("Invalid native GPU probe blocks");
+      const texture = new T.CompressedArrayTexture(
+        [{ data: new Uint8Array(bytes), width: entry.width, height: entry.height }],
+        entry.width,
+        entry.height,
+        entry.layers,
+        index === 0 ? T.RGB_BPTC_UNSIGNED_Format : T.RGBA_BPTC_Format,
+      );
+      texture.colorSpace = T.NoColorSpace;
+      texture.minFilter = texture.magFilter = T.LinearFilter;
+      texture.generateMipmaps = false;
+      texture.flipY = false;
+      texture.needsUpdate = true;
+      return texture;
+    }),
+  );
+  const keys = [
+    "normalizedScale",
+    "normalizedOffset",
+    "inverseEdge",
+    "normalizedSkin",
+    "atlasScale",
+    "atlasOffset",
+    "borderMin",
+    "borderMax",
+  ] as const;
+  return {
+    textures,
+    depth,
+    count: metadata.volumes.length,
+    frames: keys.map((key) => new Float32Array(metadata.volumes.flatMap((volume) => volume[key]))),
+    sky: metadata.skySH.map((row) => new T.Vector4().fromArray(row)),
+  };
 }
 
 // VRF 5564866 lighting_lpv.slang (MIT). Original BC blocks, separate native
@@ -113,18 +132,18 @@ export function applySourceGpuProbes(
     `#include <common>
     uniform highp sampler2DArray sourceGpuAtlas0;
     uniform highp sampler2DArray sourceGpuAtlas1;
-    ${probes.frames.map((_, index) => `uniform vec3 sourceGpuFrame${index}[43];`).join("\n")}
+    ${probes.frames.map((_, index) => `uniform vec3 sourceGpuFrame${index}[${probes.count}];`).join("\n")}
     uniform vec4 sourceGpuSky[3];
     struct SourceGpuProbe { vec3 irradiance; vec4 occlusion; };
     vec3 sourceGpuFace(vec3 uvw, int face) {
-      float z = clamp(uvw.z * 120.0 - 0.5, 0.0, 119.0);
-      float lo = floor(z), hi = min(lo + 1.0, 119.0), blend = fract(z);
-      float layer = float(face) * 120.0;
+      float z = clamp(uvw.z * ${probes.depth}.0 - 0.5, 0.0, ${probes.depth - 1}.0);
+      float lo = floor(z), hi = min(lo + 1.0, ${probes.depth - 1}.0), blend = fract(z);
+      float layer = float(face) * ${probes.depth}.0;
       return mix(texture(sourceGpuAtlas0, vec3(uvw.xy, layer + lo)).rgb, texture(sourceGpuAtlas0, vec3(uvw.xy, layer + hi)).rgb, blend);
     }
     vec4 sourceGpuShadow(vec3 uvw) {
-      float z = clamp(uvw.z * 120.0 - 0.5, 0.0, 119.0);
-      float lo = floor(z), hi = min(lo + 1.0, 119.0);
+      float z = clamp(uvw.z * ${probes.depth}.0 - 0.5, 0.0, ${probes.depth - 1}.0);
+      float lo = floor(z), hi = min(lo + 1.0, ${probes.depth - 1}.0);
       return mix(texture(sourceGpuAtlas1, vec3(uvw.xy, lo)), texture(sourceGpuAtlas1, vec3(uvw.xy, hi)), fract(z));
     }
     SourceGpuProbe sourceGpuSample(vec3 position, vec3 normalWorld) {
@@ -134,7 +153,7 @@ export function applySourceGpuProbes(
       SourceGpuProbe result;
       result.irradiance = vec3(0.0); result.occlusion = vec4(0.0);
       float coverage = 0.0;
-      for (int i = 0; i < 43; i++) {
+      for (int i = 0; i < ${probes.count}; i++) {
         vec3 q = p * sourceGpuFrame0[i] + sourceGpuFrame1[i];
         vec3 fade = (min(q, 1.0-q) + sourceGpuFrame3[i]) * sourceGpuFrame2[i];
         float edge = clamp(min(min(fade.x, fade.y), fade.z), 0.0, 1.0);

@@ -3,6 +3,30 @@ import { fetchGzipped } from "./gltf";
 import { setSourceFogSky } from "./source-fog";
 import { sourceSkyLayer } from "./source-sky-layer";
 
+const skyUpdates = new WeakMap<T.Object3D, (camera: T.Camera) => void>();
+
+export function bindSourceSky(scene: T.Scene, sky: T.Object3D, root: T.Object3D) {
+  const before = scene.onBeforeRender.bind(scene),
+    after = scene.onAfterRender.bind(scene);
+  let reset = false;
+  scene.onBeforeRender = function (...args) {
+    before.apply(this, args);
+    if (!root.visible) return;
+    reset = args[0].info.autoReset;
+    if (reset) args[0].info.reset();
+    args[0].info.autoReset = false;
+    skyUpdates.get(sky)?.(args[2]);
+  };
+  scene.onAfterRender = function (...args) {
+    try {
+      after.apply(this, args);
+    } finally {
+      if (reset) args[0].info.autoReset = true;
+      reset = false;
+    }
+  };
+}
+
 // Native BC6H cube faces/mips, sampled in Source's Z-up axes
 export async function loadSourceSky(renderer: T.WebGLRenderer) {
   if (!renderer.extensions.has("EXT_texture_compression_bptc")) {
@@ -56,7 +80,7 @@ export async function loadSourceSky(renderer: T.WebGLRenderer) {
   const mesh = new T.Mesh(new T.BoxGeometry(1, 1, 1), material);
   mesh.name = "Native Dust II sky";
   mesh.frustumCulled = false;
-  mesh.onBeforeRender = (_renderer, _scene, camera) => layer.update(camera);
+  skyUpdates.set(mesh, layer.update);
   material.addEventListener("dispose", layer.dispose);
   mesh.renderOrder = -1000;
   return mesh;
