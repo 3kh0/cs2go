@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import * as T from "three";
-import { applyTextureQuality, readPresentationSettings } from "./presentation-settings";
+import {
+  applyTextureQuality,
+  readPresentationSettings,
+  registerSurfaceTextures,
+} from "./presentation-settings";
 
 describe("saved presentation settings", () => {
   it("clamps malformed persisted values and rejects CSS color injection", () => {
@@ -25,7 +29,10 @@ it("reduces compressed upload levels and reversibly restores their source data",
     data: new Uint8Array(64),
   }));
   const texture = new T.CompressedTexture(mips, 16, 16);
-  const mesh = new T.Mesh(new T.BoxGeometry(), new T.MeshStandardMaterial({ map: texture }));
+  const mesh = new T.Mesh(
+    new T.BoxGeometry(),
+    new T.MeshStandardMaterial({ emissiveMap: texture }),
+  );
   applyTextureQuality([mesh], "low", 8);
   expect(texture.image.width).toBe(4);
   expect(texture.mipmaps[0].data).toBe(mips[2].data);
@@ -33,6 +40,28 @@ it("reduces compressed upload levels and reversibly restores their source data",
   expect(texture.image.width).toBe(16);
   expect(texture.mipmaps).toEqual(mips);
   expect(texture.anisotropy).toBe(8);
+});
+it("applies reversible quality and filtering to registered layered surface maps", () => {
+  const mips = [512, 256, 128, 64, 32, 16, 8, 4].map((size) => ({
+    width: size,
+    height: size,
+    data: new Uint8Array(16),
+  }));
+  const texture = new T.CompressedTexture(mips, 512, 512);
+  const lighting = new T.DataTexture(new Uint8Array(16), 2, 2);
+  const material = new T.MeshStandardMaterial();
+  material.userData.lighting = lighting;
+  registerSurfaceTextures(material, [texture]);
+  const mesh = new T.Mesh(new T.PlaneGeometry(), material);
+  applyTextureQuality([mesh], "low", 16, 1);
+  expect(texture.image.width).toBe(128);
+  expect(texture.mipmaps[0].data).toBe(mips[2].data);
+  expect(texture.anisotropy).toBe(1);
+  applyTextureQuality([mesh], "high", 8, 16);
+  expect(texture.image.width).toBe(512);
+  expect(texture.mipmaps).toEqual(mips);
+  expect(texture.anisotropy).toBe(8);
+  expect(lighting.version).toBe(0);
 });
 it("box filters baked skin maps while preserving alpha and the full quality source", () => {
   const pixels = new Uint8Array(4 * 4 * 4);

@@ -17,7 +17,11 @@
       "name": "palm_bark_01",
       "resource": "materials/models/props/de_dust/hr_dust/foliage/palm_bark_01.vmat",
       "foliage": {
-        "nonDirectional": true
+        "nonDirectional": true,
+        "heightGradient": {
+          "amount": 0.33,
+          "power": 1.5
+        }
       },
       "localReflections": true,
       "surface": {
@@ -190,6 +194,10 @@
       "resource": "materials/models/props/de_dust/hr_dust/foliage/palm_frond_01.vmat",
       "foliage": {
         "nonDirectional": true,
+        "heightGradient": {
+          "amount": 0.33,
+          "power": 1.5
+        },
         "transmission": {
           "useAlbedo": false,
           "texture": "/models/maps/lighting/palm-transmission.webp"
@@ -258,6 +266,10 @@
       "resource": "materials/models/props/de_dust/hr_dust/foliage/weeds_cressa_01.vmat",
       "foliage": {
         "nonDirectional": true,
+        "heightGradient": {
+          "amount": 0.409,
+          "power": 1
+        },
         "dontFlipBackfaceNormals": true,
         "alphaCoverage": {
           "reference": 0.635,
@@ -279,6 +291,10 @@
       "resource": "materials/models/props/de_dust/hr_dust/foliage/zebra_grass_01.vmat",
       "foliage": {
         "nonDirectional": true,
+        "heightGradient": {
+          "amount": 0.333,
+          "power": 1.478
+        },
         "transmission": {
           "useAlbedo": true
         },
@@ -2350,7 +2366,7 @@
   },
   "surfaceSource": {
     "nativeGltfSha256": "4d3e62e46fd747cf4fb85997630c1c55002ea14ac2de7956d52125bd28768f3b",
-    "interpretation": "ValveResourceFormat csgo_vertexlitgeneric/lightmappedgeneric, surface_material.slang, surface_shading.slang, pbr.slang and envmap.slang at 5564866c7f2a6b2ee54a9195b7963147e24da94e; native CS2 8.2 specular gates, Schlick-Smith GGX and indirect multiscatter energy; map-only, local reflection selection/parallax and original shader equivalence remain unverified"
+    "interpretation": "ValveResourceFormat csgo_vertexlitgeneric/lightmappedgeneric, surface_material.slang, surface_shading.slang, pbr.slang and envmap.slang at 5564866c7f2a6b2ee54a9195b7963147e24da94e; native CS2 8.2 generic specular gates plus always-enabled foliage/complex specular, Schlick-Smith GGX and indirect multiscatter energy; foliage/complex material AO bypasses direct diffuse; map-only, original shader equivalence remains unverified"
   },
   "localReflectionSource": {
     "nativeGltfSha256": "4d3e62e46fd747cf4fb85997630c1c55002ea14ac2de7956d52125bd28768f3b",

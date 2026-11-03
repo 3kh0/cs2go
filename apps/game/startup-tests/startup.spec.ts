@@ -42,6 +42,10 @@ test("cold cache installs, repeated startup reuses it, and the ready menu surviv
   await expect(page.locator("#startup")).toHaveCount(0);
   await page.waitForFunction(() => !!navigator.serviceWorker.controller, {}, { timeout: 30000 });
   await page.reload({ waitUntil: "domcontentloaded" });
+  // The entry point imports the app asynchronously. Absence of #startup can
+  // mean the app has not mounted yet; wait for actual asset readiness before
+  // collecting requests and cutting the network.
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });
   await expect(page.locator("#startup")).toHaveCount(0, { timeout: 120000 });
   const used = await page.evaluate(() =>
     performance
@@ -49,6 +53,7 @@ test("cold cache installs, repeated startup reuses it, and the ready menu surviv
       .map((entry) => new URL(entry.name).pathname.replace(/^\/releases\/[a-f0-9]{64}/, ""))
       .filter((path) => /^\/(?:audio|models|effects|maps|icons|fonts|ui)\//.test(path)),
   );
+  expect(used).toContain("/models/maps/dust2.glb.gz");
   await page.waitForFunction(
     async (used) => {
       const stored = new Set<string>();

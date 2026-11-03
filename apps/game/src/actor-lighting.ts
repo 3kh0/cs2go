@@ -1,6 +1,7 @@
 import * as T from "three";
 import { applySourceColorCorrection } from "./map-color";
 import { applySourceFog } from "./source-fog";
+import { applySourceBarns } from "./source-barn";
 
 type Position = { x: number; y: number; z: number };
 export type ProbeSampler = (position: Position, normal: Position, out: T.Color) => boolean;
@@ -14,11 +15,16 @@ const axes = [
 ];
 type State = {
   enabled: { value: number };
+  worldEnabled: { value: number };
   cube: { value: T.Color[] };
   target: T.Color[];
   rotation: { value: T.Matrix3 };
   sun: { value: number };
   targetSun: number;
+  localShadows: { value: T.Vector2 };
+  targetLocalShadows: T.Vector2;
+  origin: { value: T.Vector3 };
+  localFrame: { value: number };
   timer: number;
   ready: boolean;
   position: T.Vector3;
@@ -67,11 +73,16 @@ export function releaseActorLightingMaterials(root: T.Object3D, removed: T.Objec
 function makeState(): State {
   return {
     enabled: { value: 0 },
+    worldEnabled: { value: 0 },
     cube: { value: axes.map(() => new T.Color()) },
     target: axes.map(() => new T.Color()),
     rotation: { value: new T.Matrix3() },
     sun: { value: 1 },
     targetSun: 1,
+    localShadows: { value: new T.Vector2() },
+    targetLocalShadows: new T.Vector2(),
+    origin: { value: new T.Vector3() },
+    localFrame: { value: 0 },
     timer: 0,
     ready: false,
     position: new T.Vector3(Infinity, Infinity, Infinity),
@@ -121,16 +132,24 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
       previous.call(material, shader, renderer);
       Object.assign(shader.uniforms, {
         sourceActorProbeEnabled: lighting.enabled,
+        sourceActorWorldEnabled: lighting.worldEnabled,
         sourceActorProbeCube: lighting.cube,
         sourceActorProbeRotation: lighting.rotation,
         sourceActorProbeSun: lighting.sun,
+        sourceActorLocalShadows: lighting.localShadows,
+        sourceActorProbeOrigin: lighting.origin,
+        sourceActorLocalFrame: lighting.localFrame,
       });
       shader.fragmentShader =
         `
         uniform float sourceActorProbeEnabled;
+        uniform float sourceActorWorldEnabled;
         uniform vec3 sourceActorProbeCube[6];
         uniform mat3 sourceActorProbeRotation;
         uniform float sourceActorProbeSun;
+        uniform vec2 sourceActorLocalShadows;
+        uniform vec3 sourceActorProbeOrigin;
+        uniform float sourceActorLocalFrame;
       ` + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <common>",
@@ -148,11 +167,11 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
         "#include <envmap_physical_pars_fragment>",
         T.ShaderChunk.envmap_physical_pars_fragment.replaceAll(
           "envMapRotation * reflectVec",
-          "envMapRotation * mix(reflectVec, sourceActorProbeRotation * reflectVec, sourceActorProbeEnabled)",
+          "envMapRotation * mix(reflectVec, sourceActorProbeRotation * reflectVec, sourceActorWorldEnabled)",
         ),
       );
-      // Expand only the lighting chunk we need to modify. Direct point fixtures
-      // remain independent; source baked sun visibility gates directional light.
+      // Baked sun visibility gates directional light; stationary local lights
+      // use their own G/B masks and world/viewmodel coordinate frames below.
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <lights_fragment_begin>",
         T.ShaderChunk.lights_fragment_begin.replace(
@@ -170,10 +189,17 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
           }
         #endif`,
       );
-      applySourceFog(shader, "sourceActorProbeEnabled");
-      applySourceColorCorrection(shader, "sourceActorProbeEnabled");
+      applySourceBarns(shader, {
+        enabled: "sourceActorWorldEnabled",
+        shadows: "sourceActorLocalShadows",
+        worldPosition:
+          "mix(cameraPosition + sourceBarnWorldRelative, sourceActorProbeOrigin + sourceActorProbeRotation*sourceBarnWorldRelative, sourceActorLocalFrame)",
+        worldToLighting: "transpose(sourceActorProbeRotation)",
+      });
+      applySourceFog(shader, "sourceActorWorldEnabled");
+      applySourceColorCorrection(shader, "sourceActorWorldEnabled");
     };
-    material.customProgramCacheKey = () => `${key}:source-actor-probe-v3`;
+    material.customProgramCacheKey = () => `${key}:source-actor-probe-v4`;
     material.needsUpdate = true;
     return material;
   };
@@ -192,16 +218,21 @@ export function updateActorLighting(
   dt: number,
   rotation?: T.Matrix3,
   sampleSun?: (position: Position) => number,
+  sampleLocalShadows?: (position: Position, out: T.Vector2) => void,
 ) {
   const state = actors.get(root);
   if (!state) return;
   if (!sample) {
     state.enabled.value = 0;
+    state.worldEnabled.value = 0;
     state.ready = false;
     state.timer = 0;
     return;
   }
+  state.worldEnabled.value = 1;
   state.rotation.value.copy(rotation ?? identity);
+  state.localFrame.value = rotation ? 1 : 0;
+  state.origin.value.set(position.x, position.y, position.z);
   state.timer -= dt;
   const teleported = state.position.distanceToSquared(position) > 16;
   if (state.timer <= 0 || teleported) {
@@ -213,13 +244,18 @@ export function updateActorLighting(
     });
     if (!valid) {
       state.enabled.value = 0;
+      if (sampleLocalShadows) sampleLocalShadows(position, state.localShadows.value);
+      else state.localShadows.value.set(0, 0);
       state.ready = false;
       return;
     }
     state.targetSun = sampleSun ? T.MathUtils.clamp(sampleSun(position), 0, 1) : 1;
+    if (sampleLocalShadows) sampleLocalShadows(position, state.targetLocalShadows);
+    else state.targetLocalShadows.set(0, 0);
     if (!state.ready || teleported) {
       state.target.forEach((color, i) => state.cube.value[i].copy(color));
       state.sun.value = state.targetSun;
+      state.localShadows.value.copy(state.targetLocalShadows);
     }
     state.ready = true;
     state.enabled.value = 1;
@@ -227,6 +263,7 @@ export function updateActorLighting(
   const alpha = 1 - Math.exp(-Math.max(0, dt) * 12);
   state.target.forEach((color, i) => state.cube.value[i].lerp(color, alpha));
   state.sun.value = T.MathUtils.lerp(state.sun.value, state.targetSun, alpha);
+  state.localShadows.value.lerp(state.targetLocalShadows, alpha);
 }
 const identity = new T.Matrix3();
 export function disposeActorLighting(root: T.Object3D) {

@@ -77,12 +77,8 @@ export async function loadDust2(scene: T.Scene, renderer: T.WebGLRenderer) {
   // and registered actors replace diffuse fill with their baked atlas/probe data.
   const bounce = new T.Color(0x979797).multiplyScalar(1.7);
   root.add(new T.HemisphereLight(0xd3e2f8, bounce, 2.4));
-  // CT ramp's native warm light_barn (2:23513:20086). A bounded point
-  // approximates the fixture plus its baked bounce, at its original position.
-  const ramp = new T.PointLight(0xffbe87, 22, 8, 1.5);
-  ramp.name = "CT ramp warm fixture";
-  ramp.position.set(325.308746 * 0.0254, 31.464579 * 0.0254, -2371.635986 * 0.0254);
-  root.add(ramp);
+  // CT fixtures 20086/20088 are directlight=1 without baked-shadow indices:
+  // their direct light and bounce are already in the native atlases/probes.
   // Source direct diffuse omits Lambert's 1/pi; Three.js includes it.
   const sun = new T.DirectionalLight(0xffdebd, 2.5 * Math.PI);
   sun.target.position.set(0, 0, -30);

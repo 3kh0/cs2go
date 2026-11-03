@@ -39,4 +39,17 @@ export function bindSourceMapAttributes(geometry: T.BufferGeometry) {
   }
   geometry.deleteAttribute("color_1");
   geometry.deleteAttribute("color_2");
+  const blend = geometry.getAttribute("color_4");
+  if (blend) {
+    if (
+      !(blend instanceof T.BufferAttribute) ||
+      !(blend.array instanceof Uint8Array) ||
+      !blend.normalized ||
+      blend.itemSize !== 4 ||
+      blend.count !== count
+    )
+      throw new Error("Dust II native layer weights are invalid; regenerate the map");
+    geometry.setAttribute("sourceBlend", blend);
+    geometry.deleteAttribute("color_4");
+  }
 }

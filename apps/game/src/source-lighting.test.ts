@@ -1,7 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import * as T from "three";
-import { loadSourceLighting, sampleSourceProbe, sampleSourceProbeSun } from "./source-lighting";
+import {
+  loadSourceLighting,
+  sampleSourceProbe,
+  sampleSourceProbeSun,
+  sampleSourceProbeLocalShadows,
+} from "./source-lighting";
 
 describe("native probe boundaries", () => {
   beforeAll(async () => {
@@ -15,6 +20,16 @@ describe("native probe boundaries", () => {
     await loadSourceLighting();
   });
   afterAll(() => vi.unstubAllGlobals());
+  it("retains independent native G/B occlusion under the two tunnel fixtures", () => {
+    const first = new T.Vector2(),
+      second = new T.Vector2();
+    sampleSourceProbeLocalShadows({ x: -1040 * 0.0254, y: 0, z: -1424 * 0.0254 }, first);
+    sampleSourceProbeLocalShadows({ x: -692 * 0.0254, y: 0, z: -1424 * 0.0254 }, second);
+    expect(first.x).toBeLessThan(0.01);
+    expect(first.y).toBeGreaterThan(0.4);
+    expect(second.x).toBeGreaterThan(0.4);
+    expect(second.y).toBeLessThan(0.01);
+  });
   it("keeps the actual mid-underpass indoor/exterior boundary continuous", () => {
     // Native indoor volume18 extends through the doorway facade. Choosing only
     // its box used to turn this exterior wall nearly black, then jump at its edge.

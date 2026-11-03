@@ -78,6 +78,7 @@ export function renderSourceTransmission() {
   geometry.setAttribute("color_2", frontProbe);
   geometry.setAttribute("color_3", backProbe);
   const albedoGeometry = geometry.clone();
+  const noFlipGeometry = geometry.clone();
   const material = new T.MeshStandardMaterial({
     name: "test-leaf",
     color: 0xff0000,
@@ -154,10 +155,33 @@ export function renderSourceTransmission() {
   const oppositeProbeWithAO = render();
   mesh.rotation.y = Math.PI;
   const backFace = render();
+  mesh.visible = false;
+  noFlipGeometry.setAttribute("color_2", packed([64, 0, 0, 255]));
+  noFlipGeometry.setAttribute("color_3", packed([0, 64, 0, 255]));
+  const noFlipMaterial = new T.MeshStandardMaterial({ name: "no-flip-leaf", side: T.DoubleSide });
+  const noFlipMesh = new T.Mesh(noFlipGeometry, noFlipMaterial);
+  applySourceMapLighting(noFlipMesh, {
+    irradiance: black,
+    shadows: black,
+    directional: undefined,
+    native: false,
+    materialLighting: {
+      materials: [
+        { name: "no-flip-leaf", foliage: { nonDirectional: true, dontFlipBackfaceNormals: true } },
+      ],
+    },
+    transmissionTextures: new Map(),
+  });
+  scene.add(noFlipMesh);
+  const noFlipFront = render();
+  noFlipMesh.rotation.y = Math.PI;
+  const noFlipBack = render();
   geometry.dispose();
   albedoGeometry.dispose();
   albedoMaterial.dispose();
   material.dispose();
+  noFlipGeometry.dispose();
+  noFlipMaterial.dispose();
   for (const texture of [black, green, white]) texture.dispose();
   renderer.dispose();
   return {
@@ -168,5 +192,106 @@ export function renderSourceTransmission() {
     oppositeProbe,
     oppositeProbeWithAO,
     backFace,
+    noFlipFront,
+    noFlipBack,
   };
+}
+
+// Read the actual GPU normal in world space, including normal maps and both
+// tangent paths, from either side of the same unrotated leaf.
+export function renderSourceFoliageNormals() {
+  const renderer = new T.WebGLRenderer();
+  renderer.setSize(32, 32);
+  renderer.outputColorSpace = T.LinearSRGBColorSpace;
+  const camera = new T.PerspectiveCamera(40, 1, 0.1, 10);
+  const scene = new T.Scene();
+  const texture = new T.DataTexture(new Uint8Array([204, 128, 230, 255]), 1, 1);
+  texture.needsUpdate = true;
+  const results = [];
+  for (const explicit of [false, true]) {
+    const geometry = new T.PlaneGeometry(2, 2);
+    if (explicit) geometry.computeTangents();
+    for (const dontFlip of [false, true]) {
+      const material = new T.MeshStandardMaterial({ normalMap: texture, side: T.DoubleSide });
+      material.onBeforeCompile = (shader) => {
+        applySourceFoliage(shader, { nonDirectional: true, dontFlipBackfaceNormals: dontFlip });
+        shader.fragmentShader = shader.fragmentShader.replace(
+          "#include <opaque_fragment>",
+          "outgoingLight = inverseTransformDirection(normal, viewMatrix) * 0.5 + 0.5;\n#include <opaque_fragment>",
+        );
+      };
+      material.customProgramCacheKey = () => `normal-${dontFlip}`;
+      const mesh = new T.Mesh(geometry, material);
+      scene.add(mesh);
+      for (const back of [false, true]) {
+        camera.position.z = back ? -5 : 5;
+        camera.lookAt(0, 0, 0);
+        renderer.render(scene, camera);
+        const gl = renderer.getContext(),
+          pixel = new Uint8Array(4);
+        gl.readPixels(16, 16, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+        results.push({ explicit, dontFlip, back, pixel: [...pixel].slice(0, 3) });
+      }
+      scene.remove(mesh);
+      material.dispose();
+    }
+    geometry.dispose();
+  }
+  texture.dispose();
+  renderer.dispose();
+  return results;
+}
+
+export async function renderSourceFoliageGradient() {
+  const { applySourceSurface, loadSourceSurfaceLookup } = await import("../src/source-surface");
+  const lookup = await loadSourceSurfaceLookup();
+  const renderer = new T.WebGLRenderer();
+  renderer.setSize(32, 32);
+  renderer.outputColorSpace = T.LinearSRGBColorSpace;
+  const camera = new T.PerspectiveCamera(40, 1, 0.1, 10);
+  camera.position.z = 5;
+  const scene = new T.Scene();
+  const sun = new T.DirectionalLight(0xffffff, Math.PI);
+  sun.position.set(0, 0, 5);
+  scene.add(sun);
+  const results = [];
+  for (const metalness of [0, 1]) {
+    for (const height of [0, 0.5, 1]) {
+      const geometry = new T.PlaneGeometry(2, 2);
+      const count = geometry.getAttribute("position").count;
+      const values = new Float32Array(count * 4);
+      for (let i = 0; i < count; i++) values.set([height, 0.2, 0.7, 0.1], i * 4);
+      geometry.setAttribute("color", new T.BufferAttribute(values, 4));
+      const material = new T.MeshStandardMaterial({
+        color: new T.Color().setRGB(0.25, 0.25, 0.25),
+        vertexColors: true,
+        metalness,
+        roughness: 1,
+      });
+      material.onBeforeCompile = (shader) => {
+        applySourceSurface(
+          shader,
+          { directSpecular: metalness === 1, indirectSpecular: true },
+          lookup,
+        );
+        applySourceFoliage(shader, {
+          nonDirectional: true,
+          heightGradient: { amount: 0.33, power: 1.5 },
+        });
+      };
+      material.customProgramCacheKey = () => `gradient-${metalness}`;
+      const mesh = new T.Mesh(geometry, material);
+      scene.add(mesh);
+      renderer.render(scene, camera);
+      const gl = renderer.getContext(),
+        pixel = new Uint8Array(4);
+      gl.readPixels(16, 16, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+      results.push({ metalness, height, pixel: [...pixel] });
+      scene.remove(mesh);
+      material.dispose();
+      geometry.dispose();
+    }
+  }
+  renderer.dispose();
+  return results;
 }

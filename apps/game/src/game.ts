@@ -74,7 +74,11 @@ import {
 import { reloadProgress as networkReloadProgress } from "@cs2go/simulation/weapon-actions";
 import { ActorReflections } from "./actor-reflections";
 import { registerActorLighting, updateActorLighting } from "./actor-lighting";
-import { sampleSourceProbe, sampleSourceProbeSun } from "./source-lighting";
+import {
+  sampleSourceProbe,
+  sampleSourceProbeSun,
+  sampleSourceProbeLocalShadows,
+} from "./source-lighting";
 import {
   botAimSpread,
   botBodyHit,
@@ -5087,6 +5091,7 @@ export class Game {
       dt,
       this.probeRotation,
       sampleSourceProbeSun,
+      sampleSourceProbeLocalShadows,
     );
   }
   updateSceneLighting(dt: number) {
@@ -5102,6 +5107,7 @@ export class Game {
         dt,
         undefined,
         sampleSourceProbeSun,
+        sampleSourceProbeLocalShadows,
       );
     }
     if (this.bombMesh.visible) {
@@ -5114,6 +5120,7 @@ export class Game {
         dt,
         undefined,
         sampleSourceProbeSun,
+        sampleSourceProbeLocalShadows,
       );
     }
     const ball = this.dust?.ball?.mesh;
@@ -5125,6 +5132,7 @@ export class Game {
         dt,
         undefined,
         sampleSourceProbeSun,
+        sampleSourceProbeLocalShadows,
       );
     if (source) {
       // Viewmodels render in their own camera space; keep the map sun fixed in

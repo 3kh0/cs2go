@@ -2,17 +2,29 @@ import * as T from "three";
 import { loadDust2 } from "../src/dust2";
 import { enableTextureTranscoding } from "../src/gltf";
 import { gradeMapColors } from "../src/map-color";
+import { applyTextureQuality } from "../src/presentation-settings";
 
-export async function renderMapLighting(forceFallback = false, referenceView = false) {
+export async function renderMapLighting(
+  forceFallback = false,
+  referenceView = false,
+  testSurfaceQuality = false,
+  inspection?: { eye: number[]; angles: number[]; rayPixels: number[][] },
+  reflectionUniformLimit?: number,
+) {
   const renderer = new T.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true });
+  if (reflectionUniformLimit !== undefined)
+    renderer.capabilities.maxFragmentUniforms = reflectionUniformLimit;
   if (forceFallback) {
     const has = renderer.extensions.has.bind(renderer.extensions);
     renderer.extensions.has = (name: string) =>
-      !["EXT_texture_compression_bptc", "WEBGL_compressed_texture_s3tc"].includes(name) &&
-      has(name);
+      ![
+        "EXT_texture_compression_bptc",
+        "WEBGL_compressed_texture_s3tc",
+        "WEBGL_compressed_texture_s3tc_srgb",
+      ].includes(name) && has(name);
   }
-  const width = referenceView ? 1600 : 800,
-    height = referenceView ? 1200 : 600;
+  const width = referenceView || inspection ? 1600 : 800,
+    height = referenceView || inspection ? 1200 : 600;
   renderer.setSize(width, height);
   renderer.toneMapping = T.CustomToneMapping;
   renderer.shadowMap.enabled = true;
@@ -21,6 +33,23 @@ export async function renderMapLighting(forceFallback = false, referenceView = f
   document.body.replaceChildren(renderer.domElement);
   const scene = new T.Scene();
   const dust = await loadDust2(scene, renderer);
+  if (testSurfaceQuality)
+    applyTextureQuality([dust.root], "high", renderer.capabilities.getMaxAnisotropy(), 8);
+  let layerUniforms: T.WebGLProgramParametersWithUniforms["uniforms"] | undefined;
+  if (testSurfaceQuality)
+    dust.scenery.traverse((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      const material = object.material;
+      if (Array.isArray(material) || material.name !== "hr_dust_brick_ground_02") return;
+      const prior = material.onBeforeCompile.bind(material);
+      material.onBeforeCompile = (
+        shader: T.WebGLProgramParametersWithUniforms,
+        renderer: T.WebGLRenderer,
+      ) => {
+        prior(shader, renderer);
+        layerUniforms = shader.uniforms;
+      };
+    });
   gradeMapColors(dust.root);
   dust.root.visible = true;
   scene.environment = dust.sky;
@@ -43,6 +72,27 @@ export async function renderMapLighting(forceFallback = false, referenceView = f
     );
     camera.updateProjectionMatrix();
   }
+  if (inspection) {
+    const [pitch, yaw] = inspection.angles.map(T.MathUtils.degToRad);
+    camera.fov = (2 * Math.atan(3 / 4) * 180) / Math.PI;
+    camera.position.set(
+      inspection.eye[0] * 0.0254,
+      inspection.eye[2] * 0.0254,
+      -inspection.eye[1] * 0.0254,
+    );
+    camera.lookAt(
+      camera.position
+        .clone()
+        .add(
+          new T.Vector3(
+            Math.cos(pitch) * Math.cos(yaw),
+            -Math.sin(pitch),
+            -Math.cos(pitch) * Math.sin(yaw),
+          ),
+        ),
+    );
+    camera.updateProjectionMatrix();
+  }
   renderer.render(scene, camera);
   // Cached sun geometry must not add another shadow pass to subsequent frames.
   renderer.render(scene, camera);
@@ -55,6 +105,46 @@ export async function renderMapLighting(forceFallback = false, referenceView = f
   const sun = pixel(100, 430);
   const shade = pixel(560, 560);
   const image = renderer.domElement.toDataURL("image/png");
+  const raySamples = inspection?.rayPixels.map(([x, y]) => {
+    const ray = new T.Raycaster();
+    ray.setFromCamera(new T.Vector2((x / width) * 2 - 1, 1 - (y / height) * 2), camera);
+    const hit = ray.intersectObject(dust.scenery, true)[0];
+    if (!hit || !(hit.object instanceof T.Mesh))
+      throw new Error("Native masonry reference ray missed");
+    const material = Array.isArray(hit.object.material)
+      ? hit.object.material[hit.face?.materialIndex ?? 0]
+      : hit.object.material;
+    return {
+      material: material.name,
+      sourcePoint: [hit.point.x / 0.0254, -hit.point.z / 0.0254, hit.point.y / 0.0254],
+      rgba: pixel(x, y),
+    };
+  });
+  let surfaceQuality:
+    | { high: number[]; low: number[]; restored: number[]; restoredImage: boolean }
+    | undefined;
+  if (testSurfaceQuality) {
+    if (!layerUniforms) throw new Error("Native ground material did not compile");
+    const textures = [
+      "sourceLayerNormal1",
+      "sourceLayerNormal2",
+      "sourceLayerColor2",
+      "sourceLayerMask",
+    ].map((key) => layerUniforms![key].value as T.Texture<{ width: number }>);
+    const widths = () => textures.map((texture) => texture.image.width);
+    const high = widths();
+    applyTextureQuality([dust.root], "low", renderer.capabilities.getMaxAnisotropy(), 1);
+    renderer.render(scene, camera);
+    const low = widths();
+    applyTextureQuality([dust.root], "high", renderer.capabilities.getMaxAnisotropy(), 8);
+    renderer.render(scene, camera);
+    surfaceQuality = {
+      high,
+      low,
+      restored: widths(),
+      restoredImage: image === renderer.domElement.toDataURL("image/png"),
+    };
+  }
   const referenceCables: { expected: number[]; darkness: number }[] = [];
   if (referenceView) {
     const luma = (rgb: number[]) => rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
@@ -75,19 +165,30 @@ export async function renderMapLighting(forceFallback = false, referenceView = f
   }
   let vertices = 0;
   let invalid = 0;
+  let backProbeBytes = 0;
+  let layerWeightBytes = 0;
   dust.scenery.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
     vertices += object.geometry.getAttribute("position").count;
+    const backProbe = object.geometry.getAttribute("sourceBackProbe");
+    if (backProbe) backProbeBytes += backProbe.count * 4;
+    const blend = object.geometry.getAttribute("sourceBlend");
+    if (blend) layerWeightBytes += blend.count * 4;
     if (!object.geometry.hasAttribute("sourceUv") || !object.geometry.hasAttribute("sourceProbe"))
       invalid++;
   });
   return {
     referenceCables,
+    raySamples,
+    surfaceQuality,
     sun,
     shade,
     image,
     vertices,
     invalid,
+    backProbeBytes,
+    layerWeightBytes,
+    textures: renderer.info.memory.textures,
     calls: renderer.info.render.calls,
     triangles: renderer.info.render.triangles,
   };

@@ -18,6 +18,7 @@ type Manifest = { volumes: Volume[] };
 let manifest: Manifest | undefined;
 let values: Uint16Array;
 let shadows: Uint8Array;
+let localShadows: Uint8Array;
 let pending: Promise<void> | undefined;
 export function loadSourceLighting() {
   pending ??= Promise.all([
@@ -27,9 +28,13 @@ export function loadSourceLighting() {
     }),
     fetchGzipped("/models/maps/lighting/probes.bin.gz"),
     fetchGzipped("/models/maps/lighting/probe-shadows.bin.gz"),
-  ]).then(([data, rgb, mask]) => {
+    fetchGzipped("/models/maps/lighting/probe-local-shadows.bin.gz"),
+  ]).then(([data, rgb, mask, local]) => {
     values = new Uint16Array(rgb);
     shadows = new Uint8Array(mask);
+    localShadows = new Uint8Array(local);
+    if (localShadows.length !== shadows.length * 2)
+      throw new Error("Invalid native local probe shadows");
     manifest = data;
   });
   return pending;
@@ -50,7 +55,14 @@ function volumeAt(p: Point) {
       z <= v.max[2],
   );
 }
-function sample(v: Volume, p: Point, direction: number, channel: number, shadow: boolean) {
+function sample(
+  v: Volume,
+  p: Point,
+  direction: number,
+  channel: number,
+  shadow: boolean,
+  local = false,
+) {
   const x =
     T.MathUtils.clamp((p.x / 0.0254 - v.min[0]) / (v.max[0] - v.min[0]), 0, 1) *
     (v.dimensions[0] - 1);
@@ -74,7 +86,9 @@ function sample(v: Volume, p: Point, direction: number, channel: number, shadow:
     result +=
       weight *
       (shadow
-        ? shadows[v.shadowOffset + voxel] / 255
+        ? (local
+            ? localShadows[(v.shadowOffset + voxel) * 2 + channel]
+            : shadows[v.shadowOffset + voxel]) / 255
         : T.DataUtils.fromHalfFloat(values[v.offset + voxel * 18 + direction * 3 + channel]));
   }
   return result;
@@ -146,6 +160,15 @@ export function sampleSourceProbeSun(p: Point) {
   for (let i = 0; i < blendedVolumes.length; i++)
     visibility += (1 - sample(blendedVolumes[i], p, 0, 0, true)) * blendedWeights[i];
   return visibility;
+}
+export function sampleSourceProbeLocalShadows(p: Point, out: T.Vector2) {
+  blendVolumes(p);
+  out.set(0, 0);
+  for (let i = 0; i < blendedVolumes.length; i++) {
+    out.x += sample(blendedVolumes[i], p, 0, 0, true, true) * blendedWeights[i];
+    out.y += sample(blendedVolumes[i], p, 0, 1, true, true) * blendedWeights[i];
+  }
+  return out;
 }
 export function nearestSourceProbe(p: Point): number | null {
   const inside = volumeAt(p);

@@ -57,6 +57,11 @@ type TextureSource = { image: T.Texture["image"]; mipmaps: T.Texture["mipmaps"] 
 const textureSources = new WeakMap<T.Texture["source"], TextureSource>();
 const textureLevels = new WeakMap<T.Texture, string>();
 const sourceLevels = new WeakMap<T.Texture["source"], string>();
+const surfaceTextures = new WeakMap<T.Material, readonly T.Texture[]>();
+/** Shader-owned surface maps follow texture settings; lighting data stays fixed. */
+export function registerSurfaceTextures(material: T.Material, textures: readonly T.Texture[]) {
+  surfaceTextures.set(material, textures);
+}
 /** Retain immutable source references so selecting High restores original detail. */
 export function applyTextureQuality(
   roots: T.Object3D[],
@@ -71,8 +76,15 @@ export function applyTextureQuality(
       if (!(object instanceof T.Mesh)) return;
       for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
         // Don't touch lightmaps, reflection render targets or shader data textures.
-        for (const key of ["map", "normalMap", "roughnessMap", "metalnessMap"] as const) {
-          const texture = (material as T.MeshStandardMaterial)[key];
+        const standard = material as T.MeshStandardMaterial;
+        for (const texture of [
+          standard.map,
+          standard.normalMap,
+          standard.roughnessMap,
+          standard.metalnessMap,
+          standard.emissiveMap,
+          ...(surfaceTextures.get(material) ?? []),
+        ]) {
           if (!texture || seen.has(texture) || textureLevels.get(texture) === signature) continue;
           seen.add(texture);
           let source = textureSources.get(texture.source);

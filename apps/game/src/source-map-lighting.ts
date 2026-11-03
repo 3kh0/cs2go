@@ -5,6 +5,17 @@ import { bindSourceMapAttributes } from "./source-map-attributes";
 import { loadSourceLighting } from "./source-lighting";
 import { loadSourceColorCorrection } from "./map-color";
 import { applySourceFog } from "./source-fog";
+import { loadSourceLayers, applySourceLayers } from "./source-layers";
+import { registerSurfaceTextures } from "./presentation-settings";
+import { applySourceBarns, loadSourceBarns } from "./source-barn";
+import { applySourceSelfIllumination, type SourceSelfIllumination } from "./source-self-illum";
+import { applySourceSurface, loadSourceSurfaceLookup, type SourceSurface } from "./source-surface";
+import {
+  loadSourceReflections,
+  applySourceReflections,
+  sourceReflectionCandidates,
+  type SourceReflections,
+} from "./source-reflections";
 import {
   applySourceFoliage,
   applySourceFoliageTransmission,
@@ -12,7 +23,14 @@ import {
 } from "./source-foliage";
 
 interface SourceMaterialLighting {
-  materials: { name: string; ambientOcclusionScale?: number; foliage?: SourceFoliage }[];
+  materials: {
+    name: string;
+    ambientOcclusionScale?: number;
+    foliage?: SourceFoliage;
+    selfIllumination?: SourceSelfIllumination;
+    surface?: SourceSurface;
+    localReflections?: boolean;
+  }[];
 }
 
 interface SourceMapLighting {
@@ -22,6 +40,10 @@ interface SourceMapLighting {
   materialLighting: SourceMaterialLighting;
   native: boolean;
   transmissionTextures: Map<string, T.Texture>;
+  layers?: Awaited<ReturnType<typeof loadSourceLayers>>;
+  barns?: T.Box3[];
+  surfaceLookup?: T.DataTexture;
+  reflections?: SourceReflections;
 }
 
 async function loadNativeAtlas(name: string, format: T.CompressedPixelFormat, bytes: number) {
@@ -44,7 +66,16 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     renderer.capabilities.maxTextureSize >= 4096 &&
     renderer.extensions.has("EXT_texture_compression_bptc") &&
     renderer.extensions.has("WEBGL_compressed_texture_s3tc");
-  const [irradiance, shadows, directional, materialLighting] = await Promise.all([
+  const [
+    irradiance,
+    shadows,
+    directional,
+    materialLighting,
+    layers,
+    barns,
+    surfaceLookup,
+    reflections,
+  ] = await Promise.all([
     native
       ? loadNativeAtlas("irradiance", T.RGB_BPTC_UNSIGNED_Format, 16777216)
       : new T.TextureLoader().loadAsync(assetUrl("/models/maps/lighting/irradiance.webp")),
@@ -56,6 +87,10 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
       if (!r.ok) throw new Error("Native map material lighting unavailable");
       return (await r.json()) as SourceMaterialLighting;
     }),
+    loadSourceLayers(renderer),
+    loadSourceBarns(),
+    loadSourceSurfaceLookup(),
+    loadSourceReflections(renderer),
     loadSourceLighting(),
     loadSourceColorCorrection(),
   ]);
@@ -78,13 +113,59 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
       transmissionTextures.set(path, texture);
     }),
   );
-  return { irradiance, shadows, directional, materialLighting, native, transmissionTextures };
+  return {
+    irradiance,
+    shadows,
+    directional,
+    materialLighting,
+    native,
+    transmissionTextures,
+    layers,
+    barns,
+    surfaceLookup,
+    reflections,
+  };
 }
 
 // Coordinates, lightmap/probe selection and probe fallbacks survive offline simplification.
 // Native GPU blocks retain HDR and chart borders; no runtime vertex splitting or ray tracing.
 export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting) {
-  const { irradiance, shadows, directional, materialLighting, native, transmissionTextures } = data;
+  const {
+    irradiance,
+    shadows,
+    directional,
+    materialLighting,
+    native,
+    transmissionTextures,
+    layers,
+    barns,
+    surfaceLookup,
+    reflections,
+  } = data;
+  const barnMasks = new Map<T.Material, number>();
+  const reflectionCandidates = new Map<T.Material, Set<number>>();
+  if (barns || reflections) {
+    root.updateMatrixWorld(true);
+    const bounds = new T.Box3();
+    root.traverse((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      if (!object.geometry.boundingBox) object.geometry.computeBoundingBox();
+      bounds.copy(object.geometry.boundingBox!).applyMatrix4(object.matrixWorld);
+      let mask = 0;
+      barns?.forEach((barn, index) => {
+        if (bounds.intersectsBox(barn)) mask |= 1 << index;
+      });
+      for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+        barnMasks.set(material, (barnMasks.get(material) ?? 0) | mask);
+        if (reflections) {
+          let candidates = reflectionCandidates.get(material);
+          if (!candidates) reflectionCandidates.set(material, (candidates = new Set()));
+          for (const index of sourceReflectionCandidates(bounds, reflections))
+            candidates.add(index);
+        }
+      }
+    });
+  }
   const patched = new Set<T.Material>();
   root.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
@@ -98,12 +179,50 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
         (entry) => entry.name === material.name,
       );
       if (material instanceof T.MeshStandardMaterial) {
+        if (nativeMaterial?.surface?.metalness !== undefined)
+          material.metalness = nativeMaterial.surface.metalness;
+        if (nativeMaterial?.selfIllumination)
+          applySourceSelfIllumination(material, nativeMaterial.selfIllumination);
         if (nativeMaterial?.ambientOcclusionScale !== undefined)
           material.aoMapIntensity = nativeMaterial.ambientOcclusionScale;
         if (nativeMaterial?.foliage?.alphaCoverage)
           material.alphaTest = nativeMaterial.foliage.alphaCoverage.reference;
       }
       const foliage = nativeMaterial?.foliage;
+      const surface = nativeMaterial?.surface;
+      const environmentCandidates =
+        (surface?.indirectSpecular || nativeMaterial?.localReflections) && reflections
+          ? [...(reflectionCandidates.get(material) ?? [])].sort((a, b) => a - b)
+          : undefined;
+      const barnMask = barnMasks.get(material) ?? 0;
+      const layered = layers?.materials[material.name];
+      const surfaceTextures: T.Texture[] = [];
+      if (layered && layers)
+        for (const key of [
+          layered.normal1,
+          layered.normal2,
+          layered.color2,
+          layered.mask,
+          ...(layered.detail ? [layered.detail.texture] : []),
+        ]) {
+          const texture = layers.textures.get(key);
+          if (texture) surfaceTextures.push(texture);
+        }
+      const transmissionPath = foliage?.transmission?.texture;
+      const transmissionTexture = transmissionPath
+        ? transmissionTextures.get(transmissionPath)
+        : undefined;
+      if (transmissionTexture) surfaceTextures.push(transmissionTexture);
+      if (surfaceTextures.length) registerSurfaceTextures(material, surfaceTextures);
+      if (layered && material instanceof T.MeshStandardMaterial) {
+        if (!object.geometry.hasAttribute("sourceBlend") || !material.map)
+          throw new Error("Native layered surface data missing; regenerate the map");
+        // Keep the primary UV packing transform for the derivative tangent frame.
+        // Native packed normal/roughness samples replace the GLTF approximations.
+        material.normalMap = material.map;
+        material.roughnessMap = material.metalnessMap = material.aoMap = null;
+        material.metalness = layered.metalness;
+      }
       if (foliage && !object.geometry.hasAttribute("sourceBackProbe"))
         throw new Error("Native foliage back-probe attributes missing; regenerate the map");
       const cable = material.name === "csgo_placeholder_cable";
@@ -119,6 +238,8 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
         renderer: T.WebGLRenderer,
       ) => {
         prior(shader, renderer);
+        if (surface) applySourceSurface(shader, surface, surfaceLookup);
+        if (layered && layers) applySourceLayers(shader, layered, layers.textures);
         if (foliage) applySourceFoliage(shader, foliage);
         if (foliage) {
           shader.vertexShader =
@@ -170,16 +291,20 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
           shader.vertexShader;
         shader.vertexShader = shader.vertexShader.replace(
           "#include <begin_vertex>",
-          `#include <begin_vertex>\nvSourceUv=vec3(sourceUv, step(0.5 / 65535.0, sourceUv.x + sourceUv.y)); vSourceProbe=sourceProbe;`,
+          `#include <begin_vertex>
+          float sourceLightmapped = step(0.5 / 65535.0, sourceUv.x);
+          float sourceLocalMask = floor(sourceUv.y*65535.0+0.5);
+          vec2 sourceLocalShadows = vec2(mod(sourceLocalMask, 256.0), floor(sourceLocalMask/256.0))/255.0;
+          vSourceUv=vec3(mix(sourceLocalShadows, sourceUv, sourceLightmapped), sourceLightmapped); vSourceProbe=sourceProbe;`,
         );
         shader.fragmentShader =
           `uniform sampler2D sourceDirectional; uniform float sourceNative; uniform sampler2D sourceIrradiance; uniform sampler2D sourceShadows; varying vec3 vSourceUv; varying vec4 vSourceProbe;\n` +
           shader.fragmentShader;
         let direct =
-          "float sourceCoverage = vSourceUv.z;\n" +
+          "float sourceCoverage = vSourceUv.z;\nvec4 sourceBakedShadows = texture2D(sourceShadows, vSourceUv.xy);\n" +
           T.ShaderChunk.lights_fragment_begin.replace(
             "getDirectionalLightInfo( directionalLight, directLight );",
-            "getDirectionalLightInfo( directionalLight, directLight );\ndirectLight.color *= mix(vSourceProbe.a, 1.0-texture2D(sourceShadows,vSourceUv.xy).r, sourceCoverage);",
+            "getDirectionalLightInfo( directionalLight, directLight );\ndirectLight.color *= mix(vSourceProbe.a, 1.0-sourceBakedShadows.r, sourceCoverage);",
           );
         if (foliage?.transmission)
           direct = direct.replaceAll(
@@ -191,6 +316,11 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
           "#include <lights_fragment_begin>",
           direct,
         );
+        applySourceBarns(shader, {
+          mask: barnMask,
+          shadows: "mix(vSourceUv.xy, sourceBakedShadows.gb, sourceCoverage)",
+          transmission: foliage?.transmission ? "sourceTransmissionColor" : undefined,
+        });
         shader.fragmentShader = shader.fragmentShader.replace(
           "#include <lights_fragment_maps>",
           `#include <lights_fragment_maps>
@@ -219,23 +349,35 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
             `
             }
           }
-          vec3 sourceSurfaceProbe = ${foliage ? "gl_FrontFacing ? vSourceProbe.rgb : vSourceBackProbe.rgb" : "vSourceProbe.rgb"};
+          vec3 sourceSurfaceProbe = ${foliage && !foliage.dontFlipBackfaceNormals ? "gl_FrontFacing ? vSourceProbe.rgb : vSourceBackProbe.rgb" : "vSourceProbe.rgb"};
           irradiance = mix(sourceSurfaceProbe * sourceSurfaceProbe * 16.0, sourceDiffuse, sourceCoverage) * PI;
           ${
             foliage?.transmission
-              ? `vec3 sourceOppositeProbe = gl_FrontFacing ? vSourceBackProbe.rgb : vSourceProbe.rgb;
+              ? `vec3 sourceOppositeProbe = ${foliage.dontFlipBackfaceNormals ? "vSourceBackProbe.rgb" : "gl_FrontFacing ? vSourceBackProbe.rgb : vSourceProbe.rgb"};
           sourceTransmittedLight += sourceOppositeProbe * sourceOppositeProbe * 16.0 * sourceTransmissionColor * (1.0 - sourceCoverage);`
               : ""
           }
           iblIrradiance = vec3(0.0);
         `,
         );
+        if (reflections && environmentCandidates)
+          applySourceReflections(shader, reflections, environmentCandidates);
       };
       material.customProgramCacheKey = () =>
         priorKey +
-        "-native-source-lighting-v6" +
+        "-native-source-lighting-v10" +
+        `:barns-${barnMask}` +
+        (surface
+          ? `:surface-${surface.directSpecular}-${surface.indirectSpecular}-${!!surface.nativeAO}`
+          : "") +
+        (environmentCandidates ? ":native-environments" : "") +
+        (layered
+          ? `:layers-${layered.fancy}-${!!layered.detail}-${layered.specularIndirect}`
+          : "") +
         (cable ? ":cable-radius" : "") +
-        (foliage ? ":foliage" : "") +
+        (foliage
+          ? `:foliage-${!!foliage.dontFlipBackfaceNormals}-${!!foliage.heightGradient}`
+          : "") +
         (foliage?.transmission
           ? foliage.transmission.useAlbedo
             ? ":transmission-albedo"

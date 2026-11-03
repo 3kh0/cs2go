@@ -48,17 +48,18 @@
     "stationaryBarnLights": 2,
     "fullyBakedBarnsExcludedFromRuntime": 2,
     "selfIlluminatedMaterials": 1,
-    "controlledSurfaceMaterials": 250,
+    "controlledSurfaceMaterials": 267,
     "nativeBrdfGpuBytes": 16384,
     "nativeReflectionGpuBytes": 22543008,
-    "nativeReflectionVolumes": 43
+    "nativeReflectionVolumes": 43,
+    "foliageControlGpuBytes": 629860
   },
   "limitations": [
     "The authored native 4096 mip is used for 8192 irradiance and shadow atlases; directional irradiance retains its full 4096 resolution. Unsupported GPU compression uses the existing bounded 2048 WebP fallback.",
-    "Native BRDF/local reflection response, foliage wind/height-gradient tint/shadow-depth alpha coverage, dynamic caster shadows for stationary barn lights, screen-space occlusion, effect-specific fog, bloom, specular cubemap blending and complete native postprocess/exposure evaluation are not fully reproduced.",
+    "Native BRDF/local reflection response, foliage wind/shadow-depth alpha coverage, dynamic caster shadows for stationary barn lights, screen-space occlusion, effect-specific fog, bloom, specular cubemap blending and complete native postprocess/exposure evaluation are not fully reproduced.",
     "Native lightmap UVs and baked-lighting selection survive simplification. Probe-lit geometry still uses the existing resampled native ambient-cube grid; native octree validity is not ported."
   ],
-  "runtimeGeometrySha256": "f0214094b18e53b01105b303e87c077bafca31bc71915b347ebc565955544601",
+  "runtimeGeometrySha256": "9ad8429d60b4923748553421bb95278efaed4464ac3c37bfd177d19dc3d52945",
   "nativeImport": {
     "extractor": "Source2Viewer 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
     "runner": "Windows Amp runner, DESKTOP-IUQV7N6, 2026-11-02",
@@ -68,12 +69,12 @@
       "postprocess.txt": "54f0b51e245d0c4c23d2e225e09b83e3624a4ae52d71efcf906d94f92484ba32",
       "probe-local-shadows.bin.gz": "0efbdf364f6bb68fe4ec73462477b9d6a43ad44914675959eaf1b001601ae1bf",
       "barn-source.json": "3870d1164c29b864c68d17f759ac8c5f1468f82fa16fdc3c4aac1f9a19efb5c1",
-      "dust2-native.bin": "b61926b496c15e2fecddf80808266f3860f2000eaabfbf120a385b57642a77aa",
       "brdf-source.json": "e54b05f28e2706e4dfe1b4d1f558a392c3205507ed5aa2203c8b9b0845f50b14",
       "brdf-ggx.bin.gz": "c5a1b45d856f37c359bf6b6d243c3f2d3d7b97dabb507cc94e128379321318e9",
-      "reflections/source.json": "7089f36fbb01baaf3a42b1965802dd89745318523e2cecb14910cf31e707190b"
+      "reflections/source.json": "7089f36fbb01baaf3a42b1965802dd89745318523e2cecb14910cf31e707190b",
+      "dust2-native.bin": "b61926b496c15e2fecddf80808266f3860f2000eaabfbf120a385b57642a77aa"
     },
-    "referenceMapSha256": "107ebc469f7869511a05db6bc41e4f324852d68b2bd74c8a93a7f1eb7685aa7f",
+    "referenceMapSha256": "f0214094b18e53b01105b303e87c077bafca31bc71915b347ebc565955544601",
     "preservedTextureCount": 564,
     "atlasLevels": [
       {

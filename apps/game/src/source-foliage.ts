@@ -2,6 +2,8 @@ import * as T from "three";
 
 export interface SourceFoliage {
   nonDirectional: boolean;
+  dontFlipBackfaceNormals?: boolean;
+  heightGradient?: { amount: number; power: number };
   transmission?: { useAlbedo: boolean; texture?: string };
   alphaCoverage?: {
     reference: number;
@@ -20,6 +22,54 @@ export function applySourceFoliage(
   shader: T.WebGLProgramParametersWithUniforms,
   foliage: SourceFoliage,
 ) {
+  // Native COLOR is a foliage control stream, not painted diffuse color.
+  shader.vertexShader = shader.vertexShader.replace(
+    "#include <color_vertex>",
+    `#include <color_vertex>
+    ${
+      foliage.heightGradient
+        ? `
+    #if defined(USE_COLOR) || defined(USE_COLOR_ALPHA)
+    vSourceFoliageHeight = color.r;
+    #else
+    vSourceFoliageHeight = 1.0;
+    #endif`
+        : ""
+    }
+    #if defined(USE_COLOR) || defined(USE_COLOR_ALPHA)
+    vColor = vec4(1.0);
+    #endif`,
+  );
+  if (foliage.heightGradient) {
+    shader.vertexShader = "varying float vSourceFoliageHeight;\n" + shader.vertexShader;
+    shader.fragmentShader =
+      "varying float vSourceFoliageHeight; uniform vec2 sourceFoliageGradient;\n" +
+      shader.fragmentShader;
+    shader.uniforms.sourceFoliageGradient = {
+      value: new T.Vector2(foliage.heightGradient.amount, foliage.heightGradient.power),
+    };
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "#include <lights_physical_fragment>",
+      `#include <lights_physical_fragment>
+      material.diffuseContribution *= 1.0 + sourceFoliageGradient.x * pow(clamp(vSourceFoliageHeight, 0.001, 1.0), sourceFoliageGradient.y);`,
+    );
+  }
+  // Native foliage flips only N. Derivative tangent reconstruction also changes
+  // sign with screen winding; correct that only when N was kept unflipped.
+  let normalChunk = T.ShaderChunk.normal_fragment_begin;
+  if (foliage.dontFlipBackfaceNormals)
+    normalChunk = normalChunk
+      .replace("normal *= faceDirection;", "")
+      .replace("tbn[0] *= faceDirection;", "#ifndef USE_TANGENT\ntbn[0] *= faceDirection;")
+      .replace("tbn[1] *= faceDirection;", "tbn[1] *= faceDirection;\n#endif");
+  else
+    normalChunk = normalChunk
+      .replace("tbn[0] *= faceDirection;", "")
+      .replace("tbn[1] *= faceDirection;", "");
+  shader.fragmentShader = shader.fragmentShader.replace(
+    "#include <normal_fragment_begin>",
+    normalChunk,
+  );
   const alpha = foliage.alphaCoverage;
   if (!alpha) return;
   shader.uniforms.sourceFoliageCoverage = {
