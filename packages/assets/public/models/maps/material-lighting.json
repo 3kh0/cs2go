@@ -19,7 +19,13 @@
       "foliage": {
         "nonDirectional": true
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "agave_plant_01",
@@ -33,7 +39,13 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "dust_awning_fabric_01",
@@ -44,7 +56,13 @@
           "useAlbedo": true
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "dust_awning_fabric_ripped_01",
@@ -61,7 +79,13 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "dust_patio_umbrella_color",
@@ -72,7 +96,13 @@
           "useAlbedo": true
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "dust_weeds_01",
@@ -89,13 +119,20 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "grape_leaves_01",
       "resource": "materials/models/props/de_dust/hr_dust/foliage/grape_leaves_01.vmat",
       "foliage": {
         "nonDirectional": true,
+        "dontFlipBackfaceNormals": true,
         "alphaCoverage": {
           "reference": 0.401,
           "grazingAngleMask": 0,
@@ -103,7 +140,13 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "olive_bark_01",
@@ -111,7 +154,13 @@
       "foliage": {
         "nonDirectional": true
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "olive_branch_01",
@@ -128,7 +177,13 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "palm_frond_01",
@@ -146,13 +201,20 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "sagebrush_01",
       "resource": "materials/models/props/de_dust/hr_dust/foliage/sagebrush_01.vmat",
       "foliage": {
         "nonDirectional": true,
+        "dontFlipBackfaceNormals": true,
         "alphaCoverage": {
           "reference": 0.549,
           "grazingAngleMask": 0.317,
@@ -160,7 +222,13 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "sumac_01",
@@ -177,13 +245,20 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "weeds_cressa_01",
       "resource": "materials/models/props/de_dust/hr_dust/foliage/weeds_cressa_01.vmat",
       "foliage": {
         "nonDirectional": true,
+        "dontFlipBackfaceNormals": true,
         "alphaCoverage": {
           "reference": 0.635,
           "grazingAngleMask": 0,
@@ -191,7 +266,13 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "zebra_grass_01",
@@ -208,7 +289,13 @@
           "boostDistanceMeters": 508.0
         }
       },
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "dust_hanging_light_02_on",
@@ -2216,12 +2303,24 @@
     {
       "name": "dust_garbage_dumpster_color",
       "resource": "materials/models/props/de_dust/hr_dust/dust_garbage_container/dust_garbage_dumpster_color.vmat",
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "nuke_concrete_barrier_color",
       "resource": "materials/models/props/de_nuke/hr_nuke/nuke_concrete_barrier/nuke_concrete_barrier_color.vmat",
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     },
     {
       "name": "tarp_kit_01_base",
@@ -2231,7 +2330,13 @@
     {
       "name": "soccerball001_color",
       "resource": "materials/models/props/de_dust/hr_dust/dust_soccerball/soccerball001_color.vmat",
-      "localReflections": true
+      "localReflections": true,
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true,
+        "nativeAO": true,
+        "metalness": 0
+      }
     }
   ],
   "foliageSource": {
