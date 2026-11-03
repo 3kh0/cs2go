@@ -1,0 +1,87 @@
+{
+  "materials": {},
+  "textures": {
+    "street_lantern_02_color": {
+      "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_ao_psd_bd8305af.vtex",
+      "sourceSha256": "b67af808b46fad25b33c43026338ba68b5ed29657b43705983c13868eefba089",
+      "format": "BC4",
+      "srgb": false,
+      "file": "street-lantern.bin.gz",
+      "gpuBytes": 21840,
+      "gpuSha256": "118cd07fea40211ddc8bc1e11453337749f05cb9bfe5fd1f1dd9c44a42be6bef",
+      "mips": [
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 16384
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 4096
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 1024
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 256
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 64
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 16
+        }
+      ],
+      "fallbackFile": "street-lantern-rgba.bin.gz",
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 131072,
+          "redSha256": "ec1f61751929f2835cfbf38b7d21e273d98fe185494df420ed0e3ade82693776"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 32768,
+          "redSha256": "fd313da3e9f7b625d3c24f022a4003db1025136cef92ce50a2c7f23506799768"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 8192,
+          "redSha256": "4246fe983fc98c69166b0a35659e3001ad3f99aaf8b6635d394f24e81fc25d3f"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 2048,
+          "redSha256": "f6589093a999c1bfb22591e5eeb08332db6f55f201485c5a220c09524fd645db"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 512,
+          "redSha256": "51b2b567c5c8abce7c00b5dd2f99b33a1e0c2f6cfa50cb5621855116b2143744"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 128,
+          "redSha256": "960568d26eabefd8de3cc430e9594e4c8fdbf704e52296ba866f34a24e11884a"
+        }
+      ],
+      "fallbackGpuBytes": 174720
+    }
+  },
+  "interpretation": "Native BC4_U material AO, raw linear red, 256x128 through 8x4; preserves all six authored mips. RGBA8 fallback palette rounds half up and matches all six independent Windows red-channel hashes; original BC4 GPU filtering remains driver-dependent."
+}
