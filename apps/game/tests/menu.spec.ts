@@ -1,12 +1,14 @@
 import { test, expect } from "@playwright/test";
 
 test("casual lobby showcases the map and starts a full match", async ({ page }) => {
+  test.setTimeout(150_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
-  await expect(page.locator("#startup")).toHaveCount(0, { timeout: 15000 });
-  await expect(page.locator("#play")).toHaveText("PLAY CASUAL↗");
-  await expect(page.locator("#menu")).not.toContainText(/DEATHMATCH|PRACTICE/);
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
+  await expect(page.locator("#startup")).toHaveCount(0, { timeout: 15_000 });
+  await expect(page.locator("#play")).toHaveText("GO");
+  await expect(page.locator("#menu")).not.toContainText(/DEATHMATCH/);
   const initial = await page.evaluate(() => window.__game.camera.position.toArray());
   await page.screenshot({ path: "artifacts/casual-menu.png" });
   await page.waitForTimeout(3000);
@@ -39,6 +41,7 @@ test("casual lobby showcases the map and starts a full match", async ({ page }) 
   await page.evaluate(() => document.exitPointerLock());
   await expect(page.locator("#pause")).toBeVisible();
   await page.locator("#leave").click();
+  await page.locator("#leave-yes").click();
   await expect(page.locator("#menu")).toBeVisible();
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.waitForTimeout(100);

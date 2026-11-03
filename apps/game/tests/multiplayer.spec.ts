@@ -260,6 +260,7 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     await a.locator('[data-session="single"]').click();
     await a.locator("#play").click();
     await a.locator('#team-select [data-team="ct"]').click();
+    await a.waitForFunction(() => window.__game.active && !window.__game.matchLoading);
     expect(await a.evaluate(() => !!window.__game.network)).toBe(false);
     expect(await a.evaluate(() => window.__game.bots.length)).toBe(19);
     expect(await a.evaluate(() => window.__game.world === window.__game.dust)).toBe(true);

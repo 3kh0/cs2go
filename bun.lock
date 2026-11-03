@@ -5,6 +5,7 @@
     "": {
       "name": "cs2go",
       "devDependencies": {
+        "@types/node": "^26.6.6",
         "meshoptimizer": "1.1.1",
         "oxfmt": "^0.75.0",
         "oxlint": "^1.90.0",

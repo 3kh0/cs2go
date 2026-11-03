@@ -1,7 +1,7 @@
 :root {
   --menu-unit: calc(100vh / 1080);
   --menu-header: calc(64 * var(--menu-unit));
-  --social-rail: calc(64 * var(--menu-unit));
+  --social-rail: max(52px, calc(64 * var(--menu-unit)));
 }
 #menu {
   background: linear-gradient(0deg, #19222b45, transparent 45%);
@@ -83,56 +83,6 @@
   color: #82d8ff;
 }
 #menu[data-page="home"] .home-match-card {
-  display: none;
-}
-#menu[data-page="play"] .home-cards {
-  z-index: 1;
-  inset: 6% 8% 7%;
-  width: auto;
-  display: block;
-}
-#menu[data-page="play"] .home-match-card {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 48px 1fr 64px;
-  gap: 24px;
-  padding: 28px;
-  background: #26343be8;
-  backdrop-filter: blur(16px);
-}
-#menu[data-page="play"] .mode-options {
-  grid-column: 1 / -1;
-  grid-row: 1;
-}
-#menu[data-page="play"] .mode-options button {
-  flex: 0 0 220px;
-  font-size: 16px;
-}
-#menu[data-page="play"] .home-map-art {
-  grid-column: 1;
-  grid-row: 2;
-  width: 240px;
-  min-height: 240px;
-  align-self: start;
-}
-#menu[data-page="play"] .mode-description {
-  grid-column: 1;
-  grid-row: 3;
-  align-self: center;
-  padding: 0;
-  font-size: 15px;
-}
-#menu[data-page="play"] #play {
-  grid-column: 2;
-  grid-row: 3;
-  width: 240px;
-  justify-self: end;
-  align-self: center;
-}
-#menu[data-page="play"] .home-loadout-card,
-#menu[data-page="play"] .home-collection-card,
-#menu[data-page="play"] .home-profile {
   display: none;
 }
 #menu .home-nav button:hover {
@@ -323,7 +273,7 @@
   top: 0;
   bottom: -25px;
   right: 0;
-  width: 52px;
+  width: var(--social-rail);
   padding: 12px 9px;
   background: #26344066;
   display: flex;
@@ -495,26 +445,6 @@
 #match-status {
   display: block;
   color: #e7c875;
-}
-
-#menu[data-page="play"] .home-match-card {
-  grid-template-rows: 48px 48px 1fr 64px;
-  overflow: auto;
-}
-#menu[data-page="play"] .session-options {
-  grid-row: 2;
-}
-#menu[data-page="play"] .home-map-art {
-  grid-row: 3;
-}
-#menu[data-page="play"] #multiplayer-options {
-  grid-column: 2;
-  grid-row: 3;
-  align-self: start;
-}
-#menu[data-page="play"] .mode-description,
-#menu[data-page="play"] #play {
-  grid-row: 4;
 }
 
 /* Panorama nav typography and 150/250 ms selection timing. The block shimmer

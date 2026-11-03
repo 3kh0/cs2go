@@ -1,3 +1,4 @@
+import { prepareMatchMedia } from "./match-media";
 import { applyShadowDetail, graphicsPixelRatio } from "./graphics-settings";
 import { applyDisplayViewport, type DisplayAspect } from "./display-settings";
 import { applyViewmodelCamera, viewmodelPointToWorld } from "./viewmodel-settings";
@@ -626,6 +627,7 @@ export class Game {
       return world;
     });
     const assets = [
+      prepareMatchMedia(),
       loadCalloutRadar().then((image) => {
         this.radarImage = image;
       }),
@@ -670,7 +672,7 @@ export class Game {
         this.assetsReady = true;
         this.updateGraphics();
         play.disabled = false;
-        play.querySelector("span")!.textContent = "PLAY CASUAL";
+        play.querySelector("span")!.textContent = "GO";
         onLoad(loadSteps, loadSteps);
       })
       .catch((error: unknown) => {
@@ -1007,8 +1009,7 @@ export class Game {
     });
   }
   syncPointerLock() {
-    // Reserve pointer lock during the click gesture, but do not enable controls
-    // until the prepared match replaces the loader.
+    // Keep controls disabled while the map and team previews are prepared.
     if (this.matchLoading) {
       this.locked = false;
       this.keys.clear();
@@ -1071,6 +1072,27 @@ export class Game {
       registerActorLighting(gun);
     }
     return gun;
+  }
+  /** Finish map, roster and both factions' equipment before team selection. */
+  async prepareMatch(mode: Mode, bots: boolean, signal: AbortSignal) {
+    const team = this.team;
+    try {
+      this.mode = mode;
+      this.useWorld();
+      this.configureBots(this.teamMode, bots ? undefined : 0);
+      this.bots.forEach((bot, index) => this.spawnBot(bot, index));
+      for (const faction of [team, team === "ct" ? "t" : "ct"] as const) {
+        signal.throwIfAborted();
+        this.team = faction;
+        this.spawnPlayer();
+        await this.warmUp(signal);
+        this.prepareMatchFrame();
+        await this.finishPrograms(signal);
+      }
+    } finally {
+      this.team = team;
+      this.bots.forEach((bot) => (bot.group.visible = false));
+    }
   }
   // Compile both worlds and weapon programs; upload visible finishes only.
   // Hidden HD skin variants upload on first use instead of occupying GPU memory.
@@ -5198,6 +5220,7 @@ export class Game {
   get simulationRunning() {
     return this.active && !this.matchLoading;
   }
+  teamPreview?: (dt: number) => void;
   lastRender = 0;
   frame(now: number) {
     requestAnimationFrame((t) => this.frame(t));
@@ -5290,6 +5313,10 @@ export class Game {
     ) {
       unregisterGloveModel(this.lastSpectatorViewmodel);
       this.lastSpectatorViewmodel = undefined;
+    }
+    if (this.teamPreview) {
+      this.teamPreview(renderDt);
+      return;
     }
     if (!this.active && !el("menu").classList.contains("hidden")) {
       this.renderer.toneMapping = T.ACESFilmicToneMapping;

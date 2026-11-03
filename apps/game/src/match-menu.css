@@ -1,0 +1,429 @@
+#menu[data-page="play"] .home-cards {
+  inset: 0 var(--social-rail) 0 0;
+  width: auto;
+  display: block;
+}
+#menu[data-page="play"] .home-match-card {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 48px 44px minmax(0, 1fr) 80px;
+  text-align: left;
+  background: #80909c90;
+  backdrop-filter: blur(20px);
+  box-shadow: none;
+}
+#menu[data-page="play"] .mode-options {
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: #202b3538;
+  border-bottom: 1px solid #ffffff26;
+}
+#menu[data-page="play"] .session-options {
+  background: #14212e80;
+}
+#menu[data-page="play"] .mode-options button {
+  flex: 0 1 auto;
+  padding: 6px 10px;
+  font:
+    700 14px "Stratum2",
+    sans-serif;
+  line-height: 1.2;
+  letter-spacing: 0;
+  border-radius: 2px;
+  background: transparent;
+  border: 0;
+}
+#menu[data-page="play"] .mode-options button[aria-pressed="true"] {
+  color: #b2efff;
+  background: #ffffff18;
+}
+#menu[data-page="play"] .session-options button[aria-pressed="true"] {
+  background: #74bdd35c;
+}
+#menu[data-page="play"] .mode-options button:hover {
+  background: #ffffff20;
+}
+#menu[data-page="play"] .home-loadout-card,
+#menu[data-page="play"] .home-collection-card,
+#menu[data-page="play"] .home-profile,
+#menu[data-page="play"] #home-scenery-button,
+#menu[data-page="play"] #home-scenery {
+  display: none;
+}
+.match-browser {
+  display: flex;
+  gap: 32px;
+  min-height: 0;
+  padding: 24px max(24px, 12%);
+  overflow: auto;
+  align-items: flex-start;
+}
+.match-maps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+#menu .match-maps .home-map-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 210px;
+  height: clamp(260px, 48vh, 470px);
+  padding: 18px;
+  border: 3px solid #edf6f9;
+  background:
+    linear-gradient(0deg, #15213175, transparent 45%),
+    url(/ui/home/dust2.webp) 54% center / cover;
+  box-shadow: 0 3px 8px #111d2730;
+}
+#menu .match-maps .home-map-art:hover,
+#menu .match-maps .home-map-art:focus-visible {
+  border-color: #a9e7fa;
+  filter: brightness(1.08);
+}
+.map-badge {
+  width: 100%;
+  max-width: 112px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 5px #0006);
+}
+.map-card-caption {
+  position: absolute;
+  inset: auto 8px 14px;
+  text-align: center;
+  font:
+    700 24px "Stratum2 Condensed",
+    sans-serif;
+  text-shadow: 0 2px 4px #0008;
+}
+.match-footer {
+  margin: 0;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+  border-top: 1px solid #ffffff32;
+  padding: 12px 28px;
+  background: #23323b45;
+}
+#mode-description {
+  margin: 0 auto 0 0;
+  font-size: 13px;
+}
+#menu .match-footer #play {
+  width: 270px;
+  min-height: 50px;
+  justify-content: center;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid #67ee38;
+  color: #93ff48;
+  background:
+    linear-gradient(90deg, #38dc0048, transparent 24%, transparent 76%, #38dc0048), #2b7f20;
+  box-shadow: inset 0 0 12px #61ff2038;
+  font:
+    700 28px "Stratum2 Monodigit",
+    sans-serif;
+  letter-spacing: 5px;
+  padding: 10px 20px;
+}
+#menu .match-footer #play::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url(/ui/home/linemap.png) center / calc(514 * var(--menu-unit))
+    calc(513 * var(--menu-unit));
+  mix-blend-mode: overlay;
+  opacity: 0.32;
+  pointer-events: none;
+}
+#menu .match-footer #play > span {
+  position: relative;
+  z-index: 1;
+}
+#menu .match-footer #play:hover {
+  background-color: #349b23;
+  border-color: #93ff64;
+  filter: none;
+}
+.match-browser #multiplayer-options {
+  flex: 0 0 240px;
+  margin: 0;
+  padding: 16px;
+  background: #26323b50;
+}
+#multiplayer-options input {
+  min-height: 30px;
+}
+#multiplayer-options button {
+  padding: 8px 12px;
+  margin-top: 5px;
+  background: #ffffff15;
+  font-size: 11px;
+}
+
+#team-select {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  color: #fff;
+  background: linear-gradient(0deg, #0c162a99, #0c162a26 35%, #0c162a26 65%, #0c162a66);
+}
+.team-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+.team-choice {
+  --team-tint: 228, 184, 74;
+  position: relative;
+  padding: 0;
+  min-width: 0;
+  background: linear-gradient(0deg, rgba(var(--team-tint), 0.07), rgba(var(--team-tint), 0.025));
+  text-align: center;
+  border: 0;
+}
+.team-ct {
+  --team-tint: 74, 152, 220;
+}
+.team-choice:hover,
+.team-choice:focus-visible {
+  background: linear-gradient(0deg, rgba(var(--team-tint), 0.11), rgba(var(--team-tint), 0.045));
+  filter: none;
+}
+.team-choice:focus-visible {
+  outline: 2px solid #ffffffa0;
+  outline-offset: -3px;
+}
+.team-label {
+  position: absolute;
+  top: 4%;
+  left: 0;
+  right: 0;
+  text-shadow: 0 2px 3px #0009;
+}
+.team-emblem {
+  width: clamp(52px, 7.3vh, 90px);
+  height: clamp(52px, 7.3vh, 90px);
+  object-fit: contain;
+  margin-bottom: 14px;
+}
+.team-label h2 {
+  font:
+    700 clamp(26px, 3.6vh, 44px) "Stratum2 Condensed",
+    sans-serif;
+  margin: 0 0 8px;
+  color: #fff;
+}
+.team-count {
+  margin: 0;
+  font:
+    700 clamp(13px, 1.6vh, 20px) "Stratum2 Condensed",
+    sans-serif;
+}
+.agent-preview {
+  position: absolute;
+  inset: 49% 5% 4%;
+  pointer-events: none;
+}
+.team-controls {
+  position: absolute;
+  bottom: 2%;
+  left: 3%;
+  right: 3%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.team-controls button {
+  pointer-events: auto;
+  padding: 6px 10px;
+  background: transparent;
+  font:
+    700 18px "Stratum2 Condensed",
+    sans-serif;
+  text-shadow: 0 2px 3px #0009;
+}
+.team-controls button:hover {
+  background: #ffffff20;
+}
+#match-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  color: #f2f2ed;
+  background:
+    linear-gradient(0deg, #17263425, transparent 60%),
+    url(/ui/home/dust2.webp) center / cover;
+}
+.match-loading-scenery {
+  position: absolute;
+  bottom: 5%;
+  left: 4%;
+  text-shadow: 0 2px 12px #0008;
+}
+.match-loading-scenery > span {
+  font:
+    500 clamp(32px, 4vw, 56px) "Stratum2 Condensed",
+    sans-serif;
+}
+.match-loading-scenery p {
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+.match-loading-panel {
+  overflow-y: auto;
+  position: absolute;
+  inset: 4% 3% 4% auto;
+  width: clamp(270px, 25vw, 370px);
+  padding: 30px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  background: #8b969fa8;
+  backdrop-filter: blur(30px);
+}
+.match-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.match-loading-content .map-badge {
+  width: 136px;
+  height: 136px;
+  margin: 4px 0 25px;
+}
+.match-loading-map {
+  font:
+    700 34px "Stratum2 Condensed",
+    sans-serif;
+}
+.match-loading-content h1 {
+  font:
+    500 24px "Stratum2 Condensed",
+    sans-serif;
+  margin: 22px 0;
+}
+.match-loading-brief {
+  border-top: 1px solid #d6e5ec88;
+  padding: 22px 4px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #e0e6e8;
+}
+.match-loading-brief strong {
+  font-weight: 500;
+}
+.match-loading-brief p {
+  margin: 18px 0;
+}
+.match-loading-team {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+}
+.match-loading-team img {
+  width: 24px;
+  height: 24px;
+}
+.match-loading-footer {
+  height: auto;
+  margin: auto 0 0;
+  display: block;
+  border: 0;
+  margin-top: auto;
+  padding-top: 12px;
+}
+.match-loading-progress {
+  display: block;
+  width: 100%;
+}
+.match-loading-progress [role="status"] {
+  min-height: 36px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #e1e8eb;
+}
+.match-loading-progress progress {
+  width: 100%;
+  height: 6px;
+  display: block;
+  appearance: none;
+  border: 0;
+  background: #203340;
+}
+.match-loading-progress progress::-webkit-progress-bar {
+  background: #203340;
+}
+.match-loading-progress progress::-webkit-progress-value {
+  background: #73d4f0;
+}
+.match-loading-progress progress::-moz-progress-bar {
+  background: #73d4f0;
+}
+.match-loading-stages {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: #b1c8d4;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+}
+.match-loading-footer button {
+  width: 100%;
+  margin: 18px 0 0;
+  padding: 10px;
+  border: 1px solid #ffffff28;
+  background: transparent;
+  font-size: 11px;
+}
+
+@media (max-height: 720px) {
+  #menu[data-page="play"] .home-match-card {
+    grid-template-rows: 42px 40px minmax(0, 1fr) 72px;
+  }
+  .match-browser {
+    padding-block: 18px;
+  }
+  #menu .match-maps .home-map-art {
+    height: min(48vh, 340px);
+  }
+  .match-loading-panel {
+    padding: 18px 22px 14px;
+  }
+  .match-loading-content .map-badge {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 18px;
+  }
+  .match-loading-content h1 {
+    margin: 12px 0;
+  }
+  .match-loading-brief {
+    padding: 12px 4px;
+    font-size: 12px;
+  }
+  .match-loading-brief p {
+    margin: 10px 0;
+  }
+}
+@media (max-width: 650px) {
+  .match-browser {
+    padding-inline: 18px;
+    gap: 18px;
+  }
+  .match-browser #multiplayer-options {
+    flex-basis: 180px;
+  }
+  #menu .match-footer #play {
+    width: 180px;
+  }
+}

@@ -1,7 +1,4 @@
-import type { AgentTeam } from "./soldier";
-
-/** Match setup has real stage milestones; GPU work has no meaningful byte percentage. */
-export function openMatchLoading(team: AgentTeam) {
+export function openMatchLoading(mode: "casual" | "competitive" = "casual") {
   const menu = document.getElementById("menu")!;
   const overlay = document.createElement("section");
   const controller = new AbortController();
@@ -10,7 +7,7 @@ export function openMatchLoading(team: AgentTeam) {
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-labelledby", "match-loading-title");
   overlay.setAttribute("aria-busy", "true");
-  overlay.innerHTML = `<div class="match-loading-content"><span class="match-loading-map">DUST II</span><h1 id="match-loading-title">JOINING ${team === "ct" ? "COUNTER-TERRORISTS" : "TERRORISTS"}</h1><p role="status" aria-live="polite">Preparing your team…</p><progress max="3" value="0" aria-label="Match preparation"></progress><div class="match-loading-stages"><span>PLAYERS</span><span>GRAPHICS</span><span>READY</span></div><button class="text-button" type="button">CANCEL · ESC</button></div>`;
+  overlay.innerHTML = `<div class="match-loading-scenery"><span>Dust II</span></div><aside class="match-loading-panel"><div class="match-loading-content"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="match-loading-map">Dust II</span><h1 id="match-loading-title">${mode === "competitive" ? "Competitive" : "Casual"}</h1></div><div class="match-loading-brief"><strong>Bomb Scenario Mission</strong><p>Buy equipment at the beginning of each round with money earned.</p><p>${mode === "competitive" ? "5 vs 5 · Round economy<br>Friendly fire is ON" : "10 vs 10 · Free armor<br>Friendly fire is OFF"}</p></div><footer class="match-loading-footer"><div class="match-loading-progress"><p role="status" aria-live="polite">Preparing Dust II…</p><progress max="3" value="0" aria-label="Match preparation"></progress></div><button class="text-button" type="button">CANCEL · ESC</button></footer></aside>`;
   const status = overlay.querySelector<HTMLElement>('[role="status"]')!;
   const progress = overlay.querySelector("progress")!;
   const button = overlay.querySelector("button")!;

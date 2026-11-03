@@ -4,6 +4,7 @@ import { setupCosmeticMenu } from "./cosmetic-menu";
 import "./fonts.css";
 import "./style.css";
 import "./home-menu.css";
+import "./match-menu.css";
 import "./settings-page.css";
 import "./pause-menu.css";
 import "./dropdowns.css";
@@ -15,7 +16,7 @@ import { setupControlSettings } from "./control-settings";
 import { Game } from "./game";
 import { MultiplayerMatch } from "./multiplayer-match";
 import { validRoom } from "@cs2go/protocol";
-import { openTeamSelector } from "./team-select";
+import { prepareTeamSelector } from "./team-select";
 import { openMatchLoading } from "./match-loading";
 import { setupSteamAccount } from "./steam-account";
 import { startIntro } from "./intro";
@@ -85,9 +86,7 @@ let selectedMode: "casual" | "competitive" = "casual";
 for (const button of document.querySelectorAll<HTMLButtonElement>("[data-mode]"))
   button.onclick = () => {
     selectedMode = button.dataset.mode as typeof selectedMode;
-    el("mode-title").textContent = selectedMode.toUpperCase();
-    el("mode-description").textContent = "";
-    el("play").firstElementChild!.textContent = `PLAY ${selectedMode.toUpperCase()}`;
+    el("play").setAttribute("aria-label", `Play ${selectedMode}`);
     document
       .querySelectorAll("[data-mode]")
       .forEach((node) =>
@@ -157,41 +156,42 @@ el("play").onclick = () => {
       return;
     }
   }
-  openTeamSelector(
-    (team) => {
-      void enterMatch(team, session === "multi");
-    },
-    selectedMode === "competitive" ? 5 : 10,
-  );
+  void prepareMatchSelection();
 };
-async function enterMatch(team: "t" | "ct", multiplayer = false) {
-  if (game.matchLoading) return;
-  const loader = openMatchLoading(team);
+async function prepareMatchSelection(replayTeam?: "t" | "ct") {
+  if (game.matchLoading || document.getElementById("team-select")) return;
+  const mode = selectedMode;
+  const multiplayer = replayTeam === undefined && session === "multi";
+  const loader = openMatchLoading(mode);
+  let selector: ReturnType<typeof prepareTeamSelector> | undefined;
   game.matchLoading = true;
-  try {
-    await loader.stage("Preparing your team…", 0);
+  const enter = (team: "t" | "ct") => {
     game.setTeam(team, false);
-    game.start(selectedMode, { bots: !multiplayer });
-    if (!game.active) {
-      loader.close();
-      return;
+    game.keys.clear();
+    game.firing = false;
+    game.accumulator = 0;
+    game.last = performance.now();
+    game.start(mode, { bots: !multiplayer });
+    if (multiplayer && game.active)
+      game.network = new MultiplayerMatch(game, server.value, room.value, password.value, mode);
+  };
+  const cancelPreview = () => selector?.close();
+  loader.signal.addEventListener("abort", cancelPreview, { once: true });
+  try {
+    await loader.stage("Preparing Dust II…", 0);
+    await game.prepareMatch(mode, !multiplayer, loader.signal);
+    await loader.stage("Preparing the match…", 1);
+    if (replayTeam === undefined) {
+      selector = prepareTeamSelector(enter, mode === "competitive" ? 5 : 10, game);
+      await selector.ready;
     }
-    await loader.stage("Preparing the map and equipment…", 1);
-    await game.warmUp(loader.signal);
-    await loader.stage("Entering Dust II…", 2);
-    game.prepareMatchFrame();
-    await game.finishPrograms(loader.signal);
     await loader.stage("Ready", 3);
-    if (multiplayer)
-      game.network = new MultiplayerMatch(
-        game,
-        server.value,
-        room.value,
-        password.value,
-        selectedMode,
-      );
     loader.close();
+    game.matchLoading = false;
+    if (replayTeam !== undefined) enter(replayTeam);
+    else selector!.show();
   } catch (error) {
+    selector?.close();
     game.menu();
     if (loader.signal.aborted) {
       loader.close();
@@ -201,12 +201,8 @@ async function enterMatch(team: "t" | "ct", multiplayer = false) {
       loader.error();
     }
   } finally {
-    game.keys.clear();
-    game.firing = false;
-    game.accumulator = 0;
-    game.last = performance.now();
+    loader.signal.removeEventListener("abort", cancelPreview);
     game.matchLoading = false;
-    game.syncPointerLock();
   }
 }
 
@@ -241,7 +237,7 @@ leaveConfirm.addEventListener("keydown", (event) => {
 });
 el("result-menu").onclick = () => game.menu();
 el("again").onclick = () => {
-  void enterMatch(game.team);
+  void prepareMatchSelection(game.team);
 };
 el("settings-button").onclick = el("pause-settings").onclick = () => {
   el("settings").classList.remove("hidden");
@@ -319,9 +315,3 @@ document.addEventListener("keydown", (event) => {
     el("close-loadout").click();
   }
 });
-
-const favicon = document.createElement("link");
-favicon.rel = "icon";
-favicon.type = "image/svg+xml";
-favicon.href = "/icon.svg";
-document.head.append(favicon);

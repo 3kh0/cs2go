@@ -21,13 +21,14 @@ export function homeMenuMarkup() {
     <main class="home-content">
       <div id="home-agent-stage" aria-label="Equipped agent preview"></div>
       <aside class="home-cards">
-        <section class="home-match-card">
-          <div class="home-map-art"><div class="eyebrow">DUST II</div><h1 id="mode-title">CASUAL</h1></div>
-          <div class="mode-options"><button data-mode="casual" aria-pressed="true">CASUAL</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE</button></div>
-          <div class="mode-description" id="mode-description"></div>
-          <button class="deploy" id="play" disabled><span>PLAY CASUAL</span><span class="arrow">›</span></button>
-          <div class="mode-options session-options"><button data-session="single" aria-pressed="true">SINGLE PLAYER</button><button data-session="multi" aria-pressed="false">MULTIPLAYER</button></div>
-          <div id="multiplayer-options" hidden><label>SERVER<input id="match-server" placeholder="wss://your-server/ws"></label><label>ROOM CODE<input id="match-room" minlength="12" maxlength="32"></label><label>SERVER PASSWORD<input id="match-password" type="password" maxlength="128"></label><button id="match-invite">COPY INVITE</button><small id="match-status" role="status"></small></div>
+        <section class="home-match-card" aria-label="Choose a match">
+          <div class="mode-options session-options" role="group" aria-label="Session type"><button data-session="single" aria-pressed="true">OFFLINE</button><button data-session="multi" aria-pressed="false">ONLINE</button></div>
+          <div class="mode-options" role="group" aria-label="Game mode"><button data-mode="casual" aria-pressed="true">CASUAL</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE</button></div>
+          <div class="match-browser">
+            <div id="multiplayer-options" hidden><label>SERVER<input id="match-server" placeholder="wss://your-server/ws"></label><label>ROOM CODE<input id="match-room" minlength="12" maxlength="32"></label><label>SERVER PASSWORD<input id="match-password" type="password" maxlength="128"></label><button id="match-invite">COPY INVITE</button><small id="match-status" role="status"></small></div>
+            <div class="match-maps" role="group" aria-label="Maps"><button class="home-map-art" type="button" aria-label="Dust II, selected" aria-pressed="true"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="map-card-caption">Dust II</span></button></div>
+          </div>
+          <footer class="match-footer"><p id="mode-description" role="status"></p><button class="deploy" id="play" disabled aria-label="Play casual"><span>GO</span></button></footer>
         </section>
         <button class="home-loadout-card" id="home-loadout"><span class="home-card-kicker">YOUR LOADOUT</span><span class="home-guns"><img src="/icons/buy/ak47.svg" alt=""><img src="/icons/buy/m4a1_silencer.svg" alt=""></span><strong>Configure your buy menu</strong><small>Customize your buy slots <span>›</span></small></button>
         <button class="home-collection-card" id="home-collection"><span class="home-card-kicker">PLAY YOUR WAY</span><img src="/icons/buy/awp.svg" alt=""><strong>Weapon finishes</strong><small>Customize your skins<span>›</span></small></button>
@@ -100,6 +101,7 @@ export function setupHomeMenu(game: Game) {
     syncNavigation();
   });
   navigationObserver.observe(document.body, { childList: true });
+  navigationObserver.observe(el("app"), { childList: true });
   for (const id of ["menu", "skin-menu", "cosmetic-menu", "settings", "home-panel"]) {
     const node = document.getElementById(id);
     if (node)
@@ -148,6 +150,8 @@ export function setupHomeMenu(game: Game) {
   el("home-play").onclick = () => {
     close();
     el("menu").dataset.page = "play";
+    el("home-scenery").hidden = true;
+    el("home-scenery-button").setAttribute("aria-expanded", "false");
     el("play").focus();
   };
   el("home-loadout").onclick = () => el("inventory-button").click();

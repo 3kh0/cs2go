@@ -20,7 +20,7 @@ test("competitive purchases, armor parity, friendly fire, round economy, kits an
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await page.locator("#home-play").click();
   await page.locator('[data-mode="competitive"]').click();
-  await expect(page.locator("#mode-title")).toHaveText("COMPETITIVE");
+  await expect(page.locator('[data-mode="competitive"]')).toHaveAttribute("aria-pressed", "true");
   await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();
