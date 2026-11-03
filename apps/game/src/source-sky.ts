@@ -1,6 +1,7 @@
 import * as T from "three";
 import { fetchGzipped } from "./gltf";
 import { setSourceFogSky } from "./source-fog";
+import { sourceSkyLayer } from "./source-sky-layer";
 
 // Native BC6H cube faces/mips, sampled in Source's Z-up axes
 export async function loadSourceSky(renderer: T.WebGLRenderer) {
@@ -30,19 +31,22 @@ export async function loadSourceSky(renderer: T.WebGLRenderer) {
   texture.magFilter = T.LinearFilter;
   texture.needsUpdate = true;
   setSourceFogSky(texture);
+  const layer = await sourceSkyLayer(renderer, texture);
   const material = new T.ShaderMaterial({
-    uniforms: { sourceSky: { value: texture } },
+    uniforms: {
+      sourceSkyFrame: { value: layer.texture },
+      sourceSkyViewport: { value: layer.viewport },
+    },
     vertexShader: `varying vec3 sourceSkyDirection;
       void main() {
         sourceSkyDirection = position;
         gl_Position = projectionMatrix * mat4(mat3(viewMatrix)) * vec4(position, 1.0);
         gl_Position.z = gl_Position.w;
       }`,
-    fragmentShader: `uniform samplerCube sourceSky; varying vec3 sourceSkyDirection;
+    fragmentShader: `uniform sampler2D sourceSkyFrame; uniform vec4 sourceSkyViewport;
       void main() {
-        vec3 d = normalize(sourceSkyDirection);
-        vec3 color = textureCube(sourceSky, vec3(d.x, -d.z, d.y)).rgb * exp2(0.765);
-        gl_FragColor = vec4(color, 1.0);
+        vec2 uv=(gl_FragCoord.xy-sourceSkyViewport.xy)/sourceSkyViewport.zw;
+        gl_FragColor=vec4(texture2D(sourceSkyFrame,uv).rgb,1.0);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
       }`,
@@ -52,6 +56,8 @@ export async function loadSourceSky(renderer: T.WebGLRenderer) {
   const mesh = new T.Mesh(new T.BoxGeometry(1, 1, 1), material);
   mesh.name = "Native Dust II sky";
   mesh.frustumCulled = false;
+  mesh.onBeforeRender = (_renderer, _scene, camera) => layer.update(camera);
+  material.addEventListener("dispose", layer.dispose);
   mesh.renderOrder = -1000;
   return mesh;
 }
