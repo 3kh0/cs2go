@@ -23,6 +23,11 @@ import {
 } from "./source-foliage";
 
 import { applySourceEnvironment, type SourceEnvironment } from "./source-environment";
+import {
+  applySourceGenericTextures,
+  sourceTextureWithUV,
+  type SourceGenericTextures,
+} from "./source-generic-textures";
 
 interface SourceMaterialLighting {
   materials: {
@@ -46,6 +51,7 @@ interface SourceMapLighting {
   layers?: Awaited<ReturnType<typeof loadSourceLayers>>;
   environmentTextures?: Map<string, T.Texture>;
   occlusionTextures?: Map<string, T.Texture>;
+  generic?: { materials: Record<string, SourceGenericTextures>; textures: Map<string, T.Texture> };
   barns?: T.Box3[];
   surfaceLookup?: T.DataTexture;
   reflections?: SourceReflections;
@@ -82,6 +88,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     reflections,
     environmentBundle,
     occlusionBundle,
+    generic,
   ] = await Promise.all([
     native
       ? loadNativeAtlas("irradiance", T.RGB_BPTC_UNSIGNED_Format, 16777216)
@@ -100,6 +107,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     loadSourceReflections(renderer),
     loadSourceMaterialBundle(renderer, "/models/maps/lighting/environment/"),
     loadSourceMaterialBundle(renderer, "/models/maps/lighting/occlusion/"),
+    loadSourceMaterialBundle<SourceGenericTextures>(renderer, "/models/maps/lighting/generic/"),
     loadSourceLighting(),
     loadSourceColorCorrection(),
   ]);
@@ -135,6 +143,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     reflections,
     environmentTextures: environmentBundle.textures,
     occlusionTextures: occlusionBundle.textures,
+    generic,
   };
 }
 
@@ -154,6 +163,7 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
     reflections,
     environmentTextures,
     occlusionTextures,
+    generic,
   } = data;
   const barnMasks = new Map<T.Material, number>();
   const reflectionCandidates = new Map<T.Material, Set<number>>();
@@ -212,6 +222,16 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
         nativeAOTexture.rotation = original.rotation;
         nativeAOTexture.channel = original.channel;
         material.aoMap = nativeAOTexture;
+      }
+      const genericMaterial = generic?.materials[material.name];
+      if (genericMaterial && material instanceof T.MeshStandardMaterial) {
+        const color = generic!.textures.get(genericMaterial.color);
+        const normal = generic!.textures.get(genericMaterial.normal);
+        if (!color || !normal || !material.map || !material.normalMap)
+          throw new Error("Native generic texture/UV mapping missing");
+        material.map = sourceTextureWithUV(color, material.map);
+        material.normalMap = sourceTextureWithUV(normal, material.normalMap);
+        material.roughnessMap = null;
       }
       const surface = nativeMaterial?.surface;
       const environment = nativeMaterial?.environment;
@@ -276,6 +296,7 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
         if (layered && layers) applySourceLayers(shader, layered, layers.textures);
         // Layered materials construct AO from their own layer inputs first.
         if (surface) applySourceSurface(shader, surface, surfaceLookup);
+        if (genericMaterial) applySourceGenericTextures(shader, genericMaterial);
         if (environment)
           applySourceEnvironment(shader, environment, environmentTextures!.get("height")!);
         if (foliage) applySourceFoliage(shader, foliage);
@@ -410,6 +431,7 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
           : "") +
         (environmentCandidates ? ":native-environments" : "") +
         (environment ? ":environment-inputs" : "") +
+        (genericMaterial ? ":generic-packed-inputs" : "") +
         (layered
           ? `:layers-${layered.fancy}-${!!layered.detail}-${layered.specularIndirect}`
           : "") +

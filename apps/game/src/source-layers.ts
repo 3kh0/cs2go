@@ -34,8 +34,8 @@ export interface SourceLayerMaterial {
   detail?: { texture: string; scale: number[]; tintBlend: number[] };
 }
 
-interface LayerManifest {
-  materials: Record<string, SourceLayerMaterial>;
+interface LayerManifest<Material> {
+  materials: Record<string, Material>;
   textures: Record<string, LayerTexture>;
 }
 
@@ -43,10 +43,13 @@ export function loadSourceLayers(renderer: T.WebGLRenderer) {
   return loadSourceMaterialBundle(renderer, "/models/maps/lighting/layers/");
 }
 
-export async function loadSourceMaterialBundle(renderer: T.WebGLRenderer, directory: string) {
+export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
+  renderer: T.WebGLRenderer,
+  directory: string,
+) {
   const response = await assetFetch(directory + "source.json");
   if (!response.ok) throw new Error("Native layered materials unavailable");
-  const manifest = (await response.json()) as LayerManifest;
+  const manifest = (await response.json()) as LayerManifest<Material>;
   const textures = new Map<string, T.Texture>();
   const queue = createLoadQueue(6);
   await Promise.all(

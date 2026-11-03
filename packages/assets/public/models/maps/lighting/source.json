@@ -14,7 +14,9 @@
     "models/generic/tarp_kit_01/tarpkit_01_color_tga_18d62141.vtex_c": "9527b2c035c6753ba9c376068c5ba01d94678236c9cb144c549adaa4f9f60f93",
     "models/generic/tarp_kit_01/tarpkit_01_mask_tga_300433d.vtex_c": "3e7acf143cd2800b1b84ab8302b4329343c8fc8bc6ec383dd310e19e24b29d62",
     "models/generic/tarp_kit_01/tarpkit_01_normal_tga_664d5611.vtex_c": "705e967e7fa67d72fc8db550a9c28b9ba814c8cc357f734082db39c91201ef57",
-    "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_ao_psd_bd8305af.vtex_c": "b67af808b46fad25b33c43026338ba68b5ed29657b43705983c13868eefba089"
+    "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_ao_psd_bd8305af.vtex_c": "b67af808b46fad25b33c43026338ba68b5ed29657b43705983c13868eefba089",
+    "materials/models/props/de_dust/hr_dust/dust_arches/dust_arch_01_color_tga_fb22148.vtex_c": "e9cb2aef1e06ab82ee1fdc9f9fbeb719d52011c6b781c285ec007c06ea256498",
+    "materials/models/props/de_dust/hr_dust/dust_arches/dust_arch_01_normal_tga_aed07b7d.vtex_c": "48658ab3b9224f23ecb759e93844081a3f6ad42a04f3a8a0d58944f2fdd085c1"
   },
   "runtime": {
     "lightmapSize": 4096,
@@ -60,7 +62,9 @@
     "nativeEnvironmentGpuBytes": 1048560,
     "nativeMaterialAOGpuBytes": 21840,
     "nativeMaterialAOFallbackGpuBytes": 174720,
-    "probeCpuBytes": 80034184
+    "probeCpuBytes": 80034184,
+    "genericNativeTextureGpuBytes": 4194296,
+    "genericFallbackTextureGpuBytes": 2796160
   },
   "limitations": [
     "The authored native 4096 mip is used for 8192 irradiance and shadow atlases; directional irradiance retains its full 4096 resolution. Unsupported GPU compression uses the existing bounded 2048 WebP fallback.",

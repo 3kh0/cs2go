@@ -123,7 +123,19 @@ export async function renderMapLighting(
   let surfaceQuality:
     | { high: number[]; low: number[]; restored: number[]; restoredImage: boolean }
     | undefined;
+  let genericQuality: { high: number[]; low: number[]; restored: number[] } | undefined;
   if (testSurfaceQuality) {
+    let arch: T.MeshStandardMaterial | undefined;
+    dust.scenery.traverse((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      for (const material of Array.isArray(object.material) ? object.material : [object.material])
+        if (material instanceof T.MeshStandardMaterial && material.name === "dust_arch_01_color")
+          arch ??= material;
+    });
+    if (!arch?.map || !arch.normalMap) throw new Error("Native arch textures missing");
+    const genericWidths = () =>
+      [arch!.map!, arch!.normalMap!].map((texture) => (texture.image as { width: number }).width);
+    const genericHigh = genericWidths();
     if (!layerUniforms) throw new Error("Native ground material did not compile");
     const textures = [
       "sourceLayerNormal1",
@@ -136,8 +148,10 @@ export async function renderMapLighting(
     applyTextureQuality([dust.root], "low", renderer.capabilities.getMaxAnisotropy(), 1);
     renderer.render(scene, camera);
     const low = widths();
+    const genericLow = genericWidths();
     applyTextureQuality([dust.root], "high", renderer.capabilities.getMaxAnisotropy(), 8);
     renderer.render(scene, camera);
+    genericQuality = { high: genericHigh, low: genericLow, restored: genericWidths() };
     surfaceQuality = {
       high,
       low,
@@ -181,6 +195,7 @@ export async function renderMapLighting(
     referenceCables,
     raySamples,
     surfaceQuality,
+    genericQuality,
     sun,
     shade,
     image,

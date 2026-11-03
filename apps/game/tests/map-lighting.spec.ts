@@ -250,6 +250,9 @@ test("native layer GPU uploads follow Low texture settings and restore High exac
   expect(result.surfaceQuality?.low).toEqual([128, 128, 128, 128]);
   expect(result.surfaceQuality?.restored).toEqual(result.surfaceQuality?.high);
   expect(result.surfaceQuality?.restoredImage).toBe(true);
+  expect(result.genericQuality?.high).toEqual([2048, 1024]);
+  expect(result.genericQuality?.low).toEqual([512, 256]);
+  expect(result.genericQuality?.restored).toEqual(result.genericQuality?.high);
   expect(errors).toEqual([]);
 });
 
@@ -397,10 +400,17 @@ test("Dust II loads bounded fallback lighting without native compression support
   await page.goto("/audio/source/manifest.json");
   const result = await page.evaluate(async () => {
     const path = "/tests/map-lighting-fixture.ts";
-    return (await import(path)).renderMapLighting(true);
+    return (await import(path)).renderMapLighting(true, false, true);
   });
   expect(requests.some((url) => url.includes("/lighting/irradiance.webp"))).toBe(true);
   expect(requests.some((url) => url.includes("/lighting/shadows.webp"))).toBe(true);
+  expect(result.genericQuality?.high).toEqual([512, 512]);
+  expect(result.genericQuality?.low).toEqual([128, 128]);
+  expect(result.genericQuality?.restored).toEqual(result.genericQuality?.high);
+  expect(result.surfaceQuality?.restoredImage).toBe(true);
+  expect(requests.filter((url) => /\/lighting\/generic\/.*-rgba\.bin\.gz/.test(url))).toHaveLength(
+    2,
+  );
   expect(requests.some((url) => url.includes("/lighting/native/"))).toBe(false);
   expect(requests.some((url) => /\/lighting\/layers\/.*\.bin\.gz/.test(url))).toBe(false);
   expect(requests.some((url) => /\/lighting\/layers\/.*\.webp/.test(url))).toBe(true);
