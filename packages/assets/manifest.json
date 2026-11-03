@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "8c2ab1ddbaca4b43eddd11d914d5598a29027c0a0bb82aa65d1a666f9cb15cbb",
+  "release": "27e70adb6be66a32c5c956a8b90cddd29a69d1b30b99ad0fed1bf64e4cb58589",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -73226,6 +73226,16 @@
       "sha256": "8e5342c6ea52d9a85098075cef5b73421484196905323e26c884eeab03f9ae2a",
       "bytes": 5724
     },
+    "ui/home/dust2-emblem.svg": {
+      "sha256": "1f46d58ba1996df102c4d9d1a57041ef91dd093e4a031db3977c523d9ecd7d08",
+      "bytes": 236609,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "87302f32a36e44c821b218ad6c29f83c479a8a83af8e8edf0434f83d7f9b71c6",
+        "bytes": 59314
+      }
+    },
     "ui/home/dust2.webp": {
       "sha256": "fec0412791801e053ff33788bfe707acc12b19f0d2aeb1862d02bcd8ddd69e3f",
       "bytes": 177008
@@ -73243,6 +73253,16 @@
     "ui/home/linemap.png": {
       "sha256": "cbbe86cc4da39b2ca3365c97b68d054e9951e26830c31d50af0517136d46302a",
       "bytes": 133470
+    },
+    "ui/home/match-entry-source.json": {
+      "sha256": "c30f6a29f4fd866c885025b1c39632d38b0ed824ef571a3a468d22ceb64d79b4",
+      "bytes": 813,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "8460d8ee1b2227e17e1f4d5dd83a8644000a1246e7acdbbbdf07ca48bbf75efb",
+        "bytes": 419
+      }
     },
     "ui/home/power.svg": {
       "sha256": "1307bb2b72a54c538310741f6567882b482edbcca31794b3fd099689874b5ec2",

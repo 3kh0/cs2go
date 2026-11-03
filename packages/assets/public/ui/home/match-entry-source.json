@@ -1,0 +1,12 @@
+{
+  "originalAuthor": "Valve",
+  "source": "Installed Counter-Strike 2 game/csgo/pak01_dir.vpk",
+  "gameVersion": "1.41.9.4",
+  "resource": "panorama/images/map_icons/map_icon_de_dust2.vsvg_c",
+  "resourceSha256": "fc7266f4076aa73fe0d7f7fe0c021f462cfbc935b2527a436a7613c5cdbd730f",
+  "tool": "Source2Viewer-CLI 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "command": "Source2Viewer-CLI.exe -i <game/csgo/pak01_dir.vpk> -f panorama/images/map_icons/map_icon_de_dust2.vsvg_c -d -o <output.svg>",
+  "processing": "Preserve exported SVG paths unchanged; remove XML declaration, exporter comment and external DTD before the opening svg tag. Original compiled resource remains untouched.",
+  "output": "dust2-emblem.svg",
+  "outputSha256": "1f46d58ba1996df102c4d9d1a57041ef91dd093e4a031db3977c523d9ecd7d08"
+}
