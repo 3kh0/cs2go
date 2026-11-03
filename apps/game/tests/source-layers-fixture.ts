@@ -1,7 +1,9 @@
 import * as T from "three";
 import { applySourceLayers, type SourceLayerMaterial } from "../src/source-layers";
+import { applySourceSurface, loadSourceSurfaceLookup } from "../src/source-surface";
 
-export function renderSourceLayers() {
+export async function renderSourceLayers() {
+  const lookup = await loadSourceSurfaceLookup();
   const renderer = new T.WebGLRenderer({ antialias: false });
   renderer.setSize(128, 128);
   const scene = new T.Scene();
@@ -55,7 +57,14 @@ export function renderSourceLayers() {
       ]),
     ),
   };
-  material.onBeforeCompile = (shader) => applySourceLayers(shader, native, textures);
+  material.onBeforeCompile = (shader) => {
+    applySourceLayers(shader, native, textures);
+    applySourceSurface(
+      shader,
+      { directSpecular: false, indirectSpecular: native.specularIndirect, nativeAO: true },
+      lookup,
+    );
+  };
   material.customProgramCacheKey = () => `layer-fixture-${native.fancy}`;
   scene.add(new T.Mesh(geometry, material));
   const ambient = new T.AmbientLight(0xffffff, Math.PI);
@@ -100,6 +109,10 @@ export function renderSourceLayers() {
   const specularOn = render();
   native.specularIndirect = false;
   const specularOff = render();
+  native.specularIndirect = true;
+  native.ao = [0, 0];
+  material.customProgramCacheKey = () => "layer-fixture-occluded";
+  const specularOccluded = render();
   const mixed = (row: number[][]) => row.filter(([r, , b]) => r > 10 && b > 10).length;
   const result = {
     left: bordered[12],
@@ -112,6 +125,7 @@ export function renderSourceLayers() {
     normalEdge: encodedNormals[2],
     specularOn: specularOn[63],
     specularOff: specularOff[63],
+    specularOccluded: specularOccluded[63],
   };
   geometry.dispose();
   material.dispose();

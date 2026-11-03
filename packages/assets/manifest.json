@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "7177c8eb425cbfc736848eab6478d7c7038cf2d86b0643118e5c8747a8929d18",
+  "release": "a4ac0c3614c6d0ebd0c25717be990d0a57b9d1c94e90bd695638c92004efad11",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -9184,6 +9184,49 @@
         "bytes": 1694134
       }
     },
+    "models/maps/lighting/environment/color.bin.gz": {
+      "sha256": "e639447cd3413f0f545ab3ffb06585e64cffac186a81da06f2865e4791b67a61",
+      "bytes": 269671,
+      "decodedSha256": "40c5305fbfb74c7f10a2ab4276d696cd000a76e103e239e5795eb2f13c5b1a18"
+    },
+    "models/maps/lighting/environment/color.webp": {
+      "sha256": "d14555eeb270045c0a82faee8777656c820be5eaaa1364c5dffede23a1592fbb",
+      "bytes": 57794
+    },
+    "models/maps/lighting/environment/height.bin.gz": {
+      "sha256": "7b88249c30949f82c50d5f88ed2d6b671ecd74a9e8c897fbcdbf37af35618f86",
+      "bytes": 160038,
+      "decodedSha256": "115e113c614a4234526934d7915821a92fd198d870bd986c87ebf7ef2f7a95ea"
+    },
+    "models/maps/lighting/environment/height.webp": {
+      "sha256": "1e17e505fbf9e05bd6684ee66671862b7b43139a769dc4ad1e3ee73486ff6159",
+      "bytes": 27784,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "056ba9204d0a64e49805044da072f90e566397d70b41cc8c94de3c75253c487b",
+        "bytes": 27781
+      }
+    },
+    "models/maps/lighting/environment/normal.bin.gz": {
+      "sha256": "27ab4a1968ccd2f1efa9b948ce91bc7ceeb0806a8dcf67f7220e0a21b5831377",
+      "bytes": 336743,
+      "decodedSha256": "32829c04e047fd161fb5f611fe696d8f4a913474271015b5873b8aedec7a1326"
+    },
+    "models/maps/lighting/environment/normal.webp": {
+      "sha256": "0546f73cf1987ca6d9ec93a16d5c375262aaf2e790d74c5efd4904269665af51",
+      "bytes": 115380
+    },
+    "models/maps/lighting/environment/source.json": {
+      "sha256": "41d22e1a0e414afe5979e1910159376cfc4e1ae9ab7d2af31cdd4b6cb8a2c2cc",
+      "bytes": 4266,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "98d4a28e384332c9cecd1d53f586cd68490b31bdbab5f24fd1ff43046caa2b0d",
+        "bytes": 814
+      }
+    },
     "models/maps/lighting/fallback.bin.gz": {
       "sha256": "6f75adcfe2f22be8f59ba99e1fb5bbf0a57f5ac06baaaa7254630bb64df8fde0",
       "bytes": 4464115,
@@ -10354,13 +10397,13 @@
       "bytes": 921466
     },
     "models/maps/lighting/source.json": {
-      "sha256": "6e8a36a491123dc6d956fcd3d2c219258061498dfbdfccd307a190e3c80f7676",
-      "bytes": 6604,
+      "sha256": "d519902dc0d40034bbbda1bcc7bc3ee0cb8caea41f16cb31a1de892d78ef0f4b",
+      "bytes": 7062,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "1d6b8501e89c364f3b3c87ac8d834277bf3e52f60cacbea6a08a9594651fcd4a",
-        "bytes": 2561
+        "sha256": "5004f0df6ecb8fa12b01696fad5e9326d43f877dd92e1c4ccec9331a690ad768",
+        "bytes": 2728
       }
     },
     "models/maps/lighting/transmission-source.json": {
@@ -10385,13 +10428,13 @@
       }
     },
     "models/maps/material-lighting.json": {
-      "sha256": "2613f3a8d5f08686c2a987663d12b72f73687772e55b43a911ad2a9e71873ddd",
-      "bytes": 72293,
+      "sha256": "a93a53afe9233510081b08a0da58d2899d9f4e71d8138d3a494333b461abb693",
+      "bytes": 79172,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "fde4a9c32cb108372d36a6ec4b93b0f7246f7d70250418d1e14c9d9ba7398c68",
-        "bytes": 4107
+        "sha256": "91ae8a25282587683d3acc56056884181b069f0a43b6115ee688447aa9b48071",
+        "bytes": 4210
       }
     },
     "models/maps/overlay-correction.json": {

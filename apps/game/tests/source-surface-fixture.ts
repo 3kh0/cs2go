@@ -36,7 +36,8 @@ export async function renderSourceSurfaces() {
     Math.round(
       Math.min(new T.Color().setRGB(linear, linear, linear).convertLinearToSRGB().r, 1) * 255,
     );
-  const ao = new T.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1);
+  const aoData = new Uint8Array([0, 0, 0, 255]);
+  const ao = new T.DataTexture(aoData, 1, 1);
   ao.needsUpdate = true;
   const pixel = (
     surface: SourceSurface,
@@ -45,7 +46,11 @@ export async function renderSourceSurfaces() {
     occluded = false,
   ) => {
     const material = new T.MeshStandardMaterial({ metalness, roughness });
-    if (occluded) material.aoMap = ao;
+    if (occluded) {
+      material.aoMap = ao;
+      // Source scale=0 still reads raw AO, unlike Three's intensity=0.
+      material.aoMapIntensity = 0;
+    }
     material.color.setRGB(0.25, 0.25, 0.25);
     material.onBeforeCompile = (shader) => applySourceSurface(shader, surface, lookup);
     material.customProgramCacheKey = () =>
@@ -60,8 +65,10 @@ export async function renderSourceSurfaces() {
   };
   const diffuseDirect = pixel(matte, 0, 0.05);
   const diffuseDirectRough = pixel(matte, 0, 1);
-  const native = surfaces.find((entry: { surface: SourceSurface }) => entry.surface.nativeAO)
-    .surface as SourceSurface;
+  const native = surfaces.find(
+    (entry: { surface: SourceSurface }) =>
+      entry.surface.nativeAO && entry.surface.directSpecular && entry.surface.indirectSpecular,
+  ).surface as SourceSurface;
   const nativeDirectAO = pixel(native, 0, 1, true);
   const nativeDirectClear = pixel(native, 0, 1);
   const nativeMetalAO = pixel(native, 1, 1, true);
@@ -126,6 +133,22 @@ export async function renderSourceSurfaces() {
   scene.environment = environment;
   const metalIndirectOff = pixel(matte, 1, 0.1);
   const metalIndirectOn = pixel(reflective, 1, 0.1);
+  const aoSamples = [];
+  aoData[0] = 128;
+  ao.needsUpdate = true;
+  for (const roughness of [0.2, 0.8])
+    for (const NoV of [1, 0.1]) {
+      mesh.rotation.y = Math.acos(NoV);
+      const clear = pixel(native, 1, roughness);
+      const occluded = pixel(native, 1, roughness, true);
+      const expected = clear.map((value) => {
+        const linear = new T.Color()
+          .setRGB(value / 255, value / 255, value / 255)
+          .convertSRGBToLinear().r;
+        return encode((linear * 128) / 255);
+      });
+      aoSamples.push({ roughness, NoV, occluded, expected });
+    }
   const expected = Math.round(new T.Color().setRGB(0.25, 0.25, 0.25).convertLinearToSRGB().r * 255);
   const counts = {
     matte: surfaces.filter(
@@ -158,6 +181,9 @@ export async function renderSourceSurfaces() {
     metalIndirectOff,
     metalIndirectOn,
     counts,
+    rawAOCount: surfaces.filter((entry: { surface: SourceSurface }) => entry.surface.nativeAO)
+      .length,
+    aoSamples,
     nativeDirectAO,
     nativeDirectClear,
     nativeMetalAO,

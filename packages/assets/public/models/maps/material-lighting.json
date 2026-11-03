@@ -7,10 +7,10 @@
       "name": "street_lantern_02_color",
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_02/street_lantern_02_color.vmat",
       "sha256": "61aea8bb857651a59c55e4f79bcc8da54748ac4f6fd79a4a0d14028caf5ec588",
-      "ambientOcclusionScale": 0.0,
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -326,10 +326,10 @@
         ],
         "albedoFactor": 1
       },
-      "ambientOcclusionScale": 0,
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -337,7 +337,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_03.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -345,7 +346,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -353,7 +355,8 @@
       "resource": "materials/overlays/wall_stain001.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -361,7 +364,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -369,7 +373,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_decal_road_striping.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -377,7 +382,8 @@
       "resource": "materials/decals/hr_decals/dust_manhole_concrete_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -385,7 +391,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_05.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -393,7 +400,8 @@
       "resource": "materials/decals/hr_decals/dust_panel_paint_patch.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -401,7 +409,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_decal_mudbrick_wear_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -409,7 +418,8 @@
       "resource": "materials/decals/bombsite_x_spray.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -417,7 +427,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_overlay_sign_04.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -425,7 +436,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_garbage_container/dust_garbage_dumpster_signage.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -433,7 +445,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_electric_panel/dust_electric_panel_cover_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -441,7 +454,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_metal_trim_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -449,7 +463,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_asphalt_06.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -457,7 +472,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_09.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -465,7 +481,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_09b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -473,7 +490,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_09c.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -481,7 +499,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_17.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -489,7 +508,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_edges.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -497,7 +517,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_18.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -505,7 +526,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_18c.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -513,7 +535,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_breeze_block_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -521,7 +544,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_access_panels/dust_access_panel_03_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -529,7 +553,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_sidewalk01b_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -537,7 +562,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_18b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -545,7 +571,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_80x128_01_bars.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -553,7 +580,8 @@
       "resource": "materials/de_dust/hr_dust/antenna_card.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -561,7 +589,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_overlay_cards/crates_dishes_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -569,7 +598,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_300d_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -577,7 +607,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_300d_wheel_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -585,7 +616,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_ac_unit/dust_ac_unit_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -593,7 +625,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_access_panels/dust_access_panel_01_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -601,7 +634,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_access_panels/dust_access_panel_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -609,7 +643,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_arches/dust_arch_01_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -617,7 +652,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_arches/dust_arch_01_pattern_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -625,7 +661,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_arches/dust_arch_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -633,7 +670,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_arches/dust_arch_03.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -641,7 +679,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_awnings/dust_awning_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -649,7 +688,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_awnings/dust_awning_fabric_frame_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -657,7 +697,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_bicycle/dust_bicycle_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -665,7 +706,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_breeze_blocks/dust_breeze_blocks_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -673,7 +715,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_car_wreck_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -681,7 +724,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_car_wreck_interior_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -689,7 +733,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_cart/dust_cart_cloth_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -697,7 +742,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_cart/dust_cart_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -705,7 +751,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/dust_ceiling_light_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -713,7 +760,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_cell_tower/dust_cell_tower_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -721,7 +769,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_fences/dust_chainlink_fence_001.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -729,7 +778,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_fences/dust_chainlink_fence_cover_001.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -737,7 +787,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_fences/dust_chainlink_fence_wire_001.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -745,7 +796,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_construction/dust_construction_site_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -753,7 +805,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_curbs_001/dust_curbs_001.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -761,7 +814,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_curbs_001/dust_curbs_001_painted.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -769,7 +823,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_curbs_001/dust_curbs_001_painted_notint.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -777,7 +832,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_detruis_sacks/dust_detruis_sacks_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -785,7 +841,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_detruis_sacks/dust_detruis_sacks_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -793,7 +850,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -801,7 +859,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -809,7 +868,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_03_.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -817,7 +877,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_04.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -825,7 +886,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_05.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -833,7 +895,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_06.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -841,7 +904,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_06b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -849,7 +913,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_46x106_07.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -857,7 +922,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_80x128_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -865,7 +931,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_80x128_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -873,7 +940,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_80x128_03.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -881,7 +949,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_80x128_04.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -889,7 +958,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_80x128_04_frame.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -897,7 +967,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_door_arch_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -905,7 +976,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doorframes/dust_doorframes_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -913,7 +985,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doorframes/dust_doorframes_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -921,7 +994,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doorframes/dust_doorframes_03.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -929,7 +1003,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_electric_panel/dust_electric_panel_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -937,7 +1012,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_electrical_powerbox/dust_electrical_powerbox_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -945,7 +1021,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_flatbed_truck_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -953,7 +1030,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_flatbed_truck_wheels_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -961,7 +1039,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_garbage_container/dust_garbage_container_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -969,7 +1048,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_grain_basket/dust_grain_basket_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -977,7 +1057,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/dust_hanging_light_02_off.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -985,7 +1066,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_arches/dust_hotel_arch001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -993,7 +1075,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_hr_oil_drum/dust_hr_oil_drum_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1001,7 +1084,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_block_lifter.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1009,7 +1093,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_ceiling.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1017,7 +1102,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_ladder.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1025,7 +1111,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_mudbrick_piles.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1033,7 +1120,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_rock_wall.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1041,7 +1129,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_rooftrim_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1049,7 +1138,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_small_rocks.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1057,7 +1147,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_tarp_04.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1065,7 +1156,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_window_insets_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1073,7 +1165,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_windows_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1081,7 +1174,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_wood_forms.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1089,7 +1183,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_wood_planks.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1097,7 +1192,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_kasbah_wood_platform.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1105,7 +1201,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_laundry_pole/dust_laundry_pole_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1113,7 +1210,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_light_pole/dust_light_pole_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1121,7 +1219,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_light_pole/dust_light_pole_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1129,7 +1228,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_metal_panels/dust_metal_panels_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1137,7 +1237,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_metal_panels/dust_metal_panels_rusty_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1145,7 +1246,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_metal_panels/dust_metal_panels_rusty_alpha_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1153,7 +1255,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_bombsite_gap.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1161,7 +1264,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_crumbling_wall.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1169,7 +1273,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_tower_01_edges.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1177,7 +1282,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_tower_01_plaster.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1185,7 +1291,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_tower_02_edges.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1193,7 +1300,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_tower_02_plaster.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1201,7 +1309,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_tower_03_edges.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1209,7 +1318,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_tower_03_plaster.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1217,7 +1327,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_kasbah/dust_mudbrick_transition.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1225,7 +1336,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/dust_ornate_lanterns_01.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1233,7 +1345,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_patio_set/dust_patio_chair_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1241,7 +1354,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_pottery/dust_pottery_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1249,7 +1363,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_propane_cylinder/dust_propane_cylinder_01_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1257,7 +1372,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_propane_cylinder/dust_propane_cylinder_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1265,7 +1381,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_r5_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1273,7 +1390,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_shop_signs/dust_restaurant_sign_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1281,7 +1399,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_doors/dust_rollupdoor_frame_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1289,7 +1408,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_rooftops/dust_rooftop_01_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1297,7 +1417,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_rooftops/dust_rooftop_shingles_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1305,7 +1426,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_satellite_dish/dust_satellite_dish_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1313,7 +1435,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_shelf/dust_shelf_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1321,7 +1444,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_01_painted_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1329,7 +1453,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_01_painted_decals.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1337,7 +1462,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_01_wood_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1345,7 +1471,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_01_wood_decals.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1353,7 +1480,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_02_painted_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1361,7 +1489,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_02_painted_decals.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1369,7 +1498,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_02_wood_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1377,7 +1507,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_02_wood_decals.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1385,7 +1516,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_tarp_01.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1393,7 +1525,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/dust_shipping_crate_tarp_02.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1401,7 +1534,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_shop_signs/dust_shop_sign_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1409,7 +1543,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_pottery/dust_terracotta_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1417,7 +1552,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_pottery/dust_terracotta_03_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1425,7 +1561,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_pottery/dust_terracotta_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1433,7 +1570,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trap_door/dust_trap_door_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1441,7 +1579,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_garbage_container/dust_trash_bag_02_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1449,7 +1588,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_garbage_container/dust_trash_bag_color.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1457,7 +1597,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/dust_trim_decoractive_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1465,7 +1606,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vehicles/dust_vehicle_glass_opaque_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1473,7 +1615,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_wall_braces/dust_wall_braces_arch_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1481,7 +1624,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_wall_braces/dust_wall_braces_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1489,7 +1633,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_wall_braces/dust_wall_braces_rope_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1497,7 +1642,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_vents/dust_wall_vents_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1505,7 +1651,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_window_bars_metal_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1513,7 +1660,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_window_bars_metal_01_alpha.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1521,7 +1669,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_window_bars_metal_01b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1529,7 +1678,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_window_bars_metal_01b_alpha.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1537,7 +1687,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_window_frame_plaster_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1545,7 +1696,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_window_frame_stone_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1553,7 +1705,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_window_frame_wood_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1561,7 +1714,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_windows_01.vmat",
       "surface": {
         "directSpecular": true,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1569,7 +1723,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_windows/dust_windows_low.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1577,7 +1732,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_wires/dust_wire_attachments_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1585,7 +1741,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_wires/dust_wires_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1593,7 +1750,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_wood_pallet/dust_wood_pallet.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1601,7 +1759,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_asphalt_07.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1609,7 +1768,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_floortile_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1617,7 +1777,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_floortile_03.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1625,7 +1786,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_groundrough01-groundrough02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1633,7 +1795,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_groundrough01-groundsmooth01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1641,7 +1804,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_groundrough01-groundsweeds01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1649,7 +1813,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_groundrough02-groundsmooth01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1657,7 +1822,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_groundstone01-groundrough01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1665,7 +1831,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_groundstone01-groundsmooth01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1673,7 +1840,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_plaster01_rough01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1681,7 +1849,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_plaster01_rough01_bounce.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1689,7 +1858,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_plaster01b_rough01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1697,7 +1867,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_plaster01b_rough01_bounce.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1705,7 +1876,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_plaster_white_01b2.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1713,7 +1885,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_plaster_white_01c.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1721,7 +1894,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_plaster_white_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1729,7 +1903,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_rollupdoor_metal_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1737,7 +1912,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_rollupdoor_metal_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1745,7 +1921,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_rollupdoor_metal_03.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1753,7 +1930,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_blend_sand02_sand03.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1761,7 +1939,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_bracket001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1769,7 +1948,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_brick_ground_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -1777,7 +1957,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_brick_ground_04.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1785,7 +1966,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_building_ornament_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1793,7 +1975,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_concrete_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1801,7 +1984,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_concrete_04.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1809,7 +1993,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_arch002_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1817,7 +2002,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_arch003_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1825,7 +2011,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_column001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1833,7 +2020,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_merlon001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1841,7 +2029,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_merlon002_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1849,7 +2038,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_merlon003_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1857,7 +2047,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_niche001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1865,7 +2056,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_stairs001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1873,7 +2065,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_kasbah_stairs002_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1881,7 +2074,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_mudbrick_wall_plaster_smooth_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1889,7 +2083,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_06.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1897,7 +2092,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_06b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1905,7 +2101,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_06c.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1913,7 +2110,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_11b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1921,7 +2119,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_12.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1929,7 +2128,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_12b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1937,7 +2137,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_12c.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1945,7 +2146,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_13b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1953,7 +2155,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_15.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1961,7 +2164,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_15b2.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1969,7 +2173,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_15b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1977,7 +2182,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_15c.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1985,7 +2191,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_17b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -1993,7 +2200,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_17c.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2001,7 +2209,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_18_bounce.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2009,7 +2218,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_18b_bounce.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2017,7 +2227,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_18c_bounce.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2025,7 +2236,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_19.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2033,7 +2245,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_19_bounce.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2041,7 +2254,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_19b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2049,7 +2263,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_19b_bounce.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2057,7 +2272,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_20b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2065,7 +2281,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_plaster_20c.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2073,7 +2290,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_roof_trim001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2081,7 +2299,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_rooftop_ornament_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2089,7 +2308,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_sand_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2097,7 +2317,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_stairs001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2105,7 +2326,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_stairs002_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2113,7 +2335,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_stairs003_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2121,7 +2344,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_stone_ground_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2129,7 +2353,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_tile_01.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2137,7 +2362,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_tile_02.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2145,7 +2371,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_tile_03.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2153,7 +2380,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_tire/hr_dust_tire001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2161,7 +2389,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_trims/hr_dust_wall_trim001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2169,7 +2398,8 @@
       "resource": "materials/models/props_highway/metal_corrugated03b.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2177,7 +2407,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/power_pole_insulators/power_pole_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2185,7 +2416,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/power_pole_insulators/power_pole_03_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -2193,7 +2425,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/power_pole_insulators/power_pole_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2201,7 +2434,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/power_pole_insulators/power_pole_insulators_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -2209,7 +2443,8 @@
       "resource": "materials/de_dust/hr_dust/satellite_dish_card.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2217,7 +2452,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_signs/sign004_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2225,7 +2461,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_signs/sign006_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2233,7 +2470,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_signs/sign_bracket001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2241,7 +2479,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_signs/sign_directional001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2249,7 +2488,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_signs/sign_streets001_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2257,7 +2497,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lamp_01/street_lamp_01_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -2265,7 +2506,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lamp_02/street_lamp_02_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -2273,7 +2515,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lamp_03/street_lamp_03_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -2281,7 +2524,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_01/street_lantern_01_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -2289,7 +2533,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_lights/street_lantern_03/street_lantern_03_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": true
+        "indirectSpecular": true,
+        "nativeAO": true
       }
     },
     {
@@ -2297,7 +2542,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_crates/wooden_fruit_crate_01_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2305,7 +2551,8 @@
       "resource": "materials/models/props/de_dust/hr_dust/dust_broken_building/dust_broken_building_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2313,7 +2560,8 @@
       "resource": "materials/de_dust/hr_dust/hr_dust_wood_ceiling01_color.vmat",
       "surface": {
         "directSpecular": false,
-        "indirectSpecular": false
+        "indirectSpecular": false,
+        "nativeAO": true
       }
     },
     {
@@ -2341,7 +2589,28 @@
     {
       "name": "tarp_kit_01_base",
       "resource": "models/generic/tarp_kit_01/tarp_kit_01_base.vmat",
-      "localReflections": true
+      "localReflections": true,
+      "environment": {
+        "modelTint": [
+          0.17788833,
+          0.19806919,
+          0.14412838
+        ],
+        "modelTintAmount": 1,
+        "tintMask": [
+          4,
+          4
+        ],
+        "aoLevels": [
+          0,
+          0.5,
+          1
+        ]
+      },
+      "surface": {
+        "directSpecular": true,
+        "indirectSpecular": true
+      }
     },
     {
       "name": "soccerball001_color",
@@ -2366,7 +2635,7 @@
   },
   "surfaceSource": {
     "nativeGltfSha256": "4d3e62e46fd747cf4fb85997630c1c55002ea14ac2de7956d52125bd28768f3b",
-    "interpretation": "ValveResourceFormat csgo_vertexlitgeneric/lightmappedgeneric, surface_material.slang, surface_shading.slang, pbr.slang and envmap.slang at 5564866c7f2a6b2ee54a9195b7963147e24da94e; native CS2 8.2 generic specular gates plus always-enabled foliage/complex specular, Schlick-Smith GGX and indirect multiscatter energy; foliage/complex material AO bypasses direct diffuse; map-only, original shader equivalence remains unverified"
+    "interpretation": "ValveResourceFormat csgo_vertexlitgeneric/lightmappedgeneric, surface_material.slang, surface_shading.slang, pbr.slang and envmap.slang at 5564866c7f2a6b2ee54a9195b7963147e24da94e; native CS2 8.2 generic specular gates plus always-enabled foliage/complex/environment specular, Schlick-Smith GGX and indirect multiscatter energy; generic/foliage/complex material AO bypasses direct diffuse; zero vertexlit AO scale uses raw texture AO; map-only, original shader equivalence remains unverified"
   },
   "localReflectionSource": {
     "nativeGltfSha256": "4d3e62e46fd747cf4fb85997630c1c55002ea14ac2de7956d52125bd28768f3b",

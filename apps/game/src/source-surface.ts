@@ -32,7 +32,7 @@ export function applySourceSurface(
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <aomap_fragment>",
       `#ifdef USE_AOMAP
-      float ambientOcclusion = (texture2D(aoMap, vAoMapUv).r - 1.0) * aoMapIntensity + 1.0;
+      float ambientOcclusion = texture2D(aoMap, vAoMapUv).r;
       reflectedLight.indirectDiffuse *= ambientOcclusion;
       reflectedLight.directSpecular *= ambientOcclusion;
       reflectedLight.indirectSpecular *= ambientOcclusion;

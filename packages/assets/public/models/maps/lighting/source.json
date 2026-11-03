@@ -10,7 +10,10 @@
     "maps/de_dust2/cubemaps/env_cubemap_array.vtex_c": "71a1e197e33acd95d4e4351f1e26580da66d062cf2af8b24db90a9dc50d7e5e0",
     "maps/de_dust2/world.vwrld_c": "59e3af56979ce9dc2038099c32f4dec2107d6763196010d1afcef33064e7b130",
     "maps/de_dust2/entities/default_ents.vents_c": "515efdfc1e452b3d7052c5ffb1801a05e23b2395fb90586ff2dc9d14ae7ef80a",
-    "maps/de_dust2/lightmaps/directional_irradiance.vtex_c": "c8308d1e218b3e7d81d6bdb1861e6dd8b5ef5aa451d55cc5043f11741aa6b76c"
+    "maps/de_dust2/lightmaps/directional_irradiance.vtex_c": "c8308d1e218b3e7d81d6bdb1861e6dd8b5ef5aa451d55cc5043f11741aa6b76c",
+    "models/generic/tarp_kit_01/tarpkit_01_color_tga_18d62141.vtex_c": "9527b2c035c6753ba9c376068c5ba01d94678236c9cb144c549adaa4f9f60f93",
+    "models/generic/tarp_kit_01/tarpkit_01_mask_tga_300433d.vtex_c": "3e7acf143cd2800b1b84ab8302b4329343c8fc8bc6ec383dd310e19e24b29d62",
+    "models/generic/tarp_kit_01/tarpkit_01_normal_tga_664d5611.vtex_c": "705e967e7fa67d72fc8db550a9c28b9ba814c8cc357f734082db39c91201ef57"
   },
   "runtime": {
     "lightmapSize": 4096,
@@ -48,11 +51,12 @@
     "stationaryBarnLights": 2,
     "fullyBakedBarnsExcludedFromRuntime": 2,
     "selfIlluminatedMaterials": 1,
-    "controlledSurfaceMaterials": 267,
+    "controlledSurfaceMaterials": 268,
     "nativeBrdfGpuBytes": 16384,
     "nativeReflectionGpuBytes": 22543008,
     "nativeReflectionVolumes": 43,
-    "foliageControlGpuBytes": 629860
+    "foliageControlGpuBytes": 629860,
+    "nativeEnvironmentGpuBytes": 1048560
   },
   "limitations": [
     "The authored native 4096 mip is used for 8192 irradiance and shadow atlases; directional irradiance retains its full 4096 resolution. Unsupported GPU compression uses the existing bounded 2048 WebP fallback.",

@@ -105,12 +105,16 @@ test("native surfaces preserve diffuse energy and independently gate highlights 
   for (const sample of result.directSamples)
     for (const channel of sample.actual)
       expect(Math.abs(channel - sample.expected)).toBeLessThanOrEqual(2);
-  expect(result.counts).toEqual({ matte: 206, reflective: 25, glossy: 36 });
+  expect(result.counts).toEqual({ matte: 206, reflective: 25, glossy: 37 });
   for (const channel of result.nativeDirectAO)
     expect(Math.abs(channel - result.expected)).toBeLessThanOrEqual(1);
   expect(result.nativeDirectClear[0]).toBeGreaterThan(result.nativeDirectAO[0]);
   expect(result.nativeMetalAO).toEqual([0, 0, 0]);
   expect(result.nativeIndirectAO).toEqual([0, 0, 0]);
+  expect(result.rawAOCount).toBe(267);
+  for (const sample of result.aoSamples)
+    for (let channel = 0; channel < 3; channel++)
+      expect(Math.abs(sample.occluded[channel] - sample.expected[channel])).toBeLessThanOrEqual(2);
   expect(errors).toEqual([]);
 });
 
@@ -273,6 +277,7 @@ test("native layers retain vertex weights, mask softness, border tint and encode
   expect(result.normalEdge[0]).toBeLessThan(100);
   expect(result.specularOn[2]).toBeGreaterThan(20);
   expect(result.specularOff).toEqual([0, 0, 0]);
+  expect(result.specularOccluded).toEqual([0, 0, 0]);
   expect(errors).toEqual([]);
 });
 
@@ -506,6 +511,104 @@ test("foliage control colors brighten diffuse by native height without tinting s
         samples.find((s: { metalness: number }) => s.metalness === 1)!.pixel,
       );
     expect(sample.pixel[3]).toBe(255);
+  }
+  expect(errors).toEqual([]);
+});
+
+test("native environment separates AO from opacity and metalness, preserves packed normals and masks tint once", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("console", (m) => {
+    if (m.type() === "error") errors.push(m.text());
+  });
+  await page.route("**/favicon.ico", (r) => r.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/source-environment-fixture.ts";
+    return (await import(path)).renderSourceEnvironment();
+  });
+  expect(result.source.modelTint).toEqual([0.17788833, 0.19806919, 0.14412838]);
+  const tint = result.source.modelTint as number[],
+    weights = [0.2125, 0.7154, 0.0721];
+  const tintLength = Math.hypot(...tint),
+    norm = tint.map((v) => v / tintLength);
+  const base = [128, 96, 64].map((v) => v / 255);
+  const luma = base.reduce((sum, v, i) => sum + v * weights[i], 0);
+  const q = Math.min(
+    luma / norm.reduce((sum, v, i) => sum + v * weights[i], 0),
+    3 * luma * Math.max(...tint),
+  );
+  for (const sample of result.masks) {
+    const mask = Math.max(0, Math.min(1, (16 * sample.mask) / 255 - 6));
+    const amount = (1 - Math.min(...tint)) * mask;
+    for (let axis = 0; axis < 3; axis++)
+      expect(
+        Math.abs(
+          sample.pixel[axis] -
+            Math.round(255 * (base[axis] * (1 - amount) + norm[axis] * q * amount)),
+        ),
+      ).toBeLessThanOrEqual(1);
+    expect(sample.pixel[3]).toBe(255);
+  }
+  for (let axis = 0; axis < 3; axis++)
+    expect(Math.abs(result.channels[axis] - [204, 177, 91][axis])).toBeLessThanOrEqual(1);
+  const encoded = [180 / 255 + 100 / 255 - 1.003922, -(180 / 255 - 100 / 255)];
+  const normal = [...encoded, 1 - Math.abs(encoded[0]) - Math.abs(encoded[1])],
+    length = Math.hypot(...normal);
+  for (let axis = 0; axis < 3; axis++)
+    expect(
+      Math.abs(result.normal[axis] - Math.round(255 * (0.5 + (normal[axis] / length) * 0.5))),
+    ).toBeLessThanOrEqual(1);
+  expect(result.occluded).toEqual([0, 0, 0, 255]);
+  expect(result.metalOccluded).toEqual([0, 0, 0, 255]);
+  for (let axis = 0; axis < 3; axis++)
+    expect(Math.abs(result.partial[axis] - (result.clear[axis] * 128) / 255)).toBeLessThanOrEqual(
+      1,
+    );
+  expect(errors).toEqual([]);
+});
+
+test("native environment textures retain channel color spaces, compression fallback and reversible quality", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("console", (m) => {
+    if (m.type() === "error") errors.push(m.text());
+  });
+  await page.route("**/favicon.ico", (r) => r.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const results = await page.evaluate(async () => {
+    const path = "/tests/source-environment-fixture.ts";
+    return (await import(path)).inspectEnvironmentBundles();
+  });
+  expect(results[0].original).toEqual([
+    [512, 512],
+    [512, 512],
+    [512, 512],
+  ]);
+  expect(results[0].low).toEqual([
+    [128, 128],
+    [128, 128],
+    [128, 128],
+  ]);
+  expect(results[0].compressed).toEqual([true, true, true]);
+  expect(results[1].original).toEqual([
+    [256, 256],
+    [256, 256],
+    [256, 256],
+  ]);
+  expect(results[1].low).toEqual([
+    [64, 64],
+    [64, 64],
+    [64, 64],
+  ]);
+  expect(results[1].compressed).toEqual([false, false, false]);
+  for (const result of results) {
+    expect(result.restored).toEqual(result.original);
+    expect(result.colorSpaces).toEqual({ color: "srgb", height: "", normal: "" });
   }
   expect(errors).toEqual([]);
 });

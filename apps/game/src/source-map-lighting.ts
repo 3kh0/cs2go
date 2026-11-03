@@ -5,7 +5,7 @@ import { bindSourceMapAttributes } from "./source-map-attributes";
 import { loadSourceLighting } from "./source-lighting";
 import { loadSourceColorCorrection } from "./map-color";
 import { applySourceFog } from "./source-fog";
-import { loadSourceLayers, applySourceLayers } from "./source-layers";
+import { loadSourceLayers, loadSourceMaterialBundle, applySourceLayers } from "./source-layers";
 import { registerSurfaceTextures } from "./presentation-settings";
 import { applySourceBarns, loadSourceBarns } from "./source-barn";
 import { applySourceSelfIllumination, type SourceSelfIllumination } from "./source-self-illum";
@@ -22,14 +22,16 @@ import {
   type SourceFoliage,
 } from "./source-foliage";
 
+import { applySourceEnvironment, type SourceEnvironment } from "./source-environment";
+
 interface SourceMaterialLighting {
   materials: {
     name: string;
-    ambientOcclusionScale?: number;
     foliage?: SourceFoliage;
     selfIllumination?: SourceSelfIllumination;
     surface?: SourceSurface;
     localReflections?: boolean;
+    environment?: SourceEnvironment;
   }[];
 }
 
@@ -41,6 +43,7 @@ interface SourceMapLighting {
   native: boolean;
   transmissionTextures: Map<string, T.Texture>;
   layers?: Awaited<ReturnType<typeof loadSourceLayers>>;
+  environmentTextures?: Map<string, T.Texture>;
   barns?: T.Box3[];
   surfaceLookup?: T.DataTexture;
   reflections?: SourceReflections;
@@ -75,6 +78,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     barns,
     surfaceLookup,
     reflections,
+    environmentBundle,
   ] = await Promise.all([
     native
       ? loadNativeAtlas("irradiance", T.RGB_BPTC_UNSIGNED_Format, 16777216)
@@ -91,6 +95,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     loadSourceBarns(),
     loadSourceSurfaceLookup(),
     loadSourceReflections(renderer),
+    loadSourceMaterialBundle(renderer, "/models/maps/lighting/environment/"),
     loadSourceLighting(),
     loadSourceColorCorrection(),
   ]);
@@ -124,6 +129,7 @@ export async function loadSourceMapLighting(renderer: T.WebGLRenderer) {
     barns,
     surfaceLookup,
     reflections,
+    environmentTextures: environmentBundle.textures,
   };
 }
 
@@ -141,6 +147,7 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
     barns,
     surfaceLookup,
     reflections,
+    environmentTextures,
   } = data;
   const barnMasks = new Map<T.Material, number>();
   const reflectionCandidates = new Map<T.Material, Set<number>>();
@@ -183,20 +190,28 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
           material.metalness = nativeMaterial.surface.metalness;
         if (nativeMaterial?.selfIllumination)
           applySourceSelfIllumination(material, nativeMaterial.selfIllumination);
-        if (nativeMaterial?.ambientOcclusionScale !== undefined)
-          material.aoMapIntensity = nativeMaterial.ambientOcclusionScale;
         if (nativeMaterial?.foliage?.alphaCoverage)
           material.alphaTest = nativeMaterial.foliage.alphaCoverage.reference;
       }
       const foliage = nativeMaterial?.foliage;
       const surface = nativeMaterial?.surface;
+      const environment = nativeMaterial?.environment;
+      if (environment && material instanceof T.MeshStandardMaterial) {
+        if (!environmentTextures) throw new Error("Native environment textures missing");
+        for (const key of ["color", "normal", "height"])
+          if (!environmentTextures.has(key))
+            throw new Error(`Native environment texture missing: ${key}`);
+        material.map = environmentTextures.get("color")!;
+        material.normalMap = environmentTextures.get("normal")!;
+        material.roughnessMap = material.metalnessMap = material.aoMap = null;
+      }
       const environmentCandidates =
         (surface?.indirectSpecular || nativeMaterial?.localReflections) && reflections
           ? [...(reflectionCandidates.get(material) ?? [])].sort((a, b) => a - b)
           : undefined;
       const barnMask = barnMasks.get(material) ?? 0;
       const layered = layers?.materials[material.name];
-      const surfaceTextures: T.Texture[] = [];
+      const surfaceTextures: T.Texture[] = environment ? [...environmentTextures!.values()] : [];
       if (layered && layers)
         for (const key of [
           layered.normal1,
@@ -238,8 +253,11 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
         renderer: T.WebGLRenderer,
       ) => {
         prior(shader, renderer);
-        if (surface) applySourceSurface(shader, surface, surfaceLookup);
         if (layered && layers) applySourceLayers(shader, layered, layers.textures);
+        // Layered materials construct AO from their own layer inputs first.
+        if (surface) applySourceSurface(shader, surface, surfaceLookup);
+        if (environment)
+          applySourceEnvironment(shader, environment, environmentTextures!.get("height")!);
         if (foliage) applySourceFoliage(shader, foliage);
         if (foliage) {
           shader.vertexShader =
@@ -365,12 +383,13 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
       };
       material.customProgramCacheKey = () =>
         priorKey +
-        "-native-source-lighting-v10" +
+        "-native-source-lighting-v11" +
         `:barns-${barnMask}` +
         (surface
           ? `:surface-${surface.directSpecular}-${surface.indirectSpecular}-${!!surface.nativeAO}`
           : "") +
         (environmentCandidates ? ":native-environments" : "") +
+        (environment ? ":environment-inputs" : "") +
         (layered
           ? `:layers-${layered.fancy}-${!!layered.detail}-${layered.specularIndirect}`
           : "") +

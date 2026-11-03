@@ -37,8 +37,11 @@ interface LayerManifest {
   textures: Record<string, LayerTexture>;
 }
 
-const directory = "/models/maps/lighting/layers/";
-export async function loadSourceLayers(renderer: T.WebGLRenderer) {
+export function loadSourceLayers(renderer: T.WebGLRenderer) {
+  return loadSourceMaterialBundle(renderer, "/models/maps/lighting/layers/");
+}
+
+export async function loadSourceMaterialBundle(renderer: T.WebGLRenderer, directory: string) {
   const response = await assetFetch(directory + "source.json");
   if (!response.ok) throw new Error("Native layered materials unavailable");
   const manifest = (await response.json()) as LayerManifest;
@@ -205,10 +208,8 @@ export function applySourceLayers(
     `
     float ambientOcclusion = mix(sourceLayerAO.x, sourceLayerAO.y, sourceLayerFactor);
     reflectedLight.indirectDiffuse *= ambientOcclusion;
-    #if defined(USE_ENVMAP) && defined(STANDARD)
-      float dotNV = saturate(dot(geometryNormal, geometryViewDir));
-      reflectedLight.indirectSpecular *= computeSpecularOcclusion(dotNV, ambientOcclusion, material.roughness);
-    #endif
+    reflectedLight.directSpecular *= ambientOcclusion;
+    reflectedLight.indirectSpecular *= ambientOcclusion;
   `,
   );
   if (!material.specularIndirect)
