@@ -61,7 +61,7 @@ test("native Ground Rebel capsules follow standing and crouched head bones", asy
     const crouched = traceHead();
     bot.rig.crouch = 0;
     animateSoldier(bot.rig, 0, 0.016, true);
-    for (const box of data.hitboxes) {
+    for (const box of data.sets[0]) {
       const name = box.bone.replace(
         /_([lr])(?=_|$)/g,
         (_, side: string) => `_${side.toUpperCase()}`,
