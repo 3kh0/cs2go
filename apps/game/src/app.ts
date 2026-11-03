@@ -14,9 +14,9 @@ import { setupSettingsTabs } from "./settings-tabs";
 import { setupControlSettings } from "./control-settings";
 import { Game } from "./game";
 import { MultiplayerMatch } from "./multiplayer-match";
-import { disposeSoldier } from "./soldier";
 import { validRoom } from "@cs2go/protocol";
 import { openTeamSelector } from "./team-select";
+import { openMatchLoading } from "./match-loading";
 import { setupSteamAccount } from "./steam-account";
 import { startIntro } from "./intro";
 import { startAssetCache } from "./asset-cache";
@@ -159,26 +159,57 @@ el("play").onclick = () => {
   }
   openTeamSelector(
     (team) => {
-      game.setTeam(team);
-      game.start(selectedMode);
-      if (session === "multi" && game.active) {
-        for (const bot of game.bots) {
-          game.scene.remove(bot.group);
-          disposeSoldier(bot.rig);
-        }
-        game.bots = [];
-        game.network = new MultiplayerMatch(
-          game,
-          server.value,
-          room.value,
-          password.value,
-          selectedMode,
-        );
-      }
+      void enterMatch(team, session === "multi");
     },
     selectedMode === "competitive" ? 5 : 10,
   );
 };
+async function enterMatch(team: "t" | "ct", multiplayer = false) {
+  if (game.matchLoading) return;
+  const loader = openMatchLoading(team);
+  game.matchLoading = true;
+  try {
+    await loader.stage("Preparing your team…", 0);
+    game.setTeam(team, false);
+    game.start(selectedMode, { bots: !multiplayer });
+    if (!game.active) {
+      loader.close();
+      return;
+    }
+    await loader.stage("Preparing the map and equipment…", 1);
+    await game.warmUp(loader.signal);
+    await loader.stage("Entering Dust II…", 2);
+    game.prepareMatchFrame();
+    await game.finishPrograms(loader.signal);
+    await loader.stage("Ready", 3);
+    if (multiplayer)
+      game.network = new MultiplayerMatch(
+        game,
+        server.value,
+        room.value,
+        password.value,
+        selectedMode,
+      );
+    loader.close();
+  } catch (error) {
+    game.menu();
+    if (loader.signal.aborted) {
+      loader.close();
+      el("home-play").focus();
+    } else {
+      console.error("Match preparation failed", error);
+      loader.error();
+    }
+  } finally {
+    game.keys.clear();
+    game.firing = false;
+    game.accumulator = 0;
+    game.last = performance.now();
+    game.matchLoading = false;
+    game.syncPointerLock();
+  }
+}
+
 el("resume").onclick = () => game.lock();
 const leaveConfirm = el("leave-confirm");
 const closeLeaveConfirm = () => {
@@ -209,7 +240,9 @@ leaveConfirm.addEventListener("keydown", (event) => {
   }
 });
 el("result-menu").onclick = () => game.menu();
-el("again").onclick = () => game.start(selectedMode);
+el("again").onclick = () => {
+  void enterMatch(game.team);
+};
 el("settings-button").onclick = el("pause-settings").onclick = () => {
   el("settings").classList.remove("hidden");
   (el("settings").querySelector('[role="tab"][aria-selected="true"]') as HTMLElement).focus();

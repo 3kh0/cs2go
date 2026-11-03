@@ -468,6 +468,17 @@ export class HomeScene {
     }
     return previous;
   }
+  async prepare(renderer: T.WebGLRenderer) {
+    const previousToneMapping = renderer.toneMapping;
+    let programs: Promise<unknown>;
+    try {
+      renderer.toneMapping = T.ACESFilmicToneMapping;
+      programs = renderer.compileAsync(this.scene, this.camera);
+    } finally {
+      renderer.toneMapping = previousToneMapping;
+    }
+    await programs;
+  }
   render(renderer: T.WebGLRenderer, team: AgentTeam, dt: number, showAgent = true) {
     const preview = this.preview(team);
     const loading = this.pendingAgents.has(team);

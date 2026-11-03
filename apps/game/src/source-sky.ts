@@ -3,6 +3,26 @@ import { fetchGzipped } from "./gltf";
 import { setSourceFogSky } from "./source-fog";
 import { sourceSkyLayer } from "./source-sky-layer";
 
+const skyPreparation = new WeakMap<T.Object3D, () => Promise<void>>();
+export async function warmSourceSky(sky?: T.Object3D, signal?: AbortSignal) {
+  signal?.throwIfAborted();
+  const prepared = sky ? skyPreparation.get(sky)?.() : undefined;
+  if (!prepared) return;
+  if (!signal) return prepared;
+  let aborted: () => void = () => {};
+  try {
+    await Promise.race([
+      prepared,
+      new Promise<never>((_, reject) => {
+        aborted = () => reject(signal.reason);
+        signal.addEventListener("abort", aborted, { once: true });
+      }),
+    ]);
+  } finally {
+    signal.removeEventListener("abort", aborted);
+  }
+}
+
 const skyUpdates = new WeakMap<T.Object3D, (camera: T.Camera) => void>();
 
 export function bindSourceSky(scene: T.Scene, sky: T.Object3D, root: T.Object3D) {
@@ -81,6 +101,7 @@ export async function loadSourceSky(renderer: T.WebGLRenderer) {
   mesh.name = "Native Dust II sky";
   mesh.frustumCulled = false;
   skyUpdates.set(mesh, layer.update);
+  skyPreparation.set(mesh, layer.prepare);
   material.addEventListener("dispose", layer.dispose);
   mesh.renderOrder = -1000;
   return mesh;

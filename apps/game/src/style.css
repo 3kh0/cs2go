@@ -2228,3 +2228,85 @@ body:has(#loadout:not(.hidden)) #hud #scoreboard {
   fill: none;
   stroke-width: 2;
 }
+
+#match-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: #0b1218;
+  color: #eeeae1;
+}
+.match-loading-content {
+  width: min(620px, 100%);
+}
+.match-loading-map {
+  color: #dbb77c;
+  letter-spacing: 5px;
+  font-size: 14px;
+}
+.match-loading-content h1 {
+  margin: 20px 0 30px;
+  font:
+    800 clamp(32px, 4vw, 56px) "Stratum2 Condensed",
+    sans-serif;
+  line-height: 1;
+}
+.match-loading-content [role="status"] {
+  min-height: 24px;
+  color: #bdc7cc;
+}
+.match-loading-content progress {
+  display: block;
+  width: 100%;
+  height: 5px;
+  margin: 24px 0 12px;
+  appearance: none;
+  border: 0;
+  background: #26323b;
+}
+.match-loading-content progress::-webkit-progress-bar {
+  background: #26323b;
+}
+.match-loading-content progress::-webkit-progress-value {
+  background: #dbb77c;
+}
+.match-loading-content progress::-moz-progress-bar {
+  background: #dbb77c;
+}
+.match-loading-stages {
+  display: flex;
+  justify-content: space-between;
+  color: #98a6af;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+.match-loading-content button {
+  margin-top: 40px;
+}
+
+.match-loading-content [role="status"]::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: #dbb77c;
+  animation: match-loading-pulse 1s ease-in-out infinite alternate;
+}
+@keyframes match-loading-pulse {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .match-loading-content [role="status"]::before {
+    animation: none;
+  }
+}

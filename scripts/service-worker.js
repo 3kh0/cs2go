@@ -126,7 +126,7 @@ async function storeAsset(cache, path, response) {
     }
   }
   const skin = isSkin(path),
-    budget = (skin ? 64 : 384) * 1024 * 1024;
+    budget = (skin ? 64 : 448) * 1024 * 1024;
   const size = verification.size;
   if (!size || size > budget) return;
   let used = 0;

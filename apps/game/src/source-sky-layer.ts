@@ -155,6 +155,21 @@ export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.Compress
       renderer.toneMapping = toneMapping;
     }
   }
+  async function prepare() {
+    const destination = renderer.getRenderTarget(),
+      toneMapping = renderer.toneMapping;
+    let worldPrograms: Promise<unknown>, overlayPrograms: Promise<unknown>;
+    try {
+      renderer.setRenderTarget(target);
+      renderer.toneMapping = T.NoToneMapping;
+      worldPrograms = renderer.compileAsync(scene, skyCamera);
+      overlayPrograms = renderer.compileAsync(overlay, skyCamera);
+    } finally {
+      renderer.setRenderTarget(destination);
+      renderer.toneMapping = toneMapping;
+    }
+    await Promise.all([worldPrograms, overlayPrograms]);
+  }
   function dispose() {
     target.dispose();
     depthCopy.dispose();
@@ -166,5 +181,5 @@ export async function sourceSkyLayer(renderer: T.WebGLRenderer, cube: T.Compress
     background.dispose();
     bundle.textures.forEach((texture) => texture.dispose());
   }
-  return { texture: target.texture, viewport, update, dispose, scene };
+  return { texture: target.texture, viewport, update, prepare, dispose, scene };
 }
