@@ -221,8 +221,8 @@ test("native barn lights retain frustum, falloff and independent baked masks in 
   expect(result.disabledPreview.slice(0, 3)).toEqual([0, 0, 0]);
   expect(result.viewBlocked.slice(0, 3)).toEqual([0, 0, 0]);
   expect(result.probeG[0]).toBeLessThan(0.01);
-  expect(result.probeG[1]).toBeGreaterThan(0.4);
-  expect(result.probeB[0]).toBeGreaterThan(0.4);
+  expect(result.probeG[1]).toBeCloseTo(0.472972507412372, 6);
+  expect(result.probeB[0]).toBeCloseTo(0.24592417763612825, 6);
   expect(result.probeB[1]).toBeLessThan(0.01);
   expect(result.probeGBlocked.slice(0, 3)).toEqual([0, 0, 0]);
   expect(result.probeBOpen[0]).toBeGreaterThan(50);

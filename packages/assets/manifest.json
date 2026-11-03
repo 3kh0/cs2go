@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "f2f5af32564e780aeb69145ba0ae419e537e176a9640073f8e0196a5faf2af35",
+  "release": "14287d1e452934be296d84476a769f169fb0389a1f04fed9b60b2488eb29f9dc",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -9057,13 +9057,13 @@
       }
     },
     "models/maps/cables-source.json": {
-      "sha256": "5ad36a1ea8df57070cca24021d3f8b5dc306f26f86b9719607adf42bc873820f",
-      "bytes": 2522,
+      "sha256": "659aa946f0495a6f3e0f45499ef83b8c924ace68c338388408f34109b16b63cd",
+      "bytes": 2418,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "f260c06c73dab80e3bb0834691c7b503f480cc3a011e6fedfd55cf23f0a1dcc0",
-        "bytes": 1157
+        "sha256": "73b3c550eac159d67a5610baaa46503dad0efd9b71da5273e0c77dd522a98d2e",
+        "bytes": 1123
       }
     },
     "models/maps/dust2-bomb.bin.gz": {
@@ -9072,9 +9072,9 @@
       "decodedSha256": "74b4c2dc678cd32854374cb5ab34033dc19a534833d272cebddf6cd16fbe8eed"
     },
     "models/maps/dust2-cables.glb.gz": {
-      "sha256": "f5ca3dfa4bc6bc4aa1d259f18200d8e2d6bce20d184dfe19fda6743b1f3dd228",
-      "bytes": 64446,
-      "decodedSha256": "c0ee2494079deeb7fb15d54254b9fecf5d75bc270917048ab7b31a6fae26aa31"
+      "sha256": "e1a7bab24b796a4e867d666865830e595fdb81dcfa3c15ecb163f521f5af5570",
+      "bytes": 64492,
+      "decodedSha256": "2bf5862480431966fbe7a3c4a11179d1c8d8e9cf34df946b2821a2a36aacf4ba"
     },
     "models/maps/dust2-nav.json": {
       "sha256": "c4880f1e16ab5694eea123bcf4412f9418aef7a7572bb1adda7fa39b49eba8c6",
@@ -9102,9 +9102,9 @@
       }
     },
     "models/maps/dust2.glb.gz": {
-      "sha256": "b59d601462d7397a35340db2cd590fe0662dbb0541e984927fde8e1cbe28fba1",
-      "bytes": 42766435,
-      "decodedSha256": "58f437d51758e4b6cea9f8816486a29da8e63cd6f730dbf2333202e34629fb5b"
+      "sha256": "00924251006747788e162779e92c09ccb62989120f5a2f588fc0076ba1b653a8",
+      "bytes": 42836105,
+      "decodedSha256": "a443ea17222d59c4df6bfc12d031a131e6729d25b97746e6691259335e394d2d"
     },
     "models/maps/licenses/ValveResourceFormat-MIT.txt": {
       "sha256": "19549e9b3203eaf3938f35f98e63fc6b166a16af29936affa3df6ec7e2ae7f8d",
@@ -9127,13 +9127,13 @@
       }
     },
     "models/maps/lighting/barn-source.json": {
-      "sha256": "3870d1164c29b864c68d17f759ac8c5f1468f82fa16fdc3c4aac1f9a19efb5c1",
-      "bytes": 23780,
+      "sha256": "dd0b6237862100844488f6d62d3bf0d0f1053f0d6ac37196bee2027487828334",
+      "bytes": 23706,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "090ca5537ad1594c244d0c2278004f9620b4166a3decf85b4775f48b82466011",
-        "bytes": 6094
+        "sha256": "39c25b5c8ada7b69530183e5f2cf3996ad346e18fda91847445acae353420633",
+        "bytes": 5957
       }
     },
     "models/maps/lighting/brdf-ggx.bin.gz": {
@@ -10158,23 +10158,35 @@
       }
     },
     "models/maps/lighting/probe-shadows.bin.gz": {
-      "sha256": "f1b01b417038d28ab709dc9ab421f869c2329dc24991ab7ff8ecb714dadcfa21",
-      "bytes": 48665,
-      "decodedSha256": "a43a18b12d8cd2361416775958a03dfe86f6035a704b59e291a531e7b8c530a1"
-    },
-    "models/maps/lighting/probes.bin.gz": {
-      "sha256": "886516fdbd90e387e42032fcafd812b3ef5ddcf0b44b9842d75680c41b8e71c3",
-      "bytes": 4550637,
-      "decodedSha256": "9a70f9513de1663f3965d89a23c94006bf22856a1108ee288f71e6c65fb465e3"
-    },
-    "models/maps/lighting/probes.json": {
-      "sha256": "d0d359b60fd69d04669b7f6a2d71a4b928dd5dd1674ce6d129b7c9be743b7fda",
-      "bytes": 48751,
+      "sha256": "5da477a281bc2fd414216c1cf207a28638dfdc43bacae600cf297f4ed8819c01",
+      "bytes": 530731,
+      "decodedSha256": "2e614bb8d6300302f34952d14ef0f514654fa3ef92c952449d8c040947e9cf8b",
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "8646687d2286b106a5b862dbacf282cbfa625f9280cbbd9c7361f93064ff85ac",
-        "bytes": 6262
+        "sha256": "09086f24f4cec190245e3245959b57d24bf6b3cc75b80a2f095e4355ce32ed4f",
+        "bytes": 522653
+      }
+    },
+    "models/maps/lighting/probes.bin.gz": {
+      "sha256": "1d1978ee06e84cdd8c713becc389d30625b0ab1464e6e0782857126ff5b3fb89",
+      "bytes": 40873334,
+      "decodedSha256": "0f690faeb85a7ace9f7ea4ecacd8e9ccfe53b71cf1567839cba37ea2acfc148a",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "ddb3c4adc866c91c6bdc96041877729d8c3b2565c903d41f2ec6f4d03de5cbf0",
+        "bytes": 40493260
+      }
+    },
+    "models/maps/lighting/probes.json": {
+      "sha256": "797f1bc44f43c6ea7fee1cbd9df61fc079c5161d05d3d8ed57273cb56e1f0901",
+      "bytes": 72895,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "10462355b905c7188dac5f938f16140e2fd3bb48d122b94279cb0976f43a5fed",
+        "bytes": 9416
       }
     },
     "models/maps/lighting/reflection-0.hdr.gz": {
@@ -10423,13 +10435,13 @@
       "bytes": 921466
     },
     "models/maps/lighting/source.json": {
-      "sha256": "32cfda20f656773630707954f095135b97fd5b2120e6af11cd5ed31cf5d7f0b9",
-      "bytes": 7710,
+      "sha256": "1f8623d2defa074e581fe450a6a5a01eb815d72c4d187871aee494204ba5fc31",
+      "bytes": 7656,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "1a1311a18d18da7542d00ed83a10bd80dda0fcac2ad374a86f174b36a278bcbd",
-        "bytes": 3002
+        "sha256": "cadbcb48559dcccd1f8cba3754f27194c8c356532d23131542409d711542b7f7",
+        "bytes": 2950
       }
     },
     "models/maps/lighting/transmission-source.json": {
@@ -10474,13 +10486,13 @@
       }
     },
     "models/maps/source-manifest.json": {
-      "sha256": "27d560c45599825b39d3359831c67f62da4d6c554cab0c7f7190857713ebdce0",
+      "sha256": "6eb8d7b3ca8a670b24367ef0b0045a2f1e728e46241ac4347d01f50e299035b4",
       "bytes": 7932,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "469873965266160708b7a807c3b49b577d02cfc819a85e7ea92fa14ec89f98e1",
-        "bytes": 3040
+        "sha256": "e0f56a3d9a5b08b1b2665e404af543603f51dcab92f56e47202851c76294582a",
+        "bytes": 3034
       }
     },
     "models/usp-s.glb.gz": {

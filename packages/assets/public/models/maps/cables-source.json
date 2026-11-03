@@ -8,8 +8,7 @@
     "probeInputs": {
       "probes.json": "797f1bc44f43c6ea7fee1cbd9df61fc079c5161d05d3d8ed57273cb56e1f0901",
       "probes.bin.gz": "1d1978ee06e84cdd8c713becc389d30625b0ab1464e6e0782857126ff5b3fb89",
-      "probe-shadows.bin.gz": "5da477a281bc2fd414216c1cf207a28638dfdc43bacae600cf297f4ed8819c01",
-      "probe-local-shadows.bin.gz": "0efbdf364f6bb68fe4ec73462477b9d6a43ad44914675959eaf1b001601ae1bf"
+      "probe-shadows.bin.gz": "5da477a281bc2fd414216c1cf207a28638dfdc43bacae600cf297f4ed8819c01"
     }
   },
   "algorithm": "VRF 5564866c7f2a6b2ee54a9195b7963147e24da94e CableMeshBuilder, BasicMovement and RopeSpringConstraint; offline only",

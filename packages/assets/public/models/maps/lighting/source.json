@@ -44,7 +44,7 @@
     "cubemapFog": "Pinned env_cubemap_fog, native 8.2 distance/height product and authored sky mips; no added texture allocation or render pass",
     "foliageBackProbeGpuBytes": 629860,
     "layerWeightGpuBytes": 321512,
-    "probeLocalShadowBytes": 317804,
+    "probeLocalShadowBytes": 9117388,
     "probeLocalShadowChannels": [
       1,
       2
@@ -75,7 +75,6 @@
       "dust2-native.gltf": "4d3e62e46fd747cf4fb85997630c1c55002ea14ac2de7956d52125bd28768f3b",
       "primitive-lighting.json": "c52772d9e258a830d5fd504538c631477f222b847315ce351755603391ea2b68",
       "postprocess.txt": "54f0b51e245d0c4c23d2e225e09b83e3624a4ae52d71efcf906d94f92484ba32",
-      "probe-local-shadows.bin.gz": "0efbdf364f6bb68fe4ec73462477b9d6a43ad44914675959eaf1b001601ae1bf",
       "probes.json": "797f1bc44f43c6ea7fee1cbd9df61fc079c5161d05d3d8ed57273cb56e1f0901",
       "probes.bin.gz": "1d1978ee06e84cdd8c713becc389d30625b0ab1464e6e0782857126ff5b3fb89",
       "probe-shadows.bin.gz": "5da477a281bc2fd414216c1cf207a28638dfdc43bacae600cf297f4ed8819c01",
