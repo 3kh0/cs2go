@@ -8,6 +8,7 @@ const urls: Record<string, string> = JSON.parse(
 );
 const logicalPaths = Object.fromEntries(Object.entries(urls).map(([path, url]) => [url, path]));
 const mapUrl = urls["/models/maps/dust2.glb.gz"] ?? "/models/maps/dust2.glb.gz";
+const cdn = Object.keys(urls).length > 0;
 
 test("cold startup begins asset loading even if service-worker registration never finishes", async ({
   page,
@@ -19,9 +20,17 @@ test("cold startup begins asset loading even if service-worker registration neve
   });
   const maps: string[] = [];
   const errors: string[] = [];
+  const misrouted: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("request", (request) => {
     if (request.url().endsWith(mapUrl)) maps.push(request.url());
+    const url = new URL(request.url());
+    if (
+      cdn &&
+      url.origin === new URL(page.url()).origin &&
+      /^\/(?:audio|effects|fonts|icons|licenses|maps|models|skins|ui)\//.test(url.pathname)
+    )
+      misrouted.push(url.href);
   });
   const documentResponse = page
     .waitForResponse((response) => response.request().isNavigationRequest())
@@ -42,6 +51,23 @@ test("cold startup begins asset loading even if service-worker registration neve
   expect(maps).toHaveLength(1);
   expect(maps[0]).toContain(mapUrl);
   expect(await page.evaluate(() => "__game" in window)).toBe(false);
+  // A development SPA fallback can return HTML with status 200 for a broken
+  // image URL. Check decoding and routing, rather than HTTP status alone.
+  const brokenImages = () =>
+    page.locator("img[src]").evaluateAll((nodes) =>
+      nodes
+        .filter((node) => {
+          const image = node as HTMLImageElement;
+          return image.getAttribute("src") && (!image.complete || !image.naturalWidth);
+        })
+        .map((node) => (node as HTMLImageElement).src),
+    );
+  await expect.poll(brokenImages, { timeout: 15000 }).toEqual([]);
+  await page.locator("#home-play").click();
+  await page.locator("#play").click();
+  await expect(page.locator("#team-select")).toBeVisible({ timeout: 45000 });
+  await expect.poll(brokenImages, { timeout: 15000 }).toEqual([]);
+  expect(misrouted).toEqual([]);
   expect(errors).toEqual([]);
 });
 

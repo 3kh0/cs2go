@@ -10,6 +10,7 @@ import {
   sampleSourceProbeLocalShadows,
 } from "./source-lighting";
 import { acquireAgentAppearance, selectedAgentId } from "./agent-roster";
+import { assetUrl } from "./asset-url";
 
 export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: number, game: Game) {
   const teams = ["t", "ct"] as const;
@@ -19,7 +20,7 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", "Choose your team");
-  overlay.innerHTML = `<div class="team-options">${teams.map((team) => `<button class="team-choice team-${team}" data-team="${team}"><div class="team-label"><img class="team-emblem" src="/icons/team-${team}.png" alt="" width="90" height="90"><h2>${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"}</h2><p class="team-count">0 players - 0 bots</p></div><div class="agent-preview"></div></button>`).join("")}</div><div class="team-controls"><button id="team-back">ESC · BACK</button><button id="team-auto">↻ AUTO SELECT</button></div>`;
+  overlay.innerHTML = `<div class="team-options">${teams.map((team) => `<button class="team-choice team-${team}" data-team="${team}"><div class="team-label"><img class="team-emblem" src="${assetUrl(`/icons/team-${team}.png`)}" alt="" width="90" height="90"><h2>${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"}</h2><p class="team-count">0 players - 0 bots</p></div><div class="agent-preview"></div></button>`).join("")}</div><div class="team-controls"><button id="team-back">ESC · BACK</button><button id="team-auto">↻ AUTO SELECT</button></div>`;
   let shown = false;
   const menuVisibility = menu.style.visibility;
   const { renderer } = game;

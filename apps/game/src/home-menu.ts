@@ -1,8 +1,9 @@
 import { weapons, isKnife } from "./physics";
 import { weaponAvailable } from "./economy";
 import type { Game } from "./game";
+import { assetUrl } from "./asset-url";
 
-const icon = (name: string) => `<img src="/ui/home/${name}.svg" alt="">`;
+const icon = (name: string) => `<img src="${assetUrl(`/ui/home/${name}.svg`)}" alt="">`;
 
 export function homeMenuMarkup() {
   return `<div id="menu" data-page="home">
