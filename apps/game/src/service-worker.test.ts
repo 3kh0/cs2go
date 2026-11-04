@@ -2,7 +2,7 @@ import { expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 
-it.each(["", "https://cdn.test/releases/abc"])(
+it.each(["", "https://cdn.test"])(
   "keeps verified cache and API isolation with CDN base %s",
   async (base) => {
     const origin = "https://game.test";
@@ -18,6 +18,14 @@ it.each(["", "https://cdn.test/releases/abc"])(
       "/models/agents/roster/a.glb.gz": await digest("new"),
       "/models/agents/roster/b.glb.gz": await digest("new"),
     };
+    const urls: Record<string, string> = base
+      ? Object.fromEntries(
+          Object.entries(revisions)
+            .filter(([path]) => path !== "/")
+            .map(([path, hash]) => [path, `${base}/objects/${hash}-${path.split("/").pop()}`]),
+        )
+      : {};
+    const paths = new Map(Object.entries(urls).map(([path, url]) => [url, path]));
     const stores = new Map<string, Map<string, Response>>();
     const key = (value: string | Request) =>
       typeof value === "string" ? new URL(value, origin).href : value.url;
@@ -74,7 +82,7 @@ it.each(["", "https://cdn.test/releases/abc"])(
         "(skin ? 3 : 20)",
       ),
       {
-        ASSET_BASE: base,
+        ASSET_URLS: urls,
         ASSET_REVISIONS: revisions,
         ASSET_SIZES: { "/model.bin": 5, "/changed.bin": 3 },
         BUILD_ID: "test",
@@ -90,7 +98,7 @@ it.each(["", "https://cdn.test/releases/abc"])(
         fetch: async (request: string | Request, options?: RequestInit) => {
           fetches++;
           if (!online) throw new Error("offline");
-          const path = new URL(key(request)).pathname.replace("/releases/abc", "");
+          const path = paths.get(key(request)) ?? new URL(key(request)).pathname;
           if (base && path === "/model.bin" && options?.cache !== "reload")
             throw new TypeError("Cached no-CORS response is unreadable");
           if (base && typeof request !== "string" && request.url.startsWith(base)) {
@@ -126,7 +134,7 @@ it.each(["", "https://cdn.test/releases/abc"])(
         request: navigate
           ? { url: `${origin}${path}`, method: "GET", mode: "navigate", headers: new Headers() }
           : new Request(
-              `${base && !path.startsWith("/api/") ? base : origin}${path}`,
+              urls[path] ?? new URL(path, origin).href,
               range ? { headers: { Range: "bytes=0-1" } } : {},
             ),
         respondWith(value: Promise<Response>) {
@@ -169,5 +177,9 @@ it.each(["", "https://cdn.test/releases/abc"])(
     expect(await request("/model.bin", true)).toBeUndefined();
     expect(await request("/api/status")).toBeUndefined();
     expect(await request("/api/steam?action=login", false, true)).toBeUndefined();
+    if (base) {
+      expect(await request(`${base}/releases/old/model.bin`)).toBeUndefined();
+      expect(await request(`${base}/objects/older-model.bin`)).toBeUndefined();
+    }
   },
 );

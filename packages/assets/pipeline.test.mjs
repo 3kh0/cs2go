@@ -12,8 +12,20 @@ import {
   brotliDecompressSync,
   constants,
 } from "node:zlib";
-import { prepare, releaseId, transportPath, sha256, BROTLI_QUALITY } from "./pipeline.mjs";
-import { assetBase, startupHints } from "../../scripts/build-assets.mjs";
+import {
+  prepare,
+  releaseId,
+  objectKey,
+  transportPath,
+  sha256,
+  BROTLI_QUALITY,
+} from "./pipeline.mjs";
+import {
+  assetBase,
+  assetUrls,
+  rewriteAssetUrls,
+  startupHints,
+} from "../../scripts/build-assets.mjs";
 
 test("asset releases are deterministic, hash content, and cache lossless compression", async () => {
   const root = await mkdtemp(join(tmpdir(), "cs2go-assets-"));
@@ -159,12 +171,49 @@ test("verification reuses unchanged no-transport decisions but generation and ch
 test("startup hints warm the CDN and preload the exact CORS map URL only in production", () => {
   assert.deepEqual(startupHints(""), []);
   const base = assetBase("https://cdn.example/game", "abc");
-  const [connection, map] = startupHints(base);
+  const url = "https://cdn.example/game/objects/map.gz.br";
+  const [connection, map] = startupHints(base, { "/models/maps/dust2.glb.gz": url });
   assert.equal(connection.attrs.href, "https://cdn.example");
   assert.equal(connection.attrs.rel, "preconnect");
-  assert.equal(map.attrs.href, `${base}/models/maps/dust2.glb.gz`);
+  assert.equal(map.attrs.href, url);
   assert.equal(map.attrs.rel, "preload");
   assert.equal(map.attrs.as, "fetch");
   assert.equal(map.attrs.crossorigin, "anonymous");
   assert.equal(map.attrs.fetchpriority, "high");
+});
+
+test("manifests share unchanged and renamed objects across releases and preserve header identity", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cs2go-shared-"));
+  try {
+    await mkdir(join(root, "public"));
+    await writeFile(join(root, "public", "first.svg"), "svg".repeat(100));
+    const first = await prepare(root);
+    await writeFile(join(root, "public", "renamed.svg"), "svg".repeat(100));
+    const second = await prepare(root);
+    assert.equal(second.version, 2);
+    assert.notEqual(first.release, second.release);
+    assert.equal(first.files["first.svg"].object, second.files["renamed.svg"].object);
+    const entry = second.files["first.svg"];
+    assert.notEqual(objectKey("same.json", entry), objectKey("same.svg", entry));
+    assert.notEqual(
+      objectKey("same.svg", entry),
+      objectKey("same.svg", { ...entry, transport: undefined, sha256: entry.transport.sha256 }),
+    );
+    const urls = assetUrls("https://cdn.example/game/", second);
+    assert.equal(urls["/first.svg"], `https://cdn.example/game/${entry.object}`);
+    assert.equal(urls["/first.svg"], urls["/renamed.svg"]);
+    assert.equal(
+      rewriteAssetUrls("url(/icons/first.svg)", { "/icons/first.svg": urls["/first.svg"] }),
+      `url(${urls["/first.svg"]})`,
+    );
+    assert.throws(() => rewriteAssetUrls("url(/icons/missing.svg)", urls), /missing from manifest/);
+    const corrupt = { ...entry, object: "objects/wrong.svg" };
+    const files = { "first.svg": corrupt };
+    assert.throws(
+      () => assetUrls("https://cdn.example", { version: 2, release: releaseId(files), files }),
+      /Invalid asset object/,
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
 });

@@ -6,14 +6,16 @@ const ASSET_CACHE = "cs2go-assets-v1";
 const CODE_CACHE = "cs2go-code-v1";
 const REVISION = "__cs2go_revision";
 const origin = self.location.origin;
-const assetBase = typeof ASSET_BASE === "undefined" ? "" : ASSET_BASE;
+const assetUrls = typeof ASSET_URLS === "undefined" ? {} : ASSET_URLS;
+const logicalPaths = new Map();
+for (const [path, url] of Object.entries(assetUrls))
+  if (!logicalPaths.has(url)) logicalPaths.set(url, path);
 const assetPath = (url) => {
-  if (assetBase && url.href.startsWith(`${assetBase}/`))
-    return url.href.slice(assetBase.length).split("?")[0];
+  const logical = logicalPaths.get(url.origin + url.pathname);
+  if (logical) return logical;
   return url.origin === origin ? url.pathname : null;
 };
-const networkUrl = (path) =>
-  assetBase && !path.startsWith("/assets/") && path !== "/" ? `${assetBase}${path}` : path;
+const networkUrl = (path) => assetUrls[path] || path;
 const pending = new Map();
 let writes = Promise.resolve();
 let inventory;
@@ -207,10 +209,9 @@ self.addEventListener("fetch", (event) => {
     if (!network) {
       // Public CDN responses must be readable, including CSS/background images,
       // so the same byte verification and offline cache work for every asset.
-      const readable =
-        assetBase && url.href.startsWith(`${assetBase}/`)
-          ? new Request(request, { mode: "cors", credentials: "omit" })
-          : request;
+      const readable = logicalPaths.has(url.href)
+        ? new Request(request, { mode: "cors", credentials: "omit" })
+        : request;
       network = fetch(readable).catch((error) => {
         if (readable === request) throw error;
         return fetch(readable, { cache: "reload" });

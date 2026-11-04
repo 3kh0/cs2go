@@ -8,7 +8,12 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from threading import Event, Lock
 from botocore.exceptions import ClientError
-from sync import publish, seed_cache, published_status, create_once, guard_copy_destination, RetryingClient
+from sync import publish, seed_cache, published_status, create_once, guard_copy_destination, RetryingClient, object_key
+
+
+def shared(release, files):
+    entries = {path: {**entry, 'object': object_key(path, entry)} for path, entry in files.items()}
+    return {'version': 2, 'release': release, 'files': entries}
 
 
 class Bucket:
@@ -42,7 +47,7 @@ class Bucket:
                 'NextContinuationToken': str(offset + 1) if more else None}
 
     def put_object(self, **kwargs):
-        if self.fail and kwargs['Key'].endswith('.bin'):
+        if self.fail and kwargs['Key'].startswith('objects/'):
             raise RuntimeError('transfer failed')
         if kwargs.get('IfNoneMatch') == '*' and kwargs['Key'] in self.objects:
             raise ClientError({'Error': {'Code': 'PreconditionFailed'}}, 'PutObject')
@@ -60,13 +65,12 @@ class PublishTests(unittest.TestCase):
             with self.subTest(copying=copying), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 (root / 'public').mkdir()
-                entry = {'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}
-                entries = {f'{index}.bin': entry for index in range(total)}
-                manifest = {'release': 'parallel', 'files': entries}
+                entries = {f'{index}.bin': {'sha256': hashlib.sha256(str(index).encode()).hexdigest(), 'bytes': len(str(index))} for index in range(total)}
+                manifest = shared('parallel', entries)
                 body = json.dumps(manifest).encode()
                 (root / 'manifest.json').write_bytes(body)
                 for path in entries:
-                    (root / 'public' / path).write_bytes(b'one')
+                    (root / 'public' / path).write_bytes(Path(path).stem.encode())
 
                 class BlockingBucket(Bucket):
                     def __init__(self):
@@ -97,7 +101,7 @@ class PublishTests(unittest.TestCase):
                         return super().copy_object(**kwargs)
 
                     def put_object(inner, **kwargs):
-                        if kwargs['Key'].endswith('.bin'):
+                        if kwargs['Key'].startswith('objects/'):
                             inner.block_transfer()
                         else:
                             self.assertEqual(len(inner.verified), total)
@@ -112,9 +116,10 @@ class PublishTests(unittest.TestCase):
                 bucket = BlockingBucket()
                 if copying:
                     bucket.objects['latest.json'] = {'Body': json.dumps({
-                        'release': 'old', 'files': {'source.bin': entry}}).encode()}
-                    bucket.objects['releases/old/source.bin'] = {
-                        'Body': b'one', 'Metadata': {'sha256': entry['sha256']}}
+                        'release': 'old', 'files': entries}).encode()}
+                    for path, entry in entries.items():
+                        bucket.objects['releases/old/' + path] = {
+                            'Body': Path(path).stem.encode(), 'Metadata': {'sha256': entry['sha256']}}
                 with ThreadPoolExecutor(max_workers=1) as pool:
                     work = pool.submit(publish, bucket, 'test', manifest, root)
                     try:
@@ -131,7 +136,7 @@ class PublishTests(unittest.TestCase):
         bucket = Bucket()
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            manifest = {'release': 'release', 'files': {}}
+            manifest = shared('release', {})
             body = json.dumps(manifest).encode()
             (root / 'manifest.json').write_bytes(body)
             tree = 'a' * 40
@@ -193,7 +198,7 @@ class PublishTests(unittest.TestCase):
             with self.subTest(winner=winner), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 entry = {'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}
-                manifest = {'release': 'new', 'files': {'a.bin': entry}}
+                manifest = shared('new', {'a.bin': entry})
                 (root / 'manifest.json').write_text(json.dumps(manifest))
                 bucket = RacingBucket()
                 bucket.winner = winner
@@ -206,14 +211,14 @@ class PublishTests(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         publish(bucket, 'test', manifest, root)
                     self.assertNotIn('releases/new/manifest.json', bucket.objects)
-                self.assertEqual(bucket.objects['releases/new/a.bin']['Body'], winner)
+                self.assertEqual(bucket.objects[object_key('a.bin', entry)]['Body'], winner)
                 self.assertEqual(bucket.copies, [])
 
     def test_latest_pointer_is_not_rewritten_when_identical(self):
         bucket = Bucket()
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            manifest = {'release': 'empty', 'files': {}}
+            manifest = shared('empty', {})
             body = json.dumps(manifest).encode()
             (root / 'manifest.json').write_bytes(body)
             bucket.objects['latest.json'] = {'Body': body}
@@ -227,7 +232,7 @@ class PublishTests(unittest.TestCase):
                 raise ClientError({'Error': {'Code': 'AccessDenied'}}, 'GetObject')
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            manifest = {'release': 'blocked', 'files': {}}
+            manifest = shared('blocked', {})
             (root / 'manifest.json').write_text(json.dumps(manifest))
             with self.assertRaises(ClientError):
                 published_status(DeniedBucket(), 'test', manifest, root, 'a' * 40)
@@ -243,7 +248,7 @@ class PublishTests(unittest.TestCase):
                 for name, data in content.items():
                     (root / 'public' / name).write_bytes(data)
                     entries[name] = {'sha256': hashlib.sha256(data).hexdigest(), 'bytes': len(data)}
-                result = {'release': release, 'files': entries}
+                result = shared(release, entries)
                 (root / 'manifest.json').write_text(json.dumps(result))
                 return result
 
@@ -254,8 +259,9 @@ class PublishTests(unittest.TestCase):
             self.assertEqual(len(bucket.uploads), 4)
             second = manifest('second', {'a.bin': b'one', 'b.bin': b'changed'})
             publish(bucket, 'test', second, root)
-            self.assertEqual(bucket.copies, ['releases/second/a.bin'])
-            self.assertIn('releases/first/b.bin', bucket.objects)  # rollback retained
+            self.assertEqual(bucket.copies, [])
+            self.assertEqual(len([key for key in bucket.objects if key.startswith('objects/')]), 3)
+            self.assertIn(first['files']['b.bin']['object'], bucket.objects)  # rollback retained
             third = manifest('third', {'a.bin': b'new'})
             bucket.fail = True
             with self.assertRaises(RuntimeError):
@@ -275,52 +281,95 @@ class PublishTests(unittest.TestCase):
                 'encoding': 'br', 'quality': 11, 'sha256': hashlib.sha256(wire).hexdigest(), 'bytes': len(wire)}}
             (root / '.cache' / f'{logical_hash}.q11.br').write_bytes(wire)
             def manifest(release):
-                data = {'release': release, 'files': {'asset.bin.gz': entry}}
+                data = shared(release, {'asset.bin.gz': entry})
                 (root / 'manifest.json').write_text(json.dumps(data))
                 return data
             publish(bucket, 'test', manifest('first'), root)
-            stored = bucket.objects['releases/first/asset.bin.gz']
+            stored = bucket.objects[object_key('asset.bin.gz', entry)]
             self.assertEqual(stored['Body'], wire)
             self.assertEqual(stored['ContentEncoding'], 'br')
             self.assertEqual(stored['ContentType'], 'application/octet-stream')
             self.assertEqual(stored['Metadata']['sha256'], entry['transport']['sha256'])
             publish(bucket, 'test', manifest('second'), root)
-            self.assertIn('releases/second/asset.bin.gz', bucket.copies)
-            self.assertEqual(bucket.objects['releases/second/asset.bin.gz']['ContentEncoding'], 'br')
+            self.assertEqual(bucket.copies, [])
+            self.assertEqual(bucket.objects[object_key('asset.bin.gz', entry)]['ContentEncoding'], 'br')
             # Valid wire bytes with a lost encoding header would make clients see
             # compressed data; retries must refuse that immutable object.
             third = manifest('third')
-            bucket.objects['releases/third/asset.bin.gz'] = dict(stored)
-            bucket.objects['releases/third/asset.bin.gz'].pop('ContentEncoding')
+            bucket.objects[object_key('asset.bin.gz', entry)] = dict(stored)
+            bucket.objects[object_key('asset.bin.gz', entry)].pop('ContentEncoding')
             with self.assertRaises(ValueError):
                 publish(bucket, 'test', third, root)
             self.assertNotIn('releases/third/manifest.json', bucket.objects)
 
     def test_cache_seeding_requires_complete_release_and_verified_wire_bytes(self):
+        for version in (1, 2):
+            with self.subTest(version=version), tempfile.TemporaryDirectory() as directory:
+                bucket = Bucket()
+                root = Path(directory)
+                wire = b'compressed fixture'
+                entry = {'sha256': 'a' * 64, 'bytes': 200, 'transport': {
+                    'encoding': 'br', 'quality': 11, 'sha256': hashlib.sha256(wire).hexdigest(), 'bytes': len(wire)}}
+                manifest = shared('seed', {'asset.bin': entry, 'same.bin': entry}) if version == 2 else {
+                    'version': 1, 'release': 'seed', 'files': {'asset.bin': entry, 'same.bin': entry}}
+                body = json.dumps(manifest).encode()
+                (root / 'manifest.json').write_bytes(body)
+                seed_cache(bucket, 'test', manifest, root)
+                self.assertFalse((root / '.cache').exists())
+                bucket.objects['releases/seed/manifest.json'] = {'Body': body}
+                key = object_key('same.bin', entry) if version == 2 else 'releases/seed/same.bin'
+                bucket.objects[key] = {'Body': wire}
+                seed_cache(bucket, 'test', manifest, root)
+                target = root / '.cache' / f"{entry['sha256']}.q11.br"
+                self.assertEqual(target.read_bytes(), wire)
+                target.write_bytes(b'corrupt cache')
+                bucket.objects[key] = {'Body': b'wrong wire bytes'}
+                with self.assertRaises(ValueError):
+                    seed_cache(bucket, 'test', manifest, root)
+                self.assertEqual(target.read_bytes(), b'corrupt cache')
+                bucket.objects['releases/seed/manifest.json'] = {'Body': b'other manifest'}
+                with self.assertRaises(ValueError):
+                    seed_cache(bucket, 'test', manifest, root)
+
+    def test_legacy_migration_copies_once_then_only_new_content_is_uploaded(self):
         bucket = Bucket()
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            wire = b'compressed fixture'
-            entry = {'sha256': 'a' * 64, 'bytes': 200, 'transport': {
-                'encoding': 'br', 'quality': 11, 'sha256': hashlib.sha256(wire).hexdigest(), 'bytes': len(wire)}}
-            manifest = {'release': 'seed', 'files': {'asset.bin': entry, 'same.bin': entry}}
-            body = json.dumps(manifest).encode()
-            (root / 'manifest.json').write_bytes(body)
-            seed_cache(bucket, 'test', manifest, root)
-            self.assertFalse((root / '.cache').exists())
-            bucket.objects['releases/seed/manifest.json'] = {'Body': body}
-            bucket.objects['releases/seed/same.bin'] = {'Body': wire}
-            seed_cache(bucket, 'test', manifest, root)
-            target = root / '.cache' / f"{entry['sha256']}.q11.br"
-            self.assertEqual(target.read_bytes(), wire)
-            target.write_bytes(b'corrupt cache')
-            bucket.objects['releases/seed/same.bin'] = {'Body': b'wrong wire bytes'}
-            with self.assertRaises(ValueError):
-                seed_cache(bucket, 'test', manifest, root)
-            self.assertEqual(target.read_bytes(), b'corrupt cache')
-            bucket.objects['releases/seed/manifest.json'] = {'Body': b'other manifest'}
-            with self.assertRaises(ValueError):
-                seed_cache(bucket, 'test', manifest, root)
+            (root / 'public').mkdir()
+            entry = {'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}
+            legacy = {'version': 1, 'release': 'old', 'files': {'a.bin': entry}}
+            legacy_body = json.dumps(legacy).encode()
+            bucket.objects['latest.json'] = {'Body': legacy_body}
+            bucket.objects['releases/old/manifest.json'] = {'Body': legacy_body}
+            bucket.objects['releases/old/a.bin'] = {'Body': b'one', 'Metadata': {'sha256': entry['sha256']}}
+            first = shared('first', {'a.bin': entry, 'duplicate.bin': entry})
+            (root / 'manifest.json').write_text(json.dumps(first))
+            publish(bucket, 'test', first, root)
+            self.assertEqual(bucket.copies, [object_key('a.bin', entry)])
+            self.assertEqual(bucket.objects['releases/old/a.bin']['Body'], b'one')
+            self.assertFalse(any(k.startswith('releases/first/') and k.endswith('.bin') for k in bucket.objects))
+            changed = {'sha256': hashlib.sha256(b'changed').hexdigest(), 'bytes': 7}
+            second = shared('second', {'renamed.bin': entry, 'b.bin': changed})
+            (root / 'manifest.json').write_text(json.dumps(second))
+            (root / 'public/b.bin').write_bytes(b'changed')
+            publish(bucket, 'test', second, root)
+            self.assertEqual(bucket.copies, [object_key('a.bin', entry)])
+            self.assertEqual([k for k in bucket.uploads if k.startswith('objects/')], [object_key('b.bin', changed)])
+            self.assertEqual(len([k for k in bucket.objects if k.startswith('objects/')]), 2)
+
+    def test_legacy_publication_and_invalid_object_paths_fail_before_writes(self):
+        bucket = Bucket()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            entry = {'sha256': 'a' * 64, 'bytes': 1}
+            bad = shared('bad', {'a.bin': entry})
+            bad['files']['a.bin']['object'] = 'releases/other/a.bin'
+            for manifest in ({'version': 1, 'release': 'old', 'files': {}}, bad):
+                with self.assertRaises(ValueError):
+                    publish(bucket, 'test', manifest, root)
+                with self.assertRaises(ValueError):
+                    published_status(bucket, 'test', manifest, root)
+            self.assertEqual(bucket.objects, {})
 
     def test_hash_mismatch_never_publishes_marker(self):
         bucket = Bucket()
@@ -328,39 +377,36 @@ class PublishTests(unittest.TestCase):
             root = Path(directory)
             (root / 'public').mkdir()
             (root / 'public/a.bin').write_bytes(b'tampered')
-            manifest = {'release': 'bad', 'files': {'a.bin': {'sha256': '0' * 64, 'bytes': 8}}}
+            manifest = shared('bad', {'a.bin': {'sha256': '0' * 64, 'bytes': 8}})
             (root / 'manifest.json').write_text(json.dumps(manifest))
             with self.assertRaises(ValueError):
                 publish(bucket, 'test', manifest, root)
             self.assertEqual(bucket.objects, {})
 
 
-    def test_listing_resumes_without_negative_or_source_heads(self):
+    def test_listing_resumes_shared_objects_and_deduplicates_paths(self):
         bucket = Bucket()
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / 'public').mkdir()
-            content = b'one'
-            entry = {'sha256': hashlib.sha256(content).hexdigest(), 'bytes': 3}
-            manifest = {'release': 'resume', 'files': {'a.bin': entry, 'b.bin': entry, 'c.bin': entry}}
+            entry = {'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}
+            manifest = shared('resume', {'a.bin': entry, 'renamed.bin': entry})
             (root / 'manifest.json').write_text(json.dumps(manifest))
-            for name in ('a.bin', 'b.bin'):
-                bucket.objects['releases/resume/' + name] = {'Body': content, 'Metadata': {'sha256': entry['sha256']}}
-            previous = {'release': 'old', 'files': {'source.bin': entry}}
-            bucket.objects['latest.json'] = {'Body': json.dumps(previous).encode()}
-            bucket.objects['releases/old/source.bin'] = {'Body': content, 'Metadata': {'sha256': entry['sha256']}}
+            key = object_key('a.bin', entry)
+            bucket.objects[key] = {'Body': b'one', 'Metadata': {'sha256': entry['sha256']}}
+            # A second page, including an unreferenced old object, must be read.
+            bucket.objects['objects/unused.bin'] = {'Body': b'older'}
             publish(bucket, 'test', manifest, root)
             self.assertEqual(bucket.listings, 2)
-            self.assertCountEqual(bucket.heads, ['releases/resume/a.bin', 'releases/resume/b.bin', 'releases/resume/c.bin'])
-            self.assertEqual(bucket.copies, ['releases/resume/c.bin'])
-            self.assertIn('releases/resume/manifest.json', bucket.objects)
+            self.assertEqual(bucket.heads, [key])
+            self.assertEqual(bucket.copies, [])
+            self.assertEqual(bucket.uploads, ['releases/resume/manifest.json', 'latest.json'])
 
     def test_bad_copied_metadata_still_blocks_publication(self):
         bucket = Bucket()
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             entry = {'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}
-            manifest = {'release': 'new', 'files': {'a.bin': entry}}
+            manifest = shared('new', {'a.bin': entry})
             (root / 'manifest.json').write_text(json.dumps(manifest))
             bucket.objects['latest.json'] = {'Body': json.dumps({'release':'old', 'files':{'a.bin':entry}}).encode()}
             bucket.objects['releases/old/a.bin'] = {'Body': b'one', 'Metadata': {'sha256':'wrong'}}
@@ -420,8 +466,8 @@ class RetryTests(unittest.TestCase):
             root = Path(directory)
             (root / 'public').mkdir()
             (root / 'public/a.bin').write_bytes(b'one')
-            manifest = {'release': 'retry', 'files': {'a.bin': {
-                'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}}}
+            manifest = shared('retry', {'a.bin': {
+                'sha256': hashlib.sha256(b'one').hexdigest(), 'bytes': 3}})
             (root / 'manifest.json').write_text(json.dumps(manifest))
             bucket = ThrottledBucket()
             with self.assertRaises(ClientError):

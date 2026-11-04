@@ -1,7 +1,13 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, relative, join } from "node:path";
-import { files, prepare, releaseId, root as assetRoot } from "../packages/assets/pipeline.mjs";
+import {
+  files,
+  prepare,
+  releaseId,
+  objectKey,
+  root as assetRoot,
+} from "../packages/assets/pipeline.mjs";
 
 const hash = (data) => createHash("sha256").update(data).digest("hex");
 export function assetBase(origin, release) {
@@ -12,12 +18,27 @@ export function assetBase(origin, release) {
   return `${url.href.replace(/\/$/, "")}/releases/${release}`;
 }
 // CSS and markup need the same base as programmatic loaders, before Vite hashes chunks.
-export function rewriteAssetUrls(source, base) {
-  return source
-    .replace(/\/(audio|effects|fonts|icons|licenses|maps|models|skins|ui)\//g, `${base}/$1/`)
-    .replaceAll('"/icon.svg"', `"${base}/icon.svg"`);
+export function assetUrls(origin, manifest) {
+  const bucket = assetBase(origin, manifest.release).replace(`/releases/${manifest.release}`, "");
+  if (manifest.version !== 2 || manifest.release !== releaseId(manifest.files))
+    throw new Error("Invalid shared-object asset manifest");
+  return Object.fromEntries(
+    Object.entries(manifest.files).map(([path, entry]) => {
+      if (entry.object !== objectKey(path, entry)) throw new Error(`Invalid asset object: ${path}`);
+      return [`/${path}`, `${bucket}/${entry.object}`];
+    }),
+  );
 }
-export function startupHints(base) {
+export function rewriteAssetUrls(source, urls) {
+  return source.replace(
+    /\/(?:audio|effects|fonts|icons|licenses|maps|models|skins|ui)\/[\w./%-]+|\/icon\.svg/g,
+    (path) => {
+      if (!Object.hasOwn(urls, path)) throw new Error(`Asset missing from manifest: ${path}`);
+      return urls[path];
+    },
+  );
+}
+export function startupHints(base, urls) {
   if (!base) return [];
   return [
     {
@@ -30,7 +51,7 @@ export function startupHints(base) {
       attrs: {
         rel: "preload",
         as: "fetch",
-        href: `${base}/models/maps/dust2.glb.gz`,
+        href: urls["/models/maps/dust2.glb.gz"],
         crossorigin: "anonymous",
         fetchpriority: "high",
       },
@@ -39,7 +60,10 @@ export function startupHints(base) {
   ];
 }
 export function buildAssets() {
-  let output, manifest, base;
+  let output,
+    manifest,
+    base,
+    urls = {};
   return {
     name: "cs2go-assets",
     enforce: "pre",
@@ -48,23 +72,24 @@ export function buildAssets() {
       if (process.env.ASSET_CDN_URL) {
         manifest = JSON.parse(await readFile(join(assetRoot, "manifest.json"), "utf8"));
         base = assetBase(process.env.ASSET_CDN_URL, manifest.release);
+        urls = assetUrls(process.env.ASSET_CDN_URL, manifest);
       } else base = "";
       return {
         publicDir: base ? false : join(assetRoot, "public"),
-        define: { "import.meta.env.VITE_ASSET_BASE": JSON.stringify(base) },
+        define: { "import.meta.env.VITE_ASSET_URLS": JSON.stringify(JSON.stringify(urls)) },
       };
     },
     transform(code, id) {
       if (!base) return;
-      if (id.endsWith(".css")) return rewriteAssetUrls(code, base);
+      if (id.endsWith(".css")) return rewriteAssetUrls(code, urls);
       if (id.endsWith(".ts"))
         return code.replace(
-          /src="\/(audio|effects|fonts|icons|licenses|maps|models|skins|ui)\//g,
-          `src="${base}/$1/`,
+          /src="(\/(?:audio|effects|fonts|icons|licenses|maps|models|skins|ui)\/[^"$\s]+)"/g,
+          (match) => rewriteAssetUrls(match, urls),
         );
     },
     transformIndexHtml(html) {
-      return { html: base ? rewriteAssetUrls(html, base) : html, tags: startupHints(base) };
+      return { html: base ? rewriteAssetUrls(html, urls) : html, tags: startupHints(base, urls) };
     },
     async configResolved(config) {
       const started = performance.now();
@@ -75,8 +100,7 @@ export function buildAssets() {
         );
       if (process.env.ASSET_CDN_URL) {
         manifest = JSON.parse(await readFile(join(assetRoot, "manifest.json"), "utf8"));
-        if (manifest.version !== 1 || manifest.release !== releaseId(manifest.files))
-          throw new Error("Invalid asset manifest");
+        urls = assetUrls(process.env.ASSET_CDN_URL, manifest);
         base = assetBase(process.env.ASSET_CDN_URL, manifest.release);
         // Published last by the sync job. Never deploy a shell pointing at a partial release.
         config.logger.info("[assets] Checking published R2 release before bundling...");
@@ -138,10 +162,10 @@ export function buildAssets() {
         if (/^\/assets\/.*\.(?:js|css|wasm)$/.test(url)) shell.push(url);
       }
       const worker = await readFile(new URL("./service-worker.js", import.meta.url), "utf8");
-      const metadata = JSON.stringify({ revisions, sizes, decoded, base });
+      const metadata = JSON.stringify({ revisions, sizes, decoded, urls });
       await writeFile(
         join(output, "sw.js"),
-        `const ASSET_REVISIONS=${JSON.stringify(revisions)};\nconst ASSET_DECODED_REVISIONS=${JSON.stringify(decoded)};\nconst ASSET_SIZES=${JSON.stringify(sizes)};\nconst ASSET_BASE=${JSON.stringify(base)};\nconst BUILD_ID=${JSON.stringify(hash(metadata + worker))};\nconst SHELL_URLS=${JSON.stringify(shell)};\n${worker}`,
+        `const ASSET_REVISIONS=${JSON.stringify(revisions)};\nconst ASSET_DECODED_REVISIONS=${JSON.stringify(decoded)};\nconst ASSET_SIZES=${JSON.stringify(sizes)};\nconst ASSET_URLS=${JSON.stringify(urls)};\nconst BUILD_ID=${JSON.stringify(hash(metadata + worker))};\nconst SHELL_URLS=${JSON.stringify(shell)};\n${worker}`,
       );
       console.log(
         `Assets: ${base || "local"}; ${Object.keys(revisions).length} revisioned entries.`,

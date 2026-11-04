@@ -1,4 +1,4 @@
-"""Publish an immutable R2 snapshot; boto3 is a CI-only dependency."""
+"""Publish immutable manifests backed by shared R2 objects; boto3 is CI-only."""
 import hashlib
 import json
 import mimetypes
@@ -84,8 +84,33 @@ def guard_copy_destination(params, **kwargs):
     params['headers']['cf-copy-destination-if-none-match'] = '*'
 
 
+def object_key(path, entry):
+    wire = entry.get('transport', entry)
+    encoding = wire.get('encoding')
+    return f"objects/{wire['sha256']}{Path(path).suffix}" + (f'.{encoding}' if encoding else '')
+
+
+def payload_key(manifest, path, entry):
+    if manifest.get('version', 1) == 1:
+        return f"releases/{manifest['release']}/{path}"
+    return entry['object']
+
+
+def validate_manifest(manifest):
+    if manifest.get('version') != 2:
+        raise ValueError('Generate a version 2 shared-object manifest before publishing')
+    for path, entry in manifest['files'].items():
+        wire = entry.get('transport', entry)
+        digest = wire['sha256']
+        if (len(digest) != 64 or any(c not in '0123456789abcdef' for c in digest)
+                or wire.get('encoding') not in (None, 'br')
+                or entry.get('object') != object_key(path, entry)):
+            raise ValueError(f'Invalid shared object identity: {path}')
+
+
 def published_status(client, bucket, manifest, root=ROOT, tree=None):
     """Read-only fast path requires a receipt from verification of this exact Git tree."""
+    validate_manifest(manifest)
     body = (root / 'manifest.json').read_bytes()
     prefix = f"releases/{manifest['release']}/"
     keys = [prefix + 'manifest.json']
@@ -155,7 +180,7 @@ def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
             payload = target.read_bytes()
             if len(payload) == wire['bytes'] and hashlib.sha256(payload).hexdigest() == wire['sha256']:
                 return
-        payload = client.get_object(Bucket=bucket, Key=prefix + path)['Body'].read()
+        payload = client.get_object(Bucket=bucket, Key=payload_key(manifest, path, entry))['Body'].read()
         if len(payload) != wire['bytes'] or hashlib.sha256(payload).hexdigest() != wire['sha256']:
             raise ValueError(f'Published Brotli payload differs: {path}')
         temporary = target.with_suffix(f'.tmp-{os.getpid()}')
@@ -171,6 +196,7 @@ def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
 
 def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None,
             workers=TRANSFER_WORKERS, upload_workers=UPLOAD_WORKERS):
+    validate_manifest(manifest)
     if workers < 1 or upload_workers < 1:
         raise ValueError('Transfer and upload concurrency must be positive')
     client = RetryingClient(client, pause)
@@ -196,12 +222,12 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None,
         previous = {'files': {}}
         previous_body = None
 
-    # List once to avoid one doomed HEAD per missing key in a new snapshot.
+    # Inventory the shared pool once, not one failed HEAD per missing object.
     # Existing keys still require SHA-256 metadata verification before reuse.
     existing = set()
     continuation = None
     while True:
-        args = {'Bucket': bucket, 'Prefix': prefix}
+        args = {'Bucket': bucket, 'Prefix': 'objects/'}
         if continuation:
             args['ContinuationToken'] = continuation
         page = client.list_objects_v2(**args)
@@ -216,8 +242,12 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None,
     # Never use ETags as content hashes: multipart uploads have different ETag semantics.
     old_by_hash = {}
     for path, entry in previous['files'].items():
-        wire = entry.get('transport', entry)
-        old_by_hash[(wire['sha256'], Path(path).suffix, wire.get('encoding'))] = path
+        old_by_hash[object_key(path, entry)] = payload_key(previous, path, entry)
+
+    # Identical logical files share a single transfer, including concurrent work.
+    objects = {}
+    for path, entry in manifest['files'].items():
+        objects.setdefault(entry['object'], (path, entry))
 
     # Copy/HEAD requests wait on remote latency without buffering payloads.
     # Keep the smaller upload budget separate so large assets cannot exhaust RAM.
@@ -244,7 +274,7 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None,
 
     def transfer(item):
         path, entry = item
-        target = prefix + path
+        target = entry['object']
         wire = entry.get('transport', entry)
         expected = wire['sha256']
         encoding = wire.get('encoding')
@@ -253,9 +283,8 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None,
             if head.get('Metadata', {}).get('sha256') == expected and head['ContentLength'] == wire['bytes'] and head.get('ContentEncoding') == encoding:
                 return 'skipped'
             raise ValueError(f'Existing immutable object differs: {target}')
-        old_path = old_by_hash.get((expected, Path(path).suffix, encoding))
-        if old_path is not None:
-            source = f"releases/{previous['release']}/{old_path}"
+        source = old_by_hash.get(target)
+        if source is not None and source != target:
             # Copy preserves source metadata; the destination HEAD below verifies
             # that same SHA-256 and size, avoiding a redundant source HEAD.
             try:
@@ -278,18 +307,18 @@ def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None,
 
     counts = {'uploaded': 0, 'copied': 0, 'skipped': 0}
     started = time.monotonic()
-    print(f"Syncing {len(manifest['files'])} assets with {workers} transfer workers "
+    print(f"Syncing {len(objects)} unique objects for {len(manifest['files'])} assets with {workers} transfer workers "
           f'and at most {upload_workers} buffered uploads', flush=True)
     try:
         with ThreadPoolExecutor(max_workers=workers) as pool:
-            pending = [pool.submit(transfer, item) for item in manifest['files'].items()]
+            pending = [pool.submit(transfer, item) for item in objects.values()]
             try:
                 # Report actual completions, rather than waiting for earlier slow files.
                 for completed, future in enumerate(as_completed(pending), 1):
                     counts[future.result()] += 1
                     if completed % 250 == 0:
                         elapsed = time.monotonic() - started
-                        print(f"Synced {completed}/{len(manifest['files'])}: {counts}; "
+                        print(f"Synced {completed}/{len(objects)}: {counts}; "
                               f'{completed / elapsed:.1f} assets/s, {elapsed:.1f}s elapsed', flush=True)
             except BaseException:
                 for future in pending:

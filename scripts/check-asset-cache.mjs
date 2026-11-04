@@ -5,6 +5,9 @@ const base = process.env.CACHE_URL || "http://127.0.0.1:5188";
 const sw = await readFile("apps/game/dist/sw.js", "utf8");
 const revisions = JSON.parse(sw.match(/^const ASSET_REVISIONS=(.*);$/m)[1]);
 const shell = JSON.parse(sw.match(/^const SHELL_URLS=(.*);$/m)[1]);
+const urls = JSON.parse(sw.match(/^const ASSET_URLS=(.*);$/m)?.[1] ?? "{}");
+const logicalPaths = new Map(Object.entries(urls).map(([path, url]) => [url, path]));
+const logicalPath = (url) => logicalPaths.get(url) ?? new URL(url).pathname;
 const browser = await chromium.launch({ channel: "chromium" });
 const context = await browser.newContext({
   viewport: { width: 1440, height: 900 },
@@ -38,9 +41,9 @@ try {
   await page.waitForFunction(() => !!navigator.serviceWorker.controller);
   console.log("Cold Play ready", first);
   const requested = await page.evaluate(() =>
-    performance.getEntriesByType("resource").map((e) => new URL(e.name).pathname),
+    performance.getEntriesByType("resource").map((e) => e.name),
   );
-  const expected = [...new Set(requested)].filter(
+  const expected = [...new Set(requested.map(logicalPath))].filter(
     (path) => revisions[path] && !shell.includes(path),
   );
   async function waitForCached() {
@@ -127,12 +130,12 @@ try {
     button: document.querySelector("#play")?.textContent,
     disabled: document.querySelector("#play")?.disabled,
     controller: !!navigator.serviceWorker.controller,
-    requested: performance.getEntriesByType("resource").map((e) => new URL(e.name).pathname),
+    requested: performance.getEntriesByType("resource").map((e) => e.name),
     cached: (await (await caches.open("cs2go-assets-v1")).keys()).map(
       (r) => new URL(r.url).pathname,
     ),
   }));
-  diagnosis.missing = [...new Set(diagnosis.requested)].filter(
+  diagnosis.missing = [...new Set(diagnosis.requested.map(logicalPath))].filter(
     (path) => revisions[path] && !shell.includes(path) && !diagnosis.cached.includes(path),
   );
   console.error(JSON.stringify(diagnosis));

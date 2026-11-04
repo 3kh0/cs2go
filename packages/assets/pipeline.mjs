@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { readdir, readFile, writeFile, mkdir, rename } from "node:fs/promises";
-import { join, relative } from "node:path";
+import { join, relative, extname } from "node:path";
 import { gzipSync, gunzipSync, brotliCompress, brotliDecompressSync, constants } from "node:zlib";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
@@ -24,6 +24,12 @@ export async function files(directory) {
   return found.sort();
 }
 export const releaseId = (entries) => sha256(JSON.stringify(entries));
+// Include media type and HTTP encoding in the identity: equal bytes can need
+// different response headers. Filenames and releases do not affect reuse.
+export const objectKey = (path, entry) => {
+  const wire = entry.transport ?? entry;
+  return `objects/${wire.sha256}${extname(path)}${wire.encoding ? `.${wire.encoding}` : ""}`;
+};
 export async function prepare(directory = root, expectedEntries, onProgress) {
   const publicDir = join(directory, "public");
   const cache = join(directory, ".cache");
@@ -103,6 +109,7 @@ export async function prepare(directory = root, expectedEntries, onProgress) {
           bytes: encoded.length,
         };
     }
+    entry.object = objectKey(target, entry);
     if (entries[target]) throw new Error(`Duplicate generated asset: ${target}`);
     entries[target] = entry;
     if (
@@ -131,7 +138,7 @@ export async function prepare(directory = root, expectedEntries, onProgress) {
   const ordered = Object.fromEntries(
     Object.entries(entries).sort(([a], [b]) => a.localeCompare(b, "en")),
   );
-  return { version: 1, release: releaseId(ordered), files: ordered };
+  return { version: 2, release: releaseId(ordered), files: ordered };
 }
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const destination = join(root, "manifest.json");
