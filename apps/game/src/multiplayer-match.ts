@@ -701,10 +701,14 @@ export class MultiplayerMatch {
       forward: locked ? Number(g.keys.has("KeyW")) - Number(g.keys.has("KeyS")) : 0,
       right: locked ? Number(g.keys.has("KeyD")) - Number(g.keys.has("KeyA")) : 0,
       yaw: Math.atan2(Math.sin(g.yaw), Math.cos(g.yaw)),
-      pitch: -g.pitch,
+      pitch: -g.viewPitch,
       jump: locked && (g.jumpQueued || (g.settings.autoBunnyhop && g.keys.has("Space"))),
       duck:
-        locked && (g.keys.has("ControlLeft") || g.keys.has("ControlRight") || g.keys.has("KeyC")),
+        locked &&
+        (g.planting ||
+          g.keys.has("ControlLeft") ||
+          g.keys.has("ControlRight") ||
+          g.keys.has("KeyC")),
       walk: locked && (g.keys.has("ShiftLeft") || g.keys.has("ShiftRight")),
       // Preserve a short click even if press/release both precede this frame.
       fire:

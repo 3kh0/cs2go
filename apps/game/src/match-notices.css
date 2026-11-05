@@ -125,13 +125,16 @@
   pointer-events: none;
 }
 #hud-alert[data-type="bomb-planted"] {
-  color: #ff5c4e;
+  background: #ff5c4e;
+  color: white;
+  font-weight: 700;
   border-color: #ff5c4e;
 }
 #hud-alert-detail {
   display: block;
   font-size: inherit;
   font-family: inherit;
+  font-weight: inherit;
   font-variant-numeric: tabular-nums;
 }
 #hud-alert-detail:empty {

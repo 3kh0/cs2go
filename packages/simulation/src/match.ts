@@ -827,7 +827,11 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
     }
     const wasGrounded = player.grounded,
       fallingSpeed = Math.max(0, -player.vertical);
-    if (!frozen) movePlayer(player, input, STEP, match.map, [...match.players.values()]);
+    const planting = state.bomb.carrier === player.id && state.bomb.plantProgress > 0 && input.use;
+    if (!frozen)
+      movePlayer(player, planting ? { ...input, duck: true } : input, STEP, match.map, [
+        ...match.players.values(),
+      ]);
     else {
       player.vx = player.vz = player.vertical = 0;
     }

@@ -103,8 +103,11 @@ test("planting and defusing require held use; cancellation resets progress; obje
   match.map.collision.followGround = () => true;
   advance(match, 1, use);
   expect(match.state.bomb.plantProgress).toBeGreaterThan(0.9);
+  expect(t.eye).toBeLessThan(1.2);
   stepMatch(match, new Map());
   expect(match.state.bomb.plantProgress).toBe(0);
+  advance(match, 0.4);
+  expect(t.eye).toBeGreaterThan(1.6);
   advance(match, 3.3, use);
   expect(match.state.bomb.planted).toBe(true);
   t.health = 0;

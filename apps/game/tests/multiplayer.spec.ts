@@ -348,6 +348,16 @@ test("multiplayer C4 equips with 5 and plants after the result with synchronized
       ammo: window.__game.ammo,
     }));
     await b.mouse.down();
+    await b.waitForFunction(
+      () =>
+        window.__game.planting && window.__game.eye < 1.2 && window.__game.camera.rotation.x < -0.7,
+    );
+    await b.waitForFunction(
+      () =>
+        (window.__game.network?.connection.local?.eye ?? 2) < 1.2 &&
+        (window.__game.network?.connection.local?.pitch ?? 0) > 0.7,
+    );
+    await b.screenshot({ path: "artifacts/c4-multiplayer-crouched-plant.png" });
     await b.waitForFunction(() => window.__game.bomb?.planted, {}, { timeout: 7000 });
     await b.mouse.up();
     expect(

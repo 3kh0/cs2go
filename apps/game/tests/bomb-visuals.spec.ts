@@ -252,11 +252,17 @@ test("C4 equips with 5 at native draw speed, plants after rounds, and shows carr
       countdown: countdown.fontFamily,
       color: text.color,
       detailColor: detail.color,
+      weight: text.fontWeight,
+      detailWeight: detail.fontWeight,
+      background: getComputedStyle(document.getElementById("hud-alert")!).backgroundColor,
     };
   });
   expect(typography.font).toBe(typography.detailFont);
   expect(typography.label).toBe(typography.countdown);
-  expect(typography.color).toBe("rgb(255, 92, 78)");
+  expect(typography.color).toBe("rgb(255, 255, 255)");
+  expect(typography.weight).toBe("700");
+  expect(typography.detailWeight).toBe("700");
+  expect(typography.background).toBe("rgba(165, 34, 29, 0.9)");
   expect(typography.detailColor).toBe(typography.color);
   await page.screenshot({ path: "artifacts/c4-red-planted-alert.png" });
   const audio = await page.evaluate(
@@ -270,4 +276,57 @@ test("C4 equips with 5 at native draw speed, plants after rounds, and shows carr
   expect(await page.evaluate(() => window.__game.soundscape.context?.state)).toBe("running");
   expect(errors).toEqual([]);
   expect(external).toEqual([]);
+});
+
+test("planting crouches the actual player, looks at the ground, and releases without overriding held C", async ({
+  page,
+}) => {
+  test.setTimeout(120_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await page.locator("#home-play").click();
+  await page.locator("#play").click();
+  await page.locator('#team-select [data-team="t"]').click();
+  await page.waitForFunction(() => window.__game.locked);
+  await page.evaluate(() => {
+    const g = window.__game;
+    g.freezeTime = 0;
+    g.invulnerable = 100;
+    g.bomb!.carrier = "player";
+    g.position.fromArray(g.dust!.navigation.data.sites[1]);
+    g.position.y = g.dust!.collision.floor(g.position.x, g.position.z, g.position.y + 0.5);
+    g.velocity.x = g.velocity.z = g.vertical = 0;
+    g.grounded = true;
+    g.pitch = 0.2;
+    g.bots.forEach((bot, i) => bot.group.position.set(200 + i, 500, 200));
+  });
+  await page.keyboard.press("5");
+  await page.waitForFunction(() => window.__game.bombSelected && window.__game.bombDrawTime === 0);
+  await page.mouse.down();
+  await page.waitForFunction(
+    () =>
+      window.__game.planting && window.__game.eye < 1.2 && window.__game.camera.rotation.x < -0.7,
+  );
+  expect(await page.evaluate(() => window.__game.keys.has("KeyC"))).toBe(false);
+  await page.screenshot({ path: "artifacts/c4-crouched-plant-ground-view.png" });
+  await page.mouse.up();
+  await page.waitForFunction(
+    () =>
+      !window.__game.planting &&
+      window.__game.eye > 1.6 &&
+      Math.abs(window.__game.camera.rotation.x - 0.2) < 0.02,
+  );
+  await page.mouse.down();
+  await page.waitForFunction(() => window.__game.planting && window.__game.eye < 1.2);
+  await page.keyboard.down("c");
+  await page.mouse.up();
+  await page.waitForFunction(
+    () => !window.__game.planting && Math.abs(window.__game.camera.rotation.x - 0.2) < 0.02,
+  );
+  expect(await page.evaluate(() => window.__game.eye)).toBeLessThan(1.2);
+  await page.keyboard.up("c");
+  await page.waitForFunction(() => window.__game.eye > 1.6);
+  expect(errors).toEqual([]);
 });

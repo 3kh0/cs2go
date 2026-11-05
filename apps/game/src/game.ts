@@ -342,6 +342,10 @@ export class Game {
   bombSelected = false;
   bombAutoSelected = false;
   bombDrawTime = 0;
+  plantLook = 0;
+  get viewPitch() {
+    return T.MathUtils.lerp(this.pitch, -0.85, this.plantLook);
+  }
   get carryingBomb() {
     return (
       this.active &&
@@ -1465,6 +1469,7 @@ export class Game {
     this.jumpQueued = false;
     this.duckCooldown = 0;
     this.duckHeld = this.duckAccepted = false;
+    this.plantLook = 0;
     this.health = 100;
     this.armor = this.teamMode ? (this.rules.freeArmor ? 100 : 0) : 100;
     this.helmet = this.teamMode ? this.rules.freeArmor : true;
@@ -1529,7 +1534,7 @@ export class Game {
     this.camera.position.copy(this.position);
     this.camera.position.y += this.eye;
     this.camera.rotation.set(
-      clamp(this.pitch + this.aimPunch.pitch * scale, -Math.PI / 2, Math.PI / 2),
+      clamp(this.viewPitch + this.aimPunch.pitch * scale, -Math.PI / 2, Math.PI / 2),
       this.yaw + this.aimPunch.yaw * scale,
       0,
     );
@@ -2740,7 +2745,9 @@ export class Game {
     if (!pressed && this.duckCooldown === 0) this.duckTransitionRate = 15;
     this.duckAccepted = pressed;
     this.duckHeld = pressed;
+    if (this.planting) this.duckTransitionRate = 15;
     return (
+      this.planting ||
       pressed ||
       (this.eye < movement.standingEye - 0.01 &&
         this.isBlocked(
@@ -2753,6 +2760,7 @@ export class Game {
     );
   }
   simulate(dt: number) {
+    this.plantLook = T.MathUtils.damp(this.plantLook, this.planting ? 1 : 0, 12, dt);
     if (this.network) {
       this.network.simulate(dt);
       return;
@@ -4805,7 +4813,12 @@ export class Game {
         this.bomb?.carrier === index && !this.bomb.planted
           ? this.bomb.plantProgress / PLANT_DURATION
           : 0;
-      b.rig.crouch = T.MathUtils.damp(b.rig.crouch, this.bomb?.defuser === index ? 1 : 0, 12, dt);
+      b.rig.crouch = T.MathUtils.damp(
+        b.rig.crouch,
+        this.bomb?.defuser === index || b.rig.plant > 0 ? 1 : 0,
+        12,
+        dt,
+      );
       b.anim += dt;
     }
   }
