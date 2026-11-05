@@ -90,7 +90,8 @@ it("searches different connected lanes over time and avoids stacked floors and i
 it("catches up with a pushing squad and keeps going through distant contact until regrouped", () => {
   const leader = new T.Vector3(0, 2, 20);
   const position = new T.Vector3(0, 0, 0);
-  const goal = botRegroupGoal(position, leader, 1);
+  const objective = new T.Vector3(0, 2, 40);
+  const goal = botRegroupGoal(position, leader, 1, false, objective);
   expect(goal?.toArray()).toEqual([0, 2, 17]);
   expect(leader.toArray()).toEqual([0, 2, 20]);
   expect(
@@ -104,18 +105,48 @@ it("catches up with a pushing squad and keeps going through distant contact unti
       interacting: false,
     }),
   ).toBe(true);
-  expect(botRegroupGoal(new T.Vector3(0, 2, 10), leader, 1)).toBeNull();
-  expect(botRegroupGoal(new T.Vector3(0, 2, 10), leader, 1, true)).not.toBeNull();
-  expect(botRegroupGoal(new T.Vector3(0, 2, 12), leader, 1, true)).toBeNull();
-  expect(botRegroupGoal(position, null, 1)).toBeNull();
+  expect(botRegroupGoal(new T.Vector3(0, 2, 10), leader, 1, false, objective)).toBeNull();
+  expect(botRegroupGoal(new T.Vector3(0, 2, 10), leader, 1, true, objective)).not.toBeNull();
+  expect(botRegroupGoal(new T.Vector3(0, 2, 12), leader, 1, true, objective)).toBeNull();
+  expect(botRegroupGoal(position, null, 1, false, objective)).toBeNull();
 });
 
 it("spreads escorts behind their leader instead of sending every follower to the same point", () => {
   const leader = new T.Vector3(20, 0, 0);
   const position = new T.Vector3();
-  const goals = [0, 1, 2].map((index) => botRegroupGoal(position, leader, index)!);
+  const objective = new T.Vector3(40, 0, 0);
+  const goals = [0, 1, 2].map((index) =>
+    botRegroupGoal(position, leader, index, false, objective)!,
+  );
   expect(goals.every((goal) => goal.x < leader.x && goal.x > position.x)).toBe(true);
   expect(new Set(goals.map((goal) => goal.z)).size).toBe(3);
+});
+
+it("never pulls escorts back to a stationary or trailing carrier at spawn", () => {
+  const objective = new T.Vector3(0, 0, 60);
+  const carrier = new T.Vector3();
+  // Test several escort positions during the push, including active catch-up.
+  for (const z of [0, 8, 13, 20, 35]) {
+    const position = new T.Vector3(0, 0, z);
+    expect(botRegroupGoal(position, carrier, 1, false, objective, false)).toBeNull();
+    expect(botRegroupGoal(position, carrier, 1, true, objective, false)).toBeNull();
+    expect(botRegroupGoal(position, carrier, 1, true, objective, true)).toBeNull();
+  }
+  // Even a moving leader on a side route must be making objective progress.
+  expect(
+    botRegroupGoal(new T.Vector3(0, 0, 20), new T.Vector3(20, 0, 20), 1, false, objective),
+  ).toBeNull();
+  expect(botRegroupGoal(new T.Vector3(), new T.Vector3(0, 0, 20), 1)).toBeNull();
+});
+
+it("resumes catch-up only when the carrier advances ahead toward the site", () => {
+  const position = new T.Vector3(0, 0, 15);
+  const objective = new T.Vector3(0, 0, 60);
+  const leader = new T.Vector3(0, 0, 32);
+  expect(botRegroupGoal(position, leader, 1, false, objective, false)).toBeNull();
+  const goal = botRegroupGoal(position, leader, 1, false, objective, true)!;
+  expect(goal.z).toBeGreaterThan(position.z);
+  expect(goal.distanceTo(objective)).toBeLessThan(position.distanceTo(objective));
 });
 
 it("widens a prolonged quiet search beyond an empty site without enemy position knowledge", () => {

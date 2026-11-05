@@ -55,8 +55,16 @@ export function botRegroupGoal(
   leader: T.Vector3 | null | undefined,
   index: number,
   regrouping = false,
+  objective?: T.Vector3,
+  leaderMoving = true,
 ) {
-  if (!leader) return null;
+  if (!leader || !objective || !leaderMoving) return null;
+  const objectiveDistance = Math.hypot(position.x - objective.x, position.z - objective.z);
+  const leaderObjectiveDistance = Math.hypot(leader.x - objective.x, leader.z - objective.z);
+  // Follow an advancing teammate ahead on the same push. A distance-only leash
+  // pulls escorts back to a stationary carrier, producing an endless orbit.
+  // The margin also keeps the trailing offset ahead of the follower's progress.
+  if (leaderObjectiveDistance + 4 >= objectiveDistance) return null;
   const dx = position.x - leader.x;
   const dz = position.z - leader.z;
   const distance = Math.hypot(dx, dz);

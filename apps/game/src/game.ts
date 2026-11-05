@@ -143,6 +143,7 @@ import { hideRoundBanner, showRoundBanner } from "./round-banner";
 import type { LoadProgress } from "./intro";
 import { enableTextureTranscoding } from "./gltf";
 import { detour } from "./local-navigation";
+import { steerAroundTeammate } from "./bot-avoidance";
 import type { MultiplayerMatch } from "./multiplayer-match";
 import {
   createGun,
@@ -4461,14 +4462,15 @@ export class Game {
       let goal: T.Vector3;
       b.quiet = target || b.alert > 0 ? 0 : b.quiet + dt;
       let committed = (!bomb.planted && bomb.carrier === i) || (bomb.planted && defuser === i);
-      // Attack as a team on the carrier's chosen site, with escorts and one
-      // flanking squad. CTs anchor initially, then sweep quiet approaches.
+      // Clear the chosen site with spaced goals. CTs anchor initially,
+      // then sweep quiet approaches; a stationary carrier never holds a squad.
       const site = b.team === "t" ? this.round % nav.data.sites.length : i % nav.data.sites.length;
       goal = nav.site(
         site,
         b.team === "ct" ? ((i % 3) - 1) * 4 : ((i % 3) - 1) * 2,
         b.team === "ct" ? (i % 2 ? 4 : -4) : 0,
       );
+      const objective = nav.site(site);
       // The carrier must reach the plant trigger, not an offset squad anchor.
       if (bomb.carrier === i && !bomb.planted) goal = nav.site(site);
       if (
@@ -4485,15 +4487,6 @@ export class Game {
           goal.add(new T.Vector3(Math.sin(angle) * 5, 0, Math.cos(angle) * 5));
         }
       } else if (bomb.carrier === -1 && b.team === "t") goal = bomb.position;
-      else if (b.team === "t" && bomb.carrier !== i && this.time > 102) {
-        if (i % 4 === 0) goal.set((i + this.round) % 2 ? -39 : 25, 0, -15);
-        else {
-          const carrier =
-            bomb.carrier === "player" ? this.position : this.bots[bomb.carrier]?.group.position;
-          if (carrier && pos.distanceTo(carrier) > 8)
-            goal = carrier.clone().add(new T.Vector3(((i % 3) - 1) * 2, 0, -2));
-        }
-      }
       if (
         b.alert > 0 &&
         !(bomb.planted && defuser === i) &&
@@ -4515,10 +4508,21 @@ export class Game {
               this.bots[leaderId].team === b.team
             ? this.bots[leaderId].group.position
             : null;
-      const flanking = b.team === "t" && i % 4 === 0 && this.time > 102;
+      const independent = b.team === "t" && i % 4 === 0;
       const regroup =
-        leader && (!flanking || b.regrouping || pos.distanceTo(leader) > 18)
-          ? botRegroupGoal(pos, leader, i, b.regrouping)
+        leader && (!independent || b.regrouping || pos.distanceTo(leader) > 18)
+          ? botRegroupGoal(
+              pos,
+              leader,
+              i,
+              b.regrouping,
+              bomb.planted ? bomb.position : objective,
+              leaderId === "player"
+                ? Math.hypot(this.velocity.x, this.velocity.z) > 0.8
+                : typeof leaderId === "number" &&
+                    this.bots[leaderId]?.moving &&
+                    this.bots[leaderId].speed > 0.8,
+            )
           : null;
       b.regrouping = !!regroup;
       if (regroup && !committed) {
@@ -4548,14 +4552,14 @@ export class Game {
       if (!b.moving && !target && b.alert <= 0) b.facing += dt * 0.28;
       b.nav -= dt;
       // New orders invalidate an old route, including a local recovery route.
-      if (b.goal.distanceTo(goal) > 3) {
-        b.nav = 0;
-        b.recoveries = b.progressTime = 0;
-        b.progressPosition.copy(pos);
-      }
+      const changedGoal = b.goal.distanceTo(goal) > 3;
+      if (changedGoal) b.nav = 0;
       if (b.nav <= 0 && b.moving && (b.vertical === 0 || !b.path.length)) {
-        b.goal.copy(goal);
         b.nav = 0.75 + (i % 5) * 0.09;
+        // Keep a viable route while neighbours move. Repeated congestion
+        // replans can make the entire squad reverse course around each other.
+        if (!changedGoal && b.path.length && !b.reposition) continue;
+        b.goal.copy(goal);
         b.path = nav.path(
           pos,
           goal,
@@ -4739,18 +4743,19 @@ export class Game {
           if (!b.tracking) b.facing = Math.atan2(direction.x, direction.y);
         }
       }
-      if (this.teamMode && b.moving) {
+      if (this.teamMode && b.moving && b.vertical === 0) {
+        const headingX = desired.x,
+          headingZ = desired.y;
         for (const other of this.bots) {
           if (other === b || other.health <= 0 || Math.abs(other.group.position.y - pos.y) > 1.2)
             continue;
-          const sx = pos.x - other.group.position.x,
-            sz = pos.z - other.group.position.z,
-            distance = Math.hypot(sx, sz);
-          if (distance > 0.01 && distance < 0.85) {
-            const push = ((0.85 - distance) * 4) / distance;
-            desired.x += sx * push;
-            desired.y += sz * push;
-          }
+          steerAroundTeammate(
+            desired,
+            other.group.position.x - pos.x,
+            other.group.position.z - pos.z,
+            headingX,
+            headingZ,
+          );
         }
         if (!this.dead && Math.abs(pos.y - this.position.y) < 1.2) {
           const sx = pos.x - this.position.x,
@@ -4866,9 +4871,11 @@ export class Game {
           this.detours++;
           // Repair shallow landing overlaps with the same bounded contact
           // correction used by player movement before trying another route.
+          const contactX = pos.x,
+            contactZ = pos.z;
           if (
             this.world.collision.resolveHorizontal(pos, 0.35, 1.65) &&
-            (pos.x !== previousX || pos.z !== previousZ)
+            (pos.x !== contactX || pos.z !== contactZ)
           )
             b.navArea = this.dust!.navigation.nearest(pos);
           const route = b.path.filter((p): p is T.Vector3 => p instanceof T.Vector3);

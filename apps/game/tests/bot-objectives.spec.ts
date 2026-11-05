@@ -84,7 +84,14 @@ test("bomb carriers and retaking CTs commit to objectives through distant contac
     });
     escort.group.position.fromArray(g.dust!.navigation.data.spawns.t[0]);
     escort.navArea = g.dust!.navigation.nearest(escort.group.position);
-    g.bots[leader].group.position.copy(escort.group.position).x += 20;
+    const push = g
+      .dust!.navigation.site(g.round % g.dust!.navigation.data.sites.length)
+      .sub(escort.group.position)
+      .setY(0)
+      .normalize();
+    g.bots[leader].group.position.copy(escort.group.position).addScaledVector(push, 20);
+    g.bots[leader].moving = true;
+    g.bots[leader].speed = 3;
     g.bomb!.planted = false;
     g.bomb!.carrier = leader;
     g.bomb!.defuser = null;
@@ -249,6 +256,95 @@ test("an unopposed Dust II bomb carrier makes sustained progress from spawn to t
     expect(journey.displacement).toBeGreaterThan(15);
     if (journey.spawn < 0) expect(journey.maxHeight).toBeGreaterThan(4.3);
     expect(journey.remaining, JSON.stringify(journey)).toBeLessThan(2);
+  }
+  expect(errors).toEqual([]);
+});
+
+test("the full T squad advances past a stationary player carrier and a parked teammate", async ({
+  page,
+}) => {
+  test.setTimeout(120_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await page.waitForFunction(() => !!window.__game);
+  await page.bringToFront();
+  await page.locator("#home-play").click();
+  await page.locator("#play").click();
+  await page.locator('#team-select [data-team="t"]').click();
+  await page.waitForFunction(() => window.__game?.locked);
+  const scenarios = await page.evaluate(() => {
+    const g = window.__game;
+    g.simulate = () => {};
+    g.freezeTime = 0;
+    g.bots.forEach((b) => {
+      if (b.team === "ct") {
+        b.health = 0;
+        b.group.visible = false;
+      }
+    });
+    g.utility.botInventories.clear();
+    const squad = g.bots.filter((b) => b.team === "t");
+    const playerSpawn = g.position.clone();
+    const run = (parked: boolean) => {
+      g.round = 1;
+      g.time = g.rules.roundTime;
+      g.bomb!.carrier = "player";
+      g.bomb!.planted = false;
+      squad.forEach((b) => g.spawnBot(b, g.bots.indexOf(b)));
+      const blocker = parked ? squad[0] : null;
+      const park = playerSpawn.clone().set(-42.29735, 0.8636, -17.526);
+      if (blocker) {
+        blocker.group.position.copy(park);
+        blocker.navArea = g.dust!.navigation.nearest(park);
+      }
+      const advancing = squad.filter((b) => b !== blocker);
+      const snapshots = [];
+      for (let tick = 0; tick < 128 * 45; tick++) {
+        g.time -= 1 / 128;
+        g.updateCasualBots(1 / 16, tick % 8);
+        if (blocker) {
+          blocker.moving = false;
+          blocker.velocity.set(0, 0);
+        }
+        g.moveBots(1 / 128);
+        if (blocker) blocker.group.position.copy(park);
+        if (tick % 640 === 0)
+          snapshots.push({
+            seconds: tick / 128,
+            positions: advancing.map((b) => b.group.position.toArray()),
+            distances: advancing.map((b) => b.group.position.distanceTo(playerSpawn)),
+          });
+      }
+      return {
+        parked,
+        playerDisplacement: g.position.distanceTo(playerSpawn),
+        count: advancing.length,
+        advanced: advancing.filter((b) => b.group.position.distanceTo(playerSpawn) > 20).length,
+        passed: advancing.filter((b) => b.group.position.z < park.z - 6).length,
+        distances: advancing.map((b) => b.group.position.distanceTo(playerSpawn)),
+        positions: advancing.map((b) => b.group.position.toArray()),
+        snapshots,
+      };
+    };
+    const scenarios = [run(false), run(true)];
+    g.dead = Infinity;
+    g.spectated = squad[1];
+    g.spectatorMode = "third";
+    g.spectate();
+    return scenarios;
+  });
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: "artifacts/bot-full-squad-progress.png" });
+  for (const scenario of scenarios) {
+    expect(scenario.playerDisplacement).toBeLessThan(0.001);
+    for (const snapshot of scenario.snapshots.slice(-3))
+      expect(
+        snapshot.distances.filter((distance) => distance > 20).length,
+        JSON.stringify(scenario),
+      ).toBeGreaterThan(scenario.count / 2);
+    expect(scenario.advanced, JSON.stringify(scenario)).toBe(scenario.count);
+    if (scenario.parked) expect(scenario.passed, JSON.stringify(scenario)).toBe(scenario.count);
   }
   expect(errors).toEqual([]);
 });
