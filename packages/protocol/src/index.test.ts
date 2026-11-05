@@ -8,6 +8,28 @@ import {
   parseClientMessage,
 } from "./index";
 
+test("chat accepts bounded text and channels without trusting supplied identity", () => {
+  expect(
+    parseClientMessage(
+      JSON.stringify({
+        type: "chat",
+        channel: "team",
+        text: "  Hello  ",
+        name: "Forged",
+        team: "t",
+      }),
+    ),
+  ).toEqual({ type: "chat", channel: "team", text: "Hello" });
+  for (const text of ["", "   ", "x".repeat(241), "hello\nworld", "\u0000", "\u007f", 123, null])
+    expect(parseClientMessage(JSON.stringify({ type: "chat", channel: "all", text }))).toBeNull();
+  expect(
+    parseClientMessage(JSON.stringify({ type: "chat", channel: "private", text: "Hello" })),
+  ).toBeNull();
+  expect(
+    parseClientMessage(JSON.stringify({ type: "chat", channel: "all", text: "x".repeat(240) })),
+  ).not.toBeNull();
+});
+
 test("buy-and-drop is a bounded one-shot boolean input", () => {
   const input = { ...neutralInput(1), buy: 9, buyDrop: true };
   expect(parseClientMessage(JSON.stringify({ type: "inputs", inputs: [input] }))).not.toBeNull();

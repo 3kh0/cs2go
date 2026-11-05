@@ -10,6 +10,7 @@ import {
   type RoundState,
   type MatchMode,
   type Team,
+  type ChatChannel,
 } from "@cs2go/protocol";
 import { movePlayer } from "@cs2go/simulation/movement";
 import type { DustMap } from "@cs2go/simulation/dust-map";
@@ -209,6 +210,11 @@ export class MatchConnection {
     this.flush();
     if (this.socket.readyState === WebSocket.OPEN && this.id)
       this.socket.send(JSON.stringify({ type: "stop" }));
+  }
+  sendChat(channel: ChatChannel, text: string) {
+    if (this.reconnecting || !this.local || this.socket.readyState !== WebSocket.OPEN) return false;
+    this.socket.send(JSON.stringify({ type: "chat", channel, text }));
+    return true;
   }
   close(reason = "Disconnected") {
     this.disposed = true;

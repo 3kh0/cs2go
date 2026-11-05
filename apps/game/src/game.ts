@@ -1,8 +1,9 @@
 import { prepareMatchMedia } from "./match-media";
+import { MatchChat } from "./chat";
 import { applyShadowDetail, graphicsPixelRatio } from "./graphics-settings";
 import { applyDisplayViewport, type DisplayAspect } from "./display-settings";
 import { applyViewmodelCamera, viewmodelPointToWorld } from "./viewmodel-settings";
-import { unregisterGloveModel } from "./gloves";
+import { defaultGloveChoice, unregisterGloveModel } from "./gloves";
 import { bindWeaponInstance } from "./skins";
 import { createWeaponInstance, weaponInstanceName } from "./weapon-instance";
 import { grenadeData, grenadeIcons, grenadeTypes, type GrenadeKind } from "./utility";
@@ -273,6 +274,7 @@ const forward = new T.Vector3(0, 0, 1);
 const unit = new T.Vector3(1, 1, 1);
 const decalPoint = new T.Vector3();
 export class Game {
+  chat = new MatchChat(this);
   utility = new GameUtility(this);
   spectated: Bot | undefined;
   spectatorFocus = new T.Vector3();
@@ -815,7 +817,7 @@ export class Game {
       }
     });
     document.addEventListener("mousemove", (e) => {
-      if (!this.locked || this.matchLoading) return;
+      if (!this.locked || this.matchLoading || this.chat.open) return;
       if (this.dead) {
         if (this.teamMode && this.competitive && !this.spectated) {
           this.spectatorPitch = clamp(
@@ -844,7 +846,7 @@ export class Game {
       );
     });
     document.addEventListener("keydown", (e) => {
-      if (this.matchLoading) return;
+      if (this.matchLoading || this.chat.open) return;
       if (
         !el("settings").classList.contains("hidden") ||
         document.getElementById("cosmetic-menu")?.classList.contains("hidden") === false ||
@@ -862,6 +864,11 @@ export class Game {
       if (code === "KeyM" && this.active && this.locked && this.world.navigation)
         document.querySelector(".radar-wrap")!.classList.add("expanded");
       if (!this.locked) return;
+      if ((code === "KeyT" || code === "KeyY") && this.active && !e.repeat) {
+        e.preventDefault();
+        this.chat.show(code === "KeyT" ? "team" : "all");
+        return;
+      }
       if (code === "KeyE" && this.takeoverUseHeld) {
         if (e.repeat) return;
         this.takeoverUseHeld = false;
@@ -938,7 +945,8 @@ export class Game {
     document.addEventListener(
       "wheel",
       (e) => {
-        if (this.matchLoading || !this.active || !this.locked || !e.deltaY) return;
+        if (this.matchLoading || this.chat.open || !this.active || !this.locked || !e.deltaY)
+          return;
         e.preventDefault();
         const now = performance.now();
         if (now - this.wheelTime < 100) return;
@@ -952,7 +960,7 @@ export class Game {
       { passive: false },
     );
     document.addEventListener("mousedown", (e) => {
-      if (this.matchLoading) return;
+      if (this.matchLoading || this.chat.open) return;
       if (
         this.active &&
         this.locked &&
@@ -1022,6 +1030,7 @@ export class Game {
     this.firing = false;
     this.revolverCharge = 0;
     if (!this.locked) {
+      this.chat.close();
       this.suppressors[this.selected].cancel();
       this.utility.cancelThrow();
       this.burstRemaining = 0;
@@ -1195,6 +1204,7 @@ export class Game {
   }
   matchLoading = false;
   start(mode: Mode, options: { bots?: boolean; lock?: boolean } = {}) {
+    this.chat.reset();
     this.network?.disconnect();
     this.network = undefined;
     hideRoundBanner();
@@ -1256,6 +1266,7 @@ export class Game {
     this.updateUI();
   }
   menu() {
+    this.chat.reset();
     this.network?.disconnect();
     this.network = undefined;
     this.notices.reset();
@@ -2018,7 +2029,7 @@ export class Game {
     const team =
       override ??
       (this.teamMode && index >= this.teamSize ? this.team : this.team === "ct" ? "t" : "ct");
-    const rig = createSoldier(index, team, appearance, !this.network);
+    const rig = createSoldier(index, team, appearance, !this.network, defaultGloveChoice());
     this.scene.add(rig.group);
     return {
       name: names[index],

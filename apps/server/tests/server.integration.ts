@@ -127,6 +127,55 @@ try {
   const isolated = await client("Isolated", "different-room-123");
   await until(() => isolated.players().length === 1, "isolated room");
   assert.equal(a.players().length, 2);
+  const ally = await client("Ally");
+  await until(() => ally.players().length === 3, "chat teammate joined");
+  const chatMessages = (peer: typeof a) =>
+    peer.messages.filter((message) => message.type === "chat");
+  a.socket.send(
+    JSON.stringify({
+      type: "chat",
+      channel: "team",
+      text: "  Hold A  ",
+      sender: bId,
+      name: "Impostor",
+      team: "t",
+    }),
+  );
+  await until(() => chatMessages(ally).length === 1, "team chat delivered");
+  assert.deepEqual(chatMessages(a), [
+    { type: "chat", channel: "team", sender: aId, name: "Alpha", team: "ct", text: "Hold A" },
+  ]);
+  assert.deepEqual(chatMessages(ally), chatMessages(a));
+  assert.equal(chatMessages(b).length, 0);
+  assert.equal(chatMessages(isolated).length, 0);
+  a.socket.send(JSON.stringify({ type: "chat", channel: "all", text: "Spam" }));
+  await until(
+    () => a.messages.some((message) => message.type === "chat-status"),
+    "chat rate limited",
+  );
+  assert.equal(a.socket.readyState, WebSocket.OPEN);
+  b.socket.send(JSON.stringify({ type: "chat", channel: "all", text: "Good luck" }));
+  await until(
+    () => chatMessages(a).length === 2 && chatMessages(ally).length === 2,
+    "all chat delivered",
+  );
+  assert.equal(chatMessages(b).at(-1)?.text, "Good luck");
+  assert.equal(chatMessages(isolated).length, 0);
+  assert.equal(
+    chatMessages(a).some((message) => message.text === "Spam"),
+    false,
+  );
+  // Team routing follows authoritative team changes, including halftime.
+  const allyId = ally.messages.find((message) => message.type === "welcome")!.id;
+  room.players.get(allyId)!.team = "t";
+  room.players.get(bId)!.team = "ct";
+  await Bun.sleep(800);
+  a.socket.send(JSON.stringify({ type: "chat", channel: "team", text: "New teams" }));
+  await until(() => chatMessages(b).length === 2, "team chat follows current team");
+  assert.equal(chatMessages(ally).length, 2);
+  assert.equal(chatMessages(isolated).length, 0);
+  ally.socket.close();
+  await until(() => a.players().length === 2, "chat teammate left");
   // A transport/scheduler stall may release more than 250 ms of valid inputs
   // together. Buffer them, but consume at most one per elapsed simulation tick.
   for (let batch = 0; batch < 8; batch++)

@@ -1,6 +1,7 @@
 import type { ServerWebSocket } from "bun";
 import {
   MAX_PLAYERS,
+  CHAT_INTERVAL_MS,
   MAX_PENDING_INPUTS,
   PROTOCOL_VERSION,
   SNAPSHOT_RATE,
@@ -40,6 +41,7 @@ type Connection = {
   joinedAt: number;
   messages: number;
   window: number;
+  chatAt?: number;
 };
 import type { DustMap } from "@cs2go/simulation/dust-map";
 import { rulesFor } from "@cs2go/simulation/economy";
@@ -220,7 +222,29 @@ export function startServer(options: ServerOptions) {
             connection.room.players.get(connection.id)!,
             message.configuration,
           );
-        else if (message.type === "stop") {
+        else if (message.type === "chat") {
+          if (connection.chatAt !== undefined && now - connection.chatAt < CHAT_INTERVAL_MS) {
+            send(socket, {
+              type: "chat-status",
+              message: "Please wait before sending another message.",
+            });
+            return;
+          }
+          connection.chatAt = now;
+          const room = connection.room;
+          const player = room.players.get(connection.id)!;
+          const chat: ServerMessage = {
+            type: "chat",
+            channel: message.channel,
+            sender: player.id,
+            name: player.name,
+            team: player.team,
+            text: message.text,
+          };
+          for (const peer of room.connections)
+            if (message.channel === "all" || room.players.get(peer.data.id)?.team === player.team)
+              send(peer, chat);
+        } else if (message.type === "stop") {
           const player = connection.room.players.get(connection.id)!;
           connection.queue = [];
           player.ack = connection.lastSeq;

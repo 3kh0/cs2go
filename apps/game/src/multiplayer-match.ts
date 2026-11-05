@@ -205,6 +205,14 @@ export class MultiplayerMatch {
   }
   private receive(message: ServerMessage) {
     if (this.closed) return;
+    if (message.type === "chat") {
+      this.game.chat.receive(message);
+      return;
+    }
+    if (message.type === "chat-status") {
+      this.game.notices.showAlert(message.message);
+      return;
+    }
     if (message.type === "error") {
       this.game.notices.showAlert(message.message);
       return;
@@ -677,7 +685,7 @@ export class MultiplayerMatch {
       g.notices.showAlert("Connection restored");
     }
     const base = neutralInput();
-    const locked = g.locked && !g.dead;
+    const locked = g.locked && !g.dead && !g.chat.open;
     const input: Omit<Input, "seq"> = {
       ...base,
       ...this.request,

@@ -151,7 +151,40 @@ test("inventory equips gloves per team, previews agent animations and restores d
   await page.bringToFront();
   if (!(await page.evaluate(() => window.__game.locked))) await page.locator("#game").click();
   await page.waitForFunction(() => window.__game.locked);
+  const botGloves = () =>
+    page.evaluate(() =>
+      window.__game.bots.map((bot) => ({
+        team: bot.team,
+        choice: bot.rig.gloveChoice?.id,
+        customModel: !!bot.group.getObjectByName("equipped-gloves"),
+      })),
+    );
+  const expectDefaultBotGloves = async () => {
+    const bots = await botGloves();
+    expect(new Set(bots.map((bot) => bot.team))).toEqual(new Set(["ct", "t"]));
+    for (const bot of bots) {
+      expect(bot.choice).toBe("");
+      expect(bot.customModel).toBe(false);
+    }
+  };
+  await expectDefaultBotGloves();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => window.__game.gun.getObjectByName("equipped-gloves")?.userData.gloveChoice.id,
+      ),
+    )
+    .toBe(glove.id);
   await page.evaluate(() => document.exitPointerLock());
+  // Updating the inventory during a match must leave both teams' bots on defaults.
+  await page.evaluate(async (id) => {
+    const path = "/src/gloves.ts";
+    const { setGloves } = (await import(path)) as typeof import("../src/gloves");
+    await setGloves("ct", { id, wear: 0.2, seed: 12 });
+    await setGloves("t", { id, wear: 0.2, seed: 12 });
+  }, glove.id);
+  await expectDefaultBotGloves();
+  await page.screenshot({ path: "artifacts/bot-default-gloves.png" });
   await page.locator("#pause-skins").click();
   await page.locator("#inventory-agents").click();
   await expect(page.locator("#cosmetic-search")).toBeFocused();

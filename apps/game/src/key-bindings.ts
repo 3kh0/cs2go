@@ -11,6 +11,8 @@ export const bindingActions = [
   ["KeyE", "Use / plant / defuse"],
   ["KeyF", "Inspect weapon"],
   ["KeyB", "Buy menu"],
+  ["KeyT", "Team chat"],
+  ["KeyY", "All chat"],
   ["Tab", "Scoreboard"],
   ["KeyM", "Expand radar"],
   ["Digit1", "Primary weapon"],
@@ -33,12 +35,21 @@ export function readBindings(value: unknown): KeyBindings {
   const candidate: KeyBindings = { ...(value as KeyBindings) };
   // Migrate older saves without resetting established bindings when a new
   // action's default key is already used by the player.
-  for (const action of ["Digit4", "KeyG"]) {
+  for (const action of ["Digit4", "KeyG", "KeyT", "KeyY"]) {
     if (Object.hasOwn(candidate, action)) continue;
     const used = new Set(Object.values(candidate));
-    candidate[action] = [action, "KeyH", "KeyJ", "KeyV", "Digit5", "Digit6"].find(
-      (key) => !used.has(key),
-    )!;
+    candidate[action] = [
+      action,
+      ...bindingActions.map(([code]) => code),
+      "KeyH",
+      "KeyJ",
+      "KeyV",
+      "Digit5",
+      "Digit6",
+      "KeyU",
+      "KeyO",
+      "KeyP",
+    ].find((key) => !used.has(key))!;
   }
   const codes = bindingActions.map(([action]) => candidate[action]);
   if (

@@ -148,6 +148,7 @@ export function createSoldier(
   team: AgentTeam = "t",
   appearance?: { scene: T.Group; animationTeam: "t"; release?: () => void; agentId?: string },
   useSelection = true,
+  gloveChoice?: GloveChoice,
 ): Soldier {
   if (useSelection) appearance ??= peekSelectedAgent(team);
   const animationTeam = "t";
@@ -219,6 +220,7 @@ export function createSoldier(
     team,
     animationTeam,
     agentId: appearance?.agentId ?? defaultAgent(team).id,
+    gloveChoice,
     releaseAppearance: appearance?.release,
     recoil: 0,
     stride: 0,

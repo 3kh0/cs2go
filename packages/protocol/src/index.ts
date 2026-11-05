@@ -1,7 +1,18 @@
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 8;
+export const PROTOCOL_VERSION = 9;
+export const MAX_CHAT_LENGTH = 240;
+export const CHAT_INTERVAL_MS = 750;
+export type ChatChannel = "team" | "all";
+export type ChatMessage = {
+  type: "chat";
+  channel: ChatChannel;
+  sender: string;
+  name: string;
+  team: Team;
+  text: string;
+};
 export const TICK_RATE = 128;
 export const SNAPSHOT_RATE = 32;
 export const MAX_PLAYERS = 20;
@@ -228,6 +239,8 @@ export type RoundState = {
   };
 };
 export type ServerMessage =
+  | ChatMessage
+  | { type: "chat-status"; message: string }
   | {
       type: "welcome";
       version: number;
@@ -247,6 +260,7 @@ export type ServerMessage =
   | { type: "pong"; time: number }
   | { type: "error"; message: string };
 export type ClientMessage =
+  | { type: "chat"; channel: ChatChannel; text: string }
   | {
       type: "join";
       resume?: string;
@@ -340,6 +354,20 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     return null;
   }
   if (!record(value)) return null;
+  if (value.type === "chat") {
+    if (
+      (value.channel !== "team" && value.channel !== "all") ||
+      typeof value.text !== "string" ||
+      !value.text.trim() ||
+      value.text.length > MAX_CHAT_LENGTH ||
+      Array.from(value.text).some((character) => {
+        const code = character.charCodeAt(0);
+        return code < 32 || (code >= 127 && code <= 159);
+      })
+    )
+      return null;
+    return { type: "chat", channel: value.channel, text: value.text.trim() };
+  }
   if (value.type === "stop") return { type: "stop" };
   if (value.type === "configure" && record(value.configuration)) {
     const config = value.configuration;
