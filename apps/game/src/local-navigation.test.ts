@@ -26,3 +26,32 @@ it("does not teleport onto a disconnected upper floor", () => {
   ]);
   expect(detour(collision, new T.Vector3(-2, 0, 0), new T.Vector3(2, 4, 0))).toEqual([]);
 });
+it("walks around a low prop instead of routing onto its top", () => {
+  const geometry = new T.BoxGeometry(1, 0.8, 2);
+  geometry.translate(0, 0.4, 0);
+  const collision = new MapCollision([ground(), new T.Mesh(geometry, new T.MeshBasicMaterial())]);
+  const goal = new T.Vector3(2, 0, 0);
+  const route = detour(collision, new T.Vector3(-2, 0, 0), goal);
+  expect(route.at(-1)!.distanceTo(goal)).toBeLessThan(0.65);
+  expect(route.every((point) => Math.abs(point.y) < 0.01)).toBe(true);
+  expect(route.some((point) => Math.abs(point.z) > 1.3)).toBe(true);
+});
+it("makes bounded clear progress toward a distant smoothed waypoint", () => {
+  const collision = new MapCollision([
+    mesh([-20, 0, -20, 20, 0, -20, 20, 0, 20, -20, 0, -20, 20, 0, 20, -20, 0, 20]),
+    mesh([0, 0, -1, 0, 3, -1, 0, 3, 1, 0, 0, -1, 0, 3, 1, 0, 0, 1]),
+  ]);
+  const from = new T.Vector3(-2, 0, 0),
+    goal = new T.Vector3(14, 0, 0),
+    route = detour(collision, from, goal);
+  expect(route.at(-1)!.distanceTo(goal)).toBeLessThan(from.distanceTo(goal) - 1);
+  expect(route.some((point) => Math.abs(point.z) > 1.3)).toBe(true);
+  expect(route.every((point) => !collision.blocked(point.x, point.z, point.y, 0.35))).toBe(true);
+  expect(
+    route.every((point) => Math.abs(point.x - from.x) <= 8 && Math.abs(point.z - from.z) <= 8),
+  ).toBe(true);
+});
+it("does not return progress toward a distant disconnected upper floor", () => {
+  const collision = new MapCollision([ground()]);
+  expect(detour(collision, new T.Vector3(-2, 0, 0), new T.Vector3(14, 4, 0))).toEqual([]);
+});

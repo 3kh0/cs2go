@@ -329,8 +329,42 @@ export class Navigation {
     }
     return route;
   }
-  path(from: T.Vector3, goal: T.Vector3, avoid: T.Vector3[] = [], blocked?: ReadonlySet<number>) {
-    const start = this.nearest(from),
+  path(
+    from: T.Vector3,
+    goal: T.Vector3,
+    avoid: T.Vector3[] = [],
+    blocked?: ReadonlySet<number>,
+    smooth = true,
+    startArea?: NavArea,
+  ) {
+    // A hull can overhang its current NAV polygon at an edge or during a
+    // jump. Retain that physical connection instead of snapping the route's
+    // start across a nearby wall. Ignore stale hints after falling floors.
+    let hint = startArea ? this.index.get(startArea.id) : undefined;
+    if (startArea && hint !== undefined) {
+      let distance = Math.hypot(
+        Math.max(startArea.rect[0] - from.x, 0, from.x - startArea.rect[2]),
+        Math.max(startArea.rect[1] - from.z, 0, from.z - startArea.rect[3]),
+      );
+      if (this.data.polygons && !this.contains(startArea, from.x, from.z)) {
+        distance = Infinity;
+        for (let i = 0; i < startArea.corners.length; i++) {
+          const a = startArea.corners[i],
+            b = startArea.corners[(i + 1) % startArea.corners.length],
+            dx = b[0] - a[0],
+            dz = b[2] - a[2],
+            t = T.MathUtils.clamp(
+              ((from.x - a[0]) * dx + (from.z - a[2]) * dz) / Math.max(1e-10, dx * dx + dz * dz),
+              0,
+              1,
+            );
+          distance = Math.min(distance, Math.hypot(from.x - a[0] - dx * t, from.z - a[2] - dz * t));
+        }
+      }
+      if (distance > 0.4 || Math.abs(from.y - this.height(startArea, from.x, from.z)) > 0.6)
+        hint = undefined;
+    }
+    const start = hint ?? this.nearest(from),
       end = this.nearest(goal);
     const { costs, previous, closed, heapArea, heapScore, linkOffsets, linkTargets } = this,
       areas = this.areas,
@@ -385,6 +419,18 @@ export class Navigation {
           b = next.center;
         if (blocked?.has(next.id) && j !== end) continue;
         const distance = Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
+        // Native jump links retain separate takeoff and landing edges. Keep
+        // shortcuts within the 7.5 m/s, 20 m/s² jump's 1.406 m apex, with a
+        // small margin for the fixed-step controller and hull clearance.
+        const portal = areas[i].portals?.[next.id];
+        const landing = next.portals?.[areas[i].id] ?? portal;
+        if (
+          portal &&
+          landing &&
+          this.height(next, landing[0], landing[2]) - this.height(areas[i], portal[0], portal[2]) >
+            1.35
+        )
+          continue;
         // Reject ladders/jumps this walking controller cannot traverse.
         const horizontal = Math.hypot(b[0] - a[0], b[2] - a[2]);
         if (b[1] - a[1] > 1.35 + horizontal * 0.8) continue;
@@ -430,6 +476,6 @@ export class Navigation {
       Math.abs(goal.y - this.areas[end].center[1]) < 1.2
     )
       points.push(goal.clone());
-    return blocked?.size ? points : this.smooth(from, points);
+    return blocked?.size || !smooth ? points : this.smooth(from, points);
   }
 }

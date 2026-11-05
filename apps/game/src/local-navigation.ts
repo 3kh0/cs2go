@@ -65,12 +65,20 @@ export function detour(collision: MapCollision, from: T.Vector3, goal: T.Vector3
     sweepBlocked = new Uint8Array(halfSide * halfSide);
   const start: Node = { x: 0, z: 0, y: from.y, cost: 0, score: distance(0, 0), order: 0 };
   const costs = new Map([[key(0, 0, start.y), 0]]);
+  const distant = Math.max(Math.abs(goal.x - from.x), Math.abs(goal.z - from.z)) > reach * spacing;
   let end: Node | undefined,
+    progress = start,
     order = 1;
   push(start);
   for (let iteration = 0; iteration < 200 && open.length; iteration++) {
     const node = pop();
     if (node.cost > costs.get(key(node.x, node.z, node.y))!) continue;
+    if (
+      distant &&
+      Math.abs(node.y - goal.y) < 1.2 &&
+      distance(node.x, node.z) < distance(progress.x, progress.z)
+    )
+      progress = node;
     if (distance(node.x, node.z) < 0.65 && Math.abs(node.y - goal.y) < 1.2) {
       end = node;
       break;
@@ -85,7 +93,9 @@ export function detour(collision: MapCollision, from: T.Vector3, goal: T.Vector3
         wz = from.z + z * spacing;
       const point = x + reach + side * (z + reach);
       if (floorFrom[point] !== node.y) {
-        const y = collision.floor(wx, wz, node.y + 1.05, node.y - 6);
+        // Detours walk around props. Jumping onto them creates routes that can
+        // strand a bot away from the authored NAV connections.
+        const y = collision.floor(wx, wz, node.y + 0.46, node.y - 6);
         floorFrom[point] = node.y;
         floorY[point] = y;
         floorBlocked[point] = !Number.isFinite(y) || collision.blocked(wx, wz, y, 0.35) ? 1 : 0;
@@ -109,6 +119,9 @@ export function detour(collision: MapCollision, from: T.Vector3, goal: T.Vector3
       push({ x, z, y, cost, score: cost + distance(x, z), order: order++, parent: node });
     }
   }
+  // Smoothed native waypoints can lie beyond this search's 8 m radius. Keep
+  // useful local progress, letting the caller retain the unfinished waypoint.
+  if (!end && distant && distance(0, 0) - distance(progress.x, progress.z) > 1) end = progress;
   const route: T.Vector3[] = [];
   while (end?.parent) {
     route.push(new T.Vector3(from.x + end.x * spacing, end.y, from.z + end.z * spacing));

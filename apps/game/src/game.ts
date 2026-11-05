@@ -87,6 +87,9 @@ import {
 import {
   botAimSpread,
   botBodyHit,
+  botRegroupGoal,
+  botSearchGoal,
+  botShouldMove,
   burstLength,
   inBotView,
   nearestDefuser,
@@ -188,6 +191,12 @@ type Bot = {
   burst: number;
   alert: number;
   stuck: number;
+  progressTime: number;
+  progressPosition: T.Vector3;
+  recoveries: number;
+  quiet: number;
+  regrouping: boolean;
+  goal: T.Vector3;
   vertical: number;
   blockedAreas: Set<number>;
   navArea: number;
@@ -2151,6 +2160,12 @@ export class Game {
       burst: 0,
       alert: 0,
       stuck: 0,
+      progressTime: 0,
+      progressPosition: new T.Vector3(),
+      recoveries: 0,
+      quiet: 0,
+      regrouping: false,
+      goal: new T.Vector3(),
       vertical: 0,
       blockedAreas: new Set(),
       navArea: 0,
@@ -2219,6 +2234,10 @@ export class Game {
     b.helmet = this.teamMode ? this.rules.freeArmor || saved?.helmet || false : true;
     b.defuseKit = (this.teamMode && b.team === "ct" && this.rules.freeKit) || saved?.kit || false;
     b.alert = b.stuck = 0;
+    b.progressTime = b.recoveries = b.quiet = 0;
+    b.regrouping = false;
+    b.progressPosition.copy(b.group.position);
+    b.goal.copy(b.group.position);
     b.vertical = 0;
     b.blockedAreas.clear();
     b.health = 100;
@@ -3695,7 +3714,7 @@ export class Game {
         (b) =>
           b.team === "ct" &&
           b.health > 0 &&
-          !b.tracking &&
+          (!b.tracking || b.group.position.distanceTo(b.memory) > 8) &&
           b.group.position.distanceTo(bomb.position) < 1.6,
       );
       if (index >= 0) defuser = index;
@@ -4440,8 +4459,10 @@ export class Game {
       this.botCombat(b, target, dt);
       b.tactic -= dt;
       let goal: T.Vector3;
+      b.quiet = target || b.alert > 0 ? 0 : b.quiet + dt;
+      let committed = (!bomb.planted && bomb.carrier === i) || (bomb.planted && defuser === i);
       // Attack as a team on the carrier's chosen site, with escorts and one
-      // flanking squad. CTs anchor both sites until a contact report or plant.
+      // flanking squad. CTs anchor initially, then sweep quiet approaches.
       const site = b.team === "t" ? this.round % nav.data.sites.length : i % nav.data.sites.length;
       goal = nav.site(
         site,
@@ -4450,6 +4471,13 @@ export class Game {
       );
       // The carrier must reach the plant trigger, not an offset squad anchor.
       if (bomb.carrier === i && !bomb.planted) goal = nav.site(site);
+      if (
+        !bomb.planted &&
+        !committed &&
+        b.quiet > 12 &&
+        (b.team === "ct" || pos.distanceTo(goal) < 12)
+      )
+        goal = b.nav <= dt ? botSearchGoal(nav.areas, goal, i, b.quiet) : b.goal;
       if (bomb.planted) {
         goal = bomb.position.clone();
         if (b.team === "t" || defuser !== i) {
@@ -4473,25 +4501,60 @@ export class Game {
         (!bomb.planted || pos.distanceTo(b.memory) < 20)
       )
         goal = b.memory;
+      // A distant contact must not strand an escort after its squad advances.
+      const leaderId = b.team === "t" && !bomb.planted ? bomb.carrier : defuser;
+      const leader =
+        leaderId === "player"
+          ? !this.dead && this.team === b.team
+            ? this.position
+            : null
+          : typeof leaderId === "number" &&
+              leaderId >= 0 &&
+              leaderId !== i &&
+              this.bots[leaderId]?.health > 0 &&
+              this.bots[leaderId].team === b.team
+            ? this.bots[leaderId].group.position
+            : null;
+      const flanking = b.team === "t" && i % 4 === 0 && this.time > 102;
+      const regroup =
+        leader && (!flanking || b.regrouping || pos.distanceTo(leader) > 18)
+          ? botRegroupGoal(pos, leader, i, b.regrouping)
+          : null;
+      b.regrouping = !!regroup;
+      if (regroup && !committed) {
+        goal = regroup;
+        committed = true;
+      }
       const retreat = b.reloadTime > 0 || b.health < 32;
-      if (b.alert > 0 && b.tactic <= 0 && (retreat || target)) {
+      if (!committed && b.alert > 0 && b.tactic <= 0 && (retreat || target)) {
         b.cover.copy(this.botCover(b, retreat) ?? pos);
         b.tactic = retreat ? 2.2 : 1.4 + (i % 3) * 0.2;
         b.reposition = retreat || (b.burst === 0 && b.shot > 0.16);
         if (b.reposition) b.nav = 0;
       }
-      if (b.reposition && b.tactic > 0 && pos.distanceTo(b.cover) > 0.5) goal = b.cover;
+      if (!committed && b.reposition && b.tactic > 0 && pos.distanceTo(b.cover) > 0.5)
+        goal = b.cover;
       else b.reposition = false;
       goal = this.utility.botGoal(i, goal);
-      b.moving =
-        target || b.suppressTime > 0
-          ? b.reposition
-          : pos.distanceTo(goal) >
-            ((bomb.planted && defuser === i) || bomb.carrier === i ? 0.6 : 1.3);
-      if ((bomb.plantProgress > 0 && bomb.carrier === i) || bomb.defuser === i) b.moving = false;
+      b.moving = botShouldMove({
+        distance: pos.distanceTo(goal),
+        arrival: committed ? 0.6 : 1.3,
+        targetDistance: target?.distance ?? null,
+        suppressing: b.suppressTime > 0,
+        reposition: b.reposition,
+        committed,
+        interacting: (bomb.plantProgress > 0 && bomb.carrier === i) || bomb.defuser === i,
+      });
       if (!b.moving && !target && b.alert <= 0) b.facing += dt * 0.28;
       b.nav -= dt;
-      if (b.nav <= 0 && b.moving) {
+      // New orders invalidate an old route, including a local recovery route.
+      if (b.goal.distanceTo(goal) > 3) {
+        b.nav = 0;
+        b.recoveries = b.progressTime = 0;
+        b.progressPosition.copy(pos);
+      }
+      if (b.nav <= 0 && b.moving && (b.vertical === 0 || !b.path.length)) {
+        b.goal.copy(goal);
         b.nav = 0.75 + (i % 5) * 0.09;
         b.path = nav.path(
           pos,
@@ -4500,6 +4563,8 @@ export class Game {
             .filter((other) => other !== b && other.team === b.team && other.health > 0)
             .map((other) => other.group.position),
           b.blockedAreas,
+          true,
+          nav.areas[b.navArea],
         );
         if (!b.path.length) b.blockedAreas.clear();
       }
@@ -4641,15 +4706,19 @@ export class Game {
         }
         continue;
       }
+      // Finish a committed jump before stopping to engage or changing routes.
+      if (b.vertical !== 0 && b.path.length) b.moving = true;
       const desired = botDesired.set(0, 0);
       const pos = b.group.position,
         previousX = pos.x,
         previousY = pos.y,
-        previousZ = pos.z;
+        previousZ = pos.z,
+        previousArea = b.navArea;
       if (b.moving) {
         let target = b.path[0];
         while (
           target &&
+          (!(target instanceof T.Vector3) || target.y <= pos.y + 0.6) &&
           Math.hypot(
             target.x - pos.x,
             (target instanceof T.Vector3 ? target.z : target.y) - pos.z,
@@ -4715,12 +4784,20 @@ export class Game {
         const raised =
           this.botSupport(b, pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1)?.height ??
           this.world.collision.floor(pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1);
-        const target = b.path[0];
+        let target = b.path[0];
+        // Native jump links can start with a floor-height takeoff portal.
+        // Look through that point to the raised landing before hitting its face.
+        if (
+          target instanceof T.Vector3 &&
+          target.y <= pos.y + 0.45 &&
+          Math.hypot(target.x - pos.x, target.z - pos.z) < 1.8
+        )
+          target = b.path[1] ?? target;
         if (
           (raised > pos.y + 0.4 && raised < pos.y + 1.05) ||
           (target instanceof T.Vector3 &&
             target.y > pos.y + 0.45 &&
-            target.y < pos.y + 1.5 &&
+            target.y < pos.y + 1.35 &&
             Math.hypot(target.x - pos.x, target.z - pos.z) < 2)
         )
           b.vertical = 7.5;
@@ -4767,26 +4844,57 @@ export class Game {
         } else {
           pos.x = previousX;
           pos.z = previousZ;
+          b.navArea = previousArea;
           b.nav = 0;
         }
+        // Net progress catches corner pacing and crowd oscillations, which
+        // can have nonzero velocity without leaving the same small area.
+        if (
+          !b.moving ||
+          Math.hypot(pos.x - b.progressPosition.x, pos.z - b.progressPosition.z) > 1.2
+        ) {
+          b.progressPosition.copy(pos);
+          b.progressTime = b.recoveries = 0;
+        } else b.progressTime += dt;
         b.stuck =
           b.moving && Math.hypot(pos.x - previousX, pos.z - previousZ) < dt * 0.25
             ? b.stuck + dt
             : 0;
+        if (b.progressTime > 2.5) b.stuck = Math.max(b.stuck, 0.81);
         // Local detours are synchronous searches; allow one per simulation step.
         if (b.stuck > 0.8 && !this.detours) {
           this.detours++;
+          // Repair shallow landing overlaps with the same bounded contact
+          // correction used by player movement before trying another route.
+          if (
+            this.world.collision.resolveHorizontal(pos, 0.35, 1.65) &&
+            (pos.x !== previousX || pos.z !== previousZ)
+          )
+            b.navArea = this.dust!.navigation.nearest(pos);
           const route = b.path.filter((p): p is T.Vector3 => p instanceof T.Vector3);
           const goalIndex = route.findIndex((p) => Math.hypot(p.x - pos.x, p.z - pos.z) > 4);
           const index = goalIndex >= 0 ? goalIndex : route.length - 1;
-          const local = index >= 0 ? detour(this.world.collision, pos, route[index]) : [];
+          b.recoveries++;
+          const local =
+            index >= 0 && b.recoveries < 3 ? detour(this.world.collision, pos, route[index]) : [];
           if (local.length) {
-            b.path = [...local, ...route.slice(index + 1)];
-            b.nav = 3;
+            // Bounded detours can stop before the waypoint: retain that goal.
+            b.path = [...local, ...route.slice(index)];
+            b.nav = Math.max(3, local.length * 0.3);
           } else {
             const nav = this.dust!.navigation;
             const area = nav.areas[nav.nearest(pos)];
-            const next = route
+            // Smoothed waypoints may skip the adjacent area entirely. Inspect
+            // the raw route so a failed exit actually changes the next plan.
+            const onward = nav.path(
+              pos,
+              route.at(-1) ?? b.goal,
+              [],
+              b.blockedAreas,
+              false,
+              nav.areas[b.navArea],
+            );
+            const next = onward
               .map((point) => nav.areas[nav.nearest(point)].id)
               .find((id) => id !== area.id && area.links.includes(id));
             if (next !== undefined) b.blockedAreas.add(next);
@@ -4795,6 +4903,7 @@ export class Game {
             b.nav = 0;
           }
           b.stuck = 0;
+          b.progressTime = 0;
         }
       }
       const turn = Math.atan2(

@@ -1062,13 +1062,11 @@ test("Dust II casual lobby has balanced teams, textured view arms, and navigatio
     if (new URL(r.url()).origin !== "http://127.0.0.1:5173") external.push(r.url());
   });
   await page.goto("/");
+  await page.waitForFunction(() => !!window.__game);
   await page.bringToFront();
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
-    const team = await page.evaluate(() => window.__game.team);
-    await page.locator(`#team-select [data-team="${team}"]`).click();
-  }
+  await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {
     window.__game.freezeTime = 0;

@@ -1,0 +1,254 @@
+import { test, expect } from "@playwright/test";
+import type { Game } from "../src/game";
+
+declare global {
+  interface Window {
+    __game: Game;
+  }
+}
+
+test("bomb carriers and retaking CTs commit to objectives through distant contact", async ({
+  page,
+}) => {
+  test.setTimeout(120_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await page.waitForFunction(() => !!window.__game);
+  await page.bringToFront();
+  await page.locator("#home-play").click();
+  await page.locator("#play").click();
+  await page.locator('#team-select [data-team="ct"]').click();
+  await page.waitForFunction(() => window.__game?.locked);
+  const decisions = await page.evaluate(() => {
+    const g = window.__game;
+    g.simulate = () => {};
+    g.freezeTime = 0;
+    g.botCombat = () => {};
+    const originalPerceive = g.perceiveBot.bind(g);
+    let distance = 20;
+    // Inject an already perceived contact so this scenario measures objective
+    // decisions independently of spawn orientation and incidental sightlines.
+    g.perceiveBot = (b) => {
+      b.tracking = true;
+      b.target = "player";
+      b.alert = 5;
+      b.memory.copy(g.position);
+      return { id: "player", position: g.position, distance, score: distance };
+    };
+    const results = [];
+    for (const team of ["t", "ct"] as const) {
+      const index = g.bots.findIndex((b) => b.team === team);
+      const bot = g.bots[index];
+      g.bots.forEach((b) => {
+        b.health = b === bot ? 100 : 0;
+      });
+      bot.group.position.fromArray(g.dust!.navigation.data.spawns[team][0]);
+      bot.navArea = g.dust!.navigation.nearest(bot.group.position);
+      g.bomb!.planted = team === "ct";
+      g.bomb!.carrier = team === "t" ? index : -1;
+      g.bomb!.defuser = null;
+      g.bomb!.plantProgress = 0;
+      g.bomb!.position.copy(g.dust!.navigation.site(1));
+      const think = () => {
+        bot.reposition = false;
+        bot.tactic = 1;
+        bot.nav = 0;
+        g.updateCasualBots(1 / 16, index % 8);
+        return bot.moving;
+      };
+      distance = 20;
+      const distant = think();
+      distance = 3;
+      const close = think();
+      distance = 20;
+      if (team === "t") g.bomb!.plantProgress = 0.5;
+      else g.bomb!.defuser = index;
+      const interacting = think();
+      let defuseStarted = false;
+      if (team === "ct") {
+        g.bomb!.defuser = null;
+        bot.group.position.copy(g.bomb!.position);
+        bot.memory.copy(g.position);
+        g.updateRound(0.1);
+        defuseStarted = g.bomb!.defuser === index && g.bomb!.progress > 0;
+      }
+      results.push({ team, distant, close, interacting, defuseStarted });
+    }
+    const terrorists = g.bots.flatMap((b, i) => (b.team === "t" ? [i] : []));
+    const leader = terrorists[0];
+    const escortIndex = terrorists[1];
+    const escort = g.bots[escortIndex];
+    g.bots.forEach((b, i) => {
+      b.health = i === leader || i === escortIndex ? 100 : 0;
+    });
+    escort.group.position.fromArray(g.dust!.navigation.data.spawns.t[0]);
+    escort.navArea = g.dust!.navigation.nearest(escort.group.position);
+    g.bots[leader].group.position.copy(escort.group.position).x += 20;
+    g.bomb!.planted = false;
+    g.bomb!.carrier = leader;
+    g.bomb!.defuser = null;
+    g.bomb!.plantProgress = 0;
+    escort.nav = 0;
+    escort.tactic = 1;
+    g.updateCasualBots(1 / 16, escortIndex % 8);
+    const regrouping = { moving: escort.moving, regrouping: escort.regrouping };
+    g.perceiveBot = originalPerceive;
+    return { results, regrouping };
+  });
+  expect(decisions.results).toEqual([
+    { team: "t", distant: true, close: false, interacting: false, defuseStarted: false },
+    { team: "ct", distant: true, close: false, interacting: false, defuseStarted: true },
+  ]);
+  expect(decisions.regrouping).toEqual({ moving: true, regrouping: true });
+  const search = await page.evaluate(() => {
+    const g = window.__game;
+    const index = g.bots.findIndex((b) => b.team === "ct");
+    const bot = g.bots[index];
+    g.bots.forEach((b) => {
+      b.health = b === bot ? 100 : 0;
+    });
+    const nav = g.dust!.navigation;
+    const anchor = nav.site(
+      index % nav.data.sites.length,
+      ((index % 3) - 1) * 4,
+      index % 2 ? 4 : -4,
+    );
+    bot.group.position.copy(anchor);
+    bot.navArea = nav.nearest(anchor);
+    g.bomb!.planted = false;
+    g.bomb!.carrier = -1;
+    g.bomb!.defuser = null;
+    g.dead = Infinity;
+    bot.alert = 0;
+    const goals = [];
+    for (const elapsed of [20, 70]) {
+      bot.quiet = elapsed;
+      bot.nav = 0;
+      g.updateCasualBots(1 / 16, index % 8);
+      goals.push({
+        position: bot.goal.toArray(),
+        fromAnchor: bot.goal.distanceTo(anchor),
+        legal: nav.areas.some(
+          (area) => bot.goal.distanceToSquared(bot.goal.clone().fromArray(area.center)) < 0.001,
+        ),
+        hasRoute: bot.path.length > 0,
+        moving: bot.moving,
+      });
+    }
+    return goals;
+  });
+  expect(search.every((goal) => goal.legal && goal.moving && goal.hasRoute)).toBe(true);
+  expect(search.every((goal) => goal.fromAnchor > 2)).toBe(true);
+  expect(search[0].position).not.toEqual(search[1].position);
+  expect(errors).toEqual([]);
+});
+
+test("an unopposed Dust II bomb carrier makes sustained progress from spawn to the site", async ({
+  page,
+}) => {
+  test.setTimeout(120_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await page.waitForFunction(() => !!window.__game);
+  await page.bringToFront();
+  await page.locator("#home-play").click();
+  await page.locator("#play").click();
+  await page.locator('#team-select [data-team="ct"]').click();
+  await page.waitForFunction(() => window.__game?.locked);
+  const journeys = await page.evaluate(() => {
+    const g = window.__game;
+    g.simulate = () => {};
+    g.freezeTime = 0;
+    g.dead = Infinity;
+    const index = g.bots.findIndex((b) => b.team === "t");
+    const bot = g.bots[index];
+    g.bots.forEach((b) => {
+      b.health = b === bot ? 100 : 0;
+      b.group.visible = b === bot;
+    });
+    g.utility.botInventories.clear();
+    g.bomb!.carrier = index;
+    const journeys = [];
+    for (const spawn of [0, 5, -1]) {
+      for (const site of spawn < 0 ? [1] : [1, 0]) {
+        g.spawnBot(bot, index);
+        const nav = g.dust!.navigation;
+        bot.group.position.fromArray(
+          spawn < 0 ? [-25.48573, 3.3274, 17.14024] : nav.data.spawns.t[spawn],
+        );
+        const floor = g.dust!.collision.floor(
+          bot.group.position.x,
+          bot.group.position.z,
+          bot.group.position.y + 0.5,
+        );
+        if (Number.isFinite(floor)) bot.group.position.y = floor;
+        bot.navArea = nav.nearest(bot.group.position);
+        bot.progressPosition.copy(bot.group.position);
+        bot.goal.copy(bot.group.position);
+        g.round = site + 2;
+        const goal = nav.site(site);
+        const start = bot.group.position.clone();
+        if (spawn < 0) {
+          // Native dumpster/rock shortcut: take off from area496 and land on
+          // area472, then continue to the bomb site instead of camping on it.
+          bot.path = [
+            [-25.8572, 4.3688, 15.7734],
+            [-25.83815, 4.572, 15.2019],
+            [-25.8191, 4.7752, 14.6304],
+          ].map((point) => start.clone().fromArray(point));
+          bot.goal.copy(goal);
+          bot.nav = 3;
+        }
+        let maxHeight = start.y;
+        let travelled = 0;
+        let ticks = 0;
+        const samples = [];
+        for (; ticks < 128 * 60; ticks++) {
+          const before = bot.group.position.clone();
+          g.updateCasualBots(1 / 16, ticks % 8);
+          g.moveBots(1 / 128);
+          travelled += before.distanceTo(bot.group.position);
+          maxHeight = Math.max(maxHeight, bot.group.position.y);
+          if (ticks % 640 === 0)
+            samples.push({
+              seconds: ticks / 128,
+              position: bot.group.position.toArray(),
+              remaining: bot.group.position.distanceTo(goal),
+              next: bot.path.slice(0, 3).map((p) => p.toArray()),
+              navArea: bot.navArea,
+              stuck: bot.stuck,
+              recoveries: bot.recoveries,
+              blockedAreas: [...bot.blockedAreas],
+            });
+          if (bot.group.position.distanceTo(goal) < 1) break;
+        }
+        journeys.push({
+          spawn,
+          site,
+          elapsed: ticks / 128,
+          maxHeight,
+          remaining: bot.group.position.distanceTo(goal),
+          displacement: bot.group.position.distanceTo(start),
+          travelled,
+          samples,
+          position: bot.group.position.toArray(),
+        });
+      }
+    }
+    g.spectated = bot;
+    g.spectatorMode = "third";
+    g.spectate();
+    return journeys;
+  });
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: "artifacts/bot-objective-progress.png" });
+  for (const journey of journeys) {
+    expect(journey.position.every(Number.isFinite)).toBe(true);
+    expect(journey.displacement).toBeGreaterThan(15);
+    if (journey.spawn < 0) expect(journey.maxHeight).toBeGreaterThan(4.3);
+    expect(journey.remaining, JSON.stringify(journey)).toBeLessThan(2);
+  }
+  expect(errors).toEqual([]);
+});

@@ -101,6 +101,87 @@ describe("Source navigation", () => {
     expect(nav.path(new Vector3(0, 3, 0), new Vector3(0, 0, 0)).length).toBeGreaterThan(0);
     expect(nav.path(new Vector3(0, 0, 0), new Vector3(0, 3, 0))).toEqual([]);
   });
+  it("takes a walking route around a portal climb above the bot's jump apex", () => {
+    const start = area(1, 0, 0, [2, 3]),
+      prop = area(2, 2, 1.6, [4]),
+      around = { ...area(3, 2, 0, [4]), center: [2, 0, 3], rect: [1, 2, 3, 4] };
+    start.portals = { 2: [1, 0, 0] };
+    const nav = new Navigation({
+      areas: [start, prop, around, area(4, 4, 0, [])],
+      spawns: { t: [], ct: [] },
+      sites: [],
+      bounds: [],
+    });
+    const route = nav.path(new Vector3(0, 0, 0), new Vector3(4, 0, 0));
+    expect(route.some((point) => point.z === 3)).toBe(true);
+    expect(route.every((point) => point.y === 0)).toBe(true);
+  });
+  it("keeps a feasible jump shortcut with distinct takeoff and landing edges", () => {
+    const start = area(1, 0, 0, [2, 3]),
+      prop = { ...area(2, 2, 1.24, [4]), portals: { 1: [1.5, 1.24, 0] } },
+      around = { ...area(3, 2, 0, [4]), center: [2, 0, 6], rect: [1, 5, 3, 7] };
+    start.portals = { 2: [1, 0, 0] };
+    const nav = new Navigation({
+      areas: [start, prop, around, area(4, 4, 0, [])],
+      spawns: { t: [], ct: [] },
+      sites: [],
+      bounds: [],
+    });
+    const route = nav.path(new Vector3(), new Vector3(4, 0, 0));
+    expect(route.some((point) => point.x === 2 && point.y === 1.24)).toBe(true);
+    expect(route.some((point) => point.z === 6)).toBe(false);
+  });
+  it("allows a ramp crossing whose floors meet at the portal", () => {
+    const ramp = {
+      ...area(1, 0, 1, [2]),
+      corners: [
+        [-1, 0, 1],
+        [1, 2, 1],
+        [1, 2, -1],
+        [-1, 0, -1],
+      ],
+      portals: { 2: [1, 2, 0] },
+    };
+    const nav = new Navigation({
+      areas: [ramp, area(2, 2, 2, [])],
+      spawns: { t: [], ct: [] },
+      sites: [],
+      bounds: [],
+    });
+    expect(
+      nav
+        .path(new Vector3(-0.5, 0.5, 0), new Vector3(2, 2, 0))
+        .at(-1)
+        ?.toArray(),
+    ).toEqual([2, 2, 0]);
+  });
+  it("can retain adjacent area waypoints for blocked-connection recovery", () => {
+    const nav = new Navigation({
+      areas: [area(1, 0, 0, [2]), area(2, 2, 0, [3]), area(3, 4, 0, [])],
+      spawns: { t: [], ct: [] },
+      sites: [],
+      bounds: [],
+    });
+    expect(
+      nav.path(new Vector3(), new Vector3(4, 0, 0), [], undefined, false).some((p) => p.x === 2),
+    ).toBe(true);
+  });
+  it("retains the physical start connection at a polygon edge and ignores hints on another floor", () => {
+    const start = area(1, 0, 0, [3]);
+    const nav = new Navigation({
+      areas: [start, area(2, 2, 0, [4]), area(3, 4, 0, []), area(4, 2, 0, [])],
+      spawns: { t: [], ct: [] },
+      sites: [],
+      bounds: [],
+    });
+    expect(nav.path(new Vector3(1.2, 0, 0), new Vector3(4, 0, 0))).toEqual([]);
+    expect(
+      nav.path(new Vector3(1.2, 0, 0), new Vector3(4, 0, 0), [], undefined, true, start).length,
+    ).toBeGreaterThan(0);
+    expect(
+      nav.path(new Vector3(1.2, 3, 0), new Vector3(4, 0, 0), [], undefined, true, start),
+    ).toEqual([]);
+  });
 });
 
 // Source 2 uses convex polygons, including sloped triangles, not NAV16 rectangles.

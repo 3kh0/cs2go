@@ -26,6 +26,89 @@ export function botAimSpread(distance: number, speed: number, shots: number, rea
   );
 }
 
+export function botShouldMove({
+  distance,
+  arrival,
+  targetDistance,
+  suppressing,
+  reposition,
+  committed,
+  interacting,
+}: {
+  distance: number;
+  arrival: number;
+  targetDistance: number | null;
+  suppressing: boolean;
+  reposition: boolean;
+  committed: boolean;
+  interacting: boolean;
+}) {
+  if (interacting || distance <= arrival) return false;
+  // A distant engagement must not consume the entire plant/retake window.
+  // Nearby threats still require stopping to fire accurately.
+  if (committed && (targetDistance === null || targetDistance > 8)) return true;
+  return targetDistance !== null || suppressing ? reposition : true;
+}
+
+export function botRegroupGoal(
+  position: T.Vector3,
+  leader: T.Vector3 | null | undefined,
+  index: number,
+  regrouping = false,
+) {
+  if (!leader) return null;
+  const dx = position.x - leader.x;
+  const dz = position.z - leader.z;
+  const distance = Math.hypot(dx, dz);
+  // Hysteresis keeps a moving squad from alternating between combat holds and
+  // catch-up at the boundary. Teammate positions never reveal an enemy.
+  if (distance <= (regrouping ? 8 : 12)) return null;
+  const behindX = dx / distance;
+  const behindZ = dz / distance;
+  const side = ((index % 3) - 1) * 1.5;
+  return new T.Vector3(
+    leader.x + behindX * 3 - behindZ * side,
+    leader.y,
+    leader.z + behindZ * 3 + behindX * side,
+  );
+}
+
+export function botSearchGoal(
+  areas: readonly { center: readonly number[]; links: readonly number[] }[],
+  anchor: T.Vector3,
+  index: number,
+  elapsed: number,
+) {
+  // Widen quiet searches from the site to the lanes, then the wider map.
+  // NAV centers avoid decorative props; staggered phases spread teammates.
+  const quiet = Math.max(0, elapsed);
+  const phase = Math.floor(quiet / 6);
+  const angle = index * 2.399963229728653 + phase * (Math.PI / 2);
+  const radius = (quiet >= 60 ? 40 : quiet >= 35 ? 22 : 6) + (index % 3) * 2;
+  const x = anchor.x + Math.sin(angle) * radius;
+  const z = anchor.z + Math.cos(angle) * radius;
+  let best: readonly number[] | undefined;
+  let score = Infinity;
+  for (const area of areas) {
+    const center = area.center;
+    const horizontal = Math.hypot(center[0] - anchor.x, center[2] - anchor.z);
+    const vertical = Math.abs(center[1] - anchor.y);
+    if (
+      !area.links.length ||
+      horizontal < 2 ||
+      horizontal > radius + 8 ||
+      vertical > (quiet >= 35 ? 12 : 2.5)
+    )
+      continue;
+    const cost = (center[0] - x) ** 2 + (center[2] - z) ** 2 + vertical * vertical * 4;
+    if (cost < score) {
+      score = cost;
+      best = center;
+    }
+  }
+  return best ? new T.Vector3().fromArray(best) : anchor.clone();
+}
+
 // Analytic body volumes avoid decorative gun/gear meshes counting as flesh.
 // Returns the actual nearest intersection, so teammates physically block shots.
 export function botBodyHit(ray: T.Ray, feet: T.Vector3, crouch = false) {
