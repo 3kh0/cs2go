@@ -1,5 +1,5 @@
 import { assetFetch } from "./asset-url";
-import { beginLoadingWork } from "./loading";
+import { beginLoadingWork, startupBudget } from "./loading";
 import { parseAudioPack, streamAudioPack, type StreamingAudioPack } from "./audio-pack";
 export { parseAudioPack } from "./audio-pack";
 let pack: Promise<StreamingAudioPack> | undefined;
@@ -8,7 +8,7 @@ const decoded = new Map<string, Promise<AudioBuffer>>();
 const queue: (() => Promise<void>)[] = [];
 let active = 0;
 function pump() {
-  while (active < 4 && queue.length) {
+  while (active < startupBudget("audio") && queue.length) {
     active++;
     void queue.shift()!().finally(() => {
       active--;

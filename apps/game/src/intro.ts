@@ -91,6 +91,7 @@ export function startIntro(): LoadProgress {
       return;
     }
     playing = true;
+    // laptop.remove();
     root.setAttribute("aria-label", "CS2GO intro");
     root.insertAdjacentHTML(
       "beforeend",

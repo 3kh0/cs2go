@@ -1,6 +1,19 @@
 import * as T from "three";
 
 export const graphicsPresets = {
+  laptop: {
+    antialias: "off",
+    shadowDetail: "off",
+    shadowFilter: "hard",
+    textureQuality: "medium",
+    textureFiltering: 1,
+    resolutionLimit: 720,
+    resolutionScale: 100,
+    effectsDetail: "low",
+    fpsCap: 60,
+    menuFpsCap: 15,
+    startupLoad: "gentle",
+  },
   performance: {
     antialias: "off",
     shadowDetail: "low",
@@ -12,6 +25,7 @@ export const graphicsPresets = {
     effectsDetail: "low",
     fpsCap: 120,
     menuFpsCap: 30,
+    startupLoad: "standard",
   },
   balanced: {
     antialias: "off",
@@ -24,6 +38,7 @@ export const graphicsPresets = {
     effectsDetail: "high",
     fpsCap: 144,
     menuFpsCap: 30,
+    startupLoad: "standard",
   },
   quality: {
     antialias: "msaa",
@@ -36,6 +51,7 @@ export const graphicsPresets = {
     effectsDetail: "high",
     fpsCap: 0,
     menuFpsCap: 30,
+    startupLoad: "standard",
   },
 };
 export type GraphicsSettings = typeof graphicsPresets.balanced;
@@ -71,7 +87,8 @@ export function readGraphicsSettings(saved: Record<string, unknown>): GraphicsSe
     effectsDetail: ["low", "high"],
     textureFiltering: [1, 2, 4, 8, 16],
     resolutionLimit: [720, 1080, 1440, 2160, 0],
-    menuFpsCap: [30, 60, 120],
+    menuFpsCap: [15, 30, 60, 120],
+    startupLoad: ["gentle", "standard"],
   })) {
     if ((options as unknown[]).includes(saved[key])) Object.assign(result, { [key]: saved[key] });
   }

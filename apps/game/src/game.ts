@@ -1,6 +1,8 @@
 import { prepareMatchMedia } from "./match-media";
+import { configureStartupLoading } from "./loading";
+import { rendererDiagnostics } from "./renderer-diagnostics";
 import { MatchChat } from "./chat";
-import { applyShadowDetail, graphicsPixelRatio } from "./graphics-settings";
+import { applyShadowDetail, graphicsPixelRatio, graphicsPresets } from "./graphics-settings";
 import { applyDisplayViewport, type DisplayAspect } from "./display-settings";
 import { applyViewmodelCamera, viewmodelPointToWorld } from "./viewmodel-settings";
 import { defaultGloveChoice, unregisterGloveModel } from "./gloves";
@@ -593,6 +595,19 @@ export class Game {
       onLoad(0, 8, true);
       return;
     }
+    // Driver log queries can synchronously stall compilation; keep diagnostics in development.
+    this.renderer.debug.checkShaderErrors = import.meta.env.DEV;
+    const diagnostics = rendererDiagnostics(this.renderer.getContext());
+    // A software fallback gets conservative defaults; preserve saved choices.
+    if (diagnostics.software) {
+      try {
+        if (!localStorage.getItem("cs2go-settings"))
+          Object.assign(this.settings, graphicsPresets.laptop);
+      } catch {
+        /* Keep the in-memory defaults when storage is unavailable. */
+      }
+    }
+    configureStartupLoading(this.settings.startupLoad);
     enableTextureTranscoding(this.renderer);
     this.resizeRenderer();
     this.renderer.autoClear = false;
@@ -1165,10 +1180,14 @@ export class Game {
     }
     // Yield between uploads so input/painting can run during GPU warm-up.
     let uploaded = 0;
+    let uploadSlice = performance.now();
     for (const texture of textures) {
       signal?.throwIfAborted();
       this.renderer.initTexture(texture);
-      if (++uploaded % 8 === 0) await new Promise((resolve) => setTimeout(resolve, 0));
+      if (++uploaded % 8 === 0 || performance.now() - uploadSlice >= 8) {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        uploadSlice = performance.now();
+      }
     }
     if (!this.assetsReady) await this.homeScene.prepare(this.renderer);
     await warmSourceSky(this.dust.skybox, signal);
@@ -5308,7 +5327,7 @@ export class Game {
     const renderClock = advanceRenderClock(
       this.lastRender,
       now,
-      this.active ? this.settings.fpsCap : this.settings.menuFpsCap,
+      this.active && this.locked ? this.settings.fpsCap : this.settings.menuFpsCap,
     );
     if (renderClock === null) return;
     const renderDt = Math.min((now - this.lastRender) / 1000, 0.1);

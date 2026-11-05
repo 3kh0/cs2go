@@ -1,6 +1,30 @@
 import { expect, test } from "vitest";
 import { beginLoadingWork, watchLoadingWork, createLoadQueue } from "./loading";
 
+test("reducing a load budget drains active jobs before starting more work", async () => {
+  let limit = 3;
+  const load = createLoadQueue(() => limit);
+  const releases: (() => void)[] = [];
+  const jobs = Array.from({ length: 4 }, () =>
+    load(() => new Promise<void>((resolve) => releases.push(resolve))),
+  );
+  await Promise.resolve();
+  expect(releases).toHaveLength(3);
+  limit = 1;
+  releases[0]();
+  await jobs[0];
+  expect(releases).toHaveLength(3);
+  releases[1]();
+  await jobs[1];
+  expect(releases).toHaveLength(3);
+  releases[2]();
+  await jobs[2];
+  await Promise.resolve();
+  expect(releases).toHaveLength(4);
+  releases[3]();
+  await Promise.all(jobs);
+});
+
 test("map priority bypasses queued animation work without interrupting active jobs", async () => {
   const load = createLoadQueue(1);
   const order: string[] = [];

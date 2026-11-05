@@ -1,6 +1,6 @@
 import { readAssetBody } from "./asset-stream";
 import { assetFetch } from "./asset-url";
-import { createLoadQueue } from "./loading";
+import { createLoadQueue, startupBudget, yieldLoadingWork } from "./loading";
 import type * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { KTX2Loader } from "three/addons/loaders/KTX2Loader.js";
@@ -10,11 +10,13 @@ import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 // resolves its Basis transcoder through import.meta.url, so Vite bundles it.
 // Fetch ahead through network latency while retaining only six jobs and at
 // most two parsers/transcoders. Map jobs can bypass the long animation queue.
-const load = createLoadQueue(6);
-const parse = createLoadQueue(2);
+const load = createLoadQueue(() => startupBudget("fetch"));
+const parse = createLoadQueue(() => startupBudget("parse"));
 const gltf = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 export function enableTextureTranscoding(renderer: T.WebGLRenderer) {
-  gltf.setKTX2Loader(new KTX2Loader().setWorkerLimit(2).detectSupport(renderer));
+  gltf.setKTX2Loader(
+    new KTX2Loader().setWorkerLimit(startupBudget("texture")).detectSupport(renderer),
+  );
 }
 // Vercel compresses only text-like MIME types, so large GLBs ship pre-gzipped.
 // A server that adds Content-Encoding has already decoded it; check the magic.
@@ -31,6 +33,9 @@ export function loadModel(url: string, priority = 0) {
 export function loadGzipped(url: string, priority = 0) {
   return load(async () => {
     const data = await fetchGzipped(url, priority > 0 ? { priority: "high" } : undefined);
-    return parse(() => gltf.parseAsync(data, url.slice(0, url.lastIndexOf("/") + 1)), priority);
+    return parse(async () => {
+      await yieldLoadingWork();
+      return gltf.parseAsync(data, url.slice(0, url.lastIndexOf("/") + 1));
+    }, priority);
   }, priority);
 }

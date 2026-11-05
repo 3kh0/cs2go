@@ -34,6 +34,13 @@ describe("graphics choices", () => {
       resolutionScale: 100,
     });
     expect(graphicsPreset({ ...graphicsDefaults, textureFiltering: 16 })).toBe("custom");
+    expect(graphicsPreset(readGraphicsSettings(graphicsPresets.laptop))).toBe("laptop");
+    expect(readGraphicsSettings(graphicsPresets.laptop)).toMatchObject({
+      fpsCap: 60,
+      menuFpsCap: 15,
+      shadowDetail: "off",
+      startupLoad: "gentle",
+    });
   });
   it("bounds high DPI and ultrawide pixel work independently of shadows", () => {
     for (const [width, height, dpr] of [

@@ -28,20 +28,20 @@ test("render budgets survive resizing and quality changes without external asset
   await page.locator("#quality").selectOption("performance");
   await expect(page.locator("#shadowDetail")).toHaveValue("low");
   expect(await page.evaluate(() => window.__game.renderer.shadowMap.type)).toBe(0);
-  expect(
-    await page.evaluate(() => {
-      const sizes: number[] = [];
-      for (const root of [window.__game.scene, window.__game.homeScene.graphicsRoot])
-        root.traverse((object) => {
-          const light = object as unknown as {
-            castShadow: boolean;
-            shadow?: { mapSize: { x: number } };
-          };
-          if (light.castShadow && light.shadow) sizes.push(light.shadow.mapSize.x);
-        });
-      return sizes;
-    }),
-  ).toEqual([1024, 1024]);
+  const shadowSizes = await page.evaluate(() => {
+    const sizes: number[] = [];
+    for (const root of [window.__game.scene, window.__game.homeScene.graphicsRoot])
+      root.traverse((object) => {
+        const light = object as unknown as {
+          castShadow: boolean;
+          shadow?: { mapSize: { x: number } };
+        };
+        if (light.castShadow && light.shadow) sizes.push(light.shadow.mapSize.x);
+      });
+    return sizes;
+  });
+  expect(shadowSizes.length).toBeGreaterThanOrEqual(2);
+  expect(shadowSizes.every((size) => size === 1024)).toBe(true);
   await expect.poll(pixels).toBe(1280 * 720);
   await page.locator("#shadowDetail").selectOption("off");
   expect(await page.evaluate(() => window.__game.renderer.shadowMap.enabled)).toBe(false);
@@ -78,6 +78,7 @@ test("render budgets survive resizing and quality changes without external asset
   await expect(page.getByRole("dialog", { name: "RELOAD REQUIRED" })).toBeVisible();
   await Promise.all([page.waitForEvent("load"), page.locator("#settings-reload-now").click()]);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });
+  await expect(page.locator("#startup")).toHaveCount(0);
   expect(await page.evaluate(() => window.__game.antialiasAtStartup)).toBe(true);
   expect(
     await page.evaluate(

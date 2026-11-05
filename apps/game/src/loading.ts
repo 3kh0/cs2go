@@ -1,4 +1,16 @@
 let assetListener: ((filename: string) => void) | undefined;
+let gentleStartup = false;
+export function configureStartupLoading(mode: string) {
+  gentleStartup = mode === "gentle";
+}
+export function startupBudget(kind: "fetch" | "parse" | "texture" | "audio") {
+  return gentleStartup
+    ? { fetch: 3, parse: 1, texture: 1, audio: 1 }[kind]
+    : { fetch: 6, parse: 2, texture: 2, audio: 4 }[kind];
+}
+export function yieldLoadingWork() {
+  return new Promise<void>((resolve) => setTimeout(resolve, 0));
+}
 
 /** Subscribe only while the startup overlay exists; later skin loads stay silent. */
 export function watchAssetLoads(listener: (filename: string) => void) {
@@ -39,9 +51,13 @@ export function beginLoadingWork() {
 
 // Bound whole fetch/decompress/parse jobs, not just requests: decoded models
 // and texture transcoders otherwise compete for memory during startup.
-export function createLoadQueue(limit: number) {
+export function createLoadQueue(limit: number | (() => number)) {
   let active = 0;
   const waiting: { start: () => void; priority: number }[] = [];
+  function pump() {
+    while (waiting.length && active < (typeof limit === "number" ? limit : limit()))
+      waiting.shift()!.start();
+  }
   return async function load<T>(task: () => Promise<T>, priority = 0): Promise<T> {
     const finish = beginLoadingWork();
     await new Promise<void>((resolve) => {
@@ -49,18 +65,16 @@ export function createLoadQueue(limit: number) {
         active++;
         resolve();
       };
-      if (active < limit) start();
-      else {
-        waiting.push({ start, priority });
-        waiting.sort((a, b) => b.priority - a.priority);
-      }
+      waiting.push({ start, priority });
+      waiting.sort((a, b) => b.priority - a.priority);
+      pump();
     });
     try {
       return await task();
     } finally {
       active--;
       finish();
-      waiting.shift()?.start();
+      pump();
     }
   };
 }
