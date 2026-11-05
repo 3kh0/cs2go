@@ -967,14 +967,32 @@ export class GameUtility {
         b.tactic = 1;
       }
       const inventory = this.botInventories.get(index);
-      if (!inventory || cooldown || b.alert <= 0 || this.blind.has(index) || b.reloadTime > 0)
-        return;
-      const distance = b.group.position.distanceTo(b.memory);
+      if (!inventory || cooldown || this.blind.has(index) || b.reloadTime > 0) return;
+      const order = g.botStrategies?.[b.team].order(index);
+      const plannedTarget = order?.utilityTarget
+        ? new T.Vector3().fromArray(order.utilityTarget)
+        : null;
+      const plannedDistance = plannedTarget ? b.group.position.distanceTo(plannedTarget) : Infinity;
+      const plannedKind =
+        order?.utility && plannedTarget && plannedDistance >= 6 && plannedDistance <= 23
+          ? inventory[order.utility]
+            ? order.utility
+            : inventory.smoke
+              ? "smoke"
+              : inventory.flash
+                ? "flash"
+                : undefined
+          : undefined;
+      // Support players can prepare a known entry with smoke/flash before
+      // contact. Reactive utility still uses finite personally seen reports.
+      if (!plannedKind && b.alert <= 0) return;
+      const targetFeet = plannedKind ? plannedTarget! : b.memory;
+      const distance = b.group.position.distanceTo(targetFeet);
       if (distance < 6 || distance > 23) return;
-      // Use only personally seen or teammate-reported memory; no hidden enemy positions.
       const retreat = b.health < 40 || (g.bomb?.planted && b.team === "ct");
       const kind: GrenadeKind | undefined =
-        retreat && inventory.smoke
+        plannedKind ??
+        (retreat && inventory.smoke
           ? "smoke"
           : !b.tracking && inventory.flash
             ? "flash"
@@ -984,11 +1002,11 @@ export class GameUtility {
                 ? "molotov"
                 : b.tracking && inventory.incendiary
                   ? "incendiary"
-                  : undefined;
+                  : undefined);
       if (!kind) return;
       const from = b.group.position.clone().add(new T.Vector3(0, 1.4, 0));
-      const target = b.memory.clone().add(new T.Vector3(0, 0.5, 0));
-      if (kind === "smoke") target.lerp(b.group.position, 0.45);
+      const target = targetFeet.clone().add(new T.Vector3(0, 0.5, 0));
+      if (kind === "smoke" && !plannedKind) target.lerp(b.group.position, 0.45);
       // Avoid intentional HE/fire on teammates; share a team throw cooldown so
       // entries get staggered utility rather than ten simultaneous grenades.
       if (
@@ -1011,7 +1029,7 @@ export class GameUtility {
             teammate.group.position.distanceTo(from) < 16
           ) {
             this.entries.set(j, {
-              position: b.memory.clone(),
+              position: targetFeet.clone(),
               at: this.clock + 1.7,
               until: this.clock + 5,
             });

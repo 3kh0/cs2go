@@ -84,18 +84,22 @@ test("bomb carriers and retaking CTs commit to objectives through distant contac
     });
     escort.group.position.fromArray(g.dust!.navigation.data.spawns.t[0]);
     escort.navArea = g.dust!.navigation.nearest(escort.group.position);
+    g.round = 6;
+    g.botStrategySeed = 0;
+    g.time = g.rules.roundTime;
+    g.bomb!.planted = false;
+    g.bomb!.carrier = leader;
+    g.bomb!.defuser = null;
+    g.bomb!.plantProgress = 0;
+    g.resetBotStrategies();
     const push = g
-      .dust!.navigation.site(g.round % g.dust!.navigation.data.sites.length)
+      .dust!.navigation.site(g.botStrategies!.t.site === "a" ? 0 : 1)
       .sub(escort.group.position)
       .setY(0)
       .normalize();
     g.bots[leader].group.position.copy(escort.group.position).addScaledVector(push, 20);
     g.bots[leader].moving = true;
     g.bots[leader].speed = 3;
-    g.bomb!.planted = false;
-    g.bomb!.carrier = leader;
-    g.bomb!.defuser = null;
-    g.bomb!.plantProgress = 0;
     escort.nav = 0;
     escort.tactic = 1;
     g.updateCasualBots(1 / 16, escortIndex % 8);
@@ -116,18 +120,16 @@ test("bomb carriers and retaking CTs commit to objectives through distant contac
       b.health = b === bot ? 100 : 0;
     });
     const nav = g.dust!.navigation;
-    const anchor = nav.site(
-      index % nav.data.sites.length,
-      ((index % 3) - 1) * 4,
-      index % 2 ? 4 : -4,
-    );
-    bot.group.position.copy(anchor);
-    bot.navArea = nav.nearest(anchor);
+    g.spawnBot(bot, index);
     g.bomb!.planted = false;
     g.bomb!.carrier = -1;
     g.bomb!.defuser = null;
     g.dead = Infinity;
-    bot.alert = 0;
+    g.botStrategySeed = 0;
+    g.round = 1;
+    g.time = g.rules.roundTime;
+    g.resetBotStrategies();
+    const assigned = g.botStrategies!.ct.order(index)!.goal;
     const goals = [];
     for (const elapsed of [20, 70]) {
       bot.quiet = elapsed;
@@ -135,7 +137,7 @@ test("bomb carriers and retaking CTs commit to objectives through distant contac
       g.updateCasualBots(1 / 16, index % 8);
       goals.push({
         position: bot.goal.toArray(),
-        fromAnchor: bot.goal.distanceTo(anchor),
+        assigned: bot.goal.distanceTo(bot.goal.clone().fromArray(assigned)) < 0.001,
         legal: nav.areas.some(
           (area) => bot.goal.distanceToSquared(bot.goal.clone().fromArray(area.center)) < 0.001,
         ),
@@ -146,8 +148,8 @@ test("bomb carriers and retaking CTs commit to objectives through distant contac
     return goals;
   });
   expect(search.every((goal) => goal.legal && goal.moving && goal.hasRoute)).toBe(true);
-  expect(search.every((goal) => goal.fromAnchor > 2)).toBe(true);
-  expect(search[0].position).not.toEqual(search[1].position);
+  expect(search.every((goal) => goal.assigned)).toBe(true);
+  expect(search[0].position).toEqual(search[1].position);
   expect(errors).toEqual([]);
 });
 
@@ -177,6 +179,7 @@ test("an unopposed Dust II bomb carrier makes sustained progress from spawn to t
     });
     g.utility.botInventories.clear();
     g.bomb!.carrier = index;
+    g.botStrategySeed = 0;
     const journeys = [];
     for (const spawn of [0, 5, -1]) {
       for (const site of spawn < 0 ? [1] : [1, 0]) {
@@ -194,8 +197,13 @@ test("an unopposed Dust II bomb carrier makes sustained progress from spawn to t
         bot.navArea = nav.nearest(bot.group.position);
         bot.progressPosition.copy(bot.group.position);
         bot.goal.copy(bot.group.position);
-        g.round = site + 2;
-        const goal = nav.site(site);
+        // Seed zero chooses longA in round one and rushB in round six.
+        g.round = site === 0 ? 1 : 6;
+        g.time = g.rules.roundTime;
+        g.roundElapsed = 0;
+        g.resetBotStrategies();
+        const strategy = g.botStrategies!.t;
+        const goal = nav.site(strategy.site === "a" ? 0 : 1);
         const start = bot.group.position.clone();
         if (spawn < 0) {
           // Native dumpster/rock shortcut: take off from area496 and land on
@@ -205,7 +213,7 @@ test("an unopposed Dust II bomb carrier makes sustained progress from spawn to t
             [-25.83815, 4.572, 15.2019],
             [-25.8191, 4.7752, 14.6304],
           ].map((point) => start.clone().fromArray(point));
-          bot.goal.copy(goal);
+          bot.goal.fromArray(strategy.order(index)!.goal);
           bot.nav = 3;
         }
         let maxHeight = start.y;
@@ -234,6 +242,7 @@ test("an unopposed Dust II bomb carrier makes sustained progress from spawn to t
         journeys.push({
           spawn,
           site,
+          plan: strategy.plan,
           elapsed: ticks / 128,
           maxHeight,
           remaining: bot.group.position.distanceTo(goal),
@@ -287,7 +296,9 @@ test("the full T squad advances past a stationary player carrier and a parked te
     const squad = g.bots.filter((b) => b.team === "t");
     const playerSpawn = g.position.clone();
     const run = (parked: boolean) => {
-      g.round = 1;
+      g.round = 6;
+      g.botStrategySeed = 0;
+      g.roundElapsed = 0;
       g.time = g.rules.roundTime;
       g.bomb!.carrier = "player";
       g.bomb!.planted = false;
@@ -298,6 +309,7 @@ test("the full T squad advances past a stationary player carrier and a parked te
         blocker.group.position.copy(park);
         blocker.navArea = g.dust!.navigation.nearest(park);
       }
+      g.resetBotStrategies();
       const advancing = squad.filter((b) => b !== blocker);
       const snapshots = [];
       for (let tick = 0; tick < 128 * 45; tick++) {

@@ -144,6 +144,8 @@ import type { LoadProgress } from "./intro";
 import { enableTextureTranscoding } from "./gltf";
 import { detour } from "./local-navigation";
 import { steerAroundTeammate } from "./bot-avoidance";
+import { BotRoundStrategy, type BotStrategyRoutes, type StrategyPoint } from "./bot-strategy";
+import { buildBotStrategyRoutes } from "./bot-strategy-routes";
 import type { MultiplayerMatch } from "./multiplayer-match";
 import {
   createGun,
@@ -320,6 +322,12 @@ export class Game {
   world!: Awaited<ReturnType<typeof loadDust2>>;
   network?: MultiplayerMatch;
   dust?: Awaited<ReturnType<typeof loadDust2>>;
+  botStrategies: { t: BotRoundStrategy; ct: BotRoundStrategy } | null = null;
+  botStrategySeed = Math.floor(Math.random() * 0x100000000);
+  private botStrategyRoutes: BotStrategyRoutes | null = null;
+  private botStrategyNavigation?: Awaited<ReturnType<typeof loadDust2>>["navigation"];
+  private botStrategyRound = -1;
+  private botStrategyThink = 0;
   round = 1;
   teamScores = { t: 0, ct: 0 };
   roundHistory: { winner: AgentTeam; reason: string }[] = [];
@@ -1313,6 +1321,7 @@ export class Game {
     this.utility.reset();
     this.utility.botInventories.clear();
     this.round = 1;
+    this.botStrategySeed = Math.floor(Math.random() * 0x100000000);
     this.money = this.rules.startMoney;
     this.lossStreak = { t: this.rules.startingLossLevel, ct: this.rules.startingLossLevel };
     this.teamScores = { t: 0, ct: 0 };
@@ -3413,6 +3422,7 @@ export class Game {
     this.camera.updateProjectionMatrix();
   }
   configureBots(casual: boolean, count = casual ? this.teamSize * 2 - 1 : 5) {
+    this.botStrategies = null;
     for (const bot of this.bots) {
       this.scene.remove(bot.group);
       disposeSoldier(bot.rig);
@@ -3474,6 +3484,7 @@ export class Game {
       beepPulse: 0,
     };
     this.bombMesh.visible = false;
+    this.resetBotStrategies();
     this.roundElapsed = 0;
     this.roundHighlights.clear();
     this.roundFirstKill = undefined;
@@ -4439,9 +4450,97 @@ export class Game {
     }
     return best;
   }
+  resetBotStrategies() {
+    if (!this.dust || !this.teamMode || this.network) {
+      this.botStrategies = null;
+      return;
+    }
+    const nav = this.dust.navigation;
+    if (!this.botStrategyRoutes || this.botStrategyNavigation !== nav) {
+      this.botStrategyRoutes = buildBotStrategyRoutes(nav);
+      this.botStrategyNavigation = nav;
+    }
+    const create = (team: AgentTeam) =>
+      new BotRoundStrategy({
+        team,
+        round: this.round,
+        seed: this.botStrategySeed,
+        members: this.bots.flatMap((b, index) => (b.team === team ? [index] : [])),
+        routes: this.botStrategyRoutes!,
+        roundTime: this.rules.roundTime,
+      });
+    this.botStrategies = { t: create("t"), ct: create("ct") };
+    this.botStrategyRound = this.round;
+    this.botStrategyThink = 0.25;
+    this.updateBotStrategies(0);
+  }
+  updateBotStrategies(dt: number) {
+    if (!this.botStrategies || !this.bomb || !this.dust) return;
+    const bomb = this.bomb;
+    const point = (p: T.Vector3): StrategyPoint => [p.x, p.y, p.z];
+    for (const team of ["t", "ct"] as const) {
+      // This boundary deliberately supplies own-team positions and finite
+      // sight reports only. Hidden opponents never enter the coordinator.
+      const allies = this.bots.flatMap((b, index) =>
+        b.team === team
+          ? [
+              {
+                index,
+                position: point(b.group.position),
+                alive: b.health > 0,
+              },
+            ]
+          : [],
+      );
+      if (this.team === team)
+        allies.push({ index: -2, position: point(this.position), alive: !this.dead });
+      const reports = this.bots.flatMap((b) =>
+        b.team === team && b.health > 0 && b.report > 0
+          ? [
+              {
+                position: point(b.memory),
+                age: Math.max(0, 1.5 - b.report),
+              },
+            ]
+          : [],
+      );
+      let position: StrategyPoint | null = null;
+      if (bomb.planted) position = point(bomb.position);
+      else if (team === "t") {
+        const carrier =
+          bomb.carrier === "player"
+            ? this.position
+            : bomb.carrier >= 0
+              ? this.bots[bomb.carrier]?.group.position
+              : null;
+        position = point(carrier ?? bomb.position);
+      }
+      const site = bomb.planted
+        ? bomb.position.distanceToSquared(this.dust.navigation.site(0)) <
+          bomb.position.distanceToSquared(this.dust.navigation.site(1))
+          ? "a"
+          : "b"
+        : undefined;
+      this.botStrategies[team].update({
+        dt,
+        remaining: this.time,
+        allies,
+        reports,
+        bomb: { planted: bomb.planted, position, carrier: team === "t" ? bomb.carrier : -1, site },
+      });
+    }
+  }
   updateCasualBots(dt: number, phase: number) {
     const nav = this.dust!.navigation,
       bomb = this.bomb!;
+    if (!this.botStrategies || this.botStrategyRound !== this.round) this.resetBotStrategies();
+    if (phase === 0) {
+      this.botStrategyThink -= dt;
+      if (this.botStrategyThink <= 0) {
+        this.botStrategyThink = 0.25;
+        this.updateBotStrategies(0.25);
+      }
+    }
     const defuser = bomb.planted
       ? nearestDefuser(
           this.bots.flatMap((b, index) =>
@@ -4460,34 +4559,47 @@ export class Game {
       this.botCombat(b, target, dt);
       b.tactic -= dt;
       let goal: T.Vector3;
+      const order = this.botStrategies?.[b.team].order(i);
       b.quiet = target || b.alert > 0 ? 0 : b.quiet + dt;
-      let committed = (!bomb.planted && bomb.carrier === i) || (bomb.planted && defuser === i);
+      const objectiveCommit =
+        (!bomb.planted && bomb.carrier === i) || (bomb.planted && defuser === i);
+      let committed = order?.urgent || objectiveCommit;
       // Clear the chosen site with spaced goals. CTs anchor initially,
       // then sweep quiet approaches; a stationary carrier never holds a squad.
-      const site = b.team === "t" ? this.round % nav.data.sites.length : i % nav.data.sites.length;
-      goal = nav.site(
-        site,
-        b.team === "ct" ? ((i % 3) - 1) * 4 : ((i % 3) - 1) * 2,
-        b.team === "ct" ? (i % 2 ? 4 : -4) : 0,
-      );
+      const site = order
+        ? order.site === "a"
+          ? 0
+          : 1
+        : b.team === "t"
+          ? this.round % nav.data.sites.length
+          : i % nav.data.sites.length;
+      goal = order
+        ? new T.Vector3().fromArray(order.goal)
+        : nav.site(
+            site,
+            b.team === "ct" ? ((i % 3) - 1) * 4 : ((i % 3) - 1) * 2,
+            b.team === "ct" ? (i % 2 ? 4 : -4) : 0,
+          );
       const objective = nav.site(site);
       // The carrier must reach the plant trigger, not an offset squad anchor.
-      if (bomb.carrier === i && !bomb.planted) goal = nav.site(site);
+      if (!order && bomb.carrier === i && !bomb.planted) goal = nav.site(site);
       if (
+        !order &&
         !bomb.planted &&
         !committed &&
         b.quiet > 12 &&
         (b.team === "ct" || pos.distanceTo(goal) < 12)
       )
         goal = b.nav <= dt ? botSearchGoal(nav.areas, goal, i, b.quiet) : b.goal;
-      if (bomb.planted) {
+      if (bomb.planted && (defuser === i || !order)) {
         goal = bomb.position.clone();
         if (b.team === "t" || defuser !== i) {
           const angle = (i * 2.4) % (Math.PI * 2);
           goal.add(new T.Vector3(Math.sin(angle) * 5, 0, Math.cos(angle) * 5));
         }
-      } else if (bomb.carrier === -1 && b.team === "t") goal = bomb.position;
+      } else if (!order && bomb.carrier === -1 && b.team === "t") goal = bomb.position;
       if (
+        (!order || (target && target.distance < 12)) &&
         b.alert > 0 &&
         !(bomb.planted && defuser === i) &&
         bomb.carrier !== i &&
@@ -4509,8 +4621,14 @@ export class Game {
             ? this.bots[leaderId].group.position
             : null;
       const independent = b.team === "t" && i % 4 === 0;
+      const leaderOrder =
+        typeof leaderId === "number" && leaderId >= 0
+          ? this.botStrategies?.[b.team].order(leaderId)
+          : null;
+      const sameAssignment =
+        !order || (!!order.urgent && (!leaderOrder || order.lane === leaderOrder.lane));
       const regroup =
-        leader && (!independent || b.regrouping || pos.distanceTo(leader) > 18)
+        sameAssignment && leader && (!independent || b.regrouping || pos.distanceTo(leader) > 18)
           ? botRegroupGoal(
               pos,
               leader,
@@ -4530,13 +4648,19 @@ export class Game {
         committed = true;
       }
       const retreat = b.reloadTime > 0 || b.health < 32;
-      if (!committed && b.alert > 0 && b.tactic <= 0 && (retreat || target)) {
+      if (
+        !objectiveCommit &&
+        b.alert > 0 &&
+        b.tactic <= 0 &&
+        (retreat || target) &&
+        (!committed || retreat)
+      ) {
         b.cover.copy(this.botCover(b, retreat) ?? pos);
         b.tactic = retreat ? 2.2 : 1.4 + (i % 3) * 0.2;
         b.reposition = retreat || (b.burst === 0 && b.shot > 0.16);
         if (b.reposition) b.nav = 0;
       }
-      if (!committed && b.reposition && b.tactic > 0 && pos.distanceTo(b.cover) > 0.5)
+      if (!objectiveCommit && b.reposition && b.tactic > 0 && pos.distanceTo(b.cover) > 0.5)
         goal = b.cover;
       else b.reposition = false;
       goal = this.utility.botGoal(i, goal);
@@ -4549,7 +4673,10 @@ export class Game {
         committed,
         interacting: (bomb.plantProgress > 0 && bomb.carrier === i) || bomb.defuser === i,
       });
-      if (!b.moving && !target && b.alert <= 0) b.facing += dt * 0.28;
+      if (!b.moving && !target && b.alert <= 0) {
+        if (order?.watch) b.facing = Math.atan2(order.watch[0] - pos.x, order.watch[2] - pos.z);
+        else b.facing += dt * 0.28;
+      }
       b.nav -= dt;
       // New orders invalidate an old route, including a local recovery route.
       const changedGoal = b.goal.distanceTo(goal) > 3;
