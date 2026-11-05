@@ -1,5 +1,6 @@
 import { expect, it } from "vitest";
 import { readFileSync } from "node:fs";
+import { Buffer } from "node:buffer";
 import { parseAudioPack, streamAudioPack } from "./audio-pack";
 
 it("streams the shipped pack byte for byte across arbitrary chunk boundaries", async () => {
@@ -16,7 +17,12 @@ it("streams the shipped pack byte for byte across arbitrary chunk boundaries", a
       },
     }),
   );
-  for (const [url, bytes] of expected) expect(await pack.get(url), url).toEqual(bytes);
+  for (const [url, bytes] of expected) {
+    const actual = await pack.get(url);
+    expect(actual, url).toBeDefined();
+    // Native byte comparison avoids spending the timeout in millions of matcher comparisons.
+    expect(Buffer.from(actual!).equals(Buffer.from(bytes)), url).toBe(true);
+  }
   await pack.completed;
 });
 

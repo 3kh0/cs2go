@@ -263,3 +263,46 @@ test("shot feedback distinguishes wall impacts, sky misses and confirmed player 
   expect(miss?.victim).toBeUndefined();
   expect(Math.hypot(miss!.to.x - ct.x, miss!.to.z - ct.z)).toBeLessThanOrEqual(90);
 });
+
+test("post-round planting continues and restarts without changing the settled result or payout", () => {
+  for (const mode of ["casual", "competitive"] as const) {
+    const { match, ct, t } = fixture(mode);
+    live(match);
+    const box = dust2BombSites.sites[0].hulls[0];
+    const position = {
+      x: (box.min[0] + box.max[0]) / 2,
+      y: box.min[1],
+      z: (box.min[2] + box.max[2]) / 2,
+    };
+    Object.assign(t, position);
+    match.map.collision.floor = () => position.y;
+    match.map.collision.support = () => position.y;
+    match.map.collision.followGround = () => true;
+    match.state.bomb.carrier = t.id;
+    const use = new Map([[t.id, { ...neutralInput(), use: true }]]);
+    advance(match, 0.5, use);
+    const progress = match.state.bomb.plantProgress;
+    ct.health = 0;
+    stepMatch(match, use);
+    expect(match.state.phase).toBe("post");
+    expect(match.state.bomb.plantProgress).toBe(progress);
+    const result = structuredClone(match.state.result);
+    const scores = { ...match.state.scores };
+    const money = t.money;
+    stepMatch(match, new Map());
+    expect(match.state.bomb.plantProgress).toBe(0);
+    advance(match, 3.3, use);
+    expect(match.state.bomb.planted).toBe(true);
+    expect(match.state.bomb.planter).toBe(t.id);
+    expect(match.state.result).toEqual(result);
+    expect(match.state.scores).toEqual(scores);
+    expect(t.money).toBe(money);
+    const timer = match.state.bomb.timer;
+    advance(match, 0.2);
+    expect(match.state.bomb.timer).toBe(timer);
+    advance(match, match.state.pause + STEP);
+    expect(match.state.round).toBe(2);
+    expect(match.state.phase).toBe("freeze");
+    expect(match.state.bomb.planted).toBe(false);
+  }
+});

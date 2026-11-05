@@ -68,7 +68,7 @@ it("ships the CS2 soundtrack with verified local bytes and no former CS:GO music
   );
 });
 
-it("every packed effect has native CS2 provenance and matching local bytes", () => {
+it("every packed effect has verified native CS2 or pinned supplemental C4 provenance", () => {
   const effects = JSON.parse(
     readFileSync("../../packages/assets/public/audio/cs2-effects-source.json", "utf8"),
   );
@@ -124,6 +124,20 @@ it("every packed effect has native CS2 provenance and matching local bytes", () 
       outputSha256: clip.outputSha256,
       manifest: effects.manifest,
     });
+  }
+  const c4Names = ["bomb-draw", ...Array.from({ length: 7 }, (_, i) => `bomb-key-${i + 1}`)];
+  for (const name of c4Names) {
+    const clip = manifest.clips.find((entry: { name: string }) => entry.name === name);
+    const file = name === "bomb-draw" ? "c4_draw" : `key_press${name.at(-1)}`;
+    expect(clip).toMatchObject({
+      sourcePack: "Valve historical CS:GO C4 recordings",
+      repository: "https://github.com/sourcesounds/csgo",
+      commit: "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      source: `sound/weapons/c4/${file}.wav`,
+      url: `https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/${file}.wav`,
+    });
+    expect(clip.resourceSha256).toMatch(/^[a-f0-9]{64}$/);
+    sources.set(`/audio/source/${name}.ogg`, clip.outputSha256);
   }
   expect(bank.clips).toHaveLength(sources.size);
   for (const clip of bank.clips) {

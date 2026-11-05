@@ -507,7 +507,8 @@ export function endRound(
         ? "halftime"
         : "post";
   state.bomb.defuser = null;
-  state.bomb.progress = state.bomb.plantProgress = 0;
+  state.bomb.progress = 0;
+  if (state.phase !== "post") state.bomb.plantProgress = 0;
 }
 export function rayBox(origin: Vec3, direction: Vec3, min: Vec3, max: Vec3): number {
   let near = 0,
@@ -890,31 +891,35 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
     qw: ball.quaternion.w,
   });
   stepUtility(match, STEP, events);
-  if (state.phase !== "live") return events;
-  state.elapsed += STEP;
-  state.remaining = Math.max(0, state.remaining - STEP);
   const alive = (team: Team) =>
     [...match.players.values()].filter((player) => player.team === team && player.health > 0);
+  const postRound = state.phase === "post";
+  if (state.phase !== "live" && !postRound) return events;
+  if (!postRound) {
+    state.elapsed += STEP;
+    state.remaining = Math.max(0, state.remaining - STEP);
+    const bomb = state.bomb;
+    if (!alive("ct").length) {
+      endRound(match, "t", "elimination");
+      return events;
+    }
+    if (!alive("t").length && !bomb.planted) {
+      endRound(match, "ct", "elimination");
+      return events;
+    }
+    if (!bomb.planted && !state.remaining) {
+      endRound(match, "ct", "timeout");
+      return events;
+    }
+  }
   const bomb = state.bomb;
-  if (!alive("ct").length) {
-    endRound(match, "t", "elimination");
-    return events;
-  }
-  if (!alive("t").length && !bomb.planted) {
-    endRound(match, "ct", "elimination");
-    return events;
-  }
-  if (!bomb.planted && !state.remaining) {
-    endRound(match, "ct", "timeout");
-    return events;
-  }
   if (!bomb.planted) {
     if (!bomb.carrier)
       bomb.carrier =
         alive("t").find((p) => Math.hypot(p.x - bomb.x, p.y - bomb.y, p.z - bomb.z) < 1.5)?.id ??
         null;
     const carrier = bomb.carrier ? match.players.get(bomb.carrier) : undefined;
-    if (carrier) {
+    if (carrier && carrier.health > 0 && carrier.team === "t") {
       Object.assign(bomb, { x: carrier.x, y: carrier.y, z: carrier.z });
       const input = inputs.get(carrier.id);
       if (input?.dropBomb) {
@@ -951,11 +956,11 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
         bomb.carrier = null;
         bomb.plantProgress = 0;
         bomb.timer = 40;
-        carrier.money = addMoney(carrier.money, rules.plantReward, state.mode);
+        if (!postRound) carrier.money = addMoney(carrier.money, rules.plantReward, state.mode);
         events.push({ kind: "plant", actor: carrier.id });
       }
     }
-  } else {
+  } else if (!postRound) {
     bomb.timer = Math.max(0, bomb.timer - STEP);
     const eligible = alive("ct").filter(
       (player) =>

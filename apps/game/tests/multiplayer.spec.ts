@@ -297,3 +297,73 @@ test("a transport interruption recovers the same player and resumes acknowledged
   await page.waitForFunction(() => window.__game.network!.connection.local!.ack > 0);
   expect(errors).toEqual([]);
 });
+
+test("multiplayer C4 equips with 5 and plants after the result with synchronized audio", async ({
+  browser,
+  request,
+}) => {
+  test.setTimeout(120_000);
+  const ct = await browser.newContext();
+  const t = await browser.newContext();
+  const a = await ct.newPage();
+  const b = await t.newPage();
+  const room = `c4-audio-${Date.now()}`;
+  const errors: string[] = [];
+  for (const page of [a, b]) page.on("pageerror", (error) => errors.push(error.message));
+  try {
+    await join(a, room, "ct");
+    await join(b, room, "t");
+    await b.bringToFront();
+    if (!(await b.evaluate(() => window.__game.locked))) await b.locator("#game").click();
+    await b.waitForFunction(() => window.__game.locked);
+    await b.evaluate(() => {
+      const played: string[] = [];
+      const sound = window.__game.soundscape;
+      const play = sound.play.bind(sound);
+      sound.play = (...args) => {
+        const voice = play(...args);
+        if (voice && (args[0] === "bomb-draw" || args[0].startsWith("bomb-key-")))
+          played.push(args[0]);
+        return voice;
+      };
+      Object.assign(window, { c4NetworkCues: played });
+    });
+    await command(request, room, "plant");
+    await b.waitForFunction(
+      () => window.__game.bomb?.carrier === "player" && window.__game.freezeTime === 0,
+    );
+    await expect(b.locator("#bomb-carrier")).toBeVisible();
+    await b.keyboard.press("5");
+    await b.waitForFunction(
+      () =>
+        window.__game.bombSelected &&
+        window.__game.bombView.visible &&
+        window.__game.bombDrawTime === 0,
+    );
+    await command(request, room, "timeout");
+    await b.waitForFunction(() => window.__game.network?.connection.round?.phase === "post");
+    const settled = await b.evaluate(() => ({
+      money: window.__game.money,
+      scores: window.__game.teamScores,
+      ammo: window.__game.ammo,
+    }));
+    await b.mouse.down();
+    await b.waitForFunction(() => window.__game.bomb?.planted, {}, { timeout: 7000 });
+    await b.mouse.up();
+    expect(
+      await b.evaluate(() => ({
+        money: window.__game.money,
+        scores: window.__game.teamScores,
+        ammo: window.__game.ammo,
+      })),
+    ).toEqual(settled);
+    await expect(b.locator("#bomb-carrier")).toBeHidden();
+    expect(
+      await b.evaluate(() => (window as unknown as { c4NetworkCues: string[] }).c4NetworkCues),
+    ).toEqual(["bomb-draw", ...Array.from({ length: 7 }, (_, i) => `bomb-key-${i + 1}`)]);
+    expect(errors).toEqual([]);
+  } finally {
+    await ct.close();
+    await t.close();
+  }
+});

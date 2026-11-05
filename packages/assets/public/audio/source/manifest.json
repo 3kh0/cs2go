@@ -104,7 +104,9 @@
       "event": "C4.PlantSound",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/c4/c4_beep2.vsnd_c",
-      "variants": ["sounds/weapons/c4/c4_beep2.vsnd"],
+      "variants": [
+        "sounds/weapons/c4/c4_beep2.vsnd"
+      ],
       "resourceSha256": "a46f1814fde7d8d535c3a771ec9fa388687d2717d8d790222f6f60089ab0a4b9",
       "decodedSha256": "c136ca6f2e169747cdc811c40eb4e0777bce2196c151a0cd74ea5025286c20e1",
       "outputSha256": "211264338b0e0d26f16d1ad0e98ab58125ece817cc93f547f36c04cb14f6d0aa",
@@ -118,7 +120,9 @@
       "event": "c4.disarmfinish",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/c4/c4_disarmfinish.vsnd_c",
-      "variants": ["sounds/weapons/c4/c4_disarmfinish.vsnd"],
+      "variants": [
+        "sounds/weapons/c4/c4_disarmfinish.vsnd"
+      ],
       "resourceSha256": "fc3b60f89f81e757d4b098354d45f55690596b31847416b0d73c26469d94d9da",
       "decodedSha256": "e74fa507e8d322c42f4ba35e07bba5c05377a16661af5b7eab035b70fff8750b",
       "outputSha256": "64c450fef2cbc291b6d0c602bc09348b6ced700c0b8b95fede5bf16ede93510b",
@@ -132,7 +136,9 @@
       "event": "c4.explode.close",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/c4/c4_explode_close_01.vsnd_c",
-      "variants": ["sounds/weapons/c4/c4_explode_close_01.vsnd"],
+      "variants": [
+        "sounds/weapons/c4/c4_explode_close_01.vsnd"
+      ],
       "resourceSha256": "c9249109195a1b97a198656887cd1523d736b6acbc575db95781d05d3148e5eb",
       "decodedSha256": "4c50ec82b4bf8045a6e3c10b8b9c23a97e06779798ff06c9b2b9a7348039fc18",
       "outputSha256": "a4a992eeba48737f5cc38aacca6a9d43bee4d586fdffef36203be2c97d482ed1",
@@ -146,7 +152,9 @@
       "event": "c4.plant",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/c4/c4_plant.vsnd_c",
-      "variants": ["sounds/weapons/c4/c4_plant.vsnd"],
+      "variants": [
+        "sounds/weapons/c4/c4_plant.vsnd"
+      ],
       "resourceSha256": "862917445e116e587ff2faa31dfa51581f296418ce0ab58c3e40ae1346a32b31",
       "decodedSha256": "03eca36e8e6c61e3145a0118c1b38f0601eae8829aebe1e9f8fc95196197f21b",
       "outputSha256": "75afdb43caf0f83ff781be69bfc75deaa2b20b7bd88f6a9a6c5d4b16d75e98ba",
@@ -160,7 +168,9 @@
       "event": "ButterflyKnife.draw01",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/bknife/bknife_draw01.vsnd_c",
-      "variants": ["sounds/weapons/bknife/bknife_draw01.vsnd"],
+      "variants": [
+        "sounds/weapons/bknife/bknife_draw01.vsnd"
+      ],
       "resourceSha256": "2ac6dc5ac8e3b7bf473cee7f5b31421d684f58af63b2d5ae130929e8920813f9",
       "decodedSha256": "30e39d5227ab83456aafcfb3e170f72cb11840ebc5abbdd728433ff181c1c156",
       "outputSha256": "132d00acecbee7fbc44e5f46e37a3fd1791a7f29d1d5e682a226f82988bb2365",
@@ -174,7 +184,9 @@
       "event": "ButterflyKnife.look01_a",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/bknife/bknife_look01_a.vsnd_c",
-      "variants": ["sounds/weapons/bknife/bknife_look01_a.vsnd"],
+      "variants": [
+        "sounds/weapons/bknife/bknife_look01_a.vsnd"
+      ],
       "resourceSha256": "75d10e0944d52cbee46a931231f282f28d057ba9e74779fece530b208f5025cc",
       "decodedSha256": "63fe7f3cde6fab5f94aadf2bd3e75ba372abb0444f1a8a69cc9f71e7495afb90",
       "outputSha256": "ec464d2822846c7cee952b4ee0b1f3da3687991211db093ef8a1305fd30fc3a3",
@@ -188,7 +200,9 @@
       "event": "ButterflyKnife.look01_b",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/bknife/bknife_look01_b.vsnd_c",
-      "variants": ["sounds/weapons/bknife/bknife_look01_b.vsnd"],
+      "variants": [
+        "sounds/weapons/bknife/bknife_look01_b.vsnd"
+      ],
       "resourceSha256": "c89550e815fe2ff382858308f0c380c72959fa69ea7935292670d3479cf9870b",
       "decodedSha256": "0a475f32b3f9fd91d737038d328917de7ae10028d44bf28eeb399a0124b643b9",
       "outputSha256": "362a3652b56e51a4e62a0c5cae1bdd29fd3af35e86219a1a31febc4cdb4f65ee",
@@ -202,7 +216,9 @@
       "event": "ButterflyKnife.look02_a",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/bknife/bknife_look02_a.vsnd_c",
-      "variants": ["sounds/weapons/bknife/bknife_look02_a.vsnd"],
+      "variants": [
+        "sounds/weapons/bknife/bknife_look02_a.vsnd"
+      ],
       "resourceSha256": "7d93c087e5c5b84a77efdcadc163a51443f635ed52573fc12ff5739a4cdad35c",
       "decodedSha256": "51cee4ac4e11d33e4a0d06039b5bb9a629a33a0cd306d4a2368260f4a2a0d2f6",
       "outputSha256": "a83dc1f999ae03b56747c13e3e97b039a51db038f5e138fa5ee20a1a169c8c85",
@@ -216,7 +232,9 @@
       "event": "ButterflyKnife.look02_b",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/bknife/bknife_look02_b.vsnd_c",
-      "variants": ["sounds/weapons/bknife/bknife_look02_b.vsnd"],
+      "variants": [
+        "sounds/weapons/bknife/bknife_look02_b.vsnd"
+      ],
       "resourceSha256": "a7c388fd354f5e52c020f111c4235ee5951190ef6def488f1bd8f227eb70bbe4",
       "decodedSha256": "e5223c48d420a55cfd5abcb873af231455e1c7b633e728579749725cee099ba0",
       "outputSha256": "e2753f542f5a37377fa11d760c0ea9e3fb8878310d16e2bc4959edf1466b41f4",
@@ -230,7 +248,9 @@
       "event": "ButterflyKnife.look03_a",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/bknife/bknife_look03_a.vsnd_c",
-      "variants": ["sounds/weapons/bknife/bknife_look03_a.vsnd"],
+      "variants": [
+        "sounds/weapons/bknife/bknife_look03_a.vsnd"
+      ],
       "resourceSha256": "e67fcf2728801ca7ef36d121dee39dc393d23a167f267b02c87b1d10c940e435",
       "decodedSha256": "b01f50fe05952133be5b93a5d1ed3e1b9d1c0e86a68e42f7870ecfc1305b3b5d",
       "outputSha256": "67a2221eead12a94fda8a8b476eb4c7aa9b12d9cb1a49696aa7d3aaef88c5dd6",
@@ -244,7 +264,9 @@
       "event": "ButterflyKnife.look03_b",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/bknife/bknife_look03_b.vsnd_c",
-      "variants": ["sounds/weapons/bknife/bknife_look03_b.vsnd"],
+      "variants": [
+        "sounds/weapons/bknife/bknife_look03_b.vsnd"
+      ],
       "resourceSha256": "afac6f8bcb57fc3e560dd1322b23a266c7adb4a88c7807df5eb1d5adee066268",
       "decodedSha256": "b2f5226df4ba056192991109c2a19f040bce706a87aab5e5b86aed65a9cef1c8",
       "outputSha256": "be866afabe9f984af28e6d6f743f6ecd2e63d6c1a08940e1097dfa2cc1bdf80f",
@@ -258,7 +280,9 @@
       "event": "UIPanorama.buymenu_purchase",
       "eventFile": "soundevents/game_sounds_ui.vsndevts_c",
       "resource": "sounds/ui/panorama/radial_menu_buy_03.vsnd_c",
-      "variants": ["sounds/ui/panorama/radial_menu_buy_03.vsnd"],
+      "variants": [
+        "sounds/ui/panorama/radial_menu_buy_03.vsnd"
+      ],
       "resourceSha256": "0a24b6c647f3853578a80c37dd3e66c925dd2653c6c7241c4a04304603a9429b",
       "decodedSha256": "2d3fc480c9efefdb44ffe6a789689de3060a41e1b021e50164c0dbf01fcfa0c5",
       "outputSha256": "809f02af5ba1ce87954edcba4ab4966e78346527a470323261a1d41b9bf42cd7",
@@ -272,7 +296,9 @@
       "event": "UIPanorama.generic_button_press",
       "eventFile": "soundevents/game_sounds_ui.vsndevts_c",
       "resource": "sounds/ui/panorama/generic_press_01.vsnd_c",
-      "variants": ["sounds/ui/panorama/generic_press_01.vsnd"],
+      "variants": [
+        "sounds/ui/panorama/generic_press_01.vsnd"
+      ],
       "resourceSha256": "9fcfaa054253a2560c966085631c63a7efd5f73d26b74ef7cf7ae09c9a91759b",
       "decodedSha256": "9f052b5df9eba2cc3deb72ff3859e1d7576ea6b12302dbcc130913f775efca46",
       "outputSha256": "c4694bb5e1d2d425cba1411af061796868412ca9f85c8d3348828e24995c6657",
@@ -523,7 +549,9 @@
       "event": "UIPanorama.generic_button_rollover",
       "eventFile": "soundevents/game_sounds_ui.vsndevts_c",
       "resource": "sounds/ui/panorama/generic_scroll_01.vsnd_c",
-      "variants": ["sounds/ui/panorama/generic_scroll_01.vsnd"],
+      "variants": [
+        "sounds/ui/panorama/generic_scroll_01.vsnd"
+      ],
       "resourceSha256": "257b3bdf8729490bb3f85bedf29d6cc9ee2654b003d149bae4b87bb5ce17d32c",
       "decodedSha256": "93acd486a127c955b03bafa41d58e64202ed01281c23d0eda2a25f217b9004df",
       "outputSha256": "e39c39076c6a02c11077ee0c6e99e0b1ff0d2537297d6c29bacd7fad7fb8636c",
@@ -537,7 +565,9 @@
       "event": "Default.WalkJump",
       "eventFile": "soundevents/game_sounds_player.vsndevts_c",
       "resource": "sounds/player/footsteps/jump_launch_01.vsnd_c",
-      "variants": ["sounds/player/footsteps/jump_launch_01.vsnd"],
+      "variants": [
+        "sounds/player/footsteps/jump_launch_01.vsnd"
+      ],
       "resourceSha256": "79d9d60b43ae215b933f7c3ebfff030fb247a71581f71b9f712838f77a3cc42b",
       "decodedSha256": "218e991b718088fc4b85da79442deff7e363ed771e5438bfc1b4ca342e3d3301",
       "outputSha256": "c04ab3554c8ae2106497f3a770d338fc0ee329c149f85da4d7b9641d6994ea43",
@@ -678,7 +708,9 @@
       "event": "Land.Thud",
       "eventFile": "soundevents/game_sounds_footsteps.vsndevts_c",
       "resource": "sounds/player/footsteps/land_concrete_01.vsnd_c",
-      "variants": ["sounds/player/footsteps/land_concrete_01.vsnd"],
+      "variants": [
+        "sounds/player/footsteps/land_concrete_01.vsnd"
+      ],
       "resourceSha256": "d36788a636eedfa95b144e4ddbbccb415d0bf856364fdd51c64c2c67ae09c4f9",
       "decodedSha256": "cd9b5ba7b62eccde0a9f09a1fb4fc1f6a8f510dd786dae8d8247a503a677bec1",
       "outputSha256": "233240eb036fc19e649ecee48c86ac3b8375fc07276a020fa692d05d7f8f08cc",
@@ -692,7 +724,9 @@
       "event": "UIPanorama.popup_accept_match_confirmed_casual",
       "eventFile": "soundevents/game_sounds_ui.vsndevts_c",
       "resource": "sounds/ui/mm_success_lets_roll.vsnd_c",
-      "variants": ["sounds/ui/mm_success_lets_roll.vsnd"],
+      "variants": [
+        "sounds/ui/mm_success_lets_roll.vsnd"
+      ],
       "resourceSha256": "897db608f11f2707f7d0eda62c9bd6fc896cfa40d3a6e8fb33fe273c7aa18268",
       "decodedSha256": "359e3fc8dd141cd3eb6cfd3ee0c7b28c66331f8162978e86a650a197f8dd5930",
       "outputSha256": "a6c040d119306771fb402ea5f959857fa83a2a63b91aa7186d6a7429c55d166d",
@@ -706,7 +740,9 @@
       "event": "Weapon_Revolver.Prepare",
       "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
       "resource": "sounds/weapons/revolver/revolver_prepare.vsnd_c",
-      "variants": ["sounds/weapons/revolver/revolver_prepare.vsnd"],
+      "variants": [
+        "sounds/weapons/revolver/revolver_prepare.vsnd"
+      ],
       "resourceSha256": "19f17697f008d0a839c04c31c160b3e7ffc3ab20d25cfbc4801541377a070653",
       "decodedSha256": "90bb0883e50c39d003b18e60badbac4c9b0094f8982038fc209506f6c24ff644",
       "outputSha256": "8c3d41ecd699eda2562886e874c24003ebeb806d4c17c8e574af967fa2e688b7",
@@ -1184,6 +1220,102 @@
       "bytes": 1035,
       "sourcePack": "Valve CS2 UI",
       "manifest": "67499503218971311"
+    },
+    {
+      "name": "bomb-draw",
+      "source": "sound/weapons/c4/c4_draw.wav",
+      "sourcePack": "Valve historical CS:GO C4 recordings",
+      "repository": "https://github.com/sourcesounds/csgo",
+      "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      "url": "https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/c4_draw.wav",
+      "resourceSha256": "66ea68f782601cf6979fb37f465b79f7d91dab9aa809d51f3fb12157d5f7bf60",
+      "outputSha256": "b2df256966c342c800829dfa17d159638d7bb9834487d3395e197fea4ec43a49",
+      "bytes": 6399,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps"
+    },
+    {
+      "name": "bomb-key-1",
+      "source": "sound/weapons/c4/key_press1.wav",
+      "sourcePack": "Valve historical CS:GO C4 recordings",
+      "repository": "https://github.com/sourcesounds/csgo",
+      "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      "url": "https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/key_press1.wav",
+      "resourceSha256": "f6e5258fff04ba055f1a11b19db239d4bd8ca07c9777bcba59dee4b2172ed662",
+      "outputSha256": "0be7e2bd7c5d352b0ed357ffa2654519fbb805d9567c0e1371d69aa0502a005b",
+      "bytes": 3614,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps"
+    },
+    {
+      "name": "bomb-key-2",
+      "source": "sound/weapons/c4/key_press2.wav",
+      "sourcePack": "Valve historical CS:GO C4 recordings",
+      "repository": "https://github.com/sourcesounds/csgo",
+      "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      "url": "https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/key_press2.wav",
+      "resourceSha256": "209031d483e962d75e2a155fa09cee0919c3211901f7e7558ea060864fc6dbd8",
+      "outputSha256": "af4c43814ac04f77425ab0febd4e3ac169b4d24d5897e9e3e6262b7c07425c07",
+      "bytes": 3807,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps"
+    },
+    {
+      "name": "bomb-key-3",
+      "source": "sound/weapons/c4/key_press3.wav",
+      "sourcePack": "Valve historical CS:GO C4 recordings",
+      "repository": "https://github.com/sourcesounds/csgo",
+      "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      "url": "https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/key_press3.wav",
+      "resourceSha256": "b669b4b0c77b6ec826fe3d8643d2719df8395d752b2417d8c09097d5ad4c8103",
+      "outputSha256": "97211bdf928e8528cf00e7c52624ccaa80f30a85dd505334a92215b4983e4778",
+      "bytes": 4005,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps"
+    },
+    {
+      "name": "bomb-key-4",
+      "source": "sound/weapons/c4/key_press4.wav",
+      "sourcePack": "Valve historical CS:GO C4 recordings",
+      "repository": "https://github.com/sourcesounds/csgo",
+      "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      "url": "https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/key_press4.wav",
+      "resourceSha256": "f51e647a1e65a647bdfd71e35b2c3107c7931effadb53f44c20658bc6bb99fee",
+      "outputSha256": "88245d64fcf0fcba9af964429ba3a6bc757eec3219be4b27d168347dcff7ef32",
+      "bytes": 5067,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps"
+    },
+    {
+      "name": "bomb-key-5",
+      "source": "sound/weapons/c4/key_press5.wav",
+      "sourcePack": "Valve historical CS:GO C4 recordings",
+      "repository": "https://github.com/sourcesounds/csgo",
+      "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      "url": "https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/key_press5.wav",
+      "resourceSha256": "d14cba2a82b3542bf8dc67eba2d90599ff571c45b1de1a4cd17c4be1266d8e19",
+      "outputSha256": "513cdcb79ac445b45683e7df7551c3af608c771520d661f7f06c4b42ef143835",
+      "bytes": 4813,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps"
+    },
+    {
+      "name": "bomb-key-6",
+      "source": "sound/weapons/c4/key_press6.wav",
+      "sourcePack": "Valve historical CS:GO C4 recordings",
+      "repository": "https://github.com/sourcesounds/csgo",
+      "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      "url": "https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/key_press6.wav",
+      "resourceSha256": "c2271c943c5a63a57fbf823ae12c233803395e351c17685b70dcf470d562f1c9",
+      "outputSha256": "d62503b677c25353ddc4c35c32ec22029d572329bf3540de442f243414971654",
+      "bytes": 5249,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps"
+    },
+    {
+      "name": "bomb-key-7",
+      "source": "sound/weapons/c4/key_press7.wav",
+      "sourcePack": "Valve historical CS:GO C4 recordings",
+      "repository": "https://github.com/sourcesounds/csgo",
+      "commit": "08f1bd6835d4f510d2ccaedeab6bb9f637b388ab",
+      "url": "https://raw.githubusercontent.com/sourcesounds/csgo/08f1bd6835d4f510d2ccaedeab6bb9f637b388ab/sound/weapons/c4/key_press7.wav",
+      "resourceSha256": "a8a3c4ae8f315079f169576f9c5bfcdf5e4dccf9f470e05ba4b088b80151e91f",
+      "outputSha256": "9132e6afcce2bc7add331d85a2376c01912f9b8637294cf2aad8bbbe63252185",
+      "bytes": 3886,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps"
     }
   ],
   "musicSource": "../cs2-music-source.json",

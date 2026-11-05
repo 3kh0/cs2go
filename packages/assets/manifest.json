@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "58af290f2d2a744190f4ee9e96fb88e709037a3975271c9481d73f3934f5931c",
+  "release": "ec3b56a79f45667a4dd095ce5fb61ce8b2738b99141800dc3faa69ed239bc50f",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -1908,10 +1908,98 @@
       },
       "object": "objects/26c533330f9f75c39c54d8b2b5e8d2b04229b0f9c1219144ee09189dbef8936b.ogg.br"
     },
+    "audio/source/bomb-draw.ogg": {
+      "sha256": "b2df256966c342c800829dfa17d159638d7bb9834487d3395e197fea4ec43a49",
+      "bytes": 6399,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "e3f8c585721918eead976b473d0ac8b01dda9e589a9dd2d211f79e00f3477adc",
+        "bytes": 6378
+      },
+      "object": "objects/e3f8c585721918eead976b473d0ac8b01dda9e589a9dd2d211f79e00f3477adc.ogg.br"
+    },
     "audio/source/bomb-explode.ogg": {
       "sha256": "a4a992eeba48737f5cc38aacca6a9d43bee4d586fdffef36203be2c97d482ed1",
       "bytes": 64870,
       "object": "objects/a4a992eeba48737f5cc38aacca6a9d43bee4d586fdffef36203be2c97d482ed1.ogg"
+    },
+    "audio/source/bomb-key-1.ogg": {
+      "sha256": "0be7e2bd7c5d352b0ed357ffa2654519fbb805d9567c0e1371d69aa0502a005b",
+      "bytes": 3614,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "0afd31df5db20d161abc55501009b37257e9f9275d738a888288567d31777001",
+        "bytes": 3363
+      },
+      "object": "objects/0afd31df5db20d161abc55501009b37257e9f9275d738a888288567d31777001.ogg.br"
+    },
+    "audio/source/bomb-key-2.ogg": {
+      "sha256": "af4c43814ac04f77425ab0febd4e3ac169b4d24d5897e9e3e6262b7c07425c07",
+      "bytes": 3807,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "189921d8c4df9126664ca7d3536671890dcd4503e9a074b7c7092e3b5a4868c3",
+        "bytes": 3590
+      },
+      "object": "objects/189921d8c4df9126664ca7d3536671890dcd4503e9a074b7c7092e3b5a4868c3.ogg.br"
+    },
+    "audio/source/bomb-key-3.ogg": {
+      "sha256": "97211bdf928e8528cf00e7c52624ccaa80f30a85dd505334a92215b4983e4778",
+      "bytes": 4005,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "c0725f426f4fdae9486035b448b9f805b648bb04aaa9eb9e698aa6582bac09ce",
+        "bytes": 3932
+      },
+      "object": "objects/c0725f426f4fdae9486035b448b9f805b648bb04aaa9eb9e698aa6582bac09ce.ogg.br"
+    },
+    "audio/source/bomb-key-4.ogg": {
+      "sha256": "88245d64fcf0fcba9af964429ba3a6bc757eec3219be4b27d168347dcff7ef32",
+      "bytes": 5067,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "0d5c121c833f4c71b917dae94684fa8d4e9a1ad7c2d36a4f1e8839172155947e",
+        "bytes": 4835
+      },
+      "object": "objects/0d5c121c833f4c71b917dae94684fa8d4e9a1ad7c2d36a4f1e8839172155947e.ogg.br"
+    },
+    "audio/source/bomb-key-5.ogg": {
+      "sha256": "513cdcb79ac445b45683e7df7551c3af608c771520d661f7f06c4b42ef143835",
+      "bytes": 4813,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "3aea2bdc0751d56f189082403bd4f8e1da4c913aff352cb0cbbe3cb29e2f38a4",
+        "bytes": 4535
+      },
+      "object": "objects/3aea2bdc0751d56f189082403bd4f8e1da4c913aff352cb0cbbe3cb29e2f38a4.ogg.br"
+    },
+    "audio/source/bomb-key-6.ogg": {
+      "sha256": "d62503b677c25353ddc4c35c32ec22029d572329bf3540de442f243414971654",
+      "bytes": 5249,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f0e1ac93c376eb1f1d824204658fece6ebddd2575794ef9d6d14f4a173d2ee5d",
+        "bytes": 5228
+      },
+      "object": "objects/f0e1ac93c376eb1f1d824204658fece6ebddd2575794ef9d6d14f4a173d2ee5d.ogg.br"
+    },
+    "audio/source/bomb-key-7.ogg": {
+      "sha256": "9132e6afcce2bc7add331d85a2376c01912f9b8637294cf2aad8bbbe63252185",
+      "bytes": 3886,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "a01bd9854bfb4ace91dcc7c0cf4fdac854cc79943d8555d7381e42814e4b8e2f",
+        "bytes": 3758
+      },
+      "object": "objects/a01bd9854bfb4ace91dcc7c0cf4fdac854cc79943d8555d7381e42814e4b8e2f.ogg.br"
     },
     "audio/source/bomb-plant.ogg": {
       "sha256": "75afdb43caf0f83ff781be69bfc75deaa2b20b7bd88f6a9a6c5d4b16d75e98ba",
@@ -2244,15 +2332,15 @@
       "object": "objects/7c234bb447729ee543f943140f6311cb05672f9649f784f32c96452ea0e6b22a.ogg.br"
     },
     "audio/source/manifest.json": {
-      "sha256": "c7b9553e98597a9193033c1e70c462c1d9b0e4a81330905e7f9d48224b4e8ae5",
-      "bytes": 58080,
+      "sha256": "9ec3c9f36b5225ce142bdae5b92b523f9b385854475b074fd466069261e6f24e",
+      "bytes": 63713,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "d4bf6704702aad7ad1efb4fc4da7ce6b81b142382f7a11b50bd8f42c1668df07",
-        "bytes": 9408
+        "sha256": "33ed36cc8e722c098d2b0ab38687ea4c639e52bd186173c8eef83a2ee22317a5",
+        "bytes": 10199
       },
-      "object": "objects/d4bf6704702aad7ad1efb4fc4da7ce6b81b142382f7a11b50bd8f42c1668df07.json.br"
+      "object": "objects/33ed36cc8e722c098d2b0ab38687ea4c639e52bd186173c8eef83a2ee22317a5.json.br"
     },
     "audio/source/music-bomb-countdown.ogg": {
       "sha256": "a0692cb1eeb02e1748003b32d82f3fb0d7abb927c42176943b98055d85baaa46",
@@ -2695,26 +2783,26 @@
       "object": "objects/ee9652bea41be4db9f7d1f273433a2fdaa31422dde7ebdc65f04af25401a9e21.ogg.br"
     },
     "audio/startup-source.json": {
-      "sha256": "4831a685827ff385c9ec2f483e1a49f14ad108d0347a29b0d2d9eaa0edc88f98",
-      "bytes": 56494,
+      "sha256": "6f1e0ca8af4bcd2c3e248c7e9ae08901de23e425aa351ceb0098cd26bb3ed96c",
+      "bytes": 58070,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "7a98eb6e02698a4f84d0c4d3b49f81021a827c35b513284950618c0de2d4c1ad",
-        "bytes": 13752
+        "sha256": "14187f2d517edd0590fed44fd99f1732ada508eafcaed94cdaa89f3969568620",
+        "bytes": 14118
       },
-      "object": "objects/7a98eb6e02698a4f84d0c4d3b49f81021a827c35b513284950618c0de2d4c1ad.json.br"
+      "object": "objects/14187f2d517edd0590fed44fd99f1732ada508eafcaed94cdaa89f3969568620.json.br"
     },
     "audio/startup.bin": {
-      "sha256": "466a89d629019e4b1d6fdc214ee8cc100da53b074f65460bd2e676050debc742",
-      "bytes": 3234590,
+      "sha256": "e3ffa1244c314ff5dc38bc43518d274f66dcb8a2761781d15b5401121cbfdffe",
+      "bytes": 3272597,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "76874e95d5bd15a735688027f781d819f67fbf3ad22e52f73b34da6fa9cae037",
-        "bytes": 2847588
+        "sha256": "0cbb6a622c8b6a4b6ef072abdc03a3f8eac10a3558948cddc22a5d68f077ae36",
+        "bytes": 2882361
       },
-      "object": "objects/76874e95d5bd15a735688027f781d819f67fbf3ad22e52f73b34da6fa9cae037.bin.br"
+      "object": "objects/0cbb6a622c8b6a4b6ef072abdc03a3f8eac10a3558948cddc22a5d68f077ae36.bin.br"
     },
     "audio/suppressor-1-silencerscrew1.ogg": {
       "sha256": "df6fd216b22f0869285152774ba9150b772eda491c4ac7e0ddc4e1c1f511a771",

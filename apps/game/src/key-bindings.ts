@@ -19,6 +19,7 @@ export const bindingActions = [
   ["Digit2", "Sidearm"],
   ["Digit3", "Knife"],
   ["Digit4", "Cycle grenades"],
+  ["Digit5", "C4 explosive"],
   ["KeyG", "Drop weapon"],
 ] as const;
 export type KeyBindings = Record<string, string>;
@@ -35,7 +36,7 @@ export function readBindings(value: unknown): KeyBindings {
   const candidate: KeyBindings = { ...(value as KeyBindings) };
   // Migrate older saves without resetting established bindings when a new
   // action's default key is already used by the player.
-  for (const action of ["Digit4", "KeyG", "KeyT", "KeyY"]) {
+  for (const action of ["Digit4", "KeyG", "KeyT", "KeyY", "Digit5"]) {
     if (Object.hasOwn(candidate, action)) continue;
     const used = new Set(Object.values(candidate));
     candidate[action] = [

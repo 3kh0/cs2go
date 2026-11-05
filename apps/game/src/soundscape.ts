@@ -1,3 +1,4 @@
+import { bombPlantCues, type BombPlantCue } from "./bomb-presentation";
 import { assetFetch, assetUrl } from "./asset-url";
 import { utilityAudio, type UtilityCue } from "./utility-audio";
 import { loadAudioClip } from "./audio-bank";
@@ -8,6 +9,7 @@ import { fetchGzipped } from "./gltf";
 import uiCues from "./data/ui-cues.json";
 import type { UiInteraction } from "./ui-audio";
 export type Cue =
+  | BombPlantCue
   | UtilityCue
   | `ui-${UiInteraction}`
   | "revolver-prepare"
@@ -123,6 +125,14 @@ export class Soundscape {
       }
     }
     this.music.volume = (master * music) / 10000;
+  }
+  playBombPlant(previous: number, elapsed: number, position?: Vector3) {
+    if (elapsed <= 0 || elapsed <= previous) return;
+    if (position && previous === 0) this.play("bomb-draw", false, "concrete", position);
+    for (const { time, cue } of bombPlantCues) {
+      if ((time === 0 ? previous === 0 : previous < time) && elapsed >= time)
+        this.play(cue, false, "concrete", position);
+    }
   }
   playUi(kind: UiInteraction) {
     if (!this.context || !this.volume || !this.effectsVolume) return;

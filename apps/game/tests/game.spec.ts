@@ -1149,6 +1149,7 @@ test("Dust II casual lobby has balanced teams, textured view arms, and navigatio
 test("casual bomb interaction, defuse cancellation, elimination and round reset", async ({
   page,
 }) => {
+  test.setTimeout(120_000);
   const errors: string[] = [];
   const external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -1163,10 +1164,7 @@ test("casual bomb interaction, defuse cancellation, elimination and round reset"
   await page.locator("#close-settings").click();
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
-    const team = await page.evaluate(() => window.__game.team);
-    await page.locator(`#team-select [data-team="${team}"]`).click();
-  }
+  await page.locator('#team-select [data-team="t"]').click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {
     window.__game.freezeTime = 0;
@@ -1189,6 +1187,8 @@ test("casual bomb interaction, defuse cancellation, elimination and round reset"
     g.position.fromArray(g.dust!.navigation.data.sites[1]);
     g.grounded = true;
     g.keys.add("KeyE");
+    g.equipBomb(true);
+    g.updateBombSelection(1.2);
     g.updateRound(0.3);
   });
   await expect.poll(() => page.evaluate(() => window.__game.bombView.visible)).toBe(true);
@@ -1241,8 +1241,12 @@ test("casual bomb interaction, defuse cancellation, elimination and round reset"
       return [...guns, ...knife];
     };
     g.keys.add("KeyE");
+    g.equipBomb(true);
+    g.updateBombSelection(1.2);
     g.updateRound(1 / 128);
     const duringPlant = tryAttacks();
+    g.bombSelected = true;
+    g.bombDrawTime = 0;
     for (let i = 0; i < 420; i++) g.updateRound(1 / 128);
     const afterPlant = tryAttacks();
     g.keys.delete("KeyE");

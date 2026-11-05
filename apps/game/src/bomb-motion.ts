@@ -6,15 +6,19 @@ import { viewHandsTemplate } from "./knife-motion";
 import { armoryReflections } from "./reflections";
 import { updateGloveModel } from "./gloves";
 
-export const PLANT_DURATION = 3.2;
-// The weapon attachment stops changing at frame 89 (30 fps), then holds its
-// lowered pose through 3.8667s. Map visible placement onto the 3.2s game action.
-export const PLANT_ANIMATION_END = 89 / 30;
+import {
+  BOMB_DRAW_DURATION,
+  BOMB_DRAW_CLIP_END,
+  PLANT_DURATION,
+  plantClipTime,
+} from "./bomb-presentation";
+export { PLANT_DURATION, PLANT_ANIMATION_END } from "./bomb-presentation";
 
 /** The supplied meter-scale C4 clip, sampled directly from simulation progress. */
 export class BombPlantModel extends T.Group {
   private mixer?: T.AnimationMixer;
   private action?: T.AnimationAction;
+  private drawAction?: T.AnimationAction;
   protected source?: T.Group;
   protected arms?: T.Group;
   private attachment?: T.Object3D;
@@ -98,17 +102,35 @@ export class BombPlantModel extends T.Group {
     this.action.setLoop(T.LoopOnce, 1).play();
     this.action.clampWhenFinished = true;
     this.action.paused = true;
+    this.drawAction = this.mixer.clipAction(
+      motion.animations.find((clip) => clip.name.endsWith("/draw_c4"))!,
+    );
+    this.drawAction.setLoop(T.LoopOnce, 1).play();
+    this.drawAction.clampWhenFinished = true;
+    this.drawAction.paused = true;
+    this.drawAction.enabled = false;
     this.add(this.arms, this.source);
     registerActorLighting(this);
     this.sample(0);
   }
 
   sample(progress: number) {
-    this.sampleTime(T.MathUtils.clamp(progress, 0, 1) * PLANT_ANIMATION_END);
+    this.sampleTime(plantClipTime(T.MathUtils.clamp(progress, 0, 1) * PLANT_DURATION));
   }
 
-  protected sampleTime(seconds: number) {
+  draw(elapsed: number) {
+    if (!this.drawAction) return;
+    this.drawAction.time = Math.min(
+      this.drawAction.getClip().duration,
+      T.MathUtils.clamp(elapsed / BOMB_DRAW_DURATION, 0, 1) * BOMB_DRAW_CLIP_END,
+    );
+    this.sampleTime(0, true);
+  }
+
+  protected sampleTime(seconds: number, drawing = false) {
     if (!this.action || !this.source || !this.arms) return;
+    this.action.enabled = !drawing;
+    if (this.drawAction) this.drawAction.enabled = drawing;
     this.action.time = T.MathUtils.clamp(seconds, 0, this.action.getClip().duration);
     this.mixer!.update(0);
     // Keep the motion skeleton in its original world space while transferring.

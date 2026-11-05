@@ -136,3 +136,138 @@ test("CT defuse tools and connected wires reflect kit ownership and cancel with 
   );
   expect(errors).toEqual([]);
 });
+
+test("C4 equips with 5 at native draw speed, plants after rounds, and shows carrier/alert HUD", async ({
+  page,
+}) => {
+  test.setTimeout(120_000);
+  const errors: string[] = [];
+  const external: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("request", (request) => {
+    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+  });
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await page.locator("#home-play").click();
+  await page.locator("#play").click();
+  await page.locator('#team-select [data-team="t"]').click();
+  await page.waitForFunction(() => window.__game.locked);
+  await page.evaluate(() => {
+    const g = window.__game;
+    g.simulate = () => {};
+    g.freezeTime = 0;
+    g.bomb!.carrier = "player";
+    g.position.fromArray(g.dust!.navigation.data.sites[1]);
+    g.velocity.x = g.velocity.z = 0;
+    g.grounded = true;
+    g.bots.forEach((bot, i) => bot.group.position.set(200 + i, 500, 200));
+    const played: { cue: string; audible: boolean }[] = [];
+    const play = g.soundscape.play.bind(g.soundscape);
+    g.soundscape.play = (...args) => {
+      const voice = play(...args);
+      if (args[0] === "bomb-draw" || args[0].startsWith("bomb-key-")) {
+        const samples = voice?.buffer?.getChannelData(0);
+        played.push({ cue: args[0], audible: !!samples?.some((value) => Math.abs(value) > 0.01) });
+      }
+      return voice;
+    };
+    Object.assign(window, { bombAudio: played });
+    g.updateUI();
+  });
+  await expect(page.getByRole("img", { name: "Carrying the bomb", exact: true })).toBeVisible();
+  const icon = await page.locator("#bomb-carrier").boundingBox();
+  const radar = await page.locator("#radar").boundingBox();
+  expect(icon!.y).toBeGreaterThanOrEqual(radar!.y + radar!.height);
+  await page.keyboard.press("5");
+  await page.waitForFunction(() => window.__game.bombSelected && window.__game.bombView.visible);
+  await expect(page.locator('#inventory [aria-label="C4, equipped"]')).toHaveAttribute(
+    "aria-current",
+    "true",
+  );
+  const pose = () =>
+    page.evaluate(() =>
+      window.__game.bombView.getObjectByName("vmrig_wpn")!.matrixWorld.elements.slice(),
+    );
+  const initial = await pose();
+  await page.screenshot({ path: "artifacts/c4-native-draw-start.png" });
+  for (const [name, dt] of [
+    ["middle", 0.6],
+    ["late", 0.5],
+  ] as const) {
+    await page.evaluate((dt) => window.__game.updateRound(dt), dt);
+    await page.waitForTimeout(100);
+    expect(await pose()).not.toEqual(initial);
+    expect(await page.evaluate(() => window.__game.bombDrawTime)).toBeGreaterThan(0);
+    expect(await page.evaluate(() => window.__game.bomb!.plantProgress)).toBe(0);
+    await page.screenshot({ path: `artifacts/c4-native-draw-${name}.png` });
+  }
+  await page.evaluate(() => window.__game.updateRound(0.11));
+  const ammo = await page.evaluate(() => window.__game.ammo);
+  await page.mouse.down();
+  await page.evaluate(() => window.__game.updateRound(0.8));
+  await expect(page.locator("#bomb-action")).toHaveAttribute("data-action", "plant");
+  expect(await page.evaluate(() => window.__game.ammo)).toBe(ammo);
+  await page.screenshot({ path: "artifacts/c4-native-keypad.png" });
+  await page.mouse.up();
+  await page.evaluate(() => window.__game.updateRound(1 / 128));
+  expect(await page.evaluate(() => window.__game.bomb!.plantProgress)).toBe(0);
+  // Start another plant after a settled round; its result and payout stay settled.
+  const settled = await page.evaluate(() => {
+    const g = window.__game;
+    g.endRound("t", "Counter-Terrorists eliminated");
+    return { money: g.money, scores: { ...g.teamScores }, round: g.round };
+  });
+  await page.mouse.down();
+  for (const progress of [0.7, 1.7, 3.05]) {
+    await page.evaluate((progress) => {
+      const g = window.__game;
+      g.updateRound(progress - g.bomb!.plantProgress);
+    }, progress);
+    await page.waitForTimeout(100);
+  }
+  expect(await page.evaluate(() => window.__game.planting)).toBe(true);
+  await page.screenshot({ path: "artifacts/c4-post-round-placement.png" });
+  await page.evaluate(() => window.__game.updateRound(0.16));
+  await page.mouse.up();
+  expect(await page.evaluate(() => window.__game.bomb!.planted)).toBe(true);
+  expect(
+    await page.evaluate(() => ({
+      money: window.__game.money,
+      scores: window.__game.teamScores,
+      round: window.__game.round,
+    })),
+  ).toEqual(settled);
+  await expect(page.locator("#bomb-carrier")).toBeHidden();
+  await expect(page.locator("#hud-alert")).toHaveAttribute("data-type", "bomb-planted");
+  const typography = await page.evaluate(() => {
+    const text = getComputedStyle(document.getElementById("hud-alert-text")!);
+    const detail = getComputedStyle(document.getElementById("hud-alert-detail")!);
+    const label = getComputedStyle(document.getElementById("bomb-action-label")!);
+    const countdown = getComputedStyle(document.getElementById("bomb-action-time")!);
+    return {
+      font: text.fontFamily,
+      detailFont: detail.fontFamily,
+      label: label.fontFamily,
+      countdown: countdown.fontFamily,
+      color: text.color,
+      detailColor: detail.color,
+    };
+  });
+  expect(typography.font).toBe(typography.detailFont);
+  expect(typography.label).toBe(typography.countdown);
+  expect(typography.color).toBe("rgb(255, 92, 78)");
+  expect(typography.detailColor).toBe(typography.color);
+  await page.screenshot({ path: "artifacts/c4-red-planted-alert.png" });
+  const audio = await page.evaluate(
+    () => (window as unknown as { bombAudio: { cue: string; audible: boolean }[] }).bombAudio,
+  );
+  expect(audio.filter((entry) => entry.cue === "bomb-draw")).toHaveLength(1);
+  expect(audio.slice(-7).map((entry) => entry.cue)).toEqual(
+    Array.from({ length: 7 }, (_, i) => `bomb-key-${i + 1}`),
+  );
+  expect(audio.every((entry) => entry.audible)).toBe(true);
+  expect(await page.evaluate(() => window.__game.soundscape.context?.state)).toBe("running");
+  expect(errors).toEqual([]);
+  expect(external).toEqual([]);
+});

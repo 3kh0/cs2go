@@ -289,7 +289,9 @@ export class GameUtility {
     this.select(owned[(owned.indexOf(this.selected!) + 1) % owned.length]);
   }
   select(kind: GrenadeKind) {
-    if (!this.inventory[kind]) return;
+    if (!this.inventory[kind] || this.game.planting) return;
+    this.game.bombSelected = this.game.bombAutoSelected = false;
+    this.game.bombDrawTime = 0;
     this.cancelThrow();
     this.selected = kind;
     this.game.soundscape.play(`utility-${this.selected}-draw`);

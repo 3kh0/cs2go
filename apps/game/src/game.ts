@@ -1,3 +1,4 @@
+import { BOMB_DRAW_DURATION } from "./bomb-presentation";
 import { prepareMatchMedia } from "./match-media";
 import { configureStartupLoading } from "./loading";
 import { rendererDiagnostics } from "./renderer-diagnostics";
@@ -338,6 +339,54 @@ export class Game {
     beepRemaining: number;
     beepPulse: number;
   } | null = null;
+  bombSelected = false;
+  bombAutoSelected = false;
+  bombDrawTime = 0;
+  get carryingBomb() {
+    return (
+      this.active &&
+      this.teamMode &&
+      this.team === "t" &&
+      !this.dead &&
+      this.bomb?.carrier === "player" &&
+      !this.bomb.planted
+    );
+  }
+  equipBomb(automatic = false) {
+    if (!this.carryingBomb || this.bombSelected || this.planting) return;
+    this.utility.cancelThrow();
+    this.utility.selected = null;
+    this.suppressors[this.selected].cancel();
+    this.bombSelected = true;
+    this.bombAutoSelected = automatic;
+    this.bombDrawTime = BOMB_DRAW_DURATION;
+    this.drawTime = 0;
+    this.reload = this.revolverCharge = this.inspectTime = this.knifeTime = this.shotTime = 0;
+    this.knifePending = false;
+    this.burstRemaining = this.rescope = this.boltTime = 0;
+    this.firing = false;
+    this.setScope(0);
+    this.soundscape.play("bomb-draw");
+    this.updateUI();
+  }
+  updateBombSelection(dt: number) {
+    if (!this.carryingBomb || (this.bombAutoSelected && !this.keys.has("KeyE"))) {
+      if (this.bombSelected) {
+        this.bombSelected = this.bombAutoSelected = false;
+        this.bombDrawTime = 0;
+        this.firing = false;
+        this.updateUI();
+      }
+      return;
+    }
+    if (
+      this.keys.has("KeyE") &&
+      !this.halftime &&
+      dust2BombSites.contains(this.position, { halfWidth: 0.3, height: this.eye })
+    )
+      this.equipBomb(true);
+    this.bombDrawTime = Math.max(0, this.bombDrawTime - dt);
+  }
   bombMesh = new BombModel();
   bombView = new BombPlantModel();
   defuseView = new BombDefuseModel();
@@ -898,9 +947,13 @@ export class Game {
       if (code === "Space") this.jumpQueued = true;
       if (code === "KeyR" && !this.utility.selected) this.beginReload();
       if (code === "KeyG") {
-        if (this.network) this.network.request.drop = true;
+        if (this.bombSelected) {
+          if (this.network) this.network.request.dropBomb = true;
+          else this.dropBomb("player");
+        } else if (this.network) this.network.request.drop = true;
         else this.groundInventory.drop(this.selected, true);
       }
+      if (code === "Digit5") this.equipBomb();
       if (code === "Digit4") this.utility.selectNext();
       if (code === "KeyE" && this.network) this.network.request.pickup = true;
       if (code === "KeyE" && !this.network && this.groundInventory.pickup(true))
@@ -910,6 +963,7 @@ export class Game {
         !this.suppressors[this.selected].action &&
         !this.utility.selected &&
         !this.planting &&
+        !this.bombSelected &&
         !this.reload &&
         !this.boltTime &&
         !this.shotTime &&
@@ -991,6 +1045,7 @@ export class Game {
           this.spectate(e.button === 0 ? 1 : -1);
         return;
       }
+      if (this.bombSelected && e.button === 2) return;
       if (e.button === 2 && this.locked && !this.dead) {
         if (weapons[this.selected].zoomLevels > 0) this.cycleScope();
         else if (removableSuppressor(this.selected)) this.toggleSuppressor();
@@ -1359,6 +1414,7 @@ export class Game {
     toggle("crosshair", weapons[this.selected].zoomLevels < 2);
   }
   cycleScope() {
+    if (this.bombSelected) return;
     if (this.planting) return;
     if (this.reload) return;
     if (this.boltTime > 0) {
@@ -1456,13 +1512,17 @@ export class Game {
     ].filter((id): id is number => id !== null);
   }
   cycleInventory(direction: number) {
-    const choices: (number | GrenadeKind)[] = [
+    const choices: (number | GrenadeKind | "bomb")[] = [
       ...this.inventory(),
       ...grenadeTypes.filter((kind) => this.utility.inventory[kind] > 0),
+      ...(this.carryingBomb ? ["bomb" as const] : []),
     ];
-    const current = choices.indexOf(this.utility.selected ?? this.selected);
+    const current = choices.indexOf(
+      this.bombSelected ? "bomb" : (this.utility.selected ?? this.selected),
+    );
     const next = choices[(current + direction + choices.length) % choices.length];
     if (typeof next === "number") this.equip(next);
+    else if (next === "bomb") this.equipBomb();
     else this.utility.select(next);
   }
   updateAimCamera(scale = RECOIL_VIEW_SCALE) {
@@ -1688,6 +1748,8 @@ export class Game {
     }
   }
   equip(index: number) {
+    this.bombSelected = this.bombAutoSelected = false;
+    this.bombDrawTime = 0;
     if (this.network && !this.network.applying) {
       this.utility.cancelThrow();
       this.utility.selected = null;
@@ -1768,14 +1830,14 @@ export class Game {
         : this.utility.inventory);
     const utility = observer ? null : (this.utility.selected ?? this.utility.throwingKind);
     const owned = grenadeTypes.filter((kind) => inventory[kind] > 0);
-    const signature = `${indices.map((id) => `${id}:${instances(id).serial}:${instances(id).skin.id}`).join(",")}:${utility ?? selected}:${owned.map((kind) => `${kind}:${inventory[kind]}`).join(",")}`;
+    const signature = `${indices.map((id) => `${id}:${instances(id).serial}:${instances(id).skin.id}`).join(",")}:${this.carryingBomb}:${this.bombSelected}:${utility ?? selected}:${owned.map((kind) => `${kind}:${inventory[kind]}`).join(",")}`;
     if (signature === this.inventorySignature) return;
     this.inventorySignature = signature;
     const fragment = document.createDocumentFragment();
     for (const index of indices) {
       const slot = weaponSlot(index);
       const row = document.createElement("div");
-      const active = !utility && index === selected;
+      const active = !this.bombSelected && !utility && index === selected;
       row.className = `inventory-weapon ${active ? "active" : ""}`;
       row.dataset.weaponIndex = String(index);
       row.setAttribute("role", "listitem");
@@ -1843,10 +1905,20 @@ export class Game {
       row.append(icons, key, name);
       fragment.append(row);
     }
+    if (!observer && this.carryingBomb) {
+      const row = document.createElement("div");
+      row.className = `inventory-weapon ${this.bombSelected ? "active" : ""}`;
+      row.setAttribute("role", "listitem");
+      row.setAttribute("aria-label", `C4${this.bombSelected ? ", equipped" : ""}`);
+      if (this.bombSelected) row.setAttribute("aria-current", "true");
+      row.innerHTML = `<span class="inventory-art"><img src="${assetUrl("/icons/buy/c4.svg")}" alt=""></span><span class="inventory-key">5</span><span class="inventory-name">C4</span>`;
+      fragment.append(row);
+    }
     el("inventory").replaceChildren(fragment);
   }
 
   fireKnife(stab = false) {
+    if (this.bombSelected) return;
     if (this.network) {
       if (stab) this.network.request.stab = true;
       else this.network.request.fire = true;
@@ -1975,6 +2047,7 @@ export class Game {
     return start + (end - start) * (1 - this.reload / this.shellDuration());
   }
   beginReload() {
+    if (this.bombSelected) return;
     if (this.network) {
       this.network.request.reload = true;
       return;
@@ -2286,6 +2359,7 @@ export class Game {
     };
   }
   fire(continuingBurst = false, alternate = false) {
+    if (this.bombSelected) return;
     if (this.network) {
       this.network.request.fire = true;
       this.network.request.alternate = alternate;
@@ -3260,13 +3334,15 @@ export class Game {
       if (this.grounded) this.vertical = 0;
     }
     this.updateAimCamera();
-    if (this.burstRemaining && this.burstMode && !this.reload) this.fire(true);
-    else if (this.firing && this.selected === 17 && !this.reload && this.cooldown <= 0) {
-      if (!this.revolverCharge) this.fire();
-      this.revolverCharge += dt;
-      if (this.revolverCharge >= REVOLVER_COCK_TIME) this.fire();
-    } else if (this.firing && isKnife(this.selected)) this.fireKnife();
-    else if (this.firing && weapons[this.selected].auto && !this.burstMode) this.fire();
+    if (!this.bombSelected) {
+      if (this.burstRemaining && this.burstMode && !this.reload) this.fire(true);
+      else if (this.firing && this.selected === 17 && !this.reload && this.cooldown <= 0) {
+        if (!this.revolverCharge) this.fire();
+        this.revolverCharge += dt;
+        if (this.revolverCharge >= REVOLVER_COCK_TIME) this.fire();
+      } else if (this.firing && isKnife(this.selected)) this.fireKnife();
+      else if (this.firing && weapons[this.selected].auto && !this.burstMode) this.fire();
+    }
     const magnitude = Math.hypot(this.velocity.x, this.velocity.z);
     this.sway += magnitude * dt * 1.8;
     this.footsteps += magnitude * dt;
@@ -3428,7 +3504,8 @@ export class Game {
     // The result is settled; completed bomb actions must not block surviving players.
     if (this.bomb) {
       this.bomb.defuser = null;
-      this.bomb.plantProgress = this.bomb.progress = 0;
+      this.bomb.progress = 0;
+      if (this.halftime) this.bomb.plantProgress = 0;
     }
     const winners = players.filter((player) => player.team === winner);
     const fact = roundFact({
@@ -3522,12 +3599,14 @@ export class Game {
     this.bomb.plantProgress = 0;
     this.bombMesh.position.copy(position).y += 0.005;
     this.bombMesh.visible = true;
+    this.updateBombSelection(0);
+    this.updateUI();
   }
   get planting() {
     return (
       this.active &&
       !this.dead &&
-      this.roundPause === 0 &&
+      !this.halftime &&
       this.bomb?.carrier === "player" &&
       !this.bomb.planted &&
       this.bomb.plantProgress > 0
@@ -3535,12 +3614,13 @@ export class Game {
   }
   updateRound(dt: number) {
     if (!this.bomb) return;
+    this.updateBombSelection(dt);
     if (this.roundPause > 0) {
       this.roundPause -= dt;
       if (this.roundPause <= 0) {
         this.round++;
         this.startRound();
-      }
+      } else if (!this.halftime) this.updateBombPlant(dt, true);
       return;
     }
     this.buyRemaining = Math.max(0, this.buyRemaining - dt);
@@ -3572,76 +3652,10 @@ export class Game {
       this.endRound("ct", "Time expired");
       return;
     }
-    if (bomb.carrier === -1 && !bomb.planted) {
-      if (this.team === "t" && !this.dead && this.position.distanceTo(bomb.position) < 1.5)
-        bomb.carrier = "player";
-      else {
-        const index = this.bots.findIndex(
-          (b) => b.team === "t" && b.health > 0 && b.group.position.distanceTo(bomb.position) < 1.5,
-        );
-        if (index >= 0) bomb.carrier = index;
-      }
-      if (bomb.carrier !== -1) this.bombMesh.visible = false;
-    }
-    if (!bomb.planted && bomb.carrier !== -1) {
-      const position =
-        bomb.carrier === "player" ? this.position : this.bots[bomb.carrier].group.position;
-      bomb.position.copy(position);
-      const atSite = dust2BombSites.contains(position, {
-        halfWidth: 0.3,
-        height:
-          bomb.carrier === "player"
-            ? this.eye
-            : this.bots[bomb.carrier].rig.crouch > 0.5
-              ? 1.1
-              : 1.65,
-      });
-      const planting =
-        atSite &&
-        (bomb.carrier !== "player" ||
-          (!this.dead && this.grounded && stationary && this.keys.has("KeyE")));
-      if (planting && bomb.carrier === "player" && bomb.plantProgress === 0) {
-        this.revolverCharge = this.reload = this.inspectTime = this.knifeTime = this.shotTime = 0;
-        this.lastShot = this.emptyReload = false;
-        this.knifePending = false;
-        this.rescope = 0;
-        this.setScope(0);
-      }
-      bomb.plantProgress = planting ? bomb.plantProgress + dt : 0;
-      if (planting) {
-        if (bomb.carrier === "player") {
-          this.firing = false;
-          this.velocity.x = this.velocity.z = 0;
-        } else this.bots[bomb.carrier].moving = false;
-      }
-      if (bomb.plantProgress >= PLANT_DURATION) {
-        const mode = this.competitive ? "competitive" : "casual";
-        if (bomb.carrier === "player")
-          this.money = addMoney(this.money, this.rules.plantReward, mode);
-        else
-          this.bots[bomb.carrier].money = addMoney(
-            this.bots[bomb.carrier].money,
-            this.rules.plantReward,
-            mode,
-          );
-        bomb.planted = true;
-        this.soundscape.playMusic(null);
-        bomb.planter = bomb.carrier;
-        bomb.carrier = -1;
-        bomb.plantProgress = 0;
-        bomb.timer = 40;
-        this.bombMesh.position.copy(position).y += 0.005;
-        this.bombMesh.visible = true;
-        this.notices.completeAction("plant");
-        this.notices.showBombPlanted(bomb.timer);
-        this.soundscape.play("bomb-plant", false, "concrete", bomb.position);
-        this.bots.forEach((b) => {
-          b.nav = 0;
-        });
-      }
+    if (!bomb.planted) {
+      this.updateBombPlant(dt);
       return;
     }
-    if (!bomb.planted) return;
     const previousBombTime = bomb.timer;
     bomb.timer -= dt;
     if (previousBombTime > 10 && bomb.timer <= 10) this.soundscape.playMusic("bomb-countdown");
@@ -3712,6 +3726,92 @@ export class Game {
         this.endRound("ct", "Bomb defused");
       }
     } else bomb.progress = 0;
+  }
+  updateBombPlant(dt: number, postRound = false) {
+    const bomb = this.bomb;
+    if (!bomb || bomb.planted) return;
+    const stationary = !["KeyW", "KeyA", "KeyS", "KeyD", "Space"].some((key) => this.keys.has(key));
+    if (bomb.carrier === -1 && !bomb.planted) {
+      if (this.team === "t" && !this.dead && this.position.distanceTo(bomb.position) < 1.5)
+        bomb.carrier = "player";
+      else {
+        const index = this.bots.findIndex(
+          (b) => b.team === "t" && b.health > 0 && b.group.position.distanceTo(bomb.position) < 1.5,
+        );
+        if (index >= 0) bomb.carrier = index;
+      }
+      if (bomb.carrier !== -1) this.bombMesh.visible = false;
+    }
+    if (!bomb.planted && bomb.carrier !== -1) {
+      const position =
+        bomb.carrier === "player" ? this.position : this.bots[bomb.carrier].group.position;
+      bomb.position.copy(position);
+      const atSite = dust2BombSites.contains(position, {
+        halfWidth: 0.3,
+        height:
+          bomb.carrier === "player"
+            ? this.eye
+            : this.bots[bomb.carrier].rig.crouch > 0.5
+              ? 1.1
+              : 1.65,
+      });
+      const planting =
+        atSite &&
+        (bomb.carrier !== "player" ||
+          (!this.dead &&
+            this.grounded &&
+            stationary &&
+            this.bombSelected &&
+            this.bombDrawTime === 0 &&
+            (this.keys.has("KeyE") || this.firing)));
+      if (planting && bomb.carrier === "player" && bomb.plantProgress === 0) {
+        this.revolverCharge = this.reload = this.inspectTime = this.knifeTime = this.shotTime = 0;
+        this.lastShot = this.emptyReload = false;
+        this.knifePending = false;
+        this.rescope = 0;
+        this.setScope(0);
+      }
+      const previousPlantProgress = bomb.plantProgress;
+      bomb.plantProgress = planting ? bomb.plantProgress + dt : 0;
+      this.soundscape.playBombPlant(
+        previousPlantProgress,
+        bomb.plantProgress,
+        bomb.carrier === "player" ? undefined : bomb.position,
+      );
+      if (planting) {
+        if (bomb.carrier === "player") {
+          this.velocity.x = this.velocity.z = 0;
+        } else this.bots[bomb.carrier].moving = false;
+      }
+      if (bomb.plantProgress >= PLANT_DURATION) {
+        const mode = this.competitive ? "competitive" : "casual";
+        if (!postRound && bomb.carrier === "player")
+          this.money = addMoney(this.money, this.rules.plantReward, mode);
+        else if (!postRound && typeof bomb.carrier === "number")
+          this.bots[bomb.carrier].money = addMoney(
+            this.bots[bomb.carrier].money,
+            this.rules.plantReward,
+            mode,
+          );
+        if (bomb.carrier === "player") this.firing = false;
+        bomb.planted = true;
+        if (!postRound) this.soundscape.playMusic(null);
+        bomb.planter = bomb.carrier;
+        bomb.carrier = -1;
+        this.updateBombSelection(0);
+        bomb.plantProgress = 0;
+        bomb.timer = 40;
+        this.bombMesh.position.copy(position).y += 0.005;
+        this.bombMesh.visible = true;
+        this.notices.completeAction("plant");
+        this.notices.showBombPlanted(bomb.timer);
+        this.soundscape.play("bomb-plant", false, "concrete", bomb.position);
+        this.bots.forEach((b) => {
+          b.nav = 0;
+        });
+      }
+      return;
+    }
   }
   takeOverBot() {
     if (this.network) return;
@@ -4943,6 +5043,8 @@ export class Game {
     const observer =
       this.dead && this.teamMode && this.spectatorMode === "first" ? this.spectated : undefined;
     const selected = observer?.rig.weaponIndex ?? this.selected;
+    const holdingBomb = !observer && this.bombSelected && !!this.carryingBomb;
+    toggle("bomb-carrier", !!this.carryingBomb);
     if (this.bomb?.planted) this.notices.updateBombTimer(this.bomb.timer);
     const freezeTint = el("buy-phase-tint");
     freezeTint.dataset.team = this.team;
@@ -4968,21 +5070,26 @@ export class Game {
       "ammo",
       utility
         ? String(this.utility.inventory[utility])
-        : isKnife(selected)
+        : holdingBomb || isKnife(selected)
           ? ""
           : String(observer?.ammo ?? this.ammo),
     );
-    el("ammo").parentElement!.classList.toggle("knife-equipped", !utility && isKnife(selected));
+    el("ammo").parentElement!.classList.toggle(
+      "knife-equipped",
+      !utility && (holdingBomb || isKnife(selected)),
+    );
     el("ammo").parentElement!.classList.toggle("utility-equipped", !!utility);
     this.updateInventory();
     setText("reserve", String(observer?.reserve ?? this.reserve));
     setText(
       "gun-name",
-      utility
-        ? grenadeData[utility].name
-        : weaponInstanceName(
-            observer?.rig.weaponInstance ?? this.groundInventory.playerWeapon(this.selected),
-          ),
+      holdingBomb
+        ? "C4"
+        : utility
+          ? grenadeData[utility].name
+          : weaponInstanceName(
+              observer?.rig.weaponInstance ?? this.groundInventory.playerWeapon(this.selected),
+            ),
     );
     for (const team of ["ct", "t"] as const) {
       const alive =
@@ -5385,16 +5492,26 @@ export class Game {
       this.roundPause === 0 &&
       this.bomb?.planted &&
       this.bomb.defuser === "player";
-    this.bombView.visible = !!planting;
+    const holdingBomb = this.bombSelected && !!this.carryingBomb;
+    this.bombView.visible = !!planting || holdingBomb;
     this.defuseView.visible = !!defusing;
     this.defuseView.wires.visible = !!defusing;
     this.utility.renderSelection();
     this.gun.visible =
-      !planting && !defusing && !this.utility.selected && !this.utility.throwingKind;
+      !planting &&
+      !holdingBomb &&
+      !defusing &&
+      !this.utility.selected &&
+      !this.utility.throwingKind;
     if (defusing) {
       this.defuseView.userData.gloveTeam = this.team;
       this.defuseView.sample(this.bomb!.progress / (this.defuseKit ? 5 : 10), this.defuseKit);
       this.defuseView.connect(this.bomb!.position, this.camera, this.viewCamera);
+      this.flash.visible = false;
+    }
+    if (holdingBomb && !planting) {
+      this.bombView.userData.gloveTeam = this.team;
+      this.bombView.draw(BOMB_DRAW_DURATION - this.bombDrawTime);
       this.flash.visible = false;
     }
     if (planting) {

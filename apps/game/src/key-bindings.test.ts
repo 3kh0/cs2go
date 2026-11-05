@@ -46,3 +46,13 @@ it("migrates existing controls without stealing keys for new actions", () => {
   expect(next.Digit4).not.toBe("Digit4");
   expect(new Set(Object.values(next)).size).toBe(Object.keys(next).length);
 });
+
+it("adds C4 selection to old saves while preserving a custom binding on 5", () => {
+  const old = defaultBindings();
+  delete old.Digit5;
+  old.KeyR = "Digit5";
+  const next = readBindings(old);
+  expect(next.KeyR).toBe("Digit5");
+  expect(next.Digit5).not.toBe("Digit5");
+  expect(canonicalKey(next.Digit5, next)).toBe("Digit5");
+});

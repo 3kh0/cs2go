@@ -225,6 +225,7 @@ export class MultiplayerMatch {
     if (this.previousPhase === "freeze" && state.phase === "live") g.soundscape.playMusic(null);
     this.previousPhase = state.phase;
     const previousBombTime = g.bomb?.timer ?? 40;
+    const previousBomb = g.bomb;
     g.team = local.team;
     g.round = state.round;
     g.teamScores = { ...state.scores };
@@ -424,6 +425,13 @@ export class MultiplayerMatch {
       beepRemaining: 1,
       beepPulse: 0,
     };
+    g.soundscape.playBombPlant(
+      previousBomb?.carrier === g.bomb.carrier && !previousBomb.planted
+        ? previousBomb.plantProgress
+        : 0,
+      bomb.plantProgress,
+      g.bomb.carrier === "player" ? undefined : g.bomb.position,
+    );
     g.bombMesh.visible = state.phase !== "waiting" && (bomb.planted || !bomb.carrier);
     g.bombMesh.position.set(bomb.x, bomb.y + 0.005, bomb.z);
     if (local.health < this.health) g.damage = 0.3;
@@ -672,6 +680,7 @@ export class MultiplayerMatch {
   simulate(dt: number) {
     const g = this.game;
     g.utility.update(dt);
+    g.updateBombSelection(dt);
     if (this.connection.reconnecting) {
       if (!this.wasReconnecting) g.notices.showAlert("Connection interrupted. Reconnecting…");
       this.wasReconnecting = true;
@@ -699,12 +708,20 @@ export class MultiplayerMatch {
       walk: locked && (g.keys.has("ShiftLeft") || g.keys.has("ShiftRight")),
       // Preserve a short click even if press/release both precede this frame.
       fire:
-        locked && !g.utility.selected && !g.utility.throwingKind && (g.firing || this.request.fire),
-      alternate: locked && this.request.alternate,
+        locked &&
+        !g.bombSelected &&
+        !g.utility.selected &&
+        !g.utility.throwingKind &&
+        (g.firing || this.request.fire),
+      alternate: locked && !g.bombSelected && this.request.alternate,
       burst: g.burstMode,
       utility: g.utility.selected ?? "",
       scope: g.scopeLevel,
-      use: locked && g.keys.has("KeyE"),
+      use:
+        locked &&
+        (g.team === "ct"
+          ? g.keys.has("KeyE")
+          : g.bombSelected && g.bombDrawTime === 0 && (g.keys.has("KeyE") || g.firing)),
     };
     const grounded = this.connection.local?.grounded;
     if (this.connection.step(input)) {

@@ -94,9 +94,11 @@
 }
 #bomb-action-time {
   align-self: flex-end;
-  font:
-    700 calc(18 * var(--notice-unit))/1 "Stratum2 Monodigit",
-    sans-serif;
+  font-size: calc(18 * var(--notice-unit));
+  font-weight: 700;
+  line-height: 1;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
 }
 #bomb-action[data-state="canceled"] {
   animation: action-cancel 100ms 3;
@@ -122,10 +124,15 @@
   animation: match-alert-enter 250ms ease-in;
   pointer-events: none;
 }
+#hud-alert[data-type="bomb-planted"] {
+  color: #ff5c4e;
+  border-color: #ff5c4e;
+}
 #hud-alert-detail {
   display: block;
   font-size: inherit;
-  font-family: "Stratum2 Monodigit", sans-serif;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
 }
 #hud-alert-detail:empty {
   display: none;
