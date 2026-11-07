@@ -66,7 +66,7 @@ describe("native Dust II buy trigger geometry", () => {
   });
 });
 
-describe("native Dust II bomb-target hull unions", () => {
+describe("Dust II bomb-target hull unions with elevated A planting", () => {
   const sourcePoint = (x: number, y: number, z: number) => ({
     x: x * 0.0254,
     y: z * 0.0254,
@@ -78,7 +78,10 @@ describe("native Dust II bomb-target hull unions", () => {
     expect(dust2BombSites.site(sourcePoint(1150, 2400, 110))).toBe(0);
     // Inside the combined AABB, but outside both actual brushes.
     expect(dust2BombSites.contains(sourcePoint(1000, 2400, 110))).toBe(false);
-    expect(dust2BombSites.contains(sourcePoint(1000, 2500, 150))).toBe(false);
+    expect(dust2BombSites.contains(sourcePoint(1000, 2500, 150))).toBe(true);
+    expect(dust2BombSites.contains(sourcePoint(1000, 2500, 193))).toBe(false);
+    expect(dust2BombSites.contains({ x: 26, y: 3.86128, z: -64 })).toBe(true);
+    expect(dust2BombSites.contains({ x: 26, y: 4.31918, z: -63 })).toBe(true);
     expect(dust2BombSites.site(sourcePoint(1150, 2500, 150))).toBe(0);
   });
 

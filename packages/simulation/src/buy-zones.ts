@@ -40,7 +40,12 @@ export const dust2BuyZones = {
 };
 
 export const dust2BombSites = {
-  sites: data.sites,
+  sites: data.sites.map((site) => ({
+    ...site,
+    hulls: site.hulls.map((box) =>
+      site.site === 0 ? { ...box, max: [box.max[0], 192 * 0.0254, box.max[2]] } : box,
+    ),
+  })),
   site(position: Position, hull?: TriggerHull): number {
     return (
       this.sites.find((site) => site.hulls.some((box) => touchesBuyZone(position, box, hull)))

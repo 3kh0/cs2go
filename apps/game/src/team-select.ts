@@ -1,3 +1,4 @@
+import { equippedKnives } from "./equipped-knives";
 import * as T from "three";
 import { createSoldier, disposeSoldier, type Soldier } from "./soldier";
 import type { AgentTeam } from "./soldier";
@@ -124,7 +125,7 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
         }
         const soldier = createSoldier(-1, team, appearance);
         soldiers[i] = soldier;
-        const pose = await prepareTeamAgent(soldier, game.knife, controller.signal);
+        const pose = await prepareTeamAgent(soldier, equippedKnives[team], controller.signal);
         if (closed) {
           pose.release();
           return;

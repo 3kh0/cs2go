@@ -33,7 +33,7 @@ test("map cards and team selection remain usable across resize, cancel and reope
       )
       .toBeLessThan(0.5);
     await page.locator("#play").click();
-    await expect(page.locator("#team-select")).toBeVisible();
+    await expect(page.locator("#team-select")).toBeVisible({ timeout: 100_000 });
     await expect(page.locator("#team-auto")).toBeEnabled();
     expect(await page.evaluate(() => document.pointerLockElement)).toBeNull();
     expect(await page.locator("#menu").evaluate((node) => (node as HTMLElement).inert)).toBe(true);
@@ -329,4 +329,39 @@ test("native selection preserves both wrists, clip timing and dagger contacts", 
     for (const distance of [...pose.contacts, ...pose.wrists])
       expect(distance, pose.name).toBeLessThan(0.001);
   }
+});
+
+test("team selection displays each team's own equipped knife", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  for (const choices of [
+    { ct: 37, t: 38, ctMaterial: "weapon_knife_default_ct", tMaterial: "weapon_knife_default_t" },
+    { ct: 4, t: 6, ctMaterial: "weapon_knife_bayonet", tMaterial: "weapon_knife_karambit" },
+  ]) {
+    await page.evaluate(async ({ ct, t }) => {
+      const { equipKnife } = await import("../src/equipped-knives.ts");
+      equipKnife("ct", ct);
+      equipKnife("t", t);
+    }, choices);
+    await page.locator("#play").click();
+    await expect(page.locator("#team-select")).toBeVisible({ timeout: 100_000 });
+    const materials = await page.evaluate(() => {
+      const agents = window.__game.scene.getObjectByName("Team selection agents")!;
+      return agents.children.map((agent) => {
+        const names: string[] = [];
+        agent.traverse((object) => {
+          const mesh = object as import("three").Mesh;
+          if (!mesh.isMesh) return;
+          for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material])
+            if (material.name.startsWith("weapon_knife")) names.push(material.name);
+        });
+        return [...new Set(names)];
+      });
+    });
+    expect(materials).toEqual([[choices.tMaterial], [choices.ctMaterial]]);
+    await page.screenshot({ path: `artifacts/team-knives-${choices.ct}-${choices.t}.png` });
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#team-select")).toHaveCount(0);
+  }
+  expect(errors).toEqual([]);
 });

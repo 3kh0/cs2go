@@ -146,7 +146,7 @@ const control = Bun.serve({
     if (command.op === "reset") {
       room.state.pause = 0.001;
     }
-    if (command.op === "plant") {
+    if (command.op === "plant" || command.op === "plant-box") {
       const nav = await Bun.file(
         new URL("../../../packages/assets/public/models/maps/dust2-nav.json", import.meta.url),
       )
@@ -156,7 +156,7 @@ const control = Bun.serve({
       const sites = nav?.sites;
       if (!sites) return new Response("No site", { status: 500 });
       const p = [...room.players.values()].find((p) => p.team === "t")!;
-      const site = sites[1];
+      const site = command.op === "plant-box" ? [26, 7.5, -64] : sites[1];
       p.x = site[0];
       p.z = site[2];
       p.y = map.collision.floor(p.x, p.z, site[1] + 0.5);
