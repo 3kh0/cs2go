@@ -1,3 +1,4 @@
+import { equippedKnives, equipKnife } from "./equipped-knives";
 import { BOMB_DRAW_DURATION } from "./bomb-presentation";
 import { prepareMatchMedia } from "./match-media";
 import { configureStartupLoading } from "./loading";
@@ -559,7 +560,12 @@ export class Game {
   shellPhase: "intro" | "loop" | "outro" = "intro";
   shellInserted = false;
   magazineInserted = false;
-  knife = 4;
+  get knife() {
+    return equippedKnives[this.team];
+  }
+  set knife(id: number) {
+    if (equippedKnives[this.team] !== id) equipKnife(this.team, id);
+  }
   inspectVariant = 2;
   knifeTime = 0;
   knifeDuration = 0.5;

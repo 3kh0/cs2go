@@ -4,6 +4,7 @@ import * as T from "three";
 import { MapCollision } from "./map-collision";
 import { neutralInput, type Input } from "@cs2go/protocol";
 import {
+  configurePlayer,
   createPlayer,
   createMatch,
   joinMatch,
@@ -201,19 +202,20 @@ test("both sidearms fire in waiting; knives emit melee events and never bullet t
     const match = createMatch("casual", testMap());
     const player = createPlayer("p", "Player", team);
     joinMatch(match, player);
+    expect(player.knife).toBe(team === "ct" ? 37 : 38);
     player.cooldown = 0;
     const ammo = player.ammo;
     const events = stepMatch(match, new Map([[player.id, { ...neutralInput(), fire: true }]]));
     expect(events.some((event) => event.kind === "shot")).toBe(true);
     expect(player.ammo).toBe(ammo - 1);
-    stepMatch(match, new Map([[player.id, { ...neutralInput(), select: 4 }]]));
+    stepMatch(match, new Map([[player.id, { ...neutralInput(), select: player.knife }]]));
     advance(match, 2);
     const swing = stepMatch(match, new Map([[player.id, { ...neutralInput(), fire: true }]]));
     expect(swing).toEqual([{ kind: "melee", shooter: player.id, stab: false, hit: false }]);
     advance(match, 1);
     const stab = stepMatch(match, new Map([[player.id, { ...neutralInput(), stab: true }]]));
     expect(stab).toEqual([{ kind: "melee", shooter: player.id, stab: true, hit: false }]);
-    expect(player.weapon).toBe(4);
+    expect(player.weapon).toBe(player.knife);
   }
 });
 test("sidearm drops preserve ammo, leave the knife usable and can be picked up by another player", () => {
@@ -222,12 +224,12 @@ test("sidearm drops preserve ammo, leave the knife usable and can be picked up b
   joinMatch(match, player);
   player.ammo = 3;
   stepMatch(match, new Map([[player.id, { ...neutralInput(), drop: true }]]));
-  expect(player.weapon).toBe(4);
+  expect(player.weapon).toBe(player.knife);
   expect(player.magazines[2]).toBeUndefined();
   expect(match.state.drops).toHaveLength(1);
   expect(match.state.drops[0]).toMatchObject({ weapon: 2, ammo: 3, owner: "p" });
   advance(match, 1);
-  expect(player.weapon).toBe(4);
+  expect(player.weapon).toBe(player.knife);
   const other = createPlayer("other", "Other", "ct");
   joinMatch(match, other);
   Object.assign(other, {
@@ -328,7 +330,14 @@ test("switching teams releases C4, retains identity and money, and waits for a f
   const position = { x: t.x, y: t.y, z: t.z };
   expect(switchTeam(match, t, "ct")).toBeNull();
   expect(match.players.get(t.id)).toBe(t);
-  expect(t).toMatchObject({ team: "ct", money: 4321, kills: 3, health: 0, waiting: true });
+  expect(t).toMatchObject({
+    team: "ct",
+    knife: 37,
+    money: 4321,
+    kills: 3,
+    health: 0,
+    waiting: true,
+  });
   expect(match.state.bomb).toMatchObject({ ...position, carrier: null, plantProgress: 0 });
   const spawn = t.spawn;
   expect(switchTeam(match, t, "ct")).toBeNull();
@@ -353,4 +362,21 @@ test("team capacity rejects changes atomically, while waiting lobbies allow a fr
   expect(switchTeam(match, player, "ct")).toBe("That team is full.");
   expect(JSON.stringify(player)).toBe(before);
   expect(match.state.bomb.carrier).toBe(player.id);
+});
+
+test("equipped knives stay independent across multiplayer team switches", () => {
+  const match = createMatch("casual", testMap());
+  const player = createPlayer("p", "Player", "ct");
+  joinMatch(match, player);
+  configurePlayer(match, player, {
+    skins: {},
+    agents: { ct: "default-ct", t: "default-t" },
+    loadouts: { ct: [], t: [] },
+    knives: { ct: 4, t: 38 },
+  });
+  expect(player.knife).toBe(4);
+  expect(switchTeam(match, player, "t")).toBeNull();
+  expect(player.knife).toBe(38);
+  expect(switchTeam(match, player, "ct")).toBeNull();
+  expect(player.knife).toBe(4);
 });

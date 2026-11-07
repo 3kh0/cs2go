@@ -1,3 +1,4 @@
+import { equippedKnives, equipKnife } from "./equipped-knives";
 import * as T from "three";
 import { advanceDroppedWeapon, canPickupDroppedWeapon } from "@cs2go/simulation/dropped-weapon";
 import type { Game } from "./game";
@@ -15,10 +16,9 @@ import { MenuBackdrop } from "./menu-backdrop";
 import {
   selectedAgent,
   selectedAgentId,
-  loadAgentCatalog,
+  defaultAgent,
   setSelectedAgent,
   acquireAgentAppearance,
-  type AgentDefinition,
 } from "./agent-roster";
 import { gloveChoices, loadGloveCatalog, setGloves, type GloveDefinition } from "./gloves";
 
@@ -76,8 +76,8 @@ export class GameInventory {
   private backdrop?: MenuBackdrop;
   private panelRect?: DOMRect;
   private gloveCatalog: GloveDefinition[] = [];
-  private agentCatalog: AgentDefinition[] = [];
   private skinCatalog: Skin[] = [];
+  private catalogLoading = false;
   private playerAlive = true;
   private alive = new WeakMap<object, boolean>();
   private clock = 0;
@@ -206,7 +206,7 @@ export class GameInventory {
     const cosmetics = (team: "ct" | "t") => {
       const agent = selectedAgent(team);
       const glove = this.gloveCatalog.find((item) => item.id === gloveChoices[team].id);
-      const knife = this.game.knife;
+      const knife = equippedKnives[team];
       const finish = this.skinCatalog.find(
         (item) => item.weapon === knife && item.id === skinChoices[knife].id,
       );
@@ -217,9 +217,12 @@ export class GameInventory {
       </aside>`;
     };
     const cosmeticCategory = ["Agents", "Gloves", "Knives"].includes(this.editorFilter);
+    const ownedKnives = this.ownedKnives();
     const candidateItems = [
-      ...this.agentCatalog
-        .filter((agent) => agent.team === this.editorTeam)
+      ...[defaultAgent(this.editorTeam), selectedAgent(this.editorTeam)]
+        .filter(
+          (agent, index, entries) => entries.findIndex((entry) => entry.id === agent.id) === index,
+        )
         .map((agent) => ({
           category: "Agents",
           id: agent.id,
@@ -234,13 +237,19 @@ export class GameInventory {
         image: "",
         active: !gloveChoices[this.editorTeam].id,
       },
-      ...this.gloveCatalog.map((glove) => ({
-        ...glove,
-        category: "Gloves",
-        active: gloveChoices[this.editorTeam].id === glove.id,
-      })),
+      ...this.gloveCatalog
+        .filter((glove) => glove.id === gloveChoices[this.editorTeam].id)
+        .map((glove) => ({
+          ...glove,
+          category: "Gloves",
+          active: gloveChoices[this.editorTeam].id === glove.id,
+        })),
       ...weapons.flatMap((weapon, id) =>
-        isKnife(id)
+        isKnife(id) &&
+        (id === (this.editorTeam === "ct" ? 37 : 38) ||
+          id === equippedKnives[this.editorTeam] ||
+          skinChoices[id].id ||
+          ownedKnives.has(id))
           ? [
               {
                 category: "Knives",
@@ -250,7 +259,7 @@ export class GameInventory {
                   this.skinCatalog.find(
                     (skin) => skin.weapon === id && skin.id === skinChoices[id].id,
                   )?.image ?? `/skins/defaults/${id}.webp`,
-                active: this.game.knife === id,
+                active: equippedKnives[this.editorTeam] === id,
               },
             ]
           : [],
@@ -325,7 +334,7 @@ export class GameInventory {
       const team = this.editorTeam;
       try {
         if (category === "Agents") {
-          if (!this.agentCatalog.some((agent) => agent.team === team && agent.id === id)) return;
+          if (![defaultAgent(team).id, selectedAgentId(team)].includes(id)) return;
           const appearance = await acquireAgentAppearance(id);
           try {
             setSelectedAgent(team, id);
@@ -336,7 +345,7 @@ export class GameInventory {
           if (id && !this.gloveCatalog.some((glove) => glove.id === id)) return;
           await setGloves(team, { id, wear: 0.01, seed: 1 });
         } else if (category === "Knives" && /^\d+$/.test(id) && isKnife(Number(id))) {
-          this.game.knife = Number(id);
+          equipKnife(team, Number(id), true);
           this.game.updateUI();
         }
         if (document.getElementById("loadout-editor")) this.showLoadout();
@@ -449,28 +458,46 @@ export class GameInventory {
         this.closeLoadout();
       }
     };
-    if (!this.agentCatalog.length)
-      void loadAgentCatalog()
-        .then((catalog) => {
-          this.agentCatalog = catalog;
-          if (document.getElementById("loadout-editor")) this.showLoadout();
-        })
-        .catch(() => {});
-    if (!this.gloveCatalog.length)
-      void loadGloveCatalog()
-        .then((catalog) => {
-          this.gloveCatalog = catalog;
-          if (document.getElementById("loadout-editor")) this.showLoadout();
-        })
-        .catch(() => {});
-    if (!this.skinCatalog.length)
-      void skinCatalog()
-        .then((catalog) => {
-          this.skinCatalog = catalog;
-          if (document.getElementById("loadout-editor")) this.showLoadout();
-        })
-        .catch(() => {});
+    // Default loadouts need no cosmetic catalogs. Resolve equipped custom metadata
+    // together, then refresh once instead of rebuilding for every catalog response.
+    const needsGloves =
+      !this.gloveCatalog.length && Object.values(gloveChoices).some((choice) => choice.id);
+    const needsSkins = !this.skinCatalog.length && skinChoices.some((choice) => choice.id);
+    if (!this.catalogLoading && (needsGloves || needsSkins)) {
+      this.catalogLoading = true;
+      void Promise.allSettled([
+        needsGloves
+          ? loadGloveCatalog().then((catalog) => {
+              this.gloveCatalog = catalog;
+            })
+          : Promise.resolve(),
+        needsSkins
+          ? skinCatalog().then((catalog) => {
+              this.skinCatalog = catalog;
+            })
+          : Promise.resolve(),
+      ]).then(() => {
+        // Do not immediately retry a failed request in a render loop.
+        if (document.getElementById("loadout-editor")) this.showLoadout();
+        this.catalogLoading = false;
+      });
+    }
   }
+  private ownedKnives() {
+    try {
+      const items: unknown = JSON.parse(localStorage.getItem("cs2go-local-inventory") ?? "[]");
+      return new Set<number>(
+        Array.isArray(items)
+          ? items.flatMap((item) =>
+              Number.isInteger(item?.weapon) && isKnife(item.weapon) ? [item.weapon] : [],
+            )
+          : [],
+      );
+    } catch {
+      return new Set<number>();
+    }
+  }
+
   reset(preserve = false) {
     this.receipts.clear();
     if (!preserve) this.instances.clear();

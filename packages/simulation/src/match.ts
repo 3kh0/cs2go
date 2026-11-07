@@ -1,3 +1,4 @@
+import { defaultKnife } from "./loadouts";
 import * as T from "three";
 import {
   TICK_RATE,
@@ -175,7 +176,7 @@ export function createPlayer(id: string, name: string, team: Team): PlayerState 
     ack: 0,
     weapon: secondary,
     primary: null,
-    knife: 4,
+    knife: defaultKnife(team),
     secondary,
     magazines: {},
     money: 0,
@@ -237,7 +238,7 @@ export function configurePlayer(
         }
       }
     }
-    const knife = configuration.knife ?? player.knife;
+    const knife = configuration.knives?.[player.team] ?? configuration.knife ?? player.knife;
     if (knife !== player.knife) {
       const selected = player.weapon === player.knife;
       delete player.magazines[player.knife];
@@ -299,7 +300,9 @@ export function respawn(player: PlayerState, match: Match, preserve = false) {
     waiting: false,
   });
   if (!preserve) {
-    player.knife = match.configurations.get(player.id)?.knife ?? player.knife;
+    const configuration = match.configurations.get(player.id);
+    const knife = configuration?.knives?.[player.team] ?? configuration?.knife ?? player.knife;
+    player.knife = knife === 37 || knife === 38 ? defaultKnife(player.team) : knife;
     player.grenades = emptyGrenades();
     player.primary = null;
     player.secondary =

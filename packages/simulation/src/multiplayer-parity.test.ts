@@ -180,7 +180,7 @@ test("magazines commit at imported insertion markers and remain loaded across a 
   expect(ct.ammo).toBe(30);
   expect(ct.reloadTime).toBeGreaterThan(0);
   const remaining = ct.reloadTime;
-  command(match, ct.id, { select: 4 });
+  command(match, ct.id, { select: ct.knife });
   command(match, ct.id, { select: 0 });
   expect(ct.ammo).toBe(30);
   expect(ct.cooldown).toBeGreaterThanOrEqual(Math.min(remaining - 2 * STEP, weapons[0].deploy));

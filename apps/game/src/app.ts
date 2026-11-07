@@ -1,3 +1,4 @@
+import { equipKnife } from "./equipped-knives";
 import { homeMenuMarkup, setupHomeMenu } from "./home-menu";
 import { setupSkinMenu } from "./skin-menu";
 import { setupCosmeticMenu } from "./cosmetic-menu";
@@ -55,7 +56,7 @@ ${buyMenuMarkup()}
 <div id="unsupported" class="overlay hidden"><section class="dialog"><h2>DESKTOP REQUIRED</h2><p>Grab a mouse and keyboard, and open this page in a desktop browser with WebGL to play.</p></section></div>`;
 
 setupSkinMenu((index) => {
-  game.knife = index;
+  equipKnife(game.team, index, true);
   if (game.active && !game.dead) game.buy(index);
   game.updateUI();
 });

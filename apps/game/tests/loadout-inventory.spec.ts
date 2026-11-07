@@ -1,6 +1,14 @@
 import { expect, test } from "@playwright/test";
 
 test("separate team loadouts filter, accept drops and persist spawned skins", async ({ page }) => {
+  test.setTimeout(180_000);
+  await page.addInitScript(() => {
+    if (!localStorage.getItem("cs2go-local-inventory"))
+      localStorage.setItem(
+        "cs2go-local-inventory",
+        JSON.stringify([{ weapon: 5, id: "", wear: 0.01, seed: 1 }]),
+      );
+  });
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", (message) => {

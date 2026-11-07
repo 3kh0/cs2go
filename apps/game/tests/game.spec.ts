@@ -508,7 +508,10 @@ test("wheel cycles and wraps; AWP hits aligned enemies once each with penetratio
   await page.bringToFront();
   // Legacy modes remain useful as isolated gameplay fixtures, outside the lobby.
   await page.locator("#play").evaluate((button) => {
-    button.onclick = () => window.__game.start("practice");
+    button.onclick = () => {
+      window.__game.knife = 4;
+      window.__game.start("practice");
+    };
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -1648,7 +1651,7 @@ test("Tab scoreboard groups teams, tracks alive players and records match progre
   expect(errors).toEqual([]);
 });
 
-test("Bayonet default inventory, free primary purchases, slot switching and respawn reset", async ({
+test("Team default knife inventory, free primary purchases, slot switching and respawn reset", async ({
   page,
   baseURL,
 }) => {
@@ -1684,10 +1687,10 @@ test("Bayonet default inventory, free primary purchases, slot switching and resp
   await page.keyboard.press("Digit1");
   await expect(page.locator("#gun-name")).toHaveText("USP-S");
   await page.keyboard.press("Digit3");
-  await expect(page.locator("#gun-name")).toHaveText("Bayonet");
+  await expect(page.locator("#gun-name")).toHaveText("CT Knife");
   await expect(page.locator("#inventory .active .inventory-key")).toHaveText("3");
   await expect.poll(() => page.evaluate(() => window.__game.drawTime)).toBe(0);
-  await page.screenshot({ path: "artifacts/bayonet-viewmodel.png" });
+  await page.screenshot({ path: "artifacts/default-ct-knife-viewmodel.png" });
   await page.keyboard.press("r");
   expect(await page.evaluate(() => window.__game.reload)).toBe(0);
   for (const [index, name] of [
@@ -1709,7 +1712,7 @@ test("Bayonet default inventory, free primary purchases, slot switching and resp
     );
     await expect(page.locator("#inventory .active .inventory-key")).toHaveText("1");
   }
-  expect(await page.evaluate(() => window.__game.inventory())).toEqual([3, 2, 4]);
+  expect(await page.evaluate(() => window.__game.inventory())).toEqual([3, 2, 37]);
   await page.evaluate(() => {
     const g = window.__game;
     g.ammo = 3;
@@ -1735,7 +1738,10 @@ test("Bayonet slash and stab hit once, respect reach and cover, and cancel on sw
   await page.bringToFront();
   // Legacy modes remain useful as isolated gameplay fixtures, outside the lobby.
   await page.locator("#play").evaluate((button) => {
-    button.onclick = () => window.__game.start("practice");
+    button.onclick = () => {
+      window.__game.knife = 4;
+      window.__game.start("practice");
+    };
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -1900,7 +1906,10 @@ test("native Bayonet clips animate fingers, return to idle, and inspection cance
   await page.bringToFront();
   // Legacy modes remain useful as isolated gameplay fixtures, outside the lobby.
   await page.locator("#play").evaluate((button) => {
-    button.onclick = () => window.__game.start("practice");
+    button.onclick = () => {
+      window.__game.knife = 4;
+      window.__game.start("practice");
+    };
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();

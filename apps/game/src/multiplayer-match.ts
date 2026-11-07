@@ -1,3 +1,4 @@
+import { equippedKnives } from "./equipped-knives";
 import { weaponPrice } from "./economy";
 import * as T from "three";
 import {
@@ -140,6 +141,7 @@ export class MultiplayerMatch {
         gloves: { ct: { ...gloveChoices.ct }, t: { ...gloveChoices.t } },
         loadouts: privateGame.groundInventory.loadouts,
         knife: privateGame.knife,
+        knives: { ...equippedKnives },
       },
     );
     for (const event of [
@@ -147,6 +149,7 @@ export class MultiplayerMatch {
       "cs2go-agent-selection",
       "cs2go-gloves-change",
       "cs2go-loadouts-change",
+      "cs2go-knives-change",
       "cs2go-profile-change",
     ])
       window.addEventListener(event, this.configurationChanged);
@@ -168,6 +171,7 @@ export class MultiplayerMatch {
             agents: { ct: selectedAgentId("ct"), t: selectedAgentId("t") },
             gloves: { ct: { ...gloveChoices.ct }, t: { ...gloveChoices.t } },
             loadouts: this.game.groundInventory.loadouts,
+            knives: { ...equippedKnives },
           },
         }),
       );
@@ -181,6 +185,7 @@ export class MultiplayerMatch {
       "cs2go-agent-selection",
       "cs2go-gloves-change",
       "cs2go-loadouts-change",
+      "cs2go-knives-change",
       "cs2go-profile-change",
     ])
       window.removeEventListener(event, this.configurationChanged);

@@ -180,3 +180,26 @@ test("team selection accepts only real teams without accepting a supplied player
   for (const team of ["spectator", "CT", "", null, 1])
     expect(parseClientMessage(JSON.stringify({ type: "team", team }))).toBeNull();
 });
+
+test("per-team knives reject firearms and malformed selections", () => {
+  const configuration = {
+    skins: {},
+    agents: { ct: "default-ct", t: "default-t" },
+    loadouts: { ct: [], t: [] },
+  };
+  for (const knives of [
+    { ct: 4, t: 38 },
+    { ct: 37, t: 5 },
+  ])
+    expect(
+      parseClientMessage(
+        JSON.stringify({ type: "configure", configuration: { ...configuration, knives } }),
+      ),
+    ).not.toBeNull();
+  for (const knives of [null, {}, { ct: 37 }, { ct: 0, t: 38 }, { ct: 37, t: "38" }])
+    expect(
+      parseClientMessage(
+        JSON.stringify({ type: "configure", configuration: { ...configuration, knives } }),
+      ),
+    ).toBeNull();
+});

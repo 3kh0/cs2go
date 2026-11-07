@@ -1,3 +1,4 @@
+import { equippedKnives } from "./equipped-knives";
 import { wearCondition } from "./cosmetic-wear";
 import "./inventory-page.css";
 import { assetUrl } from "./asset-url";
@@ -83,13 +84,22 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
     if (choice.id && !items.some((item) => item.weapon === weapon && item.id === choice.id))
       items.push({ weapon, ...choice });
   });
-  get("add-inventory-item").onclick = () => {
+  get("add-inventory-item").onclick = async () => {
     if (busy) return;
     adding = !adding;
     delete overlay.dataset.inspect;
     get("add-inventory-item").textContent = adding ? "BACK TO INVENTORY" : "＋ ADD ITEM";
     apply.textContent = adding ? "ADD TO INVENTORY" : "EQUIP FINISH";
     status.textContent = "";
+    if (adding) {
+      status.textContent = "Loading finishes…";
+      try {
+        await loadCatalog();
+        status.textContent = "";
+      } catch {
+        status.textContent = "Skin catalog could not load. Try again.";
+      }
+    }
     refresh();
   };
   function detail() {
@@ -130,7 +140,13 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
       filter === "all" || (filter === "knives" ? isKnife(id) : id === Number(filter));
     const entries = [
       ...definitions.flatMap((_, id) =>
-        matches(id)
+        matches(id) &&
+        (adding ||
+          !isKnife(id) ||
+          id === 37 ||
+          id === 38 ||
+          Object.values(equippedKnives).includes(id) ||
+          items.some((item) => item.weapon === id))
           ? [
               {
                 id: "",
@@ -275,16 +291,19 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
       else overlay.classList.add("hidden");
     }
   });
+  async function loadCatalog() {
+    catalog = (await skinCatalog()).flatMap((skin) => {
+      const family = /^(Gamma Doppler|Doppler) \| (.+)$/.exec(skin.name);
+      if (!family) return [skin];
+      return family[2] === "Phase 1" ? [{ ...skin, name: family[1] }] : [];
+    });
+  }
   for (const id of ["skins-button", "pause-skins"])
     get(id).onclick = async () => {
       overlay.classList.remove("hidden");
       status.textContent = "Loading finishes…";
       try {
-        catalog = (await skinCatalog()).flatMap((skin) => {
-          const family = /^(Gamma Doppler|Doppler) \| (.+)$/.exec(skin.name);
-          if (!family) return [skin];
-          return family[2] === "Phase 1" ? [{ ...skin, name: family[1] }] : [];
-        });
+        if (adding || items.some((item) => item.id)) await loadCatalog();
         draft = { ...skinChoices[weapon] };
         status.textContent = "";
         refresh();

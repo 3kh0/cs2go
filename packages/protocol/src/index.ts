@@ -56,6 +56,7 @@ export type WeaponAppearance = {
 export type PlayerConfiguration = {
   profile?: { name: string; avatar: string | null };
   knife?: number;
+  knives?: Record<Team, number>;
   skins: Record<number, SkinChoice>;
   agents: Record<Team, string>;
   gloves?: Record<Team, GloveChoice>;
@@ -395,6 +396,14 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     }
 
     if (config.knife !== undefined && !isKnife(config.knife as number)) return null;
+    if (
+      config.knives !== undefined &&
+      (!record(config.knives) ||
+        Object.keys(config.knives).length !== 2 ||
+        !isKnife(config.knives.ct as number) ||
+        !isKnife(config.knives.t as number))
+    )
+      return null;
     if (
       config.gloves !== undefined &&
       (!record(config.gloves) ||

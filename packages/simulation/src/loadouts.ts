@@ -1,5 +1,6 @@
 import { isKnife, weapons, weaponSlot } from "./physics";
 import { weaponAvailable, type Team } from "./economy";
+export const defaultKnife = (team: Team) => (team === "ct" ? 37 : 38);
 export const midTier = new Set([10, 11, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]);
 export type Loadouts = Record<Team, number[]>;
 export const loadoutCategory = (id: number) =>
