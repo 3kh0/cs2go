@@ -11,8 +11,13 @@ Firefox is not supported because Firefox decides to be special and not support m
 
 <https://en.wikipedia.org/wiki/Counter-Strike_2>
 
+## How to actually play
+
+1. Open <https://cs2go.3kh0.net> in a Chromium-based browser
+2. Profit?
+
+For the sake of making the game fun, I host 2 servers in the US that are already selectable in the game. You can also host your own server if you want to play with friends.
+
 ## Local Development
 
 This is a fat ass monorepo. Frontend is on Vercel and assets are served from Cloudflare R2. To run locally, you just need to do `bun dev` and you should be ready for the races.
-
-Production asset releases are manifests pointing to shared files stored by content hash, so unchanged assets are stored once across releases. Local builds keep their assets offline. See [deployment](docs/deployment.md) for publishing and migration details.

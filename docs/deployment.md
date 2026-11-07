@@ -4,12 +4,12 @@ Vercel serves `apps/game`, R2 serves pinned asset releases, and the Bun multipla
 
 ## Configuration
 
-| Location                  | Configuration                                                                                                   |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| GitHub secrets            | `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `VERCEL_TOKEN`                                                      |
-| GitHub variables          | `R2_ACCOUNT_ID`, `R2_BUCKET`, `ASSET_CDN_URL`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`; optional `MULTIPLAYER_URL` |
-| Vercel server environment | `STEAM_ORIGIN`, `STEAM_SESSION_SECRET`; see [steam-login.md](steam-login.md)                                    |
-| Public frontend build     | `ASSET_CDN_URL`, optional `VITE_MULTIPLAYER_URL`                                                                |
+| Location                  | Configuration                                                                       |
+| ------------------------- | ----------------------------------------------------------------------------------- |
+| GitHub secrets            | `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `VERCEL_TOKEN`                          |
+| GitHub variables          | `R2_ACCOUNT_ID`, `R2_BUCKET`, `ASSET_CDN_URL`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` |
+| Vercel server environment | `STEAM_ORIGIN`, `STEAM_SESSION_SECRET`; see [steam-login.md](steam-login.md)        |
+| Public frontend build     | `ASSET_CDN_URL`                                                                     |
 
 The existing bucket is `cs2go`, account `1084af893db6194b4efdf2d48c729bc6`, public domain `https://a.cs2go.3kh0.net`. Its authenticated S3 endpoint is `https://1084af893db6194b4efdf2d48c729bc6.r2.cloudflarestorage.com`; browsers use the public domain.
 

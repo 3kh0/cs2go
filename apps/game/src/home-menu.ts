@@ -26,7 +26,15 @@ export function homeMenuMarkup() {
           <div class="mode-options session-options" role="group" aria-label="Session type"><button data-session="single" aria-pressed="true">OFFLINE</button><button data-session="multi" aria-pressed="false">ONLINE</button></div>
           <div class="mode-options" role="group" aria-label="Game mode"><button data-mode="casual" aria-pressed="true">CASUAL</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE</button></div>
           <div class="match-browser">
-            <div id="multiplayer-options" hidden><label>SERVER<input id="match-server" placeholder="wss://your-server/ws"></label><label>ROOM CODE<input id="match-room" minlength="12" maxlength="32"></label><label>SERVER PASSWORD<input id="match-password" type="password" maxlength="128"></label><button id="match-invite">COPY INVITE</button><small id="match-status" role="status"></small></div>
+            <section id="multiplayer-options" aria-label="Online lobby" hidden>
+              <header class="lobby-heading"><span class="lobby-kicker">PLAY WITH FRIENDS</span><h2>Online Lobby</h2></header>
+              <label for="match-server">SERVER</label><select id="match-server" aria-label="Server"><option value="wss://na1-cs.3kh0.dev/ws">na1-cs.3kh0.dev</option><option value="wss://na2-cs.3kh0.dev/ws">na2-cs.3kh0.dev</option></select>
+              <button id="match-create" type="button">＋ CREATE LOBBY</button>
+              <div class="lobby-divider"><span>OR JOIN FRIENDS</span></div>
+              <label for="match-room">LOBBY PIN</label><input id="match-room" type="text" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="000000" aria-describedby="lobby-help">
+              <p id="lobby-help">Make sure you and your friends are on the same server!</p>
+              <small id="match-status" role="status" aria-live="polite"></small>
+            </section>
             <div class="match-maps" role="group" aria-label="Maps"><button class="home-map-art" type="button" aria-label="Dust II, selected" aria-pressed="true"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="map-card-caption">Dust II</span></button></div>
           </div>
           <footer class="match-footer"><p id="mode-description" role="status"></p><button class="deploy" id="play" disabled aria-label="Play casual"><span>GO</span></button></footer>

@@ -34,12 +34,12 @@ function setup() {
   vi.stubGlobal("WebSocket", TestSocket);
   const connection = new MatchConnection(
     "ws://localhost/ws",
-    "test-room-123",
+    "012345",
     "Player",
     "casual",
     "ct",
     testMap(),
-    "",
+    false,
     () => {},
     () => {},
   );
@@ -48,7 +48,7 @@ function setup() {
     type: "welcome",
     version: PROTOCOL_VERSION,
     id: "player",
-    room: "test-room-123",
+    room: "012345",
     map: "dust2",
     mode: "casual",
   });
@@ -149,7 +149,7 @@ test("transport interruption retries with the session token and cancels cleanly 
     type: "welcome",
     version: PROTOCOL_VERSION,
     id: "player",
-    room: "test-room-123",
+    room: "012345",
     map: "dust2",
     mode: "casual",
     resume: "secret-session",
@@ -185,7 +185,7 @@ test("an unresponsive transport starts recovery without waiting for its close ha
     type: "welcome",
     version: PROTOCOL_VERSION,
     id: "player",
-    room: "test-room-123",
+    room: "012345",
     map: "dust2",
     mode: "casual",
     resume: "secret-session",

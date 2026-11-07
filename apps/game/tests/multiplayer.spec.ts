@@ -1,19 +1,12 @@
-import { expect, test, type Page, type APIRequestContext } from "@playwright/test";
+import { joinLobby as join, lobbyPin } from "./multiplayer-helpers";
+import { expect, test, type APIRequestContext } from "@playwright/test";
 import { writeFileSync } from "node:fs";
 test.use({ actionTimeout: 15000 });
-async function join(page: Page, room: string, team: "ct" | "t") {
-  await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=${room}`);
-  await expect(page.locator("#play")).toBeEnabled({ timeout: 100000 });
-  await expect(page.locator("#startup")).toHaveCount(0);
 
-  await expect(page.locator("#multiplayer-options")).toBeVisible();
-  await page.locator("#home-play").click();
-  await page.locator("#play").click();
-  await page.locator(`#team-select [data-team="${team}"]`).click();
-  await page.waitForFunction(() => !!window.__game.network?.connection.local);
-}
 async function command(request: APIRequestContext, room: string, op: string) {
-  const response = await request.post("http://127.0.0.1:3004", { data: { room, op } });
+  const response = await request.post("http://127.0.0.1:3004", {
+    data: { room: lobbyPin(room), op },
+  });
   expect(response.ok()).toBe(true);
   return response.json();
 }

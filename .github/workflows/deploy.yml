@@ -105,7 +105,6 @@ jobs:
       VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       ASSET_CDN_URL: ${{ vars.ASSET_CDN_URL }}
-      MULTIPLAYER_URL: ${{ vars.MULTIPLAYER_URL }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -135,9 +134,5 @@ jobs:
           key: turbo-${{ runner.os }}-${{ github.sha }}
           restore-keys: turbo-${{ runner.os }}-
       - run: bunx --bun vercel@65.8.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
-      - run: |
-          if [ -n "$MULTIPLAYER_URL" ]; then
-            export VITE_MULTIPLAYER_URL="$MULTIPLAYER_URL"
-          fi
-          bunx --bun vercel@65.8.0 build --prod --token="$VERCEL_TOKEN"
+      - run: bunx --bun vercel@65.8.0 build --prod --token="$VERCEL_TOKEN"
       - run: bunx --bun vercel@65.8.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"

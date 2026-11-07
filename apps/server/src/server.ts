@@ -50,7 +50,6 @@ export type ServerOptions = {
   port: number;
   hostname?: string;
   origins: string[];
-  password?: string;
   maxRooms?: number;
   maxConnections?: number;
   log?: (message: string) => void;
@@ -103,6 +102,19 @@ export function startServer(options: ServerOptions) {
           { ok: !stopping, version: PROTOCOL_VERSION },
           { status: stopping ? 503 : 200 },
         );
+      if (request.method === "GET" && /^\/lobbies\/\d{6}$/.test(path)) {
+        const origin = request.headers.get("origin") ?? "";
+        if (!origins.has(origin)) return new Response("Origin not allowed", { status: 403 });
+        const room = rooms.get(path.slice("/lobbies/".length));
+        return Response.json(room ? { mode: room.state.mode } : { error: "Lobby not found" }, {
+          status: room ? 200 : 404,
+          headers: {
+            "Access-Control-Allow-Origin": origin,
+            Vary: "Origin",
+            "Cache-Control": "no-store",
+          },
+        });
+      }
       if (request.method !== "GET" || path !== "/ws")
         return new Response("Not found", { status: 404 });
       if (stopping || connections.size >= (options.maxConnections ?? 128))
@@ -148,10 +160,20 @@ export function startServer(options: ServerOptions) {
         if (!message) return reject(socket, "Invalid message or incompatible game version");
         if (message.type === "join") {
           if (connection.room) return reject(socket, "Already joined");
-          if (options.password && message.password !== options.password)
-            return reject(socket, "Incorrect server password");
-          let room = rooms.get(message.room);
+          let code = message.room;
+          if (message.create) {
+            if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
+            const start = crypto.getRandomValues(new Uint32Array(1))[0] % 1000000;
+            let offset = 0;
+            do {
+              code = String((start + offset++) % 1000000).padStart(6, "0");
+            } while (rooms.has(code) && offset < 1000000);
+            if (rooms.has(code)) return reject(socket, "Server full");
+          }
+          let room = rooms.get(code);
           if (!room && message.resume) return reject(socket, "Session expired; rejoin from Play");
+          if (!room && !message.create)
+            return reject(socket, "Lobby not found. Check the PIN and server.");
           if (!room) {
             if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
             room = {
@@ -160,19 +182,19 @@ export function startServer(options: ServerOptions) {
               events: [],
               tick: 0,
             };
-            rooms.set(message.room, room);
+            rooms.set(code, room);
             roomLabels.set(room, nextRoomLabel++);
             log(
               `Room #${roomLabels.get(room)} created - Dust II - ${message.mode} - ${rulesFor(message.mode).teamSize}v${rulesFor(message.mode).teamSize}`,
             );
           }
-          if (room.state.mode !== message.mode)
+          if (message.resume && room.state.mode !== message.mode)
             return reject(socket, "Room uses a different game mode");
           if (
             !message.resume &&
             (room.players.size >= MAX_PLAYERS ||
               [...room.players.values()].filter((p) => p.team === message.team).length >=
-                rulesFor(message.mode).teamSize)
+                rulesFor(room.state.mode).teamSize)
           )
             return reject(socket, "Team is full");
           const previousSocket = message.resume
@@ -211,7 +233,7 @@ export function startServer(options: ServerOptions) {
             version: PROTOCOL_VERSION,
             id: player.id,
             resume: connection.resume,
-            room: message.room,
+            room: code,
             map: "dust2",
             mode: room.state.mode,
           });

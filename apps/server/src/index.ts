@@ -14,12 +14,12 @@ log(`Starting multiplayer with Bun ${Bun.version} as PID ${process.pid}`);
 log("Loading Dust II...");
 const map = await loadServerMap();
 log(`Dust II ready in ${Math.round(performance.now() - started)} ms!`);
-const app = startServer({ port, origins, password: process.env.ROOM_PASSWORD, map, log });
+const app = startServer({ port, origins, map, log });
 log(`WebSocket up at ws://127.0.0.1:${app.server.port}/ws`);
 log(`Health check up at http://127.0.0.1:${app.server.port}/healthz`);
 log(`Tick rate set to ${TICK_RATE} Hz with protocol v${PROTOCOL_VERSION}`);
 log(`Allowed browser origins - ${origins.join(", ")}`);
-log(`Room password ${process.env.ROOM_PASSWORD ? "required" : "not required"}`);
+log("Public lobbies ready; join with a six-digit PIN");
 log("Ready to rumble!");
 let stopping = false;
 for (const signal of ["SIGTERM", "SIGINT"] as const)

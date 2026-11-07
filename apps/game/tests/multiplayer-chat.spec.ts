@@ -1,3 +1,4 @@
+import { joinLobby as join, lobbyPin } from "./multiplayer-helpers";
 import { expect, test, type Page } from "@playwright/test";
 import { CHAT_INTERVAL_MS, PROTOCOL_VERSION } from "@cs2go/protocol";
 import type { Game } from "../src/game";
@@ -8,16 +9,6 @@ declare global {
   }
 }
 test.use({ actionTimeout: 15000 });
-
-async function join(page: Page, room: string, team: "ct" | "t") {
-  await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=${room}`);
-  await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });
-  await expect(page.locator("#startup")).toHaveCount(0);
-  await page.locator("#home-play").click();
-  await page.locator("#play").click();
-  await page.locator(`#team-select [data-team="${team}"]`).click();
-  await page.waitForFunction(() => !!window.__game.network?.connection.local);
-}
 
 test("team and all chat use server routing, suppress gameplay input, and support rebinding", async ({
   browser,
@@ -79,13 +70,12 @@ test("team and all chat use server routing, suppress gameplay input, and support
             version,
             room,
             name: "Ally",
-            password: "",
             mode: "casual",
             team: "ct",
           }),
         );
       },
-      { room, version: PROTOCOL_VERSION },
+      { room: lobbyPin(room), version: PROTOCOL_VERSION },
     );
     await b.waitForFunction(() =>
       (window as unknown as { chatPeer: { received: { type: string }[] } }).chatPeer.received.some(

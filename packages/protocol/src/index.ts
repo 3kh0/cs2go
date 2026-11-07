@@ -1,7 +1,7 @@
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 9;
+export const PROTOCOL_VERSION = 10;
 export const MAX_CHAT_LENGTH = 240;
 export const CHAT_INTERVAL_MS = 750;
 export type ChatChannel = "team" | "all";
@@ -267,7 +267,7 @@ export type ClientMessage =
       version: number;
       room: string;
       name: string;
-      password: string;
+      create?: boolean;
       mode: MatchMode;
       team: Team;
     }
@@ -276,7 +276,7 @@ export type ClientMessage =
   | { type: "stop" }
   | { type: "ping"; time: number };
 export function validRoom(value: unknown): value is string {
-  return typeof value === "string" && /^[a-zA-Z0-9_-]{12,32}$/.test(value);
+  return typeof value === "string" && /^\d{6}$/.test(value);
 }
 const record = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
@@ -432,15 +432,16 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     value.version === PROTOCOL_VERSION &&
     (value.resume === undefined ||
       (typeof value.resume === "string" && /^[a-f0-9-]{36}$/.test(value.resume))) &&
-    validRoom(value.room) &&
+    (value.create === undefined || typeof value.create === "boolean") &&
+    (value.create === true
+      ? value.room === "" && value.resume === undefined
+      : validRoom(value.room)) &&
     typeof value.name === "string" &&
     value.name.trim().length > 0 &&
     value.name.length <= 24 &&
     !Array.from(value.name).some(
       (character) => character.charCodeAt(0) < 32 || character.charCodeAt(0) === 127,
     ) &&
-    typeof value.password === "string" &&
-    value.password.length <= 128 &&
     (value.mode === "casual" || value.mode === "competitive") &&
     (value.team === "ct" || value.team === "t")
   )

@@ -427,3 +427,117 @@
     width: 180px;
   }
 }
+
+#menu[data-session="multi"] .home-match-card .match-browser {
+  gap: 24px;
+}
+#menu .match-browser #multiplayer-options {
+  flex-basis: 280px;
+  padding: 20px;
+  border-top: 2px solid #b2efff80;
+  background: linear-gradient(135deg, #1d2b36d9, #26323ba6);
+  box-shadow: 0 3px 12px #10182025;
+}
+.lobby-kicker {
+  color: #abc0cb;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+.lobby-heading h2 {
+  margin: 4px 0 20px;
+  color: #eef5f7;
+  font:
+    400 28px "Stratum2 Condensed",
+    sans-serif;
+}
+#multiplayer-options label {
+  margin: 12px 0 6px;
+  color: #bccbd3;
+  font:
+    700 11px "Stratum2",
+    sans-serif;
+  letter-spacing: 1px;
+}
+#multiplayer-options select {
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 10px;
+  color: #e9f2f6;
+  border: 1px solid #ffffff26;
+  border-radius: 1px;
+  background: #16232ca6;
+  font:
+    400 15px "Stratum2",
+    sans-serif;
+}
+#menu #multiplayer-options #match-create {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+  border: 1px solid #b2efff50;
+  background: #9ad8ec20;
+  color: #d1f1fb;
+  font:
+    700 14px "Stratum2",
+    sans-serif;
+  letter-spacing: 0.5px;
+}
+#menu #multiplayer-options #match-create:hover {
+  background: #b2efff38;
+  border-color: #b2efff;
+}
+.lobby-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 16px;
+  color: #a5b5be;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.lobby-divider::before,
+.lobby-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ffffff26;
+}
+#multiplayer-options #match-room {
+  height: 48px;
+  padding: 8px 12px;
+  text-align: center;
+  color: #e7f6fc;
+  background: #101c2670;
+  border: 1px solid #ffffff38;
+  border-radius: 1px;
+  font:
+    400 26px "Stratum2 Monodigit",
+    sans-serif;
+  letter-spacing: 6px;
+}
+#multiplayer-options #match-room::placeholder {
+  color: #ffffff35;
+}
+#multiplayer-options :is(input, select, button):focus-visible {
+  outline: 2px solid #b2efff;
+  outline-offset: 2px;
+}
+#lobby-help,
+#match-status {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+#lobby-help {
+  color: #b3c3cd;
+}
+.lobby-heading {
+  display: block;
+  height: auto;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+}
+.lobby-heading h2 {
+  margin-bottom: 0;
+}

@@ -77,16 +77,22 @@ test("rejects incompatible versions, malformed payloads and impossible inputs", 
   const join = {
     type: "join",
     version: PROTOCOL_VERSION,
-    room: "abcd1234abcd",
+    room: "012345",
     name: "PLAYER",
-    password: "",
     mode: "casual",
     team: "ct",
   };
   expect(parseClientMessage(JSON.stringify(join))).toEqual(join);
+  expect(parseClientMessage(JSON.stringify({ ...join, create: true, room: "" }))).not.toBeNull();
   for (const value of [
     { ...join, version: -1 },
-    { ...join, room: "x" },
+    ...["12345", "1234567", "abcdef", "abcd1234abcd", 123456, "123 45"].map((room) => ({
+      ...join,
+      room,
+    })),
+    { ...join, create: "true" },
+    { ...join, create: true },
+    { ...join, create: true, room: "", resume: "a".repeat(36) },
     { ...join, name: "\n" },
     null,
     [],

@@ -12,19 +12,12 @@
         "$TURBO_ROOT$/packages/simulation/src/**"
       ],
       "outputs": ["dist/**"],
-      "env": ["ASSET_CDN_URL", "VERCEL", "VITE_MULTIPLAYER_URL"]
+      "env": ["ASSET_CDN_URL", "VERCEL"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "passThroughEnv": [
-        "STEAM_ORIGIN",
-        "STEAM_SESSION_SECRET",
-        "PORT",
-        "ALLOWED_ORIGINS",
-        "ROOM_PASSWORD",
-        "VITE_MULTIPLAYER_URL"
-      ]
+      "passThroughEnv": ["STEAM_ORIGIN", "STEAM_SESSION_SECRET", "PORT", "ALLOWED_ORIGINS"]
     },
     "preview": {
       "cache": false,

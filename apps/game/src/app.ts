@@ -48,7 +48,7 @@ ${homeMenuMarkup()}
  <div id="telemetry">0 FPS &nbsp; - &nbsp; – MS FRAME &nbsp; - &nbsp; 128 TICK</div>
  <div id="scoreboard" class="hidden" role="region" aria-label="Match scoreboard"><header class="scoreboard-title"><h2></h2><span id="scoreboard-clock"></span></header><div id="scoreboard-rows"></div></div>
 </div>
-<div id="pause" class="overlay hidden"><nav class="pause-toolbar" aria-label="Match menu"><button id="resume"><span aria-hidden="true">↶</span>RESUME GAME</button><button id="pause-skins"><img src="/icons/buy/ak47.svg" alt="">INVENTORY</button><button id="pause-settings"><img src="/ui/home/settings.svg" alt="">SETTINGS</button><button id="leave"><img src="/ui/home/power.svg" alt="">DISCONNECT</button></nav><section id="leave-confirm" class="popup-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="leave-confirm-title" aria-describedby="leave-confirm-message"><div class="home-popup"><h2 id="leave-confirm-title">LEAVE MATCH</h2><p id="leave-confirm-message">Do you wish to stop playing now?</p><div class="home-popup-actions"><button id="leave-yes">YES</button><button id="leave-no">NO</button></div></div></section></div>
+<div id="pause" class="overlay hidden"><nav class="pause-toolbar" aria-label="Match menu"><button id="resume"><span aria-hidden="true">↶</span>RESUME GAME</button><button id="pause-skins"><img src="/icons/buy/ak47.svg" alt="">INVENTORY</button><button id="pause-settings"><img src="/ui/home/settings.svg" alt="">SETTINGS</button><button id="leave"><img src="/ui/home/power.svg" alt="">DISCONNECT</button></nav><aside id="pause-lobby" hidden><div><span>LOBBY PIN</span><strong id="lobby-pin"></strong><span id="lobby-server"></span></div><button id="match-invite">COPY INVITE</button><small id="lobby-copy-status" role="status"></small></aside><section id="leave-confirm" class="popup-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="leave-confirm-title" aria-describedby="leave-confirm-message"><div class="home-popup"><h2 id="leave-confirm-title">LEAVE MATCH</h2><p id="leave-confirm-message">Do you wish to stop playing now?</p><div class="home-popup-actions"><button id="leave-yes">YES</button><button id="leave-no">NO</button></div></div></section></div>
 <div id="settings" class="overlay hidden"><section class="dialog settings"><div class="dialog-heading"><div><div class="eyebrow">MAKE IT YOURS</div><h2>SETTINGS</h2></div><button class="close" id="close-settings" aria-label="Close settings">×</button></div><label class="select-label">Play as<select id="agent-team"><option value="ct">Counter terrorist</option><option value="t">Terrorist</option></select></label><label>Mouse sensitivity <output id="sensitivity-value">1.0</output><input id="sensitivity" type="range" min="0.2" max="3" step="0.1" value="1"></label><label>Field of view <output id="fov-value">90°</output><input id="fov" type="range" min="75" max="110" step="1" value="90"></label><label class="hud-hue-setting">HUD hue <output id="hudHue-value">110°</output><input id="hudHue" type="range" min="0" max="360" step="1" value="110"><small>Health, armor, and weapon icons</small></label><label>Master volume <output id="volume-value">60%</output><input id="volume" type="range" min="0" max="100" value="60"></label><label>Music volume <output id="musicVolume-value">25%</output><input id="musicVolume" type="range" min="0" max="100" value="25"></label><label>Effects volume <output id="effectsVolume-value">100%</output><input id="effectsVolume" type="range" min="0" max="100" value="100"></label><label class="toggle-label" for="auto-bunnyhop"><span>Auto bunnyhop<small>Hold Space to jump as soon as you land.</small></span><input id="auto-bunnyhop" type="checkbox" role="switch"></label><label class="select-label">Graphics preset<select id="quality"></select></label><div class="controls"><span><kbd>W A S D</kbd> Move</span><span><kbd>MOUSE</kbd> Look / fire</span><span><kbd>SPACE</kbd> Jump</span><span><kbd>CTRL / C</kbd> Crouch</span><span><kbd>SHIFT</kbd> Walk quietly</span><span><kbd>R</kbd> Reload</span><span><kbd>1 2 3 / SCROLL / B</kbd> Equip / buy weapon</span><span><kbd>E</kbd> Plant / defuse</span><span><kbd>TAB</kbd> Scoreboard</span><span><kbd>RIGHT CLICK</kbd> AWP zoom / knife stab</span></div><p class="hint">Stop before you shoot. Tap the opposite movement key to counter-strafe. Pull your mouse down to control a spray.</p></section></div>
 ${buyMenuMarkup()}
 <div id="result" class="overlay hidden"><section class="dialog"><div class="eyebrow">MATCH COMPLETE</div><h2 id="result-title">WELL PLAYED.</h2><strong id="result-score"></strong><p id="result-stats"></p><button class="deploy" id="again">PLAY AGAIN <span>↗</span></button><button class="text-button" id="result-menu">RETURN TO MENU</button></section></div>
@@ -97,63 +97,91 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-mode]")
       );
   };
 let session: "single" | "multi" = "single";
-const server = el("match-server") as HTMLInputElement;
+const server = el("match-server") as HTMLSelectElement;
 const room = el("match-room") as HTMLInputElement;
-const password = el("match-password") as HTMLInputElement;
 const invitation = new URLSearchParams(location.search);
-server.value =
-  invitation.get("server") ||
-  import.meta.env.VITE_MULTIPLAYER_URL ||
-  (import.meta.env.DEV ? "ws://127.0.0.1:3001/ws" : "");
-room.value = validRoom(invitation.get("room"))
-  ? invitation.get("room")!
-  : [...crypto.getRandomValues(new Uint8Array(9))]
-      .map((v) => v.toString(16).padStart(2, "0"))
-      .join("");
+// Local endpoints are available only in development; production uses the two fleet servers.
+if (import.meta.env.DEV) {
+  for (const port of [3001, 3002])
+    server.add(new Option(`Local server :${port}`, `ws://127.0.0.1:${port}/ws`));
+}
+const invitedServer = invitation.get("server");
+if ([...server.options].some((option) => option.value === invitedServer))
+  server.value = invitedServer!;
+room.value = validRoom(invitation.get("room")) ? invitation.get("room")! : "";
+let lobbyServer = "";
+let lobbyMode: "casual" | "competitive" = "casual";
+let creating = false;
+room.oninput = () => {
+  el("match-status").textContent = "";
+};
 for (const button of document.querySelectorAll<HTMLButtonElement>("[data-session]"))
   button.onclick = () => {
     session = button.dataset.session as typeof session;
+    el("menu").dataset.session = session;
     el("multiplayer-options").hidden = session !== "multi";
     document
       .querySelectorAll<HTMLButtonElement>("[data-session]")
       .forEach((node) => node.setAttribute("aria-pressed", String(node === button)));
   };
-if (invitation.has("room")) {
+if (invitation.has("room") || invitedServer) {
   document.querySelector<HTMLButtonElement>('[data-session="multi"]')!.click();
   el("menu").dataset.page = "play";
 }
 el("match-invite").onclick = async () => {
   const url = new URL(location.origin + "/");
   url.searchParams.set("room", room.value);
-  url.searchParams.set("server", server.value);
-  url.searchParams.set("mode", selectedMode);
+  url.searchParams.set("server", lobbyServer);
+  url.searchParams.set("mode", lobbyMode);
   try {
     await navigator.clipboard.writeText(url.href);
-    el("match-status").textContent = "Invite copied";
+    el("lobby-copy-status").textContent = "Invite copied";
   } catch {
-    el("match-status").textContent = url.href;
+    el("lobby-copy-status").textContent = url.href;
   }
 };
 if (invitation.get("mode") === "competitive")
   document.querySelector<HTMLButtonElement>('[data-mode="competitive"]')!.click();
-el("play").onclick = () => {
+el("match-create").onclick = () => {
+  if (el("play").hasAttribute("disabled") || game.matchLoading) return;
+  creating = true;
+  el("match-status").textContent = "";
+  void prepareMatchSelection();
+};
+el("play").onclick = async () => {
+  if (game.matchLoading) return;
+  creating = false;
   if (session === "multi") {
+    if (!validRoom(room.value)) {
+      el("match-status").textContent = "Enter a six-digit lobby PIN, or create a lobby.";
+      room.focus();
+      return;
+    }
+    const play = el("play") as HTMLButtonElement;
+    play.disabled = true;
+    (el("match-create") as HTMLButtonElement).disabled = true;
+    el("match-status").textContent = "Finding lobby…";
     try {
       const url = new URL(server.value);
-      if (
-        !["ws:", "wss:"].includes(url.protocol) ||
-        (location.protocol === "https:" && url.protocol !== "wss:") ||
-        url.pathname !== "/ws" ||
-        url.username ||
-        url.password ||
-        url.search ||
-        url.hash
-      )
-        throw new Error("Enter a secure game server address ending in /ws.");
-      if (!validRoom(room.value)) throw new Error("Room codes use 12–32 letters, numbers, - or _.");
+      url.protocol = url.protocol === "wss:" ? "https:" : "http:";
+      url.pathname = `/lobbies/${room.value}`;
+      const response = await fetch(url, { signal: AbortSignal.timeout(5000) });
+      if (response.status === 404) throw new Error("Lobby not found. Check the PIN and server.");
+      if (!response.ok) throw new Error("Server unavailable. Try the other server.");
+      const lobby = await response.json();
+      if (lobby.mode !== "casual" && lobby.mode !== "competitive")
+        throw new Error("Incompatible server. Refresh and try again.");
+      document.querySelector<HTMLButtonElement>(`[data-mode="${lobby.mode}"]`)!.click();
+      el("match-status").textContent = "Lobby found. Select your team.";
     } catch (error) {
-      el("match-status").textContent = (error as Error).message;
+      el("match-status").textContent =
+        error instanceof TypeError || (error as Error).name === "TimeoutError"
+          ? "Could not reach the server. Try again or choose another server."
+          : (error as Error).message;
       return;
+    } finally {
+      play.disabled = false;
+      (el("match-create") as HTMLButtonElement).disabled = false;
     }
   }
   void prepareMatchSelection();
@@ -162,6 +190,9 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
   if (game.matchLoading || document.getElementById("team-select")) return;
   const mode = selectedMode;
   const multiplayer = replayTeam === undefined && session === "multi";
+  const create = creating;
+  const endpoint = server.value;
+  const pin = room.value;
   const loader = openMatchLoading(mode);
   let selector: ReturnType<typeof prepareTeamSelector> | undefined;
   game.matchLoading = true;
@@ -172,8 +203,16 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
     game.accumulator = 0;
     game.last = performance.now();
     game.start(mode, { bots: !multiplayer });
-    if (multiplayer && game.active)
-      game.network = new MultiplayerMatch(game, server.value, room.value, password.value, mode);
+    el("pause-lobby").hidden = !multiplayer;
+    el("lobby-copy-status").textContent = "";
+    if (multiplayer && game.active) {
+      lobbyServer = endpoint;
+      lobbyMode = mode;
+      el("lobby-pin").textContent = "CONNECTING…";
+      el("lobby-server").textContent = new URL(endpoint).hostname;
+      (el("match-invite") as HTMLButtonElement).disabled = true;
+      game.network = new MultiplayerMatch(game, endpoint, pin, create, mode);
+    }
   };
   const cancelPreview = () => selector?.close();
   loader.signal.addEventListener("abort", cancelPreview, { once: true });

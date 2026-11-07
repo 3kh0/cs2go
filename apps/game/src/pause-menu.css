@@ -67,3 +67,62 @@
     letter-spacing: 0;
   }
 }
+
+#pause-lobby {
+  position: absolute;
+  top: calc(176 * var(--pause-unit));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 20px;
+  color: #e9f2f6;
+  background: #181818b3;
+  border-top: 1px solid #b2efff60;
+  backdrop-filter: blur(12px);
+}
+#pause-lobby[hidden] {
+  display: none;
+}
+#pause-lobby > div {
+  display: grid;
+  gap: 2px;
+}
+#pause-lobby span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #b3c3cd;
+}
+#lobby-pin {
+  font:
+    400 26px "Stratum2 Monodigit",
+    sans-serif;
+  letter-spacing: 4px;
+}
+#pause-lobby button {
+  padding: 8px 12px;
+  color: #d1f1fb;
+  border: 1px solid #b2efff50;
+  background: #9ad8ec20;
+  font:
+    700 13px "Stratum2",
+    sans-serif;
+}
+#pause-lobby button:hover {
+  background: #b2efff38;
+}
+#lobby-copy-status {
+  max-width: 240px;
+  overflow-wrap: anywhere;
+}
+#lobby-copy-status:empty {
+  display: none;
+}
+.match-menu-open:has(#pause-lobby:not([hidden])) #scoreboard {
+  top: calc(288 * var(--sb-unit));
+  max-height: calc(100vh - 310 * var(--sb-unit));
+}
+#pause-lobby {
+  pointer-events: auto;
+}

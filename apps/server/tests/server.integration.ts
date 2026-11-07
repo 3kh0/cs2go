@@ -13,7 +13,6 @@ const app = startServer({
   port: 0,
   hostname: "127.0.0.1",
   origins: ["http://localhost:5173"],
-  password: "test-password",
   maxRooms: 2,
 });
 const origin = `http://127.0.0.1:${app.server.port}`;
@@ -27,8 +26,8 @@ async function until(predicate: () => boolean, label: string) {
 }
 async function client(
   name: string,
-  room = "private-room-123",
-  password = "test-password",
+  room = "",
+  create = true,
   team: "ct" | "t" = "ct",
   resume?: string,
 ) {
@@ -46,7 +45,7 @@ async function client(
       version: PROTOCOL_VERSION,
       room,
       name,
-      password,
+      create,
       mode: "casual",
       team,
     }),
@@ -63,19 +62,28 @@ try {
     (await fetch(origin + "/ws", { headers: { Origin: "https://evil.invalid" } })).status,
     403,
   );
-  const wrong = await client("Bad password", "private-room-123", "incorrect");
-  await until(() => wrong.socket.readyState === WebSocket.CLOSED, "password rejection");
-  assert.equal(
-    wrong.messages.some((message) => message.type === "error"),
-    true,
+  const wrong = await client("Unknown PIN", "000000", false);
+  await until(() => wrong.socket.readyState === WebSocket.CLOSED, "unknown PIN rejection");
+  assert(
+    wrong.messages.some(
+      (message) => message.type === "error" && message.message.includes("Lobby not found"),
+    ),
   );
   assert.equal(app.rooms.size, 0);
-  const a = await client("Alpha"),
-    b = await client("Bravo", "private-room-123", "test-password", "t");
+  const a = await client("Alpha");
+  await until(() => a.messages.some((m) => m.type === "welcome"), "lobby created");
+  const code = a.messages.find((m) => m.type === "welcome")!.room;
+  assert.match(code, /^\d{6}$/);
+  const metadata = await fetch(origin + `/lobbies/${code}`, {
+    headers: { Origin: "http://localhost:5173" },
+  });
+  assert.equal(metadata.headers.get("access-control-allow-origin"), "http://localhost:5173");
+  assert.equal(((await metadata.json()) as { mode: string }).mode, "casual");
+  const b = await client("Bravo", code, false, "t");
   await until(() => a.players().length === 2 && b.players().length === 2, "two peers");
   const aId = a.messages.find((message) => message.type === "welcome")!.id;
   const bId = b.messages.find((message) => message.type === "welcome")!.id;
-  const shared = app.rooms.get("private-room-123")!;
+  const shared = app.rooms.get(code)!;
   shared.state.phase = "live";
   shared.state.remaining = 100;
   const before = a.players().find((player) => player.id === aId)!;
@@ -101,7 +109,7 @@ try {
   assert(moved.z < before.z - 0.2);
   assert(moved.z > before.z - 3);
   assert.equal(moved.health, 100);
-  const room = app.rooms.get("private-room-123")!;
+  const room = app.rooms.get(code)!;
   // Arrange a clear shot; the wire still carries only inputs, never damage.
   const shooter = room.players.get(aId)!,
     victim = room.players.get(bId)!;
@@ -124,10 +132,14 @@ try {
         message.type === "snapshot" && message.events.some((event) => event.kind === "shot"),
     ),
   );
-  const isolated = await client("Isolated", "different-room-123");
+  const isolated = await client("Isolated");
   await until(() => isolated.players().length === 1, "isolated room");
   assert.equal(a.players().length, 2);
-  const ally = await client("Ally");
+  const full = await client("Overflow");
+  await until(() => full.socket.readyState === WebSocket.CLOSED, "lobby capacity");
+  assert(full.messages.some((m) => m.type === "error" && m.message === "Server full"));
+  assert.equal(app.rooms.size, 2);
+  const ally = await client("Ally", code, false);
   await until(() => ally.players().length === 3, "chat teammate joined");
   const chatMessages = (peer: typeof a) =>
     peer.messages.filter((message) => message.type === "chat");
@@ -188,17 +200,13 @@ try {
   await until(() => isolated.players()[0]?.ack === 64, "buffered input burst drained");
 
   const welcome = isolated.messages.find((message) => message.type === "welcome")!;
-  const preserved = app.rooms.get("different-room-123")!.players.get(welcome.id)!;
+  const isolatedCode = welcome.room;
+  assert.notEqual(isolatedCode, code);
+  const preserved = app.rooms.get(isolatedCode)!.players.get(welcome.id)!;
   preserved.money = 1234;
   isolated.socket.close(4000, "Snapshot timeout");
   await until(() => isolated.socket.readyState === WebSocket.CLOSED, "interruption");
-  const recovered = await client(
-    "Isolated",
-    "different-room-123",
-    "test-password",
-    "ct",
-    welcome.resume,
-  );
+  const recovered = await client("Isolated", isolatedCode, false, "ct", welcome.resume);
   await until(() => recovered.players().length === 1, "session recovered");
   const recoveredWelcome = recovered.messages.find((message) => message.type === "welcome")!;
   assert.equal(recoveredWelcome.id, welcome.id);
@@ -206,13 +214,7 @@ try {
   assert.equal(recovered.players()[0].money, 1234);
   recovered.socket.send(JSON.stringify({ type: "inputs", inputs: [neutralInput(1)] }));
   await until(() => recovered.players()[0]?.ack === 1, "fresh sequence after recovery");
-  const takeover = await client(
-    "Isolated",
-    "different-room-123",
-    "test-password",
-    "ct",
-    recoveredWelcome.resume,
-  );
+  const takeover = await client("Isolated", isolatedCode, false, "ct", recoveredWelcome.resume);
   await until(() => takeover.players().length === 1, "half-open session takeover");
   assert.equal(takeover.players()[0].id, welcome.id);
   await until(() => recovered.socket.readyState === WebSocket.CLOSED, "old transport retired");
@@ -225,7 +227,7 @@ try {
   isolated.socket.close();
   await until(() => app.rooms.size === 0, "empty room cleanup");
   console.log(
-    "Multiplayer integration passed: health, origins, passwords, two clients, movement, damage, room isolation, replay rejection, cleanup.",
+    "Multiplayer integration passed: health, origins, lobby creation and PINs, two clients, movement, damage, room isolation, replay rejection, cleanup.",
   );
 } finally {
   for (const socket of sockets) socket.close();

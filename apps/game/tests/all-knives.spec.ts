@@ -12,10 +12,10 @@ test("Inventory knife selection reaches the authoritative private match", async 
   test.setTimeout(120_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=knives-${Date.now()}`);
+  await page.goto("/?server=ws://127.0.0.1:3002/ws");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await page.locator("#home-play").click();
-  await page.locator("#play").click();
+  await page.locator("#match-create").click();
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => !!window.__game.network?.connection.local);
   await page.bringToFront();

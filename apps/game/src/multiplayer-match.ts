@@ -97,7 +97,7 @@ export class MultiplayerMatch {
     });
   }
 
-  constructor(privateGame: Game, url: string, room: string, password: string, mode: MatchMode) {
+  constructor(privateGame: Game, url: string, room: string, create: boolean, mode: MatchMode) {
     this.game = privateGame;
     const world = privateGame.dust!;
     this.connection = new MatchConnection(
@@ -113,8 +113,19 @@ export class MultiplayerMatch {
         bombDamage: world.bombDamage,
         grenadeCollision: world.grenadeCollision,
       },
-      password,
-      (message) => this.receive(message),
+      create,
+      (message) => {
+        if (message.type === "welcome") {
+          const input = document.getElementById("match-room") as HTMLInputElement;
+          input.value = message.room;
+          this.game.mode = message.mode;
+          (document.getElementById("match-invite") as HTMLButtonElement).disabled = false;
+          document.getElementById("lobby-pin")!.textContent = message.room;
+          document.getElementById("match-status")!.textContent =
+            `Lobby ${message.room} · ${message.mode === "competitive" ? "Competitive" : "Casual"}`;
+        }
+        this.receive(message);
+      },
       (reason) => {
         if (this.closed) return;
         this.disconnect();

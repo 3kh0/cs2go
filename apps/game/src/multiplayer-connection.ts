@@ -48,7 +48,7 @@ export class MatchConnection {
     mode: MatchMode,
     team: Team,
     map: DustMap,
-    password: string,
+    create: boolean,
     onMessage: (message: ServerMessage) => void,
     onClose: (reason: string) => void,
     configuration?: PlayerConfiguration,
@@ -73,9 +73,9 @@ export class MatchConnection {
             type: "join",
             resume: this.resume,
             version: PROTOCOL_VERSION,
-            room,
+            room: this.resume ? room : create ? "" : room,
             name,
-            password,
+            create: !this.resume && create,
             mode,
             team,
           }),
@@ -90,6 +90,8 @@ export class MatchConnection {
             this.close("Game version mismatch; refresh the page");
             return;
           }
+          room = message.room;
+          mode = message.mode;
           this.id = message.id;
           this.resume = message.resume;
           this.seq = 0;

@@ -1,3 +1,4 @@
+import { joinLobby as join, lobbyPin } from "./multiplayer-helpers";
 import { expect, test, type Page, type APIRequestContext } from "@playwright/test";
 import { readFileSync } from "node:fs";
 test.use({ actionTimeout: 15000 });
@@ -8,17 +9,11 @@ const catalog = JSON.parse(
   ),
 ) as { id: string; name: string; weapon: number }[];
 type CosmeticChoice = { id: string; wear: number; seed: number };
-async function join(page: Page, room: string, team: "ct" | "t") {
-  await page.goto(`/?server=ws://127.0.0.1:3002/ws&room=${room}`);
-  await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });
-  await expect(page.locator("#startup")).toHaveCount(0);
-  await page.locator("#home-play").click();
-  await page.locator("#play").click();
-  await page.locator(`#team-select [data-team="${team}"]`).click();
-  await page.waitForFunction(() => !!window.__game.network?.connection.local);
-}
+
 async function command(request: APIRequestContext, room: string, op: string) {
-  const response = await request.post("http://127.0.0.1:3004", { data: { room, op } });
+  const response = await request.post("http://127.0.0.1:3004", {
+    data: { room: lobbyPin(room), op },
+  });
   expect(response.ok()).toBe(true);
   return response.json();
 }
@@ -293,7 +288,9 @@ test("a human teammate's spectator camera, ammunition, reload and scope replicat
     await command(request, room, "at-buy");
     await command(request, room, "rich");
     // A late joiner is admitted at the next round boundary.
-    await request.post("http://127.0.0.1:3004", { data: { room, op: "admit-late" } });
+    await request.post("http://127.0.0.1:3004", {
+      data: { room: lobbyPin(room), op: "admit-late" },
+    });
     await focus(c);
     await c.waitForFunction(() => !window.__game.dead && window.__game.canBuy());
     await c.keyboard.press("KeyB");
