@@ -82,6 +82,10 @@ type Template = {
 };
 const templates: Template[] = [];
 const legacyBodies = new Map<number, Promise<T.Group>>();
+const pendingWeapons = new Map<number, Promise<void>>();
+export function nativeWeaponReady(index: number) {
+  return !!templates[index];
+}
 let reflections: T.Texture | undefined;
 function loadLegacyBody(index: number) {
   let pending = legacyBodies.get(index);
@@ -102,140 +106,148 @@ function loadLegacyBody(index: number) {
   }
   return pending;
 }
-export async function loadNativeWeapons() {
+export async function loadNativeWeapons(indices?: readonly number[]) {
   await Promise.all(
     weapons.map(async (name, index) => {
-      if (!name) return;
-      const weaponMotions: Motion[] = [...motions];
-      if (index === 8) weaponMotions.push("shoot_empty", "reload_empty");
-      if (index === 18 || index === 17) weaponMotions.push("shoot2");
-      if (index === 17) weaponMotions.push("prepare");
-      if (index === 1 || index === 2) weaponMotions.push("silencer_attach", "silencer_detach");
-      const [model, ...animations] = await Promise.all([
-        loadModel(`/models/viewmodels/${name}-hd.glb`),
-        ...weaponMotions.map((m) => loadModel(`/models/viewmodels/${name}/${m}.glb`)),
-      ]);
-      const variants = new T.Group();
-      model.scene.name = "skin-hd";
-      variants.add(model.scene);
-      const reloadData = animations[2].parser.json as {
-        animations: { extras?: { events?: ClipEvent[] } }[];
-      };
-      const reloadEvents = reloadData.animations[0].extras?.events ?? [];
-      const loop = reloadEvents.find((event) => event.m_ID === "WPN_RELOAD_LOOP");
-      const addAmmo = reloadEvents.find((event) => event.m_ID === "WPN_RELOAD_ADD_AMMO");
-      templates[index] = {
-        magazineInsert: Object.fromEntries(
-          animations.flatMap((animation, i) => {
-            const motion = weaponMotions[i];
-            if (motion !== "reload" && motion !== "reload_empty") return [];
-            const events =
-              (animation.parser.json as { animations: { extras?: { events?: ClipEvent[] } }[] })
-                .animations[0].extras?.events ?? [];
-            const marker = events.filter((event) => event.m_ID === "WPN_RELOAD_ADD_AMMO").at(-1);
-            return marker
-              ? [[motion, T.MathUtils.clamp(marker.m_flStartTime.m_flValue, 0, 1)]]
-              : [];
-          }),
-        ),
-        reloadPhases:
-          loop && addAmmo
-            ? {
-                introEnd: loop.m_flStartTime.m_flValue,
-                loopEnd: loop.m_flStartTime.m_flValue + (loop.m_flDuration?.m_flValue ?? 0),
-                addAmmo: addAmmo.m_flStartTime.m_flValue,
-              }
-            : undefined,
-        suppressor: Object.fromEntries(
-          animations.flatMap((a, i) => {
-            const action = weaponMotions[i];
-            if (action !== "silencer_attach" && action !== "silencer_detach") return [];
-            const events =
-              (a.parser.json as { animations: { extras?: { events?: ClipEvent[] } }[] })
-                .animations[0].extras?.events ?? [];
-            const show = events.find((e) => e.m_ID === "WPN_SHOW_SILENCER");
-            return [
-              [
-                action,
-                {
-                  commit:
-                    events.find(
-                      (e) =>
-                        e.m_ID ===
-                        (action === "silencer_attach"
-                          ? "WPN_SILENCER_ATTACH"
-                          : "WPN_SILENCER_DETACH"),
-                    )?.m_flStartTime.m_flValue ?? 1,
-                  show: show?.m_flStartTime.m_flValue ?? 0,
-                  hide: (show?.m_flStartTime.m_flValue ?? 0) + (show?.m_flDuration?.m_flValue ?? 1),
-                },
-              ],
-            ];
-          }),
-        ),
-        model: variants,
-        source: animations[0].scene,
-        sounds: new Map(
-          animations.map((a, i) => {
-            const data = a.parser.json as { animations: { extras?: { events?: ClipEvent[] } }[] };
-            const cues: SoundCue[] = [];
-            for (const event of data.animations[0].extras?.events ?? []) {
-              const eliteSound =
-                index === 18 && weaponMotions[i] === "reload"
-                  ? eliteReloadSounds[event.m_name?.toLowerCase() ?? ""]
-                  : undefined;
-              if (eliteSound) {
-                cues.push({ time: event.m_flStartTime.m_flValue, kind: eliteSound });
-                continue;
-              }
-              const sound = event.m_name?.split(".").at(-1);
-              const kind: WeaponSound | undefined = /^silencerscrew(?:onstart|offend|[1-5])$/.test(
-                sound ?? "",
-              )
-                ? (sound as WeaponSound)
-                : sound === "clipout" || sound === "boxout"
-                  ? "reload"
-                  : sound === "clipin" ||
-                      sound === "boxin" ||
-                      sound === "leftclipin" ||
-                      sound === "rightclipin" ||
-                      sound === "insertshell"
-                    ? "reloadIn"
-                    : sound === "boltpull" ||
-                        sound === "boltback" ||
-                        sound === "slideback" ||
-                        sound === "pump" ||
-                        sound === "pump_back" ||
-                        sound === "sideback"
-                      ? "bolt"
-                      : sound === "boltforward" ||
-                          sound === "sliderelease" ||
-                          sound === "slideforward" ||
-                          sound === "boltrelease" ||
-                          sound === "siderelease" ||
-                          sound === "pump_forward"
-                        ? "boltForward"
-                        : sound === "draw"
-                          ? "draw"
-                          : undefined;
-              if (kind) cues.push({ time: event.m_flStartTime.m_flValue, kind });
-            }
-            return [weaponMotions[i], cues];
-          }),
-        ),
-        clips: new Map(
-          animations.map((a, i) => [
-            weaponMotions[i],
-            new T.AnimationClip(
-              weaponMotions[i],
-              a.animations[0].duration,
-              a.animations.flatMap((c) => c.tracks),
-            ).optimize(),
-          ]),
-        ),
-      };
+      if (!name || (indices && !indices.includes(index)) || templates[index]) return;
+      let pending = pendingWeapons.get(index);
+      if (!pending) {
+        pending = loadNativeWeapon(name, index).catch((error: unknown) => {
+          pendingWeapons.delete(index);
+          throw error;
+        });
+        pendingWeapons.set(index, pending);
+      }
+      return pending;
     }),
   );
+}
+async function loadNativeWeapon(name: string, index: number) {
+  const weaponMotions: Motion[] = [...motions];
+  if (index === 8) weaponMotions.push("shoot_empty", "reload_empty");
+  if (index === 18 || index === 17) weaponMotions.push("shoot2");
+  if (index === 17) weaponMotions.push("prepare");
+  if (index === 1 || index === 2) weaponMotions.push("silencer_attach", "silencer_detach");
+  const [model, ...animations] = await Promise.all([
+    loadModel(`/models/viewmodels/${name}-hd.glb`),
+    ...weaponMotions.map((m) => loadModel(`/models/viewmodels/${name}/${m}.glb`)),
+  ]);
+  const variants = new T.Group();
+  model.scene.name = "skin-hd";
+  variants.add(model.scene);
+  const reloadData = animations[2].parser.json as {
+    animations: { extras?: { events?: ClipEvent[] } }[];
+  };
+  const reloadEvents = reloadData.animations[0].extras?.events ?? [];
+  const loop = reloadEvents.find((event) => event.m_ID === "WPN_RELOAD_LOOP");
+  const addAmmo = reloadEvents.find((event) => event.m_ID === "WPN_RELOAD_ADD_AMMO");
+  templates[index] = {
+    magazineInsert: Object.fromEntries(
+      animations.flatMap((animation, i) => {
+        const motion = weaponMotions[i];
+        if (motion !== "reload" && motion !== "reload_empty") return [];
+        const events =
+          (animation.parser.json as { animations: { extras?: { events?: ClipEvent[] } }[] })
+            .animations[0].extras?.events ?? [];
+        const marker = events.filter((event) => event.m_ID === "WPN_RELOAD_ADD_AMMO").at(-1);
+        return marker ? [[motion, T.MathUtils.clamp(marker.m_flStartTime.m_flValue, 0, 1)]] : [];
+      }),
+    ),
+    reloadPhases:
+      loop && addAmmo
+        ? {
+            introEnd: loop.m_flStartTime.m_flValue,
+            loopEnd: loop.m_flStartTime.m_flValue + (loop.m_flDuration?.m_flValue ?? 0),
+            addAmmo: addAmmo.m_flStartTime.m_flValue,
+          }
+        : undefined,
+    suppressor: Object.fromEntries(
+      animations.flatMap((a, i) => {
+        const action = weaponMotions[i];
+        if (action !== "silencer_attach" && action !== "silencer_detach") return [];
+        const events =
+          (a.parser.json as { animations: { extras?: { events?: ClipEvent[] } }[] }).animations[0]
+            .extras?.events ?? [];
+        const show = events.find((e) => e.m_ID === "WPN_SHOW_SILENCER");
+        return [
+          [
+            action,
+            {
+              commit:
+                events.find(
+                  (e) =>
+                    e.m_ID ===
+                    (action === "silencer_attach" ? "WPN_SILENCER_ATTACH" : "WPN_SILENCER_DETACH"),
+                )?.m_flStartTime.m_flValue ?? 1,
+              show: show?.m_flStartTime.m_flValue ?? 0,
+              hide: (show?.m_flStartTime.m_flValue ?? 0) + (show?.m_flDuration?.m_flValue ?? 1),
+            },
+          ],
+        ];
+      }),
+    ),
+    model: variants,
+    source: animations[0].scene,
+    sounds: new Map(
+      animations.map((a, i) => {
+        const data = a.parser.json as { animations: { extras?: { events?: ClipEvent[] } }[] };
+        const cues: SoundCue[] = [];
+        for (const event of data.animations[0].extras?.events ?? []) {
+          const eliteSound =
+            index === 18 && weaponMotions[i] === "reload"
+              ? eliteReloadSounds[event.m_name?.toLowerCase() ?? ""]
+              : undefined;
+          if (eliteSound) {
+            cues.push({ time: event.m_flStartTime.m_flValue, kind: eliteSound });
+            continue;
+          }
+          const sound = event.m_name?.split(".").at(-1);
+          const kind: WeaponSound | undefined = /^silencerscrew(?:onstart|offend|[1-5])$/.test(
+            sound ?? "",
+          )
+            ? (sound as WeaponSound)
+            : sound === "clipout" || sound === "boxout"
+              ? "reload"
+              : sound === "clipin" ||
+                  sound === "boxin" ||
+                  sound === "leftclipin" ||
+                  sound === "rightclipin" ||
+                  sound === "insertshell"
+                ? "reloadIn"
+                : sound === "boltpull" ||
+                    sound === "boltback" ||
+                    sound === "slideback" ||
+                    sound === "pump" ||
+                    sound === "pump_back" ||
+                    sound === "sideback"
+                  ? "bolt"
+                  : sound === "boltforward" ||
+                      sound === "sliderelease" ||
+                      sound === "slideforward" ||
+                      sound === "boltrelease" ||
+                      sound === "siderelease" ||
+                      sound === "pump_forward"
+                    ? "boltForward"
+                    : sound === "draw"
+                      ? "draw"
+                      : undefined;
+          if (kind) cues.push({ time: event.m_flStartTime.m_flValue, kind });
+        }
+        return [weaponMotions[i], cues];
+      }),
+    ),
+    clips: new Map(
+      animations.map((a, i) => [
+        weaponMotions[i],
+        new T.AnimationClip(
+          weaponMotions[i],
+          a.animations[0].duration,
+          a.animations.flatMap((c) => c.tracks),
+        ).optimize(),
+      ]),
+    ),
+  };
+  if (reflections) applyReflections(templates[index].model, reflections);
 }
 export function nativeSuppressor(index: number, attach: boolean) {
   const motion = attach ? "silencer_attach" : "silencer_detach";

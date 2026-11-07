@@ -225,7 +225,7 @@ export function createSteamHandler({ secret, origin, fetcher = fetch, now = Date
       if (action === "complete") {
         headers.set("Content-Type", "text/html; charset=utf-8");
         return new Response(
-          `<!doctype html><title>Steam sign-in</title><p>Returning to CS2GO… You can close this window.</p><script>if(window.opener){window.opener.postMessage({type:"cs2go-steam-auth",result:${JSON.stringify(url.searchParams.get("steam") === "connected" ? "connected" : "failed")}},${JSON.stringify(base)});window.close();}</script>`,
+          `<!doctype html><title>Steam sign-in</title><p>Returning to CS2GO... You can close this window.</p><script>if(window.opener){window.opener.postMessage({type:"cs2go-steam-auth",result:${JSON.stringify(url.searchParams.get("steam") === "connected" ? "connected" : "failed")}},${JSON.stringify(base)});window.close();}</script>`,
           { headers },
         );
       }

@@ -17,7 +17,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
   const overlay = document.createElement("div");
   overlay.id = "skin-menu";
   overlay.className = "overlay hidden inventory-page";
-  overlay.innerHTML = `<section class="skin-dialog"><div class="dialog-heading"><div><div class="eyebrow">YOUR LOADOUT</div><h2>INVENTORY</h2><button id="add-inventory-item" type="button">＋ ADD ITEM</button></div><button class="close" id="close-skins" aria-label="Close skins">×</button></div><div class="inventory-toolbar"><label>Filter <select id="inventory-weapon"><option value="all">All equipment</option><option value="knives">Knives</option>${weapons.map((name, id) => `<option value="${id}">${name}</option>`).join("")}</select></label><span id="inventory-count"></span><label>Sort <select id="inventory-sort"><option value="name">Name</option><option value="weapon">Weapon</option></select></label></div><div class="skin-layout"><div class="skin-browser"><label class="skin-search">Find a finish<input id="skin-search" type="search" placeholder="Search skins…" autocomplete="off"></label><div id="skin-grid" role="group" aria-label="Finishes"></div></div><form id="skin-form" class="skin-details"><button type="button" id="close-item-details" aria-label="Close item details">×</button><div class="eyebrow" id="skin-rarity">DEFAULT FINISH</div><h3 id="skin-title">Default</h3><img id="skin-image" alt="Catalog preview"/><p class="skin-preview-note">Catalog preview - apply to see your wear and pattern in game.</p><label for="skin-wear">Wear <output id="skin-condition">Factory New</output></label><input id="skin-wear" type="range" min="0" max="1" step="0.000001"/><label class="skin-number">Wear float<input id="skin-float" type="number" min="0" max="1" step="0.000001" required/></label><label class="skin-number">Paint seed<input id="skin-seed" type="number" min="0" max="1000" step="1" required/></label><button type="button" id="random-seed" class="secondary">RANDOMIZE SEED</button><p class="hint">The same seed keeps the same pattern. Some finishes have fixed artwork; their seed changes wear placement.</p><button type="submit" class="deploy" id="apply-skin">APPLY FINISH</button><button type="button" id="equip-knife" class="secondary hidden">EQUIP KNIFE</button><p id="skin-status" role="status" aria-live="polite"></p></form></div></section>`;
+  overlay.innerHTML = `<section class="skin-dialog"><div class="dialog-heading"><div><div class="eyebrow">YOUR LOADOUT</div><h2>INVENTORY</h2><button id="add-inventory-item" type="button">＋ ADD ITEM</button></div><button class="close" id="close-skins" aria-label="Close skins">×</button></div><div class="inventory-toolbar"><label>Filter <select id="inventory-weapon"><option value="all">All equipment</option><option value="knives">Knives</option>${weapons.map((name, id) => `<option value="${id}">${name}</option>`).join("")}</select></label><span id="inventory-count"></span><label>Sort <select id="inventory-sort"><option value="name">Name</option><option value="weapon">Weapon</option></select></label></div><div class="skin-layout"><div class="skin-browser"><label class="skin-search">Find a finish<input id="skin-search" type="search" placeholder="Search skins..." autocomplete="off"></label><div id="skin-grid" role="group" aria-label="Finishes"></div></div><form id="skin-form" class="skin-details"><button type="button" id="close-item-details" aria-label="Close item details">×</button><div class="eyebrow" id="skin-rarity">DEFAULT FINISH</div><h3 id="skin-title">Default</h3><img id="skin-image" alt="Catalog preview"/><p class="skin-preview-note">Catalog preview - apply to see your wear and pattern in game.</p><label for="skin-wear">Wear <output id="skin-condition">Factory New</output></label><input id="skin-wear" type="range" min="0" max="1" step="0.000001"/><label class="skin-number">Wear float<input id="skin-float" type="number" min="0" max="1" step="0.000001" required/></label><label class="skin-number">Paint seed<input id="skin-seed" type="number" min="0" max="1000" step="1" required/></label><button type="button" id="random-seed" class="secondary">RANDOMIZE SEED</button><p class="hint">The same seed keeps the same pattern. Some finishes have fixed artwork; their seed changes wear placement.</p><button type="submit" class="deploy" id="apply-skin">APPLY FINISH</button><button type="button" id="equip-knife" class="secondary hidden">EQUIP KNIFE</button><p id="skin-status" role="status" aria-live="polite"></p></form></div></section>`;
   document.getElementById("app")!.append(overlay);
   const sections = document.createElement("nav");
   sections.className = "inventory-sections";
@@ -92,7 +92,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
     apply.textContent = adding ? "ADD TO INVENTORY" : "EQUIP FINISH";
     status.textContent = "";
     if (adding) {
-      status.textContent = "Loading finishes…";
+      status.textContent = "Loading finishes...";
       try {
         await loadCatalog();
         status.textContent = "";
@@ -270,7 +270,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
     }
     busy = true;
     apply.disabled = true;
-    status.textContent = "Preparing your finish…";
+    status.textContent = "Preparing your finish...";
     refresh(false);
     try {
       await setSkin(weapon, draft);
@@ -301,7 +301,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
   for (const id of ["skins-button", "pause-skins"])
     get(id).onclick = async () => {
       overlay.classList.remove("hidden");
-      status.textContent = "Loading finishes…";
+      status.textContent = "Loading finishes...";
       try {
         if (adding || items.some((item) => item.id)) await loadCatalog();
         draft = { ...skinChoices[weapon] };

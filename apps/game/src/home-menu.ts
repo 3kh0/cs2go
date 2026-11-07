@@ -2,6 +2,7 @@ import { weapons, isKnife } from "./physics";
 import { weaponAvailable } from "./economy";
 import type { Game } from "./game";
 import { assetUrl } from "./asset-url";
+import { readHomeWeapons } from "./home-weapons";
 
 const icon = (name: string) => `<img src="${assetUrl(`/ui/home/${name}.svg`)}" alt="">`;
 
@@ -42,7 +43,7 @@ export function homeMenuMarkup() {
         <button class="home-loadout-card" id="home-loadout"><span class="home-card-kicker">YOUR LOADOUT</span><span class="home-guns"><img src="/icons/buy/ak47.svg" alt=""><img src="/icons/buy/m4a1_silencer.svg" alt=""></span><strong>Configure your buy menu</strong><small>Customize your buy slots <span>›</span></small></button>
         <button class="home-collection-card" id="home-collection"><span class="home-card-kicker">PLAY YOUR WAY</span><img src="/icons/buy/awp.svg" alt=""><strong>Weapon finishes</strong><small>Customize your skins<span>›</span></small></button>
       </aside>
-      <div class="home-profile"><strong id="home-player-name">PLAYER</strong><span id="home-agent-name">SAS</span><div class="home-team-choice" role="group" aria-label="Showcase team"><button data-home-team="ct" aria-label="Show Counter-Terrorist" aria-pressed="true"><img src="/icons/team-ct.png" alt=""></button><button data-home-team="t" aria-label="Show Terrorist" aria-pressed="false"><img src="/icons/team-t.png" alt=""></button></div></div>
+      <div class="home-profile"><strong id="home-player-name">PLAYER</strong><span id="home-agent-name">SAS</span><span id="home-agent-status" role="status"></span><div class="home-team-choice" role="group" aria-label="Showcase team"><button data-home-team="ct" aria-label="Show Counter-Terrorist" aria-pressed="true"><img src="/icons/team-ct.png" alt=""></button><button data-home-team="t" aria-label="Show Terrorist" aria-pressed="false"><img src="/icons/team-t.png" alt=""></button></div></div>
       <aside class="home-social" aria-label="Local session"><img id="home-profile-icon" src="/icons/team-ct.png" alt="Your team"><span class="home-status-dot" title="Local session"></span><button id="steam-account-button" aria-label="Steam account" title="Sign in with Steam"><img id="steam-avatar" alt="Steam avatar" hidden><span id="steam-account-label">SIGN IN</span></button></aside>
       <button id="home-scenery-button" aria-label="Configure main menu" aria-expanded="false" aria-controls="home-scenery" title="Configure main menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></button>
       <div id="home-scenery" hidden>
@@ -249,20 +250,7 @@ export function setupHomeMenu(game: Game) {
       return button;
     }),
   );
-  const choices = { ct: 9, t: 0 };
-  try {
-    const stored = JSON.parse(localStorage.getItem("cs2go-home-weapons") ?? "{}");
-    for (const team of ["ct", "t"] as const)
-      if (
-        Number.isInteger(stored[team]) &&
-        weapons[stored[team]] &&
-        !isKnife(stored[team]) &&
-        weaponAvailable(stored[team], team)
-      )
-        choices[team] = stored[team];
-  } catch {
-    /* Defaults work without storage. */
-  }
+  const choices = readHomeWeapons();
   function syncShowcase() {
     el("home-switch-team").textContent = `Show Equipped ${game.team === "ct" ? "T" : "CT"} Agent`;
     el("home-weapon-options").replaceChildren(

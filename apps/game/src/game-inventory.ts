@@ -174,6 +174,7 @@ export class GameInventory {
       if (this.previews.length) this.closeLoadout();
       return;
     }
+    if (!this.game.assetsReady) return;
     const clear = renderer.getClearColor(new T.Color()),
       alpha = renderer.getClearAlpha();
     (this.backdrop ??= new MenuBackdrop()).render(
@@ -193,6 +194,24 @@ export class GameInventory {
   }
   showLoadout() {
     if (!this.game.assetsReady) {
+      document.getElementById("loadout-editor")?.remove();
+      const waiting = document.createElement("section");
+      waiting.id = "loadout-editor";
+      waiting.className = "overlay loadout-page";
+      waiting.setAttribute("aria-label", "Loadout");
+      waiting.innerHTML =
+        '<div class="dialog"><h2>LOADOUT</h2><p role="status">Preparing your loadout...</p></div>';
+      document.getElementById("app")!.append(waiting);
+      void this.game
+        .waitForAssets()
+        .then(() => {
+          if (waiting.isConnected) this.showLoadout();
+        })
+        .catch(() => {
+          if (waiting.isConnected)
+            waiting.querySelector('[role="status"]')!.textContent =
+              "The loadout could not load. Refresh the page to retry.";
+        });
       return;
     }
     document.getElementById("loadout-editor")?.remove();

@@ -20,6 +20,7 @@ import * as T from "three";
 import { loadModel } from "./gltf";
 import {
   loadKnifeMotion,
+  loadViewHands,
   createKnifeMotion,
   animateKnifeMotion,
   knifeDrawDuration,
@@ -45,35 +46,49 @@ export function weaponKnifeAttackDuration(index: number, stab: boolean, alternat
 }
 export const VIEWMODEL_FOV = 60;
 const templates: T.Group[] = [];
-export async function loadWeaponModels(renderer: T.WebGLRenderer) {
+const pendingModels = new Map<number, Promise<void>>();
+export async function loadWeaponModels(renderer: T.WebGLRenderer, indices?: readonly number[]) {
   // Metallic steel needs reflected light, not just diffuse hemisphere lighting.
   // Build once locally and share with knife materials for the template lifetime.
   const reflections = armoryReflections(renderer);
-  const [, , models] = await Promise.all([
-    loadKnifeMotion(),
-    loadNativeWeapons(),
+  await Promise.all([
+    indices && !indices.includes(4) ? loadViewHands() : loadKnifeMotion(),
+    loadNativeWeapons(indices),
     Promise.all(
-      ["ak-47", "m4a1_s", "usp-s", "awp", "bayonet"].map((name) =>
-        loadModel(`/models/${name}.glb`),
-      ),
+      ["ak-47", "m4a1_s", "usp-s", "awp", "bayonet"].map(async (name, index) => {
+        if (indices && !indices.includes(index)) return;
+        let pending = pendingModels.get(index);
+        if (!pending) {
+          pending = loadModel(`/models/${name}.glb`)
+            .then((model) => {
+              if (index === 4)
+                model.scene.traverse((object) => {
+                  if (!(object instanceof T.Mesh)) return;
+                  const materials = Array.isArray(object.material)
+                    ? object.material
+                    : [object.material];
+                  for (const material of materials) {
+                    if (material instanceof T.MeshStandardMaterial) {
+                      material.name = "weapon_knife_bayonet";
+                      material.envMap = reflections;
+                      material.envMapIntensity = 1.2;
+                    }
+                  }
+                });
+              templates[index] = model.scene;
+            })
+            .catch((error: unknown) => {
+              pendingModels.delete(index);
+              throw error;
+            });
+          pendingModels.set(index, pending);
+        }
+        return pending;
+      }),
     ),
-    loadInspectsKnives(reflections),
+    loadInspectsKnives(reflections, indices),
   ]);
   setNativeReflections(reflections);
-  models[4].scene.traverse((object) => {
-    if (!(object instanceof T.Mesh)) return;
-    const materials = Array.isArray(object.material) ? object.material : [object.material];
-    for (const material of materials) {
-      if (material instanceof T.MeshStandardMaterial) {
-        material.name = "weapon_knife_bayonet";
-        material.envMap = reflections;
-        material.envMapIntensity = 1.2;
-      }
-    }
-  });
-  models.forEach((model, index) => {
-    templates[index] = model.scene;
-  });
 }
 // SkeletonUtils gives every skinned part its own skeleton copy. Parts bound to
 // identical bones share one, so each rig uploads a single bone texture per frame.

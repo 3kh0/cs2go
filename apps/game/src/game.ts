@@ -471,6 +471,11 @@ export class Game {
   health = 100;
   armor = 100;
   assetsReady = false;
+  menuReady = false;
+  private assetsLoad?: Promise<void>;
+  async waitForAssets() {
+    await this.assetsLoad;
+  }
   wheelTime = 0;
   scopeLevel = 0;
   scopeTransition = 0;
@@ -713,7 +718,7 @@ export class Game {
     this.events();
     const play = el("play") as HTMLButtonElement;
     play.disabled = true;
-    play.querySelector("span")!.textContent = "LOADING ARMORY…";
+    play.querySelector("span")!.textContent = "LOADING ARMORY...";
     let loaded = 0;
     const worldReady = loadDust2(this.scene, this.renderer).then((world) => {
       gradeMapColors(world.root);
@@ -725,7 +730,7 @@ export class Game {
       loadCalloutRadar().then((image) => {
         this.radarImage = image;
       }),
-      loadWeaponModels(this.renderer),
+      loadWeaponModels(this.renderer, this.homeScene.startupWeapons),
       loadGrenadeModels(this.renderer),
       this.weaponAudio.load(),
       this.soundscape.load(),
@@ -741,41 +746,49 @@ export class Game {
       this.bombMesh.load(this.renderer).then(() => registerActorLighting(this.bombMesh)),
       worldReady,
     ];
-    const loadSteps = assets.length + 1; // GPU warm-up is the final step.
+    const loadSteps = assets.length + 1; // Compile the homepage before revealing it.
     onLoad(loaded, loadSteps);
-    void Promise.all(
+    const menuLoad = Promise.all(
       assets.map((asset) =>
         asset.then(() => {
           loaded++;
           onLoad(loaded, loadSteps);
         }),
       ),
-    )
-      .then(async () => {
-        for (let i = 0; i < 5; i++) this.bots.push(this.makeBot(i));
-        this.useWorld();
-        this.equip(this.selected);
-        await this.bombView.load(this.renderer);
-        this.view.add(this.bombView);
-        await this.defuseView.load(this.renderer);
-        this.view.add(this.defuseView);
-        this.scene.add(this.defuseView.wires);
-        return this.warmUp();
-      })
-      .then(() => {
-        this.assetsReady = true;
-        this.updateGraphics();
-        play.disabled = false;
-        play.querySelector("span")!.textContent = "GO";
-        onLoad(loadSteps, loadSteps);
-      })
-      .catch((error: unknown) => {
-        console.error("Game assets failed to load", error);
-        play.querySelector("span")!.textContent = "ARMORY UNAVAILABLE";
-        el("mode-description").textContent =
-          "Weapon models or audio could not load. Refresh the page to retry.";
-        onLoad(loaded, loadSteps, true);
-      });
+    ).then(async () => {
+      this.useWorld();
+      await this.homeScene.prepare(this.renderer);
+      this.menuReady = true;
+      this.updateGraphics();
+      play.querySelector("span")!.textContent = "PREPARING MATCH...";
+      onLoad(loadSteps, loadSteps);
+    });
+    this.assetsLoad = menuLoad.then(async () => {
+      // The homepage no longer waits for unused firearms and knives. Keep
+      // Play gated until the background armory and its GPU warm-up finish.
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await loadWeaponModels(this.renderer);
+      for (let i = 0; i < 5; i++) this.bots.push(this.makeBot(i));
+      this.useWorld();
+      this.equip(this.selected);
+      await this.bombView.load(this.renderer);
+      this.view.add(this.bombView);
+      await this.defuseView.load(this.renderer);
+      this.view.add(this.defuseView);
+      this.scene.add(this.defuseView.wires);
+      await this.warmUp();
+      this.assetsReady = true;
+      this.updateGraphics();
+      play.disabled = false;
+      play.querySelector("span")!.textContent = "GO";
+    });
+    void this.assetsLoad.catch((error: unknown) => {
+      console.error("Game assets failed to load", error);
+      play.querySelector("span")!.textContent = "ARMORY UNAVAILABLE";
+      el("mode-description").textContent =
+        "Weapon models or audio could not load. Refresh the page to retry.";
+      if (!this.menuReady) onLoad(loaded, loadSteps, true);
+    });
     requestAnimationFrame((t) => this.frame(t));
   }
   textureQualityApplied = "";
@@ -824,7 +837,7 @@ export class Game {
     this.updateTextureQuality();
   }
   updateTextureQuality() {
-    if (!this.assetsReady) return;
+    if (!this.menuReady && !this.assetsReady) return;
     const signature = `${this.settings.textureQuality}:${this.settings.textureFiltering}`;
     const changed = this.textureQualityApplied !== signature;
     const now = performance.now();
@@ -5681,7 +5694,11 @@ export class Game {
     requestAnimationFrame((t) => this.frame(t));
     // No scene work behind the loading overlay or in a background tab. Menus
     // keep their camera animation at 30 Hz without burning gameplay-level GPU.
-    if (document.hidden || !this.assetsReady || this.matchLoading) {
+    if (
+      document.hidden ||
+      (!this.assetsReady && (!this.menuReady || this.active)) ||
+      this.matchLoading
+    ) {
       this.last = now;
       return;
     }

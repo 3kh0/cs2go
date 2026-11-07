@@ -12,7 +12,7 @@ import { fetchGzipped } from "./gltf";
 import { createSoldier, disposeSoldier, type Soldier, type AgentTeam } from "./soldier";
 import { applyBuyPose, buyPoseToken, poseBuyProp } from "./buy-poses";
 import { unregisterSkinModel } from "./skins";
-import { createNativeWorldGun } from "./weapon-motion";
+import { createNativeWorldGun, nativeWeaponReady } from "./weapon-motion";
 import { armoryReflections } from "./reflections";
 import { movePreviewHands } from "./preview-arm";
 import {
@@ -22,7 +22,8 @@ import {
   agentClipForModel,
   agentAnimationEquipment,
 } from "./agent-animations";
-import { createWorldGun, disposeWorldGun } from "./weapons";
+import { createWorldGun, disposeWorldGun, loadWeaponModels } from "./weapons";
+import { readHomeWeapons } from "./home-weapons";
 import { createWeaponInstance } from "./weapon-instance";
 import { isKnife, weaponSlot } from "./physics";
 import { createGrenadeModel } from "./grenade-models";
@@ -82,7 +83,13 @@ export class HomeScene {
   private pointer = new T.Vector2();
   private parallax = new T.Vector2();
   private floor = -9.674049 * 0.0254;
-  private weapons = { ct: 9, t: 0 };
+  private weapons = readHomeWeapons();
+  get startupWeapons() {
+    return [...new Set([0, 2, 9, this.weapons.ct, this.weapons.t])];
+  }
+  private renderer!: T.WebGLRenderer;
+  private pendingWeapons = new Set<number>();
+  private failedWeapons = new Set<number>();
   private pendingAgents = new Map<AgentTeam, string>();
   private failedAgents = new Set<string>();
   private agentPlayLock = false;
@@ -102,7 +109,10 @@ export class HomeScene {
     const results = await Promise.allSettled([
       acquireAgentAnimation(id),
       acquireAgentAppearance(wanted),
-      agentAnimationWeaponIndex(id, this.weapons[team]),
+      agentAnimationWeaponIndex(id, this.weapons[team]).then(async (index) => {
+        await loadWeaponModels(this.renderer, [index]);
+        return index;
+      }),
     ]);
     if (results.some((result) => result.status === "rejected")) {
       if (results[0].status === "fulfilled") results[0].value.release();
@@ -188,6 +198,7 @@ export class HomeScene {
     this.create(team, ready, selectedAgentId(team));
   }
   setWeapon(team: AgentTeam, index: number) {
+    if (this.weapons[team] !== index) this.failedWeapons.delete(index);
     this.weapons[team] = index;
   }
   constructor() {
@@ -197,6 +208,7 @@ export class HomeScene {
     });
   }
   async load(renderer: T.WebGLRenderer, scenery: Promise<T.Group>) {
+    this.renderer = renderer;
     const [data, world] = await Promise.all([
       fetchGzipped("/models/animations/home/poses.json.gz"),
       scenery,
@@ -278,7 +290,8 @@ export class HomeScene {
     appearance?: AgentAppearance,
     agentId = defaultAgent(team).id,
   ): Preview {
-    const index = this.weapons[team];
+    const desired = this.weapons[team];
+    const index = nativeWeaponReady(desired) ? desired : team === "ct" ? 9 : 0;
     const soldier = createSoldier(-1, team, appearance);
     const poseTeam = soldier.animationTeam;
     const idle = this.poses[poseTeam].rifle;
@@ -435,6 +448,19 @@ export class HomeScene {
   private preview(team: AgentTeam) {
     const wanted = selectedAgentId(team);
     let previous = this.previews.get(team);
+    const index = this.weapons[team];
+    if (!nativeWeaponReady(index)) {
+      if (!this.pendingWeapons.has(index) && !this.failedWeapons.has(index)) {
+        this.pendingWeapons.add(index);
+        void loadWeaponModels(this.renderer, [index])
+          .catch((error: unknown) => {
+            console.error("Showcase weapon failed to load", error);
+            this.failedWeapons.add(index);
+          })
+          .finally(() => this.pendingWeapons.delete(index));
+      }
+      return previous ?? this.create(team);
+    }
     if (previous?.index !== this.weapons[team] || previous.agentId !== wanted) {
       const ready = peekSelectedAgent(team);
       if (ready || wanted === defaultAgent(team).id) {
@@ -469,6 +495,7 @@ export class HomeScene {
     return previous;
   }
   async prepare(renderer: T.WebGLRenderer) {
+    for (const team of ["ct", "t"] as const) this.preview(team);
     const previousToneMapping = renderer.toneMapping;
     let programs: Promise<unknown>;
     try {
@@ -482,12 +509,21 @@ export class HomeScene {
   render(renderer: T.WebGLRenderer, team: AgentTeam, dt: number, showAgent = true) {
     const preview = this.preview(team);
     const loading = this.pendingAgents.has(team);
+    const weaponLoading = this.pendingWeapons.has(this.weapons[team]);
+    const weaponFailed = this.failedWeapons.has(this.weapons[team]);
     const status = document.getElementById("home-agent-status");
-    if (status && (loading || this.failedAgents.has(selectedAgentId(team)))) {
+    if (
+      status &&
+      (loading || this.failedAgents.has(selectedAgentId(team)) || weaponLoading || weaponFailed)
+    ) {
       status.dataset.owner = "appearance";
-      status.textContent = loading
-        ? "Loading agent…"
-        : "Agent unavailable. Select another agent to retry.";
+      status.textContent = weaponLoading
+        ? "Loading weapon..."
+        : weaponFailed
+          ? "Weapon unavailable. Select another weapon to retry."
+          : loading
+            ? "Loading agent..."
+            : "Agent unavailable. Select another agent to retry.";
     } else if (status?.dataset.owner === "appearance") status.textContent = "";
     const play = document.getElementById("play") as HTMLButtonElement;
     if (loading && !play.disabled) {

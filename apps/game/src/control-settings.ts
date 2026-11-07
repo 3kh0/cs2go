@@ -16,7 +16,7 @@ export function setupControlSettings(game: Game) {
       button.textContent = keyLabel(game.settings.bindings[button.dataset.binding!]);
       button.classList.toggle("listening", button === pending);
     }
-    if (pending) pending.textContent = "Press a key…";
+    if (pending) pending.textContent = "Press a key...";
   };
   for (const button of section.querySelectorAll<HTMLButtonElement>("[data-binding]"))
     button.onclick = () => {

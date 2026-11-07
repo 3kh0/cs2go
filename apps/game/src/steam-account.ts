@@ -244,7 +244,7 @@ export function setupSteamAccount() {
     if (busy || !profile || Date.now() < retryUntil) return;
     busy = true;
     controls();
-    status.textContent = "Syncing your CS2 inventory…";
+    status.textContent = "Syncing your CS2 inventory...";
     try {
       const data = await api("sync", "POST");
       items = data.items;

@@ -249,6 +249,9 @@
   font-size: 12px;
   color: #d9e1e5;
 }
+#home-agent-status:empty {
+  display: none;
+}
 .home-team-choice {
   display: flex;
   margin-top: 5px;

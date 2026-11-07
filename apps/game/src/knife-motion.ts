@@ -17,13 +17,30 @@ const names = [
 type MotionName = (typeof names)[number];
 let hands: T.Group;
 let skeleton: T.Group;
+let handsLoad: Promise<void> | undefined;
+let motionLoad: Promise<void> | undefined;
+export function loadViewHands() {
+  return (handsLoad ??= loadModel("/models/agents/view-hands.glb")
+    .then((model) => {
+      hands = model.scene;
+    })
+    .catch((error: unknown) => {
+      handsLoad = undefined;
+      throw error;
+    }));
+}
 const clips = new Map<MotionName, T.AnimationClip>();
-export async function loadKnifeMotion() {
-  const [arms, ...motions] = await Promise.all([
-    loadModel("/models/agents/view-hands.glb"),
+export function loadKnifeMotion() {
+  return (motionLoad ??= loadBayonetMotion().catch((error: unknown) => {
+    motionLoad = undefined;
+    throw error;
+  }));
+}
+async function loadBayonetMotion() {
+  const [, ...motions] = await Promise.all([
+    loadViewHands(),
     ...names.map((name) => loadModel(`/models/animations/bayonet/${name}.glb`)),
   ]);
-  hands = arms.scene;
   skeleton = motions[0].scene;
   motions.forEach((motion, i) => {
     // The secondary skeleton contains the knife's independent finger roll.

@@ -697,7 +697,7 @@ export class MultiplayerMatch {
     g.utility.update(dt);
     g.updateBombSelection(dt);
     if (this.connection.reconnecting) {
-      if (!this.wasReconnecting) g.notices.showAlert("Connection interrupted. Reconnecting…");
+      if (!this.wasReconnecting) g.notices.showAlert("Connection interrupted. Reconnecting...");
       this.wasReconnecting = true;
       this.request = neutralInput();
       g.jumpQueued = false;

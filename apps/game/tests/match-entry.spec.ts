@@ -182,7 +182,7 @@ for (const team of ["t", "ct"] as const)
     await expect(page.locator("#team-select")).toHaveCount(0);
     await expect(page.locator("#team-auto")).toBeEnabled();
     await expect(page.locator("#match-loading")).toHaveCount(0);
-    await expect(page.getByText("Loading agents…", { exact: true })).toHaveCount(0);
+    await expect(page.getByText("Loading agents...", { exact: true })).toHaveCount(0);
     expect(await page.evaluate(() => window.__game.active)).toBe(false);
     const choice = page.locator(`#team-select [data-team="${team}"]`);
     await choice.evaluate((button) => {

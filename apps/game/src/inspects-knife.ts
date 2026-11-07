@@ -9,6 +9,7 @@ import { registerSkinModel } from "./skins";
 
 type Template = { scene: T.Group; clips: Map<string, T.AnimationClip> };
 const templates = new Map<number, Template>();
+const pendingKnives = new Map<number, Promise<void>>();
 function knifeMaterial(material: T.Material, index: number) {
   const own = material.clone();
   if (index === 5 || index === 6)
@@ -24,30 +25,41 @@ function motionName(name: string) {
     )?.[1];
   return motion === "idle" ? "idle1" : motion;
 }
-export async function loadInspectsKnives(reflections: T.Texture) {
+export async function loadInspectsKnives(reflections: T.Texture, indices?: readonly number[]) {
   await Promise.all(
     knifeDefinitions
-      .filter(({ id }) => id !== 4)
-      .map(async ({ icon, id }) => {
-        const asset = await loadModel(`/models/animations/knives/${icon}.glb`);
-        asset.scene.traverse((o) => {
-          if (o instanceof T.Mesh && o.material instanceof T.MeshStandardMaterial) {
-            o.material.envMap = reflections;
-            o.material.envMapIntensity = 1.2;
-          }
-        });
-        const clips = new Map<string, T.AnimationClip>();
-        for (const clip of asset.animations) {
-          const name = clip.name.includes("/") && motionName(clip.name);
-          if (name) clips.set(name, restoreKnifeTiming(clip, knifeTiming(id, name)));
+      .filter(({ id }) => id !== 4 && (!indices || indices.includes(id)))
+      .map(({ icon, id }) => {
+        let pending = pendingKnives.get(id);
+        if (!pending) {
+          pending = loadKnife(reflections, icon, id).catch((error: unknown) => {
+            pendingKnives.delete(id);
+            throw error;
+          });
+          pendingKnives.set(id, pending);
         }
-        for (const name of ["idle1", "draw", "light_miss1", "heavy_miss1"])
-          if (!clips.has(name)) throw new Error(`Missing ${icon} knife motion: ${name}`);
-        if (![...clips.keys()].some((name) => name.startsWith("lookat")))
-          throw new Error(`Missing ${icon} knife inspection`);
-        templates.set(id, { scene: asset.scene, clips });
+        return pending;
       }),
   );
+}
+async function loadKnife(reflections: T.Texture, icon: string, id: number) {
+  const asset = await loadModel(`/models/animations/knives/${icon}.glb`);
+  asset.scene.traverse((o) => {
+    if (o instanceof T.Mesh && o.material instanceof T.MeshStandardMaterial) {
+      o.material.envMap = reflections;
+      o.material.envMapIntensity = 1.2;
+    }
+  });
+  const clips = new Map<string, T.AnimationClip>();
+  for (const clip of asset.animations) {
+    const name = clip.name.includes("/") && motionName(clip.name);
+    if (name) clips.set(name, restoreKnifeTiming(clip, knifeTiming(id, name)));
+  }
+  for (const name of ["idle1", "draw", "light_miss1", "heavy_miss1"])
+    if (!clips.has(name)) throw new Error(`Missing ${icon} knife motion: ${name}`);
+  if (![...clips.keys()].some((name) => name.startsWith("lookat")))
+    throw new Error(`Missing ${icon} knife inspection`);
+  templates.set(id, { scene: asset.scene, clips });
 }
 export function sourceKnifeDrawDuration(index: number) {
   return (templates.get(index)?.clips.get("draw")?.duration ?? 1) / KNIFE_ANIMATION_RATE;

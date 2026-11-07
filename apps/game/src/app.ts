@@ -147,7 +147,7 @@ el("play").onclick = async () => {
     const play = el("play") as HTMLButtonElement;
     play.disabled = true;
     (el("match-create") as HTMLButtonElement).disabled = true;
-    el("match-status").textContent = "Finding lobby…";
+    el("match-status").textContent = "Finding lobby...";
     try {
       const url = new URL(server.value);
       url.protocol = url.protocol === "wss:" ? "https:" : "http:";
@@ -192,7 +192,7 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
     game.start(mode, { bots: !multiplayer });
     el("scoreboard-lobby").hidden = !multiplayer;
     if (multiplayer && game.active) {
-      el("lobby-pin").textContent = "CONNECTING…";
+      el("lobby-pin").textContent = "CONNECTING...";
       el("lobby-server").textContent = new URL(endpoint).hostname;
       game.network = new MultiplayerMatch(game, endpoint, pin, create, mode);
     }
@@ -200,9 +200,9 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
   const cancelPreview = () => selector?.close();
   loader.signal.addEventListener("abort", cancelPreview, { once: true });
   try {
-    await loader.stage("Preparing Dust II…", 0);
+    await loader.stage("Preparing Dust II...", 0);
     await game.prepareMatch(mode, !multiplayer, loader.signal);
-    await loader.stage("Preparing the match…", 1);
+    await loader.stage("Preparing the match...", 1);
     if (replayTeam === undefined) {
       selector = prepareTeamSelector(enter, mode === "competitive" ? 5 : 10, game);
       await selector.ready;

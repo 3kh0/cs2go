@@ -7,7 +7,7 @@ export function openMatchLoading(mode: "casual" | "competitive" = "casual") {
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-labelledby", "match-loading-title");
   overlay.setAttribute("aria-busy", "true");
-  overlay.innerHTML = `<div class="match-loading-scenery"><span>Dust II</span></div><aside class="match-loading-panel"><div class="match-loading-content"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="match-loading-map">Dust II</span><h1 id="match-loading-title">${mode === "competitive" ? "Competitive" : "Casual"}</h1></div><div class="match-loading-brief"><strong>Bomb Scenario Mission</strong><p>Buy equipment at the beginning of each round with money earned.</p><p>${mode === "competitive" ? "5 vs 5 · Round economy<br>Friendly fire is ON" : "10 vs 10 · Free armor<br>Friendly fire is OFF"}</p></div><footer class="match-loading-footer"><div class="match-loading-progress"><p role="status" aria-live="polite">Preparing Dust II…</p><progress max="3" value="0" aria-label="Match preparation"></progress></div><button class="text-button" type="button">CANCEL · ESC</button></footer></aside>`;
+  overlay.innerHTML = `<div class="match-loading-scenery"><span>Dust II</span></div><aside class="match-loading-panel"><div class="match-loading-content"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="match-loading-map">Dust II</span><h1 id="match-loading-title">${mode === "competitive" ? "Competitive" : "Casual"}</h1></div><div class="match-loading-brief"><strong>Bomb Scenario Mission</strong><p>Buy equipment at the beginning of each round with money earned.</p><p>${mode === "competitive" ? "5 vs 5 · Round economy<br>Friendly fire is ON" : "10 vs 10 · Free armor<br>Friendly fire is OFF"}</p></div><footer class="match-loading-footer"><div class="match-loading-progress"><p role="status" aria-live="polite">Preparing Dust II...</p><progress max="3" value="0" aria-label="Match preparation"></progress></div><button class="text-button" type="button">CANCEL · ESC</button></footer></aside>`;
   const status = overlay.querySelector<HTMLElement>('[role="status"]')!;
   const progress = overlay.querySelector("progress")!;
   const button = overlay.querySelector("button")!;
@@ -25,7 +25,7 @@ export function openMatchLoading(mode: "casual" | "competitive" = "casual") {
     }
     if (controller.signal.aborted) return;
     controller.abort();
-    status.textContent = "Returning to the menu…";
+    status.textContent = "Returning to the menu...";
     button.disabled = true;
   };
   const keydown = (event: KeyboardEvent) => {
