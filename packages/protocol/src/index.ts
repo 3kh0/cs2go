@@ -1,7 +1,8 @@
+export { SnapshotEncoder, SnapshotDecoder } from "./snapshot-codec";
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 11;
+export const PROTOCOL_VERSION = 12;
 export const MAX_CHAT_LENGTH = 240;
 export const CHAT_INTERVAL_MS = 750;
 export type ChatChannel = "team" | "all";
@@ -349,6 +350,17 @@ export function validInput(value: unknown): value is Input {
     ].every((key) => typeof value[key] === "boolean")
   );
 }
+export function encodeInputs(inputs: Input[]): string {
+  const defaults = neutralInput();
+  return JSON.stringify({
+    type: "compact-inputs",
+    inputs: inputs.map((input) =>
+      Object.fromEntries(
+        Object.entries(input).filter(([key, value]) => value !== defaults[key as keyof Input]),
+      ),
+    ),
+  });
+}
 export function parseClientMessage(raw: string): ClientMessage | null {
   let value: unknown;
   try {
@@ -357,6 +369,14 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     return null;
   }
   if (!record(value)) return null;
+  if (value.type === "compact-inputs") {
+    if (!Array.isArray(value.inputs) || !value.inputs.length || value.inputs.length > MAX_BATCH)
+      return null;
+    const inputs = value.inputs.map((input: unknown) =>
+      record(input) ? { ...neutralInput(), ...input } : null,
+    );
+    return inputs.every(validInput) ? { type: "inputs", inputs } : null;
+  }
   if (value.type === "team")
     return value.team === "ct" || value.team === "t" ? { type: "team", team: value.team } : null;
   if (value.type === "chat") {

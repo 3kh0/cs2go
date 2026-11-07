@@ -144,9 +144,11 @@ function areaDamage(
   const fire = effect.kind === "molotov" || effect.kind === "incendiary";
   for (const victim of match.players.values()) {
     if (victim.health <= 0) continue;
-    const center = new T.Vector3(victim.x, victim.y + 0.8, victim.z),
-      distance = source.distanceTo(center);
-    if (distance > radius || !sight(match, source, center)) continue;
+    const dx = victim.x - source.x,
+      dy = victim.y + 0.8 - source.y,
+      dz = victim.z - source.z,
+      distanceSquared = dx * dx + dy * dy + dz * dz;
+    if (distanceSquared > radius * radius) continue;
     if (
       fire &&
       !effect.cells.some(
@@ -156,8 +158,10 @@ function areaDamage(
       )
     )
       continue;
+    const center = new T.Vector3(victim.x, victim.y + 0.8, victim.z);
+    if (!sight(match, source, center)) continue;
     const damage =
-      (fixed || heDamage(distance)) *
+      (fixed || heDamage(Math.sqrt(distanceSquared))) *
       utilityDamageScale(
         match.state.mode,
         effect.kind,

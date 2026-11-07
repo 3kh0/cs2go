@@ -12,6 +12,7 @@ export class UtilityVisual {
       transparent: true,
       depthWrite: false,
       side: T.DoubleSide,
+      forceSinglePass: true,
       blending: T.NormalBlending,
       vertexShader: `uniform float time; varying vec2 vUv; varying float vPhase;
         void main(){vUv=uv;vPhase=instanceMatrix[3].x*17.13+instanceMatrix[3].z*9.7;

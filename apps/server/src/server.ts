@@ -7,6 +7,7 @@ import {
   SNAPSHOT_RATE,
   TICK_RATE,
   neutralInput,
+  SnapshotEncoder,
   parseClientMessage,
   type Input,
   type MatchEvent,
@@ -54,6 +55,7 @@ export type ServerOptions = {
   maxRooms?: number;
   maxConnections?: number;
   log?: (message: string) => void;
+  onTick?: (milliseconds: number) => void;
 };
 
 export function startServer(options: ServerOptions) {
@@ -73,16 +75,18 @@ export function startServer(options: ServerOptions) {
   const detached = new Map<string, { connection: Connection; expires: number }>();
   const roomLabels = new WeakMap<Room, number>();
   const rejected = new WeakSet<ServerWebSocket<Connection>>();
+  const encoders = new WeakMap<Room, SnapshotEncoder>();
+  const sentTicks = new WeakMap<ServerWebSocket<Connection>, number>();
   let nextRoomLabel = 1;
   const log = (message: string) => options.log?.(message);
   const clientLabel = (socket: ServerWebSocket<Connection>) => socket.data.id.slice(0, 8);
   function send(socket: ServerWebSocket<Connection>, message: ServerMessage | string) {
-    if (socket.readyState !== 1) return;
+    if (socket.readyState !== 1) return false;
     if (socket.getBufferedAmount() > 512 * 1024) {
       socket.close(1013, "Connection too slow");
-      return;
+      return false;
     }
-    socket.send(typeof message === "string" ? message : JSON.stringify(message));
+    return socket.send(typeof message === "string" ? message : JSON.stringify(message)) !== 0;
   }
   function reject(socket: ServerWebSocket<Connection>, message: string) {
     if (!rejected.has(socket)) {
@@ -361,6 +365,7 @@ export function startServer(options: ServerOptions) {
     }
     let catchup = 0;
     while (accumulator >= STEP && catchup++ < 32) {
+      const started = options.onTick ? performance.now() : 0;
       accumulator -= STEP;
       ticks++;
       for (const room of rooms.values()) {
@@ -412,11 +417,23 @@ export function startServer(options: ServerOptions) {
             events: room.events,
             round: room.state,
           };
-          const encoded = JSON.stringify(message);
-          for (const socket of room.connections) send(socket, encoded);
+          let encoder = encoders.get(room);
+          if (!encoder) {
+            encoder = new SnapshotEncoder();
+            encoders.set(room, encoder);
+          }
+          const encoded = encoder.encode(message);
+          const previousTick = room.tick - TICK_RATE / SNAPSHOT_RATE;
+          let full: string | undefined;
+          for (const socket of room.connections) {
+            const frame =
+              sentTicks.get(socket) === previousTick ? encoded : (full ??= JSON.stringify(message));
+            if (send(socket, frame)) sentTicks.set(socket, room.tick);
+          }
           room.events = [];
         }
       }
+      options.onTick?.(performance.now() - started);
     }
     peakCatchup = Math.max(peakCatchup, Math.min(catchup, 32));
     if (options.log && now - statusAt >= 30000) {

@@ -5,6 +5,7 @@ import { startServer } from "../src/server";
 import {
   PROTOCOL_VERSION,
   neutralInput,
+  SnapshotDecoder,
   type PlayerState,
   type ServerMessage,
 } from "@cs2go/protocol";
@@ -36,7 +37,12 @@ async function client(
   });
   sockets.push(socket);
   const messages: ServerMessage[] = [];
-  socket.onmessage = (event) => messages.push(JSON.parse(String(event.data)));
+  const decoder = new SnapshotDecoder();
+  socket.onmessage = (event) => {
+    const message = decoder.decode(JSON.parse(String(event.data)));
+    assert(message, "valid server frame");
+    messages.push(message);
+  };
   await until(() => socket.readyState === WebSocket.OPEN, "open");
   socket.send(
     JSON.stringify({

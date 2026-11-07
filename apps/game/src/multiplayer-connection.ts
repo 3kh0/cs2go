@@ -1,5 +1,7 @@
 import {
   MAX_BATCH,
+  SnapshotDecoder,
+  encodeInputs,
   TICK_RATE,
   MAX_PENDING_INPUTS,
   PROTOCOL_VERSION,
@@ -27,6 +29,7 @@ export class MatchConnection {
   private interrupt?: () => void;
   private timeline?: number;
   private lastTick = -1;
+  private decoder = new SnapshotDecoder();
   round?: RoundState;
   map: DustMap;
   id = "";
@@ -64,6 +67,7 @@ export class MatchConnection {
     const connect = () => {
       if (this.disposed) return;
       this.lastSnapshot = performance.now();
+      this.decoder.reset();
       this.socket = new WebSocket(url);
       const socket = this.socket;
       console.log("[network] Connecting", { attempt: this.attempts + 1 });
@@ -84,7 +88,11 @@ export class MatchConnection {
       };
       this.socket.onmessage = (event) => {
         if (socket !== this.socket || this.disposed) return;
-        const message = JSON.parse(event.data) as ServerMessage;
+        const message = this.decoder.decode(JSON.parse(event.data));
+        if (!message) {
+          this.interrupt?.();
+          return;
+        }
         if (message.type === "welcome") {
           if (message.version !== PROTOCOL_VERSION) {
             this.close("Game version mismatch; refresh the page");
@@ -203,7 +211,7 @@ export class MatchConnection {
   }
   private flush() {
     if (this.batch.length && this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send(JSON.stringify({ type: "inputs", inputs: this.batch }));
+      this.socket.send(encodeInputs(this.batch));
       this.batch = [];
     }
   }

@@ -55,15 +55,10 @@ export function advanceCombat(
 ) {
   advanceAimPunch(state.punch, dt);
   state.knifeAge += dt;
+  const pose = accuracyPose(player, mode);
   for (let i = 0; i < weapons.length; i++) {
-    advanceWeaponAccuracy(
-      state.accuracy[i],
-      i,
-      state.recoil[i].index,
-      player.eye < 1.4,
-      dt,
-      accuracyPose(player, i === player.weapon ? mode : state.accuracy[i].mode),
-    );
+    pose.mode = i === player.weapon ? mode : state.accuracy[i].mode;
+    advanceWeaponAccuracy(state.accuracy[i], i, state.recoil[i].index, player.eye < 1.4, dt, pose);
     advanceWeaponRecoil(state.recoil[i], i, dt);
   }
 }

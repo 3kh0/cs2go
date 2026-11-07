@@ -790,6 +790,10 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
   }
   if (state.phase === "finished") return events;
   for (const drop of state.drops) {
+    if (drop.sleeping || drop.age > 5) {
+      drop.age += STEP;
+      continue;
+    }
     const position = new T.Vector3(drop.x, drop.y, drop.z),
       velocity = new T.Vector3(drop.vx, drop.vy, drop.vz),
       rotation = { x: drop.rx, z: drop.rz };
@@ -820,7 +824,8 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
       state.remaining = rules.roundTime;
     }
   }
-  for (const player of match.players.values()) {
+  const actors = [...match.players.values()];
+  for (const player of actors) {
     const input = inputs.get(player.id) ?? {
       ...neutralInput(),
       yaw: player.yaw,
@@ -857,9 +862,7 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
       fallingSpeed = Math.max(0, -player.vertical);
     const planting = state.bomb.carrier === player.id && state.bomb.plantProgress > 0 && input.use;
     if (!frozen)
-      movePlayer(player, planting ? { ...input, duck: true } : input, STEP, match.map, [
-        ...match.players.values(),
-      ]);
+      movePlayer(player, planting ? { ...input, duck: true } : input, STEP, match.map, actors);
     else {
       player.vx = player.vz = player.vertical = 0;
     }
