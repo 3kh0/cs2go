@@ -15,6 +15,9 @@ RUN bun run --cwd apps/server build
 
 FROM dhi.io/bun:1 AS runtime
 WORKDIR /app
+LABEL org.opencontainers.image.source=https://github.com/3kh0/cs2go \
+      org.opencontainers.image.title=server \
+      org.opencontainers.image.description="CS2GO authoritative multiplayer server, powered by Bun"
 ENV NODE_ENV=production PORT=3001 ALLOWED_ORIGINS=https://cs2go.3kh0.net MAP_DIRECTORY=/app/maps
 COPY --from=build --chown=65532:65532 /app/apps/server/dist/index.js ./server.js
 COPY --chown=65532:65532 packages/assets/public/models/maps/dust2-physics.glb.gz packages/assets/public/models/maps/dust2-nav.json packages/assets/public/models/maps/dust2-bomb.bin.gz ./maps/

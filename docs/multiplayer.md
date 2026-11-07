@@ -27,7 +27,7 @@ Frontend: `http://127.0.0.1:5173/`. WebSocket server: `ws://127.0.0.1:3001/ws`. 
 
 ## Docker / Coolify
 
-Use the repository root as build context, root `Dockerfile` and `runtime` stage. Digest-pinned DHI Bun 1.4.4 stages produce a shell-free, non-root server. Authenticate the build host with `docker login dhi.io` when required; never add registry credentials to the repository.
+For fast deployment, use the prebuilt `ghcr.io/3kh0/cs2go/server` package in a Coolify Docker Image application, with port 3001 and `/healthz`. See [container packages](deployment.md#bun-container-packages). For source builds, use the repository root as build context, root `Dockerfile` and `runtime` stage. The DHI Bun `1-dev` build stage includes the shell required by Docker `RUN` commands; the `1` runtime stage is shell-free and runs as a non-root user. Authenticate the build host with `docker login dhi.io` when required; never add registry credentials to the repository.
 
 | Setting               | Value                                                                    |
 | --------------------- | ------------------------------------------------------------------------ |

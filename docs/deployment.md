@@ -59,3 +59,33 @@ Vercel builds reject a missing CDN origin or incomplete release. Local builds us
 Startup never waits for service-worker registration to resolve. All required assets, decoding and GPU warm-up finish before Play. The homepage shares map resources with gameplay. Use the cache/loading tools listed in [assets.md](assets.md) for local measurements; historical workstation timings are not production performance guarantees.
 
 Multiplayer container configuration is in [multiplayer.md](multiplayer.md).
+
+## Bun container packages
+
+The deploy workflow also publishes two independent repository-linked GHCR packages:
+
+| Image                       | Purpose                                                 | Container port |
+| --------------------------- | ------------------------------------------------------- | -------------- |
+| `ghcr.io/3kh0/cs2go/client` | Built browser client, served by Bun with `/api/steam`   | `3000`         |
+| `ghcr.io/3kh0/cs2go/server` | Authoritative Bun match server and three map-data files | `3001`         |
+
+Both publish `latest` and `sha-<full Git commit>` tags for Linux amd64 (NA1/NA2). Prefer an immutable SHA tag or digest when deploying. They share the small Bun base, but contain separate application layers and use separate build caches. They appear in the GitHub repository's Packages section through their OCI source labels and workflow publication token.
+
+Pushes to main build only affected images: `apps/game` changes build the client; `apps/server` changes build the server; protocol/simulation, workspace dependency and workflow changes build both. Changes to the three server map files also build the server. Client builds wait for any required R2 asset publication, while server builds run independently of R2 and Vercel. A manual workflow dispatch builds both. Vercel deployment continues independently alongside the client image.
+
+Image jobs use blobless sparse checkouts. The server downloads only code, workspace manifests and its three map inputs. The client downloads code and the asset manifest, verifies the pinned R2 release and never includes the multi-gigabyte art tree. Each image must pass a non-root, read-only container smoke test before being pushed. GitHub Actions caches dependency/build layers separately for each image.
+
+GHCR publication uses the job's `GITHUB_TOKEN` with `packages: write`; no separate GHCR push token is required. Configure Actions secrets `DHI_USERNAME` and `DHI_TOKEN` for pulling the hardened base images. `ASSET_CDN_URL` remains the public repository variable for client builds. Steam secrets are runtime-only.
+
+In Coolify, create a **Docker Image** application using the corresponding GHCR image and tag, set its exposed port from the table, and configure `/healthz`. No Git source or build commands are needed. For the client, set `STEAM_ORIGIN` to its canonical public HTTPS URL and `STEAM_SESSION_SECRET` to a stable random secret of at least 32 characters. Existing Steam login, public inventory sync, service-worker update behavior and immutable asset cache headers remain available. For match servers, set `ALLOWED_ORIGINS` to the exact public client origins; see [multiplayer](multiplayer.md).
+
+GHCR initially creates private packages. To permit unauthenticated pulls, change each package's visibility to Public in its package settings. Otherwise authenticate both Coolify hosts to GHCR with a token restricted to reading packages. Publishing images does not redeploy Coolify or change DNS automatically.
+
+Local image validation:
+
+```sh
+docker build -t cs2go-server .
+python3 scripts/smoke-container.py server cs2go-server
+docker build -f apps/game/Dockerfile --build-arg ASSET_CDN_URL=https://a.cs2go.3kh0.net -t cs2go-client .
+python3 scripts/smoke-container.py client cs2go-client
+```

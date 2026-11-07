@@ -14,6 +14,8 @@ jobs:
     outputs:
       assets: ${{ steps.diff.outputs.assets }}
       deploy: ${{ steps.diff.outputs.deploy }}
+      client: ${{ steps.diff.outputs.client }}
+      server: ${{ steps.diff.outputs.server }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -26,18 +28,36 @@ jobs:
           EVENT: ${{ github.event_name }}
         run: |
           assets=false
-          deploy=false
+          client=false
+          server=false
           if [ "$EVENT" = workflow_dispatch ] || [ "$BEFORE" = 0000000000000000000000000000000000000000 ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
             assets=true
-            deploy=true
-          elif git diff --name-only "$BEFORE" HEAD -- packages/assets .github/workflows/deploy.yml | grep -q .; then
-            assets=true
-            deploy=true
-          elif git diff --name-only "$BEFORE" HEAD -- apps packages/protocol packages/simulation package.json bun.lock bunfig.toml turbo.json scripts/build-assets.mjs scripts/service-worker.js | grep -q .; then
-            deploy=true
+            client=true
+            server=true
+          else
+            if git diff --quiet "$BEFORE" HEAD -- package.json bun.lock bunfig.toml packages/protocol packages/simulation .github/workflows/deploy.yml scripts/smoke-container.py; then
+              :
+            else
+              client=true
+              server=true
+            fi
+            if ! git diff --quiet "$BEFORE" HEAD -- packages/assets .github/workflows/deploy.yml; then
+              assets=true
+              client=true
+            fi
+            if ! git diff --quiet "$BEFORE" HEAD -- apps/game scripts/build-assets.mjs scripts/service-worker.js turbo.json; then
+              client=true
+            fi
+            if ! git diff --quiet "$BEFORE" HEAD -- apps/server Dockerfile .dockerignore packages/assets/public/models/maps/dust2-physics.glb.gz packages/assets/public/models/maps/dust2-nav.json packages/assets/public/models/maps/dust2-bomb.bin.gz; then
+              server=true
+            fi
           fi
-          echo "assets=$assets" >> "$GITHUB_OUTPUT"
-          echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
+          {
+            echo "assets=$assets"
+            echo "deploy=$client"
+            echo "client=$client"
+            echo "server=$server"
+          } >> "$GITHUB_OUTPUT"
   assets:
     needs: changes
     if: needs.changes.outputs.assets == 'true'
@@ -108,6 +128,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /apps/
@@ -136,3 +157,131 @@ jobs:
       - run: bunx --bun vercel@65.8.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
       - run: bunx --bun vercel@65.8.0 build --prod --token="$VERCEL_TOKEN"
       - run: bunx --bun vercel@65.8.0 deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+  server-image:
+    name: Publish server image
+    needs: changes
+    if: needs.changes.outputs.server == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /package.json
+            /bun.lock
+            /bunfig.toml
+            /apps/game/package.json
+            /apps/server/package.json
+            /packages/assets/package.json
+            /packages/protocol/
+            /packages/simulation/
+            /scripts/smoke-container.py
+            /Dockerfile
+            /.dockerignore
+            /apps/server/
+            /packages/assets/public/models/maps/dust2-physics.glb.gz
+            /packages/assets/public/models/maps/dust2-nav.json
+            /packages/assets/public/models/maps/dust2-bomb.bin.gz
+      - uses: docker/setup-buildx-action@v4
+      - name: Log in to DHI
+        uses: docker/login-action@v4
+        with:
+          registry: dhi.io
+          username: ${{ secrets.DHI_USERNAME }}
+          password: ${{ secrets.DHI_TOKEN }}
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build server
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          load: true
+          tags: ghcr.io/${{ github.repository }}/server:sha-${{ github.sha }}
+          labels: org.opencontainers.image.revision=${{ github.sha }}
+          cache-from: type=gha,scope=server
+          cache-to: type=gha,mode=max,scope=server
+      - name: Smoke test server image
+        run: python3 scripts/smoke-container.py server "ghcr.io/$GITHUB_REPOSITORY/server:sha-$GITHUB_SHA"
+      - name: Publish server
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}/server
+        run: |
+          docker tag "$IMAGE:sha-$GITHUB_SHA" "$IMAGE:latest"
+          docker push "$IMAGE:sha-$GITHUB_SHA"
+          docker push "$IMAGE:latest"
+          echo "### Server image" >> "$GITHUB_STEP_SUMMARY"
+          echo "\`$IMAGE:latest\` and \`$IMAGE:sha-$GITHUB_SHA\`" >> "$GITHUB_STEP_SUMMARY"
+  client-image:
+    name: Publish client image
+    needs: [changes, assets]
+    if: always() && !cancelled() && needs.changes.result == 'success' && needs.changes.outputs.client == 'true' && (needs.assets.result == 'success' || needs.assets.result == 'skipped')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /package.json
+            /bun.lock
+            /bunfig.toml
+            /apps/game/package.json
+            /apps/server/package.json
+            /packages/assets/package.json
+            /packages/protocol/
+            /packages/simulation/
+            /scripts/smoke-container.py
+            /apps/game/
+            /scripts/build-assets.mjs
+            /scripts/service-worker.js
+            /packages/assets/manifest.json
+            /packages/assets/pipeline.mjs
+      - uses: docker/setup-buildx-action@v4
+      - name: Log in to DHI
+        uses: docker/login-action@v4
+        with:
+          registry: dhi.io
+          username: ${{ secrets.DHI_USERNAME }}
+          password: ${{ secrets.DHI_TOKEN }}
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build client
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: apps/game/Dockerfile
+          platforms: linux/amd64
+          load: true
+          tags: ghcr.io/${{ github.repository }}/client:sha-${{ github.sha }}
+          labels: org.opencontainers.image.revision=${{ github.sha }}
+          cache-from: type=gha,scope=client
+          cache-to: type=gha,mode=max,scope=client
+          build-args: ASSET_CDN_URL=${{ vars.ASSET_CDN_URL }}
+      - name: Smoke test client image
+        run: python3 scripts/smoke-container.py client "ghcr.io/$GITHUB_REPOSITORY/client:sha-$GITHUB_SHA"
+      - name: Publish client
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}/client
+        run: |
+          docker tag "$IMAGE:sha-$GITHUB_SHA" "$IMAGE:latest"
+          docker push "$IMAGE:sha-$GITHUB_SHA"
+          docker push "$IMAGE:latest"
+          echo "### Client image" >> "$GITHUB_STEP_SUMMARY"
+          echo "\`$IMAGE:latest\` and \`$IMAGE:sha-$GITHUB_SHA\`" >> "$GITHUB_STEP_SUMMARY"
