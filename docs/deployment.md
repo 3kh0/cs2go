@@ -79,7 +79,7 @@ GHCR publication uses the job's `GITHUB_TOKEN` with `packages: write`; no separa
 
 In Coolify, create a **Docker Image** application using the corresponding GHCR image and tag, set its exposed port from the table, and configure `/healthz`. No Git source or build commands are needed. For the client, set `STEAM_ORIGIN` to its canonical public HTTPS URL and `STEAM_SESSION_SECRET` to a stable random secret of at least 32 characters. Existing Steam login, public inventory sync, service-worker update behavior and immutable asset cache headers remain available. For match servers, set `ALLOWED_ORIGINS` to the exact public client origins; see [multiplayer](multiplayer.md).
 
-GHCR initially creates private packages. To permit unauthenticated pulls, change each package's visibility to Public in its package settings. Otherwise authenticate both Coolify hosts to GHCR with a token restricted to reading packages. Publishing images does not redeploy Coolify or change DNS automatically.
+Both repository packages are Public and support unauthenticated pulls from Coolify. Publishing images does not redeploy Coolify or change DNS automatically.
 
 Local image validation:
 
