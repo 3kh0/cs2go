@@ -1,3 +1,4 @@
+import { cacheOwnedSkeletons } from "./cached-skeleton";
 import { agentBounds, prepareSoldierHitboxes } from "./soldier-hitboxes";
 export { agentBounds } from "./soldier-hitboxes";
 import { registerActorLighting, disposeActorLighting } from "./actor-lighting";
@@ -162,6 +163,7 @@ export function createSoldier(
   const spine = bone("spine_3");
   const hips = [bone("leg_upper_L"), bone("leg_upper_R")];
   shareSkeletons(model);
+  cacheOwnedSkeletons(model);
   model.traverse((o) => {
     if (o instanceof T.Mesh) {
       o.castShadow = o.receiveShadow = true;

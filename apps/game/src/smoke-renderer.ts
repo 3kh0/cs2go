@@ -1,4 +1,5 @@
 import * as T from "three";
+import { renderFrozenPose } from "./cached-skeleton";
 
 export const SMOKE_CELL_RADIUS = 1.05;
 const RECOVERY = 0.35;
@@ -179,6 +180,10 @@ export class SmokeRenderer {
  */
 export class SmokeComposite {
   target?: T.WebGLRenderTarget;
+  // The cloud pass needs no world lights/fog or another map/rig traversal.
+  private cloudScene = new T.Scene();
+  private cloudParents: (T.Object3D | null)[] = [];
+  private cloudMasks: number[] = [];
   private size = new T.Vector2();
   private viewportSize = new T.Vector2();
   private viewport = new T.Vector4();
@@ -246,6 +251,17 @@ export class SmokeComposite {
     clouds: readonly SmokeRenderer[],
     lowQuality = false,
   ) {
+    // Poses are sampled before rendering. Share body palettes across the depth,
+    // shadow and color passes, without retaining them across animation updates.
+    return renderFrozenPose(() => this.renderPasses(renderer, scene, camera, clouds, lowQuality));
+  }
+  private renderPasses(
+    renderer: T.WebGLRenderer,
+    scene: T.Scene,
+    camera: T.PerspectiveCamera,
+    clouds: readonly SmokeRenderer[],
+    lowQuality = false,
+  ) {
     if (!clouds.length) {
       this.target?.dispose();
       this.target = undefined;
@@ -277,9 +293,18 @@ export class SmokeComposite {
     const shadowUpdate = renderer.shadowMap.autoUpdate;
     let shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
     const autoClear = renderer.autoClear;
+    const matrixUpdate = scene.matrixWorldAutoUpdate;
     renderer.autoClear = false;
     try {
-      for (const cloud of clouds) cloud.batch.layers.set(31);
+      // Animation has already advanced; all passes share the same world pose.
+      if (matrixUpdate) scene.updateMatrixWorld();
+      scene.matrixWorldAutoUpdate = false;
+      this.cloudScene.matrixWorldAutoUpdate = false;
+      for (const cloud of clouds) {
+        this.cloudParents.push(cloud.batch.parent);
+        this.cloudMasks.push(cloud.batch.layers.mask);
+        cloud.batch.layers.set(31);
+      }
       camera.layers.mask = mask & ~(1 << 31);
       scene.background = null;
       renderer.shadowMap.autoUpdate = false;
@@ -324,21 +349,36 @@ export class SmokeComposite {
       scene.background = null;
       renderer.shadowMap.autoUpdate = false;
       renderer.shadowMap.needsUpdate = false;
-      renderer.render(scene, camera);
+      if (scene.visible && clouds.every((cloud) => cloud.batch.parent === scene)) {
+        for (const cloud of clouds) this.cloudScene.add(cloud.batch);
+        // Direct scene children keep their world matrices and draw ordering.
+        renderer.render(this.cloudScene, camera);
+      } else {
+        // Retain inherited visibility and Group.renderOrder for nested clouds.
+        renderer.render(scene, camera);
+      }
     } finally {
       for (let i = 0; i < this.objects.length; i++) this.objects[i].material = this.originals[i];
       this.objects.length = this.originals.length = 0;
       camera.layers.mask = mask;
+      scene.matrixWorldAutoUpdate = matrixUpdate;
       scene.background = background;
       renderer.shadowMap.autoUpdate = shadowUpdate;
       renderer.autoClear = autoClear;
       renderer.shadowMap.needsUpdate = shadowNeedsUpdate;
       renderer.setRenderTarget(destination);
       if (!destination) renderer.setViewport(this.logicalViewport);
-      for (const cloud of clouds) {
-        cloud.batch.layers.set(0);
+      for (let i = 0; i < this.cloudParents.length; i++) {
+        const cloud = clouds[i];
+        const parent = this.cloudParents[i];
+        if (cloud.batch.parent !== parent) {
+          if (parent) parent.add(cloud.batch);
+          else cloud.batch.removeFromParent();
+        }
+        cloud.batch.layers.mask = this.cloudMasks[i];
         cloud.clearSceneDepth();
       }
+      this.cloudParents.length = this.cloudMasks.length = 0;
     }
   }
 }

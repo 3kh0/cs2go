@@ -31,7 +31,16 @@ export function bindSourceSky(scene: T.Scene, sky: T.Object3D, root: T.Object3D)
   let reset = false;
   scene.onBeforeRender = function (...args) {
     before.apply(this, args);
-    if (!root.visible) return;
+    // Smoke depth materials hide the sky; excluded layers cannot use it either.
+    // Update its expensive native color layer only for passes that can draw it.
+    if (!root.visible || !sky.visible || !sky.layers.test(args[2].layers)) return;
+    if (
+      sky instanceof T.Mesh &&
+      (Array.isArray(sky.material)
+        ? !sky.material.some((material: T.Material) => material.visible)
+        : !sky.material.visible)
+    )
+      return;
     reset = args[0].info.autoReset;
     if (reset) args[0].info.reset();
     args[0].info.autoReset = false;

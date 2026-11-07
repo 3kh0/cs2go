@@ -152,7 +152,80 @@ test("smoke clips optical depth at actual cover from outside and inside", async 
     const customViewport = renderer.getCurrentViewport(new T.Vector4()).toArray();
     renderer.setRenderTarget(null);
     destination.dispose();
+    // Reparenting for a cloud-only pass must preserve transformed owners,
+    // caller layers and state even if a draw callback throws.
+    const owner = new T.Group();
+    owner.position.set(2, 0, 0);
+    scene.add(owner);
+    owner.add(cloud.batch);
+    cloud.batch.position.x = -2;
+    cloud.batch.layers.enable(4);
+    scene.updateMatrixWorld();
+    const beforeCloudMatrix = cloud.batch.matrixWorld.clone();
+    const beforeCloudMask = cloud.batch.layers.mask;
+    composite.render(renderer, scene, camera, [cloud]);
+    const cloudStateRestored =
+      cloud.batch.parent === owner &&
+      cloud.batch.layers.mask === beforeCloudMask &&
+      cloud.batch.matrixWorld.equals(beforeCloudMatrix) &&
+      scene.matrixWorldAutoUpdate;
+    wall.visible = false;
+    cloud.update(3, 1, 3, [], -1);
+    owner.visible = false;
+    composite.render(renderer, scene, camera, [cloud]);
+    const hiddenOwnerPixel = read();
+    composite.render(renderer, scene, camera, []);
+    const hiddenOwnerReference = read();
+    owner.visible = true;
+    composite.render(renderer, scene, camera, [cloud]);
+    const visibleOwnerPixel = read();
+    // Group order outranks transparent distance sorting. The nearer direct
+    // cloud must draw before the farther cloud inside an ordered owner.
+    const direct = new SmokeRenderer(cells, cloud.geometry);
+    direct.update(3, 1, 3, [], -1);
+    direct.batch.position.z = 2;
+    scene.add(direct.batch);
+    owner.layers.enable(31);
+    owner.renderOrder = 10;
+    const beforeDraw = cloud.batch.onBeforeRender;
+    const cloudDrawOrder: string[] = [];
+    cloud.batch.onBeforeRender = () => {
+      cloudDrawOrder.push("nested");
+    };
+    direct.batch.onBeforeRender = () => {
+      cloudDrawOrder.push("direct");
+    };
+    composite.render(renderer, scene, camera, [cloud, direct]);
+    direct.batch.removeFromParent();
+    direct.dispose();
+    scene.attach(cloud.batch);
+    const failureOwner = cloud.batch.parent;
+    cloud.batch.onBeforeRender = () => {
+      throw new Error("intentional cloud draw failure");
+    };
+    let drawFailed = false;
+    try {
+      composite.render(renderer, scene, camera, [cloud]);
+    } catch (error) {
+      drawFailed = (error as Error).message === "intentional cloud draw failure";
+    }
+    cloud.batch.onBeforeRender = beforeDraw;
+    const failedDrawRestored =
+      drawFailed &&
+      cloud.batch.parent === failureOwner &&
+      cloud.batch.layers.mask === beforeCloudMask &&
+      camera.layers.mask === cameraMask &&
+      scene.matrixWorldAutoUpdate &&
+      renderer.getRenderTarget() === null &&
+      wall.material === material &&
+      !cloud.material.uniforms.useDepth.value;
     return {
+      hiddenOwnerPixel,
+      hiddenOwnerReference,
+      visibleOwnerPixel,
+      cloudDrawOrder,
+      cloudStateRestored,
+      failedDrawRestored,
       released,
       fractionalDifference,
       originalViewport,
@@ -191,6 +264,11 @@ test("smoke clips optical depth at actual cover from outside and inside", async 
     await page.screenshot({ path: `artifacts/smoke-depth-${name}.png` });
   }
   expect(result.materialRestored).toBe(true);
+  expect(result.cloudStateRestored).toBe(true);
+  expect(result.failedDrawRestored).toBe(true);
+  expect(result.hiddenOwnerPixel).toEqual(result.hiddenOwnerReference);
+  expect(result.visibleOwnerPixel).not.toEqual(result.hiddenOwnerReference);
+  expect(result.cloudDrawOrder).toEqual(["direct", "nested"]);
   expect(result.fractionalDifference).toBeLessThanOrEqual(2);
   expect(result.restoredViewport).toEqual(result.originalViewport);
   expect(result.shadowUpdatePreserved).toBe(true);
