@@ -341,6 +341,31 @@ export function joinMatch(match: Match, player: PlayerState) {
     player.waiting = true;
   }
 }
+/** Changing sides never adds a second life to a round already in progress. */
+export function switchTeam(match: Match, player: PlayerState, team: Team): string | null {
+  if (player.team === team) return null;
+  if (match.state.phase === "finished") return "The match has ended.";
+  if (
+    [...match.players.values()].filter((other) => other.team === team).length >=
+    rulesFor(match.state.mode).teamSize
+  )
+    return "That team is full.";
+  const bomb = match.state.bomb;
+  if (bomb.carrier === player.id && !bomb.planted)
+    Object.assign(bomb, { x: player.x, y: player.y, z: player.z, carrier: null, plantProgress: 0 });
+  if (bomb.defuser === player.id) Object.assign(bomb, { defuser: null, progress: 0 });
+  match.shotsHeld.delete(player.id);
+  player.team = team;
+  respawn(player, match);
+  player.suppressed = weapons[player.weapon].suppressed;
+  player.burstRemaining = player.charge = player.suppressorTime = player.suppressorDuration = 0;
+  player.suppressorAction = "";
+  if (match.state.phase !== "waiting") {
+    player.health = 0;
+    player.waiting = true;
+  }
+  return null;
+}
 export function leaveMatch(match: Match, id: string) {
   const player = match.players.get(id);
   if (player && match.state.bomb.carrier === id) {

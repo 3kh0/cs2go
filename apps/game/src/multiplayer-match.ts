@@ -119,7 +119,6 @@ export class MultiplayerMatch {
           const input = document.getElementById("match-room") as HTMLInputElement;
           input.value = message.room;
           this.game.mode = message.mode;
-          (document.getElementById("match-invite") as HTMLButtonElement).disabled = false;
           document.getElementById("lobby-pin")!.textContent = message.room;
           document.getElementById("match-status")!.textContent =
             `Lobby ${message.room} · ${message.mode === "competitive" ? "Competitive" : "Casual"}`;
@@ -220,7 +219,7 @@ export class MultiplayerMatch {
       this.game.chat.receive(message);
       return;
     }
-    if (message.type === "chat-status") {
+    if (message.type === "chat-status" || message.type === "team-status") {
       this.game.notices.showAlert(message.message);
       return;
     }

@@ -1,5 +1,5 @@
 {
-  "source": "Imported local viewmodel GLBs; regenerate with scripts/import-weapon-action-data.py",
+  "source": "Imported local viewmodel GLBs; historical generator scripts/import-weapon-action-data.py is retained in Git history at 98ab4b7",
   "weapons": [
     {
       "draw": {

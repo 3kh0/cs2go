@@ -1,7 +1,7 @@
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 10;
+export const PROTOCOL_VERSION = 11;
 export const MAX_CHAT_LENGTH = 240;
 export const CHAT_INTERVAL_MS = 750;
 export type ChatChannel = "team" | "all";
@@ -241,6 +241,7 @@ export type RoundState = {
 export type ServerMessage =
   | ChatMessage
   | { type: "chat-status"; message: string }
+  | { type: "team-status"; message: string }
   | {
       type: "welcome";
       version: number;
@@ -260,6 +261,7 @@ export type ServerMessage =
   | { type: "pong"; time: number }
   | { type: "error"; message: string };
 export type ClientMessage =
+  | { type: "team"; team: Team }
   | { type: "chat"; channel: ChatChannel; text: string }
   | {
       type: "join";
@@ -354,6 +356,8 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     return null;
   }
   if (!record(value)) return null;
+  if (value.type === "team")
+    return value.team === "ct" || value.team === "t" ? { type: "team", team: value.team } : null;
   if (value.type === "chat") {
     if (
       (value.channel !== "team" && value.channel !== "all") ||

@@ -9,13 +9,11 @@ declare global {
   }
 }
 
-test("Panorama lobby flow creates a PIN, joins a peer, copies invites and rejects missing lobbies", async ({
+test("Panorama lobby flow creates a PIN, joins a peer, rejects missing lobbies", async ({
   browser,
 }) => {
   test.setTimeout(240000);
-  const hostContext = await browser.newContext({
-    permissions: ["clipboard-read", "clipboard-write"],
-  });
+  const hostContext = await browser.newContext();
   const peerContext = await browser.newContext();
   const host = await hostContext.newPage();
   const peer = await peerContext.newPage();
@@ -45,12 +43,15 @@ test("Panorama lobby flow creates a PIN, joins a peer, copies invites and reject
     await host.evaluate(() => document.exitPointerLock());
     await expect(host.locator("#pause")).toBeVisible();
     await expect(host.locator("#lobby-pin")).toHaveText(pin);
-    await host.locator("#match-invite").click();
-    await expect(host.locator("#lobby-copy-status")).toHaveText("Invite copied");
-    const invite = await host.evaluate(() => navigator.clipboard.readText());
-    expect(new URL(invite).searchParams.get("room")).toBe(pin);
+    await expect(host.locator("#match-invite")).toHaveCount(0);
+    const invite = new URL("/", host.url());
+    invite.search = new URLSearchParams({
+      room: pin,
+      server: "ws://127.0.0.1:3002/ws",
+      mode: "competitive",
+    }).toString();
     await host.screenshot({ path: "artifacts/online-lobby-pin.png" });
-    await peer.goto(invite);
+    await peer.goto(invite.href);
     await expect(peer.locator("#play")).toBeEnabled({ timeout: 120000 });
     await expect(peer.locator("#team-select")).toHaveCount(0);
     // Joining by PIN must adopt the host's mode even if the guest selected Casual.

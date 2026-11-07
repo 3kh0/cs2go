@@ -213,6 +213,12 @@ export class MatchConnection {
     if (this.socket.readyState === WebSocket.OPEN && this.id)
       this.socket.send(JSON.stringify({ type: "stop" }));
   }
+  changeTeam(team: Team) {
+    if (this.reconnecting || !this.local || this.socket.readyState !== WebSocket.OPEN) return false;
+    this.stopInput();
+    this.socket.send(JSON.stringify({ type: "team", team }));
+    return true;
+  }
   sendChat(channel: ChatChannel, text: string) {
     if (this.reconnecting || !this.local || this.socket.readyState !== WebSocket.OPEN) return false;
     this.socket.send(JSON.stringify({ type: "chat", channel, text }));

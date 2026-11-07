@@ -22,6 +22,9 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
   overlay.setAttribute("aria-label", "Choose your team");
   overlay.innerHTML = `<div class="team-options">${teams.map((team) => `<button class="team-choice team-${team}" data-team="${team}"><div class="team-label"><img class="team-emblem" src="${assetUrl(`/icons/team-${team}.png`)}" alt="" width="90" height="90"><h2>${team === "t" ? "TERRORISTS" : "COUNTER-TERRORISTS"}</h2><p class="team-count">0 players - 0 bots</p></div><div class="agent-preview"></div></button>`).join("")}</div><div class="team-controls"><button id="team-back">ESC · BACK</button><button id="team-auto">↻ AUTO SELECT</button></div>`;
   let shown = false;
+  const activeMatch = game.active;
+  const surfaces = ["hud", "pause"].map((id) => document.getElementById(id)!);
+  let visibility: boolean[] = [];
   const menuVisibility = menu.style.visibility;
   const { renderer } = game;
   const previewRoot = new T.Group();
@@ -72,6 +75,10 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
     layoutHeight = game.renderSize.y;
   };
   const render = (dt = 0) => {
+    if (shown && activeMatch && !game.active) {
+      close();
+      return;
+    }
     const width = game.renderSize.x,
       height = game.renderSize.y;
     renderer.setViewport(0, 0, width, height);
@@ -173,6 +180,10 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
     if (shown) {
       menu.inert = false;
       menu.style.visibility = menuVisibility;
+      if (activeMatch && game.active)
+        surfaces.forEach((surface, index) =>
+          surface.classList.toggle("hidden", visibility[index]!),
+        );
     }
     renderer.setScissorTest(false);
     renderer.setViewport(0, 0, game.renderSize.x, game.renderSize.y);
@@ -180,7 +191,7 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
   };
   const back = () => {
     close();
-    document.getElementById("play")!.focus();
+    document.getElementById(activeMatch ? "pause-teams" : "play")!.focus();
   };
   const keydown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -203,8 +214,12 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
   overlay.querySelectorAll<HTMLButtonElement>("[data-team]").forEach((button) => {
     button.onclick = () => select(button.dataset.team as AgentTeam);
   });
-  overlay.querySelector<HTMLButtonElement>("#team-auto")!.onclick = () =>
-    select(Math.random() < 0.5 ? "t" : "ct");
+  overlay.querySelector<HTMLButtonElement>("#team-auto")!.onclick = () => {
+    const available = teams.filter(
+      (team) => !overlay.querySelector<HTMLButtonElement>(`[data-team="${team}"]`)!.disabled,
+    );
+    select(available[Math.floor(Math.random() * available.length)]!);
+  };
   overlay.setAttribute("aria-description", `${size} versus ${size} bomb-defusal match`);
   const aborted = new Promise<never>((_, reject) => {
     controller.signal.addEventListener("abort", () => reject(controller.signal.reason), {
@@ -221,6 +236,22 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
     show() {
       if (closed || !ready || shown) return;
       shown = true;
+      for (const team of teams) {
+        const button = overlay.querySelector<HTMLButtonElement>(`[data-team="${team}"]`)!;
+        const players = game.network
+          ? game.network.connection.players.filter((player) => player.team === team).length
+          : activeMatch && game.team === team
+            ? 1
+            : 0;
+        const bots = game.network ? 0 : game.bots.filter((bot) => bot.team === team).length;
+        button.querySelector(".team-count")!.textContent =
+          `${players} player${players === 1 ? "" : "s"} - ${bots} bots`;
+        button.disabled = !!game.network && team !== game.team && players >= size;
+      }
+      if (activeMatch) {
+        visibility = surfaces.map((surface) => surface.classList.contains("hidden"));
+        surfaces.forEach((surface) => surface.classList.add("hidden"));
+      }
       document.getElementById("app")!.append(overlay);
       menu.inert = true;
       menu.style.visibility = "hidden";

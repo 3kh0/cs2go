@@ -188,6 +188,15 @@ try {
   assert.equal(chatMessages(isolated).length, 0);
   ally.socket.close();
   await until(() => a.players().length === 2, "chat teammate left");
+  const isolatedWelcome = isolated.messages.find((message) => message.type === "welcome")!;
+  const isolatedRoom = app.rooms.get(isolatedWelcome.room)!;
+  isolatedRoom.players.get(isolatedWelcome.id)!.money = 3210;
+  isolated.socket.send(JSON.stringify({ type: "team", team: "t" }));
+  await until(() => isolated.players()[0]?.team === "t", "authoritative team change");
+  assert.equal(isolated.players()[0].id, isolatedWelcome.id);
+  assert.equal(isolated.players()[0].money, 3210);
+  assert.equal(isolated.players()[0].health, 100);
+
   // A transport/scheduler stall may release more than 250 ms of valid inputs
   // together. Buffer them, but consume at most one per elapsed simulation tick.
   for (let batch = 0; batch < 8; batch++)

@@ -279,3 +279,32 @@
   font-size: calc(12 * var(--sb-unit));
   letter-spacing: 0;
 }
+
+/* Native-style lobby metadata below both team rosters. */
+#scoreboard-lobby {
+  display: flex;
+  align-items: center;
+  gap: calc(14 * var(--sb-unit));
+  height: auto;
+  min-height: 0;
+  margin: calc(6 * var(--sb-unit)) 0 0;
+  padding: calc(5 * var(--sb-unit)) 0 0;
+  justify-content: flex-start;
+  line-height: 1.2;
+  border-top: 1px solid #ffffff20;
+  color: #ffffff70;
+  font:
+    400 calc(12 * var(--sb-unit)) "Stratum2",
+    sans-serif;
+  letter-spacing: 0.5px;
+}
+#scoreboard-lobby[hidden] {
+  display: none;
+}
+#lobby-pin {
+  margin-left: calc(6 * var(--sb-unit));
+  color: #ffffffb3;
+  font: inherit;
+  font-family: "Stratum2 Monodigit", sans-serif;
+  letter-spacing: 1px;
+}

@@ -172,3 +172,11 @@ test("glove selections retain per-team wear and seed while rejecting malformed c
   ])
     expect(parse(invalid)).toBeNull();
 });
+
+test("team selection accepts only real teams without accepting a supplied player identity", () => {
+  expect(
+    parseClientMessage(JSON.stringify({ type: "team", team: "t", id: "someone-else" })),
+  ).toEqual({ type: "team", team: "t" });
+  for (const team of ["spectator", "CT", "", null, 1])
+    expect(parseClientMessage(JSON.stringify({ type: "team", team }))).toBeNull();
+});

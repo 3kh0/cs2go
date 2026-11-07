@@ -46,9 +46,9 @@ ${homeMenuMarkup()}
  ${matchNoticesMarkup()}<div id="inventory" role="list" aria-label="Weapon inventory"></div><div class="hud-bottom"><div class="vitals"><span class="armor" aria-label="Armor"><svg viewBox="0 0 40 46" aria-hidden="true"><path d="M8 10V5h24v5l5 4v14c0 8-9 13-17 16C12 41 3 36 3 28V14Z" fill="none" stroke="currentColor" stroke-width="2"/></svg><b id="armor">100</b></span><span class="health-stat" aria-label="Health"><b id="health">100</b><span class="health-track"><i id="health-fill"></i></span></span></div><div class="hud-team" aria-label="Your team"><span></span><img id="hud-team-icon" src="/icons/team-ct.png" alt="Counter-Terrorists"><span></span></div><div class="ammo"><div id="gun-name">USP-S</div><b id="ammo">12</b><span>/ <span id="reserve">48</span></span></div></div>
 
  <div id="telemetry">0 FPS &nbsp; - &nbsp; – MS FRAME &nbsp; - &nbsp; 128 TICK</div>
- <div id="scoreboard" class="hidden" role="region" aria-label="Match scoreboard"><header class="scoreboard-title"><h2></h2><span id="scoreboard-clock"></span></header><div id="scoreboard-rows"></div></div>
+ <div id="scoreboard" class="hidden" role="region" aria-label="Match scoreboard"><header class="scoreboard-title"><h2></h2><span id="scoreboard-clock"></span></header><div id="scoreboard-rows"></div><footer id="scoreboard-lobby" hidden><span>LOBBY ID <strong id="lobby-pin"></strong></span><span id="lobby-server"></span></footer></div>
 </div>
-<div id="pause" class="overlay hidden"><nav class="pause-toolbar" aria-label="Match menu"><button id="resume"><span aria-hidden="true">↶</span>RESUME GAME</button><button id="pause-skins"><img src="/icons/buy/ak47.svg" alt="">INVENTORY</button><button id="pause-settings"><img src="/ui/home/settings.svg" alt="">SETTINGS</button><button id="leave"><img src="/ui/home/power.svg" alt="">DISCONNECT</button></nav><aside id="pause-lobby" hidden><div><span>LOBBY PIN</span><strong id="lobby-pin"></strong><span id="lobby-server"></span></div><button id="match-invite">COPY INVITE</button><small id="lobby-copy-status" role="status"></small></aside><section id="leave-confirm" class="popup-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="leave-confirm-title" aria-describedby="leave-confirm-message"><div class="home-popup"><h2 id="leave-confirm-title">LEAVE MATCH</h2><p id="leave-confirm-message">Do you wish to stop playing now?</p><div class="home-popup-actions"><button id="leave-yes">YES</button><button id="leave-no">NO</button></div></div></section></div>
+<div id="pause" class="overlay hidden"><nav class="pause-toolbar" aria-label="Match menu"><button id="resume"><span aria-hidden="true">↶</span>RESUME GAME</button><button id="pause-skins"><img src="/icons/buy/ak47.svg" alt="">INVENTORY</button><button id="pause-teams"><span aria-hidden="true">⇄</span>SWAP TEAMS</button><button id="pause-settings"><img src="/ui/home/settings.svg" alt="">SETTINGS</button><button id="leave"><img src="/ui/home/power.svg" alt="">DISCONNECT</button></nav><section id="leave-confirm" class="popup-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="leave-confirm-title" aria-describedby="leave-confirm-message"><div class="home-popup"><h2 id="leave-confirm-title">LEAVE MATCH</h2><p id="leave-confirm-message">Do you wish to stop playing now?</p><div class="home-popup-actions"><button id="leave-yes">YES</button><button id="leave-no">NO</button></div></div></section></div>
 <div id="settings" class="overlay hidden"><section class="dialog settings"><div class="dialog-heading"><div><div class="eyebrow">MAKE IT YOURS</div><h2>SETTINGS</h2></div><button class="close" id="close-settings" aria-label="Close settings">×</button></div><label class="select-label">Play as<select id="agent-team"><option value="ct">Counter terrorist</option><option value="t">Terrorist</option></select></label><label>Mouse sensitivity <output id="sensitivity-value">1.0</output><input id="sensitivity" type="range" min="0.2" max="3" step="0.1" value="1"></label><label>Field of view <output id="fov-value">90°</output><input id="fov" type="range" min="75" max="110" step="1" value="90"></label><label class="hud-hue-setting">HUD hue <output id="hudHue-value">110°</output><input id="hudHue" type="range" min="0" max="360" step="1" value="110"><small>Health, armor, and weapon icons</small></label><label>Master volume <output id="volume-value">60%</output><input id="volume" type="range" min="0" max="100" value="60"></label><label>Music volume <output id="musicVolume-value">25%</output><input id="musicVolume" type="range" min="0" max="100" value="25"></label><label>Effects volume <output id="effectsVolume-value">100%</output><input id="effectsVolume" type="range" min="0" max="100" value="100"></label><label class="toggle-label" for="auto-bunnyhop"><span>Auto bunnyhop<small>Hold Space to jump as soon as you land.</small></span><input id="auto-bunnyhop" type="checkbox" role="switch"></label><label class="select-label">Graphics preset<select id="quality"></select></label><div class="controls"><span><kbd>W A S D</kbd> Move</span><span><kbd>MOUSE</kbd> Look / fire</span><span><kbd>SPACE</kbd> Jump</span><span><kbd>CTRL / C</kbd> Crouch</span><span><kbd>SHIFT</kbd> Walk quietly</span><span><kbd>R</kbd> Reload</span><span><kbd>1 2 3 / SCROLL / B</kbd> Equip / buy weapon</span><span><kbd>E</kbd> Plant / defuse</span><span><kbd>TAB</kbd> Scoreboard</span><span><kbd>RIGHT CLICK</kbd> AWP zoom / knife stab</span></div><p class="hint">Stop before you shoot. Tap the opposite movement key to counter-strafe. Pull your mouse down to control a spray.</p></section></div>
 ${buyMenuMarkup()}
 <div id="result" class="overlay hidden"><section class="dialog"><div class="eyebrow">MATCH COMPLETE</div><h2 id="result-title">WELL PLAYED.</h2><strong id="result-score"></strong><p id="result-stats"></p><button class="deploy" id="again">PLAY AGAIN <span>↗</span></button><button class="text-button" id="result-menu">RETURN TO MENU</button></section></div>
@@ -109,8 +109,6 @@ const invitedServer = invitation.get("server");
 if ([...server.options].some((option) => option.value === invitedServer))
   server.value = invitedServer!;
 room.value = validRoom(invitation.get("room")) ? invitation.get("room")! : "";
-let lobbyServer = "";
-let lobbyMode: "casual" | "competitive" = "casual";
 let creating = false;
 room.oninput = () => {
   el("match-status").textContent = "";
@@ -128,18 +126,6 @@ if (invitation.has("room") || invitedServer) {
   document.querySelector<HTMLButtonElement>('[data-session="multi"]')!.click();
   el("menu").dataset.page = "play";
 }
-el("match-invite").onclick = async () => {
-  const url = new URL(location.origin + "/");
-  url.searchParams.set("room", room.value);
-  url.searchParams.set("server", lobbyServer);
-  url.searchParams.set("mode", lobbyMode);
-  try {
-    await navigator.clipboard.writeText(url.href);
-    el("lobby-copy-status").textContent = "Invite copied";
-  } catch {
-    el("lobby-copy-status").textContent = url.href;
-  }
-};
 if (invitation.get("mode") === "competitive")
   document.querySelector<HTMLButtonElement>('[data-mode="competitive"]')!.click();
 el("match-create").onclick = () => {
@@ -203,14 +189,10 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
     game.accumulator = 0;
     game.last = performance.now();
     game.start(mode, { bots: !multiplayer });
-    el("pause-lobby").hidden = !multiplayer;
-    el("lobby-copy-status").textContent = "";
+    el("scoreboard-lobby").hidden = !multiplayer;
     if (multiplayer && game.active) {
-      lobbyServer = endpoint;
-      lobbyMode = mode;
       el("lobby-pin").textContent = "CONNECTING…";
       el("lobby-server").textContent = new URL(endpoint).hostname;
-      (el("match-invite") as HTMLButtonElement).disabled = true;
       game.network = new MultiplayerMatch(game, endpoint, pin, create, mode);
     }
   };
@@ -246,6 +228,31 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
 }
 
 el("resume").onclick = () => game.lock();
+el("pause-teams").onclick = async () => {
+  if (!game.active || game.matchLoading || document.getElementById("team-select")) return;
+  const button = el("pause-teams") as HTMLButtonElement;
+  button.disabled = true;
+  let selector: ReturnType<typeof prepareTeamSelector> | undefined;
+  try {
+    selector = prepareTeamSelector(
+      (team) => {
+        game.switchTeam(team);
+        void game.lock();
+      },
+      game.teamSize,
+      game,
+    );
+    await selector.ready;
+    if (game.active) selector.show();
+    else selector.close();
+  } catch (error) {
+    selector?.close();
+    console.error("Team selection failed", error);
+    game.notices.showAlert("Could not open team selection. Try again.");
+  } finally {
+    button.disabled = false;
+  }
+};
 const leaveConfirm = el("leave-confirm");
 const closeLeaveConfirm = () => {
   leaveConfirm.classList.add("hidden");

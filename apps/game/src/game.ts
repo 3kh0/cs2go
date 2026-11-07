@@ -1165,6 +1165,60 @@ export class Game {
       // Match entry awaits its warm-up with the actual roster and lighting.
     }
   }
+  switchTeam(team: AgentTeam) {
+    if (!this.active || this.team === team) return;
+    if (this.network) {
+      if (!this.network.connection.changeTeam(team))
+        this.notices.showAlert("Wait for the connection to recover before changing teams.");
+      return;
+    }
+    const previousTeam = this.team;
+    const botIndex = this.bots.findIndex((bot) => bot.team === team);
+    this.dropBomb("player");
+    if (this.bomb?.defuser === "player") {
+      this.bomb.defuser = null;
+      this.bomb.progress = 0;
+    }
+    this.team = team;
+    if (botIndex >= 0) {
+      const previous = this.bots[botIndex];
+      this.dropBomb(botIndex);
+      if (this.bomb?.defuser === botIndex) {
+        this.bomb.defuser = null;
+        this.bomb.progress = 0;
+      }
+      this.scene.remove(previous.group);
+      disposeSoldier(previous.rig);
+      const replacement = this.makeBot(botIndex, previousTeam);
+      replacement.kills = previous.kills;
+      replacement.deaths = previous.deaths;
+      replacement.money = previous.money;
+      this.bots[botIndex] = replacement;
+      this.spawnBot(replacement, botIndex);
+      if (this.teamMode) {
+        replacement.health = 0;
+        replacement.respawn = Infinity;
+        replacement.group.visible = false;
+      }
+    }
+    this.keys.clear();
+    this.firing = false;
+    this.setScope(0);
+    this.reload = this.revolverCharge = this.burstRemaining = 0;
+    this.utility.cancelThrow();
+    this.groundInventory.roundLoadout = null;
+    if (this.teamMode) {
+      this.health = 0;
+      this.dead = Infinity;
+      this.velocity = { x: 0, z: 0 };
+      this.spectated = undefined;
+      this.spectatorMode = "first";
+      this.notices.showAlert("Team changed. You will spawn next round.");
+      this.resetBotStrategies();
+    } else this.spawnPlayer();
+    this.scoreboardSignature = "";
+    this.updateUI();
+  }
   viewGun(index: number) {
     const key = `${this.team}:${index}`;
     let gun = this.guns.get(key);
@@ -2215,7 +2269,9 @@ export class Game {
       : null;
     if (this.dust) {
       const points = this.dust.navigation.data.spawns[b.team];
-      const slot = b.team === this.team ? index - this.teamSize + 1 : index;
+      const slot =
+        this.bots.slice(0, index).filter((bot) => bot.team === b.team).length +
+        (b.team === this.team ? 1 : 0);
       b.group.position.fromArray(points[slot % points.length]);
       const spawnFloor = this.dust.collision.floor(
         b.group.position.x,

@@ -48,7 +48,7 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 - `packages/assets/manifest.json`: checked-in SHA-256 release manifest; regenerate with `bun run assets:prepare` after asset changes.
 - `apps/game/`: Vite app workspace and Vercel project root.
 - `turbo.json`: task inputs, cache outputs, and environment configuration.
-- `scripts/`: maintained build/cache tools and gameplay-data importers; see docs/assets.md for the tool list and recovery of retired converters.
+- `scripts/`: only the active asset build plugin (`build-assets.mjs`), service worker (`service-worker.js`), and container smoke check (`smoke-container.py`). Recover historical import/conversion and diagnostic tools with `git show 98ab4b7:scripts/<filename>`; their recorded generator names in asset provenance describe historical runs.
 - `apps/game/tests/game.spec.ts`: browser integration checks. Unit tests live beside source files.
 
 ## Gameplay and performance

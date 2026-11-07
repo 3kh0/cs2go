@@ -3,7 +3,16 @@ afterEach(() => vi.restoreAllMocks());
 import * as T from "three";
 import { MapCollision } from "./map-collision";
 import { neutralInput, type Input } from "@cs2go/protocol";
-import { createPlayer, createMatch, joinMatch, endRound, STEP, stepMatch } from "./match";
+import {
+  createPlayer,
+  createMatch,
+  joinMatch,
+  endRound,
+  STEP,
+  stepMatch,
+  switchTeam,
+  startRound,
+} from "./match";
 import { movePlayer } from "./movement";
 import { rulesFor } from "./economy";
 import { testMap } from "./test-map";
@@ -308,4 +317,40 @@ test("post-round planting continues and restarts without changing the settled re
     expect(match.state.phase).toBe("freeze");
     expect(match.state.bomb.planted).toBe(false);
   }
+});
+
+test("switching teams releases C4, retains identity and money, and waits for a fresh round", () => {
+  const { match, ct, t } = fixture();
+  live(match);
+  t.money = 4321;
+  t.kills = 3;
+  Object.assign(match.state.bomb, { carrier: t.id, plantProgress: 1 });
+  const position = { x: t.x, y: t.y, z: t.z };
+  expect(switchTeam(match, t, "ct")).toBeNull();
+  expect(match.players.get(t.id)).toBe(t);
+  expect(t).toMatchObject({ team: "ct", money: 4321, kills: 3, health: 0, waiting: true });
+  expect(match.state.bomb).toMatchObject({ ...position, carrier: null, plantProgress: 0 });
+  const spawn = t.spawn;
+  expect(switchTeam(match, t, "ct")).toBeNull();
+  expect(t.spawn).toBe(spawn);
+  expect(t.health).toBe(0);
+  Object.assign(match.state.bomb, { planted: true, defuser: ct.id, progress: 1 });
+  expect(switchTeam(match, ct, "t")).toBeNull();
+  expect(match.state.bomb).toMatchObject({ planted: true, defuser: null, progress: 0 });
+  startRound(match);
+  expect(t).toMatchObject({ team: "ct", health: 100, waiting: false, money: 4321 });
+});
+
+test("team capacity rejects changes atomically, while waiting lobbies allow a fresh spawn", () => {
+  const match = createMatch("competitive", testMap());
+  const player = createPlayer("player", "Player", "ct");
+  joinMatch(match, player);
+  expect(switchTeam(match, player, "t")).toBeNull();
+  expect(player).toMatchObject({ team: "t", health: 100, waiting: false, secondary: 7 });
+  for (let i = 0; i < 5; i++) joinMatch(match, createPlayer(`ct${i}`, "CT", "ct"));
+  match.state.bomb.carrier = player.id;
+  const before = JSON.stringify(player);
+  expect(switchTeam(match, player, "ct")).toBe("That team is full.");
+  expect(JSON.stringify(player)).toBe(before);
+  expect(match.state.bomb.carrier).toBe(player.id);
 });

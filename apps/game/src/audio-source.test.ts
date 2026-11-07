@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import bindings from "../../../scripts/cs2-weapon-audio.json";
+import bindings from "./data/source-weapon-audio.json";
 
 it("covers every firearm marker with a native CS2 event and verifies bundled clip hashes", () => {
   const provenance = JSON.parse(

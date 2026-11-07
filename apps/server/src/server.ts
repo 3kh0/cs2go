@@ -17,6 +17,7 @@ import {
   createPlayer,
   createMatch,
   joinMatch,
+  switchTeam,
   leaveMatch,
   stepMatch,
   configurePlayer,
@@ -238,7 +239,27 @@ export function startServer(options: ServerOptions) {
             mode: room.state.mode,
           });
         } else if (!connection.room) return reject(socket, "Join a room first");
-        else if (message.type === "configure")
+        else if (message.type === "team") {
+          const player = connection.room.players.get(connection.id)!;
+          const previousTeam = player.team;
+          const error = switchTeam(connection.room, player, message.team);
+          if (!error && previousTeam !== player.team) {
+            connection.queue = [];
+            player.ack = connection.lastSeq;
+            connection.last = {
+              ...neutralInput(connection.lastSeq),
+              yaw: player.yaw,
+              pitch: player.pitch,
+            };
+            connection.lastInput = now;
+          }
+          send(socket, {
+            type: "team-status",
+            message:
+              error ??
+              `Joined ${player.team === "ct" ? "Counter-Terrorists" : "Terrorists"}.${player.waiting ? " You will spawn next round." : ""}`,
+          });
+        } else if (message.type === "configure")
           configurePlayer(
             connection.room,
             connection.room.players.get(connection.id)!,
