@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM dhi.io/bun:1 AS build
+FROM dhi.io/bun:1-dev AS build
 WORKDIR /app
 COPY package.json bun.lock bunfig.toml ./
 COPY apps/game/package.json ./apps/game/package.json
