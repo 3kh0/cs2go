@@ -1,4 +1,4 @@
-import stats from "./data/weapon-stats.json";
+import stats from "./data/weapon-stats.json" with { type: "json" };
 import { isKnife, knifeDefinitions } from "@cs2go/protocol";
 export { isKnife, knifeDefinitions } from "@cs2go/protocol";
 // CS2 console defaults, converted from Source inches to the scene's meters.

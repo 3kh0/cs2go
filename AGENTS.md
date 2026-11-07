@@ -9,7 +9,7 @@ Read the relevant implementation before editing. Preserve the user's changes and
 ## Toolchain
 
 - Package manager: Bun 1.4.4, pinned in `package.json`. Commit `bun.lock` when dependencies change; keep one package-manager lockfile.
-- Vite: 8.3.5. Import `defineConfig` from `vite` and unit-test helpers from `vitest`. Use standalone Oxlint 1.90.0 and Oxfmt 0.75.0. Keep TypeScript on v6 (currently 6.0.3); Playwright is 1.64.1.
+- Vite: 8.3.6. Import `defineConfig` from `vite` and unit-test helpers from `vitest`. Use standalone Oxlint 1.92.0 and Oxfmt 0.77.0. Keep TypeScript on v6 (currently 6.0.3); Playwright is 1.65.0.
 - `bunfig.toml` enables Bun for local JavaScript CLIs launched through `bun run`.
 - Install with `bun install --frozen-lockfile`. Use `bun add` / `bun remove` to update dependencies. Do not use npm, npx, or generate `package-lock.json`.
 

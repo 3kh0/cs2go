@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import type { Game } from "../src/game";
-import cues from "../src/data/ui-cues.json";
+import cues from "../src/data/ui-cues.json" with { type: "json" };
 declare global {
   interface Window {
     __game: Game;
