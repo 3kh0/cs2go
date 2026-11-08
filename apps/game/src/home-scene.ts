@@ -13,7 +13,14 @@ import { createSoldier, disposeSoldier, type Soldier, type AgentTeam } from "./s
 import { applyBuyPose, buyPoseToken, poseBuyProp } from "./buy-poses";
 import { unregisterSkinModel } from "./skins";
 import { createNativeWorldGun, nativeWeaponReady } from "./weapon-motion";
-import { armoryReflections } from "./reflections";
+import { registerActorLighting, updateActorLighting, setActorReflection } from "./actor-lighting";
+import {
+  sampleSourceProbe,
+  sampleSourceProbeSun,
+  sampleSourceProbeLocalShadows,
+  nearestSourceProbe,
+  loadSourceReflection,
+} from "./source-lighting";
 import { movePreviewHands } from "./preview-arm";
 import {
   acquireAgentAnimation,
@@ -77,6 +84,9 @@ type Preview = {
 /** The home scene shares the game's renderer and configurable menu clock. */
 export class HomeScene {
   private scene = new T.Scene();
+  private reflection?: T.WebGLRenderTarget;
+  private reflectionLoad?: Promise<void>;
+  private lightPosition = new T.Vector3();
   get graphicsRoot() {
     return this.scene;
   }
@@ -207,6 +217,7 @@ export class HomeScene {
       // Native wpn carries the source attachment animation, including its
       // rotation. Keep the gun outside the bone hierarchy in metre units.
       preview.soldier.group.add(preview.weapon);
+      registerActorLighting(preview.soldier.group, true);
       state.initialized = true;
       this.current = undefined;
     }
@@ -314,6 +325,7 @@ export class HomeScene {
         ? createWorldGun(index, true, createWeaponInstance(index, "player", true))
         : createNativeWorldGun(index, true, buy.weaponBones, true);
     preview.soldier.group.add(preview.weapon);
+    registerActorLighting(preview.soldier.group, true);
     preview.mixer.stopAllAction();
     ensureAgentAnimationBones(preview.soldier.model, animation.pack.scene);
     preview.action = preview.mixer
@@ -385,6 +397,27 @@ export class HomeScene {
       5,
     ).intersectObject(background, true)[0];
     if (ground) this.floor = ground.point.y;
+    // The stage stays at one location. Resolve its native reflection before
+    // compileAsync: swapping env-map defines during parallel shader warm-up
+    // can leave it waiting on a program that has already been released.
+    const probe = nearestSourceProbe(
+      this.lightPosition.set(1355.757812 * 0.0254, this.floor + 1, -925.05896 * 0.0254),
+    );
+    if (probe !== null)
+      this.reflectionLoad = loadSourceReflection(probe)
+        .then((texture) => {
+          const generator = new T.PMREMGenerator(renderer);
+          try {
+            this.reflection = generator.fromEquirectangular(texture);
+          } finally {
+            texture.dispose();
+            generator.dispose();
+          }
+        })
+        .catch(() => {
+          // Native diffuse probes remain available if an optional reflection fails.
+        });
+
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 64;
     const context = canvas.getContext("2d")!;
@@ -404,15 +437,25 @@ export class HomeScene {
     shadow.rotation.x = -Math.PI / 2;
     shadow.position.set(1355.757812 * 0.0254, this.floor + 0.005, -925.05896 * 0.0254);
     this.scene.add(shadow);
-    this.scene.environment = armoryReflections(renderer);
-    this.scene.environmentIntensity = 0.38;
+
     const haze = new T.Color("#d8c9b2");
     this.scene.background = new T.Color("#cbd2d1");
     this.scene.fog = new T.FogExp2(haze, 0.011);
-    this.scene.add(new T.HemisphereLight(0xe7f2ff, 0x8f7c60, 1.15));
-    const sun = new T.DirectionalLight(0xffe8c7, 2.6);
+    // Use Dust II's native sun and probe irradiance instead of studio fill.
+    // Three's Lambertian BRDF includes 1/pi; the Source intensity does not.
+    const sun = new T.DirectionalLight(0xffdebd, 2.5 * Math.PI);
     sun.target.position.set(34.435, 0.65, -23.497);
-    sun.position.copy(sun.target.position).add(new T.Vector3(-3, 8, 5));
+    const sunPitch = T.MathUtils.degToRad(50),
+      sunYaw = T.MathUtils.degToRad(43);
+    sun.position
+      .copy(sun.target.position)
+      .add(
+        new T.Vector3(
+          -Math.cos(sunPitch) * Math.cos(sunYaw),
+          Math.sin(sunPitch),
+          Math.cos(sunPitch) * Math.sin(sunYaw),
+        ).multiplyScalar(10),
+      );
     sun.castShadow = true;
     sun.shadow.mapSize.set(1024, 1024);
     Object.assign(sun.shadow.camera, {
@@ -527,6 +570,7 @@ export class HomeScene {
     const inverse = new T.Matrix4().fromArray(weapon.userData.buyGrip).invert();
     inverse.decompose(weapon.position, weapon.quaternion, weapon.scale);
     grip.add(weapon);
+    registerActorLighting(soldier.group, true);
     const times = pose.frames.map((frame) => frame.time);
     const tracks: T.KeyframeTrack[] = [];
     for (const name of Object.keys(pose.frames[0].bones)) {
@@ -673,11 +717,13 @@ export class HomeScene {
     return previous;
   }
   async prepare(renderer: T.WebGLRenderer) {
-    for (const team of ["ct", "t"] as const) this.preview(team);
+    await this.reflectionLoad;
+    for (const team of ["ct", "t"] as const)
+      setActorReflection(this.preview(team).soldier.group, this.reflection?.texture);
     const previousToneMapping = renderer.toneMapping;
     let programs: Promise<unknown>;
     try {
-      renderer.toneMapping = T.ACESFilmicToneMapping;
+      renderer.toneMapping = T.CustomToneMapping;
       programs = renderer.compileAsync(this.scene, this.camera);
     } finally {
       renderer.toneMapping = previousToneMapping;
@@ -807,6 +853,19 @@ export class HomeScene {
         T.Object3D.DEFAULT_UP,
         -this.parallax.x * T.MathUtils.degToRad(0.5),
       );
+    this.lightPosition.copy(preview.soldier.group.position);
+    this.lightPosition.y += 1;
+    updateActorLighting(
+      preview.soldier.group,
+      this.lightPosition,
+      sampleSourceProbe,
+      dt,
+      undefined,
+      sampleSourceProbeSun,
+      sampleSourceProbeLocalShadows,
+    );
+    setActorReflection(preview.soldier.group, this.reflection?.texture);
+    renderer.toneMapping = T.CustomToneMapping;
     renderer.clear();
     renderer.render(this.scene, this.camera);
     preview.soldier.model.getObjectByName("pelvis")!.getWorldPosition(this.namePosition);
