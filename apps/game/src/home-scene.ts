@@ -17,6 +17,7 @@ import { armoryReflections } from "./reflections";
 import { movePreviewHands } from "./preview-arm";
 import {
   acquireAgentAnimation,
+  loadAgentAnimations,
   agentAnimationWeaponIndex,
   ensureAgentAnimationBones,
   agentClipForModel,
@@ -46,6 +47,16 @@ type Preview = {
   index: number;
   agentId: string;
   agentName: string;
+  idleVariation?: {
+    actions: T.AnimationAction[];
+    releases: (() => void)[];
+    wait: number;
+    current?: T.AnimationAction;
+    entrance?: T.AnimationAction;
+    entrancePosition?: T.Vector3;
+    returning: boolean;
+    last: number;
+  };
   animation?: {
     id: string;
     release: () => void;
@@ -99,6 +110,113 @@ export class HomeScene {
   private animationPosition = new T.Vector3();
   private animationRotation = new T.Quaternion();
   private animationScale = new T.Vector3();
+  private arrivedAgents = new Set<string>();
+  private async loadIdleVariations(preview: Preview, team: AgentTeam) {
+    const state: NonNullable<Preview["idleVariation"]> = (preview.idleVariation = {
+      actions: [] as T.AnimationAction[],
+      releases: [] as (() => void)[],
+      wait: 8 + Math.random() * 6,
+      returning: false,
+      last: -1,
+    });
+    try {
+      const catalog = await loadAgentAnimations();
+      const candidates = catalog.filter(
+        (clip) =>
+          clip.team === team &&
+          clip.source === "main_menu" &&
+          !clip.additive &&
+          /walkup|lookat|shouldershrug|weightshift/.test(clip.name),
+      );
+      const compatible = (
+        await Promise.all(
+          candidates.map(async (clip) =>
+            (await agentAnimationWeaponIndex(clip.id, preview.index)) === preview.index
+              ? clip
+              : undefined,
+          ),
+        )
+      ).filter((clip) => clip !== undefined);
+      // Keep one native clip per gesture and only retain the relevant weapon pack.
+      const chosen = ["walkup", "lookat", "shouldershrug", "weightshift"].flatMap((kind) => {
+        const clip = compatible.find((clip) => clip.name.includes(kind));
+        return clip ? [clip] : [];
+      });
+      for (const definition of chosen) {
+        const loaded = await acquireAgentAnimation(definition.id);
+        if (this.previews.get(team) !== preview || preview.animation) {
+          loaded.release();
+          return;
+        }
+        ensureAgentAnimationBones(preview.soldier.model, loaded.pack.scene);
+        const clip = agentClipForModel(loaded.clip, preview.soldier.model).clone();
+        const entrance = definition.name.includes("walkup");
+        if (entrance) {
+          // Land on the showcase pose: native walk-up motion is relative to its
+          // final frame, rather than replacing the agent with another stance.
+          clip.tracks = clip.tracks.filter((track) => !track.name.startsWith("root_motion."));
+          T.AnimationUtils.makeClipAdditive(clip, clip.duration * 30);
+        } else {
+          // Idle gestures keep the same planted lower body.
+          clip.tracks = clip.tracks.filter((track) =>
+            /^(spine_|neck_|head_|clavicle_|arm_|hand_|finger_)/.test(track.name),
+          );
+          T.AnimationUtils.makeClipAdditive(clip);
+        }
+        const action = preview.mixer.clipAction(clip);
+        action.setLoop(T.LoopOnce, 1);
+        action.clampWhenFinished = true;
+        if (entrance) state.entrance = action;
+        else state.actions.push(action);
+        state.releases.push(loaded.release);
+      }
+    } catch {
+      // Keep the existing idle when an optional animation pack is unavailable.
+    }
+  }
+  private updateIdleVariation(preview: Preview, team: AgentTeam, dt: number) {
+    if (preview.animation || document.getElementById("startup")) return;
+    if (!preview.idleVariation) {
+      void this.loadIdleVariations(preview, team);
+      return;
+    }
+    const state = preview.idleVariation;
+    if (!state.current && state.entrance && !this.arrivedAgents.has(preview.agentId)) {
+      this.arrivedAgents.add(preview.agentId);
+      state.entrancePosition = preview.soldier.group.position.clone();
+      state.current = state.entrance;
+      state.current.reset().setEffectiveWeight(1).fadeIn(0.6).play();
+    }
+    if (state.current) {
+      if (state.entrancePosition) {
+        const progress = Math.min(1, state.current.time / (state.current.getClip().duration * 0.7));
+        preview.soldier.group.position
+          .copy(state.entrancePosition)
+          .addScaledVector(this.cameraDirection, 0.6 * (1 - progress));
+      }
+      if (!state.returning && state.current.time >= state.current.getClip().duration - 0.65) {
+        state.current.fadeOut(0.6);
+        state.returning = true;
+        state.wait = 0.6;
+      }
+      if (state.returning && (state.wait -= dt) <= 0) {
+        state.current.stop();
+        if (state.entrancePosition) {
+          preview.soldier.group.position.copy(state.entrancePosition);
+          state.entrancePosition = undefined;
+        }
+        state.current = undefined;
+        state.returning = false;
+        state.wait = 10 + Math.random() * 10;
+      }
+    } else if (state.actions.length && (state.wait -= dt) <= 0) {
+      const choices = state.actions.map((_, i) => i).filter((i) => i !== state.last);
+      const index = choices.length ? choices[Math.floor(Math.random() * choices.length)] : 0;
+      state.last = index;
+      state.current = state.actions[index];
+      state.current.reset().setEffectiveWeight(1).fadeIn(0.6).play();
+    }
+  }
   selectedAnimation(team: AgentTeam) {
     return this.previews.get(team)?.animation?.id;
   }
@@ -219,6 +337,12 @@ export class HomeScene {
     // Separate scene graph, shared immutable geometry/materials and native map lighting.
     // Avoid downloading/uploading a second Dust II just for the panorama.
     const background = world.clone(true);
+    // Native atlases already contain environment shadows. The showcase light
+    // should add only the agent's shadow, rather than projecting nearby map
+    // props onto the street a second time from a different sun direction.
+    background.traverse((object) => {
+      if (object instanceof T.Mesh || object instanceof T.Light) object.castShadow = false;
+    });
     this.scene.add(background);
     background.updateMatrixWorld(true);
     const ground = new T.Raycaster(
@@ -249,7 +373,9 @@ export class HomeScene {
     this.scene.add(shadow);
     this.scene.environment = armoryReflections(renderer);
     this.scene.environmentIntensity = 0.38;
-    this.scene.background = new T.Color("#c4d4de");
+    const haze = new T.Color("#d8c9b2");
+    this.scene.background = new T.Color("#cbd2d1");
+    this.scene.fog = new T.FogExp2(haze, 0.011);
     this.scene.add(new T.HemisphereLight(0xe7f2ff, 0x8f7c60, 1.15));
     const sun = new T.DirectionalLight(0xffe8c7, 2.6);
     sun.target.position.set(34.435, 0.65, -23.497);
@@ -403,8 +529,26 @@ export class HomeScene {
     tracks.push(new T.QuaternionKeyframeTrack(`${grip.name}.quaternion`, times, rotations));
     tracks.push(new T.VectorKeyframeTrack(`${grip.name}.scale`, times, scales));
     const mixer = new T.AnimationMixer(soldier.model);
+    // Attachment scale compensates for Source inches. Keep it fully weighted
+    // while body actions crossfade so the weapon never shrinks out of the hand.
+    const duration = Math.max(1, times.at(-1)!);
+    mixer
+      .clipAction(
+        new T.AnimationClip(
+          "home-grip",
+          duration,
+          tracks.filter((track) => track.name.startsWith(grip.name + ".")),
+        ),
+      )
+      .play();
     const action = mixer
-      .clipAction(new T.AnimationClip(pose.clip, Math.max(1, times.at(-1)!), tracks))
+      .clipAction(
+        new T.AnimationClip(
+          pose.clip,
+          duration,
+          tracks.filter((track) => !track.name.startsWith(grip.name + ".")),
+        ),
+      )
       .play();
     mixer.update(0);
     // Retargeted meshes have different sole heights; seat the first pose on the
@@ -424,6 +568,7 @@ export class HomeScene {
     if (!previous) return;
     this.scene.remove(previous.soldier.group);
     previous.animation?.release();
+    previous.idleVariation?.releases.forEach((release) => release());
     this.disposeWeapon(previous.weapon);
     previous.mixer.stopAllAction();
     previous.mixer.uncacheRoot(previous.soldier.model);
@@ -536,22 +681,17 @@ export class HomeScene {
     if (this.current !== team) {
       for (const [key, value] of this.previews) value.soldier.group.visible = key === team;
       this.current = team;
-      document.getElementById("home-agent-name")!.textContent = preview.agentName;
       (document.getElementById("home-profile-icon") as HTMLImageElement).src = assetUrl(
         `/icons/team-${team}.png`,
       );
-      document
-        .querySelectorAll<HTMLElement>("[data-home-team]")
-        .forEach((button) =>
-          button.setAttribute("aria-pressed", String(button.dataset.homeTeam === team)),
-        );
       const stage = document.getElementById("home-agent-stage")!;
       stage.dataset.clip = preview.action.getClip().name;
       stage.dataset.showcaseWeapon = String(preview.index);
       stage.dataset.agent = preview.agentId;
     }
     preview.soldier.group.visible = showAgent;
-    if (!this.reduced.matches) {
+    if (!this.reduced.matches && showAgent) {
+      this.updateIdleVariation(preview, team, dt);
       preview.mixer.update(dt);
     }
     if (preview.animation) {
@@ -583,8 +723,6 @@ export class HomeScene {
     this.camera.quaternion.copy(this.cameraRotation);
     if (!this.reduced.matches) {
       this.parallax.lerp(this.pointer, Math.min(1, dt * 5));
-      this.camera.rotateY(-this.parallax.x * T.MathUtils.degToRad(0.5));
-      this.camera.rotateX(-this.parallax.y * T.MathUtils.degToRad(0.5));
     }
     if ((document.getElementById("home-background") as HTMLSelectElement).value === "close")
       this.camera.position.addScaledVector(this.cameraDirection, 1.2);
@@ -610,11 +748,20 @@ export class HomeScene {
             Math.abs(point.x) / (-point.z * this.camera.aspect * 0.8),
           );
       }
-    this.camera.fov = T.MathUtils.radToDeg(2 * Math.atan(tangent));
+    this.camera.fov = T.MathUtils.radToDeg(2 * Math.atan(tangent / 1.1));
     this.camera.updateProjectionMatrix();
+    // Fit at the neutral angle so pointer movement never changes zoom or pitch.
+    if (!this.reduced.matches)
+      this.camera.rotateOnWorldAxis(
+        T.Object3D.DEFAULT_UP,
+        -this.parallax.x * T.MathUtils.degToRad(0.5),
+      );
     renderer.clear();
     renderer.render(this.scene, this.camera);
     preview.soldier.model.getObjectByName("pelvis")!.getWorldPosition(this.namePosition);
+    this.framingPoint.copy(preview.soldier.group.position);
+    this.framingPoint.y = this.floor;
+    this.namePosition.lerp(this.framingPoint, 0.75);
     this.namePosition.project(this.camera);
     const profile = document.querySelector<HTMLElement>(".home-profile")!;
     profile.style.visibility = showAgent ? "" : "hidden";

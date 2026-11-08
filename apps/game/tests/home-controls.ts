@@ -18,12 +18,7 @@ export async function selectHomeScenery(page: Page, name: string) {
 }
 
 export async function equipHomeAgent(page: Page, team: "ct" | "t", id: string) {
-  await page
-    .getByRole("button", {
-      name: team === "ct" ? "Show Counter-Terrorist" : "Show Terrorist",
-      exact: true,
-    })
-    .click();
+  await selectHomeTeam(page, team);
   await page.locator("#inventory-button").click();
   await page.locator('.loadout-team [data-loadout-cosmetic="agents"]').click();
   await page.locator(`[data-cosmetic-choice="${id}"]`).click();
@@ -31,4 +26,14 @@ export async function equipHomeAgent(page: Page, team: "ct" | "t", id: string) {
     timeout: 30000,
   });
   await page.locator("#home-button").click();
+}
+
+export async function selectHomeTeam(page: Page, team: "ct" | "t") {
+  if ((await page.locator("#home-agent-stage").getAttribute("data-agent"))?.endsWith("-" + team))
+    return;
+  await openSwitcher(page);
+  const switcher = page.locator("#home-switch-team");
+  if ((await switcher.textContent())?.includes(team === "t" ? " T " : " CT "))
+    await switcher.click();
+  else await page.locator("#home-scenery-button").click();
 }

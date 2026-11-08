@@ -40,7 +40,7 @@ test("agent roster is lazy, saved per team, and used by previews and newly spawn
     await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-agent", agent.id, {
       timeout: 30_000,
     });
-    await expect(page.locator("#home-agent-name")).toHaveText(agent.name);
+    await expect(page.locator("#home-agent-name")).toHaveCount(0);
     await expect(page.locator("#play")).toBeEnabled();
     await page.screenshot({ path: `artifacts/agent-roster-${team}.png` });
     return agent;
@@ -97,6 +97,6 @@ test("agent roster is lazy, saved per team, and used by previews and newly spawn
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-agent", replacement.id, {
     timeout: 100_000,
   });
-  await expect(page.locator("#home-agent-name")).toHaveText(replacement.name);
+  await expect(page.locator("#home-agent-name")).toHaveCount(0);
   expect(errors).toEqual([]);
 });

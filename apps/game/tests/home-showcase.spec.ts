@@ -1,4 +1,4 @@
-import { selectHomeWeapon } from "./home-controls";
+import { selectHomeTeam, selectHomeWeapon } from "./home-controls";
 import { expect, test } from "@playwright/test";
 import type { Game } from "../src/game";
 import type * as T from "three";
@@ -32,7 +32,7 @@ test("full-page native settings and saved showcase weapons share equipped legacy
   await page.screenshot({ path: "artifacts/settings-full-page-audio.png" });
   await page.keyboard.press("Escape");
   await expect(page.locator("#settings")).toBeHidden();
-  await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
+  await selectHomeTeam(page, "t");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "0");
   await selectHomeWeapon(page, "7");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "7");
@@ -95,7 +95,7 @@ test("full-page native settings and saved showcase weapons share equipped legacy
     if (id === "7_1466") {
       await page.reload();
       await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
-      await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
+      await selectHomeTeam(page, "t");
       await expect
         .poll(
           () =>
@@ -141,7 +141,7 @@ test("full-page native settings and saved showcase weapons share equipped legacy
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "3");
   await page.reload();
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
-  await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
+  await selectHomeTeam(page, "t");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "3");
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.locator("#settings-button").click();

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { selectHomeWeapon } from "./home-controls";
+import { selectHomeTeam, selectHomeWeapon } from "./home-controls";
 
 test("saved showcase is usable while the rest of the armory loads, without duplicate downloads", async ({
   page,
@@ -40,9 +40,9 @@ test("saved showcase is usable while the rest of the armory loads, without dupli
     const menuMs = Date.now() - started;
     await page.screenshot({ path: "../../artifacts/startup-menu-background-armory.png" });
 
-    await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
+    await selectHomeTeam(page, "t");
     await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "8");
-    await page.getByRole("button", { name: "Show Counter-Terrorist", exact: true }).click();
+    await selectHomeTeam(page, "ct");
     await page.locator("#settings-button").click();
     await expect(page.locator("#settings")).toBeVisible();
     await page.locator("#close-settings").click();

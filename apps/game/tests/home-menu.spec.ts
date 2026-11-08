@@ -1,5 +1,25 @@
+import { selectHomeTeam } from "./home-controls";
 import { test, expect } from "@playwright/test";
+import type * as T from "three";
 import type { Game } from "../src/game";
+type IdleScene = {
+  previews: Map<
+    string,
+    {
+      soldier: { model: T.Group };
+      action: T.AnimationAction;
+      weapon: T.Group;
+      idleVariation: {
+        actions: T.AnimationAction[];
+        current?: T.AnimationAction;
+        entrance?: T.AnimationAction;
+        last: number;
+        wait: number;
+      };
+    }
+  >;
+  clearPreview(team: string): void;
+};
 declare global {
   interface Window {
     __game: Game;
@@ -12,7 +32,7 @@ test("home weapon menu shows equipped finishes and rarity", async ({ page }) => 
   });
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
-  await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
+  await selectHomeTeam(page, "t");
   await page.locator("#home-scenery-button").click();
   await page.getByRole("button", { name: "Change Weapon", exact: true }).click();
   const weapon = page.locator('[data-home-weapon="0"]');
@@ -68,7 +88,7 @@ test("native homepage presents both agents, local navigation and a working match
   const before = await animationTime();
   await expect.poll(animationTime).toBeGreaterThan(before + 0.1);
   await page.screenshot({ path: "artifacts/home-ct-1440.png" });
-  await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
+  await selectHomeTeam(page, "t");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", /^t_main_menu_/);
   await page.screenshot({ path: "artifacts/home-t-1440.png" });
   await page.locator("#inventory-button").click();
@@ -196,4 +216,161 @@ test("reduced motion holds the native homepage idle without advancing its clock"
   await page.waitForTimeout(200);
   expect(await clock()).toBe(before);
   await page.screenshot({ path: "artifacts/home-reduced-motion.png" });
+});
+
+test("homepage keeps pointer motion horizontal and presents player identity", async ({ page }) => {
+  test.setTimeout(180_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
+  await expect(page.locator("#startup")).toHaveCount(0);
+  await expect(page.locator("[data-home-team]")).toHaveCount(0);
+  await expect(page.locator("#home-agent-name")).toHaveCount(0);
+  await expect(page.locator("#home-player-avatar")).toBeVisible();
+  const avatarBounds = (await page.locator("#home-player-avatar").boundingBox())!;
+  const nameBounds = (await page.locator("#home-player-name").boundingBox())!;
+  expect(avatarBounds.y).toBeGreaterThanOrEqual(nameBounds.y + nameBounds.height);
+  const atmosphere = await page.evaluate(() => {
+    const scene = window.__game.homeScene.graphicsRoot;
+    const shadowLights: string[] = [];
+    scene.traverse((object) => {
+      if ((object as T.Light).isLight && (object as T.Light).castShadow)
+        shadowLights.push(object.type);
+    });
+    return { fog: !!scene.fog && "isFogExp2" in scene.fog, shadowLights };
+  });
+  expect(atmosphere.fog).toBe(true);
+  expect(atmosphere.shadowLights).toEqual(["DirectionalLight"]);
+  await expect(page.locator("#home-play .nav-cell").first()).toHaveCSS(
+    "background-color",
+    "rgb(255, 255, 255)",
+  );
+  const camera = () =>
+    page.evaluate(() => {
+      const home = window.__game.homeScene as unknown as {
+        camera: {
+          position: { x: number; y: number; z: number };
+          fov: number;
+          quaternion: { x: number; y: number; z: number; w: number };
+        };
+      };
+      return {
+        position: { ...home.camera.position },
+        fov: home.camera.fov,
+        rotation: {
+          x: home.camera.quaternion.x,
+          y: home.camera.quaternion.y,
+          z: home.camera.quaternion.z,
+          w: home.camera.quaternion.w,
+        },
+      };
+    });
+  await page.mouse.move(50, 200);
+  await page.waitForTimeout(1800);
+  const left = await camera();
+  await page.mouse.move(50, 700);
+  await page.waitForTimeout(1800);
+  const down = await camera();
+  expect(down.position).toEqual(left.position);
+  expect(down.fov).toBeCloseTo(left.fov, 8);
+  for (const key of Object.keys(down.rotation) as (keyof typeof down.rotation)[])
+    expect(down.rotation[key]).toBeCloseTo(left.rotation[key], 6);
+  await page.mouse.move(1350, 700);
+  await page.waitForTimeout(1800);
+  const right = await camera();
+  expect(right.position).toEqual(left.position);
+  expect(right.fov).toBeCloseTo(left.fov, 8);
+  expect(right.rotation).not.toEqual(left.rotation);
+  await page.screenshot({ path: "artifacts/home-depth-and-profile.png" });
+  expect(errors).toEqual([]);
+});
+
+test("homepage native idle gestures move the body and return to idle", async ({ page }) => {
+  test.setTimeout(180_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
+  await expect(page.locator("#startup")).toHaveCount(0);
+  await page.waitForFunction(
+    () => {
+      const preview = (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!;
+      return preview?.idleVariation?.actions.length === 3;
+    },
+    undefined,
+    { timeout: 60_000 },
+  );
+  await page.waitForFunction(() => {
+    const state = (window.__game.homeScene as unknown as IdleScene).previews.get(
+      "ct",
+    )!.idleVariation;
+    return state.current === state.entrance && !!state.entrance;
+  });
+  await page.screenshot({ path: "artifacts/home-walkup.png" });
+  await page.waitForFunction(
+    () =>
+      !(window.__game.homeScene as unknown as IdleScene).previews.get("ct")!.idleVariation.current,
+    undefined,
+    { timeout: 20_000 },
+  );
+  const weaponScale = () =>
+    page.evaluate(() => {
+      const weapon = (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!.weapon;
+      return weapon.getWorldScale(weapon.position.clone()).length();
+    });
+  const restingScale = await weaponScale();
+  const stance = () =>
+    page.evaluate(() => {
+      const preview = (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!;
+      preview.action.paused = true;
+      return ["pelvis", "ankle_L", "ankle_R"].map((name) => {
+        const bone = preview.soldier.model.getObjectByName(name)!;
+        return bone.getWorldPosition(bone.position.clone()).toArray();
+      });
+    });
+  for (const kind of ["lookat", "shouldershrug", "weightshift"]) {
+    const planted = await stance();
+    await page.evaluate((kind) => {
+      const preview = (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!;
+      const state = preview.idleVariation;
+      const index = state.actions.findIndex((action: T.AnimationAction) =>
+        action.getClip().name.includes(kind),
+      );
+      state.last = -1;
+      // Exercise the normal random scheduler with a single eligible gesture.
+      state.actions = [state.actions[index]!];
+      state.wait = 0;
+    }, kind);
+    await page.waitForFunction(
+      () =>
+        (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!.idleVariation.current,
+    );
+    await page.waitForTimeout(2000);
+    expect(await weaponScale()).toBeCloseTo(restingScale, 3);
+    const during = await stance();
+    for (let bone = 0; bone < planted.length; bone++)
+      for (let axis = 0; axis < 3; axis++)
+        expect(during[bone]![axis]).toBeCloseTo(planted[bone]![axis]!, 5);
+    await page.screenshot({ path: `artifacts/home-idle-${kind}.png` });
+    await page.waitForFunction(
+      () =>
+        !(window.__game.homeScene as unknown as IdleScene).previews.get("ct")!.idleVariation
+          .current,
+      undefined,
+      { timeout: 20_000 },
+    );
+    // Reload the preview to recover its complete native gesture pool.
+    if (kind !== "weightshift") {
+      await page.evaluate(() =>
+        (window.__game.homeScene as unknown as IdleScene).clearPreview("ct"),
+      );
+      await page.waitForFunction(
+        () =>
+          (window.__game.homeScene as unknown as IdleScene).previews.get("ct")?.idleVariation
+            ?.actions.length === 3,
+      );
+    }
+  }
+  expect(errors).toEqual([]);
 });

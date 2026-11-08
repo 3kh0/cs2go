@@ -1,4 +1,9 @@
-import { selectHomeWeapon, selectHomeScenery, equipHomeAgent } from "./home-controls";
+import {
+  selectHomeTeam,
+  selectHomeWeapon,
+  selectHomeScenery,
+  equipHomeAgent,
+} from "./home-controls";
 import { expect, test } from "@playwright/test";
 
 test("bulky homepage agents keep their grips and use repaired cloth materials", async ({
@@ -10,7 +15,7 @@ test("bulky homepage agents keep their grips and use repaired cloth materials", 
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await expect(page.locator("#startup")).toHaveCount(0);
-  await page.getByRole("button", { name: "Show Counter-Terrorist", exact: true }).click();
+  await selectHomeTeam(page, "ct");
   await equipHomeAgent(page, "ct", "agent-5305-ct");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-agent", "agent-5305-ct", {
     timeout: 30000,
