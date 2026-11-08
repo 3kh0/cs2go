@@ -12,6 +12,7 @@ export type Cue =
   | BombPlantCue
   | UtilityCue
   | `ui-${UiInteraction}`
+  | "dry-fire"
   | "revolver-prepare"
   | "knife-deploy"
   | "knife-stab"
@@ -156,11 +157,13 @@ export class Soundscape {
     if (!this.context || !this.effects || !this.volume || !this.effectsVolume) return;
     const variant = 1 + Math.floor(Math.random() * 3);
     const name =
-      cue === "step"
-        ? `step-${surface}-${(this.step++ % 4) + 1}`
-        : ["damage", "death", "gear"].includes(cue)
-          ? `${cue}-${variant}`
-          : cue;
+      cue === "dry-fire"
+        ? "revolver-prepare"
+        : cue === "step"
+          ? `step-${surface}-${(this.step++ % 4) + 1}`
+          : ["damage", "death", "gear"].includes(cue)
+            ? `${cue}-${variant}`
+            : cue;
     const buffer = this.buffers.get(name);
     if (!buffer) return;
     const blast =

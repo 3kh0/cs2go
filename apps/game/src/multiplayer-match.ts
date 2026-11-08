@@ -472,6 +472,7 @@ export class MultiplayerMatch {
           g.drawTime = 0;
           g.kick = 0.07;
           g.sound("shot");
+          if (!local.ammo && !local.reserve) g.queueEmptyClick(event.weapon);
         } else if (!event.pellet) {
           const peer = this.peers.get(event.shooter);
           if (peer) {

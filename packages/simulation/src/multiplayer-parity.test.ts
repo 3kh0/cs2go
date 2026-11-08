@@ -513,3 +513,32 @@ test("every knife heavy backstab kills an armored enemy while front and side sta
     }
   }
 });
+
+test("the final shot reloads from reserve without another trigger input", () => {
+  for (const index of [0, 7, 3, 8, 10, 17, 19]) {
+    const { match, ct } = fixture();
+    live(match);
+    arm(ct, index, 1);
+    ct.reserve = 3;
+    command(match, ct.id, { fire: true, alternate: index === 17, burst: index === 19 });
+    expect(ct.ammo, String(index)).toBe(0);
+    expect(ct.reloadTime).toBe(0);
+    run(match, weapons[index].delay + STEP * 2, ct.id);
+    expect(ct.reloadTime, String(index)).toBeGreaterThan(0);
+    run(match, 12, ct.id);
+    expect(ct.ammo, String(index)).toBe(3);
+    expect(ct.reserve).toBe(0);
+  }
+});
+
+test("an exhausted gun cannot auto-reload without reserve ammunition", () => {
+  const { match, ct } = fixture();
+  live(match);
+  arm(ct, 7, 1);
+  ct.reserve = 0;
+  command(match, ct.id, { fire: true });
+  run(match, 5, ct.id);
+  expect(ct.ammo).toBe(0);
+  expect(ct.reserve).toBe(0);
+  expect(ct.reloadTime).toBe(0);
+});

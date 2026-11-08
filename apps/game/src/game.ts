@@ -585,6 +585,7 @@ export class Game {
   shotTime = 0;
   lastShot = false;
   emptyReload = false;
+  private emptyClick?: { weapon: number; remaining: number };
   animationTime = 0;
   inventorySignature = "";
   ammo = 12;
@@ -1845,6 +1846,7 @@ export class Game {
     }
   }
   equip(index: number) {
+    if (index !== this.selected) this.emptyClick = undefined;
     this.bombSelected = this.bombAutoSelected = false;
     this.bombDrawTime = 0;
     if (this.network && !this.network.applying) {
@@ -2142,6 +2144,22 @@ export class Game {
           ? phases.loopEnd
           : 1;
     return start + (end - start) * (1 - this.reload / this.shellDuration());
+  }
+  queueEmptyClick(weapon: number) {
+    this.emptyClick = { weapon, remaining: weapons[weapon].delay };
+  }
+  private updateEmptyClick(dt: number) {
+    const cue = this.emptyClick;
+    if (!cue) return;
+    if (!this.active || this.dead || this.selected !== cue.weapon || this.ammo || this.reserve) {
+      this.emptyClick = undefined;
+      return;
+    }
+    cue.remaining -= dt;
+    if (cue.remaining <= 0) {
+      this.emptyClick = undefined;
+      this.soundscape.play("dry-fire");
+    }
   }
   beginReload() {
     if (this.bombSelected) return;
@@ -2526,6 +2544,7 @@ export class Game {
     this.lastShot = this.selected === 8 && this.ammo === 1;
     this.emptyReload = false;
     this.ammo--;
+    if (!this.ammo && !this.reserve) this.queueEmptyClick(this.selected);
     if (this.burstMode) {
       this.burstRemaining = continuingBurst
         ? Math.max(0, this.burstRemaining - 1)
@@ -2864,6 +2883,7 @@ export class Game {
     );
   }
   simulate(dt: number) {
+    this.updateEmptyClick(dt);
     this.plantLook = T.MathUtils.damp(this.plantLook, this.planting ? 1 : 0, 12, dt);
     if (this.network) {
       this.network.simulate(dt);
@@ -3075,6 +3095,20 @@ export class Game {
       }
       return;
     }
+    if (
+      !this.ammo &&
+      this.reserve > 0 &&
+      !this.reload &&
+      this.cooldown <= 0 &&
+      !this.drawTime &&
+      !this.bombSelected &&
+      !this.utility.selected &&
+      !this.utility.throwingKind &&
+      !this.planting &&
+      this.bomb?.defuser !== "player" &&
+      !isKnife(this.selected)
+    )
+      this.beginReload();
     if (this.reload) {
       const previous = this.reload;
       this.reload = Math.max(0, this.reload - dt);

@@ -17,6 +17,7 @@ import nativeStrings from "./data/round-strings.json";
 import {
   createWeaponActions,
   advanceWeaponActions,
+  beginReload,
   cancelWeaponActions,
   canTrigger,
   commitTrigger,
@@ -883,6 +884,17 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
         : input,
       STEP,
     );
+    if (
+      !frozen &&
+      !planting &&
+      state.bomb.defuser !== player.id &&
+      !input.utility &&
+      !input.throwKind &&
+      !player.ammo &&
+      player.reserve > 0 &&
+      player.cooldown <= 0
+    )
+      beginReload(player, action);
     player.suppressed = action.attached[player.weapon];
     player.reloadPhase = action.shell;
     player.reloadEmpty = action.empty;
