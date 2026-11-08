@@ -18,9 +18,11 @@ import { movePreviewHands } from "./preview-arm";
 import {
   acquireAgentAnimation,
   loadAgentAnimations,
+  agentWeaponAnimationPacks,
   agentAnimationWeaponIndex,
   ensureAgentAnimationBones,
   agentClipForModel,
+  completeAgentClip,
   agentAnimationEquipment,
 } from "./agent-animations";
 import { createWorldGun, disposeWorldGun, loadWeaponModels } from "./weapons";
@@ -53,6 +55,10 @@ type Preview = {
     wait: number;
     current?: T.AnimationAction;
     entrance?: T.AnimationAction;
+    idle?: T.AnimationAction;
+    ready?: boolean;
+    initialized?: boolean;
+    anchor?: T.Object3D;
     entrancePosition?: T.Vector3;
     returning: boolean;
     last: number;
@@ -121,12 +127,15 @@ export class HomeScene {
     });
     try {
       const catalog = await loadAgentAnimations();
+      const weaponPacks = new Set(await agentWeaponAnimationPacks(preview.index));
       const candidates = catalog.filter(
         (clip) =>
+          weaponPacks.has(clip.pack) &&
+          clip.equipped === "weapon" &&
           clip.team === team &&
           clip.source === "main_menu" &&
           !clip.additive &&
-          /walkup|lookat|shouldershrug|weightshift/.test(clip.name),
+          /idle|walkup|lookat|shouldershrug|weightshift/.test(clip.name),
       );
       const compatible = (
         await Promise.all(
@@ -138,10 +147,12 @@ export class HomeScene {
         )
       ).filter((clip) => clip !== undefined);
       // Keep one native clip per gesture and only retain the relevant weapon pack.
-      const chosen = ["walkup", "lookat", "shouldershrug", "weightshift"].flatMap((kind) => {
-        const clip = compatible.find((clip) => clip.name.includes(kind));
-        return clip ? [clip] : [];
-      });
+      const chosen = ["idle", "walkup", "lookat", "shouldershrug", "weightshift"].flatMap(
+        (kind) => {
+          const clip = compatible.find((clip) => clip.name.includes(kind));
+          return clip ? [clip] : [];
+        },
+      );
       for (const definition of chosen) {
         const loaded = await acquireAgentAnimation(definition.id);
         if (this.previews.get(team) !== preview || preview.animation) {
@@ -149,28 +160,32 @@ export class HomeScene {
           return;
         }
         ensureAgentAnimationBones(preview.soldier.model, loaded.pack.scene);
-        const clip = agentClipForModel(loaded.clip, preview.soldier.model).clone();
-        const entrance = definition.name.includes("walkup");
-        if (entrance) {
-          // Land on the showcase pose: native walk-up motion is relative to its
-          // final frame, rather than replacing the agent with another stance.
-          clip.tracks = clip.tracks.filter((track) => !track.name.startsWith("root_motion."));
-          T.AnimationUtils.makeClipAdditive(clip, clip.duration * 30);
-        } else {
-          // Idle gestures keep the same planted lower body.
-          clip.tracks = clip.tracks.filter((track) =>
-            /^(spine_|neck_|head_|clavicle_|arm_|hand_|finger_)/.test(track.name),
-          );
-          T.AnimationUtils.makeClipAdditive(clip);
-        }
+        // Legacy T meshes bake the Source root basis into their model node.
+        // Their pelvis is not under root_motion; put helper anchors in that
+        // same space instead of applying the root rotation/scale twice.
+        const pelvis = preview.soldier.model.getObjectByName("pelvis")!;
+        const root = preview.soldier.model.getObjectByName("root_motion");
+        if (root && pelvis.parent !== root)
+          for (const child of [...root.children]) pelvis.parent!.add(child);
+        // These are absolute native clips, evaluated over their own bind pose.
+        // Mixing their deltas onto the unrelated buy pose doubles joint rotations.
+        const clip = completeAgentClip(
+          agentClipForModel(loaded.clip, preview.soldier.model),
+          preview.soldier.model,
+        );
         const action = preview.mixer.clipAction(clip);
-        action.setLoop(T.LoopOnce, 1);
-        action.clampWhenFinished = true;
-        if (entrance) state.entrance = action;
+        const idle = definition.name.includes("_idle");
+        action.setLoop(idle ? T.LoopRepeat : T.LoopOnce, idle ? Infinity : 1);
+        action.clampWhenFinished = !idle;
+        if (idle) state.idle = action;
+        else if (definition.name.includes("walkup")) state.entrance = action;
         else state.actions.push(action);
+        state.anchor = preview.soldier.model.getObjectByName("wpn");
         state.releases.push(loaded.release);
       }
+      state.ready = true;
     } catch {
+      preview.mixer.update(0);
       // Keep the existing idle when an optional animation pack is unavailable.
     }
   }
@@ -181,10 +196,25 @@ export class HomeScene {
       return;
     }
     const state = preview.idleVariation;
+    if (!state.ready || !state.idle || !state.anchor) return;
+    if (!state.initialized) {
+      preview.mixer.stopAllAction();
+      preview.action = state.idle.reset().play();
+      preview.mixer.update(0);
+      preview.soldier.group.updateMatrixWorld(true);
+      preview.soldier.group.position.y +=
+        this.floor - new T.Box3().setFromObject(preview.soldier.model, true).min.y;
+      // Native wpn carries the source attachment animation, including its
+      // rotation. Keep the gun outside the bone hierarchy in metre units.
+      preview.soldier.group.add(preview.weapon);
+      state.initialized = true;
+      this.current = undefined;
+    }
     if (!state.current && state.entrance && !this.arrivedAgents.has(preview.agentId)) {
       this.arrivedAgents.add(preview.agentId);
       state.entrancePosition = preview.soldier.group.position.clone();
       state.current = state.entrance;
+      preview.action.fadeOut(0.6);
       state.current.reset().setEffectiveWeight(1).fadeIn(0.6).play();
     }
     if (state.current) {
@@ -195,6 +225,8 @@ export class HomeScene {
           .addScaledVector(this.cameraDirection, 0.6 * (1 - progress));
       }
       if (!state.returning && state.current.time >= state.current.getClip().duration - 0.65) {
+        preview.action.enabled = true;
+        preview.action.setEffectiveWeight(1).fadeIn(0.6);
         state.current.fadeOut(0.6);
         state.returning = true;
         state.wait = 0.6;
@@ -214,6 +246,7 @@ export class HomeScene {
       const index = choices.length ? choices[Math.floor(Math.random() * choices.length)] : 0;
       state.last = index;
       state.current = state.actions[index];
+      preview.action.fadeOut(0.6);
       state.current.reset().setEffectiveWeight(1).fadeIn(0.6).play();
     }
   }
@@ -693,6 +726,24 @@ export class HomeScene {
     if (!this.reduced.matches && showAgent) {
       this.updateIdleVariation(preview, team, dt);
       preview.mixer.update(dt);
+    }
+    const nativeAnchor = preview.idleVariation?.initialized
+      ? preview.idleVariation.anchor
+      : undefined;
+    if (!preview.animation && nativeAnchor) {
+      preview.soldier.group.updateMatrixWorld(true);
+      this.animationFrame
+        .copy(nativeAnchor.matrixWorld)
+        .decompose(this.animationPosition, this.animationRotation, this.animationScale);
+      this.animationFrame.compose(
+        this.animationPosition,
+        this.animationRotation,
+        this.animationScale.set(1, 1, 1),
+      );
+      this.animationFrame
+        .multiply(this.animationParentInverse.fromArray(preview.weapon.userData.buyGrip).invert())
+        .premultiply(this.animationParentInverse.copy(preview.soldier.group.matrixWorld).invert())
+        .decompose(preview.weapon.position, preview.weapon.quaternion, preview.weapon.scale);
     }
     if (preview.animation) {
       preview.weapon.visible = preview.animation.equipped !== "none";

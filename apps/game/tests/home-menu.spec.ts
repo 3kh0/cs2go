@@ -8,11 +8,18 @@ type IdleScene = {
     {
       soldier: { model: T.Group };
       action: T.AnimationAction;
+      mixer: T.AnimationMixer;
+      index: number;
       weapon: T.Group;
       idleVariation: {
         actions: T.AnimationAction[];
         current?: T.AnimationAction;
         entrance?: T.AnimationAction;
+        idle?: T.AnimationAction;
+        initialized?: boolean;
+        anchor?: T.Object3D;
+        returning: boolean;
+        entrancePosition?: T.Vector3;
         last: number;
         wait: number;
       };
@@ -71,7 +78,10 @@ test("native homepage presents both agents, local navigation and a working match
     "STORE",
     "NEWS",
   ]);
-  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", "t_buymenu_m4a4");
+  await expect(page.locator("#home-agent-stage")).toHaveAttribute(
+    "data-clip",
+    /^(t_buymenu_m4a4|ct_main_menu_rifle_idle)/,
+  );
   expect(await page.evaluate(() => getComputedStyle(document.body).fontFamily)).toContain(
     "Stratum2",
   );
@@ -184,7 +194,10 @@ test("native homepage presents both agents, local navigation and a working match
   await page.locator("#leave-yes").click();
   await expect(page.locator("#menu")).toBeVisible();
   await expect(page.locator("#menu")).toHaveAttribute("data-page", "home");
-  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-clip", "t_buymenu_m4a4");
+  await expect(page.locator("#home-agent-stage")).toHaveAttribute(
+    "data-clip",
+    /^(t_buymenu_m4a4|ct_main_menu_rifle_idle)/,
+  );
   expect(
     await page.evaluate(
       () =>
@@ -286,90 +299,135 @@ test("homepage keeps pointer motion horizontal and presents player identity", as
   expect(errors).toEqual([]);
 });
 
-test("homepage native idle gestures move the body and return to idle", async ({ page }) => {
-  test.setTimeout(180_000);
+test("homepage preserves authored native body poses and weapon anchors", async ({ page }) => {
+  test.setTimeout(240_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
   await expect(page.locator("#startup")).toHaveCount(0);
-  await page.waitForFunction(
-    () => {
-      const preview = (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!;
-      return preview?.idleVariation?.actions.length === 3;
-    },
-    undefined,
-    { timeout: 60_000 },
-  );
-  await page.waitForFunction(() => {
-    const state = (window.__game.homeScene as unknown as IdleScene).previews.get(
-      "ct",
-    )!.idleVariation;
-    return state.current === state.entrance && !!state.entrance;
-  });
-  await page.screenshot({ path: "artifacts/home-walkup.png" });
-  await page.waitForFunction(
-    () =>
-      !(window.__game.homeScene as unknown as IdleScene).previews.get("ct")!.idleVariation.current,
-    undefined,
-    { timeout: 20_000 },
-  );
-  const weaponScale = () =>
-    page.evaluate(() => {
-      const weapon = (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!.weapon;
-      return weapon.getWorldScale(weapon.position.clone()).length();
-    });
-  const restingScale = await weaponScale();
-  const stance = () =>
-    page.evaluate(() => {
-      const preview = (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!;
-      preview.action.paused = true;
-      return ["pelvis", "ankle_L", "ankle_R"].map((name) => {
-        const bone = preview.soldier.model.getObjectByName(name)!;
-        return bone.getWorldPosition(bone.position.clone()).toArray();
-      });
-    });
-  for (const kind of ["lookat", "shouldershrug", "weightshift"]) {
-    const planted = await stance();
-    await page.evaluate((kind) => {
-      const preview = (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!;
-      const state = preview.idleVariation;
-      const index = state.actions.findIndex((action: T.AnimationAction) =>
-        action.getClip().name.includes(kind),
-      );
-      state.last = -1;
-      // Exercise the normal random scheduler with a single eligible gesture.
-      state.actions = [state.actions[index]!];
-      state.wait = 0;
-    }, kind);
+  for (const team of ["ct", "t"] as const) {
+    await selectHomeTeam(page, team);
     await page.waitForFunction(
-      () =>
-        (window.__game.homeScene as unknown as IdleScene).previews.get("ct")!.idleVariation.current,
+      (team) => {
+        const state = (window.__game.homeScene as unknown as IdleScene).previews.get(
+          team,
+        )?.idleVariation;
+        return state?.initialized;
+      },
+      team,
+      { timeout: 60_000 },
     );
-    await page.waitForTimeout(2000);
-    expect(await weaponScale()).toBeCloseTo(restingScale, 3);
-    const during = await stance();
-    for (let bone = 0; bone < planted.length; bone++)
-      for (let axis = 0; axis < 3; axis++)
-        expect(during[bone]![axis]).toBeCloseTo(planted[bone]![axis]!, 5);
-    await page.screenshot({ path: `artifacts/home-idle-${kind}.png` });
-    await page.waitForFunction(
-      () =>
-        !(window.__game.homeScene as unknown as IdleScene).previews.get("ct")!.idleVariation
-          .current,
-      undefined,
-      { timeout: 20_000 },
-    );
-    // Reload the preview to recover its complete native gesture pool.
-    if (kind !== "weightshift") {
-      await page.evaluate(() =>
-        (window.__game.homeScene as unknown as IdleScene).clearPreview("ct"),
-      );
-      await page.waitForFunction(
-        () =>
-          (window.__game.homeScene as unknown as IdleScene).previews.get("ct")?.idleVariation
-            ?.actions.length === 3,
-      );
+    const kinds = await page.evaluate((team) => {
+      const state = (window.__game.homeScene as unknown as IdleScene).previews.get(
+        team,
+      )!.idleVariation;
+      return ["idle", "walkup", ...state.actions.map((action) => action.getClip().name)];
+    }, team);
+    for (const kind of kinds) {
+      for (const fraction of [0.15, 0.45, 0.8]) {
+        const result = await page.evaluate(
+          async ({ team, kind, fraction }) => {
+            const { acquireAgentAnimation, ensureAgentAnimationBones } =
+              await import("../src/agent-animations");
+            const preview = (window.__game.homeScene as unknown as IdleScene).previews.get(team)!;
+            const state = preview.idleVariation;
+            const action =
+              kind === "idle"
+                ? state.idle!
+                : kind === "walkup"
+                  ? state.entrance!
+                  : state.actions.find((action) => action.getClip().name === kind)!;
+            // Exercise the actual body mixer with one absolute native pose.
+            preview.mixer.stopAllAction();
+            state.current = kind === "idle" ? undefined : action;
+            state.wait = 100;
+            state.returning = false;
+            state.entrancePosition = undefined;
+            action.reset().setEffectiveWeight(1).play();
+            action.paused = true;
+            action.time = action.getClip().duration * fraction;
+            preview.mixer.update(0);
+            const catalog = await (await import("../src/agent-animations")).loadAgentAnimations();
+            const definition = catalog.find((clip) => clip.name === action.getClip().name)!;
+            const source = await acquireAgentAnimation(definition.id);
+            const reference = preview.soldier.model.clone(true);
+            ensureAgentAnimationBones(reference, source.pack.scene);
+            const Mixer = preview.mixer.constructor as typeof T.AnimationMixer;
+            const sourceMixer = new Mixer(reference);
+            sourceMixer.clipAction(source.clip).play();
+            sourceMixer.update(action.time);
+            let positionError = 0,
+              rotationError = 0;
+            for (const name of [
+              "pelvis",
+              "head_0",
+              "arm_upper_R",
+              "arm_lower_R",
+              "hand_R",
+              "hand_L",
+              "ankle_L",
+              "ankle_R",
+              "wpn",
+            ]) {
+              const actual = preview.soldier.model.getObjectByName(name)!;
+              const expected = reference.getObjectByName(name)!;
+              positionError = Math.max(
+                positionError,
+                actual.position.distanceTo(expected.position),
+              );
+              rotationError = Math.max(
+                rotationError,
+                actual.quaternion
+                  .clone()
+                  .normalize()
+                  .angleTo(expected.quaternion.clone().normalize()),
+              );
+            }
+            sourceMixer.stopAllAction();
+            sourceMixer.uncacheRoot(reference);
+            source.release();
+            const allowedPacks = await (
+              await import("../src/agent-animations")
+            ).agentWeaponAnimationPacks(preview.index);
+            return {
+              positionError,
+              rotationError,
+              weaponCompatible:
+                allowedPacks.includes(definition.pack) && definition.equipped === "weapon",
+            };
+          },
+          { team, kind, fraction },
+        );
+        expect(result.weaponCompatible).toBe(true);
+        expect(result.positionError).toBeLessThan(0.0001);
+        expect(result.rotationError).toBeLessThan(0.0001);
+        await page.waitForTimeout(100);
+        const attachmentError = await page.evaluate((team) => {
+          const preview = (window.__game.homeScene as unknown as IdleScene).previews.get(team)!;
+          const anchor = preview.idleVariation.anchor!;
+          const matrix = preview.weapon.matrixWorld
+            .clone()
+            .multiply(
+              preview.weapon.matrixWorld.clone().fromArray(preview.weapon.userData.buyGrip),
+            );
+          const position = preview.weapon.position.clone().setFromMatrixPosition(matrix);
+          const hand = preview.soldier.model.getObjectByName("hand_R")!;
+          const grip = preview.soldier.model.getObjectByName("wpnHand_R")!;
+          return {
+            anchor: position.distanceTo(anchor.getWorldPosition(position.clone())),
+            hand: hand
+              .getWorldPosition(position.clone())
+              .distanceTo(grip.getWorldPosition(position.clone())),
+          };
+        }, team);
+        expect(attachmentError.anchor).toBeLessThan(0.001);
+        expect(attachmentError.hand).toBeLessThan(0.12);
+        if (fraction === 0.45)
+          await page.screenshot({
+            path: `artifacts/native-pose-${team}-${kind.replaceAll(/[^a-z0-9_-]/gi, "_")}.png`,
+          });
+      }
     }
   }
   expect(errors).toEqual([]);
