@@ -6,6 +6,21 @@ declare global {
   }
 }
 
+test("home weapon menu shows equipped finishes and rarity", async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("cs2go-skins-v1", JSON.stringify([{ id: "7_1466", wear: 0.01, seed: 1 }]));
+  });
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
+  await page.getByRole("button", { name: "Show Terrorist", exact: true }).click();
+  await page.locator("#home-scenery-button").click();
+  await page.getByRole("button", { name: "Change Weapon", exact: true }).click();
+  const weapon = page.locator('[data-home-weapon="0"]');
+  await expect(weapon).toHaveText("AK-47 | Consequence of the Jinn");
+  await expect(weapon).toHaveCSS("border-left-color", "rgb(235, 75, 75)");
+  await page.screenshot({ path: "artifacts/home-weapon-finishes.png" });
+});
+
 test("native homepage presents both agents, local navigation and a working match round trip", async ({
   page,
   baseURL,

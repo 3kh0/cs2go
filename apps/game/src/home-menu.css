@@ -378,6 +378,12 @@
   background: #101010;
   color: #fff;
 }
+#home-weapon-options {
+  padding: 0;
+}
+#home-scenery #home-weapon-options button {
+  border-left: 3px solid var(--weapon-rarity);
+}
 
 #ammo,
 #reserve,

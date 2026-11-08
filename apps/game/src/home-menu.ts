@@ -3,6 +3,7 @@ import { weaponAvailable } from "./economy";
 import type { Game } from "./game";
 import { assetUrl } from "./asset-url";
 import { readHomeWeapons } from "./home-weapons";
+import { skinCatalog, skinChoices, skinName, skinRarityColor } from "./skins";
 
 const icon = (name: string) => `<img src="${assetUrl(`/ui/home/${name}.svg`)}" alt="">`;
 
@@ -251,13 +252,15 @@ export function setupHomeMenu(game: Game) {
     }),
   );
   const choices = readHomeWeapons();
-  function syncShowcase() {
-    el("home-switch-team").textContent = `Show Equipped ${game.team === "ct" ? "T" : "CT"} Agent`;
+  function renderWeapons() {
     el("home-weapon-options").replaceChildren(
       ...weapons.flatMap((weapon, index) => {
         if (isKnife(index) || !weaponAvailable(index, game.team)) return [];
         const button = document.createElement("button");
-        button.textContent = weapon.name;
+        const id = skinChoices[index].id;
+        const finish = skinName(id);
+        button.textContent = finish ? `${weapon.name} | ${finish}` : weapon.name;
+        button.style.setProperty("--weapon-rarity", skinRarityColor(id) || "#b9bdc0");
         button.dataset.homeWeapon = String(index);
         button.setAttribute("aria-pressed", String(index === choices[game.team]));
         button.onclick = () => {
@@ -273,8 +276,20 @@ export function setupHomeMenu(game: Game) {
         return [button];
       }),
     );
+  }
+  function syncShowcase() {
+    el("home-switch-team").textContent = `Show Equipped ${game.team === "ct" ? "T" : "CT"} Agent`;
+    renderWeapons();
     game.homeScene.setWeapon(game.team, choices[game.team]);
   }
+  scenery
+    .querySelector<HTMLButtonElement>('[aria-controls="home-weapon-options"]')!
+    .addEventListener("click", () => {
+      renderWeapons();
+      void skinCatalog()
+        .then(renderWeapons)
+        .catch(() => {});
+    });
   el("home-switch-team").onclick = () => {
     game.setTeam(game.team === "ct" ? "t" : "ct");
     (el("agent-team") as HTMLSelectElement).value = game.team;
