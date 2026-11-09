@@ -188,3 +188,117 @@ export async function renderWeaponRange(distance: number, suppressed: boolean, b
   }
   return { energy, attack, allocated };
 }
+
+/** Select an actual connected wood-crate collider from the shipped Dust II map. */
+export async function auditC4Cover() {
+  const { loadGzipped } = await import("../src/gltf");
+  const { MapCollision } = await import("../src/map-collision");
+  const { Mesh, Box3, Ray } = await import("three");
+  const physics = await loadGzipped("/models/maps/dust2-physics.glb.gz");
+  physics.scene.updateMatrixWorld(true);
+  const meshes: InstanceType<typeof Mesh>[] = [];
+  physics.scene.traverse((o) => {
+    if (!(o instanceof Mesh)) return;
+    let metadata: import("three").Object3D = o;
+    while (metadata.parent && !metadata.userData.InteractAs) metadata = metadata.parent;
+    const interactions = metadata.userData.InteractAs as string[] | undefined;
+    if (
+      interactions?.some((flag) =>
+        ["csgo_grenadeclip", "sky", "playerclip", "npcclip", "passbullets"].includes(flag),
+      )
+    )
+      return;
+    meshes.push(o);
+  });
+  const collision = new MapCollision(meshes);
+  const crates = physics.scene;
+  const bounds: InstanceType<typeof Box3>[] = [];
+  crates.traverse((o) => {
+    if (!(o instanceof Mesh)) return;
+    let owner: import("three").Object3D = o;
+    while (owner.parent && !owner.userData.SurfaceProperty) owner = owner.parent;
+    if (!/^(wood|wood_crate|wood_solid)$/.test(owner.userData.SurfaceProperty ?? "")) return;
+    const positions = o.geometry.getAttribute("position"),
+      indices = o.geometry.index;
+    const parents: number[] = [],
+      points: InstanceType<typeof Vector3>[] = [],
+      weld = new Map<string, number>(),
+      ids: number[] = [];
+    const find = (i: number): number => (parents[i] === i ? i : (parents[i] = find(parents[i])));
+    for (let i = 0; i < positions.count; i++) {
+      const p = new Vector3().fromBufferAttribute(positions, i).applyMatrix4(o.matrixWorld);
+      const key = p
+        .toArray()
+        .map((v) => Math.round(v * 1000))
+        .join(",");
+      let id = weld.get(key);
+      if (id === undefined) {
+        id = points.length;
+        points.push(p);
+        parents.push(id);
+        weld.set(key, id);
+      }
+      ids.push(id);
+    }
+    for (let i = 0; i < (indices?.count ?? positions.count); i += 3) {
+      const a = ids[indices ? indices.getX(i) : i];
+      for (let j = 1; j < 3; j++)
+        parents[find(ids[indices ? indices.getX(i + j) : i + j])] = find(a);
+    }
+    const components = new Map<number, InstanceType<typeof Box3>>();
+    points.forEach((p, i) => {
+      const root = find(i);
+      const box = components.get(root) ?? new Box3();
+      box.expandByPoint(p);
+      components.set(root, box);
+    });
+    bounds.push(...components.values());
+  });
+  for (const box of bounds) {
+    const size = box.getSize(new Vector3());
+    if (size.y < 1.1 || size.y > 3.5 || size.x < 0.4 || size.z < 0.4 || size.x > 4 || size.z > 4)
+      continue;
+    const middle = box.getCenter(new Vector3());
+    for (const axis of ["x", "z"] as const) {
+      const bomb = middle.clone();
+      bomb[axis] = box.min[axis] - 0.65;
+      const floor = collision.floor(bomb.x, bomb.z, box.max.y + 0.4, box.min.y - 3);
+      if (!Number.isFinite(floor)) continue;
+      bomb.y = floor;
+      const blocked = middle.clone();
+      blocked[axis] = box.max[axis] + 0.65;
+      const otherFloor = collision.floor(blocked.x, blocked.z, box.max.y + 0.4, box.min.y - 3);
+      if (!Number.isFinite(otherFloor) || Math.abs(otherFloor - floor) > 0.15) continue;
+      blocked.y = otherFloor + 1.65;
+      const open = blocked.clone();
+      open[axis] = bomb[axis] - (blocked[axis] - bomb[axis]);
+      open.y = blocked.y;
+      const source = bomb.clone();
+      source.y += 20 * 0.0254;
+      if (!collision.visible(source, open) || collision.visible(source, blocked)) continue;
+      const direction = blocked.clone().sub(source),
+        distance = direction.length();
+      const hits = collision.intersections(new Ray(source, direction.normalize()), distance);
+      if (
+        !hits.some((hit) => {
+          let o = hit.object;
+          while (o.parent && !o.userData.SurfaceProperty) o = o.parent;
+          return /^(wood|wood_crate|wood_solid)$/.test(o.userData.SurfaceProperty);
+        })
+      )
+        continue;
+      return {
+        bomb: bomb.toArray(),
+        open: open.toArray(),
+        blocked: blocked.toArray(),
+        crate: [box.min.toArray(), box.max.toArray()],
+        clear: true,
+        occluded: true,
+        rawFloorOccluded: !collision.visible(bomb, open),
+        obstructed: (from: InstanceType<typeof Vector3>, to: InstanceType<typeof Vector3>) =>
+          !collision.visible(from, to),
+      };
+    }
+  }
+  throw new Error("No supported real native wood crate cover fixture found");
+}

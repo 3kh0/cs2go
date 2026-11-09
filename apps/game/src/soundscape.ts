@@ -1,3 +1,4 @@
+import c4Audio from "./data/c4-audio.json";
 import { bombPlantCues, type BombPlantCue } from "./bomb-presentation";
 import { assetFetch } from "./asset-url";
 import { KitMusicPlayer } from "./music-player";
@@ -40,7 +41,9 @@ export type Cue =
   | "map-break-metal"
   | "map-break-glass"
   | "bomb-plant"
+  | "bomb-beep-fast"
   | "bomb-beep"
+  | "bomb-defuse-start"
   | "bomb-defuse"
   | "bomb-explode"
   | "ready"
@@ -71,7 +74,9 @@ export class Soundscape {
   master?: GainNode;
   effects?: GainNode;
   voices = new Set<AudioBufferSourceNode>();
-  private blasts = new Set<AudioBufferSourceNode>();
+  private objectiveVoices = new Map<string, AudioBufferSourceNode>();
+  private objectiveLastPlayed = new Map<string, number>();
+  private protectedVoices = new Set<AudioBufferSourceNode>();
   private uiVoices = new Map<string, AudioBufferSourceNode>();
   private uiLastPlayed = new Map<string, number>();
   readonly musicKits = new KitMusicPlayer(new Audio(), musicStorage());
@@ -91,7 +96,9 @@ export class Soundscape {
     this.voices.clear();
     this.uiVoices.clear();
     this.uiLastPlayed.clear();
-    this.blasts.clear();
+    this.protectedVoices.clear();
+    this.objectiveVoices.clear();
+    this.objectiveLastPlayed.clear();
     this.spatial.resetRooms();
   }
   async load() {
@@ -148,7 +155,6 @@ export class Soundscape {
   }
   playBombPlant(previous: number, elapsed: number, position?: Vector3) {
     if (elapsed <= 0 || elapsed <= previous) return;
-    if (position && previous === 0) this.play("bomb-draw", false, "concrete", position);
     for (const { time, cue } of bombPlantCues) {
       if ((time === 0 ? previous === 0 : previous < time) && elapsed >= time)
         this.play(cue, false, "concrete", position);
@@ -189,7 +195,14 @@ export class Soundscape {
             : cue;
     const buffer = this.buffers.get(name);
     if (!buffer) return;
-    playback ??= this.nativeCueSettings.get(name);
+    const c4 = c4Audio[name as keyof typeof c4Audio];
+    if (
+      c4?.blockSeconds &&
+      this.context.currentTime - (this.objectiveLastPlayed.get(name) ?? -Infinity) < c4.blockSeconds
+    )
+      return;
+    if (c4?.instances === 1) this.objectiveVoices.get(name)?.stop();
+    playback ??= c4 ?? this.nativeCueSettings.get(name);
     const blast =
       cue === "bomb-explode" ||
       cue === "utility-he-explode" ||
@@ -197,11 +210,11 @@ export class Soundscape {
       cue === "utility-decoy-explode";
     if (this.voices.size >= 16) {
       const oldest =
-        [...this.voices].find((voice) => !this.blasts.has(voice)) ??
+        [...this.voices].find((voice) => !this.protectedVoices.has(voice)) ??
         (blast ? this.voices.values().next().value : undefined);
       if (!oldest) return;
       this.voices.delete(oldest);
-      this.blasts.delete(oldest);
+      this.protectedVoices.delete(oldest);
       oldest.stop();
     }
     const source = this.context.createBufferSource(),
@@ -215,7 +228,20 @@ export class Soundscape {
       playback?.pitch ?? (breaking ? breaking.pitch + (Math.random() - 0.5) * 0.02 : 1);
     source.connect(gain);
     const disconnectSpatial = position
-      ? this.spatial.connect(this.context, gain, this.effects, position, blast)
+      ? this.spatial.connect(
+          this.context,
+          gain,
+          this.effects,
+          c4 ? position.clone().setY(position.y + c4.height) : position,
+          c4
+            ? {
+                refDistance: 1,
+                maxDistance: c4.curve.at(-1)![0] * 0.0254,
+                curve: c4.curve.map(([x, y]) => [x * 0.0254, y] as const),
+                occlusionMix: c4.occlusionMix,
+              }
+            : blast,
+        )
       : undefined;
     if (!disconnectSpatial) {
       gain.connect(this.effects);
@@ -223,11 +249,16 @@ export class Soundscape {
         this.spatial.connectRoom(this.context, gain, this.effects);
     }
     this.voices.add(source);
-    if (blast) this.blasts.add(source);
+    if (c4) {
+      this.objectiveLastPlayed.set(name, this.context.currentTime);
+      if (c4.instances === 1) this.objectiveVoices.set(name, source);
+    }
+    if (blast || cue.startsWith("bomb-")) this.protectedVoices.add(source);
     this.lastCue = name;
     source.onended = () => {
       this.voices.delete(source);
-      this.blasts.delete(source);
+      this.protectedVoices.delete(source);
+      if (this.objectiveVoices.get(name) === source) this.objectiveVoices.delete(name);
       if (this.uiVoices.get(name) === source) this.uiVoices.delete(name);
       source.disconnect();
       gain.disconnect();

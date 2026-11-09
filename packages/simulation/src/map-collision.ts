@@ -647,46 +647,82 @@ export class MapCollision {
       }
     return fraction;
   }
-  // Small ragdoll joint spheres collide against all nearby triangles, without
-  // the living hull's step-height exemption (which would skip low cover).
-  resolveSphere(position: T.Vector3, radius: number) {
+  // Conservative sphere AABB candidates for repeated rigid-body contact
+  // iterations. Callers must refresh when their bound leaves this region.
+  sphereTriangles(position: T.Vector3, radius: number, result: number[]) {
+    result.length = 0;
     const query = this.stamp();
     const { cellSize, offsets, entries, vertices, visit } = this;
-    const x = position.x,
-      z = position.z;
     for (
-      let cz = Math.floor((z - radius) / cellSize);
-      cz <= Math.floor((z + radius) / cellSize);
+      let cz = Math.floor((position.z - radius) / cellSize);
+      cz <= Math.floor((position.z + radius) / cellSize);
       cz++
-    ) {
+    )
       for (
-        let cx = Math.floor((x - radius) / cellSize);
-        cx <= Math.floor((x + radius) / cellSize);
+        let cx = Math.floor((position.x - radius) / cellSize);
+        cx <= Math.floor((position.x + radius) / cellSize);
         cx++
       ) {
         const cell = this.cell(cx, cz);
         if (cell < 0) continue;
         for (let e = offsets[cell]; e < offsets[cell + 1]; e++) {
           const k = entries[e];
-          if (this.disabledOwners[this.owner[k]]) continue;
           if (visit[k] === query) continue;
           visit[k] = query;
           if (position.y - radius > this.maxY[k] || position.y + radius < this.minY[k]) continue;
-          const o = k * 9;
-          if (outside(vertices, o, position.x, position.z, radius)) continue;
-          triangle.a.fromArray(vertices, o);
-          triangle.b.fromArray(vertices, o + 3);
-          triangle.c.fromArray(vertices, o + 6);
-          triangle.closestPointToPoint(position, closest);
-          correction.subVectors(position, closest);
-          const distance = correction.length();
-          if (distance >= radius) continue;
-          if (distance < 1e-8) triangle.getNormal(correction);
-          else correction.multiplyScalar(1 / distance);
-          position.addScaledVector(correction, radius - distance + 1e-5);
+          if (!outside(vertices, k * 9, position.x, position.z, radius)) result.push(k);
         }
       }
+  }
+  private sphereTriangle(position: T.Vector3, radius: number, k: number) {
+    if (
+      this.disabledOwners[this.owner[k]] ||
+      position.y - radius > this.maxY[k] ||
+      position.y + radius < this.minY[k]
+    )
+      return;
+    const vertices = this.vertices,
+      o = k * 9;
+    if (outside(vertices, o, position.x, position.z, radius)) return;
+    triangle.a.fromArray(vertices, o);
+    triangle.b.fromArray(vertices, o + 3);
+    triangle.c.fromArray(vertices, o + 6);
+    triangle.closestPointToPoint(position, closest);
+    correction.subVectors(position, closest);
+    const distance = correction.length();
+    if (distance >= radius) return;
+    if (distance < 1e-8) triangle.getNormal(correction);
+    else correction.multiplyScalar(1 / distance);
+    position.addScaledVector(correction, radius - distance + 1e-5);
+  }
+  // Native body capsule samples use the same exact sphere/triangle narrow
+  // phase as living-world queries, with an optional precollected broadphase.
+  resolveSphere(position: T.Vector3, radius: number, candidates?: readonly number[]) {
+    if (candidates) {
+      for (const k of candidates) this.sphereTriangle(position, radius, k);
+      return;
     }
+    const query = this.stamp();
+    const { cellSize, offsets, entries, visit } = this;
+    for (
+      let cz = Math.floor((position.z - radius) / cellSize);
+      cz <= Math.floor((position.z + radius) / cellSize);
+      cz++
+    )
+      for (
+        let cx = Math.floor((position.x - radius) / cellSize);
+        cx <= Math.floor((position.x + radius) / cellSize);
+        cx++
+      ) {
+        const cell = this.cell(cx, cz);
+        if (cell < 0) continue;
+        for (let e = offsets[cell]; e < offsets[cell + 1]; e++) {
+          const k = entries[e];
+          if (visit[k] === query) continue;
+          visit[k] = query;
+          this.sphereTriangle(position, radius, k);
+        }
+      }
   }
   // Falling beside a ledge (or rising beside a sloped wall) can intersect its
   // side even when the preceding horizontal move was clear. Slide out of that

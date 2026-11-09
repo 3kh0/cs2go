@@ -334,7 +334,12 @@ test("multiplayer C4 equips with 5 and plants after the result with synchronized
       const play = sound.play.bind(sound);
       sound.play = (...args) => {
         const voice = play(...args);
-        if (voice && (args[0] === "bomb-draw" || args[0].startsWith("bomb-key-")))
+        if (
+          voice &&
+          (args[0] === "bomb-draw" ||
+            args[0] === "bomb-initiate" ||
+            args[0].startsWith("bomb-key-"))
+        )
           played.push(args[0]);
         return voice;
       };
@@ -383,7 +388,11 @@ test("multiplayer C4 equips with 5 and plants after the result with synchronized
     await expect(b.locator("#bomb-carrier")).toBeHidden();
     expect(
       await b.evaluate(() => (window as unknown as { c4NetworkCues: string[] }).c4NetworkCues),
-    ).toEqual(["bomb-draw", ...Array.from({ length: 7 }, (_, i) => `bomb-key-${i + 1}`)]);
+    ).toEqual([
+      "bomb-draw",
+      "bomb-initiate",
+      ...Array.from({ length: 7 }, (_, i) => `bomb-key-${i + 1}`),
+    ]);
     expect(errors).toEqual([]);
   } finally {
     await ct.close();

@@ -44,6 +44,25 @@ test("draft agents and gloves render native poses without equipping and close cl
   await expect(stage).toHaveAttribute("data-seed", "749");
   await expect(stage).toHaveAttribute("data-ready", "true");
   await page.waitForTimeout(1200);
+  const hands = await page.evaluate(async () => {
+    const path = "/tests/three-fixture.ts";
+    const { Vector3 } = (await import(path)) as typeof import("three");
+    const preview = window.__game.cosmeticPreview as unknown as {
+      model: import("three").Object3D;
+      camera: import("three").PerspectiveCamera;
+    };
+    return ["hand_L", "hand_R"].map((name) =>
+      preview.model
+        .getObjectByName(name)!
+        .getWorldPosition(new Vector3())
+        .project(preview.camera)
+        .toArray(),
+    );
+  });
+  // Looking through the wearer's eyes keeps their left hand on screen-left;
+  // an object camera looking back at the model reverses that relationship.
+  expect(hands[0][0]).toBeLessThan(hands[1][0]);
+  expect(hands.every((hand) => hand[2] > -1 && hand[2] < 1)).toBe(true);
   await page.screenshot({ path: "artifacts/cosmetic-gloves-native-preview.png" });
   await page.locator('[data-cosmetic-category="agents"]').click();
   await expect(stage).toHaveAttribute("data-ready", "true", { timeout: 60_000 });

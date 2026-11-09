@@ -15,6 +15,8 @@ export type SoundRange = {
   maxDistance: number;
   curve?: readonly (readonly [number, number])[];
   occlusion?: number;
+  /** C4 csgo_mega sends occlusion intensity to an EQ dry/wet mix. */
+  occlusionMix?: number;
 };
 // An inverse panner clamps attenuation at maxDistance; this envelope fades to
 // actual silence instead of leaving distant voices at a constant audible gain.
@@ -26,8 +28,10 @@ export function audibleGain(distance: number, range: SoundRange) {
     for (let i = 1; i < points.length; i++) {
       const [x, y] = points[i],
         [previousX, previousY] = points[i - 1];
-      if (distance <= x)
-        return previousY + ((y - previousY) * (distance - previousX)) / (x - previousX);
+      if (distance <= x) {
+        const t = (distance - previousX) / (x - previousX);
+        return previousY + (y - previousY) * t;
+      }
     }
     return 0;
   }
@@ -188,7 +192,8 @@ export class SpatialAudio {
       voice.panner.positionZ.setTargetAtTime(apparent.z, context.currentTime, 0.04);
       voice.filter.frequency.setTargetAtTime(cutoff, context.currentTime, 0.04);
       voice.gain.gain.setTargetAtTime(
-        level * audibleGain(this.position.distanceTo(voice.position), voice.range),
+        (voice.range.occlusionMix === undefined ? level : 1) *
+          audibleGain(this.position.distanceTo(voice.position), voice.range),
         context.currentTime,
         0.04,
       );
@@ -221,8 +226,19 @@ export class SpatialAudio {
     const blocked = this.obstructed?.(this.position, position) ?? false;
     filter.frequency.value = blocked ? 700 : 18000;
     gain.gain.value =
-      (blocked ? 0.065 : 1) * audibleGain(this.position.distanceTo(position), range);
-    input.connect(filter).connect(gain).connect(panner).connect(output);
+      (blocked && range.occlusionMix === undefined ? 0.065 : 1) *
+      audibleGain(this.position.distanceTo(position), range);
+    const dry = range.occlusionMix === undefined ? undefined : context.createGain();
+    const wet = dry ? context.createGain() : undefined;
+    if (dry && wet) {
+      // Native C4 mixes mostly unfiltered sound with occlusion EQ. The browser's
+      // lowpass approximates that EQ; a box must not mute the whole objective.
+      dry.gain.value = 1 - range.occlusionMix!;
+      wet.gain.value = range.occlusionMix!;
+      input.connect(dry).connect(gain);
+      input.connect(filter).connect(wet).connect(gain);
+    } else input.connect(filter).connect(gain);
+    gain.connect(panner).connect(output);
     this.connectRoom(context, panner, output);
     const voice = {
       position: position.clone(),
@@ -237,6 +253,8 @@ export class SpatialAudio {
     return () => {
       this.voices.delete(voice);
       filter.disconnect();
+      dry?.disconnect();
+      wet?.disconnect();
       gain.disconnect();
       panner.disconnect();
     };

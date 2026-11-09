@@ -1,0 +1,1040 @@
+{
+  "source": "Read-only installed CS2 via Windows Amp runner",
+  "vpkDirectorySha256": "10d5831cbf008808419a438141362c466f14550a8a4cf04ace56a7828ccf2b27",
+  "soundEventSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+  "plantResourceSha256": "06dd18b3334a16aecdd015006d467f0d2b3d0da5a1bf643359129649890e0f89",
+  "nativePlantClipSeconds": 4,
+  "plantEvents": [
+    {
+      "_class": "CNmSoundEvent",
+      "m_flStartTime": {
+        "m_flValue": 0.025
+      },
+      "m_flDuration": {
+        "m_flValue": 0.0
+      },
+      "m_syncID": "",
+      "m_relevance": "ClientOnly",
+      "m_name": "c4.initiate",
+      "m_position": "EntityEyePos",
+      "m_attachmentName": "",
+      "m_tags": "",
+      "m_bContinuePlayingSoundAtDurationEnd": false,
+      "m_flDurationInterruptionThreshold": 0.9
+    },
+    {
+      "_class": "CNmSoundEvent",
+      "m_flStartTime": {
+        "m_flValue": 0.166667
+      },
+      "m_flDuration": {
+        "m_flValue": 0.0
+      },
+      "m_syncID": "",
+      "m_relevance": "ClientOnly",
+      "m_name": "c4.keypressquiet",
+      "m_position": "EntityEyePos",
+      "m_attachmentName": "",
+      "m_tags": "",
+      "m_bContinuePlayingSoundAtDurationEnd": false,
+      "m_flDurationInterruptionThreshold": 0.9
+    },
+    {
+      "_class": "CNmSoundEvent",
+      "m_flStartTime": {
+        "m_flValue": 0.241667
+      },
+      "m_flDuration": {
+        "m_flValue": 0.0
+      },
+      "m_syncID": "",
+      "m_relevance": "ClientOnly",
+      "m_name": "c4.keypressquiet",
+      "m_position": "EntityEyePos",
+      "m_attachmentName": "",
+      "m_tags": "",
+      "m_bContinuePlayingSoundAtDurationEnd": false,
+      "m_flDurationInterruptionThreshold": 0.9
+    },
+    {
+      "_class": "CNmSoundEvent",
+      "m_flStartTime": {
+        "m_flValue": 0.308333
+      },
+      "m_flDuration": {
+        "m_flValue": 0.0
+      },
+      "m_syncID": "",
+      "m_relevance": "ClientOnly",
+      "m_name": "c4.keypressquiet",
+      "m_position": "EntityEyePos",
+      "m_attachmentName": "",
+      "m_tags": "",
+      "m_bContinuePlayingSoundAtDurationEnd": false,
+      "m_flDurationInterruptionThreshold": 0.9
+    },
+    {
+      "_class": "CNmSoundEvent",
+      "m_flStartTime": {
+        "m_flValue": 0.366667
+      },
+      "m_flDuration": {
+        "m_flValue": 0.0
+      },
+      "m_syncID": "",
+      "m_relevance": "ClientOnly",
+      "m_name": "c4.keypressquiet",
+      "m_position": "EntityEyePos",
+      "m_attachmentName": "",
+      "m_tags": "",
+      "m_bContinuePlayingSoundAtDurationEnd": false,
+      "m_flDurationInterruptionThreshold": 0.9
+    },
+    {
+      "_class": "CNmSoundEvent",
+      "m_flStartTime": {
+        "m_flValue": 0.416667
+      },
+      "m_flDuration": {
+        "m_flValue": 0.0
+      },
+      "m_syncID": "",
+      "m_relevance": "ClientOnly",
+      "m_name": "c4.keypressquiet",
+      "m_position": "EntityEyePos",
+      "m_attachmentName": "",
+      "m_tags": "",
+      "m_bContinuePlayingSoundAtDurationEnd": false,
+      "m_flDurationInterruptionThreshold": 0.9
+    },
+    {
+      "_class": "CNmSoundEvent",
+      "m_flStartTime": {
+        "m_flValue": 0.491667
+      },
+      "m_flDuration": {
+        "m_flValue": 0.0
+      },
+      "m_syncID": "",
+      "m_relevance": "ClientOnly",
+      "m_name": "c4.keypressquiet",
+      "m_position": "EntityEyePos",
+      "m_attachmentName": "",
+      "m_tags": "",
+      "m_bContinuePlayingSoundAtDurationEnd": false,
+      "m_flDurationInterruptionThreshold": 0.9
+    },
+    {
+      "_class": "CNmSoundEvent",
+      "m_flStartTime": {
+        "m_flValue": 0.541667
+      },
+      "m_flDuration": {
+        "m_flValue": 0.0
+      },
+      "m_syncID": "",
+      "m_relevance": "ClientOnly",
+      "m_name": "c4.keypressquiet",
+      "m_position": "EntityEyePos",
+      "m_attachmentName": "",
+      "m_tags": "",
+      "m_bContinuePlayingSoundAtDurationEnd": false,
+      "m_flDurationInterruptionThreshold": 0.9
+    }
+  ],
+  "clips": [
+    {
+      "name": "bomb-initiate",
+      "event": "c4.initiate",
+      "sourceEvent": "c4.initiate",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/c4_initiate.vsnd_c",
+      "source": "sounds/weapons/c4/c4_initiate.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "5e9c6d390c0ea4d4f9718c7c05fbfdbddb4d479e863f906035f0e6c851a06897",
+      "decodedSha256": "404d462bd77cfb6989a7d4226740aa2062decd0f8e54e3602787e18517a2ebe0",
+      "outputSha256": "616b367b16a647a12a7ff0d63af820f65536ea4749d53a8821324f4de84ffad7",
+      "bytes": 22165,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.799805,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "404d462bd77cfb6989a7d4226740aa2062decd0f8e54e3602787e18517a2ebe0"
+    },
+    {
+      "name": "bomb-defuse-start",
+      "event": "c4.disarmstart",
+      "sourceEvent": "c4.disarmstart",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/c4_disarmstart.vsnd_c",
+      "source": "sounds/weapons/c4/c4_disarmstart.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "0a4816987d9862658e3a4f3437455639752c4a5c5c02cccc2fbcd993ef5cd3e0",
+      "decodedSha256": "ae7ab3970aee1ae2db5daa5044d43dc64af8b7116a40c580a220a41c914be7cd",
+      "outputSha256": "3fe4804cf7429f366f90e1f3ab94a84f8bd5bfe4a1a58c6a074d5e6831205e79",
+      "bytes": 15903,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.699707,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "ae7ab3970aee1ae2db5daa5044d43dc64af8b7116a40c580a220a41c914be7cd"
+    },
+    {
+      "name": "bomb-beep",
+      "event": "C4.PlantSound",
+      "sourceEvent": "C4.PlantSound",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/c4_beep2.vsnd_c",
+      "source": "sounds/weapons/c4/c4_beep2.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "a46f1814fde7d8d535c3a771ec9fa388687d2717d8d790222f6f60089ab0a4b9",
+      "decodedSha256": "c136ca6f2e169747cdc811c40eb4e0777bce2196c151a0cd74ea5025286c20e1",
+      "outputSha256": "211264338b0e0d26f16d1ad0e98ab58125ece817cc93f547f36c04cb14f6d0aa",
+      "bytes": 3218,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.9,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "manifest": "67499503218971311",
+      "exportedAudioSha256": "c136ca6f2e169747cdc811c40eb4e0777bce2196c151a0cd74ea5025286c20e1"
+    },
+    {
+      "name": "bomb-beep-fast",
+      "event": "C4.PlantSound_10sec",
+      "sourceEvent": "C4.PlantSound_10sec",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/c4_beep2_10sec.vsnd_c",
+      "source": "sounds/weapons/c4/c4_beep2_10sec.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "e2bfbf513205351c3bab593d0ef50eba9ba9c9e212f19247bc8f65cc6f2a2dc5",
+      "decodedSha256": "53fa6102ce4bdbda44d2e1a7f668ce75e040997f3fcefae0f9baf77ca2564711",
+      "outputSha256": "71ac1f5615a779f774489ca803ae49e692d0af840717910d75b938b380929b41",
+      "bytes": 1664,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.9,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "53fa6102ce4bdbda44d2e1a7f668ce75e040997f3fcefae0f9baf77ca2564711"
+    },
+    {
+      "name": "bomb-defuse",
+      "event": "c4.disarmfinish",
+      "sourceEvent": "c4.disarmfinish",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/c4_disarmfinish.vsnd_c",
+      "source": "sounds/weapons/c4/c4_disarmfinish.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "fc3b60f89f81e757d4b098354d45f55690596b31847416b0d73c26469d94d9da",
+      "decodedSha256": "e74fa507e8d322c42f4ba35e07bba5c05377a16661af5b7eab035b70fff8750b",
+      "outputSha256": "64c450fef2cbc291b6d0c602bc09348b6ced700c0b8b95fede5bf16ede93510b",
+      "bytes": 17354,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.699707,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "manifest": "67499503218971311",
+      "exportedAudioSha256": "e74fa507e8d322c42f4ba35e07bba5c05377a16661af5b7eab035b70fff8750b"
+    },
+    {
+      "name": "bomb-plant",
+      "event": "c4.plant",
+      "sourceEvent": "c4.plant",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/c4_plant.vsnd_c",
+      "source": "sounds/weapons/c4/c4_plant.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "862917445e116e587ff2faa31dfa51581f296418ce0ab58c3e40ae1346a32b31",
+      "decodedSha256": "03eca36e8e6c61e3145a0118c1b38f0601eae8829aebe1e9f8fc95196197f21b",
+      "outputSha256": "75afdb43caf0f83ff781be69bfc75deaa2b20b7bd88f6a9a6c5d4b16d75e98ba",
+      "bytes": 6886,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.599609,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "manifest": "67499503218971311",
+      "exportedAudioSha256": "03eca36e8e6c61e3145a0118c1b38f0601eae8829aebe1e9f8fc95196197f21b"
+    },
+    {
+      "name": "bomb-key-1",
+      "event": "c4.keypressquiet",
+      "sourceEvent": "c4.keypressquiet",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/key_press1.vsnd_c",
+      "source": "sounds/weapons/c4/key_press1.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "3b251f8ad7bc51a74fed0a094ab29fc60d9f92abe6cfd618df235129eff7a461",
+      "outputSha256": "b25dbc57d9ea632f02a18cadd8b33d0be656bdcdfb3fd78423c5a890ce3f5587",
+      "bytes": 3609,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.3,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "mp3",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "843a71b2a09eb06a9b2a037f880b05269e11ce506a8c94b55e9d8d6e61af0158"
+    },
+    {
+      "name": "bomb-key-2",
+      "event": "c4.keypressquiet",
+      "sourceEvent": "c4.keypressquiet",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/key_press2.vsnd_c",
+      "source": "sounds/weapons/c4/key_press2.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "2f95f0eaa1830c25d5682b2d1496cff8a52770564b02fd6ae44df8fd99eed920",
+      "outputSha256": "0d1f9f0ac69c3d64d7179e033ead33afeb54c0b80dbb00714587e667df2caa48",
+      "bytes": 4119,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.3,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "mp3",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "08a498e9052658a2810ed982a20391a1f99bd8614369c9185b281fd5e5171c2d"
+    },
+    {
+      "name": "bomb-key-3",
+      "event": "c4.keypressquiet",
+      "sourceEvent": "c4.keypressquiet",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/key_press3.vsnd_c",
+      "source": "sounds/weapons/c4/key_press3.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "6354b2e4362fc1c9450b6398ededd05bc922810af5b226463c0f2622440d8058",
+      "outputSha256": "175e148f14b696f575b4ea114548ec33652e759ab09a3e7edb12a6920d5f2537",
+      "bytes": 3981,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.3,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "mp3",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "bab46167c5234ba995984bb3bcca20f6e9c7393315dd6876446e47765c243bbc"
+    },
+    {
+      "name": "bomb-key-4",
+      "event": "c4.keypressquiet",
+      "sourceEvent": "c4.keypressquiet",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/key_press4.vsnd_c",
+      "source": "sounds/weapons/c4/key_press4.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "455cd7a2ed43cba6bbf71b33037bf1ef4f58ebd81923f56c4d907b97a7d32364",
+      "outputSha256": "7f53edfcca34aff445babfbd142b9cef0eac70aeb26f744ef36895392863c1e8",
+      "bytes": 5776,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.3,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "mp3",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "1e8577021bddd01513a7bc08ba96c223279f9943d5d74698577829be60228650"
+    },
+    {
+      "name": "bomb-key-5",
+      "event": "c4.keypressquiet",
+      "sourceEvent": "c4.keypressquiet",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/key_press5.vsnd_c",
+      "source": "sounds/weapons/c4/key_press5.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "42b775f3973982df8a2eaee01348acc50c4673f72ecf89e5a90a49335c3b4b10",
+      "outputSha256": "67cee7193f528937d1e576d2d47bfe5503fc5657ee70d7087f55626e3cf611fb",
+      "bytes": 5567,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.3,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "mp3",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "452122ae41de5bb17c4dac1faab92bf7f50ea3b013f605b70ae7f42b39bf7e7a"
+    },
+    {
+      "name": "bomb-key-6",
+      "event": "c4.keypressquiet",
+      "sourceEvent": "c4.keypressquiet",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/key_press6.vsnd_c",
+      "source": "sounds/weapons/c4/key_press6.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "cae8c14e862be5778b361af7523b9e3654ce75bf28b5d22b8c9d4eda30d85d92",
+      "outputSha256": "31ef44adff18081e14943ef724b85898e92ed5b972605430fd6f72686ea8024d",
+      "bytes": 5693,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.3,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "mp3",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "f1f9b63a7ca8bfb9e9a903cbd57be6cb7bcc1d04a0c0e3cae0009f163aed6618"
+    },
+    {
+      "name": "bomb-key-7",
+      "event": "c4.keypressquiet",
+      "sourceEvent": "c4.keypressquiet",
+      "eventFile": "soundevents/game_sounds_weapons.vsndevts_c",
+      "resource": "sounds/weapons/c4/key_press7.vsnd_c",
+      "source": "sounds/weapons/c4/key_press7.vsnd_c",
+      "sourcePack": "Valve CS2 native C4 sound events",
+      "resourceSha256": "c1535b7b19de695bf4037163a5dbf451cd56bd57e46a723037d54b4947b6b63a",
+      "outputSha256": "3d1a7c007108b2b6bb1733344b356596c76a97674ea8cf60001ccf448abdc426",
+      "bytes": 4061,
+      "sourceEventResourceSha256": "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+      "sourceEventGain": 0.3,
+      "sourceEventPitch": 1.0,
+      "sourceCodec": "mp3",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 2,
+      "encoding": "FFmpeg libopus mono 48kHz 96kbps",
+      "exportedAudioSha256": "888e532ad6dd63b6733e0b8ea8ee3777ce5099f5ee9ac9bba3cb477b3185783f"
+    }
+  ],
+  "limitations": [
+    "Native animation markers are normalized phases; mapping these onto the existing 3.2-second browser interaction is an adaptation, not a verified native graph timewarp.",
+    "C4 occlusion uses the native dry/EQ mix intensity; browser HRTF, low-pass response and collision visibility approximate Steam Audio.",
+    "Distance gain interpolates the native curve points linearly; the native tangent and interpolation-mode operators are not reconstructed."
+  ],
+  "soundEvents": {
+    "C4.PlantSound": {
+      "type": "csgo_mega",
+      "preload_vsnds": true,
+      "volume": 0.9,
+      "pitch": 1.0,
+      "mixgroup": "Weapons",
+      "use_distance_volume_mapping_curve": true,
+      "block_matching_events": false,
+      "block_match_entity": false,
+      "use_distance_unfiltered_stereo_mapping_curve": false,
+      "reverb_wet": 0.1,
+      "occlusion_intensity": 0.2,
+      "display_broadcast": true,
+      "reverb_source_wet": 1.0,
+      "position_offset": [
+        0.0,
+        0.0,
+        20.0
+      ],
+      "occlusion_frequency_scale": 0.96,
+      "use_fadetime_volume_mapping_curve": false,
+      "restrict_source_reverb": false,
+      "block_duration": 0.0,
+      "block_distance": 0.0,
+      "instance_limit": 1.0,
+      "distance_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          -0.000968,
+          -0.000968,
+          2.0,
+          3.0
+        ],
+        [
+          1300.0,
+          0.0,
+          -0.000867,
+          -0.000867,
+          2.0,
+          3.0
+        ]
+      ],
+      "distance_unfiltered_stereo_mapping_curve": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          80.571434,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          300.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "vsnd_files_track_01": [
+        "sounds/weapons/c4/c4_beep2.vsnd"
+      ]
+    },
+    "C4.PlantSound_10sec": {
+      "type": "csgo_mega",
+      "preload_vsnds": true,
+      "volume": 0.9,
+      "pitch": 1.0,
+      "mixgroup": "Weapons",
+      "use_distance_volume_mapping_curve": true,
+      "block_matching_events": false,
+      "block_match_entity": false,
+      "use_distance_unfiltered_stereo_mapping_curve": false,
+      "reverb_wet": 0.1,
+      "occlusion_intensity": 0.2,
+      "display_broadcast": true,
+      "reverb_source_wet": 1.0,
+      "position_offset": [
+        0.0,
+        0.0,
+        20.0
+      ],
+      "occlusion_frequency_scale": 0.96,
+      "use_fadetime_volume_mapping_curve": false,
+      "restrict_source_reverb": false,
+      "block_duration": 0.0,
+      "block_distance": 0.0,
+      "instance_limit": 1.0,
+      "delay": 0.05,
+      "distance_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          -0.000968,
+          -0.000968,
+          2.0,
+          3.0
+        ],
+        [
+          1300.0,
+          0.0,
+          -0.000867,
+          -0.000867,
+          2.0,
+          3.0
+        ]
+      ],
+      "distance_unfiltered_stereo_mapping_curve": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          80.571434,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          300.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "vsnd_files_track_01": [
+        "sounds/weapons/c4/c4_beep2_10sec.vsnd"
+      ]
+    },
+    "c4.disarmfinish": {
+      "type": "csgo_mega",
+      "preload_vsnds": true,
+      "volume": 0.699707,
+      "pitch": 1.0,
+      "use_distance_volume_mapping_curve": true,
+      "mixgroup": "Weapons",
+      "use_distance_unfiltered_stereo_mapping_curve": true,
+      "reverb_wet": 0.5,
+      "occlusion_intensity": 0.5,
+      "block_duration": 0.5,
+      "display_broadcast": true,
+      "reverb_source_wet": 0.5,
+      "position_offset": [
+        0.0,
+        0.0,
+        20.0
+      ],
+      "occlusion_frequency_scale": 0.96,
+      "use_fadetime_volume_mapping_curve": false,
+      "restrict_source_reverb": false,
+      "block_matching_events": true,
+      "block_match_entity": true,
+      "block_distance": 60.0,
+      "distance_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          200.0,
+          1.0,
+          -0.000817,
+          -0.000817,
+          3.0,
+          1.0
+        ],
+        [
+          657.142883,
+          0.463235,
+          -0.000556,
+          -0.000556,
+          1.0,
+          1.0
+        ],
+        [
+          2000.0,
+          0.0,
+          -0.000299,
+          -0.000299,
+          2.0,
+          3.0
+        ]
+      ],
+      "distance_unfiltered_stereo_mapping_curve": [
+        [
+          103.829163,
+          0.509901,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          120.000008,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          300.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "vsnd_files_track_01": [
+        "sounds/weapons/c4/c4_disarmfinish.vsnd"
+      ]
+    },
+    "c4.disarmstart": {
+      "type": "csgo_mega",
+      "preload_vsnds": true,
+      "volume": 0.699707,
+      "pitch": 1.0,
+      "use_distance_volume_mapping_curve": true,
+      "mixgroup": "Weapons",
+      "use_distance_unfiltered_stereo_mapping_curve": true,
+      "reverb_wet": 0.5,
+      "occlusion_intensity": 0.3,
+      "block_duration": 0.5,
+      "display_broadcast": true,
+      "reverb_source_wet": 0.5,
+      "position_offset": [
+        0.0,
+        0.0,
+        20.0
+      ],
+      "occlusion_frequency_scale": 0.96,
+      "use_fadetime_volume_mapping_curve": false,
+      "restrict_source_reverb": false,
+      "block_matching_events": true,
+      "block_match_entity": true,
+      "block_distance": 60.0,
+      "distance_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          200.0,
+          1.0,
+          -0.000817,
+          -0.000817,
+          3.0,
+          1.0
+        ],
+        [
+          657.142883,
+          0.463235,
+          -0.000556,
+          -0.000556,
+          1.0,
+          1.0
+        ],
+        [
+          2000.0,
+          0.0,
+          -0.000299,
+          -0.000299,
+          2.0,
+          3.0
+        ]
+      ],
+      "distance_unfiltered_stereo_mapping_curve": [
+        [
+          103.829163,
+          0.509901,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          120.000008,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          300.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "vsnd_files_track_01": [
+        "sounds/weapons/c4/c4_disarmstart.vsnd"
+      ]
+    },
+    "c4.initiate": {
+      "type": "csgo_mega",
+      "preload_vsnds": true,
+      "volume": 0.799805,
+      "pitch": 1.0,
+      "use_distance_volume_mapping_curve": true,
+      "use_fadetime_volume_mapping_curve": false,
+      "mixgroup": "Weapons",
+      "block_matching_events": false,
+      "block_match_entity": false,
+      "use_distance_unfiltered_stereo_mapping_curve": true,
+      "reverb_wet": 0.5,
+      "occlusion_intensity": 0.5,
+      "display_broadcast": true,
+      "reverb_source_wet": 0.5,
+      "position_offset": [
+        0.0,
+        0.0,
+        20.0
+      ],
+      "occlusion_frequency_scale": 0.97,
+      "restrict_source_reverb": false,
+      "block_duration": 0.0,
+      "block_distance": 0.0,
+      "distance_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          2.0,
+          0.0
+        ],
+        [
+          103.897484,
+          1.0,
+          0.0,
+          -0.001002,
+          0.0,
+          0.0
+        ],
+        [
+          1101.942993,
+          0.0,
+          -0.001002,
+          -0.001002,
+          0.0,
+          3.0
+        ]
+      ],
+      "distance_unfiltered_stereo_mapping_curve": [
+        [
+          58.762886,
+          0.510204,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          80.571434,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          300.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "vsnd_files_track_01": [
+        "sounds/weapons/c4/c4_initiate.vsnd"
+      ]
+    },
+    "c4.keypressquiet": {
+      "type": "csgo_mega",
+      "preload_vsnds": true,
+      "volume": 0.3,
+      "pitch": 1.0,
+      "use_distance_volume_mapping_curve": true,
+      "mixgroup": "Foley",
+      "use_distance_unfiltered_stereo_mapping_curve": true,
+      "block_duration": 0.0,
+      "reverb_wet": 0.3,
+      "occlusion_intensity": 0.3,
+      "display_broadcast": false,
+      "reverb_source_wet": 0.3,
+      "position_offset": [
+        0.0,
+        0.0,
+        20.0
+      ],
+      "occlusion_frequency_scale": 0.97,
+      "use_fadetime_volume_mapping_curve": false,
+      "restrict_source_reverb": false,
+      "block_matching_events": false,
+      "block_match_entity": false,
+      "block_distance": 0.0,
+      "distance_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          2.0,
+          0.0
+        ],
+        [
+          69.264992,
+          1.0,
+          0.0,
+          -0.000968,
+          0.0,
+          0.0
+        ],
+        [
+          1101.942993,
+          0.0,
+          -0.000968,
+          -0.000968,
+          0.0,
+          3.0
+        ]
+      ],
+      "vsnd_files_track_01": [
+        "sounds/weapons/c4/key_press1.vsnd",
+        "sounds/weapons/c4/key_press2.vsnd",
+        "sounds/weapons/c4/key_press3.vsnd",
+        "sounds/weapons/c4/key_press4.vsnd",
+        "sounds/weapons/c4/key_press5.vsnd",
+        "sounds/weapons/c4/key_press6.vsnd",
+        "sounds/weapons/c4/key_press7.vsnd"
+      ],
+      "distance_unfiltered_stereo_mapping_curve": [
+        [
+          54.344627,
+          0.214286,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          80.571434,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          300.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "metadata": [
+        "meta",
+        "localplayeronly"
+      ]
+    },
+    "c4.plant": {
+      "type": "csgo_mega",
+      "preload_vsnds": true,
+      "volume": 0.599609,
+      "pitch": 1.0,
+      "use_distance_volume_mapping_curve": true,
+      "mixgroup": "Weapons",
+      "use_distance_unfiltered_stereo_mapping_curve": true,
+      "reverb_wet": 1.0,
+      "occlusion_intensity": 0.3,
+      "display_broadcast": true,
+      "reverb_source_wet": 1.0,
+      "position_offset": [
+        0.0,
+        0.0,
+        20.0
+      ],
+      "occlusion_frequency_scale": 0.97,
+      "use_fadetime_volume_mapping_curve": false,
+      "restrict_source_reverb": false,
+      "block_matching_events": false,
+      "block_match_entity": false,
+      "block_duration": 0.0,
+      "block_distance": 0.0,
+      "distance_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          2.0,
+          0.0
+        ],
+        [
+          105.428574,
+          1.0,
+          -0.000553,
+          -0.000553,
+          1.0,
+          1.0
+        ],
+        [
+          1089.428589,
+          0.397059,
+          -0.00025,
+          -0.00025,
+          1.0,
+          1.0
+        ],
+        [
+          4100.0,
+          0.0,
+          -0.000132,
+          -0.000132,
+          0.0,
+          3.0
+        ]
+      ],
+      "distance_unfiltered_stereo_mapping_curve": [
+        [
+          60.000004,
+          1.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          80.571434,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ],
+        [
+          300.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0,
+          3.0
+        ]
+      ],
+      "vsnd_files_track_01": [
+        "sounds/weapons/c4/c4_plant.vsnd"
+      ]
+    }
+  }
+}

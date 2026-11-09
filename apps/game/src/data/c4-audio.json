@@ -1,0 +1,172 @@
+{
+  "bomb-initiate": {
+    "gain": 0.799805,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.5,
+    "curve": [
+      [0.0, 1.0],
+      [103.897484, 1.0],
+      [1101.942993, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-defuse-start": {
+    "gain": 0.699707,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [200.0, 1.0],
+      [657.142883, 0.463235],
+      [2000.0, 0.0]
+    ],
+    "blockSeconds": 0.5,
+    "instances": 0
+  },
+  "bomb-beep": {
+    "gain": 0.9,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.2,
+    "curve": [
+      [0.0, 1.0],
+      [1300.0, 0.0]
+    ],
+    "instances": 1,
+    "blockSeconds": 0
+  },
+  "bomb-beep-fast": {
+    "gain": 0.9,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.2,
+    "curve": [
+      [0.0, 1.0],
+      [1300.0, 0.0]
+    ],
+    "instances": 1,
+    "blockSeconds": 0
+  },
+  "bomb-defuse": {
+    "gain": 0.699707,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.5,
+    "curve": [
+      [0.0, 1.0],
+      [200.0, 1.0],
+      [657.142883, 0.463235],
+      [2000.0, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-plant": {
+    "gain": 0.599609,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [105.428574, 1.0],
+      [1089.428589, 0.397059],
+      [4100.0, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-key-1": {
+    "gain": 0.3,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [69.264992, 1.0],
+      [1101.942993, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-key-2": {
+    "gain": 0.3,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [69.264992, 1.0],
+      [1101.942993, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-key-3": {
+    "gain": 0.3,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [69.264992, 1.0],
+      [1101.942993, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-key-4": {
+    "gain": 0.3,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [69.264992, 1.0],
+      [1101.942993, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-key-5": {
+    "gain": 0.3,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [69.264992, 1.0],
+      [1101.942993, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-key-6": {
+    "gain": 0.3,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [69.264992, 1.0],
+      [1101.942993, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  },
+  "bomb-key-7": {
+    "gain": 0.3,
+    "pitch": 1.0,
+    "height": 0.508,
+    "occlusionMix": 0.3,
+    "curve": [
+      [0.0, 1.0],
+      [69.264992, 1.0],
+      [1101.942993, 0.0]
+    ],
+    "blockSeconds": 0,
+    "instances": 0
+  }
+}

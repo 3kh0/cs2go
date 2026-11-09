@@ -471,3 +471,26 @@ it("repairs shallow floor overlaps without pulling falls upward or through low c
   expect(confined.recoverGround(position)).toBe(false);
   expect(position.y).toBe(-0.06);
 });
+
+it("cached rigid-body triangle candidates retain floor/wall contacts and live breakable state", () => {
+  const floor = surface([-4, 0, -4, 4, 0, 4, 4, 0, -4, -4, 0, -4, -4, 0, 4, 4, 0, 4]);
+  const wall = surface([0, 0, -2, 0, 2, 2, 0, 2, -2, 0, 0, -2, 0, 0, 2, 0, 2, 2]);
+  wall.name = "breakable-panel";
+  const collision = new MapCollision([floor, wall]),
+    candidates: number[] = [];
+  collision.sphereTriangles(new T.Vector3(0.2, 0.3, 0), 0.8, candidates);
+  for (const position of [new T.Vector3(0.05, 0.4, 0), new T.Vector3(0.3, 0.05, 0)]) {
+    const cached = position.clone(),
+      direct = position.clone();
+    collision.resolveSphere(cached, 0.15, candidates);
+    collision.resolveSphere(direct, 0.15);
+    expect(cached.distanceTo(direct)).toBeLessThan(1e-8);
+  }
+  collision.setMeshEnabled("breakable-panel", false);
+  const point = new T.Vector3(0.05, 0.4, 0);
+  collision.resolveSphere(point, 0.15, candidates);
+  expect(point.x).toBe(0.05);
+  collision.setMeshEnabled("breakable-panel", true);
+  collision.resolveSphere(point, 0.15, candidates);
+  expect(point.x).toBeGreaterThan(0.14);
+});

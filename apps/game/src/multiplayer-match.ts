@@ -1,3 +1,4 @@
+import { PLANT_DURATION } from "./bomb-presentation";
 import { interpolateCharacterClock } from "@cs2go/simulation/character-clock";
 import { hideDeathcam } from "./deathcam";
 import { equippedKnives } from "./equipped-knives";
@@ -475,12 +476,25 @@ export class MultiplayerMatch {
       beepRemaining: 1,
       beepPulse: 0,
     };
+    if (
+      state.phase === "live" &&
+      bomb.planted &&
+      bomb.defuser &&
+      (previousBomb?.defuser !== g.bomb.defuser || bomb.progress < previousBomb.progress)
+    )
+      g.soundscape.play("bomb-defuse-start", false, "concrete", g.bomb.position);
     g.soundscape.playBombPlant(
       previousBomb?.carrier === g.bomb.carrier && !previousBomb.planted
         ? previousBomb.plantProgress
-        : 0,
-      bomb.plantProgress,
-      g.bomb.carrier === "player" ? undefined : g.bomb.position,
+        : bomb.planted && !previousBomb?.planted
+          ? (previousBomb?.plantProgress ?? 0)
+          : 0,
+      bomb.planted && !previousBomb?.planted && (previousBomb?.plantProgress ?? 0) > 0
+        ? PLANT_DURATION
+        : bomb.plantProgress,
+      g.bomb.carrier === "player" || previousBomb?.carrier === "player"
+        ? undefined
+        : g.bomb.position,
     );
     g.bombMesh.visible = state.phase !== "waiting" && (bomb.planted || !bomb.carrier);
     g.bombMesh.position.set(bomb.x, bomb.y + 0.005, bomb.z);
@@ -952,7 +966,12 @@ export class MultiplayerMatch {
     if (g.bomb?.planted && this.connection.round?.phase === "live") {
       this.beep -= dt;
       if (this.beep <= 0) {
-        g.soundscape.play("bomb-beep", false, "concrete", g.bomb.position);
+        g.soundscape.play(
+          g.bomb.timer <= 10 ? "bomb-beep-fast" : "bomb-beep",
+          false,
+          "concrete",
+          g.bomb.position,
+        );
         this.beep = 0.15 + (0.85 * g.bomb.timer) / 40;
         g.bomb.beepPulse = 0.08;
       }

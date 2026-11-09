@@ -174,19 +174,17 @@ export class CosmeticPreview {
   }
   private frame() {
     if (!this.model) return;
-    this.model.updateMatrixWorld(true);
-    const bounds = previewBounds([this.model]);
     if (this.category === "gloves") {
-      // Frame the inspected hands; native glove cameras crop the forearms.
-      // Keep the full geometry and rig, including portions outside the lens.
-      bounds.makeEmpty();
-      this.model.traverse((bone) => {
-        if (bone instanceof T.Bone && /^(hand_|finger_)/.test(bone.name))
-          bounds.expandByPoint(bone.getWorldPosition(this.position));
-      });
-      bounds.expandByScalar(0.035);
+      // The exported viewmodel faces +Z. Inspect from the player's side,
+      // eight Source units behind its origin, rather than fitting an object
+      // camera in front of the hands. Forearms naturally leave the bottom.
+      this.camera.position.set(0, 0, -8 * 0.0254);
+      this.camera.lookAt(0, 0, 1);
+      this.fittedAspect = 0;
+      return;
     }
-    this.bounds.copy(bounds);
+    this.model.updateMatrixWorld(true);
+    this.bounds.copy(previewBounds([this.model]));
     this.fittedAspect = 0;
     this.camera.position.set(0, 0, 3);
     this.camera.lookAt(0, 0, 0);
@@ -302,7 +300,11 @@ export class CosmeticPreview {
         const width = (rect.width * this.size.x) / canvas.width;
         const height = (rect.height * this.size.y) / canvas.height;
         if (this.fittedAspect !== width / height) {
-          framePreview(this.camera, this.bounds, width / height);
+          if (this.category === "gloves") {
+            this.camera.aspect = width / height;
+            this.camera.updateProjectionMatrix();
+            this.camera.updateMatrixWorld(true);
+          } else framePreview(this.camera, this.bounds, width / height);
           this.fittedAspect = width / height;
         }
         this.lighting.update(this.model, environment, renderer);

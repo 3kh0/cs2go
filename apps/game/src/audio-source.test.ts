@@ -125,7 +125,7 @@ it("every packed effect has verified native CS2 or pinned supplemental C4 proven
       manifest: effects.manifest,
     });
   }
-  const c4Names = ["bomb-draw", ...Array.from({ length: 7 }, (_, i) => `bomb-key-${i + 1}`)];
+  const c4Names = ["bomb-draw"];
   for (const name of c4Names) {
     const clip = manifest.clips.find((entry: { name: string }) => entry.name === name);
     const file = name === "bomb-draw" ? "c4_draw" : `key_press${name.at(-1)}`;
@@ -138,6 +138,21 @@ it("every packed effect has verified native CS2 or pinned supplemental C4 proven
     });
     expect(clip.resourceSha256).toMatch(/^[a-f0-9]{64}$/);
     sources.set(`/audio/source/${name}.ogg`, clip.outputSha256);
+  }
+  const c4 = JSON.parse(
+    readFileSync("../../packages/assets/public/audio/source/c4-native.json", "utf8"),
+  );
+  expect(c4.source).toBe("Read-only installed CS2 via Windows Amp runner");
+  expect(c4.soundEventSha256).toBe(
+    "43783bf047a6ad803a4bffd6980fc53ec7f4dcefd3a00d674e4c3ba260ff49a1",
+  );
+  for (const clip of c4.clips) {
+    const bytes = readFileSync(`../../packages/assets/public/audio/source/${clip.name}.ogg`);
+    expect(createHash("sha256").update(bytes).digest("hex")).toBe(clip.outputSha256);
+    expect(
+      manifest.clips.find((entry: { name: string }) => entry.name === clip.name),
+    ).toMatchObject(clip);
+    sources.set(`/audio/source/${clip.name}.ogg`, clip.outputSha256);
   }
   const breaks = JSON.parse(
     readFileSync("../../packages/assets/public/audio/source/mirage-break-sounds.json", "utf8"),

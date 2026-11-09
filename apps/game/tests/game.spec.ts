@@ -2818,6 +2818,10 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
   await page.evaluate(async () => {
     const path = "/src/soldier.ts";
     const { resetSoldier } = (await import(path)) as typeof import("../src/soldier");
+    const spawnModule = "/src/deathmatch-spawns.ts";
+    const { deathmatchSpawnPool } = (await import(
+      spawnModule
+    )) as typeof import("../src/deathmatch-spawns");
     const g = window.__game;
     // This fixture advances ragdoll physics directly between screenshots.
     g.simulate = () => {};
@@ -2826,8 +2830,32 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
     g.scopeLevel = 1;
     g.camera.fov = 48;
     g.camera.updateProjectionMatrix();
-    g.camera.position.set(0, 3.5, 14);
-    g.camera.lookAt(0, 0.7, 11);
+    const collision = g.world.collision!;
+    const point = deathmatchSpawnPool(g.world.navigation, collision).find((candidate) =>
+      [-2, 0, 2].every((dx) =>
+        [-2, 0, 2].every((dz) => {
+          const floor = collision.floor(
+            candidate.x + dx,
+            candidate.z + dz,
+            candidate.y + 0.3,
+            candidate.y - 0.3,
+          );
+          return (
+            Number.isFinite(floor) &&
+            Math.abs(floor - candidate.y) < 0.08 &&
+            !collision.blocked(candidate.x + dx, candidate.z + dz, floor + 0.025, 16 * 0.0254, 4)
+          );
+        }),
+      ),
+    );
+    if (!point) throw new Error("Native corpse showcase requires an open floor");
+    g.scene.userData.ragdollFloor = point.y;
+    g.dead = Infinity;
+    g.spectatorMode = "free";
+    g.camera.position.set(point.x, point.y + 3.5, point.z + 4);
+    g.camera.lookAt(point.x, point.y + 0.7, point.z);
+    g.spectatorPitch = g.camera.rotation.x;
+    g.spectatorYaw = g.camera.rotation.y;
     for (const b of g.bots) {
       b.group.visible = false;
       b.anim = 0;
@@ -2836,7 +2864,7 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
       const b = g.bots.find((b) => b.team === team)!;
       resetSoldier(b.rig);
       b.group.visible = b.rig.model.visible = true;
-      b.group.position.set(i * 2.5 - 1.25, 1.5, 10);
+      b.group.position.set(point.x + i * 2.5 - 1.25, point.y + 1.5, point.z);
       b.group.rotation.set(0, i ? -0.5 : 0.5, 0);
       b.rig.moveX = i ? 0.7 : -0.7;
     }
@@ -2856,7 +2884,10 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
         const b = g.bots.find((b) => b.team === team)!;
         for (let i = 0; i < steps; i++) stepSoldierRagdoll(b.rig, -1, 1 / 128, g.world);
         animateSoldier(b.rig, 0, 0, false);
-        return Math.max(...b.rig.ragdoll!.points.map((p) => p.position.y));
+        return (
+          Math.max(...b.rig.ragdoll!.points.map((p) => p.position.y)) -
+          g.scene.userData.ragdollFloor
+        );
       });
     }, steps);
     await page.screenshot({ path: `artifacts/ragdoll-${label}.png` });

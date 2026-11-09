@@ -4433,7 +4433,12 @@ export class Game {
     bomb.beepRemaining -= dt;
     bomb.beepPulse = Math.max(0, bomb.beepPulse - dt);
     if (bomb.beepRemaining <= 0 && bomb.timer > 0) {
-      this.soundscape.play("bomb-beep", false, "concrete", bomb.position);
+      this.soundscape.play(
+        bomb.timer <= 10 ? "bomb-beep-fast" : "bomb-beep",
+        false,
+        "concrete",
+        bomb.position,
+      );
       // Tighten the pulse interval continuously from one second to 150 ms.
       bomb.beepRemaining = 0.15 + 0.85 * Math.max(0, bomb.timer / 40);
       bomb.beepPulse = 0.08;
@@ -4464,6 +4469,8 @@ export class Game {
       if (index >= 0) defuser = index;
     }
     if (bomb.defuser !== defuser) {
+      if (defuser !== null)
+        this.soundscape.play("bomb-defuse-start", false, "concrete", bomb.position);
       bomb.progress = 0;
       if (defuser === "player") {
         this.revolverCharge = this.reload = this.inspectTime = this.knifeTime = this.shotTime = 0;

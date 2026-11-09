@@ -241,7 +241,7 @@ export function createSoldier(
     dying: false,
     ragdollBones: [
       bone("pelvis"),
-      spine,
+      bone("spine_2"),
       head,
       bone("arm_upper_L"),
       bone("arm_lower_L"),
@@ -629,7 +629,7 @@ export function stepSoldierRagdoll(
       vertical,
       -soldier.moveX * Math.sin(yaw) + soldier.moveZ * Math.cos(yaw),
     );
-    soldier.ragdoll = new Ragdoll(soldier.ragdollBones, motion, yaw);
+    soldier.ragdoll = new Ragdoll(soldier.ragdollBones, motion, yaw, soldier.team);
   }
   soldier.ragdoll.step(dt, world);
 }

@@ -33,7 +33,7 @@ test("bomb pulses accelerate and stop on round completion", async ({ page }) => 
     const calls: number[] = [];
     const play = g.soundscape.play.bind(g.soundscape);
     g.soundscape.play = (...args) => {
-      if (args[0] === "bomb-beep") calls.push(g.bomb!.timer);
+      if (args[0] === "bomb-beep" || args[0] === "bomb-beep-fast") calls.push(g.bomb!.timer);
     };
     for (let i = 0; i < 39 * 128; i++) g.updateRound(1 / 128);
     const early = calls.filter((t) => t > 30);

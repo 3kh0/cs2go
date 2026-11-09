@@ -8,12 +8,14 @@ export function plantClipTime(elapsed: number) {
   return Math.max(0, Math.min(1, elapsed / PLANT_DURATION)) * PLANT_ANIMATION_END;
 }
 
-export type BombPlantCue = "bomb-draw" | `bomb-key-${1 | 2 | 3 | 4 | 5 | 6 | 7}`;
-// Reconstructed contact frames in the supplied plant clip; these are not
-// extracted native sound events. Use the same time mapping as the hands.
+export type BombPlantCue = "bomb-draw" | "bomb-initiate" | `bomb-key-${1 | 2 | 3 | 4 | 5 | 6 | 7}`;
+// Current plant_c4 CNmSoundEvent normalized phases. The native clip lasts4s;
+// mapping phases onto our3.2s interaction preserves the existing hand clock.
+// This does not establish the native animation graph's playback timewarp.
 export const bombPlantCues: { time: number; cue: BombPlantCue }[] = [
-  17, 22, 26, 36, 42, 48, 56,
-].map((frame, i) => ({
-  time: (frame / 30 / PLANT_ANIMATION_END) * PLANT_DURATION,
-  cue: `bomb-key-${i + 1}` as BombPlantCue,
-}));
+  { time: 0.025 * PLANT_DURATION, cue: "bomb-initiate" },
+  ...[0.166667, 0.241667, 0.308333, 0.366667, 0.416667, 0.491667, 0.541667].map((phase, i) => ({
+    time: phase * PLANT_DURATION,
+    cue: `bomb-key-${i + 1}` as BombPlantCue,
+  })),
+];
