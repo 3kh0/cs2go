@@ -22,12 +22,17 @@ function projectedWeaponExtent() {
   const savedZoom = preview.requestedZoom;
   const point = preview.camera.position.clone();
   let maximum = 0;
-  for (const zoom of [1, 1.8])
+  let depthExtent = 0;
+  let zoomVariation = 0;
+  for (const zoom of [1, 4])
     for (const pitch of [-Math.PI / 2, 0, Math.PI / 2])
       for (const yaw of [0, Math.PI / 4, Math.PI / 2, Math.PI * 0.75]) {
         preview.requestedZoom = zoom;
         preview.pivot.rotation.set(pitch, yaw, 0);
         preview.render(game.renderer, undefined, game.homeScene.inspectionEnvironment);
+        const expectedZoom =
+          Number(document.getElementById("weapon-inspect-stage")!.dataset.baseZoom) * zoom;
+        zoomVariation = Math.max(zoomVariation, Math.abs(preview.camera.zoom - expectedZoom));
         preview.model.traverseVisible((object) => {
           const mesh = object as import("three").Mesh;
           if (!mesh.isMesh) return;
@@ -43,16 +48,17 @@ function projectedWeaponExtent() {
             );
             point.applyMatrix4(mesh.matrixWorld).project(preview.camera);
             maximum = Math.max(maximum, Math.abs(point.x), Math.abs(point.y));
+            depthExtent = Math.max(depthExtent, Math.abs(point.z));
           }
         });
       }
   preview.pivot.rotation.copy(saved);
   preview.requestedZoom = savedZoom;
   preview.render(game.renderer, undefined, game.homeScene.inspectionEnvironment);
-  return maximum;
+  return { maximum, depthExtent, zoomVariation };
 }
 
-test("all 56 inventory weapons inspect in 3D, rotate without equipping, and close without leaking geometry", async ({
+test("all 56 inventory weapons zoom past screen edges without internal clipping or leaking geometry", async ({
   page,
 }) => {
   test.setTimeout(240_000);
@@ -192,11 +198,18 @@ test("all 56 inventory weapons inspect in 3D, rotate without equipping, and clos
     }
     // Real pointer input freezes native idle before testing explicit rotations.
     await stage.click();
-    const projectedExtent = await page.evaluate(projectedWeaponExtent);
+    const projected = await page.evaluate(projectedWeaponExtent);
     expect(
-      projectedExtent,
-      `weapon ${weapon} must stay inside the inspection stage at every angle`,
+      projected.depthExtent,
+      `weapon ${weapon} must not cross near/far clip planes`,
     ).toBeLessThan(1);
+    expect(
+      projected.zoomVariation,
+      `weapon ${weapon} zoom must stay fixed while rotating`,
+    ).toBeLessThan(0.000001);
+    if ([0, 3, 25].includes(weapon)) expect(projected.maximum).toBeGreaterThan(1);
+    const viewport = await stage.boundingBox();
+    expect(viewport).toEqual({ x: 0, y: 0, ...page.viewportSize()! });
 
     if ([0, 3, 4, 42, 55].includes(weapon)) {
       const yaw = await stage.getAttribute("data-yaw");
@@ -342,8 +355,11 @@ test("G3SG1 High Seas reframes the arriving legacy body and reveals its native c
   );
   await page.locator("#weapon-inspect-stage").hover();
   await page.mouse.wheel(0, -10000);
-  await expect(page.locator("#weapon-inspect-stage")).toHaveAttribute("data-requested-zoom", "1.8");
-  expect(await page.evaluate(projectedWeaponExtent)).toBeLessThan(1);
+  await expect(page.locator("#weapon-inspect-stage")).toHaveAttribute("data-requested-zoom", "4");
+  const projected = await page.evaluate(projectedWeaponExtent);
+  expect(projected.maximum).toBeGreaterThan(1);
+  expect(projected.depthExtent).toBeLessThan(1);
+  expect(projected.zoomVariation).toBeLessThan(0.000001);
   await expect(page.locator("#weapon-inspect-certificate")).toBeHidden();
   const stage = page.locator("#weapon-inspect-stage");
   for (let i = 0; i < 8; i++) await stage.press("ArrowRight");

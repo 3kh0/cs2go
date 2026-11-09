@@ -29,7 +29,6 @@ export class WeaponInspectPreview {
   private weapon = -1;
   private radius = 0;
   private framingBounds = new T.Box3();
-  private projectedCorner = new T.Vector3();
   private requestedZoom = 1;
   private nativeDistance = 0;
   private restCameraDistance = 0;
@@ -123,7 +122,7 @@ export class WeaponInspectPreview {
     this.requestedZoom = T.MathUtils.clamp(
       this.requestedZoom * Math.exp(-event.deltaY * 0.001),
       0.75,
-      1.8,
+      4,
     );
     this.stage.dataset.requestedZoom = String(this.requestedZoom);
     this.fitZoom();
@@ -334,29 +333,10 @@ export class WeaponInspectPreview {
   }
   private fitZoom() {
     if (this.framingBounds.isEmpty()) return;
-    this.pivot.updateWorldMatrix(true, false);
-    const bounds = this.framingBounds;
-    const tangent = Math.tan(T.MathUtils.degToRad(this.camera.fov / 2));
-    let extent = 0;
-    for (let corner = 0; corner < 8; corner++) {
-      const point = this.projectedCorner
-        .set(
-          corner & 1 ? bounds.max.x : bounds.min.x,
-          corner & 2 ? bounds.max.y : bounds.min.y,
-          corner & 4 ? bounds.max.z : bounds.min.z,
-        )
-        .applyMatrix4(this.pivot.matrixWorld)
-        .applyMatrix4(this.camera.matrixWorldInverse);
-      const depth = Math.max(this.camera.near, -point.z);
-      extent = Math.max(
-        extent,
-        Math.abs(point.x) / (depth * tangent * this.camera.aspect),
-        Math.abs(point.y) / (depth * tangent),
-      );
-    }
-    // Preserve the requested close-up on broadside views, but constrain the
-    // effective lens when tilting a long barrel would otherwise cut it off.
-    const zoom = Math.min(this.baseZoom * this.requestedZoom, 0.96 / Math.max(extent, 0.0001));
+    // Magnify the lens rather than moving the camera into the mesh. Manual
+    // close-ups may extend past the full-screen viewport at any rotation;
+    // their near/far planes still enclose the complete model.
+    const zoom = this.baseZoom * this.requestedZoom;
     if (Math.abs(this.camera.zoom - zoom) > 0.000001) {
       this.camera.zoom = zoom;
       this.camera.updateProjectionMatrix();
