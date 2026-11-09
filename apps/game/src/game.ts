@@ -2414,7 +2414,15 @@ export class Game {
   ): Bot {
     const team =
       override ??
-      (this.teamMode && index >= this.teamSize ? this.team : this.team === "ct" ? "t" : "ct");
+      (this.mode === "deathmatch"
+        ? index % 2 === 0
+          ? "ct"
+          : "t"
+        : this.teamMode && index >= this.teamSize
+          ? this.team
+          : this.team === "ct"
+            ? "t"
+            : "ct");
     const rig = createSoldier(index, team, appearance, !this.network, defaultGloveChoice());
     this.scene.add(rig.group);
     return {
@@ -3846,7 +3854,10 @@ export class Game {
     this.camera.far = this.world.collision ? 250 : 110;
     this.camera.updateProjectionMatrix();
   }
-  configureBots(casual: boolean, count = casual ? this.teamSize * 2 - 1 : 5) {
+  configureBots(
+    casual: boolean,
+    count = casual ? this.teamSize * 2 - 1 : this.mode === "deathmatch" ? 10 : 5,
+  ) {
     this.botStrategies = null;
     for (const bot of this.bots) {
       this.scene.remove(bot.group);

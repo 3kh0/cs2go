@@ -13,6 +13,11 @@ for (const map of ["dust2", "mirage"] as const)
     test.setTimeout(180_000);
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
+    const missingIcons: string[] = [];
+    page.on("response", (response) => {
+      if (response.status() === 404 && response.url().includes("/icons/buy/"))
+        missingIcons.push(response.url());
+    });
     await page.goto("/");
     await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
     await expect(page.locator("#startup")).toHaveCount(0);
@@ -20,16 +25,24 @@ for (const map of ["dust2", "mirage"] as const)
     await page.locator('[data-mode="deathmatch"]').click();
     await page.locator(`[data-map="${map}"]`).click();
     await page.locator("#play").click();
-    await page.locator('#team-select [data-team="ct"]').click();
+    await page.locator(`#team-select [data-team="${map === "mirage" ? "t" : "ct"}"]`).click();
     await page.waitForFunction((id) => window.__game.locked && window.__game.mapId === id, map);
     const initial = await page.evaluate(() => {
       const game = window.__game;
       return {
+        teams: game.bots.map((bot) => bot.team),
         time: game.time,
         primary: game.primary,
         positions: [game.position.toArray(), ...game.bots.map((b) => b.group.position.toArray())],
       };
     });
+    expect(initial.teams.filter((team) => team === "ct")).toHaveLength(5);
+    expect(initial.teams.filter((team) => team === "t")).toHaveLength(5);
+    await expect(page.locator("#deathmatch-leaders .dm-player")).toHaveCount(11);
+    await expect(page.locator("#deathmatch-leaders .you .dm-weapon")).toHaveCount(1);
+    await page.evaluate(() => window.__game.equip(window.__game.knife));
+    await expect(page.locator("#deathmatch-leaders .you .dm-weapon")).toHaveCount(0);
+    await page.screenshot({ path: `artifacts/deathmatch-${map}-ten-bots-knife.png` });
     expect(initial.time).toBeGreaterThan(580);
     expect(initial.primary).not.toBeNull();
     expect(
@@ -216,4 +229,5 @@ for (const map of ["dust2", "mirage"] as const)
     expect(result.finished).toBe(true);
     await expect(page.locator("#result-title")).toHaveText("VICTORY.");
     expect(errors).toEqual([]);
+    expect(missingIcons).toEqual([]);
   });
