@@ -371,3 +371,281 @@ body:has(#skin-menu:not(.hidden)) #skins-button {
   width: calc(32 * var(--menu-unit));
   height: calc(32 * var(--menu-unit));
 }
+
+/* Native item inspection: one shared scene, title, model and action bar. */
+#skin-menu[data-inspect="true"] {
+  z-index: 52;
+  background: transparent;
+  backdrop-filter: none;
+}
+#skin-menu[data-inspect="true"]::before {
+  display: none;
+}
+#skin-menu[data-inspect="true"]
+  .skin-dialog
+  > :is(.dialog-heading, .inventory-sections, .inventory-toolbar),
+#skin-menu[data-inspect="true"] .skin-browser {
+  visibility: hidden;
+}
+#skin-menu[data-inspect="true"] .skin-details {
+  position: absolute;
+  inset: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  padding: calc(48 * var(--menu-unit)) calc(48 * var(--menu-unit)) 0;
+  overflow: visible;
+  box-shadow: none;
+  /* Native mainmenu.css .popup-inspect-border, layered above the 3D scene. */
+  background: linear-gradient(to top, #000000ed, #0000 40%, #0000 60%, #000000f2);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: #eee;
+}
+
+/* Native inspection replaces the entire menu, including header/social chrome. */
+#skin-menu.inventory-page:is([data-inspect="true"], [data-music-inspect="true"]) {
+  inset: 0;
+  z-index: 60;
+}
+body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="true"]))
+  #menu
+  > :is(.home-header, .home-content) {
+  visibility: hidden;
+}
+#skin-menu #skin-title {
+  flex: 0 0 auto;
+  width: min(80%, calc(720 * var(--menu-unit)));
+  margin: 0 auto;
+  padding: 0 0 calc(14 * var(--menu-unit));
+  border-bottom: 0;
+  white-space: nowrap;
+  text-align: center;
+  font:
+    500 calc(50 * var(--menu-unit)) Stratum2,
+    sans-serif;
+  text-shadow: 0 1px 4px #0005;
+}
+#weapon-inspect-stage {
+  flex: 1;
+  min-height: 0;
+  touch-action: none;
+  cursor: grab;
+  outline-offset: -4px;
+}
+#weapon-inspect-stage:active {
+  cursor: grabbing;
+}
+#weapon-inspect-stage:focus-visible {
+  outline: 1px solid #ffffff80;
+  outline-offset: -1px;
+}
+#weapon-inspect-loading {
+  display: block;
+  text-align: center;
+  margin-top: calc(24 * var(--menu-unit));
+  font-size: calc(15 * var(--menu-unit));
+}
+.weapon-inspect-caption {
+  flex: 0 0 auto;
+  min-height: calc(72 * var(--menu-unit));
+  color: #ddd;
+  font-size: calc(15 * var(--menu-unit));
+  text-shadow: 0 1px 3px #0008;
+}
+.weapon-inspect-caption p {
+  margin: calc(6 * var(--menu-unit)) 0;
+}
+#skin-menu .weapon-inspect-caption .eyebrow {
+  display: none;
+}
+.weapon-inspect-footer {
+  flex: 0 0 calc(58 * var(--menu-unit));
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ffffff30;
+  position: relative;
+  width: min(100%, calc(968 * var(--menu-unit)));
+  margin-inline: auto;
+}
+#skin-menu .weapon-inspect-footer > button,
+#weapon-inspect-customize {
+  background: transparent;
+  color: #eee;
+  padding: calc(8 * var(--menu-unit));
+  font:
+    600 calc(20 * var(--menu-unit)) "Stratum2 Condensed",
+    sans-serif;
+}
+#skin-menu .weapon-inspect-footer button:hover {
+  background: #ffffff15;
+}
+#skin-menu .skin-details #close-item-details {
+  align-self: auto;
+  margin-left: auto;
+  font:
+    600 calc(20 * var(--menu-unit)) "Stratum2 Condensed",
+    sans-serif;
+}
+.weapon-inspect-customizer {
+  position: relative;
+}
+#weapon-inspect-options {
+  position: absolute;
+  bottom: calc(46 * var(--menu-unit));
+  left: 0;
+  width: calc(320 * var(--menu-unit));
+  max-height: calc(600 * var(--menu-unit));
+  padding: calc(20 * var(--menu-unit));
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: calc(12 * var(--menu-unit));
+  background: #202020;
+  box-shadow: 0 2px 5px #0004;
+  font-size: calc(15 * var(--menu-unit));
+}
+#weapon-inspect-options[hidden],
+#weapon-inspect-context[hidden] {
+  display: none;
+}
+#weapon-inspect-context {
+  position: absolute;
+  z-index: 6;
+  width: calc(230 * var(--menu-unit));
+  padding: calc(8 * var(--menu-unit)) 0;
+  border-radius: 3px;
+  background: #202020;
+  box-shadow: 0 2px 5px #0004;
+  color: #c8c8c8;
+}
+#weapon-inspect-context button {
+  display: block;
+  width: 100%;
+  min-height: calc(38 * var(--menu-unit));
+  padding: calc(8 * var(--menu-unit)) calc(18 * var(--menu-unit));
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font:
+    400 calc(14 * var(--menu-unit)) Stratum2,
+    sans-serif;
+}
+#weapon-inspect-context button:is(:hover, :focus-visible) {
+  background: #101010;
+  color: #fff;
+}
+
+#skin-menu #skin-search {
+  background: #0006;
+  color: #fff;
+  padding-inline: calc(8 * var(--menu-unit));
+}
+#skin-menu #skin-search::placeholder {
+  color: #eee;
+  opacity: 1;
+}
+#skin-menu[data-inspect="true"] #steam-account {
+  display: none;
+}
+
+/* InspectItemCert: native item certificate is revealed by the action-bar info icon. */
+#skin-menu .weapon-inspect-caption {
+  min-height: 0;
+}
+#skin-menu .weapon-inspect-caption .eyebrow {
+  display: none;
+}
+#skin-menu .weapon-inspect-caption p:empty {
+  display: none;
+}
+.weapon-inspect-info {
+  position: relative;
+}
+#weapon-inspect-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(8 * var(--menu-unit));
+  border: 0;
+  background: transparent;
+}
+#weapon-inspect-info[hidden],
+#weapon-inspect-certificate[hidden] {
+  display: none;
+}
+#weapon-inspect-info img {
+  width: calc(24 * var(--menu-unit));
+  height: calc(24 * var(--menu-unit));
+}
+#weapon-inspect-certificate {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(46 * var(--menu-unit));
+  z-index: 8;
+  width: max-content;
+  min-width: calc(250 * var(--menu-unit));
+  max-width: min(80vw, calc(420 * var(--menu-unit)));
+  padding: calc(16 * var(--menu-unit)) calc(20 * var(--menu-unit));
+  background: #080808ed;
+  border-radius: calc(3 * var(--menu-unit));
+  box-shadow: 0 2px 5px #0008;
+  color: #ddd;
+  font:
+    400 calc(16 * var(--menu-unit)) Stratum2,
+    sans-serif;
+  pointer-events: none;
+}
+#weapon-inspect-certificate p {
+  margin: 0 0 calc(14 * var(--menu-unit));
+}
+#weapon-inspect-certificate p:last-child {
+  margin-bottom: 0;
+}
+#weapon-inspect-certificate b {
+  font-weight: 600;
+  color: #eee;
+}
+
+#weapon-inspect-collection {
+  flex: 0 0 auto;
+  width: min(80%, calc(720 * var(--menu-unit)));
+  margin: 0 auto;
+  padding-bottom: calc(14 * var(--menu-unit));
+  border-bottom: calc(6 * var(--menu-unit)) solid var(--item-rarity, #b9bdc0);
+  text-align: center;
+  color: #ccc;
+  font-size: calc(20 * var(--menu-unit));
+}
+.weapon-inspect-description {
+  width: min(100%, calc(900 * var(--menu-unit)));
+  max-height: calc(205 * var(--menu-unit));
+  margin: 0 auto;
+  overflow: auto;
+  padding: calc(16 * var(--menu-unit)) calc(28 * var(--menu-unit)) 0;
+  font-size: calc(18 * var(--menu-unit));
+  line-height: 1.35;
+}
+.weapon-inspect-description p {
+  margin: 0 0 calc(20 * var(--menu-unit));
+}
+
+/* Native popup_inventory_inspect uses a full-height model behind its overlay UI. */
+#skin-menu #weapon-inspect-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+#skin-menu #skin-title,
+#skin-menu .weapon-inspect-caption,
+#skin-menu .weapon-inspect-footer {
+  position: relative;
+  z-index: 1;
+}
+#skin-menu .weapon-inspect-caption {
+  margin-top: auto;
+}

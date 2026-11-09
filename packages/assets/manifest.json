@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "aab783ed02bb3fb5a1cc1afc22d08ba02f2c014d72e59f4927fdcf19265d88a9",
+  "release": "8e7bfac6b397ef3fdcaec20b5d4a4a9f19e13ec0284ba975ca8f8b7cacc408bb",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -19364,31 +19364,31 @@
       "object": "objects/f246e816f0f21aece432e1bcf22385e70470be822cf0448a6fdc27dc9e27c52a.json.br"
     },
     "models/inspection-lighting/dust2-reflection.exr": {
-      "sha256": "732dda28a4d42a4a7538c806fab5c4b368e31a42920816f5952e30314f90770d",
-      "bytes": 5968436,
-      "object": "objects/732dda28a4d42a4a7538c806fab5c4b368e31a42920816f5952e30314f90770d.exr"
+      "sha256": "1915425933a3862d198c51d7eef6cd966bb62ccc9307a22430525404207010b8",
+      "bytes": 1386787,
+      "object": "objects/1915425933a3862d198c51d7eef6cd966bb62ccc9307a22430525404207010b8.exr"
     },
     "models/inspection-lighting/README.md": {
-      "sha256": "2345e65df0e8d42c51ba8e3654ef8ad860d322400e8492e426f6bac587e0669f",
-      "bytes": 3081,
+      "sha256": "a3043a3da690d4b31b4189120a3ddd7e99068b9ceb282782d51ef0334134c6a1",
+      "bytes": 4316,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "f4599fae1b2c4834e7c651a5819c109bc533312cf2bcd79763238d392a19635e",
-        "bytes": 1274
+        "sha256": "0beba117510ae464650da2121b68552dd40e3894a5ed6f632882493d44430c00",
+        "bytes": 1728
       },
-      "object": "objects/f4599fae1b2c4834e7c651a5819c109bc533312cf2bcd79763238d392a19635e.md.br"
+      "object": "objects/0beba117510ae464650da2121b68552dd40e3894a5ed6f632882493d44430c00.md.br"
     },
     "models/inspection-lighting/source.json": {
-      "sha256": "26f2d8c0ada2390094deecbfdc803ec2a0a60223d536c06598d732ab8a0ec75a",
-      "bytes": 9176,
+      "sha256": "422b60a12fea38bca90f2f3f1cf408afc1093455c51c1cd509d8a6c78b9b3d86",
+      "bytes": 10632,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "7789bf915d14dfc9f6d5e0361bba5dbd0dc1ab1c53e053147399af0779564104",
-        "bytes": 2279
+        "sha256": "f5e8e8728118b826b254ef5dd4661e87093476028f356d34451e95869479cf30",
+        "bytes": 2711
       },
-      "object": "objects/7789bf915d14dfc9f6d5e0361bba5dbd0dc1ab1c53e053147399af0779564104.json.br"
+      "object": "objects/f5e8e8728118b826b254ef5dd4661e87093476028f356d34451e95869479cf30.json.br"
     },
     "models/m4a1_s.glb.gz": {
       "sha256": "1e0f8bbdce4d03bf409ad397f2b7493922cada0ddca305b6b06daf6383876041",

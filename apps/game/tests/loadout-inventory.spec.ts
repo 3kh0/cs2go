@@ -175,6 +175,7 @@ test("separate team loadouts filter, accept drops and persist spawned skins", as
   await expect(skin).toBeVisible();
   const id = await skin.getAttribute("data-skin");
   await skin.click();
+  await page.locator("#weapon-action-customize").click();
   await page.locator("#apply-skin").click();
   await expect(page.locator("#skin-status")).toContainText("Added to your inventory");
   await expect(page.locator("#skin-grid [data-skin]")).toHaveCount(2);

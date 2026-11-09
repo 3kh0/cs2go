@@ -15,13 +15,8 @@
 #skin-menu .music-kit-dialog .inventory-sections {
   flex-shrink: 0;
 }
-.music-kit-content {
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 29%);
-}
 .music-kit-browser {
+  flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -47,6 +42,10 @@
 #music-kit-search::placeholder {
   color: #eee;
   opacity: 1;
+}
+#music-kit-search:focus {
+  border-bottom-color: #a9e6ff;
+  outline: none;
 }
 #music-kit-items {
   min-height: 0;
@@ -108,97 +107,170 @@
   color: #ccc;
   font-size: calc(12 * var(--menu-unit));
 }
-.music-kit-detail {
-  min-height: 0;
-  overflow-y: auto;
-  padding: calc(24 * var(--menu-unit));
-  border-left: 1px solid #ffffff20;
-  background: #0005;
-}
-#music-kit-art {
-  display: block;
-  width: min(100%, calc(240 * var(--menu-unit)));
-  aspect-ratio: 1;
-  object-fit: contain;
-  margin-inline: auto;
-}
-#music-kit-name {
-  margin: calc(16 * var(--menu-unit)) 0 calc(6 * var(--menu-unit));
-  font:
-    500 calc(26 * var(--menu-unit)) "Stratum2",
-    sans-serif;
-}
-#music-kit-description {
-  white-space: pre-line;
-}
-#music-kit-artist,
-#music-kit-description {
-  margin: 0 0 calc(16 * var(--menu-unit));
-  font-size: calc(15 * var(--menu-unit));
-  line-height: 1.4;
-}
-.music-kit-actions {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  padding-block: calc(8 * var(--menu-unit));
-  background: #303434f2;
-  display: flex;
-  flex-wrap: wrap;
-  gap: calc(8 * var(--menu-unit));
-  margin-bottom: calc(24 * var(--menu-unit));
-}
-.music-kit-actions button,
-#music-kit-tracks button {
-  padding: calc(8 * var(--menu-unit)) calc(12 * var(--menu-unit));
-  border: 1px solid #ffffff25;
-  background: #ffffff08;
-  color: #ddd;
-  font:
-    500 calc(14 * var(--menu-unit)) "Stratum2",
-    sans-serif;
-}
-.music-kit-actions button:is(:hover, :focus-visible),
-#music-kit-tracks button:is(:hover, :focus-visible),
-#music-kit-tracks button[aria-pressed="true"] {
-  background: #82d7ff1a;
-  color: #82d8ff;
-}
-#music-kit-tracks h3 {
-  margin: calc(16 * var(--menu-unit)) 0 calc(6 * var(--menu-unit));
-  font:
-    500 calc(16 * var(--menu-unit)) "Stratum2",
-    sans-serif;
-}
-#music-kit-tracks button {
-  display: block;
-  width: 100%;
-  margin-bottom: calc(4 * var(--menu-unit));
-  text-align: left;
+
+#music-kit-items {
+  flex: 1;
+  align-content: start;
 }
 #music-kit-status {
-  min-height: 2.8em;
-  margin: calc(-12 * var(--menu-unit)) 0 calc(12 * var(--menu-unit));
-  color: #c2dce7;
-  font-size: calc(13 * var(--menu-unit));
+  margin: 0;
+  padding-inline: calc(48 * var(--menu-unit));
+  font-size: calc(14 * var(--menu-unit));
+}
+#music-kit-status:empty {
+  display: none;
+}
+#skin-menu .music-kit-popup {
+  position: absolute;
+  z-index: 5;
+  width: calc(250 * var(--menu-unit));
+  padding: calc(8 * var(--menu-unit)) 0;
+  border-radius: 3px;
+  background: #202020;
+  box-shadow: 0 2px 5px #0004;
+  color: #c8c8c8;
+}
+#skin-menu .music-kit-popup button {
+  display: block;
+  width: 100%;
+  min-height: calc(38 * var(--menu-unit));
+  padding: calc(8 * var(--menu-unit)) calc(18 * var(--menu-unit));
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font:
+    400 calc(14 * var(--menu-unit)) Stratum2,
+    sans-serif;
+}
+#skin-menu .music-kit-popup button:is(:hover, :focus-visible, [aria-pressed="true"]) {
+  background: #101010;
+  color: #fff;
+  outline-offset: -2px;
+}
+#skin-menu .music-kit-popup button:disabled {
+  color: #777;
+  cursor: default;
+}
+#skin-menu .music-kit-popup[hidden],
+#music-kit-inspect[hidden] {
+  display: none;
+}
+#skin-menu[data-music-inspect="true"] {
+  background: transparent;
+  backdrop-filter: none;
+  z-index: 52;
+}
+#skin-menu[data-music-inspect="true"]
+  .music-kit-dialog
+  > :is(.inventory-sections, .music-kit-browser) {
+  visibility: hidden;
+}
+#music-kit-inspect {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: calc(48 * var(--menu-unit)) calc(48 * var(--menu-unit)) 0;
+  background: linear-gradient(to top, #000000ed, #0000 40%, #0000 60%, #000000f2);
+  color: #eee;
+}
+#music-kit-name {
+  flex: 0 0 auto;
+  width: min(80%, calc(720 * var(--menu-unit)));
+  margin: 0 auto;
+  padding: 0 0 calc(14 * var(--menu-unit));
+  border-bottom: calc(5 * var(--menu-unit)) solid #4b69ff;
+  text-align: center;
+  font:
+    500 calc(50 * var(--menu-unit)) Stratum2,
+    sans-serif;
+  text-shadow: 0 1px 4px #0005;
+  white-space: nowrap;
+}
+#music-kit-stage {
+  flex: 1;
+  min-height: 0;
+  cursor: grab;
+  touch-action: none;
+  outline-offset: -4px;
+}
+#music-kit-stage:active {
+  cursor: grabbing;
+}
+#music-kit-stage:focus-visible {
+  outline: 1px solid #ffffff80;
+  outline-offset: -1px;
+}
+#music-kit-model-status {
+  display: block;
+  text-align: center;
+  margin-top: calc(24 * var(--menu-unit));
+  font-size: calc(15 * var(--menu-unit));
+}
+.music-kit-inspect-description {
+  flex: 0 0 19%;
+  min-height: 0;
+  overflow: auto;
+  width: min(100%, calc(900 * var(--menu-unit)));
+  margin-inline: auto;
+  padding: calc(16 * var(--menu-unit)) calc(28 * var(--menu-unit)) 0;
+  color: #ddd;
+  font-size: calc(18 * var(--menu-unit));
   line-height: 1.4;
+  text-shadow: 0 1px 3px #0008;
 }
-@media (max-width: 1000px) {
-  .music-kit-content {
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 36%);
-  }
-  #music-kit-items {
-    padding-inline: calc(24 * var(--menu-unit));
-  }
+.music-kit-inspect-description p {
+  margin: 0 0 calc(20 * var(--menu-unit));
+  white-space: pre-line;
 }
-
-#music-kit-tracks .music-event-description {
-  margin: 0 0 calc(8 * var(--menu-unit));
-  font-size: calc(13 * var(--menu-unit));
-  line-height: 1.4;
-  color: #bbb;
+.music-kit-inspect-footer {
+  flex: 0 0 calc(58 * var(--menu-unit));
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--menu-unit));
+  border-top: 1px solid #ffffff30;
+  position: relative;
+  width: min(100%, calc(968 * var(--menu-unit)));
+  margin-inline: auto;
 }
-#music-kit-search:focus {
-  border-bottom-color: #a9e6ff;
-  outline: none;
+.music-kit-inspect-footer button {
+  background: transparent;
+  color: #eee;
+  padding: calc(8 * var(--menu-unit));
+}
+.music-kit-inspect-footer button:hover {
+  background: #ffffff15;
+}
+#close-music-kit-inspect {
+  margin-left: auto;
+  font:
+    600 calc(20 * var(--menu-unit)) "Stratum2 Condensed",
+    sans-serif;
+}
+#music-kit-audio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#music-kit-audio img {
+  width: calc(24 * var(--menu-unit));
+  height: calc(24 * var(--menu-unit));
+}
+#music-kit-playing {
+  font-size: calc(14 * var(--menu-unit));
+  color: #ddd;
+}
+.music-kit-audio-control {
+  position: relative;
+}
+#skin-menu #music-kit-tracks {
+  bottom: calc(46 * var(--menu-unit));
+  left: 0;
+  width: calc(290 * var(--menu-unit));
+  max-height: calc(500 * var(--menu-unit));
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }

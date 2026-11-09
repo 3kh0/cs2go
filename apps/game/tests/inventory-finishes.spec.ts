@@ -43,36 +43,45 @@ test("inventory shows full-color defaults and knife finishes paint held and prev
   for (let id = 0; id < 56; id++) {
     await page.locator("#inventory-weapon").selectOption(String(id));
     await page.locator(`[data-item-weapon="${id}"][data-skin=""]`).click();
-    await expect(page.locator("#skin-image")).toHaveAttribute("src", `/skins/defaults/${id}.webp`);
-    const image = await page.locator("#skin-image").evaluate(async (element) => {
-      const image = element as HTMLImageElement;
-      await image.decode();
-      const canvas = document.createElement("canvas");
-      canvas.width = image.naturalWidth;
-      canvas.height = image.naturalHeight;
-      const context = canvas.getContext("2d")!;
-      context.drawImage(image, 0, 0);
-      const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
-      const colors = new Set<number>();
-      let transparent = 0;
-      for (let i = 0; i < pixels.length; i += 4) {
-        if (!pixels[i + 3]) transparent++;
-        else colors.add((pixels[i] << 16) | (pixels[i + 1] << 8) | pixels[i + 2]);
-      }
-      return { width: image.naturalWidth, colors: colors.size, transparent };
-    });
+    await expect(page.locator(`[data-item-weapon="${id}"][data-skin=""] img`)).toHaveAttribute(
+      "src",
+      `/skins/defaults/${id}.webp`,
+    );
+    const image = await page
+      .locator(`[data-item-weapon="${id}"][data-skin=""] img`)
+      .evaluate(async (element) => {
+        const image = element as HTMLImageElement;
+        await image.decode();
+        const canvas = document.createElement("canvas");
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        const context = canvas.getContext("2d")!;
+        context.drawImage(image, 0, 0);
+        const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+        const colors = new Set<number>();
+        let transparent = 0;
+        for (let i = 0; i < pixels.length; i += 4) {
+          if (!pixels[i + 3]) transparent++;
+          else colors.add((pixels[i] << 16) | (pixels[i + 1] << 8) | pixels[i + 2]);
+        }
+        return { width: image.naturalWidth, colors: colors.size, transparent };
+      });
     expect(image.width).toBeGreaterThanOrEqual(256);
     expect(image.colors).toBeGreaterThan(128);
     expect(image.transparent).toBeGreaterThan(0);
+    await page.locator("#weapon-action-inspect").click();
+    await expect(page.locator("#weapon-inspect-stage")).toHaveAttribute("data-weapon", String(id));
     await page.locator("#close-item-details").click();
   }
   await page.locator("#inventory-weapon").selectOption("23");
   await page.locator('[data-item-weapon="23"][data-skin=""]').click();
+  await page.locator("#weapon-action-inspect").click();
   await page.screenshot({ path: "artifacts/inventory-default-ssg08.png" });
   await page.locator("#close-item-details").click();
   await page.locator("#inventory-weapon").selectOption("42");
   await page.locator("#skin-search").fill("Case Hardened");
   await page.locator('[data-item-weapon="42"][data-skin="508_44"]').click();
+  await page.locator("#weapon-action-customize").click();
   await page.locator("#skin-float").fill("0.123456");
   await page.locator("#skin-seed").fill("661");
   await page.locator("#apply-skin").click();

@@ -60,6 +60,7 @@ test("full-page native settings and saved showcase weapons share equipped legacy
     await page.locator("#inventory-weapon").selectOption("0");
     await page.locator("#skin-search").fill("");
     await page.locator(`[data-skin="${id}"]`).click();
+    await page.locator("#weapon-action-customize").click();
     if (id) {
       await page.locator("#skin-float").fill("0.012345");
       await page.locator("#skin-seed").fill("661");

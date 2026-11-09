@@ -9,12 +9,18 @@ test("music kits load on demand, preview variants, equip and persist without dow
   const failed: string[] = [];
   const musicRequests: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
   page.on("request", (request) => {
     const path = new URL(request.url()).pathname;
     if (path.startsWith("/audio/music-kits/")) musicRequests.push(path);
   });
   page.on("response", (response) => {
-    if (response.status() >= 400 && response.url().includes("/audio/music-kits/"))
+    if (
+      response.status() >= 400 &&
+      /\/(?:audio\/music-kits|models\/music-kit)\//.test(response.url())
+    )
       failed.push(response.url());
   });
   await page.goto("/");
@@ -34,6 +40,26 @@ test("music kits load on demand, preview variants, equip and persist without dow
   );
   await page.locator("#music-kit-search").fill("ALRT");
   await page.locator('[data-music-kit="alrt_01"]').click();
+  await page.locator("#inspect-music-kit").click();
+  await expect(page.locator("#music-kit-stage")).toHaveAttribute("data-kit", "alrt_01", {
+    timeout: 30_000,
+  });
+  await expect
+    .poll(() => page.evaluate(() => window.__game.soundscape.musicKits.previewing?.event))
+    .toBe("menu");
+  const stage = page.locator("#music-kit-stage");
+  const initialYaw = await stage.getAttribute("data-yaw");
+  const bounds = (await stage.boundingBox())!;
+  await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(bounds.x + bounds.width / 2 + 120, bounds.y + bounds.height / 2 + 35, {
+    steps: 8,
+  });
+  await page.mouse.up();
+  expect(await stage.getAttribute("data-yaw")).not.toBe(initialYaw);
+  await stage.press("Home");
+  await page.screenshot({ path: "artifacts/music-kit-3d-inspect.png" });
+  await page.locator("#music-kit-audio").click();
   await page.locator('[data-music-event="mvp"][data-music-track="1"]').click();
   const rareTrack = catalog.kits.find((kit) => kit.id === "alrt_01")!.events.mvp.tracks[1];
   await expect
@@ -51,15 +77,19 @@ test("music kits load on demand, preview variants, equip and persist without dow
     "aria-pressed",
     "true",
   );
-  await page.locator("#stop-music-kit").click();
+  await page.locator("#close-music-kit-inspect").click();
+  await expect(page.locator("#music-kit-inspect")).toBeHidden();
   await expect
     .poll(() => page.evaluate(() => new URL(window.__game.soundscape.music.src).pathname))
     .toBe("/audio/music-kits/valve_cs2_01/mainmenu.mp3");
+  await page.locator('[data-music-kit="alrt_01"]').click();
   await page.locator("#equip-music-kit").click();
   await expect(page.locator('[data-music-kit="alrt_01"]')).toHaveAttribute("data-equipped", "true");
   expect(await page.evaluate(() => localStorage.getItem("cs2go-music-kit"))).toBe("alrt_01");
   await page.screenshot({ path: "artifacts/music-kits-equipped.png" });
   await page.reload();
+  await page.waitForFunction(() => window.__game?.assetsReady, null, { timeout: 120_000 });
+  await expect(page.locator("#startup")).toHaveCount(0);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
   await page.locator("#settings-button").click();
   await expect
@@ -91,12 +121,17 @@ test("Opus tracks decode and seek, native loop bounds remain intact, and alterna
   test.setTimeout(150_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
   await page.locator("#skins-button").click();
   await page.locator("#inventory-music-kits").click();
   await page.locator("#music-kit-search").fill("Noisia");
   await page.locator('[data-music-kit="noisia_01"]').click();
+  await page.locator("#inspect-music-kit").click();
+  await page.locator("#music-kit-audio").click();
   await page.locator('[data-music-event="match"][data-music-track="0"]').click();
   await expect
     .poll(() =>
@@ -156,13 +191,19 @@ test("Opus tracks decode and seek, native loop bounds remain intact, and alterna
       }, bounds),
     )
     .toBe(true);
+  await page.locator("#close-music-kit-inspect").click();
   await page.locator("#music-kit-search").fill("Hotline");
   await page.locator('[data-music-kit="hotlinemiami_01"]').click();
+  await page.locator("#inspect-music-kit").click();
+  await page.locator("#music-kit-audio").click();
   await expect(page.locator('[data-music-event="extra"]')).not.toHaveCount(0);
   await page.locator('[data-music-event="extra"]').first().click();
   await expect
     .poll(() => page.evaluate(() => window.__game.soundscape.musicKits.previewing?.event))
     .toBe("extra");
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#music-kit-inspect")).toBeHidden();
+  await expect(page.locator("#skin-menu")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.locator("#skin-menu")).toBeHidden();
   expect(await page.evaluate(() => window.__game.soundscape.musicKits.previewing)).toBeUndefined();
@@ -175,6 +216,9 @@ test("round phases select native start, action, warnings, MVP and match-end even
   test.setTimeout(150_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
   await page.locator("#settings-button").click();

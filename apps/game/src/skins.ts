@@ -184,6 +184,9 @@ function apply(model: Model, finish?: Finish) {
     Object.assign(material, maps, { normalMap: maps.normalMap ?? original.normalMap });
     material.needsUpdate = true;
   }
+  // Inspectors can reframe after an asynchronously loaded HD/legacy body becomes
+  // visible without scanning all mesh bounds on every rendered frame.
+  model.root.userData.skinVisualVersion = (model.root.userData.skinVisualVersion ?? 0) + 1;
 }
 function rememberMaterials(root: T.Group, original: Model["original"]) {
   root.traverse((o) => {

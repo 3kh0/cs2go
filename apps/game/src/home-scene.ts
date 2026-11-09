@@ -39,6 +39,7 @@ import { createWeaponInstance } from "./weapon-instance";
 import { isKnife, weaponSlot } from "./physics";
 import { createGrenadeModel } from "./grenade-models";
 import { HomeAtmosphere } from "./home-atmosphere";
+import { withoutSourceColorCorrection } from "./map-color";
 
 // uimodel_walkup.vnmgraph: linear, completion-driven transitions.
 const homeBlendSeconds = 0.2;
@@ -92,6 +93,10 @@ type Preview = {
 export class HomeScene {
   private scene = new T.Scene();
   private reflection?: T.WebGLRenderTarget;
+  /** Shared native stage probe; inspectors borrow it without owning/disposal. */
+  get inspectionEnvironment() {
+    return this.reflection?.texture;
+  }
   private reflectionLoad?: Promise<void>;
   private atmosphere?: HomeAtmosphere;
   private lightPosition = new T.Vector3();
@@ -795,6 +800,30 @@ export class HomeScene {
     }
     await programs;
   }
+  /** Capture the shared world from an authored inspection camera, without refitting it. */
+  renderInspectionBackdrop(renderer: T.WebGLRenderer, camera: T.PerspectiveCamera) {
+    const visible = Array.from(this.previews.values(), (preview) => ({
+      group: preview.soldier.group,
+      visible: preview.soldier.group.visible,
+    }));
+    const toneMapping = renderer.toneMapping;
+    for (const preview of visible) preview.group.visible = false;
+    this.atmosphere?.invalidateDepth();
+    try {
+      // Ordinary offscreen targets intentionally skip Three's tone mapping.
+      // Keep linear HDR here; the inspector applies its own native VPOST/LUT.
+      withoutSourceColorCorrection(() => {
+        this.atmosphere?.captureDepth(renderer, this.scene, camera, this.reduced.matches);
+        renderer.clear();
+        renderer.render(this.scene, camera);
+      });
+    } finally {
+      for (const preview of visible) preview.group.visible = preview.visible;
+      renderer.toneMapping = toneMapping;
+      this.atmosphere?.invalidateDepth();
+    }
+  }
+
   render(renderer: T.WebGLRenderer, team: AgentTeam, dt: number, showAgent = true) {
     const preview = this.preview(team);
     const loading = this.pendingAgents.has(team);

@@ -24,6 +24,8 @@ import {
 } from "./tracers";
 import { HomeScene } from "./home-scene";
 import { BuyPreview } from "./buy-preview";
+import type { MusicKitPreview } from "./music-kit-preview";
+import type { WeaponInspectPreview } from "./weapon-inspect-preview";
 import { loadBuyPoses } from "./buy-poses";
 import { loadoutCategory } from "./loadouts";
 import { soldierHit } from "./soldier-hitboxes";
@@ -303,6 +305,8 @@ export class Game {
   spectatorLastShot = false;
   takeoverUseHeld = false;
   buyPreview = new BuyPreview();
+  musicKitPreview?: MusicKitPreview;
+  weaponInspectPreview?: WeaponInspectPreview;
   homeScene = new HomeScene();
   canvas = el("game") as HTMLCanvasElement;
   renderer!: T.WebGLRenderer;
@@ -5841,7 +5845,29 @@ export class Game {
       this.renderer.toneMapping = T.ACESFilmicToneMapping;
       if (document.getElementById("loadout-editor"))
         this.groundInventory.renderPreviews(this.renderer);
-      else this.homeScene.render(this.renderer, this.team, renderDt, !this.previewingViewmodel);
+      else if (
+        !this.weaponInspectPreview?.render(
+          this.renderer,
+          () =>
+            this.homeScene.renderInspectionBackdrop(
+              this.renderer,
+              this.weaponInspectPreview!.inspectionCamera,
+            ),
+          this.homeScene.inspectionEnvironment,
+          renderDt,
+        ) &&
+        !this.musicKitPreview?.render(
+          this.renderer,
+          () =>
+            this.homeScene.renderInspectionBackdrop(
+              this.renderer,
+              this.musicKitPreview!.inspectionCamera,
+            ),
+          this.homeScene.inspectionEnvironment,
+          renderDt,
+        )
+      )
+        this.homeScene.render(this.renderer, this.team, renderDt, !this.previewingViewmodel);
       if (this.previewingViewmodel) this.renderViewmodelPreview(now / 1000);
       return;
     }
@@ -5949,5 +5975,27 @@ export class Game {
       this.renderer.render(this.view, this.viewCamera);
     } else if (firstPerson && !buying) this.renderSpectatorWeapon(firstPerson);
     if (this.assetsReady) this.buyPreview.render(this.renderer, this.team, this.selected);
+    if (
+      !this.weaponInspectPreview?.render(
+        this.renderer,
+        () =>
+          this.homeScene.renderInspectionBackdrop(
+            this.renderer,
+            this.weaponInspectPreview!.inspectionCamera,
+          ),
+        this.homeScene.inspectionEnvironment,
+        renderDt,
+      )
+    )
+      this.musicKitPreview?.render(
+        this.renderer,
+        () =>
+          this.homeScene.renderInspectionBackdrop(
+            this.renderer,
+            this.musicKitPreview!.inspectionCamera,
+          ),
+        this.homeScene.inspectionEnvironment,
+        renderDt,
+      );
   }
 }

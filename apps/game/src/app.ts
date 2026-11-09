@@ -56,11 +56,14 @@ ${buyMenuMarkup()}
 <div id="result" class="overlay hidden"><section class="dialog"><div class="eyebrow">MATCH COMPLETE</div><h2 id="result-title">WELL PLAYED.</h2><strong id="result-score"></strong><p id="result-stats"></p><button class="deploy" id="again">PLAY AGAIN <span>↗</span></button><button class="text-button" id="result-menu">RETURN TO MENU</button></section></div>
 <div id="unsupported" class="overlay hidden"><section class="dialog"><h2>DESKTOP REQUIRED</h2><p>Grab a mouse and keyboard, and open this page in a desktop browser with WebGL to play.</p></section></div>`;
 
-setupSkinMenu((index) => {
-  equipKnife(game.team, index, true);
-  if (game.active && !game.dead) game.buy(index);
-  game.updateUI();
-});
+setupSkinMenu(
+  (index) => {
+    equipKnife(game.team, index, true);
+    if (game.active && !game.dead) game.buy(index);
+    game.updateUI();
+  },
+  () => game,
+);
 const game = new Game(loadProgress);
 setupControlSettings(game);
 setupSettingsTabs(game);

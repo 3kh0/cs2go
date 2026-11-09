@@ -33,17 +33,17 @@
   "limitations": "Native data is exact. Three.js shader integration and displayed calibration are separate validation requirements. Not ACES Filmic.",
   "reflection": {
     "runtime": "dust2-reflection.exr",
-    "bytes": 5968436,
-    "sha256": "732dda28a4d42a4a7538c806fab5c4b368e31a42920816f5952e30314f90770d",
+    "bytes": 1386787,
+    "sha256": "1915425933a3862d198c51d7eef6cd966bb62ccc9307a22430525404207010b8",
     "nativeResource": "maps/de_dust2_vanity/cubemaps/env_cubemap_array.vtex_c",
     "nativeResourceSha256": "92baa528f4fca2737ed5bdfc15f73c31a5d6b9bbcd00686b0e2419cc33e65139",
     "nativeResourceCrc32": "06120326",
     "nativeArchive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
     "source": "artifacts/weapon-inspection-lighting/native/de_dust2_vanity/readable/maps/de_dust2_vanity/cubemaps/env_cubemap_array.exr",
-    "conversion": "Official Source2Viewer CLI20.1 --decompile, float32 linear cubemap faces sampled into latlong via TextureExtract.CreateLatLongFromCubemapFaces; unchanged decoded EXR output bytes",
+    "conversion": "Official S2V float32 latlong exported from the native cubemap, then encoded as ZIP16 half-float using the exact Uint16Array produced by the pinned Three.js EXRLoader(HalfFloatType). Every GPU half bit is preserved; the untouched native float32 export remains outside runtime assets.",
     "width": 1024,
     "height": 512,
-    "channels": "RGBAfloat32",
+    "channels": "RGBAhalf16",
     "compression": "ZIP16",
     "volume": {
       "source_line": 1609,
@@ -121,7 +121,29 @@
       "light_probe_atlas_Y": 1,
       "light_probe_atlas_Z": 1
     },
-    "limitations": "Native specular reflection image, not complete diffuse irradiance or Source BRDF. Three PMREM filtering and camera-space projection are runtime approximations until visually compared."
+    "limitations": "Native specular reflection image, not complete diffuse irradiance or Source BRDF. Three PMREM filtering and camera-space projection are runtime approximations until visually compared.",
+    "originalDecoded": {
+      "source": "artifacts/weapon-inspection-lighting/native/de_dust2_vanity/readable/maps/de_dust2_vanity/cubemaps/env_cubemap_array.exr",
+      "preservedSource": "artifacts/weapon-inspection-lighting/preserved/dust2-reflection-native-float32.exr",
+      "bytes": 5968436,
+      "sha256": "732dda28a4d42a4a7538c806fab5c4b368e31a42920816f5952e30314f90770d",
+      "channels": "RGBAfloat32",
+      "compression": "ZIP16",
+      "conversion": "Official Source2Viewer CLI20.1 --decompile, float32 linear cubemap faces sampled into latlong via TextureExtract.CreateLatLongFromCubemapFaces; unchanged decoded EXR output bytes"
+    },
+    "delivery": {
+      "encoder": "packages/assets/encode-inspection-reflection.mjs",
+      "sourceSha256": "732dda28a4d42a4a7538c806fab5c4b368e31a42920816f5952e30314f90770d",
+      "decodedGpuSha256": "4ace77bfe2a9b45788eeba4af8f84fffce2a0149bbe82a98fa6cc30e4a3512a2",
+      "decodedElements": 2097152,
+      "gpuBitIdentical": true,
+      "validation": "Decoded the native input and runtime output through Three.js EXRLoader(HalfFloatType); compared all 2097152 Uint16 elements before publishing atomically.",
+      "runtime": "Bun 1.4.4",
+      "zlib": "12731092979c6d07f42da27da673a9f6c7b13586",
+      "sourceBytes": 5968436,
+      "runtimeBytes": 1386787,
+      "savedBytes": 4581649
+    }
   },
   "scene": {
     "entitiesSource": "artifacts/weapon-inspection-lighting/native/de_dust2_vanity/entities-all.json",

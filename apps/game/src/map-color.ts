@@ -14,6 +14,16 @@ T.ShaderChunk.tonemapping_pars_fragment = T.ShaderChunk.tonemapping_pars_fragmen
 
 const correction: { value: T.Data3DTexture | null } = { value: null };
 const correctionReady = { value: 0 };
+/** Offscreen inspection captures need linear HDR before their own VPOST/LUT pass. */
+export function withoutSourceColorCorrection(draw: () => void) {
+  const ready = correctionReady.value;
+  correctionReady.value = 0;
+  try {
+    draw();
+  } finally {
+    correctionReady.value = ready;
+  }
+}
 let pending: Promise<void> | undefined;
 export function loadSourceColorCorrection() {
   pending ??= fetchGzipped("/models/maps/lighting/color-correction.bin.gz").then((data) => {
