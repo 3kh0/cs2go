@@ -250,6 +250,7 @@ export class Ragdoll {
         if (delta.lengthSq() < 1e-12) continue;
         p.contact.add(delta.normalize());
         p.position.add(pa.sub(a1));
+        this.region(p, world);
         break;
       }
     }
@@ -270,6 +271,7 @@ export class Ragdoll {
       normal.copy(delta).multiplyScalar(1 / distance);
       translate(p, ra, normal, distance / weight(p, ra, normal));
       p.contact.add(normal);
+      this.region(p, world);
     }
   }
   private separate(a: Point, b: Point) {

@@ -125,7 +125,13 @@ export function ensureAgentAnimationBones(model: T.Group, source: T.Group) {
   });
   const root = model.getObjectByName("root_motion"),
     pelvis = model.getObjectByName("pelvis")!;
-  if (root?.userData.agentAnimationHelper && pelvis.parent && pelvis.parent !== root)
+  let ancestor: T.Object3D | null = pelvis;
+  while (ancestor && ancestor !== root) ancestor = ancestor.parent;
+  // Legacy exports can already contain an unweighted root_motion helper.
+  // Its native parent supplies the Source basis; nesting attachments beneath
+  // this extra root applies the rotation and inch scale twice. Actual body
+  // roots remain intact, including rigs whose pelvis is a deeper descendant.
+  if (root && pelvis.parent && !ancestor)
     while (root.children.length) pelvis.parent.add(root.children[0]);
 }
 export function agentClipForModel(clip: T.AnimationClip, model: T.Group) {

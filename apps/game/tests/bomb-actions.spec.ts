@@ -31,10 +31,23 @@ test("bomb pulses accelerate and stop on round completion", async ({ page }) => 
     const plantedMusic = g.bomb!.planted && g.soundscape.currentMusic === "bomb";
     g.bots.forEach((b, i) => b.group.position.set(100 + i, 500, 100));
     const calls: number[] = [];
+    let defuseEdges = 0;
     const play = g.soundscape.play.bind(g.soundscape);
     g.soundscape.play = (...args) => {
       if (args[0] === "bomb-beep" || args[0] === "bomb-beep-fast") calls.push(g.bomb!.timer);
+      if (args[0] === "bomb-defuse-start") defuseEdges++;
     };
+    const ct = g.bots.find((bot) => bot.team === "ct")!;
+    ct.tracking = false;
+    ct.group.position.copy(g.bomb!.position);
+    g.updateRound(1 / 128);
+    g.updateRound(1 / 128);
+    ct.group.position.x += 4;
+    g.updateRound(1 / 128);
+    ct.group.position.copy(g.bomb!.position);
+    g.updateRound(1 / 128);
+    ct.group.position.set(500, 500, 500);
+    g.updateRound(1 / 128);
     for (let i = 0; i < 39 * 128; i++) g.updateRound(1 / 128);
     const early = calls.filter((t) => t > 30);
     const late = calls.filter((t) => t < 10);
@@ -46,6 +59,7 @@ test("bomb pulses accelerate and stop on round completion", async ({ page }) => 
     for (let i = 0; i < 128; i++) g.updateRound(1 / 128);
     g.soundscape.play = play;
     return {
+      defuseEdges,
       earlyInterval,
       lateInterval,
       stopped: calls.length === count,
@@ -53,6 +67,7 @@ test("bomb pulses accelerate and stop on round completion", async ({ page }) => 
       warning,
     };
   });
+  expect(result.defuseEdges).toBe(2);
   expect(result.earlyInterval).toBeGreaterThan(0.85);
   expect(result.lateInterval).toBeLessThan(0.2);
   expect(result.stopped).toBe(true);

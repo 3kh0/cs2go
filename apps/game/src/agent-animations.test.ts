@@ -184,36 +184,44 @@ test("missing attachment helpers follow native hierarchy while body-only clips f
   expect(hand.children).toHaveLength(1);
 });
 
-test("legacy Source rigs apply the root basis once to newly reconstructed weapon helpers", () => {
-  const source = new T.Group(),
-    root = new T.Bone(),
-    pelvis = new T.Bone(),
-    anchor = new T.Bone();
-  root.name = "root_motion";
-  root.quaternion.set(-0.5, -0.5, -0.5, 0.5);
-  pelvis.name = "pelvis";
-  pelvis.position.z = 1;
-  anchor.name = "wpn";
-  anchor.position.set(0.2, -0.1, 1.2);
-  source.add(root);
-  root.add(pelvis, anchor);
-  const model = new T.Group(),
-    native = new T.Group(),
-    body = new T.Bone();
-  native.scale.setScalar(0.0254);
-  native.quaternion.copy(root.quaternion);
-  body.name = "pelvis";
-  model.add(native);
-  native.add(body);
-  ensureAgentAnimationBones(model, source);
-  source.updateMatrixWorld(true);
-  model.updateMatrixWorld(true);
-  expect(body.parent).toBe(native);
-  expect(model.getObjectByName("wpn")!.parent).toBe(native);
-  expect(
-    model
-      .getObjectByName("wpn")!
-      .getWorldPosition(new T.Vector3())
-      .distanceTo(anchor.getWorldPosition(new T.Vector3())),
-  ).toBeLessThan(1e-7);
-});
+test.each([false, true])(
+  "legacy Source rigs apply the root basis once (imported helper: %s)",
+  (imported) => {
+    const source = new T.Group(),
+      root = new T.Bone(),
+      pelvis = new T.Bone(),
+      anchor = new T.Bone();
+    root.name = "root_motion";
+    root.quaternion.set(-0.5, -0.5, -0.5, 0.5);
+    pelvis.name = "pelvis";
+    pelvis.position.z = 1;
+    anchor.name = "wpn";
+    anchor.position.set(0.2, -0.1, 1.2);
+    source.add(root);
+    root.add(pelvis, anchor);
+    const model = new T.Group(),
+      native = new T.Group(),
+      body = new T.Bone();
+    native.scale.setScalar(0.0254);
+    native.quaternion.copy(root.quaternion);
+    body.name = "pelvis";
+    model.add(native);
+    native.add(body);
+    if (imported) {
+      const auxiliary = new T.Bone();
+      auxiliary.name = "root_motion";
+      native.add(auxiliary);
+    }
+    ensureAgentAnimationBones(model, source);
+    source.updateMatrixWorld(true);
+    model.updateMatrixWorld(true);
+    expect(body.parent).toBe(native);
+    expect(model.getObjectByName("wpn")!.parent).toBe(native);
+    expect(
+      model
+        .getObjectByName("wpn")!
+        .getWorldPosition(new T.Vector3())
+        .distanceTo(anchor.getWorldPosition(new T.Vector3())),
+    ).toBeLessThan(1e-7);
+  },
+);

@@ -156,6 +156,9 @@ export class Soundscape {
   playBombPlant(previous: number, elapsed: number, position?: Vector3) {
     if (elapsed <= 0 || elapsed <= previous) return;
     for (const { time, cue } of bombPlantCues) {
+      // The shipped keypad event explicitly sets localplayeronly. Initiate and
+      // completion retain positional playback for nearby observers.
+      if (position && cue.startsWith("bomb-key-")) continue;
       if ((time === 0 ? previous === 0 : previous < time) && elapsed >= time)
         this.play(cue, false, "concrete", position);
     }

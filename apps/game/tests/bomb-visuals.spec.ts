@@ -139,13 +139,14 @@ test("CT defuse tools and connected wires reflect kit ownership and cancel with 
 
 test("C4 equips with 5 at native draw speed, plants after rounds, and shows carrier/alert HUD", async ({
   page,
+  baseURL,
 }) => {
   test.setTimeout(120_000);
   const errors: string[] = [];
   const external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("request", (request) => {
-    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
   });
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });

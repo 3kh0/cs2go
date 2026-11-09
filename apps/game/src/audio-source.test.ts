@@ -2,6 +2,7 @@ import { expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import bindings from "./data/source-weapon-audio.json";
+import c4Settings from "./data/c4-audio.json";
 
 it("covers every firearm marker with a native CS2 event and verifies bundled clip hashes", () => {
   const provenance = JSON.parse(
@@ -153,6 +154,14 @@ it("every packed effect has verified native CS2 or pinned supplemental C4 proven
       manifest.clips.find((entry: { name: string }) => entry.name === clip.name),
     ).toMatchObject(clip);
     sources.set(`/audio/source/${clip.name}.ogg`, clip.outputSha256);
+    const settings = c4Settings[clip.name as keyof typeof c4Settings];
+    const event = c4.soundEvents[clip.sourceEvent];
+    expect(settings.gain).toBe(event.volume);
+    expect(settings.height).toBe(event.position_offset[2] * 0.0254);
+    expect(settings.occlusionMix).toBe(event.occlusion_intensity);
+    expect(settings.curve).toEqual(
+      event.distance_volume_mapping_curve.map((row: number[]) => row.slice(0, 2)),
+    );
   }
   const breaks = JSON.parse(
     readFileSync("../../packages/assets/public/audio/source/mirage-break-sounds.json", "utf8"),

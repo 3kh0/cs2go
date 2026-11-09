@@ -1,4 +1,5 @@
 import { afterEach, expect, test, vi } from "vitest";
+import { Vector3 } from "three";
 import { PLANT_DURATION } from "./bomb-presentation";
 import { Soundscape } from "./soundscape";
 
@@ -31,4 +32,7 @@ test("plant marker crossings play once across fixed steps and sparse snapshots, 
   sound.playBombPlant(0, PLANT_DURATION);
   expect(played.filter((c) => c === "bomb-initiate")).toHaveLength(2);
   expect(played.slice(-8)).toEqual(expected);
+  played.length = 0;
+  sound.playBombPlant(0, PLANT_DURATION, new Vector3(1, 0, 2));
+  expect(played).toEqual(["bomb-initiate"]);
 });

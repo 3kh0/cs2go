@@ -63,7 +63,7 @@ test("C4 source recordings remain audible across actual crate cover and crowded 
   expect(result.blocked.peak).toBeLessThanOrEqual(16);
 });
 
-test("nearby multiplayer clients hear each CT defuse attempt and the complete plant sequence", async ({
+test("multiplayer broadcasts defuse attempts and keeps the native keypad sequence on the planter", async ({
   browser,
   request,
 }) => {
@@ -72,14 +72,37 @@ test("nearby multiplayer clients hear each CT defuse attempt and the complete pl
   const [ct, t] = await Promise.all(contexts.map((c) => c.newPage()));
   const room = `c4-native-${Date.now()}`;
   const errors: string[] = [];
-  for (const page of [ct, t]) page.on("pageerror", (e) => errors.push(e.message));
+  for (const page of [ct, t])
+    page.on("pageerror", (e) => {
+      errors.push(e.message);
+      console.log("C4 PAGEERROR", e.message);
+    });
   const command = async (op: string) => {
     const r = await request.post("http://127.0.0.1:3004", { data: { room: lobbyPin(room), op } });
     expect(r.ok()).toBe(true);
   };
   try {
-    await joinLobby(ct, room, "ct");
-    await joinLobby(t, room, "t");
+    const join = async (page: typeof ct, team: "ct" | "t") => {
+      const started = Date.now();
+      const capture = setTimeout(async () => {
+        try {
+          if (await page.locator("#startup").count()) {
+            await page.screenshot({ path: `artifacts/c4-startup-${team}.png` });
+            console.log("C4 STARTUP CHECKPOINT", team, await page.locator("#startup").innerText());
+          }
+        } catch {
+          /* A completed/closed context no longer needs a checkpoint. */
+        }
+      }, 20000);
+      try {
+        await joinLobby(page, room, team);
+      } finally {
+        clearTimeout(capture);
+      }
+      console.log("C4 CLIENT READY", team, Date.now() - started, "ms");
+    };
+    await join(ct, "ct");
+    await join(t, "t");
     for (const page of [ct, t])
       await page.evaluate(() => {
         const sound = window.__game.soundscape,
@@ -98,6 +121,11 @@ test("nearby multiplayer clients hear each CT defuse attempt and the complete pl
     if (!(await t.evaluate(() => window.__game.locked))) await t.locator("#game").click();
     await t.keyboard.press("5");
     await t.waitForFunction(() => window.__game.bombSelected && window.__game.bombDrawTime === 0);
+    // Put the observer beside the authoritative carrier before the plant begins.
+    await command("defuse");
+    await ct.waitForFunction(
+      () => window.__game.position.distanceTo(window.__game.bomb!.position) < 2,
+    );
     await t.mouse.down();
     await t.waitForFunction(() => window.__game.bomb?.planted, null, { timeout: 10000 });
     await t.mouse.up();
@@ -107,7 +135,7 @@ test("nearby multiplayer clients hear each CT defuse attempt and the complete pl
         (window as unknown as { c4Heard: { cue: string }[] }).c4Heard.map((x) => x.cue),
       );
       expect(heard).toContain("bomb-initiate");
-      expect(heard.filter((x) => x.startsWith("bomb-key-"))).toHaveLength(7);
+      expect(heard.filter((x) => x.startsWith("bomb-key-"))).toHaveLength(page === t ? 7 : 0);
       expect(heard).toContain("bomb-plant");
     }
     await command("defuse");
@@ -138,6 +166,7 @@ test("nearby multiplayer clients hear each CT defuse attempt and the complete pl
         ).c4Heard.filter((x) => x.cue === "bomb-defuse-start"),
       );
       expect(clips.every((x) => x.seconds > 1 && x.position)).toBe(true);
+      expect(await page.evaluate(() => window.__game.soundscape.context?.state)).toBe("running");
       const energy = await page.evaluate(async () => {
         const path = "/src/soundscape.ts";
         const { Soundscape } = await import(path);
