@@ -27,10 +27,8 @@ export function updateDeathmatchStatus(
   }
   panel.hidden = !active || !state?.bonus;
   if (!active) {
-    for (const id of ["deathmatch-award"]) {
-      const node = document.getElementById(id);
-      if (node) node.hidden = true;
-    }
+    const award = document.getElementById("deathmatch-award");
+    if (award) award.hidden = true;
   }
   if (state?.bonus && active) {
     const { bonus } = state;

@@ -3,7 +3,7 @@ import { isKnife, weapons } from "./physics";
 // Installed CS2 build2000942 server.dll, CCSGameModeRules_Deathmatch virtual
 // scorer RVA0x922080; price/type branches RVA0x92266d..0x9226c2. The observed
 // mp_dm_kill_base_score is8. Price is m_nPrice, not the cash m_nKillAward.
-// See docs/private-matchmaking-deathmatch.md for binary hashes and limitations.
+// server.dll SHA-256: 70c66e850b2ce72c8c7ca026de6989ef4de7f12dad64ec503645fbd2a7f06d9f.
 const priceAwards = [
   [200, 18],
   [500, 16],

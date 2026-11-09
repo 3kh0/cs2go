@@ -20,9 +20,12 @@ export class DeathmatchState {
   constructor(random: () => number = Math.random) {
     this.random = random;
   }
+  private sample() {
+    return Math.min(0.999999, Math.max(0, this.random()));
+  }
   reset() {
     this.bonus = null;
-    this.untilBonus = 30 + Math.min(0.999999, Math.max(0, this.random())) * 10;
+    this.untilBonus = 30 + this.sample() * 10;
   }
   tick(dt: number, weapons: readonly number[]) {
     if (!(dt > 0) || !Number.isFinite(dt)) return null;
@@ -30,14 +33,13 @@ export class DeathmatchState {
       this.bonus.remaining = Math.max(0, this.bonus.remaining - dt);
       if (!this.bonus.remaining) {
         this.bonus = null;
-        this.untilBonus = 30 + Math.min(0.999999, Math.max(0, this.random())) * 10;
+        this.untilBonus = 30 + this.sample() * 10;
         return "ended" as const;
       }
     } else {
       this.untilBonus -= dt;
       if (this.untilBonus <= 0 && weapons.length) {
-        const weapon =
-          weapons[Math.floor(Math.min(0.999999, Math.max(0, this.random())) * weapons.length)];
+        const weapon = weapons[Math.floor(this.sample() * weapons.length)];
         this.bonus = { weapon, remaining: 30, duration: 30 };
         return "started" as const;
       }

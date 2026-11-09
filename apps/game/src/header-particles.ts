@@ -1,5 +1,5 @@
 // Reconstruction of ParticleControls.UpdateMainMenuTopBar and
-// ui_mainmenu_navbar_press.vpcf, pinned in docs/panorama-parity.md. The browser uses
+// ui_mainmenu_navbar_press.vpcf. The browser uses
 // additive canvas squares in place of Source 2's glow_square_01 sprite shader.
 const PANEL_WIDTH = 670;
 const WORLD_WIDTH = 32 * 35;

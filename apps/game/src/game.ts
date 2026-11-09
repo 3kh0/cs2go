@@ -2070,9 +2070,10 @@ export class Game {
         }
       } else attacker.deathmatchScore += points;
       if (victim !== undefined) {
-        const killerId = attacker === "player" ? "player" : this.bots.indexOf(attacker);
-        const victimId = victim === "player" ? "player" : this.bots.indexOf(victim);
-        const { assister } = this.deathmatchCombat.kill(killerId, victimId);
+        const { assister } = this.deathmatchCombat.kill(
+          this.deathmatchActor(attacker),
+          this.deathmatchActor(victim),
+        );
         const victimName = victim === "player" ? "YOU" : victim.name;
         this.deathmatchAssisters.delete(victimName);
         if (assister !== undefined) {
@@ -2120,12 +2121,15 @@ export class Game {
     victim.health = Math.max(0, victim.health - Math.floor(result.healthDamage));
     this.recordDeathDamage(actor, attacker, Math.floor(result.healthDamage));
   }
+  private deathmatchActor(actor: Bot | "player") {
+    return actor === "player" ? "player" : this.bots.indexOf(actor);
+  }
   recordDeathDamage(victim: Bot | "player", attacker: Bot | "player", damage: number) {
     if (victim === attacker) return;
     if (this.mode === "deathmatch") {
       this.deathmatchCombat.record(
-        victim === "player" ? "player" : this.bots.indexOf(victim),
-        attacker === "player" ? "player" : this.bots.indexOf(attacker),
+        this.deathmatchActor(victim),
+        this.deathmatchActor(attacker),
         damage,
       );
     }

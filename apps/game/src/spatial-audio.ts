@@ -1,6 +1,15 @@
 import { Vector3, type Camera } from "three";
 import { NativeAcoustics, roomImpulse } from "./room-acoustics";
 
+const roomDirections = [
+  [0, 4, 0],
+  [0, 12, 0],
+  [6, 0, 0],
+  [-6, 0, 0],
+  [0, 0, 6],
+  [0, 0, -6],
+] as const;
+
 export type SoundRange = {
   refDistance: number;
   maxDistance: number;
@@ -57,17 +66,10 @@ export class SpatialAudio {
   private updateRoom(context: AudioContext) {
     if (context.currentTime < this.nextProbe || !this.obstructed) return;
     this.nextProbe = context.currentTime + 0.06;
-    const directions = [
-      [0, 4, 0],
-      [0, 12, 0],
-      [6, 0, 0],
-      [-6, 0, 0],
-      [0, 0, 6],
-      [0, 0, -6],
-    ];
-    this.probeEnd.copy(this.position).add(new Vector3(...directions[this.probe]));
+    const [x, y, z] = roomDirections[this.probe];
+    this.probeEnd.set(x, y, z).add(this.position);
     this.enclosure[this.probe] = this.obstructed(this.position, this.probeEnd);
-    this.probe = (this.probe + 1) % directions.length;
+    this.probe = (this.probe + 1) % roomDirections.length;
     this.listenerProbe = this.useNativeProbes ? (this.native?.nearest(this.position) ?? -1) : -1;
     const state = this.roomState;
     this.rooms?.sends.forEach((send, index) =>

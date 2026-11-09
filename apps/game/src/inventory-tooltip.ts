@@ -1,52 +1,13 @@
+import { appendInspectText, loadInspectText, type InspectText } from "./native-inspect-text";
 import { wearCondition } from "./cosmetic-wear";
 import { weapons } from "./physics";
 import type { Skin } from "./skins";
 import "./inventory-tooltip.css";
 
-type InspectText = {
-  weapons: string[];
-  paints: Record<string, string>;
-  collections: string[];
-  finishCollections: Record<string, number>;
-};
-
-let textLoad: Promise<InspectText> | undefined;
 const cardSelector = "#skin-grid [data-item-weapon][data-skin]";
 // Native Panorama delegates opening to UiToolkitAPI; its engine-side delay is
 // not in the exported tooltip XML. Keep a cancellable half-second hover dwell.
 const hoverDelay = 500;
-
-function description(host: HTMLElement, raw: string) {
-  for (const paragraph of raw.replace(/<br\s*\/?>/gi, "\n").split(/\n\s*\n/)) {
-    if (!paragraph.trim()) continue;
-    const p = document.createElement("p");
-    const stack: HTMLElement[] = [p];
-    for (const token of paragraph.split(/(<[^>]*>)/)) {
-      const parent = stack.at(-1)!;
-      if (/^<\/(?:i|em|b|strong)\s*>$/i.test(token)) {
-        if (stack.length > 1) stack.pop();
-      } else if (/^<(?:i|em|b|strong)(?:\s[^>]*)?>$/i.test(token)) {
-        const element = document.createElement(/^<(?:i|em)\b/i.test(token) ? "em" : "strong");
-        parent.append(element);
-        stack.push(element);
-      } else if (!/^<[^>]*>$/.test(token)) {
-        token.split("\n").forEach((line, index) => {
-          if (index) parent.append(document.createElement("br"));
-          parent.append(
-            document.createTextNode(
-              line.replace(
-                /&(amp|lt|gt|quot|apos);/g,
-                (_, entity: string) =>
-                  ({ amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" })[entity]!,
-              ),
-            ),
-          );
-        });
-      }
-    }
-    host.append(p);
-  }
-}
 
 /** Native inventory hover details, independent of the 3D inspection renderer.
  * Cards can provide data-wear for a real owned item's Exterior. Missing wear
@@ -155,9 +116,9 @@ export function setupInventoryTooltip(overlay: HTMLElement): () => void {
     const details = document.createElement("div");
     details.className = "inventory-tooltip-description";
     const weaponDescription = text?.weapons[weapon];
-    if (weaponDescription) description(details, weaponDescription);
+    if (weaponDescription) appendInspectText(details, weaponDescription, true);
     const paintDescription = skin ? text?.paints[String(skin.paint)] : undefined;
-    if (paintDescription) description(details, paintDescription);
+    if (paintDescription) appendInspectText(details, paintDescription, true);
     if (details.childElementCount) tooltip.append(details);
   }
 
@@ -165,14 +126,8 @@ export function setupInventoryTooltip(overlay: HTMLElement): () => void {
     let text: InspectText | undefined;
     let skin: Skin | undefined;
     try {
-      textLoad ??= import("./data/weapon-inspect-text.json")
-        .then((module) => module.default)
-        .catch((error: unknown) => {
-          textLoad = undefined;
-          throw error;
-        });
       const [nativeText, skins] = await Promise.all([
-        textLoad,
+        loadInspectText(),
         import("./skins").then((module) => module.skinCatalog()),
       ]);
       text = nativeText;

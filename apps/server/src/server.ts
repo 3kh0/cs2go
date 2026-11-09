@@ -92,6 +92,21 @@ export function startServer(options: ServerOptions) {
   let nextRoomLabel = 1;
   const log = (message: string) => options.log?.(message);
   const clientLabel = (socket: ServerWebSocket<Connection>) => socket.data.id.slice(0, 8);
+  const headers = (origin: string) => ({
+    ...(origins.has(origin) ? { "Access-Control-Allow-Origin": origin } : {}),
+    Vary: "Origin",
+    "Cache-Control": "no-store",
+  });
+  function stopInput(connection: Connection, player: PlayerState, now: number) {
+    connection.queue = [];
+    player.ack = connection.lastSeq;
+    connection.last = {
+      ...neutralInput(connection.lastSeq),
+      yaw: player.yaw,
+      pitch: player.pitch,
+    };
+    connection.lastInput = now;
+  }
   function send(socket: ServerWebSocket<Connection>, message: ServerMessage | string) {
     if (socket.readyState !== 1) return false;
     if (socket.getBufferedAmount() > 512 * 1024) {
@@ -125,13 +140,7 @@ export function startServer(options: ServerOptions) {
           },
           {
             status: stopping ? 503 : 200,
-            headers: {
-              ...(origins.has(request.headers.get("origin") ?? "")
-                ? { "Access-Control-Allow-Origin": request.headers.get("origin")! }
-                : {}),
-              Vary: "Origin",
-              "Cache-Control": "no-store",
-            },
+            headers: headers(request.headers.get("origin") ?? ""),
           },
         );
       if (request.method === "GET" && path === "/lobbies") {
@@ -160,16 +169,7 @@ export function startServer(options: ServerOptions) {
             phase: room.state.phase,
           });
         }
-        return Response.json(
-          { version: PROTOCOL_VERSION, lobbies },
-          {
-            headers: {
-              "Access-Control-Allow-Origin": origin,
-              Vary: "Origin",
-              "Cache-Control": "no-store",
-            },
-          },
-        );
+        return Response.json({ version: PROTOCOL_VERSION, lobbies }, { headers: headers(origin) });
       }
       if (request.method === "GET" && /^\/lobbies\/\d{6}$/.test(path)) {
         const origin = request.headers.get("origin") ?? "";
@@ -181,11 +181,7 @@ export function startServer(options: ServerOptions) {
             : { error: "Lobby not found" },
           {
             status: room ? 200 : 404,
-            headers: {
-              "Access-Control-Allow-Origin": origin,
-              Vary: "Origin",
-              "Cache-Control": "no-store",
-            },
+            headers: headers(origin),
           },
         );
       }
@@ -323,16 +319,7 @@ export function startServer(options: ServerOptions) {
           const player = connection.room.players.get(connection.id)!;
           const previousTeam = player.team;
           const error = switchTeam(connection.room, player, message.team);
-          if (!error && previousTeam !== player.team) {
-            connection.queue = [];
-            player.ack = connection.lastSeq;
-            connection.last = {
-              ...neutralInput(connection.lastSeq),
-              yaw: player.yaw,
-              pitch: player.pitch,
-            };
-            connection.lastInput = now;
-          }
+          if (!error && previousTeam !== player.team) stopInput(connection, player, now);
           send(socket, {
             type: "team-status",
             message:
@@ -369,14 +356,7 @@ export function startServer(options: ServerOptions) {
               send(peer, chat);
         } else if (message.type === "stop") {
           const player = connection.room.players.get(connection.id)!;
-          connection.queue = [];
-          player.ack = connection.lastSeq;
-          connection.last = {
-            ...neutralInput(connection.lastSeq),
-            yaw: player.yaw,
-            pitch: player.pitch,
-          };
-          connection.lastInput = now;
+          stopInput(connection, player, now);
         } else if (message.type === "ping") send(socket, { type: "pong", time: message.time });
         else {
           if (connection.queue.length + message.inputs.length > MAX_PENDING_INPUTS)

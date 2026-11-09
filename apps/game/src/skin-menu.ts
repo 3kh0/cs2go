@@ -1,3 +1,4 @@
+import { appendInspectText, loadInspectText } from "./native-inspect-text";
 import type { Game } from "./game";
 import finishStyles from "./data/paint-finish-styles.json";
 import { setupInventoryTooltip } from "./inventory-tooltip";
@@ -134,13 +135,6 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
       certificate.append(row);
     }
   }
-  type InspectText = {
-    weapons: string[];
-    paints: Record<string, string>;
-    collections: string[];
-    finishCollections: Record<string, number>;
-  };
-  let textLoad: Promise<InspectText> | undefined;
   let textGeneration = 0;
   const title = get("skin-title");
   let titleWidth = 0;
@@ -167,32 +161,6 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
   const titleResize = new ResizeObserver(fitTitle);
   titleResize.observe(title);
   titleResize.observe(overlay);
-  function appendNativeDescription(raw: string) {
-    const destination = get("weapon-inspect-description");
-    for (const paragraph of raw.replace(/<br\s*\/?>/gi, "\n").split(/\n\s*\n/)) {
-      if (!paragraph.trim()) continue;
-      const p = document.createElement("p");
-      const stack: HTMLElement[] = [p];
-      for (const token of paragraph.split(/(<[^>]*>)/)) {
-        const parent = stack.at(-1)!;
-        if (/^<\/(?:i|em|b|strong)\s*>$/i.test(token)) {
-          if (stack.length > 1) stack.pop();
-        } else if (/^<(?:i|em|b|strong)(?:\s[^>]*)?>$/i.test(token)) {
-          const element = document.createElement(/^<(?:i|em)\b/i.test(token) ? "em" : "strong");
-          parent.append(element);
-          stack.push(element);
-        } else if (!/^<[^>]*>$/.test(token)) {
-          token.split("\n").forEach((line, index) => {
-            if (index) parent.append(document.createElement("br"));
-            parent.append(
-              document.createTextNode(line.replace(/&lt;/g, "<").replace(/&gt;/g, ">")),
-            );
-          });
-        }
-      }
-      destination.append(p);
-    }
-  }
   async function updateDescription() {
     if (!overlay.dataset.inspect) return;
     const version = ++textGeneration;
@@ -200,32 +168,25 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
     const selectedFinish = draft.id;
     get("weapon-inspect-description").replaceChildren();
     get("weapon-inspect-collection").textContent = "";
-    textLoad ??= import("./data/weapon-inspect-text.json")
-      .then((module) => module.default)
-      .catch((error: unknown) => {
-        textLoad = undefined;
-        throw error;
-      });
     try {
-      const text = await textLoad;
+      const text = await loadInspectText();
       if (
         version !== textGeneration ||
         !overlay.dataset.inspect ||
         overlay.classList.contains("hidden")
       )
         return;
-      const paints = text.paints as Record<string, string>;
-      const collections = text.finishCollections as Record<string, number>;
       const skin = catalog.find(
         (entry) => entry.id === selectedFinish && entry.weapon === selectedWeapon,
       );
-      const collection = collections[selectedFinish];
+      const collection = text.finishCollections[selectedFinish];
       get("weapon-inspect-collection").textContent =
         collection === undefined ? "" : text.collections[collection];
       const weaponDescription = text.weapons[selectedWeapon];
-      if (weaponDescription) appendNativeDescription(weaponDescription);
-      const paintDescription = skin ? paints[String(skin.paint)] : "";
-      if (paintDescription) appendNativeDescription(paintDescription);
+      if (weaponDescription)
+        appendInspectText(get("weapon-inspect-description"), weaponDescription);
+      const paintDescription = skin ? text.paints[String(skin.paint)] : "";
+      if (paintDescription) appendInspectText(get("weapon-inspect-description"), paintDescription);
     } catch {
       // A missing optional description never prevents inspecting or equipping.
     }

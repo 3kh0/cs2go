@@ -1,5 +1,6 @@
 import { assetUrl } from "./asset-url";
-import { isKnife, weaponIcons, weapons } from "./physics";
+import { isKnife, weapons } from "./physics";
+import { weaponBuyIcon } from "./buy-menu";
 import "./deathmatch-hud.css";
 import { updateDeathmatchStatus, type DeathmatchHudState } from "./deathmatch-status";
 
@@ -52,14 +53,7 @@ export function updateDeathmatchHud(
       tile.append(avatar, points);
       if (!isKnife(player.weapon)) {
         const weapon = document.createElement("img");
-        const icons: Record<string, string> = {
-          "ak-47": "ak47",
-          "m4a1-s": "m4a1_silencer",
-          "usp-s": "usp_silencer",
-          m4a4: "m4a1",
-        };
-        const icon = weaponIcons[player.weapon];
-        weapon.src = assetUrl(`/icons/buy/${icons[icon] ?? icon}.svg`);
+        weapon.src = weaponBuyIcon(player.weapon);
         weapon.alt = weapons[player.weapon].name;
         weapon.className = "dm-weapon";
         tile.append(weapon);

@@ -310,6 +310,11 @@ const record = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
 const finite = (value: unknown): value is number =>
   typeof value === "number" && Number.isFinite(value);
+const validName = (value: unknown): value is string =>
+  typeof value === "string" &&
+  value.trim().length > 0 &&
+  value.length <= 24 &&
+  !Array.from(value).some((c) => c.charCodeAt(0) < 32 || c.charCodeAt(0) === 127);
 function validCosmeticChoice(value: unknown): value is SkinChoice {
   return (
     record(value) &&
@@ -424,12 +429,7 @@ export function parseClientMessage(raw: string): ClientMessage | null {
       const profile = config.profile;
       if (
         !record(profile) ||
-        typeof profile.name !== "string" ||
-        !profile.name.trim() ||
-        profile.name.length > 24 ||
-        Array.from(profile.name).some(
-          (character) => character.charCodeAt(0) < 32 || character.charCodeAt(0) === 127,
-        ) ||
+        !validName(profile.name) ||
         (profile.avatar !== null &&
           (typeof profile.avatar !== "string" ||
             !/^https:\/\/avatars\.(?:fastly\.|akamai\.|cloudflare\.)?steamstatic\.com\/[a-f0-9]{40}(?:_full|_medium)?\.jpg$/.test(
@@ -497,12 +497,7 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     (value.create === true
       ? value.room === "" && value.resume === undefined
       : validRoom(value.room)) &&
-    typeof value.name === "string" &&
-    value.name.trim().length > 0 &&
-    value.name.length <= 24 &&
-    !Array.from(value.name).some(
-      (character) => character.charCodeAt(0) < 32 || character.charCodeAt(0) === 127,
-    ) &&
+    validName(value.name) &&
     (value.mode === "casual" || value.mode === "competitive") &&
     (value.team === "ct" || value.team === "t")
   )
