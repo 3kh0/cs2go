@@ -1,0 +1,63 @@
+/* Matching-build tooltip_inventory_item: compact text, collection, Quality,
+   Exterior and Team rows. Numerical certificate fields stay in Inspect. */
+.inventory-item-tooltip {
+  position: fixed;
+  z-index: 100;
+  width: min(calc(400 * var(--menu-unit)), calc(100vw - 20px));
+  max-height: calc(100vh - 20px);
+  overflow: hidden;
+  padding: calc(14 * var(--menu-unit));
+  border: 1px solid #ffffff18;
+  border-top: calc(3 * var(--menu-unit)) solid var(--tooltip-rarity, #b0c3d9);
+  border-radius: calc(3 * var(--menu-unit));
+  background: #101010f0;
+  box-shadow: 0 4px 16px #0008;
+  color: #ddd;
+  font-family: "Stratum2", sans-serif;
+  font-size: max(12px, calc(14 * var(--menu-unit)));
+  line-height: 1.35;
+  pointer-events: none;
+  overflow-wrap: anywhere;
+}
+.inventory-item-tooltip[hidden] {
+  display: none;
+}
+.inventory-item-tooltip h3 {
+  margin: 0;
+  font: inherit;
+  font-weight: 700;
+  color: #f1f1f1;
+}
+.inventory-item-tooltip .inventory-tooltip-collection {
+  margin: calc(5 * var(--menu-unit)) 0 0;
+  color: #aaa;
+}
+.inventory-item-tooltip dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: calc(5 * var(--menu-unit)) calc(12 * var(--menu-unit));
+  margin: calc(12 * var(--menu-unit)) 0 0;
+  padding: calc(10 * var(--menu-unit));
+  border-top: 1px solid #25282b;
+}
+.inventory-item-tooltip dt {
+  color: #7c7c7c;
+}
+.inventory-item-tooltip dd {
+  min-width: 0;
+  margin: 0;
+}
+.inventory-tooltip-description {
+  padding-top: calc(6 * var(--menu-unit));
+  margin-top: calc(8 * var(--menu-unit));
+  border-top: 1px solid #25282b;
+}
+.inventory-tooltip-description p {
+  margin: 0 0 calc(10 * var(--menu-unit));
+}
+.inventory-tooltip-description p:last-child {
+  margin-bottom: 0;
+}
+.inventory-tooltip-description em {
+  color: #b3b3b3;
+}

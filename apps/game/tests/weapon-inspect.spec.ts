@@ -11,8 +11,13 @@ function projectedWeaponExtent() {
       renderer: import("three").WebGLRenderer,
       capture?: () => void,
       environment?: import("three").Texture | null,
+      dt?: number,
     ): boolean;
   };
+  // Advance the real render clock through the authored opening before testing
+  // the tighter settled camera at every user angle and zoom.
+  for (let i = 0; i < 13; i++)
+    preview.render(game.renderer, undefined, game.homeScene.inspectionEnvironment, 0.1);
   const saved = preview.pivot.rotation.clone();
   const savedZoom = preview.requestedZoom;
   const point = preview.camera.position.clone();
@@ -86,6 +91,59 @@ test("all 56 inventory weapons inspect in 3D, rotate without equipping, and clos
           requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
         ),
     );
+    if (weapon === 3 || weapon === 37 || weapon === 38) {
+      const initialDistance = await page.evaluate(
+        () =>
+          (
+            window.__game.weaponInspectPreview as unknown as {
+              camera: import("three").PerspectiveCamera;
+            }
+          ).camera.position.z,
+      );
+      await expect(stage).toHaveAttribute("data-intro", "settled", { timeout: 5000 });
+      if (weapon === 37 || weapon === 38) {
+        const settledDistance = await page.evaluate(
+          () =>
+            (
+              window.__game.weaponInspectPreview as unknown as {
+                camera: import("three").PerspectiveCamera;
+              }
+            ).camera.position.z,
+        );
+        expect(initialDistance).toBeGreaterThan(settledDistance * 1.1);
+        await stage.click();
+        const size = await page.evaluate(() => {
+          const preview = window.__game.weaponInspectPreview as unknown as {
+            model: import("three").Group;
+            camera: import("three").PerspectiveCamera;
+          };
+          const point = preview.camera.position.clone();
+          let left = Infinity,
+            right = -Infinity,
+            top = -Infinity,
+            bottom = Infinity;
+          preview.model.traverseVisible((object) => {
+            const mesh = object as import("three").Mesh;
+            if (!mesh.isMesh) return;
+            for (let i = 0; i < mesh.geometry.getAttribute("position").count; i++) {
+              mesh
+                .getVertexPosition(i, point)
+                .applyMatrix4(mesh.matrixWorld)
+                .project(preview.camera);
+              left = Math.min(left, point.x);
+              right = Math.max(right, point.x);
+              bottom = Math.min(bottom, point.y);
+              top = Math.max(top, point.y);
+            }
+          });
+          return { width: (right - left) / 2, height: (top - bottom) / 2 };
+        });
+        expect(size.width).toBeGreaterThan(0.33);
+        expect(size.width).toBeLessThan(0.65);
+        expect(size.height).toBeGreaterThan(0.09);
+        await page.screenshot({ path: `artifacts/weapon-inspect-default-knife-${weapon}.png` });
+      }
+    }
     if (weapon === 3) {
       const widthFraction = await page.evaluate(() => {
         const preview = window.__game.weaponInspectPreview as unknown as {

@@ -47,6 +47,7 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
   const audioButton = get<HTMLButtonElement>("music-kit-audio");
   const title = get("music-kit-name");
   const equip = get<HTMLButtonElement>("equip-music-kit");
+  const inspectButton = get<HTMLButtonElement>("inspect-music-kit");
   let kits: MusicKit[] = [];
   let defaultId = "";
   let selected: MusicKit | undefined;
@@ -93,8 +94,26 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
     playing.textContent = `${musicEventLabels[event] ?? event}${count > 1 ? ` · ${index + 1}` : ""}`;
     state();
   }
-  function closeInspect(focus = true) {
+  function cancelPreparation() {
     generation++;
+    if (context.getAttribute("aria-busy") === "true") status.textContent = "";
+    context.removeAttribute("aria-busy");
+    inspectButton.disabled = false;
+    inspectButton.removeAttribute("aria-disabled");
+  }
+  function prepare(kit: MusicKit) {
+    previewLoad ??= import("./music-kit-preview")
+      .then(({ MusicKitPreview }) => {
+        game.musicKitPreview = new MusicKitPreview(get("music-kit-stage"));
+      })
+      .catch((error: unknown) => {
+        previewLoad = undefined;
+        throw error;
+      });
+    return previewLoad.then(() => game.musicKitPreview!.prepare(game.renderer, kit.id));
+  }
+  function closeInspect(focus = true) {
+    cancelPreparation();
     inspect.hidden = true;
     delete overlay.dataset.musicInspect;
     closeTracks();
@@ -106,8 +125,30 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
   }
   async function inspectSelected() {
     if (!selected) return;
+    if (context.getAttribute("aria-busy") === "true") return;
     const kit = selected;
     const token = ++generation;
+    context.setAttribute("aria-busy", "true");
+    // Keep keyboard focus inside the popup so Escape cancels only this action.
+    inspectButton.setAttribute("aria-disabled", "true");
+    status.textContent = "Loading music kit…";
+    try {
+      await prepare(kit);
+      if (token !== generation || !isOpen() || context.hidden || selected?.id !== kit.id) return;
+      await game.musicKitPreview!.show(kit.id);
+      if (token !== generation || !isOpen()) return;
+    } catch {
+      if (token === generation)
+        status.textContent = "The 3D music kit could not load. Inspect again to retry.";
+      return;
+    } finally {
+      if (token === generation) {
+        context.removeAttribute("aria-busy");
+        inspectButton.disabled = false;
+        inspectButton.removeAttribute("aria-disabled");
+      }
+    }
+    status.textContent = "";
     context.hidden = true;
     inspect.hidden = false;
     overlay.dataset.musicInspect = "true";
@@ -137,28 +178,13 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
     }
     play(kit, "menu");
     get("music-kit-stage").focus();
-    get("music-kit-model-status").textContent = "Loading music kit…";
-    try {
-      previewLoad ??= import("./music-kit-preview")
-        .then(({ MusicKitPreview }) => {
-          game.musicKitPreview = new MusicKitPreview(get("music-kit-stage"));
-        })
-        .catch((error: unknown) => {
-          previewLoad = undefined;
-          throw error;
-        });
-      await previewLoad;
-      if (token !== generation || !isOpen()) return;
-      await game.musicKitPreview!.show(kit.id);
-      if (token === generation) get("music-kit-model-status").textContent = "";
-    } catch {
-      if (token === generation)
-        get("music-kit-model-status").textContent =
-          "The 3D music kit could not load. Close and inspect again to retry.";
-    }
+    get("music-kit-model-status").textContent = "";
   }
   function choose(kit: MusicKit, card: HTMLButtonElement, event?: MouseEvent) {
+    cancelPreparation();
     selected = kit;
+    status.textContent = "";
+    void prepare(kit).catch(() => {});
     state();
     context.hidden = false;
     const rect = overlay.getBoundingClientRect();
@@ -246,9 +272,13 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
     audioButton.setAttribute("aria-expanded", String(opening));
     if (opening) tracks.querySelector<HTMLButtonElement>("[aria-pressed=true]")?.focus();
   };
-  search.oninput = list;
+  search.oninput = () => {
+    cancelPreparation();
+    list();
+  };
   equip.onclick = async () => {
     if (!selected) return;
+    cancelPreparation();
     equip.disabled = true;
     try {
       await player.setKit(selected.id);
@@ -284,6 +314,7 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
         closeTracks();
         audioButton.focus();
       } else if (!context.hidden) {
+        cancelPreparation();
         context.hidden = true;
         if (selected)
           items.querySelector<HTMLButtonElement>(`[data-music-kit="${selected.id}"]`)?.focus();
@@ -296,7 +327,10 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
   );
   document.addEventListener("pointerdown", (event) => {
     const target = event.target as Node;
-    if (!context.contains(target)) context.hidden = true;
+    if (!context.contains(target)) {
+      if (context.getAttribute("aria-busy") === "true") cancelPreparation();
+      context.hidden = true;
+    }
     if (!get("music-kit-audio").parentElement!.contains(target)) closeTracks();
   });
   player.addEventListener("change", state);

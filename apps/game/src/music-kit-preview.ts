@@ -3,7 +3,12 @@ import { assetUrl } from "./asset-url";
 import { loadModel } from "./gltf";
 import { MenuBackdrop, inspectionBackdropOptions } from "./menu-backdrop";
 import { framePreview } from "./preview-framing";
-import { InspectionLighting, drawInspectionLoading } from "./inspection-lighting";
+import {
+  InspectionLighting,
+  drawInspectionLoading,
+  prepareInspectionLighting,
+} from "./inspection-lighting";
+import { yieldLoadingWork } from "./loading";
 
 /** A lazy inventory inspection, drawn by the game's existing renderer and clock. */
 export class MusicKitPreview {
@@ -32,6 +37,13 @@ export class MusicKitPreview {
   private idleElapsed = 0;
   private idleRunning = true;
   private reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  private coverId = "";
+  private requestedKitId = "";
+  private backgroundReady = false;
+  private assetGeneration = 0;
+  private assetWork?: { id: string; promise: Promise<boolean> };
+  private preparationGeneration = 0;
+  private preparation?: { id: string; promise: Promise<void>; pending: boolean };
 
   constructor(stage: HTMLElement) {
     this.stage = stage;
@@ -232,30 +244,118 @@ export class MusicKitPreview {
       }));
   }
 
+  private ensureKit(kitId: string) {
+    if (this.coverId === kitId && this.cover) {
+      if (this.assetWork && this.assetWork.id !== kitId) ++this.assetGeneration;
+      return Promise.resolve(true);
+    }
+    if (this.assetWork?.id === kitId) return this.assetWork.promise;
+    const generation = ++this.assetGeneration;
+    const promise = Promise.allSettled([
+      this.load(),
+      this.lighting.load(),
+      // Start the one intended sleeve alongside shared assets, not a second
+      // network round trip after the EXR and geometry have finished loading.
+      this.texture(`covers/${kitId}.png`),
+    ] as const)
+      .then(([model, lighting, cover]) => {
+        if (
+          model.status === "rejected" ||
+          lighting.status === "rejected" ||
+          cover.status === "rejected"
+        ) {
+          if (cover.status === "fulfilled") cover.value.dispose();
+          const failed = [model, lighting, cover].find((result) => result.status === "rejected");
+          throw failed?.reason;
+        }
+        if (generation !== this.assetGeneration) {
+          cover.value.dispose();
+          return false;
+        }
+        if (!this.sleeve) {
+          cover.value.dispose();
+          throw new Error("The music kit sleeve could not load.");
+        }
+        this.sleeve.map = cover.value;
+        this.sleeve.needsUpdate = true;
+        this.cover?.dispose();
+        this.cover = cover.value;
+        this.coverId = kitId;
+        this.lighting.configureBackgroundCamera(this.backgroundCamera);
+        this.backgroundReady = true;
+        return true;
+      })
+      .finally(() => {
+        if (this.assetWork?.promise === promise) this.assetWork = undefined;
+      });
+    this.assetWork = { id: kitId, promise };
+    return promise;
+  }
+
+  /** Prepare only the intended kit while the inventory remains usable.
+   * Hover requests serialize and obsolete queued intentions never fetch art. */
+  prepare(renderer: T.WebGLRenderer, kitId: string) {
+    if (this.open && this.requestedKitId !== kitId) return Promise.resolve();
+    if (this.preparation?.id === kitId && (this.preparation.pending || this.coverId === kitId))
+      return this.preparation.promise;
+    const previous = this.preparation?.promise;
+    const generation = ++this.preparationGeneration;
+    const promise = (async () => {
+      if (previous) await previous.catch(() => {});
+      if (generation !== this.preparationGeneration || (this.open && this.requestedKitId !== kitId))
+        return;
+      const [ready] = await Promise.all([
+        this.ensureKit(kitId),
+        prepareInspectionLighting(renderer),
+      ]);
+      if (!ready || generation !== this.preparationGeneration) return;
+      this.lighting.update(this.pivot, undefined, renderer);
+      await yieldLoadingWork();
+      const programs = new Set(renderer.info.programs ?? []);
+      const toneMapping = renderer.toneMapping;
+      let compiled: Promise<unknown>;
+      try {
+        renderer.toneMapping = T.CustomToneMapping;
+        compiled = renderer.compileAsync(this.scene, this.camera);
+      } finally {
+        renderer.toneMapping = toneMapping;
+      }
+      await compiled;
+      for (const program of renderer.info.programs ?? [])
+        if (!programs.has(program)) program.getUniforms();
+      const textures = new Set<T.Texture>();
+      this.pivot.traverse((object) => {
+        if (!(object instanceof T.Mesh)) return;
+        for (const material of Array.isArray(object.material) ? object.material : [object.material])
+          for (const value of Object.values(material))
+            if (value instanceof T.Texture) textures.add(value);
+      });
+      for (const texture of textures) {
+        renderer.initTexture(texture);
+        await yieldLoadingWork();
+      }
+    })()
+      .catch((error: unknown) => {
+        if (this.preparation?.promise === promise) this.preparation = undefined;
+        throw error;
+      })
+      .finally(() => {
+        if (this.preparation?.promise === promise) this.preparation.pending = false;
+      });
+    this.preparation = { id: kitId, promise, pending: true };
+    return promise;
+  }
+
   async show(kitId: string) {
     const generation = ++this.generation;
     this.open = true;
-    this.backdrop.invalidate();
+    this.requestedKitId = kitId;
     this.reset();
     this.stage.dataset.loading = "true";
     delete this.stage.dataset.kit;
-    await Promise.all([this.load(), this.lighting.load()]);
-    if (generation !== this.generation) return;
-    this.lighting.configureBackgroundCamera(this.backgroundCamera);
+    const ready = await this.ensureKit(kitId);
+    if (!ready || generation !== this.generation) return;
     this.backdrop.invalidate();
-    const cover = await this.texture(`covers/${kitId}.png`);
-    if (generation !== this.generation) {
-      cover.dispose();
-      return;
-    }
-    if (!this.sleeve) {
-      cover.dispose();
-      throw new Error("The music kit sleeve could not load.");
-    }
-    this.sleeve.map = cover;
-    this.sleeve.needsUpdate = true;
-    this.cover?.dispose();
-    this.cover = cover;
     this.stage.dataset.kit = kitId;
     delete this.stage.dataset.loading;
   }
@@ -272,7 +372,7 @@ export class MusicKitPreview {
 
   render(renderer: T.WebGLRenderer, capture?: () => void, environment?: T.Texture, dt = 0) {
     if (!this.open || !this.stage.checkVisibility()) return false;
-    if (!this.stage.dataset.kit) {
+    if (!this.stage.dataset.kit && !this.backgroundReady) {
       drawInspectionLoading(renderer);
       return true;
     }

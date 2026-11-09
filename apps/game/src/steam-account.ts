@@ -382,7 +382,7 @@ export function setupSteamAccount() {
         status.textContent =
           result === "failed" || result === "cancelled"
             ? "Steam sign-in was cancelled or could not be verified. Please try again."
-            : "Sign in to sync your Steam name, avatar and public CS2 inventory.";
+            : "";
     } catch (error) {
       status.textContent =
         error instanceof Error ? error.message : "Steam is unavailable. Local play is ready.";

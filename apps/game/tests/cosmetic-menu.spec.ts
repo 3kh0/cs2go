@@ -144,7 +144,7 @@ test("inventory equips gloves per team, previews agent animations and restores d
   await page.locator("#cosmetic-weapons").click();
   await expect(page.locator("#skin-menu")).toBeVisible();
   await expect(page.locator("#cosmetic-menu")).toBeHidden();
-  await page.locator("#close-skins").click();
+  await page.keyboard.press("Escape");
   await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.locator('#team-select [data-team="ct"]').click();

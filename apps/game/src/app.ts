@@ -360,7 +360,7 @@ document.addEventListener("keydown", (event) => {
   }
   if (event.code === "Escape" && !el("skin-menu").classList.contains("hidden")) {
     event.preventDefault();
-    el("close-skins").click();
+    el("skin-menu").classList.add("hidden");
     return;
   }
   if (event.code === "Escape" && !el("loadout").classList.contains("hidden")) {

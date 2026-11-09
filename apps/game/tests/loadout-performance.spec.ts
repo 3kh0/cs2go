@@ -34,7 +34,7 @@ test("loadout opens with owned cosmetics only and independent default knives", a
   await page.locator("#weapon-action-customize").click();
   await page.locator("#apply-skin").click();
   await expect(page.locator("#add-inventory-item")).toHaveText("＋ ADD ITEM");
-  await page.locator("#close-skins").click();
+  await page.keyboard.press("Escape");
   await page.locator("#inventory-button").click();
   await page.locator("#loadout-category").selectOption("Knives");
   await expect(page.locator('[data-cosmetic-choice="4"]')).toBeVisible();

@@ -36,7 +36,7 @@ test("Inventory knife selection reaches the authoritative private match", async 
     )
     .toEqual({ knife: 55, weapon: 55 });
   await expect(page.locator("#gun-name")).toHaveText("Kukri Knife");
-  await page.locator("#close-skins").click();
+  await page.keyboard.press("Escape");
   expect(errors).toEqual([]);
 });
 
@@ -71,7 +71,7 @@ test("all CS2 knives equip through inventory and render their native action vari
     ).toBeGreaterThan(0);
   }
   await page.screenshot({ path: "artifacts/all-knives-inventory.png" });
-  await page.locator("#close-skins").click();
+  await page.keyboard.press("Escape");
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });

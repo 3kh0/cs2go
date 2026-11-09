@@ -79,6 +79,7 @@ test("inventory shows full-color defaults and knife finishes paint held and prev
   await page.screenshot({ path: "artifacts/inventory-default-ssg08.png" });
   await page.locator("#close-item-details").click();
   await page.locator("#inventory-weapon").selectOption("42");
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("Case Hardened");
   await page.locator('[data-item-weapon="42"][data-skin="508_44"]').click();
   await page.locator("#weapon-action-customize").click();
@@ -89,7 +90,8 @@ test("inventory shows full-color defaults and knife finishes paint held and prev
   await page.locator("#equip-knife").click();
   await page.screenshot({ path: "artifacts/inventory-m9-finishes.png" });
   await page.locator("#close-item-details").click();
-  await page.locator("#close-skins").click();
+  await page.locator("#inventory-everything").click();
+  await page.keyboard.press("Escape");
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");
   });

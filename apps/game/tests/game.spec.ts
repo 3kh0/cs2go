@@ -2196,7 +2196,7 @@ test("default Butterfly and Karambit share knife slot and play source actions", 
     await page.locator("#pause-skins").click();
     await page.locator(`[data-skin-weapon="${index}"]`).click();
     await page.locator("#equip-knife").click();
-    await page.locator("#close-skins").click();
+    await page.keyboard.press("Escape");
     await page.locator("#resume").click();
     await page.waitForFunction(() => window.__game.locked);
     await page.evaluate(() => {

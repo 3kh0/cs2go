@@ -58,6 +58,7 @@ test("full-page native settings and saved showcase weapons share equipped legacy
     const beforeFinish = [...hdRequests];
     await page.locator("#skins-button").click();
     await page.locator("#inventory-weapon").selectOption("0");
+    await page.locator("#inventory-search").click();
     await page.locator("#skin-search").fill("");
     await page.locator(`[data-skin="${id}"]`).click();
     await page.locator("#weapon-action-customize").click();
@@ -68,7 +69,8 @@ test("full-page native settings and saved showcase weapons share equipped legacy
     await page.locator("#apply-skin").click();
     await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 30_000 });
     await page.locator("#close-item-details").click();
-    await page.locator("#close-skins").click();
+    await page.locator("#inventory-everything").click();
+    await page.keyboard.press("Escape");
     const readProof = () =>
       page.evaluate(async (id) => {
         const scene = window.__game.homeScene as unknown as {

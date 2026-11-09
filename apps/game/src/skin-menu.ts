@@ -1,5 +1,6 @@
 import type { Game } from "./game";
 import finishStyles from "./data/paint-finish-styles.json";
+import { setupInventoryTooltip } from "./inventory-tooltip";
 import { equippedKnives } from "./equipped-knives";
 import { wearCondition } from "./cosmetic-wear";
 import "./inventory-page.css";
@@ -19,13 +20,16 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
   const overlay = document.createElement("div");
   overlay.id = "skin-menu";
   overlay.className = "overlay hidden inventory-page";
-  overlay.innerHTML = `<section class="skin-dialog"><div class="dialog-heading"><div><div class="eyebrow">YOUR LOADOUT</div><h2>INVENTORY</h2><button id="add-inventory-item" type="button">＋ ADD ITEM</button></div><button class="close" id="close-skins" aria-label="Close skins">×</button></div><div class="inventory-toolbar"><label><img class="menu-control-icon" src="${assetUrl("/icons/menu/filter.svg")}" alt="Filter"> <select id="inventory-weapon"><option value="all">All equipment</option><option value="knives">Knives</option>${weapons.map((name, id) => `<option value="${id}">${name}</option>`).join("")}</select></label><span id="inventory-count"></span><label><img class="menu-control-icon" src="${assetUrl("/icons/menu/sort.svg")}" alt="Sort"> <select id="inventory-sort"><option value="name">Name</option><option value="weapon">Weapon</option></select></label></div><div class="skin-layout"><div class="skin-browser"><label class="skin-search">Find a finish<input id="skin-search" type="search" placeholder="Search skins..." autocomplete="off"></label><div id="skin-grid" role="group" aria-label="Finishes"></div></div><form id="skin-form" class="skin-details" role="dialog" aria-modal="true" aria-labelledby="skin-title"><h3 id="skin-title">Default</h3><p id="weapon-inspect-collection"></p><div id="weapon-inspect-stage" tabindex="0" role="img" aria-label="3D weapon. Drag to rotate; scroll to zoom; arrow keys rotate; Home resets."><span id="weapon-inspect-loading" role="status"></span></div><div class="weapon-inspect-caption"><div class="eyebrow" id="skin-rarity">DEFAULT FINISH</div><div id="weapon-inspect-description" class="weapon-inspect-description"></div><p id="skin-status" role="status" aria-live="polite"></p></div><footer class="weapon-inspect-footer"><div class="weapon-inspect-info"><button id="weapon-inspect-info" type="button" aria-label="Item information" aria-describedby="weapon-inspect-certificate" aria-expanded="false"><img src="${assetUrl("/ui/inspect/info.svg")}" alt=""></button><div id="weapon-inspect-certificate" role="tooltip" hidden></div></div><div class="weapon-inspect-customizer"><button id="weapon-inspect-customize" type="button" aria-expanded="false" aria-controls="weapon-inspect-options">CUSTOMIZE</button><div id="weapon-inspect-options" hidden><label for="skin-wear">Wear <output id="skin-condition">Factory New</output></label><input id="skin-wear" type="range" min="0" max="1" step="0.000001"/><label class="skin-number">Wear float<input id="skin-float" type="number" min="0" max="1" step="0.000001" required/></label><label class="skin-number">Paint seed<input id="skin-seed" type="number" min="0" max="1000" step="1" required/></label><button type="button" id="random-seed" class="secondary">RANDOMIZE SEED</button><p class="hint">The same seed keeps the same pattern. Some finishes have fixed artwork; their seed changes wear placement.</p><button type="submit" class="deploy" id="apply-skin">APPLY FINISH</button><button type="button" id="equip-knife" class="secondary hidden">EQUIP KNIFE</button></div></div><button type="button" id="close-item-details" aria-label="Close item details">CLOSE</button></footer></form><div id="weapon-inspect-context" role="menu" aria-label="Item actions" hidden><button id="weapon-action-inspect" type="button" role="menuitem">Inspect</button><button id="weapon-action-customize" type="button" role="menuitem">Customize</button><button id="weapon-action-equip" type="button" role="menuitem">Equip Finish</button></div></div></section>`;
+  overlay.innerHTML = `<section class="skin-dialog"><div class="dialog-heading inventory-actions"><div><div class="eyebrow">YOUR LOADOUT</div><h2>INVENTORY</h2><button id="add-inventory-item" type="button">＋ ADD ITEM</button></div></div><div class="inventory-toolbar"><label><img class="menu-control-icon" src="${assetUrl("/icons/menu/filter.svg")}" alt="Filter"> <select id="inventory-weapon"><option value="all">All equipment</option><option value="knives">Knives</option>${weapons.map((name, id) => `<option value="${id}">${name}</option>`).join("")}</select></label><span id="inventory-count"></span><label><img class="menu-control-icon" src="${assetUrl("/icons/menu/sort.svg")}" alt="Sort"> <select id="inventory-sort"><option value="name">Name</option><option value="weapon">Weapon</option></select></label></div><div class="skin-layout"><div class="skin-browser"><label class="skin-search" hidden><span class="visually-hidden">Search inventory</span><input id="skin-search" type="search" placeholder="Search inventory…" autocomplete="off"></label><div id="skin-grid" role="group" aria-label="Finishes"></div></div><form id="skin-form" class="skin-details" role="dialog" aria-modal="true" aria-labelledby="skin-title"><h3 id="skin-title">Default</h3><p id="weapon-inspect-collection"></p><div id="weapon-inspect-stage" tabindex="0" role="img" aria-label="3D weapon. Drag to rotate; scroll to zoom; arrow keys rotate; Home resets."><span id="weapon-inspect-loading" role="status"></span></div><div class="weapon-inspect-caption"><div class="eyebrow" id="skin-rarity">DEFAULT FINISH</div><div id="weapon-inspect-description" class="weapon-inspect-description"></div><p id="skin-status" role="status" aria-live="polite"></p></div><footer class="weapon-inspect-footer"><div class="weapon-inspect-info"><button id="weapon-inspect-info" type="button" aria-label="Item information" aria-describedby="weapon-inspect-certificate" aria-expanded="false"><img src="${assetUrl("/ui/inspect/info.svg")}" alt=""></button><div id="weapon-inspect-certificate" role="tooltip" hidden></div></div><div class="weapon-inspect-customizer"><button id="weapon-inspect-customize" type="button" aria-expanded="false" aria-controls="weapon-inspect-options" aria-label="Item actions" title="Item actions"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="19" r="1.7"/></svg></button><div id="weapon-inspect-options" hidden><div id="weapon-inspect-parameters"><label for="skin-wear">Wear <output id="skin-condition">Factory New</output></label><input id="skin-wear" type="range" min="0" max="1" step="0.000001"/><label class="skin-number">Wear rating<input id="skin-float" type="number" min="0" max="1" step="0.000001" required/></label><label class="skin-number">Pattern template<input id="skin-seed" type="number" min="0" max="1000" step="1" required/></label><button type="button" id="random-seed" class="secondary">RANDOMIZE PATTERN</button></div><button type="submit" class="deploy" id="apply-skin">APPLY FINISH</button><button type="button" id="equip-knife" class="secondary hidden">EQUIP KNIFE</button></div></div><button type="button" id="close-item-details" aria-label="Close item details">CLOSE</button></footer></form><div id="weapon-inspect-context" role="menu" aria-label="Item actions" hidden><button id="weapon-action-inspect" type="button" role="menuitem">Inspect</button><button id="weapon-action-customize" type="button" role="menuitem">Edit finish…</button><button id="weapon-action-equip" type="button" role="menuitem">Equip Finish</button></div></div></section>`;
   document.getElementById("app")!.append(overlay);
   const sections = document.createElement("nav");
   sections.className = "inventory-sections";
   sections.setAttribute("aria-label", "Inventory category");
-  sections.innerHTML = `<button type="button" id="inventory-search" aria-label="Search inventory"><img src="${assetUrl("/icons/menu/search.svg")}" alt=""></button><button type="button" aria-current="page">EVERYTHING</button><button type="button" id="inventory-agents">AGENTS</button><button type="button" id="inventory-gloves">GLOVES</button><button type="button" id="inventory-music-kits">MUSIC KITS</button>`;
+  sections.innerHTML = `<button type="button" id="inventory-search" aria-label="Search inventory"><img src="${assetUrl("/icons/menu/search.svg")}" alt=""></button><button type="button" id="inventory-everything" aria-current="page">EVERYTHING</button><button type="button" id="inventory-agents">AGENTS</button><button type="button" id="inventory-gloves">GLOVES</button><button type="button" id="inventory-music-kits">MUSIC KITS</button>`;
   overlay.querySelector(".dialog-heading")!.after(sections);
+  overlay.querySelector(".inventory-toolbar")!.append(overlay.querySelector(".dialog-heading")!);
+  overlay.querySelector("#inventory-sort")!.closest("label")!.classList.add("inventory-sort");
+  setupInventoryTooltip(overlay);
   for (const category of ["agents", "gloves"])
     sections.querySelector<HTMLButtonElement>(`#inventory-${category}`)!.onclick = () => {
       overlay.classList.add("hidden");
@@ -39,7 +43,29 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
     seed = get<HTMLInputElement>("skin-seed"),
     status = get<HTMLParagraphElement>("skin-status"),
     apply = get<HTMLButtonElement>("apply-skin");
-  get("inventory-search").onclick = () => search.focus();
+  function prewarmInspection() {
+    return import("./inspection-lighting").then(({ prepareInspectionLighting }) =>
+      prepareInspectionLighting(getGame().renderer),
+    );
+  }
+  function setSearch(open: boolean) {
+    overlay.dataset.inventorySearch = String(open);
+    search.closest<HTMLElement>(".skin-search")!.hidden = !open;
+    for (const [id, active] of [
+      ["inventory-search", open],
+      ["inventory-everything", !open],
+    ] as const) {
+      if (active) get(id).setAttribute("aria-current", "page");
+      else get(id).removeAttribute("aria-current");
+    }
+    if (open) search.focus();
+    else {
+      search.value = "";
+      list();
+    }
+  }
+  get("inventory-search").onclick = () => setSearch(true);
+  get("inventory-everything").onclick = () => setSearch(false);
   apply.textContent = "EQUIP FINISH";
   let catalog: Skin[] = [],
     weapon = 0,
@@ -206,11 +232,23 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
   }
   let previewLoad: Promise<void> | undefined;
   let previewGeneration = 0;
+  let inspectionIntent = 0;
+  function ensurePreview() {
+    return (previewLoad ??= import("./weapon-inspect-preview")
+      .then(({ WeaponInspectPreview }) => {
+        getGame().weaponInspectPreview = new WeaponInspectPreview(get("weapon-inspect-stage"));
+      })
+      .catch((error: unknown) => {
+        previewLoad = undefined;
+        throw error;
+      }));
+  }
   const closeOptions = () => {
     options.hidden = true;
     customize.setAttribute("aria-expanded", "false");
   };
   function closeInspect() {
+    inspectionIntent++;
     previewGeneration++;
     textGeneration++;
     delete overlay.dataset.inspect;
@@ -227,15 +265,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
     certificateFields();
     get("weapon-inspect-loading").textContent = "Loading item…";
     try {
-      previewLoad ??= import("./weapon-inspect-preview")
-        .then(({ WeaponInspectPreview }) => {
-          getGame().weaponInspectPreview = new WeaponInspectPreview(get("weapon-inspect-stage"));
-        })
-        .catch((error: unknown) => {
-          previewLoad = undefined;
-          throw error;
-        });
-      await previewLoad;
+      await ensurePreview();
       if (
         version !== previewGeneration ||
         !overlay.dataset.inspect ||
@@ -250,7 +280,31 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
           "This item could not load. Close and inspect again to retry.";
     }
   }
-  function inspectSelected(edit = false) {
+  async function inspectSelected(edit = false) {
+    const intent = ++inspectionIntent;
+    const selectedWeapon = weapon;
+    const selectedFinish = draft.id;
+    const selectedChoice = { ...draft };
+    context.hidden = true;
+    status.textContent = "Preparing inspection…";
+    try {
+      await Promise.all([prewarmInspection(), ensurePreview()]);
+      await getGame().weaponInspectPreview!.prepare(
+        getGame().renderer,
+        selectedWeapon,
+        selectedChoice,
+      );
+    } catch {
+      status.textContent = "Inspection could not load. Please try again.";
+      return;
+    }
+    if (
+      intent !== inspectionIntent ||
+      overlay.classList.contains("hidden") ||
+      weapon !== selectedWeapon ||
+      draft.id !== selectedFinish
+    )
+      return;
     context.hidden = true;
     overlay.dataset.inspect = "true";
     status.textContent = "";
@@ -269,8 +323,12 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
     options.hidden = !opening;
     customize.setAttribute("aria-expanded", String(opening));
   };
-  get("weapon-action-inspect").onclick = () => inspectSelected();
-  get("weapon-action-customize").onclick = () => inspectSelected(true);
+  get("weapon-action-inspect").onclick = () => {
+    void inspectSelected();
+  };
+  get("weapon-action-customize").onclick = () => {
+    void inspectSelected(true);
+  };
   get("weapon-action-equip").onclick = () => {
     context.hidden = true;
     get<HTMLFormElement>("skin-form").requestSubmit();
@@ -287,6 +345,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
       overlay.classList.contains("hidden") ||
       overlay.dataset.musicKits
     ) {
+      ++inspectionIntent;
       ++previewGeneration;
       getGame().weaponInspectPreview?.hide();
       closeInfo();
@@ -351,6 +410,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
     const skin = catalog.find((s) => s.id === draft.id && s.weapon === weapon);
     get("skin-title").textContent = weapons[weapon] + (skin ? ` | ${skin.name}` : "");
     get("skin-rarity").textContent = skin?.rarity ?? "Default finish";
+    get("weapon-inspect-parameters").hidden = !skin;
     get("skin-title").style.setProperty(
       "--item-rarity",
       draft.id ? skinRarityColor(draft.id) || "#b9bdc0" : "#b9bdc0",
@@ -433,6 +493,10 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
       button.type = "button";
       button.dataset.skin = item.id;
       button.dataset.itemWeapon = String(item.weapon);
+      const tooltipChoice =
+        items.find((entry) => entry.weapon === item.weapon && entry.id === item.id) ??
+        (skinChoices[item.weapon].id === item.id ? skinChoices[item.weapon] : undefined);
+      if (tooltipChoice) button.dataset.wear = String(tooltipChoice.wear);
       button.disabled = busy;
       button.style.setProperty(
         "--item-rarity",
@@ -454,6 +518,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
       finish.textContent = item.name;
       button.append(art, name, finish);
       const choose = (event?: MouseEvent) => {
+        inspectionIntent++;
         weapon = item.weapon;
         const owned = items.find((entry) => entry.weapon === weapon && entry.id === item.id);
         draft =
@@ -557,7 +622,6 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
       refresh(false);
     }
   };
-  get("close-skins").onclick = () => overlay.classList.add("hidden");
   overlay.addEventListener("keydown", (event) => {
     if (event.code === "Escape") {
       event.stopPropagation();
@@ -565,6 +629,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
       else if (!context.hidden) context.hidden = true;
       else if (!options.hidden) closeOptions();
       else if (overlay.dataset.inspect) closeInspect();
+      else if (overlay.dataset.inventorySearch === "true") setSearch(false);
       else overlay.classList.add("hidden");
     }
   });
@@ -578,13 +643,14 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
   for (const id of ["skins-button", "pause-skins"])
     get(id).onclick = async () => {
       overlay.classList.remove("hidden");
+      void prewarmInspection().catch(() => {});
       status.textContent = "Loading finishes...";
       try {
         if (adding || items.some((item) => item.id)) await loadCatalog();
         draft = { ...skinChoices[weapon] };
         status.textContent = "";
+        setSearch(false);
         refresh();
-        search.focus();
       } catch {
         status.textContent = "Skin catalog could not load. Close and reopen to retry.";
       }

@@ -43,7 +43,7 @@ export function setupCosmeticMenu(game: Game) {
   overlay.id = "cosmetic-menu";
   overlay.className = "overlay hidden";
   overlay.innerHTML = `<section class="cosmetic-dialog" role="dialog" aria-modal="true" aria-labelledby="cosmetic-title">
-    <header><div><div class="eyebrow">YOUR LOADOUT</div><h2 id="cosmetic-title">AGENTS</h2></div><button id="close-cosmetics" class="close" aria-label="Close inventory">×</button></header>
+    <header><div><div class="eyebrow">YOUR LOADOUT</div><h2 id="cosmetic-title">AGENTS</h2></div></header>
     <nav class="inventory-sections" aria-label="Inventory category"><button type="button" id="cosmetic-weapons">WEAPONS</button><button type="button" data-cosmetic-category="agents">AGENTS</button><button type="button" data-cosmetic-category="gloves">GLOVES</button><button type="button" id="cosmetic-music-kits">MUSIC KITS</button></nav>
     <aside class="cosmetic-browser"><label>Team<select id="cosmetic-team"><option value="ct">Counter-Terrorists</option><option value="t">Terrorists</option></select></label><label>Find an item<input id="cosmetic-search" type="search" placeholder="Search inventory..." autocomplete="off"></label><div id="cosmetic-items" class="cosmetic-items" role="group" aria-label="Available cosmetics"></div></aside>
     <div class="cosmetic-preview"><img id="cosmetic-preview-image" alt="" hidden><p id="cosmetic-preview-caption"></p></div>
@@ -246,7 +246,7 @@ export function setupCosmeticMenu(game: Game) {
     items.replaceChildren();
     loading = true;
     detail();
-    get("close-cosmetics").focus();
+    get("cosmetic-weapons").focus();
     try {
       if (category === "agents") {
         const [catalog, clips] = await Promise.all([loadAgentCatalog(), loadAgentAnimations()]);
@@ -330,7 +330,6 @@ export function setupCosmeticMenu(game: Game) {
   get("reset-cosmetic").onclick = () => {
     void equip(true);
   };
-  get("close-cosmetics").onclick = close;
   get("cosmetic-weapons").onclick = () => {
     close();
     get("skin-menu").classList.remove("hidden");

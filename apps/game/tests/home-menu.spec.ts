@@ -105,7 +105,7 @@ test("native homepage presents both agents, local navigation and a working match
   await page.locator("#home-button").click();
   await page.locator("#skins-button").click();
   await expect(page.locator("#skin-menu")).toBeVisible();
-  await page.locator("#close-skins").click();
+  await page.keyboard.press("Escape");
   await page.locator("#store-button").click();
   await expect(page.locator("#home-panel-title")).toHaveText("Store unavailable");
   await expect(page.locator("#home-panel-content p")).toHaveText(

@@ -6,7 +6,12 @@ import { bindWeaponInstance, type SkinChoice } from "./skins";
 import { isKnife } from "./physics";
 import { MenuBackdrop, inspectionBackdropOptions } from "./menu-backdrop";
 import { previewBounds } from "./preview-framing";
-import { InspectionLighting, drawInspectionLoading } from "./inspection-lighting";
+import {
+  InspectionLighting,
+  drawInspectionLoading,
+  prepareInspectionLighting,
+} from "./inspection-lighting";
+import { yieldLoadingWork } from "./loading";
 import nativeCameras from "./data/weapon-inspect-cameras.json";
 
 /** A lazy inventory inspection, drawn by the game's existing renderer and clock. */
@@ -27,6 +32,10 @@ export class WeaponInspectPreview {
   private projectedCorner = new T.Vector3();
   private requestedZoom = 1;
   private nativeDistance = 0;
+  private restCameraDistance = 0;
+  private introDistanceRatio = 1;
+  private introRatio = 1;
+  private introElapsed = nativeCameras.intro.holdSeconds + nativeCameras.intro.transitionSeconds;
   private baseZoom = 1;
   private visualVersion = -1;
   private viewport = new T.Vector4();
@@ -91,6 +100,22 @@ export class WeaponInspectPreview {
     );
     this.syncRotation();
   }
+  private updateIntro(dt: number) {
+    const { holdSeconds, transitionSeconds } = nativeCameras.intro;
+    const end = holdSeconds + transitionSeconds;
+    this.introElapsed = this.reducedMotion.matches
+      ? end
+      : Math.min(end, this.introElapsed + Math.max(0, Math.min(dt, 0.1)));
+    const progress = T.MathUtils.clamp((this.introElapsed - holdSeconds) / transitionSeconds, 0, 1);
+    this.introRatio = T.MathUtils.lerp(this.introDistanceRatio, 1, progress);
+    this.stage.dataset.intro =
+      this.introElapsed >= end
+        ? "settled"
+        : this.introElapsed < holdSeconds
+          ? "hold"
+          : "transition";
+    this.stage.dataset.introProgress = String(progress);
+  }
   private wheel = (event: WheelEvent) => {
     if (!this.open) return;
     event.preventDefault();
@@ -152,16 +177,7 @@ export class WeaponInspectPreview {
     this.syncRotation();
   };
 
-  async show(weapon: number, choice: SkinChoice) {
-    const generation = ++this.generation;
-    const wasOpen = this.open;
-    this.open = true;
-    if (!wasOpen) {
-      this.backdrop.invalidate();
-      this.reset();
-    }
-    await this.lighting.load();
-    if (generation !== this.generation) return;
+  private setModel(weapon: number, choice: SkinChoice) {
     this.lighting.setProfile(isKnife(weapon) ? "knife" : "weapon");
     if (!this.model || this.weapon !== weapon) {
       if (this.model) disposeWorldGun(this.model);
@@ -178,7 +194,11 @@ export class WeaponInspectPreview {
       // Native models use different authored axes. Keep their longest axis
       // horizontal in the inspection view, then center the visible geometry.
       const size = previewBounds([model]).getSize(new T.Vector3());
-      if (size.z > size.x && size.z >= size.y) model.rotation.y = Math.PI / 2;
+      if (weapon === 37 || weapon === 38) {
+        // Native default knives have their thin axis on X and blade length on Y.
+        // Face the broad Y/Z side toward the camera before laying the blade flat.
+        model.rotation.set(0, Math.PI / 2, -Math.PI / 2, "ZYX");
+      } else if (size.z > size.x && size.z >= size.y) model.rotation.y = Math.PI / 2;
       else if (size.y > size.x) model.rotation.z = -Math.PI / 2;
       model.updateMatrixWorld(true);
       const bounds = previewBounds([model]);
@@ -190,6 +210,7 @@ export class WeaponInspectPreview {
       this.lighting.configureBackgroundCamera(this.backgroundCamera, camera.origin);
       this.backdrop.invalidate();
       this.camera.fov = camera.verticalFov;
+      this.introDistanceRatio = camera.introDistanceSourceUnits / camera.distanceSourceUnits;
       // Baked native world guns and imported knife geometry are metre-space.
       // Undo only our showcase normalization, retaining the native item's
       // calibrated preview-panel scale and selected de_dust2_vanity camera distance.
@@ -215,6 +236,62 @@ export class WeaponInspectPreview {
       weapon,
       skin: Object.freeze({ ...choice }),
     });
+  }
+  /** Warm only the selected item while its inventory remains visible. No open
+   * state or intro clock starts until show() commits the inspection. */
+  async prepare(renderer: T.WebGLRenderer, weapon: number, choice: SkinChoice) {
+    const generation = ++this.generation;
+    await Promise.all([this.lighting.load(), prepareInspectionLighting(renderer)]);
+    if (generation !== this.generation) return;
+    this.setModel(weapon, choice);
+    this.lighting.update(this.model!, undefined, renderer);
+    this.updateFraming();
+    await yieldLoadingWork();
+    if (generation !== this.generation) return;
+    const programs = new Set(renderer.info.programs ?? []);
+    const toneMapping = renderer.toneMapping;
+    let compiled: Promise<unknown>;
+    try {
+      renderer.toneMapping = T.CustomToneMapping;
+      compiled = renderer.compileAsync(this.scene, this.camera);
+    } finally {
+      renderer.toneMapping = toneMapping;
+    }
+    await compiled;
+    if (generation !== this.generation) return;
+    for (const program of renderer.info.programs ?? [])
+      if (!programs.has(program)) program.getUniforms();
+    const textures = new Set<T.Texture>();
+    this.model!.traverse((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      for (const material of Array.isArray(object.material) ? object.material : [object.material])
+        for (const value of Object.values(material))
+          if (value instanceof T.Texture) textures.add(value);
+    });
+    for (const texture of textures) {
+      if (generation !== this.generation) return;
+      renderer.initTexture(texture);
+      await yieldLoadingWork();
+    }
+  }
+  async show(weapon: number, choice: SkinChoice) {
+    const generation = ++this.generation;
+    const wasOpen = this.open;
+    const fresh = !wasOpen || this.weapon !== weapon;
+    this.open = true;
+    if (!wasOpen) {
+      this.backdrop.invalidate();
+      this.reset();
+    }
+    await this.lighting.load();
+    if (generation !== this.generation) return;
+    this.setModel(weapon, choice);
+    if (fresh) {
+      this.introElapsed = 0;
+      this.introRatio = this.introDistanceRatio;
+      this.stage.dataset.intro = this.reducedMotion.matches ? "settled" : "hold";
+      this.stage.dataset.introProgress = "0";
+    }
     this.stage.dataset.weapon = String(weapon);
     this.stage.dataset.skin = choice.id;
     this.stage.dataset.wear = String(choice.wear);
@@ -225,7 +302,9 @@ export class WeaponInspectPreview {
     const version = Number(this.model.userData.skinVisualVersion ?? 0);
     if (version === this.visualVersion) return;
     this.visualVersion = version;
-    this.pivot.updateWorldMatrix(true, true);
+    // Attached SkinnedMesh updates bindMatrixInverse in updateMatrixWorld, not
+    // updateWorldMatrix. Refresh it after normalization before measuring bones.
+    this.pivot.updateMatrixWorld(true);
     const inverse = this.pivot.matrixWorld.clone().invert();
     const matrix = new T.Matrix4();
     const bounds = new T.Box3();
@@ -287,6 +366,10 @@ export class WeaponInspectPreview {
   hide() {
     ++this.generation;
     this.open = false;
+    this.introElapsed = nativeCameras.intro.holdSeconds + nativeCameras.intro.transitionSeconds;
+    this.introRatio = 1;
+    delete this.stage.dataset.intro;
+    delete this.stage.dataset.introProgress;
     if (this.dragging && this.stage.hasPointerCapture(this.dragging.id))
       this.stage.releasePointerCapture(this.dragging.id);
     this.dragging = undefined;
@@ -305,6 +388,7 @@ export class WeaponInspectPreview {
       return true;
     }
     this.updateIdle(dt);
+    this.updateIntro(dt);
     if (this.model) this.lighting.update(this.model, environment, renderer);
     this.updateFraming();
     const rect = this.stage.getBoundingClientRect();
@@ -337,6 +421,7 @@ export class WeaponInspectPreview {
         const halfFov = T.MathUtils.degToRad(this.camera.fov / 2);
         const halfAngle = Math.atan(Math.tan(halfFov) * Math.min(1, aspect));
         const distance = (this.radius * 1.05) / Math.sin(halfAngle);
+        this.restCameraDistance = distance;
         this.camera.position.set(0, 0, distance);
         this.baseZoom = this.nativeDistance > 0 ? distance / this.nativeDistance : 1;
         this.stage.dataset.baseZoom = String(this.baseZoom);
@@ -346,6 +431,8 @@ export class WeaponInspectPreview {
         this.camera.updateMatrixWorld(true);
         this.fittedAspect = aspect;
       }
+      this.camera.position.z = this.restCameraDistance * this.introRatio;
+      this.camera.updateMatrixWorld(true);
       this.fitZoom();
       renderer.autoClear = false;
       renderer.toneMapping = T.CustomToneMapping;

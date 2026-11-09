@@ -55,6 +55,7 @@ test("texture quality follows cached weapon switches and newly applied skin maps
     .toBe(Math.max(1, Math.floor(fullWidth / 4)));
   await page.locator("#skins-button").click();
   await page.locator('[data-skin-weapon="0"]').click();
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("Case Hardened");
   await page.locator('[data-skin="7_44"]').click();
   await page.locator("#apply-skin").click();

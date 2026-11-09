@@ -37,11 +37,7 @@
   font-size: 12px;
   background: #75955a;
 }
-#skin-menu #close-skins {
-  font-size: 22px;
-  padding: 0 6px;
-  margin-left: 4px;
-}
+
 #skin-menu .inventory-sections {
   display: flex;
   justify-content: center;
@@ -69,7 +65,6 @@
   align-items: center;
   gap: 18px;
   padding: 8px 22px;
-  padding-right: 420px;
 }
 .inventory-toolbar label {
   display: flex;
@@ -203,9 +198,6 @@ body:has(#skin-menu:not(.hidden)) #skins-button {
   #skin-menu #skin-grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 18px 16px;
-  }
-  .inventory-toolbar {
-    padding-right: 180px;
   }
   .inventory-toolbar label:last-child {
     display: none;
@@ -539,15 +531,6 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   color: #fff;
 }
 
-#skin-menu #skin-search {
-  background: #0006;
-  color: #fff;
-  padding-inline: calc(8 * var(--menu-unit));
-}
-#skin-menu #skin-search::placeholder {
-  color: #eee;
-  opacity: 1;
-}
 #skin-menu[data-inspect="true"] #steam-account {
   display: none;
 }
@@ -648,4 +631,129 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
 }
 #skin-menu .weapon-inspect-caption {
   margin-top: auto;
+}
+
+/* Inventory navbar and secondary action row use their own native alignment. */
+#skin-menu .inventory-toolbar {
+  padding: 0 calc(24 * var(--menu-unit));
+  gap: calc(16 * var(--menu-unit));
+  height: calc(48 * var(--menu-unit));
+  min-height: calc(48 * var(--menu-unit));
+  flex-basis: calc(48 * var(--menu-unit));
+}
+#skin-menu .inventory-toolbar .inventory-sort {
+  margin-left: auto;
+}
+#skin-menu .inventory-toolbar .inventory-actions {
+  position: static;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+#skin-menu .inventory-actions > div,
+#skin-menu .steam-account-actions {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--menu-unit));
+}
+#skin-menu .inventory-actions button {
+  height: calc(38 * var(--menu-unit));
+  margin: 0;
+  padding: calc(8 * var(--menu-unit)) calc(16 * var(--menu-unit));
+  font:
+    500 calc(14 * var(--menu-unit)) Stratum2,
+    sans-serif;
+  white-space: nowrap;
+}
+#skin-menu .skin-search[hidden] {
+  display: none;
+}
+#skin-menu .skin-search {
+  padding-block: calc(16 * var(--menu-unit));
+}
+#skin-menu #skin-search {
+  background: transparent;
+  padding-inline: 0;
+  color: #fff;
+  border-bottom-width: calc(2 * var(--menu-unit));
+}
+#skin-menu #skin-search:focus {
+  border-bottom-width: calc(4 * var(--menu-unit));
+}
+#skin-menu #skin-search::placeholder {
+  color: #ddd;
+  opacity: 1;
+}
+#skin-menu #weapon-inspect-customize svg {
+  width: calc(24 * var(--menu-unit));
+  height: calc(24 * var(--menu-unit));
+  fill: currentColor;
+  display: block;
+}
+#skin-menu #weapon-inspect-options {
+  width: calc(288 * var(--menu-unit));
+  padding: calc(12 * var(--menu-unit));
+  border-radius: calc(3 * var(--menu-unit));
+  background: #262626;
+  gap: calc(8 * var(--menu-unit));
+  font:
+    400 calc(14 * var(--menu-unit)) Stratum2,
+    sans-serif;
+}
+#weapon-inspect-parameters[hidden] {
+  display: none;
+}
+#weapon-inspect-parameters {
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--menu-unit));
+}
+#skin-menu #weapon-inspect-options .skin-number {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(12 * var(--menu-unit));
+}
+#skin-menu #weapon-inspect-options input[type="number"] {
+  width: calc(120 * var(--menu-unit));
+  padding: calc(6 * var(--menu-unit)) calc(8 * var(--menu-unit));
+  background: #ffffff0d;
+  border: 1px solid #ffffff30;
+  color: #eee;
+  font: inherit;
+}
+#skin-menu #weapon-inspect-options button {
+  min-height: calc(32 * var(--menu-unit));
+  width: 100%;
+  margin: 0;
+  padding: calc(6 * var(--menu-unit)) calc(10 * var(--menu-unit));
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #ddd;
+  letter-spacing: normal;
+  font:
+    500 calc(14 * var(--menu-unit)) Stratum2,
+    sans-serif;
+  text-align: left;
+}
+#skin-menu #weapon-inspect-options button:is(:hover, :focus-visible) {
+  background: #ffffff12;
+  color: #fff;
+}
+#skin-menu #weapon-inspect-options #apply-skin {
+  border-top: 1px solid #ffffff20;
+  color: #a9dff4;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

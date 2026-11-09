@@ -18,6 +18,7 @@ test("skin catalog customizes wear and seed, persists, and restores default", as
   await page.goto("/");
   await page.waitForFunction(() => window.__game?.assetsReady);
   await page.locator("#skins-button").click();
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("Case Hardened");
   const thumbnail = await page.locator('[data-skin="7_44"] img').elementHandle();
   await page.locator('[data-skin="7_44"]').click();
@@ -40,7 +41,7 @@ test("skin catalog customizes wear and seed, persists, and restores default", as
   await expect(page.locator("#skin-title")).toHaveText("Case Hardened");
   await expect(page.locator("#skin-float")).toHaveValue("0.012345");
   await expect(page.locator("#skin-seed")).toHaveValue("661");
-  await page.locator("#close-skins").click();
+  await page.keyboard.press("Escape");
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
@@ -72,7 +73,7 @@ test("skin catalog customizes wear and seed, persists, and restores default", as
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("cs2go-skins-v1")!)[0].id)).toBe(
     "",
   );
-  await page.locator("#close-skins").click();
+  await page.keyboard.press("Escape");
   await page.locator("#resume").click();
   await page.waitForFunction(() => window.__game.locked);
   const ammo = await page.evaluate(() => window.__game.ammo);
@@ -197,9 +198,11 @@ test("knife finishes persist independently, animate, and restore their defaults"
   ] as const) {
     await page.getByRole("button", { name, exact: true }).click();
     await expect(page.locator("#skin-grid button")).toHaveCount(35);
+    await page.locator("#inventory-search").click();
     await page.locator("#skin-search").fill("Doppler");
     await expect(page.locator("#skin-grid button")).toHaveCount(12);
     await expect(page.locator("#skin-grid")).toContainText("Gamma Doppler | Emerald");
+    await page.locator("#inventory-search").click();
     await page.locator("#skin-search").fill("Case Hardened");
     await page.locator(`[data-skin="${item}_44"]`).click();
     await page.locator("#skin-float").fill("0.123456");
@@ -264,7 +267,7 @@ test("knife finishes persist independently, animate, and restore their defaults"
       return restored;
     }, material);
     expect(restored).toBe(true);
-    await page.locator("#close-skins").click();
+    await page.keyboard.press("Escape");
     await page.locator("#resume").click();
     await page.waitForFunction(() => window.__game.locked);
   }
@@ -408,7 +411,7 @@ test("new gun finishes persist independently and paint both model variants", asy
         `${skin.id} maps on visible ${skin.body} body`,
       )
       .toEqual(targets);
-    await page.locator("#close-skins").click();
+    await page.keyboard.press("Escape");
     await page.locator("#resume").click();
     await page.waitForFunction(() => window.__game.locked && window.__game.drawTime === 0);
     await page.keyboard.press("f");
@@ -442,7 +445,7 @@ test("new gun finishes persist independently and paint both model variants", asy
           skin.weapon,
         ),
       ).toBe("");
-      await page.locator("#close-skins").click();
+      await page.keyboard.press("Escape");
       await page.locator("#resume").click();
       await page.waitForFunction(() => window.__game.locked);
     }

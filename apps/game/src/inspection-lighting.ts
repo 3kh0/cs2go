@@ -1,6 +1,7 @@
 import * as T from "three";
 import { assetFetch, assetUrl } from "./asset-url";
 import { EXRLoader } from "three/addons/loaders/EXRLoader.js";
+import { yieldLoadingWork } from "./loading";
 
 export type InspectionProfile = "weapon" | "knife" | "music";
 
@@ -50,6 +51,48 @@ let profiles: Record<string, NativeProfile> | undefined;
 let nativeEnvironment: T.WebGLRenderTarget | undefined;
 let nativeReflection: T.DataTexture | undefined;
 let nativeLoad: Promise<void> | undefined;
+let nativePreparation: Promise<void> | undefined;
+
+function prepareNativeEnvironment(renderer: T.WebGLRenderer) {
+  if (nativeEnvironment || !nativeReflection) return;
+  const target = renderer.getRenderTarget();
+  const viewport = renderer.getViewport(new T.Vector4());
+  const scissor = renderer.getScissor(new T.Vector4());
+  const scissorTest = renderer.getScissorTest();
+  const autoClear = renderer.autoClear;
+  const toneMapping = renderer.toneMapping;
+  const clearColor = renderer.getClearColor(new T.Color());
+  const clearAlpha = renderer.getClearAlpha();
+  const generator = new T.PMREMGenerator(renderer);
+  try {
+    nativeEnvironment = generator.fromEquirectangular(nativeReflection);
+    nativeReflection.dispose();
+    nativeReflection = undefined;
+  } finally {
+    generator.dispose();
+    renderer.setRenderTarget(target);
+    renderer.setViewport(viewport);
+    renderer.setScissor(scissor);
+    renderer.setScissorTest(scissorTest);
+    renderer.autoClear = autoClear;
+    renderer.toneMapping = toneMapping;
+    renderer.setClearColor(clearColor, clearAlpha);
+  }
+}
+
+/** Start on Inventory/inspection intent, never on startup or for the whole library.
+ * The shared promise includes native decode, PMREM creation and LUT GPU upload. */
+export function prepareInspectionLighting(renderer: T.WebGLRenderer) {
+  return (nativePreparation ??= (async () => {
+    await loadNativeProfile();
+    await yieldLoadingWork();
+    prepareNativeEnvironment(renderer);
+    if (colorCorrection.value) renderer.initTexture(colorCorrection.value);
+  })().catch((error: unknown) => {
+    nativePreparation = undefined;
+    throw error;
+  }));
+}
 function loadNativeProfile() {
   return (nativeLoad ??= Promise.allSettled([
     loadColorCorrection(),
@@ -345,16 +388,7 @@ uniform vec2 inspectionBarnSkirts, inspectionBarnEdge;\n` + shader.fragmentShade
   };
 
   update(root: T.Object3D, environment?: T.Texture | null, renderer?: T.WebGLRenderer) {
-    if (!nativeEnvironment && nativeReflection && renderer) {
-      const generator = new T.PMREMGenerator(renderer);
-      try {
-        nativeEnvironment = generator.fromEquirectangular(nativeReflection);
-      } finally {
-        generator.dispose();
-        nativeReflection.dispose();
-        nativeReflection = undefined;
-      }
-    }
+    if (renderer) prepareNativeEnvironment(renderer);
     this.scene.environment = nativeEnvironment?.texture ?? environment ?? null;
     this.sourceScale.value = this.itemScale / (Math.max(root.scale.x, 0.0001) * 0.0254);
     const version = root.userData.skinVisualVersion ?? 0;

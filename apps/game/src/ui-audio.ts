@@ -26,7 +26,7 @@ export function uiActivation(node: HTMLElement): UiInteraction | undefined {
     "news-button": "news",
     "watch-button": "watch",
     play: "go",
-    "close-skins": "inspect-close",
+    "close-item-details": "inspect-close",
   };
   if (node.id === "home-play" && document.getElementById("menu")?.dataset.page === "play")
     return undefined;

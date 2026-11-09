@@ -92,9 +92,11 @@ test("Steam profile and owned skin UI preserve exact wear and seed and handle si
   await expect(page.locator("#skin-menu")).toBeVisible();
   await expect(page.locator("#skin-grid > #steam-items")).toHaveCount(1);
   await expect(page.locator('#skin-grid > button[data-skin=""]')).not.toHaveCount(0);
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("Case Hardened");
   await expect(page.locator('[data-steam-asset="1"]')).toBeVisible();
   await expect(page.locator('#skin-grid > button[data-skin=""]')).toHaveCount(0);
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("");
   await expect(page.locator("#steam-status")).toContainText("3 total items");
   await expect(page.locator("#steam-logout")).toBeVisible();

@@ -632,7 +632,7 @@ test("native agents and team gloves replicate, survive agent replacement, and fo
     await expect(b.locator("#cosmetic-status")).toContainText("equipped for Terrorists", {
       timeout: 30_000,
     });
-    await b.locator("#close-cosmetics").click();
+    await b.keyboard.press("Escape");
     await expectBindings(a, ct.id, first.ct, t.id, updated);
     await expectBindings(b, t.id, updated, ct.id, first.ct);
     await focus(a);

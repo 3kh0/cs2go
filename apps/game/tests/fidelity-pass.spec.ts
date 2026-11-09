@@ -194,12 +194,16 @@ test("signed-in inventory renders owned items as a searchable rarity grid", asyn
   expect(bounds.width).toBeGreaterThan(1300);
   expect(bounds.y).toBeLessThan(70);
   await page.screenshot({ path: "artifacts/cs2-owned-inventory.png" });
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("Weapon Case");
   await expect(page.locator(".steam-item")).toHaveCount(12);
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("Crown");
   await expect(page.locator(".steam-item")).toHaveCount(12);
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("nothing matched");
   await expect(page.locator(".steam-inventory-empty")).toBeVisible();
+  await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("");
   await page.locator("#inventory-sort").selectOption("name");
   await expect(page.locator(".steam-item")).toHaveCount(36);
