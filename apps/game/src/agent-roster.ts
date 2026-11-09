@@ -33,7 +33,14 @@ const defaults: Record<AgentTeam, AgentDefinition> = {
     image: "/models/agents/inspects/thumbs/5600.webp",
     sourcePose: "cu_ct_pose01",
   },
-  t: { id: "default-t", name: "Ground Rebel | Elite Crew", team: "t", model: "" },
+  t: {
+    id: "default-t",
+    name: "Ground Rebel | Elite Crew",
+    team: "t",
+    model: "",
+    image: "/models/agents/inspects/thumbs/5105.webp",
+    sourcePose: "cu_t_pose03",
+  },
 };
 const choices: Record<AgentTeam, string> = { ct: "default-ct", t: "default-t" };
 try {

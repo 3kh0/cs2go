@@ -8,13 +8,14 @@ declare global {
 
 test("expanded armory equips, preserves slots, bursts, and reloads shells without duplicating ammo", async ({
   page,
+  baseURL,
 }) => {
   test.setTimeout(90000);
   const errors: string[] = [],
     external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("request", (request) => {
-    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
   });
   await page.goto("/");
   await page.locator("#play").evaluate((button) => {

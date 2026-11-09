@@ -4,6 +4,7 @@ import { loadModel } from "./gltf";
 import { homeHazeMaterial, type HazeMaterial } from "./home-atmosphere-material";
 import { HomeDebris } from "./home-debris";
 import { gradeMapColors } from "./map-color";
+import type { MapCollision } from "./map-collision";
 
 const directory = "/models/home/atmosphere/";
 interface AtmosphereAssets {
@@ -58,7 +59,7 @@ export class HomeAtmosphere {
     this.root.add(this.haze, this.paper);
   }
 
-  async load(background: T.Object3D, floor: number) {
+  async load(background: T.Object3D, floor: number, collision?: MapCollision) {
     const response = await assetFetch(directory + "source.json");
     if (!response.ok) throw new Error("Home atmosphere assets unavailable");
     const assets = (await response.json()) as AtmosphereAssets;
@@ -190,6 +191,7 @@ export class HomeAtmosphere {
       background,
       floor,
       frames.length,
+      collision,
     );
     gradeMapColors(this.haze);
   }

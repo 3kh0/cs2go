@@ -593,30 +593,44 @@ export function createNativeWorldGun(
   suppressed = true,
   buyPose?: Record<string, { p: number[]; q: number[]; s: number }>,
   customizable = false,
+  rigged = false,
 ) {
-  const result = bakeWorldGun(index, suppressed, buyPose, customizable);
+  const result = bakeWorldGun(index, suppressed, buyPose, customizable, undefined, rigged);
   if (customizable)
     registerSkinModel(result, index, undefined, true, async () => {
-      const hd = bakeWorldGun(index, suppressed, buyPose, false, await loadLegacyBody(index));
+      const hd = bakeWorldGun(
+        index,
+        suppressed,
+        buyPose,
+        false,
+        await loadLegacyBody(index),
+        rigged,
+      );
       // Both bodies must use the finished default normalization/grip, not each
       // mesh's own bounds, or changing finish moves the showcase off its hand.
       const offset = new T.Vector3()
         .setFromMatrixPosition(new T.Matrix4().fromArray(result.userData.buyGrip))
         .sub(new T.Vector3().setFromMatrixPosition(new T.Matrix4().fromArray(hd.userData.buyGrip)));
-      hd.traverse((object) => {
-        if (object instanceof T.Mesh) object.geometry.translate(offset.x, offset.y, offset.z);
-      });
+      if (rigged) hd.position.add(offset);
+      else
+        hd.traverse((object) => {
+          if (object instanceof T.Mesh) object.geometry.translate(offset.x, offset.y, offset.z);
+        });
       hd.name = "skin-legacy";
       return hd;
     });
   return result;
 }
+type WorldRig = { model: T.Object3D; frame: T.Matrix4 };
+const worldRigs = new WeakMap<T.Object3D, WorldRig>();
+export const nativeWorldRig = (group: T.Object3D) => worldRigs.get(group);
 function bakeWorldGun(
   index: number,
   suppressed: boolean,
   buyPose: Record<string, { p: number[]; q: number[]; s: number }> | undefined,
   customizable: boolean,
   body?: T.Group,
+  rigged = false,
 ) {
   const view = new T.Group();
   view.userData.muzzle = new T.Vector3();
@@ -649,6 +663,32 @@ function bakeWorldGun(
     }
   }
   const result = new T.Group();
+  if (rigged) {
+    // Preserve the original bones and skinning. Baking skinned vertices into
+    // rigid meshes discards authored magazines, bolts and trigger animation.
+    const bounds = new T.Box3().setFromObject(model, true);
+    const center = bounds.getCenter(new T.Vector3());
+    const offset = new T.Vector3(-center.x, -center.y, 0.15 - bounds.max.z);
+    const root = model.getObjectByName("weapon")!;
+    const grip = (buyPose ? nativeAttachment : root.matrixWorld).clone();
+    const position = new T.Vector3(),
+      rotation = new T.Quaternion(),
+      scale = new T.Vector3();
+    grip.decompose(position, rotation, scale);
+    result.userData.buyGrip = new T.Matrix4()
+      .compose(position.add(offset), rotation, new T.Vector3(1, 1, 1))
+      .toArray();
+    result.attach(model);
+    const frame = new T.Group();
+    frame.position.copy(offset);
+    result.add(frame);
+    frame.add(model);
+    result.updateMatrixWorld(true);
+    const anchor = model.getObjectByName("weapon_offset") ?? root;
+    worldRigs.set(result, { model, frame: anchor.matrixWorld.clone() });
+    result.userData.ownedWorldGun = true;
+    return result;
+  }
   const bodies = new Map<string, T.Group>();
   if (customizable)
     for (const name of ["skin-legacy", "skin-hd"]) {

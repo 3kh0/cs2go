@@ -5,42 +5,8 @@ import type { Soldier } from "./soldier";
 export const agentBounds = new T.Sphere(new T.Vector3(0, 0.9, 0), 1.5);
 const broadBounds = new T.Sphere();
 
-const axis = new T.Vector3();
-const fromStart = new T.Vector3();
-const closest = new T.Vector3();
-const sphere = new T.Sphere();
-const spherePoint = new T.Vector3();
-
-/** Nearest forward ray intersection with the union of a cylinder and its end caps. */
-export function rayCapsule(ray: T.Ray, start: T.Vector3, end: T.Vector3, radius: number) {
-  axis.subVectors(end, start);
-  fromStart.subVectors(ray.origin, start);
-  const lengthSq = axis.lengthSq();
-  const along = lengthSq ? Math.max(0, Math.min(1, fromStart.dot(axis) / lengthSq)) : 0;
-  closest.copy(start).addScaledVector(axis, along);
-  if (closest.distanceToSquared(ray.origin) <= radius * radius) return 0;
-  let nearest = Infinity;
-  if (lengthSq > 1e-12) {
-    const axisDirection = axis.dot(ray.direction);
-    const axisOrigin = axis.dot(fromStart);
-    const a = lengthSq - axisDirection * axisDirection;
-    const b = lengthSq * ray.direction.dot(fromStart) - axisOrigin * axisDirection;
-    const c =
-      lengthSq * fromStart.lengthSq() - axisOrigin * axisOrigin - radius * radius * lengthSq;
-    const discriminant = b * b - a * c;
-    if (a > 1e-12 && discriminant >= 0) {
-      const distance = (-b - Math.sqrt(discriminant)) / a;
-      const height = axisOrigin + distance * axisDirection;
-      if (distance >= 0 && height >= 0 && height <= lengthSq) nearest = distance;
-    }
-  }
-  for (let cap = 0; cap < 2; cap++) {
-    sphere.set(cap ? end : start, radius);
-    if (ray.intersectSphere(sphere, spherePoint))
-      nearest = Math.min(nearest, ray.origin.distanceTo(spherePoint));
-  }
-  return nearest;
-}
+import { rayCapsule } from "@cs2go/simulation/ray-capsule";
+export { rayCapsule } from "@cs2go/simulation/ray-capsule";
 
 type BoundCapsule = {
   bone: T.Object3D;

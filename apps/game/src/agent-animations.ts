@@ -53,7 +53,12 @@ export async function loadAgentAnimations(): Promise<AgentAnimationDefinition[]>
     })),
   );
 }
-type Loaded = { scene: T.Group; clips: Map<string, T.AnimationClip>; definitions: SourceClip[] };
+type Loaded = {
+  scene: T.Group;
+  clips: Map<string, T.AnimationClip>;
+  weaponClips: Map<string, T.AnimationClip>;
+  definitions: SourceClip[];
+};
 type Cached = { pending: Promise<Loaded>; value?: Loaded; references: number; used: number };
 export type AgentAnimationPack = Loaded & { release: () => void };
 const packs = new Map<string, Cached>();
@@ -93,6 +98,7 @@ export function ensureAgentAnimationBones(model: T.Group, source: T.Group) {
     const parent = node.parent && (node.parent === source ? model : ensure(node.parent));
     if (!parent) return;
     const bone = new T.Bone();
+    bone.userData.agentAnimationHelper = true;
     bone.name = node.name;
     bone.position.copy(node.position);
     if (node.name !== "root_motion") bone.position.divideScalar(0.0254);
@@ -117,6 +123,10 @@ export function ensureAgentAnimationBones(model: T.Group, source: T.Group) {
     target.scale.copy(node.scale);
     if (node.name === "root_motion") target.scale.multiplyScalar(0.0254);
   });
+  const root = model.getObjectByName("root_motion"),
+    pelvis = model.getObjectByName("pelvis")!;
+  if (root?.userData.agentAnimationHelper && pelvis.parent && pelvis.parent !== root)
+    while (root.children.length) pelvis.parent.add(root.children[0]);
 }
 export function agentClipForModel(clip: T.AnimationClip, model: T.Group) {
   const names = new Set<string>();
@@ -163,7 +173,12 @@ export async function acquireAgentAnimationPack(key: string): Promise<AgentAnima
           if (!raw) throw new Error(`Missing source agent animation: ${key}/${definition.name}`);
           clips.set(definition.name, sourceAgentClip(raw, definition.duration));
         }
-        created.value = { scene: model.scene, clips, definitions: metadata.clips };
+        const weaponClips = new Map(
+          model.animations
+            .filter((clip) => clip.name.endsWith("@weapon"))
+            .map((clip) => [clip.name.slice(0, -7), clip]),
+        );
+        created.value = { scene: model.scene, clips, weaponClips, definitions: metadata.clips };
         return created.value;
       })
       .catch((error) => {
@@ -210,24 +225,36 @@ export async function acquireAgentAnimation(id: string) {
       ? name + ".vnmclip+non_additive"
       : name,
   )!;
-  return { pack, clip, definition, release: pack.release };
+  return {
+    pack,
+    clip,
+    weaponClip: pack.weaponClips.get(clip.name),
+    definition,
+    release: pack.release,
+  };
 }
 /** Startup loads only common gameplay packs; the 1,221-clip browser stays lazy. */
 export async function loadAgentGameplayClips() {
   const loaded = await Promise.all(
-    ["world/rifle/_default_rifle", "world/pistol/_default_pistol", "world/equipment/c4"].map(
-      acquireAgentAnimationPack,
-    ),
+    [
+      "world/rifle/_default_rifle",
+      "world/pistol/_default_pistol",
+      "world/knife/_default_knife",
+      "world/equipment/c4",
+    ].map(acquireAgentAnimationPack),
   );
   try {
-    return loaded.flatMap((pack) =>
-      [...pack.clips.values()]
-        .filter(
-          (clip) =>
-            /^(?:idle|walk|run|crouch|jump|inair)_/.test(clip.name) || clip.name === "planting",
-        )
-        .map((clip) => clip.clone()),
-    );
+    const diagonal = await loadModel("/models/animations/locomotion/diagonal.glb", 1);
+    return loaded
+      .flatMap((pack) =>
+        [...pack.clips.values()]
+          .filter(
+            (clip) =>
+              /^(?:idle|walk|run|crouch|jump|inair)_/.test(clip.name) || clip.name === "planting",
+          )
+          .map((clip) => clip.clone()),
+      )
+      .concat(diagonal.animations.map((clip) => sourceAgentClip(clip)));
   } finally {
     loaded.forEach((pack) => pack.release());
   }
@@ -241,6 +268,11 @@ export async function agentWeaponAnimationPacks(index: number) {
   return (await manifest()).weapon_packs[String(itemIds[index])] ?? [];
 }
 /** Absolute native actions; callers can mask/rebase them over their grip layer. */
+const weaponSecondaries = new WeakMap<
+  T.AnimationClip,
+  { source: T.Group; clip: T.AnimationClip }
+>();
+export const agentWeaponSecondary = (clip: T.AnimationClip) => weaponSecondaries.get(clip);
 export async function loadAgentWeaponActions(index: number) {
   const keys = (await agentWeaponAnimationPacks(index)).filter(
     (key) => key.startsWith("world/") && !key.split("/").at(-1)!.startsWith("_default"),
@@ -258,6 +290,9 @@ export async function loadAgentWeaponActions(index: number) {
         if (!prefix || result[prefix]) continue;
         result[prefix] = pack.clips.get(definition.name)!.clone();
         result[prefix].name = `agent_${index}_${prefix}`;
+        const secondary = pack.weaponClips.get(definition.name);
+        if (secondary)
+          weaponSecondaries.set(result[prefix], { source: pack.scene, clip: secondary });
       }
     return result;
   } finally {

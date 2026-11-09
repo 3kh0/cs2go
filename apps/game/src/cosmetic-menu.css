@@ -4,71 +4,72 @@
   margin: 18px 0 8px;
 }
 .inventory-sections button {
-  padding: 10px 18px;
-  border: 1px solid #46515c;
-  background: #252e37;
-  color: #e7edf0;
+  padding: 8px 12px;
+  border: 0;
+  background: transparent;
+  color: #e7e7e7;
   font:
-    600 16px "Stratum2 Condensed",
+    600 18px "Stratum2",
     sans-serif;
 }
 .inventory-sections button[aria-current="page"] {
-  border-color: #a9d2e4;
-  background: #ffffff1c;
-  color: #fff;
+  background: #d5edff12;
+  color: #a8dce9;
 }
 #cosmetic-menu {
   z-index: 51;
-  background: linear-gradient(90deg, #0e151dbb, #0e151d22 45%, #0e151d66);
+  top: calc(64 * var(--menu-unit));
+  background: transparent;
   backdrop-filter: none;
 }
 .cosmetic-dialog {
-  width: min(1400px, calc(96 * var(--game-vw, 1vw)));
-  height: min(850px, 94vh);
-  color: #f1f0e9;
+  width: 100%;
+  height: 100%;
+  color: #eee;
   display: grid;
-  grid-template-columns: minmax(250px, 29%) minmax(140px, 1fr) minmax(280px, 27%);
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
-  gap: 12px;
+  grid-template-columns: minmax(230px, 24%) minmax(200px, 1fr) minmax(250px, 23%);
+  grid-template-rows: 42px 46px minmax(0, 1fr) 52px;
+  gap: 0 20px;
+  padding: 0 3%;
 }
 .cosmetic-dialog > header {
   grid-column: 1 / -1;
   height: auto;
   margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 22px;
-  background: #171d24ee;
+  border: 0;
+  padding: 0;
 }
 .cosmetic-dialog h2 {
-  margin: 2px 0 0;
+  margin: 0;
+  color: #e4e4e4;
   font:
-    700 34px "Stratum2 Condensed",
+    600 21px "Stratum2",
     sans-serif;
 }
 .cosmetic-dialog > .inventory-sections {
   grid-column: 1 / -1;
-  margin: 0;
+  align-items: center;
+  margin: 0 0 8px;
+  border-bottom: 1px solid #ffffff25;
 }
 .cosmetic-browser,
 .cosmetic-details {
-  padding: 18px;
-  background: #171d24ed;
   min-height: 0;
   overflow: auto;
+  padding: 14px;
+  background: #393733c2;
 }
 .cosmetic-browser {
   grid-column: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 .cosmetic-dialog label {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 14px;
+  font-size: 15px;
 }
 .cosmetic-dialog label[for="glove-wear"] {
   flex-direction: row;
@@ -76,16 +77,21 @@
 }
 .cosmetic-dialog :is(input:not([type="range"]), select) {
   width: 100%;
-  padding: 8px;
-  color: #e7edf0;
-  border: 1px solid #46515c;
+  padding: 7px 9px;
+  color: #f3f3f3;
+  border: 0;
+  border-bottom: 2px solid #ddd8;
   border-radius: 0;
-  background: #10161d;
+  background: #0004;
   font: inherit;
+}
+.cosmetic-dialog input::placeholder {
+  color: #d7d7d7;
+  opacity: 1;
 }
 .cosmetic-dialog input[type="range"] {
   width: 100%;
-  accent-color: #a9d2e4;
+  accent-color: #b9d5df;
 }
 .cosmetic-items {
   flex: 1;
@@ -94,119 +100,140 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: max-content;
-  gap: 8px;
+  gap: 12px;
 }
 .cosmetic-items button {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: end;
-  gap: 8px;
-  min-height: 110px;
-  padding: 10px 6px;
-  background: #252e37;
-  border: 1px solid #46515c;
+  gap: 6px;
+  min-height: 112px;
+  padding: 6px;
+  background: linear-gradient(#292b2c90, #92928b45);
+  border: 1px solid #ffffff15;
   color: #eee;
   font:
     500 14px "Stratum2",
     sans-serif;
 }
+.cosmetic-items button:hover {
+  background-color: #ffffff15;
+}
 .cosmetic-items button[aria-pressed="true"] {
-  border-color: #edb959;
-  background: #3c392e;
+  outline: 2px solid #d9d9d9;
+  outline-offset: -2px;
 }
 .cosmetic-items img {
   width: 100%;
-  height: 90px;
+  height: 100px;
   object-fit: contain;
 }
 .cosmetic-preview {
   grid-column: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
+  position: relative;
   min-width: 0;
-  padding: 20px;
-  pointer-events: none;
-  text-align: center;
+  min-height: 0;
 }
-.cosmetic-preview img {
+#cosmetic-preview-stage {
   width: 100%;
-  max-height: 330px;
-  object-fit: contain;
-  filter: drop-shadow(0 14px 20px #0009);
+  height: 100%;
 }
 .cosmetic-preview p {
-  color: #fff;
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  color: #eee;
   text-shadow: 0 1px 4px #000;
-  font-size: 14px;
+  font-size: 15px;
+  pointer-events: none;
 }
 .cosmetic-details {
   grid-column: 3;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-self: start;
+  max-height: 100%;
 }
 .cosmetic-details h3 {
-  margin: 0;
+  margin: 8px 0 18px;
   font:
-    700 26px "Stratum2 Condensed",
+    600 24px "Stratum2",
     sans-serif;
 }
 .cosmetic-details p {
-  margin: 0;
+  margin: 8px 0;
   font-size: 13px;
-  line-height: 1.5;
-  color: #b5bec6;
+  line-height: 1.4;
+  color: #ccc;
 }
 .cosmetic-details button {
-  padding: 10px 12px;
-  border: 1px solid #46515c;
-  background: #303c47;
-  color: #e7edf0;
+  padding: 10px 8px;
+  border: 1px solid #ffffff20;
+  background: #ffffff10;
+  color: #eee;
   font:
-    600 15px "Stratum2",
+    600 14px "Stratum2",
     sans-serif;
 }
 .cosmetic-details .deploy {
-  margin-top: 0;
-  border-color: #d7a34b;
-  background: #d7a34b;
-  color: #14191e;
+  margin: 0;
+  border: 0;
+  background: #ddd;
+  color: #303030;
 }
 .cosmetic-animation-controls {
-  margin-top: 0;
-  padding-top: 12px;
-  border-top: 1px solid #46515c;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  margin-top: 18px;
+  border-top: 1px solid #ffffff25;
+}
+.cosmetic-animation-controls summary {
+  padding: 12px 0;
+  cursor: pointer;
+  font-size: 15px;
+}
+.cosmetic-animation-controls[open] > :not(summary) {
+  margin-bottom: 10px;
 }
 .cosmetic-equip-actions,
 .cosmetic-animation-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
-.cosmetic-equip-actions button,
-.cosmetic-animation-actions button {
-  min-width: 0;
-  font-size: 12px;
+.cosmetic-equip-actions {
+  margin-top: 18px;
+}
+#glove-details summary {
+  padding: 10px 0;
+  cursor: pointer;
+}
+#glove-details[open] > :not(summary) {
+  margin-bottom: 10px;
 }
 #agent-animation {
-  min-height: 140px;
-  font-size: 12px;
+  min-height: 120px;
+  font-size: 13px;
 }
 .cosmetic-dialog > footer {
   grid-column: 1 / -1;
   height: auto;
-  display: block;
   margin: 0;
-  padding: 10px 18px;
-  min-height: 38px;
-  background: #171d24ee;
+  padding: 0;
+  border-top: 1px solid #ffffff25;
+  display: flex;
+  align-items: center;
+  gap: 18px;
   font-size: 14px;
+}
+#close-cosmetic {
+  margin-left: auto;
+  padding: 10px 16px;
+  border: 0;
+  background: transparent;
+  color: #eee;
+  font:
+    700 22px "Stratum2 Condensed",
+    sans-serif;
 }
 .cosmetic-dialog [hidden] {
   display: none;
@@ -215,18 +242,18 @@
   opacity: 0.5;
   cursor: default;
 }
-body:has(#cosmetic-menu:not(.hidden)) :is(.home-cards, .home-profile) {
+body:has(#cosmetic-menu:not(.hidden))
+  :is(.home-cards, .home-profile, #home-scenery-button, #home-scenery) {
   visibility: hidden;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
   .cosmetic-dialog {
-    grid-template-columns: minmax(230px, 36%) minmax(80px, 1fr) minmax(260px, 34%);
-  }
-  .cosmetic-items {
-    grid-template-columns: 1fr;
+    grid-template-columns: 230px minmax(130px, 1fr) 240px;
+    padding: 0 2%;
+    gap: 0 12px;
   }
   .cosmetic-browser,
   .cosmetic-details {
-    padding: 12px;
+    padding: 10px;
   }
 }

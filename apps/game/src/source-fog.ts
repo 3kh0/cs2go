@@ -9,6 +9,18 @@ export function setSourceFogSky(texture?: T.CubeTexture | T.CompressedCubeTextur
   ready.value = texture ? 1 : 0;
 }
 
+/** Vanity/inspection scenes have their own authored haze cards. Shared map
+ * materials must not carry gameplay's cubemap fog into those render passes. */
+export function withoutSourceFog<T>(draw: () => T): T {
+  const previous = ready.value;
+  ready.value = 0;
+  try {
+    return draw();
+  } finally {
+    ready.value = previous;
+  }
+}
+
 export function applySourceFog(
   shader: T.WebGLProgramParametersWithUniforms,
   enabled = "1.0",

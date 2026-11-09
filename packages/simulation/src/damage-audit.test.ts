@@ -70,6 +70,41 @@ function fixture(weapon: number, distance = 12.7) {
   Object.assign(victim, { x: 0, y: 0, z: 0, health: 10000, armor: 1000, helmet: true });
   return { match, shooter, victim };
 }
+// Aim through a visible native capsule, placing its first surface exactly at the
+// independently audited range. Empty space between limbs must no longer count
+// as a rectangular torso; the damage goldens themselves remain unchanged.
+function aim(f: ReturnType<typeof fixture>, group: number, distance = 12.7) {
+  const { match, shooter, victim } = f,
+    rig = match.combat.get(victim.id)!.hitboxes;
+  victim.yaw = 0;
+  const capsules = rig.capsules(victim).filter((box) => box.group === group);
+  for (const box of capsules) {
+    const center = box.start.clone().add(box.end).multiplyScalar(0.5);
+    for (const offset of [
+      new T.Vector3(0, 0, 1),
+      new T.Vector3(1, 0, 0),
+      new T.Vector3(-1, 0, 0),
+      new T.Vector3(0, 0, -1),
+    ]) {
+      const ray = new T.Ray(
+        center.clone().addScaledVector(offset, distance + 1),
+        offset.clone().negate(),
+      );
+      const hit = rig.hit(victim, ray);
+      if (hit?.group !== group) continue;
+      const from = hit.point.clone().addScaledVector(offset, distance);
+      Object.assign(shooter, {
+        x: from.x,
+        z: from.z,
+        eye: from.y,
+        yaw: Math.atan2(offset.x, offset.z),
+        pitch: 0,
+      });
+      return;
+    }
+  }
+  throw new Error(`Native damage fixture has no exposed group ${group}`);
+}
 for (const [id, chest, head, armoredChest, armoredHead] of golden)
   test(`${weapons[id].name}: standing/crouched region and armor damage match audited values`, () => {
     for (const crouched of [false, true])
@@ -80,10 +115,10 @@ for (const [id, chest, head, armoredChest, armoredHead] of golden)
           [1.25, chest, armoredChest],
           [1.65, head, armoredHead],
         ]) {
-          const { match, shooter, victim } = fixture(id);
-          const scale = crouched ? 1.1 / 1.65 : 1;
-          victim.eye = 1.65 * scale;
-          shooter.eye = height * scale;
+          const f = fixture(id),
+            { match, shooter, victim } = f;
+          victim.eye = crouched ? movement.duckEye : movement.standingEye;
+          aim(f, height === 0.5 ? 6 : height === 1 ? 3 : height === 1.65 ? 1 : 2);
           victim.armor = armored ? 1000 : 0;
           const events = shoot(match, shooter);
           expect(events[0]).toMatchObject({
@@ -96,9 +131,10 @@ for (const [id, chest, head, armoredChest, armoredHead] of golden)
           if (height === 0.5) expect(victim.armor).toBe(armored ? 1000 : 0);
         }
       }
-    const { match, shooter, victim } = fixture(id);
+    const f = fixture(id),
+      { match, shooter, victim } = f;
     victim.helmet = false;
-    shooter.eye = 1.65;
+    aim(f, 1);
     shoot(match, shooter);
     expect(10000 - victim.health).toBe(Math.floor(head + 1e-9));
   });
@@ -109,14 +145,18 @@ test("AK clear helmet headshots kill at A-site distances; range and cover can le
     [20, true],
     [80, false],
   ] as const) {
-    const { match, shooter, victim } = fixture(0, distance);
+    const f = fixture(0, distance),
+      { match, shooter, victim } = f;
+    aim(f, 1, distance);
     victim.health = 100;
     victim.armor = 100;
     const events = shoot(match, shooter);
     expect(events[0]).toMatchObject({ kind: "shot", headshot: true });
     expect(victim.health === 0).toBe(lethal);
   }
-  const { match, shooter, victim } = fixture(0, 10);
+  const f = fixture(0, 10),
+    { match, shooter, victim } = f;
+  aim(f, 1, 10);
   victim.health = 100;
   victim.armor = 100;
   const wall = new T.Mesh(new T.BoxGeometry(3, 3, 0.12), new T.MeshBasicMaterial());
@@ -131,11 +171,12 @@ test("AK clear helmet headshots kill at A-site distances; range and cover can le
 
 test("shotguns dispatch every pellet and overlapping body surfaces never duplicate one pellet", () => {
   for (const id of [10, 32, 33, 34]) {
-    const { match, shooter, victim } = fixture(id);
+    const f = fixture(id),
+      { match, shooter, victim } = f;
+    aim(f, 2);
     vi.mocked(weaponShotSpread).mockReturnValueOnce(
       Array.from({ length: weapons[id].pellets }, () => ({ x: 0, y: 0 })),
     );
-    shooter.eye = 1.25;
     const shots = shoot(match, shooter).filter((event) => event.kind === "shot");
     const goldenDamage = golden.find((entry) => entry[0] === id)![3];
     expect(shots).toHaveLength(weapons[id].pellets);
@@ -144,11 +185,13 @@ test("shotguns dispatch every pellet and overlapping body surfaces never duplica
 });
 
 test("competitive knife team damage uses the same other-damage scale as offline", () => {
-  const { match, shooter, victim } = fixture(4, 0.6);
+  const f = fixture(4, 0.6),
+    { match, shooter, victim } = f;
   victim.team = shooter.team;
   victim.health = 100;
   victim.armor = 100;
   victim.yaw = 0;
+  aim(f, 2, 0.6);
   shoot(match, shooter, true);
   expect(victim.health).toBe(39);
 });

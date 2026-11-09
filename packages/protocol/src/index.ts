@@ -2,7 +2,7 @@ export { SnapshotEncoder, SnapshotDecoder } from "./snapshot-codec";
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 14;
+export const PROTOCOL_VERSION = 15;
 export type BreakableState = { id: string; health: number };
 export type MapId = "dust2" | "mirage";
 export type LobbyVisibility = "private" | "public";
@@ -84,6 +84,7 @@ export type Team = "ct" | "t";
 export type Vec3 = { x: number; y: number; z: number };
 export type Input = {
   seq: number;
+  viewTick?: number;
   forward: number;
   right: number;
   yaw: number;
@@ -114,9 +115,18 @@ export type Input = {
   refundEquipment: "" | "kevlar" | "helmet" | "kit";
   dropBomb: boolean;
 };
+export type PlayerAnimation = {
+  plant?: number;
+  phase: number;
+  air: number;
+  shot: number | null;
+  draw: number | null;
+  reload: number | null;
+};
 export type PlayerState = Vec3 & {
   id: string;
   name: string;
+  animation?: PlayerAnimation;
   avatar?: string | null;
   team: Team;
   vx: number;
@@ -333,6 +343,10 @@ export function validInput(value: unknown): value is Input {
   return (
     Number.isSafeInteger(value.seq) &&
     (value.seq as number) > 0 &&
+    (value.viewTick === undefined ||
+      (finite(value.viewTick) &&
+        value.viewTick >= 0 &&
+        value.viewTick <= Number.MAX_SAFE_INTEGER)) &&
     finite(value.forward) &&
     Math.abs(value.forward) <= 1 &&
     finite(value.right) &&

@@ -1,3 +1,4 @@
+import { HitboxHistory } from "./hitbox-history";
 import { defaultKnife } from "./loadouts";
 import * as T from "three";
 import {
@@ -55,6 +56,8 @@ import { createLadderState } from "./ladder";
 import { BreakableWorld } from "./breakables";
 export const STEP = 1 / TICK_RATE;
 export type Match = {
+  tick: number;
+  hitboxHistory: HitboxHistory;
   breakables: BreakableWorld;
   ball: WorldBallPhysics;
   firstKill?: { name: string; seconds: number };
@@ -90,6 +93,8 @@ export function createMatch(mode: MatchMode, map: DustMap): Match {
   if (map.id === "mirage" && !map.worldBallOrigin) ball.mesh = undefined;
   mapTriggers(map);
   return {
+    tick: 0,
+    hitboxHistory: new HitboxHistory(),
     breakables,
     ball,
     highlights: new Map(),
@@ -794,6 +799,18 @@ function buy(match: Match, player: PlayerState, input: Input) {
   }
 }
 export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[] {
+  match.tick++;
+  const events = stepMatchRules(match, inputs);
+  for (const player of match.players.values()) {
+    const rig = match.combat.get(player.id)!.hitboxes;
+    player.animation = rig.clock(player.animation);
+    player.animation.plant =
+      match.state.bomb.carrier === player.id ? match.state.bomb.plantProgress / 3.2 : 0;
+  }
+  match.hitboxHistory.record(match.tick, match.players, match.combat, match.state.bomb);
+  return events;
+}
+function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] {
   const events: MatchEvent[] = [],
     state = match.state,
     rules = rulesFor(state.mode);
@@ -935,13 +952,16 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
       locks[player.weapon] = player.cooldown;
       if (isKnife(player.weapon))
         for (const { id } of knifeDefinitions) locks[id] = player.cooldown;
-      events.push(...shoot(match, player, input.stab, shot.alternate, input.burst));
+      events.push(...shoot(match, player, input.stab, shot.alternate, input.burst, input.viewTick));
     }
     if (input.fire || input.alternate) match.shotsHeld.add(player.id);
     else match.shotsHeld.delete(player.id);
     player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
     player.accuracy = match.combat.get(player.id)!.accuracy[player.weapon];
     player.recoilIndex = match.combat.get(player.id)!.recoil[player.weapon].index;
+    const pose = match.combat.get(player.id)!.hitboxes;
+    pose.sync(player);
+    player.animation = pose.clock(player.animation);
     publishReceipts(match, player);
   }
   for (const player of match.players.values())

@@ -1,6 +1,7 @@
 import * as T from "three";
 import { assetFetch } from "./asset-url";
 import { loadModel } from "./gltf";
+import { clone } from "three/addons/utils/SkeletonUtils.js";
 import { bakeSkin } from "./skin-baker";
 import type { Paint } from "./skin-paint";
 import { loadAgentCatalog, selectedAgentId } from "./agent-roster";
@@ -79,7 +80,7 @@ type Part = {
   inverses: T.Matrix4[];
   role?: "sleeves" | "hands";
 };
-type Template = { scene: T.Group; parts: Part[]; refs: number };
+type Template = { scene: T.Group; parts: Part[]; refs: number; animations: T.AnimationClip[] };
 const templates = new Map<string, Promise<Template>>();
 const readyTemplates = new Map<string, Template>();
 function trimTemplates() {
@@ -139,7 +140,7 @@ function template(path: string) {
           });
         });
         if (!parts.length) throw new Error("Glove model has no skinned meshes");
-        const result = { scene: asset.scene, parts, refs: 0 };
+        const result = { scene: asset.scene, parts, refs: 0, animations: asset.animations };
         readyTemplates.set(path, result);
         return result;
       })
@@ -248,6 +249,70 @@ async function prepare(choice: GloveChoice) {
     finishes.set(key, request);
   }
   return { definition, finish: await request };
+}
+
+/** Inspect the original native glove rig and embedded pedestal clips without
+ * changing saved equipment or borrowing the live first-person hand bones. */
+export async function acquireGloveInspection(raw: GloveChoice, team: Team) {
+  const choice = sanitizeGloveChoice(raw);
+  if (!choice.id) choice.id = team === "ct" ? "5029_0" : "5028_0";
+  const definition = (await loadGloveCatalog()).find((item) => item.id === choice.id);
+  if (!definition) throw new Error("Glove inspection model unavailable");
+  const source = await template(definition.model);
+  source.refs++;
+  let finish: Finish | undefined;
+  try {
+    finish = (await prepare(choice))?.finish;
+    if (finish) finish.refs++;
+    const model = clone(source.scene);
+    const materials = new Set<T.Material>();
+    const skeletons = new Set<T.Skeleton>();
+    model.traverse((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      object.visible = !object.name.includes("worldmodel");
+      if (object instanceof T.SkinnedMesh) {
+        skeletons.add(object.skeleton);
+        object.frustumCulled = false;
+      }
+      const copy = (original: T.Material) => {
+        const material = original.clone();
+        if (material instanceof T.MeshStandardMaterial) {
+          const maps = finish?.materials.get(original.name);
+          if (maps) {
+            Object.assign(material, maps);
+            material.color.setRGB(1, 1, 1);
+          }
+        }
+        materials.add(material);
+        return material;
+      };
+      object.material = Array.isArray(object.material)
+        ? object.material.map(copy)
+        : copy(object.material);
+    });
+    let released = false;
+    return {
+      model,
+      animations: source.animations,
+      release() {
+        if (released) return;
+        released = true;
+        model.removeFromParent();
+        skeletons.forEach((skeleton) => skeleton.dispose());
+        materials.forEach((material) => material.dispose());
+        if (finish) finish.refs--;
+        source.refs--;
+        trimFinishes();
+        trimTemplates();
+      },
+    };
+  } catch (error) {
+    if (finish) finish.refs--;
+    source.refs--;
+    trimFinishes();
+    trimTemplates();
+    throw error;
+  }
 }
 
 type Binding = {

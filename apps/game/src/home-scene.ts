@@ -33,14 +33,24 @@ import {
   completeAgentClip,
   agentAnimationEquipment,
 } from "./agent-animations";
-import { createWorldGun, disposeWorldGun, loadWeaponModels, weaponModelReady } from "./weapons";
+import {
+  createWorldGun,
+  disposeWorldGun,
+  loadWeaponModels,
+  weaponModelReady,
+  shareSkeletons,
+} from "./weapons";
 import { readHomeWeapons } from "./home-weapons";
 import { createWeaponInstance } from "./weapon-instance";
 import { isKnife, weaponSlot } from "./physics";
 import { createGrenadeModel } from "./grenade-models";
 import { HomeAtmosphere } from "./home-atmosphere";
+import { chooseHomeAnimation } from "./home-animation";
+import { AgentWeaponAnimation } from "./agent-weapon-animation";
 import { withoutSourceColorCorrection } from "./map-color";
 import { withoutNativeMapGrade } from "./native-map-color";
+import { withoutSourceFog } from "./source-fog";
+import type { MapCollision } from "./map-collision";
 
 // uimodel_walkup.vnmgraph: linear, completion-driven transitions.
 const homeBlendSeconds = 0.2;
@@ -64,8 +74,10 @@ type Preview = {
   agentId: string;
   agentName: string;
   idleVariationLoad?: Promise<void>;
+  secondary?: AgentWeaponAnimation;
   idleVariation?: {
     actions: T.AnimationAction[];
+    alternates: Map<T.AnimationAction, T.AnimationAction>;
     releases: (() => void)[];
     wait: number;
     current?: T.AnimationAction;
@@ -74,8 +86,7 @@ type Preview = {
     ready?: boolean;
     initialized?: boolean;
     anchor?: T.Object3D;
-    returning: boolean;
-    last: number;
+    outgoing?: T.AnimationAction;
     seed: number;
   };
   pairedGrips?: { hand: T.Object3D; bone: T.Object3D; offset: T.Matrix4 }[];
@@ -145,7 +156,11 @@ export class HomeScene {
   private animationScale = new T.Vector3();
   private arrivedAgents = new Set<string>();
   private createWeapon(index: number, bones: Pose["weaponBones"]) {
-    if (!isKnife(index)) return createNativeWorldGun(index, true, bones, true);
+    if (!isKnife(index)) {
+      const weapon = createNativeWorldGun(index, true, bones, true, true);
+      shareSkeletons(weapon);
+      return weapon;
+    }
     const model = createWorldGun(index, true, createWeaponInstance(index, "player", true));
     if (index === 4) model.userData.buyGrip = bayonetWorldGrip(model).toArray();
     else if (buyPoseToken(index) === "push")
@@ -158,10 +173,9 @@ export class HomeScene {
   private async loadIdleVariations(preview: Preview, team: AgentTeam) {
     const state: NonNullable<Preview["idleVariation"]> = (preview.idleVariation = {
       actions: [] as T.AnimationAction[],
+      alternates: new Map(),
       releases: [] as (() => void)[],
       wait: 0,
-      returning: false,
-      last: -1,
       seed: (Math.random() * 0x7fffffff) | 1,
     });
     try {
@@ -206,11 +220,6 @@ export class HomeScene {
         let clip: T.AnimationClip;
         try {
           ensureAgentAnimationBones(preview.soldier.model, loaded.pack.scene);
-          // Legacy meshes bake the Source basis into the model node.
-          const pelvis = preview.soldier.model.getObjectByName("pelvis")!;
-          const root = preview.soldier.model.getObjectByName("root_motion");
-          if (root && pelvis.parent !== root)
-            while (root.children.length) pelvis.parent!.add(root.children[0]);
           clip = completeAgentClip(
             agentClipForModel(loaded.clip, preview.soldier.model),
             preview.soldier.model,
@@ -219,6 +228,15 @@ export class HomeScene {
           parent?.add(preview.weapon);
         }
         const action = preview.mixer.clipAction(clip);
+        const alternate = preview.mixer.clipAction(clip.clone());
+        alternate.setLoop(T.LoopOnce, 1);
+        alternate.clampWhenFinished = true;
+        state.alternates.set(action, alternate);
+        if (loaded.weaponClip && !isKnife(preview.index)) {
+          preview.secondary ??= new AgentWeaponAnimation(preview.weapon, loaded.pack.scene);
+          preview.secondary.bind(action, loaded.weaponClip);
+          preview.secondary.bind(alternate, loaded.weaponClip);
+        }
         const idle = definition.name.includes("_idle");
         action.setLoop(T.LoopOnce, 1);
         action.clampWhenFinished = true;
@@ -267,36 +285,30 @@ export class HomeScene {
       preview.action.stop();
       state.current.reset().setEffectiveWeight(1).play();
     }
-    if (state.current) {
-      if (
-        !state.returning &&
-        state.current.time >= state.current.getClip().duration - homeBlendSeconds
-      ) {
-        preview.action.reset().setEffectiveWeight(1).fadeIn(homeBlendSeconds).play();
-        state.current.fadeOut(homeBlendSeconds);
-        state.returning = true;
-        state.wait = homeBlendSeconds;
-      }
-      if (state.returning && (state.wait -= dt) <= 0) {
-        state.current.stop();
-        state.current = undefined;
-        state.returning = false;
-      }
-    } else if (
-      state.actions.length &&
-      preview.action.time >= preview.action.getClip().duration - homeBlendSeconds
-    ) {
-      const choices = state.actions.map((_, i) => i).filter((i) => i !== state.last);
-      // A stable per-preview seed avoids frame-rate dependent timer selection.
-      // The engine's seed update policy is not exported; this is our scheduler.
+    if (state.outgoing && (state.wait -= dt) <= 0) {
+      state.outgoing.stop();
+      state.outgoing = undefined;
+    }
+    const active = state.current ?? preview.action;
+    if (!state.outgoing && active.time >= active.getClip().duration - homeBlendSeconds) {
+      // The native idle graph selects from ALL weighted options, including
+      // consecutive idle choices. Do not force a gesture after every idle or
+      // invent a no-repeat rule. Only seed generation remains browser-owned.
       state.seed ^= state.seed << 13;
       state.seed ^= state.seed >>> 17;
       state.seed ^= state.seed << 5;
-      const index = choices.length ? choices[(state.seed >>> 0) % choices.length] : 0;
-      state.last = index;
-      state.current = state.actions[index];
-      preview.action.fadeOut(homeBlendSeconds);
-      state.current.reset().setEffectiveWeight(1).fadeIn(homeBlendSeconds).play();
+      let next = chooseHomeAnimation(
+        [preview.action, ...state.actions],
+        (state.seed >>> 0) / 2 ** 32,
+      );
+      if (!next) return;
+      // Native IdlesA/IdlesB graph instances can blend the same selected clip
+      // into itself. Separate mixer actions retain its outgoing final frames.
+      if (next === active) next = state.alternates.get(next)!;
+      state.outgoing = active.fadeOut(homeBlendSeconds);
+      state.wait = homeBlendSeconds;
+      next.reset().setEffectiveWeight(1).fadeIn(homeBlendSeconds).play();
+      state.current = next === preview.action ? undefined : next;
     }
   }
   selectedAnimation(team: AgentTeam) {
@@ -372,14 +384,24 @@ export class HomeScene {
     );
     preview.action.clampWhenFinished = true;
     preview.action.play();
+    if (animation.weaponClip && !isKnife(index)) {
+      preview.secondary = new AgentWeaponAnimation(preview.weapon, animation.pack.scene);
+      preview.secondary.bind(preview.action, animation.weaponClip);
+    }
     preview.mixer.update(0);
+    const nativeAnchor =
+      !equipment &&
+      !isKnife(index) &&
+      animation.clip.tracks.some((track) => /^wpn(?:Pivot)?\./.test(track.name))
+        ? preview.soldier.model.getObjectByName("wpn")
+        : undefined;
     preview.animation = {
       id,
       release: animation.release,
       equipped: animation.definition.equipped,
       gripInverse: new T.Matrix4().fromArray(preview.weapon.userData.buyGrip).invert(),
-      hand: buy.hand,
-      attachment: buy.matrix,
+      hand: nativeAnchor ?? buy.hand,
+      attachment: nativeAnchor ? new T.Matrix4() : buy.matrix,
       equipment,
     };
     preview.soldier.group.updateMatrixWorld(true);
@@ -405,7 +427,11 @@ export class HomeScene {
       this.pointer.set(event.clientX / innerWidth - 0.5, event.clientY / innerHeight - 0.5);
     });
   }
-  async load(renderer: T.WebGLRenderer, scenery: Promise<T.Group>) {
+  async load(
+    renderer: T.WebGLRenderer,
+    scenery: Promise<T.Group>,
+    collision?: Promise<MapCollision | undefined>,
+  ) {
     this.renderer = renderer;
     const [data, world] = await Promise.all([
       fetchGzipped("/models/animations/home/poses.json.gz"),
@@ -414,6 +440,7 @@ export class HomeScene {
       document.fonts.load('700 16px "Stratum2 Mono"'),
     ]);
     this.poses = JSON.parse(new TextDecoder().decode(data));
+    const staticWorld = await collision;
     // Separate scene graph, shared immutable geometry/materials and native map lighting.
     // Avoid downloading/uploading a second Dust II just for the panorama.
     const background = world.clone(true);
@@ -474,11 +501,11 @@ export class HomeScene {
     this.scene.add(shadow);
 
     this.scene.background = new T.Color("#cbd2d1");
-    // Retain the chosen distance haze for our gameplay-map backdrop. Native
-    // vanity meshes add the local moving veils and ground-hugging dust.
-    this.scene.fog = new T.FogExp2(new T.Color("#d8c9b2"), 0.011);
+    // The complete vanity entity lump has no fog controller. Its haze is the
+    // authored smoke/dust/fog-card geometry, not an extra uniform yellow wash.
+    this.scene.fog = null;
     const atmosphere = new HomeAtmosphere();
-    await atmosphere.load(background, this.floor);
+    await atmosphere.load(background, this.floor, staticWorld);
     this.atmosphere = atmosphere;
     this.scene.add(atmosphere.root);
     registerActorLighting(atmosphere.paper);
@@ -703,6 +730,7 @@ export class HomeScene {
     if (!previous) return;
     this.scene.remove(previous.soldier.group);
     previous.animation?.release();
+    previous.secondary?.dispose();
     previous.idleVariation?.releases.forEach((release) => release());
     this.disposeWeapon(previous.weapon);
     previous.mixer.stopAllAction();
@@ -816,7 +844,7 @@ export class HomeScene {
       withoutSourceColorCorrection(() => {
         this.atmosphere?.captureDepth(renderer, this.scene, camera, this.reduced.matches);
         renderer.clear();
-        withoutNativeMapGrade(() => renderer.render(this.scene, camera));
+        withoutSourceFog(() => withoutNativeMapGrade(() => renderer.render(this.scene, camera)));
       });
     } finally {
       for (const preview of visible) preview.group.visible = preview.visible;
@@ -928,6 +956,7 @@ export class HomeScene {
         preview.weapon.position.y -= 0.025;
       }
     }
+    preview.secondary?.update();
     this.camera.position.copy(this.cameraPosition);
     this.camera.quaternion.copy(this.cameraRotation);
     if (!this.reduced.matches) {
@@ -991,7 +1020,7 @@ export class HomeScene {
     renderer.toneMapping = T.CustomToneMapping;
     this.atmosphere?.captureDepth(renderer, this.scene, this.camera, this.reduced.matches);
     renderer.clear();
-    withoutNativeMapGrade(() => renderer.render(this.scene, this.camera));
+    withoutSourceFog(() => withoutNativeMapGrade(() => renderer.render(this.scene, this.camera)));
     preview.soldier.model.getObjectByName("pelvis")!.getWorldPosition(this.namePosition);
     this.framingPoint.copy(this.namePosition);
     this.framingPoint.y = this.floor;

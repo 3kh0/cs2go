@@ -1,4 +1,5 @@
 import { wearCondition } from "./cosmetic-wear";
+import { CosmeticPreview } from "./cosmetic-preview";
 import type { Game } from "./game";
 import type { AgentTeam } from "./soldier";
 import { assetUrl } from "./asset-url";
@@ -43,17 +44,19 @@ export function setupCosmeticMenu(game: Game) {
   overlay.id = "cosmetic-menu";
   overlay.className = "overlay hidden";
   overlay.innerHTML = `<section class="cosmetic-dialog" role="dialog" aria-modal="true" aria-labelledby="cosmetic-title">
-    <header><div><div class="eyebrow">YOUR LOADOUT</div><h2 id="cosmetic-title">AGENTS</h2></div></header>
+    <header><h2 id="cosmetic-title">AGENTS</h2></header>
     <nav class="inventory-sections" aria-label="Inventory category"><button type="button" id="cosmetic-weapons">WEAPONS</button><button type="button" data-cosmetic-category="agents">AGENTS</button><button type="button" data-cosmetic-category="gloves">GLOVES</button><button type="button" id="cosmetic-music-kits">MUSIC KITS</button></nav>
     <aside class="cosmetic-browser"><label>Team<select id="cosmetic-team"><option value="ct">Counter-Terrorists</option><option value="t">Terrorists</option></select></label><label>Find an item<input id="cosmetic-search" type="search" placeholder="Search inventory..." autocomplete="off"></label><div id="cosmetic-items" class="cosmetic-items" role="group" aria-label="Available cosmetics"></div></aside>
-    <div class="cosmetic-preview"><img id="cosmetic-preview-image" alt="" hidden><p id="cosmetic-preview-caption"></p></div>
+    <div class="cosmetic-preview"><div id="cosmetic-preview-stage" role="img" aria-label="Selected cosmetic 3D preview"></div><p id="cosmetic-preview-caption" role="status"></p></div>
     <aside class="cosmetic-details"><div class="eyebrow" id="cosmetic-team-name"></div><h3 id="cosmetic-item-name"></h3>
-      <div id="glove-details"><label for="glove-wear">Wear <output id="glove-condition">Factory New</output></label><input id="glove-wear" type="range" min="0" max="1" step="0.000001"><label>Wear float<input id="glove-float" type="number" min="0" max="1" step="0.000001" required></label><label>Pattern seed<input id="glove-seed" type="number" min="0" max="1000" step="1" required></label><button id="glove-random-seed" type="button">RANDOMIZE SEED</button><p>Catalog preview. Your wear and pattern appear on the equipped gloves.</p></div>
+      <details id="glove-details"><summary>FINISH</summary><label for="glove-wear">Wear <output id="glove-condition">Factory New</output></label><input id="glove-wear" type="range" min="0" max="1" step="0.000001"><label>Wear float<input id="glove-float" type="number" min="0" max="1" step="0.000001" required></label><label>Pattern seed<input id="glove-seed" type="number" min="0" max="1000" step="1" required></label><button id="glove-random-seed" type="button">RANDOMIZE SEED</button></details>
       <div class="cosmetic-equip-actions"><button id="equip-cosmetic" class="deploy" type="button">EQUIP AGENT</button><button id="reset-cosmetic" type="button">RESTORE DEFAULT AGENT</button></div>
-      <div id="agent-animation-controls" class="cosmetic-animation-controls"><label>Find an animation<input id="agent-animation-search" type="search" placeholder="Search animations..." autocomplete="off"></label><label>Category<select id="agent-animation-group"><option value="">All animations</option><option value="base">Movement and poses</option><option value="weapon">Weapon actions</option><option value="taunt">Taunts</option><option value="additive">Additional poses</option></select></label><label>Animation<select id="agent-animation" size="7"></select></label><p id="agent-animation-count"></p><div class="cosmetic-animation-actions"><button id="play-agent-animation" type="button">PLAY ANIMATION</button><button id="stop-agent-animation" type="button">RESTORE IDLE</button></div><p id="agent-animation-hint">Preview animations in the main menu.</p></div>
-    </aside><footer id="cosmetic-status" role="status" aria-live="polite"></footer>
+      <details id="agent-animation-controls" class="cosmetic-animation-controls"><summary>ANIMATION PREVIEW</summary><label>Find an animation<input id="agent-animation-search" type="search" placeholder="Search animations..." autocomplete="off"></label><label>Category<select id="agent-animation-group"><option value="">All animations</option><option value="base">Movement and poses</option><option value="weapon">Weapon actions</option><option value="taunt">Taunts</option><option value="additive">Additional poses</option></select></label><label>Animation<select id="agent-animation" size="5"></select></label><p id="agent-animation-count"></p><div class="cosmetic-animation-actions"><button id="play-agent-animation" type="button">PLAY ANIMATION</button><button id="stop-agent-animation" type="button">RESTORE IDLE</button></div><p id="agent-animation-hint"></p></details>
+    </aside><footer><span id="cosmetic-status" role="status" aria-live="polite"></span><button id="close-cosmetic" type="button">CLOSE</button></footer>
   </section>`;
   document.getElementById("app")!.append(overlay);
+  const preview = new CosmeticPreview(document.getElementById("cosmetic-preview-stage")!);
+  game.cosmeticPreview = preview;
   const get = <E extends HTMLElement>(id: string) => document.getElementById(id) as E;
   const teamSelect = get<HTMLSelectElement>("cosmetic-team"),
     search = get<HTMLInputElement>("cosmetic-search"),
@@ -76,13 +79,42 @@ export function setupCosmeticMenu(game: Game) {
     loading = false,
     generation = 0,
     returnFocus: HTMLElement | null = null;
+  let previewTimer: ReturnType<typeof setTimeout> | undefined;
+  let previewVersion = 0;
+  function refreshPreview(delay = 0) {
+    clearTimeout(previewTimer);
+    const version = ++previewVersion;
+    previewTimer = setTimeout(async () => {
+      if (overlay.classList.contains("hidden") || loading) return;
+      const agent =
+        agents.find((a) => a.id === draftAgent && a.team === team) ?? defaultAgent(team);
+      get("cosmetic-preview-caption").textContent = "Loading preview…";
+      try {
+        await preview.show(
+          game.renderer,
+          team,
+          agent,
+          category === "gloves" ? { ...draftGloves } : undefined,
+        );
+        if (version === previewVersion) {
+          get("cosmetic-preview-caption").textContent = "";
+          detail();
+        }
+      } catch (error) {
+        if (version === previewVersion)
+          get("cosmetic-preview-caption").textContent = message(error);
+      }
+    }, delay);
+  }
 
   const message = (error: unknown) =>
     error instanceof Error ? error.message : "This item could not load. Please try again.";
   function close() {
     generation++;
+    previewVersion++;
+    clearTimeout(previewTimer);
+    preview.hide();
     overlay.classList.add("hidden");
-    if (!game.active) game.homeScene.stopAnimation(team);
     if (returnFocus?.getClientRects().length) returnFocus.focus();
     else document.getElementById(game.active ? "pause-skins" : "skins-button")?.focus();
   }
@@ -108,20 +140,10 @@ export function setupCosmeticMenu(game: Game) {
     get("equip-cosmetic").textContent = category === "agents" ? "EQUIP AGENT" : "EQUIP GLOVES";
     get("reset-cosmetic").textContent =
       category === "agents" ? "RESTORE DEFAULT AGENT" : "RESTORE DEFAULT GLOVES";
-    const image = get<HTMLImageElement>("cosmetic-preview-image");
-    image.hidden = category !== "gloves" || !glove?.image;
-    if (glove?.image && category === "gloves") {
-      image.src = assetUrl(glove.image);
-      image.alt = glove.name;
-    } else image.removeAttribute("src");
-    get("cosmetic-preview-caption").textContent =
-      category === "gloves"
-        ? "Equipped gloves appear on your hands in game."
-        : game.active
-          ? "Agent selection applies to future spawns."
-          : draftAgent === selectedAgentId(team)
-            ? agent.name
-            : "Equip an agent to see it in the main menu.";
+    get("cosmetic-preview-stage").setAttribute(
+      "aria-label",
+      `${category === "agents" ? agent.name : (glove?.name ?? "Default gloves")} 3D preview`,
+    );
     wear.value = float.value = String(draftGloves.wear);
     seed.value = String(draftGloves.seed);
     get("glove-condition").textContent = wearCondition(draftGloves.wear);
@@ -152,15 +174,11 @@ export function setupCosmeticMenu(game: Game) {
       get<HTMLButtonElement>("play-agent-animation"),
       get<HTMLButtonElement>("stop-agent-animation"),
     ])
-      element.disabled = busy || loading || game.active;
+      element.disabled = busy || loading;
     if (!animationSelect.value) get<HTMLButtonElement>("play-agent-animation").disabled = true;
-    const needsEquip = draftAgent !== selectedAgentId(team);
-    if (needsEquip) get<HTMLButtonElement>("play-agent-animation").disabled = true;
-    get("agent-animation-hint").textContent = game.active
-      ? "Animation previews are available from the main menu."
-      : needsEquip
-        ? "Equip this agent to preview its animations."
-        : "Animations preview here only. Match movement stays under your control.";
+    if (get("cosmetic-preview-stage").dataset.ready !== "true")
+      get<HTMLButtonElement>("play-agent-animation").disabled = true;
+    get("agent-animation-hint").textContent = "Preview only. Equip applies your selection.";
   }
   function list() {
     const query = search.value.toLocaleLowerCase().trim();
@@ -189,6 +207,7 @@ export function setupCosmeticMenu(game: Game) {
         else draftGloves.id = entry.id;
         status.textContent = "";
         detail();
+        refreshPreview();
       };
       items.append(button);
     }
@@ -196,7 +215,7 @@ export function setupCosmeticMenu(game: Game) {
     detail();
   }
   function listAnimations() {
-    const selected = animationSelect.value || game.homeScene.selectedAnimation(team);
+    const selected = animationSelect.value;
     const terms = animationSearch.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
     const eligible = animations.filter((animation) => !animation.team || animation.team === team);
     const filtered = eligible.filter(
@@ -234,6 +253,9 @@ export function setupCosmeticMenu(game: Game) {
     const current = ++generation;
     if (overlay.classList.contains("hidden")) returnFocus = document.activeElement as HTMLElement;
     category = next;
+    preview.hide();
+    get<HTMLDetailsElement>("agent-animation-controls").open = false;
+    get<HTMLDetailsElement>("glove-details").open = false;
     team = game.team;
     teamSelect.value = team;
     draftAgent = selectedAgentId(team);
@@ -269,6 +291,7 @@ export function setupCosmeticMenu(game: Game) {
       if (current === generation) {
         loading = false;
         detail();
+        refreshPreview();
       }
     }
   }
@@ -322,6 +345,7 @@ export function setupCosmeticMenu(game: Game) {
     } finally {
       busy = false;
       detail();
+      refreshPreview();
     }
   }
   get("equip-cosmetic").onclick = () => {
@@ -330,6 +354,7 @@ export function setupCosmeticMenu(game: Game) {
   get("reset-cosmetic").onclick = () => {
     void equip(true);
   };
+  get("close-cosmetic").onclick = close;
   get("cosmetic-weapons").onclick = () => {
     close();
     get("skin-menu").classList.remove("hidden");
@@ -340,14 +365,13 @@ export function setupCosmeticMenu(game: Game) {
     };
   });
   teamSelect.onchange = () => {
-    if (!game.active) game.homeScene.stopAnimation(team);
     team = teamSelect.value as AgentTeam;
-    if (!game.active) game.setTeam(team);
     draftAgent = selectedAgentId(team);
     draftGloves = { ...gloveChoices[team] };
     status.textContent = "";
     list();
     listAnimations();
+    refreshPreview();
   };
   search.oninput = list;
   animationSearch.oninput = listAnimations;
@@ -358,6 +382,7 @@ export function setupCosmeticMenu(game: Game) {
     float.value = wear.value;
     get("glove-condition").textContent = wearCondition(draftGloves.wear);
     status.textContent = "";
+    refreshPreview(180);
   };
   float.oninput = () => {
     if (float.validity.valid) {
@@ -366,23 +391,26 @@ export function setupCosmeticMenu(game: Game) {
       get("glove-condition").textContent = wearCondition(draftGloves.wear);
     }
     status.textContent = "";
+    if (float.validity.valid) refreshPreview(180);
   };
   seed.oninput = () => {
     if (seed.validity.valid) draftGloves.seed = Number(seed.value);
     status.textContent = "";
+    if (seed.validity.valid) refreshPreview(180);
   };
   get("glove-random-seed").onclick = () => {
     draftGloves.seed = Math.floor(Math.random() * 1001);
     seed.value = String(draftGloves.seed);
     status.textContent = "";
+    refreshPreview(180);
   };
   get("play-agent-animation").onclick = async () => {
-    if (busy || game.active || !animationSelect.value) return;
+    if (busy || !animationSelect.value) return;
     busy = true;
     detail();
     status.textContent = "Loading animation...";
     try {
-      await game.homeScene.playAnimation(team, animationSelect.value);
+      await preview.playAnimation(game.renderer, animationSelect.value);
       status.textContent = `Playing ${animationName(animations.find((animation) => animation.id === animationSelect.value)?.name ?? "animation")}.`;
     } catch (error) {
       status.textContent = message(error);
@@ -392,7 +420,7 @@ export function setupCosmeticMenu(game: Game) {
     }
   };
   get("stop-agent-animation").onclick = () => {
-    if (!game.active) game.homeScene.stopAnimation(team);
+    refreshPreview();
     status.textContent = "Default idle restored.";
   };
   document.addEventListener(

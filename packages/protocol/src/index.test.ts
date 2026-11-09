@@ -227,3 +227,15 @@ test("only lobby creation can choose an explicit public or private visibility", 
     ),
   ).toBeNull();
 });
+
+test("view tick is optional bounded finite client timing, never supplied hitboxes", () => {
+  const input = { ...neutralInput(1), viewTick: 12.125 };
+  expect(parseClientMessage(JSON.stringify({ type: "inputs", inputs: [input] }))).toMatchObject({
+    type: "inputs",
+    inputs: [{ viewTick: 12.125 }],
+  });
+  for (const viewTick of [-1, null, Number.MAX_SAFE_INTEGER + 1])
+    expect(
+      parseClientMessage(JSON.stringify({ type: "inputs", inputs: [{ ...input, viewTick }] })),
+    ).toBeNull();
+});

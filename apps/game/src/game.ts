@@ -37,6 +37,7 @@ import { HomeScene } from "./home-scene";
 import { BuyPreview } from "./buy-preview";
 import type { MusicKitPreview } from "./music-kit-preview";
 import type { WeaponInspectPreview } from "./weapon-inspect-preview";
+import type { CosmeticPreview } from "./cosmetic-preview";
 import { loadBuyPoses } from "./buy-poses";
 import { loadoutCategory } from "./loadouts";
 import { soldierHit } from "./soldier-hitboxes";
@@ -326,6 +327,7 @@ export class Game {
   buyPreview = new BuyPreview();
   musicKitPreview?: MusicKitPreview;
   weaponInspectPreview?: WeaponInspectPreview;
+  cosmeticPreview?: CosmeticPreview;
   homeScene = new HomeScene();
   canvas = el("game") as HTMLCanvasElement;
   renderer!: T.WebGLRenderer;
@@ -829,6 +831,7 @@ export class Game {
         this.homeScene.load(
           this.renderer,
           worldReady.then((world) => world.scenery),
+          worldReady.then((world) => world.collision),
         ),
       ]),
       this.bombMesh.load(this.renderer).then(() => registerActorLighting(this.bombMesh)),
@@ -6746,6 +6749,19 @@ export class Game {
       this.teamPreview(renderDt);
       return;
     }
+    if (
+      this.cosmeticPreview?.render(
+        this.renderer,
+        () =>
+          this.homeScene.renderInspectionBackdrop(
+            this.renderer,
+            this.cosmeticPreview!.inspectionCamera,
+          ),
+        this.homeScene.inspectionEnvironment,
+        renderDt,
+      )
+    )
+      return;
     if (!this.active && !el("menu").classList.contains("hidden")) {
       this.renderer.toneMapping = T.ACESFilmicToneMapping;
       if (document.getElementById("loadout-editor"))

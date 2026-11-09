@@ -116,3 +116,22 @@ test("keyframe fallback compares UTF8 bytes for unchanged Unicode profile names"
   );
   expect(decoder.decode(JSON.parse(encoded))).toEqual(JSON.parse(full));
 });
+
+test("authoritative animation clocks survive delta compression and remain independent", () => {
+  const encoder = new SnapshotEncoder(),
+    decoder = new SnapshotDecoder(),
+    current = snapshot();
+  current.players[0].animation = { phase: 0.99, air: 0, shot: null, draw: null, reload: null };
+  const first = decoder.decode(JSON.parse(encoder.encode(current))) as Snapshot;
+  current.tick += 4;
+  current.players[0].animation = {
+    phase: 0.01,
+    air: 0.02,
+    shot: 0.0078125,
+    draw: null,
+    reload: null,
+  };
+  const next = decoder.decode(JSON.parse(encoder.encode(current))) as Snapshot;
+  expect(next.players[0].animation).toEqual(current.players[0].animation);
+  expect(first.players[0].animation?.phase).toBe(0.99);
+});

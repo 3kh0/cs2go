@@ -3,7 +3,7 @@ import { assetFetch, assetUrl } from "./asset-url";
 import { EXRLoader } from "three/addons/loaders/EXRLoader.js";
 import { yieldLoadingWork } from "./loading";
 
-export type InspectionProfile = "weapon" | "knife" | "music";
+export type InspectionProfile = "weapon" | "knife" | "music" | "agent" | "gloves";
 
 const loadingClearColor = new T.Color();
 /** Keep the native opaque loading panel until its real camera/assets are ready. */

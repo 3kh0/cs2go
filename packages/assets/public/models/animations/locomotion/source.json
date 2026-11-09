@@ -1,0 +1,269 @@
+{
+  "version": 1,
+  "tool": "Source2Viewer20.1.7467",
+  "source": "Installed CS2 through Amp Windows runner, build2000942",
+  "skeleton": {
+    "resource": "animation/skeletons/characters/worldmodel.vnmskel_c",
+    "sha256": "ed57c20e5636aa13c87e212b32ce0aa7dbd0268d8a2786f8ddab56673680b82f"
+  },
+  "conversion": "Native float samplers preserved without quantization/resampling; omit only constant tracks exactly equal to the skeleton bind transform, compact other constants to one key. Gameplay simulation owns world translation; source root motion is identity.",
+  "clips": [
+    {
+      "name": "crouch_ne_knife",
+      "resource": "animation/anims/world/knife/_default_knife/crouch_ne_knife.vnmclip_c",
+      "sha256": "e9813dfbfeb76826fe20be2965dbba271167d14e181444fdfac33f1a04a2c2ff",
+      "exportSha256": "bca489de357396498e590d58dbdbfe1764b584de89e16189eef2dab3b666046b",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_ne_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/crouch_ne_pistol.vnmclip_c",
+      "sha256": "bac206b156c1ccfe20075404d49f97fba8e782e145cb07b0ad0cd08da84334ac",
+      "exportSha256": "d0679b2dc31d3deaf25a5ed5183f7aefcd7fd6d0c9fde36a5ca48c91e090f51e",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_ne_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/crouch_ne_rifle.vnmclip_c",
+      "sha256": "29167fdf571efd5d4ea313b96b903540110a8c52ebbb9369a98bf525d017733a",
+      "exportSha256": "148aef79817da9a9d3534f7668058035f0398eb3f98dd60b76e437592252114e",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_nw_knife",
+      "resource": "animation/anims/world/knife/_default_knife/crouch_nw_knife.vnmclip_c",
+      "sha256": "e413134dda0e8f65598ba984b7083921edb28ea72488101c00b6c114ecb67f4f",
+      "exportSha256": "c2737a2055f7a5456d5e42a463428fca13ee128aac30ad2a0871880ba6d13437",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_nw_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/crouch_nw_pistol.vnmclip_c",
+      "sha256": "dc36a2b2edb7ab8dc35cd7d8499bc846f7a09ffeb09f8cc99b563c9838d1dd61",
+      "exportSha256": "daf8d7d4bd4db2ad719ead8823d1f8a02cca2e1f98f0b098f9cd523f0d89e052",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_nw_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/crouch_nw_rifle.vnmclip_c",
+      "sha256": "05e4ad02907aa14e24fb58d765523bf199295cfab918b01c158c30c37d71dd94",
+      "exportSha256": "2d27c230d38d7b3ca1d8497125fe66931a0f70872c5595ee56376382f0e39b6d",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_se_knife",
+      "resource": "animation/anims/world/knife/_default_knife/crouch_se_knife.vnmclip_c",
+      "sha256": "aa1299b7d5b8c68ba104c68c7165dd7fbb3d2c5a2381e778bc5749f67d737d16",
+      "exportSha256": "39c09e4f132c78de2b9de0eb1dfd3bbfd54c9e4fb12aec90037ebacc0fe77013",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_se_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/crouch_se_pistol.vnmclip_c",
+      "sha256": "cbedc1dd6c7eae36f48546f047fe71e95b67dd91e5c22701d974dae437990cd0",
+      "exportSha256": "c9990d41e21a15fb4198d080131c40b97b67754b8fa743e46ab78b179957d700",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_se_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/crouch_se_rifle.vnmclip_c",
+      "sha256": "2cda6ca3d75841ad9cd08801036c36be23fc9a539ce32243b0181cd36d572e64",
+      "exportSha256": "eec8306e7fc029fdd47ee9d7187a0782abbbd570a5ef85948abfb0efc7cbb3e1",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_sw_knife",
+      "resource": "animation/anims/world/knife/_default_knife/crouch_sw_knife.vnmclip_c",
+      "sha256": "2c498ae4e586cbd9a795446c26708bbda9e1c0c92a20cdc3c595efcb9c3934b4",
+      "exportSha256": "0ead26cd96e987aef5cc0cfd3775cbcd7f90599804c2822a17576ed88e3065bc",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_sw_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/crouch_sw_pistol.vnmclip_c",
+      "sha256": "82f036db7eacee0e3bf233e72b8a22b00d3668e753d4e27c0373d62638d462cb",
+      "exportSha256": "04c66f0811a49dd473f9d3e2bc1d0e9ba92c92025e5405c0c2585a1a01a0687c",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "crouch_sw_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/crouch_sw_rifle.vnmclip_c",
+      "sha256": "c15cfba68f98549c6912eb7a0a11be07b7ae17388a5f7d3f44922967544c1871",
+      "exportSha256": "1237c002ebc13e36eb6554eaee8b73bd8fe841a9733ec256e9754d867f161ce1",
+      "duration": 0.7999999523162842
+    },
+    {
+      "name": "run_ne_knife",
+      "resource": "animation/anims/world/knife/_default_knife/run_ne_knife.vnmclip_c",
+      "sha256": "c4fc57502fccd0fd1c5a9650accdca0589d10156330b9d14380e7a912c5bb34c",
+      "exportSha256": "b89a613f0080ddad599e803eeb6ff19bd6859701586f7969b9e629c9645a5ee9",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_ne_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/run_ne_pistol.vnmclip_c",
+      "sha256": "6d1934622ba0f788930f4beb1f4d8234124144739145daed82b8dde027af984a",
+      "exportSha256": "55d86d5b59891269838a3eac885dc1129bcfe6ce51a091e2aa9b08dd5a574b5a",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_ne_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/run_ne_rifle.vnmclip_c",
+      "sha256": "3bd4459d6220a2b70be056dc9693c46598d2d846e3932ad72063add4667f62cf",
+      "exportSha256": "1c0ee27df26471ea6fa8848d5a52204a873ebb53e213e276f82c7b1043b00ca1",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_nw_knife",
+      "resource": "animation/anims/world/knife/_default_knife/run_nw_knife.vnmclip_c",
+      "sha256": "af091d5cfaa329ee1de547ce1103b8cb1838f2efdd90184e5bdc67e899248720",
+      "exportSha256": "206d40d86e28d5a2bfc813388ed4423b750d21a932bfe005abfd7fd3532cc566",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_nw_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/run_nw_pistol.vnmclip_c",
+      "sha256": "e3eae1050afaadf1e1726463cb8305a478079b95b8f35005367ffeea95305355",
+      "exportSha256": "681b721550c961de1fc79e048dd7082088383d34273cfff23a0018bcd4cda937",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_nw_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/run_nw_rifle.vnmclip_c",
+      "sha256": "44792ab263bd7a6d7bd7060ba0024c46c14a2c70a39670d1cb4fcd14329e3e83",
+      "exportSha256": "fb889a538b01538dbde43348cc61b5e946f29c5895c93f406180804b3aba185e",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_se_knife",
+      "resource": "animation/anims/world/knife/_default_knife/run_se_knife.vnmclip_c",
+      "sha256": "d296bf591cd3027b21d9a9d749de3845dd08a935873ccadc9fe93638c445b20e",
+      "exportSha256": "7faa8f96f8ac0fec42180f00a8e2a0ce183a117ef9f191bd5bac816f251e13b7",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_se_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/run_se_pistol.vnmclip_c",
+      "sha256": "7a0ce68fe99989a53fdf2d843c829777e5536e5c9049840c333d4a1244c7d7d4",
+      "exportSha256": "48f2b3541a35ce9afd8089ba30b68f0b2c4281046134f8060e52349698df0a58",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_se_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/run_se_rifle.vnmclip_c",
+      "sha256": "58822dd6fa93078eba757d69f5636d08aeca5e840145e20bb66b42f1e077f650",
+      "exportSha256": "0e20ab116c780a7d034ae34fb79923c7dfd0a801a8516d6d9b57423a2ac885f7",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_sw_knife",
+      "resource": "animation/anims/world/knife/_default_knife/run_sw_knife.vnmclip_c",
+      "sha256": "369d293b3e6d5d621494c7bedacec40f37f5ce2543f45f728e8ca717ba8dedf2",
+      "exportSha256": "26fe1c0fceb15ddc266a69fe2910ab9df949a626bc92d1600ac7020fc48e84a1",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_sw_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/run_sw_pistol.vnmclip_c",
+      "sha256": "11afb24608df12260053e8970fde32810befd641179c23ace78817ee9a3559e3",
+      "exportSha256": "f78bc15798decf6bf8ebb443622b2a20c23afd07bf7eb92bbb92d0f603c93278",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "run_sw_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/run_sw_rifle.vnmclip_c",
+      "sha256": "c1b38dcf3ab4da7a478d391f63899761da3601faf0de5a1f67803429227f860f",
+      "exportSha256": "66cca548268d22bc74ceebbd518d22f032113eb73ca58e07f84732a03dbe5bac",
+      "duration": 0.733299970626831
+    },
+    {
+      "name": "walk_ne_knife",
+      "resource": "animation/anims/world/knife/_default_knife/walk_ne_knife.vnmclip_c",
+      "sha256": "bd712ab9011976a529fb466da04cd8fcd9fb1e778c1072cc45ac2484eb6a8243",
+      "exportSha256": "fe95e39a542b84c1e3461d886918894be2ac789306936143b0a532ff0461a76a",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_ne_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/walk_ne_pistol.vnmclip_c",
+      "sha256": "43c67c66364e0424a19c039ad46b7ed9ba0db6459d7a57bf0a42cdb4f96a5b24",
+      "exportSha256": "2fba0a80c84f8bd4f38c37015cec893d3f293286e4aa3c4e760715077173f2e9",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_ne_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/walk_ne_rifle.vnmclip_c",
+      "sha256": "479f5d1af0dd76cfdc269e964a92642cb9dd4bdae0179164a6882b86c199b4ef",
+      "exportSha256": "98270a80d7ab5908d8ff33376a0726dd1205e449bc2f39c69d8c5279e8b77975",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_nw_knife",
+      "resource": "animation/anims/world/knife/_default_knife/walk_nw_knife.vnmclip_c",
+      "sha256": "1ceda63893fb15a2ea93fd80a27dbf3c0ac7c1601f2d001c5ef66811113429f3",
+      "exportSha256": "be89d169b8f0ed8feb6ee1bcfd7953409f5f13377a2ade87bd8778287d18929d",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_nw_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/walk_nw_pistol.vnmclip_c",
+      "sha256": "c14c4e591498315d02a59e56ab5fc02ecbdb546502c29e7d0fa04c612bf075ba",
+      "exportSha256": "433ba0dbdbc8706558229edee84373aefb5d5facf515921a60f061c55c6d7925",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_nw_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/walk_nw_rifle.vnmclip_c",
+      "sha256": "d129d3613fc54131592f244460c32f6f7c46c52664b699bcfb414108b11f8941",
+      "exportSha256": "c6de9fbec19e621e0a1f2352844f68e48dafaf4e9768f00a348c642422dc72a0",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_se_knife",
+      "resource": "animation/anims/world/knife/_default_knife/walk_se_knife.vnmclip_c",
+      "sha256": "24eaecb5a93e497b4519ba08a4afea25521f80c9b0d537d5a4c81a991e0bf57b",
+      "exportSha256": "7a0ef19c100cb6112c519f754886f005a40b10d072ed094e40b2fce0f136069c",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_se_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/walk_se_pistol.vnmclip_c",
+      "sha256": "56e067accd2f4f80348e02a35de4449506725db672b2092eae058a13012f203c",
+      "exportSha256": "3ca8107e8450668d1e76ce9233f84d0bca1dfe8119e7a582f091a84f95a6c4a1",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_se_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/walk_se_rifle.vnmclip_c",
+      "sha256": "f38083b5e2b0b3ccea177487bbfff26459736b66f8d0897a9fef0e8b27f885ab",
+      "exportSha256": "6f366e72a0c32271680e3da60de96fcebcb8ad0591bdf5c40bef16ddc5d818e5",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_sw_knife",
+      "resource": "animation/anims/world/knife/_default_knife/walk_sw_knife.vnmclip_c",
+      "sha256": "2968bdeee8ebe3a68cb950ae110f0e18f4575dcea6d8b5b27d082edb1c4ae748",
+      "exportSha256": "1bd9763fa04ee4b4c6976eedf0d6f843e72a19fbb6c12db18036129d3a76139c",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_sw_pistol",
+      "resource": "animation/anims/world/pistol/_default_pistol/walk_sw_pistol.vnmclip_c",
+      "sha256": "71f4f56926bea2baac9c41de3eeccae59a025ed80ab0ab3057e6a1c63f0508db",
+      "exportSha256": "f105704a97a79cdbd81603729a6cb158d5366acaedb270d2bab476a4a733f817",
+      "duration": 1.0
+    },
+    {
+      "name": "walk_sw_rifle",
+      "resource": "animation/anims/world/rifle/_default_rifle/walk_sw_rifle.vnmclip_c",
+      "sha256": "a590b8f74e88de21f324b8fb22deed15821b0f753f6c247c96bddaac4819d566",
+      "exportSha256": "728594f3798b601485b69ae5be6919c29e1d270a6a0cc4e9dcc00c5d92a83125",
+      "duration": 1.0
+    }
+  ],
+  "output": {
+    "file": "diagonal.glb",
+    "bytes": 1391008,
+    "sha256": "37fe640b1f452f22deb55f3ecc2894eb2fcfdb32a32e97d418f75f9c2ca9e31d"
+  }
+}

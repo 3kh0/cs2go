@@ -656,6 +656,129 @@
         ],
         "hammerUniqueId": "18533:22"
       }
+    },
+    "gloves": {
+      "activeItemIndex": 7,
+      "item": {
+        "origin": [
+          1375.979248,
+          994.27063,
+          45.238983
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "camera": {
+        "angles": [
+          0.0,
+          67.24514,
+          0.0
+        ],
+        "origin": [
+          1372.884521,
+          986.893188,
+          45.238983
+        ],
+        "VerticalFOV": 40.0,
+        "ZNear": 4.0,
+        "ZFar": 10000.0
+      },
+      "light": {
+        "origin": [
+          1411.584717,
+          1076.839355,
+          119.999985
+        ],
+        "angles": [
+          48.832275,
+          246.101013,
+          -8.400896
+        ],
+        "size_params": [
+          37.482834,
+          37.482834,
+          0.007808
+        ],
+        "range": 512.0,
+        "brightness_lumens": 800.0,
+        "brightnessscale": 1.0,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "soft_x": 0.681,
+        "soft_y": 0.696,
+        "skirt_near": 0.272,
+        "skirt": 0.954
+      }
+    },
+    "agent": {
+      "activeItemIndex": 5,
+      "item": {
+        "origin": [
+          1403.686035,
+          1066.273682,
+          -9.547699
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "camera": {
+        "angles": [
+          0.0,
+          74.999947,
+          0.0
+        ],
+        "origin": [
+          1354.208862,
+          880.710693,
+          36.75
+        ],
+        "VerticalFOV": 30.0,
+        "ZNear": 4.0,
+        "ZFar": 10000.0
+      },
+      "light": {
+        "origin": [
+          1436.040771,
+          1113.065186,
+          148.749985
+        ],
+        "angles": [
+          62.972485,
+          231.24765,
+          -17.513103
+        ],
+        "size_params": [
+          37.482834,
+          37.482834,
+          0.007808
+        ],
+        "range": 149.544006,
+        "brightness_lumens": 800.0,
+        "brightnessscale": 1.0,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "soft_x": 0.681,
+        "soft_y": 0.696,
+        "skirt_near": 0.027,
+        "skirt": 0.194
+      }
     }
+  },
+  "cosmeticSource": {
+    "entitiesReadableSha256": "870c9756ae0d15555af38e28f18cefd5658b9f53cd4aea1cd3632283bf2f70be",
+    "resource": "maps/de_dust2_vanity/entities/default_ents.vents_c",
+    "selection": "inspect.js _InitCharScene idx5 / _InitGlovesScene idx7"
   }
 }

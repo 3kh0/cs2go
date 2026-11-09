@@ -20,17 +20,67 @@ const control = Bun.serve({
   port: 3004,
   hostname: "127.0.0.1",
   async fetch(request) {
+    const origin = request.headers.get("origin") ?? "";
+    const cors: Record<string, string> = [
+      "http://127.0.0.1:5173",
+      "http://127.0.0.1:5183",
+    ].includes(origin)
+      ? {
+          "Access-Control-Allow-Origin": origin,
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Max-Age": "600",
+          Vary: "Origin",
+        }
+      : {};
+    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     if (request.method !== "POST") return new Response("Not found", { status: 404 });
     const command = (await request.json()) as {
       room: string;
       op: string;
       id?: string;
       breakableId?: string;
+      viewTick?: number;
       players?: { id: string; x: number; y: number; z: number; yaw: number; pitch: number }[];
     };
     const room = app.rooms.get(command.room);
     if (!room) return new Response("Missing room", { status: 404 });
     const map = room.map;
+    if (command.op === "native-hitboxes")
+      return Response.json(
+        {
+          tick: room.tick,
+          players: [...room.players.values()],
+          capsules: Object.fromEntries(
+            [...room.players.values()].map((player) => {
+              const rig = room.combat.get(player.id)!.hitboxes;
+              const past =
+                command.viewTick === undefined
+                  ? undefined
+                  : room.hitboxHistory.capsulesAt(player, rig, command.viewTick, room.tick);
+              const capsules =
+                past === undefined
+                  ? rig.capsules(
+                      player,
+                      room.state.bomb.carrier === player.id
+                        ? room.state.bomb.plantProgress / 3.2
+                        : 0,
+                    )
+                  : past;
+              return [
+                player.id,
+                capsules?.map(({ start, end, radius, group }) => ({
+                  start: start.toArray(),
+                  end: end.toArray(),
+                  radius,
+                  group,
+                })) ?? null,
+              ];
+            }),
+          ),
+        },
+        { headers: cors },
+      );
     if (command.op === "breakable-setup") {
       const id = command.breakableId ?? command.id;
       if (!id || room.breakables.health(id) === undefined || !command.players?.length)

@@ -1,3 +1,4 @@
+import { interpolateCharacterClock } from "@cs2go/simulation/character-clock";
 import { hideDeathcam } from "./deathcam";
 import { equippedKnives } from "./equipped-knives";
 import { weaponPrice } from "./economy";
@@ -9,7 +10,7 @@ import {
   type ServerMessage,
   type PlayerState,
 } from "@cs2go/protocol";
-import { MatchConnection } from "./multiplayer-connection";
+import { MatchConnection, INTERPOLATION_DELAY_MS } from "./multiplayer-connection";
 import type { Game } from "./game";
 import { weapons, movement, isKnife } from "./physics";
 import { createWeaponInstance } from "./weapon-instance";
@@ -880,6 +881,7 @@ export class MultiplayerMatch {
       g.playerAccuracyPose(g.selected),
     );
     g.sway += Math.hypot(local.vx, local.vz) * dt * 1.8;
+    const target = performance.now() - INTERPOLATION_DELAY_MS;
     for (const [id, bot] of this.peers) {
       if (bot.health <= 0) {
         if (bot.group.visible) {
@@ -888,8 +890,7 @@ export class MultiplayerMatch {
         }
         continue;
       }
-      const history = this.connection.history,
-        target = performance.now() - 100;
+      const history = this.connection.history;
       let before = history[0],
         after = history.at(-1)!;
       for (let i = 1; i < history.length; i++)
@@ -901,6 +902,12 @@ export class MultiplayerMatch {
       const a = before.players.find((p) => p.id === id),
         b = after.players.find((p) => p.id === id);
       if (!a || !b) continue;
+      const timeFraction = T.MathUtils.clamp(
+        (target - before.at) / Math.max(1, after.at - before.at),
+        0,
+        1,
+      );
+      this.connection.renderTick = before.tick + (after.tick - before.tick) * timeFraction;
       const t =
         a.spawn === b.spawn
           ? T.MathUtils.clamp((target - before.at) / Math.max(1, after.at - before.at), 0, 1)
@@ -913,14 +920,30 @@ export class MultiplayerMatch {
       bot.group.rotation.y =
         a.yaw + Math.atan2(Math.sin(b.yaw - a.yaw), Math.cos(b.yaw - a.yaw)) * t + Math.PI;
       bot.group.visible = true;
-      bot.vertical = b.vertical;
-      bot.velocity.set(b.vx, b.vz);
-      bot.speed = Math.hypot(b.vx, b.vz);
+      const discrete = t < 1 ? a : b;
+      bot.rig.networkPose =
+        a.animation && b.animation
+          ? interpolateCharacterClock(a.animation, b.animation, t, (after.at - before.at) / 1000)
+          : undefined;
+      bot.vertical = discrete.vertical;
+      bot.velocity.set(T.MathUtils.lerp(a.vx, b.vx, t), T.MathUtils.lerp(a.vz, b.vz, t));
+      bot.speed = bot.velocity.length();
       bot.anim += dt;
-      bot.rig.moveX = b.vx * Math.cos(bot.group.rotation.y) - b.vz * Math.sin(bot.group.rotation.y);
-      bot.rig.moveZ = b.vx * Math.sin(bot.group.rotation.y) + b.vz * Math.cos(bot.group.rotation.y);
-      bot.rig.crouch = (movement.standingEye - b.eye) / (movement.standingEye - movement.duckEye);
-      bot.rig.airborne = !b.grounded && b.ladder?.id == null;
+      bot.rig.moveX =
+        bot.velocity.x * Math.cos(bot.group.rotation.y) -
+        bot.velocity.y * Math.sin(bot.group.rotation.y);
+      bot.rig.moveZ =
+        bot.velocity.x * Math.sin(bot.group.rotation.y) +
+        bot.velocity.y * Math.cos(bot.group.rotation.y);
+      bot.rig.crouch =
+        (movement.standingEye - T.MathUtils.lerp(a.eye, b.eye, t)) /
+        (movement.standingEye - movement.duckEye);
+      bot.rig.airborne = !discrete.grounded && discrete.ladder?.id == null;
+      bot.rig.jumping = discrete.vertical > 0 && discrete.ladder?.id == null;
+      const bomb = this.connection.round?.bomb;
+      bot.rig.plant =
+        bot.rig.networkPose?.plant ??
+        (bomb?.carrier === id && !bomb.planted ? bomb.plantProgress / 3.2 : 0);
     }
     if (!g.dead) g.updateAimCamera();
     else if (g.spectatorMode === "free") g.moveSpectator(dt);

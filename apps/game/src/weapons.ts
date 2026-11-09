@@ -184,11 +184,29 @@ export function disposeWorldGun(root: T.Object3D) {
   });
   skeletons.forEach((skeleton) => skeleton.dispose());
 }
-export function createWorldGun(index: number, suppressed = true, instance?: WeaponInstance) {
+export function createWorldGun(
+  index: number,
+  suppressed = true,
+  instance?: WeaponInstance,
+  rigged = false,
+) {
   if (isKnife(index)) {
     const model = index === 4 ? createWorldBayonet() : createInspectsWorldKnife(index);
     bindWeaponInstance(model, instance ?? null);
     return model;
+  }
+  if (rigged) {
+    const gun = createNativeWorldGun(
+      index,
+      suppressed,
+      worldGrip(index)?.stand.weaponBones,
+      !!instance?.skin.id,
+      true,
+    );
+    gun.userData.ownedWorldGun = true;
+    bindWeaponInstance(gun, instance ?? null);
+    shareSkeletons(gun);
+    return gun;
   }
   if (instance?.skin.id && !isKnife(index)) {
     const gun = createNativeWorldGun(index, suppressed, worldGrip(index)?.stand.weaponBones, true);

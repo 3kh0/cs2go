@@ -1,5 +1,6 @@
 import { expect, test } from "vitest";
 import * as T from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import {
@@ -13,6 +14,42 @@ const assets = new URL("../../../packages/assets/public/", import.meta.url);
 const read = (path: string) => readFileSync(new URL(path, assets));
 const json = (path: string) => JSON.parse(read(path).toString());
 const sha = (raw: Uint8Array) => createHash("sha256").update(raw).digest("hex");
+test("native diagonal locomotion preserves authored poses instead of averaging cardinal clips", async () => {
+  const parse = (path: string) => {
+    const bytes = read(path);
+    return new GLTFLoader().parseAsync(
+      bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+      "",
+    );
+  };
+  const [native, cardinal] = await Promise.all([
+    parse("models/animations/locomotion/diagonal.glb"),
+    parse("models/agents/inspects/animations/world/rifle/_default_rifle.glb"),
+  ]);
+  expect(native.animations).toHaveLength(36);
+  const mixer = new T.AnimationMixer(native.scene);
+  const reference = new T.AnimationMixer(cardinal.scene);
+  const diagonal = mixer
+    .clipAction(native.animations.find((clip) => clip.name === "run_ne_rifle")!)
+    .play();
+  const forward = reference
+    .clipAction(cardinal.animations.find((clip) => clip.name === "run_n_rifle")!)
+    .play()
+    .setEffectiveWeight(0.5);
+  const right = reference
+    .clipAction(cardinal.animations.find((clip) => clip.name === "run_e_rifle")!)
+    .play()
+    .setEffectiveWeight(0.5);
+  diagonal.time = forward.time = right.time = 0.25;
+  mixer.update(0);
+  reference.update(0);
+  native.scene.updateMatrixWorld(true);
+  cardinal.scene.updateMatrixWorld(true);
+  const foot = native.scene.getObjectByName("ankle_L")!.getWorldPosition(new T.Vector3());
+  const average = cardinal.scene.getObjectByName("ankle_L")!.getWorldPosition(new T.Vector3());
+  expect(foot.distanceTo(average)).toBeGreaterThan(0.01);
+  expect(native.scene.getObjectByName("root_motion")!.scale.toArray()).toEqual([1, 1, 1]);
+});
 test("sparse native idles supply constant bind channels before additive grip rebasing", () => {
   const model = new T.Group(),
     finger = new T.Bone();
@@ -145,4 +182,38 @@ test("missing attachment helpers follow native hierarchy while body-only clips f
   expect(agentClipForModel(clip, model).tracks).toHaveLength(1);
   ensureAgentAnimationBones(model, source);
   expect(hand.children).toHaveLength(1);
+});
+
+test("legacy Source rigs apply the root basis once to newly reconstructed weapon helpers", () => {
+  const source = new T.Group(),
+    root = new T.Bone(),
+    pelvis = new T.Bone(),
+    anchor = new T.Bone();
+  root.name = "root_motion";
+  root.quaternion.set(-0.5, -0.5, -0.5, 0.5);
+  pelvis.name = "pelvis";
+  pelvis.position.z = 1;
+  anchor.name = "wpn";
+  anchor.position.set(0.2, -0.1, 1.2);
+  source.add(root);
+  root.add(pelvis, anchor);
+  const model = new T.Group(),
+    native = new T.Group(),
+    body = new T.Bone();
+  native.scale.setScalar(0.0254);
+  native.quaternion.copy(root.quaternion);
+  body.name = "pelvis";
+  model.add(native);
+  native.add(body);
+  ensureAgentAnimationBones(model, source);
+  source.updateMatrixWorld(true);
+  model.updateMatrixWorld(true);
+  expect(body.parent).toBe(native);
+  expect(model.getObjectByName("wpn")!.parent).toBe(native);
+  expect(
+    model
+      .getObjectByName("wpn")!
+      .getWorldPosition(new T.Vector3())
+      .distanceTo(anchor.getWorldPosition(new T.Vector3())),
+  ).toBeLessThan(1e-7);
 });

@@ -464,7 +464,6 @@ export function startServer(options: ServerOptions) {
           log(
             `Room #${roomLabels.get(room)} - round ${room.state.round} - ${room.state.phase} - CT ${room.state.scores.ct} : T ${room.state.scores.t}`,
           );
-        room.tick++;
         if (room.tick % (TICK_RATE / SNAPSHOT_RATE) === 0) {
           const message: ServerMessage = {
             type: "snapshot",

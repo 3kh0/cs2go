@@ -17,7 +17,8 @@ import {
 } from "@cs2go/protocol";
 import { movePlayer } from "@cs2go/simulation/movement";
 import type { DustMap } from "@cs2go/simulation/dust-map";
-import { STEP } from "@cs2go/simulation/match";
+const STEP = 1 / TICK_RATE;
+export const INTERPOLATION_DELAY_MS = 100;
 
 export class MatchConnection {
   socket!: WebSocket;
@@ -29,6 +30,7 @@ export class MatchConnection {
   private attempts = 0;
   private interrupt?: () => void;
   private timeline?: number;
+  renderTick?: number;
   private lastTick = -1;
   private decoder = new SnapshotDecoder();
   round?: RoundState;
@@ -36,7 +38,7 @@ export class MatchConnection {
   id = "";
   local?: PlayerState;
   players: PlayerState[] = [];
-  history: { at: number; players: PlayerState[] }[] = [];
+  history: { at: number; tick: number; players: PlayerState[] }[] = [];
   pending: Input[] = [];
   batch: Input[] = [];
   seq = 0;
@@ -116,6 +118,7 @@ export class MatchConnection {
           this.history = [];
           this.local = undefined;
           this.timeline = undefined;
+          this.renderTick = undefined;
           this.lastTick = -1;
           console.log("[network] Joined", { recovered: this.reconnecting });
         } else if (message.type === "snapshot") {
@@ -136,6 +139,7 @@ export class MatchConnection {
           this.timeline =
             this.timeline === undefined ? origin : Math.min(origin, this.timeline + 0.25);
           this.history.push({
+            tick: message.tick,
             at: this.timeline + (message.tick * 1000) / TICK_RATE,
             players: message.players,
           });
@@ -214,7 +218,12 @@ export class MatchConnection {
     // Bound prediction without disconnecting a client during a temporary load stall.
     if (this.pending.length >= MAX_PENDING_INPUTS || this.socket.bufferedAmount > 64 * 1024)
       return false;
-    const frame: Input = { ...input, seq: ++this.seq };
+    const viewTick = this.renderTick;
+    const frame: Input = {
+      ...input,
+      seq: ++this.seq,
+      ...(viewTick === undefined ? {} : { viewTick }),
+    };
     this.pending.push(frame);
     this.batch.push(frame);
     if (this.round && ["waiting", "live", "post"].includes(this.round.phase))

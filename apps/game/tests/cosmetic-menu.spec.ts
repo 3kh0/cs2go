@@ -40,9 +40,11 @@ test("inventory equips gloves per team, previews agent animations and restores d
   });
   await page.locator("#cosmetic-team").selectOption("ct");
   await page.locator(`[data-cosmetic-item="${glove.id}"]`).click();
-  await page.locator("#cosmetic-preview-image").evaluate(async (element) => {
-    await (element as HTMLImageElement).decode();
+  await expect(page.locator("#cosmetic-preview-stage")).toHaveAttribute("data-item", glove.id, {
+    timeout: 60_000,
   });
+  await expect(page.locator("#cosmetic-preview-stage")).toHaveAttribute("data-ready", "true");
+  await page.locator("#glove-details summary").click();
   await page.locator("#glove-float").fill("1.2");
   await page.locator("#equip-cosmetic").click();
   expect(
@@ -79,6 +81,10 @@ test("inventory equips gloves per team, previews agent animations and restores d
   await page.locator('[data-cosmetic-category="agents"]').click();
   await expect(page.locator("#cosmetic-search")).toBeFocused({ timeout: 30_000 });
   await page.locator("#cosmetic-team").selectOption("ct");
+  await expect(page.locator("#cosmetic-preview-stage")).toHaveAttribute("data-ready", "true", {
+    timeout: 60_000,
+  });
+  await page.locator("#agent-animation-controls summary").click();
   await expect(page.locator("#play-agent-animation")).toBeEnabled();
   await page.locator("#agent-animation").selectOption("weapon/ak::ct_buymenu_ak");
   await page.locator("#play-agent-animation").click();
@@ -103,7 +109,7 @@ test("inventory equips gloves per team, previews agent animations and restores d
   await expect(page.locator("#cosmetic-status")).toContainText("equipped for Terrorists", {
     timeout: 45_000,
   });
-  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-agent", /^(?!default)/, {
+  await expect(page.locator("#cosmetic-preview-stage")).toHaveAttribute("data-item", agent.id, {
     timeout: 45_000,
   });
   await expect(page.locator("#agent-animation option")).not.toHaveCount(0);
@@ -128,6 +134,10 @@ test("inventory equips gloves per team, previews agent animations and restores d
   await page.locator("#skins-button").click();
   await page.locator("#inventory-agents").click();
   await expect(page.locator("#cosmetic-search")).toBeFocused();
+  await expect(page.locator("#cosmetic-preview-stage")).toHaveAttribute("data-ready", "true", {
+    timeout: 60_000,
+  });
+  await page.locator("#agent-animation-controls summary").click();
   await page.locator("#agent-animation-group").selectOption("weapon");
   await page.locator("#agent-animation-search").fill("buy menu");
   await page.locator("#agent-animation").selectOption("weapon/ak::t_buymenu_ak_03");
@@ -138,7 +148,7 @@ test("inventory equips gloves per team, previews agent animations and restores d
   await expect(page.locator("#cosmetic-status")).toHaveText("Default idle restored.");
   await page.locator("#reset-cosmetic").click();
   await expect(page.locator("#cosmetic-status")).toContainText("equipped for Terrorists");
-  await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-agent", "default-t", {
+  await expect(page.locator("#cosmetic-preview-stage")).toHaveAttribute("data-item", "default-t", {
     timeout: 30_000,
   });
   await page.locator("#cosmetic-weapons").click();
@@ -188,9 +198,11 @@ test("inventory equips gloves per team, previews agent animations and restores d
   await page.locator("#pause-skins").click();
   await page.locator("#inventory-agents").click();
   await expect(page.locator("#cosmetic-search")).toBeFocused();
-  await expect(page.locator("#play-agent-animation")).toBeDisabled();
-  await expect(page.locator("#agent-animation")).toBeDisabled();
-  await expect(page.locator("#agent-animation-hint")).toContainText("main menu");
+  await expect(page.locator("#cosmetic-preview-stage")).toHaveAttribute("data-ready", "true", {
+    timeout: 60_000,
+  });
+  await expect(page.locator("#agent-animation")).toBeHidden();
+  await expect(page.locator("#agent-animation-hint")).toContainText("Preview only");
   await page.keyboard.press("Escape");
   await expect(page.locator("#cosmetic-menu")).toBeHidden();
   await page.locator("#resume").click();

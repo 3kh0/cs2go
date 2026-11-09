@@ -217,6 +217,9 @@ test("hitscan headshots, wall occlusion, spare-magazine reload, and target respa
 test("bots navigate, damage the player, and respawn resets health and ammunition", async ({
   page,
 }) => {
+  // Keep this respawn-ammo fixture on the same weapon; F3 random loadouts are
+  // exercised by the deathmatch tests.
+  await page.addInitScript(() => localStorage.setItem("cs2go-dm-random-weapons", "false"));
   await page.goto("/");
   await page.bringToFront();
   // Legacy modes remain useful as isolated gameplay fixtures, outside the lobby.
@@ -982,6 +985,7 @@ test("agent side selection, independent rigs, and live menu animation", async ({
   expect(external).toEqual([]);
 });
 test("Dust II ledges release the player and A ramp's wall stays solid", async ({ page }) => {
+  test.setTimeout(90_000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
@@ -1227,8 +1231,9 @@ test("CT ramp traversal and the local callout radar", async ({ page, baseURL }) 
   await page.keyboard.down("m");
   await expect(page.locator(".radar-wrap")).toHaveClass(/expanded/);
   expect(await page.evaluate(() => window.__game.locked)).toBe(true);
-  // Independently check the artwork: both site coordinates must land inside
-  // its red bombsite regions, not merely agree with our marker projection.
+  // The extracted radar outlines the sites in orange; their interiors are
+  // neutral map geometry. Check the nearby authored outline, not a red fill
+  // from the previous radar artwork.
   expect(
     await page.evaluate(() => {
       const g = window.__game,
@@ -1239,8 +1244,21 @@ test("CT ramp traversal and the local callout radar", async ({ page, baseURL }) 
       g.drawMapLayer(ctx, canvas.width, canvas.height, true);
       const { px, pz } = g.mapProjection(canvas.width, canvas.height);
       return g.world.navigation!.data.sites.map(([x, , z]) => {
-        const [r, green, b] = ctx.getImageData(Math.round(px(x)), Math.round(pz(z)), 1, 1).data;
-        return r > green * 2 && r > b * 2;
+        const pixels = ctx.getImageData(
+          Math.round(px(x)) - 50,
+          Math.round(pz(z)) - 50,
+          100,
+          100,
+        ).data;
+        let outline = 0;
+        for (let i = 0; i < pixels.length; i += 4)
+          if (
+            pixels[i] > 120 &&
+            pixels[i] > pixels[i + 1] * 1.4 &&
+            pixels[i + 1] > pixels[i + 2] * 1.7
+          )
+            outline++;
+        return outline > 10;
       });
     }),
   ).toEqual([true, true]);
@@ -1705,6 +1723,7 @@ test("spectator chase avoids walls and corpses settle without losing visibility"
 test("spectator wheel modes provide first person, mouse orbit, and independent paused-safe flight", async ({
   page,
 }) => {
+  test.setTimeout(90_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");

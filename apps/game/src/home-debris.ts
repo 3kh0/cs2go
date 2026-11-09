@@ -1,5 +1,13 @@
 import * as T from "three";
+import type { MapCollision } from "./map-collision";
 import { homeCurlNoise, homeValueNoise } from "./home-particle-noise";
+import {
+  dustFade,
+  dustForceCurve,
+  particleBias,
+  particleCurve,
+  particleDrag,
+} from "./home-particle-operators";
 
 const unit = 0.0254;
 const paperOrigins = [
@@ -25,6 +33,8 @@ interface Debris {
   spin: number;
   color?: T.Color;
   force?: number;
+  trace?: T.Vector3;
+  traceTime?: number;
 }
 
 /** Authored bounds/forces, reconstructed integration (not the Source particle VM). */
@@ -51,10 +61,13 @@ export class HomeDebris {
   private roll = new T.Quaternion();
   private axis = new T.Vector3(0, 0, 1);
   private curl = new T.Vector3();
+  private direction = new T.Vector3();
+  private normal = new T.Vector3();
   private counts = new Uint16Array(5);
   private background: T.Object3D;
   private floor: number;
   private dustFrames: number;
+  private collision?: MapCollision;
 
   constructor(
     models: T.Group[],
@@ -64,8 +77,10 @@ export class HomeDebris {
     background: T.Object3D,
     floor: number,
     dustFrames: number,
+    collision?: MapCollision,
   ) {
     this.background = background;
+    this.collision = collision;
     this.floor = floor;
     this.dustFrames = dustFrames;
     this.counts = new Uint16Array(models.length);
@@ -122,9 +137,13 @@ export class HomeDebris {
       return;
     const origin = paperOrigins[emitter];
     const position = sourcePosition(origin[0], origin[1] + this.between(-256, 256), origin[2]);
-    this.ray.set(new T.Vector3(position.x, position.y + 2, position.z), new T.Vector3(0, -1, 0));
-    this.ray.far = 12;
-    const floor = this.ray.intersectObject(this.background, true)[0]?.point.y ?? this.floor;
+    let floor = this.collision?.floor(position.x, position.z, position.y + 2, position.y - 10);
+    if (!this.collision) {
+      this.ray.set(new T.Vector3(position.x, position.y + 2, position.z), new T.Vector3(0, -1, 0));
+      this.ray.far = 12;
+      floor = this.ray.intersectObject(this.background, true)[0]?.point.y;
+    }
+    floor = floor !== undefined && Number.isFinite(floor) ? floor : this.floor;
     position.y = Math.max(position.y, floor + 0.08);
     this.papers.push({
       position,
@@ -144,30 +163,46 @@ export class HomeDebris {
         T.SRGBColorSpace,
       ),
       force: 1 - 0.9 * T.MathUtils.clamp((this.between(0.1, 1) - 0.1) / 0.15, 0, 1),
+      trace: position.clone(),
+      traceTime: this.between(0, 0.25),
     });
   }
   private spawnDust() {
     if (this.dust.length >= dustCapacity) return;
+    // CreateWithinSphereTransform precedes the local PositionOffset. Its bias
+    // flattens the sphere into a half ellipse; it is not the sprite radius.
+    const polar = this.between(-1, 1),
+      azimuth = this.between(0, Math.PI * 2);
+    const radial = Math.sqrt(1 - polar * polar);
+    const direction = this.curl
+      .set(-Math.abs(radial * Math.cos(azimuth)), radial * Math.sin(azimuth) * 0.5, 0)
+      .normalize();
+    const distance = 25 + 25 * Math.cbrt(this.random());
     const x = this.between(-60, -300),
       y = this.between(-60, -150);
     const yaw = T.MathUtils.degToRad(285);
     const position = sourcePosition(
-      1324.5792236328125 + Math.cos(yaw) * x - Math.sin(yaw) * y,
-      825 + Math.sin(yaw) * x + Math.cos(yaw) * y,
+      1324.5792236328125 +
+        Math.cos(yaw) * (x + direction.x * distance) -
+        Math.sin(yaw) * (y + direction.y * distance),
+      825 +
+        Math.sin(yaw) * (x + direction.x * distance) +
+        Math.cos(yaw) * (y + direction.y * distance),
       -4 + this.between(1, 2),
     );
-    const size = this.random();
+    const size = particleBias(this.random(), -0.68);
     this.dust.push({
       position,
       velocity: new T.Vector3(0, this.between(50, 120) * unit, 0),
       age: 0,
       life: 8 + size * 7,
       radius: (10 + size * 15) * unit,
-      phase: this.between(0, Math.PI * 2),
+      phase: T.MathUtils.degToRad(this.between(0, 60)) * (this.random() < 0.5 ? -1 : 1),
       spin: T.MathUtils.degToRad(15 - size * 10),
       floor: this.floor + 0.04,
       emitter: 0,
       model: Math.floor(this.random() * 4), // Native second sequence range 0–3.
+      force: 0.5 + size * 0.5,
     });
   }
   private step(dt: number) {
@@ -218,6 +253,43 @@ export class HomeDebris {
       p.velocity.y += (-20 + this.curl.z * 150) * unit * dt;
       p.velocity.clampLength(0, 60 * unit);
       p.position.addScaledVector(p.velocity, dt);
+      p.traceTime! -= dt;
+      if (p.traceTime! <= 0) {
+        // Native world-trace constraints must catch walls and changing ground,
+        // not just bounce forever against the floor sampled at emission. Sweep
+        // the whole accumulated segment, staggered and bounded at 4Hz/paper.
+        this.direction.subVectors(p.position, p.trace!);
+        const length = this.direction.length();
+        if (length > 1e-6) {
+          const fraction = this.collision?.sweepSphere(
+            p.trace!,
+            this.direction,
+            0.025,
+            this.normal,
+          );
+          let point: T.Vector3 | undefined;
+          if (fraction !== undefined && fraction <= 1) {
+            p.position.copy(p.trace!).addScaledVector(this.direction, Math.max(0, fraction));
+            point = p.position;
+          } else if (!this.collision) {
+            this.ray.set(p.trace!, this.direction.multiplyScalar(1 / length));
+            this.ray.far = length + 0.025;
+            const hit = this.ray.intersectObject(this.background, true)[0];
+            if (hit?.face) {
+              this.normal.copy(hit.face.normal).transformDirection(hit.object.matrixWorld);
+              point = hit.point;
+            }
+          }
+          if (point) {
+            if (this.normal.dot(p.velocity) > 0) this.normal.negate();
+            p.position.copy(point).addScaledVector(this.normal, 0.025);
+            p.velocity.reflect(this.normal).multiplyScalar(0.75);
+            p.floor = Math.min(p.floor, p.position.y - 0.025);
+          }
+        }
+        p.trace!.copy(p.position);
+        p.traceTime = 0.25;
+      }
       if (p.position.y < p.floor + 0.025) {
         p.position.y = p.floor + 0.025;
         p.velocity.y = Math.abs(p.velocity.y) * 0.75;
@@ -232,7 +304,7 @@ export class HomeDebris {
         continue;
       }
       const life = p.age / p.life;
-      const strength = 1.35 - 1.1 * life;
+      const strength = p.force! * particleCurve(life, dustForceCurve);
       const noise =
         -0.5 +
         0.5 *
@@ -243,10 +315,16 @@ export class HomeDebris {
           );
       const fx = (150 * strength + 80 * noise) * unit;
       const fy = (130 * strength - 350 * noise) * unit;
+      // BasicMovement uses drag per 1/30s, not a per-second decay coefficient.
+      p.velocity.multiplyScalar(particleDrag(0.3, dt));
       p.velocity.x += (Math.cos(yaw) * fx - Math.sin(yaw) * fy) * dt;
       p.velocity.z -= (Math.sin(yaw) * fx + Math.cos(yaw) * fy) * dt;
-      p.velocity.y += (-30 + 10 * strength + Math.sin(this.time + p.phase) * 20) * unit * dt;
-      p.velocity.multiplyScalar(Math.exp(-0.3 * dt));
+      const turbulence = homeValueNoise(
+        (p.position.x / unit) * 0.01,
+        (-p.position.z / unit) * 0.01,
+        (p.position.y / unit) * 0.01,
+      );
+      p.velocity.y += (-30 + 10 * strength + turbulence * 20) * unit * dt;
       p.position.addScaledVector(p.velocity, dt);
       if (p.position.y < p.floor) {
         p.position.y = p.floor;
@@ -304,11 +382,13 @@ export class HomeDebris {
       this.dummy.scale.setScalar(p.radius * (1 + 2 * radiusBias));
       this.dummy.updateMatrix();
       this.dustMesh.setMatrixAt(i, this.dummy.matrix);
-      const fade = Math.min(1, p.age / 0.5) * Math.min(1, (1 - t) / 0.5);
+      const fade = dustFade(p.age, p.life);
       this.dustOpacity.setX(i, fade * (1 - ((p.life - 8) / 7) * 0.65));
       const sequenceFrames = this.dustFrames / 4;
       this.dustFrame.setX(i, p.model * sequenceFrames + t * (sequenceFrames - 1));
-      this.dustTint.setXYZ(i, 1 - t * 0.54, 1 - t * 0.5, 1 - t * 0.46);
+      // ColorInterpolate's authored .5->0 interval is reversed. Do not silently
+      // replace it with a forward lifetime ramp that darkens every particle.
+      this.dustTint.setXYZ(i, 1, 1, 1);
     });
     this.dustMesh.count = this.dust.length;
     this.dustMesh.instanceMatrix.needsUpdate = true;

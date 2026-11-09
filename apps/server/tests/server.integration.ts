@@ -1,5 +1,7 @@
 // Exercise Bun's real HTTP/WebSocket runtime rather than mocking its upgrade API.
 import assert from "node:assert/strict";
+import * as T from "three";
+import { createCombatMemory } from "@cs2go/simulation/combat";
 import { loadServerMap } from "../src/map";
 import { startServer } from "../src/server";
 import {
@@ -138,6 +140,74 @@ try {
         message.type === "snapshot" && message.events.some((event) => event.kind === "shot"),
     ),
   );
+  // Real WebSocket commands must miss empty AABB corners and damage the actual
+  // animated native head. The client never sends a target, hitgroup or damage.
+  let seq = 50;
+  const shotCount = () =>
+    a.messages
+      .flatMap((message) => (message.type === "snapshot" ? message.events : []))
+      .filter((event) => event.kind === "shot" && event.shooter === aId).length;
+  async function nativeShot(head: boolean) {
+    a.socket.send(JSON.stringify({ type: "inputs", inputs: [neutralInput(seq++)] }));
+    await until(() => shooter.ack === seq - 1, "release native hitbox shot");
+    Object.assign(victim, {
+      x: 6.5,
+      y: -3.08,
+      z: -61,
+      yaw: 0,
+      eye: 1.6256,
+      vx: 0,
+      vz: 0,
+      health: 1000,
+      armor: 0,
+      grounded: true,
+    });
+    const box = room.combat
+      .get(bId)!
+      .hitboxes.capsules(victim)
+      .find((box) => box.group === 1)!;
+    const target = head
+      ? box.start.clone().add(box.end).multiplyScalar(0.5)
+      : new T.Vector3(victim.x + 0.35, victim.y + 1.65, victim.z);
+    const from = target.clone().add(new T.Vector3(-1.9, 0, 0));
+    Object.assign(shooter, {
+      x: from.x,
+      y: from.y - 1.6256,
+      z: from.z,
+      vx: 0,
+      vz: 0,
+      vertical: 0,
+      eye: 1.6256,
+      cooldown: 0,
+      reloadTime: 0,
+      ammo: 12,
+    });
+    const memory = createCombatMemory();
+    room.combat.set(aId, memory);
+    shooter.punch = memory.punch;
+    const before = shotCount();
+    // For the empty corner probe use a front-facing ray at x+.35; a side ray
+    // would enter the real head before reaching that corner.
+    if (!head) Object.assign(shooter, { x: target.x, z: target.z + 1.9 });
+    a.socket.send(
+      JSON.stringify({
+        type: "inputs",
+        inputs: [{ ...neutralInput(seq++), fire: true, yaw: head ? -Math.PI / 2 : 0, pitch: 0 }],
+      }),
+    );
+    await until(() => shotCount() > before, "native capsule shot replicated");
+    assert.equal(victim.health < 1000, head, "native capsule versus empty movement-hull corner");
+    const events = a.messages.flatMap((message) =>
+      message.type === "snapshot" ? message.events : [],
+    );
+    const shot = events.filter((event) => event.kind === "shot" && event.shooter === aId).at(-1)!;
+    assert.equal(
+      shot.kind === "shot" && shot.hits?.some((hit) => hit.victim === bId && hit.headshot),
+      head,
+    );
+  }
+  await nativeShot(false);
+  await nativeShot(true);
   const isolated = await client("Isolated");
   await until(() => isolated.players().length === 1, "isolated room");
   assert.equal(a.players().length, 2);

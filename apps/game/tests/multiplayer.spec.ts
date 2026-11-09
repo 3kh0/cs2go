@@ -91,7 +91,7 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     await a.waitForFunction(() => window.__game.network?.connection.round?.phase === "freeze");
     expect(await a.evaluate(() => window.__game.world === window.__game.dust)).toBe(true);
     expect(await a.evaluate(() => "range" in window.__game)).toBe(false);
-    await expect(a.locator("#location")).toHaveText("DUST II");
+    await expect(a.locator("#location")).toHaveText("CT Start");
     await a.bringToFront();
     await a
       .locator("#resume")

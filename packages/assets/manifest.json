@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "a0c340e1bf055bfda469bf4a9f0e53b97605bd289ef469575ae00691c0711f85",
+  "release": "eedcfa1e88b95ad8af9265c12471cadea8a647e8ffe4dc75bf6ad24473d9b89e",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -17882,6 +17882,31 @@
       "inputSha256": "8268461b9e4db331376011b076e1b563b03c0d02c86c72b14ebd4f57b0963855",
       "object": "objects/fc30ad8d2b6b75ea2fd27b3344e2bc03d421c40c46fcbc6e59b5ff9dc6c1762b.gz"
     },
+    "models/animations/locomotion/diagonal.glb.gz": {
+      "sha256": "f702d39afb7cdee83b6723c55f925059ea3bdedcc5b569e032de068ade47ff58",
+      "bytes": 373175,
+      "decodedSha256": "37fe640b1f452f22deb55f3ecc2894eb2fcfdb32a32e97d418f75f9c2ca9e31d",
+      "input": "models/animations/locomotion/diagonal.glb",
+      "inputSha256": "37fe640b1f452f22deb55f3ecc2894eb2fcfdb32a32e97d418f75f9c2ca9e31d",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "e1f1ff066363e870a1e75a568031bf56f1fe70f55ee7f224cf723bdb1fde3956",
+        "bytes": 368749
+      },
+      "object": "objects/e1f1ff066363e870a1e75a568031bf56f1fe70f55ee7f224cf723bdb1fde3956.gz.br"
+    },
+    "models/animations/locomotion/source.json": {
+      "sha256": "e4dd9a44ccefd569b934f2725685e666c6d049b7d93f8522918d10c66aa4fb51",
+      "bytes": 12961,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "3cfb640d8a943db24192da949924d0823e43eaafd0908f1efe8c0c501bcbf882",
+        "bytes": 3186
+      },
+      "object": "objects/3cfb640d8a943db24192da949924d0823e43eaafd0908f1efe8c0c501bcbf882.json.br"
+    },
     "models/awp.glb.gz": {
       "sha256": "e1dcd1266cb83bfab51bbbd77e5b9e46f4dbbbde71a75040a5610c371834c6c3",
       "bytes": 97695,
@@ -19588,15 +19613,15 @@
       "object": "objects/bb7b5d09ae0c97ccca05e7fa8d1e51b5f1e7dbd45a3d9868359b573b44c3754f.bin.br"
     },
     "models/inspection-lighting/dust2-profiles.json": {
-      "sha256": "fef52cdb1e64c4a7d1686c721bf22b96386349f7308a3fd6eff769715b624c40",
-      "bytes": 15992,
+      "sha256": "55b1e5c6d63564da3d04fca1d7f91e46de9ec4611570c3995610af49f5102d99",
+      "bytes": 18475,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "f246e816f0f21aece432e1bcf22385e70470be822cf0448a6fdc27dc9e27c52a",
-        "bytes": 1885
+        "sha256": "6f0d885338e0775f7a6476f66e603a9945d6b251d256b97ab9904d0bf96a952d",
+        "bytes": 2270
       },
-      "object": "objects/f246e816f0f21aece432e1bcf22385e70470be822cf0448a6fdc27dc9e27c52a.json.br"
+      "object": "objects/6f0d885338e0775f7a6476f66e603a9945d6b251d256b97ab9904d0bf96a952d.json.br"
     },
     "models/inspection-lighting/dust2-reflection.exr": {
       "sha256": "1915425933a3862d198c51d7eef6cd966bb62ccc9307a22430525404207010b8",

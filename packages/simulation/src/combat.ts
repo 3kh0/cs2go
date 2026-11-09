@@ -1,17 +1,12 @@
 import * as T from "three";
 import type { MatchEvent, PlayerState } from "@cs2go/protocol";
 import type { Match } from "./match";
-import { rayBox, dropWeapon } from "./match";
+import { dropWeapon } from "./match";
 import { weapons, movement, isKnife } from "./physics";
-import { applyArmorDamage, friendlyFireScale, hitRegion, type HitRegion } from "./damage";
+import { applyArmorDamage, friendlyFireScale, hitRegionMultiplier, type HitRegion } from "./damage";
 import { addMoney, killReward } from "./economy";
 import { ballistics } from "./ballistics";
-import {
-  solveBullet,
-  fleshThickness,
-  hitgroupMultiplier,
-  type BulletSurface,
-} from "./bullet-solver";
+import { solveBullet, type BulletSurface } from "./bullet-solver";
 import {
   advanceAimPunch,
   advanceWeaponRecoil,
@@ -28,12 +23,14 @@ import {
   type AccuracyPose,
 } from "./accuracy";
 import { knifeBackstab, knifeDamage, knifeRange } from "./melee";
+import { PlayerHitboxes } from "./player-hitboxes";
 export function createCombatMemory() {
   return {
     punch: createAimPunch(),
     recoil: weapons.map(createWeaponRecoil),
     accuracy: weapons.map(createWeaponAccuracy),
     knifeAge: 10,
+    hitboxes: new PlayerHitboxes(),
   };
 }
 export type CombatMemory = ReturnType<typeof createCombatMemory>;
@@ -54,6 +51,7 @@ export function advanceCombat(
   dt: number,
   mode: 0 | 1 = 0,
 ) {
+  state.hitboxes.advance(player, dt);
   advanceAimPunch(state.punch, dt);
   state.knifeAge += dt;
   const pose = accuracyPose(player, mode);
@@ -135,15 +133,39 @@ type HitData = {
   normal?: T.Vector3;
   victim?: PlayerState;
   head?: boolean;
-  height?: number;
+  region?: HitRegion;
   breakableId?: string;
 };
+function hitTarget(
+  match: Match,
+  target: PlayerState,
+  ray: T.Ray,
+  maxDistance: number,
+  viewTick?: number,
+) {
+  const rig = match.combat.get(target.id)!.hitboxes;
+  const past =
+    viewTick === undefined
+      ? undefined
+      : match.hitboxHistory.hit(target, rig, ray, maxDistance, viewTick, match.tick);
+  if (past !== undefined) return past;
+  const hit = rig.hit(
+    target,
+    ray,
+    maxDistance,
+    match.state.bomb.carrier === target.id ? match.state.bomb.plantProgress / 3.2 : 0,
+  );
+  return hit
+    ? { ...hit, yaw: target.yaw, position: { x: target.x, y: target.y, z: target.z } }
+    : null;
+}
 export function shoot(
   match: Match,
   shooter: PlayerState,
   stab = false,
   alternate = false,
   burst = false,
+  viewTick?: number,
 ): MatchEvent[] {
   const memory = match.combat.get(shooter.id)!;
   const weapon = weapons[shooter.weapon];
@@ -162,6 +184,7 @@ export function shoot(
     )[0];
     let distance = Math.min(knifeRange(stab), impact?.distance ?? Infinity);
     let victim: PlayerState | undefined;
+    let struck: ReturnType<typeof hitTarget>;
     for (const other of match.players.values()) {
       if (
         other === shooter ||
@@ -169,16 +192,11 @@ export function shoot(
         (other.team === shooter.team && match.state.mode === "casual")
       )
         continue;
-      const r = movement.hullRadius + 0.08;
-      const hit = rayBox(
-        from,
-        direction,
-        { x: other.x - r, y: other.y, z: other.z - r },
-        { x: other.x + r, y: other.y + other.eye + 0.2, z: other.z + r },
-      );
-      if (hit < distance) {
-        distance = hit;
+      const hit = hitTarget(match, other, new T.Ray(from, direction), distance, viewTick);
+      if (hit && hit.distance < distance) {
+        distance = hit.distance;
         victim = other;
+        struck = hit;
       }
     }
     const cover =
@@ -203,7 +221,7 @@ export function shoot(
           knifeDamage(
             stab,
             memory.knifeAge > 0.9,
-            knifeBackstab(shooter, victim, victim.yaw + Math.PI),
+            knifeBackstab(shooter, struck!.position, struck!.yaw + Math.PI),
           ) * (victim.team === shooter.team ? friendlyFireScale(match.state.mode, "other") : 1),
           false,
           shooter.weapon,
@@ -213,6 +231,7 @@ export function shoot(
     memory.knifeAge = 0;
     return events;
   }
+  memory.hitboxes.fired();
   const mode: 0 | 1 = shooter.scope || shooter.suppressed || burst || alternate ? 1 : 0;
   const pose = accuracyPose(shooter, mode);
   const offsets = weaponShotSpread(
@@ -246,23 +265,16 @@ export function shoot(
       }));
     for (const other of match.players.values()) {
       if (other === shooter || other.health <= 0) continue;
-      const r = movement.hullRadius;
-      const distance = rayBox(
-        from,
-        direction,
-        { x: other.x - r, y: other.y, z: other.z - r },
-        { x: other.x + r, y: other.y + other.eye + 0.2, z: other.z + r },
-      );
-      if (!Number.isFinite(distance) || distance > far) continue;
-      const point = from.clone().addScaledVector(direction, distance),
-        head = point.y > other.y + other.eye - 0.15;
+      const hit = hitTarget(match, other, ray, far, viewTick);
+      if (!hit) continue;
+      const { distance, point, head, region, thickness } = hit;
       surfaces.push({
         distance,
-        thickness: fleshThickness(direction, other.yaw + Math.PI, head),
+        thickness,
         material: "flesh",
         id: other.id,
         stop: other.team === shooter.team && match.state.mode === "casual",
-        data: { point, victim: other, head, height: point.y - other.y },
+        data: { point, victim: other, head, region },
       });
     }
     const result = solveBullet(stats, surfaces);
@@ -287,7 +299,7 @@ export function shoot(
         hits.push({ victim: data.victim.id, headshot: !!data.head, passed: contact.passed });
         const damage =
           contact.damage *
-          hitgroupMultiplier(!!data.head, data.height!, weapon.head, data.victim.eye < 1.4) *
+          hitRegionMultiplier(data.region!, weapon.head) *
           (data.victim.team === shooter.team ? friendlyFireScale(match.state.mode, "bullet") : 1);
         const deaths = damagePlayer(
           match,
@@ -298,7 +310,7 @@ export function shoot(
           shooter.weapon,
           weapon.armorRatio,
           false,
-          hitRegion(!!data.head, data.height!, data.victim.eye < 1.4),
+          data.region!,
         );
         for (const death of deaths)
           if (death.kind === "kill") {

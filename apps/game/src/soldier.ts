@@ -1,3 +1,4 @@
+import type { PlayerAnimation } from "@cs2go/protocol";
 import { cacheOwnedSkeletons } from "./cached-skeleton";
 import { agentBounds, prepareSoldierHitboxes } from "./soldier-hitboxes";
 export { agentBounds } from "./soldier-hitboxes";
@@ -11,9 +12,16 @@ import {
   loadAgentWeaponActions,
   agentClipForModel,
   completeAgentClip,
+  agentWeaponSecondary,
 } from "./agent-animations";
+import { AgentWeaponAnimation } from "./agent-weapon-animation";
 import { updateGloveModel, unregisterGloveModel, type GloveChoice } from "./gloves";
-import { weaponSlot } from "./physics";
+import { isKnife, weaponSlot } from "./physics";
+import { characterLocomotion, characterPhase } from "@cs2go/simulation/character-locomotion";
+import {
+  orderCharacterLayers,
+  invalidateCharacterLayers,
+} from "@cs2go/simulation/character-layers";
 import * as T from "three";
 import { Ragdoll } from "./ragdoll";
 import type { RagdollWorld } from "./ragdoll";
@@ -64,7 +72,9 @@ export async function loadSoldierModels() {
           clip,
           0,
           animations.find(
-            (base) => base.name === stance + (weaponSlot(index) === 2 ? "pistol" : "rifle"),
+            (base) =>
+              base.name ===
+              stance + (isKnife(index) ? "knife" : weaponSlot(index) === 2 ? "pistol" : "rifle"),
           )!,
         );
       }
@@ -88,7 +98,6 @@ export type Soldier = {
   animationTeam: "t";
   releaseAppearance?: () => void;
   recoil: number;
-  proceduralSpineBase?: T.Quaternion;
   stride: number;
   moveX: number;
   moveZ: number;
@@ -97,6 +106,7 @@ export type Soldier = {
   ragdoll?: Ragdoll;
   ragdollBones: T.Object3D[];
   phase: number;
+  networkPose?: PlayerAnimation;
   weapon: T.Group;
   weaponIndex: number;
   weaponInstance: WeaponInstance;
@@ -117,6 +127,7 @@ export type Soldier = {
   gloveChoice?: GloveChoice;
   agentId?: string;
   nativeActions?: Record<string, T.AnimationAction>;
+  secondary?: AgentWeaponAnimation;
   nativeGeneration: number;
   disposed: boolean;
   nativeShotElapsed: number;
@@ -132,6 +143,7 @@ export type Soldier = {
 export function disposeSoldier(soldier: Soldier) {
   soldier.disposed = true;
   soldier.nativeGeneration++;
+  soldier.secondary?.dispose();
   unregisterGloveModel(soldier.group);
   disposeWorldGun(soldier.weapon);
   disposeActorLighting(soldier.group);
@@ -179,12 +191,9 @@ export function createSoldier(
   }
   actions.idle_rifle.play().setEffectiveWeight(1);
   mixer.update(0);
-  // Size and ground the sampled rifle stance, rather than its taller bind pose.
-  model.updateMatrixWorld(true);
-  const bounds = new T.Box3().setFromObject(model, true);
-  const scale = 1.8 / (bounds.max.y - bounds.min.y);
-  model.scale.setScalar(scale);
-  model.position.y = -bounds.min.y * scale;
+  // Keep the native skeleton scale/origin. Normalizing cosmetic mesh bounds
+  // changes head/hand positions according to hats and clothing, desynchronizing
+  // the same animation and authoritative hitboxes between agent models.
   // Animated bounds differ from the bind pose, particularly while falling. A
   // fixed agent-sized sphere keeps culling and ray rejection valid in any pose.
   group.updateMatrixWorld(true);
@@ -193,7 +202,7 @@ export function createSoldier(
       o.boundingSphere = agentBounds.clone().applyMatrix4(o.matrixWorld.clone().invert());
   });
 
-  const weapon = createWorldGun(2);
+  const weapon = createWorldGun(2, true, undefined, true);
   const rightHand = bone("hand_R");
   const leftHand = bone("hand_L");
   weapon.traverse((o) => {
@@ -286,6 +295,8 @@ export function createSoldier(
   return soldier;
 }
 function prepareNativeActions(soldier: Soldier) {
+  soldier.secondary?.dispose();
+  soldier.secondary = undefined;
   const generation = ++soldier.nativeGeneration;
   for (const action of Object.values(soldier.nativeActions ?? {})) {
     action.stop();
@@ -319,12 +330,24 @@ function prepareNativeActions(soldier: Soldier) {
             .find(
               (clip) =>
                 clip.name === `grip_${name.includes("crouch") ? "crouch" : "stand"}_${index}`,
-            ) ?? templates.get("t")!.animations.find((clip) => clip.name === "idle_rifle")!;
+            ) ??
+          templates
+            .get("t")!
+            .animations.find(
+              (clip) =>
+                clip.name ===
+                `idle_${isKnife(index) ? "knife" : weaponSlot(index) === 2 ? "pistol" : "rifle"}`,
+            )!;
         T.AnimationUtils.makeClipAdditive(clip, 0, reference);
         const action = soldier.mixer.clipAction(clip);
         action.setLoop(T.LoopOnce, 1);
         action.clampWhenFinished = true;
         actions[name] = action;
+        const secondary = agentWeaponSecondary(source);
+        if (secondary) {
+          soldier.secondary ??= new AgentWeaponAnimation(soldier.weapon, secondary.source);
+          soldier.secondary.bind(action, secondary.clip);
+        }
       }
       soldier.nativeActions = actions;
     })
@@ -344,12 +367,6 @@ const gripAttachment = new T.Matrix4();
 const gripPosition = new T.Vector3(),
   gripRotation = new T.Quaternion(),
   gripScale = new T.Vector3();
-const movementClips = [
-  ["n", 0, 1],
-  ["s", 0, -1],
-  ["e", 1, 0],
-  ["w", -1, 0],
-] as const;
 // getWorldPosition refreshes only each hand's ancestor chain, not the whole rig.
 function poseWeapon(soldier: Soldier) {
   soldier.group.worldToLocal(soldier.rightHand.getWorldPosition(soldier.grip));
@@ -416,7 +433,7 @@ export function setSoldierWeapon(
     if (o instanceof T.Mesh && o.castShadow) castShadow = true;
   });
   disposeWorldGun(soldier.weapon);
-  soldier.weapon = createWorldGun(index, suppressed, identity);
+  soldier.weapon = createWorldGun(index, suppressed, identity, true);
   soldier.weaponInstance = identity;
   soldier.weaponIndex = index;
   soldier.nativeShotElapsed = soldier.nativeReloadElapsed = Infinity;
@@ -436,12 +453,10 @@ export function setSoldierWeapon(
   soldier.group.add(soldier.weapon);
   registerActorLighting(soldier.group, true);
   poseWeapon(soldier);
+  soldier.secondary?.update();
 }
 export function resetSoldier(soldier: Soldier) {
-  if (soldier.proceduralSpineBase) {
-    soldier.spine.quaternion.copy(soldier.proceduralSpineBase);
-    soldier.proceduralSpineBase = undefined;
-  }
+  invalidateCharacterLayers(soldier.mixer);
   soldier.dying = false;
   soldier.ragdoll?.reset();
   soldier.ragdoll = undefined;
@@ -497,12 +512,6 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
     poseWeapon(soldier);
     return;
   }
-  if (soldier.proceduralSpineBase) soldier.spine.quaternion.copy(soldier.proceduralSpineBase);
-  soldier.stride = T.MathUtils.damp(soldier.stride, Math.min(speed / 2.1, 1), 12, dt);
-  const magnitude = Math.hypot(soldier.moveX, soldier.moveZ);
-  const x = magnitude > 0.01 ? soldier.moveX / magnitude : 0;
-  const z = magnitude > 0.01 ? soldier.moveZ / magnitude : 1;
-  const sum = Math.abs(x) + Math.abs(z);
   for (const action of soldier.activeActions) action.setEffectiveWeight(0);
   const pose = (name: string, weight: number, progress?: number) => {
     if (weight <= 0) return;
@@ -517,27 +526,32 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
         : T.MathUtils.clamp(progress, 0, 1) * action.getClip().duration;
     soldier.activeActions.add(action);
   };
-  const family = weaponSlot(soldier.weaponIndex) === 2 ? "pistol" : "rifle";
-  const running = T.MathUtils.smoothstep(speed, 2.1, 3.5);
+  const family = isKnife(soldier.weaponIndex)
+    ? "knife"
+    : weaponSlot(soldier.weaponIndex) === 2
+      ? "pistol"
+      : "rifle";
   const crouch = T.MathUtils.clamp(soldier.crouch, 0, 1);
-  soldier.airTime = soldier.airborne ? soldier.airTime + dt : 0;
-  soldier.phase += (dt * speed) / T.MathUtils.lerp(1.12, 2.35, running);
+  soldier.airTime = soldier.networkPose?.air ?? (soldier.airborne ? soldier.airTime + dt : 0);
+  const locomotion = characterLocomotion(speed, soldier.moveX, soldier.moveZ, crouch);
+  soldier.phase = soldier.networkPose?.phase ?? characterPhase(soldier.phase, dt, locomotion);
+  soldier.stride = locomotion.reduce(
+    (weight, sample) => weight + (sample.name.startsWith("idle") ? 0 : sample.weight),
+    0,
+  );
   if (soldier.plant > 0) pose("planting", 1, soldier.plant);
   else if (soldier.airborne) {
+    const name = `${soldier.jumping ? "jump_n" : "inair_stand"}_${family}`;
+    const duration = soldier.actions[name]?.getClip().duration ?? 1;
     pose(
-      `${soldier.jumping ? "jump_n" : "inair_stand"}_${family}`,
+      name,
       1,
-      soldier.jumping ? Math.min(1, soldier.airTime / 0.4) : (soldier.airTime % 0.3) / 0.3,
+      soldier.jumping
+        ? Math.min(1, soldier.airTime / duration)
+        : (soldier.airTime % duration) / duration,
     );
   } else {
-    pose(`idle_${family}`, (1 - soldier.stride) * (1 - crouch));
-    pose(`idle_crouch_${family}`, (1 - soldier.stride) * crouch);
-    for (const [direction, dx, dz] of movementClips) {
-      const weight = (Math.max(0, x * dx + z * dz) / sum) * soldier.stride;
-      pose(`walk_${direction}_${family}`, weight * (1 - running) * (1 - crouch), soldier.phase % 1);
-      pose(`run_${direction}_${family}`, weight * running * (1 - crouch), soldier.phase % 1);
-      pose(`crouch_${direction}_${family}`, weight * crouch, soldier.phase % 1);
-    }
+    for (const sample of locomotion) pose(`${sample.name}_${family}`, sample.weight, soldier.phase);
   }
   if (soldier.plant === 0 && worldGrip(soldier.weaponIndex)) {
     pose(`grip_stand_${soldier.weaponIndex}`, 1 - crouch, 0);
@@ -557,6 +571,11 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
   } else if (soldier.reloadTime === 0 && soldier.previousReloadTime > dt * 2) {
     soldier.nativeReloadElapsed = Infinity;
   }
+  if (soldier.networkPose) {
+    soldier.nativeShotElapsed = soldier.networkPose.shot ?? Infinity;
+    soldier.nativeDrawElapsed = soldier.networkPose.draw ?? Infinity;
+    soldier.nativeReloadElapsed = soldier.networkPose.reload ?? Infinity;
+  }
   const native = soldier.nativeActions;
   const nativePose = (name: string, elapsed: number) => {
     const action = native?.[crouch > 0.5 ? `${name}_crouch` : name] ?? native?.[name];
@@ -573,9 +592,11 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
     )
       nativePose("draw", soldier.nativeDrawElapsed);
   }
-  soldier.nativeShotElapsed += dt;
-  soldier.nativeDrawElapsed += dt;
-  soldier.nativeReloadElapsed += dt;
+  if (!soldier.networkPose) {
+    soldier.nativeShotElapsed += dt;
+    soldier.nativeDrawElapsed += dt;
+    soldier.nativeReloadElapsed += dt;
+  }
   soldier.shotTime = Math.max(0, soldier.shotTime - dt);
   soldier.drawTime = Math.max(0, soldier.drawTime - dt);
   soldier.previousShotTime = soldier.shotTime;
@@ -586,11 +607,11 @@ export function animateSoldier(soldier: Soldier, speed: number, dt: number, aliv
     action.stop();
     soldier.activeActions.delete(action);
   }
+  orderCharacterLayers(soldier.mixer, soldier.activeActions);
   soldier.mixer.update(0);
   soldier.recoil = Math.max(0, soldier.recoil - dt * 7);
-  (soldier.proceduralSpineBase ??= new T.Quaternion()).copy(soldier.spine.quaternion);
-  soldier.spine.rotateZ(-soldier.recoil * 0.045 + Math.sin(soldier.time * 1.8) * 0.002);
   poseWeapon(soldier);
+  soldier.secondary?.update();
 }
 // Called by the same fixed 128 Hz simulation as living bot movement.
 export function stepSoldierRagdoll(
