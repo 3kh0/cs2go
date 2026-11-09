@@ -56,6 +56,7 @@ type Preview = {
   index: number;
   agentId: string;
   agentName: string;
+  idleVariationLoad?: Promise<void>;
   idleVariation?: {
     actions: T.AnimationAction[];
     releases: (() => void)[];
@@ -66,7 +67,6 @@ type Preview = {
     ready?: boolean;
     initialized?: boolean;
     anchor?: T.Object3D;
-    entrancePosition?: T.Vector3;
     returning: boolean;
     last: number;
   };
@@ -127,6 +127,9 @@ export class HomeScene {
   private animationRotation = new T.Quaternion();
   private animationScale = new T.Vector3();
   private arrivedAgents = new Set<string>();
+  private prepareIdleVariations(preview: Preview, team: AgentTeam) {
+    return (preview.idleVariationLoad ??= this.loadIdleVariations(preview, team));
+  }
   private async loadIdleVariations(preview: Preview, team: AgentTeam) {
     const state: NonNullable<Preview["idleVariation"]> = (preview.idleVariation = {
       actions: [] as T.AnimationAction[],
@@ -200,9 +203,9 @@ export class HomeScene {
     }
   }
   private updateIdleVariation(preview: Preview, team: AgentTeam, dt: number) {
-    if (preview.animation || document.getElementById("startup")) return;
+    if (preview.animation) return;
     if (!preview.idleVariation) {
-      void this.loadIdleVariations(preview, team);
+      void this.prepareIdleVariations(preview, team);
       return;
     }
     const state = preview.idleVariation;
@@ -217,37 +220,30 @@ export class HomeScene {
       // Native wpn carries the source attachment animation, including its
       // rotation. Keep the gun outside the bone hierarchy in metre units.
       preview.soldier.group.add(preview.weapon);
-      registerActorLighting(preview.soldier.group, true);
+      registerActorLighting(preview.soldier.group);
       state.initialized = true;
       this.current = undefined;
     }
+    const splash = document.getElementById("startup");
+    if (splash && !splash.classList.contains("startup-walk-in")) return;
     if (!state.current && state.entrance && !this.arrivedAgents.has(preview.agentId)) {
       this.arrivedAgents.add(preview.agentId);
-      state.entrancePosition = preview.soldier.group.position.clone();
       state.current = state.entrance;
-      preview.action.fadeOut(0.6);
-      state.current.reset().setEffectiveWeight(1).fadeIn(0.6).play();
+      // The native clip already walks the pelvis into place. Crossfading from
+      // the standing pose pulls it backward before that forward motion begins.
+      // Start the complete entrance pose while the splash is still opaque.
+      preview.action.stop();
+      state.current.reset().setEffectiveWeight(1).play();
     }
     if (state.current) {
-      if (state.entrancePosition) {
-        const progress = Math.min(1, state.current.time / (state.current.getClip().duration * 0.7));
-        preview.soldier.group.position
-          .copy(state.entrancePosition)
-          .addScaledVector(this.cameraDirection, 0.6 * (1 - progress));
-      }
       if (!state.returning && state.current.time >= state.current.getClip().duration - 0.65) {
-        preview.action.enabled = true;
-        preview.action.setEffectiveWeight(1).fadeIn(0.6);
+        preview.action.reset().setEffectiveWeight(1).fadeIn(0.6).play();
         state.current.fadeOut(0.6);
         state.returning = true;
         state.wait = 0.6;
       }
       if (state.returning && (state.wait -= dt) <= 0) {
         state.current.stop();
-        if (state.entrancePosition) {
-          preview.soldier.group.position.copy(state.entrancePosition);
-          state.entrancePosition = undefined;
-        }
         state.current = undefined;
         state.returning = false;
         state.wait = 10 + Math.random() * 10;
@@ -325,7 +321,7 @@ export class HomeScene {
         ? createWorldGun(index, true, createWeaponInstance(index, "player", true))
         : createNativeWorldGun(index, true, buy.weaponBones, true);
     preview.soldier.group.add(preview.weapon);
-    registerActorLighting(preview.soldier.group, true);
+    registerActorLighting(preview.soldier.group);
     preview.mixer.stopAllAction();
     ensureAgentAnimationBones(preview.soldier.model, animation.pack.scene);
     preview.action = preview.mixer
@@ -570,7 +566,9 @@ export class HomeScene {
     const inverse = new T.Matrix4().fromArray(weapon.userData.buyGrip).invert();
     inverse.decompose(weapon.position, weapon.quaternion, weapon.scale);
     grip.add(weapon);
-    registerActorLighting(soldier.group, true);
+    // World guns already own cloned materials. Preserve their identity: the
+    // skin registry updates those exact materials when changing/resetting paint.
+    registerActorLighting(soldier.group);
     const times = pose.frames.map((frame) => frame.time);
     const tracks: T.KeyframeTrack[] = [];
     for (const name of Object.keys(pose.frames[0].bones)) {
@@ -718,6 +716,19 @@ export class HomeScene {
   }
   async prepare(renderer: T.WebGLRenderer) {
     await this.reflectionLoad;
+    if (!this.reduced.matches) {
+      const teams = ["ct", "t"] as const;
+      const appearances = await Promise.all(
+        teams.map((team) => acquireAgentAppearance(selectedAgentId(team)).catch(() => undefined)),
+      );
+      try {
+        await Promise.all(
+          teams.map((team) => this.prepareIdleVariations(this.preview(team), team)),
+        );
+      } finally {
+        appearances.forEach((appearance) => appearance?.release());
+      }
+    }
     for (const team of ["ct", "t"] as const)
       setActorReflection(this.preview(team).soldier.group, this.reflection?.texture);
     const previousToneMapping = renderer.toneMapping;
@@ -869,7 +880,7 @@ export class HomeScene {
     renderer.clear();
     renderer.render(this.scene, this.camera);
     preview.soldier.model.getObjectByName("pelvis")!.getWorldPosition(this.namePosition);
-    this.framingPoint.copy(preview.soldier.group.position);
+    this.framingPoint.copy(this.namePosition);
     this.framingPoint.y = this.floor;
     this.namePosition.lerp(this.framingPoint, 0.75);
     this.namePosition.project(this.camera);

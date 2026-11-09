@@ -19,7 +19,6 @@ type IdleScene = {
         initialized?: boolean;
         anchor?: T.Object3D;
         returning: boolean;
-        entrancePosition?: T.Vector3;
         last: number;
         wait: number;
       };
@@ -343,7 +342,6 @@ test("homepage preserves authored native body poses and weapon anchors", async (
             state.current = kind === "idle" ? undefined : action;
             state.wait = 100;
             state.returning = false;
-            state.entrancePosition = undefined;
             action.reset().setEffectiveWeight(1).play();
             action.paused = true;
             action.time = action.getClip().duration * fraction;

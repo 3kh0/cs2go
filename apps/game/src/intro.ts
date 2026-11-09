@@ -64,15 +64,20 @@ export function startIntro(): LoadProgress {
       DefaultLoadingManager.onProgress = previousProgress;
     clearTimeout(sequenceTimer);
     document.removeEventListener("keydown", onKey, true);
-    root.classList.add("startup-exit");
-    setTimeout(
-      () => {
-        root.remove();
-        app.inert = false;
-        document.querySelector<HTMLButtonElement>("#play:not(:disabled)")?.focus();
-      },
-      immediate || reducedMotion ? 0 : 240,
-    );
+    root.classList.add("startup-walk-in");
+    const fade = () => {
+      root.classList.add("startup-exit");
+      setTimeout(
+        () => {
+          root.remove();
+          app.inert = false;
+          document.querySelector<HTMLButtonElement>("#play:not(:disabled)")?.focus();
+        },
+        immediate || reducedMotion ? 0 : 240,
+      );
+    };
+    if (immediate || reducedMotion) fade();
+    else sequenceTimer = setTimeout(fade, 80);
   }
 
   // Failures reveal the menu's error message; audio and pointer lock still require Play.

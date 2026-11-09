@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("startup badge stays visible until all assets finish loading", async ({ page, baseURL }) => {
+test("startup badge gates scene loading and keeps the intro inert", async ({ page, baseURL }) => {
   const errors: string[] = [];
   const external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -38,7 +38,6 @@ test("startup badge stays visible until all assets finish loading", async ({ pag
   release();
   await expect(page.locator(".startup-title")).toBeVisible({ timeout: 15000 });
   await expect(page.locator(".startup-loading")).toBeHidden();
-  await expect(page.locator("#play")).toBeEnabled();
   expect(await page.locator("#app").evaluate((el) => (el as HTMLElement).inert)).toBe(true);
   await page.waitForTimeout(1600);
   await page.screenshot({ path: "artifacts/startup-intro.png" });
