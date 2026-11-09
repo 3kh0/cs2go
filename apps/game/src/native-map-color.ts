@@ -128,8 +128,8 @@ export function applyNativeMapGrade(
     #include <tonemapping_fragment>
     #ifdef TONE_MAPPING
       if (nativeMapGradeEnabled > 0.5) {
-        float nativeMapWhite = exp2(nativeMapGradeEFWhiteBias.z);
-        vec3 nativeMapExposed = min(max(nativeMapUngraded, vec3(0.0)) * toneMappingExposure * nativeMapGradeExposure * exp2(nativeMapGradeEFWhiteBias.w), vec3(nativeMapWhite));
+        float nativeMapWhite = nativeMapGradeEFWhiteBias.z * 2.8;
+        vec3 nativeMapExposed = min(max(nativeMapUngraded, vec3(0.0)) * toneMappingExposure * nativeMapGradeExposure * exp2(nativeMapGradeEFWhiteBias.w) * 2.8, vec3(nativeMapWhite));
         gl_FragColor.rgb = nativeMapFilmic(nativeMapExposed) / nativeMapFilmic(vec3(nativeMapWhite));
       }
     #endif

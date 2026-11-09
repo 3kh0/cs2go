@@ -130,6 +130,7 @@ type HitData = {
   victim?: PlayerState;
   head?: boolean;
   height?: number;
+  breakableId?: string;
 };
 export function shoot(
   match: Match,
@@ -149,11 +150,11 @@ export function shoot(
   );
   if (isKnife(shooter.weapon)) {
     const direction = new T.Vector3(0, 0, -1).applyEuler(aim);
-    let distance = Math.min(
+    const impact = match.map.collision.intersections(
+      new T.Ray(from, direction),
       knifeRange(stab),
-      match.map.collision.intersections(new T.Ray(from, direction), knifeRange(stab))[0]
-        ?.distance ?? Infinity,
-    );
+    )[0];
+    let distance = Math.min(knifeRange(stab), impact?.distance ?? Infinity);
     let victim: PlayerState | undefined;
     for (const other of match.players.values()) {
       if (
@@ -174,7 +175,19 @@ export function shoot(
         victim = other;
       }
     }
-    const events: MatchEvent[] = [{ kind: "melee", shooter: shooter.id, stab, hit: !!victim }];
+    const cover =
+      !victim && impact
+        ? match.breakables.damageImpact(
+            impact,
+            knifeDamage(stab, memory.knifeAge > 0.9, false),
+            "melee",
+          )
+        : null;
+    const events: MatchEvent[] = [
+      { kind: "melee", shooter: shooter.id, stab, hit: !!victim || !!cover },
+    ];
+    if (cover)
+      events.push({ kind: "breakable", id: cover.id, health: cover.health, point: impact!.point });
     if (victim)
       events.push(
         ...damagePlayer(
@@ -213,10 +226,17 @@ export function shoot(
       .intersections(ray, far)
       .map((impact) => ({
         distance: impact.distance,
+        id: match.breakables.idForImpact(impact)
+          ? `breakable:${match.breakables.idForImpact(impact)}`
+          : undefined,
         thickness: () => match.map.collision.thickness(impact, direction),
         material: impact.object.userData.bulletMaterial ?? "concrete",
         exit: impact.face ? impact.face.normal.dot(direction) > 0 : false,
-        data: { point: impact.point, normal: impact.face?.normal },
+        data: {
+          point: impact.point,
+          normal: impact.face?.normal,
+          breakableId: match.breakables.idForImpact(impact),
+        },
       }));
     for (const other of match.players.values()) {
       if (other === shooter || other.health <= 0) continue;
@@ -246,6 +266,16 @@ export function shoot(
     const kills: MatchEvent[] = [];
     for (const contact of result.contacts) {
       const { data } = contact.surface;
+      if (data.breakableId) {
+        const change = match.breakables.damage(data.breakableId, contact.damage, "bullet");
+        if (change)
+          kills.push({
+            kind: "breakable",
+            id: change.id,
+            health: change.health,
+            point: data.point,
+          });
+      }
       if (data.victim) {
         if (data.victim.team === shooter.team && match.state.mode === "casual") continue;
         hits.push({ victim: data.victim.id, headshot: !!data.head, passed: contact.passed });
@@ -271,7 +301,11 @@ export function shoot(
             death.appearance = shooter.appearances[shooter.weapon];
           }
         kills.push(...deaths);
-      } else if (data.normal) impacts.push({ point: data.point, normal: data.normal });
+      } else if (
+        data.normal &&
+        (!data.breakableId || match.breakables.health(data.breakableId)! > 0)
+      )
+        impacts.push({ point: data.point, normal: data.normal });
     }
     events.push(
       {

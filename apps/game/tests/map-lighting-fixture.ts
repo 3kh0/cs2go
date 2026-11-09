@@ -93,9 +93,23 @@ export async function renderMapLighting(
     );
     camera.updateProjectionMatrix();
   }
-  renderer.render(scene, camera);
+  const frameTime = performance.now();
+  const renderFrame = () => {
+    if (!testSurfaceQuality) return renderer.render(scene, camera);
+    // Compare texture uploads at the same animation instant. Native sky clouds
+    // otherwise advance between High, Low and restored High captures.
+    const previous = Object.getOwnPropertyDescriptor(performance, "now");
+    Object.defineProperty(performance, "now", { configurable: true, value: () => frameTime });
+    try {
+      renderer.render(scene, camera);
+    } finally {
+      if (previous) Object.defineProperty(performance, "now", previous);
+      else Reflect.deleteProperty(performance, "now");
+    }
+  };
+  renderFrame();
   // Cached sun geometry must not add another shadow pass to subsequent frames.
-  renderer.render(scene, camera);
+  renderFrame();
   const gl = renderer.getContext();
   const pixel = (x: number, y: number) => {
     const rgba = new Uint8Array(4);
@@ -146,11 +160,11 @@ export async function renderMapLighting(
     const widths = () => textures.map((texture) => texture.image.width);
     const high = widths();
     applyTextureQuality([dust.root], "low", renderer.capabilities.getMaxAnisotropy(), 1);
-    renderer.render(scene, camera);
+    renderFrame();
     const low = widths();
     const genericLow = genericWidths();
     applyTextureQuality([dust.root], "high", renderer.capabilities.getMaxAnisotropy(), 8);
-    renderer.render(scene, camera);
+    renderFrame();
     genericQuality = { high: genericHigh, low: genericLow, restored: genericWidths() };
     surfaceQuality = {
       high,

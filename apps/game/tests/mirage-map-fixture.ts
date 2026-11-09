@@ -10,6 +10,7 @@ const views = [
   { name: "a-native-camera", eye: [-333, -1910, -136], angles: [-16, 249] },
   { name: "b-native-camera", eye: [-2115, -90, -111], angles: [-4, 63] },
   { name: "mid-native-camera", eye: [-1220, -630, -101], angles: [0, 0] },
+  { name: "connector-props", eye: [-650, -1100, -120], angles: [0, 300] },
 ];
 
 export async function renderMirageMapFixture() {
@@ -34,10 +35,22 @@ export async function renderMirageMapFixture() {
     lightmappedMeshes = 0,
     floatingLightmapMeshes = 0;
   const materials = new Set<T.Material>();
+  const layerFamilies = new Set<string>();
+  let blendMin = 1,
+    blendMax = 0;
   const atlasFormats = new Map<string, { format: number; bytes: number }>();
   world.scenery.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
     meshes++;
+    const blend = object.geometry.getAttribute("sourceBlend");
+    if (blend) {
+      for (let i = 0; i < blend.count; i++) {
+        blendMin = Math.min(blendMin, blend.getX(i));
+        blendMax = Math.max(blendMax, blend.getX(i));
+      }
+      for (const material of Array.isArray(object.material) ? object.material : [object.material])
+        layerFamilies.add(material.name);
+    }
     if (object.geometry.hasAttribute("nativeMapLightUv")) {
       lightmappedMeshes++;
       if (object.geometry.getAttribute("nativeMapLightUv").array instanceof Float32Array)
@@ -104,6 +117,17 @@ export async function renderMirageMapFixture() {
       blackFraction: black / count,
       calls: renderer.info.render.calls,
       triangles: renderer.info.render.triangles,
+      // Source wall_hole_diffuse is beige. Missing LPV lighting made this
+      // unmapped prop cyan even though the surrounding baked walls were warm.
+      frameColor:
+        view.name === "connector-props"
+          ? (() => {
+              const point = new T.Vector3(-12.8688253, -3.048, 31.8979815).project(camera);
+              const x = Math.round((point.x * 0.5 + 0.5) * 1200);
+              const y = Math.round((point.y * 0.5 + 0.5) * 1200);
+              return Array.from(pixels.slice((y * 1200 + x) * 4, (y * 1200 + x) * 4 + 3));
+            })()
+          : undefined,
     });
   }
   const result = {
@@ -112,6 +136,17 @@ export async function renderMirageMapFixture() {
     lightmappedMeshes,
     floatingLightmapMeshes,
     materials: materials.size,
+    layerFamilies: [...layerFamilies],
+    blendMin,
+    blendMax,
+    emission: Object.fromEntries(
+      [...materials]
+        .filter(
+          (m): m is T.MeshStandardMaterial =>
+            m instanceof T.MeshStandardMaterial && !!m.emissiveMap,
+        )
+        .map((m) => [m.name, m.emissiveIntensity]),
+    ),
     atlasFormats: Object.fromEntries(atlasFormats),
     glError: renderer.getContext().getError(),
     textures: renderer.info.memory.textures,

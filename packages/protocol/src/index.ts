@@ -2,7 +2,8 @@ export { SnapshotEncoder, SnapshotDecoder } from "./snapshot-codec";
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 13;
+export const PROTOCOL_VERSION = 14;
+export type BreakableState = { id: string; health: number };
 export type MapId = "dust2" | "mirage";
 export function isMapId(value: unknown): value is MapId {
   return value === "dust2" || value === "mirage";
@@ -159,6 +160,7 @@ export type PlayerState = Vec3 & {
   waiting: boolean;
 };
 export type MatchEvent =
+  | { kind: "breakable"; id: string; health: number; point?: Vec3 }
   | {
       kind: "shot";
       shooter: string;
@@ -195,6 +197,7 @@ export type MatchEvent =
     }
   | { kind: "plant" | "defuse" | "explode"; actor: string };
 export type RoundState = {
+  breakables?: BreakableState[];
   ball: Vec3 & { qx: number; qy: number; qz: number; qw: number };
   clock: number;
   projectiles: UtilityProjectile[];

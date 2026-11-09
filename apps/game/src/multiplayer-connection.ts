@@ -118,6 +118,9 @@ export class MatchConnection {
         } else if (message.type === "snapshot") {
           if (message.tick <= this.lastTick) return;
           this.lastTick = message.tick;
+          // Collision must match the authoritative panel state before pending
+          // movement is replayed through a newly opened or restored passage.
+          this.map.breakables?.restore(message.round.breakables ?? []);
           if (this.reconnecting) console.log("[network] Connection restored");
           this.reconnecting = false;
           this.retryStarted = 0;

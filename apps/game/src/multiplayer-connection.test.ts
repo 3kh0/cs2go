@@ -3,6 +3,9 @@ import { neutralInput, PROTOCOL_VERSION, type ServerMessage } from "@cs2go/proto
 import { createPlayer, createMatch, STEP } from "@cs2go/simulation/match";
 import { testMap } from "@cs2go/simulation/test-map";
 import { movePlayer } from "@cs2go/simulation/movement";
+import { BreakableWorld, bindBreakablePhysics } from "@cs2go/simulation/breakables";
+import { MapCollision } from "@cs2go/simulation/map-collision";
+import * as T from "three";
 import { MatchConnection } from "./multiplayer-connection";
 
 class TestSocket {
@@ -29,7 +32,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.useRealTimers();
 });
-function setup() {
+function setup(map = testMap()) {
   vi.useFakeTimers();
   vi.stubGlobal("WebSocket", TestSocket);
   const connection = new MatchConnection(
@@ -38,7 +41,7 @@ function setup() {
     "Player",
     "casual",
     "ct",
-    testMap(),
+    map,
     false,
     () => {},
     () => {},
@@ -63,6 +66,52 @@ function setup() {
   });
   return { connection, socket, player };
 }
+test("reconciliation opens breakable collision before replay and restores it on a new round", () => {
+  const floor = new T.Mesh(new T.PlaneGeometry(300, 300).rotateX(-Math.PI / 2));
+  const panel = new T.Mesh(new T.BoxGeometry(2, 2, 0.1));
+  panel.name = "test-panel-physics";
+  panel.position.set(-17, 1, 16.3);
+  const physics = new T.Group();
+  physics.add(floor, panel);
+  const definitions = [
+    {
+      id: "test-panel",
+      health: 20,
+      material: "wood" as const,
+      bounds: [
+        [-18, 0, 16.25],
+        [-16, 2, 16.35],
+      ] as [[number, number, number], [number, number, number]],
+      physicsNames: [panel.name],
+      renderNames: [],
+    },
+  ];
+  bindBreakablePhysics(physics, definitions);
+  physics.updateMatrixWorld(true);
+  const map = testMap();
+  map.collision = new MapCollision([floor, panel]);
+  map.breakables = new BreakableWorld(map.collision, definitions);
+  const { connection, socket, player } = setup(map);
+  for (let i = 0; i < 48; i++) connection.step({ ...neutralInput(), forward: 1 });
+  expect(connection.local!.z).toBeGreaterThan(16.3);
+  const round = { ...createMatch("casual", testMap()).state, phase: "live" as const };
+  socket.receive({
+    type: "snapshot",
+    tick: 48,
+    players: [player],
+    events: [],
+    round: { ...round, breakables: [{ id: "test-panel", health: 0 }] },
+  });
+  expect(connection.pending).toHaveLength(48);
+  expect(connection.local!.z).toBeLessThan(16.3);
+  // An old frame must never close a passage after a newer break snapshot.
+  socket.receive({ type: "snapshot", tick: 47, players: [player], events: [], round });
+  expect(map.breakables.health("test-panel")).toBe(0);
+  socket.receive({ type: "snapshot", tick: 49, players: [player], events: [], round });
+  expect(map.breakables.health("test-panel")).toBe(20);
+  expect(connection.local!.z).toBeGreaterThan(16.3);
+  connection.close();
+});
 test("latency reconciliation replays only unacknowledged movement and clears old prediction at respawn", () => {
   const { connection, socket, player } = setup();
   const input = { ...neutralInput(), forward: 1 };

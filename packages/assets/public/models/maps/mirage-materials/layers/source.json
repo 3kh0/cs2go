@@ -1,0 +1,2738 @@
+{
+  "materials": {
+    "de_mirage_top_ver1_blend": {
+      "resource": "materials/de_mirage/base/de_mirage_top_ver1_blend.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "5a48ad69bb003668",
+      "normal2": "e7d2fffb05475d34",
+      "color2": "0916d362cfa39e23",
+      "mask": "68637b0c90254b84",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "detail": {
+        "texture": "831d1f58129c61d5",
+        "scale": [
+          8,
+          8
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          0.05
+        ]
+      }
+    },
+    "blend_blacktopsand_01": {
+      "resource": "materials/concrete/blend_blacktopsand_01.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "131d6db1fb456583",
+      "normal2": "131d6db1fb456583",
+      "color2": "d0d651b344c50847",
+      "mask": "9d7bd48cea932d94",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "de_mirage_base_ver1_blend": {
+      "resource": "materials/de_mirage/base/de_mirage_base_ver1_blend.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "5a48ad69bb003668",
+      "normal2": "e7d2fffb05475d34",
+      "color2": "e0adb51cfce10971",
+      "mask": "68637b0c90254b84",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "de_mirage_brick_ver1pl_blend_diffuse": {
+      "resource": "materials/de_mirage/brick/de_mirage_brick_ver1pl_blend_diffuse.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "cce01b5bf5594476",
+      "normal2": "e7d2fffb05475d34",
+      "color2": "0916d362cfa39e23",
+      "mask": "68637b0c90254b84",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "de_mirage_brick_ver2_blend_update": {
+      "resource": "materials/de_mirage/brick/de_mirage_brick_ver2_blend_update.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "cce01b5bf5594476",
+      "normal2": "e7d2fffb05475d34",
+      "color2": "2d4fb3c8d3b3ce26",
+      "mask": "68637b0c90254b84",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "de_mirage_ground_tilec_blend_diffuse_": {
+      "resource": "materials/de_mirage/ground/de_mirage_ground_tilec_blend_diffuse_.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "102c02c3c3644093",
+      "normal2": "5aa010aa479b0084",
+      "color2": "e6aba7367d8f291c",
+      "mask": "1190fa3357b1b8f1",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "detail": {
+        "texture": "831d1f58129c61d5",
+        "scale": [
+          8,
+          8
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          0.25
+        ]
+      }
+    },
+    "de_mirage_ground_tileh_blend_diffuse_": {
+      "resource": "materials/de_mirage/ground/de_mirage_ground_tileh_blend_diffuse_.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "30169635b3379dcb",
+      "normal2": "5aa010aa479b0084",
+      "color2": "e6aba7367d8f291c",
+      "mask": "1ddbdee2a544ef48",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "de_mirage_plaster_blue1_blend": {
+      "resource": "materials/de_mirage/plaster/de_mirage_plaster_blue1_blend.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "5a48ad69bb003668",
+      "normal2": "e7d2fffb05475d34",
+      "color2": "fb6c87ae500ec187",
+      "mask": "68637b0c90254b84",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "detail": {
+        "texture": "abb193fa4d3caee1",
+        "scale": [
+          8,
+          8
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          0.5
+        ]
+      }
+    },
+    "de_mirage_plaster_salmon1_blend": {
+      "resource": "materials/de_mirage/plaster/de_mirage_plaster_salmon1_blend.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "5a48ad69bb003668",
+      "normal2": "e7d2fffb05475d34",
+      "color2": "241382c5e31ebd90",
+      "mask": "68637b0c90254b84",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "de_mirage_tile_ver4_blend": {
+      "resource": "materials/de_mirage/tile/de_mirage_tile_ver4_blend.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "a8b8a36b753a43fc",
+      "normal2": "a8b8a36b753a43fc",
+      "color2": "e6aba7367d8f291c",
+      "mask": "d0dba8f144af0b6f",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "mirage_plaster_blend_3": {
+      "resource": "materials/de_mirage/hr_mirage/mirage_plaster_blend_3.vmat",
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "038c9c60aacad111",
+      "normal2": "33e871f844a0a75f",
+      "color2": "e0adb51cfce10971",
+      "mask": "68637b0c90254b84",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "detail": {
+        "texture": "831d1f58129c61d5",
+        "scale": [
+          8,
+          8
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          0.05
+        ]
+      }
+    }
+  },
+  "textures": {
+    "5a48ad69bb003668": {
+      "resource": "materials/de_mirage/plaster_worn/plaster_brick1_diffuse_normal_psd_1cff08a4.vtex",
+      "sourceSha256": "6396ead9564132bb37efced0ddc81e3130c53ac29f3aba209e8e4975271d8217",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "5a48ad69bb003668.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "d60b769340f11452405dc1589bec79ce3c0fa18575d0f425916aff6b17a70692",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "1b2b2164558308e3b92bd5df179f77f8cbeaa3bebf4d3a9366a211ddec5c3ee3"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "47f5262eccc19736998360cdf5988a835bf0dce2721e085051b59d05efa250d7"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "110cb2fa4ae825db57a45f7938b73767e80d8b572eecb83721959c696bdbbc2d"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "22e87ddc94d54726aeeb706a7975ea76f3c8926bc159cbf0147e47a70c5df903"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "8b226d7de25dae21915c0ba074d3ded4d3c0e9287a585fbdb6d6503cef65a503"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "e4ef4fc7e371b3f026a7c9933e1c92996118bcc6351b8cd0fff6759eb36fea42"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "087ea481c179bea6ddd63d9aab1756520d9d85ffac851f1bc50616682ee6b6d1"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "808868b7ba0938f2230368218502c5b5e4f7b51af5b47086ac2ed4c1bf8c2ed6"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "0ecfa5a3949d5137e75126bc735d31c8944398102b0cb4e212436db2573ac0f3"
+        }
+      ],
+      "fallback": "5a48ad69bb003668.webp",
+      "fallbackSha256": "e497a9a50b5a9513052d7a427f5c61a5919c4651e0e14070ae906835b96cdf6e"
+    },
+    "e7d2fffb05475d34": {
+      "resource": "materials/de_mirage/base/base_top_ver1_normal_psd_6397a1fd.vtex",
+      "sourceSha256": "ffdfd2402855652f971081d494ce7a2ed551e13f9230fd3817fc769304b99de9",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "e7d2fffb05475d34.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "d61c195137583cb91a37ad2613d5ca244617561b0808a18291b4b79bc1e3bc45",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "2ba144d880cb7894fed0432cd535e3f8864a282da1fbbc0b7e2066c3acd8e06d"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "11ae5262e3f0b605db3b3896b297a9d08fe3e2818c722ec26b3d1de3076305a2"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "c1b8e8dda274fce20cc443f2081aba798e21b6380f1af596bbc0d5c28e9cf610"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "c9fce873ea5da7cf291379c58cb0af57307c223600e25988515c60d9b303a468"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "19b475d2e5e4ee1ea1cc416fb2dc6939b086ffdca7c1f50f8e3b982b294f9071"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "6a06af9061013daecdb2a5766415b2a214a6b4f235b19c6d08d5455145329c79"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "d8fc17d6ff43b13b361417743d74182d3adf312b014bd5b34fbb6a7121828c37"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "92922837db039e3eafaa6e4e92bade3081b2fb8e535ad36966dd46f3558a2d12"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "8b98e46d1ee7e67d5e1e44be65a2fd00bf3d4b98135597bc98ec529b7a76d4ba"
+        }
+      ],
+      "fallback": "e7d2fffb05475d34.webp",
+      "fallbackSha256": "ab0b5caed4aa4ea5f2b71c176535c5f41debb85bee79c9df50ca01d1fe96f8f2"
+    },
+    "0916d362cfa39e23": {
+      "resource": "materials/de_mirage/base/base_top_ver1_diffuse_color_psd_41ae5e62.vtex",
+      "sourceSha256": "be637e0589a9effeb9cdbb9370566447d0e432f7770869bd4a9fc50eb7cd6ffb",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "0916d362cfa39e23.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "655a296847e7623d8dd0fae6c6345ef945305d8d5a5f2643a76b046afe7df3a4",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "5ef3de9284e07ed981852c3857419fcd4ad1d7101a0c819da65aff904bea5950"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "ef2832873eb8a7f433dc9a3a2ec6dc0b744a4c5cdc0f3cc494e114c8b81541dc"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "9ed52317194e6e0dd3e4697d281c97b37e65e524215a1ff6219c301af379d66c"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "6cac216afdb7f78bc3b0ab46921c1fbf3f0e29fbe61d13431782a74b773155ae"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "24548cb99222a3e13ee8154518007f530ac2213db6a3cb0a9778892092ecb3b8"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "6e76c5e44980892e567958051394158504bfc885b66ca16dad2bcc8ef6a10cb3"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "2325bf97f3d8e5d4a628a23febd69ab0ab052abdb090bfab2ac426e125c36d3f"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "e110a57d7e4ee8b5cd0e8be566baa06a705f2b899551990e8d9a8f781d72b040"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "7ef0d57d0a046a52ac7f04966e04c825c4431075e4047d5e4d4f1240e4ab44fc"
+        }
+      ],
+      "fallback": "0916d362cfa39e23.webp",
+      "fallbackSha256": "19718fa8b3e5062583bdb8854761a724bb4429d7b79f9c9a6bf6190c2c81306d"
+    },
+    "68637b0c90254b84": {
+      "resource": "materials/de_mirage/base/base_1_diffuse_blend_psd_37bb7bd3.vtex",
+      "sourceSha256": "5d54e11edfe196709af4d0876a6d47b4edfed6b5580f6d3750945fe429295eeb",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "68637b0c90254b84.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "38ffda6384429f0986ca4c2c4fa956dd29981e396730c366e8ad64706b83fb8d",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "ae2fb0b9fcfe6e9347cc054568c9816ca87d638d6308e59cfa6419c840d1d1e6"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "e756c43266bbecc68506c07dfee353aeae962b8da5630507942624b48736447d"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "9110ad09ba6b0511533244c923c9c7032bbed3082fc51764d6c32f1fe1bf70ed"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "a34984b0b199705f7968bff2aaafd8f451499d27d6b2fa69193a13f82fb6e43f"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "cf06f6e9e1a5a713ea7e56d629d695c3d1db6b5ad0979a85f79f3dfaa775fd1a"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "842be4837bf718a52efa66fefb756f8ed8b165d179733932dd6780cfe6f5bded"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "38f2cebb88bd5e8f582f67f9a70fafc046c188770cd1256b66b38973f2470c81"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "e9aea5965b4315ce97466a1e9ecaca0667fb65942c2fbaa54d685eb375f64870"
+        }
+      ],
+      "fallback": "68637b0c90254b84.webp",
+      "fallbackSha256": "0a2017952ea80f9b031da78bd2c0efcfccce435cca496e5d6cec8376bde21a92"
+    },
+    "831d1f58129c61d5": {
+      "resource": "materials/detail/noise_detail_01_color_tga_b3cdd65b.vtex",
+      "sourceSha256": "d95a81d02a56e37d0c893cd83f352594fe87fe32c6b99a6ae257741ac08cf5c9",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        256
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "831d1f58129c61d5.bin.gz",
+      "gpuBytes": 87376,
+      "gpuSha256": "f82cc515c33076aff8370c6d2269b701e93ba3689311d4750a2e54bf4cd1ff56",
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "342b221eb60a20d77cfa30be9a8187921c37ae29ff77413ef330879ca28947d4"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "915cebf0eb8a3d92a282eb9f5b2647601eaa1777aacb5ea91c3dae8399af9616"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "ae7e35ac66af61d517765dde2adf134101404613a5fdb31f0f921f2e4a07ea5f"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "2e73b5924e09f17fe7f587edcb162b518d7cc51b9a5c342f00dabdd67b9f458a"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "9a170afcbc9f90caa77bd1c93675527a91b7e09a023d92091aa3f53855f2e7a2"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "05d6d63f117e41485867b6703a3bc09759fbe224d26539f89a4cf7b683be6375"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "2ff513fbc05fb4061cd7ece2b4e137fa850b27bcd94a9f4af9651e9563a99aff"
+        }
+      ],
+      "fallback": "831d1f58129c61d5.webp",
+      "fallbackSha256": "ee96a1b7cd08ec24365589c8a1cf7dd2d38f7c14818cf5f29b4f0984c81f584b"
+    },
+    "131d6db1fb456583": {
+      "resource": "materials/default/default_normal_tga_7be39f77.vtex",
+      "sourceSha256": "7b4d56b63404963ca56ec26ce49ebf938e4e33154e95df875a9c1c4d40f76655",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "fallback": "131d6db1fb456583.webp",
+      "fallbackSha256": "2579c4b9f1fd07226b17ef9842a2098ddfc21f04f25964f448fcab7d2e3cdac5"
+    },
+    "d0d651b344c50847": {
+      "resource": "materials/nature/dirt_ext_02b_color_psd_907b2b26.vtex",
+      "sourceSha256": "b44324b6c7d1a2607acfb21e958d75a56ff1a4aec72d67337303d108997bc658",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "d0d651b344c50847.bin.gz",
+      "gpuBytes": 174760,
+      "gpuSha256": "dab0fb7c53483667e766a8f12432a67a33242d67a23d364b87dbb401008cc0ec",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "6193e72891b19e270bd1afdf2cbc663908b38c0e8485d268ae4478d08dac79e7"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "2f98302c5797ad374d0a323b93193ecf3fab4656c19da95fbadc7d3c446e5162"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "5f40220d7c857b080b3a5b40a5c14582523ccf5783ac498ecde374c805b1198b"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "8d9feb601d0d00fc4ef75ed23ead538280d3c7637fa839134d86bc5b11bb11ea"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "a82228b8ea4aa52650b28edb5d91445a9ddbaaad124dc5c2991cbf9bf405d4e4"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "89b10dceb7728659945237d5ead3481725d4f1665d27923e70707d4b6930f7ca"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "22f147f65edfe4ffc46dd101738d876128ccd108aae3c950f51ad44f529eba88"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "b8c5ad9b29add8faac12b9da21c63a2c30b8fefd00ee41db29a92a0ac9436d83"
+        }
+      ],
+      "fallback": "d0d651b344c50847.webp",
+      "fallbackSha256": "59a3b16fea5c07970eb1eb10ad4d7fb8bd2cccea0bdf82b63e36b8e2b17d8e77"
+    },
+    "9d7bd48cea932d94": {
+      "resource": "materials/nature/blend_texture_01_blend_tga_190be053.vtex",
+      "sourceSha256": "dd01cd09c406577c83c269f8f0ddb22eb23efa74e074702c45579af89a48df36",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "9d7bd48cea932d94.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "6dd7f03d21713432355fcc4585ebd78cea57c427163cd50af419cc4d14518707",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "d19f636bb9d53fd18782febd274f9beb5f402bb708e47bf6ad35999722efb7ee"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "78ff47359dcff85ee60bc51f51fcc35cf29a956df127911a7f86f66fc99add8e"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "5374ccd8f0a474c28a5a794b6c13df30174e5070bb375f84d5b25f91e3786502"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "00741d087ce1eff951a71e4726ef0011c60719b2c15fd598898eaf9fc1989cf3"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "cf96c190714c00844b861a32e4b3b59a0366b5ab0063d27fb31b914c6832db84"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "a48e7bb26fa4a08adf577623f3c4f55cbf40adb1f070fc3a0166afdabdb8c0dd"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "460fa311611eeec270515ff8bf1adc431081bf59f0e482b05d8560cbe355636a"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "06286c07d4124ad1c9823c6a24d839c394f9fc746b12654abe51161c49548a9b"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "584e55cdd2cc2acd9a36d23585e86475b42ab8521bd0873468b9461652ecaeb6"
+        }
+      ],
+      "fallback": "9d7bd48cea932d94.webp",
+      "fallbackSha256": "970cd324a7265529be99dc6a2556d6b94e350502e7a221eb4d67e37eaf11274e"
+    },
+    "e0adb51cfce10971": {
+      "resource": "materials/de_mirage/base/base_mid_ver1_diffuse_color_psd_a1ba91d5.vtex",
+      "sourceSha256": "1025b8022428eba077e40a5760be53ac0312c96ed0e639005e901cfae11b6deb",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "e0adb51cfce10971.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "7cc723beaa8445f0ee7ea972e629fc4b9b4fa2ede7d974dc0bc9d1f2a0622a23",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "46035c9f70048555c7a5567fa1695a5d64823327a4ae9c0fddfe1f78a543234a"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "35f9e671333d4844dd7138e4c401c8653703e84330d012f9ff11832a0fff4c18"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "a90c309cab462e9febd04818a08278079151b2c649fc521cedace83de974c310"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "532239e6151406131ef309ed47f70fac415fbea35c664caf0d5b0e70e0adbb82"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "3f4d3db2bbee364511b34e79b85c6e5dc7068fc311c8e2e1c15680dece078d63"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "e5df3200c39c7837ac566d189bb20f908460d17e726c1f9740d1e826c0df3c34"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "3f020a7c9dea5e9fd1c042758fe41e2644ca16ae58879cac53b993d6bc7c092f"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "a4076ab62a5a725982f6becfd3325c3eadfadaf45ac77e41339749624c811a14"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "1ebf943491e1950a85f4b5e4e603f51fbfbc9f54c4c108fa944713bd1e94d5c9"
+        }
+      ],
+      "fallback": "e0adb51cfce10971.webp",
+      "fallbackSha256": "657f5efd1d55e189fcd1635bc10a55eb0742b15853ee4b73b3c097cfd8cc47e6"
+    },
+    "cce01b5bf5594476": {
+      "resource": "materials/de_mirage/brick/brick_ver1_a_normal_psd_549713d8.vtex",
+      "sourceSha256": "9513a8772c082cb83e053c7fd8248ee4804acc0059672a5fa3ecb67e72f3829f",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "cce01b5bf5594476.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "d552ba81c425ac7d4a8264058d97c417d00843eb598133dbd27f2bd575485e2e",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "9672b1ca7fd780c1f6dd48b5cc2d0fd1dabb6879ad2299389b92db012b0ae916"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "b5925c69b4e6c5353167d6635c7fc5cb77bb582eaaac68cf78030d8d3d163005"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "354b8e40b994742356b80372373ead3726b6f4031c5a5f5d841b27e3b968d5f4"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "b8809d5700c30d140bca753c6598188281c2ca3c1a298df03d2078b4617450c7"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "75d1ca8518c969e99abbf7a680441a7683588e96d6e4337a591986f886818b10"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "b955cb3b3d530c7306f357d6bc9ec621be346fa52cf7eea23ef3cb50d8b4b744"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "ad8e8e3e9fe2ff0e774ef01346f50fb70674de081912b346d5166f6b348b4122"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "305bc1f00434ea5e2338f1a28122002253c8062dde9ded2c59bf21796a74b38f"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "153f750c137e3065a72655b14f5c6782278245d271a368f71309d15fa6f12753"
+        }
+      ],
+      "fallback": "cce01b5bf5594476.webp",
+      "fallbackSha256": "1447f5da160ebfa96f7a7fd9e6dc8d6a163fc83742c214535289eb3e99cba285"
+    },
+    "2d4fb3c8d3b3ce26": {
+      "resource": "materials/de_mirage/hr_mirage/mirage_plaster_2_color_psd_14cbd213.vtex",
+      "sourceSha256": "4531971c3d48d68aaed6f126d268aa2a5790eba682d7f11f5fdb620dfc2c7297",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "2d4fb3c8d3b3ce26.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "15d270c7b74a4d28c98f23245baae5158d3cb348fd219cde8815eebf3ab459f1",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "5c915f236aa4e9ab59fa0a8ae845e3465350b4e130a411298c27e948e364315f"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "3fa1ac22a79311b705a73c7ec1c9d6dd9618f391cb8590edcc7932045b0a44e3"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "9ff619ed069c001b91f3227ed255664530313d67e7e69ee545552d59da56c305"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "1673ce95bf86d088dfa55c7de007b57fba0290e2a90b4cdd21725323abc3a450"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "bfac64e5b201cc7550273e24d8d04412b5aeadb2b51d7caaff64cc1d227b0378"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "dc522e9a01c53b054187f58aaae535187eea85485a0a6f061f0360823b95d1f5"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "44b38e61ed9a1f7baf14033f092f75aa1a5d26df82c0ada57f9998558bab70de"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "9c1db28eecacf4d36bf641f59012410bdcfe8c64bcdc92dc0c546924e46783be"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "b8ddb20b308f2e42b0cc485c3f28a24976be145446ea4fad8d8eb2cc9a1852a4"
+        }
+      ],
+      "fallback": "2d4fb3c8d3b3ce26.webp",
+      "fallbackSha256": "5530d2ff7ed52429ae5187e9f6b5c77926d82e47374a3efdb8e6ae43e34b6026"
+    },
+    "102c02c3c3644093": {
+      "resource": "materials/de_mirage/ground/ground_tilec_normal_psd_7de1b3b1.vtex",
+      "sourceSha256": "2a16f35706c9ab00bcc0576a79bcf00489decdfbeca36ef2173e6f8910a37ff7",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "102c02c3c3644093.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "ef10ebaf597bc6f6be27089f1c7ec727c4ed500e9e5d9765a9682545d9734756",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "9136d36d94bf5a7c45e866bac76d75171381426434d1404563e6e6d999c646f1"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "91a56f3437145b4b589da90dc7013f7faca218fb705250225823d9c13827d8a1"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "08de640a66af80598b216ad41bd4cae4257ceaba6a177334a0d7678581f45daa"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "911458f194eef4feabfcf1c92f9a40563eddaaa73f7cfbcd253574253dcb0378"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "ea51377f17b9e7d57fd6d187dd9a06a77bdab366e9eda4a8d54b3992560e0ed7"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "74f7f681a99a7ceb2822b4d9c8e1af5c388d2fb6fa6920896f5b9b97c24c5f78"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "69d1dffc0014e916d01b7b581a06bea63cbc95ee14181100513cfd556ee9d22a"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "859611de2c069e211e9567eea479e360f63ce4b1e48e2c4aabd377cc29fdad24"
+        }
+      ],
+      "fallback": "102c02c3c3644093.webp",
+      "fallbackSha256": "2be2c9373946946ea3cbda17f125346c770bd23930d0eb2a445f85ec329df8df"
+    },
+    "5aa010aa479b0084": {
+      "resource": "materials/de_mirage/ground/ground_tilef_normals_normal_psd_4e668f58.vtex",
+      "sourceSha256": "5591d2e7d344bcb98bede8c10bb6bb255c7fdc10257b2cbfee23e23fa0b5206d",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "5aa010aa479b0084.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "2d72234abab8087adda85a14a992ebaa52f6bcea8e6ba183f4a625287f9126a3",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "c1df2d843fe3065171a171ebcb8eddb33bcd0c4af14788805dcb27f3fcd7e18d"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "e4f32269c86d85131aad1f7d24d941ded56ec3aa7b542a7bee41db512256d632"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "e40cf43f108c537acaf3cc831210a736eb67a5f0f7ed65a4386b006fb6230c13"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "a6a625b33c21406be966b165c21caa77054b834bec092be19eae1715dfb4035b"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "8f165071e7355598dc68ca80a136bfee8fd82aac9737d27e1bedc1414e38703e"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "ceb873d9850c75a14eb1e1ba88da5fc0fb1ec79ebc1f13dc9947b70bcaf3d855"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "aad75cef7fc383ffa747b31855b04815ff69022b5271e54506388e99507f6e35"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "83d06325ac38127784be729404d7c2a927f52af58b5531bc9180b38638349458"
+        }
+      ],
+      "fallback": "5aa010aa479b0084.webp",
+      "fallbackSha256": "1801898aed44df7b05e97dddf8d8d8632fc62cce63f96a603acbed27374c2012"
+    },
+    "e6aba7367d8f291c": {
+      "resource": "materials/de_mirage/ground/ground_tilef_diffuse_color_psd_51e48dfa.vtex",
+      "sourceSha256": "4b0fadc0d76e209c39dd54b55bf5775c65be99ea5b8ad29f52d028bf5d685a1d",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "e6aba7367d8f291c.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "55c67cec4c66bca920322ecd810afce74d08742ae1c3f39f3c57ff8282fc371c",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "6606bb2050895dca86de72fdb9a49a263098025772ca7e9a92e18716e067dc39"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "d948597fd51b96528b718cec291617fc389af69d9335c99b18e867d72cde0468"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "5f5d4dccff1c67958d28b81a1eb4d2f1c12d40da12eca02e8084654beb67499d"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "b9d9b7994d5c4650e84e00f41078609baa18f064876a3c888692a673b08f192c"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "60e25ba23b7cbc8d9ecb849c1a311a3133ed9d63a56ea0c7af4bed54de8732f0"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "a08e5dd6074bbaaf29dac4ea1c604dc09ab47a8221972ba99dd01f1b2c87fbd9"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "46219d610d14afc736945910ba21c6f546c3bef56a0b635dbc6bd0844eb17211"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "7e6f84c537cfa9aeb6c983a1a34c5914ef1e720611c635795dc3b3f3fc343975"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "423bcc9e4a26a8b49ff01d460626e6e314d775a5ba468453c889ea340c9e8740"
+        }
+      ],
+      "fallback": "e6aba7367d8f291c.webp",
+      "fallbackSha256": "7adc06bc76773bcb868c70d2c970a0534cc553fa2549f3be379d0587e12dd357"
+    },
+    "1190fa3357b1b8f1": {
+      "resource": "materials/de_mirage/ground/ground_tilec_blendmp_diffuse_blend_psd_3d2b3c8f.vtex",
+      "sourceSha256": "652d982279874464608127190a544ec4bb4dddf57a2958ee3612e565a36a4766",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "1190fa3357b1b8f1.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "6121db9bae0a630eb5d8e66ed445d5b7f9987352125e4653c4d0ca74e4fd8010",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "bb80615494a6696c389eed4da8a6867e2cf07d3abe8b72344d59778ccbc09b07"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "dc1539643cd6455f221c2d8353ed675b8c7c91ebf56fea89a455313c3dbf5b51"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "7c3b8f62e3d547e0b1a0f5e08e43e9ad702b9c25e36f2d984d4946e74665b885"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "9e0c09b833d8c3c383ec12bf44e2f42e9f677c3430df3a14eefcfb4a404a7a23"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "939be492b553fbf6fa62fe48c8c6ca0b21bca4a36026a8bd4a019622a3a03745"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "f805d5dba184f3e08b5072f60d819ce7d14d7beaf1b7055871e82bb3b196f9b1"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "d0f1bc084a67d3ffde61c3f245f6895eb938a72c7b6664cf656e4808cf12c825"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "11566f3afc01afe42b337a5391e963f13175c403f60f11d8335711c0ad901232"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "70fb11016024addc4a222decd786311b1207e5cc18cbd0e9588dec0eba58924c"
+        }
+      ],
+      "fallback": "1190fa3357b1b8f1.webp",
+      "fallbackSha256": "844feae9a010c3b554e1187a6de1ff7020f95df969d074d4b56112df988b67cb"
+    },
+    "30169635b3379dcb": {
+      "resource": "materials/de_mirage/ground/ground_tileh_normal_psd_a6790f05.vtex",
+      "sourceSha256": "650c2d72410f0b62def2fe18d3d39f13f20d26f9b90b4731e530106aedc5f4b5",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "30169635b3379dcb.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "1f77f7b61c97d99e8ff05232efa5318c657f2cc1ff2b0c279eaf0863e30d8441",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "3a0e8208075c13f1129fb91f623a71fa26fb117f60046985545230584a6a0fb8"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "7b575f1a521209aaddba4d540484ab90ed7c467164d6496edd3e89eb64ea549c"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "35ea2815736876857010e97ab1e579020f74a0a8b686b2c6938b3065e9530ab7"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "5782e4be556a9aeaa74045dc693e05fc3c8af6314292415189e06e125b2c44db"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "8c9f3cc5248146545084bb5379703c555ee2835e616cff8848329fa120e91747"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "af02bc1c31b72874dd0b7a306db479f7595bd16ee983caeade1d686210daf980"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "f1df74938a001e276b532bb7c9c5eede1dc17943fec287477c6ea0aff00154ad"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "a97a38a8225e8108ea47dd1899f51906f491e864ff96758657cb223d550b8c3d"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "e881881ef3fdc33e7cc5ac0f4bbac75fa11a8ecf8663be6a7d5588019c2d6919"
+        }
+      ],
+      "fallback": "30169635b3379dcb.webp",
+      "fallbackSha256": "9f3f868bce9b0a51d052b7f4eadc492a564b94d81a60240236e23ad0aa8376c9"
+    },
+    "1ddbdee2a544ef48": {
+      "resource": "materials/de_mirage/ground/ground_tileh_blend_psd_3bc42ec4.vtex",
+      "sourceSha256": "187982381a40667ac2bf84a88a66a454812767c025c7c9d2be7da6770dd98c24",
+      "srgb": false,
+      "sourceSize": [
+        256,
+        256
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "1ddbdee2a544ef48.bin.gz",
+      "gpuBytes": 87376,
+      "gpuSha256": "8cfb60d6f753754a7e85a1cd00896c8c0bd8abc4efad174328f8c6431ff0b847",
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "b10b222c1c1774e3963b39c255dd64610f7ab6a9e7ddb1545f5d7d15578fdcbc"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "6475886d019337f1ac8a344f9830a0c957461523d0be02268a22243ba1051aaa"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "c24ed552c4d7b5e032fca9e08284e2baf0a5d732909bd06584e2e3fdde920efc"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "ca6837832d90f3fb687d6201f4f14339a7f6686b9d8610756d52fe1fa4a06154"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "31056f856c3d632beb5765fd6dddbcd120f2c39bcd40b719039e5a8620e32ba8"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "9abb1e8c32890ac8ca0ef8b7a7538dd5745b4359de544d662c9e39f38b842b60"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "704a62f7ab068413f120fdf7488211e8ba2f4257e0158e9d2bfe346b81549480"
+        }
+      ],
+      "fallback": "1ddbdee2a544ef48.webp",
+      "fallbackSha256": "9b2ecbf32fadc4d37a7b3e957211bc4eed35320706784518b2cb7df26dc82991"
+    },
+    "fb6c87ae500ec187": {
+      "resource": "materials/de_mirage/plaster/plaster_blue1_diffuse_color_psd_c3bb4227.vtex",
+      "sourceSha256": "d5a67df60ec408b4b66c28cc5d44fc691ed015cd92453673057643088788e01e",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "fb6c87ae500ec187.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "e7c35cb7fab1031f1d5d368ab61acdc18e270ab3e6d76f5df1125d7c9d17509b",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "80f4f3be804d2db4bb4766ab43c5e0c6fa891c88850286d0b1cac516e3050416"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "1347b962f7fc16b964789e3cd86c4e614a63dc26f83df3982df540b3992bf2ee"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "5815cb465fb53e21a123795895a8c3906e238ef59d22b1c251245ee176d822dd"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "5a64742c9cef4d8dd562b135d8cafe4c3a25dad1c7c8a04f71c918e2933fb310"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "99f8b745ab7386684219c845232aea57b456dc6541cb7e56c006ca3ca609cd07"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "3f0e55dae39cffcd1225378417b7fc7a6654a6a6829a0d04351345e456c9ca2b"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "1bf45681e671ede442a8dad045a932ab5cd964567f12c73b22da95ca178280e4"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "854f9e132533865f25d1c7a24655aeedc206fff792fa8b0c440daf6eca41c55c"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "79cf8abee12ec55cbfa75490d3644ca52cd2d3acc0424d6664b2d47aac26d3a6"
+        }
+      ],
+      "fallback": "fb6c87ae500ec187.webp",
+      "fallbackSha256": "b429f537bdae142019a37fda689e41862a143e66e65321723e43ecfb375399f3"
+    },
+    "abb193fa4d3caee1": {
+      "resource": "materials/detail/dt_plaster01_color_tga_892b3a45.vtex",
+      "sourceSha256": "b91dcde36eb9b3747ae6e850e2ea18f19e8bc82488d8ef16e2ff5aea46064861",
+      "srgb": true,
+      "sourceSize": [
+        128,
+        128
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "abb193fa4d3caee1.bin.gz",
+      "gpuBytes": 21840,
+      "gpuSha256": "7c312b44b0361e7c8d85bc426ab7b49edb91f83a03f2c1e0f3c17a883110a561",
+      "mips": [
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "aa6ae2e854407ea39690856c8ddca34f9fe0579c0db2d923caa73240537ee6d7"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "5bb3702d51a908cb07246bccffa8510b40b69e524ff63b5d3dc775ac2f81821b"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "e5ab18e7ca8d440f1f1c0b647c93630bad974f7799d6b8555b59f169c45b2994"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "99520c8477905111486cd25d6e359414225d5ec3abea849e504e39ca13056099"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "c830afe9157916f44fc66d40da57c0618db0ed789fa01e9be11a4d386e847ef1"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "ac050fa14f3746cfff75b78059fec26dc8ea7c157ab1a6989b7e832370f7a4ec"
+        }
+      ],
+      "fallback": "abb193fa4d3caee1.webp",
+      "fallbackSha256": "cbf20a35e35a55f4cc2e1331e3c5f91d1cdeb5562216872aab89be0ebc6c34a3"
+    },
+    "241382c5e31ebd90": {
+      "resource": "materials/de_mirage/plaster/plaster_salmon1_diffuse_color_psd_b9d02d0e.vtex",
+      "sourceSha256": "c1b985e051187d3592b0504e141e53afe7bb6e864d6fc8cb4c04ce853f24afa2",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "241382c5e31ebd90.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "453f0510a05fd0be1eca5c11738e6ccf41b8a88006539577392e80ed5d520213",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "fcef55a2e2629895b542390412a8231663f0f3477a31d7a4c6f6579435cc5910"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "29bd92b95cdcc04750ec468c66ece97b1199d2767fab8c2bb6e25fab822cac06"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "b6af2dd4ff7fba8b40ccf373c87fc4fee09ec17b76c4922e0b479af1e3c5d20d"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "d8a224ccb945c23c91cb13972ec1afa8a021d99c197ac2b1172d7e78b5602e50"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "1725dd5ac360896221c38169432295584f7c47e54d75c464c7a5cab153166369"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "b36f46740efa9758f37866b148cc34193b3829760b0d6dbbe253c9874d2250ae"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "7b19296f8b2bc7a1f05ac0f5967bca4c6b0cf7894fd38e23eb38483454237af4"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "ea1ce20b4a12a6847c195c056bd9a0fff8088dd4d7d9f7fbb318d2428c7aeaf0"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "f9bbb3a03080d6401e2548d20a00c0cf4c22775377fa3f5afa09597d8fdf5ed3"
+        }
+      ],
+      "fallback": "241382c5e31ebd90.webp",
+      "fallbackSha256": "7a535886cfd4b70b6f8f17ee39a193161efadacda2d556fc0de373edc0888fc8"
+    },
+    "a8b8a36b753a43fc": {
+      "resource": "materials/de_dust/tilefloor01_normal_tga_2bedbac9.vtex",
+      "sourceSha256": "7e1d188323e21cd910483199cc93e14b70ff3ba049d28a966d731713ba7dc785",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "a8b8a36b753a43fc.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "c57f62630773d6881a1c4347c702b29fe27671d787b5cc5f4dfc63ed2c1f593c",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "b2569e035b963ba85dd13cc56e487a1efceb7956abe431e04b29f6fa8b4ec88c"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "0412169a96e828fb77392978f579f87641eefb1e79e89d50ce94b62a85ec06a5"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "6a8c8d7a7018f1c2ed4dcd21441ebb1b4bba3096bd16b12fb203908480a7bf8f"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "684f5d4481fc4e8ae21f25780644e9110ffe89f32b905ec90f682e8a8d41c646"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "9a1c578e74a66f1b5e3ce3fc90b6e07487cc0897e1344e01486fdb6ed12393f4"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "e6d47a5fd7e5adf7c95d1bfb131041fd11b332e574ec0f01d961d131e9620017"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "d357ee7ed213e4c1d36aca2a897a8c40223d05328778e6d648eca6cc1e549876"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "34b688735d821d6495a04493529ef58297db42eabcdfab0ced5448c46e5404d0"
+        }
+      ],
+      "fallback": "a8b8a36b753a43fc.webp",
+      "fallbackSha256": "c289f94cf1a1561097f1b5905e2f5ebfa68f2aedac05ed8b1085a706457c2af5"
+    },
+    "d0dba8f144af0b6f": {
+      "resource": "materials/de_mirage/brick/brick_ver3_blend_psd_6b8e9a4e.vtex",
+      "sourceSha256": "dddc6e6df5d8db3906a9845c1b9772c1f942606ec85ba362426ec82b0cc17e39",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "d0dba8f144af0b6f.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "20f2d1c0d3522fd0e4aeb30c6837f480aa1a69bc88d457bfef8cf30c04e9c575",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "c950f1f5d169435fb6431c719387153f1d15de722c9e8f81fd2cec4047d77f87"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "371ab1172bab6f081208e94129d5a0570f33ddded4ac92349f20fe76bac48ca6"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "297b6fb78658f5452d4f20b5f808df185c8711980b95394c27bec5a60c249c7a"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "858ee711cae5274032910eece60f429a27159e991b36074888bb5f3ceb68c047"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "2565123f2c7ba5da9021dfe08776ebae0dc84b2c85670423d91a255e7ea2d4a3"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "971a0919098bf828c1ff4fd02757bc58f30d2a8b9ec67d550af042ca7f492957"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "7f91caace79083686043121cc882d08a9bf015f6a0e74d3b80455b9934932988"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "5510f28a4ef7732fafa6b3405e5386d308ea645419fe857225b7044efd9d08b8"
+        }
+      ],
+      "fallback": "d0dba8f144af0b6f.webp",
+      "fallbackSha256": "7e2a03431f15acd5d3f0c9e23a9e1a9da8ae39e3a08fd9e3c408050090660e23"
+    },
+    "038c9c60aacad111": {
+      "resource": "materials/de_mirage/hr_mirage/mirage_plaster_1_normal_psd_80a18e99.vtex",
+      "sourceSha256": "6b856277e50d7b3cc37bb6c80ed1472f03e2f1d489740f4a22e265ad469c14b0",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "038c9c60aacad111.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "21e339fb6451c810b6d4c5ca9d3144a1ec76cf51b4d5c4fa7e011cea59a7b838",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "609de53bad7b4b421196d3cfdebbe86d4da4cdc4ce0ba354134583f7477e1dd1"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "7117346d1510ff6064d5602508ac2550abbad90737b6c1753f3031882f9971e6"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "79bdf7c0a5cb8a88cbdf5a630456cb1f64795289558292299897c9be0e4322e2"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "9cac565b9850c880a68e58aa8f7efe8312854b258420b00780e1632eeea7289e"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "9e252287e68478c6b985b6ee704e05030ded10a33115cab0080b37151339a3d7"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "49172c09e426cf7e22ba6a16afa491e7d553f6fe5fa5f01403f6bb96bca0d823"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "bbf29790918d18eca7cc7d3d4527b487a58707d364f223787bba396e8d60d6ff"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "aa59ac2c030d43f972fd7be432df18e9e0e9fc4902a74e5d8191b9369ff6eaaa"
+        }
+      ],
+      "fallback": "038c9c60aacad111.webp",
+      "fallbackSha256": "b292c931895659e663b03c0933e9c73192d7500a7e755340b566c472d86c5d4c"
+    },
+    "33e871f844a0a75f": {
+      "resource": "materials/de_mirage/base/base_mid_ver1_normal_psd_fdce5b8c.vtex",
+      "sourceSha256": "db161e0c689a16fec5976df2c0ceb84c3a831359ffca95afcd3502e5b4cc4254",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "33e871f844a0a75f.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "6e17b455ed3a51b2b67b1afa3112aeae38ecd34b45a03eb5a8eed7cd8b846039",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "f63e9ceb8ec296127896de8d6e5665750cf71219a93fe890ef67b34ed3856596"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "bf93daf4ceeac5160ed7c99e42567633d79f96edfca94f1648cd15a5a63835f5"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "861a887678be923d8dc04710fae84978417880ef8ab7974dc2d5fe96ecbad5a3"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "0495955c3834fb6b1acd70b4f48f761944efdf1c5ee21782fd3d26b689bba309"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "fdabf7388adeb49d1539741841c4206c85cc28ede4e3c8d10322a9349d82e8ca"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "7c827f85e37abde0e433f34b6bca8771312eab078a48f099958b9b66fee21815"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "5642bca2710c2780af8b6238108ac70699c584600cc92713d4b51565490e3190"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "2f340724788e9d9242bc3e87d9a70ba2289701aa4106765f597a3a89ddda5c05"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "56e9af9711a4a5f47f8966ea902b18c1ad2c2f9f33db7140ea8dc7ac73770c42"
+        }
+      ],
+      "fallback": "33e871f844a0a75f.webp",
+      "fallbackSha256": "490bcdb681c9066cd3eb7a093447733357ecbc95b3090816dfe8e44b06f06d59"
+    }
+  },
+  "source": {
+    "tool": "Source2Viewer 20.1.7467 / 9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "geometryWeights": "Native TEXCOORD4, exported _TEXCOORD_4, preserved as COLOR_1 then sourceBlend; R is linear layer weight.",
+    "conversion": "Authored mip <=1024, original BC blocks where supported; native decode NONE with lossless WebP fallback. No normal/roughness glTF adaptation.",
+    "shader": "Existing pinned Source lightmappedgeneric two-layer shader reconstruction; native material constants retained."
+  }
+}

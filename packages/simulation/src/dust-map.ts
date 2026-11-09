@@ -4,7 +4,10 @@ import type { BakedBombDamage } from "./bomb-damage";
 import type { MapId } from "@cs2go/protocol";
 import type { MapTriggerData } from "./buy-zones";
 import type { NativeLadder } from "./ladder";
+import type { BreakableWorld, NativeBreakableDefinition } from "./breakables";
 export type DustMap = {
+  breakableDefinitions?: readonly NativeBreakableDefinition[];
+  breakables?: BreakableWorld;
   id?: MapId;
   triggers?: MapTriggerData;
   ladders?: readonly NativeLadder[];

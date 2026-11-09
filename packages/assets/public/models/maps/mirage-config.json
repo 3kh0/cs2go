@@ -18,7 +18,11 @@
     "sunEntity": "2:60417:4814",
     "skyEntity": "2:60417:6000",
     "postProcessing": "lighting/postprocessing/de_mirage_prefab/de_mirage.vpost",
-    "qualification": "Native sun and atlases; PBR and actor ambient reconstructed in browser"
+    "qualification": "Native sun, atlases, LPVs, layered materials, VPOST and LUT; fixed linear exposure and browser shader reconstruction",
+    "exposureRangeLinear": [
+      0.8,
+      1.0
+    ]
   },
   "radar": {
     "pos_x": -3230,
@@ -37,7 +41,7 @@
       "m_flWhitePoint": 1.5,
       "m_flExposureBias": 0.0
     },
-    "exposure": 1.8660659830736148
+    "exposure": 0.9
   },
   "ambient": {
     "skyColor": 8572415,

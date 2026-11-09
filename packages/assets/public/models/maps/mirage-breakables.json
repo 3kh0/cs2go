@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "mapId": "mirage",
+  "breakables": [
+    {
+      "id": "mirage:2:60417:3716",
+      "entityId": "2:60417:3716",
+      "model": "models/props/de_mirage/shutter_window_l_breakable.vmdl",
+      "material": "wood",
+      "renderNames": [
+        "breakable_mirage_2_60417_3716_shutter_window_l_breakable_bg_body_lod0"
+      ],
+      "sourceRenderNames": [
+        "shutter_window_l_breakable.shutter_window_l_breakable_bg_body_lod0"
+      ],
+      "physicsNames": [
+        "breakable_mirage_2_60417_3716_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "health": 1.0,
+      "propDataBase": "Wooden.Medium",
+      "damageScales": {
+        "bullets": -1.0,
+        "club": -1.0,
+        "explosive": -1.0,
+        "fire": -1.0
+      },
+      "damageMultipliers": {
+        "bullet": 0.75,
+        "melee": 2.0,
+        "explosion": 1.5
+      },
+      "debris": {
+        "burstSpeed": 4.0893999999999995,
+        "fadeTime": 3.0,
+        "twist": -314.0
+      },
+      "sourceModelSha256": "877ad070890fe9fcb484e83e861b9476fb71d88166ab2c1b795265680188496c",
+      "surfaceProperty": "wood_furniture",
+      "breakSoundEvent": "Wood_Furniture.Break",
+      "bounds": [
+        [
+          -48.751163957903046,
+          -3.266234360415245,
+          6.840456439825006
+        ],
+        [
+          -47.94697534530488,
+          -0.39373105507803086,
+          7.027928658329042
+        ]
+      ],
+      "onBreakEnable": [
+        "mirage:2:60417:4201"
+      ]
+    },
+    {
+      "id": "mirage:2:60417:3758",
+      "entityId": "2:60417:3758",
+      "model": "models/props/de_mirage/wall_hole_b_cover_sheetmetal.vmdl",
+      "material": "metal",
+      "renderNames": [
+        "breakable_mirage_2_60417_3758_panel0",
+        "breakable_mirage_2_60417_3758_panel1",
+        "breakable_mirage_2_60417_3758_panel2"
+      ],
+      "sourceRenderNames": [
+        "wall_hole_b_cover_sheetmetal.panel0",
+        "wall_hole_b_cover_sheetmetal.panel1",
+        "wall_hole_b_cover_sheetmetal.panel2"
+      ],
+      "physicsNames": [
+        "breakable_mirage_2_60417_3758_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "health": 1.0,
+      "propDataBase": "Metal.Medium",
+      "damageScales": {
+        "bullets": -1.0,
+        "club": -1.0,
+        "explosive": -1.0,
+        "fire": -1.0
+      },
+      "damageMultipliers": {
+        "bullet": 1.0,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "debris": {
+        "burstSpeed": 7.62,
+        "fadeTime": 3.0
+      },
+      "sourceModelSha256": "8ba1a64a2013833a8fd8b9ad7a0677c73b124b21ef59b133750ef06fa744795f",
+      "surfaceProperty": "metal_sheetmetal",
+      "breakSoundEvent": "Breakable.Metal",
+      "bounds": [
+        [
+          -30.732575741189667,
+          -1.6873614413343048,
+          11.053371716944172
+        ],
+        [
+          -28.740325179249425,
+          0.3031224685855166,
+          11.26750687860976
+        ]
+      ]
+    },
+    {
+      "id": "mirage:2:60417:4063",
+      "entityId": "2:60417:4063",
+      "model": "models/props/de_mirage/wall_hole_cover_sheetmetal.vmdl",
+      "material": "metal",
+      "renderNames": [
+        "breakable_mirage_2_60417_4063_panel0",
+        "breakable_mirage_2_60417_4063_panel1",
+        "breakable_mirage_2_60417_4063_panel2",
+        "breakable_mirage_2_60417_4063_panel3",
+        "breakable_mirage_2_60417_4063_panel4",
+        "breakable_mirage_2_60417_4063_panel5",
+        "breakable_mirage_2_60417_4063_panel6"
+      ],
+      "sourceRenderNames": [
+        "wall_hole_cover_sheetmetal.panel0",
+        "wall_hole_cover_sheetmetal.panel1",
+        "wall_hole_cover_sheetmetal.panel2",
+        "wall_hole_cover_sheetmetal.panel3",
+        "wall_hole_cover_sheetmetal.panel4",
+        "wall_hole_cover_sheetmetal.panel5",
+        "wall_hole_cover_sheetmetal.panel6"
+      ],
+      "physicsNames": [
+        "breakable_mirage_2_60417_4063_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "health": 1.0,
+      "propDataBase": "Metal.Medium",
+      "damageScales": {
+        "bullets": -1.0,
+        "club": -1.0,
+        "explosive": -1.0,
+        "fire": -1.0
+      },
+      "damageMultipliers": {
+        "bullet": 1.0,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "debris": {
+        "burstSpeed": 7.62,
+        "fadeTime": 3.0
+      },
+      "sourceModelSha256": "bffb77d35a3820dfc0fd40ecdf38e6080aeb23af00e6c2cfe31d533dbd03564d",
+      "surfaceProperty": "metal_sheetmetal",
+      "breakSoundEvent": "Breakable.Metal",
+      "bounds": [
+        [
+          -33.72809900599758,
+          -4.242367366859676,
+          23.725948822285705
+        ],
+        [
+          -33.64814456875469,
+          -2.3404483646996406,
+          25.68028697937805
+        ]
+      ]
+    },
+    {
+      "id": "mirage:2:60417:4395",
+      "entityId": "2:60417:4395",
+      "model": "maps/de_mirage/entities/unnamed_2_60417_4395.vmdl",
+      "material": "glass",
+      "renderNames": [
+        "breakable_mirage_2_60417_4395_hammer_mesh_0"
+      ],
+      "sourceRenderNames": [
+        "unnamed_2_60417_4395.hammer_mesh_0"
+      ],
+      "physicsNames": [
+        "breakable_mirage_2_60417_4395_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "health": 1,
+      "minDamage": 0,
+      "spawnFlags": 0,
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          -22.398935457336478,
+          -2.9210071044893864,
+          63.619886819379886
+        ],
+        [
+          -21.46783202955693,
+          -1.5494072995119499,
+          63.79585838937988
+        ]
+      ]
+    }
+  ],
+  "enabledRemainders": [
+    {
+      "id": "mirage:2:60417:4201",
+      "entityId": "2:60417:4201",
+      "renderNames": [
+        "breakable_remainder_mirage_2_60417_4201"
+      ],
+      "sourceRenderNames": [
+        "shutter_window_l_remainder.shutter_window_l_remainder_bg_body_lod0"
+      ],
+      "physicsNames": []
+    }
+  ],
+  "sourceHashes": {
+    "entities": "9d537d1b0fb4b68337fb4dad33e3dac568c2ebb7037ae3a31dec29b6e242b8bf",
+    "sourceRender": "e73636aafdb3ea250e1d4e61ae124b3d412262f995d4e00d57d55b04c02cc12f",
+    "sourcePhysics": "8aad6fbff623ee3f5f93d9fb8efc4bf2bef32ebb2b004de0818c6b30ecb42dc6",
+    "propData": "0e6e36e89bdbc59c291d578d89f018b2c85a6866a2e7604cbc0e1c4c5c446941",
+    "surfaces": "c016cb447cc801660475c82bc21b7ac943bfcf9c75d52a92d88daf6b5decf912"
+  },
+  "qualification": "Native model/brush health, original compound collision, entity-specific render ownership; static nails and plaster frames retained. Negative prop_data damage scales are native inherit sentinels, not immunity."
+}

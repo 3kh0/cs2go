@@ -1,0 +1,56 @@
+{
+  "materials": [
+    {
+      "name": "light_shop",
+      "selfIllumination": {
+        "brightness": 2.5,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "lightbulb01a_on",
+      "selfIllumination": {
+        "brightness": 1.585,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "wall_lamp_bulb",
+      "selfIllumination": {
+        "brightness": 2,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "tvebstest",
+      "selfIllumination": {
+        "brightness": 1.803,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0.803
+      }
+    }
+  ]
+}

@@ -498,39 +498,64 @@ footer button {
   left: 25%;
   transform: translateX(-50%);
   display: flex;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
-  font-family: "Stratum2", sans-serif;
+  font-family: "Stratum2 Monodigit", "Stratum2", sans-serif;
 }
 .vitals b {
-  font-size: 38px;
+  font-size: 42px;
   line-height: 1;
   font-weight: 700;
 }
 .armor {
   position: relative;
-  width: 36px;
-  height: 42px;
+  width: 46px;
+  height: 53px;
   display: grid;
   place-items: center;
+  transform: translateY(5px);
 }
-.armor svg {
+.armor img {
   position: absolute;
   width: 100%;
   height: 100%;
+  object-fit: contain;
+  filter: url(#hud-icon-tint);
+}
+.armor .armor-vest {
+  width: 42px;
+}
+.armor .armor-helmet {
+  transform: translateY(-3px);
+}
+.armor[data-helmet="true"] .armor-vest,
+.armor:not([data-helmet="true"]) .armor-helmet {
+  display: none;
+}
+.armor[data-empty="true"] {
+  visibility: hidden;
 }
 .armor b {
-  font-size: 15px;
-  padding-top: 4px;
+  position: relative;
+  font-size: 18px;
+  transform: translateY(3px);
 }
 .health-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 53px;
 }
 .health-track {
-  height: 5px;
-  background: hsl(var(--hud-hue) 85% 65% / 20%);
+  position: absolute;
+  right: 2px;
+  bottom: 0;
+  width: 65px;
+  height: 8px;
+  border: 1px solid #000;
+  /* Panorama leaves its red gradient visible through the missing-health end. */
+  background: linear-gradient(to right, #f00 50%, #ff00001a);
 }
 .health-track i {
   display: block;

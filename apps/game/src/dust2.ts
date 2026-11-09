@@ -21,6 +21,11 @@ import { loadGzipped } from "./gltf";
 import { dustCollision } from "@cs2go/simulation/dust-map";
 import { Navigation } from "./navigation";
 import { loadNativeMapSky } from "./native-map-sky";
+import { applySourceSelfIllumination, type SourceSelfIllumination } from "./source-self-illum";
+import { loadNativeMapProbes, applyNativeMapProbes } from "./native-map-probes";
+import { loadNativeMapLayers, applyNativeMapLayers } from "./native-map-layers";
+import { BreakableWorld, bindBreakablePhysics } from "@cs2go/simulation/breakables";
+import { NativeMapBreakableView, type NativeBreakableManifest } from "./map-breakable-view";
 import type { MapNavigation } from "./navigation";
 import type { Wall } from "./physics";
 export type NativeMapConfig = {
@@ -67,6 +72,10 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     nativeLighting,
     grade,
     nativeSky,
+    nativeMaterials,
+    nativeProbes,
+    nativeLayers,
+    breakableData,
   ] = await Promise.all([
     loadGzipped(`/models/maps/${id}.glb.gz`, 1),
     assetFetch(`/models/maps/${id}-nav.json`),
@@ -79,6 +88,24 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     config.lighting ? loadNativeMapLighting(config.lighting, renderer) : undefined,
     config.postprocess ? loadNativeMapGrade(config.postprocess) : undefined,
     config.skyWorld ? loadNativeMapSky(renderer, config.skyWorld, skyLoad, config.sun) : undefined,
+    sourceLighting
+      ? undefined
+      : assetFetch(`/models/maps/${id}-materials.json`).then(async (r) => {
+          if (!r.ok) throw new Error(`${id} native material configuration unavailable`);
+          return r.json() as Promise<{
+            materials: { name: string; selfIllumination?: SourceSelfIllumination }[];
+          }>;
+        }),
+    sourceLighting
+      ? undefined
+      : loadNativeMapProbes(renderer, `/models/maps/${id}-lighting/gpu-probes/`),
+    sourceLighting ? undefined : loadNativeMapLayers(renderer, id),
+    id === "mirage"
+      ? assetFetch(`/models/maps/${id}-breakables.json`).then(async (r) => {
+          if (!r.ok) throw new Error(`${id} native breakable configuration unavailable`);
+          return r.json() as Promise<NativeBreakableManifest>;
+        })
+      : ({ version: 1, mapId: id, breakables: [] } as NativeBreakableManifest),
   ]);
   // Native particle ropes are absent from the world export. Their settled tubes are baked offline and share static map lighting; native static_collision=false!
   if (cables) asset.scene.add(cables.scene);
@@ -118,6 +145,7 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
   root.add(asset.scene);
   if (mapSky) root.add(mapSky);
   asset.scene.updateMatrixWorld(true);
+  const emissiveMaterials = new Set<T.Material>();
   asset.scene.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
     const material = (
@@ -136,7 +164,16 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     object.castShadow = object.receiveShadow = true;
     // Preserve the native albedo. The shared scenery grade runs once, after lighting.
     for (const tex of [material.map, material.normalMap]) if (tex) tex.anisotropy = 8;
+    for (const entry of Array.isArray(object.material) ? object.material : [object.material]) {
+      if (!(entry instanceof T.MeshStandardMaterial) || emissiveMaterials.has(entry)) continue;
+      emissiveMaterials.add(entry);
+      const source = nativeMaterials?.materials.find(
+        (m) => m.name === entry.name,
+      )?.selfIllumination;
+      if (source) applySourceSelfIllumination(entry, source);
+    }
   });
+  if (nativeLayers) applyNativeMapLayers(asset.scene, nativeLayers);
   if (lighting) applySourceMapLighting(asset.scene, lighting);
   else {
     // Cache architecture shadows, but refresh moving actors in a separate atlas.
@@ -159,13 +196,17 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     }
   }
   if (nativeLighting) applyNativeMapLighting(asset.scene, nativeLighting);
+  if (nativeProbes) applyNativeMapProbes(asset.scene, nativeProbes);
   if (grade) gradeNativeMapColors(asset.scene);
   // The imported architecture never moves; skip its per-frame matrix updates.
   asset.scene.traverse((object) => {
     object.matrixAutoUpdate = false;
     object.matrixWorldAutoUpdate = false;
   });
+  bindBreakablePhysics(physics.scene, breakableData.breakables, breakableData.enabledRemainders);
   const { collision, grenadeCollision } = dustCollision(physics.scene);
+  const breakables = new BreakableWorld(collision, breakableData.breakables);
+  const breakableView = new NativeMapBreakableView(root, asset.scene, breakableData, collision);
   const ball = new WorldBall(root, collision, id === "dust2" || !!data.worldBallOrigin);
   physics.scene.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
@@ -267,6 +308,9 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     sky,
     skybox: mapSky,
     nativeSky,
+    breakables,
+    breakableView,
+    sun,
     bombDamage,
   };
 }

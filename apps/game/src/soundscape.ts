@@ -36,11 +36,20 @@ export type Cue =
   | "knife-swing2"
   | "knife-hit"
   | "knife-wall"
+  | "map-break-wood"
+  | "map-break-metal"
+  | "map-break-glass"
   | "bomb-plant"
   | "bomb-beep"
   | "bomb-defuse"
   | "bomb-explode"
   | "ready";
+// Shipped surface sound events: Wood_Furniture.Break, Breakable.Metal, Glass.Break.
+const mapBreakAudio = {
+  "map-break-wood": { variants: 2, volume: 0.799805, pitch: 0.99 },
+  "map-break-metal": { variants: 3, volume: 1, pitch: 1 },
+  "map-break-glass": { variants: 3, volume: 0.699707, pitch: 1 },
+};
 function musicStorage() {
   try {
     return localStorage;
@@ -151,9 +160,13 @@ export class Soundscape {
     playback?: { gain: number; pitch: number },
   ) {
     if (!this.context || !this.effects || !this.volume || !this.effectsVolume) return;
-    const variant = 1 + Math.floor(Math.random() * 3);
-    const name =
-      cue === "dry-fire"
+    const breaking = cue.startsWith("map-break-")
+      ? mapBreakAudio[cue as keyof typeof mapBreakAudio]
+      : undefined;
+    const variant = 1 + Math.floor(Math.random() * (breaking?.variants ?? 3));
+    const name = breaking
+      ? cue + (variant === 1 ? "" : `-${variant}`)
+      : cue === "dry-fire"
         ? "revolver-prepare"
         : cue === "step"
           ? `step-${surface}-${(this.step++ % 4) + 1}`
@@ -180,9 +193,11 @@ export class Soundscape {
       gain = this.context.createGain();
     source.buffer = buffer;
     gain.gain.value =
-      (playback?.gain ?? (cue === "hover" ? 0.1 : cue === "step" ? 0.3 : 0.45)) *
+      (playback?.gain ??
+        (breaking ? 0.45 * breaking.volume : cue === "hover" ? 0.1 : cue === "step" ? 0.3 : 0.45)) *
       (quiet ? 0.25 : 1);
-    source.playbackRate.value = playback?.pitch ?? 1;
+    source.playbackRate.value =
+      playback?.pitch ?? (breaking ? breaking.pitch + (Math.random() - 0.5) * 0.02 : 1);
     source.connect(gain);
     const disconnectSpatial = position
       ? this.spatial.connect(this.context, gain, this.effects, position, blast)

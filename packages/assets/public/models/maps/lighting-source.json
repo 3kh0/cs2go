@@ -89,7 +89,7 @@
     "sunIntensity": "2.5 * pi to account for Three.js Lambert diffuse normalization",
     "environmentIntensity": 0.35,
     "mapLighting": "Native 8.2 BC6H irradiance, BC7 sun occlusion and BC1 directional response; see lighting/source.json",
-    "toneMapping": "Native vpost coefficients, white point interpreted as exp2(stops) following VRF 5564866; bounded exposure 1.0, native 32-cubed LUT",
+    "toneMapping": "Native vpost coefficients and linear white point, with native 2.8 pre-curve scale applied to scene and white; fixed linear exposure midpoint 1.0125 (.925..1.1), native 32-cubed LUT. Automatic eye adaptation remains unimplemented.",
     "ctRampLight": "Bounded 22-intensity point at native fixture position, 8 m radius, decay 1.5",
     "sky": "Unmodified native 512 BC6H cube and authored mips; legacy HDR retained for IBL and unsupported compression fallback",
     "fog": "Native 8.2 cubemap distance/height product before tonemapping, reusing the existing sky cube; legacy generic fog on unsupported compression",

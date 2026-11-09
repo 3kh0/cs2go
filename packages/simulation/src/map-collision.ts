@@ -331,11 +331,26 @@ export class MapCollision {
   private readonly z0: number;
   private readonly width: number;
   private readonly depth: number;
-  private query = 0;
+  private readonly queryState = { value: 0 };
+  private readonly disabledOwners: Uint8Array;
+  private readonly meshKeys = new Map<string, number[]>();
   constructor(meshes: T.Mesh[], movementMeshes: T.Mesh[] = []) {
     this.raycastMeshCount = meshes.length;
     meshes = meshes.concat(movementMeshes);
     this.meshes = meshes.slice();
+    this.disabledOwners = new Uint8Array(meshes.length);
+    for (const [index, mesh] of meshes.entries())
+      for (const key of new Set([
+        mesh.name,
+        mesh.userData.nativeBreakableId,
+        mesh.userData.nativePhysicsName,
+        mesh.userData.nativeToggleId,
+      ])) {
+        if (typeof key !== "string" || !key) continue;
+        const owners = this.meshKeys.get(key) ?? [];
+        owners.push(index);
+        this.meshKeys.set(key, owners);
+      }
     let total = 0;
     for (const mesh of meshes) {
       const geometry = mesh.geometry;
@@ -471,11 +486,26 @@ export class MapCollision {
     return x >= 0 && z >= 0 && x < this.width && z < this.depth ? z * this.width + x : -1;
   }
   private stamp() {
-    if (++this.query >= stampLimit) {
+    if (++this.queryState.value >= stampLimit) {
       this.visit.fill(0);
-      this.query = 1;
+      this.queryState.value = 1;
     }
-    return this.query;
+    return this.queryState.value;
+  }
+  /** Immutable geometry/grid are shared; every match owns its obstruction mask.
+   * The shared visit buffer also shares its stamp cursor, preventing one room's
+   * ray query from suppressing a different room's identically numbered query.
+   */
+  fork(): MapCollision {
+    return Object.assign(Object.create(MapCollision.prototype) as MapCollision, this, {
+      disabledOwners: this.disabledOwners.slice(),
+    });
+  }
+  setMeshEnabled(key: string, enabled: boolean) {
+    const owners = this.meshKeys.get(key);
+    if (!owners) return false;
+    for (const owner of owners) this.disabledOwners[owner] = enabled ? 0 : 1;
+    return true;
   }
   floor(x: number, z: number, ceiling: number, bottom = ceiling - 5) {
     const cell = this.cell(Math.floor(x / this.cellSize), Math.floor(z / this.cellSize));
@@ -485,6 +515,7 @@ export class MapCollision {
       origin = ceiling + 0.01;
     for (let e = groundOffsets[cell], end = groundOffsets[cell + 1]; e < end; e++) {
       const k = ground[e];
+      if (this.disabledOwners[this.owner[k]]) continue;
       if (this.owner[k] >= this.raycastMeshCount && this.normals[k * 3 + 1] < 0.7) continue;
       if (minY[k] > ceiling || maxY[k] < bottom) continue;
       if (outside(vertices, k * 9, x, z, 0)) continue;
@@ -526,6 +557,7 @@ export class MapCollision {
         if (cell < 0) continue;
         for (let e = groundOffsets[cell]; e < groundOffsets[cell + 1]; e++) {
           const k = ground[e];
+          if (this.disabledOwners[this.owner[k]]) continue;
           if (this.visit[k] === stamp) continue;
           this.visit[k] = stamp;
           if (
@@ -597,6 +629,7 @@ export class MapCollision {
         if (cell < 0) continue;
         for (let e = offsets[cell]; e < offsets[cell + 1]; e++) {
           const k = entries[e];
+          if (this.disabledOwners[this.owner[k]]) continue;
           if (this.owner[k] >= this.raycastMeshCount) continue;
           if (visit[k] === query) continue;
           visit[k] = query;
@@ -635,6 +668,7 @@ export class MapCollision {
         if (cell < 0) continue;
         for (let e = offsets[cell]; e < offsets[cell + 1]; e++) {
           const k = entries[e];
+          if (this.disabledOwners[this.owner[k]]) continue;
           if (visit[k] === query) continue;
           visit[k] = query;
           if (position.y - radius > this.maxY[k] || position.y + radius < this.minY[k]) continue;
@@ -725,6 +759,7 @@ export class MapCollision {
         const cell = this.cell(x, z);
         for (let e = offsets[cell]; e < offsets[cell + 1]; e++) {
           const k = entries[e];
+          if (this.disabledOwners[this.owner[k]]) continue;
           if (visit[k] === query) continue;
           visit[k] = query;
           if (maxY[k] <= position.y + 18 * 0.0254 || minY[k] >= position.y + height) continue;
@@ -775,27 +810,29 @@ export class MapCollision {
     const count = grounded ? Math.min(64, Math.max(1, Math.ceil(distance / (radius * 0.4)))) : 1;
     const segment = dt / count;
     for (let i = 0; i < count; i++) {
-      const x = position.x,
-        y = position.y,
-        z = position.z;
-      const nextX = x + velocity.x * segment,
-        nextZ = z + velocity.z * segment;
-      if (grounded) {
-        const floor = this.support(nextX, nextZ, y + 18 * 0.0254, y + 1e-6, radius);
-        if (
-          Number.isFinite(floor) &&
-          !this.blocked(nextX, nextZ, floor, radius, height) &&
-          !this.blocked(x, z, floor, radius, height) &&
-          !Number.isFinite(this.ceiling(x, z, y + height, floor + height, radius)) &&
-          !Number.isFinite(this.ceiling(nextX, nextZ, y + height, floor + height, radius))
-        )
-          position.y = floor;
-      }
+      const stepCeiling = position.y + 18 * 0.0254;
       let remaining = segment;
       for (let contact = 0; contact < 4 && remaining > 1e-10; contact++) {
         const dx = velocity.x * remaining,
           dz = velocity.z * remaining;
         if (Math.abs(dx) + Math.abs(dz) < 1e-12) break;
+        // A diagonal destination can be inside the stair's side wall. Once
+        // that contact clips the wallward velocity, retry support along the
+        // remaining slide instead of treating the next riser as a dead end.
+        if (grounded) {
+          const { x, y, z } = position;
+          const nextX = x + dx,
+            nextZ = z + dz;
+          const floor = this.support(nextX, nextZ, stepCeiling, y + 1e-6, radius);
+          if (
+            Number.isFinite(floor) &&
+            !this.blocked(nextX, nextZ, floor, radius, height) &&
+            !this.blocked(x, z, floor, radius, height) &&
+            !Number.isFinite(this.ceiling(x, z, y + height, floor + height, radius)) &&
+            !Number.isFinite(this.ceiling(nextX, nextZ, y + height, floor + height, radius))
+          )
+            position.y = floor;
+        }
         if (!this.sweepHorizontal(position, dx, dz, radius, height, correction)) {
           position.x += dx;
           position.z += dz;
@@ -843,6 +880,7 @@ export class MapCollision {
         if (cell < 0) continue;
         for (let e = offsets[cell], end = offsets[cell + 1]; e < end; e++) {
           const k = entries[e];
+          if (this.disabledOwners[this.owner[k]]) continue;
           if (visit[k] === query) continue;
           visit[k] = query;
           if (maxY[k] <= step || minY[k] >= top) continue;
@@ -873,6 +911,7 @@ export class MapCollision {
     const { ground, groundOffsets, minY, maxY, vertices } = this;
     for (let e = groundOffsets[cell], end = groundOffsets[cell + 1]; e < end; e++) {
       const k = ground[e];
+      if (this.disabledOwners[this.owner[k]]) continue;
       if (this.owner[k] >= this.raycastMeshCount && this.normals[k * 3 + 1] > -0.6) continue;
       if (maxY[k] < bottom || minY[k] > top) continue;
       if (outside(vertices, k * 9, x, z, 0)) continue;
@@ -922,6 +961,7 @@ export class MapCollision {
           high = Math.max(a, b) + yMargin;
         for (let e = offsets[cell], end = offsets[cell + 1]; e < end; e++) {
           const k = entries[e];
+          if (this.disabledOwners[this.owner[k]]) continue;
           // Source player clips affect movement, not bullets or visibility.
           if (owner[k] >= this.raycastMeshCount) continue;
           // A hit lies in the cell crossed at that distance, so a triangle

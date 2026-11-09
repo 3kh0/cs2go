@@ -139,6 +139,27 @@ it("every packed effect has verified native CS2 or pinned supplemental C4 proven
     expect(clip.resourceSha256).toMatch(/^[a-f0-9]{64}$/);
     sources.set(`/audio/source/${name}.ogg`, clip.outputSha256);
   }
+  const breaks = JSON.parse(
+    readFileSync("../../packages/assets/public/audio/source/mirage-break-sounds.json", "utf8"),
+  );
+  expect(breaks.source).toBe("Read-only installed CS2 via Windows Amp runner");
+  expect(breaks.resourceSha256).toMatch(/^[a-f0-9]{64}$/);
+  expect(breaks.clips).toHaveLength(8);
+  for (const clip of breaks.clips) {
+    expect(breaks.soundEvents[clip.sourceEvent].vsnd_files_track_01).toContain(
+      clip.resource.replace(/_c$/, ""),
+    );
+    expect(clip.resourceSha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(clip.sourceEventResourceSha256).toBe(breaks.resourceSha256);
+    expect(
+      manifest.clips.find((entry: { name: string }) => entry.name === clip.name),
+    ).toMatchObject({
+      resource: clip.resource,
+      outputSha256: clip.outputSha256,
+      sourceEvent: clip.sourceEvent,
+    });
+    sources.set(`/audio/source/${clip.name}.ogg`, clip.outputSha256);
+  }
   expect(bank.clips).toHaveLength(sources.size);
   for (const clip of bank.clips) {
     expect(sources.get(clip.url), clip.url).toBe(clip.sha256);

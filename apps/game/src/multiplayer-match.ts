@@ -51,6 +51,7 @@ export class MultiplayerMatch {
   private wasReconnecting = false;
   private stepDistance = 0;
   private spectatingView = false;
+  private breakablesSynchronized = false;
   private reloadSounds = new Map<
     string,
     { weapon: number; spawn: number; time: number; phase: string; progress: number }
@@ -117,6 +118,7 @@ export class MultiplayerMatch {
         spawnAngles: world.navigation.data.spawnAngles,
         bombDamage: world.bombDamage,
         grenadeCollision: world.grenadeCollision,
+        breakables: world.breakables,
       },
       create,
       (message) => {
@@ -224,6 +226,10 @@ export class MultiplayerMatch {
   }
   private receive(message: ServerMessage) {
     if (this.closed) return;
+    if (message.type === "welcome") {
+      this.breakablesSynchronized = false;
+      return;
+    }
     if (message.type === "chat") {
       this.game.chat.receive(message);
       return;
@@ -240,6 +246,10 @@ export class MultiplayerMatch {
     const g = this.game,
       local = this.connection.local,
       state = message.round;
+    // The connection already restored collision before prediction. Initial and
+    // recovered snapshots establish the scene quietly; later transitions shatter once.
+    g.syncMapBreakables(this.breakablesSynchronized);
+    this.breakablesSynchronized = true;
     const previousTeam = g.team;
     const previousRoundTime = g.time;
     const localMvp = this.musicMvps !== undefined && local.mvps > this.musicMvps;

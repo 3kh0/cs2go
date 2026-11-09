@@ -20,6 +20,7 @@
 !packages/assets/public/models/maps/mirage-physics.glb.gz
 !packages/assets/public/models/maps/mirage-nav.json
 !packages/assets/public/models/maps/mirage-bomb.bin.gz
+!packages/assets/public/models/maps/mirage-breakables.json
 !packages/protocol/
 !packages/protocol/**
 !packages/simulation/

@@ -3,7 +3,9 @@
 // additive canvas squares in place of Source 2's glow_square_01 sprite shader.
 const PANEL_WIDTH = 670;
 const WORLD_WIDTH = 32 * 35;
-const PRESS_COUNT = 256;
+// The native 256-particle capacity is not 256 opaque square sprites. Its glow
+// shader/rope mask attenuate overlapping particles; draw each browser cell once.
+const PRESS_COUNT = 64;
 
 function curve(time: number, points: readonly (readonly [number, number])[]) {
   for (let i = 1; i < points.length; i++) {
@@ -109,9 +111,9 @@ export function setupHeaderParticles(menu: HTMLElement) {
         const perspective = 470 / (470 + depth * age * Math.exp(-0.15 * age));
         const x = (column - 15.5) * 32 * scalar + width / 2;
         const distance = (Math.abs(x - center) * extent) / halfWidth;
-        // Both native press renderers use CP2.y (.1 when selected) and
-        // overbright4. Canvas clamps additive output rather than using HDR.
-        const alpha = Math.max(0, 1 - distance) * brightness * 0.1 * 4;
+        // Keep CP2.y's .1 opacity. Applying native HDR overbright to solid canvas
+        // squares stacked four times saturated the whole selected label.
+        const alpha = Math.max(0, 1 - distance) * brightness * 0.1;
         if (alpha <= 0) continue;
         const size = 20 * 2 * 0.75 * scalar * perspective;
         const y = headerRect.height / 2 + (row - 0.5) * 32 * scalar;

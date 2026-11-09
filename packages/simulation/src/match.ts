@@ -52,8 +52,10 @@ import { mapTriggers } from "./buy-zones";
 import { groundCorrectedBombSample } from "./bomb-damage";
 import type { DustMap } from "./dust-map";
 import { createLadderState } from "./ladder";
+import { BreakableWorld } from "./breakables";
 export const STEP = 1 / TICK_RATE;
 export type Match = {
+  breakables: BreakableWorld;
   ball: WorldBallPhysics;
   firstKill?: { name: string; seconds: number };
   highlights: Map<string, { headshots: number; knives: number; grenades: number }>;
@@ -74,12 +76,21 @@ export type Match = {
   weaponCooldowns: Map<string, Record<number, number>>;
 };
 export function createMatch(mode: MatchMode, map: DustMap): Match {
+  // Room health/collision never mutate the shared startup map or another lobby.
+  if (map.breakableDefinitions?.length)
+    map = {
+      ...map,
+      collision: map.collision.fork(),
+      grenadeCollision: map.grenadeCollision?.fork(),
+    };
+  const breakables = new BreakableWorld(map.collision, map.breakableDefinitions ?? []);
   const origin = map.worldBallOrigin ?? (map.id === "mirage" ? [0, 0, 0] : ballOrigin.origin);
   const ball = new WorldBallPhysics(map.collision, new T.Vector3(...origin));
   // Dust II's authored football must not appear at an unrelated Mirage location.
   if (map.id === "mirage" && !map.worldBallOrigin) ball.mesh = undefined;
   mapTriggers(map);
   return {
+    breakables,
     ball,
     highlights: new Map(),
     receipts: new Map(),
@@ -97,6 +108,7 @@ export function createMatch(mode: MatchMode, map: DustMap): Match {
     shotsHeld: new Set(),
     weaponCooldowns: new Map(),
     state: {
+      breakables: breakables.states,
       ball: {
         x: origin[0],
         y: origin[1],
@@ -404,6 +416,7 @@ export function leaveMatch(match: Match, id: string) {
   match.highlights.delete(id);
 }
 export function startRound(match: Match) {
+  match.breakables.reset();
   match.ball.reset();
   match.firstKill = undefined;
   match.state.drops = [];
@@ -1034,6 +1047,20 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
       events.push({ kind: "defuse", actor: defuser.id });
       endRound(match, "ct", "defuse");
     } else if (!bomb.timer) {
+      if (match.map.bombDamage)
+        for (const change of match.breakables.damageRadius(
+          new T.Vector3(bomb.x, bomb.y, bomb.z),
+          Infinity,
+          (_distance, point) => match.map.bombDamage!.lookup(bomb, point)?.damage ?? 0,
+          "explosion",
+          false,
+        ))
+          events.push({
+            kind: "breakable",
+            id: change.id,
+            health: change.health,
+            point: { x: bomb.x, y: bomb.y, z: bomb.z },
+          });
       if (match.map.bombDamage)
         for (const player of match.players.values()) {
           if (player.health <= 0) continue;

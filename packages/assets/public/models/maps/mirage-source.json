@@ -88,6 +88,188 @@
     "bytes": 119725628,
     "sha256": "17e6f900620548e10ef7617e8a4ee7d9a93cf7f967dde898b7486e7d4b03dff2"
   },
+  "nativeMaterialSlots": {
+    "sourceModelExportSha256": "1f53acf961944ec55cda9391e2ab535c0af47196032afbbc7e87454520480acd",
+    "reason": "Native material-group slot remains cabinet material across all skins; VRF skin override replaced every draw call",
+    "changes": [
+      {
+        "mesh": "tv.tv_bg_body_lod0.1",
+        "primitive": 1,
+        "previousMaterial": "tvebstest",
+        "nativeMaterial": "tv",
+        "indexCount": 1854
+      },
+      {
+        "mesh": "tv.tv_bg_body_lod0.2",
+        "primitive": 1,
+        "previousMaterial": "tvanimstatic",
+        "nativeMaterial": "tv",
+        "indexCount": 1854
+      }
+    ]
+  },
+  "nativeTvResources": [
+    {
+      "resource": "models/props_interiors/tv.vmdl_c",
+      "offset": 89321168,
+      "archiveBytes": 24984,
+      "preloadBytes": 0,
+      "bytes": 24984,
+      "crc32": "0ecb9eed",
+      "sha256": "2ca22b6a84eb727ce789f84eaf0139fd2a1777dd8bbd0962585136ddac94f89d",
+      "path": "raw/models/props_interiors/tv.vmdl_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tv.vmat_c",
+      "offset": 89346160,
+      "archiveBytes": 3632,
+      "preloadBytes": 0,
+      "bytes": 3632,
+      "crc32": "c3d554c6",
+      "sha256": "6e1509467903daafaca9a2a0c0ffd90089db85b7b986ee34512e6709dbcb4033",
+      "path": "raw/materials/models/props_interiors/tv.vmat_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvanimstatic.vmat_c",
+      "offset": 90038240,
+      "archiveBytes": 3285,
+      "preloadBytes": 0,
+      "bytes": 3285,
+      "crc32": "c882e834",
+      "sha256": "76b938a723331d92205f712c8d87912370aa3bd8753ef24a34d322bddac092fd",
+      "path": "raw/materials/models/props_interiors/tvanimstatic.vmat_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvebstest.vmat_c",
+      "offset": 5804352,
+      "archiveBytes": 3840,
+      "preloadBytes": 0,
+      "bytes": 3840,
+      "crc32": "4b366904",
+      "sha256": "0c4c9903ec30af9ccdc67d9598582da51830c09f1792bc83f959d3529840cb28",
+      "path": "raw/materials/models/props_interiors/tvebstest.vmat_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvstatic.vmat_c",
+      "offset": 27059888,
+      "archiveBytes": 3844,
+      "preloadBytes": 0,
+      "bytes": 3844,
+      "crc32": "f8202501",
+      "sha256": "0e0b4313905acfc92b3069c38572286c915dbe6b19fa86176e2ec401dac4858d",
+      "path": "raw/materials/models/props_interiors/tvstatic.vmat_c"
+    },
+    {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex_c",
+      "offset": 76892032,
+      "archiveBytes": 2136,
+      "preloadBytes": 0,
+      "bytes": 2136,
+      "crc32": "8dc32399",
+      "sha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "path": "raw/materials/default/default_ao_tga_559f1ac6.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tv_color_psd_fdb64702.vtex_c",
+      "offset": 63072864,
+      "archiveBytes": 45760,
+      "preloadBytes": 0,
+      "bytes": 45760,
+      "crc32": "806544d0",
+      "sha256": "01e6541910876ad4ad04fe423ccb7d6e02fc7e18ab173f7069816374b208d64a",
+      "path": "raw/materials/models/props_interiors/tv_color_psd_fdb64702.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tv_rough_psd_111bc04b.vtex_c",
+      "offset": 63118624,
+      "archiveBytes": 89576,
+      "preloadBytes": 0,
+      "bytes": 89576,
+      "crc32": "ba088edf",
+      "sha256": "1b300ad12ffea1978ce2033ef2bbdd0b53d200545602c97ead11b3deae9bef19",
+      "path": "raw/materials/models/props_interiors/tv_rough_psd_111bc04b.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvanimstatic_color_mks_498c612d.vtex_c",
+      "offset": 22094144,
+      "archiveBytes": 174420,
+      "preloadBytes": 0,
+      "bytes": 174420,
+      "crc32": "a248a5b7",
+      "sha256": "01f9c14a3dadd575c690b531fc11831f20f0bc24da081a93303af2c8c8392df3",
+      "path": "raw/materials/models/props_interiors/tvanimstatic_color_mks_498c612d.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvebstest_color_psd_226807ac.vtex_c",
+      "offset": 22788464,
+      "archiveBytes": 45744,
+      "preloadBytes": 0,
+      "bytes": 45744,
+      "crc32": "4eadabfe",
+      "sha256": "865ed2433b4fdec09b2e52e528259104131326f6c0d05d5927bfc4ea2c70a158",
+      "path": "raw/materials/models/props_interiors/tvebstest_color_psd_226807ac.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvebstest_color_psd_ded4c481.vtex_c",
+      "offset": 22834208,
+      "archiveBytes": 45744,
+      "preloadBytes": 0,
+      "bytes": 45744,
+      "crc32": "55ec75c2",
+      "sha256": "b8a95b9460f8cf5d73a68c908bca59e20da2445e2535e891bec3390a00666c02",
+      "path": "raw/materials/models/props_interiors/tvebstest_color_psd_ded4c481.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvebstest_vmat_g_tambientocclusion_9782fd5c.vtex_c",
+      "offset": 22879952,
+      "archiveBytes": 1944,
+      "preloadBytes": 0,
+      "bytes": 1944,
+      "crc32": "8ddff2ff",
+      "sha256": "73d0a762e4096daae5f74e9c81e62423e9eb86b0e0972a78b26978549dd28934",
+      "path": "raw/materials/models/props_interiors/tvebstest_vmat_g_tambientocclusion_9782fd5c.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvebstest_vmat_g_tnormal_ab72ac96.vtex_c",
+      "offset": 22881904,
+      "archiveBytes": 2032,
+      "preloadBytes": 0,
+      "bytes": 2032,
+      "crc32": "4a33d9c9",
+      "sha256": "8aa9fb48e12175c8625de9ebd00c82c11ac448f0d972ff5e932d2a1e89746221",
+      "path": "raw/materials/models/props_interiors/tvebstest_vmat_g_tnormal_ab72ac96.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvstatic_color_tga_d2813fc4.vtex_c",
+      "offset": 22887488,
+      "archiveBytes": 45728,
+      "preloadBytes": 0,
+      "bytes": 45728,
+      "crc32": "a8d469b2",
+      "sha256": "506ab5e3c41459403b5628a265ee95b25e0e1d0be0ba101530ef4d574ef6dd1f",
+      "path": "raw/materials/models/props_interiors/tvstatic_color_tga_d2813fc4.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvstatic_ref_rough_tga_4a3b4565.vtex_c",
+      "offset": 22933216,
+      "archiveBytes": 24036,
+      "preloadBytes": 0,
+      "bytes": 24036,
+      "crc32": "c39db9d4",
+      "sha256": "56d133b77bc86384075bb571a6ecba8d0c6244685af74b4870175da8f18cc1a7",
+      "path": "raw/materials/models/props_interiors/tvstatic_ref_rough_tga_4a3b4565.vtex_c"
+    },
+    {
+      "resource": "materials/models/props_interiors/tvstatic_vmat_g_tmetalness_b7e45cfc.vtex_c",
+      "offset": 22957264,
+      "archiveBytes": 1944,
+      "preloadBytes": 0,
+      "bytes": 1944,
+      "crc32": "cb8566d7",
+      "sha256": "8f97aa22139f4a6aef6d3f251cc5731525edf5485dd6d0c35f6ebe7ec9f5c7d2",
+      "path": "raw/materials/models/props_interiors/tvstatic_vmat_g_tmetalness_b7e45cfc.vtex_c"
+    }
+  ],
   "nativeSkybox": {
     "archiveSha256": "17e6f900620548e10ef7617e8a4ee7d9a93cf7f967dde898b7486e7d4b03dff2",
     "generator": "packages/assets/import-mirage-sky.py",
@@ -164,7 +346,7 @@
     "geometry": "Full native architecture and prop geometry; material batching, meshopt, 16-bit positions, FLOAT32 texture/lightmap UVs; native chart seams retained",
     "collision": "Unsimplified world and enabled solid entity physics, native player/grenade/pass-bullet flags; disabled retake and never-solid brushes excluded",
     "textures": "Original adapted Source2Viewer PBR textures, at most1024 architecture/512props, Basis ETC1S KTX2",
-    "lighting": "Authored4096mip BC6H irradiance and4096BC1directional blocks unchanged; decodedHalfEXR/losslessWebP fallbacks; native sky,filmiccoefficients and32RGBLUT"
+    "lighting": "Native58-volume LPVs, packed layered materials and authored self illumination; Authored4096mip BC6H irradiance and4096BC1directional blocks unchanged; decodedHalfEXR/losslessWebP fallbacks; native sky,filmiccoefficients and32RGBLUT"
   },
   "runtime": {
     "mirage-bomb-source.json": {
@@ -176,9 +358,13 @@
       "sha256": "630fc01c6fd5ef569d0609a4c9cc4c5a9bdd79d1973d860bc1af4218857722fe",
       "decodedSha256": "32dbddea740e489d95c3f74dae065b2aed1ffb0575659e2d869b479f49890b12"
     },
+    "mirage-breakables.json": {
+      "bytes": 6848,
+      "sha256": "1983ac6f4a166c64474fe9cd7b584fcf7de914319a8b2f2330d3f8473e10c194"
+    },
     "mirage-config.json": {
-      "bytes": 1402,
-      "sha256": "8f129e134657951ddb3b448542ff698ece433a539feb4bc07f6fdf567bdd8f2b"
+      "bytes": 1490,
+      "sha256": "9dbe7073e6dd97d2c5844734a020e75b31cb90ac5d5a3339fa9e333c77ef69e3"
     },
     "mirage-lighting/color-correction.bin.gz": {
       "bytes": 72010,
@@ -194,6 +380,34 @@
       "bytes": 11499240,
       "sha256": "12882d7780c5e91b53b8d433cf07f58c15ee3536b2410a8fed09063f931f4b96"
     },
+    "mirage-lighting/gpu-probes/irradiance-rgb16f.bin.gz": {
+      "bytes": 22651237,
+      "sha256": "ed17521694a1bbb089d36e7d955d7e46ff80d3620b9a5908bba7388f91acd4a8",
+      "decodedSha256": "a913fb40ac0d3023644321b16c4ec90c12e8b3d8bead06477dd1e6c4fd26ce86"
+    },
+    "mirage-lighting/gpu-probes/irradiance.bin.gz": {
+      "bytes": 5837633,
+      "sha256": "646a07422222a09d3d391f4d0bce7a7078f6d86e3b11ecf36201a216ac96d9c9",
+      "decodedSha256": "84d07f4be79dae4e6847b22f0eb5bea8109ee612595eb8bc02468156195610dd"
+    },
+    "mirage-lighting/gpu-probes/probes.json": {
+      "bytes": 81991,
+      "sha256": "0981be213dd96027f62b6d2d1e4f2619d3026e19bdf9e4a19baa983a86c47dbf"
+    },
+    "mirage-lighting/gpu-probes/shadows-rgba8.bin.gz": {
+      "bytes": 341931,
+      "sha256": "9c4e6f1ce6da079eb13d7180b0226dc3c38ac7aa1f209593f1b44b3bbba70405",
+      "decodedSha256": "154cff4aa9be2f67449586eb8e40c9819caf45d9aee38059ce49b0dc8d52e657"
+    },
+    "mirage-lighting/gpu-probes/shadows.bin.gz": {
+      "bytes": 216411,
+      "sha256": "e394c750fe1c20985ff9e81be01cd28e33e585566eaa41aeb08016f81cea91de",
+      "decodedSha256": "1e2d3143d1b7e2d0defe9d9b24f787ed3108daef891d45b88ddd547fc27516f1"
+    },
+    "mirage-lighting/gpu-probes/source.json": {
+      "bytes": 1831,
+      "sha256": "21a41ea82c120737675df4f258d714b408805431993ccc15b871c912ade543a1"
+    },
     "mirage-lighting/irradiance.bin.gz": {
       "bytes": 15587151,
       "sha256": "334c36ebd175df88b193d34a2edcee3bcb48c0d7b4f038cf2d30bebb076fa4c4",
@@ -207,14 +421,233 @@
       "bytes": 1134480,
       "sha256": "c97813afe0305fec9fd72f38ca70796009fd4d43a26624c849b1bd5b5a73093d"
     },
+    "mirage-materials/layers/038c9c60aacad111.bin.gz": {
+      "bytes": 281841,
+      "sha256": "1878d99e0c3c68310a9d5addf8875b16cea296b04ceed6cf5388180346a768b8",
+      "decodedSha256": "21e339fb6451c810b6d4c5ca9d3144a1ec76cf51b4d5c4fa7e011cea59a7b838"
+    },
+    "mirage-materials/layers/038c9c60aacad111.webp": {
+      "bytes": 311510,
+      "sha256": "b292c931895659e663b03c0933e9c73192d7500a7e755340b566c472d86c5d4c"
+    },
+    "mirage-materials/layers/0916d362cfa39e23.bin.gz": {
+      "bytes": 497069,
+      "sha256": "0d18230cf5a86b70655207cd468314cf893df246047b09548b176a75875873d2",
+      "decodedSha256": "655a296847e7623d8dd0fae6c6345ef945305d8d5a5f2643a76b046afe7df3a4"
+    },
+    "mirage-materials/layers/0916d362cfa39e23.webp": {
+      "bytes": 633128,
+      "sha256": "19718fa8b3e5062583bdb8854761a724bb4429d7b79f9c9a6bf6190c2c81306d"
+    },
+    "mirage-materials/layers/102c02c3c3644093.bin.gz": {
+      "bytes": 313506,
+      "sha256": "a24cd361c75335b086487a9ab8b1ca95946b36a5f6939d68b7ec0d40aea9396f",
+      "decodedSha256": "ef10ebaf597bc6f6be27089f1c7ec727c4ed500e9e5d9765a9682545d9734756"
+    },
+    "mirage-materials/layers/102c02c3c3644093.webp": {
+      "bytes": 353828,
+      "sha256": "2be2c9373946946ea3cbda17f125346c770bd23930d0eb2a445f85ec329df8df"
+    },
+    "mirage-materials/layers/1190fa3357b1b8f1.bin.gz": {
+      "bytes": 952093,
+      "sha256": "dafdfde1a42d5db8b730e2f4c15f815c64bd977e5ed15e34bf89741d6d0a3641",
+      "decodedSha256": "6121db9bae0a630eb5d8e66ed445d5b7f9987352125e4653c4d0ca74e4fd8010"
+    },
+    "mirage-materials/layers/1190fa3357b1b8f1.webp": {
+      "bytes": 394778,
+      "sha256": "844feae9a010c3b554e1187a6de1ff7020f95df969d074d4b56112df988b67cb"
+    },
+    "mirage-materials/layers/131d6db1fb456583.webp": {
+      "bytes": 38,
+      "sha256": "2579c4b9f1fd07226b17ef9842a2098ddfc21f04f25964f448fcab7d2e3cdac5"
+    },
+    "mirage-materials/layers/1ddbdee2a544ef48.bin.gz": {
+      "bytes": 66907,
+      "sha256": "3dcdfa69187ee18d65be586c588d2a201cf0d779d846273ef51e2df1ef726d8a",
+      "decodedSha256": "8cfb60d6f753754a7e85a1cd00896c8c0bd8abc4efad174328f8c6431ff0b847"
+    },
+    "mirage-materials/layers/1ddbdee2a544ef48.webp": {
+      "bytes": 58776,
+      "sha256": "9b2ecbf32fadc4d37a7b3e957211bc4eed35320706784518b2cb7df26dc82991"
+    },
+    "mirage-materials/layers/241382c5e31ebd90.bin.gz": {
+      "bytes": 427782,
+      "sha256": "ce7de9e5c99f0987fb80631dfc6ba11f5aaf992704afb881970f046e90cdf109",
+      "decodedSha256": "453f0510a05fd0be1eca5c11738e6ccf41b8a88006539577392e80ed5d520213"
+    },
+    "mirage-materials/layers/241382c5e31ebd90.webp": {
+      "bytes": 676364,
+      "sha256": "7a535886cfd4b70b6f8f17ee39a193161efadacda2d556fc0de373edc0888fc8"
+    },
+    "mirage-materials/layers/2d4fb3c8d3b3ce26.bin.gz": {
+      "bytes": 546880,
+      "sha256": "4dd5fbc56e3ce8f3df73ac90c5888b1bd505edfd51603ac329c7cf756b6eebd2",
+      "decodedSha256": "15d270c7b74a4d28c98f23245baae5158d3cb348fd219cde8815eebf3ab459f1"
+    },
+    "mirage-materials/layers/2d4fb3c8d3b3ce26.webp": {
+      "bytes": 901046,
+      "sha256": "5530d2ff7ed52429ae5187e9f6b5c77926d82e47374a3efdb8e6ae43e34b6026"
+    },
+    "mirage-materials/layers/30169635b3379dcb.bin.gz": {
+      "bytes": 1297698,
+      "sha256": "42bba9bcab3ed8f1d85624b9420228dba44eaf166161004500d4def6a8707bc1",
+      "decodedSha256": "1f77f7b61c97d99e8ff05232efa5318c657f2cc1ff2b0c279eaf0863e30d8441"
+    },
+    "mirage-materials/layers/30169635b3379dcb.webp": {
+      "bytes": 1605150,
+      "sha256": "9f3f868bce9b0a51d052b7f4eadc492a564b94d81a60240236e23ad0aa8376c9"
+    },
+    "mirage-materials/layers/33e871f844a0a75f.bin.gz": {
+      "bytes": 1249575,
+      "sha256": "34db515bfcefa3b143f44299e2a6e74aa0a555f1ce9aef43fd8846ce246cc72c",
+      "decodedSha256": "6e17b455ed3a51b2b67b1afa3112aeae38ecd34b45a03eb5a8eed7cd8b846039"
+    },
+    "mirage-materials/layers/33e871f844a0a75f.webp": {
+      "bytes": 1808576,
+      "sha256": "490bcdb681c9066cd3eb7a093447733357ecbc95b3090816dfe8e44b06f06d59"
+    },
+    "mirage-materials/layers/5a48ad69bb003668.bin.gz": {
+      "bytes": 1042124,
+      "sha256": "ab53713137c1a75e6a43be4d6dad249f9731a20575a1c8dee119871e5d99d80c",
+      "decodedSha256": "d60b769340f11452405dc1589bec79ce3c0fa18575d0f425916aff6b17a70692"
+    },
+    "mirage-materials/layers/5a48ad69bb003668.webp": {
+      "bytes": 1131434,
+      "sha256": "e497a9a50b5a9513052d7a427f5c61a5919c4651e0e14070ae906835b96cdf6e"
+    },
+    "mirage-materials/layers/5aa010aa479b0084.bin.gz": {
+      "bytes": 275450,
+      "sha256": "967f0df77644c759f1bb1945d710971201780c3a6004c54185cf1c35fafe7147",
+      "decodedSha256": "2d72234abab8087adda85a14a992ebaa52f6bcea8e6ba183f4a625287f9126a3"
+    },
+    "mirage-materials/layers/5aa010aa479b0084.webp": {
+      "bytes": 243786,
+      "sha256": "1801898aed44df7b05e97dddf8d8d8632fc62cce63f96a603acbed27374c2012"
+    },
+    "mirage-materials/layers/68637b0c90254b84.bin.gz": {
+      "bytes": 269604,
+      "sha256": "6e93c868acd581835825f7a007fbcec7156347c4a97563d884b9ed232ca3b4cc",
+      "decodedSha256": "38ffda6384429f0986ca4c2c4fa956dd29981e396730c366e8ad64706b83fb8d"
+    },
+    "mirage-materials/layers/68637b0c90254b84.webp": {
+      "bytes": 330102,
+      "sha256": "0a2017952ea80f9b031da78bd2c0efcfccce435cca496e5d6cec8376bde21a92"
+    },
+    "mirage-materials/layers/831d1f58129c61d5.bin.gz": {
+      "bytes": 70450,
+      "sha256": "8a59f172da6fdf3b4d728170ec66ed46abab75931c17b3f6828c68ce21ab329f",
+      "decodedSha256": "f82cc515c33076aff8370c6d2269b701e93ba3689311d4750a2e54bf4cd1ff56"
+    },
+    "mirage-materials/layers/831d1f58129c61d5.webp": {
+      "bytes": 69518,
+      "sha256": "ee96a1b7cd08ec24365589c8a1cf7dd2d38f7c14818cf5f29b4f0984c81f584b"
+    },
+    "mirage-materials/layers/9d7bd48cea932d94.bin.gz": {
+      "bytes": 823868,
+      "sha256": "7de114fc505ac9a5882bc779ebcd6fb7d87258108f9c0a0888c591d159a08d0c",
+      "decodedSha256": "6dd7f03d21713432355fcc4585ebd78cea57c427163cd50af419cc4d14518707"
+    },
+    "mirage-materials/layers/9d7bd48cea932d94.webp": {
+      "bytes": 589404,
+      "sha256": "970cd324a7265529be99dc6a2556d6b94e350502e7a221eb4d67e37eaf11274e"
+    },
+    "mirage-materials/layers/a8b8a36b753a43fc.bin.gz": {
+      "bytes": 254506,
+      "sha256": "9ea62725878f427a7bd58db6825ed4b4ec41dfcce41569eab946ad60e11abfa3",
+      "decodedSha256": "c57f62630773d6881a1c4347c702b29fe27671d787b5cc5f4dfc63ed2c1f593c"
+    },
+    "mirage-materials/layers/a8b8a36b753a43fc.webp": {
+      "bytes": 217142,
+      "sha256": "c289f94cf1a1561097f1b5905e2f5ebfa68f2aedac05ed8b1085a706457c2af5"
+    },
+    "mirage-materials/layers/abb193fa4d3caee1.bin.gz": {
+      "bytes": 16202,
+      "sha256": "db722f84645bf3dfb74a4edb9f6a471d194d6375d429316dfadffbc48d220526",
+      "decodedSha256": "7c312b44b0361e7c8d85bc426ab7b49edb91f83a03f2c1e0f3c17a883110a561"
+    },
+    "mirage-materials/layers/abb193fa4d3caee1.webp": {
+      "bytes": 11370,
+      "sha256": "cbf20a35e35a55f4cc2e1331e3c5f91d1cdeb5562216872aab89be0ebc6c34a3"
+    },
+    "mirage-materials/layers/cce01b5bf5594476.bin.gz": {
+      "bytes": 1174040,
+      "sha256": "ffc55e862f6f2273178ff6444fd068f03e2dfce7b53cc3b0431ff45f295b0c41",
+      "decodedSha256": "d552ba81c425ac7d4a8264058d97c417d00843eb598133dbd27f2bd575485e2e"
+    },
+    "mirage-materials/layers/cce01b5bf5594476.webp": {
+      "bytes": 919040,
+      "sha256": "1447f5da160ebfa96f7a7fd9e6dc8d6a163fc83742c214535289eb3e99cba285"
+    },
+    "mirage-materials/layers/d0d651b344c50847.bin.gz": {
+      "bytes": 134494,
+      "sha256": "75e60033c21a2b085b6d1dbb7c516b88418f9228183d8894c3df9353835339d1",
+      "decodedSha256": "dab0fb7c53483667e766a8f12432a67a33242d67a23d364b87dbb401008cc0ec"
+    },
+    "mirage-materials/layers/d0d651b344c50847.webp": {
+      "bytes": 222902,
+      "sha256": "59a3b16fea5c07970eb1eb10ad4d7fb8bd2cccea0bdf82b63e36b8e2b17d8e77"
+    },
+    "mirage-materials/layers/d0dba8f144af0b6f.bin.gz": {
+      "bytes": 250649,
+      "sha256": "0b018903840e933433b6716cefbdba69346c0a500c5745e93e2e8fbcd808412e",
+      "decodedSha256": "20f2d1c0d3522fd0e4aeb30c6837f480aa1a69bc88d457bfef8cf30c04e9c575"
+    },
+    "mirage-materials/layers/d0dba8f144af0b6f.webp": {
+      "bytes": 249088,
+      "sha256": "7e2a03431f15acd5d3f0c9e23a9e1a9da8ae39e3a08fd9e3c408050090660e23"
+    },
+    "mirage-materials/layers/e0adb51cfce10971.bin.gz": {
+      "bytes": 521359,
+      "sha256": "9a0f9df6fbc94ad3be89a61061e2df0d2eb5651c4d6ca735df918074655fca6d",
+      "decodedSha256": "7cc723beaa8445f0ee7ea972e629fc4b9b4fa2ede7d974dc0bc9d1f2a0622a23"
+    },
+    "mirage-materials/layers/e0adb51cfce10971.webp": {
+      "bytes": 753056,
+      "sha256": "657f5efd1d55e189fcd1635bc10a55eb0742b15853ee4b73b3c097cfd8cc47e6"
+    },
+    "mirage-materials/layers/e6aba7367d8f291c.bin.gz": {
+      "bytes": 530138,
+      "sha256": "44210489dc999f0696993cc50432484c0af667a731264f3aa285a75eafe9d24e",
+      "decodedSha256": "55c67cec4c66bca920322ecd810afce74d08742ae1c3f39f3c57ff8282fc371c"
+    },
+    "mirage-materials/layers/e6aba7367d8f291c.webp": {
+      "bytes": 811154,
+      "sha256": "7adc06bc76773bcb868c70d2c970a0534cc553fa2549f3be379d0587e12dd357"
+    },
+    "mirage-materials/layers/e7d2fffb05475d34.bin.gz": {
+      "bytes": 1174086,
+      "sha256": "01caf71a2f83145f075d79a3db7d43aa1a2b9ecc8e781c3ea33cc8f34ba628f7",
+      "decodedSha256": "d61c195137583cb91a37ad2613d5ca244617561b0808a18291b4b79bc1e3bc45"
+    },
+    "mirage-materials/layers/e7d2fffb05475d34.webp": {
+      "bytes": 1415826,
+      "sha256": "ab0b5caed4aa4ea5f2b71c176535c5f41debb85bee79c9df50ca01d1fe96f8f2"
+    },
+    "mirage-materials/layers/fb6c87ae500ec187.bin.gz": {
+      "bytes": 475782,
+      "sha256": "f68ecd4dca717303006243b71704608e3b457cde14be94fc38a0928b1f95cd66",
+      "decodedSha256": "e7c35cb7fab1031f1d5d368ab61acdc18e270ab3e6d76f5df1125d7c9d17509b"
+    },
+    "mirage-materials/layers/fb6c87ae500ec187.webp": {
+      "bytes": 572108,
+      "sha256": "b429f537bdae142019a37fda689e41862a143e66e65321723e43ecfb375399f3"
+    },
+    "mirage-materials/layers/source.json": {
+      "bytes": 68542,
+      "sha256": "80f7a6fcdbe3737d157d8fa51027e2e0a75ac1dfce952263cbacd8048f6a207f"
+    },
+    "mirage-materials.json": {
+      "bytes": 906,
+      "sha256": "3a2ed06cf5030fc674b3471f5b740daa1608da9e39d3dff12e6bfeed45294fd8"
+    },
     "mirage-nav.json": {
       "bytes": 896252,
       "sha256": "4012a6c8722354f1d4a8bfa9dc54db1958fc0f6e6a2f2a85fe1b1395629ecf4d"
     },
     "mirage-physics.glb.gz": {
-      "bytes": 293941,
-      "sha256": "dffb11578c6c4cd5fe220c2ce4dd18c5637c025b8ff1648ab08a43143046b702",
-      "decodedSha256": "017dec37c3214ce45d122679523eb2dcbf3633bf0668e1cb91853e4b7b8d7ba0"
+      "bytes": 294006,
+      "sha256": "2c89b0a884e0699c62e3a11849085c4833c9a6230ce6276c87b57cd441325b3e",
+      "decodedSha256": "e1e169f8158fbd8a634b19b1c09d2e9777eb0519269c657414e335258cf336e6"
     },
     "mirage-radar.png": {
       "bytes": 143685,
@@ -292,9 +725,9 @@
       "decodedSha256": "749dee5de6b5069cebf394981c2e1cc080f21d6e4c659226a6b5fe16d2a1a852"
     },
     "mirage.glb.gz": {
-      "bytes": 31508832,
-      "sha256": "a9a3301896356ac106d4bbcc1ea3d569183cf4a69d345b0c784906ed730e2242",
-      "decodedSha256": "dcf96821aa98bdd00c22ef7435b6275610cb5894e48a4e50df09a9670979e017"
+      "bytes": 31557994,
+      "sha256": "ed92c0669e100c66864c541bd7168911349e74dc23eb0861aab2877ecaa5b0e7",
+      "decodedSha256": "c76340d5a0f63ae167a91076984d32750b633015389618044cd1ca401cf5e067"
     }
   },
   "regeneration": [
@@ -304,13 +737,19 @@
     "import-mirage.py",
     "prepare-mirage-environment.py",
     "import-mirage-sky.py",
+    "prepare-mirage-layers.py",
+    "prepare-native-probes.py",
+    "prepare-native-breakables.py",
+    "restore-native-material-slots.py",
+    "import-mirage-break-audio.py",
+    "prepare-audio-pack.py",
     "record-mirage-provenance.py",
     "bun run assets:prepare"
   ],
   "limitations": [
-    "Three PBR/material conversion differs fromSource2, full layered/probe lighting is notported",
-    "Nativecolorgrade uses fixed0.9-stop exposure ; noautomaticexposure/bloom",
-    "Movable/breakableprops represented bystaticcollision; noSource2entityI/O orfullparticle/soundscapeDSP",
+    "Native layered materials, probe volumes and self illumination are retained; full Source2 renderer parity is not established",
+    "Nativecolorgrade uses fixed0.9 linear exposure ; noautomaticexposure/bloom",
+    "Four native Mirage breakables retain entity health, damage inheritance, render/physics ownership and shutter remainder; debris motion is reconstructed; other movable props remain static; no full Source2 entity I/O or particle/soundscape DSP",
     "Bots andladdercontroller arebrowserreconstructions, nativegeometry/navigation/objectivetriggers areextracted"
   ]
 }

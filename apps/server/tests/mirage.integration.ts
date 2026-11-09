@@ -24,6 +24,62 @@ const triggers = mapTriggers(map);
 assert.equal(map.bombDamage?.positionCount, 68279);
 assert.equal(map.bombDamage?.siteCount, 2);
 assert.equal(triggers.bombSites.sites.length, 2);
+// Identity is carried by extracted entity physics, never inferred from a wood
+// material shared with permanent frames. Exercise every sourced obstruction.
+assert.equal(map.breakableDefinitions?.length, 4);
+{
+  const match = createMatch("casual", map);
+  for (const definition of map.breakableDefinitions!) {
+    assert.equal(definition.health, 1);
+    let ray: Ray | undefined;
+    let far = 0;
+    for (let axis = 0; axis < 3 && !ray; axis++)
+      for (const u of [0.25, 0.5, 0.75])
+        for (const v of [0.25, 0.5, 0.75]) {
+          const point = new Vector3().fromArray(definition.bounds[0]);
+          const other = [0, 1, 2].filter((n) => n !== axis);
+          point.setComponent(
+            other[0],
+            definition.bounds[0][other[0]] * (1 - u) + definition.bounds[1][other[0]] * u,
+          );
+          point.setComponent(
+            other[1],
+            definition.bounds[0][other[1]] * (1 - v) + definition.bounds[1][other[1]] * v,
+          );
+          point.setComponent(axis, definition.bounds[1][axis] + 0.2);
+          const direction = new Vector3().setComponent(axis, -1);
+          const candidate = new Ray(point, direction);
+          const distance = definition.bounds[1][axis] - definition.bounds[0][axis] + 0.4;
+          if (
+            match.map.collision
+              .intersections(candidate, distance)
+              .some((hit) => match.breakables.idForImpact(hit) === definition.id)
+          ) {
+            ray = candidate;
+            far = distance;
+            break;
+          }
+        }
+    assert(ray, `Native breakable physics identity must resolve: ${definition.id}`);
+    const permanent = match.map.collision
+      .intersections(ray, far)
+      .filter((hit) => match.breakables.idForImpact(hit) !== definition.id)
+      .map((hit) => [hit.object.name, hit.distance]);
+    assert(match.breakables.damage(definition.id, 10, "bullet")?.broken);
+    const open = match.map.collision.intersections(ray, far);
+    assert(open.every((hit) => match.breakables.idForImpact(hit) !== definition.id));
+    assert.deepEqual(
+      open.map((hit) => [hit.object.name, hit.distance]),
+      permanent,
+    );
+    match.breakables.reset();
+    assert(
+      match.map.collision
+        .intersections(ray, far)
+        .some((hit) => match.breakables.idForImpact(hit) === definition.id),
+    );
+  }
+}
 function place(player: PlayerState, point: number[]) {
   const floor = map.collision.floor(point[0], point[2], point[1] + 0.5);
   assert(Number.isFinite(floor), "native point must have collision support");
@@ -284,7 +340,10 @@ try {
   const welcome = messages.find((message) => message.type === "welcome")!;
   assert.equal(welcome.map, "mirage");
   const room = app.rooms.get(welcome.room)!;
-  assert.equal(room.map, map);
+  assert.equal(room.map.id, map.id);
+  assert.equal(room.map.breakableDefinitions, map.breakableDefinitions);
+  if (map.breakableDefinitions?.length) assert.notEqual(room.map.collision, map.collision);
+  else assert.equal(room.map.collision, map.collision);
   assert(
     triggers.buyZones.contains(room.players.get(welcome.id)!, "ct", {
       halfWidth: 0.3,

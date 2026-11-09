@@ -614,6 +614,11 @@ export class GameUtility {
       weapon: p.weapon,
     };
     if (p.kind === "he") {
+      if (
+        !g.network &&
+        g.world.breakables?.damageRadius(p.position, data.radius, heDamage, "explosion").length
+      )
+        g.syncMapBreakables(true, p.position);
       this.areaDamage(effect, 0, data.radius);
       for (const e of this.effects)
         if (

@@ -2,13 +2,16 @@ import * as T from "three";
 import { applyNativeMapGrade } from "./native-map-color";
 import { fetchGzipped } from "./gltf";
 
-// Dust II's pinned vpost: A=0, B=C=.0009, D=E=F=1, white point in stops.
+// Dust II's pinned vpost: A=0, B=C=.0009, D=E=F=1.
+// VRF ScenePostProcessVolume/ PostProcessRenderer: authored white point and
+// min/max exposure are linear; the native pre-curve scale applies to both
+// scene radiance and white point. Retain fixed midpoint exposure (.925..1.1).
 // Cancel the common B*(C-1) term analytically to avoid subtracting nearly equal floats.
 T.ShaderChunk.tonemapping_pars_fragment = T.ShaderChunk.tonemapping_pars_fragment.replace(
   "vec3 CustomToneMapping( vec3 color ) { return color; }",
   `vec3 CustomToneMapping(vec3 color) {
-    const float whitePoint = exp2(1.648926);
-    vec3 exposed = min(max(color, vec3(0.0)) * toneMappingExposure * 2.8, vec3(whitePoint));
+    const float whitePoint = 1.648926 * 2.8;
+    vec3 exposed = min(max(color, vec3(0.0)) * toneMappingExposure * 1.0125 * 2.8, vec3(whitePoint));
     return exposed * (1.0 + 0.0009 * whitePoint) / (whitePoint * (vec3(1.0) + 0.0009 * exposed));
   }`,
 );

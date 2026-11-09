@@ -1,6 +1,7 @@
 // Local-only browser fixture controls. This file is never bundled into the server.
 import { startServer } from "../src/server";
-import { configurePlayer, respawn } from "@cs2go/simulation/match";
+import { configurePlayer, respawn, startRound } from "@cs2go/simulation/match";
+import { movement } from "@cs2go/simulation/physics";
 import { loadServerMap } from "../src/map";
 const map = await loadServerMap();
 const mirage = (await Bun.file(
@@ -20,10 +21,61 @@ const control = Bun.serve({
   hostname: "127.0.0.1",
   async fetch(request) {
     if (request.method !== "POST") return new Response("Not found", { status: 404 });
-    const command = (await request.json()) as { room: string; op: string };
+    const command = (await request.json()) as {
+      room: string;
+      op: string;
+      id?: string;
+      breakableId?: string;
+      players?: { id: string; x: number; y: number; z: number; yaw: number; pitch: number }[];
+    };
     const room = app.rooms.get(command.room);
     if (!room) return new Response("Missing room", { status: 404 });
     const map = room.map;
+    if (command.op === "breakable-setup") {
+      const id = command.breakableId ?? command.id;
+      if (!id || room.breakables.health(id) === undefined || !command.players?.length)
+        return new Response("Missing native breakable or actors", { status: 400 });
+      const positions = command.players.map((pose) => {
+        const player = room.players.get(pose.id);
+        if (!player || ![pose.x, pose.y, pose.z, pose.yaw, pose.pitch].every(Number.isFinite))
+          return undefined;
+        const floor = map.collision.support(
+          pose.x,
+          pose.z,
+          pose.y + 0.5,
+          pose.y - 0.5,
+          movement.hullRadius,
+        );
+        if (
+          !Number.isFinite(floor) ||
+          Math.abs(floor - pose.y) > 0.2 ||
+          map.collision.blocked(pose.x, pose.z, floor, movement.hullRadius, movement.standingHeight)
+        )
+          return undefined;
+        return { player, pose, floor };
+      });
+      if (positions.some((position) => !position))
+        return new Response("Breakable actor fixture must use clear native standing support", {
+          status: 400,
+        });
+      for (const position of positions) {
+        const { player, pose, floor } = position!;
+        if (player.health <= 0 || player.waiting) respawn(player, room);
+        Object.assign(player, pose, {
+          y: floor,
+          vx: 0,
+          vz: 0,
+          vertical: 0,
+          grounded: true,
+          cooldown: 0,
+        });
+      }
+      // Preserve the actual object's current HP: late joins must see the same
+      // broken opening, rather than having a setup command silently repair it.
+      room.state.phase = "live";
+      room.state.remaining = 100;
+    }
+    if (command.op === "breakable-reset" || command.op === "round-reset") startRound(room);
     if (command.op === "live") {
       room.state.phase = "live";
       room.state.remaining = 100;

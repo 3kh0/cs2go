@@ -45,10 +45,12 @@ export async function renderNativeMapColorFixture() {
       F = p.m_flToeDenom;
     // Independently evaluate the original native rational curve in double precision.
     const filmic = (x: number) => (x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F) - E / F;
-    const white = 2 ** p.m_flWhitePoint;
+    // Native CPU renderer scales its LINEAR authored white and scene by 2.8.
+    const white = p.m_flWhitePoint * 2.8;
     const display = rgb.map((channel) => {
       const linear =
-        filmic(Math.min(white, channel * grade.exposure * 2 ** p.m_flExposureBias)) / filmic(white);
+        filmic(Math.min(white, channel * grade.exposure * 2 ** p.m_flExposureBias * 2.8)) /
+        filmic(white);
       return linear <= 0.0031308 ? linear * 12.92 : 1.055 * linear ** (1 / 2.4) - 0.055;
     });
     const data = grade.texture.image.data as Uint8Array;

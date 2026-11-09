@@ -12,7 +12,7 @@ type ArrayRecord = {
   gpuBytes: number;
 };
 export interface SourceGpuProbes {
-  textures: T.CompressedArrayTexture[];
+  textures: (T.CompressedArrayTexture | T.DataArrayTexture)[];
   frames: Float32Array[];
   sky: T.Vector4[];
   depth: number;
@@ -76,16 +76,34 @@ export async function createSourceGpuProbes(
   const textures = await Promise.all(
     arrays.map(async (entry, index) => {
       const bytes = await fetchGzipped(directory + entry.file);
-      const expected = Math.ceil(entry.width / 4) * Math.ceil(entry.height / 4) * 16 * entry.layers;
+      const decoded = entry.format === "RGB16F" || entry.format === "RGBA8";
+      const expected = decoded
+        ? entry.width * entry.height * entry.layers * (entry.format === "RGB16F" ? 6 : 4)
+        : Math.ceil(entry.width / 4) * Math.ceil(entry.height / 4) * 16 * entry.layers;
       if (bytes.byteLength !== expected || entry.gpuBytes !== expected)
         throw new Error("Invalid native GPU probe blocks");
-      const texture = new T.CompressedArrayTexture(
-        [{ data: new Uint8Array(bytes), width: entry.width, height: entry.height }],
-        entry.width,
-        entry.height,
-        entry.layers,
-        index === 0 ? T.RGB_BPTC_UNSIGNED_Format : T.RGBA_BPTC_Format,
-      );
+      const texture = decoded
+        ? new T.DataArrayTexture(
+            entry.format === "RGB16F" ? new Uint16Array(bytes) : new Uint8Array(bytes),
+            entry.width,
+            entry.height,
+            entry.layers,
+          )
+        : new T.CompressedArrayTexture(
+            [{ data: new Uint8Array(bytes), width: entry.width, height: entry.height }],
+            entry.width,
+            entry.height,
+            entry.layers,
+            index === 0 ? T.RGB_BPTC_UNSIGNED_Format : T.RGBA_BPTC_Format,
+          );
+      if (decoded) {
+        texture.format = entry.format === "RGB16F" ? T.RGBFormat : T.RGBAFormat;
+        texture.type = entry.format === "RGB16F" ? T.HalfFloatType : T.UnsignedByteType;
+        // Three infers sized floating formats for RGBA, but leaves RGB unsized.
+        // WebGL2 array storage requires RGB16F for the native three-channel HDR data.
+        if (entry.format === "RGB16F") texture.internalFormat = "RGB16F";
+        texture.unpackAlignment = 1;
+      }
       texture.colorSpace = T.NoColorSpace;
       texture.minFilter = texture.magFilter = T.LinearFilter;
       texture.generateMipmaps = false;

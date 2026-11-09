@@ -1,0 +1,118 @@
+{
+  "source": "Valve Counter-Strike 2 installed VPK content; read-only export",
+  "sourceBuild": [
+    "ClientVersion=2000942",
+    "ServerVersion=2000942",
+    "PatchVersion=1.41.9.6",
+    "ProductName=cs2",
+    "appID=730",
+    "ServerAppID=2347773",
+    "SourceRevision=11206718",
+    "VersionDate=Nov 04 2026",
+    "VersionTime=16:01:59"
+  ],
+  "vpkDirectory": {
+    "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+    "bytes": 7713879,
+    "sha256": "10d5831cbf008808419a438141362c466f14550a8a4cf04ace56a7828ccf2b27"
+  },
+  "decoder": {
+    "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\tools\\s2v-20.1\\Source2Viewer-CLI.exe",
+    "sha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830",
+    "version": "Version: 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304\nOS: Microsoft Windows 10.0.26200 (X64)\nWebsite: https://valveresourceformat.github.io\nGitHub: https://github.com/ValveResourceFormat/ValveResourceFormat"
+  },
+  "resources": [
+    {
+      "resource": "panorama/images/hud/armor.vsvg_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_187.vpk",
+      "offset": 6350672,
+      "archiveBytes": 10171,
+      "preloadBytes": 0,
+      "bytes": 10171,
+      "crc32": "f4263c07",
+      "sha256": "c3561e87abd72b03d9b3a3ead76382844a74aaaacaadde6454fb48d231f0875f",
+      "path": "originals/panorama/images/hud/armor.vsvg_c",
+      "svgAttributes": {
+        "width": "33",
+        "height": "32",
+        "viewBox": "0 0 33 32",
+        "fill": "none"
+      },
+      "crc32Verified": true,
+      "decoded": {
+        "path": "decoded/panorama/images/hud/armor.svg",
+        "bytes": 9445,
+        "sha256": "e594e572d753d71463e12de804d1b0f026e4734ef835a82a822d887aa250b482"
+      }
+    },
+    {
+      "resource": "panorama/images/hud/armor_helmet.vsvg_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_187.vpk",
+      "offset": 6360848,
+      "archiveBytes": 13576,
+      "preloadBytes": 0,
+      "bytes": 13576,
+      "crc32": "1e55cbe5",
+      "sha256": "4112960278ed1a4b14f61b218ab7005a41a1d70b144d952f6baf19c795804194",
+      "path": "originals/panorama/images/hud/armor_helmet.vsvg_c",
+      "svgAttributes": {
+        "width": "33",
+        "height": "33",
+        "viewBox": "0 0 33 33",
+        "fill": "none"
+      },
+      "crc32Verified": true,
+      "decoded": {
+        "path": "decoded/panorama/images/hud/armor_helmet.svg",
+        "bytes": 12850,
+        "sha256": "56b49a4d60cc68527cdaf4d108bd20627bba87d2d7fe4d7aefaf625e7f6ffdd0"
+      }
+    },
+    {
+      "resource": "panorama/styles/hud/hudhealthammocenter.vcss_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_371.vpk",
+      "offset": 34292512,
+      "archiveBytes": 60277,
+      "preloadBytes": 0,
+      "bytes": 60277,
+      "crc32": "06434828",
+      "sha256": "30e47d27ac6fcc9bfbce652cf814fe739f14ac3d4df5804f7e25c86129ae3a6e",
+      "path": "originals/panorama/styles/hud/hudhealthammocenter.vcss_c",
+      "crc32Verified": true,
+      "decoded": {
+        "path": "decoded/panorama/styles/hud/hudhealthammocenter.css",
+        "bytes": 33641,
+        "sha256": "2b70790a55d110d2a06f1bd613a03df16c2dfaf6acc26f4822c212fba9e166b9"
+      }
+    },
+    {
+      "resource": "panorama/layout/hud/hudhealthammocenter.vxml_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_371.vpk",
+      "offset": 34285168,
+      "archiveBytes": 7333,
+      "preloadBytes": 0,
+      "bytes": 7333,
+      "crc32": "d3e6deca",
+      "sha256": "8bf84be70add0affda74647501e6595fbd75a03ef27b2d2af89be6cb3b977475",
+      "path": "originals/panorama/layout/hud/hudhealthammocenter.vxml_c",
+      "crc32Verified": true,
+      "decoded": {
+        "path": "decoded/panorama/layout/hud/hudhealthammocenter.xml",
+        "bytes": 15901,
+        "sha256": "f65909dc6d2d0e257bd6f4f7cbcd2c71453001f76c5c8bafd4e603377c415839"
+      }
+    }
+  ],
+  "conversion": "Source2Viewer 20.1 --decompile; SVG bytes copied unchanged",
+  "hudStyle": {
+    "healthFontPx": 42,
+    "armorFontPx": 18,
+    "healthTrackPx": [
+      65,
+      8
+    ],
+    "healthTrackBorderPx": 1,
+    "missingHealthGradient": "opaque red through 50 percent, fading to 10 percent red at the right edge"
+  },
+  "limitations": "Decoded files are Source2Viewer output from compiled resources, not a claim of byte-identical pre-compilation source. Original compiled members are preserved byte-for-byte with VPK CRC verification. Archive chunk files were not hashed in full; member hashes, source offsets, and directory VPK hash identify provenance."
+}

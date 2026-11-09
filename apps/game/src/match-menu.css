@@ -8,7 +8,7 @@
   display: grid;
   grid-template-rows: 48px 44px minmax(0, 1fr) calc(96 * var(--menu-unit));
   text-align: left;
-  background: rgb(0 0 0 / 75%);
+  background: rgb(20 20 20 / 40%);
   backdrop-filter: blur(20px);
   box-shadow: none;
 }
@@ -78,6 +78,9 @@
   background:
     linear-gradient(0deg, #15213175, transparent 45%),
     url(/ui/home/dust2.webp) 54% center / cover;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-clip: border-box;
   box-shadow: 0 3px 8px #111d2730;
 }
 #menu .match-maps .home-map-art[aria-pressed="true"] {
@@ -134,7 +137,8 @@
   overflow: hidden;
   border: 1px solid rgb(9 219 9 / 33.6%);
   color: rgb(85 228 20);
-  background: rgb(9 49 9 / 65.1%);
+  background: linear-gradient(90deg, rgb(6 141 6 / 28%), transparent 27% 73%, rgb(6 141 6 / 28%))
+    rgb(9 49 9 / 65.1%);
   box-shadow: 0 0 16px #00000041;
   font:
     700 calc(32 * var(--menu-unit)) "Stratum2",
@@ -151,10 +155,21 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url(/ui/home/linemap.png) center / calc(514 * var(--menu-unit))
-    calc(513 * var(--menu-unit));
-  mix-blend-mode: overlay;
-  opacity: 0.32;
+  background: rgb(50 255 50);
+  mask: url(/ui/home/linemap.png) 20% 60% / calc(514 * var(--menu-unit))
+    calc(513 * var(--menu-unit)) repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
+#menu .match-footer #play::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-inline: 1px solid rgb(255 255 255 / 7.5%);
+  box-shadow:
+    inset 50px 0 64px -45px rgb(6 141 6 / 76.7%),
+    inset -50px 0 64px -45px rgb(6 141 6 / 76.7%);
+  transition: box-shadow 0.25s ease-in-out;
   pointer-events: none;
 }
 #menu .match-footer #play > span {
@@ -162,9 +177,12 @@
   z-index: 1;
 }
 #menu .match-footer #play:hover {
-  background-color: #349b23;
-  border-color: #93ff64;
   filter: none;
+}
+#menu .match-footer #play:hover::after {
+  box-shadow:
+    inset 60px 0 124px -45px rgb(4 179 4 / 63.7%),
+    inset -60px 0 124px -45px rgb(4 179 4 / 63.7%);
 }
 .match-browser #multiplayer-options {
   flex: 0 0 240px;

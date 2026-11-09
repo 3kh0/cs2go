@@ -1,0 +1,54 @@
+{
+  "mapId": "mirage",
+  "revision": "5564866c7f2a6b2ee54a9195b7963147e24da94e",
+  "arrays": [
+    {
+      "width": 164,
+      "height": 152,
+      "layers": 384,
+      "format": "BC6H",
+      "file": "irradiance.bin.gz",
+      "gpuBytes": 9572352,
+      "gpuSha256": "84d07f4be79dae4e6847b22f0eb5bea8109ee612595eb8bc02468156195610dd",
+      "downloadBytes": 5837633
+    },
+    {
+      "width": 164,
+      "height": 152,
+      "layers": 64,
+      "format": "BC7",
+      "file": "shadows.bin.gz",
+      "gpuBytes": 1595392,
+      "gpuSha256": "1e2d3143d1b7e2d0defe9d9b24f787ed3108daef891d45b88ddd547fc27516f1",
+      "downloadBytes": 216411
+    }
+  ],
+  "fallbacks": [
+    {
+      "width": 164,
+      "height": 152,
+      "layers": 384,
+      "format": "RGB16F",
+      "file": "irradiance-rgb16f.bin.gz",
+      "gpuBytes": 57434112,
+      "gpuSha256": "a913fb40ac0d3023644321b16c4ec90c12e8b3d8bead06477dd1e6c4fd26ce86",
+      "downloadBytes": 22651237
+    },
+    {
+      "width": 164,
+      "height": 152,
+      "layers": 64,
+      "format": "RGBA8",
+      "file": "shadows-rgba8.bin.gz",
+      "gpuBytes": 6381568,
+      "gpuSha256": "154cff4aa9be2f67449586eb8e40c9819caf45d9aee38059ce49b0dc8d52e657",
+      "downloadBytes": 341931
+    }
+  ],
+  "sourceHashes": {
+    "env_light_probe_volume_atlas.vtex_c": "d1aaf46b4997222374f42946b908bf1ee12a3155e9e935b5a9651588204bcf59",
+    "env_light_probe_volume_atlas_dlshd.vtex_c": "69d836bf25e214e335f5a9f5856b192b73255016c25d505da9402d0238ce76d7"
+  },
+  "entitiesSha256": "9d537d1b0fb4b68337fb4dad33e3dac568c2ebb7037ae3a31dec29b6e242b8bf",
+  "interpretation": "Untouched native z-major BC slices, six signed axes, per-volume half-texel borders, native priority/fade/remaining coverage. Fallbacks are original Source2Viewer-decoded RGB16F/RGBA8, no resampling, gamma or lossy encoding."
+}

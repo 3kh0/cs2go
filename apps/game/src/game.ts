@@ -1,4 +1,5 @@
 import { equippedKnives, equipKnife } from "./equipped-knives";
+import type { BreakableDamageKind } from "@cs2go/simulation/breakables";
 import { BOMB_DRAW_DURATION } from "./bomb-presentation";
 import { prepareMatchMedia } from "./match-media";
 import { configureStartupLoading } from "./loading";
@@ -240,6 +241,7 @@ type BulletImpactData = {
   head?: boolean;
   height?: number;
   crouch?: boolean;
+  breakableId?: string;
 };
 const nodes = new Map<string, HTMLElement>();
 const el = (id: string) => {
@@ -1469,6 +1471,8 @@ export class Game {
     this.freezeTime = this.buyRemaining = 0;
     this.revolverCharge = 0;
     this.useWorld();
+    this.world.breakables.reset();
+    this.syncMapBreakables(false);
     this.configureBots(this.teamMode, options.bots === false ? 0 : undefined);
     this.utility.reset();
     this.utility.botInventories.clear();
@@ -2164,6 +2168,16 @@ export class Game {
     this.knifeContact = true;
     const index = impact.actor;
     if (index === undefined) {
+      if (impact.breakableId) {
+        const point = this.ray.ray.at(impact.distance, new T.Vector3());
+        this.damageMapBreakable(
+          impact.breakableId,
+          knifeDamage(stab, this.knifeFirstSwing, false),
+          "melee",
+          point,
+          this.ray.ray.direction,
+        );
+      }
       this.soundscape.play("knife-wall");
       return;
     }
@@ -2504,6 +2518,42 @@ export class Game {
     this.decals.count = Math.max(this.decals.count, slot + 1);
     this.decals.visible = true;
   }
+  syncMapBreakables(animate = false, point?: T.Vector3, direction?: T.Vector3) {
+    const world = this.world;
+    if (!world) return;
+    const broken = world.breakableView.sync(world.breakables.states, animate, point, direction);
+    if (world.breakableView.visibilityChanged) world.sun.shadow.needsUpdate = true;
+    for (const definition of broken) {
+      const position =
+        point ??
+        new T.Vector3()
+          .fromArray(definition.bounds[0])
+          .add(new T.Vector3().fromArray(definition.bounds[1]))
+          .multiplyScalar(0.5);
+      this.soundscape.play(
+        definition.material === "glass"
+          ? "map-break-glass"
+          : definition.material === "wood"
+            ? "map-break-wood"
+            : "map-break-metal",
+        false,
+        "concrete",
+        position,
+      );
+    }
+  }
+  damageMapBreakable(
+    id: string,
+    damage: number,
+    kind: BreakableDamageKind,
+    point?: T.Vector3,
+    direction?: T.Vector3,
+  ) {
+    if (this.network) return false;
+    const change = this.world.breakables.damage(id, damage, kind);
+    if (change) this.syncMapBreakables(true, point, direction);
+    return !!change?.broken;
+  }
   // Cover remains authoritative; animated actors use separate small hitboxes.
   coverTargets() {
     const targets = this.targets;
@@ -2516,8 +2566,8 @@ export class Game {
   }
   meleeTrace() {
     const cover = this.ray.intersectObjects(this.coverTargets(), true)[0];
-    let nearest: { distance: number; actor?: number } | undefined = cover
-      ? { distance: cover.distance }
+    let nearest: { distance: number; actor?: number; breakableId?: string } | undefined = cover
+      ? { distance: cover.distance, breakableId: this.world.breakables.idForImpact(cover) }
       : undefined;
     this.bots.forEach((bot, index) => {
       if (bot.health <= 0) return;
@@ -2532,6 +2582,7 @@ export class Game {
     // MapCollision already reports world normals; ordinary mesh picking uses
     // local normals and needs the world transform exactly once.
     const normal = impact.face?.normal.clone();
+    const breakableId = this.world.breakables.idForImpact(impact);
     if (normal && !this.world.collision) normal.transformDirection(impact.object.matrixWorld);
     return {
       distance: impact.distance,
@@ -2540,9 +2591,13 @@ export class Game {
           ? this.world.collision.thickness(impact, ray.direction)
           : meshThickness(impact, ray),
       material: impact.object.userData.bulletMaterial || "concrete",
-      id: this.world.collision ? undefined : `solid:${impact.object.uuid}`,
+      id: breakableId
+        ? `breakable:${breakableId}`
+        : this.world.collision
+          ? undefined
+          : `solid:${impact.object.uuid}`,
       exit: normal ? normal.dot(ray.direction) > 0 : false,
-      data: { point: impact.point, normal },
+      data: { point: impact.point, normal, breakableId },
     };
   }
   bulletBody(
@@ -2690,8 +2745,13 @@ export class Game {
       const result = solveBullet(stats, surfaces);
       if (this.world === this.dust) this.dust.ball.shoot(this.ray.ray, result.endDistance);
       const end = this.camera.position.clone().addScaledVector(direction, result.endDistance);
+      const damagedBreakables = new Set<string>();
       for (const { surface, damage, passed } of result.contacts) {
         const data = surface.data;
+        if (data.breakableId && !damagedBreakables.has(data.breakableId)) {
+          damagedBreakables.add(data.breakableId);
+          this.damageMapBreakable(data.breakableId, damage, "bullet", data.point, direction);
+        }
         if (typeof data.actor === "number") {
           const index = data.actor;
           const b = this.bots[index];
@@ -2725,7 +2785,10 @@ export class Game {
             );
             if (this.mode === "deathmatch" && this.kills >= 20) this.finish();
           }
-        } else if (data.normal) {
+        } else if (
+          data.normal &&
+          (!data.breakableId || this.world.breakables.health(data.breakableId)! > 0)
+        ) {
           this.decal(decalPoint.copy(data.point).addScaledVector(direction, -0.015), data.normal);
         }
       }
@@ -3664,6 +3727,8 @@ export class Game {
       : blocked(x, z, y, this.world.walls, radius, height);
   }
   startRound() {
+    this.world.breakables.reset();
+    this.syncMapBreakables(false);
     this.utility.reset(true);
     this.groundInventory.clearDrops();
     for (const tracer of this.tracers) {
@@ -3840,6 +3905,18 @@ export class Game {
   }
   detonateBomb() {
     if (!this.bomb) return;
+    const field = this.world.bombDamage;
+    if (
+      field &&
+      this.world.breakables.damageRadius(
+        this.bomb.position,
+        Infinity,
+        (_distance, point) => field.lookup(this.bomb!.position, point)?.damage ?? 0,
+        "explosion",
+        false,
+      ).length
+    )
+      this.syncMapBreakables(true, this.bomb.position);
     const apply = (actor: Bot | "player") => {
       const target = actor === "player" ? this : actor;
       if (target.health <= 0 || (actor === "player" && this.dead)) return;
@@ -4617,11 +4694,19 @@ export class Game {
         b.rig.weaponIndex,
         weapons[b.rig.weaponIndex].suppressed && b.rig.suppressed,
       );
+      const damagedBreakables = new Set<string>();
       for (const { surface, damage: rawDamage, passed } of result.contacts) {
         const data = surface.data;
+        if (data.breakableId && !damagedBreakables.has(data.breakableId)) {
+          damagedBreakables.add(data.breakableId);
+          this.damageMapBreakable(data.breakableId, rawDamage, "bullet", data.point, shot);
+        }
         const victim = data.actor;
         if (victim === undefined) {
-          if (data.normal)
+          if (
+            data.normal &&
+            (!data.breakableId || this.world.breakables.health(data.breakableId)! > 0)
+          )
             this.decal(decalPoint.copy(data.point).addScaledVector(shot, -0.015), data.normal);
           continue;
         }
@@ -5123,6 +5208,60 @@ export class Game {
       if (nav) b.navArea = nav.nearest(pos);
     }
   }
+  private botClearBreakable(b: Bot, heading: T.Vector2) {
+    if (
+      this.network ||
+      !this.world.breakables.states.length ||
+      this.weaponsFrozen ||
+      b.tracking ||
+      b.shot > 0 ||
+      b.reloadTime > 0 ||
+      b.ammo <= 0 ||
+      heading.lengthSq() < 0.01 ||
+      this.utility.blind.has(this.bots.indexOf(b))
+    )
+      return false;
+    const from = b.group.position.clone().add(new T.Vector3(0, this.botHullHeight(b) * 0.85, 0));
+    const direction = new T.Vector3(heading.x, 0, heading.y).normalize();
+    const ray = new T.Ray(from, direction);
+    const impact = this.world.collision.intersections(ray, 2.5)[0];
+    if (!impact) return false;
+    const id = this.world.breakables.idForImpact(impact);
+    if (!id) return false;
+    // Clear a genuine route obstruction, without acquiring actors through it
+    // or firing across an actor who entered the short firing lane. Normal
+    // perception/combat handles actors rather than treating them as cover.
+    const blockedBy = (feet: T.Vector3) => {
+      const hit = botBodyHit(ray, feet);
+      return hit && hit.point.distanceTo(from) < impact.distance;
+    };
+    if (
+      this.bots.some(
+        (other) => other !== b && other.health > 0 && blockedBy(other.group.position),
+      ) ||
+      (!this.dead && blockedBy(this.position))
+    )
+      return false;
+    const weapon = weapons[b.rig.weaponIndex];
+    if (isKnife(b.rig.weaponIndex)) return false;
+    b.ammo--;
+    b.shot = weapon.delay;
+    b.aim.copy(impact.point);
+    b.rig.recoil = 1;
+    b.rig.shotTime = 0.25;
+    const mode = (weapon.suppressed && b.rig.suppressed) || weapon.zoomLevels > 0 ? 1 : 0;
+    applyFiringInaccuracy(b.weaponAccuracy, b.rig.weaponIndex, mode, this.botAccuracyPose(b));
+    applyWeaponRecoil(b.aimPunch, b.weaponRecoil, b.rig.weaponIndex, mode);
+    this.worldSound("bot", from, b.rig.weaponIndex, b.rig.suppressed);
+    this.trace(from, impact.point, b.rig.weaponIndex, b.rig.suppressed);
+    return this.damageMapBreakable(
+      id,
+      ballistics[b.rig.weaponIndex].damage,
+      "bullet",
+      impact.point,
+      direction,
+    );
+  }
   moveBots(dt: number) {
     this.detours = 0;
     for (let index = 0; index < this.bots.length; index++) {
@@ -5345,6 +5484,13 @@ export class Game {
               ? b.stuck + dt
               : 0;
           if (b.progressTime > 2.5) b.stuck = Math.max(b.stuck, 0.81);
+          if (
+            b.stuck > 0.2 &&
+            Math.floor(b.stuck * 16) !== Math.floor((b.stuck - dt) * 16) &&
+            this.botClearBreakable(b, desired)
+          ) {
+            b.stuck = b.progressTime = 0;
+          }
           // Local detours are synchronous searches; allow one per simulation step.
           if (b.stuck > 0.8 && !this.detours) {
             this.detours++;
@@ -5721,6 +5867,11 @@ export class Game {
     el("hud").classList.toggle("spectating", this.teamMode && this.dead > 0 && !observer);
     setText("health", String(Math.ceil(Math.max(0, observer?.health ?? this.health))));
     setText("armor", String(Math.ceil(observer?.armor ?? this.armor)));
+    const armorState = el("armor-state");
+    const helmet = String(observer?.helmet ?? this.helmet);
+    const emptyArmor = String((observer?.armor ?? this.armor) <= 0);
+    if (armorState.dataset.helmet !== helmet) armorState.dataset.helmet = helmet;
+    if (armorState.dataset.empty !== emptyArmor) armorState.dataset.empty = emptyArmor;
     setText("money", this.teamMode ? `$${(observer?.money ?? this.money).toLocaleString()}` : "");
     this.updateBuyMenu();
     el("health-fill").style.width = `${clamp(observer?.health ?? this.health, 0, 100)}%`;
@@ -6045,6 +6196,7 @@ export class Game {
     this.updateTextureQuality();
     const elapsed = (now - this.last) / 1000;
     const dt = Math.min(elapsed, 0.05);
+    if (this.simulationRunning) this.world.breakableView.update(dt);
     this.last = now;
     if (this.deathBannerUntil > 0 && now >= this.deathBannerUntil) {
       this.deathBannerUntil = 0;

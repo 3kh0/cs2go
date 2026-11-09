@@ -8,6 +8,10 @@ import { dustCollision } from "@cs2go/simulation/dust-map";
 import type { MapCollision } from "@cs2go/simulation/map-collision";
 import { createLadderState, ladderNormal, stepLadder } from "@cs2go/simulation/ladder";
 import { Navigation, type MapNavigation } from "./navigation";
+import { createPlayer } from "@cs2go/simulation/match";
+import { movePlayer } from "@cs2go/simulation/movement";
+import { movement } from "@cs2go/simulation/physics";
+import { neutralInput } from "@cs2go/protocol";
 
 const data = JSON.parse(
   readFileSync(
@@ -29,6 +33,36 @@ beforeAll(async () => {
 });
 
 describe("native Mirage physics and ladder traversal", () => {
+  it("climbs A stairs while holding into the connector-side wall without jumping", () => {
+    for (const x of [-14, -13.4, -12.6])
+      for (const walk of [false, true]) {
+        const player = createPlayer("stairs", "Stairs", "ct");
+        Object.assign(player, {
+          x,
+          y: collision.support(x, 34, -3, -5, movement.hullRadius),
+          z: 34,
+          grounded: true,
+          waiting: false,
+        });
+        const input = { ...neutralInput(), yaw: Math.PI, forward: 1, right: -1, walk };
+        let maximumRise = 0;
+        let wallSamples = 0;
+        for (let tick = 0; tick < 128 * 5 && player.z < 39; tick++) {
+          const before = player.y;
+          movePlayer(player, input, 1 / 128, { collision, spawns: data.spawns });
+          maximumRise = Math.max(maximumRise, player.y - before);
+          if (player.z > 35 && player.z < 38) {
+            expect(player.x).toBeLessThan(-12.5983);
+            if (player.x > -12.61) wallSamples++;
+          }
+        }
+        expect(player.z, `start ${x}, walk ${walk}`).toBeGreaterThanOrEqual(39);
+        expect(player.y).toBeGreaterThan(-1.1);
+        expect(player.grounded).toBe(true);
+        expect(maximumRise).toBeLessThanOrEqual(18 * 0.0254 + 1e-5);
+        expect(wallSamples).toBeGreaterThan(10);
+      }
+  });
   it("aligns every authored spawn with a solid floor in the native physics export", () => {
     for (const spawn of [...data.spawns.t, ...data.spawns.ct]) {
       const floor = collision.floor(spawn[0], spawn[2], spawn[1] + 0.5, spawn[1] - 2);

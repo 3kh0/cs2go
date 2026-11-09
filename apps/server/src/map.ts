@@ -5,6 +5,7 @@ import { BakedBombDamage } from "@cs2go/simulation/bomb-damage";
 import { resolve } from "node:path";
 import { isMapId, type MapId } from "@cs2go/protocol";
 import { mapTriggers } from "@cs2go/simulation/buy-zones";
+import { bindBreakablePhysics, type NativeBreakableDefinition } from "@cs2go/simulation/breakables";
 export async function loadServerMap(
   directory = process.env.MAP_DIRECTORY ??
     resolve(import.meta.dir, "../../../packages/assets/public/models/maps"),
@@ -12,6 +13,16 @@ export async function loadServerMap(
 ): Promise<DustMap> {
   if (!isMapId(id)) throw new Error("Unsupported map identifier");
   const bombFile = Bun.file(resolve(directory, `${id}-bomb.bin.gz`));
+  const breakableFile = Bun.file(resolve(directory, `${id}-breakables.json`));
+  const breakableData = (await breakableFile.exists()) ? await breakableFile.json() : undefined;
+  if (
+    breakableData &&
+    (breakableData.version !== 1 ||
+      breakableData.mapId !== id ||
+      !Array.isArray(breakableData.breakables))
+  )
+    throw new Error(`Invalid native breakable metadata for ${id}`);
+  const breakableDefinitions = (breakableData?.breakables ?? []) as NativeBreakableDefinition[];
   const [physics, nav, bomb] = await Promise.all([
     Bun.file(resolve(directory, `${id}-physics.glb.gz`)).arrayBuffer(),
     Bun.file(resolve(directory, `${id}-nav.json`)).json(),
@@ -21,8 +32,10 @@ export async function loadServerMap(
   const model = await new GLTFLoader()
     .setMeshoptDecoder(MeshoptDecoder)
     .parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), "");
+  bindBreakablePhysics(model.scene, breakableDefinitions, breakableData?.enabledRemainders ?? []);
   const map: DustMap = {
     id,
+    breakableDefinitions,
     ...dustCollision(model.scene),
     triggers: nav.triggers,
     ladders: nav.ladders,
