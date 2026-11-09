@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "65713f4c7d3e2c822cbf1f01da4733a5d023a9573a1fe300f6352f1b69455ce1",
+  "release": "c8ab6317a2df7b96adb64059d626a2fb6499956e65bbad6f434e08f4aa0e3190",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -21345,6 +21345,758 @@
         "bytes": 3034
       },
       "object": "objects/e0f56a3d9a5b08b1b2665e404af543603f51dcab92f56e47202851c76294582a.json.br"
+    },
+    "models/music-kit/audio.svg": {
+      "sha256": "616f7a88a90f48a1978444455f13366c48c1d89cd5c2cff5d2cd37085d43e16c",
+      "bytes": 1970,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "dbab8d559cbc91cace44c6c90abc3d241d6c7b41dd4c5a05ef6404d54d967740",
+        "bytes": 825
+      },
+      "object": "objects/dbab8d559cbc91cace44c6c90abc3d241d6c7b41dd4c5a05ef6404d54d967740.svg.br"
+    },
+    "models/music-kit/covers/3kliksphilip_01.png": {
+      "sha256": "203542a8ee5f8777cc91341982482b9ac862f96a3c6ffe381dc06ad05b95a730",
+      "bytes": 326237,
+      "object": "objects/203542a8ee5f8777cc91341982482b9ac862f96a3c6ffe381dc06ad05b95a730.png"
+    },
+    "models/music-kit/covers/adambeyer_01.png": {
+      "sha256": "b1363bb34a9cac1963e94bdb5c571fcde4231e8ed3fefa42c86faf277e70d544",
+      "bytes": 1751565,
+      "object": "objects/b1363bb34a9cac1963e94bdb5c571fcde4231e8ed3fefa42c86faf277e70d544.png"
+    },
+    "models/music-kit/covers/alrt_01.png": {
+      "sha256": "5dfb6176f7f3f5da644a335da231a1bafcbc192eebed7f39125deebba330290d",
+      "bytes": 1377199,
+      "object": "objects/5dfb6176f7f3f5da644a335da231a1bafcbc192eebed7f39125deebba330290d.png"
+    },
+    "models/music-kit/covers/altare_01.png": {
+      "sha256": "2638c6fa9a06919599992984ac2174ebf892f1856dc035805da47709106a35c7",
+      "bytes": 1544302,
+      "object": "objects/2638c6fa9a06919599992984ac2174ebf892f1856dc035805da47709106a35c7.png"
+    },
+    "models/music-kit/covers/amontobin_01.png": {
+      "sha256": "3cf3b67772f4ec0431db9140e7db67b89420bf17c89004dfa353c85d5248a057",
+      "bytes": 313770,
+      "object": "objects/3cf3b67772f4ec0431db9140e7db67b89420bf17c89004dfa353c85d5248a057.png"
+    },
+    "models/music-kit/covers/austinwintory_01.png": {
+      "sha256": "dbb070be81a7dee4f1fabee41814cbc495e2af99f7f59a772cf31d7bdc556c7e",
+      "bytes": 29842,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "334713288fa564c82bedb38ccd4a614a56babbb3a2118a575cb9370287af9569",
+        "bytes": 29347
+      },
+      "object": "objects/334713288fa564c82bedb38ccd4a614a56babbb3a2118a575cb9370287af9569.png.br"
+    },
+    "models/music-kit/covers/austinwintory_02.png": {
+      "sha256": "035c67ecbb9d78a23cded5f383b33d1c1d7b315cadde976a07071f54793f5d87",
+      "bytes": 608635,
+      "object": "objects/035c67ecbb9d78a23cded5f383b33d1c1d7b315cadde976a07071f54793f5d87.png"
+    },
+    "models/music-kit/covers/austinwintory_03.png": {
+      "sha256": "0c473df46ebcfb69d9c38afc1339a1e3ade1af7655189f47bdbd824a0f6f5b5c",
+      "bytes": 171377,
+      "object": "objects/0c473df46ebcfb69d9c38afc1339a1e3ade1af7655189f47bdbd824a0f6f5b5c.png"
+    },
+    "models/music-kit/covers/austinwintory_04.png": {
+      "sha256": "d1611ace176b046040102845949d8d72a21815d3015125535a6ea4f89f0d972b",
+      "bytes": 1524143,
+      "object": "objects/d1611ace176b046040102845949d8d72a21815d3015125535a6ea4f89f0d972b.png"
+    },
+    "models/music-kit/covers/awolnation_01.png": {
+      "sha256": "00e0fbbdc405d49070c66d57dc216711ba9b54d50225316f279a046d6370fe15",
+      "bytes": 34309,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "5ddea08bdac66ee43fad1aa99aad5d32cb6a202d67308ab57248c0381f652044",
+        "bytes": 33789
+      },
+      "object": "objects/5ddea08bdac66ee43fad1aa99aad5d32cb6a202d67308ab57248c0381f652044.png.br"
+    },
+    "models/music-kit/covers/bbnos_01.png": {
+      "sha256": "e4ecec6e5ee5c52e0d494cc096aca1df54cc99f03cb88541b833d19e200988e4",
+      "bytes": 68876,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "1fe2e6da97943c377f5a4f7e9b12843abce198a273ba4098f4643e5ebcb6aac5",
+        "bytes": 67820
+      },
+      "object": "objects/1fe2e6da97943c377f5a4f7e9b12843abce198a273ba4098f4643e5ebcb6aac5.png.br"
+    },
+    "models/music-kit/covers/beartooth_01.png": {
+      "sha256": "e61c9bd752b5c2d25e678fae88dc26c70654f0e3d6ecd60bd206736d7d341382",
+      "bytes": 77851,
+      "object": "objects/e61c9bd752b5c2d25e678fae88dc26c70654f0e3d6ecd60bd206736d7d341382.png"
+    },
+    "models/music-kit/covers/beartooth_02.png": {
+      "sha256": "8dd853aa89fc4a6458e2985566f5ade9952d3045dbb7bd5be5c03fd58e172365",
+      "bytes": 118721,
+      "object": "objects/8dd853aa89fc4a6458e2985566f5ade9952d3045dbb7bd5be5c03fd58e172365.png"
+    },
+    "models/music-kit/covers/benbromfield_01.png": {
+      "sha256": "56c0db946723513d7a56dcf5a054a9d8a3010d2cd6a8b4dd8f53b6af64f3551f",
+      "bytes": 510846,
+      "object": "objects/56c0db946723513d7a56dcf5a054a9d8a3010d2cd6a8b4dd8f53b6af64f3551f.png"
+    },
+    "models/music-kit/covers/blitzkids_01.png": {
+      "sha256": "4aa0deaad214dfc9db0099179069d2f85125d4671e4e4622065ce5144101c50b",
+      "bytes": 49268,
+      "object": "objects/4aa0deaad214dfc9db0099179069d2f85125d4671e4e4622065ce5144101c50b.png"
+    },
+    "models/music-kit/covers/borne_01.png": {
+      "sha256": "6fa1539891f3afb4c9659fe5a2866ab2f74178f8e6b58845a5eac4a5ba22758b",
+      "bytes": 1410285,
+      "object": "objects/6fa1539891f3afb4c9659fe5a2866ab2f74178f8e6b58845a5eac4a5ba22758b.png"
+    },
+    "models/music-kit/covers/chipzel_01.png": {
+      "sha256": "e187608c39f9112658a68a7cc9dd01c351e5c94ddd4406fb381c5593d735f79d",
+      "bytes": 106509,
+      "object": "objects/e187608c39f9112658a68a7cc9dd01c351e5c94ddd4406fb381c5593d735f79d.png"
+    },
+    "models/music-kit/covers/damjanmravunac_01.png": {
+      "sha256": "961959c5970afab9b8f2546780ddcebcaa74c5081e3420d730aad03b62443c77",
+      "bytes": 57811,
+      "object": "objects/961959c5970afab9b8f2546780ddcebcaa74c5081e3420d730aad03b62443c77.png"
+    },
+    "models/music-kit/covers/danielsadowski_01.png": {
+      "sha256": "11434b86f4e8481f59a44184232fd8eca8f86f118f09d5303051d0b8555e6b56",
+      "bytes": 52604,
+      "object": "objects/11434b86f4e8481f59a44184232fd8eca8f86f118f09d5303051d0b8555e6b56.png"
+    },
+    "models/music-kit/covers/danielsadowski_02.png": {
+      "sha256": "18c51b426fc34e1d00ee1f1dd9be7c3dcd7cac7c6eac085252d6c2d0392dfd77",
+      "bytes": 83801,
+      "object": "objects/18c51b426fc34e1d00ee1f1dd9be7c3dcd7cac7c6eac085252d6c2d0392dfd77.png"
+    },
+    "models/music-kit/covers/danielsadowski_03.png": {
+      "sha256": "56bc87a8e2d742d5b6a23b35e1cbc37b62572c93a54ec54fdf346e91bcf15285",
+      "bytes": 29186,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "29f2674c9ad9b4df38ee04d531a4c3009b481e637afc40511b2671a9479e172a",
+        "bytes": 28826
+      },
+      "object": "objects/29f2674c9ad9b4df38ee04d531a4c3009b481e637afc40511b2671a9479e172a.png.br"
+    },
+    "models/music-kit/covers/danielsadowski_04.png": {
+      "sha256": "94426541e61868c0bb81bdf88b7c7b683da6a76521fe4add6f281e2fde7f9677",
+      "bytes": 338963,
+      "object": "objects/94426541e61868c0bb81bdf88b7c7b683da6a76521fe4add6f281e2fde7f9677.png"
+    },
+    "models/music-kit/covers/danielsadowski_05.png": {
+      "sha256": "59fe4dbebb40e85b4fe3e0c0829a837f6b2622520e6d06453f62985deed00dd1",
+      "bytes": 810739,
+      "object": "objects/59fe4dbebb40e85b4fe3e0c0829a837f6b2622520e6d06453f62985deed00dd1.png"
+    },
+    "models/music-kit/covers/darude_01.png": {
+      "sha256": "c29963e7ed672a5fdcdd4d3620184eab1b4817f7b2101ff764e2a7b63644d023",
+      "bytes": 66536,
+      "object": "objects/c29963e7ed672a5fdcdd4d3620184eab1b4817f7b2101ff764e2a7b63644d023.png"
+    },
+    "models/music-kit/covers/denzelcurry_01.png": {
+      "sha256": "4e73cbb6b9a4dccaab04efcde7d0ff0013831571dc0d1d9f0c5c789fa1d31c66",
+      "bytes": 366664,
+      "object": "objects/4e73cbb6b9a4dccaab04efcde7d0ff0013831571dc0d1d9f0c5c789fa1d31c66.png"
+    },
+    "models/music-kit/covers/dren_01.png": {
+      "sha256": "25ed41fb2e71c58e570a3c4c3213f600b598c43418fc533423f6150309fe840e",
+      "bytes": 73259,
+      "object": "objects/25ed41fb2e71c58e570a3c4c3213f600b598c43418fc533423f6150309fe840e.png"
+    },
+    "models/music-kit/covers/dren_02.png": {
+      "sha256": "82f56ee4269f32a7363409717f9e44b4fe38804e73d98def874f97ce174e2f77",
+      "bytes": 157505,
+      "object": "objects/82f56ee4269f32a7363409717f9e44b4fe38804e73d98def874f97ce174e2f77.png"
+    },
+    "models/music-kit/covers/dren_03.png": {
+      "sha256": "30b4197d7fe9a7911a63cc1027301556598f44b05d5919b1d339b333b46d0256",
+      "bytes": 917837,
+      "object": "objects/30b4197d7fe9a7911a63cc1027301556598f44b05d5919b1d339b333b46d0256.png"
+    },
+    "models/music-kit/covers/dryden_01.png": {
+      "sha256": "d2873973df0fdddde210b4bbe2f878bd0fe87a347edfb53f8892cb83d783cf13",
+      "bytes": 1013068,
+      "object": "objects/d2873973df0fdddde210b4bbe2f878bd0fe87a347edfb53f8892cb83d783cf13.png"
+    },
+    "models/music-kit/covers/feedme_01.png": {
+      "sha256": "540b8a9242b85b95e622ee4575dc1d05cef3131dc05c81a40550800b5baf27bb",
+      "bytes": 8138,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "db1b788b2dfaa37b8106a7e6706224d4c554c8edf1a7ab947c508b92f441ff10",
+        "bytes": 7718
+      },
+      "object": "objects/db1b788b2dfaa37b8106a7e6706224d4c554c8edf1a7ab947c508b92f441ff10.png.br"
+    },
+    "models/music-kit/covers/freakydna_01.png": {
+      "sha256": "b409fc8c8d9be2ca28575b2331104bd1b3eb20a68b402561cc8ec83463caccb0",
+      "bytes": 132693,
+      "object": "objects/b409fc8c8d9be2ca28575b2331104bd1b3eb20a68b402561cc8ec83463caccb0.png"
+    },
+    "models/music-kit/covers/ghost_01.png": {
+      "sha256": "e0816483e9a377bf4be9212cf1f98cf28107917c5ee1168ae53e4b54c07eb601",
+      "bytes": 1569794,
+      "object": "objects/e0816483e9a377bf4be9212cf1f98cf28107917c5ee1168ae53e4b54c07eb601.png"
+    },
+    "models/music-kit/covers/hades_01.png": {
+      "sha256": "bf10097d6d6d729fda0186be8ec0d52b0bc23e9be6548231446bbbebc1ff8e36",
+      "bytes": 227691,
+      "object": "objects/bf10097d6d6d729fda0186be8ec0d52b0bc23e9be6548231446bbbebc1ff8e36.png"
+    },
+    "models/music-kit/covers/halo_01.png": {
+      "sha256": "a0f7b0042f34cb7a67513a2d868b19197f7cf7ad50f9fba6c2ccfa2eec22a7d4",
+      "bytes": 335458,
+      "object": "objects/a0f7b0042f34cb7a67513a2d868b19197f7cf7ad50f9fba6c2ccfa2eec22a7d4.png"
+    },
+    "models/music-kit/covers/health_01.png": {
+      "sha256": "e4be92ecc783311a58e45bb92c7e20681c7eb16c7fd2a1a123106610d8334ce2",
+      "bytes": 750347,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "216193052692dd34edd47cfc873ae0a6f9271e757b9a4e7b36e802c5f78eaef5",
+        "bytes": 740811
+      },
+      "object": "objects/216193052692dd34edd47cfc873ae0a6f9271e757b9a4e7b36e802c5f78eaef5.png.br"
+    },
+    "models/music-kit/covers/hlalyx_01.png": {
+      "sha256": "219cec46400c891560dd090dee39ac8fd51997a8037fe19baaf300d817b39479",
+      "bytes": 207152,
+      "object": "objects/219cec46400c891560dd090dee39ac8fd51997a8037fe19baaf300d817b39479.png"
+    },
+    "models/music-kit/covers/hlb_01.png": {
+      "sha256": "f99a220bc34ffbe124ed1c472d7e9fc4969261b923f58c83df33391e567e40e2",
+      "bytes": 455589,
+      "object": "objects/f99a220bc34ffbe124ed1c472d7e9fc4969261b923f58c83df33391e567e40e2.png"
+    },
+    "models/music-kit/covers/hotlinemiami_01.png": {
+      "sha256": "e157e38cb7371e48813a3278bdf206266d8929662e4a96c0e3cd5416a011c473",
+      "bytes": 111526,
+      "object": "objects/e157e38cb7371e48813a3278bdf206266d8929662e4a96c0e3cd5416a011c473.png"
+    },
+    "models/music-kit/covers/hundredth_01.png": {
+      "sha256": "4b1920057833aef02600eac07755ca6ca58071e3e09579536bd4f4281443e4ce",
+      "bytes": 46036,
+      "object": "objects/4b1920057833aef02600eac07755ca6ca58071e3e09579536bd4f4281443e4ce.png"
+    },
+    "models/music-kit/covers/ianhultquist_01.png": {
+      "sha256": "10a75ea50eca11ffe93cb68b0f564bb838dbff62e600a5c09179b40cfba0beb5",
+      "bytes": 102530,
+      "object": "objects/10a75ea50eca11ffe93cb68b0f564bb838dbff62e600a5c09179b40cfba0beb5.png"
+    },
+    "models/music-kit/covers/isoxo_01.png": {
+      "sha256": "adf66db71023e9aaaa5e055c1e62277b113f1769aed12e62c432349438bae42f",
+      "bytes": 2073049,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "74c97f851b6ee3bb17b2f67d0eb059ebaf0758c1bd6ab46c16f72dad8b475444",
+        "bytes": 2059317
+      },
+      "object": "objects/74c97f851b6ee3bb17b2f67d0eb059ebaf0758c1bd6ab46c16f72dad8b475444.png.br"
+    },
+    "models/music-kit/covers/jamesandthecoldgun_01.png": {
+      "sha256": "0a1b08f16eccbc4acb4ee88cfc1b68e7f9a83a7db0b35bec8e1e6486527556cd",
+      "bytes": 1419679,
+      "object": "objects/0a1b08f16eccbc4acb4ee88cfc1b68e7f9a83a7db0b35bec8e1e6486527556cd.png"
+    },
+    "models/music-kit/covers/jesseharlin_01.png": {
+      "sha256": "08d557293d5d53e0cd4411f2970f03473155aa56b8239a1b8ebf3c97cc045217",
+      "bytes": 120703,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "5b6d733dc590c167e867caa8e85913d056915d9d22ff79f43eca5a71680ba2bf",
+        "bytes": 120366
+      },
+      "object": "objects/5b6d733dc590c167e867caa8e85913d056915d9d22ff79f43eca5a71680ba2bf.png.br"
+    },
+    "models/music-kit/covers/jonathanyoung_01.png": {
+      "sha256": "2c587a363177f4f4c3cfa2d6098035488414118d3ddb351256d9559ebf22c5bc",
+      "bytes": 1178659,
+      "object": "objects/2c587a363177f4f4c3cfa2d6098035488414118d3ddb351256d9559ebf22c5bc.png"
+    },
+    "models/music-kit/covers/juelz_01.png": {
+      "sha256": "e48f2d0f4640ed94f4c1f29b7d2afadf1e5a679e53701cd97719e78a86f10c28",
+      "bytes": 151640,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "54088a38327a0d49f93da3d1f534d6a6512e987ebd22d3364027aec3d7b2f44f",
+        "bytes": 150300
+      },
+      "object": "objects/54088a38327a0d49f93da3d1f534d6a6512e987ebd22d3364027aec3d7b2f44f.png.br"
+    },
+    "models/music-kit/covers/juelz_02.png": {
+      "sha256": "614bd78beba6823261a98c9ec71070a97ee5800cfb0116565276993425f80bfc",
+      "bytes": 1124311,
+      "object": "objects/614bd78beba6823261a98c9ec71070a97ee5800cfb0116565276993425f80bfc.png"
+    },
+    "models/music-kit/covers/kellybailey_01.png": {
+      "sha256": "0b577b2e9611f840ae536205871dbe9754996d0a4ff04be303476244f372e737",
+      "bytes": 66216,
+      "object": "objects/0b577b2e9611f840ae536205871dbe9754996d0a4ff04be303476244f372e737.png"
+    },
+    "models/music-kit/covers/killermike_01.png": {
+      "sha256": "79f82cec7475fedf660e9343db084aa01b2ebfe2a9a8991d6b163aa72e830cc1",
+      "bytes": 1452683,
+      "object": "objects/79f82cec7475fedf660e9343db084aa01b2ebfe2a9a8991d6b163aa72e830cc1.png"
+    },
+    "models/music-kit/covers/killscript_01.png": {
+      "sha256": "b0cf82e6e296e74021cc071934f9d2444ab31b4bb71228feba5afc216d4ed380",
+      "bytes": 1567132,
+      "object": "objects/b0cf82e6e296e74021cc071934f9d2444ab31b4bb71228feba5afc216d4ed380.png"
+    },
+    "models/music-kit/covers/kitheory_01.png": {
+      "sha256": "a3307d8aae2329068f6f720e8125b496c902b3e779ad9e6178a079e80620e54c",
+      "bytes": 100254,
+      "object": "objects/a3307d8aae2329068f6f720e8125b496c902b3e779ad9e6178a079e80620e54c.png"
+    },
+    "models/music-kit/covers/knock2_01.png": {
+      "sha256": "3b662e296e9551321137b4b162542addb1a5fdaf90d2991f19f7f7d81f47f3da",
+      "bytes": 384970,
+      "object": "objects/3b662e296e9551321137b4b162542addb1a5fdaf90d2991f19f7f7d81f47f3da.png"
+    },
+    "models/music-kit/covers/knock2_02.png": {
+      "sha256": "da4b9415ab3b0a44b212f485c0b905c50ec7b0d0c1809daa92ed12898dc9fb2d",
+      "bytes": 1796916,
+      "object": "objects/da4b9415ab3b0a44b212f485c0b905c50ec7b0d0c1809daa92ed12898dc9fb2d.png"
+    },
+    "models/music-kit/covers/laurashigihara_01.png": {
+      "sha256": "c26505fb9aa495d4f304e707b602696dedd2302797a9f90a139f60d4eae0774b",
+      "bytes": 353699,
+      "object": "objects/c26505fb9aa495d4f304e707b602696dedd2302797a9f90a139f60d4eae0774b.png"
+    },
+    "models/music-kit/covers/lenniemoore_01.png": {
+      "sha256": "5d6f3eaad4f4a836a2dfcf47e0e998782ec9160361f34c64c7e20446065f3dae",
+      "bytes": 98508,
+      "object": "objects/5d6f3eaad4f4a836a2dfcf47e0e998782ec9160361f34c64c7e20446065f3dae.png"
+    },
+    "models/music-kit/covers/mateomessina_01.png": {
+      "sha256": "5470a7c3cc4563a69c74b40822f8f33af1664b1ffb5a952f3cd9d473d108b1c1",
+      "bytes": 71411,
+      "object": "objects/5470a7c3cc4563a69c74b40822f8f33af1664b1ffb5a952f3cd9d473d108b1c1.png"
+    },
+    "models/music-kit/covers/mattlange_01.png": {
+      "sha256": "61903033b8caf8baae9324f9c09e353b44c2bff90fdd3665279d7e26cd6e68ca",
+      "bytes": 51901,
+      "object": "objects/61903033b8caf8baae9324f9c09e353b44c2bff90fdd3665279d7e26cd6e68ca.png"
+    },
+    "models/music-kit/covers/mattlevine_01.png": {
+      "sha256": "6d7497042b96d6e50cb93f9db0e215063b77229c79ac3ad231c01cb130da44fe",
+      "bytes": 103952,
+      "object": "objects/6d7497042b96d6e50cb93f9db0e215063b77229c79ac3ad231c01cb130da44fe.png"
+    },
+    "models/music-kit/covers/mattlevine_02.png": {
+      "sha256": "0da71f26f8eea81aca069061e96c033cb20462a28e548bc704f60e0f81c9004e",
+      "bytes": 758332,
+      "object": "objects/0da71f26f8eea81aca069061e96c033cb20462a28e548bc704f60e0f81c9004e.png"
+    },
+    "models/music-kit/covers/meechydarko_01.png": {
+      "sha256": "14bf44fb064aec4d3e945b075e141d65bea88328733f32512dc7322d9f56b6cd",
+      "bytes": 315376,
+      "object": "objects/14bf44fb064aec4d3e945b075e141d65bea88328733f32512dc7322d9f56b6cd.png"
+    },
+    "models/music-kit/covers/michaelbross_01.png": {
+      "sha256": "c228b2c262f44e171f93963675ea283cf9ddb65b373101739a2038d6f7173479",
+      "bytes": 26158,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "4fee8bcf257045f99d7910195f286fa949ed58f9225b971ab6eba47ecc9ffa7f",
+        "bytes": 26020
+      },
+      "object": "objects/4fee8bcf257045f99d7910195f286fa949ed58f9225b971ab6eba47ecc9ffa7f.png.br"
+    },
+    "models/music-kit/covers/midnightriders_01.png": {
+      "sha256": "74d4003b1a1b7749c4529f6c963cf65bd274500d661099410fa58dbe91d94d68",
+      "bytes": 75413,
+      "object": "objects/74d4003b1a1b7749c4529f6c963cf65bd274500d661099410fa58dbe91d94d68.png"
+    },
+    "models/music-kit/covers/mordfustang_01.png": {
+      "sha256": "65ef5a01c3794c788ad12bc4f2d58ff6a33fabb62e6e0632dcea79739d0f7f73",
+      "bytes": 25710,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f3761d9f55515873d63718ef982ee54700593f814d776c2d746dca8c37069cb9",
+        "bytes": 25197
+      },
+      "object": "objects/f3761d9f55515873d63718ef982ee54700593f814d776c2d746dca8c37069cb9.png.br"
+    },
+    "models/music-kit/covers/neckdeep_01.png": {
+      "sha256": "a0ee4c7956e3f38fdf0a2f10d0004b8a0626841bca6cc81557ad87fa769de181",
+      "bytes": 124831,
+      "object": "objects/a0ee4c7956e3f38fdf0a2f10d0004b8a0626841bca6cc81557ad87fa769de181.png"
+    },
+    "models/music-kit/covers/neckdeep_02.png": {
+      "sha256": "e334f382e06def80833a7a1a0724aa12057c624e5ae31fc2b8c3b977b72f63ae",
+      "bytes": 292039,
+      "object": "objects/e334f382e06def80833a7a1a0724aa12057c624e5ae31fc2b8c3b977b72f63ae.png"
+    },
+    "models/music-kit/covers/newbeatfund_01.png": {
+      "sha256": "2a23fcc11b56884b17def0326065c9f1cc5ac1eb976a1c1cf2d8ffaa299deb54",
+      "bytes": 22801,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "17b0441ed48068ce1aae539ea576f4b61cbca94c64050dfa1fb362dee50f5e5e",
+        "bytes": 22730
+      },
+      "object": "objects/17b0441ed48068ce1aae539ea576f4b61cbca94c64050dfa1fb362dee50f5e5e.png.br"
+    },
+    "models/music-kit/covers/noisia_01.png": {
+      "sha256": "a62a77e07b83e3cd9f8dbd6d48e01449ba499e61ed523ed0a8e5283205197411",
+      "bytes": 41991,
+      "object": "objects/a62a77e07b83e3cd9f8dbd6d48e01449ba499e61ed523ed0a8e5283205197411.png"
+    },
+    "models/music-kit/covers/perfectworld_01.png": {
+      "sha256": "171c7bde48d7a1895d6a93c285cca6b2c4184fd73843ba86cff22320c4af789d",
+      "bytes": 1228450,
+      "object": "objects/171c7bde48d7a1895d6a93c285cca6b2c4184fd73843ba86cff22320c4af789d.png"
+    },
+    "models/music-kit/covers/perfectworld_02.png": {
+      "sha256": "9242a3bd81df445f275bbfe846058da2c50bd1365076c0433bb4b46be6de2ad5",
+      "bytes": 298535,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "ef487d154cac418a644bc4b75f8c4193690abe8b67ca184cde41df4f10dad733",
+        "bytes": 296061
+      },
+      "object": "objects/ef487d154cac418a644bc4b75f8c4193690abe8b67ca184cde41df4f10dad733.png.br"
+    },
+    "models/music-kit/covers/pirapus_01.png": {
+      "sha256": "6248a27f1a8952490573873ffe2011079b8ee048657d5b4cfcfd801e47b8165c",
+      "bytes": 335041,
+      "object": "objects/6248a27f1a8952490573873ffe2011079b8ee048657d5b4cfcfd801e47b8165c.png"
+    },
+    "models/music-kit/covers/proxy_01.png": {
+      "sha256": "19a9f1f7a44e90d41b30c3b06023680f3aad364aa7a91494fb6b4db625675f59",
+      "bytes": 79727,
+      "object": "objects/19a9f1f7a44e90d41b30c3b06023680f3aad364aa7a91494fb6b4db625675f59.png"
+    },
+    "models/music-kit/covers/pvris_01.png": {
+      "sha256": "d10d597c899f61fb8a00ecc4e45e5fe8b62566a555d9bc64b25d6a052ea6902d",
+      "bytes": 791828,
+      "object": "objects/d10d597c899f61fb8a00ecc4e45e5fe8b62566a555d9bc64b25d6a052ea6902d.png"
+    },
+    "models/music-kit/covers/radcat_01.png": {
+      "sha256": "df3ffee8a0fd90a0c94d50f6c79a1770e411adc76d3ecd13a8b854e74d4045cc",
+      "bytes": 1410540,
+      "object": "objects/df3ffee8a0fd90a0c94d50f6c79a1770e411adc76d3ecd13a8b854e74d4045cc.png"
+    },
+    "models/music-kit/covers/repiet_01.png": {
+      "sha256": "3fb55a8aa31d453ee53fedab01da923c47e151f027696969aba2d7ff7581b39d",
+      "bytes": 1517032,
+      "object": "objects/3fb55a8aa31d453ee53fedab01da923c47e151f027696969aba2d7ff7581b39d.png"
+    },
+    "models/music-kit/covers/roam_01.png": {
+      "sha256": "b40c641aee8fc324d13bd4cd8ec2e3590233056ce82d2f781eb68b6251af99cf",
+      "bytes": 90135,
+      "object": "objects/b40c641aee8fc324d13bd4cd8ec2e3590233056ce82d2f781eb68b6251af99cf.png"
+    },
+    "models/music-kit/covers/robertallaire_01.png": {
+      "sha256": "002f93e996351215d3b92be669a0245952104ab824f46146c47272590824661e",
+      "bytes": 62060,
+      "object": "objects/002f93e996351215d3b92be669a0245952104ab824f46146c47272590824661e.png"
+    },
+    "models/music-kit/covers/sammarshall_01.png": {
+      "sha256": "84c728bc46dc993e57cb9921240f77b69d2301cb6f285472327a057836d516d0",
+      "bytes": 289493,
+      "object": "objects/84c728bc46dc993e57cb9921240f77b69d2301cb6f285472327a057836d516d0.png"
+    },
+    "models/music-kit/covers/sammarshall_02.png": {
+      "sha256": "433bb2bcc0c4ac931969d253d7b565354d90832587f50746e585e30d1ebed123",
+      "bytes": 1536006,
+      "object": "objects/433bb2bcc0c4ac931969d253d7b565354d90832587f50746e585e30d1ebed123.png"
+    },
+    "models/music-kit/covers/sarahschachner_01.png": {
+      "sha256": "2f81752ade12eb85e706f5364bed420eb5e43cb6c6d6827cdbfdba43e2225bc7",
+      "bytes": 68774,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "6ac1c1494684132dfd746ab8f3dc60c62f936128d0824c8d093dcf0757c6244c",
+        "bytes": 67400
+      },
+      "object": "objects/6ac1c1494684132dfd746ab8f3dc60c62f936128d0824c8d093dcf0757c6244c.png.br"
+    },
+    "models/music-kit/covers/sasha_01.png": {
+      "sha256": "d80d38d99faf1ffb4ad245bddf22ddc85281eb5ec6a83e4c7ad0ca681c78d8c2",
+      "bytes": 21121,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "cb8cf2a85a635f4a5378a9ef73367e8280ea74640dabc764bccac7d27e5bf5bc",
+        "bytes": 20533
+      },
+      "object": "objects/cb8cf2a85a635f4a5378a9ef73367e8280ea74640dabc764bccac7d27e5bf5bc.png.br"
+    },
+    "models/music-kit/covers/scarlxrd_01.png": {
+      "sha256": "a926e9bc6c78fcd500f3a701fa4a480ae5524eadc846013a00c7b86ff88b8f03",
+      "bytes": 289171,
+      "object": "objects/a926e9bc6c78fcd500f3a701fa4a480ae5524eadc846013a00c7b86ff88b8f03.png"
+    },
+    "models/music-kit/covers/scarlxrd_02.png": {
+      "sha256": "2a665647ec34f8e88c0db4948fdba3aecc2dc2b6f8fa5ba007838f20e847ab2f",
+      "bytes": 399757,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "27f7793c1b301ebf12611051a643aae12cb079bb12a17b5a268d26c39d22633c",
+        "bytes": 398997
+      },
+      "object": "objects/27f7793c1b301ebf12611051a643aae12cb079bb12a17b5a268d26c39d22633c.png.br"
+    },
+    "models/music-kit/covers/seanmurray_01.png": {
+      "sha256": "7fb55376e5eb9d44a45d5cc58f8647798b1e1196cdb0f98ef3f5483321d67e57",
+      "bytes": 84808,
+      "object": "objects/7fb55376e5eb9d44a45d5cc58f8647798b1e1196cdb0f98ef3f5483321d67e57.png"
+    },
+    "models/music-kit/covers/selectiveresponse_01.png": {
+      "sha256": "6fa99079ef7c5dba86e43733042a434ef561ad9cbdc26198699e2e9bd34d30e2",
+      "bytes": 1886610,
+      "object": "objects/6fa99079ef7c5dba86e43733042a434ef561ad9cbdc26198699e2e9bd34d30e2.png"
+    },
+    "models/music-kit/covers/shockone_01.png": {
+      "sha256": "4a6d9ffe92ffbcdaa48ab493f891635a09791ba689e5143f75c8a8c7368f21d4",
+      "bytes": 1800657,
+      "object": "objects/4a6d9ffe92ffbcdaa48ab493f891635a09791ba689e5143f75c8a8c7368f21d4.png"
+    },
+    "models/music-kit/covers/skog_01.png": {
+      "sha256": "f2f96c7ce57a52a12b7ad35ed3dd59f76b5b7139d5cf7f68fb8cea1ecdb943d3",
+      "bytes": 133871,
+      "object": "objects/f2f96c7ce57a52a12b7ad35ed3dd59f76b5b7139d5cf7f68fb8cea1ecdb943d3.png"
+    },
+    "models/music-kit/covers/skog_02.png": {
+      "sha256": "e4c9c4b78a60d8786f878984e1f4aef1963c87e693d9f5e830b09a71bd04dd82",
+      "bytes": 72868,
+      "object": "objects/e4c9c4b78a60d8786f878984e1f4aef1963c87e693d9f5e830b09a71bd04dd82.png"
+    },
+    "models/music-kit/covers/skog_03.png": {
+      "sha256": "2230969329a00b517f29695d4c6a0ce046b59dc4b75f9c778c07122007f5bf10",
+      "bytes": 110151,
+      "object": "objects/2230969329a00b517f29695d4c6a0ce046b59dc4b75f9c778c07122007f5bf10.png"
+    },
+    "models/music-kit/covers/starjunk95_01.png": {
+      "sha256": "42e88ac82c72475e322c0d5443127da9fb6b50cd296f54f7fa92fa4e5f268228",
+      "bytes": 1253839,
+      "object": "objects/42e88ac82c72475e322c0d5443127da9fb6b50cd296f54f7fa92fa4e5f268228.png"
+    },
+    "models/music-kit/covers/sullivanking_01.png": {
+      "sha256": "e3c9e6b7db611890ca46425f8ad028bf84836e9967f8bc7c0c8704e238c83e5c",
+      "bytes": 464668,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "8fafe0db76b16e7facfb2cc74643c28b23d5f5ff74771492e94487149600e5c5",
+        "bytes": 463885
+      },
+      "object": "objects/8fafe0db76b16e7facfb2cc74643c28b23d5f5ff74771492e94487149600e5c5.png.br"
+    },
+    "models/music-kit/covers/theverkkars_01.png": {
+      "sha256": "d9684b3fa63c406b3bd0263c9df1a74334efbc46f2aa708379644c95af90ca4a",
+      "bytes": 16784,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "9b56db127b87e05b1b923d940c00ce40af3891ab91c149327773480d93840066",
+        "bytes": 16583
+      },
+      "object": "objects/9b56db127b87e05b1b923d940c00ce40af3891ab91c149327773480d93840066.png.br"
+    },
+    "models/music-kit/covers/theverkkars_02.png": {
+      "sha256": "d39419454e661876b740c2a4c5a8f6e08f051520547bade741152caf991ccfce",
+      "bytes": 453712,
+      "object": "objects/d39419454e661876b740c2a4c5a8f6e08f051520547bade741152caf991ccfce.png"
+    },
+    "models/music-kit/covers/tigercub_01.png": {
+      "sha256": "a2c7d429fe119b3aa495d42ddd5c5b30e246da2dadc495c2c5f255d46bd7baae",
+      "bytes": 1204188,
+      "object": "objects/a2c7d429fe119b3aa495d42ddd5c5b30e246da2dadc495c2c5f255d46bd7baae.png"
+    },
+    "models/music-kit/covers/timhuling_01.png": {
+      "sha256": "ee7131361ee51fe37f3fe356873faac068eb8bde6f3a4001f436f88a7e643e5b",
+      "bytes": 429641,
+      "object": "objects/ee7131361ee51fe37f3fe356873faac068eb8bde6f3a4001f436f88a7e643e5b.png"
+    },
+    "models/music-kit/covers/timhuling_02.png": {
+      "sha256": "ae41a5406e999b93305c82dd9c65f76c300855ced9aa1d0c7c85cfc797e95333",
+      "bytes": 807878,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "3cba0625afaa8348cc80817d5f9dd50657f12c1a7e9a4d6f6ae31c11969c63b1",
+        "bytes": 804131
+      },
+      "object": "objects/3cba0625afaa8348cc80817d5f9dd50657f12c1a7e9a4d6f6ae31c11969c63b1.png.br"
+    },
+    "models/music-kit/covers/treeadams_01.png": {
+      "sha256": "66f110fbdd36a211d688fdec89cd421768f4f7fcea869f9c6a900842d6bb4374",
+      "bytes": 1363383,
+      "object": "objects/66f110fbdd36a211d688fdec89cd421768f4f7fcea869f9c6a900842d6bb4374.png"
+    },
+    "models/music-kit/covers/treeadams_benbromfield_01.png": {
+      "sha256": "5f35c2e7cc5c9b98220c8e510c9c96f285de70c77d1f3bf447a5044cf92ec89c",
+      "bytes": 391302,
+      "object": "objects/5f35c2e7cc5c9b98220c8e510c9c96f285de70c77d1f3bf447a5044cf92ec89c.png"
+    },
+    "models/music-kit/covers/troelsfolmann_01.png": {
+      "sha256": "35e574cdf63da6b56bfd97b01023d73de2b669df15361dc1ee64f2a6fd7da38b",
+      "bytes": 83914,
+      "object": "objects/35e574cdf63da6b56bfd97b01023d73de2b669df15361dc1ee64f2a6fd7da38b.png"
+    },
+    "models/music-kit/covers/twerl_01.png": {
+      "sha256": "506c38de8b017adeb701290d71544c2da41c6ecb154fcc6f0e402a85f1b09675",
+      "bytes": 1318217,
+      "object": "objects/506c38de8b017adeb701290d71544c2da41c6ecb154fcc6f0e402a85f1b09675.png"
+    },
+    "models/music-kit/covers/twinatlantic_01.png": {
+      "sha256": "37da9ecc74aa665e9312f2667ba6e0d66c3ca3fe4dda6ac909bb8350aedb5cbb",
+      "bytes": 80484,
+      "object": "objects/37da9ecc74aa665e9312f2667ba6e0d66c3ca3fe4dda6ac909bb8350aedb5cbb.png"
+    },
+    "models/music-kit/covers/valve_01.png": {
+      "sha256": "6cdd8baff37f417d3af1813c3471880a5fd7cd7f05e173c364a549ac0d612926",
+      "bytes": 997960,
+      "object": "objects/6cdd8baff37f417d3af1813c3471880a5fd7cd7f05e173c364a549ac0d612926.png"
+    },
+    "models/music-kit/covers/valve_02.png": {
+      "sha256": "b9f5e2a1688df911e87a44afd2d0a62e02f6333f772ba2b40fb5d7eddca2f7d9",
+      "bytes": 533756,
+      "object": "objects/b9f5e2a1688df911e87a44afd2d0a62e02f6333f772ba2b40fb5d7eddca2f7d9.png"
+    },
+    "models/music-kit/covers/valve_cs2_01.png": {
+      "sha256": "68c5ccb6c57649c29ecb32b825b9671b072bd15d271ccab48ced74f111393f5b",
+      "bytes": 430621,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "95d9f4bcfbe7f65087f0f1a794a61b6dc002fa613ad77b3ee48c02c2b16a0fa5",
+        "bytes": 428224
+      },
+      "object": "objects/95d9f4bcfbe7f65087f0f1a794a61b6dc002fa613ad77b3ee48c02c2b16a0fa5.png.br"
+    },
+    "models/music-kit/label-normal.png": {
+      "sha256": "db3c5f7f999575b77c8968b1a0e5b82c59205ef4d1a20c08b6f17cb5dc7f5122",
+      "bytes": 116465,
+      "object": "objects/db3c5f7f999575b77c8968b1a0e5b82c59205ef4d1a20c08b6f17cb5dc7f5122.png"
+    },
+    "models/music-kit/label-roughness.png": {
+      "sha256": "29a1b0635a492dfc1e9f4dfb46e25efa12f88f7fb746ef05c6e7e09c621e18ff",
+      "bytes": 73965,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "ae80027c0098479acc1bc247d80c4d6b0205bcc93b65a09894fbe7c5dab7e489",
+        "bytes": 73744
+      },
+      "object": "objects/ae80027c0098479acc1bc247d80c4d6b0205bcc93b65a09894fbe7c5dab7e489.png.br"
+    },
+    "models/music-kit/label.png": {
+      "sha256": "bc0cf67d1de8baae13100376dd97f2b16ad07af9cd8e1493536bfa56b554eaf7",
+      "bytes": 101302,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "8d42d904a10884160dafa4bbd134c2fbd9f24e9f6a8574e413f4c80dee703822",
+        "bytes": 101050
+      },
+      "object": "objects/8d42d904a10884160dafa4bbd134c2fbd9f24e9f6a8574e413f4c80dee703822.png.br"
+    },
+    "models/music-kit/mesh.glb.gz": {
+      "sha256": "932942f438e020742ae05144b4913f8c00c54c78dc43cd43709fb248c8562043",
+      "bytes": 90519,
+      "decodedSha256": "d1cece44c40db824ada32aeb10dc897e014ac6088b5d569f5a58ca32f5d3136f",
+      "input": "models/music-kit/mesh.glb",
+      "inputSha256": "d1cece44c40db824ada32aeb10dc897e014ac6088b5d569f5a58ca32f5d3136f",
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "9fc0b4391104fa835455c24ebe19d4fe7b336d67c08cde9417c106f1d98ddee8",
+        "bytes": 87993
+      },
+      "object": "objects/9fc0b4391104fa835455c24ebe19d4fe7b336d67c08cde9417c106f1d98ddee8.gz.br"
+    },
+    "models/music-kit/picture.svg": {
+      "sha256": "826d1091a3b72dc23cb75f1663da020da89b237a2ea05627deacc11ef0854f7f",
+      "bytes": 859,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "9b950dc7b58dfd63d125d418ecb1e120f41f93ffb8dc2044de35d708d1c0272e",
+        "bytes": 418
+      },
+      "object": "objects/9b950dc7b58dfd63d125d418ecb1e120f41f93ffb8dc2044de35d708d1c0272e.svg.br"
+    },
+    "models/music-kit/README.md": {
+      "sha256": "39952d93b114620c965109980509c825f9e5a95c446836f7b8f28186819b555a",
+      "bytes": 3914,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f6f1b5056661ba7bcd1c510cfe6e70e0c9017ffae1ef55872782def14d5f012f",
+        "bytes": 1546
+      },
+      "object": "objects/f6f1b5056661ba7bcd1c510cfe6e70e0c9017ffae1ef55872782def14d5f012f.md.br"
+    },
+    "models/music-kit/record-anisotropy.png": {
+      "sha256": "07282092fa07c9e21f013b8a3d7ba688a653667b1ba61ba305f28e0fbde5f9d3",
+      "bytes": 1146050,
+      "object": "objects/07282092fa07c9e21f013b8a3d7ba688a653667b1ba61ba305f28e0fbde5f9d3.png"
+    },
+    "models/music-kit/record-normal.png": {
+      "sha256": "1545432f637cdec55e85a93ce7ea97de42c4b1225e14023dd6d99a6783b9f7b0",
+      "bytes": 8599,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "edd5e1bb12ae0a383997e3bc0b44441bc0040b7f51f92d7ef721825dd39f9003",
+        "bytes": 2718
+      },
+      "object": "objects/edd5e1bb12ae0a383997e3bc0b44441bc0040b7f51f92d7ef721825dd39f9003.png.br"
+    },
+    "models/music-kit/record.png": {
+      "sha256": "5aa1ae9a70f4adba7e39b8888b94ce5f199cb459e1cc89e6be36d6ee58e646c8",
+      "bytes": 86,
+      "object": "objects/5aa1ae9a70f4adba7e39b8888b94ce5f199cb459e1cc89e6be36d6ee58e646c8.png"
+    },
+    "models/music-kit/sleeve-normal.png": {
+      "sha256": "ae67657293da45fe6d306eec3d995980c972a766bc72a8ad309991bc1e5a1039",
+      "bytes": 219130,
+      "object": "objects/ae67657293da45fe6d306eec3d995980c972a766bc72a8ad309991bc1e5a1039.png"
+    },
+    "models/music-kit/sleeve-roughness.png": {
+      "sha256": "f9b2deb2dad125aff3e0e9ba2d6af7a4597302ccc4c61390f7b2835429bbb74c",
+      "bytes": 214833,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "a9d18a67cddba1ddfdd741f2d365213200edfdd2e786cf0b26336e3c0a972672",
+        "bytes": 211625
+      },
+      "object": "objects/a9d18a67cddba1ddfdd741f2d365213200edfdd2e786cf0b26336e3c0a972672.png.br"
+    },
+    "models/music-kit/source.json": {
+      "sha256": "b0e3abb9f5c363cf81ec29daf72ed0b14337d6ecfeb9595cc12e23287d135458",
+      "bytes": 55350,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "66a3890e775dfc69a62f659b36e53aed3fe9b2ea02d21110dea95b998d60dedb",
+        "bytes": 7849
+      },
+      "object": "objects/66a3890e775dfc69a62f659b36e53aed3fe9b2ea02d21110dea95b998d60dedb.json.br"
     },
     "models/usp-s.glb.gz": {
       "sha256": "4bc3f62d78b835220f45c2d17480a7c611bcb321bfb378928710b42d1138feef",

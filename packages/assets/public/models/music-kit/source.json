@@ -1,0 +1,1021 @@
+{
+  "mesh": {
+    "source": "/Users/sh/Downloads/mesh.glb",
+    "sha256": "d1cece44c40db824ada32aeb10dc897e014ac6088b5d569f5a58ca32f5d3136f",
+    "bytes": 245960,
+    "unchanged": true
+  },
+  "nativeExport": "Installed CS2 export via Source2Viewer CLI20.1; artifacts/music-kit-reference/export/art-manifest.json contains VPK CRC/SHA provenance",
+  "textures": [
+    {
+      "kit": "valve_cs2_01",
+      "source": "media/materials/models/inventory_items/music_kit/valve_cs2_01/mp3_screen_color_psd_bca63ccc.png",
+      "sourceSha256": "68c5ccb6c57649c29ecb32b825b9671b072bd15d271ccab48ced74f111393f5b",
+      "runtime": "covers/valve_cs2_01.png",
+      "bytes": 430621,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/valve_cs2_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "valve_02",
+      "source": "media/materials/models/inventory_items/music_kit/sleeve_color_psd_d5b9a6ce.png",
+      "sourceSha256": "b9f5e2a1688df911e87a44afd2d0a62e02f6333f772ba2b40fb5d7eddca2f7d9",
+      "runtime": "covers/valve_02.png",
+      "bytes": 533756,
+      "selection": "Legacy hidden definition has no shipped model or sleeve material; shared native generic sleeve fallback",
+      "materialResource": null
+    },
+    {
+      "kit": "danielsadowski_01",
+      "source": "media/materials/models/inventory_items/music_kit/danielsadowski_01/mp3_screen_color_psd_9b4ba14b.png",
+      "sourceSha256": "11434b86f4e8481f59a44184232fd8eca8f86f118f09d5303051d0b8555e6b56",
+      "runtime": "covers/danielsadowski_01.png",
+      "bytes": 52604,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/danielsadowski_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "noisia_01",
+      "source": "media/materials/models/inventory_items/music_kit/noisia_01/mp3_screen_color_psd_ec3c0b3a.png",
+      "sourceSha256": "a62a77e07b83e3cd9f8dbd6d48e01449ba499e61ed523ed0a8e5283205197411",
+      "runtime": "covers/noisia_01.png",
+      "bytes": 41991,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/noisia_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "robertallaire_01",
+      "source": "media/materials/models/inventory_items/music_kit/robertallaire_01/mp3_screen_color_psd_49c7d257.png",
+      "sourceSha256": "002f93e996351215d3b92be669a0245952104ab824f46146c47272590824661e",
+      "runtime": "covers/robertallaire_01.png",
+      "bytes": 62060,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/robertallaire_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "seanmurray_01",
+      "source": "media/materials/models/inventory_items/music_kit/seanmurray_01/mp3_screen_color_psd_b0033a7c.png",
+      "sourceSha256": "7fb55376e5eb9d44a45d5cc58f8647798b1e1196cdb0f98ef3f5483321d67e57",
+      "runtime": "covers/seanmurray_01.png",
+      "bytes": 84808,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/seanmurray_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "feedme_01",
+      "source": "media/materials/models/inventory_items/music_kit/feedme_01/mp3_screen_color_psd_3a5e6ea0.png",
+      "sourceSha256": "540b8a9242b85b95e622ee4575dc1d05cef3131dc05c81a40550800b5baf27bb",
+      "runtime": "covers/feedme_01.png",
+      "bytes": 8138,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/feedme_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "dren_01",
+      "source": "media/materials/models/inventory_items/music_kit/dren_01/mp3_screen_color_psd_2fba268f.png",
+      "sourceSha256": "25ed41fb2e71c58e570a3c4c3213f600b598c43418fc533423f6150309fe840e",
+      "runtime": "covers/dren_01.png",
+      "bytes": 73259,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/dren_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "austinwintory_01",
+      "source": "media/materials/models/inventory_items/music_kit/austinwintory_01/mp3_screen_color_psd_868a26a3.png",
+      "sourceSha256": "dbb070be81a7dee4f1fabee41814cbc495e2af99f7f59a772cf31d7bdc556c7e",
+      "runtime": "covers/austinwintory_01.png",
+      "bytes": 29842,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/austinwintory_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "sasha_01",
+      "source": "media/materials/models/inventory_items/music_kit/sasha_01/mp3_screen_color_psd_fef8350e.png",
+      "sourceSha256": "d80d38d99faf1ffb4ad245bddf22ddc85281eb5ec6a83e4c7ad0ca681c78d8c2",
+      "runtime": "covers/sasha_01.png",
+      "bytes": 21121,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/sasha_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "skog_01",
+      "source": "media/materials/models/inventory_items/music_kit/skog_01/mp3_screen_color_psd_ccab40c1.png",
+      "sourceSha256": "f2f96c7ce57a52a12b7ad35ed3dd59f76b5b7139d5cf7f68fb8cea1ecdb943d3",
+      "runtime": "covers/skog_01.png",
+      "bytes": 133871,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/skog_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "midnightriders_01",
+      "source": "media/materials/models/inventory_items/music_kit/midnight_riders_01/mp3_screen_color_psd_68b1709a.png",
+      "sourceSha256": "74d4003b1a1b7749c4529f6c963cf65bd274500d661099410fa58dbe91d94d68",
+      "runtime": "covers/midnightriders_01.png",
+      "bytes": 75413,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/midnight_riders_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "mattlange_01",
+      "source": "media/materials/models/inventory_items/music_kit/mattlange_01/mp3_screen_color_psd_3fe63d6a.png",
+      "sourceSha256": "61903033b8caf8baae9324f9c09e353b44c2bff90fdd3665279d7e26cd6e68ca",
+      "runtime": "covers/mattlange_01.png",
+      "bytes": 51901,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/mattlange_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "mateomessina_01",
+      "source": "media/materials/models/inventory_items/music_kit/mateomessina_01/mp3_screen_color_psd_4dc38fe.png",
+      "sourceSha256": "5470a7c3cc4563a69c74b40822f8f33af1664b1ffb5a952f3cd9d473d108b1c1",
+      "runtime": "covers/mateomessina_01.png",
+      "bytes": 71411,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/mateomessina_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "hotlinemiami_01",
+      "source": "media/materials/models/inventory_items/music_kit/hotlinemiami_01/mp3_screen_color_psd_999d5457.png",
+      "sourceSha256": "e157e38cb7371e48813a3278bdf206266d8929662e4a96c0e3cd5416a011c473",
+      "runtime": "covers/hotlinemiami_01.png",
+      "bytes": 111526,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/hotlinemiami_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "danielsadowski_02",
+      "source": "media/materials/models/inventory_items/music_kit/danielsadowski_02/mp3_screen_color_psd_e5b13802.png",
+      "sourceSha256": "18c51b426fc34e1d00ee1f1dd9be7c3dcd7cac7c6eac085252d6c2d0392dfd77",
+      "runtime": "covers/danielsadowski_02.png",
+      "bytes": 83801,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/danielsadowski_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "damjanmravunac_01",
+      "source": "media/materials/models/inventory_items/music_kit/damjanmravunac_01/mp3_screen_color_psd_64b27361.png",
+      "sourceSha256": "961959c5970afab9b8f2546780ddcebcaa74c5081e3420d730aad03b62443c77",
+      "runtime": "covers/damjanmravunac_01.png",
+      "bytes": 57811,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/damjanmravunac_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "proxy_01",
+      "source": "media/materials/models/inventory_items/music_kit/proxy_01/mp3_screen_color_psd_d2ce5001.png",
+      "sourceSha256": "19a9f1f7a44e90d41b30c3b06023680f3aad364aa7a91494fb6b4db625675f59",
+      "runtime": "covers/proxy_01.png",
+      "bytes": 79727,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/proxy_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "kitheory_01",
+      "source": "media/materials/models/inventory_items/music_kit/kitheory_01/mp3_screen_color_psd_d842514c.png",
+      "sourceSha256": "a3307d8aae2329068f6f720e8125b496c902b3e779ad9e6178a079e80620e54c",
+      "runtime": "covers/kitheory_01.png",
+      "bytes": 100254,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/kitheory_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "troelsfolmann_01",
+      "source": "media/materials/models/inventory_items/music_kit/troelsfolmann_01/mp3_screen_color_psd_da1b3df0.png",
+      "sourceSha256": "35e574cdf63da6b56bfd97b01023d73de2b669df15361dc1ee64f2a6fd7da38b",
+      "runtime": "covers/troelsfolmann_01.png",
+      "bytes": 83914,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/troelsfolmann_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "kellybailey_01",
+      "source": "media/materials/models/inventory_items/music_kit/kellybailey_01/mp3_screen_color_psd_5b73d387.png",
+      "sourceSha256": "0b577b2e9611f840ae536205871dbe9754996d0a4ff04be303476244f372e737",
+      "runtime": "covers/kellybailey_01.png",
+      "bytes": 66216,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/kellybailey_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "skog_02",
+      "source": "media/materials/models/inventory_items/music_kit/skog_02/mp3_screen_color_psd_a8a4af19.png",
+      "sourceSha256": "e4c9c4b78a60d8786f878984e1f4aef1963c87e693d9f5e830b09a71bd04dd82",
+      "runtime": "covers/skog_02.png",
+      "bytes": 72868,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/skog_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "danielsadowski_03",
+      "source": "media/materials/models/inventory_items/music_kit/danielsadowski_03/mp3_screen_color_psd_d52c03f0.png",
+      "sourceSha256": "56bc87a8e2d742d5b6a23b35e1cbc37b62572c93a54ec54fdf346e91bcf15285",
+      "runtime": "covers/danielsadowski_03.png",
+      "bytes": 29186,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/danielsadowski_03/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "awolnation_01",
+      "source": "media/materials/models/inventory_items/music_kit/awolnation_01/mp3_screen_color_psd_e3f82bf6.png",
+      "sourceSha256": "00e0fbbdc405d49070c66d57dc216711ba9b54d50225316f279a046d6370fe15",
+      "runtime": "covers/awolnation_01.png",
+      "bytes": 34309,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/awolnation_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "mordfustang_01",
+      "source": "media/materials/models/inventory_items/music_kit/mordfustang_01/mp3_screen_color_psd_aec0816c.png",
+      "sourceSha256": "65ef5a01c3794c788ad12bc4f2d58ff6a33fabb62e6e0632dcea79739d0f7f73",
+      "runtime": "covers/mordfustang_01.png",
+      "bytes": 25710,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/mordfustang_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "michaelbross_01",
+      "source": "media/materials/models/inventory_items/music_kit/michaelbross_01/mp3_screen_color_psd_860c23d7.png",
+      "sourceSha256": "c228b2c262f44e171f93963675ea283cf9ddb65b373101739a2038d6f7173479",
+      "runtime": "covers/michaelbross_01.png",
+      "bytes": 26158,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/michaelbross_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "ianhultquist_01",
+      "source": "media/materials/models/inventory_items/music_kit/ianhultquist_01/mp3_screen_color_psd_85dc1f64.png",
+      "sourceSha256": "10a75ea50eca11ffe93cb68b0f564bb838dbff62e600a5c09179b40cfba0beb5",
+      "runtime": "covers/ianhultquist_01.png",
+      "bytes": 102530,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/ianhultquist_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "newbeatfund_01",
+      "source": "media/materials/models/inventory_items/music_kit/newbeatfund_01/mp3_screen_color_psd_53c11be5.png",
+      "sourceSha256": "2a23fcc11b56884b17def0326065c9f1cc5ac1eb976a1c1cf2d8ffaa299deb54",
+      "runtime": "covers/newbeatfund_01.png",
+      "bytes": 22801,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/newbeatfund_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "beartooth_01",
+      "source": "media/materials/models/inventory_items/music_kit/beartooth_01/mp3_screen_color_psd_93b82a9.png",
+      "sourceSha256": "e61c9bd752b5c2d25e678fae88dc26c70654f0e3d6ecd60bd206736d7d341382",
+      "runtime": "covers/beartooth_01.png",
+      "bytes": 77851,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/beartooth_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "lenniemoore_01",
+      "source": "media/materials/models/inventory_items/music_kit/lenniemoore_01/mp3_screen_color_psd_8029a2ad.png",
+      "sourceSha256": "5d6f3eaad4f4a836a2dfcf47e0e998782ec9160361f34c64c7e20446065f3dae",
+      "runtime": "covers/lenniemoore_01.png",
+      "bytes": 98508,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/lenniemoore_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "darude_01",
+      "source": "media/materials/models/inventory_items/music_kit/darude_01/mp3_screen_color_psd_8271699.png",
+      "sourceSha256": "c29963e7ed672a5fdcdd4d3620184eab1b4817f7b2101ff764e2a7b63644d023",
+      "runtime": "covers/darude_01.png",
+      "bytes": 66536,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/darude_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "beartooth_02",
+      "source": "media/materials/models/inventory_items/music_kit/beartooth_02/mp3_screen_color_psd_2bdadbe2.png",
+      "sourceSha256": "8dd853aa89fc4a6458e2985566f5ade9952d3045dbb7bd5be5c03fd58e172365",
+      "runtime": "covers/beartooth_02.png",
+      "bytes": 118721,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/beartooth_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "blitzkids_01",
+      "source": "media/materials/models/inventory_items/music_kit/blitzkids_01/mp3_screen_color_psd_4d3a416c.png",
+      "sourceSha256": "4aa0deaad214dfc9db0099179069d2f85125d4671e4e4622065ce5144101c50b",
+      "runtime": "covers/blitzkids_01.png",
+      "bytes": 49268,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/blitzkids_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "hundredth_01",
+      "source": "media/materials/models/inventory_items/music_kit/hundredth_01/mp3_screen_color_psd_4e7ac022.png",
+      "sourceSha256": "4b1920057833aef02600eac07755ca6ca58071e3e09579536bd4f4281443e4ce",
+      "runtime": "covers/hundredth_01.png",
+      "bytes": 46036,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/hundredth_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "neckdeep_01",
+      "source": "media/materials/models/inventory_items/music_kit/neckdeep_01/mp3_screen_color_psd_e57b9db1.png",
+      "sourceSha256": "a0ee4c7956e3f38fdf0a2f10d0004b8a0626841bca6cc81557ad87fa769de181",
+      "runtime": "covers/neckdeep_01.png",
+      "bytes": 124831,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/neckdeep_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "roam_01",
+      "source": "media/materials/models/inventory_items/music_kit/roam_01/mp3_screen_color_psd_1b057000.png",
+      "sourceSha256": "b40c641aee8fc324d13bd4cd8ec2e3590233056ce82d2f781eb68b6251af99cf",
+      "runtime": "covers/roam_01.png",
+      "bytes": 90135,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/roam_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "twinatlantic_01",
+      "source": "media/materials/models/inventory_items/music_kit/twinatlantic_01/mp3_screen_color_psd_6f9ce7c4.png",
+      "sourceSha256": "37da9ecc74aa665e9312f2667ba6e0d66c3ca3fe4dda6ac909bb8350aedb5cbb",
+      "runtime": "covers/twinatlantic_01.png",
+      "bytes": 80484,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/twinatlantic_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "skog_03",
+      "source": "media/materials/models/inventory_items/music_kit/skog_03/mp3_screen_color_psd_61680e08.png",
+      "sourceSha256": "2230969329a00b517f29695d4c6a0ce046b59dc4b75f9c778c07122007f5bf10",
+      "runtime": "covers/skog_03.png",
+      "bytes": 110151,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/skog_03/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "theverkkars_01",
+      "source": "media/materials/models/inventory_items/music_kit/theverkkars_01/mp3_screen_color_psd_6e95f647.png",
+      "sourceSha256": "d9684b3fa63c406b3bd0263c9df1a74334efbc46f2aa708379644c95af90ca4a",
+      "runtime": "covers/theverkkars_01.png",
+      "bytes": 16784,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/theverkkars_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "halo_01",
+      "source": "media/materials/models/inventory_items/music_kit/halo_01/mp3_screen_color_psd_f27a7bb1.png",
+      "sourceSha256": "a0f7b0042f34cb7a67513a2d868b19197f7cf7ad50f9fba6c2ccfa2eec22a7d4",
+      "runtime": "covers/halo_01.png",
+      "bytes": 335458,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/halo_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "scarlxrd_01",
+      "source": "media/materials/models/inventory_items/music_kit/scarlxrd_01/mp3_screen_color_psd_2fb4b197.png",
+      "sourceSha256": "a926e9bc6c78fcd500f3a701fa4a480ae5524eadc846013a00c7b86ff88b8f03",
+      "runtime": "covers/scarlxrd_01.png",
+      "bytes": 289171,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/scarlxrd_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "hlalyx_01",
+      "source": "media/materials/models/inventory_items/music_kit/hlalyx_01/mp3_screen_color_psd_719cf665.png",
+      "sourceSha256": "219cec46400c891560dd090dee39ac8fd51997a8037fe19baaf300d817b39479",
+      "runtime": "covers/hlalyx_01.png",
+      "bytes": 207152,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/hlalyx_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "austinwintory_02",
+      "source": "media/materials/models/inventory_items/music_kit/austinwintory_02/mp3_screen_color_psd_1b82c733.png",
+      "sourceSha256": "035c67ecbb9d78a23cded5f383b33d1c1d7b315cadde976a07071f54793f5d87",
+      "runtime": "covers/austinwintory_02.png",
+      "bytes": 608635,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/austinwintory_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "dren_02",
+      "source": "media/materials/models/inventory_items/music_kit/dren_02/mp3_screen_color_psd_634fd98d.png",
+      "sourceSha256": "82f56ee4269f32a7363409717f9e44b4fe38804e73d98def874f97ce174e2f77",
+      "runtime": "covers/dren_02.png",
+      "bytes": 157505,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/dren_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "danielsadowski_04",
+      "source": "media/materials/models/inventory_items/music_kit/danielsadowski_04/mp3_screen_color_psd_27196f0c.png",
+      "sourceSha256": "94426541e61868c0bb81bdf88b7c7b683da6a76521fe4add6f281e2fde7f9677",
+      "runtime": "covers/danielsadowski_04.png",
+      "bytes": 338963,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/danielsadowski_04/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "treeadams_benbromfield_01",
+      "source": "media/materials/models/inventory_items/music_kit/treeadams_benbromfield_01/mp3_screen_color_psd_31c144d7.png",
+      "sourceSha256": "5f35c2e7cc5c9b98220c8e510c9c96f285de70c77d1f3bf447a5044cf92ec89c",
+      "runtime": "covers/treeadams_benbromfield_01.png",
+      "bytes": 391302,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/treeadams_benbromfield_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "timhuling_01",
+      "source": "media/materials/models/inventory_items/music_kit/timhuling_01/mp3_screen_color_psd_33afe183.png",
+      "sourceSha256": "ee7131361ee51fe37f3fe356873faac068eb8bde6f3a4001f436f88a7e643e5b",
+      "runtime": "covers/timhuling_01.png",
+      "bytes": 429641,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/timhuling_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "sammarshall_01",
+      "source": "media/materials/models/inventory_items/music_kit/sammarshall_01/mp3_screen_color_psd_d8716756.png",
+      "sourceSha256": "84c728bc46dc993e57cb9921240f77b69d2301cb6f285472327a057836d516d0",
+      "runtime": "covers/sammarshall_01.png",
+      "bytes": 289493,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/sammarshall_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "mattlevine_01",
+      "source": "media/materials/models/inventory_items/music_kit/mattlevine_01/mp3_screen_color_psd_278620bf.png",
+      "sourceSha256": "6d7497042b96d6e50cb93f9db0e215063b77229c79ac3ad231c01cb130da44fe",
+      "runtime": "covers/mattlevine_01.png",
+      "bytes": 103952,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/mattlevine_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "amontobin_01",
+      "source": "media/materials/models/inventory_items/music_kit/amontobin_01/mp3_screen_color_psd_d7856311.png",
+      "sourceSha256": "3cf3b67772f4ec0431db9140e7db67b89420bf17c89004dfa353c85d5248a057",
+      "runtime": "covers/amontobin_01.png",
+      "bytes": 313770,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/amontobin_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "hades_01",
+      "source": "media/materials/models/inventory_items/music_kit/hades_01/mp3_screen_color_psd_3df25a97.png",
+      "sourceSha256": "bf10097d6d6d729fda0186be8ec0d52b0bc23e9be6548231446bbbebc1ff8e36",
+      "runtime": "covers/hades_01.png",
+      "bytes": 227691,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/hades_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "neckdeep_02",
+      "source": "media/materials/models/inventory_items/music_kit/neckdeep_02/mp3_screen_color_psd_6b4cadd9.png",
+      "sourceSha256": "e334f382e06def80833a7a1a0724aa12057c624e5ae31fc2b8c3b977b72f63ae",
+      "runtime": "covers/neckdeep_02.png",
+      "bytes": 292039,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/neckdeep_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "scarlxrd_02",
+      "source": "media/materials/models/inventory_items/music_kit/scarlxrd_02/mp3_screen_color_psd_34e1b7cf.png",
+      "sourceSha256": "2a665647ec34f8e88c0db4948fdba3aecc2dc2b6f8fa5ba007838f20e847ab2f",
+      "runtime": "covers/scarlxrd_02.png",
+      "bytes": 399757,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/scarlxrd_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "austinwintory_03",
+      "source": "media/materials/models/inventory_items/music_kit/austinwintory_03/mp3_screen_color_psd_f004f92c.png",
+      "sourceSha256": "0c473df46ebcfb69d9c38afc1339a1e3ade1af7655189f47bdbd824a0f6f5b5c",
+      "runtime": "covers/austinwintory_03.png",
+      "bytes": 171377,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/austinwintory_03/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "chipzel_01",
+      "source": "media/materials/models/inventory_items/music_kit/chipzel_01/mp3_screen_color_psd_ba28f95e.png",
+      "sourceSha256": "e187608c39f9112658a68a7cc9dd01c351e5c94ddd4406fb381c5593d735f79d",
+      "runtime": "covers/chipzel_01.png",
+      "bytes": 106509,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/chipzel_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "freakydna_01",
+      "source": "media/materials/models/inventory_items/music_kit/freakydna_01/mp3_screen_color_psd_3eed8d5b.png",
+      "sourceSha256": "b409fc8c8d9be2ca28575b2331104bd1b3eb20a68b402561cc8ec83463caccb0",
+      "runtime": "covers/freakydna_01.png",
+      "bytes": 132693,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/freakydna_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "jesseharlin_01",
+      "source": "media/materials/models/inventory_items/music_kit/jesseharlin_01/mp3_screen_color_psd_d4c4ee1b.png",
+      "sourceSha256": "08d557293d5d53e0cd4411f2970f03473155aa56b8239a1b8ebf3c97cc045217",
+      "runtime": "covers/jesseharlin_01.png",
+      "bytes": 120703,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/jesseharlin_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "laurashigihara_01",
+      "source": "media/materials/models/inventory_items/music_kit/laurashigihara_01/mp3_screen_color_psd_f55bac6d.png",
+      "sourceSha256": "c26505fb9aa495d4f304e707b602696dedd2302797a9f90a139f60d4eae0774b",
+      "runtime": "covers/laurashigihara_01.png",
+      "bytes": 353699,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/laurashigihara_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "sarahschachner_01",
+      "source": "media/materials/models/inventory_items/music_kit/sarahschachner_01/mp3_screen_color_psd_13c7eb39.png",
+      "sourceSha256": "2f81752ade12eb85e706f5364bed420eb5e43cb6c6d6827cdbfdba43e2225bc7",
+      "runtime": "covers/sarahschachner_01.png",
+      "bytes": 68774,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/sarahschachner_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "bbnos_01",
+      "source": "media/materials/models/inventory_items/music_kit/bbnos_01/mp3_screen_color_psd_9b9d1305.png",
+      "sourceSha256": "e4ecec6e5ee5c52e0d494cc096aca1df54cc99f03cb88541b833d19e200988e4",
+      "runtime": "covers/bbnos_01.png",
+      "bytes": 68876,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/bbnos_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "theverkkars_02",
+      "source": "media/materials/models/inventory_items/music_kit/theverkkars_02/mp3_screen_color_psd_3440e409.png",
+      "sourceSha256": "d39419454e661876b740c2a4c5a8f6e08f051520547bade741152caf991ccfce",
+      "runtime": "covers/theverkkars_02.png",
+      "bytes": 453712,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/theverkkars_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "3kliksphilip_01",
+      "source": "media/materials/models/inventory_items/music_kit/3kliksphilip_01/mp3_screen_color_psd_9266f3b6.png",
+      "sourceSha256": "203542a8ee5f8777cc91341982482b9ac862f96a3c6ffe381dc06ad05b95a730",
+      "runtime": "covers/3kliksphilip_01.png",
+      "bytes": 326237,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/3kliksphilip_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "hlb_01",
+      "source": "media/materials/models/inventory_items/music_kit/hlb_01/mp3_screen_color_psd_eec4b06a.png",
+      "sourceSha256": "f99a220bc34ffbe124ed1c472d7e9fc4969261b923f58c83df33391e567e40e2",
+      "runtime": "covers/hlb_01.png",
+      "bytes": 455589,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/hlb_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "juelz_01",
+      "source": "media/materials/models/inventory_items/music_kit/juelz_01/mp3_screen_color_psd_a22ee22a.png",
+      "sourceSha256": "e48f2d0f4640ed94f4c1f29b7d2afadf1e5a679e53701cd97719e78a86f10c28",
+      "runtime": "covers/juelz_01.png",
+      "bytes": 151640,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/juelz_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "knock2_01",
+      "source": "media/materials/models/inventory_items/music_kit/knock2_01/mp3_screen_color_psd_543a8f32.png",
+      "sourceSha256": "3b662e296e9551321137b4b162542addb1a5fdaf90d2991f19f7f7d81f47f3da",
+      "runtime": "covers/knock2_01.png",
+      "bytes": 384970,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/knock2_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "meechydarko_01",
+      "source": "media/materials/models/inventory_items/music_kit/meechydarko_01/mp3_screen_color_psd_16ea8c68.png",
+      "sourceSha256": "14bf44fb064aec4d3e945b075e141d65bea88328733f32512dc7322d9f56b6cd",
+      "runtime": "covers/meechydarko_01.png",
+      "bytes": 315376,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/meechydarko_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "sullivanking_01",
+      "source": "media/materials/models/inventory_items/music_kit/sullivanking_01/mp3_screen_color_psd_de1e8ed1.png",
+      "sourceSha256": "e3c9e6b7db611890ca46425f8ad028bf84836e9967f8bc7c0c8704e238c83e5c",
+      "runtime": "covers/sullivanking_01.png",
+      "bytes": 464668,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/sullivanking_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "perfectworld_01",
+      "source": "media/materials/models/inventory_items/music_kit/perfectworld_01/mp3_screen_color_psd_b029522f.png",
+      "sourceSha256": "171c7bde48d7a1895d6a93c285cca6b2c4184fd73843ba86cff22320c4af789d",
+      "runtime": "covers/perfectworld_01.png",
+      "bytes": 1228450,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/perfectworld_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "denzelcurry_01",
+      "source": "media/materials/models/inventory_items/music_kit/denzelcurry_01/mp3_screen_color_psd_f44862cd.png",
+      "sourceSha256": "4e73cbb6b9a4dccaab04efcde7d0ff0013831571dc0d1d9f0c5c789fa1d31c66",
+      "runtime": "covers/denzelcurry_01.png",
+      "bytes": 366664,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/denzelcurry_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "valve_01",
+      "source": "media/materials/models/inventory_items/music_kit/valve_01/mp3_screen_color_psd_4ad04e74.png",
+      "sourceSha256": "6cdd8baff37f417d3af1813c3471880a5fd7cd7f05e173c364a549ac0d612926",
+      "runtime": "covers/valve_01.png",
+      "bytes": 997960,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/valve_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "dryden_01",
+      "source": "media/materials/models/inventory_items/music_kit/dryden_01/mp3_screen_color_psd_811a02d5.png",
+      "sourceSha256": "d2873973df0fdddde210b4bbe2f878bd0fe87a347edfb53f8892cb83d783cf13",
+      "runtime": "covers/dryden_01.png",
+      "bytes": 1013068,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/dryden_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "isoxo_01",
+      "source": "media/materials/models/inventory_items/music_kit/isoxo_01/mp3_screen_color_psd_bedf4223.png",
+      "sourceSha256": "adf66db71023e9aaaa5e055c1e62277b113f1769aed12e62c432349438bae42f",
+      "runtime": "covers/isoxo_01.png",
+      "bytes": 2073049,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/isoxo_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "killscript_01",
+      "source": "media/materials/models/inventory_items/music_kit/killscript_01/mp3_screen_color_psd_d4595da7.png",
+      "sourceSha256": "b0cf82e6e296e74021cc071934f9d2444ab31b4bb71228feba5afc216d4ed380",
+      "runtime": "covers/killscript_01.png",
+      "bytes": 1567132,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/killscript_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "knock2_02",
+      "source": "media/materials/models/inventory_items/music_kit/knock2_02/mp3_screen_color_psd_5e5d73be.png",
+      "sourceSha256": "da4b9415ab3b0a44b212f485c0b905c50ec7b0d0c1809daa92ed12898dc9fb2d",
+      "runtime": "covers/knock2_02.png",
+      "bytes": 1796916,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/knock2_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "radcat_01",
+      "source": "media/materials/models/inventory_items/music_kit/radcat_01/mp3_screen_color_psd_d1c1c180.png",
+      "sourceSha256": "df3ffee8a0fd90a0c94d50f6c79a1770e411adc76d3ecd13a8b854e74d4045cc",
+      "runtime": "covers/radcat_01.png",
+      "bytes": 1410540,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/radcat_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "twerl_01",
+      "source": "media/materials/models/inventory_items/music_kit/twerl_01/mp3_screen_color_psd_5917ac79.png",
+      "sourceSha256": "506c38de8b017adeb701290d71544c2da41c6ecb154fcc6f0e402a85f1b09675",
+      "runtime": "covers/twerl_01.png",
+      "bytes": 1318217,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/twerl_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "austinwintory_04",
+      "source": "media/materials/models/inventory_items/music_kit/austinwintory_04/mp3_screen_color_psd_c9e882fd.png",
+      "sourceSha256": "d1611ace176b046040102845949d8d72a21815d3015125535a6ea4f89f0d972b",
+      "runtime": "covers/austinwintory_04.png",
+      "bytes": 1524143,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/austinwintory_04/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "benbromfield_01",
+      "source": "media/materials/models/inventory_items/music_kit/benbromfield_01/mp3_screen_color_psd_a308403b.png",
+      "sourceSha256": "56c0db946723513d7a56dcf5a054a9d8a3010d2cd6a8b4dd8f53b6af64f3551f",
+      "runtime": "covers/benbromfield_01.png",
+      "bytes": 510846,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/benbromfield_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "danielsadowski_05",
+      "source": "media/materials/models/inventory_items/music_kit/danielsadowski_05/mp3_screen_color_psd_831a35e3.png",
+      "sourceSha256": "59fe4dbebb40e85b4fe3e0c0829a837f6b2622520e6d06453f62985deed00dd1",
+      "runtime": "covers/danielsadowski_05.png",
+      "bytes": 810739,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/danielsadowski_05/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "dren_03",
+      "source": "media/materials/models/inventory_items/music_kit/dren_03/mp3_screen_color_psd_8c80af47.png",
+      "sourceSha256": "30b4197d7fe9a7911a63cc1027301556598f44b05d5919b1d339b333b46d0256",
+      "runtime": "covers/dren_03.png",
+      "bytes": 917837,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/dren_03/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "mattlevine_02",
+      "source": "media/materials/models/inventory_items/music_kit/mattlevine_02/mp3_screen_color_psd_e50f19a4.png",
+      "sourceSha256": "0da71f26f8eea81aca069061e96c033cb20462a28e548bc704f60e0f81c9004e",
+      "runtime": "covers/mattlevine_02.png",
+      "bytes": 758332,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/mattlevine_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "sammarshall_02",
+      "source": "media/materials/models/inventory_items/music_kit/sammarshall_02/mp3_screen_color_psd_ccddb83c.png",
+      "sourceSha256": "433bb2bcc0c4ac931969d253d7b565354d90832587f50746e585e30d1ebed123",
+      "runtime": "covers/sammarshall_02.png",
+      "bytes": 1536006,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/sammarshall_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "timhuling_02",
+      "source": "media/materials/models/inventory_items/music_kit/timhuling_02/mp3_screen_color_psd_9f436a47.png",
+      "sourceSha256": "ae41a5406e999b93305c82dd9c65f76c300855ced9aa1d0c7c85cfc797e95333",
+      "runtime": "covers/timhuling_02.png",
+      "bytes": 807878,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/timhuling_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "treeadams_01",
+      "source": "media/materials/models/inventory_items/music_kit/treeadams_01/mp3_screen_color_psd_ac968a5c.png",
+      "sourceSha256": "66f110fbdd36a211d688fdec89cd421768f4f7fcea869f9c6a900842d6bb4374",
+      "runtime": "covers/treeadams_01.png",
+      "bytes": 1363383,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/treeadams_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "perfectworld_02",
+      "source": "media/materials/models/inventory_items/music_kit/perfectworld_02/mp3_screen_color_psd_254f6ad2.png",
+      "sourceSha256": "9242a3bd81df445f275bbfe846058da2c50bd1365076c0433bb4b46be6de2ad5",
+      "runtime": "covers/perfectworld_02.png",
+      "bytes": 298535,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/perfectworld_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "adambeyer_01",
+      "source": "media/materials/models/inventory_items/music_kit/adambeyer_01/mp3_screen_color_psd_dceb0562.png",
+      "sourceSha256": "b1363bb34a9cac1963e94bdb5c571fcde4231e8ed3fefa42c86faf277e70d544",
+      "runtime": "covers/adambeyer_01.png",
+      "bytes": 1751565,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/adambeyer_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "ghost_01",
+      "source": "media/materials/models/inventory_items/music_kit/ghost_01/mp3_screen_color_psd_3e24e257.png",
+      "sourceSha256": "e0816483e9a377bf4be9212cf1f98cf28107917c5ee1168ae53e4b54c07eb601",
+      "runtime": "covers/ghost_01.png",
+      "bytes": 1569794,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/ghost_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "health_01",
+      "source": "media/materials/models/inventory_items/music_kit/health_01/mp3_screen_color_psd_27e891b3.png",
+      "sourceSha256": "e4be92ecc783311a58e45bb92c7e20681c7eb16c7fd2a1a123106610d8334ce2",
+      "runtime": "covers/health_01.png",
+      "bytes": 750347,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/health_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "jamesandthecoldgun_01",
+      "source": "media/materials/models/inventory_items/music_kit/jamesandthecoldgun_01/mp3_screen_color_psd_d54bda23.png",
+      "sourceSha256": "0a1b08f16eccbc4acb4ee88cfc1b68e7f9a83a7db0b35bec8e1e6486527556cd",
+      "runtime": "covers/jamesandthecoldgun_01.png",
+      "bytes": 1419679,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/jamesandthecoldgun_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "jonathanyoung_01",
+      "source": "media/materials/models/inventory_items/music_kit/jonathanyoung_01/mp3_screen_color_psd_29173d68.png",
+      "sourceSha256": "2c587a363177f4f4c3cfa2d6098035488414118d3ddb351256d9559ebf22c5bc",
+      "runtime": "covers/jonathanyoung_01.png",
+      "bytes": 1178659,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/jonathanyoung_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "juelz_02",
+      "source": "media/materials/models/inventory_items/music_kit/juelz_02/mp3_screen_color_psd_68540524.png",
+      "sourceSha256": "614bd78beba6823261a98c9ec71070a97ee5800cfb0116565276993425f80bfc",
+      "runtime": "covers/juelz_02.png",
+      "bytes": 1124311,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/juelz_02/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "killermike_01",
+      "source": "media/materials/models/inventory_items/music_kit/killermike_01/mp3_screen_color_psd_3e22dce9.png",
+      "sourceSha256": "79f82cec7475fedf660e9343db084aa01b2ebfe2a9a8991d6b163aa72e830cc1",
+      "runtime": "covers/killermike_01.png",
+      "bytes": 1452683,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/killermike_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "pvris_01",
+      "source": "media/materials/models/inventory_items/music_kit/pvris_01/mp3_screen_color_psd_e1555d84.png",
+      "sourceSha256": "d10d597c899f61fb8a00ecc4e45e5fe8b62566a555d9bc64b25d6a052ea6902d",
+      "runtime": "covers/pvris_01.png",
+      "bytes": 791828,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/pvris_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "selectiveresponse_01",
+      "source": "media/materials/models/inventory_items/music_kit/selectiveresponse_01/mp3_screen_color_psd_7283f69.png",
+      "sourceSha256": "6fa99079ef7c5dba86e43733042a434ef561ad9cbdc26198699e2e9bd34d30e2",
+      "runtime": "covers/selectiveresponse_01.png",
+      "bytes": 1886610,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/selectiveresponse_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "tigercub_01",
+      "source": "media/materials/models/inventory_items/music_kit/tigercub_01/mp3_screen_color_psd_b453d7d.png",
+      "sourceSha256": "a2c7d429fe119b3aa495d42ddd5c5b30e246da2dadc495c2c5f255d46bd7baae",
+      "runtime": "covers/tigercub_01.png",
+      "bytes": 1204188,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/tigercub_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "alrt_01",
+      "source": "media/materials/models/inventory_items/music_kit/alrt_01/mp3_screen_color_psd_25b44773.png",
+      "sourceSha256": "5dfb6176f7f3f5da644a335da231a1bafcbc192eebed7f39125deebba330290d",
+      "runtime": "covers/alrt_01.png",
+      "bytes": 1377199,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/alrt_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "altare_01",
+      "source": "media/materials/models/inventory_items/music_kit/altare_01/mp3_screen_color_psd_86afe5c0.png",
+      "sourceSha256": "2638c6fa9a06919599992984ac2174ebf892f1856dc035805da47709106a35c7",
+      "runtime": "covers/altare_01.png",
+      "bytes": 1544302,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/altare_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "borne_01",
+      "source": "media/materials/models/inventory_items/music_kit/borne_01/mp3_screen_color_psd_8f0cc7a6.png",
+      "sourceSha256": "6fa1539891f3afb4c9659fe5a2866ab2f74178f8e6b58845a5eac4a5ba22758b",
+      "runtime": "covers/borne_01.png",
+      "bytes": 1410285,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/borne_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "pirapus_01",
+      "source": "media/materials/models/inventory_items/music_kit/pirapus_01/mp3_screen_color_psd_8415b8e.png",
+      "sourceSha256": "6248a27f1a8952490573873ffe2011079b8ee048657d5b4cfcfd801e47b8165c",
+      "runtime": "covers/pirapus_01.png",
+      "bytes": 335041,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/pirapus_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "repiet_01",
+      "source": "media/materials/models/inventory_items/music_kit/repiet_01/mp3_screen_color_psd_16373cc2.png",
+      "sourceSha256": "3fb55a8aa31d453ee53fedab01da923c47e151f027696969aba2d7ff7581b39d",
+      "runtime": "covers/repiet_01.png",
+      "bytes": 1517032,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/repiet_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "shockone_01",
+      "source": "media/materials/models/inventory_items/music_kit/shockone_01/mp3_screen_color_psd_4c14f65d.png",
+      "sourceSha256": "4a6d9ffe92ffbcdaa48ab493f891635a09791ba689e5143f75c8a8c7368f21d4",
+      "runtime": "covers/shockone_01.png",
+      "bytes": 1800657,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/shockone_01/sleeve_cover.vmat_c"
+    },
+    {
+      "kit": "starjunk95_01",
+      "source": "media/materials/models/inventory_items/music_kit/starjunk95_01/mp3_screen_color_psd_ab239012.png",
+      "sourceSha256": "42e88ac82c72475e322c0d5443127da9fb6b50cd296f54f7fa92fa4e5f268228",
+      "runtime": "covers/starjunk95_01.png",
+      "bytes": 1253839,
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "source/materials/models/inventory_items/music_kit/starjunk95_01/sleeve_cover.vmat_c"
+    },
+    {
+      "source": "media/materials/models/inventory_items/music_kit/label_cs2_color_psd_ad840642.png",
+      "sourceSha256": "bc0cf67d1de8baae13100376dd97f2b16ad07af9cd8e1493536bfa56b554eaf7",
+      "runtime": "label.png",
+      "bytes": 101302
+    },
+    {
+      "source": "media/materials/models/inventory_items/music_kit/label_normal_psd_48a3d0b7.png",
+      "sourceSha256": "db3c5f7f999575b77c8968b1a0e5b82c59205ef4d1a20c08b6f17cb5dc7f5122",
+      "runtime": "label-normal.png",
+      "bytes": 116465
+    },
+    {
+      "source": "media/materials/models/inventory_items/music_kit/record_vmat_g_tcolor_c59d17e5.png",
+      "sourceSha256": "5aa1ae9a70f4adba7e39b8888b94ce5f199cb459e1cc89e6be36d6ee58e646c8",
+      "runtime": "record.png",
+      "bytes": 86
+    },
+    {
+      "source": "media/materials/models/inventory_items/music_kit/record_normal_psd_8ebdefec.png",
+      "sourceSha256": "1545432f637cdec55e85a93ce7ea97de42c4b1225e14023dd6d99a6783b9f7b0",
+      "runtime": "record-normal.png",
+      "bytes": 8599
+    },
+    {
+      "source": "media/materials/models/inventory_items/music_kit/sleeve_rough_psd_b9b9cee6.png",
+      "sourceSha256": "ae67657293da45fe6d306eec3d995980c972a766bc72a8ad309991bc1e5a1039",
+      "runtime": "sleeve-normal.png",
+      "bytes": 219130
+    },
+    {
+      "source": "artifacts/native-icons-materials-evidence.zip!/packing-checks/none/record_normal_psd_51b7813f.png",
+      "sourceSha256": "07282092fa07c9e21f013b8a3d7ba688a653667b1ba61ba305f28e0fbde5f9d3",
+      "runtime": "record-anisotropy.png",
+      "bytes": 1146050,
+      "role": "Source shader directional roughness in R/G, not Three anisotropy direction/strength",
+      "conversion": "Installed native g_tAnisoGloss decoded with S2V20.1 --texture_decode_flags None, preserving native two roughness components in RG. Auto decode incorrectly applies normal expansion to this texture; do not use Auto version."
+    },
+    {
+      "source": "sleeve-normal.png",
+      "sourceSha256": "ae67657293da45fe6d306eec3d995980c972a766bc72a8ad309991bc1e5a1039",
+      "runtime": "sleeve-roughness.png",
+      "bytes": 214833,
+      "conversion": "Lossless extraction of normal-map alpha roughness channel, replicated to RGB for Three roughnessMap green channel; native S2V VMAT TextureRoughness confirms usage"
+    },
+    {
+      "source": "label-normal.png",
+      "sourceSha256": "db3c5f7f999575b77c8968b1a0e5b82c59205ef4d1a20c08b6f17cb5dc7f5122",
+      "runtime": "label-roughness.png",
+      "bytes": 73965,
+      "conversion": "Lossless extraction of normal-map alpha roughness channel, replicated to RGB for Three roughnessMap green channel; native S2V VMAT TextureRoughness confirms usage"
+    }
+  ],
+  "icons": [
+    {
+      "runtime": "audio.svg",
+      "nativeResource": "panorama/images/icons/ui/unmuted.vsvg_c",
+      "conversion": "Installed native VPK -> Source2Viewer CLI20.1 --decompile; exact unchanged UTF-8 SVG output bytes",
+      "sha256": "616f7a88a90f48a1978444455f13366c48c1d89cd5c2cff5d2cd37085d43e16c",
+      "thread": "T-01a1be3d-3d6e-7488-b071-e3b79f9253fd",
+      "source": "artifacts/native-icons-materials-evidence.zip!/decoded/panorama/images/icons/ui/unmuted.svg"
+    },
+    {
+      "runtime": "picture.svg",
+      "nativeResource": "panorama/images/icons/ui/picture.vsvg_c",
+      "conversion": "Installed native VPK -> Source2Viewer CLI20.1 --decompile; exact unchanged UTF-8 SVG output bytes",
+      "sha256": "826d1091a3b72dc23cb75f1663da020da89b237a2ea05627deacc11ef0854f7f",
+      "thread": "T-01a1be3d-3d6e-7488-b071-e3b79f9253fd",
+      "source": "artifacts/native-icons-materials-evidence.zip!/decoded/panorama/images/icons/ui/picture.svg"
+    }
+  ],
+  "materialParameters": {
+    "sleeve_cover": {
+      "shader": "csgo_complex.vfx",
+      "metalness": 0.25
+    },
+    "label_cs2": {
+      "shader": "csgo_complex.vfx",
+      "metalness": 0.288
+    },
+    "record": {
+      "shader": "csgo_complex.vfx",
+      "metalness": 0.834,
+      "F_ANISOTROPIC_GLOSS": 1
+    },
+    "evidenceThread": "T-01a1be3d-3d6e-7488-b071-e3b79f9253fd"
+  },
+  "nativeMaterialEvidence": {
+    "bundle": "artifacts/native-icons-materials-evidence.zip",
+    "sha256": "b41804bd6a5f6d2da2f3616431c4d6bbc4be459208bd32ff3cb7ebe49b6ec9fa",
+    "thread": "T-01a1be3d-3d6e-7488-b071-e3b79f9253fd",
+    "shaderReference": "ValveResourceFormat/ValveResourceFormat tag20.1 Renderer/Shaders/complex.frag.slang lines535-540 binds anisogloss RG directly as directional roughness"
+  }
+}
