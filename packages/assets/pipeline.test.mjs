@@ -226,10 +226,10 @@ test("seekable music keeps identity bytes for HTTP ranges in generation and veri
     // Compressible fixtures catch an accidental return to blanket transport
     // compression even when the original codec stream contains repeated data.
     const bytes = Buffer.from("seekable music frames\n".repeat(1000));
-    for (const extension of ["mp3", "flac"])
+    for (const extension of ["mp3", "flac", "opus"])
       await writeFile(join(directory, `menu.${extension}`), bytes);
     const manifest = await prepare(root);
-    for (const extension of ["mp3", "flac"]) {
+    for (const extension of ["mp3", "flac", "opus"]) {
       const path = `audio/music-kits/kit/menu.${extension}`;
       const entry = manifest.files[path];
       assert.equal(entry.transport, undefined);

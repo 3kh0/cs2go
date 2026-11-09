@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "8d214f6c87440d168c48be4ada80a36e95f516700cfc3f0323fb3d0d0398d3b5",
+  "release": "65713f4c7d3e2c822cbf1f01da4733a5d023a9573a1fe300f6352f1b69455ce1",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -1429,10 +1429,10 @@
       "bytes": 387158,
       "object": "objects/7f1e59a90417457fe934b5bfcc5305e365911cbee92714293a90e3828bdfb10f.mp3"
     },
-    "audio/music-kits/3kliksphilip_01/endofmatch.flac": {
-      "sha256": "06e90f446a734036cc5abfcc0eb2efe7cd3e0e796ace6325cccd32c65e4c8de4",
-      "bytes": 4189127,
-      "object": "objects/06e90f446a734036cc5abfcc0eb2efe7cd3e0e796ace6325cccd32c65e4c8de4.flac"
+    "audio/music-kits/3kliksphilip_01/endofmatch.opus": {
+      "sha256": "ab2d174f1e03bc1495be19115b4bfd28969c18ec7bdc4ee619f5bafe296c7e01",
+      "bytes": 1004098,
+      "object": "objects/ab2d174f1e03bc1495be19115b4bfd28969c18ec7bdc4ee619f5bafe296c7e01.opus"
     },
     "audio/music-kits/3kliksphilip_01/lostround.mp3": {
       "sha256": "144d58a5984f004653310ee431556a1c11436734c69ac4aaa7060bb7efd2c76c",
@@ -1469,10 +1469,10 @@
       "bytes": 486632,
       "object": "objects/79af59de99a0676fc9865df01ddd6ef5fa3fe3cfc6122f38ebc6cbcb580499d9.mp3"
     },
-    "audio/music-kits/3kliksphilip_01/startofmatch.flac": {
-      "sha256": "a0e21d7177adaaef707209c0051651764c4793dd62c37df5495ee69f850fed05",
-      "bytes": 554567,
-      "object": "objects/a0e21d7177adaaef707209c0051651764c4793dd62c37df5495ee69f850fed05.flac"
+    "audio/music-kits/3kliksphilip_01/startofmatch.opus": {
+      "sha256": "ccc3a9568bf7a97fc9144bb12ec536b731724bcce597313501fc22093d9ef881",
+      "bytes": 201706,
+      "object": "objects/ccc3a9568bf7a97fc9144bb12ec536b731724bcce597313501fc22093d9ef881.opus"
     },
     "audio/music-kits/3kliksphilip_01/startround_01.mp3": {
       "sha256": "5de4513b4a523a8fa5f59997937912b55148798fb4b7baeaac1fb2ead316c573",
@@ -1764,10 +1764,10 @@
       "bytes": 127478,
       "object": "objects/13d9c87f899ec3eff447882d780fcceb9bf6bdd66ef524f864fc5fe0ed95e247.mp3"
     },
-    "audio/music-kits/amontobin_01/endofmatch.flac": {
-      "sha256": "ad9541755b4641479cacad7c0c96f57c5b503b9f8ffb83a16b79f8bc842cf477",
-      "bytes": 9158484,
-      "object": "objects/ad9541755b4641479cacad7c0c96f57c5b503b9f8ffb83a16b79f8bc842cf477.flac"
+    "audio/music-kits/amontobin_01/endofmatch.opus": {
+      "sha256": "55d9d39612939f1713656ffad0d4d6ff4297649b1edc6c57037f5bc6924c7b2c",
+      "bytes": 1928200,
+      "object": "objects/55d9d39612939f1713656ffad0d4d6ff4297649b1edc6c57037f5bc6924c7b2c.opus"
     },
     "audio/music-kits/amontobin_01/lostround.mp3": {
       "sha256": "87527eb21bc0c25fdb5c3a6a33f8b57858d8fdb70a321f8d6a292f1082ffbe33",
@@ -1804,10 +1804,10 @@
       "bytes": 333950,
       "object": "objects/8791ec8821303817b0d7eb41cda5887dd84c43c1a40aae989273cdce11ac4807.mp3"
     },
-    "audio/music-kits/amontobin_01/startofmatch.flac": {
-      "sha256": "8003704a4df33f3d351ff53d238be42ed68bd36532c6bb80630390a7c1a744aa",
-      "bytes": 741832,
-      "object": "objects/8003704a4df33f3d351ff53d238be42ed68bd36532c6bb80630390a7c1a744aa.flac"
+    "audio/music-kits/amontobin_01/startofmatch.opus": {
+      "sha256": "5ab13e3ed5e6e78556357e8a279da471cd0c01e8a32ecbbe8dff154209e1aef4",
+      "bytes": 176170,
+      "object": "objects/5ab13e3ed5e6e78556357e8a279da471cd0c01e8a32ecbbe8dff154209e1aef4.opus"
     },
     "audio/music-kits/amontobin_01/startround_01.mp3": {
       "sha256": "8e9a278ca0e4a5050bebb7722a9819fcf937612f82f4d42e6dc792b537eca269",
@@ -2743,10 +2743,10 @@
       "bytes": 135837,
       "object": "objects/5ca399b6614c1419d437d34e295e540bdb744521e64e1f74e9a5e46fd841d59e.mp3"
     },
-    "audio/music-kits/austinwintory_01/endofmatch.flac": {
-      "sha256": "3a53e7c691ec474f04bce8961fa4fae6807e6d8e4a8ea5f88c08ebbceb8cece0",
-      "bytes": 4327368,
-      "object": "objects/3a53e7c691ec474f04bce8961fa4fae6807e6d8e4a8ea5f88c08ebbceb8cece0.flac"
+    "audio/music-kits/austinwintory_01/endofmatch.opus": {
+      "sha256": "b2a0787267bfb32d18f968303f2f102acbb5a22c8df827696da7eb6b7f81e071",
+      "bytes": 901167,
+      "object": "objects/b2a0787267bfb32d18f968303f2f102acbb5a22c8df827696da7eb6b7f81e071.opus"
     },
     "audio/music-kits/austinwintory_01/lostround.mp3": {
       "sha256": "320c7bccab461ca03872276091574e371c1214919fb415b73241225da9aa4bd4",
@@ -2778,10 +2778,10 @@
       "bytes": 307618,
       "object": "objects/a0b1935485cac81b45c1c9982f607dc8ed73487cf7f1bda1ffeb38fb4db40105.mp3"
     },
-    "audio/music-kits/austinwintory_01/startofmatch.flac": {
-      "sha256": "3a53e7c691ec474f04bce8961fa4fae6807e6d8e4a8ea5f88c08ebbceb8cece0",
-      "bytes": 4327368,
-      "object": "objects/3a53e7c691ec474f04bce8961fa4fae6807e6d8e4a8ea5f88c08ebbceb8cece0.flac"
+    "audio/music-kits/austinwintory_01/startofmatch.opus": {
+      "sha256": "b2a0787267bfb32d18f968303f2f102acbb5a22c8df827696da7eb6b7f81e071",
+      "bytes": 901167,
+      "object": "objects/b2a0787267bfb32d18f968303f2f102acbb5a22c8df827696da7eb6b7f81e071.opus"
     },
     "audio/music-kits/austinwintory_01/startround_01.mp3": {
       "sha256": "664ac878e13accbddb69ad8c6ad122a8c0b9fba17bf4d11748a3f222ea1a14f6",
@@ -2818,10 +2818,10 @@
       "bytes": 133329,
       "object": "objects/116c44837d37edf5539843ec98c0a7970ca64139081b4f8d04c0578c00d4d300.mp3"
     },
-    "audio/music-kits/austinwintory_02/endofmatch.flac": {
-      "sha256": "7177c66f204beb46e202397967e676fa8745df9904ee52e4759f4be1713968f9",
-      "bytes": 4806721,
-      "object": "objects/7177c66f204beb46e202397967e676fa8745df9904ee52e4759f4be1713968f9.flac"
+    "audio/music-kits/austinwintory_02/endofmatch.opus": {
+      "sha256": "dcecb092307ccf52c5744eadd90b00f2ef3250248fc27ac4728703c53bd2dcf9",
+      "bytes": 994294,
+      "object": "objects/dcecb092307ccf52c5744eadd90b00f2ef3250248fc27ac4728703c53bd2dcf9.opus"
     },
     "audio/music-kits/austinwintory_02/lostround.mp3": {
       "sha256": "9f87d06571f51903a45bf3e37874a84dc538b6a5a0f1b64a50f08f10fcd31161",
@@ -2853,10 +2853,10 @@
       "bytes": 272510,
       "object": "objects/e4a92da0ea9eae00785060fb4c13e08861273de7a402ff95f22cfe3f661c0ad8.mp3"
     },
-    "audio/music-kits/austinwintory_02/startofmatch.flac": {
-      "sha256": "f9fd1c5088cd9c8386ef17ef4b806a284b37fe16a61f506b6f92a877397d95cc",
-      "bytes": 764403,
-      "object": "objects/f9fd1c5088cd9c8386ef17ef4b806a284b37fe16a61f506b6f92a877397d95cc.flac"
+    "audio/music-kits/austinwintory_02/startofmatch.opus": {
+      "sha256": "c904353c55d1da44286d7cab157a65d657acb513d640d6aa344a69c904f934a5",
+      "bytes": 155947,
+      "object": "objects/c904353c55d1da44286d7cab157a65d657acb513d640d6aa344a69c904f934a5.opus"
     },
     "audio/music-kits/austinwintory_02/startround_01.mp3": {
       "sha256": "db294290500d7cdc057a94f944e176ac62ea9a28f09611c71f4cca3dce0556cc",
@@ -2893,10 +2893,10 @@
       "bytes": 96967,
       "object": "objects/2feb99972c713724f4a449ecd45c78a13c0234e590f4b7c1e838e8ab5662c068.mp3"
     },
-    "audio/music-kits/austinwintory_03/endofmatch.flac": {
-      "sha256": "4bcd49f3c81c13f34069bd5e254953b1bb1122093d66a6823d57140f5fc40452",
-      "bytes": 3608857,
-      "object": "objects/4bcd49f3c81c13f34069bd5e254953b1bb1122093d66a6823d57140f5fc40452.flac"
+    "audio/music-kits/austinwintory_03/endofmatch.opus": {
+      "sha256": "d3dc74a00c80ebec8719eb82609931e7298d8175a2d83cdb5a1c77fa557ccfd2",
+      "bytes": 969981,
+      "object": "objects/d3dc74a00c80ebec8719eb82609931e7298d8175a2d83cdb5a1c77fa557ccfd2.opus"
     },
     "audio/music-kits/austinwintory_03/lostround.mp3": {
       "sha256": "db8a13c46a1bb6d271e3f9a3674c73291c096857d1fafc921ee7ee3fc5eead2f",
@@ -2933,10 +2933,10 @@
       "bytes": 303857,
       "object": "objects/e28905efb289e4a4e6f9048b1c008b5f021e87ec6012b8089adda8169b968f98.mp3"
     },
-    "audio/music-kits/austinwintory_03/startofmatch.flac": {
-      "sha256": "a9aecf0fb9c79dd9079f2dbf3ec1857dbcd7820cecf86401e72bf2fb6256df8c",
-      "bytes": 471527,
-      "object": "objects/a9aecf0fb9c79dd9079f2dbf3ec1857dbcd7820cecf86401e72bf2fb6256df8c.flac"
+    "audio/music-kits/austinwintory_03/startofmatch.opus": {
+      "sha256": "e1e91c696228f71bb6659c95e6433f7b16aaffef0e4e9f428ab0fc1fc3931fae",
+      "bytes": 206128,
+      "object": "objects/e1e91c696228f71bb6659c95e6433f7b16aaffef0e4e9f428ab0fc1fc3931fae.opus"
     },
     "audio/music-kits/austinwintory_03/startround_01.mp3": {
       "sha256": "b5d1ecf4393c32b07d515da2b3facb43f8223330d86b3fb1714b72e775ffeb53",
@@ -3048,10 +3048,10 @@
       "bytes": 70218,
       "object": "objects/22a176f992ef11e743f6127f50852b51676dcef987d6ef55130252f21240fbde.mp3"
     },
-    "audio/music-kits/awolnation_01/endofmatch.flac": {
-      "sha256": "a530d55788a87eaa5f91cfc310b190e508e13fc0b13ca78a8e179d51d0971fac",
-      "bytes": 5045800,
-      "object": "objects/a530d55788a87eaa5f91cfc310b190e508e13fc0b13ca78a8e179d51d0971fac.flac"
+    "audio/music-kits/awolnation_01/endofmatch.opus": {
+      "sha256": "cb00dda6f95122128ea6235c60e10bdc666857b41af554a89ab3c52e9717e690",
+      "bytes": 1140639,
+      "object": "objects/cb00dda6f95122128ea6235c60e10bdc666857b41af554a89ab3c52e9717e690.opus"
     },
     "audio/music-kits/awolnation_01/lostround.mp3": {
       "sha256": "ea095fcca0ff0e1fabd482243591aaa6dc09f815650815e6b853f6084a824457",
@@ -3088,10 +3088,10 @@
       "bytes": 481071,
       "object": "objects/01e7fd285389ddd6892108eea89888e31481408e29c37f700765f6ded2be8161.mp3"
     },
-    "audio/music-kits/awolnation_01/startofmatch.flac": {
-      "sha256": "a530d55788a87eaa5f91cfc310b190e508e13fc0b13ca78a8e179d51d0971fac",
-      "bytes": 5045800,
-      "object": "objects/a530d55788a87eaa5f91cfc310b190e508e13fc0b13ca78a8e179d51d0971fac.flac"
+    "audio/music-kits/awolnation_01/startofmatch.opus": {
+      "sha256": "cb00dda6f95122128ea6235c60e10bdc666857b41af554a89ab3c52e9717e690",
+      "bytes": 1140639,
+      "object": "objects/cb00dda6f95122128ea6235c60e10bdc666857b41af554a89ab3c52e9717e690.opus"
     },
     "audio/music-kits/awolnation_01/startround_01.mp3": {
       "sha256": "40be9caac88bc881f55d0a58a1fd460bc54028189b8d5acbe3850ebc5cc59fbf",
@@ -3133,10 +3133,10 @@
       "bytes": 112014,
       "object": "objects/f50ce7efa488157c53ec67bd312b155f323b23b4edf5b01dd75f36420e79c8dc.mp3"
     },
-    "audio/music-kits/bbnos_01/endofmatch.flac": {
-      "sha256": "266917a2e98223784afec34381405fdf6703993e10e540a6750b8a21d34bdf76",
-      "bytes": 4397359,
-      "object": "objects/266917a2e98223784afec34381405fdf6703993e10e540a6750b8a21d34bdf76.flac"
+    "audio/music-kits/bbnos_01/endofmatch.opus": {
+      "sha256": "4609afefa3d377a82b473ebafc30cb54c1492f5d2c2614f694041e9b6b5a7abb",
+      "bytes": 1005232,
+      "object": "objects/4609afefa3d377a82b473ebafc30cb54c1492f5d2c2614f694041e9b6b5a7abb.opus"
     },
     "audio/music-kits/bbnos_01/lostround.mp3": {
       "sha256": "40cbef42c0dc997dcc0712b4b81fdf43af8cabfb2f29f25484bc67c9943c7297",
@@ -3168,10 +3168,10 @@
       "bytes": 372820,
       "object": "objects/1b67050e30e82065a6bd19a9083826f7b46165022c530480bf2b2e93d8df579d.mp3"
     },
-    "audio/music-kits/bbnos_01/startofmatch.flac": {
-      "sha256": "c674e08860fbc331842dbd564d84d667281bbb35a865c26f3d0937cdd32e182e",
-      "bytes": 681466,
-      "object": "objects/c674e08860fbc331842dbd564d84d667281bbb35a865c26f3d0937cdd32e182e.flac"
+    "audio/music-kits/bbnos_01/startofmatch.opus": {
+      "sha256": "6d0a3907477ebd02412f49b328289bdb8e007f704989f86a437c7b963e07cb99",
+      "bytes": 167668,
+      "object": "objects/6d0a3907477ebd02412f49b328289bdb8e007f704989f86a437c7b963e07cb99.opus"
     },
     "audio/music-kits/bbnos_01/startround_01.mp3": {
       "sha256": "7e504a42c325d18b6108478777ca75e9c79dd1be83818ec16e989e6dd7a4b348",
@@ -3203,10 +3203,10 @@
       "bytes": 57261,
       "object": "objects/c6972a16b6fce98721138acda3dfa4da83fbf28da2b02356df8692610a671876.mp3"
     },
-    "audio/music-kits/beartooth_01/endofmatch.flac": {
-      "sha256": "f94d0f1b0ce7c0f0361ab47d2a4c756ad73dab7c45c4a3fc3b8f84723ab55ae9",
-      "bytes": 4624640,
-      "object": "objects/f94d0f1b0ce7c0f0361ab47d2a4c756ad73dab7c45c4a3fc3b8f84723ab55ae9.flac"
+    "audio/music-kits/beartooth_01/endofmatch.opus": {
+      "sha256": "261b331e21a55a8111da55a718630c26a80df49ec426cbb7b512b7b06ef7484c",
+      "bytes": 912069,
+      "object": "objects/261b331e21a55a8111da55a718630c26a80df49ec426cbb7b512b7b06ef7484c.opus"
     },
     "audio/music-kits/beartooth_01/lostround.mp3": {
       "sha256": "9fb60a97b93cd9b9d89765d0408682ecf671daada2b3096492d0d680636d2fa3",
@@ -3238,10 +3238,10 @@
       "bytes": 170110,
       "object": "objects/b8b3350f57469b6814ef1dc5db80d808c739c904aa1ec2fafc1dfebc2245281f.mp3"
     },
-    "audio/music-kits/beartooth_01/startofmatch.flac": {
-      "sha256": "f94d0f1b0ce7c0f0361ab47d2a4c756ad73dab7c45c4a3fc3b8f84723ab55ae9",
-      "bytes": 4624640,
-      "object": "objects/f94d0f1b0ce7c0f0361ab47d2a4c756ad73dab7c45c4a3fc3b8f84723ab55ae9.flac"
+    "audio/music-kits/beartooth_01/startofmatch.opus": {
+      "sha256": "261b331e21a55a8111da55a718630c26a80df49ec426cbb7b512b7b06ef7484c",
+      "bytes": 912069,
+      "object": "objects/261b331e21a55a8111da55a718630c26a80df49ec426cbb7b512b7b06ef7484c.opus"
     },
     "audio/music-kits/beartooth_01/startround_01.mp3": {
       "sha256": "e22f453d013663249e0fca494646bde70ad6ad53bfefa102f8c900153be7a72e",
@@ -3278,10 +3278,10 @@
       "bytes": 81085,
       "object": "objects/49ba2ec092a121baca4b4584f60e9ae63026e5376750f72728bfe3272e88fbf4.mp3"
     },
-    "audio/music-kits/beartooth_02/endofmatch.flac": {
-      "sha256": "cfb3472a7396d0654367d82f32e12ccf50ac05b753e502c3a8a592dcfd7070b6",
-      "bytes": 4001497,
-      "object": "objects/cfb3472a7396d0654367d82f32e12ccf50ac05b753e502c3a8a592dcfd7070b6.flac"
+    "audio/music-kits/beartooth_02/endofmatch.opus": {
+      "sha256": "93800fc7172ec0cf690008f4320a3139560f644e75290499c03cfcb057ff6373",
+      "bytes": 776368,
+      "object": "objects/93800fc7172ec0cf690008f4320a3139560f644e75290499c03cfcb057ff6373.opus"
     },
     "audio/music-kits/beartooth_02/lostround.mp3": {
       "sha256": "6ff42fa0ee18c55e9b702eaa3e4bd37c2d102bbc62a69953cf7e1d5f56b71b24",
@@ -3313,10 +3313,10 @@
       "bytes": 185156,
       "object": "objects/f68992bdc6b6beb64dc0cb1514518eb544946b2126247f6f719dfb0f43b842bd.mp3"
     },
-    "audio/music-kits/beartooth_02/startofmatch.flac": {
-      "sha256": "cfb3472a7396d0654367d82f32e12ccf50ac05b753e502c3a8a592dcfd7070b6",
-      "bytes": 4001497,
-      "object": "objects/cfb3472a7396d0654367d82f32e12ccf50ac05b753e502c3a8a592dcfd7070b6.flac"
+    "audio/music-kits/beartooth_02/startofmatch.opus": {
+      "sha256": "93800fc7172ec0cf690008f4320a3139560f644e75290499c03cfcb057ff6373",
+      "bytes": 776368,
+      "object": "objects/93800fc7172ec0cf690008f4320a3139560f644e75290499c03cfcb057ff6373.opus"
     },
     "audio/music-kits/beartooth_02/startround_01.mp3": {
       "sha256": "b49155e45f90b72a73ad3f727125f6254a3d2e783aa77ed81dc232fa84c0ac49",
@@ -3428,10 +3428,10 @@
       "bytes": 70218,
       "object": "objects/0b1dd1cf7a56d0d4e2cf473f2b3d62c1c93291e358bb0f0414749c5576ddbc09.mp3"
     },
-    "audio/music-kits/blitzkids_01/endofmatch.flac": {
-      "sha256": "cfc4f10a5d943a0c9d4c5a85e5b4683ed52f4ed3418b86ed74f8567b031328e3",
-      "bytes": 5200261,
-      "object": "objects/cfc4f10a5d943a0c9d4c5a85e5b4683ed52f4ed3418b86ed74f8567b031328e3.flac"
+    "audio/music-kits/blitzkids_01/endofmatch.opus": {
+      "sha256": "3cda319361b04c755c00762a579b336c411a0292bf4778af153e4035d86c9f95",
+      "bytes": 1071066,
+      "object": "objects/3cda319361b04c755c00762a579b336c411a0292bf4778af153e4035d86c9f95.opus"
     },
     "audio/music-kits/blitzkids_01/lostround.mp3": {
       "sha256": "e4cdf8557bb5f338b28a97a4e440fe6589f514a123d373899b788d8257a6ea33",
@@ -3463,10 +3463,10 @@
       "bytes": 187664,
       "object": "objects/6194c72fdb542d6bed62957d8a06d8205074469e1cf31c9525f51c05dc314213.mp3"
     },
-    "audio/music-kits/blitzkids_01/startofmatch.flac": {
-      "sha256": "79c2ea8de9503319d0c60b61c0aadc80e5a9a13ed61679ce08695e1c51316c03",
-      "bytes": 699397,
-      "object": "objects/79c2ea8de9503319d0c60b61c0aadc80e5a9a13ed61679ce08695e1c51316c03.flac"
+    "audio/music-kits/blitzkids_01/startofmatch.opus": {
+      "sha256": "d61183ef2b2ee33549532044a2c681d8e1dff25269eab92b46a773c4c633ff12",
+      "bytes": 161400,
+      "object": "objects/d61183ef2b2ee33549532044a2c681d8e1dff25269eab92b46a773c4c633ff12.opus"
     },
     "audio/music-kits/blitzkids_01/startround_01.mp3": {
       "sha256": "39ba67f4ab7cb3e7d0db2a38c4e16221d3b7822d38313b2844a6bfdca5d42562",
@@ -3574,15 +3574,15 @@
       "object": "objects/a5185352e960128ff96042d68e9797c0152c218d2dbe444c12ff09af02187504.mp3"
     },
     "audio/music-kits/catalog.json": {
-      "sha256": "c11e64a4906af8288d95f7845e38adaab4fda4eec3e6e4e64151033d47e21c60",
+      "sha256": "5800bfef69d4c3230dfd685deef37818678c12ffdabcdc88f2b5ceaa5501c99e",
       "bytes": 514487,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "5a10f57efd8cb80398d7d1da6867f907d706e5093278e7400b6e0c10248fbfea",
-        "bytes": 32032
+        "sha256": "71cd997fe55bb7386b1b37920ff898b7f3a871985b43e8c0b3a91ecb06a99167",
+        "bytes": 31896
       },
-      "object": "objects/5a10f57efd8cb80398d7d1da6867f907d706e5093278e7400b6e0c10248fbfea.json.br"
+      "object": "objects/71cd997fe55bb7386b1b37920ff898b7f3a871985b43e8c0b3a91ecb06a99167.json.br"
     },
     "audio/music-kits/chipzel_01/bombplanted.mp3": {
       "sha256": "d6429dc0f258c0a01cef42552ad7f1dec1faa032c6f0eb317c345ad1752999ac",
@@ -3604,10 +3604,10 @@
       "bytes": 91116,
       "object": "objects/cf197caf1130a32c02b4c770f741bea688297478634fa51f5799936549355f12.mp3"
     },
-    "audio/music-kits/chipzel_01/endofmatch.flac": {
-      "sha256": "448dc0665fe3dee408f53dcf718edb752437a746ca71ae3ddbafc892f7748a08",
-      "bytes": 4455662,
-      "object": "objects/448dc0665fe3dee408f53dcf718edb752437a746ca71ae3ddbafc892f7748a08.flac"
+    "audio/music-kits/chipzel_01/endofmatch.opus": {
+      "sha256": "0a6e181d6bbec24b200fb12cd0c05472b2aa275b028d9c7bbcd85de6d6804da2",
+      "bytes": 734753,
+      "object": "objects/0a6e181d6bbec24b200fb12cd0c05472b2aa275b028d9c7bbcd85de6d6804da2.opus"
     },
     "audio/music-kits/chipzel_01/lostround.mp3": {
       "sha256": "73b4ec71d5073d692e8200c815673b8df40a11c5a90973206e371e9935597e15",
@@ -3634,10 +3634,10 @@
       "bytes": 381179,
       "object": "objects/89f954c30b24cdf57da18c902a2fec50d61f2142d3b29a543ee2169128ccef0e.mp3"
     },
-    "audio/music-kits/chipzel_01/startofmatch.flac": {
-      "sha256": "448dc0665fe3dee408f53dcf718edb752437a746ca71ae3ddbafc892f7748a08",
-      "bytes": 4455662,
-      "object": "objects/448dc0665fe3dee408f53dcf718edb752437a746ca71ae3ddbafc892f7748a08.flac"
+    "audio/music-kits/chipzel_01/startofmatch.opus": {
+      "sha256": "0a6e181d6bbec24b200fb12cd0c05472b2aa275b028d9c7bbcd85de6d6804da2",
+      "bytes": 734753,
+      "object": "objects/0a6e181d6bbec24b200fb12cd0c05472b2aa275b028d9c7bbcd85de6d6804da2.opus"
     },
     "audio/music-kits/chipzel_01/startround_01.mp3": {
       "sha256": "9afffd3f13a07eab3a5c13611e110db75a91e36a5e530ad2c3e7ed92574018b5",
@@ -3669,10 +3669,10 @@
       "bytes": 96549,
       "object": "objects/4097e4427438f57f139e4ef50871b8a3bb26aa02827b7a01aa6cdcd77f6443c4.mp3"
     },
-    "audio/music-kits/damjanmravunac_01/endofmatch.flac": {
-      "sha256": "ce31a59202b5f02300de5ff6f9ad5073b46f9dd5f561bc9f93c7d8a1ed07f10d",
-      "bytes": 6455769,
-      "object": "objects/ce31a59202b5f02300de5ff6f9ad5073b46f9dd5f561bc9f93c7d8a1ed07f10d.flac"
+    "audio/music-kits/damjanmravunac_01/endofmatch.opus": {
+      "sha256": "2a47eae6f509fc96885ab37e5e764b2a0aebb4185c0ac1851a49b55ed4c0769a",
+      "bytes": 1249528,
+      "object": "objects/2a47eae6f509fc96885ab37e5e764b2a0aebb4185c0ac1851a49b55ed4c0769a.opus"
     },
     "audio/music-kits/damjanmravunac_01/lostround.mp3": {
       "sha256": "a9f44927e15dae4bf7474bbe3d988daab377437dab53051ba6cf78344c2f9401",
@@ -3704,10 +3704,10 @@
       "bytes": 271674,
       "object": "objects/f4112309daba3490415436d8a919fe28d52bd448b89a3d1022186839ad257bc9.mp3"
     },
-    "audio/music-kits/damjanmravunac_01/startofmatch.flac": {
-      "sha256": "1545345501ef5a8bda6a2a83fc748994b3768d0b6753a88c2640ae0cebc6b5c8",
-      "bytes": 707854,
-      "object": "objects/1545345501ef5a8bda6a2a83fc748994b3768d0b6753a88c2640ae0cebc6b5c8.flac"
+    "audio/music-kits/damjanmravunac_01/startofmatch.opus": {
+      "sha256": "110bc58d2f622e7a764e7fca651c07b8b15df699604ea273ed065d2951833938",
+      "bytes": 165396,
+      "object": "objects/110bc58d2f622e7a764e7fca651c07b8b15df699604ea273ed065d2951833938.opus"
     },
     "audio/music-kits/damjanmravunac_01/startround_01.mp3": {
       "sha256": "a829e10399aec0cb4fec9eef9598fb5239e836667efae78dce5106e4c7fba0d5",
@@ -3744,10 +3744,10 @@
       "bytes": 96967,
       "object": "objects/32f787dd8376785cd0de552ba77cec6a0b71edbbe1790eb3ec66b696d040ddb6.mp3"
     },
-    "audio/music-kits/danielsadowski_01/endofmatch.flac": {
-      "sha256": "92db87f7a33e10f1944a4f8e8a5b273060431a12f544b6e94f3a8b5399be8a50",
-      "bytes": 4574828,
-      "object": "objects/92db87f7a33e10f1944a4f8e8a5b273060431a12f544b6e94f3a8b5399be8a50.flac"
+    "audio/music-kits/danielsadowski_01/endofmatch.opus": {
+      "sha256": "bd587154e8445f031c1f41ec16abcbba32727967e8d7081588201c53ad2b3948",
+      "bytes": 813153,
+      "object": "objects/bd587154e8445f031c1f41ec16abcbba32727967e8d7081588201c53ad2b3948.opus"
     },
     "audio/music-kits/danielsadowski_01/lostround.mp3": {
       "sha256": "9ccd1e51ae9bfb0364d31969da0c425c2287904b1e491cdec421ba0b671ae421",
@@ -3774,10 +3774,10 @@
       "bytes": 259553,
       "object": "objects/fdbcd97d10c084662046c55b494fc67c6c986bafcd475841e56cb2747c06adb8.mp3"
     },
-    "audio/music-kits/danielsadowski_01/startofmatch.flac": {
-      "sha256": "50194096849beb179e55a498c559dfe96fdbfb99c6f28bc7b97eaf4177f985dd",
-      "bytes": 451702,
-      "object": "objects/50194096849beb179e55a498c559dfe96fdbfb99c6f28bc7b97eaf4177f985dd.flac"
+    "audio/music-kits/danielsadowski_01/startofmatch.opus": {
+      "sha256": "4a3e3321b303f27a08d80c92e08dc93b8577e99e1d5552476dbe5b0c60855914",
+      "bytes": 138809,
+      "object": "objects/4a3e3321b303f27a08d80c92e08dc93b8577e99e1d5552476dbe5b0c60855914.opus"
     },
     "audio/music-kits/danielsadowski_01/startround_01.mp3": {
       "sha256": "4fe7656ad58c2b424e83b7f58ee0919f542e9b22fde2b30bbb080907100ddad3",
@@ -3809,10 +3809,10 @@
       "bytes": 161333,
       "object": "objects/24982624afcadbfa0211d7f40b12ccf1e8d5eda01b21612392d91998800e640c.mp3"
     },
-    "audio/music-kits/danielsadowski_02/endofmatch.flac": {
-      "sha256": "8bf153d9ceaa3c791c09f3776eaf8b748c944d76056546e17840fc65bb01d4af",
-      "bytes": 6722736,
-      "object": "objects/8bf153d9ceaa3c791c09f3776eaf8b748c944d76056546e17840fc65bb01d4af.flac"
+    "audio/music-kits/danielsadowski_02/endofmatch.opus": {
+      "sha256": "567e3f81adf6275e2e5e229dca43f77295edb3c2b3b6efc8a6d0dc6457c2f2df",
+      "bytes": 1481394,
+      "object": "objects/567e3f81adf6275e2e5e229dca43f77295edb3c2b3b6efc8a6d0dc6457c2f2df.opus"
     },
     "audio/music-kits/danielsadowski_02/lostround.mp3": {
       "sha256": "3768cd9bec2570cbc8c117b0fdb1cf9bee9495082b7e4dfac5b2e39682717c99",
@@ -3839,10 +3839,10 @@
       "bytes": 233640,
       "object": "objects/06b5c83ecc2f758a02e81a76b600a14b6bec5cfef7c093962079b83ddf2379f1.mp3"
     },
-    "audio/music-kits/danielsadowski_02/startofmatch.flac": {
-      "sha256": "2f1a13887fe657dd9a0fb6e688ddc666e4b735880334854646a313858f557a36",
-      "bytes": 804236,
-      "object": "objects/2f1a13887fe657dd9a0fb6e688ddc666e4b735880334854646a313858f557a36.flac"
+    "audio/music-kits/danielsadowski_02/startofmatch.opus": {
+      "sha256": "56fcd36a8f67e4b2e0efb554e18cff5ed3aa3cc36778e25c7a2ea8b7e7ae75eb",
+      "bytes": 185361,
+      "object": "objects/56fcd36a8f67e4b2e0efb554e18cff5ed3aa3cc36778e25c7a2ea8b7e7ae75eb.opus"
     },
     "audio/music-kits/danielsadowski_02/startround_01.mp3": {
       "sha256": "dfd5a93c8006c241ccae72344fa13c5f9f8db0cd999242543ae0a439ed798b5f",
@@ -3874,10 +3874,10 @@
       "bytes": 101147,
       "object": "objects/f3b1fe4ea87b2a1b5af0cc07b29ee028976816493d8eb5675913c66e162ed4b4.mp3"
     },
-    "audio/music-kits/danielsadowski_03/endofmatch.flac": {
-      "sha256": "a222242ef44183d57ca7db9a57f78e22c3971ad5db02a1a6bd5383a0c08dd1f2",
-      "bytes": 5577513,
-      "object": "objects/a222242ef44183d57ca7db9a57f78e22c3971ad5db02a1a6bd5383a0c08dd1f2.flac"
+    "audio/music-kits/danielsadowski_03/endofmatch.opus": {
+      "sha256": "b195b4b35816ba1931c212faf9f418ae522aa898ca8f7caa1e542e216d28a2b7",
+      "bytes": 1092616,
+      "object": "objects/b195b4b35816ba1931c212faf9f418ae522aa898ca8f7caa1e542e216d28a2b7.opus"
     },
     "audio/music-kits/danielsadowski_03/lostround.mp3": {
       "sha256": "bda4db7565e431c5c9fcd38581f3d8c55b731bf17e34ee0c9e28e844031f6e9d",
@@ -3904,10 +3904,10 @@
       "bytes": 254120,
       "object": "objects/78a816931ded7556d9ee2300be06f318b7ae7e4f78885ad2f6e1429d475e0a71.mp3"
     },
-    "audio/music-kits/danielsadowski_03/startofmatch.flac": {
-      "sha256": "639aec896788808533b66e0b0fd3c43369366d2c24d9ff3fcccaf1304d14885d",
-      "bytes": 773210,
-      "object": "objects/639aec896788808533b66e0b0fd3c43369366d2c24d9ff3fcccaf1304d14885d.flac"
+    "audio/music-kits/danielsadowski_03/startofmatch.opus": {
+      "sha256": "16d5a915aad94ead206d69238189a0663c93720171b7f2df2c20245871d6da63",
+      "bytes": 228620,
+      "object": "objects/16d5a915aad94ead206d69238189a0663c93720171b7f2df2c20245871d6da63.opus"
     },
     "audio/music-kits/danielsadowski_03/startround_01.mp3": {
       "sha256": "4641eeb94ef9f760848e2c7977a176ad49f33ba63ba6170c620e98fd7380fcb3",
@@ -3939,10 +3939,10 @@
       "bytes": 79831,
       "object": "objects/e96333acd126aeb8c045e1d4a0f07b24bc671fd3c43b35969fa1c052383466af.mp3"
     },
-    "audio/music-kits/danielsadowski_04/endofmatch.flac": {
-      "sha256": "34b847133ee23f2e9a2e8d2d92aede86954c5183001d679d65a0840c6632d5bf",
-      "bytes": 5912364,
-      "object": "objects/34b847133ee23f2e9a2e8d2d92aede86954c5183001d679d65a0840c6632d5bf.flac"
+    "audio/music-kits/danielsadowski_04/endofmatch.opus": {
+      "sha256": "8cf0040c0e9922d223bb47a38d6a68f4ad1f846c0acebbaef22a8ec432ca0715",
+      "bytes": 1261775,
+      "object": "objects/8cf0040c0e9922d223bb47a38d6a68f4ad1f846c0acebbaef22a8ec432ca0715.opus"
     },
     "audio/music-kits/danielsadowski_04/lostround.mp3": {
       "sha256": "4af9e86d98cedbe85a1eedd4f2333af685002d66dfab87e9de89839e793a715c",
@@ -3969,10 +3969,10 @@
       "bytes": 175543,
       "object": "objects/33b1f382ef923605863480a6eb2e0414d7f3b019be583eb8ee7b7a141d17276d.mp3"
     },
-    "audio/music-kits/danielsadowski_04/startofmatch.flac": {
-      "sha256": "34b847133ee23f2e9a2e8d2d92aede86954c5183001d679d65a0840c6632d5bf",
-      "bytes": 5912364,
-      "object": "objects/34b847133ee23f2e9a2e8d2d92aede86954c5183001d679d65a0840c6632d5bf.flac"
+    "audio/music-kits/danielsadowski_04/startofmatch.opus": {
+      "sha256": "8cf0040c0e9922d223bb47a38d6a68f4ad1f846c0acebbaef22a8ec432ca0715",
+      "bytes": 1261775,
+      "object": "objects/8cf0040c0e9922d223bb47a38d6a68f4ad1f846c0acebbaef22a8ec432ca0715.opus"
     },
     "audio/music-kits/danielsadowski_04/startround_01.mp3": {
       "sha256": "2455d4dbe61b82480dfca78f26f56c072dc5c366400b4f9d64713aa7e18e2124",
@@ -4069,10 +4069,10 @@
       "bytes": 121209,
       "object": "objects/ca20dfac6b6226d70ba70fc2f9ac87251c945b3dab54a06757ecd914ecd63ae7.mp3"
     },
-    "audio/music-kits/darude_01/endofmatch.flac": {
-      "sha256": "53438dc577d65774164f65881e47c1923bedfc8b1126edcd0f995c2f16afa617",
-      "bytes": 5721979,
-      "object": "objects/53438dc577d65774164f65881e47c1923bedfc8b1126edcd0f995c2f16afa617.flac"
+    "audio/music-kits/darude_01/endofmatch.opus": {
+      "sha256": "3e8f0e2ec0571c446d07d8008ee2cb968d09fba9f68dbb16535ad67232d221b0",
+      "bytes": 891664,
+      "object": "objects/3e8f0e2ec0571c446d07d8008ee2cb968d09fba9f68dbb16535ad67232d221b0.opus"
     },
     "audio/music-kits/darude_01/lostround.mp3": {
       "sha256": "22432839e9b6117816eefdb70d0df2b1c3e2baa5b271ba0e596fa2ff7e624ad4",
@@ -4109,10 +4109,10 @@
       "bytes": 191844,
       "object": "objects/d4dc8c01a35146509306d582bd50f67b43342367449ea20e201ba044b7d06ab7.mp3"
     },
-    "audio/music-kits/darude_01/startofmatch.flac": {
-      "sha256": "87e7ddeb31a238ae3f2af1a8707a14b2b1982c828d727190394aaa4bb7788c1b",
-      "bytes": 928111,
-      "object": "objects/87e7ddeb31a238ae3f2af1a8707a14b2b1982c828d727190394aaa4bb7788c1b.flac"
+    "audio/music-kits/darude_01/startofmatch.opus": {
+      "sha256": "0ffce1328c9cb700c94c999687522d7b2ea902edc7dfc5d0220ee038e86e468c",
+      "bytes": 178428,
+      "object": "objects/0ffce1328c9cb700c94c999687522d7b2ea902edc7dfc5d0220ee038e86e468c.opus"
     },
     "audio/music-kits/darude_01/startround_01.mp3": {
       "sha256": "baf7542dc4ec6c015818e2594132e75b1500e6caee7d63ba7731598c004f7635",
@@ -4154,10 +4154,10 @@
       "bytes": 145996,
       "object": "objects/f504fecdabded4a04434b1dfa65279f3157765ae0bdbc0c14896e56439d9c8dd.mp3"
     },
-    "audio/music-kits/denzelcurry_01/endofmatch.flac": {
-      "sha256": "153d63c4cf0606b9bd333757027cd01195f0026ded1a934ce90c6f82640d63e2",
-      "bytes": 3969566,
-      "object": "objects/153d63c4cf0606b9bd333757027cd01195f0026ded1a934ce90c6f82640d63e2.flac"
+    "audio/music-kits/denzelcurry_01/endofmatch.opus": {
+      "sha256": "aa61aa5699145326205be1ebfa574c3fe485a4cd5df22bb5746ca82134fc74c5",
+      "bytes": 945475,
+      "object": "objects/aa61aa5699145326205be1ebfa574c3fe485a4cd5df22bb5746ca82134fc74c5.opus"
     },
     "audio/music-kits/denzelcurry_01/lostround.mp3": {
       "sha256": "ada04d8e91d6945e0996922e963bbc05e19bc3f207c4e32e33d6caea7c24d985",
@@ -4194,10 +4194,10 @@
       "bytes": 290192,
       "object": "objects/f52a6f045d81353b52993e7ed0ade80074beef0fed63673b9b4694df4b99c60e.mp3"
     },
-    "audio/music-kits/denzelcurry_01/startofmatch.flac": {
-      "sha256": "153d63c4cf0606b9bd333757027cd01195f0026ded1a934ce90c6f82640d63e2",
-      "bytes": 3969566,
-      "object": "objects/153d63c4cf0606b9bd333757027cd01195f0026ded1a934ce90c6f82640d63e2.flac"
+    "audio/music-kits/denzelcurry_01/startofmatch.opus": {
+      "sha256": "aa61aa5699145326205be1ebfa574c3fe485a4cd5df22bb5746ca82134fc74c5",
+      "bytes": 945475,
+      "object": "objects/aa61aa5699145326205be1ebfa574c3fe485a4cd5df22bb5746ca82134fc74c5.opus"
     },
     "audio/music-kits/denzelcurry_01/startround_01.mp3": {
       "sha256": "e33d54687b3e5a051c533eb4c078a880ac862398b626f75e22a44ad6fc3cd315",
@@ -4239,10 +4239,10 @@
       "bytes": 74397,
       "object": "objects/bb78d05d240770ae1ec242ee7f6283c04933239ce0907d4393dd9daed8d8aca1.mp3"
     },
-    "audio/music-kits/dren_01/endofmatch.flac": {
-      "sha256": "5fcf9c232c3e690e261018741df474ba00040ff1b67be5d3e31e359f49249253",
-      "bytes": 4839312,
-      "object": "objects/5fcf9c232c3e690e261018741df474ba00040ff1b67be5d3e31e359f49249253.flac"
+    "audio/music-kits/dren_01/endofmatch.opus": {
+      "sha256": "0efd7c2afee53b32611937e8a86282662948a42ccf5bd23516be95ab371c0b96",
+      "bytes": 1049486,
+      "object": "objects/0efd7c2afee53b32611937e8a86282662948a42ccf5bd23516be95ab371c0b96.opus"
     },
     "audio/music-kits/dren_01/lostround.mp3": {
       "sha256": "e197304f52dbb19f7b7197bcbcf3956a09c97b7f92c349d843e8a67ae6e941df",
@@ -4279,10 +4279,10 @@
       "bytes": 356520,
       "object": "objects/d18b8199ad1b8ed5813d6e9c3f019aee07fceae57adacb669b9d0b9768f62efc.mp3"
     },
-    "audio/music-kits/dren_01/startofmatch.flac": {
-      "sha256": "5fcf9c232c3e690e261018741df474ba00040ff1b67be5d3e31e359f49249253",
-      "bytes": 4839312,
-      "object": "objects/5fcf9c232c3e690e261018741df474ba00040ff1b67be5d3e31e359f49249253.flac"
+    "audio/music-kits/dren_01/startofmatch.opus": {
+      "sha256": "0efd7c2afee53b32611937e8a86282662948a42ccf5bd23516be95ab371c0b96",
+      "bytes": 1049486,
+      "object": "objects/0efd7c2afee53b32611937e8a86282662948a42ccf5bd23516be95ab371c0b96.opus"
     },
     "audio/music-kits/dren_01/startround_01.mp3": {
       "sha256": "ecb1b1188cbe286e5f6898a342493c5881fd8d6c31473aa2de3ac1195445ef34",
@@ -4324,10 +4324,10 @@
       "bytes": 102818,
       "object": "objects/f7e1cf52e21a73ba31d8929e882e349125bdae10249114d40fa462d67b77bd85.mp3"
     },
-    "audio/music-kits/dren_02/endofmatch.flac": {
-      "sha256": "22e473a657aa3a21c3e59eac766a405b2c6b6828de4194f01cc92c75e4fc56a8",
-      "bytes": 5325194,
-      "object": "objects/22e473a657aa3a21c3e59eac766a405b2c6b6828de4194f01cc92c75e4fc56a8.flac"
+    "audio/music-kits/dren_02/endofmatch.opus": {
+      "sha256": "37f6faed05579ce2bff4b8802f36e8c6781b236ed9d87d8eaaccca9e65aab616",
+      "bytes": 1153088,
+      "object": "objects/37f6faed05579ce2bff4b8802f36e8c6781b236ed9d87d8eaaccca9e65aab616.opus"
     },
     "audio/music-kits/dren_02/lostround.mp3": {
       "sha256": "916e9782a0cb82b3bf43504e8ca4bf2da4a70ffefa8f96a3140967aeef2c653c",
@@ -4369,10 +4369,10 @@
       "bytes": 284213,
       "object": "objects/4568e3b961e9b8f14289cae05acc4a82e8cef55da660cc2a755d0d3ff0600bb3.mp3"
     },
-    "audio/music-kits/dren_02/startofmatch.flac": {
-      "sha256": "22e473a657aa3a21c3e59eac766a405b2c6b6828de4194f01cc92c75e4fc56a8",
-      "bytes": 5325194,
-      "object": "objects/22e473a657aa3a21c3e59eac766a405b2c6b6828de4194f01cc92c75e4fc56a8.flac"
+    "audio/music-kits/dren_02/startofmatch.opus": {
+      "sha256": "37f6faed05579ce2bff4b8802f36e8c6781b236ed9d87d8eaaccca9e65aab616",
+      "bytes": 1153088,
+      "object": "objects/37f6faed05579ce2bff4b8802f36e8c6781b236ed9d87d8eaaccca9e65aab616.opus"
     },
     "audio/music-kits/dren_02/startround_01.mp3": {
       "sha256": "4b78292681f1bc56083de1cf2d5d15c3723436b9e18d3eb7de486596ac4bcfae",
@@ -4574,10 +4574,10 @@
       "bytes": 63948,
       "object": "objects/687a1b1daca1326ee2a92edd6afe28a6a891d19a52957ac86028460bdb8c2795.mp3"
     },
-    "audio/music-kits/feedme_01/endofmatch.flac": {
-      "sha256": "a6a4e144fbbefa9423354f0ba1e30e8a766f4c13632d3e56c83f493960dae42e",
-      "bytes": 5961274,
-      "object": "objects/a6a4e144fbbefa9423354f0ba1e30e8a766f4c13632d3e56c83f493960dae42e.flac"
+    "audio/music-kits/feedme_01/endofmatch.opus": {
+      "sha256": "de0a37b08e51d786839adcfcfc9fd0debc47d45554ed7834f0c2cfcc83bb0ab8",
+      "bytes": 1053888,
+      "object": "objects/de0a37b08e51d786839adcfcfc9fd0debc47d45554ed7834f0c2cfcc83bb0ab8.opus"
     },
     "audio/music-kits/feedme_01/lostround.mp3": {
       "sha256": "ea79a551dad7987b8a5cd85b3b539c1f30edd6e9cc7a05ba9110de6fc76322f2",
@@ -4609,10 +4609,10 @@
       "bytes": 465607,
       "object": "objects/857807d28f6e153ab30a3cfd6ad2f4a771be66cbb465f1b20d0230eaf50ddb7c.mp3"
     },
-    "audio/music-kits/feedme_01/startofmatch.flac": {
-      "sha256": "221f8a680dafe013b5776397a57269636a7642b66f62310c7718259bb9306d4e",
-      "bytes": 921124,
-      "object": "objects/221f8a680dafe013b5776397a57269636a7642b66f62310c7718259bb9306d4e.flac"
+    "audio/music-kits/feedme_01/startofmatch.opus": {
+      "sha256": "9c02f11ea6a697f2c963c29e62dc3b4d25f1c6caf8bb42ca7130872ec5f2182e",
+      "bytes": 162782,
+      "object": "objects/9c02f11ea6a697f2c963c29e62dc3b4d25f1c6caf8bb42ca7130872ec5f2182e.opus"
     },
     "audio/music-kits/feedme_01/startround_01.mp3": {
       "sha256": "0b952eeee2fe34e6af2fd5be68952f21924f79a7e4d52e0da8e4c263007a4452",
@@ -4644,10 +4644,10 @@
       "bytes": 84428,
       "object": "objects/bab23ffc517f4ba4d6011d27130dc9748c68a789f197b4ef7741061f6a65db41.mp3"
     },
-    "audio/music-kits/freakydna_01/endofmatch.flac": {
-      "sha256": "79d2ef08ff55d38839ac4e904e2a0688df08a6735476545201e54e464d5bb216",
-      "bytes": 5885559,
-      "object": "objects/79d2ef08ff55d38839ac4e904e2a0688df08a6735476545201e54e464d5bb216.flac"
+    "audio/music-kits/freakydna_01/endofmatch.opus": {
+      "sha256": "3880052eecc00687531a5eb6edd736464da3163f7ff3fd8df849eb0267d87a22",
+      "bytes": 1025027,
+      "object": "objects/3880052eecc00687531a5eb6edd736464da3163f7ff3fd8df849eb0267d87a22.opus"
     },
     "audio/music-kits/freakydna_01/lostround.mp3": {
       "sha256": "70944e3d265d054ff0d86d75275cc2cc85279e682dcf7300a30af59b2daa6a37",
@@ -4684,10 +4684,10 @@
       "bytes": 231550,
       "object": "objects/20d33c01a52cc6b333f0313f0d2634fe58099b4eae259cb3694db0947960f4eb.mp3"
     },
-    "audio/music-kits/freakydna_01/startofmatch.flac": {
-      "sha256": "79d2ef08ff55d38839ac4e904e2a0688df08a6735476545201e54e464d5bb216",
-      "bytes": 5885559,
-      "object": "objects/79d2ef08ff55d38839ac4e904e2a0688df08a6735476545201e54e464d5bb216.flac"
+    "audio/music-kits/freakydna_01/startofmatch.opus": {
+      "sha256": "3880052eecc00687531a5eb6edd736464da3163f7ff3fd8df849eb0267d87a22",
+      "bytes": 1025027,
+      "object": "objects/3880052eecc00687531a5eb6edd736464da3163f7ff3fd8df849eb0267d87a22.opus"
     },
     "audio/music-kits/freakydna_01/startround_01.mp3": {
       "sha256": "dd1a4a4a3c8644ebc985600a4ded0af6d91269f203176f8de75d12125d21e860",
@@ -4814,10 +4814,10 @@
       "bytes": 81085,
       "object": "objects/e4ff7aee3778d9525ed9b78d751c634c374a2ac09a8859acdbed2862fc78d4df.mp3"
     },
-    "audio/music-kits/hades_01/endofmatch.flac": {
-      "sha256": "835656dadd2bcbfef7582a7a0d9259cf705f0166f579bba436a2396951dc5888",
-      "bytes": 6953737,
-      "object": "objects/835656dadd2bcbfef7582a7a0d9259cf705f0166f579bba436a2396951dc5888.flac"
+    "audio/music-kits/hades_01/endofmatch.opus": {
+      "sha256": "a27525a61c042beca458569e271ff440cad1c0720f3a961279a6381fc173eb53",
+      "bytes": 1253671,
+      "object": "objects/a27525a61c042beca458569e271ff440cad1c0720f3a961279a6381fc173eb53.opus"
     },
     "audio/music-kits/hades_01/lostround.mp3": {
       "sha256": "5f1efc77e23d795c66b91845e627d83317a74a4dff6633de6c5aa56040ee92e1",
@@ -4854,10 +4854,10 @@
       "bytes": 224863,
       "object": "objects/6ff471893e3a342e262946f1ed7604f922deb1cfe5d2de30a92bf8408ada003a.mp3"
     },
-    "audio/music-kits/hades_01/startofmatch.flac": {
-      "sha256": "69f93b274b93e50d0944520d240fb8196ce581b932968c960b64b15cb4dfed01",
-      "bytes": 769960,
-      "object": "objects/69f93b274b93e50d0944520d240fb8196ce581b932968c960b64b15cb4dfed01.flac"
+    "audio/music-kits/hades_01/startofmatch.opus": {
+      "sha256": "f63f3a1bb5a558834761df56ce538c657d2a94aa5eabd7f4547ec160d4f6ab62",
+      "bytes": 151361,
+      "object": "objects/f63f3a1bb5a558834761df56ce538c657d2a94aa5eabd7f4547ec160d4f6ab62.opus"
     },
     "audio/music-kits/hades_01/startround_01.mp3": {
       "sha256": "1ed05217e6c6a476cc542b9c741e044987ac8d866055bb67125cf13107dd115b",
@@ -4899,10 +4899,10 @@
       "bytes": 86100,
       "object": "objects/7148b124b99802f620c7e05e1fc4eacb5c44883cd57fcf09bfe882f8b959d1c0.mp3"
     },
-    "audio/music-kits/halo_01/endofmatch.flac": {
-      "sha256": "6de43074b61ba46a36791f76f9c2ed7af29b2dc58b300f1ed405be7552294aad",
-      "bytes": 6205281,
-      "object": "objects/6de43074b61ba46a36791f76f9c2ed7af29b2dc58b300f1ed405be7552294aad.flac"
+    "audio/music-kits/halo_01/endofmatch.opus": {
+      "sha256": "bcd62ec184f150363486096114397181ccea434a4e0fb2f4229227e08a18af0a",
+      "bytes": 1308682,
+      "object": "objects/bcd62ec184f150363486096114397181ccea434a4e0fb2f4229227e08a18af0a.opus"
     },
     "audio/music-kits/halo_01/lostround.mp3": {
       "sha256": "47067115de01aae5800ce34d15f17214312fba6b2b65cf5647cc36016b31d37e",
@@ -4934,10 +4934,10 @@
       "bytes": 384941,
       "object": "objects/96c67a9830ee9dae4922e3db7be540d9b916e8d356f3a891b2d877564cbc51c6.mp3"
     },
-    "audio/music-kits/halo_01/startofmatch.flac": {
-      "sha256": "dbd47b9b0e44409f88c6f3400aebf95e0c3ec1013aae8e462ed4eee4e67e659f",
-      "bytes": 677993,
-      "object": "objects/dbd47b9b0e44409f88c6f3400aebf95e0c3ec1013aae8e462ed4eee4e67e659f.flac"
+    "audio/music-kits/halo_01/startofmatch.opus": {
+      "sha256": "b858f4f52e2049e2f392189d333aac8ad428cb819390ce5bf6db15b8488c8fc8",
+      "bytes": 179411,
+      "object": "objects/b858f4f52e2049e2f392189d333aac8ad428cb819390ce5bf6db15b8488c8fc8.opus"
     },
     "audio/music-kits/halo_01/startround_01.mp3": {
       "sha256": "5c4e9bf96caab9aaca6b2c7310b870287a337e84f6a2d3f06f3404242c85a37d",
@@ -5049,15 +5049,15 @@
       "bytes": 105744,
       "object": "objects/4e19c919d512bafc678e77f800102c9949e9f0a4a9ef78e2cd3255e002f9d728.mp3"
     },
-    "audio/music-kits/hlalyx_01/endofmatch.flac": {
-      "sha256": "eb8a2445a166964487034b00454207eb1715da35c41b9330bb1a0f2fe46ba225",
-      "bytes": 4668662,
-      "object": "objects/eb8a2445a166964487034b00454207eb1715da35c41b9330bb1a0f2fe46ba225.flac"
+    "audio/music-kits/hlalyx_01/endofmatch.opus": {
+      "sha256": "ea7f762d151813a70ce980aba136f7eacc35a19a484499bcc61cb4c7a0c3e7e2",
+      "bytes": 885299,
+      "object": "objects/ea7f762d151813a70ce980aba136f7eacc35a19a484499bcc61cb4c7a0c3e7e2.opus"
     },
-    "audio/music-kits/hlalyx_01/loading.flac": {
-      "sha256": "bee38c56c6068a0caac166ba008534a604ba108ba945f123ec4ca17bc35d1c8c",
-      "bytes": 7884138,
-      "object": "objects/bee38c56c6068a0caac166ba008534a604ba108ba945f123ec4ca17bc35d1c8c.flac"
+    "audio/music-kits/hlalyx_01/loading.opus": {
+      "sha256": "5379d31d08d601190964e4addce78623412d0c8001bc8439a79dda8f4524deb6",
+      "bytes": 1869276,
+      "object": "objects/5379d31d08d601190964e4addce78623412d0c8001bc8439a79dda8f4524deb6.opus"
     },
     "audio/music-kits/hlalyx_01/lostround.mp3": {
       "sha256": "bd1b54e082153c7c8a4e3e471721762a2d82c2d997693e2b1103dcd55480da7f",
@@ -5094,10 +5094,10 @@
       "bytes": 399569,
       "object": "objects/63798669710ed4b9ee90dbbf52d7a358d295b557dec4b9d23fa4de4189e9e57a.mp3"
     },
-    "audio/music-kits/hlalyx_01/startofmatch.flac": {
-      "sha256": "f039009de2906a1267c029e58dbb34b27d0d5fb6ac7adca13c205df61513060f",
-      "bytes": 436149,
-      "object": "objects/f039009de2906a1267c029e58dbb34b27d0d5fb6ac7adca13c205df61513060f.flac"
+    "audio/music-kits/hlalyx_01/startofmatch.opus": {
+      "sha256": "c9da8f5a2b4720397c489f59cdc8caf7057e69e89fa2f730b08b006671e089a1",
+      "bytes": 253467,
+      "object": "objects/c9da8f5a2b4720397c489f59cdc8caf7057e69e89fa2f730b08b006671e089a1.opus"
     },
     "audio/music-kits/hlalyx_01/startround_01.mp3": {
       "sha256": "8b95e4dc504c6f289e903390ceacfbc10e7fac92a298b3691608cd536bb231b3",
@@ -5144,10 +5144,10 @@
       "bytes": 121627,
       "object": "objects/dc5f37d969a80161d66bfbb8b85687be13be76d2834e83b6592987ee04406269.mp3"
     },
-    "audio/music-kits/hlb_01/endofmatch.flac": {
-      "sha256": "a46ebcc0cad126dd771cb7235a189f3485f442cb890d5e85dc8ca43bb1b2974b",
-      "bytes": 4845001,
-      "object": "objects/a46ebcc0cad126dd771cb7235a189f3485f442cb890d5e85dc8ca43bb1b2974b.flac"
+    "audio/music-kits/hlb_01/endofmatch.opus": {
+      "sha256": "2077923457d3ff67f4c6f4afd0904a988aecf8b041c4cafa5e08bf5733f0872a",
+      "bytes": 956706,
+      "object": "objects/2077923457d3ff67f4c6f4afd0904a988aecf8b041c4cafa5e08bf5733f0872a.opus"
     },
     "audio/music-kits/hlb_01/lostround.mp3": {
       "sha256": "36aaed85a897121041e15775fd9d674a27f7c817efc584ba23dc79b72a50cf03",
@@ -5184,10 +5184,10 @@
       "bytes": 278779,
       "object": "objects/b40d96b15d09b341bcaa05d2726322db78d03fb23899535921bfa15b84a3d2dc.mp3"
     },
-    "audio/music-kits/hlb_01/startofmatch.flac": {
-      "sha256": "7c23c47b4c10750fa76545d45ff173e73c2172971ecd002dd520c72ab61830b7",
-      "bytes": 581380,
-      "object": "objects/7c23c47b4c10750fa76545d45ff173e73c2172971ecd002dd520c72ab61830b7.flac"
+    "audio/music-kits/hlb_01/startofmatch.opus": {
+      "sha256": "2d2e0f6008fdd23bdaf3c5a92bbe02ffe1a1c0a8f004b624cf41bd1fe7a8ef6b",
+      "bytes": 179909,
+      "object": "objects/2d2e0f6008fdd23bdaf3c5a92bbe02ffe1a1c0a8f004b624cf41bd1fe7a8ef6b.opus"
     },
     "audio/music-kits/hlb_01/startround_01.mp3": {
       "sha256": "98cfa083824b6eabe96639f4f8feb895ce10e0f5b8ab0188aabb818570590a18",
@@ -5229,10 +5229,10 @@
       "bytes": 96967,
       "object": "objects/1e620f40b28cdd7d4208b13861cadb46715d7ca6bb65ba7418177f40d3ddb970.mp3"
     },
-    "audio/music-kits/hotlinemiami_01/endofmatch.flac": {
-      "sha256": "e300b10aa2f13536f95dc987b8461f7fa2c8730464af2afcb6b9b0556cf288d7",
-      "bytes": 5908500,
-      "object": "objects/e300b10aa2f13536f95dc987b8461f7fa2c8730464af2afcb6b9b0556cf288d7.flac"
+    "audio/music-kits/hotlinemiami_01/endofmatch.opus": {
+      "sha256": "2b4af237137dff8ee3c602adffaa2a86d436184d2d0ae76e082ca706c8317f69",
+      "bytes": 1362925,
+      "object": "objects/2b4af237137dff8ee3c602adffaa2a86d436184d2d0ae76e082ca706c8317f69.opus"
     },
     "audio/music-kits/hotlinemiami_01/lostround.mp3": {
       "sha256": "1ce0cdc2c0a332c7caaa10c7b36af2dce5067677d5605cdaa413066cd85fd9ef",
@@ -5279,10 +5279,10 @@
       "bytes": 280451,
       "object": "objects/41cd2a649d3b9efe2f24e404756d0342cb5e54035c3fc1642b9c2d99df5b6ba5.mp3"
     },
-    "audio/music-kits/hotlinemiami_01/startofmatch.flac": {
-      "sha256": "f06e2f3bb49e4a99c4d1225d53e829ddf54c60fc6b735233b8ac37807cd8054e",
-      "bytes": 444471,
-      "object": "objects/f06e2f3bb49e4a99c4d1225d53e829ddf54c60fc6b735233b8ac37807cd8054e.flac"
+    "audio/music-kits/hotlinemiami_01/startofmatch.opus": {
+      "sha256": "4ba9c2152b5ccd24d6be3ab4edf7b4b2680c34ebf513f30c6f5e1f6e93e9df27",
+      "bytes": 182240,
+      "object": "objects/4ba9c2152b5ccd24d6be3ab4edf7b4b2680c34ebf513f30c6f5e1f6e93e9df27.opus"
     },
     "audio/music-kits/hotlinemiami_01/startround_01.mp3": {
       "sha256": "eb88607350c5003a5003553072f061a6294a8e7a8f2e55be9509190ac1171e23",
@@ -5319,10 +5319,10 @@
       "bytes": 101147,
       "object": "objects/7d134c697c555075b3ecc4ab2c387494bc38091135ce88785fab0feda7030b93.mp3"
     },
-    "audio/music-kits/hundredth_01/endofmatch.flac": {
-      "sha256": "bdb5f204cbe0b17a731f6fc55f8a4f45a299365be81de76ca9f5246ea5c6666d",
-      "bytes": 5779696,
-      "object": "objects/bdb5f204cbe0b17a731f6fc55f8a4f45a299365be81de76ca9f5246ea5c6666d.flac"
+    "audio/music-kits/hundredth_01/endofmatch.opus": {
+      "sha256": "81010e378e8949dede336ae96a6ab8915914b5b607dcfefb0e751201271e3f30",
+      "bytes": 934026,
+      "object": "objects/81010e378e8949dede336ae96a6ab8915914b5b607dcfefb0e751201271e3f30.opus"
     },
     "audio/music-kits/hundredth_01/lostround.mp3": {
       "sha256": "28d67299d8c4fb9996aff842d4277dea3e066d840a4c0712614df5a8db08f72c",
@@ -5359,10 +5359,10 @@
       "bytes": 261643,
       "object": "objects/85df62d8fc7e2640a79d708e5952c637b88ca224a11fa7a378e3e6720c17c9c2.mp3"
     },
-    "audio/music-kits/hundredth_01/startofmatch.flac": {
-      "sha256": "bdb5f204cbe0b17a731f6fc55f8a4f45a299365be81de76ca9f5246ea5c6666d",
-      "bytes": 5779696,
-      "object": "objects/bdb5f204cbe0b17a731f6fc55f8a4f45a299365be81de76ca9f5246ea5c6666d.flac"
+    "audio/music-kits/hundredth_01/startofmatch.opus": {
+      "sha256": "81010e378e8949dede336ae96a6ab8915914b5b607dcfefb0e751201271e3f30",
+      "bytes": 934026,
+      "object": "objects/81010e378e8949dede336ae96a6ab8915914b5b607dcfefb0e751201271e3f30.opus"
     },
     "audio/music-kits/hundredth_01/startround_01.mp3": {
       "sha256": "ac38c8aa2c1e819a84d44d380bb51ad935c46017d304fa665bbb7d75e5a45272",
@@ -5404,10 +5404,10 @@
       "bytes": 124134,
       "object": "objects/dd799c0ebd87f5e6be39a3512ff40657a6c0fe01c50a283fa1093495b17bc538.mp3"
     },
-    "audio/music-kits/ianhultquist_01/endofmatch.flac": {
-      "sha256": "d5490908280c1cfbabb139b4bc666c38ac062d77245be5972e242ca121ab81eb",
-      "bytes": 4124593,
-      "object": "objects/d5490908280c1cfbabb139b4bc666c38ac062d77245be5972e242ca121ab81eb.flac"
+    "audio/music-kits/ianhultquist_01/endofmatch.opus": {
+      "sha256": "1aae02763184dba74f5ff99da39640e650a6e02b41b4a89beea6766a2f15f739",
+      "bytes": 952682,
+      "object": "objects/1aae02763184dba74f5ff99da39640e650a6e02b41b4a89beea6766a2f15f739.opus"
     },
     "audio/music-kits/ianhultquist_01/lostround.mp3": {
       "sha256": "daae224d784911697ee59ef210b658468943036d5677ea21c1b52dd932546dff",
@@ -5444,10 +5444,10 @@
       "bytes": 315142,
       "object": "objects/a2d5bc3fb6d9991604a1dbc021b9434cc975799d0832c7d45190cb41af7fc166.mp3"
     },
-    "audio/music-kits/ianhultquist_01/startofmatch.flac": {
-      "sha256": "1bbffe8267ccbd7f1bafe86a65641ea74f4791a9f9cd2d972ece09f92d693a80",
-      "bytes": 440453,
-      "object": "objects/1bbffe8267ccbd7f1bafe86a65641ea74f4791a9f9cd2d972ece09f92d693a80.flac"
+    "audio/music-kits/ianhultquist_01/startofmatch.opus": {
+      "sha256": "874f74d36d9bf4dd240304fb1b8d516a2ce13c1c47e3651c3b2533700042a734",
+      "bytes": 134077,
+      "object": "objects/874f74d36d9bf4dd240304fb1b8d516a2ce13c1c47e3651c3b2533700042a734.opus"
     },
     "audio/music-kits/ianhultquist_01/startround_01.mp3": {
       "sha256": "3ce29a8e5349db267c08e227260422343df1690c61fabc0b0e35efe325d6630a",
@@ -5639,10 +5639,10 @@
       "bytes": 160915,
       "object": "objects/a6b464317334eecc7cb0b9aadbf8aaaae1f16ba169b2a20ef7da501bd1e232a7.mp3"
     },
-    "audio/music-kits/jesseharlin_01/endofmatch.flac": {
-      "sha256": "c4c575fd57055c69355e36ec0ec3d6e4638aceabd459acce12caf9bbc1b68234",
-      "bytes": 4025000,
-      "object": "objects/c4c575fd57055c69355e36ec0ec3d6e4638aceabd459acce12caf9bbc1b68234.flac"
+    "audio/music-kits/jesseharlin_01/endofmatch.opus": {
+      "sha256": "76c2793454a6066d07b1bab62631a25342215f2c1b83958e3b5198ef87c528c6",
+      "bytes": 1052226,
+      "object": "objects/76c2793454a6066d07b1bab62631a25342215f2c1b83958e3b5198ef87c528c6.opus"
     },
     "audio/music-kits/jesseharlin_01/lostround.mp3": {
       "sha256": "5a9c8fc9b92707d9b8eee42f091a6114b76ad63cdb1dfb2c27cb6acd7ca67594",
@@ -5674,10 +5674,10 @@
       "bytes": 289228,
       "object": "objects/015f941c483c32fb3a4305cadb3709e0f744c97e282b9798d2335e3c8f3d5607.mp3"
     },
-    "audio/music-kits/jesseharlin_01/startofmatch.flac": {
-      "sha256": "a7978a02fa1332afa03840314a4f3362d3d93fefc74aa15193826e71919431f5",
-      "bytes": 433806,
-      "object": "objects/a7978a02fa1332afa03840314a4f3362d3d93fefc74aa15193826e71919431f5.flac"
+    "audio/music-kits/jesseharlin_01/startofmatch.opus": {
+      "sha256": "a46a324fe4770ef638cd05ea7ee16970b10551747e89049f6d0b69eb5179f1f1",
+      "bytes": 170318,
+      "object": "objects/a46a324fe4770ef638cd05ea7ee16970b10551747e89049f6d0b69eb5179f1f1.opus"
     },
     "audio/music-kits/jesseharlin_01/startround_01.mp3": {
       "sha256": "a93302988d4b607facca3426be0741efc3795902532d1cfb2157e0d925b92373",
@@ -5774,10 +5774,10 @@
       "bytes": 138763,
       "object": "objects/16edeb7ab8a8e6a03e5260f3b6ffa648f9d5dda134d5847c34d0ae3749bd4150.mp3"
     },
-    "audio/music-kits/juelz_01/endofmatch.flac": {
-      "sha256": "6cd790680f198ad80e8abcf33980393c3d9c1f11704dbb96c31fedd7eb3486b4",
-      "bytes": 5878636,
-      "object": "objects/6cd790680f198ad80e8abcf33980393c3d9c1f11704dbb96c31fedd7eb3486b4.flac"
+    "audio/music-kits/juelz_01/endofmatch.opus": {
+      "sha256": "9634ba48c4ada2cbbc77ac0e9ede6ddd55c389405b39ea0ebf1236a090f87029",
+      "bytes": 1040733,
+      "object": "objects/9634ba48c4ada2cbbc77ac0e9ede6ddd55c389405b39ea0ebf1236a090f87029.opus"
     },
     "audio/music-kits/juelz_01/lostround.mp3": {
       "sha256": "93abf7bae5a2878b2999874593c6b16052de730e84629b76808dfbe6c2b7d1ee",
@@ -5809,10 +5809,10 @@
       "bytes": 319321,
       "object": "objects/974d9c614a572db147b9991eaaae823e03a32f3ca633333a47b52131ecb76554.mp3"
     },
-    "audio/music-kits/juelz_01/startofmatch.flac": {
-      "sha256": "6cd790680f198ad80e8abcf33980393c3d9c1f11704dbb96c31fedd7eb3486b4",
-      "bytes": 5878636,
-      "object": "objects/6cd790680f198ad80e8abcf33980393c3d9c1f11704dbb96c31fedd7eb3486b4.flac"
+    "audio/music-kits/juelz_01/startofmatch.opus": {
+      "sha256": "9634ba48c4ada2cbbc77ac0e9ede6ddd55c389405b39ea0ebf1236a090f87029",
+      "bytes": 1040733,
+      "object": "objects/9634ba48c4ada2cbbc77ac0e9ede6ddd55c389405b39ea0ebf1236a090f87029.opus"
     },
     "audio/music-kits/juelz_01/startround_01.mp3": {
       "sha256": "15bd4a7277a1181ca8e917b91f975f1c5eda4de9b7bfd914c25cba74e3dd01bc",
@@ -5934,10 +5934,10 @@
       "bytes": 157153,
       "object": "objects/d1fec6ede7fba885e9259a463b0dcea631373a228b1e5ebb22607383c31571cc.mp3"
     },
-    "audio/music-kits/kellybailey_01/endofmatch.flac": {
-      "sha256": "1044d6a98b70378888ad8a3c7542ffe53df36b1665e17d67904e3ddb93b42014",
-      "bytes": 3292076,
-      "object": "objects/1044d6a98b70378888ad8a3c7542ffe53df36b1665e17d67904e3ddb93b42014.flac"
+    "audio/music-kits/kellybailey_01/endofmatch.opus": {
+      "sha256": "4ec8394d346b32e184f5662b0b6137a2b637000ea1af3707be499a4ceb989f82",
+      "bytes": 828892,
+      "object": "objects/4ec8394d346b32e184f5662b0b6137a2b637000ea1af3707be499a4ceb989f82.opus"
     },
     "audio/music-kits/kellybailey_01/lostround.mp3": {
       "sha256": "98794dac6512da5c55094de7f69e74f5389e52d02b310df84e28d59576018caa",
@@ -5969,10 +5969,10 @@
       "bytes": 384941,
       "object": "objects/a441b45d2c6792f831f36a67ac41749266c6365eadfdcfe96c61c7551ba71cfb.mp3"
     },
-    "audio/music-kits/kellybailey_01/startofmatch.flac": {
-      "sha256": "1044d6a98b70378888ad8a3c7542ffe53df36b1665e17d67904e3ddb93b42014",
-      "bytes": 3292076,
-      "object": "objects/1044d6a98b70378888ad8a3c7542ffe53df36b1665e17d67904e3ddb93b42014.flac"
+    "audio/music-kits/kellybailey_01/startofmatch.opus": {
+      "sha256": "4ec8394d346b32e184f5662b0b6137a2b637000ea1af3707be499a4ceb989f82",
+      "bytes": 828892,
+      "object": "objects/4ec8394d346b32e184f5662b0b6137a2b637000ea1af3707be499a4ceb989f82.opus"
     },
     "audio/music-kits/kellybailey_01/startround_01.mp3": {
       "sha256": "7efed5c8c6ff8b31041532bda369d6f337c327ce1f30710a212cea13959cc297",
@@ -6159,10 +6159,10 @@
       "bytes": 89026,
       "object": "objects/102d9e61091c871129a9b8c601e9ea26eb86cd6a8967804743b3da918a7113e8.mp3"
     },
-    "audio/music-kits/kitheory_01/endofmatch.flac": {
-      "sha256": "e180304847daab2dc178777464325adeaff42ceab9d6979617adef067be433bb",
-      "bytes": 3758373,
-      "object": "objects/e180304847daab2dc178777464325adeaff42ceab9d6979617adef067be433bb.flac"
+    "audio/music-kits/kitheory_01/endofmatch.opus": {
+      "sha256": "b9f7f92f882431e59f08b85f0671ed4c4bee83032ec5e32d4b555621baf5e1e5",
+      "bytes": 784942,
+      "object": "objects/b9f7f92f882431e59f08b85f0671ed4c4bee83032ec5e32d4b555621baf5e1e5.opus"
     },
     "audio/music-kits/kitheory_01/lostround.mp3": {
       "sha256": "abcf187b65e5634e9e16c00360ee011717082f8069aa2cc212802c109677d215",
@@ -6189,10 +6189,10 @@
       "bytes": 326009,
       "object": "objects/473a83f8bc7ea1e85b83fce746119d544c9b3c31f420d31cc800d5ede74c50df.mp3"
     },
-    "audio/music-kits/kitheory_01/startofmatch.flac": {
-      "sha256": "e180304847daab2dc178777464325adeaff42ceab9d6979617adef067be433bb",
-      "bytes": 3758373,
-      "object": "objects/e180304847daab2dc178777464325adeaff42ceab9d6979617adef067be433bb.flac"
+    "audio/music-kits/kitheory_01/startofmatch.opus": {
+      "sha256": "b9f7f92f882431e59f08b85f0671ed4c4bee83032ec5e32d4b555621baf5e1e5",
+      "bytes": 784942,
+      "object": "objects/b9f7f92f882431e59f08b85f0671ed4c4bee83032ec5e32d4b555621baf5e1e5.opus"
     },
     "audio/music-kits/kitheory_01/startround_01.mp3": {
       "sha256": "18210b9f48b9c66fbd66cbd3ba2a21e4f75d474f0128609fd99b986f2f606736",
@@ -6224,10 +6224,10 @@
       "bytes": 95295,
       "object": "objects/c19a9acedbe9da4cc904732933395996387e4c8a36aa8190115bb84cbd22d29c.mp3"
     },
-    "audio/music-kits/knock2_01/endofmatch.flac": {
-      "sha256": "c9ffcb5eb58fa5b7941dfbdf38e91b257924b09551327af8726e6bc5fd93aa4a",
-      "bytes": 6145009,
-      "object": "objects/c9ffcb5eb58fa5b7941dfbdf38e91b257924b09551327af8726e6bc5fd93aa4a.flac"
+    "audio/music-kits/knock2_01/endofmatch.opus": {
+      "sha256": "11f020f14e68be9ab2aa10fc09f658ab112569f8eb9e34391e7bcec4d1f1c108",
+      "bytes": 1257737,
+      "object": "objects/11f020f14e68be9ab2aa10fc09f658ab112569f8eb9e34391e7bcec4d1f1c108.opus"
     },
     "audio/music-kits/knock2_01/lostround.mp3": {
       "sha256": "702b829fa9bd30ca27f8bbfc41524d4de8efb1e036d297f5fd3af3002e285b01",
@@ -6259,10 +6259,10 @@
       "bytes": 252448,
       "object": "objects/fcd775495a6a3cf3aac62b63497a0171b21ab934f114c71617c430b2b4312681.mp3"
     },
-    "audio/music-kits/knock2_01/startofmatch.flac": {
-      "sha256": "c9ffcb5eb58fa5b7941dfbdf38e91b257924b09551327af8726e6bc5fd93aa4a",
-      "bytes": 6145009,
-      "object": "objects/c9ffcb5eb58fa5b7941dfbdf38e91b257924b09551327af8726e6bc5fd93aa4a.flac"
+    "audio/music-kits/knock2_01/startofmatch.opus": {
+      "sha256": "11f020f14e68be9ab2aa10fc09f658ab112569f8eb9e34391e7bcec4d1f1c108",
+      "bytes": 1257737,
+      "object": "objects/11f020f14e68be9ab2aa10fc09f658ab112569f8eb9e34391e7bcec4d1f1c108.opus"
     },
     "audio/music-kits/knock2_01/startround_01.mp3": {
       "sha256": "1fb7a046454ad6c98ca43c75270c5ba1853dadc1861e5b0b3bfa1715181cc5fb",
@@ -6369,10 +6369,10 @@
       "bytes": 104490,
       "object": "objects/3114999244f56fdb93f081c4ab1abad6e6e4830ec619d226ed86248a0d47f1c1.mp3"
     },
-    "audio/music-kits/laurashigihara_01/endofmatch.flac": {
-      "sha256": "6c6f3d25d001834a27adce209f91c7a2b77c9c6316f941bc16eb8c13d955a8ae",
-      "bytes": 4050905,
-      "object": "objects/6c6f3d25d001834a27adce209f91c7a2b77c9c6316f941bc16eb8c13d955a8ae.flac"
+    "audio/music-kits/laurashigihara_01/endofmatch.opus": {
+      "sha256": "57551d971525e030a81b6152b892806c9ab3677f5aa54018c4e1fd72f78cf690",
+      "bytes": 1032035,
+      "object": "objects/57551d971525e030a81b6152b892806c9ab3677f5aa54018c4e1fd72f78cf690.opus"
     },
     "audio/music-kits/laurashigihara_01/lostround.mp3": {
       "sha256": "32050e867816e430502f4f420043b1afbeb4e5b030d988c13f600bfb435e84c9",
@@ -6409,10 +6409,10 @@
       "bytes": 289228,
       "object": "objects/352e2b8104758b535ec4935a04a34f2a17796e68f6733d90a3a73e4755a29d64.mp3"
     },
-    "audio/music-kits/laurashigihara_01/startofmatch.flac": {
-      "sha256": "8f92be725e99e3eba96772c201f2d6d5160577285441f66c5d9839131a10def3",
-      "bytes": 517685,
-      "object": "objects/8f92be725e99e3eba96772c201f2d6d5160577285441f66c5d9839131a10def3.flac"
+    "audio/music-kits/laurashigihara_01/startofmatch.opus": {
+      "sha256": "89f5997432d3914dedcfb0499a1a229d798d8621db93ef8f3d896df0a83f6b6d",
+      "bytes": 164775,
+      "object": "objects/89f5997432d3914dedcfb0499a1a229d798d8621db93ef8f3d896df0a83f6b6d.opus"
     },
     "audio/music-kits/laurashigihara_01/startround_01.mp3": {
       "sha256": "0e5c4c2ff2b1463ebd3f936fd7fd6f37bf4f553018fa9518744eab5948c3f613",
@@ -6454,10 +6454,10 @@
       "bytes": 104072,
       "object": "objects/1bcce5741bb1a9ce9c054aed7c966e00e7cdd287c25ee42ef6adb1926f177a17.mp3"
     },
-    "audio/music-kits/lenniemoore_01/endofmatch.flac": {
-      "sha256": "87e40b6ae77b0fe4f06862a97a7f1e9a5e97b8e3fca5911ee0f4adbbedd96f03",
-      "bytes": 4585689,
-      "object": "objects/87e40b6ae77b0fe4f06862a97a7f1e9a5e97b8e3fca5911ee0f4adbbedd96f03.flac"
+    "audio/music-kits/lenniemoore_01/endofmatch.opus": {
+      "sha256": "556fcd209efd6e7fdf5e942f1d748f7780b2618d99bada3eff3b16804531331a",
+      "bytes": 1022575,
+      "object": "objects/556fcd209efd6e7fdf5e942f1d748f7780b2618d99bada3eff3b16804531331a.opus"
     },
     "audio/music-kits/lenniemoore_01/lostround.mp3": {
       "sha256": "5da8e5378e9dbd02e1c96ed805091063b81915f044de2e806390df2b12cffc5d",
@@ -6494,10 +6494,10 @@
       "bytes": 200203,
       "object": "objects/b91371754436a8855193694a3bc325dfc520d2e2e72b42c674d05c78c5f48910.mp3"
     },
-    "audio/music-kits/lenniemoore_01/startofmatch.flac": {
-      "sha256": "87e40b6ae77b0fe4f06862a97a7f1e9a5e97b8e3fca5911ee0f4adbbedd96f03",
-      "bytes": 4585689,
-      "object": "objects/87e40b6ae77b0fe4f06862a97a7f1e9a5e97b8e3fca5911ee0f4adbbedd96f03.flac"
+    "audio/music-kits/lenniemoore_01/startofmatch.opus": {
+      "sha256": "556fcd209efd6e7fdf5e942f1d748f7780b2618d99bada3eff3b16804531331a",
+      "bytes": 1022575,
+      "object": "objects/556fcd209efd6e7fdf5e942f1d748f7780b2618d99bada3eff3b16804531331a.opus"
     },
     "audio/music-kits/lenniemoore_01/startround_01.mp3": {
       "sha256": "3cd73f4fd36843d2d05891c67131e0a613df02cfe505fa05b1200f63e709466f",
@@ -6539,15 +6539,15 @@
       "bytes": 92787,
       "object": "objects/e27675f2a4728c04aeebdadd3ace34100fdceb2a4342323d38ba0fb760a8f746.mp3"
     },
-    "audio/music-kits/mateomessina_01/endofmatch.flac": {
-      "sha256": "b7d4cfc7cf4aecde17f992fc2ee6a7b31f545b2c792ae46f17fa8798817110ae",
-      "bytes": 4583092,
-      "object": "objects/b7d4cfc7cf4aecde17f992fc2ee6a7b31f545b2c792ae46f17fa8798817110ae.flac"
+    "audio/music-kits/mateomessina_01/endofmatch.opus": {
+      "sha256": "de7e348da4ef057068c41bd13ddbd1315beb3a437aeb0ec48404f5c4bb6b8485",
+      "bytes": 1110911,
+      "object": "objects/de7e348da4ef057068c41bd13ddbd1315beb3a437aeb0ec48404f5c4bb6b8485.opus"
     },
-    "audio/music-kits/mateomessina_01/loading.flac": {
-      "sha256": "42f3216220871b25555b0bad8530367446bdb706076dd04053f08a1cf29a8751",
-      "bytes": 5448601,
-      "object": "objects/42f3216220871b25555b0bad8530367446bdb706076dd04053f08a1cf29a8751.flac"
+    "audio/music-kits/mateomessina_01/loading.opus": {
+      "sha256": "9457b78fb924f80244eee9791483f22497688fae1f803c9d7259b3bdf34d8262",
+      "bytes": 1681987,
+      "object": "objects/9457b78fb924f80244eee9791483f22497688fae1f803c9d7259b3bdf34d8262.opus"
     },
     "audio/music-kits/mateomessina_01/lostround.mp3": {
       "sha256": "360e1b4f644768cb8321100ef4f5806206d52a2de9c9e3bba575d6c0728197db",
@@ -6604,10 +6604,10 @@
       "bytes": 231550,
       "object": "objects/813aba31f9ae73c0423949f1a2ab27c77c06bc46e65f17d7bf16c6e749441b55.mp3"
     },
-    "audio/music-kits/mateomessina_01/startofmatch.flac": {
-      "sha256": "80e99a49a4b320dac04572f3a9baa33bbac4b72564be991b813dba1185221db8",
-      "bytes": 533383,
-      "object": "objects/80e99a49a4b320dac04572f3a9baa33bbac4b72564be991b813dba1185221db8.flac"
+    "audio/music-kits/mateomessina_01/startofmatch.opus": {
+      "sha256": "7e9d2b32f46a94d4bba88aee25d7b5dd0708a8181573f2d5b4732c98b2904ecd",
+      "bytes": 132445,
+      "object": "objects/7e9d2b32f46a94d4bba88aee25d7b5dd0708a8181573f2d5b4732c98b2904ecd.opus"
     },
     "audio/music-kits/mateomessina_01/startround_01.mp3": {
       "sha256": "218a08077e3885c0f112de53f507c8890b0319991a44cf607a2fea4b150b0215",
@@ -6649,10 +6649,10 @@
       "bytes": 93205,
       "object": "objects/a5a50a7fc950b89d3089506386de74178d6400756921ad82fa9fe67ca11d5f56.mp3"
     },
-    "audio/music-kits/mattlange_01/endofmatch.flac": {
-      "sha256": "6b5717cb04d2498e40c03669d916429c7cfa799a26bb649e4fac7b77b09def0a",
-      "bytes": 4463075,
-      "object": "objects/6b5717cb04d2498e40c03669d916429c7cfa799a26bb649e4fac7b77b09def0a.flac"
+    "audio/music-kits/mattlange_01/endofmatch.opus": {
+      "sha256": "780156e9876a6630ed440ec071eb27482fa7ea412d49bb986631f440f6e97caa",
+      "bytes": 808412,
+      "object": "objects/780156e9876a6630ed440ec071eb27482fa7ea412d49bb986631f440f6e97caa.opus"
     },
     "audio/music-kits/mattlange_01/lostround.mp3": {
       "sha256": "159f8a19b02a9841333d827b7fd3bca6f041bfee817602db2965fb95794dd725",
@@ -6689,10 +6689,10 @@
       "bytes": 228624,
       "object": "objects/fff4b4be73d35ef3fcb0abe0b5675a83a7e3dd8619d08699bce031dc23ea1090.mp3"
     },
-    "audio/music-kits/mattlange_01/startofmatch.flac": {
-      "sha256": "76fd64e6be3d7680f2deefae38f0581dcc4c2610bb9689a303fc77a7e11cc1cc",
-      "bytes": 730328,
-      "object": "objects/76fd64e6be3d7680f2deefae38f0581dcc4c2610bb9689a303fc77a7e11cc1cc.flac"
+    "audio/music-kits/mattlange_01/startofmatch.opus": {
+      "sha256": "2c0ba177ce09f93c87357da8ef9d6968cff778179a86b9a590fb99f71cddce45",
+      "bytes": 212542,
+      "object": "objects/2c0ba177ce09f93c87357da8ef9d6968cff778179a86b9a590fb99f71cddce45.opus"
     },
     "audio/music-kits/mattlange_01/startround_01.mp3": {
       "sha256": "389a1d61652b658f02fbfddf0a3928e440b77517ed521a71e8e883df681cc8cb",
@@ -6724,10 +6724,10 @@
       "bytes": 135837,
       "object": "objects/56e40392d408e421364a3b77db449cd6531493b8f2e2769ccf554ad7dddad4fe.mp3"
     },
-    "audio/music-kits/mattlevine_01/endofmatch.flac": {
-      "sha256": "034e000537fbafe610db4511605097945812f8983bd87974dbbdea26e592ef42",
-      "bytes": 5492615,
-      "object": "objects/034e000537fbafe610db4511605097945812f8983bd87974dbbdea26e592ef42.flac"
+    "audio/music-kits/mattlevine_01/endofmatch.opus": {
+      "sha256": "315414e62c704903d79a717dc5a28c85ce61097ac9f7a1fa4f8f5a4c7f962965",
+      "bytes": 1260893,
+      "object": "objects/315414e62c704903d79a717dc5a28c85ce61097ac9f7a1fa4f8f5a4c7f962965.opus"
     },
     "audio/music-kits/mattlevine_01/lostround.mp3": {
       "sha256": "17ced5c9b50959a7149e509f70a56fc090ba3d383103d5fe5fac757455181275",
@@ -6764,10 +6764,10 @@
       "bytes": 303021,
       "object": "objects/1691538229e24e3f64320723d689899062e0fd67220f5298b140aabbf1a45f3c.mp3"
     },
-    "audio/music-kits/mattlevine_01/startofmatch.flac": {
-      "sha256": "034e000537fbafe610db4511605097945812f8983bd87974dbbdea26e592ef42",
-      "bytes": 5492615,
-      "object": "objects/034e000537fbafe610db4511605097945812f8983bd87974dbbdea26e592ef42.flac"
+    "audio/music-kits/mattlevine_01/startofmatch.opus": {
+      "sha256": "315414e62c704903d79a717dc5a28c85ce61097ac9f7a1fa4f8f5a4c7f962965",
+      "bytes": 1260893,
+      "object": "objects/315414e62c704903d79a717dc5a28c85ce61097ac9f7a1fa4f8f5a4c7f962965.opus"
     },
     "audio/music-kits/mattlevine_01/startround_01.mp3": {
       "sha256": "4611dde2470d69933f7e2663a5c4391ec76026dae7fda7d957a3bcafe58349be",
@@ -6894,10 +6894,10 @@
       "bytes": 129986,
       "object": "objects/a27751da86483e31dbc9919446d2d807d328f5cb599b484ae7d4fde73345407e.mp3"
     },
-    "audio/music-kits/meechydarko_01/endofmatch.flac": {
-      "sha256": "dfa887fd8c7cdd410d682f0d6ccf186cc89be4d5bc10de2e71379be744a32b0f",
-      "bytes": 3890214,
-      "object": "objects/dfa887fd8c7cdd410d682f0d6ccf186cc89be4d5bc10de2e71379be744a32b0f.flac"
+    "audio/music-kits/meechydarko_01/endofmatch.opus": {
+      "sha256": "439d8438d3c70f79055e6ef36d9a3d8359d8604cc294d817bcc09cf103d32f30",
+      "bytes": 978419,
+      "object": "objects/439d8438d3c70f79055e6ef36d9a3d8359d8604cc294d817bcc09cf103d32f30.opus"
     },
     "audio/music-kits/meechydarko_01/lostround.mp3": {
       "sha256": "d29fca40481190bae0ae405dcf603a4a3f3025a38d1f961ce1b6cdb9a1a87888",
@@ -6934,10 +6934,10 @@
       "bytes": 249940,
       "object": "objects/63c3e87f717e9aabea4b04956bc4443dd82fa1fe40e1c20b8f4e13c2ca81520e.mp3"
     },
-    "audio/music-kits/meechydarko_01/startofmatch.flac": {
-      "sha256": "b28e203ce5b24533de72a152dc12a5325d6be04c44fc18b4597023fdfd21e00e",
-      "bytes": 511306,
-      "object": "objects/b28e203ce5b24533de72a152dc12a5325d6be04c44fc18b4597023fdfd21e00e.flac"
+    "audio/music-kits/meechydarko_01/startofmatch.opus": {
+      "sha256": "bfc7cb396998ff99656560d193f71e265d99e73cdd19a32121450f51082595b7",
+      "bytes": 187974,
+      "object": "objects/bfc7cb396998ff99656560d193f71e265d99e73cdd19a32121450f51082595b7.opus"
     },
     "audio/music-kits/meechydarko_01/startround_01.mp3": {
       "sha256": "0b03e2c505aecacca33bce425e74aed499b559790d5c4ca2f3cced9aa4a81923",
@@ -6979,10 +6979,10 @@
       "bytes": 131240,
       "object": "objects/2b7534b0a0244087ab6df5b4e0e8a95525b7e50b9b41c30ab978cec1bfa92327.mp3"
     },
-    "audio/music-kits/michaelbross_01/endofmatch.flac": {
-      "sha256": "c59ae1370425619cf64fa381b9037a32731dfbcd6cac8d0245b9b1ae7c9c7fca",
-      "bytes": 4798016,
-      "object": "objects/c59ae1370425619cf64fa381b9037a32731dfbcd6cac8d0245b9b1ae7c9c7fca.flac"
+    "audio/music-kits/michaelbross_01/endofmatch.opus": {
+      "sha256": "d60d2229320afc6cc7777f353d695bfd25e97ddc7f85c90b3b25d75d77b10da0",
+      "bytes": 1067694,
+      "object": "objects/d60d2229320afc6cc7777f353d695bfd25e97ddc7f85c90b3b25d75d77b10da0.opus"
     },
     "audio/music-kits/michaelbross_01/lostround.mp3": {
       "sha256": "19342181357eb010cc255d70506dd06cfb640f5e05ea8e132534b43ea58ee4e1",
@@ -7009,10 +7009,10 @@
       "bytes": 277107,
       "object": "objects/1f274d66c2bc610dba45298de34d8a676f492580cb8577d9535c0005f07f148f.mp3"
     },
-    "audio/music-kits/michaelbross_01/startofmatch.flac": {
-      "sha256": "838ce2595d7006caa3938209458911ae2fe3c120052e0d43e58a284db3f15b90",
-      "bytes": 590631,
-      "object": "objects/838ce2595d7006caa3938209458911ae2fe3c120052e0d43e58a284db3f15b90.flac"
+    "audio/music-kits/michaelbross_01/startofmatch.opus": {
+      "sha256": "edb6805f169b9cbb92b8abc522332b1419000e5d4210ce825b851168f6a7d0be",
+      "bytes": 199548,
+      "object": "objects/edb6805f169b9cbb92b8abc522332b1419000e5d4210ce825b851168f6a7d0be.opus"
     },
     "audio/music-kits/michaelbross_01/startround_01.mp3": {
       "sha256": "14f5eecc4678476a90e2a4f2dde9de32de6106b69d2f44d7b7846d6197cb39a2",
@@ -7044,10 +7044,10 @@
       "bytes": 75233,
       "object": "objects/e406defcb201dd86a7bfd79055790d637946458bbaf8da0ce00d4bf16dc1ff40.mp3"
     },
-    "audio/music-kits/midnightriders_01/endofmatch.flac": {
-      "sha256": "ad4d131d0d4c40be22f422a047db8977a4c6db772d8985a7e563d9be9392bbe6",
-      "bytes": 5980912,
-      "object": "objects/ad4d131d0d4c40be22f422a047db8977a4c6db772d8985a7e563d9be9392bbe6.flac"
+    "audio/music-kits/midnightriders_01/endofmatch.opus": {
+      "sha256": "b4e5787f127aade5d659438450b0d2139f37c60c09e349e2594743f30482d1d9",
+      "bytes": 1093429,
+      "object": "objects/b4e5787f127aade5d659438450b0d2139f37c60c09e349e2594743f30482d1d9.opus"
     },
     "audio/music-kits/midnightriders_01/lostround.mp3": {
       "sha256": "296c40b8f129941fb1d1f90abe7ece08d7427a7e9e1498028a3d0c49d6f81396",
@@ -7079,10 +7079,10 @@
       "bytes": 270838,
       "object": "objects/65689c9fe9078baf67194a0633a5f92b9a25759bc0d097fbd9eff14d9fc34476.mp3"
     },
-    "audio/music-kits/midnightriders_01/startofmatch.flac": {
-      "sha256": "d6bc1bfa8ad8722870d2acc71a19966aa516ad3612f5004f75779b1f6d8fa6b2",
-      "bytes": 681017,
-      "object": "objects/d6bc1bfa8ad8722870d2acc71a19966aa516ad3612f5004f75779b1f6d8fa6b2.flac"
+    "audio/music-kits/midnightriders_01/startofmatch.opus": {
+      "sha256": "b3e9c5b817f565a8c33213a811ba6dadba6d99ef32bb99f418fb665ccbc193e5",
+      "bytes": 138720,
+      "object": "objects/b3e9c5b817f565a8c33213a811ba6dadba6d99ef32bb99f418fb665ccbc193e5.opus"
     },
     "audio/music-kits/midnightriders_01/startround_01.mp3": {
       "sha256": "72b09651a4c1906e0d353ee00b6dd4b93806a9c8589c6c180141750a1517cdc3",
@@ -7119,10 +7119,10 @@
       "bytes": 121209,
       "object": "objects/1f6982b4bb739acc2a320dc981ff0c77d67ed3fc215aacc2562258de32f9c844.mp3"
     },
-    "audio/music-kits/mordfustang_01/endofmatch.flac": {
-      "sha256": "39ba4a629e1a52b105cde5104ab76885cd729fdf36148177eec2057561b3b39c",
-      "bytes": 6288709,
-      "object": "objects/39ba4a629e1a52b105cde5104ab76885cd729fdf36148177eec2057561b3b39c.flac"
+    "audio/music-kits/mordfustang_01/endofmatch.opus": {
+      "sha256": "f3a35168b85abd8cf52532661ddbf6f68330a39f6c69e0fbae2fada6f90d2e76",
+      "bytes": 973686,
+      "object": "objects/f3a35168b85abd8cf52532661ddbf6f68330a39f6c69e0fbae2fada6f90d2e76.opus"
     },
     "audio/music-kits/mordfustang_01/lostround.mp3": {
       "sha256": "cb3028ef4474b4c33905e7f63b1329063c168256a8dcfe9bc0febf313f325779",
@@ -7154,10 +7154,10 @@
       "bytes": 241163,
       "object": "objects/77b90a1ca2ab760b60c289bd952c172a187c8377e1a5f453de4d5ae9c4399d87.mp3"
     },
-    "audio/music-kits/mordfustang_01/startofmatch.flac": {
-      "sha256": "39ba4a629e1a52b105cde5104ab76885cd729fdf36148177eec2057561b3b39c",
-      "bytes": 6288709,
-      "object": "objects/39ba4a629e1a52b105cde5104ab76885cd729fdf36148177eec2057561b3b39c.flac"
+    "audio/music-kits/mordfustang_01/startofmatch.opus": {
+      "sha256": "f3a35168b85abd8cf52532661ddbf6f68330a39f6c69e0fbae2fada6f90d2e76",
+      "bytes": 973686,
+      "object": "objects/f3a35168b85abd8cf52532661ddbf6f68330a39f6c69e0fbae2fada6f90d2e76.opus"
     },
     "audio/music-kits/mordfustang_01/startround_01.mp3": {
       "sha256": "38ce7893483f28353ae64d9f1296dbd7825b00ae6a28633093a176ff0ad18ac0",
@@ -7205,10 +7205,10 @@
       "bytes": 41378,
       "object": "objects/d422ab9b2867795c0b97405c9d4ce4b64cfec58d9a6c811693369423b570b6d9.mp3"
     },
-    "audio/music-kits/neckdeep_01/endofmatch.flac": {
-      "sha256": "f9ea2676d34d90435071feccd842e1224a0389faa567b4f13da93899241f28ec",
-      "bytes": 4847361,
-      "object": "objects/f9ea2676d34d90435071feccd842e1224a0389faa567b4f13da93899241f28ec.flac"
+    "audio/music-kits/neckdeep_01/endofmatch.opus": {
+      "sha256": "df25c629e6010af6477a897472eaf3174e80e08368e0d6146b5225d8efa1ad27",
+      "bytes": 820587,
+      "object": "objects/df25c629e6010af6477a897472eaf3174e80e08368e0d6146b5225d8efa1ad27.opus"
     },
     "audio/music-kits/neckdeep_01/lostround.mp3": {
       "sha256": "13def7a906fe520964e75426f746b51f9ab2dca1c8b3cf30650bd51c9310d81e",
@@ -7245,10 +7245,10 @@
       "bytes": 329352,
       "object": "objects/ec81ee7fa4d7d3f15b70e3e248062afdba9261b00197ec59acd2412b17c520d5.mp3"
     },
-    "audio/music-kits/neckdeep_01/startofmatch.flac": {
-      "sha256": "b41867eea718c90949e0483a7adaa3820850801a7b88dbd02ddf15156df4f037",
-      "bytes": 751134,
-      "object": "objects/b41867eea718c90949e0483a7adaa3820850801a7b88dbd02ddf15156df4f037.flac"
+    "audio/music-kits/neckdeep_01/startofmatch.opus": {
+      "sha256": "4930296b5472fe59d84e656eedd9720e8da466ffd70e30fe8a74635df1823517",
+      "bytes": 147437,
+      "object": "objects/4930296b5472fe59d84e656eedd9720e8da466ffd70e30fe8a74635df1823517.opus"
     },
     "audio/music-kits/neckdeep_01/startround_01.mp3": {
       "sha256": "c54c7461ac357a4a029406b1e1189a3d9d976abad2b0255c798a9808ebd29086",
@@ -7290,10 +7290,10 @@
       "bytes": 121209,
       "object": "objects/b14e0ee6bab7dceb51a3fa770f9eebedd7ff5a815c26b9f71d8559170ea990cd.mp3"
     },
-    "audio/music-kits/neckdeep_02/endofmatch.flac": {
-      "sha256": "fea937d170335228ea528ea2e7a91d62cc8a6fb69efd2a7aa96e518d02e64b6a",
-      "bytes": 5121845,
-      "object": "objects/fea937d170335228ea528ea2e7a91d62cc8a6fb69efd2a7aa96e518d02e64b6a.flac"
+    "audio/music-kits/neckdeep_02/endofmatch.opus": {
+      "sha256": "cf42c6d79163ae9410c7572f7b89a517dfb0065c0afbfe2b463e2e31616c34f8",
+      "bytes": 925860,
+      "object": "objects/cf42c6d79163ae9410c7572f7b89a517dfb0065c0afbfe2b463e2e31616c34f8.opus"
     },
     "audio/music-kits/neckdeep_02/lostround.mp3": {
       "sha256": "dfc04bd310a77b986016af8bee026afa845bfc087d380b11a1cc90c4089080d2",
@@ -7330,10 +7330,10 @@
       "bytes": 318485,
       "object": "objects/98811e25e0732496fa9ac086c0477a2f066d3cae0c659b11a71fc8c4a8242985.mp3"
     },
-    "audio/music-kits/neckdeep_02/startofmatch.flac": {
-      "sha256": "1c0f9927247f84fcbf930eb2940acb78bbef8157db402837b44307c38c754c63",
-      "bytes": 733543,
-      "object": "objects/1c0f9927247f84fcbf930eb2940acb78bbef8157db402837b44307c38c754c63.flac"
+    "audio/music-kits/neckdeep_02/startofmatch.opus": {
+      "sha256": "7e5f828e3fd4bcefb80dd1adf61ba4aa89f2bef6a5776080f2edf2431a5a88ca",
+      "bytes": 158690,
+      "object": "objects/7e5f828e3fd4bcefb80dd1adf61ba4aa89f2bef6a5776080f2edf2431a5a88ca.opus"
     },
     "audio/music-kits/neckdeep_02/startround_01.mp3": {
       "sha256": "465b4641de0b3d8ceebf4cffe87c183b611cf66253f90dcae6bb96e33d42bc72",
@@ -7375,10 +7375,10 @@
       "bytes": 145032,
       "object": "objects/08791e85bfb5deb580d5b8ee9ddfc44620dd7e7a7a7f33cfdb4eb5ff761056e3.mp3"
     },
-    "audio/music-kits/newbeatfund_01/endofmatch.flac": {
-      "sha256": "b8f21e0a28476542f72ab54281ac3688240024f7c33c6318816ffc2fe84b22df",
-      "bytes": 5561849,
-      "object": "objects/b8f21e0a28476542f72ab54281ac3688240024f7c33c6318816ffc2fe84b22df.flac"
+    "audio/music-kits/newbeatfund_01/endofmatch.opus": {
+      "sha256": "30ddbca47b0abb38a77918522bad0ac89080196b9f6f81e0bd2581453fd12319",
+      "bytes": 1067737,
+      "object": "objects/30ddbca47b0abb38a77918522bad0ac89080196b9f6f81e0bd2581453fd12319.opus"
     },
     "audio/music-kits/newbeatfund_01/lostround.mp3": {
       "sha256": "6f95af6a77b07c2d4e4fc86ae8513182908a1d583c4d4368fdec208ce2c61e06",
@@ -7410,10 +7410,10 @@
       "bytes": 52245,
       "object": "objects/0e50f68e2434fc06e208cb444013521e40bfc139ef6d4f8a6d588bf181835746.mp3"
     },
-    "audio/music-kits/newbeatfund_01/startofmatch.flac": {
-      "sha256": "b8f21e0a28476542f72ab54281ac3688240024f7c33c6318816ffc2fe84b22df",
-      "bytes": 5561849,
-      "object": "objects/b8f21e0a28476542f72ab54281ac3688240024f7c33c6318816ffc2fe84b22df.flac"
+    "audio/music-kits/newbeatfund_01/startofmatch.opus": {
+      "sha256": "30ddbca47b0abb38a77918522bad0ac89080196b9f6f81e0bd2581453fd12319",
+      "bytes": 1067737,
+      "object": "objects/30ddbca47b0abb38a77918522bad0ac89080196b9f6f81e0bd2581453fd12319.opus"
     },
     "audio/music-kits/newbeatfund_01/startround_01.mp3": {
       "sha256": "02c59605e77497c61df0789c2beed0e378704437cf99f03b112d2cfb43a2ca35",
@@ -7450,10 +7450,10 @@
       "bytes": 109924,
       "object": "objects/f61f7d26353e16f8828685dae8db08025f618f3bc6462f7db2936de012474f30.mp3"
     },
-    "audio/music-kits/noisia_01/endofmatch.flac": {
-      "sha256": "b7b37ee30f3a45db4a60b655ca2fe9ee091dbe50543bcc696686b6b8026b4b94",
-      "bytes": 4600871,
-      "object": "objects/b7b37ee30f3a45db4a60b655ca2fe9ee091dbe50543bcc696686b6b8026b4b94.flac"
+    "audio/music-kits/noisia_01/endofmatch.opus": {
+      "sha256": "ad42e176877787a5f374ab087511dcac27b917bd6980765034c68b9ce60714d7",
+      "bytes": 1020023,
+      "object": "objects/ad42e176877787a5f374ab087511dcac27b917bd6980765034c68b9ce60714d7.opus"
     },
     "audio/music-kits/noisia_01/lostround.mp3": {
       "sha256": "f9b2e6d38f24d5b8f5b2a748425290a03ed98f6b3d88686539b67430624f5654",
@@ -7490,10 +7490,10 @@
       "bytes": 416706,
       "object": "objects/d9e59c87efd54c6c2334c4f8ee1868fa44b55f9e6034cf2efde24ee3179dcf26.mp3"
     },
-    "audio/music-kits/noisia_01/startofmatch.flac": {
-      "sha256": "d9ef7b16d94d01865f267479b1469457e2a0384cea1e4d3c1e8ce902bfafccc1",
-      "bytes": 545788,
-      "object": "objects/d9ef7b16d94d01865f267479b1469457e2a0384cea1e4d3c1e8ce902bfafccc1.flac"
+    "audio/music-kits/noisia_01/startofmatch.opus": {
+      "sha256": "e1e877dca82b9f4653cf177bf866208481be572e86e52ef471b8630d263b48da",
+      "bytes": 169242,
+      "object": "objects/e1e877dca82b9f4653cf177bf866208481be572e86e52ef471b8630d263b48da.opus"
     },
     "audio/music-kits/noisia_01/startround_01.mp3": {
       "sha256": "00b5867b04c3645c214e67bd8d4ad49399368619784ed5aa56e49c77e783491b",
@@ -7530,10 +7530,10 @@
       "bytes": 145032,
       "object": "objects/13e55f09ff3c744e29cb01af1d0fef36c3e8f6e6613a62dc8cb0bde8ea2c1676.mp3"
     },
-    "audio/music-kits/perfectworld_01/endofmatch.flac": {
-      "sha256": "ebfe611ca09d2717f9bc43d9343048ded29181786925781d901804716d77abbc",
-      "bytes": 3809256,
-      "object": "objects/ebfe611ca09d2717f9bc43d9343048ded29181786925781d901804716d77abbc.flac"
+    "audio/music-kits/perfectworld_01/endofmatch.opus": {
+      "sha256": "21dd1b71e536da95d883aa45f0e5528da92d7c72a7250e937d33764c0e0efac5",
+      "bytes": 716792,
+      "object": "objects/21dd1b71e536da95d883aa45f0e5528da92d7c72a7250e937d33764c0e0efac5.opus"
     },
     "audio/music-kits/perfectworld_01/lostround.mp3": {
       "sha256": "9f6a359020d2bd8df351854745598142c8dde3936848df28e617eebd7d5384fa",
@@ -7560,10 +7560,10 @@
       "bytes": 138763,
       "object": "objects/ad490b8fb76aad482cd240a2d8c7f707b6be33275b326e600eec678d97b2b87b.mp3"
     },
-    "audio/music-kits/perfectworld_01/startofmatch.flac": {
-      "sha256": "1503ec2b4885a346d2c8587c3c389edafa3ed39b8f4351f4503800359de52e40",
-      "bytes": 549235,
-      "object": "objects/1503ec2b4885a346d2c8587c3c389edafa3ed39b8f4351f4503800359de52e40.flac"
+    "audio/music-kits/perfectworld_01/startofmatch.opus": {
+      "sha256": "f48fe387b919cda5da66f54a1c63bf97a162530ba79f648ec4243d4f2f39ca26",
+      "bytes": 164463,
+      "object": "objects/f48fe387b919cda5da66f54a1c63bf97a162530ba79f648ec4243d4f2f39ca26.opus"
     },
     "audio/music-kits/perfectworld_01/startround_01.mp3": {
       "sha256": "7713be9b073166a62457cba479922a4829bb403c42e039c11a51000a1db8fb38",
@@ -7745,10 +7745,10 @@
       "bytes": 126224,
       "object": "objects/f2a40c71223378da242c3b0f38c4a70bb190736041a9bfa2633a7eff7f48d471.mp3"
     },
-    "audio/music-kits/proxy_01/endofmatch.flac": {
-      "sha256": "1cb105b8b23895f351ed40e1610b8c1437b347785ae8d2d55b1f0eda030f5d77",
-      "bytes": 6800991,
-      "object": "objects/1cb105b8b23895f351ed40e1610b8c1437b347785ae8d2d55b1f0eda030f5d77.flac"
+    "audio/music-kits/proxy_01/endofmatch.opus": {
+      "sha256": "e4a7917729b18af9a7fd6fe7ff2ce3e8baf077429362c980f551c0432f04dd46",
+      "bytes": 1110974,
+      "object": "objects/e4a7917729b18af9a7fd6fe7ff2ce3e8baf077429362c980f551c0432f04dd46.opus"
     },
     "audio/music-kits/proxy_01/lostround.mp3": {
       "sha256": "04d1734c78f8611883618c86d3a44f655a1b5c8d18ea5593f52bf29086777ff2",
@@ -7780,10 +7780,10 @@
       "bytes": 264569,
       "object": "objects/d88e7dd5903f265d9f5c6d32c9ff27fe591cfe266cc318bd8a82e9ceb41269a8.mp3"
     },
-    "audio/music-kits/proxy_01/startofmatch.flac": {
-      "sha256": "270ff51be005927fbe3643b4b271e2ad9c990ab9584a0246d2ec6e8d718d4708",
-      "bytes": 660234,
-      "object": "objects/270ff51be005927fbe3643b4b271e2ad9c990ab9584a0246d2ec6e8d718d4708.flac"
+    "audio/music-kits/proxy_01/startofmatch.opus": {
+      "sha256": "b7a352267a4b9257e263052f350bff9d85d420e15c32ae81eab40689ad1abbab",
+      "bytes": 172179,
+      "object": "objects/b7a352267a4b9257e263052f350bff9d85d420e15c32ae81eab40689ad1abbab.opus"
     },
     "audio/music-kits/proxy_01/startround_01.mp3": {
       "sha256": "c36c8cc603c93a1041ff3ce8d328aabd05370288645b8ec9e93778b1b01b6eda",
@@ -7961,15 +7961,15 @@
       "object": "objects/ea7ce9a88bdac6ec3fd58d5d39f4bf3b34d582e2af0299e6e473bc6851586172.mp3"
     },
     "audio/music-kits/README.md": {
-      "sha256": "c8d943feabc380114d6c51bbf6f48bd94b3f7b3b130e3c6dd3d8f80f9ceabcc9",
-      "bytes": 5748,
+      "sha256": "3a292353afea04db0e6b5550ccd087175d5be5222e7e09be9351de5ef500e0c3",
+      "bytes": 6804,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "c6666970e9671445e09e55ed74d8b26c5d593839a5883c0a651b40ae3241217d",
-        "bytes": 2108
+        "sha256": "be5bb0160503b9c0a6b76e0235bba7f780f86b8de45e1ca6577022d7e7568ee7",
+        "bytes": 2470
       },
-      "object": "objects/c6666970e9671445e09e55ed74d8b26c5d593839a5883c0a651b40ae3241217d.md.br"
+      "object": "objects/be5bb0160503b9c0a6b76e0235bba7f780f86b8de45e1ca6577022d7e7568ee7.md.br"
     },
     "audio/music-kits/repiet_01/bombplanted.mp3": {
       "sha256": "3370a736ed1ad7270d5dc394dc9aebaa11cc515eb7a58342fca5c90eef672231",
@@ -8076,10 +8076,10 @@
       "bytes": 86100,
       "object": "objects/4af39f22f90ce0dbac4df4bf4040192a81e78f651f15135d595cfe0267e5fc9e.mp3"
     },
-    "audio/music-kits/roam_01/endofmatch.flac": {
-      "sha256": "2c504e1b9786b4274c621a30daa6192e208254c45e6abdbb543adc43c15208dc",
-      "bytes": 4447042,
-      "object": "objects/2c504e1b9786b4274c621a30daa6192e208254c45e6abdbb543adc43c15208dc.flac"
+    "audio/music-kits/roam_01/endofmatch.opus": {
+      "sha256": "80ad754add43587a7702c9fd3204160e89140af7b718e68d900a92354e9978e8",
+      "bytes": 924018,
+      "object": "objects/80ad754add43587a7702c9fd3204160e89140af7b718e68d900a92354e9978e8.opus"
     },
     "audio/music-kits/roam_01/lostround.mp3": {
       "sha256": "40c20c271d07be894a968f6a1106667b1392703849fd093e69b08cc5c3afa4c0",
@@ -8116,10 +8116,10 @@
       "bytes": 283795,
       "object": "objects/db208da028fc59dcd4d5793447c9fe492f1779a9a6a04cd4f7d50c1c6f9255f3.mp3"
     },
-    "audio/music-kits/roam_01/startofmatch.flac": {
-      "sha256": "d45988729255e95b21bb42b8d861a6cb6e3dd602f816cdc78a9b004d7ae3a2c1",
-      "bytes": 556648,
-      "object": "objects/d45988729255e95b21bb42b8d861a6cb6e3dd602f816cdc78a9b004d7ae3a2c1.flac"
+    "audio/music-kits/roam_01/startofmatch.opus": {
+      "sha256": "a915eeb8209afd2d02f69fdef5b9f018aa65337efcdf19b9ac30708bbaa3fd81",
+      "bytes": 138713,
+      "object": "objects/a915eeb8209afd2d02f69fdef5b9f018aa65337efcdf19b9ac30708bbaa3fd81.opus"
     },
     "audio/music-kits/roam_01/startround_01.mp3": {
       "sha256": "082bd92c7757092c35cef43f022d0243565abcfd26808479f689216141b05f0f",
@@ -8161,15 +8161,15 @@
       "bytes": 156317,
       "object": "objects/9fc9f7b9f477274992a018942ce8a8dac41e56378c23e25ddc99467d580dd346.mp3"
     },
-    "audio/music-kits/robertallaire_01/endofmatch.flac": {
-      "sha256": "5aa48a2d8bd1edb83c9af68e5752372ba99e24a85c9b7162039454532a314233",
-      "bytes": 2459241,
-      "object": "objects/5aa48a2d8bd1edb83c9af68e5752372ba99e24a85c9b7162039454532a314233.flac"
+    "audio/music-kits/robertallaire_01/endofmatch.opus": {
+      "sha256": "d0b60a58611985c1a9520366079cc17a3c1d48abeeeb02bc2627e68e8dafc2c8",
+      "bytes": 1011823,
+      "object": "objects/d0b60a58611985c1a9520366079cc17a3c1d48abeeeb02bc2627e68e8dafc2c8.opus"
     },
-    "audio/music-kits/robertallaire_01/loading.flac": {
-      "sha256": "2178e704a84b92e7248ca57e117ed1375fa46326ccf10e200ce00740372b7e79",
-      "bytes": 8794309,
-      "object": "objects/2178e704a84b92e7248ca57e117ed1375fa46326ccf10e200ce00740372b7e79.flac"
+    "audio/music-kits/robertallaire_01/loading.opus": {
+      "sha256": "b307c019cb734e52881d6f9f3cde13e65fd3eaba935e1ba141bf6a0030fff269",
+      "bytes": 1957354,
+      "object": "objects/b307c019cb734e52881d6f9f3cde13e65fd3eaba935e1ba141bf6a0030fff269.opus"
     },
     "audio/music-kits/robertallaire_01/lostround.mp3": {
       "sha256": "34448487ca3c9c91b582ede5e7ca88ef406eb260a9cbbe8f5ed6983ed01ec14a",
@@ -8201,10 +8201,10 @@
       "bytes": 399151,
       "object": "objects/895e77085686cd89348f80eaab7faf6eef19b2a47ca7b11b4c181ec8d75b479b.mp3"
     },
-    "audio/music-kits/robertallaire_01/startofmatch.flac": {
-      "sha256": "aa5fc7b4b5d25f4cf4564c7156dd8ded32d9d36cb30f474330614d6432433469",
-      "bytes": 563847,
-      "object": "objects/aa5fc7b4b5d25f4cf4564c7156dd8ded32d9d36cb30f474330614d6432433469.flac"
+    "audio/music-kits/robertallaire_01/startofmatch.opus": {
+      "sha256": "df3edec3f9e43591620a60b3e3370e2ab8f9f7188acb110a3e7635b71ad3735f",
+      "bytes": 161381,
+      "object": "objects/df3edec3f9e43591620a60b3e3370e2ab8f9f7188acb110a3e7635b71ad3735f.opus"
     },
     "audio/music-kits/robertallaire_01/startround_01.mp3": {
       "sha256": "0162ada916fb596fb7f49b8ac0720fe02bfdf4d960763e833a932203e3bd0508",
@@ -8241,10 +8241,10 @@
       "bytes": 58097,
       "object": "objects/0f4247e771edfe0d6f9cbe50462fc62541656c1375e328fb262a3b235776ec17.mp3"
     },
-    "audio/music-kits/sammarshall_01/endofmatch.flac": {
-      "sha256": "b9c900be6ab4d43de02c1874089b46ccc522612db5311d0f9ae5cea077b47972",
-      "bytes": 5564637,
-      "object": "objects/b9c900be6ab4d43de02c1874089b46ccc522612db5311d0f9ae5cea077b47972.flac"
+    "audio/music-kits/sammarshall_01/endofmatch.opus": {
+      "sha256": "74ba2ce9b8ec7d4b4e9c443bbe4f4f4a5862a414e0556c78e19441896f65f649",
+      "bytes": 1292930,
+      "object": "objects/74ba2ce9b8ec7d4b4e9c443bbe4f4f4a5862a414e0556c78e19441896f65f649.opus"
     },
     "audio/music-kits/sammarshall_01/lostround.mp3": {
       "sha256": "9cf3a272c131aa4fcbab6af7695a4ce523d7859aeab9ce8db7314e7e35dcb291",
@@ -8276,10 +8276,10 @@
       "bytes": 229042,
       "object": "objects/b41c1d39212f2114ca0fc147f4eaa91e2ebcc9479593ea2e24ddc8f556224cb1.mp3"
     },
-    "audio/music-kits/sammarshall_01/startofmatch.flac": {
-      "sha256": "f551ee7eacc375aa68a9c7ecf4a16dc9fef13fea71821975e822d43583fadfdd",
-      "bytes": 798866,
-      "object": "objects/f551ee7eacc375aa68a9c7ecf4a16dc9fef13fea71821975e822d43583fadfdd.flac"
+    "audio/music-kits/sammarshall_01/startofmatch.opus": {
+      "sha256": "cd42f9a3f6d0e731780d04cfffa397316e0aeafecdb14a4acf908dcebe627edd",
+      "bytes": 161611,
+      "object": "objects/cd42f9a3f6d0e731780d04cfffa397316e0aeafecdb14a4acf908dcebe627edd.opus"
     },
     "audio/music-kits/sammarshall_01/startround_01.mp3": {
       "sha256": "d6788ddc5f47becc2de18550ca2db9a035f6ee5d6683b1e7be7b977cadabde9f",
@@ -8401,10 +8401,10 @@
       "bytes": 171782,
       "object": "objects/9f61ccc02d3cc0ff9e156b7c3ab70bd805abddc961e75a33a9312ee17a84c116.mp3"
     },
-    "audio/music-kits/sarahschachner_01/endofmatch.flac": {
-      "sha256": "0eab48ac867b2b438974be984384dfbe66f48b63bcd26869f55f08fae4f82683",
-      "bytes": 4236248,
-      "object": "objects/0eab48ac867b2b438974be984384dfbe66f48b63bcd26869f55f08fae4f82683.flac"
+    "audio/music-kits/sarahschachner_01/endofmatch.opus": {
+      "sha256": "ed007e961585af3bd4ec6f03d1042c6dcbe0d52bfee0926afd4f24580b95f278",
+      "bytes": 1202956,
+      "object": "objects/ed007e961585af3bd4ec6f03d1042c6dcbe0d52bfee0926afd4f24580b95f278.opus"
     },
     "audio/music-kits/sarahschachner_01/lostround.mp3": {
       "sha256": "3604b19f5cf66318f7d38f08e601dfc614c68419b94aa526dfa28a5c63b7b1fc",
@@ -8441,10 +8441,10 @@
       "bytes": 326009,
       "object": "objects/97a4b177b5bd6a445a681b79e95193021f3e7f6cb3c33f7cd4bdd55b1bd988c1.mp3"
     },
-    "audio/music-kits/sarahschachner_01/startofmatch.flac": {
-      "sha256": "0eab48ac867b2b438974be984384dfbe66f48b63bcd26869f55f08fae4f82683",
-      "bytes": 4236248,
-      "object": "objects/0eab48ac867b2b438974be984384dfbe66f48b63bcd26869f55f08fae4f82683.flac"
+    "audio/music-kits/sarahschachner_01/startofmatch.opus": {
+      "sha256": "ed007e961585af3bd4ec6f03d1042c6dcbe0d52bfee0926afd4f24580b95f278",
+      "bytes": 1202956,
+      "object": "objects/ed007e961585af3bd4ec6f03d1042c6dcbe0d52bfee0926afd4f24580b95f278.opus"
     },
     "audio/music-kits/sarahschachner_01/startround_01.mp3": {
       "sha256": "4f472fdef9eef5e7141a29e95086797425d98c00469c14233e28021007b62a16",
@@ -8481,10 +8481,10 @@
       "bytes": 84428,
       "object": "objects/7835925dac1bde9f465433ca7670647525b26a64b356328efa2680e7e7005d5a.mp3"
     },
-    "audio/music-kits/sasha_01/endofmatch.flac": {
-      "sha256": "8e4d7f0715cfa25859cd467b53c36eb0a449c99b4a59e822a28eaeaff9a30861",
-      "bytes": 4538226,
-      "object": "objects/8e4d7f0715cfa25859cd467b53c36eb0a449c99b4a59e822a28eaeaff9a30861.flac"
+    "audio/music-kits/sasha_01/endofmatch.opus": {
+      "sha256": "63fd245716ac1b3996fbda6073b1bf5a04d2f0676e2261b48349fd19e264de77",
+      "bytes": 1037147,
+      "object": "objects/63fd245716ac1b3996fbda6073b1bf5a04d2f0676e2261b48349fd19e264de77.opus"
     },
     "audio/music-kits/sasha_01/lostround.mp3": {
       "sha256": "76ef8e3162b098fd493709f6fdcfa82a9b8204d9d7feb8b6a9507c1013efb411",
@@ -8511,10 +8511,10 @@
       "bytes": 290064,
       "object": "objects/e1a6e3ee8e68b51409c08bfce93374701d6ee61729a10694d884d42609137c17.mp3"
     },
-    "audio/music-kits/sasha_01/startofmatch.flac": {
-      "sha256": "79cf502f8b6ee5ba5c7902ff01fdae13b998631b21bc2d49b6ebe56068edb85e",
-      "bytes": 443214,
-      "object": "objects/79cf502f8b6ee5ba5c7902ff01fdae13b998631b21bc2d49b6ebe56068edb85e.flac"
+    "audio/music-kits/sasha_01/startofmatch.opus": {
+      "sha256": "d1a8e0c4111e8597b00b7d91b0c62a8d9dbbc506514fc58cd0b5324a2b66cdc1",
+      "bytes": 182193,
+      "object": "objects/d1a8e0c4111e8597b00b7d91b0c62a8d9dbbc506514fc58cd0b5324a2b66cdc1.opus"
     },
     "audio/music-kits/sasha_01/startround_01.mp3": {
       "sha256": "40939434c0487d7e2ead408212aba59cf8facea8e84bb027cd187a840d2fb0e4",
@@ -8546,10 +8546,10 @@
       "bytes": 74815,
       "object": "objects/9db5cfe14dfb23c3cf6a0eafb8188a93f90a4822dbfeae53df687ad509df8fff.mp3"
     },
-    "audio/music-kits/scarlxrd_01/endofmatch.flac": {
-      "sha256": "11739660440bbcfa179614ffc9f724ed4cb736ecb228273c4241c5b93b66d708",
-      "bytes": 4845927,
-      "object": "objects/11739660440bbcfa179614ffc9f724ed4cb736ecb228273c4241c5b93b66d708.flac"
+    "audio/music-kits/scarlxrd_01/endofmatch.opus": {
+      "sha256": "f76c1a67f836ff8218682eda4cbab4acf8c59a6d56922171992fc65831f8cac0",
+      "bytes": 837278,
+      "object": "objects/f76c1a67f836ff8218682eda4cbab4acf8c59a6d56922171992fc65831f8cac0.opus"
     },
     "audio/music-kits/scarlxrd_01/lostround.mp3": {
       "sha256": "b1233c76936acc49e2dad4060e4a30e64942944f466907ac47caeb5899706c75",
@@ -8576,10 +8576,10 @@
       "bytes": 230714,
       "object": "objects/9fbe3635023bcf8a96405655a323756ebfa4dc73bba1bf9952465ddf9cd77d75.mp3"
     },
-    "audio/music-kits/scarlxrd_01/startofmatch.flac": {
-      "sha256": "2f538ffc39f87457d7012baac68f9e373cf7b374c94498aafc2fc86dc8f9d29a",
-      "bytes": 380813,
-      "object": "objects/2f538ffc39f87457d7012baac68f9e373cf7b374c94498aafc2fc86dc8f9d29a.flac"
+    "audio/music-kits/scarlxrd_01/startofmatch.opus": {
+      "sha256": "1742e9c2fadf5d4ffdd30b2b8c32be8b05d5de146b5018b171a2de8bb502296f",
+      "bytes": 150664,
+      "object": "objects/1742e9c2fadf5d4ffdd30b2b8c32be8b05d5de146b5018b171a2de8bb502296f.opus"
     },
     "audio/music-kits/scarlxrd_01/startround_01.mp3": {
       "sha256": "79d558c07096046b64864f392b84085a87b5743c9e984922a2d059a1cc2d0b9a",
@@ -8611,10 +8611,10 @@
       "bytes": 35527,
       "object": "objects/309eef64d465cec1e98e44ad4e34e900b5b6929631adbab7b5ee2ef1823af5c3.mp3"
     },
-    "audio/music-kits/scarlxrd_02/endofmatch.flac": {
-      "sha256": "2ed472cd849ef93e4b4e5c31f2c2333758119d162c3f120d9aa9e005b1899aae",
-      "bytes": 10398974,
-      "object": "objects/2ed472cd849ef93e4b4e5c31f2c2333758119d162c3f120d9aa9e005b1899aae.flac"
+    "audio/music-kits/scarlxrd_02/endofmatch.opus": {
+      "sha256": "bac876d9c112f6d9fb079375520cba0b96b8c27d823194c55c4b6bb803c987ac",
+      "bytes": 1932740,
+      "object": "objects/bac876d9c112f6d9fb079375520cba0b96b8c27d823194c55c4b6bb803c987ac.opus"
     },
     "audio/music-kits/scarlxrd_02/lostround.mp3": {
       "sha256": "36195c85db88a5c6eb51e263a32d41fa58342a238e94de15f8f4e3f4b4acd7b3",
@@ -8651,10 +8651,10 @@
       "bytes": 247432,
       "object": "objects/9a45fed1a518c804e5b83fd0af39085c9330a5fec33f3b1410923f7ecaee6de1.mp3"
     },
-    "audio/music-kits/scarlxrd_02/startofmatch.flac": {
-      "sha256": "35d05cd287e2848aa9215fb2450c594aa6383be107b63fa4e71ddd0f0407e7c3",
-      "bytes": 466902,
-      "object": "objects/35d05cd287e2848aa9215fb2450c594aa6383be107b63fa4e71ddd0f0407e7c3.flac"
+    "audio/music-kits/scarlxrd_02/startofmatch.opus": {
+      "sha256": "bb6bbe0455e85c0c205d1e9ee2f2ad79343f7b17afb98be372e376b80dd11b2b",
+      "bytes": 151969,
+      "object": "objects/bb6bbe0455e85c0c205d1e9ee2f2ad79343f7b17afb98be372e376b80dd11b2b.opus"
     },
     "audio/music-kits/scarlxrd_02/startround_01.mp3": {
       "sha256": "cefb4083056e04cee939191bf65ce3fefcf438d6d6702c095abf18574d3304f1",
@@ -8686,10 +8686,10 @@
       "bytes": 115775,
       "object": "objects/5909aec57b9c12dbbd9a915e7e80132f54d64afb0a178e341f0a009f1943ba11.mp3"
     },
-    "audio/music-kits/seanmurray_01/endofmatch.flac": {
-      "sha256": "27f1a9c2d7dd9b9727c79ee61f3f9536f30512ebf5d37811e0b7a416b72c41db",
-      "bytes": 4744968,
-      "object": "objects/27f1a9c2d7dd9b9727c79ee61f3f9536f30512ebf5d37811e0b7a416b72c41db.flac"
+    "audio/music-kits/seanmurray_01/endofmatch.opus": {
+      "sha256": "83b294e80819202a493c6325cd2fdaf3a9a2cd533bca8f257a81d4de2c531fcb",
+      "bytes": 890435,
+      "object": "objects/83b294e80819202a493c6325cd2fdaf3a9a2cd533bca8f257a81d4de2c531fcb.opus"
     },
     "audio/music-kits/seanmurray_01/lostround.mp3": {
       "sha256": "1fcc692876a4342a514ce2711506f792e453b8fb7a78d9d5529b8c35fb4036e7",
@@ -8721,10 +8721,10 @@
       "bytes": 429663,
       "object": "objects/d570f30b8969b5c297475df5c003ef2e90115f96c83f2a595f1ff807dd1a487f.mp3"
     },
-    "audio/music-kits/seanmurray_01/startofmatch.flac": {
-      "sha256": "4375a1e69b0b30aa7a02adc645ac7d07a239dab0dad4f94679733778ff2aece0",
-      "bytes": 406815,
-      "object": "objects/4375a1e69b0b30aa7a02adc645ac7d07a239dab0dad4f94679733778ff2aece0.flac"
+    "audio/music-kits/seanmurray_01/startofmatch.opus": {
+      "sha256": "00f7239d1583a4a4d7138538316922cad4a571ba69134b9c2c0813871716e63f",
+      "bytes": 129737,
+      "object": "objects/00f7239d1583a4a4d7138538316922cad4a571ba69134b9c2c0813871716e63f.opus"
     },
     "audio/music-kits/seanmurray_01/startround_01.mp3": {
       "sha256": "6307cfcad3996527a09dbf7a802788588b496578f767fc5b8eff66476e472efc",
@@ -8916,10 +8916,10 @@
       "bytes": 179015,
       "object": "objects/93ef9a76286b80d4b92b492115bd63109d98686104971a2425f24c2219e5012d.mp3"
     },
-    "audio/music-kits/skog_01/endofmatch.flac": {
-      "sha256": "1d339180f5d236b759538841ab4c2a8b7ae196e03aee9134eaac91b0de218342",
-      "bytes": 5421116,
-      "object": "objects/1d339180f5d236b759538841ab4c2a8b7ae196e03aee9134eaac91b0de218342.flac"
+    "audio/music-kits/skog_01/endofmatch.opus": {
+      "sha256": "27b856de5f7403458c37dbbf4e13fc4ee96de188f2ca7fc85b16aca233d078cd",
+      "bytes": 823475,
+      "object": "objects/27b856de5f7403458c37dbbf4e13fc4ee96de188f2ca7fc85b16aca233d078cd.opus"
     },
     "audio/music-kits/skog_01/lostround.mp3": {
       "sha256": "40684091643aecc18834fdfe6b01490a9bb5aeb469261dc3d1ffdbb4656c0c6a",
@@ -8951,10 +8951,10 @@
       "bytes": 666645,
       "object": "objects/182b38075f6ebd51f9c3777bd9d889f2a6348b7da4a822b062a8e38b43d68364.mp3"
     },
-    "audio/music-kits/skog_01/startofmatch.flac": {
-      "sha256": "1d339180f5d236b759538841ab4c2a8b7ae196e03aee9134eaac91b0de218342",
-      "bytes": 5421116,
-      "object": "objects/1d339180f5d236b759538841ab4c2a8b7ae196e03aee9134eaac91b0de218342.flac"
+    "audio/music-kits/skog_01/startofmatch.opus": {
+      "sha256": "27b856de5f7403458c37dbbf4e13fc4ee96de188f2ca7fc85b16aca233d078cd",
+      "bytes": 823475,
+      "object": "objects/27b856de5f7403458c37dbbf4e13fc4ee96de188f2ca7fc85b16aca233d078cd.opus"
     },
     "audio/music-kits/skog_01/startround_01.mp3": {
       "sha256": "27d7fe55cde8e39f9f07e0a9cc2516e30b47b0c6d8fc0ff22007be9f12aba93d",
@@ -8991,10 +8991,10 @@
       "bytes": 71054,
       "object": "objects/38e0be38e17bf63d1131d154e0392054e16480531c3c4ccb006b18909eb8c2c3.mp3"
     },
-    "audio/music-kits/skog_02/endofmatch.flac": {
-      "sha256": "2f520a4d97e93d40950b5b4dccb8da2b73c7f9fe90fcbe780ac6b60f320070f3",
-      "bytes": 4656625,
-      "object": "objects/2f520a4d97e93d40950b5b4dccb8da2b73c7f9fe90fcbe780ac6b60f320070f3.flac"
+    "audio/music-kits/skog_02/endofmatch.opus": {
+      "sha256": "71febd9acee0c6bbfe5570aaaedc09b0825e2739cff69983b4b1d105b689ad14",
+      "bytes": 848665,
+      "object": "objects/71febd9acee0c6bbfe5570aaaedc09b0825e2739cff69983b4b1d105b689ad14.opus"
     },
     "audio/music-kits/skog_02/lostround.mp3": {
       "sha256": "b3aa7f0461a0052291b2524d68ebc5cf3703dfd70e78fc285700aceb2b966b75",
@@ -9021,10 +9021,10 @@
       "bytes": 262897,
       "object": "objects/0e56eb8cd14c5c9df1bf66defa901a6794ce23bdddbb2d8e771a043c9ebe7e8c.mp3"
     },
-    "audio/music-kits/skog_02/startofmatch.flac": {
-      "sha256": "2f520a4d97e93d40950b5b4dccb8da2b73c7f9fe90fcbe780ac6b60f320070f3",
-      "bytes": 4656625,
-      "object": "objects/2f520a4d97e93d40950b5b4dccb8da2b73c7f9fe90fcbe780ac6b60f320070f3.flac"
+    "audio/music-kits/skog_02/startofmatch.opus": {
+      "sha256": "71febd9acee0c6bbfe5570aaaedc09b0825e2739cff69983b4b1d105b689ad14",
+      "bytes": 848665,
+      "object": "objects/71febd9acee0c6bbfe5570aaaedc09b0825e2739cff69983b4b1d105b689ad14.opus"
     },
     "audio/music-kits/skog_02/startround_01.mp3": {
       "sha256": "16184e224eb729b03a653e89cea33638b3165b2cd06b2235af9534e7d94d1e45",
@@ -9056,10 +9056,10 @@
       "bytes": 101983,
       "object": "objects/57605eeef40730ccf0d3c04ecbe4d36c37fb938474276e0e1d4ea8c4e7c24ae9.mp3"
     },
-    "audio/music-kits/skog_03/endofmatch.flac": {
-      "sha256": "88bcdd28fb0a4d3a09a755bf5edfdeb68349395e2d1e5c7af0f6c0c73765e7ce",
-      "bytes": 4758695,
-      "object": "objects/88bcdd28fb0a4d3a09a755bf5edfdeb68349395e2d1e5c7af0f6c0c73765e7ce.flac"
+    "audio/music-kits/skog_03/endofmatch.opus": {
+      "sha256": "a1d8d75f94145a0e484d66f7a0cb436c3c11e80fad1b7b1524865b0e7784f8ff",
+      "bytes": 760900,
+      "object": "objects/a1d8d75f94145a0e484d66f7a0cb436c3c11e80fad1b7b1524865b0e7784f8ff.opus"
     },
     "audio/music-kits/skog_03/lostround.mp3": {
       "sha256": "dc7943fb7ea7ead421b898c1a50e6a8ea7dc8c740945f9f4bddfa266d1dd2a46",
@@ -9086,10 +9086,10 @@
       "bytes": 107416,
       "object": "objects/7fb0b787ee9c6c4d2a44bc48eb817d3f5ab8a71398875f301f60d6d8b4927a32.mp3"
     },
-    "audio/music-kits/skog_03/startofmatch.flac": {
-      "sha256": "88bcdd28fb0a4d3a09a755bf5edfdeb68349395e2d1e5c7af0f6c0c73765e7ce",
-      "bytes": 4758695,
-      "object": "objects/88bcdd28fb0a4d3a09a755bf5edfdeb68349395e2d1e5c7af0f6c0c73765e7ce.flac"
+    "audio/music-kits/skog_03/startofmatch.opus": {
+      "sha256": "a1d8d75f94145a0e484d66f7a0cb436c3c11e80fad1b7b1524865b0e7784f8ff",
+      "bytes": 760900,
+      "object": "objects/a1d8d75f94145a0e484d66f7a0cb436c3c11e80fad1b7b1524865b0e7784f8ff.opus"
     },
     "audio/music-kits/skog_03/startround_01.mp3": {
       "sha256": "1f68bc57b570d5cf3ae3ec3aa8fc11c8f2c904c6cb3f5bd79df0bf9624265046",
@@ -9102,15 +9102,15 @@
       "object": "objects/ff363749dd63c466b3cfae0686dc40680243bdbd8491bfd784a4076e8504cea0.mp3"
     },
     "audio/music-kits/source.json": {
-      "sha256": "4e1d42eb1a4f9e25099ee00d58670314705420043653d1f34068ad4b4f336e2c",
-      "bytes": 4413997,
+      "sha256": "92d05b58d7938ee82224224cd0af5081101a641f4bdf2490b0bee7d9f56397f0",
+      "bytes": 4599292,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "ecee0aac4cef1bd64e86da01b0c057eccf40f7f843a3612db8a9a44f9544e481",
-        "bytes": 273738
+        "sha256": "9bdc43a73b82c12241951c13260880f6687dd23ae0400c2dfe5683765511bb7d",
+        "bytes": 281130
       },
-      "object": "objects/ecee0aac4cef1bd64e86da01b0c057eccf40f7f843a3612db8a9a44f9544e481.json.br"
+      "object": "objects/9bdc43a73b82c12241951c13260880f6687dd23ae0400c2dfe5683765511bb7d.json.br"
     },
     "audio/music-kits/starjunk95_01/bombplanted.mp3": {
       "sha256": "e893f8a7e3aa807336ff7201b03a19e56883c3d8dcaa859ed616a1cedb268505",
@@ -9222,10 +9222,10 @@
       "bytes": 89862,
       "object": "objects/a5948025abf9960c18b883fa2a5963534589edf274d70e6a2a24e345d867293b.mp3"
     },
-    "audio/music-kits/sullivanking_01/endofmatch.flac": {
-      "sha256": "97c39ffff00167c1aeb6dd01bfd23fbd50a795a72667962105e6cc0f1d301245",
-      "bytes": 5220911,
-      "object": "objects/97c39ffff00167c1aeb6dd01bfd23fbd50a795a72667962105e6cc0f1d301245.flac"
+    "audio/music-kits/sullivanking_01/endofmatch.opus": {
+      "sha256": "824de3a367997bb36a3bf39c58df92ad282ade178414e41ee4b0d1ae7b7426fd",
+      "bytes": 993570,
+      "object": "objects/824de3a367997bb36a3bf39c58df92ad282ade178414e41ee4b0d1ae7b7426fd.opus"
     },
     "audio/music-kits/sullivanking_01/lostround.mp3": {
       "sha256": "1888d152fd2acc1f1e8c57dae3bb3f01d8150dac1ba8d09df5342fb2419c830e",
@@ -9257,10 +9257,10 @@
       "bytes": 416288,
       "object": "objects/31e5ff91b80c041e93b53b517bcadcc40f2ad0de8fb1fa6a70f0640fc6b3e48d.mp3"
     },
-    "audio/music-kits/sullivanking_01/startofmatch.flac": {
-      "sha256": "97c39ffff00167c1aeb6dd01bfd23fbd50a795a72667962105e6cc0f1d301245",
-      "bytes": 5220911,
-      "object": "objects/97c39ffff00167c1aeb6dd01bfd23fbd50a795a72667962105e6cc0f1d301245.flac"
+    "audio/music-kits/sullivanking_01/startofmatch.opus": {
+      "sha256": "824de3a367997bb36a3bf39c58df92ad282ade178414e41ee4b0d1ae7b7426fd",
+      "bytes": 993570,
+      "object": "objects/824de3a367997bb36a3bf39c58df92ad282ade178414e41ee4b0d1ae7b7426fd.opus"
     },
     "audio/music-kits/sullivanking_01/startround_01.mp3": {
       "sha256": "2efedd7fcad45f14ae74d9620af27a159da543dd89652a0d08e0d9dda1707b43",
@@ -9297,10 +9297,10 @@
       "bytes": 33019,
       "object": "objects/1f1ded4ecc462a95d4a46a47871ba9b7f975f926599ba771c39d9dc5e075c171.mp3"
     },
-    "audio/music-kits/theverkkars_01/endofmatch.flac": {
-      "sha256": "53bbb30be867ef41f32cd3238cedc7ada1bbbcc9966dc383e5ad68302325673c",
-      "bytes": 5560550,
-      "object": "objects/53bbb30be867ef41f32cd3238cedc7ada1bbbcc9966dc383e5ad68302325673c.flac"
+    "audio/music-kits/theverkkars_01/endofmatch.opus": {
+      "sha256": "80e25381ca94c1708f6cc4392b0468dbe2bff11b1a7908d37a97e36a8f499e86",
+      "bytes": 945879,
+      "object": "objects/80e25381ca94c1708f6cc4392b0468dbe2bff11b1a7908d37a97e36a8f499e86.opus"
     },
     "audio/music-kits/theverkkars_01/lostround.mp3": {
       "sha256": "e729026222d7298b4b568a329d1aa2257a2f8f790bca3bed81125db0916ad7a4",
@@ -9332,10 +9332,10 @@
       "bytes": 264987,
       "object": "objects/f82918c7f6555a72929323b65cd8d3ad692869bf29c72a87021e86bb53a1f6b6.mp3"
     },
-    "audio/music-kits/theverkkars_01/startofmatch.flac": {
-      "sha256": "c256940ee8fdaef17a544db183e5b6e4b07f6a167eada4482676a65c1739cc06",
-      "bytes": 871751,
-      "object": "objects/c256940ee8fdaef17a544db183e5b6e4b07f6a167eada4482676a65c1739cc06.flac"
+    "audio/music-kits/theverkkars_01/startofmatch.opus": {
+      "sha256": "ac76e3b9818de32b678729b02de1e92f622eb8e6ddc006376f46c5e6942209d6",
+      "bytes": 164648,
+      "object": "objects/ac76e3b9818de32b678729b02de1e92f622eb8e6ddc006376f46c5e6942209d6.opus"
     },
     "audio/music-kits/theverkkars_01/startround_01.mp3": {
       "sha256": "0230bf0cff5d8257572f7a80ab5c05bf16019610e67a0f0452f71520b5d79d4e",
@@ -9372,10 +9372,10 @@
       "bytes": 56425,
       "object": "objects/0b0d39e7c9499c559200b00a9c46f0435b41905d7e110bdeff1bcd970a9d0d89.mp3"
     },
-    "audio/music-kits/theverkkars_02/endofmatch.flac": {
-      "sha256": "eb36f5bfb92d099c33863d072ff6166df37ed7286242a6f0000971bf4e2c4376",
-      "bytes": 5095223,
-      "object": "objects/eb36f5bfb92d099c33863d072ff6166df37ed7286242a6f0000971bf4e2c4376.flac"
+    "audio/music-kits/theverkkars_02/endofmatch.opus": {
+      "sha256": "1ac71f693b7a629b416f6e0d6510560f10019dd9a5f9c24b42bf090c0a3990d2",
+      "bytes": 930668,
+      "object": "objects/1ac71f693b7a629b416f6e0d6510560f10019dd9a5f9c24b42bf090c0a3990d2.opus"
     },
     "audio/music-kits/theverkkars_02/lostround.mp3": {
       "sha256": "2f25a685dc83ea176f9c68ff156998444174fdbb5e2a07fb32a7da0a876a35fd",
@@ -9407,10 +9407,10 @@
       "bytes": 246596,
       "object": "objects/3935b0fa776e17dbe5d89d1924f4e9b41076b3e44ea0b3e635b170efc794554e.mp3"
     },
-    "audio/music-kits/theverkkars_02/startofmatch.flac": {
-      "sha256": "bf78a94ea259edfd095000689c1f05db88daacd828861c44b43a1338289a4849",
-      "bytes": 619887,
-      "object": "objects/bf78a94ea259edfd095000689c1f05db88daacd828861c44b43a1338289a4849.flac"
+    "audio/music-kits/theverkkars_02/startofmatch.opus": {
+      "sha256": "63e25b4f5262bfde216f5e77996716d8b05116f83169b0da7648845f35e79bdc",
+      "bytes": 168038,
+      "object": "objects/63e25b4f5262bfde216f5e77996716d8b05116f83169b0da7648845f35e79bdc.opus"
     },
     "audio/music-kits/theverkkars_02/startround_01.mp3": {
       "sha256": "7096a9d4389b9f3ac8f2f6afaa4360c3f712fef4262d989d221359a223bf8003",
@@ -9512,10 +9512,10 @@
       "bytes": 97803,
       "object": "objects/dfd1d24f363cb98127c7f85f8b0fd1df561a34542369e8849604fd5086912f4b.mp3"
     },
-    "audio/music-kits/timhuling_01/endofmatch.flac": {
-      "sha256": "2e949ef3b73bf5a2f7f63fdee5e05267a856aa4a4d198aff20fb4010556e9632",
-      "bytes": 3662525,
-      "object": "objects/2e949ef3b73bf5a2f7f63fdee5e05267a856aa4a4d198aff20fb4010556e9632.flac"
+    "audio/music-kits/timhuling_01/endofmatch.opus": {
+      "sha256": "e3a8cbc1c6d1a6c262dc900d66a326e09b62a3652c307b46cfe1f93366344e57",
+      "bytes": 805361,
+      "object": "objects/e3a8cbc1c6d1a6c262dc900d66a326e09b62a3652c307b46cfe1f93366344e57.opus"
     },
     "audio/music-kits/timhuling_01/lostround.mp3": {
       "sha256": "25adb6657c8442eba1ec73042ebba31ce6ea3b1479658e3c5d93eb340d31504f",
@@ -9552,10 +9552,10 @@
       "bytes": 316396,
       "object": "objects/d4a8b9b068ee731a1b074879198241586f09d5ce8bc506ea7293d022776fc769.mp3"
     },
-    "audio/music-kits/timhuling_01/startofmatch.flac": {
-      "sha256": "2e949ef3b73bf5a2f7f63fdee5e05267a856aa4a4d198aff20fb4010556e9632",
-      "bytes": 3662525,
-      "object": "objects/2e949ef3b73bf5a2f7f63fdee5e05267a856aa4a4d198aff20fb4010556e9632.flac"
+    "audio/music-kits/timhuling_01/startofmatch.opus": {
+      "sha256": "e3a8cbc1c6d1a6c262dc900d66a326e09b62a3652c307b46cfe1f93366344e57",
+      "bytes": 805361,
+      "object": "objects/e3a8cbc1c6d1a6c262dc900d66a326e09b62a3652c307b46cfe1f93366344e57.opus"
     },
     "audio/music-kits/timhuling_01/startround_01.mp3": {
       "sha256": "eea3be6a8fab8811769194257deebdca07a15c297d5a625c46db68b8d51f4122",
@@ -9752,10 +9752,10 @@
       "bytes": 102818,
       "object": "objects/de29fd0f24502c61c87663f31ef58543e3876f220421ddf816a94cbd11a09bf8.mp3"
     },
-    "audio/music-kits/treeadams_benbromfield_01/endofmatch.flac": {
-      "sha256": "555068e5d09317a3bf4ff7824cd7e10aa208fcb2d2ff03a4f57e3eaf330bb875",
-      "bytes": 4694406,
-      "object": "objects/555068e5d09317a3bf4ff7824cd7e10aa208fcb2d2ff03a4f57e3eaf330bb875.flac"
+    "audio/music-kits/treeadams_benbromfield_01/endofmatch.opus": {
+      "sha256": "ff6542949ff4b9b0a421679bd1657fc5fb284ade486d56a8e6e69cbff45a3885",
+      "bytes": 1072059,
+      "object": "objects/ff6542949ff4b9b0a421679bd1657fc5fb284ade486d56a8e6e69cbff45a3885.opus"
     },
     "audio/music-kits/treeadams_benbromfield_01/lostround.mp3": {
       "sha256": "90c73be10c7c268b52bf27e76390d36decf31de89b4ebdc4c71875a9cde85c55",
@@ -9787,10 +9787,10 @@
       "bytes": 253702,
       "object": "objects/8e388eb388a2135e54b33f9754052a5a16de03fdd5e90e1c274b8f7e5459581e.mp3"
     },
-    "audio/music-kits/treeadams_benbromfield_01/startofmatch.flac": {
-      "sha256": "555068e5d09317a3bf4ff7824cd7e10aa208fcb2d2ff03a4f57e3eaf330bb875",
-      "bytes": 4694406,
-      "object": "objects/555068e5d09317a3bf4ff7824cd7e10aa208fcb2d2ff03a4f57e3eaf330bb875.flac"
+    "audio/music-kits/treeadams_benbromfield_01/startofmatch.opus": {
+      "sha256": "ff6542949ff4b9b0a421679bd1657fc5fb284ade486d56a8e6e69cbff45a3885",
+      "bytes": 1072059,
+      "object": "objects/ff6542949ff4b9b0a421679bd1657fc5fb284ade486d56a8e6e69cbff45a3885.opus"
     },
     "audio/music-kits/treeadams_benbromfield_01/startround_01.mp3": {
       "sha256": "15dafe3ec3e6e85e076fe33e9e48d7369630824157a50f24da9379028c63a39e",
@@ -9827,10 +9827,10 @@
       "bytes": 63530,
       "object": "objects/c6c53ed9ce6352056d716733805db69a0a8ce73f87e97bbb171420fd3f5d939c.mp3"
     },
-    "audio/music-kits/troelsfolmann_01/endofmatch.flac": {
-      "sha256": "90644e4d5019f27f2675642ddb24b73ed490a199d7dab62b0814bee0550bf3cb",
-      "bytes": 4321239,
-      "object": "objects/90644e4d5019f27f2675642ddb24b73ed490a199d7dab62b0814bee0550bf3cb.flac"
+    "audio/music-kits/troelsfolmann_01/endofmatch.opus": {
+      "sha256": "f51afc14634941dcf21813adc05173102a16aa3683a8e4d081a57f57e3d10fb4",
+      "bytes": 1075949,
+      "object": "objects/f51afc14634941dcf21813adc05173102a16aa3683a8e4d081a57f57e3d10fb4.opus"
     },
     "audio/music-kits/troelsfolmann_01/lostround.mp3": {
       "sha256": "9c40528e4eeee3f7e45d16bf33af7db7015fa46696959c1b1df3c8b34c85ad25",
@@ -9862,10 +9862,10 @@
       "bytes": 298423,
       "object": "objects/ef7da58a220cf3eb50b4a93df055b01af2fe58627ec28ebc064a44f79810776c.mp3"
     },
-    "audio/music-kits/troelsfolmann_01/startofmatch.flac": {
-      "sha256": "90644e4d5019f27f2675642ddb24b73ed490a199d7dab62b0814bee0550bf3cb",
-      "bytes": 4321239,
-      "object": "objects/90644e4d5019f27f2675642ddb24b73ed490a199d7dab62b0814bee0550bf3cb.flac"
+    "audio/music-kits/troelsfolmann_01/startofmatch.opus": {
+      "sha256": "f51afc14634941dcf21813adc05173102a16aa3683a8e4d081a57f57e3d10fb4",
+      "bytes": 1075949,
+      "object": "objects/f51afc14634941dcf21813adc05173102a16aa3683a8e4d081a57f57e3d10fb4.opus"
     },
     "audio/music-kits/troelsfolmann_01/startround_01.mp3": {
       "sha256": "a43bf79653198d0c1b587637e3e7e8f0fee38a8310081228938f78814ba8fb28",
@@ -9977,10 +9977,10 @@
       "bytes": 75233,
       "object": "objects/6acc40be9f010fbb7138bb67a6d72731bdee21a03cbbd07066de5b81d6fa49f7.mp3"
     },
-    "audio/music-kits/twinatlantic_01/endofmatch.flac": {
-      "sha256": "2011ce4ba3669829f4420a7d3234050a7c8dcaa6f2f83801c31589f34bab8454",
-      "bytes": 4871198,
-      "object": "objects/2011ce4ba3669829f4420a7d3234050a7c8dcaa6f2f83801c31589f34bab8454.flac"
+    "audio/music-kits/twinatlantic_01/endofmatch.opus": {
+      "sha256": "6de292a812097a86baf2dbabb858757230db8bf3c88db40bf733efa53867babd",
+      "bytes": 866674,
+      "object": "objects/6de292a812097a86baf2dbabb858757230db8bf3c88db40bf733efa53867babd.opus"
     },
     "audio/music-kits/twinatlantic_01/lostround.mp3": {
       "sha256": "1372a1831ca54968b0cc20a8e73397f47ae02c7dca33da602db7f7dc18c92679",
@@ -10017,10 +10017,10 @@
       "bytes": 190172,
       "object": "objects/b642f1c94685b07cc6cee8b774e9068eb1e42f7e9e9cbe3564400cb3d6e37b96.mp3"
     },
-    "audio/music-kits/twinatlantic_01/startofmatch.flac": {
-      "sha256": "2011ce4ba3669829f4420a7d3234050a7c8dcaa6f2f83801c31589f34bab8454",
-      "bytes": 4871198,
-      "object": "objects/2011ce4ba3669829f4420a7d3234050a7c8dcaa6f2f83801c31589f34bab8454.flac"
+    "audio/music-kits/twinatlantic_01/startofmatch.opus": {
+      "sha256": "6de292a812097a86baf2dbabb858757230db8bf3c88db40bf733efa53867babd",
+      "bytes": 866674,
+      "object": "objects/6de292a812097a86baf2dbabb858757230db8bf3c88db40bf733efa53867babd.opus"
     },
     "audio/music-kits/twinatlantic_01/startround_01.mp3": {
       "sha256": "da1792e2807eaac4e2bfd5741384e03f764ee9db92eb1724678ed91a98bebae5",
@@ -10062,10 +10062,10 @@
       "bytes": 81503,
       "object": "objects/36a4b48bd76ce324e56402a9d5dae1ec9934bd7b41d6e1c9005be841a9b22298.mp3"
     },
-    "audio/music-kits/valve_01/endofmatch.flac": {
-      "sha256": "b66e9b351e8a725f7d148a2b22f0b26e388c625d18cf26bc164526c18e2bbbdd",
-      "bytes": 4401408,
-      "object": "objects/b66e9b351e8a725f7d148a2b22f0b26e388c625d18cf26bc164526c18e2bbbdd.flac"
+    "audio/music-kits/valve_01/endofmatch.opus": {
+      "sha256": "905509122f0d04dfac5917051a5369c9f2a2558fcc0c9d6c75aae68f79307ea5",
+      "bytes": 1002136,
+      "object": "objects/905509122f0d04dfac5917051a5369c9f2a2558fcc0c9d6c75aae68f79307ea5.opus"
     },
     "audio/music-kits/valve_01/lostround.mp3": {
       "sha256": "21131e68defa6c07754d8db76d31fed6fa1b0516315e8b241f54b2368872685a",
@@ -10092,10 +10092,10 @@
       "bytes": 625685,
       "object": "objects/34fb9dfdd215dd7ff1bf47f07b35a0fe131d1c248b870a476ab4c776e66295e6.mp3"
     },
-    "audio/music-kits/valve_01/startofmatch.flac": {
-      "sha256": "b66e9b351e8a725f7d148a2b22f0b26e388c625d18cf26bc164526c18e2bbbdd",
-      "bytes": 4401408,
-      "object": "objects/b66e9b351e8a725f7d148a2b22f0b26e388c625d18cf26bc164526c18e2bbbdd.flac"
+    "audio/music-kits/valve_01/startofmatch.opus": {
+      "sha256": "905509122f0d04dfac5917051a5369c9f2a2558fcc0c9d6c75aae68f79307ea5",
+      "bytes": 1002136,
+      "object": "objects/905509122f0d04dfac5917051a5369c9f2a2558fcc0c9d6c75aae68f79307ea5.opus"
     },
     "audio/music-kits/valve_01/startround_01.mp3": {
       "sha256": "98fb150b4532139d5da53be0eec7b60c28c268f3adcfd66347ba93013f12a861",

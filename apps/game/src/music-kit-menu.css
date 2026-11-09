@@ -15,10 +15,6 @@
 #skin-menu .music-kit-dialog .inventory-sections {
   flex-shrink: 0;
 }
-#skin-menu #close-music-kits {
-  margin-left: auto;
-  font-size: calc(24 * var(--menu-unit));
-}
 .music-kit-content {
   flex: 1;
   min-height: 0;
@@ -38,14 +34,19 @@
   padding: calc(16 * var(--menu-unit));
   font-size: calc(16 * var(--menu-unit));
 }
-.music-kit-search input {
+#music-kit-search {
   width: min(100%, calc(400 * var(--menu-unit)));
-  background: transparent;
+  padding: calc(6 * var(--menu-unit)) calc(8 * var(--menu-unit));
+  background: #0006;
   border: 0;
   border-bottom: calc(2 * var(--menu-unit)) solid #ddd;
   border-radius: 0;
   font: inherit;
-  color: inherit;
+  color: #fff;
+}
+#music-kit-search::placeholder {
+  color: #eee;
+  opacity: 1;
 }
 #music-kit-items {
   min-height: 0;
@@ -176,13 +177,11 @@
   text-align: left;
 }
 #music-kit-status {
-  flex: 0 0 auto;
-  height: auto;
-  min-height: calc(36 * var(--menu-unit));
-  margin: 0;
-  padding: calc(8 * var(--menu-unit)) calc(24 * var(--menu-unit));
-  background: #0004;
-  font-size: calc(15 * var(--menu-unit));
+  min-height: 2.8em;
+  margin: calc(-12 * var(--menu-unit)) 0 calc(12 * var(--menu-unit));
+  color: #c2dce7;
+  font-size: calc(13 * var(--menu-unit));
+  line-height: 1.4;
 }
 @media (max-width: 1000px) {
   .music-kit-content {
@@ -199,7 +198,7 @@
   line-height: 1.4;
   color: #bbb;
 }
-.music-kit-search input:focus {
-  border-bottom-width: calc(6 * var(--menu-unit));
+#music-kit-search:focus {
+  border-bottom-color: #a9e6ff;
   outline: none;
 }

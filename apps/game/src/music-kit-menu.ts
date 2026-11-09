@@ -20,7 +20,6 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
     <button id="music-kit-agents" type="button">AGENTS</button>
     <button id="music-kit-gloves" type="button">GLOVES</button>
     <button type="button" aria-current="page">MUSIC KITS</button>
-    <button id="close-music-kits" class="close" type="button" aria-label="Close music kits">×</button>
   </nav>
   <div class="music-kit-content"><section class="music-kit-browser">
     <label class="music-kit-search">Find a music kit<input id="music-kit-search" type="search" placeholder="Search music kits…" autocomplete="off"></label>
@@ -28,8 +27,9 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
   </section><section class="music-kit-detail" aria-label="Selected music kit">
     <img id="music-kit-art" alt="" hidden><h2 id="music-kit-name"></h2><p id="music-kit-artist"></p>
     <p id="music-kit-description"></p><div class="music-kit-actions"><button id="equip-music-kit" type="button" disabled>EQUIP MUSIC KIT</button><button id="stop-music-kit" type="button" disabled>STOP PREVIEW</button></div>
+    <p id="music-kit-status" role="status" aria-live="polite"></p>
     <div id="music-kit-tracks" role="group" aria-label="Music events and tracks"></div>
-  </section></div><footer id="music-kit-status" role="status" aria-live="polite"></footer>`;
+  </section></div>`;
   overlay.append(dialog);
   const get = <E extends HTMLElement>(id: string) => dialog.querySelector<E>(`#${id}`)!;
   const player = game.soundscape.musicKits;
@@ -98,7 +98,7 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
         button.onclick = () => {
           game.ensureAudio();
           player.preview(kit, event, index);
-          status.textContent = `Previewing ${title.textContent}${cue.tracks.length > 1 ? `, variant ${index + 1}` : ""}.`;
+          status.textContent = `Playing: ${title.textContent}${cue.tracks.length > 1 ? ` · Variant ${index + 1}` : ""}`;
         };
         group.append(button);
       });
@@ -177,7 +177,6 @@ export function setupMusicKitMenu(game: Game, closeCosmetics: () => void) {
   get("music-kit-weapons").onclick = () => returnTo("skins-button");
   get("music-kit-agents").onclick = () => returnTo("inventory-agents");
   get("music-kit-gloves").onclick = () => returnTo("inventory-gloves");
-  get("close-music-kits").onclick = () => returnTo("close-skins");
   stop.onclick = stopPreview;
   search.oninput = list;
   equip.onclick = async () => {

@@ -72,8 +72,8 @@ export async function prepare(directory = root, expectedEntries, onProgress) {
     const expected = expectedEntries?.[target];
     // Music loops seek by codec byte offsets. HTTP content encoding would make
     // Range requests address a different representation (and often force a full
-    // download), so kit MP3/FLAC objects must retain their original wire bytes.
-    const streamedMusic = path.startsWith("audio/music-kits/") && /\.(mp3|flac)$/.test(path);
+    // download), so kit MP3/FLAC/Opus objects must retain their original wire bytes.
+    const streamedMusic = path.startsWith("audio/music-kits/") && /\.(mp3|flac|opus)$/.test(path);
     if (!streamedMusic && (!expected || expected.transport || expected.sha256 !== entry.sha256)) {
       // HTTP transport compression is independent of the file format. A .gz
       // response still decodes to the exact gzip bytes expected by game loaders.

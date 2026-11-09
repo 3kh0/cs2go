@@ -8,7 +8,7 @@ current event. StatTrak and ordinary items share the same music definition and
 media rather than duplicating the library.
 
 The runtime library contains 1,581 kit audio assets: 1,442 native MP3 files and
-139 lossless FLAC files, totaling 1,271,284,003 bytes, plus 102 inventory images.
+139 Ogg Opus delivery files, totaling 849,431,078 bytes, plus 102 inventory images.
 The separate reference export also retains global stingers, an empty sound and
 unused physical-case texture maps; these are not mislabeled as kit tracks.
 
@@ -65,14 +65,27 @@ metadata.
 
 ## Media, loading and transport
 
-Native MP3 payloads are kept bit for bit. Native PCM16 recordings use lossless
-FLAC with no resampling, remixing, trimming or normalization. Every FLAC is decoded
-back to signed 16-bit PCM and its SHA-256 is checked against the compiled native
-sample payload. Converted PNGs preserve the inventory artwork; unused physical
-CD-case material maps and source tool files remain in the external export.
+Native MP3 payloads are kept bit for bit. Native PCM16 recordings are served as
+160 kbps variable-bitrate Ogg Opus, encoded with FFmpeg/libopus at complexity 10
+in audio mode with 20 ms frames. The required 48 kHz sample rate is explicit;
+there is no trimming, normalization or channel downmix. These delivery copies
+are lossy. Verified lossless FLAC sources remain outside public assets in the
+original export, with their original hashes and PCM verification preserved under
+`lossless_source` in each converted provenance record.
+
+The 139 former runtime FLACs shrink from 532,858,694 to 111,005,769 bytes, saving
+421,852,925 bytes (79.2% of that subset). Every Opus file is fully decoded after
+encoding and its sample count must match the resampled native length within one
+48 kHz sample, checking that encoder pre-skip and end padding preserve timing.
+Existing per-event start/end times, weights and envelopes are unchanged. None
+of the converted tracks supplies a currently declared looping cue; native round
+loops continue using their original MP3s.
+
+Converted PNGs preserve the inventory artwork; unused physical CD-case material
+maps and source tool files remain in the external export.
 
 Music streams on demand; opening the game must not download or decode the whole
-library. Music-kit MP3/FLAC HTTP objects use identity transport so media byte
+library. Music-kit MP3/Opus HTTP objects use identity transport so media byte
 ranges and authored seeks address codec bytes directly. Other asset transport
 policies remain unchanged. The catalog's native parameters do not establish
 complete Source mixer or engine timing parity.
@@ -87,16 +100,20 @@ VPK directory/tool hashes and resource CRC/SHA checks. Its `export_music.py`,
 selection and lossless conversion. They require the installed game and the
 recorded tool versions; native originals stay untouched.
 
-Given that complete verified export directory, run from the repository root:
+Given the checked-in library/catalog and that complete verified lossless export,
+rebuild the Opus delivery copies from the repository root:
 
 ```sh
-python3 packages/assets/import-music-kits.py /path/to/verified-music-export
+python3 packages/assets/encode-music-opus.py /path/to/verified-music-export
 bun run assets:prepare
 ```
 
-The local importer verifies converted file hashes, independently verifies FLAC
-PCM through FFmpeg, copies only music-kit tracks and associated inventory art,
-checks that every catalog track resolves, and regenerates catalog/provenance.
-`--metadata-only` exists for concurrent implementation before media transfer;
-that output alone is not a complete releasable library. Do not commit native
-VPKs, tool executables, source WAVs, transfer archives or screenshots.
+The encoder checks each lossless input against its recorded SHA-256, stages and
+fully decodes all outputs before publishing, updates catalog/provenance bindings,
+and removes the superseded public FLAC copies only after successful validation.
+It never modifies the external lossless export. The Ogg muxer uses bitexact flags
+and a fixed serial offset for repeatability with the recorded encoder toolchain.
+The retained source-script snapshots document the original native extraction;
+the former initial importer is no longer a maintained repository tool.
+Do not commit native VPKs, tool executables, lossless source exports, transfer
+archives or screenshots.

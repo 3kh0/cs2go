@@ -73,7 +73,7 @@ test("music kits load on demand, preview variants, equip and persist without dow
       }),
     )
     .toEqual({ path: "/audio/music-kits/alrt_01/mainmenu.mp3", playing: true });
-  const audio = musicRequests.filter((path) => /\.(mp3|flac)$/.test(path));
+  const audio = musicRequests.filter((path) => /\.(mp3|opus)$/.test(path));
   expect([...new Set(audio)].sort()).toEqual(
     [
       "/audio/music-kits/alrt_01/mainmenu.mp3",
@@ -85,7 +85,7 @@ test("music kits load on demand, preview variants, equip and persist without dow
   expect(errors).toEqual([]);
 });
 
-test("native lossless tracks and unassigned alternate recordings remain available to preview", async ({
+test("Opus tracks decode and seek, native loop bounds remain intact, and alternate recordings preview", async ({
   page,
 }) => {
   test.setTimeout(150_000);
@@ -104,12 +104,56 @@ test("native lossless tracks and unassigned alternate recordings remain availabl
         const audio = window.__game.soundscape.music;
         return (
           !!audio.src &&
-          new URL(audio.src).pathname.endsWith(".flac") &&
+          new URL(audio.src).pathname.endsWith(".opus") &&
           !audio.paused &&
           audio.readyState >= 2 &&
-          audio.duration > 0
+          audio.duration > 0 &&
+          audio.currentTime > 0.1
         );
       }),
+    )
+    .toBe(true);
+  await page.evaluate(() => {
+    window.__game.soundscape.music.currentTime = 2;
+  });
+  await expect
+    .poll(() => page.evaluate(() => window.__game.soundscape.music.currentTime))
+    .toBeGreaterThan(2.1);
+  // Converted tracks do not declare native loops. Exercise an unchanged MP3
+  // round-start segment to ensure catalog rewriting preserves authored bounds.
+  const loop = await page.evaluate(async () => {
+    const catalog = (await (
+      await fetch("/audio/music-kits/catalog.json")
+    ).json()) as MusicKitCatalog;
+    const kit = catalog.kits.find((entry) => entry.id === "noisia_01")!;
+    await window.__game.soundscape.musicKits.setKit(kit.id);
+    window.__game.soundscape.playMusic("start");
+    return kit.events.start;
+  });
+  await expect
+    .poll(() =>
+      page.evaluate((tracks) => {
+        const audio = window.__game.soundscape.music;
+        return (
+          tracks.includes(new URL(audio.src).pathname) && !audio.paused && audio.readyState >= 2
+        );
+      }, loop.tracks),
+    )
+    .toBe(true);
+  const bounds = await page.evaluate(({ tracks, starts, ends }) => {
+    const audio = window.__game.soundscape.music;
+    const index = tracks.indexOf(new URL(audio.src).pathname);
+    const start = starts![index],
+      end = ends![index];
+    audio.currentTime = end - 0.02;
+    return { start, end };
+  }, loop);
+  await expect
+    .poll(() =>
+      page.evaluate(({ start }) => {
+        const audio = window.__game.soundscape.music;
+        return !audio.paused && audio.currentTime >= start && audio.currentTime < start + 2;
+      }, bounds),
     )
     .toBe(true);
   await page.locator("#music-kit-search").fill("Hotline");
@@ -119,7 +163,7 @@ test("native lossless tracks and unassigned alternate recordings remain availabl
   await expect
     .poll(() => page.evaluate(() => window.__game.soundscape.musicKits.previewing?.event))
     .toBe("extra");
-  await page.locator("#close-music-kits").click();
+  await page.keyboard.press("Escape");
   await expect(page.locator("#skin-menu")).toBeHidden();
   expect(await page.evaluate(() => window.__game.soundscape.musicKits.previewing)).toBeUndefined();
   expect(errors).toEqual([]);
