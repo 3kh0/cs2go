@@ -23,6 +23,59 @@ async function clickFire(page: Page) {
   await page.mouse.up();
 }
 
+test("Deathmatch buying, manual drops and deaths never leave ground weapons", async ({ page }) => {
+  test.setTimeout(150_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await startDeathmatch(page);
+  const held = await page.evaluate(() => {
+    const g = window.__game;
+    g.simulate = () => {};
+    g.invulnerable = 1000;
+    g.buy(0);
+    g.buy(9);
+    return { weapon: g.selected, primary: g.primary, drops: g.groundInventory.drops.length };
+  });
+  expect(held).toEqual({ weapon: 9, primary: 9, drops: 0 });
+  await page.keyboard.press("g");
+  expect(await page.evaluate(() => window.__game.selected)).toBe(9);
+  const result = await page.evaluate(() => {
+    const g = window.__game;
+    const buyDrop = g.buy(0, true);
+    g.groundInventory.update(0);
+    g.health = 0;
+    g.dead = 1;
+    g.bots[0].health = 0;
+    g.groundInventory.update(0);
+    const deathDrops = g.groundInventory.drops.length;
+    // A stale entity from an older mode/build must be removed from the scene,
+    // and must never be available for pickup or bot scavenging in Deathmatch.
+    g.mode = "practice";
+    const stale = g.groundInventory.spawn(0, 8, 20, g.position, g.yaw, "player")!;
+    g.mode = "deathmatch";
+    const pickedUp = g.groundInventory.pickup(true);
+    g.groundInventory.update(0);
+    g.updateBuyMenu();
+    return {
+      buyDrop,
+      deathDrops,
+      pickedUp,
+      drops: g.groundInventory.drops.length,
+      removed: !stale.mesh.parent,
+    };
+  });
+  expect(result).toEqual({
+    buyDrop: false,
+    deathDrops: 0,
+    pickedUp: false,
+    drops: 0,
+    removed: true,
+  });
+  await expect(page.locator(".buy-dropped")).toHaveClass(/hidden/);
+  await expect(page.locator('#loadout [data-weapon="9"]')).not.toHaveAttribute("title", /drop/i);
+  expect(errors).toEqual([]);
+});
+
 test("Deathmatch F3 uses the team loadout once per protected life and G claims a timed bonus", async ({
   page,
 }) => {

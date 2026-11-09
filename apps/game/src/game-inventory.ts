@@ -711,7 +711,7 @@ export class GameInventory {
         ? this.game.bots[owner].rig.weaponInstance
         : createWeaponInstance(id, `bot:${owner}`),
   ) {
-    if (isKnife(id)) return;
+    if (this.game.mode === "deathmatch" || isKnife(id)) return;
     if (this.drops.length >= 64) disposeWorldGun(this.drops.shift()!.mesh);
     const mesh = new T.Group();
     const gun = createWorldGun(id, suppressed, instance);
@@ -738,7 +738,7 @@ export class GameInventory {
     return drop;
   }
   drop(id = this.game.selected, toss = false) {
-    if (this.game.network) return false;
+    if (this.game.network || this.game.mode === "deathmatch") return false;
     const g = this.game;
     if (!g.active || g.dead || isKnife(id) || !g.inventory().includes(id)) return false;
     const state = g.selected === id ? g : g.magazines[id];
@@ -778,7 +778,7 @@ export class GameInventory {
     return true;
   }
   pickup(use = false) {
-    if (this.game.network) return false;
+    if (this.game.network || this.game.mode === "deathmatch") return false;
     const g = this.game;
     if (g.dead || !g.active) return false;
     const drop = this.drops.find(
@@ -851,6 +851,10 @@ export class GameInventory {
         );
       this.alive.set(bot, living);
     });
+    if (g.mode === "deathmatch") {
+      if (this.drops.length) this.clearDrops();
+      return;
+    }
     for (const d of this.drops) {
       advanceDroppedWeapon(d.mesh.position, d.velocity, d.mesh.rotation, d, dt, g.world.collision);
     }

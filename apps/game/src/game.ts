@@ -2171,6 +2171,7 @@ export class Game {
       (drop) => drop.mesh.position.distanceToSquared(this.position) < 36,
     );
     const dropped = el("buy-dropped-items");
+    dropped.parentElement!.classList.toggle("hidden", this.mode === "deathmatch");
     const signature = nearby.map((drop) => drop.id).join(",");
     if (dropped.dataset.items !== signature) {
       dropped.dataset.items = signature;
@@ -2184,6 +2185,10 @@ export class Game {
     el("buy-dropped-items").parentElement!.classList.toggle("has-drops", nearby.length > 0);
     for (const button of document.querySelectorAll<HTMLButtonElement>("#loadout [data-weapon]")) {
       const index = Number(button.dataset.weapon);
+      button.title =
+        this.mode === "deathmatch"
+          ? "Click to buy and equip."
+          : "Click to buy and equip. Cmd/Ctrl-click to buy and drop.";
       const owned = indices.includes(index);
       const available =
         !this.teamMode ||
