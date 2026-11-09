@@ -56,3 +56,16 @@ it("adds C4 selection to old saves while preserving a custom binding on 5", () =
   expect(next.Digit5).not.toBe("Digit5");
   expect(canonicalKey(next.Digit5, next)).toBe("Digit5");
 });
+
+it("adds Deathmatch controls without stealing a saved X binding", () => {
+  const old = defaultBindings();
+  delete old.F3;
+  delete old.KeyX;
+  old.KeyR = "KeyX";
+  const migrated = readBindings(old);
+  expect(migrated.KeyR).toBe("KeyX");
+  expect(migrated.KeyX).not.toBe("KeyX");
+  expect(migrated.F3).toBe("F3");
+  expect(canonicalKey(migrated.KeyX, migrated)).toBe("KeyX");
+  expect(canonicalKey("F3", migrated)).toBe("F3");
+});

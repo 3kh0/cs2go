@@ -10,6 +10,7 @@ export type ScorePlayer = {
   team: "ct" | "t";
   alive: boolean;
   kills: number;
+  assists?: number;
   score?: number;
   deaths: number;
   mvps: number;
@@ -131,7 +132,7 @@ export function renderScoreboard(board: Board) {
       deathmatch ? "Points" : "Money",
       "Kills",
       "Deaths",
-      "K/D",
+      deathmatch ? "Assists" : "K/D",
       deathmatch ? "Rank" : "MVPs",
     ])
       header.append(make("span", "", label));
@@ -227,7 +228,13 @@ export function renderScoreboard(board: Board) {
         cash,
         make("span", "score-number", String(player.kills)),
         make("span", "score-number", String(player.deaths)),
-        make("span", "score-ratio", (player.kills / Math.max(1, player.deaths)).toFixed(1)),
+        make(
+          "span",
+          deathmatch ? "score-assists" : "score-ratio",
+          deathmatch
+            ? String(player.assists ?? 0)
+            : (player.kills / Math.max(1, player.deaths)).toFixed(1),
+        ),
         mvps,
       );
       table.append(row);

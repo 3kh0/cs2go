@@ -101,3 +101,156 @@
   letter-spacing: 0;
   font-size: 18px;
 }
+/* Native huddmbonus:100px-high panel fading over400px,0.5s entrance,
+   circular countdown and64px weapon art, scaled from its1080p canvas. */
+#deathmatch-bonus {
+  --dm-unit: calc(var(--game-height, 100vh) / 1080);
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: calc(400 * var(--dm-unit));
+  height: calc(100 * var(--dm-unit));
+  display: flex;
+  align-items: center;
+  gap: calc(14 * var(--dm-unit));
+  padding: calc(10 * var(--dm-unit));
+  background: linear-gradient(90deg, #000e, #0002 80%, transparent);
+  border-block: 1px solid #0005;
+  color: #fff;
+  font-family: "Stratum2 Condensed", sans-serif;
+  animation: dm-bonus-enter 0.5s ease-in-out;
+}
+#deathmatch-bonus[hidden],
+#deathmatch-award[hidden],
+#deathmatch-healthshot[hidden] {
+  display: none;
+}
+.dm-bonus-timer {
+  text-align: center;
+  flex: 0 0 calc(60 * var(--dm-unit));
+  font-style: italic;
+}
+.dm-bonus-timer b {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: calc(48 * var(--dm-unit));
+  height: calc(48 * var(--dm-unit));
+  margin: auto;
+  border-radius: 50%;
+  background: conic-gradient(#00ff00 calc(var(--bonus-progress) * 360deg), #fff3 0);
+  isolation: isolate;
+  font-size: calc(24 * var(--dm-unit));
+}
+.dm-bonus-timer b::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  background: #151515;
+  border-radius: inherit;
+  z-index: -1;
+}
+.dm-bonus-timer span {
+  display: block;
+  margin-top: 5px;
+  font-size: calc(14 * var(--dm-unit));
+}
+.dm-bonus-details {
+  min-width: 0;
+  font-size: calc(20 * var(--dm-unit));
+  font-style: italic;
+}
+.dm-bonus-details > div {
+  white-space: nowrap;
+  color: #c2c2c2;
+}
+.dm-bonus-details strong {
+  color: #fff;
+}
+.dm-bonus-details img {
+  width: calc(180 * var(--dm-unit));
+  height: calc(48 * var(--dm-unit));
+  object-fit: contain;
+  object-position: left;
+}
+.dm-bonus-details small {
+  display: block;
+  font-size: calc(14 * var(--dm-unit));
+}
+#deathmatch-status:not([hidden]) {
+  padding: 7px 26px;
+  font-size: clamp(10px, 1.1vh, 14px);
+  text-transform: none;
+  line-height: 1.15;
+  background-color: #2a2825b3;
+  background-image:
+    repeating-linear-gradient(90deg, #fff1 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(0deg, #fff1 0 1px, transparent 1px 3px);
+}
+.dm-enabled {
+  color: #69cf31;
+}
+.dm-disabled {
+  color: #cf4731;
+}
+#deathmatch-award {
+  position: absolute;
+  left: 8px;
+  bottom: 12%;
+  color: #69cf31;
+  font:
+    700 16px "Stratum2 Condensed",
+    sans-serif;
+  text-shadow: 0 1px 3px #000;
+}
+@keyframes dm-bonus-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #deathmatch-bonus {
+    animation: none;
+  }
+}
+
+.deathcam-active :is(#deathmatch-bonus, #deathmatch-award, #deathmatch-status) {
+  z-index: 2;
+}
+.dm-bonus-kill {
+  position: absolute;
+  left: 65%;
+  top: 28%;
+  color: #fff;
+  font:
+    700 32px "Stratum2",
+    sans-serif;
+  text-shadow: 1px 1px 1px #000;
+  animation: dm-bonus-points 2s ease-out;
+}
+.dm-bonus-kill[hidden] {
+  display: none;
+}
+@keyframes dm-bonus-points {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(100px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}

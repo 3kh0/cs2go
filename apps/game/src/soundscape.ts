@@ -43,7 +43,13 @@ export type Cue =
   | "bomb-beep"
   | "bomb-defuse"
   | "bomb-explode"
-  | "ready";
+  | "ready"
+  | "healthshot-prepare"
+  | "healthshot-thud"
+  | "healthshot-success"
+  | "dm-bonus-start"
+  | "dm-bonus-end"
+  | "dm-bonus-kill";
 // Shipped surface sound events: Wood_Furniture.Break, Breakable.Metal, Glass.Break.
 const mapBreakAudio = {
   "map-break-wood": { variants: 2, volume: 0.799805, pitch: 0.99 },
@@ -60,6 +66,7 @@ function musicStorage() {
 export class Soundscape {
   spatial = new SpatialAudio();
   buffers = new Map<string, AudioBuffer>();
+  private nativeCueSettings = new Map<string, { gain: number; pitch: number }>();
   context?: AudioContext;
   master?: GainNode;
   effects?: GainNode;
@@ -94,7 +101,9 @@ export class Soundscape {
     ]);
     this.spatial.native = new NativeAcoustics(pathing);
     if (!response.ok) throw new Error("Sound manifest unavailable");
-    const manifest = (await response.json()) as { clips: { name: string }[] };
+    const manifest = (await response.json()) as {
+      clips: { name: string; sourceEventGain?: number; sourceEventPitch?: number }[];
+    };
     await Promise.all(
       utilityAudio.map(async (name) => {
         this.buffers.set(name, await loadAudioClip(`/audio/${name}.ogg`));
@@ -103,8 +112,13 @@ export class Soundscape {
     await Promise.all(
       manifest.clips
         .filter((c) => !c.name.startsWith("music-"))
-        .map(async ({ name }) => {
+        .map(async ({ name, sourceEventGain, sourceEventPitch }) => {
           this.buffers.set(name, await loadAudioClip(`/audio/source/${name}.ogg`));
+          if (Number.isFinite(sourceEventGain))
+            this.nativeCueSettings.set(name, {
+              gain: sourceEventGain!,
+              pitch: sourceEventPitch ?? 1,
+            });
         }),
     );
   }
@@ -175,6 +189,7 @@ export class Soundscape {
             : cue;
     const buffer = this.buffers.get(name);
     if (!buffer) return;
+    playback ??= this.nativeCueSettings.get(name);
     const blast =
       cue === "bomb-explode" ||
       cue === "utility-he-explode" ||

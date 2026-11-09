@@ -1,6 +1,7 @@
 import { assetUrl } from "./asset-url";
 import { isKnife, weaponIcons, weapons } from "./physics";
 import "./deathmatch-hud.css";
+import { updateDeathmatchStatus, type DeathmatchHudState } from "./deathmatch-status";
 
 type Standing = {
   id: number | "player";
@@ -16,16 +17,14 @@ export function updateDeathmatchHud(
   active: boolean,
   standings: readonly Standing[],
   immunity: number,
+  state?: DeathmatchHudState,
 ) {
   const hud = document.getElementById("hud")!;
   hud.classList.toggle("deathmatch", active);
   const leaders = document.getElementById("deathmatch-leaders")!;
-  const status = document.getElementById("deathmatch-status")!;
   leaders.hidden = !active;
-  status.hidden = !active || immunity <= 0;
+  updateDeathmatchStatus(active, immunity, state);
   if (!active) return;
-  const hint = `INVULNERABILITY ${Math.ceil(immunity)}s — move or fire to cancel`;
-  if (status.textContent !== hint) status.textContent = hint;
   const next = JSON.stringify(standings);
   if (next === signature) return;
   signature = next;

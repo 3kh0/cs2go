@@ -149,3 +149,13 @@
     animation: none;
   }
 }
+
+/* Econ item art already contains its native color and lighting. The general
+   HUD silhouette filter must not flatten it back to white. */
+#death-banner #death-weapon-icon.death-weapon-thumbnail {
+  filter: none;
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+}

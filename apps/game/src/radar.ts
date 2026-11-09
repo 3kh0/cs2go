@@ -17,7 +17,7 @@ export function dustRadarProjection(w: number, h: number) {
     pz: (z: number) => top + (220 + ((z + 79.375) / 109.22) * 1352 - radarCrop.y) * scale,
   };
 }
-export async function loadCalloutRadar(path = "/maps/dust2-callouts.png") {
+export async function loadCalloutRadar(path = "/models/maps/dust2-radar.png") {
   const image = new Image();
   reportLoadingAsset(path);
   image.src = assetUrl(path);

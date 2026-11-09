@@ -1,9 +1,13 @@
 import { expect, test } from "@playwright/test";
+import { PROTOCOL_VERSION } from "@cs2go/protocol";
 
 test("private matchmaking keeps native-style actions, map selection and accessible PIN errors", async ({
   page,
 }) => {
   test.setTimeout(120000);
+  await page.route("https://na1-cs.3kh0.dev/lobbies", (route) =>
+    route.fulfill({ json: { version: PROTOCOL_VERSION, lobbies: [] } }),
+  );
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");

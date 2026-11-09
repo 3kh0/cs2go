@@ -13,6 +13,7 @@ import {
   type MatchMode,
   type Team,
   type ChatChannel,
+  type LobbyVisibility,
 } from "@cs2go/protocol";
 import { movePlayer } from "@cs2go/simulation/movement";
 import type { DustMap } from "@cs2go/simulation/dust-map";
@@ -55,6 +56,7 @@ export class MatchConnection {
     onMessage: (message: ServerMessage) => void,
     onClose: (reason: string) => void,
     configuration?: PlayerConfiguration,
+    visibility: LobbyVisibility = "private",
   ) {
     this.map = map;
     this.onMessage = onMessage;
@@ -80,6 +82,7 @@ export class MatchConnection {
             room: this.resume ? room : create ? "" : room,
             name,
             create: !this.resume && create,
+            visibility: !this.resume && create ? visibility : undefined,
             mode,
             map: this.map.id ?? "dust2",
             team,

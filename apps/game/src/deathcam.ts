@@ -1,4 +1,10 @@
 import "./deathcam.css";
+import { assetUrl } from "./asset-url";
+import { skinCatalog } from "./skins";
+import type { WeaponInstance } from "./weapon-instance";
+import { deathcamArtwork, type DeathcamArtwork } from "./deathcam-art";
+
+let artworkVersion = 0;
 
 export type DamageTotal = { damage: number; hits: number };
 export type DamageExchange = { taken: DamageTotal; given: DamageTotal };
@@ -40,7 +46,9 @@ export function deathcamMarkup() {
   </div>`;
 }
 
+/** A new card invalidates any unfinished image work from the previous death. */
 export function showDeathcam(exchange: DamageExchange, avatar: string) {
+  artworkVersion++;
   const hud = document.getElementById("hud");
   hud?.classList.add("deathcam-active");
   document.getElementById("death-fade")?.classList.remove("hidden");
@@ -57,7 +65,52 @@ export function showDeathcam(exchange: DamageExchange, avatar: string) {
   }
 }
 
+/** Start with the inexpensive native base image, then resolve a known finish
+ * without delaying the death card. A generation guard handles respawn/new kills. */
+export function setDeathcamWeaponArtwork(
+  weapon: number,
+  instance: WeaponInstance | undefined,
+  fallback: string,
+) {
+  const image = document.getElementById("death-weapon-icon") as HTMLImageElement | null;
+  if (!image) return;
+  const version = ++artworkVersion;
+  const base = deathcamArtwork(weapon, undefined, [], fallback);
+  const apply = (art: DeathcamArtwork) => {
+    image.classList.toggle("death-weapon-thumbnail", art.thumbnail);
+    image.dataset.skin = art.skin;
+    image.dataset.weapon = String(weapon);
+    image.alt = art.name ?? "";
+    image.decoding = "async";
+    image.src = assetUrl(art.path);
+    if (art.name) document.getElementById("death-weapon")!.textContent = art.name;
+  };
+  let current = base;
+  const display = (art: DeathcamArtwork) => {
+    current = art;
+    apply(art);
+  };
+  image.onerror = () => {
+    if (version !== artworkVersion) return;
+    if (current.path !== base.path) display({ ...current, path: base.path, skin: "" });
+    else {
+      image.onerror = null;
+      display({ ...current, path: fallback, thumbnail: false });
+    }
+  };
+  display(base);
+  if (instance?.weapon !== weapon || !instance.skin.id) return;
+  void skinCatalog()
+    .then((catalog) => {
+      if (version === artworkVersion) display(deathcamArtwork(weapon, instance, catalog, fallback));
+    })
+    .catch(() => {
+      // Retain the actual weapon's base art if the optional catalog is unavailable.
+    });
+}
+
 export function hideDeathcam() {
+  artworkVersion++;
   document.getElementById("hud")?.classList.remove("deathcam-active");
   document.getElementById("death-fade")?.classList.add("hidden");
   document.getElementById("death-banner")?.classList.add("hidden");

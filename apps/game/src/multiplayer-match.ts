@@ -101,7 +101,14 @@ export class MultiplayerMatch {
     });
   }
 
-  constructor(privateGame: Game, url: string, room: string, create: boolean, mode: MatchMode) {
+  constructor(
+    privateGame: Game,
+    url: string,
+    room: string,
+    create: boolean,
+    mode: MatchMode,
+    visibility: "private" | "public" = "private",
+  ) {
     this.game = privateGame;
     const world = privateGame.dust!;
     this.connection = new MatchConnection(
@@ -150,6 +157,7 @@ export class MultiplayerMatch {
         knife: privateGame.knife,
         knives: { ...equippedKnives },
       },
+      visibility,
     );
     for (const event of [
       "cs2go-skins-change",

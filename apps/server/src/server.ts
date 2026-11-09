@@ -14,6 +14,8 @@ import {
   type MatchEvent,
   type PlayerState,
   type ServerMessage,
+  type LobbyVisibility,
+  type PublicLobby,
 } from "@cs2go/protocol";
 import {
   createPlayer,
@@ -28,6 +30,8 @@ import {
 } from "@cs2go/simulation/match";
 
 type Room = Match & {
+  visibility: LobbyVisibility;
+  name: string;
   players: Map<string, PlayerState>;
   connections: Set<ServerWebSocket<Connection>>;
   events: MatchEvent[];
@@ -112,7 +116,13 @@ export function startServer(options: ServerOptions) {
       const path = new URL(request.url).pathname;
       if (request.method === "GET" && path === "/healthz")
         return Response.json(
-          { ok: !stopping, version: PROTOCOL_VERSION, map: defaultMap, maps: [...maps.keys()] },
+          {
+            ok: !stopping,
+            version: PROTOCOL_VERSION,
+            map: defaultMap,
+            maps: [...maps.keys()],
+            publicLobbies: true,
+          },
           {
             status: stopping ? 503 : 200,
             headers: {
@@ -124,6 +134,43 @@ export function startServer(options: ServerOptions) {
             },
           },
         );
+      if (request.method === "GET" && path === "/lobbies") {
+        const origin = request.headers.get("origin") ?? "";
+        if (!origins.has(origin)) return new Response("Origin not allowed", { status: 403 });
+        const lobbies: PublicLobby[] = [];
+        for (const [code, room] of rooms) {
+          if (
+            room.visibility !== "public" ||
+            !room.connections.size ||
+            room.state.phase === "finished"
+          )
+            continue;
+          const players = [...room.players.values()];
+          lobbies.push({
+            room: code,
+            name: room.name,
+            mode: room.state.mode,
+            map: room.map.id ?? "dust2",
+            players: players.length,
+            capacity: rulesFor(room.state.mode).teamSize * 2,
+            teams: {
+              ct: players.filter((player) => player.team === "ct").length,
+              t: players.filter((player) => player.team === "t").length,
+            },
+            phase: room.state.phase,
+          });
+        }
+        return Response.json(
+          { version: PROTOCOL_VERSION, lobbies },
+          {
+            headers: {
+              "Access-Control-Allow-Origin": origin,
+              Vary: "Origin",
+              "Cache-Control": "no-store",
+            },
+          },
+        );
+      }
       if (request.method === "GET" && /^\/lobbies\/\d{6}$/.test(path)) {
         const origin = request.headers.get("origin") ?? "";
         if (!origins.has(origin)) return new Response("Origin not allowed", { status: 403 });
@@ -208,6 +255,8 @@ export function startServer(options: ServerOptions) {
             if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
             room = {
               ...createMatch(message.mode, selectedMap),
+              visibility: message.visibility ?? "private",
+              name: `${message.name.trim()}'s lobby`,
               connections: new Set(),
               events: [],
               tick: 0,

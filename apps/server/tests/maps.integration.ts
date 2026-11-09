@@ -60,6 +60,7 @@ try {
     version: PROTOCOL_VERSION,
     map: "dust2",
     maps: ["dust2", "mirage"],
+    publicLobbies: true,
   });
   const restricted = startServer({
     map: testMap(),

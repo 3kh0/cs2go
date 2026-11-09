@@ -1,5 +1,6 @@
 import { selectHomeTeam } from "./home-controls";
 import { test, expect } from "@playwright/test";
+import { PROTOCOL_VERSION } from "@cs2go/protocol";
 import type * as T from "three";
 import type { Game } from "../src/game";
 type IdleScene = {
@@ -52,6 +53,11 @@ test("native homepage presents both agents, local navigation and a working match
   baseURL,
 }) => {
   test.setTimeout(180_000);
+  // ONLINE intentionally discovers rooms; keep this UI/asset check independent of the hosted fleet.
+  const listingUrl = "https://na1-cs.3kh0.dev/lobbies";
+  await page.route(listingUrl, (route) =>
+    route.fulfill({ json: { version: PROTOCOL_VERSION, lobbies: [] } }),
+  );
   const errors: string[] = [],
     external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -61,7 +67,8 @@ test("native homepage presents both agents, local navigation and a working match
   page.on("request", (request) => {
     if (
       /^https?:/.test(request.url()) &&
-      new URL(request.url()).origin !== new URL(baseURL!).origin
+      new URL(request.url()).origin !== new URL(baseURL!).origin &&
+      request.url() !== listingUrl
     )
       external.push(request.url());
   });
@@ -165,9 +172,9 @@ test("native homepage presents both agents, local navigation and a working match
   await expect(page.locator("#home-scenery")).toBeHidden();
   await expect(page.getByRole("group", { name: "Session type" }).getByRole("button")).toHaveText([
     "OFFLINE",
-    "PRIVATE MATCHMAKING",
+    "ONLINE",
   ]);
-  await page.getByRole("button", { name: "PRIVATE MATCHMAKING", exact: true }).click();
+  await page.getByRole("button", { name: "ONLINE", exact: true }).click();
   await expect(page.locator("#multiplayer-options")).toBeVisible();
   await page.getByRole("button", { name: "OFFLINE", exact: true }).click();
   await expect(page.locator("#multiplayer-options")).toBeHidden();

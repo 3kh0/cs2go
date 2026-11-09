@@ -761,7 +761,8 @@ export class GameUtility {
         if (damage > 0) g.groundInventory.invalidateEquipment();
       }
       if (actor.health > 0) return;
-      if (attacker && id !== effect.owner) g.rewardKill(attacker, actor.team, 0);
+      if (attacker && id !== effect.owner)
+        g.rewardKill(attacker, actor.team, 0, id === "player" ? "player" : g.bots[id]);
       actor.deaths++;
       if (id === "player") {
         g.dead = g.teamMode ? Infinity : 2.5;

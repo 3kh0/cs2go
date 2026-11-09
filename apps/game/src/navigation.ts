@@ -3,6 +3,7 @@ import type { MapId } from "@cs2go/protocol";
 import { touchesBuyZone, type MapTriggerData } from "@cs2go/simulation/buy-zones";
 import type { NativeLadder } from "@cs2go/simulation/ladder";
 import { ladderNormal } from "@cs2go/simulation/ladder";
+import type { MapCallout } from "./map-callouts";
 export type NavArea = {
   id: number;
   flags: number;
@@ -15,6 +16,7 @@ export type NavArea = {
   portals?: Record<number, number[]>;
 };
 export type MapNavigation = {
+  locations?: MapCallout[];
   mapId?: MapId;
   worldBallOrigin?: readonly [number, number, number];
   triggers?: MapTriggerData;

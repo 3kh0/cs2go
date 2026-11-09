@@ -97,7 +97,14 @@ test("death banner shows the killer and weapon and clears on respawn", async ({ 
   await expect(page.locator("#death-banner")).toBeVisible();
   await expect(page.locator("#death-killer")).toHaveText("oat");
   await expect(page.locator("#death-weapon")).toHaveText("AK-47");
-  await expect(page.locator("#death-weapon-icon")).toHaveAttribute("src", "/icons/buy/ak47.svg");
+  await expect(page.locator("#death-weapon-icon")).toHaveAttribute("src", "/skins/defaults/0.webp");
+  await expect
+    .poll(() =>
+      page
+        .locator("#death-weapon-icon")
+        .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(32);
   await page.locator("#death-banner").screenshot({ path: "artifacts/death-banner.png" });
   await page.evaluate(() => window.__game.feed("another bot", "other victim", false, 2));
   await expect(page.locator("#death-killer")).toHaveText("oat");

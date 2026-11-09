@@ -24,6 +24,7 @@ import { openMatchLoading } from "./match-loading";
 import { setupSteamAccount } from "./steam-account";
 import { startIntro } from "./intro";
 import { startAssetCache } from "./asset-cache";
+import { setupPublicLobbies } from "./public-lobbies";
 
 document.addEventListener(
   "keydown",
@@ -131,6 +132,15 @@ if ([...server.options].some((option) => option.value === invitedServer))
   server.value = invitedServer!;
 room.value = validRoom(invitation.get("room")) ? invitation.get("room")! : "";
 let creating = false;
+const visibility = el("match-visibility") as HTMLSelectElement;
+const lobbyBrowser = setupPublicLobbies(server, (pin) => {
+  if (game.matchLoading || el("play").hasAttribute("disabled")) return;
+  room.value = pin;
+  el("play").click();
+});
+server.addEventListener("change", () => {
+  if (session === "multi") void lobbyBrowser.refresh();
+});
 room.oninput = () => {
   el("match-status").textContent = "";
 };
@@ -139,6 +149,8 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-session
     session = button.dataset.session as typeof session;
     el("menu").dataset.session = session;
     el("multiplayer-options").hidden = session !== "multi";
+    if (session === "multi") void lobbyBrowser.refresh();
+    else lobbyBrowser.cancel();
     for (const option of document.querySelectorAll<HTMLButtonElement>("[data-offline-mode]")) {
       option.hidden = option.disabled = session === "multi";
     }
@@ -212,6 +224,7 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
   const mode = selectedMode;
   const multiplayer = replayTeam === undefined && session === "multi";
   const create = creating;
+  const lobbyVisibility = visibility.value === "public" ? "public" : "private";
   const endpoint = server.value;
   const pin = room.value;
   game.matchLoading = true;
@@ -223,6 +236,10 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
       const response = await fetch(url, { signal: AbortSignal.timeout(5000) });
       if (!response.ok) throw new Error("Server unavailable. Try the other server.");
       const health = await response.json();
+      if (lobbyVisibility === "public" && health.publicLobbies !== true)
+        throw new Error(
+          "This server needs an update to create public lobbies. Choose Private or another server.",
+        );
       if (!Array.isArray(health.maps) || !health.maps.includes(selectedMap))
         throw new Error(
           "This server does not have the selected map. Choose another map or server.",
@@ -250,7 +267,7 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
     if (multiplayer && game.active && (mode === "casual" || mode === "competitive")) {
       el("lobby-pin").textContent = "CONNECTING...";
       el("lobby-server").textContent = new URL(endpoint).hostname;
-      game.network = new MultiplayerMatch(game, endpoint, pin, create, mode);
+      game.network = new MultiplayerMatch(game, endpoint, pin, create, mode, lobbyVisibility);
     }
   };
   const cancelPreview = () => selector?.close();

@@ -25,7 +25,18 @@ async function enter(page: Page, mode: "practice" | "deathmatch") {
   await expect(page.locator('#team-select [data-team="ct"]')).toBeVisible({ timeout: 120_000 });
   await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked && window.__game.mapId === "mirage");
-  await expect(page.locator("#location")).toHaveText("MIRAGE");
+  // Location now names the native place under the player, rather than the map.
+  // Unlabelled space uses the map fallback; map identity is checked separately.
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const names = window.__game.world.navigation.data.locations!.map((place) => place.name);
+        return [...names, "Mirage"].includes(
+          document.getElementById("location")!.textContent ?? "",
+        );
+      }),
+    )
+    .toBe(true);
   await expect(page.locator("#bomb-carrier")).toBeHidden();
   await expect(page.locator("#bomb-action")).toBeHidden();
   expect(
@@ -214,19 +225,24 @@ for (const mode of ["practice", "deathmatch"] as const) {
       await expect.poll(() => page.evaluate(() => window.__game.deaths)).toBe(deaths + 1);
       await expect.poll(() => page.evaluate(() => window.__game.dead), { timeout: 6000 }).toBe(0);
       expect(
-        await page.evaluate(() => ({
-          health: window.__game.health,
-          ammo: window.__game.ammo,
-          map: window.__game.mapId,
-          distance: window.__game.position.distanceTo(
-            window.__game.position
-              .clone()
-              .fromArray(window.__game.dust!.navigation.data.spawns.ct[0]),
-          ),
-        })),
+        await page.evaluate(async () => {
+          const path = "/src/physics.ts";
+          const { weapons } = (await import(path)) as typeof import("../src/physics");
+          return {
+            health: window.__game.health,
+            // F3 defaults ON: a new life can roll a different equipped weapon.
+            fullMagazine: window.__game.ammo === weapons[window.__game.selected].mag,
+            map: window.__game.mapId,
+            distance: window.__game.position.distanceTo(
+              window.__game.position
+                .clone()
+                .fromArray(window.__game.dust!.navigation.data.spawns.ct[0]),
+            ),
+          };
+        }),
       ).toMatchObject({
         health: 100,
-        ammo: shot.ammo,
+        fullMagazine: true,
         map: "mirage",
         distance: expect.any(Number),
       });

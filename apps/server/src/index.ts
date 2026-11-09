@@ -27,7 +27,7 @@ log(`WebSocket up at ws://127.0.0.1:${app.server.port}/ws`);
 log(`Health check up at http://127.0.0.1:${app.server.port}/healthz`);
 log(`Tick rate set to ${TICK_RATE} Hz with protocol v${PROTOCOL_VERSION}`);
 log(`Allowed browser origins - ${origins.join(", ")}`);
-log("Public lobbies ready; join with a six-digit PIN");
+log("Online lobbies ready; browse public rooms or join with a six-digit PIN");
 log("Ready to rumble!");
 let stopping = false;
 for (const signal of ["SIGTERM", "SIGINT"] as const)

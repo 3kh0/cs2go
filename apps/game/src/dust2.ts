@@ -29,6 +29,7 @@ import { BreakableWorld, bindBreakablePhysics } from "@cs2go/simulation/breakabl
 import { NativeMapBreakableView, type NativeBreakableManifest } from "./map-breakable-view";
 import type { MapNavigation } from "./navigation";
 import type { Wall } from "./physics";
+import type { NativePlaces } from "./map-callouts";
 export type NativeMapConfig = {
   sun: { pitch: number; yaw: number; color: number; intensity: number };
   fog?: { color: number; near: number; far: number };
@@ -55,7 +56,13 @@ export function loadDust2(scene: T.Scene, renderer: T.WebGLRenderer) {
 export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, id: MapId) {
   const sourceLighting = id === "dust2";
   const config: NativeMapConfig = sourceLighting
-    ? dustConfig
+    ? {
+        ...dustConfig,
+        radar: await assetFetch("/models/maps/dust2-overview.json").then(async (response) => {
+          if (!response.ok) throw new Error("Dust II native radar metadata unavailable");
+          return response.json() as Promise<NonNullable<NativeMapConfig["radar"]>>;
+        }),
+      }
     : await assetFetch(`/models/maps/${id}-config.json`).then(async (response) => {
         if (!response.ok) throw new Error(`${id} native environment configuration unavailable`);
         return response.json();
@@ -78,6 +85,7 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     nativeReflections,
     nativeLayers,
     breakableData,
+    places,
   ] = await Promise.all([
     loadGzipped(`/models/maps/${id}.glb.gz`, 1),
     assetFetch(`/models/maps/${id}-nav.json`),
@@ -115,13 +123,19 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
           return r.json() as Promise<NativeBreakableManifest>;
         })
       : ({ version: 1, mapId: id, breakables: [] } as NativeBreakableManifest),
+    assetFetch(`/models/maps/${id}-places.json`).then(async (response) => {
+      if (!response.ok) throw new Error(`${id} native callout volumes unavailable`);
+      return response.json() as Promise<NativePlaces>;
+    }),
   ]);
   // Native particle ropes are absent from the world export. Their settled tubes are baked offline and share static map lighting; native static_collision=false!
   if (cables) asset.scene.add(cables.scene);
   sky.mapping = T.EquirectangularReflectionMapping;
   if (!response.ok) throw new Error(`${id} navigation could not load`);
   const data = (await response.json()) as MapNavigation;
-  const navigation = new Navigation({ ...data, mapId: id });
+  if (places.version !== 1 || places.mapId !== id)
+    throw new Error(`${id} callout data does not match the map`);
+  const navigation = new Navigation({ ...data, mapId: id, locations: places.locations });
   let mapSky: T.Object3D | undefined = skybox;
   if (!sourceLighting) {
     // A map-owned sphere lets the sky use its native VPOST too; Three's built-in

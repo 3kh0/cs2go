@@ -27,6 +27,9 @@ for (const map of ["dust2", "mirage"] as const)
     await page.locator("#play").click();
     await page.locator(`#team-select [data-team="${map === "mirage" ? "t" : "ct"}"]`).click();
     await page.waitForFunction((id) => window.__game.locked && window.__game.mapId === id, map);
+    // Retained-loadout behavior is the explicit Random Weapons OFF path.
+    if (await page.evaluate(() => window.__game.deathmatchRandomWeapons))
+      await page.keyboard.press("F3");
     const initial = await page.evaluate(() => {
       const game = window.__game;
       return {

@@ -1,5 +1,11 @@
+import { updateRadarLocation } from "./radar-location";
+import { botPortrait } from "./bot-portrait";
+import { HealthshotView } from "./healthshot-view";
+import { selectedAgentId } from "./agent-roster";
+import { HealthshotAction, HealthshotHealing } from "./healthshot-action";
 import { deathmatchKillPoints } from "./deathmatch-scoring";
-import { DeathDamage, showDeathcam, hideDeathcam } from "./deathcam";
+import { DeathmatchState, DeathmatchCombat, deathmatchBonusWeapons } from "./deathmatch-state";
+import { DeathDamage, showDeathcam, hideDeathcam, setDeathcamWeaponArtwork } from "./deathcam";
 import { updateDeathmatchHud } from "./deathmatch-hud";
 import { equippedKnives, equipKnife } from "./equipped-knives";
 import { deathmatchSpawnPool, chooseDeathmatchSpawn } from "./deathmatch-spawns";
@@ -12,7 +18,7 @@ import { MatchChat } from "./chat";
 import { applyShadowDetail, graphicsPixelRatio, graphicsPresets } from "./graphics-settings";
 import { applyDisplayViewport, type DisplayAspect } from "./display-settings";
 import { applyViewmodelCamera, viewmodelPointToWorld } from "./viewmodel-settings";
-import { defaultGloveChoice, unregisterGloveModel } from "./gloves";
+import { defaultGloveChoice, unregisterGloveModel, gloveChoices } from "./gloves";
 import { bindWeaponInstance } from "./skins";
 import { createWeaponInstance, weaponInstanceName } from "./weapon-instance";
 import { grenadeData, grenadeIcons, grenadeTypes, type GrenadeKind } from "./utility";
@@ -116,7 +122,7 @@ import {
   nativeMagazineInsert,
 } from "./weapon-motion";
 import { knifeInspectDuration } from "./knife-motion";
-import { dustRadarProjection, loadCalloutRadar, radarCrop } from "./radar";
+import { loadCalloutRadar } from "./radar";
 import * as T from "three";
 import { ballistics, SOURCE_UNITS_PER_METER } from "./ballistics";
 import { fleshThickness, hitgroupMultiplier, meshThickness, solveBullet } from "./bullet-solver";
@@ -143,7 +149,7 @@ import { warmSourceSky } from "./source-sky";
 import { BombModel } from "./bomb";
 import { BombPlantModel, PLANT_DURATION } from "./bomb-motion";
 import { BombDefuseModel } from "./bomb-defuse";
-import { canonicalKey, defaultBindings, readBindings } from "./key-bindings";
+import { canonicalKey, defaultBindings, readBindings, keyLabel } from "./key-bindings";
 import { gradeMapColors } from "./map-color";
 import { setupUiAudio } from "./ui-audio";
 import { MatchNotices } from "./match-notices";
@@ -498,6 +504,25 @@ export class Game {
   kills = 0;
   deaths = 0;
   deathmatchScore = 0;
+  deathmatch = new DeathmatchState();
+  deathmatchCombat = new DeathmatchCombat(25, 4);
+  healthshotAction = new HealthshotAction();
+  healthshotHealing = new HealthshotHealing();
+  healthshotView = new HealthshotView();
+  private healthshotSounds: readonly { kind: "prepare" | "thud"; time: number }[] = [];
+  private deathmatchAssisters = new Map<string, string>();
+  deathmatchAward = "";
+  deathmatchAwardUntil = 0;
+  deathmatchBonusAward = 0;
+  deathmatchBonusAwardUntil = 0;
+  deathmatchRandomBought = false;
+  deathmatchRandomWeapons = (() => {
+    try {
+      return localStorage.getItem("cs2go-dm-random-weapons") !== "false";
+    } catch {
+      return true;
+    }
+  })();
   get deathmatchStandings() {
     return [
       {
@@ -519,7 +544,7 @@ export class Game {
         deaths: bot.deaths,
         weapon: bot.rig.weaponIndex,
         team: bot.team,
-        avatar: null,
+        avatar: botPortrait(bot.team, bot.rig.agentId),
         alive: bot.health > 0,
       })),
     ].sort((a, b) => b.score - a.score || b.kills - a.kills || a.deaths - b.deaths);
@@ -763,6 +788,7 @@ export class Game {
     this.decals.visible = this.decals.frustumCulled = false;
     this.scene.add(this.decals);
     this.camera.rotation.order = "YXZ";
+    this.view.add(this.healthshotView);
     this.view.add(this.gun, new T.HemisphereLight(0xffffff, 0x554938, 2.5));
     this.viewSun.position.set(-1, 3, 2);
     this.view.add(this.viewSun);
@@ -1045,6 +1071,18 @@ export class Game {
         if (e.repeat) return;
         this.takeoverUseHeld = false;
       }
+      if (code === "F3" && this.mode === "deathmatch" && this.active && !e.repeat) {
+        e.preventDefault();
+        this.deathmatchRandomWeapons = !this.deathmatchRandomWeapons;
+        if (this.deathmatchRandomWeapons) this.applyDeathmatchRandomWeapons();
+        try {
+          localStorage.setItem("cs2go-dm-random-weapons", String(this.deathmatchRandomWeapons));
+        } catch {
+          /* Session toggle still works. */
+        }
+        this.updateUI();
+        return;
+      }
       if (this.dead) {
         if (code === "KeyE" && !e.repeat) this.takeOverBot();
         if (this.teamMode && this.spectatorMode === "free") this.keys.add(code);
@@ -1052,9 +1090,15 @@ export class Game {
       }
       this.keys.add(code);
       if (e.repeat) return;
+      if (code === "KeyX") this.selectHealthshot();
       if (code === "Space") this.jumpQueued = true;
       if (code === "KeyR" && !this.utility.selected) this.beginReload();
       if (code === "KeyG") {
+        if (this.mode === "deathmatch" && this.deathmatch.bonus) {
+          this.claimDeathmatchBonus();
+          return;
+        }
+        if (this.healthshotAction.selected) return;
         if (this.bombSelected) {
           if (this.network) this.network.request.dropBomb = true;
           else this.dropBomb("player");
@@ -1068,6 +1112,7 @@ export class Game {
         this.keys.delete("KeyE");
       if (
         code === "KeyF" &&
+        !this.healthshotAction.selected &&
         !this.suppressors[this.selected].action &&
         !this.utility.selected &&
         !this.planting &&
@@ -1154,7 +1199,7 @@ export class Game {
         return;
       }
       if (this.bombSelected && e.button === 2) return;
-      if (e.button === 2 && this.locked && !this.dead) {
+      if (e.button === 2 && this.locked && !this.dead && !this.healthshotAction.selected) {
         if (weapons[this.selected].zoomLevels > 0) this.cycleScope();
         else if (removableSuppressor(this.selected)) this.toggleSuppressor();
         else if (isKnife(this.selected)) this.fireKnife(true);
@@ -1208,6 +1253,7 @@ export class Game {
     this.firing = false;
     this.revolverCharge = 0;
     if (!this.locked) {
+      this.healthshotAction.cancel();
       this.chat.close();
       this.suppressors[this.selected].cancel();
       this.utility.cancelThrow();
@@ -1259,7 +1305,8 @@ export class Game {
       return;
     }
     const previousTeam = this.team;
-    const botIndex = this.bots.findIndex((bot) => bot.team === team);
+    const botIndex =
+      this.mode === "deathmatch" ? -1 : this.bots.findIndex((bot) => bot.team === team);
     this.dropBomb("player");
     if (this.bomb?.defuser === "player") {
       this.bomb.defuser = null;
@@ -1367,6 +1414,12 @@ export class Game {
     try {
       this.mode = mode;
       await this.prepareMap(map, signal);
+      if (mode === "deathmatch") {
+        const timings = await this.healthshotView.prepare();
+        signal.throwIfAborted();
+        this.healthshotAction.configure({ ...timings, draw: 1 });
+        this.healthshotSounds = timings.sounds;
+      }
       this.useWorld();
       this.configureBots(this.teamMode, bots ? undefined : 0);
       this.bots.forEach((bot, index) => this.spawnBot(bot, index));
@@ -1412,6 +1465,7 @@ export class Game {
     const dust = this.dust.root.visible,
       bomb = this.bombView.visible,
       defuse = this.defuseView.visible,
+      healthshot = this.healthshotView.visible,
       previousToneMapping = this.renderer.toneMapping;
     const textures = new Set<T.Texture>();
     try {
@@ -1420,6 +1474,17 @@ export class Game {
       this.renderer.compile(this.scene, this.camera);
       this.bombView.visible = true;
       this.defuseView.visible = true;
+      if (this.mode === "deathmatch" && this.healthshotView.ready) {
+        this.healthshotView.visible = true;
+        this.healthshotView.sample(
+          "idle",
+          0,
+          this.team,
+          gloveChoices[this.team],
+          selectedAgentId(this.team),
+        );
+        this.updateViewLighting(this.healthshotView, 1 / 60);
+      }
       this.renderer.compile(this.view, this.viewCamera);
       for (const uniform of Object.values(warmTracer.material.uniforms))
         if (uniform.value instanceof T.Texture) textures.add(uniform.value);
@@ -1436,6 +1501,7 @@ export class Game {
       this.dust.root.visible = dust;
       this.bombView.visible = bomb;
       this.defuseView.visible = defuse;
+      this.healthshotView.visible = healthshot;
       this.renderer.toneMapping = previousToneMapping;
       this.scene.remove(extras);
       viewExtras.clear();
@@ -1525,6 +1591,13 @@ export class Game {
     this.bombMesh.visible = false;
     this.time = this.mode === "deathmatch" ? 600 : 300;
     this.kills = this.deaths = this.deathmatchScore = 0;
+    this.deathmatch.reset();
+    this.deathmatchCombat.reset();
+    this.healthshotHealing.clear();
+    this.deathmatchAssisters.clear();
+    this.healthshotAction.cancel();
+    this.deathmatchAward = "";
+    this.deathmatchAwardUntil = 0;
     this.primary = null;
     this.dead = 0;
     for (const id of [
@@ -1556,6 +1629,8 @@ export class Game {
     this.updateUI();
   }
   menu() {
+    this.healthshotHealing.clear();
+    this.healthshotAction.cancel();
     this.chat.reset();
     hideDeathcam();
     this.deathDamage.reset();
@@ -1657,6 +1732,9 @@ export class Game {
     );
   }
   spawnPlayer(preserve = false) {
+    this.healthshotHealing.clear();
+    this.healthshotAction.cancel();
+    this.deathmatchRandomBought = false;
     const deathmatchLoadout =
       this.mode === "deathmatch" ? { primary: this.primary, secondary: this.secondary } : null;
     this.dust?.ball.reset();
@@ -1705,6 +1783,7 @@ export class Game {
     this.plantLook = 0;
     this.health = 100;
     this.deathDamage.reset();
+    if (this.mode === "deathmatch") this.deathmatchCombat.spawn("player");
     hideDeathcam();
     this.armor = this.teamMode ? (this.rules.freeArmor ? 100 : 0) : 100;
     this.helmet = this.teamMode ? this.rules.freeArmor : true;
@@ -1736,6 +1815,11 @@ export class Game {
     if (deathmatchLoadout) {
       this.primary = deathmatchLoadout.primary ?? (this.team === "t" ? 0 : 1);
       this.secondary = deathmatchLoadout.secondary;
+      if (this.deathmatchRandomWeapons) {
+        this.primary = this.randomDeathmatchWeapon(1) ?? this.primary;
+        this.secondary = this.randomDeathmatchWeapon(2) ?? this.secondary;
+        this.deathmatchRandomBought = true;
+      }
     }
     if (saved) {
       this.primary = saved.primary;
@@ -1750,6 +1834,75 @@ export class Game {
     this.camera.position.y += this.eye;
     this.camera.rotation.set(this.pitch, this.yaw, 0);
   }
+  selectHealthshot() {
+    if (
+      !this.active ||
+      this.dead ||
+      this.mode !== "deathmatch" ||
+      !this.healthshotAction.ready ||
+      this.deathmatchCombat.life("player").healthshots < 1
+    )
+      return false;
+    if (this.healthshotAction.selected) return true;
+    this.suppressors[this.selected].cancel();
+    this.utility.cancelThrow();
+    this.utility.selected = null;
+    this.magazines[this.selected] = { ammo: this.ammo, reserve: this.reserve };
+    this.reload = this.knifeTime = this.inspectTime = this.shotTime = this.drawTime = 0;
+    this.revolverCharge = this.burstRemaining = this.cooldown = 0;
+    this.knifePending = this.firing = false;
+    this.setScope(0);
+    this.rescope = this.boltTime = 0;
+    const selected = this.healthshotAction.select();
+    this.updateUI();
+    return selected;
+  }
+  useHealthshot() {
+    if (!this.locked || this.dead || !this.active || this.mode !== "deathmatch") return false;
+    const used = this.healthshotAction.use(
+      this.health,
+      this.deathmatchCombat.life("player").healthshots,
+    );
+    if (used) {
+      this.firing = false;
+      this.invulnerable = 0;
+      this.updateUI();
+    }
+    return used;
+  }
+  claimDeathmatchBonus() {
+    if (
+      this.mode !== "deathmatch" ||
+      !this.deathmatch.bonus ||
+      !this.active ||
+      this.dead ||
+      this.health <= 0
+    )
+      return false;
+    return this.buy(this.deathmatch.bonus.weapon);
+  }
+  applyDeathmatchRandomWeapons() {
+    if (this.mode !== "deathmatch" || !this.canBuy() || this.deathmatchRandomBought) return false;
+    const primary = this.randomDeathmatchWeapon(1);
+    const secondary = this.randomDeathmatchWeapon(2);
+    if (primary === undefined && secondary === undefined) return false;
+    this.deathmatchRandomBought = true;
+    if (primary !== undefined) this.primary = primary;
+    if (secondary !== undefined) this.secondary = secondary;
+    for (const index of [primary, secondary]) {
+      if (index === undefined) continue;
+      this.magazines[index] = { ammo: weapons[index].mag, reserve: weapons[index].reserve };
+      this.groundInventory.newPlayerWeapon(index);
+    }
+    this.equip(this.primary ?? this.secondary);
+    return true;
+  }
+  randomDeathmatchWeapon(slot: 1 | 2) {
+    const choices = this.groundInventory.loadouts[this.team].filter(
+      (index) => !isKnife(index) && weaponSlot(index) === slot && weaponAvailable(index, this.team),
+    );
+    return choices.length ? choices[Math.floor(Math.random() * choices.length)] : undefined;
+  }
   inventory() {
     return [
       this.primary,
@@ -1758,16 +1911,24 @@ export class Game {
     ].filter((id): id is number => id !== null);
   }
   cycleInventory(direction: number) {
-    const choices: (number | GrenadeKind | "bomb")[] = [
+    const choices: (number | GrenadeKind | "bomb" | "healthshot")[] = [
       ...this.inventory(),
       ...grenadeTypes.filter((kind) => this.utility.inventory[kind] > 0),
       ...(this.carryingBomb ? ["bomb" as const] : []),
+      ...(this.mode === "deathmatch" && this.deathmatchCombat.life("player").healthshots
+        ? ["healthshot" as const]
+        : []),
     ];
     const current = choices.indexOf(
-      this.bombSelected ? "bomb" : (this.utility.selected ?? this.selected),
+      this.healthshotAction.selected
+        ? "healthshot"
+        : this.bombSelected
+          ? "bomb"
+          : (this.utility.selected ?? this.selected),
     );
     const next = choices[(current + direction + choices.length) % choices.length];
     if (typeof next === "number") this.equip(next);
+    else if (next === "healthshot") this.selectHealthshot();
     else if (next === "bomb") this.equipBomb();
     else this.utility.select(next);
   }
@@ -1884,16 +2045,48 @@ export class Game {
     this.updateUI();
     return true;
   }
-  rewardKill(attacker: Bot | "player", victimTeam: AgentTeam, weapon: number) {
+  rewardKill(
+    attacker: Bot | "player",
+    victimTeam: AgentTeam,
+    weapon: number,
+    victim?: Bot | "player",
+  ) {
     const attackerTeam = attacker === "player" ? this.team : attacker.team;
     const friendly = this.teamMode && attackerTeam === victimTeam;
     const delta = friendly ? -1 : 1;
     if (attacker === "player") this.kills += delta;
     else attacker.kills += delta;
     if (this.mode === "deathmatch") {
-      const points = deathmatchKillPoints(weapon);
-      if (attacker === "player") this.deathmatchScore += points;
-      else attacker.deathmatchScore += points;
+      const bonusPoints = this.deathmatch.bonusPoints(weapon);
+      const points = deathmatchKillPoints(weapon) + bonusPoints;
+      if (attacker === "player") {
+        this.deathmatchScore += points;
+        this.deathmatchAward = `${points} points for neutralizing an enemy with the ${weapons[weapon].name}`;
+        this.deathmatchAwardUntil = this.animationTime + 2;
+        if (bonusPoints > 0) {
+          this.deathmatchBonusAward = bonusPoints;
+          this.deathmatchBonusAwardUntil = this.animationTime + 2;
+          this.soundscape.play("dm-bonus-kill");
+        }
+      } else attacker.deathmatchScore += points;
+      if (victim !== undefined) {
+        const killerId = attacker === "player" ? "player" : this.bots.indexOf(attacker);
+        const victimId = victim === "player" ? "player" : this.bots.indexOf(victim);
+        const { assister } = this.deathmatchCombat.kill(killerId, victimId);
+        const victimName = victim === "player" ? "YOU" : victim.name;
+        this.deathmatchAssisters.delete(victimName);
+        if (assister !== undefined) {
+          this.deathmatchAssisters.set(
+            victimName,
+            assister === "player" ? "YOU" : this.bots[assister].name,
+          );
+          if (assister === "player") {
+            this.deathmatchScore += 5;
+            this.deathmatchAward = `5 points for assisting in neutralizing ${victim === "player" ? playerName() : victim.name}`;
+            this.deathmatchAwardUntil = this.animationTime + 2;
+          } else if (this.bots[assister]) this.bots[assister].deathmatchScore += 5;
+        }
+      }
     }
     if (!this.teamMode) return;
     const mode = this.competitive ? "competitive" : "casual";
@@ -1929,6 +2122,13 @@ export class Game {
   }
   recordDeathDamage(victim: Bot | "player", attacker: Bot | "player", damage: number) {
     if (victim === attacker) return;
+    if (this.mode === "deathmatch") {
+      this.deathmatchCombat.record(
+        victim === "player" ? "player" : this.bots.indexOf(victim),
+        attacker === "player" ? "player" : this.bots.indexOf(attacker),
+        damage,
+      );
+    }
     if (victim === "player" && attacker !== "player")
       this.deathDamage.record(`bot:${this.bots.indexOf(attacker)}`, "taken", damage);
     else if (attacker === "player" && victim !== "player")
@@ -2026,6 +2226,7 @@ export class Game {
       return;
     }
     if (!this.inventory().includes(index)) return;
+    this.healthshotAction.cancel();
     this.suppressors[this.selected].cancel();
     this.utility.cancelThrow();
     this.utility.selected = null;
@@ -2099,14 +2300,19 @@ export class Game {
         : this.utility.inventory);
     const utility = observer ? null : (this.utility.selected ?? this.utility.throwingKind);
     const owned = grenadeTypes.filter((kind) => inventory[kind] > 0);
-    const signature = `${indices.map((id) => `${id}:${instances(id).serial}:${instances(id).skin.id}`).join(",")}:${this.carryingBomb}:${this.bombSelected}:${utility ?? selected}:${owned.map((kind) => `${kind}:${inventory[kind]}`).join(",")}`;
+    const healthshots =
+      this.mode === "deathmatch" && !observer
+        ? this.deathmatchCombat.life("player").healthshots
+        : 0;
+    const healthshot = !observer && this.healthshotAction.selected;
+    const signature = `${indices.map((id) => `${id}:${instances(id).serial}:${instances(id).skin.id}`).join(",")}:${this.carryingBomb}:${this.bombSelected}:${utility ?? selected}:${owned.map((kind) => `${kind}:${inventory[kind]}`).join(",")}:${healthshots}:${healthshot}`;
     if (signature === this.inventorySignature) return;
     this.inventorySignature = signature;
     const fragment = document.createDocumentFragment();
     for (const index of indices) {
       const slot = weaponSlot(index);
       const row = document.createElement("div");
-      const active = !this.bombSelected && !utility && index === selected;
+      const active = !this.bombSelected && !utility && !healthshot && index === selected;
       row.className = `inventory-weapon ${active ? "active" : ""}`;
       row.dataset.weaponIndex = String(index);
       row.setAttribute("role", "listitem");
@@ -2130,6 +2336,31 @@ export class Game {
       const name = document.createElement("span");
       name.className = "inventory-name";
       name.textContent = weaponInstanceName(instances(index));
+      row.append(art, key, name);
+      fragment.append(row);
+    }
+    if (healthshots) {
+      const row = document.createElement("div");
+      row.className = `inventory-weapon inventory-healthshot ${healthshot ? "active" : ""}`;
+      row.dataset.healthshot = String(healthshots);
+      row.setAttribute("role", "listitem");
+      row.setAttribute(
+        "aria-label",
+        `Medi-Shot, ${healthshots} available${healthshot ? ", equipped" : ""}`,
+      );
+      if (healthshot) row.setAttribute("aria-current", "true");
+      const art = document.createElement("span");
+      art.className = "inventory-art";
+      const image = document.createElement("img");
+      image.src = assetUrl("/icons/buy/healthshot.svg");
+      image.alt = "";
+      art.append(image);
+      const key = document.createElement("span");
+      key.className = "inventory-key";
+      key.textContent = keyLabel(this.settings.bindings.KeyX);
+      const name = document.createElement("span");
+      name.className = "inventory-name";
+      name.textContent = `Medi-Shot${healthshots > 1 ? ` ×${healthshots}` : ""}`;
       row.append(art, key, name);
       fragment.append(row);
     }
@@ -2187,6 +2418,7 @@ export class Game {
   }
 
   fireKnife(stab = false) {
+    if (this.healthshotAction.selected) return;
     if (this.bombSelected) return;
     if (this.network) {
       if (stab) this.network.request.stab = true;
@@ -2286,7 +2518,7 @@ export class Game {
     this.soundscape.play(stab ? "knife-stab" : "knife-hit");
     el("hitmarker").style.color = "#fff";
     if (b.health <= 0) {
-      this.rewardKill("player", b.team, this.selected);
+      this.rewardKill("player", b.team, this.selected, b);
       b.deaths++;
       b.speed = 0;
       b.respawn = this.teamMode ? Infinity : this.mode === "practice" ? 1.8 : 3;
@@ -2341,6 +2573,7 @@ export class Game {
     }
   }
   beginReload() {
+    if (this.healthshotAction.selected) return;
     if (this.bombSelected) return;
     if (this.network) {
       this.network.request.reload = true;
@@ -2485,6 +2718,7 @@ export class Game {
     };
   }
   spawnBot(b: Bot, index: number, preserve = false) {
+    if (this.mode === "deathmatch") this.deathmatchCombat.spawn(index);
     const saved = preserve
       ? {
           weapon: b.rig.weaponIndex,
@@ -2732,6 +2966,10 @@ export class Game {
     };
   }
   fire(continuingBurst = false, alternate = false) {
+    if (this.healthshotAction.selected) {
+      this.useHealthshot();
+      return;
+    }
     if (this.bombSelected) return;
     if (this.network) {
       this.network.request.fire = true;
@@ -2877,7 +3115,7 @@ export class Game {
           this.sound(head ? "head" : "hit");
           el("hitmarker").style.color = head ? "#efac51" : "#fff";
           if (b.health <= 0) {
-            this.rewardKill("player", b.team, this.selected);
+            this.rewardKill("player", b.team, this.selected, b);
             b.deaths++;
             b.speed = 0;
             b.respawn = this.teamMode ? Infinity : this.mode === "practice" ? 1.8 : 3;
@@ -2981,7 +3219,7 @@ export class Game {
       const killerTeam = metadata?.killerTeam ?? this.bots[killerBot]?.team ?? "t";
       showDeathcam(
         this.deathDamage.exchange(metadata?.killerId ?? `bot:${killerBot}`),
-        metadata?.killerAvatar ?? assetUrl(`/icons/team-${killerTeam}.png`),
+        metadata?.killerAvatar ?? botPortrait(killerTeam, this.bots[killerBot]?.rig.agentId),
       );
       setText("death-killer", killer);
       el("death-killer").className =
@@ -2990,7 +3228,7 @@ export class Game {
           : "feed-t";
       setText("death-weapon", weaponName);
       toggle("death-weapon-icon", true);
-      (el("death-weapon-icon") as HTMLImageElement).src = assetUrl(weaponIcon);
+      setDeathcamWeaponArtwork(label ? -1 : weapon, killerInstance, weaponIcon);
       toggle("death-banner", true);
       this.deathBannerUntil = performance.now() + 3000;
     }
@@ -3026,6 +3264,12 @@ export class Game {
       return img;
     };
     row.append(name(killer, metadata?.killerTeam));
+    const assister = this.mode === "deathmatch" ? this.deathmatchAssisters.get(victim) : undefined;
+    this.deathmatchAssisters.delete(victim);
+    if (assister) {
+      row.append(" + ", name(assister));
+      if (assister === "YOU") row.classList.add("feed-local");
+    }
     const icons = document.createElement("span");
     icons.className = "feed-icons";
     if (utilityKind === "molotov" || utilityKind === "incendiary") {
@@ -3074,6 +3318,8 @@ export class Game {
     }, 6000);
   }
   finish() {
+    this.healthshotHealing.clear();
+    this.healthshotAction.cancel();
     hideRoundBanner();
     this.notices.reset();
     document.body.classList.remove("match-menu-open");
@@ -3316,6 +3562,26 @@ export class Game {
     }
     this.notices.tick(dt);
     if (this.mode === "deathmatch") {
+      if (this.dead || !this.active) {
+        this.healthshotAction.cancel();
+        this.healthshotHealing.clear();
+      } else {
+        const phase = this.healthshotAction.phase,
+          elapsed = this.healthshotAction.elapsed;
+        const result = this.healthshotAction.tick(dt);
+        if (phase === "use")
+          for (const cue of this.healthshotSounds) {
+            if (elapsed < cue.time && elapsed + dt >= cue.time)
+              this.soundscape.play(`healthshot-${cue.kind}`);
+          }
+        if (result.consumed) this.deathmatchCombat.life("player").healthshots--;
+        if (result.heal) this.healthshotHealing.enqueue(result.heal);
+        this.health = Math.min(100, this.health + this.healthshotHealing.tick(dt));
+        if (result.finished) this.equip(this.selected);
+      }
+      const bonusEvent = this.deathmatch.tick(dt, deathmatchBonusWeapons);
+      if (bonusEvent)
+        this.soundscape.play(bonusEvent === "started" ? "dm-bonus-start" : "dm-bonus-end");
       const previousTime = this.time;
       this.time -= dt;
       if (previousTime > 10 && this.time <= 10) this.soundscape.playMusic("countdown");
@@ -3462,8 +3728,9 @@ export class Game {
     if (!this.reload) this.emptyReload = this.magazineInserted = false;
     const crouch = this.updateDuckInput(dt),
       walk = this.keys.has("ShiftLeft") || this.keys.has("ShiftRight"),
-      maxSpeed =
-        (this.scopeLevel && weapons[this.selected].scopedSpeed) || weapons[this.selected].speed,
+      maxSpeed = this.healthshotAction.selected
+        ? 250 * 0.0254
+        : (this.scopeLevel && weapons[this.selected].scopedSpeed) || weapons[this.selected].speed,
       speed =
         maxSpeed *
         (crouch
@@ -4870,7 +5137,7 @@ export class Game {
           this.soundscape.play("damage");
           if (!this.health) {
             this.deaths++;
-            this.rewardKill(b, this.team, b.rig.weaponIndex);
+            this.rewardKill(b, this.team, b.rig.weaponIndex, "player");
             this.dead = this.teamMode ? Infinity : 2.5;
             this.revolverCharge = this.knifeTime = this.inspectTime = 0;
             this.knifePending = false;
@@ -4902,7 +5169,7 @@ export class Game {
           );
           if (other.health <= 0) {
             other.deaths++;
-            this.rewardKill(b, other.team, b.rig.weaponIndex);
+            this.rewardKill(b, other.team, b.rig.weaponIndex, other);
             other.respawn = this.teamMode ? Infinity : 3;
             other.moving = false;
             if (this.teamMode) this.dropBomb(victim);
@@ -5769,6 +6036,7 @@ export class Game {
   // The Dust II radar layer is drawn once per world,
   // canvas size and style, then composited under the live markers.
   drawMap(canvas: HTMLCanvasElement, live: boolean) {
+    if (live) updateRadarLocation(this.world.navigation, this.position, this.mapId);
     const ctx = canvas.getContext("2d")!,
       w = canvas.width,
       h = canvas.height,
@@ -5848,7 +6116,6 @@ export class Game {
     ctx.restore();
   }
   mapProjection(w: number, h: number) {
-    if (this.mapId === "dust2") return dustRadarProjection(w, h);
     const overview = this.dust?.config.radar;
     if (overview && this.radarImage) {
       const width = this.radarImage.naturalWidth,
@@ -5879,23 +6146,7 @@ export class Game {
 
   drawMapLayer(ctx: CanvasRenderingContext2D, w: number, h: number, _live: boolean) {
     if (this.world.navigation) {
-      if (this.radarImage && this.mapId === "dust2") {
-        const { scale, left, top } = dustRadarProjection(w, h);
-        const { x, y, width, height, referenceSize } = radarCrop;
-        const sourceScale = this.radarImage.naturalWidth / referenceSize;
-        ctx.drawImage(
-          this.radarImage,
-          x * sourceScale,
-          y * sourceScale,
-          width * sourceScale,
-          height * sourceScale,
-          left,
-          top,
-          width * scale,
-          height * scale,
-        );
-      }
-      if (this.mapId !== "dust2" && this.radarImage) {
+      if (this.radarImage) {
         const { left, top, scale } = this.mapProjection(w, h);
         ctx.drawImage(
           this.radarImage,
@@ -5904,7 +6155,7 @@ export class Game {
           this.radarImage.naturalWidth * scale,
           this.radarImage.naturalHeight * scale,
         );
-      } else if (this.mapId !== "dust2") {
+      } else {
         const { px, pz } = this.mapProjection(w, h);
         ctx.fillStyle = "#737e84";
         ctx.strokeStyle = "#323b40";
@@ -5938,6 +6189,8 @@ export class Game {
         kills: this.kills,
         deaths: this.deaths,
         score: this.deathmatchScore,
+        assists:
+          this.mode === "deathmatch" ? this.deathmatchCombat.life("player").assists : undefined,
         team: this.team,
         alive: !this.dead,
         mvps: this.mvpCounts.get("player") ?? 0,
@@ -5953,11 +6206,12 @@ export class Game {
       ...this.bots.map((b, id) => ({
         id,
         name: b.name,
-        avatar: this.network?.stateForBot(b)?.avatar,
+        avatar: this.network?.stateForBot(b)?.avatar ?? botPortrait(b.team, b.rig.agentId),
         bot: !this.network,
         kills: b.kills,
         deaths: b.deaths,
         score: b.deathmatchScore,
+        assists: this.mode === "deathmatch" ? this.deathmatchCombat.life(id).assists : undefined,
         team: b.team,
         alive: b.health > 0,
         mvps: this.mvpCounts.get(id) ?? 0,
@@ -6010,9 +6264,18 @@ export class Game {
 
   updateUI() {
     updateDeathmatchHud(
-      this.mode === "deathmatch",
-      this.mode === "deathmatch" ? this.deathmatchStandings : [],
+      this.active && this.mode === "deathmatch",
+      this.active && this.mode === "deathmatch" ? this.deathmatchStandings : [],
       this.dead ? 0 : this.invulnerable,
+      {
+        bonus: this.deathmatch.bonus,
+        randomWeapons: this.deathmatchRandomWeapons,
+        randomKey: keyLabel(this.settings.bindings.F3),
+        bonusKey: keyLabel(this.settings.bindings.KeyG),
+        award: this.animationTime < this.deathmatchAwardUntil ? this.deathmatchAward : undefined,
+        bonusAward:
+          this.animationTime < this.deathmatchBonusAwardUntil ? this.deathmatchBonusAward : 0,
+      },
     );
     const observer =
       this.dead && this.teamMode && this.spectatorMode === "first" ? this.spectated : undefined;
@@ -6045,30 +6308,35 @@ export class Game {
       teamIcon.alt = this.team === "ct" ? "Counter-Terrorists" : "Terrorists";
     }
     const utility = observer ? null : (this.utility.selected ?? this.utility.throwingKind);
+    const healthshot = !observer && this.healthshotAction.selected;
     setText(
       "ammo",
-      utility
-        ? String(this.utility.inventory[utility])
-        : holdingBomb || isKnife(selected)
-          ? ""
-          : String(observer?.ammo ?? this.ammo),
+      healthshot
+        ? String(this.deathmatchCombat.life("player").healthshots)
+        : utility
+          ? String(this.utility.inventory[utility])
+          : holdingBomb || isKnife(selected)
+            ? ""
+            : String(observer?.ammo ?? this.ammo),
     );
     el("ammo").parentElement!.classList.toggle(
       "knife-equipped",
-      !utility && (holdingBomb || isKnife(selected)),
+      !utility && !healthshot && (holdingBomb || isKnife(selected)),
     );
-    el("ammo").parentElement!.classList.toggle("utility-equipped", !!utility);
+    el("ammo").parentElement!.classList.toggle("utility-equipped", !!utility || healthshot);
     this.updateInventory();
     setText("reserve", String(observer?.reserve ?? this.reserve));
     setText(
       "gun-name",
-      holdingBomb
-        ? "C4"
-        : utility
-          ? grenadeData[utility].name
-          : weaponInstanceName(
-              observer?.rig.weaponInstance ?? this.groundInventory.playerWeapon(this.selected),
-            ),
+      healthshot
+        ? "Medi-Shot"
+        : holdingBomb
+          ? "C4"
+          : utility
+            ? grenadeData[utility].name
+            : weaponInstanceName(
+                observer?.rig.weaponInstance ?? this.groundInventory.playerWeapon(this.selected),
+              ),
     );
     for (const team of ["ct", "t"] as const) {
       const alive =
@@ -6331,8 +6599,13 @@ export class Game {
         .set(-Math.cos(pitch) * Math.cos(yaw), Math.sin(pitch), Math.cos(pitch) * Math.sin(yaw))
         .applyQuaternion(this.probeInverse.copy(this.camera.quaternion).invert());
     }
-    const viewModel =
-      this.active && this.dead && this.teamMode && this.spectatorMode === "first" && this.spectated
+    const viewModel = this.healthshotView.visible
+      ? this.healthshotView
+      : this.active &&
+          this.dead &&
+          this.teamMode &&
+          this.spectatorMode === "first" &&
+          this.spectated
         ? this.viewGun(this.spectated.rig.weaponIndex)
         : this.gun;
     this.updateViewLighting(viewModel, dt);
@@ -6533,12 +6806,25 @@ export class Game {
     this.defuseView.visible = !!defusing;
     this.defuseView.wires.visible = !!defusing;
     this.utility.renderSelection();
+    this.healthshotView.visible =
+      this.active && !this.dead && this.mode === "deathmatch" && this.healthshotAction.selected;
+    if (this.healthshotView.visible) {
+      this.healthshotView.sample(
+        this.healthshotAction.phase,
+        this.healthshotAction.elapsed,
+        this.team,
+        gloveChoices[this.team],
+        selectedAgentId(this.team),
+      );
+      this.flash.visible = false;
+    }
     this.gun.visible =
       !planting &&
       !holdingBomb &&
       !defusing &&
       !this.utility.selected &&
-      !this.utility.throwingKind;
+      !this.utility.throwingKind &&
+      !this.healthshotView.visible;
     if (defusing) {
       this.defuseView.userData.gloveTeam = this.team;
       this.defuseView.sample(this.bomb!.progress / (this.defuseKit ? 5 : 10), this.defuseKit);

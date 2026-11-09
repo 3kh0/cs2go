@@ -1,0 +1,101 @@
+#menu[data-session="multi"] .private-match-actions {
+  grid-row: 1;
+  gap: 16px;
+}
+.public-lobbies {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  min-width: 0;
+  margin-top: 24px;
+}
+.public-lobbies > header {
+  height: auto;
+  margin: 0;
+  padding: 0 0 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ffffff30;
+}
+.public-lobbies h3 {
+  margin: 0;
+  font:
+    700 18px Stratum2,
+    sans-serif;
+  color: #eee;
+}
+#multiplayer-options #refresh-lobbies {
+  padding: 0 10px;
+  margin: 0;
+  background: transparent;
+  font-size: 26px;
+  color: #a7dced;
+}
+#public-lobby-status {
+  margin: 12px 0;
+  color: #d0d0d0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+#public-lobby-list {
+  max-height: 280px;
+  overflow: auto;
+}
+#multiplayer-options #public-lobby-list button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  gap: 10px;
+  margin: 0 0 4px;
+  padding: 10px;
+  text-align: left;
+  color: #eee;
+  background: #0003;
+  font:
+    400 15px Stratum2,
+    sans-serif;
+}
+#multiplayer-options #public-lobby-list button:hover {
+  background: #ffffff20;
+}
+#public-lobby-list button > img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+#public-lobby-list button > span:first-of-type {
+  flex: 1;
+  min-width: 0;
+}
+#public-lobby-list strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#public-lobby-list small {
+  display: block;
+  margin-top: 4px;
+  color: #bbb;
+  font-size: 13px;
+}
+.public-lobby-count {
+  flex: 0 0 auto;
+  color: #a7dced;
+  font-variant-numeric: tabular-nums;
+}
+.lobby-visibility {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 28px 0;
+}
+#multiplayer-options .lobby-visibility label {
+  margin: 0;
+}
+#multiplayer-options #match-visibility {
+  flex: 1;
+  font-size: 16px;
+}
