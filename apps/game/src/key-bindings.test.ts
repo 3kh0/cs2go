@@ -69,3 +69,13 @@ it("adds Deathmatch controls without stealing a saved X binding", () => {
   expect(canonicalKey(migrated.KeyX, migrated)).toBe("KeyX");
   expect(canonicalKey("F3", migrated)).toBe("F3");
 });
+
+it("adds radar zoom without stealing an existing H binding", () => {
+  const old = defaultBindings();
+  delete old.KeyH;
+  old.KeyR = "KeyH";
+  const migrated = readBindings(old);
+  expect(migrated.KeyR).toBe("KeyH");
+  expect(migrated.KeyH).not.toBe("KeyH");
+  expect(canonicalKey(migrated.KeyH, migrated)).toBe("KeyH");
+});

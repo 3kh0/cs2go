@@ -1,0 +1,83 @@
+{
+  "source": "Installed Counter-Strike 2, native Panorama resources freshly re-extracted and hash-verified 2026-11-09",
+  "decoder": "Source2Viewer CLI 20.1",
+  "conversion": "Native decoded SVGs copied byte-for-byte. Browser alpha masks preserve the original transparent silhouettes. Presentation follows the user-requested HUD accent and translucency; native faction colors below remain source reference values. No path edits or tracing.",
+  "layout": "panorama/layout/hud/hudhealthammocenter.vxml_c, hud-HA-center-ct-icon/hud-HA-center-t-icon:48px SVG inside64px blurred circle with3px border.",
+  "colors": {
+    "ct": "#96c8fa",
+    "t": "#eabe54"
+  },
+  "resources": [
+    {
+      "resource": "panorama/images/icons/ui/ct_logo_1c.vsvg_c",
+      "raw_sha256": "22d6e6ed11d30b9ee8ea098853f1bd96a1203c142bf5b348d321c0e5b8deb07a",
+      "decoded_sha256": "3eb8e5f9bbb233cd6053de8bd625143dbabbbbc5ee95379409dad64a15fab8e5",
+      "runtime": "/icons/hud/team-ct.svg",
+      "runtime_sha256": "3eb8e5f9bbb233cd6053de8bd625143dbabbbbc5ee95379409dad64a15fab8e5",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_118.vpk",
+      "offset": 7322624,
+      "archiveBytes": 13255,
+      "preloadBytes": 0,
+      "bytes": 13255,
+      "crc32": "f4a3330e"
+    },
+    {
+      "resource": "panorama/images/icons/ui/t_logo_1c.vsvg_c",
+      "raw_sha256": "5a3c252c94dc561cae044139e13bcb75a2c3e9da8f5712c8828070b29fad96d7",
+      "decoded_sha256": "8e78ab0037873e618c63b984098c38a0b487aeaeca36ea8bb19a718a3afdd83b",
+      "runtime": "/icons/hud/team-t.svg",
+      "runtime_sha256": "8e78ab0037873e618c63b984098c38a0b487aeaeca36ea8bb19a718a3afdd83b",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_371.vpk",
+      "offset": 56927696,
+      "archiveBytes": 6117,
+      "preloadBytes": 0,
+      "bytes": 6117,
+      "crc32": "dc08e37e"
+    }
+  ],
+  "layout_sources": [
+    {
+      "resource": "panorama/layout/hud/hudhealthammocenter.vxml_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_371.vpk",
+      "offset": 34285168,
+      "archiveBytes": 7333,
+      "preloadBytes": 0,
+      "bytes": 7333,
+      "crc32": "d3e6deca",
+      "sha256": "8bf84be70add0affda74647501e6595fbd75a03ef27b2d2af89be6cb3b977475",
+      "path": "raw/panorama/layout/hud/hudhealthammocenter.vxml_c",
+      "decoded_path": "decoded/panorama/layout/hud/hudhealthammocenter.xml",
+      "decoded_sha256": "f65909dc6d2d0e257bd6f4f7cbcd2c71453001f76c5c8bafd4e603377c415839",
+      "decode_command": [
+        "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\tools\\s2v-20.1\\Source2Viewer-CLI.exe",
+        "-d",
+        "-i",
+        "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\artifacts\\native-bottomcenter-badge-20261109\\raw\\panorama\\layout\\hud\\hudhealthammocenter.vxml_c",
+        "-o",
+        "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\artifacts\\native-bottomcenter-badge-20261109\\decoded\\panorama\\layout\\hud\\hudhealthammocenter.xml"
+      ],
+      "logo_references": [
+        {
+          "line": 142,
+          "text": "<Image class=\"hud-HA-center-ct-icon hud-ct-colorize\" src=\"s2r://panorama/images/icons/ui/ct_logo_1c.vsvg\" texturewidth=\"48px\" scaling=\"stretch-to-fit-preserve-aspect\" />"
+        },
+        {
+          "line": 143,
+          "text": "<Image class=\"hud-HA-center-t-icon hud-t-colorize\" src=\"s2r://panorama/images/icons/ui/t_logo_1c.vsvg\" texturewidth=\"48px\" scaling=\"stretch-to-fit-preserve-aspect\" />"
+        }
+      ]
+    }
+  ],
+  "global_color_source": {
+    "resource": "panorama/styles/csgostyles.vcss_c",
+    "raw_sha256": "eb93cad5509380266b198a38d6e69cc7812201838139bde985699c059a67af32",
+    "decoded_sha256": "754138449edfb265ce1f9f05f99a09ea02b0acd6a010abf94164b3f3971a80cf"
+  },
+  "presentation_override": {
+    "reason": "User requested matching the rest of the HUD and greater transparency",
+    "color": "var(--hud-accent)",
+    "glyphOpacity": 0.7,
+    "ringOpacity": 0.5,
+    "backgroundAlpha": 0.2
+  }
+}

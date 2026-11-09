@@ -81,7 +81,7 @@ test("a failed map radar keeps the current world intact and retries the image on
   ).toEqual({
     map: "dust2",
     world: "dust2",
-    radar: "dust2-callouts.png",
+    radar: "dust2-radar.png",
     visibleWorlds: ["Dust II - CS2"],
   });
   await page.locator("#match-loading button").click();
@@ -146,6 +146,6 @@ test("cancelling radar preparation is immediate and its late result cannot repla
       active: window.__game.active,
       radar: window.__game.radarImage?.src.split("/").at(-1),
     })),
-  ).toEqual({ map: "dust2", world: "dust2", active: true, radar: "dust2-callouts.png" });
+  ).toEqual({ map: "dust2", world: "dust2", active: true, radar: "dust2-radar.png" });
   expect(errors).toEqual([]);
 });

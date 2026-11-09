@@ -51,12 +51,12 @@ test("fixed faction HUD, alive counts, and planted bomb countdown", async ({ pag
     g.yaw = Math.PI / 3;
     g.drawMap(document.querySelector<HTMLCanvasElement>("#radar")!, true);
   });
-  await page.locator("#radar").screenshot({ path: "artifacts/radar-focused.png" });
+  await page.locator(".radar-wrap").screenshot({ path: "artifacts/radar-focused.png" });
   await page.evaluate(() => {
     document.querySelector(".radar-wrap")!.classList.add("expanded");
     window.__game.drawMap(document.querySelector<HTMLCanvasElement>("#radar")!, true);
   });
-  await page.locator("#radar").screenshot({ path: "artifacts/radar-overview.png" });
+  await page.locator(".radar-wrap").screenshot({ path: "artifacts/radar-overview.png" });
   await page.evaluate(() => {
     const g = window.__game;
     g.bomb!.planted = true;

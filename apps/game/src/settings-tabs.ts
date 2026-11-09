@@ -3,6 +3,7 @@ import { setupGraphicsSettings } from "./graphics-controls";
 import type { Game } from "./game";
 import { applyCrosshair } from "./presentation-settings";
 import { setupViewmodelSettings } from "./viewmodel-controls";
+import { setupRadarSettings } from "./radar-controls";
 
 export function setupSettingsTabs(game: Game) {
   const host = document.querySelector<HTMLElement>("#settings .settings")!;
@@ -16,6 +17,7 @@ export function setupSettingsTabs(game: Game) {
     Viewmodel: [],
     Audio: ["volume", "musicVolume", "effectsVolume"],
     Gameplay: ["agent-team", "hudHue", "auto-bunnyhop"],
+    Radar: [],
     Controls: ["sensitivity"],
     Crosshair: [],
   };
@@ -70,6 +72,7 @@ export function setupSettingsTabs(game: Game) {
   const video = panels.get("Video")!;
   setupGraphicsSettings(video, game);
   setupViewmodelSettings(panels.get("Viewmodel")!, game);
+  setupRadarSettings(panels.get("Radar")!, game);
   const crosshair = panels.get("Crosshair")!;
   crosshair.innerHTML = `<div class="crosshair-preview-stage"><div id="crosshair-preview" class="crosshair-shape"><i></i><i></i><i></i><i></i><b></b></div><span>LIVE PREVIEW</span></div><label class="select-label">Color<input id="crosshairColor" type="color"></label>${[
     ["crosshairLength", "Length", 1, 30],

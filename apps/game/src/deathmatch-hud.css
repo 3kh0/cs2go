@@ -84,23 +84,6 @@
     sans-serif;
   text-align: center;
 }
-#hud.deathmatch .radar-wrap:not(.expanded) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#hud.deathmatch .radar-wrap:not(.expanded) #radar {
-  width: clamp(165px, 25vh, 250px);
-  height: clamp(165px, 25vh, 250px);
-  border-radius: 50%;
-}
-#hud.deathmatch .radar-wrap:not(.expanded) #location {
-  order: 1;
-  margin: 14px 0 0;
-  color: #eee;
-  letter-spacing: 0;
-  font-size: 18px;
-}
 /* Native huddmbonus:100px-high panel fading over400px,0.5s entrance,
    circular countdown and64px weapon art, scaled from its1080p canvas. */
 #deathmatch-bonus {

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "11f32c84e42b0ba10073ba48207eef35c8a288c23446a56b27974f0f9feacde7",
+  "release": "9b99c765e633a0df32ae405411caedd13ea95ad43069514fe9723d5cdd42a79e",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -13512,6 +13512,39 @@
         "bytes": 1479
       },
       "object": "objects/6bd4f95db2146e7587b312ac99e17dc5b7fc0b8d80c4fb182ed6fc39619507db.json.br"
+    },
+    "icons/hud/team-ct.svg": {
+      "sha256": "3eb8e5f9bbb233cd6053de8bd625143dbabbbbc5ee95379409dad64a15fab8e5",
+      "bytes": 12529,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "071209686c6ae8d96c688955b356f3fd7079ed67669e9d19f5ef88cb348041d8",
+        "bytes": 4854
+      },
+      "object": "objects/071209686c6ae8d96c688955b356f3fd7079ed67669e9d19f5ef88cb348041d8.svg.br"
+    },
+    "icons/hud/team-source.json": {
+      "sha256": "10196190578d2c1a953527ad611fe0f0b4a23c1681a449dc342b46fa855c968c",
+      "bytes": 4163,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "3d5d8bcef9b757f6ee4c2c175e636e2ce4b6facc72f66b2a92af1ca1dc1f8474",
+        "bytes": 1334
+      },
+      "object": "objects/3d5d8bcef9b757f6ee4c2c175e636e2ce4b6facc72f66b2a92af1ca1dc1f8474.json.br"
+    },
+    "icons/hud/team-t.svg": {
+      "sha256": "8e78ab0037873e618c63b984098c38a0b487aeaeca36ea8bb19a718a3afdd83b",
+      "bytes": 5311,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "ecfa567c68f2ca52ef7049e197c931b9b6772eedcc73cb0a998f127a66fc52c6",
+        "bytes": 1658
+      },
+      "object": "objects/ecfa567c68f2ca52ef7049e197c931b9b6772eedcc73cb0a998f127a66fc52c6.svg.br"
     },
     "icons/huntsman.png": {
       "sha256": "1cba4adf823a0077b760c4ca76d6e796ba8fdda35dd5f3747342da5aa70408c5",
@@ -93555,6 +93588,160 @@
         "bytes": 663
       },
       "object": "objects/1df2d0dc912a35fb7268eb6a8951bb7759de124a6a81b9c8fecf4cebe3ca7019.svg.br"
+    },
+    "ui/radar/bomb-above.svg": {
+      "sha256": "72145e715c53cf59cba188c37b7f0f932b50607dc706a1b4d6947dab2a457c7c",
+      "bytes": 886,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "4199c3f40b64f9d9a3db973358531479f1ef9db83ae7a27707023fc16dc3a3bf",
+        "bytes": 424
+      },
+      "object": "objects/4199c3f40b64f9d9a3db973358531479f1ef9db83ae7a27707023fc16dc3a3bf.svg.br"
+    },
+    "ui/radar/bomb-below.svg": {
+      "sha256": "db1d2e6a23b5b7b0c2e3f1336ed2eeb12e9082d358f8e3e074085a196ca12a05",
+      "bytes": 944,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "e3b166eacdad61b7e98efcbfc157b42726dd4c3e2764a5a90f35ab4d4504eac3",
+        "bytes": 460
+      },
+      "object": "objects/e3b166eacdad61b7e98efcbfc157b42726dd4c3e2764a5a90f35ab4d4504eac3.svg.br"
+    },
+    "ui/radar/bomb.svg": {
+      "sha256": "1fdd3a6d3dd1a7be945944b9efd818c01b4264c4d4d4c1d977b2ffd2e6e6796b",
+      "bytes": 10149,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "496b51f5b067dadb39a6ed8227faa1fa4e0ebe5910199c42ca04e938dada6e20",
+        "bytes": 3468
+      },
+      "object": "objects/496b51f5b067dadb39a6ed8227faa1fa4e0ebe5910199c42ca04e938dada6e20.svg.br"
+    },
+    "ui/radar/carried-bomb.png": {
+      "sha256": "3f89935c59451cc6c6fad89c08ced6b3ec77ed894c39ee16e761ac9f4ad15732",
+      "bytes": 484,
+      "object": "objects/3f89935c59451cc6c6fad89c08ced6b3ec77ed894c39ee16e761ac9f4ad15732.png"
+    },
+    "ui/radar/ct-ghost.png": {
+      "sha256": "50adba2900e9e76926e29812eacb8095aa7dd286608a4f1be34c5d9f6f7c75b5",
+      "bytes": 498,
+      "object": "objects/50adba2900e9e76926e29812eacb8095aa7dd286608a4f1be34c5d9f6f7c75b5.png"
+    },
+    "ui/radar/death.svg": {
+      "sha256": "7fbabd7e3f987d20fc4f2049db8805a5bef6544acd313735f646582987e46571",
+      "bytes": 663,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "04e670e3451f2153e78da4e46f5451365c1eec880d5acbea85e3bc6ff98ae131",
+        "bytes": 357
+      },
+      "object": "objects/04e670e3451f2153e78da4e46f5451365c1eec880d5acbea85e3bc6ff98ae131.svg.br"
+    },
+    "ui/radar/direction.svg": {
+      "sha256": "7550ea48d37cd4e98c8fa102afd40bfb286e2cd4f1de66fc02ab149b706b7c65",
+      "bytes": 364,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "224cb712e12eebdb89fb4fca17c0c2cc105891a5aa2103872c8db546b337e4c4",
+        "bytes": 218
+      },
+      "object": "objects/224cb712e12eebdb89fb4fca17c0c2cc105891a5aa2103872c8db546b337e4c4.svg.br"
+    },
+    "ui/radar/enemy-ghost.png": {
+      "sha256": "21c14e4da1c646aee2d9ad4fdc74ea8b2ecccbc17d8887caf025af396b7d653d",
+      "bytes": 494,
+      "object": "objects/21c14e4da1c646aee2d9ad4fdc74ea8b2ecccbc17d8887caf025af396b7d653d.png"
+    },
+    "ui/radar/enemy.png": {
+      "sha256": "ef113b08f379a0af8f026d0bc782d09124366c653919aafacdc86a9c4735ea38",
+      "bytes": 492,
+      "object": "objects/ef113b08f379a0af8f026d0bc782d09124366c653919aafacdc86a9c4735ea38.png"
+    },
+    "ui/radar/offmap.svg": {
+      "sha256": "850f6caafd5064d0d5efc34003410752cafe06e14c86a8b60cac0a758444697d",
+      "bytes": 568,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "08cfe8dcfc1d84c6abf129bac03493ad45049abb46736c95a3d1e58ea62ef124",
+        "bytes": 304
+      },
+      "object": "objects/08cfe8dcfc1d84c6abf129bac03493ad45049abb46736c95a3d1e58ea62ef124.svg.br"
+    },
+    "ui/radar/player-above.png": {
+      "sha256": "76c61a0b1230d7f15cccdda2493cbe14bf7e99e4d0e27f81d6785b0a97a5a098",
+      "bytes": 269,
+      "object": "objects/76c61a0b1230d7f15cccdda2493cbe14bf7e99e4d0e27f81d6785b0a97a5a098.png"
+    },
+    "ui/radar/player-below.png": {
+      "sha256": "e2b2c5e002f66d40a83547177917c51bc7e01977b339dbd278875d606b90d626",
+      "bytes": 258,
+      "object": "objects/e2b2c5e002f66d40a83547177917c51bc7e01977b339dbd278875d606b90d626.png"
+    },
+    "ui/radar/player.png": {
+      "sha256": "64184676043a5f1701a25b672fa91313889068e460a4d6ae161782cb98e45bdf",
+      "bytes": 439,
+      "object": "objects/64184676043a5f1701a25b672fa91313889068e460a4d6ae161782cb98e45bdf.png"
+    },
+    "ui/radar/rim-direction.png": {
+      "sha256": "41b0e5fc541a419b60b629804a5dd5b6bee0937bd3bfb3469c3fe8102a0c7e7a",
+      "bytes": 1609,
+      "object": "objects/41b0e5fc541a419b60b629804a5dd5b6bee0937bd3bfb3469c3fe8102a0c7e7a.png"
+    },
+    "ui/radar/selected.svg": {
+      "sha256": "120d26fde07e6db3f01411977acc4089ebdf0f5b45b50c6d31b9d68e86cee062",
+      "bytes": 2640,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f06159c4ffb67bcec60c7786dd1078b3a8e73f639eca801e0e33e144d58e03ab",
+        "bytes": 879
+      },
+      "object": "objects/f06159c4ffb67bcec60c7786dd1078b3a8e73f639eca801e0e33e144d58e03ab.svg.br"
+    },
+    "ui/radar/site-a.png": {
+      "sha256": "aad94e35d0f6c741a237761902267d862ea8ff777cbb7760d92d512726ec3660",
+      "bytes": 519,
+      "object": "objects/aad94e35d0f6c741a237761902267d862ea8ff777cbb7760d92d512726ec3660.png"
+    },
+    "ui/radar/site-b.png": {
+      "sha256": "d6efce0a11cff93a3ef80ff36185ba341aec3f9491fa53c52e00e102da5a5afa",
+      "bytes": 426,
+      "object": "objects/d6efce0a11cff93a3ef80ff36185ba341aec3f9491fa53c52e00e102da5a5afa.png"
+    },
+    "ui/radar/source.json": {
+      "sha256": "f388fb40e02825601c9fd02c3b64a620f1f7adbc95d06d9b34fcb93a7f58bd56",
+      "bytes": 21804,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "d7d4d7bee77af497d6d019cf3cbeac391a18d955ba3251616f237f01a43e2eb6",
+        "bytes": 4041
+      },
+      "object": "objects/d7d4d7bee77af497d6d019cf3cbeac391a18d955ba3251616f237f01a43e2eb6.json.br"
+    },
+    "ui/radar/t-ghost.png": {
+      "sha256": "3f7f71280c8c391d882cfd1149c547155410854fd3b61dc2b42e80f57a07242f",
+      "bytes": 513,
+      "object": "objects/3f7f71280c8c391d882cfd1149c547155410854fd3b61dc2b42e80f57a07242f.png"
+    },
+    "ui/radar/view.svg": {
+      "sha256": "09d302f847cf0b5d288a947aec119a61c16acfb0ade7953e39147809c856cb9f",
+      "bytes": 2249,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "cfaf21da1fa0cdfc3c1e981103179c5efb6503d66eeea3937fec2741f0236db7",
+        "bytes": 710
+      },
+      "object": "objects/cfaf21da1fa0cdfc3c1e981103179c5efb6503d66eeea3937fec2741f0236db7.svg.br"
     }
   }
 }

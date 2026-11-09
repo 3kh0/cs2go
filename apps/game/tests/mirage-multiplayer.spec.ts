@@ -63,7 +63,7 @@ test("two clients discover Mirage, move and fight on native geometry, then recov
       [a, "ct"],
       [b, "t"],
     ] as const) {
-      await expect(page.locator("#location")).toHaveText("MIRAGE");
+      await expect(page.locator("#location")).toHaveText(team === "ct" ? "CT Start" : "T Start");
       expect(
         await page.evaluate((side) => {
           const g = window.__game,

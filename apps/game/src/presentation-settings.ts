@@ -2,11 +2,13 @@ import * as T from "three";
 import { displayDefaults, readDisplaySettings } from "./display-settings";
 import { graphicsDefaults, readGraphicsSettings } from "./graphics-settings";
 import { viewmodelDefaults, readViewmodelSettings } from "./viewmodel-settings";
+import { radarDefaults, readRadarSettings } from "./radar-settings";
 
 export const presentationDefaults = {
   ...graphicsDefaults,
   ...displayDefaults,
   ...viewmodelDefaults,
+  ...radarDefaults,
   crosshairColor: "#a8ff80",
   crosshairLength: 7,
   crosshairThickness: 2,
@@ -23,6 +25,7 @@ export function readPresentationSettings(saved: Record<string, unknown>): Presen
     ...readGraphicsSettings(saved),
     ...readDisplaySettings(saved),
     ...readViewmodelSettings(saved),
+    ...readRadarSettings(saved),
   };
   for (const [key, min, max] of [
     ["crosshairLength", 1, 30],

@@ -252,28 +252,117 @@ footer button {
   background: #4ba6ef;
 }
 .radar-wrap {
+  --radar-unit: calc(var(--game-height, 100vh) / 1080);
+  --radar-size: calc(250 * var(--radar-unit) * var(--radar-hud-scale, 1));
+  --radar-inset: calc(25 * var(--radar-unit) * var(--radar-hud-scale, 1));
   position: absolute;
-  top: 25px;
-  left: 28px;
+  top: var(--radar-inset);
+  left: var(--radar-inset);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 100ms linear;
+}
+.radar-wrap[data-square="true"] {
+  --radar-size: calc(290 * var(--radar-unit) * var(--radar-hud-scale, 1));
+  --radar-inset: calc(5 * var(--radar-unit) * var(--radar-hud-scale, 1));
 }
 #location {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: #f4ddb3;
-  letter-spacing: 1px;
+  order: 1;
+  width: var(--radar-size);
+  margin: var(--radar-inset) 0 0;
+  font-size: calc(22 * var(--radar-unit) * var(--radar-hud-scale, 1));
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--hud-accent, #fff);
+  text-align: center;
+  text-shadow: 0 1px 2px #000;
+  letter-spacing: 0;
+}
+.radar-wrap[data-scoreboard="true"] #location {
+  color: #fff;
+}
+#radar,
+.radar-map-layer,
+.radar-backdrop {
+  width: var(--radar-size);
+  height: var(--radar-size);
+  border-radius: 50%;
 }
 #radar {
-  width: 165px;
-  height: 165px;
-  border-radius: 50%;
-  border: 1px solid #ffffff60;
-  background: #111c2299;
+  order: 0;
+  position: relative;
+  z-index: 2;
+  display: block;
+  border: 0;
+  outline: 1px solid #fff;
+  outline-offset: -1px;
+  background: transparent;
 }
-.radar-wrap.callouts #radar {
-  width: 230px;
-  height: auto;
-  border-radius: 6px;
+.radar-map-layer,
+.radar-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+.radar-backdrop {
+  z-index: 0;
+  backdrop-filter: var(--radar-blur, blur(8px));
+}
+.radar-map-layer {
+  z-index: 1;
+}
+.radar-compass {
+  --radar-orbit-size: calc(var(--radar-size) * 1.2);
+  position: absolute;
+  width: var(--radar-orbit-size);
+  height: var(--radar-orbit-size);
+  left: calc((var(--radar-size) - var(--radar-orbit-size)) / 2);
+  top: calc((var(--radar-size) - var(--radar-orbit-size)) / 2);
+  z-index: 3;
+  pointer-events: none;
+}
+.radar-compass img {
+  position: absolute;
+  top: calc(2 * var(--radar-unit) * var(--radar-hud-scale, 1));
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(10 * var(--radar-unit) * var(--radar-hud-scale, 1));
+  height: calc(14 * var(--radar-unit) * var(--radar-hud-scale, 1));
+}
+.radar-wrap[data-bomb="true"][data-square="false"] #radar {
+  animation: radar-bomb-pulse 650ms linear infinite;
+}
+@keyframes radar-bomb-pulse {
+  0%,
+  100% {
+    outline-color: #ff00001a;
+  }
+  25%,
+  75% {
+    outline-color: #ff000099;
+  }
+  50% {
+    outline-color: #ff0000cc;
+  }
+}
+.radar-wrap[data-square="true"] :is(#radar, .radar-map-layer, .radar-backdrop) {
+  border-radius: 0;
+  border: 0;
+  outline: 0;
+}
+.radar-wrap[data-square="true"] #radar {
+  outline: 1px solid #96c8fa;
+  outline-offset: -1px;
+}
+.radar-wrap #economy-hud {
+  order: 2;
+  align-self: flex-start;
+}
+.radar-wrap #bomb-carrier {
+  order: 3;
+  align-self: flex-start;
 }
 :root {
   --hud-hue: 110;
@@ -572,18 +661,44 @@ footer button {
   gap: 12px;
   width: 30%;
 }
-.hud-team span {
+.hud-team > span {
   flex: 1;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--hud-accent));
 }
-.hud-team span:last-child {
+.hud-team > span:last-child {
   transform: rotate(180deg);
 }
-.hud-team img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
+.hud-team-badge {
+  --team-badge-unit: calc(var(--game-height, 100vh) / 1080);
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: calc(64 * var(--team-badge-unit));
+  height: calc(64 * var(--team-badge-unit));
+  border-radius: 50%;
+  background: #00000033;
+  backdrop-filter: blur(2px);
+}
+.hud-team-badge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: calc(3 * var(--team-badge-unit)) solid var(--hud-accent);
+  border-radius: 50%;
+  mix-blend-mode: plus-lighter;
+  opacity: 0.5;
+}
+#hud-team-icon {
+  width: calc(48 * var(--team-badge-unit));
+  height: calc(48 * var(--team-badge-unit));
+  background-color: var(--hud-accent);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  mix-blend-mode: plus-lighter;
+  opacity: 0.7;
 }
 .ammo {
   position: absolute;
@@ -960,10 +1075,6 @@ kbd {
   footer > div > span:last-child {
     display: none;
   }
-  .radar-wrap {
-    transform: scale(0.7);
-    transform-origin: top left;
-  }
   .dialog {
     padding: 25px;
   }
@@ -1198,17 +1309,12 @@ kbd {
 }
 
 .radar-wrap.expanded {
+  --radar-size: min(calc(78 * var(--game-vw, 1vw)), 74vh);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 20;
-  padding: 12px;
-  background: #070b13f2;
-  border-radius: 8px;
-}
-.radar-wrap.callouts.expanded #radar {
-  width: min(calc(78 * var(--game-vw, 1vw)), 74vh);
 }
 
 .spectating .vitals,

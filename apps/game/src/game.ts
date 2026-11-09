@@ -1,4 +1,5 @@
 import { updateRadarLocation } from "./radar-location";
+import { GameRadar } from "./game-radar";
 import { botPortrait } from "./bot-portrait";
 import { HealthshotView } from "./healthshot-view";
 import { selectedAgentId } from "./agent-roster";
@@ -123,7 +124,7 @@ import {
   nativeMagazineInsert,
 } from "./weapon-motion";
 import { knifeInspectDuration } from "./knife-motion";
-import { loadCalloutRadar } from "./radar";
+import { drawRadar, loadCalloutRadar } from "./radar";
 import * as T from "three";
 import { ballistics, SOURCE_UNITS_PER_METER } from "./ballistics";
 import { fleshThickness, hitgroupMultiplier, meshThickness, solveBullet } from "./bullet-solver";
@@ -713,6 +714,8 @@ export class Game {
   targets: T.Object3D[] = [];
   radarImage?: HTMLImageElement;
   radarLayers = new Map<string, HTMLCanvasElement>();
+  radarAlternate = false;
+  readonly radar = new GameRadar();
   detours = 0;
   accumulator = 0;
   last = 0;
@@ -1064,6 +1067,8 @@ export class Game {
       }
       if (code === "KeyM" && this.active && this.locked && this.world.navigation)
         document.querySelector(".radar-wrap")!.classList.add("expanded");
+      if (code === "KeyH" && this.active && this.locked && !e.repeat)
+        this.radarAlternate = !this.radarAlternate;
       if (!this.locked) return;
       if ((code === "KeyT" || code === "KeyY") && this.active && !e.repeat) {
         e.preventDefault();
@@ -4102,6 +4107,7 @@ export class Game {
     this.moveBots(dt);
   }
   useWorld() {
+    this.radar.reset();
     this.groundInventory.clearDrops();
     for (const tracer of this.tracers) {
       tracer.life = 0;
@@ -4113,7 +4119,7 @@ export class Game {
     activateNativeMapGrade(this.dust.grade);
     const radar = el("radar") as HTMLCanvasElement;
     radar.width = this.world.navigation ? 900 : 180;
-    radar.height = this.world.navigation ? 948 : 180;
+    radar.height = radar.width;
     document.querySelector(".radar-wrap")!.classList.toggle("callouts", !!this.world.navigation);
     el("location").textContent = this.mapId === "dust2" ? "DUST II" : "MIRAGE";
     this.scene.background = this.dust.skybox ? null : this.dust.sky;
@@ -4150,6 +4156,7 @@ export class Game {
       : blocked(x, z, y, this.world.walls, radius, height);
   }
   startRound() {
+    this.radar.reset();
     this.world.breakables.reset();
     this.syncMapBreakables(false);
     this.utility.reset(true);
@@ -6055,7 +6062,13 @@ export class Game {
   // The Dust II radar layer is drawn once per world,
   // canvas size and style, then composited under the live markers.
   drawMap(canvas: HTMLCanvasElement, live: boolean) {
-    if (live) updateRadarLocation(this.world.navigation, this.position, this.mapId);
+    const follow = this.dead && this.teamMode ? this.spectated : undefined;
+    if (live)
+      updateRadarLocation(
+        this.world.navigation,
+        follow?.group.position ?? this.position,
+        this.mapId,
+      );
     const ctx = canvas.getContext("2d")!,
       w = canvas.width,
       h = canvas.height,
@@ -6068,71 +6081,44 @@ export class Game {
       this.drawMapLayer(layer.getContext("2d")!, w, h, live);
       this.radarLayers.set(key, layer);
     }
-    ctx.clearRect(0, 0, w, h);
-    const focused = live && !document.querySelector(".radar-wrap")!.classList.contains("expanded");
-    const zoom = focused ? 2.4 : 1;
-    ctx.save();
-    if (focused) {
-      const { px, pz } = this.mapProjection(w, h);
-      const rangeScale = Math.min(w, h) / 50;
-      ctx.translate(w / 2, h / 2);
-      ctx.rotate(this.yaw);
-      ctx.scale(zoom, zoom);
-      ctx.translate(
-        this.world.navigation ? -px(this.position.x) : -w / 2 - this.position.x * rangeScale,
-        this.world.navigation ? -pz(this.position.z) : -h / 2 - this.position.z * rangeScale,
-      );
-    }
-    ctx.drawImage(layer, 0, 0);
     if (!live) {
-      ctx.restore();
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(layer, 0, 0);
       return;
     }
-    if (this.world.navigation) {
-      const { px, pz } = this.mapProjection(w, h);
-      const marker = Math.min(w, h) / 240 / zoom;
-      const spotted = new Set<number | "player" | null>();
-      for (const ally of this.bots) if (ally.team === this.team) spotted.add(ally.target);
-      this.bots.forEach((b, i) => {
-        if (b.health <= 0) return;
-        if (b.team !== this.team && !spotted.has(i)) return;
-        ctx.beginPath();
-        ctx.arc(px(b.group.position.x), pz(b.group.position.z), 2.4 * marker, 0, Math.PI * 2);
-        ctx.fillStyle = b.team === "ct" ? "#a1c9e0" : "#e6cb7d";
-        ctx.fill();
-      });
-      ctx.save();
-      ctx.translate(px(this.position.x), pz(this.position.z));
-      ctx.rotate(-this.yaw);
-      ctx.fillStyle = "#101419d9";
-      ctx.beginPath();
-      ctx.arc(0, 0, 6 * marker, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#fff";
-      ctx.strokeStyle = "#111";
-      ctx.lineWidth = marker;
-      ctx.beginPath();
-      ctx.moveTo(0, -5 * marker);
-      ctx.lineTo(-3.5 * marker, 4 * marker);
-      ctx.lineTo(0, 2 * marker);
-      ctx.lineTo(3.5 * marker, 4 * marker);
-      ctx.closePath();
-      ctx.stroke();
-      ctx.fill();
-      ctx.restore();
-      if (this.bomb && (this.bomb.planted || this.bomb.carrier === -1)) {
-        ctx.fillStyle = "#ff5c4e";
-        ctx.fillRect(
-          px(this.bomb.position.x) - 3 * marker,
-          pz(this.bomb.position.z) - 3 * marker,
-          6 * marker,
-          6 * marker,
-        );
-      }
-      ctx.restore();
-      return;
-    }
-    ctx.restore();
+    const wrap = document.querySelector<HTMLElement>(".radar-wrap")!;
+    const fullMap = wrap.classList.contains("expanded");
+    const scoreboard = !el("scoreboard").classList.contains("hidden");
+    wrap.dataset.scoreboard = String(scoreboard);
+    wrap.dataset.bomb = String(!!this.bomb?.planted);
+    wrap.dataset.square = String(
+      fullMap ||
+        this.settings.radarSquare ||
+        (!!this.dead && this.teamMode && this.settings.radarSquareSpectator) ||
+        (scoreboard && this.settings.radarSquareScoreboard),
+    );
+    wrap.style.setProperty("--radar-hud-scale", String(this.settings.radarHudScale));
+    wrap.style.setProperty("--radar-blur", this.settings.radarBlur ? "blur(8px)" : "none");
+    const now = performance.now() / 1000;
+    const frame = this.radar.sample(this, now);
+    drawRadar(ctx, {
+      layer,
+      projection: this.mapProjection(w, h),
+      position: follow?.group.position ?? this.position,
+      yaw: follow ? Math.PI + follow.group.rotation.y : this.yaw,
+      ...frame,
+      settings: this.settings,
+      fullMap,
+      scoreboard,
+      spectating: !!this.dead && this.teamMode,
+      teamColors: this.competitive,
+      now,
+      alternate: this.radarAlternate,
+      sites:
+        this.mode === "deathmatch"
+          ? []
+          : this.world.navigation.data.sites.map(([x, y, z]) => ({ x, y, z })),
+    });
   }
   mapProjection(w: number, h: number) {
     const overview = this.dust?.config.radar;
@@ -6320,11 +6306,11 @@ export class Game {
     setText("money", this.teamMode ? `$${(observer?.money ?? this.money).toLocaleString()}` : "");
     this.updateBuyMenu();
     el("health-fill").style.width = `${clamp(observer?.health ?? this.health, 0, 100)}%`;
-    const teamIcon = el("hud-team-icon") as HTMLImageElement;
+    const teamIcon = el("hud-team-icon");
     if (teamIcon.dataset.team !== this.team) {
       teamIcon.dataset.team = this.team;
-      teamIcon.src = assetUrl(`/icons/team-${this.team}.png`);
-      teamIcon.alt = this.team === "ct" ? "Counter-Terrorists" : "Terrorists";
+      teamIcon.style.maskImage = `url("${assetUrl(`/icons/hud/team-${this.team}.svg`)}")`;
+      teamIcon.setAttribute("aria-label", this.team === "ct" ? "Counter-Terrorists" : "Terrorists");
     }
     const utility = observer ? null : (this.utility.selected ?? this.utility.throwingKind);
     const healthshot = !observer && this.healthshotAction.selected;

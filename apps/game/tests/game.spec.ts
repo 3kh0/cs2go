@@ -1239,7 +1239,7 @@ test("CT ramp traversal and the local callout radar", async ({ page, baseURL }) 
       const g = window.__game,
         canvas = document.createElement("canvas");
       canvas.width = 900;
-      canvas.height = 948;
+      canvas.height = 900;
       const ctx = canvas.getContext("2d")!;
       g.drawMapLayer(ctx, canvas.width, canvas.height, true);
       const { px, pz } = g.mapProjection(canvas.width, canvas.height);
@@ -1268,14 +1268,24 @@ test("CT ramp traversal and the local callout radar", async ({ page, baseURL }) 
         const g = window.__game,
           canvas = document.querySelector<HTMLCanvasElement>("#radar")!;
         const { px, pz } = g.mapProjection(canvas.width, canvas.height);
-        return [
-          ...canvas
-            .getContext("2d")!
-            .getImageData(Math.round(px(g.position.x)), Math.round(pz(g.position.z)), 1, 1).data,
-        ];
+        // The native directional asset is offset above the position anchor,
+        // with transparent/black pixels inside it; inspect its whole footprint.
+        const pixels = canvas
+          .getContext("2d")!
+          .getImageData(
+            Math.round(px(g.position.x)) - 50,
+            Math.round(pz(g.position.z)) - 50,
+            100,
+            100,
+          ).data;
+        let white = 0;
+        for (let i = 0; i < pixels.length; i += 4)
+          if (pixels[i] > 240 && pixels[i + 1] > 240 && pixels[i + 2] > 240 && pixels[i + 3] > 200)
+            white++;
+        return white > 5;
       }),
     )
-    .toEqual([255, 255, 255, 255]);
+    .toBe(true);
   await page.screenshot({ path: "artifacts/callout-radar-expanded.png" });
   await page.keyboard.up("m");
   await expect(page.locator(".radar-wrap")).not.toHaveClass(/expanded/);

@@ -46,9 +46,11 @@ test("Cmd-click buys ground weapons, keeps held items, renders players and place
   });
   await expect(page.locator("#economy-hud")).toHaveText("$10,000");
   const radar = await page.locator("#radar").boundingBox(),
+    location = await page.locator("#location").boundingBox(),
     money = await page.locator("#economy-hud").boundingBox();
   expect(money!.y).toBeGreaterThanOrEqual(radar!.y + radar!.height);
-  expect(money!.y).toBeLessThan(radar!.y + radar!.height + 25);
+  expect(location!.y).toBeGreaterThanOrEqual(radar!.y + radar!.height);
+  expect(money!.y).toBeLessThan(location!.y + location!.height + 25);
   expect(money!.x).toBeCloseTo(radar!.x, 0);
   await expect(page.locator("#equipment-status, #buy-status")).toHaveCount(0);
   await page.keyboard.press("b");
