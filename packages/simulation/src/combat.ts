@@ -83,8 +83,13 @@ export function damagePlayer(
       .get(victim.id)!
       .equipment.filter((receipt) => receipt.kind === "kit");
   victim.armor = result.armor;
-  victim.health = Math.max(0, victim.health - Math.floor(result.healthDamage));
-  if (victim.health > 0) return [];
+  const dealt = Math.floor(result.healthDamage);
+  victim.health = Math.max(0, victim.health - dealt);
+  const hurt: MatchEvent[] =
+    dealt > 0 && shooter && shooter !== victim
+      ? [{ kind: "hurt", attacker: shooter.id, victim: victim.id, damage: dealt }]
+      : [];
+  if (victim.health > 0) return hurt;
   const appearance = shooter?.appearances[weapon];
   for (let i = 0; i < 2 && !isKnife(victim.weapon); i++) dropWeapon(match, victim);
   victim.deaths++;
@@ -114,6 +119,7 @@ export function damagePlayer(
       plantProgress: 0,
     });
   return [
+    ...hurt,
     {
       kind: "kill",
       killer: shooter?.id ?? victim.id,

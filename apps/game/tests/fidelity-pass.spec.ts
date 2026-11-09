@@ -108,6 +108,32 @@ test("hovered buy weapons use saved finishes at metre scale", async ({ page }) =
   });
   await page.locator('#loadout [data-weapon="0"]').hover();
   await expect(page.locator("#buy-preview-stage")).toHaveAttribute("data-item", "0");
+  // The item identity is committed before its legacy paint body finishes loading.
+  // Wait for the actual authored material's baked maps on the visible body.
+  await page.waitForFunction(
+    () => {
+      const item = (window.__game.buyPreview as unknown as { item?: Group }).item;
+      if (!item?.getObjectByName("skin-legacy")?.visible) return false;
+      let applied = false;
+      item.traverseVisible((object) => {
+        const mesh = object as import("three").Mesh;
+        if (!mesh.geometry) return;
+        for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
+          const m = material as import("three").MeshStandardMaterial;
+          if (
+            m.name === "ak47" &&
+            (m.map as import("three").DataTexture | null)?.isDataTexture &&
+            (m.roughnessMap as import("three").DataTexture | null)?.isDataTexture &&
+            m.roughnessMap === m.metalnessMap
+          )
+            applied = true;
+        }
+      });
+      return applied;
+    },
+    undefined,
+    { timeout: 30000 },
+  );
   const result = await page.evaluate(() => {
     const g = window.__game;
     const p = g.buyPreview as unknown as { item: Group };
@@ -117,7 +143,7 @@ test("hovered buy weapons use saved finishes at metre scale", async ({ page }) =
     const maps: string[] = [];
     const min = [Infinity, Infinity, Infinity],
       max = [-Infinity, -Infinity, -Infinity];
-    item.traverse((o) => {
+    item.traverseVisible((o) => {
       const mesh = o as import("three").Mesh;
       if (!mesh.geometry || !mesh.visible) return;
       const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
@@ -127,11 +153,22 @@ test("hovered buy weapons use saved finishes at metre scale", async ({ page }) =
             `${m.name}:${(m as import("three").MeshStandardMaterial).map?.type}:${((m as import("three").MeshStandardMaterial).map as import("three").DataTexture)?.isDataTexture}`,
         ),
       );
-      painted ||= materials.some(
-        (m) =>
-          ((m as import("three").MeshStandardMaterial).map as import("three").DataTexture | null)
-            ?.isDataTexture === true,
-      );
+      painted ||= materials.some((material) => {
+        const m = material as import("three").MeshStandardMaterial;
+        const map = m.map as import("three").DataTexture | null;
+        const orm = m.roughnessMap as import("three").DataTexture | null;
+        return (
+          m.name === "ak47" &&
+          map?.isDataTexture === true &&
+          orm?.isDataTexture === true &&
+          map.image.data !== null &&
+          map.image.width > 0 &&
+          map.image.height > 0 &&
+          map.image.data.length === map.image.width * map.image.height * 4 &&
+          m.roughnessMap === m.metalnessMap &&
+          m.map !== m.roughnessMap
+        );
+      });
       const pos = mesh.geometry.getAttribute("position");
       for (let i = 0; i < pos.count; i++) {
         const v = g.position.clone().fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld);

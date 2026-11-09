@@ -14,7 +14,7 @@ test("bot rounds penetrate thin cover and flesh, stop at thick cover, and bound 
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.locator("#play").evaluate((button) => {
-    button.onclick = () => window.__game.start("deathmatch");
+    button.onclick = () => window.__game.start("practice");
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -122,7 +122,7 @@ test("bot rounds penetrate thin cover and flesh, stop at thick cover, and bound 
     fixtureWorld.collision = oldCollision;
     // LOS must exist before suppression is available. Team/hearing reports
     // alone cannot start it, even if an enemy happens to be behind thin wood.
-    game.mode = "deathmatch";
+    game.mode = "casual";
     first.health = second.health = 0;
     game.dead = 0;
     game.invulnerable = 99;

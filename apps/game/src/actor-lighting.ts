@@ -2,9 +2,16 @@ import * as T from "three";
 import { applySourceColorCorrection } from "./map-color";
 import { applySourceFog } from "./source-fog";
 import { applySourceBarns } from "./source-barn";
-import { sourceGpuProbes, applySourceGpuProbes } from "./source-gpu-probes";
+import { sourceGpuProbes, applySourceGpuProbes, type SourceGpuProbes } from "./source-gpu-probes";
 import { sampleSourceProbe } from "./source-lighting";
 import { sourceSunCaster, applySourceSunShadows } from "./source-sun";
+import {
+  applySourceReflections,
+  createSourceReflectionBinding,
+  updateSourceReflectionBinding,
+  type SourceReflections,
+  type SourceReflectionBinding,
+} from "./source-reflections";
 
 type Position = { x: number; y: number; z: number };
 export type ProbeSampler = (position: Position, normal: Position, out: T.Color) => boolean;
@@ -19,8 +26,17 @@ const axes = [
 type State = {
   enabled: { value: number };
   worldEnabled: { value: number };
+  dustEnabled: { value: number };
   gpuEnabled: { value: number };
   gpuAvailable: boolean;
+  gpuProbes?: SourceGpuProbes | null;
+  nativeReflections?: SourceReflections;
+  reflectionBinding?: SourceReflectionBinding;
+  reflectionTimer: number;
+  reflectionPosition: T.Vector3;
+  reflectionBounds: T.Box3;
+  meshes: Set<T.Mesh>;
+  bones: Set<T.Bone>;
   cube: { value: T.Color[] };
   target: T.Color[];
   rotation: { value: T.Matrix3 };
@@ -42,6 +58,28 @@ type State = {
   >;
 };
 const actors = new WeakMap<T.Object3D, State>();
+const probeKeys = new WeakMap<SourceGpuProbes, number>();
+const reflectionKeys = new WeakMap<SourceReflections, number>();
+let nextProbeKey = 1;
+function probeKey(probes: SourceGpuProbes | null | undefined) {
+  if (probes === undefined) return "dust";
+  if (probes === null) return "none";
+  let key = probeKeys.get(probes);
+  if (key === undefined) {
+    key = nextProbeKey++;
+    probeKeys.set(probes, key);
+  }
+  return `${key}:${probes.count}:${probes.depth}`;
+}
+function reflectionKey(data: SourceReflections | undefined) {
+  if (!data) return "pmrem";
+  let key = reflectionKeys.get(data);
+  if (key === undefined) {
+    key = nextProbeKey++;
+    reflectionKeys.set(data, key);
+  }
+  return `native:${key}`;
+}
 const patches = new WeakMap<
   T.Material,
   {
@@ -63,6 +101,8 @@ export function releaseActorLightingMaterials(root: T.Object3D, removed: T.Objec
   if (!state) return;
   const materials = new Set<T.Material>();
   removed.traverse((object) => {
+    if (object instanceof T.Mesh) state.meshes.delete(object);
+    if (object instanceof T.Bone) state.bones.delete(object);
     if (object instanceof T.Mesh)
       for (const material of Array.isArray(object.material) ? object.material : [object.material])
         materials.add(material);
@@ -79,8 +119,14 @@ function makeState(): State {
   return {
     enabled: { value: 0 },
     worldEnabled: { value: 0 },
+    dustEnabled: { value: 0 },
     gpuEnabled: { value: 0 },
     gpuAvailable: false,
+    reflectionTimer: 0,
+    reflectionPosition: new T.Vector3(Infinity, Infinity, Infinity),
+    reflectionBounds: new T.Box3(),
+    meshes: new Set(),
+    bones: new Set(),
     cube: { value: axes.map(() => new T.Color()) },
     target: axes.map(() => new T.Color()),
     rotation: { value: new T.Matrix3() },
@@ -132,18 +178,26 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
       intensity: material.envMapIntensity,
       rotation: material.envMapRotation.clone(),
     });
+    if (lighting.nativeReflections) {
+      material.envMap = null;
+      material.envMapIntensity = 0;
+    }
     // oxlint-disable-next-line typescript/unbound-method -- Called with the owning material via .call below.
     const previous = prior?.compile ?? material.onBeforeCompile;
     const key = prior?.key ?? material.customProgramCacheKey();
     patches.set(material, { lighting, compile: previous, key });
     material.onBeforeCompile = function (shader, renderer) {
       previous.call(material, shader, renderer);
-      const gpuProbes = sourceGpuProbes(renderer);
+      const gpuProbes =
+        lighting.gpuProbes === undefined
+          ? sourceGpuProbes(renderer)
+          : (lighting.gpuProbes ?? undefined);
       lighting.gpuAvailable = !!gpuProbes;
       Object.assign(shader.uniforms, {
         sourceActorProbeEnabled: lighting.enabled,
         sourceActorGpuEnabled: lighting.gpuEnabled,
         sourceActorWorldEnabled: lighting.worldEnabled,
+        sourceActorDustEnabled: lighting.dustEnabled,
         sourceActorProbeCube: lighting.cube,
         sourceActorProbeRotation: lighting.rotation,
         sourceActorProbeSun: lighting.sun,
@@ -156,6 +210,7 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
         uniform float sourceActorProbeEnabled;
         uniform float sourceActorGpuEnabled;
         uniform float sourceActorWorldEnabled;
+        uniform float sourceActorDustEnabled;
         uniform vec3 sourceActorProbeCube[6];
         uniform mat3 sourceActorProbeRotation;
         uniform float sourceActorProbeSun;
@@ -212,7 +267,7 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
         #endif`,
       );
       applySourceBarns(shader, {
-        enabled: "sourceActorWorldEnabled",
+        enabled: "sourceActorDustEnabled",
         shadows: gpuProbes
           ? "mix(sourceActorLocalShadows,sourceActorFragmentProbe.occlusion.gb,sourceActorGpuEnabled)"
           : "sourceActorLocalShadows",
@@ -220,21 +275,86 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
           "mix(cameraPosition + sourceBarnWorldRelative, sourceActorProbeOrigin + sourceActorProbeRotation*sourceBarnWorldRelative, sourceActorLocalFrame)",
         worldToLighting: "transpose(sourceActorProbeRotation)",
       });
-      applySourceFog(shader, "sourceActorWorldEnabled");
+      applySourceFog(shader, "sourceActorDustEnabled");
       applySourceColorCorrection(shader, "sourceActorWorldEnabled", true);
       if (gpuProbes) applySourceGpuProbes(shader, gpuProbes);
+      if (lighting.reflectionBinding)
+        applySourceReflections(
+          shader,
+          lighting.reflectionBinding,
+          Array.from(lighting.reflectionBinding.candidates),
+          {
+            count: lighting.reflectionBinding.count,
+            worldPosition:
+              "mix(cameraPosition+transpose(mat3(viewMatrix))*(-vViewPosition),sourceActorProbeOrigin+sourceActorProbeRotation*transpose(mat3(viewMatrix))*(-vViewPosition),sourceActorLocalFrame)",
+            worldNormal:
+              "sourceActorProbeRotation*inverseTransformDirection(geometryNormal,viewMatrix)",
+            worldView:
+              "sourceActorProbeRotation*inverseTransformDirection(geometryViewDir,viewMatrix)",
+          },
+        );
       applySourceSunShadows(shader);
     };
-    material.customProgramCacheKey = () => `${key}:source-actor-probe-v5`;
+    material.customProgramCacheKey = () =>
+      `${key}:source-actor-probe-v7:${probeKey(lighting.gpuProbes)}:${reflectionKey(lighting.nativeReflections)}`;
     material.needsUpdate = true;
     return material;
   };
   root.traverse((object) => {
+    if (object instanceof T.Bone) lighting.bones.add(object);
     if (!(object instanceof T.Mesh)) return;
+    lighting.meshes.add(object);
     object.material = Array.isArray(object.material)
       ? object.material.map(patch)
       : patch(object.material);
   });
+  lighting.reflectionTimer = 0;
+}
+
+const reflectionSphere = new T.Sphere();
+const reflectionBox = new T.Box3();
+const reflectionFrame = new T.Matrix4();
+const reflectionPoint = new T.Vector3();
+function visibleChild(object: T.Object3D, root: T.Object3D) {
+  for (let parent: T.Object3D | null = object; parent; parent = parent.parent) {
+    if (!parent.visible) return false;
+    if (parent === root) return true;
+  }
+  return false;
+}
+function updateReflectionBounds(root: T.Object3D, state: State, position: Position, dt: number) {
+  if (!state.reflectionBinding) return;
+  state.reflectionTimer -= dt;
+  const teleported = state.reflectionPosition.distanceToSquared(position) > 16;
+  if (state.reflectionTimer > 0 && !teleported) return;
+  state.reflectionTimer = 1 / 16;
+  state.reflectionPosition.set(position.x, position.y, position.z);
+  // Refresh cheap object transforms and cached mesh bounds, never walk skinned
+  // vertex buffers. Padding covers animation/movement between these 16 Hz
+  // candidate updates; the native per-fragment box fade/projection stays live.
+  root.updateWorldMatrix(true, true);
+  const bounds = state.reflectionBounds.makeEmpty();
+  for (const mesh of state.meshes) {
+    if (!visibleChild(mesh, root)) continue;
+    if (mesh instanceof T.SkinnedMesh) {
+      if (!mesh.boundingSphere) mesh.computeBoundingSphere();
+      reflectionSphere.copy(mesh.boundingSphere!);
+    } else {
+      if (!mesh.geometry.boundingSphere) mesh.geometry.computeBoundingSphere();
+      reflectionSphere.copy(mesh.geometry.boundingSphere!);
+    }
+    reflectionSphere.applyMatrix4(mesh.matrixWorld).getBoundingBox(reflectionBox);
+    bounds.union(reflectionBox);
+  }
+  for (const bone of state.bones)
+    if (visibleChild(bone, root))
+      bounds.expandByPoint(reflectionPoint.setFromMatrixPosition(bone.matrixWorld));
+  if (state.localFrame.value && !bounds.isEmpty()) {
+    reflectionFrame.setFromMatrix3(state.rotation.value).setPosition(state.origin.value);
+    bounds.applyMatrix4(reflectionFrame);
+  }
+  bounds.expandByPoint(state.origin.value).expandByScalar(1);
+  updateSourceReflectionBinding(state.reflectionBinding, bounds);
 }
 
 export function updateActorLighting(
@@ -245,9 +365,42 @@ export function updateActorLighting(
   rotation?: T.Matrix3,
   sampleSun?: (position: Position) => number,
   sampleLocalShadows?: (position: Position, out: T.Vector2) => void,
+  gpuProbes?: SourceGpuProbes | null,
+  nativeReflections?: SourceReflections,
 ) {
   const state = actors.get(root);
   if (!state) return;
+  // Undefined retains Dust II's renderer-owned cache; a map-owned object binds
+  // its own arrays. Explicit null must not silently pick up Dust II's atlas on
+  // devices that cannot support the other map's LPV shader.
+  if (state.gpuProbes !== gpuProbes) {
+    state.gpuProbes = gpuProbes;
+    state.gpuAvailable = false;
+    state.ready = false;
+    state.timer = 0;
+    for (const material of state.patched) material.needsUpdate = true;
+  }
+  if (state.nativeReflections !== nativeReflections) {
+    state.nativeReflections = nativeReflections;
+    state.reflectionBinding = nativeReflections
+      ? createSourceReflectionBinding(nativeReflections)
+      : undefined;
+    state.reflectionTimer = 0;
+    for (const material of state.patched) material.needsUpdate = true;
+    setActorReflection(root, nativeReflections ? null : undefined);
+  }
+  state.dustEnabled.value = gpuProbes === undefined && sample ? 1 : 0;
+  state.rotation.value.copy(rotation ?? identity);
+  state.localFrame.value = rotation ? 1 : 0;
+  state.origin.value.set(position.x, position.y, position.z);
+  updateReflectionBounds(root, state, position, dt);
+  if (gpuProbes) {
+    state.gpuEnabled.value = 1;
+    state.enabled.value = 1;
+    state.worldEnabled.value = 1;
+    state.ready = true;
+    return;
+  }
   if (!sample) {
     state.gpuEnabled.value = 0;
     state.enabled.value = 0;
@@ -257,10 +410,8 @@ export function updateActorLighting(
     return;
   }
   state.worldEnabled.value = 1;
-  state.rotation.value.copy(rotation ?? identity);
-  state.localFrame.value = rotation ? 1 : 0;
-  state.origin.value.set(position.x, position.y, position.z);
-  state.gpuEnabled.value = state.gpuAvailable && sample === sampleSourceProbe ? 1 : 0;
+  state.gpuEnabled.value =
+    gpuProbes !== null && state.gpuAvailable && sample === sampleSourceProbe ? 1 : 0;
   if (state.gpuEnabled.value) {
     state.enabled.value = 1;
     state.ready = true;
@@ -306,21 +457,24 @@ export function disposeActorLighting(root: T.Object3D) {
   state.materials.clear();
   state.patched.clear();
   state.owned.clear();
+  state.meshes.clear();
+  state.bones.clear();
   actors.delete(root);
 }
 
-export function setActorReflection(root: T.Object3D, texture?: T.Texture) {
+export function setActorReflection(root: T.Object3D, texture?: T.Texture | null) {
   const state = actors.get(root);
   if (!state) return;
+  if (state.nativeReflections) texture = null;
   for (const [material, original] of state.reflections) {
-    const next = texture ?? original.map;
+    const next = texture === undefined ? original.map : texture;
     if (material.envMap !== next) {
       // Same-format PMREM swaps only change uniforms, avoiding shader rebuilds.
       if (!!material.envMap !== !!next || material.envMap?.mapping !== next?.mapping)
         material.needsUpdate = true;
       material.envMap = next;
     }
-    material.envMapIntensity = texture ? 1 : original.intensity;
+    material.envMapIntensity = texture === null ? 0 : texture ? 1 : original.intensity;
     // VRF latlongs start at +X (u=0) we can use three's equirectangular lookup puts +X at u=.5
     // the local PMREMs use the material rotation, independent of scene.environmentRotation which is sweet
     if (texture) material.envMapRotation.set(0, Math.PI, 0);

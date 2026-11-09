@@ -417,6 +417,20 @@
       "bytes": 47445307,
       "sha256": "3aeea03a4b116dda02580302aa6e7f570d2b4f5c5a3d19a859f3693dc7aaf30c"
     },
+    "mirage-lighting/reflections/cubes-0.bin.gz": {
+      "bytes": 21548926,
+      "sha256": "f0d916cdd8013c87022fd677140ced616d14fb41f274d4bab2bcb9c7e452b22a",
+      "decodedSha256": "6e7c4380605b0788423a4d5eff4583334febaab4be76ccbd9eb817e3eb45e0e8"
+    },
+    "mirage-lighting/reflections/cubes-1.bin.gz": {
+      "bytes": 8237272,
+      "sha256": "672c7325bd9081961aa9cc7ba3d10d351cc620abeda5d1e73f437a4e1157b401",
+      "decodedSha256": "e29c1383d0ae2506f6e02948fdf74ba5a83b29a09f9d6e72b8a98b07fb931af1"
+    },
+    "mirage-lighting/reflections/source.json": {
+      "bytes": 47618,
+      "sha256": "502c2b1e52c6674f8add84424475727d2b571bc901fa63e797f63cd69062c256"
+    },
     "mirage-lighting/shadows.webp": {
       "bytes": 1134480,
       "sha256": "c97813afe0305fec9fd72f38ca70796009fd4d43a26624c849b1bd5b5a73093d"
@@ -740,6 +754,7 @@
     "prepare-mirage-layers.py",
     "prepare-native-probes.py",
     "prepare-native-breakables.py",
+    "prepare-native-reflections.py",
     "restore-native-material-slots.py",
     "import-mirage-break-audio.py",
     "prepare-audio-pack.py",
@@ -747,7 +762,7 @@
     "bun run assets:prepare"
   ],
   "limitations": [
-    "Native layered materials, probe volumes and self illumination are retained; full Source2 renderer parity is not established",
+    "Native layered materials, probe volumes, self illumination and original reflection mip blocks are retained; actor sampling uses eight candidate environments and Three.js BRDFs; native viewmodel lighting-origin/normalization binding is not established; full Source2 renderer parity is not established",
     "Nativecolorgrade uses fixed0.9 linear exposure ; noautomaticexposure/bloom",
     "Four native Mirage breakables retain entity health, damage inheritance, render/physics ownership and shutter remainder; debris motion is reconstructed; other movable props remain static; no full Source2 entity I/O or particle/soundscape DSP",
     "Bots andladdercontroller arebrowserreconstructions, nativegeometry/navigation/objectivetriggers areextracted"

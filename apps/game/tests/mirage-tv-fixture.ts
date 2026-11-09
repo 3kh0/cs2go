@@ -35,7 +35,7 @@ export async function renderMirageTelevisions() {
   world.scenery.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
     for (const material of Array.isArray(object.material) ? object.material : [object.material])
-      if (/^tv/.test(material.name)) {
+      if (material.name.startsWith("tv")) {
         televisionMaterials[material.name] = (televisionMaterials[material.name] ?? 0) + 1;
         if (material instanceof T.MeshStandardMaterial)
           emission[material.name] =

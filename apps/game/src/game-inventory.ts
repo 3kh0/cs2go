@@ -829,7 +829,7 @@ export class GameInventory {
     )
       this.invalidateEquipment();
     const living = !g.dead && g.health > 0;
-    if (this.playerAlive && !living) {
+    if (this.playerAlive && !living && g.mode !== "deathmatch") {
       for (const id of g.inventory()) {
         const state = g.selected === id ? g : g.magazines[id];
         this.spawn(id, state.ammo, state.reserve, g.position, g.yaw, "player", g.isSuppressed(id));
@@ -839,7 +839,7 @@ export class GameInventory {
     this.playerAlive = living;
     g.bots.forEach((bot, index) => {
       const living = bot.health > 0;
-      if (this.alive.get(bot) === true && !living && bot.group.visible)
+      if (this.alive.get(bot) === true && !living && bot.group.visible && g.mode !== "deathmatch")
         this.spawn(
           bot.rig.weaponIndex,
           bot.ammo,

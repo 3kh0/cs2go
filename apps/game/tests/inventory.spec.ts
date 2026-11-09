@@ -177,15 +177,40 @@ test("G tosses the held gun into view, then settles it with ammunition intact", 
   await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
-  await page.evaluate(() => {
+  await page.evaluate(async () => {
     const g = window.__game;
+    // Pause automatic stepping while choosing a real native-map landing lane.
+    g.simulate = () => {};
+    const modulePath = "/src/deathmatch-spawns.ts";
+    const { deathmatchSpawnPool } = (await import(
+      modulePath
+    )) as typeof import("../src/deathmatch-spawns");
+    const collision = g.world.collision!;
+    const point = deathmatchSpawnPool(g.world.navigation, collision).find((candidate) =>
+      [-1, 0, 1].every((dx) =>
+        [-4, -2, 0].every((dz) => {
+          const floor = collision.floor(
+            candidate.x + dx,
+            candidate.z + dz,
+            candidate.y + 0.3,
+            candidate.y - 0.3,
+          );
+          return (
+            Number.isFinite(floor) &&
+            Math.abs(floor - candidate.y) < 0.08 &&
+            !collision.blocked(candidate.x + dx, candidate.z + dz, floor + 0.025, 16 * 0.0254, 3)
+          );
+        }),
+      ),
+    );
+    if (!point) throw new Error("Native toss fixture needs a supported four-metre lane");
+    g.position.copy(point);
     g.bots.forEach((bot) => {
       bot.health = 0;
       bot.respawn = Infinity;
     });
     g.groundInventory.reset();
     g.groundInventory.clearDrops();
-    g.position.set(-17, 0, 17);
     g.yaw = 0;
     g.pitch = -0.15;
     g.velocity.x = g.velocity.z = 0;
@@ -206,7 +231,7 @@ test("G tosses the held gun into view, then settles it with ammunition intact", 
     const g = window.__game,
       drop = g.groundInventory.drops.at(-1)!;
     return {
-      y: drop.mesh.position.y,
+      height: drop.mesh.position.y - g.position.y,
       z: drop.mesh.position.z,
       primary: g.primary,
       selected: g.selected,
@@ -214,7 +239,7 @@ test("G tosses the held gun into view, then settles it with ammunition intact", 
       reserve: drop.reserve,
     };
   });
-  expect(release.y).toBeGreaterThan(1);
+  expect(release.height).toBeGreaterThan(1);
   expect(release.primary).toBeNull();
   expect(release.selected).not.toBe(0);
   expect([release.ammo, release.reserve]).toEqual([11, 60]);
@@ -235,8 +260,22 @@ test("G tosses the held gun into view, then settles it with ammunition intact", 
     for (let i = 0; i < 128; i++) g.groundInventory.update(1 / 128);
     g.updateAimCamera();
     const drop = g.groundInventory.drops.at(-1)!;
-    return { sleeping: drop.sleeping, speed: drop.velocity.length() };
+    const floor = g.world.collision!.support(
+      drop.mesh.position.x,
+      drop.mesh.position.z,
+      drop.mesh.position.y + 0.1,
+      drop.mesh.position.y - 0.2,
+      0.08,
+    );
+    return {
+      sleeping: drop.sleeping,
+      speed: drop.velocity.length(),
+      heightAboveFloor: drop.mesh.position.y - floor,
+      ammo: drop.ammo,
+      reserve: drop.reserve,
+    };
   });
-  expect(settled).toEqual({ sleeping: true, speed: 0 });
+  expect(settled).toMatchObject({ sleeping: true, speed: 0, ammo: 11, reserve: 60 });
+  expect(settled.heightAboveFloor).toBeCloseTo(0.06, 3);
   expect(errors).toEqual([]);
 });

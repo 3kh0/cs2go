@@ -141,13 +141,24 @@ test("HUD hue persists and lower HUD stays aligned", async ({ page }) => {
     g.armor = 85;
     g.updateUI();
   });
-  expect(
-    await page
-      .locator("#health-fill")
-      .evaluate(
-        (e) => e.getBoundingClientRect().width / e.parentElement!.getBoundingClientRect().width,
-      ),
-  ).toBeCloseTo(0.72, 2);
+  const healthBar = await page.locator("#health-fill").evaluate((fill) => {
+    const track = fill.parentElement!;
+    const style = getComputedStyle(track);
+    const trackBounds = track.getBoundingClientRect();
+    const fillBounds = fill.getBoundingClientRect();
+    const contentLeft =
+      trackBounds.left + parseFloat(style.borderLeftWidth) + parseFloat(style.paddingLeft);
+    const contentWidth =
+      trackBounds.width -
+      parseFloat(style.borderLeftWidth) -
+      parseFloat(style.borderRightWidth) -
+      parseFloat(style.paddingLeft) -
+      parseFloat(style.paddingRight);
+    return { fraction: fillBounds.width / contentWidth, inset: fillBounds.left - contentLeft };
+  });
+  // Health fills the content box inside the native track's black border.
+  expect(healthBar.fraction).toBeCloseTo(0.72, 2);
+  expect(healthBar.inset).toBeCloseTo(0, 2);
   const bounds = await page.evaluate(() => {
     const rect = (s: string) => document.querySelector(s)!.getBoundingClientRect().toJSON();
     return {

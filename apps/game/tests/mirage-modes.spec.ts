@@ -148,6 +148,7 @@ for (const mode of ["practice", "deathmatch"] as const) {
       .poll(() => page.evaluate(() => window.__game.decals.count))
       .toBeGreaterThan(shot.decals);
     if (mode === "deathmatch") {
+      const previousLife = await page.evaluate(() => window.__game.position.toArray());
       const deaths = await page.evaluate(async () => {
         const g = window.__game;
         const path = "/src/recoil.ts";
@@ -229,13 +230,37 @@ for (const mode of ["practice", "deathmatch"] as const) {
         map: "mirage",
         distance: expect.any(Number),
       });
-      expect(
-        await page.evaluate(() => {
-          const g = window.__game,
-            spawn = g.dust!.navigation.data.spawns.ct[0];
-          return Math.hypot(g.position.x - spawn[0], g.position.z - spawn[2]);
-        }),
-      ).toBeLessThan(0.55);
+      const respawn = await page.evaluate(async (previous) => {
+        const g = window.__game;
+        const physicsPath = "/src/physics.ts";
+        const { movement } = (await import(physicsPath)) as typeof import("../src/physics");
+        const spawnPath = "/src/deathmatch-spawns.ts";
+        const { deathmatchSpawnPool } = (await import(
+          spawnPath
+        )) as typeof import("../src/deathmatch-spawns");
+        const floor = g.dust!.collision.support(
+          g.position.x,
+          g.position.z,
+          g.position.y + 0.1,
+          g.position.y - 0.3,
+          movement.hullRadius,
+        );
+        return {
+          distanceFromPreviousLife: Math.hypot(
+            g.position.x - previous[0],
+            g.position.z - previous[2],
+          ),
+          grounded: g.grounded,
+          supported: Number.isFinite(floor) && Math.abs(g.position.y - floor) < 0.02,
+          distributedSpawn: deathmatchSpawnPool(g.world.navigation, g.world.collision!).some(
+            (point) => Math.hypot(point.x - g.position.x, point.z - g.position.z) < 0.05,
+          ),
+        };
+      }, previousLife);
+      expect(respawn.distanceFromPreviousLife).toBeGreaterThan(6);
+      expect(respawn.grounded).toBe(true);
+      expect(respawn.supported).toBe(true);
+      expect(respawn.distributedSpawn).toBe(true);
     }
     await page.screenshot({ path: `artifacts/mirage-${mode}.png` });
     expect(errors).toEqual([]);

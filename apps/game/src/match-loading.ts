@@ -15,7 +15,7 @@ export function openMatchLoading(
     mode === "practice"
       ? "<strong>Practice</strong><p>Practice movement and weapon handling against stationary targets.</p><p>No round timer · Unlimited reserve ammunition</p>"
       : mode === "deathmatch"
-        ? "<strong>Deathmatch</strong><p>Eliminate opponents and respawn after each death.</p><p>First to 20 eliminations · Five-minute match</p>"
+        ? "<strong>Deathmatch</strong><p>Eliminate opponents and respawn after each death.</p><p>Free for all · Ten-minute match · Highest score wins</p>"
         : `<strong>Bomb Scenario Mission</strong><p>Buy equipment at the beginning of each round with money earned.</p><p>${mode === "competitive" ? "5 vs 5 · Round economy<br>Friendly fire is ON" : "10 vs 10 · Free armor<br>Friendly fire is OFF"}</p>`;
   const menu = document.getElementById("menu")!;
   const overlay = document.createElement("section");

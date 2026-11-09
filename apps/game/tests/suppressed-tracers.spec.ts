@@ -50,7 +50,8 @@ test("suppressed player and bot shots deal damage without emitting tracers", asy
       game.fire();
       return { weapon, tracers: live(), damage: health - target.health, spent: ammo - game.ammo };
     });
-    game.mode = "deathmatch";
+    // Bot firing requires a combat mode; this tracer fixture uses opposing teams.
+    game.mode = "casual";
     game.eye = 1.65;
     game.health = 10000;
     game.armor = game.invulnerable = game.dead = 0;

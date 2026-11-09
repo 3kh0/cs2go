@@ -26,17 +26,21 @@ export function homeMenuMarkup() {
       <div id="home-agent-stage" aria-label="Equipped agent preview"></div>
       <aside class="home-cards">
         <section class="home-match-card" aria-label="Choose a match">
-          <div class="mode-options session-options" role="group" aria-label="Session type"><button data-session="single" aria-pressed="true">OFFLINE</button><button data-session="multi" aria-pressed="false">ONLINE</button></div>
+          <div class="mode-options session-options" role="group" aria-label="Session type"><button data-session="single" aria-pressed="true">OFFLINE</button><button data-session="multi" aria-pressed="false">PRIVATE MATCHMAKING</button></div>
           <div class="mode-options" role="group" aria-label="Game mode"><button data-mode="casual" aria-pressed="true">CASUAL</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE</button><button data-mode="deathmatch" data-offline-mode aria-pressed="false">DEATHMATCH</button><button data-mode="practice" data-offline-mode aria-pressed="false">PRACTICE</button></div>
           <div class="match-browser">
-            <section id="multiplayer-options" aria-label="Online lobby" hidden>
-              <header class="lobby-heading"><span class="lobby-kicker">PLAY WITH FRIENDS</span><h2>Online Lobby</h2></header>
-              <label for="match-server">SERVER</label><select id="match-server" aria-label="Server"><option value="wss://na1-cs.3kh0.dev/ws">na1-cs.3kh0.dev</option><option value="wss://na2-cs.3kh0.dev/ws">na2-cs.3kh0.dev</option></select>
-              <button id="match-create" type="button">＋ CREATE LOBBY</button>
-              <div class="lobby-divider"><span>OR JOIN FRIENDS</span></div>
-              <label for="match-room">LOBBY PIN</label><input id="match-room" type="text" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="000000" aria-describedby="lobby-help">
-              <p id="lobby-help">Make sure you and your friends are on the same server!</p>
-              <small id="match-status" role="status" aria-live="polite"></small>
+            <section id="multiplayer-options" aria-label="Private matchmaking" hidden>
+              <div class="private-match-actions">
+                <button id="match-create" type="button"><span class="private-action-icon" aria-hidden="true">＋</span><span><strong>Create a private match</strong><small>Start a lobby and share the PIN with your friends.</small></span></button>
+                <button id="match-join" type="button"><span class="private-action-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M39 10h14v44H39M8 32h33M29 20l12 12-12 12"/></svg></span><span><strong>Join a private match</strong><small>Enter a friend's lobby PIN to play together.</small></span></button>
+              </div>
+              <div class="private-match-details">
+                <header class="private-match-heading"><img src="/icons/team-ct.png" alt=""><div><span>PRIVATE MATCHMAKING</span><h2>Play with friends</h2></div></header>
+                <div class="private-match-fields"><div><label for="match-server">SERVER</label><select id="match-server" aria-label="Server"><option value="wss://na1-cs.3kh0.dev/ws">na1-cs.3kh0.dev</option><option value="wss://na2-cs.3kh0.dev/ws">na2-cs.3kh0.dev</option></select></div>
+                <div><label for="match-room">LOBBY PIN</label><input id="match-room" type="text" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Enter PIN" aria-describedby="lobby-help"></div></div>
+                <p id="lobby-help">Choose the same server as your friends. Create a match, or enter their six-digit PIN and select GO.</p>
+                <small id="match-status" role="status" aria-live="polite"></small>
+              </div>
             </section>
             <div class="match-maps" role="group" aria-label="Maps"><button class="home-map-art" data-map="dust2" type="button" aria-label="Dust II" aria-pressed="true"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="map-card-caption">Dust II</span></button><button class="home-map-art" data-map="mirage" type="button" aria-label="Mirage" aria-pressed="false"><img class="map-badge" src="/ui/home/mirage-emblem.svg" alt=""><span class="map-card-caption">Mirage</span></button></div>
           </div>

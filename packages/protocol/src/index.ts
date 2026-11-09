@@ -160,6 +160,9 @@ export type PlayerState = Vec3 & {
   waiting: boolean;
 };
 export type MatchEvent =
+  // Optional additive event: old clients ignore unknown kinds, and new clients
+  // hide unreported damage when connected to an older server.
+  | { kind: "hurt"; attacker: string; victim: string; damage: number }
   | { kind: "breakable"; id: string; health: number; point?: Vec3 }
   | {
       kind: "shot";

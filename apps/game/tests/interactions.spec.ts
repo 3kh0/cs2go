@@ -7,13 +7,14 @@ declare global {
 }
 test("suppressor native action, cancellation, sounds, pickup state and dynamic player support", async ({
   page,
+  baseURL,
 }) => {
   test.setTimeout(180000);
   const errors: string[] = [];
   const external: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("request", (r) => {
-    if (/^https?:/.test(r.url()) && !r.url().startsWith("http://127.0.0.1:5173"))
+    if (/^https?:/.test(r.url()) && new URL(r.url()).origin !== new URL(baseURL!).origin)
       external.push(r.url());
   });
   await page.goto("/");
@@ -41,7 +42,9 @@ test("suppressor native action, cancellation, sounds, pickup state and dynamic p
   await page.screenshot({ path: "artifacts/suppressor-removal.png" });
   await page.waitForFunction(() => !window.__game.suppressors[1].action);
   await page.screenshot({ path: "artifacts/suppressor-detached.png" });
-  const results = await page.evaluate(() => {
+  const results = await page.evaluate(async () => {
+    const path = "/src/physics.ts";
+    const { movement } = (await import(path)) as typeof import("../src/physics");
     const g = window.__game;
     const detached = !g.isSuppressed(1);
     g.cooldown = 0;
@@ -70,21 +73,25 @@ test("suppressor native action, cancellation, sounds, pickup state and dynamic p
     const bot = g.bots[0];
     bot.health = 100;
     bot.group.visible = true;
-    bot.group.position.set(-17, 0, 17);
+    // Use the clear boost fixture origin, not a sloped native map surface.
+    bot.group.position.set(0, 0, 0);
     bot.rig.crouch = 0;
-    g.position.set(-17, 1.85, 17);
+    g.position.set(0, movement.standingHeight + 0.3, 0);
     g.velocity = { x: 0, z: 0 };
     g.vertical = -1;
     g.grounded = false;
     g.keys.clear();
-    g.eye = 1.65;
+    g.eye = movement.standingEye;
     g.dead = 0;
     for (let i = 0; i < 64; i++) g.simulate(1 / 128);
-    const landed = { y: g.position.y, grounded: g.grounded };
+    const landed = {
+      heightAboveCarrier: g.position.y - bot.group.position.y,
+      grounded: g.grounded,
+    };
     g.jumpQueued = true;
     g.simulate(1 / 128);
     const jumped = g.vertical > 0 && !g.grounded;
-    g.position.set(-17, 1.65, 17);
+    g.position.set(0, movement.standingHeight, 0);
     g.vertical = 0;
     g.grounded = true;
     bot.health = 0;
@@ -112,7 +119,7 @@ test("suppressor native action, cancellation, sounds, pickup state and dynamic p
   expect(results.pickupState).toBe(false);
   expect(results.attached).toBe(true);
   expect(results.suppressedShot).toBe("m4a1-1-single");
-  expect(results.landed.y).toBeCloseTo(1.65, 3);
+  expect(results.landed.heightAboveCarrier).toBeCloseTo(1.8288, 3);
   expect(results.landed.grounded).toBe(true);
   expect(results.jumped).toBe(true);
   expect(results.fell).toBe(true);

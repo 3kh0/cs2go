@@ -2,8 +2,10 @@ import * as T from "three";
 import { assetFetch } from "./asset-url";
 import { fetchGzipped } from "./gltf";
 
-// Adapted from ValveResourceFormat 5564866 envmap.slang, envmap_data.slang
-// and SceneEnvMap.cs (MIT). Copyright (c) 2015 ValveResourceFormat Contributors.
+// Dust's legacy path follows VRF 5564866 envmap.slang/envmap_data.slang.
+// Mirage's 8.2 path follows VRF 20.1 (9e2e6c7) environment.slang/SceneEnvMap.cs.
+// These are renderer reconstructions, not Valve's native viewmodel binding code.
+// MIT, Copyright (c) 2015 ValveResourceFormat Contributors.
 // Full notice: packages/assets/public/models/maps/licenses/ValveResourceFormat-MIT.txt.
 
 interface Volume {
@@ -15,6 +17,7 @@ interface Volume {
   normalizationSH: number[];
 }
 interface Manifest {
+  lightmapVersion?: [number, number];
   gpuBytes: number;
   lastLod: number;
   arrays: {
@@ -26,6 +29,8 @@ interface Manifest {
   volumes: Volume[];
 }
 export interface SourceReflections {
+  lightmapVersion?: [number, number];
+  lastLod?: number;
   textures: T.CompressedArrayTexture[];
   combined?: boolean;
   volumes: Manifest["volumes"];
@@ -54,9 +59,10 @@ export async function loadSourceReflections(
   const manifest = (await response.json()) as Manifest;
   if (
     manifest.volumes.length !== bundle.volumes ||
-    manifest.arrays.length !== (bundle.volumes === 43 ? 2 : 1) ||
+    manifest.arrays.length !== Math.ceil(bundle.volumes / 42) ||
     manifest.gpuBytes > 32 * 1024 * 1024 ||
-    manifest.lastLod !== 5
+    manifest.lastLod !==
+      (manifest.lightmapVersion?.[0] === 8 && manifest.lightmapVersion[1] >= 2 ? 6 : 5)
   )
     throw new Error("Invalid native reflection budget/layout");
   let textures = await Promise.all(
@@ -87,9 +93,10 @@ export async function loadSourceReflections(
     }),
   );
   const gl = renderer.getContext() as WebGL2RenderingContext;
+  const layers = manifest.arrays.reduce((sum, entry) => sum + entry.layers, 0);
   const combined =
     textures.length === 1 ||
-    (preferCombined && gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) >= 258);
+    (preferCombined && gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) >= layers);
   if (combined && textures.length === 2) {
     const mips = textures[0].mipmaps.map((mip, index) => {
       const first = mip.data as Uint8Array,
@@ -99,7 +106,13 @@ export async function loadSourceReflections(
       data.set(last, first.byteLength);
       return { data, width: mip.width, height: mip.height };
     });
-    const texture = new T.CompressedArrayTexture(mips, 256, 256, 258, T.RGB_BPTC_UNSIGNED_Format);
+    const texture = new T.CompressedArrayTexture(
+      mips,
+      256,
+      256,
+      layers,
+      T.RGB_BPTC_UNSIGNED_Format,
+    );
     texture.colorSpace = T.NoColorSpace;
     texture.minFilter = T.LinearMipmapLinearFilter;
     texture.magFilter = T.LinearFilter;
@@ -107,6 +120,8 @@ export async function loadSourceReflections(
     textures = [texture];
   }
   return {
+    lightmapVersion: manifest.lightmapVersion,
+    lastLod: manifest.lastLod,
     textures,
     combined,
     volumes: manifest.volumes,
@@ -139,6 +154,48 @@ export function sourceReflectionCandidates(bounds: T.Box3, data: SourceReflectio
   });
 }
 
+/** Actor-local uniform window; textures and native cubemap indices remain shared. */
+export interface SourceReflectionBinding extends SourceReflections {
+  source: SourceReflections;
+  count: { value: number };
+  candidates: Int32Array;
+}
+export function createSourceReflectionBinding(
+  data: SourceReflections,
+  capacity = 8,
+): SourceReflectionBinding {
+  return {
+    ...data,
+    source: data,
+    count: { value: 0 },
+    candidates: Int32Array.from({ length: capacity }, (_, index) => index),
+    uniforms: Array.from({ length: capacity }, () => ({
+      origin: new T.Vector3(),
+      index: 0,
+      mins: new T.Vector3(),
+      maxs: new T.Vector3(),
+      invEdge: new T.Vector3(),
+      sh: new T.Vector4(),
+    })),
+  };
+}
+/** Preserve native priority order, bounded to the actor's conservative world bounds. */
+export function updateSourceReflectionBinding(binding: SourceReflectionBinding, bounds: T.Box3) {
+  const indices = sourceReflectionCandidates(bounds, binding.source);
+  binding.count.value = Math.min(indices.length, binding.uniforms.length);
+  for (let i = 0; i < binding.count.value; i++) {
+    const source = binding.source.uniforms[indices[i]],
+      target = binding.uniforms[i];
+    target.origin.copy(source.origin);
+    target.index = source.index;
+    target.mins.copy(source.mins);
+    target.maxs.copy(source.maxs);
+    target.invEdge.copy(source.invEdge);
+    target.sh.copy(source.sh);
+  }
+  return indices.length;
+}
+
 // OpenGL cube addressing over native face layers. Interior sampling uses the
 // hardware filter; edge taps cross to adjacent faces, including corner averages.
 // ES 3.0 section 3.8.9.1 recommends the three-corner average but permits other
@@ -169,7 +226,7 @@ vec3 sourceCubeFetch(ivec2 xy,int face,int cube,int level) {
   return texelFetch(sourceReflectionCubes0,ivec3(xy,cube*6+face),level).rgb;
   #else
   return cube<42 ? texelFetch(sourceReflectionCubes0,ivec3(xy,cube*6+face),level).rgb
-    : texelFetch(sourceReflectionCubes1,ivec3(xy,face),level).rgb;
+    : texelFetch(sourceReflectionCubes1,ivec3(xy,(cube-42)*6+face),level).rgb;
   #endif
 }
 vec3 sourceCubeCrossTap(ivec2 pixel,int face,int cube,int level,int size) {
@@ -200,7 +257,7 @@ vec3 sourceCubeSample(vec3 direction,int cube,float lod) {
     return textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb;
     #else
     return cube<42 ? textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb
-      : textureLod(sourceReflectionCubes1,vec3(a.xy,a.z),lod).rgb;
+      : textureLod(sourceReflectionCubes1,vec3(a.xy,float((cube-42)*6)+a.z),lod).rgb;
     #endif
   }
   return mix(sourceCubeLevel(a,cube,int(floor(lod))),sourceCubeLevel(a,cube,upper),fract(lod));
@@ -212,6 +269,12 @@ export function applySourceReflections(
   shader: T.WebGLProgramParametersWithUniforms,
   data: SourceReflections,
   candidates: number[],
+  options: {
+    count?: { value: number };
+    worldPosition?: string;
+    worldNormal?: string;
+    worldView?: string;
+  } = {},
 ) {
   shader.uniforms.sourceReflectionCubes0 = { value: data.textures[0] };
   shader.uniforms.sourceReflectionCubes1 = { value: data.textures[1] ?? data.textures[0] };
@@ -219,7 +282,7 @@ export function applySourceReflections(
   const indices = new Int32Array(data.uniforms.length);
   indices.set(candidates);
   shader.uniforms.sourceEnvironmentCandidates = { value: indices };
-  shader.uniforms.sourceEnvironmentCount = { value: candidates.length };
+  shader.uniforms.sourceEnvironmentCount = options.count ?? { value: candidates.length };
   shader.fragmentShader =
     (data.combined ? "#define SOURCE_REFLECTION_SINGLE_ARRAY\n" : "") +
     sourceCubeSampling +
@@ -245,14 +308,14 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
     vec3 farPlane=max((env.mins-local)/R,(env.maxs-local)/R);
     float distance=abs(min(farPlane.x,min(farPlane.y,farPlane.z)));
     vec3 hit=local+R*distance;
-    vec3 direction=mix(hit,R,roughness);
-    color+=sourceCubeSample(direction,int(env.index),sqrt(roughness)*5.0)*weight;
+    ${data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "vec3 direction=normalize(hit);" : "vec3 direction=mix(hit,R,roughness);"}
+    color+=sourceCubeSample(direction,int(env.index),sqrt(roughness)*${data.lastLod ?? 5}.0)*weight;
     sh+=env.sh*weight;coverage+=weight;
     if(coverage>0.99)break;
   }
-  color/=coverage;sh/=coverage;
+  ${data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "sh/=coverage;" : "color/=coverage;sh/=coverage;"}
   float captured=dot(sh,vec4(normal,1.0));
-  if(captured>0.0)color*=min(dot(irradiance,vec3(0.2125,0.7154,0.0721))/captured,1.0);
+  if(captured>0.0)color*=min(dot(irradiance,vec3(0.2125,0.7154,0.0721))/captured,${data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "max(roughness*2.0+1.0,1.0)" : "1.0"});
   return color;
 }
 ` +
@@ -260,9 +323,9 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <lights_fragment_end>",
     `
-    vec3 sourceReflectionWorld= cameraPosition+transpose(mat3(viewMatrix))*(-vViewPosition);
-    vec3 sourceReflectionNormal=inverseTransformDirection(geometryNormal,viewMatrix);
-    vec3 sourceReflectionView=inverseTransformDirection(geometryViewDir,viewMatrix);
+    vec3 sourceReflectionWorld= ${options.worldPosition ?? "cameraPosition+transpose(mat3(viewMatrix))*(-vViewPosition)"};
+    vec3 sourceReflectionNormal=${options.worldNormal ?? "inverseTransformDirection(geometryNormal,viewMatrix)"};
+    vec3 sourceReflectionView=${options.worldView ?? "inverseTransformDirection(geometryViewDir,viewMatrix)"};
     radiance=sourceMapReflection(vec3(sourceReflectionWorld.x,-sourceReflectionWorld.z,sourceReflectionWorld.y)/0.0254,
       vec3(sourceReflectionNormal.x,-sourceReflectionNormal.z,sourceReflectionNormal.y),
       vec3(sourceReflectionView.x,-sourceReflectionView.z,sourceReflectionView.y),material.roughness,irradiance*RECIPROCAL_PI);

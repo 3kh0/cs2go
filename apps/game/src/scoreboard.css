@@ -308,3 +308,12 @@
   font-family: "Stratum2 Monodigit", sans-serif;
   letter-spacing: 1px;
 }
+
+#scoreboard[data-mode="deathmatch"] .score-team {
+  display: block;
+  color: #d7d7d7;
+}
+#scoreboard[data-mode="deathmatch"] .score-cash {
+  color: #fff;
+  font-weight: 700;
+}

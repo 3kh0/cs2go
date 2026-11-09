@@ -6,26 +6,33 @@ declare global {
     __game: Game;
   }
 }
-test("menu, saved settings, and offline assets", async ({ page }) => {
+test("menu, saved settings, and offline assets", async ({ page, baseURL }) => {
+  // This persistence check initializes the full GPU scene twice, including reload.
+  test.setTimeout(120_000);
   const errors: string[] = [];
   const external: string[] = [];
   page.on("request", (request) => {
-    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
   });
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
   await expect(page.getByRole("dialog", { name: "Browser not supported" })).toBeHidden();
-  await expect(page.getByRole("heading", { name: "CASUAL", exact: true })).toBeVisible();
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await expect(page.locator("#startup")).toHaveCount(0);
+  await page.locator("#home-play").click();
+  await expect(page.locator('[data-mode="casual"]')).toHaveAttribute("aria-pressed", "true");
   await page.locator("#settings-button").click();
   await page.getByRole("tab", { name: "Controls", exact: true }).click();
   await page.locator("#sensitivity").fill("1.7");
   await page.getByRole("tab", { name: "Video", exact: true }).click();
-  await page.locator("#quality").selectOption("low");
+  await page.locator("#quality").selectOption("laptop");
   await page.locator("#close-settings").click();
   await page.reload();
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await expect(page.locator("#startup")).toHaveCount(0);
   await page.locator("#settings-button").click();
   await expect(page.locator("#sensitivity")).toHaveValue("1.7");
-  await expect(page.locator("#quality")).toHaveValue("low");
+  await expect(page.locator("#quality")).toHaveValue("laptop");
   await page.locator("#close-settings").click();
   await page.screenshot({ path: "artifacts/menu.png" });
   expect(errors).toEqual([]);
@@ -81,10 +88,28 @@ test("real pointer lock, movement, jump, crouch, pause, and loadout", async ({ p
   await page.waitForTimeout(600);
   await page.keyboard.up("w");
   await expect.poll(() => page.evaluate(() => window.__game.position.z)).toBeLessThan(15);
+  await expect.poll(() => page.evaluate(() => window.__game.grounded)).toBe(true);
+  const takeoffY = await page.evaluate(() => window.__game.position.y);
   await page.keyboard.press("Space");
-  await expect.poll(() => page.evaluate(() => window.__game.position.y)).toBeGreaterThan(0.2);
+  await expect.poll(() => page.evaluate(() => window.__game.vertical)).toBeGreaterThan(0);
+  await expect
+    .poll(() => page.evaluate((y) => window.__game.position.y - y, takeoffY))
+    .toBeGreaterThan(0.2);
   await page.waitForTimeout(900);
   await expect.poll(() => page.evaluate(() => window.__game.grounded)).toBe(true);
+  expect(
+    await page.evaluate(() => {
+      const g = window.__game;
+      const support = g.world.collision!.support(
+        g.position.x,
+        g.position.z,
+        g.position.y + 0.1,
+        g.position.y - 0.3,
+        0.4064,
+      );
+      return Math.abs(g.position.y - support);
+    }),
+  ).toBeLessThan(0.02);
   await page.keyboard.down("c");
   await expect.poll(() => page.evaluate(() => window.__game.eye)).toBeLessThan(1.2);
   await page.keyboard.up("c");
@@ -135,18 +160,17 @@ test("hitscan headshots, wall occlusion, spare-magazine reload, and target respa
   await page.evaluate(() => {
     window.__game.freezeTime = 0;
   });
-  await page.evaluate(() => {
+  await page.evaluate(async () => {
+    const path = "/tests/weapon-lane-fixture.ts";
+    const { weaponLaneFixture, placeWeaponTarget, weaponHitboxPoint, aimWeaponAt } = (await import(
+      path
+    )) as typeof import("./weapon-lane-fixture");
     const g = window.__game;
+    weaponLaneFixture(g);
     g.buy(0);
-    g.drawTime = 0;
-    g.bots.slice(1).forEach((b) => {
-      b.health = 0;
-      b.respawn = 99;
-      b.group.visible = false;
-    });
-    g.yaw = 0;
-    g.pitch = Math.atan2(1.6 - 1.65, 13);
-    g.cooldown = 0;
+    g.drawTime = g.cooldown = 0;
+    placeWeaponTarget(g, 0, -17, 0, 4);
+    aimWeaponAt(g, weaponHitboxPoint(g, 0, 1));
   });
   await page.waitForTimeout(100);
   await page.mouse.down();
@@ -161,11 +185,28 @@ test("hitscan headshots, wall occlusion, spare-magazine reload, and target respa
     ammunition - discarded,
   );
   await expect.poll(() => page.evaluate(() => window.__game.bots[0].health)).toBe(100);
-  await page.evaluate(() => {
+  await page.evaluate(async () => {
+    const path = "/tests/weapon-lane-fixture.ts";
+    const { placeWeaponTarget, weaponHitboxPoint, aimWeaponAt } = (await import(
+      path
+    )) as typeof import("./weapon-lane-fixture");
+    const threeModule = "/tests/three-fixture.ts";
+    const { Mesh, BoxGeometry, MeshBasicMaterial } = (await import(
+      threeModule
+    )) as typeof import("three");
+    const collisionModule = "/src/map-collision.ts";
+    const { MapCollision } = (await import(
+      collisionModule
+    )) as typeof import("../src/map-collision");
     const g = window.__game;
-    g.bots[0].group.position.set(-9, 0, 14);
-    g.yaw = -Math.atan2(8, 3);
-    g.pitch = 0;
+    placeWeaponTarget(g, 0, -9, 0, 14);
+    const cover = new Mesh(new BoxGeometry(4, 3, 0.6), new MeshBasicMaterial());
+    cover.position.set(-13, 1.5, 15.5);
+    cover.userData.bulletMaterial = "concrete";
+    cover.updateMatrixWorld(true);
+    g.world.solids.push(cover);
+    g.world.collision = new MapCollision(g.world.solids);
+    aimWeaponAt(g, weaponHitboxPoint(g, 0, 1));
     g.cooldown = 0;
   });
   await page.waitForTimeout(100);
@@ -198,24 +239,59 @@ test("bots navigate, damage the player, and respawn resets health and ammunition
       return g.findPath(g.bots[0].group.position, g.position).length;
     }),
   ).toBeGreaterThan(0);
-  await page.evaluate(() => {
+  const fullMagazine = await page.evaluate(() => window.__game.ammo);
+  await page.evaluate(async () => {
     const g = window.__game;
+    // Pin one clear physical lane; random spawn distribution is covered separately.
+    const spawnModule = "/src/deathmatch-spawns.ts";
+    const { deathmatchSpawnPool } = (await import(
+      spawnModule
+    )) as typeof import("../src/deathmatch-spawns");
+    const points = deathmatchSpawnPool(g.world.navigation, g.world.collision!);
+    let lane: [typeof g.position, typeof g.position] | undefined;
+    for (const point of points) {
+      for (const next of points) {
+        const distance = point.distanceTo(next);
+        if (distance < 3 || distance > 7 || Math.abs(point.y - next.y) > 0.2) continue;
+        const from = point.clone(),
+          to = next.clone();
+        from.y += 1.45;
+        to.y += 1.2;
+        if (g.visible(from, to)) {
+          lane = [point, next];
+          break;
+        }
+      }
+      if (lane) break;
+    }
+    if (!lane) throw new Error("No clear native map lane for bot damage");
+    g.position.copy(lane[1]);
+    g.velocity.x = g.velocity.z = g.vertical = 0;
+    g.grounded = true;
     g.invulnerable = 0;
     g.health = 1;
     g.armor = 0;
     g.bots.forEach((b, i) => {
-      b.group.position.set(-17 + i * 0.5, 0, 13);
-      b.reaction = 0;
-      b.shot = 0;
+      b.health = i === 0 ? 100 : 0;
+      b.respawn = Infinity;
+      b.group.visible = i === 0;
+      b.spawnProtection = 0;
+      b.group.position.copy(lane![0]);
+      b.velocity.set(0, 0);
+      b.speed = b.reaction = b.shot = b.reloadTime = 0;
+      b.facing = Math.atan2(g.position.x - b.group.position.x, g.position.z - b.group.position.z);
+      b.aim.copy(g.position).y += 1.2;
+      b.navArea = g.world.navigation.nearest(b.group.position);
     });
   });
   await expect.poll(() => page.evaluate(() => window.__game.deaths), { timeout: 5000 }).toBe(1);
   await expect.poll(() => page.evaluate(() => window.__game.dead), { timeout: 5000 }).toBe(0);
   expect(await page.evaluate(() => window.__game.health)).toBe(100);
-  expect(await page.evaluate(() => window.__game.ammo)).toBe(12);
+  expect(await page.evaluate(() => window.__game.ammo)).toBe(fullMagazine);
   await page.evaluate(() => {
-    window.__game.kills = 20;
-    window.__game.finish();
+    // Deathmatch ends on the timer and ranks points, rather than first-to-20.
+    window.__game.deathmatchScore = 9999;
+    window.__game.time = 1 / 128;
   });
   await expect(page.locator("#result-title")).toHaveText("VICTORY.");
   await page.locator("#result-menu").click();
@@ -270,15 +346,15 @@ test("supplied AWP mesh, two zoom levels, bolt lockout, body damage, reload, and
   await page.mouse.down({ button: "right" });
   await page.mouse.up({ button: "right" });
   await expect.poll(() => page.evaluate(() => window.__game.camera.fov)).toBe(10);
-  await page.evaluate(() => {
+  await page.evaluate(async () => {
+    const path = "/tests/weapon-lane-fixture.ts";
+    const { weaponLaneFixture, placeWeaponTarget, weaponHitboxPoint, aimWeaponAt } = (await import(
+      path
+    )) as typeof import("./weapon-lane-fixture");
     const g = window.__game;
-    g.yaw = 0;
-    g.pitch = Math.atan2(1.2 - g.eye, 13);
-    g.bots.slice(1).forEach((b) => {
-      b.health = 0;
-      b.respawn = 99;
-      b.group.visible = false;
-    });
+    weaponLaneFixture(g);
+    placeWeaponTarget(g, 0, -17, 0, 4);
+    aimWeaponAt(g, weaponHitboxPoint(g, 0, 2));
   });
   await page.waitForFunction(() => window.__game.cooldown === 0);
   await page.waitForTimeout(220);
@@ -319,7 +395,7 @@ test("skinned agent gait, head tracking, and corpse poses", async ({ page }) => 
   await page.bringToFront();
   // Legacy modes remain useful as isolated gameplay fixtures, outside the lobby.
   await page.locator("#play").evaluate((button) => {
-    button.onclick = () => window.__game.start("deathmatch");
+    button.onclick = () => window.__game.start("practice");
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -333,9 +409,25 @@ test("skinned agent gait, head tracking, and corpse poses", async ({ page }) => 
   });
   await page.evaluate(() => {
     const g = window.__game;
-    g.invulnerable = 99;
-    g.bots[0].group.position.set(-17, 0, -17);
-    g.bots[0].nav = 0;
+    // Isolate real locomotion/rig playback from combat and patrol decisions.
+    // Deathmatch's FFA perception and protection are exercised in its own suite.
+    g.updateBots = () => {};
+    for (const bot of g.bots.slice(1)) {
+      bot.health = 0;
+      bot.respawn = Infinity;
+      bot.group.visible = false;
+    }
+    const bot = g.bots[0];
+    const fromArea =
+      g.world.navigation.areas[
+        g.world.navigation.nearest(bot.group.position.clone().set(-17, 0, -17))
+      ];
+    bot.group.position.fromArray(fromArea.center);
+    bot.navArea = g.world.navigation.nearest(bot.group.position);
+    bot.path = g.findPath(bot.group.position, g.position);
+    bot.moving = true;
+    bot.tracking = false;
+    bot.velocity.set(0, 0);
   });
   await expect
     .poll(() => page.evaluate(() => window.__game.bots[0].rig.stride))
@@ -444,7 +536,7 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
     const drawBeforeReload = game.drawTime;
     game.beginReload(); // A full magazine must not snap an unfinished draw to idle.
     const rejectedReloadPreservesDraw = game.drawTime === drawBeforeReload;
-    game.equip(4); // No delayed M4 action sounds may survive this switch.
+    game.equip(game.knife); // No delayed M4 action sounds may survive this owned-knife switch.
     for (let tick = 0; tick < 90; tick++) game.simulate(1 / 128);
     const interruptedDraw = [...events];
     game.buy(0);
@@ -468,7 +560,7 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
     };
   });
   expect(result.decoded).toBe(true);
-  expect(result.clips).toBe(209); // 193 firearm clips plus 16 suppressor/unsuppressed cues.
+  expect(result.clips).toBe(211); // Current native firearm/action bank, including suppressor and zoom cues.
   expect(result.shots).toEqual(["ak47-1", "m4a1-1-single", "usp1", "awp1"]);
   expect(result.voices).toBeGreaterThanOrEqual(4);
   expect(result.scope).toBe("zoom");
@@ -529,23 +621,21 @@ test("wheel cycles and wraps; AWP hits aligned enemies once each with penetratio
   await page.waitForTimeout(120);
   await page.mouse.wheel(0, 120);
   await expect(page.locator("#gun-name")).toHaveText("USP-S");
-  const result = await page.evaluate(() => {
+  const result = await page.evaluate(async () => {
+    const path = "/tests/weapon-lane-fixture.ts";
+    const { weaponLaneFixture, placeWeaponTarget, weaponHitboxPoint, aimWeaponAt } = (await import(
+      path
+    )) as typeof import("./weapon-lane-fixture");
     const g = window.__game;
+    weaponLaneFixture(g);
     g.buy(3);
     g.drawTime = g.cooldown = 0;
-    g.weaponAccuracy[g.selected] = { penalty: 0, mode: 1 }; // Settled accuracy fixture.
     g.setScope(1);
-    g.weaponAccuracy[g.selected] = { penalty: 0, mode: 1 }; // Settled accuracy fixture.
-    g.yaw = g.pitch = 0;
-    g.bots.forEach((b, i) => {
-      b.health = i < 2 ? 100 : 0;
-      b.respawn = 99;
-      b.group.visible = i < 2;
-      b.group.position.set(-17, 0, i ? 0 : 4);
-      b.group.rotation.set(0, 0, 0);
-    });
+    placeWeaponTarget(g, 0, -17, 0, 4);
+    placeWeaponTarget(g, 1, -17, 0, 0);
+    aimWeaponAt(g, weaponHitboxPoint(g, 0, 1));
     g.fire();
-    return { kills: g.kills, ammo: g.ammo, health: g.bots.slice(0, 2).map((b) => b.health) };
+    return { kills: g.kills, ammo: g.ammo, health: g.bots.slice(0, 2).map((bot) => bot.health) };
   });
   expect(result.kills).toBe(2);
   expect(result.ammo).toBe(4);
@@ -557,23 +647,26 @@ test("wheel cycles and wraps; AWP hits aligned enemies once each with penetratio
   await expect(page.locator("#killfeed .feed").last().locator('img[alt="HEADSHOT"]')).toBeVisible();
   await page.waitForTimeout(250);
   await page.screenshot({ path: "artifacts/killfeed-collateral.png" });
-  const body = await page.evaluate(() => {
+  const body = await page.evaluate(async () => {
+    const path = "/tests/weapon-lane-fixture.ts";
+    const { placeWeaponTarget, weaponHitboxPoint, aimWeaponAt } = (await import(
+      path
+    )) as typeof import("./weapon-lane-fixture");
     const g = window.__game;
     g.kills = 0;
     g.cooldown = g.boltTime = 0;
     g.setScope(1);
-    g.weaponAccuracy[g.selected] = { penalty: 0, mode: 1 }; // Settled accuracy fixture.
-    g.yaw = 0;
-    g.pitch = Math.atan2(1.2 - g.eye, 13);
-    g.bots.slice(0, 2).forEach((b, i) => {
-      // Reset the complete articulated death pose before testing a new shot.
-      g.spawnBot(b, i);
-      b.group.rotation.set(0, 0, 0);
-      // Keep both torso centers on the same descending ray.
-      b.group.position.set(-17, i ? -4 * Math.tan(-g.pitch) : 0, i ? 0 : 4);
-    });
+    placeWeaponTarget(g, 0, -17, 0, 4);
+    placeWeaponTarget(g, 1, -17, 0, 0);
+    const first = weaponHitboxPoint(g, 0, 2),
+      second = weaponHitboxPoint(g, 1, 2);
+    const cameraY = g.position.y + g.eye;
+    const rayY =
+      cameraY + ((first.y - cameraY) * (second.z - g.position.z)) / (first.z - g.position.z);
+    g.bots[1].group.position.y += rayY - second.y;
+    aimWeaponAt(g, first);
     g.fire();
-    return g.bots.slice(0, 2).map((b) => b.health);
+    return g.bots.slice(0, 2).map((bot) => bot.health);
   });
   expect(body[0]).toBeLessThanOrEqual(0);
   expect(body[1]).toBeGreaterThan(0);
@@ -721,48 +814,92 @@ test("thin wood transmits a bullet but thick masonry stops it", async ({ page })
     window.__game.freezeTime = 0;
   });
   const result = await page.evaluate(async () => {
-    // Reuse an existing BoxGeometry and material so the test exercises the
-    // production raycast and world-material path without another Three module.
     const g = window.__game;
+    g.simulate = () => {};
+    const threeModule = "/tests/three-fixture.ts";
+    const { Mesh, BoxGeometry, MeshBasicMaterial } = (await import(
+      threeModule
+    )) as typeof import("three");
+    const collisionModule = "/src/map-collision.ts";
+    const { MapCollision } = (await import(
+      collisionModule
+    )) as typeof import("../src/map-collision");
+    const hitboxModule = "/src/soldier-hitboxes.ts";
+    const { soldierHitboxes } = (await import(
+      hitboxModule
+    )) as typeof import("../src/soldier-hitboxes");
+    const recoilModule = "/src/recoil.ts";
+    const { createAimPunch, createWeaponRecoil } = (await import(
+      recoilModule
+    )) as typeof import("../src/recoil");
     g.buy(3);
-    g.drawTime = g.cooldown = 0;
-    g.yaw = g.pitch = 0;
-    g.setScope(1);
-    g.weaponAccuracy[g.selected] = { penalty: 0, mode: 1 }; // Settled accuracy fixture.
-    g.bots.slice(1).forEach((b) => {
-      b.health = 0;
-      b.respawn = 99;
-      b.group.visible = false;
+    g.position.set(-17, 0, 17);
+    g.velocity.x = g.velocity.z = g.vertical = 0;
+    g.grounded = true;
+    const target = g.bots[0];
+    g.bots.slice(1).forEach((bot) => {
+      bot.health = 0;
+      bot.respawn = Infinity;
+      bot.group.visible = false;
     });
-    const cover = g.world.solids[0].clone();
-    cover.position.set(-17, 1.3, 8);
-    cover.scale.set(2, 3, 0.08);
-    cover.userData.bulletMaterial = "wood";
-    g.world.solids.push(cover);
-    g.scene.add(cover);
-    g.fire();
-    const thin = g.bots[0].health;
-    g.bots[0].health = 100;
-    g.bots[0].group.rotation.set(0, 0, 0);
-    cover.scale.z = 1;
-    cover.userData.bulletMaterial = "concrete";
-    g.cooldown = g.boltTime = 0;
-    g.pitch = g.yaw = 0;
-    g.setScope(1);
-    g.weaponAccuracy[g.selected] = { penalty: 0, mode: 1 }; // Settled accuracy fixture.
-    g.fire();
-    return { thin, thick: g.bots[0].health };
+    target.group.position.set(-17, 0, 5);
+    target.group.rotation.set(0, 0, 0);
+    target.group.updateMatrixWorld(true);
+    target.armor = 0;
+    target.helmet = false;
+    const head = soldierHitboxes(target.rig).find((box) => box.group === 1)!;
+    const aim = head.start
+      .clone()
+      .add(head.end)
+      .multiplyScalar(0.5)
+      .applyMatrix4(head.bone.matrixWorld);
+    const cover = new Mesh(new BoxGeometry(4, 3, 1), new MeshBasicMaterial());
+    cover.position.set(-17, 1.5, 11);
+    const originalCollision = g.world.collision;
+    const originalSolids = g.world.solids;
+    const fireThrough = (thickness: number, material: "wood" | "concrete") => {
+      cover.scale.z = thickness;
+      cover.userData.bulletMaterial = material;
+      cover.updateMatrixWorld(true);
+      // Use the production triangle BVH; an old native-map proxy is not a box.
+      g.world.collision = new MapCollision([cover]);
+      g.world.solids = [cover];
+      target.health = 100;
+      g.cooldown = g.drawTime = g.boltTime = g.reload = 0;
+      g.weaponCooldowns[3] = 0;
+      g.aimPunch = createAimPunch();
+      g.weaponRecoil[3] = createWeaponRecoil();
+      g.weaponAccuracy[3] = { penalty: 0, mode: 1 };
+      g.setScope(1);
+      const direction = aim.clone().sub(g.position);
+      direction.y -= g.eye;
+      g.yaw = -Math.atan2(direction.x, -direction.z);
+      g.pitch = Math.atan2(direction.y, Math.hypot(direction.x, direction.z));
+      g.fire();
+      return target.health;
+    };
+    try {
+      return { thin: fireThrough(0.08, "wood"), thick: fireThrough(1, "concrete") };
+    } finally {
+      g.world.collision = originalCollision;
+      g.world.solids = originalSolids;
+      cover.geometry.dispose();
+      (cover.material as import("three").Material).dispose();
+    }
   });
   expect(result.thin).toBeLessThanOrEqual(0);
   expect(result.thick).toBe(100);
 });
 
-test("agent side selection, independent rigs, and live menu animation", async ({ page }) => {
+test("agent side selection, independent rigs, and live menu animation", async ({
+  page,
+  baseURL,
+}) => {
   const errors: string[] = [];
   const external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("request", (request) => {
-    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
   });
   await page.goto("/");
   await page.bringToFront();
@@ -772,7 +909,7 @@ test("agent side selection, independent rigs, and live menu animation", async ({
   await page.locator("#close-settings").click();
   // Legacy modes remain useful as isolated gameplay fixtures, outside the lobby.
   await page.locator("#play").evaluate((button) => {
-    button.onclick = () => window.__game.start("deathmatch");
+    button.onclick = () => window.__game.start("practice");
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -792,9 +929,25 @@ test("agent side selection, independent rigs, and live menu animation", async ({
   ).toBe(false);
   await page.evaluate(() => {
     const g = window.__game;
-    g.invulnerable = 99;
-    g.bots[0].group.position.set(-17, 0, -17);
-    g.bots[0].nav = 0;
+    // Isolate real locomotion/rig playback from combat and patrol decisions.
+    // Deathmatch's FFA perception and protection are exercised in its own suite.
+    g.updateBots = () => {};
+    for (const bot of g.bots.slice(1)) {
+      bot.health = 0;
+      bot.respawn = Infinity;
+      bot.group.visible = false;
+    }
+    const bot = g.bots[0];
+    const fromArea =
+      g.world.navigation.areas[
+        g.world.navigation.nearest(bot.group.position.clone().set(-17, 0, -17))
+      ];
+    bot.group.position.fromArray(fromArea.center);
+    bot.navArea = g.world.navigation.nearest(bot.group.position);
+    bot.path = g.findPath(bot.group.position, g.position);
+    bot.moving = true;
+    bot.tracking = false;
+    bot.velocity.set(0, 0);
   });
   await expect.poll(() => page.evaluate(() => window.__game.bots[0].speed)).toBeGreaterThan(1);
   await page.evaluate(() => document.exitPointerLock());
@@ -842,7 +995,7 @@ test("Dust II ledges release the player and A ramp's wall stays solid", async ({
   await page.evaluate(() => {
     window.__game.freezeTime = 0;
   });
-  const { routes, seams } = await page.evaluate(() => {
+  const { routes, seams, wallContact } = await page.evaluate(() => {
     const g = window.__game,
       c = g.world.collision!;
     // Keep the actual map and player simulation, with deterministic ticks and
@@ -897,7 +1050,12 @@ test("Dust II ledges release the player and A ramp's wall stays solid", async ({
         blocked: c.blocked(g.position.x, g.position.z, g.position.y),
       };
     });
-    return { routes, seams };
+    const wall = routes[2].end;
+    const wallContact = {
+      towardWall: c.blocked(wall[0] + 0.02, wall[2], wall[1] + 0.025, 16 * 0.0254, 72 * 0.0254),
+      awayFromWall: c.blocked(wall[0] - 0.02, wall[2], wall[1] + 0.025, 16 * 0.0254, 72 * 0.0254),
+    };
+    return { routes, seams, wallContact };
   });
   for (const route of routes) {
     expect(route.overlaps).toBe(0);
@@ -907,8 +1065,8 @@ test("Dust II ledges release the player and A ramp's wall stays solid", async ({
   expect(routes[0].end[0]).toBeGreaterThan(38);
   expect(routes[1].end[0]).toBeGreaterThan(37);
   // The restored clip brush stops the hull before the decorative wall.
-  expect(routes[2].end[0]).toBeGreaterThan(40.7);
-  expect(routes[2].end[0]).toBeLessThan(40.9);
+  expect(routes[2].end[0]).toBeGreaterThan(40);
+  expect(wallContact).toEqual({ towardWall: true, awayFromWall: false });
   expect(routes[3].end[2]).toBeLessThan(-68);
   expect(routes[3].end[1]).toBeGreaterThan(2);
   for (const seam of seams) {
@@ -934,31 +1092,84 @@ test("releasing crouch under cover waits for enough room to stand", async ({ pag
   await page.evaluate(() => {
     window.__game.freezeTime = 0;
   });
-  const result = await page.evaluate(() => {
+  const result = await page.evaluate(async () => {
     const g = window.__game;
+    const simulate = g.simulate.bind(g);
+    g.simulate = () => {};
+    const threeModule = "/tests/three-fixture.ts";
+    const { Mesh, BoxGeometry, MeshBasicMaterial } = (await import(
+      threeModule
+    )) as typeof import("three");
+    const collisionModule = "/src/map-collision.ts";
+    const { MapCollision } = (await import(
+      collisionModule
+    )) as typeof import("../src/map-collision");
+    const floor = new Mesh(new BoxGeometry(20, 0.5, 20), new MeshBasicMaterial());
+    floor.position.set(100, -0.25, 100);
+    floor.updateMatrixWorld(true);
+    const roof = new Mesh(new BoxGeometry(4, 1, 4), new MeshBasicMaterial());
+    roof.position.set(100, 1.95, 100);
+    roof.updateMatrixWorld(true);
+    const collision = new MapCollision([floor, roof]);
+    const originalCollision = g.world.collision,
+      originalPosition = g.position.clone(),
+      originalEye = g.eye;
+    g.world.collision = collision;
     g.locked = false;
-    g.world.walls.push({ x: 100, z: 100, w: 4, d: 4, y: 1.45, h: 4 });
-    g.position.set(100, 0, 100);
-    g.velocity.x = g.velocity.z = g.vertical = 0;
-    g.eye = 1.1;
-    g.keys.clear();
-    for (let i = 0; i < 128; i++) g.simulate(1 / 128);
-    const underCover = g.eye;
-    g.yaw = 0;
-    g.keys.add("KeyW");
-    for (let i = 0; i < 256; i++) g.simulate(1 / 128);
-    return { underCover, standing: g.eye, z: g.position.z };
+    g.bots.forEach((bot) => {
+      bot.health = 0;
+      bot.respawn = Infinity;
+      bot.group.visible = false;
+    });
+    try {
+      g.position.set(100, 0, 100);
+      g.velocity.x = g.velocity.z = g.vertical = 0;
+      g.grounded = true;
+      g.eye = 1.1;
+      g.keys.clear();
+      for (let tick = 0; tick < 128; tick++) simulate(1 / 128);
+      const underCover = g.eye;
+      const crouchedClear = !collision.blocked(
+        g.position.x,
+        g.position.z,
+        g.position.y,
+        16 * 0.0254,
+        g.hullHeight,
+      );
+      const standingBlocked = collision.blocked(
+        g.position.x,
+        g.position.z,
+        g.position.y,
+        16 * 0.0254,
+        72 * 0.0254,
+      );
+      g.yaw = 0;
+      g.keys.add("KeyW");
+      for (let tick = 0; tick < 256; tick++) simulate(1 / 128);
+      return { underCover, standing: g.eye, z: g.position.z, crouchedClear, standingBlocked };
+    } finally {
+      g.keys.clear();
+      g.world.collision = originalCollision;
+      g.position.copy(originalPosition);
+      g.eye = originalEye;
+      floor.geometry.dispose();
+      roof.geometry.dispose();
+      (floor.material as import("three").Material).dispose();
+      (roof.material as import("three").Material).dispose();
+    }
   });
+  expect(result.crouchedClear).toBe(true);
+  expect(result.standingBlocked).toBe(true);
   expect(result.underCover).toBeLessThanOrEqual(1.3);
   expect(result.standing).toBeCloseTo(1.6256);
   expect(result.z).toBeLessThan(97);
 });
-test("CT ramp traversal and the local callout radar", async ({ page }) => {
+test("CT ramp traversal and the local callout radar", async ({ page, baseURL }) => {
   const errors: string[] = [],
     external: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("request", (r) => {
-    if (new URL(r.url()).origin !== "http://127.0.0.1:5173") external.push(r.url());
+    if (new URL(r.url()).origin !== new URL(baseURL!).origin) external.push(r.url());
   });
   await page.goto("/");
   await page.locator("#home-play").click();
@@ -1059,12 +1270,13 @@ test("CT ramp traversal and the local callout radar", async ({ page }) => {
 });
 test("Dust II casual lobby has balanced teams, textured view arms, and navigation over real floors", async ({
   page,
+  baseURL,
 }) => {
   const errors: string[] = [],
     external: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("request", (r) => {
-    if (new URL(r.url()).origin !== "http://127.0.0.1:5173") external.push(r.url());
+    if (new URL(r.url()).origin !== new URL(baseURL!).origin) external.push(r.url());
   });
   await page.goto("/");
   await page.waitForFunction(() => !!window.__game);
@@ -1151,13 +1363,14 @@ test("Dust II casual lobby has balanced teams, textured view arms, and navigatio
 
 test("casual bomb interaction, defuse cancellation, elimination and round reset", async ({
   page,
+  baseURL,
 }) => {
   test.setTimeout(120_000);
   const errors: string[] = [];
   const external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("request", (request) => {
-    if (new URL(request.url()).origin !== "http://127.0.0.1:5173") external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url());
   });
   await page.goto("/");
   await page.bringToFront();
@@ -1234,8 +1447,9 @@ test("casual bomb interaction, defuse cancellation, elimination and round reset"
         return g.ammo === ammo - 1;
       });
       const knife = [false, true].map((stab) => {
-        g.equip(4);
-        g.cooldown = g.drawTime = 0;
+        g.equip(g.knife);
+        g.cooldown = g.drawTime = g.knifeTime = 0;
+        g.knifePending = false;
         if (stab) g.fireKnife(true);
         else g.fire();
         return g.knifePending && g.knifeTime > 0;
@@ -1420,6 +1634,13 @@ test("spectator chase avoids walls and corpses settle without losing visibility"
     g.spectate();
     const wallHit = g.world.collision!.intersections(g.spectatorRay, 3.1)[0];
     const next = g.bots.find((b) => b.team === g.team && b !== ally && b.health > 0)!;
+    // Casual permits either faction. Keep exactly one alternative alive so this
+    // tests dead-target recovery rather than an obsolete team-only order.
+    for (const bot of g.bots)
+      if (bot !== ally && bot !== next) {
+        bot.health = 0;
+        bot.group.visible = false;
+      }
     ally.health = 0;
     g.spectate();
     return {
@@ -1471,6 +1692,7 @@ test("spectator chase avoids walls and corpses settle without losing visibility"
       };
     });
   });
+  console.log("Native spectator collapse", { result, collapse });
   for (const corpse of collapse) {
     expect(corpse.sleeping && corpse.stable && corpse.restored).toBe(true);
     expect(corpse.lowest).toBeGreaterThanOrEqual(-0.001);
@@ -1757,8 +1979,30 @@ test("Bayonet slash and stab hit once, respect reach and cover, and cancel on sw
   });
   await page.keyboard.press("Digit3");
   await expect.poll(() => page.evaluate(() => window.__game.drawTime)).toBe(0);
-  await page.evaluate(() => {
+  await page.evaluate(async () => {
     const g = window.__game;
+    const threeModule = "/tests/three-fixture.ts";
+    const { Mesh, BoxGeometry, MeshBasicMaterial } = (await import(
+      threeModule
+    )) as typeof import("three");
+    const collisionModule = "/src/map-collision.ts";
+    const { MapCollision } = (await import(
+      collisionModule
+    )) as typeof import("../src/map-collision");
+    // Keep the selected Bayonet and real input/contact timing, with one known
+    // physical floor instead of obsolete native-map coordinates.
+    const floor = new Mesh(new BoxGeometry(20, 0.5, 20), new MeshBasicMaterial());
+    floor.position.set(-17, -0.25, 17);
+    floor.updateMatrixWorld(true);
+    g.world.collision = new MapCollision([floor]);
+    g.world.solids = [floor];
+    // Reach and occlusion need a stationary target; native bot decisions can
+    // otherwise move its animated hitboxes through the test's thin cover.
+    g.updateBots = () => {};
+    g.moveBots = () => {};
+    g.position.set(-17, 0, 17);
+    g.velocity.x = g.velocity.z = g.vertical = 0;
+    g.grounded = true;
     g.yaw = 0;
     g.pitch = Math.atan2(1.2 - g.eye, 1.1);
     g.bots.forEach((b, i) => {
@@ -1768,21 +2012,44 @@ test("Bayonet slash and stab hit once, respect reach and cover, and cancel on sw
       b.respawn = 99;
     });
     g.bots[0].group.position.set(-17, 0, 15.9);
-    g.bots[0].group.rotation.set(0, Math.PI, 0);
+    g.bots[0].group.rotation.set(0, 0, 0);
+    g.bots[0].facing = 0;
   });
   await page.mouse.down();
   await page.mouse.up();
   await expect.poll(() => page.evaluate(() => window.__game.bots[0].health)).toBe(60);
   await page.waitForTimeout(550);
+  await page.evaluate(() => {
+    const g = window.__game;
+    // Stab reach is 32 inches; slash reach is 48 inches.
+    g.bots[0].group.position.z = 16.3;
+    g.pitch = Math.atan2(1.2 - g.eye, 0.7);
+  });
   await page.mouse.down({ button: "right" });
   await page.mouse.up({ button: "right" });
   await expect.poll(() => page.evaluate(() => window.__game.bots[0].health)).toBe(0);
   await expect(page.locator('#killfeed img[alt="Bayonet"]')).toBeVisible();
-  const result = await page.evaluate(() => {
+  const result = await page.evaluate(async () => {
     const g = window.__game,
       b = g.bots[0];
+    const simulate = g.simulate.bind(g);
+    g.simulate = () => {};
+    const meleeModule = "/src/melee.ts";
+    const { knifeRange } = (await import(meleeModule)) as typeof import("../src/melee");
+    const soldierModule = "/src/soldier.ts";
+    const { resetSoldier } = (await import(soldierModule)) as typeof import("../src/soldier");
+    const threeModule = "/tests/three-fixture.ts";
+    const { Mesh, BoxGeometry, MeshBasicMaterial } = (await import(
+      threeModule
+    )) as typeof import("three");
+    const collisionModule = "/src/map-collision.ts";
+    const { MapCollision } = (await import(
+      collisionModule
+    )) as typeof import("../src/map-collision");
+    resetSoldier(b.rig);
+    g.pitch = Math.atan2(1.2 - g.eye, 1.1);
     const step = () => {
-      for (let n = 0; n < 40; n++) g.simulate(1 / 128);
+      for (let n = 0; n < 40; n++) simulate(1 / 128);
     };
     b.health = 100;
     b.group.visible = true;
@@ -1797,23 +2064,47 @@ test("Bayonet slash and stab hit once, respect reach and cover, and cancel on sw
     g.equip(2);
     step();
     const cancelled = b.health;
+    const cancelledPending = g.knifePending;
     g.equip(4);
     g.cooldown = 0;
-    g.position.set(-1, 0, 7);
+    g.position.set(-17, 0, 17);
     g.yaw = 0;
-    g.pitch = 0;
-    b.group.position.set(-1, 0, 5.2);
+    g.pitch = Math.atan2(1.2 - g.eye, 1.1);
+    b.group.position.set(-17, 0, 15.9);
+    const cover = new Mesh(new BoxGeometry(2, 3, 0.12), new MeshBasicMaterial());
+    // Put cover ahead of the native forward-reaching arm capsules as well
+    // as the target torso; a wall behind a hand does not occlude that hand.
+    cover.position.set(-17, 1.5, 16.8);
+    cover.updateMatrixWorld(true);
+    g.world.solids.push(cover);
+    g.world.collision = new MapCollision(g.world.solids);
+    g.updateAimCamera();
+    g.ray.set(g.camera.position, g.camera.getWorldDirection(g.position.clone()));
+    g.ray.far = knifeRange(false);
+    const coverTrace = g.meleeTrace();
+    const coverBlocks =
+      coverTrace !== undefined && coverTrace.actor === undefined && coverTrace.distance <= 0.6;
     g.fireKnife();
     step();
     const covered = b.health;
-    return { outOfReach, cancelled, covered, ammo: g.ammo, pending: g.knifePending };
+    return {
+      outOfReach,
+      cancelled,
+      cancelledPending,
+      covered,
+      ammo: g.ammo,
+      pending: g.knifePending,
+      coverBlocks,
+    };
   });
   expect(result).toEqual({
     outOfReach: 100,
     cancelled: 100,
+    cancelledPending: false,
     covered: 100,
     ammo: 0,
     pending: false,
+    coverBlocks: true,
   });
 });
 
@@ -2061,8 +2352,10 @@ test("firearm inspection cancels for shots, reloads, scopes, and switching witho
       const reloaded = g.reload > 0 && g.inspectTime === 0;
       g.reload = 0;
       inspect();
-      g.equip(4);
-      const switched = g.inspectTime === 0;
+      // Switching must target the actually owned team knife. Weapon4 is the
+      // Bayonet cosmetic and is not necessarily in this player's inventory.
+      g.equip(g.knife);
+      const switched = g.selected === g.knife && g.inspectTime === 0;
       samples.push({ duration, motion, fired, drift, reloaded, switched });
     }
     g.buy(3);
@@ -2074,23 +2367,27 @@ test("firearm inspection cancels for shots, reloads, scopes, and switching witho
   for (const sample of samples.samples) {
     expect(sample.duration).toBeGreaterThan(2);
     expect(sample.motion).toBeGreaterThan(0.02);
-    expect(sample.fired).toBe(true);
+    expect(sample.fired, JSON.stringify(sample)).toBe(true);
     expect(sample.drift).toBeLessThan(0.000001);
-    expect(sample.reloaded).toBe(true);
-    expect(sample.switched).toBe(true);
+    expect(sample.reloaded, JSON.stringify(sample)).toBe(true);
+    expect(sample.switched, JSON.stringify(sample)).toBe(true);
   }
   expect(samples.scope).toBe(true);
   expect(errors).toEqual([]);
 });
 
 test("source agent poses animate both factions and crouch lowers the body", async ({ page }) => {
+  test.setTimeout(180_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.bringToFront();
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await expect(page.locator("#startup")).toHaveCount(0);
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  await page.locator('[data-team="t"]').click();
+  await expect(page.locator("#team-select")).toBeVisible({ timeout: 100_000 });
+  await page.locator('#team-select [data-team="t"]').click();
   await page.waitForFunction(() => window.__game.locked);
   await page.evaluate(() => {
     window.__game.freezeTime = 0;
@@ -2098,6 +2395,9 @@ test("source agent poses animate both factions and crouch lowers the body", asyn
   await page.evaluate(() => {
     const g = window.__game;
     g.locked = false;
+    // This is a controlled rig/pose render. Pointer unlock intentionally no
+    // longer stops live bot simulation, so pause only this fixture's stepping.
+    g.simulate = () => {};
     g.useWorld();
     g.scopeLevel = 1;
     g.world.root.traverse((object) => {
@@ -2172,12 +2472,16 @@ test("source agent poses animate both factions and crouch lowers the body", asyn
 
 test("default Butterfly and Karambit share knife slot and play source actions", async ({
   page,
+  baseURL,
 }) => {
+  // Two complete native action sequences and fourteen rendered pose captures
+  // must retain their authored durations, including cold asset preparation.
+  test.setTimeout(180_000);
   const errors: string[] = [],
     external: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("request", (r) => {
-    if (new URL(r.url()).origin !== "http://127.0.0.1:5173") external.push(r.url());
+    if (new URL(r.url()).origin !== new URL(baseURL!).origin) external.push(r.url());
   });
   await page.addInitScript(() => {
     // The fixture owns these three default knives; Loadout/Inventory no longer
@@ -2195,6 +2499,8 @@ test("default Butterfly and Karambit share knife slot and play source actions", 
     );
   });
   await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  await expect(page.locator("#startup")).toHaveCount(0);
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
@@ -2235,7 +2541,10 @@ test("default Butterfly and Karambit share knife slot and play source actions", 
     await expect.poll(() => page.evaluate(() => window.__game.inspectTime)).toBeGreaterThan(0);
     // Sample source poses with simulation frozen for visual review.
     await page.evaluate(() => {
-      window.__game.locked = false;
+      const g = window.__game;
+      g.locked = false;
+      g.scene.userData.knifePoseFixtureSimulate = g.simulate.bind(g);
+      g.simulate = () => {};
     });
     for (const phase of ["idle", "draw", "slash", "stab", "inspect0", "inspect1", "inspect2"]) {
       const finite = await page.evaluate((phase) => {
@@ -2266,6 +2575,8 @@ test("default Butterfly and Karambit share knife slot and play source actions", 
     }
     await page.evaluate(() => {
       const g = window.__game;
+      g.simulate = g.scene.userData.knifePoseFixtureSimulate;
+      delete g.scene.userData.knifePoseFixtureSimulate;
       g.locked = true;
       g.equip(2);
     });
@@ -2537,30 +2848,45 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
     const { resetSoldier, stepSoldierRagdoll } = (await import(
       path
     )) as typeof import("../src/soldier");
-    const g = window.__game;
-    const rig = g.bots.find((b) => b.team === "ct")!.rig;
+    const threeModule = "/tests/three-fixture.ts";
+    const { Mesh, BoxGeometry, MeshBasicMaterial } = (await import(
+      threeModule
+    )) as typeof import("three");
+    const collisionModule = "/src/map-collision.ts";
+    const { MapCollision } = (await import(
+      collisionModule
+    )) as typeof import("../src/map-collision");
+    const g = window.__game,
+      rig = g.bots.find((bot) => bot.team === "ct")!.rig;
+    const floor = new Mesh(new BoxGeometry(100, 0.5, 100), new MeshBasicMaterial());
+    floor.position.y = -0.25;
+    floor.updateMatrixWorld(true);
+    const platform = new Mesh(new BoxGeometry(4, 4, 4), new MeshBasicMaterial());
+    platform.position.y = 2;
+    platform.updateMatrixWorld(true);
+    const world = { collision: new MapCollision([floor, platform]), walls: [] };
     resetSoldier(rig);
-    rig.group.position.set(2.2, 4.7, -5);
+    rig.group.position.set(2.2, 4.7, 0);
     rig.group.rotation.set(0, 0, 0);
-    rig.group.userData.groundY = 4.7;
     rig.moveX = 3;
-    for (let i = 0; i < 1024; i++) stepSoldierRagdoll(rig, 0, 1 / 128, g.world);
-    const ledge = Math.max(...rig.ragdoll!.points.map((p) => p.position.y));
+    rig.moveZ = 0;
+    for (let tick = 0; tick < 1024; tick++) stepSoldierRagdoll(rig, 0, 1 / 128, world);
+    const ledge = Math.max(...rig.ragdoll!.points.map((point) => point.position.y));
     resetSoldier(rig);
     rig.group.position.set(0, 12, 10);
     rig.moveX = rig.moveZ = 0;
-    const fixturePath = "/tests/flat-collision-fixture.ts";
-    const { flatCollisionFixture } = (await import(
-      fixturePath
-    )) as typeof import("./flat-collision-fixture");
-    flatCollisionFixture(g);
-    const collision = g.world.collision;
-    for (let i = 0; i < 1024; i++) stepSoldierRagdoll(rig, 0, 1 / 128, { collision, walls: [] });
-    return {
+    const ground = { collision: new MapCollision([floor]), walls: [] };
+    for (let tick = 0; tick < 1024; tick++) stepSoldierRagdoll(rig, 0, 1 / 128, ground);
+    const result = {
       ledge,
-      high: Math.max(...rig.ragdoll!.points.map((p) => p.position.y)),
-      low: Math.min(...rig.ragdoll!.points.map((p) => p.position.y)),
+      high: Math.max(...rig.ragdoll!.points.map((point) => point.position.y)),
+      low: Math.min(...rig.ragdoll!.points.map((point) => point.position.y)),
     };
+    floor.geometry.dispose();
+    platform.geometry.dispose();
+    (floor.material as import("three").Material).dispose();
+    (platform.material as import("three").Material).dispose();
+    return result;
   });
   expect(drops.ledge).toBeLessThan(0.8);
   expect(drops.high).toBeLessThan(0.8);
@@ -2571,21 +2897,44 @@ test("ragdolls fall from the air, articulate both factions, and land on map surf
     const { resetSoldier, stepSoldierRagdoll } = (await import(
       path
     )) as typeof import("../src/soldier");
+    const spawnModule = "/src/deathmatch-spawns.ts";
+    const { deathmatchSpawnPool } = (await import(
+      spawnModule
+    )) as typeof import("../src/deathmatch-spawns");
     const g = window.__game;
     g.useWorld();
+    const collision = g.world.collision!;
+    // A falling body needs its entire landing footprint clear, not merely one
+    // floor ray below an arbitrary legacy coordinate or a nearby crate top.
+    const point = deathmatchSpawnPool(g.world.navigation, collision).find((candidate) =>
+      [-2, 0, 2].every((dx) =>
+        [-2, 0, 2].every((dz) => {
+          const floor = collision.floor(
+            candidate.x + dx,
+            candidate.z + dz,
+            candidate.y + 0.3,
+            candidate.y - 0.3,
+          );
+          return (
+            Number.isFinite(floor) &&
+            Math.abs(floor - candidate.y) < 0.08 &&
+            !collision.blocked(candidate.x + dx, candidate.z + dz, floor + 0.025, 16 * 0.0254, 4)
+          );
+        }),
+      ),
+    );
+    if (!point) throw new Error("Native ragdoll fixture lacks an open supported landing footprint");
     return (["t", "ct"] as const).map((team) => {
-      const rig = g.bots.find((b) => b.team === team)!.rig;
+      const rig = g.bots.find((bot) => bot.team === team)!.rig;
       resetSoldier(rig);
-      rig.group.position.copy(g.position);
-      const floor = g.world.collision!.floor(g.position.x, g.position.z, g.position.y + 1, -100);
-      if (!Number.isFinite(floor))
-        throw new Error("Native ragdoll fixture requires a supported spawn");
-      rig.group.position.y = floor + 2;
+      rig.group.position.copy(point);
+      rig.group.position.y += 2;
+      rig.group.rotation.set(0, 0, 0);
       rig.moveX = rig.moveZ = 0;
-      for (let i = 0; i < 768; i++) stepSoldierRagdoll(rig, 0, 1 / 128, g.world);
+      for (let tick = 0; tick < 768; tick++) stepSoldierRagdoll(rig, 0, 1 / 128, g.world);
       return {
-        highest: Math.max(...rig.ragdoll!.points.map((p) => p.position.y)) - floor,
-        lowest: Math.min(...rig.ragdoll!.points.map((p) => p.position.y)) - floor,
+        highest: Math.max(...rig.ragdoll!.points.map((joint) => joint.position.y)) - point.y,
+        lowest: Math.min(...rig.ragdoll!.points.map((joint) => joint.position.y)) - point.y,
       };
     });
   });

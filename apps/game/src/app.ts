@@ -1,3 +1,4 @@
+import { deathcamMarkup } from "./deathcam";
 import { equipKnife } from "./equipped-knives";
 import { homeMenuMarkup, setupHomeMenu } from "./home-menu";
 import { setupSkinMenu } from "./skin-menu";
@@ -43,8 +44,10 @@ ${homeMenuMarkup()}
  <div id="scope" class="hidden" aria-label="AWP scope"><div class="scope-lens"><i class="scope-horizontal"></i><i class="scope-vertical"></i></div></div>
  <div class="radar-wrap"><div id="location">DUST II</div><canvas id="radar" width="900" height="948" aria-label="Player-centered heading-up radar; hold M for the full north-up map"></canvas><div id="bomb-carrier" class="hidden" role="img" aria-label="Carrying the bomb"><img src="/icons/buy/c4.svg" alt=""></div><div id="economy-hud"><strong id="money"></strong></div></div>
  <div class="match-top" role="group" aria-label="Match status"><div class="match-alive ct" aria-label="Counter-Terrorists alive"><strong id="ct-alive">0</strong><small>ALIVE</small></div><div class="match-center"><strong id="clock" aria-label="Round time">5:00</strong><div class="match-scores"><span class="ct" id="score" aria-label="Counter-Terrorists score">0</span><span class="t" id="enemy-score" aria-label="Terrorists score">0</span></div></div><div class="match-alive t" aria-label="Terrorists alive"><strong id="t-alive">0</strong><small>ALIVE</small></div></div>
+ <div id="deathmatch-leaders" role="list" aria-label="Deathmatch standings" hidden></div>
+ <div id="deathmatch-status" role="status" hidden></div>
  <div id="killfeed" role="list" aria-label="Eliminations" aria-live="polite"></div><div id="crosshair"><i></i><i></i><i></i><i></i><b></b></div><div id="hitmarker">×</div><div id="damage"></div>
- <div id="death-banner" class="hidden" role="status"><div class="death-details"><strong id="death-killer"></strong><div><span class="death-message">killed you with the </span><span id="death-weapon"></span></div></div><img id="death-weapon-icon" alt=""></div>
+ ${deathcamMarkup()}
  ${matchNoticesMarkup()}<div id="inventory" role="list" aria-label="Weapon inventory"></div><div class="hud-bottom"><div class="vitals"><span id="armor-state" class="armor" aria-label="Armor" data-helmet="true"><img class="armor-vest" src="/icons/hud/armor.svg" alt=""><img class="armor-helmet" src="/icons/hud/armor_helmet.svg" alt=""><b id="armor">100</b></span><span class="health-stat" aria-label="Health"><b id="health">100</b><span class="health-track"><i id="health-fill"></i></span></span></div><div class="hud-team" aria-label="Your team"><span></span><img id="hud-team-icon" src="/icons/team-ct.png" alt="Counter-Terrorists"><span></span></div><div class="ammo"><div id="gun-name">USP-S</div><b id="ammo">12</b><span>/ <span id="reserve">48</span></span></div></div>
 
  <div id="telemetry">0 FPS &nbsp; - &nbsp; – MS FRAME &nbsp; - &nbsp; 128 TICK</div>
@@ -151,6 +154,13 @@ if (invitation.has("room") || invitedServer) {
 }
 if (invitation.get("mode") === "competitive")
   document.querySelector<HTMLButtonElement>('[data-mode="competitive"]')!.click();
+el("match-join").onclick = () => {
+  room.focus();
+  room.select();
+};
+room.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && session === "multi") el("play").click();
+});
 el("match-create").onclick = () => {
   if (el("play").hasAttribute("disabled") || game.matchLoading) return;
   creating = true;

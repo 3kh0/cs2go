@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "7be9ac151955e7205a4300f83d3a3a984855f3de255b5a4b31ac9b3d4a4ff885",
+  "release": "bbcf00093a14d5da843d846ab30e6df02f1ad48e5deb959a9b890ffc2a21e90a",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -21648,6 +21648,29 @@
       },
       "object": "objects/06f6e57f19794294a022b53150083232c42b315f90934fbe10a29c226518e72b.exr.br"
     },
+    "models/maps/mirage-lighting/reflections/cubes-0.bin.gz": {
+      "sha256": "f0d916cdd8013c87022fd677140ced616d14fb41f274d4bab2bcb9c7e452b22a",
+      "bytes": 21548926,
+      "decodedSha256": "6e7c4380605b0788423a4d5eff4583334febaab4be76ccbd9eb817e3eb45e0e8",
+      "object": "objects/f0d916cdd8013c87022fd677140ced616d14fb41f274d4bab2bcb9c7e452b22a.gz"
+    },
+    "models/maps/mirage-lighting/reflections/cubes-1.bin.gz": {
+      "sha256": "672c7325bd9081961aa9cc7ba3d10d351cc620abeda5d1e73f437a4e1157b401",
+      "bytes": 8237272,
+      "decodedSha256": "e29c1383d0ae2506f6e02948fdf74ba5a83b29a09f9d6e72b8a98b07fb931af1",
+      "object": "objects/672c7325bd9081961aa9cc7ba3d10d351cc620abeda5d1e73f437a4e1157b401.gz"
+    },
+    "models/maps/mirage-lighting/reflections/source.json": {
+      "sha256": "502c2b1e52c6674f8add84424475727d2b571bc901fa63e797f63cd69062c256",
+      "bytes": 47618,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "a02373f638fe643acf4010658b9ee340bfff2e8473a0e82403ada59e76074d33",
+        "bytes": 5864
+      },
+      "object": "objects/a02373f638fe643acf4010658b9ee340bfff2e8473a0e82403ada59e76074d33.json.br"
+    },
     "models/maps/mirage-lighting/shadows.webp": {
       "sha256": "c97813afe0305fec9fd72f38ca70796009fd4d43a26624c849b1bd5b5a73093d",
       "bytes": 1134480,
@@ -22122,15 +22145,15 @@
       "object": "objects/5389a3906dd36215ecd9933d2897160c03c2ce2cb9bbe169fa33272661642f0e.gz"
     },
     "models/maps/mirage-source.json": {
-      "sha256": "1bac22cdd8bf39188520412f6895e4e37b607137959649e1a38e88bfd63d7078",
-      "bytes": 32195,
+      "sha256": "3e5a8e3196b0b227dd8e1d12ee5aae0bd86ed07da6b9cad043f1a4495c2d3658",
+      "bytes": 33084,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "f67f4fec0bffaa1bf2dfc3c729a88ea1f2f3df99f469d45c8001e6be6818c358",
-        "bytes": 9291
+        "sha256": "ba4d8c2fe6b5a4b2266dd919c5802f2df5c29dbbc2f7b22d7a37a858e3b93714",
+        "bytes": 9545
       },
-      "object": "objects/f67f4fec0bffaa1bf2dfc3c729a88ea1f2f3df99f469d45c8001e6be6818c358.json.br"
+      "object": "objects/ba4d8c2fe6b5a4b2266dd919c5802f2df5c29dbbc2f7b22d7a37a858e3b93714.json.br"
     },
     "models/maps/mirage.glb.gz": {
       "sha256": "ed92c0669e100c66864c541bd7168911349e74dc23eb0861aab2877ecaa5b0e7",

@@ -169,7 +169,9 @@ test("native buy poses preview every firearm and utility on both agents without 
   ).toEqual(inventory);
   await page.evaluate(async () => {
     const path = "/src/skins.ts";
-    const { setSkin } = (await import(path)) as typeof import("../src/skins");
+    const { setSkin, skinCatalog } = (await import(path)) as typeof import("../src/skins");
+    // The real Inventory selector loads names and rarity before applying a finish.
+    await skinCatalog();
     await setSkin(22, { id: "39_287", wear: 0.1, seed: 1 });
   });
   await page.locator('#loadout [data-weapon="22"]').hover();

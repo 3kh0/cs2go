@@ -1,0 +1,103 @@
+#hud.deathmatch .match-top {
+  border: 0;
+  background: transparent;
+}
+#hud.deathmatch :is(.match-alive, .match-scores, #economy-hud) {
+  display: none;
+}
+#hud.deathmatch .match-center {
+  border: 0;
+  min-width: 78px;
+  background: #101419b8;
+}
+#hud.deathmatch #clock {
+  font-size: clamp(20px, 2.8vh, 30px);
+  line-height: 1.25;
+}
+#deathmatch-leaders:not([hidden]) {
+  --dm-size: min(42px, 4.1vh, calc(76 * var(--game-vw, 1vw) / 20));
+  position: absolute;
+  top: clamp(30px, 4vh, 44px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: start;
+  gap: 3px;
+  text-align: center;
+  font-family: "Stratum2 Condensed", sans-serif;
+  text-shadow: 0 1px 3px #000;
+}
+.dm-player {
+  width: var(--dm-size);
+  color: #ccc;
+}
+.dm-avatar {
+  width: var(--dm-size);
+  height: var(--dm-size);
+  object-fit: cover;
+  display: block;
+  border: 2px solid var(--ct-color);
+  background: #24282c;
+}
+.dm-player.t .dm-avatar {
+  border-color: var(--t-color);
+}
+.dm-player.you .dm-avatar {
+  border-color: #fff;
+}
+.dm-player.dead .dm-avatar {
+  filter: grayscale(1) brightness(0.45);
+}
+.dm-player strong {
+  display: block;
+  margin-top: 3px;
+  border-top: 2px solid #aaa8;
+  background: #13151960;
+  font-size: clamp(14px, 1.8vh, 21px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.dm-player.you strong {
+  color: #fff;
+  border-color: white;
+}
+.dm-weapon {
+  display: block;
+  width: 95%;
+  height: clamp(10px, 1.4vh, 16px);
+  object-fit: contain;
+  margin: 5px auto 0;
+}
+#deathmatch-status:not([hidden]) {
+  position: absolute;
+  left: 50%;
+  bottom: 14%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 80%;
+  padding: 12px 24px;
+  border-inline: 1px solid #ccc;
+  background: #202020b3;
+  color: #ddd;
+  font:
+    700 14px "Stratum2 Condensed",
+    sans-serif;
+  text-align: center;
+}
+#hud.deathmatch .radar-wrap:not(.expanded) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#hud.deathmatch .radar-wrap:not(.expanded) #radar {
+  width: clamp(165px, 25vh, 250px);
+  height: clamp(165px, 25vh, 250px);
+  border-radius: 50%;
+}
+#hud.deathmatch .radar-wrap:not(.expanded) #location {
+  order: 1;
+  margin: 14px 0 0;
+  color: #eee;
+  letter-spacing: 0;
+  font-size: 18px;
+}

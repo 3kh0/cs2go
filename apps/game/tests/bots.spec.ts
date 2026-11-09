@@ -14,7 +14,7 @@ test("bots react to visible contacts, remember lost contacts, and conserve reloa
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await page.locator("#play").evaluate((button) => {
-    button.onclick = () => window.__game.start("deathmatch");
+    button.onclick = () => window.__game.start("practice");
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -55,6 +55,8 @@ test("bots react to visible contacts, remember lost contacts, and conserve reloa
     const reloading = bot.reloadTime > 0;
     game.botCombat(bot, undefined, 10);
     const ammunition = { loaded: bot.ammo, reserve: bot.reserve };
+    // Exercise shooting with finite bomb-mode reserves after the reload check.
+    game.mode = "casual";
     game.position.set(-17, 0, 16);
     game.health = 100;
     game.armor = 0;
@@ -75,7 +77,8 @@ test("bots react to visible contacts, remember lost contacts, and conserve reloa
     game.botCombat(bot, contact, 1 / 16);
     const friendlyRounds = bot.ammo;
     const laneReposition = bot.reposition && bot.tactic > 0 && bot.nav === 0;
-    game.mode = "deathmatch";
+    // Practice still uses finite shell reserves; Deathmatch intentionally does not.
+    game.mode = "practice";
     bot.rig.weaponIndex = 10;
     bot.ammo = 0;
     bot.reserve = 3;

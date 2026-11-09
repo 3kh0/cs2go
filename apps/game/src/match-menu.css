@@ -460,95 +460,152 @@
   }
 }
 
-#menu[data-session="multi"] .home-match-card .match-browser {
+/* Panorama's directchallenge screen: large icon actions left, shared-code
+   header and content right. Lobby transport remains CS2GO's six-digit PIN. */
+#menu[data-session="multi"] .match-browser {
+  display: grid;
+  grid-template-columns: minmax(240px, 350px) minmax(320px, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: 32px;
+  row-gap: 0;
+  padding: 32px max(24px, 9%);
+  align-items: stretch;
+}
+#menu[data-session="multi"] #multiplayer-options:not([hidden]) {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 1 / 3;
+  grid-template-columns: subgrid;
+  grid-template-rows: subgrid;
+  padding: 0;
+  background: transparent;
+}
+.private-match-actions {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+#menu #multiplayer-options .private-match-actions button {
+  display: flex;
+  align-items: stretch;
+  text-align: left;
+  width: 100%;
+  min-height: 112px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: rgb(0 0 0 / 20%);
+  color: #d9d9d9;
+  font-family: Stratum2, sans-serif;
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+#menu #multiplayer-options .private-match-actions button:hover {
+  background: rgb(0 0 0 / 62%);
+  color: white;
+  filter: none;
+}
+.private-action-icon {
+  flex: 0 0 94px;
+  display: grid;
+  place-items: center;
+  background: rgb(50 50 50 / 90%);
+  color: #a7dced;
+  font-size: 68px;
+  font-weight: 400;
+}
+.private-action-icon svg {
+  width: 54px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+}
+.private-match-actions button > span + span {
+  padding: 14px;
+}
+.private-match-actions strong {
+  display: block;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+.private-match-actions small {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: inherit;
+}
+.private-match-details {
+  min-width: 0;
+  grid-column: 2;
+  background: rgb(0 0 0 / 20%);
+}
+.private-match-heading {
+  display: flex;
+  height: auto;
   gap: 24px;
+  align-items: center;
+  padding: 24px 28px;
+  margin: 0;
+  border: 0;
+  background: rgb(0 0 0 / 55%);
 }
-#menu .match-browser #multiplayer-options {
-  flex-basis: 280px;
-  padding: 20px;
-  border-top: 2px solid #b2efff80;
-  background: linear-gradient(135deg, #1d2b36d9, #26323ba6);
-  box-shadow: 0 3px 12px #10182025;
+.private-match-heading img {
+  width: 64px;
+  height: 64px;
 }
-.lobby-kicker {
-  color: #abc0cb;
-  font-size: 10px;
-  letter-spacing: 1.5px;
+.private-match-heading span {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ccc;
 }
-.lobby-heading h2 {
-  margin: 4px 0 20px;
-  color: #eef5f7;
+.private-match-heading h2 {
+  margin: 6px 0 0;
   font:
-    400 28px "Stratum2 Condensed",
+    700 28px Stratum2,
     sans-serif;
+  color: #eee;
+}
+.private-match-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  padding: 16px 28px 0;
 }
 #multiplayer-options label {
-  margin: 12px 0 6px;
-  color: #bccbd3;
+  margin: 0 0 8px;
   font:
-    700 11px "Stratum2",
+    700 14px Stratum2,
     sans-serif;
-  letter-spacing: 1px;
+  color: #ccc;
 }
-#multiplayer-options select {
+#multiplayer-options :is(input, select) {
+  min-width: 0;
   width: 100%;
-  min-height: 36px;
+  height: 42px;
+  min-height: 42px;
+  margin: 0;
   padding: 6px 10px;
-  color: #e9f2f6;
-  border: 1px solid #ffffff26;
-  border-radius: 1px;
-  background: #16232ca6;
+  border: 0;
+  border-bottom: 2px solid #ffffff80;
+  border-radius: 0;
+  background: rgb(0 0 0 / 30%);
+  color: #e9e9e9;
   font:
-    400 15px "Stratum2",
+    400 19px Stratum2,
     sans-serif;
-}
-#menu #multiplayer-options #match-create {
-  width: 100%;
-  margin-top: 14px;
-  padding: 10px;
-  border: 1px solid #b2efff50;
-  background: #9ad8ec20;
-  color: #d1f1fb;
-  font:
-    700 14px "Stratum2",
-    sans-serif;
-  letter-spacing: 0.5px;
-}
-#menu #multiplayer-options #match-create:hover {
-  background: #b2efff38;
-  border-color: #b2efff;
-}
-.lobby-divider {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 22px 0 16px;
-  color: #a5b5be;
-  font-size: 10px;
-  white-space: nowrap;
-}
-.lobby-divider::before,
-.lobby-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #ffffff26;
 }
 #multiplayer-options #match-room {
-  height: 48px;
-  padding: 8px 12px;
-  text-align: center;
-  color: #e7f6fc;
-  background: #101c2670;
-  border: 1px solid #ffffff38;
-  border-radius: 1px;
-  font:
-    400 26px "Stratum2 Monodigit",
-    sans-serif;
-  letter-spacing: 6px;
+  letter-spacing: 2px;
 }
-#multiplayer-options #match-room::placeholder {
-  color: #ffffff35;
+#multiplayer-options input::placeholder {
+  color: #c4c4c4;
 }
 #multiplayer-options :is(input, select, button):focus-visible {
   outline: 2px solid #b2efff;
@@ -556,20 +613,52 @@
 }
 #lobby-help,
 #match-status {
-  margin: 10px 0 0;
-  font-size: 12px;
+  margin: 12px 28px;
+  font-size: 14px;
   line-height: 1.4;
 }
 #lobby-help {
-  color: #b3c3cd;
+  color: #ccc;
 }
-.lobby-heading {
-  display: block;
-  height: auto;
-  margin: 0 0 16px;
-  padding: 0;
-  border: 0;
+#menu[data-session="multi"] .match-maps {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 12px 28px 24px;
+  background: rgb(0 0 0 / 20%);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
 }
-.lobby-heading h2 {
-  margin-bottom: 0;
+#menu[data-session="multi"] .match-maps .home-map-art {
+  max-width: none;
+  height: clamp(130px, 22vh, 240px);
+}
+#menu[data-session="multi"] .map-badge {
+  width: 72px;
+}
+#menu[data-session="multi"] .map-card-caption {
+  font-size: 20px;
+  bottom: 8px;
+}
+@media (max-width: 900px) {
+  #menu[data-session="multi"] .match-browser {
+    padding: 20px;
+    column-gap: 20px;
+    grid-template-columns: minmax(220px, 1fr) minmax(320px, 1.4fr);
+  }
+  .private-action-icon {
+    flex-basis: 64px;
+    font-size: 48px;
+  }
+  .private-match-actions strong {
+    font-size: 18px;
+  }
+  .private-match-fields {
+    gap: 12px;
+    padding-inline: 20px;
+  }
+}
+#multiplayer-options #match-server {
+  gap: 8px;
+  font-size: 16px;
+  white-space: nowrap;
 }

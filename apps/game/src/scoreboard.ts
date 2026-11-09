@@ -10,6 +10,7 @@ export type ScorePlayer = {
   team: "ct" | "t";
   alive: boolean;
   kills: number;
+  score?: number;
   deaths: number;
   mvps: number;
   bot?: boolean;
@@ -93,11 +94,16 @@ export function renderScoreboard(board: Board) {
       : `${Math.floor(board.seconds / 60)}:${String(board.seconds % 60).padStart(2, "0")}`;
   const localTeam = board.rows.find((player) => player.id === "player")?.team;
   const fragment = document.createDocumentFragment();
+  const deathmatch = board.mode === "deathmatch";
   for (const team of ["ct", "t"] as const) {
+    if (deathmatch && team === "t") break;
     if (team === "t" && board.teamMode) fragment.append(history(board));
-    const players = board.rows.filter((r) => r.team === team);
+    const players = deathmatch ? board.rows : board.rows.filter((r) => r.team === team);
     const section = make("section", `score-team ${team}`);
-    section.setAttribute("aria-label", team === "ct" ? "Counter-Terrorists" : "Terrorists");
+    section.setAttribute(
+      "aria-label",
+      deathmatch ? "Free for all standings" : team === "ct" ? "Counter-Terrorists" : "Terrorists",
+    );
     const aside = make("div", "score-team-summary");
     aside.append(
       make(
@@ -116,10 +122,21 @@ export function renderScoreboard(board: Board) {
     );
     const table = make("div", "score-team-table");
     const header = make("div", "scoreboard-head");
-    for (const label of ["", "", "", "", "Equipment", "Money", "Kills", "Deaths", "K/D", "MVPs"])
+    for (const label of [
+      "",
+      "",
+      "",
+      "",
+      "Equipment",
+      deathmatch ? "Points" : "Money",
+      "Kills",
+      "Deaths",
+      "K/D",
+      deathmatch ? "Rank" : "MVPs",
+    ])
       header.append(make("span", "", label));
     table.append(header);
-    for (const player of players) {
+    for (const [rank, player] of players.entries()) {
       const row = make(
         "div",
         `score-row ${player.id === "player" ? "you" : "bot"} ${player.alive ? "alive" : "dead"}`,
@@ -140,7 +157,7 @@ export function renderScoreboard(board: Board) {
         status.setAttribute("aria-label", status.title);
       }
       const avatar = make("span", "score-avatar");
-      const fallback = assetUrl(`/icons/team-${team}.png`);
+      const fallback = assetUrl(`/icons/team-${player.team}.png`);
       const portrait = image(
         player.avatar || (player.id === "player" && playerAvatar()) || fallback,
       );
@@ -189,10 +206,15 @@ export function renderScoreboard(board: Board) {
       const cash = make(
         "span",
         "score-cash",
-        player.money === undefined ? "" : `$${player.money.toLocaleString()}`,
+        deathmatch
+          ? String(player.score ?? 0)
+          : player.money === undefined
+            ? ""
+            : `$${player.money.toLocaleString()}`,
       );
       const mvps = make("span", "score-mvps");
-      if (player.mvps) {
+      if (deathmatch) mvps.textContent = String(rank + 1);
+      else if (player.mvps) {
         mvps.append(image("/ui/match/star.svg", "MVP"), make("span", "", String(player.mvps)));
         mvps.title = `${player.mvps} round MVP${player.mvps === 1 ? "" : "s"}`;
       }
@@ -210,7 +232,8 @@ export function renderScoreboard(board: Board) {
       );
       table.append(row);
     }
-    section.append(aside, table);
+    if (deathmatch) section.append(table);
+    else section.append(aside, table);
     fragment.append(section);
   }
   document.getElementById("scoreboard-rows")!.replaceChildren(fragment);

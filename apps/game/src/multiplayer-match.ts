@@ -1,3 +1,4 @@
+import { hideDeathcam } from "./deathcam";
 import { equippedKnives } from "./equipped-knives";
 import { weaponPrice } from "./economy";
 import * as T from "three";
@@ -396,6 +397,8 @@ export class MultiplayerMatch {
       g.utility.selected = null;
       g.utility.blind.clear();
       g.deathBannerUntil = 0;
+      g.deathDamage.reset();
+      hideDeathcam();
       document.getElementById("death-banner")!.classList.add("hidden");
       // The authoritative instances and sidearm state were just applied above.
       g.groundInventory.reset(true);
@@ -483,7 +486,11 @@ export class MultiplayerMatch {
     }
     this.health = local.health;
     for (const event of message.events) {
-      if (event.kind === "shot") {
+      if (event.kind === "hurt") {
+        if (event.victim === local.id) g.deathDamage.record(event.attacker, "taken", event.damage);
+        else if (event.attacker === local.id)
+          g.deathDamage.record(event.victim, "given", event.damage);
+      } else if (event.kind === "shot") {
         if (event.shooter === local.id && event.weapon === local.weapon && !event.pellet) {
           g.alternateShot = !!event.alternate;
           g.lastShot = local.ammo === 0;
@@ -607,6 +614,8 @@ export class MultiplayerMatch {
           event.utility ? grenadeData[event.utility].name : undefined,
           {
             appearance: event.appearance,
+            killerId: event.killer,
+            killerAvatar: message.players.find((p) => p.id === event.killer)?.avatar ?? undefined,
             killerTeam: message.players.find((p) => p.id === event.killer)?.team,
             victimTeam: message.players.find((p) => p.id === event.victim)?.team,
           },

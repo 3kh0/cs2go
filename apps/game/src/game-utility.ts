@@ -99,6 +99,7 @@ export class GameUtility {
     this.game = game;
   }
   buy(kind: GrenadeKind) {
+    if (this.game.mode === "deathmatch") return false;
     if (this.game.network) {
       this.game.network.request.grenadeBuy = kind;
       return true;
@@ -715,7 +716,13 @@ export class GameUtility {
     const g = this.game;
     const hurt = (id: Owner, position: T.Vector3) => {
       const actor = id === "player" ? g : g.bots[id];
-      if (actor.health <= 0 || (id === "player" && (g.dead || g.invulnerable > 0))) return;
+      if (
+        actor.health <= 0 ||
+        (id === "player"
+          ? g.dead || g.invulnerable > 0
+          : g.mode === "deathmatch" && g.bots[id].spawnProtection > 0)
+      )
+        return;
       const center = this.actorCenter.copy(position);
       center.y += 0.8;
       const distance = center.distanceTo(effect.position);
@@ -745,13 +752,15 @@ export class GameUtility {
         damage = result.healthDamage;
         actor.armor = result.armor;
       }
+      const attacker = effect.owner === "player" ? "player" : g.bots[effect.owner];
+      if (attacker)
+        g.recordDeathDamage(id === "player" ? "player" : g.bots[id], attacker, Math.floor(damage));
       actor.health = Math.max(0, actor.health - Math.floor(damage));
       if (id === "player") {
         g.damage = 0.2;
         if (damage > 0) g.groundInventory.invalidateEquipment();
       }
       if (actor.health > 0) return;
-      const attacker = effect.owner === "player" ? "player" : g.bots[effect.owner];
       if (attacker && id !== effect.owner) g.rewardKill(attacker, actor.team, 0);
       actor.deaths++;
       if (id === "player") {
@@ -779,11 +788,6 @@ export class GameUtility {
         false,
         grenadeData[effect.kind].name,
       );
-      if (
-        g.mode === "deathmatch" &&
-        (g.kills >= 20 || (attacker !== "player" && attacker?.kills >= 20))
-      )
-        g.finish();
     };
     hurt("player", g.position);
     g.bots.forEach((b, i) => hurt(i, b.group.position));

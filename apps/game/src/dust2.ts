@@ -23,6 +23,7 @@ import { Navigation } from "./navigation";
 import { loadNativeMapSky } from "./native-map-sky";
 import { applySourceSelfIllumination, type SourceSelfIllumination } from "./source-self-illum";
 import { loadNativeMapProbes, applyNativeMapProbes } from "./native-map-probes";
+import { loadSourceReflections } from "./source-reflections";
 import { loadNativeMapLayers, applyNativeMapLayers } from "./native-map-layers";
 import { BreakableWorld, bindBreakablePhysics } from "@cs2go/simulation/breakables";
 import { NativeMapBreakableView, type NativeBreakableManifest } from "./map-breakable-view";
@@ -74,6 +75,7 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     nativeSky,
     nativeMaterials,
     nativeProbes,
+    nativeReflections,
     nativeLayers,
     breakableData,
   ] = await Promise.all([
@@ -99,6 +101,13 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     sourceLighting
       ? undefined
       : loadNativeMapProbes(renderer, `/models/maps/${id}-lighting/gpu-probes/`),
+    sourceLighting
+      ? undefined
+      : loadSourceReflections(renderer, true, {
+          directory: `/models/maps/${id}-lighting/reflections/`,
+          manifest: "source.json",
+          volumes: 58,
+        }),
     sourceLighting ? undefined : loadNativeMapLayers(renderer, id),
     id === "mirage"
       ? assetFetch(`/models/maps/${id}-breakables.json`).then(async (r) => {
@@ -296,6 +305,8 @@ export async function loadNativeMap(scene: T.Scene, renderer: T.WebGLRenderer, i
     triggers: data.triggers,
     ladders: data.ladders,
     sourceLighting,
+    nativeProbes,
+    nativeReflections,
     grade,
     root,
     scenery: asset.scene,

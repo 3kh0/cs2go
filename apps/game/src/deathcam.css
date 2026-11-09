@@ -1,0 +1,151 @@
+/* Native death presentation is reconstructed from live captures, not an
+   extracted engine post-process. Keep HUD legible above the scene fade. */
+#death-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 45%, #38050015 15%, #390000a8 70%, #160000ed), #34000040;
+  animation: death-scene-fade 2s ease-in forwards;
+}
+@keyframes death-scene-fade {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  55% {
+    background-color: #23000050;
+  }
+  100% {
+    opacity: 1;
+    background-color: #000d;
+  }
+}
+.deathcam-active :is(.match-top, #deathmatch-leaders, .radar-wrap, #killfeed, #telemetry) {
+  z-index: 2;
+}
+.deathcam-active :is(#crosshair, .hud-bottom, #inventory) {
+  visibility: hidden;
+}
+/* Shipped huddeathpanel.vcss: 410 px content + 150 px item, 80 px avatar
+   frame / 66 px image, 300 ms linear opacity entrance, 3 px red/green bars.
+   Scale Panorama's 1080p canvas to the active game viewport. */
+#hud #death-banner {
+  --death-unit: calc(var(--game-height, 100vh) / 1080);
+  z-index: 3;
+  bottom: auto;
+  top: 50%;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  width: min(calc(560 * var(--death-unit)), calc(100% - 40px));
+  border: 0;
+  background: rgb(0 0 0 / 50%);
+  box-shadow: none;
+  animation: death-card-enter 0.3s linear both;
+}
+.death-card-content {
+  flex: 1;
+  min-width: 0;
+}
+.death-card-main {
+  display: flex;
+  align-items: center;
+  min-height: calc(80 * var(--death-unit));
+}
+.death-avatar-frame {
+  flex: 0 0 calc(80 * var(--death-unit));
+  height: calc(80 * var(--death-unit));
+  display: grid;
+  place-items: center;
+}
+#death-avatar {
+  width: calc(66 * var(--death-unit));
+  height: calc(66 * var(--death-unit));
+  border-radius: 3px;
+  object-fit: cover;
+  background: #151515;
+}
+#death-banner .death-details {
+  padding: 0;
+}
+#death-banner #death-killer {
+  color: #ccc;
+  font-size: calc(24 * var(--death-unit));
+  height: calc(24 * var(--death-unit));
+  line-height: 1;
+  margin: 0 0 calc(5 * var(--death-unit)) calc(8 * var(--death-unit));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#death-banner .death-details > div {
+  padding-left: calc(8 * var(--death-unit));
+  color: #c93121;
+  font-size: calc(18 * var(--death-unit));
+  max-height: calc(42 * var(--death-unit));
+  line-height: 1.15;
+  overflow: hidden;
+  font-style: italic;
+  font-weight: 700;
+}
+#death-banner :is(.death-message, #death-weapon) {
+  color: inherit;
+}
+.death-weapon-frame {
+  flex: 0 0 calc(150 * var(--death-unit));
+  border-left: 2px solid #25252540;
+  display: grid;
+  place-items: center;
+}
+#death-banner #death-weapon-icon {
+  width: 100%;
+  height: calc(80 * var(--death-unit));
+  padding: 0;
+  border: 0;
+}
+.death-damage {
+  position: relative;
+  padding: calc(4 * var(--death-unit)) calc(10 * var(--death-unit));
+  font-size: calc(18 * var(--death-unit));
+  line-height: 1.25;
+  color: #aaa;
+  --damage-color: red;
+}
+.death-damage.taken {
+  border-top: 2px solid #25252540;
+}
+.death-damage.given {
+  --damage-color: green;
+}
+.death-damage strong {
+  color: #eee;
+  font-weight: 400;
+}
+.death-damage i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: calc(100% * var(--damage-fraction));
+  height: 3px;
+  background: var(--damage-color);
+}
+@keyframes death-card-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #death-fade {
+    animation: none;
+  }
+  #hud #death-banner {
+    animation: none;
+  }
+}

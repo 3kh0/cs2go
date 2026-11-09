@@ -1,4 +1,8 @@
+import { deathmatchKillPoints } from "./deathmatch-scoring";
+import { DeathDamage, showDeathcam, hideDeathcam } from "./deathcam";
+import { updateDeathmatchHud } from "./deathmatch-hud";
 import { equippedKnives, equipKnife } from "./equipped-knives";
+import { deathmatchSpawnPool, chooseDeathmatchSpawn } from "./deathmatch-spawns";
 import type { BreakableDamageKind } from "@cs2go/simulation/breakables";
 import { BOMB_DRAW_DURATION } from "./bomb-presentation";
 import { prepareMatchMedia } from "./match-media";
@@ -84,7 +88,7 @@ import {
 } from "./recoil";
 import { reloadProgress as networkReloadProgress } from "@cs2go/simulation/weapon-actions";
 import { ActorReflections } from "./actor-reflections";
-import { registerActorLighting, updateActorLighting } from "./actor-lighting";
+import { registerActorLighting, updateActorLighting, setActorReflection } from "./actor-lighting";
 import {
   sampleSourceProbe,
   sampleSourceProbeSun,
@@ -225,6 +229,8 @@ type Bot = {
   kills: number;
   deaths: number;
   respawn: number;
+  spawnProtection: number;
+  deathmatchScore: number;
   shot: number;
   buyTime: number;
   reaction: number;
@@ -491,6 +497,33 @@ export class Game {
   time = 300;
   kills = 0;
   deaths = 0;
+  deathmatchScore = 0;
+  get deathmatchStandings() {
+    return [
+      {
+        id: "player" as const,
+        name: playerName(),
+        score: this.deathmatchScore,
+        kills: this.kills,
+        deaths: this.deaths,
+        weapon: this.selected,
+        team: this.team,
+        avatar: playerAvatar(),
+        alive: !this.dead && this.health > 0,
+      },
+      ...this.bots.map((bot, id) => ({
+        id,
+        name: bot.name,
+        score: bot.deathmatchScore,
+        kills: bot.kills,
+        deaths: bot.deaths,
+        weapon: bot.rig.weaponIndex,
+        team: bot.team,
+        avatar: null,
+        alive: bot.health > 0,
+      })),
+    ].sort((a, b) => b.score - a.score || b.kills - a.kills || a.deaths - b.deaths);
+  }
   health = 100;
   armor = 100;
   assetsReady = false;
@@ -662,6 +695,7 @@ export class Game {
   fpsTime = 0;
   tick = 0;
   deathBannerUntil = 0;
+  readonly deathDamage = new DeathDamage();
   sway = 0;
   footsteps = 0;
   supported = true;
@@ -1455,6 +1489,8 @@ export class Game {
   matchLoading = false;
   start(mode: Mode, options: { bots?: boolean; lock?: boolean } = {}) {
     this.chat.reset();
+    hideDeathcam();
+    this.deathDamage.reset();
     this.network?.disconnect();
     this.network = undefined;
     hideRoundBanner();
@@ -1487,8 +1523,9 @@ export class Game {
     this.roundPause = 0;
     this.bomb = null;
     this.bombMesh.visible = false;
-    this.time = 300;
-    this.kills = this.deaths = 0;
+    this.time = this.mode === "deathmatch" ? 600 : 300;
+    this.kills = this.deaths = this.deathmatchScore = 0;
+    this.primary = null;
     this.dead = 0;
     for (const id of [
       "menu",
@@ -1504,7 +1541,7 @@ export class Game {
     el("killfeed").replaceChildren();
     this.magazines = weapons.map((w) => ({ ammo: w.mag, reserve: w.reserve }));
     this.bots.forEach((b) => {
-      b.kills = b.deaths = 0;
+      b.kills = b.deaths = b.deathmatchScore = 0;
       b.money = this.rules.startMoney;
     });
     if (this.teamMode) this.startRound();
@@ -1520,6 +1557,8 @@ export class Game {
   }
   menu() {
     this.chat.reset();
+    hideDeathcam();
+    this.deathDamage.reset();
     this.network?.disconnect();
     this.network = undefined;
     this.notices.reset();
@@ -1604,7 +1643,22 @@ export class Game {
     this.setScope((this.scopeLevel + 1) % (weapons[this.selected].zoomLevels + 1));
     this.sound("scope");
   }
+  deathmatchSpawn(previous: T.Vector3, bot?: Bot) {
+    if (this.mode !== "deathmatch" || !this.world.collision) return undefined;
+    const actors = this.bots
+      .filter((other) => other !== bot && other.health > 0 && other.group.visible)
+      .map((other) => other.group.position);
+    if (bot && !this.dead && this.health > 0) actors.push(this.position);
+    return chooseDeathmatchSpawn(
+      deathmatchSpawnPool(this.world.navigation, this.world.collision),
+      actors,
+      previous,
+      (from, to) => this.visible(from, to),
+    );
+  }
   spawnPlayer(preserve = false) {
+    const deathmatchLoadout =
+      this.mode === "deathmatch" ? { primary: this.primary, secondary: this.secondary } : null;
     this.dust?.ball.reset();
     if (!preserve) this.suppressors = weapons.map(() => new SuppressorState());
     for (const state of this.suppressors) state.cancel();
@@ -1630,7 +1684,9 @@ export class Game {
     this.rescope = this.boltTime = 0;
     this.weaponCooldowns = weapons.map(() => 0);
     this.reloadLockouts.fill(0);
-    if (this.dust) {
+    const deathmatchSpawn = this.deathmatchSpawn(this.position);
+    if (deathmatchSpawn) this.position.copy(deathmatchSpawn);
+    else if (this.dust) {
       this.position.fromArray(this.dust.navigation.data.spawns[this.team][0]);
       const spawnFloor = this.dust.collision.floor(
         this.position.x,
@@ -1648,12 +1704,16 @@ export class Game {
     this.duckHeld = this.duckAccepted = false;
     this.plantLook = 0;
     this.health = 100;
+    this.deathDamage.reset();
+    hideDeathcam();
     this.armor = this.teamMode ? (this.rules.freeArmor ? 100 : 0) : 100;
     this.helmet = this.teamMode ? this.rules.freeArmor : true;
     this.defuseKit = this.teamMode && this.team === "ct" && this.rules.freeKit;
     this.yaw = this.teamMode
       ? (this.dust?.navigation.data.spawnAngles?.[this.team][0] ?? 0)
-      : -0.12;
+      : this.mode === "deathmatch"
+        ? Math.random() * Math.PI * 2
+        : -0.12;
     this.pitch = 0;
     this.aimPunch = createAimPunch();
     this.weaponRecoil = weapons.map(() => createWeaponRecoil());
@@ -1663,7 +1723,7 @@ export class Game {
     this.dead = 0;
     toggle("death-banner", false);
     this.reload = this.shots = this.cooldown = this.drawTime = 0;
-    this.invulnerable = this.teamMode ? 0 : 2;
+    this.invulnerable = this.mode === "deathmatch" ? 10 : this.teamMode ? 0 : 2;
     if (this.soundscape.currentMusic === "deathcam") this.soundscape.playMusic(null);
     this.magazines = weapons.map((w) => ({ ammo: w.mag, reserve: w.reserve }));
     this.primary = null;
@@ -1673,6 +1733,10 @@ export class Game {
       this.team === "t"
         ? 7
         : (this.groundInventory.loadouts.ct.find((id) => id === 2 || id === 12) ?? 2);
+    if (deathmatchLoadout) {
+      this.primary = deathmatchLoadout.primary ?? (this.team === "t" ? 0 : 1);
+      this.secondary = deathmatchLoadout.secondary;
+    }
     if (saved) {
       this.primary = saved.primary;
       this.secondary = saved.secondary;
@@ -1793,6 +1857,7 @@ export class Game {
   }
   canBuy() {
     if (!this.active || this.dead || this.roundPause > 0) return false;
+    if (this.mode === "deathmatch") return this.invulnerable > 0;
     if (!this.teamMode) return true;
     if (this.buyRemaining <= 0 || !this.dust) return false;
     return mapTriggers(this.dust ?? {}).buyZones.contains(this.position, this.team, {
@@ -1825,6 +1890,11 @@ export class Game {
     const delta = friendly ? -1 : 1;
     if (attacker === "player") this.kills += delta;
     else attacker.kills += delta;
+    if (this.mode === "deathmatch") {
+      const points = deathmatchKillPoints(weapon);
+      if (attacker === "player") this.deathmatchScore += points;
+      else attacker.deathmatchScore += points;
+    }
     if (!this.teamMode) return;
     const mode = this.competitive ? "competitive" : "casual";
     const amount = friendly ? this.rules.teamKillPenalty : killReward(weapon, mode);
@@ -1838,8 +1908,10 @@ export class Game {
     weapon: number,
     attackerTeam: AgentTeam,
     kind: "bullet" | "other" = "bullet",
+    attacker: Bot | "player" = "player",
   ) {
     const victim = actor === "player" ? this : actor;
+    if (this.mode === "deathmatch" && actor !== "player" && actor.spawnProtection > 0) return;
     if (this.teamMode && victim.team === attackerTeam)
       damage *= friendlyFireScale(this.competitive ? "competitive" : "casual", kind);
     const region = hitRegion(!!data.head, data.height ?? 1.1, data.crouch);
@@ -1853,6 +1925,14 @@ export class Game {
     if (actor === "player" && result.healthDamage > 0) this.groundInventory.invalidateEquipment();
     victim.armor = result.armor;
     victim.health = Math.max(0, victim.health - Math.floor(result.healthDamage));
+    this.recordDeathDamage(actor, attacker, Math.floor(result.healthDamage));
+  }
+  recordDeathDamage(victim: Bot | "player", attacker: Bot | "player", damage: number) {
+    if (victim === attacker) return;
+    if (victim === "player" && attacker !== "player")
+      this.deathDamage.record(`bot:${this.bots.indexOf(attacker)}`, "taken", damage);
+    else if (attacker === "player" && victim !== "player")
+      this.deathDamage.record(`bot:${this.bots.indexOf(victim)}`, "given", damage);
   }
   updateBuyMenu() {
     this.groundInventory.updateEquipmentRefunds();
@@ -1864,13 +1944,19 @@ export class Game {
     const indices = this.inventory();
     setText(
       "buy-money",
-      this.teamMode ? `$${this.money.toLocaleString()}` : "FREE PRACTICE LOADOUT",
+      this.teamMode
+        ? `$${this.money.toLocaleString()}`
+        : this.mode === "deathmatch"
+          ? "DEATHMATCH LOADOUT"
+          : "FREE PRACTICE LOADOUT",
     );
     const seconds = Math.max(0, Math.ceil(this.buyRemaining));
     setText(
       "buy-rules",
       !this.teamMode
-        ? "Practice - Unlimited buying"
+        ? this.mode === "deathmatch"
+          ? "Choose weapons during spawn protection"
+          : "Practice - Unlimited buying"
         : `Buy Time Remaining  ${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`,
     );
     setText("buy-wallet", this.teamMode ? `$${this.money.toLocaleString()}` : "");
@@ -2206,7 +2292,6 @@ export class Game {
       b.respawn = this.teamMode ? Infinity : this.mode === "practice" ? 1.8 : 3;
       if (this.teamMode) this.dropBomb(index);
       this.feed("YOU", b.name, false, this.selected);
-      if (this.mode === "deathmatch" && this.kills >= 20) this.finish();
     }
     this.updateUI();
   }
@@ -2379,6 +2464,8 @@ export class Game {
       kills: 0,
       deaths: 0,
       respawn: 0,
+      spawnProtection: 0,
+      deathmatchScore: 0,
       shot: 1,
       buyTime: 0,
       reaction: 0.8,
@@ -2400,7 +2487,12 @@ export class Game {
           kit: b.defuseKit,
         }
       : null;
-    if (this.dust) {
+    const deathmatchSpawn = this.deathmatchSpawn(b.group.position, b);
+    if (deathmatchSpawn) {
+      b.group.position.copy(deathmatchSpawn);
+      b.group.rotation.y = Math.random() * Math.PI * 2;
+      b.navArea = this.world.navigation.nearest(b.group.position);
+    } else if (this.dust) {
       const points = this.dust.navigation.data.spawns[b.team];
       const slot =
         this.bots.slice(0, index).filter((bot) => bot.team === b.team).length +
@@ -2422,7 +2514,13 @@ export class Game {
     b.report = b.tactic = b.reloadTime = b.burst = b.suppressTime = b.suppressShots = 0;
     b.lastSight.copy(b.group.position);
     b.reposition = false;
-    const weapon = saved?.weapon ?? (b.team === "t" ? 7 : 2);
+    const weapon =
+      saved?.weapon ??
+      (this.mode === "deathmatch"
+        ? [b.team === "t" ? 0 : 1, 3, 8, 10, b.team === "t" ? 26 : 11][index % 5]
+        : b.team === "t"
+          ? 7
+          : 2);
     b.aimPunch = createAimPunch();
     b.weaponRecoil = createWeaponRecoil();
     b.weaponAccuracy = createWeaponAccuracy();
@@ -2449,6 +2547,7 @@ export class Game {
     b.velocity.set(0, 0);
     b.facing = b.group.rotation.y;
     b.respawn = 0;
+    b.spawnProtection = this.mode === "deathmatch" ? 10 : 0;
     b.group.visible = true;
     setSoldierWeapon(
       b.rig,
@@ -2783,7 +2882,6 @@ export class Game {
               weapons[this.selected].zoomLevels > 1 && !this.scopeLevel,
               passed,
             );
-            if (this.mode === "deathmatch" && this.kills >= 20) this.finish();
           }
         } else if (
           data.normal &&
@@ -2823,6 +2921,8 @@ export class Game {
       appearance?: import("./weapon-instance").WeaponInstance;
       killerTeam?: AgentTeam;
       victimTeam?: AgentTeam;
+      killerId?: string;
+      killerAvatar?: string;
     },
   ) {
     if (!this.network && this.teamMode && !this.roundPause && !this.freezeTime) {
@@ -2869,6 +2969,12 @@ export class Game {
           : `/icons/buy/${nativeIcons[weaponIcons[weapon]] ?? weaponIcons[weapon]}.svg`
         : `/icons/buy/${utilityKind ? grenadeIcons[utilityKind] : "c4"}.svg`;
     if (victim === "YOU") {
+      const killerBot = this.bots.findIndex((b) => b.name === killer);
+      const killerTeam = metadata?.killerTeam ?? this.bots[killerBot]?.team ?? "t";
+      showDeathcam(
+        this.deathDamage.exchange(metadata?.killerId ?? `bot:${killerBot}`),
+        metadata?.killerAvatar ?? assetUrl(`/icons/team-${killerTeam}.png`),
+      );
       setText("death-killer", killer);
       el("death-killer").className =
         (metadata?.killerTeam ?? this.bots.find((b) => b.name === killer)?.team) === "ct"
@@ -2975,13 +3081,23 @@ export class Game {
     if (this.locked) document.exitPointerLock();
     toggle("pause", false);
     toggle("result", true);
-    el("result-title").textContent = (
-      this.teamMode ? this.teamScores[this.team] >= this.winTarget : this.kills >= 20
-    )
+    const leader = this.deathmatchStandings[0];
+    const won = this.teamMode
+      ? this.teamScores[this.team] >= this.winTarget
+      : this.mode === "deathmatch"
+        ? leader.id === "player"
+        : this.kills >= 20;
+    el("result-title").textContent = won
       ? "VICTORY."
-      : this.teamMode || this.bots.some((b) => b.kills >= 20)
-        ? "DEFEAT."
-        : "TIME’S UP.";
+      : this.mode === "practice"
+        ? "TIME’S UP."
+        : "DEFEAT.";
+    if (
+      this.mode === "deathmatch" &&
+      this.deathmatchStandings.filter((row) => row.score === leader.score).length > 1 &&
+      this.deathmatchScore === leader.score
+    )
+      el("result-title").textContent = "DRAW.";
     if (this.competitive && this.teamScores.t === 12 && this.teamScores.ct === 12)
       el("result-title").textContent = "DRAW.";
     this.soundscape.playMusic("end");
@@ -2993,7 +3109,9 @@ export class Game {
     el("result").dataset.team = this.team;
     el("result-score").textContent = this.teamMode
       ? `${this.teamScores[this.team]} : ${this.teamScores[this.team === "ct" ? "t" : "ct"]}`
-      : "";
+      : this.mode === "deathmatch"
+        ? `${this.deathmatchScore} POINTS`
+        : "";
     el("result-stats").textContent =
       `${this.kills} eliminations - ${this.deaths} deaths - ${this.deaths ? (this.kills / this.deaths).toFixed(2) : this.kills.toFixed(2)} K/D`;
   }
@@ -3149,6 +3267,14 @@ export class Game {
     this.hit = Math.max(0, this.hit - dt);
     this.damage = Math.max(0, this.damage - dt);
     this.invulnerable = Math.max(0, this.invulnerable - dt);
+    if (
+      this.mode === "deathmatch" &&
+      (Math.hypot(this.velocity.x, this.velocity.z) > 0.05 ||
+        this.firing ||
+        ["KeyW", "KeyA", "KeyS", "KeyD", "Space"].some((key) => this.keys.has(key)))
+    )
+      this.invulnerable = 0;
+    for (const bot of this.bots) bot.spawnProtection = Math.max(0, bot.spawnProtection - dt);
     this.shots = this.weaponRecoil[this.selected].index;
     advanceAimPunch(this.aimPunch, dt);
     for (let i = 0; i < this.weaponRecoil.length; i++) {
@@ -3232,6 +3358,9 @@ export class Game {
       }
     }
     if (this.dead) {
+      this.tick++;
+      this.updateBots(dt * 8, this.tick % 8);
+      this.moveBots(dt);
       this.dead -= dt;
       if (this.dead <= 0) {
         this.spawnPlayer();
@@ -3278,7 +3407,7 @@ export class Game {
         // after the shell enters the tube preserves it even before loop end.
         if (this.shellPhase === "loop" && !this.shellInserted && after >= phases.addAmmo) {
           this.ammo++;
-          this.reserve--;
+          if (this.mode !== "deathmatch") this.reserve--;
           this.shellInserted = true;
           this.updateUI();
         }
@@ -3311,9 +3440,13 @@ export class Game {
             this.reloadLockouts[this.selected],
             this.reload,
           );
-          const loaded = reloadMagazine(this.selected, this.ammo, this.reserve);
+          const loaded = reloadMagazine(
+            this.selected,
+            this.ammo,
+            this.mode === "deathmatch" ? weapons[this.selected].mag : this.reserve,
+          );
           this.ammo = loaded.ammo;
-          this.reserve = loaded.reserve;
+          if (this.mode !== "deathmatch") this.reserve = loaded.reserve;
           this.updateUI();
         }
       }
@@ -4230,6 +4363,8 @@ export class Game {
     this.duckCooldown = 0;
     this.duckTransitionRate = 15;
     this.dead = 0;
+    this.deathDamage.reset();
+    hideDeathcam();
     this.keys.clear();
     this.takeoverUseHeld = true;
     this.firing = false;
@@ -4467,9 +4602,9 @@ export class Game {
     };
     if (!this.dead && (!this.teamMode || b.team !== this.team))
       consider("player", this.position, this.firing);
-    if (this.teamMode)
+    if (this.teamMode || this.mode === "deathmatch")
       this.bots.forEach((other, index) => {
-        if (other.health > 0 && other.team !== b.team)
+        if (other !== b && other.health > 0 && (!this.teamMode || other.team !== b.team))
           consider(index, other.group.position, other.tracking);
       });
     candidates.sort((a, c) => a.score - c.score);
@@ -4528,7 +4663,7 @@ export class Game {
       const running = Math.hypot(this.velocity.x, this.velocity.z) > 3.5;
       if (
         !this.dead &&
-        b.team !== this.team &&
+        (!this.teamMode || b.team !== this.team) &&
         ((this.shotTime > 0 && distance < (this.isSuppressed(this.selected) ? 12 : 32)) ||
           (running && distance < 9))
       ) {
@@ -4557,11 +4692,15 @@ export class Game {
       if (!b.reloadTime) {
         if (weapon.reloadStyle === "shell") {
           b.ammo++;
-          b.reserve--;
+          if (this.mode !== "deathmatch") b.reserve--;
         } else {
-          const loaded = reloadMagazine(b.rig.weaponIndex, b.ammo, b.reserve);
+          const loaded = reloadMagazine(
+            b.rig.weaponIndex,
+            b.ammo,
+            this.mode === "deathmatch" ? weapon.mag : b.reserve,
+          );
           b.ammo = loaded.ammo;
-          b.reserve = loaded.reserve;
+          if (this.mode !== "deathmatch") b.reserve = loaded.reserve;
         }
         if (weapon.reloadStyle === "shell" && !target && b.ammo < weapon.mag && b.reserve > 0)
           b.reloadTime = weapon.reload;
@@ -4626,6 +4765,7 @@ export class Game {
     const aimError =
       botAimSpread(distanceToAim, b.speed, b.burst, suppressing ? 0 : b.reaction) +
       (suppressing ? 0.012 : 0);
+    b.spawnProtection = 0;
     b.ammo--;
     if (suppressing) b.suppressShots--;
     b.burst++;
@@ -4714,7 +4854,7 @@ export class Game {
         const damage = rawDamage * hitgroupMultiplier(head, data.height!, weapon.head, data.crouch);
         if (victim === "player") {
           if ((this.mode === "casual" && b.team === this.team) || this.invulnerable > 0) continue;
-          this.damageActor("player", damage, data, b.rig.weaponIndex, b.team);
+          this.damageActor("player", damage, data, b.rig.weaponIndex, b.team, "bullet", b);
           this.damage = 0.25;
           this.soundscape.play("damage");
           if (!this.health) {
@@ -4736,13 +4876,12 @@ export class Game {
               this.soundscape.playMusic("deathcam");
             this.soundscape.play("death");
             this.feed(b.name, "YOU", head, b.rig.weaponIndex, false, passed);
-            if (this.mode === "deathmatch" && b.kills >= 20) this.finish();
           }
           this.updateUI();
         } else {
           const other = this.bots[victim];
-          if (other.team === b.team && !this.competitive) continue;
-          this.damageActor(other, damage, data, b.rig.weaponIndex, b.team);
+          if (this.mode === "casual" && other.team === b.team) continue;
+          this.damageActor(other, damage, data, b.rig.weaponIndex, b.team, "bullet", b);
           other.memory.copy(b.group.position);
           other.alert = 5;
           other.tactic = 0;
@@ -5147,7 +5286,7 @@ export class Game {
     }
   }
   botSupport(b: Bot, x: number, z: number, ceiling: number, bottom: number) {
-    const nav = this.teamMode ? this.dust!.navigation : undefined;
+    const nav = this.world.navigation;
     return nav?.support(x, z, ceiling, bottom, nav.areas[b.navArea]);
   }
   botHullHeight(b: Bot) {
@@ -5188,7 +5327,7 @@ export class Game {
     return this.botLadderHulls;
   }
   stepBot(b: Bot, x: number, z: number) {
-    const nav = this.teamMode ? this.dust!.navigation : undefined,
+    const nav = this.world.navigation,
       pos = b.group.position;
     const ground = this.botSupport(b, x, z, pos.y + 0.46, pos.y - 8);
     // The original NAV regions already include Source's player hull and
@@ -5292,6 +5431,7 @@ export class Game {
         !!((currentArea?.flags ?? 0) & 0x10000) || !!((nextArea?.flags ?? 0) & 0x10000);
       // Lower before entering a short native NAV polygon. Remain lowered until
       // the standing hull actually clears the ceiling, even after its flag ends.
+      if (this.mode === "deathmatch" && b.moving) b.spawnProtection = 0;
       b.navCrouch = needsCrouch || (b.navCrouch && this.isBlocked(pos.x, pos.z, pos.y, 0.35, 1.65));
       const botHeight = this.botHullHeight(b);
       if (b.moving) {
@@ -5786,6 +5926,7 @@ export class Game {
         ping: this.network ? this.network.connection.ping : 0,
         kills: this.kills,
         deaths: this.deaths,
+        score: this.deathmatchScore,
         team: this.team,
         alive: !this.dead,
         mvps: this.mvpCounts.get("player") ?? 0,
@@ -5805,16 +5946,22 @@ export class Game {
         bot: !this.network,
         kills: b.kills,
         deaths: b.deaths,
+        score: b.deathmatchScore,
         team: b.team,
         alive: b.health > 0,
         mvps: this.mvpCounts.get(id) ?? 0,
         money: this.teamMode && b.team === this.team ? b.money : undefined,
-        weapon: b.team === this.team ? b.rig.weaponIndex : undefined,
-        armor: b.team === this.team ? b.armor : undefined,
-        helmet: b.team === this.team ? b.helmet : undefined,
-        kit: b.team === this.team ? b.defuseKit : undefined,
+        weapon: this.mode === "deathmatch" || b.team === this.team ? b.rig.weaponIndex : undefined,
+        armor: this.mode === "deathmatch" || b.team === this.team ? b.armor : undefined,
+        helmet: this.mode === "deathmatch" || b.team === this.team ? b.helmet : undefined,
+        kit: this.mode === "deathmatch" || b.team === this.team ? b.defuseKit : undefined,
       })),
-    ].sort((a, b) => b.kills - a.kills || a.deaths - b.deaths);
+    ].sort(
+      (a, b) =>
+        (this.mode === "deathmatch" ? b.score - a.score : 0) ||
+        b.kills - a.kills ||
+        a.deaths - b.deaths,
+    );
     const seconds = Math.max(
       0,
       Math.ceil(
@@ -5851,6 +5998,11 @@ export class Game {
   }
 
   updateUI() {
+    updateDeathmatchHud(
+      this.mode === "deathmatch",
+      this.mode === "deathmatch" ? this.deathmatchStandings : [],
+      this.dead ? 0 : this.invulnerable,
+    );
     const observer =
       this.dead && this.teamMode && this.spectatorMode === "first" ? this.spectated : undefined;
     const selected = observer?.rig.weaponIndex ?? this.selected;
@@ -6084,7 +6236,13 @@ export class Game {
       this.probeRotation,
       sampleSourceProbeSun,
       sampleSourceProbeLocalShadows,
+      source ? undefined : this.world === this.dust ? (this.dust?.nativeProbes ?? null) : null,
+      this.world === this.dust ? this.dust?.nativeReflections : undefined,
     );
+    // Unsupported native-cubemap devices must not fall back to the brightly
+    // lit armory used by cosmetic previews while standing in a dark room.
+    if (this.world === this.dust && !source && !this.dust?.nativeReflections)
+      setActorReflection(model, null);
   }
   updateSceneLighting(dt: number) {
     const source = this.world === this.dust && this.dust.sourceLighting;
@@ -6100,6 +6258,8 @@ export class Game {
         undefined,
         sampleSourceProbeSun,
         sampleSourceProbeLocalShadows,
+        source ? undefined : this.world === this.dust ? (this.dust?.nativeProbes ?? null) : null,
+        this.world === this.dust ? this.dust?.nativeReflections : undefined,
       );
     }
     if (this.bombMesh.visible) {
@@ -6113,6 +6273,8 @@ export class Game {
         undefined,
         sampleSourceProbeSun,
         sampleSourceProbeLocalShadows,
+        source ? undefined : this.world === this.dust ? (this.dust?.nativeProbes ?? null) : null,
+        this.world === this.dust ? this.dust?.nativeReflections : undefined,
       );
     }
     const ball = this.dust?.ball?.mesh;
@@ -6125,6 +6287,8 @@ export class Game {
         undefined,
         sampleSourceProbeSun,
         sampleSourceProbeLocalShadows,
+        source ? undefined : this.world === this.dust ? (this.dust?.nativeProbes ?? null) : null,
+        this.world === this.dust ? this.dust?.nativeReflections : undefined,
       );
     if (source) {
       // Viewmodels render in their own camera space; keep the map sun fixed in
@@ -6142,6 +6306,16 @@ export class Game {
         yaw = T.MathUtils.degToRad(sun.yaw);
       this.viewSun.color.setHex(sun.color);
       this.viewSun.intensity = sun.intensity;
+      if (this.world === this.dust && !this.dust.nativeProbes) {
+        // Conservative geometry visibility when the device cannot run LPVs;
+        // this fallback does not reconstruct the native indirect light field.
+        this.probePosition
+          .set(-Math.cos(pitch) * Math.cos(yaw), Math.sin(pitch), Math.cos(pitch) * Math.sin(yaw))
+          .multiplyScalar(150)
+          .add(this.camera.position);
+        if (!this.world.collision.visible(this.camera.position, this.probePosition))
+          this.viewSun.intensity = 0;
+      }
       this.viewSun.position
         .set(-Math.cos(pitch) * Math.cos(yaw), Math.sin(pitch), Math.cos(pitch) * Math.sin(yaw))
         .applyQuaternion(this.probeInverse.copy(this.camera.quaternion).invert());
@@ -6174,6 +6348,8 @@ export class Game {
         ]
       : [];
     this.actorReflections.update(this.renderer, reflectionActors);
+    if (this.world === this.dust && !source && !this.dust?.nativeReflections)
+      setActorReflection(viewModel, null);
   }
   get simulationRunning() {
     return this.active && !this.matchLoading;
@@ -6200,7 +6376,7 @@ export class Game {
     this.last = now;
     if (this.deathBannerUntil > 0 && now >= this.deathBannerUntil) {
       this.deathBannerUntil = 0;
-      toggle("death-banner", false);
+      hideDeathcam();
     }
     this.fpsTime += elapsed;
     if (this.fpsTime > 1) {

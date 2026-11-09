@@ -11,6 +11,10 @@ test("HUD keeps default silhouettes and skin names for painted weapons", async (
     const path = "/src/skins.ts";
     const { skinCatalog, skinChoices } = (await import(path)) as typeof import("../src/skins");
     const catalog = await skinCatalog();
+    const knifePath = "/src/equipped-knives.ts";
+    const { equipKnife } = (await import(knifePath)) as typeof import("../src/equipped-knives");
+    // This fixture paints the Bayonet, so equip it rather than relying on a faction default.
+    equipKnife(window.__game.team, 4, true);
     return [0, 2, 4].map((weapon) => {
       const skin = catalog.find((skin) => skin.weapon === weapon && skin.body === "legacy")!;
       skinChoices[weapon] = { id: skin.id, wear: 0.1, seed: 1 };

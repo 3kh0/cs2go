@@ -165,9 +165,9 @@ test("native homepage presents both agents, local navigation and a working match
   await expect(page.locator("#home-scenery")).toBeHidden();
   await expect(page.getByRole("group", { name: "Session type" }).getByRole("button")).toHaveText([
     "OFFLINE",
-    "ONLINE",
+    "PRIVATE MATCHMAKING",
   ]);
-  await page.getByRole("button", { name: "ONLINE", exact: true }).click();
+  await page.getByRole("button", { name: "PRIVATE MATCHMAKING", exact: true }).click();
   await expect(page.locator("#multiplayer-options")).toBeVisible();
   await page.getByRole("button", { name: "OFFLINE", exact: true }).click();
   await expect(page.locator("#multiplayer-options")).toBeHidden();
