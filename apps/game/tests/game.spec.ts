@@ -1,3 +1,4 @@
+import { teamChoiceVisible } from "./team-choice";
 import { test, expect } from "@playwright/test";
 import type { Game } from "../src/game";
 declare global {
@@ -68,7 +69,7 @@ test("real pointer lock, movement, jump, crouch, pause, and loadout", async ({ p
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -126,7 +127,7 @@ test("hitscan headshots, wall occlusion, spare-magazine reload, and target respa
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -183,7 +184,7 @@ test("bots navigate, damage the player, and respawn resets health and ammunition
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -234,7 +235,7 @@ test("supplied AWP mesh, two zoom levels, bolt lockout, body damage, reload, and
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -322,7 +323,7 @@ test("skinned agent gait, head tracking, and corpse poses", async ({ page }) => 
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -393,7 +394,7 @@ test("supplied weapon audio decodes, plays, and follows reload and AWP timing", 
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -515,7 +516,7 @@ test("wheel cycles and wraps; AWP hits aligned enemies once each with penetratio
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -617,7 +618,7 @@ test("native weapon parts follow reload and bolt clips and return to their seats
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -711,7 +712,7 @@ test("thin wood transmits a bullet but thick masonry stops it", async ({ page })
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -775,7 +776,7 @@ test("agent side selection, independent rigs, and live menu animation", async ({
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -813,7 +814,7 @@ test("agent side selection, independent rigs, and live menu animation", async ({
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -833,7 +834,7 @@ test("Dust II ledges release the player and A ramp's wall stays solid", async ({
   await page.goto("/");
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -925,7 +926,7 @@ test("releasing crouch under cover waits for enough room to stand", async ({ pag
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -962,7 +963,7 @@ test("CT ramp traversal and the local callout radar", async ({ page }) => {
   await page.goto("/");
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -1308,7 +1309,7 @@ test("spectator clicks cycle living teammates, wrap, and recover when the target
   await page.locator('[data-mode="competitive"]').click();
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -1364,7 +1365,7 @@ test("spectator chase avoids walls and corpses settle without losing visibility"
   await page.bringToFront();
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -1488,7 +1489,7 @@ test("spectator wheel modes provide first person, mouse orbit, and independent p
   await page.bringToFront();
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -1575,7 +1576,7 @@ test("Tab scoreboard groups teams, tracks alive players and records match progre
   await page.bringToFront();
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -1670,7 +1671,7 @@ test("Team default knife inventory, free primary purchases, slot switching and r
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -1746,7 +1747,7 @@ test("Bayonet slash and stab hit once, respect reach and cover, and cancel on sw
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -1825,7 +1826,7 @@ test("both teams keep native wrists on weapon contacts and reset poses", async (
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -1914,7 +1915,7 @@ test("native Bayonet clips animate fingers, return to idle, and inspection cance
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -2015,7 +2016,7 @@ test("firearm inspection cancels for shots, reloads, scopes, and switching witho
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }
@@ -2178,6 +2179,21 @@ test("default Butterfly and Karambit share knife slot and play source actions", 
   page.on("request", (r) => {
     if (new URL(r.url()).origin !== "http://127.0.0.1:5173") external.push(r.url());
   });
+  await page.addInitScript(() => {
+    // The fixture owns these three default knives; Loadout/Inventory no longer
+    // exposes every catalog entry as if the player already possessed it.
+    localStorage.setItem(
+      "cs2go-local-inventory",
+      JSON.stringify(
+        [4, 5, 6].map((weapon) => ({
+          weapon,
+          id: "",
+          wear: 0.01,
+          seed: 1,
+        })),
+      ),
+    );
+  });
   await page.goto("/");
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
@@ -2194,8 +2210,12 @@ test("default Butterfly and Karambit share knife slot and play source actions", 
   ] as const) {
     await page.evaluate(() => document.exitPointerLock());
     await page.locator("#pause-skins").click();
-    await page.locator(`[data-skin-weapon="${index}"]`).click();
+    await page.locator("#inventory-weapon").selectOption(String(index));
+    await page.locator(`[data-item-weapon="${index}"][data-skin=""]`).click();
+    await page.locator("#weapon-action-inspect").click();
+    await page.locator("#weapon-inspect-customize").click();
     await page.locator("#equip-knife").click();
+    await page.locator("#close-item-details").click();
     await page.keyboard.press("Escape");
     await page.locator("#resume").click();
     await page.waitForFunction(() => window.__game.locked);
@@ -2260,7 +2280,10 @@ test("default Butterfly and Karambit share knife slot and play source actions", 
   }
   await page.evaluate(() => document.exitPointerLock());
   await page.locator("#pause-skins").click();
-  await page.locator('[data-skin-weapon="4"]').click();
+  await page.locator("#inventory-weapon").selectOption("4");
+  await page.locator('[data-item-weapon="4"][data-skin=""]').click();
+  await page.locator("#weapon-action-inspect").click();
+  await page.locator("#weapon-inspect-customize").click();
   await page.locator("#equip-knife").click();
   await expect(page.locator("#gun-name")).toHaveText("Bayonet");
   expect(errors).toEqual([]);

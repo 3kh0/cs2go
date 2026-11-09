@@ -75,12 +75,14 @@ test("complete local armory loads real meshes and exercises distinctive firearm 
       g.ammo = weapons[id].mag;
       g.reserve = weapons[id].reserve;
     };
-    const geometry = (object: import("three").Object3D) => {
+    const geometry = (object: import("three").Object3D, visibleOnly = false) => {
       let vertices = 0;
-      object.traverse((node) => {
+      const count = (node: import("three").Object3D) => {
         const mesh = node as import("three").Mesh;
         if (mesh.isMesh) vertices += mesh.geometry.getAttribute("position").count;
-      });
+      };
+      if (visibleOnly) object.traverseVisible(count);
+      else object.traverse(count);
       return vertices;
     };
     const models = [];
@@ -96,9 +98,12 @@ test("complete local armory loads real meshes and exercises distinctive firearm 
       const world = isKnife(id) ? undefined : createWorldGun(id);
       if (world) assert(geometry(world) > 100, `${weapons[id].name} lacks carried world geometry`);
       if (world && id >= 7) {
-        const legacy = model!.getObjectByName("skin-legacy")!;
+        // Defaults use the native HD body; legacy bodies load only when a
+        // finish requires them. Carried guns must bake exactly visible parts.
+        const body = model!.getObjectByName("skin-hd");
+        assert(!!body && geometry(body, true) > 100, `${weapons[id].name} lacks default HD body`);
         assert(
-          geometry(world) === geometry(legacy),
+          geometry(world) === geometry(model!, true) && geometry(world) === geometry(world, true),
           `${weapons[id].name} carried model includes hidden skin geometry or loses visible vertices`,
         );
       }
@@ -210,11 +215,30 @@ test("complete local armory loads real meshes and exercises distinctive firearm 
     g.ammo = 2;
     const reserve = g.reserve;
     g.beginReload();
-    advance(weapons[33].reload * 0.5);
-    assert(g.ammo === 2 && g.reserve === reserve, "MAG7 incorrectly reloads individual shells");
-    advance(weapons[33].reload * 0.5 + 0.02);
+    assert(g.reload > 0, "MAG7 did not start its magazine reload");
+    // Native magazine seating can commit before half the reload animation.
+    // Sample every simulation step to prove one complete magazine transfer,
+    // rather than assuming an arbitrary commit time or shell-by-shell refill.
+    let magazineTransfers = 0;
+    const reloadTicks = Math.ceil(g.reload * 128) + 2;
+    for (let tick = 0; tick < reloadTicks; tick++) {
+      const previousAmmo = g.ammo;
+      g.simulate(1 / 128);
+      assert(
+        g.ammo === 2 || g.ammo === weapons[33].mag,
+        "MAG7 incorrectly reloads individual shells",
+      );
+      if (g.ammo !== previousAmmo) magazineTransfers++;
+      assert(
+        g.reserve === reserve - (g.ammo === 2 ? 0 : weapons[33].mag),
+        "MAG7 did not consume exactly one complete spare magazine",
+      );
+    }
     assert(
-      g.ammo === weapons[33].mag && g.reserve === reserve - weapons[33].mag,
+      magazineTransfers === 1 &&
+        g.reload === 0 &&
+        g.ammo === weapons[33].mag &&
+        g.reserve === reserve - weapons[33].mag,
       "MAG7 did not replace its detachable magazine",
     );
     g.firing = false;

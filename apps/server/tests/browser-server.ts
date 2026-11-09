@@ -3,11 +3,17 @@ import { startServer } from "../src/server";
 import { configurePlayer, respawn } from "@cs2go/simulation/match";
 import { loadServerMap } from "../src/map";
 const map = await loadServerMap();
+const mirage = (await Bun.file(
+  new URL("../../../packages/assets/public/models/maps/mirage-nav.json", import.meta.url),
+).exists())
+  ? await loadServerMap(undefined, "mirage")
+  : undefined;
 const app = startServer({
   port: 3002,
   hostname: "127.0.0.1",
   origins: ["http://127.0.0.1:5173", "http://127.0.0.1:5183"],
   map,
+  maps: mirage ? { mirage } : undefined,
 });
 const control = Bun.serve({
   port: 3004,
@@ -17,6 +23,7 @@ const control = Bun.serve({
     const command = (await request.json()) as { room: string; op: string };
     const room = app.rooms.get(command.room);
     if (!room) return new Response("Missing room", { status: 404 });
+    const map = room.map;
     if (command.op === "live") {
       room.state.phase = "live";
       room.state.remaining = 100;
@@ -148,7 +155,10 @@ const control = Bun.serve({
     }
     if (command.op === "plant" || command.op === "plant-box") {
       const nav = await Bun.file(
-        new URL("../../../packages/assets/public/models/maps/dust2-nav.json", import.meta.url),
+        new URL(
+          `../../../packages/assets/public/models/maps/${map.id ?? "dust2"}-nav.json`,
+          import.meta.url,
+        ),
       )
         .json()
         .catch(() => null);
@@ -156,7 +166,8 @@ const control = Bun.serve({
       const sites = nav?.sites;
       if (!sites) return new Response("No site", { status: 500 });
       const p = [...room.players.values()].find((p) => p.team === "t")!;
-      const site = command.op === "plant-box" ? [26, 7.5, -64] : sites[1];
+      const site =
+        command.op === "plant-box" && (map.id ?? "dust2") === "dust2" ? [26, 7.5, -64] : sites[1];
       p.x = site[0];
       p.z = site[2];
       p.y = map.collision.floor(p.x, p.z, site[1] + 0.5);

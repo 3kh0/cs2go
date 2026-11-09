@@ -8,7 +8,7 @@ import type {
 } from "@cs2go/protocol";
 import type { Match } from "./match";
 import { damagePlayer } from "./combat";
-import { dust2BuyZones } from "./buy-zones";
+import { mapTriggers } from "./buy-zones";
 import { movement } from "./physics";
 import {
   canCarryGrenade,
@@ -59,7 +59,7 @@ export function playerUtility(match: Match, player: PlayerState, input: Input, d
   const canBuy =
     match.state.buyRemaining > 0 &&
     ["freeze", "live"].includes(match.state.phase) &&
-    dust2BuyZones.contains(player, player.team, {
+    mapTriggers(match.map).buyZones.contains(player, player.team, {
       halfWidth: movement.hullRadius,
       height: player.eye + 0.2,
     });

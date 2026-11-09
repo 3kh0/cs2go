@@ -1,4 +1,8 @@
 import * as T from "three";
+import type { MapId } from "@cs2go/protocol";
+import { touchesBuyZone, type MapTriggerData } from "@cs2go/simulation/buy-zones";
+import type { NativeLadder } from "@cs2go/simulation/ladder";
+import { ladderNormal } from "@cs2go/simulation/ladder";
 export type NavArea = {
   id: number;
   flags: number;
@@ -11,6 +15,10 @@ export type NavArea = {
   portals?: Record<number, number[]>;
 };
 export type MapNavigation = {
+  mapId?: MapId;
+  worldBallOrigin?: readonly [number, number, number];
+  triggers?: MapTriggerData;
+  ladders?: NativeLadder[];
   areas: NavArea[];
   spawns: Record<"t" | "ct", number[][]>;
   spawnAngles?: Record<"t" | "ct", number[]>;
@@ -42,6 +50,7 @@ export class Navigation {
   private readonly seen: Int32Array;
   private stamp = 0;
   private readonly sites = new Map<number, NavArea[]>();
+  private readonly ladderEdges = new Map<string, { ladder: NativeLadder; up: boolean }>();
   // Reused A* buffers; path() is not re-entrant.
   private readonly costs: Float32Array;
   private readonly previous: Int32Array;
@@ -53,21 +62,46 @@ export class Navigation {
     const areas = (this.areas = data.areas),
       count = areas.length;
     areas.forEach((area, i) => this.index.set(area.id, i));
+    const extra = new Map<number, Set<number>>();
+    for (const ladder of data.ladders ?? []) {
+      const top = [...new Set(ladder.areaConnections.slice(0, 4))].filter((id) =>
+        this.index.has(id),
+      );
+      const bottom = [...new Set(ladder.areaConnections.slice(4))].filter((id) =>
+        this.index.has(id),
+      );
+      for (const lower of bottom)
+        for (const upper of top) {
+          for (const [from, to, up] of [
+            [lower, upper, true],
+            [upper, lower, false],
+          ] as const) {
+            if (from === to) continue;
+            this.ladderEdges.set(`${from}:${to}`, { ladder, up });
+            const targets = extra.get(from) ?? new Set<number>();
+            targets.add(to);
+            extra.set(from, targets);
+          }
+        }
+    }
+    const adjacent = areas.map((area) => [
+      ...new Set([...area.links, ...(extra.get(area.id) ?? [])]),
+    ]);
     const connected = (this.connected = new Uint8Array(count));
     let links = 0;
     for (let i = 0; i < count; i++) {
-      if (areas[i].links.length) connected[i] = 1;
-      for (const id of areas[i].links) {
+      if (adjacent[i].length) connected[i] = 1;
+      for (const id of adjacent[i]) {
         const j = this.index.get(id);
         if (j !== undefined) connected[j] = 1;
       }
-      links += areas[i].links.length;
+      links += adjacent[i].length;
     }
     this.anyConnected = connected.includes(1);
     this.linkOffsets = new Int32Array(count + 1);
     this.linkTargets = new Int32Array(links);
     for (let i = 0, n = 0; i < count; i++) {
-      for (const id of areas[i].links) this.linkTargets[n++] = this.index.get(id) ?? -1;
+      for (const id of adjacent[i]) this.linkTargets[n++] = this.index.get(id) ?? -1;
       this.linkOffsets[i + 1] = n;
     }
     let minX = Infinity,
@@ -288,6 +322,20 @@ export class Navigation {
       candidates = this.areas.filter(
         (area) => area.place === label && !(area.flags & 2) && !(area.center[1] > center[1] - 0.3),
       );
+      // Source 2 polygon NAV exports may omit place labels. Resolve the native
+      // trigger center onto an ordinary connected floor rather than using its
+      // airborne brush center as a planting goal.
+      if (!candidates.length && this.data.mapId === "mirage") {
+        const touchingSite = this.data.triggers?.sites.find((site) => site.site === index);
+        candidates = this.areas.filter((area) => {
+          if (!area.links.length || area.flags & 2) return false;
+          const [x, y, z] = area.center;
+          return touchingSite?.hulls.some((hull) =>
+            touchesBuyZone({ x, y, z }, hull, { halfWidth: 0.3, height: 1.7 }),
+          );
+        });
+        if (!candidates.length) candidates = [this.areas[this.nearest(goal)]];
+      }
       this.sites.set(index, candidates);
     }
     let cost = Infinity,
@@ -419,12 +467,14 @@ export class Navigation {
           b = next.center;
         if (blocked?.has(next.id) && j !== end) continue;
         const distance = Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]);
+        const ladder = this.ladderEdges.has(`${areas[i].id}:${next.id}`);
         // Native jump links retain separate takeoff and landing edges. Keep
         // shortcuts within the 7.5 m/s, 20 m/s² jump's 1.406 m apex, with a
         // small margin for the fixed-step controller and hull clearance.
         const portal = areas[i].portals?.[next.id];
         const landing = next.portals?.[areas[i].id] ?? portal;
         if (
+          !ladder &&
           portal &&
           landing &&
           this.height(next, landing[0], landing[2]) - this.height(areas[i], portal[0], portal[2]) >
@@ -433,7 +483,7 @@ export class Navigation {
           continue;
         // Reject ladders/jumps this walking controller cannot traverse.
         const horizontal = Math.hypot(b[0] - a[0], b[2] - a[2]);
-        if (b[1] - a[1] > 1.35 + horizontal * 0.8) continue;
+        if (!ladder && b[1] - a[1] > 1.35 + horizontal * 0.8) continue;
         let congestion = 0;
         for (const point of avoid) {
           const d = Math.hypot(point.x - b[0], point.z - b[2]);
@@ -454,6 +504,15 @@ export class Navigation {
     for (let i = 1; i < route.length; i++) {
       const a = this.areas[route[i - 1]],
         b = this.areas[route[i]];
+      const transition = this.ladderEdges.get(`${a.id}:${b.id}`);
+      if (transition) {
+        const { ladder, up } = transition;
+        const normal = ladderNormal(ladder);
+        const bottom = new T.Vector3().fromArray(ladder.bottom).addScaledVector(normal, 0.42);
+        const top = new T.Vector3().fromArray(ladder.top).addScaledVector(normal, 0.42);
+        points.push(...(up ? [bottom, top] : [top, bottom]), new T.Vector3().fromArray(b.center));
+        continue;
+      }
       const x0 = Math.max(a.rect[0], b.rect[0]),
         x1 = Math.min(a.rect[2], b.rect[2]);
       const z0 = Math.max(a.rect[1], b.rect[1]),

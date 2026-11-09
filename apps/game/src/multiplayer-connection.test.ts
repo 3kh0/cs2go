@@ -198,3 +198,55 @@ test("an unresponsive transport starts recovery without waiting for its close ha
   expect(connection.socket).not.toBe(socket);
   connection.close();
 });
+
+test("rejects an unexpected server map before accepting snapshots or predicting", () => {
+  vi.useFakeTimers();
+  vi.stubGlobal("WebSocket", TestSocket);
+  const closed = vi.fn();
+  const received = vi.fn();
+  const connection = new MatchConnection(
+    "ws://localhost/ws",
+    "012345",
+    "Player",
+    "casual",
+    "ct",
+    testMap(),
+    false,
+    received,
+    closed,
+  );
+  const socket = connection.socket as unknown as TestSocket;
+  socket.onopen?.();
+  expect(JSON.parse(socket.sent[0]).map).toBe("dust2");
+  socket.receive({
+    type: "welcome",
+    version: PROTOCOL_VERSION,
+    id: "player",
+    room: "012345",
+    map: "mirage",
+    mode: "casual",
+  });
+  expect(connection.id).toBe("");
+  expect(socket.readyState).toBe(3);
+  expect(received).not.toHaveBeenCalled();
+  expect(closed).toHaveBeenCalledWith("Server map changed; return to Play and rejoin");
+});
+
+test("ladder prediction preserves authoritative attachment and detach cooldown across reconciliation", () => {
+  const { connection, socket, player } = setup();
+  player.ladder = { id: null, detachTime: 0.2 };
+  const round = { ...createMatch("casual", testMap()).state, phase: "live" as const };
+  socket.receive({ type: "snapshot", tick: 1, players: [player], events: [], round });
+  const authoritative = connection.players[0];
+  connection.step(neutralInput());
+  expect(connection.local!.ladder!.detachTime).toBeLessThan(0.2);
+  expect(authoritative.ladder!.detachTime).toBe(0.2);
+  player.ack = 1;
+  player.ladder.detachTime = 0.1;
+  socket.receive({ type: "snapshot", tick: 2, players: [player], events: [], round });
+  expect(connection.local!.ladder!.detachTime).toBe(0.1);
+  connection.step(neutralInput());
+  expect(connection.local!.ladder!.detachTime).toBeLessThan(0.1);
+  expect(connection.players[0].ladder!.detachTime).toBe(0.1);
+  connection.close();
+});

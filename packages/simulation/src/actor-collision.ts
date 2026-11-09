@@ -111,6 +111,32 @@ export function actorLanding(
   return floor;
 }
 
+/** Find feet crossed by a rising hull's head, including diagonal movement. */
+export function actorCeiling(
+  start: { x: number; y: number; z: number },
+  end: { x: number; y: number; z: number },
+  height: number,
+  actors: readonly ActorHull[],
+  radius = 0.3,
+) {
+  if (end.y < start.y) return Infinity;
+  let ceiling = Infinity;
+  const head = start.y + height;
+  const rise = end.y - start.y;
+  for (const actor of actors) {
+    if (head > actor.y + 0.001 || end.y + height < actor.y) continue;
+    const time = rise > 0 ? Math.max(0, Math.min(1, (actor.y - head) / rise)) : 0;
+    const x = start.x + (end.x - start.x) * time;
+    const z = start.z + (end.z - start.z) * time;
+    if (
+      Math.abs(x - actor.x) < radius + actor.radius &&
+      Math.abs(z - actor.z) < radius + actor.radius
+    )
+      ceiling = Math.min(ceiling, actor.y);
+  }
+  return ceiling;
+}
+
 /** A known carrier may change posture without opening a gap under its rider. */
 export function actorCarry(
   position: { x: number; y: number; z: number },

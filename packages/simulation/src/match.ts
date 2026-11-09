@@ -48,9 +48,10 @@ import {
   roundReward,
   nextLossLevel,
 } from "./economy";
-import { dust2BombSites, dust2BuyZones } from "./buy-zones";
+import { mapTriggers } from "./buy-zones";
 import { groundCorrectedBombSample } from "./bomb-damage";
 import type { DustMap } from "./dust-map";
+import { createLadderState } from "./ladder";
 export const STEP = 1 / TICK_RATE;
 export type Match = {
   ball: WorldBallPhysics;
@@ -73,8 +74,13 @@ export type Match = {
   weaponCooldowns: Map<string, Record<number, number>>;
 };
 export function createMatch(mode: MatchMode, map: DustMap): Match {
+  const origin = map.worldBallOrigin ?? (map.id === "mirage" ? [0, 0, 0] : ballOrigin.origin);
+  const ball = new WorldBallPhysics(map.collision, new T.Vector3(...origin));
+  // Dust II's authored football must not appear at an unrelated Mirage location.
+  if (map.id === "mirage" && !map.worldBallOrigin) ball.mesh = undefined;
+  mapTriggers(map);
   return {
-    ball: new WorldBallPhysics(map.collision, new T.Vector3(...ballOrigin.origin)),
+    ball,
     highlights: new Map(),
     receipts: new Map(),
     configurations: new Map(),
@@ -92,9 +98,9 @@ export function createMatch(mode: MatchMode, map: DustMap): Match {
     weaponCooldowns: new Map(),
     state: {
       ball: {
-        x: ballOrigin.origin[0],
-        y: ballOrigin.origin[1],
-        z: ballOrigin.origin[2],
+        x: origin[0],
+        y: origin[1],
+        z: origin[2],
         qx: 0,
         qy: 0,
         qz: 0,
@@ -142,6 +148,7 @@ export function createPlayer(id: string, name: string, team: Team): PlayerState 
     vertical: 0,
     eye: movement.standingEye,
     grounded: true,
+    ladder: createLadderState(),
     yaw: 0,
     pitch: 0,
     allowedWeapons: [],
@@ -256,6 +263,7 @@ export function configurePlayer(
   }
 }
 export function respawn(player: PlayerState, match: Match, preserve = false) {
+  player.ladder = createLadderState();
   match.weaponCooldowns.set(player.id, {});
   match.combat.set(player.id, createCombatMemory());
   match.actions.set(player.id, createWeaponActions());
@@ -697,7 +705,7 @@ function buy(match: Match, player: PlayerState, input: Input) {
     player.health <= 0 ||
     state.buyRemaining <= 0 ||
     !["freeze", "live"].includes(state.phase) ||
-    !dust2BuyZones.contains(player, player.team, {
+    !mapTriggers(match.map).buyZones.contains(player, player.team, {
       halfWidth: movement.hullRadius,
       height: player.eye + 0.2,
     })
@@ -927,16 +935,17 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
     if (player.health > 0)
       match.ball.touch(new T.Vector3(player.x, player.y, player.z), player.vx, player.vz, STEP);
   match.ball.update(STEP);
-  const ball = match.ball.mesh!;
-  Object.assign(state.ball, {
-    x: ball.position.x,
-    y: ball.position.y,
-    z: ball.position.z,
-    qx: ball.quaternion.x,
-    qy: ball.quaternion.y,
-    qz: ball.quaternion.z,
-    qw: ball.quaternion.w,
-  });
+  const ball = match.ball.mesh;
+  if (ball)
+    Object.assign(state.ball, {
+      x: ball.position.x,
+      y: ball.position.y,
+      z: ball.position.z,
+      qx: ball.quaternion.x,
+      qy: ball.quaternion.y,
+      qz: ball.quaternion.z,
+      qw: ball.quaternion.w,
+    });
   stepUtility(match, STEP, events);
   const alive = (team: Team) =>
     [...match.players.values()].filter((player) => player.team === team && player.health > 0);
@@ -992,7 +1001,7 @@ export function stepMatch(match: Match, inputs: Map<string, Input>): MatchEvent[
         input?.use &&
         carrier.grounded &&
         Math.hypot(carrier.vx, carrier.vz) < 0.1 &&
-        dust2BombSites.contains(carrier, {
+        mapTriggers(match.map).bombSites.contains(carrier, {
           halfWidth: movement.hullRadius,
           height: carrier.eye + 0.2,
         });

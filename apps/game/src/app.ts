@@ -17,7 +17,7 @@ import { setupSettingsTabs } from "./settings-tabs";
 import { setupControlSettings } from "./control-settings";
 import { Game } from "./game";
 import { MultiplayerMatch } from "./multiplayer-match";
-import { validRoom } from "@cs2go/protocol";
+import { validRoom, isMapId, type MapId } from "@cs2go/protocol";
 import { prepareTeamSelector } from "./team-select";
 import { openMatchLoading } from "./match-loading";
 import { setupSteamAccount } from "./steam-account";
@@ -88,9 +88,10 @@ if (import.meta.env.DEV) Object.assign(window, { __game: game });
 const el = (id: string) => document.getElementById(id)!;
 (el("agent-team") as HTMLSelectElement).onchange = (event) =>
   game.setTeam((event.target as HTMLSelectElement).value as "t" | "ct");
-let selectedMode: "casual" | "competitive" = "casual";
+let selectedMode: Parameters<Game["start"]>[0] = "casual";
 for (const button of document.querySelectorAll<HTMLButtonElement>("[data-mode]"))
   button.onclick = () => {
+    if (button.disabled) return;
     selectedMode = button.dataset.mode as typeof selectedMode;
     el("play").setAttribute("aria-label", `Play ${selectedMode}`);
     document
@@ -102,10 +103,21 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-mode]")
         ),
       );
   };
+let selectedMap: MapId = "dust2";
+const chooseMap = (map: MapId) => {
+  selectedMap = map;
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-map]"))
+    button.setAttribute("aria-pressed", String(button.dataset.map === map));
+};
+for (const button of document.querySelectorAll<HTMLButtonElement>(".match-maps [data-map]"))
+  button.onclick = () => {
+    if (isMapId(button.dataset.map)) chooseMap(button.dataset.map);
+  };
 let session: "single" | "multi" = "single";
 const server = el("match-server") as HTMLSelectElement;
 const room = el("match-room") as HTMLInputElement;
 const invitation = new URLSearchParams(location.search);
+if (isMapId(invitation.get("map"))) chooseMap(invitation.get("map") as MapId);
 // Local endpoints are available only in development; production uses the two fleet servers.
 if (import.meta.env.DEV) {
   for (const port of [3001, 3002])
@@ -124,6 +136,11 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-session
     session = button.dataset.session as typeof session;
     el("menu").dataset.session = session;
     el("multiplayer-options").hidden = session !== "multi";
+    for (const option of document.querySelectorAll<HTMLButtonElement>("[data-offline-mode]")) {
+      option.hidden = option.disabled = session === "multi";
+    }
+    if (session === "multi" && selectedMode !== "casual" && selectedMode !== "competitive")
+      document.querySelector<HTMLButtonElement>('[data-mode="casual"]')!.click();
     document
       .querySelectorAll<HTMLButtonElement>("[data-session]")
       .forEach((node) => node.setAttribute("aria-pressed", String(node === button)));
@@ -164,6 +181,8 @@ el("play").onclick = async () => {
       if (lobby.mode !== "casual" && lobby.mode !== "competitive")
         throw new Error("Incompatible server. Refresh and try again.");
       document.querySelector<HTMLButtonElement>(`[data-mode="${lobby.mode}"]`)!.click();
+      if (!isMapId(lobby.map)) throw new Error("Incompatible server map. Refresh and try again.");
+      chooseMap(lobby.map);
       el("match-status").textContent = "Lobby found. Select your team.";
     } catch (error) {
       el("match-status").textContent =
@@ -185,7 +204,28 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
   const create = creating;
   const endpoint = server.value;
   const pin = room.value;
-  const loader = openMatchLoading(mode);
+  game.matchLoading = true;
+  if (multiplayer && create) {
+    try {
+      const url = new URL(endpoint);
+      url.protocol = url.protocol === "wss:" ? "https:" : "http:";
+      url.pathname = "/healthz";
+      const response = await fetch(url, { signal: AbortSignal.timeout(5000) });
+      if (!response.ok) throw new Error("Server unavailable. Try the other server.");
+      const health = await response.json();
+      if (!Array.isArray(health.maps) || !health.maps.includes(selectedMap))
+        throw new Error(
+          "This server does not have the selected map. Choose another map or server.",
+        );
+    } catch (error) {
+      el("match-status").textContent =
+        error instanceof Error ? error.message : "Could not reach the server.";
+      game.matchLoading = false;
+      return;
+    }
+  }
+  const map = replayTeam === undefined ? selectedMap : game.mapId;
+  const loader = openMatchLoading(mode, map);
   game.soundscape.playMusic("loading");
   let selector: ReturnType<typeof prepareTeamSelector> | undefined;
   game.matchLoading = true;
@@ -197,7 +237,7 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
     game.last = performance.now();
     game.start(mode, { bots: !multiplayer });
     el("scoreboard-lobby").hidden = !multiplayer;
-    if (multiplayer && game.active) {
+    if (multiplayer && game.active && (mode === "casual" || mode === "competitive")) {
       el("lobby-pin").textContent = "CONNECTING...";
       el("lobby-server").textContent = new URL(endpoint).hostname;
       game.network = new MultiplayerMatch(game, endpoint, pin, create, mode);
@@ -206,8 +246,8 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
   const cancelPreview = () => selector?.close();
   loader.signal.addEventListener("abort", cancelPreview, { once: true });
   try {
-    await loader.stage("Preparing Dust II...", 0);
-    await game.prepareMatch(mode, !multiplayer, loader.signal);
+    await loader.stage(`Preparing ${map === "dust2" ? "Dust II" : "Mirage"}...`, 0);
+    await game.prepareMatch(mode, !multiplayer, loader.signal, map);
     await loader.stage("Preparing the match...", 1);
     if (replayTeam === undefined) {
       selector = prepareTeamSelector(enter, mode === "competitive" ? 5 : 10, game);

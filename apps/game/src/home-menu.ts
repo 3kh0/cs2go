@@ -27,7 +27,7 @@ export function homeMenuMarkup() {
       <aside class="home-cards">
         <section class="home-match-card" aria-label="Choose a match">
           <div class="mode-options session-options" role="group" aria-label="Session type"><button data-session="single" aria-pressed="true">OFFLINE</button><button data-session="multi" aria-pressed="false">ONLINE</button></div>
-          <div class="mode-options" role="group" aria-label="Game mode"><button data-mode="casual" aria-pressed="true">CASUAL</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE</button></div>
+          <div class="mode-options" role="group" aria-label="Game mode"><button data-mode="casual" aria-pressed="true">CASUAL</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE</button><button data-mode="deathmatch" data-offline-mode aria-pressed="false">DEATHMATCH</button><button data-mode="practice" data-offline-mode aria-pressed="false">PRACTICE</button></div>
           <div class="match-browser">
             <section id="multiplayer-options" aria-label="Online lobby" hidden>
               <header class="lobby-heading"><span class="lobby-kicker">PLAY WITH FRIENDS</span><h2>Online Lobby</h2></header>
@@ -38,7 +38,7 @@ export function homeMenuMarkup() {
               <p id="lobby-help">Make sure you and your friends are on the same server!</p>
               <small id="match-status" role="status" aria-live="polite"></small>
             </section>
-            <div class="match-maps" role="group" aria-label="Maps"><button class="home-map-art" type="button" aria-label="Dust II, selected" aria-pressed="true"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="map-card-caption">Dust II</span></button></div>
+            <div class="match-maps" role="group" aria-label="Maps"><button class="home-map-art" data-map="dust2" type="button" aria-label="Dust II" aria-pressed="true"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="map-card-caption">Dust II</span></button><button class="home-map-art" data-map="mirage" type="button" aria-label="Mirage" aria-pressed="false"><img class="map-badge" src="/ui/home/mirage-emblem.svg" alt=""><span class="map-card-caption">Mirage</span></button></div>
           </div>
           <footer class="match-footer"><p id="mode-description" role="status"></p><button class="deploy" id="play" disabled aria-label="Play casual"><span>GO</span></button></footer>
         </section>

@@ -15,8 +15,7 @@ test("spectator E takes over a teammate without duplicating lives or ammunition"
   await page.goto("/");
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible())
-    await page.locator('#team-select [data-team="t"]').click();
+  await page.locator('#team-select [data-team="t"]').click();
   await page.waitForFunction(() => window.__game.locked && window.__game.mode === "casual");
   await page.evaluate(() => {
     const g = window.__game;

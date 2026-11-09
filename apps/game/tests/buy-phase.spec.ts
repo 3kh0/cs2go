@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import type { Game } from "../src/game";
+import { movement } from "../src/physics";
 declare global {
   interface Window {
     __game: Game;
@@ -43,7 +44,7 @@ test("freeze blocks movement and jumping, allows crouch and look, and fades team
   await page.keyboard.down("Control");
   await page.mouse.move(720, 450);
   await page.mouse.move(800, 490);
-  await page.waitForFunction(() => window.__game.eye < 1.15);
+  await page.waitForFunction((eye) => window.__game.eye <= eye + 0.001, movement.duckEye);
   const crouched = await page.evaluate(() => ({
     position: window.__game.position.toArray(),
     eye: window.__game.eye,

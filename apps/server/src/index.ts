@@ -1,4 +1,4 @@
-import { PROTOCOL_VERSION, TICK_RATE } from "@cs2go/protocol";
+import { PROTOCOL_VERSION, TICK_RATE, isMapId, type MapId } from "@cs2go/protocol";
 import { loadServerMap } from "./map";
 import { startServer } from "./server";
 const port = Number(process.env.PORT ?? 3001);
@@ -11,10 +11,18 @@ const log = (message: string) =>
   console.log(`[${new Date().toTimeString().slice(0, 8)}] ${message}`);
 const started = performance.now();
 log(`Starting multiplayer with Bun ${Bun.version} as PID ${process.pid}`);
-log("Loading Dust II...");
-const map = await loadServerMap();
-log(`Dust II ready in ${Math.round(performance.now() - started)} ms!`);
-const app = startServer({ port, origins, map, log });
+const mapId = process.env.MAP_ID ?? "dust2";
+if (!isMapId(mapId)) throw new Error("MAP_ID must be dust2 or mirage");
+const enabled = (process.env.MAPS ?? "dust2,mirage").split(",").map((id) => id.trim());
+if (enabled.some((id) => !isMapId(id))) throw new Error("MAPS must contain dust2 or mirage");
+const maps: Partial<Record<MapId, Awaited<ReturnType<typeof loadServerMap>>>> = {};
+for (const id of new Set([mapId, ...(enabled as MapId[])])) {
+  log(`Loading ${id === "mirage" ? "Mirage" : "Dust II"}...`);
+  maps[id] = await loadServerMap(undefined, id);
+}
+const map = maps[mapId]!;
+log(`Maps ready in ${Math.round(performance.now() - started)} ms!`);
+const app = startServer({ port, origins, map, maps, log });
 log(`WebSocket up at ws://127.0.0.1:${app.server.port}/ws`);
 log(`Health check up at http://127.0.0.1:${app.server.port}/healthz`);
 log(`Tick rate set to ${TICK_RATE} Hz with protocol v${PROTOCOL_VERSION}`);

@@ -3,7 +3,53 @@ import { accelerate, fallStep, limitJumpSpeed, movement, weapons } from "./physi
 import type { DustMap } from "./dust-map";
 import * as T from "three";
 import { actorLanding, actorSupport, slideActors } from "./actor-collision";
+import { createLadderState, stepLadder } from "./ladder";
 const position = new T.Vector3();
+function updatePosture(player: PlayerState, input: Input, dt: number, map: DustMap) {
+  const collision = map.collision;
+  const radius = movement.hullRadius;
+  const eye =
+    player.eye +
+    ((input.duck ? movement.duckEye : movement.standingEye) - player.eye) *
+      (1 - Math.exp(-15 * dt));
+  const feet = position.y + (player.grounded || player.ladder?.id != null ? 0 : player.eye - eye);
+  const hull = eye + movement.standingHeight - movement.standingEye;
+  const floorInExtension =
+    !player.grounded && feet < position.y
+      ? collision.support(position.x, position.z, position.y, feet, radius)
+      : -Infinity;
+  if (
+    eye <= player.eye ||
+    (!Number.isFinite(floorInExtension) &&
+      !collision.blocked(position.x, position.z, feet, radius, hull) &&
+      !Number.isFinite(
+        collision.ceiling(
+          position.x,
+          position.z,
+          position.y + player.eye + movement.standingHeight - movement.standingEye,
+          feet + hull,
+          radius,
+        ),
+      ))
+  ) {
+    position.y = feet;
+    player.eye = eye;
+  }
+  if (
+    collision.recoverGround(
+      position,
+      radius,
+      player.eye + movement.standingHeight - movement.standingEye,
+    )
+  ) {
+    player.grounded = player.vertical <= 0;
+    if (player.grounded) player.vertical = 0;
+  }
+  player.x = position.x;
+  player.y = position.y;
+  player.z = position.z;
+}
+
 /** The same native Dust II hull queries run in prediction and authority. */
 export function movePlayer(
   player: PlayerState,
@@ -15,6 +61,37 @@ export function movePlayer(
   if (player.health <= 0 || player.waiting) return;
   const collision = map.collision;
   position.set(player.x, player.y, player.z);
+  player.yaw = input.yaw;
+  player.pitch = input.pitch;
+  const actors = others
+    .filter((other) => other.id !== player.id && other.health > 0 && !other.waiting)
+    .map((other) => ({
+      x: other.x,
+      y: other.y,
+      z: other.z,
+      height: other.eye + movement.standingHeight - movement.standingEye,
+      radius: movement.hullRadius,
+    }));
+  const ladder = stepLadder(
+    position,
+    input,
+    dt,
+    map.ladders,
+    collision,
+    player.eye + movement.standingHeight - movement.standingEye,
+    (player.ladder ??= createLadderState()),
+    movement.hullRadius,
+    actors,
+  );
+  if (ladder) {
+    player.vx = ladder.velocity.x;
+    player.vz = ladder.velocity.z;
+    player.vertical = ladder.velocity.y;
+    player.grounded = ladder.grounded;
+    player.scope = Math.min(weapons[player.weapon].zoomLevels, input.scope);
+    updatePosture(player, input, dt, map);
+    return;
+  }
   if (
     collision.recoverGround(
       position,
@@ -27,15 +104,6 @@ export function movePlayer(
     if (player.grounded) player.vertical = 0;
   }
   const start = { x: player.x, y: player.y, z: player.z };
-  const actors = others
-    .filter((other) => other.id !== player.id && other.health > 0 && !other.waiting)
-    .map((other) => ({
-      x: other.x,
-      y: other.y,
-      z: other.z,
-      height: other.eye + movement.standingHeight - movement.standingEye,
-      radius: movement.hullRadius,
-    }));
   player.yaw = input.yaw;
   player.pitch = input.pitch;
   const radius = movement.hullRadius;
@@ -111,46 +179,7 @@ export function movePlayer(
       player.grounded = true;
     }
   }
-  const eye =
-    player.eye +
-    ((input.duck ? movement.duckEye : movement.standingEye) - player.eye) *
-      (1 - Math.exp(-15 * dt));
-  const feet = position.y + (player.grounded ? 0 : player.eye - eye);
-  hull = eye + movement.standingHeight - movement.standingEye;
-  const floorInExtension =
-    !player.grounded && feet < position.y
-      ? collision.support(position.x, position.z, position.y, feet, radius)
-      : -Infinity;
-  if (
-    eye <= player.eye ||
-    (!Number.isFinite(floorInExtension) &&
-      !collision.blocked(position.x, position.z, feet, radius, hull) &&
-      !Number.isFinite(
-        collision.ceiling(
-          position.x,
-          position.z,
-          position.y + player.eye + movement.standingHeight - movement.standingEye,
-          feet + hull,
-          radius,
-        ),
-      ))
-  ) {
-    position.y = feet;
-    player.eye = eye;
-  }
-  if (
-    collision.recoverGround(
-      position,
-      radius,
-      player.eye + movement.standingHeight - movement.standingEye,
-    )
-  ) {
-    player.grounded = player.vertical <= 0;
-    if (player.grounded) player.vertical = 0;
-  }
-  player.x = position.x;
-  player.y = position.y;
-  player.z = position.z;
+  updatePosture(player, input, dt, map);
   player.vx = velocity.x;
   player.vz = velocity.z;
 }

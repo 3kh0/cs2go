@@ -1,3 +1,4 @@
+import { teamChoiceVisible } from "./team-choice";
 import { test, expect } from "@playwright/test";
 import type { Game } from "../src/game";
 declare global {
@@ -19,8 +20,7 @@ test("native mode blast scales and fixed-rate inferno damage use the actual util
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible())
-    await page.locator('#team-select [data-team="ct"]').click();
+  if (await teamChoiceVisible(page)) await page.locator('#team-select [data-team="ct"]').click();
   await page.waitForFunction(() => window.__game.locked);
   const result = await page.evaluate(() => {
     const g = window.__game;

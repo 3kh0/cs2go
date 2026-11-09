@@ -109,6 +109,9 @@ export class MultiplayerMatch {
       mode,
       privateGame.team,
       {
+        id: privateGame.mapId,
+        ladders: world.navigation.data.ladders,
+        triggers: world.navigation.data.triggers,
         collision: world.collision,
         spawns: world.navigation.data.spawns,
         spawnAngles: world.navigation.data.spawnAngles,
@@ -245,6 +248,7 @@ export class MultiplayerMatch {
     this.previousPhase = state.phase;
     const previousBombTime = g.bomb?.timer ?? 40;
     const previousBomb = g.bomb;
+    Object.assign(g.ladderState, local.ladder ?? { id: null, detachTime: 0 });
     g.team = local.team;
     g.round = state.round;
     g.teamScores = { ...state.scores };
@@ -319,6 +323,7 @@ export class MultiplayerMatch {
         bot.name = player.name;
         bot.rig.gloveChoice = player.glove ?? { id: "", wear: 0.01, seed: 1 };
         bot.health = player.health;
+        Object.assign(bot.ladderState, player.ladder ?? { id: null, detachTime: 0 });
         bot.armor = player.armor;
         bot.helmet = player.helmet;
         bot.defuseKit = player.kit;
@@ -763,9 +768,16 @@ export class MultiplayerMatch {
     }
     const local = this.connection.local;
     if (!local) return;
-    if (grounded && !local.grounded && local.vertical > 0) g.soundscape.play("jump");
+    if (grounded && !local.grounded && local.vertical > 0 && local.ladder?.id == null)
+      g.soundscape.play("jump");
     if (grounded === false && local.grounded) g.soundscape.play("land");
-    if (local.grounded && Math.hypot(local.vx, local.vz) > 1.5 && !input.walk && !input.duck) {
+    if (
+      local.grounded &&
+      local.ladder?.id == null &&
+      Math.hypot(local.vx, local.vz) > 1.5 &&
+      !input.walk &&
+      !input.duck
+    ) {
       this.stepDistance += Math.hypot(local.vx, local.vz) * dt;
       if (this.stepDistance >= 1.8) {
         this.stepDistance %= 1.8;
@@ -777,6 +789,7 @@ export class MultiplayerMatch {
     g.velocity.z = local.vz;
     g.vertical = local.vertical;
     g.grounded = local.grounded;
+    Object.assign(g.ladderState, local.ladder ?? { id: null, detachTime: 0 });
     g.eye = local.eye;
     g.damage = Math.max(0, g.damage - dt);
     g.hit = Math.max(0, g.hit - dt);
@@ -880,7 +893,7 @@ export class MultiplayerMatch {
       bot.rig.moveX = b.vx * Math.cos(bot.group.rotation.y) - b.vz * Math.sin(bot.group.rotation.y);
       bot.rig.moveZ = b.vx * Math.sin(bot.group.rotation.y) + b.vz * Math.cos(bot.group.rotation.y);
       bot.rig.crouch = (movement.standingEye - b.eye) / (movement.standingEye - movement.duckEye);
-      bot.rig.airborne = !b.grounded;
+      bot.rig.airborne = !b.grounded && b.ladder?.id == null;
     }
     if (!g.dead) g.updateAimCamera();
     else if (g.spectatorMode === "free") g.moveSpectator(dt);

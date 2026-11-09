@@ -1,0 +1,48 @@
+{
+  "sun": {
+    "pitch": 60,
+    "yaw": 318,
+    "color": 16768947,
+    "intensity": 9.42477796076938
+  },
+  "backgroundIntensity": 1,
+  "environmentIntensity": 0.35,
+  "lighting": {
+    "irradiance": "/models/maps/mirage-lighting/irradiance.exr",
+    "nativeIrradiance": "/models/maps/mirage-lighting/irradiance.bin.gz",
+    "shadows": "/models/maps/mirage-lighting/shadows.webp",
+    "directional": "/models/maps/mirage-lighting/directional.webp",
+    "nativeDirectional": "/models/maps/mirage-lighting/directional.bin.gz"
+  },
+  "source": {
+    "sunEntity": "2:60417:4814",
+    "skyEntity": "2:60417:6000",
+    "postProcessing": "lighting/postprocessing/de_mirage_prefab/de_mirage.vpost",
+    "qualification": "Native sun and atlases; PBR and actor ambient reconstructed in browser"
+  },
+  "radar": {
+    "pos_x": -3230,
+    "pos_y": 1713,
+    "scale": 5
+  },
+  "postprocess": {
+    "lut": "/models/maps/mirage-lighting/color-correction.bin.gz",
+    "tonemap": {
+      "m_flShoulderStrength": 0.0,
+      "m_flLinearStrength": 0.001,
+      "m_flLinearAngle": 0.001,
+      "m_flToeStrength": 1.0,
+      "m_flToeNum": 1.0,
+      "m_flToeDenom": 1.0,
+      "m_flWhitePoint": 1.5,
+      "m_flExposureBias": 0.0
+    },
+    "exposure": 1.8660659830736148
+  },
+  "ambient": {
+    "skyColor": 8572415,
+    "groundColor": 0,
+    "intensity": 1.5
+  },
+  "skyWorld": "/models/maps/mirage-skybox/source.json"
+}

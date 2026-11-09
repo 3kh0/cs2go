@@ -22,6 +22,7 @@ export type ScorePlayer = {
   helmet?: boolean;
 };
 type Board = {
+  map?: "dust2" | "mirage";
   rows: ScorePlayer[];
   mode: string;
   teamMode: boolean;
@@ -85,7 +86,7 @@ export function renderScoreboard(board: Board) {
   const root = document.getElementById("scoreboard")!;
   root.dataset.mode = board.mode;
   root.querySelector("h2")!.textContent =
-    `${board.mode.charAt(0).toUpperCase()}${board.mode.slice(1).toLowerCase()} | Dust II`;
+    `${board.mode.charAt(0).toUpperCase()}${board.mode.slice(1).toLowerCase()} | ${board.map === "mirage" ? "Mirage" : "Dust II"}`;
   document.getElementById("scoreboard-clock")!.textContent =
     board.mode === "practice"
       ? "∞"

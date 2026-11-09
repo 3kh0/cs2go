@@ -1,3 +1,4 @@
+import { teamChoiceVisible } from "./team-choice";
 import { expect, test } from "@playwright/test";
 import type { Game } from "../src/game";
 import { weapons } from "../src/physics";
@@ -14,7 +15,7 @@ test("casual bot rounds progress with finite combat state and reset cleanly", as
   await page.goto("/");
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     await page.locator('#team-select [data-team="ct"]').click();
   }
   await page.waitForFunction(() => window.__game.locked);
@@ -100,15 +101,49 @@ test("casual bot rounds progress with finite combat state and reset cleanly", as
     weapons.map(({ mag, reserve }) => ({ mag, reserve })),
   );
   expect(reset).toBe(true);
-  const carrier = await page.evaluate(() => {
+  const carrier = await page.evaluate(async () => {
+    const routePath = "/src/bot-strategy-routes.ts";
+    const { buildBotStrategyRoutes } = (await import(
+      routePath
+    )) as typeof import("../src/bot-strategy-routes");
     const game = window.__game;
     game.round = 2;
     game.dead = 0;
+    game.botStrategySeed = 1; // Round two's pure Long A approach.
+    game.roundPause = game.freezeTime = game.roundElapsed = 0;
+    game.time = game.rules.roundTime;
+    game.visible = () => false;
+    game.botCombat = () => {};
     const bot = game.bots[0];
+    bot.team = "t";
+    game.spawnBot(bot, 0);
     game.bots.slice(1).forEach((other) => {
       other.health = 0;
+      other.group.visible = false;
     });
     const nav = game.dust!.navigation;
+    game.bomb!.carrier = 0;
+    game.bomb!.planted = false;
+    game.bomb!.plantProgress = 0;
+    game.resetBotStrategies();
+    const routes = buildBotStrategyRoutes(nav);
+    const reachedApproach = () => {
+      const order = game.botStrategies!.t.order(0)!;
+      return (
+        order.site === "a" &&
+        order.stage >= routes.lanes[order.lane].length &&
+        bot.group.position.distanceTo(nav.site(0)) < 1
+      );
+    };
+    // Complete the real approach first. Teleporting a fresh strategy beside A
+    // otherwise sends it back through its unfinished spawn checkpoints.
+    for (let step = 0; step < 128 * 60 && !reachedApproach(); step++) {
+      game.time -= 1 / 128;
+      game.roundElapsed += 1 / 128;
+      game.updateCasualBots(1 / 16, step % 8);
+      game.moveBots(1 / 128);
+    }
+    const approached = reachedApproach();
     const oldGoal = nav.site(0, -2, 0);
     const center = oldGoal.clone().fromArray(nav.data.sites[0]);
     // Reproduce the old early-stop point outside A's plant trigger.
@@ -119,6 +154,9 @@ test("casual bot rounds progress with finite combat state and reset cleanly", as
     bot.alert = 0;
     bot.target = null;
     bot.nav = 0;
+    bot.path = [];
+    bot.velocity.set(0, 0);
+    bot.vertical = 0;
     bot.navArea = nav.nearest(bot.group.position);
     game.bomb!.carrier = 0;
     game.bomb!.planted = false;
@@ -132,9 +170,14 @@ test("casual bot rounds progress with finite combat state and reset cleanly", as
       game.moveBots(1 / 128);
       game.updateRound(1 / 128);
     }
-    return { advances, initiallyOutside, planted: game.bomb!.planted };
+    return { approached, advances, initiallyOutside, planted: game.bomb!.planted };
   });
-  expect(carrier).toEqual({ advances: true, initiallyOutside: true, planted: true });
+  expect(carrier).toEqual({
+    approached: true,
+    advances: true,
+    initiallyOutside: true,
+    planted: true,
+  });
   await page.screenshot({ path: "artifacts/bots-round.png" });
   expect(errors).toEqual([]);
 });

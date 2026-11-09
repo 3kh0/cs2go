@@ -81,6 +81,7 @@ export class MatchConnection {
             name,
             create: !this.resume && create,
             mode,
+            map: this.map.id ?? "dust2",
             team,
           }),
         );
@@ -96,6 +97,10 @@ export class MatchConnection {
         if (message.type === "welcome") {
           if (message.version !== PROTOCOL_VERSION) {
             this.close("Game version mismatch; refresh the page");
+            return;
+          }
+          if (message.map !== (this.map.id ?? "dust2")) {
+            this.close("Server map changed; return to Play and rejoin");
             return;
           }
           room = message.room;
@@ -135,7 +140,9 @@ export class MatchConnection {
             this.pending = changedSpawn
               ? []
               : this.pending.filter((input) => input.seq > state.ack);
-            this.local = { ...state };
+            // Prediction mutates attachment/cooldown state; preserve the decoded
+            // authoritative snapshot and delta baseline for later reconciliation.
+            this.local = { ...state, ladder: state.ladder ? { ...state.ladder } : undefined };
             // Never replay movement across death or a respawn boundary.
             if (
               !changedSpawn &&

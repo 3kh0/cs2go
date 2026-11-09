@@ -4,6 +4,9 @@ import { setSourceFogSky } from "./source-fog";
 import { sourceSkyLayer } from "./source-sky-layer";
 
 const skyPreparation = new WeakMap<T.Object3D, () => Promise<void>>();
+export function registerSourceSkyPreparation(sky: T.Object3D, prepare: () => Promise<void>) {
+  skyPreparation.set(sky, prepare);
+}
 export async function warmSourceSky(sky?: T.Object3D, signal?: AbortSignal) {
   signal?.throwIfAborted();
   const prepared = sky ? skyPreparation.get(sky)?.() : undefined;

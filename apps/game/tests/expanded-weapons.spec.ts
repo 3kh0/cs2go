@@ -23,6 +23,7 @@ test("expanded armory equips, preserves slots, bursts, and reloads shells withou
   await page.locator("#home-play").click();
   await page.locator("#play").click();
   await page.waitForFunction(() => window.__game.locked);
+  const initialKnife = await page.evaluate(() => window.__game.knife);
   for (const [index, name] of [
     [7, "Glock-18"],
     [8, "Desert Eagle"],
@@ -49,7 +50,7 @@ test("expanded armory equips, preserves slots, bursts, and reloads shells withou
     });
     expect(state.after).toBe(state.ammo - 1);
     expect(state.slot).toContain(index);
-    expect(state.knife).toBe(4);
+    expect(state.knife).toBe(initialKnife);
     expect(state.vertices).toBeGreaterThan(0);
   }
   const result = await page.evaluate(() => {
@@ -103,7 +104,7 @@ test("expanded armory equips, preserves slots, bursts, and reloads shells withou
   expect(result.burst).toEqual({ ammo: 17, remaining: 0 });
   expect(result.shell).toEqual({ ammo: 2, reserve: 3, reloading: true });
   expect(result.interrupt).toEqual({ ammo: 1, reserve: 3, reload: 0 });
-  expect(result.slots).toEqual([10, 8, 4]);
+  expect(result.slots).toEqual([10, 8, initialKnife]);
   expect(result.preserved).toEqual({ ammo: 1, reserve: 3 });
   expect(errors).toEqual([]);
   expect(external).toEqual([]);

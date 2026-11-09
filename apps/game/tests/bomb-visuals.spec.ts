@@ -262,7 +262,7 @@ test("C4 equips with 5 at native draw speed, plants after rounds, and shows carr
   expect(typography.color).toBe("rgb(255, 255, 255)");
   expect(typography.weight).toBe("700");
   expect(typography.detailWeight).toBe("700");
-  expect(typography.background).toBe("rgba(165, 34, 29, 0.9)");
+  expect(typography.background).toBe("rgb(255, 92, 78)");
   expect(typography.detailColor).toBe(typography.color);
   await page.screenshot({ path: "artifacts/c4-red-planted-alert.png" });
   const audio = await page.evaluate(

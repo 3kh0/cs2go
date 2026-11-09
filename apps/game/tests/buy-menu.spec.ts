@@ -172,37 +172,53 @@ test("main menu Inventory replaces ordered buy slots for each side and persists 
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await page.locator("#inventory-button").click();
-  await expect(page.locator(".inventory-slots button")).toHaveCount(15);
-  await page.locator('[data-inventory-team="ct"]').click();
+  await expect(page.locator(".loadout-slot-columns [data-loadout-slot]")).toHaveCount(15);
+  await expect(page.locator(".loadout-team")).toHaveAttribute("data-team", "ct");
   await page.locator('[data-category="Pistols"][data-inventory-slot="1"]').click();
   await page.locator('[data-loadout-weapon="17"]').click();
   await expect(page.locator('[data-category="Pistols"][data-inventory-slot="1"]')).toContainText(
     "R8 Revolver",
   );
-  await page.locator('[data-category="Pistols"][data-inventory-slot="0"]').click();
+  // Starting pistols have their own native slot. Verify occupied-choice swaps
+  // within the four other-pistol slots, then edit the valid CT starter separately.
+  await page.locator('[data-category="Pistols"][data-inventory-slot="2"]').click();
   await page.locator('[data-loadout-weapon="17"]').click();
-  await expect(page.locator('[data-category="Pistols"][data-inventory-slot="0"]')).toContainText(
+  await expect(page.locator('[data-category="Pistols"][data-inventory-slot="2"]')).toContainText(
     "R8 Revolver",
   );
   await expect(page.locator('[data-category="Pistols"][data-inventory-slot="1"]')).toContainText(
-    "USP-S",
+    "Dual Berettas",
   );
-  await page.locator('[data-inventory-team="t"]').click();
+  await page.locator('[data-category="Pistols"][data-inventory-slot="0"]').click();
+  await expect(page.locator('[data-loadout-weapon="17"]')).toHaveCount(0);
+  await page.locator('[data-loadout-weapon="12"]').click();
+  await expect(page.locator('[data-category="Pistols"][data-inventory-slot="0"]')).toContainText(
+    "P2000",
+  );
+  await page.locator('.loadout-opponent [data-inventory-team="t"]').click();
   await expect(page.locator('[data-category="Pistols"][data-inventory-slot="0"]')).toContainText(
     "Glock-18",
   );
   await expect(page.locator('[data-loadout-weapon="12"]')).toHaveCount(0);
-  await page.locator('[data-inventory-team="ct"]').click();
+  await page.locator('.loadout-opponent [data-inventory-team="ct"]').click();
   await page.screenshot({ path: "artifacts/inventory-buy-slots.png" });
-  await page.evaluate(() => window.__game.groundInventory.closeLoadout());
+  await page.locator("#home-button").click();
   await page.reload();
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await page.locator("#inventory-button").click();
-  await page.locator('[data-inventory-team="ct"]').click();
-  await expect(page.locator('[data-category="Pistols"][data-inventory-slot="0"]')).toContainText(
+  await expect(page.locator(".loadout-team")).toHaveAttribute("data-team", "ct");
+  await expect(page.locator('[data-category="Pistols"][data-inventory-slot="2"]')).toContainText(
     "R8 Revolver",
   );
-  await page.evaluate(() => window.__game.groundInventory.closeLoadout());
+  await expect(page.locator('[data-category="Pistols"][data-inventory-slot="1"]')).toContainText(
+    "Dual Berettas",
+  );
+  await expect(page.locator('[data-category="Pistols"][data-inventory-slot="0"]')).toContainText(
+    "P2000",
+  );
+  await page.locator("#home-button").click();
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
@@ -216,9 +232,9 @@ test("main menu Inventory replaces ordered buy slots for each side and persists 
   await expect(page.locator('[data-category="pistols"] [data-weapon]:visible')).toHaveCount(5);
   await expect(page.locator('[data-weapon="17"]')).toBeVisible();
   await expect(page.locator('[data-weapon="8"]')).toBeHidden();
-  await expect(page.locator('[data-weapon="17"]').locator("..")).toHaveCSS("order", "0");
+  await expect(page.locator('[data-weapon="17"]').locator("..")).toHaveCSS("order", "2");
   await page.evaluate(() => window.__game.groundInventory.showLoadout());
-  await page.locator('[data-category="Pistols"][data-inventory-slot="0"]').click();
+  await page.locator('[data-category="Pistols"][data-inventory-slot="2"]').click();
   await page.locator('[data-loadout-weapon="8"]').click();
   await page.evaluate(() => window.__game.groundInventory.closeLoadout());
   await expect(page.locator('[data-weapon="17"]')).toBeVisible();

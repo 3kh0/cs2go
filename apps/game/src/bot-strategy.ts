@@ -4,6 +4,8 @@ export type StrategySite = "a" | "b";
 export type StrategyRole = "entry" | "support" | "lurk" | "anchor" | "rotate";
 export type StrategyWaypoint = { position: StrategyPoint; radius: number; timeout: number };
 export type BotStrategyRoutes = {
+  /** Spawn approaches must not be replayed from their beginning on a rotation. */
+  directRotations?: boolean;
   lanes: Record<StrategyLane, readonly StrategyWaypoint[]>;
   sites: Record<StrategySite, StrategyPoint>;
   anchors: Record<StrategySite, readonly StrategyPoint[]>;
@@ -168,7 +170,9 @@ export class BotRoundStrategy {
           : assignment.role === "lurk"
             ? "tunnelsB"
             : "midB";
-      assignment.stage = 0;
+      assignment.stage = this.routes.directRotations
+        ? this.routes.lanes[assignment.lane].length
+        : 0;
       assignment.age = 0;
     }
   }

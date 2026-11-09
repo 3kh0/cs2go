@@ -10,7 +10,7 @@ test("fixed faction HUD, alive counts, and planted bomb countdown", async ({ pag
   page.on("pageerror", (e) => errors.push(e.message));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await page.waitForFunction(() => window.__game.assetsReady);
+  await page.waitForFunction(() => window.__game?.assetsReady);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 20000 });
   await expect(page.locator("#startup")).toHaveCount(0);
   for (const team of ["ct", "t"] as const) {
@@ -80,7 +80,7 @@ test("death banner shows the killer and weapon and clears on respawn", async ({ 
   page.on("pageerror", (e) => errors.push(e.message));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await page.waitForFunction(() => window.__game.assetsReady);
+  await page.waitForFunction(() => window.__game?.assetsReady);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 20000 });
   await expect(page.locator("#startup")).toHaveCount(0);
   await page.evaluate(() => {
@@ -97,7 +97,7 @@ test("death banner shows the killer and weapon and clears on respawn", async ({ 
   await expect(page.locator("#death-banner")).toBeVisible();
   await expect(page.locator("#death-killer")).toHaveText("oat");
   await expect(page.locator("#death-weapon")).toHaveText("AK-47");
-  await expect(page.locator("#death-weapon-icon")).toHaveAttribute("src", "/icons/ak-47.png");
+  await expect(page.locator("#death-weapon-icon")).toHaveAttribute("src", "/icons/buy/ak47.svg");
   await page.locator("#death-banner").screenshot({ path: "artifacts/death-banner.png" });
   await page.evaluate(() => window.__game.feed("another bot", "other victim", false, 2));
   await expect(page.locator("#death-killer")).toHaveText("oat");

@@ -69,7 +69,9 @@ import {
   addMoney,
 } from "./economy";
 import { applyArmorDamage, friendlyFireScale, hitRegion } from "./damage";
-import { dust2BuyZones, dust2BombSites } from "./buy-zones";
+import { mapTriggers } from "./buy-zones";
+import { activateNativeMapGrade, showNativeMapGrade } from "./native-map-color";
+import { createLadderState, stepLadder, type LadderState } from "@cs2go/simulation/ladder";
 import { groundCorrectedBombSample } from "./bomb-damage";
 import {
   createAimPunch,
@@ -130,7 +132,8 @@ import {
   weaponIcons,
   WEAPON_ANIMATION_RATE,
 } from "./physics";
-import { loadDust2 } from "./dust2";
+import { loadDust2, loadNativeMap } from "./dust2";
+import type { MapId } from "@cs2go/protocol";
 import { warmSourceSky } from "./source-sky";
 import { BombModel } from "./bomb";
 import { BombPlantModel, PLANT_DURATION } from "./bomb-motion";
@@ -204,6 +207,8 @@ type Bot = {
   regrouping: boolean;
   goal: T.Vector3;
   vertical: number;
+  ladderState: LadderState;
+  navCrouch: boolean;
   blockedAreas: Set<number>;
   navArea: number;
   group: T.Group;
@@ -325,6 +330,11 @@ export class Game {
   private lastViewmodelPreview?: T.Group;
   private lastSpectatorViewmodel?: T.Group;
   world!: Awaited<ReturnType<typeof loadDust2>>;
+  private nativeWorlds = new Map<MapId, Awaited<ReturnType<typeof loadDust2>>>();
+  private nativeWorldLoads = new Map<MapId, Promise<Awaited<ReturnType<typeof loadDust2>>>>();
+  get mapId(): MapId {
+    return this.dust?.id ?? "dust2";
+  }
   network?: MultiplayerMatch;
   dust?: Awaited<ReturnType<typeof loadDust2>>;
   botStrategies: { t: BotRoundStrategy; ct: BotRoundStrategy } | null = null;
@@ -409,7 +419,10 @@ export class Game {
     if (
       this.keys.has("KeyE") &&
       !this.halftime &&
-      dust2BombSites.contains(this.position, { halfWidth: 0.3, height: this.eye })
+      mapTriggers(this.dust ?? {}).bombSites.contains(this.position, {
+        halfWidth: 0.3,
+        height: this.eye,
+      })
     )
       this.equipBomb(true);
     this.bombDrawTime = Math.max(0, this.bombDrawTime - dt);
@@ -429,6 +442,10 @@ export class Game {
   duckAccepted = false;
   position = new T.Vector3(-17, 0, 17);
   velocity = { x: 0, z: 0 };
+  ladderState = createLadderState();
+  get ladder() {
+    return this.ladderState.id !== null;
+  }
   vertical = 0;
   grounded = true;
   yaw = -0.12;
@@ -494,6 +511,7 @@ export class Game {
   primary: number | null = null;
   secondary = 2;
   private actorHulls: ActorHull[] = [];
+  private botLadderHulls: ActorHull[] = [];
   private actorStart = new T.Vector3();
   private actorCarrier: number | null = null;
   private actorCarrierTop = 0;
@@ -509,6 +527,7 @@ export class Game {
       speed: Math.hypot(this.velocity.x, this.velocity.z),
       crouch: (movement.standingEye - this.eye) / (movement.standingEye - movement.duckEye),
       grounded: this.grounded,
+      ladder: this.ladder,
       verticalSpeed: this.vertical,
       walking: this.keys.has("ShiftLeft") || this.keys.has("ShiftRight"),
       reloading: weapon === this.selected && this.reload > 0,
@@ -520,7 +539,8 @@ export class Game {
       mode: (weapon.suppressed && b.rig.suppressed) || weapon.zoomLevels > 0 ? 1 : 0,
       speed: b.speed,
       crouch: b.rig.crouch,
-      grounded: b.vertical === 0,
+      grounded: b.vertical === 0 && b.ladderState.id === null,
+      ladder: b.ladderState.id !== null,
       verticalSpeed: b.vertical,
       reloading: b.reloadTime > 0,
     };
@@ -728,6 +748,7 @@ export class Game {
     const worldReady = loadDust2(this.scene, this.renderer).then((world) => {
       gradeMapColors(world.root);
       this.world = this.dust = world;
+      this.nativeWorlds.set("dust2", world);
       return world;
     });
     const assets = [
@@ -1258,10 +1279,58 @@ export class Game {
     return gun;
   }
   /** Finish map, roster and both factions' equipment before team selection. */
-  async prepareMatch(mode: Mode, bots: boolean, signal: AbortSignal) {
+  async prepareMap(id: MapId, signal: AbortSignal) {
+    signal.throwIfAborted();
+    const waitFor = async <Value>(pending: Promise<Value>): Promise<Value> => {
+      signal.throwIfAborted();
+      let abort: () => void = () => {};
+      try {
+        return await Promise.race([
+          pending,
+          new Promise<never>((_, reject) => {
+            abort = () => reject(signal.reason);
+            signal.addEventListener("abort", abort, { once: true });
+          }),
+        ]);
+      } finally {
+        signal.removeEventListener("abort", abort);
+      }
+    };
+    let world = this.nativeWorlds.get(id);
+    if (!world) {
+      let pending = this.nativeWorldLoads.get(id);
+      if (!pending) {
+        pending = loadNativeMap(this.scene, this.renderer, id).then((loaded) => {
+          if (loaded.sourceLighting) gradeMapColors(loaded.root);
+          this.nativeWorlds.set(id, loaded);
+          return loaded;
+        });
+        this.nativeWorldLoads.set(id, pending);
+        void pending.finally(() => this.nativeWorldLoads.delete(id)).catch(() => {});
+      }
+      world = await waitFor(pending);
+    }
+    signal.throwIfAborted();
+    if (this.dust !== world) {
+      const radar =
+        id === "dust2"
+          ? await waitFor(loadCalloutRadar())
+          : world.config.radar
+            ? await waitFor(loadCalloutRadar(`/models/maps/${id}-radar.png`))
+            : undefined;
+      signal.throwIfAborted();
+      // Commit only a complete map/radar pair. Cancelled or failed image
+      // preparation must retain the current map and allow a later retry.
+      this.dust = world;
+      this.radarImage = radar;
+      this.radarLayers.clear();
+    }
+  }
+  async prepareMatch(mode: Mode, bots: boolean, signal: AbortSignal, map: MapId = this.mapId) {
     const team = this.team;
     try {
       this.mode = mode;
+      await this.prepareMap(map, signal);
       this.useWorld();
       this.configureBots(this.teamMode, bots ? undefined : 0);
       this.bots.forEach((bot, index) => this.spawnBot(bot, index));
@@ -1559,13 +1628,15 @@ export class Game {
     this.reloadLockouts.fill(0);
     if (this.dust) {
       this.position.fromArray(this.dust.navigation.data.spawns[this.team][0]);
-      this.position.y = this.dust.collision.floor(
+      const spawnFloor = this.dust.collision.floor(
         this.position.x,
         this.position.z,
         this.position.y + 0.5,
       );
+      if (Number.isFinite(spawnFloor)) this.position.y = spawnFloor;
     }
     this.velocity = { x: 0, z: 0 };
+    this.ladderState = createLadderState();
     this.vertical = 0;
     this.grounded = true;
     this.jumpQueued = false;
@@ -1720,7 +1791,7 @@ export class Game {
     if (!this.active || this.dead || this.roundPause > 0) return false;
     if (!this.teamMode) return true;
     if (this.buyRemaining <= 0 || !this.dust) return false;
-    return dust2BuyZones.contains(this.position, this.team, {
+    return mapTriggers(this.dust ?? {}).buyZones.contains(this.position, this.team, {
       halfWidth: movement.hullRadius,
       height: this.hullHeight,
     });
@@ -2277,6 +2348,8 @@ export class Game {
       regrouping: false,
       goal: new T.Vector3(),
       vertical: 0,
+      ladderState: createLadderState(),
+      navCrouch: false,
       blockedAreas: new Set(),
       navArea: 0,
       group: rig.group,
@@ -2351,6 +2424,8 @@ export class Game {
     b.progressPosition.copy(b.group.position);
     b.goal.copy(b.group.position);
     b.vertical = 0;
+    b.ladderState = createLadderState();
+    b.navCrouch = false;
     b.blockedAreas.clear();
     b.health = 100;
     b.speed = 0;
@@ -3227,219 +3302,253 @@ export class Game {
         actorCount++;
       }
     this.actorHulls.length = actorCount;
-    if (this.actorCarrier !== null && this.grounded) {
-      const carrier = this.actorHulls.find((hull) => hull.id === this.actorCarrier);
-      const top = actorCarry(this.position, this.actorCarrierTop, carrier, movement.hullRadius);
-      const ceiling =
-        top !== undefined && top > this.position.y
-          ? this.world.collision?.ceiling(
-              this.position.x,
-              this.position.z,
-              this.position.y + this.hullHeight,
-              top + this.hullHeight,
-              movement.hullRadius,
-            )
-          : undefined;
-      if (
-        top !== undefined &&
-        !Number.isFinite(ceiling) &&
-        !this.isBlocked(this.position.x, this.position.z, top, movement.hullRadius, this.hullHeight)
-      ) {
-        this.position.y = top;
-        this.actorCarrierTop = top;
-      } else {
-        this.actorCarrier = null;
-        this.grounded = false;
-      }
-    } else this.actorCarrier = null;
-    // Source checks jump before ground friction. A jump on the landing tick
-    // therefore carries momentum instead of losing a tick of ground speed.
-    if (
-      (this.jumpQueued || (this.settings.autoBunnyhop && this.keys.has("Space"))) &&
-      this.grounded
-    ) {
-      limitJumpSpeed(this.velocity, maxSpeed);
-      this.vertical = movement.jumpImpulse;
-      this.grounded = false;
-      this.soundscape.play("jump");
-    }
-    this.jumpQueued = false;
-    if (this.world.collision?.recoverGround(this.position, movement.hullRadius, this.hullHeight)) {
-      this.grounded = this.vertical <= 0;
-      if (this.grounded) this.vertical = 0;
-    }
-    const followGround = this.grounded;
-    this.actorStart.copy(this.position);
-    // Walking/ducking limit the target speed, while ground acceleration keeps
-    // weapon-speed strength against stopspeed friction (especially in a crouch).
-    accelerate(this.velocity, dx, dz, speed, dt, this.grounded, this.grounded ? maxSpeed : speed);
-    const previousY = this.position.y;
     const wasFalling = this.vertical < -2;
-    const falling = fallStep(this.vertical, dt);
-    this.position.y += falling.distance;
-    this.vertical = falling.vertical;
-    if (this.world.collision && this.vertical > 0) {
-      const ceiling = this.world.collision.ceiling(
-        this.position.x,
-        this.position.z,
-        previousY + this.hullHeight,
-        this.position.y + this.hullHeight,
-        movement.hullRadius,
-      );
-      if (Number.isFinite(ceiling)) {
-        this.position.y = ceiling - this.hullHeight;
-        this.vertical = 0;
-      }
-    }
-    this.grounded = false;
-    let ground = this.world.collision
-      ? this.world.collision.support(
-          this.position.x,
-          this.position.z,
-          previousY + (followGround ? 0.46 : 0.001),
-          this.position.y - 0.2,
+    const ladderStep = this.world.collision
+      ? stepLadder(
+          this.position,
+          { yaw: this.yaw, pitch: -this.pitch, forward, right, jump: this.jumpQueued },
+          dt,
+          this.world.navigation.data.ladders,
+          this.world.collision,
+          this.hullHeight,
+          this.ladderState,
           movement.hullRadius,
+          this.actorHulls,
         )
-      : 0;
-    for (const b of this.world.walls) {
-      const inside =
-        this.position.x > b.x - b.w / 2 - 0.2 &&
-        this.position.x < b.x + b.w / 2 + 0.2 &&
-        this.position.z > b.z - b.d / 2 - 0.2 &&
-        this.position.z < b.z + b.d / 2 + 0.2;
-      if (!inside) continue;
-      if (previousY >= b.h - 0.05) ground = Math.max(ground, b.h);
-      if (
-        b.y &&
-        this.vertical > 0 &&
-        previousY + this.hullHeight <= b.y &&
-        this.position.y + this.hullHeight > b.y
-      ) {
-        this.position.y = b.y - this.hullHeight;
-        this.vertical = 0;
-      }
-    }
-    if (this.vertical <= 0 && this.position.y <= ground) {
-      this.position.y = ground;
-      this.vertical = 0;
-      this.grounded = true;
-    }
-    if (
-      this.world.collision &&
-      !this.world.collision.resolveHorizontal(this.position, movement.hullRadius, this.hullHeight)
-    ) {
-      // A tight corner may have no horizontal escape. Keep the last clear
-      // height so input can still move away instead of embedding the player.
-      this.position.y = previousY;
-      this.grounded = this.vertical <= 0;
-      this.vertical = 0;
-    }
-    if (this.world.collision) {
-      this.world.collision.moveHorizontal(
-        this.position,
-        this.velocity,
-        dt,
-        movement.hullRadius,
-        this.hullHeight,
-        this.vertical <= 0 && (followGround || this.grounded),
-      );
+      : undefined;
+    if (ladderStep) {
+      this.velocity.x = ladderStep.velocity.x;
+      this.velocity.z = ladderStep.velocity.z;
+      this.vertical = ladderStep.velocity.y;
+      this.grounded = ladderStep.grounded;
+      this.jumpQueued = false;
+      this.actorCarrier = null;
     } else {
-      const nextX = this.position.x + this.velocity.x * dt;
+      if (this.actorCarrier !== null && this.grounded) {
+        const carrier = this.actorHulls.find((hull) => hull.id === this.actorCarrier);
+        const top = actorCarry(this.position, this.actorCarrierTop, carrier, movement.hullRadius);
+        const ceiling =
+          top !== undefined && top > this.position.y
+            ? this.world.collision?.ceiling(
+                this.position.x,
+                this.position.z,
+                this.position.y + this.hullHeight,
+                top + this.hullHeight,
+                movement.hullRadius,
+              )
+            : undefined;
+        if (
+          top !== undefined &&
+          !Number.isFinite(ceiling) &&
+          !this.isBlocked(
+            this.position.x,
+            this.position.z,
+            top,
+            movement.hullRadius,
+            this.hullHeight,
+          )
+        ) {
+          this.position.y = top;
+          this.actorCarrierTop = top;
+        } else {
+          this.actorCarrier = null;
+          this.grounded = false;
+        }
+      } else this.actorCarrier = null;
+      // Source checks jump before ground friction. A jump on the landing tick
+      // therefore carries momentum instead of losing a tick of ground speed.
       if (
-        !this.isBlocked(
-          nextX,
-          this.position.z,
-          this.position.y,
-          movement.hullRadius,
-          this.hullHeight,
-        )
-      )
-        this.position.x = nextX;
-      else this.velocity.x = 0;
-      const nextZ = this.position.z + this.velocity.z * dt;
+        (this.jumpQueued || (this.settings.autoBunnyhop && this.keys.has("Space"))) &&
+        this.grounded
+      ) {
+        limitJumpSpeed(this.velocity, maxSpeed);
+        this.vertical = movement.jumpImpulse;
+        this.grounded = false;
+        this.soundscape.play("jump");
+      }
+      this.jumpQueued = false;
       if (
-        !this.isBlocked(
+        this.world.collision?.recoverGround(this.position, movement.hullRadius, this.hullHeight)
+      ) {
+        this.grounded = this.vertical <= 0;
+        if (this.grounded) this.vertical = 0;
+      }
+      const followGround = this.grounded;
+      this.actorStart.copy(this.position);
+      // Walking/ducking limit the target speed, while ground acceleration keeps
+      // weapon-speed strength against stopspeed friction (especially in a crouch).
+      accelerate(this.velocity, dx, dz, speed, dt, this.grounded, this.grounded ? maxSpeed : speed);
+      const previousY = this.position.y;
+      const falling = fallStep(this.vertical, dt);
+      this.position.y += falling.distance;
+      this.vertical = falling.vertical;
+      if (this.world.collision && this.vertical > 0) {
+        const ceiling = this.world.collision.ceiling(
           this.position.x,
-          nextZ,
-          this.position.y,
+          this.position.z,
+          previousY + this.hullHeight,
+          this.position.y + this.hullHeight,
           movement.hullRadius,
-          this.hullHeight,
-        )
-      )
-        this.position.z = nextZ;
-      else this.velocity.z = 0;
-    }
-    if (this.world.collision && this.vertical <= 0 && (followGround || this.grounded)) {
-      this.grounded = this.world.collision.followGround(
-        this.position,
-        movement.hullRadius,
-        this.hullHeight,
-      );
-      if (this.grounded) this.vertical = 0;
-    }
-    if (this.actorHulls.length) {
-      const staticGrounded = this.grounded;
-      const staticFeet = this.position.y;
-      const landing =
-        this.vertical <= 0
-          ? actorLanding(this.actorStart, this.position, this.actorHulls, movement.hullRadius)
-          : -Infinity;
-      if (Number.isFinite(landing)) this.position.y = landing;
-      const hit = slideActors(
-        this.actorStart,
-        this.position,
-        this.hullHeight,
-        this.actorHulls,
-        movement.hullRadius,
-      );
-      if (hit.hitX) this.velocity.x = 0;
-      if (hit.hitZ) this.velocity.z = 0;
+        );
+        if (Number.isFinite(ceiling)) {
+          this.position.y = ceiling - this.hullHeight;
+          this.vertical = 0;
+        }
+      }
+      this.grounded = false;
+      let ground = this.world.collision
+        ? this.world.collision.support(
+            this.position.x,
+            this.position.z,
+            previousY + (followGround ? 0.46 : 0.001),
+            this.position.y - 0.2,
+            movement.hullRadius,
+          )
+        : 0;
+      for (const b of this.world.walls) {
+        const inside =
+          this.position.x > b.x - b.w / 2 - 0.2 &&
+          this.position.x < b.x + b.w / 2 + 0.2 &&
+          this.position.z > b.z - b.d / 2 - 0.2 &&
+          this.position.z < b.z + b.d / 2 + 0.2;
+        if (!inside) continue;
+        if (previousY >= b.h - 0.05) ground = Math.max(ground, b.h);
+        if (
+          b.y &&
+          this.vertical > 0 &&
+          previousY + this.hullHeight <= b.y &&
+          this.position.y + this.hullHeight > b.y
+        ) {
+          this.position.y = b.y - this.hullHeight;
+          this.vertical = 0;
+        }
+      }
+      if (this.vertical <= 0 && this.position.y <= ground) {
+        this.position.y = ground;
+        this.vertical = 0;
+        this.grounded = true;
+      }
       if (
         this.world.collision &&
         !this.world.collision.resolveHorizontal(this.position, movement.hullRadius, this.hullHeight)
       ) {
-        this.position.x = this.actorStart.x;
-        this.position.z = this.actorStart.z;
-      }
-      const actorFloor = actorSupport(
-        this.position.x,
-        this.position.z,
-        previousY,
-        this.position.y,
-        this.actorHulls,
-        movement.hullRadius,
-        followGround,
-      );
-      this.actorCarrier = null;
-      if (
-        this.vertical <= 0 &&
-        Number.isFinite(actorFloor) &&
-        Math.abs(this.position.y - actorFloor) <= 0.001
-      ) {
-        this.position.y = actorFloor;
+        // A tight corner may have no horizontal escape. Keep the last clear
+        // height so input can still move away instead of embedding the player.
+        this.position.y = previousY;
+        this.grounded = this.vertical <= 0;
         this.vertical = 0;
-        this.grounded = true;
-        this.actorCarrier =
-          this.actorHulls.find(
-            (hull) =>
-              Math.abs(hull.y + hull.height - actorFloor) < 0.001 &&
-              Math.abs(hull.x - this.position.x) < hull.radius + movement.hullRadius &&
-              Math.abs(hull.z - this.position.z) < hull.radius + movement.hullRadius,
-          )?.id ?? null;
-        this.actorCarrierTop = actorFloor;
-      } else {
-        // A head can stop descent during this step while horizontal motion
-        // carries the rider off its edge. That endpoint is already airborne.
-        this.grounded = staticGrounded && Math.abs(this.position.y - staticFeet) < 0.001;
       }
-    } else this.actorCarrier = null;
-    if (!followGround && this.grounded) {
-      applyLandingInaccuracy(
-        this.weaponAccuracy[this.selected],
-        this.selected,
-        this.playerAccuracyPose().mode,
-        Math.max(0, -falling.vertical),
-      );
+      if (this.world.collision) {
+        this.world.collision.moveHorizontal(
+          this.position,
+          this.velocity,
+          dt,
+          movement.hullRadius,
+          this.hullHeight,
+          this.vertical <= 0 && (followGround || this.grounded),
+        );
+      } else {
+        const nextX = this.position.x + this.velocity.x * dt;
+        if (
+          !this.isBlocked(
+            nextX,
+            this.position.z,
+            this.position.y,
+            movement.hullRadius,
+            this.hullHeight,
+          )
+        )
+          this.position.x = nextX;
+        else this.velocity.x = 0;
+        const nextZ = this.position.z + this.velocity.z * dt;
+        if (
+          !this.isBlocked(
+            this.position.x,
+            nextZ,
+            this.position.y,
+            movement.hullRadius,
+            this.hullHeight,
+          )
+        )
+          this.position.z = nextZ;
+        else this.velocity.z = 0;
+      }
+      if (this.world.collision && this.vertical <= 0 && (followGround || this.grounded)) {
+        this.grounded = this.world.collision.followGround(
+          this.position,
+          movement.hullRadius,
+          this.hullHeight,
+        );
+        if (this.grounded) this.vertical = 0;
+      }
+      if (this.actorHulls.length) {
+        const staticGrounded = this.grounded;
+        const staticFeet = this.position.y;
+        const landing =
+          this.vertical <= 0
+            ? actorLanding(this.actorStart, this.position, this.actorHulls, movement.hullRadius)
+            : -Infinity;
+        if (Number.isFinite(landing)) this.position.y = landing;
+        const hit = slideActors(
+          this.actorStart,
+          this.position,
+          this.hullHeight,
+          this.actorHulls,
+          movement.hullRadius,
+        );
+        if (hit.hitX) this.velocity.x = 0;
+        if (hit.hitZ) this.velocity.z = 0;
+        if (
+          this.world.collision &&
+          !this.world.collision.resolveHorizontal(
+            this.position,
+            movement.hullRadius,
+            this.hullHeight,
+          )
+        ) {
+          this.position.x = this.actorStart.x;
+          this.position.z = this.actorStart.z;
+        }
+        const actorFloor = actorSupport(
+          this.position.x,
+          this.position.z,
+          previousY,
+          this.position.y,
+          this.actorHulls,
+          movement.hullRadius,
+          followGround,
+        );
+        this.actorCarrier = null;
+        if (
+          this.vertical <= 0 &&
+          Number.isFinite(actorFloor) &&
+          Math.abs(this.position.y - actorFloor) <= 0.001
+        ) {
+          this.position.y = actorFloor;
+          this.vertical = 0;
+          this.grounded = true;
+          this.actorCarrier =
+            this.actorHulls.find(
+              (hull) =>
+                Math.abs(hull.y + hull.height - actorFloor) < 0.001 &&
+                Math.abs(hull.x - this.position.x) < hull.radius + movement.hullRadius &&
+                Math.abs(hull.z - this.position.z) < hull.radius + movement.hullRadius,
+            )?.id ?? null;
+          this.actorCarrierTop = actorFloor;
+        } else {
+          // A head can stop descent during this step while horizontal motion
+          // carries the rider off its edge. That endpoint is already airborne.
+          this.grounded = staticGrounded && Math.abs(this.position.y - staticFeet) < 0.001;
+        }
+      } else this.actorCarrier = null;
+      if (!followGround && this.grounded) {
+        applyLandingInaccuracy(
+          this.weaponAccuracy[this.selected],
+          this.selected,
+          this.playerAccuracyPose().mode,
+          Math.max(0, -falling.vertical),
+        );
+      }
     }
     const nextEye = T.MathUtils.damp(
       this.eye,
@@ -3449,7 +3558,7 @@ export class Game {
     );
     // In air, ducking pulls the feet up while preserving the head's trajectory.
     // Reversing the posture lowers the feet again, so toggling cannot add height.
-    const nextFeet = this.position.y + (this.grounded ? 0 : this.eye - nextEye);
+    const nextFeet = this.position.y + (this.grounded || this.ladder ? 0 : this.eye - nextEye);
     const floorInExtension =
       !this.grounded && nextFeet < this.position.y
         ? this.world.collision?.support(this.position.x, this.position.z, this.position.y, nextFeet)
@@ -3480,7 +3589,10 @@ export class Game {
       this.position.y = nextFeet;
       this.eye = nextEye;
     }
-    if (this.world.collision?.recoverGround(this.position, movement.hullRadius, this.hullHeight)) {
+    if (
+      !this.ladder &&
+      this.world.collision?.recoverGround(this.position, movement.hullRadius, this.hullHeight)
+    ) {
       this.grounded = this.vertical <= 0;
       if (this.grounded) this.vertical = 0;
     }
@@ -3513,13 +3625,14 @@ export class Game {
       tracer.mesh.visible = false;
     }
     if (!this.dust) return;
-    this.dust.root.visible = true;
+    for (const world of this.nativeWorlds.values()) world.root.visible = world === this.dust;
     this.world = this.dust;
+    activateNativeMapGrade(this.dust.grade);
     const radar = el("radar") as HTMLCanvasElement;
     radar.width = this.world.navigation ? 900 : 180;
     radar.height = this.world.navigation ? 948 : 180;
     document.querySelector(".radar-wrap")!.classList.toggle("callouts", !!this.world.navigation);
-    el("location").textContent = "DUST II";
+    el("location").textContent = this.mapId === "dust2" ? "DUST II" : "MIRAGE";
     this.scene.background = this.dust.skybox ? null : this.dust.sky;
     this.scene.environment = this.dust.sky;
     // VRF panoramas start at +X, whereas Three's equirectangular lookup starts
@@ -3527,11 +3640,13 @@ export class Game {
     this.scene.backgroundRotation.y = Math.PI;
     this.scene.environmentRotation.y = Math.PI;
     // Retain the bounded global specular fallback; actors use local native probes.
-    this.scene.backgroundIntensity = 2 ** 0.765;
-    this.scene.environmentIntensity = 0.35;
+    this.scene.backgroundIntensity = this.dust.config.backgroundIntensity ?? 1;
+    this.scene.environmentIntensity = this.dust.config.environmentIntensity ?? 0.35;
     this.scene.fog = this.dust.skybox
       ? null
-      : new T.Fog("#c7d6df", this.world.collision ? 100 : 30, this.world.collision ? 240 : 90);
+      : this.dust.config.fog
+        ? new T.Fog(this.dust.config.fog.color, this.dust.config.fog.near, this.dust.config.fog.far)
+        : null;
     this.camera.far = this.world.collision ? 250 : 110;
     this.camera.updateProjectionMatrix();
   }
@@ -3692,6 +3807,7 @@ export class Game {
     const height = actor === "player" ? this.eye : crouched ? 1.1 : 1.65;
     const sample = position.clone().add(new T.Vector3(0, height * 0.5, 0));
     const field = this.dust.bombDamage;
+    if (!field) return 0;
     let hit = field.lookup(this.bomb.position, sample);
     if (!hit) return 0;
     const node = new T.Vector3(hit.nodePosition.x, hit.nodePosition.y, hit.nodePosition.z);
@@ -3906,7 +4022,7 @@ export class Game {
       const position =
         bomb.carrier === "player" ? this.position : this.bots[bomb.carrier].group.position;
       bomb.position.copy(position);
-      const atSite = dust2BombSites.contains(position, {
+      const atSite = mapTriggers(this.dust ?? {}).bombSites.contains(position, {
         halfWidth: 0.3,
         height:
           bomb.carrier === "player"
@@ -3994,7 +4110,8 @@ export class Game {
     this.position.copy(bot.group.position);
     this.velocity = { x: bot.velocity.x, z: bot.velocity.y };
     this.vertical = bot.vertical;
-    this.grounded = bot.vertical === 0;
+    this.ladderState = { ...bot.ladderState };
+    this.grounded = bot.vertical === 0 && !this.ladder;
     this.yaw = bot.group.rotation.y + Math.PI;
     this.pitch = 0;
     if (bot.tracking) {
@@ -4017,9 +4134,24 @@ export class Game {
     this.helmet = bot.helmet;
     this.defuseKit = bot.defuseKit;
     this.invulnerable = 0;
-    this.eye = movement.standingEye;
+    // Keep the consumed body's posture, including native low passages where
+    // standing would put the player's hull through the ceiling. Normal duck
+    // release checks let the player stand once there is clearance again.
+    const crouch =
+      bot.navCrouch ||
+      this.isBlocked(
+        this.position.x,
+        this.position.z,
+        this.position.y,
+        movement.hullRadius,
+        movement.standingHeight,
+      )
+        ? 1
+        : clamp(bot.rig.crouch, 0, 1);
+    this.eye = T.MathUtils.lerp(movement.standingEye, movement.duckEye, crouch);
     this.duckHeld = this.duckAccepted = this.jumpQueued = false;
     this.duckCooldown = 0;
+    this.duckTransitionRate = 15;
     this.dead = 0;
     this.keys.clear();
     this.takeoverUseHeld = true;
@@ -4838,7 +4970,7 @@ export class Game {
           this.teamMode &&
           (this.roundPause > 0 ||
             this.buyRemaining <= 0 ||
-            !dust2BuyZones.contains(b.group.position, b.team, {
+            !mapTriggers(this.dust ?? {}).buyZones.contains(b.group.position, b.team, {
               halfWidth: 0.3,
               height: b.rig.crouch > 0.5 ? 1.1 : 1.65,
             }))
@@ -4933,19 +5065,59 @@ export class Game {
     const nav = this.teamMode ? this.dust!.navigation : undefined;
     return nav?.support(x, z, ceiling, bottom, nav.areas[b.navArea]);
   }
+  botHullHeight(b: Bot) {
+    return b.navCrouch ? 1.1 : T.MathUtils.lerp(1.65, 1.1, b.rig.crouch);
+  }
+  private ladderActors(bot: Bot) {
+    let count = 0;
+    if (this.mode !== "casual") {
+      for (const other of this.bots) {
+        if (other === bot || other.health <= 0) continue;
+        const hull = (this.botLadderHulls[count++] ??= {
+          x: 0,
+          y: 0,
+          z: 0,
+          height: 0,
+          radius: movement.hullRadius,
+        });
+        Object.assign(hull, other.group.position);
+        hull.height = T.MathUtils.lerp(
+          movement.standingHeight,
+          movement.duckHeight,
+          other.rig.crouch,
+        );
+      }
+      if (!this.dead) {
+        const hull = (this.botLadderHulls[count++] ??= {
+          x: 0,
+          y: 0,
+          z: 0,
+          height: 0,
+          radius: movement.hullRadius,
+        });
+        Object.assign(hull, this.position);
+        hull.height = this.hullHeight;
+      }
+    }
+    this.botLadderHulls.length = count;
+    return this.botLadderHulls;
+  }
   stepBot(b: Bot, x: number, z: number) {
     const nav = this.teamMode ? this.dust!.navigation : undefined,
       pos = b.group.position;
     const ground = this.botSupport(b, x, z, pos.y + 0.46, pos.y - 8);
     // The original NAV regions already include Source's player hull and
     // smooth clip ramps. Only cross a region's authored outgoing links.
-    if (ground) {
+    if (
+      ground &&
+      (!b.navCrouch || !this.isBlocked(x, z, ground.height, 0.35, this.botHullHeight(b)))
+    ) {
       pos.x = x;
       pos.z = z;
       b.navArea = nav!.index.get(ground.area.id)!;
       return;
     }
-    if (!this.isBlocked(x, z, pos.y, 0.35)) {
+    if (!this.isBlocked(x, z, pos.y, 0.35, this.botHullHeight(b))) {
       pos.x = x;
       pos.z = z;
       if (nav) b.navArea = nav.nearest(pos);
@@ -4971,11 +5143,32 @@ export class Game {
         previousY = pos.y,
         previousZ = pos.z,
         previousArea = b.navArea;
+      const nav = this.world.navigation;
+      const currentArea = this.teamMode ? nav.areas[b.navArea] : nav.areas[nav.nearest(pos)];
+      const upcoming = b.path.find(
+        (point) => point instanceof T.Vector3 && point.distanceTo(pos) < 1.5,
+      );
+      const nextArea = upcoming instanceof T.Vector3 ? nav.areas[nav.nearest(upcoming)] : undefined;
+      const needsCrouch =
+        !!((currentArea?.flags ?? 0) & 0x10000) || !!((nextArea?.flags ?? 0) & 0x10000);
+      // Lower before entering a short native NAV polygon. Remain lowered until
+      // the standing hull actually clears the ceiling, even after its flag ends.
+      b.navCrouch = needsCrouch || (b.navCrouch && this.isBlocked(pos.x, pos.z, pos.y, 0.35, 1.65));
+      const botHeight = this.botHullHeight(b);
       if (b.moving) {
         let target = b.path[0];
         while (
           target &&
-          (!(target instanceof T.Vector3) || target.y <= pos.y + 0.6) &&
+          (!(target instanceof T.Vector3) ||
+            (target.y <= pos.y + 0.6 &&
+              !(
+                Math.abs(target.y - pos.y) > 0.03 &&
+                this.world.navigation.data.ladders?.some(
+                  (ladder) =>
+                    Math.hypot(ladder.bottom[0] - pos.x, ladder.bottom[2] - pos.z) < 1 &&
+                    pos.y > (ladder.exitBottom?.[1] ?? ladder.bottom[1]) + 0.05,
+                )
+              ))) &&
           Math.hypot(
             target.x - pos.x,
             (target instanceof T.Vector3 ? target.z : target.y) - pos.z,
@@ -4991,7 +5184,8 @@ export class Game {
           direction
             .normalize()
             .multiplyScalar(
-              Math.min(weapons[b.rig.weaponIndex].speed, b.alert > 0 && !b.reposition ? 3.2 : 4.8),
+              Math.min(weapons[b.rig.weaponIndex].speed, b.alert > 0 && !b.reposition ? 3.2 : 4.8) *
+                (b.navCrouch ? movement.crouchModifier : 1),
             );
           if (!b.tracking) b.facing = Math.atan2(direction.x, direction.y);
         }
@@ -5037,133 +5231,166 @@ export class Game {
       if (supportingPlayer) desired.set(0, 0);
       b.velocity.x = T.MathUtils.damp(b.velocity.x, desired.x, 12, dt);
       b.velocity.y = T.MathUtils.damp(b.velocity.y, desired.y, 12, dt);
-      if (this.world.collision && b.moving && b.vertical === 0 && desired.lengthSq() > 0) {
-        const ahead = botAhead.copy(desired).normalize().multiplyScalar(0.7);
-        const raised =
-          this.botSupport(b, pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1)?.height ??
-          this.world.collision.floor(pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1);
-        let target = b.path[0];
-        // Native jump links can start with a floor-height takeoff portal.
-        // Look through that point to the raised landing before hitting its face.
-        if (
-          target instanceof T.Vector3 &&
-          target.y <= pos.y + 0.45 &&
-          Math.hypot(target.x - pos.x, target.z - pos.z) < 1.8
-        )
-          target = b.path[1] ?? target;
-        if (
-          (raised > pos.y + 0.4 && raised < pos.y + 1.05) ||
-          (target instanceof T.Vector3 &&
-            target.y > pos.y + 0.45 &&
-            target.y < pos.y + 1.35 &&
-            Math.hypot(target.x - pos.x, target.z - pos.z) < 2)
-        )
-          b.vertical = 7.5;
-      }
-      if (this.world.collision && b.vertical !== 0) {
-        b.vertical -= 20 * dt;
-        pos.y += b.vertical * dt;
-        if (b.vertical > 0) {
-          const ceiling = this.world.collision.ceiling(
-            pos.x,
-            pos.z,
-            previousY + 1.65,
-            pos.y + 1.65,
-          );
-          if (Number.isFinite(ceiling)) {
-            pos.y = ceiling - 1.65;
-            b.vertical = -0.01;
+      const ladderTarget = b.path[0];
+      const climb =
+        b.moving && ladderTarget instanceof T.Vector3 && Math.abs(ladderTarget.y - pos.y) > 0.02
+          ? Math.sign(ladderTarget.y - pos.y)
+          : 0;
+      const ladderStep = this.world.collision
+        ? stepLadder(
+            pos,
+            { yaw: -b.facing, pitch: 0, forward: 0, right: 0, jump: false, climb },
+            dt,
+            this.world.navigation.data.ladders,
+            this.world.collision,
+            botHeight,
+            b.ladderState,
+            movement.hullRadius,
+            () => this.ladderActors(b),
+          )
+        : undefined;
+      if (ladderStep) {
+        b.velocity.set(ladderStep.velocity.x, ladderStep.velocity.z);
+        b.vertical = ladderStep.velocity.y;
+        b.progressPosition.copy(pos);
+        b.progressTime = b.stuck = 0;
+        b.navArea = this.world.navigation.nearest(pos);
+        b.group.userData.groundY = pos.y;
+      } else {
+        if (this.world.collision && b.moving && b.vertical === 0 && desired.lengthSq() > 0) {
+          const ahead = botAhead.copy(desired).normalize().multiplyScalar(0.7);
+          const raised =
+            this.botSupport(b, pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1)
+              ?.height ??
+            this.world.collision.floor(pos.x + ahead.x, pos.z + ahead.y, pos.y + 1.05, pos.y - 0.1);
+          let target = b.path[0];
+          // Native jump links can start with a floor-height takeoff portal.
+          // Look through that point to the raised landing before hitting its face.
+          if (
+            target instanceof T.Vector3 &&
+            target.y <= pos.y + 0.45 &&
+            Math.hypot(target.x - pos.x, target.z - pos.z) < 1.8
+          )
+            target = b.path[1] ?? target;
+          if (
+            (raised > pos.y + 0.4 && raised < pos.y + 1.05) ||
+            (target instanceof T.Vector3 &&
+              target.y > pos.y + 0.45 &&
+              target.y < pos.y + 1.35 &&
+              Math.hypot(target.x - pos.x, target.z - pos.z) < 2)
+          )
+            b.vertical = 7.5;
+        }
+        if (this.world.collision && b.vertical !== 0) {
+          b.vertical -= 20 * dt;
+          pos.y += b.vertical * dt;
+          if (b.vertical > 0) {
+            const ceiling = this.world.collision.ceiling(
+              pos.x,
+              pos.z,
+              previousY + botHeight,
+              pos.y + botHeight,
+            );
+            if (Number.isFinite(ceiling)) {
+              pos.y = ceiling - botHeight;
+              b.vertical = -0.01;
+            }
           }
         }
-      }
-      const dx = b.velocity.x * dt,
-        dz = b.velocity.y * dt;
-      if (dx) this.stepBot(b, pos.x + dx, pos.z);
-      if (dz) this.stepBot(b, pos.x, pos.z + dz);
+        const dx = b.velocity.x * dt,
+          dz = b.velocity.y * dt;
+        if (dx) this.stepBot(b, pos.x + dx, pos.z);
+        if (dz) this.stepBot(b, pos.x, pos.z + dz);
 
-      if (this.world.collision) {
-        const floor =
-          this.botSupport(b, pos.x, pos.z, pos.y + (b.vertical > 0 ? 0 : 0.46), pos.y - 8)
-            ?.height ??
-          this.world.collision.floor(pos.x, pos.z, pos.y + (b.vertical > 0 ? 0 : 0.45), pos.y - 8);
-        if (Number.isFinite(floor)) {
-          if (b.vertical <= 0 && pos.y <= floor + 0.45) {
-            pos.y = floor;
-            if (b.vertical < 0)
-              applyLandingInaccuracy(
-                b.weaponAccuracy,
-                b.rig.weaponIndex,
-                this.botAccuracyPose(b).mode,
-                -b.vertical,
-              );
-            b.vertical = 0;
-            b.group.userData.groundY = floor;
-          } else if (b.vertical === 0) b.vertical = -0.01;
-        } else {
-          pos.x = previousX;
-          pos.z = previousZ;
-          b.navArea = previousArea;
-          b.nav = 0;
-        }
-        // Net progress catches corner pacing and crowd oscillations, which
-        // can have nonzero velocity without leaving the same small area.
-        if (
-          !b.moving ||
-          Math.hypot(pos.x - b.progressPosition.x, pos.z - b.progressPosition.z) > 1.2
-        ) {
-          b.progressPosition.copy(pos);
-          b.progressTime = b.recoveries = 0;
-        } else b.progressTime += dt;
-        b.stuck =
-          b.moving && Math.hypot(pos.x - previousX, pos.z - previousZ) < dt * 0.25
-            ? b.stuck + dt
-            : 0;
-        if (b.progressTime > 2.5) b.stuck = Math.max(b.stuck, 0.81);
-        // Local detours are synchronous searches; allow one per simulation step.
-        if (b.stuck > 0.8 && !this.detours) {
-          this.detours++;
-          // Repair shallow landing overlaps with the same bounded contact
-          // correction used by player movement before trying another route.
-          const contactX = pos.x,
-            contactZ = pos.z;
-          if (
-            this.world.collision.resolveHorizontal(pos, 0.35, 1.65) &&
-            (pos.x !== contactX || pos.z !== contactZ)
-          )
-            b.navArea = this.dust!.navigation.nearest(pos);
-          const route = b.path.filter((p): p is T.Vector3 => p instanceof T.Vector3);
-          const goalIndex = route.findIndex((p) => Math.hypot(p.x - pos.x, p.z - pos.z) > 4);
-          const index = goalIndex >= 0 ? goalIndex : route.length - 1;
-          b.recoveries++;
-          const local =
-            index >= 0 && b.recoveries < 3 ? detour(this.world.collision, pos, route[index]) : [];
-          if (local.length) {
-            // Bounded detours can stop before the waypoint: retain that goal.
-            b.path = [...local, ...route.slice(index)];
-            b.nav = Math.max(3, local.length * 0.3);
-          } else {
-            const nav = this.dust!.navigation;
-            const area = nav.areas[nav.nearest(pos)];
-            // Smoothed waypoints may skip the adjacent area entirely. Inspect
-            // the raw route so a failed exit actually changes the next plan.
-            const onward = nav.path(
-              pos,
-              route.at(-1) ?? b.goal,
-              [],
-              b.blockedAreas,
-              false,
-              nav.areas[b.navArea],
+        if (this.world.collision) {
+          const floor =
+            this.botSupport(b, pos.x, pos.z, pos.y + (b.vertical > 0 ? 0 : 0.46), pos.y - 8)
+              ?.height ??
+            this.world.collision.floor(
+              pos.x,
+              pos.z,
+              pos.y + (b.vertical > 0 ? 0 : 0.45),
+              pos.y - 8,
             );
-            const next = onward
-              .map((point) => nav.areas[nav.nearest(point)].id)
-              .find((id) => id !== area.id && area.links.includes(id));
-            if (next !== undefined) b.blockedAreas.add(next);
-            if (b.blockedAreas.size > 8) b.blockedAreas.clear();
-            b.path = [];
+          if (Number.isFinite(floor)) {
+            if (b.vertical <= 0 && pos.y <= floor + 0.45) {
+              pos.y = floor;
+              if (b.vertical < 0)
+                applyLandingInaccuracy(
+                  b.weaponAccuracy,
+                  b.rig.weaponIndex,
+                  this.botAccuracyPose(b).mode,
+                  -b.vertical,
+                );
+              b.vertical = 0;
+              b.group.userData.groundY = floor;
+            } else if (b.vertical === 0) b.vertical = -0.01;
+          } else {
+            pos.x = previousX;
+            pos.z = previousZ;
+            b.navArea = previousArea;
             b.nav = 0;
           }
-          b.stuck = 0;
-          b.progressTime = 0;
+          // Net progress catches corner pacing and crowd oscillations, which
+          // can have nonzero velocity without leaving the same small area.
+          if (
+            !b.moving ||
+            Math.hypot(pos.x - b.progressPosition.x, pos.z - b.progressPosition.z) > 1.2
+          ) {
+            b.progressPosition.copy(pos);
+            b.progressTime = b.recoveries = 0;
+          } else b.progressTime += dt;
+          b.stuck =
+            b.moving && Math.hypot(pos.x - previousX, pos.z - previousZ) < dt * 0.25
+              ? b.stuck + dt
+              : 0;
+          if (b.progressTime > 2.5) b.stuck = Math.max(b.stuck, 0.81);
+          // Local detours are synchronous searches; allow one per simulation step.
+          if (b.stuck > 0.8 && !this.detours) {
+            this.detours++;
+            // Repair shallow landing overlaps with the same bounded contact
+            // correction used by player movement before trying another route.
+            const contactX = pos.x,
+              contactZ = pos.z;
+            if (
+              this.world.collision.resolveHorizontal(pos, 0.35, botHeight) &&
+              (pos.x !== contactX || pos.z !== contactZ)
+            )
+              b.navArea = this.dust!.navigation.nearest(pos);
+            const route = b.path.filter((p): p is T.Vector3 => p instanceof T.Vector3);
+            const goalIndex = route.findIndex((p) => Math.hypot(p.x - pos.x, p.z - pos.z) > 4);
+            const index = goalIndex >= 0 ? goalIndex : route.length - 1;
+            b.recoveries++;
+            const local =
+              index >= 0 && b.recoveries < 3 ? detour(this.world.collision, pos, route[index]) : [];
+            if (local.length) {
+              // Bounded detours can stop before the waypoint: retain that goal.
+              b.path = [...local, ...route.slice(index)];
+              b.nav = Math.max(3, local.length * 0.3);
+            } else {
+              const nav = this.dust!.navigation;
+              const area = nav.areas[nav.nearest(pos)];
+              // Smoothed waypoints may skip the adjacent area entirely. Inspect
+              // the raw route so a failed exit actually changes the next plan.
+              const onward = nav.path(
+                pos,
+                route.at(-1) ?? b.goal,
+                [],
+                b.blockedAreas,
+                false,
+                nav.areas[b.navArea],
+              );
+              const next = onward
+                .map((point) => nav.areas[nav.nearest(point)].id)
+                .find((id) => id !== area.id && area.links.includes(id));
+              if (next !== undefined) b.blockedAreas.add(next);
+              if (b.blockedAreas.size > 8) b.blockedAreas.clear();
+              b.path = [];
+              b.nav = 0;
+            }
+            b.stuck = 0;
+            b.progressTime = 0;
+          }
         }
       }
       const turn = Math.atan2(
@@ -5176,15 +5403,15 @@ export class Game {
         vz = (pos.z - previousZ) / dt;
       b.rig.moveX = vx * Math.cos(b.group.rotation.y) - vz * Math.sin(b.group.rotation.y);
       b.rig.moveZ = vx * Math.sin(b.group.rotation.y) + vz * Math.cos(b.group.rotation.y);
-      b.rig.airborne = b.vertical !== 0;
-      b.rig.jumping = b.vertical > 0;
+      b.rig.airborne = b.vertical !== 0 && b.ladderState.id === null;
+      b.rig.jumping = b.vertical > 0 && b.ladderState.id === null;
       b.rig.plant =
         this.bomb?.carrier === index && !this.bomb.planted
           ? this.bomb.plantProgress / PLANT_DURATION
           : 0;
       b.rig.crouch = T.MathUtils.damp(
         b.rig.crouch,
-        this.bomb?.defuser === index || b.rig.plant > 0 ? 1 : 0,
+        b.navCrouch || this.bomb?.defuser === index || b.rig.plant > 0 ? 1 : 0,
         12,
         dt,
       );
@@ -5248,7 +5475,7 @@ export class Game {
     const ctx = canvas.getContext("2d")!,
       w = canvas.width,
       h = canvas.height,
-      key = `dust:${live}:${w}x${h}`;
+      key = `${this.mapId}:${live}:${w}x${h}`;
     let layer = this.radarLayers.get(key);
     if (!layer) {
       layer = document.createElement("canvas");
@@ -5324,12 +5551,38 @@ export class Game {
     ctx.restore();
   }
   mapProjection(w: number, h: number) {
-    return dustRadarProjection(w, h);
+    if (this.mapId === "dust2") return dustRadarProjection(w, h);
+    const overview = this.dust?.config.radar;
+    if (overview && this.radarImage) {
+      const width = this.radarImage.naturalWidth,
+        height = this.radarImage.naturalHeight;
+      const scale = Math.min(w / width, h / height);
+      const left = (w - width * scale) / 2,
+        top = (h - height * scale) / 2;
+      return {
+        scale,
+        left,
+        top,
+        px: (x: number) => left + ((x / 0.0254 - overview.pos_x) / overview.scale) * scale,
+        pz: (z: number) => top + ((overview.pos_y + z / 0.0254) / overview.scale) * scale,
+      };
+    }
+    const [minX, minZ, maxX, maxZ] = this.world.navigation.data.bounds;
+    const scale = Math.min(w / (maxX - minX), h / (maxZ - minZ));
+    const left = (w - (maxX - minX) * scale) / 2;
+    const top = (h - (maxZ - minZ) * scale) / 2;
+    return {
+      scale,
+      left,
+      top,
+      px: (x: number) => left + (x - minX) * scale,
+      pz: (z: number) => top + (z - minZ) * scale,
+    };
   }
 
   drawMapLayer(ctx: CanvasRenderingContext2D, w: number, h: number, _live: boolean) {
     if (this.world.navigation) {
-      if (this.radarImage) {
+      if (this.radarImage && this.mapId === "dust2") {
         const { scale, left, top } = dustRadarProjection(w, h);
         const { x, y, width, height, referenceSize } = radarCrop;
         const sourceScale = this.radarImage.naturalWidth / referenceSize;
@@ -5345,7 +5598,36 @@ export class Game {
           height * scale,
         );
       }
-      ctx.restore();
+      if (this.mapId !== "dust2" && this.radarImage) {
+        const { left, top, scale } = this.mapProjection(w, h);
+        ctx.drawImage(
+          this.radarImage,
+          left,
+          top,
+          this.radarImage.naturalWidth * scale,
+          this.radarImage.naturalHeight * scale,
+        );
+      } else if (this.mapId !== "dust2") {
+        const { px, pz } = this.mapProjection(w, h);
+        ctx.fillStyle = "#737e84";
+        ctx.strokeStyle = "#323b40";
+        ctx.lineWidth = 0.5;
+        for (const area of this.world.navigation.areas) {
+          ctx.beginPath();
+          area.corners.forEach((corner, i) =>
+            i ? ctx.lineTo(px(corner[0]), pz(corner[2])) : ctx.moveTo(px(corner[0]), pz(corner[2])),
+          );
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+        ctx.font = `bold ${Math.min(w, h) / 24}px Stratum2, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#e7c173";
+        this.world.navigation.data.sites.forEach((site, i) =>
+          ctx.fillText(i ? "B" : "A", px(site[0]), pz(site[2])),
+        );
+      }
       return;
     }
   }
@@ -5401,6 +5683,7 @@ export class Game {
     if (footer)
       footer.textContent = `HOLD TAB TO VIEW SCOREBOARD - ${this.network ? "MULTIPLAYER" : "SINGLE PLAYER"}`;
     const data = {
+      map: this.mapId,
       rows,
       seconds,
       mode: this.mode,
@@ -5639,7 +5922,7 @@ export class Game {
     this.gun.visible = true;
   }
   updateViewLighting(model: T.Object3D, dt: number) {
-    const source = this.world === this.dust;
+    const source = this.world === this.dust && this.dust.sourceLighting;
     this.probeMatrix.makeRotationFromQuaternion(this.camera.quaternion);
     this.probeRotation.setFromMatrix4(this.probeMatrix);
     updateActorLighting(
@@ -5653,7 +5936,7 @@ export class Game {
     );
   }
   updateSceneLighting(dt: number) {
-    const source = this.world === this.dust;
+    const source = this.world === this.dust && this.dust.sourceLighting;
     for (const bot of this.bots) {
       if (!bot.group.visible) continue;
       this.probePosition.copy(bot.group.position);
@@ -5702,10 +5985,15 @@ export class Game {
       this.viewSun.position
         .set(-Math.cos(pitch) * Math.cos(yaw), Math.sin(pitch), Math.cos(pitch) * Math.sin(yaw))
         .applyQuaternion(this.probeInverse.copy(this.camera.quaternion).invert());
-    } else {
-      this.viewSun.color.setHex(0xffefd5);
-      this.viewSun.intensity = 3;
-      this.viewSun.position.set(-1, 3, 2);
+    } else if (this.dust) {
+      const sun = this.dust.config.sun;
+      const pitch = T.MathUtils.degToRad(sun.pitch),
+        yaw = T.MathUtils.degToRad(sun.yaw);
+      this.viewSun.color.setHex(sun.color);
+      this.viewSun.intensity = sun.intensity;
+      this.viewSun.position
+        .set(-Math.cos(pitch) * Math.cos(yaw), Math.sin(pitch), Math.cos(pitch) * Math.sin(yaw))
+        .applyQuaternion(this.probeInverse.copy(this.camera.quaternion).invert());
     }
     const viewModel =
       this.active && this.dead && this.teamMode && this.spectatorMode === "first" && this.spectated
@@ -5753,6 +6041,7 @@ export class Game {
       this.last = now;
       return;
     }
+    showNativeMapGrade(this.active || !!this.teamPreview);
     this.updateTextureQuality();
     const elapsed = (now - this.last) / 1000;
     const dt = Math.min(elapsed, 0.05);
@@ -5938,7 +6227,7 @@ export class Game {
     if (this.active && this.dead && this.teamMode) this.spectate();
     if (!this.dead || !this.active) this.spectated = undefined;
     if (this.audio) {
-      this.soundscape.spatial.useNativeProbes = this.teamMode;
+      this.soundscape.spatial.useNativeProbes = this.teamMode && !!this.dust?.sourceLighting;
       this.soundscape.spatial.update(this.audio, this.camera);
     }
     this.animateBots();

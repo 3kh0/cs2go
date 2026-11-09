@@ -2,7 +2,11 @@ export { SnapshotEncoder, SnapshotDecoder } from "./snapshot-codec";
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 12;
+export const PROTOCOL_VERSION = 13;
+export type MapId = "dust2" | "mirage";
+export function isMapId(value: unknown): value is MapId {
+  return value === "dust2" || value === "mirage";
+}
 export const MAX_CHAT_LENGTH = 240;
 export const CHAT_INTERVAL_MS = 750;
 export type ChatChannel = "team" | "all";
@@ -108,6 +112,7 @@ export type PlayerState = Vec3 & {
   vertical: number;
   eye: number;
   grounded: boolean;
+  ladder?: { id: number | null; detachTime: number };
   yaw: number;
   pitch: number;
   allowedWeapons: number[];
@@ -249,7 +254,7 @@ export type ServerMessage =
       version: number;
       id: string;
       room: string;
-      map: "dust2";
+      map: MapId;
       mode: MatchMode;
       resume?: string;
     }
@@ -273,6 +278,7 @@ export type ClientMessage =
       name: string;
       create?: boolean;
       mode: MatchMode;
+      map?: MapId;
       team: Team;
     }
   | { type: "configure"; configuration: PlayerConfiguration }
@@ -466,6 +472,7 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     (value.resume === undefined ||
       (typeof value.resume === "string" && /^[a-f0-9-]{36}$/.test(value.resume))) &&
     (value.create === undefined || typeof value.create === "boolean") &&
+    (value.map === undefined || isMapId(value.map)) &&
     (value.create === true
       ? value.room === "" && value.resume === undefined
       : validRoom(value.room)) &&

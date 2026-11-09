@@ -1,13 +1,32 @@
-export function openMatchLoading(mode: "casual" | "competitive" = "casual") {
+import type { MapId } from "@cs2go/protocol";
+import type { Game } from "./game";
+export function openMatchLoading(
+  mode: Parameters<Game["start"]>[0] = "casual",
+  map: MapId = "dust2",
+) {
+  const name = map === "dust2" ? "Dust II" : "Mirage";
+  const title = {
+    casual: "Casual",
+    competitive: "Competitive",
+    deathmatch: "Deathmatch",
+    practice: "Practice",
+  }[mode];
+  const briefing =
+    mode === "practice"
+      ? "<strong>Practice</strong><p>Practice movement and weapon handling against stationary targets.</p><p>No round timer · Unlimited reserve ammunition</p>"
+      : mode === "deathmatch"
+        ? "<strong>Deathmatch</strong><p>Eliminate opponents and respawn after each death.</p><p>First to 20 eliminations · Five-minute match</p>"
+        : `<strong>Bomb Scenario Mission</strong><p>Buy equipment at the beginning of each round with money earned.</p><p>${mode === "competitive" ? "5 vs 5 · Round economy<br>Friendly fire is ON" : "10 vs 10 · Free armor<br>Friendly fire is OFF"}</p>`;
   const menu = document.getElementById("menu")!;
   const overlay = document.createElement("section");
   const controller = new AbortController();
   overlay.id = "match-loading";
+  overlay.dataset.map = map;
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-labelledby", "match-loading-title");
   overlay.setAttribute("aria-busy", "true");
-  overlay.innerHTML = `<div class="match-loading-scenery"><span>Dust II</span></div><aside class="match-loading-panel"><div class="match-loading-content"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="match-loading-map">Dust II</span><h1 id="match-loading-title">${mode === "competitive" ? "Competitive" : "Casual"}</h1></div><div class="match-loading-brief"><strong>Bomb Scenario Mission</strong><p>Buy equipment at the beginning of each round with money earned.</p><p>${mode === "competitive" ? "5 vs 5 · Round economy<br>Friendly fire is ON" : "10 vs 10 · Free armor<br>Friendly fire is OFF"}</p></div><footer class="match-loading-footer"><div class="match-loading-progress"><p role="status" aria-live="polite">Preparing Dust II...</p><progress max="3" value="0" aria-label="Match preparation"></progress></div><button class="text-button" type="button">CANCEL · ESC</button></footer></aside>`;
+  overlay.innerHTML = `<div class="match-loading-scenery"><span>${name}</span></div><aside class="match-loading-panel"><div class="match-loading-content"><img class="map-badge" src="/ui/home/${map}-emblem.svg" alt=""><span class="match-loading-map">${name}</span><h1 id="match-loading-title">${title}</h1></div><div class="match-loading-brief">${briefing}</div><footer class="match-loading-footer"><div class="match-loading-progress"><p role="status" aria-live="polite">Preparing ${name}...</p><progress max="3" value="0" aria-label="Match preparation"></progress></div><button class="text-button" type="button">CANCEL · ESC</button></footer></aside>`;
   const status = overlay.querySelector<HTMLElement>('[role="status"]')!;
   const progress = overlay.querySelector("progress")!;
   const button = overlay.querySelector("button")!;

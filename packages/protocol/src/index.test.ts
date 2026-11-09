@@ -83,9 +83,12 @@ test("rejects incompatible versions, malformed payloads and impossible inputs", 
     team: "ct",
   };
   expect(parseClientMessage(JSON.stringify(join))).toEqual(join);
+  expect(parseClientMessage(JSON.stringify({ ...join, map: "mirage" }))).not.toBeNull();
+  expect(parseClientMessage(JSON.stringify({ ...join, map: "dust2" }))).not.toBeNull();
   expect(parseClientMessage(JSON.stringify({ ...join, create: true, room: "" }))).not.toBeNull();
   for (const value of [
     { ...join, version: -1 },
+    ...["de_mirage", "../mirage", "nuke", null, 1].map((map) => ({ ...join, map })),
     ...["12345", "1234567", "abcdef", "abcd1234abcd", 123456, "123 45"].map((room) => ({
       ...join,
       room,

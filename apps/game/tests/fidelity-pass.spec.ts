@@ -249,11 +249,21 @@ test("native idle motion continues with non-default showcase weapons and fire re
     g.simulate = () => {};
     g.invulnerable = 100;
     g.freezeTime = 0;
-    g.position.set(-17, 0, 17);
+    // Use the native B-site anchor and actual collision floor. The old y=0
+    // fixture placed the detonation far below Dust II's supported geometry.
+    const p = g.position.clone().fromArray(g.world.navigation.data.sites[1]);
+    const floor = g.world.collision.floor(p.x, p.z, p.y + 1, p.y - 2);
+    if (!Number.isFinite(floor)) throw new Error("Fire fixture requires a supported site floor");
+    p.y = floor + 0.16;
+    g.position.copy(p);
+    g.position.z += 5;
+    const cameraFloor = g.world.collision.floor(g.position.x, g.position.z, p.y + 2, p.y - 3);
+    if (!Number.isFinite(cameraFloor))
+      throw new Error("Fire fixture requires a supported camera floor");
+    g.position.y = cameraFloor + 0.01;
     g.yaw = 0;
-    g.pitch = -0.1;
+    g.pitch = -0.22;
     g.updateAimCamera();
-    const p = g.position.clone().set(-17, 0.05, 12);
     g.utility.launch("molotov", "player", "ct", p, p.clone().set(0, 0, 0), 2);
     g.utility.detonate(g.utility.projectiles.at(-1)!);
     const effect = g.utility.effects.at(-1)!;

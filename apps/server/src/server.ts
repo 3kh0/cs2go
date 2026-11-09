@@ -9,6 +9,7 @@ import {
   neutralInput,
   SnapshotEncoder,
   parseClientMessage,
+  type MapId,
   type Input,
   type MatchEvent,
   type PlayerState,
@@ -49,6 +50,7 @@ import type { DustMap } from "@cs2go/simulation/dust-map";
 import { rulesFor } from "@cs2go/simulation/economy";
 export type ServerOptions = {
   map: DustMap;
+  maps?: Partial<Record<MapId, DustMap>>;
   port: number;
   hostname?: string;
   origins: string[];
@@ -69,6 +71,12 @@ export function startServer(options: ServerOptions) {
   )
     throw new Error("ALLOWED_ORIGINS must contain exact HTTP(S) origins.");
   const origins = new Set(options.origins);
+  const defaultMap = options.map.id ?? "dust2";
+  const maps = new Map<MapId, DustMap>([[defaultMap, options.map]]);
+  for (const [id, map] of Object.entries(options.maps ?? {})) {
+    if (map.id !== id) throw new Error(`Map registry ID does not match ${id}`);
+    maps.set(id as MapId, map);
+  }
   const rooms = new Map<string, Room>();
   const connections = new Set<ServerWebSocket<Connection>>();
   let stopping = false;
@@ -104,21 +112,35 @@ export function startServer(options: ServerOptions) {
       const path = new URL(request.url).pathname;
       if (request.method === "GET" && path === "/healthz")
         return Response.json(
-          { ok: !stopping, version: PROTOCOL_VERSION },
-          { status: stopping ? 503 : 200 },
+          { ok: !stopping, version: PROTOCOL_VERSION, map: defaultMap, maps: [...maps.keys()] },
+          {
+            status: stopping ? 503 : 200,
+            headers: {
+              ...(origins.has(request.headers.get("origin") ?? "")
+                ? { "Access-Control-Allow-Origin": request.headers.get("origin")! }
+                : {}),
+              Vary: "Origin",
+              "Cache-Control": "no-store",
+            },
+          },
         );
       if (request.method === "GET" && /^\/lobbies\/\d{6}$/.test(path)) {
         const origin = request.headers.get("origin") ?? "";
         if (!origins.has(origin)) return new Response("Origin not allowed", { status: 403 });
         const room = rooms.get(path.slice("/lobbies/".length));
-        return Response.json(room ? { mode: room.state.mode } : { error: "Lobby not found" }, {
-          status: room ? 200 : 404,
-          headers: {
-            "Access-Control-Allow-Origin": origin,
-            Vary: "Origin",
-            "Cache-Control": "no-store",
+        return Response.json(
+          room
+            ? { mode: room.state.mode, map: room.map.id ?? "dust2" }
+            : { error: "Lobby not found" },
+          {
+            status: room ? 200 : 404,
+            headers: {
+              "Access-Control-Allow-Origin": origin,
+              Vary: "Origin",
+              "Cache-Control": "no-store",
+            },
           },
-        });
+        );
       }
       if (request.method !== "GET" || path !== "/ws")
         return new Response("Not found", { status: 404 });
@@ -165,6 +187,9 @@ export function startServer(options: ServerOptions) {
         if (!message) return reject(socket, "Invalid message or incompatible game version");
         if (message.type === "join") {
           if (connection.room) return reject(socket, "Already joined");
+          const requestedMap = message.map ?? defaultMap;
+          const selectedMap = maps.get(requestedMap);
+          if (!selectedMap) return reject(socket, "Map is not available on this server");
           let code = message.room;
           if (message.create) {
             if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
@@ -182,7 +207,7 @@ export function startServer(options: ServerOptions) {
           if (!room) {
             if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
             room = {
-              ...createMatch(message.mode, options.map),
+              ...createMatch(message.mode, selectedMap),
               connections: new Set(),
               events: [],
               tick: 0,
@@ -190,9 +215,11 @@ export function startServer(options: ServerOptions) {
             rooms.set(code, room);
             roomLabels.set(room, nextRoomLabel++);
             log(
-              `Room #${roomLabels.get(room)} created - Dust II - ${message.mode} - ${rulesFor(message.mode).teamSize}v${rulesFor(message.mode).teamSize}`,
+              `Room #${roomLabels.get(room)} created - ${requestedMap === "mirage" ? "Mirage" : "Dust II"} - ${message.mode} - ${rulesFor(message.mode).teamSize}v${rulesFor(message.mode).teamSize}`,
             );
           }
+          if ((room.map.id ?? "dust2") !== requestedMap)
+            return reject(socket, "Lobby uses a different map. Return to Play and rejoin.");
           if (message.resume && room.state.mode !== message.mode)
             return reject(socket, "Room uses a different game mode");
           if (
@@ -239,7 +266,7 @@ export function startServer(options: ServerOptions) {
             id: player.id,
             resume: connection.resume,
             room: code,
-            map: "dust2",
+            map: room.map.id ?? "dust2",
             mode: room.state.mode,
           });
         } else if (!connection.room) return reject(socket, "Join a room first");

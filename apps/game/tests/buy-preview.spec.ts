@@ -40,6 +40,45 @@ test("native buy poses preview every firearm and utility on both agents without 
     ammo: window.__game.ammo,
     reserve: window.__game.reserve,
   }));
+  // The extracted Source 2 pose layer is shared by both teams (see the buy
+  // source.json provenance); CT's model must not imply a CT-prefixed clip.
+  // Pin each firearm's actual native clip, including authored variant suffixes.
+  const firearmClips: Record<string, string> = {
+    0: "ak_03",
+    1: "m4a1",
+    2: "usp_silencer",
+    3: "awp_03",
+    7: "glock18_03",
+    8: "deagle_03",
+    9: "m4a4",
+    10: "nova_02",
+    11: "mp9_03",
+    12: "hkp2000",
+    13: "p250_03",
+    14: "fiveseven",
+    15: "tec9_03",
+    16: "cz75",
+    17: "revolver_03",
+    18: "elite",
+    19: "famas",
+    20: "galilar_03",
+    21: "aug",
+    22: "sg556_03",
+    23: "ssg08_03",
+    24: "scar20",
+    25: "g3sg1_03",
+    26: "mac10_03",
+    27: "mp7_03",
+    28: "mp5sd_03",
+    29: "ump45_03",
+    30: "p90_03",
+    31: "bizon_03",
+    32: "xm1014_02",
+    33: "mag7_02",
+    34: "sawedoff_02",
+    35: "m249_02",
+    36: "negev_02",
+  };
   for (const team of ["t", "ct"] as const) {
     await page.evaluate((side) => {
       window.__game.team = side;
@@ -57,8 +96,17 @@ test("native buy poses preview every firearm and utility on both agents without 
       );
       await expect(page.locator("#buy-preview-stage")).toHaveAttribute(
         "data-pose",
-        new RegExp(`^${team}_buymenu_`),
+        `t_buymenu_${firearmClips[id]}`,
       );
+      await expect(page.locator("#buy-preview-stage")).toHaveAttribute(
+        "data-agent",
+        `default-${team}`,
+      );
+      if (team === "ct")
+        await expect(page.locator("#buy-preview-stage")).toHaveAttribute(
+          "data-agent-model",
+          "/models/agents/roster/ctm-sas.glb",
+        );
       if (id === "18") await page.screenshot({ path: `artifacts/buy-pose-${team}-dual.png` });
       if (id === (team === "t" ? "7" : "2"))
         await page.screenshot({ path: `artifacts/buy-pose-${team}-pistol.png` });

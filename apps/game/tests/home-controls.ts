@@ -19,6 +19,18 @@ export async function selectHomeScenery(page: Page, name: string) {
 
 export async function equipHomeAgent(page: Page, team: "ct" | "t", id: string) {
   await selectHomeTeam(page, team);
+  // Loadout exposes default and locally selected agents, not the full catalog.
+  // Seed just this fixture's saved appearance through the existing store API;
+  // do not broaden the product's inventory to make a test option appear.
+  await page.evaluate(
+    async ({ team, id }) => {
+      const modulePath = "/src/agent-roster.ts";
+      const roster = (await import(modulePath)) as typeof import("../src/agent-roster");
+      await roster.loadAgentCatalog();
+      roster.setSelectedAgent(team, id);
+    },
+    { team, id },
+  );
   await page.locator("#inventory-button").click();
   await page.locator('.loadout-team [data-loadout-cosmetic="agents"]').click();
   await page.locator(`[data-cosmetic-choice="${id}"]`).click();

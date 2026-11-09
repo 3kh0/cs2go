@@ -91,7 +91,7 @@ test("jump and landing retain an accuracy penalty that recovers, and scope chang
     });
     g.buy(0);
     g.cooldown = g.drawTime = 0;
-    g.position.set(0, 0, 0);
+    // Retain the authored spawn; world origin has no Dust II collision floor.
     g.velocity = { x: 0, z: 0 };
     g.vertical = 0;
     g.grounded = true;

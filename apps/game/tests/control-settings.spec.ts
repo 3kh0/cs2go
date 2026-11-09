@@ -25,6 +25,11 @@ test("key rebinding persists, rejects conflicts and drives gameplay; fullscreen 
   await jump.click();
   await page.getByRole("tab", { name: "Video", exact: true }).click();
   await page.keyboard.press("ArrowRight");
+  await expect(page.getByRole("tab", { name: "Viewmodel", exact: true })).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+  await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("tab", { name: "Audio", exact: true })).toHaveAttribute(
     "aria-selected",
     "true",

@@ -4,9 +4,10 @@ import { registerActorLighting } from "./actor-lighting";
 import { WorldBallPhysics } from "@cs2go/simulation/world-ball";
 export class WorldBall extends WorldBallPhysics {
   declare mesh?: T.Mesh;
-  constructor(root: T.Group, collision: MapCollision) {
+  constructor(root: T.Group, collision: MapCollision, enabled = true) {
     super(collision, new T.Vector3());
     this.mesh = undefined;
+    if (!enabled) return;
     root.updateMatrixWorld(true);
     const sources: T.Mesh[] = [];
     root.traverse((object) => {

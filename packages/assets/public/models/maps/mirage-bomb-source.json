@@ -1,0 +1,51 @@
+{
+  "author": "Valve",
+  "map": "de_mirage",
+  "source": "Installed Counter-Strike 2 map VPK, exported read-only through the Amp runner",
+  "sourceResource": "maps/de_mirage/baked_bomb_damage.vdata_c",
+  "resourceVersion": 2,
+  "vpk": {
+    "file": "de_mirage.vpk",
+    "bytes": 176187297,
+    "sha256": "e66cdf1ae6a976f6f6ba510a2addd04b25a4c1cfd811f51f1ef13f0954e6e350"
+  },
+  "tool": {
+    "name": "Source2Viewer-CLI",
+    "version": "Version: 20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304\nOS: macOS 27.2.0 (Arm64)\nWebsite: https://valveresourceformat.github.io\nGitHub: https://github.com/ValveResourceFormat/ValveResourceFormat",
+    "sha256": "8e27bdcb4e43e263b3cf1a3b87d2faece3c35d764e0712ff41a7a1cd0e547ae0"
+  },
+  "resourceSha256": "6f11916a6e4f133a2e4f64af192fae9a0cdfdac64eebaeed4ab7a2d66581481a",
+  "decompiledSha256": "cd9526bc4cca227ff22430846a70a9759e2b7043f8a3a182e2598bb49ec46381",
+  "positions": 68279,
+  "bombsites": [
+    [
+      -616.0,
+      -2328.0,
+      -180.0,
+      -264.0,
+      -1972.0,
+      -156.0,
+      1795.0
+    ],
+    [
+      -2216.0,
+      72.0,
+      -159.0,
+      -1880.0,
+      440.0,
+      -143.0,
+      2228.0
+    ]
+  ],
+  "runtime": {
+    "file": "mirage-bomb.bin.gz",
+    "bytes": 731393,
+    "sha256": "630fc01c6fd5ef569d0609a4c9cc4c5a9bdd79d1973d860bc1af4218857722fe",
+    "decodedBytes": 955978,
+    "decodedSha256": "32dbddea740e489d95c3f74dae065b2aed1ffb0575659e2d869b479f49890b12"
+  },
+  "regenerate": "python3 packages/assets/import-map-bomb.py --map mirage --vpk /path/de_mirage.vpk --cli /path/Source2Viewer-CLI --cache artifacts/mirage-bomb",
+  "decoderReference": "https://github.com/ValveResourceFormat/ValveResourceFormat/blob/108ec505021af108c7f69dbd4d3a64f89d74304e/ValveResourceFormat/Resource/ResourceTypes/GenericData/CS2/BombDamage.cs",
+  "queryReference": "https://github.com/Starfie1d1272/cs2-c4-damage/tree/4e288d3c986183b5357c1264bc4793cd3d394688",
+  "qualification": "Exact extracted field bytes; query uses the independently audited static native reconstruction, not matched-build live qualification."
+}

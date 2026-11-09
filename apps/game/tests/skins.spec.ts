@@ -1,9 +1,46 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import type { Game } from "../src/game";
 declare global {
   interface Window {
     __game: Game;
   }
+}
+
+async function chooseFinish(page: Page, weapon: number, id: string, add = false) {
+  if (await page.locator("#skin-form").isVisible())
+    await page.locator("#close-item-details").click();
+  const adding = (await page.locator("#add-inventory-item").textContent())!.includes("BACK");
+  if (adding !== add) await page.locator("#add-inventory-item").click();
+  await page.locator("#inventory-weapon").selectOption(String(weapon));
+  if (await page.locator("#skin-search").isVisible()) await page.locator("#skin-search").fill("");
+  await page.locator(`[data-item-weapon="${weapon}"][data-skin="${id}"]`).click();
+  await page.locator("#weapon-action-customize").click();
+  await expect(page.locator("#skin-form")).toBeVisible({ timeout: 30000 });
+}
+
+async function addAndEquip(page: Page, weapon: number, id: string) {
+  await page.locator("#apply-skin").click();
+  await expect(page.locator("#skin-status")).toContainText("Added to your inventory");
+  await chooseFinish(page, weapon, id);
+  await page.locator("#apply-skin").click();
+  await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 30000 });
+}
+
+async function closeInventory(page: Page) {
+  if (await page.locator("#skin-form").isVisible())
+    await page.locator("#close-item-details").click();
+  if (await page.locator("#skin-search").isVisible())
+    await page.locator("#inventory-everything").click();
+  await page.keyboard.press("Escape");
+}
+
+async function acquireCurrentFinish(page: Page, weapon: number) {
+  // Inventory edits affect future weapons. Existing held/dropped instances
+  // intentionally retain their original finish, so acquire a fresh instance.
+  await page.evaluate((id) => {
+    window.__game.groundInventory.newPlayerWeapon(id);
+    window.__game.equip(id);
+  }, weapon);
 }
 
 test("skin catalog customizes wear and seed, persists, and restores default", async ({ page }) => {
@@ -18,12 +55,11 @@ test("skin catalog customizes wear and seed, persists, and restores default", as
   await page.goto("/");
   await page.waitForFunction(() => window.__game?.assetsReady);
   await page.locator("#skins-button").click();
-  await page.locator("#inventory-search").click();
-  await page.locator("#skin-search").fill("Case Hardened");
-  const thumbnail = await page.locator('[data-skin="7_44"] img').elementHandle();
-  await page.locator('[data-skin="7_44"]').click();
+  await chooseFinish(page, 0, "7_44", true);
   await page.locator("#skin-float").fill("0.012345");
   await page.locator("#skin-seed").fill("661");
+  await addAndEquip(page, 0, "7_44");
+  const thumbnail = await page.locator('[data-skin="7_44"] img').elementHandle();
   await page.locator("#apply-skin").click();
   await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 30000 });
   expect(
@@ -38,10 +74,11 @@ test("skin catalog customizes wear and seed, persists, and restores default", as
   await page.reload();
   await page.waitForFunction(() => window.__game?.assetsReady);
   await page.locator("#skins-button").click();
-  await expect(page.locator("#skin-title")).toHaveText("Case Hardened");
+  await chooseFinish(page, 0, "7_44");
+  await expect(page.locator("#skin-title")).toHaveText("AK-47 | Case Hardened");
   await expect(page.locator("#skin-float")).toHaveValue("0.012345");
   await expect(page.locator("#skin-seed")).toHaveValue("661");
-  await page.keyboard.press("Escape");
+  await closeInventory(page);
   await page.locator("#play").evaluate((b) => {
     b.onclick = () => window.__game.start("practice");
   });
@@ -67,13 +104,13 @@ test("skin catalog customizes wear and seed, persists, and restores default", as
   await page.screenshot({ path: "artifacts/skin-case-hardened-inspect.png" });
   await page.evaluate(() => document.exitPointerLock());
   await page.locator("#pause-skins").click();
-  await page.locator('[data-skin=""]').click();
+  await chooseFinish(page, 0, "");
   await page.locator("#apply-skin").click();
   await expect(page.locator("#skin-status")).toContainText("Applied");
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("cs2go-skins-v1")!)[0].id)).toBe(
     "",
   );
-  await page.keyboard.press("Escape");
+  await closeInventory(page);
   await page.locator("#resume").click();
   await page.waitForFunction(() => window.__game.locked);
   const ammo = await page.evaluate(() => window.__game.ammo);
@@ -181,6 +218,13 @@ test("knife finishes persist independently, animate, and restore their defaults"
   page,
 }) => {
   test.setTimeout(120000);
+  await page.addInitScript(() => {
+    if (!localStorage.getItem("cs2go-local-inventory"))
+      localStorage.setItem(
+        "cs2go-local-inventory",
+        JSON.stringify([4, 5, 6].map((weapon) => ({ weapon, id: "", wear: 0.01, seed: 1 }))),
+      );
+  });
   const errors: string[] = [],
     foreign: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -196,19 +240,20 @@ test("knife finishes persist independently, animate, and restore their defaults"
     [5, 515, "Butterfly Knife"],
     [6, 507, "Karambit"],
   ] as const) {
-    await page.getByRole("button", { name, exact: true }).click();
-    await expect(page.locator("#skin-grid button")).toHaveCount(35);
-    await page.locator("#inventory-search").click();
+    await chooseFinish(page, index, `${item}_44`, true);
+    await page.locator("#close-item-details").click();
+    // The current CS2 catalog folds Doppler phases into their two families.
+    await expect(page.locator("#skin-grid button")).toHaveCount(25);
+    if (!(await page.locator("#skin-search").isVisible()))
+      await page.locator("#inventory-search").click();
     await page.locator("#skin-search").fill("Doppler");
-    await expect(page.locator("#skin-grid button")).toHaveCount(12);
-    await expect(page.locator("#skin-grid")).toContainText("Gamma Doppler | Emerald");
-    await page.locator("#inventory-search").click();
-    await page.locator("#skin-search").fill("Case Hardened");
-    await page.locator(`[data-skin="${item}_44"]`).click();
+    await expect(page.locator("#skin-grid button")).toHaveCount(2);
+    await expect(page.locator("#skin-grid")).toContainText("Gamma Doppler");
+    await chooseFinish(page, index, `${item}_44`, true);
+    await expect(page.locator("#skin-title")).toHaveText(`${name} | Case Hardened`);
     await page.locator("#skin-float").fill("0.123456");
     await page.locator("#skin-seed").fill(String(400 + index));
-    await page.locator("#apply-skin").click();
-    await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 30000 });
+    await addAndEquip(page, index, `${item}_44`);
   }
   await page.screenshot({ path: "artifacts/knife-skin-catalog.png" });
   await page.reload();
@@ -245,8 +290,8 @@ test("knife finishes persist independently, animate, and restore their defaults"
     await page.screenshot({ path: `artifacts/skin-knife-${index}-inspect.png` });
     await page.evaluate(() => document.exitPointerLock());
     await page.locator("#pause-skins").click();
-    await page.locator(`[data-skin-weapon="${index}"]`).click();
-    await expect(page.locator("#skin-title")).toHaveText("Case Hardened");
+    await chooseFinish(page, index, `${item}_44`);
+    await expect(page.locator("#skin-title")).toContainText("Case Hardened");
     await expect(page.locator("#skin-float")).toHaveValue("0.123456");
     await expect(page.locator("#skin-seed")).toHaveValue(String(400 + index));
     expect(
@@ -255,9 +300,10 @@ test("knife finishes persist independently, animate, and restore their defaults"
         index,
       ),
     ).toBe(`${item}_44`);
-    await page.locator('[data-skin=""]').click();
+    await chooseFinish(page, index, "");
     await page.locator("#apply-skin").click();
     await expect(page.locator("#skin-status")).toContainText("Applied");
+    await acquireCurrentFinish(page, index);
     const restored = await page.evaluate((material) => {
       let restored = false;
       window.__game.gun.traverse((o) => {
@@ -267,7 +313,7 @@ test("knife finishes persist independently, animate, and restore their defaults"
       return restored;
     }, material);
     expect(restored).toBe(true);
-    await page.keyboard.press("Escape");
+    await closeInventory(page);
     await page.locator("#resume").click();
     await page.waitForFunction(() => window.__game.locked);
   }
@@ -336,22 +382,21 @@ test("new gun finishes persist independently and paint both model variants", asy
     );
   });
   await page.locator("#skins-button").click();
-  await expect(page.locator("[data-skin-weapon]")).toHaveCount(56);
+  await expect(page.locator("#inventory-weapon option")).toHaveCount(58);
   for (const skin of variants.filter((entry) => entry.body === "legacy")) {
-    await page.locator(`[data-skin-weapon="${skin.weapon}"]`).click();
-    // The default preview must load for all expanded slots, including at desktop widths.
+    await chooseFinish(page, skin.weapon, skin.id, true);
     expect(
-      await page.locator("#skin-image").evaluate(async (element) => {
-        const image = element as HTMLImageElement;
-        await image.decode();
-        return image.naturalWidth;
-      }),
+      await page
+        .locator(`[data-item-weapon="${skin.weapon}"][data-skin="${skin.id}"] img`)
+        .evaluate(async (image) => {
+          const art = image as HTMLImageElement;
+          await art.decode();
+          return art.naturalWidth;
+        }),
     ).toBeGreaterThan(0);
-    await page.locator(`[data-skin="${skin.id}"]`).click();
     await page.locator("#skin-float").fill((skin.weapon / 100).toFixed(6));
     await page.locator("#skin-seed").fill(String(610 + skin.weapon));
-    await page.locator("#apply-skin").click();
-    await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 30000 });
+    await addAndEquip(page, skin.weapon, skin.id);
   }
   await page.reload();
   await page.waitForFunction(() => window.__game?.assetsReady);
@@ -365,9 +410,9 @@ test("new gun finishes persist independently and paint both model variants", asy
     await page.evaluate((weapon) => window.__game.buy(weapon), skin.weapon);
     await page.evaluate(() => document.exitPointerLock());
     await page.locator("#pause-skins").click();
-    await page.locator(`[data-skin-weapon="${skin.weapon}"]`).click();
     if (skin.body === "legacy") {
-      await expect(page.locator("#skin-title")).toHaveText(skin.name);
+      await chooseFinish(page, skin.weapon, skin.id);
+      await expect(page.locator("#skin-title")).toContainText(skin.name);
       await expect(page.locator("#skin-float")).toHaveValue(String(skin.weapon / 100));
       await expect(page.locator("#skin-seed")).toHaveValue(String(610 + skin.weapon));
       expect(
@@ -377,9 +422,9 @@ test("new gun finishes persist independently and paint both model variants", asy
         ),
       ).toEqual({ id: skin.id, wear: skin.weapon / 100, seed: 610 + skin.weapon });
     } else {
-      await page.locator(`[data-skin="${skin.id}"]`).click();
-      await page.locator("#apply-skin").click();
-      await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 30000 });
+      await chooseFinish(page, skin.weapon, skin.id, true);
+      await addAndEquip(page, skin.weapon, skin.id);
+      await acquireCurrentFinish(page, skin.weapon);
     }
     const targets = await page.evaluate(async (id) => {
       const paint = await (await fetch(`/skins/paints/${id}.json`)).json();
@@ -411,7 +456,7 @@ test("new gun finishes persist independently and paint both model variants", asy
         `${skin.id} maps on visible ${skin.body} body`,
       )
       .toEqual(targets);
-    await page.keyboard.press("Escape");
+    await closeInventory(page);
     await page.locator("#resume").click();
     await page.waitForFunction(() => window.__game.locked && window.__game.drawTime === 0);
     await page.keyboard.press("f");
@@ -420,9 +465,10 @@ test("new gun finishes persist independently and paint both model variants", asy
     if (skin.body === "hd") {
       await page.evaluate(() => document.exitPointerLock());
       await page.locator("#pause-skins").click();
-      await page.locator('[data-skin=""]').click();
+      await chooseFinish(page, skin.weapon, "");
       await page.locator("#apply-skin").click();
       await expect(page.locator("#skin-status")).toContainText("Applied");
+      await acquireCurrentFinish(page, skin.weapon);
       expect(
         await page.evaluate(() => {
           const root = window.__game.gun;
@@ -438,14 +484,14 @@ test("new gun finishes persist independently and paint both model variants", asy
             hd: root.getObjectByName("skin-hd")?.visible,
           };
         }),
-      ).toEqual({ painted: false, legacy: true, hd: false });
+      ).toEqual({ painted: false, legacy: false, hd: true });
       expect(
         await page.evaluate(
           (weapon) => JSON.parse(localStorage.getItem("cs2go-skins-v1")!)[weapon].id,
           skin.weapon,
         ),
       ).toBe("");
-      await page.keyboard.press("Escape");
+      await closeInventory(page);
       await page.locator("#resume").click();
       await page.waitForFunction(() => window.__game.locked);
     }

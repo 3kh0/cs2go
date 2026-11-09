@@ -33,8 +33,23 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
   previewRoot.visible = false;
   game.scene.add(previewRoot);
   const camera = new T.PerspectiveCamera(75, 1, 0.05, 254);
-  camera.position.set(-31.5, 4.65, 16);
-  camera.lookAt(-28.5, 4.1, 7);
+  const authoredCamera = game.dust!.config.teamCamera;
+  if (authoredCamera) {
+    camera.position.fromArray(authoredCamera.position);
+    camera.lookAt(new T.Vector3().fromArray(authoredCamera.target));
+  } else {
+    // Keep the fallback tied to native spawn/nav geometry, never Dust II coordinates.
+    const spawn = new T.Vector3().fromArray(game.dust!.navigation.data.spawns.ct[0]);
+    const area = game.dust!.navigation.nearest(spawn);
+    const target = new T.Vector3().fromArray(
+      game.dust!.navigation.areas[area]?.center ?? spawn.toArray(),
+    );
+    const facing = game.dust!.navigation.data.spawnAngles?.ct[0] ?? 0;
+    camera.position
+      .copy(target)
+      .add(new T.Vector3(Math.sin(facing) * 6, 2.2, Math.cos(facing) * 6));
+    camera.lookAt(target.clone().add(new T.Vector3(0, 0.8, 0)));
+  }
   let closed = false,
     ready = false;
   const controller = new AbortController();
@@ -93,7 +108,7 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
         updateActorLighting(
           soldiers[i]!.group,
           probe,
-          sampleSourceProbe,
+          game.dust?.sourceLighting ? sampleSourceProbe : undefined,
           dt,
           undefined,
           sampleSourceProbeSun,
@@ -146,7 +161,7 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
       updateActorLighting(
         soldiers[i]!.group,
         probe,
-        sampleSourceProbe,
+        game.dust?.sourceLighting ? sampleSourceProbe : undefined,
         0,
         undefined,
         sampleSourceProbeSun,
@@ -222,7 +237,14 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
     );
     select(available[Math.floor(Math.random() * available.length)]!);
   };
-  overlay.setAttribute("aria-description", `${size} versus ${size} bomb-defusal match`);
+  overlay.setAttribute(
+    "aria-description",
+    game.teamMode
+      ? `${size} versus ${size} bomb-defusal match`
+      : game.mode === "practice"
+        ? "Offline practice with stationary targets"
+        : "Offline deathmatch with respawns",
+  );
   const aborted = new Promise<never>((_, reject) => {
     controller.signal.addEventListener("abort", () => reject(controller.signal.reason), {
       once: true,

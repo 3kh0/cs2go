@@ -43,6 +43,7 @@ export function accuracyPose(player: PlayerState, mode: 0 | 1): AccuracyPose {
     speed: Math.hypot(player.vx, player.vz),
     crouch: (movement.standingEye - player.eye) / (movement.standingEye - movement.duckEye),
     grounded: player.grounded,
+    ladder: player.ladder?.id !== undefined && player.ladder.id !== null,
     verticalSpeed: player.vertical,
     reloading: player.reloadTime > 0,
   };

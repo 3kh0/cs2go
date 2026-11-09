@@ -1,7 +1,14 @@
 import * as T from "three";
 import { MapCollision } from "./map-collision";
 import type { BakedBombDamage } from "./bomb-damage";
+import type { MapId } from "@cs2go/protocol";
+import type { MapTriggerData } from "./buy-zones";
+import type { NativeLadder } from "./ladder";
 export type DustMap = {
+  id?: MapId;
+  triggers?: MapTriggerData;
+  ladders?: readonly NativeLadder[];
+  worldBallOrigin?: readonly [number, number, number];
   collision: MapCollision;
   grenadeCollision?: MapCollision;
   spawns: Record<"t" | "ct", number[][]>;

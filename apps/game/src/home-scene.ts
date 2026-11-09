@@ -40,6 +40,7 @@ import { isKnife, weaponSlot } from "./physics";
 import { createGrenadeModel } from "./grenade-models";
 import { HomeAtmosphere } from "./home-atmosphere";
 import { withoutSourceColorCorrection } from "./map-color";
+import { withoutNativeMapGrade } from "./native-map-color";
 
 // uimodel_walkup.vnmgraph: linear, completion-driven transitions.
 const homeBlendSeconds = 0.2;
@@ -815,7 +816,7 @@ export class HomeScene {
       withoutSourceColorCorrection(() => {
         this.atmosphere?.captureDepth(renderer, this.scene, camera, this.reduced.matches);
         renderer.clear();
-        renderer.render(this.scene, camera);
+        withoutNativeMapGrade(() => renderer.render(this.scene, camera));
       });
     } finally {
       for (const preview of visible) preview.group.visible = preview.visible;
@@ -990,7 +991,7 @@ export class HomeScene {
     renderer.toneMapping = T.CustomToneMapping;
     this.atmosphere?.captureDepth(renderer, this.scene, this.camera, this.reduced.matches);
     renderer.clear();
-    renderer.render(this.scene, this.camera);
+    withoutNativeMapGrade(() => renderer.render(this.scene, this.camera));
     preview.soldier.model.getObjectByName("pelvis")!.getWorldPosition(this.namePosition);
     this.framingPoint.copy(this.namePosition);
     this.framingPoint.y = this.floor;

@@ -100,6 +100,35 @@ it("default rotation and low clock commit without unbounded setup", () => {
   expect(clock.order(0)?.goal).toEqual(routes.sites.b);
   expect(clock.rotationReason).toBe("clock");
 });
+it("rotates from current positions without returning to spawn approach checkpoints", () => {
+  const nativeRoutes = { ...routes, directRotations: true };
+  const choices = Array.from(
+    { length: 6 },
+    (_, index) =>
+      new BotRoundStrategy({
+        team: "t",
+        round: index + 1,
+        seed: 0,
+        members,
+        routes: nativeRoutes,
+        roundTime: 115,
+      }),
+  );
+  const s = choices.find((choice) => choice.plan === "defaultRotate")!;
+  s.update(
+    state({
+      dt: 22.5,
+      allies: members.map((index) => ({ index, position: routes.sites.a, alive: true })),
+    }),
+  );
+  expect(s.rotationReason).toBe("default");
+  for (const member of members) {
+    const order = s.order(member)!;
+    expect(order.site).toBe("b");
+    expect(order.stage).toBe(routes.lanes[order.lane].length);
+    expect([routes.sites.b, ...routes.anchors.b]).toContainEqual(order.goal);
+  }
+});
 it("retains CT anchors and rotates supports only on recent reports, with a cooldown", () => {
   const s = strategy("balanced", "ct");
   const quiet = state({ bomb: { planted: false, position: null, carrier: -1 } });

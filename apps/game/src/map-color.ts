@@ -1,4 +1,5 @@
 import * as T from "three";
+import { applyNativeMapGrade } from "./native-map-color";
 import { fetchGzipped } from "./gltf";
 
 // Dust II's pinned vpost: A=0, B=C=.0009, D=E=F=1, white point in stops.
@@ -43,17 +44,19 @@ export function loadSourceColorCorrection() {
 export function applySourceColorCorrection(
   shader: T.WebGLProgramParametersWithUniforms,
   enabled = "1.0",
+  nativeGrade = false,
 ) {
   if (shader.uniforms.sourceColorCorrection) return;
   shader.uniforms.sourceColorCorrection = correction;
   shader.uniforms.sourceColorCorrectionReady = correctionReady;
+  if (nativeGrade) applyNativeMapGrade(shader, correction);
   shader.fragmentShader =
     "uniform highp sampler3D sourceColorCorrection; uniform float sourceColorCorrectionReady;\n" +
     shader.fragmentShader;
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <colorspace_fragment>",
     `#include <colorspace_fragment>
-    if (${enabled} > 0.5 && sourceColorCorrectionReady > 0.5) {
+    if (${enabled} > 0.5 && sourceColorCorrectionReady > 0.5 ${nativeGrade ? "&& nativeMapGradeEnabled < 0.5" : ""}) {
       vec3 sourceLutUv = clamp(gl_FragColor.rgb, 0.0, 1.0) * (31.0 / 32.0) + (0.5 / 32.0);
       gl_FragColor.rgb = texture(sourceColorCorrection, sourceLutUv).rgb;
     }`,

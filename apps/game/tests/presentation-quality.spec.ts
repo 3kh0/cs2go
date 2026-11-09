@@ -14,6 +14,12 @@ test("texture quality follows cached weapon switches and newly applied skin maps
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "cs2go-local-inventory",
+      JSON.stringify([{ weapon: 0, id: "7_44", wear: 0.01, seed: 1 }]),
+    ),
+  );
   await page.goto("/");
   await page.waitForFunction(() => window.__game?.assetsReady);
   // Wait for the UI gate as well as the loaded scene.
@@ -23,10 +29,16 @@ test("texture quality follows cached weapon switches and newly applied skin maps
     const g = window.__game;
     const gun = g.viewGun(0);
     let width = 0;
-    gun.traverse((object) => {
-      const material = (object as Mesh).material as MeshStandardMaterial | undefined;
-      if (material?.name === "ak47" && material.map)
-        width = Math.max(width, (material.map.image as { width: number }).width);
+    const model = gun.getObjectByName("weapon-model");
+    if (!model?.getObjectByName("skin-hd")) throw new Error("AK native HD body is missing");
+    model.traverseVisible((object) => {
+      const mesh = object as Mesh;
+      if (!mesh.isMesh) return;
+      for (const material of (Array.isArray(mesh.material)
+        ? mesh.material
+        : [mesh.material]) as MeshStandardMaterial[]) {
+        if (material.map) width = Math.max(width, (material.map.image as { width: number }).width);
+      }
     });
     g.primary = 3;
     g.equip(3);
@@ -41,12 +53,21 @@ test("texture quality follows cached weapon switches and newly applied skin maps
     page.evaluate(() => {
       let defaultWidth = 0,
         bakedWidth = 0;
-      window.__game.gun.traverse((object) => {
-        const material = (object as Mesh).material as MeshStandardMaterial | undefined;
-        if (material?.name !== "ak47" || !material.map) return;
-        const width = (material.map.image as { width: number }).width;
-        if ("isDataTexture" in material.map) bakedWidth = Math.max(bakedWidth, width);
-        else defaultWidth = Math.max(defaultWidth, width);
+      // Only visible weapon bodies participate: exclude arms/gloves and the
+      // hidden default/legacy variant when a finish switches the body.
+      const model = window.__game.gun.getObjectByName("weapon-model");
+      if (!model) throw new Error("AK native weapon model is missing");
+      model.traverseVisible((object) => {
+        const mesh = object as Mesh;
+        if (!mesh.isMesh) return;
+        for (const material of (Array.isArray(mesh.material)
+          ? mesh.material
+          : [mesh.material]) as MeshStandardMaterial[]) {
+          if (!material.map) continue;
+          const width = (material.map.image as { width: number }).width;
+          if ("isDataTexture" in material.map) bakedWidth = Math.max(bakedWidth, width);
+          else defaultWidth = Math.max(defaultWidth, width);
+        }
       });
       return { defaultWidth, bakedWidth };
     });
@@ -54,10 +75,11 @@ test("texture quality follows cached weapon switches and newly applied skin maps
     .poll(async () => (await mapWidths()).defaultWidth)
     .toBe(Math.max(1, Math.floor(fullWidth / 4)));
   await page.locator("#skins-button").click();
-  await page.locator('[data-skin-weapon="0"]').click();
+  await page.locator("#inventory-weapon").selectOption("0");
   await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("Case Hardened");
-  await page.locator('[data-skin="7_44"]').click();
+  await page.locator('[data-item-weapon="0"][data-skin="7_44"]').click();
+  await page.locator("#weapon-action-customize").click();
   await page.locator("#apply-skin").click();
   await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 45000 });
   // Existing weapon instances intentionally keep their original finish. Create

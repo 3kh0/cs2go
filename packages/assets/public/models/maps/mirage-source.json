@@ -1,0 +1,316 @@
+{
+  "author": "Valve",
+  "map": "de_mirage",
+  "source": "Read-only installed CS2, Windows Amp runner",
+  "vpk": {
+    "bytes": 176187297,
+    "sha256": "e66cdf1ae6a976f6f6ba510a2addd04b25a4c1cfd811f51f1ef13f0954e6e350"
+  },
+  "extractor": {
+    "name": "Source2Viewer",
+    "version": "20.1.7467+9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "windowsExecutableSha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830"
+  },
+  "extractionEvidence": {
+    "createdUtc": "2026-11-09T05:40:41.893912+00:00",
+    "sources": [
+      {
+        "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\tools\\s2v-20.1\\Source2Viewer-CLI.exe",
+        "bytes": 113264360,
+        "sha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830"
+      },
+      {
+        "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_mirage.vpk",
+        "bytes": 176187297,
+        "sha256": "e66cdf1ae6a976f6f6ba510a2addd04b25a4c1cfd811f51f1ef13f0954e6e350"
+      },
+      {
+        "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\gameinfo.gi",
+        "bytes": 26056,
+        "sha256": "bfcb4f966b63cd19bfc22bc6d5e82a0e31d69e2631f7a8bd0355db16b8c0d930"
+      },
+      {
+        "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+        "bytes": 7713879,
+        "sha256": "10d5831cbf008808419a438141362c466f14550a8a4cf04ace56a7828ccf2b27"
+      },
+      {
+        "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\core\\pak01_dir.vpk",
+        "bytes": 85252,
+        "sha256": "99d352cc1cf01bc4db43edee6a317bdaf0fbcacaac5f43ccb60286b00ecd6677"
+      }
+    ],
+    "validation": {
+      "gltf": {
+        "export.gltf": {
+          "meshes": 3463,
+          "nodes": 3525,
+          "materials": 379,
+          "images": 697,
+          "buffers": 1,
+          "primitives": 3488,
+          "extras_objects": 3842,
+          "external_references_checked": 698,
+          "missing_external_references": [],
+          "buffer_lengths_and_view_bounds_valid": true
+        },
+        "export_physics.gltf": {
+          "meshes": 174,
+          "nodes": 174,
+          "materials": 174,
+          "images": 10,
+          "buffers": 1,
+          "primitives": 174,
+          "extras_objects": 348,
+          "external_references_checked": 11,
+          "missing_external_references": [],
+          "buffer_lengths_and_view_bounds_valid": true
+        }
+      },
+      "png_files_crc_checked": 704,
+      "raw_files": 95,
+      "raw_bytes": 107906350
+    }
+  },
+  "worldExport": {
+    "bytes": 3576766,
+    "sha256": "e73636aafdb3ea250e1d4e61ae124b3d412262f995d4e00d57d55b04c02cc12f"
+  },
+  "worldBuffer": {
+    "bytes": 104641648,
+    "sha256": "11ab715c985cfdc79ef8019529757bd8f90477202ffb792003ae9ac475b5600e"
+  },
+  "originalExportArchive": {
+    "bytes": 414438594,
+    "sha256": "9187e67ebcd999749bf822336e53bb0569c973e21b3d09d5e8c376cd66d13df0"
+  },
+  "skyboxExportArchive": {
+    "bytes": 119725628,
+    "sha256": "17e6f900620548e10ef7617e8a4ee7d9a93cf7f967dde898b7486e7d4b03dff2"
+  },
+  "nativeSkybox": {
+    "archiveSha256": "17e6f900620548e10ef7617e8a4ee7d9a93cf7f967dde898b7486e7d4b03dff2",
+    "generator": "packages/assets/import-mirage-sky.py",
+    "coordinateConversion": "Packaged native camera/scale wrapper frozen, then browser +90Y once; no recenter/normalization",
+    "atlasDimensions": [
+      512,
+      512
+    ],
+    "lightmapUvScaleAlreadyBaked": [
+      1.015858,
+      1.015858
+    ],
+    "triangles": 180508
+  },
+  "navigation": {
+    "author": "Valve",
+    "navSha256": "2ba8608994c178dc5ff2553fefdd2a8473aadd0e0b09b8004201e1fa578bb0bd",
+    "resources": {
+      "maps/de_mirage/entities/default_ents.vents_c": "81e72e970cc0a7b0cd819fa7d76c4562eebe38ad5a216753dd5c5f5fed4fc2c9",
+      "maps/de_mirage/entities/a site_2_60263.vmdl_c": "20817307d3984647023be352e31dcc62e7dbe12affc34c6007030e50d6d430f9",
+      "maps/de_mirage/entities/b site_2_60265.vmdl_c": "0734c0006d8e540f950719f799b794edb941359824cee3e46e02c2a5ce7c849f",
+      "maps/de_mirage/entities/unnamed_2_60286.vmdl_c": "0a8a5238ca109829d52ee75635d070f0504fe9e807f0ed4576bd5f44f20ac387",
+      "maps/de_mirage/entities/unnamed_2_60289.vmdl_c": "c6840cc40014094a0bace02689a71189f7f17008e67d8d6e9fa49013a911b9ae"
+    },
+    "decoder": "ValveResourceFormat 20.1 + decode-source-nav.py",
+    "generator": "packages/assets/prepare-source-navigation.py",
+    "coordinateSystem": "metres, Source (X,Y,Z) becomes browser (X,Z,-Y)",
+    "placeLabels": "Bombsite labels derived from native trigger contact; source polygon NAV contains no place names"
+  },
+  "atlasMips": {
+    "direct_light_shadows": {
+      "sourceSha256": "b6012f0b46bdd9e4e36042abd2c32691ef7c422f5a78a5b9f5cd16a9292821e5",
+      "sourceSize": [
+        8192,
+        8192
+      ],
+      "mip": 1,
+      "width": 4096,
+      "height": 4096,
+      "format": 27,
+      "nativeMipSha256": "a81dcec64d3c5849a0d1b49ca6c1957dd8c464b3c4ef3b5de876000e66a4fb7e"
+    },
+    "directional_irradiance": {
+      "sourceSha256": "cfeed719657d20caae36d6aa261d4a75c2a94b1e1347126ac7119e01715bffd4",
+      "sourceSize": [
+        4096,
+        4096
+      ],
+      "mip": 0,
+      "width": 4096,
+      "height": 4096,
+      "format": 1,
+      "nativeMipSha256": "d6d728386659f48a6707ef7f986c6f3a0d06d8b464ef96f6b8505affe2180257",
+      "gpuBytes": 8388608,
+      "gpuSha256": "b258220946b867b3bdee0b584ae08a99f77c89b296cbbb557da5c10ad8961812"
+    },
+    "irradiance": {
+      "sourceSha256": "90730276aa6f69220681a9c6a69ab01525fae97a4ebdf060238579ac2652f175",
+      "sourceSize": [
+        8192,
+        8192
+      ],
+      "mip": 1,
+      "width": 4096,
+      "height": 4096,
+      "format": 19,
+      "nativeMipSha256": "87918835d4d5336825726abafd336d86d36e0e0bc156e04ffcdc120e6f96b5bf",
+      "gpuBytes": 16777216,
+      "gpuSha256": "de698aef7d122eae5abcff187b874e9df935dc03ed807fc36362e66cef1b2973"
+    }
+  },
+  "conversion": {
+    "coordinateSystem": "Source inches (X,Y,Z) -> browser metres (X,Z,-Y), once",
+    "geometry": "Full native architecture and prop geometry; material batching, meshopt, 16-bit positions, FLOAT32 texture/lightmap UVs; native chart seams retained",
+    "collision": "Unsimplified world and enabled solid entity physics, native player/grenade/pass-bullet flags; disabled retake and never-solid brushes excluded",
+    "textures": "Original adapted Source2Viewer PBR textures, at most1024 architecture/512props, Basis ETC1S KTX2",
+    "lighting": "Authored4096mip BC6H irradiance and4096BC1directional blocks unchanged; decodedHalfEXR/losslessWebP fallbacks; native sky,filmiccoefficients and32RGBLUT"
+  },
+  "runtime": {
+    "mirage-bomb-source.json": {
+      "bytes": 2079,
+      "sha256": "73df3b45e2129d2059e5cb6f68deaa3db553fc12337e50b8db2d557f17f92c75"
+    },
+    "mirage-bomb.bin.gz": {
+      "bytes": 731393,
+      "sha256": "630fc01c6fd5ef569d0609a4c9cc4c5a9bdd79d1973d860bc1af4218857722fe",
+      "decodedSha256": "32dbddea740e489d95c3f74dae065b2aed1ffb0575659e2d869b479f49890b12"
+    },
+    "mirage-config.json": {
+      "bytes": 1402,
+      "sha256": "8f129e134657951ddb3b448542ff698ece433a539feb4bc07f6fdf567bdd8f2b"
+    },
+    "mirage-lighting/color-correction.bin.gz": {
+      "bytes": 72010,
+      "sha256": "c309d6a76f236b9350f6af9b4bd84694e034638ce56e7dae7c2be95fdfb7c768",
+      "decodedSha256": "37a2a8e8b1f470778b8a7978e1cdc364f3e766abcceaad1caf8d0b05aab90f76"
+    },
+    "mirage-lighting/directional.bin.gz": {
+      "bytes": 6687423,
+      "sha256": "74774b30b0d7fefc0fd335ecddbee651c12d477a2e3d20db5badec8cee8f4a4c",
+      "decodedSha256": "b258220946b867b3bdee0b584ae08a99f77c89b296cbbb557da5c10ad8961812"
+    },
+    "mirage-lighting/directional.webp": {
+      "bytes": 11499240,
+      "sha256": "12882d7780c5e91b53b8d433cf07f58c15ee3536b2410a8fed09063f931f4b96"
+    },
+    "mirage-lighting/irradiance.bin.gz": {
+      "bytes": 15587151,
+      "sha256": "334c36ebd175df88b193d34a2edcee3bcb48c0d7b4f038cf2d30bebb076fa4c4",
+      "decodedSha256": "de698aef7d122eae5abcff187b874e9df935dc03ed807fc36362e66cef1b2973"
+    },
+    "mirage-lighting/irradiance.exr": {
+      "bytes": 47445307,
+      "sha256": "3aeea03a4b116dda02580302aa6e7f570d2b4f5c5a3d19a859f3693dc7aaf30c"
+    },
+    "mirage-lighting/shadows.webp": {
+      "bytes": 1134480,
+      "sha256": "c97813afe0305fec9fd72f38ca70796009fd4d43a26624c849b1bd5b5a73093d"
+    },
+    "mirage-nav.json": {
+      "bytes": 896252,
+      "sha256": "4012a6c8722354f1d4a8bfa9dc54db1958fc0f6e6a2f2a85fe1b1395629ecf4d"
+    },
+    "mirage-physics.glb.gz": {
+      "bytes": 293941,
+      "sha256": "dffb11578c6c4cd5fe220c2ce4dd18c5637c025b8ff1648ab08a43143046b702",
+      "decodedSha256": "017dec37c3214ce45d122679523eb2dcbf3633bf0668e1cb91853e4b7b8d7ba0"
+    },
+    "mirage-radar.png": {
+      "bytes": 143685,
+      "sha256": "c8032f6c83ffca63c0a20ebdcc598a0e1aa618efd746e381e2db26f33a4a964f"
+    },
+    "mirage-sky.hdr": {
+      "bytes": 373306,
+      "sha256": "6ea655adef416b4692dd2a047fcef6f10473b0e03d652ec7af4190adcf8fc4e2"
+    },
+    "mirage-skybox/clouds_001_mask_psd_a537be2a.png": {
+      "bytes": 3055181,
+      "sha256": "77ef0542dccb58af31e61d62948c0f63f1efed9c7d22d0e2531ad5a00412e01d"
+    },
+    "mirage-skybox/default_mask_tga_344101f8.png": {
+      "bytes": 86,
+      "sha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "mirage-skybox/directional.bin.gz": {
+      "bytes": 105847,
+      "sha256": "5aff6ce40609205e1268e5995fa01b9a271f511edc4f4312267551d2379975f3",
+      "decodedSha256": "0016144420eb1acae5f2e55606b8aaaab79cfe38478bbe87e54a2951b8f55aff"
+    },
+    "mirage-skybox/directional.png": {
+      "bytes": 281581,
+      "sha256": "3d9a0a71b193b84049225b20494b994c7af2d584797ac8c029ea2f556afc2ecb"
+    },
+    "mirage-skybox/dust_001_mask_psd_1b6f7fa5.png": {
+      "bytes": 259864,
+      "sha256": "918c817cdbdd930a08448b28aca90a5bedf97473c6084af63c3f1ba3e900132f"
+    },
+    "mirage-skybox/dust_002_mask_psd_d8512b51.png": {
+      "bytes": 253229,
+      "sha256": "86a5a3896051fabfe132d8b602d0cb5fb51f3c30bea3a9dab214ca43618d10dc"
+    },
+    "mirage-skybox/dust_sheet_002c_trans_psd_8425f01b.png": {
+      "bytes": 226694,
+      "sha256": "3bad1a1841565929d23674a0e7d223cf1c33b556598afeeb356c21dafee385ab"
+    },
+    "mirage-skybox/irradiance.bin.gz": {
+      "bytes": 243941,
+      "sha256": "f83068cd37c5bdda876f01edf3b3b2f8bd9ca0cb3881abf994231bf057489fa6",
+      "decodedSha256": "f1ef05f69469e649895932c56aee5db05e34dd0f1960ba4337296cc8071332d2"
+    },
+    "mirage-skybox/irradiance.exr": {
+      "bytes": 1290856,
+      "sha256": "b89c69b20c77983a6136fbeb01470612b07fbe0228ba4382bb84f989bb80c55f"
+    },
+    "mirage-skybox/noise_fractal_001_mask_psd_88aff3b4.png": {
+      "bytes": 70956,
+      "sha256": "0c9d18d04f6144fa2bdf37bd83a424ed9315c7420006925b1270aa2f159ca258"
+    },
+    "mirage-skybox/shadows.png": {
+      "bytes": 88150,
+      "sha256": "2f9b0ec32f5745091904956b0cc569979320f811d15a4967075c19cb833d98dd"
+    },
+    "mirage-skybox/source.json": {
+      "bytes": 16990,
+      "sha256": "16a4ed2059401e4890ec1e4c77fd96af88b1ae44e451bd85b25e52e631598c20"
+    },
+    "mirage-skybox/sun_disk_glow_001_trans_psd_e0699c26.png": {
+      "bytes": 28129,
+      "sha256": "b2d4e2ab215a0f2789edc9795ab09dbb5843a87a0265ef587ddaf8af0d6a635a"
+    },
+    "mirage-skybox/sun_glow_001_trans_psd_188c1738.png": {
+      "bytes": 91579,
+      "sha256": "088be01f6938622162d35ca4c8bee1f7dffd815da6245bd792ed3f8f4feb3b3b"
+    },
+    "mirage-skybox/sun_glow_003_trans_psd_716d1bb6.png": {
+      "bytes": 67089,
+      "sha256": "52c6bdbb6a96481ae0b4bd9d5d0ae5f4fa5817db3c350243b4882c1379cc92c2"
+    },
+    "mirage-skybox/world.glb.gz": {
+      "bytes": 5453646,
+      "sha256": "5389a3906dd36215ecd9933d2897160c03c2ce2cb9bbe169fa33272661642f0e",
+      "decodedSha256": "749dee5de6b5069cebf394981c2e1cc080f21d6e4c659226a6b5fe16d2a1a852"
+    },
+    "mirage.glb.gz": {
+      "bytes": 31508832,
+      "sha256": "a9a3301896356ac106d4bbcc1ea3d569183cf4a69d345b0c784906ed730e2242",
+      "decodedSha256": "dcf96821aa98bdd00c22ef7435b6275610cb5894e48a4e50df09a9670979e017"
+    }
+  },
+  "regeneration": [
+    "decode-source-nav.py",
+    "prepare-source-navigation.py",
+    "import-map-bomb.py",
+    "import-mirage.py",
+    "prepare-mirage-environment.py",
+    "import-mirage-sky.py",
+    "record-mirage-provenance.py",
+    "bun run assets:prepare"
+  ],
+  "limitations": [
+    "Three PBR/material conversion differs fromSource2, full layered/probe lighting is notported",
+    "Nativecolorgrade uses fixed0.9-stop exposure ; noautomaticexposure/bloom",
+    "Movable/breakableprops represented bystaticcollision; noSource2entityI/O orfullparticle/soundscapeDSP",
+    "Bots andladdercontroller arebrowserreconstructions, nativegeometry/navigation/objectivetriggers areextracted"
+  ]
+}

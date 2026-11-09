@@ -32,11 +32,14 @@ test("live purchases use native team triggers, actor contact and buy-time expiry
   await page.evaluate(() => document.exitPointerLock());
   await page.waitForFunction(() => !window.__game.locked);
 
-  const result = await page.evaluate(() => {
+  const result = await page.evaluate(async () => {
+    const path = "/src/physics.ts";
+    const { movement, SOURCE_UNIT } = (await import(path)) as typeof import("../src/physics");
+    const radius = movement.hullRadius;
     const game = window.__game;
     game.buyRemaining = 30;
     game.dead = game.roundPause = 0;
-    game.eye = 1.65;
+    game.eye = movement.standingEye;
     const check = (team: "t" | "ct", x: number, y: number, z: number) => {
       game.team = team;
       game.position.set(x, y, z);
@@ -46,26 +49,32 @@ test("live purchases use native team triggers, actor contact and buy-time expiry
       tInside: check("t", -19, 1, 20),
       ctInside: check("ct", 5, -2, -58),
       wrongFaction: check("ct", -19, 1, 20),
-      // Exact T east face = -312 Source units; current actor half-width=.3m.
-      tTouch: check("t", -312 * 0.0254 + 0.3, 1, 20),
-      tOutside: check("t", -312 * 0.0254 + 0.301, 1, 20),
-      ctTouch: check("ct", -192 * 0.0254 - 0.3, -2, -58),
-      ctOutside: check("ct", -192 * 0.0254 - 0.301, -2, -58),
+      // Keep the native faces exact; test hull contact and 1 mm separation
+      // with the pinned 32-inch player width and actual standing hull height.
+      tTouch: check("t", -312 * SOURCE_UNIT + radius, 1, 20),
+      tOutside: check("t", -312 * SOURCE_UNIT + radius + 0.001, 1, 20),
+      ctTouch: check("ct", -192 * SOURCE_UNIT - radius, -2, -58),
+      ctOutside: check("ct", -192 * SOURCE_UNIT - radius - 0.001, -2, -58),
       rectangularCorner: check("t", -30, 1, 25),
-      ctAbove: check("ct", 5, -32 * 0.0254 + 0.001, -58),
-      ctBelowTouch: check("ct", 5, -128 * 0.0254 - 1.65, -58),
-      ctBelowOutside: check("ct", 5, -128 * 0.0254 - 1.651, -58),
+      ctAbove: check("ct", 5, -32 * SOURCE_UNIT + 0.001, -58),
+      ctBelowTouch: check("ct", 5, -128 * SOURCE_UNIT - movement.standingHeight, -58),
+      ctBelowOutside: check("ct", 5, -128 * SOURCE_UNIT - movement.standingHeight - 0.001, -58),
     };
-    const standingTouches = check("ct", 5, -128 * 0.0254 - 1.5, -58);
-    game.eye = 1.1;
+    const standingTouches = check(
+      "ct",
+      5,
+      -128 * SOURCE_UNIT - (movement.standingHeight + movement.duckHeight) / 2,
+      -58,
+    );
+    game.eye = movement.duckEye;
     const crouchingMisses = game.canBuy();
-    game.eye = 1.65;
+    game.eye = movement.standingEye;
     check("ct", 5, -2, -58);
     game.buyRemaining = 0;
     const expired = game.canBuy();
     game.buyRemaining = 30;
     game.money = 16000;
-    check("ct", -192 * 0.0254 - 0.301, -2, -58);
+    check("ct", -192 * SOURCE_UNIT - radius - 0.001, -2, -58);
     const rejectedPurchase = game.buy(1);
     const moneyAfterRejection = game.money;
     check("ct", 5, -2, -58);

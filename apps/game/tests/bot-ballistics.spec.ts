@@ -1,3 +1,4 @@
+import { teamChoiceVisible } from "./team-choice";
 import { expect, test } from "@playwright/test";
 import type { Game } from "../src/game";
 declare global {
@@ -17,7 +18,7 @@ test("bot rounds penetrate thin cover and flesh, stop at thick cover, and bound 
   });
   await page.locator("#home-play").click();
   await page.locator("#play").click();
-  if (await page.locator("#team-select").isVisible()) {
+  if (await teamChoiceVisible(page)) {
     const team = await page.evaluate(() => window.__game.team);
     await page.locator(`#team-select [data-team="${team}"]`).click();
   }

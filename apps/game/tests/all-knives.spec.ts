@@ -12,6 +12,12 @@ test("Inventory knife selection reaches the authoritative private match", async 
   test.setTimeout(120_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "cs2go-local-inventory",
+      JSON.stringify([{ weapon: 55, id: "", wear: 0.01, seed: 1 }]),
+    ),
+  );
   await page.goto("/?server=ws://127.0.0.1:3002/ws");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
   await page.locator("#home-play").click();
@@ -25,7 +31,8 @@ test("Inventory knife selection reaches the authoritative private match", async 
   await page.evaluate(() => document.exitPointerLock());
   await expect(page.locator("#pause")).toBeVisible();
   await page.locator("#pause-skins").click();
-  await page.locator('[data-skin-weapon="55"]').click();
+  await page.locator('[data-item-weapon="55"][data-skin=""]').click();
+  await page.locator("#weapon-action-customize").click();
   await page.locator("#equip-knife").click();
   await expect
     .poll(() => page.evaluate(() => window.__game.network!.connection.local!.weapon))
@@ -54,21 +61,33 @@ test("all CS2 knives equip through inventory and render their native action vari
     if (/^https?:$/.test(url.protocol) && url.hostname !== "127.0.0.1")
       external.push(response.url());
   });
+  await page.addInitScript(
+    (knives) =>
+      localStorage.setItem(
+        "cs2go-local-inventory",
+        JSON.stringify(knives.map(({ id }) => ({ weapon: id, id: "", wear: 0.01, seed: 1 }))),
+      ),
+    knifeDefinitions,
+  );
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
   await page.locator("#skins-button").click();
   for (const knife of knifeDefinitions) {
-    await page.locator(`[data-skin-weapon="${knife.id}"]`).click();
-    await page.locator("#equip-knife").click();
-    await expect(page.locator("#skin-status")).toHaveText(`${knife.name} equipped.`);
-    expect(await page.evaluate(() => window.__game.knife)).toBe(knife.id);
+    await page.locator("#inventory-weapon").selectOption(String(knife.id));
+    const card = page.locator(`[data-item-weapon="${knife.id}"][data-skin=""]`);
     expect(
-      await page.locator("#skin-image").evaluate(async (element) => {
+      await card.locator("img").evaluate(async (element) => {
         const image = element as HTMLImageElement;
         await image.decode();
         return image.naturalWidth;
       }),
     ).toBeGreaterThan(0);
+    await card.click();
+    await page.locator("#weapon-action-customize").click();
+    await page.locator("#equip-knife").click();
+    await expect(page.locator("#skin-status")).toHaveText(`${knife.name} equipped.`);
+    expect(await page.evaluate(() => window.__game.knife)).toBe(knife.id);
+    await page.locator("#close-item-details").click();
   }
   await page.screenshot({ path: "artifacts/all-knives-inventory.png" });
   await page.keyboard.press("Escape");

@@ -221,7 +221,7 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
         worldToLighting: "transpose(sourceActorProbeRotation)",
       });
       applySourceFog(shader, "sourceActorWorldEnabled");
-      applySourceColorCorrection(shader, "sourceActorWorldEnabled");
+      applySourceColorCorrection(shader, "sourceActorWorldEnabled", true);
       if (gpuProbes) applySourceGpuProbes(shader, gpuProbes);
       applySourceSunShadows(shader);
     };

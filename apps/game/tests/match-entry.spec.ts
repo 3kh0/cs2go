@@ -21,7 +21,13 @@ test("map cards and team selection remain usable across resize, cancel and reope
     { width: 1600, height: 1200 },
   ]) {
     await page.setViewportSize(viewport);
-    await expect(page.getByRole("button", { name: "Dust II, selected" })).toBeVisible();
+    const dust = page.getByRole("button", { name: "Dust II", exact: true });
+    await expect(dust).toBeVisible();
+    await expect(dust).toHaveAttribute("aria-pressed", "true");
+    await expect(page.getByRole("button", { name: "Mirage", exact: true })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
     await expect(page.locator("#home-scenery-button")).toBeHidden();
     await expect
       .poll(() =>
