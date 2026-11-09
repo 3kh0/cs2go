@@ -778,6 +778,8 @@ export class Game {
       this.view.add(this.defuseView);
       this.scene.add(this.defuseView.wires);
       await this.warmUp();
+      await this.groundInventory.preparePreviews(this.renderer);
+      await this.finishPrograms();
       this.assetsReady = true;
       this.updateGraphics();
       play.disabled = false;
@@ -909,9 +911,12 @@ export class Game {
       play: (kind) => this.soundscape.playUi(kind),
     });
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) this.soundscape.music.pause();
-      else if (!this.active && !el("menu").classList.contains("hidden"))
-        this.soundscape.playMusic("menu");
+      if (document.hidden) this.soundscape.pauseMusic();
+      else {
+        this.soundscape.resumeMusic();
+        if (!this.active && !el("menu").classList.contains("hidden"))
+          this.soundscape.playMusic("menu");
+      }
     });
     document.addEventListener("pointerlockchange", () => this.syncPointerLock());
     document.addEventListener("pointerlockerror", () => {
@@ -1431,7 +1436,7 @@ export class Game {
       this.bots.forEach((b, i) => this.spawnBot(b, i));
     }
     this.ensureAudio();
-    this.soundscape.playMusic("start");
+    this.soundscape.playMusic(this.teamMode ? "start" : "match");
     this.soundscape.play("ready");
     if (options.lock !== false) void this.lock();
     this.updateUI();
@@ -2837,11 +2842,7 @@ export class Game {
         : "TIME’S UP.";
     if (this.competitive && this.teamScores.t === 12 && this.teamScores.ct === 12)
       el("result-title").textContent = "DRAW.";
-    this.soundscape.playMusic(
-      (this.teamMode ? this.teamScores[this.team] >= this.winTarget : this.kills >= 20)
-        ? "win"
-        : "lose",
-    );
+    this.soundscape.playMusic("end");
     el("result").dataset.result = el("result-title").textContent.startsWith("VICTORY")
       ? "won"
       : el("result-title").textContent.startsWith("DRAW")
@@ -3601,6 +3602,7 @@ export class Game {
       ["player", this.kills],
       ...this.bots.map((bot, id) => [id, bot.kills] as [number, number]),
     ]);
+    this.soundscape.playMusic("start");
     this.updateUI();
   }
   endRound(winner: AgentTeam, reason: string) {
@@ -3635,7 +3637,6 @@ export class Game {
     if (this.halftime) this.firing = false;
     this.setScope(0);
     this.rescope = this.boltTime = 0;
-    this.soundscape.playMusic(winner === this.team ? "win" : "lose");
     this.notices.clearAlert();
     const players = [
       { id: "player" as number | "player", name: playerName(), team: this.team, kills: this.kills },
@@ -3649,6 +3650,10 @@ export class Game {
       reason === "Bomb defused" ? this.bomb?.defuser : this.bomb?.planter,
     );
     if (mvp) this.mvpCounts.set(mvp.id, (this.mvpCounts.get(mvp.id) ?? 0) + 1);
+    this.soundscape.playRoundMusic(
+      winner === this.team,
+      mvp ? (mvp.id === "player" ? "local" : "other") : null,
+    );
     // The result is settled; completed bomb actions must not block surviving players.
     if (this.bomb) {
       this.bomb.defuser = null;
@@ -3774,13 +3779,16 @@ export class Game {
     this.buyRemaining = Math.max(0, this.buyRemaining - dt);
     if (this.freezeTime > 0) {
       this.freezeTime = Math.max(0, this.freezeTime - dt);
-      // Match-start and previous round-end music stops once the round goes live.
-      if (this.freezeTime === 0) this.soundscape.playMusic(null);
+      // The authored StartAction event replaces freeze-time round-start music.
+      if (this.freezeTime === 0) this.soundscape.playMusic("action");
       this.updateBotPurchases(dt * 8, this.tick++ % 8);
       return;
     }
     this.roundElapsed += dt;
+    const previousRoundTime = this.time;
     this.time = Math.max(0, this.time - dt);
+    if (!this.bomb.planted && previousRoundTime > 10 && this.time <= 10)
+      this.soundscape.playMusic("countdown");
     const bomb = this.bomb!;
     const stationary = !["KeyW", "KeyA", "KeyS", "KeyD", "Space"].some((key) => this.keys.has(key));
     const alive = (team: AgentTeam) => {
@@ -3943,7 +3951,7 @@ export class Game {
           );
         if (bomb.carrier === "player") this.firing = false;
         bomb.planted = true;
-        if (!postRound) this.soundscape.playMusic(null);
+        if (!postRound) this.soundscape.playMusic("bomb");
         bomb.planter = bomb.carrier;
         bomb.carrier = -1;
         this.updateBombSelection(0);
@@ -4499,7 +4507,12 @@ export class Game {
             this.rescope = this.boltTime = this.reload = 0;
             this.lastShot = this.emptyReload = false;
             if (this.teamMode) this.dropBomb("player");
-            else this.soundscape.playMusic("deathcam");
+            if (
+              !["bomb", "bomb-countdown", "countdown", "mvp"].includes(
+                this.soundscape.currentMusic ?? "",
+              )
+            )
+              this.soundscape.playMusic("deathcam");
             this.soundscape.play("death");
             this.feed(b.name, "YOU", head, b.rig.weaponIndex, false, passed);
             if (this.mode === "deathmatch" && b.kills >= 20) this.finish();

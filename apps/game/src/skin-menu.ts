@@ -22,7 +22,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void) {
   const sections = document.createElement("nav");
   sections.className = "inventory-sections";
   sections.setAttribute("aria-label", "Inventory category");
-  sections.innerHTML = `<button type="button" id="inventory-search" aria-label="Search inventory"><img src="${assetUrl("/icons/menu/search.svg")}" alt=""></button><button type="button" aria-current="page">EVERYTHING</button><button type="button" id="inventory-agents">AGENTS</button><button type="button" id="inventory-gloves">GLOVES</button>`;
+  sections.innerHTML = `<button type="button" id="inventory-search" aria-label="Search inventory"><img src="${assetUrl("/icons/menu/search.svg")}" alt=""></button><button type="button" aria-current="page">EVERYTHING</button><button type="button" id="inventory-agents">AGENTS</button><button type="button" id="inventory-gloves">GLOVES</button><button type="button" id="inventory-music-kits">MUSIC KITS</button>`;
   overlay.querySelector(".dialog-heading")!.after(sections);
   for (const category of ["agents", "gloves"])
     sections.querySelector<HTMLButtonElement>(`#inventory-${category}`)!.onclick = () => {

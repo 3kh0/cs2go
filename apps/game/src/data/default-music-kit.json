@@ -1,0 +1,245 @@
+{
+  "id": "valve_cs2_01",
+  "definitionId": 1,
+  "name": "Valve, Counter-Strike 2",
+  "artist": "Valve",
+  "description": "The official music kit of Counter-Strike 2.",
+  "image": "/audio/music-kits/art/valve_cs2_01.png",
+  "events": {
+    "menu": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/mainmenu.mp3"],
+      "loop": false,
+      "gain": 0.8,
+      "nativeEvent": "Music.Background.valve_cs2_01"
+    },
+    "mvp-preview": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/roundmvpanthem_01.mp3"],
+      "loop": false,
+      "gain": 0.8,
+      "nativeEvent": "Music.MVPPreview.valve_cs2_01"
+    },
+    "selection": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/chooseteam.mp3"],
+      "loop": false,
+      "gain": 0.8,
+      "nativeEvent": "Music.Selection.valve_cs2_01",
+      "fadeOut": 1.0
+    },
+    "match-found": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/startround_01.mp3"],
+      "loop": true,
+      "gain": 0.9,
+      "nativeEvent": "Music.MatchFound.valve_cs2_01",
+      "starts": [0.517],
+      "ends": [33.62],
+      "syncPoints": [
+        [
+          0.517, 2.586, 4.655, 6.724, 8.793, 10.862, 12.931, 15.0, 17.069, 19.138, 21.207, 23.276,
+          25.345, 27.414, 29.483, 31.552
+        ]
+      ],
+      "fadeOut": 1.5,
+      "priority": 2.0,
+      "fadeIn": {
+        "start": 4.0,
+        "end": 12.0,
+        "from": 1.0,
+        "to": 0.5
+      }
+    },
+    "loading": {
+      "tracks": [
+        "/audio/music-kits/valve_cs2_01/startaction_01.mp3",
+        "/audio/music-kits/valve_cs2_01/startaction_02.mp3"
+      ],
+      "loop": true,
+      "gain": 0.9,
+      "nativeEvent": "Music.LoadingScreen.valve_cs2_01",
+      "fadeOut": 1.5,
+      "priority": 2.0,
+      "fadeIn": {
+        "start": 4.0,
+        "end": 12.0,
+        "from": 1.0,
+        "to": 0.5
+      }
+    },
+    "start": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/startround_01.mp3"],
+      "loop": true,
+      "gain": 0.9,
+      "nativeEvent": "Music.StartRound.valve_cs2_01",
+      "starts": [0.517],
+      "ends": [33.62],
+      "syncPoints": [
+        [
+          0.517, 2.586, 4.655, 6.724, 8.793, 10.862, 12.931, 15.0, 17.069, 19.138, 21.207, 23.276,
+          25.345, 27.414, 29.483, 31.552
+        ]
+      ],
+      "fadeOut": 1.5,
+      "priority": 2.0,
+      "fadeIn": {
+        "start": 4.0,
+        "end": 12.0,
+        "from": 1.0,
+        "to": 0.5
+      }
+    },
+    "action": {
+      "tracks": [
+        "/audio/music-kits/valve_cs2_01/startaction_01.mp3",
+        "/audio/music-kits/valve_cs2_01/startaction_02.mp3"
+      ],
+      "loop": true,
+      "gain": 0.9,
+      "nativeEvent": "Music.StartAction.valve_cs2_01",
+      "stopAfter": 10.0,
+      "fadeOut": 3.0,
+      "priority": 2.0,
+      "fadeIn": {
+        "start": 4.0,
+        "end": 12.0,
+        "from": 1.0,
+        "to": 0.2
+      }
+    },
+    "start-gg": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/startround_01.mp3"],
+      "loop": true,
+      "gain": 0.9,
+      "nativeEvent": "Music.StartRound_GG.valve_cs2_01",
+      "starts": [0.517],
+      "ends": [33.62],
+      "syncPoints": [
+        [
+          0.517, 2.586, 4.655, 6.724, 8.793, 10.862, 12.931, 15.0, 17.069, 19.138, 21.207, 23.276,
+          25.345, 27.414, 29.483, 31.552
+        ]
+      ],
+      "stopAfter": 6.0,
+      "fadeOut": 3.0,
+      "priority": 1.0,
+      "fadeIn": {
+        "start": 1.0,
+        "end": 6.0,
+        "from": 1.0,
+        "to": 0.3
+      }
+    },
+    "bomb": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/bombplanted.mp3"],
+      "loop": true,
+      "gain": 0.8,
+      "nativeEvent": "Music.BombPlanted.valve_cs2_01",
+      "priority": 3.0,
+      "fadeIn": {
+        "start": 1.0,
+        "end": 6.0,
+        "from": 1.0,
+        "to": 0.3
+      }
+    },
+    "bomb-countdown": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/bombtenseccount.mp3"],
+      "loop": false,
+      "gain": 0.9,
+      "nativeEvent": "Music.BombTenSecCount.valve_cs2_01",
+      "fadeOut": 0.5,
+      "priority": 3.0
+    },
+    "hostage": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/bombplanted.mp3"],
+      "loop": true,
+      "gain": 0.8,
+      "nativeEvent": "Music.GotHostage.valve_cs2_01",
+      "stopAfter": 9.0,
+      "fadeOut": 1.5,
+      "priority": 3.0,
+      "fadeIn": {
+        "start": 1.0,
+        "end": 7.0,
+        "from": 1.0,
+        "to": 0.2
+      }
+    },
+    "hostage-rescue": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/bombtenseccount.mp3"],
+      "loop": false,
+      "gain": 0.8,
+      "nativeEvent": "Music.HostageNearRescue.valve_cs2_01",
+      "stopAfter": 4.0,
+      "fadeOut": 1.5,
+      "priority": 3.0,
+      "fadeIn": {
+        "start": 1.0,
+        "end": 7.0,
+        "from": 1.0,
+        "to": 0.2
+      }
+    },
+    "countdown": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/roundtenseccount.mp3"],
+      "loop": false,
+      "gain": 0.9,
+      "nativeEvent": "Music.TenSecCount.valve_cs2_01",
+      "syncPoints": [[0.0]],
+      "fadeOut": 0.5,
+      "priority": 3.0
+    },
+    "win": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/wonround.mp3"],
+      "loop": false,
+      "gain": 1.0,
+      "nativeEvent": "Music.WonRound.valve_cs2_01",
+      "syncPoints": [[0.0]],
+      "fadeOut": 1.6,
+      "priority": 4.0
+    },
+    "lose": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/lostround.mp3"],
+      "loop": false,
+      "gain": 1.0,
+      "nativeEvent": "Music.LostRound.valve_cs2_01",
+      "syncPoints": [[0.0]],
+      "fadeOut": 1.6,
+      "priority": 4.0
+    },
+    "deathcam": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/deathcam.mp3"],
+      "loop": false,
+      "gain": 1.0,
+      "nativeEvent": "Music.DeathCam.valve_cs2_01"
+    },
+    "mvp": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/roundmvpanthem_01.mp3"],
+      "loop": false,
+      "gain": 0.9,
+      "nativeEvent": "Music.MVPAnthem.valve_cs2_01",
+      "syncPoints": [[0.0]],
+      "fadeOut": 1.6,
+      "priority": 5.0
+    },
+    "match": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/startofmatch.mp3"],
+      "loop": false,
+      "gain": 0.8,
+      "nativeEvent": "Music.MatchStart.valve_cs2_01",
+      "fadeOut": 1.0,
+      "fadeIn": {
+        "start": 6.0,
+        "end": 8.0,
+        "from": 1.0,
+        "to": 0.1
+      }
+    },
+    "end": {
+      "tracks": ["/audio/music-kits/valve_cs2_01/endofmatch.mp3"],
+      "loop": false,
+      "gain": 0.8,
+      "nativeEvent": "Music.MatchEnd.valve_cs2_01",
+      "syncPoints": [[0.0]],
+      "fadeOut": 1.0
+    }
+  }
+}

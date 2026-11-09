@@ -68,7 +68,7 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     await expect.poll(() => a.evaluate(() => window.__game.ammo)).toBe(11);
     await expect.poll(() => a.evaluate(() => window.__game.decals.count)).toBeGreaterThan(0);
     await a.keyboard.press("KeyG");
-    await a.waitForFunction(() => window.__game.selected === 4);
+    await a.waitForFunction(() => window.__game.selected === window.__game.knife);
     await expect
       .poll(() => a.evaluate(() => window.__game.network!.connection.round!.drops.length))
       .toBe(1);
@@ -132,24 +132,42 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     if (!(await b.evaluate(() => window.__game.locked))) await b.locator("#game").click();
     await b.waitForFunction(() => window.__game.network?.connection.local?.cooldown === 0);
     const beforeImpacts = await a.evaluate(() => window.__game.decals.count);
+    // Observe the short native animation while it plays; waiting for the
+    // remote impact first can miss the entire firing clip.
+    const shotAnimation = b.evaluate(
+      () =>
+        new Promise<number>((resolve) => {
+          const until = performance.now() + 600;
+          let peak = 0;
+          const sample = () => {
+            peak = Math.max(peak, window.__game.shotTime);
+            if (performance.now() < until) requestAnimationFrame(sample);
+            else resolve(peak);
+          };
+          requestAnimationFrame(sample);
+        }),
+    );
     await b.mouse.click(700, 400);
     await expect.poll(() => b.evaluate(() => window.__game.ammo)).toBe(19);
     await expect.poll(() => b.evaluate(() => window.__game.decals.count)).toBeGreaterThan(0);
     await expect
       .poll(() => a.evaluate(() => window.__game.decals.count))
       .toBeGreaterThan(beforeImpacts);
-    await expect.poll(() => b.evaluate(() => window.__game.shotTime)).toBeGreaterThan(0.15);
+    expect(await shotAnimation).toBeGreaterThan(0);
     await b.keyboard.press("Digit3");
     await b.waitForFunction(
       () =>
-        window.__game.selected === 4 &&
+        window.__game.selected === window.__game.knife &&
         window.__game.drawTime === 0 &&
         window.__game.network?.connection.local?.cooldown === 0,
     );
     await b.mouse.click(700, 400);
     await expect.poll(() => b.evaluate(() => window.__game.knifeTime)).toBeGreaterThan(0);
     expect(await b.evaluate(() => window.__game.shotTime)).toBe(0);
-    await b.waitForTimeout(600);
+    await b.waitForFunction(
+      () =>
+        window.__game.knifeTime === 0 && window.__game.network?.connection.local?.cooldown === 0,
+    );
     await b.mouse.click(700, 400, { button: "right" });
     await expect
       .poll(() => b.evaluate(() => window.__game.knifeStab && window.__game.knifeTime > 0))
@@ -194,6 +212,7 @@ test("single-player and multiplayer share Dust II and its normal HUD, buying, ro
     if (!(await b.evaluate(() => window.__game.locked))) await b.locator("#game").click();
     await b.keyboard.down("KeyE");
     await b.waitForFunction(() => window.__game.bomb?.planted, {}, { timeout: 7000 });
+    expect(await b.evaluate(() => window.__game.soundscape.currentMusic)).toBe("bomb");
     await b.keyboard.up("KeyE");
     await command(request, room, "defuse");
     await a.bringToFront();
@@ -352,6 +371,7 @@ test("multiplayer C4 equips with 5 and plants after the result with synchronized
     );
     await b.screenshot({ path: "artifacts/c4-multiplayer-crouched-plant.png" });
     await b.waitForFunction(() => window.__game.bomb?.planted, {}, { timeout: 7000 });
+    expect(await b.evaluate(() => window.__game.soundscape.currentMusic)).not.toBe("bomb");
     await b.mouse.up();
     expect(
       await b.evaluate(() => ({

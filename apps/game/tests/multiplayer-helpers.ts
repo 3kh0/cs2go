@@ -4,6 +4,9 @@ const pins = new Map<string, string>();
 export const lobbyPin = (label: string) => pins.get(label) ?? label;
 
 export async function joinLobby(page: Page, label: string, team: "ct" | "t") {
+  // Asset preparation yields between GPU uploads; keep the joining client
+  // foregrounded so Chromium does not throttle its loading timers.
+  await page.bringToFront();
   const pin = pins.get(label);
   await page.goto(`/?server=ws://127.0.0.1:3002/ws${pin ? `&room=${pin}` : ""}`);
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120000 });

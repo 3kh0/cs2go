@@ -42,6 +42,7 @@ export class MultiplayerMatch {
   private peerSpawns = new Map<string, number>();
   private lastSpawn = 0;
   private previousPhase = "waiting";
+  private musicMvps?: number;
   private resultRound = 0;
   private closed = false;
   private health = 100;
@@ -237,7 +238,10 @@ export class MultiplayerMatch {
       local = this.connection.local,
       state = message.round;
     const previousTeam = g.team;
-    if (this.previousPhase === "freeze" && state.phase === "live") g.soundscape.playMusic(null);
+    const previousRoundTime = g.time;
+    const localMvp = this.musicMvps !== undefined && local.mvps > this.musicMvps;
+    this.musicMvps = local.mvps;
+    if (this.previousPhase === "freeze" && state.phase === "live") g.soundscape.playMusic("action");
     this.previousPhase = state.phase;
     const previousBombTime = g.bomb?.timer ?? 40;
     const previousBomb = g.bomb;
@@ -372,7 +376,7 @@ export class MultiplayerMatch {
       g.setScope(0);
       g.spectated = undefined;
       g.notices.reset();
-      g.soundscape.playMusic(null);
+      g.soundscape.playMusic(state.phase === "freeze" ? "start" : null);
       g.utility.cancelThrow();
       g.utility.selected = null;
       g.utility.blind.clear();
@@ -426,6 +430,10 @@ export class MultiplayerMatch {
     const indexFor = (id: string | null) =>
       id === local.id ? ("player" as const) : id ? g.bots.indexOf(this.peers.get(id)!) : -1;
     const bomb = state.bomb;
+    if (state.phase === "live" && bomb.planted && !previousBomb?.planted)
+      g.soundscape.playMusic("bomb");
+    if (state.phase === "live" && !bomb.planted && previousRoundTime > 10 && state.remaining <= 10)
+      g.soundscape.playMusic("countdown");
     if (bomb.planted && previousBombTime > 10 && bomb.timer <= 10)
       g.soundscape.playMusic("bomb-countdown");
     g.bomb = {
@@ -452,6 +460,8 @@ export class MultiplayerMatch {
     if (local.health < this.health) g.damage = 0.3;
     if (this.health > 0 && local.health <= 0) {
       g.soundscape.play("death");
+      if (!["bomb", "bomb-countdown", "countdown", "mvp"].includes(g.soundscape.currentMusic ?? ""))
+        g.soundscape.playMusic("deathcam");
       g.firing = false;
       g.reload = g.knifeTime = g.inspectTime = g.boltTime = g.rescope = 0;
       g.setScope(0);
@@ -606,7 +616,10 @@ export class MultiplayerMatch {
         state.result.fact,
       );
       g.roundHistory.push({ winner: state.result.winner, reason: state.result.reason });
-      g.soundscape.playMusic(state.result.winner === g.team ? "win" : "lose");
+      g.soundscape.playRoundMusic(
+        state.result.winner === g.team,
+        state.result.mvp ? (localMvp ? "local" : "other") : null,
+      );
     }
     g.notices.setWaiting(state.phase === "waiting");
     if (state.phase === "waiting") hideRoundBanner();

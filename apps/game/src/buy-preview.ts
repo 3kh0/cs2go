@@ -26,6 +26,7 @@ export class BuyPreview {
   private placement = new T.Matrix4();
   private hovered?: HTMLElement;
   private current = "";
+  private selectedItem = "";
   private agentId = "";
   private clearColor = new T.Color();
   private viewport = new T.Vector4();
@@ -78,10 +79,26 @@ export class BuyPreview {
     this.scene.add(key, rim);
     this.camera.position.set(0, 1.05, 3.7);
     this.camera.lookAt(0, 0.96, 0);
-    this.refreshLayout();
+    if (document.getElementById(this.stageId)) this.refreshLayout();
   }
   invalidateLayout() {
     this.rect = undefined;
+  }
+  suspend() {
+    this.menu?.removeEventListener("pointerover", this.inspect);
+    this.menu?.removeEventListener("focusin", this.inspect);
+    this.resizeObserver?.disconnect();
+    this.menuObserver?.disconnect();
+    this.menu = this.stage = this.hovered = undefined;
+    this.open = false;
+    this.rect = undefined;
+  }
+  private syncStage() {
+    if (!this.stage || !this.soldier) return;
+    this.stage.dataset.agent = this.agentId;
+    this.stage.dataset.agentModel = this.soldier.model.userData.agentModel ?? "";
+    this.stage.dataset.pose = this.attachment?.clip ?? "";
+    this.stage.dataset.item = this.selectedItem;
   }
   refreshLayout() {
     this.resizeObserver?.disconnect();
@@ -111,6 +128,7 @@ export class BuyPreview {
           ) ?? undefined);
     this.menu.addEventListener("pointerover", this.inspect);
     this.menu.addEventListener("focusin", this.inspect);
+    this.syncStage();
   }
   dispose() {
     this.menu?.removeEventListener("pointerover", this.inspect);
@@ -141,23 +159,33 @@ export class BuyPreview {
     });
     this.items.clear();
   }
-  render(renderer: T.WebGLRenderer, team: AgentTeam, selected: number, emphasis = 1) {
-    if (emphasis !== this.emphasis) {
-      for (const light of this.scene.children)
-        if (light instanceof T.Light) light.intensity *= emphasis / this.emphasis;
-      this.emphasis = emphasis;
+  async prepare(renderer: T.WebGLRenderer, team: AgentTeam, selected: number) {
+    this.update(team, selected);
+    // Match the on-screen preview's lighting/tone mapping. Parallel driver
+    // compilation happens during the existing armory warm-up, not on click.
+    await renderer.compileAsync(this.scene, this.camera);
+    const textures = new Set<T.Texture>();
+    this.scene.traverseVisible((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      for (const material of Array.isArray(object.material) ? object.material : [object.material])
+        for (const value of Object.values(material))
+          if (value instanceof T.Texture) textures.add(value);
+    });
+    let slice = performance.now();
+    for (const texture of textures) {
+      renderer.initTexture(texture);
+      if (performance.now() - slice >= 8) {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        slice = performance.now();
+      }
     }
-    const menu = document.getElementById(this.menuId)!;
-    if (menu.classList.contains("hidden")) {
-      this.open = false;
-      return;
-    }
-    if (this.stageId === "buy-preview-stage") renderer.render(this.backdrop, this.backdropCamera);
-    if (!this.open) {
-      this.open = true;
-      this.hovered = undefined;
-      this.rect = undefined;
-    }
+    previewBounds(
+      this.item ? [this.soldier!.group, this.item] : [this.soldier!.group],
+      this.bounds,
+    );
+    this.boundsDirty = false;
+  }
+  private update(team: AgentTeam, selected: number) {
     const agentId = selectedAgentId(team);
     if (!this.soldier || this.soldier.team !== team || this.agentId !== agentId) {
       if (this.soldier) {
@@ -166,9 +194,6 @@ export class BuyPreview {
       }
       this.soldier = createSoldier(0, team);
       this.agentId = agentId;
-      const stage = document.getElementById(this.stageId)!;
-      stage.dataset.agent = agentId;
-      stage.dataset.agentModel = this.soldier.model.userData.agentModel ?? "";
       this.soldier.group.visible = true;
       this.soldier.group.rotation.y = -0.4;
       this.scene.add(this.soldier.group);
@@ -200,7 +225,6 @@ export class BuyPreview {
             : [soldier.rightHand],
           0.14,
         );
-      document.getElementById(this.stageId)!.dataset.pose = this.attachment.clip;
       if (!equipment) {
         const itemKey = `${team}:${soldier.animationTeam}:${kind ?? String(index)}`;
         let model = this.items.get(itemKey);
@@ -237,7 +261,7 @@ export class BuyPreview {
         this.placement.decompose(this.item.position, this.item.quaternion, this.item.scale);
         this.item.visible = true;
       }
-      if (this.stageId === "buy-preview-stage") {
+      if (this.stageId === "buy-preview-stage" && this.stage) {
         document.getElementById("buy-preview-team")!.textContent =
           team === "ct" ? "COUNTER-TERRORISTS" : "TERRORISTS";
         const name = document.getElementById("buy-preview-name")!;
@@ -250,8 +274,29 @@ export class BuyPreview {
         document.getElementById("buy-preview-detail")!.textContent =
           card?.querySelector("small")?.textContent ?? "Hover an item to inspect it.";
       }
-      document.getElementById(this.stageId)!.dataset.item = kind ?? equipment ?? String(index);
+      this.selectedItem = kind ?? equipment ?? String(index);
+      this.syncStage();
     }
+  }
+  render(renderer: T.WebGLRenderer, team: AgentTeam, selected: number, emphasis = 1) {
+    if (emphasis !== this.emphasis) {
+      for (const light of this.scene.children)
+        if (light instanceof T.Light) light.intensity *= emphasis / this.emphasis;
+      this.emphasis = emphasis;
+    }
+    const menu = document.getElementById(this.menuId)!;
+    if (menu.classList.contains("hidden")) {
+      this.open = false;
+      return;
+    }
+    if (this.stageId === "buy-preview-stage") renderer.render(this.backdrop, this.backdropCamera);
+    if (!this.open) {
+      this.open = true;
+      this.hovered = undefined;
+      this.rect = undefined;
+    }
+    this.update(team, selected);
+    const soldier = this.soldier!;
     const rect = (this.rect ??= document.getElementById(this.stageId)!.getBoundingClientRect());
     if (rect.width < 1 || rect.height < 1) return;
     renderer.getSize(this.size);

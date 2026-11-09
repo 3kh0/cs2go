@@ -28,7 +28,7 @@ test("bomb pulses accelerate and stop on round completion", async ({ page }) => 
     g.soundscape.playMusic("start");
     g.updateRound(4);
     g.keys.clear();
-    const plantedSilently = g.bomb!.planted && g.soundscape.currentMusic === null;
+    const plantedMusic = g.bomb!.planted && g.soundscape.currentMusic === "bomb";
     g.bots.forEach((b, i) => b.group.position.set(100 + i, 500, 100));
     const calls: number[] = [];
     const play = g.soundscape.play.bind(g.soundscape);
@@ -49,14 +49,14 @@ test("bomb pulses accelerate and stop on round completion", async ({ page }) => 
       earlyInterval,
       lateInterval,
       stopped: calls.length === count,
-      plantedSilently,
+      plantedMusic,
       warning,
     };
   });
   expect(result.earlyInterval).toBeGreaterThan(0.85);
   expect(result.lateInterval).toBeLessThan(0.2);
   expect(result.stopped).toBe(true);
-  expect(result.plantedSilently).toBe(true);
+  expect(result.plantedMusic).toBe(true);
   expect(result.warning).toBe("bomb-countdown");
   expect(errors).toEqual([]);
 });

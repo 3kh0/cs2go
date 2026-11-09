@@ -1,6 +1,7 @@
 import { equipKnife } from "./equipped-knives";
 import { homeMenuMarkup, setupHomeMenu } from "./home-menu";
 import { setupSkinMenu } from "./skin-menu";
+import { setupMusicKitMenu } from "./music-kit-menu";
 import { setupCosmeticMenu } from "./cosmetic-menu";
 import "./fonts.css";
 import "./style.css";
@@ -65,6 +66,7 @@ setupControlSettings(game);
 setupSettingsTabs(game);
 setupHomeMenu(game);
 const cosmeticMenu = setupCosmeticMenu(game);
+setupMusicKitMenu(game, () => cosmeticMenu.close());
 setupSteamAccount();
 // Panorama navigation switches full pages; it must not stack their overlays.
 document.addEventListener(
@@ -181,6 +183,7 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
   const endpoint = server.value;
   const pin = room.value;
   const loader = openMatchLoading(mode);
+  game.soundscape.playMusic("loading");
   let selector: ReturnType<typeof prepareTeamSelector> | undefined;
   game.matchLoading = true;
   const enter = (team: "t" | "ct") => {

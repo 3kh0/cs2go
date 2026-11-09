@@ -50,12 +50,34 @@ export class MenuBackdrop {
   constructor() {
     this.scene.add(this.quad);
   }
+  invalidate() {
+    this.captured = false;
+    this.quad.material = this.material;
+  }
+  async prepare(renderer: T.WebGLRenderer, background: T.Scene, camera: T.Camera) {
+    const target = renderer.getRenderTarget();
+    let programs: Promise<unknown>[];
+    try {
+      renderer.setRenderTarget(this.target);
+      const backgroundPrograms = renderer.compileAsync(background, camera);
+      const blurPrograms = renderer.compileAsync(this.scene, this.camera);
+      renderer.setRenderTarget(target);
+      this.quad.material = this.display;
+      programs = [backgroundPrograms, blurPrograms, renderer.compileAsync(this.scene, this.camera)];
+    } finally {
+      this.quad.material = this.material;
+      renderer.setRenderTarget(target);
+    }
+    await Promise.all(programs);
+  }
   render(renderer: T.WebGLRenderer, capture: () => void, team: "ct" | "t", panel?: DOMRect) {
     if (!this.captured) {
       const previous = renderer.getRenderTarget();
+      const toneMapping = renderer.toneMapping;
       try {
         renderer.setRenderTarget(this.target);
         capture();
+        renderer.toneMapping = toneMapping;
         renderer.setRenderTarget(this.blurred);
         renderer.clear();
         renderer.render(this.scene, this.camera);
@@ -63,6 +85,7 @@ export class MenuBackdrop {
         this.captured = true;
       } finally {
         renderer.setRenderTarget(previous);
+        renderer.toneMapping = toneMapping;
       }
     }
     if (panel)

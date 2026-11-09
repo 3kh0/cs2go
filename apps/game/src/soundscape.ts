@@ -1,5 +1,8 @@
 import { bombPlantCues, type BombPlantCue } from "./bomb-presentation";
-import { assetFetch, assetUrl } from "./asset-url";
+import { assetFetch } from "./asset-url";
+import { KitMusicPlayer } from "./music-player";
+import { defaultMusicKitId, type Music } from "./music-kits";
+export type { Music } from "./music-kits";
 import { utilityAudio, type UtilityCue } from "./utility-audio";
 import { loadAudioClip } from "./audio-bank";
 import type { Vector3 } from "three";
@@ -38,18 +41,13 @@ export type Cue =
   | "bomb-defuse"
   | "bomb-explode"
   | "ready";
-export type Music =
-  | "menu"
-  | "start"
-  | "deathcam"
-  | "win"
-  | "lose"
-  | "mvp"
-  | "countdown"
-  | "bomb"
-  | "bomb-countdown"
-  | "match"
-  | "end";
+function musicStorage() {
+  try {
+    return localStorage;
+  } catch {
+    return undefined;
+  }
+}
 export class Soundscape {
   spatial = new SpatialAudio();
   buffers = new Map<string, AudioBuffer>();
@@ -60,20 +58,18 @@ export class Soundscape {
   private blasts = new Set<AudioBufferSourceNode>();
   private uiVoices = new Map<string, AudioBufferSourceNode>();
   private uiLastPlayed = new Map<string, number>();
-  music = new Audio();
-  currentMusic: Music | null = null;
+  readonly musicKits = new KitMusicPlayer(new Audio(), musicStorage());
+  get music() {
+    return this.musicKits.audio;
+  }
+  get currentMusic() {
+    return this.musicKits.currentMusic;
+  }
   lastCue = "";
   step = 0;
   volume = 60;
   musicVolume = 25;
   effectsVolume = 100;
-  constructor() {
-    this.music.preload = "none";
-    this.music.onended = () => {
-      if (this.currentMusic === "win") this.playMusic("mvp");
-      else this.currentMusic = null;
-    };
-  }
   stop() {
     for (const voice of this.voices) voice.stop();
     this.voices.clear();
@@ -125,7 +121,7 @@ export class Soundscape {
         node.gain.value = value / 100;
       }
     }
-    this.music.volume = (master * music) / 10000;
+    this.musicKits.setVolume(master, music);
   }
   playBombPlant(previous: number, elapsed: number, position?: Vector3) {
     if (elapsed <= 0 || elapsed <= previous) return;
@@ -210,16 +206,21 @@ export class Soundscape {
     source.start();
     return source;
   }
+  pauseMusic() {
+    this.musicKits.suspend();
+  }
+  resumeMusic() {
+    this.musicKits.resume();
+  }
+  playRoundMusic(won: boolean, mvp: "local" | "other" | null) {
+    // Native MVPAnthem blocks WonRound/LostRound. Bots and remote players whose
+    // kit selection is not synchronized use the default kit's anthem.
+    this.musicKits.play(
+      mvp ? "mvp" : won ? "win" : "lose",
+      mvp === "other" ? defaultMusicKitId : undefined,
+    );
+  }
   playMusic(name: Music | null) {
-    if (name === this.currentMusic && !this.music.paused) return;
-    this.music.pause();
-    this.currentMusic = name;
-    if (!name) return;
-    this.music.src = assetUrl(`/audio/source/music-${name}.ogg`);
-    this.music.loop = name === "menu";
-    this.music.volume = (this.volume * this.musicVolume) / 10000;
-    void this.music.play().catch(() => {
-      /* A later user gesture retries blocked playback. */
-    });
+    this.musicKits.play(name);
   }
 }

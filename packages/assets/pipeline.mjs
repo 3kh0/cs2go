@@ -67,10 +67,14 @@ export async function prepare(directory = root, expectedEntries, onProgress) {
       entry.inputSha256 = input;
     } else if (path.endsWith(".gz")) entry.decodedSha256 = sha256(gunzipSync(bytes));
     // Verification need not re-prove that unchanged bytes did not benefit from
-    // Brotli. Generation always tests every candidate; logical/source metadata
+    // Brotli. Generation tests non-streaming candidates; logical/source metadata
     // still regenerates here and the CLI compares the complete manifest below.
     const expected = expectedEntries?.[target];
-    if (!expected || expected.transport || expected.sha256 !== entry.sha256) {
+    // Music loops seek by codec byte offsets. HTTP content encoding would make
+    // Range requests address a different representation (and often force a full
+    // download), so kit MP3/FLAC objects must retain their original wire bytes.
+    const streamedMusic = path.startsWith("audio/music-kits/") && /\.(mp3|flac)$/.test(path);
+    if (!streamedMusic && (!expected || expected.transport || expected.sha256 !== entry.sha256)) {
       // HTTP transport compression is independent of the file format. A .gz
       // response still decodes to the exact gzip bytes expected by game loaders.
       let work = compressions.get(entry.sha256);
@@ -100,7 +104,7 @@ export async function prepare(directory = root, expectedEntries, onProgress) {
       const encoded = await work;
       compressions.delete(entry.sha256);
       // Already compressed media occasionally grows; never increase wire size.
-      // Every candidate is tested at quality 11, including gzip and KTX2 payloads.
+      // Non-streaming candidates use quality 11, including gzip and KTX2 payloads.
       if (encoded.length < bytes.length)
         entry.transport = {
           encoding: "br",

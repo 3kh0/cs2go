@@ -583,7 +583,7 @@ test("local music/effects, live volume controls, and settings persistence", asyn
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
-  await page.waitForFunction(() => window.__game.assetsReady);
+  await page.waitForFunction(() => window.__game?.assetsReady);
   await page.locator("#settings-button").click();
   await expect.poll(() => page.evaluate(() => window.__game.soundscape.music.paused)).toBe(false);
   expect(await page.evaluate(() => window.__game.soundscape.currentMusic)).toBe("menu");
@@ -591,7 +591,8 @@ test("local music/effects, live volume controls, and settings persistence", asyn
   await page.locator("#volume").fill("80");
   await page.locator("#musicVolume").fill("50");
   await page.locator("#effectsVolume").fill("30");
-  expect(await page.evaluate(() => window.__game.soundscape.music.volume)).toBeCloseTo(0.4);
+  // Native Background has an additional authored gain of 0.8.
+  expect(await page.evaluate(() => window.__game.soundscape.music.volume)).toBeCloseTo(0.32);
   await expect
     .poll(() => page.evaluate(() => window.__game.soundscape.effects!.gain.value))
     .toBeCloseTo(0.3);

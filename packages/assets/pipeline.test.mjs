@@ -64,7 +64,7 @@ test("CDN bases require HTTPS and pin the complete release", () => {
   assert.throws(() => assetBase("https://cdn.example?token=x", "abc"));
 });
 
-test("all asset formats are tried at Brotli quality 11 without changing logical bytes", async () => {
+test("non-streaming assets use Brotli quality 11 without changing logical bytes", async () => {
   const root = await mkdtemp(join(tmpdir(), "cs2go-brotli-"));
   try {
     await mkdir(join(root, "public"));
@@ -213,6 +213,39 @@ test("manifests share unchanged and renamed objects across releases and preserve
       () => assetUrls("https://cdn.example", { version: 2, release: releaseId(files), files }),
       /Invalid asset object/,
     );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("seekable music keeps identity bytes for HTTP ranges in generation and verification", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cs2go-music-range-"));
+  try {
+    const directory = join(root, "public", "audio", "music-kits", "kit");
+    await mkdir(directory, { recursive: true });
+    // Compressible fixtures catch an accidental return to blanket transport
+    // compression even when the original codec stream contains repeated data.
+    const bytes = Buffer.from("seekable music frames\n".repeat(1000));
+    for (const extension of ["mp3", "flac"])
+      await writeFile(join(directory, `menu.${extension}`), bytes);
+    const manifest = await prepare(root);
+    for (const extension of ["mp3", "flac"]) {
+      const path = `audio/music-kits/kit/menu.${extension}`;
+      const entry = manifest.files[path];
+      assert.equal(entry.transport, undefined);
+      assert.equal(entry.bytes, bytes.length);
+      assert.equal(entry.sha256, sha256(bytes));
+      assert.equal(entry.object, `objects/${sha256(bytes)}.${extension}`);
+      await assert.rejects(readFile(transportPath(root, entry.sha256)), { code: "ENOENT" });
+    }
+    // Old encoded metadata cannot reintroduce encoded objects during verify.
+    const stale = Object.fromEntries(
+      Object.entries(manifest.files).map(([path, entry]) => [
+        path,
+        { ...entry, transport: { encoding: "br", quality: 11, sha256: "old", bytes: 20 } },
+      ]),
+    );
+    assert.deepEqual(await prepare(root, stale), manifest);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

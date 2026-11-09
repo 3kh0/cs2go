@@ -192,6 +192,7 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
   };
   const back = () => {
     close();
+    if (!activeMatch) game.soundscape.playMusic("menu");
     document.getElementById(activeMatch ? "pause-teams" : "play")!.focus();
   };
   const keydown = (event: KeyboardEvent) => {
@@ -237,6 +238,7 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
     show() {
       if (closed || !ready || shown) return;
       shown = true;
+      if (!activeMatch) game.soundscape.playMusic("selection");
       for (const team of teams) {
         const button = overlay.querySelector<HTMLButtonElement>(`[data-team="${team}"]`)!;
         const players = game.network

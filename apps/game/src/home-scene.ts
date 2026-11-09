@@ -95,6 +95,9 @@ export class HomeScene {
   private reflectionLoad?: Promise<void>;
   private atmosphere?: HomeAtmosphere;
   private lightPosition = new T.Vector3();
+  get backgroundCamera() {
+    return this.camera;
+  }
   get graphicsRoot() {
     return this.scene;
   }

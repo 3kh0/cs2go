@@ -165,10 +165,8 @@ export class GameInventory {
     const restoreFocus = document
       .getElementById("loadout-editor")
       ?.contains(document.activeElement);
-    for (const preview of this.previews) preview.dispose();
-    this.previews = [];
-    this.backdrop?.dispose();
-    this.backdrop = undefined;
+    for (const preview of this.previews) preview.suspend();
+    this.backdrop?.invalidate();
     this.panelRect = undefined;
     document.getElementById("loadout-editor")?.remove();
     if (restoreFocus) document.getElementById("inventory-button")?.focus({ preventScroll: true });
@@ -201,6 +199,29 @@ export class GameInventory {
         this.editorTeam === team ? 1 : 0.55,
       );
     renderer.setClearColor(clear, alpha);
+  }
+  async preparePreviews(renderer: T.WebGLRenderer) {
+    this.previews = [
+      new BuyPreview("loadout-agent-ct", "loadout-editor", "ct"),
+      new BuyPreview("loadout-agent-t", "loadout-editor", "t"),
+    ];
+    const toneMapping = renderer.toneMapping;
+    let programs: Promise<unknown>[];
+    try {
+      renderer.toneMapping = T.ACESFilmicToneMapping;
+      programs = [
+        this.previews[0].prepare(renderer, "ct", 9),
+        this.previews[1].prepare(renderer, "t", 0),
+        (this.backdrop ??= new MenuBackdrop()).prepare(
+          renderer,
+          this.game.homeScene.graphicsRoot,
+          this.game.homeScene.backgroundCamera,
+        ),
+      ];
+    } finally {
+      renderer.toneMapping = toneMapping;
+    }
+    await Promise.all(programs);
   }
   showAgentLoadout(team: "ct" | "t") {
     this.editorTeam = team;
