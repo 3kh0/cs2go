@@ -259,3 +259,5 @@ export function bayonetWorldGrip(model: T.Group) {
     .multiply(new T.Matrix4().fromArray(model.getObjectByName("bayonet")!.userData.meshToSource))
     .invert();
 }
+
+export const bayonetMotionReady = () => !!skeleton && clips.has("idle1");

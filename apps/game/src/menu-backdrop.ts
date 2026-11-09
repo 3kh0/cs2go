@@ -10,12 +10,18 @@ export class MenuBackdrop {
       image: { value: this.blurred.texture },
       panel: { value: new T.Vector4() },
       tint: { value: new T.Color() },
+      teamGradient: { value: new T.Vector2() },
     },
     vertexShader: "varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}",
-    fragmentShader: `uniform sampler2D image; uniform vec4 panel; uniform vec3 tint; varying vec2 vUv;
+    fragmentShader: `uniform sampler2D image; uniform vec4 panel; uniform vec3 tint; uniform vec2 teamGradient; varying vec2 vUv;
       void main(){
         vec3 color = texture2D(image, vUv).rgb;
-        if(vUv.x >= panel.x && vUv.x <= panel.z && vUv.y >= panel.y && vUv.y <= panel.w) color = mix(color, tint, .42);
+        if(vUv.x >= panel.x && vUv.x <= panel.z && vUv.y >= panel.y && vUv.y <= panel.w) {
+          float x = (vUv.x - panel.x) / max(panel.z - panel.x, .0001);
+          // Native loadout_grid fades only the outer quarter of each team pane.
+          float edge = mix(x, 1. - x, teamGradient.x);
+          color = mix(color, tint, teamGradient.y * clamp(edge * 4., 0., 1.));
+        }
         gl_FragColor = vec4(color, 1.);
         #include <colorspace_fragment>
       }`,
@@ -66,7 +72,11 @@ export class MenuBackdrop {
         panel.right / innerWidth,
         1 - panel.top / innerHeight,
       );
-    this.display.uniforms.tint.value.set(team === "ct" ? 0x285c8c : 0x847031);
+    this.display.uniforms.tint.value.set(team === "ct" ? 0x1d5687 : 0x645106);
+    this.display.uniforms.teamGradient.value.set(
+      team === "ct" ? 0 : 1,
+      team === "ct" ? 0.422 : 0.5,
+    );
     renderer.clear();
     renderer.render(this.scene, this.camera);
   }

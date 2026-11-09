@@ -250,9 +250,14 @@ test("homepage keeps pointer motion horizontal and presents player identity", as
       if ((object as T.Light).isLight && (object as T.Light).castShadow)
         shadowLights.push(object.type);
     });
-    return { fog: !!scene.fog && "isFogExp2" in scene.fog, shadowLights };
+    return {
+      fog: !!scene.fog,
+      backdropCount: scene.getObjectByName("home-haze")!.children.length,
+      shadowLights,
+    };
   });
   expect(atmosphere.fog).toBe(true);
+  expect(atmosphere.backdropCount).toBe(15); // 14 native backdrops plus ground dust.
   expect(atmosphere.shadowLights).toEqual(["DirectionalLight"]);
   await expect(page.locator("#home-play .nav-cell").first()).toHaveCSS(
     "background-color",

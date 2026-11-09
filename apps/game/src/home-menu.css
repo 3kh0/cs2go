@@ -362,8 +362,16 @@
 }
 #home-weapon-options {
   padding: 0;
+  width: 200px;
+  min-width: 200px;
+  max-height: min(300px, 70vh);
 }
 #home-scenery #home-weapon-options button {
+  height: 30px;
+  min-height: 30px;
+  padding: 5px 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   border-left: 3px solid var(--weapon-rarity);
 }
 
@@ -438,8 +446,9 @@
   color: #e7c875;
 }
 
-/* Panorama nav typography and 150/250 ms selection timing. The block shimmer
-   approximates the native particle strip using bounded compositor animations. */
+/* Shipped mainmenu.vcss: 64 px bar, 28/36 px labels with a 3 px baseline
+   offset, and 150/250 ms selection timing, scaled from Panorama's 1080p canvas.
+   The block shimmer approximates the native additive particle strip. */
 #menu .home-nav {
   gap: 0;
   overflow: visible;
@@ -448,7 +457,7 @@
   position: relative;
   isolation: isolate;
   height: 100%;
-  padding: 0 calc(18 * var(--menu-unit));
+  padding: calc(6 * var(--menu-unit)) calc(18 * var(--menu-unit)) 0;
   font-size: calc(28 * var(--menu-unit));
   letter-spacing: calc(1 * var(--menu-unit));
   display: grid;
@@ -462,10 +471,14 @@
 #menu .home-nav #home-play {
   width: calc(128 * var(--menu-unit));
   font-size: calc(36 * var(--menu-unit));
-  padding: 0;
+  padding: calc(6 * var(--menu-unit)) 0 0;
 }
 #menu .home-nav i {
   height: 30%;
+}
+#menu .home-nav i:has(+ #home-play),
+#menu #home-play + i {
+  height: 40%;
 }
 #menu .home-nav button::after {
   content: "";
@@ -498,14 +511,15 @@
   opacity: 0.5;
 }
 #menu .home-tools {
-  gap: calc(4 * var(--menu-unit));
-  padding-left: calc(12 * var(--menu-unit));
+  gap: 0;
+  padding-left: 0;
 }
 #menu .home-tools button {
-  width: calc(44 * var(--menu-unit));
-  height: calc(44 * var(--menu-unit));
-  padding: calc(11 * var(--menu-unit));
-  transition: background-color 0.25s ease-in-out;
+  width: calc(32 * var(--menu-unit));
+  height: calc(32 * var(--menu-unit));
+  margin: 0 calc(8 * var(--menu-unit));
+  padding: calc(5 * var(--menu-unit));
+  transition: background-color 0.15s ease-in;
 }
 #menu .home-tools img {
   width: calc(22 * var(--menu-unit));
@@ -515,7 +529,7 @@
     filter 0.15s ease-in-out;
 }
 #menu .home-tools button:hover {
-  background: #add3e316;
+  background: #ffffff1a;
 }
 #menu .home-tools button[aria-current="page"] img {
   filter: brightness(0) saturate(100%) invert(81%) sepia(21%) saturate(902%) hue-rotate(162deg);
@@ -570,8 +584,18 @@ body:has(#cosmetic-menu:not(.hidden)) #menu > .home-header {
   display: block;
   width: 100%;
   height: 100%;
-  background: #8fd7f5;
+  background: #55d4ee;
   opacity: 0.015;
+}
+.header-navigation-particles {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: calc(670 * var(--menu-unit));
+  height: 100%;
+  pointer-events: none;
+  mix-blend-mode: plus-lighter;
 }
 #menu .home-nav button[aria-current="page"] .nav-cell {
   animation: nav-cell-pulse var(--cell-duration) ease-in-out var(--cell-delay) infinite;

@@ -80,6 +80,9 @@ export class BuyPreview {
     this.camera.lookAt(0, 0.96, 0);
     this.refreshLayout();
   }
+  invalidateLayout() {
+    this.rect = undefined;
+  }
   refreshLayout() {
     this.resizeObserver?.disconnect();
     this.menuObserver?.disconnect();

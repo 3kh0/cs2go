@@ -18,7 +18,7 @@
   width: 100%;
 }
 #settings {
-  inset: clamp(48px, 6vh, 68px) 0 0;
+  inset: calc(64 * var(--menu-unit)) 0 0;
   align-items: stretch;
   justify-content: stretch;
   background: #000000bf;
@@ -40,44 +40,53 @@
   max-width: none;
   height: 100%;
   max-height: none;
-  padding: 24px max(32px, calc((calc(100 * var(--game-vw, 1vw)) - 1280px) / 2)) 0;
+  padding: 0;
   border: 0;
   box-shadow: none;
   background: transparent;
   overflow: hidden;
   color: #ccc;
 }
+/* settings.xml uses the shared 48-unit navbar, without a page title. */
 #settings .dialog-heading {
+  position: absolute;
+  top: 0;
+  right: calc(24 * var(--menu-unit));
+  height: calc(48 * var(--menu-unit));
+  margin: 0;
+  z-index: 1;
   align-items: center;
 }
-#settings .eyebrow {
+#settings .dialog-heading > div {
   display: none;
 }
-#settings h2 {
-  margin: 0 0 16px;
-  font:
-    500 32px "Stratum2",
-    sans-serif;
-}
 #settings .settings-tabs {
-  flex: 0 0 auto;
-  justify-content: flex-start;
-  gap: 32px;
-  margin-bottom: 0;
-  border-color: #ffffff18;
+  flex: 0 0 calc(48 * var(--menu-unit));
+  min-height: calc(48 * var(--menu-unit));
+  justify-content: center;
+  align-items: center;
+  gap: calc(12 * var(--menu-unit));
+  margin: 0;
+  padding-inline: calc(64 * var(--menu-unit));
+  border: 0;
+  background: rgb(0 0 0 / 25%);
 }
 #settings .settings-tabs button {
   flex: 0 0 auto;
   font:
-    400 22px "Stratum2",
+    500 calc(16 * var(--menu-unit)) "Stratum2",
     sans-serif;
-  text-transform: none;
+  text-transform: uppercase;
   color: #ccc;
-  padding: 14px 4px;
+  padding: calc(4 * var(--menu-unit)) calc(6 * var(--menu-unit));
+  border: 1px solid transparent;
+  border-radius: calc(3 * var(--menu-unit));
+  box-shadow: none;
 }
 #settings .settings-tabs button[aria-selected="true"] {
-  color: white;
-  box-shadow: inset 0 -3px white;
+  color: #82d8ff;
+  background: #82d7ff1a;
+  box-shadow: none;
 }
 #settings .settings-panel {
   min-height: 0;

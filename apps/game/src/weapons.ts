@@ -6,6 +6,7 @@ import {
   animateInspectsKnife,
   sourceKnifeDrawDuration,
   sourceKnifeAttackDuration,
+  inspectsKnifeReady,
 } from "./inspects-knife";
 import { isKnife } from "./physics";
 import {
@@ -15,6 +16,7 @@ import {
   createNativeWorldGun,
   animateNativeWeapon,
   setNativeReflections,
+  nativeWeaponReady,
 } from "./weapon-motion";
 import * as T from "three";
 import { loadModel } from "./gltf";
@@ -25,6 +27,7 @@ import {
   animateKnifeMotion,
   knifeDrawDuration,
   knifeAttackDuration,
+  bayonetMotionReady,
 } from "./knife-motion";
 import { armoryReflections } from "./reflections";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
@@ -46,6 +49,12 @@ export function weaponKnifeAttackDuration(index: number, stab: boolean, alternat
 }
 export const VIEWMODEL_FOV = 60;
 const templates: T.Group[] = [];
+export const weaponModelReady = (index: number) =>
+  isKnife(index)
+    ? index === 4
+      ? !!templates[4] && bayonetMotionReady()
+      : inspectsKnifeReady(index)
+    : nativeWeaponReady(index);
 const pendingModels = new Map<number, Promise<void>>();
 export async function loadWeaponModels(renderer: T.WebGLRenderer, indices?: readonly number[]) {
   // Metallic steel needs reflected light, not just diffuse hemisphere lighting.

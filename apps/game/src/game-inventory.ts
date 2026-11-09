@@ -162,12 +162,22 @@ export class GameInventory {
     );
   }
   closeLoadout() {
+    const restoreFocus = document
+      .getElementById("loadout-editor")
+      ?.contains(document.activeElement);
     for (const preview of this.previews) preview.dispose();
     this.previews = [];
     this.backdrop?.dispose();
     this.backdrop = undefined;
     this.panelRect = undefined;
     document.getElementById("loadout-editor")?.remove();
+    if (restoreFocus) document.getElementById("inventory-button")?.focus({ preventScroll: true });
+  }
+  refreshPreviewLayout() {
+    this.panelRect = document
+      .querySelector<HTMLElement>("#loadout-editor .loadout-team")
+      ?.getBoundingClientRect();
+    for (const preview of this.previews) preview.invalidateLayout();
   }
   renderPreviews(renderer: T.WebGLRenderer) {
     if (!document.getElementById("loadout-editor")) {
@@ -192,7 +202,24 @@ export class GameInventory {
       );
     renderer.setClearColor(clear, alpha);
   }
+  showAgentLoadout(team: "ct" | "t") {
+    this.editorTeam = team;
+    this.editorCategory = this.editorFilter = "Agents";
+    this.showLoadout();
+  }
   showLoadout() {
+    const previous = document.getElementById("loadout-editor");
+    const focused = document.activeElement;
+    const focusSelector =
+      focused instanceof HTMLElement && previous?.contains(focused)
+        ? focused.id
+          ? `#${CSS.escape(focused.id)}`
+          : [...focused.attributes]
+              .filter((attribute) => attribute.name.startsWith("data-"))
+              .map((attribute) => `[${attribute.name}="${CSS.escape(attribute.value)}"]`)
+              .join("")
+        : "";
+    const scrollTop = previous?.querySelector(".loadout-candidates")?.scrollTop ?? 0;
     if (!this.game.assetsReady) {
       document.getElementById("loadout-editor")?.remove();
       const waiting = document.createElement("section");
@@ -219,7 +246,13 @@ export class GameInventory {
     const overlay = document.createElement("section");
     overlay.id = "loadout-editor";
     overlay.className = "overlay loadout-page";
+    overlay.tabIndex = -1;
     overlay.setAttribute("aria-label", "Loadout");
+    for (const [property, name] of [
+      ["--loadout-filter-icon", "filter_line"],
+      ["--loadout-filter-active-icon", "filter"],
+    ])
+      overlay.style.setProperty(property, `url("${assetUrl(`/icons/menu/${name}.svg`)}")`);
     overlay.dataset.activeTeam = this.editorTeam;
     const otherTeam = this.editorTeam === "ct" ? "t" : "ct";
     const cosmetics = (team: "ct" | "t") => {
@@ -287,7 +320,7 @@ export class GameInventory {
     const cosmeticCandidates = candidateItems
       .map(
         (item) =>
-          `<button draggable="true" data-cosmetic-choice="${item.id}" data-choice-category="${item.category}" aria-pressed="${item.active}">${item.image ? `<img loading="lazy" src="${assetUrl(item.image)}" alt="">` : '<span class="default-item-image">DEFAULT</span>'}<b></b></button>`,
+          `<button draggable="true" data-cosmetic-choice="${item.id}" data-choice-category="${item.category}" aria-pressed="${item.active}"><div class="inventory-item-art">${item.image ? `<img loading="lazy" src="${assetUrl(item.image)}" alt="">` : '<span class="default-item-image">DEFAULT</span>'}</div><b></b></button>`,
       )
       .join("");
     overlay.innerHTML = `<header class="loadout-page-heading"><span>LOADOUT</span><nav aria-label="Loadout team">${(["ct", "t"] as const).map((team) => `<button data-inventory-team="${team}" aria-pressed="${this.editorTeam === team}">${team === "ct" ? "COUNTER-TERRORISTS" : "TERRORISTS"}</button>`).join("")}</nav><small>Changes apply next round</small></header><div class="loadout-teams">${[
@@ -320,7 +353,7 @@ export class GameInventory {
       )
       .join(
         "",
-      )}<section class="loadout-opponent" data-team="${otherTeam}"><button class="loadout-team-title" data-inventory-team="${otherTeam}">EQUIP ${otherTeam.toUpperCase()}</button><div class="loadout-agent" id="loadout-agent-${otherTeam}"></div>${cosmetics(otherTeam)}</section></div><footer class="loadout-candidates"><div class="loadout-filter"><label>Category <select id="loadout-category">${["All Items", "Pistols", "Mid-Tier", "Rifles", "Agents", "Gloves", "Knives"].map((c) => `<option ${c === this.editorFilter ? "selected" : ""}>${c}</option>`).join("")}</select></label><span>${this.editorFilter === "All Items" ? "All equipment" : this.editorTeam.toUpperCase()} - ${this.editorFilter === "All Items" ? "Choose an item" : this.editorCategory === "Pistols" && this.editorSlot === 0 ? "Starting pistol" : `Slot ${this.editorSlot + 1}`} - Click or drag an item to equip</span></div><div class="inventory-choices">${
+      )}<section class="loadout-opponent" data-team="${otherTeam}"><button class="loadout-team-title" data-inventory-team="${otherTeam}">EQUIP ${otherTeam.toUpperCase()}</button><div class="loadout-agent" id="loadout-agent-${otherTeam}"></div>${cosmetics(otherTeam)}</section></div><footer class="loadout-candidates"><div class="loadout-filter"><label><img class="menu-control-icon" src="${assetUrl("/icons/menu/filter.svg")}" alt="Category"> <select id="loadout-category" aria-label="Category">${["All Items", "Pistols", "Mid-Tier", "Rifles", "Agents", "Gloves", "Knives"].map((c) => `<option ${c === this.editorFilter ? "selected" : ""}>${c}</option>`).join("")}</select></label><span>${this.editorFilter === "All Items" ? "All equipment" : this.editorTeam.toUpperCase()} - ${this.editorFilter === "All Items" ? "Choose an item" : this.editorCategory === "Pistols" && this.editorSlot === 0 ? "Starting pistol" : `Slot ${this.editorSlot + 1}`} - Click or drag an item to equip</span></div><div class="inventory-choices">${
       cosmeticCategory
         ? cosmeticCandidates
         : (this.editorFilter === "All Items"
@@ -333,7 +366,7 @@ export class GameInventory {
               const skin = this.skinCatalog.find(
                 (s) => s.weapon === id && s.id === skinChoices[id].id,
               );
-              return `<button draggable="true" data-loadout-weapon="${id}" aria-pressed="${this.loadouts[this.editorTeam].filter((other) => loadoutCategory(other) === this.editorCategory)[this.editorSlot] === id}"><img loading="lazy" src="${assetUrl(skin?.image ?? `/skins/defaults/${id}.webp`)}" alt=""><b>${weapons[id].name}</b><small>$${weaponPrice(id).toLocaleString()}</small></button>`;
+              return `<button draggable="true" data-loadout-weapon="${id}" data-equipped="${this.loadouts[this.editorTeam].includes(id)}" aria-pressed="${this.loadouts[this.editorTeam].filter((other) => loadoutCategory(other) === this.editorCategory)[this.editorSlot] === id}"><div class="inventory-item-art"><img loading="lazy" src="${assetUrl(skin?.image ?? `/skins/defaults/${id}.webp`)}" alt=""></div><b>${weapons[id].name}</b><small>$${weaponPrice(id).toLocaleString()}</small></button>`;
             })
             .join("")
     }</div></footer>`;
@@ -342,6 +375,12 @@ export class GameInventory {
         .querySelector(".inventory-choices")!
         .insertAdjacentHTML("beforeend", cosmeticCandidates);
     document.getElementById("app")!.append(overlay);
+    overlay.querySelector(".loadout-candidates")!.scrollTop = scrollTop;
+    // Rebuilding a team/filter must not lose keyboard control or jump the collection.
+    const focusTarget = focusSelector
+      ? overlay.querySelector<HTMLElement>(focusSelector)
+      : undefined;
+    (focusTarget ?? overlay).focus({ preventScroll: true });
     this.panelRect = overlay.querySelector<HTMLElement>(".loadout-team")!.getBoundingClientRect();
     if (!this.previews.length)
       this.previews = [

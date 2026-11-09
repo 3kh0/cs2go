@@ -1,0 +1,3743 @@
+{
+  "resources": [
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4614169,
+      "preload_bytes": 0,
+      "bytes": 4638,
+      "crc32": "5d70fe1d",
+      "sha256": "8916be31f2c98ddfcaf5f0efcd2a450a594e7a616dbd6a7b24ba91c7dd5c8e23",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge0_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 208,
+          "bytes": 55,
+          "magic": "a155aaaa"
+        },
+        "MIDX": {
+          "offset": 272,
+          "bytes": 25,
+          "magic": "e1f02020"
+        },
+        "MDAT": {
+          "offset": 304,
+          "bytes": 1200,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1504,
+          "bytes": 868,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2372,
+          "bytes": 70,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 2448,
+          "bytes": 1250,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3712,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_281.vpk",
+      "archive_offset": 62259952,
+      "preload_bytes": 0,
+      "bytes": 3544,
+      "crc32": "8e605e2e",
+      "sha256": "2186139cb6cac956d346ef88dcd1d4d72a4fe8357c8367d8c4ab76a2dc281da7",
+      "resource_path": "materials/effects/smoke_backdrop_001.vmat_c",
+      "references": [
+        {
+          "id": "9769bd6abd13f8e0",
+          "path": "materials/effects/smoke/smoke_001_mask_psd_7a7bcea9.vtex"
+        },
+        {
+          "id": "44e7224e95563ed6",
+          "path": "materials/effects/smoke/smoke_003_mask_psd_3015981f.vtex"
+        },
+        {
+          "id": "6e4b7baa98e8b2d7",
+          "path": "materials/effects/smoke/smoke_004_mask_psd_1a5eefb.vtex"
+        },
+        {
+          "id": "cf53474307c57ae6",
+          "path": "materials/effects/smoke_backdrop_001_vmat_g_tcolor_e42befc7.vtex"
+        }
+      ],
+      "blocks": {
+        "RERL": {
+          "offset": 64,
+          "bytes": 307,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 384,
+          "bytes": 1488,
+          "magic": "0333564b"
+        },
+        "DATA": {
+          "offset": 1872,
+          "bytes": 1135,
+          "magic": "0333564b"
+        },
+        "INSG": {
+          "offset": 3008,
+          "bytes": 536,
+          "magic": "0333564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4603532,
+      "preload_bytes": 0,
+      "bytes": 10637,
+      "crc32": "21e7d3f5",
+      "sha256": "ca7dd8497d44a3cc2cb50ab5abcc6498f97b6587731df1cf1c74401518090c6c",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge10_dust_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "4a88aac4aa60fd56",
+          "path": "materials/effects/dust_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 2624,
+          "bytes": 2392,
+          "magic": "a191502a"
+        },
+        "MIDX": {
+          "offset": 5024,
+          "bytes": 1246,
+          "magic": "e1f00000"
+        },
+        "MDAT": {
+          "offset": 6272,
+          "bytes": 1207,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 7488,
+          "bytes": 874,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 8364,
+          "bytes": 69,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 8448,
+          "bytes": 1254,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 9712,
+          "bytes": 925,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_007.vpk",
+      "archive_offset": 74184528,
+      "preload_bytes": 0,
+      "bytes": 3384,
+      "crc32": "3cdc1ec2",
+      "sha256": "b38bc494d7ba6cb8fd9d26bccc3dd685358ea3abc90f6a33fbcb2b0b66b0bf2b",
+      "resource_path": "materials/effects/dust_backdrop_001.vmat_c",
+      "references": [
+        {
+          "id": "c21f0ceccf804f99",
+          "path": "materials/effects/dust_backdrop_001_vmat_g_tcolor_e42befc7.vtex"
+        },
+        {
+          "id": "25667197f8884ed7",
+          "path": "materials/effects/smoke/smoke_004b_mask_psd_747d5c5a.vtex"
+        },
+        {
+          "id": "5ac81f9bd4004ac1",
+          "path": "materials/effects/smoke/smoke_005_mask_psd_d26f4776.vtex"
+        }
+      ],
+      "blocks": {
+        "RERL": {
+          "offset": 64,
+          "bytes": 235,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 304,
+          "bytes": 1419,
+          "magic": "0333564b"
+        },
+        "DATA": {
+          "offset": 1728,
+          "bytes": 1119,
+          "magic": "0333564b"
+        },
+        "INSG": {
+          "offset": 2848,
+          "bytes": 536,
+          "magic": "0333564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4598734,
+      "preload_bytes": 0,
+      "bytes": 4798,
+      "crc32": "5cd5c5df",
+      "sha256": "97c6525b7728f38d795a65907b449b81254c9c750fba9dc0290bfe78f5d0d2a1",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge12_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 304,
+          "bytes": 96,
+          "magic": "a154a8aa"
+        },
+        "MIDX": {
+          "offset": 400,
+          "bytes": 58,
+          "magic": "e1f02020"
+        },
+        "MDAT": {
+          "offset": 464,
+          "bytes": 1209,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1680,
+          "bytes": 872,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2552,
+          "bytes": 66,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 2624,
+          "bytes": 1247,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3872,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4547476,
+      "preload_bytes": 0,
+      "bytes": 4878,
+      "crc32": "9f1da176",
+      "sha256": "2bebc5013dc83584d3bc01990783de9182181b98b2e4ac7f85c1e87f1ca73236",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge17_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 320,
+          "bytes": 123,
+          "magic": "a154a9aa"
+        },
+        "MIDX": {
+          "offset": 448,
+          "bytes": 67,
+          "magic": "e1f00000"
+        },
+        "MDAT": {
+          "offset": 528,
+          "bytes": 1210,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1744,
+          "bytes": 870,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2616,
+          "bytes": 66,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 2688,
+          "bytes": 1250,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3952,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4542246,
+      "preload_bytes": 0,
+      "bytes": 5230,
+      "crc32": "47b4196b",
+      "sha256": "d7b00b7dfe018cb590e9180f20a7b6b9ffb29e6fff3ce57f0480839943e79a0e",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge18_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 480,
+          "bytes": 215,
+          "magic": "a154a8aa"
+        },
+        "MIDX": {
+          "offset": 704,
+          "bytes": 148,
+          "magic": "e1f02020"
+        },
+        "MDAT": {
+          "offset": 864,
+          "bytes": 1210,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 2080,
+          "bytes": 873,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2956,
+          "bytes": 70,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 3040,
+          "bytes": 1256,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 4304,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4537696,
+      "preload_bytes": 0,
+      "bytes": 4550,
+      "crc32": "8e9a5ceb",
+      "sha256": "efa456c09d7f30fc6c764842731b054d8bc77ad739bd8be3c836270b25c2a0e7",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge19_fog_card_001.vmdl_c",
+      "references": [
+        {
+          "id": "992847065a36145b",
+          "path": "materials/effects/fog_card_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 160,
+          "bytes": 36,
+          "magic": "00000000"
+        },
+        "MIDX": {
+          "offset": 208,
+          "bytes": 6,
+          "magic": "00000100"
+        },
+        "MDAT": {
+          "offset": 224,
+          "bytes": 1198,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1424,
+          "bytes": 867,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2292,
+          "bytes": 64,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 2368,
+          "bytes": 1250,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3632,
+          "bytes": 918,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_384.vpk",
+      "archive_offset": 98616528,
+      "preload_bytes": 0,
+      "bytes": 3432,
+      "crc32": "2a8d4529",
+      "sha256": "2eae498296fea66bf48ef3b76b966b7f3eaebaaa902c2b64323d8304387b0751",
+      "resource_path": "materials/effects/fog_card_001.vmat_c",
+      "references": [
+        {
+          "id": "723863a807ac0880",
+          "path": "materials/effects/fog_card_001_vmat_g_tcolor_e42befc7.vtex"
+        },
+        {
+          "id": "d892cb4a2fd1b3a9",
+          "path": "materials/effects/fog_card_001_vmat_g_tmask1_2b2ebb3f.vtex"
+        },
+        {
+          "id": "5b08603f767c7290",
+          "path": "materials/effects/fog_card_001_vmat_g_tmask2_2b2ebb3f.vtex"
+        },
+        {
+          "id": "b2cb4d93040e0276",
+          "path": "materials/effects/smoke/cloud_002_mask_psd_87d62c5f.vtex"
+        }
+      ],
+      "blocks": {
+        "RERL": {
+          "offset": 64,
+          "bytes": 306,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 384,
+          "bytes": 1380,
+          "magic": "0333564b"
+        },
+        "DATA": {
+          "offset": 1776,
+          "bytes": 1117,
+          "magic": "0333564b"
+        },
+        "INSG": {
+          "offset": 2896,
+          "bytes": 536,
+          "magic": "0333564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4533074,
+      "preload_bytes": 0,
+      "bytes": 4622,
+      "crc32": "a445abdb",
+      "sha256": "d759eea77c6b3cc7e3a803b663a230d0cd09422469acf55a3a4fc8c8455d8424",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge1_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 192,
+          "bytes": 55,
+          "magic": "a155aaaa"
+        },
+        "MIDX": {
+          "offset": 256,
+          "bytes": 25,
+          "magic": "e1f02020"
+        },
+        "MDAT": {
+          "offset": 288,
+          "bytes": 1200,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1488,
+          "bytes": 868,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2356,
+          "bytes": 70,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 2432,
+          "bytes": 1250,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3696,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4518995,
+      "preload_bytes": 0,
+      "bytes": 4574,
+      "crc32": "d8157403",
+      "sha256": "2f1e62671bd497a43ad1c9c5657715ce7ad399ee81f159b443b452d607ebc4d7",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge21_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 160,
+          "bytes": 36,
+          "magic": "003c0100"
+        },
+        "MIDX": {
+          "offset": 208,
+          "bytes": 6,
+          "magic": "00000100"
+        },
+        "MDAT": {
+          "offset": 224,
+          "bytes": 1203,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1440,
+          "bytes": 867,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2308,
+          "bytes": 70,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 2384,
+          "bytes": 1253,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3648,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4498227,
+      "preload_bytes": 0,
+      "bytes": 4590,
+      "crc32": "8d4e6aee",
+      "sha256": "249dca9e73c8e633f5007c1b6bdcf8e44071bcfcbb8d3998de2571f9b51c1a42",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge24_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 160,
+          "bytes": 40,
+          "magic": "a1feaaaa"
+        },
+        "MIDX": {
+          "offset": 208,
+          "bytes": 12,
+          "magic": "00000100"
+        },
+        "MDAT": {
+          "offset": 224,
+          "bytes": 1203,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1440,
+          "bytes": 873,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2316,
+          "bytes": 70,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 2400,
+          "bytes": 1249,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3664,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4476840,
+      "preload_bytes": 0,
+      "bytes": 10921,
+      "crc32": "67204922",
+      "sha256": "2d8653849aaf76634b5adc63b6c268260a041db13d424b665bd0cc014badda02",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge2_dust_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "4a88aac4aa60fd56",
+          "path": "materials/effects/dust_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 2736,
+          "bytes": 2623,
+          "magic": "a199f52a"
+        },
+        "MIDX": {
+          "offset": 5360,
+          "bytes": 1193,
+          "magic": "e1f0f010"
+        },
+        "MDAT": {
+          "offset": 6560,
+          "bytes": 1207,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 7776,
+          "bytes": 874,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 8652,
+          "bytes": 69,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 8736,
+          "bytes": 1255,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 10000,
+          "bytes": 921,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4471802,
+      "preload_bytes": 0,
+      "bytes": 5038,
+      "crc32": "d8d6d6b7",
+      "sha256": "da6851eb63dbc82ef2d353575e2af034dfa6b0872b42b1951edb142998f90145",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge3_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 432,
+          "bytes": 137,
+          "magic": "a159a8aa"
+        },
+        "MIDX": {
+          "offset": 576,
+          "bytes": 104,
+          "magic": "e1f02010"
+        },
+        "MDAT": {
+          "offset": 688,
+          "bytes": 1210,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1904,
+          "bytes": 872,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2776,
+          "bytes": 66,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 2848,
+          "bytes": 1256,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 4112,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4466844,
+      "preload_bytes": 0,
+      "bytes": 4958,
+      "crc32": "abe0c2fa",
+      "sha256": "64df6d8b70d28588294a3b7222e1408ffc1762d8a4a6a5cdb1f0e5d51c830483",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge5_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 384,
+          "bytes": 127,
+          "magic": "a119a8aa"
+        },
+        "MIDX": {
+          "offset": 512,
+          "bytes": 95,
+          "magic": "e1f02010"
+        },
+        "MDAT": {
+          "offset": 608,
+          "bytes": 1209,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1824,
+          "bytes": 872,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2696,
+          "bytes": 66,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 2768,
+          "bytes": 1252,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 4032,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4462294,
+      "preload_bytes": 0,
+      "bytes": 4550,
+      "crc32": "24b46d7e",
+      "sha256": "246bc0176279821daeb63c10bc0f6f87fee07150641c46f2cb97c8a069f973b3",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge6_fog_card_001.vmdl_c",
+      "references": [
+        {
+          "id": "992847065a36145b",
+          "path": "materials/effects/fog_card_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 160,
+          "bytes": 36,
+          "magic": "00000000"
+        },
+        "MIDX": {
+          "offset": 208,
+          "bytes": 6,
+          "magic": "00000100"
+        },
+        "MDAT": {
+          "offset": 224,
+          "bytes": 1198,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1424,
+          "bytes": 867,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2292,
+          "bytes": 64,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 2368,
+          "bytes": 1249,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3632,
+          "bytes": 918,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+      "archive_offset": 4457720,
+      "preload_bytes": 0,
+      "bytes": 4574,
+      "crc32": "9acee4e9",
+      "sha256": "425a89a5a04d17ca088bbd094bd4f8e9fb11c925e3a13cb99d47ff10c4f5726c",
+      "resource_path": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge8_smoke_backdrop_001.vmdl_c",
+      "references": [
+        {
+          "id": "e82663aaaabd36d1",
+          "path": "materials/effects/smoke_backdrop_001.vmat"
+        }
+      ],
+      "blocks": {
+        "MVTX": {
+          "offset": 160,
+          "bytes": 36,
+          "magic": "003c0100"
+        },
+        "MIDX": {
+          "offset": 208,
+          "bytes": 6,
+          "magic": "00000100"
+        },
+        "MDAT": {
+          "offset": 224,
+          "bytes": 1203,
+          "magic": "0533564b"
+        },
+        "CTRL": {
+          "offset": 1440,
+          "bytes": 867,
+          "magic": "0533564b"
+        },
+        "RERL": {
+          "offset": 2308,
+          "bytes": 70,
+          "magic": "0c000000"
+        },
+        "RED2": {
+          "offset": 2384,
+          "bytes": 1253,
+          "magic": "0533564b"
+        },
+        "DATA": {
+          "offset": 3648,
+          "bytes": 926,
+          "magic": "0533564b"
+        }
+      }
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_007.vpk",
+      "archive_offset": 74187920,
+      "preload_bytes": 0,
+      "bytes": 1968,
+      "crc32": "27a67eb1",
+      "sha256": "6e447783dc94fc2322a4a48e4dc4098ec966e4b0483f772acf484753ac0e5e55",
+      "resource_path": "materials/effects/dust_backdrop_001_vmat_g_tcolor_e42befc7.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_384.vpk",
+      "archive_offset": 98619968,
+      "preload_bytes": 0,
+      "bytes": 1968,
+      "crc32": "27a67eb1",
+      "sha256": "6e447783dc94fc2322a4a48e4dc4098ec966e4b0483f772acf484753ac0e5e55",
+      "resource_path": "materials/effects/fog_card_001_vmat_g_tcolor_e42befc7.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_384.vpk",
+      "archive_offset": 98621936,
+      "preload_bytes": 0,
+      "bytes": 1944,
+      "crc32": "870c5ae7",
+      "sha256": "2a8bad79779e16caa56c65403c9b31461a0ccddd123ee1542f429227327c9cc9",
+      "resource_path": "materials/effects/fog_card_001_vmat_g_tmask1_2b2ebb3f.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_384.vpk",
+      "archive_offset": 98623888,
+      "preload_bytes": 0,
+      "bytes": 1944,
+      "crc32": "870c5ae7",
+      "sha256": "2a8bad79779e16caa56c65403c9b31461a0ccddd123ee1542f429227327c9cc9",
+      "resource_path": "materials/effects/fog_card_001_vmat_g_tmask2_2b2ebb3f.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_315.vpk",
+      "archive_offset": 61280400,
+      "preload_bytes": 0,
+      "bytes": 126111,
+      "crc32": "276e841e",
+      "sha256": "670d81434278333766cff280ba2eb20308275cd8ecff9da7a6ba2d844977c083",
+      "resource_path": "materials/effects/smoke/cloud_002_mask_psd_87d62c5f.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_215.vpk",
+      "archive_offset": 7816896,
+      "preload_bytes": 0,
+      "bytes": 2798252,
+      "crc32": "144adb83",
+      "sha256": "db2ff1a99c68da6fa2838a0c045e9f4b8ddcc846f025f6621f720d6a1b3b80cc",
+      "resource_path": "materials/effects/smoke/smoke_001_mask_psd_7a7bcea9.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_256.vpk",
+      "archive_offset": 96517792,
+      "preload_bytes": 0,
+      "bytes": 313484,
+      "crc32": "8aa349fd",
+      "sha256": "d208d27a029fd98dede6c534f2f5fd037637f2e3262c811e1e562118336b9693",
+      "resource_path": "materials/effects/smoke/smoke_003_mask_psd_3015981f.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_311.vpk",
+      "archive_offset": 31707472,
+      "preload_bytes": 0,
+      "bytes": 701096,
+      "crc32": "80eb818a",
+      "sha256": "3dfffa167dac3378e8475ef1b38210961276c0bd48cc71d9cf965f84f6f7fa77",
+      "resource_path": "materials/effects/smoke/smoke_004_mask_psd_1a5eefb.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_311.vpk",
+      "archive_offset": 32408576,
+      "preload_bytes": 0,
+      "bytes": 701096,
+      "crc32": "246b2b63",
+      "sha256": "0f30777de6cd62232bd4c1674b62933ee33b2a908bdef5fdd0e295a0c9d94b1c",
+      "resource_path": "materials/effects/smoke/smoke_004b_mask_psd_747d5c5a.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_311.vpk",
+      "archive_offset": 33109680,
+      "preload_bytes": 0,
+      "bytes": 1822527,
+      "crc32": "698cd5c4",
+      "sha256": "f7b7ec047084effe1f58a2f74b4437584bf6a1e7598a34796bf08d6ac4b9198f",
+      "resource_path": "materials/effects/smoke/smoke_005_mask_psd_d26f4776.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_153.vpk",
+      "archive_offset": 1665728,
+      "preload_bytes": 0,
+      "bytes": 1968,
+      "crc32": "27a67eb1",
+      "sha256": "6e447783dc94fc2322a4a48e4dc4098ec966e4b0483f772acf484753ac0e5e55",
+      "resource_path": "materials/effects/smoke_backdrop_001_vmat_g_tcolor_e42befc7.vtex_c",
+      "references": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_190.vpk",
+      "archive_offset": 79145024,
+      "preload_bytes": 0,
+      "bytes": 3912,
+      "crc32": "d0d240e5",
+      "sha256": "2206a189f0f54a7d7897afb6f35f23db59a127717d5f4168ecd218ef2d14b28b",
+      "resource_path": "models/particle/debris/paper_05a.vmdl_c",
+      "references": [
+        {
+          "id": "f947ee0462d30fb5",
+          "path": "models/props/signage/materials/peeled_paper.vmat"
+        },
+        {
+          "id": "36494d037e4a84d2",
+          "path": "models/props/signage/materials/peeled_paper_dirty.vmat"
+        }
+      ],
+      "blocks": {
+        "MDAT": {
+          "offset": 96,
+          "bytes": 746,
+          "magic": "0433564b"
+        },
+        "MBUF": {
+          "offset": 848,
+          "bytes": 499,
+          "magic": "10000000"
+        },
+        "CTRL": {
+          "offset": 1360,
+          "bytes": 285,
+          "magic": "0433564b"
+        },
+        "RERL": {
+          "offset": 1648,
+          "bytes": 144,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 1792,
+          "bytes": 1229,
+          "magic": "0433564b"
+        },
+        "DATA": {
+          "offset": 3024,
+          "bytes": 888,
+          "magic": "0433564b"
+        }
+      },
+      "also_present_in": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_190.vpk",
+      "archive_offset": 79148944,
+      "preload_bytes": 0,
+      "bytes": 3976,
+      "crc32": "d15c59ea",
+      "sha256": "3faf5506b032026e862f36651e24d1f7b8d559f3186b43b36e22c8158416cfc9",
+      "resource_path": "models/particle/debris/paper_05b.vmdl_c",
+      "references": [
+        {
+          "id": "f947ee0462d30fb5",
+          "path": "models/props/signage/materials/peeled_paper.vmat"
+        },
+        {
+          "id": "36494d037e4a84d2",
+          "path": "models/props/signage/materials/peeled_paper_dirty.vmat"
+        }
+      ],
+      "blocks": {
+        "MDAT": {
+          "offset": 96,
+          "bytes": 749,
+          "magic": "0433564b"
+        },
+        "MBUF": {
+          "offset": 848,
+          "bytes": 562,
+          "magic": "10000000"
+        },
+        "CTRL": {
+          "offset": 1424,
+          "bytes": 285,
+          "magic": "0433564b"
+        },
+        "RERL": {
+          "offset": 1712,
+          "bytes": 144,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 1856,
+          "bytes": 1231,
+          "magic": "0433564b"
+        },
+        "DATA": {
+          "offset": 3088,
+          "bytes": 888,
+          "magic": "0433564b"
+        }
+      },
+      "also_present_in": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_190.vpk",
+      "archive_offset": 79152928,
+      "preload_bytes": 0,
+      "bytes": 3880,
+      "crc32": "c01aae0e",
+      "sha256": "10456ecbf2a518e893443f48cb599bd4e7f2c5460b6cc4bdc25401d9e5a6f2fa",
+      "resource_path": "models/particle/debris/paper_05c.vmdl_c",
+      "references": [
+        {
+          "id": "f947ee0462d30fb5",
+          "path": "models/props/signage/materials/peeled_paper.vmat"
+        },
+        {
+          "id": "36494d037e4a84d2",
+          "path": "models/props/signage/materials/peeled_paper_dirty.vmat"
+        }
+      ],
+      "blocks": {
+        "MDAT": {
+          "offset": 96,
+          "bytes": 748,
+          "magic": "0433564b"
+        },
+        "MBUF": {
+          "offset": 848,
+          "bytes": 478,
+          "magic": "10000000"
+        },
+        "CTRL": {
+          "offset": 1328,
+          "bytes": 285,
+          "magic": "0433564b"
+        },
+        "RERL": {
+          "offset": 1616,
+          "bytes": 144,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 1760,
+          "bytes": 1231,
+          "magic": "0433564b"
+        },
+        "DATA": {
+          "offset": 2992,
+          "bytes": 888,
+          "magic": "0433564b"
+        }
+      },
+      "also_present_in": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_190.vpk",
+      "archive_offset": 79156816,
+      "preload_bytes": 0,
+      "bytes": 3944,
+      "crc32": "41fee5be",
+      "sha256": "eb6b1c1a7f9bf91dee5c7ec6696f90d3caa9248fd7b06f4608e745cadaf0b8b8",
+      "resource_path": "models/particle/debris/paper_05d.vmdl_c",
+      "references": [
+        {
+          "id": "f947ee0462d30fb5",
+          "path": "models/props/signage/materials/peeled_paper.vmat"
+        },
+        {
+          "id": "36494d037e4a84d2",
+          "path": "models/props/signage/materials/peeled_paper_dirty.vmat"
+        }
+      ],
+      "blocks": {
+        "MDAT": {
+          "offset": 96,
+          "bytes": 748,
+          "magic": "0433564b"
+        },
+        "MBUF": {
+          "offset": 848,
+          "bytes": 539,
+          "magic": "10000000"
+        },
+        "CTRL": {
+          "offset": 1392,
+          "bytes": 285,
+          "magic": "0433564b"
+        },
+        "RERL": {
+          "offset": 1680,
+          "bytes": 144,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 1824,
+          "bytes": 1231,
+          "magic": "0433564b"
+        },
+        "DATA": {
+          "offset": 3056,
+          "bytes": 888,
+          "magic": "0433564b"
+        }
+      },
+      "also_present_in": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_190.vpk",
+      "archive_offset": 79160768,
+      "preload_bytes": 0,
+      "bytes": 4056,
+      "crc32": "6b8751f3",
+      "sha256": "0e263a8d8c5635c65976accc068570192b8e701f6359e6a6ca2675b04d730f47",
+      "resource_path": "models/particle/debris/paper_05f.vmdl_c",
+      "references": [
+        {
+          "id": "f947ee0462d30fb5",
+          "path": "models/props/signage/materials/peeled_paper.vmat"
+        },
+        {
+          "id": "36494d037e4a84d2",
+          "path": "models/props/signage/materials/peeled_paper_dirty.vmat"
+        }
+      ],
+      "blocks": {
+        "MDAT": {
+          "offset": 96,
+          "bytes": 746,
+          "magic": "0433564b"
+        },
+        "MBUF": {
+          "offset": 848,
+          "bytes": 642,
+          "magic": "10000000"
+        },
+        "CTRL": {
+          "offset": 1504,
+          "bytes": 285,
+          "magic": "0433564b"
+        },
+        "RERL": {
+          "offset": 1792,
+          "bytes": 144,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 1936,
+          "bytes": 1229,
+          "magic": "0433564b"
+        },
+        "DATA": {
+          "offset": 3168,
+          "bytes": 888,
+          "magic": "0433564b"
+        }
+      },
+      "also_present_in": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_236.vpk",
+      "archive_offset": 4811328,
+      "preload_bytes": 0,
+      "bytes": 3984,
+      "crc32": "b33fa826",
+      "sha256": "60880c047b1a1c18ce9456c20df8d7edfc8ff93374160ba7afd58ba361d763b4",
+      "resource_path": "models/props/signage/materials/peeled_paper.vmat_c",
+      "references": [
+        {
+          "id": "37e974bc8ed61ed7",
+          "path": "materials/default/default_ao_tga_559f1ac6.vtex"
+        },
+        {
+          "id": "2070d28a05fd6623",
+          "path": "models/props/signage/materials/peeled_paper_color_psd_ae600fce.vtex"
+        },
+        {
+          "id": "7612248523eb347b",
+          "path": "models/props/signage/materials/peeled_paper_dirty_normal_psd_c87c7d39.vtex"
+        }
+      ],
+      "blocks": {
+        "RERL": {
+          "offset": 64,
+          "bytes": 246,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 320,
+          "bytes": 2017,
+          "magic": "0433564b"
+        },
+        "DATA": {
+          "offset": 2352,
+          "bytes": 1044,
+          "magic": "0433564b"
+        },
+        "INSG": {
+          "offset": 3408,
+          "bytes": 576,
+          "magic": "0433564b"
+        }
+      },
+      "also_present_in": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_236.vpk",
+      "archive_offset": 5650256,
+      "preload_bytes": 0,
+      "bytes": 3856,
+      "crc32": "88c701b0",
+      "sha256": "cf1548d7abcba770888856b5c17616ea226efe48c031edd0e3ad5dec44c70019",
+      "resource_path": "models/props/signage/materials/peeled_paper_dirty.vmat_c",
+      "references": [
+        {
+          "id": "37e974bc8ed61ed7",
+          "path": "materials/default/default_ao_tga_559f1ac6.vtex"
+        },
+        {
+          "id": "9bfa036f18300209",
+          "path": "models/props/signage/materials/peeled_paper_dirty_color_psd_e5f760e6.vtex"
+        },
+        {
+          "id": "97e3b225f7ca9c9c",
+          "path": "models/props/signage/materials/peeled_paper_dirty_normal_psd_3bee3e6e.vtex"
+        }
+      ],
+      "blocks": {
+        "RERL": {
+          "offset": 64,
+          "bytes": 252,
+          "magic": "08000000"
+        },
+        "RED2": {
+          "offset": 320,
+          "bytes": 1978,
+          "magic": "0433564b"
+        },
+        "DATA": {
+          "offset": 2304,
+          "bytes": 966,
+          "magic": "0433564b"
+        },
+        "INSG": {
+          "offset": 3280,
+          "bytes": 576,
+          "magic": "0433564b"
+        }
+      },
+      "also_present_in": []
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_335.vpk",
+      "archive_offset": 76892032,
+      "preload_bytes": 0,
+      "bytes": 2136,
+      "crc32": "8dc32399",
+      "sha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "resource_path": "materials/default/default_ao_tga_559f1ac6.vtex_c",
+      "data_header_hex": "010000000000803f0000000000000000000000000400040001001b010000000008000000020000000100000014000000"
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_190.vpk",
+      "archive_offset": 37491664,
+      "preload_bytes": 0,
+      "bytes": 3265861,
+      "crc32": "7fea9f73",
+      "sha256": "de845fb9dd0254e84bab053a0957b16c4a61b6730ede73b137264f9775db44dd",
+      "resource_path": "materials/particle/simulated/steam/wispy_steam_burst_b.vtex_c",
+      "data_header_hex": "01000000ec5da33eec5da33eec5da33e6ffc6d3d00100008010002030000000008000000030000000100000020000000"
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_190.vpk",
+      "archive_offset": 41423408,
+      "preload_bytes": 0,
+      "bytes": 1237785,
+      "crc32": "4147c104",
+      "sha256": "2cef321a3648302d98b629991734d4d33d60774317fd672d862240757b693b8f",
+      "resource_path": "materials/particle/simulated/steam/wispy_steam_set.vtex_c",
+      "data_header_hex": "0100000080ee2a3e80ee2a3e80ee2a3eee669f3c00100008010002030000000008000000030000000100000020000000"
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_190.vpk",
+      "archive_offset": 42661200,
+      "preload_bytes": 0,
+      "bytes": 1207881,
+      "crc32": "185cc55a",
+      "sha256": "48f700e22a22156a32650038bec8416c145ece93c776e4ac4de0b03169f4985b",
+      "resource_path": "materials/particle/simulated/steam/wispy_steam_set_mv.vtex_c",
+      "data_header_hex": "01000000000000005f1a3f3e000000004e59003f0008000401000202000000000800000004000000010000002c000000"
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_013.vpk",
+      "archive_offset": 59787360,
+      "preload_bytes": 0,
+      "bytes": 271780,
+      "crc32": "5bba7e2e",
+      "sha256": "0b9073f87082faba398348eb58e5dca73e44f0bc44e33d415f07e0d0f0e035e5",
+      "resource_path": "models/props/signage/materials/peeled_paper_color_psd_ae600fce.vtex_c",
+      "data_header_hex": "010000001a280c3fffcd0b3feb81063f27c4da3e00020004010014080000000008000000030000000100000020000000"
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_246.vpk",
+      "archive_offset": 68354016,
+      "preload_bytes": 0,
+      "bytes": 2575709,
+      "crc32": "ced02e46",
+      "sha256": "238dbd62365ad6db41c708605e5e04d75159b1a7aca2cbeb03c86b8368551774",
+      "resource_path": "models/props/signage/materials/peeled_paper_dirty_color_psd_e5f760e6.vtex_c",
+      "data_header_hex": "01000000c8ca003f2ca4e53e2f45c93ea6c9d63e00040008010014090000000008000000020000000100000014000000"
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_246.vpk",
+      "archive_offset": 70929728,
+      "preload_bytes": 0,
+      "bytes": 2798400,
+      "crc32": "2ceb9958",
+      "sha256": "a72fafba41f95500d280e8e109d8d3c3edf81592d0ca657c7f522c66f96ec680",
+      "resource_path": "models/props/signage/materials/peeled_paper_dirty_normal_psd_3bee3e6e.vtex_c",
+      "data_header_hex": "01000000f42bfc3eca19013f79241d3f0000803f00040008010014090000000008000000020000000100000014000000"
+    },
+    {
+      "vpk": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_246.vpk",
+      "archive_offset": 73728128,
+      "preload_bytes": 0,
+      "bytes": 2572111,
+      "crc32": "6c45c7de",
+      "sha256": "26b80075179a80951eba7659859166445ed786e4655a1a47efdbeb022f665b8c",
+      "resource_path": "models/props/signage/materials/peeled_paper_dirty_normal_psd_c87c7d39.vtex_c",
+      "data_header_hex": "01000000f42bfc3eca19013f5edd193f0000803f00040008010014090000000008000000020000000100000014000000"
+    }
+  ],
+  "materials": {
+    "dust_backdrop_001": {
+      "m_materialName": "materials/effects/dust_backdrop_001.vmat",
+      "m_shaderName": "csgo_effects.vfx",
+      "m_intParams": [
+        {
+          "m_name": "F_DEPTH_FEATHER",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "F_DO_NOT_CAST_SHADOWS",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "g_bFogEnabled",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "g_nTextureAddressModeU",
+          "m_nValue": 0
+        },
+        {
+          "m_name": "g_nTextureAddressModeV",
+          "m_nValue": 0
+        }
+      ],
+      "m_floatParams": [
+        {
+          "m_name": "g_flColorBoost",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeDistance",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flFadeFalloff",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeMax",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeMin",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flFeatherDistance",
+          "m_flValue": 20.0
+        },
+        {
+          "m_name": "g_flFeatherFalloff",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFresnelExponent",
+          "m_flValue": 1.9600000381469727
+        },
+        {
+          "m_name": "g_flFresnelFalloff",
+          "m_flValue": 10.0
+        },
+        {
+          "m_name": "g_flFresnelMax",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFresnelMin",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flOpacityScale",
+          "m_flValue": 1.0
+        }
+      ],
+      "m_vectorParams": [
+        {
+          "m_name": "g_vColorTint",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask1PanSpeed",
+          "m_value": [
+            2.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask1Scale",
+          "m_value": [
+            10.0,
+            5.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask2PanSpeed",
+          "m_value": [
+            0.05000000074505806,
+            -0.009999999776482582,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask2Scale",
+          "m_value": [
+            0.6000000238418579,
+            1.100000023841858,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask3PanSpeed",
+          "m_value": [
+            0.05999999865889549,
+            0.009999999776482582,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask3Scale",
+          "m_value": [
+            0.5,
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vTexCoordScrollSpeed",
+          "m_value": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "TextureColor",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "TextureTranslucency",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "m_textureParams": [
+        {
+          "m_name": "g_tColor",
+          "m_pValue": "materials/effects/dust_backdrop_001_vmat_g_tcolor_e42befc7.vtex"
+        },
+        {
+          "m_name": "g_tMask1",
+          "m_pValue": "materials/effects/smoke/smoke_004b_mask_psd_747d5c5a.vtex"
+        },
+        {
+          "m_name": "g_tMask2",
+          "m_pValue": "materials/effects/smoke/smoke_005_mask_psd_d26f4776.vtex"
+        },
+        {
+          "m_name": "g_tMask3",
+          "m_pValue": "materials/effects/smoke/smoke_005_mask_psd_d26f4776.vtex"
+        }
+      ],
+      "m_dynamicParams": [],
+      "m_dynamicTextureParams": [],
+      "m_intAttributes": [
+        {
+          "m_name": "RepresentativeTextureHeight",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "RepresentativeTextureWidth",
+          "m_nValue": 1
+        }
+      ],
+      "m_floatAttributes": [],
+      "m_vectorAttributes": [],
+      "m_textureAttributes": [],
+      "m_stringAttributes": [],
+      "m_renderAttributesUsed": []
+    },
+    "fog_card_001": {
+      "m_materialName": "materials/effects/fog_card_001.vmat",
+      "m_shaderName": "csgo_effects.vfx",
+      "m_intParams": [
+        {
+          "m_name": "F_DEPTH_FEATHER",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "F_DO_NOT_CAST_SHADOWS",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "g_bFogEnabled",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "g_nTextureAddressModeU",
+          "m_nValue": 0
+        },
+        {
+          "m_name": "g_nTextureAddressModeV",
+          "m_nValue": 0
+        }
+      ],
+      "m_floatParams": [
+        {
+          "m_name": "g_flColorBoost",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeDistance",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flFadeFalloff",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeMax",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeMin",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flFeatherDistance",
+          "m_flValue": 2000.0
+        },
+        {
+          "m_name": "g_flFeatherFalloff",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFresnelExponent",
+          "m_flValue": 0.0010000000474974513
+        },
+        {
+          "m_name": "g_flFresnelFalloff",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFresnelMax",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFresnelMin",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flOpacityScale",
+          "m_flValue": 0.597000002861023
+        }
+      ],
+      "m_vectorParams": [
+        {
+          "m_name": "g_vColorTint",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask1PanSpeed",
+          "m_value": [
+            5.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask1Scale",
+          "m_value": [
+            10.0,
+            10.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask2PanSpeed",
+          "m_value": [
+            0.029999999329447746,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask2Scale",
+          "m_value": [
+            0.5,
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask3PanSpeed",
+          "m_value": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask3Scale",
+          "m_value": [
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vTexCoordScrollSpeed",
+          "m_value": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "TextureColor",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "TextureMask1",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "TextureMask2",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "TextureTranslucency",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "m_textureParams": [
+        {
+          "m_name": "g_tColor",
+          "m_pValue": "materials/effects/fog_card_001_vmat_g_tcolor_e42befc7.vtex"
+        },
+        {
+          "m_name": "g_tMask1",
+          "m_pValue": "materials/effects/fog_card_001_vmat_g_tmask1_2b2ebb3f.vtex"
+        },
+        {
+          "m_name": "g_tMask2",
+          "m_pValue": "materials/effects/fog_card_001_vmat_g_tmask2_2b2ebb3f.vtex"
+        },
+        {
+          "m_name": "g_tMask3",
+          "m_pValue": "materials/effects/smoke/cloud_002_mask_psd_87d62c5f.vtex"
+        }
+      ],
+      "m_dynamicParams": [],
+      "m_dynamicTextureParams": [],
+      "m_intAttributes": [
+        {
+          "m_name": "RepresentativeTextureHeight",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "RepresentativeTextureWidth",
+          "m_nValue": 1
+        }
+      ],
+      "m_floatAttributes": [],
+      "m_vectorAttributes": [],
+      "m_textureAttributes": [],
+      "m_stringAttributes": [],
+      "m_renderAttributesUsed": []
+    },
+    "smoke_backdrop_001": {
+      "m_materialName": "materials/effects/smoke_backdrop_001.vmat",
+      "m_shaderName": "csgo_effects.vfx",
+      "m_intParams": [
+        {
+          "m_name": "F_DEPTH_FEATHER",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "F_DO_NOT_CAST_SHADOWS",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "g_bFogEnabled",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "g_nTextureAddressModeU",
+          "m_nValue": 0
+        },
+        {
+          "m_name": "g_nTextureAddressModeV",
+          "m_nValue": 0
+        }
+      ],
+      "m_floatParams": [
+        {
+          "m_name": "g_flColorBoost",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeDistance",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flFadeFalloff",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeMax",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFadeMin",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flFeatherDistance",
+          "m_flValue": 123.0770034790039
+        },
+        {
+          "m_name": "g_flFeatherFalloff",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFresnelExponent",
+          "m_flValue": 0.0010000000474974513
+        },
+        {
+          "m_name": "g_flFresnelFalloff",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFresnelMax",
+          "m_flValue": 1.0
+        },
+        {
+          "m_name": "g_flFresnelMin",
+          "m_flValue": 0.0
+        },
+        {
+          "m_name": "g_flOpacityScale",
+          "m_flValue": 1.0
+        }
+      ],
+      "m_vectorParams": [
+        {
+          "m_name": "g_vColorTint",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask1PanSpeed",
+          "m_value": [
+            1.0,
+            0.20000000298023224,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask1Scale",
+          "m_value": [
+            10.0,
+            2.5,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask2PanSpeed",
+          "m_value": [
+            0.019999999552965164,
+            0.006000000052154064,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask2Scale",
+          "m_value": [
+            0.8999999761581421,
+            0.25,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask3PanSpeed",
+          "m_value": [
+            0.02500000037252903,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vMask3Scale",
+          "m_value": [
+            0.5,
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "g_vTexCoordScrollSpeed",
+          "m_value": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "TextureColor",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "m_name": "TextureTranslucency",
+          "m_value": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "m_textureParams": [
+        {
+          "m_name": "g_tColor",
+          "m_pValue": "materials/effects/smoke_backdrop_001_vmat_g_tcolor_e42befc7.vtex"
+        },
+        {
+          "m_name": "g_tMask1",
+          "m_pValue": "materials/effects/smoke/smoke_004_mask_psd_1a5eefb.vtex"
+        },
+        {
+          "m_name": "g_tMask2",
+          "m_pValue": "materials/effects/smoke/smoke_001_mask_psd_7a7bcea9.vtex"
+        },
+        {
+          "m_name": "g_tMask3",
+          "m_pValue": "materials/effects/smoke/smoke_003_mask_psd_3015981f.vtex"
+        }
+      ],
+      "m_dynamicParams": [],
+      "m_dynamicTextureParams": [],
+      "m_intAttributes": [
+        {
+          "m_name": "RepresentativeTextureHeight",
+          "m_nValue": 1
+        },
+        {
+          "m_name": "RepresentativeTextureWidth",
+          "m_nValue": 1
+        }
+      ],
+      "m_floatAttributes": [],
+      "m_vectorAttributes": [],
+      "m_textureAttributes": [],
+      "m_stringAttributes": [],
+      "m_renderAttributesUsed": []
+    }
+  },
+  "placements": [
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge0_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1316.046142578125,
+            1049.9842529296875,
+            3.2340469360351562
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge0_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1000.21875,
+            1144.0625,
+            -49.28125
+          ],
+          "m_vMaxBounds": [
+            1039.6875,
+            1157.5,
+            51.15625
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 258.76513671875,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 10,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 24,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge10_dust_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1427.833984375,
+            1103.3936767578125,
+            -6.940169334411621
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge10_dust_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1420.34375,
+            879.90625,
+            -13.5
+          ],
+          "m_vMaxBounds": [
+            1663.6875,
+            1326.90625,
+            8.40625
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 449.9361267089844,
+              "m_vTintColor": [
+                1.0,
+                0.819963812828064,
+                0.6387795805931091
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 561,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 3072,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/dust_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge12_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1316.046142578125,
+            1049.9842529296875,
+            3.2340469360351562
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge12_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1434.46875,
+            942.46875,
+            -49.28125
+          ],
+          "m_vMaxBounds": [
+            1631.875,
+            1009.65625,
+            56.0
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 255.12289428710938,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 30,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 120,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge17_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1348.0484619140625,
+            1242.39892578125,
+            70.86334228515625
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge17_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1430.21875,
+            1185.40625,
+            -14.03125
+          ],
+          "m_vMaxBounds": [
+            1676.78125,
+            1228.15625,
+            156.15625
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 325.73260498046875,
+              "m_vTintColor": [
+                0.6730492115020752,
+                0.5604992508888245,
+                0.45345649123191833
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 35,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 144,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge18_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1600.01611328125,
+            855.9945068359375,
+            16.0
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge18_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1489.46875,
+            818.375,
+            4.0
+          ],
+          "m_vMaxBounds": [
+            1710.5625,
+            893.625,
+            28.0
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 71.93032836914062,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 85,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 384,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge19_fog_card_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1352.5875244140625,
+            2092.008056640625,
+            245.99998474121094
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge19_fog_card_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            386.53125,
+            2037.46875,
+            -228.0
+          ],
+          "m_vMaxBounds": [
+            2318.65625,
+            2146.544677734375,
+            720.0
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 1354.458984375,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 3,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 3,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/fog_card_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge1_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1348.0484619140625,
+            1242.39892578125,
+            70.86334228515625
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge1_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1019.3125,
+            1292.28125,
+            -14.0
+          ],
+          "m_vMaxBounds": [
+            1060.40625,
+            1299.40625,
+            150.0
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 330.81439208984375,
+              "m_vTintColor": [
+                0.6730492115020752,
+                0.5604992508888245,
+                0.45345649123191833
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 10,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 24,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge21_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1438.045166015625,
+            2184.094970703125,
+            52.372283935546875
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge21_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1128.3125,
+            2165.84375,
+            -23.875
+          ],
+          "m_vMaxBounds": [
+            1747.785400390625,
+            2202.34375,
+            128.6322784423828
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 307.6320495605469,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 3,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 3,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge24_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1332.04345703125,
+            2990.0029296875,
+            182.0
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge24_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1033.53125,
+            2970.375,
+            109.0
+          ],
+          "m_vMaxBounds": [
+            1630.5625,
+            3009.625,
+            255.0
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 295.5552673339844,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 4,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 6,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge2_dust_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1427.833984375,
+            1103.3936767578125,
+            -6.940169334411621
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge2_dust_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1191.96875,
+            879.90625,
+            -22.5625
+          ],
+          "m_vMaxBounds": [
+            1428.03125,
+            1326.875,
+            8.6875
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 450.4317321777344,
+              "m_vTintColor": [
+                1.0,
+                0.819963812828064,
+                0.6387795805931091
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 561,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 3072,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/dust_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge3_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1316.046142578125,
+            1049.9842529296875,
+            3.2340469360351562
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge3_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1039.6875,
+            1009.65625,
+            -49.53125
+          ],
+          "m_vMaxBounds": [
+            1434.46875,
+            1144.0625,
+            56.0
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 254.4679412841797,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 55,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 240,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge5_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1348.0484619140625,
+            1242.39892578125,
+            70.86334228515625
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge5_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1060.40625,
+            1228.15625,
+            -14.4375
+          ],
+          "m_vMaxBounds": [
+            1430.21875,
+            1292.28125,
+            150.0
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 323.6773376464844,
+              "m_vTintColor": [
+                0.6730492115020752,
+                0.5604992508888245,
+                0.45345649123191833
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 50,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 216,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge6_fog_card_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1352.5875244140625,
+            2092.008056640625,
+            245.99998474121094
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge6_fog_card_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            386.53125,
+            2037.46875,
+            -228.00003051757812
+          ],
+          "m_vMaxBounds": [
+            2318.65625,
+            2146.53125,
+            720.0
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 1354.462890625,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 3,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 3,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/fog_card_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "resource": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge8_smoke_backdrop_001.vmdl",
+      "world_scene_objects": [
+        {
+          "m_nObjectID": 0,
+          "m_vTransform": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          ],
+          "m_flFadeStartDistance": -1.0,
+          "m_flFadeEndDistance": 0.0,
+          "m_vTintColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "m_skin": "",
+          "m_nObjectTypeFlags": 1056,
+          "m_vLightingOrigin": [
+            1438.045166015625,
+            2184.094970703125,
+            52.372283935546875
+          ],
+          "m_nOverlayRenderOrder": 0,
+          "m_nLODOverride": -1,
+          "m_nCubeMapPrecomputedHandshake": 0,
+          "m_nLightProbeVolumePrecomputedHandshake": 0,
+          "m_flEmissiveLightingBoost": 1.0,
+          "m_renderableModel": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge8_smoke_backdrop_001.vmdl",
+          "m_renderable": ""
+        }
+      ],
+      "scene_objects": [
+        {
+          "m_vMinBounds": [
+            1128.3050537109375,
+            2165.84375,
+            -23.887706756591797
+          ],
+          "m_vMaxBounds": [
+            1747.78125,
+            2202.34375,
+            128.625
+          ],
+          "m_drawCalls": [
+            {
+              "m_flUvDensity": 307.6383056640625,
+              "m_vTintColor": [
+                1.0,
+                0.8591737151145935,
+                0.7082979083061218
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 3,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 3,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/effects/smoke_backdrop_001.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            }
+          ],
+          "m_drawBounds": [],
+          "m_meshlets": [],
+          "m_rtProxyDrawCalls": [],
+          "m_vTintColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    }
+  ]
+}

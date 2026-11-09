@@ -12,7 +12,8 @@ import { fetchGzipped } from "./gltf";
 import { createSoldier, disposeSoldier, type Soldier, type AgentTeam } from "./soldier";
 import { applyBuyPose, buyPoseToken, poseBuyProp } from "./buy-poses";
 import { unregisterSkinModel } from "./skins";
-import { createNativeWorldGun, nativeWeaponReady } from "./weapon-motion";
+import { createNativeWorldGun } from "./weapon-motion";
+import { bayonetWorldGrip } from "./knife-motion";
 import { registerActorLighting, updateActorLighting, setActorReflection } from "./actor-lighting";
 import {
   sampleSourceProbe,
@@ -32,11 +33,15 @@ import {
   completeAgentClip,
   agentAnimationEquipment,
 } from "./agent-animations";
-import { createWorldGun, disposeWorldGun, loadWeaponModels } from "./weapons";
+import { createWorldGun, disposeWorldGun, loadWeaponModels, weaponModelReady } from "./weapons";
 import { readHomeWeapons } from "./home-weapons";
 import { createWeaponInstance } from "./weapon-instance";
 import { isKnife, weaponSlot } from "./physics";
 import { createGrenadeModel } from "./grenade-models";
+import { HomeAtmosphere } from "./home-atmosphere";
+
+// uimodel_walkup.vnmgraph: linear, completion-driven transitions.
+const homeBlendSeconds = 0.2;
 
 type Pose = {
   clip: string;
@@ -69,7 +74,9 @@ type Preview = {
     anchor?: T.Object3D;
     returning: boolean;
     last: number;
+    seed: number;
   };
+  pairedGrips?: { hand: T.Object3D; bone: T.Object3D; offset: T.Matrix4 }[];
   animation?: {
     id: string;
     release: () => void;
@@ -86,6 +93,7 @@ export class HomeScene {
   private scene = new T.Scene();
   private reflection?: T.WebGLRenderTarget;
   private reflectionLoad?: Promise<void>;
+  private atmosphere?: HomeAtmosphere;
   private lightPosition = new T.Vector3();
   get graphicsRoot() {
     return this.scene;
@@ -127,6 +135,14 @@ export class HomeScene {
   private animationRotation = new T.Quaternion();
   private animationScale = new T.Vector3();
   private arrivedAgents = new Set<string>();
+  private createWeapon(index: number, bones: Pose["weaponBones"]) {
+    if (!isKnife(index)) return createNativeWorldGun(index, true, bones, true);
+    const model = createWorldGun(index, true, createWeaponInstance(index, "player", true));
+    if (index === 4) model.userData.buyGrip = bayonetWorldGrip(model).toArray();
+    else if (buyPoseToken(index) === "push")
+      model.userData.buyGrip = poseBuyProp(model, bones).toArray();
+    return model;
+  }
   private prepareIdleVariations(preview: Preview, team: AgentTeam) {
     return (preview.idleVariationLoad ??= this.loadIdleVariations(preview, team));
   }
@@ -134,9 +150,10 @@ export class HomeScene {
     const state: NonNullable<Preview["idleVariation"]> = (preview.idleVariation = {
       actions: [] as T.AnimationAction[],
       releases: [] as (() => void)[],
-      wait: 8 + Math.random() * 6,
+      wait: 0,
       returning: false,
       last: -1,
+      seed: (Math.random() * 0x7fffffff) | 1,
     });
     try {
       const catalog = await loadAgentAnimations();
@@ -144,54 +161,60 @@ export class HomeScene {
       const candidates = catalog.filter(
         (clip) =>
           weaponPacks.has(clip.pack) &&
-          clip.equipped === "weapon" &&
+          clip.equipped === (isKnife(preview.index) ? "knife" : "weapon") &&
+          (!isKnife(preview.index) ||
+            clip.token === (buyPoseToken(preview.index) === "push" ? "pushknife" : "knife")) &&
           clip.team === team &&
           clip.source === "main_menu" &&
-          !clip.additive &&
-          /idle|walkup|lookat|shouldershrug|weightshift/.test(clip.name),
+          !clip.additive,
       );
       const compatible = (
         await Promise.all(
           candidates.map(async (clip) =>
+            // The shared knife UI graph supplies the human/anchor motion for
+            // each knife model. Its default-knife secondary skeleton is not
+            // the equipped cosmetic's item ID; push knives have their own token.
+            isKnife(preview.index) ||
             (await agentAnimationWeaponIndex(clip.id, preview.index)) === preview.index
               ? clip
               : undefined,
           ),
         )
       ).filter((clip) => clip !== undefined);
-      // Keep one native clip per gesture and only retain the relevant weapon pack.
-      const chosen = ["idle", "walkup", "lookat", "shouldershrug", "weightshift"].flatMap(
-        (kind) => {
-          const clip = compatible.find((clip) => clip.name.includes(kind));
-          return clip ? [clip] : [];
-        },
-      );
+      // Retain the weapon's full gesture set, including T lookback/lookaround
+      // variants. Each native clip completes before selecting another state.
+      const chosen = [...new Map(compatible.map((clip) => [clip.name, clip])).values()];
       for (const definition of chosen) {
         const loaded = await acquireAgentAnimation(definition.id);
         if (this.previews.get(team) !== preview || preview.animation) {
           loaded.release();
           return;
         }
-        ensureAgentAnimationBones(preview.soldier.model, loaded.pack.scene);
-        // Legacy T meshes bake the Source root basis into their model node.
-        // Their pelvis is not under root_motion; put helper anchors in that
-        // same space instead of applying the root rotation/scale twice.
-        const pelvis = preview.soldier.model.getObjectByName("pelvis")!;
-        const root = preview.soldier.model.getObjectByName("root_motion");
-        if (root && pelvis.parent !== root)
-          for (const child of [...root.children]) pelvis.parent!.add(child);
-        // These are absolute native clips, evaluated over their own bind pose.
-        // Mixing their deltas onto the unrelated buy pose doubles joint rotations.
-        const clip = completeAgentClip(
-          agentClipForModel(loaded.clip, preview.soldier.model),
-          preview.soldier.model,
-        );
+        // Carried knife bones share secondary track names but use metre locals.
+        // Exclude them from the Source-inch body mixer and its constant channels.
+        const parent = preview.weapon.parent;
+        preview.weapon.removeFromParent();
+        let clip: T.AnimationClip;
+        try {
+          ensureAgentAnimationBones(preview.soldier.model, loaded.pack.scene);
+          // Legacy meshes bake the Source basis into the model node.
+          const pelvis = preview.soldier.model.getObjectByName("pelvis")!;
+          const root = preview.soldier.model.getObjectByName("root_motion");
+          if (root && pelvis.parent !== root)
+            while (root.children.length) pelvis.parent!.add(root.children[0]);
+          clip = completeAgentClip(
+            agentClipForModel(loaded.clip, preview.soldier.model),
+            preview.soldier.model,
+          );
+        } finally {
+          parent?.add(preview.weapon);
+        }
         const action = preview.mixer.clipAction(clip);
         const idle = definition.name.includes("_idle");
-        action.setLoop(idle ? T.LoopRepeat : T.LoopOnce, idle ? Infinity : 1);
-        action.clampWhenFinished = !idle;
-        if (idle) state.idle = action;
-        else if (definition.name.includes("walkup")) state.entrance = action;
+        action.setLoop(T.LoopOnce, 1);
+        action.clampWhenFinished = true;
+        if (idle) state.idle ??= action;
+        else if (definition.name.includes("walkup")) state.entrance ??= action;
         else state.actions.push(action);
         state.anchor = preview.soldier.model.getObjectByName("wpn");
         state.releases.push(loaded.release);
@@ -236,25 +259,35 @@ export class HomeScene {
       state.current.reset().setEffectiveWeight(1).play();
     }
     if (state.current) {
-      if (!state.returning && state.current.time >= state.current.getClip().duration - 0.65) {
-        preview.action.reset().setEffectiveWeight(1).fadeIn(0.6).play();
-        state.current.fadeOut(0.6);
+      if (
+        !state.returning &&
+        state.current.time >= state.current.getClip().duration - homeBlendSeconds
+      ) {
+        preview.action.reset().setEffectiveWeight(1).fadeIn(homeBlendSeconds).play();
+        state.current.fadeOut(homeBlendSeconds);
         state.returning = true;
-        state.wait = 0.6;
+        state.wait = homeBlendSeconds;
       }
       if (state.returning && (state.wait -= dt) <= 0) {
         state.current.stop();
         state.current = undefined;
         state.returning = false;
-        state.wait = 10 + Math.random() * 10;
       }
-    } else if (state.actions.length && (state.wait -= dt) <= 0) {
+    } else if (
+      state.actions.length &&
+      preview.action.time >= preview.action.getClip().duration - homeBlendSeconds
+    ) {
       const choices = state.actions.map((_, i) => i).filter((i) => i !== state.last);
-      const index = choices.length ? choices[Math.floor(Math.random() * choices.length)] : 0;
+      // A stable per-preview seed avoids frame-rate dependent timer selection.
+      // The engine's seed update policy is not exported; this is our scheduler.
+      state.seed ^= state.seed << 13;
+      state.seed ^= state.seed >>> 17;
+      state.seed ^= state.seed << 5;
+      const index = choices.length ? choices[(state.seed >>> 0) % choices.length] : 0;
       state.last = index;
       state.current = state.actions[index];
-      preview.action.fadeOut(0.6);
-      state.current.reset().setEffectiveWeight(1).fadeIn(0.6).play();
+      preview.action.fadeOut(homeBlendSeconds);
+      state.current.reset().setEffectiveWeight(1).fadeIn(homeBlendSeconds).play();
     }
   }
   selectedAnimation(team: AgentTeam) {
@@ -316,10 +349,7 @@ export class HomeScene {
       preview.weapon.userData.buyGrip = (
         equipment === "c4" ? new T.Matrix4() : poseBuyProp(model, buy.weaponBones)
       ).toArray();
-    } else
-      preview.weapon = isKnife(index)
-        ? createWorldGun(index, true, createWeaponInstance(index, "player", true))
-        : createNativeWorldGun(index, true, buy.weaponBones, true);
+    } else preview.weapon = this.createWeapon(index, buy.weaponBones);
     preview.soldier.group.add(preview.weapon);
     registerActorLighting(preview.soldier.group);
     preview.mixer.stopAllAction();
@@ -434,9 +464,15 @@ export class HomeScene {
     shadow.position.set(1355.757812 * 0.0254, this.floor + 0.005, -925.05896 * 0.0254);
     this.scene.add(shadow);
 
-    const haze = new T.Color("#d8c9b2");
     this.scene.background = new T.Color("#cbd2d1");
-    this.scene.fog = new T.FogExp2(haze, 0.011);
+    // Retain the chosen distance haze for our gameplay-map backdrop. Native
+    // vanity meshes add the local moving veils and ground-hugging dust.
+    this.scene.fog = new T.FogExp2(new T.Color("#d8c9b2"), 0.011);
+    const atmosphere = new HomeAtmosphere();
+    await atmosphere.load(background, this.floor);
+    this.atmosphere = atmosphere;
+    this.scene.add(atmosphere.root);
+    registerActorLighting(atmosphere.paper);
     // Use Dust II's native sun and probe irradiance instead of studio fill.
     // Three's Lambertian BRDF includes 1/pi; the Source intensity does not.
     const sun = new T.DirectionalLight(0xffdebd, 2.5 * Math.PI);
@@ -489,7 +525,7 @@ export class HomeScene {
     agentId = defaultAgent(team).id,
   ): Preview {
     const desired = this.weapons[team];
-    const index = nativeWeaponReady(desired) ? desired : team === "ct" ? 9 : 0;
+    const index = weaponModelReady(desired) ? desired : team === "ct" ? 9 : 0;
     const soldier = createSoldier(-1, team, appearance);
     const poseTeam = soldier.animationTeam;
     const idle = this.poses[poseTeam].rifle;
@@ -558,7 +594,7 @@ export class HomeScene {
     soldier.group.position.set(1355.757812 * 0.0254, -9.674049 * 0.0254, -925.05896 * 0.0254);
     // The agent's local +Z faces forward; native Source yaw 248.18 faces the camera.
     soldier.group.rotation.y = T.MathUtils.degToRad(90 + 248.180099);
-    const weapon = createNativeWorldGun(index, true, pose.weaponBones, true);
+    const weapon = this.createWeapon(index, pose.weaponBones);
     weapon.name = "home-showcase-weapon";
     const grip = new T.Group();
     grip.name = "home_weapon_attachment";
@@ -633,7 +669,22 @@ export class HomeScene {
     this.scene.add(soldier.group);
     const agentName =
       agentId === defaultAgent(team).id ? defaultAgent(team).name : selectedAgent(team).name;
-    const preview = { soldier, mixer, action, weapon, index, agentId, agentName };
+    const preview: Preview = { soldier, mixer, action, weapon, index, agentId, agentName };
+    if (buyPoseToken(index) === "push") {
+      // Calibrate each rigid knife against its authored buy-pose hand contact.
+      // The body clips use Source inches; carried knife bones use metres.
+      preview.pairedGrips = ["L", "R"].map((side) => {
+        const hand = soldier.model.getObjectByName(`hand_${side}`)!;
+        const bone = weapon.getObjectByName(`weapon_hand_${side.toLowerCase()}`)!;
+        hand.matrixWorld.decompose(position, rotation, scale);
+        const handFrame = new T.Matrix4().compose(position, rotation, scale.set(1, 1, 1));
+        const offset = handFrame.invert().multiply(bone.matrixWorld);
+        // The exported weapon-hand pivot is the grip, not the old buy
+        // attachment origin (whose reconstructed arm reach differs by agent).
+        offset.setPosition(0, 0, 0);
+        return { hand, bone, offset };
+      });
+    }
     this.framing.set(preview, new T.Box3().setFromObject(soldier.model, true));
     this.previews.set(team, preview);
     return preview;
@@ -669,7 +720,7 @@ export class HomeScene {
     const wanted = selectedAgentId(team);
     let previous = this.previews.get(team);
     const index = this.weapons[team];
-    if (!nativeWeaponReady(index)) {
+    if (!weaponModelReady(index)) {
       if (!this.pendingWeapons.has(index) && !this.failedWeapons.has(index)) {
         this.pendingWeapons.add(index);
         void loadWeaponModels(this.renderer, [index])
@@ -769,6 +820,7 @@ export class HomeScene {
       play.disabled = false;
     }
     if (this.current !== team) {
+      this.atmosphere?.invalidateDepth();
       for (const [key, value] of this.previews) value.soldier.group.visible = key === team;
       this.current = team;
       (document.getElementById("home-profile-icon") as HTMLImageElement).src = assetUrl(
@@ -779,6 +831,7 @@ export class HomeScene {
       stage.dataset.showcaseWeapon = String(preview.index);
       stage.dataset.agent = preview.agentId;
     }
+    if (preview.soldier.group.visible !== showAgent) this.atmosphere?.invalidateDepth();
     preview.soldier.group.visible = showAgent;
     if (!this.reduced.matches && showAgent) {
       this.updateIdleVariation(preview, team, dt);
@@ -801,6 +854,21 @@ export class HomeScene {
         .multiply(this.animationParentInverse.fromArray(preview.weapon.userData.buyGrip).invert())
         .premultiply(this.animationParentInverse.copy(preview.soldier.group.matrixWorld).invert())
         .decompose(preview.weapon.position, preview.weapon.quaternion, preview.weapon.scale);
+    }
+    if (preview.pairedGrips && nativeAnchor && !preview.animation) {
+      preview.soldier.group.updateMatrixWorld(true);
+      for (const { hand, bone, offset } of preview.pairedGrips) {
+        hand.matrixWorld.decompose(
+          this.animationPosition,
+          this.animationRotation,
+          this.animationScale,
+        );
+        this.animationFrame
+          .compose(this.animationPosition, this.animationRotation, this.animationScale.set(1, 1, 1))
+          .multiply(offset)
+          .premultiply(this.animationParentInverse.copy(bone.parent!.matrixWorld).invert())
+          .decompose(bone.position, bone.quaternion, bone.scale);
+      }
     }
     if (preview.animation) {
       preview.weapon.visible = preview.animation.equipped !== "none";
@@ -876,7 +944,19 @@ export class HomeScene {
       sampleSourceProbeLocalShadows,
     );
     setActorReflection(preview.soldier.group, this.reflection?.texture);
+    this.atmosphere?.update(dt, this.reduced.matches);
+    if (this.atmosphere)
+      updateActorLighting(
+        this.atmosphere.paper,
+        this.lightPosition,
+        sampleSourceProbe,
+        dt,
+        undefined,
+        sampleSourceProbeSun,
+        sampleSourceProbeLocalShadows,
+      );
     renderer.toneMapping = T.CustomToneMapping;
+    this.atmosphere?.captureDepth(renderer, this.scene, this.camera, this.reduced.matches);
     renderer.clear();
     renderer.render(this.scene, this.camera);
     preview.soldier.model.getObjectByName("pelvis")!.getWorldPosition(this.namePosition);

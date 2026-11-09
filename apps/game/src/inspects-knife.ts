@@ -10,6 +10,7 @@ import { registerSkinModel } from "./skins";
 type Template = { scene: T.Group; clips: Map<string, T.AnimationClip> };
 const templates = new Map<number, Template>();
 const pendingKnives = new Map<number, Promise<void>>();
+export const inspectsKnifeReady = (index: number) => templates.has(index);
 function knifeMaterial(material: T.Material, index: number) {
   const own = material.clone();
   if (index === 5 || index === 6)

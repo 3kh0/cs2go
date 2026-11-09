@@ -1,5 +1,6 @@
 import { weapons, isKnife } from "./physics";
-import { weaponAvailable } from "./economy";
+import { setupHeaderParticles } from "./header-particles";
+import { equippedKnives } from "./equipped-knives";
 import type { Game } from "./game";
 import { assetUrl } from "./asset-url";
 import { readHomeWeapons } from "./home-weapons";
@@ -63,20 +64,11 @@ export function setupHomeMenu(game: Game) {
   const el = (id: string) => document.getElementById(id)!;
   const panel = el("home-panel");
   const navButtons = [...document.querySelectorAll<HTMLButtonElement>(".home-header button")];
-  for (const button of navButtons.filter((button) => button.closest(".home-nav"))) {
-    const field = document.createElement("span");
-    field.className = "nav-cell-field";
-    field.setAttribute("aria-hidden", "true");
-    for (let index = 0; index < 24; index++) {
-      const cell = document.createElement("i");
-      cell.className = "nav-cell";
-      cell.style.setProperty("--cell-duration", `${1800 + ((index * 739) % 2300)}ms`);
-      cell.style.setProperty("--cell-delay", `${-((index * 997) % 4200)}ms`);
-      cell.style.setProperty("--cell-peak", String(0.12 + ((index * 13) % 19) / 100));
-      field.append(cell);
-    }
-    button.append(field);
-  }
+  const navigationParticles = setupHeaderParticles(el("menu"));
+  let previousPage = "home-button";
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  let pageTransition: Animation | undefined;
+  let layoutFrame = 0;
   const syncNavigation = () => {
     const visible = (id: string) => {
       const node = document.getElementById(id);
@@ -97,11 +89,51 @@ export function setupHomeMenu(game: Game) {
       if (button.id === active) button.setAttribute("aria-current", "page");
       else button.removeAttribute("aria-current");
     });
+    navigationParticles.select(active);
+    if (active && active !== previousPage) {
+      pageTransition?.cancel();
+      cancelAnimationFrame(layoutFrame);
+      const page =
+        active === "inventory-button"
+          ? document.getElementById("loadout-editor")
+          : active === "skins-button"
+            ? document.querySelector<HTMLElement>(
+                "#skin-menu:not(.hidden), #cosmetic-menu:not(.hidden)",
+              )
+            : active === "settings-button"
+              ? document.getElementById("settings")
+              : active === "home-play"
+                ? document.querySelector<HTMLElement>(".home-match-card")
+                : null;
+      if (page && !reducedMotion.matches) {
+        // Native mainmenu-content enters from -100% over .25 s; switching
+        // existing tabs uses the child's .25 s opacity transition.
+        pageTransition = page.animate(
+          previousPage === "home-button"
+            ? [{ transform: "translateX(-100%)" }, { transform: "translateX(0)" }]
+            : [{ opacity: 0 }, { opacity: 1 }],
+          { duration: 250, easing: "ease-in-out" },
+        );
+        if (active === "inventory-button") {
+          const transition = pageTransition;
+          // WebGL scissor rectangles must follow the translated DOM stages,
+          // including one final sample when the finite entrance completes.
+          const followLayout = () => {
+            game.groundInventory.refreshPreviewLayout();
+            if (transition.playState === "running")
+              layoutFrame = requestAnimationFrame(followLayout);
+          };
+          followLayout();
+        }
+      }
+      previousPage = active;
+    }
   };
   navButtons.forEach((button) =>
     button.addEventListener("click", () => {
       el("menu").dataset.navPopup = button.id;
       queueMicrotask(syncNavigation);
+      navigationParticles.retrigger(button.id);
     }),
   );
   const navigationObserver = new MutationObserver((records) => {
@@ -223,7 +255,7 @@ export function setupHomeMenu(game: Game) {
   });
   el("home-view-loadout").onclick = () => {
     closeScenery();
-    el("inventory-button").click();
+    game.groundInventory.showAgentLoadout(game.team);
   };
   const background = el("home-background") as HTMLSelectElement;
   try {
@@ -254,8 +286,8 @@ export function setupHomeMenu(game: Game) {
   const choices = readHomeWeapons();
   function renderWeapons() {
     el("home-weapon-options").replaceChildren(
-      ...weapons.flatMap((weapon, index) => {
-        if (isKnife(index) || !weaponAvailable(index, game.team)) return [];
+      ...[equippedKnives[game.team], ...game.groundInventory.loadouts[game.team]].map((index) => {
+        const weapon = weapons[index];
         const button = document.createElement("button");
         const id = skinChoices[index].id;
         const finish = skinName(id);
@@ -273,11 +305,23 @@ export function setupHomeMenu(game: Game) {
           syncShowcase();
           closeScenery();
         };
-        return [button];
+        return button;
       }),
     );
   }
   function syncShowcase() {
+    if (
+      isKnife(choices[game.team])
+        ? choices[game.team] !== equippedKnives[game.team]
+        : !game.groundInventory.loadouts[game.team].includes(choices[game.team])
+    ) {
+      choices[game.team] = equippedKnives[game.team];
+      try {
+        localStorage.setItem("cs2go-home-weapons", JSON.stringify(choices));
+      } catch {
+        /* Session choice works without persistence. */
+      }
+    }
     el("home-switch-team").textContent = `Show Equipped ${game.team === "ct" ? "T" : "CT"} Agent`;
     renderWeapons();
     game.homeScene.setWeapon(game.team, choices[game.team]);
@@ -300,5 +344,7 @@ export function setupHomeMenu(game: Game) {
     attributes: true,
     attributeFilter: ["data-clip"],
   });
+  window.addEventListener("cs2go-loadouts-change", syncShowcase);
+  window.addEventListener("cs2go-knives-change", syncShowcase);
   syncShowcase();
 }

@@ -18,10 +18,25 @@ test("full-page native settings and saved showcase weapons share equipped legacy
     if (/-hd\.glb(?:\.gz)?$/.test(new URL(request.url()).pathname)) hdRequests.push(request.url());
   });
   page.on("pageerror", (error) => errors.push(error.message));
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "cs2go-local-inventory",
+      JSON.stringify([
+        { weapon: 0, id: "7_44", wear: 0.01, seed: 1 },
+        { weapon: 0, id: "7_1466", wear: 0.01, seed: 1 },
+      ]),
+    ),
+  );
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
-  expect(hdRequests).toEqual([]);
+  // Native firearms now use their HD bodies by default. Paint changes must
+  // reuse those downloaded bodies rather than fetching duplicates.
+  const defaultBodies = [...hdRequests];
+  expect(new Set(defaultBodies).size).toBe(defaultBodies.length);
   await page.locator("#settings-button").click();
+  await page.locator("#settings").evaluate(async (node) => {
+    await Promise.all(node.getAnimations().map((animation) => animation.finished.catch(() => {})));
+  });
   const bounds = (await page.locator("#settings .settings").boundingBox())!;
   expect(bounds.x).toBe(0);
   expect(bounds.width).toBe(1440);
@@ -40,7 +55,9 @@ test("full-page native settings and saved showcase weapons share equipped legacy
   await selectHomeWeapon(page, "0");
   await expect(page.locator("#home-agent-stage")).toHaveAttribute("data-showcase-weapon", "0");
   for (const id of ["7_44", "7_1466", ""]) {
+    const beforeFinish = [...hdRequests];
     await page.locator("#skins-button").click();
+    await page.locator("#inventory-weapon").selectOption("0");
     await page.locator("#skin-search").fill("");
     await page.locator(`[data-skin="${id}"]`).click();
     if (id) {
@@ -49,43 +66,59 @@ test("full-page native settings and saved showcase weapons share equipped legacy
     }
     await page.locator("#apply-skin").click();
     await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 30_000 });
+    await page.locator("#close-item-details").click();
     await page.locator("#close-skins").click();
-    const proof = await page.evaluate(async (id) => {
-      const scene = window.__game.homeScene as unknown as {
-        previews: Map<string, { weapon: T.Group }>;
-      };
-      const root = scene.previews.get("t")!.weapon;
-      const body =
-        (
-          (await (await fetch("/skins/catalog.json")).json()) as { id: string; body: string }[]
-        ).find((skin) => skin.id === id)?.body ?? "legacy";
-      const materialProof: string[] = [];
-      let painted = 0,
-        visibleMeshes = 0;
-      root.traverseVisible((object) => {
-        const mesh = object as T.Mesh;
-        if (!mesh.isMesh) return;
-        visibleMeshes++;
-        for (const material of (Array.isArray(mesh.material)
-          ? mesh.material
-          : [mesh.material]) as T.MeshStandardMaterial[]) {
-          materialProof.push(
-            `${material.name}:${material.map?.type}:${(material.map as T.DataTexture)?.isDataTexture}`,
+    const readProof = () =>
+      page.evaluate(async (id) => {
+        const scene = window.__game.homeScene as unknown as {
+          previews: Map<string, { weapon: T.Group }>;
+        };
+        const root = scene.previews.get("t")!.weapon;
+        const body =
+          (
+            (await (await fetch("/skins/catalog.json")).json()) as { id: string; body: string }[]
+          ).find((skin) => skin.id === id)?.body ?? "hd";
+        const materialProof: string[] = [];
+        let painted = 0,
+          visibleMeshes = 0;
+        root.traverseVisible((object) => {
+          const mesh = object as T.Mesh;
+          if (!mesh.isMesh) return;
+          visibleMeshes++;
+          for (const material of (Array.isArray(mesh.material)
+            ? mesh.material
+            : [mesh.material]) as T.MeshStandardMaterial[]) {
+            materialProof.push(
+              `${material.name}:${material.map?.type}:${(material.map as T.DataTexture)?.isDataTexture}`,
+            );
+            if ((material.map as T.DataTexture)?.isDataTexture) painted++;
+          }
+        });
+        return {
+          materialProof,
+          painted,
+          visibleMeshes,
+          body,
+          hdVisible: root.getObjectByName("skin-hd")?.visible ?? false,
+          legacyVisible: root.getObjectByName("skin-legacy")?.visible ?? false,
+        };
+      }, id);
+    await expect
+      .poll(
+        async () => {
+          const proof = await readProof();
+          return (
+            proof.visibleMeshes > 0 &&
+            proof.hdVisible === (proof.body === "hd") &&
+            proof.legacyVisible === (proof.body !== "hd") &&
+            (id ? proof.painted > 0 : proof.painted === 0)
           );
-          if ((material.map as T.DataTexture)?.isDataTexture) painted++;
-        }
-      });
-      return {
-        materialProof,
-        painted,
-        visibleMeshes,
-        body,
-        hdVisible: root.getObjectByName("skin-hd")?.visible ?? false,
-        legacyVisible: root.getObjectByName("skin-legacy")!.visible,
-      };
-    }, id);
-    if (id === "7_44") expect(hdRequests).toEqual([]);
-    if (id === "7_1466") expect(hdRequests).toHaveLength(1);
+        },
+        { timeout: 30_000 },
+      )
+      .toBe(true);
+    const proof = await readProof();
+    expect(hdRequests).toEqual(beforeFinish);
     expect(proof.visibleMeshes).toBeGreaterThan(0);
     expect(proof.hdVisible).toBe(proof.body === "hd");
     expect(proof.legacyVisible).toBe(proof.body !== "hd");

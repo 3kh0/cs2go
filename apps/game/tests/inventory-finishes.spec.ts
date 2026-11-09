@@ -21,11 +21,28 @@ test("inventory shows full-color defaults and knife finishes paint held and prev
     if (/^https?:$/.test(url.protocol) && url.hostname !== "127.0.0.1")
       external.push(response.url());
   });
+  await page.addInitScript(() => {
+    // Own each default knife and the finish under test instead of relying on
+    // the former catalog browser to expose unowned inventory entries.
+    localStorage.setItem(
+      "cs2go-local-inventory",
+      JSON.stringify([
+        ...Array.from({ length: 56 }, (_, weapon) => ({
+          weapon,
+          id: "",
+          wear: 0.01,
+          seed: 1,
+        })),
+        { weapon: 42, id: "508_44", wear: 0.01, seed: 1 },
+      ]),
+    );
+  });
   await page.goto("/");
   await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
   await page.locator("#skins-button").click();
   for (let id = 0; id < 56; id++) {
-    await page.locator(`[data-skin-weapon="${id}"]`).click();
+    await page.locator("#inventory-weapon").selectOption(String(id));
+    await page.locator(`[data-item-weapon="${id}"][data-skin=""]`).click();
     await expect(page.locator("#skin-image")).toHaveAttribute("src", `/skins/defaults/${id}.webp`);
     const image = await page.locator("#skin-image").evaluate(async (element) => {
       const image = element as HTMLImageElement;
@@ -47,18 +64,22 @@ test("inventory shows full-color defaults and knife finishes paint held and prev
     expect(image.width).toBeGreaterThanOrEqual(256);
     expect(image.colors).toBeGreaterThan(128);
     expect(image.transparent).toBeGreaterThan(0);
+    await page.locator("#close-item-details").click();
   }
-  await page.locator('[data-skin-weapon="23"]').click();
+  await page.locator("#inventory-weapon").selectOption("23");
+  await page.locator('[data-item-weapon="23"][data-skin=""]').click();
   await page.screenshot({ path: "artifacts/inventory-default-ssg08.png" });
-  await page.locator('[data-skin-weapon="42"]').click();
+  await page.locator("#close-item-details").click();
+  await page.locator("#inventory-weapon").selectOption("42");
   await page.locator("#skin-search").fill("Case Hardened");
-  await page.locator('[data-skin="508_44"]').click();
+  await page.locator('[data-item-weapon="42"][data-skin="508_44"]').click();
   await page.locator("#skin-float").fill("0.123456");
   await page.locator("#skin-seed").fill("661");
   await page.locator("#apply-skin").click();
   await expect(page.locator("#skin-status")).toContainText("Applied", { timeout: 30_000 });
   await page.locator("#equip-knife").click();
   await page.screenshot({ path: "artifacts/inventory-m9-finishes.png" });
+  await page.locator("#close-item-details").click();
   await page.locator("#close-skins").click();
   await page.locator("#play").evaluate((button) => {
     button.onclick = () => window.__game.start("practice");

@@ -1,0 +1,58 @@
+{
+  "source": "Valve Counter-Strike 2 installed VPK content; read-only export",
+  "converter": "Official Source 2 Viewer CLI 20.1",
+  "resources": [
+    {
+      "resource_path": "panorama/images/icons/ui/filter.vsvg_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_269.vpk",
+      "archive_offset": 83007968,
+      "archive_bytes": 1200,
+      "preload_bytes": 0,
+      "bytes": 1200,
+      "crc32": "4f48a464",
+      "sha256": "6ead9d351f05505ef088cedd5b58e0cdb936ecd0b2c359dd8b6f4c6374e7aa18",
+      "conversion": "Source2Viewer CLI 20.1 --decompile",
+      "readable_path": "readable/panorama/images/icons/ui/filter.svg",
+      "readable_sha256": "94640b26d1b23749101000bc6365aab5abc7228f599125883ffc4cb58becb36e"
+    },
+    {
+      "resource_path": "panorama/images/icons/ui/filter_line.vsvg_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_269.vpk",
+      "archive_offset": 83009168,
+      "archive_bytes": 1304,
+      "preload_bytes": 0,
+      "bytes": 1304,
+      "crc32": "4868a570",
+      "sha256": "b7f47f40b40ac67affc63c1b44ce2d4dc4268670447cbb05622c3cc142d46b8d",
+      "conversion": "Source2Viewer CLI 20.1 --decompile",
+      "readable_path": "readable/panorama/images/icons/ui/filter_line.svg",
+      "readable_sha256": "07471f8fdb1b7ceec7b71c78d52114581f8a95cdd175190bd32b76614fd90263"
+    },
+    {
+      "resource_path": "panorama/images/icons/ui/search.vsvg_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_407.vpk",
+      "archive_offset": 63736608,
+      "archive_bytes": 1605,
+      "preload_bytes": 0,
+      "bytes": 1605,
+      "crc32": "0e3e0d1f",
+      "sha256": "1afdc3ba1d9cb3b54fffe5d246fa57938a9f46c04c55e2a6493b5a49b4c0497a",
+      "conversion": "Source2Viewer CLI 20.1 --decompile",
+      "readable_path": "readable/panorama/images/icons/ui/search.svg",
+      "readable_sha256": "4024f395eaf789ad18ea0b5f6e8467aeee43400f620785193a76e97a59f6d5fe"
+    },
+    {
+      "resource_path": "panorama/images/icons/ui/sort.vsvg_c",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_252.vpk",
+      "archive_offset": 96714544,
+      "archive_bytes": 1092,
+      "preload_bytes": 0,
+      "bytes": 1092,
+      "crc32": "31704a03",
+      "sha256": "b47957c7b7bccc20698290453b14ec52e78fafe5a78f6fb85086612cff789f3e",
+      "conversion": "Source2Viewer CLI 20.1 --decompile",
+      "readable_path": "readable/panorama/images/icons/ui/sort.svg",
+      "readable_sha256": "9b5a626559ade2026ee1e428ef8217fe209b7257874f69ea1c10b7bff2c5b599"
+    }
+  ]
+}

@@ -1,14 +1,18 @@
 import { expect, test } from "@playwright/test";
 import { selectHomeTeam, selectHomeWeapon } from "./home-controls";
+import { defaultLoadouts } from "../src/loadouts";
 
 test("saved showcase is usable while the rest of the armory loads, without duplicate downloads", async ({
   page,
 }) => {
   test.setTimeout(180_000);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => {
+  const loadouts = defaultLoadouts();
+  loadouts.ct[loadouts.ct.indexOf(35)] = 36;
+  await page.addInitScript((loadouts) => {
     localStorage.setItem("cs2go-home-weapons", JSON.stringify({ ct: 3, t: 8 }));
-  });
+    localStorage.setItem("cs2go-loadouts", JSON.stringify(loadouts));
+  }, loadouts);
   const errors: string[] = [];
   const requests = new Map<string, number>();
   page.on("pageerror", (error) => errors.push(error.message));

@@ -1,0 +1,739 @@
+{
+  "tool": {
+    "version": "20.1",
+    "download": "https://github.com/ValveResourceFormat/ValveResourceFormat/releases/download/20.1/cli-windows-x64.zip",
+    "zipSha256": "67aaf8a67a85ca60fd09ff343e62103a4cdf3a2d177fc656231d7d734c5b3aa3",
+    "exeSha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830",
+    "gameBuild": {
+      "PatchVersion": "1.41.9.6",
+      "SourceRevision": 11206718
+    },
+    "sourceVerification": "All selected resources reread from installed archive offsets; size, SHA256 and CRC32 matched prior evidence.",
+    "releaseCommit": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "newerShaderSourceCommit": "85e8dce4b82cab74ce83e619b53bc9cee6290a9b"
+  },
+  "exportedInputSha256": {
+    "backdrops/n0_lr0_c0_s_cb_nomerge0_smoke_backdrop_001.glb": "ca034e77e46e6881e4b978b148b72ac1d906e40acb351a4738e5af902496f959",
+    "backdrops/n0_lr0_c0_s_cb_nomerge10_dust_backdrop_001.glb": "b8309fdb6385bd0290f565daa06faa797206e67a9f72ceccccb15b79b205dc1b",
+    "backdrops/n0_lr0_c0_s_cb_nomerge12_smoke_backdrop_001.glb": "39346c25e796555889e77ec8153b5279fcb9a5f126bf314b24a7be369fee6c74",
+    "backdrops/n0_lr0_c0_s_cb_nomerge17_smoke_backdrop_001.glb": "d4fbfefbfb1f2e8d1d16c36d7925f5618eedbfa443b2792b782f6e9ccf5e9a18",
+    "backdrops/n0_lr0_c0_s_cb_nomerge18_smoke_backdrop_001.glb": "e4689ff1be761b3807f5748373807c887ee1ce2eed597c7bad2bf2c6dc05a691",
+    "backdrops/n0_lr0_c0_s_cb_nomerge19_fog_card_001.glb": "8f31d1c0e380f4d6ba0bda84e4d30812fac9bb408c4e75de31c6596cf1b3a207",
+    "backdrops/n0_lr0_c0_s_cb_nomerge1_smoke_backdrop_001.glb": "72ca234ab50b7c0ea95ac6a237a9ec8302ff35503262e79b65c25770749397b4",
+    "backdrops/n0_lr0_c0_s_cb_nomerge21_smoke_backdrop_001.glb": "3e5f2aa4a76c20a06b707101db65b9938bbe5f04472263535cd4fd69e168b456",
+    "backdrops/n0_lr0_c0_s_cb_nomerge24_smoke_backdrop_001.glb": "8041c424a0f8a8e129dd5e0e36e0090b8572136d938b762a201638a2078c6fc9",
+    "backdrops/n0_lr0_c0_s_cb_nomerge2_dust_backdrop_001.glb": "a11cd704e64185ca2b0ca864878a1c02e118471233597e7520a181d131d4614a",
+    "backdrops/n0_lr0_c0_s_cb_nomerge3_smoke_backdrop_001.glb": "ca4f6c53ad5b6315f346b0d65628b2501cec05eabe1a9af0ec92d95d803310ef",
+    "backdrops/n0_lr0_c0_s_cb_nomerge5_smoke_backdrop_001.glb": "be07d5a174d2c5ce6b6436ab60ba402a23eb7484dde175b829719879a58799ab",
+    "backdrops/n0_lr0_c0_s_cb_nomerge6_fog_card_001.glb": "c22b5c820059df3dc417866dc08b919355ccbd524905fe80b94acaae9808e3bb",
+    "backdrops/n0_lr0_c0_s_cb_nomerge8_smoke_backdrop_001.glb": "b7526d581eb364161c85e9ca5b8c1a49d257aa46831667356093d837e21ef39f",
+    "paper/paper_05a.glb": "98d067ac5787cfb428058b33b25be64aa2404f70508307c4d67fdf650636ac75",
+    "paper/paper_05b.glb": "7a3a6963d8c0e5c88cb37c7c371819c98bf1df41747b8bb117f6b2a2edce6644",
+    "paper/paper_05c.glb": "aedce5ad024aeaf9e85bdb674f718ea9e5fda96fd9fbafe131b596b99c7e4ed2",
+    "paper/paper_05d.glb": "641ebb8badb8b0b628b7637e9ee0fc7dfc6f2ca24548bb412c855114989a0e2b",
+    "paper/paper_05f.glb": "7f0bf0659426b7d5e13ff4614816627fc652c738558772535d53070bcf06e14b",
+    "textures/smoke_004b_mask_psd_747d5c5a.png": "5c3ba06603974ca18c7b5fd2b0bda11d9db9877b9f85634c521f89ca1811334a",
+    "textures/smoke_005_mask_psd_d26f4776.png": "db460aaca175ee94e1e7ca8aace3f50577c2e475dd0e69238fa61a9492b22f50",
+    "textures/cloud_002_mask_psd_87d62c5f.png": "0e19d6af2f7320fec0e277f1703d1fe169127566e7ccecebfc6b6432b7a30a2b",
+    "textures/smoke_004_mask_psd_1a5eefb.png": "7dd4d46214d9a2537406422b7fcb7bb774f70ae557f25a037cd9aa54fc56321c",
+    "textures/smoke_001_mask_psd_7a7bcea9.png": "4fb7abd35b95fa57e22adb6f912ec2fcdf9de554d2b398094577cbc13a76bab7",
+    "textures/smoke_003_mask_psd_3015981f.png": "fbb95c9a085d038166bb3e24913af078dd4d8810f692ea3fbd9c324ac3ddabe1",
+    "paper/peeled_paper_color_psd_ae600fce.png": "35bf13ce08fafebd9857ee9920e18de3395b67662c38bc2d0be6b0b942f0157d",
+    "paper/peeled_paper_dirty_normal_psd_c87c7d39.png": "4b8f4e7d630d0390768ea00f8130642d093e90c5d077c8876c0f6cd0bd651475",
+    "paper/default_ao_tga_559f1ac6_orm_1423565888.png": "ab78533f70147210cfadfef82d2e03aa8565f64acb990b1dcc7fcf1d64cbcdf7",
+    "textures/wispy_steam_burst_b.png": "945ea87fa9f7e56c9283143a1f2306d028f600fe0383e4ceb83627b0f2298b73"
+  },
+  "modelValidation": [
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge0_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge0_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 10,
+          "triangles": 8,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1000.2185668945312,
+            1144.0625,
+            -49.281105041503906
+          ],
+          "maxSourceXYZ": [
+            1039.6873779296875,
+            1157.4998779296875,
+            51.15637969970703
+          ],
+          "maxBoundsErrorSourceUnits": 0.00018310546875,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge10_dust_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge10_dust_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 561,
+          "triangles": 1024,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1420.343505859375,
+            879.90625,
+            -13.499844551086426
+          ],
+          "maxSourceXYZ": [
+            1663.687255859375,
+            1326.90625,
+            8.406373977661133
+          ],
+          "maxBoundsErrorSourceUnits": 0.000244140625,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            0.1568627506494522
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge12_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge12_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 30,
+          "triangles": 40,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1434.468505859375,
+            942.4688110351562,
+            -49.2811279296875
+          ],
+          "maxSourceXYZ": [
+            1631.874755859375,
+            1009.65625,
+            56.00011444091797
+          ],
+          "maxBoundsErrorSourceUnits": 0.000244140625,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge17_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge17_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 35,
+          "triangles": 48,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1430.218505859375,
+            1185.40625,
+            -14.03110122680664
+          ],
+          "maxSourceXYZ": [
+            1676.781005859375,
+            1228.15625,
+            156.1563720703125
+          ],
+          "maxBoundsErrorSourceUnits": 0.000244140625,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge18_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge18_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 85,
+          "triangles": 128,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1489.468505859375,
+            818.3750610351562,
+            4.000100135803223
+          ],
+          "maxSourceXYZ": [
+            1710.562255859375,
+            893.6250610351562,
+            28.00009536743164
+          ],
+          "maxBoundsErrorSourceUnits": 0.000244140625,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge19_fog_card_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge19_fog_card_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 3,
+          "triangles": 1,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            386.53125,
+            2037.4683837890625,
+            -227.9997100830078
+          ],
+          "maxSourceXYZ": [
+            2318.656005859375,
+            2146.544677734375,
+            720.0001831054688
+          ],
+          "maxBoundsErrorSourceUnits": 0.0003662109375,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge1_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge1_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 10,
+          "triangles": 8,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1019.3123168945312,
+            1292.2811279296875,
+            -13.99984359741211
+          ],
+          "maxSourceXYZ": [
+            1060.4061279296875,
+            1299.4061279296875,
+            150.0001220703125
+          ],
+          "maxBoundsErrorSourceUnits": 0.00018310546875,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge21_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge21_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 3,
+          "triangles": 1,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1128.312255859375,
+            2165.843505859375,
+            -23.87473487854004
+          ],
+          "maxSourceXYZ": [
+            1747.78515625,
+            2202.34375,
+            128.6325225830078
+          ],
+          "maxBoundsErrorSourceUnits": 0.0002651214599609375,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge24_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge24_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 4,
+          "triangles": 2,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1033.5311279296875,
+            2970.374755859375,
+            109.00033569335938
+          ],
+          "maxSourceXYZ": [
+            1630.562255859375,
+            3009.62451171875,
+            255.00030517578125
+          ],
+          "maxBoundsErrorSourceUnits": 0.00048828125,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge2_dust_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge2_dust_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 561,
+          "triangles": 1024,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1191.968505859375,
+            879.90625,
+            -22.56235122680664
+          ],
+          "maxSourceXYZ": [
+            1428.031005859375,
+            1326.875,
+            8.687625885009766
+          ],
+          "maxBoundsErrorSourceUnits": 0.000244140625,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge3_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge3_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 55,
+          "triangles": 80,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1039.6873779296875,
+            1009.65625,
+            -49.53112030029297
+          ],
+          "maxSourceXYZ": [
+            1434.468505859375,
+            1144.0625,
+            56.00011444091797
+          ],
+          "maxBoundsErrorSourceUnits": 0.000244140625,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge5_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge5_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 50,
+          "triangles": 72,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1060.4061279296875,
+            1228.15625,
+            -14.437350273132324
+          ],
+          "maxSourceXYZ": [
+            1430.218505859375,
+            1292.2811279296875,
+            150.0001220703125
+          ],
+          "maxBoundsErrorSourceUnits": 0.000244140625,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge6_fog_card_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge6_fog_card_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 3,
+          "triangles": 1,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            386.53125,
+            2037.4683837890625,
+            -227.99974060058594
+          ],
+          "maxSourceXYZ": [
+            2318.656005859375,
+            2146.53125,
+            720.0001831054688
+          ],
+          "maxBoundsErrorSourceUnits": 0.0003662109375,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "backdrops/n0_lr0_c0_s_cb_nomerge8_smoke_backdrop_001.glb",
+      "source": "maps/de_dust2_vanity/worldnodes/n0_lr0_c0_s_cb_nomerge8_smoke_backdrop_001.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 3,
+          "triangles": 1,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT",
+            "COLOR_0"
+          ],
+          "minSourceXYZ": [
+            1128.3048095703125,
+            2165.843505859375,
+            -23.88744354248047
+          ],
+          "maxSourceXYZ": [
+            1747.7808837890625,
+            2202.34375,
+            128.625244140625
+          ],
+          "maxBoundsErrorSourceUnits": 0.0003662109375,
+          "vertexColorMin": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertexColorMax": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "path": "paper/paper_05a.glb",
+      "source": "models/particle/debris/paper_05a.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 12,
+          "triangles": 10,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT"
+          ],
+          "minSourceXYZ": [
+            -2.813115119934082,
+            -0.29446282982826233,
+            -1.3939063549041748
+          ],
+          "maxSourceXYZ": [
+            2.813114881515503,
+            0.29446250200271606,
+            1.3939063549041748
+          ]
+        }
+      ]
+    },
+    {
+      "path": "paper/paper_05b.glb",
+      "source": "models/particle/debris/paper_05b.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 15,
+          "triangles": 13,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT"
+          ],
+          "minSourceXYZ": [
+            -2.29608154296875,
+            -0.21464170515537262,
+            -2.0031845569610596
+          ],
+          "maxSourceXYZ": [
+            2.296081066131592,
+            0.21464216709136963,
+            2.0031845569610596
+          ]
+        }
+      ]
+    },
+    {
+      "path": "paper/paper_05c.glb",
+      "source": "models/particle/debris/paper_05c.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 11,
+          "triangles": 9,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT"
+          ],
+          "minSourceXYZ": [
+            -2.793745994567871,
+            -0.7342062592506409,
+            -2.0363314151763916
+          ],
+          "maxSourceXYZ": [
+            2.7937464714050293,
+            0.7342061996459961,
+            2.0363311767578125
+          ]
+        }
+      ]
+    },
+    {
+      "path": "paper/paper_05d.glb",
+      "source": "models/particle/debris/paper_05d.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 14,
+          "triangles": 10,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT"
+          ],
+          "minSourceXYZ": [
+            -3.0586118698120117,
+            -0.6941502094268799,
+            -1.8828039169311523
+          ],
+          "maxSourceXYZ": [
+            3.058612108230591,
+            0.6941499710083008,
+            1.8828035593032837
+          ]
+        }
+      ]
+    },
+    {
+      "path": "paper/paper_05f.glb",
+      "source": "models/particle/debris/paper_05f.vmdl_c",
+      "primitives": [
+        {
+          "vertices": 19,
+          "triangles": 13,
+          "attributes": [
+            "POSITION",
+            "TEXCOORD_0",
+            "NORMAL",
+            "TANGENT"
+          ],
+          "minSourceXYZ": [
+            -2.4115893840789795,
+            -0.7864817380905151,
+            -1.193646788597107
+          ],
+          "maxSourceXYZ": [
+            2.4115891456604004,
+            0.7596739530563354,
+            1.1936464309692383
+          ]
+        }
+      ]
+    }
+  ],
+  "nativeShader": "https://github.com/ValveResourceFormat/ValveResourceFormat/blob/9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304/Renderer/Shaders/csgo_effects.frag.slang"
+}

@@ -263,3 +263,111 @@ body:has(#skin-menu:not(.hidden)) #skins-button {
     padding-inline: calc(64 * var(--menu-unit));
   }
 }
+
+/* Matching-build mainmenu_inventory/mainmenu/itemtile Panorama styles. */
+#skin-menu.inventory-page {
+  background: rgb(20 20 20 / 40%);
+}
+#skin-menu .inventory-sections {
+  height: calc(48 * var(--menu-unit));
+  flex-basis: calc(48 * var(--menu-unit));
+  padding: 0 calc(24 * var(--menu-unit));
+  align-items: center;
+  gap: calc(12 * var(--menu-unit));
+  background: rgb(0 0 0 / 25%);
+  border-bottom: 0;
+}
+#skin-menu .inventory-sections button {
+  padding: calc(4 * var(--menu-unit)) calc(6 * var(--menu-unit));
+  border: 1px solid transparent;
+  border-radius: calc(3 * var(--menu-unit));
+  font:
+    500 calc(16 * var(--menu-unit)) "Stratum2",
+    sans-serif;
+}
+#skin-menu .inventory-sections button:hover {
+  background: rgb(255 255 255 / 2.5%);
+}
+#skin-menu .inventory-sections button[aria-current] {
+  color: #82d8ff;
+  background: #82d7ff1a;
+}
+#skin-menu .inventory-toolbar {
+  flex-basis: calc(42 * var(--menu-unit));
+  min-height: calc(42 * var(--menu-unit));
+}
+#skin-menu .inventory-toolbar label:last-child {
+  margin-left: auto;
+}
+#skin-menu .dialog-heading {
+  top: calc(48 * var(--menu-unit));
+}
+#skin-menu .skin-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 0 calc(16 * var(--menu-unit));
+}
+#skin-menu .skin-search input {
+  width: calc(512 * var(--menu-unit));
+  max-width: calc(100% - 32 * var(--menu-unit));
+  height: calc(54 * var(--menu-unit));
+  padding: calc(10 * var(--menu-unit)) 0 0;
+  border: 0;
+  border-bottom: calc(2 * var(--menu-unit)) solid white;
+  border-radius: 0;
+  background: transparent;
+  font:
+    400 calc(20 * var(--menu-unit)) "Stratum2",
+    sans-serif;
+  box-shadow: none;
+  transition: border-bottom-width 0.2s;
+}
+#skin-menu .skin-search input:focus {
+  border-bottom-width: calc(6 * var(--menu-unit));
+  outline: none;
+}
+#skin-menu #skin-grid .inventory-item-art {
+  height: calc(121 * var(--menu-unit));
+  position: relative;
+  background: linear-gradient(rgb(75 75 75 / 75%), rgb(175 175 175 / 75%));
+  border: 1px solid rgb(0 0 0 / 25%);
+  box-shadow: 0 1px 4px 2px rgb(0 0 0 / 10%);
+  transition: box-shadow 0.25s ease-in-out;
+}
+#skin-menu #skin-grid .inventory-item-art::after {
+  content: "";
+  position: absolute;
+  inset: auto -1px calc(-5 * var(--menu-unit)) -1px;
+  height: calc(5 * var(--menu-unit));
+  background: var(--item-rarity);
+  box-shadow: 0 0 4px 1px rgb(0 0 0 / 25%);
+}
+#skin-menu #skin-grid .inventory-item-art img {
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+#skin-menu #skin-grid button:is(:hover, :focus-visible) .inventory-item-art {
+  box-shadow: 0 2px 8px 2px rgb(0 0 0 / 50%);
+}
+#skin-menu #skin-grid button[aria-pressed="true"] .inventory-item-art {
+  outline: 1px solid #d2cfba;
+  outline-offset: -1px;
+}
+#skin-menu #skin-grid :is(b, span) {
+  font-family: "Stratum2", sans-serif;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-shadow: 1px 1px 4px #000;
+}
+#skin-menu #skin-grid b {
+  margin-top: calc(8 * var(--menu-unit));
+}
+#skin-menu #inventory-search img {
+  display: block;
+  width: calc(32 * var(--menu-unit));
+  height: calc(32 * var(--menu-unit));
+}

@@ -626,3 +626,145 @@ body:has(#loadout-editor) #inventory-button {
   left: auto;
   transform: translateX(50%);
 }
+
+/* Matching-build loadout_grid/itemtile styles; names and prices reveal by column. */
+#loadout-editor {
+  --loadout-team-color: rgb(150 200 250);
+}
+#loadout-editor[data-active-team="t"] {
+  --loadout-team-color: #eabe54;
+}
+#loadout-editor .loadout-teams {
+  background: rgb(0 0 0 / 25%);
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+}
+#loadout-editor .loadout-slot {
+  background: rgb(0 0 0 / 25%);
+  border-bottom-color: #b9bdc0;
+}
+#loadout-editor[data-active-team="t"] .loadout-team .loadout-slot {
+  background: rgb(0 0 0 / 25%);
+}
+#loadout-editor .loadout-slot:hover {
+  background: rgb(143 143 143 / 14.4%);
+}
+#loadout-editor .loadout-slot:hover img {
+  filter: brightness(1.6) drop-shadow(-3px 6px 6px rgb(0 0 0 / 20%));
+}
+#loadout-editor .loadout-slot-columns > section:hover :is(b, small) {
+  opacity: 0.7;
+}
+#loadout-editor .loadout-slot b {
+  color: var(--loadout-team-color);
+}
+#loadout-editor .loadout-slot-columns h3 button {
+  width: 100%;
+  text-align: left;
+  color: var(--loadout-team-color);
+}
+#loadout-editor .loadout-slot-columns h3 button[aria-pressed="true"] {
+  color: black;
+  background: var(--loadout-team-color);
+}
+#loadout-editor .loadout-team-title {
+  border: 1px solid var(--loadout-team-color);
+  border-radius: calc(3 * var(--menu-unit));
+  background: var(--loadout-team-color);
+  color: black;
+}
+#loadout-editor .loadout-opponent[data-team="t"] .loadout-team-title {
+  border-color: #eabe54;
+  background: transparent;
+  color: #eabe54;
+  opacity: 0.3;
+}
+#loadout-editor .loadout-opponent[data-team="ct"] .loadout-team-title {
+  border-color: rgb(150 200 250);
+  background: transparent;
+  color: rgb(150 200 250);
+  opacity: 0.8;
+}
+#loadout-editor .loadout-opponent:hover .loadout-team-title {
+  opacity: 0.6;
+}
+#loadout-editor .loadout-opponent .loadout-cosmetics {
+  opacity: 0.3;
+}
+#loadout-editor .loadout-cosmetics button {
+  background: rgb(0 0 0 / 25%);
+}
+#loadout-editor .loadout-cosmetics button:hover {
+  background: rgb(205 205 205 / 25%);
+}
+#loadout-editor .inventory-item-art {
+  position: relative;
+  height: calc(121 * var(--menu-unit));
+  background: linear-gradient(rgb(75 75 75 / 75%), rgb(175 175 175 / 75%));
+  border: 1px solid rgb(0 0 0 / 25%);
+  border-bottom: calc(5 * var(--menu-unit)) solid #bbc0c4;
+  box-shadow: 0 1px 4px 2px rgb(0 0 0 / 10%);
+  transition: box-shadow 0.25s ease-in-out;
+}
+#loadout-editor .inventory-choices .inventory-item-art img {
+  height: 100%;
+  border: 0;
+  background: transparent;
+  outline: 0;
+  transition:
+    transform 0.15s ease-in-out,
+    filter 0.15s ease-in-out;
+}
+#loadout-editor .inventory-choices button:is(:hover, :focus-visible) .inventory-item-art {
+  box-shadow: 0 2px 8px 2px rgb(0 0 0 / 50%);
+}
+#loadout-editor .inventory-choices button:is(:hover, :focus-visible) img {
+  transform: translateY(calc(-6 * var(--menu-unit)));
+  filter: drop-shadow(-3px 6px 6px rgb(0 0 0 / 20%));
+}
+#loadout-editor .inventory-choices button[aria-pressed="true"] .inventory-item-art {
+  outline: 1px solid #d1ceb9;
+  outline-offset: -1px;
+}
+#loadout-editor .inventory-choices b {
+  font-family: "Stratum2", sans-serif;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-shadow: 1px 1px 4px #000;
+}
+#loadout-editor .inventory-choices button[data-equipped="true"] .inventory-item-art::before {
+  content: "";
+  position: absolute;
+  top: calc(10 * var(--menu-unit));
+  right: calc(5 * var(--menu-unit));
+  width: calc(16 * var(--menu-unit));
+  height: calc(16 * var(--menu-unit));
+  border: 1px solid #3281ac;
+  border-radius: 50%;
+  background: radial-gradient(circle, #3281ac 0 38%, transparent 42%);
+  box-shadow: 0 0 2px 2px #00000025;
+}
+#loadout-editor[data-active-team="t"]
+  .inventory-choices
+  button[data-equipped="true"]
+  .inventory-item-art::before {
+  border-color: #b1af2d;
+  background: radial-gradient(circle, #b1af2d 0 38%, transparent 42%);
+}
+#loadout-editor .loadout-slot-columns h3 button::before {
+  content: "";
+  display: inline-block;
+  width: calc(14 * var(--menu-unit));
+  height: calc(14 * var(--menu-unit));
+  margin-right: calc(6 * var(--menu-unit));
+  background: currentColor;
+  mask: var(--loadout-filter-icon) center / contain no-repeat;
+}
+#loadout-editor .loadout-slot-columns h3 button[aria-pressed="true"]::before {
+  mask-image: var(--loadout-filter-active-icon);
+}
+#loadout-editor .menu-control-icon,
+#skin-menu .menu-control-icon {
+  width: calc(16 * var(--menu-unit));
+  height: calc(16 * var(--menu-unit));
+  object-fit: contain;
+}
