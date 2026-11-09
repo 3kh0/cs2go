@@ -1,0 +1,44 @@
+{
+  "source": "Installed CS2 build 2000942 / patch 1.41.9.6, Source revision 11206718",
+  "vpkDirectorySha256": "10d5831cbf008808419a438141362c466f14550a8a4cf04ace56a7828ccf2b27",
+  "tool": {
+    "name": "Source 2 Viewer CLI",
+    "version": "20.1",
+    "sha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830"
+  },
+  "generator": "python3 packages/assets/import-native-healthshot.py <unpacked-native-bundle>",
+  "attribution": "Valve Counter-Strike 2 assets; existing repository asset licenses and attribution apply.",
+  "conversion": "Direct PNG texture decode. Original pixels and alpha retained; no crop, repaint or tonemapping.",
+  "mapping": "Matches actual SAS, Ground Rebel (Elite Crew variant G) and Phoenix runtime models. Other agents use native faction portraits as an explicit fallback; this is not face-specific coverage of the entire roster.",
+  "nativeInputs": [
+    {
+      "resource": "panorama/images/econ/characters/customplayer_ctm_sas_square_png.vtex_c",
+      "offset": 84848272,
+      "bytes": 140011,
+      "crc32": "764cacae",
+      "sha256": "4dfa001e954ebc4d855b0402953d1b2ccc93524315358fa2cca226eee8a2dfdf",
+      "archive": "pak01_049.vpk"
+    },
+    {
+      "resource": "panorama/images/econ/characters/customplayer_tm_phoenix_square_png.vtex_c",
+      "offset": 47567824,
+      "bytes": 117480,
+      "crc32": "2ce82687",
+      "sha256": "2f33e195415efaeee79a80c722646a16b8bc0e2d8d58b79ab30abf08c6586cad",
+      "archive": "pak01_273.vpk"
+    },
+    {
+      "resource": "panorama/images/econ/characters/customplayer_tm_leet_variantg_square_png.vtex_c",
+      "offset": 45243232,
+      "bytes": 138596,
+      "crc32": "aec968cc",
+      "sha256": "da520043dffa2c046117752df92a926ee06fea61f66d7d129f9dc4195e02ad7a",
+      "archive": "pak01_273.vpk"
+    }
+  ],
+  "sha256": {
+    "bot-ct.png": "0be29151d17b2de1fe86134a100469b8c57f1bb9ad3c9c2651f531d5006d098a",
+    "bot-t.png": "87d472021ade143a589031748ebd266316ed684e9e6556eaae8b962aa5137a0f",
+    "bot-phoenix.png": "1332d8df6481bdfe0811e35d2ab530f35af9251e6227dae8e8b295abb079be5d"
+  }
+}

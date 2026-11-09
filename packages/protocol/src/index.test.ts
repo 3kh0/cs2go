@@ -206,3 +206,24 @@ test("per-team knives reject firearms and malformed selections", () => {
       ),
     ).toBeNull();
 });
+
+test("only lobby creation can choose an explicit public or private visibility", () => {
+  const join = {
+    type: "join",
+    version: PROTOCOL_VERSION,
+    room: "",
+    name: "Host",
+    create: true,
+    mode: "casual",
+    team: "ct",
+  };
+  for (const visibility of [undefined, "private", "public"])
+    expect(parseClientMessage(JSON.stringify({ ...join, visibility }))).not.toBeNull();
+  for (const visibility of ["friends", true, 1, null])
+    expect(parseClientMessage(JSON.stringify({ ...join, visibility }))).toBeNull();
+  expect(
+    parseClientMessage(
+      JSON.stringify({ ...join, create: false, room: "123456", visibility: "public" }),
+    ),
+  ).toBeNull();
+});

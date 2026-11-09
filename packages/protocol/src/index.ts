@@ -5,6 +5,17 @@ export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
 export const PROTOCOL_VERSION = 14;
 export type BreakableState = { id: string; health: number };
 export type MapId = "dust2" | "mirage";
+export type LobbyVisibility = "private" | "public";
+export type PublicLobby = {
+  room: string;
+  name: string;
+  mode: MatchMode;
+  map: MapId;
+  players: number;
+  capacity: number;
+  teams: Record<Team, number>;
+  phase: RoundState["phase"];
+};
 export function isMapId(value: unknown): value is MapId {
   return value === "dust2" || value === "mirage";
 }
@@ -283,6 +294,7 @@ export type ClientMessage =
       room: string;
       name: string;
       create?: boolean;
+      visibility?: LobbyVisibility;
       mode: MatchMode;
       map?: MapId;
       team: Team;
@@ -478,6 +490,9 @@ export function parseClientMessage(raw: string): ClientMessage | null {
     (value.resume === undefined ||
       (typeof value.resume === "string" && /^[a-f0-9-]{36}$/.test(value.resume))) &&
     (value.create === undefined || typeof value.create === "boolean") &&
+    (value.visibility === undefined ||
+      (value.create === true &&
+        (value.visibility === "private" || value.visibility === "public"))) &&
     (value.map === undefined || isMapId(value.map)) &&
     (value.create === true
       ? value.room === "" && value.resume === undefined

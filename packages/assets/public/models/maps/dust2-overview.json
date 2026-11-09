@@ -1,0 +1,35 @@
+{
+  "pos_x": -2476.0,
+  "pos_y": 3239.0,
+  "scale": 4.4,
+  "source": {
+    "author": "Valve",
+    "extractor": "Source2Viewer 20.1",
+    "overview": "resource/overviews/de_dust2.txt",
+    "overviewSha256": "97947e99bc7930fc06dc15af3dcf942dbca5ca1c6f36119a089615fd4b383620",
+    "texture": "panorama/images/overheadmaps/de_dust2_radar_psd.vtex_c",
+    "textureSha256": "86c0669d0081aa5ba44954dcbde5e414dc33d2555ffebb6f538458343695e9fc",
+    "outputSha256": "0828297130ce26db25a299806ff743df9104de634a3e64b52b358f6f4399354d",
+    "nativeMetadata": {
+      "material": "overviews/de_dust2_v2",
+      "pos_x": "-2476",
+      "pos_y": "3239",
+      "scale": "4.4",
+      "rotate": "1",
+      "zoom": "1.1",
+      "inset_left": "0.0",
+      "inset_top": "0.0",
+      "inset_right": "0.0",
+      "inset_bottom": "0.0",
+      "CTSpawn_x": "0.62",
+      "CTSpawn_y": "0.21",
+      "TSpawn_x": "0.39",
+      "TSpawn_y": "0.91",
+      "bombA_x": "0.80",
+      "bombA_y": "0.16",
+      "bombB_x": "0.21",
+      "bombB_y": "0.12"
+    },
+    "mapping": "Source x and -y at 0.0254 metres/unit; one native 1024px overview; game heading/zoom applied by canvas."
+  }
+}

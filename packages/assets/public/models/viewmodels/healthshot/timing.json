@@ -1,0 +1,24 @@
+{
+  "draw": 1,
+  "idle": 6.6666998863220215,
+  "use": 1.899999976158142,
+  "commit": 0.6666666666666666,
+  "events": [
+    {
+      "kind": "prepare",
+      "time": 0.13333333333333333
+    },
+    {
+      "kind": "thud",
+      "time": 0.6666666666666666
+    }
+  ],
+  "sourceEvent": {
+    "id": "WPN_HEALTHSHOT_INJECT",
+    "frame": 20,
+    "frameRate": 30.0,
+    "compiledNormalizedStart": 0.350877,
+    "compiledFrames": 58,
+    "compiledDuration": 1.9
+  }
+}

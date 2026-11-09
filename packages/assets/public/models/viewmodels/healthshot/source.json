@@ -1,0 +1,252 @@
+{
+  "source": "Installed CS2 build 2000942 / patch 1.41.9.6, Source revision 11206718",
+  "vpkDirectorySha256": "10d5831cbf008808419a438141362c466f14550a8a4cf04ace56a7828ccf2b27",
+  "tool": {
+    "name": "Source 2 Viewer CLI",
+    "version": "20.1",
+    "sha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830"
+  },
+  "generator": "python3 packages/assets/import-native-healthshot.py <unpacked-native-bundle>",
+  "attribution": "Valve Counter-Strike 2 assets; existing repository asset licenses and attribution apply.",
+  "conversion": "Direct VRF mesh with four original PNG dependencies embedded byte-for-byte into GLB bufferViews for portable CDN loading. Original geometry buffer bytes retained exactly; three separate two-skeleton motion GLBs remain unmodified. No image decode/resample or animation resampling. Runtime bindings follow the existing grenade viewmodel transfer.",
+  "embeddedTextures": {
+    "originalBufferBytes": 404992,
+    "originalBufferSha256": "4be762858a7d5f4b74c70d171b3a0cc4decf42a23e6d1c16e4ca054c9ae8aabb",
+    "originalModelSha256": "0a2c6581bb55b4e477326f1d417a190764b8337b98f177a4c6ccf49aaf9504aa",
+    "images": {
+      "default_ao_tga_559f1ac6.png": {
+        "bytes": 86,
+        "sha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+      },
+      "health_shot_color_psd_125712c.png": {
+        "bytes": 150504,
+        "sha256": "42e2bc6fb79330c1d650294df732c1894db6ede7c46fda9236cd10002f82048e"
+      },
+      "health_shot_vmat_g_tmetalness_b7e45cfc.png": {
+        "bytes": 86,
+        "sha256": "7fb5302e2a68adbd15e9f60efbe2efb9cb2f658be19ec8b102e2085f1fbd044e"
+      },
+      "health_shot_vmat_g_tnormal_d480e47f.png": {
+        "bytes": 86,
+        "sha256": "ebd2de41619fcfc1de78dd83dd2065245e823cb9e6da550ac2cc6a1486ccd7d8"
+      }
+    }
+  },
+  "timing": {
+    "draw": 1,
+    "idle": 6.6666998863220215,
+    "use": 1.899999976158142,
+    "commit": 0.6666666666666666,
+    "events": [
+      {
+        "kind": "prepare",
+        "time": 0.13333333333333333
+      },
+      {
+        "kind": "thud",
+        "time": 0.6666666666666666
+      }
+    ],
+    "sourceEvent": {
+      "id": "WPN_HEALTHSHOT_INJECT",
+      "frame": 20,
+      "frameRate": 30.0,
+      "compiledNormalizedStart": 0.350877,
+      "compiledFrames": 58,
+      "compiledDuration": 1.9
+    }
+  },
+  "nativeInputs": [
+    {
+      "resource": "animation/anims/viewmodel/equipment/healthshot/draw_healthshot.vnmclip_c",
+      "offset": 16415696,
+      "bytes": 8061,
+      "crc32": "e2b3d962",
+      "sha256": "d1d2222931e750f7007fe8ec2dbd95ecfbd4b5d1bcb5817ff2dc6db4b1d244ad",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/viewmodel/equipment/healthshot/idle_healthshot.vnmclip_c",
+      "offset": 16423760,
+      "bytes": 39560,
+      "crc32": "63c48a1f",
+      "sha256": "270f5c823c980aa6cd9c78aea60ed5282cbd693153b38e45de0950512994b19e",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/viewmodel/equipment/healthshot/inject_healthshot.vnmclip_c",
+      "offset": 16463328,
+      "bytes": 21442,
+      "crc32": "046cbd2c",
+      "sha256": "30b21681794c74d64ebdbbab54a3fc06cce77cbb15d09d80592cc350da6b315d",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/world/equipment/healthshot/draw_crouch_healthshot.vnmclip_c",
+      "offset": 28335024,
+      "bytes": 14059,
+      "crc32": "2304c1ac",
+      "sha256": "21777d86b66c490d1e8f16bfbc45bfa501209a3bc7cc192c0a57436b1c52d190",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/world/equipment/healthshot/draw_healthshot.vnmclip_c",
+      "offset": 28349088,
+      "bytes": 13969,
+      "crc32": "4145fd31",
+      "sha256": "888297115b6d1c9a058d4499a71e3639ff3479c523c3cdb1d9d9544ec3e14b8d",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/world/equipment/healthshot/idle_crouch_healthshot.vnmclip+non_additive.vnmclip_c",
+      "offset": 28367792,
+      "bytes": 4907,
+      "crc32": "41e4cc21",
+      "sha256": "76b0a3be04b94a591d0696b80a3b6ea0b4d47596167a72b72050dab7e76ac593",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/world/equipment/healthshot/idle_crouch_healthshot.vnmclip_c",
+      "offset": 28363072,
+      "bytes": 4718,
+      "crc32": "85917038",
+      "sha256": "30ce3565ed42a7a9c49a91faebcbebd7d4afe56fca6cb1a36901580643807ea0",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/world/equipment/healthshot/idle_healthshot.vnmclip+non_additive.vnmclip_c",
+      "offset": 28377312,
+      "bytes": 4880,
+      "crc32": "3449aaad",
+      "sha256": "6953e966fdccb080dd437cc39a936cf15f96c1d99b26f726c8b7563b4b66537f",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/world/equipment/healthshot/idle_healthshot.vnmclip_c",
+      "offset": 28372704,
+      "bytes": 4594,
+      "crc32": "9697f48e",
+      "sha256": "a66d05dcb255c3bda9f395c3e18c95765a4e26f48187eb02f5684a22928139b3",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/world/equipment/healthshot/shoot_crouch_healthshot.vnmclip_c",
+      "offset": 28382192,
+      "bytes": 18123,
+      "crc32": "2bf97b6c",
+      "sha256": "e43d353253ce8b2f9bc7e4ea20faae4da5edd81ab4f421adca078fa1e4950d37",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/anims/world/equipment/healthshot/shoot_healthshot.vnmclip_c",
+      "offset": 28400320,
+      "bytes": 19798,
+      "crc32": "e9587e4d",
+      "sha256": "4e193f2b9cb38d952696d98b6d66dce631035b2c5084381d3e6326bde648af34",
+      "archive": "pak01_473.vpk"
+    },
+    {
+      "resource": "animation/skeletons/weapons/healthshot.vnmskel_c",
+      "offset": 92446112,
+      "bytes": 1607,
+      "crc32": "c05b2bd1",
+      "sha256": "c313fb1d965ce72957563d0a78fe44f4974a9f9f8e825c3bf52bc858f08d3cc5",
+      "archive": "pak01_502.vpk"
+    },
+    {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex_c",
+      "offset": 76892032,
+      "bytes": 2136,
+      "crc32": "8dc32399",
+      "sha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "archive": "pak01_335.vpk"
+    },
+    {
+      "resource": "materials/models/weapons/v_models/eq_healthshot/health_shot.vmat_c",
+      "offset": 62534944,
+      "bytes": 3732,
+      "crc32": "7136923a",
+      "sha256": "c84305e9f87d6a61547350639e8d55fe9d856114f9896ea4364cfcaf7ef8dae6",
+      "archive": "pak01_502.vpk"
+    },
+    {
+      "resource": "materials/models/weapons/v_models/eq_healthshot/health_shot_color_psd_125712c.vtex_c",
+      "offset": 67595920,
+      "bytes": 108594,
+      "crc32": "c0bc5ed9",
+      "sha256": "10584b9b33598d41acbcbc4172c020dea6946a85a706b40ec56e1a60ec469f6d",
+      "archive": "pak01_392.vpk"
+    },
+    {
+      "resource": "materials/models/weapons/v_models/eq_healthshot/health_shot_vmat_g_tmetalness_b7e45cfc.vtex_c",
+      "offset": 78328192,
+      "bytes": 1944,
+      "crc32": "cb8566d7",
+      "sha256": "8f97aa22139f4a6aef6d3f251cc5731525edf5485dd6d0c35f6ebe7ec9f5c7d2",
+      "archive": "pak01_216.vpk"
+    },
+    {
+      "resource": "materials/models/weapons/v_models/eq_healthshot/health_shot_vmat_g_tnormal_d480e47f.vtex_c",
+      "offset": 78330144,
+      "bytes": 2240,
+      "crc32": "d365a650",
+      "sha256": "dbc3e18bf296790d1c854a4232c37806dca993c99f561fceff8761155c2868f7",
+      "archive": "pak01_216.vpk"
+    },
+    {
+      "resource": "panorama/images/econ/weapons/base_weapons/weapon_healthshot_png.vtex_c",
+      "offset": 115706160,
+      "bytes": 82875,
+      "crc32": "b8268062",
+      "sha256": "217a04b763b17783f794b6b351310d3a0e9c754ed89b0cbbf5f2fb461c873499",
+      "archive": "pak01_262.vpk"
+    },
+    {
+      "resource": "panorama/images/icons/equipment/healthshot.vsvg_c",
+      "offset": 87607216,
+      "bytes": 2266,
+      "crc32": "73836dee",
+      "sha256": "025af28d2595c7e55c2e2a44a5eba039388510ec305639865dc6867da3d1444a",
+      "archive": "pak01_240.vpk"
+    },
+    {
+      "resource": "sounds/items/healthshot_prepare_01.vsnd_c",
+      "offset": 92907312,
+      "bytes": 116844,
+      "crc32": "761b32d3",
+      "sha256": "f3fcd6501af55002feeb4e34dbcd8399d2fb19cfbf6dfe958ecb830a6dab11b6",
+      "archive": "pak01_357.vpk"
+    },
+    {
+      "resource": "sounds/items/healthshot_success_01.vsnd_c",
+      "offset": 93024160,
+      "bytes": 284064,
+      "crc32": "ccafddf5",
+      "sha256": "b1211b59134f244bf0c7416dee4c0d9ebb8d3276af3489a429316dc422a912e2",
+      "archive": "pak01_357.vpk"
+    },
+    {
+      "resource": "sounds/items/healthshot_thud_01.vsnd_c",
+      "offset": 93308224,
+      "bytes": 87260,
+      "crc32": "02d87f2b",
+      "sha256": "fdaec4515f2afb40acd16cc92a9e2705ee5911d03c31e05f15d648f1a494dbf8",
+      "archive": "pak01_357.vpk"
+    },
+    {
+      "resource": "weapons/models/healthshot/weapon_healthshot.vmdl_c",
+      "offset": 90434784,
+      "bytes": 84451,
+      "crc32": "48c95735",
+      "sha256": "184ea4e7ea13cf26e1b887705bbd500c76efce0c02641632936cba2831dfeb89",
+      "archive": "pak01_499.vpk"
+    }
+  ],
+  "sha256": {
+    "model.glb": "a5b19d3f670d230da1478457666115be8f04e78a48630fa06152a8ff119a5a1e",
+    "draw.glb": "008eed82450feef4ab46f7ad8ef8e103c3fdbf3bf4a668ab2e8f5c515fdf6433",
+    "idle.glb": "ab9dfb2909a1070aa36190f2acd2492c5ab1826e515870da83ffa844ff9cae84",
+    "inject.glb": "727c3c7a541816f6696e4634cc87e4d22e1ba7fa7a03165262f75bdf6afdd0e4",
+    "timing.json": "43b3c8f40e8cd86519c1a2f00bffac90f3d6231822cd9b4786b2caaca94f16e5"
+  }
+}
