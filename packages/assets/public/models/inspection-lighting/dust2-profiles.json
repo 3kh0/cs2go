@@ -1,0 +1,661 @@
+{
+  "source": "Installed CS2 de_dust2_vanity native entitylump, verified VPK resource CRC/SHA by Source2Viewer CLI20.1",
+  "profiles": {
+    "weapon": {
+      "activeItemIndex": 0,
+      "item": {
+        "source_line": 3298,
+        "expand_render_bounds_to_include_cloth": false,
+        "reset_model_on_spawn": false,
+        "targetname": "[PR#]item",
+        "model": "",
+        "animgraph": "",
+        "weapon_state": "inspect",
+        "model_scale": 0.0,
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "DefaultAnim": "",
+        "renderfx": "kRenderFxNone",
+        "rendermode": "kRenderNormal",
+        "mincpulevel": "0",
+        "maxcpulevel": "0",
+        "mingpulevel": "0",
+        "maxgpulevel": "0",
+        "disableX360": "0",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "lightgroup": "",
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "object_culling": 0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "add_attribute": "",
+        "add_modifier": "",
+        "classname": "csgo_item_previewmodel",
+        "compile_source_id": 869,
+        "origin": [
+          1360.880615,
+          937.458374,
+          40.0
+        ],
+        "angles": [
+          0.0,
+          164.999924,
+          0.0
+        ],
+        "scales": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "hammerUniqueId": "18475:3"
+      },
+      "camera": {
+        "source_line": 3787,
+        "targetname": "[PR#]cam_4",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "useLocalOffset": false,
+        "vscripts": "",
+        "clientSideEntity": 0,
+        "VerticalFOV": 35.0,
+        "ZNear": 4.0,
+        "ZFar": 10000.0,
+        "aspectRatio": 1.0,
+        "rendercolor": [
+          128,
+          128,
+          128
+        ],
+        "dof_enabled": true,
+        "dof_near_blurry": 0.0,
+        "dof_near_crisp": 0.0,
+        "dof_far_crisp": 150.0,
+        "dof_far_blurry": 200.0,
+        "dof_tilt_to_ground": 0.5,
+        "classname": "point_camera_vertical_fov",
+        "compile_source_id": 881,
+        "origin": [
+          1348.19873,
+          890.127686,
+          40.299988
+        ],
+        "angles": [
+          0.0,
+          74.999985,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18475:164"
+      },
+      "light": {
+        "source_line": 3144,
+        "forceshadowsenabled": false,
+        "transmit_always": false,
+        "bakespeculartocubemaps_scale": 1.0,
+        "targetname": "[PR#]light_item",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "useLocalOffset": false,
+        "clientSideEntity": "1",
+        "enabled": true,
+        "colormode": "0",
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "colortemperature": 6195.0,
+        "brightness_lumens": 800.0,
+        "directlight": "2",
+        "luminaire_shape": "0",
+        "luminaire_size": 4.0,
+        "luminaire_anisotropy": 0.0,
+        "brightness_units": 1,
+        "brightness": 2.61328,
+        "brightness_legacy": 6.11719,
+        "light_style": "",
+        "light_style_output_event0": "",
+        "light_style_output_event1": "",
+        "light_style_output_event2": "",
+        "light_style_output_event3": "",
+        "light_style_target0": "",
+        "light_style_target1": "",
+        "light_style_target2": "",
+        "light_style_target3": "",
+        "lightcookie": "",
+        "shape": 0.0,
+        "soft_x": 0.681,
+        "soft_y": 0.696,
+        "skirt": 0.954,
+        "skirt_near": 0.272,
+        "size_params": [
+          37.482834,
+          37.482834,
+          0.007808
+        ],
+        "range": 512.0,
+        "shear": [
+          0.0,
+          0.0
+        ],
+        "rendertocubemaps": true,
+        "bakespeculartocubemaps": 0,
+        "bakespeculartocubemaps_size": [
+          6.0,
+          6.0,
+          0.0
+        ],
+        "brightnessscale": 1.0,
+        "fade_size_start": 0.05,
+        "fade_size_end": 0.025,
+        "castshadows": "0",
+        "shadowmapsize": 1024,
+        "shadowpriority": -1,
+        "pvs_modify_entity": false,
+        "shadowfade_size_start": 0.1,
+        "shadowfade_size_end": 0.05,
+        "bouncelight": 0,
+        "bouncescale": 0.0,
+        "minroughness": 0.0,
+        "classname": "light_barn",
+        "compile_source_id": 867,
+        "origin": [
+          1389.433594,
+          1005.382629,
+          106.038849
+        ],
+        "angles": [
+          48.832249,
+          238.855896,
+          -8.400896
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18475:156"
+      }
+    },
+    "music": {
+      "activeItemIndex": 4,
+      "item": {
+        "source_line": 6473,
+        "expand_render_bounds_to_include_cloth": false,
+        "reset_model_on_spawn": false,
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "[PR#]item4",
+        "model": "",
+        "animgraph": "",
+        "weapon_state": "",
+        "DefaultAnim": "inventory_inspect",
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "model_scale": 0.0,
+        "renderfx": "kRenderFxNone",
+        "rendermode": "kRenderNormal",
+        "mincpulevel": "0",
+        "maxcpulevel": "0",
+        "mingpulevel": "0",
+        "maxgpulevel": "0",
+        "disableX360": "0",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "lightgroup": "",
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "object_culling": 0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "classname": "csgo_item_previewmodel",
+        "compile_source_id": 950,
+        "origin": [
+          1366.198975,
+          1091.498047,
+          40.0
+        ],
+        "angles": [
+          0.0,
+          162.968155,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18529:3"
+      },
+      "camera": {
+        "source_line": 6522,
+        "targetname": "[PR#]cam_musickit_close",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "useLocalOffset": false,
+        "vscripts": "",
+        "clientSideEntity": 0,
+        "VerticalFOV": 35.0,
+        "ZNear": 4.0,
+        "ZFar": 10000.0,
+        "aspectRatio": 1.0,
+        "rendercolor": [
+          128,
+          128,
+          128
+        ],
+        "dof_enabled": true,
+        "dof_near_blurry": 0.0,
+        "dof_near_crisp": 20.0,
+        "dof_far_crisp": 40.0,
+        "dof_far_blurry": 100.0,
+        "dof_tilt_to_ground": 0.5,
+        "classname": "point_camera_vertical_fov",
+        "compile_source_id": 951,
+        "origin": [
+          1336.902222,
+          1044.949829,
+          38.0
+        ],
+        "angles": [
+          0.0,
+          57.968277,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18529:19"
+      },
+      "light": {
+        "source_line": 6602,
+        "forceshadowsenabled": false,
+        "transmit_always": false,
+        "bakespeculartocubemaps_scale": 1.0,
+        "fogshadows": "-1",
+        "fogstrength": "0",
+        "fog": "0",
+        "minroughness": 0.0,
+        "bouncescale": 0.0,
+        "bouncelight": 1,
+        "shadowfade_size_end": 0.05,
+        "shadowfade_size_start": 0.1,
+        "pvs_modify_entity": false,
+        "shadowpriority": -1,
+        "shadowmapsize": -1,
+        "castshadows": "0",
+        "fade_size_end": 0.025,
+        "fade_size_start": 0.05,
+        "brightnessscale": 1.0,
+        "bakespeculartocubemaps_size": [
+          6.0,
+          6.0,
+          0.0
+        ],
+        "bakespeculartocubemaps": 0,
+        "rendertocubemaps": false,
+        "shear": [
+          0.0,
+          0.0
+        ],
+        "range": 100.0,
+        "size_params": [
+          37.482834,
+          37.482834,
+          0.007808
+        ],
+        "skirt_near": 0.272,
+        "skirt": 0.954,
+        "soft_y": 0.696,
+        "soft_x": 0.681,
+        "shape": 0.0,
+        "lightcookie": "",
+        "light_style_target3": "",
+        "light_style_target2": "",
+        "light_style_target1": "",
+        "light_style_target0": "",
+        "light_style_output_event3": "",
+        "light_style_output_event2": "",
+        "light_style_output_event1": "",
+        "light_style_output_event0": "",
+        "light_style_var": "",
+        "light_style_radiance_var": "",
+        "light_style": "",
+        "brightness_legacy": 0.304688,
+        "brightness": -1.70703,
+        "brightness_units": 1,
+        "luminaire_anisotropy": 0.0,
+        "luminaire_size": 4.0,
+        "luminaire_shape": "0",
+        "directlight": "2",
+        "brightness_lumens": 40.0,
+        "colortemperature": 6600.0,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "colormode": "1",
+        "enabled": true,
+        "clientSideEntity": "1",
+        "useLocalOffset": false,
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parentAttachmentName": "",
+        "parentname": "",
+        "vscripts": "",
+        "targetname": "[PR#]light_item4",
+        "classname": "light_barn",
+        "compile_source_id": 953,
+        "origin": [
+          1373.246582,
+          1044.791504,
+          40.884247
+        ],
+        "angles": [
+          9.420663,
+          115.166023,
+          -169.620438
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18529:21"
+      }
+    },
+    "melee": {
+      "activeItemIndex": 8,
+      "item": {
+        "source_line": 2867,
+        "expand_render_bounds_to_include_cloth": false,
+        "reset_model_on_spawn": false,
+        "add_modifier": "",
+        "add_attribute": "",
+        "model_scale": 0.0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "weapon_state": "inspect",
+        "animgraph": "weapons/models/knife/knife_bowie/animgraph/weapon_knife_bowie_all.vanmgrph",
+        "DefaultAnim": "",
+        "model": "",
+        "targetname": "[PR#]item8",
+        "classname": "csgo_item_previewmodel",
+        "compile_source_id": 861,
+        "origin": [
+          1364.0,
+          936.0,
+          40.0
+        ],
+        "angles": [
+          0.0,
+          164.999924,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18533:3"
+      },
+      "camera": {
+        "source_line": 3027,
+        "dof_tilt_to_ground": 0.5,
+        "dof_far_blurry": 150.0,
+        "dof_far_crisp": 35.0,
+        "dof_near_crisp": 5.0,
+        "dof_near_blurry": 0.0,
+        "dof_enabled": true,
+        "rendercolor": [
+          128,
+          128,
+          128
+        ],
+        "aspectRatio": 1.24558,
+        "ZFar": 10000.0,
+        "ZNear": 4.0,
+        "VerticalFOV": 35.0,
+        "clientSideEntity": 0,
+        "vscripts": "",
+        "useLocalOffset": false,
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "[PR#]cam_melee",
+        "classname": "point_camera_vertical_fov",
+        "compile_source_id": 864,
+        "origin": [
+          1355.575928,
+          905.128418,
+          40.0
+        ],
+        "angles": [
+          0.0,
+          74.999985,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18533:21"
+      },
+      "light": {
+        "source_line": 3067,
+        "transmit_always": false,
+        "bakespeculartocubemaps_scale": 1.0,
+        "forceshadowsenabled": false,
+        "minroughness": 0.0,
+        "bouncescale": 0.0,
+        "bouncelight": 0,
+        "shadowfade_size_end": 0.05,
+        "shadowfade_size_start": 0.1,
+        "pvs_modify_entity": false,
+        "shadowpriority": -1,
+        "shadowmapsize": -1,
+        "castshadows": "0",
+        "fade_size_end": 0.025,
+        "fade_size_start": 0.05,
+        "brightnessscale": 1.0,
+        "bakespeculartocubemaps_size": [
+          6.0,
+          6.0,
+          0.0
+        ],
+        "bakespeculartocubemaps": 0,
+        "rendertocubemaps": false,
+        "shear": [
+          0.0,
+          0.0
+        ],
+        "range": 154.156998,
+        "size_params": [
+          37.482834,
+          37.482834,
+          0.007808
+        ],
+        "skirt_near": 0.272,
+        "skirt": 0.954,
+        "soft_y": 0.696,
+        "soft_x": 0.681,
+        "shape": 0.0,
+        "lightcookie": "",
+        "light_style_target3": "",
+        "light_style_target2": "",
+        "light_style_target1": "",
+        "light_style_target0": "",
+        "light_style_output_event3": "",
+        "light_style_output_event2": "",
+        "light_style_output_event1": "",
+        "light_style_output_event0": "",
+        "light_style": "",
+        "brightness_legacy": 6.11719,
+        "brightness": 2.61328,
+        "brightness_units": 1,
+        "luminaire_anisotropy": 0.0,
+        "luminaire_size": 4.0,
+        "luminaire_shape": "0",
+        "directlight": "2",
+        "brightness_lumens": 800.0,
+        "colortemperature": 6195.0,
+        "color": [
+          255,
+          255,
+          255
+        ],
+        "colormode": "0",
+        "enabled": true,
+        "clientSideEntity": "1",
+        "useLocalOffset": false,
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parentAttachmentName": "",
+        "parentname": "",
+        "vscripts": "",
+        "targetname": "[PR#]light_item8",
+        "classname": "light_barn",
+        "compile_source_id": 865,
+        "origin": [
+          1380.5271,
+          966.770996,
+          88.0
+        ],
+        "angles": [
+          48.832253,
+          238.855881,
+          -8.400896
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18533:22"
+      }
+    }
+  }
+}

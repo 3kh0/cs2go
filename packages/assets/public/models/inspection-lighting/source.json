@@ -1,0 +1,300 @@
+{
+  "nativeMap": "de_dust2_vanity",
+  "nativeResource": "lighting/postprocessing/de_dust2_prefab/de_dust2_vanity.vpost_c",
+  "decodedSource": "artifacts/native-home-reference/home-parity/decoded/lighting/postprocessing/de_dust2_prefab/de_dust2_vanity.json",
+  "decodedSourceSha256": "b8416b38189dee8c4076f315b74305a2c3d0b5ceb97abd7042f59dcc3b71621c",
+  "colorCorrection": {
+    "enabled": true,
+    "dimensions": 32,
+    "channels": "RGBA",
+    "componentType": "unsigned8",
+    "runtime": "dust2-color-correction.bin",
+    "bytes": 131072,
+    "sha256": "bd4d38bc13fcb4c53ec6d19e0ca37428332d0ab264198b561085b18f5c2d7c01",
+    "conversion": "Exact binary_hex bytes from native VPOST DATA block, no grading/resampling"
+  },
+  "tonemap": {
+    "m_flExposureBias": 0.0,
+    "m_flShoulderStrength": 0.0,
+    "m_flLinearStrength": 0.0010000000474974513,
+    "m_flLinearAngle": 0.0010000000474974513,
+    "m_flToeStrength": 1.0,
+    "m_flToeNum": 1.0,
+    "m_flToeDenom": 1.0,
+    "m_flWhitePoint": 1.4985569715499878,
+    "m_flLuminanceSource": 0.0,
+    "m_flExposureBiasShadows": 0.0,
+    "m_flExposureBiasHighlights": 0.0,
+    "m_flMinShadowLum": 0.0,
+    "m_flMaxShadowLum": 0.5,
+    "m_flMinHighlightLum": 2.0,
+    "m_flMaxHighlightLum": 8.0
+  },
+  "limitations": "Native data is exact. Three.js shader integration and displayed calibration are separate validation requirements. Not ACES Filmic.",
+  "reflection": {
+    "runtime": "dust2-reflection.exr",
+    "bytes": 5968436,
+    "sha256": "732dda28a4d42a4a7538c806fab5c4b368e31a42920816f5952e30314f90770d",
+    "nativeResource": "maps/de_dust2_vanity/cubemaps/env_cubemap_array.vtex_c",
+    "nativeResourceSha256": "92baa528f4fca2737ed5bdfc15f73c31a5d6b9bbcd00686b0e2419cc33e65139",
+    "nativeResourceCrc32": "06120326",
+    "nativeArchive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_dust2_vanity.vpk",
+    "source": "artifacts/weapon-inspection-lighting/native/de_dust2_vanity/readable/maps/de_dust2_vanity/cubemaps/env_cubemap_array.exr",
+    "conversion": "Official Source2Viewer CLI20.1 --decompile, float32 linear cubemap faces sampled into latlong via TextureExtract.CreateLatLongFromCubemapFaces; unchanged decoded EXR output bytes",
+    "width": 1024,
+    "height": 512,
+    "channels": "RGBAfloat32",
+    "compression": "ZIP16",
+    "volume": {
+      "source_line": 1609,
+      "lightprobetexture_sh2_l1": "",
+      "lightprobetexture_sh2_dc": "",
+      "lightprobetexture_dlshd": "maps/de_dust2_vanity/lightmaps/env_light_probe_volume_atlas_dlshd.vtex",
+      "lightprobetexture": "maps/de_dust2_vanity/lightmaps/env_light_probe_volume_atlas.vtex",
+      "clientSideEntity": "1",
+      "edge_fade_dists": [
+        16.0,
+        16.0,
+        16.0
+      ],
+      "indoor_outdoor_level": 0,
+      "voxelize": true,
+      "flood_fill": true,
+      "voxel_size": "24.0",
+      "box_maxs": [
+        870.114624,
+        3369.681641,
+        664.0
+      ],
+      "box_mins": [
+        -1141.198364,
+        -736.318604,
+        -232.0
+      ],
+      "bakefarz": 64000.0,
+      "cubemaptexture": "maps/de_dust2_vanity/cubemaps/env_cubemap_array.vtex",
+      "StartDisabled": false,
+      "useLocalOffset": false,
+      "local.scales": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local.angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local.origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parentAttachmentName": "",
+      "parentname": "",
+      "vscripts": "",
+      "targetname": "[PR#]cm_street1",
+      "classname": "env_combined_light_probe_volume",
+      "compile_source_id": 798,
+      "origin": [
+        1422.0,
+        846.000061,
+        40.0
+      ],
+      "angles": [
+        0.0,
+        0.280974,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "18320",
+      "handshake": 409813445,
+      "light_probe_size_x": 62,
+      "light_probe_size_y": 128,
+      "light_probe_size_z": 28,
+      "array_index": 0,
+      "light_probe_atlas_x": 1,
+      "light_probe_atlas_Y": 1,
+      "light_probe_atlas_Z": 1
+    },
+    "limitations": "Native specular reflection image, not complete diffuse irradiance or Source BRDF. Three PMREM filtering and camera-space projection are runtime approximations until visually compared."
+  },
+  "scene": {
+    "entitiesSource": "artifacts/weapon-inspection-lighting/native/de_dust2_vanity/entities-all.json",
+    "items": [
+      {
+        "source_line": 2867,
+        "expand_render_bounds_to_include_cloth": false,
+        "reset_model_on_spawn": false,
+        "add_modifier": "",
+        "add_attribute": "",
+        "model_scale": 0.0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "weapon_state": "inspect",
+        "animgraph": "weapons/models/knife/knife_bowie/animgraph/weapon_knife_bowie_all.vanmgrph",
+        "DefaultAnim": "",
+        "model": "",
+        "targetname": "[PR#]item8",
+        "classname": "csgo_item_previewmodel",
+        "compile_source_id": 861,
+        "origin": [
+          1364.0,
+          936.0,
+          40.0
+        ],
+        "angles": [
+          0.0,
+          164.999924,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18533:3"
+      },
+      {
+        "source_line": 3298,
+        "expand_render_bounds_to_include_cloth": false,
+        "reset_model_on_spawn": false,
+        "targetname": "[PR#]item",
+        "model": "",
+        "animgraph": "",
+        "weapon_state": "inspect",
+        "model_scale": 0.0,
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "DefaultAnim": "",
+        "renderfx": "kRenderFxNone",
+        "rendermode": "kRenderNormal",
+        "mincpulevel": "0",
+        "maxcpulevel": "0",
+        "mingpulevel": "0",
+        "maxgpulevel": "0",
+        "disableX360": "0",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "lightgroup": "",
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "object_culling": 0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "add_attribute": "",
+        "add_modifier": "",
+        "classname": "csgo_item_previewmodel",
+        "compile_source_id": 869,
+        "origin": [
+          1360.880615,
+          937.458374,
+          40.0
+        ],
+        "angles": [
+          0.0,
+          164.999924,
+          0.0
+        ],
+        "scales": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "hammerUniqueId": "18475:3"
+      },
+      {
+        "source_line": 6473,
+        "expand_render_bounds_to_include_cloth": false,
+        "reset_model_on_spawn": false,
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "[PR#]item4",
+        "model": "",
+        "animgraph": "",
+        "weapon_state": "",
+        "DefaultAnim": "inventory_inspect",
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "model_scale": 0.0,
+        "renderfx": "kRenderFxNone",
+        "rendermode": "kRenderNormal",
+        "mincpulevel": "0",
+        "maxcpulevel": "0",
+        "mingpulevel": "0",
+        "maxgpulevel": "0",
+        "disableX360": "0",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "lightgroup": "",
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "object_culling": 0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "classname": "csgo_item_previewmodel",
+        "compile_source_id": 950,
+        "origin": [
+          1366.198975,
+          1091.498047,
+          40.0
+        ],
+        "angles": [
+          0.0,
+          162.968155,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "18529:3"
+      }
+    ],
+    "lightmapVersion": 8,
+    "lightmapGameVersion": 2
+  },
+  "evidence": {
+    "thread": "T-01a1be87-6545-7610-b0d5-f80d369e1ab8",
+    "bundle": "artifacts/weapon-inspection-lighting/scene-probes-current.zip",
+    "bundleSha256": "a31821f6b648e85e5ab7cbf6c04d7648bb69142953aaad933a2f60a8edbf8e4f"
+  },
+  "profiles": {
+    "runtime": "dust2-profiles.json",
+    "sha256": "fef52cdb1e64c4a7d1686c721bf22b96386349f7308a3fd6eff769715b624c40",
+    "source": "artifacts/weapon-inspection-lighting/native/de_dust2_vanity/entities-all.json",
+    "selection": "Active item indices and corresponding light_item target naming from native Panorama inspect.js; native entity values retained without unit conversion"
+  }
+}

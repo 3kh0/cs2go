@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "c8ab6317a2df7b96adb64059d626a2fb6499956e65bbad6f434e08f4aa0e3190",
+  "release": "aab783ed02bb3fb5a1cc1afc22d08ba02f2c014d72e59f4927fdcf19265d88a9",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -19341,6 +19341,55 @@
       },
       "object": "objects/c03ad7757fbbb8bde46f947e7941fea621e214d94da9a9865fe128c1ce4b8909.json.br"
     },
+    "models/inspection-lighting/dust2-color-correction.bin": {
+      "sha256": "bd4d38bc13fcb4c53ec6d19e0ca37428332d0ab264198b561085b18f5c2d7c01",
+      "bytes": 131072,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "bb7b5d09ae0c97ccca05e7fa8d1e51b5f1e7dbd45a3d9868359b573b44c3754f",
+        "bytes": 36720
+      },
+      "object": "objects/bb7b5d09ae0c97ccca05e7fa8d1e51b5f1e7dbd45a3d9868359b573b44c3754f.bin.br"
+    },
+    "models/inspection-lighting/dust2-profiles.json": {
+      "sha256": "fef52cdb1e64c4a7d1686c721bf22b96386349f7308a3fd6eff769715b624c40",
+      "bytes": 15992,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f246e816f0f21aece432e1bcf22385e70470be822cf0448a6fdc27dc9e27c52a",
+        "bytes": 1885
+      },
+      "object": "objects/f246e816f0f21aece432e1bcf22385e70470be822cf0448a6fdc27dc9e27c52a.json.br"
+    },
+    "models/inspection-lighting/dust2-reflection.exr": {
+      "sha256": "732dda28a4d42a4a7538c806fab5c4b368e31a42920816f5952e30314f90770d",
+      "bytes": 5968436,
+      "object": "objects/732dda28a4d42a4a7538c806fab5c4b368e31a42920816f5952e30314f90770d.exr"
+    },
+    "models/inspection-lighting/README.md": {
+      "sha256": "2345e65df0e8d42c51ba8e3654ef8ad860d322400e8492e426f6bac587e0669f",
+      "bytes": 3081,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f4599fae1b2c4834e7c651a5819c109bc533312cf2bcd79763238d392a19635e",
+        "bytes": 1274
+      },
+      "object": "objects/f4599fae1b2c4834e7c651a5819c109bc533312cf2bcd79763238d392a19635e.md.br"
+    },
+    "models/inspection-lighting/source.json": {
+      "sha256": "26f2d8c0ada2390094deecbfdc803ec2a0a60223d536c06598d732ab8a0ec75a",
+      "bytes": 9176,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "7789bf915d14dfc9f6d5e0361bba5dbd0dc1ab1c53e053147399af0779564104",
+        "bytes": 2279
+      },
+      "object": "objects/7789bf915d14dfc9f6d5e0361bba5dbd0dc1ab1c53e053147399af0779564104.json.br"
+    },
     "models/m4a1_s.glb.gz": {
       "sha256": "1e0f8bbdce4d03bf409ad397f2b7493922cada0ddca305b6b06daf6383876041",
       "bytes": 113695,
@@ -22038,17 +22087,6 @@
         "bytes": 418
       },
       "object": "objects/9b950dc7b58dfd63d125d418ecb1e120f41f93ffb8dc2044de35d708d1c0272e.svg.br"
-    },
-    "models/music-kit/README.md": {
-      "sha256": "39952d93b114620c965109980509c825f9e5a95c446836f7b8f28186819b555a",
-      "bytes": 3914,
-      "transport": {
-        "encoding": "br",
-        "quality": 11,
-        "sha256": "f6f1b5056661ba7bcd1c510cfe6e70e0c9017ffae1ef55872782def14d5f012f",
-        "bytes": 1546
-      },
-      "object": "objects/f6f1b5056661ba7bcd1c510cfe6e70e0c9017ffae1ef55872782def14d5f012f.md.br"
     },
     "models/music-kit/record-anisotropy.png": {
       "sha256": "07282092fa07c9e21f013b8a3d7ba688a653667b1ba61ba305f28e0fbde5f9d3",
@@ -92270,6 +92308,28 @@
         "bytes": 529
       },
       "object": "objects/f84cda168782aec1036745ffc93297210076b894143d3ba1ab2924e091e229a4.svg.br"
+    },
+    "ui/inspect/info.svg": {
+      "sha256": "e2d4997ff638e241aa6f5866ebbb0d8348b052f8cd523d90e32eed7d6c6aba07",
+      "bytes": 862,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "5fc5f86927a05d46b87a19e2067bf91cb5c4ef0b67de2cd24e884a9eeb0f1a63",
+        "bytes": 433
+      },
+      "object": "objects/5fc5f86927a05d46b87a19e2067bf91cb5c4ef0b67de2cd24e884a9eeb0f1a63.svg.br"
+    },
+    "ui/inspect/source.json": {
+      "sha256": "571b12bf3683f4f0dad1cbb4d5207d57346b0687e2de4439ccc1e825d4b9c388",
+      "bytes": 480,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "d543497c66f04851bcb3d6c03aff778f6dc257b3585582958021f0e3219e553d",
+        "bytes": 287
+      },
+      "object": "objects/d543497c66f04851bcb3d6c03aff778f6dc257b3585582958021f0e3219e553d.json.br"
     },
     "ui/match/alert.svg": {
       "sha256": "09bf864fc7b663427b74cdaa5604f877cd1f95cb8043df4f5f2bb36ad37af648",

@@ -1,0 +1,9 @@
+{
+  "nativeResource": "panorama/images/icons/ui/info.vsvg_c",
+  "source": "Installed CS2 VPK on Windows runner; Source2Viewer CLI20.1 --decompile",
+  "thread": "T-01a1be87-6545-7610-b0d5-f80d369e1ab8",
+  "runtime": "info.svg",
+  "sha256": "e2d4997ff638e241aa6f5866ebbb0d8348b052f8cd523d90e32eed7d6c6aba07",
+  "conversion": "Unchanged native Source2Viewer CLI20.1 decoded output bytes",
+  "nativeResourceSha256": "80360941b999a6804dd0ed475962ebaaceae72bd4bf520f1cb69994b6b34d90e"
+}

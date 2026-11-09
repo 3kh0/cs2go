@@ -1,0 +1,136 @@
+{
+  "source": {
+    "map": "maps/de_dust2_vanity/entities/default_ents.vents_c",
+    "entitiesSha256": "870c9756ae0d15555af38e28f18cefd5658b9f53cd4aea1cd3632283bf2f70be",
+    "itemFactsSha256": "887caee857fda3e3be3c94c86523b581757e1adff1502ae670b01fc20c4cebc0",
+    "cameraFactsSha256": "9750b616b0f45da943dd8fb43da55ab6b4008586e8d2bc2b7f88318e12fe4dc7",
+    "panorama": "panorama/scripts/inspect.vts_c",
+    "panoramaReadableSha256": "51fedd21906b65e351dad2b5e1e17540199dc513e336f07e6f055c4bab772ac1",
+    "selection": "m_CameraSettingsPerWeapon and SetItemCameraByWeaponType; secondary falls back to cam_0, SMG to cam_2, other guns to cam_3",
+    "framingAdaptation": "Authored camera distance and item scale; centered posed browser models retain a rotation-safe fit.",
+    "resourceSha256": "532e9eaecbe94fd25b0f7f20f06490d4e155a59d2b7a56a3136fafcd49066b0f",
+    "resourceCrc32": "50fbb079"
+  },
+  "gunItem": {
+    "origin": [1360.880615, 937.458374, 40.0],
+    "scale": 1.5
+  },
+  "knifeItem": {
+    "origin": [1364.0, 936.0, 40.0],
+    "scale": 1.0
+  },
+  "cameras": {
+    "0": {
+      "origin": [1354.927734375, 915.2418212890625, 40.29998779296875],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 23.00221717072721,
+      "itemScale": 1.5
+    },
+    "1": {
+      "origin": [1353.6339111328125, 910.411865234375, 40.29998779296875],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 28.002113242105025,
+      "itemScale": 1.5
+    },
+    "2": {
+      "origin": [1351.8221435546875, 903.650634765625, 40.29998779296875],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 35.001558961580194,
+      "itemScale": 1.5
+    },
+    "3": {
+      "origin": [1350.0108642578125, 896.8892822265625, 40.300018310546875],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 42.001103551044324,
+      "itemScale": 1.5
+    },
+    "4": {
+      "origin": [1348.19873046875, 890.127685546875, 40.29998779296875],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 49.001165877830644,
+      "itemScale": 1.5
+    },
+    "5": {
+      "origin": [1346.3873291015625, 883.3663330078125, 40.29998779296875],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 56.00084131073636,
+      "itemScale": 1.5
+    },
+    "6": {
+      "origin": [1344.5753173828125, 876.6049194335938, 40.29998779296875],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 63.000759167859776,
+      "itemScale": 1.5
+    },
+    "7": {
+      "origin": [1343.540283203125, 872.7409057617188, 40.29998779296875],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 67.00095368481402,
+      "itemScale": 1.5
+    },
+    "melee": {
+      "origin": [1355.575928, 905.128418, 40.0],
+      "verticalFov": 35.0,
+      "distanceSourceUnits": 32.00030568985096,
+      "itemScale": 1.0
+    }
+  },
+  "weaponCameras": [
+    "4",
+    "6",
+    "2",
+    "7",
+    "melee",
+    "melee",
+    "melee",
+    "0",
+    "0",
+    "4",
+    "5",
+    "2",
+    "0",
+    "0",
+    "0",
+    "2",
+    "0",
+    "2",
+    "2",
+    "4",
+    "3",
+    "3",
+    "4",
+    "6",
+    "5",
+    "5",
+    "2",
+    "2",
+    "3",
+    "3",
+    "2",
+    "3",
+    "4",
+    "3",
+    "3",
+    "6",
+    "5",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee",
+    "melee"
+  ]
+}
