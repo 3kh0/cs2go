@@ -17,6 +17,9 @@
 !packages/assets/public/models/maps/dust2-physics.glb.gz
 !packages/assets/public/models/maps/dust2-nav.json
 !packages/assets/public/models/maps/dust2-bomb.bin.gz
+!packages/assets/public/models/maps/mirage-physics.glb.gz
+!packages/assets/public/models/maps/mirage-nav.json
+!packages/assets/public/models/maps/mirage-bomb.bin.gz
 !packages/protocol/
 !packages/protocol/**
 !packages/simulation/
