@@ -1,0 +1,310 @@
+{
+  "gradient": {
+    "distance": [
+      1000.0,
+      25000.0,
+      1.5
+    ],
+    "color": [
+      0.43137254901960786,
+      0.5333333333333333,
+      0.6274509803921569
+    ],
+    "strength": 1.0,
+    "opacity": 1.0
+  },
+  "cube": {
+    "distance": [
+      256.0,
+      17636.199219,
+      1.4
+    ],
+    "opacity": 1.0,
+    "lodBias": 0.5,
+    "exposure": 4.0,
+    "angles": [
+      0.0,
+      115.999954,
+      0.0
+    ],
+    "texture": {
+      "resource": "materials/de_cache/sky/de_cache_sky_001_exr_c98347d7.vtex",
+      "sourceSha256": "dba457d4c6f5177633afb9607ca5253a057669be75ac0df9f2c7af756e0a17b0",
+      "width": 1024,
+      "height": 1024,
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 6291456,
+          "sha256": "a00bf19512d28327e919944c9061771f2dbd7d3e432b45167d9c2b8cd60b1414"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1572864,
+          "sha256": "a3ebf3cc0367ba0d51d8bdc081d782587e56c80c24fb353165abc0a8e53de852"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 393216,
+          "sha256": "e7c5a5f7aec0b1bff0e5125d79ff4fa40c1079c30c09a3465c588f62e6fca1ee"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 98304,
+          "sha256": "1ad8e0a0c27c164445ed9ba53ee625eb9ff3a9a92ba6d49c4523973da569dbd7"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 24576,
+          "sha256": "3d62093accf6ead1f0662d803bcc33a944cfcba1d56e9c53fe9fcbab9ae298fa"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 6144,
+          "sha256": "2b5b8e990ee7d8c7b0435ca862d3175fcd86d5b7df07b133243924bbc0fb0d6e"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1536,
+          "sha256": "6c7cc00046e0cae46f38b212b61b6313a3e91419f1798d12440cd6d5efc3cba9"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 384,
+          "sha256": "8f6bad4b8789acd2347d84b50375282d9b4d13c65abda5ff9de21a0b29aea02c"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 96,
+          "sha256": "e9b29fed219f87647abb98ed738f6eaf1226a249a45df6cd34653d66aec4bf2e"
+        }
+      ],
+      "nativeFlags": 16,
+      "sourceFormat": 19,
+      "transportCompression": 1,
+      "format": "BC6H",
+      "file": "sky-cube-bc6h.bin.gz",
+      "gpuBytes": 8388576,
+      "gpuSha256": "77cbd66c36431a84f365eb758deb3c27b24a3010573f8d09b75cc729addab325",
+      "fallbackFile": "sky-cube-rgba16f.bin.gz",
+      "fallbackBytes": 67108608,
+      "fallbackSha256": "5f3c159c040bc502d6fcc80ebdcc3d5c4d4e458ae7b0934927804d7fe6833609",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 50331648,
+          "sha256": "4909621ccb1cb54667af61db37bf062310bbe2285423917d2b60575a1cbd29f7"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 12582912,
+          "sha256": "04795c78077a26d393d4f52157fe0b9ab91bd51723b2166a0b75a24b281a4969"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 3145728,
+          "sha256": "00602c9f990aa5599601f369aeae905d6adeeda0c293246300d88397630d5daf"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 786432,
+          "sha256": "8e26639ddc296152ee8547b30c5e5f268dbf64b91f6e1cc081a4cf1c834438d4"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 196608,
+          "sha256": "9ed858f5da6a9b931a6349aefa507521605c1b9c42895861ac9d3a56a0d882f8"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 49152,
+          "sha256": "4a0132aa4e62cf0e64a3971fdf050f6808e6128004ab4694473245d3f0972d36"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 12288,
+          "sha256": "d52ad992865f53c04fb13aa81729cdd86220bdb4fae2841a913296264e7df954"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 3072,
+          "sha256": "a9d78bb1e86e9686cc398d0473c74cfcf7ce9365c065aeae0f2aa126e0658d13"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 768,
+          "sha256": "b1844bf60504c9e80ce6d78cbc1f3a3cb524d75aa59445bc606651db44f2b9e2"
+        }
+      ],
+      "faceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "nativeDecodeManifestSha256": "f25f7d80950abb5775955aef183cc84a206a77b706dc11360fc1c0cde8ea403d",
+      "nativeDecodeVerification": {
+        "allFacesExactHalf": true,
+        "alphaOne": true,
+        "finiteNonnegative": true,
+        "native2DControls": [
+          {
+            "mip": 1,
+            "face": 3,
+            "exactByteMatch": true,
+            "detectsHorizontalAndVerticalFlip": true,
+            "detectsTransposeAndRBSwap": true,
+            "allSixFacesDistinct": true,
+            "sha256": "7ab59cc84c155cb489ab749b08c03d0af9df93a22f358d0efeeadf56e93068ae",
+            "sample37x91": [
+              0.10009765625,
+              0.1357421875,
+              0.173583984375,
+              1.0
+            ],
+            "sample91x37": [
+              0.11572265625,
+              0.13671875,
+              0.1556396484375,
+              1.0
+            ]
+          },
+          {
+            "mip": 2,
+            "face": 4,
+            "exactByteMatch": true,
+            "detectsHorizontalAndVerticalFlip": true,
+            "detectsTransposeAndRBSwap": true,
+            "allSixFacesDistinct": true,
+            "sha256": "d967bfa125f974ea49897befc0d4e27e754f40bc2cbe08b2936659e444c0b018",
+            "sample37x91": [
+              0.2125244140625,
+              0.265380859375,
+              0.312744140625,
+              1.0
+            ],
+            "sample91x37": [
+              0.2081298828125,
+              0.25341796875,
+              0.29296875,
+              1.0
+            ]
+          }
+        ],
+        "originalSourceUnchanged": true
+      },
+      "qualification": "Exact original native BC6H faces/mips and independently decoded source-worker HDR fallback preserved with per-face checksums; no flips/resampling/synthesized mips."
+    },
+    "height": [
+      1900.0,
+      6285.720215,
+      1.0
+    ]
+  },
+  "disabledMaterials": [],
+  "source": {
+    "entitiesSha256": "6c36fe696a0a39f78dc656fa72cc2e7679a72387a1da560ce2563943ff5863a1",
+    "gradientEntity": {
+      "farz": -1.0,
+      "fadetime": 1.0,
+      "fogverticalexponent": 1.5,
+      "fogendheight": 40000.0,
+      "fogstartheight": 1600.0,
+      "heightfog": false,
+      "fogfalloffexponent": 1.5,
+      "fogend": 25000.0,
+      "fogstart": 1000.0,
+      "fogmaxopacity": 1.0,
+      "fogstrength": 1.0,
+      "fogcolor": [
+        110,
+        136,
+        160
+      ],
+      "StartDisabled": false,
+      "targetname": "",
+      "vscripts": "",
+      "classname": "env_gradient_fog",
+      "compile_source_id": 2183,
+      "origin": [
+        1986.867188,
+        16.230392,
+        1756.0
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "106210:596:149"
+    },
+    "cubeEntity": {
+      "targetname": "",
+      "vscripts": "",
+      "StartDisabled": false,
+      "cubemapfogsource": "1",
+      "cubemapfogskyentity": "[PR#]106210_sky",
+      "cubemapfogskymaterial": "",
+      "cubemapfoglodbiase": 0.5,
+      "cubemapfogstartdistance": 256.0,
+      "cubemapfogenddistance": 17636.199219,
+      "cubemapfogfalloffexponent": 1.4,
+      "cubemapheightfog": true,
+      "cubemapfogheightstart": 1900.0,
+      "cubemapfogheightend": 6285.720215,
+      "cubemapfogheightexponent": 1.0,
+      "cubemapfogmaxopacity": 1.0,
+      "classname": "env_cubemap_fog",
+      "compile_source_id": 2182,
+      "origin": [
+        1986.867188,
+        3.104797,
+        1692.0
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "106210:596:2"
+    },
+    "skyMaterial": "materials/de_cache/sky/de_cache_sky_001.vmat",
+    "skyMaterialSha256": "2a54ab27dda798cd3c9eab0f02c074b2ba5425cccd71cf478d252c7662d3048a",
+    "textureSourceSha256": "dba457d4c6f5177633afb9607ca5253a057669be75ac0df9f2c7af756e0a17b0",
+    "nativeShader": "csgo_complex PS5124/d4 fog SPV SHA256 3c1aeb5dc442a50d9adca7375752ebdedbacf8d67786d4b43b6dbe02be14acb8",
+    "shaderMath": "Strict AND3D distance/height gates; gradient before cube; LOD density before opacity; separate brightness",
+    "hostPackingQualification": "Authored entity ranges preserved; finite neutral disabled-height, color32 normalization, selected sky source/yaw/brightness/LOD-bias binding follow pinned renderer adaptation. Actual native engine uploads have not been captured. No volumetric fog reconstruction.",
+    "fallbackStatus": "Complete: all authored native face/mips independently decoded to exact RGBA16F; original compressed bytes/source SHA verified locally",
+    "nativeDecodeManifestSha256": "f25f7d80950abb5775955aef183cc84a206a77b706dc11360fc1c0cde8ea403d"
+  }
+}
