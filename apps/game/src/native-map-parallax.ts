@@ -7,6 +7,10 @@ import { loadSourceMaterialBundle } from "./source-layers";
 import { applySourceSurface, loadSourceSurfaceLookup } from "./source-surface";
 import { sourceCubeSampling } from "./source-reflections";
 import { registerSurfaceTextures } from "./presentation-settings";
+import {
+  createEnvironmentTextureBanks,
+  type EnvironmentTextureBanks,
+} from "./native-environment-textures";
 
 export interface SourceParallaxMaterial {
   shader: string;
@@ -73,6 +77,30 @@ export function createParallaxTextureBindings(
     bindings.set(native, texture);
   }
   return bindings;
+}
+
+/** Original native mip bytes share an array only when the actual sampler views
+ * have identical format, dimensions, color space, wrap/filter and anisotropy.
+ * AO remains Repeat even when the material's UserConfig masks are clamped. */
+export function createParallaxTextureBanks(
+  materials: ReadonlyMap<SourceParallaxMaterial, ReadonlyMap<string, T.Texture>>,
+  maxLayers: number,
+) {
+  const views = new Map<string, T.Texture>();
+  for (const [source, textures] of materials)
+    for (const [native, texture] of textures) {
+      const key = `${source.textures[native]}:${texture.wrapS}:${texture.wrapT}:${texture.minFilter}:${texture.magFilter}:${texture.anisotropy}`;
+      views.set(key, texture);
+    }
+  const packed = createEnvironmentTextureBanks(views, maxLayers, [
+    T.RGBA_BPTC_Format,
+    T.RGB_S3TC_DXT1_Format,
+    T.RED_RGTC1_Format,
+    T.RED_GREEN_RGTC2_Format,
+  ]);
+  const bindings: EnvironmentTextureBanks = new Map();
+  for (const [key, bank] of packed.bindings) bindings.set(views.get(key)!.uuid, bank);
+  return { ...packed, bindings };
 }
 export function validateSourceParallax(source: SourceParallaxMaterial) {
   if (source.shader !== "csgo_simple_3layer_parallax.vfx")
@@ -151,7 +179,16 @@ export async function loadNativeMapParallax(renderer: T.WebGLRenderer, path: str
         createParallaxTextureBindings(source, bundle.textures),
       ]),
     );
-    return { ...bundle, cubes, cubeInfo: manifest.cubemaps ?? {}, lookup, materialTextures };
+    const gl = renderer.getContext() as WebGL2RenderingContext;
+    const banks = createParallaxTextureBanks(
+      materialTextures,
+      gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) as number,
+    );
+    // Map loaders already own every bundle texture, including late/aborted loads.
+    banks.arrays.forEach((texture, index) =>
+      bundle.textures.set(`parallax-bank:${index}`, texture),
+    );
+    return { ...bundle, cubes, cubeInfo: manifest.cubemaps ?? {}, lookup, materialTextures, banks };
   } catch (error) {
     for (const texture of [...bundle.textures.values(), ...cubes.values()]) texture.dispose();
     throw error;
@@ -172,6 +209,7 @@ export function applyParallaxShader(
   lookup: T.DataTexture,
   cubeSize = 1,
   cubeLastLod = Math.log2(cubeSize),
+  banks?: EnvironmentTextureBanks,
 ) {
   validateSourceParallax(source);
   const floats = source.FloatParams,
@@ -187,6 +225,9 @@ export function applyParallaxShader(
     aliases: string[] = [],
     canonical = new Map<string, string>();
   const constantReads: string[] = [];
+  const arrayDeclarations: string[] = [];
+  const arrayReads: string[] = [];
+  const boundArrays = new Map<T.Texture, string>();
   const bind = (native: string, name: string) => {
     const constant = source.constants?.[native];
     if (constant) {
@@ -200,6 +241,20 @@ export function applyParallaxShader(
     const key = source.textures[native];
     const texture = textures.get(native) ?? textures.get(key);
     if (!texture) throw new Error(`Native parallax texture missing: ${native}`);
+    const bank = banks?.get(texture.uuid);
+    if (bank) {
+      let sampler = boundArrays.get(bank.texture);
+      if (!sampler) {
+        sampler = `sourceParallaxBank${boundArrays.size}`;
+        boundArrays.set(bank.texture, sampler);
+        arrayDeclarations.push(`uniform highp sampler2DArray ${sampler};`);
+        shader.uniforms[sampler] = { value: bank.texture };
+      }
+      aliases.push(`vec4 ${name}ArrayRead(vec2 uv){return texture(${sampler},vec3(uv,${literal(bank.layer)}));}
+        vec4 ${name}ArrayRead(vec2 uv,float bias){return texture(${sampler},vec3(uv,${literal(bank.layer)}),bias);}`);
+      arrayReads.push(name);
+      return;
+    }
     const previous = canonical.get(texture.uuid);
     if (previous) {
       aliases.push(`#define ${name} ${previous}`);
@@ -233,7 +288,7 @@ export function applyParallaxShader(
       cubeCode;
   }
   shader.fragmentShader =
-    `uniform vec3 sourceParallaxTintColor;\n${samplers.length ? `uniform sampler2D ${samplers.join(",")};` : ""}\n${aliases.join("\n")}\n${cubeCode}\nvec3 sourceParallaxTransmission;\n` +
+    `uniform vec3 sourceParallaxTintColor;\n${samplers.length ? `uniform sampler2D ${samplers.join(",")};` : ""}\n${arrayDeclarations.join("\n")}\n${aliases.join("\n")}\n${cubeCode}\nvec3 sourceParallaxTransmission;\n` +
     shader.fragmentShader;
   const emissiveTint = (layer: number) =>
     vector((source.VectorParams[`g_vLayer${layer}EmissiveTint`] ?? [1, 1, 1]).slice(0, 3));
@@ -300,6 +355,11 @@ export function applyParallaxShader(
       `texture2D(${name},`,
       `${name}Constant(`,
     );
+  for (const name of arrayReads)
+    shader.fragmentShader = shader.fragmentShader.replaceAll(
+      `texture2D(${name},`,
+      `${name}ArrayRead(`,
+    );
 }
 export function applyNativeMapParallax(
   root: T.Object3D,
@@ -339,7 +399,14 @@ export function applyNativeMapParallax(
       material.depthWrite = true;
       material.alphaTest = 0;
       material.fog = source.IntParams.g_bFogEnabled !== 0;
-      registerSurfaceTextures(material, [...textures.values()]);
+      registerSurfaceTextures(material, [
+        ...textures.values(),
+        ...new Set(
+          [...textures.values()]
+            .map((texture) => bundle.banks?.bindings.get(texture.uuid)?.texture)
+            .filter((texture): texture is T.CompressedArrayTexture => !!texture),
+        ),
+      ]);
       const previous = material.onBeforeCompile.bind(material),
         key = material.customProgramCacheKey();
       const cubeSize = bundle.cubeInfo[source.textures.g_tLayer2Cubemap]?.mips[0].width ?? 1;
@@ -355,11 +422,64 @@ export function applyNativeMapParallax(
           bundle.lookup,
           cubeSize,
           cubeLastLod,
+          bundle.banks?.bindings,
         );
       };
       material.customProgramCacheKey = () =>
-        `${key}:source-parallax:${JSON.stringify(source)}:${cubeSize}`;
+        `${key}:source-parallax:${JSON.stringify(source)}:${cubeSize}:${[...textures]
+          .map(([native, texture]) => {
+            const bank = bundle.banks?.bindings.get(texture.uuid);
+            return `${native}:${bank ? `${bank.name}:${bank.layer}` : "2d"}`;
+          })
+          .join(";")}`;
       material.needsUpdate = true;
     }
+  });
+}
+
+/** Validate actual material sampler bindings against the final scene graph.
+ * The caller supplies its resolved lighting/reflection/fog/grade/shadow slots;
+ * native material data is never discarded to fit the device. */
+export function assertNativeParallaxSamplerBudget(
+  renderer: T.WebGLRenderer,
+  bundle: Awaited<ReturnType<typeof loadNativeMapParallax>>,
+  additionalSamplers: number,
+) {
+  if (!Number.isSafeInteger(additionalSamplers) || additionalSamplers < 0)
+    throw new Error("Invalid native parallax scene sampler budget");
+  return Object.entries(bundle.materials).map(([name, source]) => {
+    const shader = {
+      uniforms: {},
+      vertexShader: T.ShaderLib.standard.vertexShader,
+      fragmentShader: T.ShaderLib.standard.fragmentShader,
+    } as T.WebGLProgramParametersWithUniforms;
+    const cube = bundle.cubeInfo[source.textures.g_tLayer2Cubemap];
+    applyParallaxShader(
+      shader,
+      source,
+      bundle.materialTextures.get(source)!,
+      bundle.cubes,
+      new T.Color(1, 1, 1),
+      bundle.lookup,
+      cube?.mips[0].width ?? 1,
+      (cube?.mips.length ?? 1) - 1,
+      bundle.banks?.bindings,
+    );
+    const materialSamplers = Object.values(shader.uniforms).filter(
+      (uniform) => uniform.value instanceof T.Texture,
+    ).length;
+    const samplers = materialSamplers + additionalSamplers;
+    if (samplers > renderer.capabilities.maxTextures)
+      throw new Error(
+        "This map requires more texture bindings than this graphics device supports.",
+        {
+          cause: {
+            nativeResource: source.nativeResource,
+            requiredSamplers: samplers,
+            maxSamplers: renderer.capabilities.maxTextures,
+          },
+        },
+      );
+    return { name, nativeResource: source.nativeResource, materialSamplers, samplers };
   });
 }

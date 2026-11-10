@@ -55,3 +55,30 @@ test("legacy environment distinct native resources and color matrices share one 
   }
   expect(result.rows[0].pixels).toEqual(result.rows[1].pixels);
 });
+
+test("native ENV authored controls resolve exactly once before AO and border equations", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const results = await page.evaluate(async () => {
+    const path = "/tests/native-environment-binding-fixture.ts";
+    return (await import(path)).renderNativeEnvironmentBindings();
+  });
+  console.log(JSON.stringify({ results, errors }));
+  expect(errors).toEqual([]);
+  for (const result of results) {
+    expect(result.error).toBe(0);
+    result.actual.forEach((value: number, i: number) =>
+      expect(value).toBeCloseTo(result.expected[i], 4),
+    );
+    if (result.output === "ao" && result.controls[1] === 0.5)
+      expect(Math.abs(result.actual[0] - result.wrongRawAO)).toBeGreaterThan(0.2);
+    if (result.output === "border") expect(result.actual[3]).toBeGreaterThan(0.01);
+  }
+});

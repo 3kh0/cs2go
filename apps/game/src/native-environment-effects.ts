@@ -1,5 +1,9 @@
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
-import { environmentBevelStrength } from "./native-environment-parameters";
+import * as T from "three";
+import {
+  environmentBevelStrength,
+  environmentAmbientOcclusionLevels,
+} from "./native-environment-parameters";
 
 const literal = (value: number) => {
   const raw = Number.isInteger(value) ? `${value}.0` : `${value}`;
@@ -13,8 +17,15 @@ export function environmentEffects(source: SourceEnvironmentMaterial, unitScale 
     const authored = source.FloatParams[name] ?? fallback;
     return literal(name === "g_flBevelStrength2" ? environmentBevelStrength(authored) : authored);
   };
-  const v = (name: string, fallback: number[]) =>
-    `vec${fallback.length}(${(source.VectorParams[name] ?? fallback).slice(0, fallback.length).map(literal).join(",")})`;
+  const v = (name: string, fallback: number[]) => {
+    const authored = (source.VectorParams[name] ?? fallback).slice(0, fallback.length);
+    const resolved = /^g_vAmbientOcclusionLevels[123]$/.test(name)
+      ? environmentAmbientOcclusionLevels(authored)
+      : name === "g_vBorderTint2"
+        ? new T.Color().setRGB(authored[0], authored[1], authored[2], T.SRGBColorSpace).toArray()
+        : authored;
+    return `vec${fallback.length}(${resolved.map(literal).join(",")})`;
+  };
   const borderMode = source.IntParams.F_BORDER_BLEND_MODE_2 ?? 0;
   if (
     borderMode !== 0 ||

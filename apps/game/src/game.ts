@@ -1,3 +1,4 @@
+import { prepareShadersBounded, finishPreparedPrograms } from "./shader-preparation";
 import { groundSpawn } from "@cs2go/simulation/spawn-position";
 import { sourceVerticalFov, sourceZoomRatio } from "./source-camera";
 import { MapHazards, BombReset, supportedBombPosition } from "@cs2go/simulation/map-hazards";
@@ -1490,58 +1491,106 @@ export class Game {
     signal?.throwIfAborted();
     if (!this.dust) return;
     const preparedWorld = this.dust;
-    const extras = new T.Group(),
-      viewExtras = new T.Group();
     let tracer = this.tracers[0];
     if (!tracer) {
       tracer = createTracer();
       this.tracers.push(tracer);
+      // Normal ownership registration, once. Existing tracers never reparent.
+      tracer.mesh.visible = false;
+      this.scene.add(tracer.mesh);
     }
     const warmTracer = tracer.mesh;
-    warmTracer.visible = true;
-    extras.add(createWorldGun(0), createWorldGun(1), warmTracer);
-    for (let index = 0; index < weapons.length; index++)
-      if (this.viewGun(index) !== this.gun) viewExtras.add(this.viewGun(index));
-    this.scene.add(extras);
-    this.view.add(viewExtras);
+    const worldExtras = [createWorldGun(0), createWorldGun(1)];
+    const viewExtras: T.Object3D[] = [];
+    for (let index = 0; index < weapons.length; index++) {
+      const gun = this.viewGun(index);
+      if (gun !== this.gun) viewExtras.push(gun);
+    }
     this.updateGraphics();
+    // These roots previously inherited this setup through temporary parenting.
+    applyShadowDetail(worldExtras, this.settings, this.renderer.capabilities.maxTextureSize);
     applyTextureQuality(
-      [this.scene, this.view, this.homeScene.graphicsRoot],
+      [this.scene, this.view, ...worldExtras, ...viewExtras, this.homeScene.graphicsRoot],
       this.settings.textureQuality,
       this.renderer.capabilities.getMaxAnisotropy(),
       this.settings.textureFiltering,
     );
-    const dust = this.dust.root.visible,
-      bomb = this.bombView.visible,
-      defuse = this.defuseView.visible,
-      healthshot = this.healthshotView.visible,
-      previousToneMapping = this.renderer.toneMapping;
     const textures = new Set<T.Texture>();
     let foliage: Promise<unknown> | undefined;
-    try {
-      this.dust.root.visible = true;
-      this.renderer.toneMapping = T.CustomToneMapping;
-      this.prepareMapFrame(() => this.renderer.compile(this.scene, this.camera));
-      this.prepareMapFrame(() => {
-        foliage = preparedWorld.nativeCoverage?.prepare(this.camera);
-      });
-      this.bombView.visible = true;
-      this.defuseView.visible = true;
-      if (this.mode === "deathmatch" && this.healthshotView.ready) {
-        this.healthshotView.visible = true;
-        this.healthshotView.sample(
-          "idle",
-          0,
-          this.team,
-          gloveChoices[this.team],
-          selectedAgentId(this.team),
-        );
-        this.updateViewLighting(this.healthshotView, 1 / 60);
+    const guardWorld = () => {
+      signal?.throwIfAborted();
+      if (this.dust !== preparedWorld) throw new Error("Map changed during graphics preparation");
+      if (this.renderer.getContext().isContextLost())
+        throw new Error("Graphics context lost during preparation");
+    };
+    // No altered visibility, tone mapping, or framebuffer state spans an await.
+    const scoped = (view: boolean, work: () => void) => {
+      guardWorld();
+      const dust = preparedWorld.root.visible,
+        bomb = this.bombView.visible,
+        defuse = this.defuseView.visible,
+        healthshot = this.healthshotView.visible,
+        tracerVisible = warmTracer.visible,
+        tone = this.renderer.toneMapping;
+      try {
+        preparedWorld.root.visible = true;
+        warmTracer.visible = true;
+        this.renderer.toneMapping = T.CustomToneMapping;
+        if (view) {
+          this.bombView.visible = true;
+          this.defuseView.visible = true;
+          if (this.mode === "deathmatch" && this.healthshotView.ready)
+            this.healthshotView.visible = true;
+        }
+        this.prepareMapFrame(work);
+      } finally {
+        preparedWorld.root.visible = dust;
+        this.bombView.visible = bomb;
+        this.defuseView.visible = defuse;
+        this.healthshotView.visible = healthshot;
+        warmTracer.visible = tracerVisible;
+        this.renderer.toneMapping = tone;
       }
-      this.prepareMapFrame(() => this.renderer.compile(this.view, this.viewCamera));
-      for (const uniform of Object.values(warmTracer.material.uniforms))
-        if (uniform.value instanceof T.Texture) textures.add(uniform.value);
-      for (const root of [this.scene, this.view])
+    };
+    await prepareShadersBounded(
+      this.renderer,
+      [this.scene, ...worldExtras],
+      this.camera,
+      this.scene,
+      {
+        signal,
+        scope: (work) => scoped(false, work),
+      },
+    );
+    scoped(false, () => {
+      foliage = preparedWorld.nativeCoverage?.prepare(this.camera);
+    });
+    // Attach rejection immediately while the original upload/view sequence runs.
+    void foliage?.catch(() => {});
+    if (this.mode === "deathmatch" && this.healthshotView.ready) {
+      this.healthshotView.sample(
+        "idle",
+        0,
+        this.team,
+        gloveChoices[this.team],
+        selectedAgentId(this.team),
+      );
+      this.updateViewLighting(this.healthshotView, 1 / 60);
+    }
+    await prepareShadersBounded(
+      this.renderer,
+      [this.view, ...viewExtras],
+      this.viewCamera,
+      this.view,
+      {
+        signal,
+        scope: (work) => scoped(true, work),
+      },
+    );
+    for (const uniform of Object.values(warmTracer.material.uniforms))
+      if (uniform.value instanceof T.Texture) textures.add(uniform.value);
+    const collectTextures = (roots: T.Object3D[]) => {
+      for (const root of roots)
         root.traverseVisible((object) => {
           if (!(object instanceof T.Mesh)) return;
           for (const material of Array.isArray(object.material)
@@ -1550,58 +1599,42 @@ export class Game {
             for (const value of Object.values(material))
               if (value instanceof T.Texture) textures.add(value);
         });
-    } finally {
-      this.dust.root.visible = dust;
-      this.bombView.visible = bomb;
-      this.defuseView.visible = defuse;
-      this.healthshotView.visible = healthshot;
-      this.renderer.toneMapping = previousToneMapping;
-      this.scene.remove(extras);
-      viewExtras.clear();
-      this.view.remove(viewExtras);
-      warmTracer.visible = false;
-      this.scene.add(warmTracer);
-    }
+    };
+    scoped(true, () => {
+      collectTextures([this.scene, this.view]);
+      if (this.scene.visible) collectTextures(worldExtras);
+      if (this.view.visible) collectTextures(viewExtras);
+    });
     // Yield between uploads so input/painting can run during GPU warm-up.
     let uploaded = 0;
     let uploadSlice = performance.now();
     for (const texture of textures) {
-      signal?.throwIfAborted();
+      guardWorld();
       this.renderer.initTexture(texture);
       if (++uploaded % 8 === 0 || performance.now() - uploadSlice >= 8) {
         await new Promise((resolve) => setTimeout(resolve, 0));
         uploadSlice = performance.now();
       }
     }
+    guardWorld();
     await foliage;
+    guardWorld();
     if (!this.assetsReady) await this.homeScene.prepare(this.renderer);
-    await warmSourceSky(this.dust.skybox, signal);
+    guardWorld();
+    await warmSourceSky(preparedWorld.skybox, signal);
+    guardWorld();
     let effects: Promise<void> | undefined;
     this.prepareMapFrame(() => {
       effects = preparedWorld.nativeEffects?.prepare(this.camera);
     });
     await effects;
+    guardWorld();
     await this.finishPrograms(signal);
   }
   // Let drivers link in parallel, then take each program's first use (uniform
   // lookup) now rather than when an agent or weapon first comes into view.
   async finishPrograms(signal?: AbortSignal) {
-    const parallel = this.renderer.extensions.has("KHR_parallel_shader_compile"),
-      pending = new Set(this.renderer.info.programs ?? []);
-    while (pending.size) {
-      signal?.throwIfAborted();
-      if (this.renderer.getContext().isContextLost())
-        throw new Error("Graphics context lost during preparation");
-      for (const program of pending)
-        if (!parallel || (program as T.WebGLProgram & { isReady(): boolean }).isReady()) {
-          program.getUniforms();
-          const gl = this.renderer.getContext();
-          if (!gl.getProgramParameter(program.program as WebGLProgram, gl.LINK_STATUS))
-            throw new Error("A graphics shader could not compile during preparation");
-          pending.delete(program);
-        }
-      if (pending.size) await new Promise((resolve) => setTimeout(resolve, 10));
-    }
+    await finishPreparedPrograms(this.renderer, this.renderer.info.programs ?? [], signal);
   }
   prepareMatchFrame() {
     this.updateAimCamera(1);

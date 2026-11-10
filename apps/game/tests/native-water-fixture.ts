@@ -1,10 +1,13 @@
 import * as T from "three";
-import { applyNativeMapWater } from "../src/native-map-water";
+import { applyNativeMapWater, type loadNativeMapWater } from "../src/native-map-water";
 import { SmokeComposite, SmokeRenderer, registerSceneDepthMaterial } from "../src/smoke-renderer";
 import { activateNativeMapGrade, gradeNativeMapColors } from "../src/native-map-color";
 import { nativeWaterSource } from "./native-water-source-fixture";
-export function renderNativeWater() {
-  const renderer = new T.WebGLRenderer({ antialias: false });
+export function renderNativeWater(
+  source = nativeWaterSource,
+  supplied?: { renderer: T.WebGLRenderer; bundle: Awaited<ReturnType<typeof loadNativeMapWater>> },
+) {
+  const renderer = supplied?.renderer ?? new T.WebGLRenderer({ antialias: false });
   renderer.setSize(64, 64);
   renderer.setViewport(8, 8, 48, 48);
   renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -18,7 +21,7 @@ export function renderNativeWater() {
   const group = new T.Group();
   scene.add(group);
   const waterMaterial = new T.MeshStandardMaterial();
-  waterMaterial.name = "nuke_water";
+  waterMaterial.name = supplied ? "inferno_fountain" : "nuke_water";
   const water = new T.Mesh(new T.PlaneGeometry(6, 6), waterMaterial);
   water.rotation.x = -Math.PI / 2;
   group.add(water);
@@ -44,19 +47,21 @@ export function renderNativeWater() {
   const sun = new T.DirectionalLight(0xffffff, 0.5);
   sun.position.set(1, 2, 1);
   scene.add(sun, new T.HemisphereLight(0xffffff, 0xffffff, 0.4));
-  const textures = new Map<string, T.Texture>();
-  for (const [name, data] of [
-    ["g_tDebris", [128, 128, 128, 128]],
-    ["g_tDebrisNormal", [128, 128, 255, 255]],
-    ["g_tFoam", [128, 128, 0, 255]],
-    ["g_tWavesNormalHeight", [112, 148, 140, 255]],
-  ] as const) {
-    const texture = new T.DataTexture(new Uint8Array(data), 1, 1);
-    texture.needsUpdate = true;
-    textures.set(name, texture);
-  }
+  const textures = supplied?.bundle.textures ?? new Map<string, T.Texture>();
+  if (!supplied)
+    for (const [name, data] of [
+      ["g_tDebris", [128, 128, 128, 128]],
+      ["g_tDebrisNormal", [128, 128, 255, 255]],
+      ["g_tFoam", [128, 128, 0, 255]],
+      ["g_tWavesNormalHeight", [112, 148, 140, 255]],
+    ] as const) {
+      const texture = new T.DataTexture(new Uint8Array(data), 1, 1);
+      texture.needsUpdate = true;
+      textures.set(name, texture);
+    }
   const native = applyNativeMapWater(group, {
-    materials: { nuke_water: nativeWaterSource },
+    materials: { [waterMaterial.name]: source },
+    banks: supplied?.bundle.banks,
     textures,
   });
   const fxMaterial = new T.ShaderMaterial({

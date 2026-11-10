@@ -17,6 +17,7 @@ import {
 import { createEnvironmentDepthHook, validateEnvironmentAlpha } from "./native-environment-alpha";
 import { registerSourceDepth, installSourceShadowDepth } from "./source-depth";
 import { environmentEffects } from "./native-environment-effects";
+import { environmentAmbientOcclusionLevels } from "./native-environment-parameters";
 import { loadSourceMaterialBundle } from "./source-layers";
 import { applySourceSurface, loadSourceSurfaceLookup } from "./source-surface";
 import { registerSurfaceTextures } from "./presentation-settings";
@@ -427,15 +428,15 @@ export function applyEnvironmentShader(
     vec4 environmentColor=vec4(mix(overlaid,color2.rgb,weights.y*${number(scalar(source, "g_flColorReplace2", 1))}),dot(vec2(color1.a,color2.a),weights));
     vec4 environmentHeight=height1*weights.x+height2*weights.y;
     vec4 environmentNormal=normal1*weights.x+normal2*weights.y;
-    vec3 environmentAoLevels=${vector(values(source, "g_vAmbientOcclusionLevels1", [0, 0.5, 1]), 3)}*weights.x+${vector(values(source, "g_vAmbientOcclusionLevels2", [0, 0.5, 1]), 3)}*weights.y;
+    vec3 environmentAoLevels=${vector(environmentAmbientOcclusionLevels(values(source, "g_vAmbientOcclusionLevels1", [0, 0.5, 1])), 3)}*weights.x+${vector(environmentAmbientOcclusionLevels(values(source, "g_vAmbientOcclusionLevels2", [0, 0.5, 1])), 3)}*weights.y;
   `
-      : `vec4 environmentColor=color1,environmentHeight=height1,environmentNormal=normal1;vec3 environmentAoLevels=${vector(values(source, "g_vAmbientOcclusionLevels1", [0, 0.5, 1]), 3)};`;
+      : `vec4 environmentColor=color1,environmentHeight=height1,environmentNormal=normal1;vec3 environmentAoLevels=${vector(environmentAmbientOcclusionLevels(values(source, "g_vAmbientOcclusionLevels1", [0, 0.5, 1])), 3)};`;
   shader.fragmentShader = shader.fragmentShader
     .replace(
       "#include <map_fragment>",
       `${overlayCode}\n${layerCode(source, 1, layers === 2)}\n${layers === 2 ? layerCode(source, 2, true) : ""}\n${blendCode}
     diffuseColor.rgb=environmentColor.rgb;
-    ${effects?.ao ?? "float environmentAO=mix(environmentAoLevels.x,environmentAoLevels.z,pow(max(environmentColor.a,0.0),max(environmentAoLevels.y,0.001)));"}
+    ${effects?.ao ?? "float environmentAO=clamp(mix(environmentAoLevels.x,environmentAoLevels.z,pow(max(environmentColor.a,0.0),max(environmentAoLevels.y,0.001))),0.0,1.0);"}
   `,
     )
     .replace("#include <color_fragment>", "")

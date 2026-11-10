@@ -113,5 +113,6 @@ test("native foliage own-source coordinates survive baked rotated scale16 placem
   expect(errors).toEqual([]);
   expect(result.glError).toBe(0);
   expect(result.bakedDifference).toBeLessThan(10);
+  expect(result.instanceDifference).toBe(0);
   expect(result.wrongFrameDifference).toBeGreaterThan(20);
 });

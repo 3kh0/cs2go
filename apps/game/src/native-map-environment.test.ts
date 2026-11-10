@@ -260,3 +260,36 @@ test("alpha depth refuses unresolved instance-scale gate instead of applying too
   native.IntParams.g_nScaleTexCoordUByModelScaleAxis = 2;
   expect(() => validateSourceEnvironment(native)).toThrow("unresolved engine gate");
 });
+
+test("native branched layers retain gradients captured before divergent weight evaluation", async () => {
+  const { applyModernEnvironmentShader } = await import("./native-modern-environment");
+  const native = source(),
+    texture = new T.DataTexture(new Uint8Array([128, 128, 128, 255]), 1, 1),
+    lookup = new T.DataTexture();
+  native.IntParams.F_SHARED_COLOR_OVERLAY = 0;
+  const shader = {
+    uniforms: {},
+    vertexShader: T.ShaderLib.standard.vertexShader,
+    fragmentShader: T.ShaderLib.standard.fragmentShader,
+  } as T.WebGLProgramParametersWithUniforms;
+  applyModernEnvironmentShader(
+    shader,
+    native,
+    new Map(Object.values(native.textures).map((id) => [id, texture])),
+    undefined,
+    new T.Color(1, 1, 1),
+    lookup,
+  );
+  const branch = shader.fragmentShader.indexOf("if(environmentPaint2>0.0)");
+  expect(branch).toBeGreaterThan(0);
+  expect(shader.fragmentShader.indexOf("vec4 environmentSurfaceGradient2=")).toBeLessThan(branch);
+  // Selected native PS791:962–968,1139/1149 samples the incoming color and
+  // normal with the SAME captured gradient even when adjacent weights diverge.
+  for (const role of ["Color", "Normal"])
+    expect(shader.fragmentShader).toContain(
+      `environment${role}2GradRead(vEnvironmentUv2+vec2(length(environmentSurfaceGradient2)*1e-10),environmentSurfaceGradient2.xy,environmentSurfaceGradient2.zw)`,
+    );
+  expect(shader.fragmentShader).not.toContain("environmentNormal2Read(vEnvironmentUv2)");
+  texture.dispose();
+  lookup.dispose();
+});

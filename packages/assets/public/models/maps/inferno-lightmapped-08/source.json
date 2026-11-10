@@ -1,0 +1,361 @@
+{
+  "mapId": "inferno",
+  "scope": "main",
+  "materials": {
+    "four_inferno_main_166": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/cs_italy/black.vmat",
+      "nativeSourceSha256": "5724f2cac7f05b9ec713ab48fb6e0e1688b3405ee4c6b56fbd77dcaf364732ea",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "black",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 166,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_LAYERS": 0,
+        "F_TEXTURETRANSFORMS": 0
+      },
+      "FloatParams": {},
+      "VectorParams": {
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Color": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "textures": {
+        "g_tColor": "e3b31671d2f8559c",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "131d6db1fb456583"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "5724f2cac7f05b9ec713ab48fb6e0e1688b3405ee4c6b56fbd77dcaf364732ea",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    }
+  },
+  "textures": {
+    "e3b31671d2f8559c": {
+      "resource": "materials/cs_italy/black_vmat_g_tcolor_20638b28.vtex",
+      "sourceSha256": "e4737128f82f8aa8a0d5a33a273e11622f8816cbb29905f0d6ce21efd3738694",
+      "srgb": true,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "e3b31671d2f8559c.bin.gz",
+      "gpuBytes": 8,
+      "gpuSha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "e4737128f82f8aa8a0d5a33a273e11622f8816cbb29905f0d6ce21efd3738694",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "e3b31671d2f8559c-e4737128f8-storage.png",
+      "decodedSha256": "12fdc3c219df750e60b954c749991d7dc1aa1ab4921ace0bc397022ddcc72c35",
+      "fallbackFile": "e3b31671d2f8559c-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "20e65596fe7c15642996b35ef3054f8c93a772fc0e91f66b3174ae8ff26a2921"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "20e65596fe7c15642996b35ef3054f8c93a772fc0e91f66b3174ae8ff26a2921"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "cf0f8accdfc38e3f": {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex",
+      "sourceSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "cf0f8accdfc38e3f.bin.gz",
+      "gpuBytes": 8,
+      "gpuSha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "cf0f8accdfc38e3f-e0b83fe25f-storage.png",
+      "decodedSha256": "6f73ba3cfd6e5314cb9235533c7c90d87f1f7bd19625cef96ae888724ca45007",
+      "fallbackFile": "cf0f8accdfc38e3f-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "131d6db1fb456583": {
+      "resource": "materials/default/default_normal_tga_7be39f77.vtex",
+      "sourceSha256": "7b4d56b63404963ca56ec26ce49ebf938e4e33154e95df875a9c1c4d40f76655",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        0.960784375667572
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "131d6db1fb456583.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "3a333237000cc3ccb9785324e72a049035c8e9d6a780be7d1e45d81bdbc9b450",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "3a333237000cc3ccb9785324e72a049035c8e9d6a780be7d1e45d81bdbc9b450"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "7b4d56b63404963ca56ec26ce49ebf938e4e33154e95df875a9c1c4d40f76655",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "131d6db1fb456583-7b4d56b634-storage.png",
+      "decodedSha256": "ae688360067a51b39370b15df8c8688274799b8531d3b7eedcbef5c9a5e0174d",
+      "fallbackFile": "131d6db1fb456583-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "a7ad1206c1f238ff0c99d14bdf0bb579692d070c548693a0637aa31358eab3cf"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "a7ad1206c1f238ff0c99d14bdf0bb579692d070c548693a0637aa31358eab3cf"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        0.9607843137254902,
+        1.0
+      ]
+    }
+  },
+  "source": {
+    "nativeRawPacketSHA": "5c18120aa9ccc9733bbd5eaa9331d472fd7429b110e70d04e6921f056533ea09",
+    "nativeRawManifestSHA": "36a2390679b1fc2df02e556c359c1b030a827d515f0da986cc18ea0bdea1277e",
+    "sourceTintAuditSHA": "23b9fdad09d152d975803fafbed5a57f8f61379f920710a938a2b452b452bad1",
+    "resolvedSourcePlanSHA": "c312955f615cab149a8c96ed82dfe2c6eabd3445df8d999e0b57712040ace212",
+    "packedGeometrySha256": "16f7cf17cb4491b868f658d7bfbff979f41494ecea6fe43e725849ac9958c7db",
+    "qualification": "Selected native color/state/default/texture/compiler proof, source typed tint inputs; no captured private host view/tint packing/screenAO/stencil/pass scheduling. Original mip0/allmips and exact stored RGBA fallback, no resized images; inherited shadow caster policy remains qualified."
+  }
+}

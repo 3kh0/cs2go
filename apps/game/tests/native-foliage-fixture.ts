@@ -373,7 +373,7 @@ export function renderNativeFoliageFrameControl(
   camera.position.set(0, 0, 4).applyMatrix4(placement);
   camera.lookAt(new T.Vector3().applyMatrix4(placement));
   const pictures: Uint8Array[] = [];
-  for (const kind of ["posed", "baked", "wrong-frame"]) {
+  for (const kind of ["posed", "baked", "wrong-frame", "instanced"]) {
     const scene = new T.Scene(),
       root = new T.Group();
     scene.add(root);
@@ -387,13 +387,21 @@ export function renderNativeFoliageFrameControl(
         4,
       ),
     );
-    if (kind !== "posed") geometry.applyMatrix4(placement);
+    if (kind !== "posed" && kind !== "instanced") geometry.applyMatrix4(placement);
     const material = new T.MeshStandardMaterial();
     material.name = "leaf";
-    const mesh = new T.Mesh(geometry, material);
+    const mesh =
+      kind === "instanced"
+        ? new T.InstancedMesh(geometry, material, 1)
+        : new T.Mesh(geometry, material);
+    if (mesh instanceof T.InstancedMesh) {
+      mesh.setMatrixAt(0, placement);
+      mesh.instanceMatrix.needsUpdate = true;
+    }
     if (kind === "posed") {
       mesh.matrix.copy(placement);
       mesh.matrixAutoUpdate = false;
+      mesh.matrixWorldNeedsUpdate = true;
     }
     root.add(mesh);
     const noiseBytes = new Uint8Array(32);
@@ -447,6 +455,7 @@ export function renderNativeFoliageFrameControl(
       );
     pictures.push(bytes);
     view.dispose();
+    if (mesh instanceof T.InstancedMesh) mesh.dispose();
     mesh.customDepthMaterial?.dispose();
     mesh.customDistanceMaterial?.dispose();
     geometry.dispose();
@@ -459,6 +468,7 @@ export function renderNativeFoliageFrameControl(
   const result = {
     bakedDifference: diff(pictures[0], pictures[1]),
     wrongFrameDifference: diff(pictures[0], pictures[2]),
+    instanceDifference: diff(pictures[0], pictures[3]),
     glError: renderer.getContext().getError(),
   };
   renderer.dispose();

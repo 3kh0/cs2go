@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import * as T from "three";
+import { createEnvironmentWorldFrame } from "./native-environment-frame";
 import {
   applyNativeMapFoliage,
   validateNativeFoliageMaterial,
@@ -133,4 +134,130 @@ it("shares one owned coverage material across source instances and preserves no-
   view.dispose();
   expect(depthDisposals).toBe(1);
   expect(geometryDisposals).toBe(0);
+});
+
+it("alpha coverage preserves Source camera distance under translated rotated sky scale", () => {
+  for (const scale of [1, 16]) {
+    const definition = source();
+    definition.FloatParams.g_flAlphaBoostDistance = 20000;
+    definition.IntParams.F_USE_ALBEDO_FOR_TRANSMISSIVE = 1;
+    definition.textures = { g_tColor: "color", g_tNormal: "normal", g_tAmbientOcclusion: "ao" };
+    const placement = new T.Matrix4().compose(
+      new T.Vector3(11, -3, 7),
+      new T.Quaternion().setFromEuler(new T.Euler(0.1, 0.7, -0.2)),
+      new T.Vector3(scale, scale, scale),
+    );
+    const root = new T.Group(),
+      geometry = new T.PlaneGeometry();
+    geometry.computeTangents();
+    geometry.setAttribute("color", new T.Float32BufferAttribute(new Float32Array(16).fill(1), 4));
+    const material = new T.MeshStandardMaterial();
+    material.name = "leaf";
+    root.add(new T.Mesh(geometry, material));
+    const noise = new T.Data3DTexture(new Uint8Array(32), 2, 2, 2);
+    noise.colorSpace = T.NoColorSpace;
+    const textures = new Map(
+      ["color", "normal", "ao"].map((key) => [key, new T.DataTexture(new Uint8Array(4), 1, 1)]),
+    );
+    const lookup = new T.DataTexture(new Uint8Array(4), 1, 1);
+    const view = applyNativeMapFoliage(
+      root,
+      {
+        materials: { leaf: definition },
+        textures,
+        noise,
+        lookup,
+        source: {
+          model: "controlled",
+          noise: "controlled",
+        },
+      },
+      {
+        sourceWorldFrame: createEnvironmentWorldFrame(placement.clone().invert()),
+        windState: { direction: [1, 0, 0], strength: 0, timeSeconds: 0 },
+      },
+    );
+    const depth = (view.depthScene.children[0] as T.Mesh).material as T.MeshDepthMaterial;
+    const shader = {
+      uniforms: {},
+      vertexShader: T.ShaderLib.depth.vertexShader,
+      fragmentShader: T.ShaderLib.depth.fragmentShader,
+    } as T.WebGLProgramParametersWithUniforms;
+    depth.onBeforeCompile(shader, {} as T.WebGLRenderer);
+    const sourceEye = new T.Vector3(0, 0, 1200),
+      sourcePoint = new T.Vector3(0, 0, 0);
+    const browserEye = sourceEye.clone().multiplyScalar(0.0254).applyMatrix4(placement),
+      browserPoint = sourcePoint.clone().multiplyScalar(0.0254).applyMatrix4(placement);
+    const nativeFraction = sourceEye.distanceTo(sourcePoint) / 20000;
+    expect(
+      browserEye.distanceTo(browserPoint) /
+        (shader.uniforms.nativeFoliageCoverage.value as T.Vector4).w,
+    ).toBeCloseTo(nativeFraction, 12);
+    expect(browserEye.distanceTo(browserPoint) / 20000).not.toBeCloseTo(nativeFraction, 3);
+    view.dispose();
+    geometry.dispose();
+    material.dispose();
+    noise.dispose();
+    lookup.dispose();
+    for (const t of textures.values()) t.dispose();
+  }
+});
+
+it("instanced coverage shares exact matrix bytes with independent ownership and follows source count bounds", () => {
+  const definition = source();
+  definition.IntParams.F_USE_ALBEDO_FOR_TRANSMISSIVE = 1;
+  definition.textures = { g_tColor: "color", g_tNormal: "normal", g_tAmbientOcclusion: "ao" };
+  const geometry = new T.PlaneGeometry();
+  geometry.computeTangents();
+  geometry.setAttribute("color", new T.Float32BufferAttribute(new Float32Array(16).fill(1), 4));
+  const material = new T.MeshStandardMaterial();
+  material.name = "leaf";
+  const mesh = new T.InstancedMesh(geometry, material, 2);
+  mesh.setMatrixAt(0, new T.Matrix4().makeTranslation(3, 4, 5));
+  mesh.setMatrixAt(1, new T.Matrix4().makeRotationY(0.6));
+  const noise = new T.Data3DTexture(new Uint8Array(32), 2, 2, 2);
+  noise.colorSpace = T.NoColorSpace;
+  const lookup = new T.DataTexture(),
+    textures = new Map(
+      ["color", "normal", "ao"].map((k) => [k, new T.DataTexture(new Uint8Array(4), 1, 1)]),
+    );
+  const view = applyNativeMapFoliage(
+    mesh,
+    {
+      materials: { leaf: definition },
+      textures,
+      lookup,
+      noise,
+      source: { model: "unit", noise: "unit" },
+    },
+    {
+      windState: { direction: [1, 0, 0], strength: 0.1, timeSeconds: 0 },
+      instanceBounds: new Map([[mesh, new T.Sphere(new T.Vector3(3, 4, 5), 10)]]),
+    },
+  );
+  const depth = view.depthScene.children[0] as T.InstancedMesh;
+  expect(depth).toBeInstanceOf(T.InstancedMesh);
+  expect(depth.instanceMatrix).not.toBe(mesh.instanceMatrix);
+  expect(depth.instanceMatrix.array).toBe(mesh.instanceMatrix.array);
+  expect(mesh.frustumCulled).toBe(true);
+  expect(depth.frustumCulled).toBe(true);
+  mesh.count = 1;
+  mesh.instanceMatrix.needsUpdate = true;
+  view.syncDepth();
+  expect(depth.count).toBe(1);
+  expect(depth.matrix.elements).toEqual(mesh.matrixWorld.elements);
+  let sourceReleased = 0,
+    depthReleased = 0;
+  mesh.instanceMatrix.addEventListener("dispose", () => sourceReleased++);
+  depth.instanceMatrix.addEventListener("dispose", () => depthReleased++);
+  view.dispose();
+  view.dispose();
+  expect(sourceReleased).toBe(0);
+  expect(depthReleased).toBe(1);
+  mesh.dispose();
+  geometry.dispose();
+  material.dispose();
+  noise.dispose();
+  lookup.dispose();
+  for (const t of textures.values()) t.dispose();
 });

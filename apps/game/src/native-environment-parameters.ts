@@ -8,6 +8,20 @@ export function environmentBevelStrength(authored: number) {
   return Math.fround(Math.fround(authored) * Math.fround(0.01));
 }
 
+/** Native VCS g_vAmbientOcclusionLevels{1,2,3} expression. Retain its
+ * authored control encoding and literal 0x3fb8aa65, rather than an ideal log2
+ * conversion. JS log's final bits may differ from the native SIMD evaluator. */
+export function environmentAmbientOcclusionLevels(authored: readonly number[]) {
+  if (authored.length < 3 || authored.slice(0, 3).some((value) => !Number.isFinite(value)))
+    throw new Error("Invalid authored native environment AO levels");
+  const f = Math.fround;
+  return [
+    -f(authored[0]),
+    f(-f(1.4427000284194946) * f(Math.log(Math.max(f(0.0001), f(1 - f(authored[1])))))),
+    f(2 - f(authored[2])),
+  ];
+}
+
 /** Material values belong to uniforms, while native feature decisions and
  * verified texture constants remain in the generated shader. Pack scalars so
  * three-layer materials do not consume one fragment uniform vector per float. */
@@ -63,9 +77,12 @@ export class EnvironmentShaderParameters {
     fallback: number[],
     size = fallback.length,
   ) {
+    const authored = (source.VectorParams[key] ?? fallback).slice(0, size);
     return this.value(
       `vector:${key}:${size}`,
-      (source.VectorParams[key] ?? fallback).slice(0, size),
+      /^g_vAmbientOcclusionLevels[123]$/.test(key)
+        ? environmentAmbientOcclusionLevels(authored)
+        : authored,
     );
   }
 

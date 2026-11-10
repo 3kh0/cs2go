@@ -1,5 +1,10 @@
+import { nativeMapSamplerReservation } from "./native-map-sampler-budget";
 import { bindNativeMaterialAliases } from "./native-material-aliases";
-import { loadNativeMapParallax, applyNativeMapParallax } from "./native-map-parallax";
+import {
+  loadNativeMapParallax,
+  applyNativeMapParallax,
+  assertNativeParallaxSamplerBudget,
+} from "./native-map-parallax";
 import { applyNativeStaticOverlays, type NativeStaticOverlay } from "./native-static-overlay";
 import { assetFetch, assetUrl } from "./asset-url";
 import type { MapId } from "@cs2go/protocol";
@@ -333,6 +338,29 @@ async function buildNativeMap(
         })
       : undefined,
   ]);
+  const nativeParallaxSamplerBudget = parallaxMaterials
+    ? (() => {
+        const reservation = nativeMapSamplerReservation({
+          lighting: nativeLighting,
+          probes: nativeProbes,
+          reflections: nativeReflections?.volumes.some((volume) => volume.worldToLocal)
+            ? nativeReflections
+            : undefined,
+          fog: nativeFog,
+          stockEnvironmentFallback: true,
+          grade: grade ? "active" : "none",
+          sourceSunShadows: 2,
+        });
+        return {
+          reservation,
+          materials: assertNativeParallaxSamplerBudget(
+            renderer,
+            parallaxMaterials,
+            reservation.samplers,
+          ),
+        };
+      })()
+    : undefined;
   if (environmentMaterials)
     assertNativeEnvironmentBudget(renderer, environmentMaterials, {
       reflections: nativeReflections,
@@ -639,6 +667,7 @@ async function buildNativeMap(
     sourceLighting,
     nativeProbes,
     nativeReflections,
+    nativeParallaxSamplerBudget,
     grade,
     root,
     scenery: asset.scene,

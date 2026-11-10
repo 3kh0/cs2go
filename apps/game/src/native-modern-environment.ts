@@ -157,7 +157,7 @@ function tintLayer(
 ) {
   const F = (key: string, d: number) => parameters.float(s, key + layer, d);
   return `
- vec4 color${layer}=${environmentRead(s, layer, "Color", `vEnvironmentUv${layer}`, false, parameters)};
+ vec4 color${layer}=${environmentSurfaceRead(s, layer, "Color", parameters)};
  vec4 height${layer}=${environmentRead(s, layer, "Height", `vEnvironmentUv${layer}`, false, parameters)};
  float tintMask${layer}=clamp(((height${layer}.g-.5)*${F("g_fTintMaskContrast", 1)}+.5)*${F("g_fTintMaskBrightness", 1)},0.0,1.0);
  height${layer}.a*=${n((s.IntParams[`g_bMetalness${layer}`] ?? 1) ? 1 : 0)};
@@ -172,6 +172,20 @@ function tintLayer(
  float ao${layer}=clamp(mix(${parameters.vector(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1], 3)}.x,${parameters.vector(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1], 3)}.z,pow(max(${s.IntParams.F_ALPHA_TEST ? `height${layer}.b` : `color${layer}.a`},0.0),${parameters.vector(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1], 3)}.y)),0.0,1.0);
  `;
 }
+/** Native PS791:962–968 captures UV derivatives before the weight branch;
+ * Color/Normal reads at1139/1149 use those explicit gradients. Implicit reads
+ * inside the spatially varying layer branch have undefined derivatives. */
+function environmentSurfaceRead(
+  source: SourceEnvironmentMaterial,
+  layer: number,
+  kind: string,
+  parameters: EnvironmentShaderParameters,
+) {
+  if (environmentUvSelection(source, layer) === 0)
+    return environmentRead(source, layer, kind, `vEnvironmentUv${layer}`, false, parameters);
+  const gradient = `environmentSurfaceGradient${layer}`;
+  return `environment${kind}${layer}GradRead(vEnvironmentUv${layer}+vec2(length(${gradient})*1e-10),${gradient}.xy,${gradient}.zw)`;
+}
 function normalLayer(
   s: SourceEnvironmentMaterial,
   layer: number,
@@ -182,7 +196,7 @@ function normalLayer(
   const detailSelect = s.IntParams[`g_nDetailUVSet${layer}`] ?? -1;
   const detailEffective = detailSelect === -1 ? uvSet : detailSelect;
   return `
- vec4 normalSample${layer}=${environmentRead(s, layer, "Normal", `vEnvironmentUv${layer}`, false, parameters)};
+ vec4 normalSample${layer}=${environmentSurfaceRead(s, layer, "Normal", parameters)};
  vec3 N${layer}=normalize(mix(environmentGeometric,${uvSet === 0 ? environmentProjectedNormal(s, layer, false, parameters) : `environmentPackedNormal(normalSample${layer}.rg,${parameters.float(s, `g_flTexCoordRotation${layer}`, 0)},${uvSet === 2 ? "environmentUvN,environmentUvT,environmentUvB" : "environmentFrameN,environmentFrameT,environmentFrameB"})`},${parameters.float(s, `g_fTextureNormalContrast${layer}`, 1)}));
  float R${layer}=clamp(((normalSample${layer}.b-.5)*${parameters.float(s, `g_fTextureRoughnessContrast${layer}`, 1)}+.5)*${parameters.float(s, `g_fTextureRoughnessBrightness${layer}`, 1)},0.0,1.0);
  ${
@@ -486,7 +500,14 @@ export function applyModernEnvironmentShader(
         (!!source.IntParams.F_DETAIL_NORMAL && environmentUvSelection(source, i + 1, true) === 0),
     ).some(Boolean) ||
     (!!source.IntParams.F_SHARED_COLOR_OVERLAY && environmentUvSelection(source, 0) === 0);
+  const surfaceGradients = Array.from({ length: layers }, (_, i) => {
+    const layer = i + 1;
+    return environmentUvSelection(source, layer) === 0
+      ? ""
+      : `vec4 environmentSurfaceGradient${layer}=vec4(dFdx(vEnvironmentUv${layer}),dFdy(vEnvironmentUv${layer}));`;
+  }).join("\n");
   const composition = `
+ ${surfaceGradients}
  vec3 environmentFrameN=vNormal/length(vNormal),environmentFrameT=vTangent/length(vNormal);
  vec3 environmentFrameB=cross(vNormal,vTangent)*vEnvironmentHandedness/length(vNormal);
  vec3 environmentGeometric=dot(vNormal,vNormal)>=1.01?normalize(vEnvironmentCentroidNormal):normalize(vNormal);

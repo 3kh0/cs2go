@@ -15,7 +15,13 @@ interface Vertex {
 /** Partition draws by conservative triangle coverage. Index-only partitions keep
  * the original attribute buffers; large triangles are bisected with exact
  * linear interpolation of every attribute, including atlas UVs and controls. */
-export function partitionNativeReflections(mesh: T.Mesh, data: SourceReflections, capacity = 8) {
+export function partitionNativeReflections(
+  mesh: T.Mesh,
+  data: Pick<SourceReflections, "volumes">,
+  capacity = 8,
+  padding = new T.Vector3(),
+  allowSubdivision = true,
+) {
   const geometry = mesh.geometry;
   const position = geometry.getAttribute("position");
   const boxes = data.volumes.map((volume) => {
@@ -24,7 +30,7 @@ export function partitionNativeReflections(mesh: T.Mesh, data: SourceReflections
     return new T.Box3(
       new T.Vector3(lo[0] * 0.0254, lo[2] * 0.0254, -hi[1] * 0.0254),
       new T.Vector3(hi[0] * 0.0254, hi[2] * 0.0254, -lo[1] * 0.0254),
-    );
+    ).expandByVector(padding);
   });
   const groups: Group[] = [];
   const clippedGroups: Group[] = [];
@@ -97,6 +103,10 @@ export function partitionNativeReflections(mesh: T.Mesh, data: SourceReflections
   ) => {
     const coverage = candidates(a, b, c, possible);
     if (coverage.length > capacity) {
+      // Subdivision is safe only before a linear/static vertex stage. New
+      // midpoint vertices would resample a nonlinear wind deformation.
+      if (!allowSubdivision)
+        throw new Error(`Native deformed reflection triangle exceeds ${capacity} volumes`);
       const source = Array.isArray(mesh.material) ? mesh.material[material] : mesh.material;
       if (source.transparent)
         throw new Error(

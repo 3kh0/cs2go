@@ -1,0 +1,7252 @@
+{
+  "mapId": "cache",
+  "scope": "sky",
+  "materials": {
+    "four_cache_sky_159": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 159,
+          "baseColorFactor": [
+            0.799102724,
+            0.930110812,
+            0.991102219,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.799102738014409,
+            0.9301108583754237,
+            0.9911020971138298,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.799102724,
+            0.930110812,
+            0.991102219,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_169": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 169,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_175": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 175,
+          "baseColorFactor": [
+            1,
+            0.445201188,
+            0.309468865,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            0.44520119451622786,
+            0.30946892281750854,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            0.445201188,
+            0.309468865,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_177": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 177,
+          "baseColorFactor": [
+            0.806952178,
+            0.783537805,
+            0.783537805,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.8069522576692516,
+            0.7835377915261935,
+            0.7835377915261935,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.806952178,
+            0.783537805,
+            0.783537805,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_178": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 178,
+          "baseColorFactor": [
+            1,
+            0.545724332,
+            0.428690434,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            0.5457244613701866,
+            0.4286904966139066,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            0.545724332,
+            0.428690434,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_176": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 176,
+          "baseColorFactor": [
+            0.48514992,
+            0.658374786,
+            0.879622281,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.4851499400560704,
+            0.6583748172794485,
+            0.8796223968878317,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.48514992,
+            0.658374786,
+            0.879622281,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_181": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 181,
+          "baseColorFactor": [
+            0.799102724,
+            0.930110812,
+            0.991102219,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.799102738014409,
+            0.9301108583754237,
+            0.9911020971138298,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.799102724,
+            0.930110812,
+            0.991102219,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_40": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/cache_backdrop_ac_001.vmat",
+      "nativeSourceSha256": "bf096097cf245cde4a816d5ac56785600bba9ed210071b0bbf1c24db7c0308e3",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "cache_backdrop_ac_001",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 40,
+          "baseColorFactor": [
+            0.514917612,
+            0.514917612,
+            0.514917612,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.5149176653765214,
+            0.5149176653765214,
+            0.5149176653765214,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.514917612,
+            0.514917612,
+            0.514917612,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "aa97177de4f3d603",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "db4782e118b57d41"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "bf096097cf245cde4a816d5ac56785600bba9ed210071b0bbf1c24db7c0308e3",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_182": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 182,
+          "baseColorFactor": [
+            0.896269262,
+            0.623960376,
+            0.304987252,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.8962693533742664,
+            0.6239603916750761,
+            0.3049873140698863,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.896269262,
+            0.623960376,
+            0.304987252,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_179": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 179,
+          "baseColorFactor": [
+            0.760524571,
+            0.462076962,
+            0.386429429,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.7605245046752924,
+            0.4620769996544071,
+            0.386429433787049,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.760524571,
+            0.462076962,
+            0.386429429,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_170": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 170,
+          "baseColorFactor": [
+            1,
+            0.558340371,
+            0.407240182,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            0.5583403896342679,
+            0.4072402119017367,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            0.558340371,
+            0.407240182,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_41": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/cache_backdrop_ac_001.vmat",
+      "nativeSourceSha256": "bf096097cf245cde4a816d5ac56785600bba9ed210071b0bbf1c24db7c0308e3",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "cache_backdrop_ac_001",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 41,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "aa97177de4f3d603",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "db4782e118b57d41"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "bf096097cf245cde4a816d5ac56785600bba9ed210071b0bbf1c24db7c0308e3",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_160": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 160,
+          "baseColorFactor": [
+            0.896269262,
+            0.623960376,
+            0.304987252,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.8962693533742664,
+            0.6239603916750761,
+            0.3049873140698863,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.896269262,
+            0.623960376,
+            0.304987252,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_167": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 167,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_172": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 172,
+          "baseColorFactor": [
+            0.799102724,
+            0.930110812,
+            0.991102219,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.799102738014409,
+            0.9301108583754237,
+            0.9911020971138298,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.799102724,
+            0.930110812,
+            0.991102219,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_171": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 171,
+          "baseColorFactor": [
+            0.371237636,
+            0.177888334,
+            0.13286823,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.3712376804741491,
+            0.17788841598362912,
+            0.13286832155381798,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.371237636,
+            0.177888334,
+            0.13286823,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_161": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 161,
+          "baseColorFactor": [
+            0.610495508,
+            0.672443151,
+            0.630757093,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.6104955708078648,
+            0.6724431569576875,
+            0.6307571363461468,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.610495508,
+            0.672443151,
+            0.630757093,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_162": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 162,
+          "baseColorFactor": [
+            0.597201705,
+            0.693871677,
+            0.73791039,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.5972017883637634,
+            0.6938717612919899,
+            0.7379104087727308,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.597201705,
+            0.693871677,
+            0.73791039,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_189": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 189,
+          "baseColorFactor": [
+            0.417885035,
+            0.417885035,
+            0.417885035,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.4178850708481375,
+            0.4178850708481375,
+            0.4178850708481375,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.417885035,
+            0.417885035,
+            0.417885035,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_163": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 163,
+          "baseColorFactor": [
+            0.603827298,
+            0.603827298,
+            0.520995498,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.6038273388553378,
+            0.6038273388553378,
+            0.5209955732043543,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.603827298,
+            0.603827298,
+            0.520995498,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_183": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 183,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_173": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 173,
+          "baseColorFactor": [
+            0.930110812,
+            0.879622281,
+            0.745404303,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.9301108583754237,
+            0.8796223968878317,
+            0.7454042095403874,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.930110812,
+            0.879622281,
+            0.745404303,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_164": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 164,
+          "baseColorFactor": [
+            0.356400043,
+            0.412542552,
+            0.439657122,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.3564001441459435,
+            0.41254261348390375,
+            0.4396571738409188,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.356400043,
+            0.412542552,
+            0.439657122,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_190": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 190,
+          "baseColorFactor": [
+            0.266355604,
+            0.266355604,
+            0.266355604,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.26635560480286247,
+            0.26635560480286247,
+            0.26635560480286247,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.266355604,
+            0.266355604,
+            0.266355604,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_186": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 186,
+          "baseColorFactor": [
+            0.168269306,
+            0.194617689,
+            0.208636776,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.16826940018969075,
+            0.1946178304415758,
+            0.20863687014525575,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.168269306,
+            0.194617689,
+            0.208636776,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_145": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/metal/metalvent005a.vmat",
+      "nativeSourceSha256": "58c1b7204485b9f3b1c366e5c2cc7fdb477945aaed07fa9c601646aee61d940d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "metalvent005a",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 145,
+          "baseColorFactor": [
+            0.799102724,
+            0.930110812,
+            0.991102219,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.799102738014409,
+            0.9301108583754237,
+            0.9911020971138298,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.799102724,
+            0.930110812,
+            0.991102219,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "468da5a0ce16aa33",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "16986f066ad992b9"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "58c1b7204485b9f3b1c366e5c2cc7fdb477945aaed07fa9c601646aee61d940d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_165": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 165,
+          "baseColorFactor": [
+            0.215860382,
+            0.250158221,
+            0.262250662,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.21586050011389926,
+            0.25015828472995344,
+            0.26225065752969623,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.215860382,
+            0.250158221,
+            0.262250662,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_184": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 184,
+          "baseColorFactor": [
+            0.371237636,
+            0.428690434,
+            0.456410974,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.3712376804741491,
+            0.4286904966139066,
+            0.45641102318040466,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.371237636,
+            0.428690434,
+            0.456410974,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_185": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 185,
+          "baseColorFactor": [
+            0.304987252,
+            0.304987252,
+            0.304987252,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.3049873140698863,
+            0.3049873140698863,
+            0.3049873140698863,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.304987252,
+            0.304987252,
+            0.304987252,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_191": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 191,
+          "baseColorFactor": [
+            0.274677306,
+            0.318546712,
+            0.337163568,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.27467731206038465,
+            0.31854677812509186,
+            0.33716361504833037,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.274677306,
+            0.318546712,
+            0.337163568,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_174": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 174,
+          "baseColorFactor": [
+            0.930110812,
+            0.863157094,
+            0.637596846,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.9301108583754237,
+            0.8631572134541023,
+            0.6375968739940326,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.930110812,
+            0.863157094,
+            0.637596846,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_192": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 192,
+          "baseColorFactor": [
+            0.434153616,
+            0.434153616,
+            0.434153616,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.43415363617474895,
+            0.43415363617474895,
+            0.43415363617474895,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.434153616,
+            0.434153616,
+            0.434153616,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_187": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 187,
+          "baseColorFactor": [
+            0.428690434,
+            0.428690434,
+            0.428690434,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.4286904966139066,
+            0.4286904966139066,
+            0.4286904966139066,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.428690434,
+            0.428690434,
+            0.428690434,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_188": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 188,
+          "baseColorFactor": [
+            0.266355604,
+            0.309468865,
+            0.327778071,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.26635560480286247,
+            0.30946892281750854,
+            0.3277780980565422,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.266355604,
+            0.309468865,
+            0.327778071,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_193": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 193,
+          "baseColorFactor": [
+            0.323143184,
+            0.323143184,
+            0.323143184,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.32314320911295075,
+            0.32314320911295075,
+            0.32314320911295075,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.323143184,
+            0.323143184,
+            0.323143184,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_168": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 168,
+          "baseColorFactor": [
+            0.278894216,
+            0.323143184,
+            0.341914415,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.2788942634768104,
+            0.32314320911295075,
+            0.3419144249086609,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.278894216,
+            0.323143184,
+            0.341914415,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_144": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/metal/metalvent005a.vmat",
+      "nativeSourceSha256": "58c1b7204485b9f3b1c366e5c2cc7fdb477945aaed07fa9c601646aee61d940d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "metalvent005a",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 144,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "468da5a0ce16aa33",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "16986f066ad992b9"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "58c1b7204485b9f3b1c366e5c2cc7fdb477945aaed07fa9c601646aee61d940d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_sky_166": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 166,
+          "baseColorFactor": [
+            0.973445415,
+            0.973445415,
+            0.973445415,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.9734452903984125,
+            0.9734452903984125,
+            0.9734452903984125,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.973445415,
+            0.973445415,
+            0.973445415,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_194": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 194,
+          "baseColorFactor": [
+            0.262250662,
+            0.262250662,
+            0.262250662,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.26225065752969623,
+            0.26225065752969623,
+            0.26225065752969623,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.262250662,
+            0.262250662,
+            0.262250662,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_sky_180": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_003.vmat",
+      "nativeSourceSha256": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "plant_metal_003",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 180,
+          "baseColorFactor": [
+            0.187820718,
+            0.215860382,
+            0.2269658,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.18782077230067787,
+            0.21586050011389926,
+            0.22696587351009836,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.187820718,
+            0.215860382,
+            0.2269658,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "7cd6c7d2ce7650aa",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "2948c36c884272c8"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "848c15b2ff26a99a4f3c95ad5e7770e5826d11391f42d70b1a335835b1dad411",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    }
+  },
+  "textures": {
+    "bd29b4d8da6be98b": {
+      "resource": "materials/de_cache/backdrop/plant_metal_002_color_psd_a737529a.vtex",
+      "sourceSha256": "9104453e25fb1a316fa15dfbe31678fdbf9d1a462f85ac7f24607943bd412ff5",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.39714542031288147,
+        0.4203856885433197,
+        0.4316036105155945
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "bd29b4d8da6be98b.bin.gz",
+      "gpuBytes": 174760,
+      "gpuSha256": "670757a78638c18a8897a84b0b287690c18bc359e23ad8d6bfcdf15f8f754395",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "4da0b0b631645726bda8db6b52586e644346b36c567dbe6f2d172b2861096038"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "91b5e4932f5b9e73023420a2dd60d8aa49f435175425602114c6216eef630db9"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "46afdba3a998ec148729107f95e700777d7fccf39747c83e833f6fb8f6a50d93"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "778eac73d8b5c3581c589dc715a537a127feaa7a6dd5110a818d4cb3a1d68c4a"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "dcda09d2392c98a90f2a5fe6e91a3fe25f22523f7035e4ec38cd9940960b6b54"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "c2c1efc60ce11bdc66b918b53038cbc99747a77e1a0137b0b58aad8cfab17022"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "5a213617f7d4c6fdbc867e46c31281eb6df773123a14c9ee0467364b9a2114fa"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "ad81f2f4db57d53bf5455fd6c61274c474e158a6d77efcc75e8c5e875723fa0f"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "bd29b4d8da6be98b.png",
+      "decodedSha256": "58cba8645e019d28ecdf77de5435e352eb25e198ed1d521a566d6003fb81ba77",
+      "fallbackFile": "bd29b4d8da6be98b-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "782911837d2eab3311fc3511e73f9d977ef41a255b56a072079afc33a43b6b9b"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "622059aa370dfe04285aea4b0f76305d1bc58427921637d7786cbd79f6fdbb85"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "45ce52b7c06b9698648498f46688e8c7dd020a46637ba331daf880f34585bd95"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "08ff8b5740f9e4db9d3fb3dacea213f53d931b9c029c0483e6298b2642081a31"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "d19e6135c80e9596b6a8f3c432cb3133c19900087b133c5a3efe1e28817d1035"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "bb24c797f60245a2fa469f77bb8dd8c20277a90d68e3995462fe57038c2b6bb7"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "87379f04cad6d13ca1830b5eb8c10f10cfd68ca6c4f571152bc007e8c84e1901"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "3d99221ba15ff7e409b340eae4ca274ce7d71fd828ef39a92dd2dd36eb9d6f66"
+        }
+      ]
+    },
+    "9c7b0b2aaaffd3e7": {
+      "resource": "materials/de_cache/backdrop/plant_metal_002_ao_psd_b8a1674c.vtex",
+      "sourceSha256": "9a28939c393bfb03a2ba31156feb5b1bc31a532efdd6f19a17c04a2bf52d2778",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        0.958466649055481,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "9c7b0b2aaaffd3e7.bin.gz",
+      "gpuBytes": 172032,
+      "gpuSha256": "4245638e1fc43a21651cf2f58662b6fa37fec9afe1f66151afcb08a9195184e7",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "4d91d778904b2dde994fd3c47ff1727f8018f947b6dd542736d523ec064f4d4e"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "fd5345ffff2f68bc65798f08d2a1b5ef1e4e2e666561b16b2e9f09d17a117e3f"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "27f682ff9711f02fb5c30a672a0c625e646b59c91a718864a93b45196d8ef999"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "9c7b0b2aaaffd3e7.png",
+      "decodedSha256": "83431f55d58728fe756e292a5781285f03ffc75fb68016d87de1072e3a35b121",
+      "fallbackFile": "9c7b0b2aaaffd3e7-rgba8-mips.bin.gz",
+      "fallbackBytes": 1376256,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "59e2f3e1d2d8c294c144a81fcaadb59ee351413478c0049c1a2a164aee9f47e7"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "d6e85f1eed10dace020847c9a7d9971ebaa68fd8e1fd356ba88dba79fa225ca7"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "4de1a2b909b13c5860d2dc8a372d5162a603efde08b0cbb0b379bf55e7d9ee57"
+        }
+      ]
+    },
+    "f076232d6aa3d77d": {
+      "resource": "materials/de_cache/backdrop/plant_metal_004b_detail_psd_17ad08b4.vtex",
+      "sourceSha256": "a144e913934a2d69fd3cc394237499ebbee2b79959d12e9061d3b03446c9c9bb",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.500024676322937,
+        0.5000329613685608,
+        0.5000594854354858
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "f076232d6aa3d77d.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "ed36a98c62bc68c2ef2d3cfca1e34b53f9825a3cfa849f3db0f3046ecb1c127f",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "c88d05ea37c6e857978d10ca04b0461a68f129dd08585698fac83fc8e20ed39b"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "c5cc52cf876f4b71ecccfa23421a61152cc1af967d441c2e8fd07694f31d3879"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "f903b62f0fb9ccb951f770ce5d8a33861aa1b2a9ecd60f39c81efab7237ba036"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "61dd6a66d3a8389c78588b39a50587ef37e7f4802a31162b42530719656fd33d"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "bddce86d9f28b7d360cfcc0bb6a1e51bcf6ec1a8be4b0612bcc5b791c9fc0170"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "06ef852f4ac6449abf314a389bd41588daad9a4544382d98f201cb3ea21ab31c"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "d794f1dfa080da3ef138ed360084427833450c458183f32393712d981640d417"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "0958a464d1d47fe36bccf5da8b5b3f17a912719e2fae7125cb8cd28c4bdd011d"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "f076232d6aa3d77d.png",
+      "decodedSha256": "221a7557e488e0b90f5812bd5847163d555be1d16ef1f91fde05da6cd2d1f00f",
+      "fallbackFile": "f076232d6aa3d77d-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "9938241718a37feafdceb0a375cfe47ee5c777917921c72c5756cb814f42131a"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "89ebec276b035f7fb2d8a6951ce5ecbcfbdc89d723bee0975deb5490e7517063"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "e6884b04bf0f81409dcf4ef48555c11731b92401e44a56902ca429fe73fedad0"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "47182deeb77d98f003ee7460b420827f7d34d3920e20367b10dd5c18a552505d"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "886a1c2ff72d02054ec7044cf51045c36b8a689324a02b0bc7493fd1db750a1d"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "e890230a10f8a4e21eb0bc34601751d2278d169c6f2aa23542fb776cf25e2fb5"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "c0caddc14aaad305672f627cec63698c4b6e172e1986f420a02430bcce0c1ba9"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "15ceee3793e2b767bdc4d4ea34d6144cf9b3c4199a3b8257497ba44d570e893b"
+        }
+      ]
+    },
+    "979478213206d232": {
+      "resource": "materials/de_cache/backdrop/plant_metal_002_normal_psd_6b554d8e.vtex",
+      "sourceSha256": "835fb96556786f84802095ba0943be1212b280a8287ce01260856e1fe9fba03a",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.4959767758846283,
+        0.4957025647163391,
+        0.6423581838607788
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "979478213206d232.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "9131e03484c34bd62d73c3c4184d472522eacdbed2b8fa04fd8fae4671d62246",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "72d1006b8ebca7557254c5cd03dfdc49f629c00e39ceae5b083fbb9eff096a0d"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "937848a49e3bf1ecffdc7da8bd87d0faf999f18c2660a6d328ff79eb11934d15"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "657ae16dfde3b662ca130a3aac0fb031a7697464e828ee6150f17dccf92bbbb8"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "b6a46634a59099c20f26437940fe64398a77c484f2a16824a70b5fd5133ebb2f"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "ba1fe1468ee36ab451821ff16c366865faba9b2540373ded7c86ccf289bc5026"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "18934a254f541922777ed16cdc1e53e8197884b532d8de6e060b3d845724bb7e"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "901e02be00020ce9106dc66114e61ea868784c15e6e97ff8cf71180110c87abb"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "8a67be01f41e8df457c87628a9e9e440f0f55d565c85295a1392f0f39c25433d"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "979478213206d232.png",
+      "decodedSha256": "4733cf596af8d775237b6f4f3264a7604aab87361291b75383a7714b6f58c78c",
+      "fallbackFile": "979478213206d232-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "0b97970b790deaa08094209e2b69bbc949fe758a754ce470f658239dcad3fe84"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "4a985f0ff8cb98c343726c08032f5d55d547dd28987f841513321d59dabc7a47"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "1133feda263bd83996991f371a33726a471c9f290fc464f9fb0ed137f0ecaa03"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "e762ea991ee630ee19c0f29b252a9bc793448a6addfaabf89e6aa277e04332ec"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "291338a9e2f3a404e236fd4ec8009dc0407628a4ba2d37f38505be5f446d8525"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "167005e2ab2e7ff64a438f384ffeed42a6516d79824b2c670c8106356c0a67a7"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "856ec113ad1b7032b6a5f2b9589113088c5161ff40d9cb784255970dd995f21b"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8a00fd5007de62d60ca5d573828024352c1ed0dac13991c5e3254e785c47e3d3"
+        }
+      ]
+    },
+    "7cd6c7d2ce7650aa": {
+      "resource": "materials/de_cache/backdrop/plant_metal_003_color_psd_4e945e19.vtex",
+      "sourceSha256": "3926fdb8e147150c505f157e8a3543dae31d66475c1716730f180b5df1361ccc",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.36048778891563416,
+        0.35839197039604187,
+        0.3591150641441345
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "7cd6c7d2ce7650aa.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "2c5bd0e0f2f44fc20022cbd8380bbfb96011fa737a41f8d0b24558a7d0b32265",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "0021099121d8f021d055bc8de55cc99c6104bc3b08c7ef1ecd07166966daea0b"
+        },
+        {
+          "width": 512,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "379b86e0736c6ab26f2f98b01292fba659255ac4425920302c1f06fbcc3f4c3e"
+        },
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "5eefa9f844d88b122beafec13ed9c7fe0e3b8a41e46704f1a89740834a4de158"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "7b5f44e0696f77c362657f6715f500882aaafe34db08b7f8582c556145b82165"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "9ceaa0b91bafc020c0e32f220235bb2f0fd5ed0e8fa9adcfe2900bc0aad2246b"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "82e5be5468a4a8cec14b535acea3d2c69d6b0ee504ebd890e9acd73432c18565"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "dac6cf0636665cd7053a812f85bdd3bacbe495663483b4f879a6238a333c38d5"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "20f06c485f7cc0270a7cd60ff88c8ac9e1b62701998237f75cfc560e1bfab5bb"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        512
+      ],
+      "decodedSource": "7cd6c7d2ce7650aa.png",
+      "decodedSha256": "6d2755ba236e0b95a620fc6fd9587790d14136026b974e4c4f36ef25a7dd01e6",
+      "fallbackFile": "7cd6c7d2ce7650aa-rgba8-mips.bin.gz",
+      "fallbackBytes": 2796160,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 512,
+          "bytes": 2097152,
+          "sha256": "d5acd50767a20cf22f91aad16ca61a90f7df038b9cb917e659badff8987e3c7a"
+        },
+        {
+          "width": 512,
+          "height": 256,
+          "bytes": 524288,
+          "sha256": "6e12db9977f9e15b44fb7b6ce026d7c6a4b109bb8efb79a5cf9e49f799f040f4"
+        },
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 131072,
+          "sha256": "e399908806bbf3852fe7f7ec2351b1857a52cd0fa612fe6c15e4a69b1590b420"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 32768,
+          "sha256": "f591518f97fdf96a0612f84040ab038cc46030f41d242120a278a11a29d6828f"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 8192,
+          "sha256": "9b5d9b7405eb82079ff9ad26ced48e0b4904443b2584ba46b28ed9fb5a316e7c"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 2048,
+          "sha256": "2eee371981680448168bb9ea1553e7586f379e20c1b3017035e4b56c070de41f"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 512,
+          "sha256": "e6eaff4466ab3ddd2cbb80808408c783f2e57161523d865d8e41c4762aebc871"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 128,
+          "sha256": "735d29d7f0d815343b8eee8ed1fa49ad8376c36ee11d9b4412120dd5582e24eb"
+        }
+      ]
+    },
+    "cf0f8accdfc38e3f": {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex",
+      "sourceSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "cf0f8accdfc38e3f.bin.gz",
+      "gpuBytes": 8,
+      "gpuSha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "cf0f8accdfc38e3f-e0b83fe25f-storage.png",
+      "decodedSha256": "6f73ba3cfd6e5314cb9235533c7c90d87f1f7bd19625cef96ae888724ca45007",
+      "fallbackFile": "cf0f8accdfc38e3f-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "2948c36c884272c8": {
+      "resource": "materials/de_cache/backdrop/plant_metal_003_normal_psd_d329d379.vtex",
+      "sourceSha256": "576bc88de7ef93bae49bd180b5658fa3612f6e0ba45be43092db0755c76c8f2e",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.46026888489723206,
+        0.5117763876914978,
+        0.6117850542068481
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "2948c36c884272c8.bin.gz",
+      "gpuBytes": 699040,
+      "gpuSha256": "3d545fd271d2b17ddb02be52a0a73f17f682e1f78c91d8c099deed673440fe17",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "ff5b5f33abd0936333838c9f3d4c8cb74e9e982aad5f71766ec40bd7db5950de"
+        },
+        {
+          "width": 512,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "527c0d8fc4b7d2428a345ddae145e3fba388440fbb1d44dfc575894a5535da6c"
+        },
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "f6587a9413aa1e78c0094691cf9ab1026b332651910278359b20188891212227"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "bace9327e49db78c30c8abc90998ec040447b28dfa4c6798569fe1d020fa0474"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "8674bcea3e1cae36dd8c04a3468222ac1376cad99327024ed0778ddd1d5a7257"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "093def922047fbedd3dcd5b7f8372be8914ef16c15d800a1e636e0f0a3fcf9b4"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "2fb7e7510c2e07e3d165e25766709d30ecc5692308bc03fe84a18438ab45e3bf"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 32,
+          "sha256": "fee154eea93de0c8c1dad4d6b48519d7c595cb7a1076c59273f953a1ed03f66e"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        512
+      ],
+      "decodedSource": "2948c36c884272c8.png",
+      "decodedSha256": "692d42025219aac36041e1eead2eb85c2e74cd0d588fe3a470329988b42e16ad",
+      "fallbackFile": "2948c36c884272c8-rgba8-mips.bin.gz",
+      "fallbackBytes": 2796160,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 512,
+          "bytes": 2097152,
+          "sha256": "3ccbd93d0954b5ab515a602db96a2deb2264fdaeb36d287425a29127f7080f90"
+        },
+        {
+          "width": 512,
+          "height": 256,
+          "bytes": 524288,
+          "sha256": "35396fd55f622319d9da2a9315c25fdd57f79a07e607b63c6e2dc14899b60d18"
+        },
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 131072,
+          "sha256": "658165b00a62769f82de013ed1a755a119621801f3279528bb2a5e30151176c5"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 32768,
+          "sha256": "bfb19f8f9f50c8e556f50ab2fabc423ac24772d9846b39223dea7c28b5441c3e"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 8192,
+          "sha256": "069320015111628d2d21cfab53168b5968cfc243385155597bdccac1c102107b"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 2048,
+          "sha256": "79eece0570b77e587550c50c511e2a55d1317d1e8da8a0d4ea6b64761f068414"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 512,
+          "sha256": "24fe2c4f93809a0d96a44ced8929202aafed3c0c960292e5befd95aa83b1a0b1"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 128,
+          "sha256": "b5a3ee9009a0a1f6660e83dce60f59306e22ddbb16bbb2e0a869eae6bc7241f3"
+        }
+      ]
+    },
+    "1a3bb17d50104c7d": {
+      "resource": "materials/de_cache/backdrop/plant_metal_004_color_psd_81a68e7e.vtex",
+      "sourceSha256": "7adbb9f6f332e60d7bbe6a72307ef366c3a18687d1d244ad2a3bcbb2c5bfe7d4",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.36299562454223633,
+        0.38034629821777344,
+        0.39909231662750244
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "1a3bb17d50104c7d.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "83c48db8605abf5396e68a21157dcadf0e7c46127bdd4ae47ca08f033e852b1a",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "3ce3cc50f65d7895416e2c56c9066bf2b5f2812b63c3f28d24a84ba18f140a98"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "49f46597dbcf79a959f7e6c21825aad069a679bc8d6d8aed76ebc8437e498254"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "5a0be0d8565d7860888a22ff5881942e1bc80b927fdaadace8c5e6be41e0282d"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "79b4281a4b46cd0824b774c8a0fe933fab0a96f1f8e8fecdc887cd3c3d98add2"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "ae5f50b1e63bf02a59be41a328106f93854efd3f1a049c7832dbe679d0a4d8a0"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "b0253dd0fa499ea64b5e60cfdac3214afc956efac2b0459990999edb7475ba40"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "929ea43b944742c1cb0edcf8a790c9011c7d13705ec1ca12775c84df9c8de996"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "b6cef775f70b8f6608bb865ec1a6da334cbdb19b7767c48b28a86118068410c4"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "63fd8d145f43a0c86434367cf2b1f74c529d34780567eec8d90734f730e56745"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        1024
+      ],
+      "decodedSource": "1a3bb17d50104c7d.png",
+      "decodedSha256": "83accc967855ce405b5eedd906c7033808b14ce5cb721a04b07ef493834cda66",
+      "fallbackFile": "1a3bb17d50104c7d-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "215fdf0c87fb35c82156040e8d1ce7a86b6add15272efb363d576c37cfca7953"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "1e717d3f7135680f6148e958b7be528c4550a5e320a3eae9d64e6ce5824cdb3e"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "e12f4184041b0f2006da3a20c86de57a3965fae2f0372e5260539ace2ce4bc53"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "e519e7bcb8b1640df25c41cac00261f22c92a274116b79febde69c3a4a75c21e"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "2b2489c123e67c8ecf883cd229dff4cb22f3cbfc1b99b228196ce394e97a65d1"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "452a2b86fe1a92f8049e06442cc31b47c17a98900117657a078d072efeafed20"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "03461a795596d55a8d1d7d730e5d6637569f1515629a5292e1d0bf71f0b88cb5"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "cdf82c5956f361dee8ce8c02a60185cbc7b8f444676db52808d1e240b5af173a"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "39e149cd84400e4aa3a9d57d40b652172df5f0202e7052531067ec292632b18e"
+        }
+      ]
+    },
+    "8470331088827c1d": {
+      "resource": "materials/de_cache/backdrop/plant_metal_004_detail_psd_8a9a7e1d.vtex",
+      "sourceSha256": "a9c9410c1bd2cd95e75fbc7c9622188ab063c76be0695add267fe3142b9e33d5",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5000383257865906,
+        0.5000486373901367,
+        0.5000718235969543
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "8470331088827c1d.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "55c694ef41d8aad884af27ca8ab5fabb18625a22138a0d55835b6bc55c6a26a5",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "247139752e50326094b7a2db03b5ea8e65d6722bdd3f07ad3502fbf95f068a0c"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "2bf1389be2e5363ec3b912dd1ee4d8d8c7ea99c95efcc1e485abb75ebb423cd0"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "e73bb30e5870437eb1022f70b8e25f8ed85e8aa3d4db4f529fbad502285c4b0b"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "3561a587e9f5d46a3b85bb8d35eab751736acb069e9e1804095df8a2dfbb85b1"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "cbd1f1469aa59662b410b47d1621c712d61b0fba8130a3433737bcb0863d76c4"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "e9d67aa3e80a950cae3936add6a6abfe379ecfafd217e833cc63ad258f40fff7"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "8c113e2132fae1cd5dbc3febb69c671e837e8f00a115c4a1c0ccaf6cc1a50eef"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "6dee31daadda4f54f343b4c2ff661fca5f119a94c178cc89c4900e24b430a73d"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "8470331088827c1d.png",
+      "decodedSha256": "e61000b26831e97652f97a76375782bcef7d007157ee7c39b3db52b01796eb5c",
+      "fallbackFile": "8470331088827c1d-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "8702aa75dd6aaacb4539f5efb00aab1b9a8482b6d5c8353210540fdd7c938fd4"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "e294e1bca4176ecc549b7b0d62364db597e3aaca706741fd68b5f131f2d79cfb"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "0162cdb5b7ccbcd7540975a0a978fa53b1eb60352b61a1f77fa1f40187774c39"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "e6deabb0e8c5af0f20581e7292a6e635d5d6d618b6a8a7e1ff4934b5b81039ab"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "38f185210e4e3081bb6c131b95aa54c3dee8c5d6f4b6739e709f231a73cdfaf5"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "f0a5c324bd18be1a7146b1ef8321cffca29645d1266358465f799e3120bf6aeb"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "e896bb7d6e6ff5613d2ae4559352aa2af173f3f0171ddd2f761a5b96de729d6a"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "c6c92823e5963ee70916a96bdc2232ac707bc573112161a11d4b2cdbc711a469"
+        }
+      ]
+    },
+    "13e2ec6e8d5a1f53": {
+      "resource": "materials/de_cache/backdrop/plant_metal_004_normal_psd_ba8284d3.vtex",
+      "sourceSha256": "1007be62bf81f5c31742ae20e000d0e4dcdbd82fad2a087892c6c5cd4d17bba3",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.46544522047042847,
+        0.5171065926551819,
+        0.6129562854766846
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "13e2ec6e8d5a1f53.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "fbb1ef32e3e151fc639e035bda3eabe3977cc83caabcdaf0b6fd05d02b2789de",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "65d8da7bc9d9fce22ab105df5f79006a3dc7163ed32b7e88979884546696379b"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "6f4a9637509492848af134de2b77c9a29c6dc6204520088ad81b940cf893b95a"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "ef04171088d7c78668380e28b80570cf535bc618226231bc908eb2e1b727b599"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "f1aacc458a24f8bc9b4341a3ff2007388d43ebb0debc9fdc5544d6e2a6d9a46c"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "131d91db1c139644783a7f00b2229e682d970d4cc4fd712c92cfa202b3f66c62"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "a4f492c6c424936d621ed20c0b124764f4f9907ab7231f10af88babfae644494"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "72dcc6fcd2fd21065fe8990c632af02aaaff44e872d4d35f48c2ee82b7cf5896"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "baf09bb55f212a16f2a44c48ba79d93efbbd1ad917c710a78cd8cbb723691a90"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "01f2c47c951669e1937d71504258531855f007a5f3f346f06717eaaf0b42b33e"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        1024
+      ],
+      "decodedSource": "13e2ec6e8d5a1f53.png",
+      "decodedSha256": "6892892bb20c0dfca4f7cd7d2d1d182cd6ac32b5da8fc8af4f5227eb72e01b4e",
+      "fallbackFile": "13e2ec6e8d5a1f53-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "9d324b6106043e59ef4a7b3218b2ab2407086abbb7bd85e8832f48067f9600b5"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "3d30317da3b9a8ba8adbd7bee2758af4e4e40296b24dbc7af89ce47e55612ec7"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "f424e11d960962bc5106e852bbb0ba214e76897b2e39c6f9cd99c6a230abaca2"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "90800f5ae75c429adf6b7c0427a1686c0432f09492b8e0c389893100645e9b78"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "d2af03d8e4c12b2d75ff27c57e37b3acf83238d7bb235c7b12622c5ff2cdd58e"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "9f51d8f9b6e46ff66bdd05f648e7d98de812e8cfaa9835be8453a3bddd050a16"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "e9c222a31c2e16fdbd081431c4d26d0eb07d7b01677aeb294c0ce1e551d8f2cb"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "ba667564fb05462276984af370101de783c2786c0869d5e16d9c0d4244ad2c55"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "91869b39ac3893036d8b1f9c10f4b0a131168cb1e7e476385a4de1a66ab49ed1"
+        }
+      ]
+    },
+    "aa97177de4f3d603": {
+      "resource": "materials/de_cache/backdrop/cache_backdrop_ac_color_psd_7eb1e746.vtex",
+      "sourceSha256": "e1a47ae02ff1ba4c7bee1fce36d5b8d57b7c9f7fa5d252e4927026aa458d5bdc",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.4294529855251312,
+        0.41456183791160583,
+        0.3857194185256958
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "aa97177de4f3d603.bin.gz",
+      "gpuBytes": 87376,
+      "gpuSha256": "4271535886cada27bd17e6509107f35ae23ba53aee684dc1c93906959cbe811d",
+      "mips": [
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 65536,
+          "sha256": "5e3c95a49e3641faa66696cc130765f19e62db29e3f75e5c888bd8c3b680b2ac"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 16384,
+          "sha256": "0455a7fd8abf0dbbb0e4cf4535cb012d49f4fe9d8caefc13712a471870a0ec65"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 4096,
+          "sha256": "408e04c2c709ea53be859296a29ec53afbb21343f07b7f86e4a8d484b80ea966"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 1024,
+          "sha256": "f8c2a445c534686c83753f013c4afc9ebec8040db85ddc7f7ef6fab9af577182"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 256,
+          "sha256": "2434d3d51806e21bb4cf86fd475d3a6aad67789fa7dff1d2fafd0927a9500e64"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 64,
+          "sha256": "60ed0e862b87b7ccb8a59207b1c9cdb1be681ebc8c1e2edbf93074e1289806dd"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 16,
+          "sha256": "78c8268afad1761f04b118902fc93586d8bd606ca3fb6db15377d50fb72d3f58"
+        }
+      ],
+      "decodedSize": [
+        256,
+        512
+      ],
+      "decodedSource": "aa97177de4f3d603.png",
+      "decodedSha256": "90c0f4db26060808be996677288cececad8d4b40128c4294771a2e790fc5ded2",
+      "fallbackFile": "aa97177de4f3d603-rgba8-mips.bin.gz",
+      "fallbackBytes": 699008,
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "ec169994526253764e20348bdb1a0dc613bad9c74d9ed5f0773a5088a8727124"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "318ad6474d4753fad176f0aa48370feeef7ae09128a0604634b630eff4a6cfa2"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "0dd17c3b79f2eb52e12beab5fbf3aa41e70d24d31f98d5bebce25df09833b3b7"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "a357fded68dd923e7ccdfb3f3dbeb0323e65ec53172169302b8e76545449f343"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "f9d553947b1ae2ae29804e399f2377c032723cdfbb32960e4244525971f2fd48"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "03f1eaf5b52038d948694aea14765668d108665f4a2709194ab89531fef1508e"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "1ba3f724145d700e8340341a3d1e5ccc72e3fabd14a2a82bffdd066bc880070d"
+        }
+      ]
+    },
+    "db4782e118b57d41": {
+      "resource": "materials/de_cache/backdrop/cache_backdrop_ac_001_vmat_g_tlayer1normalroughness_53b47c48.vtex",
+      "sourceSha256": "aca3183f9f236f17434d5d79a75f490de90f107f7625322b315fe288ce9c1ce2",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        1.0
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "db4782e118b57d41.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "aca3183f9f236f17434d5d79a75f490de90f107f7625322b315fe288ce9c1ce2",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "db4782e118b57d41-aca3183f9f-storage.png",
+      "decodedSha256": "d8f946a3caa0129ea20ed5c11b1e9a3cde92873925d2ba7fd2d77212d45985c7",
+      "fallbackFile": "db4782e118b57d41-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        1.0,
+        1.0
+      ]
+    },
+    "468da5a0ce16aa33": {
+      "resource": "materials/metal/metalvent005a_color_tga_31d4e31a.vtex",
+      "sourceSha256": "5358e9bfca986cab0e498d3e5ecf50c2523996bca0410440692cfbf7bffd3294",
+      "srgb": true,
+      "sourceSize": [
+        128,
+        128
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.23741978406906128,
+        0.2481599748134613,
+        0.22706055641174316
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "468da5a0ce16aa33.bin.gz",
+      "gpuBytes": 10920,
+      "gpuSha256": "af5640ca0bf2ce81f03f7bbe3b6872c8515ae5677717b1184a2dfdd55106c02c",
+      "mips": [
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "1877acea60049653c9f163d60e2b6dbcdff608fcf149e3b2cd1053215169911d"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "86e072cd4ead83df10556ea183841e0c2d5ae3e185b2b70abe3fa70e02ca8807"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "2e64223025bcea2a440933a05064c3ea4bea9536584c49e1d0dce331c0ab7175"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "d7c95166caa3c77b2182fa6fa2f25d085265d61d62d4243fa6727a26978a2bcf"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "9c34b05c7bef05ada71af4636ce0b9a4826117708979b015d05502c5f8e8ceea"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "c80b9f0ebf12d3741a3eef59473aaf25f13e4672d0de19094d00fedba8ed5857"
+        }
+      ],
+      "decodedSize": [
+        128,
+        128
+      ],
+      "decodedSource": "468da5a0ce16aa33.png",
+      "decodedSha256": "8f406707f81187683e9e9ee7f47a3f95a72764c2a9b2fd63c77e4c7cdc4cb75e",
+      "fallbackFile": "468da5a0ce16aa33-rgba8-mips.bin.gz",
+      "fallbackBytes": 87360,
+      "fallbackMips": [
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "305218adb989d326b45a47f8b56d981c0824011cac7851d01ffcf5d73f079bbf"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "c94b6268ac71896b460ec15a8238b90512b5221b942b7b9a0926b0783d578874"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "0c4015782a6a829f023e5d942570ebb67a295e8586b69c3f5f41100a98b7624a"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "f9f410add6363f91276ce9224b31f2556b4d6867100c54de4952a988b1dedf4f"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "0273ecc8743e5ecf6d847d6acb66fbbc91a953a20a361732f6bac57813f2f2b5"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8c2a70c4396e65921c0a12b203a78f9c9dfb1ff619cfe4105b8760125927de8d"
+        }
+      ]
+    },
+    "16986f066ad992b9": {
+      "resource": "materials/metal/metalvent005a_vmat_g_tlayer1normalroughness_53b47c48.vtex",
+      "sourceSha256": "bf86d5102b2276843c4ca87e81038adc739eeb72007f3a1d56e055511822a9e6",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        1.0
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "16986f066ad992b9.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "bf86d5102b2276843c4ca87e81038adc739eeb72007f3a1d56e055511822a9e6",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "16986f066ad992b9-bf86d5102b-storage.png",
+      "decodedSha256": "d8f946a3caa0129ea20ed5c11b1e9a3cde92873925d2ba7fd2d77212d45985c7",
+      "fallbackFile": "16986f066ad992b9-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "source": {
+    "nativeRawPacketSHA": "5c18120aa9ccc9733bbd5eaa9331d472fd7429b110e70d04e6921f056533ea09",
+    "nativeRawManifestSHA": "36a2390679b1fc2df02e556c359c1b030a827d515f0da986cc18ea0bdea1277e",
+    "sourceTintAuditSHA": "23b9fdad09d152d975803fafbed5a57f8f61379f920710a938a2b452b452bad1",
+    "resolvedSourcePlanSHA": "c312955f615cab149a8c96ed82dfe2c6eabd3445df8d999e0b57712040ace212",
+    "packedGeometrySha256": "1bf71cd1b42107e85387bc8663a052cd2bff47e8c52113c09accb885e00a5e17",
+    "qualification": "Selected native color/state/default/texture/compiler proof, source typed tint inputs; no captured private host view/tint packing/screenAO/stencil/pass scheduling. Original mip0/allmips and exact stored RGBA fallback, no resized images; inherited shadow caster policy remains qualified."
+  }
+}

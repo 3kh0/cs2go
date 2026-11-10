@@ -11,6 +11,7 @@ export class MapResources {
     resource.dispose();
   }
   private geometries = new Set<T.BufferGeometry>();
+  private instances = new Set<T.InstancedMesh>();
   private materials = new Set<T.Material>();
   private textures = new Set<T.Texture>();
   private externalTextures = new Set<T.Texture>();
@@ -33,6 +34,10 @@ export class MapResources {
 
   capture(root: T.Object3D) {
     root.traverse((object) => {
+      if (object instanceof T.InstancedMesh) {
+        if (this.disposed) this.release(object);
+        else this.instances.add(object);
+      }
       if (object instanceof T.Mesh || object instanceof T.Line || object instanceof T.Points) {
         if (this.disposed) this.release(object.geometry);
         else this.geometries.add(object.geometry);
@@ -78,12 +83,14 @@ export class MapResources {
     if (this.disposed) return;
     this.disposed = true;
     for (const cleanup of this.cleanup) cleanup();
+    for (const instance of this.instances) this.release(instance);
     for (const shadow of this.shadows) this.release(shadow);
     for (const target of this.targets) this.release(target);
     for (const material of this.materials) this.release(material);
     for (const geometry of this.geometries) this.release(geometry);
     for (const texture of this.textures) this.release(texture);
     this.cleanup.clear();
+    this.instances.clear();
     this.shadows.clear();
     this.targets.clear();
     this.materials.clear();

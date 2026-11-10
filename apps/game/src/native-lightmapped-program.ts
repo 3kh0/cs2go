@@ -189,21 +189,21 @@ export function nativeLightmappedProgram(s: NativeLightmappedMaterial) {
       throw new Error(`Unsupported selected native lightmapped feature: ${k}`);
   for (const [k, v] of Object.entries(flags))
     if (s.IntParams[k] !== v) throw new Error(`Native lightmapped feature missing: ${k}`);
+  // Scalar CB inputs consume X; native defaults retain unused YZW as zero.
   for (const [k, n] of [
     ["g_bDontFlipBackfaceNormals", 0],
     ["g_bRenderBackfaceNormals", 0],
     ["g_flModelTintAmount", 1],
     ["g_flVertexColorOpacityScale", 1],
   ] as const)
-    if (value(s, k).some((v) => v !== n))
-      throw new Error(`Native lightmapped baseline differs: ${k}`);
+    if (value(s, k)[0] !== n) throw new Error(`Native lightmapped baseline differs: ${k}`);
   if (
     value(s, "g_vColorTint")
       .slice(0, 3)
       .some((v) => v !== 1)
   )
     throw new Error("Native lightmapped model tint requires own selected proof");
-  if (direct && value(s, "g_bNoSpecularAtFullRoughness").some((v) => v !== 0))
+  if (direct && value(s, "g_bNoSpecularAtFullRoughness")[0] !== 0)
     throw new Error("Native lightmapped full-roughness specular switch unproved");
   const layerTint = value(s, "g_vLayer1Tint").slice(0, 3),
     metalness = value(s, "g_flMetalness")[0];
@@ -211,13 +211,13 @@ export function nativeLightmappedProgram(s: NativeLightmappedMaterial) {
     throw new Error("Native lightmapped static metalness out of source range");
   const detailScale = detail ? value(s, "g_vLayer1DetailScale").slice(0, 2) : [1, 1],
     detailTint = detail ? value(s, "g_vLayer1DetailTintAndBlend") : [1, 1, 1, 0];
-  if (detail && value(s, "g_bAddBumpMaps").some((v) => v !== 0))
+  if (detail && value(s, "g_bAddBumpMaps")[0] !== 0)
     throw new Error("Native lightmapped bump/detail combination unproved");
   const opacity = overlay ? value(s, "g_flOpacityScale")[0] : 1,
     reference = overlay ? value(s, "g_flAlphaTestReference")[0] : 0,
     reflectance = direct ? value(s, "g_flReflectance")[0] : 0;
-  if (overlay && (opacity !== 1 || Math.abs(reference - 0.01) > 1e-6))
-    throw new Error("Native lightmapped overlay opacity program differs");
+  if (overlay && (opacity < 0 || opacity > 1 || reference < 0 || reference > 1))
+    throw new Error("Native lightmapped overlay uniform out of source range");
   return {
     kind,
     direct,

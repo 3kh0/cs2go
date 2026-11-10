@@ -61,3 +61,12 @@ it("holds unknown bump/backface branches and requires all four resolved lanes", 
   s.resolvedMaterialInputs.g_vLayer1DetailScale = [0.125, 0.125];
   expect(() => validateNativeLightmapped(s)).toThrow("four-lane");
 });
+
+it("accepts unused zero scalar lanes while checking the consumed native X lane", () => {
+  const s = selected();
+  s.resolvedMaterialInputs.g_flModelTintAmount = [1, 0, 0, 0];
+  s.resolvedMaterialInputs.g_flVertexColorOpacityScale = [1, 0, 0, 0];
+  expect(() => validateNativeLightmapped(s)).not.toThrow();
+  s.resolvedMaterialInputs.g_flModelTintAmount = [0, 1, 1, 1];
+  expect(() => validateNativeLightmapped(s)).toThrow("baseline");
+});

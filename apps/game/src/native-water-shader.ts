@@ -1,3 +1,10 @@
+import {
+  fountainWaterSourceSha256,
+  fountainWaterProgramSha256,
+  nativeWaterSSR,
+  nativeWaterOil,
+  nativeWaterSSRDeclarations,
+} from "./native-water-ssr";
 import * as T from "three";
 import { nativeWaterPrepare } from "./native-water-core";
 import { applySourceSurfaceLightingBegin } from "./source-surface";
@@ -8,6 +15,9 @@ export const nativeWaterSamplers = [
   "g_tWavesNormalHeight",
 ] as const;
 export interface NativeWaterMaterial {
+  selectedContract?: "inferno-fountain-860-d2";
+  nativeSourceSha256?: string;
+  nativeSelectedProgramSha256?: string;
   shader: string;
   nativeResource: string;
   IntParams: Record<string, number>;
@@ -31,10 +41,20 @@ const vectorTypes: Record<string, number> = {
   g_vCausticsTint: 3,
   g_vDebrisTint: 3,
 };
+export function isNativeFountainWater(source: NativeWaterMaterial) {
+  return (
+    source.selectedContract === "inferno-fountain-860-d2" &&
+    source.nativeResource === "materials/liquids/inferno_fountain.vmat" &&
+    source.nativeSourceSha256 === fountainWaterSourceSha256 &&
+    source.nativeSelectedProgramSha256 === fountainWaterProgramSha256 &&
+    source.IntParams.F_REFLECTION_TYPE === 2 &&
+    source.resolvedMaterialInputs.g_nSSRMaxForwardSteps === 32
+  );
+}
 export function nativeWaterConstants(source: NativeWaterMaterial) {
   if (
     source.shader !== "csgo_water_fancy.vfx" ||
-    source.IntParams.F_REFLECTION_TYPE !== 1 ||
+    (source.IntParams.F_REFLECTION_TYPE !== 1 && !isNativeFountainWater(source)) ||
     source.IntParams.F_REFRACTION !== 1 ||
     source.IntParams.F_CAUSTICS !== 1 ||
     source.IntParams.F_INTERACTION_EFFECTS !== 1 ||
@@ -51,6 +71,9 @@ export function nativeWaterConstants(source: NativeWaterMaterial) {
     [
       ...nativeWaterPrepare.matchAll(/\bg_[bfnv]\w+/g),
       ...waterLighting.matchAll(/\bg_[bfnv]\w+/g),
+      ...(nativeWaterOil + (isNativeFountainWater(source) ? nativeWaterSSR : "")).matchAll(
+        /\bg_[bfnv]\w+/g,
+      ),
     ].map((match) => match[0]),
   );
   return [...names]
@@ -95,10 +118,13 @@ vec3 waterComposite(vec3 directLight,vec3 indirectLight){
  diffuse=mix(diffuse,waterState.fogColor*4.0*indirectLight,(waterState.fog*clamp(1.0-waterState.combinedMask+waterState.debrisEdge,0.0,1.0))*(1.0-g_flWaterFogShadowStrength));
  diffuse+=waterSpecular*waterState.reflectionWeight;
  diffuse*=mix(vec3(1.0),indirectLight*.75,clamp(waterState.receiverDebris*4.0,0.0,1.0)*(1.0-waterState.fog));
- // Current proved paint-debris=0 makes native oil modulation inactive.
+ // Native oil modulation follows receiver-darkening, before reflection blend.
  diffuse=mix(diffuse,waterRadiance*g_flEnvironmentMapBrightness,clamp(waterState.reflectionWeight,0.0,1.0));
  float edge=clamp(g_flEdgeHardness*waterState.depth+clamp(waterState.foam,0.0,1.0)+waterState.alphaEdge-.5,0.0,1.0);
  vec3 shoreline=waterState.original*mix(1.0,.6,clamp(waterState.thickness*60.0,0.0,1.0)/(1.0+waterState.distance*.002));
+ vec2 fade=abs(vec2(.5)-nativeWaterMapUv)*2.0;
+ float coverage=clamp(1.0-clamp((max(fade.x,fade.y)-(1.0-g_flSkyBoxFadeRange))/g_flSkyBoxFadeRange,0.0,1.0),0.0,1.0);
+ if(coverage-nativeWaterSSRNoise<0.0)discard;
  return mix(shoreline,diffuse,edge);
 }
 void RE_Direct_NativeWater(const in IncidentLight directLight,const in vec3 geometryPosition,const in vec3 geometryNormal,const in vec3 geometryViewDir,const in vec3 geometryClearcoatNormal,const in PhysicalMaterial material,inout ReflectedLight reflectedLight){
@@ -127,6 +153,7 @@ export function applyNativeWaterShader(
   textureReads: string,
 ) {
   const constants = nativeWaterConstants(source);
+  const fountain = isNativeFountainWater(source);
   shader.vertexShader = `varying vec3 vWaterSourcePosition,vWaterSourceNormal;uniform vec3 waterCameraSource;\n${shader.vertexShader}`;
   shader.vertexShader = shader.vertexShader.replace(
     "#include <project_vertex>",
@@ -143,15 +170,22 @@ export function applyNativeWaterShader(
  vec4 mvPosition=viewMatrix*vec4(displacedWorld,1.0);gl_Position=projectionMatrix*mvPosition;
  `,
   );
-  const core = nativeWaterSamplers.reduce(
+  let core = nativeWaterSamplers.reduce(
     (code, sampler) =>
       code.replaceAll(`texture(${sampler},`, `${sampler.replace(/^g_t/, "environment")}Read(`),
     nativeWaterPrepare,
   );
-  shader.fragmentShader = `${waterUniformDeclarations}\n${textureReads}\n${constants}\n${core}\n${shader.fragmentShader}`;
+  const marker = "waterState.normal=_9985;";
+  if (!core.includes(marker)) throw new Error("Native water preparation state marker missing");
+  core = core.replace(
+    marker,
+    "nativeWaterMapUv=_19865;nativeWaterSSRPosition=_10932;nativeWaterSSRNoise=_13724;nativeWaterSSRLod=_4694;nativeWaterSSRCos=_16080;nativeWaterSSRFresnel=_16820;\n" +
+      marker,
+  );
+  shader.fragmentShader = `${waterUniformDeclarations}\n${nativeWaterSSRDeclarations}\n${textureReads}\n${constants}\n${core}\n${fountain ? nativeWaterSSR : ""}\n${nativeWaterOil}\n${shader.fragmentShader}`;
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <lights_physical_pars_fragment>",
-    `#include <lights_physical_pars_fragment>\n${waterLighting}`,
+    `#include <lights_physical_pars_fragment>\n${waterLighting.replace("waterRadiance*g_flEnvironmentMapBrightness", fountain ? "nativeWaterFountainOil(nativeWaterFountainReflection(waterRadiance*g_flEnvironmentMapBrightness,diffuse))" : "nativeWaterFountainOil(waterRadiance*g_flEnvironmentMapBrightness)")}`,
   );
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <normal_fragment_maps>",

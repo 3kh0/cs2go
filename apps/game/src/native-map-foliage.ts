@@ -253,7 +253,12 @@ export async function loadNativeMapFoliage(renderer: T.WebGLRenderer, path: stri
 export function applyNativeMapFoliage(
   root: T.Object3D,
   bundle: Awaited<ReturnType<typeof loadNativeMapFoliage>>,
-  options: { sourceWorldFrame?: EnvironmentWorldFrame; windState: SourceFoliageWindState },
+  options: {
+    sourceWorldFrame?: EnvironmentWorldFrame;
+    windState: SourceFoliageWindState;
+    /** Explicit local bounds including authored placements and wind envelope. */
+    instanceBounds?: ReadonlyMap<T.InstancedMesh, T.Sphere>;
+  },
 ) {
   const frame =
       options.sourceWorldFrame ??
@@ -264,7 +269,8 @@ export function applyNativeMapFoliage(
       ),
     nativeToWorld = frame.worldToNative.clone().invert();
   const depthScene = new T.Scene(),
-    depthPairs: { source: T.Mesh; depth: T.Mesh }[] = [],
+    depthPairs: { source: T.Mesh; depth: T.Mesh; matrixVersion?: number }[] = [],
+    instanceDepthViews = new Set<T.InstancedMesh>(),
     owned = new Set<T.Material>(),
     updates: (
       | ReturnType<typeof createSourceFoliageSway>
@@ -282,6 +288,25 @@ export function applyNativeMapFoliage(
     prepassAA = { value: false };
   root.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
+    if (object instanceof T.InstancedMesh) {
+      // Current authored clutter has one BYTE3 tint palette per group. Resolve
+      // that palette through the existing native material tint path, not Three's
+      // otherwise unqualified per-instance color multiplication.
+      if (object.instanceColor || object.morphTexture)
+        throw new Error(
+          "Native foliage instances require resolved palette materials and no morph input",
+        );
+      const bounds = options.instanceBounds?.get(object);
+      if (bounds) {
+        if (
+          !Number.isFinite(bounds.radius) ||
+          bounds.radius < 0 ||
+          bounds.center.toArray().some((value) => !Number.isFinite(value))
+        )
+          throw new Error("Invalid conservative native foliage instance bounds");
+        object.boundingSphere = bounds.clone();
+      }
+    }
     const materials = Array.isArray(object.material) ? object.material : [object.material];
     const depthMaterials: T.MeshDepthMaterial[] = [],
       shadowFlags: boolean[] = [];
@@ -425,12 +450,21 @@ export function applyNativeMapFoliage(
         nativeFoliageNormalToWorld: { value: frame.nativeToWorldNormal },
         nativeFoliageTime: time,
       };
+      const instanceFrame = `
+mat4 foliageModelMatrix(){
+ #ifdef USE_INSTANCING
+ return modelMatrix*instanceMatrix;
+ #else
+ return modelMatrix;
+ #endif
+}
+`;
       const positionFunction = mode
-        ? `vec3 foliagePosition(vec3 p){vec3 world=(modelMatrix*vec4(p,1)).xyz;vec3 own=(nativeFoliageWorldToOwn*vec4(world,1)).xyz;vec3 bent=sourceFoliageSwayPoint(foliageBToS(own),nativeFoliageControl);return(inverse(modelMatrix)*nativeFoliageOwnToWorld*vec4(foliageSToB(bent),1)).xyz;}`
+        ? `vec3 foliagePosition(vec3 p){mat4 placement=foliageModelMatrix();vec3 world=(placement*vec4(p,1)).xyz;vec3 own=(nativeFoliageWorldToOwn*vec4(world,1)).xyz;vec3 bent=sourceFoliageSwayPoint(foliageBToS(own),nativeFoliageControl);return(inverse(placement)*nativeFoliageOwnToWorld*vec4(foliageSToB(bent),1)).xyz;}`
         : `vec3 foliagePosition(vec3 p){return p;}`;
       const vertex = (shader: T.WebGLProgramParametersWithUniforms) => {
         Object.assign(shader.uniforms, uniforms);
-        shader.vertexShader = `${hasControls ? "attribute vec4 nativeFoliageControl;" : ""}\nuniform mat4 nativeFoliageWorldToOwn,nativeFoliageOwnToWorld;uniform mat3 nativeFoliageNormalToOwn,nativeFoliageNormalToWorld;varying vec4 vNativeFoliageControl;varying vec3 vNativeFoliageView;varying vec2 vNativeFoliageUv;varying vec3 vNativeFoliageCross,vNativeFoliageOriginal;\n${(sway?.glsl ?? "").replace("animatedN=normalize(cross(tangent,bitangent));", "animatedN=cross(tangent,bitangent);").replace("animatedT=normalize(tangent);", "animatedT=tangent;")}\nvec3 foliageBToS(vec3 p){return vec3(p.x,-p.z,p.y)/.0254;}vec3 foliageSToB(vec3 p){return vec3(p.x,p.z,-p.y)*.0254;}\n${positionFunction}\n${shader.vertexShader}`;
+        shader.vertexShader = `${hasControls ? "attribute vec4 nativeFoliageControl;" : ""}\nuniform mat4 nativeFoliageWorldToOwn,nativeFoliageOwnToWorld;uniform mat3 nativeFoliageNormalToOwn,nativeFoliageNormalToWorld;varying vec4 vNativeFoliageControl;varying vec3 vNativeFoliageView;varying vec2 vNativeFoliageUv;varying vec3 vNativeFoliageCross,vNativeFoliageOriginal;\n${(sway?.glsl ?? "").replace("animatedN=normalize(cross(tangent,bitangent));", "animatedN=cross(tangent,bitangent);").replace("animatedT=normalize(tangent);", "animatedT=tangent;")}\nvec3 foliageBToS(vec3 p){return vec3(p.x,-p.z,p.y)/.0254;}vec3 foliageSToB(vec3 p){return vec3(p.x,p.z,-p.y)*.0254;}\n${instanceFrame}\n${positionFunction}\n${shader.vertexShader}`;
         shader.vertexShader = shader.vertexShader
           .replace(
             "#include <begin_vertex>",
@@ -443,8 +477,24 @@ export function applyNativeMapFoliage(
         shader.vertexShader = shader.vertexShader.replace(
           "#include <beginnormal_vertex>",
           mode
-            ? `#include <beginnormal_vertex>\nvec3 ownP=foliageBToS((nativeFoliageWorldToOwn*modelMatrix*vec4(position,1)).xyz);vec3 ownN=nativeFoliageNormalToOwn*normalize(mat3(modelMatrix)*objectNormal);vec3 ownT=nativeFoliageNormalToOwn*normalize(mat3(modelMatrix)*objectTangent);ownN=vec3(ownN.x,-ownN.z,ownN.y);ownT=vec3(ownT.x,-ownT.z,ownT.y);vNativeFoliageOriginal=mat3(viewMatrix)*normalize(mat3(modelMatrix)*objectNormal);vec3 bendP,bendN,bendT;sourceFoliageSwayFrame(ownP,ownN,ownT,nativeFoliageControl,bendP,bendN,bendT);vNativeFoliageCross=mat3(viewMatrix)*nativeFoliageNormalToWorld*vec3(bendN.x,bendN.z,-bendN.y);objectNormal=inverse(mat3(modelMatrix))*nativeFoliageNormalToWorld*vec3(bendN.x,bendN.z,-bendN.y);objectTangent=inverse(mat3(modelMatrix))*nativeFoliageNormalToWorld*vec3(bendT.x,bendT.z,-bendT.y);`
-            : `#include <beginnormal_vertex>\nvNativeFoliageOriginal=mat3(viewMatrix)*normalize(mat3(modelMatrix)*objectNormal);vNativeFoliageCross=vNativeFoliageOriginal;`,
+            ? `#include <beginnormal_vertex>\nvec3 nativeFoliageViewTangent;vec3 ownP=foliageBToS((nativeFoliageWorldToOwn*foliageModelMatrix()*vec4(position,1)).xyz);vec3 ownN=nativeFoliageNormalToOwn*normalize(mat3(foliageModelMatrix())*objectNormal);vec3 ownT=nativeFoliageNormalToOwn*normalize(mat3(foliageModelMatrix())*objectTangent);ownN=vec3(ownN.x,-ownN.z,ownN.y);ownT=vec3(ownT.x,-ownT.z,ownT.y);vNativeFoliageOriginal=mat3(viewMatrix)*normalize(mat3(foliageModelMatrix())*objectNormal);vec3 bendP,bendN,bendT;sourceFoliageSwayFrame(ownP,ownN,ownT,nativeFoliageControl,bendP,bendN,bendT);vNativeFoliageCross=mat3(viewMatrix)*nativeFoliageNormalToWorld*vec3(bendN.x,bendN.z,-bendN.y);objectNormal=inverse(mat3(foliageModelMatrix()))*nativeFoliageNormalToWorld*vec3(bendN.x,bendN.z,-bendN.y);objectTangent=inverse(mat3(foliageModelMatrix()))*nativeFoliageNormalToWorld*vec3(bendT.x,bendT.z,-bendT.y);nativeFoliageViewTangent=mat3(viewMatrix)*nativeFoliageNormalToWorld*vec3(bendT.x,bendT.z,-bendT.y);`
+            : `#include <beginnormal_vertex>\nvec3 nativeFoliageViewTangent=mat3(viewMatrix)*normalize(mat3(foliageModelMatrix())*objectTangent);vNativeFoliageOriginal=mat3(viewMatrix)*normalize(mat3(foliageModelMatrix())*objectNormal);vNativeFoliageCross=vNativeFoliageOriginal;`,
+        );
+        // Native normals use direct authored placement, not Three's
+        // inverse-square instance-scale correction.
+        shader.vertexShader = shader.vertexShader.replace(
+          "#include <defaultnormal_vertex>",
+          `#include <defaultnormal_vertex>
+#ifdef USE_INSTANCING
+transformedNormal=vNativeFoliageCross;
+#ifdef USE_TANGENT
+transformedTangent=nativeFoliageViewTangent;
+#endif
+#ifdef FLIP_SIDED
+transformedNormal=-transformedNormal;
+#endif
+#endif
+`,
         );
       };
       // Alias the preserved source stream without editing or gamma-decoding it.
@@ -459,7 +509,7 @@ export function applyNativeMapFoliage(
           )
         : undefined;
       const depthHook = {
-        cacheKey: `native-foliage-depth:${mode}:${alphaTest}:${hasControls}`,
+        cacheKey: `native-foliage-depth-instance-v1:${mode}:${alphaTest}:${hasControls}`,
         apply(
           shader: T.WebGLProgramParametersWithUniforms,
           _renderer?: T.WebGLRenderer,
@@ -589,21 +639,33 @@ export function applyNativeMapFoliage(
           );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-foliage:${mode}:${alphaTest}:${transmission}:${useAlbedo}:${tint}:${flipNormals}:${hasControls}`;
+        `${key}:native-foliage-instance-v1:${mode}:${alphaTest}:${transmission}:${useAlbedo}:${tint}:${flipNormals}:${hasControls}`;
       material.needsUpdate = true;
       registerSurfaceTextures(material, samplers(native).map(required));
+      material.userData.nativeFoliageInstanceSafe = true;
     }
     if (depthMaterials.some((material) => material.visible)) {
-      const depthMesh = new T.Mesh(
-        object.geometry,
-        Array.isArray(object.material) ? depthMaterials : depthMaterials[0],
-      );
+      const depthMaterial = Array.isArray(object.material) ? depthMaterials : depthMaterials[0];
+      const depthMesh =
+        object instanceof T.InstancedMesh
+          ? new T.InstancedMesh(object.geometry, depthMaterial, 0)
+          : new T.Mesh(object.geometry, depthMaterial);
+      if (depthMesh instanceof T.InstancedMesh && object instanceof T.InstancedMesh) {
+        // Share immutable CPU matrix bytes; separate attribute ownership keeps
+        // color and depth GPU lifetimes independent and avoids double release.
+        depthMesh.instanceMatrix = new T.InstancedBufferAttribute(object.instanceMatrix.array, 16);
+        depthMesh.count = object.count;
+        depthMesh.boundingSphere = object.boundingSphere?.clone() ?? null;
+        instanceDepthViews.add(depthMesh);
+      }
       depthMesh.matrixAutoUpdate = false;
-      depthMesh.frustumCulled = false;
+      depthMesh.frustumCulled =
+        object instanceof T.InstancedMesh && !!options.instanceBounds?.has(object);
       depthScene.add(depthMesh);
       depthPairs.push({ source: object, depth: depthMesh });
     }
-    object.frustumCulled = false;
+    object.frustumCulled =
+      object instanceof T.InstancedMesh && !!options.instanceBounds?.has(object);
     if (shadowFlags.some(Boolean) && !shadowFlags.every(Boolean))
       throw new Error("Mixed native foliage shadow policy requires primitive split");
     sourceSunCaster(object, animatedCaster);
@@ -631,6 +693,26 @@ export function applyNativeMapFoliage(
       root.updateWorldMatrix(true, true);
       for (const pair of depthPairs) {
         pair.depth.matrix.copy(pair.source.matrixWorld);
+        pair.depth.matrixWorldNeedsUpdate = true;
+        if (pair.source instanceof T.InstancedMesh && pair.depth instanceof T.InstancedMesh) {
+          if (pair.depth.instanceMatrix.array !== pair.source.instanceMatrix.array) {
+            pair.depth.instanceMatrix.dispose();
+            pair.depth.instanceMatrix = new T.InstancedBufferAttribute(
+              pair.source.instanceMatrix.array,
+              16,
+            );
+          }
+          if (pair.matrixVersion !== pair.source.instanceMatrix.version) {
+            pair.depth.instanceMatrix.needsUpdate = true;
+            pair.matrixVersion = pair.source.instanceMatrix.version;
+          }
+          pair.depth.count = pair.source.count;
+          if (pair.source.boundingSphere) {
+            pair.depth.boundingSphere ??= new T.Sphere();
+            pair.depth.boundingSphere.copy(pair.source.boundingSphere);
+          }
+          pair.depth.frustumCulled = pair.source.frustumCulled;
+        }
         let visible = true;
         for (let p: T.Object3D | null = pair.source; p; p = p.parent) visible &&= p.visible;
         pair.depth.visible = visible;
@@ -655,6 +737,8 @@ export function applyNativeMapFoliage(
       }
     },
     dispose() {
+      for (const mesh of instanceDepthViews) mesh.dispose();
+      instanceDepthViews.clear();
       for (const material of owned) material.dispose();
       owned.clear();
       depthPairs.length = 0;

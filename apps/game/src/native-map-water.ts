@@ -1,3 +1,4 @@
+import { waterSSRProjectionFromBrowser } from "./native-water-ssr";
 import * as T from "three";
 import { loadSourceMaterialBundle } from "./source-layers";
 import { registerSurfaceTextures } from "./presentation-settings";
@@ -114,6 +115,7 @@ export function applyNativeMapWater(
     waterSourceViewTranspose: { value: new T.Matrix4() },
     waterInverseProjection: { value: new T.Matrix4() },
     waterCameraWorld: { value: new T.Matrix4() },
+    waterSSRViewToClip: { value: new T.Matrix4() },
   };
   const exclude = new Set<T.Object3D>(),
     replacements = new Map<T.Material, T.MeshStandardMaterial>();
@@ -133,6 +135,21 @@ export function applyNativeMapWater(
       if (!(source instanceof T.MeshStandardMaterial))
         throw new Error("Native water requires a standard lighting receiver");
       exclude.add(object);
+      // Native VS shifts up to20*offset horizontally plus offset alongN.
+      // Expand culling bounds conservatively; positions/physics stay unchanged.
+      const worldScale = object.getWorldScale(new T.Vector3());
+      const margin =
+        (21 * Math.abs(native.FloatParams.g_flWaterPlaneOffset) * 0.0254) /
+        Math.min(Math.abs(worldScale.x), Math.abs(worldScale.y), Math.abs(worldScale.z));
+      const geometry = object.geometry;
+      const previousMargin = Number(geometry.userData.nativeWaterBoundsMargin ?? 0);
+      if (margin > previousMargin) {
+        geometry.computeBoundingBox();
+        geometry.computeBoundingSphere();
+        geometry.boundingBox!.expandByScalar(margin);
+        geometry.boundingSphere!.radius += margin;
+        geometry.userData.nativeWaterBoundsMargin = margin;
+      }
       object.castShadow = false;
       let material = replacements.get(source);
       if (material) return material;
@@ -259,6 +276,9 @@ export function applyNativeMapWater(
       temporary.setFromMatrixColumn(camera.matrixWorld, 1);
       sourceDirection(uniforms.waterUpSource.value.copy(temporary));
       uniforms.waterCameraWorld.value.copy(camera.matrixWorld);
+      uniforms.waterSSRViewToClip.value.copy(
+        waterSSRProjectionFromBrowser(camera.projectionMatrix),
+      );
       uniforms.waterInverseProjection.value.copy(camera.projectionMatrixInverse);
       uniforms.waterDepthCoefficients.value.set(
         0.0254 / camera.near - 0.0254 / camera.far,

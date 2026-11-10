@@ -1,0 +1,1394 @@
+{
+  "mapId": "nuke",
+  "scope": "sky",
+  "materials": {
+    "four_nuke_sky_6": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/ground/hr_g/ground_farm_01.vmat",
+      "nativeSourceSha256": "7911615d192962ded0bd097d0a51daed43a1ce7141ff57f4b962bd219acf09a9",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "ground_farm_01",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 6,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILBLENDMODE": 0,
+        "F_DETAILTEXTURE": 1,
+        "F_LAYERS": 0,
+        "F_TEXTURETRANSFORMS": 0
+      },
+      "FloatParams": {},
+      "VectorParams": {
+        "g_vLayer1DetailScale": [
+          0.25,
+          0.25,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.25
+        ],
+        "g_vLayer1Tint": [
+          0.954687,
+          0.954687,
+          0.954687,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "afdda99e55a9b40e",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "f2ae725a2dd03dba",
+        "g_tLayer1NormalRoughness": "131d6db1fb456583"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.25,
+          0.25,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.25
+        ],
+        "g_vLayer1Tint": [
+          0.8999996322886562,
+          0.8999996322886562,
+          0.8999996322886562,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "7911615d192962ded0bd097d0a51daed43a1ce7141ff57f4b962bd219acf09a9",
+        "sourceTintTransportTypes": [
+          "ordinary-source-FLOAT"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_nuke_sky_9": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/concrete/hr_c/hr_concrete_wall_005.vmat",
+      "nativeSourceSha256": "7d1eb11f98c9476cb42516f9156f046f97886c9fd27aaf1902ab9c8eadd815f5",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "hr_concrete_wall_005",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 9,
+          "baseColorFactor": [
+            0.78619504,
+            0.78619504,
+            0.78619504,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.899385,
+            0.899385,
+            0.899385,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.78619504,
+            0.78619504,
+            0.78619504,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.6,
+          0.2,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.35
+        ],
+        "g_vLayer1RoughnessBrightnessContrast": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "44a403a15e934432",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "01390011b4d1929a",
+        "g_tLayer1NormalRoughness": "131d6db1fb456583"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.6,
+          0.2,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.35
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "7d1eb11f98c9476cb42516f9156f046f97886c9fd27aaf1902ab9c8eadd815f5",
+        "sourceTintTransportTypes": [
+          "ordinary-source-FLOAT"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_nuke_sky_8": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/concrete/hr_c/hr_concrete_roof_001.vmat",
+      "nativeSourceSha256": "5079e85dfe7da72832d10d3740f35de096293cffb3031194dd2141030090f596",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "hr_concrete_roof_001",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 8,
+          "baseColorFactor": [
+            0.78619504,
+            0.78619504,
+            0.78619504,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.899385,
+            0.899385,
+            0.899385,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.78619504,
+            0.78619504,
+            0.78619504,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.6
+        ],
+        "g_vLayer1Tint": [
+          0.956863,
+          0.956863,
+          0.956863,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "c1285396c2587fba",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "388978cc90b9f9cd",
+        "g_tLayer1NormalRoughness": "131d6db1fb456583"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.6
+        ],
+        "g_vLayer1Tint": [
+          0.9046617213426773,
+          0.9046617213426773,
+          0.9046617213426773,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "5079e85dfe7da72832d10d3740f35de096293cffb3031194dd2141030090f596",
+        "sourceTintTransportTypes": [
+          "ordinary-source-FLOAT"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    }
+  },
+  "textures": {
+    "afdda99e55a9b40e": {
+      "resource": "materials/ground/hr_g/ground_farm_01_color_psd_8a7f3ae.vtex",
+      "sourceSha256": "d637a3de55aca34358a80f80b6691aa9c52f0f27c92ff2b7d679645e9907d015",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.14536833763122559,
+        0.13891810178756714,
+        0.11000173538923264
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "afdda99e55a9b40e.bin.gz",
+      "gpuBytes": 174760,
+      "gpuSha256": "83f5d4b4483e63208a1df6ac3cdd14fe20cadb6f6cb751b74211938c6e757d2e",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "864deae58a59c370f85b07bdc92574767e3006836c21857da8dbb9516f23dd9f"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "5dc55c2b5aa4d4554818d00078c06bcb6e7bcfb867f76330204faad0294895d7"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "62660b69939b229b78860d73db78610f8ef64819cc21309fde1c02adc881736c"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "85c6bc8d734180f7355398192cf0541895baa8f2f26d53a7f92679f9f5b2f646"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "346337c2a86b3962677ea05c6aea05327105bc51a1da275ea20f47d8f5a23af7"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "481468c152cd25e3ca4f67c2e4e418d3fe173716d737243ac2e63ea3833970f6"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "03ac360124073aa4461aa89bef7502008039f60d23392985e000f55f33592fe4"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "d9a44468f78d8f46b678fbc74e340471cf1151030ef67ec43a33256915a77610"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "afdda99e55a9b40e.png",
+      "decodedSha256": "2b8f5d764f38df011cd13cac31b9d6d29efc0e75e7f79ff2edcff6827f2463ba",
+      "fallbackFile": "afdda99e55a9b40e-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "034438e08adf3a97092bd7332061a2fc72564b018f1ea6498319b81da7274128"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "4213475e30afaddb2a6fc603c6f39bc4e9ce9893c3e28a82e3b458db7859b9f9"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "9d8c787a80c5d1005245011e715e682b8f4423a7319b9fd2fbdb36c05d5ae5f5"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "fe4c2967ba37de0b427f9fb063effd1d9a1800aa622a4f9b74c8938c26530dba"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "49858d027ec1ee7e77afe6164e06c5a27ac1dc33729d286b27ec22c6dd35c005"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "cc81e87bdf3b47c51721f5e26bfd01086ee626d2c55357772efdc4022dde324f"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "45c1d98a1c5fd2169fb3d734fa32959af34e45f5333d5143e9095b28bb56c463"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "edbcd1825d71030a07477c1f1186f5535f874fa3844ae21dfa8b8cd1cd18403e"
+        }
+      ]
+    },
+    "cf0f8accdfc38e3f": {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex",
+      "sourceSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "cf0f8accdfc38e3f.bin.gz",
+      "gpuBytes": 8,
+      "gpuSha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "cf0f8accdfc38e3f-e0b83fe25f-storage.png",
+      "decodedSha256": "6f73ba3cfd6e5314cb9235533c7c90d87f1f7bd19625cef96ae888724ca45007",
+      "fallbackFile": "cf0f8accdfc38e3f-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "f2ae725a2dd03dba": {
+      "resource": "materials/nature/hr_c/hr_terrain_001_detail_color_psd_5ac2b7ab.vtex",
+      "sourceSha256": "b96e5e6e21e40cc310bc5eb17a5c573a48d5cd74cc6c6b0628eb3b703664a525",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.49989694356918335,
+        0.49989694356918335,
+        0.49989694356918335
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "f2ae725a2dd03dba.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "1cdfb5b37a781210e1946e0803370b1554503e46a429d635c93a74dc0cae0572",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "1735d2a3ca6dc8e7d53f06508d18ce30f021f1df4ee3c381fde409a1b3355930"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "7f59771bc0320789c60fa8c461993dbe16323f3155139129a45d50fe0ed27101"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "302b731eb7348196058d7643e33dfaec146712412855b45bceee0f42cca01a94"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "cec6b2ed46acb245edbbd03a81d45e1ceb524195cf5cd584e4a9684ae95fccf9"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "7730aa0fc58da3de3a093254cbd626379fb19402209b3f9257c1194bb732185a"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "86522cdf558fdd949b783e07e13186aa58e3b4671ade35d9dbe42d0c95b39575"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "9a15f35e7fc73b5885dc7550d08f90266103537c86be9e8f1d06c6f982499765"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "9c869c809e5af4578c85a29d81600d4ac4cc5b44e544f3fdfb631e9be9cda5d7"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "f2ae725a2dd03dba.png",
+      "decodedSha256": "d25295c5c960c5a650975f7acce103f32c973fd93b9f004c1233d938a1499c3f",
+      "fallbackFile": "f2ae725a2dd03dba-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "695f040a57a1fbbb9a670275cc44dfdc5ea68cb846675e032f2efb25d7f1dc51"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "b5fad9174f74c1d2eb63ef2407c7f5e30aca8b4fe8d6a367ba403f1b46aaa54b"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "aa377d511719eb715387071093a15cb5c9502cb8081311a3e4d1913fac7e21bc"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "1ea0ac78d871aa5d4fd74e4fda50f676dbf444073ac5bf99abffe389c8a10309"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "5e60c4fa5f1f036a35523c640b45d19e1712ed673e0132ca00e7f2a1cd4a8694"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "20e5a57ffa9a02ae50065af5b83923b2281c878844b01c38064029025fbd8eac"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "6c88ece1524a33a8d09bd41851371490c4b43a3c40784bb89210624fae5f9ed0"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "983bf6dec1b8f767874dca641dd866c7df30d0fc54a5bb6e0e53b6a45daac45b"
+        }
+      ]
+    },
+    "131d6db1fb456583": {
+      "resource": "materials/default/default_normal_tga_7be39f77.vtex",
+      "sourceSha256": "7b4d56b63404963ca56ec26ce49ebf938e4e33154e95df875a9c1c4d40f76655",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        0.960784375667572
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "131d6db1fb456583.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "3a333237000cc3ccb9785324e72a049035c8e9d6a780be7d1e45d81bdbc9b450",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "3a333237000cc3ccb9785324e72a049035c8e9d6a780be7d1e45d81bdbc9b450"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "7b4d56b63404963ca56ec26ce49ebf938e4e33154e95df875a9c1c4d40f76655",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "131d6db1fb456583-7b4d56b634-storage.png",
+      "decodedSha256": "ae688360067a51b39370b15df8c8688274799b8531d3b7eedcbef5c9a5e0174d",
+      "fallbackFile": "131d6db1fb456583-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "a7ad1206c1f238ff0c99d14bdf0bb579692d070c548693a0637aa31358eab3cf"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "a7ad1206c1f238ff0c99d14bdf0bb579692d070c548693a0637aa31358eab3cf"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        0.9607843137254902,
+        1.0
+      ]
+    },
+    "44a403a15e934432": {
+      "resource": "materials/concrete/hr_c/hr_concrete_wall_005_color_psd_fa93ec21.vtex",
+      "sourceSha256": "96395c48525b4b1df6438add07be57b9a177f602bd6aa8fbbf25c6a69c102c53",
+      "srgb": true,
+      "sourceSize": [
+        2048,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.34680408239364624,
+        0.34192872047424316,
+        0.33080416917800903
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "44a403a15e934432.bin.gz",
+      "gpuBytes": 699040,
+      "gpuSha256": "3cb0cc9bc9640da9a0aeafceb3dd534051c5374edda0e694d3eee46c70568e6e",
+      "mips": [
+        {
+          "width": 2048,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "6c033020f308e47ae747178546f08fbba0bbf100d01d3f4a77e302be15ab0a54"
+        },
+        {
+          "width": 1024,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "95e35133e6b744d2013e2b700b69345e0d7d8fbad5eb99f666837955102ec986"
+        },
+        {
+          "width": 512,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "4acebd5f391dbe71f94ebd5d6be9d016ca7c48327fa1063b27b682786ee8d785"
+        },
+        {
+          "width": 256,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "6abaf1f578767a951e39404e06a07f54ec5b8b19a195781e5dd7a984ce682f5f"
+        },
+        {
+          "width": 128,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "23bd0ec39baab40622583c1954ff4f29665fbee97dd4d41bf9721434a37706d2"
+        },
+        {
+          "width": 64,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "dbde1cbef8d1415ae9a1655c186da6295ab40988d0832dd33a05e10d49dca0a2"
+        },
+        {
+          "width": 32,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "eaeb76ba0fb99846f8a7a2a0d8f4652b882007667ab1a34bca55c6c34ba7b0c2"
+        },
+        {
+          "width": 16,
+          "height": 4,
+          "bytes": 32,
+          "sha256": "30d6a37017504fce7608cf8fd1f0f53fadb3cae4e4c459c831715587954c1e78"
+        }
+      ],
+      "decodedSize": [
+        2048,
+        512
+      ],
+      "decodedSource": "44a403a15e934432.png",
+      "decodedSha256": "8df04253bbd2f9586143e908a6c7aad4cf3c7832ee162f1e79963fe7cfacbb59",
+      "fallbackFile": "44a403a15e934432-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592320,
+      "fallbackMips": [
+        {
+          "width": 2048,
+          "height": 512,
+          "bytes": 4194304,
+          "sha256": "dc4e6e42a109497a3ba562dc22dcb6b2dc3a241933894612756dd26c458c04ae"
+        },
+        {
+          "width": 1024,
+          "height": 256,
+          "bytes": 1048576,
+          "sha256": "b713cc02b64aac509ecd03fdcb89c3d73e0a4e6fa36c7190662b7b7d4d1f01c2"
+        },
+        {
+          "width": 512,
+          "height": 128,
+          "bytes": 262144,
+          "sha256": "83dba5fea4ae3fd35fc3a6b3dc7c9a94ead5b4642b49f76edce452ed0a26b766"
+        },
+        {
+          "width": 256,
+          "height": 64,
+          "bytes": 65536,
+          "sha256": "1fe83a3d2b74f2be582c6b1124cd5a54c3c09e57dd69f997ce5ddda2e3711ba0"
+        },
+        {
+          "width": 128,
+          "height": 32,
+          "bytes": 16384,
+          "sha256": "ac6789ba0791f2e9ee741e01e84925695b5cb141bf902aaaa237aad49ff40dee"
+        },
+        {
+          "width": 64,
+          "height": 16,
+          "bytes": 4096,
+          "sha256": "2fff9837e2a1915c04209576ebf36a66c2f5665c7da53ee7a63573d127aa011d"
+        },
+        {
+          "width": 32,
+          "height": 8,
+          "bytes": 1024,
+          "sha256": "3cf5ba9f0661b4e0b85eba7a4772cfdc19837255afdd28ca8718b40bd9da5ba4"
+        },
+        {
+          "width": 16,
+          "height": 4,
+          "bytes": 256,
+          "sha256": "e11a11c652b6b7e3a77fd7e2f5aaf88d540363397f2fd7c3a603fc9d60e4c7e1"
+        }
+      ]
+    },
+    "01390011b4d1929a": {
+      "resource": "materials/concrete/hr_c/hr_concrete_wall_005_detail_color_psd_1668368e.vtex",
+      "sourceSha256": "d5f071ee33f01e0159571aff29762d2b5a627fe442655f34bfd92ab480071ddf",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        256
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.49969273805618286,
+        0.49969273805618286,
+        0.49969273805618286
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "01390011b4d1929a.bin.gz",
+      "gpuBytes": 174752,
+      "gpuSha256": "4834411b89b35a6e9339e5d57b6f82b7c2508be808bf4851a082d2531db26a3a",
+      "mips": [
+        {
+          "width": 512,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "90a2ad9a4867c70b9ecd2b11f1829dd0a4f91460f2d3965f5286ca646bcb21ef"
+        },
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "9d4aa162645eb37d0cc502b03607328619332b7cbadfbb6410d7f3632fe1d6c1"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "7afaa2a63fc95acc369933030ffeca2caef82189be0d382a762e4f4e64c2cd6a"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "d959c5188066b2bb968e1baa01c33aa351042e897cf67857540ea9a50c4be30a"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "3b7a90db3c2c84659b2b2e76fa95887379c8d1b3cd2eaaba6089cd81f9da200a"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "2c2a72960217b59d769ef301313e93261d53b8b357ed0d031df868eb573821f4"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 32,
+          "sha256": "9abec9dda4bcf6962d63726c429f85f34147f4738cf827c0ddb511e500a44f02"
+        }
+      ],
+      "decodedSize": [
+        512,
+        256
+      ],
+      "decodedSource": "01390011b4d1929a.png",
+      "decodedSha256": "bd8c0f5f8636aec4619cbeabb2cc3529e00d7b76503dcf3b95c57ccbc696b82e",
+      "fallbackFile": "01390011b4d1929a-rgba8-mips.bin.gz",
+      "fallbackBytes": 699008,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 256,
+          "bytes": 524288,
+          "sha256": "8d0983efd13246f3c08dfa4d84e553235547cca06d28bcdc2726193747774150"
+        },
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 131072,
+          "sha256": "567c888fb3de6fe456bce8c02d7e3a40c513a73cfbafc0b336adac9ea28f8cf3"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 32768,
+          "sha256": "f68c9f131367c13ecb36a88394b58955db3773c4c7d55a6c05cc278049edb7c3"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 8192,
+          "sha256": "8559cfcd52fec123950d549839bfd7a50a5679bba2684f8fad3f74e4bb148bb8"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 2048,
+          "sha256": "19f83a08082b34d6e217c5236831db30157731315c5e7a615214375e6fd79df3"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 512,
+          "sha256": "3c4d33559c6eee8bed078b83bba07fca98d1f20aadca3bba18590edb2acdfc45"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 128,
+          "sha256": "9f90c6e86c6af0d936188b8ffcc5d2a04ed7cc20bcfa5d820a4c8b7c5dad003d"
+        }
+      ]
+    },
+    "c1285396c2587fba": {
+      "resource": "materials/concrete/hr_c/hr_concrete_roof_001_color_psd_adaad75f.vtex",
+      "sourceSha256": "a74f096a52fda964d27978af0d397e781375b8c8d4f77768da6cbc827ae5309f",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.29263508319854736,
+        0.2918087840080261,
+        0.29290103912353516
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "c1285396c2587fba.bin.gz",
+      "gpuBytes": 174760,
+      "gpuSha256": "7fb59d5cdf840572b79dfc8c38511b60034b4021ad48cb06e05b9553861df54c",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "35ca88f20542d1fbcd5be9a139548026efb7ddccd9e5552e789a9a5596f67e98"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "bfee8fc8cfa0ceca4f7a3c298d189caec026d38a09fc09bacffe4491a4bc6d86"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "f852960b4ca3b078fe7ff889e1619bf5e8700cde22e200f8800d0dfc674a968c"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "4a4883e561db432c7092f11b1aaf376f58ad2ac2a00ebd2cdf99b79ed9e1b0e2"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "d6a74619f302e918bbfd82ff077306025e3743c14a0d5a6e1af2b0a8a100ffb8"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "2d7b8fc84369d29ddc3b9888613a897ede6cd83cdbef81a36b11d1f0321b2c67"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "7ea237f016ad1595e6930190c2c03813108263fb643eab306ed887e92935d8b8"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "d8bc0e4a20ef93ebab89522e7e2168ea166ca73adda1eb8ddbecd7b03b38bc79"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "c1285396c2587fba.png",
+      "decodedSha256": "a4f75b21dfe50debcfea08474522630766c6586d76e95a09124eac0dd15a998d",
+      "fallbackFile": "c1285396c2587fba-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "aa98f4513a7d7c41cba3fb79c54fd8aea123ddca0fc1f1a9610e247ab41df0be"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "b9e20b5d3a0ca99175357ab2d08f87ee1bb06800838cb107cc4cc5168fb17870"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "e6780622e99689227825706de171901de1f4d442a1e5e9e72a0ea2e17af55e17"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "cd941299824a116d3ffbd6d78048b44b74159801eb4e86a8b15073e06f07b826"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "1ce61de021274953a9d29aaa382081484161705fb466a8df794c7e0ca39b4ce1"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "3cb29dd057862e87dc3d1d2fe051a59dc05658f7d279733ab04e1cf86486e0e0"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "f6dda6c3674356de70e8e0dc8c51706a6369eb5d487622808b7ad2b0064f3dd1"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "3d73f83e217d89b48a9a17ba7989c50303efd67ae984d12a8a0dcbfa80f9bcaa"
+        }
+      ]
+    },
+    "388978cc90b9f9cd": {
+      "resource": "materials/concrete/hr_c/hr_concrete_roof_001_detail_color_psd_6160b727.vtex",
+      "sourceSha256": "b7e68c5f75296380dcf7215e0d12dded93c5fc7b23433732f0cc951e2a813b0e",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.49983081221580505,
+        0.4998314082622528,
+        0.4998314082622528
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "388978cc90b9f9cd.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "0e39170bb4e7def2d9dcf3dfad4373eba3c3c5aa1be3f4cb1116376576e52d25",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "9abd5b45a62cb7861caf284c3c5a7a0618ca491aa6976082c061cf77a8f0f0b3"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "1324025eb77d55c0603d0a2b0f2dad67ac5af6586b2715336c7a9f81263d54ac"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "d17f8b776be963b2a63a86d26b7536c2ad5854d93124ded528f559567de297ee"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "d99b04af0782da2861c6e94bfc08a535ddd429f900a97bacbde6f48b0d22a222"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "06fff25c0a370ac8d64f8738d6c18a7471102535ec90b996e8c3e5837acd515d"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "7e553a2f859db3f21f2e708b8da86c7598176cdd707b6849edad8d205cfb2cb2"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "4da4a8526f316a03b9dc4cb8eb5e5a68ab1af08e460e02b7be06a28a1bb9fed8"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "41744d1a97ce38ac07b2096e6ab9e8a20749e6ef1ea5a451e9a03114a2c4824b"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "95d5e521ab90e6d802b5698836b921e69b993c4a49358673dd69ae91c367e30b"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        1024
+      ],
+      "decodedSource": "388978cc90b9f9cd.png",
+      "decodedSha256": "efd9479d947ec74746e9096cdee711c15867a0ecc7af88a363c8c8d8a21403fe",
+      "fallbackFile": "388978cc90b9f9cd-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "e457c30d4a751995820fb75a9b3c2d6de68135d1ee24ecb3cfa067150d0d48ec"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "76cf9d097c28133ccf44b8bb0906ddf04c5d726d54a9d0f0f53a405b854094ad"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "a4c00f4b729be3ce1c630eb5f57691003fc50a66fbf41d5053bd05a172f78a9a"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "8a2754aae00c3eb5fe9abe658206d8aca7f14bdb3f3ef0f27d18fbebeef0b4be"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "eb3538db4a09b85088485dbd4b85787a46a524c8eb0565e614b4f5ad50db663b"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "9cf3374cff5c077af788127a7d38ff2164c504e0f1640817b014acf820f3934c"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "a05a64286b155f1dcf1de167e8a241e08ca4591463cef433c815a673bb0e2e99"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "f14d344278a0ec1a002de4b695bf087cfd46d67e0406897ffae05f2be93b47b0"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "f26a8c6650fdbb19e6b4fb00fbdd656eb2741163db81884dd3e78bbd8e78d3a3"
+        }
+      ]
+    }
+  },
+  "source": {
+    "nativeRawPacketSHA": "5c18120aa9ccc9733bbd5eaa9331d472fd7429b110e70d04e6921f056533ea09",
+    "nativeRawManifestSHA": "36a2390679b1fc2df02e556c359c1b030a827d515f0da986cc18ea0bdea1277e",
+    "sourceTintAuditSHA": "23b9fdad09d152d975803fafbed5a57f8f61379f920710a938a2b452b452bad1",
+    "resolvedSourcePlanSHA": "c312955f615cab149a8c96ed82dfe2c6eabd3445df8d999e0b57712040ace212",
+    "packedGeometrySha256": "b90013b56a6ee2d0098b8efe61ac282b8b2f83488c834645a06efbf52d6d3030",
+    "qualification": "Selected native color/state/default/texture/compiler proof, source typed tint inputs; no captured private host view/tint packing/screenAO/stencil/pass scheduling. Original mip0/allmips and exact stored RGBA fallback, no resized images; inherited shadow caster policy remains qualified."
+  }
+}

@@ -16,6 +16,7 @@ export type EnvironmentTextureBanks = Map<string, EnvironmentTextureBank>;
 export function createEnvironmentTextureBanks(
   textures: ReadonlyMap<string, T.Texture>,
   maxLayers: number,
+  compressedFormats: readonly T.CompressedPixelFormat[] = [T.RGBA_BPTC_Format],
 ) {
   if (!Number.isInteger(maxLayers) || maxLayers < 1)
     throw new Error("Invalid environment texture array layer limit");
@@ -24,7 +25,7 @@ export function createEnvironmentTextureBanks(
     const compressed =
       texture instanceof T.CompressedTexture &&
       !(texture instanceof T.CompressedArrayTexture) &&
-      texture.format === T.RGBA_BPTC_Format;
+      compressedFormats.includes(texture.format as T.CompressedPixelFormat);
     const rgba =
       texture instanceof T.DataTexture &&
       texture.format === T.RGBAFormat &&

@@ -1,3 +1,4 @@
+import { nativeMapSamplerReservation } from "./native-map-sampler-budget";
 import * as T from "three";
 import { loadNativeMapComplex, applyNativeMapComplex } from "./native-map-complex";
 import {
@@ -18,7 +19,11 @@ import { nativeSkyPanorama, type NativeSkyPanorama } from "./native-sky-environm
 import { loadNativeMapProbes, applyNativeMapProbes } from "./native-map-probes";
 import { loadNativeMapEnvironment, applyNativeMapEnvironment } from "./native-map-environment";
 import { applyNativeMapLayers, loadNativeMapLayerBundle } from "./native-map-layers";
-import { applyNativeMapParallax, loadNativeMapParallax } from "./native-map-parallax";
+import {
+  applyNativeMapParallax,
+  loadNativeMapParallax,
+  assertNativeParallaxSamplerBudget,
+} from "./native-map-parallax";
 import { applyNativeStaticOverlays, type NativeStaticOverlay } from "./native-static-overlay";
 import { applySourceSelfIllumination, type SourceSelfIllumination } from "./source-self-illum";
 import { assetFetch, assetUrl } from "./asset-url";
@@ -288,6 +293,25 @@ async function buildNativeMapSky(
     });
     applyNativeMapEnvironment(asset.scene, environment);
   }
+  // Sky geometry has no LUT/shadow receivers; reserve one LUT slot for the
+  // separate final grade pass as a conservative documented upper bound.
+  const nativeParallaxSamplerBudget = parallax
+    ? (() => {
+        const reservation = nativeMapSamplerReservation({
+          lighting: lighting,
+          probes: probes,
+          reflections: reflections,
+          fog: fog,
+          stockEnvironmentFallback: false,
+          grade: "reserved",
+          sourceSunShadows: 0,
+        });
+        return {
+          reservation,
+          materials: assertNativeParallaxSamplerBudget(renderer, parallax, reservation.samplers),
+        };
+      })()
+    : undefined;
   if (parallax) applyNativeMapParallax(asset.scene, parallax);
   applyNativeMapLighting(asset.scene, lighting, frame.scale);
   if (probes) applyNativeMapProbes(asset.scene, probes);
@@ -544,6 +568,7 @@ async function buildNativeMapSky(
     overlay,
     target,
     manifest,
+    nativeParallaxSamplerBudget,
     skyCamera,
     dispose() {
       if (disposed) return;

@@ -135,3 +135,132 @@ test("native addressing isolates shared resources and restores all authored mip 
   root.geometry.dispose();
   m.dispose();
 });
+
+test("native BC4 masks share exact authored mip layers without merging sampler states", async () => {
+  const { createParallaxTextureBindings, createParallaxTextureBanks } =
+    await import("./native-map-parallax");
+  const make = (value: number) => {
+    const texture = new T.CompressedTexture(
+      [8, 4].map((width) => ({
+        width,
+        height: width,
+        data: new Uint8Array(width === 8 ? 32 : 8).fill(value),
+      })),
+      8,
+      8,
+      T.RED_RGTC1_Format,
+    );
+    texture.wrapS = texture.wrapT = T.RepeatWrapping;
+    return texture;
+  };
+  const ao = make(21),
+    mask = make(87),
+    originals = new Map([
+      ["ao", ao],
+      ["mask", mask],
+    ]);
+  const source = {
+    ...material,
+    textures: { ...material.textures, g_tAmbientOcclusion: "ao", g_tLayer0Mask: "mask" },
+  };
+  const bindings = createParallaxTextureBindings(source, originals);
+  const banks = createParallaxTextureBanks(new Map([[source, bindings]]), 256);
+  expect(banks.arrays).toHaveLength(1);
+  expect(banks.arrays[0].format).toBe(T.RED_RGTC1_Format);
+  expect(banks.arrays[0].image.depth).toBe(2);
+  for (const [original, value] of [
+    [ao, 21],
+    [mask, 87],
+  ] as const) {
+    const bank = banks.bindings.get(original.uuid)!;
+    for (let mip = 0; mip < 2; mip++) {
+      const data = bank.texture.mipmaps[mip].data as Uint8Array,
+        length = mip === 0 ? 32 : 8;
+      expect(data.slice(bank.layer * length, (bank.layer + 1) * length)).toEqual(
+        new Uint8Array(length).fill(value),
+      );
+    }
+  }
+  const clamped = { ...source, IntParams: { g_nTextureAddressModeU: 2 } };
+  const clampBindings = createParallaxTextureBindings(clamped, originals);
+  const isolated = createParallaxTextureBanks(new Map([[clamped, clampBindings]]), 256);
+  expect(isolated.arrays).toHaveLength(0);
+  expect(clampBindings.get("g_tAmbientOcclusion")).toBe(ao);
+  expect(clampBindings.get("g_tLayer0Mask")?.wrapS).toBe(T.ClampToEdgeWrapping);
+  [...banks.arrays, ...originals.values()].forEach((texture) => texture.dispose());
+});
+
+test("parallax bank reads preserve independent UV and authored bias arguments", async () => {
+  const { createParallaxTextureBindings, createParallaxTextureBanks } =
+    await import("./native-map-parallax");
+  const texture = (value: number) => {
+    const t = new T.DataTexture(new Uint8Array([value, 0, 0, 255]), 1, 1);
+    t.wrapS = t.wrapT = T.RepeatWrapping;
+    return t;
+  };
+  const originals = new Map(
+    Object.values(material.textures).map((name, i) => [name, texture(i * 30)]),
+  );
+  const views = createParallaxTextureBindings(material, originals),
+    banks = createParallaxTextureBanks(new Map([[material, views]]), 256),
+    lookup = new T.DataTexture();
+  const shader = {
+    vertexShader: T.ShaderLib.standard.vertexShader,
+    fragmentShader: T.ShaderLib.standard.fragmentShader,
+    uniforms: {},
+  } as T.WebGLProgramParametersWithUniforms;
+  applyParallaxShader(
+    shader,
+    material,
+    views,
+    new Map(),
+    new T.Color(1, 1, 1),
+    lookup,
+    1,
+    0,
+    banks.bindings,
+  );
+  expect(
+    Object.keys(shader.uniforms).filter((name) => name.startsWith("sourceParallaxBank")),
+  ).toHaveLength(1);
+  expect(shader.fragmentShader).toContain(
+    "sourceParallaxLayer1ArrayRead(sourceParallaxUV1,sourceParallaxBlur1)",
+  );
+  expect(shader.fragmentShader).toContain(
+    "sourceParallaxLayer2ArrayRead(sourceParallaxUV2,sourceParallaxBlur2)",
+  );
+  expect(shader.fragmentShader).toContain("vec4 sourceParallaxAOArrayRead(vec2 uv)");
+  [...originals.values(), ...banks.arrays, lookup].forEach((t) => t.dispose());
+});
+
+test("final parallax budget rejects incomplete scene capacity with private diagnostic detail", async () => {
+  const { assertNativeParallaxSamplerBudget, createParallaxTextureBindings } =
+    await import("./native-map-parallax");
+  const textures = new Map(Object.values(material.textures).map((id) => [id, new T.DataTexture()]));
+  const lookup = new T.DataTexture();
+  const bundle = {
+    materials: { authored: material },
+    textures,
+    lookup,
+    cubes: new Map(),
+    cubeInfo: {},
+    materialTextures: new Map([[material, createParallaxTextureBindings(material, textures)]]),
+  } as unknown as Parameters<typeof assertNativeParallaxSamplerBudget>[1];
+  const renderer = { capabilities: { maxTextures: 16 } } as T.WebGLRenderer;
+  const admitted = assertNativeParallaxSamplerBudget(renderer, bundle, 8);
+  expect(admitted[0].samplers).toBe(15);
+  let failure: unknown;
+  try {
+    assertNativeParallaxSamplerBudget(renderer, bundle, 10);
+  } catch (error) {
+    failure = error;
+  }
+  expect(failure).toBeInstanceOf(Error);
+  expect((failure as Error).message).not.toContain(material.nativeResource);
+  expect((failure as Error).cause).toEqual({
+    nativeResource: material.nativeResource,
+    requiredSamplers: 17,
+    maxSamplers: 16,
+  });
+  for (const texture of [...textures.values(), lookup]) texture.dispose();
+});

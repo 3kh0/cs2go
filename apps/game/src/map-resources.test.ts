@@ -109,3 +109,24 @@ test("map-owned native shadow materials are captured once and never dispose excl
   expect(sharedDisposed).not.toHaveBeenCalled();
   shared.dispose();
 });
+
+test("map-owned instanced buffers release once and leave external instance buffers alive", () => {
+  const owned = new T.InstancedMesh(new T.PlaneGeometry(), new T.MeshStandardMaterial(), 2);
+  const external = new T.InstancedMesh(new T.PlaneGeometry(), new T.MeshStandardMaterial(), 2);
+  const matrix = vi.spyOn(owned.instanceMatrix, "dispose"),
+    shared = vi.spyOn(external.instanceMatrix, "dispose");
+  const resources = new MapResources();
+  resources.capture(owned);
+  resources.capture(owned);
+  resources.dispose();
+  resources.dispose();
+  expect(matrix).toHaveBeenCalledTimes(1);
+  expect(shared).not.toHaveBeenCalled();
+  const late = new T.InstancedMesh(new T.PlaneGeometry(), new T.MeshStandardMaterial(), 1),
+    lateMatrix = vi.spyOn(late.instanceMatrix, "dispose");
+  resources.capture(late);
+  expect(lateMatrix).toHaveBeenCalledTimes(1);
+  external.dispose();
+  external.geometry.dispose();
+  external.material.dispose();
+});

@@ -1,3 +1,4 @@
+import { assertNativeInstanceReflectionCoverage } from "./native-instance-reflections";
 import { copySourceDepth } from "./source-depth";
 import * as T from "three";
 import type { NativeDoorDefinition } from "@cs2go/simulation/doors";
@@ -17,7 +18,15 @@ export function applyNativeMapReflections(
   data: SourceReflections,
   doors: readonly NativeDoorDefinition[] = [],
   preservedNames: readonly string[] = [],
-  options: { worldToNative?: T.Matrix4 } = {},
+  options: {
+    worldToNative?: T.Matrix4;
+    /** Only pre-partitioned, palette-resolved foliage instances are admitted.
+     * Matrices remain static after this coverage proof. */
+    instances?: ReadonlyMap<
+      T.InstancedMesh,
+      { candidates: readonly number[]; worldPadding: number }
+    >;
+  } = {},
 ) {
   root.updateMatrixWorld(true);
   const moving = new Map<string, NativeDoorDefinition>();
@@ -69,8 +78,9 @@ export function applyNativeMapReflections(
       break;
     }
     stats.drawsBefore += object.geometry.groups.length || 1;
-    const adapt = (source: T.Material, indices: number[]) => {
-      if (!(source instanceof T.MeshStandardMaterial) || !indices.length) return source;
+    const adapt = (source: T.Material, indices: number[], nativeEmpty = false) => {
+      if (!(source instanceof T.MeshStandardMaterial) || (!indices.length && !nativeEmpty))
+        return source;
       if (indices.length > 8)
         throw new Error(`Native moving reflection overlap exceeds eight volumes: ${object.name}`);
       const nativeFamily = source.userData.nativeSourceFamily as
@@ -132,6 +142,25 @@ export function applyNativeMapReflections(
       materials.set(selection, material);
       return material;
     };
+    if (object instanceof T.InstancedMesh) {
+      const binding = options.instances?.get(object);
+      if (
+        !binding ||
+        sourceMaterials.some((material) => material.userData.nativeFoliageInstanceSafe !== true)
+      )
+        throw new Error("This map's instanced material reflections have not been verified.", {
+          cause: { objectName: object.name },
+        });
+      assertNativeInstanceReflectionCoverage(object, data, binding.candidates, {
+        worldToNative: options.worldToNative,
+        worldPadding: binding.worldPadding,
+      });
+      object.material = Array.isArray(object.material)
+        ? sourceMaterials.map((source) => adapt(source, [...binding.candidates], true))
+        : adapt(sourceMaterials[0], [...binding.candidates], true);
+      stats.drawsAfter += object.geometry.groups.length || 1;
+      continue;
+    }
     const nativeBounds = options.worldToNative
       ? bounds.clone().applyMatrix4(options.worldToNative)
       : bounds;

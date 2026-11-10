@@ -1,0 +1,4320 @@
+{
+  "mapId": "cache",
+  "scope": "main",
+  "materials": {
+    "1070_cache": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/decals/bombsite_x_spray.vmat",
+      "selectedContract": "parking-8070-1158",
+      "exportedName": "bombsite_x_spray__alpha_0.784314",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 1070,
+          "baseColorFactor": [
+            0.802429557,
+            0.00529512111,
+            0,
+            0.784313977
+          ],
+          "nativeCombinedVSFactor": [
+            0.907547,
+            0.063815,
+            0.0,
+            0.784313977
+          ],
+          "exporterLinearAlternative": [
+            0.802429557,
+            0.00529512111,
+            0,
+            0.784313977
+          ]
+        }
+      ],
+      "tintTransportQualification": "Authored FLOAT draw RGB retained as source-domain bridge. Native shader decodes packed bytes; private FLOAT-to-packed host upload unobserved. Exporter-linear alternative retained for paired native-view comparison.",
+      "IntParams": {
+        "F_OVERLAY": 1,
+        "F_SPECULAR_DIRECT": 1,
+        "F_SPECULAR_INDIRECT": 1,
+        "F_TRANSLUCENT": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.01,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flOpacityScale": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1RoughnessBrightnessContrast": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          0.470588,
+          0.470588,
+          0.470588,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "f578c80048084e35",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "41944f0a3bb5f1e4"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bNoSpecularAtFullRoughness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeResourceSha256": "8ef23b84c1f6f5a65459b1b6cc58296fac3b55e761f0a018a2e45ad869a9a1e6",
+        "nativeSourceDraws": [
+          {
+            "meshIndex": 180,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\cache\\raw\\maps\\de_cache\\worldnodes\\n0_lr0_c178_s_mesh_overlay178.vmdl_c",
+              "sha256": "7d4f38107aa93c1e7b0a7651cc3d1536a818befb474f69a3f5a5f210845ad5ee"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 188.984589,
+              "m_vTintColor": [
+                0.907547,
+                0.063815,
+                0.0
+              ],
+              "m_flAlpha": 0.784314,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 14,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 36,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_x_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            },
+            "lightingPath": "no-explicit-baked-flag",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 0,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              }
+            ],
+            "restoredNativeAlpha": 0.784314
+          },
+          {
+            "meshIndex": 181,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\cache\\raw\\maps\\de_cache\\worldnodes\\n0_lr0_c179_s_mesh_overlay179.vmdl_c",
+              "sha256": "3f6df84d0e5f81ee8f61ec56a7b00135a754f5962008555e0b5275a8ff583964"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 189.024872,
+              "m_vTintColor": [
+                0.907547,
+                0.063815,
+                0.0
+              ],
+              "m_flAlpha": 0.784314,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 759,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 1407,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_x_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true,
+              "m_bHasEmissiveGI": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 37,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 0.784314
+          },
+          {
+            "meshIndex": 182,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\cache\\raw\\maps\\de_cache\\worldnodes\\n0_lr0_c180_s_mesh_overlay180.vmdl_c",
+              "sha256": "7ce472d86530ed71ff3d5aa874f70669d00f7dfc12a22f7dbfa25e6ad9323649"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 188.999878,
+              "m_vTintColor": [
+                0.907547,
+                0.063815,
+                0.0
+              ],
+              "m_flAlpha": 0.784314,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 95,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 276,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_x_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true,
+              "m_bHasEmissiveGI": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 0.784314
+          }
+        ],
+        "sourceNodeEvidence": [
+          {
+            "worldnode": "artifacts/new-maps/supplement/cache/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "5e52da53cd63a4ca519320b5490e3931785eef07c9d4254f836774fd78cdb6c6",
+            "model": "maps/de_cache/worldnodes/n0_lr0_c178_s_mesh_overlay178.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_flEmissiveLightingBoost": 1.0,
+              "m_renderableModel": "maps/de_cache/worldnodes/n0_lr0_c178_s_mesh_overlay178.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/cache/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "5e52da53cd63a4ca519320b5490e3931785eef07c9d4254f836774fd78cdb6c6",
+            "model": "maps/de_cache/worldnodes/n0_lr0_c179_s_mesh_overlay179.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_flEmissiveLightingBoost": 1.0,
+              "m_renderableModel": "maps/de_cache/worldnodes/n0_lr0_c179_s_mesh_overlay179.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/cache/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "5e52da53cd63a4ca519320b5490e3931785eef07c9d4254f836774fd78cdb6c6",
+            "model": "maps/de_cache/worldnodes/n0_lr0_c180_s_mesh_overlay180.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_flEmissiveLightingBoost": 1.0,
+              "m_renderableModel": "maps/de_cache/worldnodes/n0_lr0_c180_s_mesh_overlay180.vmdl",
+              "m_renderable": ""
+            }
+          }
+        ]
+      }
+    },
+    "1069_cache": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/decals/bombsite_line_spray.vmat",
+      "selectedContract": "parking-8070-1158",
+      "exportedName": "bombsite_line_spray__alpha_0.784314",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 1069,
+          "baseColorFactor": [
+            0.5610618,
+            0.00138826878,
+            0,
+            0.784313977
+          ],
+          "nativeCombinedVSFactor": [
+            0.774227,
+            0.017936,
+            0.0,
+            0.784313977
+          ],
+          "exporterLinearAlternative": [
+            0.5610618,
+            0.00138826878,
+            0,
+            0.784313977
+          ]
+        }
+      ],
+      "tintTransportQualification": "Authored FLOAT draw RGB retained as source-domain bridge. Native shader decodes packed bytes; private FLOAT-to-packed host upload unobserved. Exporter-linear alternative retained for paired native-view comparison.",
+      "IntParams": {
+        "F_OVERLAY": 1,
+        "F_SPECULAR_DIRECT": 1,
+        "F_SPECULAR_INDIRECT": 1,
+        "F_TRANSLUCENT": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.01,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flOpacityScale": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Color": [
+          0.905882,
+          0.290196,
+          0.086275,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          0.501961,
+          0.501961,
+          0.501961,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "54732f48feaaaabb",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "a82d8b56194432ea"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bNoSpecularAtFullRoughness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeResourceSha256": "e301c0b83f803059001d01afd9a56f52e5e4aa2534b8124c1cbf7976abcad2ea",
+        "nativeSourceDraws": [
+          {
+            "meshIndex": 179,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\cache\\raw\\maps\\de_cache\\worldnodes\\n0_lr0_c177_s_mesh_overlay177.vmdl_c",
+              "sha256": "e9bac2b35748d192798a5c6b1f189b5545bbda1fa0d21b802023cd7e136c553a"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 45.24929,
+              "m_vTintColor": [
+                0.774227,
+                0.017936,
+                0.0
+              ],
+              "m_flAlpha": 0.784314,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 287,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 633,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_line_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true,
+              "m_bHasEmissiveGI": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 0.784314
+          },
+          {
+            "meshIndex": 183,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\cache\\raw\\maps\\de_cache\\worldnodes\\n0_lr0_c181_s_mesh_overlay181.vmdl_c",
+              "sha256": "bb2ce73380a505fda423dc2bd36360c272b129ccd013fc34f330a24fb2f965cb"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 45.254833,
+              "m_vTintColor": [
+                0.774227,
+                0.017936,
+                0.0
+              ],
+              "m_flAlpha": 0.784314,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 10,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 24,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_line_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            },
+            "lightingPath": "no-explicit-baked-flag",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 0,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              }
+            ],
+            "restoredNativeAlpha": 0.784314
+          },
+          {
+            "meshIndex": 184,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\cache\\raw\\maps\\de_cache\\worldnodes\\n0_lr0_c182_s_mesh_overlay182.vmdl_c",
+              "sha256": "3e8b8c3b68a39ea47785401c5fe1d2f02cb1bd407f50b4645e733f2473f48249"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 45.254833,
+              "m_vTintColor": [
+                0.774227,
+                0.017936,
+                0.0
+              ],
+              "m_flAlpha": 0.784314,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 5,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 9,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_line_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasEmissiveGI": true
+            },
+            "lightingPath": "no-explicit-baked-flag",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 0,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              }
+            ],
+            "restoredNativeAlpha": 0.784314
+          }
+        ],
+        "sourceNodeEvidence": [
+          {
+            "worldnode": "artifacts/new-maps/supplement/cache/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "5e52da53cd63a4ca519320b5490e3931785eef07c9d4254f836774fd78cdb6c6",
+            "model": "maps/de_cache/worldnodes/n0_lr0_c177_s_mesh_overlay177.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_flEmissiveLightingBoost": 1.0,
+              "m_renderableModel": "maps/de_cache/worldnodes/n0_lr0_c177_s_mesh_overlay177.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/cache/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "5e52da53cd63a4ca519320b5490e3931785eef07c9d4254f836774fd78cdb6c6",
+            "model": "maps/de_cache/worldnodes/n0_lr0_c181_s_mesh_overlay181.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_flEmissiveLightingBoost": 1.0,
+              "m_renderableModel": "maps/de_cache/worldnodes/n0_lr0_c181_s_mesh_overlay181.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/cache/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "5e52da53cd63a4ca519320b5490e3931785eef07c9d4254f836774fd78cdb6c6",
+            "model": "maps/de_cache/worldnodes/n0_lr0_c182_s_mesh_overlay182.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_flEmissiveLightingBoost": 1.0,
+              "m_renderableModel": "maps/de_cache/worldnodes/n0_lr0_c182_s_mesh_overlay182.vmdl",
+              "m_renderable": ""
+            }
+          }
+        ]
+      }
+    },
+    "1077_cache": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/decals/bombsite_line_spray.vmat",
+      "selectedContract": "parking-8070-1158",
+      "exportedName": "bombsite_line_spray__alpha_1.0",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 1077,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Authored FLOAT draw RGB retained as source-domain bridge. Native shader decodes packed bytes; private FLOAT-to-packed host upload unobserved. Exporter-linear alternative retained for paired native-view comparison.",
+      "IntParams": {
+        "F_OVERLAY": 1,
+        "F_SPECULAR_DIRECT": 1,
+        "F_SPECULAR_INDIRECT": 1,
+        "F_TRANSLUCENT": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.01,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flOpacityScale": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Color": [
+          0.905882,
+          0.290196,
+          0.086275,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          0.501961,
+          0.501961,
+          0.501961,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "54732f48feaaaabb",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "a82d8b56194432ea"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bNoSpecularAtFullRoughness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeResourceSha256": "e301c0b83f803059001d01afd9a56f52e5e4aa2534b8124c1cbf7976abcad2ea",
+        "nativeSourceDraws": [
+          {
+            "meshIndex": 201,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\cache\\raw\\maps\\de_cache\\worldnodes\\n0_lr0_c199_s_mesh_overlay199.vmdl_c",
+              "sha256": "7a9998d972b252445b6a157a1e3bf08db2ef558cb422e96459160d834adc46d7"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 45.231499,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 165,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 435,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_line_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true,
+              "m_bHasEmissiveGI": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          }
+        ],
+        "sourceNodeEvidence": [
+          {
+            "worldnode": "artifacts/new-maps/supplement/cache/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "5e52da53cd63a4ca519320b5490e3931785eef07c9d4254f836774fd78cdb6c6",
+            "model": "maps/de_cache/worldnodes/n0_lr0_c199_s_mesh_overlay199.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_flEmissiveLightingBoost": 1.0,
+              "m_renderableModel": "maps/de_cache/worldnodes/n0_lr0_c199_s_mesh_overlay199.vmdl",
+              "m_renderable": ""
+            }
+          }
+        ]
+      }
+    },
+    "1085_cache": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/decals/bombsite_x_spray.vmat",
+      "selectedContract": "parking-8070-1158",
+      "exportedName": "bombsite_x_spray__alpha_0.882353",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 1085,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            0.882353008
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            0.882353008
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            0.882353008
+          ]
+        }
+      ],
+      "tintTransportQualification": "Authored FLOAT draw RGB retained as source-domain bridge. Native shader decodes packed bytes; private FLOAT-to-packed host upload unobserved. Exporter-linear alternative retained for paired native-view comparison.",
+      "IntParams": {
+        "F_OVERLAY": 1,
+        "F_SPECULAR_DIRECT": 1,
+        "F_SPECULAR_INDIRECT": 1,
+        "F_TRANSLUCENT": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.01,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flOpacityScale": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1RoughnessBrightnessContrast": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          0.470588,
+          0.470588,
+          0.470588,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "f578c80048084e35",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "41944f0a3bb5f1e4"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bNoSpecularAtFullRoughness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeResourceSha256": "8ef23b84c1f6f5a65459b1b6cc58296fac3b55e761f0a018a2e45ad869a9a1e6",
+        "nativeSourceDraws": [
+          {
+            "meshIndex": 217,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\cache\\raw\\maps\\de_cache\\worldnodes\\n0_lr0_c215_s_mesh_overlay215.vmdl_c",
+              "sha256": "9e30487e9f392d0edccedf301426ee657c641217e884a08ae06a3aff8e2ab853"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 113.999985,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 0.882353,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nEmissivePrimitiveCount": -1,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_rootBvhNodes": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 63,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 138,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_x_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true,
+              "m_bHasEmissiveGI": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 0.882353
+          }
+        ],
+        "sourceNodeEvidence": [
+          {
+            "worldnode": "artifacts/new-maps/supplement/cache/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "5e52da53cd63a4ca519320b5490e3931785eef07c9d4254f836774fd78cdb6c6",
+            "model": "maps/de_cache/worldnodes/n0_lr0_c215_s_mesh_overlay215.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_flEmissiveLightingBoost": 1.0,
+              "m_renderableModel": "maps/de_cache/worldnodes/n0_lr0_c215_s_mesh_overlay215.vmdl",
+              "m_renderable": ""
+            }
+          }
+        ]
+      }
+    },
+    "four_cache_main_923": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/metal/metalvent015a.vmat",
+      "nativeSourceSha256": "241ccebdf5dac73943dc68217f89be460022b8243a9fc12366eab3c903d47209",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "metalvent015a",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 923,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "71b6475ea2bc650e",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "131d6db1fb456583"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "241ccebdf5dac73943dc68217f89be460022b8243a9fc12366eab3c903d47209",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_main_134": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/cache_backdrop_ac_001.vmat",
+      "nativeSourceSha256": "bf096097cf245cde4a816d5ac56785600bba9ed210071b0bbf1c24db7c0308e3",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "cache_backdrop_ac_001",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 134,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "aa97177de4f3d603",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "db4782e118b57d41"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "bf096097cf245cde4a816d5ac56785600bba9ed210071b0bbf1c24db7c0308e3",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3",
+          "ordinary-source-FLOAT"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_main_856": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_dust/door03.vmat",
+      "nativeSourceSha256": "74fc203f7a6cbb5bf27d21c58c19235bf92f259f607f79c8014aa097208efe61",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "plain-opaque",
+      "exportedName": "door03",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 856,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_LAYERS": 0,
+        "F_TEXTURETRANSFORMS": 0
+      },
+      "FloatParams": {},
+      "VectorParams": {
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "17c6a957c941cbd0",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "131d6db1fb456583"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "74fc203f7a6cbb5bf27d21c58c19235bf92f259f607f79c8014aa097208efe61",
+        "sourceTintTransportTypes": [
+          "native-aggregate-BYTE3"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 0,
+          "ps_static": 6144,
+          "psrs_static": 0
+        }
+      }
+    },
+    "four_cache_main_109": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_002.vmat",
+      "nativeSourceSha256": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_002",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 109,
+          "baseColorFactor": [
+            0.942529976,
+            0.942529976,
+            0.942529976,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            0.9743,
+            0.9743,
+            0.9743,
+            1
+          ],
+          "exporterLinearAlternative": [
+            0.942529976,
+            0.942529976,
+            0.942529976,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "bd29b4d8da6be98b",
+        "g_tLayer1AmbientOcclusion": "9c7b0b2aaaffd3e7",
+        "g_tLayer1Detail": "f076232d6aa3d77d",
+        "g_tLayer1NormalRoughness": "979478213206d232"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "47a9981f100c1928fa1b227bb6c102c441a8e8b05f87119a8e1bb4a6484af44d",
+        "sourceTintTransportTypes": [
+          "ordinary-source-FLOAT"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    },
+    "four_cache_main_110": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/de_cache/backdrop/plant_metal_004.vmat",
+      "nativeSourceSha256": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+      "selectedContract": "lmg-four-build26445667",
+      "programKind": "detail1-opaque",
+      "exportedName": "plant_metal_004",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 110,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Source typed BYTE3 exact; ordinary FLOAT retained as authored domain with exporter-linear alternative; private FLOAT-to-packed upload unobserved",
+      "IntParams": {
+        "F_DETAILTEXTURE": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "1a3bb17d50104c7d",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1Detail": "8470331088827c1d",
+        "g_tLayer1NormalRoughness": "13e2ec6e8d5a1f53"
+      },
+      "resolvedMaterialInputs": {
+        "g_bAddBumpMaps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flMetalness": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_flModelTintAmount": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_flVertexColorOpacityScale": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1DetailScale": [
+          0.125,
+          0.125,
+          0,
+          0
+        ],
+        "g_vLayer1DetailTintAndBlend": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeSourceSHA": "f91f1112bf20b5bf89f5f3ce6c4c16ead7ca86a3bce98cc740081255ace9bb5e",
+        "sourceTintTransportTypes": [
+          "ordinary-source-FLOAT"
+        ],
+        "selectedNativeProgram": {
+          "vs_static": 32,
+          "ps_static": 6176,
+          "psrs_static": 32
+        }
+      }
+    }
+  },
+  "textures": {
+    "54732f48feaaaabb": {
+      "resource": "materials/decals/bombsite_line_spray_trans_tga_30f70c50.vtex",
+      "sourceSha256": "7536af70b9671e37b97c73857a689df027075a7e41984f61f28bbfe73964ec15",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        128
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.7991021871566772,
+        0.06847812235355377,
+        0.008023260161280632
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "54732f48feaaaabb.bin.gz",
+      "gpuBytes": 43680,
+      "gpuSha256": "974db7e36e735f1d5c35522f07ca3dbcbfcf8bfbc6cf0cf99b2748dc71f7e6a9",
+      "mips": [
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "042579209238b39668dfca723c46725ed96df498760d247f16d1930f85ce0146"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "2bc4271474921cdf5271200c7ab4aa09b35335b670defdfbac94140d6474c756"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "56870c6550472c6c6d809954b330480bb0b1cd6d40c08f611eb9289eb79d8f6c"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "4097a9f7793d560f2ec7f9b638af7f54395b10dac066eaf54d3fb915e5b55ba5"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "6a9e155aa7e047f84c564db6dff9263bd50026bf6d422056b2e8a6dcbbcf185d"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 32,
+          "sha256": "34dc4af434537eced50887d00435b83d2a6b9ba4013de912d17c0733dff8d0c7"
+        }
+      ],
+      "decodedSize": [
+        256,
+        128
+      ],
+      "decodedSource": "54732f48feaaaabb.png",
+      "decodedSha256": "4ec18f8caf558ab0dcaf703ca5c193a45fcc871b593712f57f6f400a7c54b576",
+      "fallbackFile": "54732f48feaaaabb-rgba8-mips.bin.gz",
+      "fallbackBytes": 174720,
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 131072,
+          "sha256": "c05ab98f828043f937aade83cbc8545eaf46b20d81e1836fcb17844e54377bca"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 32768,
+          "sha256": "0118cb468dc6da0f4d932f6d1c63d24847df0d3204f2c23bb32ba62f10ba2beb"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 8192,
+          "sha256": "b85062e07d65e3fdf652a11e6e1b5210a56b9e58a775431e7070fd68716affee"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 2048,
+          "sha256": "173cdd836edd3f4095ed96039ee4fa7646cb74c126f05b810a4cd1f11273714a"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 512,
+          "sha256": "7026d572e941df073195c5d90d411aed99d9ddba1332692eb8ca4189027f027a"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 128,
+          "sha256": "0b12da7a6da7a62d4dc5cf1bac2a565c341f1fbb893d1a2143d28bdfcc850da9"
+        }
+      ]
+    },
+    "f578c80048084e35": {
+      "resource": "materials/decals/bombsite_x_spray_color_psd_34b5fb84.vtex",
+      "sourceSha256": "df39427cc3d17d0a9284f76e0d458a734a8872bacbb515f4167d2348c5125857",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.7068419456481934,
+        0.13119199872016907,
+        0.028909001499414444
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "f578c80048084e35.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "68f3b0e63e1806482f04b0e4038abd4cfd9c1318e4ae3db41e9dbdb68c8bc2f8",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "d34d2a4762c8b8dc041ff37fd9b85ea1c0b66017acd0f514a644f80f81e10695"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "423c4e2cb7c27f7192a28d2cf67f36d7520ca4caa9529f71fb404221ec92c37c"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "c54baca21dd5a022b527ada9d5909d4007aa209e39cb8efec00a62526f8b501b"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "3973142ee4167317ea743c8989fae4b12ba3cc97cdd9dae5bcbe9f8e37d65dde"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "823f79f6617e33d0b6fca5e94e644974056436bf5b82c408448b7c533d7c56e6"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "349466dcb0f2314197cb2759fd01a1be2c2f9295a5a3ef052dcccb4e79acb43b"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "8ee6cb561b03c4a458cab7fcecee1cd52621c3efe24306e5066d43fce008eb2a"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "5852dc25b6ca8a0e4c1eb5de5e9db56248331640eb83946cd70e2ce153721bc9"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "f578c80048084e35.png",
+      "decodedSha256": "8d7481765f023c4d36d9146da8150d18077551e88c1f47b63e36cd1ca4d19a38",
+      "fallbackFile": "f578c80048084e35-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "e88ab5bfddd7e1924f5036f67ea071a2fcb21e89d49122cdd6969867e9264cf4"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "594728663d34801294bf4cbd83aedae52f0a44e970c572956cf101229f42cb40"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "6c6baeb928d0c39d5a9a5ed56a881450fcdd1ccf90d3fb3b47139e12b98f2314"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "968c68ca1f14de60455db90dadac7912ac25d27b135921dfc54c91fe0cbe870e"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "31f8e933c298396e19ffe09863a1c047d00f181dcae427e84c10614f48f6792e"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "89552068742d9a18c3e5d45b00cfa47c16311dd780b0b14a23397b8a04544c9c"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "6c05303405300b4d8b9032c7a4397db58a531eff8feaf8e04e50474cc6666e76"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "d604d85e6a8201170366990386977923822c8107c7ab93cda587bae65815a94e"
+        }
+      ]
+    },
+    "41944f0a3bb5f1e4": {
+      "resource": "materials/decals/bombsite_x_spray_normal_psd_28f21001.vtex",
+      "sourceSha256": "67749863c2163ec66933f8cbaca97728ecfba042bfbb1395c272e01235ea8fe8",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5001594424247742,
+        0.4959349036216736,
+        0.47313016653060913
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "41944f0a3bb5f1e4.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "3b34d0f89f9db96c341a176bc73e01a3468f787be11fed5b54b1a613050aa2a0",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "39d5d00ef461a486f06e8708da775cbd7a2a22ab6c01804362a9e7a517150e71"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "5f54458232a7bce0f4141ec65448dbf5c35467bc7a66c0ff9b05a4122884d437"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "640042b0811862cd7124abfc8f35c835627ca75a3c30520cc8c810e697ea5741"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "260b8434dbc48a8118609573cb71d46b0201ddc3f6505ac0eb660ec708e88619"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "dcbdac673528fa9b5b9bf87af3c56e99b7fae39c4f524d8c02ad75f4e97fbfc6"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "715236ee9b78a97fab87d0bf164b01dad467458817eaeceba644ad9f8185b7ac"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "78876200ba8fb1ea2e8b245487c431741b620ec59bb26557ad78592255815698"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "e150707d6dcdc325532f9b330229a302112f92122bea88c0e9407092ff735cae"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "0cf08925e2b27800e0fdb95c5e07aa4f736fd57fe7779fb3c05e77230bc4bebc"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        1024
+      ],
+      "decodedSource": "41944f0a3bb5f1e4.png",
+      "decodedSha256": "c9275e5dfec8cb0db1b6094229c78444a97a3e7b55f47b80bed5ba625c0e9570",
+      "fallbackFile": "41944f0a3bb5f1e4-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "b74cf8cf36a40438ad0ccd291b44cbead914ffbe8127ebda4749ec037fafae14"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "4f64537d4ddcc17aa053e77b4653ebc25b48e0ee62e36f71b66feda44fe629a3"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "0587897b17a5bd4fe9670e64326372fff18eaaa303ec3ec1179e48fcc4cbd560"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "e5c5fcb5b6196bb8de099ea425fc2db0704ca4a7c9e69e873acb8f9451bc6f1e"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "5da2f00dc156e295e14ad14e582161c0b0ce541fb6cb12c28bc376b8abccd63b"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "9ab1bb5d570011b4f2db901f2d75480896534a3ef760aa69b3011da120e725de"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "4391b468fe5187f98e24e2b03dc7669f8c707f07c26af90b9b32d7be5dd34e3e"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "a80ac6b27ef39651f351fb5f14e73e5a5c11219d7b7fb8817af276139a4e5ae1"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "63867d79446ed6ea44e71a6e5b54a006dd4305bf0cce2839e980b916e8fc2910"
+        }
+      ]
+    },
+    "a82d8b56194432ea": {
+      "resource": "materials/decals/bombsite_line_spray_vmat_g_tlayer1normalroughness_47660df.vtex",
+      "sourceSha256": "74d2e484cacddde45be9547ffc185db040ffa7b49ad37bb70915a3185120da43",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        0.5019609928131104
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "a82d8b56194432ea.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "287ed78c5414bbe41dfa4b5ee9e3a8dd9ee91f275c36973a3f9f6889f0cb34b1",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "287ed78c5414bbe41dfa4b5ee9e3a8dd9ee91f275c36973a3f9f6889f0cb34b1"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "74d2e484cacddde45be9547ffc185db040ffa7b49ad37bb70915a3185120da43",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "a82d8b56194432ea-74d2e484ca-storage.png",
+      "decodedSha256": "39e0dbf8490fc4dd9cfc100cb82392cc8894f2abedc8892c52ebe6b683daf1c8",
+      "fallbackFile": "a82d8b56194432ea-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "17a424e5890c8a7b7c42e913b8a52749090f8ff7654b1096c7b761ab040a7aa8"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "17a424e5890c8a7b7c42e913b8a52749090f8ff7654b1096c7b761ab040a7aa8"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        0.5019607843137255,
+        1.0
+      ]
+    },
+    "cf0f8accdfc38e3f": {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex",
+      "sourceSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "cf0f8accdfc38e3f.bin.gz",
+      "gpuBytes": 8,
+      "gpuSha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "cf0f8accdfc38e3f-e0b83fe25f-storage.png",
+      "decodedSha256": "6f73ba3cfd6e5314cb9235533c7c90d87f1f7bd19625cef96ae888724ca45007",
+      "fallbackFile": "cf0f8accdfc38e3f-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "71b6475ea2bc650e": {
+      "resource": "materials/metal/metalvent001a_color_psd_49509be2.vtex",
+      "sourceSha256": "d4f2c8f9d47e4e079add8bae66b8f284eea5b42862c28e34b122b6ac1af75058",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        256
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.3325214385986328,
+        0.3308483958244324,
+        0.31975072622299194
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "71b6475ea2bc650e.bin.gz",
+      "gpuBytes": 43688,
+      "gpuSha256": "27964684492d37b70ab78ec2977ff8840106d1169eda8dd40717d68b40c3939f",
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "ba8a1479f9e6f86948df5814c62e28840986059ac66888f42a53ca2277dbf190"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "9c2e502d3bca1e834fe5575a7ce6860b7d3c941bfd5081635c471e1efe93c66f"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "2562a2f232394e47dc71f86ada30dd88deb0cd55df98d24c93716d4cc7b2c4f8"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "466a246c9e8e82d866751d18a63c9cae9beff827277735f9c71d22a52b525ae3"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "3e0e1e834940b8d0d668efb71727c8fec2104021ef205d55a3cd7af7188213c4"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "d35025b4d8538b4ad4ed9fefdc3b0e1319535b3de1c6733bfcd7427175a80b19"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "4b9baeb0551650a0f22695d920cf6606dcbfd2f4d5d4a27c626593d269513ad5"
+        }
+      ],
+      "decodedSize": [
+        256,
+        256
+      ],
+      "decodedSource": "71b6475ea2bc650e.png",
+      "decodedSha256": "f223ed29123e641ec11bdd61d268354adc4017b598f5d3854c664e2d53f4b37e",
+      "fallbackFile": "71b6475ea2bc650e-rgba8-mips.bin.gz",
+      "fallbackBytes": 349504,
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "c3521caa7d96cd7c31e9d10aa69d6e1870236d3c1b4f59e415dd7000b1f8fbd6"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "255acae804832c279756af947521309047b67eb81671ec29e1955fc51115d333"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "42e46ca0ce74d0588bb916f524c6c6f54ce397c85eeb9a9adcd8a7819f05e68b"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "d9c374d94b2f175e3546c3d0f70251e8407debb926850f3cb9101d88c598f788"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "e31d4826e365bc46e5ebaca913766f30dbf97dffc3f5ad0c00ab743502197553"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "619d8606a3de9d25ef6043b2a909ae158ab902f5db0364c2671c84ef1c98bcdb"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "5032248fc49f09d2d83703cfa95b8403996651e95a2bc14348cdb1cfd0c41c1e"
+        }
+      ]
+    },
+    "131d6db1fb456583": {
+      "resource": "materials/default/default_normal_tga_7be39f77.vtex",
+      "sourceSha256": "7b4d56b63404963ca56ec26ce49ebf938e4e33154e95df875a9c1c4d40f76655",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        0.960784375667572
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "131d6db1fb456583.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "3a333237000cc3ccb9785324e72a049035c8e9d6a780be7d1e45d81bdbc9b450",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "3a333237000cc3ccb9785324e72a049035c8e9d6a780be7d1e45d81bdbc9b450"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "7b4d56b63404963ca56ec26ce49ebf938e4e33154e95df875a9c1c4d40f76655",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "131d6db1fb456583-7b4d56b634-storage.png",
+      "decodedSha256": "ae688360067a51b39370b15df8c8688274799b8531d3b7eedcbef5c9a5e0174d",
+      "fallbackFile": "131d6db1fb456583-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "a7ad1206c1f238ff0c99d14bdf0bb579692d070c548693a0637aa31358eab3cf"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "a7ad1206c1f238ff0c99d14bdf0bb579692d070c548693a0637aa31358eab3cf"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        0.9607843137254902,
+        1.0
+      ]
+    },
+    "aa97177de4f3d603": {
+      "resource": "materials/de_cache/backdrop/cache_backdrop_ac_color_psd_7eb1e746.vtex",
+      "sourceSha256": "e1a47ae02ff1ba4c7bee1fce36d5b8d57b7c9f7fa5d252e4927026aa458d5bdc",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.4294529855251312,
+        0.41456183791160583,
+        0.3857194185256958
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "aa97177de4f3d603.bin.gz",
+      "gpuBytes": 87376,
+      "gpuSha256": "4271535886cada27bd17e6509107f35ae23ba53aee684dc1c93906959cbe811d",
+      "mips": [
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 65536,
+          "sha256": "5e3c95a49e3641faa66696cc130765f19e62db29e3f75e5c888bd8c3b680b2ac"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 16384,
+          "sha256": "0455a7fd8abf0dbbb0e4cf4535cb012d49f4fe9d8caefc13712a471870a0ec65"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 4096,
+          "sha256": "408e04c2c709ea53be859296a29ec53afbb21343f07b7f86e4a8d484b80ea966"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 1024,
+          "sha256": "f8c2a445c534686c83753f013c4afc9ebec8040db85ddc7f7ef6fab9af577182"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 256,
+          "sha256": "2434d3d51806e21bb4cf86fd475d3a6aad67789fa7dff1d2fafd0927a9500e64"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 64,
+          "sha256": "60ed0e862b87b7ccb8a59207b1c9cdb1be681ebc8c1e2edbf93074e1289806dd"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 16,
+          "sha256": "78c8268afad1761f04b118902fc93586d8bd606ca3fb6db15377d50fb72d3f58"
+        }
+      ],
+      "decodedSize": [
+        256,
+        512
+      ],
+      "decodedSource": "aa97177de4f3d603.png",
+      "decodedSha256": "90c0f4db26060808be996677288cececad8d4b40128c4294771a2e790fc5ded2",
+      "fallbackFile": "aa97177de4f3d603-rgba8-mips.bin.gz",
+      "fallbackBytes": 699008,
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "ec169994526253764e20348bdb1a0dc613bad9c74d9ed5f0773a5088a8727124"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "318ad6474d4753fad176f0aa48370feeef7ae09128a0604634b630eff4a6cfa2"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "0dd17c3b79f2eb52e12beab5fbf3aa41e70d24d31f98d5bebce25df09833b3b7"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "a357fded68dd923e7ccdfb3f3dbeb0323e65ec53172169302b8e76545449f343"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "f9d553947b1ae2ae29804e399f2377c032723cdfbb32960e4244525971f2fd48"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "03f1eaf5b52038d948694aea14765668d108665f4a2709194ab89531fef1508e"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "1ba3f724145d700e8340341a3d1e5ccc72e3fabd14a2a82bffdd066bc880070d"
+        }
+      ]
+    },
+    "db4782e118b57d41": {
+      "resource": "materials/de_cache/backdrop/cache_backdrop_ac_001_vmat_g_tlayer1normalroughness_53b47c48.vtex",
+      "sourceSha256": "aca3183f9f236f17434d5d79a75f490de90f107f7625322b315fe288ce9c1ce2",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        1.0
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "db4782e118b57d41.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "aca3183f9f236f17434d5d79a75f490de90f107f7625322b315fe288ce9c1ce2",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "db4782e118b57d41-aca3183f9f-storage.png",
+      "decodedSha256": "d8f946a3caa0129ea20ed5c11b1e9a3cde92873925d2ba7fd2d77212d45985c7",
+      "fallbackFile": "db4782e118b57d41-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        1.0,
+        1.0
+      ]
+    },
+    "17c6a957c941cbd0": {
+      "resource": "materials/de_dust/door03_color_tga_92e41d2e.vtex",
+      "sourceSha256": "ca83a1088bd72ec47cc3f6bec0dc54648a6ec9d969b2921a4ad6143ccee502ba",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.34732845425605774,
+        0.2905507981777191,
+        0.27419739961624146
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "17c6a957c941cbd0.bin.gz",
+      "gpuBytes": 174760,
+      "gpuSha256": "ed7b3d7db3eaedaee619828798a5d12ba0b35446b4d690c4f224653c3fc3209e",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "a335f701fe74068328cba99ec1b3ad5d5db7d2284be1b202d0f373badd906815"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "14babdb3647f9c36c941693e0c2d518878923b5649f10b854c05ffb6c7821321"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "9ecb3e114341ccad9b1bc617be685fee185c77275c860d8519289c06985ef398"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "855bd94891d8c3b6c581ac65aa7c616f6ba850cb8e967574456a3feec624f55f"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "85c0998faee25016a3f2acfd69bc6cfc311dae24b3ee25a8a7cbb5dce742a951"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "02f745f204afb42c39b2ccd71d6de53e55c891ff2e5281a2b807060adb9c3cff"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "90cbaca801f26d8af137a965819362153b9029f398902590ce7fb31f1c6c456f"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "c74f72379dd460b60fd723b4b536fdfbb47204373eada7c868d865ab2a5cb1ac"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "17c6a957c941cbd0.png",
+      "decodedSha256": "57979a362d467bdb9a164a90ca1ded43ebab0d8d0db13b35ec3eea814cced139",
+      "fallbackFile": "17c6a957c941cbd0-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "943700e44ed789f2a3b52f879184674e64ee210f2bb830ddb626b2e5a9196b28"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "9dd986c0aa8e24ea873f65fcb14b8deaec7155a9cd348bb02a719155d49e12fa"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "4f56af13db8df79e784baa8a5ced8f2b3f84e7cf0f01aeacfe1c060a137aa986"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "c806414984d82752fb14245ccd42f94a94b6262c52313cce1b5a9b3f6ee2df0a"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "0732b883c8a10113a7a2c824e35d4537696743e7ea5f7b2dded280a8fd7604c9"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "c0cd945c001811ad08a41e57d89e703663df081ba84cc0cfb48af6624aedb81b"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "bd329219e623ac25615cd49e4ba80492212c72383751610c6b5eaf2a33b79efb"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "d38b9106a96a9816e7ea6f343716eb569eba88ea1d44f0d8795343e59caf4f76"
+        }
+      ]
+    },
+    "bd29b4d8da6be98b": {
+      "resource": "materials/de_cache/backdrop/plant_metal_002_color_psd_a737529a.vtex",
+      "sourceSha256": "9104453e25fb1a316fa15dfbe31678fdbf9d1a462f85ac7f24607943bd412ff5",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.39714542031288147,
+        0.4203856885433197,
+        0.4316036105155945
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "bd29b4d8da6be98b.bin.gz",
+      "gpuBytes": 174760,
+      "gpuSha256": "670757a78638c18a8897a84b0b287690c18bc359e23ad8d6bfcdf15f8f754395",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "4da0b0b631645726bda8db6b52586e644346b36c567dbe6f2d172b2861096038"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "91b5e4932f5b9e73023420a2dd60d8aa49f435175425602114c6216eef630db9"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "46afdba3a998ec148729107f95e700777d7fccf39747c83e833f6fb8f6a50d93"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "778eac73d8b5c3581c589dc715a537a127feaa7a6dd5110a818d4cb3a1d68c4a"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "dcda09d2392c98a90f2a5fe6e91a3fe25f22523f7035e4ec38cd9940960b6b54"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "c2c1efc60ce11bdc66b918b53038cbc99747a77e1a0137b0b58aad8cfab17022"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "5a213617f7d4c6fdbc867e46c31281eb6df773123a14c9ee0467364b9a2114fa"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "ad81f2f4db57d53bf5455fd6c61274c474e158a6d77efcc75e8c5e875723fa0f"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "bd29b4d8da6be98b.png",
+      "decodedSha256": "58cba8645e019d28ecdf77de5435e352eb25e198ed1d521a566d6003fb81ba77",
+      "fallbackFile": "bd29b4d8da6be98b-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "782911837d2eab3311fc3511e73f9d977ef41a255b56a072079afc33a43b6b9b"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "622059aa370dfe04285aea4b0f76305d1bc58427921637d7786cbd79f6fdbb85"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "45ce52b7c06b9698648498f46688e8c7dd020a46637ba331daf880f34585bd95"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "08ff8b5740f9e4db9d3fb3dacea213f53d931b9c029c0483e6298b2642081a31"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "d19e6135c80e9596b6a8f3c432cb3133c19900087b133c5a3efe1e28817d1035"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "bb24c797f60245a2fa469f77bb8dd8c20277a90d68e3995462fe57038c2b6bb7"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "87379f04cad6d13ca1830b5eb8c10f10cfd68ca6c4f571152bc007e8c84e1901"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "3d99221ba15ff7e409b340eae4ca274ce7d71fd828ef39a92dd2dd36eb9d6f66"
+        }
+      ]
+    },
+    "9c7b0b2aaaffd3e7": {
+      "resource": "materials/de_cache/backdrop/plant_metal_002_ao_psd_b8a1674c.vtex",
+      "sourceSha256": "9a28939c393bfb03a2ba31156feb5b1bc31a532efdd6f19a17c04a2bf52d2778",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        0.958466649055481,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "9c7b0b2aaaffd3e7.bin.gz",
+      "gpuBytes": 172032,
+      "gpuSha256": "4245638e1fc43a21651cf2f58662b6fa37fec9afe1f66151afcb08a9195184e7",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "4d91d778904b2dde994fd3c47ff1727f8018f947b6dd542736d523ec064f4d4e"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "fd5345ffff2f68bc65798f08d2a1b5ef1e4e2e666561b16b2e9f09d17a117e3f"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "27f682ff9711f02fb5c30a672a0c625e646b59c91a718864a93b45196d8ef999"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "9c7b0b2aaaffd3e7.png",
+      "decodedSha256": "83431f55d58728fe756e292a5781285f03ffc75fb68016d87de1072e3a35b121",
+      "fallbackFile": "9c7b0b2aaaffd3e7-rgba8-mips.bin.gz",
+      "fallbackBytes": 1376256,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "59e2f3e1d2d8c294c144a81fcaadb59ee351413478c0049c1a2a164aee9f47e7"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "d6e85f1eed10dace020847c9a7d9971ebaa68fd8e1fd356ba88dba79fa225ca7"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "4de1a2b909b13c5860d2dc8a372d5162a603efde08b0cbb0b379bf55e7d9ee57"
+        }
+      ]
+    },
+    "f076232d6aa3d77d": {
+      "resource": "materials/de_cache/backdrop/plant_metal_004b_detail_psd_17ad08b4.vtex",
+      "sourceSha256": "a144e913934a2d69fd3cc394237499ebbee2b79959d12e9061d3b03446c9c9bb",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.500024676322937,
+        0.5000329613685608,
+        0.5000594854354858
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "f076232d6aa3d77d.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "ed36a98c62bc68c2ef2d3cfca1e34b53f9825a3cfa849f3db0f3046ecb1c127f",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "c88d05ea37c6e857978d10ca04b0461a68f129dd08585698fac83fc8e20ed39b"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "c5cc52cf876f4b71ecccfa23421a61152cc1af967d441c2e8fd07694f31d3879"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "f903b62f0fb9ccb951f770ce5d8a33861aa1b2a9ecd60f39c81efab7237ba036"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "61dd6a66d3a8389c78588b39a50587ef37e7f4802a31162b42530719656fd33d"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "bddce86d9f28b7d360cfcc0bb6a1e51bcf6ec1a8be4b0612bcc5b791c9fc0170"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "06ef852f4ac6449abf314a389bd41588daad9a4544382d98f201cb3ea21ab31c"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "d794f1dfa080da3ef138ed360084427833450c458183f32393712d981640d417"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "0958a464d1d47fe36bccf5da8b5b3f17a912719e2fae7125cb8cd28c4bdd011d"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "f076232d6aa3d77d.png",
+      "decodedSha256": "221a7557e488e0b90f5812bd5847163d555be1d16ef1f91fde05da6cd2d1f00f",
+      "fallbackFile": "f076232d6aa3d77d-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "9938241718a37feafdceb0a375cfe47ee5c777917921c72c5756cb814f42131a"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "89ebec276b035f7fb2d8a6951ce5ecbcfbdc89d723bee0975deb5490e7517063"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "e6884b04bf0f81409dcf4ef48555c11731b92401e44a56902ca429fe73fedad0"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "47182deeb77d98f003ee7460b420827f7d34d3920e20367b10dd5c18a552505d"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "886a1c2ff72d02054ec7044cf51045c36b8a689324a02b0bc7493fd1db750a1d"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "e890230a10f8a4e21eb0bc34601751d2278d169c6f2aa23542fb776cf25e2fb5"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "c0caddc14aaad305672f627cec63698c4b6e172e1986f420a02430bcce0c1ba9"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "15ceee3793e2b767bdc4d4ea34d6144cf9b3c4199a3b8257497ba44d570e893b"
+        }
+      ]
+    },
+    "979478213206d232": {
+      "resource": "materials/de_cache/backdrop/plant_metal_002_normal_psd_6b554d8e.vtex",
+      "sourceSha256": "835fb96556786f84802095ba0943be1212b280a8287ce01260856e1fe9fba03a",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.4959767758846283,
+        0.4957025647163391,
+        0.6423581838607788
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "979478213206d232.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "9131e03484c34bd62d73c3c4184d472522eacdbed2b8fa04fd8fae4671d62246",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "72d1006b8ebca7557254c5cd03dfdc49f629c00e39ceae5b083fbb9eff096a0d"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "937848a49e3bf1ecffdc7da8bd87d0faf999f18c2660a6d328ff79eb11934d15"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "657ae16dfde3b662ca130a3aac0fb031a7697464e828ee6150f17dccf92bbbb8"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "b6a46634a59099c20f26437940fe64398a77c484f2a16824a70b5fd5133ebb2f"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "ba1fe1468ee36ab451821ff16c366865faba9b2540373ded7c86ccf289bc5026"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "18934a254f541922777ed16cdc1e53e8197884b532d8de6e060b3d845724bb7e"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "901e02be00020ce9106dc66114e61ea868784c15e6e97ff8cf71180110c87abb"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "8a67be01f41e8df457c87628a9e9e440f0f55d565c85295a1392f0f39c25433d"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "979478213206d232.png",
+      "decodedSha256": "4733cf596af8d775237b6f4f3264a7604aab87361291b75383a7714b6f58c78c",
+      "fallbackFile": "979478213206d232-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "0b97970b790deaa08094209e2b69bbc949fe758a754ce470f658239dcad3fe84"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "4a985f0ff8cb98c343726c08032f5d55d547dd28987f841513321d59dabc7a47"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "1133feda263bd83996991f371a33726a471c9f290fc464f9fb0ed137f0ecaa03"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "e762ea991ee630ee19c0f29b252a9bc793448a6addfaabf89e6aa277e04332ec"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "291338a9e2f3a404e236fd4ec8009dc0407628a4ba2d37f38505be5f446d8525"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "167005e2ab2e7ff64a438f384ffeed42a6516d79824b2c670c8106356c0a67a7"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "856ec113ad1b7032b6a5f2b9589113088c5161ff40d9cb784255970dd995f21b"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8a00fd5007de62d60ca5d573828024352c1ed0dac13991c5e3254e785c47e3d3"
+        }
+      ]
+    },
+    "1a3bb17d50104c7d": {
+      "resource": "materials/de_cache/backdrop/plant_metal_004_color_psd_81a68e7e.vtex",
+      "sourceSha256": "7adbb9f6f332e60d7bbe6a72307ef366c3a18687d1d244ad2a3bcbb2c5bfe7d4",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.36299562454223633,
+        0.38034629821777344,
+        0.39909231662750244
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "1a3bb17d50104c7d.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "83c48db8605abf5396e68a21157dcadf0e7c46127bdd4ae47ca08f033e852b1a",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "3ce3cc50f65d7895416e2c56c9066bf2b5f2812b63c3f28d24a84ba18f140a98"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "49f46597dbcf79a959f7e6c21825aad069a679bc8d6d8aed76ebc8437e498254"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "5a0be0d8565d7860888a22ff5881942e1bc80b927fdaadace8c5e6be41e0282d"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "79b4281a4b46cd0824b774c8a0fe933fab0a96f1f8e8fecdc887cd3c3d98add2"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "ae5f50b1e63bf02a59be41a328106f93854efd3f1a049c7832dbe679d0a4d8a0"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "b0253dd0fa499ea64b5e60cfdac3214afc956efac2b0459990999edb7475ba40"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "929ea43b944742c1cb0edcf8a790c9011c7d13705ec1ca12775c84df9c8de996"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "b6cef775f70b8f6608bb865ec1a6da334cbdb19b7767c48b28a86118068410c4"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "63fd8d145f43a0c86434367cf2b1f74c529d34780567eec8d90734f730e56745"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        1024
+      ],
+      "decodedSource": "1a3bb17d50104c7d.png",
+      "decodedSha256": "83accc967855ce405b5eedd906c7033808b14ce5cb721a04b07ef493834cda66",
+      "fallbackFile": "1a3bb17d50104c7d-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "215fdf0c87fb35c82156040e8d1ce7a86b6add15272efb363d576c37cfca7953"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "1e717d3f7135680f6148e958b7be528c4550a5e320a3eae9d64e6ce5824cdb3e"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "e12f4184041b0f2006da3a20c86de57a3965fae2f0372e5260539ace2ce4bc53"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "e519e7bcb8b1640df25c41cac00261f22c92a274116b79febde69c3a4a75c21e"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "2b2489c123e67c8ecf883cd229dff4cb22f3cbfc1b99b228196ce394e97a65d1"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "452a2b86fe1a92f8049e06442cc31b47c17a98900117657a078d072efeafed20"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "03461a795596d55a8d1d7d730e5d6637569f1515629a5292e1d0bf71f0b88cb5"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "cdf82c5956f361dee8ce8c02a60185cbc7b8f444676db52808d1e240b5af173a"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "39e149cd84400e4aa3a9d57d40b652172df5f0202e7052531067ec292632b18e"
+        }
+      ]
+    },
+    "8470331088827c1d": {
+      "resource": "materials/de_cache/backdrop/plant_metal_004_detail_psd_8a9a7e1d.vtex",
+      "sourceSha256": "a9c9410c1bd2cd95e75fbc7c9622188ab063c76be0695add267fe3142b9e33d5",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5000383257865906,
+        0.5000486373901367,
+        0.5000718235969543
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "8470331088827c1d.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "55c694ef41d8aad884af27ca8ab5fabb18625a22138a0d55835b6bc55c6a26a5",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "247139752e50326094b7a2db03b5ea8e65d6722bdd3f07ad3502fbf95f068a0c"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "2bf1389be2e5363ec3b912dd1ee4d8d8c7ea99c95efcc1e485abb75ebb423cd0"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "e73bb30e5870437eb1022f70b8e25f8ed85e8aa3d4db4f529fbad502285c4b0b"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "3561a587e9f5d46a3b85bb8d35eab751736acb069e9e1804095df8a2dfbb85b1"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "cbd1f1469aa59662b410b47d1621c712d61b0fba8130a3433737bcb0863d76c4"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "e9d67aa3e80a950cae3936add6a6abfe379ecfafd217e833cc63ad258f40fff7"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "8c113e2132fae1cd5dbc3febb69c671e837e8f00a115c4a1c0ccaf6cc1a50eef"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "6dee31daadda4f54f343b4c2ff661fca5f119a94c178cc89c4900e24b430a73d"
+        }
+      ],
+      "decodedSize": [
+        512,
+        512
+      ],
+      "decodedSource": "8470331088827c1d.png",
+      "decodedSha256": "e61000b26831e97652f97a76375782bcef7d007157ee7c39b3db52b01796eb5c",
+      "fallbackFile": "8470331088827c1d-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "8702aa75dd6aaacb4539f5efb00aab1b9a8482b6d5c8353210540fdd7c938fd4"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "e294e1bca4176ecc549b7b0d62364db597e3aaca706741fd68b5f131f2d79cfb"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "0162cdb5b7ccbcd7540975a0a978fa53b1eb60352b61a1f77fa1f40187774c39"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "e6deabb0e8c5af0f20581e7292a6e635d5d6d618b6a8a7e1ff4934b5b81039ab"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "38f185210e4e3081bb6c131b95aa54c3dee8c5d6f4b6739e709f231a73cdfaf5"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "f0a5c324bd18be1a7146b1ef8321cffca29645d1266358465f799e3120bf6aeb"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "e896bb7d6e6ff5613d2ae4559352aa2af173f3f0171ddd2f761a5b96de729d6a"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "c6c92823e5963ee70916a96bdc2232ac707bc573112161a11d4b2cdbc711a469"
+        }
+      ]
+    },
+    "13e2ec6e8d5a1f53": {
+      "resource": "materials/de_cache/backdrop/plant_metal_004_normal_psd_ba8284d3.vtex",
+      "sourceSha256": "1007be62bf81f5c31742ae20e000d0e4dcdbd82fad2a087892c6c5cd4d17bba3",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.46544522047042847,
+        0.5171065926551819,
+        0.6129562854766846
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "13e2ec6e8d5a1f53.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "fbb1ef32e3e151fc639e035bda3eabe3977cc83caabcdaf0b6fd05d02b2789de",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "65d8da7bc9d9fce22ab105df5f79006a3dc7163ed32b7e88979884546696379b"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "6f4a9637509492848af134de2b77c9a29c6dc6204520088ad81b940cf893b95a"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "ef04171088d7c78668380e28b80570cf535bc618226231bc908eb2e1b727b599"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "f1aacc458a24f8bc9b4341a3ff2007388d43ebb0debc9fdc5544d6e2a6d9a46c"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "131d91db1c139644783a7f00b2229e682d970d4cc4fd712c92cfa202b3f66c62"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "a4f492c6c424936d621ed20c0b124764f4f9907ab7231f10af88babfae644494"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "72dcc6fcd2fd21065fe8990c632af02aaaff44e872d4d35f48c2ee82b7cf5896"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "baf09bb55f212a16f2a44c48ba79d93efbbd1ad917c710a78cd8cbb723691a90"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "01f2c47c951669e1937d71504258531855f007a5f3f346f06717eaaf0b42b33e"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        1024
+      ],
+      "decodedSource": "13e2ec6e8d5a1f53.png",
+      "decodedSha256": "6892892bb20c0dfca4f7cd7d2d1d182cd6ac32b5da8fc8af4f5227eb72e01b4e",
+      "fallbackFile": "13e2ec6e8d5a1f53-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "9d324b6106043e59ef4a7b3218b2ab2407086abbb7bd85e8832f48067f9600b5"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "3d30317da3b9a8ba8adbd7bee2758af4e4e40296b24dbc7af89ce47e55612ec7"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "f424e11d960962bc5106e852bbb0ba214e76897b2e39c6f9cd99c6a230abaca2"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "90800f5ae75c429adf6b7c0427a1686c0432f09492b8e0c389893100645e9b78"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "d2af03d8e4c12b2d75ff27c57e37b3acf83238d7bb235c7b12622c5ff2cdd58e"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "9f51d8f9b6e46ff66bdd05f648e7d98de812e8cfaa9835be8453a3bddd050a16"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "e9c222a31c2e16fdbd081431c4d26d0eb07d7b01677aeb294c0ce1e551d8f2cb"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "ba667564fb05462276984af370101de783c2786c0869d5e16d9c0d4244ad2c55"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "91869b39ac3893036d8b1f9c10f4b0a131168cb1e7e476385a4de1a66ab49ed1"
+        }
+      ]
+    }
+  },
+  "source": {
+    "nativeRawPacketSHA": "5c18120aa9ccc9733bbd5eaa9331d472fd7429b110e70d04e6921f056533ea09",
+    "nativeRawManifestSHA": "36a2390679b1fc2df02e556c359c1b030a827d515f0da986cc18ea0bdea1277e",
+    "sourceTintAuditSHA": "23b9fdad09d152d975803fafbed5a57f8f61379f920710a938a2b452b452bad1",
+    "resolvedSourcePlanSHA": "c312955f615cab149a8c96ed82dfe2c6eabd3445df8d999e0b57712040ace212",
+    "packedGeometrySha256": "ee1af25fee404bb85ef013b95b1843620577b4ceeb7dab713af2e078d6a37303",
+    "qualification": "Selected native color/state/default/texture/compiler proof, source typed tint inputs; no captured private host view/tint packing/screenAO/stencil/pass scheduling. Original mip0/allmips and exact stored RGBA fallback, no resized images; inherited shadow caster policy remains qualified."
+  }
+}

@@ -159,7 +159,7 @@ export function bindNativeLightmappedTextures(
       texture = owned.get(key)!;
       if (!texture) {
         texture = original.clone();
-        texture.source = new T.Source(original.source.data);
+        texture.source = new T.TextureSource(original.source.data);
         texture.wrapS = u;
         texture.wrapT = v;
         texture.needsUpdate = true;
@@ -249,8 +249,10 @@ export function applyNativeMapLightmapped(
             nativeLMLayerTint: { value: new T.Vector3(...program.layerTint) },
             nativeLMStaticMetalness: { value: program.metalness },
             nativeLMReflectance: { value: program.reflectance },
+            nativeLMOpacityScale: { value: program.opacity },
+            nativeLMAlphaReference: { value: program.reference },
           });
-          shader.fragmentShader = `uniform vec3 nativeLMLayerTint;uniform float nativeLMStaticMetalness;uniform float nativeLMReflectance;\n${shader.fragmentShader}`;
+          shader.fragmentShader = `uniform vec3 nativeLMLayerTint;uniform float nativeLMStaticMetalness;uniform float nativeLMReflectance;uniform float nativeLMOpacityScale;uniform float nativeLMAlphaReference;\n${shader.fragmentShader}`;
           if (program.detail) {
             shader.uniforms.nativeLMDetailScale = { value: new T.Vector2(...program.detailScale) };
             shader.uniforms.nativeLMDetailTint = { value: new T.Vector4(...program.detailTint) };
@@ -271,7 +273,7 @@ export function applyNativeMapLightmapped(
           .replace(
             "#include <map_fragment>",
             program
-              ? `vec4 nativeLMColor=texture2D(nativeLM_g_tColor,vNativeLightmappedUv);diffuseColor.rgb=(nativeLMColor.rgb*nativeLMLayerTint)${program.detail ? "*mix(vec3(1.0),2.0*texture2D(nativeLM_g_tLayer1Detail,vNativeLMDetailUv).rgb*nativeLMDetailTint.rgb,nativeLMDetailTint.a)" : ""}*diffuseColor.rgb;diffuseColor.a=${program.overlay ? "nativeLightmappedOpacity(nativeLMColor.a,opacity,1.0,0.01)" : "opacity"};${program.overlay ? "if(diffuseColor.a<0.0010000000474974513)discard;" : ""}vec4 nativeLMPacked=texture2D(nativeLM_g_tLayer1NormalRoughness,vNativeLightmappedUv);`
+              ? `vec4 nativeLMColor=texture2D(nativeLM_g_tColor,vNativeLightmappedUv);diffuseColor.rgb=(nativeLMColor.rgb*nativeLMLayerTint)${program.detail ? "*mix(vec3(1.0),2.0*texture2D(nativeLM_g_tLayer1Detail,vNativeLMDetailUv).rgb*nativeLMDetailTint.rgb,nativeLMDetailTint.a)" : ""}*diffuseColor.rgb;diffuseColor.a=${program.overlay ? "nativeLightmappedOpacity(nativeLMColor.a,opacity,nativeLMOpacityScale,nativeLMAlphaReference)" : "opacity"};${program.overlay ? "if(diffuseColor.a<0.0010000000474974513)discard;" : ""}vec4 nativeLMPacked=texture2D(nativeLM_g_tLayer1NormalRoughness,vNativeLightmappedUv);`
               : `vec4 nativeLMColor=texture2D(nativeLM_g_tColor,vNativeLightmappedUv);diffuseColor.rgb*=nativeLMColor.rgb;diffuseColor.a=nativeLightmappedOpacity(nativeLMColor.a,opacity,1.0,0.01);if(diffuseColor.a<0.0010000000474974513)discard;vec4 nativeLMPacked=texture2D(nativeLM_g_tLayer1NormalRoughness,vNativeLightmappedUv);`,
           )
           .replace(
