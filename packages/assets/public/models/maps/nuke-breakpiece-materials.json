@@ -1,0 +1,2416 @@
+{
+  "version": 1,
+  "mapId": "nuke",
+  "materials": [
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42213_0",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42213_1",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42213_2",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42213_3",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42213_4",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42213_5",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42213_6",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42214_0",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42214_1",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42214_2",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42214_3",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42214_4",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42214_5",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_bombsite_color__breakpiece_nuke_2_61814_42214_6",
+      "nativeMaterialName": "nuke_vent_bombsite_color",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+      "nativeResourceSha256": "135303cfc860a7324be1fda51c58a03de28cb10405e0be144e9c8fb6dda812ae",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.941177,
+            0.941177,
+            0.941177,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_ao_psd_567316e2.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_color_vmat_g_tcolor_bff3ae90.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_normal_psd_dca1feeb.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_0",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_1",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_2",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_3",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_4",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_5",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_6",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_7",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_8",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_vent_slats__breakpiece_nuke_2_61814_42349_9",
+      "nativeMaterialName": "nuke_vent_slats",
+      "nativeResource": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+      "nativeResourceSha256": "4f6b38d8f7f14d0b05b4f65d9b3d40a39f1becdeb833a784f4c2e617cc4ec009",
+      "native": {
+        "Name": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmat",
+        "ShaderName": "csgo_complex.vfx",
+        "IntParams": {
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flMetalness": 1,
+          "g_flModelTintAmount": 0,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.823529,
+            0.823529,
+            0.823529,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_vmat_g_tcolor_b81f5c28.vtex",
+          "g_tNormal": "materials/models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats_rough_psd_3f77be5c.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_window_93x76_broken__breakpiece_nuke_2_61814_42406_0",
+      "nativeMaterialName": "nuke_window_93x76_broken",
+      "nativeResource": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmat",
+      "nativeResourceSha256": "8d58fdced187f8ceb652b97705ce9925666261ee32a0d6c9c0f37a1ce767f7ba",
+      "native": {
+        "Name": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 38,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0,
+          "g_flModelTintAmount": 1
+        },
+        "VectorParams": {
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskTransmission": [
+            0.486,
+            0.486,
+            0.486,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/hr_g/hr_glass_002_color_psd_cc0d6538.vtex",
+          "g_tGlassTintColor": "models/props/de_nuke/windows/nuke_window_93x76_broken_vmat_g_tglasstintcolor_911c8aca.vtex",
+          "g_tNormal": "models/props/de_nuke/windows/nuke_window_93x76_broken_trans_psd_72f14967.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_window_93x76_broken__breakpiece_nuke_2_61814_42407_0",
+      "nativeMaterialName": "nuke_window_93x76_broken",
+      "nativeResource": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmat",
+      "nativeResourceSha256": "8d58fdced187f8ceb652b97705ce9925666261ee32a0d6c9c0f37a1ce767f7ba",
+      "native": {
+        "Name": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 38,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0,
+          "g_flModelTintAmount": 1
+        },
+        "VectorParams": {
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskTransmission": [
+            0.486,
+            0.486,
+            0.486,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/hr_g/hr_glass_002_color_psd_cc0d6538.vtex",
+          "g_tGlassTintColor": "models/props/de_nuke/windows/nuke_window_93x76_broken_vmat_g_tglasstintcolor_911c8aca.vtex",
+          "g_tNormal": "models/props/de_nuke/windows/nuke_window_93x76_broken_trans_psd_72f14967.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_window_63x76_broken__breakpiece_nuke_2_61814_42408_0",
+      "nativeMaterialName": "nuke_window_63x76_broken",
+      "nativeResource": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmat",
+      "nativeResourceSha256": "04a131c24ee68c7710b9110a0b0d28bb781590f8a78bb55c7edc89a19a47c9e1",
+      "native": {
+        "Name": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 38,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0,
+          "g_flModelTintAmount": 1
+        },
+        "VectorParams": {
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskTransmission": [
+            0.486,
+            0.486,
+            0.486,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/hr_g/hr_glass_002_color_psd_72a46de4.vtex",
+          "g_tGlassTintColor": "models/props/de_nuke/windows/nuke_window_63x76_broken_vmat_g_tglasstintcolor_911c8aca.vtex",
+          "g_tNormal": "models/props/de_nuke/windows/nuke_window_63x76_broken_trans_psd_bdb0e3a4.vtex"
+        }
+      }
+    },
+    {
+      "name": "nuke_window_63x76_broken__breakpiece_nuke_2_61814_42409_0",
+      "nativeMaterialName": "nuke_window_63x76_broken",
+      "nativeResource": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmat",
+      "nativeResourceSha256": "04a131c24ee68c7710b9110a0b0d28bb781590f8a78bb55c7edc89a19a47c9e1",
+      "native": {
+        "Name": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 38,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0,
+          "g_flModelTintAmount": 1
+        },
+        "VectorParams": {
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskTransmission": [
+            0.486,
+            0.486,
+            0.486,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/hr_g/hr_glass_002_color_psd_72a46de4.vtex",
+          "g_tGlassTintColor": "models/props/de_nuke/windows/nuke_window_63x76_broken_vmat_g_tglasstintcolor_911c8aca.vtex",
+          "g_tNormal": "models/props/de_nuke/windows/nuke_window_63x76_broken_trans_psd_bdb0e3a4.vtex"
+        }
+      }
+    },
+    {
+      "name": "glass_plate_shatter__breakpiece_nuke_21604_4_0",
+      "nativeMaterialName": "glass_plate_shatter",
+      "nativeResource": "materials/glass/glass_plate_shatter.vmat",
+      "nativeResourceSha256": "ea537197e6b3f2550104485feddda1482df8fe64a5f62baf5d6f404861c0e165",
+      "native": {
+        "Name": "materials/glass/glass_plate_shatter.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "F_RENDER_BACKFACES": 1,
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 64,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0
+        },
+        "VectorParams": {
+          "g_flTranslucencyRemap": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskColor": [
+            0.313726,
+            0.352941,
+            0.364706,
+            0
+          ],
+          "GlassMaskTranslucency": [
+            0.2,
+            0.2,
+            0.2,
+            0
+          ],
+          "GlassMaskTransmission": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/glass_plate_shatter_vmat_g_tglassdust_62fc634.vtex",
+          "g_tGlassTintColor": "materials/glass/glass_plate_shatter_vmat_g_tglasstintcolor_6923b5b7.vtex",
+          "g_tNormal": "materials/glass/glass_plate_shatter_vmat_g_tnormal_ab72ac96.vtex"
+        }
+      }
+    },
+    {
+      "name": "glass_plate_shatter__breakpiece_nuke_21605_4_0",
+      "nativeMaterialName": "glass_plate_shatter",
+      "nativeResource": "materials/glass/glass_plate_shatter.vmat",
+      "nativeResourceSha256": "ea537197e6b3f2550104485feddda1482df8fe64a5f62baf5d6f404861c0e165",
+      "native": {
+        "Name": "materials/glass/glass_plate_shatter.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "F_RENDER_BACKFACES": 1,
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 64,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0
+        },
+        "VectorParams": {
+          "g_flTranslucencyRemap": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskColor": [
+            0.313726,
+            0.352941,
+            0.364706,
+            0
+          ],
+          "GlassMaskTranslucency": [
+            0.2,
+            0.2,
+            0.2,
+            0
+          ],
+          "GlassMaskTransmission": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/glass_plate_shatter_vmat_g_tglassdust_62fc634.vtex",
+          "g_tGlassTintColor": "materials/glass/glass_plate_shatter_vmat_g_tglasstintcolor_6923b5b7.vtex",
+          "g_tNormal": "materials/glass/glass_plate_shatter_vmat_g_tnormal_ab72ac96.vtex"
+        }
+      }
+    },
+    {
+      "name": "glass_plate_shatter__breakpiece_nuke_21616_4_0",
+      "nativeMaterialName": "glass_plate_shatter",
+      "nativeResource": "materials/glass/glass_plate_shatter.vmat",
+      "nativeResourceSha256": "ea537197e6b3f2550104485feddda1482df8fe64a5f62baf5d6f404861c0e165",
+      "native": {
+        "Name": "materials/glass/glass_plate_shatter.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "F_RENDER_BACKFACES": 1,
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 64,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0
+        },
+        "VectorParams": {
+          "g_flTranslucencyRemap": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskColor": [
+            0.313726,
+            0.352941,
+            0.364706,
+            0
+          ],
+          "GlassMaskTranslucency": [
+            0.2,
+            0.2,
+            0.2,
+            0
+          ],
+          "GlassMaskTransmission": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/glass_plate_shatter_vmat_g_tglassdust_62fc634.vtex",
+          "g_tGlassTintColor": "materials/glass/glass_plate_shatter_vmat_g_tglasstintcolor_6923b5b7.vtex",
+          "g_tNormal": "materials/glass/glass_plate_shatter_vmat_g_tnormal_ab72ac96.vtex"
+        }
+      }
+    },
+    {
+      "name": "glass_plate_shatter__breakpiece_nuke_21617_4_0",
+      "nativeMaterialName": "glass_plate_shatter",
+      "nativeResource": "materials/glass/glass_plate_shatter.vmat",
+      "nativeResourceSha256": "ea537197e6b3f2550104485feddda1482df8fe64a5f62baf5d6f404861c0e165",
+      "native": {
+        "Name": "materials/glass/glass_plate_shatter.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "F_RENDER_BACKFACES": 1,
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 64,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0
+        },
+        "VectorParams": {
+          "g_flTranslucencyRemap": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskColor": [
+            0.313726,
+            0.352941,
+            0.364706,
+            0
+          ],
+          "GlassMaskTranslucency": [
+            0.2,
+            0.2,
+            0.2,
+            0
+          ],
+          "GlassMaskTransmission": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/glass_plate_shatter_vmat_g_tglassdust_62fc634.vtex",
+          "g_tGlassTintColor": "materials/glass/glass_plate_shatter_vmat_g_tglasstintcolor_6923b5b7.vtex",
+          "g_tNormal": "materials/glass/glass_plate_shatter_vmat_g_tnormal_ab72ac96.vtex"
+        }
+      }
+    },
+    {
+      "name": "glass_plate_shatter__breakpiece_nuke_21628_4_0",
+      "nativeMaterialName": "glass_plate_shatter",
+      "nativeResource": "materials/glass/glass_plate_shatter.vmat",
+      "nativeResourceSha256": "ea537197e6b3f2550104485feddda1482df8fe64a5f62baf5d6f404861c0e165",
+      "native": {
+        "Name": "materials/glass/glass_plate_shatter.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "F_RENDER_BACKFACES": 1,
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 64,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0
+        },
+        "VectorParams": {
+          "g_flTranslucencyRemap": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskColor": [
+            0.313726,
+            0.352941,
+            0.364706,
+            0
+          ],
+          "GlassMaskTranslucency": [
+            0.2,
+            0.2,
+            0.2,
+            0
+          ],
+          "GlassMaskTransmission": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/glass_plate_shatter_vmat_g_tglassdust_62fc634.vtex",
+          "g_tGlassTintColor": "materials/glass/glass_plate_shatter_vmat_g_tglasstintcolor_6923b5b7.vtex",
+          "g_tNormal": "materials/glass/glass_plate_shatter_vmat_g_tnormal_ab72ac96.vtex"
+        }
+      }
+    },
+    {
+      "name": "glass_plate_shatter__breakpiece_nuke_21629_4_0",
+      "nativeMaterialName": "glass_plate_shatter",
+      "nativeResource": "materials/glass/glass_plate_shatter.vmat",
+      "nativeResourceSha256": "ea537197e6b3f2550104485feddda1482df8fe64a5f62baf5d6f404861c0e165",
+      "native": {
+        "Name": "materials/glass/glass_plate_shatter.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "F_RENDER_BACKFACES": 1,
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 64,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0
+        },
+        "VectorParams": {
+          "g_flTranslucencyRemap": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskColor": [
+            0.313726,
+            0.352941,
+            0.364706,
+            0
+          ],
+          "GlassMaskTranslucency": [
+            0.2,
+            0.2,
+            0.2,
+            0
+          ],
+          "GlassMaskTransmission": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/glass_plate_shatter_vmat_g_tglassdust_62fc634.vtex",
+          "g_tGlassTintColor": "materials/glass/glass_plate_shatter_vmat_g_tglasstintcolor_6923b5b7.vtex",
+          "g_tNormal": "materials/glass/glass_plate_shatter_vmat_g_tnormal_ab72ac96.vtex"
+        }
+      }
+    },
+    {
+      "name": "glass_plate_shatter__breakpiece_nuke_21640_4_0",
+      "nativeMaterialName": "glass_plate_shatter",
+      "nativeResource": "materials/glass/glass_plate_shatter.vmat",
+      "nativeResourceSha256": "ea537197e6b3f2550104485feddda1482df8fe64a5f62baf5d6f404861c0e165",
+      "native": {
+        "Name": "materials/glass/glass_plate_shatter.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "F_RENDER_BACKFACES": 1,
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 64,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0
+        },
+        "VectorParams": {
+          "g_flTranslucencyRemap": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskColor": [
+            0.313726,
+            0.352941,
+            0.364706,
+            0
+          ],
+          "GlassMaskTranslucency": [
+            0.2,
+            0.2,
+            0.2,
+            0
+          ],
+          "GlassMaskTransmission": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/glass_plate_shatter_vmat_g_tglassdust_62fc634.vtex",
+          "g_tGlassTintColor": "materials/glass/glass_plate_shatter_vmat_g_tglasstintcolor_6923b5b7.vtex",
+          "g_tNormal": "materials/glass/glass_plate_shatter_vmat_g_tnormal_ab72ac96.vtex"
+        }
+      }
+    },
+    {
+      "name": "glass_plate_shatter__breakpiece_nuke_21641_4_0",
+      "nativeMaterialName": "glass_plate_shatter",
+      "nativeResource": "materials/glass/glass_plate_shatter.vmat",
+      "nativeResourceSha256": "ea537197e6b3f2550104485feddda1482df8fe64a5f62baf5d6f404861c0e165",
+      "native": {
+        "Name": "materials/glass/glass_plate_shatter.vmat",
+        "ShaderName": "csgo_glass.vfx",
+        "IntParams": {
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "F_RENDER_BACKFACES": 1,
+          "F_VERTEX_BREAK_ANIMATION": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBreakBounceFloor": 64,
+          "g_flBreakShotSize": 100,
+          "g_flBreakTime": 0
+        },
+        "VectorParams": {
+          "g_flTranslucencyRemap": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vBreakShotPosition": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "GlassMaskColor": [
+            0.313726,
+            0.352941,
+            0.364706,
+            0
+          ],
+          "GlassMaskTranslucency": [
+            0.2,
+            0.2,
+            0.2,
+            0
+          ],
+          "GlassMaskTransmission": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "GlassTintColor": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tGlassDust": "materials/glass/glass_plate_shatter_vmat_g_tglassdust_62fc634.vtex",
+          "g_tGlassTintColor": "materials/glass/glass_plate_shatter_vmat_g_tglasstintcolor_6923b5b7.vtex",
+          "g_tNormal": "materials/glass/glass_plate_shatter_vmat_g_tnormal_ab72ac96.vtex"
+        }
+      }
+    }
+  ],
+  "source": {
+    "qualification": "Exact new runtime material names mapped to original compiled VMAT/SHA and exporter native params for future source shader adapters. No unsupported complex/glass family is falsely declared implemented. Image dedup compares native resource/image name plus exact PNG bytes; Source color/data roles remain distinct.",
+    "inputImages": 54,
+    "retainedImages": 9,
+    "textures": 9
+  }
+}

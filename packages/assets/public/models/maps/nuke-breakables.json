@@ -531,7 +531,520 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "metal",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42213_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p2.vmdl",
+            "nativeModelSha256": "ed0ec1ed75f509351a8e4521ae1ca8263f37529ab3dc3205b4987adf4b4fff3e",
+            "renderSha256": "b56f4718de38f33120f3597250cb310790e7e865f9a7d2af156ca79bd7fc4e76",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p2.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                3.0,
+                0.0,
+                8.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              0.5519371931162297,
+              -9.940695996441796e-08,
+              0.8338856500331404,
+              0.0,
+              -0.8338858500331511,
+              1.2891115454322448e-07,
+              0.5519371931162317,
+              0.0,
+              -2.479619735387806e-07,
+              -1.0,
+              -5.7736835441296926e-08,
+              0.0,
+              28.346394,
+              -16.186152,
+              34.39159,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42213_1_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p3.vmdl",
+            "nativeModelSha256": "16d5ddeaf7cca286aa8d5f5858e2e75f8fb9de029fbc4bc24c7a1742d8f755ba",
+            "renderSha256": "f355b7e74b9b3abc3e7cbc749856d7c56f71868533e52cb0e34fb3fd66f66a3c",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p3.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                15.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              0.5519371931162297,
+              -9.940695996441796e-08,
+              0.8338856500331404,
+              0.0,
+              -0.8338858500331511,
+              1.2891115454322448e-07,
+              0.5519371931162317,
+              0.0,
+              -2.479619735387806e-07,
+              -1.0,
+              -5.7736835441296926e-08,
+              0.0,
+              28.346394,
+              -16.186152,
+              34.39159,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42213_2_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p4.vmdl",
+            "nativeModelSha256": "acb0bf18b0beabbd426ad8a27cd6dc2f7a6053250dc9dbd827fe6c04476d6bc4",
+            "renderSha256": "5376bb501e949b1f0671873d8e33bc3e37942fbde3479a784330f9c65f17b053",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p4.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                1.0,
+                16.0,
+                5.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              0.5519371931162297,
+              -9.940695996441796e-08,
+              0.8338856500331404,
+              0.0,
+              -0.8338858500331511,
+              1.2891115454322448e-07,
+              0.5519371931162317,
+              0.0,
+              -2.479619735387806e-07,
+              -1.0,
+              -5.7736835441296926e-08,
+              0.0,
+              28.346394,
+              -16.186152,
+              34.39159,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42213_3_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p6.vmdl",
+            "nativeModelSha256": "f8741265d2a86d0f242b146f52fa40760e4355a5d1ae2f5f0b888d03a955fe4d",
+            "renderSha256": "e0b0323d0976be373627fe0158f3ad7f8143d02a314a61b66ad975f7e0546105",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p6.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                7.0,
+                5.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              0.5519371931162297,
+              -9.940695996441796e-08,
+              0.8338856500331404,
+              0.0,
+              -0.8338858500331511,
+              1.2891115454322448e-07,
+              0.5519371931162317,
+              0.0,
+              -2.479619735387806e-07,
+              -1.0,
+              -5.7736835441296926e-08,
+              0.0,
+              28.346394,
+              -16.186152,
+              34.39159,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42213_4_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p7.vmdl",
+            "nativeModelSha256": "fba453bed33996105a53dcec26990a30a4f7cf99eba7ac41f6b81ec8848dc33b",
+            "renderSha256": "cada4c1f5946eac83f6358c1e69e915dd296b297b2fd074c93cd7ff1846efa95",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p7.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                5.0,
+                12.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              0.5519371931162297,
+              -9.940695996441796e-08,
+              0.8338856500331404,
+              0.0,
+              -0.8338858500331511,
+              1.2891115454322448e-07,
+              0.5519371931162317,
+              0.0,
+              -2.479619735387806e-07,
+              -1.0,
+              -5.7736835441296926e-08,
+              0.0,
+              28.346394,
+              -16.186152,
+              34.39159,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42213_5_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p8.vmdl",
+            "nativeModelSha256": "6cd8471ae5a8fc8d5838a4ad6ef74fe690efa8d4f035fb80c2a8f4bdf5a93ea0",
+            "renderSha256": "f0d91713f2b8a80e4ebf7ef464dc801874aa08e0c1ce411c304909209755a6c1",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p8.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                2.0,
+                8.0,
+                10.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              0.5519371931162297,
+              -9.940695996441796e-08,
+              0.8338856500331404,
+              0.0,
+              -0.8338858500331511,
+              1.2891115454322448e-07,
+              0.5519371931162317,
+              0.0,
+              -2.479619735387806e-07,
+              -1.0,
+              -5.7736835441296926e-08,
+              0.0,
+              28.346394,
+              -16.186152,
+              34.39159,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42213_6_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p9.vmdl",
+            "nativeModelSha256": "64c10cdafec4855ca7276102519d56c4b7c3fcc0de9f9001d8698f1be70ca229",
+            "renderSha256": "d62af4b89521cf834124cfd4e72d46f9b6b42bfea588500f98787c3621987df2",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p9.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                1.0,
+                -12.0,
+                -4.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              0.5519371931162297,
+              -9.940695996441796e-08,
+              0.8338856500331404,
+              0.0,
+              -0.8338858500331511,
+              1.2891115454322448e-07,
+              0.5519371931162317,
+              0.0,
+              -2.479619735387806e-07,
+              -1.0,
+              -5.7736835441296926e-08,
+              0.0,
+              28.346394,
+              -16.186152,
+              34.39159,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        }
+      ]
     },
     {
       "id": "nuke:2:61814:42214",
@@ -858,7 +1371,520 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "metal",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42214_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p2.vmdl",
+            "nativeModelSha256": "ed0ec1ed75f509351a8e4521ae1ca8263f37529ab3dc3205b4987adf4b4fff3e",
+            "renderSha256": "b56f4718de38f33120f3597250cb310790e7e865f9a7d2af156ca79bd7fc4e76",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p2.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                3.0,
+                0.0,
+                8.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -0.9063075543784543,
+              -5.0380103022806125e-08,
+              0.4226187453571225,
+              0.0,
+              -0.42261852535711153,
+              3.0274751497340615e-07,
+              -0.9063076543784593,
+              0.0,
+              -4.3075814783149525e-08,
+              -1.0,
+              -1.1880441610303925e-07,
+              0.0,
+              16.611595,
+              -16.186152,
+              40.970192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42214_1_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p3.vmdl",
+            "nativeModelSha256": "16d5ddeaf7cca286aa8d5f5858e2e75f8fb9de029fbc4bc24c7a1742d8f755ba",
+            "renderSha256": "f355b7e74b9b3abc3e7cbc749856d7c56f71868533e52cb0e34fb3fd66f66a3c",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p3.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                15.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -0.9063075543784543,
+              -5.0380103022806125e-08,
+              0.4226187453571225,
+              0.0,
+              -0.42261852535711153,
+              3.0274751497340615e-07,
+              -0.9063076543784593,
+              0.0,
+              -4.3075814783149525e-08,
+              -1.0,
+              -1.1880441610303925e-07,
+              0.0,
+              16.611595,
+              -16.186152,
+              40.970192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42214_2_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p4.vmdl",
+            "nativeModelSha256": "acb0bf18b0beabbd426ad8a27cd6dc2f7a6053250dc9dbd827fe6c04476d6bc4",
+            "renderSha256": "5376bb501e949b1f0671873d8e33bc3e37942fbde3479a784330f9c65f17b053",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p4.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                1.0,
+                16.0,
+                5.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -0.9063075543784543,
+              -5.0380103022806125e-08,
+              0.4226187453571225,
+              0.0,
+              -0.42261852535711153,
+              3.0274751497340615e-07,
+              -0.9063076543784593,
+              0.0,
+              -4.3075814783149525e-08,
+              -1.0,
+              -1.1880441610303925e-07,
+              0.0,
+              16.611595,
+              -16.186152,
+              40.970192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42214_3_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p6.vmdl",
+            "nativeModelSha256": "f8741265d2a86d0f242b146f52fa40760e4355a5d1ae2f5f0b888d03a955fe4d",
+            "renderSha256": "e0b0323d0976be373627fe0158f3ad7f8143d02a314a61b66ad975f7e0546105",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p6.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                7.0,
+                5.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -0.9063075543784543,
+              -5.0380103022806125e-08,
+              0.4226187453571225,
+              0.0,
+              -0.42261852535711153,
+              3.0274751497340615e-07,
+              -0.9063076543784593,
+              0.0,
+              -4.3075814783149525e-08,
+              -1.0,
+              -1.1880441610303925e-07,
+              0.0,
+              16.611595,
+              -16.186152,
+              40.970192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42214_4_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p7.vmdl",
+            "nativeModelSha256": "fba453bed33996105a53dcec26990a30a4f7cf99eba7ac41f6b81ec8848dc33b",
+            "renderSha256": "cada4c1f5946eac83f6358c1e69e915dd296b297b2fd074c93cd7ff1846efa95",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p7.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                5.0,
+                12.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -0.9063075543784543,
+              -5.0380103022806125e-08,
+              0.4226187453571225,
+              0.0,
+              -0.42261852535711153,
+              3.0274751497340615e-07,
+              -0.9063076543784593,
+              0.0,
+              -4.3075814783149525e-08,
+              -1.0,
+              -1.1880441610303925e-07,
+              0.0,
+              16.611595,
+              -16.186152,
+              40.970192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42214_5_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p8.vmdl",
+            "nativeModelSha256": "6cd8471ae5a8fc8d5838a4ad6ef74fe690efa8d4f035fb80c2a8f4bdf5a93ea0",
+            "renderSha256": "f0d91713f2b8a80e4ebf7ef464dc801874aa08e0c1ce411c304909209755a6c1",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p8.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                2.0,
+                8.0,
+                10.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -0.9063075543784543,
+              -5.0380103022806125e-08,
+              0.4226187453571225,
+              0.0,
+              -0.42261852535711153,
+              3.0274751497340615e-07,
+              -0.9063076543784593,
+              0.0,
+              -4.3075814783149525e-08,
+              -1.0,
+              -1.1880441610303925e-07,
+              0.0,
+              16.611595,
+              -16.186152,
+              40.970192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42214_6_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p9.vmdl",
+            "nativeModelSha256": "64c10cdafec4855ca7276102519d56c4b7c3fcc0de9f9001d8698f1be70ca229",
+            "renderSha256": "d62af4b89521cf834124cfd4e72d46f9b6b42bfea588500f98787c3621987df2",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p9.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                1.0,
+                -12.0,
+                -4.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -0.9063075543784543,
+              -5.0380103022806125e-08,
+              0.4226187453571225,
+              0.0,
+              -0.42261852535711153,
+              3.0274751497340615e-07,
+              -0.9063076543784593,
+              0.0,
+              -4.3075814783149525e-08,
+              -1.0,
+              -1.1880441610303925e-07,
+              0.0,
+              16.611595,
+              -16.186152,
+              40.970192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        }
+      ]
     },
     {
       "id": "nuke:2:61814:42349",
@@ -1254,7 +2280,859 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "metal_ventslat",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_0_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece.vmdl",
+            "nativeModelSha256": "7848034fb219dd6a9cb8eff98505417228d453603b0fd9d2d98893d268917bb3",
+            "renderSha256": "4b25c749dc2d64d20234a709416ef1f7fc29b1771d8d7f7e4460fb4316543f72",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_1_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece1.vmdl",
+            "nativeModelSha256": "f7b898a503c37e60644e4b33530541214167addf5c08e064fd2c85b1103ca123",
+            "renderSha256": "da5b2c1e65a20abca70a95ed0717072505c7b8b86f1ce9baed7f48340f227505",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece1.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_2_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece2.vmdl",
+            "nativeModelSha256": "f3ba1c846f5ccdf0db22f028275e3c94b583ae3be947f5793ad24f3761524c44",
+            "renderSha256": "1dd89fc606894475d91829ceaf035a37cc9ec1dac028f2af094d6b92ecb286b9",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece2.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_3_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece3.vmdl",
+            "nativeModelSha256": "0cef7ea5f0f4d9a8521bd4ad7254dc0c0ac3edc409d12411d97fd2777536f200",
+            "renderSha256": "be38255f6711734171de33135c660dc9bb7177b273e859d69f661774c82d0185",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece3.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_4_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece4.vmdl",
+            "nativeModelSha256": "4c8952dcfe05a2d3a62c6e004edee2669e50913a4fc0a3366f316179613c9648",
+            "renderSha256": "67026546d023cc2e01c5c31eea6f48a326b108a386ee76e4f551fce1d9e8879b",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece4.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_5_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece5.vmdl",
+            "nativeModelSha256": "9482b22c07d9cc930bd3c6360662b7a296edcb6e2887869f419aafe52f4a55ca",
+            "renderSha256": "5fac70d0204a581d104fda2aa7ac6f1f35e4dedbdd2d53e1462d919fa1298740",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece5.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_6_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece6.vmdl",
+            "nativeModelSha256": "904e8ec9822beab13cd6cad48344a8fd9279b25454f8e78cd794389848793fa4",
+            "renderSha256": "1601eac2494df8a117b2c3868c456e6f16b5bf2718110bc6fd2936809c09acb7",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece6.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_7_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece7.vmdl",
+            "nativeModelSha256": "b02bd1dfbc1da09ca76fe77da23f86765934caa2c7e0796474e0afbd2032d4e1",
+            "renderSha256": "33e5b5a2cf18b052dd4ca6077cb44a4ef8fec5d3134921e4eefc13968d3fe467",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece7.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_8_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece8.vmdl",
+            "nativeModelSha256": "ef8a7d01ebde6af9bd12da6b0423c934121cce80f1c07a059472232d090a7c47",
+            "renderSha256": "1c0d65c477ce3cf1ed969e187ed2fb0b55a12bf4e6dcd1a3513f873139ec2ab0",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece8.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        },
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42349_9_leaf0"
+          ],
+          "fadeTime": 4.0,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece9.vmdl",
+            "nativeModelSha256": "b1d60d50e9d913be7ae845311b5a4ccc6d74c8ea26fa6d36ee1c1c521529ee8e",
+            "renderSha256": "8a2e2bf3436604e325333884bb8480adabe3f1c0d4d752c4f9a2a274e85c780d",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece9.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 4.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              1.0,
+              -1.192093047266703e-07,
+              -1.3113417786805026e-07,
+              0.0,
+              1.192093271525593e-07,
+              1.0,
+              -1.1920930396111344e-07,
+              0.0,
+              -1.0728443401117804e-07,
+              -1.192092971525581e-07,
+              1.0,
+              0.0,
+              11.379197,
+              -10.566402,
+              35.636192,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 100,
+              "spawn_motion_disabled": false
+            }
+          },
+          "motionDisabled": false
+        }
+      ]
     },
     {
       "id": "nuke:2:61814:42406",
@@ -1430,7 +3308,84 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42406_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmdl",
+            "nativeModelSha256": "13fdb4f43aced290574b963a2b43be6002617cd9bbdd3f4cfca08e73bef3971a",
+            "renderSha256": "808ef08ff12e0b3e5e6d63cd37b3069d345af3dfc7b4516d485da3d997a211b4",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false,
+              "force_motion_disabled": true,
+              "health_override": 10000
+            },
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              26.377808,
+              -14.223999,
+              11.798295,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        }
+      ]
     },
     {
       "id": "nuke:2:61814:42407",
@@ -1606,7 +3561,84 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42407_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmdl",
+            "nativeModelSha256": "13fdb4f43aced290574b963a2b43be6002617cd9bbdd3f4cfca08e73bef3971a",
+            "renderSha256": "808ef08ff12e0b3e5e6d63cd37b3069d345af3dfc7b4516d485da3d997a211b4",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false,
+              "force_motion_disabled": true,
+              "health_override": 10000
+            },
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              26.377808,
+              -14.223999,
+              14.211294,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        }
+      ]
     },
     {
       "id": "nuke:2:61814:42408",
@@ -1782,7 +3814,84 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42408_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmdl",
+            "nativeModelSha256": "b9bf31c5d7c5fc5491d214f4dfc3d00e60a880c011ce0e3796891203b02f3622",
+            "renderSha256": "13b97f5bfd79f64170af534c0d0bde11e1722a9b7dbc4a7781db77d3b11b68a1",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false,
+              "force_motion_disabled": true,
+              "health_override": 10000
+            },
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920927472666849e-07,
+              -1.947071816824313e-07,
+              0.0,
+              1.1920925715255679e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              4.33125783561659e-07,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              27.41929,
+              -8.737601,
+              20.218393,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        }
+      ]
     },
     {
       "id": "nuke:2:61814:42409",
@@ -1958,7 +4067,84 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_2_61814_42409_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmdl",
+            "nativeModelSha256": "b9bf31c5d7c5fc5491d214f4dfc3d00e60a880c011ce0e3796891203b02f3622",
+            "renderSha256": "13b97f5bfd79f64170af534c0d0bde11e1722a9b7dbc4a7781db77d3b11b68a1",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false,
+              "force_motion_disabled": true,
+              "health_override": 10000
+            },
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920927472666849e-07,
+              -1.947071816824313e-07,
+              0.0,
+              1.1920925715255679e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              4.33125783561659e-07,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              29.07029,
+              -8.737601,
+              20.218393,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {}
+          }
+        }
+      ]
     },
     {
       "id": "nuke:21604:4",
@@ -2133,7 +4319,94 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_21604_4_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "nativeModelSha256": "c7bf4bbac3ed9685734eb5ab98d740cfa5703c7f534dfd1e335e23d042397cae",
+            "renderSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -2.3256566922126417e-08,
+              2.2905727167096633e-09,
+              -1.0,
+              0.0,
+              0.19509018170541406,
+              0.9807853588471208,
+              -2.3256566395394005e-08,
+              0.0,
+              0.9807853088471186,
+              -0.19509018170541093,
+              2.2905767115466025e-09,
+              0.0,
+              10.3194895,
+              2.9717963,
+              28.295595,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 0,
+              "spawn_motion_disabled": true
+            }
+          },
+          "motionDisabled": true
+        }
+      ]
     },
     {
       "id": "nuke:21605:4",
@@ -2308,7 +4581,94 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_21605_4_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "nativeModelSha256": "c7bf4bbac3ed9685734eb5ab98d740cfa5703c7f534dfd1e335e23d042397cae",
+            "renderSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -2.3256566922126417e-08,
+              2.2905727167096633e-09,
+              -1.0,
+              0.0,
+              0.19509018170541406,
+              0.9807853588471208,
+              -2.3256566395394005e-08,
+              0.0,
+              0.9807853088471186,
+              -0.19509018170541093,
+              2.2905767115466025e-09,
+              0.0,
+              10.3194895,
+              2.971796,
+              30.378393,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 0,
+              "spawn_motion_disabled": true
+            }
+          },
+          "motionDisabled": true
+        }
+      ]
     },
     {
       "id": "nuke:21616:4",
@@ -2483,7 +4843,94 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_21616_4_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "nativeModelSha256": "c7bf4bbac3ed9685734eb5ab98d740cfa5703c7f534dfd1e335e23d042397cae",
+            "renderSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -2.3256566922126417e-08,
+              2.2905727167096633e-09,
+              -1.0,
+              0.0,
+              0.19509018170541406,
+              0.9807853588471208,
+              -2.3256566395394005e-08,
+              0.0,
+              0.9807853088471186,
+              -0.19509018170541093,
+              2.2905767115466025e-09,
+              0.0,
+              10.3194895,
+              2.971798,
+              15.290796,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 0,
+              "spawn_motion_disabled": true
+            }
+          },
+          "motionDisabled": true
+        }
+      ]
     },
     {
       "id": "nuke:21617:4",
@@ -2658,7 +5105,94 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_21617_4_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "nativeModelSha256": "c7bf4bbac3ed9685734eb5ab98d740cfa5703c7f534dfd1e335e23d042397cae",
+            "renderSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -2.3256566922126417e-08,
+              2.2905727167096633e-09,
+              -1.0,
+              0.0,
+              0.19509018170541406,
+              0.9807853588471208,
+              -2.3256566395394005e-08,
+              0.0,
+              0.9807853088471186,
+              -0.19509018170541093,
+              2.2905767115466025e-09,
+              0.0,
+              10.3194895,
+              2.9717977,
+              17.373596,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 0,
+              "spawn_motion_disabled": true
+            }
+          },
+          "motionDisabled": true
+        }
+      ]
     },
     {
       "id": "nuke:21628:4",
@@ -2833,7 +5367,94 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_21628_4_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "nativeModelSha256": "c7bf4bbac3ed9685734eb5ab98d740cfa5703c7f534dfd1e335e23d042397cae",
+            "renderSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -2.3256566922126417e-08,
+              2.2905727167096633e-09,
+              -1.0,
+              0.0,
+              0.19509018170541406,
+              0.9807853588471208,
+              -2.3256566395394005e-08,
+              0.0,
+              0.9807853088471186,
+              -0.19509018170541093,
+              2.2905767115466025e-09,
+              0.0,
+              18.041088,
+              2.971798,
+              15.290795,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 0,
+              "spawn_motion_disabled": true
+            }
+          },
+          "motionDisabled": true
+        }
+      ]
     },
     {
       "id": "nuke:21629:4",
@@ -3008,7 +5629,94 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_21629_4_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "nativeModelSha256": "c7bf4bbac3ed9685734eb5ab98d740cfa5703c7f534dfd1e335e23d042397cae",
+            "renderSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -2.3256566922126417e-08,
+              2.2905727167096633e-09,
+              -1.0,
+              0.0,
+              0.19509018170541406,
+              0.9807853588471208,
+              -2.3256566395394005e-08,
+              0.0,
+              0.9807853088471186,
+              -0.19509018170541093,
+              2.2905767115466025e-09,
+              0.0,
+              18.041088,
+              2.9717977,
+              17.373594,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 0,
+              "spawn_motion_disabled": true
+            }
+          },
+          "motionDisabled": true
+        }
+      ]
     },
     {
       "id": "nuke:21640:4",
@@ -3183,7 +5891,94 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_21640_4_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "nativeModelSha256": "c7bf4bbac3ed9685734eb5ab98d740cfa5703c7f534dfd1e335e23d042397cae",
+            "renderSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -2.3256566922126417e-08,
+              2.2905727167096633e-09,
+              -1.0,
+              0.0,
+              0.19509018170541406,
+              0.9807853588471208,
+              -2.3256566395394005e-08,
+              0.0,
+              0.9807853088471186,
+              -0.19509018170541093,
+              2.2905767115466025e-09,
+              0.0,
+              18.041088,
+              2.9717963,
+              28.295593,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 0,
+              "spawn_motion_disabled": true
+            }
+          },
+          "motionDisabled": true
+        }
+      ]
     },
     {
       "id": "nuke:21641:4",
@@ -3358,7 +6153,94 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "glass",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_nuke_21641_4_0_leaf0"
+          ],
+          "fadeTime": 3.0,
+          "spawnChance": 1.0,
+          "essential": true,
+          "source": {
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "nativeModelSha256": "c7bf4bbac3ed9685734eb5ab98d740cfa5703c7f534dfd1e335e23d042397cae",
+            "renderSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+            "native": {
+              "piece_name": "",
+              "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+              "collision_group_override": "debris",
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 3.0,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": true,
+              "can_player_pickup_piece": false,
+              "inherit_owner_joints": false
+            },
+            "worldFromStandaloneScene": [
+              -2.3256566922126417e-08,
+              2.2905727167096633e-09,
+              -1.0,
+              0.0,
+              0.19509018170541406,
+              0.9807853588471208,
+              -2.3256566395394005e-08,
+              0.0,
+              0.9807853088471186,
+              -0.19509018170541093,
+              2.2905767115466025e-09,
+              0.0,
+              18.041088,
+              2.971796,
+              30.378393,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "nativeModelPropData": {
+              "base": "Item.Medium",
+              "allowstatic": false,
+              "bakelighting": true,
+              "damage_table": "",
+              "dmg.bullets": -1.0,
+              "dmg.club": -1.0,
+              "dmg.explosive": -1.0,
+              "dmg.fire": -1.0,
+              "health": 0,
+              "spawn_motion_disabled": true
+            }
+          },
+          "motionDisabled": true
+        }
+      ]
     }
   ],
   "enabledRemainders": [],
@@ -3981,5 +6863,190 @@
         ]
       }
     }
-  ]
+  ],
+  "renderModels": [
+    "/models/maps/nuke-breakpieces.glb.gz"
+  ],
+  "source": {
+    "nativePieces": {
+      "basisAuditSha256": "46d15854be04c6f4660a97ffe337711618927205675a44486d5cf0d4ee96bbea",
+      "exportManifestSha256": "f25a34c9a92e219f697deae38f358e747a202e2871df492820ea9a6ce67c3189",
+      "materials": "/models/maps/nuke-breakpiece-materials.json",
+      "materialBindingsSha256": "e5f2d7b17af58877253aa58491d2a3562815e5e8243cec9e16a46ecaced19936",
+      "models": 20,
+      "owners": 15,
+      "pieceRecords": 36,
+      "qualification": "Exact native fragment models, source-local offsets/angles composed once through independently audited intact basis and Source-unit physics scene. Owner tint is world/base-export ratio, not duplicated VMAT tint. PBR/GLTF material adaptation, nonblocking sphere rigid bodies, random motion and optional recent-piece budget remain browser reconstructions; source burst/twist, fade-delay/fade-out curves and zero-fade schedules require native runtime proof.",
+      "geometryPreparation": {
+        "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p2.vmdl": {
+          "sourceSha256": "b56f4718de38f33120f3597250cb310790e7e865f9a7d2af156ca79bd7fc4e76",
+          "primitives": 1,
+          "inputRows": 18,
+          "referencedRows": 18,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p3.vmdl": {
+          "sourceSha256": "f355b7e74b9b3abc3e7cbc749856d7c56f71868533e52cb0e34fb3fd66f66a3c",
+          "primitives": 1,
+          "inputRows": 28,
+          "referencedRows": 28,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p4.vmdl": {
+          "sourceSha256": "5376bb501e949b1f0671873d8e33bc3e37942fbde3479a784330f9c65f17b053",
+          "primitives": 1,
+          "inputRows": 32,
+          "referencedRows": 32,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p6.vmdl": {
+          "sourceSha256": "e0b0323d0976be373627fe0158f3ad7f8143d02a314a61b66ad975f7e0546105",
+          "primitives": 1,
+          "inputRows": 18,
+          "referencedRows": 18,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p7.vmdl": {
+          "sourceSha256": "cada4c1f5946eac83f6358c1e69e915dd296b297b2fd074c93cd7ff1846efa95",
+          "primitives": 1,
+          "inputRows": 18,
+          "referencedRows": 18,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p8.vmdl": {
+          "sourceSha256": "f0d91713f2b8a80e4ebf7ef464dc801874aa08e0c1ce411c304909209755a6c1",
+          "primitives": 1,
+          "inputRows": 18,
+          "referencedRows": 18,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p9.vmdl": {
+          "sourceSha256": "d62af4b89521cf834124cfd4e72d46f9b6b42bfea588500f98787c3621987df2",
+          "primitives": 1,
+          "inputRows": 18,
+          "referencedRows": 18,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece.vmdl": {
+          "sourceSha256": "4b25c749dc2d64d20234a709416ef1f7fc29b1771d8d7f7e4460fb4316543f72",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece1.vmdl": {
+          "sourceSha256": "da5b2c1e65a20abca70a95ed0717072505c7b8b86f1ce9baed7f48340f227505",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece2.vmdl": {
+          "sourceSha256": "1dd89fc606894475d91829ceaf035a37cc9ec1dac028f2af094d6b92ecb286b9",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece3.vmdl": {
+          "sourceSha256": "be38255f6711734171de33135c660dc9bb7177b273e859d69f661774c82d0185",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece4.vmdl": {
+          "sourceSha256": "67026546d023cc2e01c5c31eea6f48a326b108a386ee76e4f551fce1d9e8879b",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece5.vmdl": {
+          "sourceSha256": "5fac70d0204a581d104fda2aa7ac6f1f35e4dedbdd2d53e1462d919fa1298740",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece6.vmdl": {
+          "sourceSha256": "1601eac2494df8a117b2c3868c456e6f16b5bf2718110bc6fd2936809c09acb7",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece7.vmdl": {
+          "sourceSha256": "33e5b5a2cf18b052dd4ca6077cb44a4ef8fec5d3134921e4eefc13968d3fe467",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece8.vmdl": {
+          "sourceSha256": "1c0d65c477ce3cf1ed969e187ed2fb0b55a12bf4e6dcd1a3513f873139ec2ab0",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece9.vmdl": {
+          "sourceSha256": "8a2e2bf3436604e325333884bb8480adabe3f1c0d4d752c4f9a2a274e85c780d",
+          "primitives": 1,
+          "inputRows": 274,
+          "referencedRows": 274,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/windows/nuke_window_93x76_broken.vmdl": {
+          "sourceSha256": "808ef08ff12e0b3e5e6d63cd37b3069d345af3dfc7b4516d485da3d997a211b4",
+          "primitives": 1,
+          "inputRows": 24254,
+          "referencedRows": 24254,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/windows/nuke_window_63x76_broken.vmdl": {
+          "sourceSha256": "13b97f5bfd79f64170af534c0d0bde11e1722a9b7dbc4a7781db77d3b11b68a1",
+          "primitives": 1,
+          "inputRows": 22016,
+          "referencedRows": 22016,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl": {
+          "sourceSha256": "e8a0ce758ade020c4f9dfdd41474adcf59db035c02ccfd99abfbd0f0e74c9230",
+          "primitives": 1,
+          "inputRows": 1892,
+          "referencedRows": 1892,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        }
+      },
+      "stationarySourceRemnants": {
+        "count": 8,
+        "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+        "sourceProperty": "prop_data.spawn_motion_disabled=true",
+        "actualPackedCpuProbe": "8remnants no drift after1s",
+        "tinyGpu": "fixed-window motion pixel difference0, reset0, GL0",
+        "qualified": "Authored flag honored; native fade scheduling and complete rigid-body/damage behavior remain unverified."
+      }
+    }
+  }
 }

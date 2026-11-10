@@ -1,0 +1,2976 @@
+{
+  "mapId": "vertigo",
+  "materials": {
+    "vertigo_buildingskyline_ft": {
+      "advancedSelection": {
+        "contract": "rare14-build26445667",
+        "group": "skyline",
+        "sourceSha256": "d7010f82f9f387a4678f2450cfdbf9179116366415c9bce8d313d0c84d048bc5"
+      },
+      "shader": "csgo_complex.vfx",
+      "nativeResource": "materials/de_vertigo/vertigo_buildingskyline_ft.vmat",
+      "IntParams": {
+        "F_ALPHA_TEST": 1,
+        "F_SELF_ILLUM": 1,
+        "g_bFogEnabled": 1,
+        "g_nScaleTexCoordUByModelScaleAxis": 0,
+        "g_nScaleTexCoordVByModelScaleAxis": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.5,
+        "g_flAntiAliasedEdgeStrength": 1,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flSelfIllumAlbedoFactor": 1,
+        "g_flSelfIllumBrightness": 0,
+        "g_flSelfIllumScale": 1,
+        "g_flTexCoordRotation": 0
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vSelfIllumScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vSelfIllumTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vTexCoordCenter": [
+          0.5,
+          0.5,
+          0,
+          0
+        ],
+        "g_vTexCoordOffset": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vTexCoordScale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureRoughness": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureSelfIllumMask": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "92747f7c7af8fb8a",
+        "g_tNormal": "f200c400594571c9",
+        "g_tAmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tSelfIllumMask": "c02f75e684ea1be5"
+      },
+      "constants": {},
+      "resolvedMaterialInputs": {
+        "g_vTexCoordXform0": [
+          1.0,
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "g_vTexCoordXform1": [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_vSelfIllumTintScaled": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_vSelfIllumScrollSpeed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flSelfIllumAlbedoFactor": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "g_flAntiAliasedEdgeStrength": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bTexCoordScaleByModel": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "exportedName": "vertigo_buildingskyline_ft",
+      "source": {
+        "originalNativeResourceSha256": "d7010f82f9f387a4678f2450cfdbf9179116366415c9bce8d313d0c84d048bc5",
+        "originalTextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/de_vertigo/vertigo_buildingskyline_ft_color_psd_f97a8c99.vtex",
+          "g_tNormal": "materials/de_vertigo/vertigo_buildingskyline_ft_vmat_g_tnormal_53b47c48.vtex",
+          "g_tSelfIllumMask": "materials/de_vertigo/vertigo_buildingskyline_ft_vmat_g_tselfillummask_ff155607.vtex"
+        },
+        "resolvedNativeInputs": {
+          "g_vTexCoordXform0": {
+            "value": [
+              1.0,
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_vTexCoordXform0",
+              "m_szUiGroup": "",
+              "m_uiType": 4,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1DF4B3033907DB0F4940150700003443160800090006010008010900060000080209011D12528A8F1E00150902181D12528A8F1E551507000000001D6F5A790C1E001D17F2C3B01E001309021D6F5A790C1E55151309011D6F5A790C1E00151406180000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 4,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 4,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "material_param": "g_flTexCoordRotation",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 35,
+                "material_param": "g_vTexCoordScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 46,
+                "material_param": "g_vTexCoordScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 59,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 66,
+                "material_param": "g_vTexCoordOffset",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 76,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 87,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              }
+            ]
+          },
+          "g_vTexCoordXform1": {
+            "value": [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_vTexCoordXform1",
+              "m_szUiGroup": "",
+              "m_uiType": 4,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1DF4B3033907DB0F4940150700003443160800090006010008010900060000080209021D12528A8F1E001509011D12528A8F1E551507000000001D6F5A790C1E551D17F2C3B01E551309021D6F5A790C1E001509011D6F5A790C1E5515131406180000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 4,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 4,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "material_param": "g_flTexCoordRotation",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 35,
+                "material_param": "g_vTexCoordScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 45,
+                "material_param": "g_vTexCoordScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 58,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 65,
+                "material_param": "g_vTexCoordOffset",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 75,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 85,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              }
+            ]
+          },
+          "g_vTexCoordScrollSpeed": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_vTexCoordScrollSpeed",
+              "m_szUiGroup": "Color/70",
+              "m_uiType": 4,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 2,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 2,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -10.0,
+                -10.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                10.0,
+                10.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_vColorTint": {
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_vColorTint",
+              "m_szUiGroup": "Color,10/20",
+              "m_uiType": 2,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 7,
+              "m_pCompiledExpression": {
+                "hex": "1D8579A720061F0000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 3,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 3,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "material_param": "g_vColorTint",
+                "value": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  0.0
+                ]
+              }
+            ]
+          },
+          "g_flModelTintAmount": {
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flModelTintAmount",
+              "m_szUiGroup": "Color,10/30",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_flReflectance": {
+            "value": [
+              0.04000000000000001,
+              0.04000000000000001,
+              0.04000000000000001,
+              0.04000000000000001
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_flReflectance",
+              "m_szUiGroup": "",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "070000C03F070000803F14070000C03F070000803F1316070000004006150000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": []
+          },
+          "g_vSelfIllumTintScaled": {
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_vSelfIllumTintScaled",
+              "m_szUiGroup": "",
+              "m_uiType": 4,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "07000000401D437BB8290615001E001DD462A9E31E00151D3C1392A31EA4061F001500"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 3,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 3,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 5,
+                "material_param": "g_flSelfIllumBrightness",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 15,
+                "material_param": "g_flSelfIllumScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                ]
+              },
+              {
+                "offset": 23,
+                "material_param": "g_vSelfIllumTint",
+                "value": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  0.0
+                ]
+              }
+            ]
+          },
+          "g_vSelfIllumScrollSpeed": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_vSelfIllumScrollSpeed",
+              "m_szUiGroup": "Self Illum/40",
+              "m_uiType": 4,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 2,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 2,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -10.0,
+                -10.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                10.0,
+                10.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_flSelfIllumAlbedoFactor": {
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flSelfIllumAlbedoFactor",
+              "m_szUiGroup": "Self Illum/50",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_flMetalness": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flMetalness",
+              "m_szUiGroup": "Lighting,30/Metalness/30",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_bFogEnabled": {
+            "value": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_bFogEnabled",
+              "m_szUiGroup": "Fog",
+              "m_uiType": 5,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 9,
+              "m_registerType": 1,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_intDefault": [
+                1,
+                0,
+                0,
+                0
+              ],
+              "m_intMin": [
+                -999999999,
+                -999999999,
+                -999999999,
+                -999999999
+              ],
+              "m_intMax": [
+                999999999,
+                999999999,
+                999999999,
+                999999999
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_bDontFlipBackfaceNormals": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_bDontFlipBackfaceNormals",
+              "m_szUiGroup": "",
+              "m_uiType": 5,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1A020407000F00070000803F021400070000000000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 9,
+              "m_registerType": 1,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_intDefault": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "m_intMin": [
+                -999999999,
+                -999999999,
+                -999999999,
+                -999999999
+              ],
+              "m_intMax": [
+                999999999,
+                999999999,
+                999999999,
+                999999999
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "feature": "F_DONT_FLIP_BACKFACE_NORMALS",
+                "value": 0
+              },
+              {
+                "offset": 2,
+                "branch": false,
+                "next_offset": 15
+              }
+            ]
+          },
+          "g_bRenderBackfaceNormals": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_bRenderBackfaceNormals",
+              "m_szUiGroup": "",
+              "m_uiType": 5,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1A01040F0007000700000000021400070000803F0419002100070000803F022600070000000000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 9,
+              "m_registerType": 1,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_intDefault": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "m_intMin": [
+                -999999999,
+                -999999999,
+                -999999999,
+                -999999999
+              ],
+              "m_intMax": [
+                999999999,
+                999999999,
+                999999999,
+                999999999
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "feature": "F_RENDER_BACKFACES",
+                "value": 0
+              },
+              {
+                "offset": 2,
+                "branch": false,
+                "next_offset": 7
+              },
+              {
+                "offset": 20,
+                "branch": false,
+                "next_offset": 33
+              }
+            ]
+          },
+          "g_flAlphaTestReference": {
+            "value": [
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flAlphaTestReference",
+              "m_szUiGroup": "Translucent",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.5,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.01,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                0.99,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_flAntiAliasedEdgeStrength": {
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flAntiAliasedEdgeStrength",
+              "m_szUiGroup": "Translucent",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_flOpacityScale": {
+            "value": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "native metadata default",
+            "variable": {
+              "m_szName": "g_flOpacityScale",
+              "m_szUiGroup": "Translucent",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_bTexCoordScaleByModel": {
+            "value": [
+              false,
+              false,
+              false,
+              false
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_bTexCoordScaleByModel",
+              "m_szUiGroup": "",
+              "m_uiType": 5,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1D8F7E09AF07000000000E0410001800070000803F0223001D3F167EE607000000000E00"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 9,
+              "m_registerType": 1,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_intDefault": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "m_intMin": [
+                -999999999,
+                -999999999,
+                -999999999,
+                -999999999
+              ],
+              "m_intMax": [
+                999999999,
+                999999999,
+                999999999,
+                999999999
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "material_param": "g_nScaleTexCoordUByModelScaleAxis",
+                "value": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "offset": 11,
+                "branch": false,
+                "next_offset": 24
+              },
+              {
+                "offset": 24,
+                "material_param": "g_nScaleTexCoordVByModelScaleAxis",
+                "value": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "exportedVariants": [
+        {
+          "materialIndex": 11,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "combinedTintProof": "native/exact exporter factor equivalence: white material tint + endpoint model amount",
+          "packedMaterialIndex": 11
+        }
+      ]
+    },
+    "vertigo_mountains_001": {
+      "advancedSelection": {
+        "contract": "rare14-build26445667",
+        "group": "mountains",
+        "sourceSha256": "ad8a9db4a4692dcf5d32489b34c15d900703e71c62dfcbdd145196b1ccf5050a"
+      },
+      "shader": "csgo_complex.vfx",
+      "nativeResource": "materials/de_vertigo/vertigo_mountains_001.vmat",
+      "IntParams": {
+        "F_ALPHA_TEST": 1,
+        "g_bFogEnabled": 1,
+        "g_nScaleTexCoordUByModelScaleAxis": 0,
+        "g_nScaleTexCoordVByModelScaleAxis": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 2
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.5,
+        "g_flAntiAliasedEdgeStrength": 1,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flTexCoordRotation": 0
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vTexCoordCenter": [
+          0.5,
+          0.5,
+          0,
+          0
+        ],
+        "g_vTexCoordOffset": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vTexCoordScale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureRoughness": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "78552ec87a64d9b5",
+        "g_tNormal": "c93a6f5609540810",
+        "g_tAmbientOcclusion": "cf0f8accdfc38e3f"
+      },
+      "constants": {},
+      "resolvedMaterialInputs": {
+        "g_vTexCoordXform0": [
+          1.0,
+          -0.0,
+          0.0,
+          0.0
+        ],
+        "g_vTexCoordXform1": [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "g_flAntiAliasedEdgeStrength": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bTexCoordScaleByModel": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "exportedName": "vertigo_mountains_001",
+      "source": {
+        "originalNativeResourceSha256": "ad8a9db4a4692dcf5d32489b34c15d900703e71c62dfcbdd145196b1ccf5050a",
+        "originalTextureParams": {
+          "g_tAmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tColor": "materials/de_vertigo/mountain_card_001_color_psd_44664a91.vtex",
+          "g_tNormal": "materials/de_vertigo/vertigo_mountains_001_vmat_g_tnormal_53b47c48.vtex"
+        },
+        "resolvedNativeInputs": {
+          "g_vTexCoordXform0": {
+            "value": [
+              1.0,
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_vTexCoordXform0",
+              "m_szUiGroup": "",
+              "m_uiType": 4,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1DF4B3033907DB0F4940150700003443160800090006010008010900060000080209011D12528A8F1E00150902181D12528A8F1E551507000000001D6F5A790C1E001D17F2C3B01E001309021D6F5A790C1E55151309011D6F5A790C1E00151406180000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 4,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 4,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "material_param": "g_flTexCoordRotation",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 35,
+                "material_param": "g_vTexCoordScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 46,
+                "material_param": "g_vTexCoordScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 59,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 66,
+                "material_param": "g_vTexCoordOffset",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 76,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 87,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              }
+            ]
+          },
+          "g_vTexCoordXform1": {
+            "value": [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_vTexCoordXform1",
+              "m_szUiGroup": "",
+              "m_uiType": 4,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1DF4B3033907DB0F4940150700003443160800090006010008010900060000080209021D12528A8F1E001509011D12528A8F1E551507000000001D6F5A790C1E551D17F2C3B01E551309021D6F5A790C1E001509011D6F5A790C1E5515131406180000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 4,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 4,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "material_param": "g_flTexCoordRotation",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 35,
+                "material_param": "g_vTexCoordScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 45,
+                "material_param": "g_vTexCoordScale",
+                "value": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 58,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 65,
+                "material_param": "g_vTexCoordOffset",
+                "value": [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 75,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "offset": 85,
+                "material_param": "g_vTexCoordCenter",
+                "value": [
+                  0.5,
+                  0.5,
+                  0.0,
+                  0.0
+                ]
+              }
+            ]
+          },
+          "g_vTexCoordScrollSpeed": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_vTexCoordScrollSpeed",
+              "m_szUiGroup": "Color/70",
+              "m_uiType": 4,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 2,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 2,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -10.0,
+                -10.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                10.0,
+                10.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_vColorTint": {
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_vColorTint",
+              "m_szUiGroup": "Color,10/20",
+              "m_uiType": 2,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 7,
+              "m_pCompiledExpression": {
+                "hex": "1D8579A720061F0000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 3,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 3,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                1.0,
+                1.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "material_param": "g_vColorTint",
+                "value": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  0.0
+                ]
+              }
+            ]
+          },
+          "g_flModelTintAmount": {
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flModelTintAmount",
+              "m_szUiGroup": "Color,10/30",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_flReflectance": {
+            "value": [
+              0.04000000000000001,
+              0.04000000000000001,
+              0.04000000000000001,
+              0.04000000000000001
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_flReflectance",
+              "m_szUiGroup": "",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "070000C03F070000803F14070000C03F070000803F1316070000004006150000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0,
+                -1000000000.0
+              ],
+              "m_flMax": [
+                1000000000.0,
+                1000000000.0,
+                1000000000.0,
+                1000000000.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": []
+          },
+          "g_flMetalness": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flMetalness",
+              "m_szUiGroup": "Lighting,30/Metalness/30",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_bFogEnabled": {
+            "value": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_bFogEnabled",
+              "m_szUiGroup": "Fog",
+              "m_uiType": 5,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 9,
+              "m_registerType": 1,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_intDefault": [
+                1,
+                0,
+                0,
+                0
+              ],
+              "m_intMin": [
+                -999999999,
+                -999999999,
+                -999999999,
+                -999999999
+              ],
+              "m_intMax": [
+                999999999,
+                999999999,
+                999999999,
+                999999999
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_bDontFlipBackfaceNormals": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_bDontFlipBackfaceNormals",
+              "m_szUiGroup": "",
+              "m_uiType": 5,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1A020407000F00070000803F021400070000000000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 9,
+              "m_registerType": 1,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_intDefault": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "m_intMin": [
+                -999999999,
+                -999999999,
+                -999999999,
+                -999999999
+              ],
+              "m_intMax": [
+                999999999,
+                999999999,
+                999999999,
+                999999999
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "feature": "F_DONT_FLIP_BACKFACE_NORMALS",
+                "value": 0
+              },
+              {
+                "offset": 2,
+                "branch": false,
+                "next_offset": 15
+              }
+            ]
+          },
+          "g_bRenderBackfaceNormals": {
+            "value": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_bRenderBackfaceNormals",
+              "m_szUiGroup": "",
+              "m_uiType": 5,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1A01040F0007000700000000021400070000803F0419002100070000803F022600070000000000"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 9,
+              "m_registerType": 1,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_intDefault": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "m_intMin": [
+                -999999999,
+                -999999999,
+                -999999999,
+                -999999999
+              ],
+              "m_intMax": [
+                999999999,
+                999999999,
+                999999999,
+                999999999
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "feature": "F_RENDER_BACKFACES",
+                "value": 0
+              },
+              {
+                "offset": 2,
+                "branch": false,
+                "next_offset": 7
+              },
+              {
+                "offset": 20,
+                "branch": false,
+                "next_offset": 33
+              }
+            ]
+          },
+          "g_flAlphaTestReference": {
+            "value": [
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flAlphaTestReference",
+              "m_szUiGroup": "Translucent",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                0.5,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.01,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                0.99,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_flAntiAliasedEdgeStrength": {
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "source": "VMAT",
+            "variable": {
+              "m_szName": "g_flAntiAliasedEdgeStrength",
+              "m_szUiGroup": "Translucent",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_flOpacityScale": {
+            "value": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "source": "native metadata default",
+            "variable": {
+              "m_szName": "g_flOpacityScale",
+              "m_szUiGroup": "Translucent",
+              "m_uiType": 1,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 0,
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 1,
+              "m_registerType": 3,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_flDefault": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMin": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "m_flMax": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            }
+          },
+          "g_bTexCoordScaleByModel": {
+            "value": [
+              false,
+              false,
+              false,
+              false
+            ],
+            "source": "evaluated native compiled expression",
+            "variable": {
+              "m_szName": "g_bTexCoordScaleByModel",
+              "m_szUiGroup": "",
+              "m_uiType": 5,
+              "m_flUiStep": 0.0,
+              "m_pSourceString": "",
+              "m_sourceType": 6,
+              "m_pCompiledExpression": {
+                "hex": "1D8F7E09AF07000000000E0410001800070000803F0223001D3F167EE607000000000E00"
+              },
+              "m_pCompiledUIVisibilityExpression": {
+                "hex": ""
+              },
+              "m_sourceIndex": -1,
+              "m_type": 9,
+              "m_registerType": 1,
+              "m_nContextStateAffectedByVariable": 8192,
+              "m_nRegisterOffset": 4294967295,
+              "m_nDescriptorSet": 4294967295,
+              "m_nRegisterElements": 1,
+              "m_nTypeSpecificBits": 4294967295,
+              "m_intDefault": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "m_intMin": [
+                -999999999,
+                -999999999,
+                -999999999,
+                -999999999
+              ],
+              "m_intMax": [
+                999999999,
+                999999999,
+                999999999,
+                999999999
+              ],
+              "m_nLayerId": -1,
+              "m_bAllowLayerOverride": true,
+              "m_bIsLayerConstant": false
+            },
+            "trace": [
+              {
+                "offset": 0,
+                "material_param": "g_nScaleTexCoordUByModelScaleAxis",
+                "value": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "offset": 11,
+                "branch": false,
+                "next_offset": 24
+              },
+              {
+                "offset": 24,
+                "material_param": "g_nScaleTexCoordVByModelScaleAxis",
+                "value": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "exportedVariants": [
+        {
+          "materialIndex": 14,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "combinedTintProof": "native/exact exporter factor equivalence: white material tint + endpoint model amount",
+          "packedMaterialIndex": 14
+        }
+      ]
+    }
+  },
+  "textures": {
+    "92747f7c7af8fb8a": {
+      "resource": "materials/de_vertigo/vertigo_buildingskyline_ft_color_psd_f97a8c99.vtex",
+      "sourceSha256": "b6ec384d97dc6e25dfd1b3a214ac6b5ffb2edc344c65580af89a5fe12b15f095",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.2522338628768921,
+        0.26793909072875977,
+        0.26542919874191284
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "92747f7c7af8fb8a.bin.gz",
+      "gpuBytes": 524288,
+      "gpuSha256": "46608946349ac1fc1af9c30ec4e596fafa6fe8cfef74abc7cb175a9916dea6fb",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "46608946349ac1fc1af9c30ec4e596fafa6fe8cfef74abc7cb175a9916dea6fb"
+        }
+      ],
+      "decodedSize": [
+        1024,
+        512
+      ],
+      "decodedSource": "92747f7c7af8fb8a.png",
+      "decodedSha256": "6391d6f96682bfce643a783921f90c1661e7050044bff6783d1ee8ae038a8110",
+      "fallbackFile": "92747f7c7af8fb8a-rgba8-mips.bin.gz",
+      "fallbackBytes": 2097152,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 512,
+          "bytes": 2097152,
+          "sha256": "9e496e3aa9ba9680cc186b063877f26c762084d982d5e8277e536136f125b35c"
+        }
+      ]
+    },
+    "f200c400594571c9": {
+      "resource": "materials/de_vertigo/vertigo_buildingskyline_ft_vmat_g_tnormal_53b47c48.vtex",
+      "sourceSha256": "2021be5283ee1b625c5c61fca685bc8f4bee7ea921144ad646d811ce5a28a396",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        1.0
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "f200c400594571c9.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "2021be5283ee1b625c5c61fca685bc8f4bee7ea921144ad646d811ce5a28a396",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "f200c400594571c9-2021be5283-storage.png",
+      "decodedSha256": "d8f946a3caa0129ea20ed5c11b1e9a3cde92873925d2ba7fd2d77212d45985c7",
+      "fallbackFile": "f200c400594571c9-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": {
+        "value": [
+          0.5019607843137255,
+          0.5019607843137255,
+          1.0,
+          1.0
+        ],
+        "verification": {
+          "allNativeStoredTexelsAndMips": true,
+          "mips": [
+            {
+              "width": 4,
+              "height": 4,
+              "bytes": 64,
+              "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+            }
+          ],
+          "decodedRgbaUnchanged": true
+        },
+        "samplingPolicy": "Rare complex runtime samples selected original native textures; no constant folding"
+      }
+    },
+    "cf0f8accdfc38e3f": {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex",
+      "sourceSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "cf0f8accdfc38e3f.bin.gz",
+      "gpuBytes": 8,
+      "gpuSha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "cf0f8accdfc38e3f-e0b83fe25f-storage.png",
+      "decodedSha256": "6f73ba3cfd6e5314cb9235533c7c90d87f1f7bd19625cef96ae888724ca45007",
+      "fallbackFile": "cf0f8accdfc38e3f-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": {
+        "value": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "verification": {
+          "allNativeStoredTexelsAndMips": true,
+          "mips": [
+            {
+              "width": 4,
+              "height": 4,
+              "bytes": 64,
+              "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+            }
+          ],
+          "decodedRgbaUnchanged": true
+        },
+        "samplingPolicy": "Rare complex runtime samples selected original native textures; no constant folding"
+      }
+    },
+    "c02f75e684ea1be5": {
+      "resource": "materials/de_vertigo/vertigo_buildingskyline_ft_vmat_g_tselfillummask_ff155607.vtex",
+      "sourceSha256": "643603b511e21cb328759e4c71e29d65f27d79fb6a05d08a73c5234ee8a1c5bb",
+      "srgb": true,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "c02f75e684ea1be5.bin.gz",
+      "gpuBytes": 8,
+      "gpuSha256": "72a4fa3544e43a836ffcb268ce06ccdbc55d44d5e6b1b1c19216a53ea98301fd",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "72a4fa3544e43a836ffcb268ce06ccdbc55d44d5e6b1b1c19216a53ea98301fd"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "643603b511e21cb328759e4c71e29d65f27d79fb6a05d08a73c5234ee8a1c5bb",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "c02f75e684ea1be5-643603b511-storage.png",
+      "decodedSha256": "6f73ba3cfd6e5314cb9235533c7c90d87f1f7bd19625cef96ae888724ca45007",
+      "fallbackFile": "c02f75e684ea1be5-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": {
+        "value": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "verification": {
+          "allNativeStoredTexelsAndMips": true,
+          "mips": [
+            {
+              "width": 4,
+              "height": 4,
+              "bytes": 64,
+              "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+            }
+          ],
+          "decodedRgbaUnchanged": true
+        },
+        "samplingPolicy": "Rare complex runtime samples selected original native textures; no constant folding"
+      }
+    },
+    "78552ec87a64d9b5": {
+      "resource": "materials/de_vertigo/mountain_card_001_color_psd_44664a91.vtex",
+      "sourceSha256": "baf5ebf4d065794b2847ddfba5c22ac487bc24a30964ab152e7bff3a24a63e0d",
+      "srgb": true,
+      "sourceSize": [
+        4096,
+        256
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.3372581899166107,
+        0.3577415347099304,
+        0.38578248023986816
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "78552ec87a64d9b5.bin.gz",
+      "gpuBytes": 1398016,
+      "gpuSha256": "f3e3b79cb04cf2d7cf00e61c6255a28b36cba1855fa6cab0ff43071182b980f9",
+      "mips": [
+        {
+          "width": 4096,
+          "height": 256,
+          "bytes": 1048576,
+          "sha256": "730b5531250d6d08e8a438bb3e462b5f0f6f324ab2fb86409eeb4930822101d7"
+        },
+        {
+          "width": 2048,
+          "height": 128,
+          "bytes": 262144,
+          "sha256": "536e12e62ac30386c9d9dbb6612a0fdc6678a2eeb75953cb903d746f3e69b36c"
+        },
+        {
+          "width": 1024,
+          "height": 64,
+          "bytes": 65536,
+          "sha256": "3264efb27d51952588c04aa3fb48e1fd95df0d066a50be7a1d8e6c1d10d48f3c"
+        },
+        {
+          "width": 512,
+          "height": 32,
+          "bytes": 16384,
+          "sha256": "265405987ccf8eee7580463375bb3485948d3bb0c5fa5f9fd299eb24bb9a7ff1"
+        },
+        {
+          "width": 256,
+          "height": 16,
+          "bytes": 4096,
+          "sha256": "05f796ef0c4e9769d51fa8de56323cc5a67666de1597254c8d34a1e40f0812cf"
+        },
+        {
+          "width": 128,
+          "height": 8,
+          "bytes": 1024,
+          "sha256": "f742a179d23c35b8267320cb06441c78d4e041e8f08ffff2656494736a6d1f7f"
+        },
+        {
+          "width": 64,
+          "height": 4,
+          "bytes": 256,
+          "sha256": "a121643945bb2cf5ece0c928e9443ff957b2e80f85122540933e1419fac121ac"
+        }
+      ],
+      "decodedSize": [
+        4096,
+        256
+      ],
+      "decodedSource": "78552ec87a64d9b5.png",
+      "decodedSha256": "c5b742b7fa39b08315b2bc621f343ef3efcb56d74ea32ab5321db9015572b2d3",
+      "fallbackFile": "78552ec87a64d9b5-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592064,
+      "fallbackMips": [
+        {
+          "width": 4096,
+          "height": 256,
+          "bytes": 4194304,
+          "sha256": "7b6f56afd80bc1d4d97c9b1413ba0f3d5370cd240f2a92b8ad376f71cfb8977c"
+        },
+        {
+          "width": 2048,
+          "height": 128,
+          "bytes": 1048576,
+          "sha256": "e8e4e90f4c68d36c302e67176226f0e2424b7a3e19c9b79aed40a6d561ea5a28"
+        },
+        {
+          "width": 1024,
+          "height": 64,
+          "bytes": 262144,
+          "sha256": "2d88618dbb453def09b09884e8526337b6e0e6565904e63f1b017c5d2a215bbf"
+        },
+        {
+          "width": 512,
+          "height": 32,
+          "bytes": 65536,
+          "sha256": "4f4d5d07a8dd82edfe44c1e51ca64f2e8b7bbdf5b06e21e4741a8ae596a0e7ad"
+        },
+        {
+          "width": 256,
+          "height": 16,
+          "bytes": 16384,
+          "sha256": "ba00454e96b15455d817c1a312998706ca8f3232df70a561d3f7dac1ffee74ab"
+        },
+        {
+          "width": 128,
+          "height": 8,
+          "bytes": 4096,
+          "sha256": "8ee4993e84c7257716bfd4be5cff2766fb1c31f2d00b12a56039976d174f206b"
+        },
+        {
+          "width": 64,
+          "height": 4,
+          "bytes": 1024,
+          "sha256": "353edf48eb05879e06002bdf971e04476bacdcbf5a2f7bea1e66af1877646f76"
+        }
+      ]
+    },
+    "c93a6f5609540810": {
+      "resource": "materials/de_vertigo/vertigo_mountains_001_vmat_g_tnormal_53b47c48.vtex",
+      "sourceSha256": "2021be5283ee1b625c5c61fca685bc8f4bee7ea921144ad646d811ce5a28a396",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        1.0
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "c93a6f5609540810.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "c522dc786034ae31b85e9519149f0ea22122baa7b2b02d0210535feb622caaf2"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "2021be5283ee1b625c5c61fca685bc8f4bee7ea921144ad646d811ce5a28a396",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "c93a6f5609540810-2021be5283-storage.png",
+      "decodedSha256": "d8f946a3caa0129ea20ed5c11b1e9a3cde92873925d2ba7fd2d77212d45985c7",
+      "fallbackFile": "c93a6f5609540810-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": {
+        "value": [
+          0.5019607843137255,
+          0.5019607843137255,
+          1.0,
+          1.0
+        ],
+        "verification": {
+          "allNativeStoredTexelsAndMips": true,
+          "mips": [
+            {
+              "width": 4,
+              "height": 4,
+              "bytes": 64,
+              "sha256": "5ce3aa8aceac9b1c3ce8da447d2554ca42e30f77bc4e4b4345374688bf24e528"
+            }
+          ],
+          "decodedRgbaUnchanged": true
+        },
+        "samplingPolicy": "Rare complex runtime samples selected original native textures; no constant folding"
+      }
+    }
+  },
+  "source": {
+    "worldSha256": "caac7b58dddc05d19c879f2ab05aaeb9cc9b63c9f7af93418b3d92eeb4f533e6",
+    "nativeMaterialPlanSha256": "0f39d44368337f7dd0bc91b732059c58529bbd1a9e06c8cbb23223c40d3e7fc1",
+    "sealedSelectedShaderManifestSha256": "67e66d72f6e1ed34551e6d97efc324cb244c067f45518ab62d63ab810fc27f9b",
+    "textureCompileContractSha256": "ab1e0c189cc0a479801024384d277aaa4f01bee3e7df5a0cc5de52b23a11ae76",
+    "nativeTintProofSha256": "529898f06944098ffe16ae15ed6cbd513ecd3bc370b7d8ce6ff43a79f718e22e",
+    "qualification": "Exact fourteen sealed native complex COLOR/DEPTH arithmetic, separateMetal.G and emission/transmission/paint. Authored mip0 compressed blocks/exact RGBA chains. Browser prepass/MSAA and live engine state remain reconstruction. Plant fallback depth key1 unresolved; no invented fallback.",
+    "packedMaterialIndexProof": {
+      "packedModelSha256": "ac41bb5ec4db288af8cf8d7e62fc09ec289d7172bad56d55b80c6b7423ef56b4",
+      "audit": "artifacts/new-maps/metadata/vertigo-sky-rare-packed-material-index-audit.json",
+      "method": "Named materials retained by gltfpack -km. Full material slot count, all per-slot scene-instanced indexed triangle counts nonincreasing after packer degenerate removal and spatial bounds within 0.02m explicit tolerance, selected source names and original factors verified; no material-slot merging."
+    }
+  }
+}

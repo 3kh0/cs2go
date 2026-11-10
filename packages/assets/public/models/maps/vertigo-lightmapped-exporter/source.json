@@ -1,0 +1,2227 @@
+{
+  "mapId": "vertigo",
+  "materials": {
+    "221_vertigo": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/decals/bombsite_line_spray.vmat",
+      "selectedContract": "parking-8070-1158",
+      "exportedName": "bombsite_line_spray__alpha_1.0",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 221,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Authored FLOAT draw RGB retained as source-domain bridge. Native shader decodes packed bytes; private FLOAT-to-packed host upload unobserved. Exporter-linear alternative retained for paired native-view comparison.",
+      "IntParams": {
+        "F_OVERLAY": 1,
+        "F_SPECULAR_DIRECT": 1,
+        "F_SPECULAR_INDIRECT": 1,
+        "F_TRANSLUCENT": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.01,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flOpacityScale": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Color": [
+          0.905882,
+          0.290196,
+          0.086275,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          0.501961,
+          0.501961,
+          0.501961,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "54732f48feaaaabb",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "a82d8b56194432ea"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bNoSpecularAtFullRoughness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeResourceSha256": "e301c0b83f803059001d01afd9a56f52e5e4aa2534b8124c1cbf7976abcad2ea",
+        "nativeSourceDraws": [
+          {
+            "meshIndex": 47,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\vertigo\\raw\\maps\\de_vertigo\\worldnodes\\n0_lr0_c42_s_mesh_overlay42.vmdl_c",
+              "sha256": "709b688092a35b24b121181560bc8f5ea7e34c9c44d17066a841c7a1b70ffbc0"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 45.254833,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 1546,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 3273,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_line_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          },
+          {
+            "meshIndex": 48,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\vertigo\\raw\\maps\\de_vertigo\\worldnodes\\n0_lr0_c43_s_mesh_overlay43.vmdl_c",
+              "sha256": "19ec0e592bf9724fae75e4fc494b1d0dbb4afb06c8103adc85fe41ba88709105"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 45.254833,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 2805,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 5838,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_line_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          },
+          {
+            "meshIndex": 96,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\vertigo\\raw\\maps\\de_vertigo\\worldnodes\\n0_lr0_c91_s_mesh_overlay91.vmdl_c",
+              "sha256": "14130827eeb3f62fccd785061e9cac18165a14225776d38749d0ba084e76853e"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 46.340519,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 5,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 9,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/decals/bombsite_line_spray.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 37,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          }
+        ],
+        "sourceNodeEvidence": [
+          {
+            "worldnode": "artifacts/new-maps/supplement/vertigo/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "34b2df02c5ed966e6ae704f2ec8d2f8d26f4503af8e38c1864ab02d8fed00df1",
+            "model": "maps/de_vertigo/worldnodes/n0_lr0_c42_s_mesh_overlay42.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_renderableModel": "maps/de_vertigo/worldnodes/n0_lr0_c42_s_mesh_overlay42.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/vertigo/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "34b2df02c5ed966e6ae704f2ec8d2f8d26f4503af8e38c1864ab02d8fed00df1",
+            "model": "maps/de_vertigo/worldnodes/n0_lr0_c43_s_mesh_overlay43.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_renderableModel": "maps/de_vertigo/worldnodes/n0_lr0_c43_s_mesh_overlay43.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/vertigo/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "34b2df02c5ed966e6ae704f2ec8d2f8d26f4503af8e38c1864ab02d8fed00df1",
+            "model": "maps/de_vertigo/worldnodes/n0_lr0_c91_s_mesh_overlay91.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_renderableModel": "maps/de_vertigo/worldnodes/n0_lr0_c91_s_mesh_overlay91.vmdl",
+              "m_renderable": ""
+            }
+          }
+        ]
+      }
+    },
+    "230_vertigo": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/overlays/vertigo_sign_hat_overlay.vmat",
+      "selectedContract": "parking-8070-1158",
+      "exportedName": "vertigo_sign_hat_overlay__alpha_1.0",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 230,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Authored FLOAT draw RGB retained as source-domain bridge. Native shader decodes packed bytes; private FLOAT-to-packed host upload unobserved. Exporter-linear alternative retained for paired native-view comparison.",
+      "IntParams": {
+        "F_OVERLAY": 1,
+        "F_SPECULAR_DIRECT": 1,
+        "F_SPECULAR_INDIRECT": 1,
+        "F_TRANSLUCENT": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.01,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flOpacityScale": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          0.117647,
+          0.117647,
+          0.117647,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "b576ccb499231903",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "d464f6b430cfe4e9"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bNoSpecularAtFullRoughness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeResourceSha256": "7e6678059a8a1e2af84b387d3d9821179662a459aaf177cdf626e517ec2101c5",
+        "nativeSourceDraws": [
+          {
+            "meshIndex": 86,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\vertigo\\raw\\maps\\de_vertigo\\worldnodes\\n0_lr0_c81_s_mesh_overlay81.vmdl_c",
+              "sha256": "0aa04bce72304bfe5ae798a38908305c70fda6580ed025c1fe831270f7a01e09"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 32.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 8,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 18,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/overlays/vertigo_sign_hat_overlay.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          },
+          {
+            "meshIndex": 87,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\vertigo\\raw\\maps\\de_vertigo\\worldnodes\\n0_lr0_c82_s_mesh_overlay82.vmdl_c",
+              "sha256": "4706dde49e9b7b309bdd321d46eb0f24059c77187aa8ba42a978aebba2c9d32f"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 32.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 41,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 78,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/overlays/vertigo_sign_hat_overlay.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          },
+          {
+            "meshIndex": 89,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\vertigo\\raw\\maps\\de_vertigo\\worldnodes\\n0_lr0_c84_s_mesh_overlay84.vmdl_c",
+              "sha256": "fa213ce0d0ef89202af2aa0bf27f31d01a46956a0ab54ecb3d14d781a90c9963"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 32.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 6,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 12,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/overlays/vertigo_sign_hat_overlay.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 37,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          }
+        ],
+        "sourceNodeEvidence": [
+          {
+            "worldnode": "artifacts/new-maps/supplement/vertigo/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "34b2df02c5ed966e6ae704f2ec8d2f8d26f4503af8e38c1864ab02d8fed00df1",
+            "model": "maps/de_vertigo/worldnodes/n0_lr0_c81_s_mesh_overlay81.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_renderableModel": "maps/de_vertigo/worldnodes/n0_lr0_c81_s_mesh_overlay81.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/vertigo/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "34b2df02c5ed966e6ae704f2ec8d2f8d26f4503af8e38c1864ab02d8fed00df1",
+            "model": "maps/de_vertigo/worldnodes/n0_lr0_c82_s_mesh_overlay82.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_renderableModel": "maps/de_vertigo/worldnodes/n0_lr0_c82_s_mesh_overlay82.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/vertigo/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "34b2df02c5ed966e6ae704f2ec8d2f8d26f4503af8e38c1864ab02d8fed00df1",
+            "model": "maps/de_vertigo/worldnodes/n0_lr0_c84_s_mesh_overlay84.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_renderableModel": "maps/de_vertigo/worldnodes/n0_lr0_c84_s_mesh_overlay84.vmdl",
+              "m_renderable": ""
+            }
+          }
+        ]
+      }
+    },
+    "220_vertigo": {
+      "shader": "csgo_lightmappedgeneric.vfx",
+      "nativeResource": "materials/overlays/vertigo_sign_crane_overlay.vmat",
+      "selectedContract": "parking-8070-1158",
+      "exportedName": "vertigo_sign_crane_overlay__alpha_1.0",
+      "exportedVariants": [
+        {
+          "packedMaterialIndex": 220,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "nativeCombinedVSFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "exporterLinearAlternative": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "tintTransportQualification": "Authored FLOAT draw RGB retained as source-domain bridge. Native shader decodes packed bytes; private FLOAT-to-packed host upload unobserved. Exporter-linear alternative retained for paired native-view comparison.",
+      "IntParams": {
+        "F_OVERLAY": 1,
+        "F_SPECULAR_DIRECT": 1,
+        "F_SPECULAR_INDIRECT": 1,
+        "F_TRANSLUCENT": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flAlphaTestReference": 0.01,
+        "g_flMetalness": 0,
+        "g_flModelTintAmount": 1,
+        "g_flOpacityScale": 1,
+        "g_flVertexColorOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1Tint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureLayer1Roughness": [
+          0.156863,
+          0.156863,
+          0.156863,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor": "0762a5951048e9c5",
+        "g_tLayer1AmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tLayer1NormalRoughness": "3670d78972861aec"
+      },
+      "resolvedMaterialInputs": {
+        "g_bDontFlipBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bFogEnabled": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "g_bNoSpecularAtFullRoughness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_bRenderBackfaceNormals": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flAlphaTestReference": [
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        "g_flMetalness": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "g_flModelTintAmount": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_flReflectance": [
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001,
+          0.04000000000000001
+        ],
+        "g_flVertexColorOpacityScale": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_vColorTint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "g_vLayer1Tint": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      },
+      "source": {
+        "nativeResourceSha256": "e059f33768f03b7f1e2e8eb0622b29b02842911cd0839ba3b32dd6c7e15da3e7",
+        "nativeSourceDraws": [
+          {
+            "meshIndex": 46,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\vertigo\\raw\\maps\\de_vertigo\\worldnodes\\n0_lr0_c41_s_mesh_overlay41.vmdl_c",
+              "sha256": "3dde573792f0c9a567e06f4a41a310d9b75deaca80e1339af3d361145cfdb908"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 32.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 8,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 18,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/overlays/vertigo_sign_crane_overlay.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 16,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          },
+          {
+            "meshIndex": 49,
+            "primitive": 0,
+            "sourceModel": {
+              "path": "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\maps-20261109\\vertigo\\raw\\maps\\de_vertigo\\worldnodes\\n0_lr0_c44_s_mesh_overlay44.vmdl_c",
+              "sha256": "4320ceef6882743f7ab97ae7294d92b18025048779cd3acd02dfcc7a14ece463"
+            },
+            "nativeDrawCall": {
+              "m_flUvDensity": 32.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_flAlpha": 1.0,
+              "m_nNumMeshlets": 0,
+              "m_nFirstMeshlet": 0,
+              "m_nAppliedIndexOffset": 0,
+              "m_nDepthVertexBufferIndex": 0,
+              "m_nMeshletPackedIVBIndex": 255,
+              "m_rigidMeshParts": [],
+              "m_nPrimitiveType": "RENDER_PRIM_TRIANGLES",
+              "m_nBaseVertex": 0,
+              "m_nVertexCount": 8,
+              "m_nStartIndex": 0,
+              "m_nIndexCount": 12,
+              "m_indexBuffer": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_meshletPackedIVB": {
+                "m_hBuffer": 0,
+                "m_nBindOffsetBytes": 0
+              },
+              "m_material": "materials/overlays/vertigo_sign_crane_overlay.vmat",
+              "m_vertexBuffers": [
+                {
+                  "m_hBuffer": 0,
+                  "m_nBindOffsetBytes": 0
+                },
+                {
+                  "m_hBuffer": 1,
+                  "m_nBindOffsetBytes": 0
+                }
+              ],
+              "m_bUseCompressedNormalTangent": true,
+              "m_bHasBakedLightingFromLightMap": true
+            },
+            "lightingPath": "lightmap",
+            "vertexAttributes": [
+              {
+                "vertexBuffer": 0,
+                "semantic": "POSITION",
+                "semanticIndex": 0,
+                "dxgiFormat": 6,
+                "byteOffset": 0,
+                "shaderInput": "vPositionOs",
+                "gltfAttribute": "POSITION"
+              },
+              {
+                "vertexBuffer": 0,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 0,
+                "dxgiFormat": 37,
+                "byteOffset": 12,
+                "shaderInput": "vTexCoord",
+                "gltfAttribute": "TEXCOORD_0"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "NORMAL",
+                "semanticIndex": 0,
+                "dxgiFormat": 42,
+                "byteOffset": 4,
+                "shaderInput": "nPackedFrame",
+                "gltfAttribute": "NORMAL"
+              },
+              {
+                "vertexBuffer": 1,
+                "semantic": "TEXCOORD",
+                "semanticIndex": 3,
+                "dxgiFormat": 35,
+                "byteOffset": 0,
+                "shaderInput": "vLightmapUV",
+                "gltfAttribute": "TEXCOORD_1"
+              }
+            ],
+            "restoredNativeAlpha": 1.0
+          }
+        ],
+        "sourceNodeEvidence": [
+          {
+            "worldnode": "artifacts/new-maps/supplement/vertigo/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "34b2df02c5ed966e6ae704f2ec8d2f8d26f4503af8e38c1864ab02d8fed00df1",
+            "model": "maps/de_vertigo/worldnodes/n0_lr0_c41_s_mesh_overlay41.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_renderableModel": "maps/de_vertigo/worldnodes/n0_lr0_c41_s_mesh_overlay41.vmdl",
+              "m_renderable": ""
+            }
+          },
+          {
+            "worldnode": "artifacts/new-maps/supplement/vertigo/uv/main/analysis/worldnodes/n0.json",
+            "worldnodeSha256": "34b2df02c5ed966e6ae704f2ec8d2f8d26f4503af8e38c1864ab02d8fed00df1",
+            "model": "maps/de_vertigo/worldnodes/n0_lr0_c44_s_mesh_overlay44.vmdl",
+            "sceneObject": {
+              "m_nObjectID": 0,
+              "m_vTransform": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "m_flFadeStartDistance": 0.0,
+              "m_flFadeEndDistance": 0.0,
+              "m_vTintColor": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "m_skin": "",
+              "m_nObjectTypeFlags": "OBJECT_TYPE_OVERLAY",
+              "m_vLightingOrigin": [
+                3.4028234663852886e+38,
+                3.4028234663852886e+38,
+                3.4028234663852886e+38
+              ],
+              "m_nOverlayRenderOrder": 0,
+              "m_nLODOverride": -1,
+              "m_nCubeMapPrecomputedHandshake": 0,
+              "m_nLightProbeVolumePrecomputedHandshake": 0,
+              "m_renderableModel": "maps/de_vertigo/worldnodes/n0_lr0_c44_s_mesh_overlay44.vmdl",
+              "m_renderable": ""
+            }
+          }
+        ]
+      }
+    }
+  },
+  "textures": {
+    "54732f48feaaaabb": {
+      "resource": "materials/decals/bombsite_line_spray_trans_tga_30f70c50.vtex",
+      "sourceSha256": "7536af70b9671e37b97c73857a689df027075a7e41984f61f28bbfe73964ec15",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        128
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.7991021871566772,
+        0.06847812235355377,
+        0.008023260161280632
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "../vertigo-lightmapped/54732f48feaaaabb.bin.gz",
+      "gpuBytes": 43680,
+      "gpuSha256": "974db7e36e735f1d5c35522f07ca3dbcbfcf8bfbc6cf0cf99b2748dc71f7e6a9",
+      "mips": [
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "042579209238b39668dfca723c46725ed96df498760d247f16d1930f85ce0146"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "2bc4271474921cdf5271200c7ab4aa09b35335b670defdfbac94140d6474c756"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "56870c6550472c6c6d809954b330480bb0b1cd6d40c08f611eb9289eb79d8f6c"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "4097a9f7793d560f2ec7f9b638af7f54395b10dac066eaf54d3fb915e5b55ba5"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "6a9e155aa7e047f84c564db6dff9263bd50026bf6d422056b2e8a6dcbbcf185d"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 32,
+          "sha256": "34dc4af434537eced50887d00435b83d2a6b9ba4013de912d17c0733dff8d0c7"
+        }
+      ],
+      "decodedSize": [
+        256,
+        128
+      ],
+      "decodedSource": "54732f48feaaaabb.png",
+      "decodedSha256": "4ec18f8caf558ab0dcaf703ca5c193a45fcc871b593712f57f6f400a7c54b576",
+      "fallbackFile": "../vertigo-lightmapped/54732f48feaaaabb-rgba8-mips.bin.gz",
+      "fallbackBytes": 174720,
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 128,
+          "bytes": 131072,
+          "sha256": "c05ab98f828043f937aade83cbc8545eaf46b20d81e1836fcb17844e54377bca"
+        },
+        {
+          "width": 128,
+          "height": 64,
+          "bytes": 32768,
+          "sha256": "0118cb468dc6da0f4d932f6d1c63d24847df0d3204f2c23bb32ba62f10ba2beb"
+        },
+        {
+          "width": 64,
+          "height": 32,
+          "bytes": 8192,
+          "sha256": "b85062e07d65e3fdf652a11e6e1b5210a56b9e58a775431e7070fd68716affee"
+        },
+        {
+          "width": 32,
+          "height": 16,
+          "bytes": 2048,
+          "sha256": "173cdd836edd3f4095ed96039ee4fa7646cb74c126f05b810a4cd1f11273714a"
+        },
+        {
+          "width": 16,
+          "height": 8,
+          "bytes": 512,
+          "sha256": "7026d572e941df073195c5d90d411aed99d9ddba1332692eb8ca4189027f027a"
+        },
+        {
+          "width": 8,
+          "height": 4,
+          "bytes": 128,
+          "sha256": "0b12da7a6da7a62d4dc5cf1bac2a565c341f1fbb893d1a2143d28bdfcc850da9"
+        }
+      ]
+    },
+    "d464f6b430cfe4e9": {
+      "resource": "materials/overlays/vertigo_sign_hat_overlay_vmat_g_tlayer1normalroughness_a531fe.vtex",
+      "sourceSha256": "e1df461df51f3e8954a52f5dbfd61ff8aabede627e693a81b633930912dd4bd4",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        0.11764699220657349
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "../vertigo-lightmapped/d464f6b430cfe4e9.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "574a3d2ba897e4d8ce719cf9b799b15a892355111625aeb1f8e37596660a6156",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "574a3d2ba897e4d8ce719cf9b799b15a892355111625aeb1f8e37596660a6156"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "e1df461df51f3e8954a52f5dbfd61ff8aabede627e693a81b633930912dd4bd4",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "d464f6b430cfe4e9-e1df461df5-storage.png",
+      "decodedSha256": "cef9bec8b48aa06f62038239eb570e980ed22378adc0c76c84e99315e0a80d8c",
+      "fallbackFile": "../vertigo-lightmapped/d464f6b430cfe4e9-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "104ddd3422694a0c201da572335cd40a0c4e2c440ae490a40815286143f1df31"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "104ddd3422694a0c201da572335cd40a0c4e2c440ae490a40815286143f1df31"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        0.11764705882352941,
+        1.0
+      ]
+    },
+    "b576ccb499231903": {
+      "resource": "materials/overlays/vertigo_sign_hat_overlay_color_psd_7cc25ff5.vtex",
+      "sourceSha256": "c0c9159dd1e0184d2cd782c4e50e75a3eb3750746503105135802f9b3822ee51",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        256
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5130854845046997,
+        0.5702970027923584,
+        0.606086015701294
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "../vertigo-lightmapped/b576ccb499231903.bin.gz",
+      "gpuBytes": 87376,
+      "gpuSha256": "63ba0b71eea2dd0b048b67f579a66bf8c358849331cf69a22e289e91cb2f9fcd",
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "4d1770aa5e8f2bf2628e669991eed04529ba8b23f09a66e8d1e6a4426c69eec9"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "bd15062b07a37e5e218b5c9a4bdec0f479bc5dd1afba1fc134412aeebe27afa9"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "977f9b34a716c90f7bf00ba4130b86674392922cd676ec682930bf4b51be1268"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "5b0126557e83b0cb50c75601bb92acd1d25f4b52017c081c5e707da0e19a0ab6"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "46aa62f7511f772d091a82097a788b0fec3ec722398573eed21270d61409389a"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "068250baf8d770d7f7493550a5ff2d44755f4c9d4afded03123253480f9800e6"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "e7f970691816fc26977ab1967fd55f25c01ba888d097ff9632bfeca4289f54eb"
+        }
+      ],
+      "decodedSize": [
+        256,
+        256
+      ],
+      "decodedSource": "b576ccb499231903.png",
+      "decodedSha256": "65e8e31917abadead5d0badf182bc143e04455e248726e3208e4e058c0fee0f3",
+      "fallbackFile": "../vertigo-lightmapped/b576ccb499231903-rgba8-mips.bin.gz",
+      "fallbackBytes": 349504,
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "783b4e16d7d1da7ba2092575fce8fad231dc3bb55217d613dbb069526d38cf4f"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "77f1a1eef4e2bb1f057ed2160a3ff41d43b044a86d8128a61e725516009c72d3"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "03a4fd83dd187990115887b272ddb376a8431b980fda8f14ded001cbff430866"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "33a551cb2741ff74016c52e7da1bbe793f90670830682532830cd07dc3862ac3"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "a667bb6a8e0da4ff31fb97f03937ec73d9b03ae42aeed53d9d47bb1c91be90e9"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "085e5691007cf81eea226349ef579a7c2a87015f50513ee66b74bfe38c036437"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "2ae05ef0f995bed5d027b335f42d8c03315ac3494de4528e10f48c62a385ee31"
+        }
+      ]
+    },
+    "0762a5951048e9c5": {
+      "resource": "materials/overlays/vertigo_sign_crane_overlay_color_psd_89f86a1b.vtex",
+      "sourceSha256": "799af02bdb2d156b711d8274b65318c2ce8b6ed430d8751ae55040222a91cc1c",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        256
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.6915939450263977,
+        0.6153784394264221,
+        0.583577036857605
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "../vertigo-lightmapped/0762a5951048e9c5.bin.gz",
+      "gpuBytes": 87376,
+      "gpuSha256": "9edd2b75d422d3aac6ef667c73e74a171267fbe2ce050501a562c52cdaf71734",
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "f05005e762806908ce854aefcdfa5791c39f19352be34099e85fd50f0f8a6063"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "e196858b9b4b5a4f06073ee4db59e3476cb18d0cf820cde5c7d5774aea3d4b96"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "756de6bab123b3ac2fd0d6e129133e64a758f76e0eb49e639cbcf67a253d60f4"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "86941362da55cf22ee85b26aa84d673d4bea4db7326815f4b813e3d276c549e7"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "73673952e717d0e3ba835218be4fd1de80ab4a5d57d58bec5365d2b28ce84cdb"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "eab60d716496043b7bb69eb44efe55ca4b61e43d20328998f8abba84571533c6"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "36ff15be75bd6ce3f4c81a427fa7cb54c4520403b5d94d0e83792a41ddf1075b"
+        }
+      ],
+      "decodedSize": [
+        256,
+        256
+      ],
+      "decodedSource": "0762a5951048e9c5.png",
+      "decodedSha256": "7ae1efa23c18b04643cbb584847d3cec86b7e88594db6c6450e054e1e7756dcb",
+      "fallbackFile": "../vertigo-lightmapped/0762a5951048e9c5-rgba8-mips.bin.gz",
+      "fallbackBytes": 349504,
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "1db376bfc539533d6075f54e33bc463cfa0c41c0ef0a1649bb5643994c7b44cf"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "ba06aa942ba897a57e897241bb89a45d69cc3654101e04d127f363f03e504529"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "cc5728551b9c68d83333f8b11f7af90a8a36c3c2b5c608d2edc432eff448067e"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "35e59c7fa8b78b6fcaf8a955617c2d5aedd92847187491d1cf9692deb1c9421e"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "895aef0c4e4d3831b5ba6edeb9518c3141f722ad047817eb510f07eb4295d3e7"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "516734e5781ab3a73495090249987560a59029edc85cbb81249a713b1d9d2791"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "d1faeeb8650e176d969d1795ac36840a044f01775555d70bf6368b0ce914497b"
+        }
+      ]
+    },
+    "3670d78972861aec": {
+      "resource": "materials/overlays/vertigo_sign_crane_overlay_vmat_g_tlayer1normalroughness_62c0ff4a.vtex",
+      "sourceSha256": "642112bf279326873cc6057169f697b63a14c2281b78ad5cda890b1cebf636af",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        0.15686297416687012
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "../vertigo-lightmapped/3670d78972861aec.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "a0a5d48b6ff95a1af3dd91fd265ceb2138f8078a7660d2f7b08998aeba31ebf8",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "a0a5d48b6ff95a1af3dd91fd265ceb2138f8078a7660d2f7b08998aeba31ebf8"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "642112bf279326873cc6057169f697b63a14c2281b78ad5cda890b1cebf636af",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "3670d78972861aec-642112bf27-storage.png",
+      "decodedSha256": "13c64946ed37037b8b454139bdea84efdf090516a2773456d6ef212298206760",
+      "fallbackFile": "../vertigo-lightmapped/3670d78972861aec-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "b51a9484435229a6a7ef1d36405fe82f3a05c92c500eccc0bde4d16e2ae440fa"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "b51a9484435229a6a7ef1d36405fe82f3a05c92c500eccc0bde4d16e2ae440fa"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        0.1568627450980392,
+        1.0
+      ]
+    },
+    "a82d8b56194432ea": {
+      "resource": "materials/decals/bombsite_line_spray_vmat_g_tlayer1normalroughness_47660df.vtex",
+      "sourceSha256": "74d2e484cacddde45be9547ffc185db040ffa7b49ad37bb70915a3185120da43",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        0.5019609928131104
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "../vertigo-lightmapped/a82d8b56194432ea.bin.gz",
+      "gpuBytes": 16,
+      "gpuSha256": "287ed78c5414bbe41dfa4b5ee9e3a8dd9ee91f275c36973a3f9f6889f0cb34b1",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "287ed78c5414bbe41dfa4b5ee9e3a8dd9ee91f275c36973a3f9f6889f0cb34b1"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "74d2e484cacddde45be9547ffc185db040ffa7b49ad37bb70915a3185120da43",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "a82d8b56194432ea-74d2e484ca-storage.png",
+      "decodedSha256": "39e0dbf8490fc4dd9cfc100cb82392cc8894f2abedc8892c52ebe6b683daf1c8",
+      "fallbackFile": "../vertigo-lightmapped/a82d8b56194432ea-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "17a424e5890c8a7b7c42e913b8a52749090f8ff7654b1096c7b761ab040a7aa8"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "17a424e5890c8a7b7c42e913b8a52749090f8ff7654b1096c7b761ab040a7aa8"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        0.5019607843137255,
+        0.5019607843137255,
+        0.5019607843137255,
+        1.0
+      ]
+    },
+    "cf0f8accdfc38e3f": {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex",
+      "sourceSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "../vertigo-lightmapped/cf0f8accdfc38e3f.bin.gz",
+      "gpuBytes": 8,
+      "gpuSha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f",
+      "mips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "5be1a81d5cafc0ab7f0d4a7843a7a8b1481b0501494f579ad5e8c81b70083a3f"
+        }
+      ],
+      "storedDecodeProof": {
+        "sourceDisplayRect": [
+          1,
+          1
+        ],
+        "storedDimensions": [
+          4,
+          4,
+          1
+        ],
+        "originalDecodeViewSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+        "displayRectClearedOnlyInTemporaryDecodeView": true,
+        "qualification": "Native bytes decoded at stored dimensions, matching pinned GPU allocation. Original resource and compressed texels unchanged; native private logical GPU dimensions not captured."
+      },
+      "decodedSize": [
+        4,
+        4
+      ],
+      "decodedSource": "cf0f8accdfc38e3f-e0b83fe25f-storage.png",
+      "decodedSha256": "6f73ba3cfd6e5314cb9235533c7c90d87f1f7bd19625cef96ae888724ca45007",
+      "fallbackFile": "../vertigo-lightmapped/cf0f8accdfc38e3f-rgba8-mips.bin.gz",
+      "fallbackBytes": 64,
+      "fallbackMips": [
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+        }
+      ],
+      "constantVerification": {
+        "allNativeStoredTexelsAndMips": true,
+        "mips": [
+          {
+            "width": 4,
+            "height": 4,
+            "bytes": 64,
+            "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+          }
+        ],
+        "decodedRgbaUnchanged": true
+      },
+      "sourceConstantProof": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "source": {
+    "planSha256": "5576b71f958067cf9edeeb141767e70eb9b1daad5d57552d46a2aeaac1d9fe67",
+    "stateContractSha256": "4d3ca8392b42b78110d7cf6f84f27e97bb12f2e346d81e0d3b15cfdcc9dd5fb9",
+    "qualification": "Authored FLOAT draw RGB retained as source-domain bridge. Native shader decodes packed bytes; private FLOAT-to-packed host upload unobserved. Exporter-linear alternative retained for paired native-view comparison.",
+    "packedGeometrySha256": "37eeba5fcfd0d2aed8800f8eedf5922cfa6fe70b34c8bc8bb05151fb03bc84f2",
+    "privateTintHostUpload": "Unobserved; compare source-supported authoredFLOAT vs exporter-linear domains against matched native frame before choosing canonical.",
+    "selectedTintDomain": "exporter-linear comparison only",
+    "remainingStateLimitations": [
+      "Native bias clamp -0.0005 unavailable in WebGL polygon offset",
+      "Receiver stencil mask producer unported; no fabricated stencil state",
+      "Native shadow depth4 dynamic0 uses alpha*opacity>=.7, dynamic4 disables clip; private shadow-pass selection unobserved; inherited caster policy retained",
+      "Private FLOAT draw-to-packed-instance tint upload and bindless image-view construction unobserved"
+    ]
+  }
+}
