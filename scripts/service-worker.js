@@ -16,7 +16,19 @@ const assetPath = (url) => {
   return url.origin === origin ? url.pathname : null;
 };
 const networkUrl = (path) => assetUrls[path] || path;
-const pending = new Map();
+// Wait before fetching instead of retaining response clones behind disk writes.
+// Waiting requests hold metadata only; every asset remains eligible offline.
+const fillWaiters = [];
+let activeFills = 0;
+async function acquireFill() {
+  if (activeFills >= 2) await new Promise((resolve) => fillWaiters.push(resolve));
+  else activeFills++;
+  return () => {
+    const next = fillWaiters.shift();
+    if (next) next();
+    else activeFills--;
+  };
+}
 let writes = Promise.resolve();
 let inventory;
 const keyFor = (path) => `${origin}${path}?${REVISION}=${ASSET_REVISIONS[path]}`;
@@ -186,6 +198,7 @@ self.addEventListener("fetch", (event) => {
   }
   if (!Object.hasOwn(ASSET_REVISIONS, path)) return;
   let cacheHit = false;
+  let releaseFill;
   const response = (async () => {
     try {
       if (SHELL_URLS.includes(path)) {
@@ -205,21 +218,33 @@ self.addEventListener("fetch", (event) => {
     } catch {
       /* Cache API can be unavailable even when workers are enabled. */
     }
-    let network = pending.get(path);
-    if (!network) {
-      // Public CDN responses must be readable, including CSS/background images,
-      // so the same byte verification and offline cache work for every asset.
+    releaseFill = await acquireFill();
+    try {
+      // Another request may have filled this revision while admission waited.
+      try {
+        const hit = await (await caches.open(ASSET_CACHE)).match(keyFor(path));
+        if (hit) {
+          cacheHit = true;
+          releaseFill();
+          return hit;
+        }
+      } catch {
+        /* Storage failure must still allow network delivery. */
+      }
+      // Public CDN responses must be readable for verification and offline caching.
       const readable = logicalPaths.has(url.href)
         ? new Request(request, { mode: "cors", credentials: "omit" })
         : request;
-      network = fetch(readable).catch((error) => {
+      try {
+        return await fetch(readable);
+      } catch (error) {
         if (readable === request) throw error;
-        return fetch(readable, { cache: "reload" });
-      });
-      pending.set(path, network);
-      void network.finally(() => pending.delete(path)).catch(() => {});
+        return await fetch(readable, { cache: "reload" });
+      }
+    } catch (error) {
+      releaseFill();
+      throw error;
     }
-    return (await network).clone();
   })();
   let cacheWork;
   const delivered = response.then((result) => {
@@ -227,17 +252,32 @@ self.addEventListener("fetch", (event) => {
     // a second disk lookup when there is nothing to populate.
     if (cacheHit) return result;
     // Clone before resolving respondWith; the browser may consume its body immediately.
-    const copy = result.clone();
+    let copy;
+    try {
+      copy = result.clone();
+    } catch (error) {
+      releaseFill();
+      throw error;
+    }
     cacheWork = (async () => {
       const cache = await caches.open(ASSET_CACHE);
-      if (SHELL_URLS.includes(path) || (await cache.match(keyFor(path)))) return;
       writes = writes
-        .then(() => storeAsset(cache, path, copy))
+        .then(async () => {
+          if (SHELL_URLS.includes(path) || (await cache.match(keyFor(path)))) return;
+          await storeAsset(cache, path, copy);
+        })
         .catch(() => {
           inventory = undefined;
         });
       await writes;
-    })().catch(() => {});
+    })()
+      .catch(() => {})
+      .finally(() => {
+        // Discard unread branches after denial, duplicate hits or invalid data.
+        // Do not await cancellation: the client owns the other tee branch.
+        void copy.body?.cancel().catch(() => {});
+        releaseFill();
+      });
     return result;
   });
   event.respondWith(delivered);

@@ -442,6 +442,9 @@ export class SmokeComposite {
       );
       this.renderOpaque(renderer, scene, camera, beforeOpaque);
       shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
+      // Water needs the opaque capture even without smoke. There is no cloud
+      // layer to composite in that case; avoid entering a third render pass.
+      if (!clouds.length) return;
       for (const cloud of clouds)
         cloud.useSceneDepth(
           this.target.depthTexture!,
