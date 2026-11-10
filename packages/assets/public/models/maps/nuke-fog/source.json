@@ -1,0 +1,289 @@
+{
+  "gradient": {
+    "distance": [
+      384.0,
+      35000.0,
+      1.0
+    ],
+    "color": [
+      0.22745098039215686,
+      0.592156862745098,
+      0.8196078431372549
+    ],
+    "strength": 1.0,
+    "opacity": 0.9
+  },
+  "cube": {
+    "distance": [
+      384.0,
+      25000.0,
+      2.0
+    ],
+    "opacity": 1.0,
+    "lodBias": 0.2,
+    "exposure": 1.0,
+    "angles": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "texture": {
+      "resource": "materials/skybox/sky_de_nuke_exr_f04e84b2.vtex",
+      "sourceSha256": "29af86e9fb76ac325233ddea3312835f2b24bd82eef802715dd14bc63de1b03c",
+      "width": 256,
+      "height": 256,
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 393216,
+          "sha256": "da8270000084bb649a000d3ad7ca0d45519a9554066a387a5ad636eee9eb4b2e"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 98304,
+          "sha256": "aaad0b456e1e382f86b8a1336f67e5e9b092bbbed2548edd34886ab7298f6e23"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 24576,
+          "sha256": "98dda80bfcc3da851aa49f0f2603b6e8dc8eda721171e267de0cfdff763089e2"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 6144,
+          "sha256": "e3159b8a66a4d2caf032acd906fc69e2781a65b8b3a3195de724479d84996861"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1536,
+          "sha256": "7176ac9d5e419ad21ec547240ce886da7cc06549a628e68d5c1108e74a321dd6"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 384,
+          "sha256": "3386143964d40dff0c9073ece27286f0a4b10b969ace886d6921271e546cd359"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 96,
+          "sha256": "fa9cd84665b519a3a1c1947231876cc1bede6df7e348a8e501d9933bcc11655c"
+        }
+      ],
+      "nativeFlags": 16,
+      "sourceFormat": 19,
+      "transportCompression": 1,
+      "format": "BC6H",
+      "file": "sky-cube-bc6h.bin.gz",
+      "gpuBytes": 524256,
+      "gpuSha256": "ba5793f3c770962aa8ca3e1be3741f163f51b1d8a744a05b1d9f4298f25add5c",
+      "fallbackFile": "sky-cube-rgba16f.bin.gz",
+      "fallbackBytes": 4194048,
+      "fallbackSha256": "37c5cece59ff21d6c51cfad403a46325867e680d8ff7fe3c157aeea7afdf71b8",
+      "fallbackMips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 3145728,
+          "sha256": "8655ac92fcae367750e2665d5bc7ed8f64539de7a36378ec4caa7f9622f94935"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 786432,
+          "sha256": "f22bc11d2a86d80dc2663bed477c5309dfb88559df841e1c249f3134f40a5974"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 196608,
+          "sha256": "41d4a981608fa8e9561704bbd314fc86356ff9dc73086bd13001c892e2463ee1"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 49152,
+          "sha256": "d27ce684869c82bb490f1ea5fca77d43cb528a4c1158b9b8f89121ba298f716f"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 12288,
+          "sha256": "d1a65b594d276aaf770f275e1c00b5babcec832141801bec395ed5f57ad28f1e"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 3072,
+          "sha256": "975b9db37bd5cc4eafde9e808a95d9f008be91202eb5c78de315a6f90b2e34f9"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 768,
+          "sha256": "ef76f1af1ef296c5a6e8227ae60b33eb2cc533466b329ad51ffde54fb52867f9"
+        }
+      ],
+      "faceOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "nativeDecodeManifestSha256": "2a89d3b4cd13050aaeb607da2c54b8f60f40e8b815a5aa21e8446fafe2471dc5",
+      "nativeDecodeVerification": {
+        "allFacesExactHalf": true,
+        "alphaOne": true,
+        "finiteNonnegative": true,
+        "native2DControls": [
+          {
+            "mip": 1,
+            "face": 3,
+            "exactByteMatch": true,
+            "detectsHorizontalAndVerticalFlip": true,
+            "detectsTransposeAndRBSwap": true,
+            "allSixFacesDistinct": true,
+            "sha256": "969137e127d6e75755285233f5156fec79e2bd2cc8e57ef5d297cd152d4d7282",
+            "sample37x91": [
+              0.22216796875,
+              0.499267578125,
+              0.84814453125,
+              1.0
+            ],
+            "sample91x37": [
+              0.3134765625,
+              0.6318359375,
+              1.0048828125,
+              1.0
+            ]
+          },
+          {
+            "mip": 2,
+            "face": 4,
+            "exactByteMatch": true,
+            "detectsHorizontalAndVerticalFlip": true,
+            "detectsTransposeAndRBSwap": true,
+            "allSixFacesDistinct": true,
+            "sha256": "ff15aad5b263288611ff49c77bd0917a69f2b4aeebd0514cf818e2c0f92a4d9b",
+            "sample37x91": [
+              0.07220458984375,
+              0.273193359375,
+              0.5634765625,
+              1.0
+            ],
+            "sample91x37": [
+              0.099609375,
+              0.322265625,
+              0.63720703125,
+              1.0
+            ]
+          }
+        ],
+        "originalSourceUnchanged": true
+      },
+      "qualification": "Exact original native BC6H faces/mips and independently decoded source-worker HDR fallback preserved with per-face checksums; no flips/resampling/synthesized mips."
+    },
+    "height": [
+      -300.0,
+      6000.0,
+      2.0
+    ]
+  },
+  "disabledMaterials": [
+    "nuke_clouds_003",
+    "sun_disc_glow_002"
+  ],
+  "source": {
+    "entitiesSha256": "c3bec4a5af6caf78f80dae85886a3fdf040d145328ef0dbb16a4c524568d2bcf",
+    "gradientEntity": {
+      "farz": -1.0,
+      "fadetime": 1.0,
+      "fogverticalexponent": 1.0,
+      "fogfalloffexponent": 1.0,
+      "fogstrength": 1.0,
+      "fogcolor": [
+        58,
+        151,
+        209
+      ],
+      "fogmaxopacity": 0.9,
+      "fogendheight": 200.0,
+      "fogstartheight": 0.0,
+      "heightfog": false,
+      "fogend": 35000.0,
+      "fogstart": 384.0,
+      "StartDisabled": false,
+      "vscripts": "",
+      "targetname": "",
+      "classname": "env_gradient_fog",
+      "compile_source_id": 10883,
+      "origin": [
+        1866.140625,
+        -608.36145,
+        -352.0
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "2:61814:42370"
+    },
+    "cubeEntity": {
+      "cubemapfogmaxopacity": 1.0,
+      "cubemapfogheightexponent": 2.0,
+      "cubemapfogheightend": 6000.0,
+      "cubemapfogheightstart": -300.0,
+      "cubemapheightfog": true,
+      "cubemapfogfalloffexponent": 2.0,
+      "cubemapfogenddistance": 25000.0,
+      "cubemapfogstartdistance": 384.0,
+      "cubemapfoglodbiase": 0.2,
+      "cubemapfogskymaterial": "materials/skybox/sky_de_nuke.vmat",
+      "cubemapfogskyentity": "[PR#]skyibl",
+      "cubemapfogsource": "2",
+      "StartDisabled": false,
+      "vscripts": "",
+      "targetname": "",
+      "classname": "env_cubemap_fog",
+      "compile_source_id": 10884,
+      "origin": [
+        134.697876,
+        -1725.412109,
+        -19.000549
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "2:61814:42368"
+    },
+    "skyMaterial": "materials/skybox/sky_de_nuke.vmat",
+    "skyMaterialSha256": "96939078323ad88cc6256634e5696634233e6c53e0af7103a3f5bf299352bc7e",
+    "textureSourceSha256": "29af86e9fb76ac325233ddea3312835f2b24bd82eef802715dd14bc63de1b03c",
+    "nativeShader": "csgo_complex PS5124/d4 fog SPV SHA256 3c1aeb5dc442a50d9adca7375752ebdedbacf8d67786d4b43b6dbe02be14acb8",
+    "shaderMath": "Strict AND3D distance/height gates; gradient before cube; LOD density before opacity; separate brightness",
+    "hostPackingQualification": "Authored entity ranges preserved; finite neutral disabled-height, color32 normalization, selected sky source/yaw/brightness/LOD-bias binding follow pinned renderer adaptation. Actual native engine uploads have not been captured. No volumetric fog reconstruction.",
+    "fallbackStatus": "Complete: all authored native face/mips independently decoded to exact RGBA16F; original compressed bytes/source SHA verified locally",
+    "nativeDecodeManifestSha256": "2a89d3b4cd13050aaeb607da2c54b8f60f40e8b815a5aa21e8446fafe2471dc5"
+  }
+}

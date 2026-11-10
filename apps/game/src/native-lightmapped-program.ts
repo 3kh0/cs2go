@@ -203,6 +203,8 @@ export function nativeLightmappedProgram(s: NativeLightmappedMaterial) {
       .some((v) => v !== 1)
   )
     throw new Error("Native lightmapped model tint requires own selected proof");
+  if (direct && value(s, "g_bNoSpecularAtFullRoughness").some((v) => v !== 0))
+    throw new Error("Native lightmapped full-roughness specular switch unproved");
   const layerTint = value(s, "g_vLayer1Tint").slice(0, 3),
     metalness = value(s, "g_flMetalness")[0];
   if (metalness < 0 || metalness > 1)

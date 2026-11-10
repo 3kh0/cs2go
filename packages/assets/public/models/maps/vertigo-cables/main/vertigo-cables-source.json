@@ -1,0 +1,1882 @@
+{
+  "version": 1,
+  "mapId": "vertigo",
+  "space": "main",
+  "model": "vertigo-cables.glb.gz",
+  "ropes": 13,
+  "triangles": 20864,
+  "nativeEntityCount": 13,
+  "placement": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "audits": [
+    {
+      "id": "2:31017:2217",
+      "nativeEntity": {
+        "targetname": "[PR#]wire9-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 935,
+        "origin": [
+          -1394.0,
+          -637.0,
+          11969.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:2217",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.6666666, -28.666666,\n\t\t0.3333333,\n\t],\n\t[\n\t\t-2.0, -86.0, 1.0, 0.6666666,\n\t\t28.666666, -0.3333333, -8.0, -55.000004,\n\t\t9.666667,\n\t],\n\t[\n\t\t-26.0, -251.0, 30.0, 8.0,\n\t\t55.000004, -9.666667, 0.0, -26.000002,\n\t\t-27.666666,\n\t],\n\t[\n\t\t-26.0, -329.0, -53.0, 0.0,\n\t\t26.000002, 27.666666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.5, 1.5, 1.5, 1.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.6666666,
+            -28.666666,
+            0.3333333
+          ],
+          [
+            -2.0,
+            -86.0,
+            1.0,
+            0.6666666,
+            28.666666,
+            -0.3333333,
+            -8.0,
+            -55.000004,
+            9.666667
+          ],
+          [
+            -26.0,
+            -251.0,
+            30.0,
+            8.0,
+            55.000004,
+            -9.666667,
+            0.0,
+            -26.000002,
+            -27.666666
+          ],
+          [
+            -26.0,
+            -329.0,
+            -53.0,
+            0.0,
+            26.000002,
+            27.666666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 24,
+      "triangles": 736,
+      "bounds": [
+        [
+          -36.08700919760312,
+          302.6509177162319,
+          16.177689191479754
+        ],
+        [
+          -35.3885551493446,
+          304.79334969390175,
+          24.547429437104373
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 13.07468648115849,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:2468",
+      "nativeEntity": {
+        "targetname": "[PR#]wire8-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 1.1,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1089,
+        "origin": [
+          -1272.0,
+          -548.0,
+          11665.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:2468",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -14.0, -10.333333,\n\t\t9.333334,\n\t],\n\t[\n\t\t-42.0, -31.0, 28.0, 14.0,\n\t\t10.333333, -9.333334, -15.956219, -34.0,\n\t\t-16.90267,\n\t],\n\t[\n\t\t-89.86865, -133.0, -22.708008, 15.956219,\n\t\t34.0, 16.90267, 15.956217, -32.999996,\n\t\t16.90267,\n\t],\n\t[\n\t\t-42.0, -232.0, 28.0, -15.956217,\n\t\t32.999996, -16.90267, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.5, 1.5, 1.5, 1.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -14.0,
+            -10.333333,
+            9.333334
+          ],
+          [
+            -42.0,
+            -31.0,
+            28.0,
+            14.0,
+            10.333333,
+            -9.333334,
+            -15.956219,
+            -34.0,
+            -16.90267
+          ],
+          [
+            -89.86865,
+            -133.0,
+            -22.708008,
+            15.956219,
+            34.0,
+            16.90267,
+            15.956217,
+            -32.999996,
+            16.90267
+          ],
+          [
+            -42.0,
+            -232.0,
+            28.0,
+            -15.956217,
+            32.999996,
+            -16.90267,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 20,
+      "triangles": 608,
+      "bounds": [
+        [
+          -34.60987584255132,
+          295.3341848190442,
+          13.903872863783892
+        ],
+        [
+          -32.29748711374525,
+          297.0206031424866,
+          19.82587732396229
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 16.713903025055448,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:2669",
+      "nativeEntity": {
+        "targetname": "[PR#]chute3-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1255,
+        "origin": [
+          -1221.0,
+          -1587.0,
+          12006.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:2669",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t-61.666668,\n\t],\n\t[\n\t\t0.0, 0.0, -185.0, 0.0,\n\t\t0.0, 61.666668, 0.0, 0.0,\n\t\t-60.0,\n\t],\n\t[\n\t\t0.0, 0.0, -365.0, 0.0,\n\t\t0.0, 60.0, 0.0, 0.0,\n\t\t-59.333332,\n\t],\n\t[\n\t\t0.0, 0.0, -543.0, 0.0,\n\t\t0.0, 59.333332, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.5, 1.5, 1.5, 1.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -61.666668
+          ],
+          [
+            0.0,
+            0.0,
+            -185.0,
+            0.0,
+            0.0,
+            61.666668,
+            0.0,
+            0.0,
+            -60.0
+          ],
+          [
+            0.0,
+            0.0,
+            -365.0,
+            0.0,
+            0.0,
+            60.0,
+            0.0,
+            0.0,
+            -59.333332
+          ],
+          [
+            0.0,
+            0.0,
+            -543.0,
+            0.0,
+            0.0,
+            59.333332,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 35,
+      "triangles": 1088,
+      "bounds": [
+        [
+          -31.032449999999997,
+          291.1602,
+          40.290749999999996
+        ],
+        [
+          -30.994349999999997,
+          304.9524,
+          40.328849999999996
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 13.187142857142856,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:2674",
+      "nativeEntity": {
+        "targetname": "[PR#]chute4-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1260,
+        "origin": [
+          -1164.0,
+          -1586.0,
+          12007.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:2674",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.6666667, 0.6666667,\n\t\t-62.000004,\n\t],\n\t[\n\t\t2.0, 2.0, -186.0, -0.6666667,\n\t\t-0.6666667, 62.000004, 0.0, 0.0,\n\t\t-60.0,\n\t],\n\t[\n\t\t2.0, 2.0, -366.0, 0.0,\n\t\t0.0, 60.0, 0.0, 0.0,\n\t\t-59.333332,\n\t],\n\t[\n\t\t2.0, 2.0, -544.0, 0.0,\n\t\t0.0, 59.333332, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.5, 1.5, 1.5, 1.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.6666667,
+            0.6666667,
+            -62.000004
+          ],
+          [
+            2.0,
+            2.0,
+            -186.0,
+            -0.6666667,
+            -0.6666667,
+            62.000004,
+            0.0,
+            0.0,
+            -60.0
+          ],
+          [
+            2.0,
+            2.0,
+            -366.0,
+            0.0,
+            0.0,
+            60.0,
+            0.0,
+            0.0,
+            -59.333332
+          ],
+          [
+            2.0,
+            2.0,
+            -544.0,
+            0.0,
+            0.0,
+            59.333332,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 35,
+      "triangles": 1088,
+      "bounds": [
+        [
+          -29.584649784600128,
+          291.1602,
+          40.21455000063234
+        ],
+        [
+          -29.49575000063235,
+          304.9778905917995,
+          40.30344978459526
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 13.211950814664855,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:2686",
+      "nativeEntity": {
+        "targetname": "[PR#]wire7-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 16.0,
+        "slack": 0.75,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1270,
+        "origin": [
+          -1203.0,
+          -1060.0,
+          11667.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:2686",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -68.0, -30.0,\n\t\t15.333333,\n\t],\n\t[\n\t\t-204.0, -90.0, 46.0, 68.0,\n\t\t30.0, -15.333333, -57.666664, -20.666666,\n\t\t0.33333334,\n\t],\n\t[\n\t\t-377.0, -152.0, 47.0, 57.666664,\n\t\t20.666666, -0.33333334, -10.0, 0.0,\n\t\t0.0,\n\t],\n\t[\n\t\t-407.0, -152.0, 47.0, 10.0,\n\t\t0.0, 0.0, -17.666666, 5.0,\n\t\t-0.33333334,\n\t],\n\t[\n\t\t-460.0, -137.0, 46.0, 17.666666,\n\t\t-5.0, 0.33333334, -0.33333334, -53.0,\n\t\t0.0,\n\t],\n\t[\n\t\t-461.0, -296.0, 46.0, 0.33333334,\n\t\t53.0, 0.0, -23.666668, 108.0,\n\t\t-0.33333334,\n\t],\n\t[\n\t\t-532.0, 28.0, 45.0, 23.666668,\n\t\t-108.0, 0.33333334, -28.666666, 71.666664,\n\t\t-6.333333,\n\t],\n\t[\n\t\t-618.0, 243.0, 26.0, 28.666666,\n\t\t-71.666664, 6.333333, -63.666668, 11.0,\n\t\t0.0,\n\t],\n\t[\n\t\t-809.0, 276.0, 26.0, 63.666668,\n\t\t-11.0, 0.0, -52.333336, 11.666667,\n\t\t0.0,\n\t],\n\t[\n\t\t-966.0, 311.0, 26.0, 52.333336,\n\t\t-11.666667, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "\n[\n\t1.5, 1.5, 1.5, 1.5,\n\t1.5, 1.5, 1.5, 1.5,\n\t1.5, 1.5,\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "\n[\n\ttrue, true, true, true,\n\ttrue, true, true, true,\n\ttrue, true,\n]\n",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -68.0,
+            -30.0,
+            15.333333
+          ],
+          [
+            -204.0,
+            -90.0,
+            46.0,
+            68.0,
+            30.0,
+            -15.333333,
+            -57.666664,
+            -20.666666,
+            0.33333334
+          ],
+          [
+            -377.0,
+            -152.0,
+            47.0,
+            57.666664,
+            20.666666,
+            -0.33333334,
+            -10.0,
+            0.0,
+            0.0
+          ],
+          [
+            -407.0,
+            -152.0,
+            47.0,
+            10.0,
+            0.0,
+            0.0,
+            -17.666666,
+            5.0,
+            -0.33333334
+          ],
+          [
+            -460.0,
+            -137.0,
+            46.0,
+            17.666666,
+            -5.0,
+            0.33333334,
+            -0.33333334,
+            -53.0,
+            0.0
+          ],
+          [
+            -461.0,
+            -296.0,
+            46.0,
+            0.33333334,
+            53.0,
+            0.0,
+            -23.666668,
+            108.0,
+            -0.33333334
+          ],
+          [
+            -532.0,
+            28.0,
+            45.0,
+            23.666668,
+            -108.0,
+            0.33333334,
+            -28.666666,
+            71.666664,
+            -6.333333
+          ],
+          [
+            -618.0,
+            243.0,
+            26.0,
+            28.666666,
+            -71.666664,
+            6.333333,
+            -63.666668,
+            11.0,
+            0.0
+          ],
+          [
+            -809.0,
+            276.0,
+            26.0,
+            63.666668,
+            -11.0,
+            0.0,
+            -52.333336,
+            11.666667,
+            0.0
+          ],
+          [
+            -966.0,
+            311.0,
+            26.0,
+            52.333336,
+            -11.666667,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 97,
+      "triangles": 3072,
+      "bounds": [
+        [
+          -55.09955674047102,
+          296.12318701912716,
+          19.009068630833873
+        ],
+        [
+          -30.548510654064724,
+          297.55403196258095,
+          34.45899361540591
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 12.172044704727528,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:2845",
+      "nativeEntity": {
+        "targetname": "[PR#]wire6-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 16.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          191,
+          164,
+          11
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1363,
+        "origin": [
+          -2371.0,
+          -439.0,
+          11626.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:2845",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 59.333336, -21.333332,\n\t\t30.666666,\n\t],\n\t[\n\t\t178.0, -64.0, 92.0, -59.333336,\n\t\t21.333332, -30.666666, 62.0, -12.666667,\n\t\t-1.3333334,\n\t],\n\t[\n\t\t364.0, -102.0, 88.0, -62.0,\n\t\t12.666667, 1.3333334, 43.0, 1.0,\n\t\t-0.33333334,\n\t],\n\t[\n\t\t493.0, -99.0, 87.0, -43.0,\n\t\t-1.0, 0.33333334, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.5, 1.5, 1.5, 1.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            59.333336,
+            -21.333332,
+            30.666666
+          ],
+          [
+            178.0,
+            -64.0,
+            92.0,
+            -59.333336,
+            21.333332,
+            -30.666666,
+            62.0,
+            -12.666667,
+            -1.3333334
+          ],
+          [
+            364.0,
+            -102.0,
+            88.0,
+            -62.0,
+            12.666667,
+            1.3333334,
+            43.0,
+            1.0,
+            -0.33333334
+          ],
+          [
+            493.0,
+            -99.0,
+            87.0,
+            -43.0,
+            -1.0,
+            0.33333334,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 33,
+      "triangles": 1024,
+      "bounds": [
+        [
+          -60.229845472887106,
+          295.23668071813825,
+          11.132673528532878
+        ],
+        [
+          -47.69498366924134,
+          297.65567269873577,
+          13.760373665098976
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 13.632596387451343,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:2932",
+      "nativeEntity": {
+        "targetname": "[PR#]wire5-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1400,
+        "origin": [
+          -2232.0,
+          -741.0,
+          11810.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:2932",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 11.0, -14.333334,\n\t\t54.666668,\n\t],\n\t[\n\t\t33.0, -43.0, 164.0, -11.0,\n\t\t14.333334, -54.666668, -64.0, -25.666668,\n\t\t1.6666667,\n\t],\n\t[\n\t\t-159.0, -120.0, 169.0, 64.0,\n\t\t25.666668, -1.6666667, 58.000004, 0.33333334,\n\t\t0.0,\n\t],\n\t[\n\t\t15.0, -119.0, 169.0, -58.000004,\n\t\t-0.33333334, 0.0, 58.666668, 0.0,\n\t\t0.0,\n\t],\n\t[\n\t\t191.0, -119.0, 169.0, -58.666668,\n\t\t0.0, 0.0, 59.0, 0.0,\n\t\t0.0,\n\t],\n\t[\n\t\t368.0, -119.0, 169.0, -59.0,\n\t\t0.0, 0.0, 0.0, -77.666664,\n\t\t0.0,\n\t],\n\t[\n\t\t368.0, -352.0, 169.0, 0.0,\n\t\t77.666664, 0.0, -0.33333334, -93.00001,\n\t\t0.0,\n\t],\n\t[\n\t\t367.0, -631.0, 169.0, 0.33333334,\n\t\t93.00001, 0.0, -58.666668, 0.0,\n\t\t0.0,\n\t],\n\t[\n\t\t191.0, -631.0, 169.0, 58.666668,\n\t\t0.0, 0.0, -58.666668, 0.0,\n\t\t0.0,\n\t],\n\t[\n\t\t15.0, -631.0, 169.0, 58.666668,\n\t\t0.0, 0.0, -58.0, 0.0,\n\t\t0.0,\n\t],\n\t[\n\t\t-159.0, -631.0, 169.0, 58.0,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "\n[\n\t1.5, 1.5, 1.5, 1.5,\n\t1.5, 1.5, 1.5, 1.5,\n\t1.5, 1.5, 1.5,\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "\n[\n\ttrue, true, true, true,\n\ttrue, true, true, true,\n\ttrue, true, true,\n]\n",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            11.0,
+            -14.333334,
+            54.666668
+          ],
+          [
+            33.0,
+            -43.0,
+            164.0,
+            -11.0,
+            14.333334,
+            -54.666668,
+            -64.0,
+            -25.666668,
+            1.6666667
+          ],
+          [
+            -159.0,
+            -120.0,
+            169.0,
+            64.0,
+            25.666668,
+            -1.6666667,
+            58.000004,
+            0.33333334,
+            0.0
+          ],
+          [
+            15.0,
+            -119.0,
+            169.0,
+            -58.000004,
+            -0.33333334,
+            0.0,
+            58.666668,
+            0.0,
+            0.0
+          ],
+          [
+            191.0,
+            -119.0,
+            169.0,
+            -58.666668,
+            0.0,
+            0.0,
+            59.0,
+            0.0,
+            0.0
+          ],
+          [
+            368.0,
+            -119.0,
+            169.0,
+            -59.0,
+            0.0,
+            0.0,
+            0.0,
+            -77.666664,
+            0.0
+          ],
+          [
+            368.0,
+            -352.0,
+            169.0,
+            0.0,
+            77.666664,
+            0.0,
+            -0.33333334,
+            -93.00001,
+            0.0
+          ],
+          [
+            367.0,
+            -631.0,
+            169.0,
+            0.33333334,
+            93.00001,
+            0.0,
+            -58.666668,
+            0.0,
+            0.0
+          ],
+          [
+            191.0,
+            -631.0,
+            169.0,
+            58.666668,
+            0.0,
+            0.0,
+            -58.666668,
+            0.0,
+            0.0
+          ],
+          [
+            15.0,
+            -631.0,
+            169.0,
+            58.666668,
+            0.0,
+            0.0,
+            -58.0,
+            0.0,
+            0.0
+          ],
+          [
+            -159.0,
+            -631.0,
+            169.0,
+            58.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 124,
+      "triangles": 3936,
+      "bounds": [
+        [
+          -60.748272175641944,
+          299.9624397471169,
+          18.80938815841928
+        ],
+        [
+          -47.326802994881554,
+          304.2854649857949,
+          34.866610937792466
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 13.330296289888667,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:2964",
+      "nativeEntity": {
+        "targetname": "[PR#]wire4-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1427,
+        "origin": [
+          -1060.76001,
+          549.440979,
+          11671.299805
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:2964",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -101.74666, 11.18634,\n\t\t14.233398,\n\t],\n\t[\n\t\t-305.24, 33.55902, 42.700195, 101.74666,\n\t\t-11.18634, -14.233398, -41.333336, -37.0,\n\t\t-9.666667,\n\t],\n\t[\n\t\t-429.24, -77.44098, 13.700195, 41.333336,\n\t\t37.0, 9.666667, -43.666668, -29.0,\n\t\t9.666667,\n\t],\n\t[\n\t\t-560.24, -164.44098, 42.700195, 43.666668,\n\t\t29.0, -9.666667, -0.33333334, -64.0,\n\t\t0.0,\n\t],\n\t[\n\t\t-561.24, -356.44098, 42.700195, 0.33333334,\n\t\t64.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "\n[\n\t1.5, 1.5, 1.5, 1.5,\n\t1.5,\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "\n[\n\ttrue, true, true, true,\n\ttrue,\n]\n",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -101.74666,
+            11.18634,
+            14.233398
+          ],
+          [
+            -305.24,
+            33.55902,
+            42.700195,
+            101.74666,
+            -11.18634,
+            -14.233398,
+            -41.333336,
+            -37.0,
+            -9.666667
+          ],
+          [
+            -429.24,
+            -77.44098,
+            13.700195,
+            41.333336,
+            37.0,
+            9.666667,
+            -43.666668,
+            -29.0,
+            9.666667
+          ],
+          [
+            -560.24,
+            -164.44098,
+            42.700195,
+            43.666668,
+            29.0,
+            -9.666667,
+            -0.33333334,
+            -64.0,
+            0.0
+          ],
+          [
+            -561.24,
+            -356.44098,
+            42.700195,
+            0.33333334,
+            64.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 54,
+      "triangles": 1696,
+      "bounds": [
+        [
+          -41.216783627599916,
+          295.329886183239,
+          -14.826171736968867
+        ],
+        [
+          -26.9328795512339,
+          297.55456687857975,
+          -4.894433131931058
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 13.078630722862343,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:3556",
+      "nativeEntity": {
+        "targetname": "[PR#]wire3-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1928,
+        "origin": [
+          -858.0,
+          117.0,
+          12021.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:3556",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -13.0, 3.3333335,\n\t\t-16.666666,\n\t],\n\t[\n\t\t-39.0, 10.0, -50.0, 13.0,\n\t\t-3.3333335, 16.666666, -64.0, 1.3333334,\n\t\t8.333334,\n\t],\n\t[\n\t\t-231.0, 14.0, -25.0, 64.0,\n\t\t-1.3333334, -8.333334, -64.00001, -5.0000005,\n\t\t-10.666668,\n\t],\n\t[\n\t\t-423.0, -1.0, -57.0, 64.00001,\n\t\t5.0000005, 10.666668, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.5, 1.5, 1.5, 1.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -13.0,
+            3.3333335,
+            -16.666666
+          ],
+          [
+            -39.0,
+            10.0,
+            -50.0,
+            13.0,
+            -3.3333335,
+            16.666666,
+            -64.0,
+            1.3333334,
+            8.333334
+          ],
+          [
+            -231.0,
+            14.0,
+            -25.0,
+            64.0,
+            -1.3333334,
+            -8.333334,
+            -64.00001,
+            -5.0000005,
+            -10.666668
+          ],
+          [
+            -423.0,
+            -1.0,
+            -57.0,
+            64.00001,
+            5.0000005,
+            10.666668,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 30,
+      "triangles": 928,
+      "bounds": [
+        [
+          -32.54485640127253,
+          303.4323294979599,
+          -3.346381402512517
+        ],
+        [
+          -21.778079995442333,
+          305.3443205045932,
+          -2.927558250497426
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 12.837340413671521,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:3640",
+      "nativeEntity": {
+        "targetname": "[PR#]chute1-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1981,
+        "origin": [
+          -2610.0,
+          -483.0,
+          12015.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:3640",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 1.0, 0.33333334,\n\t\t-37.333336,\n\t],\n\t[\n\t\t3.0, 1.0, -112.0, -1.0,\n\t\t-0.33333334, 37.333336, -1.0, 0.0,\n\t\t-30.0,\n\t],\n\t[\n\t\t0.0, 1.0, -202.0, 1.0,\n\t\t0.0, 30.0, -0.3333333, 0.0,\n\t\t-117.333336,\n\t],\n\t[\n\t\t-1.0, 1.0, -554.0, 0.3333333,\n\t\t0.0, 117.333336, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.5, 1.5, 1.5, 1.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.33333334,
+            -37.333336
+          ],
+          [
+            3.0,
+            1.0,
+            -112.0,
+            -1.0,
+            -0.33333334,
+            37.333336,
+            -1.0,
+            0.0,
+            -30.0
+          ],
+          [
+            0.0,
+            1.0,
+            -202.0,
+            1.0,
+            0.0,
+            30.0,
+            -0.3333333,
+            0.0,
+            -117.333336
+          ],
+          [
+            -1.0,
+            1.0,
+            -554.0,
+            0.3333333,
+            0.0,
+            117.333336,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 37,
+      "triangles": 1152,
+      "bounds": [
+        [
+          -66.33062026407772,
+          290.9051691646546,
+          12.223750000012059
+        ],
+        [
+          -66.05141074359153,
+          305.1813967860028,
+          12.287249540632946
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 12.729233363617439,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:3645",
+      "nativeEntity": {
+        "targetname": "[PR#]chute2-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 15.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1986,
+        "origin": [
+          -2610.0,
+          -424.0,
+          12017.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:3645",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 1.0, -0.33333334,\n\t\t-38.0,\n\t],\n\t[\n\t\t3.0, -1.0, -114.0, -1.0,\n\t\t0.33333334, 38.0, -0.6666667, 0.0,\n\t\t-29.666668,\n\t],\n\t[\n\t\t1.0, -1.0, -203.0, 0.6666667,\n\t\t0.0, 29.666668, -0.3333333, 0.0,\n\t\t-117.333336,\n\t],\n\t[\n\t\t0.0, -1.0, -555.0, 0.3333333,\n\t\t0.0, 117.333336, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.5, 1.5, 1.5, 1.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            -0.33333334,
+            -38.0
+          ],
+          [
+            3.0,
+            -1.0,
+            -114.0,
+            -1.0,
+            0.33333334,
+            38.0,
+            -0.6666667,
+            0.0,
+            -29.666668
+          ],
+          [
+            1.0,
+            -1.0,
+            -203.0,
+            0.6666667,
+            0.0,
+            29.666668,
+            -0.3333333,
+            0.0,
+            -117.333336
+          ],
+          [
+            0.0,
+            -1.0,
+            -555.0,
+            0.3333333,
+            0.0,
+            117.333336,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 36,
+      "triangles": 1120,
+      "bounds": [
+        [
+          -66.31304607654108,
+          290.7799340192334,
+          10.750550436079584
+        ],
+        [
+          -66.19875050896601,
+          305.232186602571,
+          10.814049999999995
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 13.10576610082272,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:3816",
+      "nativeEntity": {
+        "targetname": "[PR#]wire2-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 6.0,
+        "particle_spacing": 16.0,
+        "slack": 0.85,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 2083,
+        "origin": [
+          -2160.0,
+          71.0,
+          11575.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:3816",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 24.666666, 5.0,\n\t\t35.0,\n\t],\n\t[\n\t\t74.0, 15.0, 105.0, -24.666666,\n\t\t-5.0, -35.0, 26.666666, -40.666668,\n\t\t11.333333,\n\t],\n\t[\n\t\t154.0, -107.0, 139.0, -26.666666,\n\t\t40.666668, -11.333333, 42.5, 50.333332,\n\t\t0.0,\n\t],\n\t[\n\t\t281.5, 44.0, 139.0, -42.5,\n\t\t-50.333332, 0.0, 17.5, -44.0,\n\t\t0.6666667,\n\t],\n\t[\n\t\t334.0, -88.0, 141.0, -17.5,\n\t\t44.0, -0.6666667, -17.500002, -47.333336,\n\t\t-0.6666667,\n\t],\n\t[\n\t\t281.5, -230.0, 139.0, 17.500002,\n\t\t47.333336, 0.6666667, -42.833332, -34.666664,\n\t\t0.0,\n\t],\n\t[\n\t\t153.0, -334.0, 139.0, 42.833332,\n\t\t34.666664, 0.0, -22.666666, 22.000002,\n\t\t7.0,\n\t],\n\t[\n\t\t85.0, -268.0, 160.0, 22.666666,\n\t\t-22.000002, -7.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "\n[\n\t1.5, 1.5, 1.5, 1.5,\n\t1.5, 1.5, 1.5, 1.5,\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "\n[\n\ttrue, true, true, true,\n\ttrue, true, true, true,\n]\n",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            24.666666,
+            5.0,
+            35.0
+          ],
+          [
+            74.0,
+            15.0,
+            105.0,
+            -24.666666,
+            -5.0,
+            -35.0,
+            26.666666,
+            -40.666668,
+            11.333333
+          ],
+          [
+            154.0,
+            -107.0,
+            139.0,
+            -26.666666,
+            40.666668,
+            -11.333333,
+            42.5,
+            50.333332,
+            0.0
+          ],
+          [
+            281.5,
+            44.0,
+            139.0,
+            -42.5,
+            -50.333332,
+            0.0,
+            17.5,
+            -44.0,
+            0.6666667
+          ],
+          [
+            334.0,
+            -88.0,
+            141.0,
+            -17.5,
+            44.0,
+            -0.6666667,
+            -17.500002,
+            -47.333336,
+            -0.6666667
+          ],
+          [
+            281.5,
+            -230.0,
+            139.0,
+            17.500002,
+            47.333336,
+            0.6666667,
+            -42.833332,
+            -34.666664,
+            0.0
+          ],
+          [
+            153.0,
+            -334.0,
+            139.0,
+            42.833332,
+            34.666664,
+            0.0,
+            -22.666666,
+            22.000002,
+            7.0
+          ],
+          [
+            85.0,
+            -268.0,
+            160.0,
+            22.666666,
+            -22.000002,
+            -7.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 63,
+      "triangles": 1984,
+      "bounds": [
+        [
+          -54.875042424094566,
+          293.98963909988083,
+          -2.9395339511583334
+        ],
+        [
+          -46.36223345560216,
+          298.0833210710299,
+          6.696635794068714
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 6.0,
+        "stepSeconds": 0.01,
+        "steps": 600,
+        "restLength": 13.932056441200963,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:31017:3950",
+      "nativeEntity": {
+        "targetname": "[PR#]wire1-1",
+        "effect_name": "particles/entity/path_particle_cable_tintable.vpcf",
+        "start_active": true,
+        "max_simulation_time": 4.0,
+        "particle_spacing": 16.0,
+        "slack": 0.8,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          220,
+          190,
+          0
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 2164,
+        "origin": [
+          -943.0,
+          92.0,
+          11626.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:31017:3950",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -14.666666, -30.666666,\n\t\t18.999998,\n\t],\n\t[\n\t\t-44.0, -92.0, 57.0, 14.666666,\n\t\t30.666666, -18.999998, 44.0, 12.333333,\n\t\t9.666667,\n\t],\n\t[\n\t\t88.0, -55.0, 86.0, -44.0,\n\t\t-12.333333, -9.666667, 28.333332, -18.333332,\n\t\t-21.0,\n\t],\n\t[\n\t\t173.0, -110.0, 23.0, -28.333332,\n\t\t18.333332, 21.0, 14.666667, -58.0,\n\t\t20.666666,\n\t],\n\t[\n\t\t217.0, -284.0, 85.0, -14.666667,\n\t\t58.0, -20.666666, -85.333336, -58.33334,\n\t\t1.0000001,\n\t],\n\t[\n\t\t-39.0, -459.0, 88.0, 85.333336,\n\t\t58.33334, -1.0000001, 38.999996, -47.5,\n\t\t-14.666667,\n\t],\n\t[\n\t\t78.0, -601.5, 44.0, -38.999996,\n\t\t47.5, 14.666667, -6.333334, -15.833335,\n\t\t12.000001,\n\t],\n\t[\n\t\t59.0, -649.0, 80.0, 6.333334,\n\t\t15.833335, -12.000001, -35.66667, -43.000004,\n\t\t5.0000005,\n\t],\n\t[\n\t\t-48.0, -778.0, 95.0, 35.66667,\n\t\t43.000004, -5.0000005, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "\n[\n\t1.5, 1.5, 1.5, 1.5,\n\t1.5, 1.5, 1.5, 1.5,\n\t1.5,\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "\n[\n\ttrue, true, true, true,\n\ttrue, true, true, true,\n\ttrue,\n]\n",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "vertigo",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -14.666666,
+            -30.666666,
+            18.999998
+          ],
+          [
+            -44.0,
+            -92.0,
+            57.0,
+            14.666666,
+            30.666666,
+            -18.999998,
+            44.0,
+            12.333333,
+            9.666667
+          ],
+          [
+            88.0,
+            -55.0,
+            86.0,
+            -44.0,
+            -12.333333,
+            -9.666667,
+            28.333332,
+            -18.333332,
+            -21.0
+          ],
+          [
+            173.0,
+            -110.0,
+            23.0,
+            -28.333332,
+            18.333332,
+            21.0,
+            14.666667,
+            -58.0,
+            20.666666
+          ],
+          [
+            217.0,
+            -284.0,
+            85.0,
+            -14.666667,
+            58.0,
+            -20.666666,
+            -85.333336,
+            -58.33334,
+            1.0000001
+          ],
+          [
+            -39.0,
+            -459.0,
+            88.0,
+            85.333336,
+            58.33334,
+            -1.0000001,
+            38.999996,
+            -47.5,
+            -14.666667
+          ],
+          [
+            78.0,
+            -601.5,
+            44.0,
+            -38.999996,
+            47.5,
+            14.666667,
+            -6.333334,
+            -15.833335,
+            12.000001
+          ],
+          [
+            59.0,
+            -649.0,
+            80.0,
+            6.333334,
+            15.833335,
+            -12.000001,
+            -35.66667,
+            -43.000004,
+            5.0000005
+          ],
+          [
+            -48.0,
+            -778.0,
+            95.0,
+            35.66667,
+            43.000004,
+            -5.0000005,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 77,
+      "triangles": 2432,
+      "bounds": [
+        [
+          -25.186238058354842,
+          295.2820723909415,
+          -2.3450192272236485
+        ],
+        [
+          -18.423265954803984,
+          297.7307457004339,
+          17.436329849383306
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 4.0,
+        "stepSeconds": 0.01,
+        "steps": 400,
+        "restLength": 13.470886319671113,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    }
+  ],
+  "source": {
+    "engine": "Valve Source2",
+    "build": "26445667",
+    "mapAuthor": "unverified; retain supplied native map credits",
+    "originalArchiveSHA256": "f3c2966ea3423043f731bbecfb704fb7360b4bb442c85ddb50ecc8f25d7f5503",
+    "viewerCommit": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "qualifications": [
+      "Pinnedviewer Bezier sampling/Verlet/spring/transported4-sidedtube, not private native engine particle snapshot",
+      "Explicit browser host policy min(authored entity max_simulation_time,VPCFpresim,stop), unlike viewer ignoring entity max",
+      "Authored height scales retained; absent follows qualified viewer width; actual present width/height arrays equal",
+      "Default/tintable offline tessellation uses authored maximum4; camera-adaptive tessellation not claimed",
+      "Native constant VTEX fields/packed hemi-oct flat normal/roughness and min-radius/coverage/blend lowered from preserved native programs. Browser effective vertical-FOV/full drawing-buffer height binding and pinned-viewer settling/tube topology remain qualified; no native engine particle parity claim."
+    ],
+    "nativeShaderProof": {
+      "archiveSHA256": "91493c2620afebab343c470abd1f7b270b01e322c0a4235995c3c7062a4995b8",
+      "followupSHA256": "d2fec7abeaae4371c13f00099ea1fe8b670eb14a26eb8fe74f8e164614ab4106",
+      "registeredCvar": "r_csgo_cable_pixel_radius_clamp",
+      "registeredDefaultFloat32": 1.2000000476837158,
+      "defaultBytes": "9a99993f",
+      "nativeVSWidth": "max(abs(viewDepth)*suppliedK,physicalRadius)",
+      "nativeCoverage": "max(physicalRadius/expandedRadius,0.25)",
+      "candidateWriter": "C*V_tanf((A*float32(pi/180))/D); division inside tan",
+      "opaqueClampBlend": "SourceAlpha/InverseSourceAlpha Add RGB and alpha; source descriptors + qualified pinned VRF enum/bitfield interpretation",
+      "browserViewBinding": "Effective vertical cameraFOV/pixelheight QUALIFIED; exact native A/D members and formalCB3 alias unproved",
+      "independentReplay": "28originalVCS compressed dictionary/slice\u2192native programs;17nativewindows,19/19originalresources/blocks;157+12payloadSHA; noGPU/target execution"
+    },
+    "browserGpuAcceptance": {
+      "fixture": "tests/native-cables.spec.ts",
+      "proof": "native-cables-gpu-proof.json",
+      "limitations": "Controlled width/coverage/transform/clone fixture, not whole-map texel or private particle solver parity"
+    },
+    "viewerLicense": "/models/maps/licenses/ValveResourceFormat-MIT.txt"
+  },
+  "runtime": {
+    "bytes": 253114,
+    "rawGLBBytes": 1409416,
+    "sha256": "a4686f58ac90fd65039468acd0ce0f2f8cc4c34e1a44dbe60b4d2dbf8044af45",
+    "collision": false
+  },
+  "admission": "UNUSED_PUBLIC_PAYLOAD; CPU121-owner geometry and isolated native-width/pose/clone/depth GPU gates pass; no active map config or whole-map visual acceptance"
+}
