@@ -52,6 +52,11 @@ jobs:
               server=true
             fi
           fi
+          # A code-only push can reference assets whose earlier sync failed.
+          # The assets job checks the exact published receipt before downloading.
+          if [ "$client" = true ]; then
+            assets=true
+          fi
           {
             echo "assets=$assets"
             echo "deploy=$client"
@@ -61,19 +66,21 @@ jobs:
   assets:
     needs: changes
     if: needs.changes.outputs.assets == 'true'
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, cs2go-assets]
+    timeout-minutes: 120
     steps:
+      - name: Check asset runner capacity
+        run: |
+          /opt/cs2go-assets/python/bin/python -c 'import shutil; assert shutil.disk_usage("/opt/cs2go-assets").free >= 20 * 1024**3, "Asset runner needs at least 20 GiB free"'
+          echo /opt/cs2go-assets/python/bin >> "$GITHUB_PATH"
       - uses: actions/checkout@v7
         with:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /packages/assets/manifest.json
-            /packages/assets/sync.py
-            /packages/assets/sync_test.py
-      - uses: actions/setup-python@v7
-        with:
-          python-version: "3.12"
+            /packages/assets/
+            /package.json
+            /bunfig.toml
       - run: python -m pip install boto3==1.40.61
       - run: python packages/assets/sync_test.py
       - id: identity
@@ -86,19 +93,11 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET: ${{ vars.R2_BUCKET }}
-      - if: steps.published.outputs.complete != 'true'
-        run: |
-          git sparse-checkout set --no-cone '/packages/assets/' '/package.json' '/bunfig.toml'
+      - name: Reuse persistent compression cache
+        if: steps.published.outputs.complete != 'true'
+        run: ln -s /var/cache/cs2go-assets/transport packages/assets/.cache
       - uses: oven-sh/setup-bun@v2
         if: steps.published.outputs.complete != 'true'
-      - uses: actions/cache@v6
-        if: steps.published.outputs.complete != 'true'
-        with:
-          path: packages/assets/.cache
-          key: asset-compression-br11-${{ runner.os }}-${{ hashFiles('packages/assets/manifest.json') }}
-          restore-keys: |
-            asset-compression-br11-${{ runner.os }}-
-            asset-compression-${{ runner.os }}-
       - run: python packages/assets/sync.py seed
         if: steps.published.outputs.complete != 'true'
         env:
@@ -116,6 +115,22 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET: ${{ vars.R2_BUCKET }}
+      - name: Prune obsolete compression cache
+        if: steps.published.outputs.complete != 'true'
+        run: |
+          python - <<'PYTHON'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("packages/assets/manifest.json").read_text())
+          keep = set()
+          for entry in manifest["files"].values():
+              keep.add(entry["sha256"] + ".q11.br")
+              if "inputSha256" in entry:
+                  keep.add(entry["inputSha256"] + ".glb.gz")
+          for cached in Path("/var/cache/cs2go-assets/transport").iterdir():
+              if cached.is_file() and cached.name not in keep:
+                  cached.unlink()
+          PYTHON
   deploy:
     needs: [changes, assets]
     if: always() && !cancelled() && needs.changes.result == 'success' && needs.changes.outputs.deploy == 'true' && (needs.assets.result == 'success' || needs.assets.result == 'skipped')

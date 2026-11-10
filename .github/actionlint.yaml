@@ -1,0 +1,2 @@
+self-hosted-runner:
+  labels: [cs2go-assets]
