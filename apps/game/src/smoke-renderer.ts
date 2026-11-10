@@ -196,6 +196,55 @@ export function registerSceneDepthMaterial(material: T.Material) {
 export class SmokeComposite {
   target?: T.WebGLRenderTarget;
   private colorTarget = false;
+  private opaqueCapture = { exclude: new Set<T.Object3D>(), setColor(_texture: T.Texture) {} };
+  private opaqueCopy?: {
+    scene: T.Scene;
+    camera: T.Camera;
+    geometry: T.BufferGeometry;
+    material: T.ShaderMaterial;
+  };
+  private reusedObjects: T.Mesh[] = [];
+  private reusedMasks: number[] = [];
+  private releaseOpaqueCopy() {
+    this.opaqueCopy?.geometry.dispose();
+    this.opaqueCopy?.material.dispose();
+    this.opaqueCopy = undefined;
+  }
+  private copyOpaque(renderer: T.WebGLRenderer) {
+    if (!this.opaqueCopy) {
+      const material = new T.ShaderMaterial({
+        uniforms: { colorFrame: { value: null }, depthFrame: { value: null } },
+        vertexShader:
+          "varying vec2 frameUv;void main(){frameUv=position.xy*.5+.5;gl_Position=vec4(position.xy,0.0,1.0);}",
+        fragmentShader:
+          "uniform sampler2D colorFrame,depthFrame;varying vec2 frameUv;void main(){gl_FragColor=texture2D(colorFrame,frameUv);gl_FragDepth=texture2D(depthFrame,frameUv).r;}",
+        depthTest: true,
+        depthWrite: true,
+        depthFunc: T.AlwaysDepth,
+        blending: T.NoBlending,
+        toneMapped: false,
+      });
+      const geometry = new T.BufferGeometry();
+      geometry.setAttribute(
+        "position",
+        new T.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3),
+      );
+      const scene = new T.Scene(),
+        camera = new T.Camera();
+      const triangle = new T.Mesh(geometry, material);
+      triangle.frustumCulled = false;
+      scene.add(triangle);
+      this.opaqueCopy = { scene, camera, geometry, material };
+    }
+    this.opaqueCopy.material.uniforms.colorFrame.value = this.target!.texture;
+    this.opaqueCopy.material.uniforms.depthFrame.value = this.target!.depthTexture;
+    renderer.render(this.opaqueCopy.scene, this.opaqueCopy.camera);
+  }
+  private restoreReusedObjects() {
+    for (let i = 0; i < this.reusedObjects.length; i++)
+      this.reusedObjects[i].layers.mask = this.reusedMasks[i];
+    this.reusedObjects.length = this.reusedMasks.length = 0;
+  }
   // The cloud pass needs no world lights/fog or another map/rig traversal.
   private cloudScene = new T.Scene();
   private cloudParents: (T.Object3D | null)[] = [];
@@ -270,11 +319,21 @@ export class SmokeComposite {
     lowQuality = false,
     depthConsumer?: SceneDepthConsumer,
     beforeOpaque?: (camera: T.PerspectiveCamera) => void,
+    reuseLinearOpaque = false,
   ) {
     // Poses are sampled before rendering. Share body palettes across the depth,
     // shadow and color passes, without retaining them across animation updates.
     return renderFrozenPose(() =>
-      this.renderPasses(renderer, scene, camera, clouds, lowQuality, depthConsumer, beforeOpaque),
+      this.renderPasses(
+        renderer,
+        scene,
+        camera,
+        clouds,
+        lowQuality,
+        depthConsumer,
+        beforeOpaque,
+        reuseLinearOpaque,
+      ),
     );
   }
   /** Equal-depth surfaces must seed the same target immediately before color.
@@ -317,10 +376,12 @@ export class SmokeComposite {
     lowQuality = false,
     depthConsumer?: SceneDepthConsumer,
     beforeOpaque?: (camera: T.PerspectiveCamera) => void,
+    reuseLinearOpaque = false,
   ) {
     if (!clouds.length && !depthConsumer) {
       this.target?.dispose();
       this.target = undefined;
+      this.releaseOpaqueCopy();
       this.renderOpaque(renderer, scene, camera, beforeOpaque);
       return;
     }
@@ -334,7 +395,20 @@ export class SmokeComposite {
     renderer.getViewport(this.logicalViewport);
     renderer.getCurrentViewport(this.viewport);
     this.viewportSize.set(this.viewport.z, this.viewport.w);
-    const color = depthConsumer?.color;
+    const reuseOpaque = !!(
+      reuseLinearOpaque &&
+      !lowQuality &&
+      destination &&
+      destination.samples === 0 &&
+      renderer.toneMapping === T.NoToneMapping &&
+      this.viewport.x === 0 &&
+      this.viewport.y === 0 &&
+      this.viewport.z === this.size.x &&
+      this.viewport.w === this.size.y
+    );
+    const color = depthConsumer?.color ?? (reuseOpaque ? this.opaqueCapture : undefined);
+    if (!reuseOpaque) this.releaseOpaqueCopy();
+    const remaining = reuseOpaque ? new Set<T.Object3D>() : undefined;
     if (this.target && this.colorTarget !== !!color) {
       this.target.dispose();
       this.target = undefined;
@@ -395,7 +469,7 @@ export class SmokeComposite {
       }
       this.depthCamera.copy(camera, false);
       this.depthCamera.matrixWorldAutoUpdate = false;
-      this.depthCamera.far = depthConsumer ? camera.far : Math.min(camera.far, smokeFar);
+      this.depthCamera.far = color || depthConsumer ? camera.far : Math.min(camera.far, smokeFar);
       this.depthCamera.updateProjectionMatrix();
       if (color) {
         scene.traverseVisible((object) => {
@@ -423,7 +497,10 @@ export class SmokeComposite {
         );
         renderer.toneMapping = toneMapping;
         shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
-        for (const object of this.hidden) object.visible = true;
+        for (const object of this.hidden) {
+          object.visible = true;
+          object.traverse((child) => remaining?.add(child));
+        }
         this.hidden.length = 0;
         color.setColor(this.target.texture);
       } else this.renderOpaque(renderer, scene, this.depthCamera, beforeOpaque);
@@ -440,7 +517,25 @@ export class SmokeComposite {
         this.viewport,
         this.depthCamera.projectionMatrixInverse,
       );
-      this.renderOpaque(renderer, scene, camera, beforeOpaque);
+      if (reuseOpaque) {
+        this.copyOpaque(renderer);
+        // Layers skip only the captured draw, retaining children (including
+        // transparent attachments) and the scene's complete lighting state.
+        scene.traverseVisible((object) => {
+          if (!(object instanceof T.Mesh) || remaining!.has(object)) return;
+          this.reusedObjects.push(object);
+          this.reusedMasks.push(object.layers.mask);
+          object.layers.mask = 0;
+        });
+        const copiedBackground = scene.background;
+        scene.background = null;
+        try {
+          renderer.render(scene, camera);
+        } finally {
+          scene.background = copiedBackground;
+          this.restoreReusedObjects();
+        }
+      } else this.renderOpaque(renderer, scene, camera, beforeOpaque);
       shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
       // Water needs the opaque capture even without smoke. There is no cloud
       // layer to composite in that case; avoid entering a third render pass.
@@ -489,6 +584,7 @@ export class SmokeComposite {
         cloud.clearSceneDepth();
       }
       this.cloudParents.length = this.cloudMasks.length = 0;
+      this.restoreReusedObjects();
     }
   }
 }

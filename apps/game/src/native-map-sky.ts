@@ -1,3 +1,4 @@
+import { StaticSkyClipping, infiniteSkyPanorama } from "./native-sky-clipping";
 import { prepareShadersBounded, prepareTexturesBounded } from "./shader-preparation";
 import { nativeMapSamplerReservation } from "./native-map-sampler-budget";
 import * as T from "three";
@@ -426,6 +427,7 @@ async function buildNativeMapSky(
       toneMapped: false,
     }),
   );
+  infiniteSkyPanorama(panorama.material);
   panorama.quaternion.setFromRotationMatrix(panoramaConfig.rotation);
   panorama.renderOrder = -1000;
   panorama.frustumCulled = false;
@@ -442,6 +444,10 @@ async function buildNativeMapSky(
     lastWidth = 0,
     lastHeight = 0,
     lastCableHeight = 0;
+  const clipping =
+    !foliage && !nativeClutter && !nativeCables
+      ? new StaticSkyClipping([asset.scene, overlay])
+      : undefined;
   let disposed = false;
   function update(camera: T.Camera) {
     if (disposed) return;
@@ -482,8 +488,10 @@ async function buildNativeMapSky(
     skyCamera.projectionMatrix.copy(camera.projectionMatrix);
     // Derive clipping from the full authored sky bounds, rather than truncating
     // native skyline geometry at the gameplay camera's far plane.
-    const near = 0.01,
-      far = Math.max(1, radius + position.distanceTo(center)) * 2;
+    const far = Math.max(1, radius + position.distanceTo(center)) * 2;
+    const near = Math.min(far * 0.25, clipping?.near(camera) ?? 0.01);
+    skyCamera.near = near;
+    skyCamera.far = far;
     skyCamera.projectionMatrix.elements[10] = -(far + near) / (far - near);
     skyCamera.projectionMatrix.elements[14] = (-2 * far * near) / (far - near);
     skyCamera.projectionMatrixInverse.copy(skyCamera.projectionMatrix).invert();
