@@ -69,11 +69,17 @@ export function fitSourceSunShadow(
 }
 
 const configured = new WeakSet<T.Mesh>();
+// Layer 31 belongs to smoke composition. Keep layer 0 for ordinary rendering;
+// the moving sun uses this additional layer to reject static meshes before
+// Three prepares their shadow geometry and materials.
+const movingSunLayer = 30;
 /** Keep static silhouettes cached while drawing moving casters in a separate map. */
 export function sourceSunCaster(root: T.Object3D, dynamic: boolean) {
   root.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
     object.userData.sourceSunDynamic = dynamic;
+    if (dynamic) object.layers.enable(movingSunLayer);
+    else object.layers.disable(movingSunLayer);
     if (dynamic) object.castShadow = true;
     if (configured.has(object)) return;
     configured.add(object);
@@ -116,6 +122,7 @@ export function addSourceDynamicSun(
   dynamic.castShadow = true;
   dynamic.shadow.camera.copy(sun.shadow.camera);
   dynamic.shadow.camera.userData.sourceSunPass = 1;
+  dynamic.shadow.camera.layers.set(movingSunLayer);
   dynamic.shadow.mapSize.copy(sun.shadow.mapSize);
   dynamic.shadow.bias = sun.shadow.bias;
   dynamic.shadow.normalBias = sun.shadow.normalBias;
