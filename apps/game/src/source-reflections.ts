@@ -404,7 +404,10 @@ vec3 sourceCubeSample(vec3 direction,int cube,float lod) {
   vec3 a=sourceCubeAddress(direction);
   int upper=int(ceil(lod));float inset=0.5/float(SOURCE_REFLECTION_CUBE_SIZE>>upper);
   vec3 result=vec3(0.0);
-  if(all(greaterThanEqual(a.xy,vec2(inset))) && all(lessThanEqual(a.xy,vec2(1.0-inset)))) {
+  // Keep unordered coordinates in the hardware sampler: D3D converts NaN
+  // texture addresses to fixed-point zero. Manual fract/mix would propagate
+  // NaN instead. Finite edge coordinates still use the seamless taps below.
+  if(!(any(lessThan(a.xy,vec2(inset))) || any(greaterThan(a.xy,vec2(1.0-inset))))) {
     #ifdef SOURCE_REFLECTION_SINGLE_ARRAY
     result=textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb;
     #else
@@ -428,25 +431,71 @@ export function applySourceReflections(
     worldView?: string;
     /** Actual water/complex quality1 bytecode differs from the legacy adapter. */
     nativeFamily?: "water" | "complex" | "glass" | "lightmapped";
+    /** Complete BYTE4 instance IDs address the shared field with a fixed eight
+     * slot loop. The caller proves coverage and hardware budgets before use. */
+    instanceCandidates?: boolean;
+    /** Complete records in one std140 block instead of default uniforms. */
+    instanceField?: boolean;
   } = {},
 ) {
   const affine = data.volumes.some((volume) => volume.worldToLocal);
+  if (
+    options.instanceCandidates &&
+    (data.uniforms.length !== data.volumes.length || data.uniforms.length > 255)
+  )
+    throw new Error("Instanced reflections require the complete BYTE-addressable field");
   shader.uniforms.sourceReflectionCubes0 = { value: data.textures[0] };
   shader.uniforms.sourceReflectionCubes1 = { value: data.textures[1] ?? data.textures[0] };
-  shader.uniforms.sourceEnvironments = { value: data.uniforms };
-  const indices = new Int32Array(data.uniforms.length);
-  indices.set(candidates);
-  shader.uniforms.sourceEnvironmentCandidates = { value: indices };
-  shader.uniforms.sourceEnvironmentCount = options.count ?? { value: candidates.length };
+  if (!options.instanceField) shader.uniforms.sourceEnvironments = { value: data.uniforms };
+  if (options.instanceField && !options.instanceCandidates)
+    throw new Error("Native reflection field block requires instance candidate IDs");
+  if (options.instanceCandidates) {
+    const declarations =
+      "flat varying vec4 vSourceReflectionCandidates0, vSourceReflectionCandidates1;\n";
+    const main = /void\s+main\s*\(\s*\)\s*\{/;
+    if (!main.test(shader.vertexShader))
+      throw new Error("Native instance reflection vertex entry point unavailable");
+    shader.vertexShader =
+      "attribute vec4 sourceReflectionCandidates0, sourceReflectionCandidates1;\n" +
+      declarations +
+      shader.vertexShader.replace(
+        main,
+        `$&
+ vSourceReflectionCandidates0=sourceReflectionCandidates0;
+ vSourceReflectionCandidates1=sourceReflectionCandidates1;`,
+      );
+  } else {
+    const indices = new Int32Array(data.uniforms.length);
+    indices.set(candidates);
+    shader.uniforms.sourceEnvironmentCandidates = { value: indices };
+    shader.uniforms.sourceEnvironmentCount = options.count ?? { value: candidates.length };
+  }
   shader.fragmentShader =
     (data.combined ? "#define SOURCE_REFLECTION_SINGLE_ARRAY\n" : "") +
     `#define SOURCE_REFLECTION_CUBE_SIZE ${data.cubeSize ?? 256}\n#define SOURCE_REFLECTION_ARRAY_SPLIT ${data.arraySplit ?? 42}\n` +
     sourceCubeSampling +
     `
 struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEdge;vec4 sh;${affine ? "mat4 worldToLocal;mat4 localToWorld;" : ""}};
-uniform SourceEnvironment sourceEnvironments[${data.uniforms.length}];
-uniform int sourceEnvironmentCandidates[${data.uniforms.length}];
-uniform int sourceEnvironmentCount;
+${
+  options.instanceField
+    ? `layout(std140) uniform NativeSourceReflectionField { vec4 nativeReflectionWords[${data.uniforms.length * 13}]; };
+SourceEnvironment sourceFieldEnvironment(int index) {
+  int at=index*13;
+  vec4 first=nativeReflectionWords[at];
+  return SourceEnvironment(first.xyz,first.w,nativeReflectionWords[at+1].xyz,nativeReflectionWords[at+2].xyz,nativeReflectionWords[at+3].xyz,nativeReflectionWords[at+4]${affine ? `,mat4(nativeReflectionWords[at+5],nativeReflectionWords[at+6],nativeReflectionWords[at+7],nativeReflectionWords[at+8]),mat4(nativeReflectionWords[at+9],nativeReflectionWords[at+10],nativeReflectionWords[at+11],nativeReflectionWords[at+12])` : ""});
+}`
+    : `uniform SourceEnvironment sourceEnvironments[${data.uniforms.length}];`
+}
+${
+  options.instanceCandidates
+    ? `flat varying vec4 vSourceReflectionCandidates0,vSourceReflectionCandidates1;
+int sourceInstanceReflectionId(int slot) {
+  if(slot<4)return int(floor(vSourceReflectionCandidates0[slot]+0.5));
+  return int(floor(vSourceReflectionCandidates1[slot-4]+0.5));
+}`
+    : `uniform int sourceEnvironmentCandidates[${data.uniforms.length}];
+uniform int sourceEnvironmentCount;`
+}
 ${options.nativeFamily === "water" ? nativeWaterReflectionNormalGLSL : ""}
 vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,vec3 irradiance) {
   vec3 R=reflect(-viewDir,normal);float r2=roughness*roughness;
@@ -454,9 +503,16 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
   R=normalize(mix(normal,R,smoothness*(sqrt(smoothness)+r2)));
   roughness=clamp(roughness,0.0,1.0);
   float coverage=0.01;vec3 color=vec3(0.0);vec4 sh=vec4(0.0);
-  for(int i=0;i<${data.uniforms.length};i++) {
-    if(i>=sourceEnvironmentCount)break;
-    SourceEnvironment env=sourceEnvironments[sourceEnvironmentCandidates[i]];
+  for(int i=0;i<${options.instanceCandidates ? 8 : data.uniforms.length};i++) {
+    ${
+      options.instanceCandidates
+        ? `int candidate=sourceInstanceReflectionId(i);
+    if(candidate==255)continue;
+    if(candidate<0||candidate>=${data.uniforms.length})continue;
+    SourceEnvironment env=${options.instanceField ? "sourceFieldEnvironment(candidate)" : "sourceEnvironments[candidate]"};`
+        : `if(i>=sourceEnvironmentCount)break;
+    SourceEnvironment env=sourceEnvironments[sourceEnvironmentCandidates[i]];`
+    }
     vec3 local=${affine ? "(env.worldToLocal*vec4(position,1.0)).xyz" : "position-env.origin"};
     vec3 localRay=${affine ? "mat3(env.worldToLocal)*R" : "R"};
     vec3 fromMin=clamp((local-env.mins)*env.invEdge,0.0,1.0);

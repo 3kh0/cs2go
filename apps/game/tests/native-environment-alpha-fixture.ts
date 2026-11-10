@@ -11,7 +11,7 @@ import { environmentAlphaShared } from "../src/native-environment-alpha";
 /** One declared AA-off coverage policy in merged color, native shadow depth,
  * point-distance depth and the real SmokeComposite depth variant. This is not
  * evidence of native MSAA sample patterns or native Equal-depth pass order. */
-export function renderNativeAlphaConsumers() {
+export function renderNativeAlphaConsumers(instanced = false) {
   const renderer = new T.WebGLRenderer({ antialias: false, alpha: true });
   renderer.setSize(16, 16);
   renderer.outputColorSpace = T.LinearSRGBColorSpace;
@@ -76,7 +76,14 @@ export function renderNativeAlphaConsumers() {
   geometry.setAttribute("uv1", geometry.getAttribute("uv").clone());
   const original = new T.MeshStandardMaterial();
   original.name = "nativeAlpha";
-  const mesh: T.Mesh<T.BufferGeometry, T.Material> = new T.Mesh(geometry, original);
+  const mesh: T.Mesh<T.BufferGeometry, T.Material> = instanced
+    ? new T.InstancedMesh(geometry, original, 1)
+    : new T.Mesh(geometry, original);
+  if (mesh instanceof T.InstancedMesh)
+    mesh.setMatrixAt(
+      0,
+      new T.Matrix4().makeRotationY(0.2).multiply(new T.Matrix4().makeScale(1.15, 0.8, 1)),
+    );
   const scene = new T.Scene();
   scene.add(mesh);
   applyNativeMapEnvironment(mesh, {
@@ -156,6 +163,7 @@ export function renderNativeAlphaConsumers() {
     bankDepth: banks.arrays[0].image.depth,
   };
   original.dispose();
+  if (mesh instanceof T.InstancedMesh) mesh.dispose();
   color.dispose();
   geometry.dispose();
   mesh.customDepthMaterial?.dispose();

@@ -12,6 +12,8 @@ import {
 } from "./source-lighting";
 import { acquireAgentAppearance, selectedAgentId } from "./agent-roster";
 import { assetUrl } from "./asset-url";
+import { teamPreviewGround } from "./team-preview-ground";
+import type { SceneDepthConsumer, SmokeRenderer } from "./smoke-renderer";
 
 export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: number, game: Game) {
   const teams = ["t", "ct"] as const;
@@ -33,23 +35,6 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
   previewRoot.visible = false;
   game.scene.add(previewRoot);
   const camera = new T.PerspectiveCamera(75, 1, 0.05, 254);
-  const authoredCamera = game.dust!.config.teamCamera;
-  if (authoredCamera) {
-    camera.position.fromArray(authoredCamera.position);
-    camera.lookAt(new T.Vector3().fromArray(authoredCamera.target));
-  } else {
-    // Keep the fallback tied to native spawn/nav geometry, never Dust II coordinates.
-    const spawn = new T.Vector3().fromArray(game.dust!.navigation.data.spawns.ct[0]);
-    const area = game.dust!.navigation.nearest(spawn);
-    const target = new T.Vector3().fromArray(
-      game.dust!.navigation.areas[area]?.center ?? spawn.toArray(),
-    );
-    const facing = game.dust!.navigation.data.spawnAngles?.ct[0] ?? 0;
-    camera.position
-      .copy(target)
-      .add(new T.Vector3(Math.sin(facing) * 6, 2.2, Math.cos(facing) * 6));
-    camera.lookAt(target.clone().add(new T.Vector3(0, 0.8, 0)));
-  }
   let closed = false,
     ready = false;
   const controller = new AbortController();
@@ -57,22 +42,22 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
   const poses: TeamAgentPose[] = [];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const groundOffsets: number[] = [];
-  const raycaster = new T.Raycaster();
+  const noSmoke: SmokeRenderer[] = [];
+  const previewDepth: SceneDepthConsumer = {
+    setDepth(texture, viewport, inverseProjection) {
+      game.world.nativeWater?.setDepth(texture, viewport, inverseProjection);
+      game.world.nativeEffects?.setDepth(texture, viewport, inverseProjection);
+    },
+  };
   const anchor = new T.Vector3(),
     probe = new T.Vector3();
   const up = new T.Vector3(0, 1, 0);
   let layoutWidth = 0,
     layoutHeight = 0;
   const layout = () => {
-    camera.aspect = game.renderSize.x / game.renderSize.y;
-    camera.updateProjectionMatrix();
-    camera.updateMatrixWorld(true);
+    const grounds = teamPreviewGround(camera, game.dust!, game.renderSize.x / game.renderSize.y);
     for (let i = 0; i < soldiers.length; i++) {
-      raycaster.setFromCamera(new T.Vector2(i === 0 ? -0.48 : 0.48, -0.86), camera);
-      const ground = game
-        .dust!.collision.intersections(raycaster.ray, 12)
-        .find((hit) => (hit.face?.normal.y ?? 0) > 0.7);
-      if (!ground) throw new Error("Team preview courtyard floor unavailable");
+      const ground = grounds[i]!;
       const soldier = soldiers[i]!;
       const yaw = Math.atan2(
         camera.position.x - ground.point.x,
@@ -125,7 +110,29 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
     const ballVisible = ball?.visible;
     try {
       if (ball) ball.visible = false;
-      renderer.render(game.scene, camera);
+      // Selection retains native coverage, local lighting and linear-HDR
+      // presentation, using its own camera throughout the world passes.
+      game.renderMapFrame(() => {
+        const world = game.world;
+        const water = world.nativeWater;
+        const now = performance.now() / 1000;
+        world.nativeEnvironment?.update(now);
+        world.nativeEffects?.update(now);
+        world.nativeCoverage?.update(now);
+        const waterVisible = water?.needsDepth(camera) ?? false;
+        if (waterVisible) water!.prepareFrame(camera, now, world.sun);
+        const effectsVisible = world.nativeEffects?.needsDepth(camera) ?? false;
+        previewDepth.color = waterVisible ? water!.color : undefined;
+        game.utility.smokeComposite.render(
+          renderer,
+          game.scene,
+          camera,
+          noSmoke,
+          game.settings.effectsDetail === "low",
+          waterVisible || effectsVisible ? previewDepth : undefined,
+          world.nativeCoverage?.renderDepth,
+        );
+      }, camera);
     } finally {
       if (ball) ball.visible = ballVisible!;
     }
@@ -170,15 +177,19 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
     }
     const previousToneMapping = renderer.toneMapping;
     let compilation: Promise<void>;
+    let coveragePreparation: Promise<unknown> | undefined;
     try {
       renderer.toneMapping = T.CustomToneMapping;
       previewRoot.visible = true;
-      compilation = renderer.compileAsync(game.scene, camera).then(() => {});
+      game.prepareMapFrame(() => {
+        compilation = renderer.compileAsync(game.scene, camera).then(() => {});
+        coveragePreparation = game.world.nativeCoverage?.prepare(camera);
+      }, camera);
     } finally {
       previewRoot.visible = false;
       renderer.toneMapping = previousToneMapping;
     }
-    await compilation;
+    await Promise.all([compilation!, coveragePreparation]);
     await game.finishPrograms(controller.signal);
     if (closed) return;
     ready = true;

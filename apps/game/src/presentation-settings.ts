@@ -1,4 +1,5 @@
 import * as T from "three";
+import { detachNativeTexture, shareNativeTexture } from "./native-texture-sharing";
 import { displayDefaults, readDisplaySettings } from "./display-settings";
 import { graphicsDefaults, readGraphicsSettings } from "./graphics-settings";
 import { viewmodelDefaults, readViewmodelSettings } from "./viewmodel-settings";
@@ -57,9 +58,10 @@ export function applyCrosshair(settings: PresentationSettings) {
 }
 
 type TextureSource = { image: T.Texture["image"]; mipmaps: T.Texture["mipmaps"] };
-const textureSources = new WeakMap<T.Texture["source"], TextureSource>();
+const textureSources = new WeakMap<T.Texture, TextureSource>();
+const originalSources = new WeakMap<T.Texture["source"], TextureSource>();
 const textureLevels = new WeakMap<T.Texture, string>();
-const sourceLevels = new WeakMap<T.Texture["source"], string>();
+const sourceLevels = new WeakMap<T.Texture, string>();
 const surfaceTextures = new WeakMap<T.Material, readonly T.Texture[]>();
 /** Shader-owned surface maps follow texture settings; lighting data stays fixed. */
 export function registerSurfaceTextures(material: T.Material, textures: readonly T.Texture[]) {
@@ -90,11 +92,13 @@ export function applyTextureQuality(
         ]) {
           if (!texture || seen.has(texture) || textureLevels.get(texture) === signature) continue;
           seen.add(texture);
-          let source = textureSources.get(texture.source);
+          let source = textureSources.get(texture) ?? originalSources.get(texture.source);
           if (!source) {
             source = { image: texture.image, mipmaps: texture.mipmaps };
-            textureSources.set(texture.source, source);
+            originalSources.set(texture.source, source);
           }
+          textureSources.set(texture, source);
+          detachNativeTexture(texture);
           const previousImage = texture.image as {
             width?: number;
             height?: number;
@@ -102,7 +106,7 @@ export function applyTextureQuality(
           };
           const previousMipCount = texture.mipmaps.length;
           const dataImage = source.image as T.DataTexture["image"];
-          const sourceChanged = sourceLevels.get(texture.source) !== quality;
+          const sourceChanged = sourceLevels.get(texture) !== quality;
           const skip = quality === "high" ? 0 : quality === "medium" ? 1 : 2;
           if (
             (texture instanceof T.CompressedTexture || texture instanceof T.DataTexture) &&
@@ -185,9 +189,11 @@ export function applyTextureQuality(
             previousMipCount !== texture.mipmaps.length
           )
             texture.dispose();
+          shareNativeTexture(texture);
+          originalSources.set(texture.source, source);
           texture.needsUpdate = true;
           textureLevels.set(texture, signature);
-          sourceLevels.set(texture.source, quality);
+          sourceLevels.set(texture, quality);
         }
       }
     });

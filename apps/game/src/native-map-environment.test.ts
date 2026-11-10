@@ -293,3 +293,65 @@ test("native branched layers retain gradients captured before divergent weight e
   texture.dispose();
   lookup.dispose();
 });
+
+test("ENV instance admission stays bounded to audited Cache debris UV contracts", () => {
+  const probe = (change: (s: SourceEnvironmentMaterial) => void) => {
+    const native = source();
+    native.shader = "csgo_environment.vfx";
+    native.nativeResource = "materials/de_cache/debris/ch2_debris_001_detail_a.vmat";
+    native.nativeTextureDimensions = { g_tColor1: [1024, 1024], g_tHeight1: [1024, 1024] };
+    native.IntParams = { F_MATERIAL_REFERENCE: 1, g_nUVSet1: 1 };
+    native.FloatParams = {};
+    native.VectorParams = {};
+    change(native);
+    const geometry = new T.PlaneGeometry(2, 2);
+    geometry.computeTangents();
+    geometry.setAttribute("uv2", geometry.getAttribute("uv").clone());
+    const material = new T.MeshStandardMaterial();
+    material.name = "debris";
+    const texture = new T.DataTexture();
+    const textures = new Map(Object.values(native.textures).map((name) => [name, texture]));
+    applyNativeMapEnvironment(new T.Mesh(geometry, material), {
+      materials: { debris: native },
+      textures,
+      lookup: texture,
+      normalFrame: texture,
+    });
+    const admitted = material.userData.nativeEnvironmentInstanceSafe;
+    geometry.dispose();
+    material.dispose();
+    texture.dispose();
+    return admitted;
+  };
+  expect(probe(() => {})).toBe(true);
+  expect(
+    probe((s) => {
+      s.nativeResource = "materials/de_cache/debris/ch2_debris_001_detail_b.vmat_c";
+    }),
+  ).toBe(true);
+  expect(
+    probe((s) => {
+      s.nativeResource = "materials/de_cache/debris/ch2_debris_001.vmat";
+    }),
+  ).toBe(false);
+  expect(
+    probe((s) => {
+      s.IntParams.g_nUVSet1 = 2;
+    }),
+  ).toBe(false);
+  expect(
+    probe((s) => {
+      s.IntParams.g_nScaleTexCoordUByModelScaleAxis = 1;
+    }),
+  ).toBe(false);
+  expect(
+    probe((s) => {
+      s.VectorParams.g_vTexCoordScale1 = [2, 1];
+    }),
+  ).toBe(false);
+  expect(
+    probe((s) => {
+      s.VectorParams.g_vTexCoordOffset1 = [0, 0.5];
+    }),
+  ).toBe(false);
+});

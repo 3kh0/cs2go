@@ -72,6 +72,12 @@ export class NativeMapCache<Id, World extends { dispose(): void }> {
     };
   }
 
+  /** Loading pauses all map/home rendering. Keep CPU cache entries (including
+   * the permanent home map), but release inactive GPU texture residency. */
+  releaseGpuTextures(release: (world: World) => void) {
+    for (const [id, world] of this.worlds) if (!this.leases.has(id)) release(world);
+  }
+
   prune(protectedWorlds: readonly (World | undefined)[], incoming = 0) {
     let count = this.worlds.size - Number(this.worlds.has(this.permanent));
     for (const [id, world] of this.worlds) {

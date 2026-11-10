@@ -7,6 +7,9 @@ import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import {
   partitionNativeInstanceReflections,
   assertNativeInstanceReflectionCoverage,
+  createNativeInstanceReflectionCandidates,
+  assertNativeInstanceReflectionCandidates,
+  nativeInstanceReflectionAttributes,
 } from "./native-instance-reflections";
 import { partitionNativeReflections } from "./native-reflection-partition";
 import { applyNativeMapReflections } from "./native-map-reflections";
@@ -394,6 +397,122 @@ test("runtime binding accepts only complete foliage instance coverage and binds 
   expect(shader.uniforms.sourceEnvironmentCount.value).toBe(0);
   expect(shader.fragmentShader).toContain("#undef USE_ENVMAP");
   (mesh.material as T.Material).dispose();
+  mesh.dispose();
+  geometry.dispose();
+  material.dispose();
+});
+
+test("native BYTE candidates retain authored leaf order and exact field weights across the full65 main/own-sky frames", async () => {
+  const geometry = (await leaf()).clone(),
+    material = new T.MeshStandardMaterial(),
+    mesh = new T.InstancedMesh(geometry, material, 66),
+    all = native.volumes.map((_, i) => i);
+  native.volumes.forEach((volume, i) =>
+    mesh.setMatrixAt(
+      i,
+      new T.Matrix4().compose(
+        boxCenter(volume),
+        new T.Quaternion().setFromEuler(new T.Euler(0.1, i * 0.3, -0.1)),
+        new T.Vector3().setScalar(0.15),
+      ),
+    ),
+  );
+  mesh.setMatrixAt(65, new T.Matrix4().makeTranslation(100000, 100000, 100000));
+  const before = new Uint8Array(mesh.instanceMatrix.array.buffer).slice(),
+    indexBefore = Array.from(geometry.index!.array),
+    originalAttributes = { ...geometry.attributes };
+  for (const sky of [false, true]) {
+    const world = sky
+      ? new T.Matrix4().compose(
+          new T.Vector3(21, -9, 13),
+          new T.Quaternion().setFromEuler(new T.Euler(0.2, 0.5, -0.3)),
+          new T.Vector3().setScalar(16),
+        )
+      : new T.Matrix4();
+    mesh.matrixAutoUpdate = false;
+    mesh.matrix.copy(world);
+    mesh.matrixWorldNeedsUpdate = true;
+    const options = { worldToNative: sky ? world.clone().invert() : undefined, worldPadding: 0 },
+      table = createNativeInstanceReflectionCandidates(mesh, native, options);
+    expect(table.bytes).toBe(66 * 8);
+    expect(table.maximumCandidates).toBeLessThanOrEqual(8);
+    nativeInstanceReflectionAttributes.forEach((name, i) =>
+      geometry.setAttribute(name, table.attributes[i]),
+    );
+    expect(() => assertNativeInstanceReflectionCandidates(mesh, native, options)).not.toThrow();
+    for (let instance = 0; instance < mesh.count; instance++) {
+      const ids = Array.from({ length: 8 }, (_, slot) =>
+        table.attributes[slot < 4 ? 0 : 1].getComponent(instance, slot % 4),
+      ).filter((id) => id !== 255);
+      expect(ids).toEqual([...ids].sort((a, b) => a - b));
+      const transform = (options.worldToNative ?? new T.Matrix4())
+        .clone()
+        .multiply(world)
+        .multiply(new T.Matrix4().fromArray(mesh.instanceMatrix.array, instance * 16));
+      for (const id of geometry.index!.array) {
+        const point = new T.Vector3()
+          .fromBufferAttribute(geometry.getAttribute("position"), id)
+          .applyMatrix4(transform);
+        expect(field(point, ids, native)).toEqual(field(point, all, native));
+      }
+    }
+    expect(Array.from(table.attributes[0].array.slice(65 * 4))).toEqual([255, 255, 255, 255]);
+    expect(Array.from(table.attributes[1].array.slice(65 * 4))).toEqual([255, 255, 255, 255]);
+  }
+  expect(new Uint8Array(mesh.instanceMatrix.array.buffer)).toEqual(before);
+  expect(Array.from(geometry.index!.array)).toEqual(indexBefore);
+  for (const [name, attribute] of Object.entries(originalAttributes))
+    expect(geometry.getAttribute(name)).toBe(attribute);
+  mesh.dispose();
+  geometry.dispose();
+  material.dispose();
+});
+
+test("BYTE instance reflection bindings reject lost, reordered, normalized or over-capacity coverage", () => {
+  const geometry = new T.PlaneGeometry(0.01, 0.01),
+    material = new T.MeshStandardMaterial(),
+    mesh = new T.InstancedMesh(geometry, material, 2),
+    data = synthetic(3),
+    options = { worldPadding: 0.02 };
+  mesh.setMatrixAt(0, new T.Matrix4().makeTranslation(0.5, 0, 0));
+  mesh.setMatrixAt(1, new T.Matrix4().makeTranslation(4.5, 0, 0));
+  const table = createNativeInstanceReflectionCandidates(mesh, data, options);
+  nativeInstanceReflectionAttributes.forEach((name, i) =>
+    geometry.setAttribute(name, table.attributes[i]),
+  );
+  expect(() => assertNativeInstanceReflectionCandidates(mesh, data, options)).not.toThrow();
+  const first = table.attributes[0].array[0];
+  table.attributes[0].array[0] = 255;
+  expect(() => assertNativeInstanceReflectionCandidates(mesh, data, options)).toThrow(/coverage/);
+  table.attributes[0].array[0] = first;
+  table.attributes[0].array[1] = first;
+  expect(() => assertNativeInstanceReflectionCandidates(mesh, data, options)).toThrow(/coverage/);
+  table.attributes[0].array[1] = 255;
+  table.attributes[0].normalized = true;
+  expect(() => assertNativeInstanceReflectionCandidates(mesh, data, options)).toThrow(/invalid/);
+  table.attributes[0].normalized = false;
+  expect(() => createNativeInstanceReflectionCandidates(mesh, synthetic(9, true), options)).toThrow(
+    /exceed eight/,
+  );
+  expect(() => createNativeInstanceReflectionCandidates(mesh, synthetic(256), options)).toThrow(
+    /BYTE/,
+  );
+  mesh.dispose();
+  geometry.dispose();
+  material.dispose();
+});
+
+test("native instance admission rejects mirrored and singular transforms", () => {
+  const geometry = new T.PlaneGeometry(),
+    material = new T.MeshStandardMaterial(),
+    mesh = new T.InstancedMesh(geometry, material, 1),
+    options = { worldPadding: 0 };
+  for (const scale of [new T.Vector3(-1, 1, 1), new T.Vector3(0, 1, 1)]) {
+    mesh.setMatrixAt(0, new T.Matrix4().makeScale(scale.x, scale.y, scale.z));
+    expect(() => createNativeInstanceReflectionCandidates(mesh, synthetic(1), options)).toThrow(
+      /positive nonsingular/,
+    );
+  }
   mesh.dispose();
   geometry.dispose();
   material.dispose();

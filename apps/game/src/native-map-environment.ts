@@ -172,6 +172,7 @@ export async function loadNativeMapEnvironment(renderer: T.WebGLRenderer, path: 
       bundle.textures.set(`__nativeEnvironmentBank${index}`, texture);
     // Only the native lightmap OR LPV path is used. Reserve atlas (3), one
     // reflection array, sun shadows (2), grade and native BRDF: eight units.
+    const warmTextures = new Set<T.Texture>();
     for (const source of Object.values(bundle.materials)) {
       const features = validateSourceEnvironment(source);
       const names = usesModernEnvironment(source)
@@ -179,13 +180,19 @@ export async function loadNativeMapEnvironment(renderer: T.WebGLRenderer, path: 
         : Object.keys(source.textures).filter(
             (name) => name !== "g_tSharedColorOverlay" || features.overlay,
           );
+      const shader = { uniforms: {} } as T.WebGLProgramParametersWithUniforms;
       const layout = bindEnvironmentTextures(
         source,
         names,
         bundle.textures,
         usesModernEnvironment(source) ? banked.bindings : undefined,
-        { uniforms: {} } as T.WebGLProgramParametersWithUniforms,
+        shader,
       );
+      // Warm the exact shader bindings. Banked source slices remain available
+      // for legacy consumers, but uploading every slice as well as its array
+      // would allocate a second GPU copy of the same immutable native bytes.
+      for (const uniform of Object.values(shader.uniforms))
+        if (uniform.value instanceof T.Texture) warmTextures.add(uniform.value);
       if (layout.samplers + 8 > renderer.capabilities.maxTextures)
         throw new Error(
           `Native environment exceeds renderer sampler budget: ${source.nativeResource} (${layout.samplers}+8)`,
@@ -197,12 +204,14 @@ export async function loadNativeMapEnvironment(renderer: T.WebGLRenderer, path: 
     const normalFrame = new T.DataTexture(new Uint8Array([128, 128, 255, 255]), 1, 1);
     normalFrame.needsUpdate = true;
     bundle.textures.set("__nativeEnvironmentFrame", normalFrame);
+    warmTextures.add(normalFrame);
     const time = { value: 0 };
     return {
       ...bundle,
       lookup,
       banks: banked.bindings,
       bankBytes: banked.bytes,
+      warmTextures: [...warmTextures],
       normalFrame,
       sourceWorldFrame: createEnvironmentWorldFrame(),
       time,
@@ -466,6 +475,29 @@ export function applyEnvironmentShader(
   );
 }
 
+/** Bounded admission from the two audited Cache clutter VMATs, not the entire
+ * ENV family. Their dynamic parameter lists are empty in the pinned sources. */
+function instanceSafeEnvironment(source: SourceEnvironmentMaterial) {
+  return (
+    source.shader === "csgo_environment.vfx" &&
+    [
+      "materials/de_cache/debris/ch2_debris_001_detail_a.vmat",
+      "materials/de_cache/debris/ch2_debris_001_detail_b.vmat",
+    ].includes(source.nativeResource.replace(/_c$/, "")) &&
+    source.IntParams.F_MATERIAL_REFERENCE === 1 &&
+    !Object.entries(source.IntParams).some(
+      ([name, value]) => name.startsWith("F_") && name !== "F_MATERIAL_REFERENCE" && value,
+    ) &&
+    (source.IntParams.g_nUVSet1 ?? 1) === 1 &&
+    !source.IntParams.g_nScaleTexCoordUByModelScaleAxis &&
+    !source.IntParams.g_nScaleTexCoordVByModelScaleAxis &&
+    !source.FloatParams.g_flTexCoordRotation1 &&
+    (source.VectorParams.g_vTexCoordScale1 ?? [1, 1]).slice(0, 2).every((v) => v === 1) &&
+    (source.VectorParams.g_vTexCoordOffset1 ?? [0, 0]).slice(0, 2).every((v) => v === 0) &&
+    !source.weather
+  );
+}
+
 export function applyNativeMapEnvironment(
   root: T.Object3D,
   bundle: Pick<
@@ -535,6 +567,7 @@ export function applyNativeMapEnvironment(
           ),
       );
       const modern = usesModernEnvironment(source);
+      material.userData.nativeEnvironmentInstanceSafe = modern && instanceSafeEnvironment(source);
       if (modern && !geometry.getAttribute("normal"))
         throw new Error(`Native environment normal missing: ${material.name}`);
       if (modern && !geometry.getAttribute("tangent"))

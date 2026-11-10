@@ -1,4 +1,8 @@
-import { assertNativeInstanceReflectionCoverage } from "./native-instance-reflections";
+import { createSourceReflectionField } from "./source-reflection-field";
+import {
+  assertNativeInstanceReflectionCoverage,
+  assertNativeInstanceReflectionCandidates,
+} from "./native-instance-reflections";
 import { copySourceDepth } from "./source-depth";
 import * as T from "three";
 import type { NativeDoorDefinition } from "@cs2go/simulation/doors";
@@ -20,11 +24,12 @@ export function applyNativeMapReflections(
   preservedNames: readonly string[] = [],
   options: {
     worldToNative?: T.Matrix4;
-    /** Only pre-partitioned, palette-resolved foliage instances are admitted.
+    /** Only audited foliage or detail-debris ENV instances are admitted.
      * Matrices remain static after this coverage proof. */
     instances?: ReadonlyMap<
       T.InstancedMesh,
-      { candidates: readonly number[]; worldPadding: number }
+      | { candidates: readonly number[]; worldPadding: number; perInstance?: false }
+      | { perInstance: true; worldPadding: number }
     >;
   } = {},
 ) {
@@ -41,6 +46,7 @@ export function applyNativeMapReflections(
   const preserved = new Set(
     preservedNames.flatMap((name) => [name, T.PropertyBinding.sanitizeNodeName(name)]),
   );
+  let instanceField: ReturnType<typeof createSourceReflectionField> | undefined;
   const variants = new Map<T.MeshStandardMaterial, Map<string, T.MeshStandardMaterial>>();
   const meshes: T.Mesh[] = [];
   root.traverse((object) => {
@@ -78,7 +84,12 @@ export function applyNativeMapReflections(
       break;
     }
     stats.drawsBefore += object.geometry.groups.length || 1;
-    const adapt = (source: T.Material, indices: number[], nativeEmpty = false) => {
+    const adapt = (
+      source: T.Material,
+      indices: number[],
+      nativeEmpty = false,
+      instanceCandidates = false,
+    ) => {
       if (!(source instanceof T.MeshStandardMaterial) || (!indices.length && !nativeEmpty))
         return source;
       if (indices.length > 8)
@@ -89,20 +100,27 @@ export function applyNativeMapReflections(
         | "glass"
         | "lightmapped"
         | undefined;
-      const selection = `${nativeFamily ?? "legacy"}:${indices.join(",")}`;
+      const selection = `${nativeFamily ?? "legacy"}:${instanceCandidates ? "instances" : indices.join(",")}`;
       let materials = variants.get(source);
       if (!materials) variants.set(source, (materials = new Map()));
       let material = materials.get(selection);
       if (material) return material;
-      const binding = createSourceReflectionBinding(data);
-      binding.count.value = indices.length;
-      for (const [slot, index] of indices.entries())
-        Object.assign(binding.uniforms[slot], data.uniforms[index]);
+      const window = instanceCandidates ? undefined : createSourceReflectionBinding(data);
+      const binding = window ?? data;
+      if (window) {
+        window.count.value = indices.length;
+        for (const [slot, index] of indices.entries())
+          Object.assign(window.uniforms[slot], data.uniforms[index]);
+      }
       material = source.clone();
       // MeshStandardMaterial.copy resets custom defines; native callbacks still
       // require their original tangent/normal-frame feature declarations.
       material.defines = { ...source.defines };
       copySourceDepth(source, material);
+      if (instanceCandidates) {
+        instanceField ??= createSourceReflectionField(data);
+        instanceField.attach(material);
+      }
       const previous = source.onBeforeCompile.bind(source);
       const key = source.customProgramCacheKey();
       material.onBeforeCompile = (shader, renderer) => {
@@ -121,8 +139,10 @@ export function applyNativeMapReflections(
           binding,
           Array.from({ length: indices.length }, (_, i) => i),
           {
-            count: binding.count,
+            count: window?.count,
             nativeFamily,
+            instanceCandidates,
+            instanceField: instanceCandidates,
             ...(frame
               ? {
                   worldPosition:
@@ -137,7 +157,7 @@ export function applyNativeMapReflections(
         );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-world-reflections:${data.cubeSize}:${data.arraySplit}:${data.combined}:${!!data.volumes[0]?.worldToLocal}:${binding.uniforms.length}:${!!options.worldToNative}:${nativeFamily ?? "legacy"}`;
+        `${key}:native-world-reflections:${data.cubeSize}:${data.arraySplit}:${data.combined}:${!!data.volumes[0]?.worldToLocal}:${binding.uniforms.length}:${!!options.worldToNative}:${nativeFamily ?? "legacy"}:${instanceCandidates}:ubo13`;
       material.needsUpdate = true;
       materials.set(selection, material);
       return material;
@@ -146,18 +166,31 @@ export function applyNativeMapReflections(
       const binding = options.instances?.get(object);
       if (
         !binding ||
-        sourceMaterials.some((material) => material.userData.nativeFoliageInstanceSafe !== true)
+        sourceMaterials.some(
+          (material) =>
+            material.userData.nativeFoliageInstanceSafe !== true &&
+            material.userData.nativeEnvironmentInstanceSafe !== true,
+        )
       )
         throw new Error("This map's instanced material reflections have not been verified.", {
           cause: { objectName: object.name },
         });
-      assertNativeInstanceReflectionCoverage(object, data, binding.candidates, {
+      const coverage = {
         worldToNative: options.worldToNative,
         worldPadding: binding.worldPadding,
-      });
-      object.material = Array.isArray(object.material)
-        ? sourceMaterials.map((source) => adapt(source, [...binding.candidates], true))
-        : adapt(sourceMaterials[0], [...binding.candidates], true);
+      };
+      if (binding.perInstance) {
+        assertNativeInstanceReflectionCandidates(object, data, coverage);
+        const fullField = data.volumes.length > 0;
+        object.material = Array.isArray(object.material)
+          ? sourceMaterials.map((source) => adapt(source, [], true, fullField))
+          : adapt(sourceMaterials[0], [], true, fullField);
+      } else {
+        assertNativeInstanceReflectionCoverage(object, data, binding.candidates, coverage);
+        object.material = Array.isArray(object.material)
+          ? sourceMaterials.map((source) => adapt(source, [...binding.candidates], true))
+          : adapt(sourceMaterials[0], [...binding.candidates], true);
+      }
       stats.drawsAfter += object.geometry.groups.length || 1;
       continue;
     }

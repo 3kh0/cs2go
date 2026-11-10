@@ -37,6 +37,7 @@ import { registerSourceSkyPreparation } from "./source-sky";
 import { MapResources } from "./map-resources";
 import { createNativeSkyEffect, type NativeSkyEffectParameters } from "./native-sky-clouds";
 import { loadNativeCableView } from "./native-map-cables";
+import { loadNativeClutterView } from "./native-clutter-view";
 import { loadNativeFoliageView } from "./native-foliage-view";
 import { bindNativeFoliageVisibility } from "./native-foliage-visibility";
 import { assertNativeEnvironmentBudget } from "./native-environment-budget";
@@ -60,6 +61,7 @@ export type NativeSkyManifest = {
   lightmappedMaterials?: string;
   glassMaterials?: string;
   foliageMaterials?: string;
+  clutterWorld?: string;
   cablesWorld?: string;
   staticOverlays?: { name: string; staticOverlay?: NativeStaticOverlay }[];
   selfIllumination?: Record<string, SourceSelfIllumination>;
@@ -223,6 +225,16 @@ async function buildNativeMapSky(
       visibilityLinks: foliage.source.visibilityLinks,
     });
   }
+  const nativeClutter = manifest.clutterWorld
+    ? await loadNativeClutterView(
+        renderer,
+        manifest.clutterWorld,
+        resources,
+        reflections,
+        frame.worldFromSkyBrowser,
+      )
+    : undefined;
+  if (nativeClutter) asset.scene.add(nativeClutter.root);
   const nativeCables = cableAsset ? await loadNativeCableView(cableAsset.scene) : undefined;
   if (nativeCables) {
     resources.external(nativeCables.lookup);
@@ -272,6 +284,7 @@ async function buildNativeMapSky(
   if (specialComplex) complexPasses.push(applyNativeMapComplex(asset.scene, specialComplex));
   const nativeCoverage = combineNativeCoverage([
     foliage,
+    nativeClutter,
     complexPasses.length ? ownNativeCoverage(renderer, resources, complexPasses) : undefined,
   ]);
   if (legacy) applyNativeMapLegacy(asset.scene, legacy);
@@ -318,6 +331,7 @@ async function buildNativeMapSky(
   if (reflections)
     applyNativeMapReflections(asset.scene, reflections, [], [], {
       worldToNative: frame.skyBrowserFromWorld,
+      instances: nativeClutter?.instances,
     });
   resources.capture(asset.scene);
   const bounds = new T.Box3();
@@ -551,7 +565,7 @@ async function buildNativeMapSky(
       ...textures.values(),
       ...(probes?.textures ?? []),
       ...(reflections?.textures ?? []),
-      ...(environment?.textures.values() ?? []),
+      ...(environment?.warmTextures ?? []),
       ...(complex?.textures.values() ?? []),
       ...(specialComplex?.textures.values() ?? []),
       ...(legacy?.textures.values() ?? []),
@@ -570,6 +584,7 @@ async function buildNativeMapSky(
     manifest,
     nativeParallaxSamplerBudget,
     skyCamera,
+    releaseGpuTextures: () => resources.releaseGpuTextures(renderer),
     dispose() {
       if (disposed) return;
       disposed = true;

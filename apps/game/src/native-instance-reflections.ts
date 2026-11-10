@@ -53,6 +53,8 @@ function check(mesh: T.InstancedMesh, options: NativeInstanceReflectionOptions) 
       e[15] !== 1
     )
       throw new Error("Native instance reflection placement must be finite and affine");
+    if (!(matrix.determinant() > 0))
+      throw new Error("Native instancing requires positive nonsingular placement");
   }
   if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox();
 }
@@ -64,6 +66,8 @@ function frame(mesh: T.InstancedMesh, instance: number, options: NativeInstanceR
   const e = local.elements;
   if (e.some((v) => !Number.isFinite(v)) || e[3] !== 0 || e[7] !== 0 || e[11] !== 0 || e[15] !== 1)
     throw new Error("Native instance reflection matrix is not finite affine data");
+  if (!(local.determinant() > 0))
+    throw new Error("Native instancing requires positive nonsingular instance transforms");
   const own = options.worldToNative ?? new T.Matrix4(),
     box = mesh.geometry.boundingBox!;
   let magnitude = [0, 1, 2].map((i) =>
@@ -278,5 +282,91 @@ export function assertNativeInstanceReflectionCoverage(
               cause: { objectName: mesh.name, instance, missingVolume: id },
             });
       }
+  }
+}
+
+export const nativeInstanceReflectionAttributes = [
+  "sourceReflectionCandidates0",
+  "sourceReflectionCandidates1",
+] as const;
+const absentInstanceReflection = 255;
+
+/** Complete conservative candidates in authored instance order. The two BYTE4
+ * attributes consume no sampler and retain exact small integer IDs. A fixed
+ * eight-slot shader skips 255; no nearest-probe truncation or instance sorting. */
+export function createNativeInstanceReflectionCandidates(
+  mesh: T.InstancedMesh,
+  data: Volumes,
+  options: NativeInstanceReflectionOptions,
+) {
+  mesh.updateWorldMatrix(true, false, true);
+  check(mesh, options);
+  if (data.volumes.length > absentInstanceReflection)
+    throw new Error("Native instance reflection field exceeds BYTE candidate capacity");
+  const boxes = bounds(data),
+    first = new Uint8Array(mesh.count * 4).fill(absentInstanceReflection),
+    second = new Uint8Array(mesh.count * 4).fill(absentInstanceReflection);
+  let maximumCandidates = 0;
+  for (let instance = 0; instance < mesh.count; instance++) {
+    const placement = frame(mesh, instance, options),
+      ids = candidates(placement.box, boxes, placement.padding);
+    if (ids.length > capacity)
+      throw new Error("Native instance reflection candidates exceed eight; partition required", {
+        cause: { objectName: mesh.name, instance, candidates: ids.length },
+      });
+    maximumCandidates = Math.max(maximumCandidates, ids.length);
+    ids.forEach((id, slot) => {
+      (slot < 4 ? first : second)[instance * 4 + (slot % 4)] = id;
+    });
+  }
+  return {
+    attributes: [
+      new T.InstancedBufferAttribute(first, 4, false),
+      new T.InstancedBufferAttribute(second, 4, false),
+    ] as const,
+    maximumCandidates,
+    bytes: first.byteLength + second.byteLength,
+  };
+}
+
+/** Check the actual attributes consumed by the shader, including sentinel,
+ * order, divisor and complete conservative geometry/deformation coverage. */
+export function assertNativeInstanceReflectionCandidates(
+  mesh: T.InstancedMesh,
+  data: Volumes,
+  options: NativeInstanceReflectionOptions,
+) {
+  mesh.updateWorldMatrix(true, false, true);
+  check(mesh, options);
+  if (data.volumes.length > absentInstanceReflection)
+    throw new Error("Native instance reflection field exceeds BYTE candidate capacity");
+  const attributes = nativeInstanceReflectionAttributes.map((name) =>
+    mesh.geometry.getAttribute(name),
+  );
+  if (
+    attributes.some(
+      (attribute) =>
+        !(attribute instanceof T.InstancedBufferAttribute) ||
+        !(attribute.array instanceof Uint8Array) ||
+        attribute.itemSize !== 4 ||
+        attribute.normalized ||
+        attribute.meshPerAttribute !== 1 ||
+        attribute.count !== mesh.count,
+    )
+  )
+    throw new Error("Native instance reflection BYTE4 attributes are invalid");
+  const boxes = bounds(data);
+  for (let instance = 0; instance < mesh.count; instance++) {
+    const placement = frame(mesh, instance, options),
+      expected = candidates(placement.box, boxes, placement.padding);
+    if (expected.length > capacity)
+      throw new Error("Native instance reflection candidates exceed eight; partition required");
+    for (let slot = 0; slot < capacity; slot++) {
+      const actual = attributes[slot < 4 ? 0 : 1].getComponent(instance, slot % 4);
+      if (actual !== (expected[slot] ?? absentInstanceReflection))
+        throw new Error("Native instance reflection candidate bytes omit or reorder coverage", {
+          cause: { objectName: mesh.name, instance, slot, actual, expected: expected[slot] },
+        });
+    }
   }
 }

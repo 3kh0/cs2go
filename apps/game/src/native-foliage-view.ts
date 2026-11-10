@@ -16,6 +16,7 @@ export async function loadNativeFoliageView(
   for (const texture of bundle.textures.values()) resources.texture(texture);
   resources.texture(bundle.noise);
   resources.external(bundle.lookup);
+  if (!bundle.source.model) throw new Error("Native standalone foliage geometry unavailable");
   const asset = await loadGzipped(bundle.source.model, 1);
   resources.capture(asset.scene);
   resources.onDispose(() => resources.capture(asset.scene));

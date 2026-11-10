@@ -60,6 +60,7 @@ import { loadNativeMapLegacy, applyNativeMapLegacy } from "./native-map-legacy";
 import { loadNativeMapGlass, applyNativeMapGlass } from "./native-map-glass";
 import { installSourceShadowDepth } from "./source-depth";
 import { loadNativeCableView } from "./native-map-cables";
+import { loadNativeClutterView } from "./native-clutter-view";
 import { loadNativeFoliageView } from "./native-foliage-view";
 import { bindNativeFoliageVisibility } from "./native-foliage-visibility";
 import { assertNativeEnvironmentBudget } from "./native-environment-budget";
@@ -67,6 +68,7 @@ import { combineNativeCoverage, ownNativeCoverage } from "./native-coverage";
 import { loadNativeComplexPaint } from "./native-complex-paint";
 import { loadNativeMapLocalLights, applyNativeMapLocalLights } from "./native-map-local-lights";
 export type NativeMapConfig = {
+  model?: string;
   sun: { pitch: number; yaw: number; color: number; intensity: number };
   fog?: { color: number; near: number; far: number };
   backgroundIntensity?: number;
@@ -90,6 +92,7 @@ export type NativeMapConfig = {
   lightmappedMaterials?: string;
   glassMaterials?: string;
   foliageMaterials?: string;
+  clutterWorld?: string;
   cablesWorld?: string;
   nativeFog?: string;
   localLights?: string;
@@ -189,7 +192,7 @@ async function buildNativeMap(
     cableAsset,
     lightmappedMaterials,
   ] = await Promise.all([
-    ownModel(loadGzipped(`/models/maps/${id}.glb.gz`, 1)),
+    ownModel(loadGzipped(config.model ?? `/models/maps/${id}.glb.gz`, 1)),
     assetFetch(`/models/maps/${id}-nav.json`),
     loadGzipped(`/models/maps/${id}-physics.glb.gz`, 1).then((asset) => {
       physicsResources.capture(asset.scene);
@@ -380,6 +383,10 @@ async function buildNativeMap(
     asset.scene.add(complexPaint.root);
   }
   if (nativeFoliage) asset.scene.add(nativeFoliage.root);
+  const nativeClutter = config.clutterWorld
+    ? await loadNativeClutterView(renderer, config.clutterWorld, resources, nativeReflections)
+    : undefined;
+  if (nativeClutter) asset.scene.add(nativeClutter.root);
   const foliageVisibility = nativeFoliage
     ? bindNativeFoliageVisibility(
         originalMainObjects,
@@ -491,6 +498,7 @@ async function buildNativeMap(
     }
   });
   nativeFoliage?.applyShadowPolicy();
+  nativeClutter?.applyShadowPolicy();
   if (nativeMaterials) applyNativeStaticOverlays(asset.scene, nativeMaterials.materials);
   bindNativeMaterialAliases(
     environmentMaterials?.materials,
@@ -505,6 +513,7 @@ async function buildNativeMap(
     complexPasses.push(applyNativeMapComplex(asset.scene, specialComplexMaterials));
   const nativeCoverage = combineNativeCoverage([
     nativeFoliage,
+    nativeClutter,
     complexPasses.length ? ownNativeCoverage(renderer, resources, complexPasses) : undefined,
   ]);
   if (legacyMaterials) applyNativeMapLegacy(asset.scene, legacyMaterials);
@@ -547,13 +556,19 @@ async function buildNativeMap(
   if (nativeLighting) applyNativeMapLighting(asset.scene, nativeLighting);
   if (nativeProbes) applyNativeMapProbes(asset.scene, nativeProbes);
   if (nativeReflections?.volumes.some((volume) => volume.worldToLocal))
-    applyNativeMapReflections(asset.scene, nativeReflections, doorData.doors, [
-      ...breakableData.breakables.flatMap((part) => [
-        ...part.renderNames,
-        ...(part.pieces ?? []).flatMap((piece) => piece.renderNames),
-      ]),
-      ...(breakableData.enabledRemainders ?? []).flatMap((part) => part.renderNames),
-    ]);
+    applyNativeMapReflections(
+      asset.scene,
+      nativeReflections,
+      doorData.doors,
+      [
+        ...breakableData.breakables.flatMap((part) => [
+          ...part.renderNames,
+          ...(part.pieces ?? []).flatMap((piece) => piece.renderNames),
+        ]),
+        ...(breakableData.enabledRemainders ?? []).flatMap((part) => part.renderNames),
+      ],
+      { instances: nativeClutter?.instances },
+    );
   if (nativeFog) applyNativeMapFog(asset.scene, nativeFog);
   if (grade) gradeNativeMapColors(asset.scene);
   const localLightAdmission = nativeLocalLights
@@ -698,6 +713,10 @@ async function buildNativeMap(
     breakableView,
     sun,
     bombDamage,
+    releaseGpuTextures: () => {
+      resources.releaseGpuTextures(renderer);
+      nativeSky?.releaseGpuTextures();
+    },
     dispose: () => resources.dispose(),
   };
 }

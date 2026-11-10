@@ -304,3 +304,45 @@ test("rotated reflection volumes select their authored world extent and retain i
   expect(() => validateSourceReflections(invalid)).toThrow(/Invalid native reflection/);
   data.textures.forEach((texture) => texture.dispose());
 });
+
+test("instance IDs keep the complete shared field with a fixed eight-slot shader and no extra sampler", async () => {
+  const manifest = reflectionBundle([1]);
+  serveReflections(manifest);
+  const base = await loadSourceReflections(reflectionRenderer(12), false, {
+    directory: "/test/",
+    manifest: "source.json",
+  });
+  const data = {
+    ...base!,
+    volumes: Array.from({ length: 65 }, () => base!.volumes[0]),
+    uniforms: Array.from({ length: 65 }, () => base!.uniforms[0]),
+  };
+  const shader = {
+    uniforms: {},
+    vertexShader: "void main(){vec3 transformed=position;}",
+    fragmentShader: "#include <lights_fragment_end>",
+  } as T.WebGLProgramParametersWithUniforms;
+  applySourceReflections(shader, data, [], { instanceCandidates: true });
+  expect(shader.fragmentShader).toContain("sourceEnvironments[65]");
+  expect(shader.fragmentShader).toContain("for(int i=0;i<8;i++)");
+  expect(shader.fragmentShader).not.toContain("for(int i=0;i<65;i++)");
+  expect(shader.fragmentShader).toContain("if(candidate==255)continue");
+  expect(shader.fragmentShader).toContain("candidate>=65");
+  expect(shader.fragmentShader).toContain("flat varying vec4 vSourceReflectionCandidates0");
+  expect(shader.vertexShader).toContain("flat varying vec4 vSourceReflectionCandidates0");
+  expect(shader.vertexShader).toContain(
+    "void main(){\n vSourceReflectionCandidates0=sourceReflectionCandidates0;",
+  );
+  expect(shader.uniforms.sourceEnvironments.value).toBe(data.uniforms);
+  expect(shader.uniforms.sourceEnvironmentCandidates).toBeUndefined();
+  expect(shader.uniforms.sourceEnvironmentCount).toBeUndefined();
+  expect(
+    Object.values(shader.uniforms).filter((uniform) => uniform.value instanceof T.Texture),
+  ).toHaveLength(2);
+  expect(() =>
+    applySourceReflections(shader, { ...data, uniforms: data.uniforms.slice(0, 8) }, [], {
+      instanceCandidates: true,
+    }),
+  ).toThrow(/complete/);
+  base!.textures.forEach((texture) => texture.dispose());
+});

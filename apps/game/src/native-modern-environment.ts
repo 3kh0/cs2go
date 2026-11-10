@@ -450,6 +450,19 @@ export function applyModernEnvironmentShader(
     const layer = i + 1;
     return `vEnvironmentUv${layer}=${layer <= layers ? uvCode(source, layer, false, parameters) : "vEnvironmentUv1"};vEnvironmentDetailUv${layer}=${layer <= layers ? uvCode(source, layer, true, parameters) : "vEnvironmentUv1"};`;
   }).join("\n");
+  // Position/world-position and tangent chunks already compose instanceMatrix.
+  // ENV also retains an unnormalized centroid normal, so both normal paths
+  // need the inverse-transpose instance frame. Ordinary meshes stay unchanged.
+  shader.vertexShader = shader.vertexShader.replace(
+    "#include <defaultnormal_vertex>",
+    `#include <defaultnormal_vertex>
+#ifdef USE_INSTANCING
+ transformedNormal=normalMatrix*transpose(inverse(mat3(instanceMatrix)))*objectNormal;
+ #ifdef FLIP_SIDED
+ transformedNormal=-transformedNormal;
+ #endif
+#endif`,
+  );
   shader.vertexShader = shader.vertexShader.replace(
     "#include <begin_vertex>",
     `#include <begin_vertex>
@@ -459,6 +472,9 @@ export function applyModernEnvironmentShader(
  vEnvironmentPaint=vec4(${parameters.value("paintTint", tint.toArray())}*mix(vec3(1.0),sourceEnvironmentPaint.rgb,sourceEnvironmentPaint.a),1.0);
  vEnvironmentHandedness=tangent.w;
  vEnvironmentCentroidNormal=normalMatrix*objectNormal;
+ #ifdef USE_INSTANCING
+ vEnvironmentCentroidNormal=normalMatrix*transpose(inverse(mat3(instanceMatrix)))*objectNormal;
+ #endif
  `,
   );
   let lastUv = "vEnvironmentUv1";

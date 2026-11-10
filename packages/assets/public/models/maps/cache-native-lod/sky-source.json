@@ -1,0 +1,1896 @@
+{
+  "model": "/models/maps/cache-skybox/world.glb.gz",
+  "lighting": {
+    "size": 2048,
+    "nativeIrradiance": "/models/maps/cache-skybox/irradiance.bin.gz",
+    "nativeDirectional": "/models/maps/cache-skybox/directional.bin.gz",
+    "irradiance": "/models/maps/cache-skybox/irradiance.exr",
+    "directional": "/models/maps/cache-skybox/directional.png",
+    "shadows": "/models/maps/cache-skybox/shadows.png"
+  },
+  "effects": {
+    "fog_card_002": {
+      "Name": "materials/effects/fog_card_002.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_DEPTH_FEATHER": 1,
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 2,
+        "g_flFadeDistance": 5000,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFeatherDistance": 2000,
+        "g_flFeatherFalloff": 1,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0.003,
+          0.005,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          0.5,
+          0.25,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          0.5,
+          1,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureMask2": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureTranslucency": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/fog_card_002_vmat_g_tcolor_e42befc7.vtex",
+        "g_tMask1": "materials/effects/smoke/dust_004_mask_psd_bbe62bc8.vtex",
+        "g_tMask2": "materials/effects/fog_card_002_vmat_g_tmask2_2b2ebb3f.vtex",
+        "g_tMask3": "materials/effects/smoke/cloud_002_mask_psd_87d62c5f.vtex"
+      }
+    }
+  },
+  "textures": {
+    "materials/effects/fog_card_002_vmat_g_tcolor_e42befc7.vtex": {
+      "path": "/models/maps/cache-skybox/62a6c0f1be3b7b09.png",
+      "srgb": true,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/smoke/dust_004_mask_psd_bbe62bc8.vtex": {
+      "path": "/models/maps/cache-skybox/75f7f807dd02977d.png",
+      "srgb": false,
+      "sourceSha256": "16b715c2fe35fedd182644c7508e2f37196dbffeb1a8111387696f9ecdc25c6c"
+    },
+    "materials/effects/fog_card_002_vmat_g_tmask2_2b2ebb3f.vtex": {
+      "path": "/models/maps/cache-skybox/d7595f7c3fc2ea78.png",
+      "srgb": false,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/smoke/cloud_002_mask_psd_87d62c5f.vtex": {
+      "path": "/models/maps/cache-skybox/f943435fd1f38631.png",
+      "srgb": false,
+      "sourceSha256": "0e19d6af2f7320fec0e277f1703d1fe169127566e7ccecebfc6b6432b7a30a2b"
+    }
+  },
+  "nativeTransform": {
+    "skyCamera": {
+      "scale": 1,
+      "classname": "sky_camera",
+      "compile_source_id": 1,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "100"
+    },
+    "skyboxReference": {
+      "worldGroupID": "skyboxWorldGroup0",
+      "fixupNames": false,
+      "targetMapName": "maps/prefabs/de_cache/de_cache_sky.vmap",
+      "targetname": "",
+      "vscripts": "",
+      "classname": "skybox_reference",
+      "compile_source_id": 9,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "106210:80:33837"
+    },
+    "noCenteringOrNormalization": true,
+    "browserWorldFromSkyBrowser": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "environmentMaterials": "/models/maps/cache-skybox/environment/source.json",
+  "parallaxMaterials": "/models/maps/cache-skybox/parallax/source.json",
+  "probes": "/models/maps/cache-skybox/gpu-probes/",
+  "sun": {
+    "pitch": 44.999966,
+    "yaw": 115.999886,
+    "color": 16774368,
+    "intensity": 5.969026041820607
+  },
+  "ambient": {
+    "skyColor": 14283007,
+    "groundColor": 5526612,
+    "intensity": 1.0
+  },
+  "panorama": {
+    "angles": [
+      0.0,
+      115.999954,
+      0.0
+    ],
+    "brightness": 4.0,
+    "tint": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "counts": {
+    "unreferencedVertexSlotsDiscarded": 6423835,
+    "probeOrUnlit": 510,
+    "lightmapped": 532,
+    "effects": 1
+  },
+  "selfIllumination": {
+    "truck_large_01_glow_off": {
+      "brightness": 1,
+      "scale": 0,
+      "tint": [
+        1,
+        1,
+        1
+      ],
+      "albedoFactor": 1
+    }
+  },
+  "staticOverlays": [
+    {
+      "name": "ch2_backdrop_concrete_overlay",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0,
+          "g_fTextureColorBrightness": 1,
+          "g_fTextureColorContrast": 1,
+          "g_fTextureColorSaturation": 1
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTextureColorCorrectionTint": [
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "ch2_backdrop_concrete_overlay__alpha_0.823529",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0,
+          "g_fTextureColorBrightness": 1,
+          "g_fTextureColorContrast": 1,
+          "g_fTextureColorSaturation": 1
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTextureColorCorrectionTint": [
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "source": {
+    "worldSha256": "cac0e6d5125831a5998fb5e929bcd8b64b1525ab7168651365fea3bc8150250d",
+    "packedWorldSha256": "1d3aa5ae3f9fa2d584aba671e9a63cabc8075335249400aa40773f8469545f4d",
+    "inputGlbSha256": "01daaa1ab9b3083d068929fab453cf8c5fd8cd861709a0fb628255eb606b33e5",
+    "packedGeometryCacheReused": false,
+    "worldInfoSha256": "a974ebc5a3263b9aad8d8b1c51c01e5fe02f81ea84410273fd5d606f046f7c1e",
+    "uvJoinSha256": "c91081beef2e63142d7a7013f14f8235fbd423cd1a491b78edf380cdc8f47875",
+    "cameraSha256": "5f650551ee2b2b406894231f38e0afd87436b0584d69e3040514c57518f781cd",
+    "entitySha256": "d8795715858bdf95559ab39bb8186246511ab811d0a4720de9a17c29cd01c859",
+    "atlases": {
+      "irradiance": {
+        "sha256": "d25b51878f575c8e966f29c5263abf3fe40e39d1207a2548b15be6b139199ffa",
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "depth": 1,
+          "format": 19,
+          "mips": 1
+        }
+      },
+      "directional_irradiance": {
+        "sha256": "673188ba302c9cc94a1cc2ce2db3885439c60dd88876a3fcd3b39660ae4a312f",
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "depth": 1,
+          "format": 1,
+          "mips": 1
+        }
+      },
+      "direct_light_shadows": {
+        "sha256": "ada87fdfaf04a04ea336a76c70f37063b7314a4a0b6256496b075e3a579306ad",
+        "dimensions": {
+          "width": 2048,
+          "height": 2048,
+          "depth": 1,
+          "format": 27,
+          "mips": 1
+        }
+      }
+    },
+    "coordinateConversion": "Standalone S2V (y,z,x) metres -> browser basis once; native sky_camera offset/scale then skybox_reference rotation/translation. Never recenter, normalize, clip to NAV or scale UV charts again.",
+    "lightmapUvScaleAlreadyBaked": [
+      1.06665,
+      1.06665
+    ],
+    "reference": "VRF20.1 WorldLoader.LoadSkybox + EntityTransformHelper; browser shaders, fixed exposure and material adaptation do not establish private Source2 parity.",
+    "counts": {
+      "unreferencedVertexSlotsDiscarded": 6423835,
+      "probeOrUnlit": 510,
+      "lightmapped": 532,
+      "effects": 1
+    },
+    "triangles": 287838,
+    "shaderCounts": {
+      "generic.vfx": 3,
+      "csgo_static_overlay.vfx": 3,
+      "csgo_complex.vfx": 613,
+      "csgo_glass.vfx": 2,
+      "csgo_effects.vfx": 1,
+      "csgo_environment_blend.vfx": 66,
+      "csgo_environment.vfx": 16,
+      "csgo_lightmappedgeneric.vfx": 116,
+      "csgo_unlitgeneric.vfx": 1,
+      "csgo_foliage.vfx": 75,
+      "csgo_vertexlitgeneric.vfx": 105,
+      "csgo_black_unlit.vfx": 3,
+      "csgo_simple_3layer_parallax.vfx": 39
+    },
+    "bounds": [
+      [
+        -474.2687072753906,
+        27.838411331176758,
+        -434.32958984375
+      ],
+      [
+        519.0584106445312,
+        205.68914794921875,
+        621.2846069335938
+      ]
+    ],
+    "selfIllumination": {
+      "truck_large_01_glow_off": {
+        "brightness": 1,
+        "scale": 0,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    "staticOverlays": [
+      {
+        "name": "ch2_backdrop_concrete_overlay",
+        "staticOverlay": {
+          "IntParams": {
+            "F_BLEND_MODE": 1,
+            "g_bFogEnabled": 1,
+            "g_nScaleTexCoordUByModelScaleAxis": 0,
+            "g_nScaleTexCoordVByModelScaleAxis": 0,
+            "g_nTextureAddressModeU": 0,
+            "g_nTextureAddressModeV": 0
+          },
+          "FloatParams": {
+            "g_flModelTintAmount": 1,
+            "g_flOpacityScale": 1,
+            "g_flTexCoordRotation": 0,
+            "g_fTextureColorBrightness": 1,
+            "g_fTextureColorContrast": 1,
+            "g_fTextureColorSaturation": 1
+          },
+          "VectorParams": {
+            "g_vColorTint": [
+              1,
+              1,
+              1,
+              0
+            ],
+            "g_vTexCoordCenter": [
+              0.5,
+              0.5,
+              0,
+              0
+            ],
+            "g_vTexCoordOffset": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vTexCoordScale": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "g_vTexCoordScrollSpeed": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vTextureColorCorrectionTint": [
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "name": "ch2_backdrop_concrete_overlay__alpha_0.823529",
+        "staticOverlay": {
+          "IntParams": {
+            "F_BLEND_MODE": 1,
+            "g_bFogEnabled": 1,
+            "g_nScaleTexCoordUByModelScaleAxis": 0,
+            "g_nScaleTexCoordVByModelScaleAxis": 0,
+            "g_nTextureAddressModeU": 0,
+            "g_nTextureAddressModeV": 0
+          },
+          "FloatParams": {
+            "g_flModelTintAmount": 1,
+            "g_flOpacityScale": 1,
+            "g_flTexCoordRotation": 0,
+            "g_fTextureColorBrightness": 1,
+            "g_fTextureColorContrast": 1,
+            "g_fTextureColorSaturation": 1
+          },
+          "VectorParams": {
+            "g_vColorTint": [
+              1,
+              1,
+              1,
+              0
+            ],
+            "g_vTexCoordCenter": [
+              0.5,
+              0.5,
+              0,
+              0
+            ],
+            "g_vTexCoordOffset": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vTexCoordScale": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "g_vTexCoordScrollSpeed": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vTextureColorCorrectionTint": [
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        }
+      }
+    ],
+    "drawAlpha": [
+      {
+        "meshIndex": 2,
+        "primitive": 0,
+        "sourceMaterialIndex": 2,
+        "materialIndex": 236,
+        "nativeDrawAlpha": 0.823529,
+        "nativeDrawTint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "sourceModelSha256": "049fd7f889af3cd02d753165f5a06e96fdce3965d0e19f62a55da0be5f3c0695"
+      },
+      {
+        "meshIndex": 3,
+        "primitive": 0,
+        "sourceMaterialIndex": 2,
+        "materialIndex": 236,
+        "nativeDrawAlpha": 0.823529,
+        "nativeDrawTint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "sourceModelSha256": "f6f4bd05f683e5fdcb74aa21afd8bafd5bc395f57a4cafc9bbaa569b12dc4af6"
+      },
+      {
+        "meshIndex": 4,
+        "primitive": 0,
+        "sourceMaterialIndex": 2,
+        "materialIndex": 236,
+        "nativeDrawAlpha": 0.823529,
+        "nativeDrawTint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "sourceModelSha256": "d1987b96ac50e8d42dbba4fadacfcb20e6c1fda1577d8be62b500a5ccf571808"
+      }
+    ],
+    "authoritativePbrPruning": {
+      "bundles": {
+        "artifacts/new-maps/staged/cache/cache-skybox/environment/source.json": "b606b601c3e0d75b9c44e963a63f4b99593149e48b0e4f53d584d7625ad6ebb4",
+        "artifacts/new-maps/staged/cache/cache-skybox/parallax/source.json": "1bb9de559d65c03d6a1996c1b0bc7108bd6fc53fb2b32930d767162d352c53e0"
+      },
+      "replacedMaterials": [
+        {
+          "name": "ch2_stone_cladding_01_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "wall_tile_stone_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_asphalt_gravel_grass_001b",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_metal_corrugated_blend_02a",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_plaster_rough_brick_blend_01a",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_tile_exterior_wall_blend_brick_tile",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_wall_tile_ceramic_002_small_blend_grout",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "firestation_sign_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "truck_large_01_attachment_02",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "reactor_crane_01_beams",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_curb_001_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_concretefloor_03",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_trim_metal_painted_blend_01d",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "lamp_tower_01a",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_asphalt_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_asphalt_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_concrete_panel_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_concrete_panel_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_concrete_panel_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_concrete_panel_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_concrete_panel_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_blend_concrete_panel_gravel_grass_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_concrete_fence_modular_001",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_concrete_siding_001_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_concrete_siding_002_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_concrete_siding_002_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_concrete_siding_002_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_concrete_siding_002_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_concrete_siding_003_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_curb_001_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_curb_001_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_curb_001_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_glassblock_02",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_metal_diamondplate_rust_dust_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_sheet_glass_02",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_sheet_glass_02",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_sheet_glass_02",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_sheet_glass_02",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_sheet_glass_02_selfillum",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_shifer_corrugated_roof_tile_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_shifer_corrugated_roof_tile_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_shifer_corrugated_roof_tile_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_shifer_corrugated_roof_tile_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_shifer_corrugated_roof_tile_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_shifer_corrugated_roof_tile_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_shifer_corrugated_roof_tile_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_tile_exterior_wall_blend_01",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_tile_exterior_wall_blend_01",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_trim_concrete_beams_01b",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_trim_metal_painted_blend_01d",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_trim_metal_painted_blend_01d",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_trim_metal_painted_blend_01d",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "ch2_trim_metal_painted_blend_01d",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "reactor_core_01_hull_rust_blend",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "reactor_crane_01",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "truck_large_01",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "truck_large_01",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "truck_large_01_attachment_01",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        },
+        {
+          "name": "truck_large_01_wheels",
+          "bindings": [
+            "normalTexture",
+            "occlusionTexture",
+            "baseColorTexture",
+            "metallicRoughnessTexture"
+          ]
+        }
+      ],
+      "inputImages": 209,
+      "retainedImages": 125,
+      "removedImages": 84,
+      "previousGzipBytes": 145657913,
+      "optimizedGzipBytes": 42555376,
+      "keptAllVertexAttributes": true,
+      "preservedRetainedImageDimensions": true,
+      "qualification": "Only native environment/parallax bundle PBR bindings are removed; original native textures and authored geometry/tints remain. Layered legacy materials keep their base PBR color.",
+      "retainedImageCensus": {
+        "toolsblocklight_color_tga_8b58e5dd.vtex": {
+          "width": 64,
+          "height": 64,
+          "mode": "RGB"
+        },
+        "default_normal_tga_b3f4ec4c.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "tools_solid_block_light_psd_d308939f.vtex": {
+          "width": 128,
+          "height": 128,
+          "mode": "RGB"
+        },
+        "backdrop_concrete_overlay_001_color_psd_82c10b3e.vtex": {
+          "width": 1024,
+          "height": 128,
+          "mode": "RGBA"
+        },
+        "truck_large_01_lights_color_tga_dae5d2a0.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGBA"
+        },
+        "truck_large_01_lights_normal_tga_730fd7e0.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "truck_large_01_lights_selfillum_tga_ded8b878.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGBA"
+        },
+        "truck_large_01_lights_ao_tga_1ea7eb9_orm_3775917304.png": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "ch2_sheet_glass_02_normal_psd_a0de9678.vtex": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGB"
+        },
+        "ch2_sheet_glass_02_normal_psd_a0de9678_orm_3170182803.png": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGB"
+        },
+        "fog_card_002_vmat_g_tcolor_e42befc7.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGBA"
+        },
+        "cache_backdrop_window_002_color_psd_cbdba2ea.vtex": {
+          "width": 256,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_002_rough_psd_9bb59a5a.vtex": {
+          "width": 256,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_002_rough_psd_9bb59a5a_orm_3159916799.png": {
+          "width": 256,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_stone_bevel_001_color_psd_4890fc12.vtex": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "cache_backdrop_stone_bevel_001_normal_psd_9dd47c13.vtex": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "cache_backdrop_stone_bevel_001_ao_psd_556ec856_orm_3389084631.png": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "hr_metal_railing_002_card_color_psd_332b32d8.vtex": {
+          "width": 2048,
+          "height": 256,
+          "mode": "RGBA"
+        },
+        "hr_metal_railing_001_card_normals_normal_psd_bc2426aa.vtex": {
+          "width": 2048,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "hr_metal_railing_001_card_normals_normal_psd_bc2426aa_orm_1502524792.png": {
+          "width": 2048,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "nuke_metalgrate_01_color_tga_c3ba277.vtex": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGBA"
+        },
+        "default_normal_tga_7be39f77.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "default_ao_tga_559f1ac6_orm_3386094931.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "tree_poplar_billboard_color_psd_7cc29dfd.vtex": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGBA"
+        },
+        "tree_poplar_billboard_normal_psd_b665a0b3.vtex": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "tree_poplar_billboard_ao_psd_23a0b16e_orm_663705047.png": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "vertigo_ceilingtileframe_color_tga_25e2ec.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGBA"
+        },
+        "plant_metal_truss_001_color_psd_bb74d0fd.vtex": {
+          "width": 128,
+          "height": 512,
+          "mode": "RGBA"
+        },
+        "plant_metal_truss_001_normal_psd_d7dd68f5.vtex": {
+          "width": 128,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_metal_truss_001_normal_psd_d7dd68f5_orm_2627313625.png": {
+          "width": 128,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_pylons_color_psd_c2ede983.vtex": {
+          "width": 1024,
+          "height": 512,
+          "mode": "RGBA"
+        },
+        "ferris_wheel_card_001_color_psd_abe0f9b4.vtex": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGBA"
+        },
+        "ferris_wheel_card_001_normal_psd_8144d33b.vtex": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "ferris_wheel_card_001_ao_psd_ce74b3f6_orm_3637900360.png": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "ch2_detail_foliage_001_color_psd_9156e346.vtex": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGBA"
+        },
+        "ch2_detail_foliage_001_normal_psd_78448dfa.vtex": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "ch2_detail_foliage_001_ao_psd_ea4575e4_orm_1800821930.png": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "shrub_dogwood_billboard_color_psd_e94144e5.vtex": {
+          "width": 4096,
+          "height": 2048,
+          "mode": "RGBA"
+        },
+        "shrub_dogwood_billboard_normal_psd_e4725e23.vtex": {
+          "width": 4096,
+          "height": 2048,
+          "mode": "RGB"
+        },
+        "shrub_dogwood_billboard_ao_psd_24a8ec9e_orm_2180072241.png": {
+          "width": 4096,
+          "height": 2048,
+          "mode": "RGB"
+        },
+        "tree_poplar_branch_color_psd_d4ec29bd.vtex": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGBA"
+        },
+        "tree_poplar_branch_normal_psd_92b9a6fb.vtex": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "tree_poplar_branch_ao_tga_d301bb87_orm_3460803778.png": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "tree_poplar_bark_color_psd_e8ea02eb.vtex": {
+          "width": 2048,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "tree_poplar_bark_normal_tga_1dffa45a.vtex": {
+          "width": 2048,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "tree_poplar_bark_ao_tga_4c46a1a3_orm_3921429248.png": {
+          "width": 2048,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "tree_poplar_mature_trunk_01_color_psd_6f46e5f2.vtex": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "tree_poplar_mature_trunk_01_normal_tga_1a491c53.vtex": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "tree_poplar_mature_trunk_01_ao_tga_65bfaca4_orm_623272197.png": {
+          "width": 4096,
+          "height": 4096,
+          "mode": "RGB"
+        },
+        "dust_satellite_dish_color_psd_4821290f.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "default_ao_tga_559f1ac6_orm_1094365692.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_ac_color_psd_7eb1e746.vtex": {
+          "width": 256,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_ac_001_vmat_g_tlayer1normalroughness_53b47c48.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_ac_001_vmat_g_tlayer1normalroughness_53b47c48_orm_2357554992.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_brick_001_color_psd_ca6ef23f.vtex": {
+          "width": 1024,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "cache_backdrop_brick_001_vmat_g_tnormal_53b47c48.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_brick_001_vmat_g_tnormal_53b47c48_orm_3576602555.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_buildings_001_color_psd_c935c2bf.vtex": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGB"
+        },
+        "cache_backdrop_buildings_001_vmat_g_tnormal_53b47c48.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_buildings_001_vmat_g_tnormal_53b47c48_orm_2195693478.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_buildings_railing_001_color_psd_2db9d079.vtex": {
+          "width": 512,
+          "height": 256,
+          "mode": "RGBA"
+        },
+        "default_normal_tga_7be61377.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "default_ao_tga_559f1ac6_orm_2875450975.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_concrete_hs_001_color_psd_2bf6b36c.vtex": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "cache_backdrop_concrete_hs_001_vmat_g_tnormal_53b47c48.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_concrete_hs_001_vmat_g_tnormal_53b47c48_orm_3359485629.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_concrete_trim_001_color_psd_91ffc56f.vtex": {
+          "width": 2048,
+          "height": 64,
+          "mode": "RGB"
+        },
+        "cache_backdrop_concrete_trim_001_vmat_g_tnormal_53b47c48.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_concrete_trim_001_vmat_g_tnormal_53b47c48_orm_1410967953.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_door_001_color_psd_8112a49d.vtex": {
+          "width": 256,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_door_001_vmat_g_tnormal_59656961.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_door_001_vmat_g_tnormal_59656961_orm_3865417359.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_metal_trim_001_color_psd_b3febb91.vtex": {
+          "width": 4096,
+          "height": 64,
+          "mode": "RGB"
+        },
+        "cache_backdrop_metal_trim_001_vmat_g_tnormal_53b47c48.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_metal_trim_001_vmat_g_tnormal_53b47c48_orm_2606885441.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_roads_001_color_psd_5dc9c384.vtex": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGB"
+        },
+        "cache_backdrop_roads_001_vmat_g_tnormal_d52512a9.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_roads_001_vmat_g_tnormal_d52512a9_orm_1635622812.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_stone_wall_001_color_psd_9ff0fdf7.vtex": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGB"
+        },
+        "default_ao_tga_559f1ac6_orm_2889892925.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "cache_backdrop_stucco_001_color_psd_d22c0dbb.vtex": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_001_color_psd_c6427465.vtex": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_001_normal_psd_323f0367.vtex": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_001_ao_psd_de64e547_orm_2928264489.png": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_003_color_psd_36b81243.vtex": {
+          "width": 256,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_003_rough_psd_a3fdadf2.vtex": {
+          "width": 256,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_003_color_psd_36b81243_orm_1270126394.png": {
+          "width": 256,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_004_color_psd_dd714a1f.vtex": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_004_rough_psd_cc432d0.vtex": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "cache_backdrop_window_004_color_psd_dd714a1f_orm_3316895482.png": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "ch2_tree_card_001_color_psd_346cf22e.vtex": {
+          "width": 2048,
+          "height": 1024,
+          "mode": "RGBA"
+        },
+        "ch2_tree_card_001_normal_psd_fdb86e94.vtex": {
+          "width": 2048,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "ch2_tree_card_001_ao_psd_59807fd_orm_2586283284.png": {
+          "width": 2048,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "metalvent005a_color_tga_31d4e31a.vtex": {
+          "width": 128,
+          "height": 128,
+          "mode": "RGB"
+        },
+        "metalvent005a_vmat_g_tlayer1normalroughness_53b47c48.vtex": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "default_ao_tga_559f1ac6_orm_533006700.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "nuke_skybox_powerline_color_trans_tga_f8244293.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGBA"
+        },
+        "default_ao_tga_559f1ac6_orm_1484570254.png": {
+          "width": 1,
+          "height": 1,
+          "mode": "RGB"
+        },
+        "plant_metal_001_color_psd_453d95e0.vtex": {
+          "width": 512,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "plant_metal_001_normal_psd_26094216.vtex": {
+          "width": 512,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "plant_metal_001_ao_psd_5440da8b_orm_1192109289.png": {
+          "width": 512,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "plant_metal_002_color_psd_a737529a.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_metal_002_normal_psd_6b554d8e.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_metal_002_ao_psd_b8a1674c_orm_3895974293.png": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_metal_003_color_psd_4e945e19.vtex": {
+          "width": 1024,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_metal_003_normal_psd_d329d379.vtex": {
+          "width": 1024,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_metal_003_normal_psd_d329d379_orm_2262142810.png": {
+          "width": 1024,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_metal_004_color_psd_81a68e7e.vtex": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "plant_metal_004_normal_psd_ba8284d3.vtex": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "plant_metal_004_normal_psd_ba8284d3_orm_1464528435.png": {
+          "width": 1024,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "plant_metal_truss_003_color_psd_e9b5d75c.vtex": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGBA"
+        },
+        "plant_metal_truss_003_normal_psd_1b59756c.vtex": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "plant_metal_truss_003_normal_psd_1b59756c_orm_1304435440.png": {
+          "width": 256,
+          "height": 256,
+          "mode": "RGB"
+        },
+        "plant_panel_001_color_psd_9a28a80f.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_panel_001_normal_psd_d17fe7be.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_panel_001_ao_psd_c040164f_orm_2237923568.png": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "plant_railing_001_color_psd_9b87cf26.vtex": {
+          "width": 512,
+          "height": 64,
+          "mode": "RGBA"
+        },
+        "plant_railing_001_normal_psd_46c89a95.vtex": {
+          "width": 512,
+          "height": 64,
+          "mode": "RGB"
+        },
+        "plant_railing_001_normal_psd_46c89a95_orm_3477958710.png": {
+          "width": 512,
+          "height": 64,
+          "mode": "RGB"
+        },
+        "scaffoldinggrate_color_psd_ececaedf.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGBA"
+        },
+        "scaffoldinggrate_n_normal_psd_3f25b835.vtex": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "default_ao_tga_559f1ac6_orm_3295508880.png": {
+          "width": 512,
+          "height": 512,
+          "mode": "RGB"
+        },
+        "streetlamp_01_card_color_psd_c6e30598.vtex": {
+          "width": 512,
+          "height": 1024,
+          "mode": "RGBA"
+        },
+        "streetlamp_01_card_normal_tga_f5ec02c9.vtex": {
+          "width": 512,
+          "height": 1024,
+          "mode": "RGB"
+        },
+        "streetlamp_01_card_ao_tga_537c2f4b_orm_2629681052.png": {
+          "width": 512,
+          "height": 1024,
+          "mode": "RGB"
+        }
+      },
+      "retainedImageAuditSha256": "6f17cb2c9f4608635ae884a237387214837da02745ecaf6e36f2e53269304565",
+      "retainedBaseTexels": 304418843
+    },
+    "ownReflections": {
+      "manifestSha256": "e20973921c745032064a3d7aa69e19ac6a66a40054343db01ced379430f426ff",
+      "coordinateFrame": "Original sky Source positions/volumes/cube orientation/SH. NativeSkyFrame reverses baked main placement for shader positions/normal/view and candidate bounds exactly once.",
+      "qualification": "Exact original native BC6H faces and authored mips; existing runtime capability fallback remains on devices without BPTC/fragment uniforms/array capacity. No synthetic HDR mip fallback."
+    },
+    "shaderCoordinateFrame": {
+      "position": "NativeSkyFrame reconstructs own sky Source coordinates by inverting authored skybox_reference rotation/translation and sky_camera origin/scale once. Geometry stays baked in main-world browser coordinates; raw reflection boxes/cubes/SH stay in own native Source coordinates.",
+      "modernEnvironment": "Biplanar, wetness and facing fields use own-frame positions/normals; Source-unit bevel displacement uses native sky scale.",
+      "atlasCurvature": "Source-unit curvature uses0.0254*skyCamera.scale per baked browser metre; main-map default remains1.",
+      "clock": "Native environment.update is stepped by the same own-sky preparation clock as fog/cloud effects."
+    },
+    "toolsMaterials": {
+      "materials": [
+        {
+          "name": "toolsblocklight",
+          "nativeResource": "materials/tools/toolsblocklight.vmat",
+          "nativeIntAttributes": [
+            {
+              "m_name": "mapbuilder.blocklight",
+              "m_nValue": 1
+            },
+            {
+              "m_name": "mapbuilder.detail",
+              "m_nValue": 1
+            },
+            {
+              "m_name": "mapbuilder.nonsolid",
+              "m_nValue": 1
+            },
+            {
+              "m_name": "RepresentativeTextureHeight",
+              "m_nValue": 64
+            },
+            {
+              "m_name": "RepresentativeTextureWidth",
+              "m_nValue": 64
+            },
+            {
+              "m_name": "tools.toolsmaterial",
+              "m_nValue": 1
+            }
+          ],
+          "materialDataSha256": "9e729c2c806a12a70c6ca107a6d559a6133d9b97125e3b01f594a6e27b25b4f9",
+          "materialData": "artifacts/new-maps/supplement/cache/uv/main/analysis/materials/materials/tools/toolsblocklight.vmat_c-data.json"
+        },
+        {
+          "name": "toolssolidblocklight",
+          "nativeResource": "materials/tools/toolssolidblocklight.vmat",
+          "nativeIntAttributes": [
+            {
+              "m_name": "mapbuilder.blocklight",
+              "m_nValue": 1
+            },
+            {
+              "m_name": "RepresentativeTextureHeight",
+              "m_nValue": 128
+            },
+            {
+              "m_name": "RepresentativeTextureWidth",
+              "m_nValue": 128
+            },
+            {
+              "m_name": "tools.toolsmaterial",
+              "m_nValue": 1
+            }
+          ],
+          "materialDataSha256": "e0868df628291ac981ae70afc7119c2352ef03008014e27f31da3763249bf34a",
+          "materialData": "artifacts/new-maps/supplement/cache/uv/main/analysis/materials/materials/tools/toolssolidblocklight.vmat_c-data.json"
+        }
+      ],
+      "policy": "Native VMAT m_intAttributes contains tools.toolsmaterial; VRF20.1 RenderMaterial.LoadRenderState and Scene.Add exclude exact material batches from normal rendering. No name heuristic.",
+      "auditSha256": "5f58f539b3e18b3112917dc96d91c24916692805c6011e4f6369838f61bb8d66"
+    }
+  },
+  "reflections": {
+    "directory": "/models/maps/cache-skybox/lighting/reflections/",
+    "manifest": "source.json",
+    "volumes": 8,
+    "maxGpuBytes": 4194048
+  },
+  "toolsMaterials": [
+    "toolsblocklight",
+    "toolssolidblocklight"
+  ],
+  "complexMaterials": "/models/maps/cache-skybox/complex/source.json",
+  "legacyMaterials": "/models/maps/cache-skybox/legacy/source.json",
+  "glassMaterials": "/models/maps/cache-skybox/glass/source.json",
+  "foliageMaterials": "/models/maps/cache-native-lod/sky-foliage/source.json",
+  "complexSpecialMaterials": "/models/maps/cache-skybox/complex-special08/source.json",
+  "lightmappedMaterials": "/models/maps/cache-skybox/lightmapped-08/source.json",
+  "clutterWorld": "/models/maps/cache-clutter/sky/source.json"
+}

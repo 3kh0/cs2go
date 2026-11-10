@@ -1,4 +1,5 @@
 import * as T from "three";
+import { detachNativeTexture } from "./native-texture-sharing";
 import type { EnvironmentShaderParameters } from "./native-environment-parameters";
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
 
@@ -106,6 +107,7 @@ export function createEnvironmentTextureBanks(
         // The bank is the sole CPU byte owner. Keep exact per-texture views
         // available for optional depth/inspection without retaining another
         // complete fetched ArrayBuffer beside the concatenated native bank.
+        detachNativeTexture(originalTexture, true);
         originalTexture.mipmaps = views;
         entry[2] = views;
         if (originalTexture instanceof T.DataTexture)

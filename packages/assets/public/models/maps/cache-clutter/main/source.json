@@ -1,0 +1,1801 @@
+{
+  "version": 1,
+  "mapId": "cache",
+  "scope": "main",
+  "status": "runtime-candidate-exact-fields-visual-acceptance-pending",
+  "source": {
+    "nativeWorldNodeSha256": "f9369751f1ae860865c0f2e47a7940ce0a6ed522052653de1d165143b1b7f9e8",
+    "nativeDataBlockSha256": "58ed77c915c721a46f3c79bca4efeebd4bd0488ed7f0f3072d7ab8201f0f2b0d",
+    "sourceParserSha256": "40d61c473bb29d1879316ff68b18d3368f7a8d733575d1e04cb2a1edd1fe4ecc",
+    "priorCaptureControl": "metadata/clutter-v5-prior-capture-controls.json"
+  },
+  "placements": {
+    "file": "placements.bin.gz",
+    "count": 67315,
+    "stride": 24,
+    "offsets": {
+      "sourceXYZFloat32": 0,
+      "uniformScaleFloat32": 12,
+      "packedQuaternionUInt32": 16,
+      "tintSrgbByte3": 20
+    },
+    "uncompressedSha256": "e8b8a11aeb27904574d65f2b3b32225d9e1920a720d5c442223493b102db654a",
+    "gzipSha256": "df379e87ea5a5bdb761a165a0ae2ad300db52355dd598f7a6e4caaa8b67dd89a",
+    "bytes": 1615560,
+    "gzipBytes": 1137237
+  },
+  "groups": [
+    {
+      "id": "main:0",
+      "nativeGroupIndex": 0,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter0_ch2_debris_ground_01_small_a.vmdl_c",
+      "templateNativeSha256": "4e2d755aa712702b6e9f922912709d2fbdd885d810fb9b1404ed8b9ffaf64a1d",
+      "materialGroup": "",
+      "firstInstance": 0,
+      "instanceCount": 258,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 258,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -1838.0736083984375,
+              -1181.44189453125,
+              1531.30615234375
+            ],
+            "m_vMaxBounds": [
+              1954.7110595703125,
+              2330.961181640625,
+              1834.1024169921875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -1838.0736083984375,
+          -1181.44189453125,
+          1531.30615234375
+        ],
+        "m_vMaxBounds": [
+          1954.7110595703125,
+          2330.961181640625,
+          1834.1024169921875
+        ]
+      }
+    },
+    {
+      "id": "main:1",
+      "nativeGroupIndex": 1,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter1_ch2_detail_debris_trash_003.vmdl_c",
+      "templateNativeSha256": "74fcc2871c80189b4f5663c06d24706e8c5662914f6b6d7f0babbff2c79a2361",
+      "materialGroup": "",
+      "firstInstance": 258,
+      "instanceCount": 7,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 7,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -872.1652221679688,
+              142.2831573486328,
+              1608.2723388671875
+            ],
+            "m_vMaxBounds": [
+              3689.682373046875,
+              3191.132080078125,
+              1684.5972900390625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -872.1652221679688,
+          142.2831573486328,
+          1608.2723388671875
+        ],
+        "m_vMaxBounds": [
+          3689.682373046875,
+          3191.132080078125,
+          1684.5972900390625
+        ]
+      }
+    },
+    {
+      "id": "main:2",
+      "nativeGroupIndex": 2,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter2_ch2_detail_debris_leaves_005.vmdl_c",
+      "templateNativeSha256": "90eca2761a2d87d40b925394dd2e80e27e2dd7011a6cb58baf7aa3edfebb8233",
+      "materialGroup": "",
+      "firstInstance": 265,
+      "instanceCount": 88,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 88,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2336.836669921875,
+              -1558.5186767578125,
+              1592.3011474609375
+            ],
+            "m_vMaxBounds": [
+              3791.035888671875,
+              3328.121826171875,
+              1711.5208740234375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2336.836669921875,
+          -1558.5186767578125,
+          1592.3011474609375
+        ],
+        "m_vMaxBounds": [
+          3791.035888671875,
+          3328.121826171875,
+          1711.5208740234375
+        ]
+      }
+    },
+    {
+      "id": "main:3",
+      "nativeGroupIndex": 3,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter3_ch2_detail_debris_cables_002.vmdl_c",
+      "templateNativeSha256": "a80ee08d09968ea133e465ce8dacf749d578ed19e18ff9155ec028e8c2ab2cbc",
+      "materialGroup": "",
+      "firstInstance": 353,
+      "instanceCount": 22,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 22,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -1629.73974609375,
+              -1447.8465576171875,
+              1608.275146484375
+            ],
+            "m_vMaxBounds": [
+              2953.434814453125,
+              3124.686767578125,
+              1689.08984375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -1629.73974609375,
+          -1447.8465576171875,
+          1608.275146484375
+        ],
+        "m_vMaxBounds": [
+          2953.434814453125,
+          3124.686767578125,
+          1689.08984375
+        ]
+      }
+    },
+    {
+      "id": "main:4",
+      "nativeGroupIndex": 4,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter4_ch2_debris_ground_01_medium_a.vmdl_c",
+      "templateNativeSha256": "c947c2987d24bbf5b02415aae3e1db0c09fe2c656aa6e99bd20f6303054910c2",
+      "materialGroup": "",
+      "firstInstance": 375,
+      "instanceCount": 182,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 182,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -1247.173828125,
+              -1171.42529296875,
+              1530.998779296875
+            ],
+            "m_vMaxBounds": [
+              1971.5396728515625,
+              2082.62890625,
+              1833.4761962890625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -1247.173828125,
+          -1171.42529296875,
+          1530.998779296875
+        ],
+        "m_vMaxBounds": [
+          1971.5396728515625,
+          2082.62890625,
+          1833.4761962890625
+        ]
+      }
+    },
+    {
+      "id": "main:5",
+      "nativeGroupIndex": 5,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter5_ch2_detail_debris_trash_001.vmdl_c",
+      "templateNativeSha256": "571c756d0e6e1712ed25c116e06d38950880c14d769a7ab97fb829ca59b4793c",
+      "materialGroup": "",
+      "firstInstance": 557,
+      "instanceCount": 388,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 388,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2368.633056640625,
+              -1219.1619873046875,
+              1532.2392578125
+            ],
+            "m_vMaxBounds": [
+              3822.532470703125,
+              2618.067626953125,
+              1832.656982421875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2368.633056640625,
+          -1219.1619873046875,
+          1532.2392578125
+        ],
+        "m_vMaxBounds": [
+          3822.532470703125,
+          2618.067626953125,
+          1832.656982421875
+        ]
+      }
+    },
+    {
+      "id": "main:6",
+      "nativeGroupIndex": 6,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter6_ch2_grass_detail_medium_001.vmdl_c",
+      "templateNativeSha256": "7e6aa49cbdf3177bc2e924ed0b3cec9cf7aa7c1d85f931b2a246183a0d68c4de",
+      "materialGroup": "",
+      "firstInstance": 945,
+      "instanceCount": 16397,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 7229,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2397.001953125,
+              -2303.629638671875,
+              1554.06689453125
+            ],
+            "m_vMaxBounds": [
+              -413.26910400390625,
+              2238.043212890625,
+              1883.8544921875
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 7229,
+          "m_nLastInstance": 11154,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -461.0118103027344,
+              -1580.170166015625,
+              1566.0108642578125
+            ],
+            "m_vMaxBounds": [
+              1447.4508056640625,
+              3387.708740234375,
+              1900.115234375
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 11154,
+          "m_nLastInstance": 16397,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              1412.15087890625,
+              -1499.391357421875,
+              1592.000732421875
+            ],
+            "m_vMaxBounds": [
+              3851.025634765625,
+              1739.594970703125,
+              1730.84912109375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2397.001953125,
+          -2303.629638671875,
+          1554.06689453125
+        ],
+        "m_vMaxBounds": [
+          3851.025634765625,
+          3387.708740234375,
+          1900.115234375
+        ]
+      }
+    },
+    {
+      "id": "main:7",
+      "nativeGroupIndex": 7,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter7_ch2_detail_debris_leaves_003.vmdl_c",
+      "templateNativeSha256": "27f68f503fe83f1f35a76234e1b54cba3c3e58fc8fe601a0a0a4e9d4f6365a1f",
+      "materialGroup": "",
+      "firstInstance": 17342,
+      "instanceCount": 4301,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 2809,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2279.822509765625,
+              -1569.92919921875,
+              1587.946533203125
+            ],
+            "m_vMaxBounds": [
+              3834.809814453125,
+              1103.822998046875,
+              1881.587158203125
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 2809,
+          "m_nLastInstance": 4301,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2386.374267578125,
+              1082.657958984375,
+              1606.56689453125
+            ],
+            "m_vMaxBounds": [
+              1965.4827880859375,
+              3755.947509765625,
+              1711.136962890625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2386.374267578125,
+          -1569.92919921875,
+          1587.946533203125
+        ],
+        "m_vMaxBounds": [
+          3834.809814453125,
+          3755.947509765625,
+          1881.587158203125
+        ]
+      }
+    },
+    {
+      "id": "main:8",
+      "nativeGroupIndex": 8,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter8_ch2_grass_detail_large_002c_dead.vmdl_c",
+      "templateNativeSha256": "b2ba08f39a8f2b798bd511179aa559cc9aa623ebdbcdfe149d924460fc795df9",
+      "materialGroup": "",
+      "firstInstance": 21643,
+      "instanceCount": 61,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 61,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -787.5855712890625,
+              -2227.485107421875,
+              1605.8876953125
+            ],
+            "m_vMaxBounds": [
+              662.9794921875,
+              2059.961181640625,
+              1704.4228515625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -787.5855712890625,
+          -2227.485107421875,
+          1605.8876953125
+        ],
+        "m_vMaxBounds": [
+          662.9794921875,
+          2059.961181640625,
+          1704.4228515625
+        ]
+      }
+    },
+    {
+      "id": "main:9",
+      "nativeGroupIndex": 9,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter9_ch2_detail_debris_cables_001.vmdl_c",
+      "templateNativeSha256": "11f50104017b0f2ac9e535d0f1597c1f2d6f4fa69044b6bf0ce351a165a667f5",
+      "materialGroup": "",
+      "firstInstance": 21704,
+      "instanceCount": 20,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.009999999776482582,
+      "nativeEndCullSize": 0.004999999888241291,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 20,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -1967.0152587890625,
+              -1403.318359375,
+              1608.1546630859375
+            ],
+            "m_vMaxBounds": [
+              3112.60986328125,
+              3540.926513671875,
+              1703.404541015625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -1967.0152587890625,
+          -1403.318359375,
+          1608.1546630859375
+        ],
+        "m_vMaxBounds": [
+          3112.60986328125,
+          3540.926513671875,
+          1703.404541015625
+        ]
+      }
+    },
+    {
+      "id": "main:10",
+      "nativeGroupIndex": 10,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter10_ch2_grass_detail_large_001_dead.vmdl_c",
+      "templateNativeSha256": "ca3708c1e0a79654d1bd1149529ff7f86a3b42683c9ab324a9f53f0d480dd310",
+      "materialGroup": "",
+      "firstInstance": 21724,
+      "instanceCount": 510,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 510,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2367.79150390625,
+              -2270.5859375,
+              1590.4385986328125
+            ],
+            "m_vMaxBounds": [
+              3832.233154296875,
+              3356.817138671875,
+              1750.935791015625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2367.79150390625,
+          -2270.5859375,
+          1590.4385986328125
+        ],
+        "m_vMaxBounds": [
+          3832.233154296875,
+          3356.817138671875,
+          1750.935791015625
+        ]
+      }
+    },
+    {
+      "id": "main:11",
+      "nativeGroupIndex": 11,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter11_ch2_detail_debris_cables_001.vmdl_c",
+      "templateNativeSha256": "4a8fd0b3681292739174f7759481d6bd97050f8f8d3f8a60e2aecc7f812f3b03",
+      "materialGroup": "",
+      "firstInstance": 22234,
+      "instanceCount": 23,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 23,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -1744.9688720703125,
+              -1322.2152099609375,
+              1608.1597900390625
+            ],
+            "m_vMaxBounds": [
+              3819.310791015625,
+              2884.80419921875,
+              1875.272216796875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -1744.9688720703125,
+          -1322.2152099609375,
+          1608.1597900390625
+        ],
+        "m_vMaxBounds": [
+          3819.310791015625,
+          2884.80419921875,
+          1875.272216796875
+        ]
+      }
+    },
+    {
+      "id": "main:12",
+      "nativeGroupIndex": 12,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter12_ch2_detail_debris_leaves_005.vmdl_c",
+      "templateNativeSha256": "4da73481f71eebca1a8d96b72bbf2625b8b3c59cb7367d5c6a8bd83a8539db38",
+      "materialGroup": "",
+      "firstInstance": 22257,
+      "instanceCount": 112,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 112,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2111.451171875,
+              -2198.95654296875,
+              1606.4869384765625
+            ],
+            "m_vMaxBounds": [
+              3845.300537109375,
+              3196.618408203125,
+              1875.6112060546875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2111.451171875,
+          -2198.95654296875,
+          1606.4869384765625
+        ],
+        "m_vMaxBounds": [
+          3845.300537109375,
+          3196.618408203125,
+          1875.6112060546875
+        ]
+      }
+    },
+    {
+      "id": "main:13",
+      "nativeGroupIndex": 13,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter13_ch2_detail_debris_leaves_001.vmdl_c",
+      "templateNativeSha256": "3b6e3c9385d010c9672a375471b4292cd4f0eda38550e25c9dc7476cd85a8972",
+      "materialGroup": "",
+      "firstInstance": 22369,
+      "instanceCount": 229,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 229,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2359.689208984375,
+              -1151.950927734375,
+              1532.1370849609375
+            ],
+            "m_vMaxBounds": [
+              3721.297607421875,
+              2803.6455078125,
+              1903.1510009765625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2359.689208984375,
+          -1151.950927734375,
+          1532.1370849609375
+        ],
+        "m_vMaxBounds": [
+          3721.297607421875,
+          2803.6455078125,
+          1903.1510009765625
+        ]
+      }
+    },
+    {
+      "id": "main:14",
+      "nativeGroupIndex": 14,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter14_ch2_detail_debris_leaves_003.vmdl_c",
+      "templateNativeSha256": "e8d3ab501ee2f0954e61ea922a3bc0e2a4f0396e16f92e629cc6b24bf250cd6b",
+      "materialGroup": "",
+      "firstInstance": 22598,
+      "instanceCount": 2159,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 2159,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2382.33203125,
+              -2273.393310546875,
+              1532.1728515625
+            ],
+            "m_vMaxBounds": [
+              3850.173828125,
+              3617.06884765625,
+              2237.314208984375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2382.33203125,
+          -2273.393310546875,
+          1532.1728515625
+        ],
+        "m_vMaxBounds": [
+          3850.173828125,
+          3617.06884765625,
+          2237.314208984375
+        ]
+      }
+    },
+    {
+      "id": "main:15",
+      "nativeGroupIndex": 15,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter15_ch2_detail_debris_trash_001.vmdl_c",
+      "templateNativeSha256": "48d998b4bf8b3da4eafbe0229a555ff07b8fb8da64147d80669b39d42a16ef6d",
+      "materialGroup": "",
+      "firstInstance": 24757,
+      "instanceCount": 101,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 101,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2187.501708984375,
+              -1483.2764892578125,
+              1605.29931640625
+            ],
+            "m_vMaxBounds": [
+              3801.18212890625,
+              3240.32568359375,
+              1879.4703369140625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2187.501708984375,
+          -1483.2764892578125,
+          1605.29931640625
+        ],
+        "m_vMaxBounds": [
+          3801.18212890625,
+          3240.32568359375,
+          1879.4703369140625
+        ]
+      }
+    },
+    {
+      "id": "main:16",
+      "nativeGroupIndex": 16,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter16_ch2_debris_ground_01_large_a.vmdl_c",
+      "templateNativeSha256": "3e8043461564e351b16bc72781a818e8b72146fe827c32fe6c6483bfd9b37355",
+      "materialGroup": "",
+      "firstInstance": 24858,
+      "instanceCount": 960,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 960,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2373.455078125,
+              -1112.8779296875,
+              1530.2628173828125
+            ],
+            "m_vMaxBounds": [
+              1968.18896484375,
+              2620.246826171875,
+              1834.7864990234375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2373.455078125,
+          -1112.8779296875,
+          1530.2628173828125
+        ],
+        "m_vMaxBounds": [
+          1968.18896484375,
+          2620.246826171875,
+          1834.7864990234375
+        ]
+      }
+    },
+    {
+      "id": "main:17",
+      "nativeGroupIndex": 17,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter17_ch2_debris_ground_01_medium_b.vmdl_c",
+      "templateNativeSha256": "3ec8352f78272742943d9847bd872dbf06f1db7979de1a7fdc36e6a68b69f9bd",
+      "materialGroup": "",
+      "firstInstance": 25818,
+      "instanceCount": 1039,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.012500000186264515,
+      "nativeEndCullSize": 0.006500000134110451,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 1039,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -904.8233032226562,
+              -1197.1895751953125,
+              1610.44091796875
+            ],
+            "m_vMaxBounds": [
+              602.5170288085938,
+              75.01212310791016,
+              1661.661376953125
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -904.8233032226562,
+          -1197.1895751953125,
+          1610.44091796875
+        ],
+        "m_vMaxBounds": [
+          602.5170288085938,
+          75.01212310791016,
+          1661.661376953125
+        ]
+      }
+    },
+    {
+      "id": "main:18",
+      "nativeGroupIndex": 18,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter18_ch2_grass_detail_large_002c_dead.vmdl_c",
+      "templateNativeSha256": "f2e7d0c9b4b06deea6002eab44ce3628ef2a8007dc4a17a7545178bfc3df6799",
+      "materialGroup": "",
+      "firstInstance": 26857,
+      "instanceCount": 25629,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 5074,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2206.161865234375,
+              -2298.447021484375,
+              1550.7197265625
+            ],
+            "m_vMaxBounds": [
+              -492.2315673828125,
+              -619.9964599609375,
+              1910.777099609375
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 5074,
+          "m_nLastInstance": 9637,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2397.160400390625,
+              -665.8823852539062,
+              1554.0394287109375
+            ],
+            "m_vMaxBounds": [
+              -489.8725280761719,
+              1494.7177734375,
+              1722.3306884765625
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 9637,
+          "m_nLastInstance": 13999,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -527.84130859375,
+              -1582.4326171875,
+              1570.153564453125
+            ],
+            "m_vMaxBounds": [
+              373.3302001953125,
+              3457.0263671875,
+              1900.3494873046875
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 13999,
+          "m_nLastInstance": 20599,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              307.87420654296875,
+              -1571.4405517578125,
+              1596.5947265625
+            ],
+            "m_vMaxBounds": [
+              2113.089111328125,
+              3366.462158203125,
+              1893.9510498046875
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 20599,
+          "m_nLastInstance": 25629,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              2056.646728515625,
+              -1499.734130859375,
+              1600.8775634765625
+            ],
+            "m_vMaxBounds": [
+              3860.345703125,
+              909.1055908203125,
+              1660.5653076171875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2397.160400390625,
+          -2298.447021484375,
+          1550.7197265625
+        ],
+        "m_vMaxBounds": [
+          3860.345703125,
+          3457.0263671875,
+          1910.777099609375
+        ]
+      }
+    },
+    {
+      "id": "main:19",
+      "nativeGroupIndex": 19,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter19_ch2_detail_debris_cables_003.vmdl_c",
+      "templateNativeSha256": "11d3616b04ffd326851eeef8edac7a8f7044f568e2c74e8775fa75f02f2a8a55",
+      "materialGroup": "",
+      "firstInstance": 52486,
+      "instanceCount": 30,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 30,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2134.122802734375,
+              -1483.2493896484375,
+              1608.138671875
+            ],
+            "m_vMaxBounds": [
+              3553.417236328125,
+              3733.729248046875,
+              1689.3272705078125
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2134.122802734375,
+          -1483.2493896484375,
+          1608.138671875
+        ],
+        "m_vMaxBounds": [
+          3553.417236328125,
+          3733.729248046875,
+          1689.3272705078125
+        ]
+      }
+    },
+    {
+      "id": "main:20",
+      "nativeGroupIndex": 20,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter20_ch2_detail_debris_cables_003.vmdl_c",
+      "templateNativeSha256": "10d9ca400180291f007c83cbc04cd5449a5dcaed5b905b4b9b5d7f303ea3e6d1",
+      "materialGroup": "",
+      "firstInstance": 52516,
+      "instanceCount": 25,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.009999999776482582,
+      "nativeEndCullSize": 0.004999999888241291,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 25,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2346.596923828125,
+              -1281.99072265625,
+              1608.1461181640625
+            ],
+            "m_vMaxBounds": [
+              2555.8984375,
+              2098.0087890625,
+              1703.602294921875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2346.596923828125,
+          -1281.99072265625,
+          1608.1461181640625
+        ],
+        "m_vMaxBounds": [
+          2555.8984375,
+          2098.0087890625,
+          1703.602294921875
+        ]
+      }
+    },
+    {
+      "id": "main:21",
+      "nativeGroupIndex": 21,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter21_ch2_detail_debris_cables_002.vmdl_c",
+      "templateNativeSha256": "b8970902996dec024f177dccb8f57f5a2db94f90a15445eb672b0cd4cfe47e35",
+      "materialGroup": "",
+      "firstInstance": 52541,
+      "instanceCount": 24,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.009999999776482582,
+      "nativeEndCullSize": 0.004999999888241291,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 24,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2295.500244140625,
+              -1174.2779541015625,
+              1590.2117919921875
+            ],
+            "m_vMaxBounds": [
+              3073.2216796875,
+              2468.005615234375,
+              1703.76025390625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2295.500244140625,
+          -1174.2779541015625,
+          1590.2117919921875
+        ],
+        "m_vMaxBounds": [
+          3073.2216796875,
+          2468.005615234375,
+          1703.76025390625
+        ]
+      }
+    },
+    {
+      "id": "main:22",
+      "nativeGroupIndex": 22,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter22_ch2_grass_detail_large_002c_dead.vmdl_c",
+      "templateNativeSha256": "bdce369c9e296c31bf3c8efa90d020d4746cae463f8320efd460ee6fba34f913",
+      "materialGroup": "",
+      "firstInstance": 52565,
+      "instanceCount": 121,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.0020000000949949026,
+      "nativeEndCullSize": 0.0010000000474974513,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 121,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -168.4678955078125,
+              -712.9451293945312,
+              1606.003662109375
+            ],
+            "m_vMaxBounds": [
+              3223.849853515625,
+              2063.4736328125,
+              1714.599609375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -168.4678955078125,
+          -712.9451293945312,
+          1606.003662109375
+        ],
+        "m_vMaxBounds": [
+          3223.849853515625,
+          2063.4736328125,
+          1714.599609375
+        ]
+      }
+    },
+    {
+      "id": "main:23",
+      "nativeGroupIndex": 23,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter23_ch2_debris_ground_01_medium_a.vmdl_c",
+      "templateNativeSha256": "f28a043a855f9fe9494b4bc7a56b60b5d05146f510a04b5f922b54d248f82e51",
+      "materialGroup": "",
+      "firstInstance": 52686,
+      "instanceCount": 977,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.012500000186264515,
+      "nativeEndCullSize": 0.006500000134110451,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 977,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -867.765625,
+              -1196.8380126953125,
+              1610.966796875
+            ],
+            "m_vMaxBounds": [
+              628.5635375976562,
+              77.62846374511719,
+              1661.1015625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -867.765625,
+          -1196.8380126953125,
+          1610.966796875
+        ],
+        "m_vMaxBounds": [
+          628.5635375976562,
+          77.62846374511719,
+          1661.1015625
+        ]
+      }
+    },
+    {
+      "id": "main:24",
+      "nativeGroupIndex": 24,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter24_ch2_detail_debris_leaves_001.vmdl_c",
+      "templateNativeSha256": "22a6935193b1d54c7d78614d4f444c4866e88708bbb2b1385e4469cdf3a7fdc4",
+      "materialGroup": "",
+      "firstInstance": 53663,
+      "instanceCount": 104,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 104,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2365.215087890625,
+              -1551.969970703125,
+              1608.2030029296875
+            ],
+            "m_vMaxBounds": [
+              3376.514404296875,
+              3353.778564453125,
+              1710.875732421875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2365.215087890625,
+          -1551.969970703125,
+          1608.2030029296875
+        ],
+        "m_vMaxBounds": [
+          3376.514404296875,
+          3353.778564453125,
+          1710.875732421875
+        ]
+      }
+    },
+    {
+      "id": "main:25",
+      "nativeGroupIndex": 25,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter25_ch2_detail_debris_trash_002.vmdl_c",
+      "templateNativeSha256": "e4dc1ce1982f3247e7b3643963b9b04194d342d68118e88c1e9dff3d6506af1b",
+      "materialGroup": "",
+      "firstInstance": 53767,
+      "instanceCount": 402,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 402,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2380.173828125,
+              -1148.667236328125,
+              1532.452880859375
+            ],
+            "m_vMaxBounds": [
+              3098.017822265625,
+              2622.046875,
+              1832.623779296875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2380.173828125,
+          -1148.667236328125,
+          1532.452880859375
+        ],
+        "m_vMaxBounds": [
+          3098.017822265625,
+          2622.046875,
+          1832.623779296875
+        ]
+      }
+    },
+    {
+      "id": "main:26",
+      "nativeGroupIndex": 26,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter26_ch2_detail_debris_trash_004.vmdl_c",
+      "templateNativeSha256": "632db4d65fcfa4de70eb993f750f4949802c44267613a6a65a430b49bc13b85d",
+      "materialGroup": "",
+      "firstInstance": 54169,
+      "instanceCount": 390,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 390,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2369.4580078125,
+              -1163.057861328125,
+              1532.258056640625
+            ],
+            "m_vMaxBounds": [
+              3783.586181640625,
+              2608.814697265625,
+              1832.58544921875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2369.4580078125,
+          -1163.057861328125,
+          1532.258056640625
+        ],
+        "m_vMaxBounds": [
+          3783.586181640625,
+          2608.814697265625,
+          1832.58544921875
+        ]
+      }
+    },
+    {
+      "id": "main:27",
+      "nativeGroupIndex": 27,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter27_ch2_detail_debris_leaves_004.vmdl_c",
+      "templateNativeSha256": "958c5f2b7ac3566e3d1943aadb1b667e60f81f6ccb676b423388d224b1a13045",
+      "materialGroup": "",
+      "firstInstance": 54559,
+      "instanceCount": 378,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 378,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2174.01025390625,
+              -1438.4962158203125,
+              1582.2901611328125
+            ],
+            "m_vMaxBounds": [
+              3814.2412109375,
+              3734.510009765625,
+              2232.98486328125
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2174.01025390625,
+          -1438.4962158203125,
+          1582.2901611328125
+        ],
+        "m_vMaxBounds": [
+          3814.2412109375,
+          3734.510009765625,
+          2232.98486328125
+        ]
+      }
+    },
+    {
+      "id": "main:28",
+      "nativeGroupIndex": 28,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter28_ch2_grass_detail_small_001.vmdl_c",
+      "templateNativeSha256": "b8893a3f3435a59a09363d61f3b3a8bc4f6c280a93dd491e77181aa8cd81672c",
+      "materialGroup": "",
+      "firstInstance": 54937,
+      "instanceCount": 2106,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 2106,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2390.105224609375,
+              -2295.153076171875,
+              1556.47412109375
+            ],
+            "m_vMaxBounds": [
+              3604.119384765625,
+              3335.40185546875,
+              1909.44677734375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2390.105224609375,
+          -2295.153076171875,
+          1556.47412109375
+        ],
+        "m_vMaxBounds": [
+          3604.119384765625,
+          3335.40185546875,
+          1909.44677734375
+        ]
+      }
+    },
+    {
+      "id": "main:29",
+      "nativeGroupIndex": 29,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter29_ch2_detail_debris_leaves_002.vmdl_c",
+      "templateNativeSha256": "8653f33fa69c4a8ab08de292d244b56c14de347dacc83fbecb1ee6a01b3a18bc",
+      "materialGroup": "",
+      "firstInstance": 57043,
+      "instanceCount": 524,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 524,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2349.4775390625,
+              -1631.0081787109375,
+              1584.615234375
+            ],
+            "m_vMaxBounds": [
+              3831.418701171875,
+              3612.9228515625,
+              2230.7626953125
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2349.4775390625,
+          -1631.0081787109375,
+          1584.615234375
+        ],
+        "m_vMaxBounds": [
+          3831.418701171875,
+          3612.9228515625,
+          2230.7626953125
+        ]
+      }
+    },
+    {
+      "id": "main:30",
+      "nativeGroupIndex": 30,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter30_ch2_debris_ground_01_large_a.vmdl_c",
+      "templateNativeSha256": "093fb3b140d0bb3f402d9605f42a30268e07e03b129d963af9aa2595a3befaf9",
+      "materialGroup": "",
+      "firstInstance": 57567,
+      "instanceCount": 528,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.012500000186264515,
+      "nativeEndCullSize": 0.006500000134110451,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 528,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -889.06298828125,
+              -1196.36962890625,
+              1610.342529296875
+            ],
+            "m_vMaxBounds": [
+              631.484619140625,
+              59.27175521850586,
+              1661.9322509765625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -889.06298828125,
+          -1196.36962890625,
+          1610.342529296875
+        ],
+        "m_vMaxBounds": [
+          631.484619140625,
+          59.27175521850586,
+          1661.9322509765625
+        ]
+      }
+    },
+    {
+      "id": "main:31",
+      "nativeGroupIndex": 31,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter31_ch2_detail_debris_trash_002.vmdl_c",
+      "templateNativeSha256": "633bbfbe0a9a7ed260f0c2154f7e4f0672010fed90e58816a68ab8469b23da97",
+      "materialGroup": "",
+      "firstInstance": 58095,
+      "instanceCount": 117,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 117,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2280.542724609375,
+              -1558.938720703125,
+              1608.1802978515625
+            ],
+            "m_vMaxBounds": [
+              3598.10009765625,
+              3714.381103515625,
+              1877.4559326171875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2280.542724609375,
+          -1558.938720703125,
+          1608.1802978515625
+        ],
+        "m_vMaxBounds": [
+          3598.10009765625,
+          3714.381103515625,
+          1877.4559326171875
+        ]
+      }
+    },
+    {
+      "id": "main:32",
+      "nativeGroupIndex": 32,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter32_ch2_detail_debris_trash_003.vmdl_c",
+      "templateNativeSha256": "2eb34505352a28cc97396dd3eb0669a4cb057ebf19041f5ad14392c084f514ea",
+      "materialGroup": "",
+      "firstInstance": 58212,
+      "instanceCount": 187,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 187,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2383.47998046875,
+              -1158.014404296875,
+              1532.3223876953125
+            ],
+            "m_vMaxBounds": [
+              3219.283447265625,
+              2618.837646484375,
+              1832.6553955078125
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2383.47998046875,
+          -1158.014404296875,
+          1532.3223876953125
+        ],
+        "m_vMaxBounds": [
+          3219.283447265625,
+          2618.837646484375,
+          1832.6553955078125
+        ]
+      }
+    },
+    {
+      "id": "main:33",
+      "nativeGroupIndex": 33,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter33_ch2_detail_debris_trash_004.vmdl_c",
+      "templateNativeSha256": "b576e27575b76a42065e14308243cab836cd12bf19065ae46b4ae147b517551d",
+      "materialGroup": "",
+      "firstInstance": 58399,
+      "instanceCount": 120,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 120,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2358.085205078125,
+              -1566.9525146484375,
+              1606.409912109375
+            ],
+            "m_vMaxBounds": [
+              3714.83740234375,
+              3668.52685546875,
+              1876.3966064453125
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2358.085205078125,
+          -1566.9525146484375,
+          1606.409912109375
+        ],
+        "m_vMaxBounds": [
+          3714.83740234375,
+          3668.52685546875,
+          1876.3966064453125
+        ]
+      }
+    },
+    {
+      "id": "main:34",
+      "nativeGroupIndex": 34,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter34_ch2_detail_debris_leaves_004.vmdl_c",
+      "templateNativeSha256": "ee68d00664aeb02fab7a9cc4f19da152839dadec82308a381a316b2453f48faf",
+      "materialGroup": "",
+      "firstInstance": 58519,
+      "instanceCount": 1696,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 1696,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2377.28515625,
+              -1563.869873046875,
+              1583.1033935546875
+            ],
+            "m_vMaxBounds": [
+              3806.56005859375,
+              3747.502197265625,
+              1875.2623291015625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2377.28515625,
+          -1563.869873046875,
+          1583.1033935546875
+        ],
+        "m_vMaxBounds": [
+          3806.56005859375,
+          3747.502197265625,
+          1875.2623291015625
+        ]
+      }
+    },
+    {
+      "id": "main:35",
+      "nativeGroupIndex": 35,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter35_ch2_grass_detail_large_001.vmdl_c",
+      "templateNativeSha256": "3907121407a1f6eabb7f65f9b37f9e5482b6c070bb6f9e495bf03ac13b622db4",
+      "materialGroup": "",
+      "firstInstance": 60215,
+      "instanceCount": 4914,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 2419,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2076.145751953125,
+              -2264.184326171875,
+              1605.53759765625
+            ],
+            "m_vMaxBounds": [
+              3832.290283203125,
+              1154.251953125,
+              1720.197021484375
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 2419,
+          "m_nLastInstance": 4914,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2391.19482421875,
+              1377.0560302734375,
+              1617.537841796875
+            ],
+            "m_vMaxBounds": [
+              1343.884521484375,
+              3357.42626953125,
+              1720.38525390625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2391.19482421875,
+          -2264.184326171875,
+          1605.53759765625
+        ],
+        "m_vMaxBounds": [
+          3832.290283203125,
+          3357.42626953125,
+          1720.38525390625
+        ]
+      }
+    },
+    {
+      "id": "main:36",
+      "nativeGroupIndex": 36,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter36_ch2_debris_ground_01_small_a.vmdl_c",
+      "templateNativeSha256": "f04859732c7cc66d541858a9e7d9927259f528118f35fd252a46a4f46e68f83e",
+      "materialGroup": "",
+      "firstInstance": 65129,
+      "instanceCount": 538,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.012500000186264515,
+      "nativeEndCullSize": 0.006500000134110451,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 538,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -877.28515625,
+              -1194.1522216796875,
+              1611.3126220703125
+            ],
+            "m_vMaxBounds": [
+              613.374755859375,
+              74.49430847167969,
+              1660.44873046875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -877.28515625,
+          -1194.1522216796875,
+          1611.3126220703125
+        ],
+        "m_vMaxBounds": [
+          613.374755859375,
+          74.49430847167969,
+          1660.44873046875
+        ]
+      }
+    },
+    {
+      "id": "main:37",
+      "nativeGroupIndex": 37,
+      "nativeResource": "maps/de_cache/worldnodes/n0_lr0_clutter37_ch2_detail_debris_leaves_002.vmdl_c",
+      "templateNativeSha256": "e901563c132db373f0390e5aff3bb02bfe3602afad6106576b3531ce96aa6dce",
+      "materialGroup": "",
+      "firstInstance": 65667,
+      "instanceCount": 1648,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 1648,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2383.13818359375,
+              -1564.1080322265625,
+              1582.0645751953125
+            ],
+            "m_vMaxBounds": [
+              3835.4716796875,
+              3765.958984375,
+              1878.1966552734375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2383.13818359375,
+          -1564.1080322265625,
+          1582.0645751953125
+        ],
+        "m_vMaxBounds": [
+          3835.4716796875,
+          3765.958984375,
+          1878.1966552734375
+        ]
+      }
+    }
+  ],
+  "matrixQualification": "Exact original float32-representable position/scale fields and quaternion32bits retained. Runtime unpack uses pinnedVRF556equation without normalization. Native C# matrix-byte equivalence has NOT been proved; JS/Three intermediates mayrounddifferently.",
+  "visibilityQualification": "Native screen-size fields retained unchanged, notinterpreted as distances. Allinstancesretained; no guessedfade/density/distancecuts.",
+  "geometryManifest": "/models/maps/cache-native-geometry/source.json",
+  "foliageMaterials": "/models/maps/cache-clutter-foliage/source.json",
+  "environmentMaterials": "/models/maps/cache-clutter-environment/source.json",
+  "reflectionMetadata": {
+    "file": "/models/maps/cache-lighting/reflections/source.json",
+    "volumes": 65,
+    "maxGpuBytes": 34076640
+  }
+}

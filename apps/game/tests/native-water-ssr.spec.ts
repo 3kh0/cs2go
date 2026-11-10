@@ -98,6 +98,7 @@ test("actual native fountain material and full authored texture chains render th
     expect(row.pixel.every(Number.isFinite)).toBe(true);
   }
   expect(result.results.map((r: any) => r.size)).toEqual([64, 32, 64]);
+  expect(result.receiverNormal[2]).toBeGreaterThan(0.99);
   expect(result.cubeRoughness).toHaveLength(3);
   for (const [index, expected] of [0.01, 0.208, 0.3565].entries())
     expect(result.cubeRoughness[index]!.actual).toBeCloseTo(expected, 3);

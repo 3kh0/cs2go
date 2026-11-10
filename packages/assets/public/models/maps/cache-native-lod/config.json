@@ -1,0 +1,104 @@
+{
+  "sun": {
+    "pitch": 44.999966,
+    "yaw": 115.999886,
+    "color": 16774368,
+    "intensity": 5.969026041820607
+  },
+  "backgroundIntensity": 4.0,
+  "environmentIntensity": 0.35,
+  "ambient": {
+    "skyColor": 14283007,
+    "groundColor": 5526612,
+    "intensity": 1.0
+  },
+  "lighting": {
+    "irradiance": "/models/maps/cache-lighting/irradiance.exr",
+    "nativeIrradiance": "/models/maps/cache-lighting/irradiance.bin.gz",
+    "shadows": "/models/maps/cache-lighting/shadows.webp",
+    "directional": "/models/maps/cache-lighting/directional.webp",
+    "nativeDirectional": "/models/maps/cache-lighting/directional.bin.gz",
+    "size": 4096
+  },
+  "postprocess": {
+    "lut": "/models/maps/cache-lighting/color-correction.bin.gz",
+    "tonemap": {
+      "m_flShoulderStrength": 0.1498,
+      "m_flLinearStrength": 0.5,
+      "m_flLinearAngle": 0.0999,
+      "m_flToeStrength": 0.1999,
+      "m_flToeNum": 0.02,
+      "m_flToeDenom": 0.2999,
+      "m_flWhitePoint": 4.0,
+      "m_flExposureBias": -0.1
+    },
+    "exposure": 1.1
+  },
+  "radar": {
+    "pos_x": -2000.0,
+    "pos_y": 3250.0,
+    "scale": 5.5
+  },
+  "source": {
+    "sunEntity": "106210:596:13",
+    "skyEntity": "106210:596:5",
+    "skyMaterial": "materials/de_cache/sky/de_cache_sky_001.vmat",
+    "skyTint": [
+      255,
+      255,
+      255
+    ],
+    "skyAngles": [
+      0.0,
+      115.999954,
+      0.0
+    ],
+    "skyStartDisabled": false,
+    "exposureEndpointOrder": "native values retained, including reversed authored endpoints; fixed midpoint is a browser adaptation",
+    "postEntity": "106210:596:3",
+    "postProcessing": "lighting/postprocessing/de_cache_prefab/de_cache_prefab.vpost",
+    "exposureRangeLinear": [
+      1.0,
+      1.2
+    ],
+    "environmentIntensityQualification": ".35 browser reflection strength; retained shared renderer adaptation, not extracted native value",
+    "qualification": "Native map-specific sun, sky, VPOST/LUT and atlases; fixed linear exposure. Separate 3D sky and other native rendering acceptance required.",
+    "inputHashes": {
+      "artifacts/new-maps/source/cache/raw/maps/de_cache/lightmaps/irradiance.vtex_c": "c946e9796d3a92a4b34679b08b03c1233ad9cc9640625c5d75e77a1901bb7e6a",
+      "artifacts/new-maps/source/cache/raw/maps/de_cache/lightmaps/direct_light_shadows.vtex_c": "a64b0ec388804fc0474684b6b354475e0e2371ab542ce67a54c7508bec056b1c",
+      "artifacts/new-maps/source/cache/raw/maps/de_cache/lightmaps/directional_irradiance.vtex_c": "6b74c86ddafa930cb308a42a82f3dfb100dc0ee5625faf0a97c2d60dabbe25ba",
+      "artifacts/new-maps/staged/cache/navigation/entities-merged.txt": "dcc93b2758515028891eba088d3052e0abe04d740d17f7499f28194b16190952",
+      "artifacts/new-maps/supplement/cache/decoded/materials/de_cache/sky/de_cache_sky_001_exr_c98347d7.exr": "338453a2cbac5395dd4bf94deff5e63472cf4e1093ecc7a8322bda946c1ebcb3",
+      "artifacts/new-maps/supplement/cache/decoded/lighting/postprocessing/de_cache_prefab/de_cache_prefab.vpost": "1943ad903262a089d40f3848a46cbd514b0f32f92fb19ff5478403838e8de901",
+      "artifacts/new-maps/supplement/cache/decoded/lighting/postprocessing/de_cache_prefab/de_cache_prefab.raw": "c805576715b1f1de21e324b526761815703feae8c93f981365d5203a30dc8d49",
+      "artifacts/new-maps/supplement/cache/raw/resource/overviews/de_cache.txt": "4344e0364bc9ec31f9f3fc04fe24aacb465e5252f8c173e661cebec586b54c0d",
+      "artifacts/new-maps/supplement/cache/decoded/panorama/images/overheadmaps/de_cache_radar_psd.png": "94c058b3deaa5cc24be81006322da3af1ef0bbded116160a3fcdea6d87227967"
+    },
+    "supplementalRoot": "/Users/sh/Documents/GitHub/cs2go/artifacts/new-maps/supplement/cache",
+    "radarSelection": {
+      "resource": "panorama/images/overheadmaps/de_cache_radar_psd.vtex",
+      "decodedSha256": "94c058b3deaa5cc24be81006322da3af1ef0bbded116160a3fcdea6d87227967",
+      "evidence": "Actual native Cache T-spawn capture has gray/tan floor and adjacent cyan/pink containers matching PSD layout. Installed TGA has different white/extruded geometry and was rejected.",
+      "qualification": "Distinctive layout/color matched native capture; direct Panorama resource binding not traced."
+    },
+    "radarSectionConversion": "Native overview Source-unit altitude boundaries converted once to browser metres; original verticalsections retained"
+  },
+  "reflections": {
+    "volumes": 65,
+    "maxGpuBytes": 34076640
+  },
+  "doors": "/models/maps/cache-doors.json",
+  "parallaxMaterials": "/models/maps/cache-parallax/source.json",
+  "skyWorld": "/models/maps/cache-native-lod/sky-source.json",
+  "environmentMaterials": "/models/maps/cache-environment/source.json",
+  "nativeFog": "/models/maps/cache-fog/source.json",
+  "frameComposition": "linear-hdr",
+  "complexMaterials": "/models/maps/cache-common-complex/source.json",
+  "legacyMaterials": "/models/maps/cache-legacy/source.json",
+  "glassMaterials": "/models/maps/cache-glass/source.json",
+  "foliageMaterials": "/models/maps/cache-native-lod/main-foliage/source.json",
+  "complexSpecialMaterials": "/models/maps/cache-complex-special08/source.json",
+  "lightmappedMaterials": "/models/maps/cache-lightmapped-08/source.json",
+  "model": "/models/maps/cache-native-lod/world.glb.gz",
+  "clutterWorld": "/models/maps/cache-clutter/main/source.json"
+}

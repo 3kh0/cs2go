@@ -24,6 +24,7 @@ export async function renderSourceReflections() {
     testManual: { value: 0 },
     testFixed: { value: 0 },
     testDirection: { value: new T.Vector3(1, 0, 0) },
+    testNanBits: { value: 0x7fc00000 },
   };
   const vertexShader = "void main(){gl_Position=vec4(position,1.0);}";
   const material = new T.ShaderMaterial({
@@ -33,9 +34,15 @@ export async function renderSourceReflections() {
       sourceCubeSampling +
       `
     uniform samplerCube referenceCube;uniform int testCube;uniform int testFace;
-    uniform float testLod;uniform int testManual;uniform int testFixed;uniform vec3 testDirection;
+    uniform float testLod;uniform int testNanBits;uniform int testManual;uniform int testFixed;uniform vec3 testDirection;
     void main(){
       vec3 direction=testFixed==1?testDirection:sourceCubeDirection((gl_FragCoord.xy-1.5)/29.0,testFace);
+      if(testFixed==2)direction=vec3(uintBitsToFloat(uint(testNanBits)));
+      if(testManual==3){gl_FragColor=vec4(vec3(isnan(direction)),1.0);return;}
+      if(testManual==2){
+        vec3 a=sourceCubeAddress(direction);
+        gl_FragColor=vec4(testCube<42?textureLod(sourceReflectionCubes0,vec3(a.xy,float(testCube*6)+a.z),testLod).rgb:textureLod(sourceReflectionCubes1,vec3(a.xy,float((testCube-42)*6)+a.z),testLod).rgb,1.0);return;
+      }
       vec3 color=testManual==1?sourceCubeSample(direction,testCube,testLod):textureLod(referenceCube,direction,testLod).rgb;
       gl_FragColor=vec4(color,1.0);
     }`,
@@ -82,6 +89,26 @@ export async function renderSourceReflections() {
     nonCornerSquaredError = 0,
     nonCornerSamples = 0;
   const hardwareCornerDifferences: number[][] = [];
+  const unorderedSamples: { cube: number; lod: number; hardware: number[]; manual: number[] }[] =
+    [];
+  reference(0);
+  uniforms.testFixed.value = 2;
+  uniforms.testManual.value = 3;
+  const unorderedInputChannels = Array.from(read().subarray(0, 3)).filter(
+    (value) => value === 1,
+  ).length;
+  for (const cube of [0, 42]) {
+    reference(cube);
+    for (const lod of [0, 2.5, 5]) {
+      uniforms.testLod.value = lod;
+      uniforms.testManual.value = 2;
+      const hardware = Array.from(read().subarray(0, 3));
+      uniforms.testManual.value = 1;
+      const manual = Array.from(read().subarray(0, 3));
+      unorderedSamples.push({ cube, lod, hardware, manual });
+    }
+  }
+  uniforms.testFixed.value = 0;
   for (const cube of [0, 29, 42]) {
     reference(cube);
     for (const lod of [0, 2.5, 5])
@@ -187,7 +214,12 @@ export async function renderSourceReflections() {
       testRoughness: roughness,
       testIrradiance: irradiance,
     },
+    // This probe calls sourceMapReflection directly. Retain Three's guarded
+    // lighting anchor for the production adapter without executing its lighting.
     fragmentShader: `
+    #if 0
+    #include <lights_fragment_end>
+    #endif
     uniform vec3 testPosition;uniform vec3 testNormal;uniform vec3 testView;uniform float testRoughness;uniform vec3 testIrradiance;
     void main(){gl_FragColor=vec4(sourceMapReflection(testPosition,testNormal,testView,testRoughness,testIrradiance),1.0);}`,
   });
@@ -254,6 +286,12 @@ export async function renderSourceReflections() {
   const roughParallaxExpected = nativeSample(0, new T.Vector3(2.5, 0, 5.5), Math.sqrt(0.5) * 5);
   const obliqueParallaxExpected = nativeSample(0, obliqueDirection, Math.sqrt(0.5) * 5);
   const result = {
+    rendererIdentity: (() => {
+      const gl = renderer.getContext(),
+        debug = gl.getExtension("WEBGL_debug_renderer_info");
+      return gl.getParameter(debug ? debug.UNMASKED_RENDERER_WEBGL : gl.RENDERER) as string;
+    })(),
+    glError: renderer.getContext().getError(),
     maxError,
     nonCornerMaxError,
     nonCornerRmsError: Math.sqrt(nonCornerSquaredError / nonCornerSamples),
@@ -264,6 +302,8 @@ export async function renderSourceReflections() {
     rmsError: Math.sqrt(squaredError / samples),
     samples,
     hardwareCornerDifferences,
+    unorderedInputChannels,
+    unorderedSamples,
     a,
     b,
     priorityA,

@@ -147,3 +147,20 @@ test("a failed map does not wedge the next selection or a retry", async () => {
   releaseOne();
   releaseTwo();
 });
+
+test("GPU suspension retains cached home and maps and protects preparation leases", () => {
+  const cache = new NativeMapCache<string, ReturnType<typeof world>>("dust2");
+  const home = world(),
+    old = world(),
+    selected = world();
+  cache.set("dust2", home);
+  cache.set("nuke", old);
+  cache.set("cache", selected);
+  const release = cache.retain("cache"),
+    suspended = vi.fn();
+  cache.releaseGpuTextures(suspended);
+  expect(suspended.mock.calls.map(([entry]) => entry)).toEqual([home, old]);
+  expect([...cache.values()]).toEqual([home, old, selected]);
+  for (const entry of cache.values()) expect(entry.dispose).not.toHaveBeenCalled();
+  release();
+});

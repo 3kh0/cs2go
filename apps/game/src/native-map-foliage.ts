@@ -31,7 +31,8 @@ export interface NativeFoliageMaterial extends NativeComplexMaterial {
   textures: Record<string, string>;
 }
 interface FoliageManifest {
-  model: string;
+  model?: string;
+  geometryManifest?: string;
   noise: string;
   originalMainMaterialIndices?: number[];
   controllers?: unknown[];

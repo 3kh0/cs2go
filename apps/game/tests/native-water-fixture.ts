@@ -115,14 +115,19 @@ export function renderNativeWater(
     shader.uniforms.waterFixtureDebug = debug;
     shader.uniforms.cubeLodOverride = cubeLodOverride;
     shader.fragmentShader =
-      "uniform float waterFixtureDebug,cubeLodOverride;\n" + shader.fragmentShader;
+      "uniform float waterFixtureDebug,cubeLodOverride;vec3 waterFixtureReceiverNormal;\n" +
+      shader.fragmentShader;
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "_11008 = _20489;",
+      "_11008 = _20489;waterFixtureReceiverNormal=_24294;",
+    );
     shader.fragmentShader = shader.fragmentShader.replace(
       "waterPrepare();vec3 mapN=waterState.normal;",
       "waterPrepare();if(cubeLodOverride>=0.)nativeWaterSSRLod=cubeLodOverride;vec3 mapN=waterState.normal;",
     );
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <opaque_fragment>",
-      "#include <opaque_fragment>\nif(waterFixtureDebug>1.5)gl_FragColor=vec4(material.roughness);else if(waterFixtureDebug>.5)gl_FragColor=vec4(waterState.specularPower,waterState.reflectionWeight,waterState.depth,1.0);",
+      "#include <opaque_fragment>\nif(waterFixtureDebug>2.5)gl_FragColor=vec4(waterFixtureReceiverNormal,1.);else if(waterFixtureDebug>1.5)gl_FragColor=vec4(material.roughness);else if(waterFixtureDebug>.5)gl_FragColor=vec4(waterState.specularPower,waterState.reflectionWeight,waterState.depth,1.0);",
     );
   };
   const draw = (low = false) => {
@@ -215,6 +220,10 @@ export function renderNativeWater(
   const formula = new Uint16Array(4);
   renderer.readRenderTargetPixels(debugTarget, 32, 32, 1, 1, formula);
   const nativeFormula = [...formula].map((value) => T.DataUtils.fromHalfFloat(value));
+  debug.value = 3;
+  draw();
+  renderer.readRenderTargetPixels(debugTarget, 32, 32, 1, 1, formula);
+  const receiverNormal = [...formula].slice(0, 3).map((value) => T.DataUtils.fromHalfFloat(value));
   const cubeRoughness = [];
   if (source.selectedContract === "inferno-fountain-860-d2") {
     debug.value = 2;
@@ -303,6 +312,7 @@ export function renderNativeWater(
   });
   water.visible = fx.visible = smoke.batch.visible = true;
   debug.value = 0;
+  cubeLodOverride.value = -1;
   draw();
   const colorLifecycle = {
     cancelled,
@@ -328,6 +338,7 @@ export function renderNativeWater(
     solid,
     nativeFormula,
     cubeRoughness,
+    receiverNormal,
     mipProbe,
     colorLifecycle,
     error,

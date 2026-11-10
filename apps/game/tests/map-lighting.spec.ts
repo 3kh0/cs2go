@@ -42,11 +42,23 @@ test("native reflection arrays preserve cube seams, blur mips, volume priority, 
     const path = "/tests/source-reflections-fixture.ts";
     return (await import(path)).renderSourceReflections();
   });
+  await test.info().attach("native-reflection-regression.json", {
+    body: JSON.stringify(r, null, 2),
+    contentType: "application/json",
+  });
+  expect(r.glError).toBe(0);
   expect(r.gpuBytes).toBe(22543008);
   expect(r.samples).toBe(165888);
   expect(r.nonCornerSamples).toBeGreaterThan(150000);
   expect(r.nonCornerMaxError).toBeLessThan(0.02);
   expect(r.nonCornerRmsError).toBeLessThan(0.001);
+  expect(r.unorderedInputChannels).toBe(3);
+  expect(r.unorderedSamples).toHaveLength(6);
+  for (const sample of r.unorderedSamples) {
+    expect(sample.hardware.every(Number.isFinite)).toBe(true);
+    expect(sample.manual.every(Number.isFinite)).toBe(true);
+    expect(sample.manual).toEqual(sample.hardware);
+  }
   for (let channel = 0; channel < 3; channel++) {
     expect(Math.abs(r.manualCorner[channel] - r.cornerAverage[channel])).toBeLessThan(0.00001);
     expect(Math.abs(r.priorityA[channel] - r.a[channel] * 0.99)).toBeLessThan(0.00001);

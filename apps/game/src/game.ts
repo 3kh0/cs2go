@@ -1408,6 +1408,10 @@ export class Game {
     signal.addEventListener("abort", release, { once: true });
     try {
       signal.throwIfAborted();
+      // No frame renders while loading. Retain CPU assets for warm reentry,
+      // without keeping the hidden home/previous maps resident beside this map.
+      if (this.matchLoading)
+        this.nativeWorlds.releaseGpuTextures((world) => world.releaseGpuTextures());
       const waitFor = async <Value>(pending: Promise<Value>): Promise<Value> => {
         signal.throwIfAborted();
         let abort: () => void = () => {};
@@ -1654,14 +1658,14 @@ export class Game {
     });
   }
   private cableResolution = new T.Vector2();
-  private updateMapCables() {
+  private updateMapCables(camera = this.camera) {
     const cables = this.world.nativeCables;
     if (!cables) return;
     this.renderer.getDrawingBufferSize(this.cableResolution);
-    cables.update(this.camera, this.cableResolution.y);
+    cables.update(camera, this.cableResolution.y);
   }
-  renderMapFrame(draw: () => void) {
-    this.updateMapCables();
+  renderMapFrame(draw: () => void, camera = this.camera) {
+    this.updateMapCables(camera);
     const composite = this.world.frameComposite;
     const render = () => {
       if (composite) composite.render(this.renderer, draw);
@@ -1670,8 +1674,8 @@ export class Game {
     if (this.world.nativeLocalLights) this.world.nativeLocalLights.render(this.renderer, render);
     else render();
   }
-  prepareMapFrame(compile: () => void) {
-    this.updateMapCables();
+  prepareMapFrame(compile: () => void, camera = this.camera) {
+    this.updateMapCables(camera);
     const composite = this.world.frameComposite;
     if (composite) composite.prepare(this.renderer, compile);
     else compile();

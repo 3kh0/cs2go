@@ -79,6 +79,14 @@ export class MapResources {
     else this.cleanup.add(cleanup);
   }
 
+  /** Suspend an inactive map's immutable texture allocations, retaining every
+   * source mip for Three's automatic reupload. This is not terminal disposal:
+   * do not add these textures to released, or a later upload would leak. */
+  releaseGpuTextures(renderer: T.WebGLRenderer) {
+    if (this.disposed) return;
+    for (const texture of this.textures) if (renderer.properties.has(texture)) texture.dispose();
+  }
+
   dispose() {
     if (this.disposed) return;
     this.disposed = true;

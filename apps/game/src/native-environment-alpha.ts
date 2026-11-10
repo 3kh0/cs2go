@@ -87,7 +87,11 @@ ${shader.vertexShader}`;
       shader.vertexShader = shader.vertexShader.replace(
         "#include <project_vertex>",
         `#include <project_vertex>
- vEnvironmentDepthUv=${uv};vViewPosition=-mvPosition.xyz;vEnvironmentDepthNormal=normalize(mat3(viewMatrix)*mat3(modelMatrix)*normal);vEnvironmentDepthCentroidNormal=vEnvironmentDepthNormal;`,
+ vEnvironmentDepthUv=${uv};vViewPosition=-mvPosition.xyz;vEnvironmentDepthNormal=normalize(mat3(viewMatrix)*mat3(modelMatrix)*normal);
+ #ifdef USE_INSTANCING
+ vEnvironmentDepthNormal=normalize(mat3(viewMatrix)*transpose(inverse(mat3(modelMatrix*instanceMatrix)))*normal);
+ #endif
+ vEnvironmentDepthCentroidNormal=vEnvironmentDepthNormal;`,
       );
       shader.fragmentShader = `varying vec2 vEnvironmentDepthUv;varying vec3 vViewPosition,vEnvironmentDepthNormal;centroid varying vec3 vEnvironmentDepthCentroidNormal;\n${environmentProjectionShared}\n${binding.code}\n${environmentAlphaShared}\n${shader.fragmentShader}`;
       const geometric =

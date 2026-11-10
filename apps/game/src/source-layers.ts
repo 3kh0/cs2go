@@ -1,4 +1,5 @@
 import * as T from "three";
+import { nativeTextureIdentity, shareNativeTexture } from "./native-texture-sharing";
 import { assetFetch, assetUrl } from "./asset-url";
 import { fetchGzipped } from "./gltf";
 import { createLoadQueue } from "./loading";
@@ -9,9 +10,11 @@ interface LayerTexture {
   file?: string;
   fallback?: string;
   fallbackFile?: string;
-  fallbackMips?: { width: number; height: number; bytes: number }[];
+  fallbackMips?: { width: number; height: number; bytes: number; sha256?: string }[];
   gpuBytes?: number;
-  mips?: { width: number; height: number; bytes: number }[];
+  gpuSha256?: string;
+  nativeMip?: number;
+  mips?: { width: number; height: number; bytes: number; sha256?: string }[];
   constant?: number;
 }
 
@@ -40,6 +43,14 @@ export interface SourceLayerMaterial {
 interface LayerManifest<Material> {
   materials: Record<string, Material>;
   textures: Record<string, LayerTexture>;
+}
+
+/** Resolve shared native texture banks before immutable asset-manifest lookup. */
+function materialAsset(directory: string, file: string) {
+  const url = new URL(file, `https://assets.invalid${directory}`);
+  if (url.origin !== "https://assets.invalid")
+    throw new Error("Native material texture must use a bundled asset path");
+  return url.pathname;
 }
 
 export function loadSourceLayers(renderer: T.WebGLRenderer) {
@@ -78,8 +89,9 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
                       : "WEBGL_compressed_texture_s3tc",
                   );
           let texture: T.Texture;
+          let identity: string | undefined;
           if (supported && entry.file && entry.mips) {
-            const bytes = await fetchGzipped(directory + entry.file);
+            const bytes = await fetchGzipped(materialAsset(directory, entry.file));
             if (bytes.byteLength !== entry.gpuBytes)
               throw new Error("Invalid native layer texture");
             let offset = 0;
@@ -98,6 +110,12 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
               return { data, width: mip.width, height: mip.height };
             });
             if (offset !== bytes.byteLength) throw new Error("Invalid native layer mip lengths");
+            identity = nativeTextureIdentity(
+              entry.format ?? "BC1",
+              entry.mips,
+              entry.gpuSha256,
+              entry.nativeMip,
+            );
             texture = new T.CompressedTexture(
               mips,
               mips[0].width,
@@ -112,7 +130,7 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
             );
             texture.minFilter = mips.length > 1 ? T.LinearMipmapLinearFilter : T.LinearFilter;
           } else if (entry.fallbackFile && entry.fallbackMips) {
-            const bytes = await fetchGzipped(directory + entry.fallbackFile);
+            const bytes = await fetchGzipped(materialAsset(directory, entry.fallbackFile));
             let offset = 0;
             const mips = entry.fallbackMips.map((mip) => {
               const data = new Uint8Array(bytes, offset, mip.bytes);
@@ -121,13 +139,21 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
             });
             if (offset !== bytes.byteLength || !mips.length)
               throw new Error("Invalid material fallback mip lengths");
+            identity = nativeTextureIdentity(
+              "RGBA8",
+              entry.fallbackMips,
+              undefined,
+              entry.nativeMip,
+            );
             texture = new T.DataTexture(mips[0].data, mips[0].width, mips[0].height);
             texture.mipmaps = mips;
             texture.generateMipmaps = false;
             texture.minFilter = mips.length > 1 ? T.LinearMipmapLinearFilter : T.LinearFilter;
           } else {
             if (!entry.fallback) throw new Error("Missing native layer fallback");
-            texture = await new T.TextureLoader().loadAsync(assetUrl(directory + entry.fallback));
+            texture = await new T.TextureLoader().loadAsync(
+              assetUrl(materialAsset(directory, entry.fallback)),
+            );
           }
           texture.colorSpace = entry.srgb ? T.SRGBColorSpace : T.NoColorSpace;
           texture.flipY = false;
@@ -135,6 +161,7 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
           texture.magFilter = T.LinearFilter;
           texture.anisotropy = 8;
           texture.needsUpdate = true;
+          shareNativeTexture(texture, identity);
           textures.set(key, texture);
         }),
       ),

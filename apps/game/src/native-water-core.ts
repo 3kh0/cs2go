@@ -2,6 +2,8 @@
  * Native material expressions, waves, shoreline/debris/foam, refraction,
  * absorption and receiver caustics remain separate. WebGL camera unprojection,
  * fine derivatives and runtime interaction/noise inputs are qualified adapters.
+ * Signed Y derivatives convert native upper-left fragment Y to WebGL lower-left;
+ * magnitude-only wave LOD derivatives are invariant under that axis conversion.
  * Proven current Nuke TEXCOORD4=(0,0,0,0); native rain default=0 is folded.
  * Evidence: native-water-evidence/water_ps_s88_d2.resources.glsl + replay_water.py.
  */
@@ -173,7 +175,7 @@ vec4 _11408=gl_FragCoord;
     if (_8776)
     {
         vec3 _5599 = _17114 + (_11306 * clamp(dot(_14948.xyz, vec3(0.2125000059604644775390625, 0.7153999805450439453125, 0.07209999859333038330078125)), 0.0, 0.4000000059604644775390625));
-        vec3 _24294 = -normalize(cross(dFdx(_5599), dFdy(_5599)));
+        vec3 _24294 = -normalize(cross(dFdx(_5599), -dFdy(_5599)));
         vec2 _8218 = _24294.xy + ((_4130 - vec2(0.5)) * 0.0500000007450580596923828125);
         vec3 _20489 = _24294;
         _20489.x = _8218.x;
@@ -495,7 +497,7 @@ vec4 _11408=gl_FragCoord;
             float _13526 = _16129.x;
             vec3 _4046 = _21971 * (vec3(1.0) + (((((pow(max(_16129 * (vec3(1.0) + (vec3(1.25, -0.25, -1.0) * (clamp(dFdx(_13526) * 200.0, -1.0, 1.0) * clamp(1.0 - (_13526 * 3.0), 0.0, 1.0)))), vec3(0.001000000047497451305389404296875)) * 8.0, vec3(2.5)) * _10021) * waterSunColor) * g_vCausticsTint.xyz) * g_flCausticsStrength) * 0.100000001490116119384765625));
             float _16517 = pow(dot(_4046.xyz, vec3(0.2125000059604644775390625, 0.7153999805450439453125, 0.07209999859333038330078125)), 0.20000000298023223876953125);
-            float _14716 = clamp(dFdx(_16517), -1.0, 1.0) + clamp(dFdy(_16517), -1.0, 1.0);
+            float _14716 = clamp(dFdx(_16517), -1.0, 1.0) + clamp(-dFdy(_16517), -1.0, 1.0);
             _13143 = _16121;
             _16381 = mix(_4046, _4046 * (vec3(1.0) + (vec3(2.5, 0.0, -2.0) * float(int(sign(_14716 * clamp(abs(_14716) - 0.100000001490116119384765625, 0.0, 1.0)))))), vec3(clamp(200.0 / _3558, 0.0, 1.0) * 0.100000001490116119384765625));
             _16479 = _4276.z;

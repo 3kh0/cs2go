@@ -130,3 +130,43 @@ test("map-owned instanced buffers release once and leave external instance buffe
   external.geometry.dispose();
   external.material.dispose();
 });
+
+test("inactive texture suspension retains source mips and final ownership across reupload", () => {
+  const resources = new MapResources();
+  const bytes = new Uint8Array(16);
+  const texture = new T.DataTexture(bytes, 2, 2);
+  const external = new T.Texture();
+  const target = new T.WebGLRenderTarget(1, 1);
+  const material = new T.MeshBasicMaterial({ map: texture, envMap: external });
+  const geometry = new T.PlaneGeometry();
+  const textureDispose = vi.spyOn(texture, "dispose"),
+    externalDispose = vi.spyOn(external, "dispose"),
+    targetDispose = vi.spyOn(target, "dispose"),
+    materialDispose = vi.spyOn(material, "dispose"),
+    geometryDispose = vi.spyOn(geometry, "dispose");
+  resources.external(external);
+  resources.target(target);
+  resources.capture(new T.Mesh(geometry, material));
+  const allocated = new WeakSet<object>([texture, external, target.texture]);
+  texture.addEventListener("dispose", () => allocated.delete(texture));
+  const renderer = { properties: { has: (value: object) => allocated.has(value) } };
+  resources.releaseGpuTextures(renderer as T.WebGLRenderer);
+  resources.releaseGpuTextures(renderer as T.WebGLRenderer);
+  expect(textureDispose).toHaveBeenCalledTimes(1);
+  expect(texture.image.data).toBe(bytes);
+  expect(material.map).toBe(texture);
+  expect(materialDispose).not.toHaveBeenCalled();
+  expect(geometryDispose).not.toHaveBeenCalled();
+  expect(targetDispose).not.toHaveBeenCalled();
+  expect(externalDispose).not.toHaveBeenCalled();
+  // Reentry creates a fresh renderer allocation from the same immutable bytes.
+  allocated.add(texture);
+  resources.releaseGpuTextures(renderer as T.WebGLRenderer);
+  expect(textureDispose).toHaveBeenCalledTimes(2);
+  allocated.add(texture);
+  resources.dispose();
+  resources.releaseGpuTextures(renderer as T.WebGLRenderer);
+  expect(textureDispose).toHaveBeenCalledTimes(3);
+  expect(targetDispose).toHaveBeenCalledTimes(1);
+  expect(externalDispose).not.toHaveBeenCalled();
+});

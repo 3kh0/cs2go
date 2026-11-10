@@ -1,0 +1,1016 @@
+{
+  "version": 1,
+  "mapId": "cache",
+  "scope": "sky",
+  "status": "runtime-candidate-exact-fields-visual-acceptance-pending",
+  "source": {
+    "nativeWorldNodeSha256": "529f8341180ba0f820d3ba7295d09c4a0a558c63d62c7ba92b8343f131b2a2b3",
+    "nativeDataBlockSha256": "bf7a7c506c15f0e262107972bb363552ba59790bee5ba97059f4c5033457da69",
+    "sourceParserSha256": "40d61c473bb29d1879316ff68b18d3368f7a8d733575d1e04cb2a1edd1fe4ecc",
+    "priorCaptureControl": "metadata/clutter-v5-prior-capture-controls.json"
+  },
+  "placements": {
+    "file": "placements.bin.gz",
+    "count": 12232,
+    "stride": 24,
+    "offsets": {
+      "sourceXYZFloat32": 0,
+      "uniformScaleFloat32": 12,
+      "packedQuaternionUInt32": 16,
+      "tintSrgbByte3": 20
+    },
+    "uncompressedSha256": "12377de3fc0c3e5640c2c1e03db3153a62bf4961522ec6d145c5ff9ea65ba23d",
+    "gzipSha256": "f5d14c658f77ba665dcaafbc01dd4d2d2674493a19f6447d548b997e5e329ee8",
+    "bytes": 293568,
+    "gzipBytes": 224989
+  },
+  "groups": [
+    {
+      "id": "sky:0",
+      "nativeGroupIndex": 0,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter0_ch2_detail_debris_leaves_001.vmdl_c",
+      "templateNativeSha256": "d3c4965b295bbf06a49dd02d66cde59807458fa5811b816e6c78aff5aefce78f",
+      "materialGroup": "",
+      "firstInstance": 0,
+      "instanceCount": 7,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 7,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5373.76220703125,
+              455.748291015625,
+              1577.5487060546875
+            ],
+            "m_vMaxBounds": [
+              -5128.177734375,
+              619.01123046875,
+              1619.3082275390625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5373.76220703125,
+          455.748291015625,
+          1577.5487060546875
+        ],
+        "m_vMaxBounds": [
+          -5128.177734375,
+          619.01123046875,
+          1619.3082275390625
+        ]
+      }
+    },
+    {
+      "id": "sky:1",
+      "nativeGroupIndex": 1,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter1_ch2_detail_debris_leaves_005.vmdl_c",
+      "templateNativeSha256": "d808e5978d63451251b493ed2f26b2d9a946565239a1ad9618b3606929dda562",
+      "materialGroup": "",
+      "firstInstance": 7,
+      "instanceCount": 9,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 9,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5803.029296875,
+              460.7493896484375,
+              1573.72265625
+            ],
+            "m_vMaxBounds": [
+              -2326.650634765625,
+              1419.5050048828125,
+              1617.633056640625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5803.029296875,
+          460.7493896484375,
+          1573.72265625
+        ],
+        "m_vMaxBounds": [
+          -2326.650634765625,
+          1419.5050048828125,
+          1617.633056640625
+        ]
+      }
+    },
+    {
+      "id": "sky:2",
+      "nativeGroupIndex": 2,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter2_ch2_detail_debris_trash_003.vmdl_c",
+      "templateNativeSha256": "f1fbe640dc1ca26f228134d3dbb6df991225b00c2d589fd1fdb2cc087be2523a",
+      "materialGroup": "",
+      "firstInstance": 16,
+      "instanceCount": 2,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 2,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5153.07373046875,
+              548.1405029296875,
+              1616.6234130859375
+            ],
+            "m_vMaxBounds": [
+              -2646.4755859375,
+              1214.4287109375,
+              1616.6488037109375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5153.07373046875,
+          548.1405029296875,
+          1616.6234130859375
+        ],
+        "m_vMaxBounds": [
+          -2646.4755859375,
+          1214.4287109375,
+          1616.6488037109375
+        ]
+      }
+    },
+    {
+      "id": "sky:3",
+      "nativeGroupIndex": 3,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter3_ch2_detail_debris_cables_002.vmdl_c",
+      "templateNativeSha256": "2846e843c0dd00289b709802dbda6639277202d1337b026581907267a45244bd",
+      "materialGroup": "",
+      "firstInstance": 18,
+      "instanceCount": 6,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 6,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5758.8466796875,
+              447.3309326171875,
+              1584.27734375
+            ],
+            "m_vMaxBounds": [
+              -2405.31005859375,
+              1442.955322265625,
+              1617.77197265625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5758.8466796875,
+          447.3309326171875,
+          1584.27734375
+        ],
+        "m_vMaxBounds": [
+          -2405.31005859375,
+          1442.955322265625,
+          1617.77197265625
+        ]
+      }
+    },
+    {
+      "id": "sky:4",
+      "nativeGroupIndex": 4,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter4_ch2_detail_debris_leaves_003.vmdl_c",
+      "templateNativeSha256": "e4b874eac084586c190dafab87967dc2fd5d07992b5cdb86bf53a9a999d17c91",
+      "materialGroup": "",
+      "firstInstance": 24,
+      "instanceCount": 369,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 369,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5994.810546875,
+              456.72021484375,
+              1575.42431640625
+            ],
+            "m_vMaxBounds": [
+              -2300.105224609375,
+              1434.28271484375,
+              1619.0242919921875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5994.810546875,
+          456.72021484375,
+          1575.42431640625
+        ],
+        "m_vMaxBounds": [
+          -2300.105224609375,
+          1434.28271484375,
+          1619.0242919921875
+        ]
+      }
+    },
+    {
+      "id": "sky:5",
+      "nativeGroupIndex": 5,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter5_ch2_grass_detail_medium_001.vmdl_c",
+      "templateNativeSha256": "08b6dc05d06516a7d206fb70791a9234f27c1a0f7528a30b6f0db3e165fc542f",
+      "materialGroup": "",
+      "firstInstance": 393,
+      "instanceCount": 2534,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 2534,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -6030.0673828125,
+              440.5153503417969,
+              1566.027587890625
+            ],
+            "m_vMaxBounds": [
+              -2282.447265625,
+              1484.1221923828125,
+              1638.9915771484375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -6030.0673828125,
+          440.5153503417969,
+          1566.027587890625
+        ],
+        "m_vMaxBounds": [
+          -2282.447265625,
+          1484.1221923828125,
+          1638.9915771484375
+        ]
+      }
+    },
+    {
+      "id": "sky:6",
+      "nativeGroupIndex": 6,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter6_ch2_detail_debris_leaves_004.vmdl_c",
+      "templateNativeSha256": "40133eda5abe166f3bfe114576e8013c61b2089436645b0a74c8ad30b6a473e6",
+      "materialGroup": "",
+      "firstInstance": 2927,
+      "instanceCount": 5,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 5,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -3738.455322265625,
+              684.5612182617188,
+              1607.0875244140625
+            ],
+            "m_vMaxBounds": [
+              -2766.030517578125,
+              1230.23681640625,
+              1617.0943603515625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -3738.455322265625,
+          684.5612182617188,
+          1607.0875244140625
+        ],
+        "m_vMaxBounds": [
+          -2766.030517578125,
+          1230.23681640625,
+          1617.0943603515625
+        ]
+      }
+    },
+    {
+      "id": "sky:7",
+      "nativeGroupIndex": 7,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter7_ch2_grass_detail_small_001.vmdl_c",
+      "templateNativeSha256": "4c8abf9a68f329b5855cc2be42dffd8caaef84c095e8981d7bd262e89e094914",
+      "materialGroup": "",
+      "firstInstance": 2932,
+      "instanceCount": 1672,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 1672,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5992.04541015625,
+              447.804931640625,
+              1577.4783935546875
+            ],
+            "m_vMaxBounds": [
+              -2292.134033203125,
+              1467.8326416015625,
+              1633.036376953125
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5992.04541015625,
+          447.804931640625,
+          1577.4783935546875
+        ],
+        "m_vMaxBounds": [
+          -2292.134033203125,
+          1467.8326416015625,
+          1633.036376953125
+        ]
+      }
+    },
+    {
+      "id": "sky:8",
+      "nativeGroupIndex": 8,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter8_ch2_detail_debris_leaves_002.vmdl_c",
+      "templateNativeSha256": "357f0e63906e19a9c1685e546877c8f5fd608bdf097fd7b69d4ae6fb4f283fcb",
+      "materialGroup": "",
+      "firstInstance": 4604,
+      "instanceCount": 5,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 5,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2767.870361328125,
+              641.01416015625,
+              1616.1610107421875
+            ],
+            "m_vMaxBounds": [
+              -2612.31884765625,
+              1250.57080078125,
+              1616.941650390625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2767.870361328125,
+          641.01416015625,
+          1616.1610107421875
+        ],
+        "m_vMaxBounds": [
+          -2612.31884765625,
+          1250.57080078125,
+          1616.941650390625
+        ]
+      }
+    },
+    {
+      "id": "sky:9",
+      "nativeGroupIndex": 9,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter9_ch2_detail_debris_cables_001.vmdl_c",
+      "templateNativeSha256": "8d2d75dfdddf8a1b570bdcf484fc610d85edd20caacdd4955410d8da542434ad",
+      "materialGroup": "",
+      "firstInstance": 4609,
+      "instanceCount": 5,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 5,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -4353.0419921875,
+              672.8008422851562,
+              1589.22412109375
+            ],
+            "m_vMaxBounds": [
+              -3042.200439453125,
+              1199.5472412109375,
+              1617.398193359375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -4353.0419921875,
+          672.8008422851562,
+          1589.22412109375
+        ],
+        "m_vMaxBounds": [
+          -3042.200439453125,
+          1199.5472412109375,
+          1617.398193359375
+        ]
+      }
+    },
+    {
+      "id": "sky:10",
+      "nativeGroupIndex": 10,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter10_ch2_detail_debris_leaves_001.vmdl_c",
+      "templateNativeSha256": "782e5a5e1449c9b8336bde71d52ad9f57873943a541a103ed4d01f7f3eb87d7a",
+      "materialGroup": "",
+      "firstInstance": 4614,
+      "instanceCount": 1,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 1,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2982.226318359375,
+              1210.6240234375,
+              1616.186279296875
+            ],
+            "m_vMaxBounds": [
+              -2940.753173828125,
+              1251.4716796875,
+              1616.186279296875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2982.226318359375,
+          1210.6240234375,
+          1616.186279296875
+        ],
+        "m_vMaxBounds": [
+          -2940.753173828125,
+          1251.4716796875,
+          1616.186279296875
+        ]
+      }
+    },
+    {
+      "id": "sky:11",
+      "nativeGroupIndex": 11,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter11_ch2_detail_debris_trash_002.vmdl_c",
+      "templateNativeSha256": "8f3483d0db8132154711529690a4e28c2e3f4ed8e75740a62a7beebdf16dfe34",
+      "materialGroup": "",
+      "firstInstance": 4615,
+      "instanceCount": 18,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 18,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5996.0869140625,
+              484.25299072265625,
+              1582.506591796875
+            ],
+            "m_vMaxBounds": [
+              -2428.26171875,
+              1428.1954345703125,
+              1618.453125
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5996.0869140625,
+          484.25299072265625,
+          1582.506591796875
+        ],
+        "m_vMaxBounds": [
+          -2428.26171875,
+          1428.1954345703125,
+          1618.453125
+        ]
+      }
+    },
+    {
+      "id": "sky:12",
+      "nativeGroupIndex": 12,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter12_ch2_detail_debris_leaves_005.vmdl_c",
+      "templateNativeSha256": "64c3c2ac5bacec1f3e4a4103152d521172526015fa8b36a89ff2fca548da04af",
+      "materialGroup": "",
+      "firstInstance": 4633,
+      "instanceCount": 22,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 22,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5216.87060546875,
+              489.78582763671875,
+              1583.1983642578125
+            ],
+            "m_vMaxBounds": [
+              -2313.269775390625,
+              1476.9161376953125,
+              1619.867431640625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5216.87060546875,
+          489.78582763671875,
+          1583.1983642578125
+        ],
+        "m_vMaxBounds": [
+          -2313.269775390625,
+          1476.9161376953125,
+          1619.867431640625
+        ]
+      }
+    },
+    {
+      "id": "sky:13",
+      "nativeGroupIndex": 13,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter13_ch2_detail_debris_leaves_003.vmdl_c",
+      "templateNativeSha256": "b83717b58ce81f7a8790016669362dcdb613a981d070b8c6d9f3a414d11c3771",
+      "materialGroup": "",
+      "firstInstance": 4655,
+      "instanceCount": 426,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.012500000186264515,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 426,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5987.1767578125,
+              459.13690185546875,
+              1581.9501953125
+            ],
+            "m_vMaxBounds": [
+              -2302.93212890625,
+              1470.7738037109375,
+              1623.1683349609375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5987.1767578125,
+          459.13690185546875,
+          1581.9501953125
+        ],
+        "m_vMaxBounds": [
+          -2302.93212890625,
+          1470.7738037109375,
+          1623.1683349609375
+        ]
+      }
+    },
+    {
+      "id": "sky:14",
+      "nativeGroupIndex": 14,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter14_ch2_detail_debris_trash_004.vmdl_c",
+      "templateNativeSha256": "b001e9727d73e42de1f5e93c41986eb073d6bf73c70ec284ae04e8d317569229",
+      "materialGroup": "",
+      "firstInstance": 5081,
+      "instanceCount": 21,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 21,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5911.24169921875,
+              456.645751953125,
+              1580.11181640625
+            ],
+            "m_vMaxBounds": [
+              -2490.03955078125,
+              1415.5181884765625,
+              1616.7451171875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5911.24169921875,
+          456.645751953125,
+          1580.11181640625
+        ],
+        "m_vMaxBounds": [
+          -2490.03955078125,
+          1415.5181884765625,
+          1616.7451171875
+        ]
+      }
+    },
+    {
+      "id": "sky:15",
+      "nativeGroupIndex": 15,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter15_ch2_detail_debris_trash_001.vmdl_c",
+      "templateNativeSha256": "fbd533ccb9df28bc837b88d75acc02d63466e39d6b00a158f34eda82a90c2cfb",
+      "materialGroup": "",
+      "firstInstance": 5102,
+      "instanceCount": 16,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 16,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5682.154296875,
+              540.662109375,
+              1584.955322265625
+            ],
+            "m_vMaxBounds": [
+              -2300.642578125,
+              1434.641845703125,
+              1616.7044677734375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5682.154296875,
+          540.662109375,
+          1584.955322265625
+        ],
+        "m_vMaxBounds": [
+          -2300.642578125,
+          1434.641845703125,
+          1616.7044677734375
+        ]
+      }
+    },
+    {
+      "id": "sky:16",
+      "nativeGroupIndex": 16,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter16_ch2_detail_debris_cables_003.vmdl_c",
+      "templateNativeSha256": "c857ba55f1bd5a75e63bc5bffc8b079196742231edf738706c0f1127c5f5a383",
+      "materialGroup": "",
+      "firstInstance": 5118,
+      "instanceCount": 1,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 1,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2617.15966796875,
+              1267.5791015625,
+              1616.18115234375
+            ],
+            "m_vMaxBounds": [
+              -2570.93017578125,
+              1318.313720703125,
+              1617.0888671875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2617.15966796875,
+          1267.5791015625,
+          1616.18115234375
+        ],
+        "m_vMaxBounds": [
+          -2570.93017578125,
+          1318.313720703125,
+          1617.0888671875
+        ]
+      }
+    },
+    {
+      "id": "sky:17",
+      "nativeGroupIndex": 17,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter17_ch2_detail_debris_leaves_004.vmdl_c",
+      "templateNativeSha256": "0d5f8fb60aa59be1a55f840d97395c405b8e3903cc66cfb85512856f0c9a8f45",
+      "materialGroup": "",
+      "firstInstance": 5119,
+      "instanceCount": 165,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 165,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5963.10107421875,
+              461.4912109375,
+              1575.893798828125
+            ],
+            "m_vMaxBounds": [
+              -2301.8388671875,
+              1434.600830078125,
+              1619.0472412109375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5963.10107421875,
+          461.4912109375,
+          1575.893798828125
+        ],
+        "m_vMaxBounds": [
+          -2301.8388671875,
+          1434.600830078125,
+          1619.0472412109375
+        ]
+      }
+    },
+    {
+      "id": "sky:18",
+      "nativeGroupIndex": 18,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter18_ch2_grass_detail_large_002c_dead.vmdl_c",
+      "templateNativeSha256": "a4967cc0f5b8d9ac36d4d6f2fab67a78fd9a429b3135ad82583007167638750d",
+      "materialGroup": "",
+      "firstInstance": 5284,
+      "instanceCount": 6814,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 2196,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5403.97607421875,
+              440.0128173828125,
+              1571.5992431640625
+            ],
+            "m_vMaxBounds": [
+              -4041.779052734375,
+              854.8810424804688,
+              1639.192626953125
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 2196,
+          "m_nLastInstance": 4192,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -4079.062255859375,
+              441.71832275390625,
+              1607.35107421875
+            ],
+            "m_vMaxBounds": [
+              -2350.7568359375,
+              856.9295654296875,
+              1639.4537353515625
+            ]
+          }
+        },
+        {
+          "m_nFirstInstance": 4192,
+          "m_nLastInstance": 6814,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -6031.29541015625,
+              818.274169921875,
+              1564.46435546875
+            ],
+            "m_vMaxBounds": [
+              -2279.065185546875,
+              1481.441162109375,
+              1640.350341796875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -6031.29541015625,
+          440.0128173828125,
+          1564.46435546875
+        ],
+        "m_vMaxBounds": [
+          -2279.065185546875,
+          1481.441162109375,
+          1640.350341796875
+        ]
+      }
+    },
+    {
+      "id": "sky:19",
+      "nativeGroupIndex": 19,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter19_ch2_detail_debris_cables_003.vmdl_c",
+      "templateNativeSha256": "be8f7cf7eb01dacd7d92ac7036ee846353cfebcafe83e504864c365945103064",
+      "materialGroup": "",
+      "firstInstance": 12098,
+      "instanceCount": 1,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.009999999776482582,
+      "nativeEndCullSize": 0.004999999888241291,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 1,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -2823.625732421875,
+              575.42626953125,
+              1616.225341796875
+            ],
+            "m_vMaxBounds": [
+              -2756.919677734375,
+              640.3551025390625,
+              1617.35498046875
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -2823.625732421875,
+          575.42626953125,
+          1616.225341796875
+        ],
+        "m_vMaxBounds": [
+          -2756.919677734375,
+          640.3551025390625,
+          1617.35498046875
+        ]
+      }
+    },
+    {
+      "id": "sky:20",
+      "nativeGroupIndex": 20,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter20_ch2_detail_debris_leaves_002.vmdl_c",
+      "templateNativeSha256": "e080a0488ea2ab3b8d438d2ffc9db0ce22064128848ce79ac954e6177c764935",
+      "materialGroup": "",
+      "firstInstance": 12099,
+      "instanceCount": 132,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.019999999552965164,
+      "nativeEndCullSize": 0.009999999776482582,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 132,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -5986.86962890625,
+              457.21185302734375,
+              1575.79052734375
+            ],
+            "m_vMaxBounds": [
+              -2308.448486328125,
+              1441.18017578125,
+              1618.2200927734375
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -5986.86962890625,
+          457.21185302734375,
+          1575.79052734375
+        ],
+        "m_vMaxBounds": [
+          -2308.448486328125,
+          1441.18017578125,
+          1618.2200927734375
+        ]
+      }
+    },
+    {
+      "id": "sky:21",
+      "nativeGroupIndex": 21,
+      "nativeResource": "maps/prefabs/de_cache/de_cache_sky/worldnodes/n0_lr0_clutter21_ch2_detail_debris_cables_002.vmdl_c",
+      "templateNativeSha256": "0a7598440b183e3ed6be32456c8339c53c030ab7ccb8f9105c6215d4aabe1f83",
+      "materialGroup": "",
+      "firstInstance": 12231,
+      "instanceCount": 1,
+      "nativeLayer": 0,
+      "nativeFlags": "OBJECT_TYPE_NONE",
+      "nativeBeginCullSize": 0.009999999776482582,
+      "nativeEndCullSize": 0.004999999888241291,
+      "nativeTiles": [
+        {
+          "m_nFirstInstance": 0,
+          "m_nLastInstance": 1,
+          "m_BoundsWs": {
+            "m_vMinBounds": [
+              -3626.84814453125,
+              1221.9041748046875,
+              1610.02783203125
+            ],
+            "m_vMaxBounds": [
+              -3560.5419921875,
+              1277.1427001953125,
+              1613.2587890625
+            ]
+          }
+        }
+      ],
+      "nativeBounds": {
+        "m_vMinBounds": [
+          -3626.84814453125,
+          1221.9041748046875,
+          1610.02783203125
+        ],
+        "m_vMaxBounds": [
+          -3560.5419921875,
+          1277.1427001953125,
+          1613.2587890625
+        ]
+      }
+    }
+  ],
+  "matrixQualification": "Exact original float32-representable position/scale fields and quaternion32bits retained. Runtime unpack uses pinnedVRF556equation without normalization. Native C# matrix-byte equivalence has NOT been proved; JS/Three intermediates mayrounddifferently.",
+  "visibilityQualification": "Native screen-size fields retained unchanged, notinterpreted as distances. Allinstancesretained; no guessedfade/density/distancecuts.",
+  "geometryManifest": "/models/maps/cache-native-geometry/source.json",
+  "foliageMaterials": "/models/maps/cache-clutter-foliage/source.json",
+  "reflectionMetadata": {
+    "file": "/models/maps/cache-skybox/lighting/reflections/source.json",
+    "volumes": 8,
+    "maxGpuBytes": 4194048
+  }
+}
