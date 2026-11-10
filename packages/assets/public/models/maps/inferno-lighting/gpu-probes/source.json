@@ -1,0 +1,54 @@
+{
+  "mapId": "inferno",
+  "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "arrays": [
+    {
+      "width": 160,
+      "height": 208,
+      "layers": 840,
+      "format": "BC6H",
+      "file": "irradiance.bin.gz",
+      "gpuBytes": 27955200,
+      "gpuSha256": "5f56315b0c9896e9543282920750b73b7a83e3428c45b6f51a3d3e87d3ab5df0",
+      "downloadBytes": 15422745
+    },
+    {
+      "width": 160,
+      "height": 208,
+      "layers": 140,
+      "format": "BC7",
+      "file": "shadows.bin.gz",
+      "gpuBytes": 4659200,
+      "gpuSha256": "c3b2ed53b24c1e621b675c3ef92a7a73db492f8f730196d1355a18bce3d185ba",
+      "downloadBytes": 466719
+    }
+  ],
+  "fallbacks": [
+    {
+      "width": 160,
+      "height": 208,
+      "layers": 840,
+      "format": "RGB16F",
+      "file": "irradiance-rgb16f.bin.gz",
+      "gpuBytes": 167731200,
+      "gpuSha256": "0c283aca4811264c120ca97c7f987cb0a69b58cc14f21d8b0f176cd5419c54fa",
+      "downloadBytes": 50457824
+    },
+    {
+      "width": 160,
+      "height": 208,
+      "layers": 140,
+      "format": "RGBA8",
+      "file": "shadows-rgba8.bin.gz",
+      "gpuBytes": 18636800,
+      "gpuSha256": "5aa85faf34f86a71db1e09f8753ad749c65fdc135aa11d04edbdc190aa68f53a",
+      "downloadBytes": 646503
+    }
+  ],
+  "sourceHashes": {
+    "env_light_probe_volume_atlas.vtex_c": "4b3d2151582bb2cb1fecae93989b2f08c6c87480cab4af44c5b0aa918f91815c",
+    "env_light_probe_volume_atlas_dlshd.vtex_c": "f9226c3ff5d86bbbf66059d6b93a3e9bc0c517546e0ab111b3ec48449f74e759"
+  },
+  "entitiesSha256": "6543427b71d46c30a0cab64797b0f3333a32e155bd082265e747f98519b76e1a",
+  "interpretation": "Untouched native z-major BC slices, six signed axes, per-volume half-texel borders, native priority/fade/remaining coverage. Fallbacks are original Source2Viewer-decoded RGB16F/RGBA8, no resampling, gamma or lossy encoding."
+}

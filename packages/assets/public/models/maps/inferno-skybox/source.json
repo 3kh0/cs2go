@@ -1,0 +1,405 @@
+{
+  "model": "/models/maps/inferno-skybox/world.glb.gz",
+  "lighting": {
+    "size": 512,
+    "nativeIrradiance": "/models/maps/inferno-skybox/irradiance.bin.gz",
+    "nativeDirectional": "/models/maps/inferno-skybox/directional.bin.gz",
+    "irradiance": "/models/maps/inferno-skybox/irradiance.exr",
+    "directional": "/models/maps/inferno-skybox/directional.png",
+    "shadows": "/models/maps/inferno-skybox/shadows.png"
+  },
+  "effects": {
+    "cloud_001_b": {
+      "Name": "materials/effects/smoke/cloud_001_b.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_DEPTH_FEATHER": 1,
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 3,
+        "g_flFadeDistance": 210,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFeatherDistance": 321.918,
+        "g_flFeatherFalloff": 1,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 0.517
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0.001,
+          0,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          0.4,
+          0.2,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0.005,
+          -0.001,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          0.5,
+          0.25,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureMask3": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/smoke/cloud_002_mask_psd_dd5b5537.vtex",
+        "g_tMask1": "materials/effects/smoke/cloud_003_mask_psd_3fa6a080.vtex",
+        "g_tMask2": "materials/effects/smoke/cloud_003_mask_psd_3fa6a080.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    },
+    "sun_disc_glow_003": {
+      "Name": "materials/effects/glows/sun_disc_glow_003.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_ADDITIVE_BLEND": 1,
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 500,
+        "g_flFadeDistance": 1,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/glows/sun_disk_glow_002_trans_psd_371bef7d.vtex",
+        "g_tMask1": "materials/default/default_mask_tga_344101f8.vtex",
+        "g_tMask2": "materials/effects/glows/sun_disk_glow_002_trans_psd_f66f7dd.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    }
+  },
+  "textures": {
+    "materials/effects/smoke/cloud_002_mask_psd_dd5b5537.vtex": {
+      "path": "/models/maps/inferno-skybox/ece8ec3336df836d.png",
+      "srgb": true,
+      "sourceSha256": "4cdfa4dee8e300be971285e01a7c503781a0f4fc0e9ec7eae6b493b9398c0d3e"
+    },
+    "materials/effects/smoke/cloud_003_mask_psd_3fa6a080.vtex": {
+      "path": "/models/maps/inferno-skybox/0881c46bbece4a1b.png",
+      "srgb": false,
+      "sourceSha256": "ef68847aa628a4f55d9945c583e8f9aefdeb9443bc1cbc55004cccb671c279b2"
+    },
+    "materials/default/default_mask_tga_344101f8.vtex": {
+      "path": "/models/maps/inferno-skybox/0d5b16c57091556d.png",
+      "srgb": false,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/glows/sun_disk_glow_002_trans_psd_371bef7d.vtex": {
+      "path": "/models/maps/inferno-skybox/1a8b3d28e645f179.png",
+      "srgb": true,
+      "sourceSha256": "b2d4e2ab215a0f2789edc9795ab09dbb5843a87a0265ef587ddaf8af0d6a635a"
+    },
+    "materials/effects/glows/sun_disk_glow_002_trans_psd_f66f7dd.vtex": {
+      "path": "/models/maps/inferno-skybox/509c4f8d443215d9.png",
+      "srgb": false,
+      "sourceSha256": "46c0b584d733e49caa7d03838d98269aa75a35465f44b0a4654c80f36c5c6cef"
+    }
+  },
+  "nativeTransform": {
+    "skyCamera": {
+      "scale": 16,
+      "classname": "sky_camera",
+      "origin": "0.000000 0.000000 0.000000",
+      "angles": "0.000000 0.000000 0.000000",
+      "scales": "1.000000 1.000000 1.000000",
+      "hammerUniqueId": "190"
+    },
+    "skyboxReference": {
+      "targetMapName": "maps/prefabs/de_inferno/inferno_skybox.vmap",
+      "fixupNames": false,
+      "worldGroupID": "skyboxWorldGroup0",
+      "classname": "skybox_reference",
+      "compile_source_id": 60,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "8125"
+    },
+    "noCenteringOrNormalization": true,
+    "browserWorldFromSkyBrowser": [
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "environmentMaterials": "/models/maps/inferno-skybox/environment/source.json",
+  "probes": "/models/maps/inferno-skybox/gpu-probes/",
+  "sun": {
+    "pitch": 63.0,
+    "yaw": 218.0,
+    "color": 16775147,
+    "intensity": 10.053096491487338
+  },
+  "ambient": {
+    "skyColor": 8964095,
+    "groundColor": 0,
+    "intensity": 1.5
+  },
+  "panorama": {
+    "angles": [
+      0.0,
+      244.999985,
+      0.0
+    ],
+    "brightness": 0.8,
+    "tint": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "counts": {
+    "effects": 11,
+    "lightmapped": 227,
+    "probeOrUnlit": 3
+  },
+  "selfIllumination": {
+    "inferno_skybox_mountain_01": {
+      "brightness": 0,
+      "scale": 1,
+      "tint": [
+        1,
+        1,
+        1
+      ],
+      "albedoFactor": 0.902
+    }
+  },
+  "staticOverlays": [],
+  "source": {
+    "worldSha256": "2d755c2e80e269c224099aeb7478ceb9247e44b1057ef593f9bb027ddcba0437",
+    "worldInfoSha256": "ed6d926374808468082ba1d0b77cea0d241d0118ac333a90435bb6b2c8c76faa",
+    "uvJoinSha256": "d3e824183c62a307afdac67f293a9528acc32dfab0cd7c60ced4b16392049ca5",
+    "cameraSha256": "f52a62b494e0694f5015d527596d10e8398a7d8f8e76787f55633549ae3d20a0",
+    "entitySha256": "2c989939659a7a3b2181d893f630664fbeeed35e960d9fb24b57cb084f8b2191",
+    "atlases": {
+      "irradiance": {
+        "sha256": "766c18038b4b99eb7bcedbe7b3c432e5e704d758680c0d14da9b0461b084532f",
+        "dimensions": {
+          "width": 512,
+          "height": 512,
+          "depth": 1,
+          "format": 19,
+          "mips": 1
+        }
+      },
+      "directional_irradiance": {
+        "sha256": "a700581e03a74ccabb4692ec4eea0ff6c62d5a862ded09f7e36ca9b482e905e3",
+        "dimensions": {
+          "width": 512,
+          "height": 512,
+          "depth": 1,
+          "format": 1,
+          "mips": 1
+        }
+      },
+      "direct_light_shadows": {
+        "sha256": "5dd270e09ae550a911ca4b30a579635fa37974ff7f72d0a1e382c94447196901",
+        "dimensions": {
+          "width": 512,
+          "height": 512,
+          "depth": 1,
+          "format": 27,
+          "mips": 1
+        }
+      }
+    },
+    "coordinateConversion": "Standalone S2V (y,z,x) metres -> browser basis once; native sky_camera offset/scale then skybox_reference rotation/translation. Never recenter, normalize, clip to NAV or scale UV charts again.",
+    "lightmapUvScaleAlreadyBaked": [
+      1.015858,
+      1.015858
+    ],
+    "reference": "VRF20.1 WorldLoader.LoadSkybox + EntityTransformHelper; browser shaders, fixed exposure and material adaptation do not establish private Source2 parity.",
+    "counts": {
+      "effects": 11,
+      "lightmapped": 227,
+      "probeOrUnlit": 3
+    },
+    "triangles": 294672,
+    "shaderCounts": {
+      "csgo_effects.vfx": 11,
+      "csgo_environment_blend.vfx": 153,
+      "csgo_lightmappedgeneric.vfx": 2,
+      "csgo_complex.vfx": 4,
+      "csgo_foliage.vfx": 47,
+      "generic.vfx": 2,
+      "csgo_environment.vfx": 22
+    },
+    "bounds": [
+      [
+        -4066.037841796875,
+        -1449.321044921875,
+        -9618.1796875
+      ],
+      [
+        7934.208984375,
+        2195.8037109375,
+        4391.44775390625
+      ]
+    ],
+    "selfIllumination": {
+      "inferno_skybox_mountain_01": {
+        "brightness": 0,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0.902
+      }
+    },
+    "staticOverlays": [],
+    "drawAlpha": [],
+    "ownReflections": {
+      "manifestSha256": "84678f2ccf1141c22df362c194e3137fa7f0ab69a6d12032d7af69f331e433f4",
+      "coordinateFrame": "Original sky Source positions/volumes/cube orientation/SH. NativeSkyFrame reverses baked main placement for shader positions/normal/view and candidate bounds exactly once.",
+      "qualification": "Exact original native BC6H faces and authored mips; existing runtime capability fallback remains on devices without BPTC/fragment uniforms/array capacity. No synthetic HDR mip fallback."
+    },
+    "shaderCoordinateFrame": {
+      "position": "NativeSkyFrame reconstructs own sky Source coordinates by inverting authored skybox_reference rotation/translation and sky_camera origin/scale once. Geometry stays baked in main-world browser coordinates; raw reflection boxes/cubes/SH stay in own native Source coordinates.",
+      "modernEnvironment": "Biplanar, wetness and facing fields use own-frame positions/normals; Source-unit bevel displacement uses native sky scale.",
+      "atlasCurvature": "Source-unit curvature uses0.0254*skyCamera.scale per baked browser metre; main-map default remains1.",
+      "clock": "Native environment.update is stepped by the same own-sky preparation clock as fog/cloud effects."
+    }
+  },
+  "reflections": {
+    "directory": "/models/maps/inferno-skybox/lighting/reflections/",
+    "manifest": "source.json",
+    "volumes": 1,
+    "maxGpuBytes": 524256
+  }
+}

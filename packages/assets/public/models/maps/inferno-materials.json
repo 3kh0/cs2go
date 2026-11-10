@@ -1,0 +1,4012 @@
+{
+  "materials": [
+    {
+      "name": "overlay_ground_border_dirt_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "overlay_ground_border_leaves_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_stroke_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0.501961,
+            0.501961,
+            0.501961,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_trim_decal_leakage_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 2,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_arrow_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_chicken_lover_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "top_grime_2",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 3,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_b_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_vinoauty_decals_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_a_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_func_vehicule_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.823529,
+            0.792157,
+            0.741176,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            1,
+            0.968628,
+            0.901961,
+            1
+          ],
+          "TextureMetalness": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0.388235,
+            0.388235,
+            0.388235,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ghost_sign_banana_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ghost_sign_macaroni_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "overlay_ground_nature_debris_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "overlay_ground_dirt_debris_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.443,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ghost_sign_macaroni_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_graffiti_coffin_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_arrow_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_b_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ghost_sign_grosini_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_tenuta_auti_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_trim_decal_leakage_01_c",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 0.3,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_trim_decal_leakage_01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 2,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ceiling_ornament",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "cs_really_hilarious_joke",
+      "selfIllumination": {
+        "brightness": 1.5,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "sign_01_farmacia_a_glow_low",
+      "selfIllumination": {
+        "brightness": 1,
+        "scale": 0.5,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "bulb_01_glow_white_100",
+      "selfIllumination": {
+        "brightness": 4.5,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "bulb_01_glow_white_50",
+      "selfIllumination": {
+        "brightness": 3,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "ceiling_fan_01",
+      "selfIllumination": {
+        "brightness": 1,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "chandelier_01",
+      "selfIllumination": {
+        "brightness": 1,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "fluorescent_lights_01_bulbs",
+      "selfIllumination": {
+        "brightness": 1,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "fluorescent_lights_01_bulbs_glow_high",
+      "selfIllumination": {
+        "brightness": 2.7,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "fluorescent_lights_01_bulbs_glow_off",
+      "selfIllumination": {
+        "brightness": 0,
+        "scale": 0,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "glass_stained_inferno_01_unlit",
+      "selfIllumination": {
+        "brightness": 4,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "glass_stained_inferno_01_unlit",
+      "selfIllumination": {
+        "brightness": 4,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "glass_stained_inferno_01_unlit",
+      "selfIllumination": {
+        "brightness": 4,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "glass_stained_inferno_01_unlit",
+      "selfIllumination": {
+        "brightness": 4,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "glass_stained_inferno_01_unlit",
+      "selfIllumination": {
+        "brightness": 4,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "glass_stained_inferno_01_unlit",
+      "selfIllumination": {
+        "brightness": 4,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "glass_stained_inferno_01_unlit",
+      "selfIllumination": {
+        "brightness": 4,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "handheld_lamp_kit_01",
+      "selfIllumination": {
+        "brightness": 0.75,
+        "scale": 0.5,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "handheld_lamp_kit_01_glow_med",
+      "selfIllumination": {
+        "brightness": 0.5,
+        "scale": 0.5,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "interior_lamp_kit_03",
+      "selfIllumination": {
+        "brightness": 2,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "lamp_01_shade_glow_off",
+      "selfIllumination": {
+        "brightness": 0,
+        "scale": 0,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "lamp_02_shade_glow_medium",
+      "selfIllumination": {
+        "brightness": 2.5,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "lamp_02_shade_glow_off",
+      "selfIllumination": {
+        "brightness": 1,
+        "scale": 0,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "lamp_kit_03_lamp_01_a_glowmed",
+      "selfIllumination": {
+        "brightness": 2,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "lamp_kit_03_lamp_01_a_glowoff",
+      "selfIllumination": {
+        "brightness": 1,
+        "scale": 0,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "lamp_kit_03_lamp_02_a",
+      "selfIllumination": {
+        "brightness": 3,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 0
+      }
+    },
+    {
+      "name": "lamp_kit_03_lamp_02_a_glowoff",
+      "selfIllumination": {
+        "brightness": 0,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "window_opaque_1b_lit_sky",
+      "selfIllumination": {
+        "brightness": 2,
+        "scale": 1,
+        "tint": [
+          0.823529,
+          0.890196,
+          1
+        ],
+        "albedoFactor": 0.5
+      }
+    },
+    {
+      "name": "window_opaque_1b_lit_sun",
+      "selfIllumination": {
+        "brightness": 2,
+        "scale": 1,
+        "tint": [
+          0.858824,
+          0.952941,
+          0.988235
+        ],
+        "albedoFactor": 0.5
+      }
+    },
+    {
+      "name": "overlay_ground_border_dirt_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "overlay_ground_border_leaves_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_stroke_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0.501961,
+            0.501961,
+            0.501961,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_trim_decal_leakage_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 2,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_arrow_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_chicken_lover_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "top_grime_2__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 3,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_b_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_vinoauty_decals_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_a_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_func_vehicule_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.823529,
+            0.792157,
+            0.741176,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            1,
+            0.968628,
+            0.901961,
+            1
+          ],
+          "TextureMetalness": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureRoughness": [
+            0.388235,
+            0.388235,
+            0.388235,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ghost_sign_banana_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ghost_sign_macaroni_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "overlay_ground_nature_debris_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "overlay_ground_dirt_debris_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.443,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ghost_sign_macaroni_01__alpha_0.686275",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_graffiti_coffin_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_arrow_01__alpha_0.784314",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_bombsite_signs_b_01__alpha_0.784314",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureAmbientOcclusion": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureMetalness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureNormal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureRoughness": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureSelfIllumMask": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ghost_sign_grosini_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_tenuta_auti_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_trim_decal_leakage_01_c__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 0.3,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_trim_decal_leakage_01__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 2,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 0,
+          "g_flOpacityScale": 0.9,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            0.972549,
+            0.952941,
+            0.92549,
+            1
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "inferno_ceiling_ornament__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 1,
+          "F_DO_NOT_CAST_SHADOWS": 1,
+          "F_LIT": 1,
+          "F_PAINT_VERTEX_COLORS": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "mapId": "inferno",
+  "space": "sky0",
+  "arrays": [
+    {
+      "width": 72,
+      "height": 132,
+      "layers": 240,
+      "format": "BC6H",
+      "file": "irradiance.bin.gz",
+      "gpuBytes": 2280960,
+      "gpuSha256": "d3994eeaa286e79e3fecfca87670891e5577cbbd79435de7f3dc394292970700",
+      "downloadBytes": 1511641
+    },
+    {
+      "width": 72,
+      "height": 132,
+      "layers": 40,
+      "format": "BC7",
+      "file": "shadows.bin.gz",
+      "gpuBytes": 380160,
+      "gpuSha256": "9881c07cafcd15212424bc0e0fd7075ff87b929b16bee060210f111f1c91e3e7",
+      "downloadBytes": 11489
+    }
+  ],
+  "fallbacks": [
+    {
+      "width": 72,
+      "height": 132,
+      "layers": 240,
+      "format": "RGB16F",
+      "file": "irradiance-rgb16f.bin.gz",
+      "gpuBytes": 13685760,
+      "gpuSha256": "ff8ebbbbde96afad01bfd871737f8cdf8f5260ecff1af1ab42084fcc7be3580a",
+      "downloadBytes": 5161712
+    },
+    {
+      "width": 72,
+      "height": 132,
+      "layers": 40,
+      "format": "RGBA8",
+      "file": "shadows-rgba8.bin.gz",
+      "gpuBytes": 1520640,
+      "gpuSha256": "118070feb1fade3b1a454bcaeb77a3edd0ca33fa5d913cfed163796b142aa4fc",
+      "downloadBytes": 22494
+    }
+  ],
+  "sourceHashes": {
+    "maps/prefabs/de_inferno/inferno_skybox/lightmaps/env_light_probe_volume_atlas.vtex": "e340d29bafd2bf18042b7d23f8bf3307a5e26fd6fe9b1cf3b19ddbc02c826edd",
+    "maps/prefabs/de_inferno/inferno_skybox/lightmaps/env_light_probe_volume_atlas_dlshd.vtex": "5bd05ec8970390659ee29026b9b5309853341cf49c9a9bc009c6a2688ac605e4"
+  },
+  "cameraSha256": "f52a62b494e0694f5015d527596d10e8398a7d8f8e76787f55633549ae3d20a0",
+  "worldInfoSha256": "ed6d926374808468082ba1d0b77cea0d241d0118ac333a90435bb6b2c8c76faa",
+  "interpretation": "Original sky-owned BC6H/BC7 arrays and exact decoded fallbacks; native volume frames composed with sky placement."
+}

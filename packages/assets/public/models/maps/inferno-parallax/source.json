@@ -1,0 +1,1740 @@
+{
+  "mapId": "inferno",
+  "materials": {
+    "inferno_apartment_windows_01_glass": {
+      "shader": "csgo_simple_3layer_parallax.vfx",
+      "nativeResource": "models/de_inferno/inferno_apartment_windows_01/inferno_apartment_windows_01_glass.vmat",
+      "IntParams": {
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 2,
+        "g_nTextureAddressModeV": 2
+      },
+      "FloatParams": {
+        "g_flLayer1EmissiveLevel": 4.5,
+        "g_flLayer1Offset": -120,
+        "g_flLayer2EmissiveLevel": 0,
+        "g_flLayer2Offset": 0,
+        "g_flMetalness": 0
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1EmissiveTint": [
+          0.741176,
+          0.839216,
+          1,
+          1
+        ],
+        "g_vLayer2EmissiveTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureLayer2Color": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureNormal": [
+          0.501961,
+          0.501961,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tAmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tColor": "dc998b6522a5af60",
+        "g_tLayer0Mask": "3524fd27a797ac76",
+        "g_tLayer1Color": "4fe5e45d8a69a3d7",
+        "g_tLayer2Color": "fedd8d9bbe1c270b",
+        "g_tNormal": "1abf0cc408218ff1"
+      },
+      "textureReflectivity": {
+        "g_tAmbientOcclusion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "g_tColor": [
+          0.13532903790473938,
+          0.16879478096961975,
+          0.1956566572189331
+        ],
+        "g_tLayer0Mask": [
+          0.21958114206790924,
+          0.0,
+          0.0
+        ],
+        "g_tLayer1Color": [
+          0.38360345363616943,
+          0.38360345363616943,
+          0.38360345363616943
+        ],
+        "g_tLayer2Color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_tNormal": [
+          0.5038914084434509,
+          0.5,
+          0.26335030794143677
+        ]
+      },
+      "modelTintQualification": "Exporter baseColorFactor may combine native model tint/material approximation; retain material instance identity and avoid multiplying native color correction twice.",
+      "exportedVariants": [
+        {
+          "materialIndex": 57,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "constants": {
+        "g_tAmbientOcclusion": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_tLayer2Color": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "inferno_apartment_windows_01_glass_sun": {
+      "shader": "csgo_simple_3layer_parallax.vfx",
+      "nativeResource": "models/de_inferno/inferno_apartment_windows_01/inferno_apartment_windows_01_glass_sun.vmat",
+      "IntParams": {
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 2,
+        "g_nTextureAddressModeV": 2
+      },
+      "FloatParams": {
+        "g_flLayer1EmissiveLevel": 8,
+        "g_flLayer1Offset": -120,
+        "g_flLayer2EmissiveLevel": 0,
+        "g_flLayer2Offset": 0,
+        "g_flMetalness": 0
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1EmissiveTint": [
+          1,
+          0.8,
+          0.501961,
+          1
+        ],
+        "g_vLayer2EmissiveTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureLayer2Color": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureNormal": [
+          0.501961,
+          0.501961,
+          1,
+          0
+        ]
+      },
+      "textures": {
+        "g_tAmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tColor": "dc998b6522a5af60",
+        "g_tLayer0Mask": "3524fd27a797ac76",
+        "g_tLayer1Color": "4fe5e45d8a69a3d7",
+        "g_tLayer2Color": "1f4540808327bedf",
+        "g_tNormal": "1abf0cc408218ff1"
+      },
+      "textureReflectivity": {
+        "g_tAmbientOcclusion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "g_tColor": [
+          0.13532903790473938,
+          0.16879478096961975,
+          0.1956566572189331
+        ],
+        "g_tLayer0Mask": [
+          0.21958114206790924,
+          0.0,
+          0.0
+        ],
+        "g_tLayer1Color": [
+          0.38360345363616943,
+          0.38360345363616943,
+          0.38360345363616943
+        ],
+        "g_tLayer2Color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_tNormal": [
+          0.5038914084434509,
+          0.5,
+          0.26335030794143677
+        ]
+      },
+      "modelTintQualification": "Exporter baseColorFactor may combine native model tint/material approximation; retain material instance identity and avoid multiplying native color correction twice.",
+      "exportedVariants": [
+        {
+          "materialIndex": 347,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "constants": {
+        "g_tAmbientOcclusion": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_tLayer2Color": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "italy_windows_glass_01a": {
+      "shader": "csgo_simple_3layer_parallax.vfx",
+      "nativeResource": "models/cs_italy/italy_windowkit_01/italy_windows_glass_01a.vmat",
+      "IntParams": {
+        "F_TINT_MASK": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 2,
+        "g_nTextureAddressModeV": 2
+      },
+      "FloatParams": {
+        "g_flLayer1EmissiveLevel": 0,
+        "g_flLayer1Offset": -90.411,
+        "g_flLayer2EmissiveLevel": 0,
+        "g_flLayer2Offset": -358.904,
+        "g_flMetalness": 0
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer1EmissiveTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vLayer2EmissiveTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureTintMask": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textures": {
+        "g_tAmbientOcclusion": "cf0f8accdfc38e3f",
+        "g_tColor": "13f6c0aadba46bd5",
+        "g_tLayer0Mask": "d07253be0aca8a88",
+        "g_tLayer1Color": "b6baa5622c700ff0",
+        "g_tLayer2Color": "2b59c3dfef34a101",
+        "g_tNormal": "e90e94d94ae63a80",
+        "g_tTintMask": "7f681cd5120acdf9"
+      },
+      "textureReflectivity": {
+        "g_tAmbientOcclusion": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "g_tColor": [
+          0.40015363693237305,
+          0.39817142486572266,
+          0.4049416780471802
+        ],
+        "g_tLayer0Mask": [
+          0.5133556723594666,
+          0.0,
+          0.0
+        ],
+        "g_tLayer1Color": [
+          0.27584588527679443,
+          0.2748658061027527,
+          0.2733176052570343
+        ],
+        "g_tLayer2Color": [
+          0.1200893223285675,
+          0.1200893223285675,
+          0.1200893223285675
+        ],
+        "g_tNormal": [
+          0.5038910508155823,
+          0.5,
+          0.28899967670440674
+        ],
+        "g_tTintMask": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "modelTintQualification": "Exporter baseColorFactor may combine native model tint/material approximation; retain material instance identity and avoid multiplying native color correction twice.",
+      "exportedVariants": [
+        {
+          "materialIndex": 669,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "materialIndex": 670,
+          "baseColorFactor": [
+            0.22322784,
+            0.15896073,
+            0.11443529,
+            1
+          ]
+        },
+        {
+          "materialIndex": 671,
+          "baseColorFactor": [
+            0.104616374,
+            0.074213475,
+            0.057805333,
+            1
+          ]
+        },
+        {
+          "materialIndex": 672,
+          "baseColorFactor": [
+            0.17144099,
+            0.12743756,
+            0.095307365,
+            1
+          ]
+        },
+        {
+          "materialIndex": 673,
+          "baseColorFactor": [
+            0.15292604,
+            0.09084161,
+            0.049706455,
+            1
+          ]
+        },
+        {
+          "materialIndex": 674,
+          "baseColorFactor": [
+            0.1221387,
+            0.17144099,
+            0.08437612,
+            1
+          ]
+        },
+        {
+          "materialIndex": 675,
+          "baseColorFactor": [
+            0.37626207,
+            0.19806919,
+            0.097587265,
+            1
+          ]
+        }
+      ],
+      "constants": {
+        "g_tAmbientOcclusion": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "g_tTintMask": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      }
+    }
+  },
+  "textures": {
+    "cf0f8accdfc38e3f": {
+      "resource": "materials/default/default_ao_tga_559f1ac6.vtex",
+      "sourceSha256": "e0b83fe25f7950a35126785af19a9b89edf78d8bfbba184e13185f84ec4a9795",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "fallback": "cf0f8accdfc38e3f.webp",
+      "fallbackSha256": "52dc24c0429ea6ccc5b579a6da8bb79bf41e471fe5108a62009f3c2e195551c0",
+      "decodedSource": "default_ao_tga_559f1ac6.png",
+      "decodedSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3",
+      "fallbackFile": "cf0f8accdfc38e3f-rgba8-mips.bin.gz",
+      "fallbackBytes": 4,
+      "fallbackMips": [
+        {
+          "width": 1,
+          "height": 1,
+          "bytes": 4,
+          "sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+        }
+      ],
+      "constant": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "dc998b6522a5af60": {
+      "resource": "models/de_inferno/inferno_apartment_windows_01/inferno_apartment_windows_01_glass_color_tga_493f84e4.vtex",
+      "sourceSha256": "c2ee82dee0e381a8414a6504bd39c67f5e9c228ee3444590617baa25983281d1",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        1024
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.13532903790473938,
+        0.16879478096961975,
+        0.1956566572189331
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "dc998b6522a5af60.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "c6f2fe1bf1468afda70bd4f83f7c4f7d1c26ed7c163e5f01403532cd4663d312",
+      "mips": [
+        {
+          "width": 512,
+          "height": 1024,
+          "bytes": 262144,
+          "sha256": "2d9fc2fadb56eec5d662413faccfa8069e78c7dcfb7f882addef05787c3d6f1f"
+        },
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 65536,
+          "sha256": "69469fb5b0a177d73e7cb525fcff770b67f4e2dbe78c4fd988cd94a87c180260"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 16384,
+          "sha256": "5f631cbf41c16f58ba16defd9faa6d44809582c4ddd53c4a20aa4d84470db86d"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 4096,
+          "sha256": "371cd8d6f3e89740c6e657b3c6ba720c13556dea7d8e190b5abaf075fabadbaf"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 1024,
+          "sha256": "ad59c06d03cac7a5de19350da86c5a51d09558d135fdb6989a8e102ea19a4947"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 256,
+          "sha256": "ba2878df8fc8a262d5dd7980f8e2fa0f127a8be8b80d91dc6f32b4ce785a4418"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 64,
+          "sha256": "95431aa18cc0bfa267f3e1adfe960d0278b411e45d03921b3e0b6f43297016b9"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 16,
+          "sha256": "5a0fcbf747805ede5956ac69fdf39e368bc149640eb762591bf314f6e1411a40"
+        }
+      ],
+      "fallback": "dc998b6522a5af60.webp",
+      "fallbackSha256": "a745da1bfc88a922e0437c114308c876808c539c455279794eb947461c0c905c",
+      "decodedSource": "dc998b6522a5af60.png",
+      "decodedSha256": "fa22b49e4e4868c9b2ea3ebe513a8ce93489fc916c5a1561a24604e57ff3fbcd",
+      "fallbackFile": "dc998b6522a5af60-rgba8-mips.bin.gz",
+      "fallbackBytes": 2796160,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 1024,
+          "bytes": 2097152,
+          "sha256": "5e4e44418b78d19ace9833bad6965ad9b16acdb04f9cb9e83e832471f7ae7e0a"
+        },
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "26482a08ef0b61c43a542fea407e778e26f099c1d856888bbaf8a25b38ff2e08"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "66b1f23a163d8dadc7f96ce4863e6d4b2b4315bdc1bc30f9dc8521adaaa0dfb1"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "e80ba3c0a908a31bf8473d49461cfb652ebf80d0a684f48944ad4e08ad70d81f"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "5e4e04d80972cb1a5222e98fe35bcddf0b41cd577d5c7bb234da121aa9551f1f"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "2a3c71abd55f54dd8245fc52a956078e39cdac98cd155cd5d6f53c188d0d51e0"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "3bbf3cf0992266fda4104488a4f8231608a7d9a26bf15c7462d9053435f2d5f3"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "096ed328f48ae684d34e8177f0b2fcb0ffacf9477a21114107eb084d09a40912"
+        }
+      ]
+    },
+    "3524fd27a797ac76": {
+      "resource": "models/de_inferno/inferno_apartment_windows_01/inferno_apartment_windows_01_glass_layer0_mask_tga_74fdfd09.vtex",
+      "sourceSha256": "d9c5c921b85e4e6deb36e6f2aa9a85fce9a91ec7dba4b95b394787b96c6de968",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        1024
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        0.21958114206790924,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "3524fd27a797ac76.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "e0e4911ed483cf7dc1ff26a5381f9f832870927aa81f7c2b56f207dff7b14e20",
+      "mips": [
+        {
+          "width": 512,
+          "height": 1024,
+          "bytes": 262144,
+          "sha256": "1b690ddfcdaa0cbe7c6b4138a75a3cf66613b7bacd9a4469d9c3315be893f14b"
+        },
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 65536,
+          "sha256": "9a604dc2c77af1b7164f79fe887c92d26f77f68ecb9758fd833406fbabbf6aa1"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 16384,
+          "sha256": "6605d0387049317eeacf3080671b933bcdeab5c3f38df02ef22083af7e96057d"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 4096,
+          "sha256": "f49448320a05b36c045bbfa9b1721fd0e96a1b4ef88312dee042c80a4f2269bb"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 1024,
+          "sha256": "b5c6603e9dbb0ad7bc0e53d21cf8f2edc1697bd610d19d54f5dd155bd15d0d3f"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 256,
+          "sha256": "f6883d358402bad548dc39ffcc73fc7477513038203f1252dd58b77c2c0cb983"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 64,
+          "sha256": "e91096205fd16e351f02189ac2fe18805be014667c9dd023a3a7492dabacc4f0"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 16,
+          "sha256": "94a6c05be887f5d73339bd4251be5cb3f0634e00386c02cd93fd7cf9d2f54394"
+        }
+      ],
+      "fallback": "3524fd27a797ac76.webp",
+      "fallbackSha256": "7116aa4b00440399132a8cfede47abdbb11fdbcde97e3f690cabfcfb417768dd",
+      "decodedSource": "3524fd27a797ac76.png",
+      "decodedSha256": "066be2b845122115fbfcf868f2a8153cc10a32aea397a7c48ef67fe92a90697e",
+      "fallbackFile": "3524fd27a797ac76-rgba8-mips.bin.gz",
+      "fallbackBytes": 2796160,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 1024,
+          "bytes": 2097152,
+          "sha256": "16c7e282e394cbf1a1dbb9d3b6e88c28240f274aeb5e3ee52862fdb214e27d6b"
+        },
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "5822c57a8241b2e367aba0caa0d5a6065e67df2d967823c596269ef0bafc7b80"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "bef7b2fb0121f5df011cbe1277f614e64583c1e1b68c1fe26eda6ed3e3b68ba1"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "8d8d4ef24e70409ecba51517dead0b6ed295429fe137ea4921e4ba504135ef8d"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "913ddc6fa898d7569ce52219eecffd4ef5736f0e06bb08a60635bc2c829b9ee9"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "071690f4cc7ed0b03e5a7b3bc8a02c1c486ed0ff767a55cc48c1993a39480b4d"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "1d4c18bb417a974519ce0fc86efa819bbbbacc98bf773c697b92b85be90151fb"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "899119c0bd8e583308d88376345982d2d93f8cdd62662b3ce1eaa3bbb4d2326b"
+        }
+      ]
+    },
+    "4fe5e45d8a69a3d7": {
+      "resource": "models/de_inferno/inferno_apartment_windows_01/inferno_apartment_windows_01_glass_selfillum_tga_4a143d92.vtex",
+      "sourceSha256": "f75021ce49bf9686f21c82ec817c512ff73d923bf2fe54a9c7834031d77365a1",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.38360345363616943,
+        0.38360345363616943,
+        0.38360345363616943
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "4fe5e45d8a69a3d7.bin.gz",
+      "gpuBytes": 699040,
+      "gpuSha256": "b6abf035b4b7640ab712239660b36ffb37a11509169251d9184225b6cc0c6e77",
+      "mips": [
+        {
+          "width": 512,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "fa177d4825dbc0c43b48e8dd81ec548f61818d90a127e1a3db8edfc1f0ab5b34"
+        },
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "004dbe402d25e4b9d857511b044e2e0234393b3f5f3b3be0ef9ff63f716bab1a"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "1d6aace6d93edb943fffa0cd44947adaff84bcdf4bcb7d15e9005d884859e147"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "b6daa8b0e708ec8cc7ba36ab8c0868588d7f2915bba59169b30552d6523c6f25"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "50668cea6ab37e723a92dd8e572fcc0c86de1bdeb2f1a9f2f787114318cea868"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "d92d62e7c03324c403243e3645e7253575941a678f4a9b17f33533be564066d2"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "5c666fb262162356e86581c60bc8be3caa32c5e2ddaab70562e7678d6fed1fca"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "8c1ee85b3967b19b1ede89041d79ffaa68d5f59799576879bf205075f115a060"
+        }
+      ],
+      "fallback": "4fe5e45d8a69a3d7.webp",
+      "fallbackSha256": "dcb1023beed7ac654a15872a81b75088593dfc8e8f92a1c2e444c58779835119",
+      "decodedSource": "4fe5e45d8a69a3d7.png",
+      "decodedSha256": "3679813157c12220e01bb579b195fab2d719b480db8659e3c34f4245099cc076",
+      "fallbackFile": "4fe5e45d8a69a3d7-rgba8-mips.bin.gz",
+      "fallbackBytes": 2796160,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 1024,
+          "bytes": 2097152,
+          "sha256": "aebf357a0460d327877df4a0738456bf00556f787e234a34bd97a3b5e11104c4"
+        },
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "366c73c4e6cfe9d22cfdcd065a0043bc59c94d5977be350970b026a37757c9d3"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "a1be436de9bc999d763230b334c715c461342681a934d59aa48f78752d1745ad"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "c5758059f6b9597745ac7ec2aba5d6d8c630f6bfbf4dbd8ce7376c2932bf802d"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "06be268ee8bca520b17cea0ae084f2fe98bc512b93bdf51818a079c2f1e5c904"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "3e5763cb66a8cff36cd7cda32f4db97fe8a42bcbad4364fb7e380f6e9ac97cdc"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "1c8540f9b82c74be08f30645f8f7b51587576240afb11137345e9e723c9e9b5f"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "2a7303a449be5f109b1d19e87a2cf725898d70c6898b519e1037d303ebb425d7"
+        }
+      ]
+    },
+    "fedd8d9bbe1c270b": {
+      "resource": "models/de_inferno/inferno_apartment_windows_01/inferno_apartment_windows_01_glass_vmat_g_tlayer2color_a00ef19e.vtex",
+      "sourceSha256": "7ebd9d9ca59598607840eb27877566dae6a877bbb39d282aa987407584af985c",
+      "srgb": true,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "fallback": "fedd8d9bbe1c270b.webp",
+      "fallbackSha256": "52dc24c0429ea6ccc5b579a6da8bb79bf41e471fe5108a62009f3c2e195551c0",
+      "decodedSource": "inferno_apartment_windows_01_glass_vmat_g_tlayer2color_a00ef19e.png",
+      "decodedSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3",
+      "fallbackFile": "fedd8d9bbe1c270b-rgba8-mips.bin.gz",
+      "fallbackBytes": 4,
+      "fallbackMips": [
+        {
+          "width": 1,
+          "height": 1,
+          "bytes": 4,
+          "sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+        }
+      ],
+      "constant": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "1abf0cc408218ff1": {
+      "resource": "models/de_inferno/inferno_apartment_windows_01/inferno_apartment_windows_01_glass_rough_tga_c8c26e9a.vtex",
+      "sourceSha256": "54931a52a798ad94869172a004f37d129a34018bc80b472d0bf3cad93c902722",
+      "srgb": false,
+      "sourceSize": [
+        512,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038914084434509,
+        0.5,
+        0.26335030794143677
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "1abf0cc408218ff1.bin.gz",
+      "gpuBytes": 699040,
+      "gpuSha256": "2bfd2112112565ff082aef3c5abcffc86bd82a7b0a55ffe22d4fdd7f146fa917",
+      "mips": [
+        {
+          "width": 512,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "9293d2dd210575897559a38a0d5784c7fc0c1541c144a85df4133ff471feefb3"
+        },
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "7ce0ffa1a9564c6c4a67b25cc0687f7c9ddf68fbac8bf119c45af164cd090c78"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "303598dbeda280a22eafd296480991cd41ade34d66c6622815a5347e33d4bf06"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "143e27cbdc8492b49eddac024e24c1f95421101c87c7121c99f72b9645d22d7e"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "37dcb41854dfcc8d2cf09c1ef02d241bb452fb94efa4f02c8205a1efa63b0295"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "60d2601b828aa3cc0f4cec8031978595b1c4b7560a5926371d46d85256970457"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "992c7f6a8fe877827deb011583c4c01d2b1b7cd760a0e703b72b7818b8ad37ca"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "3ba09dff28d39ceded83d537eeb8bc887c789a49b3640fce41e769b468344445"
+        }
+      ],
+      "fallback": "1abf0cc408218ff1.webp",
+      "fallbackSha256": "bbb5f88ecb88dde2aa96a5b8715e7c824cfd8a9d951cbec84ec6034faff15a8c",
+      "decodedSource": "1abf0cc408218ff1.png",
+      "decodedSha256": "0dc9ff62cd794f682e7e938f0391ea44fbe2950a4527d516ca1186e0604fc018",
+      "fallbackFile": "1abf0cc408218ff1-rgba8-mips.bin.gz",
+      "fallbackBytes": 2796160,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 1024,
+          "bytes": 2097152,
+          "sha256": "fcc28070c05b94bee61db25180a061cd2dae0e7441adfc12df42673abd594aa4"
+        },
+        {
+          "width": 256,
+          "height": 512,
+          "bytes": 524288,
+          "sha256": "a9b62ab355e6362838bef05fa56526596fc2d39d21681b823d785a915b1548bf"
+        },
+        {
+          "width": 128,
+          "height": 256,
+          "bytes": 131072,
+          "sha256": "98e7a3a87e41a2e1e627b90bd4502c027179ccd0846111f9c9d4a212abcbb819"
+        },
+        {
+          "width": 64,
+          "height": 128,
+          "bytes": 32768,
+          "sha256": "f385b44fb600419091cc0f22ac316c1f478f3043cb2e385e6176cc1936041831"
+        },
+        {
+          "width": 32,
+          "height": 64,
+          "bytes": 8192,
+          "sha256": "d3b8c29c99cf4e5afa9b6da9d1e25a4ac1b5f4912cdf55eb0ea25952a6004ae4"
+        },
+        {
+          "width": 16,
+          "height": 32,
+          "bytes": 2048,
+          "sha256": "cfd7bf23c35a9c35b87c6bb338cb53c71df7a0daf4c480096294d6522a51cb32"
+        },
+        {
+          "width": 8,
+          "height": 16,
+          "bytes": 512,
+          "sha256": "872d7ef3a50a5f32140c084da8d1da43940b510072550b52e75598083c695181"
+        },
+        {
+          "width": 4,
+          "height": 8,
+          "bytes": 128,
+          "sha256": "8116d9cbc947a2ee11168e7637ce14f03c2b8992dd3af947525a892c5a009d25"
+        }
+      ]
+    },
+    "1f4540808327bedf": {
+      "resource": "models/de_inferno/inferno_apartment_windows_01/inferno_apartment_windows_01_glass_sun_vmat_g_tlayer2color_a00ef19e.vtex",
+      "sourceSha256": "7ebd9d9ca59598607840eb27877566dae6a877bbb39d282aa987407584af985c",
+      "srgb": true,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "fallback": "1f4540808327bedf.webp",
+      "fallbackSha256": "52dc24c0429ea6ccc5b579a6da8bb79bf41e471fe5108a62009f3c2e195551c0",
+      "decodedSource": "inferno_apartment_windows_01_glass_sun_vmat_g_tlayer2color_a00ef19e.png",
+      "decodedSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3",
+      "fallbackFile": "1f4540808327bedf-rgba8-mips.bin.gz",
+      "fallbackBytes": 4,
+      "fallbackMips": [
+        {
+          "width": 1,
+          "height": 1,
+          "bytes": 4,
+          "sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+        }
+      ],
+      "constant": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "13f6c0aadba46bd5": {
+      "resource": "materials/cs_italy/windows/window_001_layer_0_color_psd_3ac48bc.vtex",
+      "sourceSha256": "86f4a5aaf5353b339af694f64ff5e08159796dab912479688618101089a3fb9a",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.40015363693237305,
+        0.39817142486572266,
+        0.4049416780471802
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "13f6c0aadba46bd5.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "8c96bfca5e137e812c41fff3972ac9e5fb2d0547760c5537d6709d18a057a8ec",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "0bbcbe772230eb5235bbe2e02a5efc7071d880ffe29d4d9b7cc82a3bcc46385d"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "6ec2448d97cbbf19ef9b6d8d6dfd0fcd03c91c7e7abf6a8549dedfdb5202b195"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "38be1ba1ddbd7168bba8e14ab1404d1478fea0ac18854613e6d0c10c7af6a096"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "7641120a52e18c8e3747b3bfba6773d91fb0d5912d15492593e79f9c423cb503"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "3598ecb8e102635c2a64234fa4c098b19e43899a62c0d5d236c904f95a8b6387"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "35a974207869e927df09c9315efacd215773083e5fa69419a88318a03bb9fe5c"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "8566e0324313d6bedaa0396e527965b51e0ef245b39e9f4ab3fd0c7e8d5ad3f9"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "0e2938e03bf38deef1f669ca1f0652e15df2db11cd3c020d92d7244106316dbf"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "c654487183eb13aa7f2bb69275b1558adeb3c58889413a86cb58906b4231b673"
+        }
+      ],
+      "fallback": "13f6c0aadba46bd5.webp",
+      "fallbackSha256": "bf5e7b71b61654d1f329b0eff9b4047888e26e6d418a3aa50495429d88cb95fd",
+      "decodedSource": "13f6c0aadba46bd5.png",
+      "decodedSha256": "b62541c006339bb2a4ef54d4a411bab9d845d8b09b2ae53ce2c259f7ca7a42f6",
+      "fallbackFile": "13f6c0aadba46bd5-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "9902bbaa32de2cb0db5a972a011a1cc77cd47944de697c060d7cb79d6fe649d0"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "1471ccdcf1687b20dd2cfa85e4b4e53f446919235211a2037b520cdae6aca837"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "680164f79df1c431a899762e85569b57cc82c16a0b81a2fb781887edf26ac9c7"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "caa8fd637098c33948e4dc6c2b6b594d050fe69051c126514718fcf2b1633c2e"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "3958656612f177621c9714ba553a9309fd419b1caf34c58e32be32666ca4b238"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "4675e253a385befb2b3fc5fd316fe9ced08bd1d3a25346fb286bd8be439695fb"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "adc921ae90a41a289e31c3ee63a38f50cae1f92c10136e936cffe8aeea08f02b"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "246f27ba62482328a0a852a87ba3648f87beac09f01a3b61914eb29876a29d87"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "97aae43ada40320a94e0637a7ea54bb63cc31c55ccd897f2613b64498aebde91"
+        }
+      ]
+    },
+    "d07253be0aca8a88": {
+      "resource": "materials/cs_italy/windows/window_001_layer_0_trans_psd_82f17194.vtex",
+      "sourceSha256": "1650b4926ae54311c02bfb260d2f4965e6e08c1acd7135cdc2e3b79734d8207a",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        0.5133556723594666,
+        0.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC4",
+      "file": "d07253be0aca8a88.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "2e5ce73bd1260528ed3e4c421cdc5009d6235590a70edf6553efa4f3c64eabb3",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "d54b7b94c422426dfdcbd6d120c915ff1d3110f62c2707bca3881a672195280b"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "f278d38b11b51e0a2cd34388b9cda9494ae49877b4121c2f749809fb5e64ca5e"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "8e7f1c7c9b2e091caff10885b300c3eabf9d9a88d2c7ebdadfff3e48ca187bc5"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "b03e15a9e7c9ae16a2b0655b688ae4eefd5db4b155f439f4221eee6441b4940a"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "9dc20347b0ec69e528ccaa375535f1ded46901bb659df0c3545049896306d778"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "7e74ecd673749cc7b1d19167a100f7647855735b3df91bda7e023ade9afc7e27"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "be9a001346f0e1976895d2e6b6056b1240bb1babd9db51f58aa0e7013e55ab3a"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "37c44eb8ded2fedb356c8b25a7240414efbd2c134f245b43dc1d54e8c0d1b542"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "7aee1dafd466a6e660d05e7b38758e311c553c27ea2cedade9214a4ba2c563ca"
+        }
+      ],
+      "fallback": "d07253be0aca8a88.webp",
+      "fallbackSha256": "f858165fcf166fda79b6925e98fa6e16bccd4dac32257fde2fc2dffbada8fe9b",
+      "decodedSource": "d07253be0aca8a88.png",
+      "decodedSha256": "aa8b29bf179e6a77d7d054eb7d3b0209a477b138cba3c61f78170919f38d7f91",
+      "fallbackFile": "d07253be0aca8a88-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "c22a00f825a176035bdae1f7735451b8ee088a1af32e97d593384a49b9c101df"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "d9bdfaec15a244ed5dc6b470936ba6acfa1f671f94397ec9effc0deb0ba7488c"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "3b3fd1e1dde3dd7d21fe1448f01402c3ee79bc61b74d11c801b14d91821d63f4"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "ae6a1c53f05aa7b24c53fe219c297b0579855cdb77aecce95202b9988141431e"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "d4c9b883d8cc96ad26ffc8d4a8f8be952ceda1427152fbedf479b8220b68f818"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "619bd95fd91be0cfe6f659fe7b2dedfb64838fa0116659b6fe50b26bc9690352"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "6f259c34cc4e20a09516bab7d5cc453d0ccb9001f2ddfae538841314254b141d"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "727328e98cf36d87af73b592bcb2fc51d0e333808753a24ce15193d88ef65eee"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "f59c9f7caeccdccc8e925a07e62ad0827f254adb6ff403db40977fc764a6bca9"
+        }
+      ]
+    },
+    "b6baa5622c700ff0": {
+      "resource": "materials/cs_italy/windows/window_001_layer_1_color_psd_89f65095.vtex",
+      "sourceSha256": "b1998b7ed9d2e4260e4a5936da7d3478d5553ef81b592a6fac46303b5adb86fa",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.27584588527679443,
+        0.2748658061027527,
+        0.2733176052570343
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "b6baa5622c700ff0.bin.gz",
+      "gpuBytes": 349520,
+      "gpuSha256": "fe69d89fd91632f05517cfd14d33543e62fdd21026fa60e4232b2d3bb7718169",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "063bbe55c022af028d97f5c6f4cf6141d928aa5ac7ff8f8a1d2818a668135c17"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "f93529ba0f984d1263f6279b5eeff16f6952052580085b7e681c93b35ba1be38"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "ac478ae14931527dd8d72db5ae9dae72fcdf569c5620e1b48618a8f73469fa1a"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "7bf34e50913f651f5a68f3f8cfa4de14362ec750ec4acf1d309b57989531a189"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "4acdff144f918c658117928c95346fd315c38e99e0dc9820c7855a4b78f1a743"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "1fdb2bb91141c5601ff1dbe9c47442b48e5e5b24a85fe4c7f29f19f0778ea802"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "2e2f8e57b21b41bd3460950637c5dc234cef0e97714897240b1b6506832fce9b"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "41035f1f7b977393b56921219dc076980b9516973d772eeac1d74cc227876278"
+        }
+      ],
+      "fallback": "b6baa5622c700ff0.webp",
+      "fallbackSha256": "5b2da0f678685c32960754ba51c1ceb0e4371f403a1bd9df81d8e0fbbeb80712",
+      "decodedSource": "b6baa5622c700ff0.png",
+      "decodedSha256": "ab317809d8ff3395fda363a40bac29bb119d527052e6af3a10db463a58adebb2",
+      "fallbackFile": "b6baa5622c700ff0-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "a5e204f044807ac7085fd9fe253ac31c05ecdcd1a025d5759e82a8c8ebae67a9"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "c864ec19427669cf7e42128a9e065b5613ac2d5118209c85be9dbc53aed14a86"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "bb019fa17b73e170bdda821049db9c49f67ce97b20dcadb8ef494fe6305935a6"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "be384003fe3706a75304bfdea7e86d53d781e832694437c483bca44a9fcb2c75"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "eea1ff824dd490db4c8467ac650e3d123f5666e862518972f6c86bfd4f2729e9"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "cfdba743ba7dcca6e3ef5fef737dc881b5183f6d9958873af7409950baef2c9c"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "d6268809890303922b3edc17b2b6139bb60e001ad3f414e1ecabd43df7d9ad45"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "f2d9f92259e255064131dbc6bad992d674ca8f9ea3ad0941b945b8f963ad9fec"
+        }
+      ]
+    },
+    "2b59c3dfef34a101": {
+      "resource": "materials/cs_italy/windows/window_001_layer_2_color_psd_585855d8.vtex",
+      "sourceSha256": "39e8005746bdbc68091fafa2712f3c2735bd228243d745713d2349580cb7dff7",
+      "srgb": true,
+      "sourceSize": [
+        512,
+        512
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.1200893223285675,
+        0.1200893223285675,
+        0.1200893223285675
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "2b59c3dfef34a101.bin.gz",
+      "gpuBytes": 174760,
+      "gpuSha256": "291fe31f7bd71cfdc66f020bbcdbfaec68a6450fbd62676e9108416fe751fe46",
+      "mips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "f70aadfbfb7c0659ed51030b12a1521ec8caf7093bf36ff9ac5e9234f84af1bd"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "8b62a23766e3644d19edf31f32f4ccfab4db37bb911ddada3706427f354d2556"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "81430e0c69e94e9940cfc0071851b39ab8b4cac04a20c02e1f4ef5bb3b7c71f6"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "d3b9a31a79f1dd1347f3ee099c5b70939cd97f11340b840c484a7fb294532b1f"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "34890c826d03fce91c8ac187914d45683a80dc9dea81039c81511ada1794b7ba"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "e238f3701d2f223d3def6c7b7ecbddd9b21361cef6574ee6e7f0dbd111ef94b8"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "f63fb5e7c4b27a757519abad91545748347c01ae7fc411c86aa11d7adfda3f4b"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "77252cff4e515c89dbf3054e6979d85e594d836863462cc2a10c1b4b46b1a410"
+        }
+      ],
+      "fallback": "2b59c3dfef34a101.webp",
+      "fallbackSha256": "f1ce5218711b0aa8330dbdd2971f42822a9bf6114ff33ab8442f720cdb2992b1",
+      "decodedSource": "2b59c3dfef34a101.png",
+      "decodedSha256": "face2427777fb466e93354c94f230fe5a72345ff60bbff09f500bdda92f1cd8f",
+      "fallbackFile": "2b59c3dfef34a101-rgba8-mips.bin.gz",
+      "fallbackBytes": 1398080,
+      "fallbackMips": [
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "118b355202146407f9698726af173128e1d000314ff89ccd169f7413adc7d01f"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "151cda46b7e779fec5bb97bb16073d0bd281b68d484958b72ba175494e2cdd6c"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "b0a30a50b2a1f8869def84aa89c1f71c6155a30b05345e600ad5c19a85df7183"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "58561072d406a732c78e82cac968ee254e2128eacdbad9b487bcf189274ccac2"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "7474920bac43f4c427987f63d00910ede0c9912a669c6f53eb49c1374b56b914"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "64825fbfec8e4a446f13ae34de276c93f8a9ef490581baa152a7f6c85773a7d3"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "575fd7491a11561b9f9df33846820dbe47cab88b6a99addbf57a2505e8bc2e8c"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "ad7e5217eb534d3606f7d67d74e5d1c11932755941f8c593f4c179bb009886c0"
+        }
+      ]
+    },
+    "e90e94d94ae63a80": {
+      "resource": "materials/cs_italy/windows/window_001_layer_0_rough_psd_3cc1006c.vtex",
+      "sourceSha256": "3489cd8380bbd4fb9767c6d6ade1cc4c65a1b3ae1b3115c34056b6daec933202",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.5038910508155823,
+        0.5,
+        0.28899967670440674
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "e90e94d94ae63a80.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "fd22aa9e1851b008642f453f54939793b7be42c211cabcb6b67656020de2d6ce",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "8bcdc8e6193fcbd0692c63bf70c8486dcfd230c54692013f38a4d17ca0d949d2"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "12f554324ff7d309011eda6537eb7108369b2de3ecd3b00e5a4466b59dfe35f3"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "e9d975e49216d84887306c7de8a0e0dffd2f721f49634935554d86aff653100c"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "dd8f5dd458d0a7a1d59f8ee10a44d18ee09c00e72f0e92e02f58a5b6089f1586"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "b49f0b4d8405045c890288912a606ad5278a07a0573213df1b973ac6f5024adb"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "5bc9986ae77a657db5e27e61c355486aabee596c4856250e7777703fa2851264"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "e89c5681068aac12ec03b1d1d989799fefcf58a31efa6153a8688efaabedb18a"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "9bf28ba65519423970a786144422699fb4c99c1e7172c4ad67d9261122c450e8"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "2c2da30e04e5345cf12c000953c92b31e44955b07d4bc629c2f1f703cfbc3bd0"
+        }
+      ],
+      "fallback": "e90e94d94ae63a80.webp",
+      "fallbackSha256": "d648b430cc3915f9178cc9b18449667fc2f663a9a56b4b644e7eb9ab445f24b9",
+      "decodedSource": "e90e94d94ae63a80.png",
+      "decodedSha256": "403994ca6e589bb1f4ff7551bc2ba1213722bbaf0afb195c019552f76b255cb7",
+      "fallbackFile": "e90e94d94ae63a80-rgba8-mips.bin.gz",
+      "fallbackBytes": 5592384,
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "bac593f215a4d75ae441c3e6baf24db5cc5b7c018d4ea099df3d562547b9e0b0"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "dde315e77fc83fba9b86b9694d11bf371db9dceb854a18e5c93672548597cb03"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "bcc2c3c2cde6b09d6bb662d78b9b6837585b1a60c41bc0b0a8ac09c39df2524b"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "e56e4e01130601049a543ce00ccc736c086d47be4c6f969219a4042dc7bbfed1"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "bce0ddc9ef5818dda1a85abdd81be86e2c74e04dab4ff47f1ccc8c568311ab9b"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "bf491c3384e678e2794300d4def0762ff5778f854fbfe517d5175a167674c993"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "5f46be686c300d62de42c8e98aa51cc61fd3765266aca1591d45aad8d0835d61"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "482e8ab70cd462c8fd45867e1e219ee0bf9bc9e6b75648b634146a116acd1e9d"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "871d5f5b872b6e0b6073b7e45269f66193599078d73626c14fe3dd085bacf381"
+        }
+      ]
+    },
+    "7f681cd5120acdf9": {
+      "resource": "models/cs_italy/italy_windowkit_01/italy_windows_glass_01a_vmat_g_ttintmask_73100e5a.vtex",
+      "sourceSha256": "ec1fc80a3e6e4eb882f614e9515763f7bc0bd4326073f3f9f5e18713a3d7918a",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 27,
+      "reflectivity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fallback": "7f681cd5120acdf9.webp",
+      "fallbackSha256": "b0ff5420a87b7117d944273dafe43684066c6cae95533df2fbada29cf1523a9f",
+      "decodedSource": "italy_windows_glass_01a_vmat_g_ttintmask_73100e5a.png",
+      "decodedSha256": "7fb5302e2a68adbd15e9f60efbe2efb9cb2f658be19ec8b102e2085f1fbd044e",
+      "fallbackFile": "7f681cd5120acdf9-rgba8-mips.bin.gz",
+      "fallbackBytes": 4,
+      "fallbackMips": [
+        {
+          "width": 1,
+          "height": 1,
+          "bytes": 4,
+          "sha256": "e3820096cb82366b860b8a4e668453a7aaaf423af03bdf289fa308ea03a79332"
+        }
+      ],
+      "constant": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "source": {
+    "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "worldSha256": "5951b2ef5c6709504435797b4d3b28d2575d2bf55b8d01ed8b7e23922d33c1a3",
+    "conversion": "Native full VMAT parameters, original VTEX reflectivity and packed channels; authored mip <=1024, original BC blocks and lossless decoded fallback. No native shader features silently removed.",
+    "qualification": "Data transport only; browser shader feature support and matched visual acceptance are separate checks."
+  }
+}
