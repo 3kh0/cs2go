@@ -357,13 +357,16 @@ export class Navigation {
         let distance = Infinity;
         for (const area of areas) {
           if (!this.connected[this.index.get(area.id)!] || area.flags & 2) continue;
+          // Grounding changes only height. A farther XZ candidate cannot beat
+          // the current valid goal, so avoid its floor and hull queries.
+          const score = Math.hypot(area.center[0] - goal.x, area.center[2] - goal.z);
+          if (score >= distance) continue;
           const point = new T.Vector3().fromArray(area.center);
           if (!groundSpawn(point, collision)) continue;
           // NAV samples hover above their walking surface; a different storey
           // underneath a fixture is not a substitute for that authored floor.
           if (Math.abs(point.y - area.center[1]) > 18 * SOURCE_UNIT) continue;
           if (hulls && !hulls.some((box) => touchesBuyZone(point, box, hull))) continue;
-          const score = Math.hypot(point.x - goal.x, point.z - goal.z);
           if (score < distance) {
             best = point;
             distance = score;
