@@ -107,5 +107,13 @@
   "doors": "/models/maps/vertigo-doors.json",
   "environmentMaterials": "/models/maps/vertigo-environment/source.json",
   "skyWorld": "/models/maps/vertigo-skybox/source.json",
-  "effectsWorld": "/models/maps/vertigo-effects/source.json"
+  "effectsWorld": "/models/maps/vertigo-effects/source.json",
+  "nativeFog": "/models/maps/vertigo-fog/source.json",
+  "frameComposition": "linear-hdr",
+  "complexMaterials": "/models/maps/vertigo-common-complex/source.json",
+  "legacyMaterials": "/models/maps/vertigo-legacy/source.json",
+  "cablesWorld": "/models/maps/vertigo-cables/main/vertigo-cables.glb.gz",
+  "localLights": "/models/maps/vertigo-cookie-local-lights/source.json",
+  "lightmappedMaterials": "/models/maps/vertigo-lightmapped-08/source.json",
+  "complexSpecialMaterials": "/models/maps/vertigo-complex-special08/source.json"
 }

@@ -645,7 +645,799 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "metal_ventslat",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_0_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_01.vmdl",
+            "nativeModelSha256": "ed43344382ae9508a481253ffd221ef1dd03697da5367758f86beb26f050eeca",
+            "renderSha256": "76b0272db76b848b9c4da4e0614325d5c814711d6cabd29163279fa5eeaf1967",
+            "native": {
+              "piece_name": "piece_01",
+              "model": "models/de_cache_s2/newvent/newvent_gib_01.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                5.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_1_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_02.vmdl",
+            "nativeModelSha256": "a5c61eef41dbedffb415216bc1d2ccd55bd844f71f282286d394da43dd314d7b",
+            "renderSha256": "16a184fd6c9a6074e4d9883715bf039bfaeb58a458a035aa505e2ff2b897ad26",
+            "native": {
+              "piece_name": "piece_02",
+              "model": "models/de_cache_s2/newvent/newvent_gib_02.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                10.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_2_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_03.vmdl",
+            "nativeModelSha256": "16568e52c96bd0db88aa23770978bc50be84c6ec37fcd487026c02f5c5094719",
+            "renderSha256": "18973ea8d59f5c3293c740c9dd9aac9434ba78193948f7c8e4538eb69c500949",
+            "native": {
+              "piece_name": "piece_03",
+              "model": "models/de_cache_s2/newvent/newvent_gib_03.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                15.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_3_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_04.vmdl",
+            "nativeModelSha256": "4509d2e8a38e3b8b4d546e48c43583af4755b3a6e7f96b01b9c29d9a330c71c4",
+            "renderSha256": "da9fe27445af1f665f141e359e37b4b1bf501b6e4d466570f5b56640c955b52e",
+            "native": {
+              "piece_name": "piece_04",
+              "model": "models/de_cache_s2/newvent/newvent_gib_04.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                -5.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_4_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_05.vmdl",
+            "nativeModelSha256": "e598fb4dd0740c9ea02635e2e2a0064bb003e1e4f40e1f58a1f777874e282f12",
+            "renderSha256": "1b60c1ad039d6b56cef38bce058526317b54500249f552e13955a187fe13462b",
+            "native": {
+              "piece_name": "piece_05",
+              "model": "models/de_cache_s2/newvent/newvent_gib_05.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                -10.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_5_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_06.vmdl",
+            "nativeModelSha256": "b5e4007bf96f8dc467ad0b39933007e50b1a8e5b6d94ad3ba916fb94ca9c8f21",
+            "renderSha256": "b399609d379337a9b523d3962e3fdc0a5245c313c3fd9faf47527e3f0973a49b",
+            "native": {
+              "piece_name": "piece_06",
+              "model": "models/de_cache_s2/newvent/newvent_gib_06.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                -15.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_6_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_07.vmdl",
+            "nativeModelSha256": "f610e62c8344b3050bee96672c693b0bfb26ae967d1f6391cd32d3ac29323dd6",
+            "renderSha256": "3fe04209901e6f192ec71f0b10715796563ba2472a42555d7fe7f8ae4cf064ef",
+            "native": {
+              "piece_name": "piece_07",
+              "model": "models/de_cache_s2/newvent/newvent_gib_07.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                5.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_7_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_08.vmdl",
+            "nativeModelSha256": "c40be477f72fcb2b4f4b4737dacff635af6fb844af3cfe86c7cfa82dfcb39d12",
+            "renderSha256": "d5f61fc5c54bd36b445753002ead1671189353fe2b1167e20abeb50f8d0e5587",
+            "native": {
+              "piece_name": "piece_08",
+              "model": "models/de_cache_s2/newvent/newvent_gib_08.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                10.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_8_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_09.vmdl",
+            "nativeModelSha256": "de98b11c5925baeabde2189fa722800e442eb7400f053f3e8e4d415cf4f4397e",
+            "renderSha256": "e023db5edc9c563262ae796a714da4c4af8eb7c22de32af3c95288f4bcf770f1",
+            "native": {
+              "piece_name": "piece_09",
+              "model": "models/de_cache_s2/newvent/newvent_gib_09.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                15.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123804_9_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_10.vmdl",
+            "nativeModelSha256": "1281efc7e7749c5d8fae5e3c7226347f81041752bee7de9ee7389e5427b3e9e2",
+            "renderSha256": "3e0ae42de0e6f5db97367c664e1c02daa293770530ab20ade1e4ac4dcb3bc024",
+            "native": {
+              "piece_name": "piece_10",
+              "model": "models/de_cache_s2/newvent/newvent_gib_10.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              -1.0,
+              -1.1920932472667147e-07,
+              1.629206797752404e-07,
+              0.0,
+              1.1920929715255806e-07,
+              1.0,
+              1.1920930396111344e-07,
+              0.0,
+              7.549792210398734e-08,
+              1.1920932715255936e-07,
+              -1.0,
+              0.0,
+              9.505954,
+              45.44694,
+              7.010398,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        }
+      ]
     },
     {
       "id": "cache:123807",
@@ -1107,7 +1899,799 @@
       },
       "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
       "breakSoundSourceSurface": "metal_ventslat",
-      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof.",
+      "pieces": [
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_0_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_01.vmdl",
+            "nativeModelSha256": "ed43344382ae9508a481253ffd221ef1dd03697da5367758f86beb26f050eeca",
+            "renderSha256": "76b0272db76b848b9c4da4e0614325d5c814711d6cabd29163279fa5eeaf1967",
+            "native": {
+              "piece_name": "piece_01",
+              "model": "models/de_cache_s2/newvent/newvent_gib_01.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                5.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_1_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_02.vmdl",
+            "nativeModelSha256": "a5c61eef41dbedffb415216bc1d2ccd55bd844f71f282286d394da43dd314d7b",
+            "renderSha256": "16a184fd6c9a6074e4d9883715bf039bfaeb58a458a035aa505e2ff2b897ad26",
+            "native": {
+              "piece_name": "piece_02",
+              "model": "models/de_cache_s2/newvent/newvent_gib_02.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                10.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_2_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_03.vmdl",
+            "nativeModelSha256": "16568e52c96bd0db88aa23770978bc50be84c6ec37fcd487026c02f5c5094719",
+            "renderSha256": "18973ea8d59f5c3293c740c9dd9aac9434ba78193948f7c8e4538eb69c500949",
+            "native": {
+              "piece_name": "piece_03",
+              "model": "models/de_cache_s2/newvent/newvent_gib_03.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                15.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_3_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_04.vmdl",
+            "nativeModelSha256": "4509d2e8a38e3b8b4d546e48c43583af4755b3a6e7f96b01b9c29d9a330c71c4",
+            "renderSha256": "da9fe27445af1f665f141e359e37b4b1bf501b6e4d466570f5b56640c955b52e",
+            "native": {
+              "piece_name": "piece_04",
+              "model": "models/de_cache_s2/newvent/newvent_gib_04.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                -5.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_4_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_05.vmdl",
+            "nativeModelSha256": "e598fb4dd0740c9ea02635e2e2a0064bb003e1e4f40e1f58a1f777874e282f12",
+            "renderSha256": "1b60c1ad039d6b56cef38bce058526317b54500249f552e13955a187fe13462b",
+            "native": {
+              "piece_name": "piece_05",
+              "model": "models/de_cache_s2/newvent/newvent_gib_05.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                -10.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_5_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_06.vmdl",
+            "nativeModelSha256": "b5e4007bf96f8dc467ad0b39933007e50b1a8e5b6d94ad3ba916fb94ca9c8f21",
+            "renderSha256": "b399609d379337a9b523d3962e3fdc0a5245c313c3fd9faf47527e3f0973a49b",
+            "native": {
+              "piece_name": "piece_06",
+              "model": "models/de_cache_s2/newvent/newvent_gib_06.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                -15.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_6_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_07.vmdl",
+            "nativeModelSha256": "f610e62c8344b3050bee96672c693b0bfb26ae967d1f6391cd32d3ac29323dd6",
+            "renderSha256": "3fe04209901e6f192ec71f0b10715796563ba2472a42555d7fe7f8ae4cf064ef",
+            "native": {
+              "piece_name": "piece_07",
+              "model": "models/de_cache_s2/newvent/newvent_gib_07.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                5.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_7_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_08.vmdl",
+            "nativeModelSha256": "c40be477f72fcb2b4f4b4737dacff635af6fb844af3cfe86c7cfa82dfcb39d12",
+            "renderSha256": "d5f61fc5c54bd36b445753002ead1671189353fe2b1167e20abeb50f8d0e5587",
+            "native": {
+              "piece_name": "piece_08",
+              "model": "models/de_cache_s2/newvent/newvent_gib_08.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                10.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_8_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_09.vmdl",
+            "nativeModelSha256": "de98b11c5925baeabde2189fa722800e442eb7400f053f3e8e4d415cf4f4397e",
+            "renderSha256": "e023db5edc9c563262ae796a714da4c4af8eb7c22de32af3c95288f4bcf770f1",
+            "native": {
+              "piece_name": "piece_09",
+              "model": "models/de_cache_s2/newvent/newvent_gib_09.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                5.0,
+                15.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        },
+        {
+          "renderNames": [
+            "breakpiece_cache_123807_9_leaf0"
+          ],
+          "fadeTime": 0.1,
+          "spawnChance": 1.0,
+          "essential": false,
+          "source": {
+            "model": "models/de_cache_s2/newvent/newvent_gib_10.vmdl",
+            "nativeModelSha256": "1281efc7e7749c5d8fae5e3c7226347f81041752bee7de9ee7389e5427b3e9e2",
+            "renderSha256": "3e0ae42de0e6f5db97367c664e1c02daa293770530ab20ade1e4ac4dcb3bc024",
+            "native": {
+              "piece_name": "piece_10",
+              "model": "models/de_cache_s2/newvent/newvent_gib_10.vmdl",
+              "spawn_entity": "prop_physics",
+              "ragdoll_applies_bind_pose_root": false,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "offset_rotation": [
+                -5.0,
+                0.0,
+                0.0
+              ],
+              "fadetime": 0.1,
+              "fademindist": 0.0,
+              "fademaxdist": 0.0,
+              "massoverride": -1.0,
+              "random_spawn_chance": 1.0,
+              "suppress_creation_on_death": false,
+              "is_essential_piece": false,
+              "can_player_pickup_piece": false,
+              "physics_joint_modification_type": "none",
+              "sound_event_on_spawn": "",
+              "health_override": 0,
+              "render_color_mode": "inherit_owner",
+              "material_group_mode": "inherit_owner_index"
+            },
+            "nativeModelPropData": {},
+            "worldFromStandaloneScene": [
+              7.070949808905484e-38,
+              0.0,
+              -1.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              1.0,
+              -5.877471754111438e-39,
+              -5.781488240543492e-32,
+              0.0,
+              13.836654,
+              45.44694,
+              4.3021226,
+              1.0
+            ],
+            "sourceToStandaloneScene": [
+              3.027916e-09,
+              0.0,
+              0.025399996,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.025399996,
+              3.027916e-09,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          }
+        }
+      ]
     }
   ],
   "enabledRemainders": [],
@@ -1492,5 +3076,797 @@
         }
       }
     }
-  ]
+  ],
+  "renderModels": [
+    "/models/maps/cache-breakpieces.glb.gz"
+  ],
+  "source": {
+    "nativePieces": {
+      "basisAuditSha256": "9e7f4a12a6a6c70c03cebef3b2284cf445ac7c74ba5bc81efc4522b0ab5576ce",
+      "exportManifestSha256": "86554e360fe706998d164be59d6eecb3dc8f77c7d6326089513e22bda33e68d5",
+      "selection": {
+        "sha256": "ae9cfeb922df9c03a23d213e65e26639035a0a67943ba14d931f8fa4677570c0",
+        "eligibleOwners": [
+          "cache:123804",
+          "cache:123807"
+        ],
+        "heldOwners": [],
+        "qualification": "Only explicitly prevalidated, binding-invariant owners are activated; omitted group policy is not inferred."
+      },
+      "geometryPreparation": {
+        "models/de_cache_s2/newvent/newvent_gib_01.vmdl": {
+          "sourceSha256": "76b0272db76b848b9c4da4e0614325d5c814711d6cabd29163279fa5eeaf1967",
+          "primitives": 1,
+          "inputRows": 162,
+          "referencedRows": 162,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_02.vmdl": {
+          "sourceSha256": "16a184fd6c9a6074e4d9883715bf039bfaeb58a458a035aa505e2ff2b897ad26",
+          "primitives": 1,
+          "inputRows": 126,
+          "referencedRows": 126,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_03.vmdl": {
+          "sourceSha256": "18973ea8d59f5c3293c740c9dd9aac9434ba78193948f7c8e4538eb69c500949",
+          "primitives": 1,
+          "inputRows": 44,
+          "referencedRows": 44,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_04.vmdl": {
+          "sourceSha256": "da9fe27445af1f665f141e359e37b4b1bf501b6e4d466570f5b56640c955b52e",
+          "primitives": 1,
+          "inputRows": 70,
+          "referencedRows": 70,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_05.vmdl": {
+          "sourceSha256": "1b60c1ad039d6b56cef38bce058526317b54500249f552e13955a187fe13462b",
+          "primitives": 1,
+          "inputRows": 162,
+          "referencedRows": 162,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_06.vmdl": {
+          "sourceSha256": "b399609d379337a9b523d3962e3fdc0a5245c313c3fd9faf47527e3f0973a49b",
+          "primitives": 1,
+          "inputRows": 96,
+          "referencedRows": 96,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_07.vmdl": {
+          "sourceSha256": "3fe04209901e6f192ec71f0b10715796563ba2472a42555d7fe7f8ae4cf064ef",
+          "primitives": 1,
+          "inputRows": 44,
+          "referencedRows": 44,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_08.vmdl": {
+          "sourceSha256": "d5f61fc5c54bd36b445753002ead1671189353fe2b1167e20abeb50f8d0e5587",
+          "primitives": 1,
+          "inputRows": 44,
+          "referencedRows": 44,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_09.vmdl": {
+          "sourceSha256": "e023db5edc9c563262ae796a714da4c4af8eb7c22de32af3c95288f4bcf770f1",
+          "primitives": 1,
+          "inputRows": 44,
+          "referencedRows": 44,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        },
+        "models/de_cache_s2/newvent/newvent_gib_10.vmdl": {
+          "sourceSha256": "3e0ae42de0e6f5db97367c664e1c02daa293770530ab20ade1e4ac4dcb3bc024",
+          "primitives": 1,
+          "inputRows": 44,
+          "referencedRows": 44,
+          "compacted": false,
+          "qualification": "Only referenced source rows retained, all primitive attributes and normalized/component types preserved; original triangle order retained. Unused poisoned/shared VB tails are not geometry."
+        }
+      },
+      "materials": "/models/maps/cache-breakpiece-materials.json",
+      "materialBindingsSha256": "393b1a60de052fa025be22a745d0b1558d59a8d2a7abad8320344f4156527bf4",
+      "models": 10,
+      "owners": 2,
+      "pieceRecords": 20,
+      "qualification": "Exact native fragment models, source-local offsets/angles composed once through independently audited intact basis and Source-unit physics scene. Owner tint is world/base-export ratio, not duplicated VMAT tint. PBR/GLTF material adaptation, nonblocking sphere rigid bodies, random motion and optional recent-piece budget remain browser reconstructions; source burst/twist, fade-delay/fade-out curves and zero-fade schedules require native runtime proof.",
+      "adapterAliases": {
+        "qualification": "Candidate-only exact nativeResource/full VMAT parameters/native samplers and per-piece tint-factor guards; report binds source hashes. Unsupported families retain exported adaptation.",
+        "report": "cache-piece-alias-report.json"
+      },
+      "nativeBlendStreamBinding": {
+        "modelGzipSHA256": "3d616b01c8e9d724313f8f0dfb7410e1d43fe27b37abb5d68dba44ee22cbcb46",
+        "proofSHA256": "55ca699be0fd5037b9bf6b492a0e828664e85765bec367e8f686211ea09183ae",
+        "nativeMVTXControlProofSHA256": "864aa2021f1074d35d6ddd9e4a911befc8d3a6dfb5f76a2cdd0e4847936c5385",
+        "qualification": "Native CTRL TEXCOORD4 VertexPaintBlendParams to existing exact FLOAT4 accessor alias COLOR_1; no geometry/control/BIN/image bytes changed, no guard relaxed. Independent source MVTX decode checked before transport."
+      }
+    }
+  },
+  "materialAliases": {
+    "environment": [
+      {
+        "sourceName": "ch2_trim_metal_painted_blend_01d",
+        "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "shader": "csgo_environment_blend.vfx",
+        "definition": {
+          "shader": "csgo_environment_blend.vfx",
+          "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+          "IntParams": {
+            "F_BLEND_BY_FACING_DIRECTION_3": 1,
+            "F_BLEND_EFFECTS_2": 1,
+            "F_BLEND_EFFECTS_3": 1,
+            "F_BORDER_BLEND_MODE_2": 3,
+            "F_BORDER_BLEND_MODE_3": 1,
+            "F_BORDER_ROUGHNESS_2": 1,
+            "F_BORDER_ROUGHNESS_3": 1,
+            "F_ENABLE_LAYER_3": 1,
+            "F_USE_NEW_BLENDING": 1,
+            "g_bBorderTintMask2": 0,
+            "g_bBorderTintMask3": 1,
+            "g_bFogEnabled": 1,
+            "g_bModelTint2": 0,
+            "g_bSnowLayer1": 0,
+            "g_bSnowLayer2": 0,
+            "g_bSnowLayer3": 0,
+            "g_nDetailUVSet1": 0,
+            "g_nDetailUVSet3": 0,
+            "g_nScaleTexCoord2UByModelScaleAxis": 0,
+            "g_nScaleTexCoord2VByModelScaleAxis": 0,
+            "g_nScaleTexCoordUByModelScaleAxis": 3,
+            "g_nScaleTexCoordVByModelScaleAxis": 0,
+            "g_nTextureAddressModeU": 0,
+            "g_nTextureAddressModeV": 0,
+            "g_nUVSet1": 1,
+            "g_nUVSet2": 1,
+            "g_nUVSet3": 1,
+            "MaterialLayerReferenceShaderId_1": -1,
+            "MaterialLayerReferenceShaderId_2": -1,
+            "MaterialLayerReferenceShaderId_3": -1
+          },
+          "FloatParams": {
+            "g_fBorderRoughness2": 1,
+            "g_fBorderRoughness3": 1,
+            "g_fDetailTextureNormalContrast1": 1,
+            "g_fDetailTextureNormalContrast3": 1,
+            "g_flBevelCurve2": 1,
+            "g_flBevelCurve3": 1,
+            "g_flBevelOffset2": 0,
+            "g_flBevelOffset3": 0,
+            "g_flBevelSoftness2": 0.1,
+            "g_flBevelSoftness3": 0.1,
+            "g_flBevelSpread2": 0.1,
+            "g_flBevelSpread3": 0.1,
+            "g_flBevelStrength2": -0.1,
+            "g_flBevelStrength3": 0,
+            "g_flBlendSoftness3": 0.35,
+            "g_flBlendSoftnessDistanceModifierStrength": 1,
+            "g_flBorderOffset2": 0.027,
+            "g_flBorderOffset3": -0.012,
+            "g_flBorderSoftness2": 0.05,
+            "g_flBorderSoftness3": 0.5,
+            "g_flBorderSpread2": 0.146,
+            "g_flBorderSpread3": 0.06,
+            "g_flDetailTexCoordRotation1": 0,
+            "g_flDetailTexCoordRotation3": 0,
+            "g_flFacingDirectionMaskSpread3": 0.375,
+            "g_flHeightMapScale1": -1,
+            "g_flHeightMapScale2": -1,
+            "g_flHeightMapScale3": 1.25,
+            "g_flModelTintAmount": 1,
+            "g_flTexCoordRotation1": 0,
+            "g_flTexCoordRotation2": 0,
+            "g_flTexCoordRotation3": 0,
+            "g_flUnderlyingHeightMapInfluence3": 0.25,
+            "g_flWetnessDarkeningStrength1": 1,
+            "g_flWetnessDarkeningStrength2": 1,
+            "g_flWetnessDarkeningStrength3": 1,
+            "g_fTextureColorBrightness2": 1.05,
+            "g_fTextureColorBrightness3": -0.5,
+            "g_fTextureColorContrast3": 0,
+            "g_fTextureNormalContrast3": 0.5,
+            "g_fTextureRoughnessBrightness3": 2.349,
+            "g_fTextureRoughnessContrast3": 1.991,
+            "g_fTintMaskBrightness3": 0.3,
+            "g_vFacingDirectionMaskNormalMapStrength3": 4,
+            "g_vFacingDirectionMaskSoftness3": 0.9771
+          },
+          "VectorParams": {
+            "g_vBevelLayerAmount2": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "g_vBevelLayerAmount3": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "g_vBorderLayerAmount2": [
+              0.6,
+              0.175,
+              0,
+              0
+            ],
+            "g_vBorderLayerAmount3": [
+              0.561,
+              0,
+              0,
+              0
+            ],
+            "g_vBorderTint2": [
+              0.733333,
+              0.552941,
+              0.239216,
+              0
+            ],
+            "g_vBorderTint3": [
+              0.384314,
+              0.290196,
+              0.239216,
+              0
+            ],
+            "g_vColorTint": [
+              1,
+              1,
+              1,
+              0
+            ],
+            "g_vDetailTexCoordCenter1": [
+              0.5,
+              0.5,
+              0,
+              0
+            ],
+            "g_vDetailTexCoordCenter3": [
+              0.5,
+              0.5,
+              0,
+              0
+            ],
+            "g_vDetailTexCoordOffset1": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vDetailTexCoordOffset3": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vDetailTexCoordScale1": [
+              4,
+              4,
+              0,
+              0
+            ],
+            "g_vDetailTexCoordScale3": [
+              4,
+              4,
+              0,
+              0
+            ],
+            "g_vTexCoordCenter1": [
+              0.5,
+              0.5,
+              0,
+              0
+            ],
+            "g_vTexCoordCenter2": [
+              0.5,
+              0.5,
+              0,
+              0
+            ],
+            "g_vTexCoordCenter3": [
+              0.5,
+              0.5,
+              0,
+              0
+            ],
+            "g_vTexCoordOffset1": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vTexCoordOffset2": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vTexCoordOffset3": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "g_vTexCoordScale1": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "g_vTexCoordScale2": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "g_vTexCoordScale3": [
+              1,
+              1,
+              0,
+              0
+            ]
+          },
+          "textures": {
+            "g_tColor1": "169cd4898e95e489",
+            "g_tColor2": "5f0cf7b0016541d2",
+            "g_tColor3": "169cd4898e95e489",
+            "g_tHeight1": "32e83780a1285452",
+            "g_tHeight2": "7a728ab7d4b8982e",
+            "g_tHeight3": "b8d476532b814673",
+            "g_tNormal1": "4ca5849f1ae13d16",
+            "g_tNormal2": "b00019d5b952aca6",
+            "g_tNormal3": "4ca5849f1ae13d16"
+          },
+          "textureReflectivity": {
+            "g_tColor1": [
+              0.6285032629966736,
+              0.6335335969924927,
+              0.6323884725570679
+            ],
+            "g_tColor2": [
+              0.2981782555580139,
+              0.21689334511756897,
+              0.17519643902778625
+            ],
+            "g_tColor3": [
+              0.6285032629966736,
+              0.6335335969924927,
+              0.6323884725570679
+            ],
+            "g_tHeight1": [
+              0.5808143615722656,
+              0.9421037435531616,
+              0.0
+            ],
+            "g_tHeight2": [
+              0.6440083980560303,
+              0.8494141697883606,
+              0.0
+            ],
+            "g_tHeight3": [
+              0.5808143615722656,
+              0.9421037435531616,
+              0.0
+            ],
+            "g_tNormal1": [
+              0.49786126613616943,
+              0.4999801814556122,
+              0.4557466506958008
+            ],
+            "g_tNormal2": [
+              0.4954776465892792,
+              0.49956014752388,
+              0.8744690418243408
+            ],
+            "g_tNormal3": [
+              0.49786126613616943,
+              0.4999801814556122,
+              0.4557466506958008
+            ]
+          },
+          "textureDimensions": {
+            "g_tColor1": [
+              1024,
+              1024
+            ],
+            "g_tColor2": [
+              1024,
+              1024
+            ],
+            "g_tColor3": [
+              1024,
+              1024
+            ],
+            "g_tHeight1": [
+              1024,
+              1024
+            ],
+            "g_tHeight2": [
+              1024,
+              1024
+            ],
+            "g_tHeight3": [
+              1024,
+              1024
+            ],
+            "g_tNormal1": [
+              1024,
+              1024
+            ],
+            "g_tNormal2": [
+              1024,
+              1024
+            ],
+            "g_tNormal3": [
+              1024,
+              1024
+            ]
+          },
+          "nativeTextureDimensions": {
+            "g_tColor1": [
+              2048,
+              2048
+            ],
+            "g_tColor2": [
+              2048,
+              2048
+            ],
+            "g_tColor3": [
+              2048,
+              2048
+            ],
+            "g_tHeight1": [
+              2048,
+              2048
+            ],
+            "g_tHeight2": [
+              2048,
+              2048
+            ],
+            "g_tHeight3": [
+              2048,
+              2048
+            ],
+            "g_tNormal1": [
+              2048,
+              2048
+            ],
+            "g_tNormal2": [
+              2048,
+              2048
+            ],
+            "g_tNormal3": [
+              2048,
+              2048
+            ]
+          },
+          "nativeMipLevels": {
+            "g_tColor1": 1,
+            "g_tColor2": 1,
+            "g_tColor3": 1,
+            "g_tHeight1": 1,
+            "g_tHeight2": 1,
+            "g_tHeight3": 1,
+            "g_tNormal1": 1,
+            "g_tNormal2": 1,
+            "g_tNormal3": 1
+          },
+          "constants": {},
+          "modelTintQualification": "Exporter baseColorFactor may combine native model tint/material approximation; retain material instance identity and avoid multiplying native color correction twice.",
+          "exportedVariants": [
+            {
+              "materialIndex": 143,
+              "baseColorFactor": [
+                0.13843155,
+                0.25818282,
+                0.30054373,
+                1
+              ]
+            },
+            {
+              "materialIndex": 144,
+              "baseColorFactor": [
+                0.4452012,
+                0.25818282,
+                0.08437612,
+                1
+              ]
+            },
+            {
+              "materialIndex": 146,
+              "baseColorFactor": [
+                0.4910208,
+                0.4910208,
+                0.4910208,
+                1
+              ]
+            },
+            {
+              "materialIndex": 147,
+              "baseColorFactor": [
+                0.08021974,
+                0.20155618,
+                0.2961382,
+                1
+              ]
+            },
+            {
+              "materialIndex": 574,
+              "baseColorFactor": [
+                0.37626207,
+                0.21586038,
+                0.074213475,
+                1
+              ]
+            },
+            {
+              "materialIndex": 575,
+              "baseColorFactor": [
+                0.043734923,
+                0.13843153,
+                0.0451861,
+                1
+              ]
+            },
+            {
+              "materialIndex": 576,
+              "baseColorFactor": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "materialIndex": 577,
+              "baseColorFactor": [
+                0.46207696,
+                0.46207696,
+                0.46207696,
+                1
+              ]
+            },
+            {
+              "materialIndex": 578,
+              "baseColorFactor": [
+                0.45641097,
+                0.45078576,
+                0.45078576,
+                1
+              ]
+            },
+            {
+              "materialIndex": 579,
+              "baseColorFactor": [
+                0.18447493,
+                0.23455049,
+                0.15896073,
+                1
+              ]
+            },
+            {
+              "materialIndex": 580,
+              "baseColorFactor": [
+                0.25415203,
+                0.25415203,
+                0.25415203,
+                1
+              ]
+            },
+            {
+              "materialIndex": 581,
+              "baseColorFactor": [
+                0.43965712,
+                0.43965712,
+                0.43965712,
+                1
+              ]
+            },
+            {
+              "materialIndex": 582,
+              "baseColorFactor": [
+                0.6104955,
+                0.6104955,
+                0.6104955,
+                1
+              ]
+            },
+            {
+              "materialIndex": 583,
+              "baseColorFactor": [
+                0.12743756,
+                0.12743756,
+                0.12743756,
+                1
+              ]
+            },
+            {
+              "materialIndex": 584,
+              "baseColorFactor": [
+                0.14702715,
+                0.19461769,
+                0.11443529,
+                1
+              ]
+            },
+            {
+              "materialIndex": 585,
+              "baseColorFactor": [
+                0.07227177,
+                0.07227177,
+                0.07227177,
+                1
+              ]
+            },
+            {
+              "materialIndex": 586,
+              "baseColorFactor": [
+                0.20863678,
+                0.37626207,
+                0.43415362,
+                1
+              ]
+            },
+            {
+              "materialIndex": 587,
+              "baseColorFactor": [
+                0.124771714,
+                0.25015822,
+                0.3185467,
+                1
+              ]
+            },
+            {
+              "materialIndex": 588,
+              "baseColorFactor": [
+                0.2961382,
+                0.2961382,
+                0.2961382,
+                1
+              ]
+            },
+            {
+              "materialIndex": 589,
+              "baseColorFactor": [
+                0.08437612,
+                0.08437612,
+                0.08437612,
+                1
+              ]
+            },
+            {
+              "materialIndex": 590,
+              "baseColorFactor": [
+                0.026241118,
+                0.026241118,
+                0.026241118,
+                1
+              ]
+            },
+            {
+              "materialIndex": 591,
+              "baseColorFactor": [
+                0.08021974,
+                0.20155618,
+                0.2961382,
+                1
+              ]
+            },
+            {
+              "materialIndex": 592,
+              "baseColorFactor": [
+                0.7529423,
+                0.7912979,
+                0.7912979,
+                1
+              ]
+            },
+            {
+              "materialIndex": 593,
+              "baseColorFactor": [
+                0.0886555,
+                0.0886555,
+                0.0886555,
+                1
+              ]
+            },
+            {
+              "materialIndex": 594,
+              "baseColorFactor": [
+                0.035601214,
+                0.035601214,
+                0.035601214,
+                1
+              ]
+            },
+            {
+              "materialIndex": 595,
+              "baseColorFactor": [
+                0.13013636,
+                0.2874408,
+                0.18782072,
+                1
+              ]
+            },
+            {
+              "materialIndex": 596,
+              "baseColorFactor": [
+                0.2874408,
+                0.2874408,
+                0.2874408,
+                1
+              ]
+            },
+            {
+              "materialIndex": 597,
+              "baseColorFactor": [
+                0.49693298,
+                0.49693298,
+                0.49693298,
+                1
+              ]
+            },
+            {
+              "materialIndex": 598,
+              "baseColorFactor": [
+                0.30498725,
+                0.30498725,
+                0.30498725,
+                1
+              ]
+            },
+            {
+              "materialIndex": 599,
+              "baseColorFactor": [
+                0.25015822,
+                0.25015822,
+                0.25015822,
+                1
+              ]
+            },
+            {
+              "materialIndex": 600,
+              "baseColorFactor": [
+                0.41788504,
+                0.41788504,
+                0.41788504,
+                1
+              ]
+            }
+          ]
+        },
+        "names": [
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_0",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_1",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_2",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_3",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_4",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_5",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_6",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_7",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_8",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_9",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_0",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_1",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_2",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_3",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_4",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_5",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_6",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_7",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_8",
+          "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_9"
+        ]
+      }
+    ]
+  }
 }

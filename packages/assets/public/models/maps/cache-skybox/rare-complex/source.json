@@ -10632,9 +10632,12 @@
       "originalWorldSha256": "cac0e6d5125831a5998fb5e929bcd8b64b1525ab7168651365fea3bc8150250d",
       "nativeUvJoinSha256": "c91081beef2e63142d7a7013f14f8235fbd423cd1a491b78edf380cdc8f47875",
       "rawControlGeometrySha256": "fe7cd6036d8093f916bfd374110ff19cd8e15b2433b86e9d7d7b1a75a358ac5f",
-      "packedGeometrySha256": "38ebe04b91d24815765d72169e35a4c51d7a8cc9e5d2b7f3d9e388b4e47d334e",
+      "packedGeometrySha256": "29d3dc30ad1d06f6f4311be8b14e430fa6c10fb2d4c8d44a9de42e18254c9971",
       "specializedAuditedReaderSha256": "1e4f1504d008197e1f32d2db73b607b5caad935d5e81573b6b1468f18d6cf9e8",
-      "qualification": "Original referenced native BYTE4 COLOR0 transported as raw FLOAT4, allsource T.w preserved, directM independently normalized N/T. Exact hash-bound nativeUV semantic joins and original placed world frame. No nativePBR approximationimages; runtime source-owned sampler bundle required before activation. Meshopt compression with -noq preserves float vertex streams; no position/normal/control quantization. Existing main/sky world remains unchanged."
+      "qualification": "Original referenced native BYTE4 COLOR0 transported as raw FLOAT4, allsource T.w preserved, directM independently normalized N/T. Exact hash-bound nativeUV semantic joins and original placed world frame. No nativePBR approximationimages; runtime source-owned sampler bundle required before activation. Meshopt compression with -noq preserves float vertex streams; no position/normal/control quantization. Existing main/sky world remains unchanged. Packed normalized BYTE4 COLOR0 was corrected to original FLOAT4 by independently matching all source triangle controls; existing BIN bytes retained, native gate unchanged. Candidate-only correction.",
+      "originalNormalizedPackedGeometrySha256": "38ebe04b91d24815765d72169e35a4c51d7a8cc9e5d2b7f3d9e388b4e47d334e",
+      "float4RestorationProofSha256": "a913b0cfb6c06b2e4dabe70c46867c68190a173b9e81f717a4c5ed73e1317609",
+      "strictProductionLoaderProofSha256": "85f407d146ae7ec23036247277db2b9dc569661ed2203d744316306b97697bce"
     }
   }
 }

@@ -1885,5 +1885,12 @@
   "toolsMaterials": [
     "toolsblocklight",
     "toolssolidblocklight"
-  ]
+  ],
+  "complexMaterials": "/models/maps/cache-skybox/complex/source.json",
+  "legacyMaterials": "/models/maps/cache-skybox/legacy/source.json",
+  "glassMaterials": "/models/maps/cache-skybox/glass/source.json",
+  "foliageMaterials": "/models/maps/cache-native-lod/sky-foliage/source.json",
+  "complexSpecialMaterials": "/models/maps/cache-skybox/complex-special08/source.json",
+  "lightmappedMaterials": "/models/maps/cache-skybox/lightmapped-08/source.json",
+  "clutterWorld": "/models/maps/cache-clutter/sky/source.json"
 }

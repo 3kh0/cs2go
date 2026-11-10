@@ -107,5 +107,16 @@
   "doors": "/models/maps/nuke-doors.json",
   "environmentMaterials": "/models/maps/nuke-environment/source.json",
   "skyWorld": "/models/maps/nuke-skybox/source.json",
-  "effectsWorld": "/models/maps/nuke-effects/source.json"
+  "effectsWorld": "/models/maps/nuke-effects/source.json",
+  "nativeFog": "/models/maps/nuke-fog/source.json",
+  "frameComposition": "linear-hdr",
+  "complexMaterials": "/models/maps/nuke-common-complex/source.json",
+  "legacyMaterials": "/models/maps/nuke-legacy/source.json",
+  "glassMaterials": "/models/maps/nuke-glass/source.json",
+  "foliageMaterials": "/models/maps/nuke-foliage/source.json",
+  "waterMaterials": "/models/maps/nuke-water/source.json",
+  "cablesWorld": "/models/maps/nuke-cables/main/nuke-cables.glb.gz",
+  "complexSpecialMaterials": "/models/maps/nuke-complex-special09/source.json",
+  "localLights": "/models/maps/nuke-cookie-local-lights/source.json",
+  "lightmappedMaterials": "/models/maps/nuke-lightmapped-08/source.json"
 }

@@ -1,0 +1,4692 @@
+{
+  "version": 1,
+  "mapId": "cache",
+  "materials": [
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_0",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_1",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_2",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_3",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_4",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_5",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_6",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_7",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_8",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123804_9",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_0",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_1",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_2",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_3",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_4",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_5",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_6",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_7",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_8",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    },
+    {
+      "name": "ch2_trim_metal_painted_blend_01d__breakpiece_cache_123807_9",
+      "nativeMaterialName": "ch2_trim_metal_painted_blend_01d",
+      "nativeResource": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+      "nativeResourceSha256": "3cbd1e4295a9e4ca9fd1aaf58fd63d26dd20d2c339f4dfa09f56d2259526bd71",
+      "native": {
+        "Name": "materials/de_cache/trim/ch2_trim_metal_painted_blend_01d.vmat",
+        "ShaderName": "csgo_environment_blend.vfx",
+        "IntParams": {
+          "F_BLEND_BY_FACING_DIRECTION_3": 1,
+          "F_BLEND_EFFECTS_2": 1,
+          "F_BLEND_EFFECTS_3": 1,
+          "F_BORDER_BLEND_MODE_2": 3,
+          "F_BORDER_BLEND_MODE_3": 1,
+          "F_BORDER_ROUGHNESS_2": 1,
+          "F_BORDER_ROUGHNESS_3": 1,
+          "F_ENABLE_LAYER_3": 1,
+          "F_USE_NEW_BLENDING": 1,
+          "g_bBorderTintMask2": 0,
+          "g_bBorderTintMask3": 1,
+          "g_bFogEnabled": 1,
+          "g_bModelTint2": 0,
+          "g_bSnowLayer1": 0,
+          "g_bSnowLayer2": 0,
+          "g_bSnowLayer3": 0,
+          "g_nDetailUVSet1": 0,
+          "g_nDetailUVSet3": 0,
+          "g_nScaleTexCoord2UByModelScaleAxis": 0,
+          "g_nScaleTexCoord2VByModelScaleAxis": 0,
+          "g_nScaleTexCoordUByModelScaleAxis": 3,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0,
+          "g_nUVSet1": 1,
+          "g_nUVSet2": 1,
+          "g_nUVSet3": 1,
+          "MaterialLayerReferenceShaderId_1": -1,
+          "MaterialLayerReferenceShaderId_2": -1,
+          "MaterialLayerReferenceShaderId_3": -1
+        },
+        "FloatParams": {
+          "g_fBorderRoughness2": 1,
+          "g_fBorderRoughness3": 1,
+          "g_fDetailTextureNormalContrast1": 1,
+          "g_fDetailTextureNormalContrast3": 1,
+          "g_flBevelCurve2": 1,
+          "g_flBevelCurve3": 1,
+          "g_flBevelOffset2": 0,
+          "g_flBevelOffset3": 0,
+          "g_flBevelSoftness2": 0.1,
+          "g_flBevelSoftness3": 0.1,
+          "g_flBevelSpread2": 0.1,
+          "g_flBevelSpread3": 0.1,
+          "g_flBevelStrength2": -0.1,
+          "g_flBevelStrength3": 0,
+          "g_flBlendSoftness3": 0.35,
+          "g_flBlendSoftnessDistanceModifierStrength": 1,
+          "g_flBorderOffset2": 0.027,
+          "g_flBorderOffset3": -0.012,
+          "g_flBorderSoftness2": 0.05,
+          "g_flBorderSoftness3": 0.5,
+          "g_flBorderSpread2": 0.146,
+          "g_flBorderSpread3": 0.06,
+          "g_flDetailTexCoordRotation1": 0,
+          "g_flDetailTexCoordRotation3": 0,
+          "g_flFacingDirectionMaskSpread3": 0.375,
+          "g_flHeightMapScale1": -1,
+          "g_flHeightMapScale2": -1,
+          "g_flHeightMapScale3": 1.25,
+          "g_flModelTintAmount": 1,
+          "g_flTexCoordRotation1": 0,
+          "g_flTexCoordRotation2": 0,
+          "g_flTexCoordRotation3": 0,
+          "g_flUnderlyingHeightMapInfluence3": 0.25,
+          "g_flWetnessDarkeningStrength1": 1,
+          "g_flWetnessDarkeningStrength2": 1,
+          "g_flWetnessDarkeningStrength3": 1,
+          "g_fTextureColorBrightness2": 1.05,
+          "g_fTextureColorBrightness3": -0.5,
+          "g_fTextureColorContrast3": 0,
+          "g_fTextureNormalContrast3": 0.5,
+          "g_fTextureRoughnessBrightness3": 2.349,
+          "g_fTextureRoughnessContrast3": 1.991,
+          "g_fTintMaskBrightness3": 0.3,
+          "g_vFacingDirectionMaskNormalMapStrength3": 4,
+          "g_vFacingDirectionMaskSoftness3": 0.9771
+        },
+        "VectorParams": {
+          "g_vBevelLayerAmount2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBevelLayerAmount3": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount2": [
+            0.6,
+            0.175,
+            0,
+            0
+          ],
+          "g_vBorderLayerAmount3": [
+            0.561,
+            0,
+            0,
+            0
+          ],
+          "g_vBorderTint2": [
+            0.733333,
+            0.552941,
+            0.239216,
+            0
+          ],
+          "g_vBorderTint3": [
+            0.384314,
+            0.290196,
+            0.239216,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vDetailTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale1": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vDetailTexCoordScale3": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter1": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter2": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordCenter3": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset1": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset2": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset3": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale1": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale2": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScale3": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tColor1": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tColor2": "trim_rust_heavy_01_color_tga_ff6e6263.vtex",
+          "g_tColor3": "trim_metal_painted_rusty_01_color_tga_c1b20e8f.vtex",
+          "g_tHeight1": "trim_metal_painted_rusty_01_height_tga_b27244ea.vtex",
+          "g_tHeight2": "trim_rust_heavy_01_height_tga_924ede0b.vtex",
+          "g_tHeight3": "trim_metal_painted_rusty_01_height_tga_442823f3.vtex",
+          "g_tNormal1": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex",
+          "g_tNormal2": "trim_rust_heavy_01_normal_tga_a121f7c0.vtex",
+          "g_tNormal3": "trim_metal_painted_rusty_01_normal_tga_7dd334a3.vtex"
+        }
+      }
+    }
+  ],
+  "source": {
+    "qualification": "Exact new runtime material names mapped to original compiled VMAT/SHA and exporter native params for future source shader adapters. No unsupported complex/glass family is falsely declared implemented. Image dedup compares native resource/image name plus exact PNG bytes; Source color/data roles remain distinct.",
+    "inputImages": 70,
+    "retainedImages": 7,
+    "textures": 7
+  }
+}

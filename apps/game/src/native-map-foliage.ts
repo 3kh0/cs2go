@@ -463,9 +463,11 @@ mat4 foliageModelMatrix(){
       const positionFunction = mode
         ? `vec3 foliagePosition(vec3 p){mat4 placement=foliageModelMatrix();vec3 world=(placement*vec4(p,1)).xyz;vec3 own=(nativeFoliageWorldToOwn*vec4(world,1)).xyz;vec3 bent=sourceFoliageSwayPoint(foliageBToS(own),nativeFoliageControl);return(inverse(placement)*nativeFoliageOwnToWorld*vec4(foliageSToB(bent),1)).xyz;}`
         : `vec3 foliagePosition(vec3 p){return p;}`;
+      // Color and depth have different normal/lighting work. Keep their shared
+      // clip position invariant so EqualDepth retains the covered samples.
       const vertex = (shader: T.WebGLProgramParametersWithUniforms) => {
         Object.assign(shader.uniforms, uniforms);
-        shader.vertexShader = `${hasControls ? "attribute vec4 nativeFoliageControl;" : ""}\nuniform mat4 nativeFoliageWorldToOwn,nativeFoliageOwnToWorld;uniform mat3 nativeFoliageNormalToOwn,nativeFoliageNormalToWorld;varying vec4 vNativeFoliageControl;varying vec3 vNativeFoliageView;varying vec2 vNativeFoliageUv;varying vec3 vNativeFoliageCross,vNativeFoliageOriginal;\n${(sway?.glsl ?? "").replace("animatedN=normalize(cross(tangent,bitangent));", "animatedN=cross(tangent,bitangent);").replace("animatedT=normalize(tangent);", "animatedT=tangent;")}\nvec3 foliageBToS(vec3 p){return vec3(p.x,-p.z,p.y)/.0254;}vec3 foliageSToB(vec3 p){return vec3(p.x,p.z,-p.y)*.0254;}\n${instanceFrame}\n${positionFunction}\n${shader.vertexShader}`;
+        shader.vertexShader = `invariant gl_Position;\n${hasControls ? "attribute vec4 nativeFoliageControl;" : ""}\nuniform mat4 nativeFoliageWorldToOwn,nativeFoliageOwnToWorld;uniform mat3 nativeFoliageNormalToOwn,nativeFoliageNormalToWorld;varying vec4 vNativeFoliageControl;varying vec3 vNativeFoliageView;varying vec2 vNativeFoliageUv;varying vec3 vNativeFoliageCross,vNativeFoliageOriginal;\n${(sway?.glsl ?? "").replace("animatedN=normalize(cross(tangent,bitangent));", "animatedN=cross(tangent,bitangent);").replace("animatedT=normalize(tangent);", "animatedT=tangent;")}\nvec3 foliageBToS(vec3 p){return vec3(p.x,-p.z,p.y)/.0254;}vec3 foliageSToB(vec3 p){return vec3(p.x,p.z,-p.y)*.0254;}\n${instanceFrame}\n${positionFunction}\n${shader.vertexShader}`;
         shader.vertexShader = shader.vertexShader
           .replace(
             "#include <begin_vertex>",
@@ -510,7 +512,7 @@ transformedNormal=-transformedNormal;
           )
         : undefined;
       const depthHook = {
-        cacheKey: `native-foliage-depth-instance-v1:${mode}:${alphaTest}:${hasControls}`,
+        cacheKey: `native-foliage-depth-invariant-v2:${mode}:${alphaTest}:${hasControls}`,
         apply(
           shader: T.WebGLProgramParametersWithUniforms,
           _renderer?: T.WebGLRenderer,
@@ -643,7 +645,7 @@ transformedNormal=-transformedNormal;
           );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-foliage-instance-v1:${mode}:${alphaTest}:${transmission}:${useAlbedo}:${tint}:${flipNormals}:${hasControls}`;
+        `${key}:native-foliage-invariant-v2:${mode}:${alphaTest}:${transmission}:${useAlbedo}:${tint}:${flipNormals}:${hasControls}`;
       material.needsUpdate = true;
       registerSurfaceTextures(material, samplers(native).map(required));
       material.userData.nativeFoliageInstanceSafe = true;

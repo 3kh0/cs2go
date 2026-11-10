@@ -663,5 +663,7 @@
     "manifest": "source.json",
     "volumes": 1,
     "maxGpuBytes": 524256
-  }
+  },
+  "legacyMaterials": "/models/maps/vertigo-skybox/legacy/source.json",
+  "complexSpecialMaterials": "/models/maps/vertigo-skybox/complex-special08/source.json"
 }

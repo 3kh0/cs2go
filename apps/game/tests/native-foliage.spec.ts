@@ -152,3 +152,32 @@ test("native foliage own-source coordinates survive baked rotated scale16 placem
   expect(result.instanceDifference).toBe(0);
   expect(result.wrongFrameDifference).toBeGreaterThan(20);
 });
+
+test("native foliage color retains every prepass sample at both wind times", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error" || message.type() === "warning") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/native-foliage-projection-fixture.ts";
+    return (await import(path)).renderNativeFoliageProjectionFixture();
+  });
+  await test.info().attach("native-foliage-coincident-depth", {
+    body: JSON.stringify(result),
+    contentType: "application/json",
+  });
+  expect(errors).toEqual([]);
+  expect(result.glError).toBe(0);
+  expect(result.contextLost).toBe(false);
+  expect(result.programsLinked).toBe(true);
+  expect(result.triangles).toBeGreaterThan(1000);
+  expect(result.samples).toBe(4);
+  for (const frame of result.results) {
+    expect(frame.occupied).toBeGreaterThan(1000);
+    expect(frame.lost).toBe(0);
+    expect(frame.outside).toBe(0);
+  }
+});

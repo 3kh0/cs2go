@@ -84,5 +84,16 @@
   "parallaxMaterials": "/models/maps/inferno-parallax/source.json",
   "environmentMaterials": "/models/maps/inferno-environment/source.json",
   "effectsWorld": "/models/maps/inferno-effects/source.json",
-  "skyWorld": "/models/maps/inferno-skybox/source.json"
+  "skyWorld": "/models/maps/inferno-skybox/source.json",
+  "nativeFog": "/models/maps/inferno-fog/source.json",
+  "frameComposition": "linear-hdr",
+  "complexMaterials": "/models/maps/inferno-common-complex/source.json",
+  "legacyMaterials": "/models/maps/inferno-legacy/source.json",
+  "glassMaterials": "/models/maps/inferno-glass/source.json",
+  "foliageMaterials": "/models/maps/inferno-foliage/source.json",
+  "complexSpecialMaterials": "/models/maps/inferno-complex-special08/source.json",
+  "cablesWorld": "/models/maps/inferno-cables/main/inferno-cables.glb.gz",
+  "localLights": "/models/maps/inferno-local-lights/source.json",
+  "waterMaterials": "/models/maps/inferno-water-09/source.json",
+  "lightmappedMaterials": "/models/maps/inferno-lightmapped-08/source.json"
 }

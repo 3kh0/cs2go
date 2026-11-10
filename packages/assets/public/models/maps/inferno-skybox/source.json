@@ -401,5 +401,7 @@
     "manifest": "source.json",
     "volumes": 1,
     "maxGpuBytes": 524256
-  }
+  },
+  "foliageMaterials": "/models/maps/inferno-skybox/foliage/source.json",
+  "complexSpecialMaterials": "/models/maps/inferno-skybox/rare-complex/source.json"
 }

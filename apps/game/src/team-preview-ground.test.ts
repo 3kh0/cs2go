@@ -105,4 +105,6 @@ test.each(["vertigo", "nuke", "inferno", "cache"])(
       ),
     ).toThrow("Team preview floor unavailable");
   },
+  // Decode both complete native render and physics models, including on CI.
+  30_000,
 );

@@ -6,6 +6,7 @@ import { DoorAudio } from "./door-audio";
 import { NativePropBreakAudio } from "./prop-break-audio";
 import propBreakCues from "./data/prop-break-audio.json";
 import { NativeMapCache } from "./native-map-cache";
+import { withSourceSkyFrame } from "./source-sky-clock";
 import { updateRadarLocation } from "./radar-location";
 import { GameRadar } from "./game-radar";
 import { botPortrait } from "./bot-portrait";
@@ -1665,14 +1666,16 @@ export class Game {
     cables.update(camera, this.cableResolution.y);
   }
   renderMapFrame(draw: () => void, camera = this.camera) {
-    this.updateMapCables(camera);
-    const composite = this.world.frameComposite;
-    const render = () => {
-      if (composite) composite.render(this.renderer, draw);
-      else draw();
-    };
-    if (this.world.nativeLocalLights) this.world.nativeLocalLights.render(this.renderer, render);
-    else render();
+    return withSourceSkyFrame(() => {
+      this.updateMapCables(camera);
+      const composite = this.world.frameComposite;
+      const render = () => {
+        if (composite) composite.render(this.renderer, draw);
+        else draw();
+      };
+      if (this.world.nativeLocalLights) this.world.nativeLocalLights.render(this.renderer, render);
+      else render();
+    });
   }
   prepareMapFrame(compile: () => void, camera = this.camera) {
     this.updateMapCables(camera);

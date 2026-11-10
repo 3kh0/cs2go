@@ -566,5 +566,10 @@
     "manifest": "source.json",
     "volumes": 1,
     "maxGpuBytes": 524256
-  }
+  },
+  "complexMaterials": "/models/maps/nuke-skybox/complex/source.json",
+  "legacyMaterials": "/models/maps/nuke-skybox/legacy/source.json",
+  "foliageMaterials": "/models/maps/nuke-skybox/foliage/source.json",
+  "cablesWorld": "/models/maps/nuke-cables/sky/nuke-cables.glb.gz",
+  "lightmappedMaterials": "/models/maps/nuke-skybox/lightmapped-08/source.json"
 }

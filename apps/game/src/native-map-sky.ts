@@ -35,6 +35,7 @@ import {
 } from "./native-map-lighting";
 import { registerSourceSkyPreparation } from "./source-sky";
 import { MapResources } from "./map-resources";
+import { sourceSkyFrameTime } from "./source-sky-clock";
 import { createNativeSkyEffect, type NativeSkyEffectParameters } from "./native-sky-clouds";
 import { loadNativeCableView } from "./native-map-cables";
 import { loadNativeClutterView } from "./native-clutter-view";
@@ -448,7 +449,7 @@ async function buildNativeMapSky(
     const ratio = Math.min(1, Math.sqrt(2_097_152 / (viewport.z * viewport.w)));
     const width = Math.max(1, Math.round(viewport.z * ratio)),
       height = Math.max(1, Math.round(viewport.w * ratio));
-    const now = performance.now() / 1000,
+    const now = sourceSkyFrameTime(),
       bucket = Math.floor(now * 30);
     const sameProjection = camera.projectionMatrix.elements.every(
       (value, index) => index === 10 || index === 14 || value === lastProjection.elements[index],

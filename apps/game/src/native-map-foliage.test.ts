@@ -184,6 +184,29 @@ it("alpha coverage preserves Source camera distance under translated rotated sky
       fragmentShader: T.ShaderLib.depth.fragmentShader,
     } as T.WebGLProgramParametersWithUniforms;
     depth.onBeforeCompile(shader, {} as T.WebGLRenderer);
+    const mesh = root.children[0] as T.Mesh,
+      color = mesh.material as T.MeshStandardMaterial;
+    const passes = [
+      [color, T.ShaderLib.standard],
+      [mesh.customDepthMaterial!, T.ShaderLib.depth],
+      [mesh.customDistanceMaterial!, T.ShaderLib.distance],
+    ] as const;
+    expect(color.depthFunc).toBe(T.EqualDepth);
+    expect(depth.depthFunc).toBe(T.LessEqualDepth);
+    expect(shader.vertexShader.match(/invariant gl_Position;/g)).toHaveLength(1);
+    for (const [material, template] of passes) {
+      const pass = {
+        uniforms: {},
+        vertexShader: template.vertexShader,
+        fragmentShader: template.fragmentShader,
+      } as T.WebGLProgramParametersWithUniforms;
+      material.onBeforeCompile(pass, {} as T.WebGLRenderer);
+      expect(pass.vertexShader.match(/invariant gl_Position;/g)).toHaveLength(1);
+      expect(pass.vertexShader).toContain("vec3 transformed=foliagePosition(position)");
+      expect(pass.uniforms.nativeFoliageTime).toBe(shader.uniforms.nativeFoliageTime);
+      expect(pass.uniforms.nativeFoliageWorldToOwn).toBe(shader.uniforms.nativeFoliageWorldToOwn);
+    }
+
     const sourceEye = new T.Vector3(0, 0, 1200),
       sourcePoint = new T.Vector3(0, 0, 0);
     const browserEye = sourceEye.clone().multiplyScalar(0.0254).applyMatrix4(placement),
