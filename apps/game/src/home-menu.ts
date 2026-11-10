@@ -38,7 +38,7 @@ export function homeMenuMarkup() {
               </div>
               ${publicLobbiesMarkup()}
               <div class="private-match-details">
-                <header class="private-match-heading"><img src="/icons/team-ct.png" alt=""><div><span>ONLINE</span><h2>Play together</h2></div></header>
+                <header class="private-match-heading"><img src="${assetUrl("/icons/team-ct.png")}" alt=""><div><span>ONLINE</span><h2>Play together</h2></div></header>
                 <div class="private-match-fields"><div><label for="match-server">SERVER</label><select id="match-server" aria-label="Server"><option value="wss://na1-cs.3kh0.dev/ws">na1-cs.3kh0.dev</option><option value="wss://na2-cs.3kh0.dev/ws">na2-cs.3kh0.dev</option></select></div>
                 <div><label for="match-room">LOBBY PIN</label><input id="match-room" type="text" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Enter PIN" aria-describedby="lobby-help"></div></div>
                 <div class="lobby-visibility"><label for="match-visibility">CREATE LOBBY AS</label><select id="match-visibility" aria-label="Lobby visibility"><option value="private">Private · PIN only</option><option value="public">Public · listed in browser</option></select></div>
@@ -46,15 +46,15 @@ export function homeMenuMarkup() {
                 <small id="match-status" role="status" aria-live="polite"></small>
               </div>
             </section>
-            <div class="match-maps" role="group" aria-label="Maps">${MAP_IDS.map((map) => `<button class="home-map-art" style="--map-art: url(/ui/home/${map}.webp)" data-map="${map}" type="button" aria-label="${MAPS[map].name}" aria-pressed="${map === "dust2"}"><img class="map-badge" src="/ui/home/${map}-emblem.svg" alt=""><span class="map-card-caption">${MAPS[map].name}</span></button>`).join("")}</div>
+            <div class="match-maps" role="group" aria-label="Maps">${MAP_IDS.map((map) => `<button class="home-map-art" style="--map-art: url(${assetUrl(`/ui/home/${map}.webp`)})" data-map="${map}" type="button" aria-label="${MAPS[map].name}" aria-pressed="${map === "dust2"}"><img class="map-badge" src="${assetUrl(`/ui/home/${map}-emblem.svg`)}" alt=""><span class="map-card-caption">${MAPS[map].name}</span></button>`).join("")}</div>
           </div>
           <footer class="match-footer"><p id="mode-description" role="status"></p><button class="deploy" id="play" disabled aria-label="Play casual"><span>GO</span></button></footer>
         </section>
         <button class="home-loadout-card" id="home-loadout"><span class="home-card-kicker">YOUR LOADOUT</span><span class="home-guns"><img src="/icons/buy/ak47.svg" alt=""><img src="/icons/buy/m4a1_silencer.svg" alt=""></span><strong>Configure your buy menu</strong><small>Customize your buy slots <span>›</span></small></button>
         <button class="home-collection-card" id="home-collection"><span class="home-card-kicker">PLAY YOUR WAY</span><img src="/icons/buy/awp.svg" alt=""><strong>Weapon finishes</strong><small>Customize your skins<span>›</span></small></button>
       </aside>
-      <div class="home-profile"><div class="home-player-identity"><strong id="home-player-name">PLAYER</strong><img id="home-player-avatar" src="/icons/team-ct.png" alt="Profile picture"></div><span id="home-agent-status" role="status"></span></div>
-      <aside class="home-social" aria-label="Local session"><img id="home-profile-icon" src="/icons/team-ct.png" alt="Your team"><span class="home-status-dot" title="Local session"></span><button id="steam-account-button" aria-label="Steam account" title="Sign in with Steam"><img id="steam-avatar" alt="Steam avatar" hidden><span id="steam-account-label">SIGN IN</span></button></aside>
+      <div class="home-profile"><div class="home-player-identity"><strong id="home-player-name">PLAYER</strong><img id="home-player-avatar" src="${assetUrl("/icons/team-ct.png")}" alt="Profile picture"></div><span id="home-agent-status" role="status"></span></div>
+      <aside class="home-social" aria-label="Local session"><img id="home-profile-icon" src="${assetUrl("/icons/team-ct.png")}" alt="Your team"><span class="home-status-dot" title="Local session"></span><button id="steam-account-button" aria-label="Steam account" title="Sign in with Steam"><img id="steam-avatar" alt="Steam avatar" hidden><span id="steam-account-label">SIGN IN</span></button></aside>
       <button id="home-scenery-button" aria-label="Configure main menu" aria-expanded="false" aria-controls="home-scenery" title="Configure main menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></button>
       <div id="home-scenery" hidden>
         <div class="home-scenery-branch"><button aria-expanded="false" aria-controls="home-background-options">Change Main Menu Scenery</button><div id="home-background-options" class="home-scenery-options" hidden></div></div>

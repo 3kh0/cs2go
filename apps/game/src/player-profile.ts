@@ -1,3 +1,4 @@
+import { assetUrl } from "./asset-url";
 export type SteamProfile = {
   steamId: string;
   name: string;
@@ -14,7 +15,7 @@ export function setPlayerProfile(value: SteamProfile | null) {
   window.dispatchEvent(new Event("cs2go-profile-change"));
   document.getElementById("home-player-name")!.textContent = value?.name || "PLAYER";
   const homeAvatar = document.getElementById("home-player-avatar") as HTMLImageElement;
-  homeAvatar.src = value?.avatar || "/icons/team-ct.png";
+  homeAvatar.src = value?.avatar || assetUrl("/icons/team-ct.png");
   const avatar = document.getElementById("steam-avatar") as HTMLImageElement;
   avatar.hidden = !value?.avatar;
   if (value?.avatar) avatar.src = value.avatar;
