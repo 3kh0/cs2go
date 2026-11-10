@@ -8,7 +8,8 @@ import { applySourceSurface, loadSourceSurfaceLookup } from "./source-surface";
 import { registerSurfaceTextures } from "./presentation-settings";
 import { nativeLightmappedResponseGLSL } from "./native-lightmapped-response";
 
-/** PS8070/d0+d4 VS6/d1+d9. FLOAT draw→packed tint upload remains unobserved;
+/** Installed PS8070 overlays plus selected 6144/6176/6150/8064 branches.
+ * FLOAT draw→packed tint upload remains unobserved;
  * combinedVSFactor is an explicitly qualified source-domain host bridge. */
 export interface NativeLightmappedMaterial {
   shader: "csgo_lightmappedgeneric.vfx";
@@ -275,6 +276,7 @@ export function applyNativeMapLightmapped(
           )
           .replace(
             "#include <roughnessmap_fragment>",
+            // No-spec native programs do not read roughB. This is only an unused Three field.
             program && !program.direct
               ? "float roughnessFactor=1.0;"
               : "float roughnessFactor=nativeLMPacked.b;",

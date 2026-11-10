@@ -1,0 +1,131 @@
+{
+  "resource": "materials/default/effects/noise/perlin_a_z000_tga_8c53a467.vtex",
+  "sourceSha256": "20022368213215042239f2070efcdb5145343697956f01d290d5ea9784af920a",
+  "file": "volume-rgba8-mips.bin.gz",
+  "format": "RGBA8",
+  "srgb": false,
+  "mips": [
+    {
+      "mip": 0,
+      "width": 64,
+      "height": 64,
+      "depth": 256,
+      "bytes": 4194304,
+      "sha256": "e0d95186c8a60654c4da9211f1173bbb847d65cd6512eb92ada4956bce897883"
+    },
+    {
+      "mip": 1,
+      "width": 32,
+      "height": 32,
+      "depth": 128,
+      "bytes": 524288,
+      "sha256": "432814a62cacf4c5a3b26e3aaedddd217a2e05ff4ce8a1a06ef70c1a41475073"
+    },
+    {
+      "mip": 2,
+      "width": 16,
+      "height": 16,
+      "depth": 64,
+      "bytes": 65536,
+      "sha256": "d9531ffc0cea0f04ab372acc5e0d383cd75e9527ec7c94ba1bac8480550b91aa"
+    },
+    {
+      "mip": 3,
+      "width": 8,
+      "height": 8,
+      "depth": 32,
+      "bytes": 8192,
+      "sha256": "9b3c82be373ddfd63d9de2f75e441dc937c3b7e2100b60f474c5429b67a283ac"
+    },
+    {
+      "mip": 4,
+      "width": 4,
+      "height": 4,
+      "depth": 16,
+      "bytes": 1024,
+      "sha256": "bd68bcec56790797faa461da5af297df0f6674d3d96992246b5deb3bac6c4753"
+    },
+    {
+      "mip": 5,
+      "width": 2,
+      "height": 2,
+      "depth": 8,
+      "bytes": 128,
+      "sha256": "f2c3c5fc9df11a66217b6bc70b78064dc727e8a776125543703da0d55d79e5c3"
+    },
+    {
+      "mip": 6,
+      "width": 1,
+      "height": 1,
+      "depth": 4,
+      "bytes": 16,
+      "sha256": "eea01c90cac12dfd37f2fd9d8573185769fa4fecf21ad9f33c30e3ac76a9d905"
+    },
+    {
+      "mip": 7,
+      "width": 1,
+      "height": 1,
+      "depth": 2,
+      "bytes": 8,
+      "sha256": "838d25e6b77ca2433c34e77a2dec140e99c34ac90a65cd333b74198256eb8ad3"
+    },
+    {
+      "mip": 8,
+      "width": 1,
+      "height": 1,
+      "depth": 1,
+      "bytes": 4,
+      "sha256": "ad383e8e0313390ccaf53b9e4dfb3d4697a269c8094bddf9ce5d0998b1eaebee"
+    }
+  ],
+  "bytes": 4793500,
+  "sha256": "569909818165edc2e8f8e6d4add7859f08fde3d21e1f04a5bee434c86712c588",
+  "source": {
+    "originalNativeIdentity": {
+      "member": "materials/default/effects/noise/perlin_a_z000_tga_8c53a467.vtex_c",
+      "index": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_dir.vpk",
+      "archive": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\pak01_089.vpk",
+      "archive_index": 89,
+      "entry_offset": 22394976,
+      "absolute_offset": 22394976,
+      "archive_bytes": 4798704,
+      "preload_bytes": 0,
+      "bytes": 4798704,
+      "crc32": "b2eebd65",
+      "sha256": "20022368213215042239f2070efcdb5145343697956f01d290d5ea9784af920a",
+      "retained_file": "perlin_a_z000_tga_8c53a467.vtex_c",
+      "resource_header": {
+        "declared_file_size": 5204,
+        "header_version": 12,
+        "resource_version": 1,
+        "blocks": [
+          {
+            "name": "RED2",
+            "directory_offset": 16,
+            "offset": 48,
+            "bytes": 5048
+          },
+          {
+            "name": "DATA",
+            "directory_offset": 28,
+            "offset": 5104,
+            "bytes": 100
+          }
+        ]
+      },
+      "metadata_command": [
+        "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\tools\\s2v-20.1\\Source2Viewer-CLI.exe",
+        "-i",
+        "C:\\Users\\mortar\\Documents\\GitHub\\.amp\\in\\legacy-foliage-native-20261110\\noise\\perlin_a_z000_tga_8c53a467.vtex_c",
+        "-b",
+        "DATA"
+      ],
+      "metadata_exit_code": 0,
+      "memory_available_before": 8910123008,
+      "memory_available_after": 8893415424
+    },
+    "layoutSha256": "383cf870b3ae25332a116081c91cf0ff22a6db501e638e6a06fa02abb4846526",
+    "nativeSamplerProofSha256": "b0db7ee9cf88f80d53df4787afb58afa972027930874930c717abfebc61cf6e9",
+    "qualification": "Original64x64x256RGBA8888 native volume, exact original9 authored mips largest-first with original zslice/row order; no decode/channel operation. Selected native foliage VS samples explicitLOD0 TrilinearWrap; runtime may upload/read baselevel only while preservingallauthoredpayload. Engine live wind uniforms remain separate source-authored reconstruction."
+  }
+}

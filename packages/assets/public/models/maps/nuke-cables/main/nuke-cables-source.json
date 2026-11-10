@@ -1,0 +1,6921 @@
+{
+  "version": 1,
+  "mapId": "nuke",
+  "space": "main",
+  "model": "nuke-cables.glb.gz",
+  "ropes": 66,
+  "triangles": 6048,
+  "nativeEntityCount": 69,
+  "placement": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "audits": [
+    {
+      "id": "2:61814:37634",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 1.25,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1335,
+        "origin": [
+          -2510.27002,
+          -848.0,
+          -51.325001
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37634",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 72.03003, -100.33333,\n\t\t42.639202,\n\t],\n\t[\n\t\t216.09009, -301.0, 127.9176, -72.03003,\n\t\t100.33333, -42.639202, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 1.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            72.03003,
+            -100.33333,
+            42.639202
+          ],
+          [
+            216.09009,
+            -301.0,
+            127.9176,
+            -72.03003,
+            100.33333,
+            -42.639202,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          -63.777365250343216,
+          -1.323036024206493,
+          21.527349689573075
+        ],
+        [
+          -58.239156737313536,
+          1.9834938861931466,
+          29.20830062085382
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 122.49794297777392,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37761",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 1.0,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1338,
+        "origin": [
+          -2192.0,
+          -2304.0,
+          41.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37761",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 43.666668, -193.66667,\n\t\t11.917399,\n\t],\n\t[\n\t\t131.0, -581.0, 35.752197, -43.666668,\n\t\t193.66667, -11.917399, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            43.666668,
+            -193.66667,
+            11.917399
+          ],
+          [
+            131.0,
+            -581.0,
+            35.752197,
+            -43.666668,
+            193.66667,
+            -11.917399,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 6,
+      "triangles": 40,
+      "bounds": [
+        [
+          -55.71248028205922,
+          1.0048454620604552,
+          58.51355504828014
+        ],
+        [
+          -52.313719717940806,
+          1.9859476269202703,
+          73.28704495171996
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 99.44292327068923,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37791",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1482,
+        "origin": [
+          3396.0,
+          480.704987,
+          178.86499
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37791",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 1018.4033, 6.688334,\n\t\t133.02501,\n\t],\n\t[\n\t\t3055.21, 20.065002, 399.075, -1018.4033,\n\t\t-6.688334, -133.02501, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1018.4033,
+            6.688334,
+            133.02501
+          ],
+          [
+            3055.21,
+            20.065002,
+            399.075,
+            -1018.4033,
+            -6.688334,
+            -133.02501,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 16,
+      "triangles": 120,
+      "bounds": [
+        [
+          86.2533483778832,
+          4.4926225510439295,
+          -12.770356625091003
+        ],
+        [
+          163.86882899004274,
+          14.729826601524492,
+          -12.159107765308997
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 134.80376487078976,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37638",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1485,
+        "origin": [
+          3396.0,
+          -114.294998,
+          178.86499
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37638",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 1015.37335, 211.18933,\n\t\t220.69167,\n\t],\n\t[\n\t\t3046.12, 633.568, 662.075, -1015.37335,\n\t\t-211.18933, -220.69167, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1015.37335,
+            211.18933,
+            220.69167
+          ],
+          [
+            3046.12,
+            633.568,
+            662.075,
+            -1015.37335,
+            -211.18933,
+            -220.69167,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 16,
+      "triangles": 120,
+      "bounds": [
+        [
+          86.24805540392926,
+          4.49319777839509,
+          -13.23926984501718
+        ],
+        [
+          163.64159461125377,
+          21.409238565036553,
+          2.9528285434171546
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 139.1676343818682,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37657",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1488,
+        "origin": [
+          3396.0,
+          403.704987,
+          178.86499
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37657",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 962.4599, 129.56999,\n\t\t175.69167,\n\t],\n\t[\n\t\t2887.38, 388.71, 527.075, -962.4599,\n\t\t-129.56999, -175.69167, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            962.4599,
+            129.56999,
+            175.69167
+          ],
+          [
+            2887.38,
+            388.71,
+            527.075,
+            -962.4599,
+            -129.56999,
+            -175.69167,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 15,
+      "triangles": 112,
+      "bounds": [
+        [
+          86.25070151499246,
+          4.492968164338886,
+          -20.17768649554591
+        ],
+        [
+          159.60806876334928,
+          17.9806187451909,
+          -10.203760844054091
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 138.16696379897684,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37843",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1491,
+        "origin": [
+          3396.0,
+          97.705002,
+          178.86499
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37843",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 968.35333, 221.586,\n\t\t220.69167,\n\t],\n\t[\n\t\t2905.06, 664.758, 662.075, -968.35333,\n\t\t-221.586, -220.69167, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            968.35333,
+            221.586,
+            220.69167
+          ],
+          [
+            2905.06,
+            664.758,
+            662.075,
+            -968.35333,
+            -221.586,
+            -220.69167,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 16,
+      "triangles": 120,
+      "bounds": [
+        [
+          86.24706844315352,
+          4.49327026253188,
+          -19.41608030551963
+        ],
+        [
+          160.05910406467672,
+          21.40911513979181,
+          -2.4321869960803695
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 133.56023121635002,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37810",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1494,
+        "origin": [
+          3396.0,
+          692.705017,
+          178.86499
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37810",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 965.38995, 28.48,\n\t\t132.69167,\n\t],\n\t[\n\t\t2896.17, 85.44, 398.075, -965.38995,\n\t\t-28.48, -132.69167, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            965.38995,
+            28.48,
+            132.69167
+          ],
+          [
+            2896.17,
+            85.44,
+            398.075,
+            -965.38995,
+            -28.48,
+            -132.69167,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 15,
+      "triangles": 112,
+      "bounds": [
+        [
+          86.25279503038252,
+          4.492681173074717,
+          -19.81566134032419
+        ],
+        [
+          159.82932901864086,
+          14.704407178213776,
+          -17.54392952327581
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 136.48356092106638,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37676",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1497,
+        "origin": [
+          3396.0,
+          191.705002,
+          178.86499
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37676",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 1021.0833, 98.483665,\n\t\t175.69168,\n\t],\n\t[\n\t\t3063.25, 295.451, 527.075, -1021.0833,\n\t\t-98.483665, -175.69168, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1021.0833,
+            98.483665,
+            175.69168
+          ],
+          [
+            3063.25,
+            295.451,
+            527.075,
+            -1021.0833,
+            -98.483665,
+            -175.69168,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 16,
+      "triangles": 120,
+      "bounds": [
+        [
+          86.2513490419197,
+          4.492867053290716,
+          -12.424327799728859
+        ],
+        [
+          164.07495504236846,
+          17.980671407710517,
+          -4.81874170187114
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 136.59952239358392,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37672",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1500,
+        "origin": [
+          -2181.850098,
+          -4920.509766,
+          612.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37672",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1269.3999, 28.613281,\n\t\t20.853333,\n\t],\n\t[\n\t\t-3808.1997, 85.83984, 62.559998, 1269.3999,\n\t\t-28.613281, -20.853333, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1269.3999,
+            28.613281,
+            20.853333
+          ],
+          [
+            -3808.1997,
+            85.83984,
+            62.559998,
+            1269.3999,
+            -28.613281,
+            -20.853333,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 20,
+      "triangles": 152,
+      "bounds": [
+        [
+          -152.15003019555093,
+          15.148364172902344,
+          122.74982902090258
+        ],
+        [
+          -55.4178477077192,
+          17.184548589019457,
+          125.03173515589742
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 123.81462339241328,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37803",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1503,
+        "origin": [
+          1294.969971,
+          -5024.580078,
+          479.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37803",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1081.1567, -45.860027,\n\t\t1.4800009,\n\t],\n\t[\n\t\t-3243.47, -137.58008, 4.4400024, 1081.1567,\n\t\t45.860027, -1.4800009, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1081.1567,
+            -45.860027,
+            1.4800009
+          ],
+          [
+            -3243.47,
+            -137.58008,
+            4.4400024,
+            1081.1567,
+            45.860027,
+            -1.4800009,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 17,
+      "triangles": 128,
+      "bounds": [
+        [
+          -49.49405361268713,
+          11.55950673113634,
+          127.57357962055428
+        ],
+        [
+          32.89439013948716,
+          12.344375957009305,
+          131.1696223738457
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 124.12666234215352,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37819",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1506,
+        "origin": [
+          5194.959961,
+          -5052.180176,
+          476.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37819",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1250.0366, 103.510086,\n\t\t0.6666667,\n\t],\n\t[\n\t\t-3750.1099, 310.53027, 2.0, 1250.0366,\n\t\t-103.510086, -0.6666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1250.0366,
+            103.510086,
+            0.6666667
+          ],
+          [
+            -3750.1099,
+            310.53027,
+            2.0,
+            1250.0366,
+            -103.510086,
+            -0.6666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 19,
+      "triangles": 144,
+      "bounds": [
+        [
+          36.69499937048055,
+          11.212801501762174,
+          120.3872808839267
+        ],
+        [
+          131.95617518831946,
+          12.206193593616556,
+          128.37600319887326
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 128.73233911903114,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37666",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1509,
+        "origin": [
+          5183.580078,
+          -5041.27002,
+          605.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37666",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1243.6301, 104.433266,\n\t\t0.6666667,\n\t],\n\t[\n\t\t-3730.8901, 313.2998, 2.0, 1243.6301,\n\t\t-104.433266, -0.6666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1243.6301,
+            104.433266,
+            0.6666667
+          ],
+          [
+            -3730.8901,
+            313.2998,
+            2.0,
+            1243.6301,
+            -104.433266,
+            -0.6666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 19,
+      "triangles": 144,
+      "bounds": [
+        [
+          36.89407449620181,
+          14.4894062045485,
+          120.03982176003397
+        ],
+        [
+          131.66718492619836,
+          15.482793286531782,
+          128.09888033596602
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 128.08496757341172,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37822",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1512,
+        "origin": [
+          1444.849976,
+          -4741.649902,
+          478.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37822",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1205.37, -63.51335,\n\t\t1.480001,\n\t],\n\t[\n\t\t-3616.1099, -190.54004, 4.4400024, 1205.37,\n\t\t63.51335, -1.480001, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1205.37,
+            -63.51335,
+            1.480001
+          ],
+          [
+            -3616.1099,
+            -190.54004,
+            4.4400024,
+            1205.37,
+            63.51335,
+            -1.480001,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 19,
+      "triangles": 144,
+      "bounds": [
+        [
+          -55.152675114665975,
+          11.294679328436954,
+          120.3871778860224
+        ],
+        [
+          36.70186243546593,
+          12.318965995004781,
+          125.32835415157759
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 123.8807327013298,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37784",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1515,
+        "origin": [
+          -2060.0,
+          -2885.0,
+          208.751999
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37784",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 114.99999, -423.66663,\n\t\t-8.250666,\n\t],\n\t[\n\t\t345.0, -1271.0, -24.751999, -114.99999,\n\t\t423.66663, 8.250666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            114.99999,
+            -423.66663,
+            -8.250666
+          ],
+          [
+            345.0,
+            -1271.0,
+            -24.751999,
+            -114.99999,
+            423.66663,
+            8.250666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 7,
+      "triangles": 48,
+      "bounds": [
+        [
+          -52.359298712397994,
+          4.288561296738684,
+          73.26941852417194
+        ],
+        [
+          -43.525701287602004,
+          5.338755342845004,
+          105.57198147582805
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 206.99231871580582,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37852",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1518,
+        "origin": [
+          5209.620117,
+          -5065.830078,
+          740.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37852",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1258.1567, 102.21663,\n\t\t0.6666666,\n\t],\n\t[\n\t\t-3774.4702, 306.6499, 2.0, 1258.1567,\n\t\t-102.21663, -0.6666666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1258.1567,
+            102.21663,
+            0.6666666
+          ],
+          [
+            -3774.4702,
+            306.6499,
+            2.0,
+            1258.1567,
+            -102.21663,
+            -0.6666666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 19,
+      "triangles": 144,
+      "bounds": [
+        [
+          36.448694292566174,
+          17.918395645302386,
+          120.8325433472787
+        ],
+        [
+          132.32846457103386,
+          18.91179397589363,
+          128.72271715512127
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 129.55207627247728,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37647",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1521,
+        "origin": [
+          5417.680176,
+          -5252.52002,
+          740.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37647",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1371.1134, 82.09994,\n\t\t0.6666667,\n\t],\n\t[\n\t\t-4113.3403, 246.2998, 2.0, 1371.1134,\n\t\t-82.09994, -0.6666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1371.1134,
+            82.09994,
+            0.6666667
+          ],
+          [
+            -4113.3403,
+            246.2998,
+            2.0,
+            1371.1134,
+            -82.09994,
+            -0.6666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 21,
+      "triangles": 160,
+      "bounds": [
+        [
+          33.12719647152473,
+          17.680788433078952,
+          127.10728441325493
+        ],
+        [
+          137.61211284927498,
+          18.91178343616941,
+          133.4647176827451
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 127.54572979545227,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37691",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1524,
+        "origin": [
+          -1937.349976,
+          -5173.419922,
+          612.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37691",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1301.2833, 6.67334,\n\t\t20.853333,\n\t],\n\t[\n\t\t-3903.85, 20.02002, 62.559998, 1301.2833,\n\t\t-6.67334, -20.853333, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1301.2833,
+            6.67334,
+            20.853333
+          ],
+          [
+            -3903.85,
+            20.02002,
+            62.559998,
+            1301.2833,
+            -6.67334,
+            -20.853333,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 20,
+      "triangles": 152,
+      "bounds": [
+        [
+          -148.3691784733225,
+          15.148338338964471,
+          130.84555817878686
+        ],
+        [
+          -49.20761265627363,
+          17.184552193401686,
+          131.45566535081315
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 126.89308331035878,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37800",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1527,
+        "origin": [
+          5433.220215,
+          -5266.049805,
+          477.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37800",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1379.4166, 80.489914,\n\t\t0.6666667,\n\t],\n\t[\n\t\t-4138.25, 241.46973, 2.0, 1379.4166,\n\t\t-80.489914, -0.6666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1379.4166,
+            80.489914,
+            0.6666667
+          ],
+          [
+            -4138.25,
+            241.46973,
+            2.0,
+            1379.4166,
+            -80.489914,
+            -0.6666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 21,
+      "triangles": 160,
+      "bounds": [
+        [
+          32.88928427954081,
+          11.000581998621383,
+          127.57362016677165
+        ],
+        [
+          138.00675264245893,
+          12.231583914290221,
+          133.8083787852283
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 128.3065784708663,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37644",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1530,
+        "origin": [
+          6447.310059,
+          -2587.709961,
+          708.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37644",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -343.20993, -888.26996,\n\t\t10.666666,\n\t],\n\t[\n\t\t-1029.6299, -2664.81, 32.0, 343.20993,\n\t\t888.26996, -10.666666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -343.20993,
+            -888.26996,
+            10.666666
+          ],
+          [
+            -1029.6299,
+            -2664.81,
+            32.0,
+            343.20993,
+            888.26996,
+            -10.666666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 15,
+      "triangles": 112,
+      "bounds": [
+        [
+          137.56169015770095,
+          17.82750146010653,
+          65.7095240418862
+        ],
+        [
+          163.80906137949904,
+          18.86099484378598,
+          133.4323159769137
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 123.80276506226022,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37660",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1533,
+        "origin": [
+          6283.379883,
+          792.414978,
+          705.940002
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37660",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -49.456703, -1141.2183,\n\t\t-44.126663,\n\t],\n\t[\n\t\t-148.37012, -3423.655, -132.38, 49.456703,\n\t\t1141.2183, 44.126663, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -49.456703,
+            -1141.2183,
+            -44.126663
+          ],
+          [
+            -148.37012,
+            -3423.655,
+            -132.38,
+            49.456703,
+            1141.2183,
+            44.126663,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 18,
+      "triangles": 136,
+      "bounds": [
+        [
+          155.7784956162149,
+          14.517624978718924,
+          -20.130947990172558
+        ],
+        [
+          159.64860139218507,
+          17.981547553129957,
+          66.83569600189446
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 123.84032555881164,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37816",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1536,
+        "origin": [
+          6150.680176,
+          -2629.540039,
+          444.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37816",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -318.57343, -807.5467,\n\t\t10.666667,\n\t],\n\t[\n\t\t-955.7202, -2422.6401, 32.0, 318.57343,\n\t\t807.5467, -10.666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -318.57343,
+            -807.5467,
+            10.666667
+          ],
+          [
+            -955.7202,
+            -2422.6401,
+            32.0,
+            318.57343,
+            807.5467,
+            -10.666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 14,
+      "triangles": 104,
+      "bounds": [
+        [
+          131.90472760843082,
+          11.175807878415254,
+          66.77167480536076
+        ],
+        [
+          156.27453225236903,
+          12.155396603706448,
+          128.3440177158389
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 120.92490692299756,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37767",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1539,
+        "origin": [
+          -1716.0,
+          -4156.0,
+          52.000198
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37767",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -151.82332, -258.6966,\n\t\t143.81326,\n\t],\n\t[\n\t\t-455.46997, -776.08984, 431.43982, 151.82332,\n\t\t258.6966, -143.81326, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -151.82332,
+            -258.6966,
+            143.81326
+          ],
+          [
+            -455.46997,
+            -776.08984,
+            431.43982,
+            151.82332,
+            258.6966,
+            -143.81326,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 5,
+      "triangles": 32,
+      "bounds": [
+        [
+          -55.18688204045768,
+          1.287653862991978,
+          105.54388705280337
+        ],
+        [
+          -43.55485519754231,
+          12.31218438771393,
+          125.29359488319662
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 219.5494904062988,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37688",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1542,
+        "origin": [
+          1287.709961,
+          -5038.660156,
+          607.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37688",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1075.0199, -44.91992,\n\t\t1.4800007,\n\t],\n\t[\n\t\t-3225.06, -134.75977, 4.4400024, 1075.0199,\n\t\t44.91992, -1.4800007, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1075.0199,
+            -44.91992,
+            1.4800007
+          ],
+          [
+            -3225.06,
+            -134.75977,
+            4.4400024,
+            1075.0199,
+            44.91992,
+            -1.4800007,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 17,
+      "triangles": 128,
+      "bounds": [
+        [
+          -49.21081182796045,
+          14.8107105612083,
+          127.93121225287987
+        ],
+        [
+          32.709953846760435,
+          15.59557568075661,
+          131.45562182992012
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 123.4188382312479,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37825",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1545,
+        "origin": [
+          -2171.26001,
+          -4932.189941,
+          483.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37825",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1270.86, 27.676598,\n\t\t20.853333,\n\t],\n\t[\n\t\t-3812.5798, 83.029785, 62.559998, 1270.86,\n\t\t-27.676598, -20.853333, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1270.86,
+            27.676598,
+            20.853333
+          ],
+          [
+            -3812.5798,
+            83.029785,
+            62.559998,
+            1270.86,
+            -27.676598,
+            -20.853333,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 20,
+      "triangles": 152,
+      "bounds": [
+        [
+          -151.99229342695887,
+          11.871762954470247,
+          123.11788000469355
+        ],
+        [
+          -55.14889820155646,
+          13.90794875910458,
+          125.32841245910643
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 123.95489957681245,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37835",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1548,
+        "origin": [
+          772.0,
+          -3914.0,
+          -47.212601
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37835",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 224.00002, -275.33334,\n\t\t175.33319,\n\t],\n\t[\n\t\t672.0, -826.0, 525.9996, -224.00002,\n\t\t275.33334, -175.33319, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            224.00002,
+            -275.33334,
+            175.33319
+          ],
+          [
+            672.0,
+            -826.0,
+            525.9996,
+            -224.00002,
+            275.33334,
+            -175.33319,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 6,
+      "triangles": 40,
+      "bounds": [
+        [
+          19.58042756962922,
+          -1.232387474803543,
+          99.3925173448049
+        ],
+        [
+          36.70597243037088,
+          12.193573484515728,
+          120.41908265519496
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 217.7376129167216,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37858",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1551,
+        "origin": [
+          -2157.590088,
+          -4946.830078,
+          747.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37858",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1272.6967, 26.459959,\n\t\t20.853333,\n\t],\n\t[\n\t\t-3818.09, 79.37988, 62.559998, 1272.6967,\n\t\t-26.459959, -20.853333, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1272.6967,
+            26.459959,
+            20.853333
+          ],
+          [
+            -3818.09,
+            79.37988,
+            62.559998,
+            1272.6967,
+            -26.459959,
+            -20.853333,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 20,
+      "triangles": 152,
+      "bounds": [
+        [
+          -151.7850326304066,
+          18.57736142616725,
+          123.58244600462908
+        ],
+        [
+          -54.80168782970295,
+          20.613548972285784,
+          125.7002730057709
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 124.13139263973879,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37663",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1554,
+        "origin": [
+          6135.009766,
+          -2631.23999,
+          573.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37663",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -317.1432, -803.34326,\n\t\t10.666666,\n\t],\n\t[\n\t\t-951.4297, -2410.03, 32.0, 317.1432,\n\t\t803.34326, -10.666666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -317.1432,
+            -803.34326,
+            10.666666
+          ],
+          [
+            -951.4297,
+            -2410.03,
+            32.0,
+            317.1432,
+            803.34326,
+            -10.666666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 13,
+      "triangles": 96,
+      "bounds": [
+        [
+          131.61568247462867,
+          14.483659128302648,
+          66.81484195466513
+        ],
+        [
+          155.87649925817132,
+          15.432001304836865,
+          128.06691153733485
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 129.5616366342878,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37650",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1557,
+        "origin": [
+          1304.339966,
+          -5006.220215,
+          742.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37650",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1089.1333, -47.119957,\n\t\t1.4800009,\n\t],\n\t[\n\t\t-3267.4, -141.35986, 4.4400024, 1089.1333,\n\t\t47.119957, -1.4800009, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1089.1333,
+            -47.119957,
+            1.4800009
+          ],
+          [
+            -3267.4,
+            -141.35986,
+            4.4400024,
+            1089.1333,
+            47.119957,
+            -1.4800009,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 17,
+      "triangles": 128,
+      "bounds": [
+        [
+          -49.86392060629961,
+          18.239701842086543,
+          127.10724093678694
+        ],
+        [
+          33.13243087909954,
+          19.024576309218652,
+          130.79928642921305
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 125.04697937712447,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37682",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1560,
+        "origin": [
+          6483.330078,
+          -2582.090088,
+          573.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37682",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -346.06674, -898.13666,\n\t\t10.666667,\n\t],\n\t[\n\t\t-1038.2002, -2694.41, 32.0, 346.06674,\n\t\t898.13666, -10.666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -346.06674,
+            -898.13666,
+            10.666667
+          ],
+          [
+            -1038.2002,
+            -2694.41,
+            32.0,
+            346.06674,
+            898.13666,
+            -10.666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 15,
+      "triangles": 112,
+      "bounds": [
+        [
+          138.2588960860915,
+          14.398498993500215,
+          65.56682315595599
+        ],
+        [
+          164.72398679630848,
+          15.431995458681895,
+          134.04136731444402
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 125.13304851109596,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37641",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1563,
+        "origin": [
+          6442.120117,
+          519.27301,
+          840.940002
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37641",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 1.7299805, -1035.661,\n\t\t-44.126667,\n\t],\n\t[\n\t\t5.1899414, -3106.983, -132.38, -1.7299805,\n\t\t1035.661, 44.126667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.7299805,
+            -1035.661,
+            -44.126667
+          ],
+          [
+            5.1899414,
+            -3106.983,
+            -132.38,
+            -1.7299805,
+            1035.661,
+            44.126667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 16,
+      "triangles": 120,
+      "bounds": [
+        [
+          163.57905104267286,
+          17.94663143817135,
+          -13.192985760302216
+        ],
+        [
+          163.81247541248715,
+          21.410558675550224,
+          65.72870006018206
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 126.3358779241459,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37855",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1566,
+        "origin": [
+          1435.150024,
+          -4759.180176,
+          742.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37855",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1197.5801, -62.54996,\n\t\t1.4800007,\n\t],\n\t[\n\t\t-3592.7402, -187.6499, 4.4400024, 1197.5801,\n\t\t62.54996, -1.4800007, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1197.5801,
+            -62.54996,
+            1.4800007
+          ],
+          [
+            -3592.7402,
+            -187.6499,
+            4.4400024,
+            1197.5801,
+            62.54996,
+            -1.4800007,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 18,
+      "triangles": 136,
+      "bounds": [
+        [
+          -54.80544015795715,
+          18.121586187381986,
+          120.83244562026077
+        ],
+        [
+          36.45546029715732,
+          19.02457355158466,
+          125.70021478053923
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 129.91478166069965,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37669",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1569,
+        "origin": [
+          1452.689941,
+          -4727.970215,
+          607.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37669",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1211.5133, -64.17985,\n\t\t1.480001,\n\t],\n\t[\n\t\t-3634.54, -192.53955, 4.4400024, 1211.5133,\n\t\t64.17985, -1.480001, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1211.5133,
+            -64.17985,
+            1.480001
+          ],
+          [
+            -3634.54,
+            -192.53955,
+            4.4400024,
+            1211.5133,
+            64.17985,
+            -1.480001,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 19,
+      "triangles": 144,
+      "bounds": [
+        [
+          -55.4216788575255,
+          14.571274237789247,
+          120.03971459247325
+        ],
+        [
+          36.901011860325454,
+          15.595566339462394,
+          125.03167689952677
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 124.51396650953812,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37797",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1572,
+        "origin": [
+          6467.669922,
+          -2584.48999,
+          445.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37797",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -344.81656, -893.8533,\n\t\t10.666667,\n\t],\n\t[\n\t\t-1034.4497, -2681.5598, 32.0, 344.81656,\n\t\t893.8533, -10.666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -344.81656,
+            -893.8533,
+            10.666667
+          ],
+          [
+            -1034.4497,
+            -2681.5598,
+            32.0,
+            344.81656,
+            893.8533,
+            -10.666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 15,
+      "triangles": 112,
+      "bounds": [
+        [
+          137.9563979484857,
+          11.147300055825648,
+          65.6277621867286
+        ],
+        [
+          164.3262117091143,
+          12.180795193933056,
+          133.77594822527132
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 124.55505525822868,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37679",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1575,
+        "origin": [
+          6459.25,
+          487.156006,
+          705.940002
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37679",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 8.026693, -1023.08203,\n\t\t-44.126667,\n\t],\n\t[\n\t\t24.080078, -3069.246, -132.38, -8.026693,\n\t\t1023.08203, 44.126667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.026693,
+            -1023.08203,
+            -44.126667
+          ],
+          [
+            24.080078,
+            -3069.246,
+            -132.38,
+            -8.026693,
+            1023.08203,
+            44.126667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 16,
+      "triangles": 120,
+      "bounds": [
+        [
+          164.01415156338538,
+          14.517631620779285,
+          -12.377255882569127
+        ],
+        [
+          164.7273824178146,
+          17.981555789287594,
+          65.58596277704736
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 124.80787694865326,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37711",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1578,
+        "origin": [
+          816.0,
+          -3916.0,
+          120.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37711",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 212.33331, -270.66666,\n\t\t162.33333,\n\t],\n\t[\n\t\t637.0, -812.0, 487.0, -212.33331,\n\t\t270.66666, -162.33333, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            212.33331,
+            -270.66666,
+            162.33333
+          ],
+          [
+            637.0,
+            -812.0,
+            487.0,
+            -212.33331,
+            270.66666,
+            -162.33333,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 6,
+      "triangles": 40,
+      "bounds": [
+        [
+          20.697622411707535,
+          3.0145241096897055,
+          99.44382447812188
+        ],
+        [
+          36.934977588292334,
+          15.450462980220976,
+          120.11377552187828
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 209.21554674545584,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37777",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1581,
+        "origin": [
+          -1715.0,
+          -4156.0,
+          116.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37777",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -155.56665, -254.93669,\n\t\t165.14667,\n\t],\n\t[\n\t\t-466.69995, -764.81006, 495.44, 155.56665,\n\t\t254.93669, -165.14667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -155.56665,
+            -254.93669,
+            165.14667
+          ],
+          [
+            -466.69995,
+            -764.81006,
+            495.44,
+            155.56665,
+            254.93669,
+            -165.14667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 6,
+      "triangles": 40,
+      "bounds": [
+        [
+          -55.44640078350122,
+          2.91390340423277,
+          105.54334777831414
+        ],
+        [
+          -43.529777946498776,
+          15.56207842616697,
+          125.00762774568585
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 187.70003540051164,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37813",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1584,
+        "origin": [
+          6292.169922,
+          778.14502,
+          576.940002
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37813",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -47.16325, -1135.895,\n\t\t-44.12667,\n\t],\n\t[\n\t\t-141.48975, -3407.685, -132.38, 47.16325,\n\t\t1135.895, 44.12667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -47.16325,
+            -1135.895,
+            -44.12667
+          ],
+          [
+            -141.48975,
+            -3407.685,
+            -132.38,
+            47.16325,
+            1135.895,
+            44.12667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 18,
+      "triangles": 136,
+      "bounds": [
+        [
+          156.17652010123894,
+          11.24102498766535,
+          -19.768508432615477
+        ],
+        [
+          159.87187228636105,
+          14.704946330731728,
+          66.79242293197997
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 123.25405633815417,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37685",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1587,
+        "origin": [
+          5445.129883,
+          -5276.5,
+          605.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37685",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1385.8066, 79.279945,\n\t\t0.6666666,\n\t],\n\t[\n\t\t-4157.42, 237.83984, 2.0, 1385.8066,\n\t\t-79.279945, -0.6666666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1385.8066,
+            79.279945,
+            0.6666666
+          ],
+          [
+            -4157.42,
+            237.83984,
+            2.0,
+            1385.8066,
+            -79.279945,
+            -0.6666666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 21,
+      "triangles": 160,
+      "bounds": [
+        [
+          32.70492957952137,
+          14.2517771205816,
+          127.93125098999563
+        ],
+        [
+          138.30920047687854,
+          15.482784276724153,
+          134.07381707400438
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 128.89246671523853,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37653",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1590,
+        "origin": [
+          -1963.060059,
+          -5147.580078,
+          747.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37653",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1298.0165, 8.993326,\n\t\t20.85333,\n\t],\n\t[\n\t\t-3894.0498, 26.97998, 62.559998, 1298.0165,\n\t\t-8.993326, -20.85333, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1298.0165,
+            8.993326,
+            20.85333
+          ],
+          [
+            -3894.0498,
+            26.97998,
+            62.559998,
+            1298.0165,
+            -8.993326,
+            -20.85333,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 20,
+      "triangles": 152,
+      "bounds": [
+        [
+          -148.77329621447066,
+          18.577340913467193,
+          130.01244370846558
+        ],
+        [
+          -49.860646085388886,
+          20.613551834206675,
+          130.79933276193438
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 126.57598687315388,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37846",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1593,
+        "origin": [
+          6301.060059,
+          762.463013,
+          840.940002
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37846",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -43.5, -1129.8511,\n\t\t-44.12667,\n\t],\n\t[\n\t\t-130.5, -3389.5532, -132.38, 43.5,\n\t\t1129.8511, 44.12667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -43.5,
+            -1129.8511,
+            -44.12667
+          ],
+          [
+            -130.5,
+            -3389.5532,
+            -132.38,
+            43.5,
+            1129.8511,
+            44.12667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 17,
+      "triangles": 128,
+      "bounds": [
+        [
+          156.68146310721525,
+          17.9466270577907,
+          -19.369962351914115
+        ],
+        [
+          160.09768788998474,
+          21.41056185211822,
+          66.73004513484429
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 129.7953115771026,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37787",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1596,
+        "origin": [
+          -1715.0,
+          -4156.0,
+          184.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37787",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -147.25667, -263.70996,\n\t\t188.14665,\n\t],\n\t[\n\t\t-441.77002, -791.1299, 564.44, 147.25667,\n\t\t263.70996, -188.14665, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -147.25667,
+            -263.70996,
+            188.14665
+          ],
+          [
+            -441.77002,
+            -791.1299,
+            564.44,
+            147.25667,
+            263.70996,
+            -188.14665,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 6,
+      "triangles": 40,
+      "bounds": [
+        [
+          -54.8138929937358,
+          4.642055790625753,
+          105.54456765868456
+        ],
+        [
+          -43.529065514264204,
+          19.040909647995,
+          125.67493180131544
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 195.71550620183234,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37794",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1599,
+        "origin": [
+          6451.209961,
+          500.769989,
+          577.940002
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37794",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 5.486654, -1028.42,\n\t\t-44.12667,\n\t],\n\t[\n\t\t16.45996, -3085.26, -132.38, -5.486654,\n\t\t1028.42, 44.12667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.486654,
+            -1028.42,
+            -44.12667
+          ],
+          [
+            16.45996,
+            -3085.26,
+            -132.38,
+            -5.486654,
+            1028.42,
+            44.12667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 16,
+      "triangles": 120,
+      "bounds": [
+        [
+          163.80993373233366,
+          11.266431542529709,
+          -12.72303312121473
+        ],
+        [
+          164.3296152704663,
+          14.730357025995676,
+          65.6469186795089
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 125.45579275894754,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37849",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1602,
+        "origin": [
+          6170.560059,
+          -2627.090088,
+          708.559998
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37849",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -320.3133, -812.9133,\n\t\t10.666667,\n\t],\n\t[\n\t\t-960.93994, -2438.74, 32.0, 320.3133,\n\t\t812.9133, -10.666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -320.3133,
+            -812.9133,
+            10.666667
+          ],
+          [
+            -960.93994,
+            -2438.74,
+            32.0,
+            320.3133,
+            812.9133,
+            -10.666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 14,
+      "triangles": 104,
+      "bounds": [
+        [
+          132.27708775801304,
+          17.88140725427798,
+          66.70946502869351
+        ],
+        [
+          156.77948876318695,
+          18.8609969546826,
+          128.69070744170645
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 121.70913586024957,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37721",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1605,
+        "origin": [
+          816.0,
+          -3916.0,
+          189.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37721",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 206.33334, -281.0,\n\t\t184.26233,\n\t],\n\t[\n\t\t619.0, -843.0, 552.787, -206.33334,\n\t\t281.0, -184.26233, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            206.33334,
+            -281.0,
+            184.26233
+          ],
+          [
+            619.0,
+            -843.0,
+            552.787,
+            -206.33334,
+            281.0,
+            -184.26233,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 6,
+      "triangles": 40,
+      "bounds": [
+        [
+          20.696918278544402,
+          4.7678503344456775,
+          99.44475209303386
+        ],
+        [
+          36.47848172145564,
+          18.873299925419563,
+          120.90024790696607
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 216.8751558127196,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:39731",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1608,
+        "origin": [
+          -2060.0,
+          -2885.0,
+          76.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:39731",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 114.99999, -423.66663,\n\t\t-8.250666,\n\t],\n\t[\n\t\t345.0, -1271.0, -24.751999, -114.99999,\n\t\t423.66663, 8.250666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            114.99999,
+            -423.66663,
+            -8.250666
+          ],
+          [
+            345.0,
+            -1271.0,
+            -24.751999,
+            -114.99999,
+            423.66663,
+            8.250666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 7,
+      "triangles": 48,
+      "bounds": [
+        [
+          -52.359298712397994,
+          0.9166605221386771,
+          73.26941852417194
+        ],
+        [
+          -43.525701287602004,
+          1.966854568245003,
+          105.57198147582805
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 206.99231871580582,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37701",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1611,
+        "origin": [
+          816.0,
+          -3916.0,
+          56.000397
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37701",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 209.66666, -275.33334,\n\t\t140.99988,\n\t],\n\t[\n\t\t629.0, -826.0, 422.9996, -209.66666,\n\t\t275.33334, -140.99988, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            209.66666,
+            -275.33334,
+            140.99988
+          ],
+          [
+            629.0,
+            -826.0,
+            422.9996,
+            -209.66666,
+            275.33334,
+            -140.99988,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 6,
+      "triangles": 40,
+      "bounds": [
+        [
+          20.69730062942241,
+          1.3881734296234447,
+          99.4442407940578
+        ],
+        [
+          36.732099370577494,
+          12.200087473381522,
+          120.46895920594231
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 205.5334016201769,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37806",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 0.65,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1614,
+        "origin": [
+          -1948.5,
+          -5162.160156,
+          484.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37806",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -1299.86, 7.680013,\n\t\t20.853333,\n\t],\n\t[\n\t\t-3899.58, 23.04004, 62.559998, 1299.86,\n\t\t-7.680013, -20.853333, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.5, 2.5 ]",
+        "pathNodeRadiusHeightScales": "[ 2.5, 2.5 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1299.86,
+            7.680013,
+            20.853333
+          ],
+          [
+            -3899.58,
+            23.04004,
+            62.559998,
+            1299.86,
+            -7.680013,
+            -20.853333,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 20,
+      "triangles": 152,
+      "bounds": [
+        [
+          -148.54393400593992,
+          11.897139459007622,
+          130.48285183305188
+        ],
+        [
+          -49.49082209932636,
+          13.933352037169481,
+          131.16966707574812
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 126.7548697947541,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37774",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.1,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1617,
+        "origin": [
+          -2060.0,
+          -2885.0,
+          140.751999
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37774",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 114.99999, -423.66663,\n\t\t-8.250666,\n\t],\n\t[\n\t\t345.0, -1271.0, -24.751999, -114.99999,\n\t\t423.66663, 8.250666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            114.99999,
+            -423.66663,
+            -8.250666
+          ],
+          [
+            345.0,
+            -1271.0,
+            -24.751999,
+            -114.99999,
+            423.66663,
+            8.250666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 7,
+      "triangles": 48,
+      "bounds": [
+        [
+          -52.359298712397994,
+          2.5613612967386743,
+          73.26941852417194
+        ],
+        [
+          -43.525701287602004,
+          3.6115553428450036,
+          105.57198147582805
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 206.99231871580582,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37839",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 80.0,
+        "slack": 1.0,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1632,
+        "origin": [
+          -960.544006,
+          -860.085022,
+          -47.9403
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37839",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 60.177994, -138.97165,\n\t\t2.7350667,\n\t],\n\t[\n\t\t180.534, -416.91498, 8.2052, -60.177994,\n\t\t138.97165, -2.7350667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 1.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            60.177994,
+            -138.97165,
+            2.7350667
+          ],
+          [
+            180.534,
+            -416.91498,
+            8.2052,
+            -60.177994,
+            138.97165,
+            -2.7350667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 6,
+      "triangles": 40,
+      "bounds": [
+        [
+          -24.4164645895631,
+          -1.2771746891330502,
+          21.83808503938317
+        ],
+        [
+          -19.774960478073623,
+          -0.9686861787016633,
+          32.45194908963326
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 75.73307493563614,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37695",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 80.0,
+        "slack": 0.75,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1648,
+        "origin": [
+          922.0,
+          -1596.0,
+          53.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37695",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -24.072002, -305.75336,\n\t\t7.9291334,\n\t],\n\t[\n\t\t-72.216, -917.26, 23.7874, 24.072002,\n\t\t305.75336, -7.9291334, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -24.072002,
+            -305.75336,
+            7.9291334
+          ],
+          [
+            -72.216,
+            -917.26,
+            23.7874,
+            24.072002,
+            305.75336,
+            -7.9291334,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 12,
+      "triangles": 88,
+      "bounds": [
+        [
+          21.54805043268315,
+          1.2185360084080537,
+          40.535529250059035
+        ],
+        [
+          23.455263167316847,
+          1.986866121198455,
+          63.83967474994097
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 57.52536460440871,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37698",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.05,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1651,
+        "origin": [
+          849.783997,
+          -2513.26001,
+          76.787399
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37698",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -11.261332, -467.58,\n\t\t-6.929001,\n\t],\n\t[\n\t\t-33.783997, -1402.74, -20.787003, 11.261332,\n\t\t467.58, 6.929001, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -11.261332,
+            -467.58,
+            -6.929001
+          ],
+          [
+            -33.783997,
+            -1402.74,
+            -20.787003,
+            11.261332,
+            467.58,
+            6.929001,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 8,
+      "triangles": 56,
+      "bounds": [
+        [
+          20.68983460339708,
+          1.0490900888230381,
+          63.83422333325679
+        ],
+        [
+          21.62107892040292,
+          1.986884708962684,
+          99.46790102591878
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 184.1832220624507,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37764",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1717,
+        "origin": [
+          -1716.0,
+          -4156.0,
+          52.000198
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37764",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "2:61814:37715",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 80.0,
+        "slack": 0.75,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1724,
+        "origin": [
+          988.0,
+          -1596.0,
+          53.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37715",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -46.072, -305.75333,\n\t\t51.928997,\n\t],\n\t[\n\t\t-138.216, -917.26, 155.787, 46.072,\n\t\t305.75333, -51.928997, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -46.072,
+            -305.75333,
+            51.928997
+          ],
+          [
+            -138.216,
+            -917.26,
+            155.787,
+            46.072,
+            305.75333,
+            -51.928997,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 12,
+      "triangles": 88,
+      "bounds": [
+        [
+          21.548345898841404,
+          1.3098700242849775,
+          40.532950122120376
+        ],
+        [
+          25.13136770115859,
+          5.338915504657358,
+          63.844557251385666
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 58.78785879996955,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37718",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.05,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1727,
+        "origin": [
+          849.783997,
+          -2513.26001,
+          208.787003
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37718",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -11.2613325, -467.58,\n\t\t-6.595668,\n\t],\n\t[\n\t\t-33.783997, -1402.74, -19.787003, 11.2613325,\n\t\t467.58, 6.595668, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -11.2613325,
+            -467.58,
+            -6.595668
+          ],
+          [
+            -33.783997,
+            -1402.74,
+            -19.787003,
+            11.2613325,
+            467.58,
+            6.595668,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 8,
+      "triangles": 56,
+      "bounds": [
+        [
+          20.689834603397063,
+          4.41642162926047,
+          63.83424923468144
+        ],
+        [
+          21.621078920402937,
+          5.339676474638658,
+          99.46792705308641
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 184.1813246196688,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37771",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1738,
+        "origin": [
+          -2060.0,
+          -2885.0,
+          140.751999
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37771",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "2:61814:37729",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1740,
+        "origin": [
+          1726.0,
+          610.234009,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37729",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.170002, 2.2043252,\n\t\t-49.6072,\n\t],\n\t[\n\t\t168.51001, 6.612976, -148.82161, -56.170002,\n\t\t-2.2043252, 49.6072, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.170002,
+            2.2043252,
+            -49.6072
+          ],
+          [
+            168.51001,
+            6.612976,
+            -148.82161,
+            -56.170002,
+            -2.2043252,
+            49.6072,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.81340085109371,
+          -2.3133381510754747,
+          -15.708522160732281
+        ],
+        [
+          48.147290294628775,
+          1.5276766005790687,
+          -15.459335086867718
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.360307574014755,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37757",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1783,
+        "origin": [
+          1726.0,
+          -47.765999,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37757",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.17, 11.5377,\n\t\t-49.6072,\n\t],\n\t[\n\t\t168.51001, 34.6131, -148.82161, -56.17,\n\t\t-11.5377, 49.6072, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.17,
+            11.5377,
+            -49.6072
+          ],
+          [
+            168.51001,
+            34.6131,
+            -148.82161,
+            -56.17,
+            -11.5377,
+            49.6072,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.81422736813471,
+          -2.313600078766257,
+          0.29427476530241237
+        ],
+        [
+          48.146467422506454,
+          1.5279417467886038,
+          1.2530652438975884
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.80685027789899,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37725",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1804,
+        "origin": [
+          1726.0,
+          674.234009,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37725",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.17, -7.1290073,\n\t\t-48.983196,\n\t],\n\t[\n\t\t168.51001, -21.387024, -146.9496, -56.17,\n\t\t7.1290073, 48.983196, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.17,
+            -7.1290073,
+            -48.983196
+          ],
+          [
+            168.51001,
+            -21.387024,
+            -146.9496,
+            -56.17,
+            7.1290073,
+            48.983196,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.81389171352735,
+          -2.2660523134612722,
+          -17.165860410330914
+        ],
+        [
+          48.14679642162557,
+          1.5279401148118195,
+          -16.541996837269085
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.30579988286474,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37733",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1868,
+        "origin": [
+          1726.0,
+          546.234009,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37733",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.170002, 11.537659,\n\t\t-49.607204,\n\t],\n\t[\n\t\t168.51001, 34.612976, -148.82161, -56.170002,\n\t\t-11.537659, 49.607204, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.170002,
+            11.537659,
+            -49.607204
+          ],
+          [
+            168.51001,
+            34.612976,
+            -148.82161,
+            -56.170002,
+            -11.537659,
+            49.607204,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.814227362183736,
+          -2.3136000768703324,
+          -14.793322294071128
+        ],
+        [
+          48.146467428430505,
+          1.527941744868903,
+          -13.834534953528872
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.80684697587895,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37737",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1871,
+        "origin": [
+          1726.0,
+          386.234009,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37737",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.170006, -7.129009,\n\t\t-49.60721,\n\t],\n\t[\n\t\t168.51001, -21.387024, -148.82161, -56.170006,\n\t\t7.129009, 49.60721, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.170006,
+            -7.129009,
+            -49.60721
+          ],
+          [
+            168.51001,
+            -21.387024,
+            -148.82161,
+            -56.170006,
+            7.129009,
+            49.60721,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.813703214449596,
+          -2.313433649109856,
+          -9.850660410330915
+        ],
+        [
+          48.14698924245508,
+          1.52777325640653,
+          -9.226796837269086
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.52091292570357,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37741",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1884,
+        "origin": [
+          1726.0,
+          322.234009,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37741",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.170002, 2.2043252,\n\t\t-49.6072,\n\t],\n\t[\n\t\t168.51001, 6.612976, -148.82161, -56.170002,\n\t\t-2.2043252, 49.6072, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.170002,
+            2.2043252,
+            -49.6072
+          ],
+          [
+            168.51001,
+            6.612976,
+            -148.82161,
+            -56.170002,
+            -2.2043252,
+            49.6072,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.81340085109371,
+          -2.3133381510754747,
+          -8.393322160732282
+        ],
+        [
+          48.147290294628775,
+          1.5276766005790687,
+          -8.144135086867719
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.360307574014755,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37749",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1905,
+        "origin": [
+          1726.0,
+          80.234001,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37749",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.170002, -7.128967,\n\t\t-49.607204,\n\t],\n\t[\n\t\t168.51001, -21.386902, -148.82161, -56.170002,\n\t\t7.128967, 49.607204, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.170002,
+            -7.128967,
+            -49.607204
+          ],
+          [
+            168.51001,
+            -21.386902,
+            -148.82161,
+            -56.170002,
+            7.128967,
+            49.607204,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.813703210679726,
+          -2.3134336479168756,
+          -2.078260210776786
+        ],
+        [
+          48.14698924620843,
+          1.527773255198963,
+          -1.4543997292232143
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.520910903810936,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37745",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1945,
+        "origin": [
+          1726.0,
+          258.234009,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37745",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.170002, 11.537659,\n\t\t-49.607204,\n\t],\n\t[\n\t\t168.51001, 34.612976, -148.82161, -56.170002,\n\t\t-11.537659, 49.607204, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.170002,
+            11.537659,
+            -49.607204
+          ],
+          [
+            168.51001,
+            34.612976,
+            -148.82161,
+            -56.170002,
+            -11.537659,
+            49.607204,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.814227362183736,
+          -2.3136000768703324,
+          -7.478122294071127
+        ],
+        [
+          48.146467428430505,
+          1.527941744868903,
+          -6.519334953528871
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.80684697587895,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37705",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 80.0,
+        "slack": 0.75,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1962,
+        "origin": [
+          954.0,
+          -1596.0,
+          53.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37705",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -34.738667, -305.75333,\n\t\t28.929,\n\t],\n\t[\n\t\t-104.216, -917.26, 86.787, 34.738667,\n\t\t305.75333, -28.929, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -34.738667,
+            -305.75333,
+            28.929
+          ],
+          [
+            -104.216,
+            -917.26,
+            86.787,
+            34.738667,
+            305.75333,
+            -28.929,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 12,
+      "triangles": 88,
+      "bounds": [
+        [
+          21.548171413795192,
+          1.3096567355736264,
+          40.53427092288091
+        ],
+        [
+          24.267942186204802,
+          3.5867835359658304,
+          63.84204449075869
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 57.95198934331468,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37708",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.05,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1965,
+        "origin": [
+          849.783997,
+          -2513.26001,
+          139.787003
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37708",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -11.2613325, -467.58,\n\t\t-6.595668,\n\t],\n\t[\n\t\t-33.783997, -1402.74, -19.787003, 11.2613325,\n\t\t467.58, 6.595668, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -11.2613325,
+            -467.58,
+            -6.595668
+          ],
+          [
+            -33.783997,
+            -1402.74,
+            -19.787003,
+            11.2613325,
+            467.58,
+            6.595668,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 8,
+      "triangles": 56,
+      "bounds": [
+        [
+          20.689834603397063,
+          2.6638216292604726,
+          63.83424923468144
+        ],
+        [
+          21.621078920402937,
+          3.5870764746386583,
+          99.46792705308641
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 184.1813246196688,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37781",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 2041,
+        "origin": [
+          -2060.0,
+          -2885.0,
+          208.751999
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37781",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "2:61814:37829",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 80.0,
+        "slack": 0.75,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 2079,
+        "origin": [
+          890.0,
+          -1596.0,
+          53.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37829",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -23.333332, -305.66666,\n\t\t-32.404198,\n\t],\n\t[\n\t\t-70.0, -917.0, -97.2126, 23.333332,\n\t\t305.66666, 32.404198, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -23.333332,
+            -305.66666,
+            -32.404198
+          ],
+          [
+            -70.0,
+            -917.0,
+            -97.2126,
+            23.333332,
+            305.66666,
+            32.404198,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 12,
+      "triangles": 88,
+      "bounds": [
+        [
+          20.79153010372777,
+          -1.1595228765304888,
+          40.53271720267428
+        ],
+        [
+          22.642469896272228,
+          1.3823292320284764,
+          63.83298396154657
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 57.79946777432433,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37832",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 200.0,
+        "slack": 1.05,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 2082,
+        "origin": [
+          820.0,
+          -2513.0,
+          -44.212601
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37832",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -11.000001, -467.00003,\n\t\t-6.5958,\n\t],\n\t[\n\t\t-33.0, -1401.0, -19.7874, 11.000001,\n\t\t467.00003, 6.5958, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 1.8, 1.8 ]",
+        "pathNodeRadiusHeightScales": "[ 1.8, 1.8 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -11.000001,
+            -467.00003,
+            -6.5958
+          ],
+          [
+            -33.0,
+            -1401.0,
+            -19.7874,
+            11.000001,
+            467.00003,
+            6.5958,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 8,
+      "triangles": 56,
+      "bounds": [
+        [
+          19.953234142316326,
+          -2.009751235818796,
+          63.827641822120185
+        ],
+        [
+          20.864565857683672,
+          -1.0865136861462943,
+          99.4171286427815
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 183.95058775947624,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "2:61814:37753",
+      "nativeEntity": {
+        "targetname": "",
+        "vscripts": "",
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "start_active": true,
+        "max_simulation_time": 1.5,
+        "particle_spacing": 100.0,
+        "slack": 0.7,
+        "radius": 0.8,
+        "static_collision": false,
+        "surface_properties": "",
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 2100,
+        "origin": [
+          1726.0,
+          16.233999,
+          58.9496
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:37753",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 56.170002, 2.2043667,\n\t\t-49.6072,\n\t],\n\t[\n\t\t168.51001, 6.6131, -148.82161, -56.170002,\n\t\t-2.2043667, 49.6072, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0, 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0, 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "nuke",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            56.170002,
+            2.2043667,
+            -49.6072
+          ],
+          [
+            168.51001,
+            6.6131,
+            -148.82161,
+            -56.170002,
+            -2.2043667,
+            49.6072,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 4,
+      "triangles": 24,
+      "bounds": [
+        [
+          43.81340085230657,
+          -2.313338151457798,
+          -0.620925055161375
+        ],
+        [
+          48.14729029342112,
+          1.527676600965992,
+          -0.37173483403862506
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 1.5,
+        "stepSeconds": 0.01,
+        "steps": 150,
+        "restLength": 39.3603082120436,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 1,
+      "missingArrayPolicy": {
+        "radius": false,
+        "height": false,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    }
+  ],
+  "source": {
+    "engine": "Valve Source2",
+    "build": "26445667",
+    "mapAuthor": "unverified; retain supplied native map credits",
+    "originalArchiveSHA256": "f3c2966ea3423043f731bbecfb704fb7360b4bb442c85ddb50ecc8f25d7f5503",
+    "viewerCommit": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "qualifications": [
+      "Pinnedviewer Bezier sampling/Verlet/spring/transported4-sidedtube, not private native engine particle snapshot",
+      "Explicit browser host policy min(authored entity max_simulation_time,VPCFpresim,stop), unlike viewer ignoring entity max",
+      "Authored height scales retained; absent follows qualified viewer width; actual present width/height arrays equal",
+      "Default/tintable offline tessellation uses authored maximum4; camera-adaptive tessellation not claimed",
+      "Native constant VTEX fields/packed hemi-oct flat normal/roughness and min-radius/coverage/blend lowered from preserved native programs. Browser effective vertical-FOV/full drawing-buffer height binding and pinned-viewer settling/tube topology remain qualified; no native engine particle parity claim."
+    ],
+    "nativeShaderProof": {
+      "archiveSHA256": "91493c2620afebab343c470abd1f7b270b01e322c0a4235995c3c7062a4995b8",
+      "followupSHA256": "d2fec7abeaae4371c13f00099ea1fe8b670eb14a26eb8fe74f8e164614ab4106",
+      "registeredCvar": "r_csgo_cable_pixel_radius_clamp",
+      "registeredDefaultFloat32": 1.2000000476837158,
+      "defaultBytes": "9a99993f",
+      "nativeVSWidth": "max(abs(viewDepth)*suppliedK,physicalRadius)",
+      "nativeCoverage": "max(physicalRadius/expandedRadius,0.25)",
+      "candidateWriter": "C*V_tanf((A*float32(pi/180))/D); division inside tan",
+      "opaqueClampBlend": "SourceAlpha/InverseSourceAlpha Add RGB and alpha; source descriptors + qualified pinned VRF enum/bitfield interpretation",
+      "browserViewBinding": "Effective vertical cameraFOV/pixelheight QUALIFIED; exact native A/D members and formalCB3 alias unproved",
+      "independentReplay": "28originalVCS compressed dictionary/slice\u2192native programs;17nativewindows,19/19originalresources/blocks;157+12payloadSHA; noGPU/target execution"
+    },
+    "browserGpuAcceptance": {
+      "fixture": "tests/native-cables.spec.ts",
+      "proof": "native-cables-gpu-proof.json",
+      "limitations": "Controlled width/coverage/transform/clone fixture, not whole-map texel or private particle solver parity"
+    },
+    "viewerLicense": "/models/maps/licenses/ValveResourceFormat-MIT.txt"
+  },
+  "runtime": {
+    "bytes": 104508,
+    "rawGLBBytes": 444352,
+    "sha256": "9165bf79c14572073e9b6228c00bc63bb0f0804841b577f12a3a86c80862105a",
+    "collision": false
+  },
+  "admission": "UNUSED_PUBLIC_PAYLOAD; CPU121-owner geometry and isolated native-width/pose/clone/depth GPU gates pass; no active map config or whole-map visual acceptance"
+}

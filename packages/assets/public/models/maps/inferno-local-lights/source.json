@@ -1,0 +1,1085 @@
+{
+  "version": 1,
+  "map": "inferno",
+  "qualification": "Candidate qualified pinned VRF host reconstruction; installed compiled shader kernel, no private host/live-shadow parity claim",
+  "lights": [
+    {
+      "id": "13103:7:7901:3495",
+      "record": {
+        "projection": [
+          1.7761797503103622,
+          -2.745138135218294,
+          -1.4692192192191689,
+          -0.9999999999999659,
+          -7.154638461967107,
+          -7.186754820724687e-7,
+          -3.8464069151788145e-7,
+          -2.6179938737956984e-7,
+          0,
+          4.443218360553941,
+          0,
+          0,
+          -2931.0045996302188,
+          2127.1989141975937,
+          1934.838826716512,
+          1437.0364804606384
+        ],
+        "worldToBounds": [
+          0.010141259176142746,
+          -0.003101793597870837,
+          -0.009801448883158507,
+          0,
+          0.0012451900549452389,
+          0.026638604521193807,
+          -0.0007217499536591813,
+          0,
+          0.003922098992674508,
+          -0.0004370192194798608,
+          0.02557246756841421,
+          0,
+          -13.691607684009202,
+          6.929519156530788,
+          4.5764698819073,
+          1
+        ],
+        "positionRadius": [
+          1437.0364943131353,
+          -52.9124539257503,
+          409.0874187394895,
+          20825.731833266585
+        ],
+        "depthFalloff": [
+          1,
+          0,
+          2.9615287728573154,
+          0
+        ],
+        "color": [
+          66.54230734638551,
+          53.17414537387591,
+          28.526055966244613
+        ],
+        "rotation": [
+          0,
+          0,
+          0.9999999999999915,
+          -1.30899693689786e-7
+        ],
+        "angularLine": [
+          1,
+          0,
+          0
+        ],
+        "barn": [
+          1,
+          1,
+          0
+        ],
+        "shadowWeights": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "minimumRoughness": 0.04,
+        "cookieKind": 0
+      },
+      "qualification": {
+        "host": "Pinned VRF CS2 photometric reconstruction; not Valve private host records",
+        "sourceColor": [
+          255,
+          231,
+          175
+        ],
+        "sourceColorMode": "0",
+        "sourceTemperature": 6600,
+        "sourceBrightnessUnits": "1",
+        "sourceLumens": 800,
+        "liveShadow": "Not represented by pre-live-shadow kernel",
+        "colorDecoder": "Pinned VRF float32 FMA/Exp/Log minus1e-7; scalar transcendental last bits qualified"
+      },
+      "source": {
+        "entity": {
+          "bakedshadowindex": "1",
+          "light_map_uniqueid": "-1886395614",
+          "light_path_uniqueid": "-209789967",
+          "precomputedboundsmaxs": "1316.978882 -65.913567 361.903442",
+          "precomputedboundsmins": "1167.933716 -157.095947 255.931885",
+          "precomputedobbextent": "91.280090 37.245346 36.465187",
+          "precomputedobbangles": "-20.999998 7.000000 -1.000000",
+          "precomputedobborigin": "1248.865723 -109.847084 296.605774",
+          "precomputedfieldsvalid": "1",
+          "transmit_always": false,
+          "bakespeculartocubemaps_scale": 1,
+          "forceshadowsenabled": false,
+          "fogshadows": "-1",
+          "fogstrength": "0",
+          "fog": "0",
+          "minroughness": 0,
+          "bouncescale": 1,
+          "bouncelight": "1",
+          "shadowfade_size_end": 0.05,
+          "shadowfade_size_start": 0.1,
+          "pvs_modify_entity": false,
+          "shadowpriority": "-1",
+          "shadowmapsize": "-1",
+          "castshadows": "1",
+          "fade_size_end": 0.025,
+          "fade_size_start": 0.05,
+          "brightnessscale": 1,
+          "bakespeculartocubemaps_size": [
+            6,
+            6,
+            0
+          ],
+          "bakespeculartocubemaps": "0",
+          "rendertocubemaps": true,
+          "shear": [
+            63.553387,
+            -158.163589
+          ],
+          "range": 256,
+          "size_params": [
+            16.789124,
+            27.034485,
+            0.008325
+          ],
+          "skirt_near": 0.140018,
+          "skirt": 0,
+          "soft_y": 0,
+          "soft_x": 0,
+          "shape": 0,
+          "brightness_legacy": 23.2188,
+          "brightness": 4.53906,
+          "brightness_units": "1",
+          "luminaire_anisotropy": 0,
+          "luminaire_size": 0,
+          "luminaire_shape": "2",
+          "directlight": "3",
+          "brightness_lumens": 800,
+          "colortemperature": 6600,
+          "color": [
+            255,
+            231,
+            175
+          ],
+          "colormode": "0",
+          "enabled": true,
+          "clientSideEntity": "1",
+          "useLocalOffset": false,
+          "classname": "light_barn",
+          "compile_source_id": 9960,
+          "origin": [
+            1316.916382,
+            -82.732956,
+            334.874023
+          ],
+          "angles": [
+            0,
+            180.000015,
+            0
+          ],
+          "scales": [
+            1,
+            1,
+            1
+          ],
+          "hammerUniqueId": "13103:7:7901:3495"
+        },
+        "entitySha256": "94fa3112d0fd9201bada59a002cef44feaf37887fdc7338a0f9d830f40c4e62d",
+        "worldSha256": "c9d5c3d24e1752ce09710b1a91f872c609e72def452b6aed493fe71e1448a9ae",
+        "compiledShadow": [
+          {
+            "m_nLightHash": 4085177329,
+            "m_nMapHash": 2408571682,
+            "m_nShadowChannel": 1
+          }
+        ],
+        "intensity": 66.54231527884764,
+        "divisor": 12.02242507865221
+      }
+    },
+    {
+      "id": "13103:8:9312:2021",
+      "record": {
+        "projection": [
+          2.8870325755912067,
+          -3.645257734693996e-16,
+          -2.445224613107605e-16,
+          -1.8369701987210297e-16,
+          -1.693717039435522,
+          -1.9843858856458132,
+          -1.3311182809661615,
+          -1,
+          0,
+          1.7929229243183347,
+          0,
+          0,
+          1998.3420764205134,
+          251.83328180779074,
+          517.7288034431331,
+          437.41349690364007
+        ],
+        "worldToBounds": [
+          0.05485919608648395,
+          0.0013837492553837429,
+          -0.0016273379680586575,
+          0,
+          -0.007709956232711268,
+          0.009845888802007903,
+          -0.011579112772384204,
+          0,
+          0,
+          0.005740391633076372,
+          0.020252709556344037,
+          0,
+          28.52848877514959,
+          -4.027187660316057,
+          -1.7464951655874215,
+          1
+        ],
+        "positionRadius": [
+          -435.56397460400416,
+          437.4134969036401,
+          343.66445945970344,
+          6036.005506905743
+        ],
+        "depthFalloff": [
+          1,
+          0,
+          2.0431438776490776,
+          0
+        ],
+        "color": [
+          62.10614496602473,
+          53.1002987337421,
+          35.072059155454745
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.7071067811865476,
+          0.7071067811865475
+        ],
+        "angularLine": [
+          1,
+          0,
+          0
+        ],
+        "barn": [
+          0.894,
+          0.907,
+          0
+        ],
+        "shadowWeights": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "minimumRoughness": 0.04,
+        "cookieKind": 0
+      },
+      "qualification": {
+        "host": "Pinned VRF CS2 photometric reconstruction; not Valve private host records",
+        "sourceColor": [
+          255,
+          238,
+          198
+        ],
+        "sourceColorMode": "0",
+        "sourceTemperature": 6600,
+        "sourceBrightnessUnits": "1",
+        "sourceLumens": 600,
+        "liveShadow": "Not represented by pre-live-shadow kernel",
+        "colorDecoder": "Pinned VRF float32 FMA/Exp/Log minus1e-7; scalar transcendental last bits qualified"
+      },
+      "source": {
+        "entity": {
+          "bakedshadowindex": "1",
+          "light_map_uniqueid": "-1886395614",
+          "light_path_uniqueid": "-2073604973",
+          "precomputedboundsmaxs": "-447.159119 389.005249 317.047028",
+          "precomputedboundsmins": "-493.023376 242.495270 191.935333",
+          "precomputedobbextent": "18.033035 87.014969 42.718204",
+          "precomputedobbangles": "-0.000000 -7.999999 30.000000",
+          "precomputedobborigin": "-472.877228 335.517365 240.064545",
+          "precomputedfieldsvalid": "1",
+          "transmit_always": false,
+          "bakespeculartocubemaps_scale": 1,
+          "forceshadowsenabled": false,
+          "useLocalOffset": false,
+          "clientSideEntity": "1",
+          "enabled": true,
+          "colormode": "0",
+          "color": [
+            255,
+            238,
+            198
+          ],
+          "colortemperature": 6600,
+          "brightness_lumens": 600,
+          "directlight": "3",
+          "luminaire_shape": "2",
+          "luminaire_size": 0,
+          "luminaire_anisotropy": 0,
+          "brightness_units": "1",
+          "brightness": 3.57031,
+          "brightness_legacy": 11.8711,
+          "shape": 0,
+          "soft_x": 0.106,
+          "soft_y": 0.093,
+          "skirt": 0,
+          "skirt_near": 0.192548,
+          "size_params": [
+            16.789124,
+            27.034485,
+            0.020631
+          ],
+          "range": 146.384995,
+          "shear": [
+            -85.878754,
+            -162.017181
+          ],
+          "rendertocubemaps": true,
+          "bakespeculartocubemaps": "0",
+          "bakespeculartocubemaps_size": [
+            6,
+            6,
+            0
+          ],
+          "brightnessscale": 1,
+          "fade_size_start": 0.05,
+          "fade_size_end": 0.025,
+          "castshadows": "1",
+          "shadowmapsize": "-1",
+          "shadowpriority": "-1",
+          "pvs_modify_entity": false,
+          "shadowfade_size_start": 0.1,
+          "shadowfade_size_end": 0.05,
+          "bouncelight": "1",
+          "bouncescale": 1,
+          "minroughness": 0,
+          "fog": "0",
+          "fogstrength": "0",
+          "fogshadows": "-1",
+          "classname": "light_barn",
+          "compile_source_id": 11797,
+          "origin": [
+            -464,
+            388.942749,
+            290.017609
+          ],
+          "angles": [
+            0,
+            270,
+            0
+          ],
+          "scales": [
+            1,
+            1,
+            1
+          ],
+          "hammerUniqueId": "13103:8:9312:2021"
+        },
+        "entitySha256": "94fa3112d0fd9201bada59a002cef44feaf37887fdc7338a0f9d830f40c4e62d",
+        "worldSha256": "c9d5c3d24e1752ce09710b1a91f872c609e72def452b6aed493fe71e1448a9ae",
+        "compiledShadow": [
+          {
+            "m_nLightHash": 2221362323,
+            "m_nMapHash": 2408571682,
+            "m_nShadowChannel": 1
+          }
+        ],
+        "intensity": 62.10615236965503,
+        "divisor": 9.66087862646534
+      }
+    },
+    {
+      "id": "13103:8:9312:2024",
+      "record": {
+        "projection": [
+          8.859492647184616,
+          -1.2379008461274786e-15,
+          -4.445883182770638e-16,
+          -1.8369701987210297e-16,
+          -5.880219975538014,
+          -6.7388183378769755,
+          -2.4202260798057775,
+          -1,
+          0,
+          5.64902711205229,
+          0,
+          0,
+          5423.731129048152,
+          1136.26729367399,
+          960.1818591613298,
+          545.4754206306709
+        ],
+        "worldToBounds": [
+          0.03304083173916561,
+          0.005018878504783937,
+          -0.0000802548604622951,
+          0,
+          -0.012025879268454283,
+          0.006822855879577553,
+          -0.03799539491424846,
+          0,
+          -0.012107011582417976,
+          0.006919715782190272,
+          0.037521756840054356,
+          0,
+          19.504749062205825,
+          -2.0983718899236523,
+          4.842519265420902,
+          0.9999999999999998
+        ],
+        "positionRadius": [
+          -250.15153268341533,
+          545.4754206306709,
+          449.56280495005416,
+          63355.18709575299
+        ],
+        "depthFalloff": [
+          1,
+          0,
+          2.1277658690250663,
+          0
+        ],
+        "color": [
+          71.61063856440937,
+          61.22657109637637,
+          40.43935673780416
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.7071067811865476,
+          0.7071067811865475
+        ],
+        "angularLine": [
+          1,
+          0,
+          0
+        ],
+        "barn": [
+          0.794,
+          0.813,
+          0
+        ],
+        "shadowWeights": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "minimumRoughness": 0.04,
+        "cookieKind": 0
+      },
+      "qualification": {
+        "host": "Pinned VRF CS2 photometric reconstruction; not Valve private host records",
+        "sourceColor": [
+          255,
+          238,
+          198
+        ],
+        "sourceColorMode": "0",
+        "sourceTemperature": 6600,
+        "sourceBrightnessUnits": "1",
+        "sourceLumens": 600,
+        "liveShadow": "Not represented by pre-live-shadow kernel",
+        "colorDecoder": "Pinned VRF float32 FMA/Exp/Log minus1e-7; scalar transcendental last bits qualified"
+      },
+      "source": {
+        "entity": {
+          "bakedshadowindex": "1",
+          "light_map_uniqueid": "-1886395614",
+          "light_path_uniqueid": "-101474526",
+          "precomputedboundsmaxs": "-332.034393 396.794800 298.452118",
+          "precomputedboundsmins": "-443.195404 292.215881 191.935104",
+          "precomputedobbextent": "26.863983 91.339409 18.707935",
+          "precomputedobbangles": "18.999998 -20.000000 42.000000",
+          "precomputedobborigin": "-377.841187 353.823792 228.422989",
+          "precomputedfieldsvalid": "1",
+          "transmit_always": false,
+          "bakespeculartocubemaps_scale": 1,
+          "forceshadowsenabled": false,
+          "useLocalOffset": false,
+          "clientSideEntity": "1",
+          "enabled": true,
+          "colormode": "0",
+          "color": [
+            255,
+            238,
+            198
+          ],
+          "colortemperature": 6600,
+          "brightness_lumens": 600,
+          "directlight": "3",
+          "luminaire_shape": "2",
+          "luminaire_size": 0,
+          "luminaire_anisotropy": 0,
+          "brightness_units": "1",
+          "brightness": 5.19531,
+          "brightness_legacy": 36.6758,
+          "shape": 0,
+          "soft_x": 0.206,
+          "soft_y": 0.187,
+          "skirt": 0,
+          "skirt_near": 0.34225,
+          "size_params": [
+            16.789124,
+            26.33075,
+            0.006723
+          ],
+          "range": 104.732002,
+          "shear": [
+            -69.512695,
+            -124.936546
+          ],
+          "rendertocubemaps": true,
+          "bakespeculartocubemaps": "0",
+          "bakespeculartocubemaps_size": [
+            6,
+            6,
+            0
+          ],
+          "brightnessscale": 1,
+          "fade_size_start": 0.05,
+          "fade_size_end": 0.025,
+          "castshadows": "1",
+          "shadowmapsize": "-1",
+          "shadowpriority": "-1",
+          "pvs_modify_entity": false,
+          "shadowfade_size_start": 0.1,
+          "shadowfade_size_end": 0.05,
+          "bouncelight": "1",
+          "bouncescale": 1,
+          "minroughness": 0,
+          "fog": "0",
+          "fogstrength": "0",
+          "fogshadows": "-1",
+          "classname": "light_barn",
+          "compile_source_id": 11798,
+          "origin": [
+            -348.875275,
+            396.7323,
+            272.124664
+          ],
+          "angles": [
+            0,
+            270,
+            0
+          ],
+          "scales": [
+            1,
+            1,
+            1
+          ],
+          "hammerUniqueId": "13103:8:9312:2024"
+        },
+        "entitySha256": "94fa3112d0fd9201bada59a002cef44feaf37887fdc7338a0f9d830f40c4e62d",
+        "worldSha256": "c9d5c3d24e1752ce09710b1a91f872c609e72def452b6aed493fe71e1448a9ae",
+        "compiledShadow": [
+          {
+            "m_nLightHash": 4193492770,
+            "m_nMapHash": 2408571682,
+            "m_nShadowChannel": 1
+          }
+        ],
+        "intensity": 71.61064710106373,
+        "divisor": 8.378642342851938
+      }
+    },
+    {
+      "id": "13103:8:9312:2034",
+      "record": {
+        "projection": [
+          8.859492647184616,
+          -1.3278038814020789e-15,
+          -4.2061838567717074e-16,
+          -1.8369701987210297e-16,
+          -5.8802037041068855,
+          -7.228227667093063,
+          -2.2897398442828396,
+          -1,
+          0,
+          5.64902711205229,
+          0,
+          0,
+          3131.3995614277787,
+          1318.49613435347,
+          927.2719651713724,
+          553.7113826306709
+        ],
+        "worldToBounds": [
+          0.030476773466268713,
+          0.004619295217748663,
+          -0.0005924025518945865,
+          0,
+          -0.010493993478439555,
+          0.006122538604816642,
+          -0.035118855152749526,
+          0,
+          -0.011098664397637537,
+          0.00689554445406914,
+          0.03157880137747834,
+          0,
+          9.802921771207048,
+          -3.3044180900063354,
+          5.268903530121258,
+          1.0000000000000002
+        ],
+        "positionRadius": [
+          14.056805133509812,
+          553.7113826306709,
+          475.10053464531063,
+          68094.31383921143
+        ],
+        "depthFalloff": [
+          1,
+          0,
+          2.2490161938157756,
+          0
+        ],
+        "color": [
+          74.22150010076766,
+          63.45883857343365,
+          41.913740477125806
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.7071067811865476,
+          0.7071067811865475
+        ],
+        "angularLine": [
+          1,
+          0,
+          0
+        ],
+        "barn": [
+          0.794,
+          0.813,
+          0
+        ],
+        "shadowWeights": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "minimumRoughness": 0.04,
+        "cookieKind": 0
+      },
+      "qualification": {
+        "host": "Pinned VRF CS2 photometric reconstruction; not Valve private host records",
+        "sourceColor": [
+          255,
+          238,
+          198
+        ],
+        "sourceColorMode": "0",
+        "sourceTemperature": 6600,
+        "sourceBrightnessUnits": "1",
+        "sourceLumens": 600,
+        "liveShadow": "Not represented by pre-live-shadow kernel",
+        "colorDecoder": "Pinned VRF float32 FMA/Exp/Log minus1e-7; scalar transcendental last bits qualified"
+      },
+      "source": {
+        "entity": {
+          "bakedshadowindex": "1",
+          "light_map_uniqueid": "-1886395614",
+          "light_path_uniqueid": "1201482631",
+          "precomputedboundsmaxs": "-67.825783 405.030762 311.103333",
+          "precomputedboundsmins": "-181.598877 297.130005 191.935333",
+          "precomputedobbextent": "29.304657 96.861687 21.150707",
+          "precomputedobbangles": "18.999998 -18.999998 45.000004",
+          "precomputedobborigin": "-112.182693 361.657593 233.246338",
+          "precomputedfieldsvalid": "1",
+          "transmit_always": false,
+          "bakespeculartocubemaps_scale": 1,
+          "forceshadowsenabled": false,
+          "useLocalOffset": false,
+          "clientSideEntity": "1",
+          "enabled": true,
+          "colormode": "0",
+          "color": [
+            255,
+            238,
+            198
+          ],
+          "colortemperature": 6600,
+          "brightness_lumens": 600,
+          "directlight": "3",
+          "luminaire_shape": "2",
+          "luminaire_size": 0,
+          "luminaire_anisotropy": 0,
+          "brightness_units": "1",
+          "brightness": 5.27734,
+          "brightness_legacy": 38.792999,
+          "shape": 0,
+          "soft_x": 0.206,
+          "soft_y": 0.187,
+          "skirt": 0,
+          "skirt_near": 0.310806,
+          "size_params": [
+            16.789124,
+            26.33075,
+            0.006723
+          ],
+          "range": 115.328003,
+          "shear": [
+            -76.545258,
+            -147.568253
+          ],
+          "rendertocubemaps": true,
+          "bakespeculartocubemaps": "0",
+          "bakespeculartocubemaps_size": [
+            6,
+            6,
+            0
+          ],
+          "brightnessscale": 1,
+          "fade_size_start": 0.05,
+          "fade_size_end": 0.025,
+          "castshadows": "1",
+          "shadowmapsize": "-1",
+          "shadowpriority": "-1",
+          "pvs_modify_entity": false,
+          "shadowfade_size_start": 0.1,
+          "shadowfade_size_end": 0.05,
+          "bouncelight": "1",
+          "bouncescale": 1,
+          "minroughness": 0,
+          "fog": "0",
+          "fogstrength": "0",
+          "fogshadows": "-1",
+          "classname": "light_barn",
+          "compile_source_id": 11799,
+          "origin": [
+            -84.666664,
+            404.968262,
+            284.775879
+          ],
+          "angles": [
+            0,
+            270,
+            0
+          ],
+          "scales": [
+            1,
+            1,
+            1
+          ],
+          "hammerUniqueId": "13103:8:9312:2034"
+        },
+        "entitySha256": "94fa3112d0fd9201bada59a002cef44feaf37887fdc7338a0f9d830f40c4e62d",
+        "worldSha256": "c9d5c3d24e1752ce09710b1a91f872c609e72def452b6aed493fe71e1448a9ae",
+        "compiledShadow": [
+          {
+            "m_nLightHash": 1201482631,
+            "m_nMapHash": 2408571682,
+            "m_nShadowChannel": 1
+          }
+        ],
+        "intensity": 74.22150894866101,
+        "divisor": 8.083910021487434
+      }
+    },
+    {
+      "id": "13103:8:9312:2038",
+      "record": {
+        "projection": [
+          8.859492647184616,
+          -1.3278066080423953e-15,
+          -4.3339469491515083e-16,
+          -1.8369701987210297e-16,
+          -5.880215758723709,
+          -7.228242510231609,
+          -2.3592908323548043,
+          -1,
+          0,
+          5.64902711205229,
+          0,
+          0,
+          4684.618822318701,
+          1300.0051105423727,
+          955.3777153442526,
+          553.6858696306708
+        ],
+        "worldToBounds": [
+          0.054082672231815516,
+          0.0037355071639833095,
+          -0.014103608603598394,
+          0,
+          -0.029978512276951953,
+          0.006739033868756376,
+          -0.02544358553711987,
+          0,
+          0,
+          0.007978865202550266,
+          0.028092881627122212,
+          0,
+          26.271729017135378,
+          -3.321792934943268,
+          -1.4921570682455254,
+          1
+        ],
+        "positionRadius": [
+          -161.27632848003358,
+          553.6858696306708,
+          478.3426554762809,
+          68094.50256953102
+        ],
+        "depthFalloff": [
+          1,
+          0,
+          2.182719492790735,
+          0
+        ],
+        "color": [
+          74.22160305815878,
+          63.45892660124842,
+          41.91379861835665
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.7071067811865476,
+          0.7071067811865475
+        ],
+        "angularLine": [
+          1,
+          0,
+          0
+        ],
+        "barn": [
+          0.794,
+          0.813,
+          0
+        ],
+        "shadowWeights": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "minimumRoughness": 0.04,
+        "cookieKind": 0
+      },
+      "qualification": {
+        "host": "Pinned VRF CS2 photometric reconstruction; not Valve private host records",
+        "sourceColor": [
+          255,
+          238,
+          198
+        ],
+        "sourceColorMode": "0",
+        "sourceTemperature": 6600,
+        "sourceBrightnessUnits": "1",
+        "sourceLumens": 600,
+        "liveShadow": "Not represented by pre-live-shadow kernel",
+        "colorDecoder": "Pinned VRF float32 FMA/Exp/Log minus1e-7; scalar transcendental last bits qualified"
+      },
+      "source": {
+        "entity": {
+          "bakedshadowindex": "1",
+          "light_map_uniqueid": "-1886395614",
+          "light_path_uniqueid": "-50132554",
+          "precomputedboundsmaxs": "-243.159119 405.005249 314.345062",
+          "precomputedboundsmins": "-321.485779 295.453278 191.935577",
+          "precomputedobbextent": "16.155731 90.065491 24.702477",
+          "precomputedobbangles": "-0.000000 -28.999998 45.999996",
+          "precomputedobborigin": "-283.604370 364.716125 241.057434",
+          "precomputedfieldsvalid": "1",
+          "transmit_always": false,
+          "bakespeculartocubemaps_scale": 1,
+          "forceshadowsenabled": false,
+          "useLocalOffset": false,
+          "clientSideEntity": "1",
+          "enabled": true,
+          "colormode": "0",
+          "color": [
+            255,
+            238,
+            198
+          ],
+          "colortemperature": 6600,
+          "brightness_lumens": 600,
+          "directlight": "3",
+          "luminaire_shape": "2",
+          "luminaire_size": 0,
+          "luminaire_anisotropy": 0,
+          "brightness_units": "1",
+          "brightness": 5.27734,
+          "brightness_legacy": 38.792999,
+          "shape": 0,
+          "soft_x": 0.206,
+          "soft_y": 0.187,
+          "skirt": 0,
+          "skirt_near": 0.327566,
+          "size_params": [
+            16.789124,
+            26.33075,
+            0.006723
+          ],
+          "range": 109.427002,
+          "shear": [
+            -72.628807,
+            -140.017899
+          ],
+          "rendertocubemaps": true,
+          "bakespeculartocubemaps": "0",
+          "bakespeculartocubemaps_size": [
+            6,
+            6,
+            0
+          ],
+          "brightnessscale": 1,
+          "fade_size_start": 0.05,
+          "fade_size_end": 0.025,
+          "castshadows": "1",
+          "shadowmapsize": "-1",
+          "shadowpriority": "-1",
+          "pvs_modify_entity": false,
+          "shadowfade_size_start": 0.1,
+          "shadowfade_size_end": 0.05,
+          "bouncelight": "1",
+          "bouncescale": 1,
+          "minroughness": 0,
+          "fog": "0",
+          "fogstrength": "0",
+          "fogshadows": "-1",
+          "classname": "light_barn",
+          "compile_source_id": 11800,
+          "origin": [
+            -260,
+            404.942749,
+            288.017609
+          ],
+          "angles": [
+            0,
+            270,
+            0
+          ],
+          "scales": [
+            1,
+            1,
+            1
+          ],
+          "hammerUniqueId": "13103:8:9312:2038"
+        },
+        "entitySha256": "94fa3112d0fd9201bada59a002cef44feaf37887fdc7338a0f9d830f40c4e62d",
+        "worldSha256": "c9d5c3d24e1752ce09710b1a91f872c609e72def452b6aed493fe71e1448a9ae",
+        "compiledShadow": [
+          {
+            "m_nLightHash": 4244834742,
+            "m_nMapHash": 2408571682,
+            "m_nShadowChannel": 1
+          }
+        ],
+        "intensity": 74.2216119060644,
+        "divisor": 8.08389880779423
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "id": "13103:2:35890",
+      "reason": "Error: Qualified VRF bridge supports barn/rect only",
+      "entity": {
+        "bakedshadowindex": "1",
+        "light_map_uniqueid": "-1886395614",
+        "light_path_uniqueid": "907979026",
+        "precomputedsubfrusta": "5",
+        "precomputedobbextent4": "40.885803 134.014404 60.179268",
+        "precomputedobbangles4": "-19.999996 30.999994 6.999999",
+        "precomputedobborigin4": "-1133.943604 595.347656 2.668083",
+        "precomputedobbextent3": "45.280579 54.268646 33.380119",
+        "precomputedobbangles3": "0.000000 -45.000004 3.000000",
+        "precomputedobborigin3": "-1313.086792 650.861206 22.232750",
+        "precomputedobbextent2": "64.069031 69.857712 31.426559",
+        "precomputedobbangles2": "0.000000 0.000000 -45.000004",
+        "precomputedobborigin2": "-1244.000732 728.048340 28.969849",
+        "precomputedobbextent1": "128.054382 110.229904 63.264923",
+        "precomputedobbangles1": "2.000000 -45.000000 -0.000000",
+        "precomputedobborigin1": "-1232.987305 489.184235 -10.159397",
+        "precomputedobbextent0": "71.450104 131.668884 62.309143",
+        "precomputedobbangles0": "-33.000000 7.000000 16.999998",
+        "precomputedobborigin0": "-1239.254272 625.567322 -31.526062",
+        "precomputedboundsmaxs": "-1032.529541 756.065063 57.723465",
+        "precomputedboundsmins": "-1338.202393 400.248962 -72.417725",
+        "precomputedobbextent": "153.216797 176.798737 62.991421",
+        "precomputedobbangles": "1.000000 -5.999999 2.000000",
+        "precomputedobborigin": "-1181.721436 572.294250 -8.902050",
+        "precomputedfieldsvalid": "1",
+        "transmit_always": false,
+        "bakespeculartocubemaps_scale": 1,
+        "useLocalOffset": false,
+        "clientSideEntity": "1",
+        "enabled": true,
+        "colormode": "1",
+        "color": [
+          203,
+          219,
+          255
+        ],
+        "colortemperature": 9803,
+        "brightness_lumens": 1000,
+        "shape": "1",
+        "directlight": "3",
+        "brightness_units": "1",
+        "brightness_candelas": 203,
+        "brightness_nits": 1021,
+        "brightness": 1.35156,
+        "brightness_legacy": 2.55078,
+        "skirt": 0.282,
+        "size_params": [
+          1.309605,
+          29.375488,
+          0.15
+        ],
+        "range": 256,
+        "outer_angle": 88,
+        "inner_angle": 66.599998,
+        "showlight": false,
+        "rendertocubemaps": true,
+        "bakespeculartocubemaps": false,
+        "brightnessscale": 1,
+        "fade_size_start": 0.05,
+        "fade_size_end": 0.025,
+        "castshadows": "1",
+        "shadowmapsize": "-1",
+        "shadowpriority": "-1",
+        "pvs_modify_entity": false,
+        "shadowfade_size_start": 0.1,
+        "shadowfade_size_end": 0.05,
+        "bouncelight": "1",
+        "bouncescale": 1,
+        "minroughness": 0,
+        "fog": "0",
+        "fogstrength": "0",
+        "fogshadows": "-1",
+        "classname": "light_omni2",
+        "compile_source_id": 8250,
+        "origin": [
+          -1244,
+          656,
+          56.662663
+        ],
+        "angles": [
+          89.999992,
+          90,
+          0
+        ],
+        "scales": [
+          1,
+          1,
+          1
+        ],
+        "hammerUniqueId": "13103:2:35890"
+      }
+    }
+  ]
+}
