@@ -1,0 +1,111 @@
+{
+  "sun": {
+    "pitch": 61.999989,
+    "yaw": 53.999996,
+    "color": 16774106,
+    "intensity": 10.210176124166829
+  },
+  "backgroundIntensity": 2.0,
+  "environmentIntensity": 0.35,
+  "ambient": {
+    "skyColor": 9612747,
+    "groundColor": 8289918,
+    "intensity": 1.5
+  },
+  "lighting": {
+    "irradiance": "/models/maps/vertigo-lighting/irradiance.exr",
+    "nativeIrradiance": "/models/maps/vertigo-lighting/irradiance.bin.gz",
+    "shadows": "/models/maps/vertigo-lighting/shadows.webp",
+    "directional": "/models/maps/vertigo-lighting/directional.webp",
+    "nativeDirectional": "/models/maps/vertigo-lighting/directional.bin.gz",
+    "size": 4096
+  },
+  "postprocess": {
+    "lut": "/models/maps/vertigo-lighting/color-correction.bin.gz",
+    "tonemap": {
+      "m_flShoulderStrength": 0.15,
+      "m_flLinearStrength": 0.5,
+      "m_flLinearAngle": 0.1,
+      "m_flToeStrength": 0.2,
+      "m_flToeNum": 0.02,
+      "m_flToeDenom": 0.3,
+      "m_flWhitePoint": 4.0,
+      "m_flExposureBias": 0.0
+    },
+    "exposure": 0.975
+  },
+  "radar": {
+    "pos_x": -3168.0,
+    "pos_y": 1762.0,
+    "scale": 4.0,
+    "verticalsections": {
+      "default": {
+        "AltitudeMax": "20000",
+        "AltitudeMin": "11700"
+      },
+      "lower": {
+        "AltitudeMax": "11700",
+        "AltitudeMin": "-10000"
+      }
+    },
+    "sections": [
+      {
+        "name": "default",
+        "min": 297.18,
+        "max": 508.0,
+        "image": "/models/maps/vertigo-radar.png"
+      },
+      {
+        "name": "lower",
+        "min": -254.0,
+        "max": 297.18,
+        "image": "/models/maps/vertigo-lower-radar.png"
+      }
+    ]
+  },
+  "source": {
+    "sunEntity": "2:31017:6514:4",
+    "skyEntity": "2:31017:6514:2",
+    "skyMaterial": "materials/skybox/sky_de_vertigo.vmat",
+    "skyTint": [
+      255,
+      255,
+      255
+    ],
+    "skyAngles": [
+      0.0,
+      247.5,
+      0.0
+    ],
+    "skyStartDisabled": true,
+    "exposureEndpointOrder": "native values retained, including reversed authored endpoints; fixed midpoint is a browser adaptation",
+    "postEntity": "2:31017:6299",
+    "postProcessing": "lighting/postprocessing/de_vertigo_prefab/de_vertigo_prefab.vpost",
+    "exposureRangeLinear": [
+      0.8,
+      1.15
+    ],
+    "environmentIntensityQualification": ".35 browser reflection strength; retained shared renderer adaptation, not extracted native value",
+    "qualification": "Native map-specific sun, sky, VPOST/LUT and atlases; fixed linear exposure. Separate 3D sky and other native rendering acceptance required.",
+    "inputHashes": {
+      "artifacts/new-maps/supplement/vertigo/raw/maps/de_vertigo/lightmaps/irradiance.vtex_c": "62735b4a8eeaf45c284c8ea20ce4ead03dd0de45d8a6baa72b61ecd258ed097d",
+      "artifacts/new-maps/supplement/vertigo/raw/maps/de_vertigo/lightmaps/direct_light_shadows.vtex_c": "f9837ff78bfc8c4490941fd0fabeae3cac43db0d1e225fc946340aa35a123369",
+      "artifacts/new-maps/supplement/vertigo/raw/maps/de_vertigo/lightmaps/directional_irradiance.vtex_c": "d9413943023e80aea612f6638370e26915813741745fdc91d6eb1ef12524bbb8",
+      "artifacts/new-maps/staged/vertigo/entities-resource.txt": "6b680f4ee8ce78d4fc079910d6579562f4af579855757c1c72a853890dda0ed3",
+      "artifacts/new-maps/supplement/vertigo/decoded/materials/skybox/sky_de_vertigo_exr_c70a3937.exr": "8905bff95d3135ab9ee5c852d966d6b769c8c48790cb39227982e05a181b0a63",
+      "artifacts/new-maps/supplement/vertigo/decoded/lighting/postprocessing/de_vertigo_prefab/de_vertigo_prefab.vpost": "ec6e3bce8572da34eb6115df77dd032d58cdbeae8bd6306d4233f04637217548",
+      "artifacts/new-maps/supplement/vertigo/decoded/lighting/postprocessing/de_vertigo_prefab/de_vertigo_prefab.raw": "fd3bd6188e2854d9daaee9246d19cd50f4b007b225ce46fdb6f522279f9e5e74",
+      "artifacts/new-maps/supplement/vertigo/raw/resource/overviews/de_vertigo.txt": "61cd5156d443c10c898283dfb98cdfaf5befb2a24afa18e27f76b89b4d908541"
+    },
+    "supplementalRoot": "/Users/sh/Documents/GitHub/cs2go/artifacts/new-maps/supplement/vertigo",
+    "radarSectionConversion": "Native overview Source-unit altitude boundaries converted once to browser metres; original verticalsections retained"
+  },
+  "reflections": {
+    "volumes": 70,
+    "maxGpuBytes": 36697920
+  },
+  "doors": "/models/maps/vertigo-doors.json",
+  "environmentMaterials": "/models/maps/vertigo-environment/source.json",
+  "skyWorld": "/models/maps/vertigo-skybox/source.json",
+  "effectsWorld": "/models/maps/vertigo-effects/source.json"
+}

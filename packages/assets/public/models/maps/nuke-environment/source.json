@@ -1,0 +1,1550 @@
+{
+  "mapId": "nuke",
+  "materials": {
+    "hr_asphalt_blend_001": {
+      "shader": "csgo_environment_blend.vfx",
+      "nativeResource": "materials/de_nuke/hr_nuke/hr_asphalt_blend_001.vmat",
+      "IntParams": {
+        "DynamicShaderCompile": 1,
+        "F_BLEND_EFFECTS_2": 1,
+        "F_SHARED_COLOR_OVERLAY": 1,
+        "g_bBorderTintMask2": 0,
+        "g_bFogEnabled": 1,
+        "g_bMetalness2": 0,
+        "g_nColorCorrectionMode1": 0,
+        "g_nColorCorrectionMode2": 0,
+        "g_nColorOverlayMode": 0,
+        "g_nColorOverlayTintMask": 4,
+        "g_nScaleTexCoordUByModelScaleAxis": 0,
+        "g_nScaleTexCoordVByModelScaleAxis": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0,
+        "g_nVertexColorMode1": 0,
+        "g_nVertexColorMode2": 0,
+        "MaterialLayerReferenceShaderId_1": -1,
+        "MaterialLayerReferenceShaderId_2": -1
+      },
+      "FloatParams": {
+        "g_flBevelCurve2": 1,
+        "g_flBevelSoftness2": 0.1,
+        "g_flBevelSpread2": 0.1,
+        "g_flBevelStrength2": -0.25,
+        "g_flBlendSoftness2": 0.02,
+        "g_flBorderOffset2": 0.023,
+        "g_flBorderSoftness2": 0.161,
+        "g_flBorderSpread2": 0.336,
+        "g_flHeightMapScale2": 0,
+        "g_flModelTintAmount": 1,
+        "g_flOverlayBrightnessContrast": 1.205,
+        "g_flOverlayDarknessContrast": 0.95,
+        "g_flOverlayTexCoordRotation": 0,
+        "g_flTexCoordRotation1": 0,
+        "g_flTexCoordRotation2": 0,
+        "g_fTextureColorBrightness1": 1.2,
+        "g_fTextureColorBrightness2": 1.45,
+        "g_fTextureColorContrast1": 1,
+        "g_fTextureColorContrast2": 0.5,
+        "g_fTextureColorSaturation1": 1,
+        "g_fTextureColorSaturation2": 1,
+        "g_fTextureNormalContrast2": 1.619,
+        "g_fTextureRoughnessBrightness2": 1.429,
+        "g_fTintMaskBrightness1": 1,
+        "g_fTintMaskBrightness2": 1,
+        "g_fTintMaskContrast1": 1,
+        "g_fTintMaskContrast2": 1
+      },
+      "VectorParams": {
+        "g_vAmbientOcclusionLevels1": [
+          0,
+          0.5,
+          1,
+          0
+        ],
+        "g_vAmbientOcclusionLevels2": [
+          0,
+          0.09,
+          1,
+          0
+        ],
+        "g_vBevelLayerAmount2": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vBorderLayerAmount2": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "g_vBorderTint2": [
+          0.796079,
+          0.796079,
+          0.796079,
+          0
+        ],
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vOverlayTexCoordCenter": [
+          0.5,
+          0.5,
+          0,
+          0
+        ],
+        "g_vOverlayTexCoordOffset": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vOverlayTexCoordScale": [
+          0.2,
+          0.2,
+          0,
+          0
+        ],
+        "g_vTexCoordCenter1": [
+          0.5,
+          0.5,
+          0,
+          0
+        ],
+        "g_vTexCoordCenter2": [
+          0.5,
+          0.5,
+          0,
+          0
+        ],
+        "g_vTexCoordOffset1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vTexCoordOffset2": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vTexCoordScale1": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScale2": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTextureColorTint1": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vTextureColorTint2": [
+          1,
+          0.960784,
+          0.898039,
+          0
+        ],
+        "TextureMetalness1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureMetalness2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor1": "07c528e594cb3b34",
+        "g_tColor2": "07c528e594cb3b34",
+        "g_tHeight1": "8e21540a9c594cc0",
+        "g_tHeight2": "d261e5fed2414594",
+        "g_tNormal1": "9bf85e3bd72e60d9",
+        "g_tNormal2": "9bf85e3bd72e60d9",
+        "g_tSharedColorOverlay": "e05590fc0171b3aa"
+      },
+      "textureReflectivity": {
+        "g_tColor1": [
+          0.09636279195547104,
+          0.09636471420526505,
+          0.09635809063911438
+        ],
+        "g_tColor2": [
+          0.09636279195547104,
+          0.09636471420526505,
+          0.09635809063911438
+        ],
+        "g_tHeight1": [
+          0.6741087436676025,
+          1.0,
+          0.0
+        ],
+        "g_tHeight2": [
+          0.6741087436676025,
+          1.0,
+          0.0
+        ],
+        "g_tNormal1": [
+          0.4996687173843384,
+          0.5002242922782898,
+          0.8993943929672241
+        ],
+        "g_tNormal2": [
+          0.4996687173843384,
+          0.5002242922782898,
+          0.8993943929672241
+        ],
+        "g_tSharedColorOverlay": [
+          0.4311850965023041,
+          0.4311850965023041,
+          0.4311850965023041
+        ]
+      },
+      "modelTintQualification": "Exporter baseColorFactor may combine native model tint/material approximation; retain material instance identity and avoid multiplying native color correction twice.",
+      "exportedVariants": [
+        {
+          "materialIndex": 125,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "materialIndex": 126,
+          "baseColorFactor": [
+            0.6172065,
+            0.6172065,
+            0.6172065,
+            1
+          ]
+        }
+      ]
+    },
+    "swat_van_generic_tint_1": {
+      "shader": "csgo_environment.vfx",
+      "nativeResource": "models/vehicles/swat_van/swat_van_generic_tint_1.vmat",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nScaleTexCoordUByModelScaleAxis": 0,
+        "g_nScaleTexCoordVByModelScaleAxis": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flModelTintAmount": 1,
+        "g_flTexCoordRotation1": 0
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vTexCoordCenter1": [
+          0.5,
+          0.5,
+          0,
+          0
+        ],
+        "g_vTexCoordOffset1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vTexCoordScale1": [
+          1,
+          1,
+          0,
+          0
+        ]
+      },
+      "textures": {
+        "g_tColor1": "114f7c80a6b43fbb",
+        "g_tHeight1": "e32f9ad0e190a384",
+        "g_tNormal1": "4963c95d84ab5087"
+      },
+      "textureReflectivity": {
+        "g_tColor1": [
+          0.41481566429138184,
+          0.4123045802116394,
+          0.41080671548843384
+        ],
+        "g_tHeight1": [
+          0.0,
+          0.6489480137825012,
+          0.0
+        ],
+        "g_tNormal1": [
+          0.4973122775554657,
+          0.4994673728942871,
+          0.6569957137107849
+        ]
+      },
+      "modelTintQualification": "Exporter baseColorFactor may combine native model tint/material approximation; retain material instance identity and avoid multiplying native color correction twice.",
+      "exportedVariants": [
+        {
+          "materialIndex": 462,
+          "baseColorFactor": [
+            0.07818735,
+            0.124771714,
+            0.08437612,
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "textures": {
+    "07c528e594cb3b34": {
+      "resource": "materials/asphalt/hr_c/hr_asphalt_001_color_psd_64a0e897.vtex",
+      "sourceSha256": "04dbf865d3bb6d1b18e139d402c6bf145e588f30dbf117031d375943dbf9067b",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.09636279195547104,
+        0.09636471420526505,
+        0.09635809063911438
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "07c528e594cb3b34.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "0a1f81b79964252f56ed87e5b9c81e5c271d9a0b1f6ee87788b4e54db4d6815c",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "3e87c17b95c6abc388f957cb9102347cad8f056b33b3c1d24f20744581f4339a"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "c70c9a79bc41f2b20ab236dfe38dc024ed16453c722aaa06bdff947b6c848333"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "107d93b5dc586540acfe3f8b6273f7fd630f8d29f36655bbde1d0473444bd8c6"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "25838804dfb386262df9881fe1aff20434cca28bf975f41f538ae105aed5d993"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "d6e255e4a83507f24f61cc0431c9a07b75d342ad9f30c376e54f9e9924527eb8"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "9aaad9dcb9da3ddc06bc8c1498edb6eab4d01ae488098e1930c8a69bc6c64e08"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "f0a8dccdbfd78e8c703b17ff1f4231cf25357a3f3821ef2165fe4f81285997db"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "262c5c98b6c6dec5e7678418d5a49cfedca705628109d054539a8d0098d1044b"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "6529b726e0d9e15e671143b8abf8e2e86b5ee2786757c0afa25f8aa147705c99"
+        }
+      ],
+      "decodedSource": "07c528e594cb3b34.png",
+      "decodedSha256": "18a3b26c2383cc7de2d0028a6ba7fe7b2ddcdc427f77471a34457b4bed1780bb",
+      "legacyWebpSha256": "a7397ee85d6aae8eea6a97b92bd222ffefac2af84c30dc5fdc01839de159d629",
+      "fallbackFile": "07c528e594cb3b34.rgba8.gz",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "65a25793915fece6bab425bd341db6cd9c723fff98301e3f3b288705b0de229c",
+          "nativeMip": 0
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "0b070d60cea5023b2cd9bfa04737a0c1d30c4407bea4b74924aa6f87b9b7e23a",
+          "nativeMip": 1
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "2be8c077a3ce44f1f18138d75f84b46e9cacdfd2c07bdcddeda1d0354f2ed910",
+          "nativeMip": 2
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "a13dd0ebb39fe06892a31196f4e15253b466b350d90cc2811a3f1bea28f98939",
+          "nativeMip": 3
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "f8c7bbc0108d825ebbcfb7e53e8b23497f5f7f40ccabf9861126e68329a8a012",
+          "nativeMip": 4
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "54b7a0341db69b0c73cd6142a55ea9fab145608717c68354c36dcbc13a34db1d",
+          "nativeMip": 5
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "b3b2f2f1425144ad91394da28a0cf8ed14109bbe018a736d3f7dea00f0e58ab2",
+          "nativeMip": 6
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "f6a2b6a88c983e54020807b025e83516a23e480aae3c5e9902c74e057e72d9f4",
+          "nativeMip": 7
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "c254c4540200550c3e656a77cc9b3e3295789e45e68d54dd6a10c50351b9ccc8",
+          "nativeMip": 8
+        }
+      ],
+      "fallbackFileSha256": "992511ba2492b5608582b69d7335769cad3958c1b55b62696b227005e165bb28",
+      "fallbackPixelsSha256": "6367f7be9bd1ad2998c5bdabf7fca657fc42fdc4c9055bc98c16405ee15f9255",
+      "fallbackGpuBytes": 5592384,
+      "fallbackQualification": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present."
+    },
+    "8e21540a9c594cc0": {
+      "resource": "materials/asphalt/hr_c/hr_asphalt_001_height_psd_e4c14351.vtex",
+      "sourceSha256": "bd918258548622c1bf0661ea78411c47f64f75f5458da7e2fc7428f05aa507df",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.6741087436676025,
+        1.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "8e21540a9c594cc0.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "04f12836449ba6af88d7efe4971f96efbea39b43bde957cfd80070a287983b93",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "a59ed05785a2549bad1ac1ce2c7e0332597af87475810a7bd1fac6fe8a511fa2"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "63e9defaf82816c9726b76af1e358fcb970316477fc27b052aea2e0698712c01"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "3680425f6f4a6fb38136569f483cb77a6fdcc402a8bc4d8e5d88427685420c45"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "7b8083f239bb88e975caafce3adae1a1e0f65fdfadfd4cd3c8a671b626d7e6a6"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "5d76b451e94b51f048a420a0997435fa84780e048def344fc66edb8c6994bb08"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "54271a5a078695478c35d2df4fe10db1d6149fbed613d31b203b8d9992acfd8b"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "0ab45a0dacf2ab96afd5bf360962aedd47ac709adc27ade0f092b7471e698fef"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "13ad2ca2a38f60b48b4c95fb7732f8d757b6458ed43d259675a31d12adfe03e4"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "1b1fafbfdee1a7aeaf258e0374eff9df1925a30b97646b1d5b0d3cc9aeb53c0e"
+        }
+      ],
+      "decodedSource": "8e21540a9c594cc0.png",
+      "decodedSha256": "f25cc1d8647cc13d20884930e7e51bffcb6f0f3284f26d8370a66e23a1938424",
+      "legacyWebpSha256": "4b308b1c417cb6ecf1fee3be6a06ecf782b5297b0d0a34a2125fa8cb35ae4cdb",
+      "fallbackFile": "8e21540a9c594cc0.rgba8.gz",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "9101f1f09f4303c430e383439efd0864a7b208e11dc6ec3efc456b90e1350973",
+          "nativeMip": 0
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "99833f432fe4a666b3c69dd05cfc8743c663bf9076277f3b4d8786fb14140c07",
+          "nativeMip": 1
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "92fca37efc2549ed1de2799754ddf3ed6f82e33ff9d47f3f61d2c7096783c07c",
+          "nativeMip": 2
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "c69bda02071935bcf023fff87694fee2f0b1ad9a5c2b536907cd40de9ccd76d3",
+          "nativeMip": 3
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "627067a2b977564b2b2e55a259bef29c5f3dd819fc0e4eee547d888add932159",
+          "nativeMip": 4
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "9627f612b21c41f630b6d1fa203031af0ec84d6441e7e2f416ec9613e91e0eb7",
+          "nativeMip": 5
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "54337b670bf3edfe202af830b1495f42cc5707d6d73115bdb147d28634711894",
+          "nativeMip": 6
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "3991f8549f3d86308ecfe06450c5f63c85aabe16c689a2954b9ef3d9fd50cdff",
+          "nativeMip": 7
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "e4f1a09b21afa21e0597846bc7a1a47f1ef823994fca051bbf110489e02e2526",
+          "nativeMip": 8
+        }
+      ],
+      "fallbackFileSha256": "c262bc77df352dab324f648d3d5a0952fa49bf93fa4a8eb3e13cd0caed886cef",
+      "fallbackPixelsSha256": "5a5fc27e7b11a2c0aa5fc0696553f143836bb1cfc25011b4ef6cb3e52c922bf0",
+      "fallbackGpuBytes": 5592384,
+      "fallbackQualification": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present."
+    },
+    "d261e5fed2414594": {
+      "resource": "materials/asphalt/hr_c/hr_asphalt_001_height_psd_20a335a1.vtex",
+      "sourceSha256": "9968c9f1ad108bf2ae1239c791a5b76327b6dc844c18c6aca0f0f4db5eb97947",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.6741087436676025,
+        1.0,
+        0.0
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "d261e5fed2414594.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "735c1a0f54ee91f0fd2990c3b1218befae81232b367cbb4a560a39037dad947c",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "a59ed05785a2549bad1ac1ce2c7e0332597af87475810a7bd1fac6fe8a511fa2"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "7f250c62baf87b39525da07657b91fab78e90258cae86695bc610b2ef02c73c1"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "3773e5b542b38078e1962130ef885a94939c77852dcf10a63dda66989082d5ef"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "59c52168a122c50427325e3bac24a6641686e2265a3bac653ca58dc54da9766b"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "ef20725b1c4e50c2ae030b8d147cbfeaf9ac3d0073488ab8307e8580b258cb47"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "bd867d72051a66e0ac49641f0df683e98797c12dac802df91045da1551d4baa5"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "e84d4823ef2c348453351b63b17cad3ba660c856c12de9db30dacdc04d13abef"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "0d78488e26e3664632b543fdf9d65c04a2253368f459cd252a611ed0992802ee"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "f6e813264f344a438b371d106eebf5767fe76e618971946abc4a07ce54315e16"
+        }
+      ],
+      "decodedSource": "d261e5fed2414594.png",
+      "decodedSha256": "f25cc1d8647cc13d20884930e7e51bffcb6f0f3284f26d8370a66e23a1938424",
+      "legacyWebpSha256": "4b308b1c417cb6ecf1fee3be6a06ecf782b5297b0d0a34a2125fa8cb35ae4cdb",
+      "fallbackFile": "d261e5fed2414594.rgba8.gz",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "9101f1f09f4303c430e383439efd0864a7b208e11dc6ec3efc456b90e1350973",
+          "nativeMip": 0
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "1d286e4bf8aeab4e5d4d82c759a9e9003c51ef45cd4276aced4556e490fa2404",
+          "nativeMip": 1
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "514ce6a6ed68d676e6a4db13f47ff6a441b049cae468dc0771d3de65770c2985",
+          "nativeMip": 2
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "107ecd906a355623c593ac78597e48acf84738d5ee3e99512258383a992476d9",
+          "nativeMip": 3
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "8f02bb0bde76ae2fbcddf459ad1991888b0d4761e723b29708c9cac90633d683",
+          "nativeMip": 4
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "9084f14178ed9276909898d8eaa31a3eced048a4098297473868bd926c77a367",
+          "nativeMip": 5
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "4ba1656f049f3612f4f5a59d9ddef69ed9f2219fa8a383bc8352b4bd0069de64",
+          "nativeMip": 6
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "b0b878a4f5a3fdfa794224d6a98db99ec656b5b652f31c02ef522a4efd03eed0",
+          "nativeMip": 7
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "44309968988d52fd1ad3419622b8456c661898b4e8564e0b98c1292033ed1b09",
+          "nativeMip": 8
+        }
+      ],
+      "fallbackFileSha256": "d1b8ed2cb280d6925d0d8ecd1d4e3deee8871fb8ab6711e811d9dcb981e76f46",
+      "fallbackPixelsSha256": "15c1228e2aa47ab734dbf5ef91de77a8c8f24ea9824459a9417148854fc466bc",
+      "fallbackGpuBytes": 5592384,
+      "fallbackQualification": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present."
+    },
+    "9bf85e3bd72e60d9": {
+      "resource": "materials/asphalt/hr_c/hr_asphalt_001_normal_psd_18eec9f5.vtex",
+      "sourceSha256": "0cf06cb8bf7fe1cfb581ed1858354fc6183d801a00fa85c8b6ed347d7ccaec52",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.4996687173843384,
+        0.5002242922782898,
+        0.8993943929672241
+      ],
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "9bf85e3bd72e60d9.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "c701b61f934ad5c5000d9ea4986368245e27cf1d074b9b4367036ed2845e5826",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "f049f372ea8f1777b01f63e726cd9888c827ad3806168b5818fc9cd591a79705"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "cb17d2977b7c62ac16f025610c84f9070c2effdef4cdb23da3b738a8a62406e4"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "c36c8d05a86748a39ec0b6588ca0d38e0b9f45431455b3dfb9b052da6c342763"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "44a38f7e0869ef86895154c0e25e1cd73023b0b3ff9441b1c5502778c52974bf"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "f5fe12fcb9e45513e5f3bccfb6eced0502a798d626cb79785ba5cba11dbe6c7a"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "3df7ca29c34e62dba977d9b1d26bf3d2ea01d72f6b051b7a35944f6c9b8458a1"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "3c9e4e1926bde0f8ce410101b872f80c05a10e5528c2ff3bb6873811c971897c"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "92a3bb69894b00a0d48a4f3afffa24382024298c6806633c0759b337e85e1ff7"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "0bc1691cee8aadede439ba0f6ffc1f796875f99454ecca46e1112b2951a2aacb"
+        }
+      ],
+      "decodedSource": "9bf85e3bd72e60d9.png",
+      "decodedSha256": "f93300f01305f20614e3e6706d01632365e932e8069949bcdce985c8546db792",
+      "legacyWebpSha256": "0230ccfffc7661d45d0f8735c53d5975753addf20c0139fbb73adaf84a1a8b76",
+      "fallbackFile": "9bf85e3bd72e60d9.rgba8.gz",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "49e706aa7af342b0e8a910fd851e692917dbb6464f83955531022d183f5bcd5a",
+          "nativeMip": 0
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "b150c6c15d1333a4bab5b7af63756ca025907ecf5f3ff319c8af224233155656",
+          "nativeMip": 1
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "73121a717566619db270da08c97089f2bddd60d8c0b6f71f84846d437f82610e",
+          "nativeMip": 2
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "729df39187fdcbc7cdc1fb83bde747fa2a81f5cb9735c8df8c97055c2bd3f194",
+          "nativeMip": 3
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "babcdcd029882cf2c6beabc3842eb8636fa87a229818582dfad4064e2afc308f",
+          "nativeMip": 4
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "8a183ea315004afebec5de5e97a3ec8ffc4c0eba09753a571e2c7515e14203c7",
+          "nativeMip": 5
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "fc9a8bfc237ad797a2d54e1ce60ebaed43cf225ce01a121b8d6268a1e63e0bb4",
+          "nativeMip": 6
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "f57c1cd71f499909e2e59e13adb04f050d001ad063960e7ce8970dd60ee0ef31",
+          "nativeMip": 7
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "8a6b757cde1cfd5840c2b10c0ccbe2c66175856bc888c15d0b8d131c77deb643",
+          "nativeMip": 8
+        }
+      ],
+      "fallbackFileSha256": "63b6a832b6e16ba78a5c3434b70df8a8625d2d79db3651179dc95e0e5a3fe450",
+      "fallbackPixelsSha256": "880421962e9d035fa6bcaca47dedfdab06416154e2f6932a0cf0c9c85953c1a4",
+      "fallbackGpuBytes": 5592384,
+      "fallbackQualification": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present."
+    },
+    "e05590fc0171b3aa": {
+      "resource": "materials/asphalt/hr_c/hr_asphalt_001_detail_color_psd_a815c37f.vtex",
+      "sourceSha256": "58a58d89113ad3ba8e6a10653c8e68417e5e0b4bc0b49c26559e9960cedd101f",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "reflectivity": [
+        0.4311850965023041,
+        0.4311850965023041,
+        0.4311850965023041
+      ],
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "e05590fc0171b3aa.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "6e96ee22636c54e0278789a77f6b82dc5130a9b7c2d2dbca890f8f9a4bca7df5",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "c1b3b19fcdaed7435c0d2618e90c7cc86be586d04748b039920a64018af08397"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "90585fe884617831270b524222d23cae22fb5c59259f994b3abba4f60d6d8929"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "3ba5a9e616b37b8c53e66feb75373d426b531233870cc0e753dee2d94c656e9e"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "af4ea068e166d69ee6c55faecf8a4e4f3ddec145b07fbf3683434b3eb9a3d830"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "f85aa2e2c1f19b8cdbe4d46308d4f16cf33c0986cb39c5c10213c97388a2bdc6"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "67013a486d4cf528bd57efd0bd07b91684b73db2db95093f33d34542dce0062f"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "1e7e495628c1baf4423756c106689221aafa24b1c9eaf5f20211ff74b4714909"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "c759da92ace4a9a2dcc65dada739ea719d2e794c0ec5f646c0ac260babebb4d6"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "ec7edbc9b2f688156598ffc72b1a0fa275c5c1eec445b44b159100b2889cca9f"
+        }
+      ],
+      "decodedSource": "e05590fc0171b3aa.png",
+      "decodedSha256": "f281187b129709ac8ec63f3c853a812a17b11df1b85f7e04e571b7e20cf8be61",
+      "legacyWebpSha256": "6d5c77d2a90905f2e6be7c40bb25732a32f89b52a3853c34dd4e0652cf552530",
+      "fallbackFile": "e05590fc0171b3aa.rgba8.gz",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "e5b56e9e7ad1448f5da804cc47a798f37187be7c310fac4208a8b3444dca0421",
+          "nativeMip": 0
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "a5b5acca37a3e87e867beb056aa9790f9a71dd504d4e1f813b35c57972d48b4c",
+          "nativeMip": 1
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "05a6da7b228e66830639147c893182a8ba08ed1cf493b46076718af21f586787",
+          "nativeMip": 2
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "bdf4305d6f7e392af112cda78cd001e0f20a84d51227995b444dcff17564f0ef",
+          "nativeMip": 3
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "da5f8208cfdfa9ea98defd6b1ce49b710a92a94b8ec65dc6f0fc9debf0e4a691",
+          "nativeMip": 4
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "47559b1c9615026679373485e95bbac9deebfb2ffd61dfd6c3e0c0f28b688381",
+          "nativeMip": 5
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "81558a0d2f08797eed5d1d356b64447da75568f4e62e143ecf7a6f62f673da69",
+          "nativeMip": 6
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "fb5bab4e65b4abf7d616942cedf94fad1d8ddddd0de50559daf7ea2018140972",
+          "nativeMip": 7
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "2abf74d6d6fb973aedcedad5957e84de4030b3087349886372a8b1467e70be5a",
+          "nativeMip": 8
+        }
+      ],
+      "fallbackFileSha256": "fd02a9a4b210857945f39fa6c18df4b508578f1a8b322cf2c4bf2256335e8a53",
+      "fallbackPixelsSha256": "11597d744ecb21f96450fdb4608e1dfeffc3cb28f8e8a0c0b7d46d605baf9875",
+      "fallbackGpuBytes": 5592384,
+      "fallbackQualification": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present."
+    },
+    "114f7c80a6b43fbb": {
+      "resource": "models/vehicles/swat_van/swat_van_generic_1_color_psd_2706d220.vtex",
+      "sourceSha256": "f3ac7f6577d59c93cc7333a94dc8129fe7000702beda55841ce0bb52d5b829d5",
+      "srgb": true,
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.41481566429138184,
+        0.4123045802116394,
+        0.41080671548843384
+      ],
+      "nativeMip": 1,
+      "format": "BC7",
+      "file": "114f7c80a6b43fbb.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "81e71f2e6f3215f031689e7d2dc8fa84a0ec51962dbc8df3a2314e077bcf99c5",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "d4b5a101fc7be0f82ff3985ab17677738156385ed09a2f79c92e2d4b02172ba5"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "6bec02ace96b7e94c84578dfb7e65ee3327a22534d35952fbcfa5905864b1853"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "5c1b545b5b6544bad3f58800a38e3388ee2be41c7d1967d1eca812d03221bd1d"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "179f3ac76a90e25289637dc36b0600ce55c9a4ba3649f24865c0ac20e43b9b59"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "d0a408d1f6abe11b047d378518ce36715ba18a3794d35c6f1beb3efd91d0d42a"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "51dc4583b9078865a52f47f0582345585899f9b8622cbb1b0c824fe41849945e"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "4a52149b56ed682972a254256a997d49e7cb1825ca23b4f9513b8b9bab998290"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "d4f4b4b208b1a50bb5383f6a962c1d70d22a617e253180ac0502be398eaa8982"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "cc74b4cc75a21ee38de5b093538ff44a7a45f92342aff25e0b3fefe1ada6fcb0"
+        }
+      ],
+      "decodedSource": "114f7c80a6b43fbb.png",
+      "decodedSha256": "7257e4dce83f4184bdcc501dad43be515ac936010e370bc594eea50f4aa00c09",
+      "legacyWebpSha256": "eba5eef185e2aa498c9d060488db476c27bbb620f832cca71977f15a181b1571",
+      "fallbackFile": "114f7c80a6b43fbb.rgba8.gz",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "d28357ddd95ce48fa0007996017d2e725cf006a64fe69e2c9461e13ad974263d",
+          "nativeMip": 1
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "66f698a738fbb4a23a7aa209b900804f8a717ad6bba63093c83769119efd9f58",
+          "nativeMip": 2
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "84fe821d253be1787250567efe19e24c3888484c09e581567eb576269eafe2fa",
+          "nativeMip": 3
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "a59815ec6b3269765fb078a814bcad6685c6ada43dd0c0ca2875363890e49e51",
+          "nativeMip": 4
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "23b13de096bf138304162694a2843aaab6bbd35ccbe040676c378f392cb49bb4",
+          "nativeMip": 5
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "7a7fe7c597de62961a2a7a642ec4a5a231f6febed0c0c0a595c4fa17152a8c3f",
+          "nativeMip": 6
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "370be6eb1d3525b5b9546938819074682540d9ba6f16b78c337757de687905ae",
+          "nativeMip": 7
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "978af87def103497aafe297d780490b58516f5b4525400a35d7a8e65bfe8609d",
+          "nativeMip": 8
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "b58c03520cb2dce6682198662e39f58cb2a86e85191a5a1e1e4bf50668d74551",
+          "nativeMip": 9
+        }
+      ],
+      "fallbackFileSha256": "416f82d7cbd146365251bfb48d2ad5d6ec2d854927e1c5e919da05b33930f5a8",
+      "fallbackPixelsSha256": "e447bda0a93857cff407f5da6a251bfe4a658d0ececf607913e93dbe50407295",
+      "fallbackGpuBytes": 5592384,
+      "fallbackQualification": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present."
+    },
+    "e32f9ad0e190a384": {
+      "resource": "models/vehicles/swat_van/swat_van_generic_mask_tga_df5f74b7.vtex",
+      "sourceSha256": "63040018f23e28df09cc7f4a4b697b81a9f0180ca352d1df01e55387ed9ea43a",
+      "srgb": false,
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.0,
+        0.6489480137825012,
+        0.0
+      ],
+      "nativeMip": 1,
+      "format": "BC7",
+      "file": "e32f9ad0e190a384.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "4f985b54913bd2e09caf914dd514883f80378767619af27dd773fcb9a974a195",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "9548111cb5f4feede247216fe42cc58eff46d6ec965893a5d5acd8eeeec8f6b6"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "7f13809176ca12fbb0495f9da62ec010b6e5a4def36ab26a8585d10d91ba6502"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "cfae44419b17a19b9c2e453ef9b30f17840a201285db349fa63c059879ce0c8f"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "44d32679364c4bb37728cfe14828147d28611901656f2218dedd0231ded486e9"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "eaf487ae7ed3d81e3bc9866d2822bfe4934ac6001c9ce8dee9bfd21c02d4768c"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "df8febaddd9709b9801fec788e5cbe1400aa57356ce7a8199d3f3170012b9153"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "70bb2e27a428f588e9c89a3f9f908a9a8b6cea7a333536c2b66d679831e169f0"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "548e8f24790d6a4190a04602e374843868864d8fc2231788ee8f20e3f2c5dee0"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "36b1f50aed59bb616d43e2b9fa8cdbe24bf36f6842562cf1ffce5c0119176d1c"
+        }
+      ],
+      "decodedSource": "e32f9ad0e190a384.png",
+      "decodedSha256": "5e5c3b125ac1efc0469b8895a6fb32721a9cae52cf46781ccfc2e5f0a64187fa",
+      "legacyWebpSha256": "bbe6a0ca505448e8a2d9e6ba89c11e5b209e32600082a99ae901cdd2c86bf308",
+      "fallbackFile": "e32f9ad0e190a384.rgba8.gz",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "95c5e75404df82f804eb9590e07c11891bf83a117569ca4b7704aafaeae6d4b2",
+          "nativeMip": 1
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "66fe382eb370a4d9379c03b1769ff3d9cfa0b4fb4d26e1c1bbfd5cd27ec55a0e",
+          "nativeMip": 2
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "84a3c62db715d83919e5a62134a13065dc02fa151410b6a69c3fcde39c2a3123",
+          "nativeMip": 3
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "f2b639fff13ab7e18fa5dec9c540b06578344b0adf960fc547bbe733b23820ba",
+          "nativeMip": 4
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "22f171a475bca8d86c61b9c95187a5277859b387d1a538187110805f5d5d0eec",
+          "nativeMip": 5
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "2ce7969354911a349f3e991b87fb5af03ac99854000b4c1dffbc56e5cdf10350",
+          "nativeMip": 6
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "170fe46268ef8200de4b847a3ba18e2b692c629b2bbae00aa07c57eda5ffb62b",
+          "nativeMip": 7
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "e469d9b2e95a9078d49160ec692f10a7f0cd5732971eace02aa310e9d1b4212c",
+          "nativeMip": 8
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "15206fec632f18681ac8bbdde79562b9ef2bca5a38a460f61129f3799627d0a5",
+          "nativeMip": 9
+        }
+      ],
+      "fallbackFileSha256": "46f5d00d92a04b3454e800fd7e6f3d2862a5d9a4ad4decd4bfd35a6d88eefab9",
+      "fallbackPixelsSha256": "f0bc508138c5b3f340a67074b9a24f7ef8c7e4bf4573f8dd67407e595555ecf3",
+      "fallbackGpuBytes": 5592384,
+      "fallbackQualification": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present."
+    },
+    "4963c95d84ab5087": {
+      "resource": "models/vehicles/swat_van/swat_van_generic_normal_tga_4496b41c.vtex",
+      "sourceSha256": "92602794ab4fcaff852a7639bcef636cccb27f044bf7b19358b7cd6a44e54a98",
+      "srgb": false,
+      "sourceSize": [
+        2048,
+        2048
+      ],
+      "sourceFormat": 20,
+      "reflectivity": [
+        0.4973122775554657,
+        0.4994673728942871,
+        0.6569957137107849
+      ],
+      "nativeMip": 1,
+      "format": "BC7",
+      "file": "4963c95d84ab5087.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "65922dfcb44ee4d188898925b09779bf621a671c4075dffd3d87148865c3209e",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "5552c9d15ca5548918ed2a06bda8740e9d40421838366453541fa731cd86a6da"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "3de52e29ed289e827c790dbfc5d19fbaebcd4dc882cb714240dd682c0ef189e4"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "3505e231070cac634d957fa099fd01fe598e3fa0b2a79fc0e8eb9ace75299833"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "ed9d0291ed2307d7787fb2f50201b792ee7c9aecfe415dc7359cccad5ed2655f"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "e5992bf368d389f5e5acfa6db702e8800aa4781f212b16de411ab82860179075"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "7ccdca61b9763d9f629e614e09c480eed54dbc53b86420b6529430f00afa7c2d"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "09a1f3bddffd4f89b88ea623fd3a9fcf6a78a3c67404e9e6c6b60fc14fcf7e79"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "d12cabaed0b374062d3784d6cd0a476d7987cbeb009cb11817c6af9936a4ba99"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "cb0ee541cbd517a2b9a2028186dc52302a3925ad15f8570bc4d0ac3bdd2fbaae"
+        }
+      ],
+      "decodedSource": "4963c95d84ab5087.png",
+      "decodedSha256": "2485e69dd875f660a93154c2c08f32fb2614b697cd382dae9af73bc51349086e",
+      "legacyWebpSha256": "c018a0cbc50c46c5e397ff9f61bc06e7776f13d77fbfc81b8cb3a90fb5f93ece",
+      "fallbackFile": "4963c95d84ab5087.rgba8.gz",
+      "fallbackMips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 4194304,
+          "sha256": "32454f8516aff2e40361b14e0d6e55b2d0d55ffaa86babafcfa6187b3e442aa9",
+          "nativeMip": 1
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 1048576,
+          "sha256": "d5e1068295c4628c1d4a13b7c116a91001cd7efe69c80a9f618643dfe7f030d0",
+          "nativeMip": 2
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 262144,
+          "sha256": "e14b3dce715792d654600c9f8def374e813201f8c15be12f9743fc41fb19d3ec",
+          "nativeMip": 3
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 65536,
+          "sha256": "6ef11b77012a9b77b591bce8861c9de6c354d5822a7a8b519af81842a4a20e66",
+          "nativeMip": 4
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 16384,
+          "sha256": "dfd94993b74a33b8964a9b6be569242f4f81571daff64acdc788815784e240c7",
+          "nativeMip": 5
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 4096,
+          "sha256": "97529bd8fea580323c1a722cccaf6329d04b1961017e64b6a4b0c986e2347ce2",
+          "nativeMip": 6
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1024,
+          "sha256": "0585c9a5722a672e9775d0d570eaa08c997527ea70c82ccc5a6a69abc0f4bb12",
+          "nativeMip": 7
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 256,
+          "sha256": "e7232bd95c7f9bed3132d10f773e7cfa0b2760ade949a114ff3247a14d36790b",
+          "nativeMip": 8
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 64,
+          "sha256": "acc58555113489fe0cb991a51181aa09a381ea12011ede6b534246076a546bf4",
+          "nativeMip": 9
+        }
+      ],
+      "fallbackFileSha256": "140e2e3772add7b810e85ff41328c21be908d63572b3b8c868acadbe1e1a5c46",
+      "fallbackPixelsSha256": "e38e612cbed38c1dcd6692a2d7c268a15de5b8b98b7fa35d90660a37637b2a11",
+      "fallbackGpuBytes": 5592384,
+      "fallbackQualification": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present."
+    }
+  },
+  "source": {
+    "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "worldSha256": "f00e41ba9ecee28eb481d762402f78adda23c6f6879e5e2cdf116cfd6d4716ae",
+    "conversion": "Native full VMAT parameters, original VTEX reflectivity and packed channels; authored mip <=1024, original BC blocks and lossless decoded fallback. No native shader features silently removed.",
+    "qualification": "Data transport only; browser shader feature support and matched visual acceptance are separate checks.",
+    "authoredFallbackTransport": {
+      "indexSha256": "8f286870dffee84a2d1fa5ff2205227db0e246bb6d72fc38a75a40cb78116b90",
+      "otherBundleTextureIdsSkipped": [
+        "2327fb1544240390",
+        "35f30f37fac66798",
+        "40270ee23380bfaf",
+        "4265edc4b3a5195b",
+        "4689d36d597d5adf",
+        "56de5a74d580a9c7",
+        "5a847c854760c8be",
+        "6af5b62da7536309",
+        "73efcd353de21521",
+        "7419cad58e1f956b",
+        "770cf530668fa8f9",
+        "78e620957bdc7c4a",
+        "793b85aff2ae254f",
+        "7e3da2b46e696f7e",
+        "8bb3405e50fb24ba",
+        "9329c702699e8af2",
+        "95f965b46de42686",
+        "9e962b8ede13c731",
+        "a9c8dd9a32d217e7",
+        "b23efeea4f59d2e8",
+        "ca131a52bac9566d",
+        "cef984e8e2b23b15",
+        "ec9d506d6097188b"
+      ],
+      "textures": 8,
+      "mips": 72,
+      "rgbaBytes": 44739072,
+      "gzipBytes": 14232038,
+      "contract": "One process, serial Texture.GenerateBitmap(depth0,face0,mip,TextureCodec.None=0). Native BGRA storage reorders to RGBA only. Unpremultiplied channel bytes retained; no gamma, flip, normal reconstruction, resample or generated mips. Source srgb is retained separately as sampling metadata; byte values are not linearized. Accepted formats BC7,BC1(no-alpha per pinned decoder),RGBA8888,BC5(native RG with no Z reconstruction). No HDR input present.",
+      "qualification": "Exact source-bound native decoded authored mips; no generated image mipmaps. sRGB metadata controls sampling, bytes unchanged. Legacy WebP source files remain research inputs, absent runtime references when exact raw fallback exists."
+    }
+  }
+}

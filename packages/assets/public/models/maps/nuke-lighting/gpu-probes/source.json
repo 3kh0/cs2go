@@ -1,0 +1,54 @@
+{
+  "mapId": "nuke",
+  "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "arrays": [
+    {
+      "width": 200,
+      "height": 188,
+      "layers": 648,
+      "format": "BC6H",
+      "file": "irradiance.bin.gz",
+      "gpuBytes": 24364800,
+      "gpuSha256": "4136be745255f671dadf40a048cd3eb01dcc20c23724388a6e4d98355631f12b",
+      "downloadBytes": 13847497
+    },
+    {
+      "width": 200,
+      "height": 188,
+      "layers": 108,
+      "format": "BC7",
+      "file": "shadows.bin.gz",
+      "gpuBytes": 4060800,
+      "gpuSha256": "d0610073354575b7c442cb683c0b776b22f5a639efae1de65374a581954f8b6c",
+      "downloadBytes": 364247
+    }
+  ],
+  "fallbacks": [
+    {
+      "width": 200,
+      "height": 188,
+      "layers": 648,
+      "format": "RGB16F",
+      "file": "irradiance-rgb16f.bin.gz",
+      "gpuBytes": 146188800,
+      "gpuSha256": "c1fe66ab2913ca97b965d75f5866b0c0ced42ab06a41f24b418995f5364aa2fa",
+      "downloadBytes": 45427434
+    },
+    {
+      "width": 200,
+      "height": 188,
+      "layers": 108,
+      "format": "RGBA8",
+      "file": "shadows-rgba8.bin.gz",
+      "gpuBytes": 16243200,
+      "gpuSha256": "cabe27310e916551de87e4a1b18a146db62e277357c1b33ab314186be36bedb7",
+      "downloadBytes": 492645
+    }
+  ],
+  "sourceHashes": {
+    "env_light_probe_volume_atlas.vtex_c": "97e911b4319960cf463d44d82c1349df2c8610afb3af0113a7d2bdbd6022bc93",
+    "env_light_probe_volume_atlas_dlshd.vtex_c": "38f3ba313fadcdcb3adac576af4b402419a40f3d103ef157d5cff2e7c854c6f2"
+  },
+  "entitiesSha256": "86e48d3ab22db270d9ddcf0d86612eb9357458858aace7e78adeed7bc6559de3",
+  "interpretation": "Untouched native z-major BC slices, six signed axes, per-volume half-texel borders, native priority/fade/remaining coverage. Fallbacks are original Source2Viewer-decoded RGB16F/RGBA8, no resampling, gamma or lossy encoding."
+}

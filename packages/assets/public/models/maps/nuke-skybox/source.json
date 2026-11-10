@@ -1,0 +1,570 @@
+{
+  "model": "/models/maps/nuke-skybox/world.glb.gz",
+  "lighting": {
+    "size": 1024,
+    "nativeIrradiance": "/models/maps/nuke-skybox/irradiance.bin.gz",
+    "nativeDirectional": "/models/maps/nuke-skybox/directional.bin.gz",
+    "irradiance": "/models/maps/nuke-skybox/irradiance.exr",
+    "directional": "/models/maps/nuke-skybox/directional.png",
+    "shadows": "/models/maps/nuke-skybox/shadows.png"
+  },
+  "effects": {
+    "nuke_clouds_003": {
+      "Name": "materials/models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_clouds_003.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 1.5,
+        "g_flFadeDistance": 1,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          -0.002,
+          0.004,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          5,
+          6,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0,
+          0.001,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          1,
+          1.5,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          -0.01,
+          0.01,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          5,
+          5,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/glows/sun_glow_003_trans_psd_716d1bb6.vtex",
+        "g_tMask1": "materials/effects/clouds_001_mask_psd_a537be2a.vtex",
+        "g_tMask2": "materials/effects/noise_fractal_001_mask_psd_88aff3b4.vtex",
+        "g_tMask3": "materials/effects/noise_fractal_001_mask_psd_88aff3b4.vtex"
+      }
+    },
+    "nuke_chimney_steam_001": {
+      "Name": "materials/models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_chimney_steam_001.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 1,
+        "g_flFadeDistance": 0,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFresnelExponent": 2.51,
+        "g_flFresnelFalloff": 2.196,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          0.87451,
+          0.941177,
+          1,
+          1
+        ],
+        "g_vMask1PanSpeed": [
+          -0.01,
+          0.001,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          2,
+          1,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          -0.01,
+          0.001,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          3,
+          2,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          -0.02,
+          0.001,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureMask3": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_chimney_steam_001_vmat_g_tcolor_37c55b5d.vtex",
+        "g_tMask1": "materials/effects/smoke/steam_001_mask_psd_6e0e704.vtex",
+        "g_tMask2": "materials/effects/smoke/steam_001_mask_psd_6e0e704.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    },
+    "steam_001_additive": {
+      "Name": "materials/effects/smoke/steam_001_additive.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_ADDITIVE_BLEND": 1,
+        "F_DEPTH_FEATHER": 1,
+        "F_RENDER_BACKFACES": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 1,
+        "g_flFadeDistance": 263.158,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFeatherDistance": 20,
+        "g_flFeatherFalloff": 1,
+        "g_flFresnelExponent": 2.501,
+        "g_flFresnelFalloff": 1.552,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 0.533
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0.01,
+          -0.025,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          0.1,
+          0.5,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          -0.01,
+          -0.025,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          0.07,
+          0.4,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/smoke/steam_001_additive_vmat_g_tcolor_37c55b5d.vtex",
+        "g_tMask1": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex",
+        "g_tMask2": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    },
+    "sun_disc_glow_002": {
+      "Name": "materials/effects/glows/sun_disc_glow_002.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_ADDITIVE_BLEND": 1,
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 156.652,
+        "g_flFadeDistance": 1,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/glows/sun_disk_glow_002_trans_psd_fc526368.vtex",
+        "g_tMask1": "materials/default/default_mask_tga_344101f8.vtex",
+        "g_tMask2": "materials/default/default_mask_tga_344101f8.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    }
+  },
+  "textures": {
+    "materials/effects/glows/sun_glow_003_trans_psd_716d1bb6.vtex": {
+      "path": "/models/maps/nuke-skybox/2a29a5f408eae3c0.png",
+      "srgb": true,
+      "sourceSha256": "52c6bdbb6a96481ae0b4bd9d5d0ae5f4fa5817db3c350243b4882c1379cc92c2"
+    },
+    "materials/effects/clouds_001_mask_psd_a537be2a.vtex": {
+      "path": "/models/maps/nuke-skybox/f48aca539acdfdb5.png",
+      "srgb": false,
+      "sourceSha256": "77ef0542dccb58af31e61d62948c0f63f1efed9c7d22d0e2531ad5a00412e01d"
+    },
+    "materials/effects/noise_fractal_001_mask_psd_88aff3b4.vtex": {
+      "path": "/models/maps/nuke-skybox/75cd5a8c09c6fce9.png",
+      "srgb": false,
+      "sourceSha256": "0c9d18d04f6144fa2bdf37bd83a424ed9315c7420006925b1270aa2f159ca258"
+    },
+    "materials/models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_chimney_steam_001_vmat_g_tcolor_37c55b5d.vtex": {
+      "path": "/models/maps/nuke-skybox/798fb295dc24fcf7.png",
+      "srgb": true,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/smoke/steam_001_mask_psd_6e0e704.vtex": {
+      "path": "/models/maps/nuke-skybox/3ac285ee0c5724bb.png",
+      "srgb": false,
+      "sourceSha256": "4ea474c3497aa64f1b4b0f1447be987cf1a9de2c140d9e18dd30c53d20ba84ec"
+    },
+    "materials/default/default_mask_tga_344101f8.vtex": {
+      "path": "/models/maps/nuke-skybox/0d5b16c57091556d.png",
+      "srgb": false,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/smoke/steam_001_additive_vmat_g_tcolor_37c55b5d.vtex": {
+      "path": "/models/maps/nuke-skybox/46e29fbf1071d1b7.png",
+      "srgb": true,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex": {
+      "path": "/models/maps/nuke-skybox/d49a987174c44d8a.png",
+      "srgb": false,
+      "sourceSha256": "86a5a3896051fabfe132d8b602d0cb5fb51f3c30bea3a9dab214ca43618d10dc"
+    },
+    "materials/effects/glows/sun_disk_glow_002_trans_psd_fc526368.vtex": {
+      "path": "/models/maps/nuke-skybox/3ba7d8bfb1441830.png",
+      "srgb": true,
+      "sourceSha256": "b2d4e2ab215a0f2789edc9795ab09dbb5843a87a0265ef587ddaf8af0d6a635a"
+    }
+  },
+  "nativeTransform": {
+    "skyCamera": {
+      "scale": 16,
+      "classname": "sky_camera",
+      "origin": "-40.000000 -308.000000 192.000000",
+      "angles": "0.000000 0.000000 0.000000",
+      "scales": "1.000000 1.000000 1.000000",
+      "hammerUniqueId": "412"
+    },
+    "skyboxReference": {
+      "targetname": "",
+      "vscripts": "",
+      "targetMapName": "maps/prefabs/de_nuke/de_nuke_skybox02.vmap",
+      "fixupNames": false,
+      "worldGroupID": "skyboxWorldGroup0",
+      "classname": "skybox_reference",
+      "compile_source_id": 10017,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "2:61814:21271"
+    },
+    "noCenteringOrNormalization": true,
+    "browserWorldFromSkyBrowser": [
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.0,
+      0.0,
+      16.256,
+      -78.02879999999999,
+      -125.1712,
+      1.0
+    ]
+  },
+  "layers": "/models/maps/nuke-skybox/layers/source.json",
+  "probes": "/models/maps/nuke-skybox/gpu-probes/",
+  "sun": {
+    "pitch": 60.0,
+    "yaw": 25.999996,
+    "color": 16776431,
+    "intensity": 7.5398223686155035
+  },
+  "ambient": {
+    "skyColor": 4422326,
+    "groundColor": 0,
+    "intensity": 2.6
+  },
+  "panorama": {
+    "angles": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "brightness": 1.0,
+    "tint": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "counts": {
+    "effects": 211,
+    "lightmapped": 68,
+    "probeOrUnlit": 149
+  },
+  "selfIllumination": {},
+  "source": {
+    "worldSha256": "09e07fb09bb3c147a1f4557e52e539b5b9f9e35ed2d7ce2bbcf37a4a2ba5e648",
+    "worldInfoSha256": "d4c597dc7a93f939f277cb21b7cf9ab219bdcca46ae700a7c70d315d4ee7edc6",
+    "uvJoinSha256": "edd7daa1d56606564d54d93cf591a014207a244328ee29207a7b623e9ff9beee",
+    "cameraSha256": "aaaf21cc812235ce7a91bb04f578ccbd257bdad441f60d3178b9fb42f6b2a897",
+    "entitySha256": "985a892975a211cb950ba6ae7c65c0a8d3582069afe7e72bd5e9cb7590bbfd84",
+    "atlases": {
+      "irradiance": {
+        "sha256": "e184878fa2a400c4e0abe6df4eb8aa40fad56b6f7c0e99c06a9299eb8335e134",
+        "dimensions": {
+          "width": 1024,
+          "height": 1024,
+          "depth": 1,
+          "format": 19,
+          "mips": 1
+        }
+      },
+      "directional_irradiance": {
+        "sha256": "b7835e25be071055909c5291873e0f188b3c116360d3848450329006a18a0f24",
+        "dimensions": {
+          "width": 1024,
+          "height": 1024,
+          "depth": 1,
+          "format": 1,
+          "mips": 1
+        }
+      },
+      "direct_light_shadows": {
+        "sha256": "db31a21ad714f997b380c113636b90e1d8fe289b8887aa82f5176fb3468ad08b",
+        "dimensions": {
+          "width": 1024,
+          "height": 1024,
+          "depth": 1,
+          "format": 27,
+          "mips": 1
+        }
+      }
+    },
+    "coordinateConversion": "Standalone S2V (y,z,x) metres -> browser basis once; native sky_camera offset/scale then skybox_reference rotation/translation. Never recenter, normalize, clip to NAV or scale UV charts again.",
+    "lightmapUvScaleAlreadyBaked": [
+      1.032242,
+      1.032242
+    ],
+    "reference": "VRF20.1 WorldLoader.LoadSkybox + EntityTransformHelper; browser shaders, fixed exposure and material adaptation do not establish private Source2 parity.",
+    "counts": {
+      "effects": 211,
+      "lightmapped": 68,
+      "probeOrUnlit": 149
+    },
+    "triangles": 109807,
+    "shaderCounts": {
+      "csgo_effects.vfx": 211,
+      "csgo_lightmappedgeneric.vfx": 21,
+      "csgo_black_unlit.vfx": 1,
+      "csgo_complex.vfx": 63,
+      "generic.vfx": 2,
+      "csgo_foliage.vfx": 95,
+      "csgo_vertexlitgeneric.vfx": 35
+    },
+    "bounds": [
+      [
+        -5974.07861328125,
+        -31.059293746948242,
+        -5849.16162109375
+      ],
+      [
+        5909.0546875,
+        1645.3514404296875,
+        6171.0302734375
+      ]
+    ],
+    "selfIllumination": {},
+    "ownReflections": {
+      "manifestSha256": "5ae4395c956dcbe5fe08d0f88320d262d52894c2432129238bd3129080386742",
+      "coordinateFrame": "Original sky Source positions/volumes/cube orientation/SH. NativeSkyFrame reverses baked main placement for shader positions/normal/view and candidate bounds exactly once.",
+      "qualification": "Exact original native BC6H faces and authored mips; existing runtime capability fallback remains on devices without BPTC/fragment uniforms/array capacity. No synthetic HDR mip fallback."
+    },
+    "shaderCoordinateFrame": {
+      "position": "NativeSkyFrame reconstructs own sky Source coordinates by inverting authored skybox_reference rotation/translation and sky_camera origin/scale once. Geometry stays baked in main-world browser coordinates; raw reflection boxes/cubes/SH stay in own native Source coordinates.",
+      "modernEnvironment": "Biplanar, wetness and facing fields use own-frame positions/normals; Source-unit bevel displacement uses native sky scale.",
+      "atlasCurvature": "Source-unit curvature uses0.0254*skyCamera.scale per baked browser metre; main-map default remains1.",
+      "clock": "Native environment.update is stepped by the same own-sky preparation clock as fog/cloud effects."
+    }
+  },
+  "reflections": {
+    "directory": "/models/maps/nuke-skybox/lighting/reflections/",
+    "manifest": "source.json",
+    "volumes": 1,
+    "maxGpuBytes": 524256
+  }
+}

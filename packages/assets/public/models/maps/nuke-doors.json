@@ -1,0 +1,753 @@
+{
+  "version": 1,
+  "mapId": "nuke",
+  "doors": [
+    {
+      "id": "nuke:2:61814:19238",
+      "pivot": [
+        26.593799999999998,
+        -19.507199999999997,
+        23.368
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 89.0,
+      "speed": 200,
+      "returnDelay": -1,
+      "startAngle": 0,
+      "openDirection": 0,
+      "locked": false,
+      "useEnabled": true,
+      "touchOpen": false,
+      "physicsNames": [
+        "door_nuke_2_61814_19238_physics"
+      ],
+      "renderNames": [
+        "door_nuke_2_61814_19238_leaf0"
+      ],
+      "group": "nuke:linked:2:61814:19237"
+    },
+    {
+      "id": "nuke:2:61814:19237",
+      "pivot": [
+        26.593799999999998,
+        -19.507199999999997,
+        26.416
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 89.0,
+      "speed": 200,
+      "returnDelay": -1,
+      "startAngle": 0,
+      "openDirection": 0,
+      "locked": false,
+      "useEnabled": true,
+      "touchOpen": false,
+      "physicsNames": [
+        "door_nuke_2_61814_19237_physics"
+      ],
+      "renderNames": [
+        "door_nuke_2_61814_19237_leaf0"
+      ],
+      "group": "nuke:linked:2:61814:19237"
+    },
+    {
+      "id": "nuke:2:61814:19236",
+      "pivot": [
+        7.751888839599999,
+        -19.506945746,
+        34.2997079308
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 89.0,
+      "speed": 200,
+      "returnDelay": -1,
+      "startAngle": 0,
+      "openDirection": 0,
+      "locked": false,
+      "useEnabled": true,
+      "touchOpen": false,
+      "physicsNames": [
+        "door_nuke_2_61814_19236_physics"
+      ],
+      "renderNames": [
+        "door_nuke_2_61814_19236_leaf0"
+      ]
+    },
+    {
+      "id": "nuke:2:61814:19235",
+      "pivot": [
+        6.5278,
+        -10.5664,
+        33.274
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 89.0,
+      "speed": 200,
+      "returnDelay": -1,
+      "startAngle": 0,
+      "openDirection": 0,
+      "locked": false,
+      "useEnabled": true,
+      "touchOpen": false,
+      "physicsNames": [
+        "door_nuke_2_61814_19235_physics"
+      ],
+      "renderNames": [
+        "door_nuke_2_61814_19235_leaf0"
+      ]
+    }
+  ],
+  "source": {
+    "entities": [
+      {
+        "steamaudio_geometry_mode": "2",
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "[PR#]door_02",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "useLocalOffset": false,
+        "globalname": "",
+        "model": "models/props/de_nuke/hr_nuke/metal_door_001/metal_door_001_br.vmdl",
+        "skin": "0",
+        "bodygroups": "",
+        "disableshadows": 2,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendercolor": [
+          223,
+          149,
+          32
+        ],
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          255,
+          255,
+          255
+        ],
+        "slavename": "[PR#]door_01",
+        "hardware": "1",
+        "ajarangle": 0.0,
+        "spawnpos": "0",
+        "distance": 89.0,
+        "speed": 200,
+        "soundopenoverride": "Door.de_nuke_full_open_01",
+        "soundcloseoverride": "Door.de_nuke_full_close_01",
+        "soundmoveoverride": "Door.de_nuke_move_01",
+        "soundjiggleoverride": "",
+        "returndelay": -1,
+        "dmg": 0,
+        "health": 0,
+        "soundlockedoverride": "",
+        "soundunlockedoverride": "Door.de_nuke_unlock_01",
+        "soundlatchoverride": "",
+        "forceclosed": false,
+        "rendertocubemaps": true,
+        "lightmapstatic": "0",
+        "spawnflags": 8192,
+        "opendir": "0",
+        "glowteam": -1,
+        "ajardoorshouldntalwaysopen": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 10023,
+        "origin": [
+          1047.0,
+          -920.0,
+          -768.0
+        ],
+        "angles": [
+          0.0,
+          180.000046,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:19238"
+      },
+      {
+        "steamaudio_geometry_mode": "2",
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "[PR#]door_01",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "useLocalOffset": false,
+        "globalname": "",
+        "model": "models/props/de_nuke/hr_nuke/metal_door_001/metal_door_001_br.vmdl",
+        "skin": "0",
+        "bodygroups": "",
+        "disableshadows": 2,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendercolor": [
+          223,
+          149,
+          32
+        ],
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "slavename": "",
+        "hardware": "1",
+        "ajarangle": 0.0,
+        "spawnpos": "0",
+        "distance": 89.0,
+        "speed": 200,
+        "soundopenoverride": "Door.de_nuke_full_open_02",
+        "soundcloseoverride": "Door.de_nuke_full_close_02",
+        "soundmoveoverride": "Door.de_nuke_move_02",
+        "soundjiggleoverride": "",
+        "returndelay": -1,
+        "dmg": 0,
+        "health": 0,
+        "soundlockedoverride": "",
+        "soundunlockedoverride": "Door.de_nuke_unlock_02",
+        "soundlatchoverride": "",
+        "forceclosed": false,
+        "rendertocubemaps": true,
+        "lightmapstatic": "0",
+        "spawnflags": 8192,
+        "opendir": "0",
+        "glowteam": -1,
+        "ajardoorshouldntalwaysopen": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 10024,
+        "origin": [
+          1047.0,
+          -1040.0,
+          -768.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:19237"
+      },
+      {
+        "steamaudio_geometry_mode": "2",
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "useLocalOffset": false,
+        "globalname": "",
+        "model": "models/props/de_nuke/hr_nuke/metal_door_001/metal_door_001_br.vmdl",
+        "skin": "0",
+        "bodygroups": "",
+        "disableshadows": 2,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendercolor": [
+          255,
+          153,
+          0
+        ],
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          255,
+          255,
+          255
+        ],
+        "slavename": "",
+        "hardware": "1",
+        "ajarangle": 0.0,
+        "spawnpos": "0",
+        "distance": 89.0,
+        "speed": 200,
+        "soundopenoverride": "Door.de_nuke_full_open_03",
+        "soundcloseoverride": "Door.de_nuke_full_close_03",
+        "soundmoveoverride": "Door.de_nuke_move_03",
+        "soundjiggleoverride": "",
+        "returndelay": -1,
+        "dmg": 0,
+        "health": 0,
+        "soundlockedoverride": "",
+        "soundunlockedoverride": "Door.de_nuke_unlock_03",
+        "soundlatchoverride": "",
+        "forceclosed": true,
+        "rendertocubemaps": true,
+        "lightmapstatic": "0",
+        "spawnflags": 8192,
+        "opendir": "0",
+        "glowteam": -1,
+        "ajardoorshouldntalwaysopen": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 10025,
+        "origin": [
+          305.192474,
+          -1350.382202,
+          -767.98999
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0125,
+          1.0125,
+          1.0125
+        ],
+        "hammerUniqueId": "2:61814:19236"
+      },
+      {
+        "steamaudio_geometry_mode": "2",
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "local.origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "local.scales": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "useLocalOffset": false,
+        "globalname": "",
+        "model": "models/props/de_nuke/hr_nuke/metal_door_001/metal_door_001_br.vmdl",
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendercolor": [
+          223,
+          149,
+          32
+        ],
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "slavename": "",
+        "hardware": "1",
+        "ajarangle": 0.0,
+        "spawnpos": "0",
+        "distance": 89.0,
+        "speed": 200,
+        "soundopenoverride": "Door.de_nuke_full_open_03",
+        "soundcloseoverride": "Door.de_nuke_full_close_03",
+        "soundmoveoverride": "Door.de_nuke_move_03",
+        "soundjiggleoverride": "",
+        "returndelay": -1,
+        "dmg": 0,
+        "health": 0,
+        "soundlockedoverride": "",
+        "soundunlockedoverride": "Door.de_nuke_unlock_03",
+        "soundlatchoverride": "",
+        "forceclosed": true,
+        "rendertocubemaps": true,
+        "lightmapstatic": "0",
+        "spawnflags": 8192,
+        "opendir": "0",
+        "glowteam": -1,
+        "ajardoorshouldntalwaysopen": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 10026,
+        "origin": [
+          257.0,
+          -1310.0,
+          -416.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:19235"
+      }
+    ],
+    "boundEntities": [
+      {
+        "steamaudio_geometry_mode": "2",
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "[PR#]door_02",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "globalname": "",
+        "model": "models/props/de_nuke/hr_nuke/metal_door_001/metal_door_001_br.vmdl",
+        "skin": "0",
+        "bodygroups": "",
+        "disableshadows": 2,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendercolor": [
+          223,
+          149,
+          32
+        ],
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          255,
+          255,
+          255
+        ],
+        "slavename": "[PR#]door_01",
+        "hardware": "1",
+        "ajarangle": 0.0,
+        "spawnpos": "0",
+        "distance": 89.0,
+        "speed": 200,
+        "soundopenoverride": "Door.de_nuke_full_open_01",
+        "soundcloseoverride": "Door.de_nuke_full_close_01",
+        "soundmoveoverride": "Door.de_nuke_move_01",
+        "soundjiggleoverride": "",
+        "returndelay": -1,
+        "dmg": 0,
+        "health": 0,
+        "soundlockedoverride": "",
+        "soundunlockedoverride": "Door.de_nuke_unlock_01",
+        "soundlatchoverride": "",
+        "forceclosed": false,
+        "rendertocubemaps": true,
+        "lightmapstatic": "0",
+        "spawnflags": 8192,
+        "opendir": "0",
+        "glowteam": -1,
+        "ajardoorshouldntalwaysopen": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 10023,
+        "origin": [
+          1047.0,
+          -920.0,
+          -768.0
+        ],
+        "angles": [
+          0.0,
+          180.000046,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:19238"
+      },
+      {
+        "steamaudio_geometry_mode": "2",
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "[PR#]door_01",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "globalname": "",
+        "model": "models/props/de_nuke/hr_nuke/metal_door_001/metal_door_001_br.vmdl",
+        "skin": "0",
+        "bodygroups": "",
+        "disableshadows": 2,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendercolor": [
+          223,
+          149,
+          32
+        ],
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "slavename": "",
+        "hardware": "1",
+        "ajarangle": 0.0,
+        "spawnpos": "0",
+        "distance": 89.0,
+        "speed": 200,
+        "soundopenoverride": "Door.de_nuke_full_open_02",
+        "soundcloseoverride": "Door.de_nuke_full_close_02",
+        "soundmoveoverride": "Door.de_nuke_move_02",
+        "soundjiggleoverride": "",
+        "returndelay": -1,
+        "dmg": 0,
+        "health": 0,
+        "soundlockedoverride": "",
+        "soundunlockedoverride": "Door.de_nuke_unlock_02",
+        "soundlatchoverride": "",
+        "forceclosed": false,
+        "rendertocubemaps": true,
+        "lightmapstatic": "0",
+        "spawnflags": 8192,
+        "opendir": "0",
+        "glowteam": -1,
+        "ajardoorshouldntalwaysopen": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 10024,
+        "origin": [
+          1047.0,
+          -1040.0,
+          -768.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:19237"
+      },
+      {
+        "steamaudio_geometry_mode": "2",
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "globalname": "",
+        "model": "models/props/de_nuke/hr_nuke/metal_door_001/metal_door_001_br.vmdl",
+        "skin": "0",
+        "bodygroups": "",
+        "disableshadows": 2,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendercolor": [
+          255,
+          153,
+          0
+        ],
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          255,
+          255,
+          255
+        ],
+        "slavename": "",
+        "hardware": "1",
+        "ajarangle": 0.0,
+        "spawnpos": "0",
+        "distance": 89.0,
+        "speed": 200,
+        "soundopenoverride": "Door.de_nuke_full_open_03",
+        "soundcloseoverride": "Door.de_nuke_full_close_03",
+        "soundmoveoverride": "Door.de_nuke_move_03",
+        "soundjiggleoverride": "",
+        "returndelay": -1,
+        "dmg": 0,
+        "health": 0,
+        "soundlockedoverride": "",
+        "soundunlockedoverride": "Door.de_nuke_unlock_03",
+        "soundlatchoverride": "",
+        "forceclosed": true,
+        "rendertocubemaps": true,
+        "lightmapstatic": "0",
+        "spawnflags": 8192,
+        "opendir": "0",
+        "glowteam": -1,
+        "ajardoorshouldntalwaysopen": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 10025,
+        "origin": [
+          305.192474,
+          -1350.382202,
+          -767.98999
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0125,
+          1.0125,
+          1.0125
+        ],
+        "hammerUniqueId": "2:61814:19236"
+      },
+      {
+        "steamaudio_geometry_mode": "2",
+        "add_modifier": "",
+        "add_attribute": "",
+        "targetname": "",
+        "vscripts": "",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "globalname": "",
+        "model": "models/props/de_nuke/hr_nuke/metal_door_001/metal_door_001_br.vmdl",
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendercolor": [
+          223,
+          149,
+          32
+        ],
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "slavename": "",
+        "hardware": "1",
+        "ajarangle": 0.0,
+        "spawnpos": "0",
+        "distance": 89.0,
+        "speed": 200,
+        "soundopenoverride": "Door.de_nuke_full_open_03",
+        "soundcloseoverride": "Door.de_nuke_full_close_03",
+        "soundmoveoverride": "Door.de_nuke_move_03",
+        "soundjiggleoverride": "",
+        "returndelay": -1,
+        "dmg": 0,
+        "health": 0,
+        "soundlockedoverride": "",
+        "soundunlockedoverride": "Door.de_nuke_unlock_03",
+        "soundlatchoverride": "",
+        "forceclosed": true,
+        "rendertocubemaps": true,
+        "lightmapstatic": "0",
+        "spawnflags": 8192,
+        "opendir": "0",
+        "glowteam": -1,
+        "ajardoorshouldntalwaysopen": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 10026,
+        "origin": [
+          257.0,
+          -1310.0,
+          -416.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:19235"
+      }
+    ],
+    "bindingManifest": "door-node-identities.json",
+    "sourceCoordinateConversion": "Source[x,y,z]inches\u2192browser[x,z,-y]metres. Native entity scale retained by source geometry, not applied again to hinge.",
+    "qualification": "Authored hinge/speed/travel and explicit slave pairing. Both-way away-side selection, paused occupied closure and source flag interpretation are browser/server reconstructions; inherited health, forceclosed push and model destruction await native evidence."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "resourceVersion": 1,
+  "sites": [
+    [
+      -491.0,
+      -720.0,
+      11776.0,
+      -64.00004577636719,
+      -522.0,
+      11807.0,
+      2371.0
+    ],
+    [
+      -2363.0,
+      657.0,
+      11744.0,
+      -2133.0,
+      938.0,
+      11772.0,
+      2590.0
+    ]
+  ],
+  "points": 63157,
+  "sourceResource": "/Users/sh/Documents/GitHub/cs2go/artifacts/new-maps/vertigo/raw/maps/de_vertigo/baked_bomb_damage.vdata_c",
+  "sourceSha256": "c0fe2ee996b9e378bf67c7dcd0b830cc2324feee83f377a00b9e022a928534a6",
+  "decodedSha256": "dbdd79f004b19ed8158ac7c0db847464bbabffd4d5eccaf99e1941f7f3954f01"
+}

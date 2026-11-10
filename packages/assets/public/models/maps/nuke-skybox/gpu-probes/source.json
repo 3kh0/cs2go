@@ -1,0 +1,55 @@
+{
+  "mapId": "nuke",
+  "space": "sky0",
+  "arrays": [
+    {
+      "width": 132,
+      "height": 108,
+      "layers": 72,
+      "format": "BC6H",
+      "file": "irradiance.bin.gz",
+      "gpuBytes": 1026432,
+      "gpuSha256": "17263bd8c84a7f611d7d56ee457a0bb8bfc1aae1cf7405bd0915336ea752a012",
+      "downloadBytes": 547766
+    },
+    {
+      "width": 132,
+      "height": 108,
+      "layers": 12,
+      "format": "BC7",
+      "file": "shadows.bin.gz",
+      "gpuBytes": 171072,
+      "gpuSha256": "55a717a9dc9ad6d28b7ed9198109bfb48edafdea85a5e3dd9066c036e6432ddc",
+      "downloadBytes": 14479
+    }
+  ],
+  "fallbacks": [
+    {
+      "width": 132,
+      "height": 108,
+      "layers": 72,
+      "format": "RGB16F",
+      "file": "irradiance-rgb16f.bin.gz",
+      "gpuBytes": 6158592,
+      "gpuSha256": "10c86857cf65ad26a5d5ffdf9b7a3d886ff7fa4a823f9fd20219bf15d8a963a1",
+      "downloadBytes": 2674844
+    },
+    {
+      "width": 132,
+      "height": 108,
+      "layers": 12,
+      "format": "RGBA8",
+      "file": "shadows-rgba8.bin.gz",
+      "gpuBytes": 684288,
+      "gpuSha256": "53ff24de4c328d7e56e82a4ed524a296b325a0fa1fd434aad46189a871b9326c",
+      "downloadBytes": 29650
+    }
+  ],
+  "sourceHashes": {
+    "maps/prefabs/de_nuke/de_nuke_skybox02/lightmaps/env_light_probe_volume_atlas.vtex": "c4d5598373bb4678a2ba74db3b78735e42cb522509718bcbf7eb6772e0047637",
+    "maps/prefabs/de_nuke/de_nuke_skybox02/lightmaps/env_light_probe_volume_atlas_dlshd.vtex": "ef41543ffc7d9ab82366ed2fceb6d62311cfc5ee4d5dcd799514d28d0bddd7f2"
+  },
+  "cameraSha256": "aaaf21cc812235ce7a91bb04f578ccbd257bdad441f60d3178b9fb42f6b2a897",
+  "worldInfoSha256": "d4c597dc7a93f939f277cb21b7cf9ab219bdcca46ae700a7c70d315d4ee7edc6",
+  "interpretation": "Original sky-owned BC6H/BC7 arrays and exact decoded fallbacks; native volume frames composed with sky placement."
+}

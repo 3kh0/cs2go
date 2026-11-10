@@ -1,0 +1,430 @@
+{
+  "version": 1,
+  "mapId": "vertigo",
+  "breakables": [],
+  "enabledRemainders": [],
+  "sourceHashes": {
+    "entities": "6b680f4ee8ce78d4fc079910d6579562f4af579855757c1c72a853890dda0ed3",
+    "sourceRender": "14c30520e748f744679c01e961997dc456d9d07999d523bcf0cd4a43e168279c",
+    "sourcePhysics": "5ac9fa526bb85b46ba80bbaaf00d7bef682e081a1354dd4d8acb9a48324d3c48",
+    "propData": "0e6e36e89bdbc59c291d578d89f018b2c85a6866a2e7604cbc0e1c4c5c446941",
+    "surfaceDefinitionsData": "2f527a673f188f929c6c9c41c57dbf1fdd7d674a958a4186bbb81baf960edfaa"
+  },
+  "modelAudit": [
+    {
+      "model": "models/props/cs_office/water_bottle.vmdl",
+      "sourceSha256": "c2b9c4274fbe06962b0e55c7f8a6fcdd5fe8306fb1de5e78c1099017088d4369",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Plastic.large",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": -1.0,
+          "spawn_motion_disabled": false
+        },
+        "ao_proxy_capsule_list": [
+          {
+            "bonename": null,
+            "radius": 1.58164,
+            "point0": [
+              0.0,
+              0.0,
+              -3.85977
+            ],
+            "point1": [
+              0.0,
+              0.0,
+              3.73637
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/hr_vertigo/vertigo_sign/sign_number.vmdl",
+      "sourceSha256": "cc85452fd4e7cf2cd66102660ee1f581756bbbf8c47822bd702956f0f9fcd9c1",
+      "hasPropData": false,
+      "native": {}
+    },
+    {
+      "model": "models/props/de_vertigo/constructioncrane01_load.vmdl",
+      "sourceSha256": "f8f7ef3bef594cc82979d23d380de66ee4402fe5bb452f4055675fc1d7e17190",
+      "hasPropData": false,
+      "native": {}
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/nuke_hard_hat/nuke_hard_hat.vmdl",
+      "sourceSha256": "9f615df0eab74603a770c354fbe0016c8727f1959feab13ab254a7d5bb8d6b73",
+      "hasPropData": false,
+      "native": {}
+    },
+    {
+      "model": "models/props_urban/plastic_chair001.vmdl",
+      "sourceSha256": "3c4ecc8d5c2301ac22c477032524997e60c94fb9749f33eee0e750ef54ff95df",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Plastic.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": -1.0,
+          "spawn_motion_disabled": false
+        },
+        "ao_proxy_box_list": [
+          {
+            "bonename": null,
+            "dimensions": [
+              22.7477,
+              22.3858,
+              3.0355
+            ],
+            "offset_origin": [
+              3.09703,
+              1.16571,
+              23.5205
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "bonename": null,
+            "dimensions": [
+              4.21952,
+              3.62839,
+              23.1871
+            ],
+            "offset_origin": [
+              12.3617,
+              12.3173,
+              11.0895
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "bonename": null,
+            "dimensions": [
+              4.85468,
+              3.62839,
+              24.2078
+            ],
+            "offset_origin": [
+              -7.901,
+              12.3173,
+              11.5999
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "bonename": null,
+            "dimensions": [
+              3.5376,
+              5.16986,
+              24.2078
+            ],
+            "offset_origin": [
+              -8.86795,
+              -11.2929,
+              11.5999
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "bonename": null,
+            "dimensions": [
+              4.21952,
+              3.35908,
+              23.1871
+            ],
+            "offset_origin": [
+              12.3617,
+              -12.1988,
+              11.0895
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "bonename": null,
+            "dimensions": [
+              6.72085,
+              24.3914,
+              21.4902
+            ],
+            "offset_origin": [
+              -8.72562,
+              0.910232,
+              32.748
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/de_vertigo/hvac_fanblade_spinning_01.vmdl",
+      "sourceSha256": "cdd5e0643feba684f7c4ad300b4639f4244f3af4727e475605784a6eb2480cc2",
+      "hasPropData": false,
+      "native": {}
+    },
+    {
+      "model": "models/props/hr_vertigo/vertigo_traffic_cone/traffic_cone.vmdl",
+      "sourceSha256": "de1c7b814dd396c7d54b7145d5b00ac0198fc8b279da803b8c8c94bcfa753dd0",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Plastic.Small",
+          "allowstatic": false,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": -1.0,
+          "spawn_motion_disabled": false
+        },
+        "ao_proxy_capsule_list": [
+          {
+            "bonename": null,
+            "radius": 4.54565,
+            "point0": [
+              0.001379,
+              0.0,
+              3.49638
+            ],
+            "point1": [
+              0.01,
+              0.0,
+              25.357
+            ]
+          }
+        ],
+        "ao_proxy_box_list": [
+          {
+            "bonename": null,
+            "dimensions": [
+              15.6136,
+              15.9068,
+              1.18915
+            ],
+            "offset_origin": [
+              -0.144483,
+              0.186479,
+              0.354203
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/hr_vertigo/vertigo_paint_bucket/vertigo_paint_bucket.vmdl",
+      "sourceSha256": "1e6d64a47b6d3a12ca4b961b04c04de77d15bdbe4e216440a0502fc581c04165",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Plastic.Medium",
+          "allowstatic": false,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": -1.0,
+          "spawn_motion_disabled": false
+        },
+        "ao_proxy_capsule_list": [
+          {
+            "bonename": null,
+            "radius": 9.10789,
+            "point0": [
+              0.003424,
+              0.0,
+              5.82159
+            ],
+            "point1": [
+              0.009315,
+              0.0,
+              15.8352
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props_junk/garbage_spraypaintcan01a.vmdl",
+      "sourceSha256": "d03af7d126742f383d9f8cd81b55b2c014c9a805010b6001c966446698b65b8d",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "metal.small",
+          "allowstatic": false,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": -1.0,
+          "spawn_motion_disabled": false
+        },
+        "ao_proxy_capsule_list": [
+          {
+            "bonename": null,
+            "radius": 1.86783,
+            "point0": [
+              0.0,
+              0.0,
+              -4.31811
+            ],
+            "point1": [
+              0.0,
+              0.0,
+              3.41563
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/de_vertigo/fencerail_construction2x4_break_base.vmdl",
+      "sourceSha256": "3148665cf2296cbfe8c3ddabe49a2a01f048ae1fc39c6b11cc78a617faf6ffe7",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Wooden.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": -1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_vertigo/de_vertigo/fencerail_construction2x4_break_debris_01.vmdl",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "health_override": 1
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_vertigo/de_vertigo/fencerail_construction2x4_break_debris_02.vmdl",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "health_override": 1
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_vertigo/de_vertigo/fencerail_construction2x4_break_debris_03.vmdl",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "health_override": 1
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/de_vertigo/portapotty01_door.vmdl",
+      "sourceSha256": "3549c0c3751c49afa2cc9b72f73c17725b4e7f0ff1f5769a2b5e79ebcfd0ac2c",
+      "hasPropData": false,
+      "native": {}
+    },
+    {
+      "model": "models/hybridphysx/news_helicoptor_map1_intro_v1.vmdl",
+      "sourceSha256": "a52a430fa200aa0e93a48144e78e8218166c89401d3fb29be4d6af0b042eeed9",
+      "hasPropData": false,
+      "native": {}
+    }
+  ]
+}

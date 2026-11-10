@@ -1,0 +1,282 @@
+{
+  "mapId": "nuke",
+  "resource": "maps/prefabs/de_nuke/de_nuke_skybox02/cubemaps/env_cubemap_array.vtex_c",
+  "texture": {
+    "width": 256,
+    "height": 256,
+    "cubes": 1,
+    "mips": 7,
+    "nativeFlags": 80,
+    "transportCompression": 0
+  },
+  "sourceSha256": "3ec638243c0056b61a67af443e41c072dd94866466367ac42d188aaf130e18a7",
+  "entitiesSha256": "aaaf21cc812235ce7a91bb04f578ccbd257bdad441f60d3178b9fb42f6b2a897",
+  "interpretation": "ValveResourceFormat 9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304 20.1 environment.slang lightmap 8.2 weighted radiance and roughness-dependent normalization cap",
+  "normalizationSHReference": "ValveResourceFormat 9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304 20.1 SceneEnvMap.CalculateNormalizationSH; shader-luma L1 bands without newer-reference sign/clamp changes",
+  "transformReference": "VRF20.1 EntityTransformHelper: Source row-vector Scale*RollX*PitchY*YawZ*Translation transposed to column-major worldToLocal/localToWorld; local boxes/fades retained, transformed world bounds supplied for broadphase",
+  "qualification": "Native BC6H data retained exactly; native viewmodel runtime cubemap-normalization toggle is not established; actor influence selection is bounded to eight native priority volumes",
+  "rendererReferences": [
+    {
+      "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+      "path": "Renderer/Shaders/common/environment.slang",
+      "sourceSha256": "2dfa11e369901feef1be8ae67396ed42b848cce5ac52e5d4307aaf6e5afce97d",
+      "originalLines": [
+        [
+          63,
+          124
+        ],
+        [
+          187,
+          338
+        ]
+      ]
+    },
+    {
+      "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+      "path": "Renderer/Renderer/SceneEnvironment/SceneEnvMap.cs",
+      "sourceSha256": "b08c1b6e4c5d6d1539d8d7c3410831f33b8ba4d15e7e928a556fee143f38ca79",
+      "originalLines": [
+        [
+          61,
+          105
+        ]
+      ]
+    },
+    {
+      "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+      "path": "Renderer/Renderer/Scene.cs",
+      "sourceSha256": "26205d01b4b9da86491bb5064392568a16a06b40b632b9c789e8a960bb96ec37",
+      "originalLines": [
+        [
+          1894,
+          1905
+        ],
+        [
+          2052,
+          2074
+        ]
+      ]
+    }
+  ],
+  "format": "Original BC6H unsigned linear HDR; native +X/-X/+Y/-Y/+Z/-Z faces and every authored mip",
+  "lightmapVersion": [
+    8,
+    2
+  ],
+  "gpuBytes": 524256,
+  "lastLod": 6,
+  "lod": "(NumMipLevels-1)*sqrt(clamp(perceptualRoughness,0,1)); pinned VRF20.1 Scene.cs, using extracted native mip count",
+  "arrays": [
+    {
+      "file": "cubes-0.bin.gz",
+      "firstCube": 0,
+      "layers": 6,
+      "gpuBytes": 524256,
+      "bytes": 478550,
+      "sha256": "dafa858d833e5bf61a2024c1f75b112cc707baaf4a536a873eb54f0a2e583c73",
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 393216,
+          "sha256": "0d88342fe001ae92db22e1d845fc1b95a490cb04d62a667d21546b441afdbee4"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 98304,
+          "sha256": "e48a55d4c435ba2ebfda4ad4fe4bd519f6ce0033c65ee53871ae669849ea383f"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 24576,
+          "sha256": "aceaf9ebba7c5cdeee4cbcbf9b5c6bd7322af7bbff33a3717def09770112f208"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 6144,
+          "sha256": "3a592d0609749096b8c4b26af7cf8d53c5596dd6bd4bf3eccf96e29cbce6a884"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 1536,
+          "sha256": "6603af08afd41bc5ce76a216c36b00fd5ad2dd9af45d6451257906510c69e9ce"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 384,
+          "sha256": "af5e29792b0662dd9931833978516a3e26219e07de6e8f5b3ddbabe0ec27499e"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 96,
+          "sha256": "5b77e834e1ad4f20a91ce650500493f2f2b390d3de908495654290923c455b27"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "worldToLocal": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        38.0,
+        397.5,
+        -340.0,
+        1.0
+      ],
+      "localToWorld": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -38.0,
+        -397.5,
+        340.0,
+        1.0
+      ],
+      "worldMin": [
+        -2456.10009765625,
+        -2928.10009765625,
+        155.89999389648438
+      ],
+      "worldMax": [
+        2460.10009765625,
+        1108.0999755859375,
+        472.1000061035156
+      ],
+      "rotated": false,
+      "sourceAngles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceScales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "index": 0,
+      "origin": [
+        -38.0,
+        -397.5,
+        340.0
+      ],
+      "min": [
+        -2418.10009765625,
+        -2530.60009765625,
+        -184.10000610351562
+      ],
+      "max": [
+        2498.10009765625,
+        1505.5999755859375,
+        132.10000610351562
+      ],
+      "localMin": [
+        -2418.10009765625,
+        -2530.60009765625,
+        -184.10000610351562
+      ],
+      "localMax": [
+        2498.10009765625,
+        1505.5999755859375,
+        132.10000610351562
+      ],
+      "worldAABB": [
+        [
+          -2456.10009765625,
+          -2928.10009765625,
+          155.89999389648438
+        ],
+        [
+          2460.10009765625,
+          1108.0999755859375,
+          472.1000061035156
+        ]
+      ],
+      "localFade": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "fade": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "authoredFade": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "priority": 0,
+      "handshake": 744203366,
+      "entity": "418",
+      "normalizationSH": [
+        0.025444503873586655,
+        0.009144650772213936,
+        0.07394412904977798,
+        0.42871448397636414
+      ]
+    }
+  ],
+  "worldMetadataSha256": "d4c597dc7a93f939f277cb21b7cf9ab219bdcca46ae700a7c70d315d4ee7edc6",
+  "nativeWorldLightingInfo": {
+    "m_nLightmapVersionNumber": 8,
+    "m_nLightmapGameVersionNumber": 2,
+    "m_vLightmapUvScale": [
+      1.032242,
+      1.032242
+    ],
+    "m_bHasLightmaps": true,
+    "m_lightMaps": [
+      "maps/prefabs/de_nuke/de_nuke_skybox02/lightmaps/direct_light_shadows.vtex",
+      "maps/prefabs/de_nuke/de_nuke_skybox02/lightmaps/irradiance.vtex",
+      "maps/prefabs/de_nuke/de_nuke_skybox02/lightmaps/debug_chart_color.vtex",
+      "maps/prefabs/de_nuke/de_nuke_skybox02/lightmaps/directional_irradiance.vtex"
+    ]
+  },
+  "sourceEngine": "Valve Source 2",
+  "mapAuthorship": {
+    "status": "unverified",
+    "qualification": "Original map-specific credits are not inferred from engine identity or installed package placement"
+  },
+  "sourceMapProvenance": {
+    "sourceSnapshotSha256": "9f8846ffc540fe86ca91dac8b7f7f25bcbe19258e6bf969a74dcdfc7106c52ef",
+    "steamBuildID": "26445667",
+    "steamManifestSHA256": "562accb4c52cd593b0393bf294f7c722d47e1388bc65524750c9a78f0c0f8d0e",
+    "mapPackage": {
+      "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\de_nuke.vpk",
+      "bytes": 246935525,
+      "sha256": "ab56860b13c86ead3f0f17f1488e4cec44ac0208dbfdda9f1fecb5d5e769d4a7"
+    },
+    "resourceArchive": {
+      "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\maps\\prefabs\\de_nuke\\de_nuke_skybox02.vpk",
+      "bytes": 4708053,
+      "sha256": "7a72c7adea4d4a0a4352cb56bfc0a48f52e7f63b2a4657eb7b57b103946ca2e7"
+    }
+  }
+}

@@ -1,0 +1,1049 @@
+{
+  "model": "/models/maps/vertigo-effects/world.glb.gz",
+  "effects": {
+    "steam_001_additive__alpha_1.0": {
+      "Name": "materials/effects/smoke/steam_001_additive.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_ADDITIVE_BLEND": 1,
+        "F_DEPTH_FEATHER": 1,
+        "F_RENDER_BACKFACES": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 1,
+        "g_flFadeDistance": 263.158,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFeatherDistance": 20,
+        "g_flFeatherFalloff": 1,
+        "g_flFresnelExponent": 2.501,
+        "g_flFresnelFalloff": 1.552,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 0.533
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0.01,
+          -0.025,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          0.1,
+          0.5,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          -0.01,
+          -0.025,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          0.07,
+          0.4,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/smoke/steam_001_additive_vmat_g_tcolor_37c55b5d.vtex",
+        "g_tMask1": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex",
+        "g_tMask2": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    },
+    "vertigo_glow_001__alpha_1.0": {
+      "Name": "materials/de_vertigo/vertigo_glow_001.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_DEPTH_FEATHER": 1,
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 18.75,
+        "g_flFadeDistance": 0,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFeatherDistance": 437.917,
+        "g_flFeatherFalloff": 1,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 0.872
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          -0.002,
+          0.004,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          6,
+          7,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0,
+          0.001,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          2,
+          3,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          0.001,
+          0.002,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          2.3,
+          3.3,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          0.52549,
+          0.847059,
+          0.996078,
+          0
+        ],
+        "TextureMask1": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureMask2": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureMask3": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureTranslucency": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/de_vertigo/vertigo_glow_001_vmat_g_tcolor_f22ad4b8.vtex",
+        "g_tMask1": "materials/de_vertigo/vertigo_glow_001_vmat_g_tmask1_2b2ebb3f.vtex",
+        "g_tMask2": "materials/de_vertigo/vertigo_glow_001_vmat_g_tmask2_2b2ebb3f.vtex",
+        "g_tMask3": "materials/de_vertigo/vertigo_glow_001_vmat_g_tmask3_2b2ebb3f.vtex"
+      }
+    }
+  },
+  "textures": {
+    "materials/effects/smoke/steam_001_additive_vmat_g_tcolor_37c55b5d.vtex": {
+      "path": "/models/maps/vertigo-effects/46e29fbf1071d1b7.webp",
+      "srgb": true,
+      "sourceSha256": "4bb2d7168861608b1366359a0f895b6313fe2c7bb0ef0e2351d8a01847d0ef93",
+      "nativeMip": 0,
+      "width": 1,
+      "height": 1,
+      "pixelEquality": true
+    },
+    "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex": {
+      "path": "/models/maps/vertigo-effects/d49a987174c44d8a.webp",
+      "srgb": false,
+      "sourceSha256": "14dd80e0305c1dbd06edc85f3a50ede968491fe01f383e3cc4d48ecf0e989854",
+      "nativeMip": 0,
+      "width": 512,
+      "height": 512,
+      "pixelEquality": true
+    },
+    "materials/default/default_mask_tga_344101f8.vtex": {
+      "path": "/models/maps/vertigo-effects/0d5b16c57091556d.webp",
+      "srgb": false,
+      "sourceSha256": "a1d433f0b043c5a4da3ad08472cd1cb314bf10948c377e77ed6cd9b2535687b5",
+      "nativeMip": 0,
+      "width": 1,
+      "height": 1,
+      "pixelEquality": true
+    },
+    "materials/de_vertigo/vertigo_glow_001_vmat_g_tcolor_f22ad4b8.vtex": {
+      "path": "/models/maps/vertigo-effects/105a5d8e57217da8.webp",
+      "srgb": true,
+      "sourceSha256": "cbba36ff8f750d389d9002cacb3cb913d8a15c09c77494ad1f13eb2a06b0db98",
+      "nativeMip": 0,
+      "width": 1,
+      "height": 1,
+      "pixelEquality": true
+    },
+    "materials/de_vertigo/vertigo_glow_001_vmat_g_tmask1_2b2ebb3f.vtex": {
+      "path": "/models/maps/vertigo-effects/4dae16cd2e6ed2c3.webp",
+      "srgb": false,
+      "sourceSha256": "e00a469617f3b43afb7ac175afb79819068360fc0871b7628b288981951d7802",
+      "nativeMip": 0,
+      "width": 1,
+      "height": 1,
+      "pixelEquality": true
+    },
+    "materials/de_vertigo/vertigo_glow_001_vmat_g_tmask2_2b2ebb3f.vtex": {
+      "path": "/models/maps/vertigo-effects/ebd977d282f2bd60.webp",
+      "srgb": false,
+      "sourceSha256": "e00a469617f3b43afb7ac175afb79819068360fc0871b7628b288981951d7802",
+      "nativeMip": 0,
+      "width": 1,
+      "height": 1,
+      "pixelEquality": true
+    },
+    "materials/de_vertigo/vertigo_glow_001_vmat_g_tmask3_2b2ebb3f.vtex": {
+      "path": "/models/maps/vertigo-effects/b0284d5fba6365d5.webp",
+      "srgb": false,
+      "sourceSha256": "e00a469617f3b43afb7ac175afb79819068360fc0871b7628b288981951d7802",
+      "nativeMip": 0,
+      "width": 1,
+      "height": 1,
+      "pixelEquality": true
+    }
+  },
+  "source": {
+    "mapId": "vertigo",
+    "browserWorldSpace": true,
+    "worldSha256": "14c30520e748f744679c01e961997dc456d9d07999d523bcf0cd4a43e168279c",
+    "entitiesSha256": "6b680f4ee8ce78d4fc079910d6579562f4af579855757c1c72a853890dda0ed3",
+    "nativeDrawJoinSha256": "11ea3e1200ae17397bd312ed49a316e0b5bc6e83b3c46d74f7f06225b52fa2f5",
+    "draws": [
+      {
+        "node": "n0_lr0_c0_s_nomerge1_steam_001_additive.meshset_0",
+        "material": "steam_001_additive__alpha_1.0",
+        "sourceMesh": 98,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.554227,
+          0.645555,
+          0.74453
+        ],
+        "sourceModelSha256": "40db86936d16181e69e631e678d6ed67c4b23bcfd972ffa8b0fdfec479029fc6"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge10_vertigo_glow_001.meshset_0",
+        "material": "vertigo_glow_001__alpha_1.0",
+        "sourceMesh": 107,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "sourceModelSha256": "abc4d657054903abe92177067f294c5a305a70cd17e9bc29998dd7fb349affe3"
+      },
+      {
+        "node": "n0_lr0_c0_s_nomerge11_steam_001_additive.meshset_0",
+        "material": "steam_001_additive__alpha_1.0",
+        "sourceMesh": 108,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.554227,
+          0.645555,
+          0.74453
+        ],
+        "sourceModelSha256": "e65104cedcd00627e5ee81855c7a140684dfbfe3df02748215b418b3214ff2a7"
+      },
+      {
+        "node": "n0_lr0_c0_s_nomerge12_steam_001_additive.meshset_0",
+        "material": "steam_001_additive__alpha_1.0",
+        "sourceMesh": 109,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.554227,
+          0.645555,
+          0.74453
+        ],
+        "sourceModelSha256": "2108d45394ed4e907ab2eacb85161a93007ed000560dd31f89e22582e89a2927"
+      },
+      {
+        "node": "n0_lr0_c0_s_nomerge18_steam_001_additive.meshset_0",
+        "material": "steam_001_additive__alpha_1.0",
+        "sourceMesh": 115,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.554227,
+          0.645555,
+          0.74453
+        ],
+        "sourceModelSha256": "f9f8d2b012340776155e47129c9c30dbb31a96e8b15b02ce2a4b1cd4ff940b1c"
+      },
+      {
+        "node": "n0_lr0_c0_s_nomerge19_steam_001_additive.meshset_0",
+        "material": "steam_001_additive__alpha_1.0",
+        "sourceMesh": 116,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.554227,
+          0.645555,
+          0.74453
+        ],
+        "sourceModelSha256": "a78944ac7447d8974154d221bbe31dfff8b13f8166a9fdcdde837d81148a2273"
+      },
+      {
+        "node": "n0_lr0_c0_s_nomerge21_steam_001_additive.meshset_0",
+        "material": "steam_001_additive__alpha_1.0",
+        "sourceMesh": 118,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.554227,
+          0.645555,
+          0.74453
+        ],
+        "sourceModelSha256": "e36894c393cce7c0589e93de251b4b98d73286947a5b9f2400f3f4c32d5326c4"
+      },
+      {
+        "node": "n0_lr0_c0_s_nomerge31_steam_001_additive.meshset_0",
+        "material": "steam_001_additive__alpha_1.0",
+        "sourceMesh": 128,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.554227,
+          0.645555,
+          0.74453
+        ],
+        "sourceModelSha256": "133bc8c8cb8bb3dc6570a3f3487039527fc09f84fef93b5ea2063a2319d80e57"
+      }
+    ],
+    "disabledRetakesOwnersAudit": [
+      {
+        "node": "retake_asite_2_31017_6352.hammer_mesh_0",
+        "entityId": "2:31017:6352",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "targetname": "[PR#]retake.asite",
+          "useLocalOffset": false,
+          "renderfx": "0",
+          "rendermode": "0",
+          "renderamt": 255,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "disablereceiveshadows": false,
+          "fademindist": -1.0,
+          "fademaxdist": 0.0,
+          "rendertocubemaps": false,
+          "lightmapstatic": "1",
+          "InputFilter": "0",
+          "StartDisabled": true,
+          "disableshadows": "1",
+          "spawnflags": 2,
+          "Solidity": "0",
+          "invert_exclusion": "0",
+          "solidbsp": false,
+          "ScriptedMovement": false,
+          "vrad_brush_cast_shadows": "0",
+          "object_culling": "0",
+          "classname": "func_brush",
+          "compile_source_id": 3439,
+          "origin": [
+            -128.0,
+            -515.0,
+            11963.299805
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:6352",
+          "model": "maps/de_vertigo/entities/retake_asite_2_31017_6352.vmdl"
+        }
+      },
+      {
+        "node": "retake_asite_2_31017_6356.hammer_mesh_0",
+        "entityId": "2:31017:6356",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "targetname": "[PR#]retake.asite",
+          "useLocalOffset": false,
+          "renderfx": "0",
+          "rendermode": "0",
+          "renderamt": 255,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "disablereceiveshadows": false,
+          "fademindist": -1.0,
+          "fademaxdist": 0.0,
+          "rendertocubemaps": false,
+          "lightmapstatic": "1",
+          "InputFilter": "0",
+          "StartDisabled": true,
+          "disableshadows": "1",
+          "spawnflags": 2,
+          "Solidity": "0",
+          "invert_exclusion": "0",
+          "solidbsp": false,
+          "ScriptedMovement": false,
+          "vrad_brush_cast_shadows": "0",
+          "object_culling": "0",
+          "classname": "func_brush",
+          "compile_source_id": 3441,
+          "origin": [
+            -57.0,
+            -637.0,
+            11966.299805
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:6356",
+          "model": "maps/de_vertigo/entities/retake_asite_2_31017_6356.vmdl"
+        }
+      },
+      {
+        "node": "retake_asite_2_31017_6360.hammer_mesh_0",
+        "entityId": "2:31017:6360",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "targetname": "[PR#]retake.asite",
+          "useLocalOffset": false,
+          "renderfx": "0",
+          "rendermode": "0",
+          "renderamt": 255,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "disablereceiveshadows": false,
+          "fademindist": -1.0,
+          "fademaxdist": 0.0,
+          "rendertocubemaps": false,
+          "lightmapstatic": "1",
+          "InputFilter": "0",
+          "StartDisabled": true,
+          "disableshadows": "1",
+          "spawnflags": 2,
+          "Solidity": "0",
+          "invert_exclusion": "0",
+          "solidbsp": false,
+          "ScriptedMovement": false,
+          "vrad_brush_cast_shadows": "0",
+          "object_culling": "0",
+          "classname": "func_brush",
+          "compile_source_id": 3443,
+          "origin": [
+            46.5,
+            -649.98999,
+            11877.5
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:6360",
+          "model": "maps/de_vertigo/entities/retake_asite_2_31017_6360.vmdl"
+        }
+      },
+      {
+        "node": "retake_asite_2_31017_6364.hammer_mesh_0",
+        "entityId": "2:31017:6364",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "targetname": "[PR#]retake.asite",
+          "useLocalOffset": false,
+          "renderfx": "0",
+          "rendermode": "0",
+          "renderamt": 255,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "disablereceiveshadows": false,
+          "fademindist": -1.0,
+          "fademaxdist": 0.0,
+          "rendertocubemaps": false,
+          "lightmapstatic": "1",
+          "InputFilter": "0",
+          "StartDisabled": true,
+          "disableshadows": "1",
+          "spawnflags": 2,
+          "Solidity": "0",
+          "invert_exclusion": "0",
+          "solidbsp": false,
+          "ScriptedMovement": false,
+          "vrad_brush_cast_shadows": "0",
+          "object_culling": "0",
+          "classname": "func_brush",
+          "compile_source_id": 3445,
+          "origin": [
+            -153.009995,
+            -484.0,
+            11958.400391
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:6364",
+          "model": "maps/de_vertigo/entities/retake_asite_2_31017_6364.vmdl"
+        }
+      },
+      {
+        "node": "retake_asite_2_31017_6372.hammer_mesh_0",
+        "entityId": "2:31017:6372",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "targetname": "[PR#]retake.asite",
+          "useLocalOffset": false,
+          "renderfx": "0",
+          "rendermode": "0",
+          "renderamt": 255,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "disablereceiveshadows": false,
+          "fademindist": -1.0,
+          "fademaxdist": 0.0,
+          "rendertocubemaps": false,
+          "lightmapstatic": "1",
+          "InputFilter": "0",
+          "StartDisabled": true,
+          "disableshadows": "1",
+          "spawnflags": 2,
+          "Solidity": "0",
+          "invert_exclusion": "0",
+          "solidbsp": false,
+          "ScriptedMovement": false,
+          "vrad_brush_cast_shadows": "0",
+          "object_culling": "0",
+          "classname": "func_brush",
+          "compile_source_id": 3448,
+          "origin": [
+            -588.98999,
+            -644.5,
+            11930.299805
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:6372",
+          "model": "maps/de_vertigo/entities/retake_asite_2_31017_6372.vmdl"
+        }
+      },
+      {
+        "node": "retake_asite_2_31017_6376.hammer_mesh_0",
+        "entityId": "2:31017:6376",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "targetname": "[PR#]retake.asite",
+          "useLocalOffset": false,
+          "renderfx": "0",
+          "rendermode": "0",
+          "renderamt": 255,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "disablereceiveshadows": false,
+          "fademindist": -1.0,
+          "fademaxdist": 0.0,
+          "rendertocubemaps": false,
+          "lightmapstatic": "1",
+          "InputFilter": "0",
+          "StartDisabled": true,
+          "disableshadows": "1",
+          "spawnflags": 2,
+          "Solidity": "0",
+          "invert_exclusion": "0",
+          "solidbsp": false,
+          "ScriptedMovement": false,
+          "vrad_brush_cast_shadows": "0",
+          "object_culling": "0",
+          "classname": "func_brush",
+          "compile_source_id": 3450,
+          "origin": [
+            -267.48999,
+            -464.600006,
+            11926.299805
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:6376",
+          "model": "maps/de_vertigo/entities/retake_asite_2_31017_6376.vmdl"
+        }
+      },
+      {
+        "node": "retake_asite_2_31017_9009.hammer_mesh_0",
+        "entityId": "2:31017:9009",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "vrad_brush_cast_shadows": "0",
+          "ScriptedMovement": false,
+          "solidbsp": false,
+          "invert_exclusion": "0",
+          "Solidity": "0",
+          "spawnflags": 2,
+          "disableshadows": "1",
+          "StartDisabled": true,
+          "InputFilter": "0",
+          "lightmapstatic": "1",
+          "rendertocubemaps": false,
+          "object_culling": "0",
+          "fademaxdist": 0.0,
+          "fademindist": -1.0,
+          "disablereceiveshadows": false,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "renderamt": 255,
+          "rendermode": "0",
+          "renderfx": "0",
+          "useLocalOffset": false,
+          "targetname": "[PR#]retake.asite",
+          "classname": "func_brush",
+          "compile_source_id": 3453,
+          "origin": [
+            92.0,
+            -698.0,
+            11877.5
+          ],
+          "angles": [
+            0.0,
+            270.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:9009",
+          "model": "maps/de_vertigo/entities/retake_asite_2_31017_9009.vmdl"
+        }
+      },
+      {
+        "node": "retake_bsite_2_31017_8992.hammer_mesh_0",
+        "entityId": "2:31017:8992",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "vrad_brush_cast_shadows": "0",
+          "ScriptedMovement": false,
+          "solidbsp": false,
+          "invert_exclusion": "0",
+          "Solidity": "0",
+          "spawnflags": 2,
+          "disableshadows": "1",
+          "StartDisabled": true,
+          "InputFilter": "0",
+          "lightmapstatic": "1",
+          "rendertocubemaps": false,
+          "object_culling": "0",
+          "fademaxdist": 0.0,
+          "fademindist": -1.0,
+          "disablereceiveshadows": false,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "renderamt": 255,
+          "rendermode": "0",
+          "renderfx": "0",
+          "useLocalOffset": false,
+          "targetname": "[PR#]retake.bsite",
+          "classname": "func_brush",
+          "compile_source_id": 3460,
+          "origin": [
+            -2543.5,
+            469.0,
+            11900.5
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:8992",
+          "model": "maps/de_vertigo/entities/retake_bsite_2_31017_8992.vmdl"
+        }
+      },
+      {
+        "node": "retake_bsite_2_31017_8994.hammer_mesh_0",
+        "entityId": "2:31017:8994",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "vrad_brush_cast_shadows": "0",
+          "ScriptedMovement": false,
+          "solidbsp": false,
+          "invert_exclusion": "0",
+          "Solidity": "0",
+          "spawnflags": 2,
+          "disableshadows": "1",
+          "StartDisabled": true,
+          "InputFilter": "0",
+          "lightmapstatic": "1",
+          "rendertocubemaps": false,
+          "object_culling": "0",
+          "fademaxdist": 0.0,
+          "fademindist": -1.0,
+          "disablereceiveshadows": false,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "renderamt": 255,
+          "rendermode": "0",
+          "renderfx": "0",
+          "useLocalOffset": false,
+          "targetname": "[PR#]retake.bsite",
+          "classname": "func_brush",
+          "compile_source_id": 3461,
+          "origin": [
+            -2077.0,
+            719.0,
+            11925.299805
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:8994",
+          "model": "maps/de_vertigo/entities/retake_bsite_2_31017_8994.vmdl"
+        }
+      },
+      {
+        "node": "retake_bsite_2_31017_9001.hammer_mesh_0",
+        "entityId": "2:31017:9001",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "vrad_brush_cast_shadows": "0",
+          "ScriptedMovement": false,
+          "solidbsp": false,
+          "invert_exclusion": "0",
+          "Solidity": "0",
+          "spawnflags": 2,
+          "disableshadows": "1",
+          "StartDisabled": true,
+          "InputFilter": "0",
+          "lightmapstatic": "1",
+          "rendertocubemaps": false,
+          "object_culling": "0",
+          "fademaxdist": 0.0,
+          "fademindist": -1.0,
+          "disablereceiveshadows": false,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "renderamt": 255,
+          "rendermode": "0",
+          "renderfx": "0",
+          "useLocalOffset": false,
+          "targetname": "[PR#]retake.bsite",
+          "classname": "func_brush",
+          "compile_source_id": 3462,
+          "origin": [
+            -2656.0,
+            760.5,
+            11888.0
+          ],
+          "angles": [
+            0.0,
+            270.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:9001",
+          "model": "maps/de_vertigo/entities/retake_bsite_2_31017_9001.vmdl"
+        }
+      },
+      {
+        "node": "retake_bsite_2_31017_9006.hammer_mesh_0",
+        "entityId": "2:31017:9006",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "vrad_brush_cast_shadows": "0",
+          "ScriptedMovement": false,
+          "solidbsp": false,
+          "invert_exclusion": "0",
+          "Solidity": "0",
+          "disableshadows": "0",
+          "InputFilter": "0",
+          "lightmapstatic": "0",
+          "rendertocubemaps": false,
+          "object_culling": "0",
+          "fademaxdist": 0.0,
+          "fademindist": -1.0,
+          "disablereceiveshadows": false,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "renderamt": 255,
+          "rendermode": "kRenderNormal",
+          "renderfx": "kRenderFxNone",
+          "spawnflags": 2,
+          "StartDisabled": true,
+          "useLocalOffset": false,
+          "targetname": "[PR#]retake.bsite",
+          "classname": "func_brush",
+          "compile_source_id": 3832,
+          "origin": [
+            -2630.5,
+            1094.0,
+            11888.0
+          ],
+          "angles": [
+            0.0,
+            270.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:9006",
+          "model": "maps/de_vertigo/entities/retake_bsite_2_31017_9006.vmdl"
+        }
+      },
+      {
+        "node": "retake_bsite_2_31017_9008.hammer_mesh_0",
+        "entityId": "2:31017:9008",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "vrad_brush_cast_shadows": "0",
+          "ScriptedMovement": false,
+          "solidbsp": false,
+          "invert_exclusion": "0",
+          "Solidity": "0",
+          "disableshadows": "0",
+          "InputFilter": "0",
+          "lightmapstatic": "0",
+          "rendertocubemaps": false,
+          "object_culling": "0",
+          "fademaxdist": 0.0,
+          "fademindist": -1.0,
+          "disablereceiveshadows": false,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "renderamt": 255,
+          "rendermode": "kRenderNormal",
+          "renderfx": "kRenderFxNone",
+          "spawnflags": 2,
+          "StartDisabled": true,
+          "useLocalOffset": false,
+          "targetname": "[PR#]retake.bsite",
+          "classname": "func_brush",
+          "compile_source_id": 3833,
+          "origin": [
+            -2344.5,
+            1120.0,
+            11888.0
+          ],
+          "angles": [
+            0.0,
+            270.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:9008",
+          "model": "maps/de_vertigo/entities/retake_bsite_2_31017_9008.vmdl"
+        }
+      },
+      {
+        "node": "retake_asite_2_31017_9012.hammer_mesh_0",
+        "entityId": "2:31017:9012",
+        "native": {
+          "AlwaysSolidIgnoreNav": false,
+          "NoInterpolate": false,
+          "vrad_brush_cast_shadows": "0",
+          "ScriptedMovement": false,
+          "solidbsp": false,
+          "invert_exclusion": "0",
+          "Solidity": "0",
+          "disableshadows": "0",
+          "InputFilter": "0",
+          "lightmapstatic": "0",
+          "rendertocubemaps": false,
+          "object_culling": "0",
+          "fademaxdist": 0.0,
+          "fademindist": -1.0,
+          "disablereceiveshadows": false,
+          "rendercolor": [
+            255,
+            0,
+            0
+          ],
+          "renderamt": 255,
+          "rendermode": "kRenderNormal",
+          "renderfx": "kRenderFxNone",
+          "spawnflags": 2,
+          "StartDisabled": true,
+          "useLocalOffset": false,
+          "targetname": "[PR#]retake.asite",
+          "classname": "func_brush",
+          "compile_source_id": 3834,
+          "origin": [
+            -582.0,
+            -644.5,
+            11902.5
+          ],
+          "angles": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scales": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hammerUniqueId": "2:31017:9012",
+          "model": "maps/de_vertigo/entities/retake_asite_2_31017_9012.vmdl"
+        }
+      }
+    ],
+    "qualification": "Original visible native FX geometry/parameters and draw opacity retained; runtime uses source-backed effect shader and main opaque depth, with native Source-unit fade distances."
+  }
+}

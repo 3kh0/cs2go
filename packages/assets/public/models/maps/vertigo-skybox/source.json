@@ -1,0 +1,667 @@
+{
+  "model": "/models/maps/vertigo-skybox/world.glb.gz",
+  "lighting": {
+    "size": 512,
+    "nativeIrradiance": "/models/maps/vertigo-skybox/irradiance.bin.gz",
+    "nativeDirectional": "/models/maps/vertigo-skybox/directional.bin.gz",
+    "irradiance": "/models/maps/vertigo-skybox/irradiance.exr",
+    "directional": "/models/maps/vertigo-skybox/directional.png",
+    "shadows": "/models/maps/vertigo-skybox/shadows.png"
+  },
+  "effects": {
+    "vertigo_clouds_001": {
+      "Name": "materials/de_vertigo/vertigo_clouds_001.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 2.2,
+        "g_flFadeDistance": 1,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          -0.001,
+          0.002,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          7,
+          7,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0,
+          0.001,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          2,
+          3,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          0.001,
+          0.002,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          2.3,
+          3.3,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/glows/sun_glow_003_trans_psd_716d1bb6.vtex",
+        "g_tMask1": "materials/effects/clouds_001_mask_psd_a537be2a.vtex",
+        "g_tMask2": "materials/effects/clouds_002_mask_psd_73cd86a7.vtex",
+        "g_tMask3": "materials/effects/noise_fractal_001_mask_psd_88aff3b4.vtex"
+      }
+    },
+    "horizon_001_skybox": {
+      "Name": "materials/effects/smoke/horizon_001_skybox.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 2.7,
+        "g_flFadeDistance": 0,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0.002,
+          0,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          1,
+          0.25,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0.01,
+          0.006,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          0.4,
+          0.1,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          0.025,
+          0,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          0.4,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureMask2": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "TextureTranslucency": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/smoke/horizon_001_skybox_vmat_g_tcolor_e42befc7.vtex",
+        "g_tMask1": "materials/effects/clouds_001_mask_psd_a537be2a.vtex",
+        "g_tMask2": "materials/effects/smoke/horizon_001_skybox_vmat_g_tmask2_2b2ebb3f.vtex",
+        "g_tMask3": "materials/effects/smoke/steam_002_mask_psd_8b757a6d.vtex"
+      }
+    },
+    "steam_001_additive": {
+      "Name": "materials/effects/smoke/steam_001_additive.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_ADDITIVE_BLEND": 1,
+        "F_DEPTH_FEATHER": 1,
+        "F_RENDER_BACKFACES": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 1,
+        "g_flFadeDistance": 263.158,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFeatherDistance": 20,
+        "g_flFeatherFalloff": 1,
+        "g_flFresnelExponent": 2.501,
+        "g_flFresnelFalloff": 1.552,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 0.533
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0.01,
+          -0.025,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          0.1,
+          0.5,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          -0.01,
+          -0.025,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          0.07,
+          0.4,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/smoke/steam_001_additive_vmat_g_tcolor_37c55b5d.vtex",
+        "g_tMask1": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex",
+        "g_tMask2": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    },
+    "sun_glow_001": {
+      "Name": "materials/effects/glows/sun_glow_001.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_ADDITIVE_BLEND": 1,
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "g_bFogEnabled": 0,
+        "g_nTextureAddressModeU": 2,
+        "g_nTextureAddressModeV": 2
+      },
+      "FloatParams": {
+        "g_flColorBoost": 1,
+        "g_flFadeDistance": 1,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/glows/sun_glow_001_trans_psd_188c1738.vtex",
+        "g_tMask1": "materials/default/default_mask_tga_344101f8.vtex",
+        "g_tMask2": "materials/default/default_mask_tga_344101f8.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    },
+    "sun_disc_glow_001": {
+      "Name": "materials/effects/glows/sun_disc_glow_001.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_ADDITIVE_BLEND": 1,
+        "g_bFogEnabled": 0,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 129.93,
+        "g_flFadeDistance": 1,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFresnelExponent": 0.001,
+        "g_flFresnelFalloff": 1,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 1
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/glows/sun_disk_glow_001_trans_psd_e0699c26.vtex",
+        "g_tMask1": "materials/default/default_mask_tga_344101f8.vtex",
+        "g_tMask2": "materials/default/default_mask_tga_344101f8.vtex",
+        "g_tMask3": "materials/default/default_mask_tga_344101f8.vtex"
+      }
+    }
+  },
+  "textures": {
+    "materials/effects/glows/sun_glow_003_trans_psd_716d1bb6.vtex": {
+      "path": "/models/maps/vertigo-skybox/2a29a5f408eae3c0.png",
+      "srgb": true,
+      "sourceSha256": "52c6bdbb6a96481ae0b4bd9d5d0ae5f4fa5817db3c350243b4882c1379cc92c2"
+    },
+    "materials/effects/clouds_001_mask_psd_a537be2a.vtex": {
+      "path": "/models/maps/vertigo-skybox/f48aca539acdfdb5.png",
+      "srgb": false,
+      "sourceSha256": "77ef0542dccb58af31e61d62948c0f63f1efed9c7d22d0e2531ad5a00412e01d"
+    },
+    "materials/effects/clouds_002_mask_psd_73cd86a7.vtex": {
+      "path": "/models/maps/vertigo-skybox/3e7bdbe6b87fd1e8.png",
+      "srgb": false,
+      "sourceSha256": "f274eea96fc97eb2ba489f5eb0cce614e385caba256a631a6705c7a24492b8ae"
+    },
+    "materials/effects/noise_fractal_001_mask_psd_88aff3b4.vtex": {
+      "path": "/models/maps/vertigo-skybox/75cd5a8c09c6fce9.png",
+      "srgb": false,
+      "sourceSha256": "0c9d18d04f6144fa2bdf37bd83a424ed9315c7420006925b1270aa2f159ca258"
+    },
+    "materials/effects/smoke/horizon_001_skybox_vmat_g_tcolor_e42befc7.vtex": {
+      "path": "/models/maps/vertigo-skybox/fdf9c6162802bf04.png",
+      "srgb": true,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/smoke/horizon_001_skybox_vmat_g_tmask2_2b2ebb3f.vtex": {
+      "path": "/models/maps/vertigo-skybox/5da043f57fa1a74c.png",
+      "srgb": false,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/smoke/steam_002_mask_psd_8b757a6d.vtex": {
+      "path": "/models/maps/vertigo-skybox/2be41487be24e392.png",
+      "srgb": false,
+      "sourceSha256": "e0f0df240bb13e1bcef0574e3ba030e071d43bf9f431fb190517ae90b98af57c"
+    },
+    "materials/effects/smoke/steam_001_additive_vmat_g_tcolor_37c55b5d.vtex": {
+      "path": "/models/maps/vertigo-skybox/46e29fbf1071d1b7.png",
+      "srgb": true,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex": {
+      "path": "/models/maps/vertigo-skybox/d49a987174c44d8a.png",
+      "srgb": false,
+      "sourceSha256": "86a5a3896051fabfe132d8b602d0cb5fb51f3c30bea3a9dab214ca43618d10dc"
+    },
+    "materials/default/default_mask_tga_344101f8.vtex": {
+      "path": "/models/maps/vertigo-skybox/0d5b16c57091556d.png",
+      "srgb": false,
+      "sourceSha256": "ebd3c78be259dd40dc054514fbd1fea79ab6ca5b0d0c480e4bf283e1195cdff3"
+    },
+    "materials/effects/glows/sun_glow_001_trans_psd_188c1738.vtex": {
+      "path": "/models/maps/vertigo-skybox/7d15e378ac42b729.png",
+      "srgb": true,
+      "sourceSha256": "088be01f6938622162d35ca4c8bee1f7dffd815da6245bd792ed3f8f4feb3b3b"
+    },
+    "materials/effects/glows/sun_disk_glow_001_trans_psd_e0699c26.vtex": {
+      "path": "/models/maps/vertigo-skybox/17b4ca28f2bedf7b.png",
+      "srgb": true,
+      "sourceSha256": "b2d4e2ab215a0f2789edc9795ab09dbb5843a87a0265ef587ddaf8af0d6a635a"
+    }
+  },
+  "nativeTransform": {
+    "skyCamera": {
+      "scale": 16,
+      "classname": "sky_camera",
+      "origin": "8.000000 40.000000 64.000000",
+      "angles": "0.000000 0.000000 0.000000",
+      "scales": "1.000000 1.000000 1.000000",
+      "hammerUniqueId": "38"
+    },
+    "skyboxReference": {
+      "targetMapName": "maps/prefabs/de_vertigo/skybox2.vmap",
+      "fixupNames": false,
+      "worldGroupID": "skyboxWorldGroup0",
+      "classname": "skybox_reference",
+      "compile_source_id": 2604,
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hammerUniqueId": "2:31017:4651"
+    },
+    "noCenteringOrNormalization": true,
+    "browserWorldFromSkyBrowser": [
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.0,
+      0.0,
+      -3.2512,
+      -26.0096,
+      16.256,
+      1.0
+    ]
+  },
+  "probes": "/models/maps/vertigo-skybox/gpu-probes/",
+  "sun": {
+    "pitch": 61.999989,
+    "yaw": 53.999996,
+    "color": 16774106,
+    "intensity": 10.210176124166829
+  },
+  "ambient": {
+    "skyColor": 9612747,
+    "groundColor": 8289918,
+    "intensity": 1.5
+  },
+  "panorama": {
+    "angles": [
+      0.0,
+      247.5,
+      0.0
+    ],
+    "brightness": 2.0,
+    "tint": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "counts": {
+    "effects": 620,
+    "lightmapped": 20,
+    "probeOrUnlit": 90
+  },
+  "selfIllumination": {
+    "vertigo_buildingskyline_ft": {
+      "brightness": 0,
+      "scale": 1,
+      "tint": [
+        1,
+        1,
+        1
+      ],
+      "albedoFactor": 1
+    }
+  },
+  "source": {
+    "worldSha256": "caac7b58dddc05d19c879f2ab05aaeb9cc9b63c9f7af93418b3d92eeb4f533e6",
+    "worldInfoSha256": "0d741f903a5ab25afe385e6fc22b417b0cf39b6ded35873c27e613f271826806",
+    "uvJoinSha256": "a7703c326fb2bf5627dc6d2504a952863a89945a34d1d13888ce4fdaa4f3c81a",
+    "cameraSha256": "588928ec74657aade32214a6d3c2d194ec32fe92070dadf58a61c700fcb96a28",
+    "entitySha256": "9a1824a0c3bdf2070cca947ade44978ebbef3e78eebb72916b60a8146d5da0b9",
+    "atlases": {
+      "irradiance": {
+        "sha256": "3e4ebb9803a1d88810718c4fa4852d7da231cca5ce2e292391b29f3528670415",
+        "dimensions": {
+          "width": 512,
+          "height": 512,
+          "depth": 1,
+          "format": 19,
+          "mips": 1
+        }
+      },
+      "directional_irradiance": {
+        "sha256": "c58fef1f8452f63bbffe15e2b68005c4d60446fa8afb181ec6d41bbfed6d328d",
+        "dimensions": {
+          "width": 512,
+          "height": 512,
+          "depth": 1,
+          "format": 1,
+          "mips": 1
+        }
+      },
+      "direct_light_shadows": {
+        "sha256": "87cf5f6865c2b41747334f1aa6650ba4d7e14582c2243db344c5d059a05014b8",
+        "dimensions": {
+          "width": 512,
+          "height": 512,
+          "depth": 1,
+          "format": 27,
+          "mips": 1
+        }
+      }
+    },
+    "coordinateConversion": "Standalone S2V (y,z,x) metres -> browser basis once; native sky_camera offset/scale then skybox_reference rotation/translation. Never recenter, normalize, clip to NAV or scale UV charts again.",
+    "lightmapUvScaleAlreadyBaked": [
+      1.015858,
+      1.015858
+    ],
+    "reference": "VRF20.1 WorldLoader.LoadSkybox + EntityTransformHelper; browser shaders, fixed exposure and material adaptation do not establish private Source2 parity.",
+    "counts": {
+      "effects": 620,
+      "lightmapped": 20,
+      "probeOrUnlit": 90
+    },
+    "triangles": 76748,
+    "shaderCounts": {
+      "csgo_effects.vfx": 620,
+      "csgo_vertexlitgeneric.vfx": 22,
+      "csgo_complex.vfx": 88
+    },
+    "bounds": [
+      [
+        -14019.19921875,
+        -1828.8258056640625,
+        -13941.8359375
+      ],
+      [
+        14168.7548828125,
+        5456.4013671875,
+        13974.34765625
+      ]
+    ],
+    "selfIllumination": {
+      "vertigo_buildingskyline_ft": {
+        "brightness": 0,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    "ownReflections": {
+      "manifestSha256": "c5eeba11b3de02e36ed34fb4743edb8ed1c010fa46767919531c5f1e49088d15",
+      "coordinateFrame": "Original sky Source positions/volumes/cube orientation/SH. NativeSkyFrame reverses baked main placement for shader positions/normal/view and candidate bounds exactly once.",
+      "qualification": "Exact original native BC6H faces and authored mips; existing runtime capability fallback remains on devices without BPTC/fragment uniforms/array capacity. No synthetic HDR mip fallback."
+    },
+    "shaderCoordinateFrame": {
+      "position": "NativeSkyFrame reconstructs own sky Source coordinates by inverting authored skybox_reference rotation/translation and sky_camera origin/scale once. Geometry stays baked in main-world browser coordinates; raw reflection boxes/cubes/SH stay in own native Source coordinates.",
+      "modernEnvironment": "Biplanar, wetness and facing fields use own-frame positions/normals; Source-unit bevel displacement uses native sky scale.",
+      "atlasCurvature": "Source-unit curvature uses0.0254*skyCamera.scale per baked browser metre; main-map default remains1.",
+      "clock": "Native environment.update is stepped by the same own-sky preparation clock as fog/cloud effects."
+    }
+  },
+  "reflections": {
+    "directory": "/models/maps/vertigo-skybox/lighting/reflections/",
+    "manifest": "source.json",
+    "volumes": 1,
+    "maxGpuBytes": 524256
+  }
+}

@@ -1,0 +1,1979 @@
+{
+  "mapId": "nuke",
+  "materials": {
+    "hr_gravel_dirt_001_blend": {
+      "resource": "materials/ground/hr_g/hr_gravel_dirt_001_blend.vmat",
+      "nativeParameters": {
+        "Name": "materials/ground/hr_g/hr_gravel_dirt_001_blend.vmat",
+        "ShaderName": "csgo_lightmappedgeneric.vfx",
+        "IntParams": {
+          "F_DETAILTEXTURE": 1,
+          "F_FANCY_BLENDING": 1,
+          "F_LAYERS": 1,
+          "F_TEXTURETRANSFORMS": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBevelBlendSharpness": 2,
+          "g_flBevelBlendStrength": 0,
+          "g_flBevelBlendWidth": 4,
+          "g_flBlendModulateTexCoordRotation": 0,
+          "g_flBlendSoftness": 0.5,
+          "g_flLayer1NormalTexCoordRotation": 0,
+          "g_flLayer1TexCoordRotation": 0,
+          "g_flLayer2NormalTexCoordRotation": 0,
+          "g_flLayer2TexCoordRotation": 0,
+          "g_flLayerBorderOffset": 0,
+          "g_flLayerBorderSoftness": 0.5,
+          "g_flLayerBorderStrength": 0.5,
+          "g_flMetalness": 0,
+          "g_flModelTintAmount": 1,
+          "g_flVertexColorOpacityScale": 1
+        },
+        "VectorParams": {
+          "g_vBlendModulateTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vBlendModulateTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vBlendModulateTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer1DetailScale": [
+            0.15,
+            0.15,
+            0,
+            0
+          ],
+          "g_vLayer1DetailTintAndBlend": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "g_vLayer1NormalTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vLayer1NormalTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer1NormalTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer1TexCoordCenter": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer1TexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer1TexCoordScale": [
+            1.125,
+            1.125,
+            0,
+            0
+          ],
+          "g_vLayer1Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer2NormalTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vLayer2NormalTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer2NormalTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer2TexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vLayer2TexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer2TexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer2Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayerBorderTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureLayer1Normal": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureLayer2Normal": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tBlendModulation": "materials/ground/hr_g/hr_gravel_001_blendmod_blend_psd_b05c3e2a.vtex",
+          "g_tColor": "materials/ground/hr_g/hr_gravel_002_color_psd_6a658d98.vtex",
+          "g_tLayer1AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer1Detail": "materials/asphalt/hr_c/hr_asphalt_001_detail_color_psd_97df95eb.vtex",
+          "g_tLayer1NormalRoughness": "materials/default/default_normal_tga_7be39f77.vtex",
+          "g_tLayer2AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer2Color": "materials/ground/hr_g/hr_gravel_001_color_psd_98880e10.vtex",
+          "g_tLayer2NormalRoughness": "materials/default/default_normal_tga_7be39f77.vtex"
+        }
+      },
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularDirect": false,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "131d6db1fb456583",
+      "normal2": "131d6db1fb456583",
+      "color2": "acbefc54b4b7127c",
+      "mask": "16c6964b75ea5f2a",
+      "transforms": {
+        "Layer1": [
+          1.125,
+          0.0,
+          0,
+          -0.0,
+          1.125,
+          0,
+          0.0,
+          0.0,
+          1
+        ],
+        "Layer1Normal": [
+          1.0,
+          0.0,
+          0,
+          -0.0,
+          1.0,
+          0,
+          0.0,
+          0.0,
+          1
+        ],
+        "Layer2": [
+          1.0,
+          0.0,
+          0,
+          -0.0,
+          1.0,
+          0,
+          0.0,
+          0.0,
+          1
+        ],
+        "Layer2Normal": [
+          1.0,
+          0.0,
+          0,
+          -0.0,
+          1.0,
+          0,
+          0.0,
+          0.0,
+          1
+        ],
+        "BlendModulate": [
+          1.0,
+          0.0,
+          0,
+          -0.0,
+          1.0,
+          0,
+          0.0,
+          0.0,
+          1
+        ]
+      },
+      "detail": {
+        "texture": "c26410be69b8c07b",
+        "scale": [
+          0.15,
+          0.15
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "hr_grass_dirt_blend_001": {
+      "resource": "materials/nature/hr_c/hr_grass_dirt_blend_001.vmat",
+      "nativeParameters": {
+        "Name": "materials/nature/hr_c/hr_grass_dirt_blend_001.vmat",
+        "ShaderName": "csgo_lightmappedgeneric.vfx",
+        "IntParams": {
+          "F_DETAILTEXTURE": 1,
+          "F_FANCY_BLENDING": 1,
+          "F_LAYERS": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBevelBlendSharpness": 2,
+          "g_flBevelBlendStrength": 0,
+          "g_flBevelBlendWidth": 4,
+          "g_flBlendSoftness": 0.5,
+          "g_flLayerBorderOffset": 0,
+          "g_flLayerBorderSoftness": 0.5,
+          "g_flLayerBorderStrength": 0.5,
+          "g_flMetalness": 0,
+          "g_flModelTintAmount": 1,
+          "g_flVertexColorOpacityScale": 1
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer1DetailScale": [
+            0.019,
+            0.019,
+            0,
+            0
+          ],
+          "g_vLayer1DetailTintAndBlend": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "g_vLayer1RoughnessBrightnessContrast": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer1Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer2RoughnessBrightnessContrast": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer2Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayerBorderTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureLayer1Normal": [
+            0.501961,
+            0.501961,
+            1,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tBlendModulation": "materials/nature/hr_c/hr_grass_001_blend_psd_e6bfe17e.vtex",
+          "g_tColor": "materials/nature/hr_c/hr_grass_001_color_psd_bc33d97d.vtex",
+          "g_tLayer1AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer1Detail": "materials/nature/hr_c/hr_grass_001_detail_color_psd_e29bd0cd.vtex",
+          "g_tLayer1NormalRoughness": "materials/nature/hr_c/hr_grass_dirt_blend_001_vmat_g_tlayer1normalroughness_1e13e361.vtex",
+          "g_tLayer2AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer2Color": "materials/nature/hr_c/hr_dirt_001_color_psd_50b92813.vtex",
+          "g_tLayer2NormalRoughness": "materials/default/default_normal_tga_7be39f77.vtex"
+        }
+      },
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularDirect": false,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "9c71a9b1f5b7b22b",
+      "normal2": "131d6db1fb456583",
+      "color2": "ae586daff4aaada2",
+      "mask": "c5f40e0c2b33ab57",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "detail": {
+        "texture": "f5415abe2ca649a7",
+        "scale": [
+          0.019,
+          0.019
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "hr_concrete_floor_05_blend": {
+      "resource": "materials/concrete/hr_c/hr_concrete_floor_05_blend.vmat",
+      "nativeParameters": {
+        "Name": "materials/concrete/hr_c/hr_concrete_floor_05_blend.vmat",
+        "ShaderName": "csgo_lightmappedgeneric.vfx",
+        "IntParams": {
+          "F_FANCY_BLENDING": 1,
+          "F_LAYERS": 1,
+          "F_SPECULAR_DIRECT": 1,
+          "F_SPECULAR_INDIRECT": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBevelBlendSharpness": 2,
+          "g_flBevelBlendStrength": 0,
+          "g_flBevelBlendWidth": 4,
+          "g_flBlendSoftness": 0.5,
+          "g_flLayerBorderOffset": 0,
+          "g_flLayerBorderSoftness": 0.5,
+          "g_flLayerBorderStrength": 0.5,
+          "g_flMetalness": 0,
+          "g_flModelTintAmount": 1,
+          "g_flVertexColorOpacityScale": 1
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer1Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer2Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayerBorderTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "TextureLayer1Roughness": [
+            0.705882,
+            0.705882,
+            0.705882,
+            0
+          ],
+          "TextureLayer2Roughness": [
+            0.784314,
+            0.784314,
+            0.784314,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tBlendModulation": "materials/concrete/hr_c/hr_concrete_floor_05_blendmod_blend_tga_f9057e2c.vtex",
+          "g_tColor": "materials/concrete/hr_c/hr_concrete_floor_05_color_psd_9c3571fe.vtex",
+          "g_tLayer1AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer1NormalRoughness": "materials/concrete/hr_c/hr_concrete_floor_05_normal_psd_2964fb3d.vtex",
+          "g_tLayer2AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer2Color": "materials/concrete/hr_c/hr_concrete_floor_05_dirty_color_psd_9ac4f622.vtex",
+          "g_tLayer2NormalRoughness": "materials/concrete/hr_c/hr_concrete_floor_05_normal_psd_d10abc9d.vtex"
+        }
+      },
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularDirect": true,
+      "specularIndirect": true,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "ef82500c6f04daeb",
+      "normal2": "42c33f945c7b316f",
+      "color2": "25f1b281b1ceb7df",
+      "mask": "d01e722ab1fbb570",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "hr_grass_mulch_blend_001": {
+      "resource": "materials/nature/hr_c/hr_grass_mulch_blend_001.vmat",
+      "nativeParameters": {
+        "Name": "materials/nature/hr_c/hr_grass_mulch_blend_001.vmat",
+        "ShaderName": "csgo_lightmappedgeneric.vfx",
+        "IntParams": {
+          "F_DETAILBLENDMODE": 0,
+          "F_DETAILTEXTURE": 1,
+          "F_FANCY_BLENDING": 1,
+          "F_LAYERS": 1,
+          "F_TEXTURETRANSFORMS": 0
+        },
+        "FloatParams": {},
+        "VectorParams": {
+          "g_vLayer1DetailScale": [
+            0.019,
+            0.019,
+            0,
+            0
+          ],
+          "g_vLayer1DetailTintAndBlend": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "g_vLayer1Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer2Tint": [
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tBlendModulation": "materials/nature/hr_c/hr_grass_001_blend_psd_e6bfe17e.vtex",
+          "g_tColor": "materials/nature/hr_c/hr_mulch_001_color_psd_971ae5e8.vtex",
+          "g_tLayer1AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer1Detail": "materials/nature/hr_c/hr_grass_001_detail_color_psd_e29bd0cd.vtex",
+          "g_tLayer1NormalRoughness": "materials/default/default_normal_tga_7be39f77.vtex",
+          "g_tLayer2AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer2Color": "materials/nature/hr_c/hr_grass_001_color_psd_bc33d97d.vtex",
+          "g_tLayer2NormalRoughness": "materials/default/default_normal_tga_7be39f77.vtex"
+        }
+      },
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularDirect": false,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "131d6db1fb456583",
+      "normal2": "131d6db1fb456583",
+      "color2": "a69e7c357225496a",
+      "mask": "c5f40e0c2b33ab57",
+      "transforms": {
+        "Layer1": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer1Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Layer2Normal": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "BlendModulate": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "detail": {
+        "texture": "f5415abe2ca649a7",
+        "scale": [
+          0.019,
+          0.019
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "hr_gravel_grass_001b_blend": {
+      "resource": "materials/ground/hr_g/hr_gravel_grass_001b_blend.vmat",
+      "nativeParameters": {
+        "Name": "materials/ground/hr_g/hr_gravel_grass_001b_blend.vmat",
+        "ShaderName": "csgo_lightmappedgeneric.vfx",
+        "IntParams": {
+          "F_DETAILTEXTURE": 2,
+          "F_FANCY_BLENDING": 1,
+          "F_LAYERS": 1,
+          "F_TEXTURETRANSFORMS": 1,
+          "g_bFogEnabled": 1,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flBevelBlendSharpness": 2,
+          "g_flBevelBlendStrength": 0,
+          "g_flBevelBlendWidth": 4,
+          "g_flBlendModulateTexCoordRotation": 0,
+          "g_flBlendSoftness": 0.5,
+          "g_flLayer1NormalTexCoordRotation": 0,
+          "g_flLayer1TexCoordRotation": 0,
+          "g_flLayer2NormalTexCoordRotation": 0,
+          "g_flLayer2TexCoordRotation": 0,
+          "g_flLayerBorderOffset": 0,
+          "g_flLayerBorderSoftness": 0.5,
+          "g_flLayerBorderStrength": 0.5,
+          "g_flMetalness": 0,
+          "g_flModelTintAmount": 1,
+          "g_flVertexColorOpacityScale": 1
+        },
+        "VectorParams": {
+          "g_vBlendModulateTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vBlendModulateTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vBlendModulateTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer1DetailScale": [
+            0.15,
+            0.15,
+            0,
+            0
+          ],
+          "g_vLayer1DetailTintAndBlend": [
+            1,
+            1,
+            1,
+            2
+          ],
+          "g_vLayer1NormalTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vLayer1NormalTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer1NormalTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer1RoughnessBrightnessContrast": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer1TexCoordCenter": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer1TexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer1TexCoordScale": [
+            1.125,
+            1.125,
+            0,
+            0
+          ],
+          "g_vLayer1Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayer2DetailScale": [
+            4,
+            4,
+            0,
+            0
+          ],
+          "g_vLayer2DetailTintAndBlend": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "g_vLayer2NormalTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vLayer2NormalTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer2NormalTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer2RoughnessBrightnessContrast": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer2TexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vLayer2TexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vLayer2TexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vLayer2Tint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vLayerBorderTint": [
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "TextureParams": {
+          "g_tBlendModulation": "materials/nature/hr_c/hr_grass_001_blend_psd_e6bfe17e.vtex",
+          "g_tColor": "materials/nature/hr_c/hr_grass_001_color_psd_bc33d97d.vtex",
+          "g_tLayer1AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer1Detail": "materials/asphalt/hr_c/hr_asphalt_001_detail_color_psd_97df95eb.vtex",
+          "g_tLayer1NormalRoughness": "materials/default/default_normal_tga_7be39f77.vtex",
+          "g_tLayer2AmbientOcclusion": "materials/default/default_ao_tga_559f1ac6.vtex",
+          "g_tLayer2Color": "materials/ground/hr_g/hr_gravel_001_color_psd_98880e10.vtex",
+          "g_tLayer2Detail": "materials/default/default_detail_tga_35e09bae.vtex",
+          "g_tLayer2NormalRoughness": "materials/default/default_normal_tga_7be39f77.vtex"
+        }
+      },
+      "fancy": 1,
+      "softness": 0.5,
+      "border": [
+        0,
+        0.5,
+        0.5
+      ],
+      "borderTint": [
+        1,
+        1,
+        1
+      ],
+      "tint1": [
+        1,
+        1,
+        1
+      ],
+      "tint2": [
+        1,
+        1,
+        1
+      ],
+      "bevel": [
+        4,
+        2,
+        0.0
+      ],
+      "metalness": 0,
+      "specularDirect": false,
+      "specularIndirect": false,
+      "ao": [
+        1,
+        1
+      ],
+      "normal1": "131d6db1fb456583",
+      "normal2": "131d6db1fb456583",
+      "color2": "acbefc54b4b7127c",
+      "mask": "c5f40e0c2b33ab57",
+      "transforms": {
+        "Layer1": [
+          1.125,
+          0.0,
+          0,
+          -0.0,
+          1.125,
+          0,
+          0.0,
+          0.0,
+          1
+        ],
+        "Layer1Normal": [
+          1.0,
+          0.0,
+          0,
+          -0.0,
+          1.0,
+          0,
+          0.0,
+          0.0,
+          1
+        ],
+        "Layer2": [
+          1.0,
+          0.0,
+          0,
+          -0.0,
+          1.0,
+          0,
+          0.0,
+          0.0,
+          1
+        ],
+        "Layer2Normal": [
+          1.0,
+          0.0,
+          0,
+          -0.0,
+          1.0,
+          0,
+          0.0,
+          0.0,
+          1
+        ],
+        "BlendModulate": [
+          1.0,
+          0.0,
+          0,
+          -0.0,
+          1.0,
+          0,
+          0.0,
+          0.0,
+          1
+        ]
+      },
+      "detail": {
+        "texture": "c26410be69b8c07b",
+        "scale": [
+          0.15,
+          0.15
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          2
+        ]
+      },
+      "detail2": {
+        "texture": "c63132ada3fb7f9e",
+        "scale": [
+          4,
+          4
+        ],
+        "tintBlend": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailQualification": "Pinned VRF5564866 legacy-lightmappedgeneric ApplyDetailTextures reconstruction; native per-layer textures/parameters retained, Valve private shader parity unverified"
+    }
+  },
+  "textures": {
+    "131d6db1fb456583": {
+      "resource": "materials/default/default_normal_tga_7be39f77.vtex",
+      "sourceSha256": "7b4d56b63404963ca56ec26ce49ebf938e4e33154e95df875a9c1c4d40f76655",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "fallback": "131d6db1fb456583.webp",
+      "fallbackSha256": "2579c4b9f1fd07226b17ef9842a2098ddfc21f04f25964f448fcab7d2e3cdac5"
+    },
+    "acbefc54b4b7127c": {
+      "resource": "materials/ground/hr_g/hr_gravel_001_color_psd_98880e10.vtex",
+      "sourceSha256": "fb90a85ed9490dc8247076cf95dd03e2351ceb72489a1470c6adaa70cf5b1503",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "acbefc54b4b7127c.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "da9ffe3a87866dd6a63ffc8b0a3144319f0b33cc872a79aece441601faf7a463",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "cfc74bc1d30bb82f6509ec2d40373d0a756f090bb64daefbdb44ed7cd3e9f79a"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "ed9795efc7030ae8b98f8fb57b7a9278e1ee75dd789000b23def6f3da2b12238"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "7786743b04a7060a1ae84df0a8ef0f1d403d9a270977926a2b76742f141c0374"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "12b98f90a0378a1345c0a4b2191a353791070d8afe379a7ffd18351ef9f82e7b"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "fe6cf160d966349e3c695f2beda6d4e3e7b9d9d47f9e962de70db6a8db2e0131"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "a903693b6dfd8050e3915daba3463d461811c6ae37616c48f1cba60655b377cf"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "cb9c66aba584022ac9f2b823f91c014383faa8e73aa74016acb5b89fc854e752"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "86f2b1dd279af27830781913a67aac43a3df150e90b12419cffd821b62e21565"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "4c1f1b6bf2e60db75e8db893208dae00a6f2585e12755b1fe389af1596cc9a79"
+        }
+      ],
+      "fallback": "acbefc54b4b7127c.webp",
+      "fallbackSha256": "913160ab30827374cdbd80b98e6f87d62579c14606edb446ad63dbf30109e09e"
+    },
+    "16c6964b75ea5f2a": {
+      "resource": "materials/ground/hr_g/hr_gravel_001_blendmod_blend_psd_b05c3e2a.vtex",
+      "sourceSha256": "faf48633b15ef4cefd075878fa2b0872851fd00c9fcf86ebb1e6ffdc96134079",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "16c6964b75ea5f2a.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "ceefd0d685411e256249aab08b9230df3ca842558685f3795694bb6a3e1c9eb4",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "8d8f1977b38ca8ffa60fbf31cf1f46da24f6ee73ecfcc930b3e46f91a41a2f27"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "7ceb67fbddabd8a5e58bffa6d8ece04d3ee91dc2e4cd7695cb732227a8cf22f2"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "87e5d6b82712ea32ba3a19cf11aa9b8aaa3fd193e7ad183bcd4eb6ae390e1d77"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "83b94e4b0793522991cd372f65febc13ba056458422d30a9ddabb4a1b1b4a726"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "a43c7bde9f251bf69d672b812a12725887c0ff96ffe13e4566432473b7ece3a3"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "b897f08db4f808d3a3a96606780295e729f7ec0e7fa06468e0a8136037467d3c"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "3482c4790596f12f715f3e14dfcca48537e6c54d7d25554fcc0c933ffab1f24e"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "2ff5d39e8ce9a676dbd064d3801974c04b7e4957e615ea3451dff484442d2bc2"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "2dce72f4a0631f069b814a38732d0fe20cf8bd62ca870fa87740b0bbc122dc6f"
+        }
+      ],
+      "fallback": "16c6964b75ea5f2a.webp",
+      "fallbackSha256": "230ad87219595ab4514e1be23bf6c3ddf62cb946a3749bad8fc3c8eadcfb5850"
+    },
+    "c26410be69b8c07b": {
+      "resource": "materials/asphalt/hr_c/hr_asphalt_001_detail_color_psd_97df95eb.vtex",
+      "sourceSha256": "2ec9bf28dfeb171d140890c6ae448f29b37da585c397d5130655f370d6ab0e03",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "c26410be69b8c07b.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "b102714023561315e877f5866f63ed1ee60600fb4c5f6553fbcc624dec97eb02",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "0f5edb8e78f0630c03df906e8eca907dac0dc08d7889592f3362202ec874a666"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "20ffceca624245ce5c80ac2031592401ab6cfdc895cb43d0614451cba776665b"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "6080ce438d6b11b43166f447fcee2372626f5ebbf7fea76f7d49a62f1a170684"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "5d9dea9401013bd44a44b855aa68766715b1c0bb0a166eb5dd675fc75a7a1312"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "bc8f280de8da6d81cee28be7c9901cc9d9aefc385779e7fbdee0e2705ddadaf7"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "eb119fc832bb29220d639e06c94f7272c9a1ce7c15ad4dda4a5429d4bfd54ae9"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "43865fe68b15e77b3514000259dd380a0051f5467261c3d2adf5ae59b1e7536b"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "3e2315620cbb6d134e7c83d73bf0d43b5da5825a99e9c109d63b382894be9a7d"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "629796acf05c00e4ddb9619a57cbca84abccdda1c8c7348638b4403b865dd2bd"
+        }
+      ],
+      "fallback": "c26410be69b8c07b.webp",
+      "fallbackSha256": "1c46bdfde6f6e1fd00ac0331c90aa6d07f0d8e055e1f5dea71da897c7f36ff75"
+    },
+    "9c71a9b1f5b7b22b": {
+      "resource": "materials/nature/hr_c/hr_grass_dirt_blend_001_vmat_g_tlayer1normalroughness_1e13e361.vtex",
+      "sourceSha256": "f080a6b1d06059b2263920f8ea7a947851e159102450df71e7f02bab7d129ab1",
+      "srgb": false,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "fallback": "9c71a9b1f5b7b22b.webp",
+      "fallbackSha256": "2579c4b9f1fd07226b17ef9842a2098ddfc21f04f25964f448fcab7d2e3cdac5"
+    },
+    "ae586daff4aaada2": {
+      "resource": "materials/nature/hr_c/hr_dirt_001_color_psd_50b92813.vtex",
+      "sourceSha256": "08baefce7e922301dd4bd444d858c3da8260c4feaabcf469a1ee417dfa11ea83",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "ae586daff4aaada2.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "6ae500bdda12db99978791dad8cef8212b59a9e14e38256f7f1b33e225915dff",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "a9b78f2c81035a0dd5ba67a4c539d96115e5d57c24146d61fd244421b041e45c"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "d7e17541cd571be28879db7b678f2c99813605181f6686a40b270a80396adbb9"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "a9b8f3bbe2c0d706eb2c965e75b4b921e61f154fcb3800d00d02a743ac638f73"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "082c9894e927f88fdf538d2abfc7a144c02f0e938f489972e65f5529444331d7"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "21fe7777b7d101eb4d570d16f1fcbd10e3790ccb2e2b9d4ccf18a10f59e9d985"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "cab2dc340b9f000cedb16bf2a4d827992aac559ef36cef12b50c822e858b05cf"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "a9336898e4e668794858c8687c400f9c98c6621f3138c551a10d7aab7a041b54"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "0d60fcc8c183caad11fab6af2df9c9368e96019c7d24b7e544112ea77e7b1ffb"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "a4d8682da480efc13484ebdd54b389332ba4652f327a5758814963da5f18be97"
+        }
+      ],
+      "fallback": "ae586daff4aaada2.webp",
+      "fallbackSha256": "e849928a73d0f88800c1e85655fff31980edbe51bd802977307949bd34e94d1b"
+    },
+    "c5f40e0c2b33ab57": {
+      "resource": "materials/nature/hr_c/hr_grass_001_blend_psd_e6bfe17e.vtex",
+      "sourceSha256": "5b077132b515536a929cc7b6d8097a7e3b0562ebacd51a32099e1ee4fb07b4bc",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "c5f40e0c2b33ab57.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "587680fe53e2abb84e4ddf780c89ad5cded61acd4b6a4c08b072408a6bd3f3d7",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "bc909b924c2abbf0619ac3e273f74bf21d9ff912e0a3178b6403abe6045b1bf8"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "1e1b2f0d8277515d970cc9c2e45860b4be1db64b163ab1c387315cae8fd68f5c"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "18ff1e318a30b8f04e2a5e4ea2c5ea3e361059818cf43f7a9a4a9448e975f473"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "0f355f30d4af9ffcda71d5439acbdacc09ea42f45bc8f00317219ffb374d081e"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "652783229269b3da8e73090159e3e194bc5d5859324a3cc1c24284a2566268da"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "c7c6def33137e2febcb1801509b6bc05fd728917e12876e5dba9b5fc8cef6ae6"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "16f72a28032c177e53220769153851921e5cc1a3c54bce7ae5354c65cd8081eb"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "36e61bdbffb73a1b72a87d0263d427dd7f0d21ab1824667a89c3dd26d6238be0"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "a8515c41dc7d8f6e50e3c5c48733ee2d8b050fa12c325b6e8d864bace8ce1734"
+        }
+      ],
+      "fallback": "c5f40e0c2b33ab57.webp",
+      "fallbackSha256": "bf0b27c7753c0d8406699892c86e6f99efddb69836e14fde028c912329b3a5fd"
+    },
+    "f5415abe2ca649a7": {
+      "resource": "materials/nature/hr_c/hr_grass_001_detail_color_psd_e29bd0cd.vtex",
+      "sourceSha256": "22c9b9a64736c5cbc230265e7b5e1dc93d07cbe5fd0c206a7851875b008bef0f",
+      "srgb": true,
+      "sourceSize": [
+        256,
+        256
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "f5415abe2ca649a7.bin.gz",
+      "gpuBytes": 87376,
+      "gpuSha256": "554a303776468966034986453a6a3734c36713a9edea3e65aae70e181579671a",
+      "mips": [
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "29a236245e2b21ca52ef297875a65666b89ef7473244526d4dc08a7b8e34ab91"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "7fcc867181c0a0ebcf1fc570dfc75f11e1ba900d8c42e0fa6d0c4de8dc8ef967"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "202befc56625ad22ed927a1cc0996675c363e3aa3b8ccefa235be668963227f6"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "c53543b37aa62c278acc0626cc100df584197461bc85a5af895d632ad3306665"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "bb4ed643538a20c1c051523a0fccba47d86a8fe56be2ead09569286b38834384"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "5c8791625e680632a8ff8eb3ac0bc3b705d0e027939ffba15e3b55953027b5fa"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "a2029590669f46f86d2654b2c218873680a7d32edfd08effaf6943cea1927cf1"
+        }
+      ],
+      "fallback": "f5415abe2ca649a7.webp",
+      "fallbackSha256": "124fce575a6c7392c162ebceb05cc14ee3ed853e04c0f673ac92ab31f5cff2fb"
+    },
+    "ef82500c6f04daeb": {
+      "resource": "materials/concrete/hr_c/hr_concrete_floor_05_normal_psd_2964fb3d.vtex",
+      "sourceSha256": "0d3d7c480d3cac73036ce4b45a0b171c551667c78bb1d0e3e276ee9a2c71a43c",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "ef82500c6f04daeb.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "77cfad7989943df3b033cc25da421e37ddc81dbff79565198bab9f8fdec302ab",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "ddfcf79da935ad1763e504d96ad56a4ad03643bd3e987a5e0888b7f7383dc7e3"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "d4fd972b0856a30ca03a2890dd54a3a6385a35c5b0d02f2c8227f78a18746e4a"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "9d6f68738fa2a0c5e7bea6ed57c6096b58e035760288073df7df9e21fcf72c03"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "60fb5850c35c15549564809a4d0aef32c40ca2dd51b3558650683c75b3f7ab40"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "7458cddda79484716d00468d65c36c37a50e3c1339d58225482fe6213a9c8298"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "c4b4637f4e2872e5cb9404eac33dfcf7975340f0600a62466b0eee98a050f943"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "7e4fdf9ed8bccebb34cc4696970dcecb3ec0d7cc7ebe770c56a7f64653d455dc"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "4a292f9bd080e039dc99d044cc6becfcda8436707f7ef7d5eb587ddb5afd4375"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "5a1354980d6640d6d414f86632f03e73e5bd2fe82ad5e1d26cd44fb6e02b5ce5"
+        }
+      ],
+      "fallback": "ef82500c6f04daeb.webp",
+      "fallbackSha256": "c69228c88b9a0c77ad80319709e9db2452d4e5f624506385f75ef2528363acb2"
+    },
+    "42c33f945c7b316f": {
+      "resource": "materials/concrete/hr_c/hr_concrete_floor_05_normal_psd_d10abc9d.vtex",
+      "sourceSha256": "025091eb8e0cfd92e49351e84193884131ee54e77f058a4fd49978093dcab0b6",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "42c33f945c7b316f.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "277c51081a4e60c03296f90fe439833ce722c9681a052dd91c7ff3d4c9b1866e",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "25f4dcc9bccc5962637fce5ff7759c682c6c80413a9bc4976164d997be1d2a8b"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "38b01805fb3fabcd93983f5248484500921333d5e54368e91da8c4de9efcaf3d"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "2ff0700342bad75387d40e36c3835162337aebb03969fbf49ed27c106755469e"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "405923d754b096f15a4704e8766f408d13f1cedee35f7b4d0658e77c2b7a4aac"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "92d9e7fd15ee77a4cbfb00d325caca1efd5b731f59712cfbee77efea2b7d0bee"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "4fff22fe08c4d5ea61a9f640f0a925222cb668aec1e5f7506c78612a1cf14f90"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "1f1dca48a62e425a8bbf2cc1a19a203db9e0d2f6f8f8522d471e82bd57067ced"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "594c37bd589489bbfec26a623b2c6ee419392224d20ee7dff70eacf557f3b692"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "a063e3e46526c070ffa5741e3d7d802e2fd86584e70deeea471b19eb9757696b"
+        }
+      ],
+      "fallback": "42c33f945c7b316f.webp",
+      "fallbackSha256": "559f13698ffce9fd31b919258b535197f1b9dc59998d610f3b29ac4134dea117"
+    },
+    "25f1b281b1ceb7df": {
+      "resource": "materials/concrete/hr_c/hr_concrete_floor_05_dirty_color_psd_9ac4f622.vtex",
+      "sourceSha256": "c88d081de5c24736739723e0486ea3254dd4af8e37f3e17ca271f29f9e63337f",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "25f1b281b1ceb7df.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "ce6f049cb5dbf18f5bac068b124c7b799930ec389a20a592ac704be09b3027a0",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "b5d658dd3b4a6180d0c00919ab7c4b21e03ed5f57692864a2bddfc74e648c04d"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "c37ffc7f40de786d672867c2b144466346fbebf7161ea8ee563638c3cff2bbad"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "138c10239732039d5f273c64594fec8fea51f4f53cd4c9be340e8f4bf2e75063"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "8c6bffb210e95471512f5342057d1dedcbaab9bacb570fd3a3c668824f848372"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "51d8c33f6922b973bc382b2a3e69130c78bb1f838f111a89d3f9ec78acd5207c"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "214343459d369879c0859e50b547ed7b92ed0863b2e8b725f0f2c2d39c54e2c6"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "c260a58f13e3b7c0c6acd5badae1d733bfa6286bb68ba24d1bb8af365f51bac7"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "4b31dbb411861ffc98c9a31cbd6542272569c6e6cb42d73d5c4f992c2924a083"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "affce156ff5cb219700627fc8556f525a26d7041fa60e1b3304e077fb0b4add3"
+        }
+      ],
+      "fallback": "25f1b281b1ceb7df.webp",
+      "fallbackSha256": "0a0ac81b56a3cede02332ae32c91174e6cf9a89386b2d41a93d12d39d9f5c0ea"
+    },
+    "d01e722ab1fbb570": {
+      "resource": "materials/concrete/hr_c/hr_concrete_floor_05_blendmod_blend_tga_f9057e2c.vtex",
+      "sourceSha256": "a21ffb8d2d4c674b53e80017ae608f20b4f791c0bb720590766541ef60b3f4d9",
+      "srgb": false,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 20,
+      "nativeMip": 0,
+      "format": "BC7",
+      "file": "d01e722ab1fbb570.bin.gz",
+      "gpuBytes": 1398096,
+      "gpuSha256": "a0dbfa1ea74243bce7b2e6a154670c8fde2fafaee64ed9ec738f5b3a89101f02",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 1048576,
+          "sha256": "b89f148a5d8e8cbd3a4682e27cc810977bfffad57f4cefc86484d2ade635483e"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 262144,
+          "sha256": "f4492f988a64266d6c0db8db316364ee515f9830e9ec0562af0304a0b0dd4323"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 65536,
+          "sha256": "0f8cb6202b82dfdb37d506df7024797394ca90af1e383fb4abf37b6b244f77fb"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 16384,
+          "sha256": "c602fd950cf1ebf6446904c17b00fa80c98b080d0690ec93ed87997826dcd953"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 4096,
+          "sha256": "a740dca9de72aeb0801b79f262f7abc7d485042fb73788511a2b2b7fff44567a"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 1024,
+          "sha256": "f5529008532c51ab3a96e43b4dda854e3ac870188914aac5ec061fb0f0e71975"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 256,
+          "sha256": "28de1ff550d4b264bc6fc7ce505c776b36518c6bb301399a5e28cacbcef0c0c1"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 64,
+          "sha256": "c97cd7ca798d22502058cd6e05a8aa8f474e8965e0a76bc69d2ae701328f1973"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 16,
+          "sha256": "1bc41a7f13226e6b652e6c15fc5a3fd907b34bc316548bbcd4e22316851aed2c"
+        }
+      ],
+      "fallback": "d01e722ab1fbb570.webp",
+      "fallbackSha256": "be7f4f5f59c117f62d8e926e31eddf3a4baf47380444c47e5c62c6ec42735646"
+    },
+    "a69e7c357225496a": {
+      "resource": "materials/nature/hr_c/hr_grass_001_color_psd_bc33d97d.vtex",
+      "sourceSha256": "5a6d10f7310561f22b5ca7bf81760f6ab26d33c4dd4d7e95aef977792dfa2bfa",
+      "srgb": true,
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "sourceFormat": 1,
+      "nativeMip": 0,
+      "format": "BC1",
+      "file": "a69e7c357225496a.bin.gz",
+      "gpuBytes": 699048,
+      "gpuSha256": "206ffb55f591779ece5d5357ee557296655ce6b7cadb5abc41fb6735f4c3f377",
+      "mips": [
+        {
+          "width": 1024,
+          "height": 1024,
+          "bytes": 524288,
+          "sha256": "b746654b7441e8fdabab667619b494244c9f67dee595945ff57f274b74c7a694"
+        },
+        {
+          "width": 512,
+          "height": 512,
+          "bytes": 131072,
+          "sha256": "3ce9b1495399ca836ec1d7ffc5d5a35629b4de7ea4d92375b21df46402dcb811"
+        },
+        {
+          "width": 256,
+          "height": 256,
+          "bytes": 32768,
+          "sha256": "07524d761a933e68699fba77a3a3b001f55cbda84e9e99bcb2f5093c1e999cf2"
+        },
+        {
+          "width": 128,
+          "height": 128,
+          "bytes": 8192,
+          "sha256": "e6754365b81860a928d7cc14d018c8e6a025f6cfee7794edb8834f4155de08a4"
+        },
+        {
+          "width": 64,
+          "height": 64,
+          "bytes": 2048,
+          "sha256": "6075a48197276eb6ee58c51a8b34d86765c3863acee014e1afd580615f116130"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "bytes": 512,
+          "sha256": "996855846fb70bb38446edf260e4c24e36c6d9e213381584763bf74afd614fb0"
+        },
+        {
+          "width": 16,
+          "height": 16,
+          "bytes": 128,
+          "sha256": "c84f28e2cdecdc1f945eebfb6a3aac9129fbeadc64d9503d61bad855b66de34d"
+        },
+        {
+          "width": 8,
+          "height": 8,
+          "bytes": 32,
+          "sha256": "e90c3c9d70f0feaf22274b5e988f96e0736aba50900063df5408046c3ed258d1"
+        },
+        {
+          "width": 4,
+          "height": 4,
+          "bytes": 8,
+          "sha256": "110bb1d993c5bd0faf9071acf1696b8561b68b7f6f8606c21a4cca6739b30b00"
+        }
+      ],
+      "fallback": "a69e7c357225496a.webp",
+      "fallbackSha256": "816f98e152726029d7ff6964d9032853d6135f49a0439e04236971a4c51ace3c"
+    },
+    "c63132ada3fb7f9e": {
+      "resource": "materials/default/default_detail_tga_35e09bae.vtex",
+      "sourceSha256": "def6fd363ea291f252ab136e9a70154cc9c6220c447c3b3e2fc4301b10d7655a",
+      "srgb": true,
+      "sourceSize": [
+        4,
+        4
+      ],
+      "sourceFormat": 20,
+      "fallback": "c63132ada3fb7f9e.webp",
+      "fallbackSha256": "e094113febdea3f8d3b0a7d3fc10dd436683a064f8aa8b10f59c39911cb4fa85"
+    }
+  },
+  "source": {
+    "tool": "Source2Viewer 20.1.7467 / 9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "geometryWeights": "Native TEXCOORD4, exported _TEXCOORD_4, preserved as COLOR_1 then sourceBlend; R is linear layer weight.",
+    "conversion": "Authored mip <=1024, original BC blocks where supported; native decode NONE with lossless WebP fallback. No normal/roughness glTF adaptation.",
+    "shader": "Existing pinned Source lightmappedgeneric two-layer shader reconstruction; native material constants retained."
+  }
+}

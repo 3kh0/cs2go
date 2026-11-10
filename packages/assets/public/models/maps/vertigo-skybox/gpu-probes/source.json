@@ -1,0 +1,55 @@
+{
+  "mapId": "vertigo",
+  "space": "sky0",
+  "arrays": [
+    {
+      "width": 124,
+      "height": 132,
+      "layers": 72,
+      "format": "BC6H",
+      "file": "irradiance.bin.gz",
+      "gpuBytes": 1178496,
+      "gpuSha256": "ce39c06e35ee41ff02a57324eb08a22846217704c1e2c4a64a08ff8d94e032de",
+      "downloadBytes": 768037
+    },
+    {
+      "width": 124,
+      "height": 132,
+      "layers": 12,
+      "format": "BC7",
+      "file": "shadows.bin.gz",
+      "gpuBytes": 196416,
+      "gpuSha256": "628c72a9cfab1c0a07447661e3151fe3c0eea7f6a85ba8d41c6b2fed68bbf5db",
+      "downloadBytes": 1426
+    }
+  ],
+  "fallbacks": [
+    {
+      "width": 124,
+      "height": 132,
+      "layers": 72,
+      "format": "RGB16F",
+      "file": "irradiance-rgb16f.bin.gz",
+      "gpuBytes": 7070976,
+      "gpuSha256": "9a9122e02e46162202faba62b016a1792382dac3166c293932583aadf6c41ec0",
+      "downloadBytes": 2683494
+    },
+    {
+      "width": 124,
+      "height": 132,
+      "layers": 12,
+      "format": "RGBA8",
+      "file": "shadows-rgba8.bin.gz",
+      "gpuBytes": 785664,
+      "gpuSha256": "d4a8d0627bfa16b4ec0038c2cc21209b784c7ad81da0e0db539d9a3c94868883",
+      "downloadBytes": 3576
+    }
+  ],
+  "sourceHashes": {
+    "maps/prefabs/de_vertigo/skybox2/lightmaps/env_light_probe_volume_atlas.vtex": "f1c8bc2c39b4f07cefb4a379efb1d3bc0b69aaa24ef98beb08f8e02ca8e048ae",
+    "maps/prefabs/de_vertigo/skybox2/lightmaps/env_light_probe_volume_atlas_dlshd.vtex": "38c786c2a18e1fd7853f05421987396a4eb5dd22354f3e5ed2634db8af7d9f43"
+  },
+  "cameraSha256": "588928ec74657aade32214a6d3c2d194ec32fe92070dadf58a61c700fcb96a28",
+  "worldInfoSha256": "0d741f903a5ab25afe385e6fc22b417b0cf39b6ded35873c27e613f271826806",
+  "interpretation": "Original sky-owned BC6H/BC7 arrays and exact decoded fallbacks; native volume frames composed with sky placement."
+}

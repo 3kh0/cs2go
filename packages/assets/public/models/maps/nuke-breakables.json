@@ -1,0 +1,3985 @@
+{
+  "version": 1,
+  "mapId": "nuke",
+  "breakables": [
+    {
+      "id": "nuke:2:61814:21692",
+      "entityId": "2:61814:21692",
+      "model": "maps/de_nuke/entities/unnamed_2_61814_21692.vmdl",
+      "native": {
+        "NoInterpolate": false,
+        "targetname": "",
+        "vscripts": "",
+        "damagefilter": "",
+        "disableshadows": 1,
+        "ExplodeDamage": 0.0,
+        "ExplodeRadius": 0.0,
+        "PerformanceMode": "0",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "globalname": "",
+        "spawnflags": 0,
+        "propdata": 24,
+        "health": 1,
+        "material": 0,
+        "explosion": 0,
+        "nodamageforces": false,
+        "spawnobject": 0,
+        "explodemagnitude": 0,
+        "pressuredelay": 0.0,
+        "renderfx": "0",
+        "rendermode": "0",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "minhealthdmg": 0,
+        "gamemass": 0,
+        "_minlight": "",
+        "physdamagescale": 1.0,
+        "object_culling": 0,
+        "overrideBlockLOS": "0",
+        "classname": "func_breakable",
+        "compile_source_id": 10014,
+        "origin": [
+          1414.5,
+          -391.0,
+          -341.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:21692",
+        "model": "maps/de_nuke/entities/unnamed_2_61814_21692.vmdl"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_21692_0"
+      ],
+      "sourceRenderNames": [
+        "unnamed_2_61814_21692.hammer_mesh_0"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_21692_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          35.915594914190436,
+          -9.397999908223328,
+          9.702795031458127
+        ],
+        [
+          35.99179507780956,
+          -7.899400095776674,
+          10.134594969513959
+        ]
+      ],
+      "health": 1.0,
+      "minDamage": 0,
+      "spawnFlags": 0,
+      "propDataPreset": 24,
+      "qualification": "Native brush health/minimum damage/propdata preset retained; brush-specific preset damage modifier graph remains unverified; base shared brush damage handling is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:2:61814:20555",
+      "entityId": "2:61814:20555",
+      "model": "maps/de_nuke/entities/unnamed_2_61814_20555.vmdl",
+      "native": {
+        "NoInterpolate": false,
+        "targetname": "",
+        "vscripts": "",
+        "damagefilter": "",
+        "disableshadows": 1,
+        "ExplodeDamage": 0.0,
+        "ExplodeRadius": 0.0,
+        "PerformanceMode": "0",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "globalname": "",
+        "spawnflags": 0,
+        "propdata": 24,
+        "health": 1,
+        "material": 0,
+        "explosion": 0,
+        "nodamageforces": false,
+        "spawnobject": 0,
+        "explodemagnitude": 0,
+        "pressuredelay": 0.0,
+        "renderfx": "0",
+        "rendermode": "0",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "minhealthdmg": 0,
+        "gamemass": 0,
+        "_minlight": "",
+        "physdamagescale": 1.0,
+        "object_culling": 0,
+        "overrideBlockLOS": "0",
+        "classname": "func_breakable",
+        "compile_source_id": 10019,
+        "origin": [
+          1414.5,
+          -601.0,
+          -341.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:20555",
+        "model": "maps/de_nuke/entities/unnamed_2_61814_20555.vmdl"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_20555_0"
+      ],
+      "sourceRenderNames": [
+        "unnamed_2_61814_20555.hammer_mesh_0"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_20555_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          35.915594914190436,
+          -9.398000908223327,
+          15.036793037513958
+        ],
+        [
+          35.99179507780956,
+          -7.899401095776671,
+          15.468592963458125
+        ]
+      ],
+      "health": 1.0,
+      "minDamage": 0,
+      "spawnFlags": 0,
+      "propDataPreset": 24,
+      "qualification": "Native brush health/minimum damage/propdata preset retained; brush-specific preset damage modifier graph remains unverified; base shared brush damage handling is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:2:61814:42213",
+      "entityId": "2:61814:42213",
+      "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_breakable_c.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "0",
+        "animgraph2_identifier": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "NoInterpolate": false,
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "add_modifier": "",
+        "add_attribute": "",
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_breakable_c.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "classname": "prop_dynamic",
+        "compile_source_id": 10834,
+        "origin": [
+          1116.0,
+          -1354.0,
+          -637.25
+        ],
+        "angles": [
+          89.999992,
+          213.5,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:42213"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_42213_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_vent_bombsite_breakable_c.nuke_vent_bombsite_breakable_c_bg_body_lod0"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_42213_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "metal",
+      "surfaceProperty": "metal",
+      "breakSoundEvent": "Breakable.Metal",
+      "bounds": [
+        [
+          27.06104148838237,
+          -16.256002089470847,
+          33.247601349308795
+        ],
+        [
+          29.504662341617628,
+          -16.116301933273913,
+          35.61969386269121
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Metal.Medium",
+      "damageMultipliers": {
+        "bullet": 1.0,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "break_command_list": [
+          {
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "attachment_point": "",
+            "center_on_damage_point": false,
+            "limit_to_piece": "",
+            "burst_scale": 300.0,
+            "burst_randomize": 0.0,
+            "break_command": "break_uniform_burst"
+          }
+        ],
+        "prop_data": {
+          "base": "Metal.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p2.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              3.0,
+              0.0,
+              8.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p3.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              15.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p4.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              1.0,
+              16.0,
+              5.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p6.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              7.0,
+              5.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p7.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              5.0,
+              12.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p8.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              2.0,
+              8.0,
+              10.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p9.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              1.0,
+              -12.0,
+              -4.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "metal",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:2:61814:42214",
+      "entityId": "2:61814:42214",
+      "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_breakable_c.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "0",
+        "animgraph2_identifier": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "NoInterpolate": false,
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "add_modifier": "",
+        "add_attribute": "",
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_breakable_c.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "classname": "prop_dynamic",
+        "compile_source_id": 10835,
+        "origin": [
+          654.0,
+          -1613.0,
+          -637.25
+        ],
+        "angles": [
+          89.999992,
+          115.000015,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:42214"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_42214_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_vent_bombsite_breakable_c.nuke_vent_bombsite_breakable_c_bg_body_lod0"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_42214_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "metal",
+      "surfaceProperty": "metal",
+      "breakSoundEvent": "Breakable.Metal",
+      "bounds": [
+        [
+          15.455569106738123,
+          -16.25600219878697,
+          39.71595464550558
+        ],
+        [
+          17.703213839261874,
+          -16.116301797465137,
+          42.086308094494406
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Metal.Medium",
+      "damageMultipliers": {
+        "bullet": 1.0,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "break_command_list": [
+          {
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "attachment_point": "",
+            "center_on_damage_point": false,
+            "limit_to_piece": "",
+            "burst_scale": 300.0,
+            "burst_randomize": 0.0,
+            "break_command": "break_uniform_burst"
+          }
+        ],
+        "prop_data": {
+          "base": "Metal.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p2.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              3.0,
+              0.0,
+              8.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p3.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              15.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p4.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              1.0,
+              16.0,
+              5.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p6.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              7.0,
+              5.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p7.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              5.0,
+              12.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p8.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              2.0,
+              8.0,
+              10.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p9.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              1.0,
+              -12.0,
+              -4.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "metal",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:2:61814:42349",
+      "entityId": "2:61814:42349",
+      "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "0",
+        "animgraph2_identifier": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "NoInterpolate": false,
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "add_modifier": "",
+        "add_attribute": "",
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": false,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "[PR#]nuke_vent",
+        "StartingAnim": "open",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "classname": "prop_dynamic",
+        "compile_source_id": 10882,
+        "origin": [
+          448.0,
+          -1403.0,
+          -416.0
+        ],
+        "angles": [
+          0.0,
+          270.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:42349"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_42349_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_vent_slats.nuke_vent_slats_bg_body_lod0"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_42349_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "metal",
+      "surfaceProperty": "metal_ventslat",
+      "breakSoundEvent": "Breakable.Metal",
+      "bounds": [
+        [
+          10.566397031106693,
+          -10.566402096893302,
+          35.5624289531672
+        ],
+        [
+          12.191997410968996,
+          -8.483602327999995,
+          35.661592138920824
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Metal.Medium",
+      "damageMultipliers": {
+        "bullet": 1.0,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Metal.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_command_list": [
+          {
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "attachment_point": "",
+            "center_on_damage_point": true,
+            "limit_to_piece": "",
+            "burst_scale": 120.0,
+            "burst_randomize": 50.0,
+            "break_command": "break_uniform_burst"
+          }
+        ],
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece1.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece2.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece3.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece4.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece5.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece6.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece7.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece8.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece9.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "metal_ventslat",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:2:61814:42406",
+      "entityId": "2:61814:42406",
+      "model": "models/props/de_nuke/windows/nuke_window_93x76.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "2",
+        "animgraph2_identifier": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "NoInterpolate": false,
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "add_modifier": "",
+        "add_attribute": "",
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/windows/nuke_window_93x76.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "classname": "prop_dynamic",
+        "compile_source_id": 10932,
+        "origin": [
+          1038.496582,
+          -464.5,
+          -560.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:42406"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_42406_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_93x76.unnamed_1"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_42406_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          26.365107886939192,
+          -15.189198988798093,
+          10.617195184486041
+        ],
+        [
+          26.39050811306081,
+          -13.258799011201905,
+          12.979394815513958
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "force_motion_disabled": true,
+            "health_override": 10000
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:2:61814:42407",
+      "entityId": "2:61814:42407",
+      "model": "models/props/de_nuke/windows/nuke_window_93x76.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "2",
+        "animgraph2_identifier": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "NoInterpolate": false,
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "add_modifier": "",
+        "add_attribute": "",
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/windows/nuke_window_93x76.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "classname": "prop_dynamic",
+        "compile_source_id": 10933,
+        "origin": [
+          1038.496582,
+          -559.5,
+          -560.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:42407"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_42407_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_93x76.unnamed_1"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_42407_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          26.365107886939192,
+          -15.189198988798093,
+          13.030194184486042
+        ],
+        [
+          26.39050811306081,
+          -13.258799011201905,
+          15.392393815513959
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "force_motion_disabled": true,
+            "health_override": 10000
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:2:61814:42408",
+      "entityId": "2:61814:42408",
+      "model": "models/props/de_nuke/windows/nuke_window_63x76.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "2",
+        "animgraph2_identifier": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "NoInterpolate": false,
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "add_modifier": "",
+        "add_attribute": "",
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/windows/nuke_window_63x76.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "classname": "prop_dynamic",
+        "compile_source_id": 10934,
+        "origin": [
+          1079.499878,
+          -796.0,
+          -344.0
+        ],
+        "angles": [
+          0.0,
+          89.999985,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:42408"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_42408_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_63x76.unnamed_1"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_42408_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          26.61919010384575,
+          -9.702800849513988,
+          20.205692846971814
+        ],
+        [
+          28.21938989615425,
+          -7.7724011504860115,
+          20.231093153028183
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "force_motion_disabled": true,
+            "health_override": 10000
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:2:61814:42409",
+      "entityId": "2:61814:42409",
+      "model": "models/props/de_nuke/windows/nuke_window_63x76.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "2",
+        "animgraph2_identifier": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "NoInterpolate": false,
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "add_modifier": "",
+        "add_attribute": "",
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/windows/nuke_window_63x76.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "classname": "prop_dynamic",
+        "compile_source_id": 10935,
+        "origin": [
+          1144.499878,
+          -796.0,
+          -344.0
+        ],
+        "angles": [
+          0.0,
+          89.999985,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "2:61814:42409"
+      },
+      "renderNames": [
+        "breakable_nuke_2_61814_42409_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_63x76.unnamed_1"
+      ],
+      "physicsNames": [
+        "breakable_nuke_2_61814_42409_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          28.27019010384575,
+          -9.702800849513988,
+          20.205692846971814
+        ],
+        [
+          29.87038989615425,
+          -7.7724011504860115,
+          20.231093153028183
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "force_motion_disabled": true,
+            "health_override": 10000
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:21604:4",
+      "entityId": "21604:4",
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "2",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "NoInterpolate": false,
+        "animgraph2_identifier": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "StartingAnim": "",
+        "targetname": "[PR#]21604_window",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "clientSideEntity": 0,
+        "globalname": "",
+        "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "add_attribute": "",
+        "add_modifier": "",
+        "vscripts": "",
+        "damagefilter": "",
+        "ExplodeDamage": 0.0,
+        "ExplodeRadius": 0.0,
+        "PerformanceMode": "PM_NORMAL",
+        "spawnflags": 0,
+        "pressuredelay": 0.0,
+        "renderfx": "kRenderFxNone",
+        "rendermode": "kRenderNormal",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "lightgroup": "",
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "object_culling": 0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowteam": -1,
+        "solid": "6",
+        "disablelowviolence": "0",
+        "use_animgraph": true,
+        "randomizecycle": false,
+        "LagCompensate": false,
+        "AnimateOnServer": false,
+        "ScriptedMovement": "0",
+        "velocity": "",
+        "avelocity": "",
+        "lightingorigin": "",
+        "CreateNavObstacle": false,
+        "forcenpcexclude": false,
+        "StartDisabled": false,
+        "clothScale": 1.0,
+        "classname": "prop_dynamic",
+        "compile_source_id": 11003,
+        "origin": [
+          406.279175,
+          -1114.0,
+          117.000008
+        ],
+        "angles": [
+          11.249993,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "21604:4"
+      },
+      "renderNames": [
+        "breakable_nuke_21604_4_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_84x68.window"
+      ],
+      "physicsNames": [
+        "breakable_nuke_21604_4_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          10.1447815622,
+          2.1235512543275394,
+          27.228795244066493
+        ],
+        [
+          10.494197437799999,
+          3.8200413456724602,
+          29.362394755933504
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:21605:4",
+      "entityId": "21605:4",
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "native": {
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "lightgroup": "",
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "add_modifier": "",
+        "add_attribute": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "[PR#]21605_window",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "animgraph2_identifier": "",
+        "NoInterpolate": false,
+        "burstscale": 100.0,
+        "burstlocation": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsParticleOverride": "",
+        "interactAs": "",
+        "interactWith": "",
+        "interactExclude": "",
+        "steamaudio_geometry_mode": "2",
+        "classname": "prop_dynamic",
+        "compile_source_id": 11003,
+        "origin": [
+          406.279175,
+          -1196.0,
+          117.000008
+        ],
+        "angles": [
+          11.249993,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "21605:4"
+      },
+      "renderNames": [
+        "breakable_nuke_21605_4_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_84x68.window"
+      ],
+      "physicsNames": [
+        "breakable_nuke_21605_4_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          10.1447815622,
+          2.1235509543275395,
+          29.311593244066493
+        ],
+        [
+          10.494197437799999,
+          3.8200410456724603,
+          31.445192755933505
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:21616:4",
+      "entityId": "21616:4",
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "2",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "NoInterpolate": false,
+        "animgraph2_identifier": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "StartingAnim": "",
+        "targetname": "[PR#]21616_window",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "clientSideEntity": 0,
+        "globalname": "",
+        "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "add_attribute": "",
+        "add_modifier": "",
+        "vscripts": "",
+        "damagefilter": "",
+        "ExplodeDamage": 0.0,
+        "ExplodeRadius": 0.0,
+        "PerformanceMode": "PM_NORMAL",
+        "spawnflags": 0,
+        "pressuredelay": 0.0,
+        "renderfx": "kRenderFxNone",
+        "rendermode": "kRenderNormal",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "lightgroup": "",
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "object_culling": 0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowteam": -1,
+        "solid": "6",
+        "disablelowviolence": "0",
+        "use_animgraph": true,
+        "randomizecycle": false,
+        "LagCompensate": false,
+        "AnimateOnServer": false,
+        "ScriptedMovement": "0",
+        "velocity": "",
+        "avelocity": "",
+        "lightingorigin": "",
+        "CreateNavObstacle": false,
+        "forcenpcexclude": false,
+        "StartDisabled": false,
+        "clothScale": 1.0,
+        "classname": "prop_dynamic",
+        "compile_source_id": 11003,
+        "origin": [
+          406.279175,
+          -602.0,
+          117.000008
+        ],
+        "angles": [
+          11.249993,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "21616:4"
+      },
+      "renderNames": [
+        "breakable_nuke_21616_4_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_84x68.window"
+      ],
+      "physicsNames": [
+        "breakable_nuke_21616_4_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          10.1447815622,
+          2.1235529543275398,
+          14.223996244066495
+        ],
+        [
+          10.494197437799999,
+          3.8200430456724606,
+          16.357595755933506
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:21617:4",
+      "entityId": "21617:4",
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "native": {
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "lightgroup": "",
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "add_modifier": "",
+        "add_attribute": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "[PR#]21617_window",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "animgraph2_identifier": "",
+        "NoInterpolate": false,
+        "burstscale": 100.0,
+        "burstlocation": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsParticleOverride": "",
+        "interactAs": "",
+        "interactWith": "",
+        "interactExclude": "",
+        "steamaudio_geometry_mode": "2",
+        "classname": "prop_dynamic",
+        "compile_source_id": 11003,
+        "origin": [
+          406.279175,
+          -684.0,
+          117.000008
+        ],
+        "angles": [
+          11.249993,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "21617:4"
+      },
+      "renderNames": [
+        "breakable_nuke_21617_4_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_84x68.window"
+      ],
+      "physicsNames": [
+        "breakable_nuke_21617_4_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          10.1447815622,
+          2.12355265432754,
+          16.306796244066494
+        ],
+        [
+          10.494197437799999,
+          3.8200427456724606,
+          18.440395755933505
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:21628:4",
+      "entityId": "21628:4",
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "2",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "NoInterpolate": false,
+        "animgraph2_identifier": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "StartingAnim": "",
+        "targetname": "[PR#]21628_window",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "clientSideEntity": 0,
+        "globalname": "",
+        "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "add_attribute": "",
+        "add_modifier": "",
+        "vscripts": "",
+        "damagefilter": "",
+        "ExplodeDamage": 0.0,
+        "ExplodeRadius": 0.0,
+        "PerformanceMode": "PM_NORMAL",
+        "spawnflags": 0,
+        "pressuredelay": 0.0,
+        "renderfx": "kRenderFxNone",
+        "rendermode": "kRenderNormal",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "lightgroup": "",
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "object_culling": 0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowteam": -1,
+        "solid": "6",
+        "disablelowviolence": "0",
+        "use_animgraph": true,
+        "randomizecycle": false,
+        "LagCompensate": false,
+        "AnimateOnServer": false,
+        "ScriptedMovement": "0",
+        "velocity": "",
+        "avelocity": "",
+        "lightingorigin": "",
+        "CreateNavObstacle": false,
+        "forcenpcexclude": false,
+        "StartDisabled": false,
+        "clothScale": 1.0,
+        "classname": "prop_dynamic",
+        "compile_source_id": 11003,
+        "origin": [
+          710.279175,
+          -602.0,
+          117.000008
+        ],
+        "angles": [
+          11.249993,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "21628:4"
+      },
+      "renderNames": [
+        "breakable_nuke_21628_4_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_84x68.window"
+      ],
+      "physicsNames": [
+        "breakable_nuke_21628_4_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          17.866380062199998,
+          2.1235529543275398,
+          14.223995244066494
+        ],
+        [
+          18.2157959378,
+          3.8200430456724606,
+          16.357594755933505
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:21629:4",
+      "entityId": "21629:4",
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "native": {
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "lightgroup": "",
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "add_modifier": "",
+        "add_attribute": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "[PR#]21629_window",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "animgraph2_identifier": "",
+        "NoInterpolate": false,
+        "burstscale": 100.0,
+        "burstlocation": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsParticleOverride": "",
+        "interactAs": "",
+        "interactWith": "",
+        "interactExclude": "",
+        "steamaudio_geometry_mode": "2",
+        "classname": "prop_dynamic",
+        "compile_source_id": 11003,
+        "origin": [
+          710.279175,
+          -684.0,
+          117.000008
+        ],
+        "angles": [
+          11.249993,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "21629:4"
+      },
+      "renderNames": [
+        "breakable_nuke_21629_4_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_84x68.window"
+      ],
+      "physicsNames": [
+        "breakable_nuke_21629_4_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          17.866380062199998,
+          2.12355265432754,
+          16.306794244066495
+        ],
+        [
+          18.2157959378,
+          3.8200427456724606,
+          18.440393755933506
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:21640:4",
+      "entityId": "21640:4",
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "2",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "NoInterpolate": false,
+        "animgraph2_identifier": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "StartingAnim": "",
+        "targetname": "[PR#]21640_window",
+        "parentname": "",
+        "parentAttachmentName": "",
+        "useLocalOffset": false,
+        "clientSideEntity": 0,
+        "globalname": "",
+        "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+        "skin": "default",
+        "bodygroups": "",
+        "disableshadows": 0,
+        "add_attribute": "",
+        "add_modifier": "",
+        "vscripts": "",
+        "damagefilter": "",
+        "ExplodeDamage": 0.0,
+        "ExplodeRadius": 0.0,
+        "PerformanceMode": "PM_NORMAL",
+        "spawnflags": 0,
+        "pressuredelay": 0.0,
+        "renderfx": "kRenderFxNone",
+        "rendermode": "kRenderNormal",
+        "renderamt": 255,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "disablereceiveshadows": false,
+        "lightgroup": "",
+        "fademindist": -1.0,
+        "fademaxdist": 0.0,
+        "object_culling": 0,
+        "rendertocubemaps": false,
+        "lightmapstatic": 0,
+        "glowstate": 0,
+        "glowrange": 0,
+        "glowrangemin": 0,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowteam": -1,
+        "solid": "6",
+        "disablelowviolence": "0",
+        "use_animgraph": true,
+        "randomizecycle": false,
+        "LagCompensate": false,
+        "AnimateOnServer": false,
+        "ScriptedMovement": "0",
+        "velocity": "",
+        "avelocity": "",
+        "lightingorigin": "",
+        "CreateNavObstacle": false,
+        "forcenpcexclude": false,
+        "StartDisabled": false,
+        "clothScale": 1.0,
+        "classname": "prop_dynamic",
+        "compile_source_id": 11003,
+        "origin": [
+          710.279175,
+          -1114.0,
+          117.000008
+        ],
+        "angles": [
+          11.249993,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "21640:4"
+      },
+      "renderNames": [
+        "breakable_nuke_21640_4_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_84x68.window"
+      ],
+      "physicsNames": [
+        "breakable_nuke_21640_4_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          17.866380062199998,
+          2.1235512543275394,
+          27.228793244066495
+        ],
+        [
+          18.2157959378,
+          3.8200413456724602,
+          29.362392755933506
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "nuke:21641:4",
+      "entityId": "21641:4",
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "native": {
+        "clothScale": 1.0,
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "avelocity": "",
+        "velocity": "",
+        "ScriptedMovement": "0",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "use_animgraph": true,
+        "disablelowviolence": "0",
+        "solid": "6",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "lightgroup": "",
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "add_modifier": "",
+        "add_attribute": "",
+        "disableshadows": 0,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "[PR#]21641_window",
+        "StartingAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "animgraph2_identifier": "",
+        "NoInterpolate": false,
+        "burstscale": 100.0,
+        "burstlocation": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsParticleOverride": "",
+        "interactAs": "",
+        "interactWith": "",
+        "interactExclude": "",
+        "steamaudio_geometry_mode": "2",
+        "classname": "prop_dynamic",
+        "compile_source_id": 11003,
+        "origin": [
+          710.279175,
+          -1196.0,
+          117.000008
+        ],
+        "angles": [
+          11.249993,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "21641:4"
+      },
+      "renderNames": [
+        "breakable_nuke_21641_4_0"
+      ],
+      "sourceRenderNames": [
+        "nuke_window_84x68.window"
+      ],
+      "physicsNames": [
+        "breakable_nuke_21641_4_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "glass",
+      "surfaceProperty": "glass",
+      "breakSoundEvent": "Glass.Break",
+      "bounds": [
+        [
+          17.866380062199998,
+          2.1235509543275395,
+          29.311593244066493
+        ],
+        [
+          18.2157959378,
+          3.8200410456724603,
+          31.445192755933505
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Glass.Window",
+      "damageMultipliers": {
+        "bullet": 0.5,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "glass",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    }
+  ],
+  "enabledRemainders": [],
+  "sourceHashes": {
+    "entities": "86e48d3ab22db270d9ddcf0d86612eb9357458858aace7e78adeed7bc6559de3",
+    "sourceRender": "f00e41ba9ecee28eb481d762402f78adda23c6f6879e5e2cdf116cfd6d4716ae",
+    "sourcePhysics": "7c7698a06d1fa2a1922f7fbf1203f7018a1d002e5df88f465d7718301daa84a7",
+    "propData": "0e6e36e89bdbc59c291d578d89f018b2c85a6866a2e7604cbc0e1c4c5c446941",
+    "surfaceDefinitionsData": "2f527a673f188f929c6c9c41c57dbf1fdd7d674a958a4186bbb81baf960edfaa"
+  },
+  "modelAudit": [
+    {
+      "model": "models/props/de_nuke/hr_nuke/nuke_hard_hat/nuke_hard_hat_hanging.vmdl",
+      "sourceSha256": "c1bee25ae2cf072061b8309a1cba3798374e6477e1d227340047e47cc243b048",
+      "hasPropData": false,
+      "native": {}
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/nuke_office_desk/nuke_office_desk_mug.vmdl",
+      "sourceSha256": "d04bb45d07cb7ef0d69b94dd2bb88e62798dc7bd7bde315a0a7c6eaaec183635",
+      "hasPropData": false,
+      "native": {}
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombsite_breakable_c.vmdl",
+      "sourceSha256": "30af1e4fe722f3d91393859773b1d12d1b59af7490d11037d0a473bffcfc171f",
+      "hasPropData": true,
+      "native": {
+        "break_command_list": [
+          {
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "attachment_point": "",
+            "center_on_damage_point": false,
+            "limit_to_piece": "",
+            "burst_scale": 300.0,
+            "burst_randomize": 0.0,
+            "break_command": "break_uniform_burst"
+          }
+        ],
+        "prop_data": {
+          "base": "Metal.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p2.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              3.0,
+              0.0,
+              8.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p3.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              15.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p4.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              1.0,
+              16.0,
+              5.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p6.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              7.0,
+              5.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p7.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              5.0,
+              12.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p8.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              2.0,
+              8.0,
+              10.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_bombsite/nuke_vent_bombiste_breakable_a_p9.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              1.0,
+              -12.0,
+              -4.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats.vmdl",
+      "sourceSha256": "609509e3e3c072ad4ce2497b0cadd37348c9461fef140661bb345e4df8da0285",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Metal.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_command_list": [
+          {
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "attachment_point": "",
+            "center_on_damage_point": true,
+            "limit_to_piece": "",
+            "burst_scale": 120.0,
+            "burst_randomize": 50.0,
+            "break_command": "break_uniform_burst"
+          }
+        ],
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece1.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece2.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece3.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece4.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece5.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece6.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece7.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece8.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          },
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/hr_nuke/nuke_vent_slats/nuke_vent_slats/piece9.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 4.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/de_nuke/windows/nuke_window_93x76.vmdl",
+      "sourceSha256": "d015350c98a68fb6f8089ab229d89ff5b1dd78c65599b579b7251a2422d74bc3",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_93x76_broken.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "force_motion_disabled": true,
+            "health_override": 10000
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/de_nuke/windows/nuke_window_63x76.vmdl",
+      "sourceSha256": "d8b2898d5ccbf5dd9058aba012217362276fa36d38c8312c9bacf75175a5a710",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_63x76_broken.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false,
+            "force_motion_disabled": true,
+            "health_override": 10000
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/props/de_nuke/windows/nuke_window_84x68.vmdl",
+      "sourceSha256": "da47c9d9472c9cd5eaf9bef4acdb49ee6b6ec296eb5886baff428538c0160d0e",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Glass.Window",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_list": [
+          {
+            "piece_name": "",
+            "model": "models/props/de_nuke/windows/nuke_window_84x68/piece.vmdl",
+            "collision_group_override": "debris",
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 3.0,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": true,
+            "can_player_pickup_piece": false,
+            "inherit_owner_joints": false
+          }
+        ]
+      }
+    }
+  ]
+}

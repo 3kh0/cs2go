@@ -1,0 +1,11 @@
+{
+  "mapId": "vertigo",
+  "materials": {},
+  "textures": {},
+  "source": {
+    "tool": "Source2Viewer 20.1.7467 / 9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "geometryWeights": "Native TEXCOORD4, exported _TEXCOORD_4, preserved as COLOR_1 then sourceBlend; R is linear layer weight.",
+    "conversion": "Authored mip <=1024, original BC blocks where supported; native decode NONE with lossless WebP fallback. No normal/roughness glTF adaptation.",
+    "shader": "Existing pinned Source lightmappedgeneric two-layer shader reconstruction; native material constants retained."
+  }
+}

@@ -1,0 +1,515 @@
+{
+  "materials": [
+    {
+      "name": "overlay_drywall_paint_color",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "stain01",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 3,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "51",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 3,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.133333,
+            0.133333,
+            0.133333,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "50",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 3,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "cage_light_fixture_on",
+      "selfIllumination": {
+        "brightness": 3,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "constructionlight",
+      "selfIllumination": {
+        "brightness": 5,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "recessed_lighting_fixture_on_color",
+      "selfIllumination": {
+        "brightness": 3,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "solid_white_glow",
+      "selfIllumination": {
+        "brightness": 4.007,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "helicopter_news2",
+      "selfIllumination": {
+        "brightness": 0,
+        "scale": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "albedoFactor": 1
+      }
+    },
+    {
+      "name": "overlay_drywall_paint_color__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 2,
+          "F_LIT": 1,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flAlphaTestReference": 0.5,
+          "g_flAntiAliasedEdgeStrength": 1,
+          "g_flModelTintAmount": 1,
+          "g_flSelfIllumAlbedoFactor": 1,
+          "g_flSelfIllumBrightness": 0,
+          "g_flSelfIllumScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vSelfIllumScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vSelfIllumTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "stain01__alpha_0.454902",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 3,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "51__alpha_0.913725",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 3,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "TextureColor": [
+            0.133333,
+            0.133333,
+            0.133333,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "50__alpha_1.0",
+      "staticOverlay": {
+        "IntParams": {
+          "F_BLEND_MODE": 3,
+          "g_bFogEnabled": 1,
+          "g_nScaleTexCoordUByModelScaleAxis": 0,
+          "g_nScaleTexCoordVByModelScaleAxis": 0,
+          "g_nTextureAddressModeU": 0,
+          "g_nTextureAddressModeV": 0
+        },
+        "FloatParams": {
+          "g_flModelTintAmount": 1,
+          "g_flOpacityScale": 1,
+          "g_flTexCoordRotation": 0
+        },
+        "VectorParams": {
+          "g_vColorTint": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "g_vTexCoordCenter": [
+            0.5,
+            0.5,
+            0,
+            0
+          ],
+          "g_vTexCoordOffset": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "g_vTexCoordScale": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "g_vTexCoordScrollSpeed": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ]
+}

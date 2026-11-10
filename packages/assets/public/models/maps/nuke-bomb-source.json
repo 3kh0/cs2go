@@ -1,0 +1,27 @@
+{
+  "resourceVersion": 2,
+  "sites": [
+    [
+      502.0,
+      -939.9998779296875,
+      -416.0,
+      874.0,
+      -499.9999694824219,
+      -320.0,
+      1893.0
+    ],
+    [
+      320.0,
+      -1312.0,
+      -768.0,
+      864.0,
+      -704.0,
+      -728.0,
+      3332.0
+    ]
+  ],
+  "points": 101261,
+  "sourceResource": "/Users/sh/Documents/GitHub/cs2go/artifacts/new-maps/nuke/raw/maps/de_nuke/baked_bomb_damage.vdata_c",
+  "sourceSha256": "afec29a4a4e0f11c28b00e8fecfc77bdd5ac678378b8bd0f5485cc7032ca288f",
+  "decodedSha256": "02b4b61b0eacb66166dc409d480d0ea73b957f5aa2cac3d87b6f5bcec4d36316"
+}

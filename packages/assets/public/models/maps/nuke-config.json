@@ -1,0 +1,111 @@
+{
+  "sun": {
+    "pitch": 60.0,
+    "yaw": 25.999996,
+    "color": 16776431,
+    "intensity": 7.5398223686155035
+  },
+  "backgroundIntensity": 1.0,
+  "environmentIntensity": 0.35,
+  "ambient": {
+    "skyColor": 4422326,
+    "groundColor": 0,
+    "intensity": 2.6
+  },
+  "lighting": {
+    "irradiance": "/models/maps/nuke-lighting/irradiance.exr",
+    "nativeIrradiance": "/models/maps/nuke-lighting/irradiance.bin.gz",
+    "shadows": "/models/maps/nuke-lighting/shadows.webp",
+    "directional": "/models/maps/nuke-lighting/directional.webp",
+    "nativeDirectional": "/models/maps/nuke-lighting/directional.bin.gz",
+    "size": 4096
+  },
+  "postprocess": {
+    "lut": "/models/maps/nuke-lighting/color-correction.bin.gz",
+    "tonemap": {
+      "m_flShoulderStrength": 0.0,
+      "m_flLinearStrength": 0.001,
+      "m_flLinearAngle": 0.001,
+      "m_flToeStrength": 1.0,
+      "m_flToeNum": 1.0,
+      "m_flToeDenom": 1.0,
+      "m_flWhitePoint": 1.5,
+      "m_flExposureBias": 0.0
+    },
+    "exposure": 0.925
+  },
+  "radar": {
+    "pos_x": -3453.0,
+    "pos_y": 2887.0,
+    "scale": 7.0,
+    "verticalsections": {
+      "default": {
+        "AltitudeMax": "10000",
+        "AltitudeMin": "-495"
+      },
+      "lower": {
+        "AltitudeMax": "-495",
+        "AltitudeMin": "-10000"
+      }
+    },
+    "sections": [
+      {
+        "name": "default",
+        "min": -12.572999999999999,
+        "max": 254.0,
+        "image": "/models/maps/nuke-radar.png"
+      },
+      {
+        "name": "lower",
+        "min": -254.0,
+        "max": -12.572999999999999,
+        "image": "/models/maps/nuke-lower-radar.png"
+      }
+    ]
+  },
+  "source": {
+    "sunEntity": "2:61814:38118",
+    "skyEntity": "2:61814:41381",
+    "skyMaterial": "materials/skybox/sky_de_nuke.vmat",
+    "skyTint": [
+      255,
+      255,
+      255
+    ],
+    "skyAngles": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "skyStartDisabled": false,
+    "exposureEndpointOrder": "native values retained, including reversed authored endpoints; fixed midpoint is a browser adaptation",
+    "postEntity": "2:61814:38404",
+    "postProcessing": "lighting/postprocessing/de_nuke_prefab/de_nuke_post.vpost",
+    "exposureRangeLinear": [
+      1.0,
+      0.85
+    ],
+    "environmentIntensityQualification": ".35 browser reflection strength; retained shared renderer adaptation, not extracted native value",
+    "qualification": "Native map-specific sun, sky, VPOST/LUT and atlases; fixed linear exposure. Separate 3D sky and other native rendering acceptance required.",
+    "inputHashes": {
+      "artifacts/new-maps/supplement/nuke/raw/maps/de_nuke/lightmaps/irradiance.vtex_c": "d60f8eeebbc196b95d10aad9f5d7b29f652898122081a7bf6c2469137acd33fe",
+      "artifacts/new-maps/supplement/nuke/raw/maps/de_nuke/lightmaps/direct_light_shadows.vtex_c": "e2736849f31ee0496d601fccc5bfb8728ff14e83eba2b95205683a337c8202a1",
+      "artifacts/new-maps/supplement/nuke/raw/maps/de_nuke/lightmaps/directional_irradiance.vtex_c": "f3bfb9fe21ecebc3a1d18d0d3512a84ebe46bf0f31b3890e33ca349f5f10aa4a",
+      "artifacts/new-maps/staged/nuke/entities-resource.txt": "86e48d3ab22db270d9ddcf0d86612eb9357458858aace7e78adeed7bc6559de3",
+      "artifacts/new-maps/supplement/nuke/decoded/materials/skybox/sky_de_nuke_exr_f04e84b2.exr": "8841f0245a7b046a558841e8fdc87476705838ee8e41596a742b6aa012144338",
+      "artifacts/new-maps/supplement/nuke/decoded/lighting/postprocessing/de_nuke_prefab/de_nuke_post.vpost": "75156a0d7773c7cada97f11dccfae61c7378c6383d95c480bfb7775754be0e05",
+      "artifacts/new-maps/supplement/nuke/decoded/lighting/postprocessing/de_nuke_prefab/de_nuke_post.raw": "86302b2ceafde0cf27f7e883f7be29a785df3ba64219c3e2761dbc78462872d6",
+      "artifacts/new-maps/supplement/nuke/raw/resource/overviews/de_nuke.txt": "877a8df76cee8e5abc4756df162790ed25c5f5dd994ed9d895a7bc3a9c3ac585"
+    },
+    "supplementalRoot": "/Users/sh/Documents/GitHub/cs2go/artifacts/new-maps/supplement/nuke",
+    "radarSectionConversion": "Native overview Source-unit altitude boundaries converted once to browser metres; original verticalsections retained"
+  },
+  "reflections": {
+    "volumes": 93,
+    "maxGpuBytes": 48755808
+  },
+  "doors": "/models/maps/nuke-doors.json",
+  "environmentMaterials": "/models/maps/nuke-environment/source.json",
+  "skyWorld": "/models/maps/nuke-skybox/source.json",
+  "effectsWorld": "/models/maps/nuke-effects/source.json"
+}

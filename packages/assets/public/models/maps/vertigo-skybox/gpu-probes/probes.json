@@ -1,0 +1,175 @@
+{
+  "mapId": "vertigo",
+  "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "volumes": [
+    {
+      "priority": 0,
+      "handshake": "238739023",
+      "entity": "42",
+      "min": [
+        -644352.0,
+        -700032.0,
+        -9216.0
+      ],
+      "max": [
+        609152.0,
+        635648.0,
+        95232.0
+      ],
+      "origin": [
+        -128.0,
+        -640.0,
+        12288.0
+      ],
+      "worldToLocalVolumeNormalized": [
+        7.977637324074749e-07,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.486823392355291e-07,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9.574142495694105e-06,
+        0.0,
+        0.5140406489372253,
+        0.5241016149520874,
+        0.0882352888584137,
+        1.0
+      ],
+      "rotated": false,
+      "classname": "env_combined_light_probe_volume",
+      "sourceAngles": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceScales": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions": [
+        120,
+        128,
+        10
+      ],
+      "fade": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "atlas": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "normalizedScale": [
+        7.977637324074749e-07,
+        7.486823392355291e-07,
+        9.574142495694105e-06
+      ],
+      "normalizedOffset": [
+        0.5140406489372253,
+        0.5241016149520874,
+        0.0882352888584137
+      ],
+      "inverseEdge": [
+        3.4028234663852886e+38,
+        3.4028234663852886e+38,
+        3.4028234663852886e+38
+      ],
+      "normalizedSkin": [
+        1.2764219263772247e-06,
+        1.197891720039479e-06,
+        1.5318628356908448e-05
+      ],
+      "atlasScale": [
+        0.9677419066429138,
+        0.9696969985961914,
+        0.8333333134651184
+      ],
+      "atlasOffset": [
+        0.008064515888690948,
+        0.007575757801532745,
+        0.0833333358168602
+      ],
+      "borderMin": [
+        0.004032257944345474,
+        0.0037878789007663727,
+        0.0069444444961845875
+      ],
+      "borderMax": [
+        0.9959677457809448,
+        0.9962121248245239,
+        0.1597222238779068
+      ],
+      "index": "0"
+    }
+  ],
+  "skySH": [
+    [
+      0,
+      0,
+      0.08023841679096222,
+      0.39319366216659546
+    ],
+    [
+      0,
+      0,
+      0.18766310811042786,
+      0.5006183385848999
+    ],
+    [
+      0,
+      0,
+      0.33533573150634766,
+      0.6482909917831421
+    ]
+  ],
+  "skySHQualification": "Browser hemisphere reconstruction from this map native upper skycolor*skyintensity and lower skyambientbounce*skybouncescale, sRGB-linearized; private Source2 SH conversion unverified",
+  "skyNativeInputs": {
+    "skycolor": [
+      146,
+      173,
+      203
+    ],
+    "skyintensity": 1.647059,
+    "skyambientbounce": [
+      126,
+      126,
+      126
+    ],
+    "skybouncescale": 1.5,
+    "lower_hemisphere_is_black": null
+  },
+  "sampling": "native-priority-remaining-coverage-six-axis",
+  "sunEntity": "54:4",
+  "frameReference": "VRF20.1 SceneLightProbe.CalculateGpuProbeData; column-vector inverse Source entity transform followed by native box normalization; normals remain world Source axes",
+  "borderReference": "VRF20.1 SceneLightProbe.CalculateGpuProbeData: borders divide by full DirectLightShadows texture dimensions, not per-volume grid",
+  "sortReference": "VRF20.1 Scene.CalculateLightProbeBindings: indoorOutdoorLevel descending then AtlasSize.LengthSquared ascending; stable native entity order for ties",
+  "qualification": "Native compiled frames/atlas payloads with pinned VRF interpretation, not Valve private-engine shader parity; .1-unit normalizedSkin and remaining-coverage blend remain shared browser reconstructions",
+  "skyWorldPlacement": {
+    "sourceWorldFromSky": [
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      16.0,
+      0.0,
+      -128.0,
+      -640.0,
+      -1024.0,
+      1.0
+    ],
+    "qualification": "Native LPV frames composed with native sky_camera/reference transform; no atlas rewrite. Current source sky references have identity rotation."
+  }
+}
