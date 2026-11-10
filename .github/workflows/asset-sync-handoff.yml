@@ -1,0 +1,37 @@
+name: Configure server asset sync
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  configure:
+    runs-on: [self-hosted, linux, x64, cs2go-assets]
+    timeout-minutes: 5
+    steps:
+      - name: Provision R2 credentials and start the independent server timer
+        env:
+          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+        run: |
+          /opt/cs2go-assets/python/bin/python - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          directory = Path.home() / '.config/cs2go-assets'
+          directory.mkdir(mode=0o700, parents=True, exist_ok=True)
+          temporary = directory / 'r2.env.tmp'
+          descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+          with os.fdopen(descriptor, 'w') as output:
+              for key in ('R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_BUCKET'):
+                  value = os.environ[key]
+                  if not value or '\n' in value or '\r' in value:
+                      raise ValueError('Missing or invalid R2 configuration')
+                  output.write(key + '=' + json.dumps(value) + '\n')
+          temporary.replace(directory / 'r2.env')
+          PYTHON
+          XDG_RUNTIME_DIR="/run/user/$(id -u)"
+          export XDG_RUNTIME_DIR
+          export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+          systemctl --user enable --now cs2go-assets-sync.timer
+          systemctl --user start --no-block cs2go-assets-sync.service

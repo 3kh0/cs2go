@@ -64,73 +64,47 @@ jobs:
             echo "server=$server"
           } >> "$GITHUB_OUTPUT"
   assets:
+    name: Wait for server asset publication
     needs: changes
     if: needs.changes.outputs.assets == 'true'
-    runs-on: [self-hosted, linux, x64, cs2go-assets]
+    runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
-      - name: Check asset runner capacity
-        run: |
-          /opt/cs2go-assets/python/bin/python -c 'import shutil; assert shutil.disk_usage("/opt/cs2go-assets").free >= 20 * 1024**3, "Asset runner needs at least 20 GiB free"'
-          echo /opt/cs2go-assets/python/bin >> "$GITHUB_PATH"
       - uses: actions/checkout@v7
         with:
           filter: blob:none
           sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /packages/assets/
-            /package.json
-            /bunfig.toml
-      - run: python -m pip install boto3==1.40.61
-      - run: python packages/assets/sync_test.py
-      - id: identity
-        run: echo "tree=$(git rev-parse HEAD:packages/assets)" >> "$GITHUB_OUTPUT"
-      - id: published
-        run: python packages/assets/sync.py status
+          sparse-checkout: /packages/assets/manifest.json
+      - name: Wait for the independent na1 sync service
         env:
-          ASSET_TREE: ${{ steps.identity.outputs.tree }}
-          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          R2_BUCKET: ${{ vars.R2_BUCKET }}
-      - name: Reuse persistent compression cache
-        if: steps.published.outputs.complete != 'true'
-        run: ln -s /var/cache/cs2go-assets/transport packages/assets/.cache
-      - uses: oven-sh/setup-bun@v2
-        if: steps.published.outputs.complete != 'true'
-      - run: python packages/assets/sync.py seed
-        if: steps.published.outputs.complete != 'true'
-        env:
-          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          R2_BUCKET: ${{ vars.R2_BUCKET }}
-      - run: bun run assets:verify
-        if: steps.published.outputs.complete != 'true'
-      - run: bun run assets:sync
-        if: steps.published.outputs.complete != 'true'
-        env:
-          ASSET_TREE: ${{ steps.identity.outputs.tree }}
-          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          R2_BUCKET: ${{ vars.R2_BUCKET }}
-      - name: Prune obsolete compression cache
-        if: steps.published.outputs.complete != 'true'
+          ASSET_CDN_URL: ${{ vars.ASSET_CDN_URL }}
         run: |
-          python - <<'PYTHON'
-          import json
-          from pathlib import Path
-          manifest = json.loads(Path("packages/assets/manifest.json").read_text())
-          keep = set()
-          for entry in manifest["files"].values():
-              keep.add(entry["sha256"] + ".q11.br")
-              if "inputSha256" in entry:
-                  keep.add(entry["inputSha256"] + ".glb.gz")
-          for cached in Path("/var/cache/cs2go-assets/transport").iterdir():
-              if cached.is_file() and cached.name not in keep:
-                  cached.unlink()
-          PYTHON
+          node --input-type=module <<'JAVASCRIPT'
+          import { readFileSync } from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          const body = readFileSync('packages/assets/manifest.json', 'utf8');
+          const manifest = JSON.parse(body);
+          const tree = execFileSync('git', ['rev-parse', 'HEAD:packages/assets'], { encoding: 'utf8' }).trim();
+          const base = `${process.env.ASSET_CDN_URL.replace(/\/$/, '')}/releases/${manifest.release}`;
+          const deadline = Date.now() + 115 * 60_000;
+          while (Date.now() < deadline) {
+            try {
+              const receipt = await fetch(`${base}/verified/${tree}.json`, { signal: AbortSignal.timeout(30_000) });
+              if (receipt.ok && await receipt.text() === body) {
+                const release = await fetch(`${base}/manifest.json`, { signal: AbortSignal.timeout(30_000) });
+                if (release.ok && await release.text() === body) {
+                  console.log(`Server published verified asset tree ${tree}`);
+                  process.exit(0);
+                }
+              }
+            } catch (error) {
+              console.log(`Publication check will retry: ${error.message}`);
+            }
+            console.log(`Waiting for na1 to publish ${manifest.release}`);
+            await new Promise(resolve => setTimeout(resolve, 30_000));
+          }
+          throw new Error('Server asset publication timed out; inspect cs2go-assets-sync.service on na1');
+          JAVASCRIPT
   deploy:
     needs: [changes, assets]
     if: always() && !cancelled() && needs.changes.result == 'success' && needs.changes.outputs.deploy == 'true' && (needs.assets.result == 'success' || needs.assets.result == 'skipped')
