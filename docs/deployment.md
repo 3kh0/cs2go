@@ -31,7 +31,8 @@ publication; the release manifest and verification receipt are written last.
 After sync, obsolete compression-cache files are removed.
 
 The service uses Nice=10, CPUQuota=200%, MemoryHigh=6G, MemoryMax=8G and IOWeight=25.
-Keep enough disk space for Git objects, the checkout and compressed payloads;
+The script requires at least 20 GiB free before fetching. Keep enough disk space
+for Git objects, the checkout and compressed payloads;
 the initial checkout requires much more space than incremental updates. The
 `cs2go-assets` user has lingering enabled so the timer survives logout/reboot.
 To inspect from a root SSH session:
@@ -56,4 +57,5 @@ Runner location: `/opt/cs2go-assets/runner`, workspace: `/opt/cs2go-assets/work`
 service: `actions.runner.3kh0-cs2go.na1-cs2go-assets.service`. If replacing the host,
 register an official checksum-verified Actions runner under the same non-root
 account and label `cs2go-assets`, recreate the paths and Python/Bun environments,
-install the script and user units, enable lingering, then provision credentials.
+install the script and the user-unit templates from `scripts/cs2go-assets-sync.service`
+and `scripts/cs2go-assets-sync.timer`, enable lingering, then provision credentials.

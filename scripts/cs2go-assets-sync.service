@@ -1,0 +1,14 @@
+[Unit]
+Description=Verify and publish the latest CS2GO asset tree
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/cs2go-assets/work/cs2go/cs2go
+EnvironmentFile=/home/cs2go-assets/.config/cs2go-assets/r2.env
+ExecStart=/opt/cs2go-assets/sync-assets-server.sh
+TimeoutStartSec=3h
+Nice=10
+CPUQuota=200%
+MemoryHigh=6G
+MemoryMax=8G
+IOWeight=25
+UMask=0077

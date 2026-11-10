@@ -8,6 +8,7 @@ mkdir -p "$asset_state/transport"
 exec 9>"$asset_state/sync.lock"
 flock -n 9 || exit 0
 cd "$asset_checkout"
+"$asset_python" -c 'import shutil; assert shutil.disk_usage(".").free >= 20 * 1024**3, "Asset sync needs at least 20 GiB free"'
 if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
   echo 'Asset checkout has tracked modifications; refusing to overwrite them.' >&2
   exit 1

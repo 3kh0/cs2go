@@ -1,0 +1,8 @@
+[Unit]
+Description=Check for CS2GO asset updates
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=2min
+Unit=cs2go-assets-sync.service
+[Install]
+WantedBy=timers.target
