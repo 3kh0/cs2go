@@ -273,6 +273,25 @@ it("every packed effect has verified native CS2 or pinned supplemental C4 proven
     expect(createHash("sha256").update(bytes).digest("hex")).toBe(outputSha256);
     sources.set(`/audio/source/${name}.ogg`, outputSha256);
   }
+  for (const reportName of ["map-door-sounds", "prop-break-sounds"]) {
+    const native = JSON.parse(
+      readFileSync(`../../packages/assets/public/audio/source/${reportName}.json`, "utf8"),
+    );
+    if (reportName === "map-door-sounds") expect(native.decompiler).toContain("20.1");
+    else expect(native.soundEventResourceSha256).toBe(breaks.resourceSha256);
+    for (const clip of native.clips) {
+      expect(clip.resourceSha256).toMatch(/^[a-f0-9]{64}$/);
+      expect(clip.codec).toBe("pcm_s16le");
+      expect(
+        manifest.clips.find((entry: { name: string }) => entry.name === clip.name),
+      ).toMatchObject({
+        path: clip.path,
+        resource: clip.resource,
+        outputSha256: clip.outputSha256,
+      });
+      sources.set(clip.path, clip.outputSha256);
+    }
+  }
   expect(bank.clips).toHaveLength(sources.size);
   for (const clip of bank.clips) {
     expect(sources.get(clip.url), clip.url).toBe(clip.sha256);

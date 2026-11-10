@@ -8,7 +8,7 @@
     "start": "bun src/index.ts",
     "build": "tsc --noEmit && bun build src/index.ts --target=bun --outdir=dist",
     "check": "tsc --noEmit && oxlint --type-aware --type-check src tests",
-    "test": "bun tests/server.integration.ts && bun tests/maps.integration.ts && bun tests/mirage.integration.ts && bun tests/breakables.integration.ts && bun tests/public-lobbies.integration.ts"
+    "test": "bun tests/server.integration.ts && bun tests/maps.integration.ts && bun tests/mirage.integration.ts && bun tests/native-maps.integration.ts && bun tests/breakables.integration.ts && bun tests/doors.integration.ts && bun tests/footsteps.integration.ts && bun tests/public-lobbies.integration.ts"
   },
   "dependencies": {
     "@cs2go/protocol": "workspace:*",

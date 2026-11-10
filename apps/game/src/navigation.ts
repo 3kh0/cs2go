@@ -1,6 +1,9 @@
 import * as T from "three";
 import type { MapId } from "@cs2go/protocol";
 import { touchesBuyZone, type MapTriggerData } from "@cs2go/simulation/buy-zones";
+import type { MapCollision } from "@cs2go/simulation/map-collision";
+import { movement, SOURCE_UNIT } from "@cs2go/simulation/physics";
+import { groundSpawn } from "@cs2go/simulation/spawn-position";
 import type { NativeLadder } from "@cs2go/simulation/ladder";
 import { ladderNormal } from "@cs2go/simulation/ladder";
 import type { MapCallout } from "./map-callouts";
@@ -59,7 +62,9 @@ export class Navigation {
   private readonly closed: Uint8Array;
   private readonly heapArea: Int32Array;
   private readonly heapScore: Float64Array;
-  constructor(data: MapNavigation) {
+  private collision?: MapCollision;
+  constructor(data: MapNavigation, collision?: MapCollision) {
+    this.collision = collision;
     this.data = data;
     const areas = (this.areas = data.areas),
       count = areas.length;
@@ -150,6 +155,9 @@ export class Navigation {
     this.closed = new Uint8Array(count);
     this.heapArea = new Int32Array(links + 1);
     this.heapScore = new Float64Array(links + 1);
+  }
+  bindCollision(collision: MapCollision) {
+    this.collision = collision;
   }
   private cell(x: number, z: number) {
     const cx = Math.floor(x / navCell) - this.x0,
@@ -327,7 +335,7 @@ export class Navigation {
       // Source 2 polygon NAV exports may omit place labels. Resolve the native
       // trigger center onto an ordinary connected floor rather than using its
       // airborne brush center as a planting goal.
-      if (!candidates.length && this.data.mapId === "mirage") {
+      if (!candidates.length && this.data.mapId && this.data.mapId !== "dust2") {
         const touchingSite = this.data.triggers?.sites.find((site) => site.site === index);
         candidates = this.areas.filter((area) => {
           if (!area.links.length || area.flags & 2) return false;
@@ -339,6 +347,34 @@ export class Navigation {
         if (!candidates.length) candidates = [this.areas[this.nearest(goal)]];
       }
       this.sites.set(index, candidates);
+    }
+    if (this.collision && this.data.mapId && this.data.mapId !== "dust2") {
+      const collision = this.collision;
+      const hulls = this.data.triggers?.sites.find((site) => site.site === index)?.hulls;
+      const hull = { halfWidth: movement.hullRadius, height: movement.standingHeight };
+      const select = (areas: readonly NavArea[]) => {
+        let best: T.Vector3 | undefined;
+        let distance = Infinity;
+        for (const area of areas) {
+          if (!this.connected[this.index.get(area.id)!] || area.flags & 2) continue;
+          const point = new T.Vector3().fromArray(area.center);
+          if (!groundSpawn(point, collision)) continue;
+          // NAV samples hover above their walking surface; a different storey
+          // underneath a fixture is not a substitute for that authored floor.
+          if (Math.abs(point.y - area.center[1]) > 18 * SOURCE_UNIT) continue;
+          if (hulls && !hulls.some((box) => touchesBuyZone(point, box, hull))) continue;
+          const score = Math.hypot(point.x - goal.x, point.z - goal.z);
+          if (score < distance) {
+            best = point;
+            distance = score;
+          }
+        }
+        return best;
+      };
+      const point = select(candidates) ?? (hulls ? select(this.areas) : undefined);
+      if (!point)
+        throw new Error(`No standing-clear native plant goal for ${this.data.mapId}/${index}`);
+      return point;
     }
     let cost = Infinity,
       best: NavArea | undefined;

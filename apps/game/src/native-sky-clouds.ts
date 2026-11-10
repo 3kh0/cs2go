@@ -11,6 +11,7 @@ export type NativeSkyEffectUniforms = {
   depth: { value: T.DepthTexture };
   resolution: { value: T.Vector2 };
   inverseProjection: { value: T.Matrix4 };
+  viewportOrigin?: { value: T.Vector2 };
   /** Native sky-camera scale when miniature coordinates are baked into world metres. */
   sourceScale?: number;
 };
@@ -76,6 +77,7 @@ export function createNativeSkyEffect(
       time: uniforms.time,
       sceneDepth: uniforms.depth,
       resolution: uniforms.resolution,
+      viewportOrigin: uniforms.viewportOrigin ?? { value: new T.Vector2() },
       inverseProjection: uniforms.inverseProjection,
       colorMap: texture("g_tColor"),
       mask1: texture("g_tMask1"),
@@ -131,7 +133,7 @@ export function createNativeSkyEffect(
       #endif
       uniform float time, boost, opacityScale, fadeDistance, fadeFalloff, fadeMin, fadeMax;
       uniform float fresnelExponent, fresnelFalloff, fresnelMin, fresnelMax, featherDistance, featherFalloff;
-      uniform vec2 scale1,scale2,scale3,pan1,pan2,pan3,resolution;
+      uniform vec2 scale1,scale2,scale3,pan1,pan2,pan3,resolution,viewportOrigin;
       uniform mat4 inverseProjection;
       varying vec2 effectUv; varying vec4 effectTint;
       varying vec3 effectNormal,effectView;
@@ -154,7 +156,7 @@ export function createNativeSkyEffect(
         fade = pow(max(fade,0.0),fadeFalloff);
         float feather = 1.0;
         #if NATIVE_SKY_DEPTH_FEATHER == 1
-          vec2 screen = gl_FragCoord.xy/resolution;
+          vec2 screen = (gl_FragCoord.xy-viewportOrigin)/resolution;
           float depth = texture2D(sceneDepth,screen).r;
           vec4 scene = inverseProjection * vec4(screen*2.0-1.0,depth*2.0-1.0,1.0);
           feather = pow(clamp(length(scene.xyz/scene.w+effectView)/max(featherDistance,1e-8),.0001,1.0),featherFalloff);

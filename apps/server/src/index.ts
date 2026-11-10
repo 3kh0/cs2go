@@ -1,4 +1,4 @@
-import { PROTOCOL_VERSION, TICK_RATE, isMapId, type MapId } from "@cs2go/protocol";
+import { PROTOCOL_VERSION, TICK_RATE, MAPS, MAP_IDS, isMapId, type MapId } from "@cs2go/protocol";
 import { loadServerMap } from "./map";
 import { startServer } from "./server";
 const port = Number(process.env.PORT ?? 3001);
@@ -12,12 +12,13 @@ const log = (message: string) =>
 const started = performance.now();
 log(`Starting multiplayer with Bun ${Bun.version} as PID ${process.pid}`);
 const mapId = process.env.MAP_ID ?? "dust2";
-if (!isMapId(mapId)) throw new Error("MAP_ID must be dust2 or mirage");
-const enabled = (process.env.MAPS ?? "dust2,mirage").split(",").map((id) => id.trim());
-if (enabled.some((id) => !isMapId(id))) throw new Error("MAPS must contain dust2 or mirage");
+if (!isMapId(mapId)) throw new Error(`MAP_ID must be one of: ${MAP_IDS.join(", ")}`);
+const enabled = (process.env.MAPS ?? MAP_IDS.join(",")).split(",").map((id) => id.trim());
+if (enabled.some((id) => !isMapId(id)))
+  throw new Error(`MAPS must contain only: ${MAP_IDS.join(", ")}`);
 const maps: Partial<Record<MapId, Awaited<ReturnType<typeof loadServerMap>>>> = {};
 for (const id of new Set([mapId, ...(enabled as MapId[])])) {
-  log(`Loading ${id === "mirage" ? "Mirage" : "Dust II"}...`);
+  log(`Loading ${MAPS[id].name}...`);
   maps[id] = await loadServerMap(undefined, id);
 }
 const map = maps[mapId]!;

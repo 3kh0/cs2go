@@ -201,6 +201,7 @@ function detonate(match: Match, projectile: UtilityProjectile, events: MatchEven
   const origin = new T.Vector3(effect.x, effect.y, effect.z),
     data = grenadeData[effect.kind];
   if (effect.kind === "he") {
+    match.doors.damageRadius(origin, data.radius, heDamage, "explosion");
     for (const change of match.breakables.damageRadius(origin, data.radius, heDamage, "explosion"))
       events.push({ kind: "breakable", id: change.id, health: change.health, point: origin });
     areaDamage(match, effect, 0, data.radius, events);

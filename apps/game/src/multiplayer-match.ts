@@ -1,3 +1,5 @@
+import { FootstepStride } from "@cs2go/simulation/footsteps";
+import { interpolateDoorStates } from "./door-presentation";
 import { PLANT_DURATION } from "./bomb-presentation";
 import { interpolateCharacterClock } from "@cs2go/simulation/character-clock";
 import { hideDeathcam } from "./deathcam";
@@ -7,6 +9,7 @@ import * as T from "three";
 import {
   neutralInput,
   type Input,
+  type DoorState,
   type MatchMode,
   type ServerMessage,
   type PlayerState,
@@ -52,9 +55,10 @@ export class MultiplayerMatch {
   private beep = 0;
   private finished = false;
   private wasReconnecting = false;
-  private stepDistance = 0;
+  private readonly footstepStride = new FootstepStride();
   private spectatingView = false;
   private breakablesSynchronized = false;
+  private readonly presentedDoors: DoorState[] = [];
   private reloadSounds = new Map<
     string,
     { weapon: number; spawn: number; time: number; phase: string; progress: number }
@@ -129,6 +133,7 @@ export class MultiplayerMatch {
         bombDamage: world.bombDamage,
         grenadeCollision: world.grenadeCollision,
         breakables: world.breakables,
+        doors: world.doors,
       },
       create,
       (message) => {
@@ -260,6 +265,8 @@ export class MultiplayerMatch {
     // The connection already restored collision before prediction. Initial and
     // recovered snapshots establish the scene quietly; later transitions shatter once.
     g.syncMapBreakables(this.breakablesSynchronized);
+    g.syncDoorAudio(!this.breakablesSynchronized || g.round !== state.round);
+    if (!this.breakablesSynchronized || g.round !== state.round) g.syncMapDoors();
     this.breakablesSynchronized = true;
     const previousTeam = g.team;
     const previousRoundTime = g.time;
@@ -397,6 +404,7 @@ export class MultiplayerMatch {
       g.magazines[Number(index)] = { ...ammo };
     if (local.spawn !== this.lastSpawn) {
       this.lastSpawn = local.spawn;
+      this.footstepStride.reset();
       g.yaw = local.yaw;
       g.pitch = -local.pitch;
       g.setScope(0);
@@ -509,7 +517,13 @@ export class MultiplayerMatch {
     }
     this.health = local.health;
     for (const event of message.events) {
-      if (event.kind === "hurt") {
+      if (event.kind === "footstep") {
+        // Local prediction already emitted the same simulation stride.
+        if (event.actor !== local.id) {
+          const peer = this.peers.get(event.actor);
+          g.playFootstep(event, !!peer && peer === g.spectated && g.spectatorMode === "first");
+        }
+      } else if (event.kind === "hurt") {
         if (event.victim === local.id) g.deathDamage.record(event.attacker, "taken", event.damage);
         else if (event.attacker === local.id)
           g.deathDamage.record(event.victim, "given", event.damage);
@@ -797,6 +811,7 @@ export class MultiplayerMatch {
       burst: g.burstMode,
       utility: g.utility.selected ?? "",
       scope: g.scopeLevel,
+      interact: locked && g.keys.has("KeyE"),
       use:
         locked &&
         (g.team === "ct"
@@ -813,19 +828,18 @@ export class MultiplayerMatch {
     if (grounded && !local.grounded && local.vertical > 0 && local.ladder?.id == null)
       g.soundscape.play("jump");
     if (grounded === false && local.grounded) g.soundscape.play("land");
-    if (
-      local.grounded &&
-      local.ladder?.id == null &&
-      Math.hypot(local.vx, local.vz) > 1.5 &&
-      !input.walk &&
-      !input.duck
-    ) {
-      this.stepDistance += Math.hypot(local.vx, local.vz) * dt;
-      if (this.stepDistance >= 1.8) {
-        this.stepDistance %= 1.8;
-        g.sound("step");
-      }
-    } else this.stepDistance = 0;
+    const foot = this.footstepStride.advance(
+      {
+        x: local.x,
+        y: local.y,
+        z: local.z,
+        spawn: local.spawn,
+        audible:
+          local.health > 0 && local.grounded && !local.ladder?.id && !input.walk && !input.duck,
+      },
+      dt,
+    );
+    if (foot) g.emitFootstep(new T.Vector3(local.x, local.y, local.z), local.team, foot, true);
     g.position.set(local.x, local.y, local.z);
     g.velocity.x = local.vx;
     g.velocity.z = local.vz;
@@ -896,6 +910,32 @@ export class MultiplayerMatch {
     );
     g.sway += Math.hypot(local.vx, local.vz) * dt * 1.8;
     const target = performance.now() - INTERPOLATION_DELAY_MS;
+    const history = this.connection.history;
+    let before = history[0],
+      after = history.at(-1)!;
+    for (let i = 1; i < history.length; i++)
+      if (history[i].at >= target) {
+        before = history[i - 1];
+        after = history[i];
+        break;
+      }
+    const timeFraction =
+      before && after
+        ? T.MathUtils.clamp((target - before.at) / Math.max(1, after.at - before.at), 0, 1)
+        : 1;
+    if (g.world.doors?.states.length && g.world.doorView) {
+      if (after?.round === g.round)
+        g.world.doorView.sync(
+          interpolateDoorStates(
+            before?.doors ?? [],
+            after.doors ?? [],
+            timeFraction,
+            before?.round === after.round,
+            this.presentedDoors,
+          ),
+        );
+      else g.syncMapDoors();
+    }
     for (const [id, bot] of this.peers) {
       if (bot.health <= 0) {
         if (bot.group.visible) {
@@ -904,23 +944,10 @@ export class MultiplayerMatch {
         }
         continue;
       }
-      const history = this.connection.history;
-      let before = history[0],
-        after = history.at(-1)!;
-      for (let i = 1; i < history.length; i++)
-        if (history[i].at >= target) {
-          before = history[i - 1];
-          after = history[i];
-          break;
-        }
+      if (!before || !after) continue;
       const a = before.players.find((p) => p.id === id),
         b = after.players.find((p) => p.id === id);
       if (!a || !b) continue;
-      const timeFraction = T.MathUtils.clamp(
-        (target - before.at) / Math.max(1, after.at - before.at),
-        0,
-        1,
-      );
       this.connection.renderTick = before.tick + (after.tick - before.tick) * timeFraction;
       const t =
         a.spawn === b.spawn

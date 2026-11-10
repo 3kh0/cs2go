@@ -9,9 +9,24 @@ export type TriggerBox = {
   planes?: readonly (readonly number[])[];
 };
 export type BuyZone = TriggerBox & { team: "t" | "ct" };
+export type NativeMapTrigger = {
+  entity: string;
+  model: string;
+  enabled: boolean;
+  hulls: TriggerBox[];
+  native?: Record<string, unknown>;
+  spawnflags?: number;
+  filtername?: string;
+  damage?: number;
+  damagecap?: number;
+  damagemodel?: number | string;
+  damagetype?: number | string;
+};
 export type MapTriggerData = {
   zones: BuyZone[];
   sites: { site: number; hulls: TriggerBox[] }[];
+  hurt?: NativeMapTrigger[];
+  bombReset?: NativeMapTrigger[];
 };
 
 type ConvexShape = { vertices: number[][]; axes: number[][] };

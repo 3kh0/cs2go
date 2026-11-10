@@ -5,7 +5,11 @@ import type { MapId } from "@cs2go/protocol";
 import type { MapTriggerData } from "./buy-zones";
 import type { NativeLadder } from "./ladder";
 import type { BreakableWorld, NativeBreakableDefinition } from "./breakables";
+import type { DoorWorld, DoorPhysics, NativeDoorDefinition } from "./doors";
 export type DustMap = {
+  doorDefinitions?: readonly NativeDoorDefinition[];
+  doorPhysics?: readonly DoorPhysics[];
+  doors?: DoorWorld;
   breakableDefinitions?: readonly NativeBreakableDefinition[];
   breakables?: BreakableWorld;
   id?: MapId;
@@ -29,6 +33,11 @@ export function dustCollision(scene: T.Object3D) {
     let metadata: T.Object3D = object;
     while (metadata.parent && !metadata.userData.InteractAs) metadata = metadata.parent;
     const interactions = metadata.userData.InteractAs as string[] | undefined;
+    let attributes: T.Object3D = object;
+    while (attributes.parent && !attributes.userData.nativeCollisionAttributes)
+      attributes = attributes.parent;
+    if (attributes.userData.nativeCollisionAttributes)
+      object.userData.nativeCollisionAttributes = attributes.userData.nativeCollisionAttributes;
     if (interactions?.includes("csgo_grenadeclip")) {
       grenadeOnly.push(object);
       return;

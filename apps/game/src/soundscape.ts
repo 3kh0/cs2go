@@ -7,12 +7,14 @@ export type { Music } from "./music-kits";
 import { utilityAudio, type UtilityCue } from "./utility-audio";
 import { loadAudioClip } from "./audio-bank";
 import type { Vector3 } from "three";
-import { SpatialAudio } from "./spatial-audio";
+import { SpatialAudio, type SoundRange } from "./spatial-audio";
 import { NativeAcoustics } from "./room-acoustics";
 import { fetchGzipped } from "./gltf";
 import uiCues from "./data/ui-cues.json";
 import type { UiInteraction } from "./ui-audio";
 export type Cue =
+  | `map-door-${string}`
+  | `prop-break-${string}`
   | BombPlantCue
   | UtilityCue
   | `ui-${UiInteraction}`
@@ -109,7 +111,7 @@ export class Soundscape {
     this.spatial.native = new NativeAcoustics(pathing);
     if (!response.ok) throw new Error("Sound manifest unavailable");
     const manifest = (await response.json()) as {
-      clips: { name: string; sourceEventGain?: number; sourceEventPitch?: number }[];
+      clips: { name: string; path?: string; sourceEventGain?: number; sourceEventPitch?: number }[];
     };
     await Promise.all(
       utilityAudio.map(async (name) => {
@@ -119,8 +121,8 @@ export class Soundscape {
     await Promise.all(
       manifest.clips
         .filter((c) => !c.name.startsWith("music-"))
-        .map(async ({ name, sourceEventGain, sourceEventPitch }) => {
-          this.buffers.set(name, await loadAudioClip(`/audio/source/${name}.ogg`));
+        .map(async ({ name, path, sourceEventGain, sourceEventPitch }) => {
+          this.buffers.set(name, await loadAudioClip(path ?? `/audio/source/${name}.ogg`));
           if (Number.isFinite(sourceEventGain))
             this.nativeCueSettings.set(name, {
               gain: sourceEventGain!,
@@ -180,22 +182,24 @@ export class Soundscape {
     quiet = false,
     surface: "sand" | "concrete" = "sand",
     position?: Vector3,
-    playback?: { gain: number; pitch: number },
+    playback?: { gain: number; pitch: number; range?: SoundRange; clip?: string },
   ) {
     if (!this.context || !this.effects || !this.volume || !this.effectsVolume) return;
     const breaking = cue.startsWith("map-break-")
       ? mapBreakAudio[cue as keyof typeof mapBreakAudio]
       : undefined;
     const variant = 1 + Math.floor(Math.random() * (breaking?.variants ?? 3));
-    const name = breaking
-      ? cue + (variant === 1 ? "" : `-${variant}`)
-      : cue === "dry-fire"
-        ? "revolver-prepare"
-        : cue === "step"
-          ? `step-${surface}-${(this.step++ % 4) + 1}`
-          : ["damage", "death", "gear"].includes(cue)
-            ? `${cue}-${variant}`
-            : cue;
+    const name =
+      playback?.clip ??
+      (breaking
+        ? cue + (variant === 1 ? "" : `-${variant}`)
+        : cue === "dry-fire"
+          ? "revolver-prepare"
+          : cue === "step"
+            ? `step-${surface}-${(this.step++ % 4) + 1}`
+            : ["damage", "death", "gear"].includes(cue)
+              ? `${cue}-${variant}`
+              : cue);
     const buffer = this.buffers.get(name);
     if (!buffer) return;
     const c4 = c4Audio[name as keyof typeof c4Audio];
@@ -236,14 +240,15 @@ export class Soundscape {
           gain,
           this.effects,
           c4 ? position.clone().setY(position.y + c4.height) : position,
-          c4
-            ? {
-                refDistance: 1,
-                maxDistance: c4.curve.at(-1)![0] * 0.0254,
-                curve: c4.curve.map(([x, y]) => [x * 0.0254, y] as const),
-                occlusionMix: c4.occlusionMix,
-              }
-            : blast,
+          playback?.range ??
+            (c4
+              ? {
+                  refDistance: 1,
+                  maxDistance: c4.curve.at(-1)![0] * 0.0254,
+                  curve: c4.curve.map(([x, y]) => [x * 0.0254, y] as const),
+                  occlusionMix: c4.occlusionMix,
+                }
+              : blast),
         )
       : undefined;
     if (!disconnectSpatial) {

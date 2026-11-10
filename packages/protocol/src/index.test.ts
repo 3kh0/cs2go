@@ -1,12 +1,44 @@
 import { expect, test } from "vitest";
 import {
   MAX_BATCH,
+  MAPS,
+  MAP_IDS,
   PROTOCOL_VERSION,
   WEAPON_COUNT,
   knifeDefinitions,
+  isMapId,
   neutralInput,
   parseClientMessage,
 } from "./index";
+
+test("native imported maps are available to matchmaking", () => {
+  expect(MAP_IDS).toEqual(["dust2", "mirage", "vertigo", "nuke", "inferno", "cache"]);
+  expect(MAP_IDS.map((id) => MAPS[id].name)).toEqual([
+    "Dust II",
+    "Mirage",
+    "Vertigo",
+    "Nuke",
+    "Inferno",
+    "Cache",
+  ]);
+  for (const map of ["de_nuke", "unknown", "constructor", "__proto__", null]) {
+    expect(isMapId(map)).toBe(false);
+    expect(
+      parseClientMessage(
+        JSON.stringify({
+          type: "join",
+          version: PROTOCOL_VERSION,
+          room: "012345",
+          name: "PLAYER",
+          mode: "casual",
+          team: "ct",
+          map,
+        }),
+      ),
+    ).toBeNull();
+  }
+  for (const id of MAP_IDS) expect(isMapId(id)).toBe(true);
+});
 
 test("chat accepts bounded text and channels without trusting supplied identity", () => {
   expect(
@@ -37,6 +69,15 @@ test("buy-and-drop is a bounded one-shot boolean input", () => {
     parseClientMessage(JSON.stringify({ type: "inputs", inputs: [{ ...input, buyDrop: "true" }] })),
   ).toBeNull();
   expect(neutralInput().buyDrop).toBe(false);
+});
+
+test("generic use stays separate from held C4 use", () => {
+  const input = { ...neutralInput(1), interact: true };
+  expect(input.use).toBe(false);
+  expect(parseClientMessage(JSON.stringify({ type: "inputs", inputs: [input] }))).not.toBeNull();
+  expect(
+    parseClientMessage(JSON.stringify({ type: "inputs", inputs: [{ ...input, interact: "yes" }] })),
+  ).toBeNull();
 });
 
 test("every knife can be configured and selected without accepting invalid weapon IDs", () => {
@@ -88,7 +129,7 @@ test("rejects incompatible versions, malformed payloads and impossible inputs", 
   expect(parseClientMessage(JSON.stringify({ ...join, create: true, room: "" }))).not.toBeNull();
   for (const value of [
     { ...join, version: -1 },
-    ...["de_mirage", "../mirage", "nuke", null, 1].map((map) => ({ ...join, map })),
+    ...["de_mirage", "../mirage", "de_nuke", null, 1].map((map) => ({ ...join, map })),
     ...["12345", "1234567", "abcdef", "abcd1234abcd", 123456, "123 45"].map((room) => ({
       ...join,
       room,

@@ -6,6 +6,7 @@ import {
   MAX_PENDING_INPUTS,
   PROTOCOL_VERSION,
   type Input,
+  type DoorState,
   type PlayerState,
   type PlayerConfiguration,
   type ServerMessage,
@@ -38,7 +39,13 @@ export class MatchConnection {
   id = "";
   local?: PlayerState;
   players: PlayerState[] = [];
-  history: { at: number; tick: number; players: PlayerState[] }[] = [];
+  history: {
+    at: number;
+    tick: number;
+    players: PlayerState[];
+    round?: number;
+    doors?: DoorState[];
+  }[] = [];
   pending: Input[] = [];
   batch: Input[] = [];
   seq = 0;
@@ -127,6 +134,7 @@ export class MatchConnection {
           // Collision must match the authoritative panel state before pending
           // movement is replayed through a newly opened or restored passage.
           this.map.breakables?.restore(message.round.breakables ?? []);
+          this.map.doors?.restore(message.round.doors ?? []);
           if (this.reconnecting) console.log("[network] Connection restored");
           this.reconnecting = false;
           this.retryStarted = 0;
@@ -142,6 +150,8 @@ export class MatchConnection {
             tick: message.tick,
             at: this.timeline + (message.tick * 1000) / TICK_RATE,
             players: message.players,
+            round: message.round.round,
+            doors: message.round.doors,
           });
           while (this.history.length > 16) this.history.shift();
           const state = message.players.find((player) => player.id === this.id);

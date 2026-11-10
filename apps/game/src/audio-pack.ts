@@ -23,7 +23,7 @@ function parseIndex(bytes: Uint8Array): Entry[] {
     const entry = row as Record<string, unknown>;
     if (
       typeof entry.url !== "string" ||
-      !/^\/audio\/(?:source\/)?[a-z0-9_-]+\.ogg$/.test(entry.url) ||
+      !/^\/audio\/(?:[a-z0-9_-]+\.ogg|source\/[a-z0-9_-]+\.(?:ogg|wav))$/.test(entry.url) ||
       urls.has(entry.url) ||
       entry.offset !== offset ||
       typeof entry.length !== "number" ||
@@ -39,12 +39,52 @@ function parseIndex(bytes: Uint8Array): Entry[] {
   }
   return result;
 }
-function validClip(bytes: Uint8Array) {
+function validClip(bytes: Uint8Array, url: string) {
+  if (url.endsWith(".wav")) {
+    if (bytes.length < 44) return invalid("Invalid packed PCM WAV clip");
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    const tag = (offset: number) => new TextDecoder().decode(bytes.subarray(offset, offset + 4));
+    if (tag(0) !== "RIFF" || tag(8) !== "WAVE" || view.getUint32(4, true) + 8 !== bytes.length)
+      return invalid("Invalid packed PCM WAV clip");
+    let offset = 12,
+      format = false,
+      data = 0,
+      block = 0;
+    while (offset + 8 <= bytes.length) {
+      const size = view.getUint32(offset + 4, true),
+        start = offset + 8;
+      if (size > bytes.length - start) return invalid("Invalid packed PCM WAV chunk");
+      if (tag(offset) === "fmt ") {
+        if (format || size < 16) return invalid("Invalid packed PCM WAV format");
+        const channels = view.getUint16(start + 2, true),
+          rate = view.getUint32(start + 4, true);
+        block = view.getUint16(start + 12, true);
+        if (
+          view.getUint16(start, true) !== 1 ||
+          ![1, 2].includes(channels) ||
+          rate < 8000 ||
+          rate > 192000 ||
+          view.getUint16(start + 14, true) !== 16 ||
+          block !== channels * 2 ||
+          view.getUint32(start + 8, true) !== rate * block
+        )
+          return invalid("Invalid packed PCM WAV format");
+        format = true;
+      } else if (tag(offset) === "data") {
+        if (data) return invalid("Invalid packed PCM WAV data");
+        data = size;
+      }
+      offset = start + size + (size & 1);
+    }
+    if (offset !== bytes.length || !format || !data || data % block)
+      return invalid("Invalid packed PCM WAV data");
+    return bytes;
+  }
   if (bytes[0] !== 79 || bytes[1] !== 103 || bytes[2] !== 103 || bytes[3] !== 83)
     invalid("Invalid packed Ogg clip");
   return bytes;
 }
-/** Lossless local Opus container; music remains streamed separately. */
+/** Lossless local Opus/native PCM bank; music remains streamed separately. */
 export function parseAudioPack(data: ArrayBuffer): Map<string, Uint8Array> {
   const bytes = new Uint8Array(data),
     end = 12 + indexLength(bytes);
@@ -53,7 +93,7 @@ export function parseAudioPack(data: ArrayBuffer): Map<string, Uint8Array> {
   let offset = end;
   for (const entry of parseIndex(bytes.subarray(12, end))) {
     if (offset + entry.length > bytes.length) return invalid("Truncated audio pack clip");
-    clips.set(entry.url, validClip(bytes.subarray(offset, offset + entry.length)));
+    clips.set(entry.url, validClip(bytes.subarray(offset, offset + entry.length), entry.url));
     offset += entry.length;
   }
   if (offset !== bytes.length) invalid("Unindexed audio pack bytes");
@@ -120,7 +160,7 @@ export async function streamAudioPack(
     try {
       for (let i = 0; i < entries.length; i++) {
         const entry = entries[i],
-          bytes = validClip(await input.take(entry.length));
+          bytes = validClip(await input.take(entry.length), entry.url);
         // The final requested clip also verifies EOF/trailing data before startup completes.
         if (i === entries.length - 1 && (await input.available()))
           invalid("Unindexed audio pack bytes");

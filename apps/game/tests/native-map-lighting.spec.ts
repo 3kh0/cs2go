@@ -89,3 +89,68 @@ test("Mirage native compressed atlases upload without fetching decoded fallback 
   expect(requests.some((path) => /directional\.(png|webp)$/.test(path))).toBe(true);
   expect(errors).toEqual([]);
 });
+
+test("native layered detail textures blend independently before modulation", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const results = await page.evaluate(async () => {
+    const path = "/tests/native-layer-detail-fixture.ts";
+    return (await import(path)).renderNativeLayerDetails();
+  });
+  for (const result of results) {
+    expect(result.error).toBe(0);
+    for (const channel of result.actual)
+      expect(Math.abs(channel - result.expected)).toBeLessThanOrEqual(1);
+  }
+  expect(errors).toEqual([]);
+});
+
+test("native Mod2x overlays preserve the background and authored draw opacity", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const results = await page.evaluate(async () => {
+    const path = "/tests/native-overlay-fixture.ts";
+    return (await import(path)).renderNativeOverlay();
+  });
+  for (const result of results) {
+    expect(result.error).toBe(0);
+    result.actual.forEach((value: number, i: number) =>
+      expect(Math.abs(value - result.expected[i])).toBeLessThanOrEqual(1),
+    );
+  }
+  expect(errors).toEqual([]);
+});
+
+test("native Mod2x filters raw texels and preserves graded backgrounds at zero opacity", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/native-overlay-fixture.ts";
+    return (await import(path)).renderNativeOverlaySampling();
+  });
+  for (const row of [result.raw, result.graded, result.neutral]) expect(row.error).toBe(0);
+  result.raw.pixel.forEach((value: number, index: number) =>
+    expect(Math.abs(value - [64, 102, 128][index])).toBeLessThanOrEqual(1),
+  );
+  expect(result.neutral.pixel).toEqual(result.graded.pixel);
+  expect(errors).toEqual([]);
+});

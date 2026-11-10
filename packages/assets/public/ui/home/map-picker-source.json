@@ -1,0 +1,110 @@
+{
+  "sourceEngine": "Valve Source 2",
+  "steamBuild": "26445667",
+  "source": "Installed native Panorama resources and mainmenu_play layout/style/script",
+  "nativeCardBinding": {
+    "image": "map_icons/screenshots/720p/<map>.png",
+    "position": "50% 0%",
+    "size": "auto 100%"
+  },
+  "mapAuthorship": "Not inferred from engine or distribution; original map creators unverified",
+  "cacheDistribution": {
+    "app": 730,
+    "depot": "2347770",
+    "manifest": "6679288287140932208",
+    "resource": "maps/de_cache.vpk",
+    "bytes": 308788626,
+    "sha256": "a53d4294883fb2c51025cfa3d4208fa396494f9492ebd51ea7138e8a231aefcd",
+    "qualification": "Installed base-game depot record matches; map creator, Workshop identity and artwork revision match are unverified."
+  },
+  "files": [
+    {
+      "map": "vertigo",
+      "kind": "cardSource",
+      "file": "vertigo.webp",
+      "resource": "panorama/images/map_icons/screenshots/720p/de_vertigo_png.vtex_c",
+      "sourceSha256": "417ab3dc89fc462885b3b3ff28304f19a88d7f1e1b18e544af2f4f5890b729b4",
+      "decodedSha256": "664745ebabb86850cc93f30bd226b3900635a80490160bc0d8cff2e32382d27f",
+      "sha256": "f38343d5de17bf736ed69605b70d56f6fd103556b0bd5c3f762860ea3dd59c66",
+      "bytes": 921478,
+      "processing": "Lossless WebP; all decoded RGBA pixels verified unchanged"
+    },
+    {
+      "map": "vertigo",
+      "kind": "emblem",
+      "file": "vertigo-emblem.svg",
+      "resource": "panorama/images/map_icons/map_icon_de_vertigo.vsvg_c",
+      "sourceSha256": "37840b48954a80f8d0c2d3cadce7735b587f5801ee6f68b2e8cf2206aaa7bab7",
+      "decodedSha256": "1e2b011874066e8f355b56fdbeb4bb9d0c972ebd109f96b7ae86a7c242a1d75b",
+      "sha256": "1e2b011874066e8f355b56fdbeb4bb9d0c972ebd109f96b7ae86a7c242a1d75b",
+      "bytes": 41677,
+      "processing": "Original embedded SVG bytes unchanged"
+    },
+    {
+      "map": "nuke",
+      "kind": "cardSource",
+      "file": "nuke.webp",
+      "resource": "panorama/images/map_icons/screenshots/720p/de_nuke_png.vtex_c",
+      "sourceSha256": "1ad78ed89756f87a3a2b20da3fef5030736f447440edcc10f48596cd58058835",
+      "decodedSha256": "7a862f9c81b5445d1d27ba82fd4564da6e273d6af4eaeb6b19a8bd10dbe929d5",
+      "sha256": "0f0f1b9a8dd633e84b49528485de14b367acd500b81c52f6306c5793b12addb2",
+      "bytes": 829300,
+      "processing": "Lossless WebP; all decoded RGBA pixels verified unchanged"
+    },
+    {
+      "map": "nuke",
+      "kind": "emblem",
+      "file": "nuke-emblem.svg",
+      "resource": "panorama/images/map_icons/map_icon_de_nuke.vsvg_c",
+      "sourceSha256": "2c8e521753e4d0cfdfbc3f47d66cdfa378594067ca6e360c5da6f5ffe5d4d2f9",
+      "decodedSha256": "a6e0edc910841320eed4dbc6d6ca1ebc94f0048a98d4d85ce1a1022c39845760",
+      "sha256": "a6e0edc910841320eed4dbc6d6ca1ebc94f0048a98d4d85ce1a1022c39845760",
+      "bytes": 70460,
+      "processing": "Original embedded SVG bytes unchanged"
+    },
+    {
+      "map": "inferno",
+      "kind": "cardSource",
+      "file": "inferno.webp",
+      "resource": "panorama/images/map_icons/screenshots/720p/de_inferno_png.vtex_c",
+      "sourceSha256": "882144824104daf2a5cf298b5f3f0e61884f083cadf630e765275cdc9c2f1dd6",
+      "decodedSha256": "3a7b5c80f00f7b39b7c630eb8925a2f60e27aa847498af786121bb5f260d91dd",
+      "sha256": "9be48afe8ead1f7c6120cb1ae03c11751cf990a5e01eab33f88cd00fa5797b35",
+      "bytes": 958220,
+      "processing": "Lossless WebP; all decoded RGBA pixels verified unchanged"
+    },
+    {
+      "map": "inferno",
+      "kind": "emblem",
+      "file": "inferno-emblem.svg",
+      "resource": "panorama/images/map_icons/map_icon_de_inferno.vsvg_c",
+      "sourceSha256": "01c4a3d4801d1f8d7c133d2766b26068cfbf5e415be748a8522ba730a3470261",
+      "decodedSha256": "05175e695e8014ec72d563f85aa11ce896da659ff7f091e138bf0fe2f27b4af4",
+      "sha256": "05175e695e8014ec72d563f85aa11ce896da659ff7f091e138bf0fe2f27b4af4",
+      "bytes": 34361,
+      "processing": "Original embedded SVG bytes unchanged"
+    },
+    {
+      "map": "cache",
+      "kind": "cardSource",
+      "file": "cache.webp",
+      "resource": "panorama/images/map_icons/screenshots/720p/de_cache_png.vtex_c",
+      "sourceSha256": "1fd692e9c1f6bec390bb226e504dfb1cec319903012b0ad00a3ba6f791fb134d",
+      "decodedSha256": "6c84de04833f9b225cc70d190f2bd10a04065fcbb356cd26694240b4a977c5cf",
+      "sha256": "22f62427065166d98b35e4527022ae0814c8702a752ae046d3a7d430f7ee3181",
+      "bytes": 948228,
+      "processing": "Lossless WebP; all decoded RGBA pixels verified unchanged"
+    },
+    {
+      "map": "cache",
+      "kind": "emblem",
+      "file": "cache-emblem.svg",
+      "resource": "panorama/images/map_icons/map_icon_de_cache.vsvg_c",
+      "sourceSha256": "a4b750ed97a579754524281c371afd1400ca43c00a9bb0c7c7d9fcacb26fb0f5",
+      "decodedSha256": "f7ce0d355a4f854108e100a0f5014f150f07195c45a0df9f45d880f5edb51371",
+      "sha256": "f7ce0d355a4f854108e100a0f5014f150f07195c45a0df9f45d880f5edb51371",
+      "bytes": 28218,
+      "processing": "Original embedded SVG bytes unchanged"
+    }
+  ]
+}

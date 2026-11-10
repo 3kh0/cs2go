@@ -1,3 +1,9 @@
+import { groundSpawn } from "@cs2go/simulation/spawn-position";
+import { MapHazards, BombReset, supportedBombPosition } from "@cs2go/simulation/map-hazards";
+import { DoorAudio } from "./door-audio";
+import { NativePropBreakAudio } from "./prop-break-audio";
+import propBreakCues from "./data/prop-break-audio.json";
+import { NativeMapCache } from "./native-map-cache";
 import { updateRadarLocation } from "./radar-location";
 import { GameRadar } from "./game-radar";
 import { botPortrait } from "./bot-portrait";
@@ -84,6 +90,7 @@ import {
 import { applyArmorDamage, friendlyFireScale, hitRegion } from "./damage";
 import { mapTriggers } from "./buy-zones";
 import { activateNativeMapGrade, showNativeMapGrade } from "./native-map-color";
+import { FootstepStride, type FootstepSide } from "@cs2go/simulation/footsteps";
 import { createLadderState, stepLadder, type LadderState } from "@cs2go/simulation/ladder";
 import { groundCorrectedBombSample } from "./bomb-damage";
 import {
@@ -124,7 +131,8 @@ import {
   nativeMagazineInsert,
 } from "./weapon-motion";
 import { knifeInspectDuration } from "./knife-motion";
-import { drawRadar, loadCalloutRadar } from "./radar";
+import { drawRadar } from "./radar";
+import { prepareRadarOverview, radarLayerAt, type PreparedRadarOverview } from "./radar-overview";
 import * as T from "three";
 import { ballistics, SOURCE_UNITS_PER_METER } from "./ballistics";
 import { fleshThickness, hitgroupMultiplier, meshThickness, solveBullet } from "./bullet-solver";
@@ -146,7 +154,7 @@ import {
   WEAPON_ANIMATION_RATE,
 } from "./physics";
 import { loadDust2, loadNativeMap } from "./dust2";
-import type { MapId } from "@cs2go/protocol";
+import { MAPS, type MapId, type MatchEvent } from "@cs2go/protocol";
 import { warmSourceSky } from "./source-sky";
 import { BombModel } from "./bomb";
 import { BombPlantModel, PLANT_DURATION } from "./bomb-motion";
@@ -256,6 +264,7 @@ type BulletImpactData = {
   height?: number;
   crouch?: boolean;
   breakableId?: string;
+  doorId?: string;
 };
 const nodes = new Map<string, HTMLElement>();
 const el = (id: string) => {
@@ -347,8 +356,12 @@ export class Game {
   private lastViewmodelPreview?: T.Group;
   private lastSpectatorViewmodel?: T.Group;
   world!: Awaited<ReturnType<typeof loadDust2>>;
-  private nativeWorlds = new Map<MapId, Awaited<ReturnType<typeof loadDust2>>>();
-  private nativeWorldLoads = new Map<MapId, Promise<Awaited<ReturnType<typeof loadDust2>>>>();
+  private nativeWorlds = new NativeMapCache<MapId, Awaited<ReturnType<typeof loadDust2>>>(
+    "dust2",
+    2,
+  );
+  private mapHazards = new MapHazards<number | "player">();
+  private bombReset = new BombReset();
   get mapId(): MapId {
     return this.dust?.id ?? "dust2";
   }
@@ -423,6 +436,13 @@ export class Game {
     this.soundscape.play("bomb-draw");
     this.updateUI();
   }
+  private doorUseConsumed = false;
+  private readonly doorAudio = new DoorAudio();
+  private readonly propBreakAudio = new NativePropBreakAudio(propBreakCues);
+  private readonly doorFrom = new T.Vector3();
+  private readonly doorDirection = new T.Vector3();
+  private readonly doorAim = new T.Euler(0, 0, 0, "YXZ");
+  private readonly doorActors: { x: number; y: number; z: number; height: number }[] = [];
   updateBombSelection(dt: number) {
     if (!this.carryingBomb || (this.bombAutoSelected && !this.keys.has("KeyE"))) {
       if (this.bombSelected) {
@@ -435,6 +455,7 @@ export class Game {
     }
     if (
       this.keys.has("KeyE") &&
+      !this.doorUseConsumed &&
       !this.halftime &&
       mapTriggers(this.dust ?? {}).bombSites.contains(this.position, {
         halfWidth: 0.3,
@@ -713,6 +734,7 @@ export class Game {
   guns = new Map<string, T.Group>();
   targets: T.Object3D[] = [];
   radarImage?: HTMLImageElement;
+  radarOverview?: PreparedRadarOverview;
   radarLayers = new Map<string, HTMLCanvasElement>();
   radarAlternate = false;
   readonly radar = new GameRadar();
@@ -727,7 +749,7 @@ export class Game {
   deathBannerUntil = 0;
   readonly deathDamage = new DeathDamage();
   sway = 0;
-  footsteps = 0;
+  private readonly footstepStride = new FootstepStride();
   supported = true;
   antialiasAtStartup = false;
   aspectAtStartup: DisplayAspect = "native";
@@ -820,8 +842,9 @@ export class Game {
     });
     const assets = [
       prepareMatchMedia(),
-      loadCalloutRadar().then((image) => {
-        this.radarImage = image;
+      prepareRadarOverview("/models/maps/dust2-radar.png").then((overview) => {
+        this.radarOverview = overview;
+        this.radarImage = overview.image;
       }),
       loadWeaponModels(this.renderer, this.homeScene.startupWeapons),
       loadGrenadeModels(this.renderer),
@@ -870,8 +893,9 @@ export class Game {
       await this.defuseView.load(this.renderer);
       this.view.add(this.defuseView);
       this.scene.add(this.defuseView.wires);
-      await this.warmUp();
-      await this.groundInventory.preparePreviews(this.renderer);
+      // Submit independent menu and gameplay programs together so drivers can
+      // compile both batches in parallel. Play still waits for every program.
+      await Promise.all([this.warmUp(), this.groundInventory.preparePreviews(this.renderer)]);
       await this.finishPrograms();
       this.assetsReady = true;
       this.updateGraphics();
@@ -1168,7 +1192,10 @@ export class Game {
     document.addEventListener("keyup", (e) => {
       const code = canonicalKey(e.code, this.settings.bindings);
       this.keys.delete(code);
-      if (code === "KeyE") this.takeoverUseHeld = false;
+      if (code === "KeyE") {
+        this.takeoverUseHeld = false;
+        this.doorUseConsumed = false;
+      }
       if (code === "KeyM") document.querySelector(".radar-wrap")!.classList.remove("expanded");
       if (code === "Tab" && el("pause").classList.contains("hidden")) toggle("scoreboard", false);
     });
@@ -1370,51 +1397,64 @@ export class Game {
     return gun;
   }
   /** Finish map, roster and both factions' equipment before team selection. */
+  private pruneNativeWorlds() {
+    // The simulation and selected preparation may temporarily reference
+    // different maps until useWorld commits. Both must remain alive.
+    this.nativeWorlds.prune([this.world, this.dust]);
+  }
   async prepareMap(id: MapId, signal: AbortSignal) {
-    signal.throwIfAborted();
-    const waitFor = async <Value>(pending: Promise<Value>): Promise<Value> => {
+    const release = this.nativeWorlds.retain(id);
+    signal.addEventListener("abort", release, { once: true });
+    try {
       signal.throwIfAborted();
-      let abort: () => void = () => {};
-      try {
-        return await Promise.race([
-          pending,
-          new Promise<never>((_, reject) => {
-            abort = () => reject(signal.reason);
-            signal.addEventListener("abort", abort, { once: true });
+      const waitFor = async <Value>(pending: Promise<Value>): Promise<Value> => {
+        signal.throwIfAborted();
+        let abort: () => void = () => {};
+        try {
+          return await Promise.race([
+            pending,
+            new Promise<never>((_, reject) => {
+              abort = () => reject(signal.reason);
+              signal.addEventListener("abort", abort, { once: true });
+            }),
+          ]);
+        } finally {
+          signal.removeEventListener("abort", abort);
+        }
+      };
+      let world = this.nativeWorlds.get(id);
+      if (!world) {
+        world = await waitFor(
+          this.nativeWorlds.load(id, async () => {
+            // Reserve memory when this queued selection actually starts, after
+            // any earlier cancelled world has finished and released its resources.
+            this.nativeWorlds.prune([this.world, this.dust], 1);
+            const loaded = await loadNativeMap(this.scene, this.renderer, id);
+            if (loaded.sourceLighting) gradeMapColors(loaded.root);
+            return loaded;
           }),
-        ]);
-      } finally {
-        signal.removeEventListener("abort", abort);
+        );
       }
-    };
-    let world = this.nativeWorlds.get(id);
-    if (!world) {
-      let pending = this.nativeWorldLoads.get(id);
-      if (!pending) {
-        pending = loadNativeMap(this.scene, this.renderer, id).then((loaded) => {
-          if (loaded.sourceLighting) gradeMapColors(loaded.root);
-          this.nativeWorlds.set(id, loaded);
-          return loaded;
-        });
-        this.nativeWorldLoads.set(id, pending);
-        void pending.finally(() => this.nativeWorldLoads.delete(id)).catch(() => {});
-      }
-      world = await waitFor(pending);
-    }
-    signal.throwIfAborted();
-    if (this.dust !== world) {
-      const radar =
-        id === "dust2"
-          ? await waitFor(loadCalloutRadar())
-          : world.config.radar
-            ? await waitFor(loadCalloutRadar(`/models/maps/${id}-radar.png`))
-            : undefined;
       signal.throwIfAborted();
-      // Commit only a complete map/radar pair. Cancelled or failed image
-      // preparation must retain the current map and allow a later retry.
-      this.dust = world;
-      this.radarImage = radar;
-      this.radarLayers.clear();
+      if (this.dust !== world) {
+        const radar =
+          world.config.radar || id === "dust2"
+            ? await waitFor(
+                prepareRadarOverview(`/models/maps/${id}-radar.png`, world.config.radar),
+              )
+            : undefined;
+        signal.throwIfAborted();
+        // Commit only a complete map/radar pair. Cancelled or failed image
+        // preparation must retain the current map and allow a later retry.
+        this.dust = world;
+        this.radarOverview = radar;
+        this.radarImage = radar?.image;
+        this.radarLayers.clear();
+      }
+    } finally {
+      signal.removeEventListener("abort", release);
+      release();
+      this.pruneNativeWorlds();
     }
   }
   async prepareMatch(mode: Mode, bots: boolean, signal: AbortSignal, map: MapId = this.mapId) {
@@ -1530,6 +1570,7 @@ export class Game {
     }
     if (!this.assetsReady) await this.homeScene.prepare(this.renderer);
     await warmSourceSky(this.dust.skybox, signal);
+    await this.dust.nativeEffects?.prepare(this.camera);
     await this.finishPrograms(signal);
   }
   // Let drivers link in parallel, then take each program's first use (uniform
@@ -1556,6 +1597,8 @@ export class Game {
     this.updateSceneLighting(0);
     this.renderer.toneMapping = T.CustomToneMapping;
     this.renderer.clear();
+    this.world.nativeEffects?.update(this.animationTime);
+    this.world.nativeEnvironment?.update(this.animationTime);
     this.utility.renderWorld();
     this.renderer.clearDepth();
     this.renderer.render(this.view, this.viewCamera);
@@ -1567,6 +1610,7 @@ export class Game {
     this.deathDamage.reset();
     this.network?.disconnect();
     this.network = undefined;
+    this.world?.doors?.release("player");
     hideRoundBanner();
     this.notices.reset();
     if (!this.supported || matchMedia("(pointer: coarse)").matches) {
@@ -1582,6 +1626,9 @@ export class Game {
     this.revolverCharge = 0;
     this.useWorld();
     this.world.breakables.reset();
+    this.world.doors?.reset();
+    this.doorUseConsumed = false;
+    this.syncMapDoors();
     this.syncMapBreakables(false);
     this.configureBots(this.teamMode, options.bots === false ? 0 : undefined);
     this.utility.reset();
@@ -1774,15 +1821,11 @@ export class Game {
     if (deathmatchSpawn) this.position.copy(deathmatchSpawn);
     else if (this.dust) {
       this.position.fromArray(this.dust.navigation.data.spawns[this.team][0]);
-      const spawnFloor = this.dust.collision.floor(
-        this.position.x,
-        this.position.z,
-        this.position.y + 0.5,
-      );
-      if (Number.isFinite(spawnFloor)) this.position.y = spawnFloor;
+      groundSpawn(this.position, this.dust.collision);
     }
     this.velocity = { x: 0, z: 0 };
     this.ladderState = createLadderState();
+    this.footstepStride.reset();
     this.vertical = 0;
     this.grounded = true;
     this.jumpQueued = false;
@@ -2513,6 +2556,14 @@ export class Game {
           this.ray.ray.direction,
         );
       }
+      if (impact.doorId) {
+        this.world.doors.damage(
+          impact.doorId,
+          knifeDamage(stab, this.knifeFirstSwing, false),
+          "melee",
+        );
+        this.syncMapDoors();
+      }
       this.soundscape.play("knife-wall");
       return;
     }
@@ -2621,17 +2672,8 @@ export class Game {
     this.animationSounds("reload", -1, 0);
     this.updateUI();
   }
-  sound(
-    kind: WeaponSound | "hit" | "head" | "step",
-    pan = 0,
-    distance = 0,
-    weapon = this.selected,
-  ) {
+  sound(kind: WeaponSound | "hit" | "head", pan = 0, distance = 0, weapon = this.selected) {
     if (!this.audio || !this.noise || !this.settings.volume || !this.settings.effectsVolume) return;
-    if (kind === "step") {
-      this.soundscape.play("step", false, this.position.y > 0.1 ? "concrete" : "sand");
-      return;
-    }
     if (isKnife(weapon) && kind !== "hit" && kind !== "head" && kind !== "bot") return;
     if (kind !== "hit" && kind !== "head") {
       this.weaponAudio.play(
@@ -2648,15 +2690,43 @@ export class Game {
     }
     this.soundscape.play(kind);
   }
-  worldSound(kind: "bot" | "step", position: T.Vector3, weapon = 0, suppressed = true) {
+  worldSound(kind: "bot", position: T.Vector3, weapon = 0, suppressed = true) {
     if (!this.audio || !this.settings.volume || !this.settings.effectsVolume) return;
-    const range = kind === "bot" ? weaponSoundRange(weapon, suppressed).maxDistance : 35;
+    const range = weaponSoundRange(weapon, suppressed).maxDistance;
     if (position.distanceToSquared(this.camera.position) > range * range) return;
-    if (kind === "bot")
-      this.weaponAudio.play(this.audio, "bot", weapon, 100, 0, 0, position, suppressed);
-    else this.soundscape.play("step", false, this.teamMode ? "concrete" : "sand", position);
+    this.weaponAudio.play(this.audio, kind, weapon, 100, 0, 0, position, suppressed);
   }
-  private audioSteps = new WeakMap<Bot, { position: T.Vector3; distance: number }>();
+  // Legacy bank has only concrete/sand CT-left clips. The actual support
+  // surface travels end to end; unimported native bindings retain this explicit
+  // compatibility fallback instead of guessing material families from height.
+  playFootstep(
+    cue: Omit<Extract<MatchEvent, { kind: "footstep" }>, "kind" | "actor">,
+    firstPerson = false,
+  ) {
+    if (!this.audio || !this.settings.volume || !this.settings.effectsVolume) return;
+    const point = new T.Vector3(cue.point.x, cue.point.y + 0.15, cue.point.z);
+    if (!firstPerson && point.distanceToSquared(this.camera.position) > 35 * 35) return;
+    this.soundscape.play(
+      "step",
+      false,
+      cue.surface === "sand" ? "sand" : "concrete",
+      firstPerson ? undefined : point,
+    );
+  }
+  emitFootstep(position: T.Vector3, team: AgentTeam, side: FootstepSide, firstPerson = false) {
+    const support = this.world.collision?.supportingSurface(position.x, position.z, position.y);
+    if (support)
+      this.playFootstep(
+        {
+          team,
+          side,
+          point: { x: position.x, y: support.height, z: position.z },
+          surface: support.surface,
+        },
+        firstPerson,
+      );
+  }
+  private audioSteps = new WeakMap<Bot, FootstepStride>();
   makeBot(
     index: number,
     override?: AgentTeam,
@@ -2735,6 +2805,7 @@ export class Game {
     };
   }
   spawnBot(b: Bot, index: number, preserve = false) {
+    this.audioSteps.delete(b);
     if (this.mode === "deathmatch") this.deathmatchCombat.spawn(index);
     const saved = preserve
       ? {
@@ -2757,14 +2828,7 @@ export class Game {
         this.bots.slice(0, index).filter((bot) => bot.team === b.team).length +
         (b.team === this.team ? 1 : 0);
       b.group.position.fromArray(points[slot % points.length]);
-      const spawnFloor = this.dust.collision.floor(
-        b.group.position.x,
-        b.group.position.z,
-        b.group.position.y + 0.5,
-      );
-      // Retain the authored NAV spawn height when a thin collision surface
-      // fails the floor probe; never seed the simulation with -Infinity.
-      if (Number.isFinite(spawnFloor)) b.group.position.y = spawnFloor;
+      groundSpawn(b.group.position, this.dust.collision);
       b.navArea = this.dust.navigation.nearest(b.group.position);
     }
     b.target = null;
@@ -2876,6 +2940,62 @@ export class Game {
     this.decals.count = Math.max(this.decals.count, slot + 1);
     this.decals.visible = true;
   }
+  syncDoorAudio(silent = false) {
+    const doors = this.world?.doors;
+    if (doors)
+      this.doorAudio.observe(
+        doors.definitions,
+        doors.states,
+        (definition, kind) => this.doorAudio.play(this.soundscape, definition, kind),
+        silent,
+      );
+  }
+  syncMapDoors() {
+    const world = this.world;
+    if (world?.doors && world.doorView?.sync(world.doors.states))
+      world.sun.shadow.needsUpdate = true;
+  }
+  private updateMapDoors(dt: number) {
+    const world = this.world;
+    if (!this.active || world !== this.dust || !world.doors?.states.length) return;
+    let count = 0;
+    const append = (position: T.Vector3, height: number) => {
+      const actor = (this.doorActors[count++] ??= { x: 0, y: 0, z: 0, height });
+      actor.x = position.x;
+      actor.y = position.y;
+      actor.z = position.z;
+      actor.height = height;
+    };
+    if (!this.dead) append(this.position, this.hullHeight);
+    for (const bot of this.bots)
+      if (bot.health > 0) append(bot.group.position, this.botHullHeight(bot));
+    this.doorActors.length = count;
+    const objectiveUse =
+      (this.carryingBomb &&
+        mapTriggers(world).bombSites.contains(this.position, {
+          halfWidth: movement.hullRadius,
+          height: this.hullHeight,
+        })) ||
+      (this.bomb?.planted &&
+        this.team === "ct" &&
+        this.position.distanceTo(this.bomb.position) < 1.8);
+    this.doorFrom.copy(this.position);
+    this.doorFrom.y += this.eye;
+    this.doorDirection.set(0, 0, -1).applyEuler(this.doorAim.set(this.viewPitch, this.yaw, 0));
+    if (
+      world.doors.use(
+        "player",
+        this.keys.has("KeyE"),
+        this.doorFrom,
+        this.doorDirection,
+        !this.dead && this.locked && this.freezeTime <= 0 && !this.halftime && !objectiveUse,
+      )
+    )
+      this.doorUseConsumed = true;
+    world.doors.step(dt, this.doorActors);
+    this.syncDoorAudio();
+    this.syncMapDoors();
+  }
   syncMapBreakables(animate = false, point?: T.Vector3, direction?: T.Vector3) {
     const world = this.world;
     if (!world) return;
@@ -2888,16 +3008,7 @@ export class Game {
           .fromArray(definition.bounds[0])
           .add(new T.Vector3().fromArray(definition.bounds[1]))
           .multiplyScalar(0.5);
-      this.soundscape.play(
-        definition.material === "glass"
-          ? "map-break-glass"
-          : definition.material === "wood"
-            ? "map-break-wood"
-            : "map-break-metal",
-        false,
-        "concrete",
-        position,
-      );
+      this.propBreakAudio.play(this.soundscape, definition, position);
     }
   }
   damageMapBreakable(
@@ -2924,8 +3035,14 @@ export class Game {
   }
   meleeTrace() {
     const cover = this.ray.intersectObjects(this.coverTargets(), true)[0];
-    let nearest: { distance: number; actor?: number; breakableId?: string } | undefined = cover
-      ? { distance: cover.distance, breakableId: this.world.breakables.idForImpact(cover) }
+    let nearest:
+      | { distance: number; actor?: number; breakableId?: string; doorId?: string }
+      | undefined = cover
+      ? {
+          distance: cover.distance,
+          breakableId: this.world.breakables.idForImpact(cover),
+          doorId: this.world.doors.idForImpact(cover),
+        }
       : undefined;
     this.bots.forEach((bot, index) => {
       if (bot.health <= 0) return;
@@ -2941,6 +3058,7 @@ export class Game {
     // local normals and needs the world transform exactly once.
     const normal = impact.face?.normal.clone();
     const breakableId = this.world.breakables.idForImpact(impact);
+    const doorId = this.world.doors.idForImpact(impact);
     if (normal && !this.world.collision) normal.transformDirection(impact.object.matrixWorld);
     return {
       distance: impact.distance,
@@ -2951,11 +3069,13 @@ export class Game {
       material: impact.object.userData.bulletMaterial || "concrete",
       id: breakableId
         ? `breakable:${breakableId}`
-        : this.world.collision
-          ? undefined
-          : `solid:${impact.object.uuid}`,
+        : doorId
+          ? `door:${doorId}`
+          : this.world.collision
+            ? undefined
+            : `solid:${impact.object.uuid}`,
       exit: normal ? normal.dot(ray.direction) > 0 : false,
-      data: { point: impact.point, normal, breakableId },
+      data: { point: impact.point, normal, breakableId, doorId },
     };
   }
   bulletBody(
@@ -3110,6 +3230,10 @@ export class Game {
       const damagedBreakables = new Set<string>();
       for (const { surface, damage, passed } of result.contacts) {
         const data = surface.data;
+        if (data.doorId) {
+          this.world.doors.damage(data.doorId, damage, "bullet");
+          this.syncMapDoors();
+        }
         if (data.breakableId && !damagedBreakables.has(data.breakableId)) {
           damagedBreakables.add(data.breakableId);
           this.damageMapBreakable(data.breakableId, damage, "bullet", data.point, direction);
@@ -3206,6 +3330,7 @@ export class Game {
         };
       }
     }
+    const environmentDeath = killer === "World" && weapon < 0 && !label;
     const utilityKind = grenadeTypes.find((kind) => grenadeData[kind].name === label);
     const killerInstance =
       metadata?.appearance ??
@@ -3215,7 +3340,9 @@ export class Game {
     const weaponName =
       label ??
       (weapon < 0
-        ? "C4"
+        ? environmentDeath
+          ? "World"
+          : "C4"
         : killerInstance?.weapon === weapon
           ? weaponInstanceName(killerInstance)
           : weapons[weapon].name);
@@ -3244,9 +3371,10 @@ export class Game {
           ? "feed-ct"
           : "feed-t";
       setText("death-weapon", weaponName);
-      toggle("death-weapon-icon", true);
-      setDeathcamWeaponArtwork(label ? -1 : weapon, killerInstance, weaponIcon);
-      toggle("death-banner", true);
+      toggle("death-weapon-icon", !environmentDeath);
+      if (!environmentDeath)
+        setDeathcamWeaponArtwork(label ? -1 : weapon, killerInstance, weaponIcon);
+      toggle("death-banner", !environmentDeath);
       this.deathBannerUntil = performance.now() + 3000;
     }
     const container = el("killfeed");
@@ -3298,7 +3426,7 @@ export class Game {
       flame.innerHTML =
         '<path fill="currentColor" d="M13 1c2 6-4 7-2 11 1-2 3-3 4-5 5 5 7 9 3 13-3 3-8 3-11 0-4-4-2-8 1-12-1 5 0 6 1 7-1-6 5-7 4-14Z"/>';
       icons.append(flame);
-    } else {
+    } else if (!environmentDeath) {
       const image = document.createElement("img");
       image.src = assetUrl(weaponIcon);
       image.alt = weaponName;
@@ -3421,6 +3549,8 @@ export class Game {
       this.network.simulate(dt);
       return;
     }
+    this.updateMapHazards(dt);
+    this.updateMapDoors(dt);
     this.utility.update(dt);
     this.groundInventory.update(dt);
     if (this.active && this.world === this.dust) {
@@ -4096,17 +4226,26 @@ export class Game {
     }
     const magnitude = Math.hypot(this.velocity.x, this.velocity.z);
     this.sway += magnitude * dt * 1.8;
-    this.footsteps += magnitude * dt;
-    if (this.footsteps > 2.1 && this.grounded && !walk && !crouch) {
-      this.footsteps = 0;
-      this.sound("step");
-    }
+    const foot = this.footstepStride.advance(
+      {
+        x: this.position.x,
+        y: this.position.y,
+        z: this.position.z,
+        spawn: 0,
+        audible: this.grounded && !this.ladder && !walk && !crouch,
+      },
+      dt,
+    );
+    if (foot) this.emitFootstep(this.position, this.team, foot, true);
     if (this.grounded && wasFalling) this.soundscape.play("land");
     this.tick++;
     this.updateBots(dt * 8, this.tick % 8);
     this.moveBots(dt);
   }
   useWorld() {
+    this.doorAudio.reset();
+    this.footstepStride.reset();
+    this.audioSteps = new WeakMap();
     this.radar.reset();
     this.groundInventory.clearDrops();
     for (const tracer of this.tracers) {
@@ -4116,12 +4255,16 @@ export class Game {
     if (!this.dust) return;
     for (const world of this.nativeWorlds.values()) world.root.visible = world === this.dust;
     this.world = this.dust;
+    this.propBreakAudio.validate(this.world.breakables.definitions);
+    this.mapHazards = new MapHazards(this.world.triggers?.hurt);
+    this.bombReset = new BombReset(this.world.triggers);
+    this.pruneNativeWorlds();
     activateNativeMapGrade(this.dust.grade);
     const radar = el("radar") as HTMLCanvasElement;
     radar.width = this.world.navigation ? 900 : 180;
     radar.height = radar.width;
     document.querySelector(".radar-wrap")!.classList.toggle("callouts", !!this.world.navigation);
-    el("location").textContent = this.mapId === "dust2" ? "DUST II" : "MIRAGE";
+    el("location").textContent = MAPS[this.mapId].name.toUpperCase();
     this.scene.background = this.dust.skybox ? null : this.dust.sky;
     this.scene.environment = this.dust.sky;
     // VRF panoramas start at +X, whereas Three's equirectangular lookup starts
@@ -4156,8 +4299,14 @@ export class Game {
       : blocked(x, z, y, this.world.walls, radius, height);
   }
   startRound() {
+    this.doorAudio.reset();
+    this.mapHazards.reset();
+    this.bombReset.reset();
     this.radar.reset();
     this.world.breakables.reset();
+    this.world.doors?.reset();
+    this.doorUseConsumed = false;
+    this.syncMapDoors();
     this.syncMapBreakables(false);
     this.utility.reset(true);
     this.groundInventory.clearDrops();
@@ -4207,6 +4356,7 @@ export class Game {
       beepRemaining: 1,
       beepPulse: 0,
     };
+    this.rememberMapBomb();
     this.bombMesh.visible = false;
     this.resetBotStrategies();
     this.roundElapsed = 0;
@@ -4347,6 +4497,16 @@ export class Game {
       ).length
     )
       this.syncMapBreakables(true, this.bomb.position);
+    if (field) {
+      this.world.doors.damageRadius(
+        this.bomb.position,
+        Infinity,
+        (_distance, point) => field.lookup(this.bomb!.position, point)?.damage ?? 0,
+        "explosion",
+        false,
+      );
+      this.syncMapDoors();
+    }
     const apply = (actor: Bot | "player") => {
       const target = actor === "player" ? this : actor;
       if (target.health <= 0 || (actor === "player" && this.dead)) return;
@@ -4371,13 +4531,101 @@ export class Game {
     apply("player");
     this.bots.forEach(apply);
   }
+  private rememberMapBomb() {
+    const carrier = this.bomb?.carrier;
+    if (carrier === undefined || carrier === -1 || this.bomb?.planted) return;
+    const bot = typeof carrier === "number" ? this.bots[carrier] : undefined;
+    const position = bot?.group.position ?? this.position;
+    this.bombReset.remember(
+      position,
+      bot ? bot.health > 0 && bot.vertical === 0 : !this.dead && this.grounded,
+      (point) => supportedBombPosition(this.world.collision, point),
+    );
+  }
+  private restoreMapBomb(dt = 0) {
+    if (!this.bomb) return;
+    if (
+      this.bombReset.advance(
+        this.bomb.position,
+        dt,
+        this.world.collision,
+        this.bomb.planted || this.bomb.carrier !== -1,
+      )
+    ) {
+      this.bombMesh.position.copy(this.bomb.position).y += 0.005;
+      this.bombMesh.visible = true;
+    }
+  }
+  private updateMapHazards(dt: number) {
+    if (!this.active || this.network || !this.world) return;
+    this.rememberMapBomb();
+    if (this.mapHazards.hasTriggers) {
+      const actors: {
+        id: number | "player";
+        position: T.Vector3;
+        hull: { halfWidth: number; height: number };
+      }[] = [];
+      if (!this.dead && this.health > 0)
+        actors.push({
+          id: "player",
+          position: this.position,
+          hull: { halfWidth: movement.hullRadius, height: this.hullHeight },
+        });
+      this.bots.forEach((bot, id) => {
+        if (bot.health > 0)
+          actors.push({
+            id,
+            position: bot.group.position,
+            hull: { halfWidth: movement.hullRadius, height: this.botHullHeight(bot) },
+          });
+      });
+      for (const hit of this.mapHazards.update(dt, actors)) {
+        const actor = hit.actor === "player" ? this : this.bots[hit.actor];
+        if (!actor || actor.health <= 0) continue;
+        actor.health = Math.max(0, actor.health - Math.floor(hit.damage));
+        if (hit.actor === "player") {
+          this.groundInventory.invalidateEquipment();
+          this.damage = 0.25;
+        }
+        if (actor.health > 0) continue;
+        actor.deaths++;
+        if (hit.actor === "player") {
+          this.dead = this.teamMode ? Infinity : 2.5;
+          this.firing = this.knifePending = this.lastShot = this.emptyReload = false;
+          this.revolverCharge = this.reload = this.knifeTime = this.inspectTime = this.shotTime = 0;
+          this.rescope = this.boltTime = this.burstRemaining = 0;
+          this.suppressors[this.selected].cancel();
+          this.utility.cancelThrow();
+          this.healthshotAction.cancel();
+          this.healthshotHealing.clear();
+          this.setScope(0);
+          this.soundscape.play("death");
+        } else {
+          const bot = this.bots[hit.actor];
+          bot.speed = 0;
+          bot.moving = false;
+          bot.reloadTime = 0;
+          bot.respawn = this.teamMode ? Infinity : this.mode === "practice" ? 1.8 : 3;
+        }
+        if (this.teamMode) this.dropBomb(hit.actor);
+        if (this.bomb?.defuser === hit.actor) {
+          this.bomb.defuser = null;
+          this.bomb.progress = 0;
+        }
+        this.feed("World", hit.actor === "player" ? "YOU" : this.bots[hit.actor].name, false, -1);
+        this.updateUI();
+      }
+    }
+    this.restoreMapBomb(dt);
+  }
   dropBomb(carrier: number | "player") {
     if (!this.bomb || this.bomb.planted || this.bomb.carrier !== carrier) return;
     const position = carrier === "player" ? this.position : this.bots[carrier].group.position;
     this.bomb.position.copy(position);
     this.bomb.carrier = -1;
     this.bomb.plantProgress = 0;
-    this.bombMesh.position.copy(position).y += 0.005;
+    this.restoreMapBomb();
+    this.bombMesh.position.copy(this.bomb.position).y += 0.005;
     this.bombMesh.visible = true;
     this.updateBombSelection(0);
     this.updateUI();
@@ -5141,6 +5389,10 @@ export class Game {
       const damagedBreakables = new Set<string>();
       for (const { surface, damage: rawDamage, passed } of result.contacts) {
         const data = surface.data;
+        if (data.doorId) {
+          this.world.doors.damage(data.doorId, rawDamage, "bullet");
+          this.syncMapDoors();
+        }
         if (data.breakableId && !damagedBreakables.has(data.breakableId)) {
           damagedBreakables.add(data.breakableId);
           this.damageMapBreakable(data.breakableId, rawDamage, "bullet", data.point, shot);
@@ -5630,27 +5882,6 @@ export class Game {
     this.botLadderHulls.length = count;
     return this.botLadderHulls;
   }
-  stepBot(b: Bot, x: number, z: number) {
-    const nav = this.world.navigation,
-      pos = b.group.position;
-    const ground = this.botSupport(b, x, z, pos.y + 0.46, pos.y - 8);
-    // The original NAV regions already include Source's player hull and
-    // smooth clip ramps. Only cross a region's authored outgoing links.
-    if (
-      ground &&
-      (!b.navCrouch || !this.isBlocked(x, z, ground.height, 0.35, this.botHullHeight(b)))
-    ) {
-      pos.x = x;
-      pos.z = z;
-      b.navArea = nav!.index.get(ground.area.id)!;
-      return;
-    }
-    if (!this.isBlocked(x, z, pos.y, 0.35, this.botHullHeight(b))) {
-      pos.x = x;
-      pos.z = z;
-      if (nav) b.navArea = nav.nearest(pos);
-    }
-  }
   private botClearBreakable(b: Bot, heading: T.Vector2) {
     if (
       this.network ||
@@ -5711,6 +5942,7 @@ export class Game {
       const b = this.bots[index];
       // Visual animation accumulates simulated time and is applied per rendered frame.
       if (b.health <= 0) {
+        this.audioSteps.delete(b);
         if (b.group.visible) {
           stepSoldierRagdoll(b.rig, b.vertical, dt, this.world);
           b.anim += dt;
@@ -5761,6 +5993,14 @@ export class Game {
           target = b.path[0];
         }
         if (target) {
+          if (this.world.doors?.states.length) {
+            this.doorFrom.copy(pos);
+            this.doorFrom.y += botHeight - 0.2;
+            this.doorDirection
+              .set(target.x - pos.x, 0, (target instanceof T.Vector3 ? target.z : target.y) - pos.z)
+              .normalize();
+            this.world.doors.openAhead(this.doorFrom, this.doorDirection);
+          }
           const direction = desired.copy(target);
           direction.x -= pos.x;
           direction.y = (target instanceof T.Vector3 ? target.z : target.y) - pos.z;
@@ -5833,6 +6073,9 @@ export class Game {
           )
         : undefined;
       if (ladderStep) {
+        // Native vents can cover a ladder's connected landing. Clear the
+        // actual short firing lane before stepping off the ladder lip.
+        if (b.ladderState.exit && desired.lengthSq() > 0.01) this.botClearBreakable(b, desired);
         b.velocity.set(ladderStep.velocity.x, ladderStep.velocity.z);
         b.vertical = ladderStep.velocity.y;
         b.progressPosition.copy(pos);
@@ -5880,21 +6123,22 @@ export class Game {
             }
           }
         }
-        const dx = b.velocity.x * dt,
-          dz = b.velocity.y * dt;
-        if (dx) this.stepBot(b, pos.x + dx, pos.z);
-        if (dz) this.stepBot(b, pos.x, pos.z + dz);
-
         if (this.world.collision) {
-          const floor =
-            this.botSupport(b, pos.x, pos.z, pos.y + (b.vertical > 0 ? 0 : 0.46), pos.y - 8)
-              ?.height ??
-            this.world.collision.floor(
-              pos.x,
-              pos.z,
-              pos.y + (b.vertical > 0 ? 0 : 0.45),
-              pos.y - 8,
-            );
+          // NAV describes route connectivity, not physical clearance. Sweep the
+          // same hull/18-unit stair support as players so steering cannot put
+          // a bot through a stair side or land it inside an adjacent wall.
+          const velocity = { x: b.velocity.x, z: b.velocity.y };
+          this.world.collision.moveHorizontal(pos, velocity, dt, 0.35, botHeight, b.vertical === 0);
+          b.velocity.set(velocity.x, velocity.z);
+          if (b.vertical === 0) this.world.collision.followGround(pos, 0.35, botHeight);
+          b.navArea = nav.nearest(pos);
+          const floor = this.world.collision.support(
+            pos.x,
+            pos.z,
+            pos.y + (b.vertical > 0 ? 0 : 0.46),
+            pos.y - 8,
+            0.35,
+          );
           if (Number.isFinite(floor)) {
             if (b.vertical <= 0 && pos.y <= floor + 0.45) {
               pos.y = floor;
@@ -5918,13 +6162,16 @@ export class Game {
           // can have nonzero velocity without leaving the same small area.
           if (
             !b.moving ||
+            !b.path.length ||
             Math.hypot(pos.x - b.progressPosition.x, pos.z - b.progressPosition.z) > 1.2
           ) {
             b.progressPosition.copy(pos);
             b.progressTime = b.recoveries = 0;
           } else b.progressTime += dt;
           b.stuck =
-            b.moving && Math.hypot(pos.x - previousX, pos.z - previousZ) < dt * 0.25
+            b.moving &&
+            b.path.length > 0 &&
+            Math.hypot(pos.x - previousX, pos.z - previousZ) < dt * 0.25
               ? b.stuck + dt
               : 0;
           if (b.progressTime > 2.5) b.stuck = Math.max(b.stuck, 0.81);
@@ -6005,6 +6252,31 @@ export class Game {
         12,
         dt,
       );
+      let stride = this.audioSteps.get(b);
+      if (!stride) this.audioSteps.set(b, (stride = new FootstepStride()));
+      const foot = stride.advance(
+        {
+          x: pos.x,
+          y: pos.y,
+          z: pos.z,
+          spawn: 0,
+          audible:
+            this.active &&
+            this.locked &&
+            b.vertical === 0 &&
+            !b.ladderState.id &&
+            !b.navCrouch &&
+            b.rig.crouch < 0.1,
+        },
+        dt,
+      );
+      if (foot)
+        this.emitFootstep(
+          pos,
+          b.team,
+          foot,
+          b === this.spectated && this.spectatorMode === "first",
+        );
       b.anim += dt;
     }
   }
@@ -6020,29 +6292,6 @@ export class Game {
     const shadows = !this.teamMode && this.renderer.shadowMap.enabled;
     for (const b of this.bots) {
       if (!b.group.visible) continue;
-      let foot = this.audioSteps.get(b);
-      if (!foot) {
-        foot = { position: b.group.position.clone(), distance: 0 };
-        this.audioSteps.set(b, foot);
-      }
-      const traveled = foot.position.distanceTo(b.group.position);
-      foot.position.copy(b.group.position);
-      if (
-        this.active &&
-        this.locked &&
-        b.health > 0 &&
-        b.vertical === 0 &&
-        b.speed > 1.5 &&
-        traveled < 2
-      ) {
-        foot.distance += traveled;
-        if (foot.distance >= 1.8) {
-          foot.distance %= 1.8;
-          if (b !== this.spectated || this.spectatorMode !== "first")
-            this.worldSound("step", b.group.position.clone().add(new T.Vector3(0, 0.15, 0)));
-          else this.soundscape.play("step", false, "concrete");
-        }
-      } else foot.distance = 0;
       botSphere.copy(agentBounds).center.add(b.group.position);
       if (b.rig.ragdoll) botSphere.center.copy(b.rig.ragdoll.points[0].position);
       const onScreen = frustum.intersectsSphere(botSphere);
@@ -6069,10 +6318,17 @@ export class Game {
         follow?.group.position ?? this.position,
         this.mapId,
       );
+    // Native overview ranges are converted into browser Y metres during
+    // import. Observer origin is provisional until a native boundary capture
+    // establishes whether CS2 selects its layer using origin or eye height.
+    const radarLayer = this.radarOverview
+      ? radarLayerAt(this.radarOverview, (follow?.group.position ?? this.position).y)
+      : undefined;
+    if (radarLayer) this.radarImage = radarLayer.image;
     const ctx = canvas.getContext("2d")!,
       w = canvas.width,
       h = canvas.height,
-      key = `${this.mapId}:${live}:${w}x${h}`;
+      key = `${this.mapId}:${radarLayer?.section?.name ?? "base"}:${live}:${w}x${h}`;
     let layer = this.radarLayers.get(key);
     if (!layer) {
       layer = document.createElement("canvas");
@@ -6894,6 +7150,8 @@ export class Game {
     const buying = !el("loadout").classList.contains("hidden");
     this.renderer.toneMapping = T.CustomToneMapping;
     this.renderer.clear();
+    this.world.nativeEffects?.update(now / 1000);
+    this.world.nativeEnvironment?.update(now / 1000);
     this.utility.renderWorld();
     if (followed && hideFollowed) followed.visible = wasVisible!;
     if (this.previewingViewmodel) this.renderViewmodelPreview(now / 1000);

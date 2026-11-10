@@ -1,4 +1,4 @@
-import type { MapId } from "@cs2go/protocol";
+import { MAPS, type MapId } from "@cs2go/protocol";
 import type { Navigation } from "./navigation";
 import { mapCalloutAt } from "./map-callouts";
 
@@ -12,7 +12,7 @@ export function updateRadarLocation(
   let sample = samples.get(navigation);
   if (sample && now - sample.at < 62.5) return;
   const location = mapCalloutAt(navigation.data.locations ?? [], position);
-  const name = location?.name ?? sample?.name ?? (mapId === "dust2" ? "Dust II" : "Mirage");
+  const name = location?.name ?? sample?.name ?? MAPS[mapId].name;
   if (!sample) {
     sample = { at: now, name };
     samples.set(navigation, sample);

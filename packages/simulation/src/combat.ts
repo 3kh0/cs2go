@@ -135,6 +135,7 @@ type HitData = {
   head?: boolean;
   region?: HitRegion;
   breakableId?: string;
+  doorId?: string;
 };
 function hitTarget(
   match: Match,
@@ -207,6 +208,12 @@ export function shoot(
             "melee",
           )
         : null;
+    if (!victim && impact)
+      match.doors.damageHit(
+        impact.object,
+        knifeDamage(stab, memory.knifeAge > 0.9, false),
+        "melee",
+      );
     const events: MatchEvent[] = [
       { kind: "melee", shooter: shooter.id, stab, hit: !!victim || !!cover },
     ];
@@ -253,7 +260,9 @@ export function shoot(
         distance: impact.distance,
         id: match.breakables.idForImpact(impact)
           ? `breakable:${match.breakables.idForImpact(impact)}`
-          : undefined,
+          : match.doors.idForImpact(impact)
+            ? `door:${match.doors.idForImpact(impact)}`
+            : undefined,
         thickness: () => match.map.collision.thickness(impact, direction),
         material: impact.object.userData.bulletMaterial ?? "concrete",
         exit: impact.face ? impact.face.normal.dot(direction) > 0 : false,
@@ -261,6 +270,7 @@ export function shoot(
           point: impact.point,
           normal: impact.face?.normal,
           breakableId: match.breakables.idForImpact(impact),
+          doorId: match.doors.idForImpact(impact),
         },
       }));
     for (const other of match.players.values()) {
@@ -284,6 +294,7 @@ export function shoot(
     const kills: MatchEvent[] = [];
     for (const contact of result.contacts) {
       const { data } = contact.surface;
+      if (data.doorId) match.doors.damage(data.doorId, contact.damage, "bullet");
       if (data.breakableId) {
         const change = match.breakables.damage(data.breakableId, contact.damage, "bullet");
         if (change)

@@ -5,6 +5,7 @@ import { testMap } from "@cs2go/simulation/test-map";
 import { movePlayer } from "@cs2go/simulation/movement";
 import { BreakableWorld, bindBreakablePhysics } from "@cs2go/simulation/breakables";
 import { MapCollision } from "@cs2go/simulation/map-collision";
+import { DoorWorld, bindDoorPhysics } from "@cs2go/simulation/doors";
 import * as T from "three";
 import { MatchConnection } from "./multiplayer-connection";
 
@@ -109,6 +110,49 @@ test("reconciliation opens breakable collision before replay and restores it on 
   expect(map.breakables.health("test-panel")).toBe(0);
   socket.receive({ type: "snapshot", tick: 49, players: [player], events: [], round });
   expect(map.breakables.health("test-panel")).toBe(20);
+  expect(connection.local!.z).toBeGreaterThan(16.3);
+  connection.close();
+});
+test("reconciliation restores rotated door collision before unacknowledged movement and round resets", () => {
+  const floor = new T.Mesh(new T.PlaneGeometry(300, 300).rotateX(-Math.PI / 2));
+  const panel = new T.Mesh(new T.BoxGeometry(2, 2, 0.1).translate(1, 1, 0));
+  panel.name = "door-leaf";
+  panel.position.set(-18, 0, 16.3);
+  const physics = new T.Group();
+  physics.add(floor, panel);
+  const definitions = [
+    {
+      id: "door",
+      pivot: [-18, 0, 16.3] as const,
+      axis: [0, 1, 0] as const,
+      distance: 90,
+      speed: 180,
+      returnDelay: -1,
+      physicsNames: [panel.name],
+      renderNames: ["render-leaf"],
+    },
+  ];
+  const templates = bindDoorPhysics(physics, definitions),
+    map = testMap();
+  map.collision = new MapCollision([floor, panel]);
+  map.doors = new DoorWorld(map.collision, definitions, templates);
+  const { connection, socket, player } = setup(map);
+  for (let i = 0; i < 48; i++) connection.step({ ...neutralInput(), forward: 1 });
+  expect(connection.local!.z).toBeGreaterThan(16.3);
+  const round = { ...createMatch("casual", testMap()).state, phase: "live" as const };
+  socket.receive({
+    type: "snapshot",
+    tick: 48,
+    players: [player],
+    events: [],
+    round: { ...round, doors: [{ id: "door", angle: 90, target: 90, returnTime: -1 }] },
+  });
+  expect(connection.pending).toHaveLength(48);
+  expect(connection.local!.z).toBeLessThan(16.3);
+  socket.receive({ type: "snapshot", tick: 47, players: [player], events: [], round });
+  expect(map.doors.states[0].angle).toBe(90);
+  socket.receive({ type: "snapshot", tick: 49, players: [player], events: [], round });
+  expect(map.doors.states[0].angle).toBe(0);
   expect(connection.local!.z).toBeGreaterThan(16.3);
   connection.close();
 });
@@ -297,5 +341,61 @@ test("ladder prediction preserves authoritative attachment and detach cooldown a
   connection.step(neutralInput());
   expect(connection.local!.ladder!.detachTime).toBeLessThan(0.1);
   expect(connection.players[0].ladder!.detachTime).toBe(0.1);
+  connection.close();
+});
+
+test("authoritative holed door stage is applied before prediction replay and round recovery", () => {
+  const floor = new T.Mesh(new T.PlaneGeometry(300, 300).rotateX(-Math.PI / 2));
+  const panel = new T.Mesh(new T.BoxGeometry(2, 2, 0.1).translate(1, 1, 0));
+  panel.name = "damage-base";
+  panel.position.set(-18, 0, 16.3);
+  const residue = new T.Mesh(new T.BoxGeometry(0.1, 2, 0.1).translate(0.05, 1, 0));
+  residue.name = "residue";
+  residue.position.copy(panel.position);
+  residue.updateMatrixWorld(true);
+  const root = new T.Group();
+  root.add(floor, panel, residue);
+  const definitions = [
+    {
+      id: "damage",
+      pivot: [-18, 0, 16.3] as const,
+      axis: [0, 1, 0] as const,
+      distance: 90,
+      speed: 180,
+      returnDelay: -1,
+      physicsNames: [panel.name],
+      renderNames: ["base"],
+      damage: {
+        health: 100,
+        damageMultipliers: { bullet: 1 },
+        stages: [{ belowHealth: 100, renderNames: ["residue"], physicsNames: ["residue"] }],
+      },
+    },
+  ];
+  const templates = bindDoorPhysics(root, definitions);
+  const map = testMap();
+  map.collision = new MapCollision([floor, panel, residue]);
+  map.doors = new DoorWorld(map.collision, definitions, templates);
+  const { connection, socket, player } = setup(map);
+  for (let i = 0; i < 48; i++) connection.step({ ...neutralInput(), forward: 1 });
+  expect(connection.local!.z).toBeGreaterThan(16.3);
+  const round = { ...createMatch("casual", testMap()).state, phase: "live" as const };
+  socket.receive({
+    type: "snapshot",
+    tick: 48,
+    players: [player],
+    events: [],
+    round: {
+      ...round,
+      doors: [{ id: "damage", angle: 0, target: 0, returnTime: -1, health: 99, stage: 1 }],
+    },
+  });
+  expect(map.doors.states[0]).toMatchObject({ health: 99, stage: 1 });
+  expect(connection.local!.z).toBeLessThan(16.3);
+  socket.receive({ type: "snapshot", tick: 47, players: [player], events: [], round });
+  expect(map.doors.states[0].stage).toBe(1);
+  socket.receive({ type: "snapshot", tick: 49, players: [player], events: [], round });
+  expect(map.doors.states[0]).toMatchObject({ health: 100, stage: 0 });
+  expect(connection.local!.z).toBeGreaterThan(16.3);
   connection.close();
 });

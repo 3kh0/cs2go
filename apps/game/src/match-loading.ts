@@ -1,10 +1,10 @@
-import type { MapId } from "@cs2go/protocol";
+import { MAPS, type MapId } from "@cs2go/protocol";
 import type { Game } from "./game";
 export function openMatchLoading(
   mode: Parameters<Game["start"]>[0] = "casual",
   map: MapId = "dust2",
 ) {
-  const name = map === "dust2" ? "Dust II" : "Mirage";
+  const name = MAPS[map].name;
   const title = {
     casual: "Casual",
     competitive: "Competitive",
@@ -22,6 +22,7 @@ export function openMatchLoading(
   const controller = new AbortController();
   overlay.id = "match-loading";
   overlay.dataset.map = map;
+  overlay.style.setProperty("--map-art", `url(/ui/home/${map}.webp)`);
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-labelledby", "match-loading-title");

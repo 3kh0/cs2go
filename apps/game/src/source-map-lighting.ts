@@ -302,8 +302,9 @@ export function applySourceMapLighting(root: T.Object3D, data: SourceMapLighting
           layered.normal1,
           layered.normal2,
           layered.color2,
-          layered.mask,
+          ...(layered.fancy > 0 && layered.mask ? [layered.mask] : []),
           ...(layered.detail ? [layered.detail.texture] : []),
+          ...(layered.detail2 ? [layered.detail2.texture] : []),
         ]) {
           const texture = layers.textures.get(key);
           if (texture) surfaceTextures.push(texture);
@@ -502,7 +503,7 @@ if(sourceCoverage<0.5) sourceFragmentProbe=sourceGpuSample(cameraPosition+transp
         (environment ? ":environment-inputs" : "") +
         (genericMaterial ? ":generic-packed-inputs" : "") +
         (layered
-          ? `:layers-${layered.fancy}-${!!layered.detail}-${layered.specularIndirect}`
+          ? `:layers-${layered.fancy}-${!!layered.detail}-${!!layered.detail2}-${layered.specularIndirect}-${JSON.stringify([layered.normal1, layered.normal2, layered.color2, layered.mask, layered.detail?.texture, layered.detail2?.texture])}`
           : "") +
         (cable ? ":cable-radius" : "") +
         (foliage

@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { Vector3 } from "three";
+import { BoxGeometry, Mesh, Vector3 } from "three";
+import { MapCollision } from "@cs2go/simulation/map-collision";
+import { mapTriggers } from "@cs2go/simulation/buy-zones";
+import { movement } from "@cs2go/simulation/physics";
 import { Navigation } from "./navigation";
 import type { NavArea } from "./navigation";
 const area = (id: number, x: number, y: number, links: number[]): NavArea => ({
@@ -205,4 +208,70 @@ it("keeps CS2 triangular ramps inside their actual polygon", () => {
   });
   expect(nav.support(0.5, 0.5, 3, -1)?.height).toBeCloseTo(0.5);
   expect(nav.support(1.8, 1.8, 3, -1)).toBeUndefined();
+});
+
+describe("physical native plant goals", () => {
+  function fixture(mapId: "nuke" | "dust2" = "nuke") {
+    const floor = new Mesh(new BoxGeometry(20, 0.5, 20));
+    floor.position.y = -0.25;
+    const fixture = new Mesh(new BoxGeometry(0.6, 3, 0.6));
+    fixture.position.y = 1.5;
+    floor.updateMatrixWorld(true);
+    fixture.updateMatrixWorld(true);
+    const collision = new MapCollision([floor, fixture]);
+    const areas = [
+      { ...area(1, 0, 0.1, [2, 3, 4]), place: "BombsiteA" },
+      { ...area(2, 2, 0.1, [1]), place: "BombsiteA" },
+      { ...area(3, -1.2, 0.1, [1]), place: "BombsiteA" },
+      { ...area(4, 4, 0.1, [1]), place: "BombsiteA" },
+    ];
+    const data = {
+      mapId,
+      areas,
+      spawns: { t: [[2, 0.1, 0]], ct: [[4, 0.1, 0]] },
+      sites: [[0, 1.5, 0]],
+      triggers: {
+        zones: [],
+        sites: [{ site: 0, hulls: [{ min: [-0.4, -0.1, -2], max: [6, 3, 2] }] }],
+      },
+      bounds: [-5, -5, 7, 5],
+    };
+    return { data, collision };
+  }
+  it("rejects a blocked labelled center and a closer clear point outside the native trigger", () => {
+    const { data, collision } = fixture();
+    const nav = new Navigation(data, collision);
+    const goal = nav.site(0);
+    expect(goal.toArray()).toEqual([2, 0, 0]);
+    expect(
+      collision.blocked(
+        goal.x,
+        goal.z,
+        goal.y + 0.001,
+        movement.hullRadius,
+        movement.standingHeight,
+      ),
+    ).toBe(false);
+    expect(
+      mapTriggers({ id: "nuke", triggers: data.triggers }).bombSites.site(goal, {
+        halfWidth: movement.hullRadius,
+        height: movement.standingHeight,
+      }),
+    ).toBe(0);
+    expect(nav.site(0, 4).toArray()).toEqual([4, 0, 0]);
+    expect(data.sites).toEqual([[0, 1.5, 0]]);
+  });
+  it("uses a clear ordinary native floor in the trigger when labelled samples are all blocked", () => {
+    const { data, collision } = fixture();
+    for (const area of data.areas.slice(1)) area.place = "";
+    const nav = new Navigation(data);
+    nav.bindCollision(collision);
+    expect(nav.site(0).toArray()).toEqual([2, 0, 0]);
+  });
+  it("preserves legacy Dust II site and offset selection", () => {
+    const { data, collision } = fixture("dust2");
+    const nav = new Navigation(data, collision);
+    expect(nav.site(0).toArray()).toEqual([0, 0.1, 0]);
+    expect(nav.site(0, 4).toArray()).toEqual([4, 0.1, 0]);
+  });
 });

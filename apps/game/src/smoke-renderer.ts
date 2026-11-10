@@ -1,5 +1,8 @@
+import { applySourceDepth } from "./source-depth";
 import * as T from "three";
 import { renderFrozenPose } from "./cached-skeleton";
+import { withoutSourceColorCorrection } from "./map-color";
+import { withoutNativeMapGrade } from "./native-map-color";
 
 export const SMOKE_CELL_RADIUS = 1.05;
 const RECOVERY = 0.35;
@@ -178,8 +181,21 @@ export class SmokeRenderer {
 /** Scene depth is rendered with cached unlit material variants, preserving the
  * world's original display transform, cutout textures and animated geometry.
  */
+export type SceneDepthConsumer = {
+  setDepth(texture: T.DepthTexture, viewport: T.Vector4, inverseProjection: T.Matrix4): void;
+  color?: {
+    exclude: ReadonlySet<T.Object3D>;
+    setColor(texture: T.Texture): void;
+  };
+};
+const depthSamplingMaterials = new WeakSet<T.Material>();
+/** Such materials must never sample a depth image attached to their own draw. */
+export function registerSceneDepthMaterial(material: T.Material) {
+  depthSamplingMaterials.add(material);
+}
 export class SmokeComposite {
   target?: T.WebGLRenderTarget;
+  private colorTarget = false;
   // The cloud pass needs no world lights/fog or another map/rig traversal.
   private cloudScene = new T.Scene();
   private cloudParents: (T.Object3D | null)[] = [];
@@ -195,6 +211,7 @@ export class SmokeComposite {
   private arrays = new WeakMap<T.Material[], T.Material[]>();
   private objects: T.Mesh[] = [];
   private originals: (T.Material | T.Material[])[] = [];
+  private hidden: T.Object3D[] = [];
   private depthVariant(source: T.Material) {
     let depth = this.variants.get(source);
     if (!depth) {
@@ -227,6 +244,7 @@ export class SmokeComposite {
     depth.polygonOffset = source.polygonOffset;
     depth.polygonOffsetFactor = source.polygonOffsetFactor;
     depth.polygonOffsetUnits = source.polygonOffsetUnits;
+    applySourceDepth(source, depth);
     return depth;
   }
   private replaceMaterial = (object: T.Object3D) => {
@@ -250,10 +268,13 @@ export class SmokeComposite {
     camera: T.PerspectiveCamera,
     clouds: readonly SmokeRenderer[],
     lowQuality = false,
+    depthConsumer?: SceneDepthConsumer,
   ) {
     // Poses are sampled before rendering. Share body palettes across the depth,
     // shadow and color passes, without retaining them across animation updates.
-    return renderFrozenPose(() => this.renderPasses(renderer, scene, camera, clouds, lowQuality));
+    return renderFrozenPose(() =>
+      this.renderPasses(renderer, scene, camera, clouds, lowQuality, depthConsumer),
+    );
   }
   private renderPasses(
     renderer: T.WebGLRenderer,
@@ -261,8 +282,9 @@ export class SmokeComposite {
     camera: T.PerspectiveCamera,
     clouds: readonly SmokeRenderer[],
     lowQuality = false,
+    depthConsumer?: SceneDepthConsumer,
   ) {
-    if (!clouds.length) {
+    if (!clouds.length && !depthConsumer) {
       this.target?.dispose();
       this.target = undefined;
       renderer.render(scene, camera);
@@ -278,13 +300,23 @@ export class SmokeComposite {
     renderer.getViewport(this.logicalViewport);
     renderer.getCurrentViewport(this.viewport);
     this.viewportSize.set(this.viewport.z, this.viewport.w);
+    const color = depthConsumer?.color;
+    if (this.target && this.colorTarget !== !!color) {
+      this.target.dispose();
+      this.target = undefined;
+    }
     if (!this.target) {
+      if (color && !renderer.extensions.has("EXT_color_buffer_float"))
+        throw new Error("Native water requires a renderable linear HDR scene-color target");
+      this.colorTarget = !!color;
       this.target = new T.WebGLRenderTarget(this.size.x, this.size.y, {
-        format: T.RedFormat,
+        format: color ? T.RGBAFormat : T.RedFormat,
+        type: color ? T.HalfFloatType : T.UnsignedByteType,
         minFilter: T.NearestFilter,
         magFilter: T.NearestFilter,
         depthTexture: new T.DepthTexture(this.size.x, this.size.y, T.UnsignedIntType),
       });
+      this.target.texture.colorSpace = T.LinearSRGBColorSpace;
     } else if (this.target.width !== this.size.x || this.target.height !== this.size.y) {
       this.target.setSize(this.size.x, this.size.y);
     }
@@ -294,6 +326,7 @@ export class SmokeComposite {
     let shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
     const autoClear = renderer.autoClear;
     const matrixUpdate = scene.matrixWorldAutoUpdate;
+    const toneMapping = renderer.toneMapping;
     renderer.autoClear = false;
     try {
       // Animation has already advanced; all passes share the same world pose.
@@ -306,9 +339,11 @@ export class SmokeComposite {
         cloud.batch.layers.set(31);
       }
       camera.layers.mask = mask & ~(1 << 31);
-      scene.background = null;
-      renderer.shadowMap.autoUpdate = false;
-      renderer.shadowMap.needsUpdate = false;
+      scene.background = color ? background : null;
+      if (!color) {
+        renderer.shadowMap.autoUpdate = false;
+        renderer.shadowMap.needsUpdate = false;
+      }
       camera.updateWorldMatrix(true, false);
       this.cameraPosition.setFromMatrixPosition(camera.matrixWorld);
       let smokeFar = camera.near + 0.01;
@@ -322,20 +357,49 @@ export class SmokeComposite {
       }
       this.depthCamera.copy(camera, false);
       this.depthCamera.matrixWorldAutoUpdate = false;
-      this.depthCamera.far = Math.min(camera.far, smokeFar);
+      this.depthCamera.far = depthConsumer ? camera.far : Math.min(camera.far, smokeFar);
       this.depthCamera.updateProjectionMatrix();
-      scene.traverseVisible(this.replaceMaterial);
+      if (color) {
+        scene.traverseVisible((object) => {
+          if (!(object instanceof T.Mesh)) return;
+          const materials = Array.isArray(object.material) ? object.material : [object.material];
+          if (
+            color.exclude.has(object) ||
+            materials.some(
+              (material) => material.transparent || depthSamplingMaterials.has(material),
+            )
+          ) {
+            this.hidden.push(object);
+            object.visible = false;
+          }
+        });
+      } else scene.traverseVisible(this.replaceMaterial);
       renderer.setRenderTarget(this.target);
       renderer.clear();
-      renderer.render(scene, this.depthCamera);
+      if (color) {
+        renderer.toneMapping = T.NoToneMapping;
+        withoutSourceColorCorrection(() =>
+          withoutNativeMapGrade(() => renderer.render(scene, this.depthCamera)),
+        );
+        renderer.toneMapping = toneMapping;
+        shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
+        for (const object of this.hidden) object.visible = true;
+        this.hidden.length = 0;
+        color.setColor(this.target.texture);
+      } else renderer.render(scene, this.depthCamera);
       for (let i = 0; i < this.objects.length; i++) this.objects[i].material = this.originals[i];
       this.objects.length = this.originals.length = 0;
       scene.background = background;
-      renderer.shadowMap.autoUpdate = shadowUpdate;
+      renderer.shadowMap.autoUpdate = color ? false : shadowUpdate;
       renderer.shadowMap.needsUpdate = shadowNeedsUpdate;
       renderer.setRenderTarget(destination);
       if (!destination) renderer.setViewport(this.logicalViewport);
       renderer.clear();
+      depthConsumer?.setDepth(
+        this.target.depthTexture!,
+        this.viewport,
+        this.depthCamera.projectionMatrixInverse,
+      );
       renderer.render(scene, camera);
       shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
       for (const cloud of clouds)
@@ -360,11 +424,14 @@ export class SmokeComposite {
     } finally {
       for (let i = 0; i < this.objects.length; i++) this.objects[i].material = this.originals[i];
       this.objects.length = this.originals.length = 0;
+      for (const object of this.hidden) object.visible = true;
+      this.hidden.length = 0;
       camera.layers.mask = mask;
       scene.matrixWorldAutoUpdate = matrixUpdate;
       scene.background = background;
       renderer.shadowMap.autoUpdate = shadowUpdate;
       renderer.autoClear = autoClear;
+      renderer.toneMapping = toneMapping;
       renderer.shadowMap.needsUpdate = shadowNeedsUpdate;
       renderer.setRenderTarget(destination);
       if (!destination) renderer.setViewport(this.logicalViewport);

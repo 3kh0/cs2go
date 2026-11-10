@@ -1,4 +1,4 @@
-import { isMapId, PROTOCOL_VERSION, validRoom, type PublicLobby } from "@cs2go/protocol";
+import { isMapId, MAPS, PROTOCOL_VERSION, validRoom, type PublicLobby } from "@cs2go/protocol";
 import { assetUrl } from "./asset-url";
 import "./public-lobbies.css";
 
@@ -75,13 +75,13 @@ export function setupPublicLobbies(server: HTMLSelectElement, join: (room: strin
         button.dataset.publicRoom = lobby.room;
         button.disabled = lobby.players >= lobby.capacity;
         const badge = document.createElement("img");
-        badge.src = assetUrl(`/ui/home/${lobby.map === "dust2" ? "dust2" : "mirage"}-emblem.svg`);
+        badge.src = assetUrl(`/ui/home/${lobby.map}-emblem.svg`);
         badge.alt = "";
         const detail = document.createElement("span");
         const name = document.createElement("strong");
         name.textContent = lobby.name;
         const metadata = document.createElement("small");
-        metadata.textContent = `${lobby.map === "dust2" ? "Dust II" : "Mirage"} · ${lobby.mode === "casual" ? "Casual" : "Competitive"}`;
+        metadata.textContent = `${MAPS[lobby.map].name} · ${lobby.mode === "casual" ? "Casual" : "Competitive"}`;
         detail.append(name, metadata);
         const count = document.createElement("span");
         count.className = "public-lobby-count";

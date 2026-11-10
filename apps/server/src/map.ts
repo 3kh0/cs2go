@@ -2,6 +2,11 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { dustCollision, type DustMap } from "@cs2go/simulation/dust-map";
 import { BakedBombDamage } from "@cs2go/simulation/bomb-damage";
+import {
+  bindDoorPhysics,
+  type NativeDoorDefinition,
+  type NativeDoorManifest,
+} from "@cs2go/simulation/doors";
 import { resolve } from "node:path";
 import { isMapId, type MapId } from "@cs2go/protocol";
 import { mapTriggers } from "@cs2go/simulation/buy-zones";
@@ -23,6 +28,16 @@ export async function loadServerMap(
   )
     throw new Error(`Invalid native breakable metadata for ${id}`);
   const breakableDefinitions = (breakableData?.breakables ?? []) as NativeBreakableDefinition[];
+  const doorFile = Bun.file(resolve(directory, `${id}-doors.json`));
+  const doorData: NativeDoorManifest | undefined = (await doorFile.exists())
+    ? await doorFile.json()
+    : undefined;
+  if (
+    doorData &&
+    (doorData.version !== 1 || doorData.mapId !== id || !Array.isArray(doorData.doors))
+  )
+    throw new Error(`Invalid native door metadata for ${id}`);
+  const doorDefinitions = (doorData?.doors ?? []) as NativeDoorDefinition[];
   const [physics, nav, bomb] = await Promise.all([
     Bun.file(resolve(directory, `${id}-physics.glb.gz`)).arrayBuffer(),
     Bun.file(resolve(directory, `${id}-nav.json`)).json(),
@@ -32,9 +47,25 @@ export async function loadServerMap(
   const model = await new GLTFLoader()
     .setMeshoptDecoder(MeshoptDecoder)
     .parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), "");
+  for (const path of doorData?.physicsModels ?? []) {
+    if (!new RegExp(`^/models/maps/${id}-[a-z0-9-]+-physics\\.glb\\.gz$`).test(path))
+      throw new Error(`Invalid native door physics asset for ${id}`);
+    const bytes = Bun.gunzipSync(
+      new Uint8Array(
+        await Bun.file(resolve(directory, path.slice(path.lastIndexOf("/") + 1))).arrayBuffer(),
+      ),
+    );
+    const extra = await new GLTFLoader()
+      .setMeshoptDecoder(MeshoptDecoder)
+      .parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), "");
+    model.scene.add(extra.scene);
+  }
   bindBreakablePhysics(model.scene, breakableDefinitions, breakableData?.enabledRemainders ?? []);
+  const doorPhysics = bindDoorPhysics(model.scene, doorDefinitions);
   const map: DustMap = {
     id,
+    doorDefinitions,
+    doorPhysics,
     breakableDefinitions,
     ...dustCollision(model.scene),
     triggers: nav.triggers,

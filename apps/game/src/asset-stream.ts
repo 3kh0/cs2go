@@ -64,3 +64,38 @@ export async function readAssetBody(response: Response): Promise<ArrayBuffer> {
   const body = response.body ?? new Blob([await response.arrayBuffer()]).stream();
   return new Response(await decodedAssetStream(body)).arrayBuffer();
 }
+
+/** Assemble independently compressed native chunks into one bounded allocation.
+ * Parts are requested sequentially so large fallback atlases do not retain a
+ * second complete decoded copy while joining their transport. */
+export async function readAssetParts(
+  responses: AsyncIterable<Response>,
+  expectedBytes: number,
+): Promise<ArrayBuffer> {
+  if (!Number.isSafeInteger(expectedBytes) || expectedBytes <= 0 || expectedBytes > 2 ** 31)
+    throw new Error("Invalid asset part size");
+  const output = new Uint8Array(expectedBytes);
+  let offset = 0;
+  for await (const response of responses) {
+    if (!response.ok) throw new Error(`Asset part unavailable (${response.status})`);
+    const body = response.body ?? new Blob([await response.arrayBuffer()]).stream();
+    const reader = (await decodedAssetStream(body)).getReader();
+    try {
+      for (;;) {
+        const next = await reader.read();
+        if (next.done) break;
+        if (next.value.length > output.length - offset)
+          throw new Error("Asset parts exceed declared size");
+        output.set(next.value, offset);
+        offset += next.value.length;
+      }
+    } catch (error) {
+      await reader.cancel(error).catch(() => {});
+      throw error;
+    } finally {
+      reader.releaseLock();
+    }
+  }
+  if (offset !== output.length) throw new Error("Asset parts do not match declared size");
+  return output.buffer;
+}

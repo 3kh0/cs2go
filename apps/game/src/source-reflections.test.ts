@@ -1,13 +1,23 @@
 import { readFileSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import * as T from "three";
 import {
+  applySourceReflections,
   createSourceReflectionBinding,
+  loadSourceReflections,
   updateSourceReflectionBinding,
+  validateSourceReflections,
+  sourceReflectionCandidates,
+  type SourceReflectionManifest,
   type SourceReflections,
 } from "./source-reflections";
+import { assetFetch } from "./asset-url";
+import { fetchGzipped } from "./gltf";
+
+vi.mock("./asset-url", () => ({ assetFetch: vi.fn() }));
+vi.mock("./gltf", () => ({ fetchGzipped: vi.fn() }));
 
 const directory = new URL(
   "../../../packages/assets/public/models/maps/mirage-lighting/reflections/",
@@ -112,4 +122,185 @@ test("actor reflection bindings update native indoor priority without changing s
   bounds.translate(new T.Vector3(1000, 1000, 1000));
   expect(updateSourceReflectionBinding(binding, bounds)).toBe(0);
   expect(binding.count.value).toBe(0);
+});
+
+function reflectionBundle(partitions: number[]): SourceReflectionManifest {
+  let firstCube = 0;
+  const arrays = partitions.map((cubes, index) => {
+    const layers = cubes * 6;
+    const mips = [8, 4, 2].map((size) => ({
+      width: size,
+      height: size,
+      bytes: Math.ceil(size / 4) ** 2 * 16 * layers,
+    }));
+    const entry = {
+      file: `cubes-${index}.bin.gz`,
+      firstCube,
+      layers,
+      gpuBytes: mips.reduce((bytes, mip) => bytes + mip.bytes, 0),
+      mips,
+    };
+    firstCube += cubes;
+    return entry;
+  });
+  return {
+    arrays,
+    lightmapVersion: [8, 2],
+    lastLod: 2,
+    gpuBytes: arrays.reduce((bytes, array) => bytes + array.gpuBytes, 0),
+    volumes: Array.from({ length: firstCube }, (_, index) => ({
+      index,
+      origin: [0, 0, 0],
+      min: [-1, -1, -1],
+      max: [1, 1, 1],
+      fade: [0, 0, 0],
+      normalizationSH: [0, 0, 0, 1],
+    })),
+  };
+}
+
+function reflectionRenderer(maxLayers: number) {
+  return {
+    extensions: { has: () => true },
+    capabilities: { maxFragmentUniforms: 1024, maxTextureSize: 4096, maxTextures: 16 },
+    getContext: () => ({ MAX_ARRAY_TEXTURE_LAYERS: 1, getParameter: () => maxLayers }),
+  } as unknown as T.WebGLRenderer;
+}
+
+function serveReflections(manifest: SourceReflectionManifest) {
+  vi.mocked(assetFetch).mockImplementation(async () => new Response(JSON.stringify(manifest)));
+  vi.mocked(fetchGzipped).mockImplementation(async (path) => {
+    const index = manifest.arrays.findIndex((array) => path.endsWith(array.file));
+    const array = manifest.arrays[index];
+    return new Uint8Array(array.gpuBytes).fill(index + 1).buffer;
+  });
+}
+
+test("reflection validation preserves shipped layouts and rejects incomplete or ambiguous native face data", () => {
+  expect(validateSourceReflections(source)).toEqual({ size: 256, layers: 348, mipCount: 7 });
+  const legacy = JSON.parse(
+    readFileSync(new URL("../../lighting/reflections/source.json", directory), "utf8"),
+  ) as SourceReflectionManifest;
+  expect(validateSourceReflections(legacy, { volumes: 43 }).size).toBe(256);
+  const sky = JSON.parse(
+    readFileSync(new URL("../../lighting/sky/reflections.json", directory), "utf8"),
+  ) as SourceReflectionManifest;
+  expect(validateSourceReflections(sky, { volumes: 2 })).toEqual({
+    size: 256,
+    layers: 12,
+    mipCount: 7,
+  });
+  const valid = reflectionBundle([2, 1]);
+  expect(validateSourceReflections(valid)).toEqual({ size: 8, layers: 18, mipCount: 3 });
+  for (const mutate of [
+    (data: SourceReflectionManifest) => (data.arrays[1].firstCube = 3),
+    (data: SourceReflectionManifest) => data.arrays[0].mips[0].bytes++,
+    (data: SourceReflectionManifest) => (data.volumes[1].index = 0),
+    (data: SourceReflectionManifest) => (data.volumes[0].origin[0] = NaN),
+    (data: SourceReflectionManifest) => (data.volumes[0].min[0] = 2),
+  ]) {
+    const invalid = structuredClone(valid);
+    mutate(invalid);
+    expect(() => validateSourceReflections(invalid)).toThrow("Invalid native reflection");
+  }
+  expect(() => validateSourceReflections(valid, { maxGpuBytes: 1 })).toThrow();
+  expect(() => validateSourceReflections(valid, { volumes: 58 })).toThrow();
+});
+
+test("map reflection loading combines every source array without changing cube face indices", async () => {
+  const manifest = reflectionBundle([1, 1, 1]);
+  serveReflections(manifest);
+  const data = await loadSourceReflections(reflectionRenderer(18), true, {
+    directory: "/test/",
+    manifest: "source.json",
+  });
+  expect(data?.textures).toHaveLength(1);
+  expect(data?.cubeSize).toBe(8);
+  expect(data?.combined).toBe(true);
+  for (const [level, mip] of data!.textures[0].mipmaps.entries()) {
+    const bytes = manifest.arrays[0].mips[level].bytes;
+    expect(Array.from(mip.data as Uint8Array)).toEqual([
+      ...Array.from({ length: bytes }, () => 1),
+      ...Array.from({ length: bytes }, () => 2),
+      ...Array.from({ length: bytes }, () => 3),
+    ]);
+  }
+  data!.textures.forEach((texture) => texture.dispose());
+  vi.mocked(fetchGzipped).mockClear();
+  expect(
+    await loadSourceReflections(reflectionRenderer(12), true, {
+      directory: "/test/",
+      manifest: "source.json",
+    }),
+  ).toBeUndefined();
+  expect(fetchGzipped).not.toHaveBeenCalled();
+});
+
+test("separate reflection arrays use their own face size and split in the shader", async () => {
+  const manifest = reflectionBundle([2, 1]);
+  serveReflections(manifest);
+  const data = await loadSourceReflections(reflectionRenderer(12), false, {
+    directory: "/test/",
+    manifest: "source.json",
+  });
+  expect(data?.textures).toHaveLength(2);
+  expect(data?.arraySplit).toBe(2);
+  const shader = {
+    uniforms: {},
+    fragmentShader: "#include <lights_fragment_end>",
+  } as T.WebGLProgramParametersWithUniforms;
+  applySourceReflections(shader, data!, [0]);
+  expect(shader.fragmentShader).toContain("#define SOURCE_REFLECTION_CUBE_SIZE 8");
+  expect(shader.fragmentShader).toContain("#define SOURCE_REFLECTION_ARRAY_SPLIT 2");
+  expect(shader.fragmentShader).not.toContain("#define SOURCE_REFLECTION_SINGLE_ARRAY");
+  data!.textures.forEach((texture) => texture.dispose());
+});
+
+test("rotated reflection volumes select their authored world extent and retain inverse affine frames", async () => {
+  const manifest = reflectionBundle([1]);
+  const transform = new T.Matrix4()
+    .makeTranslation(100, 200, 300)
+    .multiply(new T.Matrix4().makeRotationZ(Math.PI / 2));
+  const localBounds = new T.Box3(new T.Vector3(-20, -1, -1), new T.Vector3(20, 1, 1));
+  const worldBounds = localBounds.clone().applyMatrix4(transform);
+  Object.assign(manifest.volumes[0], {
+    origin: [100, 200, 300],
+    min: localBounds.min.toArray(),
+    max: localBounds.max.toArray(),
+    localMin: localBounds.min.toArray(),
+    localMax: localBounds.max.toArray(),
+    localFade: [1, 1, 1],
+    worldToLocal: transform.clone().invert().toArray(),
+    localToWorld: transform.toArray(),
+    worldAABB: [worldBounds.min.toArray(), worldBounds.max.toArray()],
+  });
+  validateSourceReflections(manifest);
+  serveReflections(manifest);
+  const data = (await loadSourceReflections(reflectionRenderer(6), true, {
+    directory: "/test/",
+    manifest: "source.json",
+  }))!;
+  // This point is inside the rotated long axis, outside the old unrotated box.
+  const bounds = new T.Box3().setFromCenterAndSize(
+    new T.Vector3(100 * 0.0254, 300 * 0.0254, -210 * 0.0254),
+    new T.Vector3(0.001, 0.001, 0.001),
+  );
+  expect(sourceReflectionCandidates(bounds, data)).toEqual([0]);
+  const binding = createSourceReflectionBinding(data);
+  updateSourceReflectionBinding(binding, bounds);
+  expect(
+    new T.Vector3(100, 210, 300).applyMatrix4(binding.uniforms[0].worldToLocal!).x,
+  ).toBeCloseTo(10, 6);
+  const shader = {
+    uniforms: {},
+    fragmentShader: T.ShaderChunk.lights_fragment_end,
+  } as T.WebGLProgramParametersWithUniforms;
+  applySourceReflections(shader, binding, [0], { count: binding.count });
+  expect(shader.fragmentShader).toContain("mat3(env.worldToLocal)*R");
+  expect(shader.fragmentShader).toContain("radiance=sourceMapReflection");
+  expect(shader.uniforms.sourceEnvironments.value).toBe(binding.uniforms);
+  const invalid = structuredClone(manifest);
+  invalid.volumes[0].worldToLocal![0] = NaN;
+  expect(() => validateSourceReflections(invalid)).toThrow(/Invalid native reflection/);
+  data.textures.forEach((texture) => texture.dispose());
 });

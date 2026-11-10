@@ -1,0 +1,57 @@
+import type { NativeComplexMaterial } from "../src/native-map-complex";
+/** Actual installed concrete133 native6da3fa09...; PS5124/d4+VS4/d9. */
+export const nativeComplexSource: NativeComplexMaterial = {
+  shader: "csgo_complex.vfx",
+  nativeResource: "materials/concrete/hr_c/hr_concrete_floor_001.vmat",
+  IntParams: {
+    F_DETAIL_TEXTURE: 2,
+    g_bFogEnabled: 1,
+    g_nScaleTexCoordUByModelScaleAxis: 0,
+    g_nScaleTexCoordVByModelScaleAxis: 0,
+    g_nTextureAddressModeU: 0,
+    g_nTextureAddressModeV: 0,
+  },
+  FloatParams: {
+    g_flDetailBlendFactor: 0.653,
+    g_flDetailBlendToFull: 0,
+    g_flDetailTexCoordRotation: 0,
+    g_flMetalness: 0,
+    g_flModelTintAmount: 1,
+    g_flTexCoordRotation: 0,
+  },
+  VectorParams: {
+    g_vColorTint: [1, 1, 1, 0],
+    g_vDetailTexCoordOffset: [0, 0, 0, 0],
+    g_vDetailTexCoordScale: [0.1, 0.1, 0, 0],
+    g_vTexCoordCenter: [0.5, 0.5, 0, 0],
+    g_vTexCoordOffset: [0, 0, 0, 0],
+    g_vTexCoordScale: [1, 1, 0, 0],
+    g_vTexCoordScrollSpeed: [0, 0, 0, 0],
+    TextureRoughness: [0.254902, 0.254902, 0.254902, 0],
+  },
+  resolvedMaterialInputs: {
+    g_flReflectance: [
+      0.04000000000000001, 0.04000000000000001, 0.04000000000000001, 0.04000000000000001,
+    ],
+    g_flMetalness: [0.0, 0.0, 0.0, 0.0],
+    g_flDetailBlendFactor: [0.653, 0.653, 0.653, 0.653],
+    g_flDetailBlendToFull: [0.0, 0.0, 0.0, 0.0],
+    g_bFogEnabled: [1, 1, 1, 1],
+    g_bDontFlipBackfaceNormals: [0.0, 0.0, 0.0, 0.0],
+    g_bRenderBackfaceNormals: [0.0, 0.0, 0.0, 0.0],
+    g_vDetailTexCoordOffset: [0.45, 0.45, 0.5, 0.5],
+    g_vDetailTexCoordXform: [0.1, -0.0, 0.0, 0.1],
+    g_vTexCoordXform0: [1.0, -0.0, 0.0, 0.0],
+    g_vTexCoordXform1: [0.0, 1.0, 0.0, 0.0],
+    g_vTexCoordScrollSpeed: [0.0, 0.0, 0.0, 0.0],
+    g_vColorTint: [1.0, 1.0, 1.0, 0.0],
+    g_flModelTintAmount: [1.0, 1.0, 1.0, 1.0],
+  },
+  nativeDetailMaskValue: 1,
+  textures: {
+    g_tColor: "g_tColor",
+    g_tNormal: "g_tNormal",
+    g_tAmbientOcclusion: "g_tAmbientOcclusion",
+    g_tDetail: "g_tDetail",
+  },
+};

@@ -1,5 +1,6 @@
 import * as T from "three";
 import { fetchGzipped } from "./gltf";
+import { isNativeMod2x } from "./native-static-overlay";
 
 export type NativeFilmicParameters = {
   m_flShoulderStrength: number;
@@ -155,6 +156,9 @@ export function gradeNativeMapColors(root: T.Object3D) {
         materials.add(material);
   });
   for (const material of materials) {
+    // This shader outputs a multiplication factor, not scene color. Grading
+    // its neutral0.5 would change the destination even at zero opacity.
+    if (isNativeMod2x(material)) continue;
     const compile = material.onBeforeCompile.bind(material),
       key = material.customProgramCacheKey();
     material.onBeforeCompile = (shader, renderer) => {

@@ -333,12 +333,28 @@ export class MapCollision {
   private readonly depth: number;
   private readonly queryState = { value: 0 };
   private readonly disabledOwners: Uint8Array;
+  // Native small props may block bullets/grenades while excluding player hulls.
+  private readonly playerExcludedOwners: Uint8Array;
   private readonly meshKeys = new Map<string, number[]>();
+  // Small, room-owned moving islands keep the map's immutable arrays/CSR shared.
+  // Rebuild only a changed island from its exact current world-space mesh pose.
+  private readonly dynamic = new Map<string, MapCollision>();
+  private readonly dynamicContact = new T.Vector3();
+  private readonly dynamicCandidates: number[] = [];
   constructor(meshes: T.Mesh[], movementMeshes: T.Mesh[] = []) {
     this.raycastMeshCount = meshes.length;
     meshes = meshes.concat(movementMeshes);
     this.meshes = meshes.slice();
     this.disabledOwners = new Uint8Array(meshes.length);
+    this.playerExcludedOwners = Uint8Array.from(meshes, (mesh) => {
+      let metadata: T.Object3D = mesh;
+      while (metadata.parent && !metadata.userData.nativeCollisionAttributes)
+        metadata = metadata.parent;
+      const attributes = metadata.userData.nativeCollisionAttributes as
+        | { m_InteractExcludeStrings?: string[] }
+        | undefined;
+      return attributes?.m_InteractExcludeStrings?.includes("player") ? 1 : 0;
+    });
     for (const [index, mesh] of meshes.entries())
       for (const key of new Set([
         mesh.name,
@@ -499,9 +515,48 @@ export class MapCollision {
   fork(): MapCollision {
     return Object.assign(Object.create(MapCollision.prototype) as MapCollision, this, {
       disabledOwners: this.disabledOwners.slice(),
+      dynamic: new Map([...this.dynamic].map(([id, collision]) => [id, collision.fork()])),
+      dynamicContact: new T.Vector3(),
+      dynamicCandidates: [],
     });
   }
+  /** Call only when a kinematic pose changes. Meshes must contain just the
+   * moving leaf, never its static frame or already-flattened closed duplicate.
+   * Geometry is sampled immediately; later Object3D changes cannot mutate a
+   * different room's collision. Bullet materials/identity remain on each mesh.
+   */
+  setDynamicMeshes(id: string, meshes: T.Mesh[], movementMeshes: T.Mesh[] = []) {
+    if (!id) throw new Error("Dynamic collision identity is required");
+    if (!meshes.length && !movementMeshes.length) {
+      this.dynamic.delete(id);
+      return;
+    }
+    const previous = this.dynamic.get(id),
+      next = new MapCollision(meshes, movementMeshes);
+    // A pose update must not resurrect an explicitly disabled physics part.
+    // Reference identity avoids conflating unrelated leaves with the same name.
+    if (previous)
+      for (const [index, mesh] of next.meshes.entries()) {
+        const owner = previous.meshes.indexOf(mesh);
+        if (owner >= 0) next.disabledOwners[index] = previous.disabledOwners[owner];
+      }
+    this.dynamic.set(id, next);
+  }
+  removeDynamicMeshes(id: string) {
+    return this.dynamic.delete(id);
+  }
+  dynamicBlocked(id: string, x: number, z: number, feet: number, radius = 0.3, height = 1.65) {
+    return this.dynamic.get(id)?.blocked(x, z, feet, radius, height) ?? false;
+  }
   setMeshEnabled(key: string, enabled: boolean) {
+    let found = this.setStaticMeshEnabled(key, enabled);
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values())
+        found = collision.setMeshEnabled(key, enabled) || found;
+    return found;
+  }
+  /** Moving leaves replace their closed-pose triangles in the static grid. */
+  setStaticMeshEnabled(key: string, enabled: boolean) {
     const owners = this.meshKeys.get(key);
     if (!owners) return false;
     for (const owner of owners) this.disabledOwners[owner] = enabled ? 0 : 1;
@@ -510,12 +565,15 @@ export class MapCollision {
   floor(x: number, z: number, ceiling: number, bottom = ceiling - 5) {
     const cell = this.cell(Math.floor(x / this.cellSize), Math.floor(z / this.cellSize));
     let height = -Infinity;
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values())
+        height = Math.max(height, collision.floor(x, z, ceiling, bottom));
     if (cell < 0) return height;
     const { ground, groundOffsets, minY, maxY, vertices } = this,
       origin = ceiling + 0.01;
     for (let e = groundOffsets[cell], end = groundOffsets[cell + 1]; e < end; e++) {
       const k = ground[e];
-      if (this.disabledOwners[this.owner[k]]) continue;
+      if (this.disabledOwners[this.owner[k]] || this.playerExcludedOwners[this.owner[k]]) continue;
       if (this.owner[k] >= this.raycastMeshCount && this.normals[k * 3 + 1] < 0.7) continue;
       if (minY[k] > ceiling || maxY[k] < bottom) continue;
       if (outside(vertices, k * 9, x, z, 0)) continue;
@@ -532,6 +590,80 @@ export class MapCollision {
   support(x: number, z: number, ceiling: number, bottom: number, radius = 0.3) {
     return this.footprint(x, z, ceiling, bottom, radius, false);
   }
+  /** Resolve the actual nearby supporting PHYS owner for bounded event-time
+   * queries (footsteps, landing), using the same hull footprint as movement.
+   * Height/mode never identify a material; absent source metadata stays absent. */
+  supportingSurface(
+    x: number,
+    z: number,
+    feet: number,
+    radius = 0.3,
+    tolerance = 0.1,
+  ): { height: number; object: T.Mesh; surface: string | undefined } | undefined {
+    if (![x, z, feet, radius, tolerance].every(Number.isFinite) || radius < 0 || tolerance < 0)
+      return undefined;
+    const ceiling = feet + tolerance,
+      bottom = feet - tolerance;
+    let best: { height: number; object: T.Mesh; surface: string | undefined } | undefined;
+    for (const collision of this.dynamic.values()) {
+      const candidate = collision.supportingSurface(x, z, feet, radius, tolerance);
+      if (candidate && (!best || candidate.height > best.height)) best = candidate;
+    }
+    const stamp = this.stamp(),
+      { cellSize, ground, groundOffsets, vertices } = this;
+    let height = best?.height ?? -Infinity,
+      object: T.Mesh | undefined;
+    for (
+      let cz = Math.floor((z - radius) / cellSize);
+      cz <= Math.floor((z + radius) / cellSize);
+      cz++
+    )
+      for (
+        let cx = Math.floor((x - radius) / cellSize);
+        cx <= Math.floor((x + radius) / cellSize);
+        cx++
+      ) {
+        const cell = this.cell(cx, cz);
+        if (cell < 0) continue;
+        for (let e = groundOffsets[cell]; e < groundOffsets[cell + 1]; e++) {
+          const k = ground[e],
+            owner = this.owner[k];
+          if (
+            this.disabledOwners[owner] ||
+            this.playerExcludedOwners[owner] ||
+            this.visit[k] === stamp
+          )
+            continue;
+          this.visit[k] = stamp;
+          if (owner >= this.raycastMeshCount && this.normals[k * 3 + 1] < 0.7) continue;
+          if (
+            this.minY[k] > ceiling ||
+            this.maxY[k] < bottom ||
+            outside(vertices, k * 9, x, z, radius)
+          )
+            continue;
+          const y = footprintHeight(vertices, k * 9, x, z, radius, true);
+          if (y <= ceiling && y >= bottom && y > height) {
+            height = y;
+            object = this.meshes[owner];
+          }
+        }
+      }
+    if (!object) return best;
+    let metadata: T.Object3D | null = object,
+      surface: string | undefined;
+    while (metadata) {
+      if (
+        typeof metadata.userData.SurfaceProperty === "string" &&
+        metadata.userData.SurfaceProperty
+      ) {
+        surface = metadata.userData.SurfaceProperty;
+        break;
+      }
+      metadata = metadata.parent;
+    }
+    return { height, object, surface };
+  }
   private footprint(
     x: number,
     z: number,
@@ -543,6 +675,11 @@ export class MapCollision {
     const { cellSize, ground, groundOffsets, vertices } = this;
     const stamp = this.stamp();
     let height = overhead ? Infinity : -Infinity;
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values()) {
+        const candidate = collision.footprint(x, z, ceiling, bottom, radius, overhead);
+        height = overhead ? Math.min(height, candidate) : Math.max(height, candidate);
+      }
     for (
       let cz = Math.floor((z - radius) / cellSize);
       cz <= Math.floor((z + radius) / cellSize);
@@ -557,7 +694,8 @@ export class MapCollision {
         if (cell < 0) continue;
         for (let e = groundOffsets[cell]; e < groundOffsets[cell + 1]; e++) {
           const k = ground[e];
-          if (this.disabledOwners[this.owner[k]]) continue;
+          if (this.disabledOwners[this.owner[k]] || this.playerExcludedOwners[this.owner[k]])
+            continue;
           if (this.visit[k] === stamp) continue;
           this.visit[k] = stamp;
           if (
@@ -645,6 +783,14 @@ export class MapCollision {
           }
         }
       }
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values()) {
+        const candidate = collision.sweepSphere(from, delta, radius, this.dynamicContact);
+        if (candidate < fraction) {
+          fraction = candidate;
+          normal.copy(this.dynamicContact);
+        }
+      }
     return fraction;
   }
   // Conservative sphere AABB candidates for repeated rigid-body contact
@@ -673,6 +819,17 @@ export class MapCollision {
           if (!outside(vertices, k * 9, position.x, position.z, radius)) result.push(k);
         }
       }
+    if (this.dynamic.size) {
+      let offset = 0;
+      for (const collision of this.dynamic.values()) {
+        collision.sphereTriangles(position, radius, this.dynamicCandidates);
+        // Negative tokens distinguish transient island candidates from stable
+        // static triangle indices. Resolution refreshes moving islands even if
+        // this list was collected before a leaf entered the cached region.
+        for (const k of this.dynamicCandidates) result.push(-1 - offset - k);
+        offset += collision.owner.length;
+      }
+    }
   }
   private sphereTriangle(position: T.Vector3, radius: number, k: number) {
     if (
@@ -698,8 +855,10 @@ export class MapCollision {
   // Native body capsule samples use the same exact sphere/triangle narrow
   // phase as living-world queries, with an optional precollected broadphase.
   resolveSphere(position: T.Vector3, radius: number, candidates?: readonly number[]) {
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values()) collision.resolveSphere(position, radius);
     if (candidates) {
-      for (const k of candidates) this.sphereTriangle(position, radius, k);
+      for (const k of candidates) if (k >= 0) this.sphereTriangle(position, radius, k);
       return;
     }
     const query = this.stamp();
@@ -795,7 +954,8 @@ export class MapCollision {
         const cell = this.cell(x, z);
         for (let e = offsets[cell]; e < offsets[cell + 1]; e++) {
           const k = entries[e];
-          if (this.disabledOwners[this.owner[k]]) continue;
+          if (this.disabledOwners[this.owner[k]] || this.playerExcludedOwners[this.owner[k]])
+            continue;
           if (visit[k] === query) continue;
           visit[k] = query;
           if (maxY[k] <= position.y + 18 * 0.0254 || minY[k] >= position.y + height) continue;
@@ -823,6 +983,16 @@ export class MapCollision {
           }
         }
       }
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values())
+        if (
+          collision.sweepHorizontal(position, dx, dz, radius, height, this.dynamicContact) &&
+          this.dynamicContact.y <= fraction
+        ) {
+          fraction = this.dynamicContact.y;
+          result.copy(this.dynamicContact);
+          hit = true;
+        }
     return hit;
   }
   moveHorizontal(
@@ -902,6 +1072,17 @@ export class MapCollision {
       step = feet + 18 * 0.0254,
       top = feet + height;
     let hit = false;
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values()) {
+        this.dynamicContact.set(0, 0, 0);
+        if (
+          collision.overlap(x, z, feet, radius, height, offset ? this.dynamicContact : undefined)
+        ) {
+          if (!offset) return true;
+          hit = true;
+          if (this.dynamicContact.lengthSq() > offset.lengthSq()) offset.copy(this.dynamicContact);
+        }
+      }
     for (
       let cz = Math.floor((z - radius) / cellSize);
       cz <= Math.floor((z + radius) / cellSize);
@@ -916,7 +1097,8 @@ export class MapCollision {
         if (cell < 0) continue;
         for (let e = offsets[cell], end = offsets[cell + 1]; e < end; e++) {
           const k = entries[e];
-          if (this.disabledOwners[this.owner[k]]) continue;
+          if (this.disabledOwners[this.owner[k]] || this.playerExcludedOwners[this.owner[k]])
+            continue;
           if (visit[k] === query) continue;
           visit[k] = query;
           if (maxY[k] <= step || minY[k] >= top) continue;
@@ -943,11 +1125,14 @@ export class MapCollision {
     if (radius > 0) return this.footprint(x, z, top, bottom, radius, true);
     const cell = this.cell(Math.floor(x / this.cellSize), Math.floor(z / this.cellSize));
     let height = Infinity;
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values())
+        height = Math.min(height, collision.ceiling(x, z, bottom, top));
     if (cell < 0) return height;
     const { ground, groundOffsets, minY, maxY, vertices } = this;
     for (let e = groundOffsets[cell], end = groundOffsets[cell + 1]; e < end; e++) {
       const k = ground[e];
-      if (this.disabledOwners[this.owner[k]]) continue;
+      if (this.disabledOwners[this.owner[k]] || this.playerExcludedOwners[this.owner[k]]) continue;
       if (this.owner[k] >= this.raycastMeshCount && this.normals[k * 3 + 1] > -0.6) continue;
       if (maxY[k] < bottom || minY[k] > top) continue;
       if (outside(vertices, k * 9, x, z, 0)) continue;
@@ -981,6 +1166,12 @@ export class MapCollision {
       z = Math.floor(oz / cellSize),
       travelled = 0,
       best = Infinity;
+    if (this.dynamic.size)
+      for (const collision of this.dynamic.values()) {
+        const candidate = collision.cast(ox, oy, oz, dx, dy, dz, far, mode, hits);
+        if (mode === Blocked && candidate === 0) return 0;
+        best = Math.min(best, candidate);
+      }
     const sx = Math.sign(dx),
       sz = Math.sign(dz);
     const stepX = sx ? cellSize / Math.abs(dx) : Infinity,

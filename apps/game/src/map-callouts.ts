@@ -1,6 +1,8 @@
+import type { MapId } from "@cs2go/protocol";
+
 export type CalloutHull = { min: number[]; max: number[]; planes: number[][] };
 export type MapCallout = { id: string; token: string; name: string; hulls: CalloutHull[] };
-export type NativePlaces = { version: 1; mapId: "dust2" | "mirage"; locations: MapCallout[] };
+export type NativePlaces = { version: 1; mapId: MapId; locations: MapCallout[] };
 
 /** Native convex volumes retain vertical separation between stacked floors.
  * Centre-point lookup and source-order arbitration are browser adaptations. */

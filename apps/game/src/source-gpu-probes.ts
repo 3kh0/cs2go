@@ -1,10 +1,19 @@
 import * as T from "three";
 import { assetFetch } from "./asset-url";
 import { fetchGzipped } from "./gltf";
+import { readAssetParts } from "./asset-stream";
 import { loadSourceLighting, sourceProbeMetadata } from "./source-lighting";
+import {
+  packSourceProbeFrames,
+  probeFrameKeys,
+  type PackedProbeFrames,
+  type SourceProbeFrame,
+} from "./source-probe-frames";
 
 type ArrayRecord = {
-  file: string;
+  file?: string;
+  /** Independently compressed consecutive slices of the exact decoded atlas. */
+  files?: string[];
   format: string;
   width: number;
   height: number;
@@ -14,6 +23,7 @@ type ArrayRecord = {
 export interface SourceGpuProbes {
   textures: (T.CompressedArrayTexture | T.DataArrayTexture)[];
   frames: Float32Array[];
+  packedFrames?: PackedProbeFrames;
   sky: T.Vector4[];
   depth: number;
   count: number;
@@ -57,29 +67,32 @@ export async function createSourceGpuProbes(
   directory: string,
   arrays: ArrayRecord[],
   metadata: {
-    volumes: {
-      normalizedScale: number[];
-      normalizedOffset: number[];
-      inverseEdge: number[];
-      normalizedSkin: number[];
-      atlasScale: number[];
-      atlasOffset: number[];
-      borderMin: number[];
-      borderMax: number[];
-    }[];
+    volumes: SourceProbeFrame[];
     skySH: number[][];
   },
 ): Promise<SourceGpuProbes> {
+  if (arrays.length !== 2) throw new Error("Invalid native GPU probe layout");
   const depth = arrays[1].layers;
-  if (arrays.length !== 2 || arrays[0].layers !== depth * 6 || !metadata.volumes.length)
+  if (arrays[0].layers !== depth * 6 || !metadata.volumes.length)
     throw new Error("Invalid native GPU probe layout");
-  const textures = await Promise.all(
+  const loaded = await Promise.allSettled(
     arrays.map(async (entry, index) => {
-      const bytes = await fetchGzipped(directory + entry.file);
       const decoded = entry.format === "RGB16F" || entry.format === "RGBA8";
       const expected = decoded
         ? entry.width * entry.height * entry.layers * (entry.format === "RGB16F" ? 6 : 4)
         : Math.ceil(entry.width / 4) * Math.ceil(entry.height / 4) * 16 * entry.layers;
+      if (!Number.isSafeInteger(expected) || expected <= 0 || entry.gpuBytes !== expected)
+        throw new Error("Invalid native GPU probe blocks");
+      if (!!entry.file === !!entry.files || (entry.files && !entry.files.length))
+        throw new Error("Invalid native GPU probe transport");
+      const bytes = entry.files
+        ? await readAssetParts(
+            (async function* () {
+              for (const file of entry.files!) yield await assetFetch(directory + file);
+            })(),
+            expected,
+          )
+        : await fetchGzipped(directory + entry.file!);
       if (bytes.byteLength !== expected || entry.gpuBytes !== expected)
         throw new Error("Invalid native GPU probe blocks");
       const texture = decoded
@@ -112,21 +125,23 @@ export async function createSourceGpuProbes(
       return texture;
     }),
   );
-  const keys = [
-    "normalizedScale",
-    "normalizedOffset",
-    "inverseEdge",
-    "normalizedSkin",
-    "atlasScale",
-    "atlasOffset",
-    "borderMin",
-    "borderMax",
-  ] as const;
+  const failure = loaded.find((result) => result.status === "rejected");
+  if (failure) {
+    for (const result of loaded) if (result.status === "fulfilled") result.value.dispose();
+    throw failure.reason;
+  }
+  const textures = loaded.map(
+    (result) =>
+      (result as PromiseFulfilledResult<T.CompressedArrayTexture | T.DataArrayTexture>).value,
+  );
   return {
     textures,
     depth,
     count: metadata.volumes.length,
-    frames: keys.map((key) => new Float32Array(metadata.volumes.flatMap((volume) => volume[key]))),
+    frames: probeFrameKeys.map(
+      (key) => new Float32Array(metadata.volumes.flatMap((volume) => volume[key])),
+    ),
+    packedFrames: packSourceProbeFrames(metadata.volumes),
     sky: metadata.skySH.map((row) => new T.Vector4().fromArray(row)),
   };
 }
@@ -141,16 +156,22 @@ export function applySourceGpuProbes(
   probes.textures.forEach((texture, index) => {
     shader.uniforms[`sourceGpuAtlas${index}`] = { value: texture };
   });
-  probes.frames.forEach((frame, index) => {
-    shader.uniforms[`sourceGpuFrame${index}`] = { value: frame };
-  });
+  const packed = probes.packedFrames;
+  if (packed) {
+    shader.uniforms.sourceGpuPackedFrames = { value: packed.values };
+    if (packed.rotations.length)
+      shader.uniforms.sourceGpuRotatedFrames = { value: packed.rotations };
+  } else
+    probes.frames.forEach((frame, index) => {
+      shader.uniforms[`sourceGpuFrame${index}`] = { value: frame };
+    });
   shader.uniforms.sourceGpuSky = { value: probes.sky };
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <common>",
     `#include <common>
     uniform highp sampler2DArray sourceGpuAtlas0;
     uniform highp sampler2DArray sourceGpuAtlas1;
-    ${probes.frames.map((_, index) => `uniform vec3 sourceGpuFrame${index}[${probes.count}];`).join("\n")}
+    ${packed ? `uniform vec4 sourceGpuPackedFrames[${probes.count * 6}];\n${packed.rotations.length ? `uniform vec4 sourceGpuRotatedFrames[${packed.rotations.length / 4}];` : ""}` : probes.frames.map((_, index) => `uniform vec3 sourceGpuFrame${index}[${probes.count}];`).join("\n")}
     uniform vec4 sourceGpuSky[3];
     struct SourceGpuProbe { vec3 irradiance; vec4 occlusion; };
     vec3 sourceGpuFace(vec3 uvw, int face) {
@@ -172,7 +193,28 @@ export function applySourceGpuProbes(
       result.irradiance = vec3(0.0); result.occlusion = vec4(0.0);
       float coverage = 0.0;
       for (int i = 0; i < ${probes.count}; i++) {
+        ${
+          packed
+            ? `
+        vec4 f0=sourceGpuPackedFrames[i*6], f1=sourceGpuPackedFrames[i*6+1], f2=sourceGpuPackedFrames[i*6+2];
+        vec4 f3=sourceGpuPackedFrames[i*6+3], f4=sourceGpuPackedFrames[i*6+4], f5=sourceGpuPackedFrames[i*6+5];
+        vec3 packedFrame0=f0.xyz, packedFrame1=vec3(f0.w,f1.xy);
+        vec3 packedFrame2=vec3(f1.zw,f2.x), packedFrame3=f2.yzw;
+        vec3 packedFrame4=f3.xyz, packedFrame5=vec3(f3.w,f4.xy);
+        vec3 packedFrame6=vec3(f4.zw,f5.x), packedFrame7=f5.yzw;
+        `
+            : ""
+        }
         vec3 q = p * sourceGpuFrame0[i] + sourceGpuFrame1[i];
+        ${
+          packed?.rotations.length
+            ? `
+        if (packedFrame0.x < 0.0) {
+          int base=int(packedFrame0.y)*3;
+          q=vec3(dot(sourceGpuRotatedFrames[base],vec4(p,1.0)),dot(sourceGpuRotatedFrames[base+1],vec4(p,1.0)),dot(sourceGpuRotatedFrames[base+2],vec4(p,1.0)));
+        }`
+            : ""
+        }
         vec3 fade = (min(q, 1.0-q) + sourceGpuFrame3[i]) * sourceGpuFrame2[i];
         float edge = clamp(min(min(fade.x, fade.y), fade.z), 0.0, 1.0);
         float weight = edge*edge*(3.0-2.0*edge)*(1.0-coverage);
@@ -193,4 +235,9 @@ export function applySourceGpuProbes(
     }
   `,
   );
+  if (packed)
+    shader.fragmentShader = shader.fragmentShader.replace(
+      /sourceGpuFrame([0-7])\[i\]/g,
+      "packedFrame$1",
+    );
 }

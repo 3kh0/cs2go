@@ -1,3 +1,4 @@
+import { copySourceDepth } from "./source-depth";
 import * as T from "three";
 import { EXRLoader } from "three/addons/loaders/EXRLoader.js";
 import { fetchGzipped } from "./gltf";
@@ -89,7 +90,13 @@ export async function loadNativeMapLighting(
 }
 
 /** Applies native UV1 irradiance without borrowing another map's palettes, probes or LUT. */
-export function applyNativeMapLighting(root: T.Object3D, data: NativeMapLighting) {
+export function applyNativeMapLighting(
+  root: T.Object3D,
+  data: NativeMapLighting,
+  sourceUnitScale = 1,
+) {
+  if (!Number.isFinite(sourceUnitScale) || sourceUnitScale <= 0)
+    throw new Error("Invalid native atlas Source-unit scale");
   const materials = new Map<T.MeshStandardMaterial, T.MeshStandardMaterial>();
   let lightmappedMeshes = 0;
   root.traverse((object) => {
@@ -107,6 +114,7 @@ export function applyNativeMapLighting(root: T.Object3D, data: NativeMapLighting
         return material;
       }
       material = source.clone();
+      copySourceDepth(source, material);
       // Cloning only the UV1 branch keeps shared prop materials on their own lighting path.
       materials.set(source, material);
       // oxlint-disable-next-line typescript/unbound-method -- Invoked with the cloned material via .call below.
@@ -114,6 +122,7 @@ export function applyNativeMapLighting(root: T.Object3D, data: NativeMapLighting
       const key = source.customProgramCacheKey();
       material.onBeforeCompile = function (shader, renderer) {
         compile.call(this, shader, renderer);
+        shader.uniforms.nativeMapSourceUnitMetres = { value: 0.0254 * sourceUnitScale };
         shader.uniforms.nativeMapIrradiance = { value: data.irradiance };
         shader.uniforms.nativeMapShadows = { value: data.shadows };
         if (data.directional) shader.uniforms.nativeMapDirectional = { value: data.directional };
@@ -122,7 +131,7 @@ export function applyNativeMapLighting(root: T.Object3D, data: NativeMapLighting
           "#include <begin_vertex>",
           "#include <begin_vertex>\nvNativeMapLightUv = nativeMapLightUv;",
         );
-        shader.fragmentShader = `uniform sampler2D nativeMapIrradiance; uniform sampler2D nativeMapShadows; varying vec2 vNativeMapLightUv;\n${data.directional ? "uniform sampler2D nativeMapDirectional;\n" : ""}${shader.fragmentShader}`;
+        shader.fragmentShader = `uniform float nativeMapSourceUnitMetres; uniform sampler2D nativeMapIrradiance; uniform sampler2D nativeMapShadows; varying vec2 vNativeMapLightUv;\n${data.directional ? "uniform sampler2D nativeMapDirectional;\n" : ""}${shader.fragmentShader}`;
         shader.fragmentShader = shader.fragmentShader.replace(
           "#include <lights_fragment_begin>",
           T.ShaderChunk.lights_fragment_begin,
@@ -144,7 +153,7 @@ export function applyNativeMapLighting(root: T.Object3D, data: NativeMapLighting
               const float nativeMapMaxXY = 0.996190805;
               nativeMapDirectionXY *= nativeMapMaxXY / max(nativeMapMaxXY, length(nativeMapDirectionXY));
               float nativeMapDirectionZ = sqrt(max(1.0 - dot(nativeMapDirectionXY, nativeMapDirectionXY), 0.0));
-              float nativeMapCurvature = length(fwidth(nonPerturbedNormal)) * 0.0254 / max(length(fwidth(vViewPosition)), 1e-6);
+              float nativeMapCurvature = length(fwidth(nonPerturbedNormal)) * nativeMapSourceUnitMetres / max(length(fwidth(vViewPosition)), 1e-6);
               float nativeMapFlatness = (1.0 - smoothstep(0.01, 0.1, nativeMapCurvature)) * 0.8;
               float nativeMapZScale = mix(1.0, mix(0.1, 2.0, clamp((1.0-nativeMapDirectionZ)*1.5, 0.0, 1.0)), nativeMapFlatness);
               vec3 nativeMapLightTs = normalize(vec3(nativeMapDirectionXY, nativeMapDirectionZ * nativeMapZScale));
@@ -176,7 +185,7 @@ export function applyNativeMapLighting(root: T.Object3D, data: NativeMapLighting
         );
         // radiance/clearcoatRadiance remain untouched: the atlas is diffuse only.
       };
-      material.customProgramCacheKey = () => `${key}:native-map-atlas-v1:${!!data.directional}`;
+      material.customProgramCacheKey = () => `${key}:native-map-atlas-v2:${!!data.directional}`;
       material.needsUpdate = true;
       applied = true;
       return material;

@@ -26,7 +26,7 @@ describe("packed startup audio", () => {
     );
     for (const clip of manifest.clips) {
       if (!clip.name.startsWith("music-"))
-        expect(clips.has(`/audio/source/${clip.name}.ogg`)).toBe(true);
+        expect(clips.has(clip.path ?? `/audio/source/${clip.name}.ogg`)).toBe(true);
     }
     expect(clips.size).toBeGreaterThan(200);
     for (const [url, bytes] of clips) {

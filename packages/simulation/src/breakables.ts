@@ -7,10 +7,13 @@ export type BreakableDamageKind = "bullet" | "melee" | "explosion" | "fire";
 export type NativeBreakableDefinition = {
   id: string;
   health: number;
-  material: BulletMaterial;
+  /** Physical debris family, separate from the bullet penetration model. */
+  material: BulletMaterial | "plastic" | "paper" | "fruit";
   bounds: [[number, number, number], [number, number, number]];
   physicsNames: string[];
   renderNames: string[];
+  /** Exact inherited VSURF event; empty explicitly disables sound. */
+  breakSoundEvent?: string;
   damageKinds?: BreakableDamageKind[];
   damageMultipliers?: Partial<Record<BreakableDamageKind, number>>;
   /** Authored OnBreak -> Enable targets, retained in collision but initially disabled. */

@@ -24,7 +24,13 @@ import {
   commitTrigger,
   type WeaponActions,
 } from "./weapon-actions";
-import { shoot, advanceCombat, createCombatMemory, type CombatMemory } from "./combat";
+import {
+  shoot,
+  damagePlayer,
+  advanceCombat,
+  createCombatMemory,
+  type CombatMemory,
+} from "./combat";
 import {
   createUtilityMemory,
   playerUtility,
@@ -39,6 +45,7 @@ import { readLoadouts } from "./loadouts";
 import { WorldBallPhysics } from "./world-ball";
 import ballOrigin from "./data/world-ball-origin.json";
 import { movePlayer } from "./movement";
+import { groundSpawn } from "./spawn-position";
 import { isKnife, knifeDefinitions, movement, weaponSlot, weapons } from "./physics";
 import {
   rulesFor,
@@ -50,15 +57,22 @@ import {
   nextLossLevel,
 } from "./economy";
 import { mapTriggers } from "./buy-zones";
+import { MapHazards, BombReset, supportedBombPosition } from "./map-hazards";
 import { groundCorrectedBombSample } from "./bomb-damage";
 import type { DustMap } from "./dust-map";
 import { createLadderState } from "./ladder";
 import { BreakableWorld } from "./breakables";
+import { DoorWorld } from "./doors";
+import { FootstepStride } from "./footsteps";
 export const STEP = 1 / TICK_RATE;
 export type Match = {
   tick: number;
+  footsteps: Map<string, FootstepStride>;
+  hazards: MapHazards<string>;
+  bombReset: BombReset;
   hitboxHistory: HitboxHistory;
   breakables: BreakableWorld;
+  doors: DoorWorld;
   ball: WorldBallPhysics;
   firstKill?: { name: string; seconds: number };
   highlights: Map<string, { headshots: number; knives: number; grenades: number }>;
@@ -80,22 +94,28 @@ export type Match = {
 };
 export function createMatch(mode: MatchMode, map: DustMap): Match {
   // Room health/collision never mutate the shared startup map or another lobby.
-  if (map.breakableDefinitions?.length)
+  if (map.breakableDefinitions?.length || map.doorDefinitions?.length)
     map = {
       ...map,
       collision: map.collision.fork(),
       grenadeCollision: map.grenadeCollision?.fork(),
     };
   const breakables = new BreakableWorld(map.collision, map.breakableDefinitions ?? []);
-  const origin = map.worldBallOrigin ?? (map.id === "mirage" ? [0, 0, 0] : ballOrigin.origin);
+  const doors = new DoorWorld(map.collision, map.doorDefinitions ?? [], map.doorPhysics ?? []);
+  const foreignMap = !!map.id && map.id !== "dust2";
+  const origin = map.worldBallOrigin ?? (foreignMap ? [0, 0, 0] : ballOrigin.origin);
   const ball = new WorldBallPhysics(map.collision, new T.Vector3(...origin));
-  // Dust II's authored football must not appear at an unrelated Mirage location.
-  if (map.id === "mirage" && !map.worldBallOrigin) ball.mesh = undefined;
+  // Only maps with an authored football may create one.
+  if (foreignMap && !map.worldBallOrigin) ball.mesh = undefined;
   mapTriggers(map);
   return {
     tick: 0,
+    footsteps: new Map(),
+    hazards: new MapHazards(map.triggers?.hurt),
+    bombReset: new BombReset(map.triggers),
     hitboxHistory: new HitboxHistory(),
     breakables,
+    doors,
     ball,
     highlights: new Map(),
     receipts: new Map(),
@@ -114,6 +134,7 @@ export function createMatch(mode: MatchMode, map: DustMap): Match {
     weaponCooldowns: new Map(),
     state: {
       breakables: breakables.states,
+      ...(doors.states.length ? { doors: doors.states } : {}),
       ball: {
         x: origin[0],
         y: origin[1],
@@ -280,6 +301,7 @@ export function configurePlayer(
   }
 }
 export function respawn(player: PlayerState, match: Match, preserve = false) {
+  match.footsteps.delete(player.id);
   player.ladder = createLadderState();
   match.weaponCooldowns.set(player.id, {});
   match.combat.set(player.id, createCombatMemory());
@@ -306,10 +328,11 @@ export function respawn(player: PlayerState, match: Match, preserve = false) {
   const team = [...match.players.values()].filter((other) => other.team === player.team);
   const slot = Math.max(0, team.indexOf(player)) % points.length;
   const point = points[slot];
-  const floor = match.map.collision.floor(point[0], point[2], point[1] + 0.5);
+  const spawn = new T.Vector3().fromArray(point);
+  groundSpawn(spawn, match.map.collision);
   Object.assign(player, {
     x: point[0],
-    y: Number.isFinite(floor) ? floor : point[1],
+    y: spawn.y,
     z: point[2],
     vx: 0,
     vz: 0,
@@ -396,6 +419,7 @@ export function switchTeam(match: Match, player: PlayerState, team: Team): strin
   return null;
 }
 export function leaveMatch(match: Match, id: string) {
+  match.doors.release(id);
   const player = match.players.get(id);
   if (player && match.state.bomb.carrier === id) {
     Object.assign(match.state.bomb, {
@@ -411,6 +435,7 @@ export function leaveMatch(match: Match, id: string) {
     match.state.bomb.progress = 0;
   }
   match.players.delete(id);
+  match.footsteps.delete(id);
   match.shotsHeld.delete(id);
   match.weaponCooldowns.delete(id);
   match.combat.delete(id);
@@ -421,7 +446,10 @@ export function leaveMatch(match: Match, id: string) {
   match.highlights.delete(id);
 }
 export function startRound(match: Match) {
+  match.hazards.reset();
+  match.bombReset.reset();
   match.breakables.reset();
+  match.doors.reset();
   match.ball.reset();
   match.firstKill = undefined;
   match.state.drops = [];
@@ -477,6 +505,10 @@ export function startRound(match: Match) {
     progress: 0,
     planter: null,
   };
+  if (carrier)
+    match.bombReset.remember(carrier, carrier.grounded, (position) =>
+      supportedBombPosition(match.map.collision, position),
+    );
   match.shotsHeld.clear();
 }
 export function endRound(
@@ -667,7 +699,7 @@ function pickupWeapon(match: Match, player: PlayerState, manual: boolean) {
       )
     );
   });
-  if (index < 0) return;
+  if (index < 0) return false;
   const [drop] = match.state.drops.splice(index, 1);
   const slot = weaponSlot(drop.weapon);
   const previous =
@@ -688,6 +720,7 @@ function pickupWeapon(match: Match, player: PlayerState, manual: boolean) {
   player.reserve = drop.reserve;
   player.cooldown = weapons[drop.weapon].deploy;
   player.reloadTime = 0;
+  return true;
 }
 function buy(match: Match, player: PlayerState, input: Input) {
   const index = input.buy;
@@ -864,6 +897,7 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
     }
   }
   const actors = [...match.players.values()];
+  if (match.doors.states.length) match.doors.step(STEP, actors);
   for (const player of actors) {
     const input = inputs.get(player.id) ?? {
       ...neutralInput(),
@@ -880,7 +914,26 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
     for (const id of Object.keys(locks)) locks[Number(id)] = Math.max(0, locks[Number(id)] - STEP);
     match.weaponCooldowns.set(player.id, locks);
     if (input.drop) dropWeapon(match, player, true);
-    pickupWeapon(match, player, input.pickup);
+    const pickedUp = pickupWeapon(match, player, input.pickup);
+    if (match.doors.states.length) {
+      const objectiveUse =
+        (state.bomb.carrier === player.id &&
+          mapTriggers(match.map).bombSites.contains(player, {
+            halfWidth: movement.hullRadius,
+            height: player.eye + 0.2,
+          })) ||
+        (state.bomb.planted &&
+          player.team === "ct" &&
+          Math.hypot(player.x - state.bomb.x, player.y - state.bomb.y, player.z - state.bomb.z) <
+            1.8);
+      match.doors.use(
+        player.id,
+        input.interact,
+        new T.Vector3(player.x, player.y + player.eye, player.z),
+        new T.Vector3(0, 0, -1).applyEuler(new T.Euler(-player.pitch, player.yaw, 0, "YXZ")),
+        !frozen && !objectiveUse && !(input.pickup && pickedUp),
+      );
+    }
     buy(match, player, input);
     playerUtility(match, player, input, STEP);
     if (input.utility) cancelWeaponActions(player, action);
@@ -904,6 +957,36 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
       movePlayer(player, planting ? { ...input, duck: true } : input, STEP, match.map, actors);
     else {
       player.vx = player.vz = player.vertical = 0;
+    }
+    let stride = match.footsteps.get(player.id);
+    if (!stride) match.footsteps.set(player.id, (stride = new FootstepStride()));
+    const foot = stride.advance(
+      {
+        x: player.x,
+        y: player.y,
+        z: player.z,
+        spawn: player.spawn,
+        audible:
+          !frozen &&
+          player.grounded &&
+          !player.ladder?.id &&
+          !input.walk &&
+          !input.duck &&
+          !planting,
+      },
+      STEP,
+    );
+    if (foot) {
+      const support = match.map.collision.supportingSurface(player.x, player.z, player.y);
+      if (support)
+        events.push({
+          kind: "footstep",
+          actor: player.id,
+          team: player.team,
+          side: foot,
+          point: { x: player.x, y: support.height, z: player.z },
+          ...(support.surface === undefined ? {} : { surface: support.surface }),
+        });
     }
     if (!wasGrounded && player.grounded)
       applyLandingInaccuracy(
@@ -964,6 +1047,48 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
     player.animation = pose.clock(player.animation);
     publishReceipts(match, player);
   }
+  const carrier = state.bomb.carrier ? match.players.get(state.bomb.carrier) : undefined;
+  if (carrier && carrier.health > 0)
+    match.bombReset.remember(carrier, carrier.grounded, (position) =>
+      supportedBombPosition(match.map.collision, position),
+    );
+  const hazards = match.hazards.hasTriggers
+    ? match.hazards.update(
+        STEP,
+        actors
+          .filter((player) => player.health > 0)
+          .map((player) => ({
+            id: player.id,
+            position: player,
+            hull: {
+              halfWidth: movement.hullRadius,
+              height: player.eye + movement.standingHeight - movement.standingEye,
+            },
+          })),
+      )
+    : [];
+  for (const hit of hazards) {
+    const player = match.players.get(hit.actor);
+    if (!player || player.health <= 0) continue;
+    const damage = damagePlayer(match, undefined, player, hit.damage, false, -1, 1, true);
+    for (const event of damage) if (event.kind === "kill") event.killer = "World";
+    events.push(...damage);
+    if (player.health <= 0) {
+      cancelWeaponActions(player, match.actions.get(player.id)!);
+      player.charge = player.burstRemaining = player.scope = 0;
+      player.suppressorAction = "";
+      match.utility.get(player.id)!.held = 0;
+      match.shotsHeld.delete(player.id);
+      if (state.bomb.defuser === player.id)
+        Object.assign(state.bomb, { defuser: null, progress: 0 });
+    }
+  }
+  match.bombReset.advance(
+    state.bomb,
+    STEP,
+    match.map.collision,
+    state.bomb.planted || !!state.bomb.carrier,
+  );
   for (const player of match.players.values())
     if (player.health > 0)
       match.ball.touch(new T.Vector3(player.x, player.y, player.z), player.vx, player.vz, STEP);
@@ -1028,6 +1153,7 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
         bomb.z = carrier.z + direction.z * distance;
         const floor = match.map.collision.floor(bomb.x, bomb.z, carrier.y + 0.5);
         bomb.y = Number.isFinite(floor) ? floor : carrier.y;
+        match.bombReset.advance(bomb, 0, match.map.collision, false);
         return events;
       }
       const canPlant =
@@ -1067,6 +1193,14 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
       events.push({ kind: "defuse", actor: defuser.id });
       endRound(match, "ct", "defuse");
     } else if (!bomb.timer) {
+      if (match.map.bombDamage)
+        match.doors.damageRadius(
+          new T.Vector3(bomb.x, bomb.y, bomb.z),
+          Infinity,
+          (_distance, point) => match.map.bombDamage!.lookup(bomb, point)?.damage ?? 0,
+          "explosion",
+          false,
+        );
       if (match.map.bombDamage)
         for (const change of match.breakables.damageRadius(
           new T.Vector3(bomb.x, bomb.y, bomb.z),

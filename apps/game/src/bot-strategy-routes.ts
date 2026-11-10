@@ -32,7 +32,7 @@ function point(area: NavArea): StrategyPoint {
 }
 
 export function buildBotStrategyRoutes(nav: Navigation): BotStrategyRoutes {
-  if (nav.data.mapId === "mirage") return buildNativeStrategyRoutes(nav);
+  if (nav.data.mapId && nav.data.mapId !== "dust2") return buildNativeStrategyRoutes(nav);
   const floors = nav.areas.filter((area) => {
     const [x, y, z] = area.center;
     return (

@@ -20,7 +20,7 @@ export type NativeLadder = {
   exitTop?: readonly number[];
   exitBottom?: readonly number[];
 };
-export type LadderState = { id: number | null; detachTime: number };
+export type LadderState = { id: number | null; detachTime: number; exit?: 1 | -1 };
 export const createLadderState = (): LadderState => ({ id: null, detachTime: 0 });
 export type LadderInput = {
   yaw: number;
@@ -64,6 +64,7 @@ export function stepLadder(
   state.detachTime = Math.max(0, state.detachTime - dt);
   if (!ladders?.length || state.detachTime > 0) {
     state.id = null;
+    state.exit = undefined;
     return undefined;
   }
   const wish = new T.Vector3(
@@ -73,6 +74,7 @@ export function stepLadder(
       input.forward * Math.cos(input.yaw) * Math.cos(input.pitch),
   );
   let selected: NativeLadder | undefined;
+  let selectionScore = -Infinity;
   for (const ladder of ladders) {
     const normal = normals[ladder.direction];
     if (!normal) continue;
@@ -93,11 +95,20 @@ export function stepLadder(
     const alreadyAttached = state.id === ladder.id;
     if (!alreadyAttached && !input.climb && wish.x * normal[0] + wish.z * normal[1] >= -0.05)
       continue;
-    selected = ladder;
-    break;
+    // Adjacent stacked NAV ladders share the same face at their joint.
+    // Retain an attached ladder until its physical exit completes; a new
+    // attachment prefers vertical room in the requested climb direction.
+    const intent = input.climb ?? wish.y - wish.x * normal[0] - wish.z * normal[1];
+    const room = intent >= 0 ? ladder.top[1] - position.y : position.y - ladder.bottom[1];
+    const score = (alreadyAttached ? 10000 : 0) + Math.min(1, Math.max(-1, room));
+    if (score > selectionScore) {
+      selected = ladder;
+      selectionScore = score;
+    }
   }
   if (!selected) {
     state.id = null;
+    state.exit = undefined;
     return undefined;
   }
   state.id = selected.id;
@@ -107,6 +118,7 @@ export function stepLadder(
   if (input.jump) {
     velocity = normal.multiplyScalar(270 * SOURCE_UNIT);
     state.id = null;
+    state.exit = undefined;
     state.detachTime = 0.2;
   } else if (input.climb) {
     velocity = new T.Vector3(0, Math.sign(input.climb) * speed, 0);
@@ -130,15 +142,23 @@ export function stepLadder(
   }
   // At either end, walk onto the actual connected native floor. This remains
   // collision-constrained and never snaps/teleports through the ladder lip.
-  const exitingTop = velocity.y > 0 && position.y >= selected.top[1] - 0.02;
-  const exitingBottom =
-    velocity.y < 0 &&
-    position.y <= Math.max(selected.bottom[1], selected.exitBottom?.[1] ?? -Infinity) + 0.02;
+  if (!input.jump && !state.exit) {
+    if (velocity.y > 0 && position.y >= selected.top[1] - 0.02) state.exit = 1;
+    else if (
+      velocity.y < 0 &&
+      position.y <= Math.max(selected.bottom[1], selected.exitBottom?.[1] ?? -Infinity) + 0.02
+    )
+      state.exit = -1;
+  }
+  const exitingTop = state.exit === 1;
+  const exitingBottom = state.exit === -1;
   const exit = exitingTop ? selected.exitTop : exitingBottom ? selected.exitBottom : undefined;
   if (exit) {
     velocity.set(exit[0] - position.x, 0, exit[2] - position.z).clampLength(0, speed);
     if (Math.hypot(velocity.x, velocity.z) < radius) {
       state.id = null;
+      state.exit = undefined;
+      state.detachTime = 0.2;
       return undefined;
     }
     velocity.setLength(speed);
@@ -159,8 +179,19 @@ export function stepLadder(
     const floor = collision.support(position.x, position.z, position.y + 0.01, requestedY, radius);
     position.y = Number.isFinite(floor) ? Math.max(requestedY, floor) : requestedY;
   }
+  // A fixed step can cross an endpoint between intent samples. Commit that
+  // exit now, before a bot's remaining vertical error becomes its zero-intent
+  // dead zone on the next tick.
+  if (!input.jump && !state.exit) {
+    if (velocity.y > 0 && position.y >= selected.top[1] - 0.02) state.exit = 1;
+    else if (
+      velocity.y < 0 &&
+      position.y <= Math.max(selected.bottom[1], selected.exitBottom?.[1] ?? -Infinity) + 0.02
+    )
+      state.exit = -1;
+  }
   const horizontal = { x: velocity.x, z: velocity.z };
-  collision.moveHorizontal(position, horizontal, dt, radius, hullHeight, false);
+  collision.moveHorizontal(position, horizontal, dt, radius, hullHeight, !!exit);
   // Resolve other players at the swept contact, not just static ladder/wall
   // geometry. Collect crowded bot hulls only after a ladder actually attaches.
   const hulls = typeof actors === "function" ? actors() : actors;
@@ -191,6 +222,10 @@ export function stepLadder(
     actorSupport(position.x, position.z, previous.y, position.y, hulls, radius, actorGrounded),
   );
   const grounded = Number.isFinite(floor) && Math.abs(position.y - floor) < 0.03 && velocity.y <= 0;
-  if (grounded && (exitingBottom || state.id === null)) state.id = null;
+  if (grounded && (exitingBottom || state.id === null)) {
+    state.id = null;
+    state.exit = undefined;
+    state.detachTime = 0.2;
+  }
   return { velocity, grounded };
 }

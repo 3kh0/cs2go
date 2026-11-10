@@ -20,7 +20,7 @@ LABEL org.opencontainers.image.source=https://github.com/3kh0/cs2go \
       org.opencontainers.image.description="CS2GO authoritative multiplayer server, powered by Bun"
 ENV NODE_ENV=production PORT=3001 ALLOWED_ORIGINS=https://cs2go.3kh0.net MAP_DIRECTORY=/app/maps
 COPY --from=build --chown=65532:65532 /app/apps/server/dist/index.js ./server.js
-COPY --chown=65532:65532 packages/assets/public/models/maps/dust2-physics.glb.gz packages/assets/public/models/maps/dust2-nav.json packages/assets/public/models/maps/mirage-physics.glb.gz packages/assets/public/models/maps/mirage-nav.json packages/assets/public/models/maps/dust2-bomb.bin.gz packages/assets/public/models/maps/mirage-bomb.bin.gz packages/assets/public/models/maps/mirage-breakables.json ./maps/
+COPY --chown=65532:65532 packages/assets/public/models/maps/*-physics.glb.gz packages/assets/public/models/maps/*-nav.json packages/assets/public/models/maps/*-bomb.bin.gz packages/assets/public/models/maps/*-breakables.json packages/assets/public/models/maps/*-doors.json ./maps/
 USER 65532:65532
 EXPOSE 3001
 HEALTHCHECK --interval=15s --timeout=3s --start-period=5s --retries=3 \

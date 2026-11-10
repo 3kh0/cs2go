@@ -95,18 +95,30 @@ export function applyTextureQuality(
             source = { image: texture.image, mipmaps: texture.mipmaps };
             textureSources.set(texture.source, source);
           }
+          const previousImage = texture.image as {
+            width?: number;
+            height?: number;
+            depth?: number;
+          };
+          const previousMipCount = texture.mipmaps.length;
           const dataImage = source.image as T.DataTexture["image"];
           const sourceChanged = sourceLevels.get(texture.source) !== quality;
           const skip = quality === "high" ? 0 : quality === "medium" ? 1 : 2;
           if (
             (texture instanceof T.CompressedTexture || texture instanceof T.DataTexture) &&
-            source.mipmaps.length > 1
+            source.mipmaps.length > 0
           ) {
             const level = Math.min(skip, source.mipmaps.length - 1);
             texture.mipmaps = (source.mipmaps as T.CompressedTexture["mipmaps"]).slice(level);
             const mip = texture.mipmaps[0];
             texture.image =
-              texture instanceof T.DataTexture ? mip : { width: mip.width, height: mip.height };
+              texture instanceof T.DataTexture
+                ? mip
+                : {
+                    ...(source.image as { width: number; height: number; depth?: number }),
+                    width: mip.width,
+                    height: mip.height,
+                  };
           } else if (
             sourceChanged &&
             texture instanceof T.DataTexture &&
@@ -162,6 +174,17 @@ export function applyTextureQuality(
           if (texture.generateMipmaps || texture.mipmaps.length > 1)
             texture.minFilter =
               filtering === 1 ? T.LinearMipmapNearestFilter : T.LinearMipmapLinearFilter;
+          const nextImage = texture.image as { width?: number; height?: number; depth?: number };
+          // WebGL texStorage is immutable. A quality change with the same
+          // filters/cache key otherwise uploads a smaller mip into the old
+          // base allocation, leaving stale texels (including array layers).
+          if (
+            previousImage?.width !== nextImage?.width ||
+            previousImage?.height !== nextImage?.height ||
+            previousImage?.depth !== nextImage?.depth ||
+            previousMipCount !== texture.mipmaps.length
+          )
+            texture.dispose();
           texture.needsUpdate = true;
           textureLevels.set(texture, signature);
           sourceLevels.set(texture.source, quality);

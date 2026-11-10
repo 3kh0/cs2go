@@ -15,13 +15,20 @@ interface Volume {
   max: number[];
   fade: number[];
   normalizationSH: number[];
+  worldToLocal?: number[];
+  localToWorld?: number[];
+  localMin?: number[];
+  localMax?: number[];
+  localFade?: number[];
+  worldAABB?: number[][];
 }
-interface Manifest {
+export interface SourceReflectionManifest {
   lightmapVersion?: [number, number];
   gpuBytes: number;
   lastLod: number;
   arrays: {
     file: string;
+    firstCube?: number;
     layers: number;
     gpuBytes: number;
     mips: { width: number; height: number; bytes: number }[];
@@ -33,7 +40,9 @@ export interface SourceReflections {
   lastLod?: number;
   textures: T.CompressedArrayTexture[];
   combined?: boolean;
-  volumes: Manifest["volumes"];
+  volumes: SourceReflectionManifest["volumes"];
+  cubeSize?: number;
+  arraySplit?: number;
   uniforms: {
     origin: T.Vector3;
     index: number;
@@ -41,13 +50,139 @@ export interface SourceReflections {
     maxs: T.Vector3;
     invEdge: T.Vector3;
     sh: T.Vector4;
+    worldToLocal?: T.Matrix4;
+    localToWorld?: T.Matrix4;
   }[];
 }
 const directory = "/models/maps/lighting/reflections/";
+interface ReflectionBundle {
+  directory: string;
+  manifest: string;
+  /** Optional checked source count, never a count borrowed from another map. */
+  volumes?: number;
+  /** Explicit per-map residency budget; existing bundles fit within 32 MiB. */
+  maxGpuBytes?: number;
+}
+
+/** Validate complete native cube faces and mip payloads before allocating GPU resources. */
+export function validateSourceReflections(
+  manifest: SourceReflectionManifest,
+  bundle: Pick<ReflectionBundle, "volumes" | "maxGpuBytes"> = {},
+) {
+  const invalid = () => {
+    throw new Error("Invalid native reflection budget/layout");
+  };
+  const integer = (value: number) => Number.isSafeInteger(value) && value > 0;
+  if (
+    !manifest.arrays?.length ||
+    !manifest.volumes?.length ||
+    (bundle.volumes !== undefined && manifest.volumes.length !== bundle.volumes) ||
+    !integer(manifest.gpuBytes) ||
+    manifest.gpuBytes > (bundle.maxGpuBytes ?? 32 * 1024 * 1024)
+  )
+    invalid();
+  const size = manifest.arrays[0].mips?.[0]?.width;
+  const mipCount = manifest.arrays[0].mips?.length;
+  if (!integer(size) || (size & (size - 1)) !== 0 || !integer(mipCount)) invalid();
+  const native82 = manifest.lightmapVersion?.[0] === 8 && manifest.lightmapVersion[1] >= 2;
+  if (
+    !Number.isInteger(manifest.lastLod) ||
+    manifest.lastLod < 0 ||
+    manifest.lastLod >= mipCount ||
+    (native82 && manifest.lastLod !== mipCount - 1)
+  )
+    invalid();
+  let cubes = 0,
+    gpuBytes = 0;
+  for (const array of manifest.arrays) {
+    if (
+      !array.file ||
+      array.file.includes("..") ||
+      array.file.startsWith("/") ||
+      (array.firstCube ?? (manifest.arrays.length === 1 ? 0 : NaN)) !== cubes ||
+      !integer(array.layers) ||
+      array.layers % 6 !== 0 ||
+      array.mips.length !== mipCount
+    )
+      invalid();
+    let arrayBytes = 0;
+    for (const [level, mip] of array.mips.entries()) {
+      const side = Math.max(1, size / 2 ** level);
+      if (
+        !Number.isInteger(side) ||
+        mip.width !== side ||
+        mip.height !== side ||
+        mip.bytes !== Math.ceil(side / 4) ** 2 * 16 * array.layers
+      )
+        invalid();
+      arrayBytes += mip.bytes;
+    }
+    if (arrayBytes !== array.gpuBytes) invalid();
+    gpuBytes += arrayBytes;
+    cubes += array.layers / 6;
+  }
+  const indices = new Set<number>();
+  const affine = manifest.volumes.some((volume) => volume.worldToLocal || volume.localToWorld);
+  for (const volume of manifest.volumes) {
+    if (
+      !Number.isInteger(volume.index) ||
+      volume.index < 0 ||
+      volume.index >= cubes ||
+      indices.has(volume.index) ||
+      ![volume.origin, volume.min, volume.max, volume.fade].every(
+        (values) => values.length === 3 && values.every(Number.isFinite),
+      ) ||
+      volume.normalizationSH.length !== 4 ||
+      !volume.normalizationSH.every(Number.isFinite) ||
+      volume.min.some((value, axis) => value > volume.max[axis]) ||
+      volume.fade.some((value) => value < 0)
+    )
+      invalid();
+    indices.add(volume.index);
+    if (affine) {
+      for (const matrix of [volume.worldToLocal, volume.localToWorld])
+        if (
+          !matrix ||
+          matrix.length !== 16 ||
+          !matrix.every(Number.isFinite) ||
+          matrix[3] !== 0 ||
+          matrix[7] !== 0 ||
+          matrix[11] !== 0 ||
+          matrix[15] !== 1
+        )
+          invalid();
+      const inverse = new T.Matrix4().fromArray(volume.worldToLocal!);
+      const forward = new T.Matrix4().fromArray(volume.localToWorld!);
+      if (
+        inverse.determinant() === 0 ||
+        forward.determinant() === 0 ||
+        inverse
+          .multiply(forward)
+          .elements.some((value, index) => Math.abs(value - (index % 5 === 0 ? 1 : 0)) > 0.02)
+      )
+        invalid();
+      if (
+        ![volume.localMin, volume.localMax, volume.localFade].every(
+          (values) => values?.length === 3 && values.every(Number.isFinite),
+        ) ||
+        !volume.worldAABB ||
+        volume.worldAABB.length !== 2 ||
+        volume.worldAABB.some((values) => values.length !== 3 || !values.every(Number.isFinite)) ||
+        volume.worldAABB[0].some((value, axis) => value > volume.worldAABB![1][axis]) ||
+        volume.localMin!.some((value, axis) => value > volume.localMax![axis]) ||
+        volume.localFade!.some((value) => value < 0)
+      )
+        invalid();
+    }
+  }
+  if (indices.size !== cubes || gpuBytes !== manifest.gpuBytes) invalid();
+  return { size, layers: cubes * 6, mipCount };
+}
+
 export async function loadSourceReflections(
   renderer: T.WebGLRenderer,
   preferCombined = false,
-  bundle = { directory, manifest: "source.json", volumes: 43 },
+  bundle: ReflectionBundle = { directory, manifest: "source.json", volumes: 43 },
 ): Promise<SourceReflections | undefined> {
   if (
     !renderer.extensions.has("EXT_texture_compression_bptc") ||
@@ -56,88 +191,88 @@ export async function loadSourceReflections(
     return undefined;
   const response = await assetFetch(bundle.directory + bundle.manifest);
   if (!response.ok) throw new Error("Native reflection metadata unavailable");
-  const manifest = (await response.json()) as Manifest;
+  const manifest = (await response.json()) as SourceReflectionManifest;
+  const { size, layers } = validateSourceReflections(manifest, bundle);
+  const gl = renderer.getContext() as WebGL2RenderingContext;
+  const maxLayers = gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) as number;
+  const combined =
+    manifest.arrays.length === 1 ||
+    ((preferCombined || manifest.arrays.length > 2) && layers <= maxLayers);
+  // Keep reflection sampling within its existing two-sampler budget. Larger
+  // source bundles can still use one array on GPUs with sufficient layer capacity.
   if (
-    manifest.volumes.length !== bundle.volumes ||
-    manifest.arrays.length !== Math.ceil(bundle.volumes / 42) ||
-    manifest.gpuBytes > 32 * 1024 * 1024 ||
-    manifest.lastLod !==
-      (manifest.lightmapVersion?.[0] === 8 && manifest.lightmapVersion[1] >= 2 ? 6 : 5)
+    size > renderer.capabilities.maxTextureSize ||
+    renderer.capabilities.maxTextures < (combined ? 1 : 2) ||
+    (combined && layers > maxLayers) ||
+    (!combined &&
+      (manifest.arrays.length > 2 || manifest.arrays.some((entry) => entry.layers > maxLayers)))
   )
-    throw new Error("Invalid native reflection budget/layout");
-  let textures = await Promise.all(
+    return undefined;
+  const payloads = await Promise.all(
     manifest.arrays.map(async (entry) => {
       const bytes = await fetchGzipped(bundle.directory + entry.file);
-      if (bytes.byteLength !== entry.gpuBytes || entry.layers > 256)
-        throw new Error("Invalid native reflection array");
+      if (bytes.byteLength !== entry.gpuBytes) throw new Error("Invalid native reflection array");
       let offset = 0;
-      const mips = entry.mips.map((mip) => {
+      return entry.mips.map((mip) => {
         const data = new Uint8Array(bytes, offset, mip.bytes);
         offset += mip.bytes;
         return { data, width: mip.width, height: mip.height };
       });
-      if (offset !== bytes.byteLength || mips.length !== 7)
-        throw new Error("Invalid native reflection mips");
-      const texture = new T.CompressedArrayTexture(
-        mips,
-        256,
-        256,
-        entry.layers,
-        T.RGB_BPTC_UNSIGNED_Format,
-      );
-      texture.colorSpace = T.NoColorSpace;
-      texture.minFilter = T.LinearMipmapLinearFilter;
-      texture.magFilter = T.LinearFilter;
-      texture.needsUpdate = true;
-      return texture;
     }),
   );
-  const gl = renderer.getContext() as WebGL2RenderingContext;
-  const layers = manifest.arrays.reduce((sum, entry) => sum + entry.layers, 0);
-  const combined =
-    textures.length === 1 ||
-    (preferCombined && gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) >= layers);
-  if (combined && textures.length === 2) {
-    const mips = textures[0].mipmaps.map((mip, index) => {
-      const first = mip.data as Uint8Array,
-        last = textures[1].mipmaps[index].data as Uint8Array;
-      const data = new Uint8Array(first.byteLength + last.byteLength);
-      data.set(first);
-      data.set(last, first.byteLength);
-      return { data, width: mip.width, height: mip.height };
-    });
+  // Combine CPU mip payloads before constructing textures, so no abandoned
+  // array textures need disposing and each native face keeps its original index.
+  const arrays =
+    combined && payloads.length > 1
+      ? [
+          payloads[0].map((mip, level) => {
+            const data = new Uint8Array(
+              payloads.reduce((bytes, array) => bytes + array[level].data.byteLength, 0),
+            );
+            let offset = 0;
+            for (const array of payloads) {
+              data.set(array[level].data, offset);
+              offset += array[level].data.byteLength;
+            }
+            return { data, width: mip.width, height: mip.height };
+          }),
+        ]
+      : payloads;
+  const textures = arrays.map((mips, index) => {
     const texture = new T.CompressedArrayTexture(
       mips,
-      256,
-      256,
-      layers,
+      size,
+      size,
+      combined ? layers : manifest.arrays[index].layers,
       T.RGB_BPTC_UNSIGNED_Format,
     );
     texture.colorSpace = T.NoColorSpace;
     texture.minFilter = T.LinearMipmapLinearFilter;
     texture.magFilter = T.LinearFilter;
     texture.needsUpdate = true;
-    textures = [texture];
-  }
+    return texture;
+  });
   return {
     lightmapVersion: manifest.lightmapVersion,
     lastLod: manifest.lastLod,
+    cubeSize: size,
+    arraySplit: manifest.arrays[0].layers / 6,
     textures,
     combined,
     volumes: manifest.volumes,
     uniforms: manifest.volumes.map((v) => ({
       origin: new T.Vector3().fromArray(v.origin),
       index: v.index,
-      mins: new T.Vector3().fromArray(v.min),
-      maxs: new T.Vector3().fromArray(v.max),
+      mins: new T.Vector3().fromArray(v.localMin ?? v.min),
+      maxs: new T.Vector3().fromArray(v.localMax ?? v.max),
       invEdge: new T.Vector3(
-        ...(v.fade.map((distance) => (distance > 0 ? 1 / distance : 3.402823466e38)) as [
-          number,
-          number,
-          number,
-        ]),
+        ...((v.localFade ?? v.fade).map((distance) =>
+          distance > 0 ? 1 / distance : 3.402823466e38,
+        ) as [number, number, number]),
       ),
       sh: new T.Vector4().fromArray(v.normalizationSH),
+      worldToLocal: v.worldToLocal ? new T.Matrix4().fromArray(v.worldToLocal) : undefined,
+      localToWorld: v.localToWorld ? new T.Matrix4().fromArray(v.localToWorld) : undefined,
     })),
   };
 }
@@ -147,7 +282,9 @@ export function sourceReflectionCandidates(bounds: T.Box3, data: SourceReflectio
     const lo = [bounds.min.x / 0.0254, -bounds.max.z / 0.0254, bounds.min.y / 0.0254];
     const hi = [bounds.max.x / 0.0254, -bounds.min.z / 0.0254, bounds.max.y / 0.0254];
     return v.origin.every(
-      (origin, axis) => lo[axis] <= origin + v.max[axis] && hi[axis] >= origin + v.min[axis],
+      (origin, axis) =>
+        lo[axis] <= (v.worldAABB?.[1][axis] ?? origin + v.max[axis]) &&
+        hi[axis] >= (v.worldAABB?.[0][axis] ?? origin + v.min[axis]),
     )
       ? [index]
       : [];
@@ -176,6 +313,8 @@ export function createSourceReflectionBinding(
       maxs: new T.Vector3(),
       invEdge: new T.Vector3(),
       sh: new T.Vector4(),
+      worldToLocal: new T.Matrix4(),
+      localToWorld: new T.Matrix4(),
     })),
   };
 }
@@ -192,6 +331,10 @@ export function updateSourceReflectionBinding(binding: SourceReflectionBinding, 
     target.maxs.copy(source.maxs);
     target.invEdge.copy(source.invEdge);
     target.sh.copy(source.sh);
+    if (source.worldToLocal) target.worldToLocal!.copy(source.worldToLocal);
+    else target.worldToLocal!.identity();
+    if (source.localToWorld) target.localToWorld!.copy(source.localToWorld);
+    else target.localToWorld!.identity();
   }
   return indices.length;
 }
@@ -201,6 +344,12 @@ export function updateSourceReflectionBinding(binding: SourceReflectionBinding, 
 // ES 3.0 section 3.8.9.1 recommends the three-corner average but permits other
 // hardware replacements. This does not promise bit-identical cube corners.
 export const sourceCubeSampling = `
+#ifndef SOURCE_REFLECTION_CUBE_SIZE
+#define SOURCE_REFLECTION_CUBE_SIZE 256
+#endif
+#ifndef SOURCE_REFLECTION_ARRAY_SPLIT
+#define SOURCE_REFLECTION_ARRAY_SPLIT 42
+#endif
 uniform highp sampler2DArray sourceReflectionCubes0;
 #ifndef SOURCE_REFLECTION_SINGLE_ARRAY
 uniform highp sampler2DArray sourceReflectionCubes1;
@@ -225,8 +374,8 @@ vec3 sourceCubeFetch(ivec2 xy,int face,int cube,int level) {
   #ifdef SOURCE_REFLECTION_SINGLE_ARRAY
   return texelFetch(sourceReflectionCubes0,ivec3(xy,cube*6+face),level).rgb;
   #else
-  return cube<42 ? texelFetch(sourceReflectionCubes0,ivec3(xy,cube*6+face),level).rgb
-    : texelFetch(sourceReflectionCubes1,ivec3(xy,(cube-42)*6+face),level).rgb;
+  return cube<SOURCE_REFLECTION_ARRAY_SPLIT ? texelFetch(sourceReflectionCubes0,ivec3(xy,cube*6+face),level).rgb
+    : texelFetch(sourceReflectionCubes1,ivec3(xy,(cube-SOURCE_REFLECTION_ARRAY_SPLIT)*6+face),level).rgb;
   #endif
 }
 vec3 sourceCubeCrossTap(ivec2 pixel,int face,int cube,int level,int size) {
@@ -244,20 +393,20 @@ vec3 sourceCubeTap(ivec2 pixel,int face,int cube,int level,int size) {
   return sourceCubeCrossTap(pixel,face,cube,level,size);
 }
 vec3 sourceCubeLevel(vec3 a,int cube,int level) {
-  int size=256>>level;
+  int size=SOURCE_REFLECTION_CUBE_SIZE>>level;
   vec2 p=a.xy*float(size)-0.5;ivec2 base=ivec2(floor(p));vec2 f=fract(p);
   return mix(mix(sourceCubeTap(base,int(a.z),cube,level,size),sourceCubeTap(base+ivec2(1,0),int(a.z),cube,level,size),f.x),
     mix(sourceCubeTap(base+ivec2(0,1),int(a.z),cube,level,size),sourceCubeTap(base+ivec2(1),int(a.z),cube,level,size),f.x),f.y);
 }
 vec3 sourceCubeSample(vec3 direction,int cube,float lod) {
   vec3 a=sourceCubeAddress(direction);
-  int upper=int(ceil(lod));float inset=0.5/float(256>>upper);
+  int upper=int(ceil(lod));float inset=0.5/float(SOURCE_REFLECTION_CUBE_SIZE>>upper);
   if(all(greaterThanEqual(a.xy,vec2(inset))) && all(lessThanEqual(a.xy,vec2(1.0-inset)))) {
     #ifdef SOURCE_REFLECTION_SINGLE_ARRAY
     return textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb;
     #else
-    return cube<42 ? textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb
-      : textureLod(sourceReflectionCubes1,vec3(a.xy,float((cube-42)*6)+a.z),lod).rgb;
+    return cube<SOURCE_REFLECTION_ARRAY_SPLIT ? textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb
+      : textureLod(sourceReflectionCubes1,vec3(a.xy,float((cube-SOURCE_REFLECTION_ARRAY_SPLIT)*6)+a.z),lod).rgb;
     #endif
   }
   return mix(sourceCubeLevel(a,cube,int(floor(lod))),sourceCubeLevel(a,cube,upper),fract(lod));
@@ -274,8 +423,11 @@ export function applySourceReflections(
     worldPosition?: string;
     worldNormal?: string;
     worldView?: string;
+    /** Actual water/complex quality1 bytecode differs from the legacy adapter. */
+    nativeFamily?: "water" | "complex";
   } = {},
 ) {
+  const affine = data.volumes.some((volume) => volume.worldToLocal);
   shader.uniforms.sourceReflectionCubes0 = { value: data.textures[0] };
   shader.uniforms.sourceReflectionCubes1 = { value: data.textures[1] ?? data.textures[0] };
   shader.uniforms.sourceEnvironments = { value: data.uniforms };
@@ -285,9 +437,10 @@ export function applySourceReflections(
   shader.uniforms.sourceEnvironmentCount = options.count ?? { value: candidates.length };
   shader.fragmentShader =
     (data.combined ? "#define SOURCE_REFLECTION_SINGLE_ARRAY\n" : "") +
+    `#define SOURCE_REFLECTION_CUBE_SIZE ${data.cubeSize ?? 256}\n#define SOURCE_REFLECTION_ARRAY_SPLIT ${data.arraySplit ?? 42}\n` +
     sourceCubeSampling +
     `
-struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEdge;vec4 sh;};
+struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEdge;vec4 sh;${affine ? "mat4 worldToLocal;mat4 localToWorld;" : ""}};
 uniform SourceEnvironment sourceEnvironments[${data.uniforms.length}];
 uniform int sourceEnvironmentCandidates[${data.uniforms.length}];
 uniform int sourceEnvironmentCount;
@@ -299,36 +452,47 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
   float coverage=0.01;vec3 color=vec3(0.0);vec4 sh=vec4(0.0);
   for(int i=0;i<${data.uniforms.length};i++) {
     if(i>=sourceEnvironmentCount)break;
-    SourceEnvironment env=sourceEnvironments[sourceEnvironmentCandidates[i]];vec3 local=position-env.origin;
+    SourceEnvironment env=sourceEnvironments[sourceEnvironmentCandidates[i]];
+    vec3 local=${affine ? "(env.worldToLocal*vec4(position,1.0)).xyz" : "position-env.origin"};
+    vec3 localRay=${affine ? "mat3(env.worldToLocal)*R" : "R"};
     vec3 fromMin=clamp((local-env.mins)*env.invEdge,0.0,1.0);
     vec3 fromMax=clamp((env.maxs-local)*env.invEdge,0.0,1.0);
     vec3 edges=min(fromMin,fromMax);float fade=min(edges.x,min(edges.y,edges.z));
     if(fade<=0.0)continue;
     float weight=fade*fade*(3.0-2.0*fade)*(1.0-coverage);
-    vec3 farPlane=max((env.mins-local)/R,(env.maxs-local)/R);
+    vec3 farPlane=max((env.mins-local)/localRay,(env.maxs-local)/localRay);
     float distance=abs(min(farPlane.x,min(farPlane.y,farPlane.z)));
-    vec3 hit=local+R*distance;
-    ${data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "vec3 direction=normalize(hit);" : "vec3 direction=mix(hit,R,roughness);"}
+    vec3 hit=local+localRay*distance;
+    ${affine ? "hit=(env.localToWorld*vec4(hit,1.0)).xyz-env.origin;" : ""}
+    ${!options.nativeFamily && data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "vec3 direction=normalize(hit);" : "vec3 direction=mix(hit,R,roughness);"}
     color+=sourceCubeSample(direction,int(env.index),sqrt(roughness)*${data.lastLod ?? 5}.0)*weight;
     sh+=env.sh*weight;coverage+=weight;
     if(coverage>0.99)break;
   }
-  ${data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "sh/=coverage;" : "color/=coverage;sh/=coverage;"}
+  ${!options.nativeFamily && data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "sh/=coverage;" : "color/=coverage;sh/=coverage;"}
   float captured=dot(sh,vec4(normal,1.0));
-  if(captured>0.0)color*=min(dot(irradiance,vec3(0.2125,0.7154,0.0721))/captured,${data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "max(roughness*2.0+1.0,1.0)" : "1.0"});
+  if(captured>0.0)color*=min(${options.nativeFamily === "water" ? "1.0" : "dot(irradiance,vec3(0.2125,0.7154,0.0721))"}/captured,${data.lightmapVersion?.[0] === 8 && data.lightmapVersion[1] >= 2 ? "max(roughness*2.0+1.0,1.0)" : "1.0"});
   return color;
 }
 ` +
     shader.fragmentShader;
-  shader.fragmentShader = shader.fragmentShader.replace(
-    "#include <lights_fragment_end>",
-    `
+  const reflection = `
     vec3 sourceReflectionWorld= ${options.worldPosition ?? "cameraPosition+transpose(mat3(viewMatrix))*(-vViewPosition)"};
     vec3 sourceReflectionNormal=${options.worldNormal ?? "inverseTransformDirection(geometryNormal,viewMatrix)"};
     vec3 sourceReflectionView=${options.worldView ?? "inverseTransformDirection(geometryViewDir,viewMatrix)"};
     radiance=sourceMapReflection(vec3(sourceReflectionWorld.x,-sourceReflectionWorld.z,sourceReflectionWorld.y)/0.0254,
       vec3(sourceReflectionNormal.x,-sourceReflectionNormal.z,sourceReflectionNormal.y),
       vec3(sourceReflectionView.x,-sourceReflectionView.z,sourceReflectionView.y),material.roughness,irradiance*RECIPROCAL_PI);
-    #include <lights_fragment_end>`,
+    `;
+  // Keep the injection inside RE_IndirectSpecular's guard, after the light
+  // accumulators exist. Diffuse-only native surfaces have no radiance variable.
+  shader.fragmentShader = shader.fragmentShader.replace(
+    "#include <lights_fragment_end>",
+    T.ShaderChunk.lights_fragment_end,
   );
+  const call =
+    "RE_IndirectSpecular( radiance, iblIrradiance, clearcoatRadiance, geometryPosition, geometryNormal, geometryViewDir, geometryClearcoatNormal, material, reflectedLight );";
+  if (!shader.fragmentShader.includes(call))
+    throw new Error("Native reflection lighting anchor unavailable");
+  shader.fragmentShader = shader.fragmentShader.replace(call, reflection + call);
 }

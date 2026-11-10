@@ -18,7 +18,7 @@ import { setupSettingsTabs } from "./settings-tabs";
 import { setupControlSettings } from "./control-settings";
 import { Game } from "./game";
 import { MultiplayerMatch } from "./multiplayer-match";
-import { validRoom, isMapId, type MapId } from "@cs2go/protocol";
+import { validRoom, isMapId, MAPS, type MapId } from "@cs2go/protocol";
 import { prepareTeamSelector } from "./team-select";
 import { openMatchLoading } from "./match-loading";
 import { setupSteamAccount } from "./steam-account";
@@ -273,7 +273,7 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
   const cancelPreview = () => selector?.close();
   loader.signal.addEventListener("abort", cancelPreview, { once: true });
   try {
-    await loader.stage(`Preparing ${map === "dust2" ? "Dust II" : "Mirage"}...`, 0);
+    await loader.stage(`Preparing ${MAPS[map].name}...`, 0);
     await game.prepareMatch(mode, !multiplayer, loader.signal, map);
     await loader.stage("Preparing the match...", 1);
     if (replayTeam === undefined) {

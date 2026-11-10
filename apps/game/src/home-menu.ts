@@ -1,3 +1,4 @@
+import { MAPS, MAP_IDS } from "@cs2go/protocol";
 import { weapons, isKnife } from "./physics";
 import { setupHeaderParticles } from "./header-particles";
 import { equippedKnives } from "./equipped-knives";
@@ -45,7 +46,7 @@ export function homeMenuMarkup() {
                 <small id="match-status" role="status" aria-live="polite"></small>
               </div>
             </section>
-            <div class="match-maps" role="group" aria-label="Maps"><button class="home-map-art" data-map="dust2" type="button" aria-label="Dust II" aria-pressed="true"><img class="map-badge" src="/ui/home/dust2-emblem.svg" alt=""><span class="map-card-caption">Dust II</span></button><button class="home-map-art" data-map="mirage" type="button" aria-label="Mirage" aria-pressed="false"><img class="map-badge" src="/ui/home/mirage-emblem.svg" alt=""><span class="map-card-caption">Mirage</span></button></div>
+            <div class="match-maps" role="group" aria-label="Maps">${MAP_IDS.map((map) => `<button class="home-map-art" style="--map-art: url(/ui/home/${map}.webp)" data-map="${map}" type="button" aria-label="${MAPS[map].name}" aria-pressed="${map === "dust2"}"><img class="map-badge" src="/ui/home/${map}-emblem.svg" alt=""><span class="map-card-caption">${MAPS[map].name}</span></button>`).join("")}</div>
           </div>
           <footer class="match-footer"><p id="mode-description" role="status"></p><button class="deploy" id="play" disabled aria-label="Play casual"><span>GO</span></button></footer>
         </section>

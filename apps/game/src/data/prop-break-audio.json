@@ -1,0 +1,134 @@
+{
+  "Breakable.Metal": {
+    "clips": ["map-break-metal", "map-break-metal-2", "map-break-metal-3"],
+    "gain": 1.0,
+    "pitch": 1.0,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [8.0989715338, 0.453846],
+      [30.48, 0.0]
+    ],
+    "occlusionMix": 0.5
+  },
+  "Cardboard.Break": {
+    "clips": [null],
+    "gain": 0.799805,
+    "pitch": 1.0,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [5.5734857795999995, 0.332226],
+      [15.24, 0.0]
+    ],
+    "occlusionMix": 0.8
+  },
+  "Fruit.Break": {
+    "clips": [
+      "prop-break-flesh_squishy_impact_hard2",
+      "prop-break-flesh_squishy_impact_hard3",
+      "prop-break-flesh_squishy_impact_hard4"
+    ],
+    "gain": 0.35,
+    "pitch": 1.4,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [0.4789714322, 1.0],
+      [5.5734857795999995, 0.332226],
+      [15.24, 0.0]
+    ],
+    "occlusionMix": 0.8
+  },
+  "Glass.Break": {
+    "clips": ["map-break-glass", "map-break-glass-2", "map-break-glass-3"],
+    "gain": 0.699707,
+    "pitch": 1.0,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [8.0989715338, 0.307692],
+      [30.48, -0.0]
+    ],
+    "occlusionMix": 0.8
+  },
+  "GlassBottle.Break": {
+    "clips": ["prop-break-glass_bottle_break1", "prop-break-glass_bottle_break2"],
+    "gain": 0.699707,
+    "pitch": 1.0,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [5.5734857795999995, 0.332226],
+      [15.24, 0.0]
+    ],
+    "occlusionMix": 0.8
+  },
+  "Plastic_Box.Break": {
+    "clips": [null],
+    "gain": 1.0,
+    "pitch": 1.0,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [5.5734857795999995, 0.332226],
+      [15.24, 0.0]
+    ],
+    "occlusionMix": 0.8
+  },
+  "Pottery.Break": {
+    "clips": [
+      "prop-break-glass_pottery_break1",
+      "prop-break-glass_pottery_break2",
+      "prop-break-glass_pottery_break3"
+    ],
+    "gain": 0.7,
+    "pitch": 1.07,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [5.5734857795999995, 0.332226],
+      [15.24, 0.0]
+    ],
+    "occlusionMix": 0.8
+  },
+  "Pottery.Large.Break": {
+    "clips": [
+      "prop-break-glass_pottery_break1",
+      "prop-break-glass_pottery_break2",
+      "prop-break-glass_pottery_break3"
+    ],
+    "gain": 0.699707,
+    "pitch": 0.96,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [5.5734857795999995, 0.332226],
+      [15.24, 0.0]
+    ],
+    "occlusionMix": 0.8
+  },
+  "Wood_Box.Break": {
+    "clips": [null],
+    "gain": 0.799805,
+    "pitch": 0.99,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [5.5734857795999995, 0.332226],
+      [15.24, 0.0]
+    ],
+    "occlusionMix": 0.8
+  },
+  "Wood_Furniture.Break": {
+    "clips": ["map-break-wood", "map-break-wood-2"],
+    "gain": 0.799805,
+    "pitch": 0.99,
+    "pitchRandom": [-0.01, 0.01],
+    "curve": [
+      [1.016, 1.0],
+      [5.5734857795999995, 0.332226],
+      [15.24, 0.0]
+    ],
+    "occlusionMix": 0.8
+  }
+}

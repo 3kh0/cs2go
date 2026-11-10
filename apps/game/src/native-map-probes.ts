@@ -1,5 +1,7 @@
+import { copySourceDepth } from "./source-depth";
 import * as T from "three";
 import { assetFetch } from "./asset-url";
+import { sourceProbeUniformVectors } from "./source-probe-frames";
 import {
   createSourceGpuProbes,
   applySourceGpuProbes,
@@ -20,7 +22,7 @@ export async function loadNativeMapProbes(renderer: T.WebGLRenderer, directory: 
     : source.fallbacks;
   if (
     renderer.capabilities.maxTextures < 16 ||
-    renderer.capabilities.maxFragmentUniforms < metadata.volumes.length * 8 + 128 ||
+    renderer.capabilities.maxFragmentUniforms < sourceProbeUniformVectors(metadata.volumes) ||
     gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) <
       Math.max(...arrays.map((a: { layers: number }) => a.layers))
   )
@@ -38,6 +40,7 @@ export function applyNativeMapProbes(root: T.Object3D, probes: SourceGpuProbes) 
       let material = materials.get(source);
       if (material) return material;
       material = source.clone();
+      copySourceDepth(source, material);
       materials.set(source, material);
       const prior = source.onBeforeCompile.bind(source);
       const key = source.customProgramCacheKey();
@@ -73,7 +76,8 @@ export function applyNativeMapProbes(root: T.Object3D, probes: SourceGpuProbes) 
           ),
         );
       };
-      material.customProgramCacheKey = () => `${key}:native-map-probes:${probes.count}`;
+      material.customProgramCacheKey = () =>
+        `${key}:native-map-probes:${probes.count}:${!!probes.packedFrames}:${probes.packedFrames?.rotations.length ?? 0}`;
       material.needsUpdate = true;
       return material;
     };

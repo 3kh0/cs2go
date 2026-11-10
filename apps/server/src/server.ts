@@ -1,6 +1,7 @@
 import type { ServerWebSocket } from "bun";
 import {
   MAX_PLAYERS,
+  MAPS,
   CHAT_INTERVAL_MS,
   MAX_PENDING_INPUTS,
   PROTOCOL_VERSION,
@@ -260,7 +261,7 @@ export function startServer(options: ServerOptions) {
             rooms.set(code, room);
             roomLabels.set(room, nextRoomLabel++);
             log(
-              `Room #${roomLabels.get(room)} created - ${requestedMap === "mirage" ? "Mirage" : "Dust II"} - ${message.mode} - ${rulesFor(message.mode).teamSize}v${rulesFor(message.mode).teamSize}`,
+              `Room #${roomLabels.get(room)} created - ${MAPS[requestedMap].name} - ${message.mode} - ${rulesFor(message.mode).teamSize}v${rulesFor(message.mode).teamSize}`,
             );
           }
           if ((room.map.id ?? "dust2") !== requestedMap)

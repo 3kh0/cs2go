@@ -1,10 +1,19 @@
 export { SnapshotEncoder, SnapshotDecoder } from "./snapshot-codec";
 // Version every wire-format or simulation compatibility change together.
 import { isKnife, WEAPON_COUNT } from "./armory";
+import { isMapId, type MapId } from "./maps";
+export { MAPS, MAP_IDS, isMapId, type MapId } from "./maps";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 15;
+export const PROTOCOL_VERSION = 16;
+export type DoorState = {
+  id: string;
+  angle: number;
+  target: number;
+  returnTime: number;
+  health?: number;
+  stage?: number;
+};
 export type BreakableState = { id: string; health: number };
-export type MapId = "dust2" | "mirage";
 export type LobbyVisibility = "private" | "public";
 export type PublicLobby = {
   room: string;
@@ -16,9 +25,6 @@ export type PublicLobby = {
   teams: Record<Team, number>;
   phase: RoundState["phase"];
 };
-export function isMapId(value: unknown): value is MapId {
-  return value === "dust2" || value === "mirage";
-}
 export const MAX_CHAT_LENGTH = 240;
 export const CHAT_INTERVAL_MS = 750;
 export type ChatChannel = "team" | "all";
@@ -107,6 +113,7 @@ export type Input = {
   pickup: boolean;
   reload: boolean;
   use: boolean;
+  interact: boolean;
   select: number;
   buy: number;
   buyDrop: boolean;
@@ -134,7 +141,7 @@ export type PlayerState = Vec3 & {
   vertical: number;
   eye: number;
   grounded: boolean;
-  ladder?: { id: number | null; detachTime: number };
+  ladder?: { id: number | null; detachTime: number; exit?: 1 | -1 };
   yaw: number;
   pitch: number;
   allowedWeapons: number[];
@@ -184,6 +191,14 @@ export type MatchEvent =
   // Optional additive event: old clients ignore unknown kinds, and new clients
   // hide unreported damage when connected to an older server.
   | { kind: "hurt"; attacker: string; victim: string; damage: number }
+  | {
+      kind: "footstep";
+      actor: string;
+      team: Team;
+      side: "left" | "right";
+      point: Vec3;
+      surface?: string;
+    }
   | { kind: "breakable"; id: string; health: number; point?: Vec3 }
   | {
       kind: "shot";
@@ -222,6 +237,7 @@ export type MatchEvent =
   | { kind: "plant" | "defuse" | "explode"; actor: string };
 export type RoundState = {
   breakables?: BreakableState[];
+  doors?: DoorState[];
   ball: Vec3 & { qx: number; qy: number; qz: number; qw: number };
   clock: number;
   projectiles: UtilityProjectile[];
@@ -388,6 +404,7 @@ export function validInput(value: unknown): value is Input {
       "pickup",
       "reload",
       "use",
+      "interact",
       "dropBomb",
       "buyDrop",
     ].every((key) => typeof value[key] === "boolean")
@@ -552,6 +569,7 @@ export function neutralInput(seq = 0): Input {
     pickup: false,
     reload: false,
     use: false,
+    interact: false,
     select: -1,
     buy: -1,
     buyDrop: false,

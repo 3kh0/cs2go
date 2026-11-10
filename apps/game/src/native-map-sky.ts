@@ -1,4 +1,16 @@
 import * as T from "three";
+import { excludeNativeToolsMaterials } from "./native-tools-materials";
+import { nativeSkyFrame, type NativeSkyPlacement } from "./native-sky-frame";
+import { createEnvironmentWorldFrame } from "./native-environment-frame";
+import { loadSourceReflections } from "./source-reflections";
+import { applyNativeMapReflections } from "./native-map-reflections";
+import { nativeSkyPanorama, type NativeSkyPanorama } from "./native-sky-environment";
+import { loadNativeMapProbes, applyNativeMapProbes } from "./native-map-probes";
+import { loadNativeMapEnvironment, applyNativeMapEnvironment } from "./native-map-environment";
+import { applyNativeMapLayers, loadNativeMapLayerBundle } from "./native-map-layers";
+import { applyNativeMapParallax, loadNativeMapParallax } from "./native-map-parallax";
+import { applyNativeStaticOverlays, type NativeStaticOverlay } from "./native-static-overlay";
+import { applySourceSelfIllumination, type SourceSelfIllumination } from "./source-self-illum";
 import { assetFetch, assetUrl } from "./asset-url";
 import { loadGzipped } from "./gltf";
 import {
@@ -7,29 +19,53 @@ import {
   type NativeMapLightingPaths,
 } from "./native-map-lighting";
 import { registerSourceSkyPreparation } from "./source-sky";
+import { MapResources } from "./map-resources";
 import { createNativeSkyEffect, type NativeSkyEffectParameters } from "./native-sky-clouds";
 
 export type NativeSkyManifest = {
   model: string;
+  toolsMaterials?: string[];
+  panorama?: NativeSkyPanorama;
+  ambient?: { skyColor: number; groundColor: number; intensity: number };
+  sun?: { pitch: number; yaw: number; color: number; intensity: number };
+  probes?: string;
+  reflections?: { directory: string; manifest: string; volumes: number; maxGpuBytes: number };
+  environmentMaterials?: string;
+  layers?: string;
+  parallaxMaterials?: string;
+  staticOverlays?: { name: string; staticOverlay?: NativeStaticOverlay }[];
+  selfIllumination?: Record<string, SourceSelfIllumination>;
   lighting: NativeMapLightingPaths;
   effects: Record<string, NativeSkyEffectParameters>;
   textures: Record<string, { path: string; srgb: boolean }>;
-  nativeTransform: {
-    skyCamera: { scale: number; origin: string };
-    noCenteringOrNormalization: boolean;
-  };
+  nativeTransform: NativeSkyPlacement & { noCenteringOrNormalization: boolean };
 };
 
 /** The imported wrapper already places the separate 3D sky in main-world
- * coordinates: 16*(SourceSkyPosition-nativeCameraOrigin), followed by the
- * Source2Viewer-to-browser adapter. Main camera translation therefore supplies
- * native 1/16 parallax without subtracting the origin or applying scale twice.
+ * coordinates using its authored sky_camera scale and skybox_reference pose.
+ * Main camera translation therefore supplies the authored parallax without
+ * subtracting the origin or applying scale twice.
  */
 export async function loadNativeMapSky(
   renderer: T.WebGLRenderer,
   manifestPath: string,
   gradientLoad: T.Texture | Promise<T.Texture>,
   sun: { pitch: number; yaw: number; color: number; intensity: number },
+) {
+  const resources = new MapResources();
+  try {
+    return await buildNativeMapSky(renderer, manifestPath, gradientLoad, sun, resources);
+  } catch (error) {
+    resources.dispose();
+    throw error;
+  }
+}
+async function buildNativeMapSky(
+  renderer: T.WebGLRenderer,
+  manifestPath: string,
+  gradientLoad: T.Texture | Promise<T.Texture>,
+  sun: { pitch: number; yaw: number; color: number; intensity: number },
+  resources: MapResources,
 ) {
   const response = await assetFetch(manifestPath);
   if (!response.ok) throw new Error("Native 3D sky manifest unavailable");
@@ -39,11 +75,54 @@ export async function loadNativeMapSky(
     !manifest.nativeTransform.noCenteringOrNormalization
   )
     throw new Error("Native sky camera placement provenance is missing");
-  const [asset, lighting, gradient] = await Promise.all([
-    loadGzipped(manifest.model, 1),
-    loadNativeMapLighting(manifest.lighting, renderer),
-    gradientLoad,
-  ]);
+  const panoramaConfig = nativeSkyPanorama(manifest.panorama);
+  const frame = nativeSkyFrame(manifest.nativeTransform);
+  const [asset, lighting, gradient, probes, environment, layers, parallax, reflections] =
+    await Promise.all([
+      loadGzipped(manifest.model, 1).then((asset) => {
+        resources.capture(asset.scene);
+        resources.onDispose(() => resources.capture(asset.scene));
+        return asset;
+      }),
+      loadNativeMapLighting(manifest.lighting, renderer).then((lighting) => {
+        for (const texture of Object.values(lighting)) resources.texture(texture);
+        return lighting;
+      }),
+      gradientLoad,
+      manifest.probes
+        ? loadNativeMapProbes(renderer, manifest.probes).then((probes) => {
+            for (const texture of probes?.textures ?? []) resources.texture(texture);
+            return probes;
+          })
+        : undefined,
+      manifest.environmentMaterials
+        ? loadNativeMapEnvironment(renderer, manifest.environmentMaterials).then((bundle) => {
+            for (const texture of bundle.textures.values()) resources.texture(texture);
+            return bundle;
+          })
+        : undefined,
+      manifest.layers
+        ? loadNativeMapLayerBundle(renderer, manifest.layers).then((bundle) => {
+            for (const texture of bundle.textures.values()) resources.texture(texture);
+            return bundle;
+          })
+        : undefined,
+      manifest.parallaxMaterials
+        ? loadNativeMapParallax(renderer, manifest.parallaxMaterials).then((bundle) => {
+            for (const texture of [...bundle.textures.values(), ...bundle.cubes.values()])
+              resources.texture(texture);
+            return bundle;
+          })
+        : undefined,
+      manifest.reflections
+        ? loadSourceReflections(renderer, true, manifest.reflections).then((bundle) => {
+            for (const texture of bundle?.textures ?? []) resources.texture(texture);
+            return bundle;
+          })
+        : undefined,
+    ]);
+  // The caller also uses the gradient for the world environment and owns it.
+  resources.external(gradient);
   const textures = new Map<string, T.Texture>();
   await Promise.all(
     Object.entries(manifest.textures).map(async ([resource, entry]) => {
@@ -51,6 +130,7 @@ export async function loadNativeMapSky(
       texture.colorSpace = entry.srgb ? T.SRGBColorSpace : T.NoColorSpace;
       texture.flipY = false;
       texture.wrapS = texture.wrapT = T.RepeatWrapping;
+      resources.texture(texture);
       textures.set(resource, texture);
     }),
   );
@@ -58,8 +138,45 @@ export async function loadNativeMapSky(
     overlay = new T.Scene();
   const skyCamera = new T.PerspectiveCamera();
   scene.add(asset.scene);
-  applyNativeMapLighting(asset.scene, lighting);
-  const bounds = new T.Box3().setFromObject(asset.scene);
+  excludeNativeToolsMaterials(asset.scene, manifest.toolsMaterials ?? []);
+  const emissive = new Set<T.Material>();
+  asset.scene.traverse((object) => {
+    if (!(object instanceof T.Mesh)) return;
+    for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+      const source = manifest.selfIllumination?.[material.name];
+      if (
+        source &&
+        !parallax?.materials[material.name] &&
+        material instanceof T.MeshStandardMaterial &&
+        !emissive.has(material)
+      ) {
+        applySourceSelfIllumination(material, source);
+        emissive.add(material);
+      }
+    }
+  });
+  if (layers) applyNativeMapLayers(asset.scene, layers);
+  if (manifest.staticOverlays) applyNativeStaticOverlays(asset.scene, manifest.staticOverlays);
+  if (environment) {
+    environment.sourceWorldFrame = createEnvironmentWorldFrame(frame.skyBrowserFromWorld);
+    applyNativeMapEnvironment(asset.scene, environment);
+  }
+  if (parallax) applyNativeMapParallax(asset.scene, parallax);
+  applyNativeMapLighting(asset.scene, lighting, frame.scale);
+  if (probes) applyNativeMapProbes(asset.scene, probes);
+  if (reflections)
+    applyNativeMapReflections(asset.scene, reflections, [], [], {
+      worldToNative: frame.skyBrowserFromWorld,
+    });
+  resources.capture(asset.scene);
+  const bounds = new T.Box3();
+  asset.scene.updateMatrixWorld(true);
+  asset.scene.traverse((object) => {
+    if (!(object instanceof T.Mesh) || object.userData.nativeToolsMaterial) return;
+    object.geometry.computeBoundingBox();
+    if (object.geometry.boundingBox)
+      bounds.union(object.geometry.boundingBox.clone().applyMatrix4(object.matrixWorld));
+  });
   if (bounds.isEmpty() || !Number.isFinite(bounds.min.length() + bounds.max.length()))
     throw new Error("Native sky geometry has invalid bounds");
   const center = bounds.getCenter(new T.Vector3());
@@ -69,6 +186,7 @@ export async function loadNativeMapSky(
     depthBuffer: true,
   });
   target.depthTexture = new T.DepthTexture(1, 1, T.UnsignedIntType);
+  resources.target(target);
   target.texture.colorSpace = T.LinearSRGBColorSpace;
   target.texture.generateMipmaps = false;
   target.texture.minFilter = target.texture.magFilter = T.LinearFilter;
@@ -79,6 +197,7 @@ export async function loadNativeMapSky(
     type: T.UnsignedByteType,
     depthTexture: new T.DepthTexture(1, 1, T.UnsignedIntType),
   });
+  resources.target(depthCopy);
   const time = { value: 0 },
     resolution = { value: new T.Vector2(1, 1) };
   const effectUniforms = {
@@ -104,7 +223,13 @@ export async function loadNativeMapSky(
   });
   scene.updateMatrixWorld(true);
   for (const mesh of effectMeshes) overlay.attach(mesh);
-  const ambient = new T.HemisphereLight(0x82cdff, 0x8f887c, 1.5);
+  const authoredAmbient = manifest.ambient;
+  const ambient = new T.HemisphereLight(
+    authoredAmbient?.skyColor ?? 0x82cdff,
+    authoredAmbient?.groundColor ?? 0x8f887c,
+    authoredAmbient?.intensity ?? 1.5,
+  );
+  sun = manifest.sun ?? sun;
   const light = new T.DirectionalLight(sun.color, sun.intensity);
   const pitch = T.MathUtils.degToRad(sun.pitch),
     yaw = T.MathUtils.degToRad(sun.yaw);
@@ -118,13 +243,14 @@ export async function loadNativeMapSky(
     new T.SphereGeometry(1, 32, 16),
     new T.MeshBasicMaterial({
       map: gradient,
+      color: panoramaConfig.color,
       side: T.BackSide,
       depthWrite: false,
       fog: false,
       toneMapped: false,
     }),
   );
-  panorama.rotation.y = Math.PI;
+  panorama.quaternion.setFromRotationMatrix(panoramaConfig.rotation);
   panorama.renderOrder = -1000;
   panorama.frustumCulled = false;
   scene.add(panorama);
@@ -138,7 +264,9 @@ export async function loadNativeMapSky(
   let lastBucket = -1,
     lastWidth = 0,
     lastHeight = 0;
+  let disposed = false;
   function update(camera: T.Camera) {
+    if (disposed) return;
     renderer.getCurrentViewport(viewport);
     const ratio = Math.min(1, Math.sqrt(2_097_152 / (viewport.z * viewport.w)));
     const width = Math.max(1, Math.round(viewport.z * ratio)),
@@ -180,6 +308,7 @@ export async function loadNativeMapSky(
     skyCamera.projectionMatrixInverse.copy(skyCamera.projectionMatrix).invert();
     panorama.position.copy(position);
     time.value = now;
+    environment?.update(now);
     const destination = renderer.getRenderTarget(),
       autoClear = renderer.autoClear,
       toneMapping = renderer.toneMapping,
@@ -215,12 +344,16 @@ export async function loadNativeMapSky(
     toneMapped: true,
   });
   const background = new T.Mesh(new T.PlaneGeometry(2, 2), material);
-  background.name = "Mirage native 3D sky and clouds";
+  background.name = "Native 3D sky and clouds";
   background.frustumCulled = false;
   background.renderOrder = -1000;
   background.castShadow = background.receiveShadow = false;
   background.onBeforeRender = (_renderer, _scene, camera) => update(camera);
+  resources.capture(scene);
+  resources.capture(overlay);
+  resources.capture(background);
   registerSourceSkyPreparation(background, async () => {
+    if (disposed) return;
     const destination = renderer.getRenderTarget(),
       toneMapping = renderer.toneMapping;
     let worldPrograms: Promise<unknown>, effectPrograms: Promise<unknown>;
@@ -234,14 +367,35 @@ export async function loadNativeMapSky(
       renderer.toneMapping = toneMapping;
     }
     await Promise.all([worldPrograms, effectPrograms]);
+    if (disposed) return;
     for (const texture of [
       gradient,
       lighting.irradiance,
       lighting.shadows,
       lighting.directional,
       ...textures.values(),
+      ...(probes?.textures ?? []),
+      ...(environment?.textures.values() ?? []),
+      ...(layers?.textures.values() ?? []),
+      ...(parallax?.textures.values() ?? []),
+      ...(parallax?.cubes.values() ?? []),
     ])
       if (texture) renderer.initTexture(texture);
   });
-  return { background, scene, overlay, target, manifest, skyCamera };
+  return {
+    background,
+    scene,
+    overlay,
+    target,
+    manifest,
+    skyCamera,
+    dispose() {
+      if (disposed) return;
+      disposed = true;
+      background.removeFromParent();
+      resources.dispose();
+      scene.clear();
+      overlay.clear();
+    },
+  };
 }

@@ -7,6 +7,7 @@ import {
   smokeCellDensity,
   smokeSampleBudget,
   SMOKE_CELL_RADIUS,
+  type SceneDepthConsumer,
 } from "./smoke-renderer";
 import { UtilityVisual } from "./utility-effects";
 import { GrenadeHandling } from "./grenade-handling";
@@ -67,6 +68,12 @@ export class GameUtility {
   private visibleSmoke: SmokeRenderer[] = [];
   private smokeFrustum = new T.Frustum();
   private smokeViewProjection = new T.Matrix4();
+  private nativeDepth: SceneDepthConsumer = {
+    setDepth: (texture, viewport, inverseProjection) => {
+      this.game.world.nativeEffects?.setDepth(texture, viewport, inverseProjection);
+      this.game.world.nativeWater?.setDepth(texture, viewport, inverseProjection);
+    },
+  };
   inventory = emptyGrenades();
   selected: GrenadeKind | null = null;
   projectiles: Projectile[] = [];
@@ -183,12 +190,32 @@ export class GameUtility {
       if (this.smokeFrustum.intersectsObject(effect.smoke.batch))
         this.visibleSmoke.push(effect.smoke);
     }
+    const water = this.game.world.nativeWater;
+    const waterVisible = water?.needsDepth(camera) ?? false;
+    const waterTime = performance.now() / 1000;
+    if (water && this.game.active) {
+      if (this.game.health > 0)
+        water.contact("player", this.game.position, waterTime, this.game.hullHeight);
+      this.game.bots.forEach((bot, index) => {
+        if (bot.health > 0 && bot.group.visible)
+          water.contact(
+            `bot:${index}`,
+            bot.group.position,
+            waterTime,
+            bot.navCrouch ? 1.3716 : 1.8288,
+          );
+      });
+    }
+    if (waterVisible) water!.prepareFrame(camera, waterTime, this.game.world.sun);
+    this.nativeDepth.color = waterVisible ? water!.color : undefined;
+    const effectsVisible = this.game.world.nativeEffects?.needsDepth(camera) ?? false;
     this.smokeComposite.render(
       this.game.renderer,
       this.game.scene,
       this.game.camera,
       this.visibleSmoke,
       this.game.settings.effectsDetail === "low",
+      waterVisible || effectsVisible ? this.nativeDepth : undefined,
     );
   }
   renderEffects() {
@@ -462,6 +489,7 @@ export class GameUtility {
     );
   }
   bullet(from: T.Vector3, to: T.Vector3) {
+    this.game.world.nativeWater?.crossing(from, to, performance.now() / 1000, 0.025);
     for (const e of this.effects)
       if (e.kind === "smoke") {
         e.cells.forEach((cell, i) => {
@@ -494,6 +522,7 @@ export class GameUtility {
       p.age += dt;
       let fireContact = false;
       if (!p.resting) {
+        this.projectileFrom.copy(p.position);
         const result = advanceGrenade(
           p.position,
           p.velocity,
@@ -534,6 +563,12 @@ export class GameUtility {
           p.kind === "molotov" || p.kind === "incendiary",
         );
         p.resting = result.resting;
+        g.world.nativeWater?.crossing(
+          this.projectileFrom,
+          p.position,
+          performance.now() / 1000,
+          0.05,
+        );
         fireContact = result.fireContact;
         if (result.impact > 1.5 && p.age - p.lastBounce >= 0.08) {
           g.soundscape.play(`utility-${p.kind}-bounce`, false, "sand", p.position);
@@ -615,6 +650,10 @@ export class GameUtility {
       weapon: p.weapon,
     };
     if (p.kind === "he") {
+      if (!g.network) {
+        g.world.doors.damageRadius(p.position, data.radius, heDamage, "explosion");
+        g.syncMapDoors();
+      }
       if (
         !g.network &&
         g.world.breakables?.damageRadius(p.position, data.radius, heDamage, "explosion").length

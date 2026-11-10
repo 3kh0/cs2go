@@ -24,14 +24,17 @@ export interface SourceLayerMaterial {
   tint2: number[];
   bevel: number[];
   metalness: number;
+  /** Absent in historical diffuse-only map manifests. */
+  specularDirect?: boolean;
   specularIndirect: boolean;
   ao: number[];
   normal1: string;
   normal2: string;
   color2: string;
-  mask: string;
+  mask?: string;
   transforms: Record<string, number[]>;
   detail?: { texture: string; scale: number[]; tintBlend: number[] };
+  detail2?: { texture: string; scale: number[]; tintBlend: number[] };
 }
 
 interface LayerManifest<Material> {
@@ -46,76 +49,90 @@ export function loadSourceLayers(renderer: T.WebGLRenderer) {
 export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
   renderer: T.WebGLRenderer,
   directory: string,
+  selectTextures?: (materials: Record<string, Material>) => ReadonlySet<string>,
 ) {
   const response = await assetFetch(directory + "source.json");
   if (!response.ok) throw new Error("Native layered materials unavailable");
   const manifest = (await response.json()) as LayerManifest<Material>;
+  const selected = selectTextures?.(manifest.materials);
+  if (selected)
+    for (const key of selected)
+      if (!manifest.textures[key])
+        throw new Error(`Native material texture definition missing: ${key}`);
   const textures = new Map<string, T.Texture>();
   const queue = createLoadQueue(6);
-  await Promise.all(
-    Object.entries(manifest.textures).map(([key, entry]) =>
-      queue(async () => {
-        if (entry.constant !== undefined) return;
-        const supported =
-          entry.format === "BC7"
-            ? renderer.extensions.has("EXT_texture_compression_bptc")
-            : entry.format === "BC4"
-              ? renderer.extensions.has("EXT_texture_compression_rgtc")
-              : renderer.extensions.has(
-                  entry.srgb
-                    ? "WEBGL_compressed_texture_s3tc_srgb"
-                    : "WEBGL_compressed_texture_s3tc",
-                );
-        let texture: T.Texture;
-        if (supported && entry.file && entry.mips) {
-          const bytes = await fetchGzipped(directory + entry.file);
-          if (bytes.byteLength !== entry.gpuBytes) throw new Error("Invalid native layer texture");
-          let offset = 0;
-          const mips = entry.mips.map((mip) => {
-            const data = new Uint8Array(bytes, offset, mip.bytes);
-            offset += mip.bytes;
-            return { data, width: mip.width, height: mip.height };
-          });
-          if (offset !== bytes.byteLength) throw new Error("Invalid native layer mip lengths");
-          texture = new T.CompressedTexture(
-            mips,
-            mips[0].width,
-            mips[0].height,
+  const outcomes = await Promise.allSettled(
+    Object.entries(manifest.textures)
+      .filter(([key]) => !selected || selected.has(key))
+      .map(([key, entry]) =>
+        queue(async () => {
+          if (entry.constant !== undefined) return;
+          const supported =
             entry.format === "BC7"
-              ? T.RGBA_BPTC_Format
+              ? renderer.extensions.has("EXT_texture_compression_bptc")
               : entry.format === "BC4"
-                ? T.RED_RGTC1_Format
-                : T.RGB_S3TC_DXT1_Format,
-          );
-          texture.minFilter = mips.length > 1 ? T.LinearMipmapLinearFilter : T.LinearFilter;
-        } else if (entry.fallbackFile && entry.fallbackMips) {
-          const bytes = await fetchGzipped(directory + entry.fallbackFile);
-          let offset = 0;
-          const mips = entry.fallbackMips.map((mip) => {
-            const data = new Uint8Array(bytes, offset, mip.bytes);
-            offset += mip.bytes;
-            return { data, width: mip.width, height: mip.height };
-          });
-          if (offset !== bytes.byteLength || !mips.length)
-            throw new Error("Invalid material fallback mip lengths");
-          texture = new T.DataTexture(mips[0].data, mips[0].width, mips[0].height);
-          texture.mipmaps = mips;
-          texture.generateMipmaps = false;
-          texture.minFilter = T.LinearMipmapLinearFilter;
-        } else {
-          if (!entry.fallback) throw new Error("Missing native layer fallback");
-          texture = await new T.TextureLoader().loadAsync(assetUrl(directory + entry.fallback));
-        }
-        texture.colorSpace = entry.srgb ? T.SRGBColorSpace : T.NoColorSpace;
-        texture.flipY = false;
-        texture.wrapS = texture.wrapT = T.RepeatWrapping;
-        texture.magFilter = T.LinearFilter;
-        texture.anisotropy = 8;
-        texture.needsUpdate = true;
-        textures.set(key, texture);
-      }),
-    ),
+                ? renderer.extensions.has("EXT_texture_compression_rgtc")
+                : renderer.extensions.has(
+                    entry.srgb
+                      ? "WEBGL_compressed_texture_s3tc_srgb"
+                      : "WEBGL_compressed_texture_s3tc",
+                  );
+          let texture: T.Texture;
+          if (supported && entry.file && entry.mips) {
+            const bytes = await fetchGzipped(directory + entry.file);
+            if (bytes.byteLength !== entry.gpuBytes)
+              throw new Error("Invalid native layer texture");
+            let offset = 0;
+            const mips = entry.mips.map((mip) => {
+              const data = new Uint8Array(bytes, offset, mip.bytes);
+              offset += mip.bytes;
+              return { data, width: mip.width, height: mip.height };
+            });
+            if (offset !== bytes.byteLength) throw new Error("Invalid native layer mip lengths");
+            texture = new T.CompressedTexture(
+              mips,
+              mips[0].width,
+              mips[0].height,
+              entry.format === "BC7"
+                ? T.RGBA_BPTC_Format
+                : entry.format === "BC4"
+                  ? T.RED_RGTC1_Format
+                  : T.RGB_S3TC_DXT1_Format,
+            );
+            texture.minFilter = mips.length > 1 ? T.LinearMipmapLinearFilter : T.LinearFilter;
+          } else if (entry.fallbackFile && entry.fallbackMips) {
+            const bytes = await fetchGzipped(directory + entry.fallbackFile);
+            let offset = 0;
+            const mips = entry.fallbackMips.map((mip) => {
+              const data = new Uint8Array(bytes, offset, mip.bytes);
+              offset += mip.bytes;
+              return { data, width: mip.width, height: mip.height };
+            });
+            if (offset !== bytes.byteLength || !mips.length)
+              throw new Error("Invalid material fallback mip lengths");
+            texture = new T.DataTexture(mips[0].data, mips[0].width, mips[0].height);
+            texture.mipmaps = mips;
+            texture.generateMipmaps = false;
+            texture.minFilter = mips.length > 1 ? T.LinearMipmapLinearFilter : T.LinearFilter;
+          } else {
+            if (!entry.fallback) throw new Error("Missing native layer fallback");
+            texture = await new T.TextureLoader().loadAsync(assetUrl(directory + entry.fallback));
+          }
+          texture.colorSpace = entry.srgb ? T.SRGBColorSpace : T.NoColorSpace;
+          texture.flipY = false;
+          texture.wrapS = texture.wrapT = T.RepeatWrapping;
+          texture.magFilter = T.LinearFilter;
+          texture.anisotropy = 8;
+          texture.needsUpdate = true;
+          textures.set(key, texture);
+        }),
+      ),
   );
+  const failure = outcomes.find((result) => result.status === "rejected");
+  if (failure?.status === "rejected") {
+    for (const texture of textures.values()) texture.dispose();
+    throw failure.reason;
+  }
   return { materials: manifest.materials, textures };
 }
 
@@ -128,7 +145,15 @@ export function applySourceLayers(
   material: SourceLayerMaterial,
   textures: Map<string, T.Texture>,
 ) {
+  const canonical = new Map<string, string>();
+  const aliases: string[] = [];
   const bind = (name: string, key: string) => {
+    const previous = canonical.get(key);
+    if (previous) {
+      aliases.push(`#define ${name} ${previous}`);
+      return;
+    }
+    canonical.set(key, name);
     const texture = textures.get(key);
     if (!texture) throw new Error(`Native layer texture missing: ${key}`);
     shader.uniforms[name] = { value: texture };
@@ -136,7 +161,10 @@ export function applySourceLayers(
   bind("sourceLayerNormal1", material.normal1);
   bind("sourceLayerNormal2", material.normal2);
   bind("sourceLayerColor2", material.color2);
-  bind("sourceLayerMask", material.mask);
+  if (material.fancy > 0) {
+    if (!material.mask) throw new Error("Native fancy layer blend mask missing");
+    bind("sourceLayerMask", material.mask);
+  }
   for (const [name, values] of Object.entries(material.transforms))
     shader.uniforms["source" + name + "Transform"] = { value: new T.Matrix3().fromArray(values) };
   for (const [name, values] of Object.entries({
@@ -149,13 +177,19 @@ export function applySourceLayers(
     shader.uniforms[name] = { value: new T.Vector3().fromArray(values) };
   shader.uniforms.sourceLayerSoftness = { value: material.softness };
   shader.uniforms.sourceLayerAO = { value: new T.Vector2().fromArray(material.ao) };
-  if (material.detail) {
-    bind("sourceLayerDetail", material.detail.texture);
-    shader.uniforms.sourceLayerDetailScale = {
-      value: new T.Vector2().fromArray(material.detail.scale),
+  if (material.detail2 && !material.detail)
+    throw new Error("Native second detail requires first detail");
+  for (const [suffix, detail] of [
+    ["", material.detail],
+    ["2", material.detail2],
+  ] as const) {
+    if (!detail) continue;
+    bind("sourceLayerDetail" + suffix, detail.texture);
+    shader.uniforms["sourceLayerDetailScale" + suffix] = {
+      value: new T.Vector2().fromArray(detail.scale),
     };
-    shader.uniforms.sourceLayerDetailTintBlend = {
-      value: new T.Vector4().fromArray(material.detail.tintBlend),
+    shader.uniforms["sourceLayerDetailTintBlend" + suffix] = {
+      value: new T.Vector4().fromArray(detail.tintBlend),
     };
   }
   shader.vertexShader =
@@ -171,7 +205,19 @@ export function applySourceLayers(
     uniform vec3 sourceLayerTint1, sourceLayerTint2, sourceLayerBorder, sourceLayerBorderTint, sourceLayerBevel;
     uniform vec2 sourceLayerAO;
     uniform float sourceLayerSoftness;
-    ${material.detail ? "uniform sampler2D sourceLayerDetail; uniform vec2 sourceLayerDetailScale; uniform vec4 sourceLayerDetailTintBlend;" : ""}
+    ${(
+      [
+        ["", material.detail],
+        ["2", material.detail2],
+      ] as const
+    )
+      .map(([suffix, detail]) =>
+        detail
+          ? `uniform sampler2D sourceLayerDetail${suffix}; uniform vec2 sourceLayerDetailScale${suffix}; uniform vec4 sourceLayerDetailTintBlend${suffix};`
+          : "",
+      )
+      .join("\n")}
+    ${aliases.join("\n")}
     float sourceBlendModulation(float weight, float mask, float softness) {
       float lo = max(0.0, mask - softness), hi = min(1.0, mask + softness);
       return smoothstep(lo, max(lo + 1e-6, hi), weight);
@@ -183,8 +229,12 @@ export function applySourceLayers(
     vec2 sourceLayerUV = (sourceLayer1Transform * vec3(vMapUv, 1.0)).xy;
     vec4 sourceLayerColor1 = texture2D(map, sourceLayerUV);
     sourceLayerColor1.rgb *= sourceLayerTint1;
-    vec4 sourceLayerMaskValue = texture2D(sourceLayerMask, (sourceBlendModulateTransform * vec3(sourceLayerUV, 1.0)).xy);
-    float sourceLayerMaskChannel = sourceLayerMaskValue.${material.fancy === 3 ? "a" : "g"};
+    ${
+      material.fancy > 0
+        ? `vec4 sourceLayerMaskValue = texture2D(sourceLayerMask, (sourceBlendModulateTransform * vec3(sourceLayerUV, 1.0)).xy);
+    float sourceLayerMaskChannel = sourceLayerMaskValue.${material.fancy === 3 ? "a" : "g"};`
+        : ""
+    }
     float sourceLayerFactor = ${material.fancy > 0 ? `sourceBlendModulation(vSourceBlend, sourceLayerMaskChannel, ${material.fancy === 1 ? "sourceLayerMaskValue.r" : "sourceLayerSoftness"})` : "vSourceBlend"};
     ${
       material.fancy > 1
@@ -199,7 +249,15 @@ export function applySourceLayers(
     ${
       material.detail
         ? `vec3 sourceDetail = texture2D(sourceLayerDetail, sourceLayerUV * sourceLayerDetailScale).rgb * sourceLayerDetailTintBlend.rgb;
-    sourceLayerColor.rgb *= mix(vec3(1.0), sourceDetail * 2.0, sourceLayerDetailTintBlend.a);`
+    float sourceDetailBlend = sourceLayerDetailTintBlend.a;
+    ${
+      material.detail2
+        ? `vec3 sourceDetailSecond = texture2D(sourceLayerDetail2, sourceLayerUV * sourceLayerDetailScale2).rgb * sourceLayerDetailTintBlend2.rgb;
+    sourceDetail = mix(sourceDetail, sourceDetailSecond, sourceLayerFactor);
+    sourceDetailBlend = mix(sourceDetailBlend, sourceLayerDetailTintBlend2.a, sourceLayerFactor);`
+        : ""
+    }
+    sourceLayerColor.rgb *= mix(vec3(1.0), sourceDetail * 2.0, sourceDetailBlend);`
         : ""
     }
     diffuseColor *= sourceLayerColor;

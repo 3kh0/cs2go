@@ -2,10 +2,19 @@ import * as T from "three";
 import type { MapId } from "@cs2go/protocol";
 import { applySourceLayers, loadSourceMaterialBundle } from "./source-layers";
 import { registerSurfaceTextures } from "./presentation-settings";
-import { applySourceSurface } from "./source-surface";
+import { applySourceSurface, loadSourceSurfaceLookup } from "./source-surface";
 
-export function loadNativeMapLayers(renderer: T.WebGLRenderer, id: MapId) {
-  return loadSourceMaterialBundle(renderer, `/models/maps/${id}-materials/layers/`);
+export async function loadNativeMapLayers(renderer: T.WebGLRenderer, id: MapId) {
+  return loadNativeMapLayerBundle(renderer, `/models/maps/${id}-materials/layers/`);
+}
+
+export async function loadNativeMapLayerBundle(renderer: T.WebGLRenderer, directory: string) {
+  if (directory.endsWith("/source.json")) directory = directory.slice(0, -"source.json".length);
+  const bundle = await loadSourceMaterialBundle(renderer, directory);
+  const lookup = Object.values(bundle.materials).some((material) => material.specularIndirect)
+    ? await loadSourceSurfaceLookup()
+    : undefined;
+  return { ...bundle, lookup };
 }
 
 /** Native TEXCOORD4 is a linear blend-control stream, separate from paint and lightmap UVs. */
@@ -35,8 +44,10 @@ export function applyNativeMapLayers(
       material.normalMap = material.map;
       material.roughnessMap = material.metalnessMap = material.aoMap = null;
       material.metalness = source.metalness;
-      const textures = [source.normal1, source.normal2, source.color2, source.mask];
+      const textures = [source.normal1, source.normal2, source.color2];
+      if (source.fancy > 0 && source.mask) textures.push(source.mask);
       if (source.detail) textures.push(source.detail.texture);
+      if (source.detail2) textures.push(source.detail2.texture);
       registerSurfaceTextures(
         material,
         textures.map((key) => {
@@ -50,12 +61,19 @@ export function applyNativeMapLayers(
       material.onBeforeCompile = (shader, renderer) => {
         compile(shader, renderer);
         applySourceLayers(shader, source, bundle.textures);
-        // The shipped Mirage layered materials omit both specular features.
-        // Match the native diffuse BRDF instead of introducing glTF highlights.
-        applySourceSurface(shader, { directSpecular: false, indirectSpecular: false });
+        // Preserve each source material's feature flags; historical Mirage
+        // manifests omit direct specular and explicitly disable indirect specular.
+        applySourceSurface(
+          shader,
+          {
+            directSpecular: source.specularDirect ?? false,
+            indirectSpecular: source.specularIndirect,
+          },
+          bundle.lookup,
+        );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-map-layers-${source.fancy}-${!!source.detail}-${source.specularIndirect}`;
+        `${key}:native-map-layers-${source.fancy}-${!!source.detail}-${!!source.detail2}-${source.specularIndirect}-${source.specularDirect ?? false}-${JSON.stringify([source.normal1, source.normal2, source.color2, source.mask, source.detail?.texture, source.detail2?.texture])}`;
       material.needsUpdate = true;
     }
   });
