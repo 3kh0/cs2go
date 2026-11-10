@@ -1,6 +1,11 @@
 import { expect, test } from "vitest";
 import * as T from "three";
-import { prepareShadersBounded, finishPreparedPrograms } from "./shader-preparation";
+import {
+  prepareShadersBounded,
+  finishPreparedPrograms,
+  preparedTextures,
+  prepareTexturesBounded,
+} from "./shader-preparation";
 function fixture() {
   const scene = new T.Scene(),
     parent = new T.Group();
@@ -213,4 +218,46 @@ test("deferred, duplicate and async scopes fail closed", async () => {
     ).rejects.toThrow("scope");
     expect(f.state().scoped).toBe(false);
   }
+});
+
+test("warms native compiled sampler bindings while leaving framebuffer attachments owned by their targets", async () => {
+  const direct = new T.Texture(),
+    native = new T.Texture(),
+    array = new T.Texture();
+  const target = new T.WebGLRenderTarget(1, 1);
+  const material = new T.MeshStandardMaterial({ map: direct });
+  const scene = new T.Scene();
+  scene.add(new T.Mesh(new T.BoxGeometry(), material));
+  const renderer = {
+    properties: {
+      get: () => ({
+        uniforms: {
+          native: { value: native },
+          nested: { value: [{ map: array }, native, target.texture, new T.DepthTexture(1, 1)] },
+        },
+      }),
+    },
+    getContext: () => ({ isContextLost: () => false }),
+    domElement: new EventTarget(),
+    initTexture: (texture: T.Texture) => uploaded.push(texture),
+  } as unknown as T.WebGLRenderer;
+  const uploaded: T.Texture[] = [];
+  await prepareTexturesBounded(renderer, preparedTextures(renderer, [scene]));
+  expect(uploaded).toEqual([direct, native, array]);
+  target.dispose();
+});
+test("texture upload batches yield to input and stop after cancellation", async () => {
+  const signal = new AbortController();
+  const uploaded: T.Texture[] = [];
+  const textures = Array.from({ length: 32 }, () => new T.Texture());
+  const renderer = {
+    getContext: () => ({ isContextLost: () => false }),
+    domElement: new EventTarget(),
+    initTexture: (texture: T.Texture) => uploaded.push(texture),
+  } as unknown as T.WebGLRenderer;
+  const pending = prepareTexturesBounded(renderer, textures, signal.signal);
+  signal.abort(new Error("cancel upload"));
+  await expect(pending).rejects.toThrow("cancel upload");
+  expect(uploaded.length).toBeGreaterThan(0);
+  expect(uploaded.length).toBeLessThan(textures.length);
 });

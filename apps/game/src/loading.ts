@@ -28,7 +28,7 @@ export function reportLoadingAsset(path: string) {
 let workListener: ((completed: number, total: number) => void) | undefined;
 let workCompleted = 0;
 let workTotal = 0;
-export type PreparationKind = "resources" | "graphics";
+export type PreparationKind = "resources" | "graphics" | "textures" | "processing";
 type PreparationWatcher = {
   counts: Record<PreparationKind, { completed: number; total: number }>;
   notify(kind: PreparationKind, completed: number, total: number): void;
@@ -38,7 +38,12 @@ let preparationWatcher: PreparationWatcher | undefined;
 /** Each subscription owns its counters; abandoned jobs cannot update a retry. */
 export function watchPreparationWork(notify: PreparationWatcher["notify"]) {
   const watcher = (preparationWatcher = {
-    counts: { resources: { completed: 0, total: 0 }, graphics: { completed: 0, total: 0 } },
+    counts: {
+      resources: { completed: 0, total: 0 },
+      graphics: { completed: 0, total: 0 },
+      textures: { completed: 0, total: 0 },
+      processing: { completed: 0, total: 0 },
+    },
     notify,
   });
   return () => {
@@ -103,4 +108,28 @@ export function createLoadQueue(limit: number | (() => number)) {
       pump();
     }
   };
+}
+
+export function finishPreparationSteps<Result>(steps: Generator<void, Result>) {
+  let step = steps.next();
+  while (!step.done) step = steps.next();
+  return step.value;
+}
+/** Bound CPU preparation without copying map/geometry buffers to another owner. */
+export async function runPreparationSteps<Result>(steps: Generator<void, Result>) {
+  const finish = beginLoadingWork("processing");
+  let slice = performance.now();
+  try {
+    let step = steps.next();
+    while (!step.done) {
+      if (performance.now() - slice >= 8) {
+        await yieldLoadingWork();
+        slice = performance.now();
+      }
+      step = steps.next();
+    }
+    return step.value;
+  } finally {
+    finish();
+  }
 }

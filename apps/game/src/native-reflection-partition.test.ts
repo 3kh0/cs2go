@@ -1,6 +1,10 @@
+import { runPreparationSteps } from "./loading";
 import { expect, test } from "vitest";
 import * as T from "three";
-import { partitionNativeReflections } from "./native-reflection-partition";
+import {
+  partitionNativeReflections,
+  partitionNativeReflectionSteps,
+} from "./native-reflection-partition";
 import type { SourceReflections } from "./source-reflections";
 
 function reflections(count: number, overlapping = false) {
@@ -124,4 +128,27 @@ test("transparent triangles preserve their authored blending order across reflec
     [1],
     [0],
   ]);
+});
+
+test("spatial lookup preserves transformed indexed triangle coverage and cooperatively yields", async () => {
+  const positions = Array.from({ length: 400 }, (_, i) => {
+    const x = (i % 96) * 2;
+    return [x, 0, 0, x + 1, 0, 0, x, 0.5, 0];
+  }).flat();
+  const object = mesh(positions);
+  object.geometry.setIndex(Array.from({ length: positions.length / 3 }, (_, i) => i));
+  object.position.x = 2;
+  object.updateMatrixWorld(true);
+  const data = reflections(100);
+  const generator = partitionNativeReflectionSteps(object, data);
+  expect(generator.next().done).toBe(false);
+  const result = await runPreparationSteps(generator);
+  const synchronous = partitionNativeReflections(object, data);
+  expect(result.original.groups).toEqual(synchronous.original.groups);
+  for (const group of result.original.groups) {
+    for (const index of group.indices) {
+      const x = object.geometry.getAttribute("position").getX(index);
+      expect(group.candidates).toContain(Math.floor((x + 2) / 2));
+    }
+  }
 });

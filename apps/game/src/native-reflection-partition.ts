@@ -1,4 +1,5 @@
 import * as T from "three";
+import { finishPreparationSteps } from "./loading";
 import type { SourceReflections } from "./source-reflections";
 
 interface Group {
@@ -16,6 +17,13 @@ interface Vertex {
  * the original attribute buffers; large triangles are bisected with exact
  * linear interpolation of every attribute, including atlas UVs and controls. */
 export function partitionNativeReflections(
+  ...args: Parameters<typeof partitionNativeReflectionSteps>
+) {
+  return finishPreparationSteps(partitionNativeReflectionSteps(...args));
+}
+
+// The same generator serves synchronous callers and cooperative map loading.
+export function* partitionNativeReflectionSteps(
   mesh: T.Mesh,
   data: Pick<SourceReflections, "volumes">,
   capacity = 8,
@@ -42,8 +50,9 @@ export function partitionNativeReflections(
   const box = new T.Box3();
   const candidates = (a: Vertex, b: Vertex, c: Vertex, possible: number[]) => {
     triangle.set(a.world, b.world, c.world);
-    box.setFromPoints([a.world, b.world, c.world]);
-    return possible.filter(
+    box.makeEmpty().expandByPoint(a.world).expandByPoint(b.world).expandByPoint(c.world);
+    const nearby = lookup && possible === broadCandidates ? queryVolumes(lookup, box) : possible;
+    return nearby.filter(
       (index) => boxes[index].intersectsBox(box) && boxes[index].intersectsTriangle(triangle),
     );
   };
@@ -148,19 +157,23 @@ export function partitionNativeReflections(
     : [{ start: 0, count: index?.count ?? position.count, materialIndex: 0 }];
   const all = boxes.map((_, index) => index);
   const meshBounds = new T.Box3().setFromObject(mesh);
-  const possible = all.filter((index) => boxes[index].intersectsBox(meshBounds));
+  const broadCandidates = all.filter((index) => boxes[index].intersectsBox(meshBounds));
+  const lookup = broadCandidates.length > 32 ? volumeTree(boxes, broadCandidates) : undefined;
+  const vertices: Vertex[] = Array.from({ length: 3 }, () => ({
+    index: 0,
+    world: new T.Vector3(),
+  }));
+  let processed = 0;
   for (const group of sourceGroups) {
     for (let offset = group.start; offset < group.start + group.count; offset += 3) {
-      const vertices = [0, 1, 2].map((i) => {
-        const vertex = index ? index.getX(offset + i) : offset + i;
-        return {
-          index: vertex,
-          world: new T.Vector3()
-            .fromBufferAttribute(position, vertex)
-            .applyMatrix4(mesh.matrixWorld),
-        };
-      });
-      emit(vertices[0], vertices[1], vertices[2], group.materialIndex ?? 0, possible, 0);
+      for (let i = 0; i < 3; i++) {
+        const vertex = vertices[i];
+        vertex.index = index ? index.getX(offset + i) : offset + i;
+        vertex.values = undefined;
+        vertex.world.fromBufferAttribute(position, vertex.index).applyMatrix4(mesh.matrixWorld);
+      }
+      emit(vertices[0], vertices[1], vertices[2], group.materialIndex ?? 0, broadCandidates, 0);
+      if (++processed % 256 === 0) yield;
     }
   }
   const build = (target: T.BufferGeometry, list: Group[]) => {
@@ -190,4 +203,43 @@ export function partitionNativeReflections(
     overflow = build(target, clippedGroups);
   }
   return { original, overflow, extraVertices };
+}
+
+interface VolumeNode {
+  bounds: T.Box3;
+  indices?: number[];
+  left?: VolumeNode;
+  right?: VolumeNode;
+}
+function volumeTree(boxes: T.Box3[], indices: number[]): VolumeNode {
+  const bounds = new T.Box3();
+  for (const index of indices) bounds.union(boxes[index]);
+  if (indices.length <= 8) return { bounds, indices };
+  const size = bounds.getSize(new T.Vector3());
+  const axis = size.x >= size.y && size.x >= size.z ? "x" : size.y >= size.z ? "y" : "z";
+  const sorted = indices
+    .slice()
+    .sort(
+      (a, b) => boxes[a].min[axis] + boxes[a].max[axis] - boxes[b].min[axis] - boxes[b].max[axis],
+    );
+  const middle = sorted.length >> 1;
+  return {
+    bounds,
+    left: volumeTree(boxes, sorted.slice(0, middle)),
+    right: volumeTree(boxes, sorted.slice(middle)),
+  };
+}
+function queryVolumes(root: VolumeNode, box: T.Box3) {
+  const indices: number[] = [];
+  const visit = (node: VolumeNode) => {
+    if (!node.bounds.intersectsBox(box)) return;
+    if (node.indices) indices.push(...node.indices);
+    else {
+      visit(node.left!);
+      visit(node.right!);
+    }
+  };
+  visit(root);
+  // Preserve authored candidate/priority order exactly.
+  return indices.sort((a, b) => a - b);
 }

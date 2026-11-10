@@ -1,3 +1,4 @@
+import { prepareShadersBounded, prepareTexturesBounded } from "./shader-preparation";
 import { nativeMapSamplerReservation } from "./native-map-sampler-budget";
 import * as T from "three";
 import { loadNativeMapComplex, applyNativeMapComplex } from "./native-map-complex";
@@ -14,7 +15,7 @@ import { excludeNativeToolsMaterials } from "./native-tools-materials";
 import { nativeSkyFrame, type NativeSkyPlacement } from "./native-sky-frame";
 import { createEnvironmentWorldFrame } from "./native-environment-frame";
 import { loadSourceReflections } from "./source-reflections";
-import { applyNativeMapReflections } from "./native-map-reflections";
+import { prepareNativeMapReflections } from "./native-map-reflections";
 import { nativeSkyPanorama, type NativeSkyPanorama } from "./native-sky-environment";
 import { loadNativeMapProbes, applyNativeMapProbes } from "./native-map-probes";
 import { loadNativeMapEnvironment, applyNativeMapEnvironment } from "./native-map-environment";
@@ -330,7 +331,7 @@ async function buildNativeMapSky(
   applyNativeMapLighting(asset.scene, lighting, frame.scale);
   if (probes) applyNativeMapProbes(asset.scene, probes);
   if (reflections)
-    applyNativeMapReflections(asset.scene, reflections, [], [], {
+    await prepareNativeMapReflections(asset.scene, reflections, [], [], {
       worldToNative: frame.skyBrowserFromWorld,
       instances: nativeClutter?.instances,
     });
@@ -540,42 +541,49 @@ async function buildNativeMapSky(
   resources.capture(scene);
   resources.capture(overlay);
   resources.capture(background);
-  registerSourceSkyPreparation(background, async () => {
+  registerSourceSkyPreparation(background, async (signal) => {
     if (disposed) return;
-    const destination = renderer.getRenderTarget(),
-      toneMapping = renderer.toneMapping;
-    let worldPrograms: Promise<unknown>, effectPrograms: Promise<unknown>;
-    let foliagePrograms: Promise<unknown> | undefined;
-    try {
-      renderer.setRenderTarget(target);
-      renderer.toneMapping = T.NoToneMapping;
-      worldPrograms = renderer.compileAsync(scene, skyCamera);
-      effectPrograms = renderer.compileAsync(overlay, skyCamera);
-      foliagePrograms = nativeCoverage?.prepare(skyCamera);
-    } finally {
-      renderer.setRenderTarget(destination);
-      renderer.toneMapping = toneMapping;
-    }
-    await Promise.all([worldPrograms, effectPrograms, foliagePrograms]);
+    const scope = (work: () => void) => {
+      const destination = renderer.getRenderTarget(),
+        tone = renderer.toneMapping;
+      try {
+        renderer.setRenderTarget(target);
+        renderer.toneMapping = T.NoToneMapping;
+        work();
+      } finally {
+        renderer.setRenderTarget(destination);
+        renderer.toneMapping = tone;
+      }
+    };
+    await prepareShadersBounded(renderer, [scene], skyCamera, scene, { signal, scope });
+    await prepareShadersBounded(renderer, [overlay], skyCamera, overlay, { signal, scope });
+    let foliage: Promise<unknown> | undefined;
+    scope(() => {
+      foliage = nativeCoverage?.prepare(skyCamera);
+    });
+    await foliage;
     if (disposed) return;
-    for (const texture of [
-      gradient,
-      lighting.irradiance,
-      lighting.shadows,
-      lighting.directional,
-      ...textures.values(),
-      ...(probes?.textures ?? []),
-      ...(reflections?.textures ?? []),
-      ...(environment?.warmTextures ?? []),
-      ...(complex?.textures.values() ?? []),
-      ...(specialComplex?.textures.values() ?? []),
-      ...(legacy?.textures.values() ?? []),
-      ...(glass?.textures.values() ?? []),
-      ...(layers?.textures.values() ?? []),
-      ...(parallax?.textures.values() ?? []),
-      ...(parallax?.cubes.values() ?? []),
-    ])
-      if (texture) renderer.initTexture(texture);
+    await prepareTexturesBounded(
+      renderer,
+      [
+        gradient,
+        lighting.irradiance,
+        lighting.shadows,
+        lighting.directional,
+        ...textures.values(),
+        ...(probes?.textures ?? []),
+        ...(reflections?.textures ?? []),
+        ...(environment?.warmTextures ?? []),
+        ...(complex?.textures.values() ?? []),
+        ...(specialComplex?.textures.values() ?? []),
+        ...(legacy?.textures.values() ?? []),
+        ...(glass?.textures.values() ?? []),
+        ...(layers?.textures.values() ?? []),
+        ...(parallax?.textures.values() ?? []),
+        ...(parallax?.cubes.values() ?? []),
+      ].filter((texture): texture is T.Texture => !!texture),
+      signal,
+    );
   });
   return {
     background,

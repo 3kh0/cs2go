@@ -1,3 +1,4 @@
+import { finishPreparationSteps, runPreparationSteps } from "./loading";
 import { createSourceReflectionField } from "./source-reflection-field";
 import {
   assertNativeInstanceReflectionCoverage,
@@ -12,12 +13,18 @@ import {
   sourceReflectionCandidates,
   type SourceReflections,
 } from "./source-reflections";
-import { partitionNativeReflections } from "./native-reflection-partition";
+import { partitionNativeReflectionSteps } from "./native-reflection-partition";
 
 /** Map-owned static bindings use the same bounded native box projection as
  * actors. Geometry bounds select candidates once while each fragment retains
  * native priority/edge weighting and affine projection. */
-export function applyNativeMapReflections(
+export function applyNativeMapReflections(...args: Parameters<typeof nativeMapReflectionSteps>) {
+  return finishPreparationSteps(nativeMapReflectionSteps(...args));
+}
+export function prepareNativeMapReflections(...args: Parameters<typeof nativeMapReflectionSteps>) {
+  return runPreparationSteps(nativeMapReflectionSteps(...args));
+}
+function* nativeMapReflectionSteps(
   root: T.Object3D,
   data: SourceReflections,
   doors: readonly NativeDoorDefinition[] = [],
@@ -62,6 +69,7 @@ export function applyNativeMapReflections(
     indexBytesBefore: 0,
   };
   for (const object of meshes) {
+    yield;
     const sourceMaterials = Array.isArray(object.material) ? object.material : [object.material];
     if (sourceMaterials.every((material) => !(material instanceof T.MeshStandardMaterial)))
       continue;
@@ -208,7 +216,7 @@ export function applyNativeMapReflections(
       continue;
     }
     stats.indexBytesBefore += object.geometry.index?.array.byteLength ?? 0;
-    const partition = partitionNativeReflections(object, data);
+    const partition = yield* partitionNativeReflectionSteps(object, data);
     object.geometry = partition.original.geometry;
     object.material = partition.original.groups.map((group) =>
       adapt(sourceMaterials[group.material], group.candidates),

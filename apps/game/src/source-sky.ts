@@ -3,13 +3,16 @@ import { fetchGzipped } from "./gltf";
 import { setSourceFogSky } from "./source-fog";
 import { sourceSkyLayer } from "./source-sky-layer";
 
-const skyPreparation = new WeakMap<T.Object3D, () => Promise<void>>();
-export function registerSourceSkyPreparation(sky: T.Object3D, prepare: () => Promise<void>) {
+const skyPreparation = new WeakMap<T.Object3D, (signal?: AbortSignal) => Promise<void>>();
+export function registerSourceSkyPreparation(
+  sky: T.Object3D,
+  prepare: (signal?: AbortSignal) => Promise<void>,
+) {
   skyPreparation.set(sky, prepare);
 }
 export async function warmSourceSky(sky?: T.Object3D, signal?: AbortSignal) {
   signal?.throwIfAborted();
-  const prepared = sky ? skyPreparation.get(sky)?.() : undefined;
+  const prepared = sky ? skyPreparation.get(sky)?.(signal) : undefined;
   if (!prepared) return;
   if (!signal) return prepared;
   let aborted: () => void = () => {};

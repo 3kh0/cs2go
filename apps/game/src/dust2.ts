@@ -46,7 +46,7 @@ import type { RadarOverview } from "./radar-overview";
 import { bindDoorPhysics, DoorWorld, type NativeDoorManifest } from "@cs2go/simulation/doors";
 import { NativeMapDoorView } from "./map-door-view";
 import { loadNativeMapEffects } from "./native-map-effects";
-import { applyNativeMapReflections } from "./native-map-reflections";
+import { prepareNativeMapReflections } from "./native-map-reflections";
 import { loadNativeMapWater, applyNativeMapWater } from "./native-map-water";
 import { loadNativeMapComplex, applyNativeMapComplex } from "./native-map-complex";
 import { loadNativeMapFog, applyNativeMapFog } from "./native-map-fog";
@@ -556,7 +556,7 @@ async function buildNativeMap(
   if (nativeLighting) applyNativeMapLighting(asset.scene, nativeLighting);
   if (nativeProbes) applyNativeMapProbes(asset.scene, nativeProbes);
   if (nativeReflections?.volumes.some((volume) => volume.worldToLocal))
-    applyNativeMapReflections(
+    await prepareNativeMapReflections(
       asset.scene,
       nativeReflections,
       doorData.doors,

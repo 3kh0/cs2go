@@ -1,4 +1,9 @@
-import { prepareShadersBounded, finishPreparedPrograms } from "./shader-preparation";
+import {
+  prepareShadersBounded,
+  finishPreparedPrograms,
+  preparedTextures,
+  prepareTexturesBounded,
+} from "./shader-preparation";
 import { groundSpawn } from "@cs2go/simulation/spawn-position";
 import { sourceVerticalFov, sourceZoomRatio } from "./source-camera";
 import { MapHazards, BombReset, supportedBombPosition } from "@cs2go/simulation/map-hazards";
@@ -1594,33 +1599,13 @@ export class Game {
     );
     for (const uniform of Object.values(warmTracer.material.uniforms))
       if (uniform.value instanceof T.Texture) textures.add(uniform.value);
-    const collectTextures = (roots: T.Object3D[]) => {
-      for (const root of roots)
-        root.traverseVisible((object) => {
-          if (!(object instanceof T.Mesh)) return;
-          for (const material of Array.isArray(object.material)
-            ? object.material
-            : [object.material])
-            for (const value of Object.values(material))
-              if (value instanceof T.Texture) textures.add(value);
-        });
-    };
     scoped(true, () => {
-      collectTextures([this.scene, this.view]);
-      if (this.scene.visible) collectTextures(worldExtras);
-      if (this.view.visible) collectTextures(viewExtras);
+      const roots: T.Object3D[] = [this.scene, this.view];
+      if (this.scene.visible) roots.push(...worldExtras);
+      if (this.view.visible) roots.push(...viewExtras);
+      for (const texture of preparedTextures(this.renderer, roots)) textures.add(texture);
     });
-    // Yield between uploads so input/painting can run during GPU warm-up.
-    let uploaded = 0;
-    let uploadSlice = performance.now();
-    for (const texture of textures) {
-      guardWorld();
-      this.renderer.initTexture(texture);
-      if (++uploaded % 8 === 0 || performance.now() - uploadSlice >= 8) {
-        await new Promise((resolve) => setTimeout(resolve, 0));
-        uploadSlice = performance.now();
-      }
-    }
+    await prepareTexturesBounded(this.renderer, textures, signal);
     guardWorld();
     await foliage;
     guardWorld();
@@ -1630,7 +1615,7 @@ export class Game {
     guardWorld();
     let effects: Promise<void> | undefined;
     this.prepareMapFrame(() => {
-      effects = preparedWorld.nativeEffects?.prepare(this.camera);
+      effects = preparedWorld.nativeEffects?.prepare(this.camera, signal);
     });
     await effects;
     guardWorld();

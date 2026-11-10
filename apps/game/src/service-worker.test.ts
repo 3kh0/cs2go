@@ -1,4 +1,4 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 
@@ -181,5 +181,65 @@ it.each(["", "https://cdn.test"])(
       expect(await request(`${base}/releases/old/model.bin`)).toBeUndefined();
       expect(await request(`${base}/objects/older-model.bin`)).toBeUndefined();
     }
+  },
+);
+
+it.each([
+  [64 * 1024, 6],
+  [16 * 1024 * 1024, 2],
+  [0, 2],
+])(
+  "overlaps small downloads without increasing large/unknown cache fill pressure (%s bytes)",
+  async (size, admitted) => {
+    const origin = "https://game.test";
+    const paths = Array.from({ length: 8 }, (_, i) => `/models/${i}.bin`);
+    const handlers = new Map<string, (event: unknown) => void>();
+    const pending: { resolve(response: Response): void }[] = [];
+    let started = 0;
+    runInNewContext(readFileSync("../../scripts/service-worker.js", "utf8"), {
+      ASSET_REVISIONS: Object.fromEntries(paths.map((path) => [path, "unverified"])),
+      ASSET_SIZES: Object.fromEntries(paths.map((path) => [path, size])),
+      BUILD_ID: "test",
+      SHELL_URLS: [],
+      self: {
+        location: { origin },
+        addEventListener: (name: string, handler: (event: unknown) => void) =>
+          handlers.set(name, handler),
+      },
+      // Storage denial must release admission and keep the network working.
+      caches: { open: () => Promise.reject(new Error("storage denied")) },
+      URL,
+      Request,
+      Response,
+      Headers,
+      Uint8Array,
+      crypto,
+      fetch: () => {
+        started++;
+        return new Promise<Response>((resolve) => pending.push({ resolve }));
+      },
+    });
+    const responses: Promise<string>[] = [],
+      writes: Promise<unknown>[] = [];
+    for (const path of paths)
+      handlers.get("fetch")!({
+        request: new Request(origin + path),
+        respondWith(response: Promise<Response>) {
+          responses.push(response.then((result) => result.text()));
+        },
+        waitUntil(work: Promise<unknown>) {
+          writes.push(work);
+        },
+      });
+    await vi.waitFor(() => expect(started).toBe(admitted));
+    // Finish one admitted response at a time. Queued work must keep advancing
+    // even when cache population fails, while the remaining fills stay occupied.
+    for (let index = 0; index < paths.length; index++) {
+      await vi.waitFor(() => expect(pending.length).toBeGreaterThan(0));
+      pending.shift()!.resolve(new Response("payload"));
+    }
+    expect(await Promise.all(responses)).toEqual(paths.map(() => "payload"));
+    await Promise.all(writes);
+    expect(started).toBe(paths.length);
   },
 );

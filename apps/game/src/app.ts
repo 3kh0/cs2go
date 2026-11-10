@@ -253,7 +253,8 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
   }
   const map = replayTeam === undefined ? selectedMap : game.mapId;
   const loader = openMatchLoading(mode, map);
-  game.soundscape.playMusic("loading");
+  // Team selection and round-start cues begin only after preparation succeeds.
+  game.soundscape.playMusic(null);
   let selector: ReturnType<typeof prepareTeamSelector> | undefined;
   game.matchLoading = true;
   const enter = (team: "t" | "ct") => {

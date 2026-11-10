@@ -1,3 +1,4 @@
+import { prepareTexturesBounded } from "./shader-preparation";
 import * as T from "three";
 import { registerSceneDepthMaterial } from "./smoke-renderer";
 import { assetFetch, assetUrl } from "./asset-url";
@@ -163,9 +164,9 @@ export function bindNativeMapEffects(
     update(seconds: number) {
       if (Number.isFinite(seconds)) time.value = seconds;
     },
-    async prepare(camera: T.Camera) {
+    async prepare(camera: T.Camera, signal?: AbortSignal) {
       await renderer.compileAsync(root, camera);
-      for (const texture of textures.values()) renderer.initTexture(texture);
+      await prepareTexturesBounded(renderer, textures.values(), signal);
     },
   };
 }

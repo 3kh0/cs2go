@@ -19,15 +19,33 @@ const networkUrl = (path) => assetUrls[path] || path;
 // Wait before fetching instead of retaining response clones behind disk writes.
 // Waiting requests hold metadata only; every asset remains eligible offline.
 const fillWaiters = [];
+const fillBudget = 32 * 1024 * 1024;
+const largeFill = fillBudget / 2;
 let activeFills = 0;
-async function acquireFill() {
-  if (activeFills >= 2) await new Promise((resolve) => fillWaiters.push(resolve));
-  else activeFills++;
-  return () => {
-    const next = fillWaiters.shift();
-    if (next) next();
-    else activeFills--;
-  };
+let activeWeight = 0;
+function pumpFills() {
+  while (fillWaiters.length && activeFills < 6) {
+    const { weight, resolve } = fillWaiters[0];
+    if (activeWeight + weight > fillBudget) break;
+    fillWaiters.shift();
+    activeFills++;
+    activeWeight += weight;
+    let released = false;
+    resolve(() => {
+      if (released) return;
+      released = true;
+      activeFills--;
+      activeWeight -= weight;
+      pumpFills();
+    });
+  }
+}
+function acquireFill(path) {
+  const weight = Math.min(largeFill, Math.max(64 * 1024, sizeFor(path) || largeFill));
+  return new Promise((resolve) => {
+    fillWaiters.push({ weight, resolve });
+    pumpFills();
+  });
 }
 let writes = Promise.resolve();
 let inventory;
@@ -218,7 +236,7 @@ self.addEventListener("fetch", (event) => {
     } catch {
       /* Cache API can be unavailable even when workers are enabled. */
     }
-    releaseFill = await acquireFill();
+    releaseFill = await acquireFill(path);
     try {
       // Another request may have filled this revision while admission waited.
       try {

@@ -47,7 +47,12 @@ export function openMatchLoading(
     updateFrame = requestAnimationFrame(() => {
       updateFrame = 0;
       if (closed || failed || ready || controller.signal.aborted) return;
-      const label = kind === "graphics" ? "Preparing graphics" : "Loading resources";
+      const label = {
+        resources: "Loading resources",
+        graphics: "Preparing graphics",
+        textures: "Uploading textures",
+        processing: "Preparing map data",
+      }[kind];
       status.textContent = `${label} · ${completed} / ${total}`;
       progress.setAttribute("aria-label", label);
       progress.max = total;

@@ -159,3 +159,52 @@ export async function prepareShadersBounded(
     await pause(renderer, 0, signal);
   }
 }
+
+/** Include compiled onBeforeCompile bindings, not just ordinary material maps. */
+export function preparedTextures(renderer: T.WebGLRenderer, roots: readonly T.Object3D[]) {
+  const textures = new Set<T.Texture>();
+  const seen = new WeakSet<object>();
+  const collect = (value: unknown) => {
+    if (!value || typeof value !== "object" || seen.has(value)) return;
+    seen.add(value);
+    if (value instanceof T.Texture) {
+      // Framebuffer-owned attachments must be allocated with their render target.
+      if (!value.isRenderTargetTexture && !(value instanceof T.DepthTexture)) textures.add(value);
+    } else if (!ArrayBuffer.isView(value)) {
+      for (const child of Object.values(value)) collect(child);
+    }
+  };
+  for (const root of roots)
+    root.traverseVisible((object) => {
+      const mesh = object as T.Mesh;
+      if (!mesh.material) return;
+      for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
+        for (const value of Object.values(material)) if (value instanceof T.Texture) collect(value);
+        collect((material as T.ShaderMaterial).uniforms);
+        collect((renderer.properties.get(material) as { uniforms?: unknown }).uniforms);
+      }
+    });
+  return textures;
+}
+export async function prepareTexturesBounded(
+  renderer: T.WebGLRenderer,
+  textures: Iterable<T.Texture>,
+  signal?: AbortSignal,
+) {
+  guard(renderer, signal);
+  const pending = [...new Set(textures)].filter(
+    (texture) => !texture.isRenderTargetTexture && !(texture instanceof T.DepthTexture),
+  );
+  const completed = pending.map(() => beginLoadingWork("textures"));
+  let slice = performance.now();
+  for (let index = 0; index < pending.length; index++) {
+    guard(renderer, signal);
+    renderer.initTexture(pending[index]);
+    completed[index]();
+    if ((index + 1) % 8 === 0 || performance.now() - slice >= 8) {
+      await pause(renderer, 0, signal);
+      slice = performance.now();
+    }
+  }
+  guard(renderer, signal);
+}
