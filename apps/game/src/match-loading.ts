@@ -1,5 +1,7 @@
 import { MAPS, type MapId } from "@cs2go/protocol";
 import type { Game } from "./game";
+import { assetUrl } from "./asset-url";
+import { watchPreparationWork } from "./loading";
 export function openMatchLoading(
   mode: Parameters<Game["start"]>[0] = "casual",
   map: MapId = "dust2",
@@ -22,12 +24,12 @@ export function openMatchLoading(
   const controller = new AbortController();
   overlay.id = "match-loading";
   overlay.dataset.map = map;
-  overlay.style.setProperty("--map-art", `url(/ui/home/${map}.webp)`);
+  overlay.style.setProperty("--map-art", `url("${assetUrl(`/ui/home/${map}.webp`)}")`);
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-labelledby", "match-loading-title");
   overlay.setAttribute("aria-busy", "true");
-  overlay.innerHTML = `<div class="match-loading-scenery"><span>${name}</span></div><aside class="match-loading-panel"><div class="match-loading-content"><img class="map-badge" src="/ui/home/${map}-emblem.svg" alt=""><span class="match-loading-map">${name}</span><h1 id="match-loading-title">${title}</h1></div><div class="match-loading-brief">${briefing}</div><footer class="match-loading-footer"><div class="match-loading-progress"><p role="status" aria-live="polite">Preparing ${name}...</p><progress max="3" value="0" aria-label="Match preparation"></progress></div><button class="text-button" type="button">CANCEL · ESC</button></footer></aside>`;
+  overlay.innerHTML = `<div class="match-loading-scenery"><span>${name}</span></div><aside class="match-loading-panel"><div class="match-loading-content"><img class="map-badge" src="${assetUrl(`/ui/home/${map}-emblem.svg`)}" alt=""><span class="match-loading-map">${name}</span><h1 id="match-loading-title">${title}</h1></div><div class="match-loading-brief">${briefing}</div><footer class="match-loading-footer"><div class="match-loading-progress"><p role="status" aria-live="polite">Preparing ${name}...</p><progress aria-label="Match preparation"></progress></div><button class="text-button" type="button">CANCEL · ESC</button></footer></aside>`;
   const status = overlay.querySelector<HTMLElement>('[role="status"]')!;
   const progress = overlay.querySelector("progress")!;
   const button = overlay.querySelector("button")!;
@@ -37,6 +39,27 @@ export function openMatchLoading(
   let closed = false,
     hadLock = false,
     failed = false;
+  let updateFrame = 0,
+    ready = false;
+  const stopWork = watchPreparationWork((kind, completed, total) => {
+    if (closed || failed || ready || controller.signal.aborted) return;
+    cancelAnimationFrame(updateFrame);
+    updateFrame = requestAnimationFrame(() => {
+      updateFrame = 0;
+      if (closed || failed || ready || controller.signal.aborted) return;
+      const label = kind === "graphics" ? "Preparing graphics" : "Loading resources";
+      status.textContent = `${label} · ${completed} / ${total}`;
+      progress.setAttribute("aria-label", label);
+      progress.max = total;
+      if (completed > 0 && completed < total) progress.value = completed;
+      else progress.removeAttribute("value");
+    });
+  });
+  const stopProgress = () => {
+    stopWork();
+    cancelAnimationFrame(updateFrame);
+    updateFrame = 0;
+  };
   const cancel = () => {
     if (failed) {
       close();
@@ -44,6 +67,7 @@ export function openMatchLoading(
       return;
     }
     if (controller.signal.aborted) return;
+    stopProgress();
     controller.abort();
     status.textContent = "Returning to the menu...";
     button.disabled = true;
@@ -70,6 +94,7 @@ export function openMatchLoading(
   const close = () => {
     if (closed) return;
     closed = true;
+    stopProgress();
     document.removeEventListener("keydown", keydown, true);
     document.removeEventListener("pointerlockchange", pointerlock);
     overlay.remove();
@@ -81,8 +106,14 @@ export function openMatchLoading(
     // the next preparation stage submits CPU/GPU work.
     async stage(label: string, completed: number) {
       controller.signal.throwIfAborted();
+      cancelAnimationFrame(updateFrame);
+      ready = completed === 3;
       status.textContent = label;
-      progress.value = completed;
+      progress.setAttribute("aria-label", "Match preparation");
+      if (ready) {
+        progress.max = 1;
+        progress.value = 1;
+      } else progress.removeAttribute("value");
       await new Promise<void>((resolve) =>
         requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
       );
@@ -91,6 +122,7 @@ export function openMatchLoading(
     close,
     error() {
       failed = true;
+      stopProgress();
       overlay.setAttribute("aria-busy", "false");
       status.textContent = "The match could not be prepared. Return to the menu and try again.";
       button.disabled = false;

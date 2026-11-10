@@ -28,6 +28,23 @@ export function reportLoadingAsset(path: string) {
 let workListener: ((completed: number, total: number) => void) | undefined;
 let workCompleted = 0;
 let workTotal = 0;
+export type PreparationKind = "resources" | "graphics";
+type PreparationWatcher = {
+  counts: Record<PreparationKind, { completed: number; total: number }>;
+  notify(kind: PreparationKind, completed: number, total: number): void;
+};
+let preparationWatcher: PreparationWatcher | undefined;
+
+/** Each subscription owns its counters; abandoned jobs cannot update a retry. */
+export function watchPreparationWork(notify: PreparationWatcher["notify"]) {
+  const watcher = (preparationWatcher = {
+    counts: { resources: { completed: 0, total: 0 }, graphics: { completed: 0, total: 0 } },
+    notify,
+  });
+  return () => {
+    if (preparationWatcher === watcher) preparationWatcher = undefined;
+  };
+}
 
 /** Count queued fetch/decode jobs, including work waiting for a concurrency slot. */
 export function watchLoadingWork(listener: (completed: number, total: number) => void) {
@@ -37,15 +54,24 @@ export function watchLoadingWork(listener: (completed: number, total: number) =>
     if (workListener === listener) workListener = undefined;
   };
 }
-export function beginLoadingWork() {
+export function beginLoadingWork(kind: PreparationKind = "resources") {
   const listener = workListener;
-  if (!listener) return () => {};
-  listener(workCompleted, ++workTotal);
+  const watcher = preparationWatcher;
+  if (!listener && !watcher) return () => {};
+  listener?.(workCompleted, ++workTotal);
+  if (watcher) {
+    const count = watcher.counts[kind];
+    watcher.notify(kind, count.completed, ++count.total);
+  }
   let finished = false;
   return () => {
-    if (finished || workListener !== listener) return;
+    if (finished) return;
     finished = true;
-    listener(++workCompleted, workTotal);
+    if (listener && workListener === listener) listener(++workCompleted, workTotal);
+    if (watcher && preparationWatcher === watcher) {
+      const count = watcher.counts[kind];
+      watcher.notify(kind, ++count.completed, count.total);
+    }
   };
 }
 

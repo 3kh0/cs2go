@@ -287,6 +287,7 @@
   background:
     linear-gradient(0deg, #17263425, transparent 60%),
     var(--map-art, url(/ui/home/dust2.webp)) center / cover;
+  background-color: #273039;
 }
 .match-loading-scenery {
   position: absolute;
@@ -311,8 +312,9 @@
   padding: 30px 24px 18px;
   display: flex;
   flex-direction: column;
-  background: #8b969fa8;
-  backdrop-filter: blur(30px);
+  background: #8b969f70;
+  backdrop-filter: blur(24px);
+  text-shadow: 0 1px 3px #0007;
 }
 .match-loading-content {
   display: flex;
@@ -394,6 +396,28 @@
 }
 .match-loading-progress progress::-moz-progress-bar {
   background: #73d4f0;
+}
+.match-loading-progress progress:not([value]) {
+  background: linear-gradient(90deg, #203340 25%, #73d4f0 50%, #203340 75%);
+  background-size: 200% 100%;
+  animation: match-loading-active 1.4s linear infinite;
+}
+.match-loading-progress progress:not([value])::-webkit-progress-bar {
+  background: transparent;
+}
+@keyframes match-loading-active {
+  to {
+    background-position: -200% 0;
+  }
+}
+#match-loading[aria-busy="false"] progress {
+  animation: none;
+  background: #203340;
+}
+@media (prefers-reduced-motion: reduce) {
+  .match-loading-progress progress:not([value]) {
+    animation: none;
+  }
 }
 .match-loading-stages {
   display: flex;

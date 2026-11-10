@@ -1,4 +1,5 @@
 import * as T from "three";
+import { beginLoadingWork } from "./loading";
 
 type Program = T.WebGLProgram & { isReady(): boolean };
 export type PreparationScope = (work: () => void) => void;
@@ -109,6 +110,9 @@ export async function prepareShadersBounded(
         objects.add(object);
     });
   const renderables = [...objects];
+  const completedBatches = Array.from({ length: Math.ceil(renderables.length / batchSize) }, () =>
+    beginLoadingWork("graphics"),
+  );
   // Traversal facade only: children remain empty; no parent/matrix mutations.
   const batch = new T.Group();
   batch.traverseVisible = (visitor) => visitor(batch);
@@ -151,6 +155,7 @@ export async function prepareShadersBounded(
       if (program) pending.add(program);
     }
     await finishPreparedPrograms(renderer, pending, signal);
+    completedBatches[offset / batchSize]();
     await pause(renderer, 0, signal);
   }
 }

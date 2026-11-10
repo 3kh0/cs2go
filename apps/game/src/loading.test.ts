@@ -1,5 +1,35 @@
 import { expect, test } from "vitest";
-import { beginLoadingWork, watchLoadingWork, createLoadQueue } from "./loading";
+import {
+  beginLoadingWork,
+  watchLoadingWork,
+  watchPreparationWork,
+  createLoadQueue,
+} from "./loading";
+
+test("match progress separates graphics and resources and ignores a cancelled load on retry", () => {
+  const events: unknown[] = [];
+  const stop = watchPreparationWork((...event) => events.push(event));
+  const resource = beginLoadingWork();
+  const graphics = beginLoadingWork("graphics");
+  resource();
+  resource();
+  expect(events).toEqual([
+    ["resources", 0, 1],
+    ["graphics", 0, 1],
+    ["resources", 1, 1],
+  ]);
+  stop();
+  const retry: unknown[] = [];
+  const stopRetry = watchPreparationWork((...event) => retry.push(event));
+  graphics();
+  const finish = beginLoadingWork("graphics");
+  finish();
+  expect(retry).toEqual([
+    ["graphics", 0, 1],
+    ["graphics", 1, 1],
+  ]);
+  stopRetry();
+});
 
 test("reducing a load budget drains active jobs before starting more work", async () => {
   let limit = 3;
