@@ -21,7 +21,9 @@ pushes and manually dispatched workflows use it; do not attach pull-request jobs
 
 Actions updates the existing sparse checkout to the exact requested SHA. Checkout
 cleanup stays enabled; compression files live outside the checkout and are linked
-only when verification is needed. No Actions cache archive needs downloading.
+only when verification is needed. No Actions cache archive needs downloading. When a release is incomplete, seeding
+reuses shared R2 payloads only after their size and SHA-256 match the manifest;
+missing payloads are generated locally, followed by source verification.
 After successful sync, cache files no longer used by the current manifest are
 removed. The job requires 20 GiB free before checkout and has a two-hour deadline.
 The systemd service uses Nice=10, CPUQuota=200%, MemoryHigh=6G, MemoryMax=8G and

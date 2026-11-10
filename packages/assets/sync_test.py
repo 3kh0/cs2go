@@ -302,7 +302,7 @@ class PublishTests(unittest.TestCase):
                 publish(bucket, 'test', third, root)
             self.assertNotIn('releases/third/manifest.json', bucket.objects)
 
-    def test_cache_seeding_requires_complete_release_and_verified_wire_bytes(self):
+    def test_cache_seeding_requires_verified_wire_bytes(self):
         for version in (1, 2):
             with self.subTest(version=version), tempfile.TemporaryDirectory() as directory:
                 bucket = Bucket()
@@ -315,7 +315,7 @@ class PublishTests(unittest.TestCase):
                 body = json.dumps(manifest).encode()
                 (root / 'manifest.json').write_bytes(body)
                 seed_cache(bucket, 'test', manifest, root)
-                self.assertFalse((root / '.cache').exists())
+                self.assertEqual((root / '.cache').exists(), version == 2)
                 bucket.objects['releases/seed/manifest.json'] = {'Body': body}
                 key = object_key('same.bin', entry) if version == 2 else 'releases/seed/same.bin'
                 bucket.objects[key] = {'Body': wire}
@@ -330,6 +330,27 @@ class PublishTests(unittest.TestCase):
                 bucket.objects['releases/seed/manifest.json'] = {'Body': b'other manifest'}
                 with self.assertRaises(ValueError):
                     seed_cache(bucket, 'test', manifest, root)
+
+    def test_partial_shared_release_seeds_existing_objects_but_rejects_corruption(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root, bucket = Path(directory), Bucket()
+            wire = b'verified wire'
+            entry = {'sha256': 'a' * 64, 'bytes': 200, 'transport': {
+                'encoding': 'br', 'quality': 11, 'sha256': hashlib.sha256(wire).hexdigest(), 'bytes': len(wire)}}
+            absent = dict(entry, sha256='b' * 64, transport=dict(entry['transport'], sha256='c' * 64))
+            manifest = shared('partial', {'existing.bin': entry, 'absent.bin': absent})
+            (root / 'manifest.json').write_text(json.dumps(manifest))
+            key = object_key('existing.bin', entry)
+            bucket.objects[key] = {'Body': wire}
+            seed_cache(bucket, 'test', manifest, root)
+            target = root / '.cache' / f"{entry['sha256']}.q11.br"
+            self.assertEqual(target.read_bytes(), wire)
+            self.assertFalse((root / '.cache' / f"{absent['sha256']}.q11.br").exists())
+            target.unlink()
+            bucket.objects[key] = {'Body': b'corrupt'}
+            with self.assertRaises(ValueError):
+                seed_cache(bucket, 'test', manifest, root)
+            self.assertFalse(target.exists())
 
     def test_legacy_migration_copies_once_then_only_new_content_is_uploaded(self):
         bucket = Bucket()

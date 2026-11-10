@@ -154,7 +154,7 @@ def verification_receipt(client, bucket, manifest, root, tree):
 
 
 def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
-    """Reuse a complete immutable release's verified wire bytes before CI encoding."""
+    """Reuse verified wire bytes, including shared objects from partial releases."""
     client = RetryingClient(client, pause)
     prefix = f"releases/{manifest['release']}/"
     try:
@@ -162,9 +162,12 @@ def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
     except ClientError as error:
         if not missing(error):
             raise
-        print('Release not published yet; verification will generate compression locally')
-        return
-    if marker != (root / 'manifest.json').read_bytes():
+        if manifest.get('version') != 2:
+            print('Legacy release not published; generating compression locally')
+            return
+        marker = None
+        print('Release not published; checking shared objects before recompressing', flush=True)
+    if marker is not None and marker != (root / 'manifest.json').read_bytes():
         raise ValueError('Published release manifest differs; refusing cache seeding')
     cache = root / '.cache'
     cache.mkdir(exist_ok=True)
@@ -179,19 +182,27 @@ def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
         if target.exists():
             payload = target.read_bytes()
             if len(payload) == wire['bytes'] and hashlib.sha256(payload).hexdigest() == wire['sha256']:
-                return
-        payload = client.get_object(Bucket=bucket, Key=payload_key(manifest, path, entry))['Body'].read()
+                return True
+        try:
+            payload = client.get_object(Bucket=bucket, Key=payload_key(manifest, path, entry))['Body'].read()
+        except ClientError as error:
+            if marker is None and missing(error):
+                return False
+            raise
         if len(payload) != wire['bytes'] or hashlib.sha256(payload).hexdigest() != wire['sha256']:
             raise ValueError(f'Published Brotli payload differs: {path}')
         temporary = target.with_suffix(f'.tmp-{os.getpid()}')
         temporary.write_bytes(payload)
         temporary.replace(target)
+        return True
 
+    available = 0
     with ThreadPoolExecutor(max_workers=4) as pool:
-        for completed, _ in enumerate(pool.map(seed, entries.values()), 1):
+        for completed, found in enumerate(pool.map(seed, entries.values()), 1):
+            available += found
             if completed % 250 == 0:
-                print(f'Seeded {completed}/{len(entries)} Brotli cache payloads', flush=True)
-    print(f'Verified {len(entries)} immutable Brotli cache payloads; local round-trip verification follows')
+                print(f'Checked {completed}/{len(entries)} Brotli cache payloads', flush=True)
+    print(f'Verified {available}/{len(entries)} Brotli cache payloads; local source verification follows')
 
 
 def publish(client, bucket, manifest, root=ROOT, pause=time.sleep, tree=None,
