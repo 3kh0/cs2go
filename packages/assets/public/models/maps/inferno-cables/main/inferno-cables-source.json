@@ -1,0 +1,2801 @@
+{
+  "version": 1,
+  "mapId": "inferno",
+  "space": "main",
+  "model": "inferno-cables.glb.gz",
+  "ropes": 28,
+  "triangles": 18560,
+  "nativeEntityCount": 28,
+  "placement": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "audits": [
+    {
+      "id": "13103:3:37895",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 1.25,
+        "particle_spacing": 6.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 576,
+        "origin": [
+          175.722092,
+          1951.690552,
+          574.999878
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:3:37895",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -14.165166, 26.490683,\n\t\t-13.547241,\n\t],\n\t[\n\t\t-42.4955, 79.472046, -40.641724, 14.165166,\n\t\t-26.490683, 13.547241, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -14.165166,
+            26.490683,
+            -13.547241
+          ],
+          [
+            -42.4955,
+            79.472046,
+            -40.641724,
+            14.165166,
+            -26.490683,
+            13.547241,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 17,
+      "triangles": 512,
+      "bounds": [
+        [
+          3.3727560215229566,
+          12.806395602026607,
+          -51.60115325406724
+        ],
+        [
+          4.474540552077207,
+          14.608908092328377,
+          -49.562284933180024
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 7.269163666153192,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:5:66843",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "static_collision": false,
+        "radius": 0.8,
+        "slack": 0.2,
+        "particle_spacing": 10.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1163,
+        "origin": [
+          2737.122803,
+          1939.808472,
+          -74.146858
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:5:66843",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -57.045334, 23.415854,\n\t\t79.743164,\n\t],\n\t[\n\t\t-171.13599, 70.24756, 239.22949, 57.045334,\n\t\t-23.415854, -79.743164, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -57.045334,
+            23.415854,
+            79.743164
+          ],
+          [
+            -171.13599,
+            70.24756,
+            239.22949,
+            57.045334,
+            -23.415854,
+            -79.743164,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 31,
+      "triangles": 960,
+      "bounds": [
+        [
+          65.15893535486298,
+          -1.902008852724788,
+          -51.07422117603704
+        ],
+        [
+          69.53063534667407,
+          4.201467596392537,
+          -49.25233722556295
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 1.9510449255607754,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:5:66853",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "static_collision": false,
+        "radius": 0.8,
+        "slack": 0.5,
+        "particle_spacing": 10.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1166,
+        "origin": [
+          2779.125244,
+          2105.664795,
+          -70.298073
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:5:66853",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -67.50619, -9.364502,\n\t\t79.45254,\n\t],\n\t[\n\t\t-202.51855, -28.093506, 238.3576, 67.50619,\n\t\t9.364502, -79.45254, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -67.50619,
+            -9.364502,
+            79.45254
+          ],
+          [
+            -202.51855,
+            -28.093506,
+            238.3576,
+            67.50619,
+            9.364502,
+            -79.45254,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 32,
+      "triangles": 992,
+      "bounds": [
+        [
+          65.4269795059339,
+          -1.815436062405997,
+          -53.504013057105276
+        ],
+        [
+          70.59257326486939,
+          4.275887663981929,
+          -52.75018347649473
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 4.906781262320384,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:5:82588",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 1.0,
+        "particle_spacing": 6.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1242,
+        "origin": [
+          1336.0,
+          2706.0,
+          459.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:5:82588",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -30.163614, -27.333172,\n\t\t-12.668111,\n\t],\n\t[\n\t\t-90.490845, -81.99951, -38.004333, 30.163614,\n\t\t27.333172, 12.668111, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -30.163614,
+            -27.333172,
+            -12.668111
+          ],
+          [
+            -90.490845,
+            -81.99951,
+            -38.004333,
+            30.163614,
+            27.333172,
+            12.668111,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 22,
+      "triangles": 672,
+      "bounds": [
+        [
+          31.627404686753003,
+          9.775332232528058,
+          -68.74181093885662
+        ],
+        [
+          33.94302685376547,
+          11.663675093666228,
+          -66.64020150714327
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.813357729449984,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:5:82689",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 1.25,
+        "particle_spacing": 6.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1245,
+        "origin": [
+          1013.581116,
+          2221.94458,
+          459.672913
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:5:82689",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 15.454163, -20.74943,\n\t\t16.403605,\n\t],\n\t[\n\t\t46.362488, -62.24829, 49.210815, -15.454163,\n\t\t20.74943, -16.403605, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            15.454163,
+            -20.74943,
+            16.403605
+          ],
+          [
+            46.362488,
+            -62.24829,
+            49.210815,
+            -15.454163,
+            20.74943,
+            -16.403605,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 16,
+      "triangles": 480,
+      "bounds": [
+        [
+          25.734774977262166,
+          11.075456382419759,
+          -56.44601798968091
+        ],
+        [
+          26.93275291073778,
+          12.92901315649061,
+          -54.846464752775375
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 7.179867811952381,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:5:82804",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 0.75,
+        "particle_spacing": 6.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1248,
+        "origin": [
+          1060.0,
+          1856.5,
+          554.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:5:82804",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -61.33262, 0.16699219,\n\t\t-18.666668,\n\t],\n\t[\n\t\t-183.99786, 0.50097656, -56.0, 61.33262,\n\t\t-0.16699219, 18.666668, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -61.33262,
+            0.16699219,
+            -18.666668
+          ],
+          [
+            -183.99786,
+            0.50097656,
+            -56.0,
+            61.33262,
+            -0.16699219,
+            18.666668,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 33,
+      "triangles": 1024,
+      "bounds": [
+        [
+          22.239950222124513,
+          11.252271482094624,
+          -47.18052475755005
+        ],
+        [
+          26.935591289451875,
+          14.076789509881682,
+          -47.14240004707394
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 4.371173855977407,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:2:40288",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 8286,
+        "origin": [
+          -879.0,
+          350.0,
+          326.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:2:40288",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 1.0, -23.666666,\n\t\t-28.333334,\n\t],\n\t[\n\t\t3.0, -71.0, -85.0, -1.0,\n\t\t23.666666, 28.333334, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            -23.666666,
+            -28.333334
+          ],
+          [
+            3.0,
+            -71.0,
+            -85.0,
+            -1.0,
+            23.666666,
+            28.333334,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 19,
+      "triangles": 576,
+      "bounds": [
+        [
+          -22.339299556843752,
+          5.771158885462386,
+          -8.90244929575638
+        ],
+        [
+          -22.237744960314973,
+          8.28291098290917,
+          -7.07688337395678
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.8311894226737735,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:683806",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11123,
+        "origin": [
+          -838.0,
+          808.0,
+          512.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:683806",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -13.666666, -40.0,\n\t\t-0.6666667,\n\t],\n\t[\n\t\t-41.0, -120.0, -2.0, 13.666666,\n\t\t40.0, 0.6666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -13.666666,
+            -40.0,
+            -0.6666667
+          ],
+          [
+            -41.0,
+            -120.0,
+            -2.0,
+            13.666666,
+            40.0,
+            0.6666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 22,
+      "triangles": 672,
+      "bounds": [
+        [
+          -22.338617895989557,
+          11.64368809086932,
+          -20.533667805666663
+        ],
+        [
+          -21.27318210401043,
+          13.01103888534497,
+          -17.464792562483535
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.764847879552432,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:694004",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 3.0,
+        "slack": 1.5,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11126,
+        "origin": [
+          -281.0,
+          417.0,
+          442.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:694004",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 4.3333335, 15.0,\n\t\t4.6666665,\n\t],\n\t[\n\t\t13.0, 45.0, 14.0, -4.3333335,\n\t\t-15.0, -4.6666665, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            4.3333335,
+            15.0,
+            4.6666665
+          ],
+          [
+            13.0,
+            45.0,
+            14.0,
+            -4.3333335,
+            -15.0,
+            -4.6666665,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 17,
+      "triangles": 512,
+      "bounds": [
+        [
+          -7.149601070122087,
+          10.473944976996604,
+          -11.746657657470294
+        ],
+        [
+          -6.794998929877926,
+          11.58539192202491,
+          -10.580188904567006
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 4.313614080557758,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:694007",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 3.0,
+        "slack": 0.5,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11129,
+        "origin": [
+          -270.0,
+          441.0,
+          533.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:694007",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.33333334, 7.0000005,\n\t\t-25.666668,\n\t],\n\t[\n\t\t1.0, 21.0, -77.0, -0.33333334,\n\t\t-7.0000005, 25.666668, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.33333334,
+            7.0000005,
+            -25.666668
+          ],
+          [
+            1.0,
+            21.0,
+            -77.0,
+            -0.33333334,
+            -7.0000005,
+            25.666668,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 27,
+      "triangles": 832,
+      "bounds": [
+        [
+          -6.8706999377166875,
+          11.273183086080968,
+          -11.747070157498058
+        ],
+        [
+          -6.819978114417481,
+          13.539035263685538,
+          -11.188727496909623
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 1.4781211890968426,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:753544",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 0.1,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11154,
+        "origin": [
+          -675.0,
+          -444.0,
+          470.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:753544",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -11.0, 0.0,\n\t\t-12.999999,\n\t],\n\t[\n\t\t-33.0, 0.0, -39.0, 11.0,\n\t\t0.0, 12.999999, -10.666667, 0.0,\n\t\t13.0,\n\t],\n\t[\n\t\t-65.0, 0.0, 0.0, 10.666667,\n\t\t0.0, -13.0, -45.666668, -44.333336,\n\t\t15.333334,\n\t],\n\t[\n\t\t-202.0, -133.0, 46.0, 45.666668,\n\t\t44.333336, -15.333334, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, false, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -11.0,
+            0.0,
+            -12.999999
+          ],
+          [
+            -33.0,
+            0.0,
+            -39.0,
+            11.0,
+            0.0,
+            12.999999,
+            -10.666667,
+            0.0,
+            13.0
+          ],
+          [
+            -65.0,
+            0.0,
+            0.0,
+            10.666667,
+            0.0,
+            -13.0,
+            -45.666668,
+            -44.333336,
+            15.333334
+          ],
+          [
+            -202.0,
+            -133.0,
+            46.0,
+            45.666668,
+            44.333336,
+            -15.333334,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 49,
+      "triangles": 1536,
+      "bounds": [
+        [
+          -22.28584419075225,
+          11.375151185225105,
+          11.264899999999999
+        ],
+        [
+          -17.138253388771275,
+          13.114706632252492,
+          14.664103794189367
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 0.6080383668577386,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:753846",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 0.1,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11159,
+        "origin": [
+          -497.446228,
+          -1.591711,
+          562.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:753846",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 9.165222, -56.26055,\n\t\t0.0,\n\t],\n\t[\n\t\t27.495667, -168.78165, 0.0, -9.165222,\n\t\t56.26055, 0.0, 13.3168545, -39.542217,\n\t\t-19.0,\n\t],\n\t[\n\t\t67.44623, -287.4083, -57.0, -13.3168545,\n\t\t39.542217, 19.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            9.165222,
+            -56.26055,
+            0.0
+          ],
+          [
+            27.495667,
+            -168.78165,
+            0.0,
+            -9.165222,
+            56.26055,
+            0.0,
+            13.3168545,
+            -39.542217,
+            -19.0
+          ],
+          [
+            67.44623,
+            -287.4083,
+            -57.0,
+            -13.3168545,
+            39.542217,
+            19.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 51,
+      "triangles": 1600,
+      "bounds": [
+        [
+          -12.647668952788012,
+          12.78211059607469,
+          0.03301739427184471
+        ],
+        [
+          -10.910034075817876,
+          14.287446450600859,
+          7.344767019497404
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 0.6049938882022801,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:757971",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11163,
+        "origin": [
+          256.0,
+          -4.0,
+          363.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:757971",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 23.833334, 11.333333,\n\t\t11.166666,\n\t],\n\t[\n\t\t71.5, 34.0, 33.5, -23.833334,\n\t\t-11.333333, -11.166666, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            23.833334,
+            11.333333,
+            11.166666
+          ],
+          [
+            71.5,
+            34.0,
+            33.5,
+            -23.833334,
+            -11.333333,
+            -11.166666,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 15,
+      "triangles": 448,
+      "bounds": [
+        [
+          6.494579487114209,
+          8.85518273438028,
+          -0.7734692919571654
+        ],
+        [
+          8.328804019199419,
+          10.07667754585032,
+          0.11306929195716008
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.731201153917622,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:757978",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 0.3,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11166,
+        "origin": [
+          256.0,
+          -6.0,
+          366.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:757978",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 14.433878, -30.064713,\n\t\t17.564411,\n\t],\n\t[\n\t\t43.301636, -90.19414, 52.693237, -14.433878,\n\t\t30.064713, -17.564411, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            14.433878,
+            -30.064713,
+            17.564411
+          ],
+          [
+            43.301636,
+            -90.19414,
+            52.693237,
+            -14.433878,
+            30.064713,
+            -17.564411,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 19,
+      "triangles": 576,
+      "bounds": [
+        [
+          6.490951075588527,
+          9.27294695896155,
+          0.14690344382177334
+        ],
+        [
+          7.6137104788114724,
+          10.64306288818899,
+          2.4520318409904736
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 1.7854391528613673,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:758009",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11169,
+        "origin": [
+          327.319,
+          30.183594,
+          397.043823
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:758009",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 5.8936663, -0.06119728,\n\t\t5.9853926,\n\t],\n\t[\n\t\t17.681, -0.18359184, 17.956177, -5.8936663,\n\t\t0.06119728, -5.9853926, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.8936663,
+            -0.06119728,
+            5.9853926
+          ],
+          [
+            17.681,
+            -0.18359184,
+            17.956177,
+            -5.8936663,
+            0.06119728,
+            -5.9853926,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 5,
+      "triangles": 128,
+      "bounds": [
+        [
+          8.307001932478792,
+          10.074251694652856,
+          -0.7793626030081747
+        ],
+        [
+          8.773469208505691,
+          10.548188452955628,
+          -0.7493007394558253
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.040141900458932,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:758144",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11172,
+        "origin": [
+          694.18634,
+          30.1712,
+          414.281799
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:758144",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.9378866, 0.27626672,\n\t\t-5.093933,\n\t],\n\t[\n\t\t2.8136597, 0.8288002, -15.281799, -0.9378866,\n\t\t-0.27626672, 5.093933, 2.3333333, 0.0,\n\t\t0.0,\n\t],\n\t[\n\t\t9.81366, 0.8288002, -15.281799, -2.3333333,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.9378866,
+            0.27626672,
+            -5.093933
+          ],
+          [
+            2.8136597,
+            0.8288002,
+            -15.281799,
+            -0.9378866,
+            -0.27626672,
+            5.093933,
+            2.3333333,
+            0.0,
+            0.0
+          ],
+          [
+            9.81366,
+            0.8288002,
+            -15.281799,
+            -2.3333333,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 7,
+      "triangles": 192,
+      "bounds": [
+        [
+          17.619803361480542,
+          10.047411440902584,
+          -0.800098708777878
+        ],
+        [
+          17.892460948854726,
+          10.52482821394152,
+          -0.7536635703761695
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 3.222964469919848,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:758182",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11176,
+        "origin": [
+          740.0,
+          42.00761,
+          398.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:758182",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -10.333334, 11.16413,\n\t\t-0.16666667,\n\t],\n\t[\n\t\t-31.0, 33.49239, -0.5, 10.333334,\n\t\t-11.16413, 0.16666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -10.333334,
+            11.16413,
+            -0.16666667
+          ],
+          [
+            -31.0,
+            33.49239,
+            -0.5,
+            10.333334,
+            -11.16413,
+            0.16666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 8,
+      "triangles": 224,
+      "bounds": [
+        [
+          17.999279648053825,
+          9.88142630062883,
+          -1.9263267629850052
+        ],
+        [
+          18.805320351946172,
+          10.119724016546783,
+          -1.0583665310149923
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.704973416776503,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:761991",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 0.5,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11180,
+        "origin": [
+          838.0,
+          -452.0,
+          400.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:761991",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 40.434753, -33.30369,\n\t\t9.801097,\n\t],\n\t[\n\t\t121.30426, -99.91107, 29.40329, -40.434753,\n\t\t33.30369, -9.801097, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            40.434753,
+            -33.30369,
+            9.801097
+          ],
+          [
+            121.30426,
+            -99.91107,
+            29.40329,
+            -40.434753,
+            33.30369,
+            -9.801097,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 27,
+      "triangles": 832,
+      "bounds": [
+        [
+          21.277125870509526,
+          9.425244386054091,
+          11.470997019179299
+        ],
+        [
+          24.37440233349047,
+          10.914637298130945,
+          14.028344158820703
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 2.9607340496915544,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:762072",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 0.3,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11183,
+        "origin": [
+          958.306763,
+          -311.911591,
+          442.404358
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:762072",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.33239746, 47.000175,\n\t\t11.332977,\n\t],\n\t[\n\t\t0.9971924, 141.00052, 33.99893, -0.33239746,\n\t\t-47.000175, -11.332977, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.33239746,
+            47.000175,
+            11.332977
+          ],
+          [
+            0.9971924,
+            141.00052,
+            33.99893,
+            -0.33239746,
+            -47.000175,
+            -11.332977,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 25,
+      "triangles": 768,
+      "bounds": [
+        [
+          24.3282920977952,
+          10.871849611737277,
+          4.33192318210444
+        ],
+        [
+          24.379020149564802,
+          12.109379294121508,
+          7.928675845931569
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 1.7405406721677317,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:762075",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 0.5,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11186,
+        "origin": [
+          787.5,
+          -300.5,
+          434.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:762075",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 57.602253, -3.1371968,\n\t\t1.8014526,\n\t],\n\t[\n\t\t172.80676, -9.411591, 5.404358, -57.602253,\n\t\t3.1371968, -1.8014526, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            57.602253,
+            -3.1371968,
+            1.8014526
+          ],
+          [
+            172.80676,
+            -9.411591,
+            5.404358,
+            -57.602253,
+            3.1371968,
+            -1.8014526,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 29,
+      "triangles": 896,
+      "bounds": [
+        [
+          19.993140599438384,
+          9.855906618382795,
+          7.6200187937527994
+        ],
+        [
+          24.40141417476995,
+          11.16914253745616,
+          7.8844356176472
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 2.9852969781303296,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:780951",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11193,
+        "origin": [
+          320.0,
+          441.0,
+          392.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:780951",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -11.0, -38.666668,\n\t\t12.333333,\n\t],\n\t[\n\t\t-33.0, -116.0, 37.0, 11.0,\n\t\t38.666668, -12.333333, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -11.0,
+            -38.666668,
+            12.333333
+          ],
+          [
+            -33.0,
+            -116.0,
+            37.0,
+            11.0,
+            38.666668,
+            -12.333333,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 22,
+      "triangles": 672,
+      "bounds": [
+        [
+          7.277584680031259,
+          9.037531986551224,
+          -11.211478584914707
+        ],
+        [
+          8.140215319968748,
+          10.901662066974492,
+          -8.243796962207764
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.734122887526583,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:781042",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.25,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11196,
+        "origin": [
+          581.0,
+          722.0,
+          385.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:781042",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -19.000002, -13.666667,\n\t\t-18.333334,\n\t],\n\t[\n\t\t-57.0, -41.0, -55.0, 19.000002,\n\t\t13.666667, 18.333334, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -19.000002,
+            -13.666667,
+            -18.333334
+          ],
+          [
+            -57.0,
+            -41.0,
+            -55.0,
+            19.000002,
+            13.666667,
+            18.333334,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 15,
+      "triangles": 448,
+      "bounds": [
+        [
+          13.301038524907348,
+          7.882825966399105,
+          -18.349109915765
+        ],
+        [
+          14.767413386244355,
+          9.782023985519528,
+          -17.287090084234865
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 7.432567225094946,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:781169",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11199,
+        "origin": [
+          406.205109,
+          743.835754,
+          482.999451
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:781169",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -5.722128, -24.911543,\n\t\t-23.666487,\n\t],\n\t[\n\t\t-17.166382, -74.73462, -70.99945, 5.722128,\n\t\t24.911543, 23.666487, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -5.722128,
+            -24.911543,
+            -23.666487
+          ],
+          [
+            -17.166382,
+            -74.73462,
+            -70.99945,
+            5.722128,
+            24.911543,
+            23.666487,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 18,
+      "triangles": 544,
+      "bounds": [
+        [
+          9.869205998494014,
+          10.122134049834324,
+          -18.90539357724824
+        ],
+        [
+          10.329987435905982,
+          12.271436394949689,
+          -16.986190808749395
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.805720358590368,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:781211",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 2.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11202,
+        "origin": [
+          196.999954,
+          1105.0,
+          286.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:781211",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.000015258789, -19.333334,\n\t\t11.666667,\n\t],\n\t[\n\t\t0.000045776367, -58.0, 35.0, -0.000015258789,\n\t\t19.333334, -11.666667, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.5258789e-05,
+            -19.333334,
+            11.666667
+          ],
+          [
+            4.5776367e-05,
+            -58.0,
+            35.0,
+            -1.5258789e-05,
+            19.333334,
+            -11.666667,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 12,
+      "triangles": 352,
+      "bounds": [
+        [
+          4.991098831600003,
+          6.251169276654696,
+          -28.07922674550858
+        ],
+        [
+          5.016499994319718,
+          8.155406707868908,
+          -26.581259540537573
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 11.290359702962542,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:781216",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 0.25,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11205,
+        "origin": [
+          48.0,
+          1192.0,
+          286.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:781216",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 49.999985, -29.000002,\n\t\t0.0,\n\t],\n\t[\n\t\t149.99995, -87.0, 0.0, -49.999985,\n\t\t29.000002, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            49.999985,
+            -29.000002,
+            0.0
+          ],
+          [
+            149.99995,
+            -87.0,
+            0.0,
+            -49.999985,
+            29.000002,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 29,
+      "triangles": 896,
+      "bounds": [
+        [
+          1.2121203568163383,
+          6.3209309588499965,
+          -30.287785895181838
+        ],
+        [
+          5.036290580895751,
+          7.274111221334942,
+          -28.056014104818164
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 1.4948630081712366,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:785014",
+      "nativeEntity": {
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "start_active": true,
+        "max_simulation_time": 5.0,
+        "particle_spacing": 6.0,
+        "slack": 1.0,
+        "radius": 0.5,
+        "static_collision": false,
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11208,
+        "origin": [
+          -52.0,
+          1313.5,
+          342.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:785014",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 1.0970726, 19.5,\n\t\t13.990773,\n\t],\n\t[\n\t\t3.2912178, 58.5, 41.97232, -1.0970726,\n\t\t-19.5, -13.990773, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0970726,
+            19.5,
+            13.990773
+          ],
+          [
+            3.2912178,
+            58.5,
+            41.97232,
+            -1.0970726,
+            -19.5,
+            -13.990773,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 13,
+      "triangles": 384,
+      "bounds": [
+        [
+          -1.333479948551111,
+          8.513866442996557,
+          -34.860626391994046
+        ],
+        [
+          -1.2245231193288888,
+          9.757477730979643,
+          -33.35587502089969
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 5.544205227289514,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:984323",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 1.0,
+        "particle_spacing": 4.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11712,
+        "origin": [
+          1038.5,
+          741.5,
+          553.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:984323",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 5.6666665,\n\t\t-16.333334,\n\t],\n\t[\n\t\t0.0, 17.0, -49.0, 0.0,\n\t\t-5.6666665, 16.333334, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            5.6666665,
+            -16.333334
+          ],
+          [
+            0.0,
+            17.0,
+            -49.0,
+            0.0,
+            -5.6666665,
+            16.333334,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 13,
+      "triangles": 384,
+      "bounds": [
+        [
+          26.365199999999998,
+          12.670465181674528,
+          -19.276724714671982
+        ],
+        [
+          26.3906,
+          14.0471419182501,
+          -18.821434977694054
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 3.9896315322738283,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    },
+    {
+      "id": "13103:8:984327",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 1.0,
+        "particle_spacing": 4.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 11715,
+        "origin": [
+          1040.000488,
+          786.999939,
+          597.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:984327",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.5001628, -13.833315,\n\t\t-14.166668,\n\t],\n\t[\n\t\t-1.5004883, -41.49994, -42.5, 0.5001628,\n\t\t13.833315, 14.166668, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true, true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "inferno",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.5001628,
+            -13.833315,
+            -14.166668
+          ],
+          [
+            -1.5004883,
+            -41.49994,
+            -42.5,
+            0.5001628,
+            13.833315,
+            14.166668,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      },
+      "particleCount": 15,
+      "triangles": 448,
+      "bounds": [
+        [
+          26.36520828550973,
+          13.867666156136913,
+          -20.002155572168924
+        ],
+        [
+          26.428704102070263,
+          15.166696882139117,
+          -18.926017648798318
+        ]
+      ],
+      "simulation": {
+        "qualifiedHostSeconds": 5.0,
+        "stepSeconds": 0.01,
+        "steps": 500,
+        "restLength": 3.9613389908755967,
+        "qualifiedOneConstraintWorklistPass": true
+      },
+      "subdivisions": 4,
+      "missingArrayPolicy": {
+        "radius": true,
+        "height": true,
+        "pins": false,
+        "color": true
+      },
+      "qualifiedSampleCap": false
+    }
+  ],
+  "source": {
+    "engine": "Valve Source2",
+    "build": "26445667",
+    "mapAuthor": "unverified; retain supplied native map credits",
+    "originalArchiveSHA256": "f3c2966ea3423043f731bbecfb704fb7360b4bb442c85ddb50ecc8f25d7f5503",
+    "viewerCommit": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "qualifications": [
+      "Pinnedviewer Bezier sampling/Verlet/spring/transported4-sidedtube, not private native engine particle snapshot",
+      "Explicit browser host policy min(authored entity max_simulation_time,VPCFpresim,stop), unlike viewer ignoring entity max",
+      "Authored height scales retained; absent follows qualified viewer width; actual present width/height arrays equal",
+      "Default/tintable offline tessellation uses authored maximum4; camera-adaptive tessellation not claimed",
+      "Native constant VTEX fields/packed hemi-oct flat normal/roughness and min-radius/coverage/blend lowered from preserved native programs. Browser effective vertical-FOV/full drawing-buffer height binding and pinned-viewer settling/tube topology remain qualified; no native engine particle parity claim."
+    ],
+    "nativeShaderProof": {
+      "archiveSHA256": "91493c2620afebab343c470abd1f7b270b01e322c0a4235995c3c7062a4995b8",
+      "followupSHA256": "d2fec7abeaae4371c13f00099ea1fe8b670eb14a26eb8fe74f8e164614ab4106",
+      "registeredCvar": "r_csgo_cable_pixel_radius_clamp",
+      "registeredDefaultFloat32": 1.2000000476837158,
+      "defaultBytes": "9a99993f",
+      "nativeVSWidth": "max(abs(viewDepth)*suppliedK,physicalRadius)",
+      "nativeCoverage": "max(physicalRadius/expandedRadius,0.25)",
+      "candidateWriter": "C*V_tanf((A*float32(pi/180))/D); division inside tan",
+      "opaqueClampBlend": "SourceAlpha/InverseSourceAlpha Add RGB and alpha; source descriptors + qualified pinned VRF enum/bitfield interpretation",
+      "browserViewBinding": "Effective vertical cameraFOV/pixelheight QUALIFIED; exact native A/D members and formalCB3 alias unproved",
+      "independentReplay": "28originalVCS compressed dictionary/slice\u2192native programs;17nativewindows,19/19originalresources/blocks;157+12payloadSHA; noGPU/target execution"
+    },
+    "browserGpuAcceptance": {
+      "fixture": "tests/native-cables.spec.ts",
+      "proof": "native-cables-gpu-proof.json",
+      "limitations": "Controlled width/coverage/transform/clone fixture, not whole-map texel or private particle solver parity"
+    },
+    "viewerLicense": "/models/maps/licenses/ValveResourceFormat-MIT.txt"
+  },
+  "runtime": {
+    "bytes": 248222,
+    "rawGLBBytes": 1262668,
+    "sha256": "3cb4c1207d54863c964a7d829e34f3a03ea33df60e1c425d67ba365e9277dad7",
+    "collision": false
+  },
+  "admission": "UNUSED_PUBLIC_PAYLOAD; CPU121-owner geometry and isolated native-width/pose/clone/depth GPU gates pass; no active map config or whole-map visual acceptance"
+}
