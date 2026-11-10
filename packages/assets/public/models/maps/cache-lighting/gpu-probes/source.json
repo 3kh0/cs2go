@@ -1,0 +1,162 @@
+{
+  "mapId": "cache",
+  "revision": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+  "arrays": [
+    {
+      "width": 300,
+      "height": 292,
+      "layers": 1608,
+      "format": "BC6H",
+      "file": "irradiance.bin.gz",
+      "gpuBytes": 140860800,
+      "gpuSha256": "58d318a01162704f23994f1a8a504eb434798156eaa745350f1636ba03a8e573",
+      "downloadBytes": 80316963
+    },
+    {
+      "width": 300,
+      "height": 292,
+      "layers": 268,
+      "format": "BC7",
+      "file": "shadows.bin.gz",
+      "gpuBytes": 23476800,
+      "gpuSha256": "2698bb20e3f800cefe5a9866ca3416945db05663b5fdc43584f661aa85d26737",
+      "downloadBytes": 1650912
+    }
+  ],
+  "fallbacks": [
+    {
+      "width": 300,
+      "height": 292,
+      "layers": 1608,
+      "format": "RGB16F",
+      "gpuBytes": 845164800,
+      "gpuSha256": "aa595c06cec7db17cbcfbbfce8e688df8c40c4e79e17fc9afa48d3809d389a24",
+      "downloadBytes": 269431999,
+      "files": [
+        "irradiance-rgb16f-000.bin.gz",
+        "irradiance-rgb16f-001.bin.gz",
+        "irradiance-rgb16f-002.bin.gz",
+        "irradiance-rgb16f-003.bin.gz",
+        "irradiance-rgb16f-004.bin.gz",
+        "irradiance-rgb16f-005.bin.gz",
+        "irradiance-rgb16f-006.bin.gz",
+        "irradiance-rgb16f-007.bin.gz",
+        "irradiance-rgb16f-008.bin.gz",
+        "irradiance-rgb16f-009.bin.gz",
+        "irradiance-rgb16f-010.bin.gz",
+        "irradiance-rgb16f-011.bin.gz",
+        "irradiance-rgb16f-012.bin.gz"
+      ],
+      "chunks": [
+        {
+          "file": "irradiance-rgb16f-000.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 20124753,
+          "rawSha256": "a4b0bc911fc9cb1914f30d15396b73cc8e5bfb3d082441e61e95e6129eec92e9",
+          "gzipSha256": "4fe50ee83e2f601f509c92bb913c514c29fb3dab65d4da3050dc9826d66fe9cb"
+        },
+        {
+          "file": "irradiance-rgb16f-001.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 22948431,
+          "rawSha256": "d5218aa68189aa739eaf24c45b0e8bfb57b3623f3751f2610e4f007e46f6660c",
+          "gzipSha256": "220bf6491edf2353f7b2daed46d693c6ea244b5d3308837b00bac8956cf72d19"
+        },
+        {
+          "file": "irradiance-rgb16f-002.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 18667038,
+          "rawSha256": "c044365911024ad46b8f3eb4b785da7b34bda9747826fe7c26a06156a4cc364b",
+          "gzipSha256": "dc66f67d0ecacb9d7f3c0095ee874def7a51b6fcc908516447d97ce570004e7d"
+        },
+        {
+          "file": "irradiance-rgb16f-003.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 23875285,
+          "rawSha256": "13f514fcb82103478997eaa414f34605aef41b8572ec3d9665cfa40eb2c4e4cd",
+          "gzipSha256": "9c80b74e16c04ea943613e13d4dbdce2dc9d4fe96649a4440b7b9fd5a26b65b9"
+        },
+        {
+          "file": "irradiance-rgb16f-004.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 18838640,
+          "rawSha256": "a517da42f8c8b8dc686adc126a6ef462c70dba6c600843b22a0b2691e66b8121",
+          "gzipSha256": "31cb7e33bf6b8c0f2c09a398a8f65e24194e9ed2024175cbf668d57ea55d41cb"
+        },
+        {
+          "file": "irradiance-rgb16f-005.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 21729280,
+          "rawSha256": "07b5974990c6735683e5942704f7421e7fad20c81f39996dd76c0d11e4693497",
+          "gzipSha256": "d0950445eb462238024d1619d183eec041c054bc727fa1cd39f072215c208d30"
+        },
+        {
+          "file": "irradiance-rgb16f-006.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 20254342,
+          "rawSha256": "206ff3b51ee202bc0bebf6648fac133947815350e3f36ecaad4469359a4bb34f",
+          "gzipSha256": "d1ac3be9c71df718559d6cbd0d0bf5b20b611d80eb59d1bcbf65407fdfad6ba1"
+        },
+        {
+          "file": "irradiance-rgb16f-007.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 21882621,
+          "rawSha256": "32b6c22f811806fb0145588f2555afd5b1f83d59b781b21ca6f727fc7ca30255",
+          "gzipSha256": "fe0cf0c964ba88f960607ef1dcde36696a4a46f286d9b0179df8eddc4f7b9f7a"
+        },
+        {
+          "file": "irradiance-rgb16f-008.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 22206085,
+          "rawSha256": "139b0505111ac637e0218cf63337a15a92b1beca56fcb34cfbd2d9032c67709a",
+          "gzipSha256": "bf2aa816c7bc104ac47aae5c7c09a41dadca34d1f7d7cd04c19a849c1171bb33"
+        },
+        {
+          "file": "irradiance-rgb16f-009.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 21290854,
+          "rawSha256": "54703abcd9b7284b823029189b8aa6ada7f28bb21bcfc0ce0ee2426ce5d9f6a1",
+          "gzipSha256": "f0e762a9fab5760127a5ba7fef1a6c513a98658b163504ea13a941984f0199bf"
+        },
+        {
+          "file": "irradiance-rgb16f-010.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 22506303,
+          "rawSha256": "28e31fe9914d53c2f2dc890b7a1e8139ed4d034e0ef5d8d9e47d086ea7561ee1",
+          "gzipSha256": "15dcff78fcb41ce79fd7acd910f5b039c16875b87396a777dbced8c0b58b5855"
+        },
+        {
+          "file": "irradiance-rgb16f-011.bin.gz",
+          "rawBytes": 67108864,
+          "gzipBytes": 21658804,
+          "rawSha256": "cb9dc383f13b883832dbd326d743c9fd40be0347111e534c9227bcf3cc44044d",
+          "gzipSha256": "0ae55849092015dd8ecb3812a7e8d41353f034fbafd2e3f6ae2668c8df93dcc8"
+        },
+        {
+          "file": "irradiance-rgb16f-012.bin.gz",
+          "rawBytes": 39858432,
+          "gzipBytes": 13449563,
+          "rawSha256": "3fe31f7289d8ae1e3e392d58f67f9c01a0a5e5180dcdb23e987cf44b992a1edf",
+          "gzipSha256": "515eff355418bbe3379252f47ca512791cf1c271db7d33af6a5980639fee8f84"
+        }
+      ],
+      "transportQualification": "Ordered independent gzip parts of exact native decoded array bytes; no resampling, channel, mip or quality changes"
+    },
+    {
+      "width": 300,
+      "height": 292,
+      "layers": 268,
+      "format": "RGBA8",
+      "file": "shadows-rgba8.bin.gz",
+      "gpuBytes": 93907200,
+      "gpuSha256": "5e70b85d3d937e09e0497b1f3431bbdcbdbf3bfd97cdfb7c55b1608765232c07",
+      "downloadBytes": 2419631
+    }
+  ],
+  "sourceHashes": {
+    "env_light_probe_volume_atlas.vtex_c": "39b36a368da8ac0da8194388f550d014701c4e43b05c1368218a355cb1820270",
+    "env_light_probe_volume_atlas_dlshd.vtex_c": "79dbe0ed132a2793554d93665dda7615f44d5f6a1a4d28dabcbadea6884e2b42"
+  },
+  "entitiesSha256": "dcc93b2758515028891eba088d3052e0abe04d740d17f7499f28194b16190952",
+  "interpretation": "Untouched native z-major BC slices, six signed axes, per-volume half-texel borders, native priority/fade/remaining coverage. Fallbacks are original Source2Viewer-decoded RGB16F/RGBA8, no resampling, gamma or lossy encoding."
+}
