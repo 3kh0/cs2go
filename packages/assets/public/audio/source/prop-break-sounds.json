@@ -1,0 +1,970 @@
+{
+  "source": "Read-only installed CS2 via Windows Amp runner",
+  "soundEventResource": "soundevents/game_sounds_physics.vsndevts_c",
+  "soundEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+  "eventDataSha256": "7a94749083fea9145662a20688ec7821f0dc20ae9cb4fcad04d01dff2095585a",
+  "generator": "prepare-prop-break-audio.py",
+  "events": {
+    "Breakable.Metal": {
+      "type": "csgo_mega",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 1.0,
+      "instance_limit": 2.0,
+      "occlusion_intensity": 0.5,
+      "occlusion_frequency_scale": 0.4,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": [
+        "sounds/physics/metal/metal_container_break_01.vsnd",
+        "sounds/physics/metal/metal_container_break_02.vsnd",
+        "sounds/physics/metal/metal_container_break_03.vsnd"
+      ],
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.001959,
+          0.0,
+          0.0
+        ],
+        [
+          318.857147,
+          0.453846,
+          -0.001959,
+          -0.000862,
+          0.0,
+          1.0
+        ],
+        [
+          1200.0,
+          0.0,
+          -0.000515,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "Cardboard.Break": {
+      "type": "csgo_mega",
+      "volume": 0.799805,
+      "pitch": 1.0,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 2.0,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": "sounds/common/null.vsnd",
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.003722,
+          0.0,
+          0.0
+        ],
+        [
+          219.428574,
+          0.332226,
+          -0.003722,
+          -0.001786,
+          0.0,
+          1.0
+        ],
+        [
+          600.0,
+          0.0,
+          -0.000873,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "Fruit.Break": {
+      "type": "csgo_mega",
+      "volume": 0.35,
+      "pitch": 1.4,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 1.0,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "delay": 0.0,
+      "vsnd_files_track_01": [
+        "sounds/physics/flesh/flesh_squishy_impact_hard2.vsnd",
+        "sounds/physics/flesh/flesh_squishy_impact_hard3.vsnd",
+        "sounds/physics/flesh/flesh_squishy_impact_hard4.vsnd"
+      ],
+      "distance_volume_mapping_curve": [
+        [
+          18.857143,
+          1.0,
+          0.0,
+          -0.003329,
+          0.0,
+          0.0
+        ],
+        [
+          219.428574,
+          0.332226,
+          -0.003329,
+          -0.001721,
+          0.0,
+          1.0
+        ],
+        [
+          600.0,
+          0.0,
+          -0.000873,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "Glass.Break": {
+      "type": "csgo_mega",
+      "volume": 0.699707,
+      "pitch": 1.0,
+      "block_duration": 0.05,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 2.0,
+      "block_match_entity": false,
+      "block_matching_events": false,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": [
+        "sounds/physics/glass/glass_sheet_break1.vsnd",
+        "sounds/physics/glass/glass_sheet_break2.vsnd",
+        "sounds/physics/glass/glass_sheet_break3.vsnd"
+      ],
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.002483,
+          0.0,
+          0.0
+        ],
+        [
+          318.857147,
+          0.307692,
+          -0.000862,
+          -0.000862,
+          1.0,
+          1.0
+        ],
+        [
+          1200.0,
+          -0.0,
+          -0.000349,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "GlassBottle.Break": {
+      "type": "csgo_mega",
+      "volume": 0.699707,
+      "pitch": 1.0,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 2.0,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": [
+        "sounds/physics/glass/glass_bottle_break1.vsnd",
+        "sounds/physics/glass/glass_bottle_break2.vsnd"
+      ],
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.003722,
+          0.0,
+          0.0
+        ],
+        [
+          219.428574,
+          0.332226,
+          -0.003722,
+          -0.001786,
+          0.0,
+          1.0
+        ],
+        [
+          600.0,
+          0.0,
+          -0.000873,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "Plastic_Box.Break": {
+      "type": "csgo_mega",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 2.0,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": "sounds/common/null.vsnd",
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.003722,
+          0.0,
+          0.0
+        ],
+        [
+          219.428574,
+          0.332226,
+          -0.003722,
+          -0.001786,
+          0.0,
+          1.0
+        ],
+        [
+          600.0,
+          0.0,
+          -0.000873,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "Pottery.Break": {
+      "type": "csgo_mega",
+      "volume": 0.7,
+      "pitch": 1.07,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 2.0,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": [
+        "sounds/physics/glass/glass_pottery_break1.vsnd",
+        "sounds/physics/glass/glass_pottery_break2.vsnd",
+        "sounds/physics/glass/glass_pottery_break3.vsnd"
+      ],
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.003722,
+          0.0,
+          0.0
+        ],
+        [
+          219.428574,
+          0.332226,
+          -0.003722,
+          -0.001786,
+          0.0,
+          1.0
+        ],
+        [
+          600.0,
+          0.0,
+          -0.000873,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "Pottery.Large.Break": {
+      "type": "csgo_mega",
+      "volume": 0.699707,
+      "pitch": 0.96,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 2.0,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": [
+        "sounds/physics/glass/glass_pottery_break1.vsnd",
+        "sounds/physics/glass/glass_pottery_break2.vsnd",
+        "sounds/physics/glass/glass_pottery_break3.vsnd"
+      ],
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.003722,
+          0.0,
+          0.0
+        ],
+        [
+          219.428574,
+          0.332226,
+          -0.003722,
+          -0.001786,
+          0.0,
+          1.0
+        ],
+        [
+          600.0,
+          0.0,
+          -0.000873,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "Wood_Box.Break": {
+      "type": "csgo_mega",
+      "volume": 0.799805,
+      "pitch": 0.99,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 2.0,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": "sounds/common/null.vsnd",
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.003722,
+          0.0,
+          0.0
+        ],
+        [
+          219.428574,
+          0.332226,
+          -0.003722,
+          -0.001786,
+          0.0,
+          1.0
+        ],
+        [
+          600.0,
+          0.0,
+          -0.000873,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "Wood_Furniture.Break": {
+      "type": "csgo_mega",
+      "volume": 0.799805,
+      "pitch": 0.99,
+      "block_duration": 0.4,
+      "mixgroup": "Physics",
+      "use_distance_volume_mapping_curve": true,
+      "pitch_random_min": -0.01,
+      "pitch_random_max": 0.01,
+      "use_fadetime_volume_mapping_curve": false,
+      "reverb_wet": 0.5,
+      "instance_limit": 2.0,
+      "occlusion_intensity": 0.8,
+      "occlusion_frequency_scale": 0.96,
+      "restrict_source_reverb": true,
+      "vsnd_files_track_01": [
+        "sounds/physics/wood/wood_furniture_break1.vsnd",
+        "sounds/physics/wood/wood_furniture_break2.vsnd"
+      ],
+      "distance_volume_mapping_curve": [
+        [
+          40.0,
+          1.0,
+          0.0,
+          -0.003722,
+          0.0,
+          0.0
+        ],
+        [
+          219.428574,
+          0.332226,
+          -0.003722,
+          -0.001786,
+          0.0,
+          1.0
+        ],
+        [
+          600.0,
+          0.0,
+          -0.000873,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "fadetime_volume_mapping_curve": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.1,
+          0.0,
+          -10.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    }
+  },
+  "clips": [
+    {
+      "name": "prop-break-flesh_squishy_impact_hard2",
+      "resource": "sounds/physics/flesh/flesh_squishy_impact_hard2.vsnd_c",
+      "source": "sounds/physics/flesh/flesh_squishy_impact_hard2.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "876f10f42ee73e99d652002b9bb24428ec9a0881c58277da24312dffdf777245",
+      "outputSha256": "c3430847579b77dac568dcf7b66bcb8eb932743de9e9d7f6f08e8388ed279d8e",
+      "bytes": 22700,
+      "codec": "pcm_s16le",
+      "sampleRate": 22050,
+      "channels": 1,
+      "sampleFrames": 11328,
+      "durationSeconds": 0.5137414965986394,
+      "conversion": "Original Source2Viewer20.1 native PCM WAV copied byte-for-byte; no re-encoding or downmix",
+      "pcmSha256": "ec2c7303877673dd6392715a2997e42e68a4f739531c9c1eeed01464e128bc37",
+      "path": "/audio/source/prop-break-flesh_squishy_impact_hard2.wav"
+    },
+    {
+      "name": "prop-break-flesh_squishy_impact_hard3",
+      "resource": "sounds/physics/flesh/flesh_squishy_impact_hard3.vsnd_c",
+      "source": "sounds/physics/flesh/flesh_squishy_impact_hard3.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "929b01929143ee1441f5958a774640b2228715194ebf559101ddc8cae8dd9bb6",
+      "outputSha256": "b061772cfd37b741c2f2830094abbc671eb85860aa471d70a9cb27022599e6dd",
+      "bytes": 44844,
+      "codec": "pcm_s16le",
+      "sampleRate": 22050,
+      "channels": 1,
+      "sampleFrames": 22400,
+      "durationSeconds": 1.0158730158730158,
+      "conversion": "Original Source2Viewer20.1 native PCM WAV copied byte-for-byte; no re-encoding or downmix",
+      "pcmSha256": "a58f3df7ca0b19f7f7950f75a939858ffc67948917e9da000492384133782a3f",
+      "path": "/audio/source/prop-break-flesh_squishy_impact_hard3.wav"
+    },
+    {
+      "name": "prop-break-flesh_squishy_impact_hard4",
+      "resource": "sounds/physics/flesh/flesh_squishy_impact_hard4.vsnd_c",
+      "source": "sounds/physics/flesh/flesh_squishy_impact_hard4.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "317f4b82f3718eaa9ec9bf9b9736f2c48c1fe2675b36c9dbc76043d370b3dd11",
+      "outputSha256": "8629317e09542eaedb031b8d39efed77705058a50bc45c5a775d971c2cefbe93",
+      "bytes": 24300,
+      "codec": "pcm_s16le",
+      "sampleRate": 22050,
+      "channels": 1,
+      "sampleFrames": 12128,
+      "durationSeconds": 0.5500226757369614,
+      "conversion": "Original Source2Viewer20.1 native PCM WAV copied byte-for-byte; no re-encoding or downmix",
+      "pcmSha256": "4e5f3ecc4a89eb854a0ed0759c49af9275adbe14325adf95643fa82a7d283ef6",
+      "path": "/audio/source/prop-break-flesh_squishy_impact_hard4.wav"
+    },
+    {
+      "name": "prop-break-glass_bottle_break1",
+      "resource": "sounds/physics/glass/glass_bottle_break1.vsnd_c",
+      "source": "sounds/physics/glass/glass_bottle_break1.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "7443066d493b8bccfc5f01d2b40ef689e208e0f8aac963ae3c6ce167617c91de",
+      "outputSha256": "7f056f805478fff29886616b4390ec19db9436b31efca1235dd193e13fb03051",
+      "bytes": 113242,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "sampleFrames": 56599,
+      "durationSeconds": 1.283424036281179,
+      "conversion": "Original Source2Viewer20.1 native PCM WAV copied byte-for-byte; no re-encoding or downmix",
+      "pcmSha256": "d604ddd8c09b560f24aa13dbbe15109b9230a52368e3dcd243c684e9eda7e3b2",
+      "path": "/audio/source/prop-break-glass_bottle_break1.wav"
+    },
+    {
+      "name": "prop-break-glass_bottle_break2",
+      "resource": "sounds/physics/glass/glass_bottle_break2.vsnd_c",
+      "source": "sounds/physics/glass/glass_bottle_break2.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "d6c0e673ad18b6fd5fdd357ef17251a3d73b4136a936e196bc1cbc0b92fb048e",
+      "outputSha256": "2c70aeb8713c4739f67160f2f71fe093e08775f8c28678135feab202d33751b0",
+      "bytes": 104510,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "sampleFrames": 52233,
+      "durationSeconds": 1.184421768707483,
+      "conversion": "Original Source2Viewer20.1 native PCM WAV copied byte-for-byte; no re-encoding or downmix",
+      "pcmSha256": "013eed25e79ab9bb8dccd178683c523eba8a182459963f9f4c3a3964a2d398fc",
+      "path": "/audio/source/prop-break-glass_bottle_break2.wav"
+    },
+    {
+      "name": "prop-break-glass_pottery_break1",
+      "resource": "sounds/physics/glass/glass_pottery_break1.vsnd_c",
+      "source": "sounds/physics/glass/glass_pottery_break1.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "6f6094a3d977da2ffb6ca0360ea54285a061f334de4011556425b9b6e0ccd8ca",
+      "outputSha256": "5ba87fd8f1db89b6b6896d1cc8b156f5600817ecbc5449e1801788b825f25f53",
+      "bytes": 93828,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "sampleFrames": 46892,
+      "durationSeconds": 1.0633106575963718,
+      "conversion": "Original Source2Viewer20.1 native PCM WAV copied byte-for-byte; no re-encoding or downmix",
+      "pcmSha256": "a56631ce7da2c0a9534daa15ab6f2bf8b848ca1726bd2470e749fc6dfb1e8030",
+      "path": "/audio/source/prop-break-glass_pottery_break1.wav"
+    },
+    {
+      "name": "prop-break-glass_pottery_break2",
+      "resource": "sounds/physics/glass/glass_pottery_break2.vsnd_c",
+      "source": "sounds/physics/glass/glass_pottery_break2.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "13a1787b4514a7baf385b5b66ac50e9213bf070dab0c3afffdd74844b989834b",
+      "outputSha256": "876b4cf4a4f33ab328b64c12480b4560af2f0c6fc7c8ad0d76bca60caff1f504",
+      "bytes": 86702,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "sampleFrames": 43329,
+      "durationSeconds": 0.9825170068027211,
+      "conversion": "Original Source2Viewer20.1 native PCM WAV copied byte-for-byte; no re-encoding or downmix",
+      "pcmSha256": "44af27036143ec2ca799166abf336c07839b12ec6561889cb2f8b4fe914894fc",
+      "path": "/audio/source/prop-break-glass_pottery_break2.wav"
+    },
+    {
+      "name": "prop-break-glass_pottery_break3",
+      "resource": "sounds/physics/glass/glass_pottery_break3.vsnd_c",
+      "source": "sounds/physics/glass/glass_pottery_break3.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "81e301fb9c7f505e7bbd788111aba190329a6744782080e8f4842cf5008d2d51",
+      "outputSha256": "02f5529d6e01789463662cc7decb4757be1a03bd06f0e16a0c06b8196467fd98",
+      "bytes": 128244,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "sampleFrames": 64100,
+      "durationSeconds": 1.4535147392290249,
+      "conversion": "Original Source2Viewer20.1 native PCM WAV copied byte-for-byte; no re-encoding or downmix",
+      "pcmSha256": "b7ec73a22b63d621396504b60c1d4c09559318d6fb86ce1be47735c85fab5081",
+      "path": "/audio/source/prop-break-glass_pottery_break3.wav"
+    }
+  ],
+  "silentClips": [
+    {
+      "name": "prop-break-null",
+      "resource": "sounds/common/null.vsnd_c",
+      "source": "sounds/common/null.vsnd_c",
+      "sourcePack": "Installed CS2 native physics sound events",
+      "resourceSha256": "106e435bd8e5c77808c5527b1cfe0df98bb8186e93a9a807caacde864d1989e1",
+      "outputSha256": "0e5a83047c29310eccb94323e60de2f352acb5a4c78b84a0598e5325c6260251",
+      "bytes": 8868,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "sampleFrames": 4412,
+      "durationSeconds": 0.1000453514739229,
+      "conversion": "Verified original native PCM is all zero; no runtime file/voice is added and the event stays explicitly silent.",
+      "pcmSha256": "b3e05266fc0a39ee10337d8636bb59b8eb1734c612083f4f9f5fbfc1308498ca",
+      "allSamplesZero": true
+    }
+  ],
+  "legacyBindings": [
+    {
+      "name": "map-break-glass",
+      "resource": "sounds/physics/glass/glass_sheet_break1.vsnd_c",
+      "source": "sounds/physics/glass/glass_sheet_break1.vsnd_c",
+      "sourcePack": "Valve CS2 native physics sound events",
+      "sourceEvent": "Glass.Break",
+      "resourceSha256": "cdc38fc9b5aa079d149a2029efd790d3ff1056dca8a0770ed7a45d1f1c0d7bad",
+      "outputSha256": "a2e67282cf776e86e6b673f90968ace9af8dbe79b1a606275ec2464044af7c49",
+      "bytes": 21523,
+      "sourceEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "duration": 1.797755,
+      "outputCodec": "opus",
+      "outputBitrate": 96000,
+      "outputSampleRate": 48000,
+      "outputEncodedDuration": 1.804271
+    },
+    {
+      "name": "map-break-glass-2",
+      "resource": "sounds/physics/glass/glass_sheet_break2.vsnd_c",
+      "source": "sounds/physics/glass/glass_sheet_break2.vsnd_c",
+      "sourcePack": "Valve CS2 native physics sound events",
+      "sourceEvent": "Glass.Break",
+      "resourceSha256": "7fd505301141b7798097a76a4ff73fbb327be190b8ebe52c9ae42f1f60dfd641",
+      "outputSha256": "678175bdd0d637543db07e92a1820cd1105830908844df592d1d89dbaaf19bca",
+      "bytes": 29685,
+      "sourceEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "duration": 2.513741,
+      "outputCodec": "opus",
+      "outputBitrate": 96000,
+      "outputSampleRate": 48000,
+      "outputEncodedDuration": 2.52025
+    },
+    {
+      "name": "map-break-glass-3",
+      "resource": "sounds/physics/glass/glass_sheet_break3.vsnd_c",
+      "source": "sounds/physics/glass/glass_sheet_break3.vsnd_c",
+      "sourcePack": "Valve CS2 native physics sound events",
+      "sourceEvent": "Glass.Break",
+      "resourceSha256": "403a6eea2d6bbc34ae6264d502cc59514e70db9f8d69312bb88d1655299d4234",
+      "outputSha256": "46b9675a1861a23f52466060f487a389d7803b85746efc956142fe3bb49755d0",
+      "bytes": 13716,
+      "sourceEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "duration": 1.196304,
+      "outputCodec": "opus",
+      "outputBitrate": 96000,
+      "outputSampleRate": 48000,
+      "outputEncodedDuration": 1.202813
+    },
+    {
+      "name": "map-break-metal",
+      "resource": "sounds/physics/metal/metal_container_break_01.vsnd_c",
+      "source": "sounds/physics/metal/metal_container_break_01.vsnd_c",
+      "sourcePack": "Valve CS2 native physics sound events",
+      "sourceEvent": "Breakable.Metal",
+      "resourceSha256": "ddfb0ccb13dce164bc968834d0484a207301e45bbef74a4058240438668b0c21",
+      "outputSha256": "91c968d9eed35a0537229361a2acef3096a141e3984267f2715d22b5551f4fd5",
+      "bytes": 17229,
+      "sourceEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "duration": 1.496145,
+      "outputCodec": "opus",
+      "outputBitrate": 96000,
+      "outputSampleRate": 48000,
+      "outputEncodedDuration": 1.502646
+    },
+    {
+      "name": "map-break-metal-2",
+      "resource": "sounds/physics/metal/metal_container_break_02.vsnd_c",
+      "source": "sounds/physics/metal/metal_container_break_02.vsnd_c",
+      "sourcePack": "Valve CS2 native physics sound events",
+      "sourceEvent": "Breakable.Metal",
+      "resourceSha256": "e8bc364f2f76b993326954397c48a21221955478ccf8b8a4e4df32043088f454",
+      "outputSha256": "39bf107cf255f3e13bb0898562b65aadfe888b2fb9d7543c2600642fe99dc831",
+      "bytes": 18011,
+      "sourceEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "duration": 1.661905,
+      "outputCodec": "opus",
+      "outputBitrate": 96000,
+      "outputSampleRate": 48000,
+      "outputEncodedDuration": 1.668417
+    },
+    {
+      "name": "map-break-metal-3",
+      "resource": "sounds/physics/metal/metal_container_break_03.vsnd_c",
+      "source": "sounds/physics/metal/metal_container_break_03.vsnd_c",
+      "sourcePack": "Valve CS2 native physics sound events",
+      "sourceEvent": "Breakable.Metal",
+      "resourceSha256": "76f5793e21a08daf863a5f79f8c9bbaed4ffd97656ccd348a6bf4a46ddf95ded",
+      "outputSha256": "a138d383bdc399267926b800335ccf4046f8c3a6563db1d70b9b706fe8dbd97b",
+      "bytes": 17017,
+      "sourceEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "duration": 1.652585,
+      "outputCodec": "opus",
+      "outputBitrate": 96000,
+      "outputSampleRate": 48000,
+      "outputEncodedDuration": 1.659104
+    },
+    {
+      "name": "map-break-wood",
+      "resource": "sounds/physics/wood/wood_furniture_break1.vsnd_c",
+      "source": "sounds/physics/wood/wood_furniture_break1.vsnd_c",
+      "sourcePack": "Valve CS2 native physics sound events",
+      "sourceEvent": "Wood_Furniture.Break",
+      "resourceSha256": "815db5e9bf04657ef7b6e0e16545a142415cf96bad1f56d87c3a943303aeca6f",
+      "outputSha256": "05efd5c2042b7542e015a8152a6fe105f57504422f211334101bc9cd4dee1815",
+      "bytes": 14749,
+      "sourceEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "duration": 1.22737,
+      "outputCodec": "opus",
+      "outputBitrate": 96000,
+      "outputSampleRate": 48000,
+      "outputEncodedDuration": 1.233875
+    },
+    {
+      "name": "map-break-wood-2",
+      "resource": "sounds/physics/wood/wood_furniture_break2.vsnd_c",
+      "source": "sounds/physics/wood/wood_furniture_break2.vsnd_c",
+      "sourcePack": "Valve CS2 native physics sound events",
+      "sourceEvent": "Wood_Furniture.Break",
+      "resourceSha256": "a35b05baf8dc39d0892234ad3c38ad53dcadbf9e0759f43978a37ad21dd597f6",
+      "outputSha256": "f67de75163fbb223cd2b29d06c06248358a5beae4128cdc52f4d7cd35b036de9",
+      "bytes": 17511,
+      "sourceEventResourceSha256": "bc6142861b66b6cef74a27360608c4413dcde7cada8f5690a7cafd4d32333637",
+      "sourceCodec": "pcm_s16le",
+      "sourceSampleRate": 44100,
+      "sourceChannels": 1,
+      "duration": 1.267392,
+      "outputCodec": "opus",
+      "outputBitrate": 96000,
+      "outputSampleRate": 48000,
+      "outputEncodedDuration": 1.273896
+    }
+  ],
+  "sourcePackages": [
+    {
+      "clipsSha256": "a6e5668a4557c20f471fd050f6a2930c7ccc6d7052a500b7dde2daa36bd59a29",
+      "provenanceSha256": "81e19c0433682ef6b83d9d072157feb2407a71d4c4479c8e0bc3b47e216e76e4"
+    },
+    {
+      "clipsSha256": "cb9a728d4d59c9677afc2466d2e429a65067559950a64f6752825992f9e8cb4c",
+      "provenanceSha256": "333efc00516647dc1eb197fe5d562082cfb4ac26ce18744be0d6beb8601d6cec"
+    }
+  ],
+  "qualification": "Exact authored events, original PCM and existing sealed legacy payloads. Browser piecewise-linear distance envelopes, voice budget, reverb/occlusion and matching behavior remain a reconstruction; six-column native curve keys are preserved above, not falsely claimed as native interpolation."
+}

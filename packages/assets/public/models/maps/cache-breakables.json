@@ -1,0 +1,1496 @@
+{
+  "version": 1,
+  "mapId": "cache",
+  "breakables": [
+    {
+      "id": "cache:106210:80:32924:31064",
+      "entityId": "106210:80:32924:31064",
+      "model": "models/cs_italy/props/radio/vintage_radio_1.vmdl",
+      "native": {
+        "steamaudio_geometry_mode": "0",
+        "expand_render_bounds_to_include_cloth": false,
+        "physicsmode": 3,
+        "skipPreSettle": true,
+        "lightmapstatic": 0,
+        "rendertocubemaps": false,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "ItemCount4": 1,
+        "ItemClass4": "",
+        "ItemCount3": 1,
+        "ItemClass3": "",
+        "ItemCount2": 1,
+        "ItemClass2": "",
+        "ItemCount1": 1,
+        "ItemClass1": "",
+        "ammobalancing_removable": 0,
+        "allowobstacleconvexhullmerging": "1",
+        "forcenavcut": false,
+        "updatenavwhenmoving": false,
+        "auto_convert_back_from_debris": true,
+        "nonavmeshblocker": false,
+        "forcenpcexclude": false,
+        "forcenavignore": false,
+        "interactAs": "",
+        "addon": "",
+        "puntsound": "",
+        "enableuseoutput": false,
+        "dynamiccontinuouscontactbehavior": 0,
+        "forcetoenablemotion": 0.0,
+        "damagetoenablemotion": 0,
+        "buoyancyScale": 1.0,
+        "massScale": 0.0,
+        "inertiaScale": 1.0,
+        "acceptdamagefromheldobjects": false,
+        "nodamageforces": 0,
+        "Damagetype": 0,
+        "physdamagescale": 0.1,
+        "shadowcastdist": 0,
+        "minhealthdmg": 0,
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "pressuredelay": 0.0,
+        "spawnflags": 4,
+        "NoInterpolate": false,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "animgraph2_identifier": "",
+        "add_modifier": "",
+        "add_attribute": "",
+        "disableshadows": "2",
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/cs_italy/props/radio/vintage_radio_1.vmdl",
+        "clientSideEntity": 0,
+        "globalname": "",
+        "targetname": "[PR#]106210_80_32924_cache_radio",
+        "vscripts": "",
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "classname": "prop_physics_multiplayer",
+        "compile_source_id": 532,
+        "origin": [
+          -1692.00061,
+          942.001099,
+          1678.376221
+        ],
+        "angles": [
+          0.001611,
+          334.999939,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "106210:80:32924:31064"
+      },
+      "renderNames": [
+        "breakable_cache_106210_80_32924_31064_0"
+      ],
+      "sourceRenderNames": [
+        "vintage_radio_1.unnamed_1"
+      ],
+      "physicsNames": [
+        "breakable_cache_106210_80_32924_31064_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "plastic",
+      "surfaceProperty": "plastic",
+      "breakSoundEvent": "Plastic_Box.Break",
+      "bounds": [
+        [
+          -43.043309151453556,
+          42.636989732469786,
+          -24.071189873095854
+        ],
+        [
+          -42.79223320886728,
+          42.89770821333473,
+          -23.727733991709155
+        ]
+      ],
+      "health": 5.0,
+      "propDataBase": "Plastic.Medium",
+      "damageMultipliers": {
+        "bullet": 1.0,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "prop_data": {
+          "base": "Plastic.Medium",
+          "allowstatic": false,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 5.0,
+          "spawn_motion_disabled": false,
+          "bakelighting": true
+        },
+        "ao_proxy_box_list": [
+          {
+            "bonename": "",
+            "dimensions": [
+              5.10384,
+              12.9578,
+              10.3499
+            ],
+            "offset_origin": [
+              2.64617,
+              0.129574,
+              5.33075
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "plastic",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "cache:123804",
+      "entityId": "123804",
+      "model": "models/de_cache_s2/newvent/newvent.vmdl",
+      "native": {
+        "clothScale": 1.0,
+        "steamaudio_geometry_mode": "0",
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "StartingAnim": "",
+        "use_animgraph": true,
+        "disablelowviolence": 0,
+        "solid": 6,
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": true,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "NoInterpolate": false,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "animgraph2_identifier": "",
+        "add_modifier": "",
+        "add_attribute": "",
+        "disableshadows": 1,
+        "expand_render_bounds_to_include_cloth": false,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/de_cache_s2/newvent/newvent.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "",
+        "classname": "prop_dynamic",
+        "compile_source_id": 748,
+        "origin": [
+          374.25,
+          -276.0,
+          1789.25
+        ],
+        "angles": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "123804"
+      },
+      "renderNames": [
+        "breakable_cache_123804_0"
+      ],
+      "sourceRenderNames": [
+        "newvent.unnamed_1"
+      ],
+      "physicsNames": [
+        "breakable_cache_123804_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "metal",
+      "surfaceProperty": "metal_ventslat",
+      "breakSoundEvent": "Breakable.Metal",
+      "bounds": [
+        [
+          9.381693132005811,
+          44.479948671355466,
+          6.007825443848629
+        ],
+        [
+          9.59789402415011,
+          46.39738582960254,
+          8.012455287155428
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Metal.Medium",
+      "damageMultipliers": {
+        "bullet": 1.0,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "break_list": [
+          {
+            "piece_name": "piece_01",
+            "model": "models/de_cache_s2/newvent/newvent_gib_01.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_02",
+            "model": "models/de_cache_s2/newvent/newvent_gib_02.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_03",
+            "model": "models/de_cache_s2/newvent/newvent_gib_03.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_04",
+            "model": "models/de_cache_s2/newvent/newvent_gib_04.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              -5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_05",
+            "model": "models/de_cache_s2/newvent/newvent_gib_05.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              -10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_06",
+            "model": "models/de_cache_s2/newvent/newvent_gib_06.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              -15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_07",
+            "model": "models/de_cache_s2/newvent/newvent_gib_07.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_08",
+            "model": "models/de_cache_s2/newvent/newvent_gib_08.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_09",
+            "model": "models/de_cache_s2/newvent/newvent_gib_09.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_10",
+            "model": "models/de_cache_s2/newvent/newvent_gib_10.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          }
+        ],
+        "prop_data": {
+          "base": "Metal.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_command_list": [
+          {
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "attachment_point": "",
+            "center_on_damage_point": false,
+            "limit_to_piece": "piece_01",
+            "burst_scale": 2.0,
+            "burst_randomize": 50.0,
+            "break_command": "break_twist_pieces"
+          }
+        ],
+        "CPhysicsBodyGameMarkupData": {
+          "m_PhysicsBodyMarkupByBoneName": {
+            "default": {
+              "m_TargetBody": "default",
+              "m_Tag": ""
+            }
+          }
+        }
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "metal_ventslat",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    },
+    {
+      "id": "cache:123807",
+      "entityId": "123807",
+      "model": "models/de_cache_s2/newvent/newvent.vmdl",
+      "native": {
+        "clothScale": 1.0,
+        "steamaudio_geometry_mode": "0",
+        "StartDisabled": false,
+        "forcenpcexclude": false,
+        "CreateNavObstacle": false,
+        "lightingorigin": "",
+        "interactExclude": "",
+        "interactWith": "",
+        "interactAs": "",
+        "AnimateOnServer": false,
+        "LagCompensate": false,
+        "randomizecycle": false,
+        "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "IdleAnim": "",
+        "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
+        "StartingAnim": "",
+        "use_animgraph": true,
+        "disablelowviolence": 0,
+        "solid": 6,
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": 0,
+        "lightmapstatic": 0,
+        "rendertocubemaps": true,
+        "object_culling": 0,
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disablereceiveshadows": false,
+        "rendercolor": [
+          255,
+          255,
+          255
+        ],
+        "renderamt": 255,
+        "rendermode": "kRenderNormal",
+        "renderfx": "kRenderFxNone",
+        "BreakableContentsParticleOverride": "",
+        "BreakableContentsPropGroupOverride": "",
+        "BreakableContentsType": "BC_DEFAULT",
+        "burstlocation": "",
+        "burstscale": 100.0,
+        "pressuredelay": 0.0,
+        "spawnflags": 0,
+        "NoInterpolate": false,
+        "PerformanceMode": "PM_NORMAL",
+        "ExplodeRadius": 0.0,
+        "ExplodeDamage": 0.0,
+        "damagefilter": "",
+        "vscripts": "",
+        "animgraph2_identifier": "",
+        "add_modifier": "",
+        "add_attribute": "",
+        "disableshadows": 1,
+        "expand_render_bounds_to_include_cloth": false,
+        "bodygroups": "",
+        "skin": "default",
+        "model": "models/de_cache_s2/newvent/newvent.vmdl",
+        "globalname": "",
+        "clientSideEntity": 0,
+        "useLocalOffset": false,
+        "parentAttachmentName": "",
+        "parentname": "",
+        "targetname": "",
+        "classname": "prop_dynamic",
+        "compile_source_id": 749,
+        "origin": [
+          544.75,
+          -169.375,
+          1789.25
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "123807"
+      },
+      "renderNames": [
+        "breakable_cache_123807_0"
+      ],
+      "sourceRenderNames": [
+        "newvent.unnamed_1"
+      ],
+      "physicsNames": [
+        "breakable_cache_123807_physics"
+      ],
+      "damageKinds": [
+        "bullet",
+        "melee",
+        "explosion"
+      ],
+      "material": "metal",
+      "surfaceProperty": "metal_ventslat",
+      "breakSoundEvent": "Breakable.Metal",
+      "bounds": [
+        [
+          12.834596608859847,
+          44.47994880356975,
+          4.177861772888453
+        ],
+        [
+          14.839226669502317,
+          46.3973857011798,
+          4.394062585200965
+        ]
+      ],
+      "health": 1.0,
+      "propDataBase": "Metal.Medium",
+      "damageMultipliers": {
+        "bullet": 1.0,
+        "melee": 1.0,
+        "explosion": 1.0
+      },
+      "nativeModelKeys": {
+        "break_list": [
+          {
+            "piece_name": "piece_01",
+            "model": "models/de_cache_s2/newvent/newvent_gib_01.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_02",
+            "model": "models/de_cache_s2/newvent/newvent_gib_02.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_03",
+            "model": "models/de_cache_s2/newvent/newvent_gib_03.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_04",
+            "model": "models/de_cache_s2/newvent/newvent_gib_04.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              -5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_05",
+            "model": "models/de_cache_s2/newvent/newvent_gib_05.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              -10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_06",
+            "model": "models/de_cache_s2/newvent/newvent_gib_06.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              -15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_07",
+            "model": "models/de_cache_s2/newvent/newvent_gib_07.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_08",
+            "model": "models/de_cache_s2/newvent/newvent_gib_08.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_09",
+            "model": "models/de_cache_s2/newvent/newvent_gib_09.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_10",
+            "model": "models/de_cache_s2/newvent/newvent_gib_10.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          }
+        ],
+        "prop_data": {
+          "base": "Metal.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_command_list": [
+          {
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "attachment_point": "",
+            "center_on_damage_point": false,
+            "limit_to_piece": "piece_01",
+            "burst_scale": 2.0,
+            "burst_randomize": 50.0,
+            "break_command": "break_twist_pieces"
+          }
+        ],
+        "CPhysicsBodyGameMarkupData": {
+          "m_PhysicsBodyMarkupByBoneName": {
+            "default": {
+              "m_TargetBody": "default",
+              "m_Tag": ""
+            }
+          }
+        }
+      },
+      "qualification": "Native positive model health and inherited damage scales; original entity compound render/collision ownership retained. Native break pieces/commands preserved as data; debris motion is a browser reconstruction.",
+      "breakSoundSourceSurface": "metal_ventslat",
+      "breakSoundQualification": "Native VSURF primary PHYS surface inheritance; first explicit audiosounds.break wins, including empty silence. Mixed partition primary choice is retained as source metadata; engine event selection requires matched native interaction proof."
+    }
+  ],
+  "enabledRemainders": [],
+  "sourceHashes": {
+    "entities": "dcc93b2758515028891eba088d3052e0abe04d740d17f7499f28194b16190952",
+    "sourceRender": "61efce19bc01e6579f9d484d7ff6b65191aef347fd75fda78b2dd92ae89ec597",
+    "sourcePhysics": "5779ee797d2ed8f5423c02d632d7d771526d0f47c5b58c7d9301a3df927eff03",
+    "propData": "0e6e36e89bdbc59c291d578d89f018b2c85a6866a2e7604cbc0e1c4c5c446941",
+    "surfaceDefinitionsData": "2f527a673f188f929c6c9c41c57dbf1fdd7d674a958a4186bbb81baf960edfaa"
+  },
+  "modelAudit": [
+    {
+      "model": "models/cs_italy/props/radio/vintage_radio_1.vmdl",
+      "sourceSha256": "6d7b4da4ba41e1bff007ce2cb2838ee5c75b71c42fbb579e4627f3709ee5b3d6",
+      "hasPropData": true,
+      "native": {
+        "prop_data": {
+          "base": "Plastic.Medium",
+          "allowstatic": false,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 5.0,
+          "spawn_motion_disabled": false,
+          "bakelighting": true
+        },
+        "ao_proxy_box_list": [
+          {
+            "bonename": "",
+            "dimensions": [
+              5.10384,
+              12.9578,
+              10.3499
+            ],
+            "offset_origin": [
+              2.64617,
+              0.129574,
+              5.33075
+            ],
+            "offset_angles": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "model": "models/de_cache_s2/newvent/newvent.vmdl",
+      "sourceSha256": "2cd40015b903cce8fd706dfe30dbfba879f138698a0630168c0ef6f5e8dbbbcb",
+      "hasPropData": true,
+      "native": {
+        "break_list": [
+          {
+            "piece_name": "piece_01",
+            "model": "models/de_cache_s2/newvent/newvent_gib_01.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_02",
+            "model": "models/de_cache_s2/newvent/newvent_gib_02.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_03",
+            "model": "models/de_cache_s2/newvent/newvent_gib_03.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_04",
+            "model": "models/de_cache_s2/newvent/newvent_gib_04.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              -5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_05",
+            "model": "models/de_cache_s2/newvent/newvent_gib_05.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              -10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_06",
+            "model": "models/de_cache_s2/newvent/newvent_gib_06.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              -15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_07",
+            "model": "models/de_cache_s2/newvent/newvent_gib_07.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              5.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_08",
+            "model": "models/de_cache_s2/newvent/newvent_gib_08.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              10.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_09",
+            "model": "models/de_cache_s2/newvent/newvent_gib_09.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              5.0,
+              15.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          },
+          {
+            "piece_name": "piece_10",
+            "model": "models/de_cache_s2/newvent/newvent_gib_10.vmdl",
+            "spawn_entity": "prop_physics",
+            "ragdoll_applies_bind_pose_root": false,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "offset_rotation": [
+              -5.0,
+              0.0,
+              0.0
+            ],
+            "fadetime": 0.1,
+            "fademindist": 0.0,
+            "fademaxdist": 0.0,
+            "massoverride": -1.0,
+            "random_spawn_chance": 1.0,
+            "suppress_creation_on_death": false,
+            "is_essential_piece": false,
+            "can_player_pickup_piece": false,
+            "physics_joint_modification_type": "none",
+            "sound_event_on_spawn": "",
+            "health_override": 0,
+            "render_color_mode": "inherit_owner",
+            "material_group_mode": "inherit_owner_index"
+          }
+        ],
+        "prop_data": {
+          "base": "Metal.Medium",
+          "allowstatic": true,
+          "bakelighting": true,
+          "damage_table": "",
+          "dmg.bullets": -1.0,
+          "dmg.club": -1.0,
+          "dmg.explosive": -1.0,
+          "dmg.fire": -1.0,
+          "health": 1.0,
+          "spawn_motion_disabled": false
+        },
+        "break_command_list": [
+          {
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "attachment_point": "",
+            "center_on_damage_point": false,
+            "limit_to_piece": "piece_01",
+            "burst_scale": 2.0,
+            "burst_randomize": 50.0,
+            "break_command": "break_twist_pieces"
+          }
+        ],
+        "CPhysicsBodyGameMarkupData": {
+          "m_PhysicsBodyMarkupByBoneName": {
+            "default": {
+              "m_TargetBody": "default",
+              "m_Tag": ""
+            }
+          }
+        }
+      }
+    }
+  ]
+}

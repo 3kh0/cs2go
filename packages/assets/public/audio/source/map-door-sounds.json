@@ -1,0 +1,2023 @@
+{
+  "source": "Installed CS2 game/csgo/pak01_dir.vpk",
+  "build": "26445667",
+  "sourceVpkSha256": "10d5831cbf008808419a438141362c466f14550a8a4cf04ace56a7828ccf2b27",
+  "decompiler": "ValveResourceFormat Source2Viewer20.1",
+  "clips": [
+    {
+      "name": "map-door-door_plastic_full_close_01",
+      "path": "/audio/source/map-door-door_plastic_full_close_01.wav",
+      "resource": "sounds/doors/door_plastic_full_close_01.vsnd_c",
+      "source": "sounds/doors/door_plastic_full_close_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "cb68b1b9e113ec73ad2058fa8dcab835b31a3b7f9f56bd37b4ab7059d14a09f1",
+      "outputSha256": "557339b645d89628a5eafd6effadbac37a2139d1923e5b90b692c3be43da4cab",
+      "bytes": 85620,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 0.970249,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_plastic_full_close_02",
+      "path": "/audio/source/map-door-door_plastic_full_close_02.wav",
+      "resource": "sounds/doors/door_plastic_full_close_02.vsnd_c",
+      "source": "sounds/doors/door_plastic_full_close_02.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "ade3d664e718bcbc0a75da262902900a8d0a1ff69d887b08a1e8398cc60e8c91",
+      "outputSha256": "84503ab1747da994c9b71ec89dea46254f5e5ed70f8b30e15373d1e274792da6",
+      "bytes": 61612,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 0.69805,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_plastic_full_close_03",
+      "path": "/audio/source/map-door-door_plastic_full_close_03.wav",
+      "resource": "sounds/doors/door_plastic_full_close_03.vsnd_c",
+      "source": "sounds/doors/door_plastic_full_close_03.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "b123dadb32f35367982edd69c3e90b1133eee286c7b39d89d192176b3e6be93e",
+      "outputSha256": "9fd17b200cf7a970340e26c05ae3e42f33b3df84b20bb5b4c3bc19ce8abbfb11",
+      "bytes": 38732,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 0.438639,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_plastic_full_close_04",
+      "path": "/audio/source/map-door-door_plastic_full_close_04.wav",
+      "resource": "sounds/doors/door_plastic_full_close_04.vsnd_c",
+      "source": "sounds/doors/door_plastic_full_close_04.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "e213db573ec8a9c6d3d3b2d34b265f58c19e8e830968e14478d180f0e488e74d",
+      "outputSha256": "190e4ce63c196b53aa62177b68e6ae7ba04b7906102d770d7ac9250337a42c8b",
+      "bytes": 38252,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 0.433197,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_plastic_full_open_01",
+      "path": "/audio/source/map-door-door_plastic_full_open_01.wav",
+      "resource": "sounds/doors/door_plastic_full_open_01.vsnd_c",
+      "source": "sounds/doors/door_plastic_full_open_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "05448ae1b644a6c595bbe192530d3d71a38a5aac57273a2b585a92264edd677a",
+      "outputSha256": "3caa45fc88ce87119f5eaef1f63606e1ba91dc2cfd37414419d77389afaec16c",
+      "bytes": 29436,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 0.333243,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_plastic_start_close_01",
+      "path": "/audio/source/map-door-door_plastic_start_close_01.wav",
+      "resource": "sounds/doors/door_plastic_start_close_01.vsnd_c",
+      "source": "sounds/doors/door_plastic_start_close_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "b8fdad7f338486ae0a364968b17c3ac9fbe7bbcdeb3a66018aa72156ad311997",
+      "outputSha256": "a079aea65c3ec06790dbb003f5e34c80c4450d640693a28b85e909f01d126de9",
+      "bytes": 108612,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 1.23093,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_plastic_start_close_02",
+      "path": "/audio/source/map-door-door_plastic_start_close_02.wav",
+      "resource": "sounds/doors/door_plastic_start_close_02.vsnd_c",
+      "source": "sounds/doors/door_plastic_start_close_02.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "054db51f806d30888f19fa8592b7145a0bc0d5b496d27bf5f58db9bbbd094f02",
+      "outputSha256": "9668185d238ae049ac9d3bbb3bc6d0fab07625da44e9af43d5c0dd38f77c0a58",
+      "bytes": 80526,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 0.912494,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_plastic_start_open_01",
+      "path": "/audio/source/map-door-door_plastic_start_open_01.wav",
+      "resource": "sounds/doors/door_plastic_start_open_01.vsnd_c",
+      "source": "sounds/doors/door_plastic_start_open_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "ab151bdf99fc47d257e04cef4a6a6c06be4027209462759135d1a96abe3b61ec",
+      "outputSha256": "0b501ba3336ece88ac1bd6d721e9f55f2c34154aafb372bd3d34503ed046e030",
+      "bytes": 111538,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 1.264104,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_wood_full_close_02",
+      "path": "/audio/source/map-door-door_wood_full_close_02.wav",
+      "resource": "sounds/doors/door_wood_full_close_02.vsnd_c",
+      "source": "sounds/doors/door_wood_full_close_02.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "b709887546326c160ff6707c623ce81b4176b074425359cce383dbb12a9d55cc",
+      "outputSha256": "656de6e4121c99f60a986ef2b65343a61f80817d2ae665b2a0547ed819ee48c5",
+      "bytes": 41672,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 0.471973,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_wood_full_open_01",
+      "path": "/audio/source/map-door-door_wood_full_open_01.wav",
+      "resource": "sounds/doors/door_wood_full_open_01.vsnd_c",
+      "source": "sounds/doors/door_wood_full_open_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "549d7f1a42241068dbbee61f04b5db937ecf06603efbae320b2ac520b44a5d0c",
+      "outputSha256": "194d93564f4cb979824d9e61b84cc14e6715a25c9ce68f788af97fb3d5e7ef1b",
+      "bytes": 92594,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 1.04932,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_wood_start_close_01",
+      "path": "/audio/source/map-door-door_wood_start_close_01.wav",
+      "resource": "sounds/doors/door_wood_start_close_01.vsnd_c",
+      "source": "sounds/doors/door_wood_start_close_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "3b8a2578e3dcee25b78304fbad09c0d64fa57ca220d22297c442ddbe8999fbec",
+      "outputSha256": "e95557e8e6d608fce7cd556d9a4b6301db591ba1df3fbc30f7b5f8726f93e216",
+      "bytes": 145308,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 1.646984,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-door_wood_start_open_01",
+      "path": "/audio/source/map-door-door_wood_start_open_01.wav",
+      "resource": "sounds/doors/door_wood_start_open_01.vsnd_c",
+      "source": "sounds/doors/door_wood_start_open_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "0c594ba6595a5b2f8d1a9e8cd5e8ed16b763ff83264a6671bd77ea7343dc323b",
+      "outputSha256": "b1f7843e54f5d34f9d5a7ed0b69d330ef822162fcbdd2ab4ab55fb652ba3fe53",
+      "bytes": 98318,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 1,
+      "durationSeconds": 1.114218,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-metal_door_full_close_01",
+      "path": "/audio/source/map-door-metal_door_full_close_01.wav",
+      "resource": "sounds/doors/metal_door_full_close_01.vsnd_c",
+      "source": "sounds/doors/metal_door_full_close_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "caad41824a24869950edd4cf4532a20449650419d75ecc0847f72afd61003c73",
+      "outputSha256": "80285427bc12c54b797b12c27d2405def03ba0c12d9b0c8b60efdf6be45defc4",
+      "bytes": 122068,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 2,
+      "durationSeconds": 0.691746,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-metal_door_full_close_02",
+      "path": "/audio/source/map-door-metal_door_full_close_02.wav",
+      "resource": "sounds/doors/metal_door_full_close_02.vsnd_c",
+      "source": "sounds/doors/metal_door_full_close_02.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "a30b4e0907dd822d4cb3347e21ae82e28258112a0a6c7575e93f47dabcba314f",
+      "outputSha256": "9e08e89570a80b38338fa07db900bb2b9ddf4d2f578947402cce2663f000e875",
+      "bytes": 123732,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 2,
+      "durationSeconds": 0.701179,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-metal_door_full_open_01",
+      "path": "/audio/source/map-door-metal_door_full_open_01.wav",
+      "resource": "sounds/doors/metal_door_full_open_01.vsnd_c",
+      "source": "sounds/doors/metal_door_full_open_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "4c2f2e00d75074b1158195476510e4be5cbbc5b6e0de94b5b5999bffcf208432",
+      "outputSha256": "32f52699a3dafdb3483f8166e75791ac133b0ae081aa376a699cfc818e0110cc",
+      "bytes": 114824,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 2,
+      "durationSeconds": 0.65068,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-metal_door_full_open_02",
+      "path": "/audio/source/map-door-metal_door_full_open_02.wav",
+      "resource": "sounds/doors/metal_door_full_open_02.vsnd_c",
+      "source": "sounds/doors/metal_door_full_open_02.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "338e8494ef908140eb44b93f3b8e6178b7a6ac4ac89495e5102803cab4c0d1c8",
+      "outputSha256": "976b69d528fd8b0a0a76f6597835af380cb39b2851f3399bef803d3cf269491d",
+      "bytes": 98272,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 2,
+      "durationSeconds": 0.556848,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-metal_door_move_01",
+      "path": "/audio/source/map-door-metal_door_move_01.wav",
+      "resource": "sounds/doors/metal_door_move_01.vsnd_c",
+      "source": "sounds/doors/metal_door_move_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "7600c2f14f7cbca1f621d57dec24a10308b1a9f601101196f26c62000d1143fc",
+      "outputSha256": "ba5a1c8a2e9c4218753cd5669df3d9dfcfc7f56f6d934da198fb1b0b5b785552",
+      "bytes": 69212,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 2,
+      "durationSeconds": 0.392109,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-metal_door_move_02",
+      "path": "/audio/source/map-door-metal_door_move_02.wav",
+      "resource": "sounds/doors/metal_door_move_02.vsnd_c",
+      "source": "sounds/doors/metal_door_move_02.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "c5421970c27b5a6298dcfc6d5089e5af1c65d4d32066c7d7185f5b0aed6ffe0a",
+      "outputSha256": "d7e917a4abc1cea6e2aa235b43ed96756b3bd17507afc3dae1bea8c7df22f79c",
+      "bytes": 81184,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 2,
+      "durationSeconds": 0.459977,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-metal_door_open_01",
+      "path": "/audio/source/map-door-metal_door_open_01.wav",
+      "resource": "sounds/doors/metal_door_open_01.vsnd_c",
+      "source": "sounds/doors/metal_door_open_01.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "2909943f457dbca6b50b7168574253d261783fdda2c3452610ff9f400eddcd4c",
+      "outputSha256": "f6637aa1b0600e0692ed5aa4a211cd7d976204c72c2e0676569178df2ecc044d",
+      "bytes": 97728,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 2,
+      "durationSeconds": 0.553764,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    },
+    {
+      "name": "map-door-metal_door_open_02",
+      "path": "/audio/source/map-door-metal_door_open_02.wav",
+      "resource": "sounds/doors/metal_door_open_02.vsnd_c",
+      "source": "sounds/doors/metal_door_open_02.vsnd_c",
+      "sourcePack": "Installed CS2 build26445667 native map door sounds",
+      "resourceSha256": "a7f439aaacb33645a4f6848470945d7b56e6f96baf6481f9bc002465b26e2868",
+      "outputSha256": "354fc6eb1933ffe27afde5e8a14c3c7c5bcaaacb972c9a602da1dec922488db5",
+      "bytes": 116892,
+      "codec": "pcm_s16le",
+      "sampleRate": 44100,
+      "channels": 2,
+      "durationSeconds": 0.662404,
+      "conversion": "Unmodified Source2Viewer20.1 decompile output; original PCM16 WAV preserved byte-for-byte, no extra audio encoding"
+    }
+  ],
+  "events": {
+    "vertigo": {
+      "sourceResource": "soundevents/game_sounds_world.vsndevts_c",
+      "original": "raw/csgo/pak01_dir/soundevents/game_sounds_world.vsndevts_c",
+      "dataEvidence": "analysis/audio-world.json",
+      "rawDataDump": "logs/audio-world.txt",
+      "requested": [
+        "Door.de_vertigo_full_close",
+        "Door.de_vertigo_full_open",
+        "Door.de_vertigo_start_close",
+        "Door.de_vertigo_start_open"
+      ],
+      "matched": [
+        {
+          "requested": "Door.de_vertigo_full_close",
+          "eventKey": "Door.de_vertigo_full_close",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 1.0,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 0.3,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": true,
+            "reverb_source_wet": 0.3,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "vsnd_files_track_01": [
+              "sounds/doors/door_plastic_full_close_01.vsnd",
+              "sounds/doors/door_plastic_full_close_02.vsnd",
+              "sounds/doors/door_plastic_full_close_03.vsnd",
+              "sounds/doors/door_plastic_full_close_04.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/door_plastic_full_close_01.vsnd",
+            "sounds/doors/door_plastic_full_close_02.vsnd",
+            "sounds/doors/door_plastic_full_close_03.vsnd",
+            "sounds/doors/door_plastic_full_close_04.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/door_plastic_full_close_01.vsnd": true,
+            "sounds/doors/door_plastic_full_close_02.vsnd": true,
+            "sounds/doors/door_plastic_full_close_03.vsnd": true,
+            "sounds/doors/door_plastic_full_close_04.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_vertigo_full_open",
+          "eventKey": "Door.de_vertigo_full_open",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.399902,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 0.3,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": true,
+            "reverb_source_wet": 0.3,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "vsnd_files_track_01": "sounds/doors/door_plastic_full_open_01.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/door_plastic_full_open_01.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/door_plastic_full_open_01.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_vertigo_start_close",
+          "eventKey": "Door.de_vertigo_start_close",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.399902,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 0.3,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": true,
+            "reverb_source_wet": 0.3,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "vsnd_files_track_01": [
+              "sounds/doors/door_plastic_start_close_01.vsnd",
+              "sounds/doors/door_plastic_start_close_02.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/door_plastic_start_close_01.vsnd",
+            "sounds/doors/door_plastic_start_close_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/door_plastic_start_close_01.vsnd": true,
+            "sounds/doors/door_plastic_start_close_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_vertigo_start_open",
+          "eventKey": "Door.de_vertigo_start_open",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.399902,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 0.3,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": true,
+            "reverb_source_wet": 0.3,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "vsnd_files_track_01": "sounds/doors/door_plastic_start_open_01.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/door_plastic_start_open_01.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/door_plastic_start_open_01.vsnd": true
+          }
+        }
+      ],
+      "missing": [],
+      "method": "Exact case-insensitive event-key match in global pak soundevents DATA; no sound-media decoding or extraction."
+    },
+    "nuke": {
+      "sourceResource": "soundevents/game_sounds_world.vsndevts_c",
+      "original": "raw/csgo/pak01_dir/soundevents/game_sounds_world.vsndevts_c",
+      "dataEvidence": "analysis/audio-world.json",
+      "rawDataDump": "logs/audio-world.txt",
+      "requested": [
+        "Door.de_nuke_full_close_01",
+        "Door.de_nuke_full_close_02",
+        "Door.de_nuke_full_close_03",
+        "Door.de_nuke_full_open_01",
+        "Door.de_nuke_full_open_02",
+        "Door.de_nuke_full_open_03",
+        "Door.de_nuke_move_01",
+        "Door.de_nuke_move_02",
+        "Door.de_nuke_move_03",
+        "Door.de_nuke_unlock_01",
+        "Door.de_nuke_unlock_02",
+        "Door.de_nuke_unlock_03"
+      ],
+      "matched": [
+        {
+          "requested": "Door.de_nuke_full_close_01",
+          "eventKey": "Door.de_nuke_full_close_01",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.399902,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": "sounds/doors/metal_door_full_close_01.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_full_close_01.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_full_close_01.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_full_close_02",
+          "eventKey": "Door.de_nuke_full_close_02",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.399902,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": "sounds/doors/metal_door_full_close_02.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_full_close_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_full_close_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_full_close_03",
+          "eventKey": "Door.de_nuke_full_close_03",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.399902,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": [
+              "sounds/doors/metal_door_full_close_01.vsnd",
+              "sounds/doors/metal_door_full_close_02.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_full_close_01.vsnd",
+            "sounds/doors/metal_door_full_close_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_full_close_01.vsnd": true,
+            "sounds/doors/metal_door_full_close_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_full_open_01",
+          "eventKey": "Door.de_nuke_full_open_01",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.25,
+            "pitch": 1.075,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              60.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": "sounds/doors/metal_door_full_open_01.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_full_open_01.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_full_open_01.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_full_open_02",
+          "eventKey": "Door.de_nuke_full_open_02",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.25,
+            "pitch": 1.075,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              60.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": "sounds/doors/metal_door_full_open_02.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_full_open_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_full_open_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_full_open_03",
+          "eventKey": "Door.de_nuke_full_open_03",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.25,
+            "pitch": 1.075,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              60.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": [
+              "sounds/doors/metal_door_full_close_01.vsnd",
+              "sounds/doors/metal_door_full_close_02.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_full_close_01.vsnd",
+            "sounds/doors/metal_door_full_close_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_full_close_01.vsnd": true,
+            "sounds/doors/metal_door_full_close_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_move_01",
+          "eventKey": "Door.de_nuke_move_01",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.299805,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              60.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": "sounds/doors/metal_door_move_01.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_move_01.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_move_01.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_move_02",
+          "eventKey": "Door.de_nuke_move_02",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.299805,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              60.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": "sounds/doors/metal_door_move_02.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_move_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_move_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_move_03",
+          "eventKey": "Door.de_nuke_move_03",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.299805,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              60.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": [
+              "sounds/doors/metal_door_move_01.vsnd",
+              "sounds/doors/metal_door_move_02.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_move_01.vsnd",
+            "sounds/doors/metal_door_move_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_move_01.vsnd": true,
+            "sounds/doors/metal_door_move_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_unlock_01",
+          "eventKey": "Door.de_nuke_unlock_01",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.699707,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": "sounds/doors/metal_door_open_01.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_open_01.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_open_01.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_unlock_02",
+          "eventKey": "Door.de_nuke_unlock_02",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.699707,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": "sounds/doors/metal_door_open_02.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_open_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_open_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_unlock_03",
+          "eventKey": "Door.de_nuke_unlock_03",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.699707,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": [
+              "sounds/doors/metal_door_open_02.vsnd",
+              "sounds/doors/metal_door_open_01.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_open_01.vsnd",
+            "sounds/doors/metal_door_open_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_open_01.vsnd": true,
+            "sounds/doors/metal_door_open_02.vsnd": true
+          }
+        }
+      ],
+      "missing": [],
+      "method": "Exact case-insensitive event-key match in global pak soundevents DATA; no sound-media decoding or extraction."
+    },
+    "inferno": {
+      "sourceResource": "soundevents/game_sounds_world.vsndevts_c",
+      "original": "raw/csgo/pak01_dir/soundevents/game_sounds_world.vsndevts_c",
+      "dataEvidence": "analysis/audio-world.json",
+      "rawDataDump": "logs/audio-world.txt",
+      "requested": [
+        "Door.wood_full_close",
+        "Door.wood_full_open",
+        "Door.wood_start_open"
+      ],
+      "matched": [
+        {
+          "requested": "Door.wood_full_close",
+          "eventKey": "Door.wood_full_close",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 1.0,
+            "pitch": 1.1,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 0.3,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": true,
+            "reverb_source_wet": 0.3,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "vsnd_files_track_01": "sounds/doors/door_wood_full_close_02.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/door_wood_full_close_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/door_wood_full_close_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.wood_full_open",
+          "eventKey": "Door.wood_full_open",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 1.0,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 0.3,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": true,
+            "reverb_source_wet": 0.3,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "vsnd_files_track_01": "sounds/doors/door_wood_full_open_01.vsnd",
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/door_wood_full_open_01.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/door_wood_full_open_01.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.wood_start_open",
+          "eventKey": "Door.wood_start_open",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 1.0,
+            "pitch": 1.4,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 0.3,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.0,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": true,
+            "reverb_source_wet": 0.3,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "vsnd_files_track_01": [
+              "sounds/doors/door_wood_start_open_01.vsnd",
+              "sounds/doors/door_wood_start_close_01.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/door_wood_start_close_01.vsnd",
+            "sounds/doors/door_wood_start_open_01.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/door_wood_start_close_01.vsnd": true,
+            "sounds/doors/door_wood_start_open_01.vsnd": true
+          }
+        }
+      ],
+      "missing": [],
+      "method": "Exact case-insensitive event-key match in global pak soundevents DATA; no sound-media decoding or extraction."
+    },
+    "cache": {
+      "sourceResource": "soundevents/game_sounds_world.vsndevts_c",
+      "original": "raw/csgo/pak01_dir/soundevents/game_sounds_world.vsndevts_c",
+      "dataEvidence": "analysis/audio-world.json",
+      "rawDataDump": "logs/audio-world.txt",
+      "requested": [
+        "Door.de_nuke_full_close_03",
+        "Door.de_nuke_full_open_03",
+        "Door.de_nuke_move_03",
+        "Door.de_nuke_unlock_03"
+      ],
+      "matched": [
+        {
+          "requested": "Door.de_nuke_full_close_03",
+          "eventKey": "Door.de_nuke_full_close_03",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.399902,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": [
+              "sounds/doors/metal_door_full_close_01.vsnd",
+              "sounds/doors/metal_door_full_close_02.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_full_close_01.vsnd",
+            "sounds/doors/metal_door_full_close_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_full_close_01.vsnd": true,
+            "sounds/doors/metal_door_full_close_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_full_open_03",
+          "eventKey": "Door.de_nuke_full_open_03",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.25,
+            "pitch": 1.075,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              60.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": [
+              "sounds/doors/metal_door_full_close_01.vsnd",
+              "sounds/doors/metal_door_full_close_02.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_full_close_01.vsnd",
+            "sounds/doors/metal_door_full_close_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_full_close_01.vsnd": true,
+            "sounds/doors/metal_door_full_close_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_move_03",
+          "eventKey": "Door.de_nuke_move_03",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.299805,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              60.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": [
+              "sounds/doors/metal_door_move_01.vsnd",
+              "sounds/doors/metal_door_move_02.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_move_01.vsnd",
+            "sounds/doors/metal_door_move_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_move_01.vsnd": true,
+            "sounds/doors/metal_door_move_02.vsnd": true
+          }
+        },
+        {
+          "requested": "Door.de_nuke_unlock_03",
+          "eventKey": "Door.de_nuke_unlock_03",
+          "definition": {
+            "type": "csgo_mega",
+            "volume": 0.699707,
+            "pitch": 1.0,
+            "use_distance_volume_mapping_curve": true,
+            "reverb_wet": 1.0,
+            "mixgroup": "World",
+            "occlusion_intensity": 0.8,
+            "display_broadcast": true,
+            "position_offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "use_fadetime_volume_mapping_curve": false,
+            "reverb_source_wet": 1.0,
+            "instance_limit": 1.0,
+            "block_duration": 0.3,
+            "block_distance": 100.0,
+            "restrict_source_reverb": true,
+            "occlusion_frequency_scale": 0.97,
+            "vsnd_files_track_01": [
+              "sounds/doors/metal_door_open_02.vsnd",
+              "sounds/doors/metal_door_open_01.vsnd"
+            ],
+            "distance_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ],
+              [
+                1400.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ],
+            "fadetime_volume_mapping_curve": [
+              [
+                0.0,
+                1.0,
+                -1.691176,
+                -1.691176,
+                2.0,
+                3.0
+              ],
+              [
+                0.3,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                3.0
+              ]
+            ]
+          },
+          "vsndReferences": [
+            "sounds/doors/metal_door_open_01.vsnd",
+            "sounds/doors/metal_door_open_02.vsnd"
+          ],
+          "compiledReferencePresent": {
+            "sounds/doors/metal_door_open_01.vsnd": true,
+            "sounds/doors/metal_door_open_02.vsnd": true
+          }
+        }
+      ],
+      "missing": [],
+      "method": "Exact case-insensitive event-key match in global pak soundevents DATA; no sound-media decoding or extraction."
+    }
+  },
+  "qualification": "Exact native event definitions and original decoded PCM WAV media. Source2 engine event timing/occlusion/reverb are reconstructed; source inheritance is not proof of effective door health."
+}
