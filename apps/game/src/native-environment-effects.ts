@@ -1,4 +1,5 @@
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
+import { environmentBevelStrength } from "./native-environment-parameters";
 
 const literal = (value: number) => {
   const raw = Number.isInteger(value) ? `${value}.0` : `${value}`;
@@ -8,7 +9,10 @@ const literal = (value: number) => {
  * derivative-based LOD because WebGL2 has no textureQueryLod, and view-space
  * derivatives rather than Source's camera-relative world coordinates. */
 export function environmentEffects(source: SourceEnvironmentMaterial, unitScale = 1) {
-  const f = (name: string, fallback: number) => literal(source.FloatParams[name] ?? fallback);
+  const f = (name: string, fallback: number) => {
+    const authored = source.FloatParams[name] ?? fallback;
+    return literal(name === "g_flBevelStrength2" ? environmentBevelStrength(authored) : authored);
+  };
   const v = (name: string, fallback: number[]) =>
     `vec${fallback.length}(${(source.VectorParams[name] ?? fallback).slice(0, fallback.length).map(literal).join(",")})`;
   const borderMode = source.IntParams.F_BORDER_BLEND_MODE_2 ?? 0;

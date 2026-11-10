@@ -1,6 +1,13 @@
 import type * as T from "three";
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
 
+/** Installed ENV VCS MATERIAL_PARAM / FLOAT(0x3c23d70a) / MUL / RETURN
+ * resolves authored bevel strength before the pixel shader's separate *100.
+ * The authored value is not the shader uniform, despite their identical names. */
+export function environmentBevelStrength(authored: number) {
+  return Math.fround(Math.fround(authored) * Math.fround(0.01));
+}
+
 /** Material values belong to uniforms, while native feature decisions and
  * verified texture constants remain in the generated shader. Pack scalars so
  * three-layer materials do not consume one fragment uniform vector per float. */
@@ -40,7 +47,11 @@ export class EnvironmentShaderParameters {
   }
 
   float(source: SourceEnvironmentMaterial, key: string, fallback: number) {
-    const value = source.FloatParams[key] ?? fallback;
+    const authored = source.FloatParams[key] ?? fallback;
+    const value =
+      key === "g_flBevelStrength2" || key === "g_flBevelStrength3"
+        ? environmentBevelStrength(authored)
+        : authored;
     // Native zero/identity controls often remove an entire texture contribution.
     // Preserve those compile-time eliminations, especially on 16-sampler GPUs.
     return value === 0 || value === 1 ? `${value}.0` : this.value(`float:${key}`, [value]);
