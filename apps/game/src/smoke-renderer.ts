@@ -346,8 +346,12 @@ export class SmokeComposite {
       this.target = new T.WebGLRenderTarget(this.size.x, this.size.y, {
         format: color ? T.RGBAFormat : T.RedFormat,
         type: color ? T.HalfFloatType : T.UnsignedByteType,
-        minFilter: T.NearestFilter,
-        magFilter: T.NearestFilter,
+        // Native water's scene-color sampler uses MIN_MAG_MIP_LINEAR. This
+        // full chain reconstructs its producer at our existing viewport size;
+        // native host dimensions/mip count remain unobserved. Depth stays point.
+        minFilter: color ? T.LinearMipmapLinearFilter : T.NearestFilter,
+        magFilter: color ? T.LinearFilter : T.NearestFilter,
+        generateMipmaps: !!color,
         depthTexture: new T.DepthTexture(this.size.x, this.size.y, T.UnsignedIntType),
       });
       this.target.texture.colorSpace = T.LinearSRGBColorSpace;

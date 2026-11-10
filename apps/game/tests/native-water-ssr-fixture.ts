@@ -126,6 +126,26 @@ export function renderNativeWaterSSR() {
       draw("wrongWorldProjection");
     }
   }
+  // Native viewport UVs start at the top; browser scene textures start below.
+  // Force the same final ray sample at opposite browser edges to test the bridge.
+  projection.copy(new T.PerspectiveCamera(65, 1, 0.05, 250).projectionMatrix);
+  uniforms.testSourcePosition.value.set(0, 0, -100);
+  uniforms.testSourceNormal.value.set(0, 0, 1);
+  uniforms.waterSourceViewTranspose.value.identity();
+  uniforms.waterSSRViewToClip.value.copy(waterSSRProjectionFromBrowser(projection));
+  uniforms.waterDepthCoefficients.value.set(0.0254 / 0.05 - 0.0254 / 250, -0.0254 / 0.05);
+  setDepth(-90);
+  for (const [name, y] of [
+    ["browserTopFade", 0.95],
+    ["browserBottomNoFade", 0.05],
+  ] as const) {
+    material.fragmentShader = (prefix + nativeWaterSSR + nativeWaterOil + body).replace(
+      "float _5420 =",
+      `_23824.xy=vec2(.5,${y});float _5420 =`,
+    );
+    material.needsUpdate = true;
+    draw(name);
+  }
   uniforms.testMode.value = 1;
   draw("oilActiveNoVisibleDebris");
   uniforms.testA.value = 0.5;

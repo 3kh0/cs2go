@@ -128,7 +128,9 @@ vec3 nativeWaterFountainReflection(vec3 cubeColor,vec3 baseDiffuse){
         {
             _18229 = mix((baseDiffuse + cubeColor) * 0.5, cubeColor, vec3(_5420));
         }
-        _21711 = mix(cubeColor, _18229, vec3((clamp(1.0 - pow(_5420, 4.0), 0.0, 1.0) * clamp(_23824.y * 8.0, 0.0, 1.0)) * clamp(_7813 * 2.0, 0.0, 1.0)));
+        // Projection bridge produces bottom-origin browser UVs; native edge
+        // fade is defined in top-origin viewport UVs.
+        _21711 = mix(cubeColor, _18229, vec3((clamp(1.0 - pow(_5420, 4.0), 0.0, 1.0) * clamp((1.0 - _23824.y) * 8.0, 0.0, 1.0)) * clamp(_7813 * 2.0, 0.0, 1.0)));
     }
     else
     {

@@ -67,7 +67,7 @@ export function createParallaxTextureBindings(
       texture = owned.get(key)!;
       if (!texture) {
         texture = original.clone();
-        texture.source = new T.Source(original.source.data);
+        texture.source = new T.TextureSource(original.source.data);
         texture.wrapS = wrapS;
         texture.wrapT = wrapT;
         texture.needsUpdate = true;

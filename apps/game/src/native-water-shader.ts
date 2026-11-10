@@ -195,9 +195,15 @@ export function applyNativeWaterShader(
     "#include <roughnessmap_fragment>",
     `float roughnessFactor=${literal(Number(source.resolvedMaterialInputs.g_vRoughness))};`,
   );
+  // PS860 _6410 blends the equal authored roughness lanes with the wave LOD
+  // before cube ray, mip and normalization; the native direct lobe is separate.
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <lights_physical_fragment>",
-    "#include <lights_physical_fragment>\nmaterial.roughness=roughnessFactor;",
+    `#include <lights_physical_fragment>\nmaterial.roughness=${
+      fountain
+        ? "mix(roughnessFactor,1.0,clamp(nativeWaterSSRLod,0.0,0.3499999940395355))"
+        : "roughnessFactor"
+    };`,
   );
   shader.fragmentShader = shader.fragmentShader.replace(
     "vec3 outgoingLight = totalDiffuse + totalSpecular + totalEmissiveRadiance;",

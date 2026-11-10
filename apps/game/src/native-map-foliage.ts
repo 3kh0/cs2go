@@ -631,7 +631,10 @@ transformedNormal=-transformedNormal;
           )
           .replace(
             "// Source ResolveDiffuseSpecular supplies albedo*(1-metalness), without",
-            `${transmission ? "nativeFoliageTransmitted+=max(0.,-dot(nativeFoliageGeometric,directLight.direction))*directLight.color;" : ""}\n// Source ResolveDiffuseSpecular supplies albedo*(1-metalness), without`,
+            // Native transmission and direct diffuse consume the same light
+            // radiance. Three's map sun carries pi for Lambert; undo it here
+            // too, since transmission bypasses BRDF_Lambert.
+            `${transmission ? "nativeFoliageTransmitted+=max(0.,-dot(nativeFoliageGeometric,directLight.direction))*directLight.color*RECIPROCAL_PI;" : ""}\n// Source ResolveDiffuseSpecular supplies albedo*(1-metalness), without`,
           )
           .replace(
             "#include <opaque_fragment>",

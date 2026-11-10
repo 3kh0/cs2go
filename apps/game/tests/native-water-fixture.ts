@@ -106,16 +106,23 @@ export function renderNativeWater(
   gradeNativeMapColors(scene);
   const activeMaterial = water.material as T.MeshStandardMaterial,
     priorCompile = activeMaterial.onBeforeCompile.bind(activeMaterial),
-    debug = { value: 0 };
+    debug = { value: 0 },
+    cubeLodOverride = { value: -1 };
   let gradeState: { value: number } | undefined;
   activeMaterial.onBeforeCompile = (shader, renderer) => {
     priorCompile(shader, renderer);
     gradeState = shader.uniforms.nativeMapGradeEnabled;
     shader.uniforms.waterFixtureDebug = debug;
-    shader.fragmentShader = "uniform float waterFixtureDebug;\n" + shader.fragmentShader;
+    shader.uniforms.cubeLodOverride = cubeLodOverride;
+    shader.fragmentShader =
+      "uniform float waterFixtureDebug,cubeLodOverride;\n" + shader.fragmentShader;
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "waterPrepare();vec3 mapN=waterState.normal;",
+      "waterPrepare();if(cubeLodOverride>=0.)nativeWaterSSRLod=cubeLodOverride;vec3 mapN=waterState.normal;",
+    );
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <opaque_fragment>",
-      "#include <opaque_fragment>\nif(waterFixtureDebug>.5)gl_FragColor=vec4(waterState.specularPower,waterState.reflectionWeight,waterState.depth,1.0);",
+      "#include <opaque_fragment>\nif(waterFixtureDebug>1.5)gl_FragColor=vec4(material.roughness);else if(waterFixtureDebug>.5)gl_FragColor=vec4(waterState.specularPower,waterState.reflectionWeight,waterState.depth,1.0);",
     );
   };
   const draw = (low = false) => {
@@ -208,7 +215,102 @@ export function renderNativeWater(
   const formula = new Uint16Array(4);
   renderer.readRenderTargetPixels(debugTarget, 32, 32, 1, 1, formula);
   const nativeFormula = [...formula].map((value) => T.DataUtils.fromHalfFloat(value));
+  const cubeRoughness = [];
+  if (source.selectedContract === "inferno-fountain-860-d2") {
+    debug.value = 2;
+    for (const waveLod of [0, 0.2, 0.8]) {
+      cubeLodOverride.value = waveLod;
+      draw();
+      renderer.readRenderTargetPixels(debugTarget, 32, 32, 1, 1, formula);
+      cubeRoughness.push({ waveLod, actual: T.DataUtils.fromHalfFloat(formula[0]) });
+    }
+  }
   renderer.setRenderTarget(null);
+  const captured = pass.target!,
+    capturedPixels = new Uint16Array(captured.width * captured.height * 4);
+  renderer.readRenderTargetPixels(captured, 0, 0, captured.width, captured.height, capturedPixels);
+  let contrast = -1,
+    edgeX = 0,
+    edgeY = 0;
+  for (let y = 0; y < captured.height; y += 2)
+    for (let x = 0; x < captured.width; x += 2) {
+      const red = [0, 1, captured.width, captured.width + 1].map((offset) =>
+        T.DataUtils.fromHalfFloat(capturedPixels[(y * captured.width + x + offset) * 4]),
+      );
+      const difference = Math.max(...red) - Math.min(...red);
+      if (difference > contrast) {
+        contrast = difference;
+        edgeX = x;
+        edgeY = y;
+      }
+    }
+  const expectedMip = [0, 1, 2].map(
+      (channel) =>
+        [0, 1, captured.width, captured.width + 1].reduce(
+          (sum, offset) =>
+            sum +
+            T.DataUtils.fromHalfFloat(
+              capturedPixels[(edgeY * captured.width + edgeX + offset) * 4 + channel],
+            ),
+          0,
+        ) / 4,
+    ),
+    mipTarget = new T.WebGLRenderTarget(1, 1, { type: T.HalfFloatType }),
+    mipScene = new T.Scene(),
+    mipGeometry = new T.PlaneGeometry(2, 2),
+    mipMaterial = new T.ShaderMaterial({
+      uniforms: {
+        frame: { value: captured.texture },
+        probeUv: {
+          value: new T.Vector2((edgeX + 1) / captured.width, (edgeY + 1) / captured.height),
+        },
+      },
+      vertexShader: "void main(){gl_Position=vec4(position.xy,0.,1.);}",
+      fragmentShader:
+        "uniform sampler2D frame;uniform vec2 probeUv;void main(){gl_FragColor=textureLod(frame,probeUv,1.);}",
+    });
+  mipScene.add(new T.Mesh(mipGeometry, mipMaterial));
+  renderer.setRenderTarget(mipTarget);
+  renderer.render(mipScene, new T.Camera());
+  renderer.readRenderTargetPixels(mipTarget, 0, 0, 1, 1, formula);
+  const mipProbe = {
+    contrast,
+    expected: expectedMip,
+    actual: [...formula].slice(0, 3).map((value) => T.DataUtils.fromHalfFloat(value)),
+  };
+  renderer.setRenderTarget(null);
+  renderer.setViewport(8, 8, 48, 48);
+  mipTarget.dispose();
+  mipGeometry.dispose();
+  mipMaterial.dispose();
+  const textureCount = renderer.info.memory.textures;
+  let colorDisposed = false,
+    depthDisposed = false;
+  captured.addEventListener("dispose", () => {
+    colorDisposed = true;
+  });
+  water.visible = fx.visible = smoke.batch.visible = false;
+  pass.render(renderer, scene, camera, [], false);
+  const cancelled = colorDisposed && !pass.target;
+  pass.render(renderer, scene, camera, [], false, { setDepth() {} });
+  const depthTarget = pass.target!,
+    depthPoint =
+      depthTarget.texture.minFilter === T.NearestFilter &&
+      !depthTarget.texture.generateMipmaps &&
+      depthTarget.depthTexture!.magFilter === T.NearestFilter;
+  depthTarget.addEventListener("dispose", () => {
+    depthDisposed = true;
+  });
+  water.visible = fx.visible = smoke.batch.visible = true;
+  debug.value = 0;
+  draw();
+  const colorLifecycle = {
+    cancelled,
+    depthPoint,
+    depthDisposed,
+    restoredColor: pass.target !== depthTarget && pass.target!.texture.generateMipmaps,
+    texturesStable: renderer.info.memory.textures === textureCount,
+  };
   const error = renderer.getContext().getError();
   pass.target?.dispose();
   depthReadTarget.dispose();
@@ -219,5 +321,15 @@ export function renderNativeWater(
   for (const t of native.textures) t.dispose();
   cutoutTexture.dispose();
   renderer.dispose();
-  return { results, control, hole, solid, nativeFormula, error };
+  return {
+    results,
+    control,
+    hole,
+    solid,
+    nativeFormula,
+    cubeRoughness,
+    mipProbe,
+    colorLifecycle,
+    error,
+  };
 }

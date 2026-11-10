@@ -31,6 +31,42 @@ test("native foliage transmission, alpha depth and smoke remain separate", async
   expect(result.smokeLeafWithoutDepth).not.toEqual(result.smokeLeaf);
 });
 
+test("backlit foliage transmission uses native light radiance independently of albedo", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const fixturePath = "/tests/native-foliage-fixture.ts";
+    const sourcePath = "/tests/native-foliage-source-fixture.ts";
+    const fixture = await import(fixturePath);
+    const source = structuredClone((await import(sourcePath)).nativeFoliageSource);
+    source.IntParams.F_USE_ALBEDO_FOR_TRANSMISSIVE = 0;
+    source.resolvedMaterialInputs.g_bUseAlbedoForTransmissive = [0, 0, 0, 0];
+    source.textures.g_tTransmissiveColor = "transmission";
+    return fixture.renderNativeFoliageFixture(source, {
+      alpha: 1,
+      transmission: [0.8, 0.6, 0.4, 1],
+      lightRadiance: 0.4,
+    });
+  });
+  expect(errors).toEqual([]);
+  expect(result.glError).toBe(0);
+  await test.info().attach("native-transmission-radiance", {
+    body: JSON.stringify(result),
+    contentType: "application/json",
+  });
+  // Backside NoL=1, native radiance .4, transmission texel (.8,.6,.4).
+  // Front diffuse/specular are zero; there is no ambient or environment light.
+  expect(result.opaquePixel.slice(0, 3)).toEqual([82, 61, 41]);
+  expect(result.unlit).toBe(0);
+});
+
 test("native foliage coverage follows actual multisampling and explicit color matrix", async ({
   page,
 }) => {
@@ -90,10 +126,10 @@ test("native advanced wind keeps independent fields, unclamped wind and three-po
     actual.forEach((value, index) => expect(value).toBeCloseTo(expected[index], 4));
   // dot(noise,wind)=-1 makes mix(.33,1,-1)=-.34; clamping reverses this displacement.
   near(result[0].position, [10.595, 20.595, 30.595]);
-  near(result[1].position, [2.75, 2.25, 0.75]);
-  near(result[1].tangent, [0.9, 0, 0]);
-  near(result[1].normal, [0, 0, 0.99]);
-  near(result[2].position, [0.75, 0.75, 0.75]);
+  near(result[1].position, [2.6875, 2.3125, 0.75]);
+  near(result[1].tangent, [0.875, 0, 0]);
+  near(result[1].normal, [0, 0, 0.984375]);
+  near(result[2].position, [1.1875, 1.1875, 0.75]);
 });
 
 test("native foliage own-source coordinates survive baked rotated scale16 placement", async ({

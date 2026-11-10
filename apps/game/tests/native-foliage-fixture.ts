@@ -20,6 +20,8 @@ export function renderNativeFoliageFixture(
     backFace?: boolean;
     ambient?: number;
     normal?: number[];
+    transmission?: number[];
+    lightRadiance?: number;
   } = {},
 ) {
   const renderer = new T.WebGLRenderer({ antialias: false });
@@ -51,6 +53,7 @@ export function renderNativeFoliageFixture(
     ),
     normal = texture(settings.normal ?? [128 / 255, 128 / 255, 0.4, 1]),
     ao = texture([0.5, 0.5, 0.5, 1]),
+    transmission = texture(settings.transmission ?? [0, 0, 0, 1]),
     lookup = texture([0.2, 0.7, 0, 1]);
   const noise = new T.Data3DTexture(
     new Uint8Array(Array.from({ length: 32 }, (_, i) => (i % 4 === 2 ? 255 : 180))),
@@ -69,6 +72,7 @@ export function renderNativeFoliageFixture(
       ["color", color],
       ["normal", normal],
       ["ao", ao],
+      ["transmission", transmission],
     ]),
     lookup,
     noise,
@@ -96,7 +100,9 @@ export function renderNativeFoliageFixture(
     };
   }
   const composite = new SmokeComposite();
-  const light = new T.DirectionalLight(0xffffff, 0.5);
+  // Production map lights carry pi to compensate Three's Lambert factor.
+  const lightIntensity = (settings.lightRadiance ?? 0.5) * Math.PI;
+  const light = new T.DirectionalLight(0xffffff, lightIntensity);
   light.position.set(0, 0, -3);
   scene.add(light);
   if (settings.ambient) scene.add(new T.HemisphereLight(0xffffff, 0xffffff, settings.ambient));
@@ -138,7 +144,7 @@ export function renderNativeFoliageFixture(
   geometry.getAttribute("color").needsUpdate = true;
   light.intensity = 0;
   const unlit = draw();
-  light.intensity = 0.5;
+  light.intensity = lightIntensity;
   const blocker = new T.Mesh(new T.PlaneGeometry(1, 2), new T.MeshBasicMaterial({ color: 0 }));
   blocker.position.set(0.5, 0, 0.3);
   scene.add(blocker);
@@ -192,7 +198,12 @@ export function renderNativeFoliageFixture(
   const sum = (p: Uint8Array) => p.reduce((s, v, i) => s + (i % 4 < 3 ? v : 0), 0);
   const different = (a: Uint8Array, b: Uint8Array) =>
     a.reduce((s, v, i) => s + (v !== b[i] ? 1 : 0), 0);
+  const gl = renderer.getContext();
+  const debug = gl.getExtension("WEBGL_debug_renderer_info");
   const result = {
+    rendererIdentity: gl.getParameter(
+      debug ? debug.UNMASKED_RENDERER_WEBGL : gl.RENDERER,
+    ) as string,
     backlit: sum(backlit),
     opaquePixel: Array.from(backlit.slice((16 * 32 + 24) * 4, (16 * 32 + 24) * 4 + 4)),
     holePixel: Array.from(backlit.slice((16 * 32 + 8) * 4, (16 * 32 + 8) * 4 + 4)),

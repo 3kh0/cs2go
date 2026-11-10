@@ -50,6 +50,19 @@ test("native SSR hit/miss/zero-step fixed UV taps and oil gates are distinguishi
   expect(Math.abs(row("wrongResolutionOffsets").pixel[0] - row("hit").pixel[0])).toBeGreaterThan(
     0.005,
   );
+  for (const [name, y] of [
+    ["browserTopFade", 0.95],
+    ["browserBottomNoFade", 0.05],
+  ] as const) {
+    const edgeFade = fade * Math.min((1 - y) * 8, 1),
+      edgeSample = [1 + 2 * offset, y * 2 + 2 * offset, 0.3];
+    edgeSample.forEach((value, i) =>
+      expect(row(name).pixel[i]).toBeCloseTo(
+        [0.1, 0.2, 0.8][i]! * (1 - edgeFade) + value * edgeFade,
+        4,
+      ),
+    );
+  }
   for (const [name, rgb] of [
     ["oilActiveNoVisibleDebris", [0.9875, 0.95, 0.95]],
     ["oilAlphaHalf", [1, 1, 1]],
@@ -85,4 +98,7 @@ test("actual native fountain material and full authored texture chains render th
     expect(row.pixel.every(Number.isFinite)).toBe(true);
   }
   expect(result.results.map((r: any) => r.size)).toEqual([64, 32, 64]);
+  expect(result.cubeRoughness).toHaveLength(3);
+  for (const [index, expected] of [0.01, 0.208, 0.3565].entries())
+    expect(result.cubeRoughness[index]!.actual).toBeCloseTo(expected, 3);
 });

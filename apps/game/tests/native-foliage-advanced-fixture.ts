@@ -31,8 +31,10 @@ export function renderNativeFoliageAdvanced() {
     const negative = kind === "negative-unclamped";
     const wind = createSourceFoliageAdvancedWind(
       [
-        { strength: 2, falloff: 1, scale: [100, 100, 100], speed: [0.5, 0, 0] },
-        { strength: 3, falloff: 1, scale: [100, 100, 100], speed: [0, 0.5, 0] },
+        // Binary-exact eighth-texel weights avoid backend-dependent UNORM
+        // filter precision without weakening the native arithmetic assertions.
+        { strength: 2, falloff: 1, scale: [125, 125, 125], speed: [0.5, 0, 0] },
+        { strength: 3, falloff: 1, scale: [125, 125, 125], speed: [0, 0.5, 0] },
       ],
       negative,
       { direction: [1, 0, 0], strength: 1, timeSeconds: kind === "time-zero" ? 0 : 1 },

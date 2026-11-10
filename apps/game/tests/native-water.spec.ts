@@ -30,6 +30,10 @@ test("native water consumes linear HDR and alpha-cutout depth with active FX smo
   expect(results[0].pixel).toEqual(results[2].pixel);
   expect(results[0].pixel).not.toEqual(control);
   expect(hole).toBeGreaterThan(solid);
+  expect(result.mipProbe.contrast).toBeGreaterThan(0.1);
+  for (let i = 0; i < 3; i++)
+    expect(Math.abs(result.mipProbe.actual[i] - result.mipProbe.expected[i])).toBeLessThan(0.002);
+  expect(Object.values(result.colorLifecycle).every(Boolean)).toBe(true);
   expect(nativeFormula[0]).toBe(546);
   expect(result.error).toBe(0);
 });
