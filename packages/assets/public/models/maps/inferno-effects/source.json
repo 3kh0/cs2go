@@ -1,0 +1,255 @@
+{
+  "model": "/models/maps/inferno-effects/world.glb.gz",
+  "effects": {
+    "steam_001__alpha_1.0": {
+      "Name": "materials/effects/smoke/steam_001.vmat",
+      "ShaderName": "csgo_effects.vfx",
+      "IntParams": {
+        "F_ADDITIVE_BLEND": 1,
+        "F_DEPTH_FEATHER": 1,
+        "F_DO_NOT_CAST_SHADOWS": 1,
+        "F_RENDER_BACKFACES": 1,
+        "g_bFogEnabled": 1,
+        "g_nTextureAddressModeU": 0,
+        "g_nTextureAddressModeV": 0
+      },
+      "FloatParams": {
+        "g_flColorBoost": 1,
+        "g_flFadeDistance": 263.158,
+        "g_flFadeFalloff": 1,
+        "g_flFadeMax": 1,
+        "g_flFadeMin": 0,
+        "g_flFeatherDistance": 20,
+        "g_flFeatherFalloff": 1,
+        "g_flFresnelExponent": 3.461,
+        "g_flFresnelFalloff": 1.552,
+        "g_flFresnelMax": 1,
+        "g_flFresnelMin": 0,
+        "g_flOpacityScale": 0.75
+      },
+      "VectorParams": {
+        "g_vColorTint": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "g_vMask1PanSpeed": [
+          0.01,
+          -0.015,
+          0,
+          0
+        ],
+        "g_vMask1Scale": [
+          0.1,
+          0.5,
+          0,
+          0
+        ],
+        "g_vMask2PanSpeed": [
+          -0.01,
+          -0.015,
+          0,
+          0
+        ],
+        "g_vMask2Scale": [
+          0.07,
+          0.4,
+          0,
+          0
+        ],
+        "g_vMask3PanSpeed": [
+          0,
+          -0.001,
+          0,
+          0
+        ],
+        "g_vMask3Scale": [
+          0.01,
+          0.05,
+          0,
+          0
+        ],
+        "g_vTexCoordScrollSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "TextureColor": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "TextureParams": {
+        "g_tColor": "materials/effects/smoke/steam_001_vmat_g_tcolor_37c55b5d.vtex",
+        "g_tMask1": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex",
+        "g_tMask2": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex",
+        "g_tMask3": "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex"
+      }
+    }
+  },
+  "textures": {
+    "materials/effects/smoke/steam_001_vmat_g_tcolor_37c55b5d.vtex": {
+      "path": "/models/maps/inferno-effects/56046acd329f5486.webp",
+      "srgb": true,
+      "sourceSha256": "4bb2d7168861608b1366359a0f895b6313fe2c7bb0ef0e2351d8a01847d0ef93",
+      "nativeMip": 0,
+      "width": 1,
+      "height": 1,
+      "pixelEquality": true
+    },
+    "materials/effects/smoke/dust_002_mask_psd_d8512b51.vtex": {
+      "path": "/models/maps/inferno-effects/d49a987174c44d8a.webp",
+      "srgb": false,
+      "sourceSha256": "14dd80e0305c1dbd06edc85f3a50ede968491fe01f383e3cc4d48ecf0e989854",
+      "nativeMip": 0,
+      "width": 512,
+      "height": 512,
+      "pixelEquality": true
+    }
+  },
+  "source": {
+    "mapId": "inferno",
+    "browserWorldSpace": true,
+    "worldSha256": "5951b2ef5c6709504435797b4d3b28d2575d2bf55b8d01ed8b7e23922d33c1a3",
+    "entitiesSha256": "6543427b71d46c30a0cab64797b0f3333a32e155bd082265e747f98519b76e1a",
+    "nativeDrawJoinSha256": "00f75cc2ad6021b36894f7a9e6f1cf9b487bc3f499d0d2726588be1271651646",
+    "draws": [
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge5_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 288,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "706deb01f74a0190bd4188546150eafc215a0521cdf0da4ae64ebce615d8ca42"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge30_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 313,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "2956db31ea04f9a525130855303be28a934338ab518df6159d46d97883998295"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge33_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 316,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "4e804a39e2e2ff9484ca3f75f83a29a2ed3f04adbc7e0fba35f7e5e679c07b04"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge58_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 341,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "2cc858074b6779396a62e03e2826922e1ac2ca5791b382f5baa6f7ef269be79a"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge62_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 345,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "c53ed59f8b371ea6ba726a00c88dfc33a8368550bc4990140be9acb40e5bc657"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge63_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 346,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "c444217286903745a770084bcd0a17c7b8ccd9121f00b385748e2f0eba8326c6"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge65_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 348,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "ac9335d4fafd0239d51dabceca957461e132ed072f4944d130864b1a6e924e35"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge71_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 354,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "c7c69fd58e5bcd0b14942a221f50c9e4cbd10ea474e408dd1232a183916c74df"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge111_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 394,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "116f03a8b6dde851cde1367c34253522d2e20173a302b975eda39c5f2c5d5312"
+      },
+      {
+        "node": "n0_lr0_c0_s_cb_nomerge143_steam_001.meshset_0",
+        "material": "steam_001__alpha_1.0",
+        "sourceMesh": 426,
+        "sourcePrimitive": 0,
+        "nativeDrawAlpha": 1.0,
+        "nativeDrawTint": [
+          0.835528,
+          0.835528,
+          0.835528
+        ],
+        "sourceModelSha256": "c439295244721948ed8a2ac6cbb0ac00c217f1b1f685aa0fb72124750b31b75b"
+      }
+    ],
+    "disabledRetakesOwnersAudit": [],
+    "qualification": "Original visible native FX geometry/parameters and draw opacity retained; runtime uses source-backed effect shader and main opaque depth, with native Source-unit fade distances."
+  }
+}

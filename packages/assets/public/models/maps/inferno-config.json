@@ -1,0 +1,88 @@
+{
+  "sun": {
+    "pitch": 62.999996,
+    "yaw": 218.0,
+    "color": 16775147,
+    "intensity": 9.42477796076938
+  },
+  "backgroundIntensity": 0.5,
+  "environmentIntensity": 0.35,
+  "ambient": {
+    "skyColor": 8964095,
+    "groundColor": 0,
+    "intensity": 1.5
+  },
+  "lighting": {
+    "irradiance": "/models/maps/inferno-lighting/irradiance.exr",
+    "nativeIrradiance": "/models/maps/inferno-lighting/irradiance.bin.gz",
+    "shadows": "/models/maps/inferno-lighting/shadows.webp",
+    "directional": "/models/maps/inferno-lighting/directional.webp",
+    "nativeDirectional": "/models/maps/inferno-lighting/directional.bin.gz",
+    "size": 4096
+  },
+  "postprocess": {
+    "lut": "/models/maps/inferno-lighting/color-correction.bin.gz",
+    "tonemap": {
+      "m_flShoulderStrength": 0.15,
+      "m_flLinearStrength": 0.5,
+      "m_flLinearAngle": 0.1,
+      "m_flToeStrength": 0.2,
+      "m_flToeNum": 0.02,
+      "m_flToeDenom": 0.3,
+      "m_flWhitePoint": 4.0,
+      "m_flExposureBias": 0.0
+    },
+    "exposure": 0.9500000000000001
+  },
+  "radar": {
+    "pos_x": -2087.0,
+    "pos_y": 3870.0,
+    "scale": 4.9
+  },
+  "source": {
+    "sunEntity": "13276:10",
+    "skyEntity": "13276:2",
+    "skyMaterial": "materials/skybox/test/s2_de_inferno_sky01.vmat",
+    "skyTint": [
+      255,
+      255,
+      255
+    ],
+    "skyAngles": [
+      0.0,
+      244.999985,
+      0.0
+    ],
+    "skyStartDisabled": false,
+    "exposureEndpointOrder": "native values retained, including reversed authored endpoints; fixed midpoint is a browser adaptation",
+    "postEntity": "13885",
+    "postProcessing": "lighting/postprocessing/de_inferno_prefab/de_inferno_prefab.vpost",
+    "exposureRangeLinear": [
+      0.8,
+      1.1
+    ],
+    "environmentIntensityQualification": ".35 browser reflection strength; retained shared renderer adaptation, not extracted native value",
+    "qualification": "Native map-specific sun, sky, VPOST/LUT and atlases; fixed linear exposure. Separate 3D sky and other native rendering acceptance required.",
+    "inputHashes": {
+      "artifacts/new-maps/supplement/inferno/raw/maps/de_inferno/lightmaps/irradiance.vtex_c": "53a43ad451d7fe5ebc559b91185b367c78f68daf8482a94d9894c0fd36b9da5c",
+      "artifacts/new-maps/supplement/inferno/raw/maps/de_inferno/lightmaps/direct_light_shadows.vtex_c": "73c75ce127188bdd009af119f2b46289320e311feb7862977670b14fd6895092",
+      "artifacts/new-maps/supplement/inferno/raw/maps/de_inferno/lightmaps/directional_irradiance.vtex_c": "1b30a317d48143b2a9e2266b7afcf7ba985f331f25ea85cc3cb8d5d0493c1349",
+      "artifacts/new-maps/staged/inferno/entities-resource.txt": "6543427b71d46c30a0cab64797b0f3333a32e155bd082265e747f98519b76e1a",
+      "artifacts/new-maps/supplement/inferno/decoded/materials/de_inferno/skybox/inferno_sky_01_exr_773ad3d7.exr": "5919a3cb9b280cef61e7991f5fbd0b643c023d8cf86e3c67b5a8391bcd38829c",
+      "artifacts/new-maps/supplement/inferno/decoded/lighting/postprocessing/de_inferno_prefab/de_inferno_prefab.vpost": "008314b3424dea5c73026144611e6d8769555c43d17753a4dccb849978ded76c",
+      "artifacts/new-maps/supplement/inferno/decoded/lighting/postprocessing/de_inferno_prefab/de_inferno_prefab.raw": "1ea00e0839f3ed2c90629fcc91567dec32e7a729d64bd1a89735027b8470472d",
+      "artifacts/new-maps/supplement/inferno/raw/resource/overviews/de_inferno.txt": "ff93b0ff1f6705ccfb4daf3b038dd88ccdf3ca776823667c19782650e94d2c54"
+    },
+    "supplementalRoot": "/Users/sh/Documents/GitHub/cs2go/artifacts/new-maps/supplement/inferno",
+    "radarSectionConversion": "Native overview Source-unit altitude boundaries converted once to browser metres; original verticalsections retained"
+  },
+  "reflections": {
+    "volumes": 116,
+    "maxGpuBytes": 60813696
+  },
+  "doors": "/models/maps/inferno-doors.json",
+  "parallaxMaterials": "/models/maps/inferno-parallax/source.json",
+  "environmentMaterials": "/models/maps/inferno-environment/source.json",
+  "effectsWorld": "/models/maps/inferno-effects/source.json",
+  "skyWorld": "/models/maps/inferno-skybox/source.json"
+}

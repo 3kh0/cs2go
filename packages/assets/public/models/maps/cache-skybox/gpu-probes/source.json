@@ -1,0 +1,55 @@
+{
+  "mapId": "cache",
+  "space": "sky0",
+  "arrays": [
+    {
+      "width": 132,
+      "height": 132,
+      "layers": 576,
+      "format": "BC6H",
+      "file": "irradiance.bin.gz",
+      "gpuBytes": 10036224,
+      "gpuSha256": "d088b5872ba74b88a28ca77e79b0c839cb4daaac29ab33614edcac4363f596d3",
+      "downloadBytes": 5931308
+    },
+    {
+      "width": 132,
+      "height": 132,
+      "layers": 96,
+      "format": "BC7",
+      "file": "shadows.bin.gz",
+      "gpuBytes": 1672704,
+      "gpuSha256": "dcc35565a73a943a294283643d79ac5937b38abe3f244867dbbb3e5a8020c79e",
+      "downloadBytes": 157720
+    }
+  ],
+  "fallbacks": [
+    {
+      "width": 132,
+      "height": 132,
+      "layers": 576,
+      "format": "RGB16F",
+      "file": "irradiance-rgb16f.bin.gz",
+      "gpuBytes": 60217344,
+      "gpuSha256": "41ffb78be3ff3b7c433c6a28aba5e9ce9c394b6f7a903c90ce93388ce7d9e0b2",
+      "downloadBytes": 21362086
+    },
+    {
+      "width": 132,
+      "height": 132,
+      "layers": 96,
+      "format": "RGBA8",
+      "file": "shadows-rgba8.bin.gz",
+      "gpuBytes": 6690816,
+      "gpuSha256": "cc761556b3f9c6777617f57706f7f9de781bf9ff42696578a0f4462bb96ef7bf",
+      "downloadBytes": 264305
+    }
+  ],
+  "sourceHashes": {
+    "maps/prefabs/de_cache/de_cache_sky/lightmaps/env_light_probe_volume_atlas.vtex": "de6b8f6770fb26b7083ac3488da4c40ef28c8746152def846fcf570903d3d6d6",
+    "maps/prefabs/de_cache/de_cache_sky/lightmaps/env_light_probe_volume_atlas_dlshd.vtex": "b5dbdb3c6160099082fe1dc8b758fce02fabca0902d626d7564254781ca50d13"
+  },
+  "cameraSha256": "5f650551ee2b2b406894231f38e0afd87436b0584d69e3040514c57518f781cd",
+  "worldInfoSha256": "a974ebc5a3263b9aad8d8b1c51c01e5fe02f81ea84410273fd5d606f046f7c1e",
+  "interpretation": "Original sky-owned BC6H/BC7 arrays and exact decoded fallbacks; native volume frames composed with sky placement."
+}

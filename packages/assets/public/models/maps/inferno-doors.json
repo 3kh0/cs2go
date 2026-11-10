@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "mapId": "inferno",
+  "doors": [
+    {
+      "id": "inferno:13103:8:9326:1121",
+      "pivot": [
+        7.3115862658,
+        2.4383999999999997,
+        8.1597538862
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 89.0,
+      "speed": 160.0,
+      "returnDelay": -1.0,
+      "startAngle": 0,
+      "openDirection": 0,
+      "useEnabled": true,
+      "renderNames": [
+        "door_inferno_13103_8_9326_1121_leaf0"
+      ],
+      "physicsNames": [
+        "door_inferno_13103_8_9326_1121_physics"
+      ]
+    }
+  ],
+  "source": {
+    "nativeEntities": [
+      {
+        "ajardoorshouldntalwaysopen": false,
+        "opendir": "0",
+        "spawnflags": 8192,
+        "lightmapstatic": "0",
+        "rendertocubemaps": true,
+        "forceclosed": false,
+        "health": 0,
+        "dmg": 0,
+        "returndelay": -1,
+        "soundmoveoverride": "Door.wood_start_open",
+        "soundcloseoverride": "Door.wood_full_close",
+        "soundopenoverride": "Door.wood_full_open",
+        "speed": 160,
+        "distance": 89.0,
+        "spawnpos": "0",
+        "ajarangle": 0.0,
+        "hardware": "1",
+        "glowteam": -1,
+        "glowcolor": [
+          0,
+          0,
+          0
+        ],
+        "glowrangemin": 0,
+        "glowrange": 0,
+        "glowstate": "0",
+        "rendercolor": [
+          161,
+          74,
+          74
+        ],
+        "fademaxdist": 0.0,
+        "fademindist": -1.0,
+        "disableshadows": "0",
+        "skin": "default",
+        "model": "models/breakable_props/break_wooden_door_01/break_wooden_door_01.vmdl",
+        "useLocalOffset": false,
+        "classname": "prop_door_rotating",
+        "compile_source_id": 11920,
+        "origin": [
+          287.857727,
+          -321.250153,
+          96.0
+        ],
+        "angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "13103:8:9326:1121"
+      }
+    ],
+    "bindings": "artifacts/new-maps/staged/inferno/door-bindings.json",
+    "coordinateConversion": "Native Source units x,y,z to browser metres x,z,-y; exact leaf geometry already carries original source scale. No geometry normalization.",
+    "qualification": "Native entity angle/distance/speed/return source values and exact rendered/physics leaf binding. Both-way away-side selection, safe occupied-leaf pause and use interaction are reconstructions pending native captures. Entity health0 does not establish unbreakability; model inheritance and staged damage meshes require runtime validation. Cache forceclosed and x_squeaky_filter behavior not reconstructed from absence."
+  }
+}
