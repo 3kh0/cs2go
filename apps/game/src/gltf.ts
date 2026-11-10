@@ -2,7 +2,8 @@ import { readAssetBody } from "./asset-stream";
 import { assetFetch } from "./asset-url";
 import { createLoadQueue, startupBudget, yieldLoadingWork } from "./loading";
 import type * as T from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { Material } from "three";
+import { GLTFLoader, type GLTF } from "three/addons/loaders/GLTFLoader.js";
 import { KTX2Loader } from "three/addons/loaders/KTX2Loader.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 
@@ -35,7 +36,18 @@ export function loadGzipped(url: string, priority = 0) {
     const data = await fetchGzipped(url, priority > 0 ? { priority: "high" } : undefined);
     return parse(async () => {
       await yieldLoadingWork();
-      return gltf.parseAsync(data, url.slice(0, url.lastIndexOf("/") + 1));
+      return tagGltfMaterialIndices(
+        await gltf.parseAsync(data, url.slice(0, url.lastIndexOf("/") + 1)),
+      );
     }, priority);
   }, priority);
+}
+
+/** Native material bundles bind to audited packed GLB material slots. Names and
+ * flattened glTF textures alone can omit distinct native tint-mask identities. */
+export function tagGltfMaterialIndices<Asset extends Pick<GLTF, "parser">>(asset: Asset): Asset {
+  for (const [object, association] of asset.parser.associations)
+    if (object instanceof Material && association && Number.isInteger(association.materials))
+      object.userData.nativeGltfMaterialIndex = association.materials;
+  return asset;
 }

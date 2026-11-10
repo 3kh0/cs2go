@@ -4,32 +4,46 @@ import { registerSurfaceTextures } from "./presentation-settings";
 import {
   applyNativeWaterShader,
   nativeWaterConstants,
+  nativeWaterSamplers,
   type NativeWaterMaterial,
 } from "./native-water-shader";
 import { registerSceneDepthMaterial, type SceneDepthConsumer } from "./smoke-renderer";
+import {
+  createEnvironmentTextureBanks,
+  bindEnvironmentTextures,
+} from "./native-environment-textures";
 export async function loadNativeMapWater(renderer: T.WebGLRenderer, path: string) {
   const directory = path.endsWith("source.json") ? path.slice(0, -"source.json".length) : path;
-  return loadSourceMaterialBundle<NativeWaterMaterial & { nativeControlValue: number[] }>(
-    renderer,
-    directory,
-    (materials) => {
-      const selected = new Set<string>();
-      for (const source of Object.values(materials)) {
-        nativeWaterConstants(source);
-        if (
-          source.nativeControlValue?.length !== 4 ||
-          source.nativeControlValue.some((value) => value !== 0)
-        )
-          throw new Error("Native water requires verified zero paint controls");
-        for (const sampler of ["g_tDebris", "g_tDebrisNormal", "g_tFoam", "g_tWavesNormalHeight"]) {
-          const id = source.textures[sampler];
-          if (!id) throw new Error(`Native water sampler missing: ${sampler}`);
-          selected.add(id);
-        }
+  const bundle = await loadSourceMaterialBundle<
+    NativeWaterMaterial & { nativeControlValue: number[] }
+  >(renderer, directory, (materials) => {
+    const selected = new Set<string>();
+    for (const source of Object.values(materials)) {
+      nativeWaterConstants(source);
+      if (
+        source.nativeControlValue?.length !== 4 ||
+        source.nativeControlValue.some((value) => value !== 0)
+      )
+        throw new Error("Native water requires verified zero paint controls");
+      for (const sampler of nativeWaterSamplers) {
+        const id = source.textures[sampler];
+        if (!id) throw new Error(`Native water sampler missing: ${sampler}`);
+        selected.add(id);
       }
-      return selected;
-    },
-  );
+    }
+    return selected;
+  });
+  try {
+    const gl = renderer.getContext() as WebGL2RenderingContext;
+    const banks = createEnvironmentTextureBanks(
+      bundle.textures,
+      gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS),
+    );
+    return { ...bundle, banks };
+  } catch (error) {
+    for (const texture of new Set(bundle.textures.values())) texture.dispose();
+    throw error;
+  }
 }
 const sourceToBrowser = new T.Matrix4().set(
   0.0254,
@@ -58,7 +72,8 @@ const sourceViewScale = new T.Matrix4().makeScale(1 / 0.0254, 1 / 0.0254, 1 / 0.
  * recovered. A bounded browser interaction field is supplied independently. */
 export function applyNativeMapWater(
   root: T.Object3D,
-  bundle: Awaited<ReturnType<typeof loadNativeMapWater>>,
+  bundle: Pick<Awaited<ReturnType<typeof loadNativeMapWater>>, "materials" | "textures"> &
+    Partial<Pick<Awaited<ReturnType<typeof loadNativeMapWater>>, "banks">>,
   ownTexture?: (texture: T.Texture) => void,
 ) {
   const white = new T.DataTexture(new Uint8Array([128, 128, 128, 128]), 1, 1);
@@ -102,7 +117,14 @@ export function applyNativeMapWater(
   };
   const exclude = new Set<T.Object3D>(),
     replacements = new Map<T.Material, T.MeshStandardMaterial>();
-  const textures = [...bundle.textures.values(), white, noise, field, unboundDepth];
+  const textures = [
+    ...bundle.textures.values(),
+    ...(bundle.banks?.arrays ?? []),
+    white,
+    noise,
+    field,
+    unboundDepth,
+  ];
   root.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
     const replace = (source: T.Material) => {
@@ -121,6 +143,9 @@ export function applyNativeMapWater(
         material.metalnessMap =
         material.aoMap =
           null;
+      // Enable the existing directional-atlas tangent-normal contract without
+      // sampling a second normal image. The native water normal is world XY/Z.
+      material.normalMap = white;
       material.metalness = 0;
       material.roughness = 0.01;
       material.color.setRGB(1, 1, 1);
@@ -132,20 +157,35 @@ export function applyNativeMapWater(
       material.alphaTest = 0;
       const key = source.customProgramCacheKey(),
         previous = source.onBeforeCompile.bind(source);
+      const layout = bindEnvironmentTextures(
+        native,
+        nativeWaterSamplers,
+        bundle.textures,
+        bundle.banks?.bindings,
+        { uniforms: {} } as T.WebGLProgramParametersWithUniforms,
+      );
       material.onBeforeCompile = (shader, renderer) => {
         previous(shader, renderer);
         Object.assign(shader.uniforms, uniforms);
-        for (const sampler of ["g_tDebris", "g_tDebrisNormal", "g_tFoam", "g_tWavesNormalHeight"]) {
-          const texture = bundle.textures.get(native.textures[sampler]);
-          if (!texture) throw new Error(`Native water texture missing: ${sampler}`);
-          shader.uniforms[sampler] = { value: texture };
-        }
-        applyNativeWaterShader(shader, native);
+        const binding = bindEnvironmentTextures(
+          native,
+          nativeWaterSamplers,
+          bundle.textures,
+          bundle.banks?.bindings,
+          shader,
+        );
+        applyNativeWaterShader(shader, native, binding.code);
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-water-quality1:${JSON.stringify(native)}`;
+        `${key}:native-water-quality1:${JSON.stringify(native)}:${layout.signature}`;
       registerSceneDepthMaterial(material);
-      registerSurfaceTextures(material, [...bundle.textures.values()]);
+      registerSurfaceTextures(material, [
+        ...new Set(
+          [...bundle.textures].map(
+            ([id, texture]) => bundle.banks?.bindings.get(id)?.texture ?? texture,
+          ),
+        ),
+      ]);
       replacements.set(source, material);
       material.needsUpdate = true;
       return material;

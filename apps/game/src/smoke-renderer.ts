@@ -269,12 +269,45 @@ export class SmokeComposite {
     clouds: readonly SmokeRenderer[],
     lowQuality = false,
     depthConsumer?: SceneDepthConsumer,
+    beforeOpaque?: (camera: T.PerspectiveCamera) => void,
   ) {
     // Poses are sampled before rendering. Share body palettes across the depth,
     // shadow and color passes, without retaining them across animation updates.
     return renderFrozenPose(() =>
-      this.renderPasses(renderer, scene, camera, clouds, lowQuality, depthConsumer),
+      this.renderPasses(renderer, scene, camera, clouds, lowQuality, depthConsumer, beforeOpaque),
     );
+  }
+  /** Equal-depth surfaces must seed the same target immediately before color.
+   * Keep automatic/background clears ahead of that seed, including standalone
+   * callers which normally rely on renderer.render() to clear their target. */
+  private renderOpaque(
+    renderer: T.WebGLRenderer,
+    scene: T.Scene,
+    camera: T.PerspectiveCamera,
+    beforeOpaque?: (camera: T.PerspectiveCamera) => void,
+  ) {
+    if (!beforeOpaque) return renderer.render(scene, camera);
+    const autoClear = renderer.autoClear,
+      background = scene.background,
+      colorBackground = background instanceof T.Color,
+      clearColor = colorBackground ? renderer.getClearColor(new T.Color()) : undefined,
+      clearAlpha = renderer.getClearAlpha();
+    try {
+      if (colorBackground) {
+        renderer.setClearColor(background, 1);
+        // Three otherwise forces another clear after the depth seed.
+        scene.background = null;
+      }
+      if (autoClear || colorBackground)
+        renderer.clear(renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil);
+      renderer.autoClear = false;
+      beforeOpaque(camera);
+      renderer.render(scene, camera);
+    } finally {
+      renderer.autoClear = autoClear;
+      scene.background = background;
+      if (clearColor) renderer.setClearColor(clearColor, clearAlpha);
+    }
   }
   private renderPasses(
     renderer: T.WebGLRenderer,
@@ -283,11 +316,12 @@ export class SmokeComposite {
     clouds: readonly SmokeRenderer[],
     lowQuality = false,
     depthConsumer?: SceneDepthConsumer,
+    beforeOpaque?: (camera: T.PerspectiveCamera) => void,
   ) {
     if (!clouds.length && !depthConsumer) {
       this.target?.dispose();
       this.target = undefined;
-      renderer.render(scene, camera);
+      this.renderOpaque(renderer, scene, camera, beforeOpaque);
       return;
     }
     const destination = renderer.getRenderTarget();
@@ -379,14 +413,16 @@ export class SmokeComposite {
       if (color) {
         renderer.toneMapping = T.NoToneMapping;
         withoutSourceColorCorrection(() =>
-          withoutNativeMapGrade(() => renderer.render(scene, this.depthCamera)),
+          withoutNativeMapGrade(() =>
+            this.renderOpaque(renderer, scene, this.depthCamera, beforeOpaque),
+          ),
         );
         renderer.toneMapping = toneMapping;
         shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
         for (const object of this.hidden) object.visible = true;
         this.hidden.length = 0;
         color.setColor(this.target.texture);
-      } else renderer.render(scene, this.depthCamera);
+      } else this.renderOpaque(renderer, scene, this.depthCamera, beforeOpaque);
       for (let i = 0; i < this.objects.length; i++) this.objects[i].material = this.originals[i];
       this.objects.length = this.originals.length = 0;
       scene.background = background;
@@ -400,7 +436,7 @@ export class SmokeComposite {
         this.viewport,
         this.depthCamera.projectionMatrixInverse,
       );
-      renderer.render(scene, camera);
+      this.renderOpaque(renderer, scene, camera, beforeOpaque);
       shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
       for (const cloud of clouds)
         cloud.useSceneDepth(

@@ -8,6 +8,24 @@ export interface SourceSurface {
   metalness?: number;
 }
 
+/** Native RE callbacks own their scattering equations and lookup. Three 187
+ * otherwise keeps an unused stock DFG read alive through PhysicalMaterial,
+ * spending a fragment sampler even though native lighting never reads it. */
+const nativeScatteringFlag = "SOURCE_NATIVE_SCATTERING";
+if (!T.ShaderChunk.lights_fragment_begin.includes(nativeScatteringFlag))
+  T.ShaderChunk.lights_fragment_begin = T.ShaderChunk.lights_fragment_begin.replace(
+    "material.dfg = texture2D( dfgLUT, vec2( material.roughness, dotNVms ) ).rg;",
+    `#ifdef ${nativeScatteringFlag}
+    material.dfg = vec2(1.0,0.0);
+    #else
+    material.dfg = texture2D( dfgLUT, vec2( material.roughness, dotNVms ) ).rg;
+    #endif`,
+  );
+export function applySourceSurfaceLightingBegin(shader: T.WebGLProgramParametersWithUniforms) {
+  if (!shader.fragmentShader.includes(`#define ${nativeScatteringFlag}`))
+    shader.fragmentShader = `#define ${nativeScatteringFlag}\n${shader.fragmentShader}`;
+}
+
 let pending: Promise<T.DataTexture> | undefined;
 export function loadSourceSurfaceLookup() {
   pending ??= fetchGzipped("/models/maps/lighting/brdf-ggx.bin.gz").then((bytes) => {
@@ -28,6 +46,7 @@ export function applySourceSurface(
   source: SourceSurface,
   lookup?: T.DataTexture,
 ) {
+  applySourceSurfaceLightingBegin(shader);
   if (source.nativeAO)
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <aomap_fragment>",

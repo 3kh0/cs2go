@@ -4,7 +4,11 @@ import * as T from "three";
  * consumer keeps its own depth packing, light-distance output and ownership. */
 export interface SourceDepthHook {
   cacheKey: string;
-  apply(shader: T.WebGLProgramParametersWithUniforms, renderer: T.WebGLRenderer): void;
+  apply(
+    shader: T.WebGLProgramParametersWithUniforms,
+    renderer: T.WebGLRenderer,
+    source?: T.Material,
+  ): void;
 }
 const hooks = new WeakMap<T.Material, SourceDepthHook>();
 const bindings = new WeakMap<
@@ -42,7 +46,7 @@ export function applySourceDepth(source: T.Material, target: T.Material) {
   const { compile, key } = binding;
   target.onBeforeCompile = (shader, renderer) => {
     compile(shader, renderer);
-    hook.apply(shader, renderer);
+    hook.apply(shader, renderer, source);
   };
   target.customProgramCacheKey = () => `${key}:source-depth:${hook.cacheKey}`;
   target.needsUpdate = true;

@@ -1,4 +1,5 @@
 import { groundSpawn } from "@cs2go/simulation/spawn-position";
+import { sourceVerticalFov, sourceZoomRatio } from "./source-camera";
 import { MapHazards, BombReset, supportedBombPosition } from "@cs2go/simulation/map-hazards";
 import { DoorAudio } from "./door-audio";
 import { NativePropBreakAudio } from "./prop-break-audio";
@@ -350,7 +351,7 @@ export class Game {
   probeRotation = new T.Matrix3();
   probeMatrix = new T.Matrix4();
   probeInverse = new T.Quaternion();
-  camera = new T.PerspectiveCamera(90, innerWidth / innerHeight, 0.05, 110);
+  camera = new T.PerspectiveCamera(sourceVerticalFov(90), innerWidth / innerHeight, 0.05, 110);
   viewCamera = new T.PerspectiveCamera(VIEWMODEL_FOV, innerWidth / innerHeight, 0.01, 10);
   viewmodelPreviewWeapon = 4;
   private lastViewmodelPreview?: T.Group;
@@ -585,8 +586,8 @@ export class Game {
   scopeLevel = 0;
   scopeTransition = 0;
   scopeDuration = 0;
-  scopeFrom = 90;
-  scopeTarget = 90;
+  scopeFrom = sourceVerticalFov(90);
+  scopeTarget = sourceVerticalFov(90);
   boltTime = 0;
   rescope = 0;
   weaponCooldowns = weapons.map(() => 0);
@@ -936,12 +937,13 @@ export class Game {
     }
     if (!this.supported || !this.renderer) return;
     this.scopeTransition = 0;
-    this.camera.fov =
+    this.camera.fov = sourceVerticalFov(
       this.scopeLevel === 2
         ? weapons[this.selected].zoomFov2
         : this.scopeLevel === 1
           ? weapons[this.selected].zoomFov1
-          : this.settings.fov;
+          : this.settings.fov,
+    );
     this.camera.updateProjectionMatrix();
     // Viewmodel lens is independent of world FOV, as in Source.
     applyViewmodelCamera(this.viewCamera, this.renderSize.x, this.renderSize.y, this.settings);
@@ -1063,9 +1065,7 @@ export class Game {
         }
         return;
       }
-      const zoomRatio =
-        Math.tan(T.MathUtils.degToRad(this.camera.fov / 2)) /
-        Math.tan(T.MathUtils.degToRad(this.settings.fov / 2));
+      const zoomRatio = sourceZoomRatio(this.camera.fov, this.settings.fov);
       this.yaw -= e.movementX * 0.002 * this.settings.sensitivity * zoomRatio;
       this.pitch = clamp(
         this.pitch - e.movementY * 0.002 * this.settings.sensitivity * zoomRatio,
@@ -1489,6 +1489,7 @@ export class Game {
   async warmUp(signal?: AbortSignal) {
     signal?.throwIfAborted();
     if (!this.dust) return;
+    const preparedWorld = this.dust;
     const extras = new T.Group(),
       viewExtras = new T.Group();
     let tracer = this.tracers[0];
@@ -1516,10 +1517,14 @@ export class Game {
       healthshot = this.healthshotView.visible,
       previousToneMapping = this.renderer.toneMapping;
     const textures = new Set<T.Texture>();
+    let foliage: Promise<unknown> | undefined;
     try {
       this.dust.root.visible = true;
       this.renderer.toneMapping = T.CustomToneMapping;
-      this.renderer.compile(this.scene, this.camera);
+      this.prepareMapFrame(() => this.renderer.compile(this.scene, this.camera));
+      this.prepareMapFrame(() => {
+        foliage = preparedWorld.nativeCoverage?.prepare(this.camera);
+      });
       this.bombView.visible = true;
       this.defuseView.visible = true;
       if (this.mode === "deathmatch" && this.healthshotView.ready) {
@@ -1533,7 +1538,7 @@ export class Game {
         );
         this.updateViewLighting(this.healthshotView, 1 / 60);
       }
-      this.renderer.compile(this.view, this.viewCamera);
+      this.prepareMapFrame(() => this.renderer.compile(this.view, this.viewCamera));
       for (const uniform of Object.values(warmTracer.material.uniforms))
         if (uniform.value instanceof T.Texture) textures.add(uniform.value);
       for (const root of [this.scene, this.view])
@@ -1568,9 +1573,14 @@ export class Game {
         uploadSlice = performance.now();
       }
     }
+    await foliage;
     if (!this.assetsReady) await this.homeScene.prepare(this.renderer);
     await warmSourceSky(this.dust.skybox, signal);
-    await this.dust.nativeEffects?.prepare(this.camera);
+    let effects: Promise<void> | undefined;
+    this.prepareMapFrame(() => {
+      effects = preparedWorld.nativeEffects?.prepare(this.camera);
+    });
+    await effects;
     await this.finishPrograms(signal);
   }
   // Let drivers link in parallel, then take each program's first use (uniform
@@ -1585,6 +1595,9 @@ export class Game {
       for (const program of pending)
         if (!parallel || (program as T.WebGLProgram & { isReady(): boolean }).isReady()) {
           program.getUniforms();
+          const gl = this.renderer.getContext();
+          if (!gl.getProgramParameter(program.program as WebGLProgram, gl.LINK_STATUS))
+            throw new Error("A graphics shader could not compile during preparation");
           pending.delete(program);
         }
       if (pending.size) await new Promise((resolve) => setTimeout(resolve, 10));
@@ -1596,12 +1609,39 @@ export class Game {
     this.animateBots();
     this.updateSceneLighting(0);
     this.renderer.toneMapping = T.CustomToneMapping;
-    this.renderer.clear();
-    this.world.nativeEffects?.update(this.animationTime);
-    this.world.nativeEnvironment?.update(this.animationTime);
-    this.utility.renderWorld();
-    this.renderer.clearDepth();
-    this.renderer.render(this.view, this.viewCamera);
+    const effectTime = performance.now() / 1000;
+    this.world.nativeEffects?.update(effectTime);
+    this.world.nativeEnvironment?.update(effectTime);
+    this.world.nativeCoverage?.update(effectTime);
+    this.renderMapFrame(() => {
+      this.renderer.clear();
+      this.utility.renderWorld();
+      this.renderer.clearDepth();
+      this.renderer.render(this.view, this.viewCamera);
+    });
+  }
+  private cableResolution = new T.Vector2();
+  private updateMapCables() {
+    const cables = this.world.nativeCables;
+    if (!cables) return;
+    this.renderer.getDrawingBufferSize(this.cableResolution);
+    cables.update(this.camera, this.cableResolution.y);
+  }
+  renderMapFrame(draw: () => void) {
+    this.updateMapCables();
+    const composite = this.world.frameComposite;
+    const render = () => {
+      if (composite) composite.render(this.renderer, draw);
+      else draw();
+    };
+    if (this.world.nativeLocalLights) this.world.nativeLocalLights.render(this.renderer, render);
+    else render();
+  }
+  prepareMapFrame(compile: () => void) {
+    this.updateMapCables();
+    const composite = this.world.frameComposite;
+    if (composite) composite.prepare(this.renderer, compile);
+    else compile();
   }
   matchLoading = false;
   start(mode: Mode, options: { bots?: boolean; lock?: boolean } = {}) {
@@ -1750,12 +1790,13 @@ export class Game {
     const w = weapons[this.selected];
     this.scopeDuration = level === 2 ? w.zoomTime2 : level === 1 ? w.zoomTime1 : w.zoomTime0;
     this.scopeTransition = this.scopeDuration;
-    this.scopeTarget =
+    this.scopeTarget = sourceVerticalFov(
       level === 2
         ? weapons[this.selected].zoomFov2
         : level === 1
           ? weapons[this.selected].zoomFov1
-          : this.settings.fov;
+          : this.settings.fov,
+    );
     if (!this.scopeDuration) this.camera.fov = this.scopeTarget;
     this.camera.updateProjectionMatrix();
     toggle("scope", level > 0 && weapons[this.selected].zoomLevels > 1);
@@ -6800,6 +6841,7 @@ export class Game {
         sampleSourceProbeLocalShadows,
         source ? undefined : this.world === this.dust ? (this.dust?.nativeProbes ?? null) : null,
         this.world === this.dust ? this.dust?.nativeReflections : undefined,
+        this.world === this.dust ? this.dust?.nativeFog : undefined,
       );
     }
     if (this.bombMesh.visible) {
@@ -6815,6 +6857,7 @@ export class Game {
         sampleSourceProbeLocalShadows,
         source ? undefined : this.world === this.dust ? (this.dust?.nativeProbes ?? null) : null,
         this.world === this.dust ? this.dust?.nativeReflections : undefined,
+        this.world === this.dust ? this.dust?.nativeFog : undefined,
       );
     }
     const ball = this.dust?.ball?.mesh;
@@ -6829,6 +6872,7 @@ export class Game {
         sampleSourceProbeLocalShadows,
         source ? undefined : this.world === this.dust ? (this.dust?.nativeProbes ?? null) : null,
         this.world === this.dust ? this.dust?.nativeReflections : undefined,
+        this.world === this.dust ? this.dust?.nativeFog : undefined,
       );
     if (source) {
       // Viewmodels render in their own camera space; keep the map sun fixed in
@@ -7149,21 +7193,27 @@ export class Game {
     if (hideFollowed) followed.visible = false;
     const buying = !el("loadout").classList.contains("hidden");
     this.renderer.toneMapping = T.CustomToneMapping;
-    this.renderer.clear();
     this.world.nativeEffects?.update(now / 1000);
     this.world.nativeEnvironment?.update(now / 1000);
-    this.utility.renderWorld();
-    if (followed && hideFollowed) followed.visible = wasVisible!;
-    if (this.previewingViewmodel) this.renderViewmodelPreview(now / 1000);
-    else if (
-      !buying &&
-      this.active &&
-      !this.dead &&
-      (!this.scopeLevel || weapons[this.selected].zoomLevels === 1)
-    ) {
-      this.renderer.clearDepth();
-      this.renderer.render(this.view, this.viewCamera);
-    } else if (firstPerson && !buying) this.renderSpectatorWeapon(firstPerson);
+    this.world.nativeCoverage?.update(now / 1000);
+    this.renderMapFrame(() => {
+      this.renderer.clear();
+      try {
+        this.utility.renderWorld();
+      } finally {
+        if (followed && hideFollowed) followed.visible = wasVisible!;
+      }
+      if (this.previewingViewmodel) this.renderViewmodelPreview(now / 1000);
+      else if (
+        !buying &&
+        this.active &&
+        !this.dead &&
+        (!this.scopeLevel || weapons[this.selected].zoomLevels === 1)
+      ) {
+        this.renderer.clearDepth();
+        this.renderer.render(this.view, this.viewCamera);
+      } else if (firstPerson && !buying) this.renderSpectatorWeapon(firstPerson);
+    });
     if (this.assetsReady) this.buyPreview.render(this.renderer, this.team, this.selected);
     if (
       !this.weaponInspectPreview?.render(

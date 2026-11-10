@@ -1,6 +1,8 @@
 import * as T from "three";
 import { assetFetch } from "./asset-url";
-import { fetchGzipped } from "./gltf";
+import { loadNativeCube, type NativeCube } from "./native-cube";
+export { validateNativeCube as validateParallaxCube } from "./native-cube";
+export type ParallaxCube = NativeCube;
 import { loadSourceMaterialBundle } from "./source-layers";
 import { applySourceSurface, loadSourceSurfaceLookup } from "./source-surface";
 import { sourceCubeSampling } from "./source-reflections";
@@ -16,15 +18,6 @@ export interface SourceParallaxMaterial {
   /** Only values verified across every decoded authored pixel and mip. */
   constants?: Record<string, number[]>;
 }
-export interface ParallaxCube {
-  file: string;
-  format: "BC6H";
-  gpuBytes: number;
-  mips: { width: number; height: number; bytes: number }[];
-  fallbackFile: string;
-  fallbackBytes: number;
-  fallbackMips: { width: number; height: number; bytes: number }[];
-}
 const features = new Set([
   "F_TINT_MASK",
   "F_SECONDARY_UV",
@@ -33,6 +26,54 @@ const features = new Set([
   "F_TRANSMISSIVE_BACKFACE_NDOTL",
   "F_DO_NOT_CAST_SHADOWS",
 ]);
+/** Pinned VRF20.1 MaterialLoader.MapAddressMode and the shader's UserConfig annotations.
+ * ClampToBorder requires a separate WebGL implementation and stays unsupported. */
+const userConfigSamplers = new Set([
+  "g_tColor",
+  "g_tNormal",
+  "g_tLayer0Mask",
+  "g_tLayer1Color",
+  "g_tLayer2Color",
+  "g_tTransmissiveMask",
+]);
+function nativeWrapping(mode = 0): T.Wrapping {
+  if (mode === 0) return T.RepeatWrapping;
+  if (mode === 1) return T.MirroredRepeatWrapping;
+  if (mode === 2) return T.ClampToEdgeWrapping;
+  throw new Error(`Unsupported native parallax addressing mode: ${mode}`);
+}
+/** Owned views isolate sampler state and quality restoration while sharing immutable pixel bytes. */
+export function createParallaxTextureBindings(
+  source: SourceParallaxMaterial,
+  owned: Map<string, T.Texture>,
+): Map<string, T.Texture> {
+  const bindings = new Map<string, T.Texture>();
+  for (const [native, resource] of Object.entries(source.textures)) {
+    const original = owned.get(resource);
+    if (!original) continue; // Cube arrays and verified folded constants have separate bindings.
+    const wrapS = nativeWrapping(
+      userConfigSamplers.has(native) ? source.IntParams.g_nTextureAddressModeU : 0,
+    );
+    const wrapT = nativeWrapping(
+      userConfigSamplers.has(native) ? source.IntParams.g_nTextureAddressModeV : 0,
+    );
+    const key = `parallax-sampler:${resource}:${wrapS}:${wrapT}`;
+    let texture = original;
+    if (original.wrapS !== wrapS || original.wrapT !== wrapT) {
+      texture = owned.get(key)!;
+      if (!texture) {
+        texture = original.clone();
+        texture.source = new T.Source(original.source.data);
+        texture.wrapS = wrapS;
+        texture.wrapT = wrapT;
+        texture.needsUpdate = true;
+        owned.set(key, texture);
+      }
+    }
+    bindings.set(native, texture);
+  }
+  return bindings;
+}
 export function validateSourceParallax(source: SourceParallaxMaterial) {
   if (source.shader !== "csgo_simple_3layer_parallax.vfx")
     throw new Error(`Unsupported native parallax shader: ${source.shader}`);
@@ -53,7 +94,7 @@ export function validateSourceParallax(source: SourceParallaxMaterial) {
   if (source.FloatParams.g_flTexCoordRotation)
     throw new Error("Unsupported native parallax UV rotation");
   for (const flag of ["g_nTextureAddressModeU", "g_nTextureAddressModeV"])
-    if (source.IntParams[flag]) throw new Error(`Unsupported native parallax addressing: ${flag}`);
+    nativeWrapping(source.IntParams[flag]);
   for (const name of [
     "g_tColor",
     "g_tNormal",
@@ -71,44 +112,6 @@ export function validateSourceParallax(source: SourceParallaxMaterial) {
     Object.values(source.VectorParams).some((v) => v.some((n) => !Number.isFinite(n)))
   )
     throw new Error("Nonfinite native parallax parameters");
-}
-export function validateParallaxCube(entry: ParallaxCube) {
-  const size = entry.mips?.[0]?.width;
-  if (
-    entry.format !== "BC6H" ||
-    !Number.isSafeInteger(size) ||
-    size < 1 ||
-    size > 1024 ||
-    size & (size - 1) ||
-    entry.mips.length < 1 ||
-    entry.mips.length > Math.log2(size) + 1 ||
-    entry.fallbackMips?.length !== entry.mips.length
-  )
-    throw new Error("Invalid native parallax cube layout/budget");
-  let compressed = 0,
-    fallback = 0;
-  entry.mips.forEach((mip, index) => {
-    const width = Math.max(1, size >> index),
-      other = entry.fallbackMips[index];
-    if (
-      mip.width !== width ||
-      mip.height !== width ||
-      mip.bytes !== Math.ceil(width / 4) ** 2 * 16 * 6 ||
-      other.width !== width ||
-      other.height !== width ||
-      other.bytes !== width * width * 8 * 6
-    )
-      throw new Error("Invalid native parallax cube mip/face lengths");
-    compressed += mip.bytes;
-    fallback += other.bytes;
-  });
-  if (
-    compressed !== entry.gpuBytes ||
-    fallback !== entry.fallbackBytes ||
-    fallback > 64 * 1024 * 1024
-  )
-    throw new Error("Invalid native parallax cube payload budget");
-  return size;
 }
 export async function loadNativeMapParallax(renderer: T.WebGLRenderer, path: string) {
   const directory = path.endsWith("/source.json")
@@ -128,39 +131,7 @@ export async function loadNativeMapParallax(renderer: T.WebGLRenderer, path: str
   try {
     const results = await Promise.allSettled(
       Object.entries(manifest.cubemaps ?? {}).map(async ([key, entry]) => {
-        const size = validateParallaxCube(entry),
-          compressed = renderer.extensions.has("EXT_texture_compression_bptc");
-        const bytes = await fetchGzipped(
-          directory + (compressed ? entry.file : entry.fallbackFile),
-        );
-        if (bytes.byteLength !== (compressed ? entry.gpuBytes : entry.fallbackBytes))
-          throw new Error("Invalid native parallax cube bytes");
-        let offset = 0;
-        const mips = (compressed ? entry.mips : entry.fallbackMips).map((mip) => {
-          const data = compressed
-            ? new Uint8Array(bytes, offset, mip.bytes)
-            : new Uint16Array(bytes, offset, mip.bytes / 2);
-          offset += mip.bytes;
-          return { width: mip.width, height: mip.height, data };
-        });
-        const texture = new T.CompressedArrayTexture(
-          mips,
-          size,
-          size,
-          6,
-          T.RGB_BPTC_UNSIGNED_Format,
-        );
-        if (!compressed) {
-          // Three 0.187 uploads manual array mips through this class's explicit
-          // RGBA branch. DataArrayTexture only uploads level0, ignoring mipmaps.
-          Object.assign(texture, { type: T.HalfFloatType, format: T.RGBAFormat });
-        }
-        texture.colorSpace = T.NoColorSpace;
-        texture.flipY = false;
-        texture.generateMipmaps = false;
-        texture.minFilter = T.LinearMipmapLinearFilter;
-        texture.magFilter = T.LinearFilter;
-        texture.needsUpdate = true;
+        const texture = await loadNativeCube(renderer, directory, entry);
         cubes.set(key, texture);
       }),
     );
@@ -174,7 +145,13 @@ export async function loadNativeMapParallax(renderer: T.WebGLRenderer, path: str
         throw new Error("Native parallax exceeds renderer material sampler budget");
     }
     const lookup = await loadSourceSurfaceLookup();
-    return { ...bundle, cubes, cubeInfo: manifest.cubemaps ?? {}, lookup };
+    const materialTextures = new Map(
+      Object.values(bundle.materials).map((source) => [
+        source,
+        createParallaxTextureBindings(source, bundle.textures),
+      ]),
+    );
+    return { ...bundle, cubes, cubeInfo: manifest.cubemaps ?? {}, lookup, materialTextures };
   } catch (error) {
     for (const texture of [...bundle.textures.values(), ...cubes.values()]) texture.dispose();
     throw error;
@@ -220,15 +197,15 @@ export function applyParallaxShader(
         vec4 ${name}Constant(vec2 uv,float bias){return ${vector(constant)};}`);
       return;
     }
-    const key = source.textures[native],
-      previous = canonical.get(key);
+    const key = source.textures[native];
+    const texture = textures.get(native) ?? textures.get(key);
+    if (!texture) throw new Error(`Native parallax texture missing: ${native}`);
+    const previous = canonical.get(texture.uuid);
     if (previous) {
       aliases.push(`#define ${name} ${previous}`);
       return;
     }
-    const texture = textures.get(key);
-    if (!texture) throw new Error(`Native parallax texture missing: ${native}`);
-    canonical.set(key, name);
+    canonical.set(texture.uuid, name);
     shader.uniforms[name] = { value: texture };
     samplers.push(name);
   };
@@ -344,6 +321,7 @@ export function applyNativeMapParallax(
       object.castShadow = !source.IntParams.F_DO_NOT_CAST_SHADOWS;
       if (patched.has(material)) continue;
       patched.add(material);
+      const textures = bundle.materialTextures.get(source)!;
       const modelTint = material.color.clone();
       material.color.setRGB(1, 1, 1);
       material.vertexColors = false;
@@ -351,8 +329,8 @@ export function applyNativeMapParallax(
       // or color is a verified constant and its sampler has been folded away.
       const uvCarrier = [...bundle.textures.values()][0];
       if (!uvCarrier) throw new Error("Native parallax UV carrier unavailable");
-      material.map = bundle.textures.get(source.textures.g_tColor) ?? uvCarrier;
-      material.normalMap = bundle.textures.get(source.textures.g_tNormal) ?? uvCarrier;
+      material.map = textures.get("g_tColor") ?? uvCarrier;
+      material.normalMap = textures.get("g_tNormal") ?? uvCarrier;
       material.roughnessMap = material.metalnessMap = material.aoMap = material.emissiveMap = null;
       material.emissive.setRGB(0, 0, 0);
       material.side = T.FrontSide;
@@ -361,12 +339,7 @@ export function applyNativeMapParallax(
       material.depthWrite = true;
       material.alphaTest = 0;
       material.fog = source.IntParams.g_bFogEnabled !== 0;
-      registerSurfaceTextures(
-        material,
-        Object.values(source.textures)
-          .map((key) => bundle.textures.get(key))
-          .filter((t): t is T.Texture => !!t),
-      );
+      registerSurfaceTextures(material, [...textures.values()]);
       const previous = material.onBeforeCompile.bind(material),
         key = material.customProgramCacheKey();
       const cubeSize = bundle.cubeInfo[source.textures.g_tLayer2Cubemap]?.mips[0].width ?? 1;
@@ -376,7 +349,7 @@ export function applyNativeMapParallax(
         applyParallaxShader(
           shader,
           source,
-          bundle.textures,
+          textures,
           bundle.cubes,
           modelTint,
           bundle.lookup,

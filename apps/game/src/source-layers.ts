@@ -4,7 +4,7 @@ import { fetchGzipped } from "./gltf";
 import { createLoadQueue } from "./loading";
 
 interface LayerTexture {
-  format?: "BC1" | "BC7" | "BC4";
+  format?: "BC1" | "BC7" | "BC4" | "BC5";
   srgb: boolean;
   file?: string;
   fallback?: string;
@@ -70,7 +70,7 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
           const supported =
             entry.format === "BC7"
               ? renderer.extensions.has("EXT_texture_compression_bptc")
-              : entry.format === "BC4"
+              : entry.format === "BC4" || entry.format === "BC5"
                 ? renderer.extensions.has("EXT_texture_compression_rgtc")
                 : renderer.extensions.has(
                     entry.srgb
@@ -84,6 +84,15 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
               throw new Error("Invalid native layer texture");
             let offset = 0;
             const mips = entry.mips.map((mip) => {
+              if (
+                entry.format === "BC5" &&
+                (!Number.isInteger(mip.width) ||
+                  !Number.isInteger(mip.height) ||
+                  mip.width < 1 ||
+                  mip.height < 1 ||
+                  mip.bytes !== Math.ceil(mip.width / 4) * Math.ceil(mip.height / 4) * 16)
+              )
+                throw new Error("Invalid native BC5 mip shape");
               const data = new Uint8Array(bytes, offset, mip.bytes);
               offset += mip.bytes;
               return { data, width: mip.width, height: mip.height };
@@ -97,7 +106,9 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
                 ? T.RGBA_BPTC_Format
                 : entry.format === "BC4"
                   ? T.RED_RGTC1_Format
-                  : T.RGB_S3TC_DXT1_Format,
+                  : entry.format === "BC5"
+                    ? T.RED_GREEN_RGTC2_Format
+                    : T.RGB_S3TC_DXT1_Format,
             );
             texture.minFilter = mips.length > 1 ? T.LinearMipmapLinearFilter : T.LinearFilter;
           } else if (entry.fallbackFile && entry.fallbackMips) {

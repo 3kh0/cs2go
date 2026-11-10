@@ -1,3 +1,4 @@
+import { sourceVerticalFov } from "../src/source-camera";
 import { expect, test } from "@playwright/test";
 import type { Game } from "../src/game";
 declare global {
@@ -33,7 +34,7 @@ test("viewmodel controls preview native projection, preserve world FOV, resize, 
       previewing: g.previewingViewmodel,
     };
   });
-  expect(state.world).toBe(110);
+  expect(state.world).toBeCloseTo(sourceVerticalFov(110), 8);
   expect(state.view).toBeCloseTo(53.667998865, 8);
   expect(state.aspect).toBeCloseTo(1440 / 900, 8);
   expect(state.position).toEqual([-1.3 * 0.0254, 1.8 * 0.0254, -0.7 * 0.0254]);

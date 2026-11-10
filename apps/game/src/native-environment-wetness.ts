@@ -1,3 +1,4 @@
+import type { EnvironmentShaderParameters } from "./native-environment-parameters";
 import * as T from "three";
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
 const literal = (value: number) => {
@@ -19,8 +20,12 @@ float environmentWetDiffuse(vec3 normal,vec3 direction){
 /** PS7912431–2617 wetness, using authored weather. The engine's live
  * texture slot is unknown: the manifest must explicitly qualify its chosen
  * reconstruction wave resource. Browser time/derivatives are approximations. */
-export function environmentWetnessCode(source: SourceEnvironmentMaterial) {
-  const f = (name: string, fallback: number) => literal(source.FloatParams[name] ?? fallback);
+export function environmentWetnessCode(
+  source: SourceEnvironmentMaterial,
+  parameters?: EnvironmentShaderParameters,
+) {
+  const f = (name: string, fallback: number) =>
+    parameters?.float(source, name, fallback) ?? literal(source.FloatParams[name] ?? fallback);
   const weather = source.weather;
   if (!weather || !weather.waveResourceQualification || !source.textures.g_tEnvironmentWater)
     throw new Error(
@@ -50,16 +55,16 @@ export function environmentWetnessCode(source: SourceEnvironmentMaterial) {
  vec3 wetOriginalNormal=environmentViewNormalToSource(environmentNormalOut);
  vec4 wave=environmentEnvironmentWaterRead(wetPosition.xy*.006);
  float up=pow(max(0.0,wetGeometric.z),${f("g_flHorizontalSurfaceTolerance", 32)});
- float coverage=min(min(vEnvironmentBlend.z,clamp(${literal(weather.coverage)},0.0,1.0)),1.0-2.0*clamp(${literal(weather.drying)}-.5,0.0,1.0));
+ float coverage=min(min(vEnvironmentBlend.z,clamp(${parameters?.value("weather:coverage", [weather.coverage]) ?? literal(weather.coverage)},0.0,1.0)),1.0-2.0*clamp(${parameters?.value("weather:drying", [weather.drying]) ?? literal(weather.drying)}-.5,0.0,1.0));
  float delta=coverage-environmentWetHeight-.65+${f("g_fPuddleHeight", 0.5)};
  float extra=clamp(coverage-.75,0.0,1.0),level=coverage+4.0*extra*extra,fade=clamp(20.0*level,0.0,1.0);
  float puddle=clamp(delta/${f("g_fPuddleBlendSoftness", 0.08)}+.5,0.0,1.0)*up*fade;
- float wet=max(max(clamp(2.0*level-.5*mix(.5,wave.a,clamp(20.0*up,0.0,1.0))-.5*environmentWetHeight+.25,0.0,1.0)*${f("g_fWetnessStrength", 1)}*fade*(1.0-clamp(2.0*${literal(weather.drying)},0.0,1.0)),puddle),clamp((delta+${f("g_fWetEdgeSpread", 0.2)})/${f("g_fWetEdgeSoftness", 0.2)}+.5,0.0,1.0)*${f("g_fWetEdgeStrength", 0.5)});
+ float wet=max(max(clamp(2.0*level-.5*mix(.5,wave.a,clamp(20.0*up,0.0,1.0))-.5*environmentWetHeight+.25,0.0,1.0)*${f("g_fWetnessStrength", 1)}*fade*(1.0-clamp(2.0*${parameters?.value("weather:drying", [weather.drying]) ?? literal(weather.drying)},0.0,1.0)),puddle),clamp((delta+${f("g_fWetEdgeSpread", 0.2)})/${f("g_fWetEdgeSoftness", 0.2)}+.5,0.0,1.0)*${f("g_fWetEdgeStrength", 0.5)});
  vec4 water=vec4(0.0,0.0,1.0,0.0);float rippleAA=0.0,rainSparkle=0.0;
  if(wet>.5){
- float rippleStrength=${f("g_fRippleStrength", 1)}*${literal(weather.ripples)};
+ float rippleStrength=${f("g_fRippleStrength", 1)}*${parameters?.value("weather:ripples", [weather.ripples]) ?? literal(weather.ripples)};
  if(rippleStrength>0.0&&puddle>0.0){
- vec3 direction=normalize(vec3(-1.0,.2,0.0));float angle=${literal(weather.rippleDirection)}*6.2831854820251465,s=sin(angle),c=cos(angle);
+ vec3 direction=normalize(vec3(-1.0,.2,0.0));float angle=${parameters?.value("weather:rippleDirection", [weather.rippleDirection]) ?? literal(weather.rippleDirection)}*6.2831854820251465,s=sin(angle),c=cos(angle);
  direction.xy=direction.xy*mat2(c,-s,s,c);
  vec3 across=-cross(direction,wetGeometric);
  float along=dot(wetPosition,direction),crossing=dot(wetPosition,across),dryPaint=1.0-vEnvironmentBlend.z;
@@ -76,7 +81,7 @@ export function environmentWetnessCode(source: SourceEnvironmentMaterial) {
  water+=vec4(perturb,0.0,vEnvironmentBlend.z*(wave1.z+wave2.z))*up*rippleStrength;
  rippleAA=rippleStrength*.04*(aa1+aa2);
  }
- float rainStrength=${f("g_fRainStrength", 1)}*${literal(weather.rain)}*${literal(weather.rain)};
+ float rainStrength=${f("g_fRainStrength", 1)}*${parameters?.value("weather:rain", [weather.rain]) ?? literal(weather.rain)}*${parameters?.value("weather:rain", [weather.rain]) ?? literal(weather.rain)};
  if(rainStrength>0.0){
  vec2 rainUv=wetPosition.xy*.12;vec3 phases=vec3(environmentTime*6.5)+vec3(0.0,.3167,.6334),rain=vec3(0.0);
  const vec3 rotations=vec3(.9713,.7518,.3624),rotationsSine=vec3(.2377,.6594,.932),scales=vec3(.6,.6661,.7322);
@@ -100,7 +105,7 @@ export function environmentWetnessCode(source: SourceEnvironmentMaterial) {
  float sediment=puddle*clamp(delta*puddle*${f("g_fPuddleSedimentOpacity", 0.25)}*12.0,0.0,1.0);
  vec3 wetNormal=normalize(mix(wetOriginalNormal,water.xyz,puddle));
  vec3 dark=mix(environmentColorOut,pow(environmentColorOut,vec3(1.3))*.8,clamp(pow(environmentColorOut,vec3(.25))*wet*environmentRoughness*8.0,0.0,1.0)*environmentWetDarkening);
- environmentColorOut=mix(dark*mix(1.0,environmentAO,puddle),vec3(${sediment.toArray().map(literal).join(",")}),sediment)*(1.0+rainSparkle)+vec3(.1*rainSparkle);
+ environmentColorOut=mix(dark*mix(1.0,environmentAO,puddle),vec3(${parameters?.value("wetSediment", sediment.toArray()) ?? sediment.toArray().map(literal).join(",")}),sediment)*(1.0+rainSparkle)+vec3(.1*rainSparkle);
  environmentRoughness=clamp(mix(environmentRoughness,${f("g_fPuddleRoughness", 0.02)},max(puddle,(1.0-environmentRoughness*environmentRoughness)*wet))+rippleAA+.5*length(fwidth(wetNormal)),0.0,1.0);
  environmentWetReflectance=mix(${f("g_flReflectance", 0.04)},.035,wet);
  environmentNormalOut=environmentSourceNormalToView(wetNormal);

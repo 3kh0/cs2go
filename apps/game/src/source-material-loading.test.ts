@@ -81,3 +81,105 @@ test("failed material loading waits for in-flight textures and disposes every co
   await expect(pending).rejects.toThrow("broken native payload");
   expect(dispose).toHaveBeenCalledTimes(2);
 });
+
+test("native BC5 retains RGTC2 blocks and its partial authored mip chain", async () => {
+  const bytes = Uint8Array.from({ length: 80 }, (_, i) => i),
+    has = vi.fn((name: string) => name === "EXT_texture_compression_rgtc");
+  transport.assetFetch.mockResolvedValue(
+    new Response(
+      JSON.stringify({
+        materials: {},
+        textures: {
+          normal: {
+            format: "BC5",
+            srgb: false,
+            file: "normal.bin.gz",
+            gpuBytes: 80,
+            mips: [
+              { width: 8, height: 8, bytes: 64 },
+              { width: 4, height: 4, bytes: 16 },
+            ],
+          },
+        },
+      }),
+    ),
+  );
+  transport.fetchGzipped.mockResolvedValue(bytes.buffer);
+  const result = await loadSourceMaterialBundle(
+    { extensions: { has } } as unknown as T.WebGLRenderer,
+    "/native/",
+  );
+  const texture = result.textures.get("normal") as T.CompressedTexture;
+  expect(has.mock.calls).toEqual([["EXT_texture_compression_rgtc"]]);
+  expect(texture.format).toBe(T.RED_GREEN_RGTC2_Format);
+  expect(texture.mipmaps.map((m) => [m.width, m.height])).toEqual([
+    [8, 8],
+    [4, 4],
+  ]);
+  expect([...texture.mipmaps[1].data]).toEqual(Array.from(bytes.slice(64)));
+  expect(texture.colorSpace).toBe(T.NoColorSpace);
+  texture.dispose();
+});
+test("BC5 without RGTC uses exact RGBA authored mips rather than a BC1 upload or regenerated tail", async () => {
+  const bytes = Uint8Array.from({ length: 320 }, (_, i) => [51, 102, 0, 255][i % 4]);
+  transport.assetFetch.mockResolvedValue(
+    new Response(
+      JSON.stringify({
+        materials: {},
+        textures: {
+          normal: {
+            format: "BC5",
+            srgb: false,
+            file: "native.bin.gz",
+            gpuBytes: 80,
+            mips: [
+              { width: 8, height: 8, bytes: 64 },
+              { width: 4, height: 4, bytes: 16 },
+            ],
+            fallbackFile: "normal.rgba8.gz",
+            fallbackMips: [
+              { width: 8, height: 8, bytes: 256 },
+              { width: 4, height: 4, bytes: 64 },
+            ],
+          },
+        },
+      }),
+    ),
+  );
+  transport.fetchGzipped.mockResolvedValue(bytes.buffer);
+  const result = await loadSourceMaterialBundle(
+    { extensions: { has: () => false } } as unknown as T.WebGLRenderer,
+    "/native/",
+  );
+  const texture = result.textures.get("normal") as T.DataTexture;
+  expect(transport.fetchGzipped.mock.calls.map((c) => c[0])).toEqual(["/native/normal.rgba8.gz"]);
+  expect(texture.isDataTexture).toBe(true);
+  expect(texture.generateMipmaps).toBe(false);
+  expect(texture.mipmaps.map((m) => [m.width, m.height])).toEqual([
+    [8, 8],
+    [4, 4],
+  ]);
+  expect(Array.from(texture.image.data!.slice(0, 4))).toEqual([51, 102, 0, 255]);
+  texture.dispose();
+});
+test("invalid BC5 block dimensions fail before driver texture upload", async () => {
+  transport.assetFetch.mockResolvedValue(
+    new Response(
+      JSON.stringify({
+        materials: {},
+        textures: {
+          normal: {
+            format: "BC5",
+            srgb: false,
+            file: "normal.bin.gz",
+            gpuBytes: 16,
+            mips: [{ width: 8, height: 4, bytes: 16 }],
+          },
+        },
+      }),
+    ),
+  );
+  await expect(loadSourceMaterialBundle(renderer, "/native/")).rejects.toThrow(
+    "Invalid native BC5 mip shape",
+  );
+});

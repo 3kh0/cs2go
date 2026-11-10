@@ -92,3 +92,46 @@ test("native per-draw model tint remains a material uniform when shader programs
   textures.forEach((t) => t.dispose());
   lookup.dispose();
 });
+
+test("native addressing isolates shared resources and restores all authored mip levels", async () => {
+  const { createParallaxTextureBindings } = await import("./native-map-parallax");
+  const { applyTextureQuality, registerSurfaceTextures } = await import("./presentation-settings");
+  const original = new T.CompressedTexture(
+    [4, 2, 1].map((width) => ({ width, height: width, data: new Uint8Array(16) })),
+    4,
+    4,
+    T.RGBA_BPTC_Format,
+  );
+  original.wrapS = original.wrapT = T.RepeatWrapping;
+  const owned = new Map([["shared", original]]);
+  const source = {
+    ...material,
+    IntParams: { g_nTextureAddressModeU: 2, g_nTextureAddressModeV: 1 },
+    textures: { g_tColor: "shared", g_tAmbientOcclusion: "shared" },
+  };
+  const bindings = createParallaxTextureBindings(source, owned);
+  const color = bindings.get("g_tColor")! as T.CompressedTexture;
+  expect(color).not.toBe(original);
+  expect(bindings.get("g_tAmbientOcclusion")).toBe(original);
+  expect(color.wrapS).toBe(T.ClampToEdgeWrapping);
+  expect(color.wrapT).toBe(T.MirroredRepeatWrapping);
+  expect(color.source).not.toBe(original.source);
+  expect(color.mipmaps[0].data).toBe(original.mipmaps[0].data);
+  expect(createParallaxTextureBindings(source, owned).get("g_tColor")).toBe(color);
+  const m = new T.MeshStandardMaterial();
+  registerSurfaceTextures(m, [...bindings.values()]);
+  const root = new T.Mesh(new T.PlaneGeometry(), m);
+  for (const quality of ["low", "medium", "high"]) {
+    applyTextureQuality([root], quality, 8);
+    expect(color.image.width).toBe(quality === "low" ? 1 : quality === "medium" ? 2 : 4);
+    expect(color.mipmaps.length).toBe(quality === "low" ? 1 : quality === "medium" ? 2 : 3);
+    expect(color.wrapS).toBe(T.ClampToEdgeWrapping);
+    expect(original.wrapS).toBe(T.RepeatWrapping);
+  }
+  expect(() =>
+    validateSourceParallax({ ...material, IntParams: { g_nTextureAddressModeU: 3 } }),
+  ).toThrow("addressing mode: 3");
+  for (const texture of owned.values()) texture.dispose();
+  root.geometry.dispose();
+  m.dispose();
+});

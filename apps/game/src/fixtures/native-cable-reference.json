@@ -1,0 +1,101 @@
+{
+  "source": {
+    "build": "26445667",
+    "sourceArchiveSHA256": "91493c2620afebab343c470abd1f7b270b01e322c0a4235995c3c7062a4995b8",
+    "nativeVertexProgramSHA256": "7e4a7fc1a0020bef555dafd4797a903f8c8c80bec779529bcb8858d2191a744c",
+    "disassemblySHA256": "9bdfc973c6342e1c2f87c7d34436dd68047e686866399f88bbe2812f076dae2b",
+    "qualification": "CPU float32 fragment evaluation checked against independent literal/rational expectations. No native shader/GPU execution. First8uniforms are supplied test inputs. Native writer vectors use verified registration default1.2 and literal instruction order, but symbolic full/half/horizontal/verticalFOV and width/height field identities remain unresolved. V_tanf last-bit behavior is not verified. Fixed-uniform projection controls are not full-host FOV/viewport tests. No0.75pixel clamp is assumed."
+  },
+  "cases": [
+    {
+      "label": "near",
+      "viewDepth": 256,
+      "physicalRadius": 0.5,
+      "suppliedUniform": 0.0009765625,
+      "expandedRadius": 0.5,
+      "coverageAlphaScale": 1.0
+    },
+    {
+      "label": "boundary",
+      "viewDepth": 512,
+      "physicalRadius": 0.5,
+      "suppliedUniform": 0.0009765625,
+      "expandedRadius": 0.5,
+      "coverageAlphaScale": 1.0
+    },
+    {
+      "label": "just-above",
+      "viewDepth": 513,
+      "physicalRadius": 0.5,
+      "suppliedUniform": 0.0009765625,
+      "expandedRadius": 0.5009765625,
+      "coverageAlphaScale": 0.9980506896972656
+    },
+    {
+      "label": "far",
+      "viewDepth": 1024,
+      "physicalRadius": 0.5,
+      "suppliedUniform": 0.0009765625,
+      "expandedRadius": 1.0,
+      "coverageAlphaScale": 0.5
+    },
+    {
+      "label": "behind-camera-abs",
+      "viewDepth": -1024,
+      "physicalRadius": 0.5,
+      "suppliedUniform": 0.0009765625,
+      "expandedRadius": 1.0,
+      "coverageAlphaScale": 0.5
+    },
+    {
+      "label": "alpha-floor",
+      "viewDepth": 4096,
+      "physicalRadius": 0.5,
+      "suppliedUniform": 0.0009765625,
+      "expandedRadius": 4.0,
+      "coverageAlphaScale": 0.25
+    },
+    {
+      "label": "larger-physical",
+      "viewDepth": 1024,
+      "physicalRadius": 2,
+      "suppliedUniform": 0.0009765625,
+      "expandedRadius": 2,
+      "coverageAlphaScale": 1.0
+    },
+    {
+      "label": "zero-uniform",
+      "viewDepth": 1024,
+      "physicalRadius": 0.5,
+      "suppliedUniform": 0,
+      "expandedRadius": 0.5,
+      "coverageAlphaScale": 1.0
+    }
+  ],
+  "nativeWriterVectors": [
+    {
+      "nativeAngleField": 90,
+      "nativePackedDimensionField": 1080,
+      "defaultClamp": 1.2000000476837158,
+      "uniform": 0.001745330635458231,
+      "independentSeriesReference": 0.001745330631650147,
+      "expandedAtViewDepth1024PhysicalRadius0p5": 1.7872185707092285
+    },
+    {
+      "nativeAngleField": 90,
+      "nativePackedDimensionField": 2160,
+      "defaultClamp": 1.2000000476837158,
+      "uniform": 0.0008726648520678282,
+      "independentSeriesReference": 0.0008726648543160894,
+      "expandedAtViewDepth1024PhysicalRadius0p5": 0.893608808517456
+    },
+    {
+      "nativeAngleField": 60,
+      "nativePackedDimensionField": 1080,
+      "defaultClamp": 1.2000000476837158,
+      "uniform": 0.001163553330115974,
+      "independentSeriesReference": 0.001163553298622014,
+      "expandedAtViewDepth1024PhysicalRadius0p5": 1.1914786100387573
+    }
+  ]
+}

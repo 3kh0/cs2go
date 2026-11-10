@@ -1,13 +1,24 @@
 import * as T from "three";
+import type { NativePieceMaterialAliases } from "./native-material-aliases";
 import type { BreakableState } from "@cs2go/protocol";
 import type { NativeBreakableDefinition } from "@cs2go/simulation/breakables";
 import type { MapCollision } from "@cs2go/simulation/map-collision";
 import { sourceSunCaster } from "./source-sun";
 
+export type NativeBreakablePiece = {
+  renderNames: string[];
+  fadeTime: number;
+  spawnChance: number;
+  essential?: boolean;
+  motionDisabled?: boolean;
+};
 export type NativeBreakableManifest = {
   version: number;
   mapId: string;
+  renderModels?: string[];
+  materialAliases?: NativePieceMaterialAliases;
   breakables: (NativeBreakableDefinition & {
+    pieces?: NativeBreakablePiece[];
     debris?: { burstSpeed: number; fadeTime: number; twist?: number };
   })[];
   enabledRemainders?: { id: string; renderNames: string[]; physicsNames: string[] }[];
@@ -18,6 +29,9 @@ type Fragment = {
   spin: T.Vector3;
   radius: number;
   life: number;
+  essential: boolean;
+  legacy: boolean;
+  motionDisabled: boolean;
 };
 
 /** Gameplay state owns destruction; the view owns only bounded, nonblocking debris. */
@@ -29,6 +43,10 @@ export class NativeMapBreakableView {
   readonly collision: MapCollision;
   readonly root = new T.Group();
   private readonly parts = new Map<string, T.Object3D[]>();
+  private readonly pieces = new Map<
+    string,
+    { definition: NativeBreakablePiece; parts: T.Object3D[] }[]
+  >();
   private readonly remainders = new Map<string, T.Object3D[]>();
   private readonly health = new Map<string, number>();
   private readonly fragments: Fragment[] = [];
@@ -61,6 +79,27 @@ export class NativeMapBreakableView {
       if (!parts.length) throw new Error(`Native breakable geometry missing: ${definition.id}`);
       this.parts.set(definition.id, parts);
       this.health.set(definition.id, definition.health);
+      if (definition.pieces)
+        this.pieces.set(
+          definition.id,
+          definition.pieces.map((piece) => {
+            if (
+              !Number.isFinite(piece.fadeTime) ||
+              piece.fadeTime < 0 ||
+              !Number.isFinite(piece.spawnChance) ||
+              piece.spawnChance < 0 ||
+              piece.spawnChance > 1 ||
+              (piece.motionDisabled !== undefined && typeof piece.motionDisabled !== "boolean") ||
+              !piece.renderNames.length
+            )
+              throw new Error(`Invalid native break piece: ${definition.id}`);
+            const templates = find(piece.renderNames);
+            if (!templates.length)
+              throw new Error(`Native break piece geometry missing: ${definition.id}`);
+            for (const template of templates) template.visible = false;
+            return { definition: piece, parts: templates };
+          }),
+        );
     }
     for (const remainder of manifest.enabledRemainders ?? [])
       this.remainders.set(remainder.id, find(remainder.renderNames));
@@ -114,14 +153,31 @@ export class NativeMapBreakableView {
     point?: T.Vector3,
     direction?: T.Vector3,
   ) {
+    const native = this.pieces.get(definition.id);
+    if (native) {
+      for (const piece of native)
+        if (Math.random() < piece.definition.spawnChance)
+          this.spawnFragment(piece.parts, definition, point, direction, piece.definition);
+      return;
+    }
+    // Historical maps without an authored piece manifest retain their old
+    // whole-panel reconstruction. Source-bound pieces never take this path.
+    for (const part of parts) this.spawnFragment([part], definition, point, direction);
+  }
+  private spawnFragment(
+    parts: T.Object3D[],
+    definition: NativeBreakableManifest["breakables"][number],
+    point?: T.Vector3,
+    direction?: T.Vector3,
+    piece?: NativeBreakablePiece,
+  ) {
+    const box = new T.Box3();
+    for (const part of parts) box.union(new T.Box3().setFromObject(part));
+    if (box.isEmpty()) return;
+    const center = box.getCenter(new T.Vector3());
+    const pivot = new T.Group();
+    pivot.position.copy(center);
     for (const part of parts) {
-      const box = new T.Box3().setFromObject(part);
-      if (box.isEmpty()) continue;
-      const center = box.getCenter(new T.Vector3());
-      const pivot = new T.Group();
-      pivot.position.copy(center);
-      // The map importer bakes world transforms. Preserve native panel geometry,
-      // material/lightmap UVs and tint while moving it around its own center.
       part.updateWorldMatrix(true, true);
       const clone = part.clone(true);
       clone.visible = true;
@@ -130,36 +186,71 @@ export class NativeMapBreakableView {
       );
       clone.matrixAutoUpdate = false;
       clone.matrixWorldAutoUpdate = true;
+      const originals: T.Mesh[] = [];
+      part.traverse((object) => {
+        if (object instanceof T.Mesh) originals.push(object);
+      });
+      let index = 0;
       clone.traverse((object) => {
         object.matrixWorldAutoUpdate = true;
         object.raycast = () => {};
+        if (object instanceof T.Mesh) {
+          const source = originals[index++];
+          object.customDepthMaterial = source.customDepthMaterial;
+          object.customDistanceMaterial = source.customDistanceMaterial;
+        }
       });
       pivot.add(clone);
-      sourceSunCaster(pivot, true);
-      this.root.add(pivot);
-      const speed = definition.debris?.burstSpeed ?? 2;
-      const velocity = center
-        .clone()
-        .sub(point ?? box.getCenter(new T.Vector3()))
-        .multiplyScalar(0.5);
-      if (direction) velocity.addScaledVector(direction, Math.min(speed, 4));
-      velocity.add(
-        new T.Vector3(
-          (Math.random() - 0.5) * speed,
-          1 + Math.random() * speed * 0.4,
-          (Math.random() - 0.5) * speed,
-        ),
+    }
+    sourceSunCaster(pivot, true);
+    this.root.add(pivot);
+    // Authored mesh/pose/fade parameter are separate from this bounded browser
+    // rigid-body approximation. Native burst/twist commands are not guessed.
+    const speed = definition.debris?.burstSpeed ?? 2;
+    const velocity = center
+      .clone()
+      .sub(point ?? box.getCenter(new T.Vector3()))
+      .multiplyScalar(0.5);
+    if (direction) velocity.addScaledVector(direction, Math.min(speed, 4));
+    velocity.add(
+      new T.Vector3(
+        (Math.random() - 0.5) * speed,
+        1 + Math.random() * speed * 0.4,
+        (Math.random() - 0.5) * speed,
+      ),
+    );
+    const extent = box.getSize(new T.Vector3());
+    const radius = Math.max(0.015, Math.min(0.1, Math.min(extent.x, extent.y, extent.z) * 0.4));
+    this.fragments.push({
+      root: pivot,
+      velocity,
+      spin: new T.Vector3(Math.random() * 8 - 4, Math.random() * 8 - 4, Math.random() * 8 - 4),
+      radius,
+      // Zero source fade currently retains the piece until round reset; native
+      // zero-fade scheduling remains explicitly unverified in provenance.
+      life: piece
+        ? piece.fadeTime > 0
+          ? piece.fadeTime
+          : Infinity
+        : Math.min(3, definition.debris?.fadeTime ?? 3),
+      essential: piece?.essential ?? false,
+      legacy: !piece,
+      motionDisabled: piece?.motionDisabled === true,
+    });
+    // Never discard authored essential pieces. Their count is bounded by the
+    // loaded manifest/one destruction per owner until reset. Only optional
+    // visual debris uses this reconstructed recent-piece budget.
+    while (
+      this.fragments.filter((fragment) => !fragment.essential && !fragment.legacy).length > 96
+    ) {
+      const oldest = this.fragments.findIndex(
+        (fragment) => !fragment.essential && !fragment.legacy,
       );
-      const extent = box.getSize(new T.Vector3());
-      const radius = Math.max(0.015, Math.min(0.1, Math.min(extent.x, extent.y, extent.z) * 0.4));
-      this.fragments.push({
-        root: pivot,
-        velocity,
-        spin: new T.Vector3(Math.random() * 8 - 4, Math.random() * 8 - 4, Math.random() * 8 - 4),
-        radius,
-        life: Math.min(3, definition.debris?.fadeTime ?? 3),
-      });
-      while (this.fragments.length > 24) this.fragments.shift()!.root.removeFromParent();
+      this.fragments.splice(oldest, 1)[0].root.removeFromParent();
+    }
+    while (this.fragments.filter((fragment) => fragment.legacy).length > 24) {
+      const oldest = this.fragments.findIndex((fragment) => fragment.legacy);
+      this.fragments.splice(oldest, 1)[0].root.removeFromParent();
     }
   }
   update(dt: number) {
@@ -171,6 +262,7 @@ export class NativeMapBreakableView {
         this.fragments.splice(i, 1);
         continue;
       }
+      if (fragment.motionDisabled) continue;
       fragment.velocity.y -= 9.81 * dt;
       this.delta.copy(fragment.velocity).multiplyScalar(dt);
       const hit = this.collision.sweepSphere(

@@ -1,6 +1,7 @@
 import * as T from "three";
 import { applySourceColorCorrection } from "./map-color";
 import { applySourceFog } from "./source-fog";
+import { applyNativeFogShader, type NativeMapFog } from "./native-map-fog";
 import { applySourceBarns } from "./source-barn";
 import { sourceGpuProbes, applySourceGpuProbes, type SourceGpuProbes } from "./source-gpu-probes";
 import { sampleSourceProbe } from "./source-lighting";
@@ -31,6 +32,7 @@ type State = {
   gpuAvailable: boolean;
   gpuProbes?: SourceGpuProbes | null;
   nativeReflections?: SourceReflections;
+  nativeFog?: NativeMapFog;
   reflectionBinding?: SourceReflectionBinding;
   reflectionTimer: number;
   reflectionPosition: T.Vector3;
@@ -60,6 +62,7 @@ type State = {
 const actors = new WeakMap<T.Object3D, State>();
 const probeKeys = new WeakMap<SourceGpuProbes, number>();
 const reflectionKeys = new WeakMap<SourceReflections, number>();
+const fogKeys = new WeakMap<NativeMapFog, number>();
 let nextProbeKey = 1;
 function probeKey(probes: SourceGpuProbes | null | undefined) {
   if (probes === undefined) return "dust";
@@ -79,6 +82,15 @@ function reflectionKey(data: SourceReflections | undefined) {
     reflectionKeys.set(data, key);
   }
   return `native:${key}`;
+}
+function fogKey(fog: NativeMapFog | undefined) {
+  if (!fog) return "none";
+  let key = fogKeys.get(fog);
+  if (key === undefined) {
+    key = nextProbeKey++;
+    fogKeys.set(fog, key);
+  }
+  return key;
 }
 const patches = new WeakMap<
   T.Material,
@@ -276,6 +288,7 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
         worldToLighting: "transpose(sourceActorProbeRotation)",
       });
       applySourceFog(shader, "sourceActorDustEnabled");
+      if (lighting.nativeFog) applyNativeFogShader(shader, lighting.nativeFog);
       applySourceColorCorrection(shader, "sourceActorWorldEnabled", true);
       if (gpuProbes) applySourceGpuProbes(shader, gpuProbes);
       if (lighting.reflectionBinding)
@@ -296,7 +309,7 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
       applySourceSunShadows(shader);
     };
     material.customProgramCacheKey = () =>
-      `${key}:source-actor-probe-v7:${probeKey(lighting.gpuProbes)}:${reflectionKey(lighting.nativeReflections)}`;
+      `${key}:source-actor-probe-v7:${probeKey(lighting.gpuProbes)}:${reflectionKey(lighting.nativeReflections)}:fog${fogKey(lighting.nativeFog)}`;
     material.needsUpdate = true;
     return material;
   };
@@ -367,9 +380,14 @@ export function updateActorLighting(
   sampleLocalShadows?: (position: Position, out: T.Vector2) => void,
   gpuProbes?: SourceGpuProbes | null,
   nativeReflections?: SourceReflections,
+  nativeFog?: NativeMapFog,
 ) {
   const state = actors.get(root);
   if (!state) return;
+  if (state.nativeFog !== nativeFog) {
+    state.nativeFog = nativeFog;
+    for (const material of state.patched) material.needsUpdate = true;
+  }
   // Undefined retains Dust II's renderer-owned cache; a map-owned object binds
   // its own arrays. Explicit null must not silently pick up Dust II's atlas on
   // devices that cannot support the other map's LPV shader.

@@ -2,7 +2,13 @@ import * as T from "three";
 import { applySourceReflections, type SourceReflections } from "../src/source-reflections";
 /** Independently controlled quality1 normalization/projection equations. The
  * native .01 coverage floor is deliberately visible; legacy behavior is control. */
-export function renderNativeReflectionFamilies() {
+export function renderNativeReflectionFamilies(
+  options: {
+    normalSource?: [number, number, number];
+    directionPalette?: boolean;
+    disableWaterShape?: boolean;
+  } = {},
+) {
   const renderer = new T.WebGLRenderer({ antialias: false });
   renderer.setSize(1, 1);
   renderer.outputColorSpace = T.LinearSRGBColorSpace;
@@ -15,7 +21,7 @@ export function renderNativeReflectionFamilies() {
     for (let face = 0; face < 6; face++)
       for (let i = 0; i < 16; i++)
         bytes.set(
-          mode === "normalization"
+          mode === "normalization" && !options.directionPalette
             ? [128, 128, 128, 255]
             : face === 0
               ? [255, 0, 0, 255]
@@ -80,13 +86,21 @@ void main(){TestMaterial material;material.roughness=${roughness}.0;vec3 radianc
 RE_IndirectSpecular( radiance, iblIrradiance, clearcoatRadiance, geometryPosition, geometryNormal, geometryViewDir, geometryClearcoatNormal, material, reflectedLight );
 gl_FragColor=vec4(radiance,1.0);}`,
         });
-        material.onBeforeCompile = (shader) =>
+        material.onBeforeCompile = (shader) => {
           applySourceReflections(shader, data, [0], {
             nativeFamily: family,
             worldPosition: mode === "normalization" ? "vec3(0.0)" : "vec3(.2286,0.0,0.0)",
-            worldNormal: "vec3(0.0,1.0,0.0)",
+            worldNormal: options.normalSource
+              ? `vec3(${options.normalSource[0]},${options.normalSource[2]},${-options.normalSource[1]})`
+              : "vec3(0.0,1.0,0.0)",
             worldView: "vec3(0.0,1.0,0.0)",
           });
+          if (options.disableWaterShape)
+            shader.fragmentShader = shader.fragmentShader.replace(
+              "return (worldToViewRow*vec4(normalize(viewNormal),0.0)).xyz;",
+              "return normalize(normalSource);",
+            );
+        };
         scene.add(new T.Mesh(new T.PlaneGeometry(2, 2), material));
         renderer.setRenderTarget(target);
         renderer.render(scene, camera);

@@ -73,7 +73,12 @@ export function applyNativeMapReflections(
       if (!(source instanceof T.MeshStandardMaterial) || !indices.length) return source;
       if (indices.length > 8)
         throw new Error(`Native moving reflection overlap exceeds eight volumes: ${object.name}`);
-      const nativeFamily = source.userData.nativeSourceFamily as "water" | "complex" | undefined;
+      const nativeFamily = source.userData.nativeSourceFamily as
+        | "water"
+        | "complex"
+        | "glass"
+        | "lightmapped"
+        | undefined;
       const selection = `${nativeFamily ?? "legacy"}:${indices.join(",")}`;
       let materials = variants.get(source);
       if (!materials) variants.set(source, (materials = new Map()));
@@ -84,6 +89,9 @@ export function applyNativeMapReflections(
       for (const [slot, index] of indices.entries())
         Object.assign(binding.uniforms[slot], data.uniforms[index]);
       material = source.clone();
+      // MeshStandardMaterial.copy resets custom defines; native callbacks still
+      // require their original tangent/normal-frame feature declarations.
+      material.defines = { ...source.defines };
       copySourceDepth(source, material);
       const previous = source.onBeforeCompile.bind(source);
       const key = source.customProgramCacheKey();

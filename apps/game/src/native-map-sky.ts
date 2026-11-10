@@ -1,4 +1,14 @@
 import * as T from "three";
+import { loadNativeMapComplex, applyNativeMapComplex } from "./native-map-complex";
+import {
+  loadNativeMapLightmapped,
+  applyNativeMapLightmapped,
+  selectNativeLightmappedMaterial,
+} from "./native-map-lightmapped";
+import { loadNativeMapLegacy, applyNativeMapLegacy } from "./native-map-legacy";
+import { loadNativeMapGlass, applyNativeMapGlass } from "./native-map-glass";
+import { installSourceShadowDepth } from "./source-depth";
+import { applyNativeMapFog, type NativeMapFog } from "./native-map-fog";
 import { excludeNativeToolsMaterials } from "./native-tools-materials";
 import { nativeSkyFrame, type NativeSkyPlacement } from "./native-sky-frame";
 import { createEnvironmentWorldFrame } from "./native-environment-frame";
@@ -21,6 +31,12 @@ import {
 import { registerSourceSkyPreparation } from "./source-sky";
 import { MapResources } from "./map-resources";
 import { createNativeSkyEffect, type NativeSkyEffectParameters } from "./native-sky-clouds";
+import { loadNativeCableView } from "./native-map-cables";
+import { loadNativeFoliageView } from "./native-foliage-view";
+import { bindNativeFoliageVisibility } from "./native-foliage-visibility";
+import { assertNativeEnvironmentBudget } from "./native-environment-budget";
+import { combineNativeCoverage, ownNativeCoverage } from "./native-coverage";
+import { loadNativeComplexPaint } from "./native-complex-paint";
 
 export type NativeSkyManifest = {
   model: string;
@@ -33,6 +49,13 @@ export type NativeSkyManifest = {
   environmentMaterials?: string;
   layers?: string;
   parallaxMaterials?: string;
+  complexMaterials?: string;
+  complexSpecialMaterials?: string;
+  legacyMaterials?: string;
+  lightmappedMaterials?: string;
+  glassMaterials?: string;
+  foliageMaterials?: string;
+  cablesWorld?: string;
   staticOverlays?: { name: string; staticOverlay?: NativeStaticOverlay }[];
   selfIllumination?: Record<string, SourceSelfIllumination>;
   lighting: NativeMapLightingPaths;
@@ -51,10 +74,11 @@ export async function loadNativeMapSky(
   manifestPath: string,
   gradientLoad: T.Texture | Promise<T.Texture>,
   sun: { pitch: number; yaw: number; color: number; intensity: number },
+  fog?: NativeMapFog,
 ) {
   const resources = new MapResources();
   try {
-    return await buildNativeMapSky(renderer, manifestPath, gradientLoad, sun, resources);
+    return await buildNativeMapSky(renderer, manifestPath, gradientLoad, sun, resources, fog);
   } catch (error) {
     resources.dispose();
     throw error;
@@ -66,6 +90,7 @@ async function buildNativeMapSky(
   gradientLoad: T.Texture | Promise<T.Texture>,
   sun: { pitch: number; yaw: number; color: number; intensity: number },
   resources: MapResources,
+  fog?: NativeMapFog,
 ) {
   const response = await assetFetch(manifestPath);
   if (!response.ok) throw new Error("Native 3D sky manifest unavailable");
@@ -77,50 +102,129 @@ async function buildNativeMapSky(
     throw new Error("Native sky camera placement provenance is missing");
   const panoramaConfig = nativeSkyPanorama(manifest.panorama);
   const frame = nativeSkyFrame(manifest.nativeTransform);
-  const [asset, lighting, gradient, probes, environment, layers, parallax, reflections] =
-    await Promise.all([
-      loadGzipped(manifest.model, 1).then((asset) => {
-        resources.capture(asset.scene);
-        resources.onDispose(() => resources.capture(asset.scene));
-        return asset;
-      }),
-      loadNativeMapLighting(manifest.lighting, renderer).then((lighting) => {
-        for (const texture of Object.values(lighting)) resources.texture(texture);
-        return lighting;
-      }),
-      gradientLoad,
-      manifest.probes
-        ? loadNativeMapProbes(renderer, manifest.probes).then((probes) => {
-            for (const texture of probes?.textures ?? []) resources.texture(texture);
-            return probes;
-          })
-        : undefined,
-      manifest.environmentMaterials
-        ? loadNativeMapEnvironment(renderer, manifest.environmentMaterials).then((bundle) => {
-            for (const texture of bundle.textures.values()) resources.texture(texture);
-            return bundle;
-          })
-        : undefined,
-      manifest.layers
-        ? loadNativeMapLayerBundle(renderer, manifest.layers).then((bundle) => {
-            for (const texture of bundle.textures.values()) resources.texture(texture);
-            return bundle;
-          })
-        : undefined,
-      manifest.parallaxMaterials
-        ? loadNativeMapParallax(renderer, manifest.parallaxMaterials).then((bundle) => {
-            for (const texture of [...bundle.textures.values(), ...bundle.cubes.values()])
-              resources.texture(texture);
-            return bundle;
-          })
-        : undefined,
-      manifest.reflections
-        ? loadSourceReflections(renderer, true, manifest.reflections).then((bundle) => {
-            for (const texture of bundle?.textures ?? []) resources.texture(texture);
-            return bundle;
-          })
-        : undefined,
-    ]);
+  const [
+    asset,
+    lighting,
+    gradient,
+    probes,
+    environment,
+    layers,
+    parallax,
+    reflections,
+    complex,
+    legacy,
+    glass,
+    foliage,
+    specialComplex,
+    cableAsset,
+    lightmapped,
+  ] = await Promise.all([
+    loadGzipped(manifest.model, 1).then((asset) => {
+      resources.capture(asset.scene);
+      resources.onDispose(() => resources.capture(asset.scene));
+      return asset;
+    }),
+    loadNativeMapLighting(manifest.lighting, renderer).then((lighting) => {
+      for (const texture of Object.values(lighting)) resources.texture(texture);
+      return lighting;
+    }),
+    gradientLoad,
+    manifest.probes
+      ? loadNativeMapProbes(renderer, manifest.probes).then((probes) => {
+          for (const texture of probes?.textures ?? []) resources.texture(texture);
+          return probes;
+        })
+      : undefined,
+    manifest.environmentMaterials
+      ? loadNativeMapEnvironment(renderer, manifest.environmentMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    manifest.layers
+      ? loadNativeMapLayerBundle(renderer, manifest.layers).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    manifest.parallaxMaterials
+      ? loadNativeMapParallax(renderer, manifest.parallaxMaterials).then((bundle) => {
+          for (const texture of [...bundle.textures.values(), ...bundle.cubes.values()])
+            resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    manifest.reflections
+      ? loadSourceReflections(renderer, true, manifest.reflections).then((bundle) => {
+          for (const texture of bundle?.textures ?? []) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    manifest.complexMaterials
+      ? loadNativeMapComplex(renderer, manifest.complexMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    manifest.legacyMaterials
+      ? loadNativeMapLegacy(renderer, manifest.legacyMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    manifest.glassMaterials
+      ? loadNativeMapGlass(renderer, manifest.glassMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    manifest.foliageMaterials
+      ? loadNativeFoliageView(renderer, manifest.foliageMaterials, resources, "sky")
+      : undefined,
+    manifest.complexSpecialMaterials
+      ? loadNativeMapComplex(renderer, manifest.complexSpecialMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    manifest.cablesWorld
+      ? loadGzipped(manifest.cablesWorld, 1).then((asset) => {
+          resources.capture(asset.scene);
+          resources.onDispose(() => resources.capture(asset.scene));
+          return asset;
+        })
+      : undefined,
+    manifest.lightmappedMaterials
+      ? loadNativeMapLightmapped(renderer, manifest.lightmappedMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          resources.external(bundle.lookup);
+          return bundle;
+        })
+      : undefined,
+  ]);
+  const originals: T.Object3D[] = [];
+  asset.scene.traverse((object) => originals.push(object));
+  const complexPaint = await loadNativeComplexPaint(specialComplex, resources);
+  if (complexPaint) {
+    bindNativeFoliageVisibility(originals, complexPaint.root, {
+      originalMainMaterialIndices: complexPaint.originalMainMaterialIndices,
+    });
+    asset.scene.add(complexPaint.root);
+  }
+  if (foliage) {
+    asset.scene.add(foliage.root);
+    bindNativeFoliageVisibility(originals, foliage.root, {
+      originalMainMaterialIndices: foliage.source.originalMainMaterialIndices ?? [],
+      visibilityLinks: foliage.source.visibilityLinks,
+    });
+  }
+  const nativeCables = cableAsset ? await loadNativeCableView(cableAsset.scene) : undefined;
+  if (nativeCables) {
+    resources.external(nativeCables.lookup);
+    resources.onDispose(() => nativeCables.dispose());
+    resources.capture(cableAsset!.scene);
+    asset.scene.add(cableAsset!.scene);
+  }
   // The caller also uses the gradient for the world environment and owns it.
   resources.external(gradient);
   const textures = new Map<string, T.Texture>();
@@ -148,6 +252,7 @@ async function buildNativeMapSky(
         source &&
         !parallax?.materials[material.name] &&
         material instanceof T.MeshStandardMaterial &&
+        !(lightmapped && selectNativeLightmappedMaterial(material, lightmapped.materials)) &&
         !emissive.has(material)
       ) {
         applySourceSelfIllumination(material, source);
@@ -157,8 +262,30 @@ async function buildNativeMapSky(
   });
   if (layers) applyNativeMapLayers(asset.scene, layers);
   if (manifest.staticOverlays) applyNativeStaticOverlays(asset.scene, manifest.staticOverlays);
+  const complexPasses = [];
+  if (complex) complexPasses.push(applyNativeMapComplex(asset.scene, complex));
+  if (specialComplex) complexPasses.push(applyNativeMapComplex(asset.scene, specialComplex));
+  const nativeCoverage = combineNativeCoverage([
+    foliage,
+    complexPasses.length ? ownNativeCoverage(renderer, resources, complexPasses) : undefined,
+  ]);
+  if (legacy) applyNativeMapLegacy(asset.scene, legacy);
+  if (lightmapped) {
+    try {
+      applyNativeMapLightmapped(asset.scene, lightmapped);
+    } finally {
+      for (const texture of lightmapped.textures.values()) resources.texture(texture);
+    }
+  }
+  if (glass) applyNativeMapGlass(asset.scene, glass, { fog });
   if (environment) {
     environment.sourceWorldFrame = createEnvironmentWorldFrame(frame.skyBrowserFromWorld);
+    assertNativeEnvironmentBudget(renderer, environment, {
+      reflections,
+      probes,
+      fog,
+      lightingSamplers: lighting.directional ? 3 : 2,
+    });
     applyNativeMapEnvironment(asset.scene, environment);
   }
   if (parallax) applyNativeMapParallax(asset.scene, parallax);
@@ -221,6 +348,15 @@ async function buildNativeMapSky(
       effectMeshes.push(object);
     }
   });
+  // The imported wrapper already places sky geometry in main-world space.
+  // Include converted HDR cloud/glow materials, before moving them to overlay.
+  if (fog) applyNativeMapFog(asset.scene, fog);
+  // Preserve displaced shadow materials before replacing them with variants
+  // bound to the final atlas/probe/reflection material clones.
+  resources.capture(asset.scene);
+  asset.scene.traverse((object) => {
+    if (object instanceof T.Mesh) installSourceShadowDepth(object);
+  });
   scene.updateMatrixWorld(true);
   for (const mesh of effectMeshes) overlay.attach(mesh);
   const authoredAmbient = manifest.ambient;
@@ -254,6 +390,7 @@ async function buildNativeMapSky(
   panorama.renderOrder = -1000;
   panorama.frustumCulled = false;
   scene.add(panorama);
+  const cableResolution = new T.Vector2();
   const viewport = new T.Vector4(),
     logicalViewport = new T.Vector4();
   const position = new T.Vector3(),
@@ -263,10 +400,12 @@ async function buildNativeMapSky(
     lastProjection = new T.Matrix4();
   let lastBucket = -1,
     lastWidth = 0,
-    lastHeight = 0;
+    lastHeight = 0,
+    lastCableHeight = 0;
   let disposed = false;
   function update(camera: T.Camera) {
     if (disposed) return;
+    renderer.getDrawingBufferSize(cableResolution);
     renderer.getCurrentViewport(viewport);
     const ratio = Math.min(1, Math.sqrt(2_097_152 / (viewport.z * viewport.w)));
     const width = Math.max(1, Math.round(viewport.z * ratio)),
@@ -280,6 +419,7 @@ async function buildNativeMapSky(
       bucket === lastBucket &&
       width === lastWidth &&
       height === lastHeight &&
+      cableResolution.y === lastCableHeight &&
       lastWorld.equals(camera.matrixWorld) &&
       sameProjection
     )
@@ -293,6 +433,7 @@ async function buildNativeMapSky(
     lastBucket = bucket;
     lastWidth = width;
     lastHeight = height;
+    lastCableHeight = cableResolution.y;
     lastWorld.copy(camera.matrixWorld);
     lastProjection.copy(camera.projectionMatrix);
     camera.matrixWorld.decompose(position, quaternion, scale);
@@ -306,9 +447,12 @@ async function buildNativeMapSky(
     skyCamera.projectionMatrix.elements[10] = -(far + near) / (far - near);
     skyCamera.projectionMatrix.elements[14] = (-2 * far * near) / (far - near);
     skyCamera.projectionMatrixInverse.copy(skyCamera.projectionMatrix).invert();
+    skyCamera.updateMatrixWorld(true);
+    nativeCables?.update(skyCamera, cableResolution.y);
     panorama.position.copy(position);
     time.value = now;
     environment?.update(now);
+    nativeCoverage?.update(now);
     const destination = renderer.getRenderTarget(),
       autoClear = renderer.autoClear,
       toneMapping = renderer.toneMapping,
@@ -319,6 +463,11 @@ async function buildNativeMapSky(
       renderer.info.autoReset = false;
       renderer.autoClear = true;
       renderer.setRenderTarget(target);
+      if (nativeCoverage) {
+        renderer.clear();
+        nativeCoverage.renderDepth(skyCamera);
+        renderer.autoClear = false;
+      }
       renderer.render(scene, skyCamera);
       renderer.copyTextureToTexture(target.depthTexture!, depthCopy.depthTexture!);
       renderer.autoClear = false;
@@ -357,16 +506,18 @@ async function buildNativeMapSky(
     const destination = renderer.getRenderTarget(),
       toneMapping = renderer.toneMapping;
     let worldPrograms: Promise<unknown>, effectPrograms: Promise<unknown>;
+    let foliagePrograms: Promise<unknown> | undefined;
     try {
       renderer.setRenderTarget(target);
       renderer.toneMapping = T.NoToneMapping;
       worldPrograms = renderer.compileAsync(scene, skyCamera);
       effectPrograms = renderer.compileAsync(overlay, skyCamera);
+      foliagePrograms = nativeCoverage?.prepare(skyCamera);
     } finally {
       renderer.setRenderTarget(destination);
       renderer.toneMapping = toneMapping;
     }
-    await Promise.all([worldPrograms, effectPrograms]);
+    await Promise.all([worldPrograms, effectPrograms, foliagePrograms]);
     if (disposed) return;
     for (const texture of [
       gradient,
@@ -375,7 +526,12 @@ async function buildNativeMapSky(
       lighting.directional,
       ...textures.values(),
       ...(probes?.textures ?? []),
+      ...(reflections?.textures ?? []),
       ...(environment?.textures.values() ?? []),
+      ...(complex?.textures.values() ?? []),
+      ...(specialComplex?.textures.values() ?? []),
+      ...(legacy?.textures.values() ?? []),
+      ...(glass?.textures.values() ?? []),
       ...(layers?.textures.values() ?? []),
       ...(parallax?.textures.values() ?? []),
       ...(parallax?.cubes.values() ?? []),

@@ -1,5 +1,73 @@
 import * as T from "three";
 
+/** Fit receivers in light-space XY, but retain off-nav roofs in the depth
+ * range. Map elevation must not leave the entire level behind the sun camera. */
+export function fitSourceSunShadow(
+  sun: T.DirectionalLight,
+  areas: readonly { corners: readonly number[][] }[],
+  scenery: T.Object3D,
+) {
+  const receivers = new T.Box3(),
+    point = new T.Vector3();
+  for (const area of areas)
+    for (const corner of area.corners) {
+      point.fromArray(corner);
+      receivers.expandByPoint(point);
+      point.y += 5;
+      receivers.expandByPoint(point);
+    }
+  if (receivers.isEmpty()) return;
+  const direction = sun.position.clone().sub(sun.target.position).normalize();
+  sun.target.position.copy(receivers.getCenter(new T.Vector3()));
+  sun.position.copy(sun.target.position).addScaledVector(direction, 100);
+  sun.updateWorldMatrix(true, false);
+  sun.target.updateWorldMatrix(true, false);
+  sun.shadow.updateMatrices(sun);
+  const view = sun.shadow.camera.matrixWorldInverse;
+  const receiverView = new T.Box3();
+  for (const area of areas)
+    for (const corner of area.corners) {
+      point.fromArray(corner).applyMatrix4(view);
+      receiverView.expandByPoint(point);
+      point.fromArray(corner);
+      point.y += 5;
+      receiverView.expandByPoint(point.applyMatrix4(view));
+    }
+  const depthBounds = receiverView.clone(),
+    matrix = new T.Matrix4();
+  scenery.updateWorldMatrix(true, true);
+  scenery.traverseVisible((object) => {
+    if (!(object instanceof T.Mesh) || !object.castShadow) return;
+    let box: T.Box3 | null;
+    if (object instanceof T.InstancedMesh) {
+      if (!object.boundingBox) object.computeBoundingBox();
+      box = object.boundingBox;
+    } else {
+      if (!object.geometry.boundingBox) object.geometry.computeBoundingBox();
+      box = object.geometry.boundingBox;
+    }
+    if (!box || box.isEmpty()) return;
+    matrix.multiplyMatrices(view, object.matrixWorld);
+    depthBounds.union(box.clone().applyMatrix4(matrix));
+  });
+  const padding = 8,
+    near = 1;
+  // Moving along the sun axis leaves its direction and receiver XY unchanged.
+  sun.position.addScaledVector(direction, depthBounds.max.z + padding + near);
+  Object.assign(sun.shadow.camera, {
+    left: receiverView.min.x - padding,
+    right: receiverView.max.x + padding,
+    bottom: receiverView.min.y - padding,
+    top: receiverView.max.y + padding,
+    near,
+    far: depthBounds.max.z - depthBounds.min.z + 2 * padding + near,
+  });
+  sun.shadow.camera.updateProjectionMatrix();
+  sun.updateWorldMatrix(true, false);
+  sun.shadow.updateMatrices(sun);
+  sun.shadow.needsUpdate = true;
+}
+
 const configured = new WeakSet<T.Mesh>();
 /** Keep static silhouettes cached while drawing moving casters in a separate map. */
 export function sourceSunCaster(root: T.Object3D, dynamic: boolean) {

@@ -1,4 +1,5 @@
 import * as T from "three";
+import { sourceVerticalFov } from "./source-camera";
 
 export const viewmodelDefaults = {
   viewmodelFov: 60,
@@ -23,9 +24,7 @@ export function readViewmodelSettings(saved: Record<string, unknown>): Viewmodel
   return result;
 }
 /** Source's horizontal 4:3 reference lens, not Three.js's vertical FOV. */
-export function viewmodelVerticalFov(horizontal: number) {
-  return T.MathUtils.radToDeg(2 * Math.atan(Math.tan(T.MathUtils.degToRad(horizontal / 2)) * 0.75));
-}
+export const viewmodelVerticalFov = sourceVerticalFov;
 export function applyViewmodelCamera(
   camera: T.PerspectiveCamera,
   width: number,

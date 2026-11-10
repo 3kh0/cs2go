@@ -1,6 +1,7 @@
 import * as T from "three";
 import {
   applyModernEnvironmentShader,
+  modernEnvironmentProgramKey,
   modernEnvironmentSamplers,
   usesModernEnvironment,
 } from "./native-modern-environment";
@@ -241,8 +242,10 @@ export function environmentColorMatrix(
     invLum,
   ])
     correction.premultiply(transform);
-  const max = Math.max(...tint),
-    min = Math.min(...tint);
+  // VMAT vector parameters carry an unused fourth component. Native
+  // MatrixColorTint2 takes Vector3; W must not change RGB saturation.
+  const max = Math.max(tint[0], tint[1], tint[2]),
+    min = Math.min(tint[0], tint[1], tint[2]);
   const saturation = max === 0 ? 0 : (max - min) / max;
   const gray = new T.Vector3().fromArray(tint).applyMatrix4(lumScale).applyMatrix4(rotation);
   const factor = 1 - saturation * saturation;
@@ -482,6 +485,11 @@ export function applyNativeMapEnvironment(
       const source = bundle.materials[material.name];
       if (!source || !(material instanceof T.MeshStandardMaterial)) continue;
       const { layers, overlay } = validateSourceEnvironment(source);
+      material.userData.nativeSourceFamily = "environment";
+      material.userData.nativeLocalDirectSpecular = true;
+      material.userData.nativeLocalLightResponse = source.IntParams.F_WETNESS
+        ? "wetness"
+        : "ordinary";
       const geometry = object.geometry,
         count = geometry.getAttribute("position").count;
       const uv = geometry.getAttribute("uv");
@@ -594,16 +602,40 @@ export function applyNativeMapEnvironment(
             bundle.sourceWorldFrame,
           );
       };
-      const bankKey = modern
-        ? bindEnvironmentTextures(
-            source,
-            modernEnvironmentSamplers(source, layers),
-            bundle.textures,
-            bundle.banks,
-            { uniforms: {} } as T.WebGLProgramParametersWithUniforms,
-          ).signature
-        : "legacy";
-      const programKey = `${key}:native-environment:${bundle.sourceWorldFrame?.unitScale ?? 1}:${bankKey}:${JSON.stringify(source)}:${modelTint.getHexString()}`;
+      let programKey: string;
+      if (modern) {
+        const template = {
+          vertexShader: T.ShaderLib.standard.vertexShader,
+          fragmentShader: T.ShaderLib.standard.fragmentShader,
+          uniforms: {},
+        } as T.WebGLProgramParametersWithUniforms;
+        applyModernEnvironmentShader(
+          template,
+          source,
+          bundle.textures,
+          bundle.banks,
+          modelTint,
+          bundle.lookup,
+          bundle.time,
+          bundle.sourceWorldFrame,
+        );
+        programKey = `${key}:${modernEnvironmentProgramKey(template)}`;
+      } else {
+        const template = {
+          vertexShader: T.ShaderLib.standard.vertexShader,
+          fragmentShader: T.ShaderLib.standard.fragmentShader,
+          uniforms: {},
+        } as T.WebGLProgramParametersWithUniforms;
+        applyEnvironmentShader(
+          template,
+          source,
+          bundle.textures,
+          modelTint,
+          bundle.lookup,
+          bundle.sourceWorldFrame,
+        );
+        programKey = `${key}:native-environment-legacy:${modernEnvironmentProgramKey(template)}`;
+      }
       material.customProgramCacheKey = () => programKey;
       material.needsUpdate = true;
     }

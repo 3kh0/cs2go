@@ -1,4 +1,4 @@
-/** Lowered from installed csgo_water_fancy PS88/d2 build26445667.
+/** Lowered from installed csgo_water_fancy PS856/d2 build26445667.
  * Native material expressions, waves, shoreline/debris/foam, refraction,
  * absorption and receiver caustics remain separate. WebGL camera unprojection,
  * fine derivatives and runtime interaction/noise inputs are qualified adapters.
@@ -133,14 +133,23 @@ vec4 _11408=gl_FragCoord;
         }
         float _14123 = (float(_17017) / (float(_14533) - 1.0)) * 2.0;
         float _14126 = mix(mix(g_flLowFreqWeight + (_18208 * 0.0500000007450580596923828125), g_flMedFreqWeight + _7242, clamp(_14123, 0.0, 1.0)), (g_flHighFreqWeight * _24840) + _7242, clamp(_14123 - 1.0, 0.0, 1.0));
-        vec3 _19401 = texture(g_tWavesNormalHeight, ((((_3386.xy + (_13137 * 3.0)) + _17133) / _16306) + ((vec2(sin(_17115), cos(_17115)) * ((waterTime * g_flWavesSpeed) * 0.5)) * sqrt(vec2(1.0) / _16306))).xy, (-1.0) * clamp(_4694, 0.0, 0.5)).xyz - vec3(0.5);
-        float _8072 = ((_19401.z * _14126) * length(_16306)) * 0.00999999977648258209228515625;
+        vec2 _15840 = _3386.xy;
+        vec2 _14060 = (vec2(sin(_17115), cos(_17115)) * ((waterTime * g_flWavesSpeed) * 0.5)) * sqrt(vec2(1.0) / _16306);
+        float _6695 = (-1.0) * clamp(_4694, 0.0, 0.5);
+        vec3 _19401 = texture(g_tWavesNormalHeight, ((((_15840 + (_13137 * 3.0)) + _17133) / _16306) + _14060).xy, _6695).xyz - vec3(0.5);
+        float _9160 = length(_16306);
         vec2 _9388 = _19401.xy * 2.0;
-        vec2 _10224 = vec2(_9388.x * min(1.0, _16306.y / _16306.x), _9388.y * min(1.0, _16306.x / _16306.y)).xy * (_14126 * 0.100000001490116119384765625);
-        _6759 = _13137.xy + ((((-_5201.xy) * _8072) * g_flWavesHeightOffset) * _24840);
-        _8974 = _17133.xy + (((_10224.xy * g_flWavesSharpness) * _16306) * g_flWavesPhaseOffset);
-        _9798 = _17117 + _8072;
-        vec2 _23792 = _17116.xy + _10224;
+        float _16755 = min(1.0, _16306.y / _16306.x);
+        float _7337 = min(1.0, _16306.x / _16306.y);
+        float _8090 = _14126 * 0.100000001490116119384765625;
+        vec2 _11360 = (((-_5201.xy) * (((_19401.z * _14126) * _9160) * 0.00999999977648258209228515625)) * g_flWavesHeightOffset) * _24840;
+        vec2 _22910 = (((vec2(_9388.x * _16755, _9388.y * _7337).xy * _8090).xy * g_flWavesSharpness) * _16306) * g_flWavesPhaseOffset;
+        vec3 _19402 = texture(g_tWavesNormalHeight, ((((_15840 + ((_13137 + _11360) * 3.0)) + (_17133 + _22910)) / _16306) + _14060).xy, _6695).xyz - vec3(0.5);
+        vec2 _10376 = _19402.xy * 2.0;
+        _6759 = _13137.xy + _11360;
+        _8974 = _17133.xy + _22910;
+        _9798 = _17117 + (((_19402.z * _14126) * _9160) * 0.00999999977648258209228515625);
+        vec2 _23792 = _17116.xy + (vec2(_10376.x * _16755, _10376.y * _7337).xy * _8090);
         vec3 _20488=vec3(0.0);
         _20488.x = _23792.x;
         _8417 = _20488;

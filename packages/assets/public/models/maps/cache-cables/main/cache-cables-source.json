@@ -1,0 +1,466 @@
+{
+  "version": 1,
+  "mapId": "cache",
+  "space": "main",
+  "model": null,
+  "ropes": 0,
+  "triangles": 0,
+  "nativeEntityCount": 7,
+  "placement": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "audits": [
+    {
+      "id": "106210:80:31321:252",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "color_tint": [
+          27,
+          27,
+          27
+        ],
+        "surface_properties": "",
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 0.4,
+        "particle_spacing": 30.0,
+        "max_simulation_time": 0.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "vscripts": "",
+        "targetname": "",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 160,
+        "origin": [
+          -1138.5,
+          921.375,
+          1956.75
+        ],
+        "angles": [
+          0.0,
+          270.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "106210:80:31321:252",
+        "pathNodes": "\n[\n\t[\n\t\t-0.000013576477, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "cache",
+        "parsedPathNodes": [
+          [
+            -1.3576477e-05,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "106210:80:31321:254",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "color_tint": [
+          27,
+          27,
+          27
+        ],
+        "surface_properties": "",
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 0.4,
+        "particle_spacing": 30.0,
+        "max_simulation_time": 0.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "vscripts": "",
+        "targetname": "",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 162,
+        "origin": [
+          -1138.125,
+          827.5,
+          1956.75
+        ],
+        "angles": [
+          0.0,
+          270.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "106210:80:31321:254",
+        "pathNodes": "\n[\n\t[\n\t\t-0.000013572005, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "cache",
+        "parsedPathNodes": [
+          [
+            -1.3572005e-05,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "106210:80:32926:79802",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "color_tint": [
+          255,
+          255,
+          255
+        ],
+        "surface_properties": "",
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 0.1,
+        "particle_spacing": 10.0,
+        "max_simulation_time": 5.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_default.vpcf",
+        "vscripts": "",
+        "targetname": "",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 632,
+        "origin": [
+          1467.0,
+          -1241.0,
+          1957.0
+        ],
+        "angles": [
+          0.0,
+          225.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "106210:80:32926:79802",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, -0.00012207031, 0.0, -0.0,\n\t\t0.0, 0.0, -0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeColors": "\n[\n\t[ 0.7529412, 0.7529412, 0.7529412 ],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "cache",
+        "parsedPathNodes": [
+          [
+            0.0,
+            -0.00012207031,
+            0.0,
+            -0.0,
+            0.0,
+            0.0,
+            -0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "106210:80:33334:5",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "color_tint": [
+          27,
+          27,
+          27
+        ],
+        "surface_properties": "",
+        "static_collision": false,
+        "radius": 0.2,
+        "slack": 0.2,
+        "particle_spacing": 15.0,
+        "max_simulation_time": 0.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "vscripts": "",
+        "targetname": "",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 680,
+        "origin": [
+          1306.25,
+          -823.5,
+          1892.5
+        ],
+        "angles": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "106210:80:33334:5",
+        "pathNodes": "[  ]",
+        "closed_loop": 0,
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "cache",
+        "parsedPathNodes": []
+      }
+    },
+    {
+      "id": "106210:80:33334:10",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "color_tint": [
+          27,
+          27,
+          27
+        ],
+        "surface_properties": "",
+        "static_collision": false,
+        "radius": 0.2,
+        "slack": 0.2,
+        "particle_spacing": 15.0,
+        "max_simulation_time": 0.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "vscripts": "",
+        "targetname": "",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 681,
+        "origin": [
+          1409.0,
+          -823.5,
+          1892.5
+        ],
+        "angles": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "106210:80:33334:10",
+        "pathNodes": "[  ]",
+        "closed_loop": 0,
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "cache",
+        "parsedPathNodes": []
+      }
+    },
+    {
+      "id": "106210:80:20717:2022",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "color_tint": [
+          27,
+          27,
+          27
+        ],
+        "surface_properties": "",
+        "static_collision": false,
+        "radius": 0.5,
+        "slack": 0.3,
+        "particle_spacing": 30.0,
+        "max_simulation_time": 0.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "vscripts": "",
+        "targetname": "",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1440,
+        "origin": [
+          1491.0,
+          -1179.625,
+          1896.25
+        ],
+        "angles": [
+          0.0,
+          225.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "106210:80:20717:2022",
+        "pathNodes": "\n[\n\t[\n\t\t0.0, 0.0, 0.0, -0.0,\n\t\t0.0, 0.0, -0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "cache",
+        "parsedPathNodes": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            -0.0,
+            0.0,
+            0.0,
+            -0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "106210:80:20717:2028",
+      "skipped": "Pinnedviewer ignores <2 authored knots; no invented span",
+      "nativeEntity": {
+        "color_tint": [
+          27,
+          27,
+          27
+        ],
+        "surface_properties": "",
+        "static_collision": false,
+        "radius": 0.2,
+        "slack": 0.05,
+        "particle_spacing": 15.0,
+        "max_simulation_time": 0.0,
+        "start_active": true,
+        "effect_name": "particles/entity/path_particle_cable_static.vpcf",
+        "vscripts": "",
+        "targetname": "",
+        "classname": "path_particle_rope_clientside",
+        "clientSideEntity": "1",
+        "compile_source_id": 1446,
+        "origin": [
+          1454.5,
+          -1081.5,
+          1910.875
+        ],
+        "angles": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scales": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hammerUniqueId": "106210:80:20717:2028",
+        "pathNodes": "\n[\n\t[\n\t\t0.0000584921, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]\n",
+        "pathNodeRadiusScales": "[ 2.0 ]",
+        "pathNodeRadiusHeightScales": "[ 2.0 ]",
+        "closed_loop": 0,
+        "pathNodePinsEnabled": "[ true ]",
+        "sourceEntityIndex": null,
+        "sourceEntityFile": null,
+        "space": "main",
+        "mapId": "cache",
+        "parsedPathNodes": [
+          [
+            5.84921e-05,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ]
+      }
+    }
+  ],
+  "source": {
+    "engine": "Valve Source2",
+    "build": "26445667",
+    "mapAuthor": "unverified; retain supplied native map credits",
+    "originalArchiveSHA256": "f3c2966ea3423043f731bbecfb704fb7360b4bb442c85ddb50ecc8f25d7f5503",
+    "viewerCommit": "9e2e6c7f67e3c4e5a5f443a60c3a5d841ba8f304",
+    "qualifications": [
+      "Pinnedviewer Bezier sampling/Verlet/spring/transported4-sidedtube, not private native engine particle snapshot",
+      "Explicit browser host policy min(authored entity max_simulation_time,VPCFpresim,stop), unlike viewer ignoring entity max",
+      "Authored height scales retained; absent follows qualified viewer width; actual present width/height arrays equal",
+      "Default/tintable offline tessellation uses authored maximum4; camera-adaptive tessellation not claimed",
+      "Native constant VTEX fields/packed hemi-oct flat normal/roughness and min-radius/coverage/blend lowered from preserved native programs. Browser effective vertical-FOV/full drawing-buffer height binding and pinned-viewer settling/tube topology remain qualified; no native engine particle parity claim."
+    ],
+    "nativeShaderProof": {
+      "archiveSHA256": "91493c2620afebab343c470abd1f7b270b01e322c0a4235995c3c7062a4995b8",
+      "followupSHA256": "d2fec7abeaae4371c13f00099ea1fe8b670eb14a26eb8fe74f8e164614ab4106",
+      "registeredCvar": "r_csgo_cable_pixel_radius_clamp",
+      "registeredDefaultFloat32": 1.2000000476837158,
+      "defaultBytes": "9a99993f",
+      "nativeVSWidth": "max(abs(viewDepth)*suppliedK,physicalRadius)",
+      "nativeCoverage": "max(physicalRadius/expandedRadius,0.25)",
+      "candidateWriter": "C*V_tanf((A*float32(pi/180))/D); division inside tan",
+      "opaqueClampBlend": "SourceAlpha/InverseSourceAlpha Add RGB and alpha; source descriptors + qualified pinned VRF enum/bitfield interpretation",
+      "browserViewBinding": "Effective vertical cameraFOV/pixelheight QUALIFIED; exact native A/D members and formalCB3 alias unproved",
+      "independentReplay": "28originalVCS compressed dictionary/slice\u2192native programs;17nativewindows,19/19originalresources/blocks;157+12payloadSHA; noGPU/target execution"
+    },
+    "browserGpuAcceptance": {
+      "fixture": "tests/native-cables.spec.ts",
+      "proof": "native-cables-gpu-proof.json",
+      "limitations": "Controlled width/coverage/transform/clone fixture, not whole-map texel or private particle solver parity"
+    },
+    "viewerLicense": "/models/maps/licenses/ValveResourceFormat-MIT.txt"
+  },
+  "runtime": {
+    "bytes": 0,
+    "rawGLBBytes": 0,
+    "sha256": null,
+    "collision": false
+  },
+  "admission": "UNUSED_PUBLIC_PAYLOAD; CPU121-owner geometry and isolated native-width/pose/clone/depth GPU gates pass; no active map config or whole-map visual acceptance"
+}

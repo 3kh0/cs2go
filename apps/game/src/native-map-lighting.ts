@@ -64,19 +64,28 @@ export async function loadNativeMapLighting(
     : paths.directional
       ? new T.TextureLoader().loadAsync(assetUrl(paths.directional))
       : undefined;
-  const [irradiance, shadows, directional] = await Promise.all([
+  const loaded = await Promise.allSettled([
     irradianceLoad,
     new T.TextureLoader().loadAsync(assetUrl(paths.shadows)),
     directionalLoad,
   ]);
+  const failure = loaded.find((result) => result.status === "rejected");
+  if (failure) {
+    for (const result of loaded) if (result.status === "fulfilled") result.value?.dispose();
+    throw failure.reason;
+  }
+  const irradiance = loaded[0].status === "fulfilled" ? loaded[0].value : undefined;
+  const shadows = loaded[1].status === "fulfilled" ? loaded[1].value : undefined;
+  const directional = loaded[2].status === "fulfilled" ? loaded[2].value : undefined;
+  if (!irradiance || !shadows) throw new Error("Native map atlases are missing");
   for (const texture of [irradiance, shadows, directional]) {
     if (!texture) continue;
     const { width, height } = texture.image as { width: number; height: number };
-    if (!width || !height || width > 4096 || height > 4096) {
+    if (width !== size || height !== size) {
       irradiance.dispose();
       shadows.dispose();
       directional?.dispose();
-      throw new Error("Native map atlases must retain their original dimensions up to 4096 pixels");
+      throw new Error(`Native map atlases must retain their declared ${size}x${size} dimensions`);
     }
     texture.colorSpace = T.NoColorSpace;
     texture.flipY = false;
@@ -114,7 +123,11 @@ export function applyNativeMapLighting(
         return material;
       }
       material = source.clone();
+      // MeshStandardMaterial.copy resets custom defines; native callbacks still
+      // require their original tangent/normal-frame feature declarations.
+      material.defines = { ...source.defines };
       copySourceDepth(source, material);
+      material.userData.nativeBakedVisibility = "atlas";
       // Cloning only the UV1 branch keeps shared prop materials on their own lighting path.
       materials.set(source, material);
       // oxlint-disable-next-line typescript/unbound-method -- Invoked with the cloned material via .call below.

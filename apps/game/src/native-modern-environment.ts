@@ -1,3 +1,4 @@
+import { EnvironmentShaderParameters } from "./native-environment-parameters";
 import * as T from "three";
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
 import { environmentColorMatrix } from "./native-map-environment";
@@ -19,6 +20,21 @@ import {
 } from "./native-environment-frame";
 import { environmentAlphaShared, environmentAlphaTest } from "./native-environment-alpha";
 import { applySourceSurface } from "./source-surface";
+
+// Exact generated templates are interned once; uniform values and resource IDs
+// never enter the key. Keep the source as the identity to avoid hash collisions.
+const programTemplates = new Map<string, string>();
+export function modernEnvironmentProgramKey(
+  shader: Pick<T.WebGLProgramParametersWithUniforms, "vertexShader" | "fragmentShader">,
+) {
+  const template = shader.vertexShader + "\0" + shader.fragmentShader;
+  let key = programTemplates.get(template);
+  if (!key) {
+    key = `native-modern-environment:${programTemplates.size}`;
+    programTemplates.set(template, key);
+  }
+  return key;
+}
 
 const n = (value: number) => {
   const raw = Number.isInteger(value) ? `${value}.0` : `${value}`;
@@ -118,7 +134,12 @@ vec3 environmentColorize(vec3 color,vec3 tint,float mask,float band){
  return mix(color,clamp(mix(color,target,mask),0.0,1.0),band);
 }
 `;
-function uvCode(s: SourceEnvironmentMaterial, layer: number, detail = false) {
+function uvCode(
+  s: SourceEnvironmentMaterial,
+  layer: number,
+  detail = false,
+  parameters: EnvironmentShaderParameters,
+) {
   const suffix = layer || "",
     prefix = detail ? "DetailTexCoord" : layer ? "TexCoord" : "OverlayTexCoord";
   const selected = detail
@@ -126,13 +147,18 @@ function uvCode(s: SourceEnvironmentMaterial, layer: number, detail = false) {
     : (s.IntParams[layer ? `g_nUVSet${layer}` : "g_nColorOverlayUVSet"] ?? (layer ? 1 : 2));
   const effective = selected === -1 ? (s.IntParams[`g_nUVSet${layer}`] ?? 1) : selected;
   if (effective === 0) return "sourceEnvironmentUv";
-  return `environmentRotate(${effective === 2 ? "sourceEnvironmentAlternateUv" : "sourceEnvironmentUv"},${n(f(s, `g_fl${prefix}Rotation${suffix}`, 0))},${v(vec(s, `g_v${prefix}Scale${suffix}`, [1, 1]), 2)},${v(vec(s, `g_v${prefix}Offset${suffix}`, [0, 0]), 2)},${v(vec(s, `g_v${prefix}Center${suffix}`, [0.5, 0.5]), 2)})`;
+  return `environmentRotate(${effective === 2 ? "sourceEnvironmentAlternateUv" : "sourceEnvironmentUv"},${parameters.float(s, `g_fl${prefix}Rotation${suffix}`, 0)},${parameters.vector(s, `g_v${prefix}Scale${suffix}`, [1, 1], 2)},${parameters.vector(s, `g_v${prefix}Offset${suffix}`, [0, 0], 2)},${parameters.vector(s, `g_v${prefix}Center${suffix}`, [0.5, 0.5], 2)})`;
 }
-function tintLayer(s: SourceEnvironmentMaterial, layer: number, _layers: number) {
-  const F = (key: string, d: number) => n(f(s, key + layer, d));
+function tintLayer(
+  s: SourceEnvironmentMaterial,
+  layer: number,
+  _layers: number,
+  parameters: EnvironmentShaderParameters,
+) {
+  const F = (key: string, d: number) => parameters.float(s, key + layer, d);
   return `
- vec4 color${layer}=${environmentRead(s, layer, "Color", `vEnvironmentUv${layer}`)};
- vec4 height${layer}=${environmentRead(s, layer, "Height", `vEnvironmentUv${layer}`)};
+ vec4 color${layer}=${environmentRead(s, layer, "Color", `vEnvironmentUv${layer}`, false, parameters)};
+ vec4 height${layer}=${environmentRead(s, layer, "Height", `vEnvironmentUv${layer}`, false, parameters)};
  float tintMask${layer}=clamp(((height${layer}.g-.5)*${F("g_fTintMaskContrast", 1)}+.5)*${F("g_fTintMaskBrightness", 1)},0.0,1.0);
  height${layer}.a*=${n((s.IntParams[`g_bMetalness${layer}`] ?? 1) ? 1 : 0)};
  vec3 adjusted${layer}=${(s.IntParams[`g_nColorCorrectionMode${layer}`] ?? 0) === 1 ? `(environmentAdjust${layer}*vec4(color${layer}.rgb,1.0)).rgb` : `color${layer}.rgb`};
@@ -140,26 +166,30 @@ function tintLayer(s: SourceEnvironmentMaterial, layer: number, _layers: number)
  vec3 modelDirection${layer}=normalize(max(environmentModelTint,vec3(.001)));
  float lum${layer}=dot(base${layer},vec3(.2125,.7154,.0721));
  vec3 target${layer}=modelDirection${layer}*min(lum${layer}/dot(modelDirection${layer},vec3(.2125,.7154,.0721)),3.0*lum${layer}*max(environmentModelTint.r,max(environmentModelTint.g,environmentModelTint.b)));
- color${layer}.rgb=clamp(mix(base${layer},target${layer},${n(f(s, "g_flModelTintAmount", 1))}*(1.0-min(environmentModelTint.r,min(environmentModelTint.g,environmentModelTint.b)))*tintMask${layer}*${n((s.IntParams[`g_bModelTint${layer}`] ?? 1) ? 1 : 0)}),0.0,1.0);
+ color${layer}.rgb=clamp(mix(base${layer},target${layer},${parameters.float(s, "g_flModelTintAmount", 1)}*(1.0-min(environmentModelTint.r,min(environmentModelTint.g,environmentModelTint.b)))*tintMask${layer}*${n((s.IntParams[`g_bModelTint${layer}`] ?? 1) ? 1 : 0)}),0.0,1.0);
  vec3 overlayColor${layer}=color${layer}.rgb;
 
- float ao${layer}=clamp(mix(${v(vec(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1]), 3)}.x,${v(vec(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1]), 3)}.z,pow(max(${s.IntParams.F_ALPHA_TEST ? `height${layer}.b` : `color${layer}.a`},0.0),${v(vec(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1]), 3)}.y)),0.0,1.0);
+ float ao${layer}=clamp(mix(${parameters.vector(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1], 3)}.x,${parameters.vector(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1], 3)}.z,pow(max(${s.IntParams.F_ALPHA_TEST ? `height${layer}.b` : `color${layer}.a`},0.0),${parameters.vector(s, `g_vAmbientOcclusionLevels${layer}`, [0, 0.5, 1], 3)}.y)),0.0,1.0);
  `;
 }
-function normalLayer(s: SourceEnvironmentMaterial, layer: number) {
+function normalLayer(
+  s: SourceEnvironmentMaterial,
+  layer: number,
+  parameters: EnvironmentShaderParameters,
+) {
   if (!groupActive(s, layer)) return `vec3 N${layer}=environmentGeometric;float R${layer}=1.0;`;
   const uvSet = s.IntParams[`g_nUVSet${layer}`] ?? 1;
   const detailSelect = s.IntParams[`g_nDetailUVSet${layer}`] ?? -1;
   const detailEffective = detailSelect === -1 ? uvSet : detailSelect;
   return `
- vec4 normalSample${layer}=${environmentRead(s, layer, "Normal", `vEnvironmentUv${layer}`)};
- vec3 N${layer}=normalize(mix(environmentGeometric,${uvSet === 0 ? environmentProjectedNormal(s, layer) : `environmentPackedNormal(normalSample${layer}.rg,${n(f(s, `g_flTexCoordRotation${layer}`, 0))},${uvSet === 2 ? "environmentUvN,environmentUvT,environmentUvB" : "environmentFrameN,environmentFrameT,environmentFrameB"})`},${n(f(s, `g_fTextureNormalContrast${layer}`, 1))}));
- float R${layer}=clamp(((normalSample${layer}.b-.5)*${n(f(s, `g_fTextureRoughnessContrast${layer}`, 1))}+.5)*${n(f(s, `g_fTextureRoughnessBrightness${layer}`, 1))},0.0,1.0);
+ vec4 normalSample${layer}=${environmentRead(s, layer, "Normal", `vEnvironmentUv${layer}`, false, parameters)};
+ vec3 N${layer}=normalize(mix(environmentGeometric,${uvSet === 0 ? environmentProjectedNormal(s, layer, false, parameters) : `environmentPackedNormal(normalSample${layer}.rg,${parameters.float(s, `g_flTexCoordRotation${layer}`, 0)},${uvSet === 2 ? "environmentUvN,environmentUvT,environmentUvB" : "environmentFrameN,environmentFrameT,environmentFrameB"})`},${parameters.float(s, `g_fTextureNormalContrast${layer}`, 1)}));
+ float R${layer}=clamp(((normalSample${layer}.b-.5)*${parameters.float(s, `g_fTextureRoughnessContrast${layer}`, 1)}+.5)*${parameters.float(s, `g_fTextureRoughnessBrightness${layer}`, 1)},0.0,1.0);
  ${
    s.IntParams.F_DETAIL_NORMAL && f(s, `g_fDetailTextureNormalContrast${layer}`, 1) !== 0
      ? `
- vec2 detailUv${layer}=vEnvironmentDetailUv${layer}${detailSelect === -1 ? `*${v(vec(s, `g_vTexCoordScale${layer}`, [1, 1]), 2)}` : ""};
- vec3 detailN${layer}=normalize(mix(environmentGeometric,${detailEffective === 0 ? environmentProjectedNormal(s, layer, true) : `environmentPackedNormal(environmentNormalDetail${layer}Read(detailUv${layer}).rg,${n(f(s, `g_flDetailTexCoordRotation${layer}`, 0))},${detailEffective === 2 ? "environmentUvN,environmentUvT,environmentUvB" : "environmentFrameN,environmentFrameT,environmentFrameB"})`},${n(f(s, `g_fDetailTextureNormalContrast${layer}`, 1))}));
+ vec2 detailUv${layer}=vEnvironmentDetailUv${layer}${detailSelect === -1 ? `*${parameters.vector(s, `g_vTexCoordScale${layer}`, [1, 1], 2)}` : ""};
+ vec3 detailN${layer}=normalize(mix(environmentGeometric,${detailEffective === 0 ? environmentProjectedNormal(s, layer, true, parameters) : `environmentPackedNormal(environmentNormalDetail${layer}Read(detailUv${layer}).rg,${parameters.float(s, `g_flDetailTexCoordRotation${layer}`, 0)},${detailEffective === 2 ? "environmentUvN,environmentUvT,environmentUvB" : "environmentFrameN,environmentFrameT,environmentFrameB"})`},${parameters.float(s, `g_fDetailTextureNormalContrast${layer}`, 1)}));
  N${layer}=normalize(N${layer}+detailN${layer}-environmentGeometric);`
      : ""
  }
@@ -172,31 +202,41 @@ function borderColor(
   factor: string,
   band: string,
   tintMask: string,
+  parameters: EnvironmentShaderParameters,
 ) {
   const tint = new T.Color().setRGB(
     ...(vec(s, `g_vBorderTint${layer}`, [1, 1, 1]).slice(0, 3) as [number, number, number]),
     T.SRGBColorSpace,
   );
-  const TINT = v(tint.toArray(), 3),
+  const TINT = parameters.value(`borderTint:${layer}`, tint.toArray()),
     mode = s.IntParams[`F_BORDER_BLEND_MODE_${layer}`] ?? 0;
   if (mode === 1) return `${color}=mix(${color},${TINT},${factor});`;
   if (mode === 2) return `${color}*=mix(vec3(1.0),${TINT}*2.0,${factor});`;
   if (mode === 3) return `${color}=environmentColorize(${color},${TINT},${tintMask},${band});`;
   return `${color}*=mix(vec3(1.0),${TINT},${factor});`;
 }
-function facingDirection(source: SourceEnvironmentMaterial, layer: number) {
+function facingDirection(
+  source: SourceEnvironmentMaterial,
+  layer: number,
+  parameters: EnvironmentShaderParameters,
+) {
   const direction = vec(source, `g_vFacingDirection${layer}`, [0, 0, 1]).slice(0, 3);
   if (direction[2] === 0) direction[2] = 0.0001;
   const native = new T.Vector3().fromArray(direction).normalize();
-  return `environmentSourceNormalToView(${v(native.toArray(), 3)})`;
+  return `environmentSourceNormalToView(${parameters.value(`facingDirection:${layer}`, native.toArray())})`;
 }
-function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean) {
-  const F = (key: string, d: number) => n(f(s, key + layer, d));
+function stageCode(
+  s: SourceEnvironmentMaterial,
+  layer: number,
+  modern: boolean,
+  parameters: EnvironmentShaderParameters,
+) {
+  const F = (key: string, d: number) => parameters.float(s, key + layer, d);
   const effects = !!(
     s.IntParams[`F_BLEND_EFFECTS_${layer}`] ||
     (layer === 2 && s.IntParams.F_BLEND_EFFECTS)
   );
-  const borderAmount = v(vec(s, `g_vBorderLayerAmount${layer}`, [1, 0]), 2);
+  const borderAmount = parameters.vector(s, `g_vBorderLayerAmount${layer}`, [1, 0], 2);
   const maskTint = s.IntParams[`g_bBorderTintMask${layer}`] ?? 0;
   const belowTint = layer === 2 ? "tintMask1" : "mix(tintMask1,tintMask2,environmentWeight2)";
   let weights: string;
@@ -212,8 +252,8 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
     weights = `
  float environmentTSoft=max(min(vEnvironmentBlend.w+${F("g_flBlendSoftness", 0.01)},1.0),.0001)+q1;
  float soft2=environmentTSoft+q1+q2;
- float legacyZ1=${n(f(s, "g_flHeightMapZeroPoint1", 0.5))}+.5*q1,legacyZ2=${F("g_flHeightMapZeroPoint", 0.5)}+.5*(q1+q2);
- float legacyA=${n(f(s, "g_flHeightMapScale1", 1))}+environmentTSoft,legacyB=${F("g_flHeightMapScale", 1)}+soft2;
+ float legacyZ1=${parameters.float(s, "g_flHeightMapZeroPoint1", 0.5)}+.5*q1,legacyZ2=${F("g_flHeightMapZeroPoint", 0.5)}+.5*(q1+q2);
+ float legacyA=${parameters.float(s, "g_flHeightMapScale1", 1)}+environmentTSoft,legacyB=${F("g_flHeightMapScale", 1)}+soft2;
  float legacyL=legacyB-2.0*soft2;if(legacyL==0.0)legacyL=.0001;
  float legacyE1=height1.r-legacyZ1,legacyE2=height2.r-legacyZ2;
  float legacyT=mix(-legacyZ1*legacyA-(1.0-legacyZ2)*legacyB-soft2,(1.0-legacyZ1)*legacyA+legacyZ2*legacyB,paint2);
@@ -222,9 +262,9 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
  environmentWeight2=clamp(legacyU.y/(legacyU.x+.0001+legacyU.y)*mix(.5,height2.r,${F("g_flMaskWithHeight", 0)})*2.0,0.0,1.0);
  `;
   }
-  const surface = tintLayer(s, layer, 3)
+  const surface = tintLayer(s, layer, 3, parameters)
     .replace(
-      ` vec4 height${layer}=${environmentRead(s, layer, "Height", `vEnvironmentUv${layer}`)};`,
+      ` vec4 height${layer}=${environmentRead(s, layer, "Height", `vEnvironmentUv${layer}`, false, parameters)};`,
       "",
     )
     .replace(` float tintMask${layer}=`, ` tintMask${layer}=`)
@@ -236,7 +276,7 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
     if (modern) {
       border = `
  float edge${layer}=clamp(5.0*paint${layer},0.0,1.0)*clamp(5.0*(1.0-paint${layer}),0.0,1.0);
- float underScale${layer}=${layer === 2 ? n(f(s, "g_flHeightMapScale1", 1)) : `mix(${n(f(s, "g_flHeightMapScale1", 1))},${n(f(s, "g_flHeightMapScale2", 1))},environmentWeight2)`};
+ float underScale${layer}=${layer === 2 ? parameters.float(s, "g_flHeightMapScale1", 1) : `mix(${parameters.float(s, "g_flHeightMapScale1", 1)},${parameters.float(s, "g_flHeightMapScale2", 1)},environmentWeight2)`};
  float borderScale${layer}=.5+.5*max(abs(underScale${layer}),abs(${F("g_flHeightMapScale", 1)}));
  vec2 amount${layer}=clamp(${borderAmount}*mix(.5,height${layer}.r,${F("g_flMaskWithHeight", 0)})*2.0,0.0,1.0);
  float border${layer}=0.0;
@@ -250,8 +290,8 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
  }
  float borderTintMask${layer}=${maskTint ? `mix(${belowTint},tintMask${layer},environmentWeight${layer})` : "1.0"};
  float borderFactor${layer}=border${layer}*borderTintMask${layer};
- ${borderColor(s, layer, "environmentColorOut", `borderFactor${layer}`, `border${layer}`, `borderTintMask${layer}`)}
- ${borderColor(s, layer, `color${layer}.rgb`, `borderFactor${layer}`, `border${layer}`, `borderTintMask${layer}`)}
+ ${borderColor(s, layer, "environmentColorOut", `borderFactor${layer}`, `border${layer}`, `borderTintMask${layer}`, parameters)}
+ ${borderColor(s, layer, `color${layer}.rgb`, `borderFactor${layer}`, `border${layer}`, `borderTintMask${layer}`, parameters)}
  ${s.IntParams[`F_BORDER_ROUGHNESS_${layer}`] ? `environmentRoughness=mix(environmentRoughness,${F("g_fBorderRoughness", 0.5)},borderFactor${layer});R${layer}=mix(R${layer},${F("g_fBorderRoughness", 0.5)},borderFactor${layer});` : ""}
  `;
     } else {
@@ -266,8 +306,8 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
  float border2=borderQ2.y/(borderQ2.x+.001+borderQ2.y)*(borderR2.x+.001)/(borderR2.x+.001+borderR2.y);
  float borderTintMask2=${maskTint ? "mix(tintMask1,tintMask2,environmentWeight2)" : "1.0"};
  vec2 borderFactor2=border2*borderTintMask2*clamp(${borderAmount}*mix(.5,height2.r,${F("g_flMaskWithHeight", 0)})*2.0,0.0,1.0);
- ${borderColor(s, 2, "environmentColorOut", "borderFactor2.x", "border2*clamp(" + borderAmount + ".x*mix(.5,height2.r," + F("g_flMaskWithHeight", 0) + ")*2.0,0.0,1.0)", "borderTintMask2")}
- ${borderColor(s, 2, "color2.rgb", "borderFactor2.y", "border2*clamp(" + borderAmount + ".y*mix(.5,height2.r," + F("g_flMaskWithHeight", 0) + ")*2.0,0.0,1.0)", "borderTintMask2")}
+ ${borderColor(s, 2, "environmentColorOut", "borderFactor2.x", "border2*clamp(" + borderAmount + ".x*mix(.5,height2.r," + F("g_flMaskWithHeight", 0) + ")*2.0,0.0,1.0)", "borderTintMask2", parameters)}
+ ${borderColor(s, 2, "color2.rgb", "borderFactor2.y", "border2*clamp(" + borderAmount + ".y*mix(.5,height2.r," + F("g_flMaskWithHeight", 0) + ")*2.0,0.0,1.0)", "borderTintMask2", parameters)}
  ${s.IntParams.F_BORDER_ROUGHNESS_2 ? `environmentRoughness=mix(environmentRoughness,${F("g_fBorderRoughness", 0.5)},borderFactor2.x);R2=mix(R2,${F("g_fBorderRoughness", 0.5)},borderFactor2.y);` : ""}
  `;
     }
@@ -286,7 +326,7 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
  vec3 bevelPosition${layer}=-vViewPosition+environmentGeometric*(bevelProfile${layer}*.0254*environmentNativeUnitScale);
  vec3 bevelCross${layer}=cross(dFdx(bevelPosition${layer}),dFdy(bevelPosition${layer}));
  if(dot(bevelCross${layer},environmentGeometric)<0.0)bevelCross${layer}=-bevelCross${layer};
- float bevelFactor${layer}=(1.0-smoothstep(bevelWidth${layer}-bevelSoft${layer},bevelWidth${layer}+bevelSoft${layer},abs(bevelDifference${layer})))*(1.0-clamp(bevelSoft${layer}/${F("g_flBevelSpread", 0.1)}*.01,0.0,1.0))*mix(${v(vec(s, `g_vBevelLayerAmount${layer}`, [1, 0]), 2)}.x,${v(vec(s, `g_vBevelLayerAmount${layer}`, [1, 0]), 2)}.y,environmentWeight${layer})*${F("g_flBevelStrength", 0)}*100.0;
+ float bevelFactor${layer}=(1.0-smoothstep(bevelWidth${layer}-bevelSoft${layer},bevelWidth${layer}+bevelSoft${layer},abs(bevelDifference${layer})))*(1.0-clamp(bevelSoft${layer}/${F("g_flBevelSpread", 0.1)}*.01,0.0,1.0))*mix(${parameters.vector(s, `g_vBevelLayerAmount${layer}`, [1, 0], 2)}.x,${parameters.vector(s, `g_vBevelLayerAmount${layer}`, [1, 0], 2)}.y,environmentWeight${layer})*${F("g_flBevelStrength", 0)}*100.0;
  if(length(bevelCross${layer})>0.0){vec3 bevelNormal${layer}=normalize(mix(environmentGeometric,normalize(bevelCross${layer}),bevelFactor${layer}));environmentNormalOut=normalize(environmentNormalOut+bevelNormal${layer}-environmentGeometric);}
  }
  `;
@@ -299,7 +339,7 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
  float bevelPositive2=pow(smoothstep(0.0,.5,bevelX2),bevelPower2),bevelNegative2=pow(1.0-smoothstep(.5,1.0,bevelX2),bevelPower2);
  vec3 bevelPosition2=-vViewPosition+environmentGeometric*((bevelPositive2+1.0-bevelNegative2)*${F("g_flBevelStrength", 0)}*2.54*environmentNativeUnitScale);
  vec3 bevelCross2=cross(dFdx(bevelPosition2),dFdy(bevelPosition2));if(dot(bevelCross2,environmentGeometric)<0.0)bevelCross2=-bevelCross2;
- float bevelFactor2=bevelPositive2*bevelNegative2*smoothstep(0.0,${F("g_flBevelSoftness", 0.1)},paint2)*edge2*mix(1.0,${v(vec(s, "g_vBevelLayerAmount2", [1, 0]), 2)}.x,environmentWeight2)*mix(${v(vec(s, "g_vBevelLayerAmount2", [1, 0]), 2)}.y,1.0,environmentWeight2);
+ float bevelFactor2=bevelPositive2*bevelNegative2*smoothstep(0.0,${F("g_flBevelSoftness", 0.1)},paint2)*edge2*mix(1.0,${parameters.vector(s, "g_vBevelLayerAmount2", [1, 0], 2)}.x,environmentWeight2)*mix(${parameters.vector(s, "g_vBevelLayerAmount2", [1, 0], 2)}.y,1.0,environmentWeight2);
  if(length(bevelCross2)>0.0)environmentNormalOut=normalize(environmentNormalOut+normalize(mix(environmentGeometric,normalize(bevelCross2),bevelFactor2))-environmentGeometric);
  `;
     }
@@ -308,13 +348,13 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
   return `
  if(environmentPaint${layer}>0.0){
  float paint${layer}=environmentPaint${layer};
- ${s.IntParams[`F_BLEND_BY_FACING_DIRECTION_${layer}`] ? `paint${layer}*=clamp(((dot(${facingDirection(s, layer)},mix(environmentGeometric,environmentNormalOut,${F("g_vFacingDirectionMaskNormalMapStrength", 1)}))-1.0+2.0*${F("g_flFacingDirectionMaskSpread", 0.5)})/(2.0*${F("g_vFacingDirectionMaskSoftness", 0.1)}))+.5,0.0,1.0);` : ""}
- q${layer}=pow(environmentLod(vEnvironmentUv${layer},environmentHeight${layer}Size()),2.0)*(.0125+fwidth(height${layer}.r*${F("g_flHeightMapScale", 1)}))*.02*${n(f(s, "g_flBlendSoftnessDistanceModifierStrength", 1))}*environmentBlendDistance.${layer === 2 ? "y" : "z"};
+ ${s.IntParams[`F_BLEND_BY_FACING_DIRECTION_${layer}`] ? `paint${layer}*=clamp(((dot(${facingDirection(s, layer, parameters)},mix(environmentGeometric,environmentNormalOut,${F("g_vFacingDirectionMaskNormalMapStrength", 1)}))-1.0+2.0*${F("g_flFacingDirectionMaskSpread", 0.5)})/(2.0*${F("g_vFacingDirectionMaskSoftness", 0.1)}))+.5,0.0,1.0);` : ""}
+ q${layer}=pow(environmentLod(vEnvironmentUv${layer},environmentHeight${layer}Size()),2.0)*(.0125+fwidth(height${layer}.r*${F("g_flHeightMapScale", 1)}))*.02*${parameters.float(s, "g_flBlendSoftnessDistanceModifierStrength", 1)}*environmentBlendDistance.${layer === 2 ? "y" : "z"};
  ${weights}
  vec4 color${layer}=vec4(0.0);vec3 overlayColor${layer}=vec3(0.0);float ao${layer}=1.0;vec3 N${layer}=environmentGeometric;float R${layer}=1.0;
  if(environmentWeight${layer}>.05){
  ${surface}
- ${normalLayer(s, layer).replace(`vec3 N${layer}=`, `N${layer}=`).replace(`float R${layer}=`, `R${layer}=`)}
+ ${normalLayer(s, layer, parameters).replace(`vec3 N${layer}=`, `N${layer}=`).replace(`float R${layer}=`, `R${layer}=`)}
  }
  ${border}
  ${bevel}
@@ -331,7 +371,7 @@ function stageCode(s: SourceEnvironmentMaterial, layer: number, modern: boolean)
  }
  environmentMetalness=mix(environmentMetalness*mix(1.0,2.0*height${layer}.a,environmentWeight${layer}*${F("g_flMetalnessCombine", 0)}),height${layer}.a,environmentWeight${layer}*${F("g_flMetalnessReplace", 1)});
  environmentOpacity=mix(environmentOpacity,color${layer}.a,environmentWeight${layer});
- ${s.IntParams.F_WETNESS ? `environmentWetHeight=mix(environmentWetHeight,h${layer}*${n(f(s, "g_flWetnessUnderlyingHeightMapInfluence", 1))}+.5,environmentWeight${layer});` : ""}
+ ${s.IntParams.F_WETNESS ? `environmentWetHeight=mix(environmentWetHeight,h${layer}*${parameters.float(s, "g_flWetnessUnderlyingHeightMapInfluence", 1)}+.5,environmentWeight${layer});` : ""}
  }
  }
  `;
@@ -353,12 +393,14 @@ export function applyModernEnvironmentShader(
       ? 2
       : 1;
   const modern = !!source.IntParams.F_USE_NEW_BLENDING;
+  const parameters = new EnvironmentShaderParameters();
   const binding = bindEnvironmentTextures(
     source,
     modernEnvironmentSamplers(source, layers),
     textures,
     banks,
     shader,
+    parameters,
   );
   shader.uniforms.environmentModelTint = { value: modelTint };
   shader.uniforms.environmentWorldToNative = { value: frame.worldToNative };
@@ -392,15 +434,15 @@ export function applyModernEnvironmentShader(
   );
   const assignments = Array.from({ length: 3 }, (_, i) => {
     const layer = i + 1;
-    return `vEnvironmentUv${layer}=${layer <= layers ? uvCode(source, layer) : "vEnvironmentUv1"};vEnvironmentDetailUv${layer}=${layer <= layers ? uvCode(source, layer, true) : "vEnvironmentUv1"};`;
+    return `vEnvironmentUv${layer}=${layer <= layers ? uvCode(source, layer, false, parameters) : "vEnvironmentUv1"};vEnvironmentDetailUv${layer}=${layer <= layers ? uvCode(source, layer, true, parameters) : "vEnvironmentUv1"};`;
   }).join("\n");
   shader.vertexShader = shader.vertexShader.replace(
     "#include <begin_vertex>",
     `#include <begin_vertex>
  ${assignments}
- vEnvironmentOverlayUv=${source.IntParams.F_SHARED_COLOR_OVERLAY ? uvCode(source, 0) : "vEnvironmentUv1"};
+ vEnvironmentOverlayUv=${source.IntParams.F_SHARED_COLOR_OVERLAY ? uvCode(source, 0, false, parameters) : "vEnvironmentUv1"};
  vEnvironmentBlend=sourceEnvironmentBlend;
- vEnvironmentPaint=vec4(${v(tint.toArray(), 3)}*mix(vec3(1.0),sourceEnvironmentPaint.rgb,sourceEnvironmentPaint.a),1.0);
+ vEnvironmentPaint=vec4(${parameters.value("paintTint", tint.toArray())}*mix(vec3(1.0),sourceEnvironmentPaint.rgb,sourceEnvironmentPaint.a),1.0);
  vEnvironmentHandedness=tangent.w;
  vEnvironmentCentroidNormal=normalMatrix*objectNormal;
  `,
@@ -413,18 +455,18 @@ export function applyModernEnvironmentShader(
       if (source.IntParams[`g_nDetailUVSet${layer}`] === 2) lastUv = `vEnvironmentDetailUv${layer}`;
   const heights = Array.from({ length: layers - 1 }, (_, i) => {
     const layer = i + 2;
-    return `vec4 height${layer}=${environmentRead(source, layer, "Height", `vEnvironmentUv${layer}`)};float tintMask${layer}=0.0;float h${layer}=(height${layer}.r-${n(f(source, `g_flHeightMapZeroPoint${layer}`, 0.5))})*${n(f(source, `g_flHeightMapScale${layer}`, 1))};`;
+    return `vec4 height${layer}=${environmentRead(source, layer, "Height", `vEnvironmentUv${layer}`, false, parameters)};float tintMask${layer}=0.0;float h${layer}=(height${layer}.r-${parameters.float(source, `g_flHeightMapZeroPoint${layer}`, 0.5)})*${parameters.float(source, `g_flHeightMapScale${layer}`, 1)};`;
   }).join("\n");
   const overlay = source.IntParams.F_SHARED_COLOR_OVERLAY
     ? `
 
- vec3 overlayStrengths=${v(vec(source, "g_vColorOverlayLayerStrengths", [1, 1, 1]), 3)},overlayMasks=${v(vec(source, "g_vColorOverlayTintMaskStrengths", [0, 0, 0]), 3)};
+ vec3 overlayStrengths=${parameters.vector(source, "g_vColorOverlayLayerStrengths", [1, 1, 1], 3)},overlayMasks=${parameters.vector(source, "g_vColorOverlayTintMaskStrengths", [0, 0, 0], 3)};
  vec3 overlayTintMasks=vec3(tintMask1,${layers > 1 ? "tintMask2" : "0.0"},${layers > 2 ? "tintMask3" : "0.0"});
  vec3 overlayMask=mix(vec3(1.0)-overlayTintMasks,overlayTintMasks,step(vec3(0.0),overlayMasks));
  float overlayStrength=dot(environmentCoverage*overlayStrengths,mix(vec3(1.0),overlayMask,abs(overlayMasks)));
  if(overlayStrength>0.0){
- vec3 overlay=2.0*${environmentRead(source, 0, "SharedColorOverlay", "vEnvironmentOverlayUv")}.rgb-1.0;
- float bright=${n(f(source, "g_flOverlayBrightnessContrast", 1))},dark=${n(f(source, "g_flOverlayDarknessContrast", 1))};
+ vec3 overlay=2.0*${environmentRead(source, 0, "SharedColorOverlay", "vEnvironmentOverlayUv", false, parameters)}.rgb-1.0;
+ float bright=${parameters.float(source, "g_flOverlayBrightnessContrast", 1)},dark=${parameters.float(source, "g_flOverlayDarknessContrast", 1)};
  vec3 overlayFactor=max(vec3(0.0),vec3(1.0)+(vec3(1.0)-pow(vec3(1.0)-max(vec3(0.0),overlay),vec3(bright)))*bright+(pow(vec3(1.0)+min(vec3(0.0),overlay),vec3(dark))-vec3(1.0))*dark);
  environmentColorOut*=mix(vec3(1.0),overlayFactor,overlayStrength);
  }
@@ -458,26 +500,26 @@ export function applyModernEnvironmentShader(
  if(abs(environmentDet)>0.0)environmentUvT=normalize(environmentUvT);
  vec3 environmentUvB=cross(environmentUvN,environmentUvT)*environmentSign*(dot(environmentPy,cross(environmentUvN,environmentPx))<0.0?-1.0:1.0);
  ${biplanar ? environmentProjectionSetup : ""}
- ${tintLayer(source, 1, layers)}
- ${normalLayer(source, 1)}
+ ${tintLayer(source, 1, layers, parameters)}
+ ${normalLayer(source, 1, parameters)}
  ${heights}
  vec3 environmentColorOut=color1.rgb,environmentNormalOut=N1;
  float environmentAO=ao1,environmentRoughness=R1,environmentMetalness=height1.a,environmentOpacity=color1.a;
  float environmentWeight2=0.0,environmentWeight3=0.0;
  float environmentPaint2=clamp(vEnvironmentBlend.x*1.1-.05,0.0,1.0),environmentPaint3=clamp(vEnvironmentBlend.y*1.1-.05,0.0,1.0);
  vec3 environmentBlendDistance=normalize(vec3(clamp(1.0-environmentPaint2-environmentPaint3,0.0,1.0),environmentPaint2,environmentPaint3));
- float h1=(height1.r-${n(f(source, "g_flHeightMapZeroPoint1", 0.5))})*${n(f(source, "g_flHeightMapScale1", 1))};
- float q1=pow(environmentLod(vEnvironmentUv1,environmentHeight1Size()),2.0)*(.0125+fwidth(height1.r*${n(f(source, "g_flHeightMapScale1", 1))}))*.02*${n(f(source, "g_flBlendSoftnessDistanceModifierStrength", 1))}*environmentBlendDistance.x;
+ float h1=(height1.r-${parameters.float(source, "g_flHeightMapZeroPoint1", 0.5)})*${parameters.float(source, "g_flHeightMapScale1", 1)};
+ float q1=pow(environmentLod(vEnvironmentUv1,environmentHeight1Size()),2.0)*(.0125+fwidth(height1.r*${parameters.float(source, "g_flHeightMapScale1", 1)}))*.02*${parameters.float(source, "g_flBlendSoftnessDistanceModifierStrength", 1)}*environmentBlendDistance.x;
  float q2=0.0,q3=0.0,environmentCarry2=0.0,environmentUnder2=h1,environmentSigned2=0.0;
- ${source.IntParams.F_WETNESS ? `float environmentWetHeight=h1*${n(f(source, "g_flWetnessUnderlyingHeightMapInfluence", 1))}+.5;` : ""}
- ${layers > 1 ? stageCode(source, 2, modern) : ""}
- ${layers > 2 ? stageCode(source, 3, modern) : ""}
+ ${source.IntParams.F_WETNESS ? `float environmentWetHeight=h1*${parameters.float(source, "g_flWetnessUnderlyingHeightMapInfluence", 1)}+.5;` : ""}
+ ${layers > 1 ? stageCode(source, 2, modern, parameters) : ""}
+ ${layers > 2 ? stageCode(source, 3, modern, parameters) : ""}
  vec3 environmentCoverage=vec3(clamp(1.0-environmentWeight2*(1.0-environmentWeight3)-environmentWeight3,0.0,1.0),environmentWeight2*(1.0-environmentWeight3),environmentWeight3);
  ${overlay}
  float vertexMask=clamp(dot(environmentCoverage,vec3(tintMask1,${layers > 1 ? "tintMask2" : "0.0"},${layers > 2 ? "tintMask3" : "0.0"}))+dot(environmentCoverage,${v(maskModes, 3)}),0.0,1.0);
  float vertexAmount=clamp(vertexMask*dot(environmentCoverage.xy,${v(enableModes.slice(0, 2), 2)})+environmentCoverage.z*${n(enableModes[2])},0.0,1.0);
  environmentColorOut*=mix(vec3(1.0),vEnvironmentPaint.rgb,vertexAmount);
- ${source.IntParams.F_WETNESS ? `float environmentWetDarkening=mix(${n(f(source, "g_flWetnessDarkeningStrength1", 1))},${n(f(source, "g_flWetnessDarkeningStrength2", 1))},environmentCoverage.y*${n(f(source, "g_flColorReplace2", 1))});${layers === 3 ? `environmentWetDarkening=mix(environmentWetDarkening,${n(f(source, "g_flWetnessDarkeningStrength3", 1))},environmentCoverage.z*${n(f(source, "g_flColorReplace3", 1))});` : ""}${environmentWetnessCode(source)}` : ""}
+ ${source.IntParams.F_WETNESS ? `float environmentWetDarkening=mix(${parameters.float(source, "g_flWetnessDarkeningStrength1", 1)},${parameters.float(source, "g_flWetnessDarkeningStrength2", 1)},environmentCoverage.y*${parameters.float(source, "g_flColorReplace2", 1)});${layers === 3 ? `environmentWetDarkening=mix(environmentWetDarkening,${parameters.float(source, "g_flWetnessDarkeningStrength3", 1)},environmentCoverage.z*${parameters.float(source, "g_flColorReplace3", 1)});` : ""}${environmentWetnessCode(source, parameters)}` : ""}
  diffuseColor.rgb=environmentColorOut;
  ${source.IntParams.F_ALPHA_TEST ? `${environmentAlphaTest(source, "vEnvironmentUv1")}diffuseColor.a=1.0;` : ""}
  normal=environmentNormalOut;roughnessFactor=environmentRoughness;metalnessFactor=environmentMetalness;
@@ -492,17 +534,20 @@ export function applyModernEnvironmentShader(
     .replace("#include <normal_fragment_maps>", composition)
     .replace(
       "#include <aomap_fragment>",
-      `reflectedLight.directDiffuse*=mix(1.0,environmentAO,${n(f(source, "g_flAmbientOcclusionDirectDiffuse", 1))});reflectedLight.indirectDiffuse*=environmentAO;reflectedLight.directSpecular*=mix(1.0,environmentAO,${n(f(source, "g_flAmbientOcclusionDirectSpecular", 1))});reflectedLight.indirectSpecular*=environmentAO;`,
+      `reflectedLight.directDiffuse*=mix(1.0,environmentAO,${parameters.float(source, "g_flAmbientOcclusionDirectDiffuse", 1)});reflectedLight.indirectDiffuse*=environmentAO;reflectedLight.directSpecular*=mix(1.0,environmentAO,${parameters.float(source, "g_flAmbientOcclusionDirectSpecular", 1)});reflectedLight.indirectSpecular*=environmentAO;`,
     );
   applySourceSurface(shader, { directSpecular: true, indirectSpecular: true }, lookup);
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <lights_physical_fragment>",
-    `#include <lights_physical_fragment>\nmaterial.specularColor=vec3(${source.IntParams.F_WETNESS ? "environmentWetReflectance" : n(f(source, "g_flReflectance", 0.04))});material.specularColorBlended=mix(material.specularColor,diffuseColor.rgb,metalnessFactor);`,
+    `#include <lights_physical_fragment>\nmaterial.specularColor=vec3(${source.IntParams.F_WETNESS ? "environmentWetReflectance" : parameters.float(source, "g_flReflectance", 0.04)});material.specularColorBlended=mix(material.specularColor,diffuseColor.rgb,metalnessFactor);`,
   );
   if (source.IntParams.F_WETNESS)
     shader.fragmentShader = shader.fragmentShader.replace(
       "saturate(dot(geometryNormal, directLight.direction)) * directLight.color * BRDF_Lambert(material.diffuseContribution)",
       "environmentWetDiffuse(geometryNormal,directLight.direction) * directLight.color * BRDF_Lambert(material.diffuseContribution)",
     );
-  return binding;
+  const declaration = parameters.bind(shader);
+  shader.vertexShader = declaration + "\n" + shader.vertexShader;
+  shader.fragmentShader = declaration + "\n" + shader.fragmentShader;
+  return { ...binding, uniformVectors: parameters.vectorCount };
 }

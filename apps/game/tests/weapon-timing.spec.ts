@@ -1,3 +1,4 @@
+import { sourceVerticalFov } from "../src/source-camera";
 import { expect, test } from "@playwright/test";
 import type { Game } from "../src/game";
 declare global {
@@ -98,8 +99,8 @@ test("shipped deploy, reload, burst and zoom clocks drive gameplay", async ({ pa
     expect(burst.timestamps[2]).toBeCloseTo(2 * burst.timestamps[1], 6);
   }
   expect(result.zoomDuration).toBe(0.05);
-  expect(result.middle).toBeCloseTo((result.from + 40) / 2);
-  expect(result.end).toBe(40);
-  expect(result.second).toBe(10);
+  expect(result.middle).toBeCloseTo((result.from + sourceVerticalFov(40)) / 2);
+  expect(result.end).toBeCloseTo(sourceVerticalFov(40), 8);
+  expect(result.second).toBeCloseTo(sourceVerticalFov(10), 8);
   expect(errors).toEqual([]);
 });

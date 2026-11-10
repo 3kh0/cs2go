@@ -1,3 +1,4 @@
+import type { EnvironmentShaderParameters } from "./native-environment-parameters";
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
 const literal = (value: number) => {
   const raw = Number.isInteger(value) ? `${value}.0` : `${value}`;
@@ -18,16 +19,20 @@ export function environmentProjectionScale(
   source: SourceEnvironmentMaterial,
   layer: number,
   detail = false,
+  parameters?: EnvironmentShaderParameters,
 ) {
   const base = source.VectorParams[
     layer ? `g_vTexCoordScale${layer}` : "g_vOverlayTexCoordScale"
   ] ?? [1, 1];
-  if (!detail) return vector(base);
+  if (!detail)
+    return parameters?.value(`projectionScale:${layer}:base`, base.slice(0, 2)) ?? vector(base);
   const scale = source.VectorParams[`g_vDetailTexCoordScale${layer}`] ?? [1, 1];
-  return vector(
+  const selected =
     (source.IntParams[`g_nDetailUVSet${layer}`] ?? -1) === -1
       ? scale.map((value, i) => value * base[i])
-      : scale,
+      : scale;
+  return (
+    parameters?.value(`projectionScale:${layer}:detail`, selected.slice(0, 2)) ?? vector(selected)
   );
 }
 export function environmentRead(
@@ -36,10 +41,11 @@ export function environmentRead(
   kind: string,
   uv: string,
   detail = false,
+  parameters?: EnvironmentShaderParameters,
 ) {
   const name = layer ? `environment${kind}${layer}` : "environmentSharedColorOverlay";
   if (environmentUvSelection(source, layer, detail) !== 0) return `${name}Read(${uv})`;
-  const scale = environmentProjectionScale(source, layer, detail);
+  const scale = environmentProjectionScale(source, layer, detail, parameters);
   const read = (plane: string) =>
     `${name}GradRead(environmentProjected${plane}*${scale},environmentProjectedDx${plane}*${scale},environmentProjectedDy${plane}*${scale})`;
   return `(${read("A")}*environmentProjectionWeights.x+${kind === "Height" ? `${read("B")}*environmentProjectionWeights.y` : `(environmentProjectionWeights.y>0.0?${read("B")}*environmentProjectionWeights.y:vec4(0.0))`})`;
@@ -48,9 +54,10 @@ export function environmentProjectedNormal(
   source: SourceEnvironmentMaterial,
   layer: number,
   detail = false,
+  parameters?: EnvironmentShaderParameters,
 ) {
   const name = `environment${detail ? "NormalDetail" : "Normal"}${layer}`;
-  const scale = environmentProjectionScale(source, layer, detail);
+  const scale = environmentProjectionScale(source, layer, detail, parameters);
   const sample = (plane: string) =>
     `${name}GradRead(environmentProjected${plane}*${scale},environmentProjectedDx${plane}*${scale},environmentProjectedDy${plane}*${scale}).rg`;
   return `normalize(environmentGeometric+environmentSourceNormalToView(environmentProjectionPerturb(${sample("A")},environmentProjectionA)*environmentProjectionWeights.x+(environmentProjectionWeights.y>0.0?environmentProjectionPerturb(${sample("B")},environmentProjectionB)*environmentProjectionWeights.y:vec3(0.0))))`;

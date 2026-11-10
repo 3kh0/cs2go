@@ -1,4 +1,5 @@
 import * as T from "three";
+import type { EnvironmentShaderParameters } from "./native-environment-parameters";
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
 
 type Mip = { data: Uint8Array; width: number; height: number };
@@ -120,17 +121,22 @@ const vector = (values: readonly number[]) =>
 /** Material-local sampler declarations and constant functions. Constant RGBA is
  * supplied only after every authored mip/texel was verified by the converter. */
 export function bindEnvironmentTextures(
-  source: SourceEnvironmentMaterial,
+  source: Pick<
+    SourceEnvironmentMaterial,
+    "textures" | "constants" | "nativeTextureDimensions" | "textureDimensions"
+  >,
   nativeNames: readonly string[],
   textures: ReadonlyMap<string, T.Texture>,
   banks: EnvironmentTextureBanks | undefined,
   shader: T.WebGLProgramParametersWithUniforms,
+  parameters?: EnvironmentShaderParameters,
 ) {
   const declarations: string[] = [],
     reads: string[] = [],
     signature: string[] = [];
   const bound = new Set<string>();
   const canonical = new Map<string, string>();
+  const canonicalBanks = new Map<T.Texture, string>();
   for (const native of nativeNames) {
     const name = native.replace(/^g_t/, "environment"),
       id = source.textures[native],
@@ -140,21 +146,30 @@ export function bindEnvironmentTextures(
       if (constant.length !== 4 || constant.some((value) => !Number.isFinite(value)))
         throw new Error(`Invalid verified environment constant: ${native}`);
       reads.push(
-        `vec4 ${name}Read(vec2 uv){return ${vector(constant)};}vec4 ${name}GradRead(vec2 uv,vec2 dx,vec2 dy){return ${vector(constant)};}`,
+        `vec4 ${name}Read(vec2 uv){return ${vector(constant)};}vec4 ${name}Read(vec2 uv,float bias){return ${vector(constant)};}vec4 ${name}GradRead(vec2 uv,vec2 dx,vec2 dy){return ${vector(constant)};}`,
       );
       signature.push(`${name}:constant:${constant.join(",")}`);
     } else {
       const bank = banks?.get(id);
       if (bank) {
-        if (!bound.has(bank.name)) {
-          declarations.push(`uniform highp sampler2DArray ${bank.name};`);
-          shader.uniforms[bank.name] = { value: bank.texture };
-          bound.add(bank.name);
+        let sampler = canonicalBanks.get(bank.texture);
+        if (!sampler) {
+          sampler = parameters ? `environmentBank${canonicalBanks.size}` : bank.name;
+          canonicalBanks.set(bank.texture, sampler);
         }
+        if (!bound.has(sampler)) {
+          declarations.push(`uniform highp sampler2DArray ${sampler};`);
+          shader.uniforms[sampler] = { value: bank.texture };
+          bound.add(sampler);
+        }
+        const layer =
+          parameters?.value(`textureLayer:${native}`, [bank.layer]) ?? literal(bank.layer);
         reads.push(
-          `vec4 ${name}Read(vec2 uv){return texture(${bank.name},vec3(uv,${literal(bank.layer)}));}vec4 ${name}GradRead(vec2 uv,vec2 dx,vec2 dy){return textureGrad(${bank.name},vec3(uv,${literal(bank.layer)}),dx,dy);}`,
+          `vec4 ${name}Read(vec2 uv){return texture(${sampler},vec3(uv,${layer}));}vec4 ${name}Read(vec2 uv,float bias){return texture(${sampler},vec3(uv,${layer}),bias);}vec4 ${name}GradRead(vec2 uv,vec2 dx,vec2 dy){return textureGrad(${sampler},vec3(uv,${layer}),dx,dy);}`,
         );
-        signature.push(`${name}:${bank.name}:${bank.layer}`);
+        signature.push(
+          parameters ? `${name}:${sampler}:uniformLayer` : `${name}:${bank.name}:${bank.layer}`,
+        );
       } else {
         let sampler = canonical.get(id);
         if (!sampler) {
@@ -167,7 +182,7 @@ export function bindEnvironmentTextures(
           shader.uniforms[sampler] = { value: texture };
         }
         reads.push(
-          `vec4 ${name}Read(vec2 uv){return texture2D(${sampler},uv);}vec4 ${name}GradRead(vec2 uv,vec2 dx,vec2 dy){return textureGrad(${sampler},uv,dx,dy);}`,
+          `vec4 ${name}Read(vec2 uv){return texture2D(${sampler},uv);}vec4 ${name}Read(vec2 uv,float bias){return texture2D(${sampler},uv,bias);}vec4 ${name}GradRead(vec2 uv,vec2 dx,vec2 dy){return textureGrad(${sampler},uv,dx,dy);}`,
         );
         signature.push(`${name}:${sampler}`);
       }
@@ -186,7 +201,9 @@ export function bindEnvironmentTextures(
     if (size) {
       if (size.length !== 2 || size.some((value) => !Number.isSafeInteger(value) || value < 1))
         throw new Error(`Invalid native environment texture dimensions: ${native}`);
-      reads.push(`vec2 ${name}Size(){return ${vector(size)};}`);
+      reads.push(
+        `vec2 ${name}Size(){return ${parameters?.value(`textureSize:${native}`, size) ?? vector(size)};}`,
+      );
     } else if (native.startsWith("g_tHeight"))
       throw new Error(`Native environment height dimensions unavailable: ${native}`);
   }

@@ -1,4 +1,5 @@
 import * as T from "three";
+import { nativeWaterReflectionNormalGLSL } from "./native-water-reflection-normal";
 import { assetFetch } from "./asset-url";
 import { fetchGzipped } from "./gltf";
 
@@ -384,13 +385,14 @@ vec3 sourceCubeCrossTap(ivec2 pixel,int face,int cube,int level,int size) {
 }
 vec3 sourceCubeTap(ivec2 pixel,int face,int cube,int level,int size) {
   bool outsideX=pixel.x<0 || pixel.x>=size, outsideY=pixel.y<0 || pixel.y>=size;
+  vec3 result=vec3(0.0);
   if(outsideX && outsideY) {
     ivec2 corner=clamp(pixel,ivec2(0),ivec2(size-1));
-    return (sourceCubeFetch(corner,face,cube,level)+
+    result=(sourceCubeFetch(corner,face,cube,level)+
       sourceCubeCrossTap(ivec2(pixel.x,corner.y),face,cube,level,size)+
       sourceCubeCrossTap(ivec2(corner.x,pixel.y),face,cube,level,size))/3.0;
-  }
-  return sourceCubeCrossTap(pixel,face,cube,level,size);
+  } else result=sourceCubeCrossTap(pixel,face,cube,level,size);
+  return result;
 }
 vec3 sourceCubeLevel(vec3 a,int cube,int level) {
   int size=SOURCE_REFLECTION_CUBE_SIZE>>level;
@@ -401,15 +403,16 @@ vec3 sourceCubeLevel(vec3 a,int cube,int level) {
 vec3 sourceCubeSample(vec3 direction,int cube,float lod) {
   vec3 a=sourceCubeAddress(direction);
   int upper=int(ceil(lod));float inset=0.5/float(SOURCE_REFLECTION_CUBE_SIZE>>upper);
+  vec3 result=vec3(0.0);
   if(all(greaterThanEqual(a.xy,vec2(inset))) && all(lessThanEqual(a.xy,vec2(1.0-inset)))) {
     #ifdef SOURCE_REFLECTION_SINGLE_ARRAY
-    return textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb;
+    result=textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb;
     #else
-    return cube<SOURCE_REFLECTION_ARRAY_SPLIT ? textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb
+    result=cube<SOURCE_REFLECTION_ARRAY_SPLIT ? textureLod(sourceReflectionCubes0,vec3(a.xy,float(cube*6)+a.z),lod).rgb
       : textureLod(sourceReflectionCubes1,vec3(a.xy,float((cube-SOURCE_REFLECTION_ARRAY_SPLIT)*6)+a.z),lod).rgb;
     #endif
-  }
-  return mix(sourceCubeLevel(a,cube,int(floor(lod))),sourceCubeLevel(a,cube,upper),fract(lod));
+  } else result=mix(sourceCubeLevel(a,cube,int(floor(lod))),sourceCubeLevel(a,cube,upper),fract(lod));
+  return result;
 }
 `;
 
@@ -424,7 +427,7 @@ export function applySourceReflections(
     worldNormal?: string;
     worldView?: string;
     /** Actual water/complex quality1 bytecode differs from the legacy adapter. */
-    nativeFamily?: "water" | "complex";
+    nativeFamily?: "water" | "complex" | "glass" | "lightmapped";
   } = {},
 ) {
   const affine = data.volumes.some((volume) => volume.worldToLocal);
@@ -444,6 +447,7 @@ struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEd
 uniform SourceEnvironment sourceEnvironments[${data.uniforms.length}];
 uniform int sourceEnvironmentCandidates[${data.uniforms.length}];
 uniform int sourceEnvironmentCount;
+${options.nativeFamily === "water" ? nativeWaterReflectionNormalGLSL : ""}
 vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,vec3 irradiance) {
   vec3 R=reflect(-viewDir,normal);float r2=roughness*roughness;
   float smoothness=clamp(1.0-r2,0.0,1.0);
@@ -481,7 +485,7 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
     vec3 sourceReflectionNormal=${options.worldNormal ?? "inverseTransformDirection(geometryNormal,viewMatrix)"};
     vec3 sourceReflectionView=${options.worldView ?? "inverseTransformDirection(geometryViewDir,viewMatrix)"};
     radiance=sourceMapReflection(vec3(sourceReflectionWorld.x,-sourceReflectionWorld.z,sourceReflectionWorld.y)/0.0254,
-      vec3(sourceReflectionNormal.x,-sourceReflectionNormal.z,sourceReflectionNormal.y),
+      ${options.nativeFamily === "water" ? "sourceWaterReflectionNormal(vec3(sourceReflectionNormal.x,-sourceReflectionNormal.z,sourceReflectionNormal.y),sourceWaterViewRowFromBrowser(viewMatrix))" : "vec3(sourceReflectionNormal.x,-sourceReflectionNormal.z,sourceReflectionNormal.y)"},
       vec3(sourceReflectionView.x,-sourceReflectionView.z,sourceReflectionView.y),material.roughness,irradiance*RECIPROCAL_PI);
     `;
   // Keep the injection inside RE_IndirectSpecular's guard, after the light

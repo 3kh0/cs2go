@@ -64,7 +64,7 @@ export function renderNativeComplex() {
     };
     if (mode.startsWith("specular")) {
       const light = new T.DirectionalLight(0xffffff, Math.PI);
-      light.position.z = 3;
+      light.position.set(0, 0, 3);
       scene.add(light);
     }
     renderer.setRenderTarget(target);

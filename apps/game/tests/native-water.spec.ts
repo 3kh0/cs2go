@@ -112,3 +112,28 @@ test("actual native concrete detail2 packed normal and quality1 direct AO respon
       expect(Math.abs(result.pixel[index] - value)).toBeLessThan(0.002);
   }
 });
+test("native quality1 wave predictor samples twice but carries the first sample", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("console", (m) => {
+    if (m.type() === "error") errors.push(m.text());
+  });
+  await page.route("**/favicon.ico", (r) => r.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const results: ReturnType<
+    typeof import("./native-water-wave-fixture").renderNativeWaterPredictor
+  > = await page.evaluate(async () => {
+    const path = "/tests/native-water-wave-fixture.ts";
+    return (await import(path)).renderNativeWaterPredictor();
+  });
+  console.log(JSON.stringify({ results, errors }));
+  expect(errors).toEqual([]);
+  for (const result of results) {
+    expect(result.error).toBe(0);
+    for (let i = 0; i < 3; i++)
+      expect(Math.abs(result.actual[i] - result.expected[i])).toBeLessThan(2e-7);
+  }
+  expect(Math.abs(results[0].actual[0] - results[1].actual[0])).toBeGreaterThan(1e-6);
+});

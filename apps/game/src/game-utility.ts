@@ -216,6 +216,7 @@ export class GameUtility {
       this.visibleSmoke,
       this.game.settings.effectsDetail === "low",
       waterVisible || effectsVisible ? this.nativeDepth : undefined,
+      this.game.world.nativeCoverage?.renderDepth,
     );
   }
   renderEffects() {

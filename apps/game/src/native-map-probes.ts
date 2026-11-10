@@ -40,7 +40,11 @@ export function applyNativeMapProbes(root: T.Object3D, probes: SourceGpuProbes) 
       let material = materials.get(source);
       if (material) return material;
       material = source.clone();
+      // MeshStandardMaterial.copy resets custom defines; native callbacks still
+      // require their original tangent/normal-frame feature declarations.
+      material.defines = { ...source.defines };
       copySourceDepth(source, material);
+      material.userData.nativeBakedVisibility = "probe";
       materials.set(source, material);
       const prior = source.onBeforeCompile.bind(source);
       const key = source.customProgramCacheKey();

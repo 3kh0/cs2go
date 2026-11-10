@@ -1,5 +1,12 @@
 import * as T from "three";
 import { nativeWaterPrepare } from "./native-water-core";
+import { applySourceSurfaceLightingBegin } from "./source-surface";
+export const nativeWaterSamplers = [
+  "g_tDebris",
+  "g_tDebrisNormal",
+  "g_tFoam",
+  "g_tWavesNormalHeight",
+] as const;
 export interface NativeWaterMaterial {
   shader: string;
   nativeResource: string;
@@ -65,7 +72,6 @@ export function nativeWaterConstants(source: NativeWaterMaterial) {
 }
 export const waterUniformDeclarations = `
 uniform sampler2D g_tSceneDepth,g_tRefractionMap,g_tWaterEffectsMap,g_tBlueNoise;
-uniform sampler2D g_tDebris,g_tDebrisNormal,g_tFoam,g_tWavesNormalHeight;
 uniform float waterTime;
 uniform vec4 waterViewport;
 uniform vec2 waterDepthCoefficients;
@@ -118,6 +124,7 @@ void RE_IndirectDiffuse_NativeWater(const in vec3 irradiance,const in vec3 geome
 export function applyNativeWaterShader(
   shader: T.WebGLProgramParametersWithUniforms,
   source: NativeWaterMaterial,
+  textureReads: string,
 ) {
   const constants = nativeWaterConstants(source);
   shader.vertexShader = `varying vec3 vWaterSourcePosition,vWaterSourceNormal;uniform vec3 waterCameraSource;\n${shader.vertexShader}`;
@@ -132,17 +139,23 @@ export function applyNativeWaterShader(
  sourceP+=sourceN*${literal(source.FloatParams.g_flWaterPlaneOffset)};sourceP.xy+=waterShift*${literal(source.FloatParams.g_flWaterPlaneOffset)};
  vWaterSourcePosition=sourceP;vWaterSourceNormal=sourceN;
  vec3 displacedWorld=vec3(sourceP.x,sourceP.z,-sourceP.y)*.0254;
+ transformed=(inverse(modelMatrix)*vec4(displacedWorld,1.0)).xyz;
  vec4 mvPosition=viewMatrix*vec4(displacedWorld,1.0);gl_Position=projectionMatrix*mvPosition;
  `,
   );
-  shader.fragmentShader = `${waterUniformDeclarations}\n${constants}\n${nativeWaterPrepare}\n${shader.fragmentShader}`;
+  const core = nativeWaterSamplers.reduce(
+    (code, sampler) =>
+      code.replaceAll(`texture(${sampler},`, `${sampler.replace(/^g_t/, "environment")}Read(`),
+    nativeWaterPrepare,
+  );
+  shader.fragmentShader = `${waterUniformDeclarations}\n${textureReads}\n${constants}\n${core}\n${shader.fragmentShader}`;
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <lights_physical_pars_fragment>",
     `#include <lights_physical_pars_fragment>\n${waterLighting}`,
   );
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <normal_fragment_maps>",
-    "waterPrepare();normal=normalize(mat3(viewMatrix)*vec3(waterState.normal.x,waterState.normal.z,-waterState.normal.y));",
+    "waterPrepare();vec3 mapN=waterState.normal;normal=normalize(mat3(viewMatrix)*vec3(waterState.normal.x,waterState.normal.z,-waterState.normal.y));",
   );
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <roughnessmap_fragment>",
@@ -156,4 +169,5 @@ export function applyNativeWaterShader(
     "vec3 outgoingLight = totalDiffuse + totalSpecular + totalEmissiveRadiance;",
     "vec3 outgoingLight=waterComposite(reflectedLight.directDiffuse,reflectedLight.indirectDiffuse);",
   );
+  applySourceSurfaceLightingBegin(shader);
 }

@@ -1,3 +1,4 @@
+import { sourceVerticalFov } from "../src/source-camera";
 import { teamChoiceVisible } from "./team-choice";
 import { test, expect } from "@playwright/test";
 import type { Game } from "../src/game";
@@ -345,10 +346,14 @@ test("supplied AWP mesh, two zoom levels, bolt lockout, body damage, reload, and
   await page.mouse.down({ button: "right" });
   await page.mouse.up({ button: "right" });
   await expect(page.locator("#scope")).toBeVisible();
-  await expect.poll(() => page.evaluate(() => window.__game.camera.fov)).toBe(40);
+  await expect
+    .poll(() => page.evaluate(() => window.__game.camera.fov))
+    .toBeCloseTo(sourceVerticalFov(40), 8);
   await page.mouse.down({ button: "right" });
   await page.mouse.up({ button: "right" });
-  await expect.poll(() => page.evaluate(() => window.__game.camera.fov)).toBe(10);
+  await expect
+    .poll(() => page.evaluate(() => window.__game.camera.fov))
+    .toBeCloseTo(sourceVerticalFov(10), 8);
   await page.evaluate(async () => {
     const path = "/tests/weapon-lane-fixture.ts";
     const { weaponLaneFixture, placeWeaponTarget, weaponHitboxPoint, aimWeaponAt } = (await import(
@@ -384,7 +389,9 @@ test("supplied AWP mesh, two zoom levels, bolt lockout, body damage, reload, and
     await page.mouse.up({ button: "right" });
   }
   await expect(page.locator("#scope")).toBeHidden();
-  await expect.poll(() => page.evaluate(() => window.__game.camera.fov)).toBe(90);
+  await expect
+    .poll(() => page.evaluate(() => window.__game.camera.fov))
+    .toBeCloseTo(sourceVerticalFov(90), 8);
   await page.mouse.down({ button: "right" });
   await page.mouse.up({ button: "right" });
   await page.keyboard.press("Digit2");
@@ -2206,12 +2213,14 @@ test("both teams keep native wrists on weapon contacts and reset poses", async (
     return {
       wristError,
       resetError,
-      lensStable: g.viewCamera.fov === lens && g.camera.fov === 110,
+      lensStable: g.viewCamera.fov === lens,
+      worldFov: g.camera.fov,
     };
   });
   expect(result.wristError).toBeLessThan(0.001);
   expect(result.resetError).toBeLessThan(0.0001);
   expect(result.lensStable).toBe(true);
+  expect(result.worldFov).toBeCloseTo(sourceVerticalFov(110), 8);
 });
 
 test("native Bayonet clips animate fingers, return to idle, and inspection cancels coherently", async ({

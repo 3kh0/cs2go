@@ -74,6 +74,27 @@ test("environment color correction follows source reflectivity pivots and lumina
     });
 });
 
+test("native FLOAT4 tint padding cannot replace asphalt RGB with its AO alpha", () => {
+  const pivot = [0.09636279, 0.09636471, 0.09635809];
+  for (const rgb of [
+    [1, 1, 1],
+    [1, 0.960784, 0.898039],
+    [0.8, 0.2, 0.1],
+  ]) {
+    const expected = environmentColorMatrix([1, 1, 1.2], pivot, rgb);
+    for (const unused of [0, 1, -8, 40])
+      expect(environmentColorMatrix([1, 1, 1.2], pivot, [...rgb, unused]).elements).toEqual(
+        expected.elements,
+      );
+  }
+  const asphalt = new T.Vector4(0.1, 0.1, 0.1, 0.94).applyMatrix4(
+    environmentColorMatrix([1, 1, 1.2], pivot, [1, 1, 1, 0]),
+  );
+  asphalt
+    .toArray()
+    .forEach((value, index) => expect(value).toBeCloseTo([0.12, 0.12, 0.12, 0.94][index], 10));
+});
+
 test("environment variants retain native UV selection, blend controls, model tint and packed channels", () => {
   const native = source();
   const textures = new Map(Object.values(native.textures).map((key) => [key, new T.Texture()]));
@@ -132,9 +153,51 @@ test("environment variants retain native UV selection, blend controls, model tin
     expect(material.aoMap).toBeNull();
     material.dispose();
   }
-  expect(one.customProgramCacheKey()).not.toBe(two.customProgramCacheKey());
+  expect(one.customProgramCacheKey()).toBe(two.customProgramCacheKey());
   geometry.dispose();
   textures.forEach((texture) => texture.dispose());
+  lookup.dispose();
+});
+
+test("legacy environment shares only identical callback sources while retaining prior hooks and sampler aliases", () => {
+  const materials: T.MeshStandardMaterial[] = [];
+  const texture = new T.Texture(),
+    lookup = new T.DataTexture(),
+    geometry = new T.PlaneGeometry();
+  geometry.setAttribute("uv2", geometry.getAttribute("uv"));
+  geometry.setAttribute("color_1", new T.Float32BufferAttribute(Array(16).fill(0), 4));
+  const bind = (native: SourceEnvironmentMaterial, prior = "prior-program") => {
+    const material = new T.MeshStandardMaterial();
+    material.name = "native blend";
+    material.customProgramCacheKey = () => prior;
+    applyNativeMapEnvironment(new T.Mesh(geometry, material), {
+      materials: { [material.name]: native },
+      textures: new Map(Object.values(native.textures).map((id) => [id, texture])),
+      lookup,
+    });
+    materials.push(material);
+    return material.customProgramCacheKey();
+  };
+  const original = source(),
+    resourceVariant = structuredClone(original);
+  resourceVariant.nativeResource = "materials/another-native-resource.vmat";
+  resourceVariant.FloatParams.g_fTextureColorBrightness1 = 1.7;
+  resourceVariant.VectorParams.g_vTextureColorTint1 = [0.7, 0.2, 0.1, 0];
+  resourceVariant.textures = Object.fromEntries(
+    Object.entries(resourceVariant.textures).map(([name, id]) => [name, `another-${id}`]),
+  );
+  const key = bind(original);
+  expect(bind(resourceVariant)).toBe(key);
+  expect(bind(original, "different-prior-program")).not.toBe(key);
+  const differentAlias = structuredClone(original);
+  differentAlias.textures.g_tColor2 = "independent-second-color";
+  expect(bind(differentAlias)).not.toBe(key);
+  const differentShader = structuredClone(original);
+  differentShader.IntParams.F_SHARED_COLOR_OVERLAY = 0;
+  expect(bind(differentShader)).not.toBe(key);
+  materials.forEach((material) => material.dispose());
+  geometry.dispose();
+  texture.dispose();
   lookup.dispose();
 });
 

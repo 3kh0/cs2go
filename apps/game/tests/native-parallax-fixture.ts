@@ -395,3 +395,100 @@ export async function renderNativeParallaxCubeFixture() {
   renderer.forceContextLoss();
   return result;
 }
+
+/** Real hardware sampler boundaries; UV clamping in GLSL would fail the half-texel cases. */
+export async function renderNativeParallaxAddressFixture() {
+  const { createParallaxTextureBindings } = await import("../src/native-map-parallax");
+  const renderer = new T.WebGLRenderer({ antialias: false });
+  renderer.setSize(1, 1);
+  const target = new T.WebGLRenderTarget(1, 1, { depthBuffer: false });
+  const camera = new T.OrthographicCamera(-1, 1, 1, -1, 0, 2);
+  camera.position.z = 1;
+  const data = new Uint8Array([255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255, 255, 255, 255, 255]);
+  const original = new T.DataTexture(data, 2, 2);
+  original.wrapS = original.wrapT = T.RepeatWrapping;
+  original.magFilter = original.minFilter = T.LinearFilter;
+  original.needsUpdate = true;
+  const owned = new Map([["shared", original]]);
+  const geometry = new T.PlaneGeometry(2, 2),
+    results = [];
+  const wrapIndex = (i: number, mode: number) =>
+    mode === 2
+      ? Math.max(0, Math.min(1, i))
+      : mode === 1
+        ? ((i % 4) + 4) % 4 < 2
+          ? ((i % 4) + 4) % 4
+          : 3 - (((i % 4) + 4) % 4)
+        : ((i % 2) + 2) % 2;
+  const expected = (uv: number[], u: number, v: number) => {
+    const x = uv[0] * 2 - 0.5,
+      y = uv[1] * 2 - 0.5,
+      ix = Math.floor(x),
+      iy = Math.floor(y);
+    return [0, 1, 2].map((c) => {
+      let value = 0;
+      for (let dy = 0; dy < 2; dy++)
+        for (let dx = 0; dx < 2; dx++)
+          value +=
+            data[(wrapIndex(iy + dy, v) * 2 + wrapIndex(ix + dx, u)) * 4 + c] *
+            (dx ? x - ix : 1 - x + ix) *
+            (dy ? y - iy : 1 - y + iy);
+      return Math.round(value);
+    });
+  };
+  for (const [u, v] of [
+    [0, 0],
+    [2, 2],
+    [1, 2],
+    [2, 1],
+  ]) {
+    const source: SourceParallaxMaterial = {
+      shader: "csgo_simple_3layer_parallax.vfx",
+      nativeResource: "fixture.vmat",
+      IntParams: { g_nTextureAddressModeU: u, g_nTextureAddressModeV: v },
+      FloatParams: {},
+      VectorParams: {},
+      textures: { g_tColor: "shared", g_tAmbientOcclusion: "shared" },
+    };
+    const bindings = createParallaxTextureBindings(source, owned);
+    for (const uv of [
+      [0, 0.25],
+      [1, 0.75],
+      [1.75, -0.125],
+      [-0.125, 1.75],
+    ]) {
+      for (const native of ["g_tColor", "g_tAmbientOcclusion"]) {
+        const material = new T.ShaderMaterial({
+          uniforms: {
+            tex: { value: bindings.get(native) },
+            sampleUv: { value: new T.Vector2(...uv) },
+          },
+          vertexShader: "void main(){gl_Position=vec4(position,1.0);}",
+          fragmentShader:
+            "uniform sampler2D tex;uniform vec2 sampleUv;void main(){gl_FragColor=texture2D(tex,sampleUv);}",
+        });
+        const scene = new T.Scene();
+        scene.add(new T.Mesh(geometry, material));
+        renderer.setRenderTarget(target);
+        renderer.render(scene, camera);
+        const pixel = new Uint8Array(4);
+        renderer.readRenderTargetPixels(target, 0, 0, 1, 1, pixel);
+        results.push({
+          u,
+          v,
+          uv,
+          native,
+          actual: Array.from(pixel.subarray(0, 3)),
+          expected: expected(uv, native === "g_tColor" ? u : 0, native === "g_tColor" ? v : 0),
+          error: renderer.getContext().getError(),
+        });
+        material.dispose();
+      }
+    }
+  }
+  owned.forEach((t) => t.dispose());
+  geometry.dispose();
+  target.dispose();
+  renderer.dispose();
+  return results;
+}

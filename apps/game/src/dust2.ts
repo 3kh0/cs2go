@@ -1,3 +1,4 @@
+import { bindNativeMaterialAliases } from "./native-material-aliases";
 import { loadNativeMapParallax, applyNativeMapParallax } from "./native-map-parallax";
 import { applyNativeStaticOverlays, type NativeStaticOverlay } from "./native-static-overlay";
 import { assetFetch, assetUrl } from "./asset-url";
@@ -20,7 +21,7 @@ import { disposeActorLighting } from "./actor-lighting";
 import { applySourceMapLighting, loadSourceMapLighting } from "./source-map-lighting";
 import { loadBombDamage } from "./bomb-damage";
 import { loadSourceSky, bindSourceSky } from "./source-sky";
-import { addSourceDynamicSun, applySourceSunShadows } from "./source-sun";
+import { addSourceDynamicSun, applySourceSunShadows, fitSourceSunShadow } from "./source-sun";
 import * as T from "three";
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 import { loadGzipped } from "./gltf";
@@ -43,6 +44,23 @@ import { loadNativeMapEffects } from "./native-map-effects";
 import { applyNativeMapReflections } from "./native-map-reflections";
 import { loadNativeMapWater, applyNativeMapWater } from "./native-map-water";
 import { loadNativeMapComplex, applyNativeMapComplex } from "./native-map-complex";
+import { loadNativeMapFog, applyNativeMapFog } from "./native-map-fog";
+import { NativeWorldFrameComposite } from "./native-world-frame-composite";
+import {
+  loadNativeMapLightmapped,
+  applyNativeMapLightmapped,
+  selectNativeLightmappedMaterial,
+} from "./native-map-lightmapped";
+import { loadNativeMapLegacy, applyNativeMapLegacy } from "./native-map-legacy";
+import { loadNativeMapGlass, applyNativeMapGlass } from "./native-map-glass";
+import { installSourceShadowDepth } from "./source-depth";
+import { loadNativeCableView } from "./native-map-cables";
+import { loadNativeFoliageView } from "./native-foliage-view";
+import { bindNativeFoliageVisibility } from "./native-foliage-visibility";
+import { assertNativeEnvironmentBudget } from "./native-environment-budget";
+import { combineNativeCoverage, ownNativeCoverage } from "./native-coverage";
+import { loadNativeComplexPaint } from "./native-complex-paint";
+import { loadNativeMapLocalLights, applyNativeMapLocalLights } from "./native-map-local-lights";
 export type NativeMapConfig = {
   sun: { pitch: number; yaw: number; color: number; intensity: number };
   fog?: { color: number; near: number; far: number };
@@ -62,6 +80,15 @@ export type NativeMapConfig = {
   effectsWorld?: string;
   waterMaterials?: string;
   complexMaterials?: string;
+  complexSpecialMaterials?: string;
+  legacyMaterials?: string;
+  lightmappedMaterials?: string;
+  glassMaterials?: string;
+  foliageMaterials?: string;
+  cablesWorld?: string;
+  nativeFog?: string;
+  localLights?: string;
+  frameComposition?: "linear-hdr";
 };
 const dustConfig: NativeMapConfig = {
   sun: { pitch: 50, yaw: 43, color: 0xffdebd, intensity: 2.5 * Math.PI },
@@ -118,6 +145,12 @@ async function buildNativeMap(
     resources.texture(sky);
     return sky;
   });
+  const fogLoad = config.nativeFog
+    ? loadNativeMapFog(renderer, config.nativeFog).then((fog) => {
+        if (fog.cube) resources.texture(fog.cube);
+        return fog;
+      })
+    : Promise.resolve(undefined);
   const [
     asset,
     response,
@@ -142,6 +175,14 @@ async function buildNativeMap(
     nativeEffects,
     waterMaterials,
     complexMaterials,
+    nativeFog,
+    legacyMaterials,
+    glassMaterials,
+    nativeFoliage,
+    specialComplexMaterials,
+    nativeLocalLights,
+    cableAsset,
+    lightmappedMaterials,
   ] = await Promise.all([
     ownModel(loadGzipped(`/models/maps/${id}.glb.gz`, 1)),
     assetFetch(`/models/maps/${id}-nav.json`),
@@ -167,10 +208,12 @@ async function buildNativeMap(
         })
       : undefined,
     config.skyWorld
-      ? loadNativeMapSky(renderer, config.skyWorld, skyLoad, config.sun).then((sky) => {
-          resources.onDispose(() => sky.dispose());
-          return sky;
-        })
+      ? fogLoad
+          .then((fog) => loadNativeMapSky(renderer, config.skyWorld!, skyLoad, config.sun, fog))
+          .then((sky) => {
+            resources.onDispose(() => sky.dispose());
+            return sky;
+          })
       : undefined,
     sourceLighting
       ? undefined
@@ -242,7 +285,8 @@ async function buildNativeMap(
       : undefined,
     config.waterMaterials
       ? loadNativeMapWater(renderer, config.waterMaterials).then((bundle) => {
-          for (const texture of bundle.textures.values()) resources.texture(texture);
+          for (const texture of [...bundle.textures.values(), ...bundle.banks.arrays])
+            resources.texture(texture);
           return bundle;
         })
       : undefined,
@@ -252,14 +296,82 @@ async function buildNativeMap(
           return bundle;
         })
       : undefined,
+    fogLoad,
+    config.legacyMaterials
+      ? loadNativeMapLegacy(renderer, config.legacyMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    config.glassMaterials
+      ? loadNativeMapGlass(renderer, config.glassMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    config.foliageMaterials
+      ? loadNativeFoliageView(renderer, config.foliageMaterials, resources, "main")
+      : undefined,
+    config.complexSpecialMaterials
+      ? loadNativeMapComplex(renderer, config.complexSpecialMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          return bundle;
+        })
+      : undefined,
+    config.localLights
+      ? loadNativeMapLocalLights(config.localLights).then((view) => {
+          resources.onDispose(() => view.dispose());
+          return view;
+        })
+      : undefined,
+    config.cablesWorld ? ownModel(loadGzipped(config.cablesWorld, 1)) : undefined,
+    config.lightmappedMaterials
+      ? loadNativeMapLightmapped(renderer, config.lightmappedMaterials).then((bundle) => {
+          for (const texture of bundle.textures.values()) resources.texture(texture);
+          resources.external(bundle.lookup);
+          return bundle;
+        })
+      : undefined,
   ]);
+  if (environmentMaterials)
+    assertNativeEnvironmentBudget(renderer, environmentMaterials, {
+      reflections: nativeReflections,
+      probes: nativeProbes,
+      fog: nativeFog,
+      lightingSamplers: nativeLighting?.directional ? 3 : 2,
+    });
+  // Parser slots are local to this GLTF. Snapshot before adding any model
+  // sidecars, whose material indices restart at zero.
+  const originalMainObjects: T.Object3D[] = [];
+  asset.scene.traverse((object) => originalMainObjects.push(object));
+  const complexPaint = await loadNativeComplexPaint(specialComplexMaterials, resources);
+  if (complexPaint) {
+    bindNativeFoliageVisibility(originalMainObjects, complexPaint.root, {
+      originalMainMaterialIndices: complexPaint.originalMainMaterialIndices,
+    });
+    asset.scene.add(complexPaint.root);
+  }
+  if (nativeFoliage) asset.scene.add(nativeFoliage.root);
+  const foliageVisibility = nativeFoliage
+    ? bindNativeFoliageVisibility(
+        originalMainObjects,
+        nativeFoliage.root,
+        {
+          originalMainMaterialIndices: nativeFoliage.source.originalMainMaterialIndices ?? [],
+          visibilityLinks: nativeFoliage.source.visibilityLinks,
+        },
+        breakableData,
+      )
+    : undefined;
   // Damage replacements retain exact native geometry in map-owned sidecars.
   // Bind their identities before collision flattening and material adaptation.
   await Promise.all([
-    ...(doorData.renderModels ?? []).map(async (path) => {
-      const extra = await ownModel(loadGzipped(path, 1));
-      asset.scene.add(extra.scene);
-    }),
+    ...[...(doorData.renderModels ?? []), ...(breakableData.renderModels ?? [])].map(
+      async (path) => {
+        const extra = await ownModel(loadGzipped(path, 1));
+        asset.scene.add(extra.scene);
+      },
+    ),
     ...(doorData.physicsModels ?? []).map(async (path) => {
       const extra = await loadGzipped(path, 1);
       physicsResources.capture(extra.scene);
@@ -269,6 +381,13 @@ async function buildNativeMap(
   if (nativeEffects) asset.scene.add(nativeEffects.root);
   // Native particle ropes are absent from the world export. Their settled tubes are baked offline and share static map lighting; native static_collision=false!
   if (cables) asset.scene.add(cables.scene);
+  const nativeCables = cableAsset ? await loadNativeCableView(cableAsset.scene) : undefined;
+  if (nativeCables) {
+    resources.external(nativeCables.lookup);
+    resources.onDispose(() => nativeCables.dispose());
+    resources.capture(cableAsset!.scene);
+    asset.scene.add(cableAsset!.scene);
+  }
   sky.mapping = T.EquirectangularReflectionMapping;
   if (!response.ok) throw new Error(`${id} navigation could not load`);
   const data = (await response.json()) as MapNavigation;
@@ -332,12 +451,44 @@ async function buildNativeMap(
       const source = nativeMaterials?.materials.find(
         (m) => m.name === entry.name,
       )?.selfIllumination;
-      if (source && !parallaxMaterials?.materials[entry.name])
+      if (
+        source &&
+        !parallaxMaterials?.materials[entry.name] &&
+        !(
+          lightmappedMaterials &&
+          selectNativeLightmappedMaterial(entry, lightmappedMaterials.materials)
+        )
+      )
         applySourceSelfIllumination(entry, source);
     }
   });
+  nativeFoliage?.applyShadowPolicy();
   if (nativeMaterials) applyNativeStaticOverlays(asset.scene, nativeMaterials.materials);
-  if (complexMaterials) applyNativeMapComplex(asset.scene, complexMaterials);
+  bindNativeMaterialAliases(
+    environmentMaterials?.materials,
+    breakableData.materialAliases?.environment,
+  );
+  bindNativeMaterialAliases(complexMaterials?.materials, breakableData.materialAliases?.complex);
+  bindNativeMaterialAliases(legacyMaterials?.materials, breakableData.materialAliases?.legacy);
+  bindNativeMaterialAliases(glassMaterials?.materials, breakableData.materialAliases?.glass);
+  const complexPasses = [];
+  if (complexMaterials) complexPasses.push(applyNativeMapComplex(asset.scene, complexMaterials));
+  if (specialComplexMaterials)
+    complexPasses.push(applyNativeMapComplex(asset.scene, specialComplexMaterials));
+  const nativeCoverage = combineNativeCoverage([
+    nativeFoliage,
+    complexPasses.length ? ownNativeCoverage(renderer, resources, complexPasses) : undefined,
+  ]);
+  if (legacyMaterials) applyNativeMapLegacy(asset.scene, legacyMaterials);
+  if (lightmappedMaterials) {
+    try {
+      applyNativeMapLightmapped(asset.scene, lightmappedMaterials);
+    } finally {
+      // Sampler views created during apply stay owned even if later admission fails.
+      for (const texture of lightmappedMaterials.textures.values()) resources.texture(texture);
+    }
+  }
+  if (glassMaterials) applyNativeMapGlass(asset.scene, glassMaterials, { fog: nativeFog });
   const nativeWater = waterMaterials
     ? applyNativeMapWater(asset.scene, waterMaterials, (texture) => resources.texture(texture))
     : undefined;
@@ -369,10 +520,23 @@ async function buildNativeMap(
   if (nativeProbes) applyNativeMapProbes(asset.scene, nativeProbes);
   if (nativeReflections?.volumes.some((volume) => volume.worldToLocal))
     applyNativeMapReflections(asset.scene, nativeReflections, doorData.doors, [
-      ...breakableData.breakables.flatMap((part) => part.renderNames),
+      ...breakableData.breakables.flatMap((part) => [
+        ...part.renderNames,
+        ...(part.pieces ?? []).flatMap((piece) => piece.renderNames),
+      ]),
       ...(breakableData.enabledRemainders ?? []).flatMap((part) => part.renderNames),
     ]);
+  if (nativeFog) applyNativeMapFog(asset.scene, nativeFog);
   if (grade) gradeNativeMapColors(asset.scene);
+  const localLightAdmission = nativeLocalLights
+    ? applyNativeMapLocalLights(asset.scene, nativeLocalLights)
+    : undefined;
+  // Lighting/reflection adapters clone color materials. Retain any earlier
+  // shadow variants, then bind the final material's own instance/tint state.
+  resources.capture(asset.scene);
+  asset.scene.traverse((object) => {
+    if (object instanceof T.Mesh) installSourceShadowDepth(object);
+  });
   // The imported architecture never moves; skip its per-frame matrix updates.
   asset.scene.traverse((object) => {
     object.matrixAutoUpdate = false;
@@ -384,7 +548,12 @@ async function buildNativeMap(
   navigation.bindCollision(collision);
   const doors = new DoorWorld(collision, doorData.doors, doorPhysics);
   const breakables = new BreakableWorld(collision, breakableData.breakables);
-  const breakableView = new NativeMapBreakableView(root, asset.scene, breakableData, collision);
+  const breakableView = new NativeMapBreakableView(
+    root,
+    asset.scene,
+    foliageVisibility?.manifest ?? breakableData,
+    collision,
+  );
   const ball = new WorldBall(root, collision, id === "dust2" || !!data.worldBallOrigin);
   physicsResources.dispose();
   const proxy = new T.Mesh(new T.BufferGeometry(), new T.MeshBasicMaterial());
@@ -433,32 +602,8 @@ async function buildNativeMap(
   sun.shadow.bias = -0.0001;
   sun.shadow.normalBias = 0.025;
   root.add(sun, sun.target);
-  // Spend the existing 2048 shadow texels on playable terrain rather than a
-  // fixed 180m square. Keep depth broad so off-nav roofs still cast shadows.
-  // NAV hulls include tunnels and elevation; padding covers walls around them.
   root.updateMatrixWorld(true);
-  sun.shadow.updateMatrices(sun);
-  const shadowBounds = new T.Box3();
-  const shadowPoint = new T.Vector3();
-  for (const area of navigation.areas) {
-    for (const corner of area.corners) {
-      shadowPoint.fromArray(corner).applyMatrix4(sun.shadow.camera.matrixWorldInverse);
-      shadowBounds.expandByPoint(shadowPoint);
-      shadowPoint.fromArray(corner);
-      shadowPoint.y += 5;
-      shadowPoint.applyMatrix4(sun.shadow.camera.matrixWorldInverse);
-      shadowBounds.expandByPoint(shadowPoint);
-    }
-  }
-  if (!shadowBounds.isEmpty()) {
-    Object.assign(sun.shadow.camera, {
-      left: shadowBounds.min.x - 8,
-      right: shadowBounds.max.x + 8,
-      bottom: shadowBounds.min.y - 8,
-      top: shadowBounds.max.y + 8,
-    });
-    sun.shadow.camera.updateProjectionMatrix();
-  }
+  fitSourceSunShadow(sun, navigation.areas, asset.scene);
   const dynamicSun = addSourceDynamicSun(root, sun, asset.scene);
   const doorView = new NativeMapDoorView(asset.scene, doorData.doors);
   doorView.sync(doors.states);
@@ -477,6 +622,15 @@ async function buildNativeMap(
   root.visible = false;
   scene.add(root);
   if (mapSky && sourceLighting) bindSourceSky(scene, mapSky, root);
+  const frameComposite =
+    config.frameComposition === "linear-hdr" && grade
+      ? new NativeWorldFrameComposite(
+          renderer,
+          grade,
+          renderer.getContext().getContextAttributes()?.antialias ? 4 : 0,
+        )
+      : undefined;
+  if (frameComposite) resources.onDispose(() => frameComposite.dispose());
   return {
     id,
     config,
@@ -500,6 +654,13 @@ async function buildNativeMap(
     nativeEffects,
     nativeWater,
     nativeEnvironment: environmentMaterials,
+    nativeFog,
+    nativeFoliage,
+    nativeCoverage,
+    nativeLocalLights,
+    nativeCables,
+    localLightAdmission,
+    frameComposite,
     breakables,
     doors,
     doorDefinitions: doorData.doors,
