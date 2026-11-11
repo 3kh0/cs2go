@@ -39,6 +39,39 @@ const source = JSON.parse(readFileSync(new URL("source.json", directory), "utf8"
 };
 const sha = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
 
+test("reflection candidates include touching faces in source axes and retain volume priority", () => {
+  const volume = {
+    index: 17,
+    origin: [0, 0, 0],
+    min: [-1, -1, -1],
+    max: [1, 1, 1],
+    fade: [0, 0, 0],
+    normalizationSH: [0, 0, 0, 1],
+  };
+  const data: SourceReflections = {
+    textures: [],
+    uniforms: [],
+    volumes: [volume, { ...volume, index: 3, origin: [20, 20, 20] }, { ...volume, index: 9 }],
+  };
+  for (let axis = 0; axis < 3; axis++) {
+    for (const side of [-1, 1]) {
+      const point = new T.Vector3().setComponent(axis, side * 0.0254);
+      expect(sourceReflectionCandidates(new T.Box3(point, point), data)).toEqual([0, 2]);
+      point.setComponent(axis, side * 0.0254 * 1.001);
+      expect(sourceReflectionCandidates(new T.Box3(point, point), data)).toEqual([]);
+    }
+  }
+  // Source Y reverses world Z, while Source Z follows world Y.
+  data.volumes = [{ ...volume, origin: [10, 20, 30] }];
+  const point = new T.Vector3(10 * 0.0254, 30 * 0.0254, -20 * 0.0254);
+  expect(sourceReflectionCandidates(new T.Box3(point, point), data)).toEqual([0]);
+  data.volumes[0].worldAABB = [volume.min, volume.max];
+  expect(sourceReflectionCandidates(new T.Box3(point, point), data)).toEqual([]);
+  expect(sourceReflectionCandidates(new T.Box3(new T.Vector3(), new T.Vector3()), data)).toEqual([
+    0,
+  ]);
+});
+
 test("Mirage reflection arrays retain every native cube face and authored roughness mip", () => {
   expect(source.arrays.map((array) => [array.firstCube, array.layers])).toEqual([
     [0, 252],

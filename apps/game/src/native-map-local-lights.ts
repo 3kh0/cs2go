@@ -24,9 +24,11 @@ export interface NativeMapLocalLightDefinition {
  * a map-owned UBO; native private host packing/live-shadow parity is not claimed. */
 export class NativeMapLocalLights {
   readonly buffer: NativeLightBuffer;
+  readonly group: T.UniformsGroup;
   readonly definition: NativeMapLocalLightDefinition;
   readonly cookies?: T.DataArrayTexture;
   private disposed = false;
+  private prepared = false;
   private readonly checked = new WeakSet<T.WebGLRenderer>();
   constructor(definition: NativeMapLocalLightDefinition, cookies?: T.DataArrayTexture) {
     this.cookies = cookies;
@@ -70,32 +72,71 @@ export class NativeMapLocalLights {
       0,
       1,
     );
-    this.buffer = new NativeLightBuffer(
-      packNativeLocalLights(
-        definition.lights.map((light) => light.record),
-        sourceToWorld.clone().invert().toArray(),
-        sourceToWorld.toArray(),
-      ),
+    const packed = packNativeLocalLights(
+      definition.lights.map((light) => light.record),
+      sourceToWorld.clone().invert().toArray(),
+      sourceToWorld.toArray(),
     );
+    this.buffer = new NativeLightBuffer(packed);
+    // Only the bounded count header uses uint words. Its Float32 view is a
+    // finite subnormal; all other words are validated Float32 records. Vector4
+    // uploads preserve those bits without relying on Three's private uint type.
+    const floats = new Float32Array(packed.buffer, packed.byteOffset, packed.length);
+    if (floats.some((value) => !Number.isFinite(value)))
+      throw new Error("Native map light group requires finite Float32 words");
+    this.group = new T.UniformsGroup()
+      .setName("NativeMapLocalLightBlock")
+      .add(
+        new T.Uniform(
+          Array.from({ length: floats.length / 4 }, (_, i) =>
+            new T.Vector4().fromArray(floats, i * 4),
+          ),
+        ),
+      );
+  }
+  prepare(materials: Iterable<T.Material>) {
+    if (this.disposed) throw new Error("Native map lights are disposed");
+    for (const material of materials) {
+      const target = material as T.Material & { uniformsGroups?: T.UniformsGroup[] };
+      const groups = target.uniformsGroups ?? [];
+      if (groups.includes(this.group)) continue;
+      if (
+        groups.some(
+          (group) =>
+            (group as T.UniformsGroup & { name?: string }).name === "NativeMapLocalLightBlock",
+        )
+      )
+        throw new Error("Native local-light material already belongs to another map");
+      target.uniformsGroups = [...groups, this.group];
+    }
+    // Even an entirely held map must not wrap unrelated reflection groups in a
+    // manual point-zero binding scope.
+    this.prepared = true;
   }
   render<Value>(renderer: T.WebGLRenderer, draw: () => Value) {
-    if (this.cookies && !this.checked.has(renderer)) {
+    if (this.disposed) throw new Error("Native map lights are disposed");
+    if (!this.checked.has(renderer)) {
       const gl = renderer.getContext() as WebGL2RenderingContext;
-      if (gl.isContextLost()) return this.buffer.withBinding(renderer, draw);
+      if (gl.isContextLost())
+        return this.prepared ? draw() : this.buffer.withBinding(renderer, draw);
+      if (this.buffer.byteLength > gl.getParameter(gl.MAX_UNIFORM_BLOCK_SIZE))
+        throw new Error("Native light records exceed uniform-block capacity");
       if (
-        this.cookies.image.width > renderer.capabilities.maxTextureSize ||
-        this.cookies.image.height > renderer.capabilities.maxTextureSize ||
-        this.cookies.image.depth > gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS)
+        this.cookies &&
+        (this.cookies.image.width > renderer.capabilities.maxTextureSize ||
+          this.cookies.image.height > renderer.capabilities.maxTextureSize ||
+          this.cookies.image.depth > gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS))
       )
         throw new Error("Native cookie array exceeds GPU capacity");
       this.checked.add(renderer);
     }
-    return this.buffer.withBinding(renderer, draw);
+    return this.prepared ? draw() : this.buffer.withBinding(renderer, draw);
   }
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
     this.buffer.dispose();
+    this.group.dispose();
     this.cookies?.dispose();
   }
 }
@@ -212,5 +253,6 @@ export function applyNativeMapLocalLights(root: T.Object3D, lights: NativeMapLoc
       material.needsUpdate = true;
     }
   });
+  lights.prepare(patched);
   return { materials: patched.size, held: [...held] };
 }

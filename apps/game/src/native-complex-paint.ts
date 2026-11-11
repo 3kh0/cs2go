@@ -12,8 +12,9 @@ export async function loadNativeComplexPaint(
   const paint = bundle?.paint;
   if (!paint) return undefined;
   const asset = await loadGzipped(paint.model, 1);
-  resources.capture(asset.scene);
-  resources.onDispose(() => resources.capture(asset.scene));
+  const root = asset.scene;
+  resources.capture(root);
+  resources.onDispose(() => resources.capture(root));
   const bindings = new Map(
     paint.materialBindings.map((binding) => [binding.packedMaterialIndex, binding]),
   );

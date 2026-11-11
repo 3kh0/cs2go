@@ -639,6 +639,7 @@ export class MapCollision {
           if (
             this.minY[k] > ceiling ||
             this.maxY[k] < bottom ||
+            this.maxY[k] <= height ||
             outside(vertices, k * 9, x, z, radius)
           )
             continue;
@@ -703,7 +704,14 @@ export class MapCollision {
             (overhead ? this.normals[k * 3 + 1] > -0.7 : this.normals[k * 3 + 1] < 0.7)
           )
             continue;
-          if (this.minY[k] > ceiling || this.maxY[k] < bottom) continue;
+          // Clipping only interpolates vertex heights. A triangle whose entire
+          // Y range cannot improve the current result needs no footprint clip.
+          if (
+            this.minY[k] > ceiling ||
+            this.maxY[k] < bottom ||
+            (overhead ? this.minY[k] >= height : this.maxY[k] <= height)
+          )
+            continue;
           if (outside(vertices, k * 9, x, z, radius)) continue;
           const y = footprintHeight(vertices, k * 9, x, z, radius, !overhead);
           if (y <= ceiling && y >= bottom && (overhead ? y < height : y > height)) height = y;

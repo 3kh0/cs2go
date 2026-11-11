@@ -43,6 +43,7 @@ export class MatchConnection {
     at: number;
     tick: number;
     players: PlayerState[];
+    readonly playersById: ReadonlyMap<string, PlayerState>;
     round?: number;
     doors?: DoorState[];
   }[] = [];
@@ -150,6 +151,7 @@ export class MatchConnection {
             tick: message.tick,
             at: this.timeline + (message.tick * 1000) / TICK_RATE,
             players: message.players,
+            playersById: new Map(message.players.map((player) => [player.id, player])),
             round: message.round.round,
             doors: message.round.doors,
           });
@@ -157,9 +159,15 @@ export class MatchConnection {
           const state = message.players.find((player) => player.id === this.id);
           if (state) {
             const changedSpawn = this.local?.spawn !== state.spawn;
-            this.pending = changedSpawn
-              ? []
-              : this.pending.filter((input) => input.seq > state.ack);
+            if (changedSpawn) this.pending.length = 0;
+            else if (this.pending.length) {
+              // Compact in place without allocating a new replay queue on every
+              // snapshot. Preserve input order and the exact ack comparison.
+              let retained = 0;
+              for (const input of this.pending)
+                if (input.seq > state.ack) this.pending[retained++] = input;
+              this.pending.length = retained;
+            }
             // Prediction mutates attachment/cooldown state; preserve the decoded
             // authoritative snapshot and delta baseline for later reconciliation.
             this.local = { ...state, ladder: state.ladder ? { ...state.ladder } : undefined };
@@ -244,7 +252,7 @@ export class MatchConnection {
   private flush() {
     if (this.batch.length && this.socket.readyState === WebSocket.OPEN) {
       this.socket.send(encodeInputs(this.batch));
-      this.batch = [];
+      this.batch.length = 0;
     }
   }
   stopInput() {

@@ -30,6 +30,25 @@ export function nativeOpaqueReuseFixture() {
   );
   transparent.position.z = 0.6;
   parent.add(transparent);
+  // Excluding a transparent parent must also retain its opaque descendants
+  // for the remaining pass, including across intervening non-mesh groups.
+  const nestedGroup = new T.Group();
+  nestedGroup.renderOrder = 3;
+  const nestedOpaque = new T.Mesh(geometry, opaque);
+  nestedOpaque.scale.setScalar(0.35);
+  nestedOpaque.position.set(0.25, 0.25, 0.25);
+  nestedGroup.add(nestedOpaque);
+  transparent.add(nestedGroup);
+  const mixed = new T.Mesh(geometry, [opaque, transparent.material]);
+  mixed.position.set(1.5, 1, 0.5);
+  const mixedChild = new T.Mesh(geometry, opaque);
+  mixedChild.scale.setScalar(0.25);
+  mixedChild.position.z = 0.6;
+  mixed.add(mixedChild);
+  group.add(mixed);
+  const initiallyHidden = new T.Mesh(geometry, opaque);
+  initiallyHidden.visible = false;
+  transparent.add(initiallyHidden);
   const cutoutTexture = new T.DataTexture(
     new Uint8Array([255, 255, 255, 0, 255, 255, 255, 255]),
     2,
@@ -142,7 +161,10 @@ export function nativeOpaqueReuseFixture() {
           layersRestored:
             group.children.every((mesh) => mesh.layers.mask === 1) &&
             transparent.layers.mask === 1 &&
+            nestedOpaque.layers.mask === 1 &&
+            mixedChild.layers.mask === 1 &&
             smoke.batch.layers.mask === 1,
+          visibilityRestored: transparent.visible && mixed.visible && !initiallyHidden.visible,
           backgroundRestored: scene.background instanceof T.Color,
           glError: renderer.getContext().getError(),
         });

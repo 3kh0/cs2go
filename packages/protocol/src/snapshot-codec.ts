@@ -7,6 +7,10 @@ const utf8 = new TextEncoder();
 
 type Delta = { type: "snapshot-delta"; base: number; tick: number; patch: Patch };
 
+function cloneJson(value: Json): Json {
+  return value !== null && typeof value === "object" ? structuredClone(value) : value;
+}
+
 function difference(previous: Json, current: Json): { next: Json; patch?: Patch } {
   if (previous === current) return { next: previous };
   if (
@@ -17,30 +21,32 @@ function difference(previous: Json, current: Json): { next: Json; patch?: Patch 
     Array.isArray(previous) !== Array.isArray(current) ||
     (Array.isArray(current) && current.length !== (previous as Json[]).length)
   )
-    return { next: structuredClone(current), patch: [0, current] };
-  const changes: Record<string, Patch> = {};
+    return { next: cloneJson(current), patch: [0, current] };
+  let changes: Record<string, Patch> | undefined;
   const before = previous as Record<string, Json>,
     after = current as Record<string, Json>;
   let next: Record<string, Json> | undefined;
   for (const key of Object.keys(after)) {
     if (after[key] === undefined) continue;
-    const update = Object.hasOwn(before, key)
+    const owned = Object.hasOwn(before, key);
+    if (owned && before[key] === after[key]) continue;
+    const update = owned
       ? difference(before[key], after[key])
-      : { next: structuredClone(after[key]), patch: [0, after[key]] as Patch };
+      : { next: cloneJson(after[key]), patch: [0, after[key]] as Patch };
     if (update.patch) {
       next ??= (Array.isArray(previous) ? [...previous] : { ...before }) as Record<string, Json>;
       next[key] = update.next;
-      changes[key] = update.patch;
+      (changes ??= {})[key] = update.patch;
     }
   }
   for (const key of Object.keys(before)) {
     if (!Object.hasOwn(after, key) || after[key] === undefined) {
       next ??= { ...before };
       delete next[key];
-      changes[key] = [2];
+      (changes ??= {})[key] = [2];
     }
   }
-  return next ? { next, patch: [1, changes] } : { next: previous };
+  return next && changes ? { next, patch: [1, changes] } : { next: previous };
 }
 
 function apply(previous: Json, patch: Patch): Json {

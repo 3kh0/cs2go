@@ -16,7 +16,9 @@ export class GameRadar {
   private frame: RadarFrame = { markers: [] };
   private lastBomb?: RadarFrame["bomb"];
   private knowledgeKey = "";
-  private previous: RadarFrame = { markers: [] };
+  // IDs are the local "player" or numeric bot slots. Build once per sensing
+  // sample so presentation can match authorized observations without rescanning.
+  private previousMarkers: Partial<Record<RadarMarker["id"], RadarMarker>> = {};
   private previousAt = -Infinity;
   reset() {
     this.contacts.reset();
@@ -24,7 +26,7 @@ export class GameRadar {
     this.frame = { markers: [] };
     this.lastBomb = undefined;
     this.knowledgeKey = "";
-    this.previous = { markers: [] };
+    this.previousMarkers = {};
     this.previousAt = -Infinity;
   }
   sample(game: Game, now: number) {
@@ -47,7 +49,8 @@ export class GameRadar {
       this.knowledgeKey = knowledgeKey;
     }
     if (now - this.sampledAt < 1 / 16) return this.present(game, now);
-    this.previous = this.frame;
+    this.previousMarkers = {};
+    for (const marker of this.frame.markers) this.previousMarkers[marker.id] = marker;
     this.previousAt = this.sampledAt;
     this.sampledAt = now;
     const players: RadarPlayer[] = [
@@ -206,7 +209,7 @@ export class GameRadar {
           ),
         };
       }
-      const previous = this.previous.markers.find((old) => old.id === marker.id);
+      const previous = this.previousMarkers[marker.id];
       if (
         !previous ||
         previous.uncertain ||

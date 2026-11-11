@@ -592,6 +592,7 @@ export class GameInventory {
     this.equipmentReceipts.push({ kind, price, before, after: this.equipmentState() });
   }
   invalidateEquipment(kitOnly = false) {
+    if (!this.equipmentReceipts.some((receipt) => (receipt.kind === "kit") === kitOnly)) return;
     this.equipmentReceipts = this.equipmentReceipts.filter((receipt) =>
       kitOnly ? receipt.kind !== "kit" : receipt.kind === "kit",
     );
@@ -784,14 +785,14 @@ export class GameInventory {
     const drop = this.drops.find(
       (d) =>
         (use || !d.buyDrop || d.owner !== "player") &&
+        (use || (weaponSlot(d.id) === 1 ? g.primary === null : this.sidearmDropped)) &&
         canPickupDroppedWeapon(
           d.mesh.position,
           d.age,
           d.owner === "player",
           g.position,
           (from, to) => g.visible(from, to),
-        ) &&
-        (use || (weaponSlot(d.id) === 1 ? g.primary === null : this.sidearmDropped)),
+        ),
     );
     if (!drop) return false;
     drop.mesh.removeFromParent();

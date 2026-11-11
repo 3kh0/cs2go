@@ -154,3 +154,92 @@ test("late animation and skin arrivals use bind scale rather than the currently 
   expect(late.getWorldScale(new T.Vector3()).distanceTo(initial)).toBeLessThan(1e-6);
   secondary.dispose();
 });
+
+test("cached secondary samples preserve paused, interrupted and restored world poses", async () => {
+  const pack = await parse("/models/agents/inspects/animations/world/rifle/rifle_ak.glb");
+  const clips = ["reload_ak@weapon", "shoot_ak@weapon"].map((name) =>
+    pack.animations.find((clip) => clip.name === name)!,
+  );
+  const make = () => {
+    const weapon = createNativeWorldGun(0, true, undefined, false, true);
+    const parent = new T.Group();
+    parent.add(weapon);
+    const secondary = new AgentWeaponAnimation(weapon, pack.scene);
+    const mixer = new T.AnimationMixer(new T.Group());
+    const clocks = clips.map((clip, i) => {
+      const clock = mixer.clipAction(new T.AnimationClip(`body-${i}`, clip.duration, []));
+      secondary.bind(clock, clip);
+      return clock;
+    });
+    return { weapon, parent, secondary, clocks };
+  };
+  const cached = make(),
+    reference = make();
+  // The reference always evaluates its detached source. Compare actual target
+  // matrices and skinned geometry against that path, including external motion.
+  const internals = (secondary: AgentWeaponAnimation) =>
+    secondary as unknown as { sampled: boolean; mixer: T.AnimationMixer; source: T.Object3D };
+  const evaluate = vi.spyOn(internals(cached.secondary).mixer, "update");
+  const sourceWorld = vi.spyOn(internals(cached.secondary).source, "updateMatrixWorld");
+  const sample = (change?: (rig: ReturnType<typeof make>) => void) => {
+    if (change) for (const rig of [cached, reference]) change(rig);
+    internals(reference.secondary).sampled = false;
+    cached.secondary.update();
+    reference.secondary.update();
+    const bones = (weapon: T.Group) => {
+      const values: number[] = [];
+      weapon.traverse((node) => {
+        if (node instanceof T.Bone) values.push(...node.matrixWorld.elements);
+      });
+      return values;
+    };
+    const a = bones(cached.weapon),
+      b = bones(reference.weapon);
+    expect(a).toHaveLength(b.length);
+    expect(Math.max(...a.map((value, i) => Math.abs(value - b[i])))).toBeLessThan(1e-9);
+    const boundsA = new T.Box3().setFromObject(cached.weapon, true),
+      boundsB = new T.Box3().setFromObject(reference.weapon, true);
+    expect(boundsA.min.distanceTo(boundsB.min)).toBeLessThan(1e-9);
+    expect(boundsA.max.distanceTo(boundsB.max)).toBeLessThan(1e-9);
+  };
+  sample();
+  sample(({ clocks }) => {
+    clocks[0].play().setEffectiveWeight(1);
+    clocks[0].time = 0.7666561604;
+    clocks[0].paused = true;
+  });
+  const beforePause = evaluate.mock.calls.length;
+  for (let i = 0; i < 10; i++) sample();
+  expect(evaluate).toHaveBeenCalledTimes(beforePause);
+  expect(sourceWorld).toHaveBeenCalledTimes(beforePause);
+  sample(({ parent, weapon }) => {
+    parent.position.set(4, 2, -3);
+    parent.rotation.set(0.2, -0.7, 0.1);
+    weapon.add(createNativeWorldGun(0, true, undefined, false, true));
+  });
+  expect(evaluate).toHaveBeenCalledTimes(beforePause);
+  sample(({ clocks }) => {
+    clocks[0].setEffectiveWeight(0.3);
+    clocks[1].play().setEffectiveWeight(0.7);
+    clocks[1].time = 0.02;
+  });
+  sample();
+  sample(({ clocks }) => clocks[0].stop());
+  sample(({ clocks }) => clocks[1].stop());
+  const afterStop = evaluate.mock.calls.length;
+  sample();
+  expect(evaluate).toHaveBeenCalledTimes(afterStop);
+  sample(({ clocks }) => {
+    clocks[0].play();
+    clocks[0].time = 0;
+  });
+  sample(({ clocks }) => {
+    clocks[0].enabled = false;
+    clocks[0].setEffectiveWeight(1);
+  });
+  sample(({ clocks }) => {
+    clocks[0].enabled = true;
+    clocks[0].setEffectiveWeight(1);
+  });
+  for (const rig of [cached, reference]) rig.secondary.dispose();
+});

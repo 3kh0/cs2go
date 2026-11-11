@@ -9,10 +9,14 @@ const mirage = (await Bun.file(
 ).exists())
   ? await loadServerMap(undefined, "mirage")
   : undefined;
+const origins = (process.env.ALLOWED_ORIGINS ?? "http://127.0.0.1:5173,http://127.0.0.1:5183")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 const app = startServer({
   port: 3002,
   hostname: "127.0.0.1",
-  origins: ["http://127.0.0.1:5173", "http://127.0.0.1:5183"],
+  origins,
   map,
   maps: mirage ? { mirage } : undefined,
 });
@@ -21,10 +25,7 @@ const control = Bun.serve({
   hostname: "127.0.0.1",
   async fetch(request) {
     const origin = request.headers.get("origin") ?? "";
-    const cors: Record<string, string> = [
-      "http://127.0.0.1:5173",
-      "http://127.0.0.1:5183",
-    ].includes(origin)
+    const cors: Record<string, string> = origins.includes(origin)
       ? {
           "Access-Control-Allow-Origin": origin,
           "Access-Control-Allow-Methods": "POST, OPTIONS",

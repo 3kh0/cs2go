@@ -24,7 +24,7 @@ test("native HDR opaque reuse preserves depth, cutouts, nested transparency, smo
   console.log("OPAQUE_REUSE", JSON.stringify(rows));
   for (const row of rows) {
     expect(row.glError).toBe(0);
-    expect(row.layersRestored && row.backgroundRestored).toBe(true);
+    expect(row.layersRestored && row.backgroundRestored && row.visibilityRestored).toBe(true);
     expect(row.maxError).toBeLessThan(0.002);
     expect(row.captureMipmaps).toEqual([row.mode === "water", row.mode === "water"]);
     if (!row.partial && row.mode !== "smoke")

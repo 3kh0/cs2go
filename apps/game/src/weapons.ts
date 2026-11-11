@@ -1,4 +1,5 @@
 import { worldGrip } from "./world-grips";
+import { cacheOwnedSkeletons } from "./cached-skeleton";
 import {
   loadInspectsKnives,
   createInspectsKnife,
@@ -206,6 +207,9 @@ export function createWorldGun(
     gun.userData.ownedWorldGun = true;
     bindWeaponInstance(gun, instance ?? null);
     shareSkeletons(gun);
+    // Carried weapon bones are sampled before the immutable world render,
+    // just like agent bodies. Reuse their palettes across its depth/color passes.
+    cacheOwnedSkeletons(gun);
     return gun;
   }
   if (instance?.skin.id && !isKnife(index)) {

@@ -130,8 +130,9 @@ async function buildNativeMapSky(
     lightmapped,
   ] = await Promise.all([
     loadGzipped(manifest.model, 1).then((asset) => {
-      resources.capture(asset.scene);
-      resources.onDispose(() => resources.capture(asset.scene));
+      const root = asset.scene;
+      resources.capture(root);
+      resources.onDispose(() => resources.capture(root));
       return asset;
     }),
     loadNativeMapLighting(manifest.lighting, renderer).then((lighting) => {
@@ -199,8 +200,9 @@ async function buildNativeMapSky(
       : undefined,
     manifest.cablesWorld
       ? loadGzipped(manifest.cablesWorld, 1).then((asset) => {
-          resources.capture(asset.scene);
-          resources.onDispose(() => resources.capture(asset.scene));
+          const root = asset.scene;
+          resources.capture(root);
+          resources.onDispose(() => resources.capture(root));
           return asset;
         })
       : undefined,

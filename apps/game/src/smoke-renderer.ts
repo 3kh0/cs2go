@@ -189,6 +189,9 @@ export type SceneDepthConsumer = {
   };
 };
 const depthSamplingMaterials = new WeakSet<T.Material>();
+function excludesOpaqueCapture(material: T.Material) {
+  return material.transparent || depthSamplingMaterials.has(material);
+}
 /** Such materials must never sample a depth image attached to their own draw. */
 export function registerSceneDepthMaterial(material: T.Material) {
   depthSamplingMaterials.add(material);
@@ -206,6 +209,27 @@ export class SmokeComposite {
   };
   private reusedObjects: T.Mesh[] = [];
   private reusedMasks: number[] = [];
+  private captureCandidates: T.Mesh[] = [];
+  private rendering = false;
+  private collectOpaque(object: T.Object3D, exclude: ReadonlySet<T.Object3D>, collect: boolean) {
+    if (object.visible === false) return;
+    if (object instanceof T.Mesh) {
+      if (
+        exclude.has(object) ||
+        (Array.isArray(object.material)
+          ? object.material.some(excludesOpaqueCapture)
+          : excludesOpaqueCapture(object.material))
+      ) {
+        this.hidden.push(object);
+        object.visible = false;
+        // Nothing below this root enters the capture, even opaque descendants.
+        // Unlike traverseVisible's callback, prune immediately after hiding it.
+        return;
+      }
+      if (collect) this.captureCandidates.push(object);
+    }
+    for (const child of object.children) this.collectOpaque(child, exclude, collect);
+  }
   private releaseOpaqueCopy() {
     this.opaqueCopy?.geometry.dispose();
     this.opaqueCopy?.material.dispose();
@@ -322,20 +346,28 @@ export class SmokeComposite {
     beforeOpaque?: (camera: T.PerspectiveCamera) => void,
     reuseLinearOpaque = false,
   ) {
+    // Independent sky renders are fine; this instance's pass/restore buffers
+    // cannot be shared by a recursive invocation of the same composite.
+    if (this.rendering) throw new Error("SmokeComposite.render cannot reenter the same instance");
+    this.rendering = true;
     // Poses are sampled before rendering. Share body palettes across the depth,
     // shadow and color passes, without retaining them across animation updates.
-    return renderFrozenPose(() =>
-      this.renderPasses(
-        renderer,
-        scene,
-        camera,
-        clouds,
-        lowQuality,
-        depthConsumer,
-        beforeOpaque,
-        reuseLinearOpaque,
-      ),
-    );
+    try {
+      return renderFrozenPose(() =>
+        this.renderPasses(
+          renderer,
+          scene,
+          camera,
+          clouds,
+          lowQuality,
+          depthConsumer,
+          beforeOpaque,
+          reuseLinearOpaque,
+        ),
+      );
+    } finally {
+      this.rendering = false;
+    }
   }
   /** Equal-depth surfaces must seed the same target immediately before color.
    * Keep automatic/background clears ahead of that seed, including standalone
@@ -412,7 +444,6 @@ export class SmokeComposite {
     // only copies level zero, at matching full-size source/destination pixels.
     const colorMipmaps = !!depthConsumer?.color;
     if (!reuseOpaque) this.releaseOpaqueCopy();
-    const remaining = reuseOpaque ? new Set<T.Object3D>() : undefined;
     if (this.target && (this.colorTarget !== !!color || this.colorMipmaps !== colorMipmaps)) {
       this.target.dispose();
       this.target = undefined;
@@ -481,19 +512,7 @@ export class SmokeComposite {
       this.depthCamera.far = color || depthConsumer ? camera.far : Math.min(camera.far, smokeFar);
       this.depthCamera.updateProjectionMatrix();
       if (color) {
-        scene.traverseVisible((object) => {
-          if (!(object instanceof T.Mesh)) return;
-          const materials = Array.isArray(object.material) ? object.material : [object.material];
-          if (
-            color.exclude.has(object) ||
-            materials.some(
-              (material) => material.transparent || depthSamplingMaterials.has(material),
-            )
-          ) {
-            this.hidden.push(object);
-            object.visible = false;
-          }
-        });
+        this.collectOpaque(scene, color.exclude, reuseOpaque);
       } else scene.traverseVisible(this.replaceMaterial);
       renderer.setRenderTarget(this.target);
       renderer.clear();
@@ -508,7 +527,6 @@ export class SmokeComposite {
         shadowNeedsUpdate = renderer.shadowMap.needsUpdate;
         for (const object of this.hidden) {
           object.visible = true;
-          object.traverse((child) => remaining?.add(child));
         }
         this.hidden.length = 0;
         color.setColor(this.target.texture);
@@ -530,12 +548,11 @@ export class SmokeComposite {
         this.copyOpaque(renderer);
         // Layers skip only the captured draw, retaining children (including
         // transparent attachments) and the scene's complete lighting state.
-        scene.traverseVisible((object) => {
-          if (!(object instanceof T.Mesh) || remaining!.has(object)) return;
+        for (const object of this.captureCandidates) {
           this.reusedObjects.push(object);
           this.reusedMasks.push(object.layers.mask);
           object.layers.mask = 0;
-        });
+        }
         const copiedBackground = scene.background;
         scene.background = null;
         try {
@@ -594,6 +611,7 @@ export class SmokeComposite {
       }
       this.cloudParents.length = this.cloudMasks.length = 0;
       this.restoreReusedObjects();
+      this.captureCandidates.length = 0;
     }
   }
 }

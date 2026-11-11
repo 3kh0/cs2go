@@ -945,8 +945,8 @@ export class MultiplayerMatch {
         continue;
       }
       if (!before || !after) continue;
-      const a = before.players.find((p) => p.id === id),
-        b = after.players.find((p) => p.id === id);
+      const a = before.playersById.get(id),
+        b = after.playersById.get(id);
       if (!a || !b) continue;
       this.connection.renderTick = before.tick + (after.tick - before.tick) * timeFraction;
       const t =

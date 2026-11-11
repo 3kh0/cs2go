@@ -236,6 +236,74 @@ test("a temporary acknowledgement stall bounds input and resumes without disconn
   connection.close();
 });
 
+test.each([0, 2 ** 32 - 2])(
+  "ack pruning retains ordered inputs across repeated snapshots (sequence base %i)",
+  (base) => {
+    const { connection, socket, player } = setup();
+    connection.seq = base;
+    for (let i = 0; i < 6; i++) connection.step(neutralInput());
+    const frames = [...connection.pending];
+    const round = { ...createMatch("casual", testMap()).state, phase: "live" as const };
+    const snapshot = (tick: number, ack: number) =>
+      socket.receive({
+        type: "snapshot",
+        tick,
+        players: [{ ...player, ack }],
+        events: [],
+        round,
+      });
+    snapshot(1, base + 2);
+    expect(connection.pending).toEqual(frames.slice(2));
+    snapshot(2, base + 2);
+    snapshot(1, base + 6);
+    snapshot(3, base + 1);
+    expect(connection.pending).toEqual(frames.slice(2));
+    expect(connection.pending[0]).toBe(frames[2]);
+    connection.stopInput();
+    expect(socket.sent.filter((data) => JSON.parse(data).type === "compact-inputs")).toHaveLength(
+      2,
+    );
+    snapshot(4, base + 6);
+    expect(connection.pending).toHaveLength(0);
+    expect(connection.step(neutralInput())).toBe(true);
+    expect(connection.pending[0].seq).toBe(base + 7);
+    connection.stopInput();
+    expect(JSON.parse(socket.sent.at(-2)!).inputs).toHaveLength(1);
+    connection.close();
+  },
+);
+
+test("recovery discards pending and batched inputs before restarting sequence numbers", () => {
+  const { connection, socket, player } = setup();
+  const welcome = {
+    type: "welcome" as const,
+    version: PROTOCOL_VERSION,
+    id: "player",
+    room: "012345",
+    map: "dust2" as const,
+    mode: "casual" as const,
+    resume: "secret-session",
+  };
+  socket.receive(welcome);
+  const round = { ...createMatch("casual", testMap()).state, phase: "live" as const };
+  socket.receive({ type: "snapshot", tick: 1, players: [player], events: [], round });
+  connection.seq = 2 ** 32;
+  connection.step(neutralInput());
+  expect(connection.pending).toHaveLength(1);
+  socket.close(1006, "");
+  expect(connection.pending).toHaveLength(0);
+  expect(connection.batch).toHaveLength(0);
+  vi.advanceTimersByTime(450);
+  const retry = connection.socket as unknown as TestSocket;
+  retry.receive(welcome);
+  retry.receive({ type: "snapshot", tick: 0, players: [player], events: [], round });
+  expect(connection.step(neutralInput())).toBe(true);
+  expect(connection.pending[0].seq).toBe(1);
+  connection.stopInput();
+  expect(JSON.parse(retry.sent[0]).inputs).toHaveLength(1);
+  connection.close();
+});
+
 test("transport interruption retries with the session token and cancels cleanly on leave", () => {
   const { connection, socket } = setup();
   socket.receive({

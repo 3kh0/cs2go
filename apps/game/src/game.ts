@@ -55,7 +55,8 @@ import type { WeaponInspectPreview } from "./weapon-inspect-preview";
 import type { CosmeticPreview } from "./cosmetic-preview";
 import { loadBuyPoses } from "./buy-poses";
 import { loadoutCategory } from "./loadouts";
-import { soldierHit } from "./soldier-hitboxes";
+import { createSoldierHitboxShot, soldierHit } from "./soldier-hitboxes";
+import { nearestWaypointArea } from "./navigation-waypoints";
 import {
   actorCarry,
   actorLanding,
@@ -316,6 +317,7 @@ const names = [
 ].map((name) => `BOT ${name}`);
 const step = 1 / 128;
 const botDesired = new T.Vector2();
+const botMoveVelocity = { x: 0, z: 0 };
 const botAway = new T.Vector2();
 const botAhead = new T.Vector2();
 const botSphere = new T.Sphere();
@@ -3273,6 +3275,7 @@ export class Game {
       inaccuracy,
       w.pellets,
     );
+    const shotHit = offsets.length > 1 ? createSoldierHitboxShot() : soldierHit;
     for (const offset of offsets) {
       const direction = new T.Vector3(offset.x, offset.y, -1)
         .normalize()
@@ -3286,7 +3289,7 @@ export class Game {
       }
       this.bots.forEach((bot, index) => {
         if (bot.health <= 0) return;
-        const hit = soldierHit(bot.rig, this.ray.ray, this.ray.far);
+        const hit = shotHit(bot.rig, this.ray.ray, this.ray.far);
         if (hit)
           surfaces.push(this.bulletBody(index, hit.point, hit.head, this.ray.ray, hit.height));
       });
@@ -5415,6 +5418,7 @@ export class Game {
       inaccuracy,
       weapon.pellets,
     );
+    const shotHit = offsets.length > 1 ? createSoldierHitboxShot() : soldierHit;
     for (const offset of offsets) {
       const shot = new T.Vector3(aimOffset.x + offset.x, aimOffset.y + offset.y, -1)
         .normalize()
@@ -5428,7 +5432,7 @@ export class Game {
       const intersect = (id: number | "player", feet: T.Vector3, crouch = false) => {
         const hit =
           typeof id === "number"
-            ? soldierHit(this.bots[id].rig, ray, caster.far)
+            ? shotHit(this.bots[id].rig, ray, caster.far)
             : botBodyHit(ray, feet, crouch);
         if (!hit) return;
         const surface = this.bulletBody(
@@ -6031,7 +6035,8 @@ export class Game {
       const upcoming = b.path.find(
         (point) => point instanceof T.Vector3 && point.distanceTo(pos) < 1.5,
       );
-      const nextArea = upcoming instanceof T.Vector3 ? nav.areas[nav.nearest(upcoming)] : undefined;
+      const nextArea =
+        upcoming instanceof T.Vector3 ? nav.areas[nearestWaypointArea(nav, upcoming)] : undefined;
       const needsCrouch =
         !!((currentArea?.flags ?? 0) & 0x10000) || !!((nextArea?.flags ?? 0) & 0x10000);
       // Lower before entering a short native NAV polygon. Remain lowered until
@@ -6196,7 +6201,9 @@ export class Game {
           // NAV describes route connectivity, not physical clearance. Sweep the
           // same hull/18-unit stair support as players so steering cannot put
           // a bot through a stair side or land it inside an adjacent wall.
-          const velocity = { x: b.velocity.x, z: b.velocity.y };
+          const velocity = botMoveVelocity;
+          velocity.x = b.velocity.x;
+          velocity.z = b.velocity.y;
           this.world.collision.moveHorizontal(pos, velocity, dt, 0.35, botHeight, b.vertical === 0);
           b.velocity.set(velocity.x, velocity.z);
           if (b.vertical === 0) this.world.collision.followGround(pos, 0.35, botHeight);

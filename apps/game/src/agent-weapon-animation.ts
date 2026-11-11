@@ -21,6 +21,7 @@ export class AgentWeaponAnimation {
   private mixer: T.AnimationMixer;
   private actions = new Map<T.AnimationAction, T.AnimationAction>();
   private active = new Set<T.AnimationAction>();
+  private sampled = false;
   private variants = new Map<T.Object3D, { frame: T.Matrix4; bindings: Binding[] }>();
   private inverse: T.Matrix4;
   private children = -1;
@@ -46,21 +47,34 @@ export class AgentWeaponAnimation {
     this.actions.set(body, action);
   }
   update() {
-    for (const action of this.active) action.setEffectiveWeight(0);
+    let changed = !this.sampled;
     for (const [body, action] of this.actions) {
-      const weight = body.getEffectiveWeight();
-      if (weight <= 0 || !body.isScheduled()) continue;
+      const weight = body.isScheduled() ? body.getEffectiveWeight() : 0;
+      if (weight <= 0) {
+        if (this.active.delete(action)) {
+          action.stop();
+          changed = true;
+        }
+        continue;
+      }
+      if (
+        !this.active.has(action) ||
+        action.time !== body.time ||
+        action.getEffectiveWeight() !== weight
+      )
+        changed = true;
       action.play().setEffectiveWeight(weight);
       action.time = body.time;
       this.active.add(action);
     }
-    for (const action of this.active)
-      if (action.getEffectiveWeight() === 0) {
-        action.stop();
-        this.active.delete(action);
-      }
-    this.mixer.update(0);
-    this.source.updateMatrixWorld(true);
+    // Only this mixer owns the detached source rig. Paused/settled samples can
+    // retain its matrices; targets still follow moving parents and late skins.
+    // Stopping the last action must sample once to restore the original pose.
+    if (changed) {
+      this.mixer.update(0);
+      this.source.updateMatrixWorld(true);
+      this.sampled = true;
+    }
     this.weapon.updateWorldMatrix(true, true);
     if (this.children !== this.weapon.children.length)
       this.weapon.traverse((group) => {

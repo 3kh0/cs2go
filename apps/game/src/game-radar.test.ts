@@ -242,3 +242,47 @@ test("known bomb memory cannot survive a map/round/team knowledge boundary", () 
     expect(a.sample(1).bomb).toBeUndefined();
   }
 });
+
+test("interpolation history resets with explicit reset, time rewind and knowledge changes", () => {
+  const boundaries = [
+    (a: ReturnType<typeof setup>) => a.radar.reset(),
+    (a: ReturnType<typeof setup>) => a.game.round++,
+    (a: ReturnType<typeof setup>) => (a.game.mapId = "mirage"),
+    (a: ReturnType<typeof setup>) => (a.game.mode = "practice"),
+    (_a: ReturnType<typeof setup>) => {},
+  ];
+  for (const [index, boundary] of boundaries.entries()) {
+    const a = setup();
+    a.sample(0);
+    a.game.bots[0].group.position.z = -10.2;
+    a.sample(0.0625);
+    expect(enemies(a.sample(0.09375))[0].position.z).toBeCloseTo(-10.1);
+    boundary(a);
+    a.game.bots[0].group.position.z = -10.4;
+    const now = index === boundaries.length - 1 ? 0.03 : 0.1;
+    expect(enemies(a.sample(now))[0].position.z).toBe(-10.4);
+  }
+});
+
+test("a reacquired contact does not interpolate from an expired observation", () => {
+  const a = setup();
+  a.sample(0);
+  a.game.utility.blind.set("player", 2);
+  expect(enemies(a.sample(4))).toHaveLength(0);
+  a.game.utility.blind.clear();
+  a.game.bots[0].group.position.z = -10.5;
+  expect(enemies(a.sample(4.0625))[0].position.z).toBe(-10.5);
+});
+
+test("each spotting sample refreshes viewer directions for multiple enemies", () => {
+  const a = setup();
+  a.game.bots.push(a.bot("t", 0, 10));
+  expect(enemies(a.sample(0)).map((marker) => marker.id)).toEqual([0]);
+  a.game.yaw = Math.PI;
+  const rotated = enemies(a.sample(0.0625));
+  expect(rotated.find((marker) => marker.id === 0)?.uncertain).toBe(true);
+  expect(rotated.find((marker) => marker.id === 1)?.uncertain).toBe(false);
+  a.game.utility.blind.set("player", 2);
+  const blinded = enemies(a.sample(0.125));
+  expect(blinded.every((marker) => marker.uncertain)).toBe(true);
+});

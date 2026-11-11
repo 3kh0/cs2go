@@ -4,9 +4,11 @@ type Allocation = { gl: WebGL2RenderingContext; buffer: WebGLBuffer; invalidate:
 
 /** Browser transport for map-owned native light records. std140 data stays out
  * of the fragment default-uniform/sampler budgets. The associated native
- * material shader declares one block, whose WebGL default binding is zero;
- * StandardMaterial does not process Three's ShaderMaterial uniformsGroups.
- * Callbacks are synchronous and may nest across main/own-sky worlds. */
+ * standalone shader declares one block, whose WebGL default binding is zero.
+ * This raw fallback requires exclusive point-zero ownership: draw callbacks
+ * must not process Three uniformsGroups or modify indexed UBO bindings/ranges.
+ * Map materials use Three-managed groups instead. Callbacks are synchronous
+ * and may nest across raw main/own-sky worlds. */
 export class NativeLightBuffer {
   private readonly data: Uint8Array;
   private readonly allocations = new Map<T.WebGLRenderer, Allocation>();

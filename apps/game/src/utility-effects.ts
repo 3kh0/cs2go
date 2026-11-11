@@ -1,9 +1,16 @@
 import * as T from "three";
+const FIRE_SWAY = 0.075;
+const BLAST_INITIAL_SIZE = 0.25;
+const BLAST_GROWTH = 2.4;
+const FLOAT32_PADDING = 16 * 2 ** -23;
 /** Bounded procedural flame/dust billboards. Source2 particle graphs are not executed. */
 export class UtilityVisual {
   readonly mesh: T.InstancedMesh;
   private geometry = new T.PlaneGeometry(1, 1);
   private material: T.ShaderMaterial;
+  private bounds = new T.Sphere();
+  private blastCenterRadius: number | undefined;
+  private coordinateMagnitude = 1;
   constructor(kind: "fire" | "blast" | "flash", positions: T.Vector3[]) {
     const fire = kind === "fire",
       count = fire ? positions.length * 3 : 12;
@@ -19,12 +26,12 @@ export class UtilityVisual {
         vec3 p=position;
         ${
           fire
-            ? `p.y+=0.5; p.x+=sin(time*7.0+vPhase+p.y*5.0)*p.y*0.075;
+            ? `p.y+=0.5; p.x+=sin(time*7.0+vPhase+p.y*5.0)*p.y*${FIRE_SWAY};
           vec4 center=modelViewMatrix*instanceMatrix*vec4(0.0,0.0,0.0,1.0);
           center.xy+=p.xy*vec2(length(instanceMatrix[0].xyz),length(instanceMatrix[1].xyz));
           gl_Position=projectionMatrix*center;`
             : `vec4 center=modelViewMatrix*instanceMatrix*vec4(0.0,0.0,0.0,1.0);
-          center.xy+=position.xy*(0.25+time*2.4);gl_Position=projectionMatrix*center;`
+          center.xy+=position.xy*(${BLAST_INITIAL_SIZE}+time*${BLAST_GROWTH});gl_Position=projectionMatrix*center;`
         }}
       `,
       fragmentShader: `uniform float time;uniform float fade;varying vec2 vUv;varying float vPhase;
@@ -47,7 +54,6 @@ export class UtilityVisual {
         }`,
     });
     this.mesh = new T.InstancedMesh(this.geometry, this.material, count);
-    this.mesh.frustumCulled = false;
     const matrix = new T.Matrix4();
     if (fire)
       positions.forEach((p, i) => {
@@ -71,10 +77,60 @@ export class UtilityVisual {
         );
         this.mesh.setMatrixAt(i, matrix);
       }
+
+    // The shader ignores instance rotation and expands vertices in camera space.
+    // Three's ordinary plane bounds therefore miss both billboard orientations
+    // and the animated displacement. Bound the uploaded float32 centers, then
+    // add an orientation-independent radius for every possible shader vertex.
+    // Effect meshes and their parents must retain unit scale: billboard offsets
+    // are in view-space units and deliberately ignore the model's scale.
+    const centers = new T.Box3();
+    const center = new T.Vector3();
+    for (let i = 0; i < count; i++) {
+      this.mesh.getMatrixAt(i, matrix);
+      centers.expandByPoint(center.setFromMatrixPosition(matrix));
+      this.coordinateMagnitude = Math.max(
+        this.coordinateMagnitude,
+        Math.abs(center.x),
+        Math.abs(center.y),
+        Math.abs(center.z),
+      );
+    }
+    centers.getCenter(this.bounds.center);
+    let centerRadius = 0;
+    for (let i = 0; i < count; i++) {
+      this.mesh.getMatrixAt(i, matrix);
+      const distance = center.setFromMatrixPosition(matrix).distanceTo(this.bounds.center);
+      centerRadius = Math.max(centerRadius, distance);
+      // Plane y is shifted to [0,1], making |x| <= 0.5 + FIRE_SWAY.
+      // Column lengths match the shader's per-instance width/height scaling.
+      const extent = fire
+        ? Math.hypot(
+            (0.5 + FIRE_SWAY) * center.setFromMatrixColumn(matrix, 0).length(),
+            center.setFromMatrixColumn(matrix, 1).length(),
+          )
+        : Math.SQRT1_2 * BLAST_INITIAL_SIZE;
+      this.bounds.radius = Math.max(this.bounds.radius, distance + extent);
+    }
+    if (!fire) this.blastCenterRadius = centerRadius;
+    this.bounds.radius = this.paddedRadius(this.bounds.radius);
+    this.mesh.boundingSphere = this.bounds;
+  }
+  private paddedRadius(radius: number) {
+    // Cover float32 shader matrix products/additions versus CPU double bounds,
+    // including cancellation near frustum edges, plus a small absolute margin.
+    return radius + FLOAT32_PADDING * Math.max(this.coordinateMagnitude, radius) + 0.0001;
   }
   update(age: number, fade: number) {
     this.material.uniforms.time.value = age;
     this.material.uniforms.fade.value = fade;
+    if (this.blastCenterRadius !== undefined) {
+      // Follow the actual shader time, including an overshooting final frame;
+      // this remains conservative if gameplay effect lifetimes change.
+      this.bounds.radius = this.paddedRadius(
+        this.blastCenterRadius + Math.SQRT1_2 * Math.abs(BLAST_INITIAL_SIZE + age * BLAST_GROWTH),
+      );
+    }
   }
   dispose() {
     this.mesh.dispose();

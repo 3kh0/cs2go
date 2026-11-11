@@ -305,11 +305,20 @@ const ranges = soundRanges.clips as Record<
   string,
   { volume: number; occlusion: number; curve: number[][] }
 >;
+// Authored curves are immutable; convert their units once rather than for each
+// shot and each bot audibility check. Only shipped clips occupy this cache.
+const clipRanges = new Map<string, SoundRange>(
+  Object.entries(ranges).map(([name, event]) => {
+    const curve = event.curve.map(([x, y]) => [x * 0.0254, y] as const);
+    return [
+      name,
+      { refDistance: 1, maxDistance: curve.at(-1)![0], curve, occlusion: event.occlusion },
+    ];
+  }),
+);
+const defaultRange: SoundRange = { refDistance: 1.5, maxDistance: 35 };
 export function clipSoundRange(name: string): SoundRange {
-  const event = ranges[name];
-  if (!event) return { refDistance: 1.5, maxDistance: 35 };
-  const curve = event.curve.map(([x, y]) => [x * 0.0254, y] as const);
-  return { refDistance: 1, maxDistance: curve.at(-1)![0], curve, occlusion: event.occlusion };
+  return clipRanges.get(name) ?? defaultRange;
 }
 function shotClip(weapon: number, suppressed: boolean) {
   return !suppressed && (weapon === 1 || weapon === 2)
@@ -399,7 +408,7 @@ export class WeaponAudio {
     }
     const source = context.createBufferSource();
     const gain = context.createGain();
-    const panner = context.createStereoPanner();
+    let panner: StereoPannerNode | undefined;
     source.buffer = buffer;
     gain.gain.value =
       (volume / 100) *
@@ -411,13 +420,14 @@ export class WeaponAudio {
             ? 0.65
             : 0.42 / (1 + distance * 0.09)
           : 0.4);
-    panner.pan.value = Math.max(-1, Math.min(1, pan));
     source.connect(gain);
     const disconnectSpatial =
       position && this.spatial
         ? this.spatial.connect(context, gain, this.output || context.destination, position, range)
         : undefined;
     if (!disconnectSpatial) {
+      panner = context.createStereoPanner();
+      panner.pan.value = Math.max(-1, Math.min(1, pan));
       gain.connect(panner).connect(this.output || context.destination);
       if (kind === "shot")
         this.spatial?.connectRoom(context, gain, this.output || context.destination);
@@ -428,7 +438,7 @@ export class WeaponAudio {
       this.voices.delete(source);
       source.disconnect();
       gain.disconnect();
-      panner.disconnect();
+      panner?.disconnect();
       disconnectSpatial?.();
     };
     source.start();

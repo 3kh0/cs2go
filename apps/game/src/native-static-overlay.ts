@@ -82,18 +82,22 @@ export function applyNativeStaticOverlays(
           seconds <= 0)
       )
         throw new Error("Invalid native overlay animation");
-      const clock = { value: 0 };
-      let frame = -1;
-      material.onBeforeRender = (renderer) => {
-        if (frame === renderer.info.render.frame) return;
-        frame = renderer.info.render.frame;
-        clock.value = performance.now() / 1000;
-      };
+      const clock = animation ? { value: 0 } : undefined;
+      if (clock) {
+        let frame = -1;
+        material.onBeforeRender = (renderer) => {
+          if (frame === renderer.info.render.frame) return;
+          frame = renderer.info.render.frame;
+          clock.value = performance.now() / 1000;
+        };
+      }
       const previous = material.onBeforeCompile.bind(material);
       material.onBeforeCompile = (shader, renderer) => {
         previous(shader, renderer);
-        shader.uniforms.nativeOverlayTime = clock;
-        shader.fragmentShader = "uniform float nativeOverlayTime;\n" + shader.fragmentShader;
+        if (clock) {
+          shader.uniforms.nativeOverlayTime = clock;
+          shader.fragmentShader = "uniform float nativeOverlayTime;\n" + shader.fragmentShader;
+        }
         shader.fragmentShader = shader.fragmentShader.replace(
           "#include <map_fragment>",
           `

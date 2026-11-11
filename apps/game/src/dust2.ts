@@ -128,8 +128,10 @@ async function buildNativeMap(
   resources.onDispose(() => physicsResources.dispose());
   const ownModel = async (pending: ReturnType<typeof loadGzipped>) => {
     const asset = await pending;
-    resources.capture(asset.scene);
-    resources.onDispose(() => resources.capture(asset.scene));
+    // Keep late material capture without retaining the GLTF parser and source buffers.
+    const root = asset.scene;
+    resources.capture(root);
+    resources.onDispose(() => resources.capture(root));
     return asset;
   };
   const ownTextures = <Value extends { textures: T.Texture[] }>(value: Value) => {
@@ -555,18 +557,19 @@ async function buildNativeMap(
   }
   if (nativeLighting) applyNativeMapLighting(asset.scene, nativeLighting);
   if (nativeProbes) applyNativeMapProbes(asset.scene, nativeProbes);
+  const movingRenderNames = [
+    ...breakableData.breakables.flatMap((part) => [
+      ...part.renderNames,
+      ...(part.pieces ?? []).flatMap((piece) => piece.renderNames),
+    ]),
+    ...(breakableData.enabledRemainders ?? []).flatMap((part) => part.renderNames),
+  ];
   if (nativeReflections?.volumes.some((volume) => volume.worldToLocal))
     await prepareNativeMapReflections(
       asset.scene,
       nativeReflections,
       doorData.doors,
-      [
-        ...breakableData.breakables.flatMap((part) => [
-          ...part.renderNames,
-          ...(part.pieces ?? []).flatMap((piece) => piece.renderNames),
-        ]),
-        ...(breakableData.enabledRemainders ?? []).flatMap((part) => part.renderNames),
-      ],
+      movingRenderNames,
       { instances: nativeClutter?.instances },
     );
   if (nativeFog) applyNativeMapFog(asset.scene, nativeFog);

@@ -54,6 +54,8 @@ type State = {
   materials: Map<T.Material, T.MeshStandardMaterial>;
   patched: Set<T.Material>;
   owned: Set<T.Material>;
+  reflectionDirty: boolean;
+  reflectionTexture?: T.Texture | null;
   reflections: Map<
     T.MeshStandardMaterial,
     { map: T.Texture | null; intensity: number; rotation: T.Euler }
@@ -111,6 +113,7 @@ function lightingRoot(root: T.Object3D) {
 export function releaseActorLightingMaterials(root: T.Object3D, removed: T.Object3D) {
   const state = actors.get(lightingRoot(root));
   if (!state) return;
+  state.reflectionDirty = true;
   const materials = new Set<T.Material>();
   removed.traverse((object) => {
     if (object instanceof T.Mesh) state.meshes.delete(object);
@@ -154,6 +157,7 @@ function makeState(): State {
     materials: new Map(),
     patched: new Set(),
     owned: new Set(),
+    reflectionDirty: true,
     reflections: new Map(),
   };
 }
@@ -185,6 +189,7 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
       lighting.owned.add(material);
     }
     lighting.patched.add(material);
+    lighting.reflectionDirty = true;
     lighting.reflections.set(material, {
       map: material.envMap,
       intensity: material.envMapIntensity,
@@ -400,6 +405,7 @@ export function updateActorLighting(
   }
   if (state.nativeReflections !== nativeReflections) {
     state.nativeReflections = nativeReflections;
+    state.reflectionDirty = true;
     state.reflectionBinding = nativeReflections
       ? createSourceReflectionBinding(nativeReflections)
       : undefined;
@@ -484,6 +490,12 @@ export function setActorReflection(root: T.Object3D, texture?: T.Texture | null)
   const state = actors.get(root);
   if (!state) return;
   if (state.nativeReflections) texture = null;
+  // Reflection requests run every frame, while PMREMs and registered materials
+  // usually persist. Registration/removal and native-mode changes invalidate
+  // this cache so asynchronously attached cosmetics still receive the binding.
+  if (!state.reflectionDirty && state.reflectionTexture === texture) return;
+  state.reflectionDirty = false;
+  state.reflectionTexture = texture;
   for (const [material, original] of state.reflections) {
     const next = texture === undefined ? original.map : texture;
     if (material.envMap !== next) {

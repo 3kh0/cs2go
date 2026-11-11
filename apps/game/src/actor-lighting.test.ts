@@ -158,6 +158,79 @@ test("pending native reflections suppress studio highlights and restore original
   expect(material.envMapRotation).toEqual(originalRotation);
 });
 
+test("unchanged actor reflections skip material writes and refresh asynchronously registered cosmetics", () => {
+  const root = new T.Group();
+  const studio = new T.Texture();
+  const local = new T.Texture();
+  local.mapping = T.CubeReflectionMapping;
+  const replacement = local.clone();
+  const material = new T.MeshStandardMaterial({ envMap: studio, envMapIntensity: 1.2 });
+  root.add(new T.Mesh(new T.BoxGeometry(), material));
+  registerActorLighting(root);
+  setActorReflection(root, local);
+  const rotationWrite = vi.spyOn(material.envMapRotation, "set");
+  const version = material.version;
+  for (let frame = 0; frame < 20; frame++) setActorReflection(root, local);
+  expect(rotationWrite).not.toHaveBeenCalled();
+  expect(material.version).toBe(version);
+
+  // New glove/skin meshes join an existing actor after their async load.
+  const cosmetic = new T.Group();
+  const cosmeticMaterial = new T.MeshStandardMaterial({ envMapIntensity: 0.7 });
+  cosmeticMaterial.envMapRotation.set(0.1, 0.2, 0.3);
+  const originalRotation = cosmeticMaterial.envMapRotation.clone();
+  cosmetic.add(new T.Mesh(new T.BoxGeometry(), cosmeticMaterial));
+  root.add(cosmetic);
+  registerActorLighting(cosmetic);
+  setActorReflection(root, local);
+  expect(cosmeticMaterial.envMap).toBe(local);
+  expect(cosmeticMaterial.envMapIntensity).toBe(1);
+  expect(cosmeticMaterial.envMapRotation.y).toBe(Math.PI);
+
+  const cosmeticVersion = cosmeticMaterial.version;
+  setActorReflection(root, replacement);
+  expect(cosmeticMaterial.envMap).toBe(replacement);
+  expect(cosmeticMaterial.version).toBe(cosmeticVersion);
+  setActorReflection(root);
+  expect(cosmeticMaterial.envMap).toBeNull();
+  expect(cosmeticMaterial.envMapIntensity).toBe(0.7);
+  expect(cosmeticMaterial.envMapRotation).toEqual(originalRotation);
+  expect(material.envMap).toBe(studio);
+
+  releaseActorLightingMaterials(root, cosmetic);
+  root.remove(cosmetic);
+  setActorReflection(root, null);
+  expect(material.envMapIntensity).toBe(0);
+  expect(cosmeticMaterial.envMapIntensity).toBe(0.7);
+});
+
+test("reflection registration invalidates an already applied default or pending binding", () => {
+  const root = new T.Group();
+  registerActorLighting(root);
+  setActorReflection(root);
+  const source = new T.MeshStandardMaterial({ envMap: new T.Texture(), envMapIntensity: 1.4 });
+  const mesh = new T.Mesh(new T.BoxGeometry(), source);
+  root.add(mesh);
+  registerActorLighting(root, true);
+  const material = mesh.material;
+  expect(material).not.toBe(source);
+  setActorReflection(root);
+  expect(material.envMap).toBe(source.envMap);
+  setActorReflection(root, null);
+  expect(material.envMap).toBeNull();
+
+  const lateMesh = new T.Mesh(new T.BoxGeometry(), source.clone());
+  root.add(lateMesh);
+  registerActorLighting(root, true);
+  setActorReflection(root, null);
+  expect(lateMesh.material.envMap).toBeNull();
+  setActorReflection(root);
+  expect(material.envMap).toBe(source.envMap);
+  expect(material.envMapIntensity).toBe(1.4);
+  expect(lateMesh.material.envMap).toBe(source.envMap);
+  expect(lateMesh.material.envMapIntensity).toBe(1.4);
+});
+
 test("native actor reflections use world-frame box bindings and cannot restore the studio map during cleanup", () => {
   const manifest = JSON.parse(
     readFileSync(
@@ -267,6 +340,19 @@ test("native actor reflections use world-frame box bindings and cannot restore t
     expect(records.slice(0, indoorCount).map((record) => record.index)).toContain(
       reflections.volumes[index].index,
     );
+  const lateMaterial = new T.MeshStandardMaterial({ envMap: studio, envMapIntensity: 0.6 });
+  lateMaterial.envMapRotation.set(0.3, 0.5, 0.7);
+  const lateRotation = lateMaterial.envMapRotation.clone();
+  root.add(new T.Mesh(new T.BoxGeometry(), lateMaterial));
+  registerActorLighting(root);
+  setActorReflection(root, studio);
+  expect(lateMaterial.envMap).toBeNull();
+  expect(lateMaterial.envMapIntensity).toBe(0);
+  // Cleanup caches null while native reflections are active; disabling them
+  // must restore every original material, including late registrations.
   updateActorLighting(root, underpass, undefined, 1 / 60);
   expect(material.envMap).toBe(studio);
+  expect(lateMaterial.envMap).toBe(studio);
+  expect(lateMaterial.envMapIntensity).toBe(0.6);
+  expect(lateMaterial.envMapRotation).toEqual(lateRotation);
 });

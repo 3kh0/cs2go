@@ -280,17 +280,26 @@ export async function loadSourceReflections(
 }
 
 export function sourceReflectionCandidates(bounds: T.Box3, data: SourceReflections) {
-  return data.volumes.flatMap((v, index) => {
-    const lo = [bounds.min.x / 0.0254, -bounds.max.z / 0.0254, bounds.min.y / 0.0254];
-    const hi = [bounds.max.x / 0.0254, -bounds.min.z / 0.0254, bounds.max.y / 0.0254];
-    return v.origin.every(
-      (origin, axis) =>
-        lo[axis] <= (v.worldAABB?.[1][axis] ?? origin + v.max[axis]) &&
-        hi[axis] >= (v.worldAABB?.[0][axis] ?? origin + v.min[axis]),
+  const minX = bounds.min.x / 0.0254;
+  const minY = -bounds.max.z / 0.0254;
+  const minZ = bounds.min.y / 0.0254;
+  const maxX = bounds.max.x / 0.0254;
+  const maxY = -bounds.min.z / 0.0254;
+  const maxZ = bounds.max.y / 0.0254;
+  const candidates: number[] = [];
+  for (let index = 0; index < data.volumes.length; index++) {
+    const v = data.volumes[index];
+    if (
+      minX <= (v.worldAABB?.[1][0] ?? v.origin[0] + v.max[0]) &&
+      maxX >= (v.worldAABB?.[0][0] ?? v.origin[0] + v.min[0]) &&
+      minY <= (v.worldAABB?.[1][1] ?? v.origin[1] + v.max[1]) &&
+      maxY >= (v.worldAABB?.[0][1] ?? v.origin[1] + v.min[1]) &&
+      minZ <= (v.worldAABB?.[1][2] ?? v.origin[2] + v.max[2]) &&
+      maxZ >= (v.worldAABB?.[0][2] ?? v.origin[2] + v.min[2])
     )
-      ? [index]
-      : [];
-  });
+      candidates.push(index);
+  }
+  return candidates;
 }
 
 /** Actor-local uniform window; textures and native cubemap indices remain shared. */

@@ -18,8 +18,9 @@ export async function loadNativeFoliageView(
   resources.external(bundle.lookup);
   if (!bundle.source.model) throw new Error("Native standalone foliage geometry unavailable");
   const asset = await loadGzipped(bundle.source.model, 1);
-  resources.capture(asset.scene);
-  resources.onDispose(() => resources.capture(asset.scene));
+  const root = asset.scene;
+  resources.capture(root);
+  resources.onDispose(() => resources.capture(root));
   // Some native draws consume a COLOR0 input absent from their stored stream.
   // The engine's fallback binding is unobserved. Keep those original map draws
   // visible, and exclude their complete replacement material, including siblings

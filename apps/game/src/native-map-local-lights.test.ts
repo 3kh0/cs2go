@@ -130,3 +130,44 @@ test("native direct-specular-disabled materials retain local diffuse without loc
   expect(m.customProgramCacheKey()).toContain(":false");
   data.dispose();
 });
+
+test("map light groups retain uint count bits and append after existing reflection ownership", () => {
+  const m = material("atlas"),
+    data = light(),
+    reflection = new T.UniformsGroup().setName("NativeSourceReflectionField");
+  const target = m as T.Material & { uniformsGroups?: T.UniformsGroup[] };
+  target.uniformsGroups = [reflection];
+  applyNativeMapLocalLights(new T.Mesh(new T.BoxGeometry(), m), data);
+  expect(target.uniformsGroups).toEqual([reflection, data.group]);
+  const values = data.group.uniforms[0] as T.Uniform<T.Vector4[]>;
+  const uploaded = new Float32Array(values.value.flatMap((value) => value.toArray()));
+  expect(uploaded.every(Number.isFinite)).toBe(true);
+  expect(new Uint32Array(uploaded.buffer)[32]).toBe(1);
+  expect(Array.from(new Uint32Array(uploaded.buffer).subarray(33, 36))).toEqual([0, 0, 0]);
+  let releases = 0;
+  data.group.addEventListener("dispose", () => releases++);
+  m.dispose();
+  expect(releases).toBe(0);
+  data.dispose();
+  data.dispose();
+  expect(releases).toBe(1);
+});
+
+test("prepared held-only maps render without touching raw point-zero ownership", () => {
+  const data = light();
+  applyNativeMapLocalLights(new T.Group(), data);
+  const renderer = {
+    getContext: () => ({
+      isContextLost: () => false,
+      MAX_UNIFORM_BLOCK_SIZE: 1,
+      getParameter: (key: number) => {
+        if (key !== 1) throw new Error("Unexpected binding query");
+        return 16384;
+      },
+    }),
+  } as unknown as T.WebGLRenderer;
+  expect(data.render(renderer, () => "drawn")).toBe("drawn");
+  expect(data.render(renderer, () => "drawn-again")).toBe("drawn-again");
+  data.dispose();
+  expect(() => data.render(renderer, () => {})).toThrow("disposed");
+});

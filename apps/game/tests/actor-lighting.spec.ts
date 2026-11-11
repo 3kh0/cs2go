@@ -30,7 +30,10 @@ test("actor probe shaders render independent light and compensate viewmodel rota
   expect(errors).toEqual([]);
 });
 
-test("native map and every cached viewmodel compile without shader errors", async ({ page }) => {
+test("native map and every cached viewmodel compile without shader errors", async ({
+  page,
+  baseURL,
+}) => {
   const errors: string[] = [],
     external: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -38,7 +41,10 @@ test("native map and every cached viewmodel compile without shader errors", asyn
     if (message.type() === "error") errors.push(message.text());
   });
   page.on("request", (request) => {
-    if (!/^(http:\/\/127\.0\.0\.1:5173|blob:|data:)/.test(request.url()))
+    if (
+      !/^(blob:|data:)/.test(request.url()) &&
+      new URL(request.url()).origin !== new URL(baseURL!).origin
+    )
       external.push(request.url());
   });
   await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));

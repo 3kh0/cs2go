@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import * as T from "three";
-import { PlayerHitboxes } from "./player-hitboxes";
+import { PlayerHitboxes, tracePlayerCapsules } from "./player-hitboxes";
 import { createPlayer } from "./match";
 import { movement } from "./physics";
 import { rayCapsuleInterval } from "./ray-capsule";
@@ -31,6 +31,56 @@ test("capsule intervals retain exact entry/exit through sides, caps and inside s
     { entry: 0, exit: 0.5 },
   );
   expect(rayCapsuleInterval(ray(0.51, 0), a, b, 0.5)).toBeNull();
+});
+
+test("capsule tracing preserves stable hitgroups, connected thickness and independent results", () => {
+  const capsule = (entry: number, exit: number, group: number) => ({
+    start: new T.Vector3(0, 0, -(entry + exit) / 2),
+    end: new T.Vector3(0, 0, -(entry + exit) / 2),
+    radius: (exit - entry) / 2,
+    group,
+  });
+  const probe = new T.Ray(new T.Vector3(), new T.Vector3(0, 0, -1));
+  const tied = [capsule(2, 3, 3), capsule(2, 3, 1)];
+  expect(tracePlayerCapsules(tied, probe)?.group).toBe(3);
+  expect(tracePlayerCapsules(tied.toReversed(), probe)?.group).toBe(1);
+  const shapes = [
+    capsule(8, 9, 4),
+    capsule(3, 5, 2),
+    capsule(2, 3, 1),
+    capsule(5 + 0.5e-6, 6, 3),
+    capsule(6 + 2e-6, 7, 6),
+  ];
+  const first = tracePlayerCapsules(shapes, probe)!;
+  expect(first.distance).toBe(2);
+  expect(first.thickness).toBeCloseTo(4, 12);
+  // Range accepts the capsule entry, retaining its exit beyond the range.
+  expect(tracePlayerCapsules([capsule(2, 4, 1)], probe, 2)?.thickness).toBe(2);
+  expect(tracePlayerCapsules(shapes, probe, 1)).toBeNull();
+  expect(tracePlayerCapsules(shapes, probe, NaN)).toBeNull();
+  const second = tracePlayerCapsules([capsule(4, 5, 2)], probe)!;
+  expect(second).not.toBe(first);
+  expect(second.point).not.toBe(first.point);
+  expect(first.point.toArray()).toEqual([0, 0, -2]);
+  // The public helper also accepts more capsules than the native pose.
+  expect(
+    tracePlayerCapsules(
+      Array.from({ length: 40 }, () => tied[0]),
+      probe,
+    )?.group,
+  ).toBe(3);
+  expect(tracePlayerCapsules([], probe)).toBeNull();
+});
+
+test("capsule interval output scratch preserves the allocating API", () => {
+  const start = new T.Vector3(0, -1, 0),
+    end = new T.Vector3(0, 1, 0),
+    output = { entry: 0, exit: 0 };
+  const expected = rayCapsuleInterval(ray(0, 0), start, end, 0.5);
+  expect(rayCapsuleInterval(ray(0, 0), start, end, 0.5, output)).toBe(output);
+  expect(output).toEqual(expected);
+  expect(rayCapsuleInterval(ray(1, 0), start, end, 0.5, output)).toBeNull();
+  expect(output).toEqual(expected);
 });
 
 test("native head, chest, stomach and limbs replace height slabs and empty movement hull corners", () => {

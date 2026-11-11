@@ -58,6 +58,28 @@ test("missing, skipped, duplicate baselines fail closed; fresh reconnect keyfram
   const fresh = new SnapshotEncoder().encode(snapshot(16));
   expect(decoder.decode(JSON.parse(fresh))).toEqual(JSON.parse(fresh));
 });
+test("primitive updates and undefined deletions retain independent mutable replacements", () => {
+  const encoder = new SnapshotEncoder(),
+    decoder = new SnapshotDecoder(),
+    current = snapshot();
+  const player = current.players[0] as unknown as Record<string, unknown>;
+  decoder.decode(JSON.parse(encoder.encode(current)));
+  player.avatar = null;
+  player.extra = { values: [1] };
+  current.tick += 4;
+  const prior = decoder.decode(JSON.parse(encoder.encode(current))) as Snapshot;
+  (player.extra as { values: number[] }).values.push(2);
+  for (const value of [0, -0, NaN, NaN, 2, false, "界", null]) {
+    player.extraPrimitive = value;
+    player.avatar = undefined;
+    current.tick += 4;
+    const next = decoder.decode(JSON.parse(encoder.encode(current))) as Snapshot;
+    expect(next).toEqual(JSON.parse(JSON.stringify(current)));
+    expect(Object.hasOwn(next.players[0], "avatar")).toBe(false);
+    delete player.avatar;
+  }
+  expect((prior.players[0] as unknown as Record<string, unknown>).extra).toEqual({ values: [1] });
+});
 test("sparse inputs are independent and preserve all actions without accepting invalid values", () => {
   const inputs = [
     neutralInput(1),

@@ -73,29 +73,51 @@ export type HitboxPlayer = Pick<
   "x" | "y" | "z" | "yaw" | "eye" | "weapon" | "vx" | "vz" | "vertical" | "grounded" | "ladder"
 >;
 export type PlayerCapsule = { start: T.Vector3; end: T.Vector3; radius: number; group: number };
+// Traces are synchronous, like rayCapsuleInterval's vector scratch. Only the
+// independently owned hit result escapes; grow for callers with extra shapes.
+let traceEntries = new Float64Array(shapes.length),
+  traceExits = new Float64Array(shapes.length),
+  traceGroups = new Float64Array(shapes.length);
+const traceInterval = { entry: 0, exit: 0 };
 export function tracePlayerCapsules(
   capsules: readonly PlayerCapsule[],
   ray: T.Ray,
   maxDistance = Infinity,
 ) {
-  const intervals = capsules
-    .flatMap((shape) => {
-      const interval = rayCapsuleInterval(ray, shape.start, shape.end, shape.radius);
-      return interval && interval.entry <= maxDistance ? [{ ...interval, group: shape.group }] : [];
-    })
-    .sort((a, b) => a.entry - b.entry);
-  const first = intervals[0];
-  if (!first) return null;
-  let exit = first.exit;
-  for (const interval of intervals)
-    if (interval.entry <= exit + 1e-6) exit = Math.max(exit, interval.exit);
+  if (traceEntries.length < capsules.length) {
+    traceEntries = new Float64Array(capsules.length);
+    traceExits = new Float64Array(capsules.length);
+    traceGroups = new Float64Array(capsules.length);
+  }
+  let count = 0;
+  for (const shape of capsules) {
+    const interval = rayCapsuleInterval(ray, shape.start, shape.end, shape.radius, traceInterval);
+    if (!interval || !(interval.entry <= maxDistance)) continue;
+    let i = count++;
+    // Strict comparison keeps equal-entry hitgroups in the input shape order.
+    while (i > 0 && interval.entry < traceEntries[i - 1]) {
+      traceEntries[i] = traceEntries[i - 1];
+      traceExits[i] = traceExits[i - 1];
+      traceGroups[i] = traceGroups[i - 1];
+      i--;
+    }
+    traceEntries[i] = interval.entry;
+    traceExits[i] = interval.exit;
+    traceGroups[i] = shape.group;
+  }
+  if (!count) return null;
+  const entry = traceEntries[0],
+    group = traceGroups[0];
+  let exit = traceExits[0];
+  for (let i = 1; i < count; i++)
+    if (traceEntries[i] <= exit + 1e-6) exit = Math.max(exit, traceExits[i]);
   return {
-    distance: first.entry,
-    point: ray.at(first.entry, new T.Vector3()),
-    head: first.group === 1,
-    region: region(first.group),
-    group: first.group,
-    thickness: Math.max(0, exit - first.entry),
+    distance: entry,
+    point: ray.at(entry, new T.Vector3()),
+    head: group === 1,
+    region: region(group),
+    group,
+    thickness: Math.max(0, exit - entry),
   };
 }
 /** Native bone-local capsules and exported animation channels, evaluated headlessly.

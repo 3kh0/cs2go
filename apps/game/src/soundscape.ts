@@ -61,6 +61,20 @@ const mapBreakAudio = {
   "map-break-metal": { variants: 3, volume: 1, pitch: 1 },
   "map-break-glass": { variants: 3, volume: 0.699707, pitch: 1 },
 };
+const c4Ranges = new Map<string, SoundRange>(
+  Object.entries(c4Audio).map(([name, event]) => {
+    const curve = event.curve.map(([x, y]) => [x * 0.0254, y] as const);
+    return [
+      name,
+      {
+        refDistance: 1,
+        maxDistance: curve.at(-1)![0],
+        curve,
+        occlusionMix: event.occlusionMix,
+      },
+    ];
+  }),
+);
 function musicStorage() {
   try {
     return localStorage;
@@ -197,7 +211,7 @@ export class Soundscape {
           ? "revolver-prepare"
           : cue === "step"
             ? `step-${surface}-${(this.step++ % 4) + 1}`
-            : ["damage", "death", "gear"].includes(cue)
+            : cue === "damage" || cue === "death" || cue === "gear"
               ? `${cue}-${variant}`
               : cue);
     const buffer = this.buffers.get(name);
@@ -216,9 +230,14 @@ export class Soundscape {
       cue === "utility-flash-explode" ||
       cue === "utility-decoy-explode";
     if (this.voices.size >= 16) {
-      const oldest =
-        [...this.voices].find((voice) => !this.protectedVoices.has(voice)) ??
-        (blast ? this.voices.values().next().value : undefined);
+      let oldest: AudioBufferSourceNode | undefined;
+      for (const voice of this.voices) {
+        if (!this.protectedVoices.has(voice)) {
+          oldest = voice;
+          break;
+        }
+      }
+      oldest ??= blast ? this.voices.values().next().value : undefined;
       if (!oldest) return;
       this.voices.delete(oldest);
       this.protectedVoices.delete(oldest);
@@ -240,15 +259,7 @@ export class Soundscape {
           gain,
           this.effects,
           c4 ? position.clone().setY(position.y + c4.height) : position,
-          playback?.range ??
-            (c4
-              ? {
-                  refDistance: 1,
-                  maxDistance: c4.curve.at(-1)![0] * 0.0254,
-                  curve: c4.curve.map(([x, y]) => [x * 0.0254, y] as const),
-                  occlusionMix: c4.occlusionMix,
-                }
-              : blast),
+          playback?.range ?? c4Ranges.get(name) ?? blast,
         )
       : undefined;
     if (!disconnectSpatial) {

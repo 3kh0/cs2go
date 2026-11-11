@@ -57,6 +57,14 @@ test("native casual render workload with animated actors and overlapping smoke",
     g.scene.traverse((object) => {
       if ("skeleton" in object) skeletons.add((object as import("three").SkinnedMesh).skeleton);
     });
+    // Bodies and carried equipment have distinct palettes. Count both groups
+    // instead of assuming that every actor owns only one skeleton.
+    const bodySkeletons = new Set<import("three").Skeleton>();
+    for (const bot of g.bots)
+      bot.rig.model.traverse((object) => {
+        if ("skeleton" in object)
+          bodySkeletons.add((object as import("three").SkinnedMesh).skeleton);
+      });
     const versions = () =>
       [...skeletons].reduce((sum, skeleton) => sum + (skeleton.boneTexture?.version ?? 0), 0);
     const output = [];
@@ -86,6 +94,10 @@ test("native casual render workload with animated actors and overlapping smoke",
           calls: [] as number[],
           updates: 0,
           paletteUpdates: 0,
+          bodyPaletteUpdates: 0,
+          maxBodyPaletteUpdates: 0,
+          equipmentPaletteUpdates: 0,
+          maxEquipmentPaletteUpdates: 0,
         }));
         const warmup = compare ? 24 : 6;
         const samples = compare ? 96 : 48;
@@ -103,6 +115,9 @@ test("native casual render workload with animated actors and overlapping smoke",
             g.utility.smokeComposite = run.composite;
             const beforeUpdates = sceneUpdates,
               beforeVersions = versions();
+            const paletteVersions = [...skeletons].map(
+              (skeleton) => [skeleton, skeleton.boneTexture?.version ?? 0] as const,
+            );
             g.renderer.info.autoReset = false;
             g.renderer.info.reset();
             const before = performance.now();
@@ -116,6 +131,19 @@ test("native casual render workload with animated actors and overlapping smoke",
               run.calls.push(g.renderer.info.render.calls);
               run.updates += sceneUpdates - beforeUpdates;
               run.paletteUpdates += versions() - beforeVersions;
+              for (const [skeleton, version] of paletteVersions) {
+                const updates = (skeleton.boneTexture?.version ?? 0) - version;
+                if (bodySkeletons.has(skeleton)) {
+                  run.bodyPaletteUpdates += updates;
+                  run.maxBodyPaletteUpdates = Math.max(run.maxBodyPaletteUpdates, updates);
+                } else {
+                  run.equipmentPaletteUpdates += updates;
+                  run.maxEquipmentPaletteUpdates = Math.max(
+                    run.maxEquipmentPaletteUpdates,
+                    updates,
+                  );
+                }
+              }
             }
             g.renderer.info.autoReset = true;
           }
@@ -135,6 +163,12 @@ test("native casual render workload with animated actors and overlapping smoke",
             medianCalls: percentile(run.calls, 0.5),
             sceneUpdatesPerFrame: run.updates / run.cpu.length,
             paletteUpdatesPerFrame: run.paletteUpdates / run.cpu.length,
+            bodySkeletons: bodySkeletons.size,
+            bodyPaletteUpdatesPerFrame: run.bodyPaletteUpdates / run.cpu.length,
+            maxBodyPaletteUpdatesPerFrame: run.maxBodyPaletteUpdates,
+            equipmentSkeletons: skeletons.size - bodySkeletons.size,
+            equipmentPaletteUpdatesPerFrame: run.equipmentPaletteUpdates / run.cpu.length,
+            maxEquipmentPaletteUpdatesPerFrame: run.maxEquipmentPaletteUpdates,
           });
         }
       }
@@ -155,7 +189,14 @@ test("native casual render workload with animated actors and overlapping smoke",
   ).toBe(true);
   for (const result of results.filter((result) => result.implementation === "optimized")) {
     expect(result.sceneUpdatesPerFrame).toBe(1);
-    expect(result.paletteUpdatesPerFrame).toBeLessThanOrEqual(result.actors);
+    expect(result.bodySkeletons).toBe(result.actors);
+    expect(result.bodyPaletteUpdatesPerFrame).toBeGreaterThan(0);
+    expect(result.bodyPaletteUpdatesPerFrame).toBeLessThanOrEqual(result.bodySkeletons);
+    expect(result.maxBodyPaletteUpdatesPerFrame).toBeLessThanOrEqual(1);
+    expect(result.equipmentSkeletons).toBeGreaterThan(0);
+    expect(result.equipmentPaletteUpdatesPerFrame).toBeGreaterThan(0);
+    expect(result.equipmentPaletteUpdatesPerFrame).toBeLessThanOrEqual(result.equipmentSkeletons);
+    expect(result.maxEquipmentPaletteUpdatesPerFrame).toBeLessThanOrEqual(1);
   }
   expect(errors).toEqual([]);
 });

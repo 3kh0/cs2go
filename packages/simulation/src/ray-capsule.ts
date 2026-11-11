@@ -5,7 +5,13 @@ const axis = new Vector3(),
   nearest = new Vector3();
 /** Exact forward interval through a finite cylinder and its two hemispherical caps.
  * Input rays use unit directions; inside starts retain a zero entry distance. */
-export function rayCapsuleInterval(ray: Ray, start: Vector3, end: Vector3, radius: number) {
+export function rayCapsuleInterval(
+  ray: Ray,
+  start: Vector3,
+  end: Vector3,
+  radius: number,
+  out?: { entry: number; exit: number },
+) {
   axis.subVectors(end, start);
   offset.subVectors(ray.origin, start);
   const length = axis.lengthSq(),
@@ -44,7 +50,11 @@ export function rayCapsuleInterval(ray: Ray, start: Vector3, end: Vector3, radiu
       accept(-b + Math.sqrt(d));
     }
   }
-  return Number.isFinite(entry) && exit >= entry ? { entry, exit } : null;
+  if (!Number.isFinite(entry) || exit < entry) return null;
+  const interval = out ?? { entry: 0, exit: 0 };
+  interval.entry = entry;
+  interval.exit = exit;
+  return interval;
 }
 export function rayCapsule(ray: Ray, start: Vector3, end: Vector3, radius: number) {
   return rayCapsuleInterval(ray, start, end, radius)?.entry ?? Infinity;
