@@ -259,6 +259,8 @@ export function applyNativeMapFoliage(
     windState: SourceFoliageWindState;
     /** Explicit local bounds including authored placements and wind envelope. */
     instanceBounds?: ReadonlyMap<T.InstancedMesh, T.Sphere>;
+    /** Ordinary sidecars admitted with their complete shader-wind envelope. */
+    meshBounds?: ReadonlyMap<T.Mesh, T.Sphere>;
   },
 ) {
   const frame =
@@ -289,6 +291,18 @@ export function applyNativeMapFoliage(
     prepassAA = { value: false };
   root.traverse((object) => {
     if (!(object instanceof T.Mesh)) return;
+    const meshBounds = !(object instanceof T.InstancedMesh) && options.meshBounds?.get(object);
+    if (meshBounds) {
+      if (
+        !Number.isFinite(meshBounds.radius) ||
+        meshBounds.radius < 0 ||
+        meshBounds.center.toArray().some((value) => !Number.isFinite(value))
+      )
+        throw new Error("Invalid conservative native foliage mesh bounds");
+      // Frustum.intersectsObject supports object-owned spheres before geometry
+      // bounds. Keep wind padding separate from shared exported geometry.
+      (object as T.Mesh & { boundingSphere: T.Sphere }).boundingSphere = meshBounds.clone();
+    }
     if (object instanceof T.InstancedMesh) {
       // Current authored clutter has one BYTE3 tint palette per group. Resolve
       // that palette through the existing native material tint path, not Three's
@@ -665,13 +679,16 @@ transformedNormal=-transformedNormal;
         instanceDepthViews.add(depthMesh);
       }
       depthMesh.matrixAutoUpdate = false;
+      if (meshBounds)
+        (depthMesh as T.Mesh & { boundingSphere: T.Sphere }).boundingSphere = meshBounds.clone();
       depthMesh.frustumCulled =
-        object instanceof T.InstancedMesh && !!options.instanceBounds?.has(object);
+        !!meshBounds ||
+        (object instanceof T.InstancedMesh && !!options.instanceBounds?.has(object));
       depthScene.add(depthMesh);
       depthPairs.push({ source: object, depth: depthMesh });
     }
     object.frustumCulled =
-      object instanceof T.InstancedMesh && !!options.instanceBounds?.has(object);
+      !!meshBounds || (object instanceof T.InstancedMesh && !!options.instanceBounds?.has(object));
     if (shadowFlags.some(Boolean) && !shadowFlags.every(Boolean))
       throw new Error("Mixed native foliage shadow policy requires primitive split");
     sourceSunCaster(object, animatedCaster);
@@ -721,8 +738,8 @@ transformedNormal=-transformedNormal;
             pair.depth.boundingSphere ??= new T.Sphere();
             pair.depth.boundingSphere.copy(pair.source.boundingSphere);
           }
-          pair.depth.frustumCulled = pair.source.frustumCulled;
         }
+        pair.depth.frustumCulled = pair.source.frustumCulled;
         let visible = true;
         for (let p: T.Object3D | null = pair.source; p; p = p.parent) visible &&= p.visible;
         pair.depth.visible = visible;

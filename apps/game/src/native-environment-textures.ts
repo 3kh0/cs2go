@@ -62,16 +62,32 @@ export function createEnvironmentTextureBanks(
   const bindings: EnvironmentTextureBanks = new Map();
   const arrays: T.CompressedArrayTexture[] = [];
   let bytes = 0;
-  for (const group of groups.values())
-    for (let start = 0; start < group.length; start += maxLayers) {
-      const entries = group.slice(start, start + maxLayers);
-      if (entries.length < 2) continue;
-      const source = entries[0][1],
-        original = entries[0][2];
+  for (const group of groups.values()) {
+    // Native sharing has already verified every mip byte before unifying both
+    // identities. Resource aliases need only one array layer; a shared source
+    // alone is insufficient because a wrapper can replace its mip list.
+    const shared = new Map<T.Texture["source"], Map<Mip[], typeof group>>();
+    const layers: (typeof group)[] = [];
+    for (const entry of group) {
+      let sources = shared.get(entry[1].source);
+      if (!sources) shared.set(entry[1].source, (sources = new Map()));
+      let aliases = sources.get(entry[2]);
+      if (!aliases) {
+        aliases = [];
+        sources.set(entry[2], aliases);
+        layers.push(aliases);
+      }
+      aliases.push(entry);
+    }
+    for (let start = 0; start < layers.length; start += maxLayers) {
+      const entries = layers.slice(start, start + maxLayers);
+      if (entries.length === 1 && entries[0].length === 1) continue;
+      const source = entries[0][0][1],
+        original = entries[0][0][2];
       const mips = original.map((mip, level) => {
         const data = new Uint8Array(mip.data.byteLength * entries.length);
-        for (const [layer, [, , originalMips]] of entries.entries())
-          data.set(originalMips[level].data, layer * mip.data.byteLength);
+        for (const [layer, aliases] of entries.entries())
+          data.set(aliases[0][2][level].data, layer * mip.data.byteLength);
         bytes += data.byteLength;
         return { data, width: mip.width, height: mip.height };
       });
@@ -94,8 +110,8 @@ export function createEnvironmentTextureBanks(
       texture.needsUpdate = true;
       const name = `environmentBank${arrays.length}`;
       arrays.push(texture);
-      entries.forEach((entry, layer) => {
-        const [id, originalTexture, originalMips] = entry;
+      entries.forEach((aliases, layer) => {
+        const originalMips = aliases[0][2];
         const views = mips.map((mip, level) => ({
           width: mip.width,
           height: mip.height,
@@ -107,14 +123,18 @@ export function createEnvironmentTextureBanks(
         // The bank is the sole CPU byte owner. Keep exact per-texture views
         // available for optional depth/inspection without retaining another
         // complete fetched ArrayBuffer beside the concatenated native bank.
-        detachNativeTexture(originalTexture, true);
-        originalTexture.mipmaps = views;
-        entry[2] = views;
-        if (originalTexture instanceof T.DataTexture)
-          originalTexture.image = { ...originalTexture.image, data: views[0].data };
-        bindings.set(id, { name, layer, texture });
+        for (const entry of aliases) {
+          const [id, originalTexture] = entry;
+          detachNativeTexture(originalTexture, true);
+          originalTexture.mipmaps = views;
+          entry[2] = views;
+          if (originalTexture instanceof T.DataTexture)
+            originalTexture.image = { ...originalTexture.image, data: views[0].data };
+          bindings.set(id, { name, layer, texture });
+        }
       });
     }
+  }
   return { bindings, arrays, bytes };
 }
 const literal = (value: number) => (Number.isInteger(value) ? `${value}.0` : `${value}`);

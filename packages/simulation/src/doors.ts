@@ -84,6 +84,8 @@ type Entry = {
   pivot: T.Vector3;
   axis: T.Vector3;
   center: T.Vector3;
+  currentBounds: T.Box3;
+  currentBoundsKnown: boolean;
   meshes: T.Mesh[];
   closed: T.Matrix4[];
   stages: { meshes: T.Mesh[]; closed: T.Matrix4[] }[];
@@ -280,6 +282,8 @@ export class DoorWorld {
         pivot: new T.Vector3(...definition.pivot),
         axis,
         center: bounds.getCenter(new T.Vector3()),
+        currentBounds: new T.Box3(),
+        currentBoundsKnown: false,
         meshes,
         closed,
         stages,
@@ -292,6 +296,8 @@ export class DoorWorld {
   }
   private pose(entry: Entry) {
     const { pivot, axis, state } = entry;
+    entry.currentBounds.makeEmpty();
+    entry.currentBoundsKnown = true;
     for (const name of doorPhysicsNames(entry.definition))
       this.collision.setStaticMeshEnabled(name, false);
     if (nativeDoorDestroyed(entry.definition, state)) {
@@ -314,12 +320,51 @@ export class DoorWorld {
       mesh.matrix.multiplyMatrices(this.delta, entry.closed[index]);
       mesh.matrixWorld.copy(mesh.matrix);
       mesh.userData.nativeDoorId = entry.definition.id;
+      // Sample the same transformed Float32 positions as MapCollision. Bounds
+      // may include unused vertices, but must never exclude a current leaf.
+      // This only runs when its pose/stage changes, not on interaction queries.
+      const positions = mesh.geometry.getAttribute("position"),
+        e = mesh.matrixWorld.elements;
+      if (!positions) {
+        entry.currentBoundsKnown = false;
+        continue;
+      }
+      for (let i = 0; i < positions.count; i++) {
+        const x = positions.getX(i),
+          y = positions.getY(i),
+          z = positions.getZ(i),
+          w = 1 / (e[3] * x + e[7] * y + e[11] * z + e[15]),
+          wx = Math.fround((e[0] * x + e[4] * y + e[8] * z + e[12]) * w),
+          wy = Math.fround((e[1] * x + e[5] * y + e[9] * z + e[13]) * w),
+          wz = Math.fround((e[2] * x + e[6] * y + e[10] * z + e[14]) * w);
+        if (!Number.isFinite(wx + wy + wz)) {
+          entry.currentBoundsKnown = false;
+          continue;
+        }
+        const { min, max } = entry.currentBounds;
+        min.set(Math.min(min.x, wx), Math.min(min.y, wy), Math.min(min.z, wz));
+        max.set(Math.max(max.x, wx), Math.max(max.y, wy), Math.max(max.z, wz));
+      }
     }
+    if (!entry.currentBounds.isEmpty()) entry.currentBounds.expandByScalar(1e-5);
     for (const name of doorPhysicsNames(entry.definition))
       this.collision.setStaticMeshEnabled(name, false);
     this.collision.setDynamicMeshes(`door:${entry.definition.id}`, entry.meshes);
   }
   target(from: T.Vector3, direction: T.Vector3) {
+    // Bots ask every movement tick. Most are nowhere near a door: avoid a
+    // full-world ray only when every current leaf is provably out of range.
+    // Nearby/unknown bounds keep the original first-hit occlusion query.
+    let nearby = false;
+    for (const entry of this.entries.values())
+      if (
+        !entry.currentBoundsKnown ||
+        !(entry.currentBounds.distanceToPoint(from) > DOOR_USE_DISTANCE)
+      ) {
+        nearby = true;
+        break;
+      }
+    if (!nearby) return undefined;
     const impact = this.collision.intersections(new T.Ray(from, direction), DOOR_USE_DISTANCE)[0];
     let object: T.Object3D | null = impact?.object ?? null;
     while (object) {

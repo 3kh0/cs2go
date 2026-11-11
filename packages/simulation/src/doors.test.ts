@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import * as T from "three";
 import { DoorWorld, bindDoorPhysics, DOOR_USE_DISTANCE, type NativeDoorDefinition } from "./doors";
 import { MapCollision } from "./map-collision";
@@ -71,6 +71,92 @@ test("use is bounded by range, cover, locks, and objective/pickup arbitration", 
   const locked = fixture({ locked: true }).world;
   expect(locked.use("p", true, from, direction)).toBe(false);
   expect(locked.states[0].target).toBe(0);
+});
+
+test("distant bot door requests avoid world rays while nearby queries retain exact cover and range", () => {
+  const { world, collision } = fixture();
+  const intersections = vi.spyOn(collision, "intersections");
+  for (const origin of [
+    new T.Vector3(30, 1, 0),
+    new T.Vector3(1, 30, 0),
+    new T.Vector3(1, 1, -30),
+  ]) {
+    expect(world.target(origin, direction)).toBeUndefined();
+    expect(world.openAhead(origin, direction)).toBe(false);
+  }
+  expect(intersections).not.toHaveBeenCalled();
+  const front = Math.fround(0.06);
+  expect(world.target(new T.Vector3(1, 1, front + DOOR_USE_DISTANCE - 1e-7), direction)).toBe(
+    "door",
+  );
+  expect(intersections).toHaveBeenCalledTimes(1);
+  // A conservative bound admits nearby rays even when they point away.
+  expect(world.target(from, direction.clone().negate())).toBeUndefined();
+  expect(intersections).toHaveBeenCalledTimes(2);
+  const blocker = new T.Mesh(new T.BoxGeometry(2, 2, 0.1));
+  blocker.position.set(1, 1, 0.6);
+  blocker.updateMatrixWorld(true);
+  collision.setDynamicMeshes("blocker", [blocker]);
+  expect(world.target(from, direction)).toBeUndefined();
+  expect(intersections).toHaveBeenCalledTimes(3);
+  collision.removeDynamicMeshes("blocker");
+  expect(world.openAhead(from, direction)).toBe(true);
+  expect(intersections).toHaveBeenCalledTimes(4);
+});
+
+test("door interaction bounds follow swinging, restoration, reset and obstruction rollback", () => {
+  const { world, collision } = fixture();
+  const rotatedFrom = new T.Vector3(-1, 1, -1.9),
+    rotatedDirection = new T.Vector3(1, 0, 0);
+  const intersections = vi.spyOn(collision, "intersections");
+  expect(world.target(rotatedFrom, rotatedDirection)).toBeUndefined();
+  expect(intersections).not.toHaveBeenCalled();
+  world.openAhead(from, direction);
+  advance(world, 0.5);
+  expect(world.target(rotatedFrom, rotatedDirection)).toBe("door");
+  const snapshot = structuredClone(world.states);
+  world.reset();
+  intersections.mockClear();
+  expect(world.target(rotatedFrom, rotatedDirection)).toBeUndefined();
+  expect(intersections).not.toHaveBeenCalled();
+  world.restore(snapshot);
+  expect(world.target(rotatedFrom, rotatedDirection)).toBe("door");
+  world.use("p", true, rotatedFrom, rotatedDirection);
+  // The blocked closing attempt restores both the collision pose and bounds.
+  advance(world, 0.5, [{ x: 1, y: 0, z: -0.1, height: 1.65 }]);
+  const origin = new T.Vector3(1, 1, -1),
+    aim = new T.Vector3(-1, 0, 0);
+  const expected = collision.intersections(new T.Ray(origin, aim), DOOR_USE_DISTANCE)[0];
+  const actual = world.target(origin, aim);
+  expect(actual).toBe(expected?.object.userData.nativeDoorId);
+});
+
+test("any nearby current leaf retains the world query regardless of definition order", () => {
+  const { mesh, definition } = fixture();
+  const distant = mesh.clone();
+  distant.name = "distant";
+  distant.position.x = 50;
+  const root = new T.Group();
+  root.add(distant, mesh);
+  const definitions: NativeDoorDefinition[] = [
+    {
+      ...definition,
+      id: "distant",
+      pivot: [50, 0, 0],
+      physicsNames: ["distant"],
+      renderNames: ["distant"],
+    },
+    definition,
+  ];
+  const physics = bindDoorPhysics(root, definitions),
+    collision = new MapCollision([distant, mesh]),
+    world = new DoorWorld(collision, definitions, physics),
+    intersections = vi.spyOn(collision, "intersections");
+  expect(world.target(from, direction)).toBe("door");
+  expect(world.target(new T.Vector3(51, 1, 1), direction)).toBe("distant");
+  expect(intersections).toHaveBeenCalledTimes(2);
+  expect(world.target(new T.Vector3(25, 1, 1), direction)).toBeUndefined();
+  expect(intersections).toHaveBeenCalledTimes(2);
 });
 
 test("both-way doors swing away while explicit one-way direction wins", () => {
@@ -250,6 +336,32 @@ function damageFixture(destroyOnZero = false) {
   const world = new DoorWorld(collision, [definition], physics);
   return { world, collision, definition, physics };
 }
+
+test("interaction range follows damaged remnants, terminal destruction and restored stages", () => {
+  for (const destroy of [false, true]) {
+    const { world, collision } = damageFixture(destroy);
+    const intersections = vi.spyOn(collision, "intersections");
+    const side = new T.Vector3(3, 1, 0),
+      toward = new T.Vector3(-1, 0, 0),
+      hinge = new T.Vector3(0.075, 1, 1);
+    expect(world.target(side, toward)).toBe("damage");
+    const intact = structuredClone(world.states);
+    world.damage("damage", 100, "explosion");
+    intersections.mockClear();
+    // The old intact leaf was in range; the surviving hinge is not.
+    expect(world.target(side, toward)).toBeUndefined();
+    expect(intersections).not.toHaveBeenCalled();
+    expect(world.target(hinge, direction)).toBe(destroy ? undefined : "damage");
+    expect(intersections).toHaveBeenCalledTimes(destroy ? 0 : 1);
+    world.restore(intact);
+    expect(world.target(side, toward)).toBe("damage");
+    world.damage("damage", 1, "bullet");
+    // A hole in a nearby damaged frame still needs exact triangle occlusion.
+    expect(world.target(from, direction)).toBeUndefined();
+    world.reset();
+    expect(world.target(from, direction)).toBe("damage");
+  }
+});
 
 test("authored damage stages swap exact holed collision without losing hinge motion or terminal residue", () => {
   const { world, collision } = damageFixture();

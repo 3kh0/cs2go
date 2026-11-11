@@ -5,6 +5,7 @@ import {
   createEnvironmentTextureBanks,
 } from "./native-environment-textures";
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
+import { shareNativeTexture } from "./native-texture-sharing";
 
 const compressed = (byte: number, srgb = false, width = 8) => {
   const mips = [
@@ -52,6 +53,66 @@ test("banks never merge incompatible color spaces, dimensions, filter states or 
   expect(
     createEnvironmentTextureBanks(new Map(Object.entries({ a, b, c, d, e })), 256).arrays,
   ).toHaveLength(0);
+});
+test("byte-verified aliases share array layers before applying the GPU layer limit", () => {
+  const a = compressed(23),
+    b = compressed(23),
+    c = compressed(71),
+    d = compressed(71);
+  for (const texture of [a, b]) shareNativeTexture(texture, "environment-bank-alias-a");
+  for (const texture of [c, d]) shareNativeTexture(texture, "environment-bank-alias-c");
+  expect(a.source).toBe(b.source);
+  expect(a.mipmaps).toBe(b.mipmaps);
+  const before = [a, c].map((texture) =>
+    texture.mipmaps.map((mip) => (mip.data as Uint8Array).slice()),
+  );
+  const { arrays, bindings, bytes } = createEnvironmentTextureBanks(
+    new Map(Object.entries({ d, b, a, c })),
+    2,
+  );
+  expect(arrays).toHaveLength(1);
+  expect(arrays[0].image.depth).toBe(2);
+  expect(bytes).toBe(160);
+  for (const [ids, layer] of [
+    ["ab", 0],
+    ["cd", 1],
+  ] as const) {
+    for (const id of ids) {
+      const binding = bindings.get(id)!;
+      expect(binding.texture).toBe(arrays[0]);
+      expect(binding.layer).toBe(layer);
+      for (let mip = 0; mip < 2; mip++) {
+        const wanted = before[layer][mip];
+        const bank = binding.texture.mipmaps[mip].data as Uint8Array;
+        expect(bank.slice(layer * wanted.length, (layer + 1) * wanted.length)).toEqual(wanted);
+      }
+    }
+  }
+  expect(a.mipmaps).toBe(b.mipmaps);
+  expect(c.mipmaps).toBe(d.mipmaps);
+});
+test("a sole verified alias layer remains banked but a diverged mip list stays independent", () => {
+  const a = compressed(31),
+    b = compressed(31);
+  for (const texture of [a, b]) shareNativeTexture(texture, "environment-bank-single-alias");
+  const packed = createEnvironmentTextureBanks(new Map(Object.entries({ a, b })), 1);
+  expect(packed.arrays).toHaveLength(1);
+  expect(packed.arrays[0].image.depth).toBe(1);
+  expect(packed.bytes).toBe(80);
+  expect(packed.bindings.get("a")).toEqual(packed.bindings.get("b"));
+
+  const c = compressed(41),
+    d = compressed(41);
+  for (const texture of [c, d]) shareNativeTexture(texture, "environment-bank-diverged-alias");
+  d.mipmaps = d.mipmaps.map((mip) => ({
+    ...mip,
+    data: new Uint8Array(mip.data.byteLength).fill(92),
+  }));
+  expect(c.source).toBe(d.source);
+  const diverged = createEnvironmentTextureBanks(new Map(Object.entries({ c, d })), 2);
+  expect(diverged.arrays[0].image.depth).toBe(2);
+  expect(diverged.bytes).toBe(160);
+  expect(diverged.bindings.get("c")?.layer).not.toBe(diverged.bindings.get("d")?.layer);
 });
 test("sampler aliases retain independent native UV reads and verified constants retain authored LOD dimensions", () => {
   const textures = new Map([

@@ -3,6 +3,7 @@ import { createAuthoredWind } from "./native-authored-wind";
 import { loadGzipped } from "./gltf";
 import { MapResources } from "./map-resources";
 import { applyNativeMapFoliage, loadNativeMapFoliage } from "./native-map-foliage";
+import { createNativeFoliageBounds } from "./native-foliage-bounds";
 
 /** A map-owned sidecar preserves the source's FLOAT4 controls. Its coverage
  * pass must run before every opaque color/depth consumer, including smoke. */
@@ -49,7 +50,18 @@ export async function loadNativeFoliageView(
       ? new T.Matrix4().fromArray(bundle.source.frame.ownBrowserFromBrowserWorld)
       : undefined,
   });
-  const view = applyNativeMapFoliage(asset.scene, bundle, { windState: wind.state });
+  const bounds = createNativeFoliageBounds(
+    root,
+    bundle.materials,
+    bundle.source.controllers ?? [],
+    bundle.source.frame
+      ? new T.Matrix4().fromArray(bundle.source.frame.ownBrowserFromBrowserWorld)
+      : undefined,
+  );
+  const view = applyNativeMapFoliage(asset.scene, bundle, {
+    windState: wind.state,
+    meshBounds: bounds.bounds,
+  });
   resources.onDispose(() => view.dispose());
   return {
     root: asset.scene,
@@ -64,6 +76,7 @@ export async function loadNativeFoliageView(
       const autoClear = renderer.autoClear;
       try {
         renderer.autoClear = false;
+        bounds.update();
         view.syncDepth(renderer);
         renderer.render(view.depthScene, camera);
       } finally {
@@ -72,6 +85,7 @@ export async function loadNativeFoliageView(
     },
     prepare(camera: T.PerspectiveCamera) {
       renderer.initTexture(bundle.noise);
+      bounds.update();
       view.syncDepth(renderer);
       return renderer.compileAsync(view.depthScene, camera);
     },

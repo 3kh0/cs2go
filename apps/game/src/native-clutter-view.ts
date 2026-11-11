@@ -152,9 +152,18 @@ export async function loadNativeClutterView(
   );
   const view = createNativeClutter(fields, bytes, templates, field, resources, placement),
     frame = createEnvironmentWorldFrame(worldToNative);
+  // Tile spheres already include every authored instance and the complete
+  // local wind envelope. Keep those local-space bounds when the foliage
+  // adapter creates its color/depth views; placement is applied by matrixWorld.
+  const instanceBounds = new Map<T.InstancedMesh, T.Sphere>();
+  view.foliage.traverse((object) => {
+    if (object instanceof T.InstancedMesh && object.boundingSphere)
+      instanceBounds.set(object, object.boundingSphere.clone());
+  });
   const foliage = applyNativeMapFoliage(view.foliage, foliageBundle, {
     sourceWorldFrame: frame,
     windState: wind.state,
+    instanceBounds,
   });
   resources.onDispose(() => foliage.dispose());
   if (environmentBundle)

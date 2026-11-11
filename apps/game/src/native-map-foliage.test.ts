@@ -116,11 +116,27 @@ it("shares one owned coverage material across source instances and preserves no-
       noise,
       source: { model: "controlled", noise: "controlled" },
     },
-    { windState: { direction: [1, 0, 0], strength: 1, timeSeconds: 0 } },
+    {
+      windState: { direction: [1, 0, 0], strength: 1, timeSeconds: 0 },
+      meshBounds: new Map([[a, new T.Sphere(new T.Vector3(), 9)]]),
+    },
   );
   expect(view.depthScene.children).toHaveLength(2);
   const depth = (view.depthScene.children[0] as T.Mesh).material;
   expect((view.depthScene.children[1] as T.Mesh).material).toBe(depth);
+  const bounded = a as typeof a & { boundingSphere: T.Sphere },
+    boundedDepth = view.depthScene.children[0] as T.Mesh & { boundingSphere: T.Sphere };
+  expect(a.frustumCulled).toBe(true);
+  expect(b.frustumCulled).toBe(false);
+  expect(boundedDepth.boundingSphere).toEqual(bounded.boundingSphere);
+  expect(boundedDepth.boundingSphere).not.toBe(bounded.boundingSphere);
+  geometry.computeBoundingSphere();
+  expect(geometry.boundingSphere!.radius).toBeLessThan(1);
+  view.syncDepth();
+  expect(boundedDepth.frustumCulled).toBe(true);
+  a.frustumCulled = false;
+  view.syncDepth();
+  expect(boundedDepth.frustumCulled).toBe(false);
   a.castShadow = b.castShadow = true;
   view.applyShadowPolicy();
   expect(a.castShadow).toBe(false);
