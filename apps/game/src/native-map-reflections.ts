@@ -151,6 +151,7 @@ function* nativeMapReflectionSteps(
             nativeFamily,
             instanceCandidates,
             instanceField: instanceCandidates,
+            packedUniforms: !instanceCandidates,
             ...(frame
               ? {
                   worldPosition:
@@ -165,7 +166,7 @@ function* nativeMapReflectionSteps(
         );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-world-reflections:${data.cubeSize}:${data.arraySplit}:${data.combined}:${!!data.volumes[0]?.worldToLocal}:${binding.uniforms.length}:${!!options.worldToNative}:${nativeFamily ?? "legacy"}:${instanceCandidates}:ubo13`;
+        `${key}:native-world-reflections:${data.cubeSize}:${data.arraySplit}:${data.combined}:${!!data.volumes[0]?.worldToLocal}:${binding.uniforms.length}:${!!options.worldToNative}:${nativeFamily ?? "legacy"}:${instanceCandidates}:${instanceCandidates ? "ubo13" : "packed-default-v1"}`;
       material.needsUpdate = true;
       materials.set(selection, material);
       return material;

@@ -696,7 +696,11 @@ transformedNormal=-transformedNormal;
           material.alphaToCoverage = aa;
           material.needsUpdate = true;
         }
-      root.updateWorldMatrix(true, true);
+      // Main-map architecture owns frozen world matrices, including foliage.
+      // Three cannot change those matrices in this traversal; retain the walk
+      // only for sources whose world transforms are still managed by Three.
+      if (depthPairs.some((pair) => pair.source.matrixWorldAutoUpdate))
+        root.updateWorldMatrix(true, true);
       for (const pair of depthPairs) {
         pair.depth.matrix.copy(pair.source.matrixWorld);
         pair.depth.matrixWorldNeedsUpdate = true;

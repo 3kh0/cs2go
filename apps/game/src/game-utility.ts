@@ -767,7 +767,7 @@ export class GameUtility {
       const center = this.actorCenter.copy(position);
       center.y += 0.8;
       const distance = center.distanceTo(effect.position);
-      if (distance > radius || !g.visible(effect.position, center)) return;
+      if (distance > radius) return;
       if (
         fixedDamage &&
         (effect.kind === "molotov" || effect.kind === "incendiary") &&
@@ -779,6 +779,9 @@ export class GameUtility {
           ))
       )
         return;
+      // Nearby actors outside the actual flame spread cannot take fire damage;
+      // reject them before tracing through map geometry.
+      if (!g.visible(effect.position, center)) return;
       let damage = fixedDamage || heDamage(distance);
       if (g.teamMode)
         damage *= utilityDamageScale(

@@ -2,6 +2,7 @@ import * as T from "three";
 import { nativeWaterReflectionNormalGLSL } from "./native-water-reflection-normal";
 import { assetFetch } from "./asset-url";
 import { fetchGzipped } from "./gltf";
+import { packSourceReflectionRecords } from "./source-reflection-field";
 
 // Dust's legacy path follows VRF 5564866 envmap.slang/envmap_data.slang.
 // Mirage's 8.2 path follows VRF 20.1 (9e2e6c7) environment.slang/SceneEnvMap.cs.
@@ -436,9 +437,14 @@ export function applySourceReflections(
     instanceCandidates?: boolean;
     /** Complete records in one std140 block instead of default uniforms. */
     instanceField?: boolean;
+    /** Immutable static windows use one default vec4-array upload. */
+    packedUniforms?: boolean;
   } = {},
 ) {
   const affine = data.volumes.some((volume) => volume.worldToLocal);
+  if (options.packedUniforms && (options.instanceCandidates || options.instanceField))
+    throw new Error("Packed static reflection uniforms require a static candidate window");
+  const packedWords = affine ? 13 : 5;
   if (
     options.instanceCandidates &&
     (data.uniforms.length !== data.volumes.length || data.uniforms.length > 255)
@@ -446,7 +452,11 @@ export function applySourceReflections(
     throw new Error("Instanced reflections require the complete BYTE-addressable field");
   shader.uniforms.sourceReflectionCubes0 = { value: data.textures[0] };
   shader.uniforms.sourceReflectionCubes1 = { value: data.textures[1] ?? data.textures[0] };
-  if (!options.instanceField) shader.uniforms.sourceEnvironments = { value: data.uniforms };
+  if (options.packedUniforms)
+    shader.uniforms.nativeReflectionWords = {
+      value: packSourceReflectionRecords(data.uniforms, affine),
+    };
+  else if (!options.instanceField) shader.uniforms.sourceEnvironments = { value: data.uniforms };
   if (options.instanceField && !options.instanceCandidates)
     throw new Error("Native reflection field block requires instance candidate IDs");
   if (options.instanceCandidates) {
@@ -477,10 +487,10 @@ export function applySourceReflections(
     `
 struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEdge;vec4 sh;${affine ? "mat4 worldToLocal;mat4 localToWorld;" : ""}};
 ${
-  options.instanceField
-    ? `layout(std140) uniform NativeSourceReflectionField { vec4 nativeReflectionWords[${data.uniforms.length * 13}]; };
+  options.instanceField || options.packedUniforms
+    ? `${options.instanceField ? `layout(std140) uniform NativeSourceReflectionField { vec4 nativeReflectionWords[${data.uniforms.length * 13}]; };` : `uniform vec4 nativeReflectionWords[${data.uniforms.length * packedWords}];`}
 SourceEnvironment sourceFieldEnvironment(int index) {
-  int at=index*13;
+  int at=index*${options.instanceField ? 13 : packedWords};
   vec4 first=nativeReflectionWords[at];
   return SourceEnvironment(first.xyz,first.w,nativeReflectionWords[at+1].xyz,nativeReflectionWords[at+2].xyz,nativeReflectionWords[at+3].xyz,nativeReflectionWords[at+4]${affine ? `,mat4(nativeReflectionWords[at+5],nativeReflectionWords[at+6],nativeReflectionWords[at+7],nativeReflectionWords[at+8]),mat4(nativeReflectionWords[at+9],nativeReflectionWords[at+10],nativeReflectionWords[at+11],nativeReflectionWords[at+12])` : ""});
 }`
@@ -511,7 +521,7 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
     if(candidate<0||candidate>=${data.uniforms.length})continue;
     SourceEnvironment env=${options.instanceField ? "sourceFieldEnvironment(candidate)" : "sourceEnvironments[candidate]"};`
         : `if(i>=sourceEnvironmentCount)break;
-    SourceEnvironment env=sourceEnvironments[sourceEnvironmentCandidates[i]];`
+    SourceEnvironment env=${options.packedUniforms ? "sourceFieldEnvironment(sourceEnvironmentCandidates[i])" : "sourceEnvironments[sourceEnvironmentCandidates[i]]"};`
     }
     vec3 local=${affine ? "(env.worldToLocal*vec4(position,1.0)).xyz" : "position-env.origin"};
     vec3 localRay=${affine ? "mat3(env.worldToLocal)*R" : "R"};

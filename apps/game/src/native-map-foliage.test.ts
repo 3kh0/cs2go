@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import * as T from "three";
 import { createEnvironmentWorldFrame } from "./native-environment-frame";
 import {
@@ -226,7 +226,7 @@ it("alpha coverage preserves Source camera distance under translated rotated sky
   }
 });
 
-it("instanced coverage shares exact matrix bytes with independent ownership and follows source count bounds", () => {
+it("instanced coverage follows dynamic and managed transforms, visibility, and source count bounds", () => {
   const definition = source();
   definition.IntParams.F_USE_ALBEDO_FOR_TRANSMISSIVE = 1;
   definition.textures = { g_tColor: "color", g_tNormal: "normal", g_tAmbientOcclusion: "ao" };
@@ -236,6 +236,12 @@ it("instanced coverage shares exact matrix bytes with independent ownership and 
   const material = new T.MeshStandardMaterial();
   material.name = "leaf";
   const mesh = new T.InstancedMesh(geometry, material, 2);
+  const ancestor = new T.Group(),
+    root = new T.Group();
+  ancestor.add(root);
+  root.add(mesh);
+  ancestor.position.set(5, 6, 7);
+  mesh.position.set(1, 2, 3);
   mesh.setMatrixAt(0, new T.Matrix4().makeTranslation(3, 4, 5));
   mesh.setMatrixAt(1, new T.Matrix4().makeRotationY(0.6));
   const noise = new T.Data3DTexture(new Uint8Array(32), 2, 2, 2);
@@ -245,7 +251,7 @@ it("instanced coverage shares exact matrix bytes with independent ownership and 
       ["color", "normal", "ao"].map((k) => [k, new T.DataTexture(new Uint8Array(4), 1, 1)]),
     );
   const view = applyNativeMapFoliage(
-    mesh,
+    root,
     {
       materials: { leaf: definition },
       textures,
@@ -269,6 +275,29 @@ it("instanced coverage shares exact matrix bytes with independent ownership and 
   view.syncDepth();
   expect(depth.count).toBe(1);
   expect(depth.matrix.elements).toEqual(mesh.matrixWorld.elements);
+  expect(new T.Vector3().setFromMatrixPosition(depth.matrix).toArray()).toEqual([6, 8, 10]);
+  ancestor.position.x = 10;
+  view.syncDepth();
+  expect(new T.Vector3().setFromMatrixPosition(depth.matrix).toArray()).toEqual([11, 8, 10]);
+  // Frozen map objects may still receive explicitly managed door/breakable
+  // transforms and visibility changes. Coverage must copy them every pass.
+  root.traverse((object) => {
+    object.matrixAutoUpdate = false;
+    object.matrixWorldAutoUpdate = false;
+  });
+  mesh.matrixWorld.makeTranslation(21, 22, 23);
+  root.visible = false;
+  mesh.count = 2;
+  const traversal = vi.spyOn(root, "updateWorldMatrix");
+  view.syncDepth();
+  expect(traversal).not.toHaveBeenCalled();
+  expect(new T.Vector3().setFromMatrixPosition(depth.matrix).toArray()).toEqual([21, 22, 23]);
+  expect(depth.visible).toBe(false);
+  expect(depth.count).toBe(2);
+  root.visible = true;
+  view.syncDepth();
+  expect(depth.visible).toBe(true);
+  traversal.mockRestore();
   let sourceReleased = 0,
     depthReleased = 0;
   mesh.instanceMatrix.addEventListener("dispose", () => sourceReleased++);

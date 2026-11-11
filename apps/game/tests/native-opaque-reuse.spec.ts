@@ -26,6 +26,7 @@ test("native HDR opaque reuse preserves depth, cutouts, nested transparency, smo
     expect(row.glError).toBe(0);
     expect(row.layersRestored && row.backgroundRestored).toBe(true);
     expect(row.maxError).toBeLessThan(0.002);
+    expect(row.captureMipmaps).toEqual([row.mode === "water", row.mode === "water"]);
     if (!row.partial && row.mode !== "smoke")
       expect(row.reuseCalls).toBeLessThan(row.baselineCalls);
     // A nearby cloud can cull every world mesh from the old short-far depth

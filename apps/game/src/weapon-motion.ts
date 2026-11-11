@@ -307,6 +307,9 @@ type Rig = {
   mixer: T.AnimationMixer;
   actions: Map<Motion, T.AnimationAction>;
   current?: Motion;
+  sampledMotion?: Motion;
+  sampledTime?: number;
+  sampledBlend?: number;
   armsBindings: Binding[];
   twists: ReturnType<typeof forearmTwists>;
   weaponBindings: Binding[];
@@ -523,27 +526,35 @@ export function animateNativeWeapon(group: T.Group, pose: NativePose) {
   }
   action.paused = true;
   action.time = T.MathUtils.clamp(progress, 0, 1) * action.getClip().duration;
-  // PropertyMixer skips unchanged values; restore its last unblended output
-  // before sampling, otherwise repeated paused frames would accumulate blending.
-  for (const state of rig.blend) {
-    state.bone.position.copy(state.rawPosition);
-    state.bone.quaternion.copy(state.rawQuaternion);
-    state.bone.scale.copy(state.rawScale);
-  }
-  rig.mixer.update(0);
-  for (const state of rig.blend) {
-    state.rawPosition.copy(state.bone.position);
-    state.rawQuaternion.copy(state.bone.quaternion);
-    state.rawScale.copy(state.bone.scale);
-  }
   const blend = T.MathUtils.clamp(((pose.clock ?? 0) - rig.transitionStart) / 0.08, 0, 1);
-  if (blend < 1)
+  // The detached source rig is owned by this sampler. Identical clip/time/blend
+  // inputs retain its pose and world matrices, including paused transitions;
+  // target retargeting below still follows bob, sway and parent transforms.
+  if (rig.sampledMotion !== name || rig.sampledTime !== action.time || rig.sampledBlend !== blend) {
+    // PropertyMixer skips unchanged values; restore its last unblended output
+    // before sampling, otherwise repeated paused frames would accumulate blending.
     for (const state of rig.blend) {
-      state.bone.position.lerp(state.position, 1 - blend);
-      state.bone.quaternion.slerp(state.quaternion, 1 - blend);
-      state.bone.scale.lerp(state.scale, 1 - blend);
+      state.bone.position.copy(state.rawPosition);
+      state.bone.quaternion.copy(state.rawQuaternion);
+      state.bone.scale.copy(state.rawScale);
     }
-  rig.source.updateMatrixWorld(true);
+    rig.mixer.update(0);
+    for (const state of rig.blend) {
+      state.rawPosition.copy(state.bone.position);
+      state.rawQuaternion.copy(state.bone.quaternion);
+      state.rawScale.copy(state.bone.scale);
+    }
+    if (blend < 1)
+      for (const state of rig.blend) {
+        state.bone.position.lerp(state.position, 1 - blend);
+        state.bone.quaternion.slerp(state.quaternion, 1 - blend);
+        state.bone.scale.lerp(state.scale, 1 - blend);
+      }
+    rig.source.updateMatrixWorld(true);
+    rig.sampledMotion = name;
+    rig.sampledTime = action.time;
+    rig.sampledBlend = blend;
+  }
   group.position.set(0.05 + pose.sway, -0.025 + pose.bob, -0.025);
   group.rotation.set(0, 0, 0);
   group.updateWorldMatrix(true, true);

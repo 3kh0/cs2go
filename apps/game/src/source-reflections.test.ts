@@ -346,3 +346,50 @@ test("instance IDs keep the complete shared field with a fixed eight-slot shader
   ).toThrow(/complete/);
   base!.textures.forEach((texture) => texture.dispose());
 });
+
+test.each([false, true])(
+  "packed static windows preserve candidate order and reflection kernel (affine=%s)",
+  (affine) => {
+    const source = {
+      textures: [],
+      volumes: [{ worldToLocal: affine ? new T.Matrix4().toArray() : undefined }],
+    } as unknown as SourceReflections;
+    const binding = createSourceReflectionBinding(source),
+      createShader = () =>
+        ({
+          uniforms: {},
+          fragmentShader: "#include <lights_fragment_end>",
+        }) as T.WebGLProgramParametersWithUniforms,
+      original = createShader(),
+      packed = createShader();
+    const candidates = [5, 1, 7];
+    binding.count.value = candidates.length;
+    applySourceReflections(original, binding, candidates, { count: binding.count });
+    applySourceReflections(packed, binding, candidates, {
+      count: binding.count,
+      packedUniforms: true,
+    });
+    expect(packed.uniforms.sourceEnvironments).toBeUndefined();
+    expect(packed.uniforms.nativeReflectionWords.value).toBeInstanceOf(Float32Array);
+    expect(packed.uniforms.nativeReflectionWords.value).toHaveLength(8 * (affine ? 52 : 20));
+    expect(packed.uniforms.sourceEnvironmentCandidates.value).toEqual(
+      original.uniforms.sourceEnvironmentCandidates.value,
+    );
+    expect(packed.uniforms.sourceEnvironmentCount).toBe(binding.count);
+    expect(packed.fragmentShader).not.toContain("layout(std140)");
+    const kernel = (shader: T.WebGLProgramParametersWithUniforms) =>
+      shader.fragmentShader.slice(shader.fragmentShader.indexOf("vec3 sourceMapReflection"));
+    expect(
+      kernel(packed).replace(
+        "sourceFieldEnvironment(sourceEnvironmentCandidates[i])",
+        "sourceEnvironments[sourceEnvironmentCandidates[i]]",
+      ),
+    ).toBe(kernel(original));
+    expect(() =>
+      applySourceReflections(createShader(), binding, [], {
+        packedUniforms: true,
+        instanceCandidates: true,
+      }),
+    ).toThrow("static candidate window");
+  },
+);

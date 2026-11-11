@@ -66,7 +66,8 @@ export function nativeOpaqueReuseFixture() {
   const rows = [];
   const white = new T.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1);
   white.needsUpdate = true;
-  for (const mode of ["water", "fx", "smoke"])
+  // Returning to water also exercises target/filter changes after plain reuse.
+  for (const mode of ["water", "fx", "water", "smoke"])
     for (const clouds of [false, true])
       for (const partial of [false, true]) {
         smoke.batch.visible = clouds;
@@ -111,7 +112,11 @@ export function nativeOpaqueReuseFixture() {
           );
           const pixels = new Uint16Array(96 * 64 * 4);
           renderer.readRenderTargetPixels(target, 0, 0, 96, 64, pixels);
-          runs.push({ pixels, calls: renderer.info.render.calls });
+          runs.push({
+            pixels,
+            calls: renderer.info.render.calls,
+            mipmaps: composite.target?.texture.generateMipmaps ?? false,
+          });
         }
         let changed = 0,
           maxError = 0;
@@ -133,6 +138,7 @@ export function nativeOpaqueReuseFixture() {
           maxError,
           baselineCalls: runs[0].calls,
           reuseCalls: runs[1].calls,
+          captureMipmaps: runs.map((run) => run.mipmaps),
           layersRestored:
             group.children.every((mesh) => mesh.layers.mask === 1) &&
             transparent.layers.mask === 1 &&

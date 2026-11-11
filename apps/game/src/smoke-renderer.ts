@@ -196,6 +196,7 @@ export function registerSceneDepthMaterial(material: T.Material) {
 export class SmokeComposite {
   target?: T.WebGLRenderTarget;
   private colorTarget = false;
+  private colorMipmaps = false;
   private opaqueCapture = { exclude: new Set<T.Object3D>(), setColor(_texture: T.Texture) {} };
   private opaqueCopy?: {
     scene: T.Scene;
@@ -407,9 +408,12 @@ export class SmokeComposite {
       this.viewport.w === this.size.y
     );
     const color = depthConsumer?.color ?? (reuseOpaque ? this.opaqueCapture : undefined);
+    // Water samples the authored roughness mip chain. Internal opaque reuse
+    // only copies level zero, at matching full-size source/destination pixels.
+    const colorMipmaps = !!depthConsumer?.color;
     if (!reuseOpaque) this.releaseOpaqueCopy();
     const remaining = reuseOpaque ? new Set<T.Object3D>() : undefined;
-    if (this.target && this.colorTarget !== !!color) {
+    if (this.target && (this.colorTarget !== !!color || this.colorMipmaps !== colorMipmaps)) {
       this.target.dispose();
       this.target = undefined;
     }
@@ -417,15 +421,20 @@ export class SmokeComposite {
       if (color && !renderer.extensions.has("EXT_color_buffer_float"))
         throw new Error("Native water requires a renderable linear HDR scene-color target");
       this.colorTarget = !!color;
+      this.colorMipmaps = colorMipmaps;
       this.target = new T.WebGLRenderTarget(this.size.x, this.size.y, {
         format: color ? T.RGBAFormat : T.RedFormat,
         type: color ? T.HalfFloatType : T.UnsignedByteType,
         // Native water's scene-color sampler uses MIN_MAG_MIP_LINEAR. This
         // full chain reconstructs its producer at our existing viewport size;
         // native host dimensions/mip count remain unobserved. Depth stays point.
-        minFilter: color ? T.LinearMipmapLinearFilter : T.NearestFilter,
+        minFilter: colorMipmaps
+          ? T.LinearMipmapLinearFilter
+          : color
+            ? T.LinearFilter
+            : T.NearestFilter,
         magFilter: color ? T.LinearFilter : T.NearestFilter,
-        generateMipmaps: !!color,
+        generateMipmaps: colorMipmaps,
         depthTexture: new T.DepthTexture(this.size.x, this.size.y, T.UnsignedIntType),
       });
       this.target.texture.colorSpace = T.LinearSRGBColorSpace;

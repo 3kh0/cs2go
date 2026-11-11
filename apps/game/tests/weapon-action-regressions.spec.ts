@@ -23,7 +23,7 @@ test("Nova inserts sound once per shell and Karambit contact changes its recover
     g.freezeTime = 0;
     g.roundPause = 100;
     g.invulnerable = 100;
-    g.position.set(0, 0, 0);
+    // Keep the grounded native spawn; world origin has no supporting floor.
     g.yaw = g.pitch = 0;
     g.eye = 1.65;
     g.bots.forEach((b, i) => b.group.position.set(30 + i, 0, 30));
@@ -77,7 +77,13 @@ test("Nova inserts sound once per shell and Karambit contact changes its recover
     const source = await (await fetch("/src/soldier.ts")).text();
     const T = await import(/* @vite-ignore */ source.match(/from "([^"]*three\.js[^"]*)"/)![1]);
     const wall = new T.Mesh(new T.BoxGeometry(1, 3, 0.1), new T.MeshBasicMaterial());
-    wall.position.set(0, 1.5, -0.6);
+    // The reload exercise settles the player onto the native floor. Place
+    // cover in front of that camera rather than assuming world origin height.
+    g.updateAimCamera();
+    wall.position
+      .copy(g.camera.position)
+      .addScaledVector(g.camera.getWorldDirection(new T.Vector3()), 0.6);
+    wall.quaternion.copy(g.camera.quaternion);
     g.scene.add(wall);
     g.world.solids.push(wall);
     g.knife = 6;

@@ -432,6 +432,16 @@ async function buildNativeMapSky(
   panorama.renderOrder = -1000;
   panorama.frustumCulled = false;
   scene.add(panorama);
+  // Only the imported hierarchy is immutable. Its cloud/glow meshes have now
+  // been reparented into overlay; finish those world transforms before freezing.
+  // Appended foliage, clutter and cables retain their own update policy, while
+  // the panorama still follows the camera and effect uniforms continue to tick.
+  scene.updateMatrixWorld(true);
+  overlay.updateMatrixWorld(true);
+  for (const object of originals) {
+    object.matrixAutoUpdate = false;
+    object.matrixWorldAutoUpdate = false;
+  }
   const cableResolution = new T.Vector2();
   const viewport = new T.Vector4(),
     logicalViewport = new T.Vector4();

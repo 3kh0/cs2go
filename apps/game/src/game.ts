@@ -5190,33 +5190,38 @@ export class Game {
     const pos = b.group.position;
     const from = pos.clone().add(new T.Vector3(0, 1.45, 0));
     const oldTarget = b.target;
-    const candidates: {
-      id: number | "player";
-      position: T.Vector3;
-      distance: number;
-      score: number;
-    }[] = [];
+    const blinded = this.utility.blind.has(this.bots.indexOf(b));
+    let target:
+      | {
+          id: number | "player";
+          position: T.Vector3;
+          distance: number;
+          score: number;
+        }
+      | undefined;
     const consider = (id: number | "player", position: T.Vector3, attacking: boolean) => {
+      if (blinded) return;
       const distance = pos.distanceTo(position);
       if (
         distance > 65 ||
         !inBotView(b.facing, position.x - pos.x, position.z - pos.z, b.alert > 0)
       )
         return;
+      const score = targetPriority(distance, id === oldTarget, attacking);
+      // Only a better visible candidate can replace the current winner. Strict
+      // comparison retains the original stable-sort tie order without tracing
+      // candidates that cannot change acquisition.
+      if (target && score >= target.score) return;
       const aim = position
         .clone()
         .add(new T.Vector3(0, id === "player" && this.eye < 1.35 ? 0.9 : 1.3, 0));
-      if (
-        !this.utility.blind.has(this.bots.indexOf(b)) &&
-        this.visible(from, aim) &&
-        this.utility.clearSight(from, aim)
-      )
-        candidates.push({
+      if (this.visible(from, aim) && this.utility.clearSight(from, aim))
+        target = {
           id,
           position,
           distance,
-          score: targetPriority(distance, id === oldTarget, attacking),
-        });
+          score,
+        };
     };
     if (!this.dead && (!this.teamMode || b.team !== this.team))
       consider("player", this.position, this.firing);
@@ -5225,8 +5230,6 @@ export class Game {
         if (other !== b && other.health > 0 && (!this.teamMode || other.team !== b.team))
           consider(index, other.group.position, other.tracking);
       });
-    candidates.sort((a, c) => a.score - c.score);
-    const target = candidates[0];
     b.alert = Math.max(0, b.alert - dt);
     b.report = Math.max(0, b.report - dt);
     b.suppressTime = Math.max(0, b.suppressTime - dt);

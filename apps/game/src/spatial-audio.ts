@@ -147,8 +147,16 @@ export class SpatialAudio {
     for (const voice of this.voices) {
       if (budget <= 0) break;
       if (voice.nextCheck > context.currentTime) continue;
-      budget--;
       voice.nextCheck = context.currentTime + 0.125;
+      const attenuation = audibleGain(this.position.distanceTo(voice.position), voice.range);
+      // A voice outside its authored range contributes no dry or room signal.
+      // Keep its refresh cadence so moving back into range restores it, but
+      // reserve geometry/path traces for voices that can actually be heard.
+      if (attenuation === 0) {
+        voice.gain.gain.setTargetAtTime(0, context.currentTime, 0.04);
+        continue;
+      }
+      budget--;
       const blocked = this.obstructed?.(this.position, voice.position) ?? false;
       let level = blocked ? 0.065 : 1;
       let cutoff = blocked ? 700 : 18000;
@@ -192,8 +200,7 @@ export class SpatialAudio {
       voice.panner.positionZ.setTargetAtTime(apparent.z, context.currentTime, 0.04);
       voice.filter.frequency.setTargetAtTime(cutoff, context.currentTime, 0.04);
       voice.gain.gain.setTargetAtTime(
-        (voice.range.occlusionMix === undefined ? level : 1) *
-          audibleGain(this.position.distanceTo(voice.position), voice.range),
+        (voice.range.occlusionMix === undefined ? level : 1) * attenuation,
         context.currentTime,
         0.04,
       );
@@ -223,11 +230,10 @@ export class SpatialAudio {
     filter.type = "lowpass";
     filter.frequency.value = 18000;
     const gain = context.createGain();
-    const blocked = this.obstructed?.(this.position, position) ?? false;
+    const attenuation = audibleGain(this.position.distanceTo(position), range);
+    const blocked = attenuation > 0 && (this.obstructed?.(this.position, position) ?? false);
     filter.frequency.value = blocked ? 700 : 18000;
-    gain.gain.value =
-      (blocked && range.occlusionMix === undefined ? 0.065 : 1) *
-      audibleGain(this.position.distanceTo(position), range);
+    gain.gain.value = (blocked && range.occlusionMix === undefined ? 0.065 : 1) * attenuation;
     const dry = range.occlusionMix === undefined ? undefined : context.createGain();
     const wet = dry ? context.createGain() : undefined;
     if (dry && wet) {

@@ -32,6 +32,12 @@ export type MapNavigation = {
   polygons?: boolean;
 };
 const navCell = 4;
+type PolygonQuery = {
+  // Per edge: origin X/Z, delta X/Z, and the existing 2.5 cm tolerance.
+  edges: Float64Array;
+  // First non-degenerate triangle, preserving the authored plane calculation.
+  plane?: readonly number[];
+};
 // The original Source navigation graph preserves stacked tunnels, ramps and
 // one-way connections. A* searches this graph rather than a flattened grid.
 export class Navigation {
@@ -56,6 +62,7 @@ export class Navigation {
   private stamp = 0;
   private readonly sites = new Map<number, NavArea[]>();
   private readonly ladderEdges = new Map<string, { ladder: NativeLadder; up: boolean }>();
+  private readonly polygons = new WeakMap<NavArea, PolygonQuery>();
   // Reused A* buffers; path() is not re-entrant.
   private readonly costs: Float32Array;
   private readonly previous: Int32Array;
@@ -68,6 +75,37 @@ export class Navigation {
     this.data = data;
     const areas = (this.areas = data.areas),
       count = areas.length;
+    if (data.polygons)
+      for (const area of areas) {
+        const edges = new Float64Array(area.corners.length * 5);
+        for (let i = 0; i < area.corners.length; i++) {
+          const a = area.corners[i],
+            b = area.corners[(i + 1) % area.corners.length],
+            dx = b[0] - a[0],
+            dz = b[2] - a[2],
+            offset = i * 5;
+          edges[offset] = a[0];
+          edges[offset + 1] = a[2];
+          edges[offset + 2] = dx;
+          edges[offset + 3] = dz;
+          edges[offset + 4] = 0.025 * Math.hypot(dx, dz);
+        }
+        let plane: PolygonQuery["plane"];
+        const a = area.corners[0];
+        for (let i = 1; i + 1 < area.corners.length; i++) {
+          const b = area.corners[i],
+            c = area.corners[i + 1],
+            bx = b[0] - a[0],
+            bz = b[2] - a[2],
+            cx = c[0] - a[0],
+            cz = c[2] - a[2],
+            determinant = bx * cz - cx * bz;
+          if (Math.abs(determinant) < 1e-8) continue;
+          plane = [a[0], a[1], a[2], bx, b[1] - a[1], bz, cx, c[1] - a[1], cz, determinant];
+          break;
+        }
+        this.polygons.set(area, { edges, plane });
+      }
     areas.forEach((area, i) => this.index.set(area.id, i));
     const extra = new Map<number, Set<number>>();
     for (const ladder of data.ladders ?? []) {
@@ -192,17 +230,13 @@ export class Navigation {
   }
   private height(area: NavArea, x: number, z: number) {
     if (this.data.polygons) {
-      const a = area.corners[0];
-      for (let i = 1; i + 1 < area.corners.length; i++) {
-        const b = area.corners[i],
-          c = area.corners[i + 1];
-        const determinant = (b[0] - a[0]) * (c[2] - a[2]) - (c[0] - a[0]) * (b[2] - a[2]);
-        if (Math.abs(determinant) < 1e-8) continue;
-        const u = ((x - a[0]) * (c[2] - a[2]) - (z - a[2]) * (c[0] - a[0])) / determinant;
-        const v = ((b[0] - a[0]) * (z - a[2]) - (b[2] - a[2]) * (x - a[0])) / determinant;
-        return a[1] + u * (b[1] - a[1]) + v * (c[1] - a[1]);
-      }
-      return area.center[1];
+      const plane = this.polygons.get(area)?.plane;
+      if (!plane) return area.center[1];
+      const dx = x - plane[0],
+        dz = z - plane[2],
+        u = (dx * plane[8] - dz * plane[6]) / plane[9],
+        v = (plane[3] * dz - plane[5] * dx) / plane[9];
+      return plane[1] + u * plane[4] + v * plane[7];
     }
     if (area.corners.length !== 4) return area.center[1];
     const [x0, z0, x1, z1] = area.rect;
@@ -216,15 +250,13 @@ export class Navigation {
   }
   private contains(area: NavArea, x: number, z: number) {
     if (!this.data.polygons) return true;
+    const edges = this.polygons.get(area)!.edges;
     let positive = false,
       negative = false;
-    for (let i = 0; i < area.corners.length; i++) {
-      const a = area.corners[i],
-        b = area.corners[(i + 1) % area.corners.length];
-      const cross = (b[0] - a[0]) * (z - a[2]) - (b[2] - a[2]) * (x - a[0]);
-      const tolerance = 0.025 * Math.hypot(b[0] - a[0], b[2] - a[2]);
-      positive ||= cross > tolerance;
-      negative ||= cross < -tolerance;
+    for (let i = 0; i < edges.length; i += 5) {
+      const cross = edges[i + 2] * (z - edges[i + 1]) - edges[i + 3] * (x - edges[i]);
+      positive ||= cross > edges[i + 4];
+      negative ||= cross < -edges[i + 4];
     }
     return !(positive && negative);
   }

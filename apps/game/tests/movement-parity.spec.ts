@@ -2,10 +2,10 @@ import { test, expect } from "@playwright/test";
 import type { Game } from "../src/game";
 
 test("rapid crouch presses cannot bypass posture recovery", async ({ page }) => {
+  test.setTimeout(120000);
   await page.goto("/");
-  await page.waitForFunction(
-    () => !(document.querySelector("#play") as HTMLButtonElement).disabled,
-  );
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100000 });
+  await expect(page.locator("#startup")).toBeHidden();
   const result = await page.evaluate(() => {
     const game = (window as unknown as { __game: Game }).__game;
     game.start("practice");

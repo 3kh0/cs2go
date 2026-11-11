@@ -210,6 +210,34 @@ it("keeps CS2 triangular ramps inside their actual polygon", () => {
   expect(nav.support(1.8, 1.8, 3, -1)).toBeUndefined();
 });
 
+it.each([false, true])(
+  "preserves polygon edge tolerance and planes with repeated corners (reversed=%s)",
+  (reversed) => {
+    const corners = [
+      [10, 4, 20],
+      [10, 4, 20],
+      [14, 6, 20],
+      [10, 5, 24],
+    ];
+    const ramp = {
+      ...area(1, 0, 0, []),
+      rect: [10, 20, 14, 24],
+      center: [11, 4.75, 21],
+      corners: reversed ? corners.slice().reverse() : corners,
+    };
+    const nav = new Navigation({
+      polygons: true,
+      areas: [ramp],
+      spawns: { t: [], ct: [] },
+      sites: [],
+      bounds: [10, 20, 14, 24],
+    });
+    expect(nav.support(11, 21, 8, 0)?.height).toBe(4.75);
+    expect(nav.support(12, 22.02, 8, 0)?.height).toBeCloseTo(5.505);
+    expect(nav.support(12, 22.08, 8, 0)).toBeUndefined();
+  },
+);
+
 describe("physical native plant goals", () => {
   function fixture(mapId: "nuke" | "dust2" = "nuke") {
     const floor = new Mesh(new BoxGeometry(20, 0.5, 20));

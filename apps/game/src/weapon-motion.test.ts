@@ -10,6 +10,7 @@ import {
   nativeShotDuration,
   nativeSoundCues,
   nativeSuppressor,
+  type NativePose,
 } from "./weapon-motion";
 
 const fixture = vi.hoisted(() => ({ hands: undefined as T.Group | undefined }));
@@ -113,4 +114,61 @@ test("verified clip intervals retain the authored 0.9 playback rate", () => {
   for (const id of [1, 2])
     for (const attach of [true, false])
       expect(nativeSuppressor(id, attach).duration).toBeCloseTo(4.8333 / 0.9, 5);
+});
+
+test("paused samples preserve interruption poses while retargeting follows the viewmodel", () => {
+  const create = () => {
+    const parent = new T.Group();
+    const gun = new T.Group();
+    gun.userData.muzzle = new T.Vector3();
+    createNativeWeapon(gun, 8);
+    parent.add(gun);
+    return { parent, gun };
+  };
+  const sparse = create(),
+    paused = create();
+  const base = { draw: 0, reload: 0, bolt: 0, bob: 0.01, sway: -0.02 };
+  const timeline: Partial<NativePose>[] = [
+    { clock: 0 },
+    { reload: 0.3, clock: 1 },
+    { reload: 0.3, clock: 1.04 },
+    { reload: 0.6, clock: 1.09 },
+    { clock: 1.1 },
+    { clock: 1.14 },
+    { shotActive: true, shot: 0.2, clock: 1.16 },
+    { clock: 1.18 },
+    { inspectActive: true, inspect: 0.4, clock: 1.2 },
+    { inspectActive: true, inspect: 0.4, clock: 1.24 },
+    { reload: 0.7, emptyReload: true, clock: 1.25 },
+    { reload: 0.7, emptyReload: true, clock: 1.33 },
+  ];
+  const matrices = (gun: T.Group) => {
+    gun.updateWorldMatrix(true, true);
+    const values: number[] = [];
+    gun.traverse((object) => values.push(...object.matrixWorld.elements));
+    return values;
+  };
+  for (const [index, sample] of timeline.entries()) {
+    for (const { parent } of [sparse, paused]) {
+      parent.position.set(index * 0.03, 1, 2);
+      parent.rotation.set(0.1, index * 0.02, -0.05);
+    }
+    const pose = { ...base, ...sample };
+    animateNativeWeapon(sparse.gun, pose);
+    animateNativeWeapon(paused.gun, pose);
+    // The simulation clock and clip sample stay fixed while the rendered
+    // viewmodel moves. Repeated samples must not compound transition blending.
+    for (let frame = 0; frame < 8; frame++)
+      animateNativeWeapon(paused.gun, { ...pose, bob: frame * 0.003, sway: frame * -0.004 });
+    animateNativeWeapon(paused.gun, pose);
+    const expected = matrices(sparse.gun),
+      actual = matrices(paused.gun);
+    expect(actual).toHaveLength(expected.length);
+    expect(Math.max(...actual.map((value, i) => Math.abs(value - expected[i])))).toBeLessThan(
+      0.000001,
+    );
+    expect(paused.gun.userData.muzzle.distanceTo(sparse.gun.userData.muzzle)).toBeLessThan(
+      0.000001,
+    );
+  }
 });

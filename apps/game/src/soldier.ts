@@ -355,7 +355,8 @@ function prepareNativeActions(soldier: Soldier) {
       /* Existing locomotion remains responsive; a later switch retries. */
     });
 }
-const weaponMatrix = new T.Matrix4();
+const weaponMatrix = new T.Matrix4(),
+  soldierInverse = new T.Matrix4();
 const up = new T.Vector3(0, 1, 0);
 const pistolGripOffset = new T.Vector3(0.018, -0.065, 0.085);
 const gripOffset = new T.Vector3(0.01, -0.05, -0.1);
@@ -367,10 +368,14 @@ const gripAttachment = new T.Matrix4();
 const gripPosition = new T.Vector3(),
   gripRotation = new T.Quaternion(),
   gripScale = new T.Vector3();
-// getWorldPosition refreshes only each hand's ancestor chain, not the whole rig.
+// Refresh only the hand ancestor chains, then share the root inverse across
+// both grip positions and the native attachment without revisiting the rig.
 function poseWeapon(soldier: Soldier) {
-  soldier.group.worldToLocal(soldier.rightHand.getWorldPosition(soldier.grip));
-  soldier.group.worldToLocal(soldier.leftHand.getWorldPosition(soldier.support));
+  soldier.rightHand.updateWorldMatrix(true, false);
+  soldier.leftHand.updateWorldMatrix(true, false);
+  soldierInverse.copy(soldier.group.matrixWorld).invert();
+  soldier.grip.setFromMatrixPosition(soldier.rightHand.matrixWorld).applyMatrix4(soldierInverse);
+  soldier.support.setFromMatrixPosition(soldier.leftHand.matrixWorld).applyMatrix4(soldierInverse);
   const native = worldGrip(soldier.weaponIndex);
   if (native && soldier.weaponGripInverse) {
     const stand = native.stand.attachmentPose!,
@@ -380,10 +385,8 @@ function poseWeapon(soldier: Soldier) {
     gripRotation.copy(stand.rotation).slerp(crouched.rotation, crouch);
     gripScale.copy(stand.scale).lerp(crouched.scale, crouch);
     gripAttachment.compose(gripPosition, gripRotation, gripScale);
-    soldier.rightHand.updateWorldMatrix(true, false);
     weaponMatrix
-      .copy(soldier.group.matrixWorld)
-      .invert()
+      .copy(soldierInverse)
       .multiply(soldier.rightHand.matrixWorld)
       .multiply(gripAttachment)
       .multiply(soldier.weaponGripInverse);

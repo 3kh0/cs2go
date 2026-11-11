@@ -1,6 +1,9 @@
 import * as T from "three";
 import { expect, test, vi } from "vitest";
-import { createSourceReflectionField } from "./source-reflection-field";
+import {
+  createSourceReflectionField,
+  packSourceReflectionRecords,
+} from "./source-reflection-field";
 import type { SourceReflections } from "./source-reflections";
 function data() {
   const uniforms = Array.from({ length: 65 }, (_, i) => ({
@@ -15,6 +18,45 @@ function data() {
   }));
   return { uniforms, volumes: Array.from({ length: 65 }, () => ({})) } as SourceReflections;
 }
+test.each([false, true])(
+  "default-uniform records retain every Float32 field (affine=%s)",
+  (affine) => {
+    const records = data().uniforms.slice(0, 2);
+    // Exercise nontrivial matrix columns, negative values and zero-width fades.
+    records[0].worldToLocal!.makeRotationY(0.73).setPosition(-12.5, 33.25, 9.1);
+    records[0].localToWorld!.copy(records[0].worldToLocal!).invert();
+    records[1].invEdge.x = 3.402823466e38;
+    const packed = packSourceReflectionRecords(records, affine),
+      stride = affine ? 52 : 20;
+    expect(packed.length).toBe(records.length * stride);
+    for (const [index, record] of records.entries()) {
+      const at = index * stride;
+      expect(Array.from(packed.slice(at, at + 4))).toEqual(
+        [record.origin.x, record.origin.y, record.origin.z, record.index].map(Math.fround),
+      );
+      for (const [offset, vector] of [
+        [4, record.mins],
+        [8, record.maxs],
+        [12, record.invEdge],
+      ] as const) {
+        expect(Array.from(packed.slice(at + offset, at + offset + 4))).toEqual(
+          [vector.x, vector.y, vector.z, 0].map(Math.fround),
+        );
+      }
+      expect(Array.from(packed.slice(at + 16, at + 20))).toEqual(
+        record.sh.toArray().map(Math.fround),
+      );
+      if (affine) {
+        expect(Array.from(packed.slice(at + 20, at + 36))).toEqual(
+          record.worldToLocal!.elements.map(Math.fround),
+        );
+        expect(Array.from(packed.slice(at + 36, at + 52))).toEqual(
+          record.localToWorld!.elements.map(Math.fround),
+        );
+      }
+    }
+  },
+);
 test("std140 retains the complete65 record Float32 values within16KiB", () => {
   const d = data(),
     field = createSourceReflectionField(d);

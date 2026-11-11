@@ -1181,6 +1181,17 @@ export class MapCollision {
     while (travelled <= far) {
       const cell = this.cell(x, z),
         exit = Math.min(tx, tz);
+      // Moving islands were queried above. Once a ray is outside the static
+      // grid and cannot move back through that boundary, its remaining cells
+      // are empty. Retain the original DDA for rays approaching from outside.
+      if (
+        cell < 0 &&
+        ((x < this.x0 && sx <= 0) ||
+          (x >= this.x0 + this.width && sx >= 0) ||
+          (z < this.z0 && sz <= 0) ||
+          (z >= this.z0 + this.depth && sz >= 0))
+      )
+        break;
       if (cell >= 0) {
         const a = oy + dy * travelled,
           b = oy + dy * Math.min(exit, limit);

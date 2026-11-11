@@ -1,15 +1,14 @@
 import * as T from "three";
 import type { SourceReflections } from "./source-reflections";
 export const sourceReflectionFieldWords = 13;
-/** Exact std140 vec4 transport of complete affine records. Padding is explicit;
- * matrix columns and scalar Float32 uploads match the default-uniform path. */
-export function createSourceReflectionField(data: SourceReflections) {
-  if (data.uniforms.length !== data.volumes.length || !data.uniforms.length)
-    throw new Error("Native reflection field must retain all source records");
-  const packed = new Float32Array(data.uniforms.length * sourceReflectionFieldWords * 4),
+/** Float32 records shared by the static default-uniform and std140 transports.
+ * Keep scalar/vector rounding and column-major matrix uploads identical. */
+export function packSourceReflectionRecords(records: SourceReflections["uniforms"], affine = true) {
+  const stride = (affine ? sourceReflectionFieldWords : 5) * 4;
+  const packed = new Float32Array(records.length * stride),
     identity = new T.Matrix4();
-  data.uniforms.forEach((v, i) => {
-    const at = i * 52;
+  records.forEach((v, i) => {
+    const at = i * stride;
     packed.set(
       [
         ...v.origin.toArray(),
@@ -24,11 +23,21 @@ export function createSourceReflectionField(data: SourceReflections) {
       ],
       at,
     );
-    packed.set((v.worldToLocal ?? identity).elements, at + 20);
-    packed.set((v.localToWorld ?? identity).elements, at + 36);
+    if (affine) {
+      packed.set((v.worldToLocal ?? identity).elements, at + 20);
+      packed.set((v.localToWorld ?? identity).elements, at + 36);
+    }
   });
   if (packed.some((v) => !Number.isFinite(v)))
     throw new Error("Native reflection field contains invalid Float32 values");
+  return packed;
+}
+/** Exact std140 vec4 transport of complete affine records. Padding is explicit;
+ * matrix columns and scalar Float32 uploads match the default-uniform path. */
+export function createSourceReflectionField(data: SourceReflections) {
+  if (data.uniforms.length !== data.volumes.length || !data.uniforms.length)
+    throw new Error("Native reflection field must retain all source records");
+  const packed = packSourceReflectionRecords(data.uniforms);
   const words = Array.from({ length: packed.length / 4 }, (_, i) =>
       new T.Vector4().fromArray(packed, i * 4),
     ),
