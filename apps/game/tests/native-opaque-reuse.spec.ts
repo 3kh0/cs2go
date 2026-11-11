@@ -37,3 +37,35 @@ test("native HDR opaque reuse preserves depth, cutouts, nested transparency, smo
   }
   expect(errors).toEqual([]);
 });
+
+test("gameplay smoke Groups preserve six-cloud depth, holes, recovery and inside-cloud pixels", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.route("**/__native-render-fixture", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: "<!doctype html><title>Gameplay smoke roots</title>",
+    }),
+  );
+  await page.goto("/__native-render-fixture");
+  const rows = await page.evaluate(async () => {
+    const path = "/tests/native-opaque-reuse-fixture.ts";
+    return (await import(path)).nativeGameplaySmokeRootsFixture() as ReturnType<
+      typeof import("./native-opaque-reuse-fixture").nativeGameplaySmokeRootsFixture
+    >;
+  });
+  for (const row of rows) {
+    expect(row.changed).toBe(0);
+    expect(row.smokePixels).toBeGreaterThan(100);
+    expect(row.cloudOnly).toEqual([false, true]);
+    expect(row.restored).toBe(true);
+    expect(row.glError).toBe(0);
+  }
+  expect(errors).toEqual([]);
+});

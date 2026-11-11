@@ -41,6 +41,8 @@ const ctPlans = ["balanced", "heavyA", "heavyB", "retake"] as const;
 const distance = (a: StrategyPoint, b: StrategyPoint) =>
   Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 type Assignment = {
+  ordinal: number;
+  siteOrdinal: number;
   role: StrategyRole;
   lane: StrategyLane;
   site: StrategySite;
@@ -144,6 +146,8 @@ export class BotRoundStrategy {
               ? "shortA"
               : "longA";
         this.assignments.set(index, {
+          ordinal: this.assignments.get(index)?.ordinal ?? this.assignments.size,
+          siteOrdinal: 0,
           role,
           lane: role === "lurk" ? alternate : lane,
           site,
@@ -257,16 +261,29 @@ export class BotRoundStrategy {
         if (assignment.role === "rotate") assignment.site = contactSite;
     }
     this.orders.clear();
-    const retriever =
-      this.team === "t" && !state.bomb.planted && state.bomb.carrier === -1 && state.bomb.position
-        ? state.allies
-            .filter((ally) => ally.alive && this.assignments.has(ally.index))
-            .sort(
-              (a, b) =>
-                distance(a.position, state.bomb.position!) -
-                distance(b.position, state.bomb.position!),
-            )[0]?.index
-        : undefined;
+    let aOrdinal = 0,
+      bOrdinal = 0;
+    // Dead or absent members still occupy their original hold/watch slots.
+    for (const assignment of this.assignments.values())
+      assignment.siteOrdinal = assignment.site === "a" ? aOrdinal++ : bOrdinal++;
+    let retriever: number | undefined;
+    if (
+      this.team === "t" &&
+      !state.bomb.planted &&
+      state.bomb.carrier === -1 &&
+      state.bomb.position
+    ) {
+      let nearestDistance = Infinity;
+      for (const ally of state.allies) {
+        if (!ally.alive || !this.assignments.has(ally.index)) continue;
+        const range = distance(ally.position, state.bomb.position);
+        // Stable sorting previously preferred the first ally on a distance tie.
+        if (retriever === undefined || range < nearestDistance) {
+          retriever = ally.index;
+          nearestDistance = range;
+        }
+      }
+    }
     for (const ally of state.allies) {
       const assignment = this.assignments.get(ally.index);
       if (!assignment || !ally.alive) continue;
@@ -275,10 +292,7 @@ export class BotRoundStrategy {
       let utility: StrategyOrder["utility"] = null;
       let utilityTarget: StrategyPoint | undefined;
       let watch: StrategyPoint | undefined;
-      const ordinal = [...this.assignments.keys()].indexOf(ally.index);
-      const siteOrdinal = [...this.assignments.values()]
-        .slice(0, ordinal)
-        .filter((other) => other.site === assignment.site).length;
+      const { ordinal, siteOrdinal } = assignment;
       const anchors = this.routes.anchors[assignment.site];
       const anchor =
         anchors[siteOrdinal % Math.max(1, anchors.length)] ?? this.routes.sites[assignment.site];

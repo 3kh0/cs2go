@@ -9,6 +9,24 @@ const edge = new Vector3(),
   relative = new Vector3(),
   closest = new Vector3();
 const triangle = new Triangle(a, b, c);
+
+function acceptContact(
+  t: number,
+  point: Vector3,
+  from: Vector3,
+  delta: Vector3,
+  normal: Vector3,
+  best: number,
+) {
+  if (t < -1e-8 || t > 1 || t >= best) return best;
+  relative.copy(from).addScaledVector(delta, Math.max(0, t)).sub(point);
+  if (relative.lengthSq() < 1e-16) relative.copy(n);
+  relative.normalize();
+  if (relative.dot(delta) >= -1e-10) return best;
+  normal.copy(relative);
+  return Math.max(0, t);
+}
+
 /** Earliest continuous contact with a triangle's face, edges or vertices.
  * Writes a unit normal and returns a fraction of the displacement, or Infinity. */
 export function sweepSphereTriangle(
@@ -24,35 +42,25 @@ export function sweepSphereTriangle(
   c.fromArray(vertices, offset + 6);
   triangle.getNormal(n);
   let best = Infinity;
-  const accept = (t: number, point: Vector3) => {
-    if (t < -1e-8 || t > 1 || t >= best) return;
-    relative.copy(from).addScaledVector(delta, Math.max(0, t)).sub(point);
-    if (relative.lengthSq() < 1e-16) relative.copy(n);
-    relative.normalize();
-    if (relative.dot(delta) >= -1e-10) return;
-    normal.copy(relative);
-    best = Math.max(0, t);
-  };
   triangle.closestPointToPoint(from, closest);
-  if (from.distanceToSquared(closest) <= radius * radius + 1e-12) accept(0, closest);
+  if (from.distanceToSquared(closest) <= radius * radius + 1e-12)
+    best = acceptContact(0, closest, from, delta, normal, best);
   const distance = n.dot(p.subVectors(from, a)),
     rate = n.dot(delta);
   if (Math.abs(rate) > 1e-12)
-    for (const side of [-1, 1]) {
+    for (let side = -1; side <= 1; side += 2) {
       const t = (side * radius - distance) / rate;
       if (t < 0 || t > 1 || t >= best) continue;
       p.copy(from)
         .addScaledVector(delta, t)
         .addScaledVector(n, -side * radius);
-      if (triangle.containsPoint(p)) accept(t, p);
+      if (triangle.containsPoint(p)) best = acceptContact(t, p, from, delta, normal, best);
     }
   // Capsule edges, including spherical endcaps. The quadratic uses an
   // unnormalised displacement, so the roots already lie in tick fractions.
-  for (const [start, end] of [
-    [a, b],
-    [b, c],
-    [c, a],
-  ]) {
+  for (let i = 0; i < 3; i++) {
+    const start = i === 0 ? a : i === 1 ? b : c;
+    const end = i === 0 ? b : i === 1 ? c : a;
     edge.subVectors(end, start);
     p.subVectors(from, start);
     const length = edge.lengthSq(),
@@ -67,14 +75,15 @@ export function sweepSphereTriangle(
         s = (along + t * speed) / length;
       if (s >= 0 && s <= 1) {
         closest.copy(start).addScaledVector(edge, s);
-        accept(t, closest);
+        best = acceptContact(t, closest, from, delta, normal, best);
       }
     }
     const av = delta.lengthSq(),
       bv = p.dot(delta),
       cv = p.lengthSq() - radius * radius;
     const dv = bv * bv - av * cv;
-    if (av > 1e-16 && dv >= 0) accept((-bv - Math.sqrt(dv)) / av, start);
+    if (av > 1e-16 && dv >= 0)
+      best = acceptContact((-bv - Math.sqrt(dv)) / av, start, from, delta, normal, best);
   }
   return best;
 }

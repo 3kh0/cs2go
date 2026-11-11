@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import * as T from "three";
 import { invalidateCharacterLayers, orderCharacterLayers } from "./character-layers";
 
@@ -62,4 +62,66 @@ test("weapon and locomotion activation histories cannot reorder additive hand ro
   invalidateCharacterLayers(a.mixer);
   orderCharacterLayers(a.mixer, [a.draw, a.walk, a.grip]);
   expect(stops).toBe(1);
+});
+
+test("Set layer membership ignores insertion order and inactive extras without disturbing playback", () => {
+  const r = rig();
+  for (const action of [r.draw, r.walk, r.grip]) action.play();
+  orderCharacterLayers(r.mixer, new Set([r.draw, r.walk, r.grip]));
+  r.draw.time = 0.63;
+  r.draw.paused = true;
+  r.draw.setEffectiveWeight(0.4);
+  r.idle.setEffectiveWeight(0);
+  const stop = vi.spyOn(r.mixer, "stopAllAction");
+  orderCharacterLayers(r.mixer, new Set([r.grip, r.idle, r.walk, r.draw]));
+  expect(stop).not.toHaveBeenCalled();
+  expect(r.draw.time).toBe(0.63);
+  expect(r.draw.paused).toBe(true);
+  expect(r.draw.getEffectiveWeight()).toBe(0.4);
+
+  // Replacing a normal layer keeps the count, but requires canonical activation.
+  r.walk.stop();
+  r.idle.play().setEffectiveWeight(1);
+  orderCharacterLayers(r.mixer, new Set([r.draw, r.idle, r.grip]));
+  expect(stop).toHaveBeenCalledTimes(1);
+  expect(r.draw.time).toBe(0.63);
+  expect(r.draw.paused).toBe(true);
+  expect(r.draw.getEffectiveWeight()).toBe(0.4);
+  r.mixer.update(0);
+  const expected = new T.Quaternion()
+    .setFromAxisAngle(new T.Vector3(0, 0, 1), 0.2)
+    .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(1, 0, 0), 0.8))
+    .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0, 1, 0), -0.7 * 0.4));
+  expect(r.bone.quaternion.angleTo(expected)).toBeLessThan(0.001);
+});
+
+test("Set layer caching respects edited clip ordering keys and invalidation", () => {
+  const r = rig();
+  const active = new Set([r.walk.play(), r.draw.play(), r.grip.play()]);
+  orderCharacterLayers(r.mixer, active);
+  const stop = vi.spyOn(r.mixer, "stopAllAction");
+  r.grip.getClip().name = "zz_after_draw";
+  orderCharacterLayers(r.mixer, active);
+  expect(stop).toHaveBeenCalledTimes(1);
+  r.mixer.update(0);
+  const expected = new T.Quaternion()
+    .setFromAxisAngle(new T.Vector3(0, 0, 1), 0.4)
+    .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0, 1, 0), -0.7))
+    .multiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(1, 0, 0), 0.8));
+  expect(r.bone.quaternion.angleTo(expected)).toBeLessThan(0.001);
+  invalidateCharacterLayers(r.mixer);
+  orderCharacterLayers(r.mixer, active);
+  expect(stop).toHaveBeenCalledTimes(2);
+});
+
+test("generic iterable duplicate layers retain the original activation behavior", () => {
+  const r = rig();
+  for (const action of [r.walk, r.grip, r.draw]) action.play();
+  orderCharacterLayers(r.mixer, new Set([r.walk, r.grip, r.draw]));
+  const play = vi.spyOn(r.grip, "play");
+  orderCharacterLayers(r.mixer, [r.walk, r.grip, r.grip, r.draw]);
+  expect(play).toHaveBeenCalledTimes(2);
+  // A duplicated generic cache cannot satisfy a later unique Set membership.
+  orderCharacterLayers(r.mixer, new Set([r.idle.play(), r.walk, r.grip, r.draw]));
+  expect(play).toHaveBeenCalledTimes(3);
 });

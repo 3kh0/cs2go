@@ -177,6 +177,75 @@ it("only one living T recovers dropped C4 and resumes its existing lane afterwar
   expect(s.order(0)).toBeNull();
   expect(s.order(1)?.goal).toEqual(p(-5, 2));
 });
+it("dropped C4 chooses the nearest assigned living ally and preserves input-order ties", () => {
+  const s = strategy("longA");
+  const ally = (index: number, x: number, alive = true) => ({
+    index,
+    position: p(x, 0),
+    alive,
+  });
+  const dropped = state({
+    dt: 0,
+    bomb: { planted: false, position: p(0, 0), carrier: -1 },
+    allies: [ally(-2, 0), ally(0, 0, false), ally(1, 8), ally(5, -3), ally(2, 3)],
+  });
+  s.update(dropped);
+  expect(s.order(-2)).toBeNull();
+  expect(s.order(0)).toBeNull();
+  expect(s.order(5)?.goal).toEqual(p(0, 0));
+  expect(s.order(2)?.goal).not.toEqual(p(0, 0));
+  s.update({ ...dropped, allies: [...dropped.allies].reverse() });
+  expect(s.order(2)?.goal).toEqual(p(0, 0));
+  expect(s.order(5)?.goal).not.toEqual(p(0, 0));
+});
+it("keeps hold and watch slots for missing and dead CTs across contact and plant rotations", () => {
+  const complete = strategy("balanced", "ct"),
+    partial = strategy("balanced", "ct");
+  const allies = state().allies.map((ally) => ({ ...ally, alive: ally.index >= 5 }));
+  const sparse = [allies[8], allies[6], allies[2], allies[7], allies[5]];
+  const updates: Partial<StrategyUpdate>[] = [
+    { dt: 0 },
+    { dt: 4, reports: [{ position: routes.sites.b, age: 0 }] },
+    { dt: 2, reports: [{ position: routes.sites.b, age: 0 }] },
+    { dt: 8, reports: [{ position: routes.sites.a, age: 0 }] },
+    { dt: 2, reports: [{ position: routes.sites.a, age: 0 }] },
+    { dt: 0, bomb: { planted: true, position: routes.sites.b, carrier: -1, site: "b" } },
+  ];
+  for (const [step, update] of updates.entries()) {
+    complete.update(state({ ...update, allies }));
+    partial.update(state({ ...update, allies: sparse }));
+    for (const index of [5, 6, 7, 8]) expect(partial.order(index)).toEqual(complete.order(index));
+    expect(partial.order(2)).toBeNull();
+    if (step === 0) {
+      expect(partial.order(6)?.goal).toEqual(routes.anchors.a[1]);
+      expect(partial.order(6)?.watch).toEqual(routes.lanes.shortA.at(-1)?.position);
+    } else if (step === 2) {
+      expect(partial.rotationReason).toBe("contact");
+      expect(partial.order(5)?.site).toBe("b");
+      expect(partial.order(5)?.goal).toEqual(routes.anchors.b[1]);
+      expect(partial.order(6)?.goal).toEqual(routes.anchors.a[0]);
+    } else if (step === 4) {
+      expect(partial.order(5)?.site).toBe("a");
+      expect(partial.order(5)?.goal).toEqual(routes.anchors.a[1]);
+    }
+  }
+  expect(partial.rotationReason).toBe("plant");
+  expect(partial.order(6)?.site).toBe("b");
+});
+it("preserves a support's original utility ordinal and previously returned orders", () => {
+  const s = strategy("longA");
+  const ally = { index: 5, position: p(24, 28), alive: true };
+  s.update(state({ dt: 15, allies: [ally] }));
+  const previous = s.order(5)!;
+  expect(previous.utility).toBe("smoke");
+  expect(previous.stage).toBe(1);
+  s.update(state({ dt: 15, allies: [ally] }));
+  expect(s.order(5)?.stage).toBe(2);
+  expect(s.order(5)?.utility).toBeNull();
+  expect(previous.stage).toBe(1);
+  expect(previous.utility).toBe("smoke");
+  expect(s.order(5)).not.toBe(previous);
+});
 it("support uses actual entry utility intent while lurker traverses an alternate lane", () => {
   const s = strategy("longA");
   const initial = state({ dt: 0 });

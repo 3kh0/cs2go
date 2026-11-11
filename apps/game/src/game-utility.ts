@@ -10,6 +10,7 @@ import {
   type SceneDepthConsumer,
 } from "./smoke-renderer";
 import { UtilityVisual } from "./utility-effects";
+import type { PreparationScope } from "./shader-preparation";
 import { GrenadeHandling } from "./grenade-handling";
 import { grenadeLaunch, grenadePhysics, advanceGrenade } from "./grenade-physics";
 import { GrenadeView } from "./grenade-view";
@@ -53,6 +54,7 @@ type Effect = {
   age: number;
   mesh: T.Group;
   cells: T.Vector3[];
+  smokeBounds?: T.Box3;
   materials: T.MeshStandardMaterial[];
   batch?: T.InstancedMesh;
   smoke?: SmokeRenderer;
@@ -62,6 +64,19 @@ type Effect = {
   pulse: number;
   weapon: number;
 };
+function segmentMayCrossSmoke(from: T.Vector3, to: T.Vector3, bounds?: T.Box3) {
+  return (
+    !bounds ||
+    !(
+      (from.x < bounds.min.x && to.x < bounds.min.x) ||
+      (from.x > bounds.max.x && to.x > bounds.max.x) ||
+      (from.y < bounds.min.y && to.y < bounds.min.y) ||
+      (from.y > bounds.max.y && to.y > bounds.max.y) ||
+      (from.z < bounds.min.z && to.z < bounds.min.z) ||
+      (from.z > bounds.max.z && to.z > bounds.max.z)
+    )
+  );
+}
 export class GameUtility {
   game: Game;
   smokeComposite = new SmokeComposite();
@@ -102,8 +117,36 @@ export class GameUtility {
   overlay?: HTMLDivElement;
   sphere = new T.SphereGeometry(1, 18, 12);
   cylinder = new T.CylinderGeometry(0.045, 0.045, 0.14, 8);
+  private readonly retainedPreparationRoots: T.Object3D[] = [];
   constructor(game: Game) {
     this.game = game;
+  }
+  /** Keep one material of each utility shader alive between grenade waves.
+   * These detached roots only participate in match graphics preparation; they
+   * never enter the scene or own gameplay effects. Their lifetime matches the
+   * shared sphere/cylinder, rather than an individual round or detonation. */
+  preparationRoots(): readonly T.Object3D[] {
+    if (this.game.mode === "deathmatch") return [];
+    if (!this.retainedPreparationRoots.length) {
+      const cells = [new T.Vector3()];
+      const smoke = new SmokeRenderer(cells, this.sphere);
+      this.retainedPreparationRoots.push(smoke.batch);
+      for (const kind of ["fire", "flash", "blast"] as const)
+        this.retainedPreparationRoots.push(new UtilityVisual(kind, cells).mesh);
+    }
+    return this.retainedPreparationRoots;
+  }
+  /** Smoke renders separately from world lighting/fog, so retain its exact
+   * cloud-pass program in addition to the ordinary world preparation roots. */
+  async prepareSmokeShader(
+    renderer: T.WebGLRenderer,
+    camera: T.Camera,
+    signal?: AbortSignal,
+    scope?: PreparationScope,
+  ) {
+    const smoke = this.preparationRoots()[0];
+    if (!smoke) return;
+    await this.smokeComposite.prepareClouds(renderer, [smoke], camera, signal, scope);
   }
   buy(kind: GrenadeKind) {
     if (this.game.mode === "deathmatch") return false;
@@ -483,6 +526,7 @@ export class GameUtility {
         e.kind === "smoke" &&
         e.cleared <= 0 &&
         e.age > 0.35 &&
+        segmentMayCrossSmoke(from, to, e.smokeBounds) &&
         e.cells.some(
           (c, i) =>
             smokeCellDensity(this.clock, e.holes[i] ?? 0, e.cleared) > 0.3 &&
@@ -493,7 +537,7 @@ export class GameUtility {
   bullet(from: T.Vector3, to: T.Vector3) {
     this.game.world.nativeWater?.crossing(from, to, performance.now() / 1000, 0.025);
     for (const e of this.effects)
-      if (e.kind === "smoke") {
+      if (e.kind === "smoke" && segmentMayCrossSmoke(from, to, e.smokeBounds)) {
         e.cells.forEach((cell, i) => {
           if (segmentNearSphere(from, to, cell, SMOKE_CELL_RADIUS)) e.holes[i] = this.clock + 0.25;
         });
@@ -735,6 +779,11 @@ export class GameUtility {
             effect.cells.push(cell);
           }
       if (!fire) {
+        // Cells stay fixed after detonation. Include jitter and clipped expansion;
+        // holes, clearing and age only change density, never these bounds.
+        effect.smokeBounds = new T.Box3()
+          .setFromPoints(effect.cells)
+          .expandByScalar(SMOKE_CELL_RADIUS + 1e-6);
         effect.smoke = new SmokeRenderer(effect.cells, this.sphere);
         effect.mesh.add(effect.smoke.batch);
       } else {
@@ -838,7 +887,6 @@ export class GameUtility {
     g.bots.forEach((b, i) => hurt(i, b.group.position));
   }
   syncNetwork(state: RoundState, players: PlayerState[], localId: string) {
-    const g = this.game;
     const owner = (id: string): Owner =>
       id === localId
         ? "player"
@@ -903,7 +951,6 @@ export class GameUtility {
     this.blind.set("player", local.blind);
     this.clock = state.clock;
     if (this.selected && !this.inventory[this.selected]) this.selected = null;
-    g.updateBuyMenu();
   }
   takeover(index: number) {
     this.cancelThrow();

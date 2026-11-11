@@ -67,6 +67,7 @@ import { assertNativeEnvironmentBudget } from "./native-environment-budget";
 import { combineNativeCoverage, ownNativeCoverage } from "./native-coverage";
 import { loadNativeComplexPaint } from "./native-complex-paint";
 import { loadNativeMapLocalLights, applyNativeMapLocalLights } from "./native-map-local-lights";
+import { retainImportedSceneryMatrices } from "./imported-scenery-matrices";
 export type NativeMapConfig = {
   model?: string;
   sun: { pitch: number; yaw: number; color: number; intensity: number };
@@ -667,6 +668,7 @@ async function buildNativeMap(
   });
   root.visible = false;
   scene.add(root);
+  resources.onDispose(retainImportedSceneryMatrices(asset.scene));
   if (mapSky && sourceLighting) bindSourceSky(scene, mapSky, root);
   const frameComposite =
     config.frameComposition === "linear-hdr" && grade

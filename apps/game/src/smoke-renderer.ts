@@ -3,6 +3,7 @@ import * as T from "three";
 import { renderFrozenPose } from "./cached-skeleton";
 import { withoutSourceColorCorrection } from "./map-color";
 import { withoutNativeMapGrade } from "./native-map-color";
+import { prepareShadersBounded, type PreparationScope } from "./shader-preparation";
 
 export const SMOKE_CELL_RADIUS = 1.05;
 const RECOVERY = 0.35;
@@ -272,8 +273,66 @@ export class SmokeComposite {
   }
   // The cloud pass needs no world lights/fog or another map/rig traversal.
   private cloudScene = new T.Scene();
+  /** Match the isolated live cloud pass's lighting/fog program key. The caller
+   * supplies its destination framebuffer/color/tone state synchronously. */
+  async prepareClouds(
+    renderer: T.WebGLRenderer,
+    roots: readonly T.Object3D[],
+    camera: T.Camera,
+    signal?: AbortSignal,
+    scope?: PreparationScope,
+  ) {
+    await prepareShadersBounded(renderer, roots, camera, this.cloudScene, { signal, scope });
+  }
   private cloudParents: (T.Object3D | null)[] = [];
   private cloudMasks: number[] = [];
+  private cloudRoots: T.Object3D[] = [];
+  private cloudRootIndices: number[] = [];
+  private identity = new T.Matrix4();
+  private collectCloudRoots(scene: T.Scene, clouds: readonly SmokeRenderer[]) {
+    if (!scene.visible) return false;
+    for (const cloud of clouds) {
+      let root: T.Object3D = cloud.batch;
+      if (root.parent !== scene) {
+        const group = root.parent;
+        // Gameplay effects use a unit Group containing just their cloud. Move
+        // that root intact: visibility, layers and Group.renderOrder still run
+        // through Three's usual traversal. Other hierarchies stay untouched.
+        if (
+          !(group instanceof T.Group) ||
+          group.parent !== scene ||
+          group.children.length !== 1 ||
+          !group.matrix.equals(this.identity)
+        ) {
+          this.cloudRoots.length = this.cloudRootIndices.length = 0;
+          return false;
+        }
+        root = group;
+      }
+      const index = scene.children.indexOf(root);
+      // Save roots in scene order so insertion during restoration cannot shift
+      // a previously restored root away from its original sibling position.
+      let slot = this.cloudRoots.length;
+      while (slot > 0 && this.cloudRootIndices[slot - 1] > index) {
+        this.cloudRoots[slot] = this.cloudRoots[slot - 1];
+        this.cloudRootIndices[slot] = this.cloudRootIndices[slot - 1];
+        slot--;
+      }
+      this.cloudRoots[slot] = root;
+      this.cloudRootIndices[slot] = index;
+    }
+    return true;
+  }
+  private restoreCloudRoots(scene: T.Scene) {
+    for (let i = 0; i < this.cloudRoots.length; i++) {
+      const root = this.cloudRoots[i];
+      if (root.parent === scene) continue;
+      scene.add(root);
+      scene.children.pop();
+      scene.children.splice(this.cloudRootIndices[i], 0, root);
+    }
+    this.cloudRoots.length = this.cloudRootIndices.length = 0;
+  }
   private size = new T.Vector2();
   private viewportSize = new T.Vector2();
   private viewport = new T.Vector4();
@@ -577,9 +636,9 @@ export class SmokeComposite {
       scene.background = null;
       renderer.shadowMap.autoUpdate = false;
       renderer.shadowMap.needsUpdate = false;
-      if (scene.visible && clouds.every((cloud) => cloud.batch.parent === scene)) {
-        for (const cloud of clouds) this.cloudScene.add(cloud.batch);
-        // Direct scene children keep their world matrices and draw ordering.
+      if (this.collectCloudRoots(scene, clouds)) {
+        for (const root of this.cloudRoots) this.cloudScene.add(root);
+        // Matrix updates are disabled; intact roots retain their world pose.
         renderer.render(this.cloudScene, camera);
       } else {
         // Retain inherited visibility and Group.renderOrder for nested clouds.
@@ -599,6 +658,7 @@ export class SmokeComposite {
       renderer.shadowMap.needsUpdate = shadowNeedsUpdate;
       renderer.setRenderTarget(destination);
       if (!destination) renderer.setViewport(this.logicalViewport);
+      this.restoreCloudRoots(scene);
       for (let i = 0; i < this.cloudParents.length; i++) {
         const cloud = clouds[i];
         const parent = this.cloudParents[i];

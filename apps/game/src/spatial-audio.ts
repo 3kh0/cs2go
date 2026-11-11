@@ -1,6 +1,10 @@
 import { Vector3, type Camera } from "three";
 import { NativeAcoustics, roomImpulse } from "./room-acoustics";
 
+// Room nodes are rebuilt after pause; their deterministic sample buffers can
+// survive those resets without retaining the context or its connected graph.
+const roomImpulses = new WeakMap<AudioContext, readonly [AudioBuffer, AudioBuffer]>();
+
 const roomDirections = [
   [0, 4, 0],
   [0, 12, 0],
@@ -83,10 +87,15 @@ export class SpatialAudio {
   connectRoom(context: AudioContext, input: AudioNode, output: AudioNode) {
     if (!this.rooms || this.rooms.context !== context || this.rooms.output !== output) {
       if (this.rooms) this.resetRooms();
-      const convolvers = [false, true].map((large) => {
+      let impulses = roomImpulses.get(context);
+      if (!impulses) {
+        impulses = [roomImpulse(context, false), roomImpulse(context, true)];
+        roomImpulses.set(context, impulses);
+      }
+      const convolvers = impulses.map((impulse) => {
         const convolver = context.createConvolver();
         convolver.normalize = false;
-        convolver.buffer = roomImpulse(context, large);
+        convolver.buffer = impulse;
         convolver.connect(output);
         return convolver;
       });
@@ -124,8 +133,9 @@ export class SpatialAudio {
   }>();
   obstructed?: (from: Vector3, to: Vector3) => boolean;
   update(context: AudioContext, camera: Camera) {
-    camera.getWorldPosition(this.position);
-    camera.getWorldDirection(this.forward);
+    camera.updateWorldMatrix(true, false);
+    this.position.setFromMatrixPosition(camera.matrixWorld);
+    this.forward.setFromMatrixColumn(camera.matrixWorld, 2).normalize().negate();
     this.up.set(0, 1, 0).applyQuaternion(camera.quaternion);
     const listener = context.listener;
     for (const [parameter, value] of [

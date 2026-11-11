@@ -59,6 +59,50 @@ describe("Source navigation", () => {
     expect(route.some((p) => p.x === 3)).toBe(true);
     expect(route.some((p) => p.x === 2)).toBe(false);
   });
+  it("preserves the original raw route and ties through reconverging congested lanes", () => {
+    const lane = (id: number, x: number, z: number, links: number[]): NavArea => ({
+      ...area(id, x, 0, links),
+      center: [x, 0, z],
+      rect: [x - 0.25, z - 0.25, x + 0.25, z + 0.25],
+    });
+    const nav = new Navigation({
+      areas: [
+        lane(1, 0, 0, [2, 3]),
+        lane(2, 2, 1, [4]),
+        lane(3, 2, -1, [4]),
+        lane(4, 4, 0, [5]),
+        lane(5, 6, 0, []),
+      ],
+      spawns: { t: [], ct: [] },
+      sites: [],
+      bounds: [],
+    });
+    const from = new Vector3(),
+      goal = new Vector3(6, 0, 0),
+      neighbour = new Vector3(2, 0, 1),
+      avoid = [neighbour];
+    const route = (points: Vector3[]) =>
+      nav.path(from, goal, points, undefined, false).map((point) => point.toArray());
+    // Exact outputs captured from the original per-edge congestion sums.
+    const expected = (z: number) => [
+      [2, 0, z],
+      [4, 0, 0],
+      [6, 0, 0],
+      [6, 0, 0],
+      [6, 0, 0],
+    ];
+    expect(route(avoid)).toEqual(expected(-1));
+    // The same avoid array and vector are mutable between searches.
+    neighbour.z = -1;
+    expect(route(avoid)).toEqual(expected(1));
+    neighbour.z = 8;
+    expect(route(avoid)).toEqual(expected(-1));
+    expect(route([])).toEqual(expected(-1));
+    neighbour.z = 1;
+    expect(route(avoid)).toEqual(expected(-1));
+    avoid.push(new Vector3(2, 0, -1), new Vector3(2, 0, -1));
+    expect(route(avoid)).toEqual(expected(1));
+  });
   it("escapes an orphaned spawn area overlapping the connected floor", () => {
     const nav = new Navigation({
       areas: [area(1, 0, -0.1, []), area(2, 0, 0, [3]), area(3, 2, 0, [])],

@@ -65,6 +65,7 @@ export class Navigation {
   private readonly polygons = new WeakMap<NavArea, PolygonQuery>();
   // Reused A* buffers; path() is not re-entrant.
   private readonly costs: Float32Array;
+  private readonly congestion: Float64Array;
   private readonly previous: Int32Array;
   private readonly closed: Uint8Array;
   private readonly heapArea: Int32Array;
@@ -189,6 +190,7 @@ export class Navigation {
     each((cell, i) => (this.cellAreas[cursor[cell]++] = i));
     this.seen = new Int32Array(count);
     this.costs = new Float32Array(count);
+    this.congestion = new Float64Array(count);
     this.previous = new Int32Array(count);
     this.closed = new Uint8Array(count);
     this.heapArea = new Int32Array(links + 1);
@@ -487,12 +489,14 @@ export class Navigation {
     }
     const start = hint ?? this.nearest(from),
       end = this.nearest(goal);
-    const { costs, previous, closed, heapArea, heapScore, linkOffsets, linkTargets } = this,
+    const { costs, congestion, previous, closed, heapArea, heapScore, linkOffsets, linkTargets } =
+        this,
       areas = this.areas,
       target = areas[end].center;
     costs.fill(Infinity);
     previous.fill(-1);
     closed.fill(0);
+    if (avoid.length) congestion.fill(-1);
     let size = 0;
     const heuristic = (i: number) => {
       const a = areas[i].center;
@@ -557,12 +561,22 @@ export class Navigation {
         // Reject ladders/jumps this walking controller cannot traverse.
         const horizontal = Math.hypot(b[0] - a[0], b[2] - a[2]);
         if (!ladder && b[1] - a[1] > 1.35 + horizontal * 0.8) continue;
-        let congestion = 0;
-        for (const point of avoid) {
-          const d = Math.hypot(point.x - b[0], point.z - b[2]);
-          if (d < 2.5) congestion += (2.5 - d) * 0.35;
+        let penalty = 0;
+        if (avoid.length) {
+          penalty = congestion[j];
+          if (penalty < 0) {
+            // Every incoming edge uses the same destination penalty for this
+            // search. Retain the original sum in Float64, without caching
+            // moving neighbours or graph coordinates across path() calls.
+            penalty = 0;
+            for (const point of avoid) {
+              const d = Math.hypot(point.x - b[0], point.z - b[2]);
+              if (d < 2.5) penalty += (2.5 - d) * 0.35;
+            }
+            congestion[j] = penalty;
+          }
         }
-        const cost = costs[i] + distance + congestion;
+        const cost = costs[i] + distance + penalty;
         if (cost >= costs[j]) continue;
         costs[j] = cost;
         previous[j] = i;

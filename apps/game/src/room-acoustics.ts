@@ -5,6 +5,10 @@ export class NativeAcoustics {
   readonly ratio: Uint8Array;
   readonly deviation: Uint8Array;
   readonly count: number;
+  // Sparse XZ cells bound construction to the probe count, even for remote
+  // outliers. Any probe within the exclusive 12-unit radius is in these nine
+  // neighboring cells; height and final distance still use the original data.
+  private readonly cells = new Map<number, Map<number, number[]>>();
   constructor(data: ArrayBuffer) {
     const header = new DataView(data);
     this.count = header.getUint32(0, true);
@@ -17,19 +21,44 @@ export class NativeAcoustics {
     this.probes = new Float32Array(data, 8, this.count * 4);
     this.ratio = new Uint8Array(data, 8 + this.count * 16, pairs);
     this.deviation = new Uint8Array(data, 8 + this.count * 16 + pairs, pairs);
+    for (let i = 0; i < this.count; i++) {
+      const x = Math.floor(this.probes[i * 4] / 12),
+        z = Math.floor(this.probes[i * 4 + 2] / 12);
+      let column = this.cells.get(x);
+      if (!column) this.cells.set(x, (column = new Map()));
+      let cell = column.get(z);
+      if (!cell) column.set(z, (cell = []));
+      cell.push(i);
+    }
   }
   nearest(position: Vector3) {
+    if (
+      !Number.isFinite(position.x) ||
+      !Number.isFinite(position.y) ||
+      !Number.isFinite(position.z)
+    )
+      return -1;
     let best = -1,
       distance = 144;
-    for (let i = 0; i < this.count; i++) {
-      const k = i * 4;
-      const d =
-        (this.probes[k] - position.x) ** 2 +
-        (this.probes[k + 1] - position.y) ** 2 +
-        (this.probes[k + 2] - position.z) ** 2;
-      if (d < distance) {
-        distance = d;
-        best = i;
+    const x = Math.floor(position.x / 12),
+      z = Math.floor(position.z / 12);
+    for (let dx = -1; dx <= 1; dx++) {
+      const column = this.cells.get(x + dx);
+      if (!column) continue;
+      for (let dz = -1; dz <= 1; dz++) {
+        const cell = column.get(z + dz);
+        if (!cell) continue;
+        for (const i of cell) {
+          const k = i * 4;
+          const d =
+            (this.probes[k] - position.x) ** 2 +
+            (this.probes[k + 1] - position.y) ** 2 +
+            (this.probes[k + 2] - position.z) ** 2;
+          if (d < distance || (d === distance && best >= 0 && i < best)) {
+            distance = d;
+            best = i;
+          }
+        }
       }
     }
     return best;

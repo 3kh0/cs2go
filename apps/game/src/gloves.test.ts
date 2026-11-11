@@ -1,7 +1,15 @@
 import { afterEach, expect, test, vi } from "vitest";
 import * as T from "three";
 import { existsSync, readFileSync } from "node:fs";
-import { gloveInverseBind, sanitizeGloveChoice } from "./gloves";
+import {
+  gloveInverseBind,
+  sanitizeGloveChoice,
+  unregisterGloveModel,
+  updateGloveModel,
+} from "./gloves";
+import { loadModel } from "./gltf";
+
+vi.mock("./gltf", () => ({ loadModel: vi.fn() }));
 
 afterEach(() => vi.unstubAllGlobals());
 
@@ -101,5 +109,88 @@ test("all glove catalog variants have both native mesh groups and local paint/sh
     expect(paint).not.toContain("https:");
     for (const path of paint.matchAll(/"(\/skins\/[^"\s]+)"/g))
       expect(existsSync(root + path[1])).toBe(true);
+  }
+});
+
+test("switching gloves reuses skin influences while preserving helper bones and owned cleanup", async () => {
+  const geometry = new T.BufferGeometry();
+  geometry.setAttribute("position", new T.Float32BufferAttribute([0, 0, 0], 3));
+  geometry.setAttribute("skinIndex", new T.Uint16BufferAttribute([0, 1, 2, 3], 4));
+  geometry.setAttribute(
+    "skinWeight",
+    new T.BufferAttribute(new Float64Array([1, 1e-6, 1.001e-6, 0]), 4),
+  );
+  const bones = ["hand_l", "threshold", "weighted", "unused"].map((name) => {
+    const bone = new T.Bone();
+    bone.name = name;
+    return bone;
+  });
+  bones[0].add(...bones.slice(1));
+  const material = new T.MeshStandardMaterial();
+  const sourceMesh = new T.SkinnedMesh(geometry, material);
+  sourceMesh.name = "test.viewmodel";
+  sourceMesh.add(bones[0]);
+  sourceMesh.bind(new T.Skeleton(bones));
+  const scene = new T.Group();
+  scene.add(sourceMesh);
+  vi.mocked(loadModel).mockResolvedValue({ scene, animations: [] } as unknown as Awaited<
+    ReturnType<typeof loadModel>
+  >);
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify([
+          {
+            id: "4725_10085",
+            paint: 0,
+            model: "/models/gloves/test.glb",
+          },
+        ]),
+      ),
+    ),
+  );
+  const root = new T.Group(),
+    hand = new T.Bone(),
+    finger = new T.Bone();
+  hand.name = "hand_l";
+  finger.name = "finger_index_meta_l";
+  root.add(hand, finger);
+  const choice = { id: "4725_10085", wear: 0, seed: 1 };
+  const attach = async () => {
+    updateGloveModel(root, "t", choice, false, "default-t");
+    await vi.waitFor(() => expect(root.getObjectByName("glove-test.viewmodel")).toBeDefined());
+    return root.getObjectByName("glove-test.viewmodel") as T.SkinnedMesh;
+  };
+  let reads: ReturnType<typeof vi.spyOn> | undefined;
+  try {
+    const first = await attach();
+    expect(first.skeleton.bones).toEqual([
+      hand,
+      hand,
+      root.getObjectByName("glove-helper-weighted"),
+      hand,
+    ]);
+    expect(first.skeleton.bones[2].parent).toBe(hand);
+    expect(first.skeleton.boneInverses.map((inverse) => inverse.toArray())).toEqual(
+      sourceMesh.skeleton.boneInverses.map((inverse) => gloveInverseBind(inverse).toArray()),
+    );
+    const disposed = vi.spyOn(first.skeleton, "dispose");
+    unregisterGloveModel(root);
+    expect(disposed).toHaveBeenCalledOnce();
+    expect(root.getObjectByName("glove-helper-weighted")).toBeUndefined();
+    reads = vi.spyOn(T.BufferAttribute.prototype, "getComponent");
+    const second = await attach();
+    expect(reads).not.toHaveBeenCalled();
+    expect(second.skeleton).not.toBe(first.skeleton);
+    expect(second.geometry).toBe(first.geometry);
+    expect(second.material).not.toBe(first.material);
+    expect(second.skeleton.bones[2].parent).toBe(hand);
+    expect(second.skeleton.boneInverses.map((inverse) => inverse.toArray())).toEqual(
+      first.skeleton.boneInverses.map((inverse) => inverse.toArray()),
+    );
+  } finally {
+    reads?.mockRestore();
+    unregisterGloveModel(root);
   }
 });

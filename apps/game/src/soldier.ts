@@ -371,6 +371,9 @@ const gripPosition = new T.Vector3(),
 // Refresh only the hand ancestor chains, then share the root inverse across
 // both grip positions and the native attachment without revisiting the rig.
 function poseWeapon(soldier: Soldier) {
+  soldier.weapon.visible = soldier.plant === 0 && !soldier.dying;
+  soldier.carriedBomb.visible = soldier.plant > 0;
+  if (!soldier.weapon.visible && !soldier.carriedBomb.visible) return;
   soldier.rightHand.updateWorldMatrix(true, false);
   soldier.leftHand.updateWorldMatrix(true, false);
   soldierInverse.copy(soldier.group.matrixWorld).invert();
@@ -406,8 +409,6 @@ function poseWeapon(soldier: Soldier) {
       .negate()
       .add(soldier.grip);
   }
-  soldier.weapon.visible = soldier.plant === 0 && !soldier.dying;
-  soldier.carriedBomb.visible = soldier.plant > 0;
   if (soldier.carriedBomb.visible) {
     soldier.carriedBomb.position.copy(soldier.grip).lerp(soldier.support, 0.5);
     soldier.carriedBomb.position.y -= 0.025;

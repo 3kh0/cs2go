@@ -85,15 +85,20 @@ function history(board: Board) {
   node.append(rounds);
   return node;
 }
+export function updateScoreboardClock(board: Pick<Board, "mode" | "seconds">) {
+  const clock = document.getElementById("scoreboard-clock")!;
+  const text =
+    board.mode === "practice"
+      ? "∞"
+      : `${Math.floor(board.seconds / 60)}:${String(board.seconds % 60).padStart(2, "0")}`;
+  if (clock.textContent !== text) clock.textContent = text;
+}
 export function renderScoreboard(board: Board) {
   const root = document.getElementById("scoreboard")!;
   root.dataset.mode = board.mode;
   root.querySelector("h2")!.textContent =
     `${board.mode.charAt(0).toUpperCase()}${board.mode.slice(1).toLowerCase()} | ${MAPS[board.map ?? "dust2"].name}`;
-  document.getElementById("scoreboard-clock")!.textContent =
-    board.mode === "practice"
-      ? "∞"
-      : `${Math.floor(board.seconds / 60)}:${String(board.seconds % 60).padStart(2, "0")}`;
+  updateScoreboardClock(board);
   const localTeam = board.rows.find((player) => player.id === "player")?.team;
   const fragment = document.createDocumentFragment();
   const deathmatch = board.mode === "deathmatch";

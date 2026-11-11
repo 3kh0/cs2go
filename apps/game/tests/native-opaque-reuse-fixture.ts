@@ -172,3 +172,124 @@ export function nativeOpaqueReuseFixture() {
   renderer.dispose();
   return rows;
 }
+
+/** Real utility hierarchy, compared with the unchanged nested-scene fallback. */
+export function nativeGameplaySmokeRootsFixture() {
+  const renderer = new T.WebGLRenderer({ antialias: false });
+  renderer.setSize(96, 64);
+  renderer.toneMapping = T.NoToneMapping;
+  const target = new T.WebGLRenderTarget(96, 64, { type: T.HalfFloatType });
+  const scene = new T.Scene();
+  scene.background = new T.Color(0.12, 0.25, 0.5);
+  const camera = new T.PerspectiveCamera(65, 1.5, 0.1, 30);
+  const wall = new T.Mesh(
+    new T.BoxGeometry(8, 6, 0.2),
+    new T.MeshBasicMaterial({ color: 0xcc5522 }),
+  );
+  wall.position.set(0, 1, -2);
+  scene.add(wall);
+  const cover = new T.Mesh(
+    new T.BoxGeometry(0.8, 3, 0.4),
+    new T.MeshBasicMaterial({ color: 0x226633 }),
+  );
+  cover.position.set(-0.6, 1, 1);
+  scene.add(cover);
+  const sphere = new T.SphereGeometry(1, 18, 12);
+  const clouds = Array.from({ length: 6 }, (_, index) => {
+    const x = ((index % 3) - 1) * 0.3,
+      z = Math.floor(index / 3) * 0.35;
+    return new SmokeRenderer(
+      [new T.Vector3(x, 0.5, z), new T.Vector3(x, 1.3, z), new T.Vector3(x + 0.5, 0.9, z)],
+      sphere,
+    );
+  });
+  const roots = clouds.map((cloud, index) => {
+    const root = new T.Group();
+    root.layers.enable(31);
+    root.renderOrder = index % 2;
+    root.add(cloud.batch);
+    scene.add(root, new T.Group());
+    return root;
+  });
+  const originalChildren = [...scene.children];
+  const blockers = roots.map(() => new T.Group());
+  const composite = new SmokeComposite();
+  const render = renderer.render.bind(renderer);
+  let cloudOnly = false;
+  renderer.render = (drawScene, drawCamera) => {
+    if (drawCamera.layers.mask === 0x80000000) cloudOnly = drawScene !== scene;
+    render(drawScene, drawCamera);
+  };
+  const rows = [];
+  for (const inside of [false, true])
+    for (const state of ["filled", "holes", "recovery", "hidden"] as const) {
+      camera.position.set(0.25, 1.15, inside ? 0.2 : 6);
+      camera.lookAt(0, 1, -2);
+      roots[2].visible = state !== "hidden";
+      clouds.forEach((cloud, index) =>
+        cloud.update(
+          4,
+          1,
+          10,
+          state === "holes" && index % 2 === 0 ? [11, 0, 11] : [],
+          state === "recovery" ? -0.175 : -1,
+          2,
+        ),
+      );
+      // A smoke-free image prevents two equally empty/broken passes from
+      // passing the pixel comparison.
+      roots.forEach((root) => {
+        root.visible = false;
+      });
+      renderer.setRenderTarget(target);
+      composite.render(renderer, scene, camera, []);
+      const clearPixels = new Uint16Array(96 * 64 * 4);
+      renderer.readRenderTargetPixels(target, 0, 0, 96, 64, clearPixels);
+      roots.forEach((root, index) => {
+        root.visible = state !== "hidden" || index !== 2;
+      });
+      const runs = [];
+      for (const optimized of [false, true]) {
+        roots.forEach((root, index) => {
+          if (optimized) blockers[index].removeFromParent();
+          else root.add(blockers[index]);
+        });
+        renderer.setRenderTarget(target);
+        renderer.clear();
+        cloudOnly = false;
+        composite.render(renderer, scene, camera, clouds);
+        const pixels = new Uint16Array(96 * 64 * 4);
+        renderer.readRenderTargetPixels(target, 0, 0, 96, 64, pixels);
+        runs.push({ pixels, cloudOnly });
+      }
+      let changed = 0,
+        smokePixels = 0;
+      for (let i = 0; i < runs[0].pixels.length; i++) {
+        if (runs[0].pixels[i] !== runs[1].pixels[i]) changed++;
+        if (runs[1].pixels[i] !== clearPixels[i]) smokePixels++;
+      }
+      rows.push({
+        inside,
+        state,
+        changed,
+        smokePixels,
+        cloudOnly: runs.map((run) => run.cloudOnly),
+        restored:
+          scene.children.every((child, index) => child === originalChildren[index]) &&
+          roots.every(
+            (root, index) => root.parent === scene && clouds[index].batch.parent === root,
+          ),
+        glError: renderer.getContext().getError(),
+      });
+    }
+  clouds.forEach((cloud) => cloud.dispose());
+  sphere.dispose();
+  wall.geometry.dispose();
+  wall.material.dispose();
+  cover.geometry.dispose();
+  cover.material.dispose();
+  composite.target?.dispose();
+  target.dispose();
+  renderer.dispose();
+  return rows;
+}

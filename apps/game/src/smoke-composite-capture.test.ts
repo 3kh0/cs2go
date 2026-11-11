@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import * as T from "three";
-import { registerSceneDepthMaterial, SmokeComposite } from "./smoke-renderer";
+import { registerSceneDepthMaterial, SmokeComposite, SmokeRenderer } from "./smoke-renderer";
 
 function fixture() {
   const scene = new T.Scene();
@@ -126,4 +126,87 @@ for (const failure of ["capture", "remaining", "reentrant"] as const)
     f.onDraw(() => {});
     expect(f.render).not.toThrow();
     f.restored();
+  });
+
+for (const fail of [false, true])
+  it(`renders intact gameplay cloud roots alone and restores sibling order${fail ? " after failure" : ""}`, () => {
+    const f = fixture();
+    const geometry = new T.SphereGeometry(1, 8, 6);
+    const clouds = [
+      new SmokeRenderer([new T.Vector3()], geometry),
+      new SmokeRenderer([new T.Vector3(1, 0, 0)], geometry),
+    ];
+    const roots = clouds.map((cloud, index) => {
+      const root = new T.Group();
+      root.layers.mask = index ? 1 : -1;
+      root.renderOrder = index + 3;
+      root.visible = index === 0;
+      root.add(cloud.batch);
+      f.scene.add(root, new T.Group());
+      return root;
+    });
+    f.scene.updateMatrixWorld();
+    const siblings = [...f.scene.children];
+    const matrices = clouds.map((cloud) => cloud.batch.matrixWorld.clone());
+    const render = f.renderer.render.bind(f.renderer);
+    let isolated = false;
+    f.renderer.render = (scene, camera) => {
+      if (camera.layers.mask === 0x80000000) {
+        isolated = true;
+        expect(scene).not.toBe(f.scene);
+        expect(scene.children).toEqual(roots);
+        roots.forEach((root, index) => {
+          expect(root.visible).toBe(index === 0);
+          expect(root.renderOrder).toBe(index + 3);
+          expect(root.layers.mask).toBe(index ? 1 : -1);
+          expect(clouds[index].batch.matrixWorld.equals(matrices[index])).toBe(true);
+        });
+        if (fail) throw new Error("cloud draw failed");
+      } else render(scene, camera);
+    };
+    const run = () =>
+      f.composite.render(f.renderer, f.scene, new T.PerspectiveCamera(), [...clouds].reverse());
+    if (fail) expect(run).toThrow("cloud draw failed");
+    else run();
+    expect(isolated).toBe(true);
+    expect(f.scene.children).toEqual(siblings);
+    f.restored();
+    roots.forEach((root, index) => {
+      expect(root.parent).toBe(f.scene);
+      expect(clouds[index].batch.parent).toBe(root);
+      expect(clouds[index].batch.layers.mask).toBe(1);
+      expect(clouds[index].batch.matrixWorld.equals(matrices[index])).toBe(true);
+    });
+    clouds.forEach((cloud) => cloud.dispose());
+    geometry.dispose();
+  });
+
+for (const hierarchy of ["transformed", "nested", "sibling"] as const)
+  it(`keeps the original scene for a ${hierarchy} cloud hierarchy`, () => {
+    const f = fixture();
+    const geometry = new T.SphereGeometry(1, 8, 6);
+    const cloud = new SmokeRenderer([new T.Vector3()], geometry);
+    const root = new T.Group();
+    root.add(cloud.batch);
+    f.scene.add(root);
+    if (hierarchy === "transformed") root.position.x = 2;
+    if (hierarchy === "nested") {
+      const outer = new T.Group();
+      f.scene.add(outer);
+      outer.add(root);
+    }
+    if (hierarchy === "sibling") root.add(new T.Group());
+    const render = f.renderer.render.bind(f.renderer);
+    let checked = false;
+    f.renderer.render = (scene, camera) => {
+      if (camera.layers.mask === 0x80000000) {
+        checked = true;
+        expect(scene).toBe(f.scene);
+        expect(cloud.batch.parent).toBe(root);
+      } else render(scene, camera);
+    };
+    f.composite.render(f.renderer, f.scene, new T.PerspectiveCamera(), [cloud]);
+    expect(checked).toBe(true);
+    cloud.dispose();
+    geometry.dispose();
   });

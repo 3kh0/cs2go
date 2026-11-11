@@ -11,14 +11,20 @@ export class ActorReflections {
   private desired = new Set<number>();
   private generator?: T.PMREMGenerator;
   private previous = new Set<T.Object3D>();
+  private current = new Set<T.Object3D>();
+  private indices: (number | null)[] = [];
   update(renderer: T.WebGLRenderer, requests: Request[]) {
-    const chosen = new Set<number>();
-    const current = new Set<T.Object3D>();
-    const indices = requests.map(({ position }) => nearestSourceProbe(position));
-    for (const index of indices) {
+    const chosen = this.desired;
+    chosen.clear();
+    const current = this.current;
+    current.clear();
+    const indices = this.indices;
+    indices.length = requests.length;
+    for (let i = 0; i < requests.length; i++) {
+      const index = nearestSourceProbe(requests[i].position);
+      indices[i] = index;
       if (index !== null && chosen.size < 8) chosen.add(index);
     }
-    this.desired = chosen;
     for (let i = 0; i < requests.length; i++) {
       const { root } = requests[i];
       const index = indices[i];
@@ -29,6 +35,7 @@ export class ActorReflections {
       );
     }
     for (const root of this.previous) if (!current.has(root)) setActorReflection(root);
+    this.current = this.previous;
     this.previous = current;
     for (const [index, target] of this.cache) {
       if (!chosen.has(index)) {
@@ -37,7 +44,14 @@ export class ActorReflections {
       }
     }
     if (this.loading) return;
-    const next = [...chosen].find((index) => !this.cache.has(index) && !this.failed.has(index));
+    let candidate: number | undefined;
+    for (const index of chosen) {
+      if (!this.cache.has(index) && !this.failed.has(index)) {
+        candidate = index;
+        break;
+      }
+    }
+    const next = candidate;
     if (next === undefined) return;
     this.loading = true;
     void loadSourceReflection(next)

@@ -174,7 +174,7 @@ import { setupUiAudio } from "./ui-audio";
 import { MatchNotices } from "./match-notices";
 import { roundMvp } from "./round-mvp";
 import { roundFact, type RoundActor } from "./round-facts";
-import { renderScoreboard } from "./scoreboard";
+import { renderScoreboard, updateScoreboardClock } from "./scoreboard";
 import { hideRoundBanner, showRoundBanner } from "./round-banner";
 import type { LoadProgress } from "./intro";
 import { enableTextureTranscoding } from "./gltf";
@@ -355,6 +355,9 @@ export class Game {
   groundInventory = new GameInventory(this);
   view = new T.Scene();
   actorReflections = new ActorReflections();
+  private reflectionBots: Bot[] = [];
+  private reflectionActors: { root: T.Object3D; position: T.Vector3 }[] = [];
+  private reflectionRecords: { root: T.Object3D; position: T.Vector3 }[] = [];
   viewSun = new T.DirectionalLight(0xffefd5, 3);
   probePosition = new T.Vector3();
   probeRotation = new T.Matrix3();
@@ -967,17 +970,23 @@ export class Game {
     this.resizeRenderer();
     this.updateTextureQuality();
   }
+  private textureCheckingHome = false;
   updateTextureQuality() {
     if (!this.menuReady && !this.assetsReady) return;
     const signature = `${this.settings.textureQuality}:${this.settings.textureFiltering}`;
     const changed = this.textureQualityApplied !== signature;
     const now = performance.now();
-    if (!changed && now - this.textureViewCheck < 1000) return;
+    const checkHome = !this.active;
+    const enteredHome = checkHome && !this.textureCheckingHome;
+    this.textureCheckingHome = checkHome;
+    if (!changed && !enteredHome && now - this.textureViewCheck < 1000) return;
     // Cached guns are detached from the view scene. Refresh them on a quality
     // change; ordinary checks inspect only the current view and spectator gun.
     const roots: T.Object3D[] = changed
       ? [this.scene, this.homeScene.graphicsRoot, this.view, ...this.guns.values()]
-      : [this.view, ...this.homeScene.previewRoots];
+      : checkHome
+        ? [this.view, ...this.homeScene.previewRoots]
+        : [this.view];
     if (
       this.active &&
       this.dead &&
@@ -1194,6 +1203,7 @@ export class Game {
       if (code === "Digit3") this.equip(this.knife);
       if (code === "KeyB" && this.canBuy()) {
         toggle("loadout", true);
+        this.updateBuyMenu();
         document.exitPointerLock();
         toggle("pause", false);
       }
@@ -1512,7 +1522,7 @@ export class Game {
       this.scene.add(tracer.mesh);
     }
     const warmTracer = tracer.mesh;
-    const worldExtras = [createWorldGun(0), createWorldGun(1)];
+    const worldExtras = [createWorldGun(0), createWorldGun(1), ...this.utility.preparationRoots()];
     const viewExtras: T.Object3D[] = [];
     for (let index = 0; index < weapons.length; index++) {
       const gun = this.viewGun(index);
@@ -1574,6 +1584,9 @@ export class Game {
         scope: (work) => scoped(false, work),
       },
     );
+    await this.utility.prepareSmokeShader(this.renderer, this.camera, signal, (work) =>
+      scoped(false, work),
+    );
     scoped(false, () => {
       foliage = preparedWorld.nativeCoverage?.prepare(this.camera);
     });
@@ -1589,6 +1602,10 @@ export class Game {
       );
       this.updateViewLighting(this.healthshotView, 1 / 60);
     }
+    // Compile the same map-lighting shape that each cached gun uses on equip,
+    // instead of invalidating its prepared program at the first live switch.
+    for (const model of [this.gun, ...viewExtras, this.bombView, this.defuseView])
+      this.updateViewLighting(model, 1 / 60);
     await prepareShadersBounded(
       this.renderer,
       [this.view, ...viewExtras],
@@ -5424,15 +5441,15 @@ export class Game {
         .normalize()
         .applyQuaternion(basis);
       const ray = new T.Ray(from, shot);
-      const caster = new T.Raycaster(from, shot, 0, stats.range / SOURCE_UNITS_PER_METER);
+      const maxDistance = stats.range / SOURCE_UNITS_PER_METER;
       const cover = this.world.collision
-        ? this.world.collision.intersections(ray, caster.far)
-        : caster.intersectObjects(this.world.solids, false);
+        ? this.world.collision.intersections(ray, maxDistance)
+        : new T.Raycaster(from, shot, 0, maxDistance).intersectObjects(this.world.solids, false);
       const surfaces = cover.map((impact) => this.bulletCover(impact, ray));
       const intersect = (id: number | "player", feet: T.Vector3, crouch = false) => {
         const hit =
           typeof id === "number"
-            ? shotHit(this.bots[id].rig, ray, caster.far)
+            ? shotHit(this.bots[id].rig, ray, maxDistance)
             : botBodyHit(ray, feet, crouch);
         if (!hit) return;
         const surface = this.bulletBody(
@@ -6293,9 +6310,14 @@ export class Game {
                 false,
                 nav.areas[b.navArea],
               );
-              const next = onward
-                .map((point) => nav.areas[nav.nearest(point)].id)
-                .find((id) => id !== area.id && area.links.includes(id));
+              let next: number | undefined;
+              for (const point of onward) {
+                const id = nav.areas[nav.nearest(point)].id;
+                if (id !== area.id && area.links.includes(id)) {
+                  next = id;
+                  break;
+                }
+              }
               if (next !== undefined) b.blockedAreas.add(next);
               if (b.blockedAreas.size > 8) b.blockedAreas.clear();
               b.path = [];
@@ -6580,7 +6602,6 @@ export class Game {
     const data = {
       map: this.mapId,
       rows,
-      seconds,
       mode: this.mode,
       round: this.round,
       history: this.roundHistory,
@@ -6593,10 +6614,11 @@ export class Game {
       planted: !!this.bomb?.planted,
       roundPause: this.roundPause > 0,
     };
+    updateScoreboardClock({ mode: this.mode, seconds });
     const signature = JSON.stringify(data);
     if (signature === this.scoreboardSignature) return;
     this.scoreboardSignature = signature;
-    renderScoreboard(data);
+    renderScoreboard({ ...data, seconds });
   }
 
   updateUI() {
@@ -6636,7 +6658,7 @@ export class Game {
     if (armorState.dataset.helmet !== helmet) armorState.dataset.helmet = helmet;
     if (armorState.dataset.empty !== emptyArmor) armorState.dataset.empty = emptyArmor;
     setText("money", this.teamMode ? `$${(observer?.money ?? this.money).toLocaleString()}` : "");
-    this.updateBuyMenu();
+    if (!el("loadout").classList.contains("hidden")) this.updateBuyMenu();
     el("health-fill").style.width = `${clamp(observer?.health ?? this.health, 0, 100)}%`;
     const teamIcon = el("hud-team-icon");
     if (teamIcon.dataset.team !== this.team) {
@@ -6951,26 +6973,33 @@ export class Game {
     this.updateViewLighting(viewModel, dt);
     if (this.bombView.visible) this.updateViewLighting(this.bombView, dt);
     if (this.defuseView.visible) this.updateViewLighting(this.defuseView, dt);
-    const reflectionActors = source
-      ? [
-          { root: viewModel, position: this.camera.position },
-          ...(this.bombView.visible
-            ? [{ root: this.bombView, position: this.camera.position }]
-            : []),
-          ...this.bots
-            .filter((bot) => bot.group.visible)
-            .sort(
-              (a, b) =>
-                a.group.position.distanceToSquared(this.camera.position) -
-                b.group.position.distanceToSquared(this.camera.position),
-            )
-            .map((bot) => ({ root: bot.group, position: bot.group.position })),
-          ...(this.bombMesh.visible
-            ? [{ root: this.bombMesh, position: this.bombMesh.position }]
-            : []),
-          ...(ball ? [{ root: ball, position: ball.position }] : []),
-        ]
-      : [];
+    // The consumer reads these records synchronously; retain their storage,
+    // while refreshing roots/positions and the existing nearest-first priority.
+    const reflectionActors = this.reflectionActors;
+    reflectionActors.length = 0;
+    if (source) {
+      const append = (root: T.Object3D, position: T.Vector3) => {
+        const index = reflectionActors.length;
+        const record = (this.reflectionRecords[index] ??= { root, position });
+        record.root = root;
+        record.position = position;
+        reflectionActors.push(record);
+      };
+      append(viewModel, this.camera.position);
+      if (this.bombView.visible) append(this.bombView, this.camera.position);
+      const bots = this.reflectionBots;
+      for (const bot of this.bots) if (bot.group.visible) bots.push(bot);
+      bots.sort(
+        (a, b) =>
+          a.group.position.distanceToSquared(this.camera.position) -
+          b.group.position.distanceToSquared(this.camera.position),
+      );
+      for (const bot of bots) append(bot.group, bot.group.position);
+      bots.length = 0;
+      if (this.bombMesh.visible) append(this.bombMesh, this.bombMesh.position);
+      if (ball) append(ball, ball.position);
+    }
+    this.reflectionRecords.length = reflectionActors.length;
     this.actorReflections.update(this.renderer, reflectionActors);
     if (this.world === this.dust && !source && !this.dust?.nativeReflections)
       setActorReflection(viewModel, null);

@@ -46,6 +46,56 @@ function delayedBody() {
   const promise = new Promise<T.Group>((done) => (resolve = done));
   return { promise, resolve };
 }
+test("rebinding identical effective skin maps avoids material invalidation while real changes stay dirty", async () => {
+  const skins = await import("./skins"),
+    { createWeaponInstance } = await import("./weapon-instance");
+  const root = new T.Group(),
+    hd = body("skin-hd");
+  hd.material.normalMap = new T.Texture();
+  const nativeMap = hd.material.map,
+    nativeNormal = hd.material.normalMap,
+    initialVersion = hd.material.version;
+  root.add(hd.root);
+  skins.registerSkinModel(root, 0, undefined, true);
+  expect(hd.material.version).toBe(initialVersion);
+
+  await skins.setSkin(0, choice);
+  const paintedMap = hd.material.map,
+    paintedVersion = hd.material.version;
+  expect(paintedMap).not.toBe(nativeMap);
+  expect(hd.material.normalMap).toBe(nativeNormal);
+  expect(paintedVersion).toBe(initialVersion + 1);
+  const visualVersion = root.userData.skinVisualVersion;
+  skins.bindWeaponInstance(root, createWeaponInstance(0, "player:1", true));
+  skins.bindWeaponInstance(root, createWeaponInstance(0, "player:2", true));
+  expect(hd.material.map).toBe(paintedMap);
+  expect(hd.material.normalMap).toBe(nativeNormal);
+  expect(hd.material.version).toBe(paintedVersion);
+  expect(root.userData.skinVisualVersion).toBe(visualVersion + 2);
+
+  skins.bindWeaponInstance(root, null);
+  expect(hd.material.map).toBe(nativeMap);
+  expect(hd.material.roughnessMap).toBeNull();
+  expect(hd.material.metalnessMap).toBeNull();
+  expect(hd.material.normalMap).toBe(nativeNormal);
+  expect(hd.material.version).toBe(paintedVersion + 1);
+});
+test("restoring any changed skin map invalidates its material", async () => {
+  const skins = await import("./skins"),
+    { createWeaponInstance } = await import("./weapon-instance");
+  const root = new T.Group(),
+    hd = body("skin-hd");
+  root.add(hd.root);
+  skins.registerSkinModel(root, 0, undefined, true);
+  for (const name of ["map", "roughnessMap", "metalnessMap", "normalMap"] as const) {
+    const original = hd.material[name],
+      version = hd.material.version;
+    hd.material[name] = new T.Texture();
+    skins.bindWeaponInstance(root, createWeaponInstance(0, `bot:${name}`));
+    expect(hd.material[name]).toBe(original);
+    expect(hd.material.version).toBe(version + 1);
+  }
+});
 test("restores a saved HD finish lazily, retains imported UVs, and restores native maps", async () => {
   storage.set("cs2go-skins-v1", JSON.stringify([choice]));
   const skins = await import("./skins");

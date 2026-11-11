@@ -181,7 +181,15 @@ function apply(model: Model, finish?: Finish) {
       }
       maps = views;
     }
-    Object.assign(material, maps, { normalMap: maps.normalMap ?? original.normalMap });
+    const normalMap = maps.normalMap ?? original.normalMap;
+    if (
+      material.map === maps.map &&
+      material.roughnessMap === maps.roughnessMap &&
+      material.metalnessMap === maps.metalnessMap &&
+      material.normalMap === normalMap
+    )
+      continue;
+    Object.assign(material, maps, { normalMap });
     material.needsUpdate = true;
   }
   // Inspectors can reframe after an asynchronously loaded HD/legacy body becomes

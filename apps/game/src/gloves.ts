@@ -77,6 +77,7 @@ export function gloveInverseBind(inverse: T.Matrix4) {
 type Part = {
   mesh: T.SkinnedMesh;
   geometry: T.BufferGeometry;
+  usedJoints: ReadonlySet<number>;
   inverses: T.Matrix4[];
   role?: "sleeves" | "hands";
 };
@@ -123,6 +124,15 @@ function template(path: string) {
         asset.scene.traverse((object) => {
           if (!(object instanceof T.SkinnedMesh)) return;
           const geometry = object.geometry.clone().applyMatrix4(sourceBasis);
+          // Skin influences are immutable template data. Switching recreates
+          // owned attachments, but must not rescan their vertices each time.
+          const skinIndex = geometry.getAttribute("skinIndex"),
+            skinWeight = geometry.getAttribute("skinWeight"),
+            usedJoints = new Set<number>();
+          for (let i = 0; i < skinIndex.count; i++)
+            for (let channel = 0; channel < 4; channel++)
+              if (skinWeight.getComponent(i, channel) > 1e-6)
+                usedJoints.add(skinIndex.getComponent(i, channel));
           // glTF tangents carry the old basis too; regenerated tangents use posed normals/UVs.
           geometry.deleteAttribute("tangent");
           let node: T.Object3D | null = object,
@@ -135,6 +145,7 @@ function template(path: string) {
           parts.push({
             mesh: object,
             geometry,
+            usedJoints,
             inverses: object.skeleton.boneInverses.map(gloveInverseBind),
             role,
           });
@@ -410,15 +421,8 @@ function attach(
     )
       continue;
     const joints: T.Bone[] = [];
-    const skinIndex = part.geometry.getAttribute("skinIndex"),
-      skinWeight = part.geometry.getAttribute("skinWeight"),
-      used = new Set<number>();
-    for (let i = 0; i < skinIndex.count; i++)
-      for (let channel = 0; channel < 4; channel++)
-        if (skinWeight.getComponent(i, channel) > 1e-6)
-          used.add(skinIndex.getComponent(i, channel));
     for (const [index, bone] of part.mesh.skeleton.bones.entries()) {
-      const target = used.has(index)
+      const target = part.usedJoints.has(index)
         ? targetBone(bone)
         : (bones.get(bone.name.toLowerCase()) ?? bones.get("hand_l"));
       if (!target) return false;
