@@ -55,3 +55,30 @@ it("does not return progress toward a distant disconnected upper floor", () => {
   const collision = new MapCollision([ground()]);
   expect(detour(collision, new T.Vector3(-2, 0, 0), new T.Vector3(14, 4, 0))).toEqual([]);
 });
+it("rechecks nodes and swept midpoints when an obstruction changes between searches", () => {
+  const collision = new MapCollision([ground()]);
+  const from = new T.Vector3(-2, 0, -2),
+    goal = new T.Vector3(2, 0, 2),
+    open = detour(collision, from, goal);
+  for (const obstacle of [
+    mesh([0, 0, -1, 0, 3, -1, 0, 3, 1, 0, 0, -1, 0, 3, 1, 0, 0, 1]),
+    // Both diagonal endpoints clear this thin edge; only the midpoint hits it.
+    mesh([
+      -1.75, 0, -1.751, -1.75, 3, -1.751, -1.75, 3, -1.749, -1.75, 0, -1.751, -1.75, 3, -1.749,
+      -1.75, 0, -1.749,
+    ]),
+  ]) {
+    collision.setDynamicMeshes("obstruction", [obstacle]);
+    const route = detour(collision, from, goal);
+    expect(route).not.toEqual(open);
+    expect(route.at(-1)!.distanceTo(goal)).toBeLessThan(0.65);
+    for (const [index, point] of route.entries()) {
+      const previous = route[index - 1] ?? from,
+        midpoint = previous.clone().lerp(point, 0.5);
+      expect(collision.blocked(point.x, point.z, point.y, 0.35)).toBe(false);
+      expect(collision.blocked(midpoint.x, midpoint.z, midpoint.y, 0.35)).toBe(false);
+    }
+    collision.removeDynamicMeshes("obstruction");
+    expect(detour(collision, from, goal)).toEqual(open);
+  }
+});

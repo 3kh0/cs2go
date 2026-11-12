@@ -20,6 +20,13 @@ type Node = {
 const before = (a: Node, b: Node) =>
   a.score < b.score || (a.score === b.score && a.order < b.order);
 
+// Searches are synchronous and non-reentrant. Retain storage, not probe results.
+const floorFrom = new Float64Array(side * side),
+  floorY = new Float64Array(side * side),
+  floorBlocked = new Uint8Array(side * side);
+const sweepFeet = new Float64Array(halfSide * halfSide),
+  sweepBlocked = new Uint8Array(halfSide * halfSide);
+
 // A bounded local search refines native NAV routes around angled doors and
 // props. Heights remain part of the state so tunnels are not flattened.
 export function detour(collision: MapCollision, from: T.Vector3, goal: T.Vector3) {
@@ -58,11 +65,8 @@ export function detour(collision: MapCollision, from: T.Vector3, goal: T.Vector3
   };
   // Collision probes are pure, and neighbouring expansions repeat them from
   // the same floor height. Remember the latest result per grid point.
-  const floorFrom = new Float64Array(side * side).fill(NaN),
-    floorY = new Float64Array(side * side),
-    floorBlocked = new Uint8Array(side * side);
-  const sweepFeet = new Float64Array(halfSide * halfSide).fill(NaN),
-    sweepBlocked = new Uint8Array(halfSide * halfSide);
+  floorFrom.fill(NaN);
+  sweepFeet.fill(NaN);
   const start: Node = { x: 0, z: 0, y: from.y, cost: 0, score: distance(0, 0), order: 0 };
   const costs = new Map([[key(0, 0, start.y), 0]]);
   const distant = Math.max(Math.abs(goal.x - from.x), Math.abs(goal.z - from.z)) > reach * spacing;

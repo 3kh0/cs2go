@@ -10,6 +10,7 @@ import { addMoney, weaponPrice, weaponAvailable } from "./economy";
 import { defaultLoadouts, loadoutCategory, readLoadouts, loadoutChoices } from "./loadouts";
 import { BuyPreview } from "./buy-preview";
 import { assetUrl } from "./asset-url";
+import { setBuyProperty } from "./buy-menu";
 import { skinChoices, skinCatalog, type Skin } from "./skins";
 import "./loadout-menu.css";
 import { MenuBackdrop } from "./menu-backdrop";
@@ -651,7 +652,7 @@ export class GameInventory {
         refund.onclick = () => this.refundEquipment(kind);
         button.after(refund);
       }
-      refund.hidden = !this.canRefundEquipment(kind);
+      setBuyProperty(refund, "hidden", !this.canRefundEquipment(kind));
     }
   }
   clearDrops() {

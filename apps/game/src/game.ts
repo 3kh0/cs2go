@@ -39,7 +39,7 @@ import { createWeaponInstance, weaponInstanceName } from "./weapon-instance";
 import { grenadeData, grenadeIcons, grenadeTypes, type GrenadeKind } from "./utility";
 import { setAssetCacheMatchActive } from "./asset-cache";
 import { assetUrl } from "./asset-url";
-import { weaponBuyIcon } from "./buy-menu";
+import { weaponBuyIcon, setBuyProperty } from "./buy-menu";
 import { playerName, playerAvatar } from "./player-profile";
 import {
   createTracer,
@@ -1507,7 +1507,7 @@ export class Game {
       this.bots.forEach((bot) => (bot.group.visible = false));
     }
   }
-  // Compile both worlds and weapon programs; upload visible finishes only.
+  // Compile the selected world and weapon programs; upload visible finishes only.
   // Hidden HD skin variants upload on first use instead of occupying GPU memory.
   async warmUp(signal?: AbortSignal) {
     signal?.throwIfAborted();
@@ -1574,9 +1574,16 @@ export class Game {
         this.renderer.toneMapping = tone;
       }
     };
+    // Cached maps are direct scene children. Keep hidden future actors/weapons,
+    // but do not prepare inactive maps against the selected map's lighting.
+    const inactiveMaps = new Set<T.Object3D>(
+      [...this.nativeWorlds.values()]
+        .filter((world) => world !== preparedWorld)
+        .map((world) => world.root),
+    );
     await prepareShadersBounded(
       this.renderer,
-      [this.scene, ...worldExtras],
+      [...this.scene.children.filter((root) => !inactiveMaps.has(root)), ...worldExtras],
       this.camera,
       this.scene,
       {
@@ -2277,9 +2284,9 @@ export class Game {
   updateBuyMenu() {
     this.groundInventory.updateEquipmentRefunds();
     this.utility.updateBuyMenu();
-    el("loadout").dataset.layout = "columns";
-    el("loadout").dataset.team = this.team;
-    el("loadout").dataset.practice = String(!this.teamMode);
+    setBuyProperty(el("loadout").dataset, "layout", "columns");
+    setBuyProperty(el("loadout").dataset, "team", this.team);
+    setBuyProperty(el("loadout").dataset, "practice", String(!this.teamMode));
     const allowed = this.canBuy();
     const indices = this.inventory();
     setText(
@@ -2318,46 +2325,71 @@ export class Game {
     el("buy-dropped-items").parentElement!.classList.toggle("has-drops", nearby.length > 0);
     for (const button of document.querySelectorAll<HTMLButtonElement>("#loadout [data-weapon]")) {
       const index = Number(button.dataset.weapon);
-      button.title =
+      setBuyProperty(
+        button,
+        "title",
         this.mode === "deathmatch"
           ? "Click to buy and equip."
-          : "Click to buy and equip. Cmd/Ctrl-click to buy and drop.";
+          : "Click to buy and equip. Cmd/Ctrl-click to buy and drop.",
+      );
       const owned = indices.includes(index);
       const available =
         !this.teamMode ||
         isKnife(index) ||
         (weaponAvailable(index, this.team) && this.groundInventory.allowed(index));
-      button.hidden = !available;
+      setBuyProperty(button, "hidden", !available);
       const loadout = this.groundInventory.roundLoadout ?? this.groundInventory.loadouts[this.team];
-      button.parentElement!.style.order = String(loadout.indexOf(index));
-      button.dataset.slot = String(
-        loadout.filter((id) => loadoutCategory(id) === loadoutCategory(index)).indexOf(index) + 1,
+      setBuyProperty(button.parentElement!.style, "order", String(loadout.indexOf(index)));
+      setBuyProperty(
+        button.dataset,
+        "slot",
+        String(
+          loadout.filter((id) => loadoutCategory(id) === loadoutCategory(index)).indexOf(index) + 1,
+        ),
       );
       const price = this.teamMode && !isKnife(index) ? weaponPrice(index) : 0;
       button.classList.toggle("owned", owned);
-      button.disabled = !owned && !isKnife(index) && (!available || !allowed || this.money < price);
-      button.querySelector(".buy-state")!.textContent = price
-        ? `$${price.toLocaleString()}`
-        : "FREE";
-      button.setAttribute(
-        "aria-label",
+      setBuyProperty(
+        button,
+        "disabled",
+        !owned && !isKnife(index) && (!available || !allowed || this.money < price),
+      );
+      setBuyProperty(
+        button.querySelector(".buy-state")!,
+        "textContent",
+        price ? `$${price.toLocaleString()}` : "FREE",
+      );
+      setBuyProperty(
+        button,
+        "ariaLabel",
         `${weapons[index].name} - ${owned ? "Owned, equip" : price ? `$${price}, buy` : "Free, equip"}`,
       );
     }
     for (const button of document.querySelectorAll<HTMLButtonElement>("[data-refund]")) {
-      button.hidden = !this.groundInventory.canRefund(Number(button.dataset.refund));
+      setBuyProperty(
+        button,
+        "hidden",
+        !this.groundInventory.canRefund(Number(button.dataset.refund)),
+      );
     }
     for (const button of document.querySelectorAll<HTMLButtonElement>("[data-equipment]")) {
       const kind = button.dataset.equipment as "kevlar" | "helmet" | "kit";
-      button.hidden = kind === "kit" && this.team === "t";
+      setBuyProperty(button, "hidden", kind === "kit" && this.team === "t");
       const owned =
         kind === "kit" ? this.defuseKit : this.armor >= 100 && (kind === "kevlar" || this.helmet);
       const price = this.teamMode
         ? equipmentPrice(kind === "kevlar" ? "vest" : kind, this.armor, this.helmet)
         : 0;
-      button.disabled =
-        owned || !allowed || this.money < price || (kind === "kit" && this.team !== "ct");
-      button.querySelector("small")!.textContent = owned ? "EQUIPPED" : `$${price}`;
+      setBuyProperty(
+        button,
+        "disabled",
+        owned || !allowed || this.money < price || (kind === "kit" && this.team !== "ct"),
+      );
+      setBuyProperty(
+        button.querySelector("small")!,
+        "textContent",
+        owned ? "EQUIPPED" : `$${price}`,
+      );
     }
   }
   equip(index: number) {

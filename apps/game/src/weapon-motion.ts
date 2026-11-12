@@ -7,6 +7,7 @@ import { viewHandsTemplate } from "./knife-motion";
 import type { WeaponSound } from "./audio";
 import { registerActorLighting } from "./actor-lighting";
 import { forearmTwists, updateForearmTwists } from "./forearm-twist";
+import { worldGrip } from "./world-grips";
 
 const weapons = [
   "ak-47",
@@ -634,6 +635,7 @@ export function createNativeWorldGun(
 }
 type WorldRig = { model: T.Object3D; frame: T.Matrix4 };
 const worldRigs = new WeakMap<T.Object3D, WorldRig>();
+const normalizationBounds = new WeakMap<Template, Map<string, T.Box3>>();
 export const nativeWorldRig = (group: T.Object3D) => worldRigs.get(group);
 function bakeWorldGun(
   index: number,
@@ -677,7 +679,21 @@ function bakeWorldGun(
   if (rigged) {
     // Preserve the original bones and skinning. Baking skinned vertices into
     // rigid meshes discards authored magazines, bolts and trigger animation.
-    const bounds = new T.Box3().setFromObject(model, true);
+    // Only the immutable default body/canonical carried pose shares bounds.
+    // Include pose values so editing the canonical pose cannot reuse stale bounds.
+    const cacheable =
+      !customizable && !body && (!buyPose || buyPose === worldGrip(index)?.stand.weaponBones);
+    const key = cacheable ? `${suppressed}:${JSON.stringify(buyPose)}` : "";
+    const template = templates[index];
+    let cached = cacheable ? normalizationBounds.get(template) : undefined;
+    let bounds = cached?.get(key);
+    if (!bounds) {
+      bounds = new T.Box3().setFromObject(model, true);
+      if (cacheable) {
+        if (!cached) normalizationBounds.set(template, (cached = new Map()));
+        cached.set(key, bounds);
+      }
+    }
     const center = bounds.getCenter(new T.Vector3());
     const offset = new T.Vector3(-center.x, -center.y, 0.15 - bounds.max.z);
     const root = model.getObjectByName("weapon")!;
