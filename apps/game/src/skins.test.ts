@@ -169,31 +169,35 @@ test("HD load failure preserves the previous body and selection, then retries", 
   expect(hd.root.visible).toBe(true);
   expect(skins.skinChoices[0]).toEqual(choice);
 });
-test("unregistering during an HD load disposes the orphan body but not shared textures", async () => {
-  const skins = await import("./skins");
-  const root = new T.Group(),
-    hd = body("skin-hd"),
-    load = delayedBody();
-  const mesh = hd.root.children[0] as T.Mesh;
-  let geometryDisposed = 0,
-    materialDisposed = 0,
-    textureDisposed = 0,
-    started = false;
-  mesh.geometry.addEventListener("dispose", () => geometryDisposed++);
-  hd.material.addEventListener("dispose", () => materialDisposed++);
-  hd.material.map!.addEventListener("dispose", () => textureDisposed++);
-  skins.registerSkinModel(root, 0, () => {
-    started = true;
-    return load.promise;
-  });
-  const pending = skins.setSkin(0, choice);
-  await vi.waitFor(() => expect(started).toBe(true));
-  skins.unregisterSkinModel(root);
-  load.resolve(hd.root);
-  await pending;
-  expect(root.getObjectByName("skin-hd")).toBeUndefined();
-  expect([geometryDisposed, materialDisposed, textureDisposed]).toEqual([1, 1, 0]);
-});
+test.each([false, true])(
+  "unregistering an HD load respects shared geometry (%s)",
+  async (shared) => {
+    const skins = await import("./skins");
+    const root = new T.Group(),
+      hd = body("skin-hd"),
+      load = delayedBody();
+    const mesh = hd.root.children[0] as T.Mesh;
+    mesh.userData.sharedWeaponGeometry = shared;
+    let geometryDisposed = 0,
+      materialDisposed = 0,
+      textureDisposed = 0,
+      started = false;
+    mesh.geometry.addEventListener("dispose", () => geometryDisposed++);
+    hd.material.addEventListener("dispose", () => materialDisposed++);
+    hd.material.map!.addEventListener("dispose", () => textureDisposed++);
+    skins.registerSkinModel(root, 0, () => {
+      started = true;
+      return load.promise;
+    });
+    const pending = skins.setSkin(0, choice);
+    await vi.waitFor(() => expect(started).toBe(true));
+    skins.unregisterSkinModel(root);
+    load.resolve(hd.root);
+    await pending;
+    expect(root.getObjectByName("skin-hd")).toBeUndefined();
+    expect([geometryDisposed, materialDisposed, textureDisposed]).toEqual([shared ? 0 : 1, 1, 0]);
+  },
+);
 
 test("a created weapon keeps its finish when the owner's loadout changes and releases it after unbinding", async () => {
   const skins = await import("./skins");

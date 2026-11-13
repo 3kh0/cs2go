@@ -216,13 +216,13 @@ function ensureBody(model: Model, variant: "hd" | "legacy" = "hd"): Promise<void
   model[loading] ??= loader()
     .then((body) => {
       if (!models.includes(model)) {
-        // Factories return owned geometry/material/skeleton clones. Their
-        // texture maps remain shared with the cached native template.
+        // Factories own materials and skeletons; rigged world bodies retain
+        // template geometry. Texture maps also belong to the shared template.
         body.removeFromParent();
         const skeletons = new Set<T.Skeleton>();
         body.traverse((object) => {
           if (!(object instanceof T.Mesh)) return;
-          object.geometry.dispose();
+          if (!object.userData.sharedWeaponGeometry) object.geometry.dispose();
           for (const material of Array.isArray(object.material)
             ? object.material
             : [object.material])

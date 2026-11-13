@@ -329,12 +329,15 @@ type Rig = {
   }[];
 };
 const rigs = new WeakMap<T.Group, Rig>();
-function prepare(template: T.Group) {
+function prepare(template: T.Group, shareGeometry = false) {
   const root = clone(template) as T.Group;
   root.traverse((o) => {
     if (o instanceof T.Mesh) {
       o.frustumCulled = false;
-      o.geometry = o.geometry.clone();
+      // Rigged world guns only pose bones; the template owns their immutable
+      // vertex buffers. Materials and skeletons remain private to each actor.
+      if (shareGeometry) o.userData.sharedWeaponGeometry = true;
+      else o.geometry = o.geometry.clone();
       o.material = Array.isArray(o.material)
         ? o.material.map((m) => m.clone())
         : o.material.clone();
@@ -348,6 +351,7 @@ export function createNativeWeapon(
   register = true,
   skinBodies = false,
   body?: T.Group,
+  shareGeometry = false,
 ) {
   const template = templates[index];
   if (!template) return false;
@@ -359,6 +363,7 @@ export function createNativeWeapon(
         (register || skinBodies
           ? template.model
           : (template.model.getObjectByName("skin-hd") as T.Group)),
+      shareGeometry,
     ),
     source = template.source.clone(true);
   arms.name = "agent-view-arms";
@@ -645,7 +650,7 @@ function bakeWorldGun(
 ) {
   const view = new T.Group();
   view.userData.muzzle = new T.Vector3();
-  createNativeWeapon(view, index, false, customizable, body);
+  createNativeWeapon(view, index, false, customizable, body, rigged);
   animateNativeWeapon(view, { draw: 0, reload: 0, bolt: 0, bob: 0, sway: 0, suppressed });
   view.updateMatrixWorld(true);
   const model = view.getObjectByName("weapon-model")!;
