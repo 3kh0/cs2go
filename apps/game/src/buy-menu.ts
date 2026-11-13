@@ -3,6 +3,16 @@ import { grenadeData, grenadeIcons } from "./utility";
 import { weapons, weaponIcons, isKnife, weaponSlot } from "./physics";
 import { assetUrl } from "./asset-url";
 
+// Repeated menu refreshes must not replace text nodes or rewrite attributes
+// when their values are unchanged. Read the DOM so other writers stay coherent.
+export function setBuyProperty<Target, Key extends keyof Target>(
+  target: Target,
+  key: Key,
+  value: Target[Key],
+) {
+  if (target[key] !== value) target[key] = value;
+}
+
 const equipment = [
   ["kevlar", "Kevlar", "kevlar"],
   ["helmet", "Kevlar + Helmet", "assaultsuit"],

@@ -16,6 +16,7 @@ import { grenadeLaunch, grenadePhysics, advanceGrenade } from "./grenade-physics
 import { GrenadeView } from "./grenade-view";
 import { createGrenadeModel, grenadeMotionDuration } from "./grenade-models";
 import { applyArmorDamage } from "./damage";
+import { setBuyProperty } from "./buy-menu";
 import {
   canCarryGrenade,
   fireParameters,
@@ -329,7 +330,7 @@ export class GameUtility {
   updateBuyMenu() {
     for (const button of document.querySelectorAll<HTMLButtonElement>("[data-grenade]")) {
       const kind = button.dataset.grenade as GrenadeKind;
-      button.hidden = !grenadeAvailable(kind, this.game.team);
+      setBuyProperty(button, "hidden", !grenadeAvailable(kind, this.game.team));
       let refund = button.parentElement?.querySelector<HTMLButtonElement>(
         `[data-grenade-refund="${kind}"]`,
       );
@@ -343,15 +344,20 @@ export class GameUtility {
         refund.onclick = () => this.refund(kind);
         button.after(refund);
       }
-      refund.hidden = !this.receipts[kind] || !this.game.canBuy();
+      setBuyProperty(refund, "hidden", !this.receipts[kind] || !this.game.canBuy());
 
-      button.disabled =
+      setBuyProperty(
+        button,
+        "disabled",
         !this.game.canBuy() ||
-        !canCarryGrenade(this.inventory, kind, !this.game.teamMode || this.game.competitive) ||
-        (this.game.teamMode && this.game.money < grenadeData[kind].price);
-      button.querySelector("small")!.textContent = this.game.teamMode
-        ? `$${grenadeData[kind].price}`
-        : "FREE";
+          !canCarryGrenade(this.inventory, kind, !this.game.teamMode || this.game.competitive) ||
+          (this.game.teamMode && this.game.money < grenadeData[kind].price),
+      );
+      setBuyProperty(
+        button.querySelector("small")!,
+        "textContent",
+        this.game.teamMode ? `$${grenadeData[kind].price}` : "FREE",
+      );
     }
   }
   selectNext() {

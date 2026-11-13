@@ -69,3 +69,52 @@ for (const custom of [false, true])
     }
     expect(errors).toEqual([]);
   });
+
+test("repeated carried-gun normalization preserves exact grips for poses and suppressors", async ({
+  page,
+}) => {
+  test.setTimeout(120_000);
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 100_000 });
+  const differences = await page.evaluate(async () => {
+    // Keep Vite's HMR query too: a second module URL has an empty template cache.
+    const source = await (await fetch("/src/weapons.ts")).text();
+    const path = source.match(/from "([^"]*\/weapon-motion\.ts[^"]*)"/)![1];
+    const motion = (await import(/* @vite-ignore */ path)) as typeof import("../src/weapon-motion");
+    const { worldGrip } = await import("../src/world-grips.ts");
+    const { disposeWorldGun } = await import("../src/weapons.ts");
+    const { isKnife, weapons } = await import("../src/physics.ts");
+    const results: number[] = [];
+    for (let index = 0; index < weapons.length; index++) {
+      if (isKnife(index)) continue;
+      const pose = worldGrip(index)!.stand.weaponBones;
+      for (const suppressed of [true, false, true]) {
+        const cached = motion.createNativeWorldGun(index, suppressed, pose, false, true);
+        // A distinct pose object takes the uncached path, with identical values.
+        const fresh = motion.createNativeWorldGun(
+          index,
+          suppressed,
+          structuredClone(pose),
+          false,
+          true,
+        );
+        const matrices = (root: import("three").Group) => {
+          root.updateMatrixWorld(true);
+          const values: number[] = [...root.userData.buyGrip];
+          root.traverse((object) => values.push(...object.matrixWorld.elements));
+          return values;
+        };
+        const a = matrices(cached),
+          b = matrices(fresh);
+        results.push(
+          a.length === b.length ? Math.max(...a.map((v, i) => Math.abs(v - b[i]))) : Infinity,
+        );
+        disposeWorldGun(cached);
+        disposeWorldGun(fresh);
+      }
+    }
+    return results;
+  });
+  expect(differences).toHaveLength(34 * 3);
+  expect(differences.every((difference) => difference === 0)).toBe(true);
+});
