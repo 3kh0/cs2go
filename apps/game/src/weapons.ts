@@ -178,7 +178,7 @@ export function disposeWorldGun(root: T.Object3D) {
     if (object instanceof T.Group && object.userData.ownedWorldGun) unregisterSkinModel(object);
     if (object instanceof T.Mesh && root.userData.ownedWorldGun) {
       if (object instanceof T.SkinnedMesh) skeletons.add(object.skeleton);
-      object.geometry.dispose();
+      if (!object.userData.sharedWeaponGeometry) object.geometry.dispose();
       for (const material of Array.isArray(object.material) ? object.material : [object.material])
         material.dispose();
     }

@@ -6,8 +6,9 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { AgentWeaponAnimation } from "./agent-weapon-animation";
 import { createNativeWorldGun, loadNativeWeapons, nativeWorldRig } from "./weapon-motion";
+import { disposeWorldGun } from "./weapons";
 
-vi.mock("./skins", () => ({ registerSkinModel() {} }));
+vi.mock("./skins", () => ({ registerSkinModel() {}, unregisterSkinModel() {} }));
 vi.mock("./knife-motion", () => ({ viewHandsTemplate: () => new T.Group() }));
 vi.mock("./gltf", () => ({ loadModel: (path: string) => parse(path) }));
 
@@ -120,6 +121,64 @@ test("native secondary reload moves the actual magazine and scrubs back without 
   expect(restored.scale.distanceTo(first.scale)).toBeLessThan(1e-6);
   expect(restored.bounds.min.distanceTo(first.bounds.min)).toBeLessThan(1e-6);
   secondary.dispose();
+});
+
+test("carried weapons share vertices without sharing poses or disposing another actor's resources", async () => {
+  const pack = await parse("/models/agents/inspects/animations/world/rifle/rifle_ak.glb");
+  const clip = pack.animations.find((clip) => clip.name === "reload_ak@weapon")!;
+  const make = () => {
+    const weapon = createNativeWorldGun(0, true, undefined, false, true);
+    const clock = new T.AnimationMixer(new T.Group())
+      .clipAction(new T.AnimationClip("body", clip.duration, []))
+      .play();
+    const secondary = new AgentWeaponAnimation(weapon, pack.scene);
+    secondary.bind(clock, clip);
+    const meshes: T.SkinnedMesh[] = [];
+    weapon.traverse((node) => {
+      if (node instanceof T.SkinnedMesh) meshes.push(node);
+    });
+    return { weapon, clock, secondary, meshes };
+  };
+  const a = make(),
+    b = make();
+  expect(a.meshes.length).toBeGreaterThan(0);
+  let disposedGeometry = 0,
+    disposedMaterial = 0;
+  a.meshes.forEach((mesh, i) => {
+    expect(mesh.geometry).toBe(b.meshes[i].geometry);
+    expect(mesh.skeleton).not.toBe(b.meshes[i].skeleton);
+    expect(mesh.material).not.toBe(b.meshes[i].material);
+    mesh.geometry.addEventListener("dispose", () => disposedGeometry++);
+    for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material])
+      material.addEventListener("dispose", () => disposedMaterial++);
+  });
+  b.clock.time = 1.2;
+  b.secondary.update();
+  const vertices = () => {
+    const values: number[] = [],
+      point = new T.Vector3();
+    for (const mesh of b.meshes)
+      for (let i = 0; i < mesh.geometry.getAttribute("position").count; i++)
+        values.push(...mesh.getVertexPosition(i, point).toArray());
+    return values;
+  };
+  const before = vertices();
+  a.clock.time = 0.7666561604;
+  a.secondary.update();
+  expect(vertices()).toEqual(before);
+  a.secondary.dispose();
+  disposeWorldGun(a.weapon);
+  expect(disposedGeometry).toBe(0);
+  expect(disposedMaterial).toBeGreaterThan(0);
+  b.secondary.update();
+  expect(vertices()).toEqual(before);
+  const next = make();
+  next.meshes.forEach((mesh, i) => expect(mesh.geometry).toBe(b.meshes[i].geometry));
+  for (const rig of [b, next]) {
+    rig.secondary.dispose();
+    disposeWorldGun(rig.weapon);
+  }
+  expect(disposedGeometry).toBe(0);
 });
 
 test("late animation and skin arrivals use bind scale rather than the currently hidden magazine", async () => {
