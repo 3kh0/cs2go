@@ -14,7 +14,14 @@ const texture = (file: string) => ({
   gpuBytes: 16,
   mips: [{ width: 4, height: 4, bytes: 16 }],
 });
-const renderer = { extensions: { has: () => true } } as unknown as T.WebGLRenderer;
+const renderer = {
+  extensions: { has: () => true },
+  getContext: () => ({
+    getExtension: () => null,
+    getParameter: () => "WebKit WebGL",
+    getContextAttributes: () => null,
+  }),
+} as unknown as T.WebGLRenderer;
 beforeEach(() => {
   vi.clearAllMocks();
   transport.fetchGzipped.mockResolvedValue(new Uint8Array(16).buffer);
@@ -106,7 +113,7 @@ test("native BC5 retains RGTC2 blocks and its partial authored mip chain", async
   );
   transport.fetchGzipped.mockResolvedValue(bytes.buffer);
   const result = await loadSourceMaterialBundle(
-    { extensions: { has } } as unknown as T.WebGLRenderer,
+    { ...renderer, extensions: { has } } as unknown as T.WebGLRenderer,
     "/native/",
   );
   const texture = result.textures.get("normal") as T.CompressedTexture;
@@ -148,7 +155,7 @@ test("BC5 without RGTC uses exact RGBA authored mips rather than a BC1 upload or
   );
   transport.fetchGzipped.mockResolvedValue(bytes.buffer);
   const result = await loadSourceMaterialBundle(
-    { extensions: { has: () => false } } as unknown as T.WebGLRenderer,
+    { ...renderer, extensions: { has: () => false } } as unknown as T.WebGLRenderer,
     "/native/",
   );
   const texture = result.textures.get("normal") as T.DataTexture;
@@ -183,3 +190,66 @@ test("invalid BC5 block dimensions fail before driver texture upload", async () 
     "Invalid native BC5 mip shape",
   );
 });
+
+test.each([
+  ["ANGLE (Google, Vulkan SwiftShader)", false, true],
+  ["ANGLE (Google, Vulkan SwiftShader)", true, false],
+  ["ANGLE (Intel UHD Graphics)", false, false],
+  ["WebKit WebGL", false, false],
+  ["llvmpipe (LLVM 15)", false, false],
+] as const)(
+  "BC7 storage on %s preserves the complete authored chain (short fallback: %s)",
+  async (name, short, decoded) => {
+    const native = Uint8Array.from({ length: 48 }, (_, i) => i + 1);
+    const rgba = Uint8Array.from({ length: 160 }, (_, i) => (i * 13) % 256);
+    const mips = [
+      { width: 4, height: 8, bytes: 32 },
+      { width: 2, height: 4, bytes: 16 },
+    ];
+    const fallbackMips = [
+      { width: 4, height: 8, bytes: 128 },
+      { width: 2, height: 4, bytes: 32 },
+    ];
+    transport.assetFetch.mockImplementation(
+      async () =>
+        new Response(
+          JSON.stringify({
+            materials: {},
+            textures: {
+              color: {
+                format: "BC7",
+                srgb: true,
+                file: "native.bin.gz",
+                gpuBytes: native.length,
+                mips,
+                fallbackFile: "color.rgba8.gz",
+                fallbackMips: short ? fallbackMips.slice(0, 1) : fallbackMips,
+              },
+            },
+          }),
+        ),
+    );
+    transport.fetchGzipped.mockImplementation(async (path: string) =>
+      path.endsWith("rgba8.gz") ? rgba.buffer : native.buffer,
+    );
+    const result = await loadSourceMaterialBundle(
+      {
+        ...renderer,
+        getContext: () => ({ ...renderer.getContext(), getParameter: () => name }),
+      } as unknown as T.WebGLRenderer,
+      "/native/",
+    );
+    const image = result.textures.get("color")!;
+    expect(image.format).toBe(decoded ? T.RGBAFormat : T.RGBA_BPTC_Format);
+    expect(image.mipmaps.map((mip) => [mip.width, mip.height])).toEqual([
+      [4, 8],
+      [2, 4],
+    ]);
+    const bytes = image.mipmaps.flatMap((mip) => Array.from((mip as { data: Uint8Array }).data));
+    expect(bytes).toEqual(Array.from(decoded ? rgba : native));
+    expect(image.colorSpace).toBe(T.SRGBColorSpace);
+    expect(image.minFilter).toBe(T.LinearMipmapLinearFilter);
+    expect(image.generateMipmaps).toBe(false);
+    image.dispose();
+  },
+);

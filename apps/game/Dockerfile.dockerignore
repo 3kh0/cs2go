@@ -3,6 +3,8 @@
 !package.json
 !bun.lock
 !bunfig.toml
+!patches/
+!patches/**
 !apps/
 !apps/server/
 !apps/server/package.json

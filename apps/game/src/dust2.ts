@@ -718,9 +718,9 @@ async function buildNativeMap(
     breakableView,
     sun,
     bombDamage,
-    releaseGpuTextures: () => {
-      resources.releaseGpuTextures(renderer);
-      nativeSky?.releaseGpuTextures();
+    releaseGpuTextures: (retainArrays = false) => {
+      resources.releaseGpuTextures(renderer, retainArrays);
+      nativeSky?.releaseGpuTextures(retainArrays);
     },
     dispose: () => resources.dispose(),
   };

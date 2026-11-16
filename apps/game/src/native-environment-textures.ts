@@ -1,5 +1,6 @@
 import * as T from "three";
 import { detachNativeTexture } from "./native-texture-sharing";
+import { nativeArrayLayerLimit } from "./native-array-texture";
 import type { EnvironmentShaderParameters } from "./native-environment-parameters";
 import type { SourceEnvironmentMaterial } from "./native-map-environment";
 
@@ -79,8 +80,13 @@ export function createEnvironmentTextureBanks(
       }
       aliases.push(entry);
     }
-    for (let start = 0; start < layers.length; start += maxLayers) {
-      const entries = layers.slice(start, start + maxLayers);
+    const bankLayers = nativeArrayLayerLimit(
+      group[0][2].map((mip) => ({ ...mip, bytes: mip.data.byteLength })),
+      group[0][1].format,
+      maxLayers,
+    );
+    for (let start = 0; start < layers.length; start += bankLayers) {
+      const entries = layers.slice(start, start + bankLayers);
       if (entries.length === 1 && entries[0].length === 1) continue;
       const source = entries[0][0][1],
         original = entries[0][0][2];

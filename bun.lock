@@ -65,6 +65,9 @@
       },
     },
   },
+  "patchedDependencies": {
+    "three@0.187.0": "patches/three@0.187.0.patch",
+  },
   "packages": {
     "@cs2go/assets": ["@cs2go/assets@workspace:packages/assets"],
 

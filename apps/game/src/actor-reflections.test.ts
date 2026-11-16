@@ -47,6 +47,7 @@ function target() {
 
 beforeEach(() => {
   vi.resetAllMocks();
+  mocks.load.mockReturnValue(new Promise<T.Texture>(() => {}));
 });
 
 test("loads eight distinct probes in request priority and binds every current actor each update", async () => {
@@ -119,6 +120,60 @@ test("empty and shrinking requests clear departed actors once and dispose unwant
   expect(mocks.bind).not.toHaveBeenCalled();
   expect(output.dispose).toHaveBeenCalledOnce();
   expect(mocks.load).toHaveBeenCalledTimes(1);
+});
+
+test("returning actors reuse retained probes until empty demand releases them", async () => {
+  const reflections = new ActorReflections();
+  const first = actor(1),
+    second = actor(2);
+  const outputs = [target(), target()];
+  for (const [i, request] of [first, second].entries()) {
+    const job = pending();
+    mocks.generate.mockReturnValueOnce(outputs[i]);
+    reflections.update(renderer, [request]);
+    job.resolve(source());
+    await settle();
+  }
+  mocks.bind.mockClear();
+  reflections.update(renderer, [first]);
+  expect(mocks.bind.mock.calls).toEqual([[first.root, outputs[0].texture], [second.root]]);
+  expect(mocks.load).toHaveBeenCalledTimes(2);
+  for (const output of outputs) expect(output.dispose).not.toHaveBeenCalled();
+  reflections.update(renderer, []);
+  reflections.update(renderer, []);
+  for (const output of outputs) expect(output.dispose).toHaveBeenCalledOnce();
+});
+
+test("full retention evicts the least recent unused probe using demand at completion", async () => {
+  const reflections = new ActorReflections();
+  const requests = Array.from({ length: 9 }, (_, i) => actor(i));
+  const outputs = requests.map(() => target());
+  for (let i = 0; i < 8; i++) {
+    const job = pending();
+    mocks.generate.mockReturnValueOnce(outputs[i]);
+    reflections.update(renderer, [requests[i]]);
+    job.resolve(source());
+    await settle();
+  }
+  // Probe 0 becomes recent, leaving 1 oldest. Demand changes while 8 loads:
+  // probe 1 is now needed and must not be evicted; probe 2 is the oldest unused.
+  reflections.update(renderer, [requests[0]]);
+  const job = pending();
+  reflections.update(renderer, [requests[8]]);
+  reflections.update(renderer, [requests[1], requests[8]]);
+  mocks.generate.mockReturnValueOnce(outputs[8]);
+  job.resolve(source());
+  await settle();
+  for (const [i, output] of outputs.entries())
+    expect(output.dispose).toHaveBeenCalledTimes(i === 2 ? 1 : 0);
+  mocks.bind.mockClear();
+  reflections.update(renderer, [requests[0], requests[1], requests[8]]);
+  expect(mocks.bind.mock.calls).toEqual(
+    [0, 1, 8].map((i) => [requests[i].root, outputs[i].texture]),
+  );
+  expect(mocks.load).toHaveBeenCalledTimes(9);
+  reflections.update(renderer, []);
+  for (const output of outputs) expect(output.dispose).toHaveBeenCalledOnce();
 });
 
 test("failed probes retain fallback and later eligible probes load in order", async () => {

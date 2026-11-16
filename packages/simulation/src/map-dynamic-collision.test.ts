@@ -94,6 +94,32 @@ test("moving platforms and roofs participate in support, floor, headroom and ste
   expect(position.y).toBeCloseTo(0.4);
 });
 
+test("support reuse keeps enabled masks, moving platforms and forked rooms independent", () => {
+  const floor = box(0, -0.125, 0, 4, 0.25, 4),
+    platform = box(0, 0.125, 0, 2, 0.25, 2);
+  floor.name = "floor";
+  const collision = new MapCollision([floor]);
+  collision.beginSupportReuse(0, 0, 0.3);
+  try {
+    expect(collision.support(0, 0, 1, -1)).toBe(0);
+    collision.setDynamicMeshes("platform", [platform]);
+    expect(collision.support(0, 0, 1, -1)).toBe(0.25);
+    const fork = collision.fork();
+    platform.position.y += 0.5;
+    collision.setDynamicMeshes("platform", [platform]);
+    expect(collision.support(0, 0, 1, -1)).toBe(0.75);
+    expect(fork.support(0, 0, 1, -1)).toBe(0.25);
+    collision.removeDynamicMeshes("platform");
+    expect(collision.support(0, 0, 1, -1)).toBe(0);
+    collision.setMeshEnabled("floor", false);
+    expect(collision.support(0, 0, 1, -1)).toBe(-Infinity);
+    collision.setMeshEnabled("floor", true);
+    expect(collision.support(0, 0, 1, -1)).toBe(0);
+  } finally {
+    collision.endSupportReuse();
+  }
+});
+
 test("grenade sweeps retain the earliest static or dynamic hit and its own normal", () => {
   const door = leaf(),
     collision = new MapCollision([box(1, 1.2, -1, 2, 2.4, 0.1)]),

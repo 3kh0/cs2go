@@ -1,12 +1,25 @@
 import * as T from "three";
 import { beginLoadingWork } from "./loading";
+import { rendererDiagnostics } from "./renderer-diagnostics";
 
 type Program = T.WebGLProgram & { isReady(): boolean };
+const completedPrograms = new WeakMap<
+  WebGLRenderingContext | WebGL2RenderingContext,
+  { programs: WeakSet<T.WebGLProgram> }
+>();
 export type PreparationScope = (work: () => void) => void;
 export interface PreparationOptions {
   signal?: AbortSignal;
   batchSize?: number;
   scope?: PreparationScope;
+}
+
+function deferPreparation(renderer: T.WebGLRenderer) {
+  // Software drivers retain expanded images and compiled pipelines in process
+  // memory. Preparing unseen variants can exhaust that pool before entry. Real
+  // draws still use every authored texture/mip and shader; first use may stall.
+  // Hardware and privacy-withheld adapters retain eager preparation.
+  return rendererDiagnostics(renderer.getContext()).software;
 }
 
 function guard(renderer: T.WebGLRenderer, signal?: AbortSignal) {
@@ -50,12 +63,146 @@ async function pause(renderer: T.WebGLRenderer, milliseconds: number, signal?: A
   guard(renderer, signal);
 }
 
+/** Complete submitted work after releasing the previous map, before allocating
+ * its replacement. Loading must keep rendering paused throughout this wait. */
+export async function finishGpuTextureRelease(renderer: T.WebGLRenderer, signal?: AbortSignal) {
+  guard(renderer, signal);
+  if (!deferPreparation(renderer)) return;
+  const gl = renderer.getContext() as WebGL2RenderingContext;
+  const fence = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
+  if (!fence) throw new Error("Could not synchronize graphics texture release");
+  try {
+    gl.flush();
+    for (;;) {
+      await pause(renderer, 10, signal);
+      const status = gl.clientWaitSync(fence, 0, 0);
+      if (status === gl.ALREADY_SIGNALED || status === gl.CONDITION_SATISFIED) break;
+      if (status === gl.WAIT_FAILED) throw new Error("Graphics texture release wait failed");
+    }
+  } finally {
+    if (!gl.isContextLost()) gl.deleteSync(fence);
+  }
+  guard(renderer, signal);
+  // Chrome implements WebGL finish as a flush. A CPU readback also gives ANGLE
+  // a native completion/garbage-retirement point; a fence alone does not.
+  // This does not join unrelated shader compiler tasks or reduce live storage.
+  const target = new T.WebGLRenderTarget(1, 1, { depthBuffer: false });
+  try {
+    renderer.initRenderTarget(target);
+    renderer.readRenderTargetPixels(target, 0, 0, 1, 1, new Uint8Array(4));
+  } finally {
+    target.dispose();
+  }
+  guard(renderer, signal);
+}
+
+/** Materialize main-map arrays before ordinary draws fragment the software
+ * driver's allocation pool. initTexture alone need not allocate decoded BC
+ * storage: sample each original image, largest first, and complete its draw.
+ * Every source mip and the resulting image stay available for gameplay. */
+export function prepareNativeTextureArrays(
+  renderer: T.WebGLRenderer,
+  textures: readonly (T.DataArrayTexture | T.CompressedArrayTexture)[],
+  signal?: AbortSignal,
+) {
+  guard(renderer, signal);
+  if (!textures.length) return;
+  const arrays = [...new Set(textures)].map((texture) => {
+    const compressed = [
+      T.RGBA_BPTC_Format,
+      T.RGB_BPTC_UNSIGNED_Format,
+      T.RGB_BPTC_SIGNED_Format,
+    ].includes(texture.format);
+    const hdr =
+      texture.format === T.RGB_BPTC_UNSIGNED_Format || texture.format === T.RGB_BPTC_SIGNED_Format;
+    const pixelBytes =
+      hdr || texture.type === T.HalfFloatType ? 8 : texture.type === T.FloatType ? 16 : 4;
+    const mips = texture.mipmaps.length ? texture.mipmaps : [texture.image];
+    const bytes =
+      mips.reduce(
+        (sum, mip) => sum + mip.width * mip.height * texture.image.depth * pixelBytes,
+        0,
+      ) +
+      (compressed && texture instanceof T.CompressedArrayTexture
+        ? texture.mipmaps.reduce((sum, mip) => sum + mip.data.byteLength, 0)
+        : 0);
+    return { texture, bytes };
+  });
+  arrays.sort((a, b) => b.bytes - a.bytes);
+  const gl = renderer.getContext() as WebGL2RenderingContext;
+  const target = new T.WebGLRenderTarget(1, 1, { depthBuffer: false, stencilBuffer: false });
+  const scene = new T.Scene(),
+    camera = new T.Camera(),
+    geometry = new T.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new T.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3),
+  );
+  const material = new T.RawShaderMaterial({
+    glslVersion: T.GLSL3,
+    depthTest: false,
+    depthWrite: false,
+    uniforms: { sourceTexture: { value: null } },
+    vertexShader:
+      "precision highp float; in vec3 position; void main(){gl_Position=vec4(position,1.);}",
+    fragmentShader:
+      "precision highp float; uniform highp sampler2DArray sourceTexture; out vec4 color; void main(){color=textureLod(sourceTexture,vec3(.5,.5,0.),0.);}",
+  });
+  const mesh = new T.Mesh(geometry, material);
+  mesh.frustumCulled = false;
+  scene.add(mesh);
+  const destination = renderer.getRenderTarget(),
+    face = renderer.getActiveCubeFace(),
+    level = renderer.getActiveMipmapLevel(),
+    viewport = renderer.getViewport(new T.Vector4()),
+    scissor = renderer.getScissor(new T.Vector4()),
+    scissorTest = renderer.getScissorTest(),
+    pack = gl.getParameter(gl.PIXEL_PACK_BUFFER_BINDING);
+  try {
+    renderer.setRenderTarget(target);
+    renderer.setViewport(0, 0, 1, 1);
+    renderer.setScissorTest(false);
+    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+    const pixels = new Uint8Array(4);
+    for (const { texture } of arrays) {
+      guard(renderer, signal);
+      material.uniforms.sourceTexture!.value = texture;
+      renderer.render(scene, camera);
+      renderer.readRenderTargetPixels(target, 0, 0, 1, 1, pixels);
+      guard(renderer, signal);
+      if (gl.getError()) throw new Error("Graphics texture array preparation failed");
+    }
+  } finally {
+    gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pack);
+    renderer.setRenderTarget(destination, face, level);
+    renderer.setViewport(viewport);
+    renderer.setScissor(scissor);
+    renderer.setScissorTest(scissorTest);
+    material.uniforms.sourceTexture!.value = null;
+    target.dispose();
+    geometry.dispose();
+    material.dispose();
+  }
+}
+
 export async function finishPreparedPrograms(
   renderer: T.WebGLRenderer,
   programs: Iterable<T.WebGLProgram> = renderer.info.programs ?? [],
   signal?: AbortSignal,
 ) {
   guard(renderer, signal);
+  const gl = renderer.getContext();
+  let completed = completedPrograms.get(gl);
+  if (!completed) {
+    const state = { programs: new WeakSet<T.WebGLProgram>() };
+    const invalidate = () => {
+      state.programs = new WeakSet();
+    };
+    renderer.domElement.addEventListener("webglcontextlost", invalidate);
+    renderer.domElement.addEventListener("webglcontextrestored", invalidate);
+    completedPrograms.set(gl, state);
+    completed = state;
+  }
   const pending = new Set(programs);
   const parallel = renderer.extensions.has("KHR_parallel_shader_compile");
   while (pending.size) {
@@ -65,12 +212,11 @@ export async function finishPreparedPrograms(
       guard(renderer, signal);
       // UI/map disposal may occur while a batch yields. Never query a deleted
       // program or resurrect its material; ownership stays with its caller.
-      if (!live.has(program)) {
+      if (!live.has(program) || completed.programs.has(program)) {
         pending.delete(program);
         continue;
       }
       if (parallel && !(program as Program).isReady()) continue;
-      const gl = renderer.getContext();
       if (!gl.getProgramParameter(program.program as WebGLProgram, gl.LINK_STATUS))
         throw new Error("A graphics shader could not compile during preparation", {
           cause: {
@@ -79,6 +225,10 @@ export async function finishPreparedPrograms(
           },
         });
       program.getUniforms();
+      guard(renderer, signal);
+      // First use is complete. Rechecking this same live linked program can
+      // synchronize the driver again; new variants still require preparation.
+      completed.programs.add(program);
       pending.delete(program);
     }
     if (pending.size) await pause(renderer, 10, signal);
@@ -98,6 +248,7 @@ export async function prepareShadersBounded(
   if (!Number.isInteger(batchSize) || batchSize < 1)
     throw new Error("Shader preparation batch size must be a positive integer");
   guard(renderer, signal);
+  if (deferPreparation(renderer)) return;
   const objects = new Set<T.Object3D>();
   for (const root of roots)
     root.traverse((object) => {
@@ -163,6 +314,9 @@ export async function prepareShadersBounded(
 /** Include compiled onBeforeCompile bindings, not just ordinary material maps. */
 export function preparedTextures(renderer: T.WebGLRenderer, roots: readonly T.Object3D[]) {
   const textures = new Set<T.Texture>();
+  // Without compilation, cached uniforms may still name the previous map's
+  // suspended textures. Keep discovery and upload on the same policy.
+  if (deferPreparation(renderer)) return textures;
   const seen = new WeakSet<object>();
   const collect = (value: unknown) => {
     if (!value || typeof value !== "object" || seen.has(value)) return;
@@ -192,6 +346,7 @@ export async function prepareTexturesBounded(
   signal?: AbortSignal,
 ) {
   guard(renderer, signal);
+  if (deferPreparation(renderer)) return;
   const pending = [...new Set(textures)].filter(
     (texture) => !texture.isRenderTargetTexture && !(texture instanceof T.DepthTexture),
   );

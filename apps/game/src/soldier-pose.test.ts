@@ -1,12 +1,18 @@
 import { expect, it, vi } from "vitest";
 import * as T from "three";
-import { animateSoldier, resetSoldier, type Soldier } from "./soldier";
+import { animateSoldier, resetSoldier, setSoldierWeapon, type Soldier } from "./soldier";
 import { Ragdoll } from "./ragdoll";
 import native from "./data/native-ragdoll.json";
 import { updateGloveModel } from "./gloves";
 import { createWeaponInstance } from "./weapon-instance";
+import * as weapons from "./weapons";
+import { registerActorLighting, setActorReflection, disposeActorLighting } from "./actor-lighting";
 
 vi.mock("./gloves", () => ({ updateGloveModel: vi.fn() }));
+vi.mock("./agent-animations", async (original) => ({
+  ...(await original<typeof import("./agent-animations")>()),
+  loadAgentWeaponActions: async () => ({}),
+}));
 
 function actor(): Soldier {
   const group = new T.Group();
@@ -124,4 +130,56 @@ it("still attaches a visible planted bomb while the carried weapon is hidden", (
   expected.y -= 0.025;
   expect(soldier.carriedBomb.position.distanceTo(expected)).toBeLessThan(1e-10);
   expect(soldier.carriedBomb.position.y).toBeCloseTo(0.975);
+});
+
+it("weapon replacement stops lighting disposed attachments without changing live actors", () => {
+  const soldier = actor(),
+    other = actor();
+  const geometry = new T.BoxGeometry(),
+    material = new T.MeshStandardMaterial();
+  const makeGun = () => {
+    const gun = new T.Group();
+    gun.userData.ownedWorldGun = true;
+    const mesh = new T.Mesh(geometry, material.clone());
+    mesh.userData.sharedWeaponGeometry = true;
+    gun.add(mesh);
+    return gun;
+  };
+  const factory = vi.spyOn(weapons, "createWorldGun").mockImplementation(makeGun);
+  soldier.weapon.removeFromParent();
+  soldier.weapon = makeGun();
+  soldier.group.add(soldier.weapon);
+  const body = new T.Mesh(geometry, material),
+    neighbor = new T.Mesh(geometry, material);
+  soldier.model.add(body);
+  other.model.add(neighbor);
+  registerActorLighting(soldier.group, true);
+  registerActorLighting(other.group, true);
+  const first = new T.Texture(),
+    next = new T.Texture();
+  setActorReflection(soldier.group, first);
+  setActorReflection(other.group, first);
+  const retired = soldier.weapon.children[0] as T.Mesh<T.BufferGeometry, T.MeshStandardMaterial>;
+  let disposed = false;
+  retired.material.addEventListener("dispose", () => {
+    disposed = true;
+  });
+  try {
+    setSoldierWeapon(soldier, 0);
+    setActorReflection(soldier.group, next);
+    expect(disposed).toBe(true);
+    expect(retired.parent!.parent).toBeNull();
+    expect(retired.material.envMap).toBe(first);
+    expect(body.material.envMap).toBe(next);
+    expect((soldier.weapon.children[0] as typeof retired).material.envMap).toBe(next);
+    expect(neighbor.material.envMap).toBe(first);
+  } finally {
+    factory.mockRestore();
+    disposeActorLighting(soldier.group);
+    disposeActorLighting(other.group);
+    geometry.dispose();
+    material.dispose();
+    first.dispose();
+    next.dispose();
+  }
 });

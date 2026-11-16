@@ -2,7 +2,11 @@ import type { PlayerAnimation } from "@cs2go/protocol";
 import { cacheOwnedSkeletons } from "./cached-skeleton";
 import { agentBounds, prepareSoldierHitboxes } from "./soldier-hitboxes";
 export { agentBounds } from "./soldier-hitboxes";
-import { registerActorLighting, disposeActorLighting } from "./actor-lighting";
+import {
+  registerActorLighting,
+  disposeActorLighting,
+  releaseActorLightingMaterials,
+} from "./actor-lighting";
 import { loadWorldGrips, worldGrip, worldGripClips } from "./world-grips";
 import { peekSelectedAgent, defaultAgent, acquireAgentAppearance } from "./agent-roster";
 import {
@@ -35,6 +39,9 @@ type Template = { scene: T.Group; animations: T.AnimationClip[] };
 const templates = new Map<AgentTeam, Template>();
 const actionReferences = new Map<AgentTeam, T.AnimationClip[]>();
 const nativeWeaponActions = new Map<number, Promise<Record<string, T.AnimationClip>>>();
+// Source clips and reference snapshots are private and immutable after loading.
+// Share only prepared tracks; mixers retain each soldier's action state.
+const preparedActions = new WeakMap<T.AnimationClip, WeakMap<T.AnimationClip, T.AnimationClip>>();
 let bombTemplate: T.Group;
 export async function loadSoldierModels() {
   const gripLoad = loadWorldGrips();
@@ -319,11 +326,6 @@ function prepareNativeActions(soldier: Soldier) {
       if (soldier.disposed || generation !== soldier.nativeGeneration) return;
       const actions: Record<string, T.AnimationAction> = {};
       for (const [name, source] of Object.entries(clips)) {
-        const clip = source.clone();
-        clip.tracks = clip.tracks.filter((track) =>
-          /^(spine_|clavicle_|arm_|hand_|finger_)/.test(track.name),
-        );
-        if (!clip.tracks.length) continue;
         const reference =
           actionReferences
             .get("t")!
@@ -338,7 +340,18 @@ function prepareNativeActions(soldier: Soldier) {
                 clip.name ===
                 `idle_${isKnife(index) ? "knife" : weaponSlot(index) === 2 ? "pistol" : "rifle"}`,
             )!;
-        T.AnimationUtils.makeClipAdditive(clip, 0, reference);
+        let references = preparedActions.get(source);
+        let clip = references?.get(reference);
+        if (!clip) {
+          clip = source.clone();
+          clip.tracks = clip.tracks.filter((track) =>
+            /^(spine_|clavicle_|arm_|hand_|finger_)/.test(track.name),
+          );
+          if (!clip.tracks.length) continue;
+          T.AnimationUtils.makeClipAdditive(clip, 0, reference);
+          if (!references) preparedActions.set(source, (references = new WeakMap()));
+          references.set(reference, clip);
+        }
         const action = soldier.mixer.clipAction(clip);
         action.setLoop(T.LoopOnce, 1);
         action.clampWhenFinished = true;
@@ -436,6 +449,7 @@ export function setSoldierWeapon(
   soldier.weapon.traverse((o) => {
     if (o instanceof T.Mesh && o.castShadow) castShadow = true;
   });
+  releaseActorLightingMaterials(soldier.group, soldier.weapon);
   disposeWorldGun(soldier.weapon);
   soldier.weapon = createWorldGun(index, suppressed, identity, true);
   soldier.weaponInstance = identity;

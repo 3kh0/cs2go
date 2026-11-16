@@ -18,6 +18,7 @@ export function renderNativeFog() {
   const errors: string[] = [];
   renderer.debug.onShaderError = () => errors.push("shader compile failure");
   const cases: Record<string, number[]> = {};
+  const actorSamplers: Record<string, string[]> = {};
   const cubeData = new Uint8Array(4 * 4 * 6 * 4);
   const faces = [
     [255, 0, 0],
@@ -81,10 +82,23 @@ export function renderNativeFog() {
       );
     } else applyNativeMapFog(scene, fog);
     renderer.render(scene, camera);
-    const gl = renderer.getContext(),
+    const gl = renderer.getContext() as WebGL2RenderingContext,
       pixel = new Uint8Array(4);
     gl.readPixels(16, 16, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
     cases[name] = Array.from(pixel);
+    if (actor) {
+      const program = gl.getParameter(gl.CURRENT_PROGRAM) as WebGLProgram;
+      actorSamplers[name] = [];
+      for (let index = 0; index < gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS); index++) {
+        const uniform = gl.getActiveUniform(program, index)!;
+        if (
+          uniform.type === gl.SAMPLER_2D ||
+          uniform.type === gl.SAMPLER_CUBE ||
+          uniform.type === gl.SAMPLER_2D_ARRAY
+        )
+          actorSamplers[name].push(uniform.name);
+      }
+    }
     if (actor) disposeActorLighting(plane);
     material.dispose();
     plane.geometry.dispose();
@@ -119,8 +133,9 @@ export function renderNativeFog() {
   draw("cubeSourcePositiveY", cubeDefinition);
   draw("cubeYaw90", { cube: { ...cubeDefinition.cube!, angles: [0, 90, 0] } });
   draw("orderedGradientThenCube", { ...gradient, ...cubeDefinition });
+  draw("actorOrderedGradientThenCube", { ...gradient, ...cubeDefinition }, "ordinary", 0, true);
   draw("cubeDisabledHeightAtDifferentElevation", cubeDefinition, "ordinary", 100);
-  const result = { cases, errors, glError: renderer.getContext().getError() };
+  const result = { cases, actorSamplers, errors, glError: renderer.getContext().getError() };
   cube.dispose();
   renderer.dispose();
   return result;

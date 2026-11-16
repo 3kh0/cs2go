@@ -39,6 +39,41 @@ describe("imported map collision", () => {
     expect(collision.ceiling(-0.2, 0, 0.9, 1.1, 0.3)).toBeCloseTo(1);
     expect(collision.ceiling(-0.31, 0, 0.9, 1.1, 0.3)).toBe(Infinity);
   });
+  it("reuses support geometry without reusing vertical windows, positions, radii or ceilings", () => {
+    const ramp = surface([-4, -2, -4, 4, 2, 4, 4, 2, -4, -4, -2, -4, -4, -2, 4, 4, 2, 4]);
+    const collision = new MapCollision([ramp]);
+    collision.beginSupportReuse(0.5, 0.25, 0.25);
+    try {
+      expect(collision.support(0.5, 0.25, 1, -1, 0.25)).toBe(0.375);
+      expect(collision.support(0.5, 0.25, 0.1, -1, 0.25)).toBe(-Infinity);
+      expect(collision.support(0.5, 0.25, 1, -1, 0.5)).toBe(0.5);
+      expect(collision.support(1, 0.25, 1, -1, 0.25)).toBe(0.625);
+      expect(collision.ceiling(0.5, 0.25, -1, 1, 0.25)).toBe(0.125);
+    } finally {
+      collision.endSupportReuse();
+    }
+    const floor = (y: number) => surface([-2, y, -2, 2, y, 2, 2, y, -2]);
+    const stacked = new MapCollision([floor(0.25), floor(0.625)]);
+    const position = new T.Vector3();
+    stacked.beginSupportReuse(0, 0, 0.35);
+    try {
+      expect(stacked.followGround(position, 0.35, 1.65)).toBe(true);
+      expect(position.y).toBe(0.25);
+      expect(stacked.support(0, 0, position.y + 0.46, position.y - 8, 0.35)).toBe(0.625);
+    } finally {
+      stacked.endSupportReuse();
+    }
+    const lowRoof = new MapCollision([floor(0.25), floor(1.5)]);
+    position.set(0, 0, 0);
+    lowRoof.beginSupportReuse(0, 0, 0.35);
+    try {
+      expect(lowRoof.support(0, 0, 0.46, -8, 0.35)).toBe(0.25);
+      expect(lowRoof.followGround(position, 0.35, 1.65)).toBe(false);
+      expect(position.y).toBe(0);
+    } finally {
+      lowRoof.endSupportReuse();
+    }
+  });
   it("does not snap onto a steep face or step through a low ceiling", () => {
     const steep = new MapCollision([surface([-2, -2.2, -2, 2, 2.2, 2, 2, 2.2, -2])]);
     expect(steep.followGround(new T.Vector3(0, 0, 0))).toBe(false);

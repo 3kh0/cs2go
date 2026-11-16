@@ -14,7 +14,7 @@ export function nativeMapSamplerReservation(resources: NativeMapSamplerResources
   const atlas = resources.lighting ? (resources.lighting.directional ? 3 : 2) : 0;
   if (resources.probes && resources.probes.textures.length < 2)
     throw new Error("Native probe sampler layout is incomplete");
-  const probes = resources.probes ? 2 : 0; // sourceGpuAtlas0/1 shader ABI
+  const probes = resources.probes?.textures.length ?? 0;
   const lighting = Math.max(atlas, probes);
   const reflection = resources.reflections;
   if (

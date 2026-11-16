@@ -1,6 +1,8 @@
 import {
   prepareShadersBounded,
   finishPreparedPrograms,
+  finishGpuTextureRelease,
+  prepareNativeTextureArrays,
   preparedTextures,
   prepareTexturesBounded,
 } from "./shader-preparation";
@@ -808,6 +810,10 @@ export class Game {
     const diagnostics = rendererDiagnostics(this.renderer.getContext());
     // A software fallback gets conservative defaults; preserve saved choices.
     if (diagnostics.software) {
+      // Texture suspension alone leaves old programs and geometry resident.
+      // Evict the previous native world after the replacement commits; keep
+      // home permanent and preserve the selected world across menu/reentry.
+      this.nativeWorlds = new NativeMapCache("dust2", 1);
       try {
         if (!localStorage.getItem("cs2go-settings"))
           Object.assign(this.settings, graphicsPresets.laptop);
@@ -1048,6 +1054,12 @@ export class Game {
       play: (kind) => this.soundscape.playUi(kind),
     });
     document.addEventListener("visibilitychange", () => {
+      // Hidden tabs may receive no rAF callbacks at all. Do not charge that
+      // suspension to simulation, presentation or the next FPS sample.
+      this.last = performance.now();
+      this.lastRender = 0;
+      this.lastPresentation = undefined;
+      this.frames = this.fpsTime = 0;
       if (document.hidden) this.soundscape.pauseMusic();
       else {
         this.soundscape.resumeMusic();
@@ -1428,8 +1440,13 @@ export class Game {
       signal.throwIfAborted();
       // No frame renders while loading. Retain CPU assets for warm reentry,
       // without keeping the hidden home/previous maps resident beside this map.
-      if (this.matchLoading)
+      if (this.matchLoading) {
         this.nativeWorlds.releaseGpuTextures((world) => world.releaseGpuTextures());
+        // Same-map reentry retains its arrays. A different native map must wait
+        // for the old images' submitted work before allocating its replacement.
+        if (this.dust && this.dust.id !== "dust2" && this.dust.id !== id)
+          await finishGpuTextureRelease(this.renderer, signal);
+      }
       const waitFor = async <Value>(pending: Promise<Value>): Promise<Value> => {
         signal.throwIfAborted();
         let abort: () => void = () => {};
@@ -1491,9 +1508,27 @@ export class Game {
         this.healthshotAction.configure({ ...timings, draw: 1 });
         this.healthshotSounds = timings.sounds;
       }
+      const replacingNativeWorld =
+        this.world && this.world.id !== "dust2" && this.world !== this.dust;
       this.useWorld();
       this.configureBots(this.teamMode, bots ? undefined : 0);
+      // Committing the replacement also disposes the previous world's programs,
+      // geometry and targets. Retire those deletions before its first GPU draws.
+      if (replacingNativeWorld) await finishGpuTextureRelease(this.renderer, signal);
       this.bots.forEach((bot, index) => this.spawnBot(bot, index));
+      // Keep hardware preparation unchanged. Software drivers need the largest
+      // main-map images before ordinary world/actor draws consume free extents.
+      if (rendererDiagnostics(this.renderer.getContext()).software)
+        prepareNativeTextureArrays(
+          this.renderer,
+          [
+            ...(this.world?.nativeProbes?.textures ?? []),
+            ...[...(this.world?.nativeEnvironment?.banks?.values() ?? [])].map(
+              (bank) => bank.texture,
+            ),
+          ],
+          signal,
+        );
       for (const faction of [team, team === "ct" ? "t" : "ct"] as const) {
         signal.throwIfAborted();
         this.team = faction;
@@ -1506,6 +1541,18 @@ export class Game {
       this.team = team;
       this.bots.forEach((bot) => (bot.group.visible = false));
     }
+  }
+  worldPreparationRoots(includeHiddenBots = true) {
+    // Cached maps and bot groups are direct scene children. Hidden future
+    // effects/weapons still need preparation; visibility alone is not a filter.
+    const excluded = new Set<T.Object3D>(
+      [...this.nativeWorlds.values()]
+        .filter((world) => world !== this.world)
+        .map((world) => world.root),
+    );
+    if (!includeHiddenBots)
+      for (const bot of this.bots) if (!bot.group.visible) excluded.add(bot.group);
+    return this.scene.children.filter((root) => !excluded.has(root));
   }
   // Compile the selected world and weapon programs; upload visible finishes only.
   // Hidden HD skin variants upload on first use instead of occupying GPU memory.
@@ -1574,16 +1621,9 @@ export class Game {
         this.renderer.toneMapping = tone;
       }
     };
-    // Cached maps are direct scene children. Keep hidden future actors/weapons,
-    // but do not prepare inactive maps against the selected map's lighting.
-    const inactiveMaps = new Set<T.Object3D>(
-      [...this.nativeWorlds.values()]
-        .filter((world) => world !== preparedWorld)
-        .map((world) => world.root),
-    );
     await prepareShadersBounded(
       this.renderer,
-      [...this.scene.children.filter((root) => !inactiveMaps.has(root)), ...worldExtras],
+      [...this.worldPreparationRoots(), ...worldExtras],
       this.camera,
       this.scene,
       {
@@ -1807,6 +1847,12 @@ export class Game {
     this.bots.forEach((b) => (b.group.visible = false));
     this.bombMesh.visible = false;
     this.useWorld();
+    // Home shares Dust II's textures. Suspend other maps before home renders,
+    // but keep the selected map's arrays to avoid another large contiguous
+    // allocation on reentry. prepareMap releases them on a switch.
+    this.nativeWorlds.releaseGpuTextures((world) => {
+      if (world.id !== "dust2") world.releaseGpuTextures(world === this.dust);
+    });
     setAssetCacheMatchActive(false);
   }
   inspectDuration() {
@@ -6255,15 +6301,21 @@ export class Game {
           velocity.z = b.velocity.y;
           this.world.collision.moveHorizontal(pos, velocity, dt, 0.35, botHeight, b.vertical === 0);
           b.velocity.set(velocity.x, velocity.z);
-          if (b.vertical === 0) this.world.collision.followGround(pos, 0.35, botHeight);
-          b.navArea = nav.nearest(pos);
-          const floor = this.world.collision.support(
-            pos.x,
-            pos.z,
-            pos.y + (b.vertical > 0 ? 0 : 0.46),
-            pos.y - 8,
-            0.35,
-          );
+          if (b.vertical === 0) this.world.collision.beginSupportReuse(pos.x, pos.z, 0.35);
+          let floor: number;
+          try {
+            if (b.vertical === 0) this.world.collision.followGround(pos, 0.35, botHeight);
+            b.navArea = nav.nearest(pos);
+            floor = this.world.collision.support(
+              pos.x,
+              pos.z,
+              pos.y + (b.vertical > 0 ? 0 : 0.46),
+              pos.y - 8,
+              0.35,
+            );
+          } finally {
+            this.world.collision.endSupportReuse();
+          }
           if (Number.isFinite(floor)) {
             if (b.vertical <= 0 && pos.y <= floor + 0.45) {
               pos.y = floor;
@@ -7041,6 +7093,7 @@ export class Game {
   }
   teamPreview?: (dt: number) => void;
   lastRender = 0;
+  private lastPresentation?: number;
   frame(now: number) {
     requestAnimationFrame((t) => this.frame(t));
     // No scene work behind the loading overlay or in a background tab. Menus
@@ -7051,6 +7104,7 @@ export class Game {
       this.matchLoading
     ) {
       this.last = now;
+      this.lastPresentation = undefined;
       return;
     }
     showNativeMapGrade(this.active || !!this.teamPreview);
@@ -7125,7 +7179,10 @@ export class Game {
       this.active && this.locked ? this.settings.fpsCap : this.settings.menuFpsCap,
     );
     if (renderClock === null) return;
-    const renderDt = Math.min((now - this.lastRender) / 1000, 0.1);
+    // The cap clock is an ideal deadline, not the preceding displayed frame.
+    const renderDt =
+      this.lastPresentation === undefined ? 0 : Math.min((now - this.lastPresentation) / 1000, 0.1);
+    this.lastPresentation = now;
     this.lastRender = renderClock;
     this.frames++;
     if (!this.previewingViewmodel && this.lastViewmodelPreview) {

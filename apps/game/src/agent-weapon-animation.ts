@@ -41,7 +41,11 @@ export class AgentWeaponAnimation {
   }
   bind(body: T.AnimationAction, clip?: T.AnimationClip) {
     if (!clip || this.actions.has(body)) return;
-    const action = this.mixer.clipAction(clip.clone());
+    // Tracks from the loaded pack are read-only. Keep a unique clip identity:
+    // two body actions can bind the same secondary with different blend clocks.
+    const action = this.mixer.clipAction(
+      new T.AnimationClip(clip.name, clip.duration, clip.tracks, clip.blendMode),
+    );
     action.setLoop(T.LoopOnce, 1);
     action.clampWhenFinished = true;
     this.actions.set(body, action);

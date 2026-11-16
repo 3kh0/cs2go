@@ -35,7 +35,7 @@ jobs:
             client=true
             server=true
           else
-            if git diff --quiet "$BEFORE" HEAD -- package.json bun.lock bunfig.toml packages/protocol packages/simulation .github/workflows/deploy.yml scripts/smoke-container.py; then
+            if git diff --quiet "$BEFORE" HEAD -- package.json bun.lock bunfig.toml patches packages/protocol packages/simulation .github/workflows/deploy.yml scripts/smoke-container.py; then
               :
             else
               client=true
@@ -125,6 +125,7 @@ jobs:
             /package.json
             /bun.lock
             /bunfig.toml
+            /patches/
             /turbo.json
             /packages/protocol/
             /packages/simulation/
@@ -163,6 +164,7 @@ jobs:
             /package.json
             /bun.lock
             /bunfig.toml
+            /patches/
             /apps/game/package.json
             /apps/server/package.json
             /packages/assets/package.json
@@ -229,6 +231,7 @@ jobs:
             /package.json
             /bun.lock
             /bunfig.toml
+            /patches/
             /apps/game/package.json
             /apps/server/package.json
             /packages/assets/package.json

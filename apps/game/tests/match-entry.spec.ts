@@ -9,6 +9,72 @@ test.beforeEach(async ({ page }) => {
   await page.locator("#home-play").click();
 });
 
+test("presentation follows actual accepted frames and excludes suspended tab time", async ({
+  page,
+}) => {
+  const result = await page.evaluate(() => {
+    const game = window.__game;
+    const raf = window.requestAnimationFrame,
+      preview = game.teamPreview,
+      cap = game.settings.menuFpsCap;
+    const samples: { dt: number; elapsed: number }[] = [];
+    let now = performance.now() + 1000;
+    window.requestAnimationFrame = () => 0;
+    try {
+      for (const [refresh, limit] of [
+        [60, 144],
+        [60, 30],
+        [165, 144],
+        [60, 0],
+      ]) {
+        game.settings.menuFpsCap = limit;
+        let previous: number | undefined;
+        game.teamPreview = (dt) => {
+          if (previous !== undefined) samples.push({ dt, elapsed: (now - previous) / 1000 });
+          previous = now;
+        };
+        const start = now + 1000;
+        for (let frame = 0; frame <= refresh; frame++) {
+          now = start + (frame * 1000) / refresh;
+          game.frame(now);
+        }
+      }
+      // No hidden rAF is required for visibility restoration to reset clocks.
+      game.last = performance.now() - 10_000;
+      game.accumulator = 0.003;
+      game.frames = 77;
+      game.fpsTime = 10;
+      const resumeStarted = performance.now();
+      document.dispatchEvent(new Event("visibilitychange"));
+      const resumed = {
+        reset: game.last >= resumeStarted && game.last <= performance.now(),
+        frames: game.frames,
+        fpsTime: game.fpsTime,
+        remainder: game.accumulator,
+      };
+      let resumedDt = -1;
+      game.teamPreview = (dt) => {
+        resumedDt = dt;
+      };
+      game.frame(performance.now());
+      return { samples, resumed, resumedDt };
+    } finally {
+      game.matchLoading = true;
+      game.frame(performance.now());
+      game.matchLoading = false;
+      game.lastRender = 0;
+      game.accumulator = 0;
+      game.teamPreview = preview;
+      game.settings.menuFpsCap = cap;
+      window.requestAnimationFrame = raf;
+    }
+  });
+  expect(result.samples.length).toBeGreaterThan(250);
+  for (const { dt, elapsed } of result.samples) expect(dt).toBeCloseTo(elapsed, 10);
+  expect(result.resumed).toEqual({ reset: true, frames: 0, fpsTime: 0, remainder: 0.003 });
+  expect(result.resumedDt).toBe(0);
+});
+
 test("map cards and team selection remain usable across resize, cancel and reopen", async ({
   page,
 }) => {

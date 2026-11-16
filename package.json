@@ -36,5 +36,8 @@
       "onFail": "download"
     }
   },
-  "packageManager": "bun@1.4.4"
+  "packageManager": "bun@1.4.4",
+  "patchedDependencies": {
+    "three@0.187.0": "patches/three@0.187.0.patch"
+  }
 }

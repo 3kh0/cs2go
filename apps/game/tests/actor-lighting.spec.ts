@@ -27,6 +27,12 @@ test("actor probe shaders render independent light and compensate viewmodel rota
   expect(result.turned[0]).toBeLessThan(5);
   expect(result.disabled.slice(0, 3)).toEqual([0, 0, 0]);
   expect(result.independent).toBe(true);
+  // One steady actor and one current map variant, not every previous map.
+  expect(result.mapPrograms.every((count: number) => count <= 2)).toBe(true);
+  expect(result.otherActorUnchanged).toBe(true);
+  expect(result.mapColors[0]).not.toEqual(result.mapColors[1]);
+  for (let index = 2; index < result.mapColors.length; index++)
+    expect(result.mapColors[index]).toEqual(result.mapColors[index % 2]);
   expect(errors).toEqual([]);
 });
 
