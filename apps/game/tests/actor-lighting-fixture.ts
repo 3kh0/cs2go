@@ -5,6 +5,8 @@ import {
   disposeActorLighting,
   setActorReflection,
 } from "../src/actor-lighting";
+import { nativeFogParameters, type NativeFogDefinition } from "../src/native-map-fog";
+
 export function renderActorProbes() {
   const renderer = new T.WebGLRenderer({ antialias: false });
   renderer.setSize(32, 32);
@@ -40,13 +42,45 @@ export function renderActorProbes() {
   scene.add(second);
   const disabled = read();
   const independent = first.material !== second.material && first.material !== material;
+  const mapPrograms: number[] = [],
+    mapColors: number[][] = [];
+  let otherActorUnchanged = true;
+  for (let index = 0; index < 12; index++) {
+    const definition: NativeFogDefinition = {
+      gradient: {
+        distance: [0, 250, 1],
+        color: index % 2 ? [0.05, 0.4, 0.15] : [0.5, 0.07, 0.03],
+        opacity: 0.8,
+        strength: 1,
+      },
+    };
+    updateActorLighting(
+      first,
+      new T.Vector3(),
+      sample,
+      0.1,
+      undefined,
+      undefined,
+      undefined,
+      null,
+      undefined,
+      { definition, parameters: nativeFogParameters(definition) },
+    );
+    scene.remove(second);
+    scene.add(first);
+    mapColors.push(read());
+    mapPrograms.push(renderer.info.programs!.length);
+    scene.remove(first);
+    scene.add(second);
+    otherActorUnchanged &&= read().every((value, channel) => value === disabled[channel]);
+  }
   disposeActorLighting(first);
   disposeActorLighting(second);
   geometry.dispose();
   material.dispose();
   target.dispose();
   renderer.dispose();
-  return { front, turned, disabled, independent };
+  return { front, turned, disabled, independent, mapPrograms, mapColors, otherActorUnchanged };
 }
 
 // https://en.wikipedia.org/wiki/Azimuth

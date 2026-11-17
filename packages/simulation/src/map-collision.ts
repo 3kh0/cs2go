@@ -341,6 +341,17 @@ export class MapCollision {
   private readonly dynamic = new Map<string, MapCollision>();
   private readonly dynamicContact = new T.Vector3();
   private readonly dynamicCandidates: number[] = [];
+  // One synchronous support-query scope; immutable triangle heights only.
+  private supportReuse?: {
+    active: boolean;
+    x: number;
+    z: number;
+    radius: number;
+    epoch: number;
+    stamps: Uint32Array;
+    triangles: Int32Array;
+    heights: Float64Array;
+  };
   constructor(meshes: T.Mesh[], movementMeshes: T.Mesh[] = []) {
     this.raycastMeshCount = meshes.length;
     meshes = meshes.concat(movementMeshes);
@@ -514,6 +525,7 @@ export class MapCollision {
    */
   fork(): MapCollision {
     return Object.assign(Object.create(MapCollision.prototype) as MapCollision, this, {
+      supportReuse: undefined,
       disabledOwners: this.disabledOwners.slice(),
       dynamic: new Map([...this.dynamic].map(([id, collision]) => [id, collision.fork()])),
       dynamicContact: new T.Vector3(),
@@ -586,6 +598,48 @@ export class MapCollision {
   }
   blocked(x: number, z: number, feet: number, radius = 0.3, height = 1.65) {
     return this.overlap(x, z, feet, radius, height);
+  }
+  /** Reuse exact clipping across a non-nested, synchronous support-query pair.
+   * End in finally. Vertical windows, clearance and dynamic islands stay live. */
+  beginSupportReuse(x: number, z: number, radius: number) {
+    const memo = (this.supportReuse ??= {
+      active: false,
+      x,
+      z,
+      radius,
+      epoch: 0,
+      stamps: new Uint32Array(64),
+      triangles: new Int32Array(64),
+      heights: new Float64Array(64),
+    });
+    if (++memo.epoch >= 0xffffffff) {
+      memo.stamps.fill(0);
+      memo.epoch = 1;
+    }
+    memo.active = true;
+    memo.x = x;
+    memo.z = z;
+    memo.radius = radius;
+  }
+  endSupportReuse() {
+    if (this.supportReuse) this.supportReuse.active = false;
+  }
+  private reusedSupportHeight(k: number, x: number, z: number, radius: number) {
+    const memo = this.supportReuse;
+    if (
+      !memo?.active ||
+      !Object.is(memo.x, x) ||
+      !Object.is(memo.z, z) ||
+      !Object.is(memo.radius, radius)
+    )
+      return footprintHeight(this.vertices, k * 9, x, z, radius, true);
+    const slot = k & 63;
+    if (memo.stamps[slot] === memo.epoch && memo.triangles[slot] === k) return memo.heights[slot];
+    const value = footprintHeight(this.vertices, k * 9, x, z, radius, true);
+    memo.stamps[slot] = memo.epoch;
+    memo.triangles[slot] = k;
+    memo.heights[slot] = value;
+    return value;
   }
   support(x: number, z: number, ceiling: number, bottom: number, radius = 0.3) {
     return this.footprint(x, z, ceiling, bottom, radius, false);
@@ -713,7 +767,9 @@ export class MapCollision {
           )
             continue;
           if (outside(vertices, k * 9, x, z, radius)) continue;
-          const y = footprintHeight(vertices, k * 9, x, z, radius, !overhead);
+          const y = overhead
+            ? footprintHeight(vertices, k * 9, x, z, radius, false)
+            : this.reusedSupportHeight(k, x, z, radius);
           if (y <= ceiling && y >= bottom && (overhead ? y < height : y > height)) height = y;
         }
       }

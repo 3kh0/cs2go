@@ -37,10 +37,17 @@ export class ActorReflections {
     for (const root of this.previous) if (!current.has(root)) setActorReflection(root);
     this.current = this.previous;
     this.previous = current;
-    for (const [index, target] of this.cache) {
-      if (!chosen.has(index)) {
-        target.dispose();
+    if (!chosen.size) {
+      for (const target of this.cache.values()) target.dispose();
+      this.cache.clear();
+    } else {
+      // Keep unused probes for returns across a boundary, within the same cap.
+      // Map insertion order records recency; demanded probes are never evicted.
+      for (const index of chosen) {
+        const target = this.cache.get(index);
+        if (!target) continue;
         this.cache.delete(index);
+        this.cache.set(index, target);
       }
     }
     if (this.loading) return;
@@ -57,7 +64,16 @@ export class ActorReflections {
     void loadSourceReflection(next)
       .then((texture) => {
         try {
-          if (!this.desired.has(next) || this.cache.size >= 8) return;
+          if (!this.desired.has(next)) return;
+          if (this.cache.size >= 8) {
+            // Demand may change while decoding; select against its latest set.
+            for (const [index, target] of this.cache) {
+              if (this.desired.has(index)) continue;
+              target.dispose();
+              this.cache.delete(index);
+              break;
+            }
+          }
           this.generator ??= new T.PMREMGenerator(renderer);
           this.cache.set(next, this.generator.fromEquirectangular(texture));
         } finally {

@@ -123,6 +123,56 @@ test("native secondary reload moves the actual magazine and scrubs back without 
   secondary.dispose();
 });
 
+test("two body actions sharing a secondary clip keep independent blend clocks", async () => {
+  const pack = await parse("/models/agents/inspects/animations/world/rifle/rifle_ak.glb");
+  const clip = pack.animations.find((clip) => clip.name === "reload_ak@weapon")!;
+  const original = clip.tracks.map((track) => [...track.values]);
+  const make = (clips: T.AnimationClip[]) => {
+    const weapon = createNativeWorldGun(0, true, undefined, false, true);
+    const secondary = new AgentWeaponAnimation(weapon, pack.scene);
+    const mixer = new T.AnimationMixer(new T.Group());
+    const clocks = clips.map((source, i) => {
+      const clock = mixer.clipAction(new T.AnimationClip(`body-${i}`, source.duration, []));
+      secondary.bind(clock, source);
+      return clock;
+    });
+    const pose = () => {
+      const matrices: number[] = [];
+      weapon.traverse((node) => {
+        if (node instanceof T.Bone) matrices.push(...node.matrixWorld.elements);
+      });
+      return matrices;
+    };
+    return { weapon, secondary, clocks, pose };
+  };
+  const shared = make([clip, clip]);
+  const separate = make([clip.clone(), clip.clone()]);
+  for (const actor of [shared, separate]) {
+    actor.clocks[0].play().setEffectiveWeight(0.3);
+    actor.clocks[0].time = 0.7666561604;
+    actor.clocks[1].play().setEffectiveWeight(0.7);
+    actor.clocks[1].time = 1.2;
+    actor.secondary.update();
+  }
+  expect(shared.pose()).toEqual(separate.pose());
+  const blended = shared.pose();
+  for (const actor of [shared, separate]) {
+    actor.clocks[1].stop();
+    actor.clocks[0].setEffectiveWeight(1);
+    actor.secondary.update();
+  }
+  expect(shared.pose()).toEqual(separate.pose());
+  expect(shared.pose()).not.toEqual(blended);
+  shared.secondary.dispose();
+  disposeWorldGun(shared.weapon);
+  const before = separate.pose();
+  separate.secondary.update();
+  expect(separate.pose()).toEqual(before);
+  expect(clip.tracks.map((track) => [...track.values])).toEqual(original);
+  separate.secondary.dispose();
+  disposeWorldGun(separate.weapon);
+});
+
 test("carried weapons share vertices without sharing poses or disposing another actor's resources", async () => {
   const pack = await parse("/models/agents/inspects/animations/world/rifle/rifle_ak.glb");
   const clip = pack.animations.find((clip) => clip.name === "reload_ak@weapon")!;

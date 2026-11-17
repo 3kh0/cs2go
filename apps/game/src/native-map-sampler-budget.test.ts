@@ -15,6 +15,13 @@ test("main resolved graph reserves8 slots and uses atlas OR LPVs rather than the
   expect(row.lighting).toBe(3);
   expect(row.reflectionMode).toBe("native");
   expect(nativeMapSamplerReservation({ ...resolved, lighting: undefined }).samplers).toBe(7);
+  const split = nativeMapSamplerReservation({
+    ...resolved,
+    probes: { textures: [{}, {}, {}, {}] },
+  });
+  expect(split.probes).toBe(4);
+  expect(split.lighting).toBe(4);
+  expect(split.samplers).toBe(9);
 });
 test("sky5-slot graph explicitly marks conservative sixth grade reservation", () => {
   const actual = nativeMapSamplerReservation({

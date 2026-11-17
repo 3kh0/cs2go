@@ -2,6 +2,7 @@
 FROM dhi.io/bun:1-dev AS build
 WORKDIR /app
 COPY package.json bun.lock bunfig.toml ./
+COPY patches ./patches
 COPY apps/game/package.json ./apps/game/package.json
 COPY apps/server/package.json ./apps/server/package.json
 COPY packages/assets/package.json ./packages/assets/package.json

@@ -3,6 +3,7 @@ import { assetFetch } from "./asset-url";
 import { fetchGzipped } from "./gltf";
 import { readAssetParts } from "./asset-stream";
 import { loadSourceLighting, sourceProbeMetadata } from "./source-lighting";
+import { nativeArrayLayerLimit } from "./native-array-texture";
 import {
   packSourceProbeFrames,
   probeFrameKeys,
@@ -21,7 +22,9 @@ type ArrayRecord = {
   gpuBytes: number;
 };
 export interface SourceGpuProbes {
+  /** Irradiance banks first, then shadow banks; every texture is map-owned. */
   textures: (T.CompressedArrayTexture | T.DataArrayTexture)[];
+  irradianceBanks?: number;
   frames: Float32Array[];
   packedFrames?: PackedProbeFrames;
   sky: T.Vector4[];
@@ -70,6 +73,7 @@ export async function createSourceGpuProbes(
     volumes: SourceProbeFrame[];
     skySH: number[][];
   },
+  maxLayers = Infinity,
 ): Promise<SourceGpuProbes> {
   if (arrays.length !== 2) throw new Error("Invalid native GPU probe layout");
   const depth = arrays[1].layers;
@@ -95,47 +99,69 @@ export async function createSourceGpuProbes(
         : await fetchGzipped(directory + entry.file!);
       if (bytes.byteLength !== expected || entry.gpuBytes !== expected)
         throw new Error("Invalid native GPU probe blocks");
-      const texture = decoded
-        ? new T.DataArrayTexture(
-            entry.format === "RGB16F" ? new Uint16Array(bytes) : new Uint8Array(bytes),
-            entry.width,
-            entry.height,
-            entry.layers,
-          )
-        : new T.CompressedArrayTexture(
-            [{ data: new Uint8Array(bytes), width: entry.width, height: entry.height }],
-            entry.width,
-            entry.height,
-            entry.layers,
-            index === 0 ? T.RGB_BPTC_UNSIGNED_Format : T.RGBA_BPTC_Format,
-          );
-      if (decoded) {
-        texture.format = entry.format === "RGB16F" ? T.RGBFormat : T.RGBAFormat;
-        texture.type = entry.format === "RGB16F" ? T.HalfFloatType : T.UnsignedByteType;
-        // Three infers sized floating formats for RGBA, but leaves RGB unsized.
-        // WebGL2 array storage requires RGB16F for the native three-channel HDR data.
-        if (entry.format === "RGB16F") texture.internalFormat = "RGB16F";
-        texture.unpackAlignment = 1;
+      const format = decoded
+        ? entry.format === "RGB16F"
+          ? T.RGBFormat
+          : T.RGBAFormat
+        : index === 0
+          ? T.RGB_BPTC_UNSIGNED_Format
+          : T.RGBA_BPTC_Format;
+      const layerBytes = expected / entry.layers;
+      const bankLayers = nativeArrayLayerLimit(
+        [{ width: entry.width, height: entry.height, bytes: layerBytes }],
+        format,
+        maxLayers,
+      );
+      const textures: SourceGpuProbes["textures"] = [];
+      for (let start = 0; start < entry.layers; start += bankLayers) {
+        const layers = Math.min(bankLayers, entry.layers - start);
+        // Views retain the exact transport payload, without another CPU copy.
+        const data = new Uint8Array(bytes, start * layerBytes, layers * layerBytes);
+        const texture = decoded
+          ? new T.DataArrayTexture(
+              entry.format === "RGB16F"
+                ? new Uint16Array(bytes, data.byteOffset, data.byteLength / 2)
+                : data,
+              entry.width,
+              entry.height,
+              layers,
+            )
+          : new T.CompressedArrayTexture(
+              [{ data, width: entry.width, height: entry.height }],
+              entry.width,
+              entry.height,
+              layers,
+              format as T.CompressedPixelFormat,
+            );
+        if (decoded) {
+          texture.format = format;
+          texture.type = entry.format === "RGB16F" ? T.HalfFloatType : T.UnsignedByteType;
+          // RGB16F must be explicit for WebGL2 immutable array storage.
+          if (entry.format === "RGB16F") texture.internalFormat = "RGB16F";
+          texture.unpackAlignment = 1;
+        }
+        texture.colorSpace = T.NoColorSpace;
+        texture.minFilter = texture.magFilter = T.LinearFilter;
+        texture.generateMipmaps = false;
+        texture.flipY = false;
+        texture.needsUpdate = true;
+        textures.push(texture);
       }
-      texture.colorSpace = T.NoColorSpace;
-      texture.minFilter = texture.magFilter = T.LinearFilter;
-      texture.generateMipmaps = false;
-      texture.flipY = false;
-      texture.needsUpdate = true;
-      return texture;
+      return textures;
     }),
   );
   const failure = loaded.find((result) => result.status === "rejected");
   if (failure) {
-    for (const result of loaded) if (result.status === "fulfilled") result.value.dispose();
+    for (const result of loaded)
+      if (result.status === "fulfilled") for (const texture of result.value) texture.dispose();
     throw failure.reason;
   }
-  const textures = loaded.map(
-    (result) =>
-      (result as PromiseFulfilledResult<T.CompressedArrayTexture | T.DataArrayTexture>).value,
+  const groups = loaded.map(
+    (result) => (result as PromiseFulfilledResult<SourceGpuProbes["textures"]>).value,
   );
   return {
-    textures,
+    textures: groups.flat(),
+    irradianceBanks: groups[0].length,
     depth,
     count: metadata.volumes.length,
     frames: probeFrameKeys.map(
@@ -156,6 +182,20 @@ export function applySourceGpuProbes(
   probes.textures.forEach((texture, index) => {
     shader.uniforms[`sourceGpuAtlas${index}`] = { value: texture };
   });
+  const split = probes.irradianceBanks ?? 1;
+  const readAtlas = (start: number, end: number, name: string) => {
+    let offset = 0;
+    const reads: string[] = [];
+    for (let index = start; index < end; index++) {
+      const last = index === end - 1;
+      const depth = probes.textures[index].image.depth;
+      reads.push(
+        `${last ? "" : `if (p.z < ${offset + depth}.0) `}return texture(sourceGpuAtlas${index}, ${offset ? `vec3(p.xy,p.z-${offset}.0)` : "p"});`,
+      );
+      offset += depth;
+    }
+    return `vec4 ${name}(vec3 p) { ${reads.join("\n")} }`;
+  };
   const packed = probes.packedFrames;
   if (packed) {
     shader.uniforms.sourceGpuPackedFrames = { value: packed.values };
@@ -169,8 +209,9 @@ export function applySourceGpuProbes(
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <common>",
     `#include <common>
-    uniform highp sampler2DArray sourceGpuAtlas0;
-    uniform highp sampler2DArray sourceGpuAtlas1;
+    ${probes.textures.map((_, index) => `uniform highp sampler2DArray sourceGpuAtlas${index};`).join("\n")}
+    ${readAtlas(0, split, "sourceGpuIrradiance")}
+    ${readAtlas(split, probes.textures.length, "sourceGpuOcclusion")}
     ${packed ? `uniform vec4 sourceGpuPackedFrames[${probes.count * 6}];\n${packed.rotations.length ? `uniform vec4 sourceGpuRotatedFrames[${packed.rotations.length / 4}];` : ""}` : probes.frames.map((_, index) => `uniform vec3 sourceGpuFrame${index}[${probes.count}];`).join("\n")}
     uniform vec4 sourceGpuSky[3];
     struct SourceGpuProbe { vec3 irradiance; vec4 occlusion; };
@@ -178,12 +219,12 @@ export function applySourceGpuProbes(
       float z = clamp(uvw.z * ${probes.depth}.0 - 0.5, 0.0, ${probes.depth - 1}.0);
       float lo = floor(z), hi = min(lo + 1.0, ${probes.depth - 1}.0), blend = fract(z);
       float layer = float(face) * ${probes.depth}.0;
-      return mix(texture(sourceGpuAtlas0, vec3(uvw.xy, layer + lo)).rgb, texture(sourceGpuAtlas0, vec3(uvw.xy, layer + hi)).rgb, blend);
+      return mix(sourceGpuIrradiance(vec3(uvw.xy, layer + lo)).rgb, sourceGpuIrradiance(vec3(uvw.xy, layer + hi)).rgb, blend);
     }
     vec4 sourceGpuShadow(vec3 uvw) {
       float z = clamp(uvw.z * ${probes.depth}.0 - 0.5, 0.0, ${probes.depth - 1}.0);
       float lo = floor(z), hi = min(lo + 1.0, ${probes.depth - 1}.0);
-      return mix(texture(sourceGpuAtlas1, vec3(uvw.xy, lo)), texture(sourceGpuAtlas1, vec3(uvw.xy, hi)), fract(z));
+      return mix(sourceGpuOcclusion(vec3(uvw.xy, lo)), sourceGpuOcclusion(vec3(uvw.xy, hi)), fract(z));
     }
     SourceGpuProbe sourceGpuSample(vec3 position, vec3 normalWorld) {
       vec3 p = vec3(position.x, -position.z, position.y) / 0.0254;

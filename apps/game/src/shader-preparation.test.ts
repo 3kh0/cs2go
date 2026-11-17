@@ -3,10 +3,11 @@ import * as T from "three";
 import {
   prepareShadersBounded,
   finishPreparedPrograms,
+  finishGpuTextureRelease,
   preparedTextures,
   prepareTexturesBounded,
 } from "./shader-preparation";
-function fixture() {
+function fixture(parallel = true, adapter = "Hardware GPU") {
   const scene = new T.Scene(),
     parent = new T.Group();
   scene.add(parent);
@@ -31,6 +32,9 @@ function fixture() {
   const gl = {
     LINK_STATUS: 1,
     isContextLost: () => lost,
+    getExtension: () => null,
+    getParameter: () => adapter,
+    getContextAttributes: () => null,
     getProgramParameter: () => {
       links++;
       return linked;
@@ -42,7 +46,7 @@ function fixture() {
     domElement: target,
     getContext: () => gl,
     info: { programs },
-    extensions: { has: () => true },
+    extensions: { has: () => parallel },
     properties: { get: (material: T.Material) => props.get(material) ?? {} },
     compile(root: T.Object3D, _camera: T.Camera, actual: T.Scene) {
       expect(scoped).toBe(true);
@@ -96,6 +100,10 @@ function fixture() {
       lost = true;
       target.dispatchEvent(new Event("webglcontextlost"));
     },
+    restore: () => {
+      lost = false;
+      target.dispatchEvent(new Event("webglcontextrestored"));
+    },
   };
 }
 test("deduplicates original hidden/detached objects, real target, topology; restores scope during every yield", async () => {
@@ -125,6 +133,46 @@ test("deduplicates original hidden/detached objects, real target, topology; rest
   expect(f.state().uniforms).toBe(4);
   expect(ticks).toBeGreaterThan(0);
 });
+test.each(["ANGLE SwiftShader", "Hardware GPU", ""])(
+  "preparation defers software GPU allocations but retains guards (%s)",
+  async (adapter) => {
+    const f = fixture(true, adapter);
+    const texture = new T.DataTexture(new Uint8Array([17, 41, 83, 255]), 1, 1);
+    (f.meshes[0].material as T.MeshBasicMaterial).map = texture;
+    const uploaded: T.Texture[] = [];
+    f.renderer.initTexture = (value) => {
+      uploaded.push(value);
+    };
+    await prepareShadersBounded(f.renderer, [f.scene], new T.Camera(), f.scene, { scope: f.scope });
+    await prepareTexturesBounded(f.renderer, preparedTextures(f.renderer, [f.scene]));
+    const deferred = adapter === "ANGLE SwiftShader";
+    expect(f.programs.length).toBe(deferred ? 0 : 3);
+    expect(uploaded).toEqual(deferred ? [] : [texture]);
+    expect(texture.image.data).toEqual(new Uint8Array([17, 41, 83, 255]));
+    expect(f.meshes[1].visible).toBe(false);
+    if (!deferred) await finishGpuTextureRelease(f.renderer);
+
+    const abort = new AbortController();
+    abort.abort(new Error("cancel preparation"));
+    await expect(
+      prepareShadersBounded(f.renderer, [f.scene], new T.Camera(), f.scene, {
+        signal: abort.signal,
+      }),
+    ).rejects.toThrow("cancel preparation");
+    await expect(prepareTexturesBounded(f.renderer, [texture], abort.signal)).rejects.toThrow(
+      "cancel preparation",
+    );
+    await expect(finishGpuTextureRelease(f.renderer, abort.signal)).rejects.toThrow(
+      "cancel preparation",
+    );
+    f.lose();
+    await expect(
+      prepareShadersBounded(f.renderer, [f.scene], new T.Camera(), f.scene),
+    ).rejects.toThrow("context lost");
+    await expect(prepareTexturesBounded(f.renderer, [texture])).rejects.toThrow("context lost");
+    await expect(finishGpuTextureRelease(f.renderer)).rejects.toThrow("context lost");
+  },
+);
 test("failed links retain the driver cause without looking up uniforms or compiling another batch", async () => {
   const f = fixture();
   f.linked(false);
@@ -141,6 +189,50 @@ test("failed links retain the driver cause without looking up uniforms or compil
   });
   expect(f.seen).toHaveLength(1);
   expect(f.state()).toEqual({ scoped: false, uniforms: 0, links: 1 });
+  f.linked(true);
+  await finishPreparedPrograms(f.renderer);
+  expect(f.state()).toEqual({ scoped: false, uniforms: 1, links: 2 });
+});
+test.each([false, true])(
+  "finished programs are reused only in their live context (parallel=%s)",
+  async (parallel) => {
+    const f = fixture(parallel);
+    await prepareShadersBounded(f.renderer, [f.scene], new T.Camera(), f.scene, { scope: f.scope });
+    await finishPreparedPrograms(f.renderer);
+    expect(f.state()).toEqual({ scoped: false, uniforms: 3, links: 3 });
+    const controller = new AbortController();
+    controller.abort(new Error("cancel cached"));
+    await expect(finishPreparedPrograms(f.renderer, f.programs, controller.signal)).rejects.toThrow(
+      "cancel cached",
+    );
+    f.lose();
+    await expect(finishPreparedPrograms(f.renderer)).rejects.toThrow("context lost");
+    f.restore();
+    f.linked(false);
+    await expect(finishPreparedPrograms(f.renderer)).rejects.toThrow("could not compile");
+    f.linked(true);
+    await finishPreparedPrograms(f.renderer);
+    expect(f.state().uniforms).toBe(6);
+    f.programs.splice(0);
+    await finishPreparedPrograms(f.renderer);
+    expect(f.state().uniforms).toBe(6);
+  },
+);
+test("a failed first uniform lookup is not recorded as successful preparation", async () => {
+  const f = fixture();
+  let lookups = 0;
+  f.programs.push({
+    isReady: () => true,
+    program: {},
+    getUniforms: () => {
+      if (++lookups === 1) throw new Error("uniform setup failed");
+    },
+  } as unknown as T.WebGLProgram);
+  await expect(finishPreparedPrograms(f.renderer)).rejects.toThrow("uniform setup failed");
+  await finishPreparedPrograms(f.renderer);
+  await finishPreparedPrograms(f.renderer);
+  expect(lookups).toBe(2);
+  expect(f.state().links).toBe(2);
 });
 test("abort before compilation and during pending link stops subsequent batches without blocking uniform lookup", async () => {
   const f = fixture(),
@@ -237,7 +329,7 @@ test("warms native compiled sampler bindings while leaving framebuffer attachmen
         },
       }),
     },
-    getContext: () => ({ isContextLost: () => false }),
+    getContext: () => ({ isContextLost: () => false, getContextAttributes: () => null }),
     domElement: new EventTarget(),
     initTexture: (texture: T.Texture) => uploaded.push(texture),
   } as unknown as T.WebGLRenderer;
@@ -251,7 +343,7 @@ test("texture upload batches yield to input and stop after cancellation", async 
   const uploaded: T.Texture[] = [];
   const textures = Array.from({ length: 32 }, () => new T.Texture());
   const renderer = {
-    getContext: () => ({ isContextLost: () => false }),
+    getContext: () => ({ isContextLost: () => false, getContextAttributes: () => null }),
     domElement: new EventTarget(),
     initTexture: (texture: T.Texture) => uploaded.push(texture),
   } as unknown as T.WebGLRenderer;

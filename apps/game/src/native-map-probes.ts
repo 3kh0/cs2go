@@ -27,7 +27,12 @@ export async function loadNativeMapProbes(renderer: T.WebGLRenderer, directory: 
       Math.max(...arrays.map((a: { layers: number }) => a.layers))
   )
     return undefined;
-  return createSourceGpuProbes(directory, arrays, metadata);
+  return createSourceGpuProbes(
+    directory,
+    arrays,
+    metadata,
+    gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS),
+  );
 }
 
 /** Apply the native six-direction irradiance and sunlight visibility to props. */
@@ -81,7 +86,7 @@ export function applyNativeMapProbes(root: T.Object3D, probes: SourceGpuProbes) 
         );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-map-probes:${probes.count}:${!!probes.packedFrames}:${probes.packedFrames?.rotations.length ?? 0}`;
+        `${key}:native-map-probes:${probes.count}:${!!probes.packedFrames}:${probes.packedFrames?.rotations.length ?? 0}:${probes.depth}:${probes.irradianceBanks ?? 1}:${probes.textures.map((texture) => texture.image.depth).join(",")}`;
       material.needsUpdate = true;
       return material;
     };

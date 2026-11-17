@@ -35,7 +35,12 @@ export function assertNativeEnvironmentBudget(
   // Atlas/LPV + native BRDF + two sun shadows + final grade, excluding the
   // material's own samplers and the separately resolved reflection/fog arrays.
   const reservedSamplers =
-    (resources.lightingSamplers ?? 3) + 1 + 2 + 1 + reflectionSamplers + fogSamplers;
+    Math.max(resources.lightingSamplers ?? 3, resources.probes?.textures.length ?? 0) +
+    1 +
+    2 +
+    1 +
+    reflectionSamplers +
+    fogSamplers;
   const probes = resources.probes;
   const probeVectors = probes
     ? probes.packedFrames

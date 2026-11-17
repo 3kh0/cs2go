@@ -27,6 +27,10 @@ test("native fog uses Source axes, authored height, blend attenuation and gradie
   near("cubeSourcePositiveY", [31, 31, 133]);
   near("cubeYaw90", [133, 31, 31]);
   near("orderedGradientThenCube", [67, 31, 126]);
+  near("actorOrderedGradientThenCube", [67, 31, 126]);
+  expect(result.actorSamplers.actorGradient).not.toContain("sourceFogSky");
+  expect(result.actorSamplers.actorOrderedGradientThenCube).not.toContain("sourceFogSky");
+  expect(result.actorSamplers.actorOrderedGradientThenCube).toContain("nativeFogCubes0");
   expect(result.cases.cubeDisabledHeightAtDifferentElevation).toEqual(
     result.cases.cubeSourcePositiveY,
   );

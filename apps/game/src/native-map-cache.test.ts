@@ -10,22 +10,32 @@ function gate() {
   return { promise, open };
 }
 
-test("map cache retains home and two recent maps, evicting inactive GPU owners", () => {
-  const cache = new NativeMapCache<string, ReturnType<typeof world>>("dust2");
-  const dust = world(),
-    mirage = world(),
-    nuke = world(),
-    inferno = world();
-  cache.set("dust2", dust);
-  cache.set("mirage", mirage);
-  cache.set("nuke", nuke);
-  cache.get("mirage");
-  cache.set("inferno", inferno);
-  cache.prune([mirage, inferno]);
-  expect(nuke.dispose).toHaveBeenCalledTimes(1);
-  expect(dust.dispose).not.toHaveBeenCalled();
-  expect([...cache.values()]).toEqual([dust, mirage, inferno]);
-});
+test.each([1, 2])(
+  "map cache protects home and consumers before pruning to capacity %i",
+  (capacity) => {
+    const cache = new NativeMapCache<string, ReturnType<typeof world>>("dust2", capacity);
+    const dust = world(),
+      mirage = world(),
+      nuke = world(),
+      inferno = world();
+    cache.set("dust2", dust);
+    cache.set("mirage", mirage);
+    cache.set("nuke", nuke);
+    cache.get("mirage");
+    cache.set("inferno", inferno);
+    cache.prune([mirage, inferno]);
+    expect(nuke.dispose).toHaveBeenCalledTimes(1);
+    expect(dust.dispose).not.toHaveBeenCalled();
+    expect([...cache.values()]).toEqual([dust, mirage, inferno]);
+    cache.prune([inferno]);
+    expect([...cache.values()]).toEqual(capacity === 1 ? [dust, inferno] : [dust, mirage, inferno]);
+    expect(mirage.dispose).toHaveBeenCalledTimes(capacity === 1 ? 1 : 0);
+    expect(inferno.dispose).not.toHaveBeenCalled();
+    expect(dust.dispose).not.toHaveBeenCalled();
+    cache.prune([inferno]);
+    expect(mirage.dispose).toHaveBeenCalledTimes(capacity === 1 ? 1 : 0);
+  },
+);
 
 test("concurrent preparation leases protect live consumers and release aborted results", () => {
   const cache = new NativeMapCache<string, ReturnType<typeof world>>("dust2");

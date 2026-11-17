@@ -175,21 +175,31 @@ export function prepareTeamSelector(onSelect: (team: AgentTeam) => void, size: n
         sampleSourceProbeLocalShadows,
       );
     }
+    const roots = game.worldPreparationRoots(activeMatch);
+    // Keep one selector compile, without reparenting objects or introducing a
+    // timer per small batch of already-warm materials. The real scene owns lights.
+    const selection = new T.Group();
+    selection.traverseVisible = (visit) => visit(selection);
+    selection.traverse = (visit) => {
+      visit(selection);
+      for (const root of roots) root.traverse(visit);
+    };
     const previousToneMapping = renderer.toneMapping;
-    let compilation: Promise<void>;
     let coveragePreparation: Promise<unknown> | undefined;
     try {
       renderer.toneMapping = T.CustomToneMapping;
       previewRoot.visible = true;
       game.prepareMapFrame(() => {
-        compilation = renderer.compileAsync(game.scene, camera).then(() => {});
+        renderer.compile(selection, camera, game.scene);
         coveragePreparation = game.world.nativeCoverage?.prepare(camera);
       }, camera);
     } finally {
       previewRoot.visible = false;
       renderer.toneMapping = previousToneMapping;
     }
-    await Promise.all([compilation!, coveragePreparation]);
+    await coveragePreparation;
+    // Completion is abortable and includes every newly compiled variant, rather
+    // than leaving compileAsync polling disposed preview materials after cancel.
     await game.finishPrograms(controller.signal);
     if (closed) return;
     ready = true;

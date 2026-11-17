@@ -613,7 +613,8 @@ async function buildNativeMapSky(
     manifest,
     nativeParallaxSamplerBudget,
     skyCamera,
-    releaseGpuTextures: () => resources.releaseGpuTextures(renderer),
+    releaseGpuTextures: (retainArrays = false) =>
+      resources.releaseGpuTextures(renderer, retainArrays),
     dispose() {
       if (disposed) return;
       disposed = true;

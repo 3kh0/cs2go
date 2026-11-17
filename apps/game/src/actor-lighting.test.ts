@@ -100,6 +100,7 @@ test("map-owned actor LPVs switch after registration without leaking Dust II pro
     expect(shader.uniforms.sourceActorGpuEnabled.value).toBe(1);
     expect(shader.uniforms.sourceActorWorldEnabled.value).toBe(1);
     expect(shader.uniforms.sourceActorDustEnabled.value).toBe(0);
+    expect(shader.uniforms.sourceFogSky).toBeUndefined();
     expect(shader.uniforms.sourceActorLocalFrame.value).toBe(1);
     expect(shader.uniforms.sourceActorProbeRotation.value).toEqual(rotation);
     expect(shader.uniforms.sourceActorProbeOrigin.value).toEqual(position);
@@ -124,14 +125,30 @@ test("map-owned actor LPVs switch after registration without leaking Dust II pro
     expect(fallback.uniforms.sourceGpuAtlas0).toBeUndefined();
     expect(fallback.uniforms.sourceActorGpuEnabled.value).toBe(0);
     expect(fallback.uniforms.sourceActorDustEnabled.value).toBe(0);
+    expect(fallback.uniforms.sourceFogSky).toBeUndefined();
 
     updateActorLighting(root, position, sampleSourceProbe, 1 / 60);
     const restored = compileActor(material);
-    updateActorLighting(root, position, sampleSourceProbe, 1 / 60);
+    // First-use compilation must enable the resolved atlas in this draw, not
+    // depend on another lighting update on the following frame.
     expect(restored.uniforms.sourceGpuAtlas0.value).toBe(dust.textures[0]);
+    expect(restored.uniforms.sourceActorProbeEnabled.value).toBe(1);
     expect(restored.uniforms.sourceActorGpuEnabled.value).toBe(1);
     expect(restored.uniforms.sourceActorDustEnabled.value).toBe(1);
+    expect(restored.uniforms.sourceFogSky).toBeDefined();
     expect(restored.fragmentShader).toContain("sourceGpuFrame0[43]");
+
+    // A custom CPU sampler must not be replaced by the renderer's Dust atlas.
+    updateActorLighting(
+      root,
+      position,
+      (_p, _n, out) => {
+        out.setRGB(0.2, 0.3, 0.4);
+        return true;
+      },
+      1 / 60,
+    );
+    expect(compileActor(material).uniforms.sourceActorGpuEnabled.value).toBe(0);
   } finally {
     lookup.mockRestore();
   }

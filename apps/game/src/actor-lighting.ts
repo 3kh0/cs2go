@@ -30,6 +30,7 @@ type State = {
   dustEnabled: { value: number };
   gpuEnabled: { value: number };
   gpuAvailable: boolean;
+  dustGpuRequested: boolean;
   gpuProbes?: SourceGpuProbes | null;
   nativeReflections?: SourceReflections;
   nativeFog?: NativeMapFog;
@@ -137,6 +138,7 @@ function makeState(): State {
     dustEnabled: { value: 0 },
     gpuEnabled: { value: 0 },
     gpuAvailable: false,
+    dustGpuRequested: false,
     reflectionTimer: 0,
     reflectionPosition: new T.Vector3(Infinity, Infinity, Infinity),
     reflectionBounds: new T.Box3(),
@@ -210,6 +212,15 @@ export function registerActorLighting(root: T.Object3D, cloneMaterials = false) 
           ? sourceGpuProbes(renderer)
           : (lighting.gpuProbes ?? undefined);
       lighting.gpuAvailable = !!gpuProbes;
+      // First-use compilation can resolve the renderer-owned atlas after this
+      // frame's lighting update. Use it immediately, just as a prewarmed actor
+      // would, without overriding custom CPU samplers or native-map fallbacks.
+      if (lighting.gpuAvailable && lighting.dustGpuRequested) {
+        lighting.gpuEnabled.value = 1;
+        lighting.enabled.value = 1;
+        lighting.worldEnabled.value = 1;
+        lighting.ready = true;
+      }
       Object.assign(shader.uniforms, {
         sourceActorProbeEnabled: lighting.enabled,
         sourceActorGpuEnabled: lighting.gpuEnabled,
@@ -292,7 +303,9 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
           "mix(cameraPosition + sourceBarnWorldRelative, sourceActorProbeOrigin + sourceActorProbeRotation*sourceBarnWorldRelative, sourceActorLocalFrame)",
         worldToLighting: "transpose(sourceActorProbeRotation)",
       });
-      applySourceFog(shader, "sourceActorDustEnabled");
+      // Native maps always disable Dust fog. A uniform branch still reserves
+      // its cube sampler and can push fully textured actors past the 16-slot limit.
+      if (lighting.gpuProbes === undefined) applySourceFog(shader, "sourceActorDustEnabled");
       if (lighting.nativeFog) applyNativeFogShader(shader, lighting.nativeFog);
       applySourceColorCorrection(shader, "sourceActorWorldEnabled", true);
       if (gpuProbes) applySourceGpuProbes(shader, gpuProbes);
@@ -314,7 +327,7 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
       applySourceSunShadows(shader);
     };
     material.customProgramCacheKey = () =>
-      `${key}:source-actor-probe-v7:${probeKey(lighting.gpuProbes)}:${reflectionKey(lighting.nativeReflections)}:fog${fogKey(lighting.nativeFog)}`;
+      `${key}:source-actor-probe-v8:${probeKey(lighting.gpuProbes)}:${reflectionKey(lighting.nativeReflections)}:fog${fogKey(lighting.nativeFog)}`;
     material.needsUpdate = true;
     return material;
   };
@@ -389,6 +402,16 @@ export function updateActorLighting(
 ) {
   const state = actors.get(root);
   if (!state) return;
+  if (
+    state.gpuProbes !== gpuProbes ||
+    state.nativeReflections !== nativeReflections ||
+    state.nativeFog !== nativeFog
+  ) {
+    // needsUpdate selects another program but retains all previous variants.
+    // Retire map-bound programs without releasing the actor's textures/geometry.
+    for (const material of state.patched) material.dispose();
+  }
+  state.dustGpuRequested = gpuProbes === undefined && sample === sampleSourceProbe;
   if (state.nativeFog !== nativeFog) {
     state.nativeFog = nativeFog;
     for (const material of state.patched) material.needsUpdate = true;

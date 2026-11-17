@@ -1,2 +1,5 @@
 # Imported shader bytes are pinned by asset hashes; preserve upstream whitespace.
 packages/assets/public/skins/shaders/*.wgsl -whitespace
+
+# Unified diffs require space-prefixed context, including blank and tabbed lines.
+patches/*.patch -whitespace

@@ -183,3 +183,31 @@ test("decoded fallback RGBA mip banks preserve authored bytes instead of regener
   ]);
   expect(bindings.get("b")?.layer).toBe(1);
 });
+
+test("large banks respect expanded allocation bytes even when hardware permits every layer", () => {
+  // Each BC7 layer needs 4 MiB of blocks + 16 MiB decoded. 38 fit below
+  // 768 MiB; 39 do not. Shared immutable input keeps this fixture small.
+  const data = new Uint8Array(2048 * 2048).fill(73);
+  const boundary = new Uint8Array(data.length).fill(29);
+  const textures = new Map(
+    Array.from({ length: 40 }, (_, index) => [
+      String(index).padStart(2, "0"),
+      new T.CompressedTexture(
+        [{ data: index === 38 ? boundary : data, width: 2048, height: 2048 }],
+        2048,
+        2048,
+        T.RGBA_BPTC_Format,
+      ),
+    ]),
+  );
+  const { arrays, bindings, bytes } = createEnvironmentTextureBanks(textures, 2048);
+  expect(arrays.map((texture) => texture.image.depth)).toEqual([38, 2]);
+  expect(bytes).toBe(40 * data.byteLength);
+  expect(bindings.get("37")?.layer).toBe(37);
+  expect(bindings.get("38")?.layer).toBe(0);
+  expect(bindings.get("38")?.texture).toBe(arrays[1]);
+  const secondBank = arrays[1].mipmaps[0].data as Uint8Array;
+  expect(secondBank.subarray(0, data.length).every((byte) => byte === 29)).toBe(true);
+  expect(secondBank.subarray(data.length).every((byte) => byte === 73)).toBe(true);
+  for (const texture of [...arrays, ...textures.values()]) texture.dispose();
+});

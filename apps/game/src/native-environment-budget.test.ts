@@ -67,6 +67,7 @@ test("final ENV uniform guard retains full LPVs and the complete affine reflecti
   ).toBe(64);
   const probes = {
     count: 116,
+    textures: [new T.DataArrayTexture(), new T.DataArrayTexture()],
     frames: [],
     packedFrames: { values: new Float32Array(116 * 6 * 4), rotations: new Float32Array(42 * 4) },
   } as unknown as SourceGpuProbes;
@@ -84,4 +85,10 @@ test("final ENV uniform guard retains full LPVs and the complete affine reflecti
   ).toThrow("uniform budget");
   expect(probes.count).toBe(116);
   expect(probes.packedFrames?.values.length).toBe(116 * 6 * 4);
+  probes.textures.push(new T.DataArrayTexture(), new T.DataArrayTexture());
+  const split = assertNativeEnvironmentBudget(renderer(16), data, { probes });
+  expect(split.reservedSamplers).toBe(8);
+  expect(() => assertNativeEnvironmentBudget(renderer(10), data, { probes })).toThrow(
+    "sampler budget",
+  );
 });

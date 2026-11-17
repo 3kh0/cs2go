@@ -3,6 +3,7 @@ import { nativeTextureIdentity, shareNativeTexture } from "./native-texture-shar
 import { assetFetch, assetUrl } from "./asset-url";
 import { fetchGzipped } from "./gltf";
 import { createLoadQueue } from "./loading";
+import { rendererDiagnostics } from "./renderer-diagnostics";
 
 interface LayerTexture {
   format?: "BC1" | "BC7" | "BC4" | "BC5";
@@ -71,6 +72,10 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
       if (!manifest.textures[key])
         throw new Error(`Native material texture definition missing: ${key}`);
   const textures = new Map<string, T.Texture>();
+  // SwiftShader stores BC7 blocks AND their decoded pixels. The exact RGBA
+  // mip payload avoids the extra GPU copy, at the cost of larger CPU payloads.
+  // Other adapters retain compressed storage, including withheld identities.
+  const decodedBc7 = /swiftshader/i.test(rendererDiagnostics(renderer.getContext()).name);
   const queue = createLoadQueue(6);
   const outcomes = await Promise.allSettled(
     Object.entries(manifest.textures)
@@ -90,7 +95,17 @@ export async function loadSourceMaterialBundle<Material = SourceLayerMaterial>(
                   );
           let texture: T.Texture;
           let identity: string | undefined;
-          if (supported && entry.file && entry.mips) {
+          const exactFallback =
+            decodedBc7 &&
+            entry.format === "BC7" &&
+            entry.fallbackFile &&
+            entry.mips &&
+            entry.fallbackMips?.length === entry.mips.length &&
+            entry.fallbackMips.every(
+              (mip, level) =>
+                mip.width === entry.mips![level].width && mip.height === entry.mips![level].height,
+            );
+          if (supported && !exactFallback && entry.file && entry.mips) {
             const bytes = await fetchGzipped(materialAsset(directory, entry.file));
             if (bytes.byteLength !== entry.gpuBytes)
               throw new Error("Invalid native layer texture");

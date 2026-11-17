@@ -493,7 +493,9 @@ if(sourceCoverage<0.5) sourceFragmentProbe=sourceGpuSample(cameraPosition+transp
         priorKey +
         "-native-source-lighting-v13" +
         (data.skySpace ? ":sky" : "") +
-        (gpuProbes ? `:lpv-${gpuProbes.count}-${gpuProbes.depth}` : "") +
+        (gpuProbes
+          ? `:lpv-${gpuProbes.count}-${gpuProbes.depth}-${gpuProbes.irradianceBanks ?? 1}-${gpuProbes.textures.map((texture) => texture.image.depth).join(",")}`
+          : "") +
         (gpuProbes ? ":fragment-probes" : "") +
         `:barns-${barnMask}` +
         (surface

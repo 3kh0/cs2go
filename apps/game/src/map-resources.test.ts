@@ -135,6 +135,16 @@ test("inactive texture suspension retains source mips and final ownership across
   const resources = new MapResources();
   const bytes = new Uint8Array(16);
   const texture = new T.DataTexture(bytes, 2, 2);
+  const probe = new T.DataArrayTexture(new Uint8Array(32), 2, 2, 2);
+  const bank = new T.CompressedArrayTexture(
+    [{ data: new Uint8Array(32), width: 4, height: 4 }],
+    4,
+    4,
+    2,
+    T.RGBA_BPTC_Format,
+  );
+  resources.texture(probe);
+  resources.texture(bank);
   const external = new T.Texture();
   const target = new T.WebGLRenderTarget(1, 1);
   const material = new T.MeshBasicMaterial({ map: texture, envMap: external });
@@ -147,11 +157,16 @@ test("inactive texture suspension retains source mips and final ownership across
   resources.external(external);
   resources.target(target);
   resources.capture(new T.Mesh(geometry, material));
-  const allocated = new WeakSet<object>([texture, external, target.texture]);
+  const allocated = new WeakSet<object>([texture, probe, bank, external, target.texture]);
   texture.addEventListener("dispose", () => allocated.delete(texture));
+  probe.addEventListener("dispose", () => allocated.delete(probe));
+  bank.addEventListener("dispose", () => allocated.delete(bank));
   const renderer = { properties: { has: (value: object) => allocated.has(value) } };
-  resources.releaseGpuTextures(renderer as T.WebGLRenderer);
-  resources.releaseGpuTextures(renderer as T.WebGLRenderer);
+  resources.releaseGpuTextures(renderer as T.WebGLRenderer, true);
+  resources.releaseGpuTextures(renderer as T.WebGLRenderer, true);
+  expect(allocated.has(probe)).toBe(true);
+  expect(allocated.has(bank)).toBe(true);
+  expect(allocated.has(texture)).toBe(false);
   expect(textureDispose).toHaveBeenCalledTimes(1);
   expect(texture.image.data).toBe(bytes);
   expect(material.map).toBe(texture);
@@ -162,11 +177,20 @@ test("inactive texture suspension retains source mips and final ownership across
   // Reentry creates a fresh renderer allocation from the same immutable bytes.
   allocated.add(texture);
   resources.releaseGpuTextures(renderer as T.WebGLRenderer);
+  expect(allocated.has(probe)).toBe(false);
+  expect(allocated.has(bank)).toBe(false);
   expect(textureDispose).toHaveBeenCalledTimes(2);
   allocated.add(texture);
+  allocated.add(probe);
+  allocated.add(bank);
+  resources.releaseGpuTextures(renderer as T.WebGLRenderer, true);
+  expect(allocated.has(probe)).toBe(true);
+  expect(allocated.has(bank)).toBe(true);
   resources.dispose();
   resources.releaseGpuTextures(renderer as T.WebGLRenderer);
-  expect(textureDispose).toHaveBeenCalledTimes(3);
+  expect(allocated.has(probe)).toBe(false);
+  expect(allocated.has(bank)).toBe(false);
+  expect(textureDispose).toHaveBeenCalledTimes(4);
   expect(targetDispose).toHaveBeenCalledTimes(1);
   expect(externalDispose).not.toHaveBeenCalled();
 });

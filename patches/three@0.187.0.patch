@@ -1,0 +1,150 @@
+diff --git a/build/three.core.js b/build/three.core.js
+index 0ee9b6d588348c3177b91d6093cfe8b167778db8..fee4648d6dd5768ac12bfd20053f831068c13af8 100644
+--- a/build/three.core.js
++++ b/build/three.core.js
+@@ -25775,10 +25775,7 @@ class InstancedMesh extends Mesh {
+ 		const matrixWorld = this.matrixWorld;
+ 		const raycastTimes = this.count;
+ 
+-		_mesh$1.geometry = this.geometry;
+-		_mesh$1.material = this.material;
+-
+-		if ( _mesh$1.material === undefined ) return;
++		if ( this.material === undefined ) return;
+ 
+ 		// test with bounding sphere first
+ 
+@@ -25791,31 +25788,45 @@ class InstancedMesh extends Mesh {
+ 
+ 		// now test each instance
+ 
+-		for ( let instanceId = 0; instanceId < raycastTimes; instanceId ++ ) {
++		_mesh$1.geometry = this.geometry;
++		_mesh$1.material = this.material;
+ 
+-			// calculate the world matrix for each instance
++		try {
+ 
+-			this.getMatrixAt( instanceId, _instanceLocalMatrix );
++			for ( let instanceId = 0; instanceId < raycastTimes; instanceId ++ ) {
+ 
+-			_instanceWorldMatrix.multiplyMatrices( matrixWorld, _instanceLocalMatrix );
++				// calculate the world matrix for each instance
+ 
+-			// the mesh represents this single instance
++				this.getMatrixAt( instanceId, _instanceLocalMatrix );
+ 
+-			_mesh$1.matrixWorld = _instanceWorldMatrix;
++				_instanceWorldMatrix.multiplyMatrices( matrixWorld, _instanceLocalMatrix );
+ 
+-			_mesh$1.raycast( raycaster, _instanceIntersects );
++				// the mesh represents this single instance
+ 
+-			// process the result of raycast
++				_mesh$1.matrixWorld = _instanceWorldMatrix;
+ 
+-			for ( let i = 0, l = _instanceIntersects.length; i < l; i ++ ) {
++				_mesh$1.raycast( raycaster, _instanceIntersects );
+ 
+-				const intersect = _instanceIntersects[ i ];
+-				intersect.instanceId = instanceId;
+-				intersect.object = this;
+-				intersects.push( intersect );
++				// process the result of raycast
++
++				for ( let i = 0, l = _instanceIntersects.length; i < l; i ++ ) {
++
++					const intersect = _instanceIntersects[ i ];
++					intersect.instanceId = instanceId;
++					intersect.object = this;
++					intersects.push( intersect );
++
++				}
++
++				_instanceIntersects.length = 0;
+ 
+ 			}
+ 
++		} finally {
++
++			// Do not retain retired scenes through material shader callbacks.
++			_mesh$1.geometry = null;
++			_mesh$1.material = null;
+ 			_instanceIntersects.length = 0;
+ 
+ 		}
+diff --git a/src/objects/InstancedMesh.js b/src/objects/InstancedMesh.js
+index ebad98aeaed1c1472ad8bdc0d025eb608312dfad..d15c7f2704cc4115c278712f51e03300ba2d674b 100644
+--- a/src/objects/InstancedMesh.js
++++ b/src/objects/InstancedMesh.js
+@@ -260,10 +260,7 @@ class InstancedMesh extends Mesh {
+ 		const matrixWorld = this.matrixWorld;
+ 		const raycastTimes = this.count;
+ 
+-		_mesh.geometry = this.geometry;
+-		_mesh.material = this.material;
+-
+-		if ( _mesh.material === undefined ) return;
++		if ( this.material === undefined ) return;
+ 
+ 		// test with bounding sphere first
+ 
+@@ -276,31 +273,45 @@ class InstancedMesh extends Mesh {
+ 
+ 		// now test each instance
+ 
+-		for ( let instanceId = 0; instanceId < raycastTimes; instanceId ++ ) {
++		_mesh.geometry = this.geometry;
++		_mesh.material = this.material;
++
++		try {
++
++			for ( let instanceId = 0; instanceId < raycastTimes; instanceId ++ ) {
++
++				// calculate the world matrix for each instance
+ 
+-			// calculate the world matrix for each instance
++				this.getMatrixAt( instanceId, _instanceLocalMatrix );
+ 
+-			this.getMatrixAt( instanceId, _instanceLocalMatrix );
++				_instanceWorldMatrix.multiplyMatrices( matrixWorld, _instanceLocalMatrix );
+ 
+-			_instanceWorldMatrix.multiplyMatrices( matrixWorld, _instanceLocalMatrix );
++				// the mesh represents this single instance
+ 
+-			// the mesh represents this single instance
++				_mesh.matrixWorld = _instanceWorldMatrix;
+ 
+-			_mesh.matrixWorld = _instanceWorldMatrix;
++				_mesh.raycast( raycaster, _instanceIntersects );
+ 
+-			_mesh.raycast( raycaster, _instanceIntersects );
++				// process the result of raycast
+ 
+-			// process the result of raycast
++				for ( let i = 0, l = _instanceIntersects.length; i < l; i ++ ) {
+ 
+-			for ( let i = 0, l = _instanceIntersects.length; i < l; i ++ ) {
++					const intersect = _instanceIntersects[ i ];
++					intersect.instanceId = instanceId;
++					intersect.object = this;
++					intersects.push( intersect );
+ 
+-				const intersect = _instanceIntersects[ i ];
+-				intersect.instanceId = instanceId;
+-				intersect.object = this;
+-				intersects.push( intersect );
++				}
++
++				_instanceIntersects.length = 0;
+ 
+ 			}
+ 
++		} finally {
++
++			// Do not retain retired scenes through material shader callbacks.
++			_mesh.geometry = null;
++			_mesh.material = null;
+ 			_instanceIntersects.length = 0;
+ 
+ 		}
