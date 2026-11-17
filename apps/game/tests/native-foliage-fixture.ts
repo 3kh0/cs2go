@@ -12,6 +12,7 @@ function texture(data: number[], width = 1) {
 export function renderNativeFoliageFixture(
   source: NativeFoliageMaterial = nativeFoliageSource,
   settings: {
+    animateWind?: boolean;
     samples?: number;
     adaptRoot?: (root: T.Object3D) => void;
     alpha?: number;
@@ -79,6 +80,7 @@ export function renderNativeFoliageFixture(
     source: { model: "controlled", noise: "controlled" },
   };
   const view = applyNativeMapFoliage(root, bundle, {
+    animateWind: settings.animateWind,
     windState: { direction: [1, 0, 0], strength: 0, timeSeconds: 0 },
   });
   settings.adaptRoot?.(root);

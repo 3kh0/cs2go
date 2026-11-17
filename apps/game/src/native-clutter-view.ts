@@ -46,6 +46,7 @@ export async function loadNativeClutterView(
   resources: MapResources,
   reflections: SourceReflections | undefined,
   placement = new T.Matrix4(),
+  animateWind = true,
 ) {
   const response = await assetFetch(path);
   if (!response.ok) throw new Error("Native clutter manifest unavailable");
@@ -161,6 +162,7 @@ export async function loadNativeClutterView(
       instanceBounds.set(object, object.boundingSphere.clone());
   });
   const foliage = applyNativeMapFoliage(view.foliage, foliageBundle, {
+    animateWind,
     sourceWorldFrame: frame,
     windState: wind.state,
     instanceBounds,

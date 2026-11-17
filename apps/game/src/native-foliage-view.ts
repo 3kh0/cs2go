@@ -4,6 +4,7 @@ import { loadGzipped } from "./gltf";
 import { MapResources } from "./map-resources";
 import { applyNativeMapFoliage, loadNativeMapFoliage } from "./native-map-foliage";
 import { createNativeFoliageBounds } from "./native-foliage-bounds";
+import { createStaticFoliageBounds } from "./native-static-foliage-bounds";
 
 /** A map-owned sidecar preserves the source's FLOAT4 controls. Its coverage
  * pass must run before every opaque color/depth consumer, including smoke. */
@@ -12,6 +13,7 @@ export async function loadNativeFoliageView(
   path: string,
   resources: MapResources,
   space: "main" | "sky",
+  animateWind = true,
 ) {
   const bundle = await loadNativeMapFoliage(renderer, path);
   for (const texture of bundle.textures.values()) resources.texture(texture);
@@ -59,10 +61,21 @@ export async function loadNativeFoliageView(
       : undefined,
   );
   const view = applyNativeMapFoliage(asset.scene, bundle, {
+    animateWind,
     windState: wind.state,
     meshBounds: bounds.bounds,
   });
   resources.onDispose(() => view.dispose());
+  const staticBounds = animateWind ? undefined : createStaticFoliageBounds();
+  function syncDepth() {
+    if (staticBounds) staticBounds(root);
+    else bounds.update();
+    view.syncDepth(renderer);
+    if (staticBounds) {
+      view.depthScene.updateMatrixWorld(true);
+      staticBounds(view.depthScene);
+    }
+  }
   return {
     root: asset.scene,
     source: bundle.source,
@@ -76,8 +89,7 @@ export async function loadNativeFoliageView(
       const autoClear = renderer.autoClear;
       try {
         renderer.autoClear = false;
-        bounds.update();
-        view.syncDepth(renderer);
+        syncDepth();
         renderer.render(view.depthScene, camera);
       } finally {
         renderer.autoClear = autoClear;
@@ -85,8 +97,7 @@ export async function loadNativeFoliageView(
     },
     prepare(camera: T.PerspectiveCamera) {
       renderer.initTexture(bundle.noise);
-      bounds.update();
-      view.syncDepth(renderer);
+      syncDepth();
       return renderer.compileAsync(view.depthScene, camera);
     },
   };

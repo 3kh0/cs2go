@@ -255,6 +255,7 @@ export function applyNativeMapFoliage(
   root: T.Object3D,
   bundle: Awaited<ReturnType<typeof loadNativeMapFoliage>>,
   options: {
+    animateWind?: boolean;
     sourceWorldFrame?: EnvironmentWorldFrame;
     windState: SourceFoliageWindState;
     /** Explicit local bounds including authored placements and wind envelope. */
@@ -354,10 +355,10 @@ export function applyNativeMapFoliage(
         throw new Error(`Native foliage sidecar has an unbound material: ${material.name}`);
       validateNativeFoliageMaterial(native);
       shadowFlags.push(!!native.IntParams.F_DO_NOT_CAST_SHADOWS);
-      animatedCaster ||= !!native.IntParams.F_VERTEX_ANIMATION;
-      const mode = native.IntParams.F_VERTEX_ANIMATION ?? 0,
+      const mode = options.animateWind === false ? 0 : (native.IntParams.F_VERTEX_ANIMATION ?? 0),
         alphaTest = !!native.IntParams.F_ALPHA_TEST,
         transmission = !!native.IntParams.F_TRANSMISSIVE_BACKFACE_NDOTL;
+      animatedCaster ||= mode !== 0;
       const needsControls =
           mode !== 0 ||
           scalar(native, "g_flVertexAmbientOcclusionAmount") !== 0 ||

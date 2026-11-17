@@ -1,5 +1,6 @@
 import * as T from "three";
 import { applySourceReflections, type SourceReflections } from "../src/source-reflections";
+import { createSourceReflectionField } from "../src/source-reflection-field";
 
 type Uploads = {
   uniform3f: number;
@@ -127,7 +128,7 @@ export function reflectionUniformsFixture() {
   for (const affine of [false, true])
     for (const family of [undefined, "complex", "glass", "lightmapped", "water"] as const) {
       const datasets = [makeData(affine, 0), makeData(affine, 1)];
-      const materials = [false, true].map((packedUniforms) =>
+      const materials = ["structured", "packed", "shared"].map((mode) =>
         datasets.map((data, variant) => {
           const roughness = { value: 0 };
           const count = { value: 3 };
@@ -144,9 +145,11 @@ void main(){TestMaterial material;material.roughness=testRoughness;vec3 radiance
 RE_IndirectSpecular( radiance, iblIrradiance, clearcoatRadiance, geometryPosition, geometryNormal, geometryViewDir, geometryClearcoatNormal, material, reflectedLight );
 gl_FragColor=vec4(radiance,1.0);}`,
           });
+          if (mode === "shared") createSourceReflectionField(data).attach(material);
           material.onBeforeCompile = (shader) => {
             applySourceReflections(shader, data, [0, 1, 2], {
-              packedUniforms,
+              packedUniforms: mode === "packed",
+              sharedField: mode === "shared",
               count,
               nativeFamily: family,
               worldPosition: "vec3((gl_FragCoord.x-8.0)*.0254,0.0,(gl_FragCoord.y-8.0)*.0254)",
@@ -155,8 +158,7 @@ gl_FragColor=vec4(radiance,1.0);}`,
             });
             candidates = shader.uniforms.sourceEnvironmentCandidates;
           };
-          material.customProgramCacheKey = () =>
-            `reflection-transport:${affine}:${family}:${packedUniforms}`;
+          material.customProgramCacheKey = () => `reflection-transport:${affine}:${family}:${mode}`;
           return {
             material,
             roughness,
@@ -187,7 +189,7 @@ gl_FragColor=vec4(radiance,1.0);}`,
         renderer.readRenderTargetPixels(target, 0, 0, 16, 16, pixels);
         return { pixels, uploads: { ...uploads } };
       };
-      for (const mode of [0, 1]) firstUploads.push(read(mode, 0, 0, false, 3).uploads);
+      for (const mode of [0, 1, 2]) firstUploads.push(read(mode, 0, 0, false, 3).uploads);
       let cases = 0,
         differenceFromOther = 0;
       for (const roughness of [0, 0.35, 1])
@@ -195,16 +197,21 @@ gl_FragColor=vec4(radiance,1.0);}`,
           for (const count of [1, 3]) {
             for (const variant of [0, 1, 0]) {
               const a = read(0, variant, roughness, reverse, count),
-                b = read(1, variant, roughness, reverse, count);
+                b = read(1, variant, roughness, reverse, count),
+                c = read(2, variant, roughness, reverse, count);
               for (let i = 0; i < a.pixels.length; i++) {
-                if (!Number.isFinite(a.pixels[i]) || !Number.isFinite(b.pixels[i])) nonFinite++;
-                maxError = Math.max(maxError, Math.abs(a.pixels[i] - b.pixels[i]));
+                if (![a.pixels[i], b.pixels[i], c.pixels[i]].every(Number.isFinite)) nonFinite++;
+                maxError = Math.max(
+                  maxError,
+                  Math.abs(a.pixels[i] - b.pixels[i]),
+                  Math.abs(a.pixels[i] - c.pixels[i]),
+                );
               }
               cases++;
             }
-            const restored = read(1, 0, roughness, reverse, count).pixels;
-            const alternate = read(1, 1, roughness, reverse, count).pixels;
-            const again = read(1, 0, roughness, reverse, count).pixels;
+            const restored = read(2, 0, roughness, reverse, count).pixels;
+            const alternate = read(2, 1, roughness, reverse, count).pixels;
+            const again = read(2, 0, roughness, reverse, count).pixels;
             for (let i = 0; i < restored.length; i++) {
               sharedRestoreError = Math.max(sharedRestoreError, Math.abs(restored[i] - again[i]));
               differenceFromOther = Math.max(

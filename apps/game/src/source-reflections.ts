@@ -446,12 +446,16 @@ export function applySourceReflections(
     instanceCandidates?: boolean;
     /** Complete records in one std140 block instead of default uniforms. */
     instanceField?: boolean;
+    /** Static draws share the immutable complete field, addressing at most
+     * eight global IDs instead of uploading a padded record window per draw. */
+    sharedField?: boolean;
     /** Immutable static windows use one default vec4-array upload. */
     packedUniforms?: boolean;
   } = {},
 ) {
   const affine = data.volumes.some((volume) => volume.worldToLocal);
-  if (options.packedUniforms && (options.instanceCandidates || options.instanceField))
+  const field = options.instanceField || options.sharedField;
+  if (options.packedUniforms && (options.instanceCandidates || field))
     throw new Error("Packed static reflection uniforms require a static candidate window");
   const packedWords = affine ? 13 : 5;
   if (
@@ -465,7 +469,7 @@ export function applySourceReflections(
     shader.uniforms.nativeReflectionWords = {
       value: packSourceReflectionRecords(data.uniforms, affine),
     };
-  else if (!options.instanceField) shader.uniforms.sourceEnvironments = { value: data.uniforms };
+  else if (!field) shader.uniforms.sourceEnvironments = { value: data.uniforms };
   if (options.instanceField && !options.instanceCandidates)
     throw new Error("Native reflection field block requires instance candidate IDs");
   if (options.instanceCandidates) {
@@ -484,7 +488,7 @@ export function applySourceReflections(
  vSourceReflectionCandidates1=sourceReflectionCandidates1;`,
       );
   } else {
-    const indices = new Int32Array(data.uniforms.length);
+    const indices = new Int32Array(options.sharedField ? 8 : data.uniforms.length);
     indices.set(candidates);
     shader.uniforms.sourceEnvironmentCandidates = { value: indices };
     shader.uniforms.sourceEnvironmentCount = options.count ?? { value: candidates.length };
@@ -496,10 +500,10 @@ export function applySourceReflections(
     `
 struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEdge;vec4 sh;${affine ? "mat4 worldToLocal;mat4 localToWorld;" : ""}};
 ${
-  options.instanceField || options.packedUniforms
-    ? `${options.instanceField ? `layout(std140) uniform NativeSourceReflectionField { vec4 nativeReflectionWords[${data.uniforms.length * 13}]; };` : `uniform vec4 nativeReflectionWords[${data.uniforms.length * packedWords}];`}
+  field || options.packedUniforms
+    ? `${field ? `layout(std140) uniform NativeSourceReflectionField { vec4 nativeReflectionWords[${data.uniforms.length * 13}]; };` : `uniform vec4 nativeReflectionWords[${data.uniforms.length * packedWords}];`}
 SourceEnvironment sourceFieldEnvironment(int index) {
-  int at=index*${options.instanceField ? 13 : packedWords};
+  int at=index*${field ? 13 : packedWords};
   vec4 first=nativeReflectionWords[at];
   return SourceEnvironment(first.xyz,first.w,nativeReflectionWords[at+1].xyz,nativeReflectionWords[at+2].xyz,nativeReflectionWords[at+3].xyz,nativeReflectionWords[at+4]${affine ? `,mat4(nativeReflectionWords[at+5],nativeReflectionWords[at+6],nativeReflectionWords[at+7],nativeReflectionWords[at+8]),mat4(nativeReflectionWords[at+9],nativeReflectionWords[at+10],nativeReflectionWords[at+11],nativeReflectionWords[at+12])` : ""});
 }`
@@ -512,7 +516,7 @@ int sourceInstanceReflectionId(int slot) {
   if(slot<4)return int(floor(vSourceReflectionCandidates0[slot]+0.5));
   return int(floor(vSourceReflectionCandidates1[slot-4]+0.5));
 }`
-    : `uniform int sourceEnvironmentCandidates[${data.uniforms.length}];
+    : `uniform int sourceEnvironmentCandidates[${options.sharedField ? 8 : data.uniforms.length}];
 uniform int sourceEnvironmentCount;`
 }
 ${options.nativeFamily === "water" ? nativeWaterReflectionNormalGLSL : ""}
@@ -522,7 +526,7 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
   R=normalize(mix(normal,R,smoothness*(sqrt(smoothness)+r2)));
   roughness=clamp(roughness,0.0,1.0);
   float coverage=0.01;vec3 color=vec3(0.0);vec4 sh=vec4(0.0);
-  for(int i=0;i<${options.instanceCandidates ? 8 : data.uniforms.length};i++) {
+  for(int i=0;i<${options.instanceCandidates || options.sharedField ? 8 : data.uniforms.length};i++) {
     ${
       options.instanceCandidates
         ? `int candidate=sourceInstanceReflectionId(i);
@@ -530,7 +534,7 @@ vec3 sourceMapReflection(vec3 position,vec3 normal,vec3 viewDir,float roughness,
     if(candidate<0||candidate>=${data.uniforms.length})continue;
     SourceEnvironment env=${options.instanceField ? "sourceFieldEnvironment(candidate)" : "sourceEnvironments[candidate]"};`
         : `if(i>=sourceEnvironmentCount)break;
-    SourceEnvironment env=${options.packedUniforms ? "sourceFieldEnvironment(sourceEnvironmentCandidates[i])" : "sourceEnvironments[sourceEnvironmentCandidates[i]]"};`
+    SourceEnvironment env=${options.packedUniforms || field ? "sourceFieldEnvironment(sourceEnvironmentCandidates[i])" : "sourceEnvironments[sourceEnvironmentCandidates[i]]"};`
     }
     vec3 local=${affine ? "(env.worldToLocal*vec4(position,1.0)).xyz" : "position-env.origin"};
     vec3 localRay=${affine ? "mat3(env.worldToLocal)*R" : "R"};

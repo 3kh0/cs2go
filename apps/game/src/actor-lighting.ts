@@ -6,6 +6,12 @@ import { applySourceBarns } from "./source-barn";
 import { sourceGpuProbes, applySourceGpuProbes, type SourceGpuProbes } from "./source-gpu-probes";
 import { sampleSourceProbe } from "./source-lighting";
 import { sourceSunCaster, applySourceSunShadows } from "./source-sun";
+import { bindSourceProbeField } from "./source-probe-field";
+import {
+  createSourceProbeSelection,
+  updateSourceProbeSelection,
+  type SourceProbeSelection,
+} from "./source-probe-selection";
 import {
   applySourceReflections,
   createSourceReflectionBinding,
@@ -32,6 +38,7 @@ type State = {
   gpuAvailable: boolean;
   dustGpuRequested: boolean;
   gpuProbes?: SourceGpuProbes | null;
+  probeSelection?: SourceProbeSelection;
   nativeReflections?: SourceReflections;
   nativeFog?: NativeMapFog;
   reflectionBinding?: SourceReflectionBinding;
@@ -308,7 +315,8 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
       if (lighting.gpuProbes === undefined) applySourceFog(shader, "sourceActorDustEnabled");
       if (lighting.nativeFog) applyNativeFogShader(shader, lighting.nativeFog);
       applySourceColorCorrection(shader, "sourceActorWorldEnabled", true);
-      if (gpuProbes) applySourceGpuProbes(shader, gpuProbes);
+      bindSourceProbeField(material, gpuProbes);
+      if (gpuProbes) applySourceGpuProbes(shader, gpuProbes, lighting.probeSelection);
       if (lighting.reflectionBinding)
         applySourceReflections(
           shader,
@@ -327,7 +335,7 @@ sourceActorFragmentProbe=sourceGpuSample(sourceActorWorld,sourceActorProbeRotati
       applySourceSunShadows(shader);
     };
     material.customProgramCacheKey = () =>
-      `${key}:source-actor-probe-v8:${probeKey(lighting.gpuProbes)}:${reflectionKey(lighting.nativeReflections)}:fog${fogKey(lighting.nativeFog)}`;
+      `${key}:source-actor-probe-v9:${!!lighting.probeSelection}:${probeKey(lighting.gpuProbes)}:${reflectionKey(lighting.nativeReflections)}:fog${fogKey(lighting.nativeFog)}`;
     material.needsUpdate = true;
     return material;
   };
@@ -346,6 +354,7 @@ const reflectionSphere = new T.Sphere();
 const reflectionBox = new T.Box3();
 const reflectionFrame = new T.Matrix4();
 const reflectionPoint = new T.Vector3();
+const probeExtent = new T.Vector3(16, 16, 16);
 function visibleChild(object: T.Object3D, root: T.Object3D) {
   for (let parent: T.Object3D | null = object; parent; parent = parent.parent) {
     if (!parent.visible) return false;
@@ -354,7 +363,7 @@ function visibleChild(object: T.Object3D, root: T.Object3D) {
   return false;
 }
 function updateReflectionBounds(root: T.Object3D, state: State, position: Position, dt: number) {
-  if (!state.reflectionBinding) return;
+  if (!state.reflectionBinding && !state.probeSelection) return;
   state.reflectionTimer -= dt;
   const teleported = state.reflectionPosition.distanceToSquared(position) > 16;
   if (state.reflectionTimer > 0 && !teleported) return;
@@ -385,7 +394,17 @@ function updateReflectionBounds(root: T.Object3D, state: State, position: Positi
     bounds.applyMatrix4(reflectionFrame);
   }
   bounds.expandByPoint(state.origin.value).expandByScalar(1);
-  updateSourceReflectionBinding(state.reflectionBinding, bounds);
+  if (state.reflectionBinding) updateSourceReflectionBinding(state.reflectionBinding, bounds);
+  if (state.probeSelection && state.gpuProbes?.selectionBounds) {
+    // Include the existing complete actor bounds plus an eight-metre radius
+    // around its origin, covering viewmodel turns and movement between updates.
+    reflectionBox.setFromCenterAndSize(state.origin.value, probeExtent).union(bounds);
+    updateSourceProbeSelection(
+      state.probeSelection,
+      state.gpuProbes.selectionBounds,
+      reflectionBox,
+    );
+  }
 }
 
 export function updateActorLighting(
@@ -420,7 +439,12 @@ export function updateActorLighting(
   // its own arrays. Explicit null must not silently pick up Dust II's atlas on
   // devices that cannot support the other map's LPV shader.
   if (state.gpuProbes !== gpuProbes) {
+    for (const material of state.patched) bindSourceProbeField(material, gpuProbes);
     state.gpuProbes = gpuProbes;
+    state.probeSelection = gpuProbes?.selectionBounds
+      ? createSourceProbeSelection(gpuProbes.count)
+      : undefined;
+    state.reflectionTimer = 0;
     state.gpuAvailable = false;
     state.ready = false;
     state.timer = 0;

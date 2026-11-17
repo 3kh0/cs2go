@@ -261,7 +261,7 @@ export function createAdvancedComplexView() {
     const cutoff = alpha ? advancedScalar(source, "g_flAlphaTestReference") : 0.5;
     const edge = alpha ? advancedScalar(source, "g_flAntiAliasedEdgeStrength") : 1;
     const depthHook = {
-      cacheKey: `native-complex-rare-depth:${alpha}:${translucent}:${cutoff}:${edge}`,
+      cacheKey: `native-complex-rare-depth-invariant:${alpha}:${translucent}:${cutoff}:${edge}`,
       apply(
         shader: T.WebGLProgramParametersWithUniforms,
         _renderer?: T.WebGLRenderer,
@@ -277,10 +277,11 @@ export function createAdvancedComplexView() {
             translucent ? advancedScalar(source, "g_flOpacityScale") : 1,
           ),
         };
-        shader.vertexShader = `varying vec2 vNativeComplexDepthUV;\n${shader.vertexShader}`.replace(
-          "#include <uv_vertex>",
-          "#include <uv_vertex>\nvNativeComplexDepthUV=uv;",
-        );
+        shader.vertexShader =
+          `${alpha ? "invariant gl_Position;\n" : ""}varying vec2 vNativeComplexDepthUV;\n${shader.vertexShader}`.replace(
+            "#include <uv_vertex>",
+            "#include <uv_vertex>\nvNativeComplexDepthUV=uv;",
+          );
         shader.fragmentShader =
           `varying vec2 vNativeComplexDepthUV;uniform sampler2D nativeComplexDepthColor;uniform bool nativeComplexDepthAA;uniform vec3 nativeComplexDepthControl;\n${shader.fragmentShader}`.replace(
             "#include <alphatest_fragment>",
@@ -316,6 +317,10 @@ export function createAdvancedComplexView() {
       key = material.customProgramCacheKey();
     material.onBeforeCompile = (shader, renderer) => {
       previous(shader, renderer);
+      // EqualDepth must use identical rasterized positions in both programs.
+      // Without invariance Metal can reassociate the color/depth transforms,
+      // exposing sky-colored cracks on Vertigo's high-altitude metal framing.
+      if (alpha) shader.vertexShader = `invariant gl_Position;\n${shader.vertexShader}`;
       shader.uniforms.nativeComplexAdvancedTime = time;
       shader.uniforms.nativeComplexFactorAlpha = { value: factorAlpha };
       for (const sampler of advancedComplexSamplers(source))
@@ -421,7 +426,7 @@ export function createAdvancedComplexView() {
       );
     };
     material.customProgramCacheKey = () =>
-      `${key}:rare14:${alpha}:${translucent}:${paint}:${transmission}:${!!flags.F_USE_ALBEDO_FOR_TRANSMISSIVE}:${!!flags.F_SELF_ILLUM}:${advancedScalar(source, "g_bRenderBackfaceNormals") !== 0 && advancedScalar(source, "g_bDontFlipBackfaceNormals") === 0}`;
+      `${key}:rare14-invariant:${alpha}:${translucent}:${paint}:${transmission}:${!!flags.F_USE_ALBEDO_FOR_TRANSMISSIVE}:${!!flags.F_SELF_ILLUM}:${advancedScalar(source, "g_bRenderBackfaceNormals") !== 0 && advancedScalar(source, "g_bDontFlipBackfaceNormals") === 0}`;
     material.needsUpdate = true;
   }
   function finish(object: T.Mesh) {

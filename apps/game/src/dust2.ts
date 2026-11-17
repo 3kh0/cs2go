@@ -68,6 +68,8 @@ import { combineNativeCoverage, ownNativeCoverage } from "./native-coverage";
 import { loadNativeComplexPaint } from "./native-complex-paint";
 import { loadNativeMapLocalLights, applyNativeMapLocalLights } from "./native-map-local-lights";
 import { retainImportedSceneryMatrices } from "./imported-scenery-matrices";
+import { bindSourceProbeField } from "./source-probe-field";
+import { NativeEnvironmentParameterField } from "./native-environment-parameter-field";
 export type NativeMapConfig = {
   model?: string;
   sun: { pitch: number; yaw: number; color: number; intensity: number };
@@ -140,6 +142,10 @@ async function buildNativeMap(
     return value;
   };
   const sourceLighting = id === "dust2";
+  // Retain map-specific lighting and reflections: global sky lighting makes
+  // indoor props blue. Save background cost without changing those colors.
+  const performanceMap = ["vertigo", "nuke", "inferno", "cache"].includes(id);
+  const gl = renderer.getContext() as WebGL2RenderingContext;
   const config: NativeMapConfig = sourceLighting
     ? {
         ...dustConfig,
@@ -218,7 +224,7 @@ async function buildNativeMap(
           return grade;
         })
       : undefined,
-    config.skyWorld
+    config.skyWorld && !performanceMap
       ? fogLoad
           .then((fog) => loadNativeMapSky(renderer, config.skyWorld!, skyLoad, config.sun, fog))
           .then((sky) => {
@@ -240,9 +246,14 @@ async function buildNativeMap(
         }),
     sourceLighting
       ? undefined
-      : loadNativeMapProbes(renderer, `/models/maps/${id}-lighting/gpu-probes/`).then((probes) =>
-          probes ? ownTextures(probes) : undefined,
-        ),
+      : loadNativeMapProbes(
+          renderer,
+          `/models/maps/${id}-lighting/gpu-probes/`,
+          performanceMap,
+        ).then((probes) => {
+          if (probes?.uniformsGroup) resources.onDispose(() => probes.uniformsGroup!.dispose());
+          return probes ? ownTextures(probes) : undefined;
+        }),
     sourceLighting
       ? undefined
       : loadSourceReflections(renderer, true, {
@@ -291,7 +302,7 @@ async function buildNativeMap(
         })
       : undefined,
 
-    config.effectsWorld
+    config.effectsWorld && !performanceMap
       ? loadNativeMapEffects(renderer, config.effectsWorld, resources)
       : undefined,
     config.waterMaterials
@@ -321,7 +332,7 @@ async function buildNativeMap(
         })
       : undefined,
     config.foliageMaterials
-      ? loadNativeFoliageView(renderer, config.foliageMaterials, resources, "main")
+      ? loadNativeFoliageView(renderer, config.foliageMaterials, resources, "main", !performanceMap)
       : undefined,
     config.complexSpecialMaterials
       ? loadNativeMapComplex(renderer, config.complexSpecialMaterials).then((bundle) => {
@@ -329,7 +340,7 @@ async function buildNativeMap(
           return bundle;
         })
       : undefined,
-    config.localLights
+    config.localLights && !performanceMap
       ? loadNativeMapLocalLights(config.localLights).then((view) => {
           resources.onDispose(() => view.dispose());
           return view;
@@ -387,7 +398,14 @@ async function buildNativeMap(
   }
   if (nativeFoliage) asset.scene.add(nativeFoliage.root);
   const nativeClutter = config.clutterWorld
-    ? await loadNativeClutterView(renderer, config.clutterWorld, resources, nativeReflections)
+    ? await loadNativeClutterView(
+        renderer,
+        config.clutterWorld,
+        resources,
+        nativeReflections,
+        undefined,
+        !performanceMap,
+      )
     : undefined;
   if (nativeClutter) asset.scene.add(nativeClutter.root);
   const foliageVisibility = nativeFoliage
@@ -532,7 +550,15 @@ async function buildNativeMap(
   const nativeWater = waterMaterials
     ? applyNativeMapWater(asset.scene, waterMaterials, (texture) => resources.texture(texture))
     : undefined;
-  if (environmentMaterials) applyNativeMapEnvironment(asset.scene, environmentMaterials);
+  const environmentParameterField = performanceMap
+    ? new NativeEnvironmentParameterField(
+        gl.getParameter(gl.MAX_UNIFORM_BLOCK_SIZE) / 16,
+        Math.max(1, Math.floor(gl.getParameter(gl.MAX_UNIFORM_BUFFER_BINDINGS) / 4)),
+      )
+    : undefined;
+  if (environmentParameterField) resources.onDispose(() => environmentParameterField.dispose());
+  if (environmentMaterials)
+    applyNativeMapEnvironment(asset.scene, environmentMaterials, environmentParameterField);
   if (parallaxMaterials) applyNativeMapParallax(asset.scene, parallaxMaterials);
   if (nativeLayers) applyNativeMapLayers(asset.scene, nativeLayers);
   if (lighting) applySourceMapLighting(asset.scene, lighting);
@@ -571,13 +597,27 @@ async function buildNativeMap(
       nativeReflections,
       doorData.doors,
       movingRenderNames,
-      { instances: nativeClutter?.instances },
+      {
+        instances: nativeClutter?.instances,
+        sharedField:
+          performanceMap &&
+          nativeReflections.uniforms.length * 13 * 16 <= gl.getParameter(gl.MAX_UNIFORM_BLOCK_SIZE),
+      },
     );
   if (nativeFog) applyNativeMapFog(asset.scene, nativeFog);
   if (grade) gradeNativeMapColors(asset.scene);
   const localLightAdmission = nativeLocalLights
     ? applyNativeMapLocalLights(asset.scene, nativeLocalLights)
     : undefined;
+  if (nativeProbes?.uniformsGroup || environmentParameterField)
+    asset.scene.traverse((object) => {
+      if (!(object instanceof T.Mesh)) return;
+      for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+        if (nativeProbes?.uniformsGroup && material.userData.nativeBakedVisibility === "probe")
+          bindSourceProbeField(material, nativeProbes);
+        environmentParameterField?.attach(material);
+      }
+    });
   // Lighting/reflection adapters clone color materials. Retain any earlier
   // shadow variants, then bind the final material's own instance/tint state.
   resources.capture(asset.scene);

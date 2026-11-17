@@ -21,6 +21,7 @@ import { environmentAmbientOcclusionLevels } from "./native-environment-paramete
 import { loadSourceMaterialBundle } from "./source-layers";
 import { applySourceSurface, loadSourceSurfaceLookup } from "./source-surface";
 import { registerSurfaceTextures } from "./presentation-settings";
+import type { NativeEnvironmentParameterField } from "./native-environment-parameter-field";
 
 export interface SourceEnvironmentMaterial {
   shader: string;
@@ -510,6 +511,7 @@ export function applyNativeMapEnvironment(
         "banks" | "normalFrame" | "time" | "sourceWorldFrame"
       >
     >,
+  parameterField?: NativeEnvironmentParameterField,
 ) {
   const patched = new Set<T.Material>();
   root.traverse((object) => {
@@ -654,6 +656,16 @@ export function applyNativeMapEnvironment(
           bundle.sourceWorldFrame,
         );
         programKey = `${key}:${modernEnvironmentProgramKey(template)}`;
+        const words = template.uniforms.environmentParameters?.value as Float32Array | undefined;
+        const binding = words && parameterField?.add(material, words);
+        if (binding && parameterField) {
+          const compile = material.onBeforeCompile.bind(material);
+          material.onBeforeCompile = (shader, renderer) => {
+            compile(shader, renderer);
+            parameterField.apply(shader, binding);
+          };
+          programKey += `:${parameterField.cacheKey}`;
+        }
       } else {
         const template = {
           vertexShader: T.ShaderLib.standard.vertexShader,

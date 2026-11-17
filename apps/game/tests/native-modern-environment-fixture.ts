@@ -1,4 +1,5 @@
 import * as T from "three";
+import { NativeEnvironmentParameterField } from "../src/native-environment-parameter-field";
 import {
   applyNativeMapEnvironment,
   type SourceEnvironmentMaterial,
@@ -61,8 +62,9 @@ function source(): SourceEnvironmentMaterial {
 }
 /** Selected native PS791/PS258 equation branches, not a full map parity claim.
  * The six goldens were independently evaluated from retained native SPIR-V. */
-export function renderModernEnvironment() {
+export function renderModernEnvironment(sharedParameters = false) {
   const renderer = new T.WebGLRenderer({ antialias: false });
+  const parameterField = sharedParameters ? new NativeEnvironmentParameterField(64, 16) : undefined;
   renderer.setSize(8, 8);
   renderer.outputColorSpace = T.LinearSRGBColorSpace;
   renderer.toneMapping = T.NoToneMapping;
@@ -226,13 +228,18 @@ export function renderModernEnvironment() {
     material.name = "probe";
     const mesh = new T.Mesh(geometry, material);
     scene.add(mesh);
-    applyNativeMapEnvironment(mesh, {
-      materials: { probe: native },
-      textures,
-      lookup,
-      normalFrame: frame,
-      banks: banked.bindings,
-    });
+    applyNativeMapEnvironment(
+      mesh,
+      {
+        materials: { probe: native },
+        textures,
+        lookup,
+        normalFrame: frame,
+        banks: banked.bindings,
+      },
+      parameterField,
+    );
+    parameterField?.attach(material);
     const compile = material.onBeforeCompile.bind(material);
     material.onBeforeCompile = (shader, r) => {
       compile(shader, r);
@@ -280,6 +287,7 @@ export function renderModernEnvironment() {
   lookup.dispose();
   renderer.dispose();
   renderer.forceContextLoss();
+  parameterField?.dispose();
   return results;
 }
 

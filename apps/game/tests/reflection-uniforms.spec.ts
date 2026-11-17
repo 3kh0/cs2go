@@ -30,10 +30,11 @@ test("packed reflection uniforms preserve all native family pixels and shared-pr
   for (const row of result.results) {
     expect(row.cases).toBe(36);
     expect(row.differenceFromOther).toBeGreaterThan(0.001);
-    const [structured, packed] = row.firstUploads;
+    const [structured, packed, shared] = row.firstUploads;
     expect(structured.uniform3f).toBeGreaterThan(0);
     expect(packed.uniform3f).toBe(0);
     expect(packed.uniform4fv).toBe(1);
+    expect(Object.values(shared).reduce((a, b) => a + b, 0)).toBe(0);
     expect(Object.values(packed).reduce((a, b) => a + b, 0)).toBeLessThan(
       Object.values(structured).reduce((a, b) => a + b, 0),
     );

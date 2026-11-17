@@ -1,5 +1,22 @@
 import { expect, test } from "@playwright/test";
 
+test("static preview foliage retains native leaf colors, alpha holes and smoke coverage", async ({
+  page,
+}) => {
+  await page.route("**/favicon.ico", (route) => route.fulfill({ status: 204 }));
+  await page.goto("/audio/source/manifest.json");
+  const result = await page.evaluate(async () => {
+    const path = "/tests/native-foliage-fixture.ts";
+    return (await import(path)).renderNativeFoliageFixture(undefined, { animateWind: false });
+  });
+  expect(result.glError).toBe(0);
+  expect(result.opaquePixel.slice(0, 3)).toEqual([26, 51, 13]);
+  expect(result.holePixel.slice(0, 3)).toEqual([0, 0, 0]);
+  expect(result.motionDifference).toBe(0);
+  expect(result.smokeLeaf).toEqual([26, 51, 13]);
+  expect(result.smokeLeafWithoutDepth).not.toEqual(result.smokeLeaf);
+});
+
 test("native foliage transmission, alpha depth and smoke remain separate", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));

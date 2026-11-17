@@ -2,6 +2,9 @@ import { copySourceDepth } from "./source-depth";
 import * as T from "three";
 import { assetFetch } from "./asset-url";
 import { sourceProbeUniformVectors } from "./source-probe-frames";
+import { packSourceProbeFrames } from "./source-probe-frames";
+import { createSourceProbeField } from "./source-probe-field";
+import { sourceProbeBounds } from "./source-probe-selection";
 import {
   createSourceGpuProbes,
   applySourceGpuProbes,
@@ -9,7 +12,11 @@ import {
 } from "./source-gpu-probes";
 
 /** Map-owned LPVs; never replace Dust II's active probe cache during preload. */
-export async function loadNativeMapProbes(renderer: T.WebGLRenderer, directory: string) {
+export async function loadNativeMapProbes(
+  renderer: T.WebGLRenderer,
+  directory: string,
+  sharedField = false,
+) {
   const gl = renderer.getContext() as WebGL2RenderingContext;
   const read = async (file: string) => {
     const response = await assetFetch(directory + file);
@@ -20,19 +27,31 @@ export async function loadNativeMapProbes(renderer: T.WebGLRenderer, directory: 
   const arrays = renderer.extensions.has("EXT_texture_compression_bptc")
     ? source.arrays
     : source.fallbacks;
+  const packed = sharedField ? packSourceProbeFrames(metadata.volumes) : undefined;
+  const useField = !!(
+    packed &&
+    packed.values.byteLength + packed.rotations.byteLength + 48 <=
+      gl.getParameter(gl.MAX_UNIFORM_BLOCK_SIZE)
+  );
   if (
     renderer.capabilities.maxTextures < 16 ||
-    renderer.capabilities.maxFragmentUniforms < sourceProbeUniformVectors(metadata.volumes) ||
+    (!useField &&
+      renderer.capabilities.maxFragmentUniforms < sourceProbeUniformVectors(metadata.volumes)) ||
     gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS) <
       Math.max(...arrays.map((a: { layers: number }) => a.layers))
   )
     return undefined;
-  return createSourceGpuProbes(
+  const probes: SourceGpuProbes = await createSourceGpuProbes(
     directory,
     arrays,
     metadata,
     gl.getParameter(gl.MAX_ARRAY_TEXTURE_LAYERS),
   );
+  if (useField) {
+    probes.uniformsGroup = createSourceProbeField(probes);
+    probes.selectionBounds = sourceProbeBounds(metadata.volumes);
+  }
+  return probes;
 }
 
 /** Apply the native six-direction irradiance and sunlight visibility to props. */
@@ -86,7 +105,7 @@ export function applyNativeMapProbes(root: T.Object3D, probes: SourceGpuProbes) 
         );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-map-probes:${probes.count}:${!!probes.packedFrames}:${probes.packedFrames?.rotations.length ?? 0}:${probes.depth}:${probes.irradianceBanks ?? 1}:${probes.textures.map((texture) => texture.image.depth).join(",")}`;
+        `${key}:native-map-probes:${!!probes.uniformsGroup}:${probes.count}:${!!probes.packedFrames}:${probes.packedFrames?.rotations.length ?? 0}:${probes.depth}:${probes.irradianceBanks ?? 1}:${probes.textures.map((texture) => texture.image.depth).join(",")}`;
       material.needsUpdate = true;
       return material;
     };

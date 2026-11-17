@@ -14,6 +14,11 @@ test("native modern environment bands and selected Cache/Inferno branches compil
     const path = "/tests/native-modern-environment-fixture.ts";
     return (await import(path)).renderModernEnvironment();
   });
+  const shared = await page.evaluate(async () => {
+    const path = "/tests/native-modern-environment-fixture.ts";
+    return (await import(path)).renderModernEnvironment(true);
+  });
+  expect(shared).toEqual(results);
   console.log(JSON.stringify({ results, errors }));
   expect(errors).toEqual([]);
   expect(results).toHaveLength(11);

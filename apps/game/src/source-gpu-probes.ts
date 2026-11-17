@@ -4,6 +4,7 @@ import { fetchGzipped } from "./gltf";
 import { readAssetParts } from "./asset-stream";
 import { loadSourceLighting, sourceProbeMetadata } from "./source-lighting";
 import { nativeArrayLayerLimit } from "./native-array-texture";
+import type { SourceProbeSelection } from "./source-probe-selection";
 import {
   packSourceProbeFrames,
   probeFrameKeys,
@@ -27,6 +28,8 @@ export interface SourceGpuProbes {
   irradianceBanks?: number;
   frames: Float32Array[];
   packedFrames?: PackedProbeFrames;
+  uniformsGroup?: T.UniformsGroup;
+  selectionBounds?: readonly T.Box3[];
   sky: T.Vector4[];
   depth: number;
   count: number;
@@ -178,7 +181,12 @@ export async function createSourceGpuProbes(
 export function applySourceGpuProbes(
   shader: T.WebGLProgramParametersWithUniforms,
   probes: SourceGpuProbes,
+  selection?: SourceProbeSelection,
 ) {
+  if (selection) {
+    shader.uniforms.sourceGpuProbeCandidates = selection.indices;
+    shader.uniforms.sourceGpuProbeCount = selection.count;
+  }
   probes.textures.forEach((texture, index) => {
     shader.uniforms[`sourceGpuAtlas${index}`] = { value: texture };
   });
@@ -197,23 +205,26 @@ export function applySourceGpuProbes(
     return `vec4 ${name}(vec3 p) { ${reads.join("\n")} }`;
   };
   const packed = probes.packedFrames;
-  if (packed) {
+  if (packed && !probes.uniformsGroup) {
     shader.uniforms.sourceGpuPackedFrames = { value: packed.values };
     if (packed.rotations.length)
       shader.uniforms.sourceGpuRotatedFrames = { value: packed.rotations };
-  } else
+  } else if (!packed)
     probes.frames.forEach((frame, index) => {
       shader.uniforms[`sourceGpuFrame${index}`] = { value: frame };
     });
-  shader.uniforms.sourceGpuSky = { value: probes.sky };
+  if (!probes.uniformsGroup) shader.uniforms.sourceGpuSky = { value: probes.sky };
   shader.fragmentShader = shader.fragmentShader.replace(
     "#include <common>",
     `#include <common>
     ${probes.textures.map((_, index) => `uniform highp sampler2DArray sourceGpuAtlas${index};`).join("\n")}
     ${readAtlas(0, split, "sourceGpuIrradiance")}
     ${readAtlas(split, probes.textures.length, "sourceGpuOcclusion")}
-    ${packed ? `uniform vec4 sourceGpuPackedFrames[${probes.count * 6}];\n${packed.rotations.length ? `uniform vec4 sourceGpuRotatedFrames[${packed.rotations.length / 4}];` : ""}` : probes.frames.map((_, index) => `uniform vec3 sourceGpuFrame${index}[${probes.count}];`).join("\n")}
-    uniform vec4 sourceGpuSky[3];
+    ${probes.uniformsGroup ? "layout(std140) uniform NativeSourceProbeField {" : ""}
+    ${packed ? `${probes.uniformsGroup ? "" : "uniform "}vec4 sourceGpuPackedFrames[${probes.count * 6}];\n${packed.rotations.length ? `${probes.uniformsGroup ? "" : "uniform "}vec4 sourceGpuRotatedFrames[${packed.rotations.length / 4}];` : ""}` : probes.frames.map((_, index) => `uniform vec3 sourceGpuFrame${index}[${probes.count}];`).join("\n")}
+    ${probes.uniformsGroup ? "" : "uniform "}vec4 sourceGpuSky[3];
+    ${probes.uniformsGroup ? "};" : ""}
+    ${selection ? `uniform int sourceGpuProbeCandidates[${probes.count}];uniform int sourceGpuProbeCount;` : ""}
     struct SourceGpuProbe { vec3 irradiance; vec4 occlusion; };
     vec3 sourceGpuFace(vec3 uvw, int face) {
       float z = clamp(uvw.z * ${probes.depth}.0 - 0.5, 0.0, ${probes.depth - 1}.0);
@@ -233,7 +244,7 @@ export function applySourceGpuProbes(
       SourceGpuProbe result;
       result.irradiance = vec3(0.0); result.occlusion = vec4(0.0);
       float coverage = 0.0;
-      for (int i = 0; i < ${probes.count}; i++) {
+      ${selection ? `for(int probeSlot=0;probeSlot<${probes.count};probeSlot++){if(probeSlot>=sourceGpuProbeCount)break;int i=sourceGpuProbeCandidates[probeSlot];` : `for (int i = 0; i < ${probes.count}; i++) {`}
         ${
           packed
             ? `

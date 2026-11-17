@@ -30,6 +30,7 @@ function* nativeMapReflectionSteps(
   doors: readonly NativeDoorDefinition[] = [],
   preservedNames: readonly string[] = [],
   options: {
+    sharedField?: boolean;
     worldToNative?: T.Matrix4;
     /** Only audited foliage or detail-debris ENV instances are admitted.
      * Matrices remain static after this coverage proof. */
@@ -113,7 +114,9 @@ function* nativeMapReflectionSteps(
       if (!materials) variants.set(source, (materials = new Map()));
       let material = materials.get(selection);
       if (material) return material;
-      const window = instanceCandidates ? undefined : createSourceReflectionBinding(data);
+      const sharedField = !!options.sharedField && !instanceCandidates;
+      const window =
+        instanceCandidates || sharedField ? undefined : createSourceReflectionBinding(data);
       const binding = window ?? data;
       if (window) {
         window.count.value = indices.length;
@@ -125,7 +128,7 @@ function* nativeMapReflectionSteps(
       // require their original tangent/normal-frame feature declarations.
       material.defines = { ...source.defines };
       copySourceDepth(source, material);
-      if (instanceCandidates) {
+      if (instanceCandidates || sharedField) {
         instanceField ??= createSourceReflectionField(data);
         instanceField.attach(material);
       }
@@ -145,13 +148,14 @@ function* nativeMapReflectionSteps(
         applySourceReflections(
           shader,
           binding,
-          Array.from({ length: indices.length }, (_, i) => i),
+          sharedField ? indices : Array.from({ length: indices.length }, (_, i) => i),
           {
-            count: window?.count,
+            count: sharedField ? { value: indices.length } : window?.count,
             nativeFamily,
             instanceCandidates,
             instanceField: instanceCandidates,
-            packedUniforms: !instanceCandidates,
+            sharedField,
+            packedUniforms: !instanceCandidates && !sharedField,
             ...(frame
               ? {
                   worldPosition:
@@ -166,7 +170,7 @@ function* nativeMapReflectionSteps(
         );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-world-reflections:${data.cubeSize}:${data.arraySplit}:${data.combined}:${!!data.volumes[0]?.worldToLocal}:${binding.uniforms.length}:${!!options.worldToNative}:${nativeFamily ?? "legacy"}:${instanceCandidates}:${instanceCandidates ? "ubo13" : "packed-default-v1"}`;
+        `${key}:native-world-reflections:${data.cubeSize}:${data.arraySplit}:${data.combined}:${!!data.volumes[0]?.worldToLocal}:${binding.uniforms.length}:${!!options.worldToNative}:${nativeFamily ?? "legacy"}:${instanceCandidates}:${instanceCandidates || sharedField ? "ubo13" : "packed-default-v1"}`;
       material.needsUpdate = true;
       materials.set(selection, material);
       return material;
