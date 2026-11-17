@@ -2,6 +2,8 @@ import * as T from "three";
 import { sweepSphereTriangle } from "./sphere-sweep";
 
 const baseCellSize = 1.5,
+  heightBlockShift = 5,
+  heightBlockMask = (1 << heightBlockShift) - 1,
   // A dense grid is only practical for map-scale bounds; very distant stray
   // geometry coarsens the grid instead of allocating millions of cells.
   maxCells = 1 << 22,
@@ -326,6 +328,8 @@ export class MapCollision {
   private readonly entries: Int32Array;
   private readonly groundOffsets: Int32Array;
   private readonly ground: Int32Array;
+  private readonly entryHeights: Float32Array;
+  private readonly groundHeights: Float32Array;
   private readonly cellSize: number;
   private readonly x0: number;
   private readonly z0: number;
@@ -478,6 +482,30 @@ export class MapCollision {
     );
     // Floor and ceiling probes only consider walkable surfaces.
     [this.groundOffsets, this.ground] = this.index(n, (k) => Math.abs(normals[k * 3 + 1]) >= 0.7);
+    this.entryHeights = this.heightBlocks(this.entries);
+    this.groundHeights = this.heightBlocks(this.ground);
+  }
+  // A tiny hierarchy over the existing CSR order. Reject entire runs on other
+  // storeys without sorting contacts or changing triangle/owner precedence.
+  private heightBlocks(entries: Int32Array) {
+    const bounds = new Float32Array(Math.ceil(entries.length / (heightBlockMask + 1)) * 2);
+    for (let first = 0; first < entries.length; first += heightBlockMask + 1) {
+      let low = Infinity,
+        high = -Infinity;
+      for (
+        let e = first, end = Math.min(entries.length, first + heightBlockMask + 1);
+        e < end;
+        e++
+      ) {
+        const k = entries[e];
+        low = Math.min(low, this.minY[k]);
+        high = Math.max(high, this.maxY[k]);
+      }
+      const at = (first >> heightBlockShift) * 2;
+      bounds[at] = low;
+      bounds[at + 1] = high;
+    }
+    return bounds;
   }
   // CSR cell lists, built in two passes: count entries per cell, then fill.
   private index(count: number, include: (k: number) => boolean): [Int32Array, Int32Array] {
@@ -747,7 +775,23 @@ export class MapCollision {
       ) {
         const cell = this.cell(cx, cz);
         if (cell < 0) continue;
-        for (let e = groundOffsets[cell]; e < groundOffsets[cell + 1]; e++) {
+        for (
+          let e = groundOffsets[cell], end = groundOffsets[cell + 1], nextBlock = e;
+          e < end;
+          e++
+        ) {
+          if (e === nextBlock) {
+            nextBlock = Math.min(end, (e | heightBlockMask) + 1);
+            const at = (e >> heightBlockShift) * 2;
+            if (
+              this.groundHeights[at] > ceiling ||
+              this.groundHeights[at + 1] < bottom ||
+              (overhead ? this.groundHeights[at] >= height : this.groundHeights[at + 1] <= height)
+            ) {
+              e = nextBlock - 1;
+              continue;
+            }
+          }
           const k = ground[e];
           if (this.disabledOwners[this.owner[k]] || this.playerExcludedOwners[this.owner[k]])
             continue;
@@ -1159,7 +1203,15 @@ export class MapCollision {
       ) {
         const cell = this.cell(cx, cz);
         if (cell < 0) continue;
-        for (let e = offsets[cell], end = offsets[cell + 1]; e < end; e++) {
+        for (let e = offsets[cell], end = offsets[cell + 1], nextBlock = e; e < end; e++) {
+          if (e === nextBlock) {
+            nextBlock = Math.min(end, (e | heightBlockMask) + 1);
+            const at = (e >> heightBlockShift) * 2;
+            if (this.entryHeights[at + 1] <= step || this.entryHeights[at] >= top) {
+              e = nextBlock - 1;
+              continue;
+            }
+          }
           const k = entries[e];
           if (this.disabledOwners[this.owner[k]] || this.playerExcludedOwners[this.owner[k]])
             continue;
@@ -1261,7 +1313,15 @@ export class MapCollision {
           b = oy + dy * Math.min(exit, limit);
         const low = Math.min(a, b) - yMargin,
           high = Math.max(a, b) + yMargin;
-        for (let e = offsets[cell], end = offsets[cell + 1]; e < end; e++) {
+        for (let e = offsets[cell], end = offsets[cell + 1], nextBlock = e; e < end; e++) {
+          if (e === nextBlock) {
+            nextBlock = Math.min(end, (e | heightBlockMask) + 1);
+            const at = (e >> heightBlockShift) * 2;
+            if (this.entryHeights[at + 1] < low || this.entryHeights[at] > high) {
+              e = nextBlock - 1;
+              continue;
+            }
+          }
           const k = entries[e];
           if (this.disabledOwners[this.owner[k]]) continue;
           // Source player clips affect movement, not bullets or visibility.

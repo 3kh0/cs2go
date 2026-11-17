@@ -2,7 +2,11 @@ import * as T from "three";
 import { nativeWaterReflectionNormalGLSL } from "./native-water-reflection-normal";
 import { assetFetch } from "./asset-url";
 import { fetchGzipped } from "./gltf";
-import { packSourceReflectionRecords } from "./source-reflection-field";
+import {
+  packSourceReflectionRecords,
+  sourceReflectionFieldGLSL,
+  sourceReflectionFieldLayout,
+} from "./source-reflection-field";
 
 // Dust's legacy path follows VRF 5564866 envmap.slang/envmap_data.slang.
 // Mirage's 8.2 path follows VRF 20.1 (9e2e6c7) environment.slang/SceneEnvMap.cs.
@@ -444,11 +448,12 @@ export function applySourceReflections(
     /** Complete BYTE4 instance IDs address the shared field with a fixed eight
      * slot loop. The caller proves coverage and hardware budgets before use. */
     instanceCandidates?: boolean;
-    /** Complete records in one std140 block instead of default uniforms. */
+    /** Complete records in bounded std140 blocks instead of default uniforms. */
     instanceField?: boolean;
     /** Static draws share the immutable complete field, addressing at most
      * eight global IDs instead of uploading a padded record window per draw. */
     sharedField?: boolean;
+    fieldBlockBytes?: number;
     /** Immutable static windows use one default vec4-array upload. */
     packedUniforms?: boolean;
   } = {},
@@ -458,6 +463,23 @@ export function applySourceReflections(
   if (options.packedUniforms && (options.instanceCandidates || field))
     throw new Error("Packed static reflection uniforms require a static candidate window");
   const packedWords = affine ? 13 : 5;
+  const record = () => {
+    const layout = field
+      ? sourceReflectionFieldLayout(data.uniforms.length, options.fieldBlockBytes)
+      : [packedWords];
+    const word = (offset: number) => {
+      let first = 0;
+      for (const [bank, width] of layout.entries()) {
+        if (offset < first + width)
+          return `nativeReflectionWords${bank || ""}[index*${width}+${offset - first}]`;
+        first += width;
+      }
+      throw new Error("Native reflection record column unavailable");
+    };
+    const matrix = (offset: number) =>
+      `mat4(${[0, 1, 2, 3].map((i) => word(offset + i)).join(",")})`;
+    return `vec4 first=${word(0)};return SourceEnvironment(first.xyz,first.w,${word(1)}.xyz,${word(2)}.xyz,${word(3)}.xyz,${word(4)}${affine ? `,${matrix(5)},${matrix(9)}` : ""});`;
+  };
   if (
     options.instanceCandidates &&
     (data.uniforms.length !== data.volumes.length || data.uniforms.length > 255)
@@ -501,11 +523,9 @@ export function applySourceReflections(
 struct SourceEnvironment {vec3 origin;float index;vec3 mins;vec3 maxs;vec3 invEdge;vec4 sh;${affine ? "mat4 worldToLocal;mat4 localToWorld;" : ""}};
 ${
   field || options.packedUniforms
-    ? `${field ? `layout(std140) uniform NativeSourceReflectionField { vec4 nativeReflectionWords[${data.uniforms.length * 13}]; };` : `uniform vec4 nativeReflectionWords[${data.uniforms.length * packedWords}];`}
+    ? `${field ? sourceReflectionFieldGLSL(data.uniforms.length, options.fieldBlockBytes) : `uniform vec4 nativeReflectionWords[${data.uniforms.length * packedWords}];`}
 SourceEnvironment sourceFieldEnvironment(int index) {
-  int at=index*${field ? 13 : packedWords};
-  vec4 first=nativeReflectionWords[at];
-  return SourceEnvironment(first.xyz,first.w,nativeReflectionWords[at+1].xyz,nativeReflectionWords[at+2].xyz,nativeReflectionWords[at+3].xyz,nativeReflectionWords[at+4]${affine ? `,mat4(nativeReflectionWords[at+5],nativeReflectionWords[at+6],nativeReflectionWords[at+7],nativeReflectionWords[at+8]),mat4(nativeReflectionWords[at+9],nativeReflectionWords[at+10],nativeReflectionWords[at+11],nativeReflectionWords[at+12])` : ""});
+  ${record()}
 }`
     : `uniform SourceEnvironment sourceEnvironments[${data.uniforms.length}];`
 }

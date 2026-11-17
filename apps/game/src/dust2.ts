@@ -599,9 +599,7 @@ async function buildNativeMap(
       movingRenderNames,
       {
         instances: nativeClutter?.instances,
-        sharedField:
-          performanceMap &&
-          nativeReflections.uniforms.length * 13 * 16 <= gl.getParameter(gl.MAX_UNIFORM_BLOCK_SIZE),
+        sharedField: performanceMap,
       },
     );
   if (nativeFog) applyNativeMapFog(asset.scene, nativeFog);

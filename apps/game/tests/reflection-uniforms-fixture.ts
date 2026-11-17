@@ -16,7 +16,7 @@ const emptyUploads = (): Uploads => ({
 });
 
 /** Transport comparison, with synthetic direction/mip palettes rather than map assets. */
-export function reflectionUniformsFixture() {
+export function reflectionUniformsFixture(recordCount = 3) {
   const renderer = new T.WebGLRenderer({ antialias: false });
   renderer.setSize(16, 16);
   renderer.outputColorSpace = T.LinearSRGBColorSpace;
@@ -128,8 +128,23 @@ export function reflectionUniformsFixture() {
   for (const affine of [false, true])
     for (const family of [undefined, "complex", "glass", "lightmapped", "water"] as const) {
       const datasets = [makeData(affine, 0), makeData(affine, 1)];
-      const materials = ["structured", "packed", "shared"].map((mode) =>
+      const materials = ["structured", "packed", "shared", "banked"].map((mode) =>
         datasets.map((data, variant) => {
+          const shared = mode === "shared" || mode === "banked";
+          const ids = shared && recordCount > 3 ? [0, 78, recordCount - 1] : [0, 1, 2];
+          const fieldData =
+            shared && recordCount > 3
+              ? {
+                  ...data,
+                  uniforms: Array.from({ length: recordCount }, () => data.uniforms[0]),
+                  volumes: Array.from({ length: recordCount }, () => data.volumes[0]),
+                }
+              : data;
+          for (let i = 0; i < 3; i++) {
+            fieldData.uniforms[ids[i]] = data.uniforms[i];
+            fieldData.volumes[ids[i]] = data.volumes[i];
+          }
+          const fieldBlockBytes = mode === "banked" && recordCount === 3 ? 208 : undefined;
           const roughness = { value: 0 };
           const count = { value: 3 };
           let candidates: { value: Int32Array } | undefined;
@@ -145,11 +160,12 @@ void main(){TestMaterial material;material.roughness=testRoughness;vec3 radiance
 RE_IndirectSpecular( radiance, iblIrradiance, clearcoatRadiance, geometryPosition, geometryNormal, geometryViewDir, geometryClearcoatNormal, material, reflectedLight );
 gl_FragColor=vec4(radiance,1.0);}`,
           });
-          if (mode === "shared") createSourceReflectionField(data).attach(material);
+          if (shared) createSourceReflectionField(fieldData, fieldBlockBytes).attach(material);
           material.onBeforeCompile = (shader) => {
-            applySourceReflections(shader, data, [0, 1, 2], {
+            applySourceReflections(shader, fieldData, ids, {
               packedUniforms: mode === "packed",
-              sharedField: mode === "shared",
+              sharedField: mode === "shared" || mode === "banked",
+              fieldBlockBytes,
               count,
               nativeFamily: family,
               worldPosition: "vec3((gl_FragCoord.x-8.0)*.0254,0.0,(gl_FragCoord.y-8.0)*.0254)",
@@ -164,6 +180,7 @@ gl_FragColor=vec4(radiance,1.0);}`,
             roughness,
             count,
             variant,
+            ids,
             get candidates() {
               return candidates!;
             },
@@ -181,7 +198,7 @@ gl_FragColor=vec4(radiance,1.0);}`,
         const state = materials[mode][variant];
         state.roughness.value = roughness;
         state.count.value = count;
-        state.candidates?.value.set(reverse ? [2, 1, 0] : [0, 1, 2]);
+        state.candidates?.value.set(reverse ? [...state.ids].reverse() : state.ids);
         mesh.material = state.material;
         uploads = emptyUploads();
         renderer.render(scene, camera);
@@ -189,7 +206,7 @@ gl_FragColor=vec4(radiance,1.0);}`,
         renderer.readRenderTargetPixels(target, 0, 0, 16, 16, pixels);
         return { pixels, uploads: { ...uploads } };
       };
-      for (const mode of [0, 1, 2]) firstUploads.push(read(mode, 0, 0, false, 3).uploads);
+      for (const mode of [0, 1, 2, 3]) firstUploads.push(read(mode, 0, 0, false, 3).uploads);
       let cases = 0,
         differenceFromOther = 0;
       for (const roughness of [0, 0.35, 1])
@@ -198,13 +215,16 @@ gl_FragColor=vec4(radiance,1.0);}`,
             for (const variant of [0, 1, 0]) {
               const a = read(0, variant, roughness, reverse, count),
                 b = read(1, variant, roughness, reverse, count),
-                c = read(2, variant, roughness, reverse, count);
+                c = read(2, variant, roughness, reverse, count),
+                d = read(3, variant, roughness, reverse, count);
               for (let i = 0; i < a.pixels.length; i++) {
-                if (![a.pixels[i], b.pixels[i], c.pixels[i]].every(Number.isFinite)) nonFinite++;
+                if (![a.pixels[i], b.pixels[i], c.pixels[i], d.pixels[i]].every(Number.isFinite))
+                  nonFinite++;
                 maxError = Math.max(
                   maxError,
                   Math.abs(a.pixels[i] - b.pixels[i]),
                   Math.abs(a.pixels[i] - c.pixels[i]),
+                  Math.abs(a.pixels[i] - d.pixels[i]),
                 );
               }
               cases++;
@@ -219,6 +239,16 @@ gl_FragColor=vec4(radiance,1.0);}`,
                 Math.abs(restored[i] - alternate[i]),
               );
             }
+            // Banked programs must also restore every block after another
+            // material using the same program overwrites its binding points.
+            const banked = read(3, 0, roughness, reverse, count).pixels;
+            read(3, 1, roughness, reverse, count);
+            const bankedAgain = read(3, 0, roughness, reverse, count).pixels;
+            for (let i = 0; i < banked.length; i++)
+              sharedRestoreError = Math.max(
+                sharedRestoreError,
+                Math.abs(banked[i] - bankedAgain[i]),
+              );
           }
       results.push({
         affine,

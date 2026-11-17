@@ -3,6 +3,7 @@ import { expect, test, vi } from "vitest";
 import {
   createSourceReflectionField,
   packSourceReflectionRecords,
+  sourceReflectionFieldLayout,
 } from "./source-reflection-field";
 import type { SourceReflections } from "./source-reflections";
 function data() {
@@ -72,6 +73,39 @@ test("std140 retains the complete65 record Float32 values within16KiB", () => {
     expect(Array.from(p.slice(36, 52))).toEqual(v.localToWorld!.elements.map(Math.fround));
   }
   expect(field.group.uniforms).toHaveLength(1);
+});
+test("large map fields retain all records in independently owned 16KiB blocks", () => {
+  const d = data();
+  d.uniforms = Array.from({ length: 116 }, (_, i) => ({ ...d.uniforms[i % 65], index: i }));
+  d.volumes = Array.from({ length: 116 }, () => ({})) as SourceReflections["volumes"];
+  const field = createSourceReflectionField(d);
+  const layout = sourceReflectionFieldLayout(116);
+  expect(layout).toEqual([5, 8]);
+  expect(field.groups).toHaveLength(2);
+  const restored = new Float32Array(field.packed.length);
+  let offset = 0;
+  field.groups.forEach((group, bank) => {
+    const width = layout[bank];
+    const values = (group.uniforms[0] as T.Uniform<T.Vector4[]>).value;
+    expect(values.length * 16).toBeLessThanOrEqual(16384);
+    values.forEach((value, word) =>
+      restored.set(value.toArray(), (Math.floor(word / width) * 13 + offset + (word % width)) * 4),
+    );
+    offset += width;
+  });
+  expect(restored).toEqual(field.packed);
+  const disposed = field.groups.map((group) => {
+    const spy = vi.fn();
+    group.addEventListener("dispose", spy);
+    return spy;
+  });
+  const material = new T.MeshStandardMaterial();
+  field.attach(material);
+  expect((material as T.Material & { uniformsGroups?: T.UniformsGroup[] }).uniformsGroups).toEqual(
+    field.groups,
+  );
+  material.dispose();
+  for (const spy of disposed) expect(spy).toHaveBeenCalledTimes(1);
 });
 test("shared block releases once after its last final material and rejects unproved coexisting groups", () => {
   const field = createSourceReflectionField(data()),

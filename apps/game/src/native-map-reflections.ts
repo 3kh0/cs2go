@@ -170,7 +170,7 @@ function* nativeMapReflectionSteps(
         );
       };
       material.customProgramCacheKey = () =>
-        `${key}:native-world-reflections:${data.cubeSize}:${data.arraySplit}:${data.combined}:${!!data.volumes[0]?.worldToLocal}:${binding.uniforms.length}:${!!options.worldToNative}:${nativeFamily ?? "legacy"}:${instanceCandidates}:${instanceCandidates || sharedField ? "ubo13" : "packed-default-v1"}`;
+        `${key}:native-world-reflections:${data.cubeSize}:${data.arraySplit}:${data.combined}:${!!data.volumes[0]?.worldToLocal}:${binding.uniforms.length}:${!!options.worldToNative}:${nativeFamily ?? "legacy"}:${instanceCandidates}:${instanceCandidates || sharedField ? "ubo13-banked16k" : "packed-default-v1"}`;
       material.needsUpdate = true;
       materials.set(selection, material);
       return material;
