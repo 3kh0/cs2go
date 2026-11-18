@@ -14,6 +14,7 @@ import {
 } from "node:zlib";
 import {
   prepare,
+  readManifest,
   releaseId,
   objectKey,
   transportPath,
@@ -26,6 +27,43 @@ import {
   rewriteAssetUrls,
   startupHints,
 } from "../../scripts/build-assets.mjs";
+
+test("incremental preparation preserves cold output and rechecks changed and added files", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cs2go-incremental-assets-"));
+  try {
+    assert.equal(await readManifest(root), undefined);
+    await mkdir(join(root, "public"));
+    await writeFile(join(root, "public", "tiny.bin"), Buffer.from([1]));
+    await writeFile(join(root, "public", "removed.bin"), Buffer.from([2]));
+    await writeFile(join(root, "public", "compressed.json"), "unchanged metadata".repeat(500));
+    const first = await prepare(root);
+    await writeFile(join(root, "manifest.json"), JSON.stringify(first));
+    const previous = await readManifest(root);
+    // A previous no-benefit decision survives a cleared compression cache.
+    await rm(join(root, ".cache"), { recursive: true });
+    assert.deepEqual(await prepare(root, previous.files, undefined, true), first);
+    await assert.rejects(readFile(transportPath(root, first.files["tiny.bin"].sha256)), {
+      code: "ENOENT",
+    });
+    const compressedCache = transportPath(root, first.files["compressed.json"].sha256);
+    await assert.rejects(readFile(compressedCache), { code: "ENOENT" });
+    // Publishing/verification must recreate and validate missing wire bytes.
+    assert.deepEqual(await prepare(root, previous.files), first);
+    assert.ok((await readFile(compressedCache)).length > 0);
+    await writeFile(join(root, "public", "tiny.bin"), "new compressible data".repeat(500));
+    await writeFile(join(root, "public", "added.json"), "new kit metadata".repeat(500));
+    await rm(join(root, "public", "removed.bin"));
+    const incremental = await prepare(root, previous.files, undefined, true);
+    assert.ok(incremental.files["tiny.bin"].transport);
+    assert.ok(incremental.files["added.json"].transport);
+    assert.equal(incremental.files["removed.bin"], undefined);
+    assert.deepEqual(incremental, await prepare(root));
+    await writeFile(join(root, "manifest.json"), JSON.stringify({ ...first, release: "invalid" }));
+    await assert.rejects(readManifest(root), /Invalid asset manifest/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
 
 test("asset releases are deterministic, hash content, and cache lossless compression", async () => {
   const root = await mkdtemp(join(tmpdir(), "cs2go-assets-"));

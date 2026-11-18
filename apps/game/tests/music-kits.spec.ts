@@ -1,6 +1,99 @@
 import { expect, test } from "@playwright/test";
 import type { MusicKitCatalog } from "../src/music-kits";
 
+test("all eight Monstercat kits inspect, preview both MVPs, equip and play round cues", async ({
+  page,
+}) => {
+  test.setTimeout(240_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
+  });
+  page.on("response", (response) => {
+    if (
+      response.status() >= 400 &&
+      /\/(?:audio\/music-kits|models\/music-kit)\//.test(response.url())
+    )
+      errors.push(response.url());
+  });
+  await page.goto("/");
+  await expect(page.locator("#play")).toBeEnabled({ timeout: 120_000 });
+  await page.locator("#skins-button").click();
+  await page.locator("#inventory-music-kits").click();
+  const catalog = await page.evaluate(
+    async () =>
+      (await (await fetch("/audio/music-kits/catalog.json")).json()) as Promise<MusicKitCatalog>,
+  );
+  const ids = [
+    "alleycvt_01",
+    "arcando_01",
+    "djdiesel_01",
+    "fool_01",
+    "noisestorm_01",
+    "pegboardnerds_01",
+    "tristam_braken_01",
+    "vicetone_01",
+  ];
+  const playing = async (tracks: string[]) => {
+    await expect
+      .poll(() =>
+        page.evaluate((paths) => {
+          const audio = window.__game.soundscape.music;
+          return (
+            !!audio.src &&
+            paths.includes(new URL(audio.src).pathname) &&
+            !audio.paused &&
+            audio.readyState >= 2 &&
+            audio.currentTime > 0.1
+          );
+        }, tracks),
+      )
+      .toBe(true);
+  };
+  for (const id of ids) {
+    const kit = catalog.kits.find((entry) => entry.id === id)!;
+    await page.locator("#music-kit-search").fill(kit.artist!);
+    const card = page.locator(`[data-music-kit="${id}"]`);
+    await expect
+      .poll(() =>
+        card
+          .locator("img")
+          .evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0),
+      )
+      .toBe(true);
+    await card.click();
+    await page.locator("#inspect-music-kit").click();
+    await expect(page.locator("#music-kit-stage")).toHaveAttribute("data-kit", id, {
+      timeout: 30_000,
+    });
+    await expect(page.locator("#music-kit-name")).toContainText(kit.name);
+    await playing(kit.events.menu.tracks);
+    if (id === "noisestorm_01")
+      await page.screenshot({ path: "artifacts/monstercat-crab-rave-inspect.png" });
+    for (let track = 0; track < 2; track++) {
+      await page.locator("#music-kit-audio").click();
+      await page.locator(`[data-music-event="mvp"][data-music-track="${track}"]`).click();
+      await playing([kit.events.mvp.tracks[track]]);
+    }
+    if (kit.extraTracks?.length) {
+      await page.locator("#music-kit-audio").click();
+      await page.locator('[data-music-event="extra"]').click();
+      await playing(kit.extraTracks);
+    }
+    await page.locator("#close-music-kit-inspect").click();
+    await card.click();
+    await page.locator("#equip-music-kit").click();
+    await expect(card).toHaveAttribute("data-equipped", "true");
+    expect(await page.evaluate(() => localStorage.getItem("cs2go-music-kit"))).toBe(id);
+    for (const event of ["start", "action", "bomb", "bomb-countdown", "mvp", "end"] as const) {
+      await page.evaluate((cue) => window.__game.soundscape.playMusic(cue), event);
+      await playing(kit.events[event].tracks);
+    }
+  }
+  expect(errors).toEqual([]);
+});
+
 test("music kits load on demand, preview variants, equip and persist without downloading the library", async ({
   page,
 }) => {

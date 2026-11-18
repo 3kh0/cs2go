@@ -9,6 +9,10 @@ Vertigo, Nuke, Inferno and Cache are available as early map previews alongside D
 
 Hardware-accelerated Chrome is recommended. Firefox is not supported because Firefox decides to be special and not support many of the cool APIs we use.
 
+Choose and preview music kits in Inventory → Music Kits, including all eight
+Monstercat kits from November 17, 2026. Full recordings stream on demand; see the
+[music library provenance](packages/assets/public/audio/music-kits/README.md).
+
 ## How to play
 
 <https://en.wikipedia.org/wiki/Counter-Strike_2>

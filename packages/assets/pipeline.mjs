@@ -24,13 +24,29 @@ export async function files(directory) {
   return found.sort();
 }
 export const releaseId = (entries) => sha256(JSON.stringify(entries));
+export async function readManifest(directory = root) {
+  try {
+    const manifest = JSON.parse(await readFile(join(directory, "manifest.json"), "utf8"));
+    if (manifest.version !== 2 || manifest.release !== releaseId(manifest.files))
+      throw new Error("Invalid asset manifest");
+    return manifest;
+  } catch (error) {
+    if (error.code === "ENOENT") return undefined;
+    throw error;
+  }
+}
 // Include media type and HTTP encoding in the identity: equal bytes can need
 // different response headers. Filenames and releases do not affect reuse.
 export const objectKey = (path, entry) => {
   const wire = entry.transport ?? entry;
   return `objects/${wire.sha256}${extname(path)}${wire.encoding ? `.${wire.encoding}` : ""}`;
 };
-export async function prepare(directory = root, expectedEntries, onProgress) {
+export async function prepare(
+  directory = root,
+  expectedEntries,
+  onProgress,
+  reuseTransport = false,
+) {
   const publicDir = join(directory, "public");
   const cache = join(directory, ".cache");
   await mkdir(cache, { recursive: true });
@@ -66,15 +82,27 @@ export async function prepare(directory = root, expectedEntries, onProgress) {
       entry.input = path;
       entry.inputSha256 = input;
     } else if (path.endsWith(".gz")) entry.decodedSha256 = sha256(gunzipSync(bytes));
-    // Verification need not re-prove that unchanged bytes did not benefit from
-    // Brotli. Generation tests non-streaming candidates; logical/source metadata
-    // still regenerates here and the CLI compares the complete manifest below.
+    // Reuse a prior no-benefit compression decision only for identical bytes.
+    // Changed/new files are compressed; logical/source metadata still regenerates.
     const expected = expectedEntries?.[target];
     // Music loops seek by codec byte offsets. HTTP content encoding would make
     // Range requests address a different representation (and often force a full
     // download), so kit MP3/FLAC/Opus objects must retain their original wire bytes.
     const streamedMusic = path.startsWith("audio/music-kits/") && /\.(mp3|flac|opus)$/.test(path);
-    if (!streamedMusic && (!expected || expected.transport || expected.sha256 !== entry.sha256)) {
+    // Local builds and manifest generation need identities, not encoded copies
+    // of unchanged assets. Publishing still materializes and verifies wire bytes.
+    const reusable =
+      reuseTransport &&
+      !streamedMusic &&
+      expected?.sha256 === entry.sha256 &&
+      expected.bytes === entry.bytes &&
+      expected.transport?.encoding === "br" &&
+      expected.transport.quality === BROTLI_QUALITY;
+    if (reusable) entry.transport = { ...expected.transport };
+    else if (
+      !streamedMusic &&
+      (!expected || expected.transport || expected.sha256 !== entry.sha256)
+    ) {
       // HTTP transport compression is independent of the file format. A .gz
       // response still decodes to the exact gzip bytes expected by game loaders.
       let work = compressions.get(entry.sha256);
@@ -147,9 +175,9 @@ export async function prepare(directory = root, expectedEntries, onProgress) {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const destination = join(root, "manifest.json");
   const verifying = process.argv[2] === "verify";
+  const expected = await readManifest();
   const expectedBytes = verifying ? await readFile(destination, "utf8") : undefined;
-  const expected = expectedBytes ? JSON.parse(expectedBytes) : undefined;
-  const manifest = await prepare(root, expected?.files);
+  const manifest = await prepare(root, expected?.files, undefined, !verifying);
   const bytes = JSON.stringify(manifest, null, 2) + "\n";
   if (verifying) {
     if (expectedBytes !== bytes) {

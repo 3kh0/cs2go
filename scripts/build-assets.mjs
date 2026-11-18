@@ -4,6 +4,7 @@ import { resolve, relative, join } from "node:path";
 import {
   files,
   prepare,
+  readManifest,
   releaseId,
   objectKey,
   root as assetRoot,
@@ -121,9 +122,15 @@ export function buildAssets() {
         report();
         const heartbeat = setInterval(report, 2000);
         try {
-          manifest = await prepare(assetRoot, undefined, (value) => {
-            progress = value;
-          });
+          const previous = await readManifest(assetRoot);
+          manifest = await prepare(
+            assetRoot,
+            previous?.files,
+            (value) => {
+              progress = value;
+            },
+            true,
+          );
         } finally {
           clearInterval(heartbeat);
         }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "aa6cf0310b186529a2cf1a9c226cd6a7c6c9707cb33c863a3dd89f23b73baefa",
+  "release": "ef8a2bad9d00a53358ba1e1c715e70ff2734c7e25f517a9d21d5c771247f53be",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -1574,6 +1574,76 @@
       "bytes": 121692,
       "object": "objects/297cba606e43310d4d1358a3556337e41271c4219c6da68c0e521cb42ca222c7.mp3"
     },
+    "audio/music-kits/alleycvt_01/bombplanted.mp3": {
+      "sha256": "04fe2c14a82014b26ac9b4e116c27340beb6e714e993878b61f4c752bffe8565",
+      "bytes": 606339,
+      "object": "objects/04fe2c14a82014b26ac9b4e116c27340beb6e714e993878b61f4c752bffe8565.mp3"
+    },
+    "audio/music-kits/alleycvt_01/bombtenseccount.mp3": {
+      "sha256": "768e9418d1a8eebda8732a241b549b8347e6f08fe76a4efca8a0dc81af599106",
+      "bytes": 176848,
+      "object": "objects/768e9418d1a8eebda8732a241b549b8347e6f08fe76a4efca8a0dc81af599106.mp3"
+    },
+    "audio/music-kits/alleycvt_01/chooseteam.mp3": {
+      "sha256": "92821ba670e6cea2d013aa48b49e2d88193c46e7105a8ba5f72f9e6fdd8fb259",
+      "bytes": 455800,
+      "object": "objects/92821ba670e6cea2d013aa48b49e2d88193c46e7105a8ba5f72f9e6fdd8fb259.mp3"
+    },
+    "audio/music-kits/alleycvt_01/deathcam.mp3": {
+      "sha256": "6f753e1c4ccb34ad7b6fccfc6f4d11823aa32e2c185aa223d613719aaa31d864",
+      "bytes": 92374,
+      "object": "objects/6f753e1c4ccb34ad7b6fccfc6f4d11823aa32e2c185aa223d613719aaa31d864.mp3"
+    },
+    "audio/music-kits/alleycvt_01/endofmatch.mp3": {
+      "sha256": "29d0826f8a9e0cd3ee961da032b5ebc2cbce8643fe28795a76d28cc9abb0b80d",
+      "bytes": 1024313,
+      "object": "objects/29d0826f8a9e0cd3ee961da032b5ebc2cbce8643fe28795a76d28cc9abb0b80d.mp3"
+    },
+    "audio/music-kits/alleycvt_01/lostround.mp3": {
+      "sha256": "98806441b3668236c710f10cf4b24b43f330bbcdabe20a7038538237e7fa1f59",
+      "bytes": 100946,
+      "object": "objects/98806441b3668236c710f10cf4b24b43f330bbcdabe20a7038538237e7fa1f59.mp3"
+    },
+    "audio/music-kits/alleycvt_01/mainmenu.mp3": {
+      "sha256": "c8e8bbb73038d178c5adec6d23e725eec6964411b07ee747c60bfd287fcb6046",
+      "bytes": 2772044,
+      "object": "objects/c8e8bbb73038d178c5adec6d23e725eec6964411b07ee747c60bfd287fcb6046.mp3"
+    },
+    "audio/music-kits/alleycvt_01/roundmvpanthem_01.mp3": {
+      "sha256": "57ad619843979225ec21fb3702cb14818b4b7ae3eab5bff5c4a9a856d91fb98f",
+      "bytes": 147365,
+      "object": "objects/57ad619843979225ec21fb3702cb14818b4b7ae3eab5bff5c4a9a856d91fb98f.mp3"
+    },
+    "audio/music-kits/alleycvt_01/roundmvpanthem_02.mp3": {
+      "sha256": "db311a859342297a4fbe47ba172e7cb42cd447d4823940f4f17fa334ae7048a3",
+      "bytes": 149453,
+      "object": "objects/db311a859342297a4fbe47ba172e7cb42cd447d4823940f4f17fa334ae7048a3.mp3"
+    },
+    "audio/music-kits/alleycvt_01/roundtenseccount.mp3": {
+      "sha256": "c8a42afb8628cb78dbe8f8156959f96bba9dfd9ffa52e40ab795ca77debe4c5e",
+      "bytes": 193218,
+      "object": "objects/c8a42afb8628cb78dbe8f8156959f96bba9dfd9ffa52e40ab795ca77debe4c5e.mp3"
+    },
+    "audio/music-kits/alleycvt_01/startaction_01.mp3": {
+      "sha256": "2a498877fd0d9868a9db0842a051247fb0aa8946969c3c79193fac00fe08f575",
+      "bytes": 263544,
+      "object": "objects/2a498877fd0d9868a9db0842a051247fb0aa8946969c3c79193fac00fe08f575.mp3"
+    },
+    "audio/music-kits/alleycvt_01/startofmatch.mp3": {
+      "sha256": "66c9ce11703b4e7782e3b1ab3a78ae637d94973614de58addc9293ffab19c6e7",
+      "bytes": 258349,
+      "object": "objects/66c9ce11703b4e7782e3b1ab3a78ae637d94973614de58addc9293ffab19c6e7.mp3"
+    },
+    "audio/music-kits/alleycvt_01/startround_01.mp3": {
+      "sha256": "24e954739ef05db9c84fa7468d52486467ecef3944d74e002e20dddc44ded9af",
+      "bytes": 234564,
+      "object": "objects/24e954739ef05db9c84fa7468d52486467ecef3944d74e002e20dddc44ded9af.mp3"
+    },
+    "audio/music-kits/alleycvt_01/wonround.mp3": {
+      "sha256": "8d5b4ab6adfba4e89bd34789a7efac9f8f1793d59630ffb2fb3a92491f89d3d7",
+      "bytes": 154160,
+      "object": "objects/8d5b4ab6adfba4e89bd34789a7efac9f8f1793d59630ffb2fb3a92491f89d3d7.mp3"
+    },
     "audio/music-kits/alrt_01/bombplanted.mp3": {
       "sha256": "bb2610fd68d9474db2bcb20f8bcfb98f5aa126b74a35b13b09a07866a3cc9cff",
       "bytes": 595406,
@@ -1829,6 +1899,76 @@
       "bytes": 163840,
       "object": "objects/88dae8aa0bb4677ceb0e3a854f3e43d62cf803b40f72910dbe04468e7bbcfc3d.mp3"
     },
+    "audio/music-kits/arcando_01/bombplanted.mp3": {
+      "sha256": "083ddff6d90430aaa5b7324af533d28042db86fb5964655676b547cf4b776173",
+      "bytes": 614333,
+      "object": "objects/083ddff6d90430aaa5b7324af533d28042db86fb5964655676b547cf4b776173.mp3"
+    },
+    "audio/music-kits/arcando_01/bombtenseccount.mp3": {
+      "sha256": "3a1cb39ddc877b93c2f6e9df1b699d6fb5a0e55ca06dd047a11af38cfa496baa",
+      "bytes": 192714,
+      "object": "objects/3a1cb39ddc877b93c2f6e9df1b699d6fb5a0e55ca06dd047a11af38cfa496baa.mp3"
+    },
+    "audio/music-kits/arcando_01/chooseteam.mp3": {
+      "sha256": "f8c96060a02f68f2f60e527b31f68b15fd8b151b28e5ed2e26449d41403c580f",
+      "bytes": 376235,
+      "object": "objects/f8c96060a02f68f2f60e527b31f68b15fd8b151b28e5ed2e26449d41403c580f.mp3"
+    },
+    "audio/music-kits/arcando_01/deathcam.mp3": {
+      "sha256": "45c2a33259f12accfecfb0e28bc6608395c169f5ccac82955fbfa74f4763a6e9",
+      "bytes": 76946,
+      "object": "objects/45c2a33259f12accfecfb0e28bc6608395c169f5ccac82955fbfa74f4763a6e9.mp3"
+    },
+    "audio/music-kits/arcando_01/endofmatch.mp3": {
+      "sha256": "bdf2ae4571ce0a969dd54d61cf47309b296330cc28aa84b55940def570e715d8",
+      "bytes": 1612996,
+      "object": "objects/bdf2ae4571ce0a969dd54d61cf47309b296330cc28aa84b55940def570e715d8.mp3"
+    },
+    "audio/music-kits/arcando_01/lostround.mp3": {
+      "sha256": "8274b084ac6190646905bf59df8c5758a5c3bae78b5a9461b07d1681b0cff310",
+      "bytes": 133688,
+      "object": "objects/8274b084ac6190646905bf59df8c5758a5c3bae78b5a9461b07d1681b0cff310.mp3"
+    },
+    "audio/music-kits/arcando_01/mainmenu.mp3": {
+      "sha256": "9541dba94c0c548394089042d512b513b9f4249b572b91be97b6b8cfe8049363",
+      "bytes": 3252135,
+      "object": "objects/9541dba94c0c548394089042d512b513b9f4249b572b91be97b6b8cfe8049363.mp3"
+    },
+    "audio/music-kits/arcando_01/roundmvpanthem_01.mp3": {
+      "sha256": "39362311d5fb25fb75ef8d099a657c386f62908f22da0326bf7908abdacd2a19",
+      "bytes": 139644,
+      "object": "objects/39362311d5fb25fb75ef8d099a657c386f62908f22da0326bf7908abdacd2a19.mp3"
+    },
+    "audio/music-kits/arcando_01/roundmvpanthem_02.mp3": {
+      "sha256": "c385f6286d1fb07a9baa165d2469c681bb98d67d3a2b7bad4698d2d2765d177b",
+      "bytes": 144945,
+      "object": "objects/c385f6286d1fb07a9baa165d2469c681bb98d67d3a2b7bad4698d2d2765d177b.mp3"
+    },
+    "audio/music-kits/arcando_01/roundtenseccount.mp3": {
+      "sha256": "2b971b6f0cc6612d39a9e01cb84a6a73ba3c803b892e93f92920e80dc5ed0b61",
+      "bytes": 199176,
+      "object": "objects/2b971b6f0cc6612d39a9e01cb84a6a73ba3c803b892e93f92920e80dc5ed0b61.mp3"
+    },
+    "audio/music-kits/arcando_01/startaction_01.mp3": {
+      "sha256": "c45346dd61f0744c8ec68f4d541ce528acc2ac2e190bcfbbb5fd9b595331c459",
+      "bytes": 214194,
+      "object": "objects/c45346dd61f0744c8ec68f4d541ce528acc2ac2e190bcfbbb5fd9b595331c459.mp3"
+    },
+    "audio/music-kits/arcando_01/startofmatch.mp3": {
+      "sha256": "58c76f04d5cfadbb67697a3f4843f79d444166e3f9cf809da17de337b01644e3",
+      "bytes": 224890,
+      "object": "objects/58c76f04d5cfadbb67697a3f4843f79d444166e3f9cf809da17de337b01644e3.mp3"
+    },
+    "audio/music-kits/arcando_01/startround_01.mp3": {
+      "sha256": "b2ccd5babb1fd249e9cc7700b2880c59395f09e699709dbdf3d883d5a4ba50f2",
+      "bytes": 192602,
+      "object": "objects/b2ccd5babb1fd249e9cc7700b2880c59395f09e699709dbdf3d883d5a4ba50f2.mp3"
+    },
+    "audio/music-kits/arcando_01/wonround.mp3": {
+      "sha256": "6e6aacb7a1df48f517e188b084cee7c3248cd564f6b45e52dc84ffc45d655951",
+      "bytes": 134418,
+      "object": "objects/6e6aacb7a1df48f517e188b084cee7c3248cd564f6b45e52dc84ffc45d655951.mp3"
+    },
     "audio/music-kits/art/3kliksphilip_01.png": {
       "sha256": "e8fcd37184d64b910fb78d87a36a2f0780927ff0893c4391caadedb9bcbaf764",
       "bytes": 77735,
@@ -1850,6 +1990,17 @@
         "bytes": 64032
       },
       "object": "objects/2f6f99aa1483b1f7fb22610ae2f6ac1eb9076cd16c35e6e7e5769b2c168095f7.png.br"
+    },
+    "audio/music-kits/art/alleycvt_01.png": {
+      "sha256": "42af2e67c41b80fc07180337adbb6b697a5995987a272255a6c8385efb6f5ddb",
+      "bytes": 79547,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "b644f210f73aab5af6da8a85cdb7f2106ffe9802aedfb70399d9b981bd2868c7",
+        "bytes": 77305
+      },
+      "object": "objects/b644f210f73aab5af6da8a85cdb7f2106ffe9802aedfb70399d9b981bd2868c7.png.br"
     },
     "audio/music-kits/art/alrt_01.png": {
       "sha256": "3ae9ffc037b3dca2eebf286bf70be968b7addc3046cf1f7c3ae05dbacdae78c3",
@@ -1877,6 +2028,17 @@
       "sha256": "9f7f9581f297d7e49990b952744d253766a4fddfcbe8d10f60a3211607f89722",
       "bytes": 69821,
       "object": "objects/9f7f9581f297d7e49990b952744d253766a4fddfcbe8d10f60a3211607f89722.png"
+    },
+    "audio/music-kits/art/arcando_01.png": {
+      "sha256": "e64f94e969f1dc3e722bb0cf5a87f6f8aac367f14f328ef986bfe95c1ea2f4eb",
+      "bytes": 51663,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "7661c42dae3489670e901028412b61d9170130555dde7480e8188ca5de0fb38a",
+        "bytes": 49418
+      },
+      "object": "objects/7661c42dae3489670e901028412b61d9170130555dde7480e8188ca5de0fb38a.png.br"
     },
     "audio/music-kits/art/austinwintory_01.png": {
       "sha256": "e7aa23c1f9841f62fa3d71c243c62a4523845dcbbcee8ab2c717d922c615a556",
@@ -2032,6 +2194,17 @@
       },
       "object": "objects/f69059747c6daf6edd0b0e3c79d52d24ba1fad8e99c662b8092d592378ec6f9e.png.br"
     },
+    "audio/music-kits/art/djdiesel_01.png": {
+      "sha256": "c13f05488e6884b21d873731d19b6965df82f2c7bc46559dfb6853ce8a9f54c2",
+      "bytes": 73952,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "34849d5be9ab4393808d5168370a663c48a8b6c7951b7a289213772a902f97dd",
+        "bytes": 71738
+      },
+      "object": "objects/34849d5be9ab4393808d5168370a663c48a8b6c7951b7a289213772a902f97dd.png.br"
+    },
     "audio/music-kits/art/dren_01.png": {
       "sha256": "e52cc840515cf9496536cb3c2832593c43bdc9a8023d7cae1d2bf013c0d960a3",
       "bytes": 69660,
@@ -2080,6 +2253,17 @@
         "bytes": 35108
       },
       "object": "objects/f4982b6b9127b62b72d44add62455270cb6effeb7d24eb746c5173b2410371b3.png.br"
+    },
+    "audio/music-kits/art/fool_01.png": {
+      "sha256": "faa3a3e0747f3961400e3b37321352fe4eb77238dc1a8fdc81d38f44e35fe137",
+      "bytes": 64407,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "f0a2b04298db1176e42c44cde5c4bcea5fce23bb1470e60382768f8070568f02",
+        "bytes": 62254
+      },
+      "object": "objects/f0a2b04298db1176e42c44cde5c4bcea5fce23bb1470e60382768f8070568f02.png.br"
     },
     "audio/music-kits/art/freakydna_01.png": {
       "sha256": "c2dcf0a9c8994f2bae5a679ab8b6148ac2ef7447fe13f1c0b3ca731e8e912b3b",
@@ -2388,10 +2572,32 @@
       "bytes": 44940,
       "object": "objects/8fdf9fce1300e64fbcccc6c2f6192860dc2896453561757cdae06965110cb701.png"
     },
+    "audio/music-kits/art/noisestorm_01.png": {
+      "sha256": "45a5fcc1e407c3ba9716e3e699ed28b9f2f364e7c0ef2781a62963431e676e59",
+      "bytes": 84035,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "90973c659dd3d81a7defac0b90fc8fb5c30c30ff7c4ef664fdd88edf829b5a2d",
+        "bytes": 82015
+      },
+      "object": "objects/90973c659dd3d81a7defac0b90fc8fb5c30c30ff7c4ef664fdd88edf829b5a2d.png.br"
+    },
     "audio/music-kits/art/noisia_01.png": {
       "sha256": "815fe4573598685980b164f00fc5e4ac0f55013503b159ec2360bfc3e24fcd90",
       "bytes": 55357,
       "object": "objects/815fe4573598685980b164f00fc5e4ac0f55013503b159ec2360bfc3e24fcd90.png"
+    },
+    "audio/music-kits/art/pegboardnerds_01.png": {
+      "sha256": "46693fdb415191ce5725c0e878a62381bac123dc27778d8c151849b995e4cb6b",
+      "bytes": 39305,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "06457a35e13b9940311791fb5a273000a88d10b918ed7a120a07de83f6b001f7",
+        "bytes": 37034
+      },
+      "object": "objects/06457a35e13b9940311791fb5a273000a88d10b918ed7a120a07de83f6b001f7.png.br"
     },
     "audio/music-kits/art/perfectworld_01.png": {
       "sha256": "ac61c0a86f2aafe9f86fe94ba7ddaca40c705c8fc1877fe7734e9fc0b6141aa7",
@@ -2669,6 +2875,17 @@
       },
       "object": "objects/5e8576231932c4e256904c992211f6b0ffbcf5508bcf02fd48d37de499d4248e.png.br"
     },
+    "audio/music-kits/art/tristam_braken_01.png": {
+      "sha256": "4fa9561eb35bcc73053d3b672d673d6d3061cba5d593b74341c11743434db501",
+      "bytes": 30123,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "dacc298be2ec43171ef6ee40d39bbd2ec790f1e8d63ddd1057eec627b213fd25",
+        "bytes": 27828
+      },
+      "object": "objects/dacc298be2ec43171ef6ee40d39bbd2ec790f1e8d63ddd1057eec627b213fd25.png.br"
+    },
     "audio/music-kits/art/troelsfolmann_01.png": {
       "sha256": "4712d188b25bb4e631f256ce8e10f595612e665dd15882f671e6137f80cc5fa3",
       "bytes": 81362,
@@ -2722,6 +2939,17 @@
         "bytes": 52991
       },
       "object": "objects/79db24767377f15472bd9eb56c940f2f2649f5a2c75bde9a54e3d3a6bcf2281b.png.br"
+    },
+    "audio/music-kits/art/vicetone_01.png": {
+      "sha256": "af4a805513406973b249ae75f104f1237d047ed880d0446dda69ca6683be8790",
+      "bytes": 69007,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "c8eb5ff40d6442108d34a98ca67b650317d5a1656154182bbbc97869d6687973",
+        "bytes": 66839
+      },
+      "object": "objects/c8eb5ff40d6442108d34a98ca67b650317d5a1656154182bbbc97869d6687973.png.br"
     },
     "audio/music-kits/austinwintory_01/bombplanted.mp3": {
       "sha256": "12ea59c3181910a95c832e48087910fe99c5437e319c7ce1006bb7ce3357dff8",
@@ -3574,15 +3802,15 @@
       "object": "objects/a5185352e960128ff96042d68e9797c0152c218d2dbe444c12ff09af02187504.mp3"
     },
     "audio/music-kits/catalog.json": {
-      "sha256": "5800bfef69d4c3230dfd685deef37818678c12ffdabcdc88f2b5ceaa5501c99e",
-      "bytes": 514487,
+      "sha256": "a4860e6d3f2514e82980382e154ee2237ec3514e104eda8ba40a4be12edea500",
+      "bytes": 537695,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "71cd997fe55bb7386b1b37920ff898b7f3a871985b43e8c0b3a91ecb06a99167",
-        "bytes": 31896
+        "sha256": "dc6cee52377e89ca513fd41214895d1f16704eb40992b221491ebcc5c39e9bd5",
+        "bytes": 34270
       },
-      "object": "objects/71cd997fe55bb7386b1b37920ff898b7f3a871985b43e8c0b3a91ecb06a99167.json.br"
+      "object": "objects/dc6cee52377e89ca513fd41214895d1f16704eb40992b221491ebcc5c39e9bd5.json.br"
     },
     "audio/music-kits/chipzel_01/bombplanted.mp3": {
       "sha256": "d6429dc0f258c0a01cef42552ad7f1dec1faa032c6f0eb317c345ad1752999ac",
@@ -4219,6 +4447,81 @@
       "bytes": 161878,
       "object": "objects/d7701ff32221268b35b32f6e175374bd03c252c675439a65942e6197f1a17f3f.mp3"
     },
+    "audio/music-kits/djdiesel_01/bombplanted.mp3": {
+      "sha256": "aa877744b307a86b7dd432de701a2638fef3aec5a75b121a364fe10e1ecc42dc",
+      "bytes": 576702,
+      "object": "objects/aa877744b307a86b7dd432de701a2638fef3aec5a75b121a364fe10e1ecc42dc.mp3"
+    },
+    "audio/music-kits/djdiesel_01/bombtenseccount.mp3": {
+      "sha256": "425ed476d6378c2b75f249557b65ab889b4ee5c95d8e9e461c89b6b141961365",
+      "bytes": 173899,
+      "object": "objects/425ed476d6378c2b75f249557b65ab889b4ee5c95d8e9e461c89b6b141961365.mp3"
+    },
+    "audio/music-kits/djdiesel_01/chooseteam.mp3": {
+      "sha256": "00eff4bb8da2276e9f1afae52a535983a994b2a2e11e59b807285a9a69cfad8d",
+      "bytes": 437655,
+      "object": "objects/00eff4bb8da2276e9f1afae52a535983a994b2a2e11e59b807285a9a69cfad8d.mp3"
+    },
+    "audio/music-kits/djdiesel_01/deathcam.mp3": {
+      "sha256": "2438ddc6d34dde9e2d52e02e8072fcb2b98ecf771993adbb6f80871a1a468604",
+      "bytes": 80389,
+      "object": "objects/2438ddc6d34dde9e2d52e02e8072fcb2b98ecf771993adbb6f80871a1a468604.mp3"
+    },
+    "audio/music-kits/djdiesel_01/endofmatch.mp3": {
+      "sha256": "c6e95e296a368ed8f033607818e3ffa69a7e5e218c421896a517c2012f59cca1",
+      "bytes": 1945083,
+      "object": "objects/c6e95e296a368ed8f033607818e3ffa69a7e5e218c421896a517c2012f59cca1.mp3"
+    },
+    "audio/music-kits/djdiesel_01/lostround.mp3": {
+      "sha256": "f45ba3729bd47529241ed41903661a717820067fefa03b9d2fe042a9ddd23331",
+      "bytes": 103626,
+      "object": "objects/f45ba3729bd47529241ed41903661a717820067fefa03b9d2fe042a9ddd23331.mp3"
+    },
+    "audio/music-kits/djdiesel_01/mainmenu.mp3": {
+      "sha256": "6ffc963c20e454687f461e3453da2ab92bc184d50fe4d0ac0379ad2ebe897ec3",
+      "bytes": 3685037,
+      "object": "objects/6ffc963c20e454687f461e3453da2ab92bc184d50fe4d0ac0379ad2ebe897ec3.mp3"
+    },
+    "audio/music-kits/djdiesel_01/roundmvpanthem_01.mp3": {
+      "sha256": "42810a6f360653e6a7bdcad1dece59e23c6d93c8e215731db8d0bd1da7cc93fc",
+      "bytes": 147881,
+      "object": "objects/42810a6f360653e6a7bdcad1dece59e23c6d93c8e215731db8d0bd1da7cc93fc.mp3"
+    },
+    "audio/music-kits/djdiesel_01/roundmvpanthem_02.mp3": {
+      "sha256": "1be337cdae3acfb589db72f793f7df1be9a75deae3b8c890f2118199377bac34",
+      "bytes": 154180,
+      "object": "objects/1be337cdae3acfb589db72f793f7df1be9a75deae3b8c890f2118199377bac34.mp3"
+    },
+    "audio/music-kits/djdiesel_01/roundtenseccount.mp3": {
+      "sha256": "f2a9255d45025085fb4d0bed9a5b7242f51aa693b6f4b0d7aa29ead539eff7f4",
+      "bytes": 175048,
+      "object": "objects/f2a9255d45025085fb4d0bed9a5b7242f51aa693b6f4b0d7aa29ead539eff7f4.mp3"
+    },
+    "audio/music-kits/djdiesel_01/startaction_01.mp3": {
+      "sha256": "5e028a334d89251c5e758372bf947643cabdad0d2a8797317db575ae6e7c254a",
+      "bytes": 207366,
+      "object": "objects/5e028a334d89251c5e758372bf947643cabdad0d2a8797317db575ae6e7c254a.mp3"
+    },
+    "audio/music-kits/djdiesel_01/startaction_02.mp3": {
+      "sha256": "22a240ce8f7ec087069d788d322b9126c35caf122e1ddd99a774b8f25338aaac",
+      "bytes": 207682,
+      "object": "objects/22a240ce8f7ec087069d788d322b9126c35caf122e1ddd99a774b8f25338aaac.mp3"
+    },
+    "audio/music-kits/djdiesel_01/startofmatch.mp3": {
+      "sha256": "6b306ee5fa42d3c792168e0edc4609f4bb0ef696062a09112a7b5075e34b0a10",
+      "bytes": 283516,
+      "object": "objects/6b306ee5fa42d3c792168e0edc4609f4bb0ef696062a09112a7b5075e34b0a10.mp3"
+    },
+    "audio/music-kits/djdiesel_01/startround_01.mp3": {
+      "sha256": "e0179e5e788fc4a966fa474b43050ce29995d13bc4f4cff308d9716c3ec28af2",
+      "bytes": 224311,
+      "object": "objects/e0179e5e788fc4a966fa474b43050ce29995d13bc4f4cff308d9716c3ec28af2.mp3"
+    },
+    "audio/music-kits/djdiesel_01/wonround.mp3": {
+      "sha256": "f8a4557b462b993544424a3fc183dc801c2fb7134118052fdce3053ab2b2bd8d",
+      "bytes": 136697,
+      "object": "objects/f8a4557b462b993544424a3fc183dc801c2fb7134118052fdce3053ab2b2bd8d.mp3"
+    },
     "audio/music-kits/dren_01/bombplanted.mp3": {
       "sha256": "ac421c782743aeb41503379edfe984ee0ad35f00ad879e33015509d5993c4b20",
       "bytes": 615236,
@@ -4623,6 +4926,81 @@
       "sha256": "4814abca2848a0b96aa08d0a650199a85e721462d6c98ecae2b1633cf0f6d7a2",
       "bytes": 132494,
       "object": "objects/4814abca2848a0b96aa08d0a650199a85e721462d6c98ecae2b1633cf0f6d7a2.mp3"
+    },
+    "audio/music-kits/fool_01/bombplanted.mp3": {
+      "sha256": "9ffac9f09bd9dfd181c3cb5284869d99a73ff6032f57f8254a8218040ab7d425",
+      "bytes": 656619,
+      "object": "objects/9ffac9f09bd9dfd181c3cb5284869d99a73ff6032f57f8254a8218040ab7d425.mp3"
+    },
+    "audio/music-kits/fool_01/bombtenseccount.mp3": {
+      "sha256": "696b7506e68e7252a407e8ab7c9fcd71ae92de37b699eda1dd545881fe464fe8",
+      "bytes": 182792,
+      "object": "objects/696b7506e68e7252a407e8ab7c9fcd71ae92de37b699eda1dd545881fe464fe8.mp3"
+    },
+    "audio/music-kits/fool_01/chooseteam.mp3": {
+      "sha256": "c6293445d64fc366816eea14f361f2ccb41f3f29568097baac6d6ce4bcd5626e",
+      "bytes": 387516,
+      "object": "objects/c6293445d64fc366816eea14f361f2ccb41f3f29568097baac6d6ce4bcd5626e.mp3"
+    },
+    "audio/music-kits/fool_01/deathcam.mp3": {
+      "sha256": "9d09a9d852087f6a9ebb16cc0cf1268aa645125324b2615211f3f16459bc0ac3",
+      "bytes": 144194,
+      "object": "objects/9d09a9d852087f6a9ebb16cc0cf1268aa645125324b2615211f3f16459bc0ac3.mp3"
+    },
+    "audio/music-kits/fool_01/endofmatch.mp3": {
+      "sha256": "1969bdc4f91f4ba82a334424285a9652b5e7c56e2c59710f783ca65ac3fc6b4f",
+      "bytes": 1037499,
+      "object": "objects/1969bdc4f91f4ba82a334424285a9652b5e7c56e2c59710f783ca65ac3fc6b4f.mp3"
+    },
+    "audio/music-kits/fool_01/lostround.mp3": {
+      "sha256": "378faf7aa505e8862a106175b6f67c3340987d39e3def09125f0b3b58df6489e",
+      "bytes": 123961,
+      "object": "objects/378faf7aa505e8862a106175b6f67c3340987d39e3def09125f0b3b58df6489e.mp3"
+    },
+    "audio/music-kits/fool_01/mainmenu.mp3": {
+      "sha256": "fc69335fea791b3e5d869e1edd2038aa749467736cc264d5901faf7e564649e7",
+      "bytes": 4317688,
+      "object": "objects/fc69335fea791b3e5d869e1edd2038aa749467736cc264d5901faf7e564649e7.mp3"
+    },
+    "audio/music-kits/fool_01/roundmvpanthem_01.mp3": {
+      "sha256": "f5327dd49e991ca1b627f2da163a657be68d18e2292adf7dad754000a49492a5",
+      "bytes": 148694,
+      "object": "objects/f5327dd49e991ca1b627f2da163a657be68d18e2292adf7dad754000a49492a5.mp3"
+    },
+    "audio/music-kits/fool_01/roundmvpanthem_02.mp3": {
+      "sha256": "f4903c36bd74d9beb1f791107a6ed96e7bc6a99bf2ba8c02e9f1e7d4868846f6",
+      "bytes": 164788,
+      "object": "objects/f4903c36bd74d9beb1f791107a6ed96e7bc6a99bf2ba8c02e9f1e7d4868846f6.mp3"
+    },
+    "audio/music-kits/fool_01/roundtenseccount.mp3": {
+      "sha256": "0da0b77b82e2b6c0281c6dbe22d75ebd81d5b0222ea0266c2f591ccb57602bca",
+      "bytes": 177969,
+      "object": "objects/0da0b77b82e2b6c0281c6dbe22d75ebd81d5b0222ea0266c2f591ccb57602bca.mp3"
+    },
+    "audio/music-kits/fool_01/startaction_01.mp3": {
+      "sha256": "dee3a0c24c7ae254bc733f8fbcbf5744d88af0a0704288f1ca87c4a26b26a94b",
+      "bytes": 246210,
+      "object": "objects/dee3a0c24c7ae254bc733f8fbcbf5744d88af0a0704288f1ca87c4a26b26a94b.mp3"
+    },
+    "audio/music-kits/fool_01/startofmatch.mp3": {
+      "sha256": "9a7ac187ea9be4a3ea0dbcaad2b744400477e5d07db3d97d798ee4c5bcd892ee",
+      "bytes": 241087,
+      "object": "objects/9a7ac187ea9be4a3ea0dbcaad2b744400477e5d07db3d97d798ee4c5bcd892ee.mp3"
+    },
+    "audio/music-kits/fool_01/startround_01.mp3": {
+      "sha256": "3a8aae37c9c434b4efe295bafdece01d628d873000d79ef2140f202ada82f07b",
+      "bytes": 298439,
+      "object": "objects/3a8aae37c9c434b4efe295bafdece01d628d873000d79ef2140f202ada82f07b.mp3"
+    },
+    "audio/music-kits/fool_01/startround_02.mp3": {
+      "sha256": "ba235d6b85b81efceb53e458e8c1b68e351e0005c3388dfbfa3e78cbf8505684",
+      "bytes": 312863,
+      "object": "objects/ba235d6b85b81efceb53e458e8c1b68e351e0005c3388dfbfa3e78cbf8505684.mp3"
+    },
+    "audio/music-kits/fool_01/wonround.mp3": {
+      "sha256": "3c8254b5a56238b55b19bd5bea4a042cbfdbfcb7ce944c58f60df5773774e979",
+      "bytes": 148490,
+      "object": "objects/3c8254b5a56238b55b19bd5bea4a042cbfdbfcb7ce944c58f60df5773774e979.mp3"
     },
     "audio/music-kits/freakydna_01/bombplanted.mp3": {
       "sha256": "8ddd630cb94bf3183ec9fd361df0a994fd2409be2244d6d539497e1766d6b14a",
@@ -7175,15 +7553,15 @@
       "object": "objects/1ef382b246e973daab8033cac9e0cffba3afdefdfc7e910abad191de7737c9c8.mp3"
     },
     "audio/music-kits/native-events.json": {
-      "sha256": "4ffc22463452420fdc97574c2cdfdbf7d238cc82fec97243357eb6e214898104",
-      "bytes": 1648368,
+      "sha256": "3a2c109f239b0ecf8e8eae5574d93aef41295af7cbe98c6ffb34cb00a2a0a89c",
+      "bytes": 1772228,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "082d70f36c603df860d36836ba60a4ba3e7b9dfc45cf648913d256ed740ce337",
-        "bytes": 36629
+        "sha256": "b3e29d772525cfe5a4529e056134d02249ff9712bb52c5d89dbd94fb4d6abf0f",
+        "bytes": 39276
       },
-      "object": "objects/082d70f36c603df860d36836ba60a4ba3e7b9dfc45cf648913d256ed740ce337.json.br"
+      "object": "objects/b3e29d772525cfe5a4529e056134d02249ff9712bb52c5d89dbd94fb4d6abf0f.json.br"
     },
     "audio/music-kits/neckdeep_01/bombplanted.mp3": {
       "sha256": "9b244523a4b064830727bcb399b17c21eff9db3a30d71430e930fcb1ff7600c6",
@@ -7430,6 +7808,76 @@
       "bytes": 146286,
       "object": "objects/9e18b0877e524704d37cfbb8b2fdaa2c4af81b2be9c2638a7b9594f95a216ab3.mp3"
     },
+    "audio/music-kits/noisestorm_01/bombplanted.mp3": {
+      "sha256": "8613b889fb545d69f4b1a9a9f43961fe05bc53d187995e576af1783b1223c1b0",
+      "bytes": 662386,
+      "object": "objects/8613b889fb545d69f4b1a9a9f43961fe05bc53d187995e576af1783b1223c1b0.mp3"
+    },
+    "audio/music-kits/noisestorm_01/bombtenseccount.mp3": {
+      "sha256": "e2a3dfd7feb1fa73e7a27cca1d86ca6051c932acf47c01f962116c12dce57f35",
+      "bytes": 200112,
+      "object": "objects/e2a3dfd7feb1fa73e7a27cca1d86ca6051c932acf47c01f962116c12dce57f35.mp3"
+    },
+    "audio/music-kits/noisestorm_01/chooseteam.mp3": {
+      "sha256": "e9e7a60581c5f77f4005c752a849ed6e442cfcbee49db120dbf8d21f442da018",
+      "bytes": 435336,
+      "object": "objects/e9e7a60581c5f77f4005c752a849ed6e442cfcbee49db120dbf8d21f442da018.mp3"
+    },
+    "audio/music-kits/noisestorm_01/deathcam.mp3": {
+      "sha256": "7306ac8c68aadb852ad7ac6a723c156f7479060f027a66e09f1a45833dbb9a99",
+      "bytes": 89703,
+      "object": "objects/7306ac8c68aadb852ad7ac6a723c156f7479060f027a66e09f1a45833dbb9a99.mp3"
+    },
+    "audio/music-kits/noisestorm_01/endofmatch.mp3": {
+      "sha256": "79977f792c68f661ad456a0b5695a216a30c845d5724e82d7c6eac8f256f23f1",
+      "bytes": 1461967,
+      "object": "objects/79977f792c68f661ad456a0b5695a216a30c845d5724e82d7c6eac8f256f23f1.mp3"
+    },
+    "audio/music-kits/noisestorm_01/lostround.mp3": {
+      "sha256": "29ce3b27d7e4527e26e268a9030cfa7c4384d9593c8996aae39c9aa1354e9eaf",
+      "bytes": 117424,
+      "object": "objects/29ce3b27d7e4527e26e268a9030cfa7c4384d9593c8996aae39c9aa1354e9eaf.mp3"
+    },
+    "audio/music-kits/noisestorm_01/mainmenu.mp3": {
+      "sha256": "bca12eb43ce97d25be0d995071387a02836eaf2880693eafbf6eba0352a8166e",
+      "bytes": 2896409,
+      "object": "objects/bca12eb43ce97d25be0d995071387a02836eaf2880693eafbf6eba0352a8166e.mp3"
+    },
+    "audio/music-kits/noisestorm_01/roundmvpanthem_01.mp3": {
+      "sha256": "6aababcba9ab6e171f52fc54157963af248c4df2bb94cdc7bd3354c149eb3bff",
+      "bytes": 116895,
+      "object": "objects/6aababcba9ab6e171f52fc54157963af248c4df2bb94cdc7bd3354c149eb3bff.mp3"
+    },
+    "audio/music-kits/noisestorm_01/roundmvpanthem_02.mp3": {
+      "sha256": "50fd74066b86d3f89ab64d00c8fcfb7ab7212daf311d43dcbad824d2bdd6168f",
+      "bytes": 117736,
+      "object": "objects/50fd74066b86d3f89ab64d00c8fcfb7ab7212daf311d43dcbad824d2bdd6168f.mp3"
+    },
+    "audio/music-kits/noisestorm_01/roundtenseccount.mp3": {
+      "sha256": "d6fe2cd1d9d1e53745fb4f92724ab30650132321ce690eed30c3948cfaac23df",
+      "bytes": 186770,
+      "object": "objects/d6fe2cd1d9d1e53745fb4f92724ab30650132321ce690eed30c3948cfaac23df.mp3"
+    },
+    "audio/music-kits/noisestorm_01/startaction_01.mp3": {
+      "sha256": "99ed6bec5a2c04d3ae9c1bb623e23c97c60aa071ca334ce1f47eca619d47c4c8",
+      "bytes": 338806,
+      "object": "objects/99ed6bec5a2c04d3ae9c1bb623e23c97c60aa071ca334ce1f47eca619d47c4c8.mp3"
+    },
+    "audio/music-kits/noisestorm_01/startofmatch.mp3": {
+      "sha256": "837d5e5131179d335126809ba69a9bdbe7d25e50c8bacaf889bedda015e9f5ae",
+      "bytes": 299763,
+      "object": "objects/837d5e5131179d335126809ba69a9bdbe7d25e50c8bacaf889bedda015e9f5ae.mp3"
+    },
+    "audio/music-kits/noisestorm_01/startround_01.mp3": {
+      "sha256": "d4fa6cb69f544f1859aa4133ecb56856d52c10487d19ac27889270cc7b993a9b",
+      "bytes": 180664,
+      "object": "objects/d4fa6cb69f544f1859aa4133ecb56856d52c10487d19ac27889270cc7b993a9b.mp3"
+    },
+    "audio/music-kits/noisestorm_01/wonround.mp3": {
+      "sha256": "9e65deab2d1ff1d00f5b0b4c71855c43d4d2216063d61552187ef34537a51134",
+      "bytes": 116902,
+      "object": "objects/9e65deab2d1ff1d00f5b0b4c71855c43d4d2216063d61552187ef34537a51134.mp3"
+    },
     "audio/music-kits/noisia_01/bombplanted.mp3": {
       "sha256": "f304a2c07cd2114ae6dfaef038276b6a2594d83f06610497a982f7bfea84ea8a",
       "bytes": 810423,
@@ -7509,6 +7957,76 @@
       "sha256": "5ebad5db04b52489105c5c8e180082abd15cac5f2b5c0e841b18b75cf625857d",
       "bytes": 246596,
       "object": "objects/5ebad5db04b52489105c5c8e180082abd15cac5f2b5c0e841b18b75cf625857d.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/bombplanted.mp3": {
+      "sha256": "69c313882eab9ea8ef867a7b0687ed0eefdc4f173a1394c8830e44456d20e97c",
+      "bytes": 632549,
+      "object": "objects/69c313882eab9ea8ef867a7b0687ed0eefdc4f173a1394c8830e44456d20e97c.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/bombtenseccount.mp3": {
+      "sha256": "765607f4fcbafdd1bc20178a3569efc33ab463532b32a68e2b813e771f7c4c09",
+      "bytes": 183285,
+      "object": "objects/765607f4fcbafdd1bc20178a3569efc33ab463532b32a68e2b813e771f7c4c09.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/chooseteam.mp3": {
+      "sha256": "7dd2c8392f3f1b373d2ba4dc39458257ba40ba9b2aedadb35fdfc6591e63939b",
+      "bytes": 286805,
+      "object": "objects/7dd2c8392f3f1b373d2ba4dc39458257ba40ba9b2aedadb35fdfc6591e63939b.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/deathcam.mp3": {
+      "sha256": "bdc1ddc9cfc074438ff7284f11c831a2cfe2cee1b0e64b45f5a85638216afbc2",
+      "bytes": 81438,
+      "object": "objects/bdc1ddc9cfc074438ff7284f11c831a2cfe2cee1b0e64b45f5a85638216afbc2.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/endofmatch.mp3": {
+      "sha256": "6034eb86121b07de77d6fddb1f2316b438bd22ca8c228bf29eb7d9d73b93ff94",
+      "bytes": 1361227,
+      "object": "objects/6034eb86121b07de77d6fddb1f2316b438bd22ca8c228bf29eb7d9d73b93ff94.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/lostround.mp3": {
+      "sha256": "463553263c80e51fca9244df36e186ec5c09fb8f95e5a4ebdb67aa9c1d174890",
+      "bytes": 141072,
+      "object": "objects/463553263c80e51fca9244df36e186ec5c09fb8f95e5a4ebdb67aa9c1d174890.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/mainmenu.mp3": {
+      "sha256": "3f85489b881f2eb5484fd6796ec9177655851f3e1fe49d6f75e57b6090e21ce5",
+      "bytes": 4038523,
+      "object": "objects/3f85489b881f2eb5484fd6796ec9177655851f3e1fe49d6f75e57b6090e21ce5.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/roundmvpanthem_01.mp3": {
+      "sha256": "f19d696ddac09fda3c004b332adf9d055e221f03f2a5ee30d6a6092ddaf7fe8f",
+      "bytes": 129401,
+      "object": "objects/f19d696ddac09fda3c004b332adf9d055e221f03f2a5ee30d6a6092ddaf7fe8f.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/roundmvpanthem_02.mp3": {
+      "sha256": "efbf0f5a8039bbb9965e66c05fc9baddb0ae0b6455c9d54574d05d8f51c6964e",
+      "bytes": 132544,
+      "object": "objects/efbf0f5a8039bbb9965e66c05fc9baddb0ae0b6455c9d54574d05d8f51c6964e.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/roundtenseccount.mp3": {
+      "sha256": "87f481fbae7d3ab8780f6fbc7d636c5d0e6a0eb1f48497d03293782a0849033d",
+      "bytes": 198128,
+      "object": "objects/87f481fbae7d3ab8780f6fbc7d636c5d0e6a0eb1f48497d03293782a0849033d.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/startaction_01.mp3": {
+      "sha256": "e377bc7d596cf480de2bf3bc2806ec6e0f611e4d2d22c891db875c5acd01de8c",
+      "bytes": 306998,
+      "object": "objects/e377bc7d596cf480de2bf3bc2806ec6e0f611e4d2d22c891db875c5acd01de8c.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/startofmatch.mp3": {
+      "sha256": "2b3b0a40cb175a94a514f96649b6957f085a67632ef3f087fb6a984d119c9cea",
+      "bytes": 258241,
+      "object": "objects/2b3b0a40cb175a94a514f96649b6957f085a67632ef3f087fb6a984d119c9cea.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/startround_01.mp3": {
+      "sha256": "e277181061255a9379ed65dd206096820312555d81cf4344d2573a5173ca6669",
+      "bytes": 295416,
+      "object": "objects/e277181061255a9379ed65dd206096820312555d81cf4344d2573a5173ca6669.mp3"
+    },
+    "audio/music-kits/pegboardnerds_01/wonround.mp3": {
+      "sha256": "99454ec631cd218963b4a702d9a94f62c2db6a29f94d302847299ec898870de2",
+      "bytes": 132217,
+      "object": "objects/99454ec631cd218963b4a702d9a94f62c2db6a29f94d302847299ec898870de2.mp3"
     },
     "audio/music-kits/perfectworld_01/bombplanted.mp3": {
       "sha256": "fb903a4cc7df16671669090bf64d7870e82db548cb362c087053be8a71668c26",
@@ -7961,15 +8479,15 @@
       "object": "objects/ea7ce9a88bdac6ec3fd58d5d39f4bf3b34d582e2af0299e6e473bc6851586172.mp3"
     },
     "audio/music-kits/README.md": {
-      "sha256": "3a292353afea04db0e6b5550ccd087175d5be5222e7e09be9351de5ef500e0c3",
-      "bytes": 6804,
+      "sha256": "f436ba51231b7e4bb98b46bb7c35f6c589216c3816511fc88eabf3d99eb8db7a",
+      "bytes": 8754,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "be5bb0160503b9c0a6b76e0235bba7f780f86b8de45e1ca6577022d7e7568ee7",
-        "bytes": 2470
+        "sha256": "440e7783b7b778f51113c134774ba52a1e7dd7ef1e82196d111d6dd7c0f57be2",
+        "bytes": 3221
       },
-      "object": "objects/be5bb0160503b9c0a6b76e0235bba7f780f86b8de45e1ca6577022d7e7568ee7.md.br"
+      "object": "objects/440e7783b7b778f51113c134774ba52a1e7dd7ef1e82196d111d6dd7c0f57be2.md.br"
     },
     "audio/music-kits/repiet_01/bombplanted.mp3": {
       "sha256": "3370a736ed1ad7270d5dc394dc9aebaa11cc515eb7a58342fca5c90eef672231",
@@ -9102,15 +9620,15 @@
       "object": "objects/ff363749dd63c466b3cfae0686dc40680243bdbd8491bfd784a4076e8504cea0.mp3"
     },
     "audio/music-kits/source.json": {
-      "sha256": "92d05b58d7938ee82224224cd0af5081101a641f4bdf2490b0bee7d9f56397f0",
-      "bytes": 4599292,
+      "sha256": "139fbb10965719d3650520b0f91eae7cf74e1ba4d0626db57c216c62fa67c811",
+      "bytes": 4879171,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "9bdc43a73b82c12241951c13260880f6687dd23ae0400c2dfe5683765511bb7d",
-        "bytes": 281130
+        "sha256": "5a6cfc89a9a6ef201fe34f6efd25663467237b21fa8cf2f99c3163972f43034c",
+        "bytes": 300762
       },
-      "object": "objects/9bdc43a73b82c12241951c13260880f6687dd23ae0400c2dfe5683765511bb7d.json.br"
+      "object": "objects/5a6cfc89a9a6ef201fe34f6efd25663467237b21fa8cf2f99c3163972f43034c.json.br"
     },
     "audio/music-kits/starjunk95_01/bombplanted.mp3": {
       "sha256": "e893f8a7e3aa807336ff7201b03a19e56883c3d8dcaa859ed616a1cedb268505",
@@ -9807,6 +10325,86 @@
       "bytes": 167602,
       "object": "objects/2d9060c04cfaa4ac4ef65543ac76011dfef33587d1cf402b61adab4ce9172f18.mp3"
     },
+    "audio/music-kits/tristam_braken_01/bombplanted.mp3": {
+      "sha256": "230e06418b56ee9f5e96efcde0fb2830b1be78aefbc995335f3b496dc41074c4",
+      "bytes": 643628,
+      "object": "objects/230e06418b56ee9f5e96efcde0fb2830b1be78aefbc995335f3b496dc41074c4.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/bombtenseccount.mp3": {
+      "sha256": "f2951099dc98e40d1e40abebc6cadbc41d6ebdf3b60c39176fd4eb4bd32f4f82",
+      "bytes": 181731,
+      "object": "objects/f2951099dc98e40d1e40abebc6cadbc41d6ebdf3b60c39176fd4eb4bd32f4f82.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/chooseteam.mp3": {
+      "sha256": "2b40310e4dc97d3c82f0fb2387f83fd9c436d91dc09e122786f0149cb3eace67",
+      "bytes": 431202,
+      "object": "objects/2b40310e4dc97d3c82f0fb2387f83fd9c436d91dc09e122786f0149cb3eace67.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/deathcam.mp3": {
+      "sha256": "18484152388c58d2bba7b313ae7432daee5d16b0017c713641230e6bdc14d87f",
+      "bytes": 82776,
+      "object": "objects/18484152388c58d2bba7b313ae7432daee5d16b0017c713641230e6bdc14d87f.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/endofmatch.mp3": {
+      "sha256": "77cbbbeb6c8e36569f6191e04b773af826cbf0abe7494cfc999775fc6d377f10",
+      "bytes": 2318286,
+      "object": "objects/77cbbbeb6c8e36569f6191e04b773af826cbf0abe7494cfc999775fc6d377f10.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/lostround.mp3": {
+      "sha256": "589203d81a9301833092c19d3695ddc5a9c94ba8a37ceb14793da3d261c7577d",
+      "bytes": 125524,
+      "object": "objects/589203d81a9301833092c19d3695ddc5a9c94ba8a37ceb14793da3d261c7577d.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/mainmenu.mp3": {
+      "sha256": "043873a3472e53d7a91e6d2d8ed245a0e18ebbd24e24045b7389e8d8ae0d5fda",
+      "bytes": 3568484,
+      "object": "objects/043873a3472e53d7a91e6d2d8ed245a0e18ebbd24e24045b7389e8d8ae0d5fda.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/roundmvpanthem_01.mp3": {
+      "sha256": "e1891549eadf57ca40f8dba789d1efdbc64a7b803f83294d9ee0977323fd85fd",
+      "bytes": 121044,
+      "object": "objects/e1891549eadf57ca40f8dba789d1efdbc64a7b803f83294d9ee0977323fd85fd.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/roundmvpanthem_02.mp3": {
+      "sha256": "545b9645162d4dcce66d2d5bb9a7fda1e244e151673f01aa7cfefcd2acce98bd",
+      "bytes": 122098,
+      "object": "objects/545b9645162d4dcce66d2d5bb9a7fda1e244e151673f01aa7cfefcd2acce98bd.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/roundtenseccount.mp3": {
+      "sha256": "51d489ea9a41962b668b8814b253abe8396b58c328d2438c96ce504216c802fb",
+      "bytes": 205419,
+      "object": "objects/51d489ea9a41962b668b8814b253abe8396b58c328d2438c96ce504216c802fb.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/startaction_01.mp3": {
+      "sha256": "eafebe8db07e59875042f7f6694beca03c06831387741c0906e88c16698ea96d",
+      "bytes": 217794,
+      "object": "objects/eafebe8db07e59875042f7f6694beca03c06831387741c0906e88c16698ea96d.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/startaction_02.mp3": {
+      "sha256": "32b92ad46ba560ad7f96e50a29a8cb3e7ae7a1f3bdc9006f0fccce5f2ce60ff5",
+      "bytes": 216956,
+      "object": "objects/32b92ad46ba560ad7f96e50a29a8cb3e7ae7a1f3bdc9006f0fccce5f2ce60ff5.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/startofmatch.mp3": {
+      "sha256": "dbe762dcbdacb439ee52521680cc5c35889ed169acfebc538ccb0bdf7b16f6bf",
+      "bytes": 277646,
+      "object": "objects/dbe762dcbdacb439ee52521680cc5c35889ed169acfebc538ccb0bdf7b16f6bf.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/startround_01.mp3": {
+      "sha256": "a79fbdecd141ceed0a4564d6ada9169280c0412368d4233ef22f022cdcfb31fe",
+      "bytes": 182677,
+      "object": "objects/a79fbdecd141ceed0a4564d6ada9169280c0412368d4233ef22f022cdcfb31fe.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/startround_02.mp3": {
+      "sha256": "2d325a094b3db67229a4ce1c3f4ac60b8fbe0bed3926670373b6577e9ffaa423",
+      "bytes": 182149,
+      "object": "objects/2d325a094b3db67229a4ce1c3f4ac60b8fbe0bed3926670373b6577e9ffaa423.mp3"
+    },
+    "audio/music-kits/tristam_braken_01/wonround.mp3": {
+      "sha256": "e683fba61966437c12d33b26f087bb856f29059bf5bf1c6479169b4bd1f2692b",
+      "bytes": 120943,
+      "object": "objects/e683fba61966437c12d33b26f087bb856f29059bf5bf1c6479169b4bd1f2692b.mp3"
+    },
     "audio/music-kits/troelsfolmann_01/bombplanted.mp3": {
       "sha256": "ac494a4da5385b802e45a563df17b133b663ccb69e4c519ac17060a7b55741e8",
       "bytes": 581800,
@@ -10251,6 +10849,76 @@
       "sha256": "4bf3023af5b35ce8c9311614098682e66e287937a1652a095395c78c2c0fa8ce",
       "bytes": 101545,
       "object": "objects/4bf3023af5b35ce8c9311614098682e66e287937a1652a095395c78c2c0fa8ce.mp3"
+    },
+    "audio/music-kits/vicetone_01/bombplanted.mp3": {
+      "sha256": "75c86579e2b1affcafd5e25fb28d6aa423c5df67e9daf310004eb5e72b81209b",
+      "bytes": 654939,
+      "object": "objects/75c86579e2b1affcafd5e25fb28d6aa423c5df67e9daf310004eb5e72b81209b.mp3"
+    },
+    "audio/music-kits/vicetone_01/bombtenseccount.mp3": {
+      "sha256": "75075e84665c3dcbb36b95dfdd724a4d9a833fae60cb5a6e569fc234fcf36ec2",
+      "bytes": 204405,
+      "object": "objects/75075e84665c3dcbb36b95dfdd724a4d9a833fae60cb5a6e569fc234fcf36ec2.mp3"
+    },
+    "audio/music-kits/vicetone_01/chooseteam.mp3": {
+      "sha256": "407af856a0dc3e13a67d8823e8817d0b34b06e64f71adaf4b9cdf03aaafc8b51",
+      "bytes": 452584,
+      "object": "objects/407af856a0dc3e13a67d8823e8817d0b34b06e64f71adaf4b9cdf03aaafc8b51.mp3"
+    },
+    "audio/music-kits/vicetone_01/deathcam.mp3": {
+      "sha256": "cacc223310f4da114903b5a5ab76c334bae91971bb5b905e590799e560fc9776",
+      "bytes": 96654,
+      "object": "objects/cacc223310f4da114903b5a5ab76c334bae91971bb5b905e590799e560fc9776.mp3"
+    },
+    "audio/music-kits/vicetone_01/endofmatch.mp3": {
+      "sha256": "accc8d3ec157bac8925e9286892faf8f0f33ea7d79fba084a18a6970f631f7cd",
+      "bytes": 1635353,
+      "object": "objects/accc8d3ec157bac8925e9286892faf8f0f33ea7d79fba084a18a6970f631f7cd.mp3"
+    },
+    "audio/music-kits/vicetone_01/lostround.mp3": {
+      "sha256": "e342f37dd74cafeec10f22fb4d1bed3dc2e6ca949fe1e15574720bc24bc53765",
+      "bytes": 134406,
+      "object": "objects/e342f37dd74cafeec10f22fb4d1bed3dc2e6ca949fe1e15574720bc24bc53765.mp3"
+    },
+    "audio/music-kits/vicetone_01/mainmenu.mp3": {
+      "sha256": "60d601240b745b943994390a7b1b20bec24cebb7ff009f0e42d90ad696ab2f50",
+      "bytes": 3506068,
+      "object": "objects/60d601240b745b943994390a7b1b20bec24cebb7ff009f0e42d90ad696ab2f50.mp3"
+    },
+    "audio/music-kits/vicetone_01/roundmvpanthem_01.mp3": {
+      "sha256": "64f6dbd4ec047438493125f94306007f057126e2a939cb4d9fbecd902058a71b",
+      "bytes": 139955,
+      "object": "objects/64f6dbd4ec047438493125f94306007f057126e2a939cb4d9fbecd902058a71b.mp3"
+    },
+    "audio/music-kits/vicetone_01/roundmvpanthem_02.mp3": {
+      "sha256": "404d577a4108a1c00e57cf27dbbdbcc4fd4a156c1e773bdb5b800ce2e1374135",
+      "bytes": 137122,
+      "object": "objects/404d577a4108a1c00e57cf27dbbdbcc4fd4a156c1e773bdb5b800ce2e1374135.mp3"
+    },
+    "audio/music-kits/vicetone_01/roundtenseccount.mp3": {
+      "sha256": "f70e14b9379968062de6d0a831ff73e6164b1124984f8b968291f7290730eb0e",
+      "bytes": 190282,
+      "object": "objects/f70e14b9379968062de6d0a831ff73e6164b1124984f8b968291f7290730eb0e.mp3"
+    },
+    "audio/music-kits/vicetone_01/startaction_01.mp3": {
+      "sha256": "bf068e260b3d8a598c73e1ccc1ec54b27840cc141707ca4895b408e771ad8417",
+      "bytes": 217869,
+      "object": "objects/bf068e260b3d8a598c73e1ccc1ec54b27840cc141707ca4895b408e771ad8417.mp3"
+    },
+    "audio/music-kits/vicetone_01/startofmatch.mp3": {
+      "sha256": "5f0e61d142c22282bc7f2114c0be5b283d0c499cf9b36cd9362fe01b61edc47f",
+      "bytes": 303365,
+      "object": "objects/5f0e61d142c22282bc7f2114c0be5b283d0c499cf9b36cd9362fe01b61edc47f.mp3"
+    },
+    "audio/music-kits/vicetone_01/startround_01.mp3": {
+      "sha256": "ebeb6ccfbc7aa5d290d39e9478cfd0fa58db1fd1cfb37260839b4b9975542789",
+      "bytes": 303983,
+      "object": "objects/ebeb6ccfbc7aa5d290d39e9478cfd0fa58db1fd1cfb37260839b4b9975542789.mp3"
+    },
+    "audio/music-kits/vicetone_01/wonround.mp3": {
+      "sha256": "64f6dbd4ec047438493125f94306007f057126e2a939cb4d9fbecd902058a71b",
+      "bytes": 139955,
+      "object": "objects/64f6dbd4ec047438493125f94306007f057126e2a939cb4d9fbecd902058a71b.mp3"
     },
     "audio/negev_boxin.ogg": {
       "sha256": "e8dc61a08b5ad12e9e6d679d197755536d99c5c1c16c6b0784b6cade0063ac79",
@@ -79555,6 +80223,11 @@
       "bytes": 1751565,
       "object": "objects/b1363bb34a9cac1963e94bdb5c571fcde4231e8ed3fefa42c86faf277e70d544.png"
     },
+    "models/music-kit/covers/alleycvt_01.png": {
+      "sha256": "8fa539aa8f4a8f3555e394d80edfe4391cbd215a00d6e0ace3e7cbeef0777f6e",
+      "bytes": 825667,
+      "object": "objects/8fa539aa8f4a8f3555e394d80edfe4391cbd215a00d6e0ace3e7cbeef0777f6e.png"
+    },
     "models/music-kit/covers/alrt_01.png": {
       "sha256": "5dfb6176f7f3f5da644a335da231a1bafcbc192eebed7f39125deebba330290d",
       "bytes": 1377199,
@@ -79569,6 +80242,11 @@
       "sha256": "3cf3b67772f4ec0431db9140e7db67b89420bf17c89004dfa353c85d5248a057",
       "bytes": 313770,
       "object": "objects/3cf3b67772f4ec0431db9140e7db67b89420bf17c89004dfa353c85d5248a057.png"
+    },
+    "models/music-kit/covers/arcando_01.png": {
+      "sha256": "33f4ed69c3c6a40ba997b673918cbff2d196d3791ec2a96621dca15a306a812d",
+      "bytes": 661992,
+      "object": "objects/33f4ed69c3c6a40ba997b673918cbff2d196d3791ec2a96621dca15a306a812d.png"
     },
     "models/music-kit/covers/austinwintory_01.png": {
       "sha256": "dbb070be81a7dee4f1fabee41814cbc495e2af99f7f59a772cf31d7bdc556c7e",
@@ -79694,6 +80372,11 @@
       "bytes": 366664,
       "object": "objects/4e73cbb6b9a4dccaab04efcde7d0ff0013831571dc0d1d9f0c5c789fa1d31c66.png"
     },
+    "models/music-kit/covers/djdiesel_01.png": {
+      "sha256": "39c15b90de77f9527e67eabb6b07ec8556096225742dd5533733482f2c1c63cd",
+      "bytes": 1418563,
+      "object": "objects/39c15b90de77f9527e67eabb6b07ec8556096225742dd5533733482f2c1c63cd.png"
+    },
     "models/music-kit/covers/dren_01.png": {
       "sha256": "25ed41fb2e71c58e570a3c4c3213f600b598c43418fc533423f6150309fe840e",
       "bytes": 73259,
@@ -79724,6 +80407,11 @@
         "bytes": 7718
       },
       "object": "objects/db1b788b2dfaa37b8106a7e6706224d4c554c8edf1a7ab947c508b92f441ff10.png.br"
+    },
+    "models/music-kit/covers/fool_01.png": {
+      "sha256": "1c03feddfa6deb18a140ae417cac5dd0c220a1e8ff8333a3e99dd899cf7c5b3f",
+      "bytes": 930298,
+      "object": "objects/1c03feddfa6deb18a140ae417cac5dd0c220a1e8ff8333a3e99dd899cf7c5b3f.png"
     },
     "models/music-kit/covers/freakydna_01.png": {
       "sha256": "b409fc8c8d9be2ca28575b2331104bd1b3eb20a68b402561cc8ec83463caccb0",
@@ -79942,10 +80630,26 @@
       },
       "object": "objects/17b0441ed48068ce1aae539ea576f4b61cbca94c64050dfa1fb362dee50f5e5e.png.br"
     },
+    "models/music-kit/covers/noisestorm_01.png": {
+      "sha256": "9a1bad1c9a6bc50b2f7f71c70e4e814d9293246570b76cda278ac470bebb1f3c",
+      "bytes": 1338858,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "6767140aef495f954e695c0788083c53a1f94a016c9daeb087ccf3b2fa1631b5",
+        "bytes": 1338841
+      },
+      "object": "objects/6767140aef495f954e695c0788083c53a1f94a016c9daeb087ccf3b2fa1631b5.png.br"
+    },
     "models/music-kit/covers/noisia_01.png": {
       "sha256": "a62a77e07b83e3cd9f8dbd6d48e01449ba499e61ed523ed0a8e5283205197411",
       "bytes": 41991,
       "object": "objects/a62a77e07b83e3cd9f8dbd6d48e01449ba499e61ed523ed0a8e5283205197411.png"
+    },
+    "models/music-kit/covers/pegboardnerds_01.png": {
+      "sha256": "b706b88c68ed3c06a16b81663ef16dd957e1e566bdd98cb5c73d2cd166208beb",
+      "bytes": 337817,
+      "object": "objects/b706b88c68ed3c06a16b81663ef16dd957e1e566bdd98cb5c73d2cd166208beb.png"
     },
     "models/music-kit/covers/perfectworld_01.png": {
       "sha256": "171c7bde48d7a1895d6a93c285cca6b2c4184fd73843ba86cff22320c4af789d",
@@ -80139,6 +80843,17 @@
       "bytes": 391302,
       "object": "objects/5f35c2e7cc5c9b98220c8e510c9c96f285de70c77d1f3bf447a5044cf92ec89c.png"
     },
+    "models/music-kit/covers/tristam_braken_01.png": {
+      "sha256": "a7d314b544f4be645e67e5049d824133d662504674d3163a53237991da0ef0e6",
+      "bytes": 246047,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "ce840e0fb01cf0047d71c0cc3dd0e0436e4569ab2790e3a72512698cd650ba48",
+        "bytes": 242456
+      },
+      "object": "objects/ce840e0fb01cf0047d71c0cc3dd0e0436e4569ab2790e3a72512698cd650ba48.png.br"
+    },
     "models/music-kit/covers/troelsfolmann_01.png": {
       "sha256": "35e574cdf63da6b56bfd97b01023d73de2b669df15361dc1ee64f2a6fd7da38b",
       "bytes": 83914,
@@ -80174,6 +80889,11 @@
         "bytes": 428224
       },
       "object": "objects/95d9f4bcfbe7f65087f0f1a794a61b6dc002fa613ad77b3ee48c02c2b16a0fa5.png.br"
+    },
+    "models/music-kit/covers/vicetone_01.png": {
+      "sha256": "fa8feef7b78e9d371d899243f39ad3efa61bdf8f77674c574530cf2eaeca6b14",
+      "bytes": 1499106,
+      "object": "objects/fa8feef7b78e9d371d899243f39ad3efa61bdf8f77674c574530cf2eaeca6b14.png"
     },
     "models/music-kit/label-normal.png": {
       "sha256": "db3c5f7f999575b77c8968b1a0e5b82c59205ef4d1a20c08b6f17cb5dc7f5122",
@@ -80265,15 +80985,15 @@
       "object": "objects/a9d18a67cddba1ddfdd741f2d365213200edfdd2e786cf0b26336e3c0a972672.png.br"
     },
     "models/music-kit/source.json": {
-      "sha256": "b0e3abb9f5c363cf81ec29daf72ed0b14337d6ecfeb9595cc12e23287d135458",
-      "bytes": 55350,
+      "sha256": "63da1ba277c70176f697e04eadf7590f098a714d851609b679a069e588bf223c",
+      "bytes": 61330,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "66a3890e775dfc69a62f659b36e53aed3fe9b2ea02d21110dea95b998d60dedb",
-        "bytes": 7849
+        "sha256": "0992a4444857a80604ee03dab3d652241f947984a2e9287454dd38f3a9a1ed4f",
+        "bytes": 9068
       },
-      "object": "objects/66a3890e775dfc69a62f659b36e53aed3fe9b2ea02d21110dea95b998d60dedb.json.br"
+      "object": "objects/0992a4444857a80604ee03dab3d652241f947984a2e9287454dd38f3a9a1ed4f.json.br"
     },
     "models/usp-s.glb.gz": {
       "sha256": "4bc3f62d78b835220f45c2d17480a7c611bcb321bfb378928710b42d1138feef",

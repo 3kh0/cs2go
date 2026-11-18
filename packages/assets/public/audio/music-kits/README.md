@@ -1,18 +1,19 @@
 # Native CS2 music kits
 
 Music, compositions and artwork belong to Valve and the credited artists. This
-library is imported from the user's installed Counter-Strike 2 content. The
+library is imported from the user's installed Counter-Strike 2 content and the
+public Valve Steam depot. The
 catalog preserves the shipped music-definition IDs, display text, inventory
 artwork and all kit audio, including alternate recordings not assigned to a
 current event. StatTrak and ordinary items share the same music definition and
 media rather than duplicating the library.
 
-The runtime library contains 1,581 kit audio assets: 1,442 native MP3 files and
-139 Ogg Opus delivery files, totaling 849,431,078 bytes, plus 102 inventory images.
+The runtime library contains 1,697 kit audio assets: 1,558 native MP3 files and
+139 Ogg Opus delivery files, totaling 913,211,206 bytes, plus 110 inventory images.
 The separate reference export also retains global stingers, an empty sound and
 unused physical-case texture maps; these are not mislabeled as kit tracks.
 
-`catalog.json` is the compact runtime index. It includes all 102 shipped music
+`catalog.json` is the compact runtime index. It includes all 110 shipped music
 definitions and their 19 event declarations each. The `valve_02` legacy alternate
 has no current English localization; its native identifier is retained rather
 than inventing an official title. `valve_cs2_01` is definition 1; `valve_02` is
@@ -23,7 +24,45 @@ definition 2; `valve_01` is the CS:GO kit at definition 70. Missing definition I
 properties, including the stop/group/priority flags. `source.json` records the
 original VPK members, archive offsets, CRC32/SHA-256, sound headers, decoded media
 hashes and runtime bindings. The original native files are external inputs and
-are never edited. Decoding uses official Source 2 Viewer CLI 20.1.
+are never edited. The original import uses official Source 2 Viewer CLI 20.1;
+the Monstercat additions use CLI 21.1.
+
+## Monstercat release — November 17, 2026
+
+Definitions 105–112 add:
+
+- ALLEYCVT & LEVEL UP, *BELIEVE*
+- Arcando & Pirapus, *Ultrasound*
+- DJ DIESEL & Hairitage, *BANG YOUR HEAD*
+- F.O.O.L, *Criminals*
+- Noisestorm, *Crab Rave*
+- Pegboard Nerds, *Disconnected*
+- Tristam & Braken, *Flight*
+- Vicetone & Cozi Zuehlsdorff, *Nevada*
+
+These add 116 unchanged native MP3 payloads (63,780,128 bytes), eight inventory
+icons and eight native sleeve textures for 3D inspection.
+Each kit retains all 19 event declarations and both MVP recordings. BANG YOUR
+HEAD also includes its unassigned `startaction_02` recording under Additional
+tracks. Ordinary and StatTrak versions use the same kit.
+
+This import uses anonymous Steam app 730, depot 2347770, pinned manifest
+`239443625111074552` (CS2 1.41.9.8). Only `pak01_dir.vpk`, `steam.inf` and
+archives 502, 544, 545 and 546 were downloaded. Sleeve textures follow each
+kit's exact `sleeve_cover.vmat` color dependency, with provenance also recorded
+in `/models/music-kit/source.json`. Every selected VPK member passes
+its directory CRC32, and each exported MP3 is verified against the native stream
+bytes and fully decoded with FFmpeg. `source.json` records this release under
+`additionalReleases`, with per-member `sourceRelease` links, original resource
+hashes, audio headers, tool hashes and output hashes. Earlier kits retain their
+original provenance.
+
+The extraction, KV parsing and import snapshots are retained outside runtime
+assets under ignored `artifacts/monstercat-import/`, alongside the downloaded
+archives and official Source 2 Viewer CLI 21.1. Regeneration requires that pinned
+Steam manifest and tool version: extract the recorded members, decompile the
+VSND/VTEX/event resources, and preserve the exported MP3 bytes and native event
+parameters. Do not replace the full recordings with store-preview audio.
 
 ## Tracks and authored playback
 
@@ -52,7 +91,7 @@ variant weights, gain, loop flag, per-variant start/end bounds, beat sync points
 stop time, priority and volume-envelope inputs. For example, the CS2 default
 StartAction declaration stops after 10 seconds despite its longer audio file.
 Seven kits declare MVP variant weights of 0.8/0.2; these are shipped values, not
-an estimated rare-track probability. The 17 unassigned alternate recordings are
+an estimated rare-track probability. The 18 unassigned alternate recordings are
 listed as `extraTracks` and are not falsely assigned to an automatic event.
 
 The browser integrates these declarations with its own supported game states;

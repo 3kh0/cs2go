@@ -816,6 +816,70 @@
       "loc_description": "#MusicKit_starjunk95_01_desc",
       "image_inventory": "econ/music_kits/starjunk95_01",
       "pedestal_display_model": "models/inventory_items/music_kits/music_kit_starjunk95_01.vmdl"
+    },
+    {
+      "id": "105",
+      "name": "alleycvt_01",
+      "loc_name": "#MusicKit_alleycvt_01",
+      "loc_description": "#MusicKit_alleycvt_01_desc",
+      "image_inventory": "econ/music_kits/alleycvt_01",
+      "pedestal_display_model": "models/inventory_items/music_kits/music_kit_alleycvt_01.vmdl"
+    },
+    {
+      "id": "106",
+      "name": "arcando_01",
+      "loc_name": "#MusicKit_arcando_01",
+      "loc_description": "#MusicKit_arcando_01_desc",
+      "image_inventory": "econ/music_kits/arcando_01",
+      "pedestal_display_model": "models/inventory_items/music_kits/music_kit_arcando_01.vmdl"
+    },
+    {
+      "id": "107",
+      "name": "djdiesel_01",
+      "loc_name": "#MusicKit_djdiesel_01",
+      "loc_description": "#MusicKit_djdiesel_01_desc",
+      "image_inventory": "econ/music_kits/djdiesel_01",
+      "pedestal_display_model": "models/inventory_items/music_kits/music_kit_djdiesel_01.vmdl"
+    },
+    {
+      "id": "108",
+      "name": "fool_01",
+      "loc_name": "#MusicKit_fool_01",
+      "loc_description": "#MusicKit_fool_01_desc",
+      "image_inventory": "econ/music_kits/fool_01",
+      "pedestal_display_model": "models/inventory_items/music_kits/music_kit_fool_01.vmdl"
+    },
+    {
+      "id": "109",
+      "name": "noisestorm_01",
+      "loc_name": "#MusicKit_noisestorm_01",
+      "loc_description": "#MusicKit_noisestorm_01_desc",
+      "image_inventory": "econ/music_kits/noisestorm_01",
+      "pedestal_display_model": "models/inventory_items/music_kits/music_kit_noisestorm_01.vmdl"
+    },
+    {
+      "id": "110",
+      "name": "pegboardnerds_01",
+      "loc_name": "#MusicKit_pegboardnerds_01",
+      "loc_description": "#MusicKit_pegboardnerds_01_desc",
+      "image_inventory": "econ/music_kits/pegboardnerds_01",
+      "pedestal_display_model": "models/inventory_items/music_kits/music_kit_pegboardnerds_01.vmdl"
+    },
+    {
+      "id": "111",
+      "name": "tristam_braken_01",
+      "loc_name": "#MusicKit_tristam_braken_01",
+      "loc_description": "#MusicKit_tristam_braken_01_desc",
+      "image_inventory": "econ/music_kits/tristam_braken_01",
+      "pedestal_display_model": "models/inventory_items/music_kits/music_kit_tristam_braken_01.vmdl"
+    },
+    {
+      "id": "112",
+      "name": "vicetone_01",
+      "loc_name": "#MusicKit_vicetone_01",
+      "loc_description": "#MusicKit_vicetone_01_desc",
+      "image_inventory": "econ/music_kits/vicetone_01",
+      "pedestal_display_model": "models/inventory_items/music_kits/music_kit_vicetone_01.vmdl"
     }
   ],
   "events": {
@@ -53961,6 +54025,3940 @@
           0.0
         ],
         "vsnd_duration": 44.400002
+      }
+    },
+    "alleycvt_01": {
+      "Music.Background.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": "sounds/music/alleycvt_01/mainmenu.vsnd",
+        "vsnd_duration": 161.601242
+      },
+      "Music.MVPPreview.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": [
+          "sounds/music/alleycvt_01/roundmvpanthem_01.vsnd",
+          "sounds/music/alleycvt_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 8.001791
+      },
+      "Music.Selection.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_match_end": "true",
+        "stop_loading": "true",
+        "vsnd_files": "sounds/music/alleycvt_01/chooseteam.vsnd",
+        "join_non_mvp_group": "true",
+        "vsnd_duration": 27.201677
+      },
+      "Music.MatchFound.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 12.75,
+        "vsnd_files": [
+          "sounds/music/alleycvt_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.801,
+          1.601,
+          2.401,
+          3.202,
+          4.0,
+          4.801,
+          5.601,
+          6.401,
+          7.201,
+          8.001,
+          8.801,
+          9.601,
+          10.402,
+          11.201,
+          12.001
+        ],
+        "vsnd_duration": 12.801248
+      },
+      "Music.LoadingScreen.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_menumusic_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/alleycvt_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 14.401247
+      },
+      "Music.StartRound.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 12.75,
+        "vsnd_files": [
+          "sounds/music/alleycvt_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.801,
+          1.601,
+          2.401,
+          3.202,
+          4.0,
+          4.801,
+          5.601,
+          6.401,
+          7.201,
+          8.001,
+          8.801,
+          9.601,
+          10.402,
+          11.201,
+          12.001
+        ],
+        "vsnd_duration": 12.801248
+      },
+      "Music.StartAction.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_roundaction_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 10.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/alleycvt_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 14.401247
+      },
+      "Music.StartRound_GG.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 1.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 6.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 12.75,
+        "vsnd_files": [
+          "sounds/music/alleycvt_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.801,
+          1.601,
+          2.401,
+          3.202,
+          4.0,
+          4.801,
+          5.601,
+          6.401,
+          7.201,
+          8.001,
+          8.801,
+          9.601,
+          10.402,
+          11.201,
+          12.001
+        ],
+        "vsnd_duration": 12.801248
+      },
+      "Music.BombPlanted.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/alleycvt_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "loop_track": "true",
+        "join_non_mvp_group": "true",
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 37.601246
+      },
+      "Music.BombTenSecCount.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/alleycvt_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_bomb_planted": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.400839
+      },
+      "Music.GotHostage.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/alleycvt_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "stop_at_time": 9.0,
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 37.601246
+      },
+      "Music.HostageNearRescue.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/alleycvt_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "stop_at_time": 4.0,
+        "stop_got_hostage": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.400839
+      },
+      "Music.TenSecCount.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/alleycvt_01/roundtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 11.400839
+      },
+      "Music.WonRound.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/alleycvt_01/wonround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 8.001678
+      },
+      "Music.LostRound.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/alleycvt_01/lostround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 5.601678
+      },
+      "Music.DeathCam.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "mixgroup": "DuckingMusic",
+        "volume_convar": "snd_deathcamera_volume",
+        "vsnd_files": "sounds/music/alleycvt_01/deathcam.vsnd",
+        "check_for_classic_deathcam": "true",
+        "stop_start_round": "true",
+        "stop_won_mvp": "true",
+        "join_non_mvp_group": "true",
+        "set_mixlayer_amount_enable": true,
+        "time_mixlayer_amount_curve": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ],
+          [
+            1.5,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ]
+        ],
+        "vsnd_duration": 5.601678
+      },
+      "Music.MVPAnthem.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_mvp_volume",
+        "priority": 5.0,
+        "stop_music": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "block_won_lost": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_files": [
+          "sounds/music/alleycvt_01/roundmvpanthem_01.vsnd",
+          "sounds/music/alleycvt_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 8.001791
+      },
+      "Music.MatchStart.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "volume_fade_initial_input_min": 9.0,
+        "volume_fade_initial_input_max": 9.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.1,
+        "stop_music": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/alleycvt_01/startofmatch.vsnd",
+        "vsnd_duration": 16.002087
+      },
+      "Music.MatchEnd.alleycvt_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_won_mvp": "true",
+        "should_queue_track": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/alleycvt_01/endofmatch.vsnd",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 57.61084
+      }
+    },
+    "arcando_01": {
+      "Music.Background.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": "sounds/music/arcando_01/mainmenu.vsnd",
+        "vsnd_duration": 185.143921
+      },
+      "Music.MVPPreview.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": [
+          "sounds/music/arcando_01/roundmvpanthem_01.vsnd",
+          "sounds/music/arcando_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 8.229909
+      },
+      "Music.Selection.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_match_end": "true",
+        "stop_loading": "true",
+        "vsnd_files": "sounds/music/arcando_01/chooseteam.vsnd",
+        "join_non_mvp_group": "true",
+        "vsnd_duration": 21.944286
+      },
+      "Music.MatchFound.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 21.9,
+        "vsnd_files": [
+          "sounds/music/arcando_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.373,
+          2.743,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601,
+          10.972,
+          12.344,
+          13.715,
+          15.087,
+          16.458,
+          17.829,
+          19.201,
+          20.572
+        ],
+        "vsnd_duration": 10.971791
+      },
+      "Music.LoadingScreen.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_menumusic_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/arcando_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 12.351429
+      },
+      "Music.StartRound.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 21.9,
+        "vsnd_files": [
+          "sounds/music/arcando_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.373,
+          2.743,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601,
+          10.972,
+          12.344,
+          13.715,
+          15.087,
+          16.458,
+          17.829,
+          19.201,
+          20.572
+        ],
+        "vsnd_duration": 10.971791
+      },
+      "Music.StartAction.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_roundaction_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 10.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/arcando_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 12.351429
+      },
+      "Music.StartRound_GG.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 1.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 6.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 21.9,
+        "vsnd_files": [
+          "sounds/music/arcando_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.373,
+          2.743,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601,
+          10.972,
+          12.344,
+          13.715,
+          15.087,
+          16.458,
+          17.829,
+          19.201,
+          20.572
+        ],
+        "vsnd_duration": 10.971791
+      },
+      "Music.BombPlanted.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/arcando_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "loop_track": "true",
+        "join_non_mvp_group": "true",
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 37.028934
+      },
+      "Music.BombTenSecCount.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/arcando_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_bomb_planted": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.971791
+      },
+      "Music.GotHostage.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/arcando_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "stop_at_time": 9.0,
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 37.028934
+      },
+      "Music.HostageNearRescue.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/arcando_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "stop_at_time": 4.0,
+        "stop_got_hostage": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.971791
+      },
+      "Music.TenSecCount.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/arcando_01/roundtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 11.314649
+      },
+      "Music.WonRound.arcando_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/arcando_01/wonround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 7.544286
+      },
+      "Music.LostRound.arcando_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/arcando_01/lostround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 7.544286
+      },
+      "Music.DeathCam.arcando_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "mixgroup": "DuckingMusic",
+        "volume_convar": "snd_deathcamera_volume",
+        "vsnd_files": "sounds/music/arcando_01/deathcam.vsnd",
+        "check_for_classic_deathcam": "true",
+        "stop_start_round": "true",
+        "stop_won_mvp": "true",
+        "join_non_mvp_group": "true",
+        "set_mixlayer_amount_enable": true,
+        "time_mixlayer_amount_curve": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ],
+          [
+            1.5,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ]
+        ],
+        "vsnd_duration": 4.801429
+      },
+      "Music.MVPAnthem.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_mvp_volume",
+        "priority": 5.0,
+        "stop_music": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "block_won_lost": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_files": [
+          "sounds/music/arcando_01/roundmvpanthem_01.vsnd",
+          "sounds/music/arcando_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 8.229909
+      },
+      "Music.MatchStart.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "volume_fade_initial_input_min": 9.0,
+        "volume_fade_initial_input_max": 9.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.1,
+        "stop_music": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/arcando_01/startofmatch.vsnd",
+        "vsnd_duration": 13.715714
+      },
+      "Music.MatchEnd.arcando_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_won_mvp": "true",
+        "should_queue_track": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/arcando_01/endofmatch.vsnd",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 92.581429
+      }
+    },
+    "djdiesel_01": {
+      "Music.Background.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": "sounds/music/djdiesel_01/mainmenu.vsnd",
+        "vsnd_duration": 204.799591
+      },
+      "Music.MVPPreview.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": [
+          "sounds/music/djdiesel_01/roundmvpanthem_01.vsnd",
+          "sounds/music/djdiesel_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 8.001678
+      },
+      "Music.Selection.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_match_end": "true",
+        "stop_loading": "true",
+        "vsnd_files": "sounds/music/djdiesel_01/chooseteam.vsnd",
+        "join_non_mvp_group": "true",
+        "vsnd_duration": 27.200409
+      },
+      "Music.MatchFound.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 12.7,
+        "vsnd_files": [
+          "sounds/music/djdiesel_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.6,
+          3.201,
+          4.8,
+          6.401,
+          8.0,
+          9.601,
+          11.2
+        ],
+        "vsnd_duration": 12.801248
+      },
+      "Music.LoadingScreen.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_menumusic_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/djdiesel_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 12.801248
+      },
+      "Music.StartRound.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 12.7,
+        "vsnd_files": [
+          "sounds/music/djdiesel_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.6,
+          3.201,
+          4.8,
+          6.401,
+          8.0,
+          9.601,
+          11.2
+        ],
+        "vsnd_duration": 12.801248
+      },
+      "Music.StartAction.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_roundaction_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 10.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/djdiesel_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 12.801248
+      },
+      "Music.StartRound_GG.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 1.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 6.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 12.7,
+        "vsnd_files": [
+          "sounds/music/djdiesel_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.6,
+          3.201,
+          4.8,
+          6.401,
+          8.0,
+          9.601,
+          11.2
+        ],
+        "vsnd_duration": 12.801248
+      },
+      "Music.BombPlanted.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/djdiesel_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "loop_track": "true",
+        "join_non_mvp_group": "true",
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 34.800838
+      },
+      "Music.BombTenSecCount.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/djdiesel_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_bomb_planted": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.664989
+      },
+      "Music.GotHostage.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/djdiesel_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "stop_at_time": 9.0,
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 34.800838
+      },
+      "Music.HostageNearRescue.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/djdiesel_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "stop_at_time": 4.0,
+        "stop_got_hostage": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.664989
+      },
+      "Music.TenSecCount.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/djdiesel_01/roundtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 10.664989
+      },
+      "Music.WonRound.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/djdiesel_01/wonround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 8.001791
+      },
+      "Music.LostRound.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/djdiesel_01/lostround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 6.401678
+      },
+      "Music.DeathCam.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "mixgroup": "DuckingMusic",
+        "volume_convar": "snd_deathcamera_volume",
+        "vsnd_files": "sounds/music/djdiesel_01/deathcam.vsnd",
+        "check_for_classic_deathcam": "true",
+        "stop_start_round": "true",
+        "stop_won_mvp": "true",
+        "join_non_mvp_group": "true",
+        "set_mixlayer_amount_enable": true,
+        "time_mixlayer_amount_curve": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ],
+          [
+            1.5,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ]
+        ],
+        "vsnd_duration": 4.801678
+      },
+      "Music.MVPAnthem.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_mvp_volume",
+        "priority": 5.0,
+        "stop_music": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "block_won_lost": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_files": [
+          "sounds/music/djdiesel_01/roundmvpanthem_01.vsnd",
+          "sounds/music/djdiesel_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 8.001678
+      },
+      "Music.MatchStart.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "volume_fade_initial_input_min": 9.0,
+        "volume_fade_initial_input_max": 9.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.1,
+        "stop_music": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/djdiesel_01/startofmatch.vsnd",
+        "vsnd_duration": 16.801678
+      },
+      "Music.MatchEnd.djdiesel_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_won_mvp": "true",
+        "should_queue_track": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/djdiesel_01/endofmatch.vsnd",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 104.001678
+      }
+    },
+    "fool_01": {
+      "Music.Background.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": "sounds/music/fool_01/mainmenu.vsnd",
+        "vsnd_duration": 250.921707
+      },
+      "Music.MVPPreview.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": [
+          "sounds/music/fool_01/roundmvpanthem_01.vsnd",
+          "sounds/music/fool_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 8.729025
+      },
+      "Music.Selection.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_match_end": "true",
+        "stop_loading": "true",
+        "vsnd_files": "sounds/music/fool_01/chooseteam.vsnd",
+        "join_non_mvp_group": "true",
+        "vsnd_duration": 24.002676
+      },
+      "Music.MatchFound.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "endpoint_01": 17.4,
+        "endpoint_02": 17.4,
+        "vsnd_files": [
+          "sounds/music/fool_01/startround_01.vsnd",
+          "sounds/music/fool_01/startround_02.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.09,
+          2.182,
+          3.723,
+          4.364,
+          5.455,
+          6.546,
+          7.637,
+          8.728,
+          9.819,
+          10.91,
+          12.0,
+          13.091,
+          14.182,
+          15.723,
+          16.364
+        ],
+        "syncpoints_02": [
+          0.0,
+          1.09,
+          2.182,
+          3.723,
+          4.364,
+          5.455,
+          6.546,
+          7.637,
+          8.728,
+          9.819,
+          10.91,
+          12.0,
+          13.091,
+          14.182,
+          15.723,
+          16.364
+        ],
+        "vsnd_duration": 17.457596
+      },
+      "Music.LoadingScreen.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_menumusic_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/fool_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 14.183923
+      },
+      "Music.StartRound.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "endpoint_01": 17.4,
+        "endpoint_02": 17.4,
+        "vsnd_files": [
+          "sounds/music/fool_01/startround_01.vsnd",
+          "sounds/music/fool_01/startround_02.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.09,
+          2.182,
+          3.723,
+          4.364,
+          5.455,
+          6.546,
+          7.637,
+          8.728,
+          9.819,
+          10.91,
+          12.0,
+          13.091,
+          14.182,
+          15.723,
+          16.364
+        ],
+        "syncpoints_02": [
+          0.0,
+          1.09,
+          2.182,
+          3.723,
+          4.364,
+          5.455,
+          6.546,
+          7.637,
+          8.728,
+          9.819,
+          10.91,
+          12.0,
+          13.091,
+          14.182,
+          15.723,
+          16.364
+        ],
+        "vsnd_duration": 17.457596
+      },
+      "Music.StartAction.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_roundaction_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 10.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/fool_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 14.183923
+      },
+      "Music.StartRound_GG.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 1.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 6.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "endpoint_01": 17.4,
+        "endpoint_02": 17.4,
+        "vsnd_files": [
+          "sounds/music/fool_01/startround_01.vsnd",
+          "sounds/music/fool_01/startround_02.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.09,
+          2.182,
+          3.723,
+          4.364,
+          5.455,
+          6.546,
+          7.637,
+          8.728,
+          9.819,
+          10.91,
+          12.0,
+          13.091,
+          14.182,
+          15.723,
+          16.364
+        ],
+        "syncpoints_02": [
+          0.0,
+          1.09,
+          2.182,
+          3.723,
+          4.364,
+          5.455,
+          6.546,
+          7.637,
+          8.728,
+          9.819,
+          10.91,
+          12.0,
+          13.091,
+          14.182,
+          15.723,
+          16.364
+        ],
+        "vsnd_duration": 17.457596
+      },
+      "Music.BombPlanted.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/fool_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "loop_track": "true",
+        "join_non_mvp_group": "true",
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 40.364738
+      },
+      "Music.BombTenSecCount.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/fool_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_bomb_planted": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.912064
+      },
+      "Music.GotHostage.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/fool_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "stop_at_time": 9.0,
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 40.364738
+      },
+      "Music.HostageNearRescue.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/fool_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "stop_at_time": 4.0,
+        "stop_got_hostage": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.912064
+      },
+      "Music.TenSecCount.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/fool_01/roundtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 10.912064
+      },
+      "Music.WonRound.fool_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/fool_01/wonround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 8.729025
+      },
+      "Music.LostRound.fool_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/fool_01/lostround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 7.637052
+      },
+      "Music.DeathCam.fool_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "mixgroup": "DuckingMusic",
+        "volume_convar": "snd_deathcamera_volume",
+        "vsnd_files": "sounds/music/fool_01/deathcam.vsnd",
+        "check_for_classic_deathcam": "true",
+        "stop_start_round": "true",
+        "stop_won_mvp": "true",
+        "join_non_mvp_group": "true",
+        "set_mixlayer_amount_enable": true,
+        "time_mixlayer_amount_curve": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ],
+          [
+            1.5,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ]
+        ],
+        "vsnd_duration": 8.729025
+      },
+      "Music.MVPAnthem.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_mvp_volume",
+        "priority": 5.0,
+        "stop_music": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "block_won_lost": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_files": [
+          "sounds/music/fool_01/roundmvpanthem_01.vsnd",
+          "sounds/music/fool_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 8.729025
+      },
+      "Music.MatchStart.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "volume_fade_initial_input_min": 9.0,
+        "volume_fade_initial_input_max": 9.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.1,
+        "stop_music": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/fool_01/startofmatch.vsnd",
+        "vsnd_duration": 14.183923
+      },
+      "Music.MatchEnd.fool_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_won_mvp": "true",
+        "should_queue_track": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/fool_01/endofmatch.vsnd",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 60.001793
+      }
+    },
+    "noisestorm_01": {
+      "Music.Background.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": "sounds/music/noisestorm_01/mainmenu.vsnd",
+        "vsnd_duration": 161.295013
+      },
+      "Music.MVPPreview.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": [
+          "sounds/music/noisestorm_01/roundmvpanthem_01.vsnd",
+          "sounds/music/noisestorm_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 6.735011
+      },
+      "Music.Selection.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_match_end": "true",
+        "stop_loading": "true",
+        "vsnd_files": "sounds/music/noisestorm_01/chooseteam.vsnd",
+        "join_non_mvp_group": "true",
+        "vsnd_duration": 22.095011
+      },
+      "Music.MatchFound.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 7.6,
+        "vsnd_files": [
+          "sounds/music/noisestorm_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.928,
+          3.848,
+          5.768
+        ],
+        "vsnd_duration": 7.695011
+      },
+      "Music.LoadingScreen.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_menumusic_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/noisestorm_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 18.255011
+      },
+      "Music.StartRound.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 7.6,
+        "vsnd_files": [
+          "sounds/music/noisestorm_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.928,
+          3.848,
+          5.768
+        ],
+        "vsnd_duration": 7.695011
+      },
+      "Music.StartAction.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_roundaction_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 10.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/noisestorm_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 18.255011
+      },
+      "Music.StartRound_GG.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 1.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 6.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 7.6,
+        "vsnd_files": [
+          "sounds/music/noisestorm_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          1.928,
+          3.848,
+          5.768
+        ],
+        "vsnd_duration": 7.695011
+      },
+      "Music.BombPlanted.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/noisestorm_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "loop_track": "true",
+        "join_non_mvp_group": "true",
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 38.415012
+      },
+      "Music.BombTenSecCount.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/noisestorm_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_bomb_planted": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 11.535011
+      },
+      "Music.GotHostage.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/noisestorm_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "stop_at_time": 9.0,
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 38.415012
+      },
+      "Music.HostageNearRescue.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/noisestorm_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "stop_at_time": 4.0,
+        "stop_got_hostage": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 11.535011
+      },
+      "Music.TenSecCount.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/noisestorm_01/roundtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 10.575011
+      },
+      "Music.WonRound.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/noisestorm_01/wonround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 6.735011
+      },
+      "Music.LostRound.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/noisestorm_01/lostround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 6.735011
+      },
+      "Music.DeathCam.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "mixgroup": "DuckingMusic",
+        "volume_convar": "snd_deathcamera_volume",
+        "vsnd_files": "sounds/music/noisestorm_01/deathcam.vsnd",
+        "check_for_classic_deathcam": "true",
+        "stop_start_round": "true",
+        "stop_won_mvp": "true",
+        "join_non_mvp_group": "true",
+        "set_mixlayer_amount_enable": true,
+        "time_mixlayer_amount_curve": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ],
+          [
+            1.5,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ]
+        ],
+        "vsnd_duration": 4.815012
+      },
+      "Music.MVPAnthem.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_mvp_volume",
+        "priority": 5.0,
+        "stop_music": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "block_won_lost": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_files": [
+          "sounds/music/noisestorm_01/roundmvpanthem_01.vsnd",
+          "sounds/music/noisestorm_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 6.735011
+      },
+      "Music.MatchStart.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "volume_fade_initial_input_min": 9.0,
+        "volume_fade_initial_input_max": 9.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.1,
+        "stop_music": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/noisestorm_01/startofmatch.vsnd",
+        "vsnd_duration": 16.335011
+      },
+      "Music.MatchEnd.noisestorm_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_won_mvp": "true",
+        "should_queue_track": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/noisestorm_01/endofmatch.vsnd",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 83.535011
+      }
+    },
+    "pegboardnerds_01": {
+      "Music.Background.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": "sounds/music/pegboardnerds_01/mainmenu.vsnd",
+        "vsnd_duration": 241.876465
+      },
+      "Music.MVPPreview.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": [
+          "sounds/music/pegboardnerds_01/roundmvpanthem_01.vsnd",
+          "sounds/music/pegboardnerds_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 7.628413
+      },
+      "Music.Selection.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_match_end": "true",
+        "stop_loading": "true",
+        "vsnd_files": "sounds/music/pegboardnerds_01/chooseteam.vsnd",
+        "join_non_mvp_group": "true",
+        "vsnd_duration": 17.814444
+      },
+      "Music.MatchFound.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 14.9,
+        "vsnd_files": [
+          "sounds/music/pegboardnerds_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.938,
+          1.876,
+          2.813,
+          3.751,
+          4.688,
+          5.626,
+          6.563,
+          7.501,
+          8.438,
+          9.376,
+          10.313,
+          11.251,
+          12.188,
+          13.126,
+          14.064
+        ],
+        "vsnd_duration": 15.012698
+      },
+      "Music.LoadingScreen.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_menumusic_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/pegboardnerds_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 15.236326
+      },
+      "Music.StartRound.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 14.9,
+        "vsnd_files": [
+          "sounds/music/pegboardnerds_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.938,
+          1.876,
+          2.813,
+          3.751,
+          4.688,
+          5.626,
+          6.563,
+          7.501,
+          8.438,
+          9.376,
+          10.313,
+          11.251,
+          12.188,
+          13.126,
+          14.064
+        ],
+        "vsnd_duration": 15.012698
+      },
+      "Music.StartAction.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_roundaction_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 10.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/pegboardnerds_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 15.236326
+      },
+      "Music.StartRound_GG.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 1.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 6.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 14.9,
+        "vsnd_files": [
+          "sounds/music/pegboardnerds_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.938,
+          1.876,
+          2.813,
+          3.751,
+          4.688,
+          5.626,
+          6.563,
+          7.501,
+          8.438,
+          9.376,
+          10.313,
+          11.251,
+          12.188,
+          13.126,
+          14.064
+        ],
+        "vsnd_duration": 15.012698
+      },
+      "Music.BombPlanted.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/pegboardnerds_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "loop_track": "true",
+        "join_non_mvp_group": "true",
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 38.438957
+      },
+      "Music.BombTenSecCount.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/pegboardnerds_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_bomb_planted": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 11.250975
+      },
+      "Music.GotHostage.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/pegboardnerds_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "stop_at_time": 9.0,
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 38.438957
+      },
+      "Music.HostageNearRescue.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/pegboardnerds_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "stop_at_time": 4.0,
+        "stop_got_hostage": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 11.250975
+      },
+      "Music.TenSecCount.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/pegboardnerds_01/roundtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 11.720204
+      },
+      "Music.WonRound.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/pegboardnerds_01/wonround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 7.738843
+      },
+      "Music.LostRound.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/pegboardnerds_01/lostround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 8.439456
+      },
+      "Music.DeathCam.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "mixgroup": "DuckingMusic",
+        "volume_convar": "snd_deathcamera_volume",
+        "vsnd_files": "sounds/music/pegboardnerds_01/deathcam.vsnd",
+        "check_for_classic_deathcam": "true",
+        "stop_start_round": "true",
+        "stop_won_mvp": "true",
+        "join_non_mvp_group": "true",
+        "set_mixlayer_amount_enable": true,
+        "time_mixlayer_amount_curve": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ],
+          [
+            1.5,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ]
+        ],
+        "vsnd_duration": 4.689456
+      },
+      "Music.MVPAnthem.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_mvp_volume",
+        "priority": 5.0,
+        "stop_music": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "block_won_lost": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_files": [
+          "sounds/music/pegboardnerds_01/roundmvpanthem_01.vsnd",
+          "sounds/music/pegboardnerds_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 7.628413
+      },
+      "Music.MatchStart.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "volume_fade_initial_input_min": 9.0,
+        "volume_fade_initial_input_max": 9.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.1,
+        "stop_music": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/pegboardnerds_01/startofmatch.vsnd",
+        "vsnd_duration": 15.939456
+      },
+      "Music.MatchEnd.pegboardnerds_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_won_mvp": "true",
+        "should_queue_track": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/pegboardnerds_01/endofmatch.vsnd",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 79.69873
+      }
+    },
+    "tristam_braken_01": {
+      "Music.Background.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": "sounds/music/tristam_braken_01/mainmenu.vsnd",
+        "vsnd_duration": 219.429916
+      },
+      "Music.MVPPreview.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": [
+          "sounds/music/tristam_braken_01/roundmvpanthem_01.vsnd",
+          "sounds/music/tristam_braken_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 7.37322
+      },
+      "Music.Selection.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_match_end": "true",
+        "stop_loading": "true",
+        "vsnd_files": "sounds/music/tristam_braken_01/chooseteam.vsnd",
+        "join_non_mvp_group": "true",
+        "vsnd_duration": 26.744648
+      },
+      "Music.MatchFound.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "endpoint_01": 10.9,
+        "endpoint_02": 10.9,
+        "vsnd_files": [
+          "sounds/music/tristam_braken_01/startround_01.vsnd",
+          "sounds/music/tristam_braken_01/startround_02.vsnd"
+        ],
+        "syncpoints_01": [
+          0.001,
+          1.372,
+          2.744,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601
+        ],
+        "syncpoints_02": [
+          0.001,
+          1.372,
+          2.744,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601
+        ],
+        "vsnd_duration": 10.97322
+      },
+      "Music.LoadingScreen.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_menumusic_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/tristam_braken_01/startaction_01.vsnd",
+          "sounds/music/tristam_braken_01/startaction_02.vsnd"
+        ],
+        "vsnd_duration": 13.373219
+      },
+      "Music.StartRound.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "endpoint_01": 10.9,
+        "endpoint_02": 10.9,
+        "vsnd_files": [
+          "sounds/music/tristam_braken_01/startround_01.vsnd",
+          "sounds/music/tristam_braken_01/startround_02.vsnd"
+        ],
+        "syncpoints_01": [
+          0.001,
+          1.372,
+          2.744,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601
+        ],
+        "syncpoints_02": [
+          0.001,
+          1.372,
+          2.744,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601
+        ],
+        "vsnd_duration": 10.97322
+      },
+      "Music.StartAction.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_roundaction_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 10.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/tristam_braken_01/startaction_01.vsnd",
+          "sounds/music/tristam_braken_01/startaction_02.vsnd"
+        ],
+        "vsnd_duration": 13.373219
+      },
+      "Music.StartRound_GG.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 1.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 6.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "endpoint_01": 10.9,
+        "endpoint_02": 10.9,
+        "vsnd_files": [
+          "sounds/music/tristam_braken_01/startround_01.vsnd",
+          "sounds/music/tristam_braken_01/startround_02.vsnd"
+        ],
+        "syncpoints_01": [
+          0.001,
+          1.372,
+          2.744,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601
+        ],
+        "syncpoints_02": [
+          0.001,
+          1.372,
+          2.744,
+          4.115,
+          5.486,
+          6.858,
+          8.229,
+          9.601
+        ],
+        "vsnd_duration": 10.97322
+      },
+      "Music.BombPlanted.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/tristam_braken_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "loop_track": "true",
+        "join_non_mvp_group": "true",
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 38.744648
+      },
+      "Music.BombTenSecCount.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/tristam_braken_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_bomb_planted": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.97322
+      },
+      "Music.GotHostage.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/tristam_braken_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "stop_at_time": 9.0,
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 38.744648
+      },
+      "Music.HostageNearRescue.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/tristam_braken_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "stop_at_time": 4.0,
+        "stop_got_hostage": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 10.97322
+      },
+      "Music.TenSecCount.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/tristam_braken_01/roundtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 12.001791
+      },
+      "Music.WonRound.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/tristam_braken_01/wonround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 7.37322
+      },
+      "Music.LostRound.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/tristam_braken_01/lostround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 7.718299
+      },
+      "Music.DeathCam.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "mixgroup": "DuckingMusic",
+        "volume_convar": "snd_deathcamera_volume",
+        "vsnd_files": "sounds/music/tristam_braken_01/deathcam.vsnd",
+        "check_for_classic_deathcam": "true",
+        "stop_start_round": "true",
+        "stop_won_mvp": "true",
+        "join_non_mvp_group": "true",
+        "set_mixlayer_amount_enable": true,
+        "time_mixlayer_amount_curve": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ],
+          [
+            1.5,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ]
+        ],
+        "vsnd_duration": 5.144649
+      },
+      "Music.MVPAnthem.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_mvp_volume",
+        "priority": 5.0,
+        "stop_music": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "block_won_lost": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_files": [
+          "sounds/music/tristam_braken_01/roundmvpanthem_01.vsnd",
+          "sounds/music/tristam_braken_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 7.37322
+      },
+      "Music.MatchStart.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "volume_fade_initial_input_min": 9.0,
+        "volume_fade_initial_input_max": 9.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.1,
+        "stop_music": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/tristam_braken_01/startofmatch.vsnd",
+        "vsnd_duration": 16.920975
+      },
+      "Music.MatchEnd.tristam_braken_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_won_mvp": "true",
+        "should_queue_track": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/tristam_braken_01/endofmatch.vsnd",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 141.602676
+      }
+    },
+    "vicetone_01": {
+      "Music.Background.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": "sounds/music/vicetone_01/mainmenu.vsnd",
+        "vsnd_duration": 208.562988
+      },
+      "Music.MVPPreview.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "vsnd_files": [
+          "sounds/music/vicetone_01/roundmvpanthem_01.vsnd",
+          "sounds/music/vicetone_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 7.985896
+      },
+      "Music.Selection.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_match_end": "true",
+        "stop_loading": "true",
+        "vsnd_files": "sounds/music/vicetone_01/chooseteam.vsnd",
+        "join_non_mvp_group": "true",
+        "vsnd_duration": 24.195555
+      },
+      "Music.MatchFound.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 15.4,
+        "vsnd_files": [
+          "sounds/music/vicetone_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.968,
+          1.936,
+          2.904,
+          3.872,
+          4.839,
+          5.807,
+          6.775,
+          7.743,
+          8.71,
+          9.678,
+          10.646,
+          11.614,
+          12.581,
+          13.549,
+          14.517
+        ],
+        "vsnd_duration": 15.485374
+      },
+      "Music.LoadingScreen.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_menumusic_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/vicetone_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 12.098798
+      },
+      "Music.StartRound.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.5,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 15.4,
+        "vsnd_files": [
+          "sounds/music/vicetone_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.968,
+          1.936,
+          2.904,
+          3.872,
+          4.839,
+          5.807,
+          6.775,
+          7.743,
+          8.71,
+          9.678,
+          10.646,
+          11.614,
+          12.581,
+          13.549,
+          14.517
+        ],
+        "vsnd_duration": 15.485374
+      },
+      "Music.StartAction.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_roundaction_volume",
+        "sync_action_to_startround": 0,
+        "priority": 2.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 4.0,
+        "volume_fade_initial_input_max": 12.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 10.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_files": [
+          "sounds/music/vicetone_01/startaction_01.vsnd"
+        ],
+        "vsnd_duration": 12.098798
+      },
+      "Music.StartRound_GG.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "mixgroup": "BuyMusic",
+        "volume_convar": "snd_roundstart_volume",
+        "stop_music": "true",
+        "priority": 1.0,
+        "priority_override": "true",
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "volume_fade_out_input_max": 3.0,
+        "stop_at_time": 6.0,
+        "loop_track": "true",
+        "should_queue_track": "true",
+        "update_track_syncpoint_index": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "endpoint_01": 15.4,
+        "vsnd_files": [
+          "sounds/music/vicetone_01/startround_01.vsnd"
+        ],
+        "syncpoints_01": [
+          0.0,
+          0.968,
+          1.936,
+          2.904,
+          3.872,
+          4.839,
+          5.807,
+          6.775,
+          7.743,
+          8.71,
+          9.678,
+          10.646,
+          11.614,
+          12.581,
+          13.549,
+          14.517
+        ],
+        "vsnd_duration": 15.485374
+      },
+      "Music.BombPlanted.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/vicetone_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 6.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.3,
+        "loop_track": "true",
+        "join_non_mvp_group": "true",
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 37.259567
+      },
+      "Music.BombTenSecCount.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/vicetone_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_bomb_planted": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 11.612404
+      },
+      "Music.GotHostage.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_mapobjective_volume",
+        "vsnd_files": "sounds/music/vicetone_01/bombplanted.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "loop_track": "true",
+        "stop_at_time": 9.0,
+        "stop_start_round": "true",
+        "stop_tensec_count": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 37.259567
+      },
+      "Music.HostageNearRescue.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/vicetone_01/bombtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_initial_input_min": 1.0,
+        "volume_fade_initial_input_max": 7.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.2,
+        "volume_fade_out_input_max": 1.5,
+        "stop_at_time": 4.0,
+        "stop_got_hostage": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "vsnd_duration": 11.612404
+      },
+      "Music.TenSecCount.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_tensecondwarning_volume",
+        "vsnd_files": "sounds/music/vicetone_01/roundtenseccount.vsnd",
+        "priority": 3.0,
+        "volume_fade_out_input_max": 0.5,
+        "should_queue_track": "true",
+        "stop_start_round": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 11.615623
+      },
+      "Music.WonRound.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/vicetone_01/wonround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 7.985896
+      },
+      "Music.LostRound.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "volume_convar": "snd_roundend_volume",
+        "vsnd_files": "sounds/music/vicetone_01/lostround.vsnd",
+        "priority": 4.0,
+        "stop_music_except_mvp": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "test_mvp_block": "true",
+        "join_non_mvp_group": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 7.985896
+      },
+      "Music.DeathCam.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 1.0,
+        "mixgroup": "DuckingMusic",
+        "volume_convar": "snd_deathcamera_volume",
+        "vsnd_files": "sounds/music/vicetone_01/deathcam.vsnd",
+        "check_for_classic_deathcam": "true",
+        "stop_start_round": "true",
+        "stop_won_mvp": "true",
+        "join_non_mvp_group": "true",
+        "set_mixlayer_amount_enable": true,
+        "time_mixlayer_amount_curve": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ],
+          [
+            1.5,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            3.0
+          ]
+        ],
+        "vsnd_duration": 5.80898
+      },
+      "Music.MVPAnthem.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.9,
+        "volume_convar": "snd_mvp_volume",
+        "priority": 5.0,
+        "stop_music": "true",
+        "volume_fade_out_input_max": 1.6,
+        "loop_track": "false",
+        "should_queue_track": "true",
+        "skip_if_muted": "true",
+        "block_won_lost": "true",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_files": [
+          "sounds/music/vicetone_01/roundmvpanthem_01.vsnd",
+          "sounds/music/vicetone_01/roundmvpanthem_02.vsnd"
+        ],
+        "vsnd_selection_type": "random",
+        "vsnd_duration": 7.985896
+      },
+      "Music.MatchStart.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "volume_fade_initial_input_min": 9.0,
+        "volume_fade_initial_input_max": 9.0,
+        "volume_fade_initial_input_map_min": 1.0,
+        "volume_fade_initial_input_map_max": 0.1,
+        "stop_music": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/vicetone_01/startofmatch.vsnd",
+        "vsnd_duration": 17.42136
+      },
+      "Music.MatchEnd.vicetone_01": {
+        "type": "csgo_music",
+        "volume": 0.8,
+        "mixgroup": "SelectedMusic",
+        "volume_convar": "snd_menumusic_volume",
+        "volume_fade_out_input_max": 1.0,
+        "stop_won_mvp": "true",
+        "should_queue_track": "true",
+        "join_non_mvp_group": "true",
+        "vsnd_files": "sounds/music/vicetone_01/endofmatch.vsnd",
+        "startpoint_01": 0.0,
+        "startpoint_02": 0.0,
+        "startpoint_03": 0.0,
+        "endpoint_01": 0.0,
+        "endpoint_02": 0.0,
+        "endpoint_03": 0.0,
+        "syncpoints_01": [
+          0.0
+        ],
+        "syncpoints_02": [
+          0.0
+        ],
+        "syncpoints_03": [
+          0.0
+        ],
+        "vsnd_duration": 95.808456
       }
     }
   }

@@ -976,6 +976,102 @@
       "runtime": "label-roughness.png",
       "bytes": 73965,
       "conversion": "Lossless extraction of normal-map alpha roughness channel, replicated to RGB for Three roughnessMap green channel; native S2V VMAT TextureRoughness confirms usage"
+    },
+    {
+      "kit": "alleycvt_01",
+      "source": "materials/models/inventory_items/music_kit/alleycvt_01/mp3_screen_color_psd_782306fd.vtex_c",
+      "sourceSha256": "56f8ee7ad19dd4112fcd8041fe661efd9b5ccc44dac7d0fd4b1b6776fc40c605",
+      "runtime": "covers/alleycvt_01.png",
+      "bytes": 825667,
+      "sha256": "8fa539aa8f4a8f3555e394d80edfe4391cbd215a00d6e0ace3e7cbeef0777f6e",
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "materials/models/inventory_items/music_kit/alleycvt_01/sleeve_cover.vmat_c",
+      "materialResourceSha256": "87114e55332416784ea38b7521a264d69f83c93b113cd48da4e81d6a3e934452",
+      "sourceRelease": "monstercat-2026-11-17"
+    },
+    {
+      "kit": "arcando_01",
+      "source": "materials/models/inventory_items/music_kit/arcando_01/mp3_screen_color_psd_e87ea661.vtex_c",
+      "sourceSha256": "05cc75d38691cf553f6a2a9922599b526316d5af4c74a31fbaf1b31c1760552a",
+      "runtime": "covers/arcando_01.png",
+      "bytes": 661992,
+      "sha256": "33f4ed69c3c6a40ba997b673918cbff2d196d3791ec2a96621dca15a306a812d",
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "materials/models/inventory_items/music_kit/arcando_01/sleeve_cover.vmat_c",
+      "materialResourceSha256": "fa671708b3763f929ff34f5e15baf61b27795f02b718c0a17bf37b2a55e1e211",
+      "sourceRelease": "monstercat-2026-11-17"
+    },
+    {
+      "kit": "djdiesel_01",
+      "source": "materials/models/inventory_items/music_kit/djdiesel_01/mp3_screen_color_psd_afc885fb.vtex_c",
+      "sourceSha256": "fb8e22ce87f2918cc587dfc7b2b0bd97e4fc4ee8497588e4dde56ff5d40b8b2d",
+      "runtime": "covers/djdiesel_01.png",
+      "bytes": 1418563,
+      "sha256": "39c15b90de77f9527e67eabb6b07ec8556096225742dd5533733482f2c1c63cd",
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "materials/models/inventory_items/music_kit/djdiesel_01/sleeve_cover.vmat_c",
+      "materialResourceSha256": "4100c0518e2f04ac4c435d9b596d36d5e8def138d2e24b1d53faf01ee39bcd21",
+      "sourceRelease": "monstercat-2026-11-17"
+    },
+    {
+      "kit": "fool_01",
+      "source": "materials/models/inventory_items/music_kit/fool_01/mp3_screen_color_psd_5b081c47.vtex_c",
+      "sourceSha256": "e6e197a6e09b7425001863061fb5ebac6f9e776d408ef0618eca4ecbe17c9c88",
+      "runtime": "covers/fool_01.png",
+      "bytes": 930298,
+      "sha256": "1c03feddfa6deb18a140ae417cac5dd0c220a1e8ff8333a3e99dd899cf7c5b3f",
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "materials/models/inventory_items/music_kit/fool_01/sleeve_cover.vmat_c",
+      "materialResourceSha256": "6689e7d2328adec2a5b2285a67dbf32e2b11f2d2b2c0243edccb130cc64f147f",
+      "sourceRelease": "monstercat-2026-11-17"
+    },
+    {
+      "kit": "noisestorm_01",
+      "source": "materials/models/inventory_items/music_kit/noisestorm_01/mp3_screen_color_psd_b4189c0e.vtex_c",
+      "sourceSha256": "59e4d764c1e0779d45e2345788fdf1ddd06736961bdea8cb264476b2640ee07f",
+      "runtime": "covers/noisestorm_01.png",
+      "bytes": 1338858,
+      "sha256": "9a1bad1c9a6bc50b2f7f71c70e4e814d9293246570b76cda278ac470bebb1f3c",
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "materials/models/inventory_items/music_kit/noisestorm_01/sleeve_cover.vmat_c",
+      "materialResourceSha256": "7ae1bd95803b32add5e6f85ad047f3c2e427e5719c639949ae7ba0c33c983521",
+      "sourceRelease": "monstercat-2026-11-17"
+    },
+    {
+      "kit": "pegboardnerds_01",
+      "source": "materials/models/inventory_items/music_kit/pegboardnerds_01/mp3_screen_color_psd_307cc0ce.vtex_c",
+      "sourceSha256": "328184a1dc8275eed246e576e9a8b2ae4f007b566f48dd39e35da0c8e4b429a8",
+      "runtime": "covers/pegboardnerds_01.png",
+      "bytes": 337817,
+      "sha256": "b706b88c68ed3c06a16b81663ef16dd957e1e566bdd98cb5c73d2cd166208beb",
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "materials/models/inventory_items/music_kit/pegboardnerds_01/sleeve_cover.vmat_c",
+      "materialResourceSha256": "27e310ffb11037a2b3b383f50fd0e707a200081c8483784d6302df58efb0c800",
+      "sourceRelease": "monstercat-2026-11-17"
+    },
+    {
+      "kit": "tristam_braken_01",
+      "source": "materials/models/inventory_items/music_kit/tristam_braken_01/mp3_screen_color_psd_e1ed2b78.vtex_c",
+      "sourceSha256": "6628c47765e9420881acc633608860947fad41eb0f29495246c668b3f332662c",
+      "runtime": "covers/tristam_braken_01.png",
+      "bytes": 246047,
+      "sha256": "a7d314b544f4be645e67e5049d824133d662504674d3163a53237991da0ef0e6",
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "materials/models/inventory_items/music_kit/tristam_braken_01/sleeve_cover.vmat_c",
+      "materialResourceSha256": "6fe73c8a6ef38a112e16fc35e8c4debb08bb7157b0c175e4489d8498b66feec9",
+      "sourceRelease": "monstercat-2026-11-17"
+    },
+    {
+      "kit": "vicetone_01",
+      "source": "materials/models/inventory_items/music_kit/vicetone_01/mp3_screen_color_psd_8c5a91dd.vtex_c",
+      "sourceSha256": "4a168adc9b26d8c941f281844e50cf09dac546fd938f569806e6ddead9a161a3",
+      "runtime": "covers/vicetone_01.png",
+      "bytes": 1499106,
+      "sha256": "fa8feef7b78e9d371d899243f39ad3efa61bdf8f77674c574530cf2eaeca6b14",
+      "selection": "Exact sleeve_cover.vmat RERL texture dependency",
+      "materialResource": "materials/models/inventory_items/music_kit/vicetone_01/sleeve_cover.vmat_c",
+      "materialResourceSha256": "a669b593ab41c0f41632a3d05347f62f1bea7783e6ea31c8acda1f4d4ccb1730",
+      "sourceRelease": "monstercat-2026-11-17"
     }
   ],
   "icons": [
@@ -1017,5 +1113,13 @@
     "sha256": "b41804bd6a5f6d2da2f3616431c4d6bbc4be459208bd32ff3cb7ebe49b6ec9fa",
     "thread": "T-01a1be3d-3d6e-7488-b071-e3b79f9253fd",
     "shaderReference": "ValveResourceFormat/ValveResourceFormat tag20.1 Renderer/Shaders/complex.frag.slang lines535-540 binds anisogloss RG directly as directional roughness"
-  }
+  },
+  "additionalReleases": [
+    {
+      "id": "monstercat-2026-11-17",
+      "provenance": "/audio/music-kits/source.json",
+      "manifestId": "239443625111074552",
+      "converter": "Official Source2Viewer CLI 21.1 --decompile"
+    }
+  ]
 }
