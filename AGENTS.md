@@ -70,10 +70,16 @@ The additional historical sound library comes from pinned `sourcesounds/csgo` in
 
 The supplied OBJs are static meshes. Runtime combines imported native clips with reconstructed playback, retargeting and procedural behavior; imported samples do not establish complete native animation-graph parity. Ballistic and economy attributes use the documented pinned shipped-data snapshot, while body thickness and collision behavior retain approximations. Distinguish verified source values from approximations when changing or describing behavior.
 
+## Documentation
+
+- Write documentation only in `README.md` files in the folder that needs it. Update an existing local README or create one alongside the affected code or assets when documentation is needed.
+- Never update the root `README.md` unless absolutely necessary for repository-wide setup, installation, or basic usage. Feature details, asset provenance, regeneration instructions, and limitations belong in the relevant folder's README.
+- Do not create separate documentation files or a central docs directory. This restriction does not apply to required machine-readable asset manifests, licenses, or agent instruction files such as `AGENTS.md`.
+
 ## Validation and delivery
 
 Run `bun run check` and `bun run build` for code/toolchain changes. Run relevant unit tests for movement, collision, or ballistics changes. Use browser tests for input, pointer lock, weapons, scopes, audio, menus, or gameplay integration.
 
 Visually inspect meaningful rendering and animation changes in Chromium; passing numeric checks alone does not establish a convincing animation. Screenshots go in the ignored `artifacts/` directory. Check browser errors and external requests when changing asset loading. Avoid adding tests that merely repeat implementation details.
 
-Keep `README.md` controls, toolchain commands, asset provenance, and limitations current. Report the behavior changed, verification performed, and any material limitations. Do not commit generated `dist/`, `node_modules/`, test reports, or screenshots.
+Keep relevant folder-local README instructions, controls, toolchain commands, asset provenance, and limitations current, following the documentation rules above. Report the behavior changed, verification performed, and any material limitations. Do not commit generated `dist/`, `node_modules/`, test reports, or screenshots.
