@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "cd366af0838ae63c967ba84c96ab915bde7586f05f70eac63e7532a33d024c07",
+  "release": "f8d7079964f548d691ff2f29b715ed3d24d8796e93cf4e37f0d4e732d3bcb7e7",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -151149,15 +151149,9 @@
       "object": "objects/8e5342c6ea52d9a85098075cef5b73421484196905323e26c884eeab03f9ae2a.webp"
     },
     "ui/collections/README.md": {
-      "sha256": "c245324b01b84076c2fe82ccbe8c42d19833ecf6e37e5b27391a28ca250faf19",
-      "bytes": 885,
-      "transport": {
-        "encoding": "br",
-        "quality": 11,
-        "sha256": "77d28bb80b9714efdfc02806f3cc5bf3d599e3a233de14de7ce3eb6292953490",
-        "bytes": 432
-      },
-      "object": "objects/77d28bb80b9714efdfc02806f3cc5bf3d599e3a233de14de7ce3eb6292953490.md.br"
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "object": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.md"
     },
     "ui/collections/set_anubis_png.png": {
       "sha256": "06f43486564031245c06a622077ee1ec649832034056470f9d12e960002cd428",
