@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readdir, readFile, writeFile, mkdir, rename } from "node:fs/promises";
+import { readdir, readFile, writeFile, mkdir, rename, stat } from "node:fs/promises";
 import { join, relative, extname } from "node:path";
 import { gzipSync, gunzipSync, brotliCompress, brotliDecompressSync, constants } from "node:zlib";
 import { promisify } from "node:util";
@@ -41,47 +41,108 @@ export const objectKey = (path, entry) => {
   const wire = entry.transport ?? entry;
   return `objects/${wire.sha256}${extname(path)}${wire.encoding ? `.${wire.encoding}` : ""}`;
 };
+const RACY_NS = 2_000_000_000n;
+// Like Git's index, reuse content identities only while size, mtime, ctime and
+// inode are unchanged. Userland cannot set ctime, so any rewrite invalidates an
+// entry; files changed within the last two seconds are always rehashed.
+async function identities(directory, reuse) {
+  const path = join(directory, ".cache", "identities.json");
+  let saved = {};
+  if (reuse)
+    try {
+      const memo = JSON.parse(await readFile(path, "utf8"));
+      if (memo.version === 1) saved = memo.entries;
+    } catch {}
+  const next = {};
+  const now = BigInt(Date.now()) * 1_000_000n;
+  return {
+    async lookup(file) {
+      const name = relative(directory, file).replaceAll("\\", "/");
+      let info;
+      try {
+        info = await stat(file, { bigint: true });
+      } catch {
+        return { remember: (value) => value };
+      }
+      const key = `${info.size}:${info.mtimeNs}:${info.ctimeNs}:${info.ino}`;
+      const stable = now - info.ctimeNs > RACY_NS;
+      return {
+        value: stable && saved[name]?.key === key ? saved[name].value : undefined,
+        remember(value) {
+          if (stable) next[name] = { key, value };
+          return value;
+        },
+      };
+    },
+    async save() {
+      const temporary = `${path}.tmp-${process.pid}-${Date.now()}`;
+      await writeFile(temporary, JSON.stringify({ version: 1, entries: next }));
+      await rename(temporary, path);
+    },
+  };
+}
 export async function prepare(
   directory = root,
   expectedEntries,
   onProgress,
   reuseTransport = false,
+  { reuseIdentities = true } = {},
 ) {
   const publicDir = join(directory, "public");
   const cache = join(directory, ".cache");
   await mkdir(cache, { recursive: true });
+  const memo = await identities(directory, reuseIdentities);
   const entries = {};
   let writeId = 0;
+  let processed = 0;
   const compressions = new Map();
   const processFile = async (file) => {
     const path = relative(publicDir, file).replaceAll("\\", "/");
-    let bytes = await readFile(file);
-    const raw = bytes;
-    const input = sha256(bytes);
+    const source = await memo.lookup(file);
+    const known = source.value;
+    let raw;
+    const readRaw = async () => (raw ??= await readFile(file));
+    const input = known?.sha256 ?? sha256(await readRaw());
+    const size = known?.bytes ?? raw.length;
     let target = path;
-    const entry = { sha256: input, bytes: bytes.length };
+    let readWire = readRaw;
+    const entry = { sha256: input, bytes: size };
     if (path.endsWith(".glb")) {
       target += ".gz";
       const packed = join(cache, `${input}.glb.gz`);
-      try {
-        bytes = await readFile(packed);
-        if (sha256(gunzipSync(bytes)) !== input) throw new Error("Invalid cached compression");
-      } catch {
-        bytes = gzipSync(raw, { level: 9 });
-        await writeFile(packed, bytes);
+      const cached = await memo.lookup(packed);
+      let gz;
+      readWire = async () => (gz ??= await readFile(packed));
+      let wire = cached.value?.decodedSha256 === input ? cached.value : undefined;
+      if (!wire) {
+        try {
+          gz = await readFile(packed);
+          if (sha256(gunzipSync(gz)) !== input) throw new Error("Invalid cached compression");
+        } catch {
+          gz = gzipSync(await readRaw(), { level: 9 });
+          await writeFile(packed, gz);
+        }
+        // RFC 1952 OS byte is informational. Bun emits 19 on macOS and 3 on Linux;
+        // normalize it so identical compressed content has one portable wire hash.
+        if (gz[9] !== 255) {
+          gz[9] = 255;
+          await writeFile(packed, gz);
+        }
+        // A rewritten file gets a new ctime, so a stale key here never matches.
+        wire = cached.remember({ sha256: sha256(gz), bytes: gz.length, decodedSha256: input });
       }
-      // RFC 1952 OS byte is informational. Bun emits 19 on macOS and 3 on Linux;
-      // normalize it so identical compressed content has one portable wire hash.
-      if (bytes[9] !== 255) {
-        bytes[9] = 255;
-        await writeFile(packed, bytes);
-      }
-      entry.sha256 = sha256(bytes);
-      entry.bytes = bytes.length;
+      entry.sha256 = wire.sha256;
+      entry.bytes = wire.bytes;
       entry.decodedSha256 = input;
       entry.input = path;
       entry.inputSha256 = input;
-    } else if (path.endsWith(".gz")) entry.decodedSha256 = sha256(gunzipSync(bytes));
+    } else if (path.endsWith(".gz"))
+      entry.decodedSha256 = known?.decodedSha256 ?? sha256(gunzipSync(await readRaw()));
+    source.remember(
+      entry.decodedSha256 && !entry.input
+        ? { sha256: input, bytes: size, decodedSha256: entry.decodedSha256 }
+        : { sha256: input, bytes: size },
+    );
     // Reuse a prior no-benefit compression decision only for identical bytes.
     // Changed/new files are compressed; logical/source metadata still regenerates.
     const expected = expectedEntries?.[target];
@@ -109,12 +170,20 @@ export async function prepare(
       if (!work) {
         work = (async () => {
           const packed = transportPath(directory, entry.sha256);
+          const cached = await memo.lookup(packed);
+          if (cached.value?.decodedSha256 === entry.sha256) return cached.value;
+          const identity = (encoded) => ({
+            sha256: sha256(encoded),
+            bytes: encoded.length,
+            decodedSha256: entry.sha256,
+          });
           try {
             const encoded = await readFile(packed);
             if (sha256(brotliDecompressSync(encoded)) !== entry.sha256)
               throw new Error("Invalid cached Brotli compression");
-            return encoded;
+            return cached.remember(identity(encoded));
           } catch {
+            const bytes = await readWire();
             const encoded = await compressBrotli(bytes, {
               params: {
                 [constants.BROTLI_PARAM_QUALITY]: BROTLI_QUALITY,
@@ -124,7 +193,7 @@ export async function prepare(
             const temporary = `${packed}.tmp-${process.pid}-${writeId++}`;
             await writeFile(temporary, encoded);
             await rename(temporary, packed);
-            return encoded;
+            return identity(encoded);
           }
         })();
         compressions.set(entry.sha256, work);
@@ -133,23 +202,20 @@ export async function prepare(
       compressions.delete(entry.sha256);
       // Already compressed media occasionally grows; never increase wire size.
       // Non-streaming candidates use quality 11, including gzip and KTX2 payloads.
-      if (encoded.length < bytes.length)
+      if (encoded.bytes < entry.bytes)
         entry.transport = {
           encoding: "br",
           quality: BROTLI_QUALITY,
-          sha256: sha256(encoded),
-          bytes: encoded.length,
+          sha256: encoded.sha256,
+          bytes: encoded.bytes,
         };
     }
     entry.object = objectKey(target, entry);
     if (entries[target]) throw new Error(`Duplicate generated asset: ${target}`);
     entries[target] = entry;
-    if (
-      process.argv[1] === fileURLToPath(import.meta.url) &&
-      Object.keys(entries).length % 250 === 0
-    )
+    if (process.argv[1] === fileURLToPath(import.meta.url) && ++processed % 250 === 0)
       console.log(
-        `${expectedEntries ? "Verified" : "Compressed"} ${Object.keys(entries).length} assets (Brotli quality ${BROTLI_QUALITY})`,
+        `${expectedEntries ? "Verified" : "Compressed"} ${processed} assets (Brotli quality ${BROTLI_QUALITY})`,
       );
   };
   const inputs = await files(publicDir);
@@ -166,6 +232,7 @@ export async function prepare(
       }
     }),
   );
+  await memo.save();
   // Filesystem enumeration order never affects the release identity.
   const ordered = Object.fromEntries(
     Object.entries(entries).sort(([a], [b]) => a.localeCompare(b, "en")),
@@ -177,7 +244,25 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const verifying = process.argv[2] === "verify";
   const expected = await readManifest();
   const expectedBytes = verifying ? await readFile(destination, "utf8") : undefined;
-  const manifest = await prepare(root, expected?.files, undefined, !verifying);
+  if (verifying && expected) {
+    // Fail before hashing when files were added or removed without regenerating.
+    const publicDir = join(root, "public");
+    const present = new Set(
+      (await files(publicDir)).map((file) => {
+        const path = relative(publicDir, file).replaceAll("\\", "/");
+        return path.endsWith(".glb") ? `${path}.gz` : path;
+      }),
+    );
+    const missing = Object.keys(expected.files).filter((path) => !present.delete(path));
+    if (missing.length || present.size)
+      throw new Error(
+        `Asset manifest is stale (missing: ${JSON.stringify(missing.slice(0, 5))}, unlisted: ${JSON.stringify([...present].slice(0, 5))}). Run bun run assets:prepare and commit manifest.json.`,
+      );
+  }
+  // --full ignores remembered identities and rehashes every source and cache file.
+  const manifest = await prepare(root, expected?.files, undefined, !verifying, {
+    reuseIdentities: !process.argv.includes("--full"),
+  });
   const bytes = JSON.stringify(manifest, null, 2) + "\n";
   if (verifying) {
     if (expectedBytes !== bytes) {
