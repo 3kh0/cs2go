@@ -386,7 +386,7 @@ body:has(#skin-menu:not(.hidden)) #skins-button {
   width: 100%;
   height: 100%;
   max-height: none;
-  padding: calc(48 * var(--menu-unit)) calc(48 * var(--menu-unit)) 0;
+  padding: calc(24 * var(--menu-unit)) calc(48 * var(--menu-unit)) 0;
   overflow: visible;
   box-shadow: none;
   /* Native mainmenu.css .popup-inspect-border, layered above the 3D scene. */
@@ -413,15 +413,17 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  gap: calc(28 * var(--menu-unit));
-  width: min(80%, calc(720 * var(--menu-unit)));
+  gap: calc(16 * var(--menu-unit));
+  width: max-content;
+  max-width: min(80%, calc(900 * var(--menu-unit)));
+  min-height: calc(124 * var(--menu-unit));
   margin: 0 auto;
-  padding: calc(8 * var(--menu-unit)) calc(28 * var(--menu-unit)) calc(28 * var(--menu-unit));
+  padding: 0 calc(28 * var(--menu-unit)) calc(18 * var(--menu-unit)) 0;
   border-bottom: calc(6 * var(--menu-unit)) solid var(--item-rarity, #b9bdc0);
 }
 #weapon-inspect-collection-icon {
   flex: 0 0 auto;
-  width: calc(80 * var(--menu-unit));
+  width: calc(124 * var(--menu-unit));
   height: calc(100 * var(--menu-unit));
   object-fit: contain;
 }
@@ -429,7 +431,7 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   display: none;
 }
 .weapon-inspect-heading-text {
-  flex: 1;
+  flex: 0 1 auto;
   min-width: 0;
 }
 #skin-menu #skin-title {
@@ -439,8 +441,9 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   border: 0;
   white-space: nowrap;
   text-align: left;
+  letter-spacing: calc(1.5 * var(--menu-unit));
   font:
-    500 calc(50 * var(--menu-unit)) Stratum2,
+    500 calc(40 * var(--menu-unit)) Stratum2,
     sans-serif;
   text-shadow: 0 1px 4px #0005;
 }
@@ -467,9 +470,9 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
 .weapon-inspect-caption {
   flex: 0 0 auto;
   min-height: calc(72 * var(--menu-unit));
-  color: #ddd;
+  color: #ccc;
   font-size: calc(15 * var(--menu-unit));
-  text-shadow: 0 1px 3px #0008;
+  text-shadow: none;
 }
 .weapon-inspect-caption p {
   margin: calc(6 * var(--menu-unit)) 0;
@@ -478,7 +481,7 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   display: none;
 }
 .weapon-inspect-footer {
-  flex: 0 0 calc(58 * var(--menu-unit));
+  flex: 0 0 calc(76 * var(--menu-unit));
   display: flex;
   align-items: center;
   border-top: 1px solid #ffffff30;
@@ -624,7 +627,9 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   margin: 0;
   color: #ccc;
   text-align: left;
-  font-size: calc(24 * var(--menu-unit));
+  font:
+    400 calc(24 * var(--menu-unit)) / 1.2 Arial,
+    sans-serif;
 }
 .weapon-inspect-description {
   width: min(100%, calc(900 * var(--menu-unit)));
@@ -632,8 +637,9 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   margin: 0 auto;
   overflow: auto;
   padding: calc(16 * var(--menu-unit)) calc(28 * var(--menu-unit)) 0;
-  font-size: calc(18 * var(--menu-unit));
-  line-height: 1.35;
+  font:
+    400 calc(18 * var(--menu-unit)) / 1.35 Arial,
+    sans-serif;
 }
 .weapon-inspect-description p {
   margin: 0 0 calc(20 * var(--menu-unit));
@@ -738,7 +744,7 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   gap: calc(12 * var(--menu-unit));
 }
 #skin-menu #weapon-inspect-options input[type="number"] {
-  width: calc(120 * var(--menu-unit));
+  width: calc(124 * var(--menu-unit));
   padding: calc(6 * var(--menu-unit)) calc(8 * var(--menu-unit));
   background: #ffffff0d;
   border: 1px solid #ffffff30;

@@ -162,7 +162,7 @@ export function setupSkinMenu(selectKnife: (index: number) => void, getGame: () 
     titleWidth = width;
     titleHostHeight = overlay.clientHeight;
     titleText = title.textContent ?? "";
-    title.style.fontSize = "calc(50 * var(--menu-unit))";
+    title.style.fontSize = "calc(40 * var(--menu-unit))";
     const preferred = Number.parseFloat(getComputedStyle(title).fontSize);
     if (title.scrollWidth > width)
       title.style.fontSize = `${Math.max(preferred * 0.4, (preferred * width) / title.scrollWidth)}px`;
