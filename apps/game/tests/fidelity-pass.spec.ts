@@ -231,29 +231,15 @@ test("signed-in inventory renders owned items as a searchable rarity grid", asyn
   const bounds = (await page.locator("#skin-menu").boundingBox())!;
   expect(bounds.width).toBeGreaterThan(1300);
   expect(bounds.y).toBeLessThan(70);
-  const equippedRow = page
-    .locator(".steam-item")
-    .filter({ has: page.locator("button") })
-    .first();
-  const equip = equippedRow.locator("button");
+  const equippedRow = page.locator(".steam-item-inspectable").first();
   await equippedRow.hover();
-  await expect(equip).toHaveCSS("opacity", "1");
-  const rowBox = (await equippedRow.boundingBox())!;
-  const artBox = (await equippedRow.locator("img").boundingBox())!;
-  const actionBox = (await equip.boundingBox())!;
-  expect(actionBox.height).toBeLessThan(40);
-  expect(actionBox.height).toBeGreaterThan(10);
-  expect(actionBox.x).toBeGreaterThanOrEqual(rowBox.x);
-  expect(actionBox.x + actionBox.width).toBeLessThanOrEqual(rowBox.x + rowBox.width);
-  expect(actionBox.y).toBeGreaterThanOrEqual(artBox.y);
-  expect(actionBox.y + actionBox.height).toBeLessThanOrEqual(artBox.y + artBox.height);
-  await equip.focus();
+  await expect(equippedRow.locator("button")).toHaveCount(0);
+  await equippedRow.focus();
   await page.locator("#inventory-sort").hover();
-  await expect(equip).toBeFocused();
-  await expect(equip).toHaveCSS("opacity", "1");
-  await equip.click();
-  await expect(equip).toHaveAttribute("aria-pressed", "true", { timeout: 30_000 });
-  await expect(equip).toHaveText("EQUIPPED");
+  await expect(equippedRow).toBeFocused();
+  await equippedRow.press("Enter");
+  await page.locator("#weapon-action-equip").click();
+  await expect(page.locator("#steam-status")).toContainText("Equipped", { timeout: 30_000 });
   await page.screenshot({ path: "artifacts/cs2-owned-inventory.png" });
   await page.locator("#inventory-search").click();
   await page.locator("#skin-search").fill("Weapon Case");

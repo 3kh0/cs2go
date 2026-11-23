@@ -390,7 +390,7 @@ body:has(#skin-menu:not(.hidden)) #skins-button {
   overflow: visible;
   box-shadow: none;
   /* Native mainmenu.css .popup-inspect-border, layered above the 3D scene. */
-  background: linear-gradient(to top, #000000ed, #0000 40%, #0000 60%, #000000f2);
+  background: linear-gradient(to top, #0009, #0000 40%, #0000 60%, #0008);
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -407,14 +407,38 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   > :is(.home-header, .home-content) {
   visibility: hidden;
 }
-#skin-menu #skin-title {
+#skin-menu .weapon-inspect-heading {
+  position: relative;
+  z-index: 1;
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: calc(28 * var(--menu-unit));
   width: min(80%, calc(720 * var(--menu-unit)));
   margin: 0 auto;
-  padding: 0 0 calc(14 * var(--menu-unit));
-  border-bottom: 0;
+  padding: calc(8 * var(--menu-unit)) calc(28 * var(--menu-unit)) calc(28 * var(--menu-unit));
+  border-bottom: calc(6 * var(--menu-unit)) solid var(--item-rarity, #b9bdc0);
+}
+#weapon-inspect-collection-icon {
+  flex: 0 0 auto;
+  width: calc(80 * var(--menu-unit));
+  height: calc(100 * var(--menu-unit));
+  object-fit: contain;
+}
+#weapon-inspect-collection-icon[hidden] {
+  display: none;
+}
+.weapon-inspect-heading-text {
+  flex: 1;
+  min-width: 0;
+}
+#skin-menu #skin-title {
+  width: 100%;
+  margin: 0;
+  padding: 0 0 calc(8 * var(--menu-unit));
+  border: 0;
   white-space: nowrap;
-  text-align: center;
+  text-align: left;
   font:
     500 calc(50 * var(--menu-unit)) Stratum2,
     sans-serif;
@@ -499,6 +523,8 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
   box-shadow: 0 2px 5px #0004;
   font-size: calc(15 * var(--menu-unit));
 }
+#skin-menu #weapon-action-customize[hidden],
+#skin-menu #weapon-inspect-customize[hidden],
 #weapon-inspect-options[hidden],
 #weapon-inspect-context[hidden] {
   display: none;
@@ -595,14 +621,10 @@ body:has(#skin-menu:not(.hidden):is([data-inspect="true"], [data-music-inspect="
 }
 
 #weapon-inspect-collection {
-  flex: 0 0 auto;
-  width: min(80%, calc(720 * var(--menu-unit)));
-  margin: 0 auto;
-  padding-bottom: calc(14 * var(--menu-unit));
-  border-bottom: calc(6 * var(--menu-unit)) solid var(--item-rarity, #b9bdc0);
-  text-align: center;
+  margin: 0;
   color: #ccc;
-  font-size: calc(20 * var(--menu-unit));
+  text-align: left;
+  font-size: calc(24 * var(--menu-unit));
 }
 .weapon-inspect-description {
   width: min(100%, calc(900 * var(--menu-unit)));

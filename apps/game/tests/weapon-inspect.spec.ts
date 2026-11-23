@@ -296,6 +296,12 @@ test("G3SG1 High Seas reframes the arriving legacy body and reveals its native c
   page,
 }) => {
   test.setTimeout(150_000);
+  const errors: string[] = [];
+  const iconRequests: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("request", (request) => {
+    if (request.url().includes("/ui/collections/")) iconRequests.push(request.url());
+  });
   await page.addInitScript(() =>
     localStorage.setItem(
       "cs2go-local-inventory",
@@ -309,6 +315,23 @@ test("G3SG1 High Seas reframes the arriving legacy body and reveals its native c
   await page.locator('[data-item-weapon="25"][data-skin="11_712"]').click();
   await page.locator("#weapon-action-inspect").click();
   await expect(page.locator("#weapon-inspect-collection")).toHaveText("The Horizon Collection");
+  const collectionIcon = page.locator("#weapon-inspect-collection-icon");
+  await expect(collectionIcon).toBeVisible();
+  await expect
+    .poll(() => collectionIcon.evaluate((image: HTMLImageElement) => image.naturalWidth))
+    .toBeGreaterThan(0);
+  expect(iconRequests.length).toBeGreaterThan(0);
+  expect(iconRequests.every((url) => new URL(url).origin === new URL(page.url()).origin)).toBe(
+    true,
+  );
+  expect(errors).toEqual([]);
+  await expect(page.locator("#weapon-inspect-description > p")).toHaveCount(2);
+  await expect(page.locator("#weapon-inspect-description > p").first()).toContainText(
+    "The pricy G3SG1",
+  );
+  await expect(page.locator("#weapon-inspect-description > p").first()).toContainText(
+    "nautical theme",
+  );
   await expect(page.locator("#weapon-inspect-description")).toContainText(
     "nautical theme and decorative brass metal work",
   );
@@ -353,6 +376,7 @@ test("G3SG1 High Seas reframes the arriving legacy body and reveals its native c
         requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
       ),
   );
+  await page.screenshot({ path: "artifacts/weapon-inspect-high-seas-overview.png" });
   await page.locator("#weapon-inspect-stage").hover();
   await page.mouse.wheel(0, -10000);
   await expect(page.locator("#weapon-inspect-stage")).toHaveAttribute("data-requested-zoom", "4");
@@ -375,6 +399,26 @@ test("G3SG1 High Seas reframes the arriving legacy body and reveals its native c
   await page.screenshot({ path: "artifacts/weapon-inspect-high-seas-certificate.png" });
   await stage.hover();
   await expect(page.locator("#weapon-inspect-certificate")).toBeHidden();
-  await page.locator("#close-item-details").click();
+  const closing = await page.evaluate(() => {
+    document.getElementById("close-item-details")!.click();
+    const canvas = window.__game.renderer.domElement;
+    const animation = canvas.getAnimations()[0]!;
+    animation.pause();
+    animation.currentTime = 110;
+    return {
+      visible: document.getElementById("skin-form")!.checkVisibility(),
+      opacity: Number(getComputedStyle(canvas).opacity),
+    };
+  });
+  expect(closing.visible).toBe(true);
+  expect(closing.opacity).toBeGreaterThan(0);
+  expect(closing.opacity).toBeLessThan(1);
+  await page.screenshot({ path: "artifacts/weapon-inspect-closing.png" });
+  await page.evaluate(() => {
+    for (const animation of window.__game.renderer.domElement.getAnimations()) animation.finish();
+  });
   await expect(page.locator("#skin-form")).toBeHidden();
+  expect(await page.evaluate(() => window.__game.renderer.domElement.getAnimations().length)).toBe(
+    0,
+  );
 });

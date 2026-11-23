@@ -101,8 +101,46 @@ test("Steam profile and owned skin UI preserve exact wear and seed and handle si
   await expect(page.locator("#steam-status")).toContainText("3 total items");
   await expect(page.locator("#steam-logout")).toBeVisible();
   await page.screenshot({ path: "artifacts/steam-account-inventory.png" });
-  await page.locator('[data-steam-asset="1"]').click();
+  const imported = page.locator('.steam-item[data-steam-asset="1"]');
+  await imported.hover();
+  await expect(imported.locator("button")).toHaveCount(0);
+  const beforeInspection = await page.evaluate(() => localStorage.getItem("cs2go-skins-v1"));
+  await imported.click({ button: "right" });
+  await expect(page.locator("#weapon-inspect-context")).toBeVisible();
+  await expect(page.locator("#weapon-action-customize")).toBeHidden();
+  await page.locator("#weapon-action-inspect").click();
+  await expect(page.locator("#skin-title")).toHaveText("AK-47 | Case Hardened");
+  await expect(page.locator("#weapon-inspect-stage")).toHaveAttribute("data-weapon", "0", {
+    timeout: 30_000,
+  });
+  await expect(page.locator("#weapon-inspect-loading")).toHaveText("");
+  await page.locator("#weapon-inspect-info").click();
+  await expect(page.locator("#weapon-inspect-certificate")).toContainText("Pattern Template: 661");
+  await expect(page.locator("#weapon-inspect-certificate")).toContainText(
+    "Wear Rating: 0.231234565",
+  );
+  await expect
+    .poll(
+      () =>
+        page.evaluate(() => {
+          const preview = window.__game.weaponInspectPreview as unknown as {
+            model?: import("three").Group;
+          };
+          return preview.model?.getObjectByName("skin-legacy")?.visible;
+        }),
+      { timeout: 30_000 },
+    )
+    .toBe(true);
+  await page.screenshot({ path: "artifacts/steam-item-inspection.png" });
+  expect(await page.evaluate(() => localStorage.getItem("cs2go-skins-v1"))).toBe(beforeInspection);
+  await page.locator("#close-item-details").click();
+  await expect(page.locator("#skin-form")).toBeHidden();
+  await expect(imported).toBeFocused();
+  await imported.press("Enter");
+  await expect(page.locator("#weapon-inspect-context")).toBeVisible();
+  await page.locator("#weapon-action-equip").click();
   await expect(page.locator("#steam-status")).toContainText("Equipped AK-47", { timeout: 30_000 });
+
   const choice = await page.evaluate(() => JSON.parse(localStorage.getItem("cs2go-skins-v1")!)[0]);
   expect(choice).toEqual({ id: "7_44", wear: 0.231234565, seed: 661 });
   failSync = true;

@@ -60,30 +60,6 @@
   color: #e5e6df;
   margin-top: 2px;
 }
-#skin-menu #skin-grid .steam-item > button {
-  position: absolute;
-  top: calc(84 * var(--menu-unit));
-  right: calc(13 * var(--menu-unit));
-  bottom: auto;
-  width: auto;
-  max-width: calc(166 * var(--menu-unit));
-  height: auto;
-  min-height: 0;
-  margin: 0;
-  padding: calc(5 * var(--menu-unit)) calc(8 * var(--menu-unit));
-  border: 0;
-  border-radius: 0;
-  font-size: calc(12 * var(--menu-unit));
-  line-height: 1.2;
-  white-space: nowrap;
-  background: #18232fdf;
-  opacity: 0;
-}
-#skin-menu #skin-grid .steam-item:hover > button,
-#skin-menu #skin-grid .steam-item:focus-within > button,
-#skin-menu #skin-grid .steam-item > button[aria-pressed="true"] {
-  opacity: 1;
-}
 .steam-inventory-empty {
   grid-column: 1 / -1;
   color: #bfc7ca;
@@ -148,4 +124,12 @@
   display: block;
   color: #b4b9ba;
   margin-bottom: 4px;
+}
+
+.steam-item-inspectable {
+  cursor: pointer;
+}
+.steam-item-inspectable:focus-visible {
+  outline: 1px solid #ddd;
+  outline-offset: -1px;
 }

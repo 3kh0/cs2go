@@ -1,5 +1,6 @@
+import type { ImportedItemActions } from "./skin-menu";
 import { assetUrl } from "./asset-url";
-import { skinCatalog, skinChoices, setSkin } from "./skins";
+import { skinCatalog, setSkin } from "./skins";
 import { matchSteamSkin, steamChoice, type SteamItem } from "./steam-inventory";
 import { setPlayerProfile, type SteamProfile } from "./player-profile";
 import "./steam-account.css";
@@ -153,6 +154,7 @@ export function setupSteamAccount() {
       const choice = skin && steamChoice(item, skin);
       const row = document.createElement("div");
       row.className = "steam-item";
+      row.dataset.steamAsset = item.assetId;
       row.style.setProperty(
         "--item-rarity",
         /^#[0-9a-f]{6}$/i.test(item.color ?? "") ? item.color! : "#b0c3d9",
@@ -180,44 +182,50 @@ export function setupSteamAccount() {
       row.append(description);
       if (skin && choice) {
         supported++;
-        const equip = document.createElement("button");
-        equip.className = "secondary";
-        const equipped = () =>
-          skinChoices[skin.weapon].id === choice.id &&
-          skinChoices[skin.weapon].wear === choice.wear &&
-          skinChoices[skin.weapon].seed === choice.seed;
-        equip.textContent = equipped() ? "EQUIPPED" : "EQUIP";
-        equip.setAttribute("aria-pressed", String(equipped()));
-        equip.dataset.steamAsset = item.assetId;
-        equip.dataset.steamWeapon = String(skin.weapon);
-        equip.onclick = async () => {
+        const equip = async () => {
           if (busy) return;
           busy = true;
           controls();
-          grid.querySelectorAll("button").forEach((button) => {
-            button.disabled = true;
-          });
           try {
             await setSkin(skin.weapon, choice);
             status.textContent = `Equipped ${item.name} with its Steam wear and pattern.`;
-            grid.querySelectorAll(`[data-steam-weapon="${skin.weapon}"]`).forEach((button) => {
-              button.setAttribute("aria-pressed", "false");
-              button.textContent = "EQUIP";
-            });
-            equip.textContent = "EQUIPPED";
-            equip.setAttribute("aria-pressed", "true");
           } catch (error) {
             status.textContent =
               error instanceof Error ? error.message : "This finish could not load.";
           } finally {
             busy = false;
             controls();
-            grid.querySelectorAll("button").forEach((button) => {
-              button.disabled = false;
-            });
           }
         };
-        row.append(equip);
+        row.tabIndex = 0;
+        row.setAttribute("role", "group");
+        row.setAttribute("aria-label", item.name);
+        row.setAttribute("aria-haspopup", "menu");
+        row.classList.add("steam-item-inspectable");
+        const openActions = (event?: MouseEvent) => {
+          if (busy) return;
+          const detail: ImportedItemActions = {
+            weapon: skin.weapon,
+            choice: { ...choice },
+            anchor: row,
+            pointer: event?.detail || event?.type === "contextmenu" ? event : undefined,
+            equip: () => {
+              void equip();
+            },
+          };
+          document.dispatchEvent(new CustomEvent("cs2go-imported-item-actions", { detail }));
+        };
+        row.onclick = openActions;
+        row.oncontextmenu = (event) => {
+          event.preventDefault();
+          openActions(event);
+        };
+        row.onkeydown = (event) => {
+          if (event.target === row && (event.key === "Enter" || event.key === " ")) {
+            event.preventDefault();
+            openActions();
+          }
+        };
       }
       grid.append(row);
     }
