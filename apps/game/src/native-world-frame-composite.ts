@@ -125,6 +125,12 @@ gl_FragColor=vec4(texture(lut,clamp(display,0.0,1.0)*(31.0/32.0)+vec3(.5/32.0)).
     if (this.target.width !== size.x || this.target.height !== size.y)
       this.target.setSize(size.x, size.y);
     const ratio = destination ? 1 : renderer.getPixelRatio();
+    // Three rounds the canvas viewport but floors its drawing buffer, so a
+    // fractional pixel ratio overhangs the buffer by a pixel. Clamp to real
+    // pixels so nested full-frame passes (smoke/water opaque reuse) match.
+    const framed = current.clone();
+    framed.z = Math.min(framed.z, size.x - framed.x);
+    framed.w = Math.min(framed.w, size.y - framed.y);
     // Three exposes its logical scissor but no current target scissor getter.
     // Only nested target callers need the two cached GL-state queries.
     const physicalScissor = destination
@@ -153,14 +159,14 @@ gl_FragColor=vec4(texture(lut,clamp(display,0.0,1.0)*(31.0/32.0)+vec3(.5/32.0)).
         destination.scissorTest = targetTest;
       }
     };
-    this.target.viewport.copy(current);
+    this.target.viewport.copy(framed);
     this.target.scissor.copy(physicalScissor);
     this.target.scissorTest = physicalScissorTest;
     let completed = false,
       postWorldShadowNeeds = shadowNeeds;
     try {
       renderer.setRenderTarget(this.target);
-      renderer.setViewport(current);
+      renderer.setViewport(framed);
       renderer.setScissor(physicalScissor);
       renderer.setScissorTest(physicalScissorTest);
       renderer.toneMapping = T.NoToneMapping;
@@ -170,14 +176,14 @@ gl_FragColor=vec4(texture(lut,clamp(display,0.0,1.0)*(31.0/32.0)+vec3(.5/32.0)).
       renderer.shadowMap.autoUpdate = false;
       renderer.shadowMap.needsUpdate = false;
       this.material.uniforms.frameUv.value.set(
-        current.x / size.x,
-        current.y / size.y,
-        current.z / size.x,
-        current.w / size.y,
+        framed.x / size.x,
+        framed.y / size.y,
+        framed.z / size.x,
+        framed.w / size.y,
       );
       this.material.uniforms.toneExposure.value = toneExposure;
       renderer.setRenderTarget(destination, face, mip);
-      renderer.setViewport(current.clone().divideScalar(ratio));
+      renderer.setViewport(framed.clone().divideScalar(ratio));
       renderer.setScissor(physicalScissor.clone().divideScalar(ratio));
       renderer.setScissorTest(physicalScissorTest);
       renderer.autoClear = false;

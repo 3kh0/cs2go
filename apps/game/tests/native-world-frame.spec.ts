@@ -30,6 +30,8 @@ test("native linear world blend precedes one actual VPOST with state and owned t
   expect(result.offscreenResult.after).toEqual(result.offscreenResult.before);
   expect(result.offscreenResult.inside).toEqual(result.oldOpaque);
   expect(result.offscreenResult.outside).toEqual([0, 255, 0, 255]);
+  expect(result.fractionalResult.error).toBe(0);
+  expect(result.fractionalResult.viewport).toEqual([0, 0, ...result.fractionalResult.buffer]);
   expect(result.disposed).toBe(2);
   expect(result.borrowedBeforeOwnerDispose).toBe(0);
   expect(result.borrowedDisposed).toBe(1);

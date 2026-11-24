@@ -237,6 +237,22 @@ export async function renderNativeWorldFrame() {
   }
   const after = state();
   const afterException = draw(opaque);
+  // A fractional pixel ratio rounds the canvas viewport (17 * 1.152 = 19.6 -> 20)
+  // past the floored drawing buffer (19). Nested full-frame passes, such as
+  // smoke/water opaque reuse, must see the buffer's real size.
+  renderer.setPixelRatio(1.152);
+  renderer.setSize(17, 13);
+  let fractionalViewport: number[] = [];
+  composite.render(renderer, () => {
+    fractionalViewport = renderer.getCurrentViewport(new T.Vector4()).toArray();
+  });
+  const fractionalResult = {
+    buffer: renderer.getDrawingBufferSize(new T.Vector2()).toArray(),
+    viewport: fractionalViewport,
+    error: renderer.getContext().getError(),
+  };
+  renderer.setPixelRatio(2);
+  renderer.setSize(16, 16);
   const offscreen = new T.WebGLRenderTarget(32, 32);
   renderer.setRenderTarget(offscreen);
   renderer.setScissorTest(false);
@@ -285,6 +301,7 @@ export async function renderNativeWorldFrame() {
     shadowResult,
     prepareResult,
     offscreenResult,
+    fractionalResult,
     wrongMixed,
     expectedHdr,
     results,
