@@ -64,6 +64,11 @@ import { createLadderState } from "./ladder";
 import { BreakableWorld } from "./breakables";
 import { DoorWorld } from "./doors";
 import { FootstepStride } from "./footsteps";
+import {
+  DEATHMATCH_PROTECTION,
+  DEATHMATCH_RESPAWN_DELAY,
+  chooseDeathmatchSpawnPoint,
+} from "./deathmatch";
 export const STEP = 1 / TICK_RATE;
 export type Match = {
   tick: number;
@@ -91,6 +96,8 @@ export type Match = {
   startingKills: Map<string, number>;
   shotsHeld: Set<string>;
   weaponCooldowns: Map<string, Record<number, number>>;
+  /** Deathmatch primary/secondary restored on each respawn. */
+  deathmatchLoadouts: Map<string, { primary: number | null; secondary: number }>;
 };
 export function createMatch(mode: MatchMode, map: DustMap): Match {
   // Room health/collision never mutate the shared startup map or another lobby.
@@ -132,6 +139,7 @@ export function createMatch(mode: MatchMode, map: DustMap): Match {
     startingKills: new Map(),
     shotsHeld: new Set(),
     weaponCooldowns: new Map(),
+    deathmatchLoadouts: new Map(),
     state: {
       breakables: breakables.states,
       ...(doors.states.length ? { doors: doors.states } : {}),
@@ -324,10 +332,20 @@ export function respawn(player: PlayerState, match: Match, preserve = false) {
     }),
   };
   player.punch = match.combat.get(player.id)!.punch;
+  const deathmatch = match.state.mode === "deathmatch";
   const points = match.map.spawns[player.team];
   const team = [...match.players.values()].filter((other) => other.team === player.team);
   const slot = Math.max(0, team.indexOf(player)) % points.length;
-  const point = points[slot];
+  const point =
+    (deathmatch
+      ? chooseDeathmatchSpawnPoint(
+          match.map.deathmatchSpawns?.length
+            ? match.map.deathmatchSpawns
+            : [...match.map.spawns.ct, ...match.map.spawns.t],
+          [...match.players.values()].filter((other) => other !== player && other.health > 0),
+          (from, to) => match.map.collision.visible(from, to),
+        )
+      : undefined) ?? points[slot];
   const spawn = new T.Vector3().fromArray(point);
   groundSpawn(spawn, match.map.collision);
   Object.assign(player, {
@@ -338,7 +356,9 @@ export function respawn(player: PlayerState, match: Match, preserve = false) {
     vz: 0,
     vertical: 0,
     eye: movement.standingEye,
-    yaw: match.map.spawnAngles?.[player.team][slot] ?? 0,
+    yaw: deathmatch
+      ? Math.random() * Math.PI * 2 - Math.PI
+      : (match.map.spawnAngles?.[player.team][slot] ?? 0),
     pitch: 0,
     grounded: true,
     health: 100,
@@ -382,13 +402,81 @@ export function respawn(player: PlayerState, match: Match, preserve = false) {
     player.helmet = true;
   }
   if (rules.freeKit && player.team === "ct") player.kit = true;
+  if (deathmatch) applyDeathmatchLoadout(match, player);
   Object.assign(player, player.magazines[player.weapon]);
+}
+/** Deathmatch spawns with the last chosen guns (or a team rifle) and protection. */
+function applyDeathmatchLoadout(match: Match, player: PlayerState) {
+  const saved = match.deathmatchLoadouts.get(player.id);
+  const fallback =
+    player.team === "t"
+      ? 0
+      : player.allowedWeapons.includes(9) && !player.allowedWeapons.includes(1)
+        ? 9
+        : 1;
+  const primary =
+    saved?.primary != null && weaponAvailable(saved.primary, player.team)
+      ? saved.primary
+      : fallback;
+  const secondary =
+    saved && weaponAvailable(saved.secondary, player.team) ? saved.secondary : player.secondary;
+  if (secondary !== player.secondary) {
+    delete player.magazines[player.secondary];
+    delete player.appearances[player.secondary];
+    player.secondary = secondary;
+  }
+  player.primary = primary;
+  for (const id of [primary, secondary]) {
+    player.magazines[id] = { ammo: weapons[id].mag, reserve: weapons[id].reserve };
+    newAppearance(match, player, id);
+  }
+  player.weapon = primary;
+  player.suppressed = weapons[primary].suppressed;
+  player.protection = DEATHMATCH_PROTECTION;
+}
+/** Free deathmatch purchase: replaces the slot's weapon without dropping it. */
+function buyDeathmatch(match: Match, player: PlayerState, index: number) {
+  if (
+    player.health <= 0 ||
+    match.state.phase !== "live" ||
+    !(player.protection! > 0) ||
+    index < 0 ||
+    isKnife(index) ||
+    !weapons[index] ||
+    !weaponAvailable(index, player.team) ||
+    (match.configurations.has(player.id) && !player.allowedWeapons.includes(index)) ||
+    player.magazines[index]
+  )
+    return;
+  const slot = weaponSlot(index);
+  if (slot !== 1 && slot !== 2) return;
+  const previous = slot === 1 ? player.primary : player.secondary;
+  cancelWeaponActions(player, match.actions.get(player.id)!);
+  if (previous !== null && previous !== index) {
+    delete player.magazines[previous];
+    delete player.appearances[previous];
+  }
+  if (slot === 1) player.primary = index;
+  else player.secondary = index;
+  newAppearance(match, player, index);
+  player.magazines[index] = { ammo: weapons[index].mag, reserve: weapons[index].reserve };
+  player.weapon = index;
+  player.cooldown = weapons[index].deploy;
+  player.reloadTime = 0;
+  Object.assign(player, player.magazines[index]);
+  match.deathmatchLoadouts.set(player.id, {
+    primary: player.primary,
+    secondary: player.secondary,
+  });
 }
 export function joinMatch(match: Match, player: PlayerState) {
   match.players.set(player.id, player);
   player.money = rulesFor(match.state.mode).startMoney;
   respawn(player, match);
-  if (match.state.phase !== "waiting") {
+  if (
+    match.state.phase !== "waiting" &&
+    (match.state.mode !== "deathmatch" || match.state.phase === "finished")
+  ) {
     player.health = 0;
     player.waiting = true;
   }
@@ -444,6 +532,7 @@ export function leaveMatch(match: Match, id: string) {
   match.configurations.delete(id);
   match.receipts.delete(id);
   match.highlights.delete(id);
+  match.deathmatchLoadouts.delete(id);
 }
 export function startRound(match: Match) {
   match.hazards.reset();
@@ -457,6 +546,10 @@ export function startRound(match: Match) {
   match.state.effects = [];
   const state = match.state,
     rules = rulesFor(state.mode);
+  if (state.mode === "deathmatch") {
+    startDeathmatch(match);
+    return;
+  }
   if (
     ![...match.players.values()].some((p) => p.team === "ct") ||
     ![...match.players.values()].some((p) => p.team === "t")
@@ -510,6 +603,63 @@ export function startRound(match: Match) {
       supportedBombPosition(match.map.collision, position),
     );
   match.shotsHeld.clear();
+}
+function startDeathmatch(match: Match) {
+  const state = match.state;
+  state.bomb = {
+    x: 0,
+    y: 0,
+    z: 0,
+    carrier: null,
+    planted: false,
+    timer: 40,
+    plantProgress: 0,
+    defuser: null,
+    progress: 0,
+    planter: null,
+  };
+  if (!match.players.size) {
+    Object.assign(state, {
+      phase: "waiting",
+      remaining: 0,
+      pause: 0,
+      buyRemaining: 0,
+      result: null,
+    });
+    return;
+  }
+  for (const player of match.players.values()) {
+    player.kills = player.deaths = player.score = 0;
+    respawn(player, match);
+    match.startingKills.set(player.id, 0);
+  }
+  Object.assign(state, {
+    phase: "live",
+    remaining: rulesFor(state.mode).roundTime,
+    buyRemaining: 0,
+    elapsed: 0,
+    pause: 0,
+    result: null,
+  });
+  match.shotsHeld.clear();
+}
+/** Highest points wins; kills then fewer deaths break ties. */
+export function endDeathmatch(match: Match) {
+  const state = match.state;
+  if (state.phase !== "live") return;
+  const [leader] = [...match.players.values()].sort(
+    (a, b) => (b.score ?? 0) - (a.score ?? 0) || b.kills - a.kills || a.deaths - b.deaths,
+  );
+  if (leader) leader.mvps++;
+  state.phase = "finished";
+  state.pause = rulesFor(state.mode).roundEndTime;
+  state.result = leader
+    ? {
+        winner: leader.team,
+        reason: `${leader.name} wins with ${leader.score ?? 0} points`,
+        mvp: { name: leader.name, reason: "Most points" },
+      }
+    : null;
 }
 export function endRound(
   match: Match,
@@ -752,6 +902,10 @@ function buy(match: Match, player: PlayerState, input: Input) {
   }
 
   const state = match.state;
+  if (state.mode === "deathmatch") {
+    buyDeathmatch(match, player, index);
+    return;
+  }
   if (
     player.health <= 0 ||
     state.buyRemaining <= 0 ||
@@ -854,8 +1008,10 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
         if (player.respawnTime >= 3) respawn(player, match);
       }
     if (
-      [...match.players.values()].some((p) => p.team === "ct") &&
-      [...match.players.values()].some((p) => p.team === "t")
+      state.mode === "deathmatch"
+        ? match.players.size > 0
+        : [...match.players.values()].some((p) => p.team === "ct") &&
+          [...match.players.values()].some((p) => p.team === "t")
     )
       startRound(match);
     if (state.phase !== "waiting") return events;
@@ -887,6 +1043,12 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
       return events;
     }
   }
+  if (state.mode === "deathmatch" && state.phase === "live")
+    for (const player of match.players.values())
+      if (player.health <= 0) {
+        player.respawnTime += STEP;
+        if (player.respawnTime >= DEATHMATCH_RESPAWN_DELAY) respawn(player, match);
+      }
   const frozen = state.phase === "freeze" || state.phase === "halftime";
   state.buyRemaining = Math.max(0, state.buyRemaining - STEP);
   if (state.phase === "freeze") {
@@ -935,6 +1097,20 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
       );
     }
     buy(match, player, input);
+    if (player.protection) {
+      player.protection = Math.max(0, player.protection - STEP);
+      // Moving or attacking ends spawn protection, matching offline deathmatch.
+      if (
+        input.forward ||
+        input.right ||
+        input.jump ||
+        input.fire ||
+        input.alternate ||
+        input.stab ||
+        input.utility
+      )
+        player.protection = 0;
+    }
     playerUtility(match, player, input, STEP);
     if (input.utility) cancelWeaponActions(player, action);
     if (input.select >= 0 && player.magazines[input.select] && input.select !== player.weapon) {
@@ -1039,6 +1215,9 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
     }
     if (input.fire || input.alternate) match.shotsHeld.add(player.id);
     else match.shotsHeld.delete(player.id);
+    // Deathmatch reserves never run dry.
+    if (state.mode === "deathmatch" && !isKnife(player.weapon))
+      player.reserve = weapons[player.weapon].reserve;
     player.magazines[player.weapon] = { ammo: player.ammo, reserve: player.reserve };
     player.accuracy = match.combat.get(player.id)!.accuracy[player.weapon];
     player.recoilIndex = match.combat.get(player.id)!.recoil[player.weapon].index;
@@ -1105,6 +1284,14 @@ function stepMatchRules(match: Match, inputs: Map<string, Input>): MatchEvent[] 
       qw: ball.quaternion.w,
     });
   stepUtility(match, STEP, events);
+  if (state.mode === "deathmatch") {
+    if (state.phase === "live") {
+      state.elapsed += STEP;
+      state.remaining = Math.max(0, state.remaining - STEP);
+      if (!state.remaining) endDeathmatch(match);
+    }
+    return events;
+  }
   const alive = (team: Team) =>
     [...match.players.values()].filter((player) => player.team === team && player.health > 0);
   const postRound = state.phase === "post";

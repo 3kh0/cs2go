@@ -1,4 +1,11 @@
-import { isMapId, MAPS, PROTOCOL_VERSION, validRoom, type PublicLobby } from "@cs2go/protocol";
+import {
+  isMapId,
+  isMatchMode,
+  MAPS,
+  PROTOCOL_VERSION,
+  validRoom,
+  type PublicLobby,
+} from "@cs2go/protocol";
 import { assetUrl } from "./asset-url";
 import "./public-lobbies.css";
 
@@ -14,7 +21,10 @@ function validLobby(value: unknown): value is PublicLobby {
     typeof lobby.name === "string" &&
     lobby.name.length <= 64 &&
     isMapId(lobby.map) &&
-    (lobby.mode === "casual" || lobby.mode === "competitive") &&
+    isMatchMode(lobby.mode) &&
+    (lobby.persistent === undefined || typeof lobby.persistent === "boolean") &&
+    (lobby.bots === undefined ||
+      (Number.isInteger(lobby.bots) && lobby.bots >= 0 && lobby.bots <= 20)) &&
     Number.isInteger(lobby.players) &&
     Number.isInteger(lobby.capacity) &&
     lobby.players >= 0 &&
@@ -25,7 +35,10 @@ function validLobby(value: unknown): value is PublicLobby {
 }
 
 /** Refresh on explicit navigation/server changes; no background polling loops. */
-export function setupPublicLobbies(server: HTMLSelectElement, join: (room: string) => void) {
+export function setupPublicLobbies(
+  server: { readonly value: string },
+  join: (room: string) => void,
+) {
   const list = document.getElementById("public-lobby-list")!;
   const status = document.getElementById("public-lobby-status")!;
   const refreshButton = document.getElementById("refresh-lobbies") as HTMLButtonElement;
@@ -37,6 +50,11 @@ export function setupPublicLobbies(server: HTMLSelectElement, join: (room: strin
   };
   const refresh = async () => {
     cancel();
+    if (!/^wss?:\/\//.test(server.value)) {
+      list.replaceChildren();
+      status.textContent = "Add a custom server to browse its lobbies.";
+      return;
+    }
     const controller = (request = new AbortController());
     refreshButton.disabled = true;
     list.replaceChildren();
@@ -81,7 +99,20 @@ export function setupPublicLobbies(server: HTMLSelectElement, join: (room: strin
         const name = document.createElement("strong");
         name.textContent = lobby.name;
         const metadata = document.createElement("small");
-        metadata.textContent = `${MAPS[lobby.map].name} · ${lobby.mode === "casual" ? "Casual" : "Competitive"}`;
+        const mode = { casual: "Casual", competitive: "Competitive", deathmatch: "Deathmatch" }[
+          lobby.mode
+        ];
+        const bots = lobby.bots ? ` · ${lobby.bots} ${lobby.bots === 1 ? "bot" : "bots"}` : "";
+        metadata.textContent = lobby.persistent
+          ? `${MAPS[lobby.map].name} · Rotating maps${bots}`
+          : `${MAPS[lobby.map].name} · ${mode}${bots}`;
+        if (lobby.persistent) {
+          button.classList.add("persistent-lobby");
+          const live = document.createElement("span");
+          live.className = "public-lobby-live";
+          live.textContent = "BOT LOBBY";
+          name.append(live);
+        }
         detail.append(name, metadata);
         const count = document.createElement("span");
         count.className = "public-lobby-count";

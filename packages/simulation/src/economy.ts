@@ -1,5 +1,5 @@
 import { weapons } from "./physics";
-export type MatchMode = "casual" | "competitive";
+export type MatchMode = "casual" | "competitive" | "deathmatch";
 export type Team = "ct" | "t";
 export type RoundReason = "elimination" | "bomb" | "defuse" | "timeout";
 // Valve shipped cfg/gamemode_{casual,competitive}.cfg and DumpSource2/convars.txt
@@ -37,6 +37,24 @@ const rules = {
     startingLossLevel: 1,
     maxRounds: 24,
   },
+  // Online free-for-all: weapons are free during spawn protection, armor is
+  // granted, and the single "round" is the ten-minute match clock.
+  deathmatch: {
+    startMoney: 0,
+    maxMoney: 0,
+    freeArmor: true,
+    freeKit: false,
+    freezeTime: 0,
+    buyTime: 0,
+    roundTime: 600,
+    roundEndTime: 15,
+    teamSize: 10,
+    plantReward: 0,
+    defuseReward: 0,
+    teamKillPenalty: 0,
+    startingLossLevel: 0,
+    maxRounds: 1,
+  },
 } as const;
 export function rulesFor(mode: MatchMode) {
   return rules[mode];
@@ -45,6 +63,7 @@ export function weaponPrice(id: number) {
   return weapons[id]?.price ?? Infinity;
 }
 export function killReward(id: number, mode: MatchMode) {
+  if (mode === "deathmatch") return 0;
   return (weapons[id]?.killAward ?? 300) * (mode === "casual" ? 0.5 : 1);
 }
 export function weaponAvailable(id: number, team: Team) {

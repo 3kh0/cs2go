@@ -4,7 +4,7 @@ import { isKnife, WEAPON_COUNT } from "./armory";
 import { isMapId, type MapId } from "./maps";
 export { MAPS, MAP_IDS, isMapId, type MapId } from "./maps";
 export { isKnife, knifeDefinitions, WEAPON_COUNT } from "./armory";
-export const PROTOCOL_VERSION = 16;
+export const PROTOCOL_VERSION = 17;
 export type DoorState = {
   id: string;
   angle: number;
@@ -24,6 +24,10 @@ export type PublicLobby = {
   capacity: number;
   teams: Record<Team, number>;
   phase: RoundState["phase"];
+  /** Server-owned rooms that always exist and rotate maps between matches. */
+  persistent?: boolean;
+  /** Server bots currently filling the room; not included in `players`. */
+  bots?: number;
 };
 export const MAX_CHAT_LENGTH = 240;
 export const CHAT_INTERVAL_MS = 750;
@@ -85,7 +89,11 @@ export type PlayerConfiguration = {
   gloves?: Record<Team, GloveChoice>;
   loadouts: Record<Team, number[]>;
 };
-export type MatchMode = "casual" | "competitive";
+export type MatchMode = "casual" | "competitive" | "deathmatch";
+export const MATCH_MODES: readonly MatchMode[] = ["casual", "competitive", "deathmatch"];
+export function isMatchMode(value: unknown): value is MatchMode {
+  return value === "casual" || value === "competitive" || value === "deathmatch";
+}
 export type Team = "ct" | "t";
 export type Vec3 = { x: number; y: number; z: number };
 export type Input = {
@@ -186,6 +194,12 @@ export type PlayerState = Vec3 & {
   helmet: boolean;
   kit: boolean;
   waiting: boolean;
+  /** Deathmatch points. */
+  score?: number;
+  /** Deathmatch spawn protection seconds; also the deathmatch buy window. */
+  protection?: number;
+  /** Server-controlled bot filling a server lobby. */
+  bot?: boolean;
 };
 export type MatchEvent =
   // Optional additive event: old clients ignore unknown kinds, and new clients
@@ -309,6 +323,8 @@ export type ServerMessage =
       round: RoundState;
     }
   | { type: "pong"; time: number }
+  /** The room moved to another map. Reload it and rejoin the same room. */
+  | { type: "map-change"; map: MapId; room: string }
   | { type: "error"; message: string };
 export type ClientMessage =
   | { type: "team"; team: Team }
@@ -529,7 +545,7 @@ export function parseClientMessage(raw: string): ClientMessage | null {
       ? value.room === "" && value.resume === undefined
       : validRoom(value.room)) &&
     validName(value.name) &&
-    (value.mode === "casual" || value.mode === "competitive") &&
+    isMatchMode(value.mode) &&
     (value.team === "ct" || value.team === "t")
   )
     return value as ClientMessage;

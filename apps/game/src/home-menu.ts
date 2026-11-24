@@ -29,7 +29,7 @@ export function homeMenuMarkup() {
       <aside class="home-cards">
         <section class="home-match-card" aria-label="Choose a match">
           <div class="mode-options session-options" role="group" aria-label="Session type"><button data-session="single" aria-pressed="true">OFFLINE</button><button data-session="multi" aria-pressed="false">ONLINE</button></div>
-          <div class="mode-options" role="group" aria-label="Game mode"><button data-mode="casual" aria-pressed="true">CASUAL</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE</button><button data-mode="deathmatch" data-offline-mode aria-pressed="false">DEATHMATCH</button><button data-mode="practice" data-offline-mode aria-pressed="false">PRACTICE</button></div>
+          <div class="mode-options" role="group" aria-label="Game mode"><button data-mode="casual" aria-pressed="true">CASUAL</button><button data-mode="competitive" aria-pressed="false">COMPETITIVE</button><button data-mode="deathmatch" aria-pressed="false">DEATHMATCH</button><button data-mode="practice" data-offline-mode aria-pressed="false">PRACTICE</button></div>
           <div class="match-browser">
             <section id="multiplayer-options" aria-label="Online matchmaking" hidden>
               <div class="private-match-actions">
@@ -41,8 +41,9 @@ export function homeMenuMarkup() {
                 <header class="private-match-heading"><img src="${assetUrl("/icons/team-ct.png")}" alt=""><div><span>ONLINE</span><h2>Play together</h2></div></header>
                 <div class="private-match-fields"><div><label for="match-server">SERVER</label><select id="match-server" aria-label="Server"><option value="wss://na1-cs.3kh0.dev/ws">na1-cs.3kh0.dev</option><option value="wss://na2-cs.3kh0.dev/ws">na2-cs.3kh0.dev</option></select></div>
                 <div><label for="match-room">LOBBY PIN</label><input id="match-room" type="text" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Enter PIN" aria-describedby="lobby-help"></div></div>
+                <div id="custom-server" class="custom-server" hidden><input id="custom-server-url" type="url" autocomplete="off" spellcheck="false" placeholder="wss://your-server.example/ws" aria-label="Custom server address"><button id="custom-server-add" type="button">ADD SERVER</button><button id="custom-server-remove" type="button">FORGET SERVER</button></div>
                 <div class="lobby-visibility"><label for="match-visibility">CREATE LOBBY AS</label><select id="match-visibility" aria-label="Lobby visibility"><option value="private">Private · PIN only</option><option value="public">Public · listed in browser</option></select></div>
-                <p id="lobby-help">Choose the same server as your friends. Create a match, or enter their six-digit PIN and select GO.</p>
+                <p id="lobby-help">Choose the same server as your friends. Jump into a bot lobby, create a match, or enter a six-digit PIN and select GO.</p>
                 <small id="match-status" role="status" aria-live="polite"></small>
               </div>
             </section>

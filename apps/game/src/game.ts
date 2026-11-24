@@ -2076,6 +2076,13 @@ export class Game {
     const secondary = this.randomDeathmatchWeapon(2);
     if (primary === undefined && secondary === undefined) return false;
     this.deathmatchRandomBought = true;
+    if (this.network) {
+      // The server applies each purchase; the primary is bought last so it ends equipped.
+      for (const index of [secondary, primary])
+        if (index !== undefined && index !== this.primary && index !== this.secondary)
+          this.network.buy(index);
+      return true;
+    }
     if (primary !== undefined) this.primary = primary;
     if (secondary !== undefined) this.secondary = secondary;
     for (const index of [primary, secondary]) {
@@ -6650,7 +6657,7 @@ export class Game {
         id,
         name: b.name,
         avatar: this.network?.stateForBot(b)?.avatar ?? botPortrait(b.team, b.rig.agentId),
-        bot: !this.network,
+        bot: !this.network || !!this.network.stateForBot(b)?.bot,
         kills: b.kills,
         deaths: b.deaths,
         score: b.deathmatchScore,

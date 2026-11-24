@@ -11,6 +11,7 @@ import {
   type Input,
   type DoorState,
   type MatchMode,
+  type MapId,
   type ServerMessage,
   type PlayerState,
 } from "@cs2go/protocol";
@@ -34,6 +35,15 @@ import {
 } from "./weapons";
 import { grenadeData } from "./utility";
 import { nativeShotDuration, nativeSoundCues, nativeReloadPhases } from "./weapon-motion";
+import { deathmatchKillPoints } from "./deathmatch-scoring";
+
+const MODE_NAMES: Record<MatchMode, string> = {
+  casual: "Casual",
+  competitive: "Competitive",
+  deathmatch: "Deathmatch",
+};
+/** Fired when the server rotates a room's map; app.ts reloads and rejoins. */
+export type MapChangeDetail = { map: MapId; room: string; url: string; mode: MatchMode };
 
 import { reloadProgress as remoteReloadProgress } from "@cs2go/simulation/weapon-actions";
 
@@ -41,6 +51,8 @@ type Bot = Game["bots"][number];
 export class MultiplayerMatch {
   connection: MatchConnection;
   request = neutralInput();
+  /** Purchases waiting for a later input frame; each frame carries one buy. */
+  private buyQueue: { index: number; drop: boolean }[] = [];
   applying = false;
   private drops = new Map<number, T.Group>();
   private peers = new Map<string, Bot>();
@@ -107,6 +119,8 @@ export class MultiplayerMatch {
     });
   }
 
+  private readonly url: string;
+  private readonly mode: MatchMode;
   constructor(
     privateGame: Game,
     url: string,
@@ -116,6 +130,8 @@ export class MultiplayerMatch {
     visibility: "private" | "public" = "private",
   ) {
     this.game = privateGame;
+    this.url = url;
+    this.mode = mode;
     const world = privateGame.dust!;
     this.connection = new MatchConnection(
       url,
@@ -143,7 +159,7 @@ export class MultiplayerMatch {
           this.game.mode = message.mode;
           document.getElementById("lobby-pin")!.textContent = message.room;
           document.getElementById("match-status")!.textContent =
-            `Lobby ${message.room} · ${message.mode === "competitive" ? "Competitive" : "Casual"}`;
+            `Lobby ${message.room} · ${MODE_NAMES[message.mode]}`;
         }
         this.receive(message);
       },
@@ -227,8 +243,11 @@ export class MultiplayerMatch {
     )
       return false;
     if (drop && (isKnife(index) || this.game.money < weaponPrice(index))) return false;
-    this.request.buy = index;
-    this.request.buyDrop = drop;
+    if (this.request.buy >= 0) this.buyQueue.push({ index, drop });
+    else {
+      this.request.buy = index;
+      this.request.buyDrop = drop;
+    }
     return true;
   }
   equipment(kind: "kevlar" | "helmet" | "kit") {
@@ -258,7 +277,18 @@ export class MultiplayerMatch {
       this.game.notices.showAlert(message.message);
       return;
     }
+    if (message.type === "map-change") {
+      // Retire this connection quietly; the server closes it right after.
+      this.disconnect();
+      window.dispatchEvent(
+        new CustomEvent<MapChangeDetail>("cs2go-map-change", {
+          detail: { map: message.map, room: message.room, url: this.url, mode: this.mode },
+        }),
+      );
+      return;
+    }
     if (message.type !== "snapshot" || !this.connection.local) return;
+    const deathmatch = message.round.mode === "deathmatch";
     const g = this.game,
       local = this.connection.local,
       state = message.round;
@@ -357,6 +387,7 @@ export class MultiplayerMatch {
         bot.defuseKit = player.kit;
         bot.kills = player.kills;
         bot.deaths = player.deaths;
+        bot.deathmatchScore = player.score ?? 0;
         bot.money = player.money;
         Object.assign(bot.aimPunch, player.punch);
         bot.recoilWeapon = player.weapon;
@@ -400,6 +431,9 @@ export class MultiplayerMatch {
     g.money = local.money;
     g.kills = local.kills;
     g.deaths = local.deaths;
+    g.deathmatchScore = local.score ?? 0;
+    // Server spawn protection is also the deathmatch buy window.
+    if (deathmatch) g.invulnerable = local.protection ?? 0;
     for (const [index, ammo] of Object.entries(local.magazines))
       g.magazines[Number(index)] = { ...ammo };
     if (local.spawn !== this.lastSpawn) {
@@ -421,6 +455,11 @@ export class MultiplayerMatch {
       // The authoritative instances and sidearm state were just applied above.
       g.groundInventory.reset(true);
       hideRoundBanner();
+      this.buyQueue = [];
+      if (deathmatch) {
+        g.deathmatchRandomBought = false;
+        if (g.deathmatchRandomWeapons) g.applyDeathmatchRandomWeapons();
+      }
     }
     if (
       g.selected !== local.weapon ||
@@ -504,7 +543,8 @@ export class MultiplayerMatch {
         ? undefined
         : g.bomb.position,
     );
-    g.bombMesh.visible = state.phase !== "waiting" && (bomb.planted || !bomb.carrier);
+    g.bombMesh.visible =
+      !deathmatch && state.phase !== "waiting" && (bomb.planted || !bomb.carrier);
     g.bombMesh.position.set(bomb.x, bomb.y + 0.005, bomb.z);
     if (local.health < this.health) g.damage = 0.3;
     if (this.health > 0 && local.health <= 0) {
@@ -637,6 +677,11 @@ export class MultiplayerMatch {
             point,
           );
       } else if (event.kind === "kill") {
+        if (deathmatch && event.killer === local.id && event.victim !== local.id) {
+          const points = deathmatchKillPoints(event.weapon);
+          g.deathmatchAward = `${points} points for neutralizing an enemy with the ${weapons[event.weapon]?.name ?? "weapon"}`;
+          g.deathmatchAwardUntil = g.animationTime + 2;
+        }
         const killer =
           event.killer === local.id ? "YOU" : (this.peers.get(event.killer)?.name ?? event.killer);
         const victim =
@@ -665,7 +710,7 @@ export class MultiplayerMatch {
       else if (event.kind === "explode")
         g.soundscape.play("bomb-explode", false, "concrete", g.bomb.position);
     }
-    if (state.result && this.resultRound !== state.round) {
+    if (state.result && this.resultRound !== state.round && !deathmatch) {
       this.resultRound = state.round;
       g.notices.clearAlert();
       if (state.result.reason === "Bomb defused") g.notices.completeAction("defuse");
@@ -775,6 +820,7 @@ export class MultiplayerMatch {
       if (!this.wasReconnecting) g.notices.showAlert("Connection interrupted. Reconnecting...");
       this.wasReconnecting = true;
       this.request = neutralInput();
+      this.buyQueue = [];
       g.jumpQueued = false;
       return;
     }
@@ -821,6 +867,11 @@ export class MultiplayerMatch {
     const grounded = this.connection.local?.grounded;
     if (this.connection.step(input)) {
       this.request = neutralInput();
+      const queued = this.buyQueue.shift();
+      if (queued) {
+        this.request.buy = queued.index;
+        this.request.buyDrop = queued.drop;
+      }
       g.jumpQueued = false;
     }
     const local = this.connection.local;

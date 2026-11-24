@@ -57,6 +57,7 @@ export function playerUtility(match: Match, player: PlayerState, input: Input, d
   memory.held = input.utility && player.grenades[input.utility] ? memory.held + dt : memory.held;
   player.blind = Math.max(0, player.blind - dt);
   const canBuy =
+    match.state.mode !== "deathmatch" &&
     match.state.buyRemaining > 0 &&
     ["freeze", "live"].includes(match.state.phase) &&
     mapTriggers(match.map).buyZones.contains(player, player.team, {
@@ -163,10 +164,10 @@ function areaDamage(
     const damage =
       (fixed || heDamage(Math.sqrt(distanceSquared))) *
       utilityDamageScale(
-        match.state.mode,
+        match.state.mode === "deathmatch" ? "competitive" : match.state.mode,
         effect.kind,
         victim.id === effect.owner,
-        victim.team === effect.team,
+        match.state.mode !== "deathmatch" && victim.team === effect.team,
       );
     const deaths = damagePlayer(
       match,

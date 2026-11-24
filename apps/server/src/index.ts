@@ -1,4 +1,13 @@
-import { PROTOCOL_VERSION, TICK_RATE, MAPS, MAP_IDS, isMapId, type MapId } from "@cs2go/protocol";
+import {
+  PROTOCOL_VERSION,
+  TICK_RATE,
+  MAPS,
+  MAP_IDS,
+  isMapId,
+  isMatchMode,
+  type MapId,
+  type MatchMode,
+} from "@cs2go/protocol";
 import { loadServerMap } from "./map";
 import { startServer } from "./server";
 const port = Number(process.env.PORT ?? 3001);
@@ -23,7 +32,33 @@ for (const id of new Set([mapId, ...(enabled as MapId[])])) {
 }
 const map = maps[mapId]!;
 log(`Maps ready in ${Math.round(performance.now() - started)} ms!`);
-const app = startServer({ port, origins, map, maps, log });
+function botFill(name: string, fallback: number) {
+  const value = Number(process.env[name] ?? fallback);
+  if (!Number.isInteger(value) || value < 0 || value > 20)
+    throw new Error(`${name} must be a whole number from 0 to 20`);
+  return value;
+}
+// Always-on public rooms; set PERSISTENT_MODES= (empty) to disable.
+const persistentModes = (process.env.PERSISTENT_MODES ?? "casual,deathmatch")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
+if (!persistentModes.every(isMatchMode))
+  throw new Error("PERSISTENT_MODES must contain only: casual, competitive, deathmatch");
+const app = startServer({
+  port,
+  origins,
+  map,
+  maps,
+  log,
+  persistentModes: persistentModes as MatchMode[],
+  // Server lobbies are topped up with bots while at least one person plays.
+  botFill: {
+    casual: botFill("BOT_FILL_CASUAL", 10),
+    competitive: botFill("BOT_FILL_COMPETITIVE", 10),
+    deathmatch: botFill("BOT_FILL_DEATHMATCH", 8),
+  },
+});
 log(`WebSocket up at ws://127.0.0.1:${app.server.port}/ws`);
 log(`Health check up at http://127.0.0.1:${app.server.port}/healthz`);
 log(`Tick rate set to ${TICK_RATE} Hz with protocol v${PROTOCOL_VERSION}`);

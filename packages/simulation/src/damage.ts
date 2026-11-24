@@ -47,6 +47,10 @@ export function applyArmorDamage(
   };
 }
 
-export function friendlyFireScale(mode: "casual" | "competitive", kind: "bullet" | "other") {
-  return mode === "casual" ? 0 : kind === "bullet" ? 0.33 : 0.4;
+export function friendlyFireScale(
+  mode: "casual" | "competitive" | "deathmatch",
+  kind: "bullet" | "other",
+) {
+  // Deathmatch has no teammates; callers only scale allied damage.
+  return mode === "casual" ? 0 : mode === "deathmatch" ? 1 : kind === "bullet" ? 0.33 : 0.4;
 }

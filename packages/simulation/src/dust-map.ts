@@ -21,6 +21,17 @@ export type DustMap = {
   spawns: Record<"t" | "ct", number[][]>;
   spawnAngles?: Record<"t" | "ct", number[]>;
   bombDamage?: BakedBombDamage;
+  /** Precomputed free-for-all spawn points; falls back to team spawns. */
+  deathmatchSpawns?: readonly (readonly number[])[];
+  /** Native NAV areas and bomb-site points; the server uses them for bots. */
+  nav?: { areas: readonly NavAreaData[]; sites: readonly (readonly number[])[] };
+};
+export type NavAreaData = {
+  id: number;
+  flags: number;
+  links: number[];
+  portals?: Record<string, number[]>;
+  center: [number, number, number];
 };
 /** Identical native movement and bullet filtering in the browser and server. */
 export function dustCollision(scene: T.Object3D) {

@@ -11,6 +11,7 @@ import { resolve } from "node:path";
 import { isMapId, type MapId } from "@cs2go/protocol";
 import { mapTriggers } from "@cs2go/simulation/buy-zones";
 import { bindBreakablePhysics, type NativeBreakableDefinition } from "@cs2go/simulation/breakables";
+import { deathmatchSpawnPoints } from "@cs2go/simulation/deathmatch";
 export async function loadServerMap(
   directory = process.env.MAP_DIRECTORY ??
     resolve(import.meta.dir, "../../../packages/assets/public/models/maps"),
@@ -75,6 +76,10 @@ export async function loadServerMap(
     spawnAngles: nav.spawnAngles,
     bombDamage: new BakedBombDamage(Bun.gunzipSync(new Uint8Array(bomb)).buffer as ArrayBuffer),
   };
+  if (Array.isArray(nav.areas)) {
+    map.deathmatchSpawns = deathmatchSpawnPoints(nav.areas, map.spawns, map.collision);
+    map.nav = { areas: nav.areas, sites: Array.isArray(nav.sites) ? nav.sites : [] };
+  }
   // Reject absent native objective data at startup rather than admitting peers
   // into a match that accidentally uses Dust II's buy/plant brushes.
   mapTriggers(map);

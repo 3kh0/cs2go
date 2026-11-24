@@ -11,6 +11,8 @@ import {
   SnapshotEncoder,
   parseClientMessage,
   type MapId,
+  type MatchMode,
+  type Team,
   type Input,
   type MatchEvent,
   type PlayerState,
@@ -32,6 +34,12 @@ import {
 
 type Room = Match & {
   visibility: LobbyVisibility;
+  /** Server-owned: never removed, reset when empty, rotates map after a match. */
+  persistent: boolean;
+  finishedFor: number;
+  bots: BotRoster;
+  /** Total players (people plus bots) the server keeps in the room. */
+  botFill: number;
   name: string;
   players: Map<string, PlayerState>;
   connections: Set<ServerWebSocket<Connection>>;
@@ -53,6 +61,7 @@ type Connection = {
 };
 import type { DustMap } from "@cs2go/simulation/dust-map";
 import { rulesFor } from "@cs2go/simulation/economy";
+import { BotNavigation, balanceBots, botInput, removeBot, type BotRoster } from "./bots";
 export type ServerOptions = {
   map: DustMap;
   maps?: Partial<Record<MapId, DustMap>>;
@@ -63,6 +72,23 @@ export type ServerOptions = {
   maxConnections?: number;
   log?: (message: string) => void;
   onTick?: (milliseconds: number) => void;
+  /** Modes that always have one public room available. */
+  persistentModes?: MatchMode[];
+  /** Seconds a finished persistent match shows its result before rotating. */
+  rotationDelay?: number;
+  random?: () => number;
+  /** Persistent rooms are topped up with bots to this many players per mode. */
+  botFill?: Partial<Record<MatchMode, number>>;
+};
+const humans = (room: Match) => {
+  let count = 0;
+  for (const player of room.players.values()) if (!player.bot) count++;
+  return count;
+};
+const PERSISTENT_NAMES: Record<MatchMode, string> = {
+  casual: "Casual",
+  competitive: "Competitive",
+  deathmatch: "Deathmatch",
 };
 
 export function startServer(options: ServerOptions) {
@@ -92,6 +118,124 @@ export function startServer(options: ServerOptions) {
   const sentTicks = new WeakMap<ServerWebSocket<Connection>, number>();
   let nextRoomLabel = 1;
   const log = (message: string) => options.log?.(message);
+  const random = options.random ?? Math.random;
+  const rotationDelay = options.rotationDelay ?? 15;
+  function newCode() {
+    const start = crypto.getRandomValues(new Uint32Array(1))[0] % 1000000;
+    for (let offset = 0; offset < 1000000; offset++) {
+      const code = String((start + offset) % 1000000).padStart(6, "0");
+      if (!rooms.has(code)) return code;
+    }
+    return undefined;
+  }
+  function createRoom(
+    code: string,
+    mode: MatchMode,
+    map: DustMap,
+    visibility: LobbyVisibility,
+    name: string,
+    persistent = false,
+  ) {
+    const room: Room = {
+      ...createMatch(mode, map),
+      visibility,
+      persistent,
+      finishedFor: 0,
+      bots: new Map(),
+      botFill: persistent ? (options.botFill?.[mode] ?? 0) : 0,
+      name,
+      connections: new Set(),
+      events: [],
+      tick: 0,
+    };
+    rooms.set(code, room);
+    roomLabels.set(room, nextRoomLabel++);
+    log(
+      `Room #${roomLabels.get(room)} created${persistent ? " (persistent)" : ""} - ${MAPS[map.id ?? defaultMap].name} - ${mode} - ${rulesFor(mode).teamSize}v${rulesFor(mode).teamSize}`,
+    );
+    return room;
+  }
+  /** Replace the room's match in place, keeping its PIN, name and visibility. */
+  function resetRoom(room: Room, match: Match) {
+    for (const [token, saved] of detached)
+      if (saved.connection.room === room) detached.delete(token);
+    Object.assign(room, match, { events: [], finishedFor: 0, bots: new Map() });
+    encoders.delete(room);
+  }
+  const navigations = new Map<MapId, BotNavigation | undefined>();
+  function navigationFor(room: Room) {
+    const id = room.map.id ?? defaultMap;
+    if (!navigations.has(id)) {
+      const nav = maps.get(id)?.nav;
+      navigations.set(id, nav ? new BotNavigation(nav) : undefined);
+    }
+    return navigations.get(id);
+  }
+  function fillBots(room: Room) {
+    if (!room.botFill || room.state.phase === "finished") return;
+    balanceBots(room, room.bots, room.botFill, rulesFor(room.state.mode).teamSize, random);
+  }
+  /** Bots give up their seat to a person joining a full team or room. */
+  function seatFor(room: Room, team: Team) {
+    const size = rulesFor(room.state.mode).teamSize;
+    while (
+      room.bots.size &&
+      (room.players.size >= MAX_PLAYERS ||
+        [...room.players.values()].filter((player) => player.team === team).length >= size)
+    )
+      if (
+        !removeBot(room, room.bots, team) &&
+        !removeBot(room, room.bots, team === "ct" ? "t" : "ct")
+      )
+        break;
+  }
+  function roomCode(room: Room) {
+    for (const [key, value] of rooms) if (value === room) return key;
+    return "";
+  }
+  /** Pick a different random map, then ask every peer to reload and rejoin. */
+  function rotateRoom(room: Room) {
+    const current = room.map.id ?? defaultMap;
+    const choices = [...maps.keys()].filter((id) => id !== current);
+    let next = choices.length ? choices[Math.floor(random() * choices.length)] : current;
+    let match: Match;
+    try {
+      match = createMatch(room.state.mode, maps.get(next)!);
+    } catch (error) {
+      // Never strand players on a map that cannot host this mode.
+      log(
+        `Room #${roomLabels.get(room)} could not rotate to ${MAPS[next].name} - ${error instanceof Error ? error.message : String(error)}`,
+      );
+      next = current;
+      match = createMatch(room.state.mode, maps.get(current)!);
+    }
+    const code = roomCode(room);
+    for (const socket of room.connections) {
+      send(socket, { type: "map-change", map: next, room: code });
+      socket.data.room = undefined;
+      socket.close(4001, "Map changing");
+    }
+    room.connections.clear();
+    resetRoom(room, match);
+    log(`Room #${roomLabels.get(room)} rotated - ${MAPS[current].name} -> ${MAPS[next].name}`);
+  }
+  /** Delete an empty lobby; persistent rooms instead start fresh on the same map. */
+  function releaseEmptyRoom(room: Room) {
+    if (humans(room)) {
+      fillBots(room);
+      return;
+    }
+    if (room.persistent) {
+      resetRoom(room, createMatch(room.state.mode, maps.get(room.map.id ?? defaultMap)!));
+      log(`Room #${roomLabels.get(room)} reset - empty`);
+      return;
+    }
+    const code = roomCode(room);
+    if (code) {
+      rooms.delete(code);
+      log(`Room #${roomLabels.get(room)} removed - empty`);
+    }
+  }
   const clientLabel = (socket: ServerWebSocket<Connection>) => socket.data.id.slice(0, 8);
   const headers = (origin: string) => ({
     ...(origins.has(origin) ? { "Access-Control-Allow-Origin": origin } : {}),
@@ -124,6 +268,20 @@ export function startServer(options: ServerOptions) {
     send(socket, { type: "error", message });
     socket.close(1008, message);
   }
+  const persistentModes = [...new Set<MatchMode>(options.persistentModes ?? [])];
+  for (const mode of persistentModes) {
+    const ids = [...maps.keys()];
+    const code = newCode()!;
+    createRoom(
+      code,
+      mode,
+      maps.get(ids[Math.floor(random() * ids.length)])!,
+      "public",
+      PERSISTENT_NAMES[mode],
+      true,
+    );
+  }
+  const persistentCount = persistentModes.length;
   const server = Bun.serve<Connection>({
     port: options.port,
     hostname: options.hostname ?? "0.0.0.0",
@@ -138,6 +296,7 @@ export function startServer(options: ServerOptions) {
             map: defaultMap,
             maps: [...maps.keys()],
             publicLobbies: true,
+            modes: ["casual", "competitive", "deathmatch"],
           },
           {
             status: stopping ? 503 : 200,
@@ -151,25 +310,28 @@ export function startServer(options: ServerOptions) {
         for (const [code, room] of rooms) {
           if (
             room.visibility !== "public" ||
-            !room.connections.size ||
-            room.state.phase === "finished"
+            (!room.persistent && (!room.connections.size || room.state.phase === "finished"))
           )
             continue;
           const players = [...room.players.values()];
+          const people = players.filter((player) => !player.bot).length;
           lobbies.push({
             room: code,
             name: room.name,
             mode: room.state.mode,
             map: room.map.id ?? "dust2",
-            players: players.length,
+            players: people,
+            ...(room.bots.size ? { bots: room.bots.size } : {}),
             capacity: rulesFor(room.state.mode).teamSize * 2,
             teams: {
               ct: players.filter((player) => player.team === "ct").length,
               t: players.filter((player) => player.team === "t").length,
             },
             phase: room.state.phase,
+            ...(room.persistent ? { persistent: true } : {}),
           });
         }
+        lobbies.sort((a, b) => Number(!!b.persistent) - Number(!!a.persistent));
         return Response.json({ version: PROTOCOL_VERSION, lobbies }, { headers: headers(origin) });
       }
       if (request.method === "GET" && /^\/lobbies\/\d{6}$/.test(path)) {
@@ -236,38 +398,35 @@ export function startServer(options: ServerOptions) {
           if (!selectedMap) return reject(socket, "Map is not available on this server");
           let code = message.room;
           if (message.create) {
-            if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
-            const start = crypto.getRandomValues(new Uint32Array(1))[0] % 1000000;
-            let offset = 0;
-            do {
-              code = String((start + offset++) % 1000000).padStart(6, "0");
-            } while (rooms.has(code) && offset < 1000000);
-            if (rooms.has(code)) return reject(socket, "Server full");
+            if (rooms.size >= (options.maxRooms ?? 16) + persistentCount)
+              return reject(socket, "Server full");
+            const created = newCode();
+            if (!created) return reject(socket, "Server full");
+            code = created;
           }
           let room = rooms.get(code);
           if (!room && message.resume) return reject(socket, "Session expired; rejoin from Play");
           if (!room && !message.create)
             return reject(socket, "Lobby not found. Check the PIN and server.");
-          if (!room) {
-            if (rooms.size >= (options.maxRooms ?? 16)) return reject(socket, "Server full");
-            room = {
-              ...createMatch(message.mode, selectedMap),
-              visibility: message.visibility ?? "private",
-              name: `${message.name.trim()}'s lobby`,
-              connections: new Set(),
-              events: [],
-              tick: 0,
-            };
-            rooms.set(code, room);
-            roomLabels.set(room, nextRoomLabel++);
-            log(
-              `Room #${roomLabels.get(room)} created - ${MAPS[requestedMap].name} - ${message.mode} - ${rulesFor(message.mode).teamSize}v${rulesFor(message.mode).teamSize}`,
+          if (!room)
+            room = createRoom(
+              code,
+              message.mode,
+              selectedMap,
+              message.visibility ?? "private",
+              `${message.name.trim()}'s lobby`,
             );
+          if ((room.map.id ?? "dust2") !== requestedMap) {
+            if (!room.persistent || message.resume)
+              return reject(socket, "Lobby uses a different map. Return to Play and rejoin.");
+            // The rotation raced this client's map load; send it to the new map.
+            send(socket, { type: "map-change", map: room.map.id ?? defaultMap, room: code });
+            socket.close(4001, "Map changing");
+            return;
           }
-          if ((room.map.id ?? "dust2") !== requestedMap)
-            return reject(socket, "Lobby uses a different map. Return to Play and rejoin.");
           if (message.resume && room.state.mode !== message.mode)
             return reject(socket, "Room uses a different game mode");
+          if (!message.resume) seatFor(room, message.team);
           if (
             !message.resume &&
             (room.players.size >= MAX_PLAYERS ||
@@ -298,7 +457,10 @@ export function startServer(options: ServerOptions) {
             }
             connection.id = player.id;
             player.ack = 0;
-          } else joinMatch(room, player);
+          } else {
+            joinMatch(room, player);
+            fillBots(room);
+          }
           connection.resume = crypto.randomUUID();
           room.connections.add(socket);
           connection.room = room;
@@ -319,7 +481,9 @@ export function startServer(options: ServerOptions) {
         else if (message.type === "team") {
           const player = connection.room.players.get(connection.id)!;
           const previousTeam = player.team;
+          if (previousTeam !== message.team) seatFor(connection.room, message.team);
           const error = switchTeam(connection.room, player, message.team);
+          fillBots(connection.room);
           if (!error && previousTeam !== player.team) stopInput(connection, player, now);
           send(socket, {
             type: "team-status",
@@ -390,12 +554,7 @@ export function startServer(options: ServerOptions) {
           return;
         }
         leaveMatch(room, socket.data.id);
-        if (!room.players.size)
-          for (const [key, value] of rooms)
-            if (value === room) {
-              rooms.delete(key);
-              log(`Room #${roomLabels.get(room)} removed - empty`);
-            }
+        releaseEmptyRoom(room);
       },
     },
   });
@@ -409,6 +568,7 @@ export function startServer(options: ServerOptions) {
     // Keep elapsed ticks through scheduler stalls; draining buffered inputs must
     // not discard time or advance faster than the authoritative wall clock.
     accumulator = Math.min(1, accumulator + (now - previous) / 1000);
+    const previousNow = previous;
     previous = now;
     for (const socket of connections)
       if (!socket.data.room && now - socket.data.joinedAt > 10000) reject(socket, "Join timed out");
@@ -417,9 +577,11 @@ export function startServer(options: ServerOptions) {
       detached.delete(token);
       const room = saved.connection.room!;
       leaveMatch(room, saved.connection.id);
-      if (!room.players.size)
-        for (const [key, value] of rooms) if (value === room) rooms.delete(key);
+      releaseEmptyRoom(room);
     }
+    for (const room of rooms.values())
+      if (room.persistent && room.state.phase === "finished" && humans(room))
+        if ((room.finishedFor += now - previousNow) / 1000 >= rotationDelay) rotateRoom(room);
     let catchup = 0;
     while (accumulator >= STEP && catchup++ < 32) {
       const started = options.onTick ? performance.now() : 0;
@@ -458,6 +620,14 @@ export function startServer(options: ServerOptions) {
               : { ...neutralInput(), yaw: connection.last.yaw, pitch: connection.last.pitch };
           inputs.set(connection.id, held);
         }
+        if (room.bots.size) {
+          const navigation = navigationFor(room);
+          for (const [id, brain] of room.bots) {
+            const bot = room.players.get(id);
+            if (bot) inputs.set(id, botInput(room, bot, brain, navigation, random));
+          }
+        }
+        if (ticks % TICK_RATE === 0) fillBots(room);
         const phase = room.state.phase,
           round = room.state.round;
         room.events.push(...stepMatch(room, inputs));

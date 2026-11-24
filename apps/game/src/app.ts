@@ -17,8 +17,9 @@ import { saveAndCloseSettings } from "./settings-reload";
 import { setupSettingsTabs } from "./settings-tabs";
 import { setupControlSettings } from "./control-settings";
 import { Game } from "./game";
-import { MultiplayerMatch } from "./multiplayer-match";
-import { validRoom, isMapId, MAPS, type MapId } from "@cs2go/protocol";
+import { MultiplayerMatch, type MapChangeDetail } from "./multiplayer-match";
+import { setupCustomServers } from "./custom-servers";
+import { validRoom, isMapId, isMatchMode, MAPS, type MapId } from "@cs2go/protocol";
 import { prepareTeamSelector } from "./team-select";
 import { openMatchLoading } from "./match-loading";
 import { setupSteamAccount } from "./steam-account";
@@ -122,24 +123,25 @@ const server = el("match-server") as HTMLSelectElement;
 const room = el("match-room") as HTMLInputElement;
 const invitation = new URLSearchParams(location.search);
 if (isMapId(invitation.get("map"))) chooseMap(invitation.get("map") as MapId);
-// Local endpoints are available only in development; production uses the two fleet servers.
+// Local endpoints are available only in development; production lists the fleet
+// servers plus any custom servers the player has added.
 if (import.meta.env.DEV) {
   for (const port of [3001, 3002])
     server.add(new Option(`Local server :${port}`, `ws://127.0.0.1:${port}/ws`));
 }
+const servers = setupCustomServers(server);
 const invitedServer = invitation.get("server");
-if ([...server.options].some((option) => option.value === invitedServer))
-  server.value = invitedServer!;
+if (invitedServer) servers.choose(invitedServer, false);
 room.value = validRoom(invitation.get("room")) ? invitation.get("room")! : "";
 let creating = false;
 const visibility = el("match-visibility") as HTMLSelectElement;
-const lobbyBrowser = setupPublicLobbies(server, (pin) => {
+const lobbyBrowser = setupPublicLobbies(servers, (pin) => {
   if (game.matchLoading || el("play").hasAttribute("disabled")) return;
   room.value = pin;
   el("play").click();
 });
 server.addEventListener("change", () => {
-  if (session === "multi") void lobbyBrowser.refresh();
+  if (session === "multi" && server.value !== "custom") void lobbyBrowser.refresh();
 });
 room.oninput = () => {
   el("match-status").textContent = "";
@@ -154,7 +156,7 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-session
     for (const option of document.querySelectorAll<HTMLButtonElement>("[data-offline-mode]")) {
       option.hidden = option.disabled = session === "multi";
     }
-    if (session === "multi" && selectedMode !== "casual" && selectedMode !== "competitive")
+    if (session === "multi" && !isMatchMode(selectedMode))
       document.querySelector<HTMLButtonElement>('[data-mode="casual"]')!.click();
     document
       .querySelectorAll<HTMLButtonElement>("[data-session]")
@@ -164,8 +166,9 @@ if (invitation.has("room") || invitedServer) {
   document.querySelector<HTMLButtonElement>('[data-session="multi"]')!.click();
   el("menu").dataset.page = "play";
 }
-if (invitation.get("mode") === "competitive")
-  document.querySelector<HTMLButtonElement>('[data-mode="competitive"]')!.click();
+const invitedMode = invitation.get("mode");
+if (invitedMode === "competitive" || invitedMode === "deathmatch")
+  document.querySelector<HTMLButtonElement>(`[data-mode="${invitedMode}"]`)!.click();
 el("match-join").onclick = () => {
   room.focus();
   room.select();
@@ -193,15 +196,14 @@ el("play").onclick = async () => {
     (el("match-create") as HTMLButtonElement).disabled = true;
     el("match-status").textContent = "Finding lobby...";
     try {
-      const url = new URL(server.value);
+      const url = new URL(servers.value);
       url.protocol = url.protocol === "wss:" ? "https:" : "http:";
       url.pathname = `/lobbies/${room.value}`;
       const response = await fetch(url, { signal: AbortSignal.timeout(5000) });
       if (response.status === 404) throw new Error("Lobby not found. Check the PIN and server.");
       if (!response.ok) throw new Error("Server unavailable. Try the other server.");
       const lobby = await response.json();
-      if (lobby.mode !== "casual" && lobby.mode !== "competitive")
-        throw new Error("Incompatible server. Refresh and try again.");
+      if (!isMatchMode(lobby.mode)) throw new Error("Incompatible server. Refresh and try again.");
       document.querySelector<HTMLButtonElement>(`[data-mode="${lobby.mode}"]`)!.click();
       if (!isMapId(lobby.map)) throw new Error("Incompatible server map. Refresh and try again.");
       chooseMap(lobby.map);
@@ -219,14 +221,15 @@ el("play").onclick = async () => {
   }
   void prepareMatchSelection();
 };
-async function prepareMatchSelection(replayTeam?: "t" | "ct") {
+type Rejoin = MapChangeDetail & { team: "t" | "ct" };
+async function prepareMatchSelection(replayTeam?: "t" | "ct", rejoin?: Rejoin) {
   if (game.matchLoading || document.getElementById("team-select")) return;
-  const mode = selectedMode;
-  const multiplayer = replayTeam === undefined && session === "multi";
-  const create = creating;
+  const mode = rejoin?.mode ?? selectedMode;
+  const multiplayer = !!rejoin || (replayTeam === undefined && session === "multi");
+  const create = !rejoin && creating;
   const lobbyVisibility = visibility.value === "public" ? "public" : "private";
-  const endpoint = server.value;
-  const pin = room.value;
+  const endpoint = rejoin?.url ?? servers.value;
+  const pin = rejoin?.room ?? room.value;
   game.matchLoading = true;
   if (multiplayer && create) {
     try {
@@ -240,6 +243,8 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
         throw new Error(
           "This server needs an update to create public lobbies. Choose Private or another server.",
         );
+      if (mode === "deathmatch" && !health.modes?.includes?.("deathmatch"))
+        throw new Error("This server needs an update to host Deathmatch. Choose another server.");
       if (!Array.isArray(health.maps) || !health.maps.includes(selectedMap))
         throw new Error(
           "This server does not have the selected map. Choose another map or server.",
@@ -251,7 +256,7 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
       return;
     }
   }
-  const map = replayTeam === undefined ? selectedMap : game.mapId;
+  const map = rejoin?.map ?? (replayTeam === undefined ? selectedMap : game.mapId);
   const loader = openMatchLoading(mode, map);
   // Team selection and round-start cues begin only after preparation succeeds.
   game.soundscape.playMusic(null);
@@ -265,7 +270,7 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
     game.last = performance.now();
     game.start(mode, { bots: !multiplayer });
     el("scoreboard-lobby").hidden = !multiplayer;
-    if (multiplayer && game.active && (mode === "casual" || mode === "competitive")) {
+    if (multiplayer && game.active && isMatchMode(mode)) {
       el("lobby-pin").textContent = "CONNECTING...";
       el("lobby-server").textContent = new URL(endpoint).hostname;
       game.network = new MultiplayerMatch(game, endpoint, pin, create, mode, lobbyVisibility);
@@ -277,14 +282,15 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
     await loader.stage(`Preparing ${MAPS[map].name}...`, 0);
     await game.prepareMatch(mode, !multiplayer, loader.signal, map);
     await loader.stage("Preparing the match...", 1);
-    if (replayTeam === undefined) {
+    if (replayTeam === undefined && !rejoin) {
       selector = prepareTeamSelector(enter, mode === "competitive" ? 5 : 10, game);
       await selector.ready;
     }
     await loader.stage("Ready", 3);
     loader.close();
     game.matchLoading = false;
-    if (replayTeam !== undefined) enter(replayTeam);
+    if (rejoin) enter(rejoin.team);
+    else if (replayTeam !== undefined) enter(replayTeam);
     else selector!.show();
   } catch (error) {
     selector?.close();
@@ -301,6 +307,20 @@ async function prepareMatchSelection(replayTeam?: "t" | "ct") {
     game.matchLoading = false;
   }
 }
+
+// Persistent lobbies rotate maps after each match: load the new map and rejoin
+// the same PIN on the same side without reopening team selection.
+window.addEventListener("cs2go-map-change", (event) => {
+  const detail = (event as CustomEvent<MapChangeDetail>).detail;
+  const team = game.team;
+  game.menu();
+  document.getElementById("team-select")?.remove();
+  document.querySelector<HTMLButtonElement>(`[data-mode="${detail.mode}"]`)!.click();
+  chooseMap(detail.map);
+  room.value = detail.room;
+  el("match-status").textContent = `Loading the next map: ${MAPS[detail.map].name}...`;
+  void prepareMatchSelection(undefined, { ...detail, team });
+});
 
 el("resume").onclick = () => game.lock();
 el("pause-teams").onclick = async () => {

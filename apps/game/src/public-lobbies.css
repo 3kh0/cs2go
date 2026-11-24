@@ -99,3 +99,19 @@
   flex: 1;
   font-size: 16px;
 }
+#multiplayer-options #public-lobby-list button.persistent-lobby {
+  background: rgb(76 154 186 / 18%);
+  box-shadow: inset 3px 0 #a7dced;
+}
+#multiplayer-options #public-lobby-list button.persistent-lobby:hover {
+  background: rgb(76 154 186 / 30%);
+}
+.public-lobby-live {
+  margin-left: 8px;
+  padding: 1px 5px;
+  vertical-align: 2px;
+  background: #a7dced;
+  color: #10222b;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}

@@ -61,6 +61,7 @@ try {
     map: "dust2",
     maps: ["dust2", "mirage"],
     publicLobbies: true,
+    modes: ["casual", "competitive", "deathmatch"],
   });
   const restricted = startServer({
     map: testMap(),

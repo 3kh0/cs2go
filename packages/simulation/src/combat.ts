@@ -24,6 +24,11 @@ import {
 } from "./accuracy";
 import { knifeBackstab, knifeDamage, knifeRange } from "./melee";
 import { PlayerHitboxes } from "./player-hitboxes";
+import { deathmatchKillPoints } from "./deathmatch";
+/** Deathmatch is free-for-all: team colours only choose the character model. */
+export function allies(match: Match, a: PlayerState, b: PlayerState) {
+  return match.state.mode !== "deathmatch" && a.team === b.team;
+}
 export function createCombatMemory() {
   return {
     punch: createAimPunch(),
@@ -73,6 +78,7 @@ export function damagePlayer(
   region: HitRegion = headshot ? "head" : "chest",
 ): MatchEvent[] {
   if (victim.health <= 0 || damage <= 0) return [];
+  if (shooter && shooter !== victim && (victim.protection ?? 0) > 0) return [];
   const result = ignoreArmor
     ? { armor: victim.armor, healthDamage: damage }
     : applyArmorDamage(damage, region, victim.armor, victim.helmet, armorRatio);
@@ -89,13 +95,19 @@ export function damagePlayer(
       : [];
   if (victim.health > 0) return hurt;
   const appearance = shooter?.appearances[weapon];
-  for (let i = 0; i < 2 && !isKnife(victim.weapon); i++) dropWeapon(match, victim);
+  // Deathmatch keeps the arena clear: weapons vanish with the player.
+  if (match.state.mode !== "deathmatch")
+    for (let i = 0; i < 2 && !isKnife(victim.weapon); i++) dropWeapon(match, victim);
   victim.deaths++;
   victim.reloadTime = 0;
   victim.vx = victim.vz = 0;
   if (shooter && shooter !== victim) {
-    shooter.kills += victim.team === shooter.team ? -1 : 1;
-    if (victim.team !== shooter.team) {
+    const allied = allies(match, victim, shooter);
+    shooter.kills += allied ? -1 : 1;
+    if (!allied) {
+      if (match.state.mode === "deathmatch")
+        shooter.score =
+          (shooter.score ?? 0) + deathmatchKillPoints(weapon >= 0 ? weapon : shooter.weapon);
       match.firstKill ??= { name: shooter.name, seconds: match.state.elapsed };
       const highlights = match.highlights.get(shooter.id)!;
       if (headshot) highlights.headshots++;
@@ -104,7 +116,7 @@ export function damagePlayer(
     }
     shooter.money = addMoney(
       shooter.money,
-      victim.team === shooter.team ? -300 : killReward(weapon >= 0 ? weapon : 0, match.state.mode),
+      allied ? -300 : killReward(weapon >= 0 ? weapon : 0, match.state.mode),
       match.state.mode,
     );
   }
@@ -190,7 +202,7 @@ export function shoot(
       if (
         other === shooter ||
         other.health <= 0 ||
-        (other.team === shooter.team && match.state.mode === "casual")
+        (allies(match, other, shooter) && match.state.mode === "casual")
       )
         continue;
       const hit = hitTarget(match, other, new T.Ray(from, direction), distance, viewTick);
@@ -229,7 +241,7 @@ export function shoot(
             stab,
             memory.knifeAge > 0.9,
             knifeBackstab(shooter, struck!.position, struck!.yaw + Math.PI),
-          ) * (victim.team === shooter.team ? friendlyFireScale(match.state.mode, "other") : 1),
+          ) * (allies(match, victim, shooter) ? friendlyFireScale(match.state.mode, "other") : 1),
           false,
           shooter.weapon,
           1.7,
@@ -283,7 +295,7 @@ export function shoot(
         thickness,
         material: "flesh",
         id: other.id,
-        stop: other.team === shooter.team && match.state.mode === "casual",
+        stop: allies(match, other, shooter) && match.state.mode === "casual",
         data: { point, victim: other, head, region },
       });
     }
@@ -306,12 +318,12 @@ export function shoot(
           });
       }
       if (data.victim) {
-        if (data.victim.team === shooter.team && match.state.mode === "casual") continue;
+        if (allies(match, data.victim, shooter) && match.state.mode === "casual") continue;
         hits.push({ victim: data.victim.id, headshot: !!data.head, passed: contact.passed });
         const damage =
           contact.damage *
           hitRegionMultiplier(data.region!, weapon.head) *
-          (data.victim.team === shooter.team ? friendlyFireScale(match.state.mode, "bullet") : 1);
+          (allies(match, data.victim, shooter) ? friendlyFireScale(match.state.mode, "bullet") : 1);
         const deaths = damagePlayer(
           match,
           shooter,
