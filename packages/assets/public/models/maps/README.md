@@ -18,4 +18,5 @@ The script starts the Vite dev server (or uses `BAKE_URL`), loads each map in Ch
 - The sets are sampled, not exact. Validation can still find a few one-pixel slivers seen through narrow gaps from positions between samples.
 - Doors, breakables and transparent, alpha-tested or depth-less materials neither occlude nor get culled. Players, weapons and effects are never culled.
 - No culling happens when the camera has no NAV area within reach below it, for example while falling from a height or on off-NAV props. A pending static sun shadow refresh also turns culling off for that frame.
+- Players can turn culling off under Settings → Video → Occlusion culling. It is on by default.
 - At load, the game disables culling for a map if any baked draw is missing or no longer opaque and static.

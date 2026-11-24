@@ -265,9 +265,10 @@ export class GameUtility {
         !!this.game.world.frameComposite,
       );
     // A pending static sun refresh renders every caster, so it must see the whole map.
-    const visibility = this.game.world.sun.shadow.needsUpdate
-      ? undefined
-      : this.game.world.visibility;
+    const visibility =
+      this.game.settings.occlusionCulling === "off" || this.game.world.sun.shadow.needsUpdate
+        ? undefined
+        : this.game.world.visibility;
     if (visibility) visibility.render(camera.getWorldPosition(this.eye), draw);
     else draw();
   }

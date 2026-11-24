@@ -33,6 +33,9 @@ describe("graphics choices", () => {
       fpsCap: 30,
       resolutionScale: 100,
     });
+    expect(graphicsDefaults.occlusionCulling).toBe("on");
+    expect(readGraphicsSettings({ occlusionCulling: "off" }).occlusionCulling).toBe("off");
+    expect(readGraphicsSettings({ occlusionCulling: false }).occlusionCulling).toBe("on");
     expect(graphicsPreset({ ...graphicsDefaults, textureFiltering: 16 })).toBe("custom");
     expect(graphicsPreset(readGraphicsSettings(graphicsPresets.laptop))).toBe("laptop");
     expect(readGraphicsSettings(graphicsPresets.laptop)).toMatchObject({

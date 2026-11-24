@@ -42,6 +42,7 @@ export function setupGraphicsSettings(panel: HTMLElement, game: Game) {
     <label class="select-label">Texture resolution<select id="texture-quality"><option value="high">High - original detail</option><option value="medium">Medium - half resolution</option><option value="low">Low - quarter resolution</option></select></label>
     <label class="select-label">Texture filtering<select id="textureFiltering"><option value="1">Bilinear mipmaps</option>${[2, 4, 8, 16].map((n) => `<option value="${n}">Anisotropic ${n}×</option>`).join("")}</select></label>
     <label class="select-label">Smoke rendering<select id="effectsDetail"><option value="low">Performance</option><option value="high">Quality</option></select></label>
+    <label class="select-label">Occlusion culling<select id="occlusionCulling"><option value="on">On - skip hidden map geometry</option><option value="off">Off - draw the whole map</option></select></label>
   `,
   );
   const diagnostics = game.renderer
@@ -76,6 +77,8 @@ export function setupGraphicsSettings(panel: HTMLElement, game: Game) {
     textureFiltering: "Sharpen textures on angled surfaces. Filtering is limited by your GPU.",
     effectsDetail:
       "Adjust smoke rendering quality. Gameplay obstruction and grenade physics stay unchanged.",
+    occlusionCulling:
+      "Skip map geometry that is hidden behind walls from your position. Turn off only if parts of the map flicker or vanish.",
   };
   for (const [id, description] of Object.entries(help))
     panel.querySelector(`#${id}`)!.closest("label")!.dataset.settingsHelp = description;
@@ -93,6 +96,7 @@ export function setupGraphicsSettings(panel: HTMLElement, game: Game) {
     textureFiltering: "textureFiltering",
     effectsDetail: "effectsDetail",
     startupLoad: "startupLoad",
+    occlusionCulling: "occlusionCulling",
   } as const;
   const scale = panel.querySelector<HTMLInputElement>("#resolutionScale")!;
   const aspect = panel.querySelector<HTMLSelectElement>("#aspect-ratio")!;

@@ -13,6 +13,7 @@ export const graphicsPresets = {
     fpsCap: 60,
     menuFpsCap: 15,
     startupLoad: "gentle",
+    occlusionCulling: "on",
   },
   performance: {
     antialias: "off",
@@ -26,6 +27,7 @@ export const graphicsPresets = {
     fpsCap: 120,
     menuFpsCap: 30,
     startupLoad: "standard",
+    occlusionCulling: "on",
   },
   balanced: {
     antialias: "off",
@@ -39,6 +41,7 @@ export const graphicsPresets = {
     fpsCap: 144,
     menuFpsCap: 30,
     startupLoad: "standard",
+    occlusionCulling: "on",
   },
   quality: {
     antialias: "msaa",
@@ -52,6 +55,7 @@ export const graphicsPresets = {
     fpsCap: 0,
     menuFpsCap: 30,
     startupLoad: "standard",
+    occlusionCulling: "on",
   },
 };
 export type GraphicsSettings = typeof graphicsPresets.balanced;
@@ -89,6 +93,7 @@ export function readGraphicsSettings(saved: Record<string, unknown>): GraphicsSe
     resolutionLimit: [720, 1080, 1440, 2160, 0],
     menuFpsCap: [15, 30, 60, 120],
     startupLoad: ["gentle", "standard"],
+    occlusionCulling: ["on", "off"],
   })) {
     if ((options as unknown[]).includes(saved[key])) Object.assign(result, { [key]: saved[key] });
   }
