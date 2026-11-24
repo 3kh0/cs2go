@@ -79,6 +79,8 @@ export function renderNativeWater(
   smoke.batch.position.set(0, 0, 0);
   scene.add(smoke.batch);
   const pass = new SmokeComposite();
+  // This fixture checks release and reallocation between consecutive frames.
+  pass.idleRelease = 0;
   const lutBytes = new Uint8Array(32 ** 3 * 4);
   for (let z = 0; z < 32; z++)
     for (let y = 0; y < 32; y++)

@@ -201,6 +201,9 @@ export class SmokeComposite {
   target?: T.WebGLRenderTarget;
   private colorTarget = false;
   private colorMipmaps = false;
+  /** Milliseconds an unused capture target and copy shader stay resident. */
+  idleRelease = 5000;
+  private idleSince?: number;
   private opaqueCapture = { exclude: new Set<T.Object3D>(), setColor(_texture: T.Texture) {} };
   private opaqueCopy?: {
     scene: T.Scene;
@@ -471,12 +474,20 @@ export class SmokeComposite {
     reuseLinearOpaque = false,
   ) {
     if (!clouds.length && !depthConsumer) {
-      this.target?.dispose();
-      this.target = undefined;
-      this.releaseOpaqueCopy();
+      // Turning away from water or smoke and back is common. Reallocating the
+      // HDR capture and recompiling the copy shader stalled that frame, so keep
+      // them for a short grace period before releasing the memory.
+      const now = performance.now();
+      this.idleSince ??= now;
+      if (now - this.idleSince >= this.idleRelease) {
+        this.target?.dispose();
+        this.target = undefined;
+        this.releaseOpaqueCopy();
+      }
       this.renderOpaque(renderer, scene, camera, beforeOpaque);
       return;
     }
+    this.idleSince = undefined;
     const destination = renderer.getRenderTarget();
     if (destination) this.viewportSize.set(destination.width, destination.height);
     else renderer.getDrawingBufferSize(this.viewportSize);

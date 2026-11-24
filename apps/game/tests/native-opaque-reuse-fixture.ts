@@ -82,6 +82,8 @@ export function nativeOpaqueReuseFixture() {
   target.texture.colorSpace = T.LinearSRGBColorSpace;
   const baseline = new SmokeComposite(),
     reuse = new SmokeComposite();
+  // Rows inspect each frame's own target; skip the idle grace period.
+  baseline.idleRelease = reuse.idleRelease = 0;
   const rows = [];
   const white = new T.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1);
   white.needsUpdate = true;

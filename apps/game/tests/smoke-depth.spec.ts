@@ -105,6 +105,12 @@ test("smoke clips optical depth at actual cover from outside and inside", async 
       disposed = true;
     });
     cloud.batch.visible = false;
+    // Briefly unused captures stay resident so turning back costs no reallocation.
+    composite.render(renderer, scene, camera, []);
+    const retained = composite.target === target && !disposed;
+    composite.render(renderer, scene, camera, [cloud]);
+    const reused = composite.target === target && !disposed;
+    composite.idleRelease = 0;
     composite.render(renderer, scene, camera, []);
     const released = composite.target === undefined;
     renderer.setPixelRatio(0.84327);
@@ -227,6 +233,8 @@ test("smoke clips optical depth at actual cover from outside and inside", async 
       cloudStateRestored,
       failedDrawRestored,
       released,
+      retained,
+      reused,
       fractionalDifference,
       originalViewport,
       restoredViewport,
@@ -291,6 +299,8 @@ test("smoke clips optical depth at actual cover from outside and inside", async 
     targetRestored: true,
     disposed: true,
     released: true,
+    retained: true,
+    reused: true,
     residentBytes: 800 * 600 * 5,
   });
   expect(errors).toEqual([]);
