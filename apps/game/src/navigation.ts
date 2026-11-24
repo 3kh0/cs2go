@@ -230,7 +230,7 @@ export class Navigation {
     }
     return best ? { area: best, height } : undefined;
   }
-  private height(area: NavArea, x: number, z: number) {
+  height(area: NavArea, x: number, z: number) {
     if (this.data.polygons) {
       const plane = this.polygons.get(area)?.plane;
       if (!plane) return area.center[1];

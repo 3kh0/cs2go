@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "f8d7079964f548d691ff2f29b715ed3d24d8796e93cf4e37f0d4e732d3bcb7e7",
+  "release": "9a78c57e2897583f1fab1b28fc3d31b853ba97d83b97d926db0fb62694ac4613",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -37790,6 +37790,17 @@
       "decodedSha256": "1d3aa5ae3f9fa2d584aba671e9a63cabc8075335249400aa40773f8469545f4d",
       "object": "objects/1bf71cd1b42107e85387bc8663a052cd2bff47e8c52113c09accb885e00a5e17.gz"
     },
+    "models/maps/cache-visibility.json": {
+      "sha256": "449a967d6f069f8da34a29a495af93339c1d1f118c4ac4283c3aeb55fc559685",
+      "bytes": 466986,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "30876e4473fc574c1a6189db7329c15c2f37c44f70763fa9aa670737b1299092",
+        "bytes": 71967
+      },
+      "object": "objects/30876e4473fc574c1a6189db7329c15c2f37c44f70763fa9aa670737b1299092.json.br"
+    },
     "models/maps/cache.glb.gz": {
       "sha256": "ee1af25fee404bb85ef013b95b1843620577b4ceeb7dab713af2e078d6a37303",
       "bytes": 44367949,
@@ -37874,6 +37885,17 @@
         "bytes": 220137
       },
       "object": "objects/7fc03c33f6da7dbeeea49070ce3168465baef7b85a5aa3ae856d20c8226fcfdd.hdr.br"
+    },
+    "models/maps/dust2-visibility.json": {
+      "sha256": "3687d48b9b010d087f44d7e8c517d57a5e5ca9167e3ff5842b6e1ab444476494",
+      "bytes": 252844,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "79ee360fd651b8e6075e5095ac237abebb70633562c7dc82d53c62e5cfaaa36b",
+        "bytes": 34547
+      },
+      "object": "objects/79ee360fd651b8e6075e5095ac237abebb70633562c7dc82d53c62e5cfaaa36b.json.br"
     },
     "models/maps/dust2.glb.gz": {
       "sha256": "00924251006747788e162779e92c09ccb62989120f5a2f588fc0076ba1b653a8",
@@ -53512,6 +53534,17 @@
       "decodedSha256": "eb65fac62a107139c6c4cc7c1faa7c657c73fd036cfbb154f070d6c62a73b06a",
       "object": "objects/2259b5210aed4d42d114c1f8445bc3174a4273763673c7805b7fde0f74ade9c4.gz"
     },
+    "models/maps/inferno-visibility.json": {
+      "sha256": "e6e8697ea65a9101b29bf9bef3c31cf797766962c16130a11b691cfa2154c15f",
+      "bytes": 622054,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "79b92066f733de8f8da40acf94d13e8f740daedd3116adf7f99e4cf5747e26fc",
+        "bytes": 58024
+      },
+      "object": "objects/79b92066f733de8f8da40acf94d13e8f740daedd3116adf7f99e4cf5747e26fc.json.br"
+    },
     "models/maps/inferno-water-09/source.json": {
       "sha256": "f0e16304af1bd0047144fda7aa89b38110df0a1b37f3d76db9343f946e1da611",
       "bytes": 157306,
@@ -56174,6 +56207,17 @@
         "bytes": 9545
       },
       "object": "objects/ba4d8c2fe6b5a4b2266dd919c5802f2df5c29dbbc2f7b22d7a37a858e3b93714.json.br"
+    },
+    "models/maps/mirage-visibility.json": {
+      "sha256": "0acb4285986572749cc0600b4aac8c4a4d31fc35c00aadcc5b3b086f566b8159",
+      "bytes": 141224,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "e053c60a247b8ec55473c286c6eb8e8cf7ab77c9802993db92475ad4ec87237a",
+        "bytes": 30131
+      },
+      "object": "objects/e053c60a247b8ec55473c286c6eb8e8cf7ab77c9802993db92475ad4ec87237a.json.br"
     },
     "models/maps/mirage.glb.gz": {
       "sha256": "ed92c0669e100c66864c541bd7168911349e74dc23eb0861aab2877ecaa5b0e7",
@@ -72174,6 +72218,17 @@
       },
       "object": "objects/eb1329f1c5af1e971400e6bca38825fc2b36c8683ea7512fb95e5056474680d3.gz.br"
     },
+    "models/maps/nuke-visibility.json": {
+      "sha256": "efd84bd1e0512d20eb7101cd0a36fad801fc757e8a81329bffa7f24d7ed83d47",
+      "bytes": 580479,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "097545ed059b06727eeae8e1173f6b659e26f108fed1f73f3eb7a02f977acb64",
+        "bytes": 92367
+      },
+      "object": "objects/097545ed059b06727eeae8e1173f6b659e26f108fed1f73f3eb7a02f977acb64.json.br"
+    },
     "models/maps/nuke-water/3491c7824de58b19.bin.gz": {
       "sha256": "5488ac7a71ce5dd75248b920e21d1f668424571aadb63526049c954eb9d1f26f",
       "bytes": 1368728,
@@ -72279,6 +72334,17 @@
         "bytes": 1362
       },
       "object": "objects/2dd4a9a931557401831342bb5c95568a9cadcde4b835d974daeba5d917bf95f8.json.br"
+    },
+    "models/maps/README.md": {
+      "sha256": "2fada05d2c75140d9259471450bdffe62c520d2a03fa0bfbcb78ed50bb7b2259",
+      "bytes": 1818,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "c3a4a70f6dfcb10f9f7a91b700658af11714245d3e08ed2540300a1910b1fc3a",
+        "bytes": 806
+      },
+      "object": "objects/c3a4a70f6dfcb10f9f7a91b700658af11714245d3e08ed2540300a1910b1fc3a.md.br"
     },
     "models/maps/source-manifest.json": {
       "sha256": "6eb8d7b3ca8a670b24367ef0b0045a2f1e728e46241ac4347d01f50e299035b4",
@@ -80195,6 +80261,17 @@
       "bytes": 7034577,
       "decodedSha256": "80ae5d9bb3a6a1a5d23574b37b6fcfeb2a334d13d63ab15ed015a96cad3658c9",
       "object": "objects/ac41bb5ec4db288af8cf8d7e62fc09ec289d7172bad56d55b80c6b7423ef56b4.gz"
+    },
+    "models/maps/vertigo-visibility.json": {
+      "sha256": "785780567530ab656ab8dea9d80e6910034d543d9bcaf1a1bd9c5cb8f41ce2fa",
+      "bytes": 152524,
+      "transport": {
+        "encoding": "br",
+        "quality": 11,
+        "sha256": "ddbc40cf7a71e4e30e400a3c46e9986c8855c7bb2666893f3756a5e9a7b3faf4",
+        "bytes": 33624
+      },
+      "object": "objects/ddbc40cf7a71e4e30e400a3c46e9986c8855c7bb2666893f3756a5e9a7b3faf4.json.br"
     },
     "models/maps/vertigo.glb.gz": {
       "sha256": "37eeba5fcfd0d2aed8800f8eedf5922cfa6fe70b34c8bc8bb05151fb03bc84f2",

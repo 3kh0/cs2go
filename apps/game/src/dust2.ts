@@ -70,6 +70,7 @@ import { loadNativeMapLocalLights, applyNativeMapLocalLights } from "./native-ma
 import { retainImportedSceneryMatrices } from "./imported-scenery-matrices";
 import { bindSourceProbeField } from "./source-probe-field";
 import { NativeEnvironmentParameterField } from "./native-environment-parameter-field";
+import { loadMapVisibility, MapVisibility } from "./map-visibility";
 export type NativeMapConfig = {
   model?: string;
   sun: { pitch: number; yaw: number; color: number; intensity: number };
@@ -142,6 +143,7 @@ async function buildNativeMap(
     return value;
   };
   const sourceLighting = id === "dust2";
+  const visibilityLoad = loadMapVisibility(id);
   // Retain map-specific lighting and reflections: global sky lighting makes
   // indoor props blue. Save background cost without changing those colors.
   const performanceMap = ["vertigo", "nuke", "inferno", "cache"].includes(id);
@@ -692,6 +694,13 @@ async function buildNativeMap(
   const dynamicSun = addSourceDynamicSun(root, sun, asset.scene);
   const doorView = new NativeMapDoorView(asset.scene, doorData.doors);
   doorView.sync(doors.states);
+  const visibilityData = await visibilityLoad;
+  const visibility = visibilityData
+    ? MapVisibility.create(visibilityData, asset.scene, navigation, [
+        ...doorView.objects(),
+        ...breakableView.objects(),
+      ])
+    : undefined;
   resources.capture(asset.scene);
   resources.capture(proxy);
   resources.capture(sun);
@@ -754,6 +763,7 @@ async function buildNativeMap(
     doorPhysics,
     doorView,
     breakableView,
+    visibility,
     sun,
     bombDamage,
     releaseGpuTextures: (retainArrays = false) => {

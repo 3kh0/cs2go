@@ -108,6 +108,12 @@ export class NativeMapBreakableView {
       false,
     );
   }
+  /** Every authored part or piece template whose visibility follows breakage. */
+  *objects() {
+    for (const parts of this.parts.values()) yield* parts;
+    for (const pieces of this.pieces.values()) for (const piece of pieces) yield* piece.parts;
+    for (const parts of this.remainders.values()) yield* parts;
+  }
   sync(
     states: readonly BreakableState[],
     animate = false,

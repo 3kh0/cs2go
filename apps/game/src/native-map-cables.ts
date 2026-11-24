@@ -173,6 +173,9 @@ export function applyNativeMapCables(root: T.Object3D, lookup: T.DataTexture) {
       material.needsUpdate = true;
     }
     installSourceShadowDepth(object);
+    // The vertex shader widens distant cables to a pixel, so a baked ID render
+    // of the raw tube cannot prove them hidden; never cull them.
+    object.userData.visibilityExempt = true;
   }
   return {
     lookup,

@@ -33,6 +33,7 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 - `apps/game/src/physics.ts`: movement, collision, and weapon definitions.
 - `apps/game/src/ballistics.ts`: archived weapon attributes, range attenuation, and penetration damage loss.
 - `apps/game/src/dust2.ts`: native Dust II rendering and lighting.
+- `apps/game/src/map-visibility.ts`: baked per-NAV-area visibility culling of static map draws; rebake with `bun scripts/bake-visibility.mjs <map>` after map geometry changes.
 - `packages/simulation/src/`: shared Dust II collision, movement, C4, weapon and round rules.
 - `apps/server/src/`: authoritative Bun match server; deploy with the root DHI Dockerfile.
 - `apps/game/src/weapons.ts`: GLB loading, first-person hands, and sampled weapon animation tracks.
@@ -48,7 +49,7 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 - `packages/assets/manifest.json`: checked-in SHA-256 release manifest; regenerate with `bun run assets:prepare` after asset changes.
 - `apps/game/`: Vite app workspace and Vercel project root.
 - `turbo.json`: task inputs, cache outputs, and environment configuration.
-- `scripts/`: only the active asset build plugin (`build-assets.mjs`), service worker (`service-worker.js`), and container smoke check (`smoke-container.py`). Recover historical import/conversion and diagnostic tools with `git show 98ab4b7:scripts/<filename>`; their recorded generator names in asset provenance describe historical runs.
+- `scripts/`: only the active asset build plugin (`build-assets.mjs`), service worker (`service-worker.js`), container smoke check (`smoke-container.py`), asset server sync, and the map visibility baker (`bake-visibility.mjs`). Recover historical import/conversion and diagnostic tools with `git show 98ab4b7:scripts/<filename>`; their recorded generator names in asset provenance describe historical runs.
 - `apps/game/tests/game.spec.ts`: browser integration checks. Unit tests live beside source files.
 
 ## Gameplay and performance

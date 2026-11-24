@@ -70,6 +70,11 @@ export class NativeMapDoorView {
       this.entries.set(definition.id, { definition, stages, angle: NaN, stage: -1, hidden: false });
     }
   }
+  /** Every authored leaf that can move or disappear with door state. */
+  *objects() {
+    for (const entry of this.entries.values())
+      for (const stage of entry.stages) for (const part of stage) yield part.object;
+  }
   sync(states: readonly DoorState[]) {
     let changed = false;
     for (const state of states) {

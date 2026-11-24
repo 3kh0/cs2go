@@ -253,17 +253,25 @@ export class GameUtility {
     if (waterVisible) water!.prepareFrame(camera, waterTime, this.game.world.sun);
     this.nativeDepth.color = waterVisible ? water!.color : undefined;
     const effectsVisible = this.game.world.nativeEffects?.needsDepth(camera) ?? false;
-    this.smokeComposite.render(
-      this.game.renderer,
-      this.game.scene,
-      this.game.camera,
-      this.visibleSmoke,
-      this.game.settings.effectsDetail === "low",
-      waterVisible || effectsVisible ? this.nativeDepth : undefined,
-      this.game.world.nativeCoverage?.renderDepth,
-      !!this.game.world.frameComposite,
-    );
+    const draw = () =>
+      this.smokeComposite.render(
+        this.game.renderer,
+        this.game.scene,
+        this.game.camera,
+        this.visibleSmoke,
+        this.game.settings.effectsDetail === "low",
+        waterVisible || effectsVisible ? this.nativeDepth : undefined,
+        this.game.world.nativeCoverage?.renderDepth,
+        !!this.game.world.frameComposite,
+      );
+    // A pending static sun refresh renders every caster, so it must see the whole map.
+    const visibility = this.game.world.sun.shadow.needsUpdate
+      ? undefined
+      : this.game.world.visibility;
+    if (visibility) visibility.render(camera.getWorldPosition(this.eye), draw);
+    else draw();
   }
+  private readonly eye = new T.Vector3();
   renderEffects() {
     const g = this.game;
     if (!g.active) {
