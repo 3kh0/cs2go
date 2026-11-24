@@ -46,7 +46,12 @@ function present(beforePlayers: PlayerState[], afterPlayers: PlayerState[], frac
     request: neutralInput(),
     footstepStride: new FootstepStride(),
     peers: new Map([["peer", bot]]),
-    connection: { history, local: createPlayer("local", "Local", "ct"), step: () => false },
+    connection: {
+      history,
+      local: createPlayer("local", "Local", "ct"),
+      step: () => false,
+      interpolationTarget: (now: number) => now - INTERPOLATION_DELAY_MS,
+    },
   }) as MultiplayerMatch;
   vi.spyOn(performance, "now").mockReturnValue(INTERPOLATION_DELAY_MS + fraction * 100);
   match.simulate(1 / 128);

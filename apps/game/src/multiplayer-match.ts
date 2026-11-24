@@ -15,7 +15,7 @@ import {
   type ServerMessage,
   type PlayerState,
 } from "@cs2go/protocol";
-import { MatchConnection, INTERPOLATION_DELAY_MS } from "./multiplayer-connection";
+import { MatchConnection } from "./multiplayer-connection";
 import type { Game } from "./game";
 import { weapons, movement, isKnife } from "./physics";
 import { createWeaponInstance } from "./weapon-instance";
@@ -960,7 +960,7 @@ export class MultiplayerMatch {
       g.playerAccuracyPose(g.selected),
     );
     g.sway += Math.hypot(local.vx, local.vz) * dt * 1.8;
-    const target = performance.now() - INTERPOLATION_DELAY_MS;
+    const target = this.connection.interpolationTarget(performance.now());
     const history = this.connection.history;
     let before = history[0],
       after = history.at(-1)!;

@@ -5,6 +5,7 @@ import {
   TICK_RATE,
   MAX_PENDING_INPUTS,
   PROTOCOL_VERSION,
+  SNAPSHOT_RATE,
   type Input,
   type DoorState,
   type PlayerState,
@@ -18,8 +19,13 @@ import {
 } from "@cs2go/protocol";
 import { movePlayer } from "@cs2go/simulation/movement";
 import type { DustMap } from "@cs2go/simulation/dust-map";
+import { MAX_REWIND_TICKS } from "@cs2go/simulation/hitbox-history";
 const STEP = 1 / TICK_RATE;
+/** Minimum remote-player buffer; it grows when snapshots arrive unevenly. */
 export const INTERPOLATION_DELAY_MS = 100;
+const MAX_INTERPOLATION_DELAY_MS = 200;
+const SNAPSHOT_MS = 1000 / SNAPSHOT_RATE;
+const REWIND_MS = (MAX_REWIND_TICKS * 1000) / TICK_RATE;
 
 export class MatchConnection {
   socket!: WebSocket;
@@ -31,6 +37,11 @@ export class MatchConnection {
   private attempts = 0;
   private interrupt?: () => void;
   private timeline?: number;
+  /** Peak snapshot lateness behind the best-case arrival, decaying 10 ms/s. */
+  private jitter = 0;
+  private jitterAt = 0;
+  private presentedAt?: number;
+  interpolationDelay = INTERPOLATION_DELAY_MS;
   renderTick?: number;
   private lastTick = -1;
   private decoder = new SnapshotDecoder();
@@ -126,6 +137,9 @@ export class MatchConnection {
           this.history = [];
           this.local = undefined;
           this.timeline = undefined;
+          this.jitter = 0;
+          this.presentedAt = undefined;
+          this.interpolationDelay = INTERPOLATION_DELAY_MS;
           this.renderTick = undefined;
           this.lastTick = -1;
           console.log("[network] Joined", { recovered: this.reconnecting });
@@ -147,6 +161,11 @@ export class MatchConnection {
           const origin = this.lastSnapshot - (message.tick * 1000) / TICK_RATE;
           this.timeline =
             this.timeline === undefined ? origin : Math.min(origin, this.timeline + 0.25);
+          this.jitter = Math.max(
+            origin - this.timeline,
+            this.jitter - (this.lastSnapshot - this.jitterAt) * 0.01,
+          );
+          this.jitterAt = this.lastSnapshot;
           this.history.push({
             tick: message.tick,
             at: this.timeline + (message.tick * 1000) / TICK_RATE,
@@ -230,6 +249,28 @@ export class MatchConnection {
       if (this.socket.readyState === WebSocket.OPEN && this.id)
         this.socket.send(JSON.stringify({ type: "ping", time: performance.now() }));
     }, 1000);
+  }
+  /** Remote-player render time. The buffer covers recent snapshot gaps (Wi-Fi
+   * scans, proxy bursts, long frames) instead of freezing peers between late
+   * packets. It changes playback speed by at most +5%/-20% rather than jumping,
+   * and stays inside the server's hitbox rewind window so lag-compensated
+   * shots at the rendered pose still register. */
+  interpolationTarget(now: number) {
+    const ceiling = Math.max(
+      INTERPOLATION_DELAY_MS,
+      Math.min(MAX_INTERPOLATION_DELAY_MS, REWIND_MS - 10 - this.ping),
+    );
+    const wanted = Math.min(
+      ceiling,
+      Math.max(INTERPOLATION_DELAY_MS, SNAPSHOT_MS + this.jitter + 8),
+    );
+    const elapsed = Math.min(100, Math.max(0, now - (this.presentedAt ?? now)));
+    this.presentedAt = now;
+    this.interpolationDelay += Math.max(
+      -0.05 * elapsed,
+      Math.min(0.2 * elapsed, wanted - this.interpolationDelay),
+    );
+    return now - this.interpolationDelay;
   }
   step(input: Omit<Input, "seq">) {
     if (this.reconnecting || !this.local || this.socket.readyState !== WebSocket.OPEN) return false;

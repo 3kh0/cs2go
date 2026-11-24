@@ -340,6 +340,41 @@ test("packet arrival jitter does not become uneven interpolation spacing", () =>
   connection.close();
 });
 
+test("the interpolation buffer grows to cover periodic late snapshots, then recovers", () => {
+  const { connection, socket, player } = setup();
+  const round = createMatch("casual", testMap()).state;
+  let tick = 0;
+  const play = (seconds: number, stall: number) => {
+    let renderGap = -Infinity;
+    for (let ms = 0; ms < seconds * 1000; ms += 4) {
+      vi.advanceTimersByTime(4);
+      const now = performance.now();
+      // Snapshots every 31.25 ms; once a second the link stalls, then delivers the backlog.
+      const due = Math.floor(now / (1000 / 32));
+      const blocked = stall && now % 1000 < stall;
+      while (!blocked && tick < due * 4) {
+        tick += 4;
+        socket.receive({ type: "snapshot", tick, players: [player], events: [], round });
+      }
+      const target = connection.interpolationTarget(now);
+      if (ms > 1500) renderGap = Math.max(renderGap, target - connection.history.at(-1)!.at);
+    }
+    return renderGap;
+  };
+  const steady = connection.interpolationDelay;
+  const starved = play(4, 130);
+  expect(connection.interpolationDelay).toBeGreaterThan(130);
+  expect(connection.interpolationDelay).toBeLessThanOrEqual(200);
+  // Rendering never runs past the newest snapshot, so peers do not freeze.
+  expect(starved).toBeLessThan(0);
+  play(12, 0);
+  expect(connection.interpolationDelay).toBe(steady);
+  connection.ping = 120;
+  play(4, 130);
+  expect(connection.interpolationDelay).toBeLessThanOrEqual(120);
+  connection.close();
+});
+
 test("an unresponsive transport starts recovery without waiting for its close handshake", () => {
   const { connection, socket } = setup();
   socket.receive({
