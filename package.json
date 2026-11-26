@@ -15,6 +15,7 @@
     "test:browser": "turbo run test:browser",
     "check": "oxfmt --check . && oxlint scripts packages/assets && turbo run check",
     "assets:prepare": "bun run --cwd packages/assets generate",
+    "assets:check": "bun run --cwd packages/assets check",
     "assets:verify": "bun run --cwd packages/assets verify",
     "assets:sync": "bun run --cwd packages/assets sync",
     "test:tools": "vitest run",

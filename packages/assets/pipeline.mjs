@@ -1,3 +1,4 @@
+import { spawn, execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readdir, readFile, writeFile, mkdir, rename, stat } from "node:fs/promises";
 import { join, relative, extname } from "node:path";
@@ -74,9 +75,11 @@ async function identities(directory, reuse) {
         },
       };
     },
-    async save() {
+    // `keep` retains unvisited entries for passes that only read some files.
+    async save(keep = false) {
       const temporary = `${path}.tmp-${process.pid}-${Date.now()}`;
-      await writeFile(temporary, JSON.stringify({ version: 1, entries: next }));
+      const entries = keep ? { ...saved, ...next } : next;
+      await writeFile(temporary, JSON.stringify({ version: 1, entries }));
       await rename(temporary, path);
     },
   };
@@ -239,7 +242,114 @@ export async function prepare(
   );
   return { version: 2, release: releaseId(ordered), files: ordered };
 }
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+const hashBlob = (directory, path) =>
+  new Promise((resolve, reject) => {
+    const git = spawn("git", ["cat-file", "blob", `HEAD:./${path}`], {
+      cwd: directory,
+      stdio: ["ignore", "pipe", "inherit"],
+    });
+    const hash = createHash("sha256");
+    let bytes = 0;
+    git.stdout.on("data", (chunk) => {
+      hash.update(chunk);
+      bytes += chunk.length;
+    });
+    git.on("error", reject);
+    git.on("close", (code) =>
+      code === 0
+        ? resolve({ sha256: hash.digest("hex"), bytes })
+        : reject(new Error(`git cat-file failed for ${path}`)),
+    );
+  });
+// Compare source paths and bytes with the manifest without compressing
+// anything, so a stale manifest fails in seconds rather than on the server.
+// `verify` remains the full wire-byte check. With `base`, read Git's HEAD tree:
+// every path is checked, and contents changed since `base` are hashed from
+// blobs, which suits a blobless CI checkout.
+export async function staleSources(manifest, { directory = root, base } = {}) {
+  const expected = new Map(
+    Object.entries(manifest.files).map(([path, entry]) => [entry.input ?? path, entry]),
+  );
+  const publicDir = join(directory, "public");
+  const git = (...args) =>
+    execFileSync("git", args, { cwd: directory, encoding: "utf8", maxBuffer: 1 << 30 })
+      .split("\0")
+      .filter((path) => path && !path.split("/").some((part) => part.startsWith(".")));
+  const inputs = base
+    ? git("ls-tree", "-r", "-z", "--name-only", "HEAD", "--", "public")
+    : (await files(publicDir)).map((file) => relative(directory, file).replaceAll("\\", "/"));
+  const changed = base
+    ? new Set(
+        git(
+          "diff",
+          "-z",
+          "--name-only",
+          "--relative",
+          "--no-renames",
+          base,
+          "HEAD",
+          "--",
+          "public",
+        ),
+      )
+    : undefined;
+  const memo = base ? undefined : await identities(directory, true);
+  const problems = [];
+  let cursor = 0;
+  await Promise.all(
+    Array.from({ length: 6 }, async () => {
+      while (cursor < inputs.length) {
+        const input = inputs[cursor++];
+        const path = input.slice("public/".length);
+        const entry = expected.get(path);
+        expected.delete(path);
+        if (!entry) {
+          problems.push(`unlisted: ${path}`);
+          continue;
+        }
+        let actual;
+        if (changed) {
+          if (!changed.has(input)) continue;
+          actual = await hashBlob(directory, input);
+        } else {
+          const source = await memo.lookup(join(directory, input));
+          if (source.value) actual = source.value;
+          else {
+            const raw = await readFile(join(directory, input));
+            actual = { sha256: sha256(raw), bytes: raw.length };
+          }
+          source.remember(actual);
+        }
+        // A .glb entry describes its gzip wire file; only its input hash is raw.
+        if (
+          actual.sha256 !== (entry.inputSha256 ?? entry.sha256) ||
+          (!entry.input && actual.bytes !== entry.bytes)
+        )
+          problems.push(`changed: ${path}`);
+      }
+    }),
+  );
+  await memo?.save(true);
+  for (const path of expected.keys()) problems.push(`missing: ${path}`);
+  return problems.sort();
+}
+if (process.argv[1] === fileURLToPath(import.meta.url) && process.argv[2] === "check") {
+  const manifest = await readManifest();
+  if (!manifest) throw new Error("Missing asset manifest");
+  const since = process.argv.indexOf("--since");
+  const problems = await staleSources(manifest, {
+    base: since > 0 ? process.argv[since + 1] : undefined,
+  });
+  if (problems.length) {
+    console.error(problems.slice(0, 20).join("\n"));
+    console.error(
+      `Asset manifest is stale for ${problems.length} source file(s). Run bun run assets:prepare and commit packages/assets/manifest.json.`,
+    );
+    process.exit(1);
+  }
+  console.log(`Asset manifest matches ${Object.keys(manifest.files).length} source files`);
+}
+if (process.argv[1] === fileURLToPath(import.meta.url) && process.argv[2] !== "check") {
   const destination = join(root, "manifest.json");
   const verifying = process.argv[2] === "verify";
   const expected = await readManifest();

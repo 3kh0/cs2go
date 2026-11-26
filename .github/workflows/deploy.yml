@@ -74,7 +74,24 @@ jobs:
         with:
           filter: blob:none
           sparse-checkout-cone-mode: false
-          sparse-checkout: /packages/assets/manifest.json
+          sparse-checkout: |
+            /packages/assets/manifest.json
+            /packages/assets/pipeline.mjs
+      - name: Check the manifest against pushed asset changes
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # Every path is checked; contents changed by this push are hashed from
+          # their blobs. na1 still performs the full wire-byte verification.
+          base=HEAD
+          if [ "$GITHUB_EVENT_NAME" = push ] && [ "$BEFORE" != 0000000000000000000000000000000000000000 ]; then
+            if git fetch --no-tags --depth=1 --filter=blob:none origin "$BEFORE"; then
+              base=$BEFORE
+            else
+              echo "::warning::Could not fetch $BEFORE; checking asset paths only"
+            fi
+          fi
+          node packages/assets/pipeline.mjs check --since "$base"
       - name: Wait for the independent na1 sync service
         env:
           ASSET_CDN_URL: ${{ vars.ASSET_CDN_URL }}
@@ -86,8 +103,10 @@ jobs:
           const manifest = JSON.parse(body);
           const tree = execFileSync('git', ['rev-parse', 'HEAD:packages/assets'], { encoding: 'utf8' }).trim();
           const base = `${process.env.ASSET_CDN_URL.replace(/\/$/, '')}/releases/${manifest.release}`;
-          const deadline = Date.now() + 115 * 60_000;
+          const started = Date.now();
+          const deadline = started + 115 * 60_000;
           while (Date.now() < deadline) {
+            let failure;
             try {
               const receipt = await fetch(`${base}/verified/${tree}.json`, { signal: AbortSignal.timeout(30_000) });
               if (receipt.ok && await receipt.text() === body) {
@@ -97,8 +116,18 @@ jobs:
                   process.exit(0);
                 }
               }
+              // na1 records consecutive failures for this tree and clears them on success.
+              const status = await fetch(`${base}/failed/${tree}.json?checked=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(30_000) });
+              if (status.ok) failure = await status.json();
             } catch (error) {
               console.log(`Publication check will retry: ${error.message}`);
+            }
+            if (failure) {
+              console.log(`na1 sync attempt failed (${failure.failures} in a row): ${failure.reason}`);
+              // Require a failure recorded after this job started, so a rerun after an
+              // infrastructure fix is not failed by an older status.
+              if (failure.failures >= 3 && Date.parse(failure.at) > started)
+                throw new Error(`na1 could not publish asset tree ${tree}: ${failure.reason}`);
             }
             console.log(`Waiting for na1 to publish ${manifest.release}`);
             await new Promise(resolve => setTimeout(resolve, 30_000));

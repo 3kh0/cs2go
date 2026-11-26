@@ -153,6 +153,25 @@ def verification_receipt(client, bucket, manifest, root, tree):
                     CacheControl='public, max-age=31536000, immutable')
 
 
+def failure_key(release, tree):
+    for identity in (release, tree):
+        if len(identity) not in (40, 64) or any(c not in '0123456789abcdef' for c in identity):
+            raise ValueError('Invalid asset release or Git tree identity')
+    return f'releases/{release}/failed/{tree}.json'
+
+
+def record_failure(client, bucket, release, tree, failures, reason):
+    """Public, mutable status so the deploy workflow can stop waiting with the server's reason."""
+    body = json.dumps({'tree': tree, 'failures': failures, 'reason': reason[:500],
+                       'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())})
+    client.put_object(Bucket=bucket, Key=failure_key(release, tree), Body=body.encode(),
+                      ContentType='application/json', CacheControl='no-store')
+
+
+def clear_failure(client, bucket, release, tree):
+    client.delete_object(Bucket=bucket, Key=failure_key(release, tree))
+
+
 def seed_cache(client, bucket, manifest, root=ROOT, pause=time.sleep):
     """Reuse verified wire bytes, including shared objects from partial releases."""
     client = RetryingClient(client, pause)
@@ -354,8 +373,17 @@ if __name__ == '__main__':
                           config=Config(retries={'max_attempts': 5, 'mode': 'adaptive'}, max_pool_connections=TRANSFER_WORKERS))
     client.meta.events.register('before-call.s3.CopyObject', guard_copy_destination)
     mode = sys.argv[1] if len(sys.argv) > 1 else 'publish'
-    manifest = json.loads((ROOT / 'manifest.json').read_text())
     tree = os.environ.get('ASSET_TREE')
+    if mode in ('failed', 'clear-failure'):
+        # The checkout may not match the fetched commit, so the caller names the release.
+        release = os.environ['ASSET_RELEASE']
+        if mode == 'failed':
+            record_failure(RetryingClient(client), os.environ['R2_BUCKET'], release, tree,
+                           int(os.environ['ASSET_FAILURES']), os.environ['ASSET_FAILURE'])
+        else:
+            clear_failure(RetryingClient(client), os.environ['R2_BUCKET'], release, tree)
+        sys.exit(0)
+    manifest = json.loads((ROOT / 'manifest.json').read_text())
     if mode == 'status':
         complete = published_status(RetryingClient(client), os.environ['R2_BUCKET'], manifest, tree=tree)
         print(f'Exact asset tree already verified and published: {complete}')

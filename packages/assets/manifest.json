@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "release": "9a78c57e2897583f1fab1b28fc3d31b853ba97d83b97d926db0fb62694ac4613",
+  "release": "f4d2eb9ed12e44c0f05fd92a99de971712b32708c3c743f0cddbbfd6b3892175",
   "files": {
     "audio/acoustics/dust2-pathing.bin.gz": {
       "sha256": "97831ef76e36e3e3792c81b294078fe1ecb1b913b27ac70175047671234434da",
@@ -72336,15 +72336,15 @@
       "object": "objects/2dd4a9a931557401831342bb5c95568a9cadcde4b835d974daeba5d917bf95f8.json.br"
     },
     "models/maps/README.md": {
-      "sha256": "2fada05d2c75140d9259471450bdffe62c520d2a03fa0bfbcb78ed50bb7b2259",
-      "bytes": 1818,
+      "sha256": "bdfa256d24809eb649b4137c8c9b7d0c47c0cbb4f06ef77468ee5c94a8525d2b",
+      "bytes": 1918,
       "transport": {
         "encoding": "br",
         "quality": 11,
-        "sha256": "c3a4a70f6dfcb10f9f7a91b700658af11714245d3e08ed2540300a1910b1fc3a",
-        "bytes": 806
+        "sha256": "6fdfd0548b6ed12eb17dff3e094d60ca32610c713f81b38141eb2ad7fdb516a6",
+        "bytes": 848
       },
-      "object": "objects/c3a4a70f6dfcb10f9f7a91b700658af11714245d3e08ed2540300a1910b1fc3a.md.br"
+      "object": "objects/6fdfd0548b6ed12eb17dff3e094d60ca32610c713f81b38141eb2ad7fdb516a6.md.br"
     },
     "models/maps/source-manifest.json": {
       "sha256": "6eb8d7b3ca8a670b24367ef0b0045a2f1e728e46241ac4347d01f50e299035b4",
