@@ -20,7 +20,7 @@ async function device() {
   devicePromise ??= (async () => {
     const adapter = await navigator.gpu?.requestAdapter();
     if (!adapter)
-      throw new Error("Skin customization needs WebGPU. Open the game in current Chrome or Edge.");
+      throw new Error("Skin customization needs WebGPU, which this browser did not provide.");
     // Native glove composites bind more than WebGPU's default 16 textures.
     const gpu = await adapter.requestDevice({
       requiredLimits: {

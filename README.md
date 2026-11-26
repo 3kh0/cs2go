@@ -7,7 +7,7 @@ A browser port of Counter-Strike 2, powered by Three.js. This is in early beta b
 
 Vertigo, Nuke, Inferno and Cache are available as early map previews alongside Dust II and Mirage. Visual parity and performance tuning are still in progress.
 
-Hardware-accelerated Chrome is recommended. Firefox is not supported because Firefox decides to be special and not support many of the cool APIs we use.
+Hardware-accelerated Chrome is recommended. Firefox and Zen are supported too. Skin customization uses WebGPU.
 
 ## How to play
 
