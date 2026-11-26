@@ -14,7 +14,7 @@ After changing anything under `public/`, run `bun run assets:prepare` and commit
 
 The na1 user service `cs2go-assets-sync` (`scripts/sync-assets-server.sh`, every 2 minutes) verifies the `main` tip and publishes it to R2. It then writes `releases/<release>/verified/<asset tree>.json`.
 
-The deploy workflow first runs `pipeline.mjs check --since <previous push>`. It checks every path in the commit's tree and hashes the blobs this push changed, so a stale manifest fails within seconds. The workflow then waits for the verification receipt.
+The deploy workflow diffs against the last successful deploy run, not the previous push, so the changes of a failed or superseded run still ship. It first runs `pipeline.mjs check --since <that commit>`, which checks every path in the tree and hashes the blobs changed since then, so a stale manifest fails within seconds. The workflow then waits for the verification receipt.
 
 When a sync attempt fails, na1 writes `releases/<release>/failed/<asset tree>.json` with the consecutive failure count and the first error line, and deletes it after a successful run. The workflow stops after three consecutive failures if at least one was recorded after the wait began.
 

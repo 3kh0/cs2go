@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: production-release
   cancel-in-progress: false
@@ -16,6 +17,7 @@ jobs:
       deploy: ${{ steps.diff.outputs.deploy }}
       client: ${{ steps.diff.outputs.client }}
       server: ${{ steps.diff.outputs.server }}
+      base: ${{ steps.diff.outputs.base }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -24,13 +26,21 @@ jobs:
           sparse-checkout: .github
       - id: diff
         env:
-          BEFORE: ${{ github.event.before }}
           EVENT: ${{ github.event_name }}
+          GH_TOKEN: ${{ github.token }}
         run: |
+          # Diff against the last successful release rather than the previous push:
+          # a failed run, or a queued run superseded by a newer push, still ships.
+          BEFORE=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/deploy.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].head_sha // empty' || true)
+          if [ -n "$BEFORE" ] && ! git fetch --no-tags --depth=1 --filter=blob:none origin "$BEFORE"; then
+            BEFORE=
+          fi
+          echo "Changes since ${BEFORE:-the beginning}"
+          echo "base=${BEFORE:-HEAD}" >> "$GITHUB_OUTPUT"
           assets=false
           client=false
           server=false
-          if [ "$EVENT" = workflow_dispatch ] || [ "$BEFORE" = 0000000000000000000000000000000000000000 ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+          if [ "$EVENT" = workflow_dispatch ] || [ -z "$BEFORE" ]; then
             assets=true
             client=true
             server=true
@@ -77,18 +87,18 @@ jobs:
           sparse-checkout: |
             /packages/assets/manifest.json
             /packages/assets/pipeline.mjs
-      - name: Check the manifest against pushed asset changes
+      - name: Check the manifest against asset changes since the last release
         env:
-          BEFORE: ${{ github.event.before }}
+          BASE: ${{ needs.changes.outputs.base }}
         run: |
-          # Every path is checked; contents changed by this push are hashed from
-          # their blobs. na1 still performs the full wire-byte verification.
+          # Every path is checked; contents changed since the last successful
+          # release are hashed from their blobs. na1 still verifies wire bytes.
           base=HEAD
-          if [ "$GITHUB_EVENT_NAME" = push ] && [ "$BEFORE" != 0000000000000000000000000000000000000000 ]; then
-            if git fetch --no-tags --depth=1 --filter=blob:none origin "$BEFORE"; then
-              base=$BEFORE
+          if [ "$BASE" != HEAD ]; then
+            if git fetch --no-tags --depth=1 --filter=blob:none origin "$BASE"; then
+              base=$BASE
             else
-              echo "::warning::Could not fetch $BEFORE; checking asset paths only"
+              echo "::warning::Could not fetch $BASE; checking asset paths only"
             fi
           fi
           node packages/assets/pipeline.mjs check --since "$base"
