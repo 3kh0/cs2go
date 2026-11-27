@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: production-release
   cancel-in-progress: false
@@ -16,6 +17,7 @@ jobs:
       deploy: ${{ steps.diff.outputs.deploy }}
       client: ${{ steps.diff.outputs.client }}
       server: ${{ steps.diff.outputs.server }}
+      base: ${{ steps.diff.outputs.base }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -24,13 +26,21 @@ jobs:
           sparse-checkout: .github
       - id: diff
         env:
-          BEFORE: ${{ github.event.before }}
           EVENT: ${{ github.event_name }}
+          GH_TOKEN: ${{ github.token }}
         run: |
+          # Diff against the last successful release rather than the previous push:
+          # a failed run, or a queued run superseded by a newer push, still ships.
+          BEFORE=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/deploy.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].head_sha // empty' || true)
+          if [ -n "$BEFORE" ] && ! git fetch --no-tags --depth=1 --filter=blob:none origin "$BEFORE"; then
+            BEFORE=
+          fi
+          echo "Changes since ${BEFORE:-the beginning}"
+          echo "base=${BEFORE:-HEAD}" >> "$GITHUB_OUTPUT"
           assets=false
           client=false
           server=false
-          if [ "$EVENT" = workflow_dispatch ] || [ "$BEFORE" = 0000000000000000000000000000000000000000 ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+          if [ "$EVENT" = workflow_dispatch ] || [ -z "$BEFORE" ]; then
             assets=true
             client=true
             server=true
@@ -74,7 +84,24 @@ jobs:
         with:
           filter: blob:none
           sparse-checkout-cone-mode: false
-          sparse-checkout: /packages/assets/manifest.json
+          sparse-checkout: |
+            /packages/assets/manifest.json
+            /packages/assets/pipeline.mjs
+      - name: Check the manifest against asset changes since the last release
+        env:
+          BASE: ${{ needs.changes.outputs.base }}
+        run: |
+          # Every path is checked; contents changed since the last successful
+          # release are hashed from their blobs. na1 still verifies wire bytes.
+          base=HEAD
+          if [ "$BASE" != HEAD ]; then
+            if git fetch --no-tags --depth=1 --filter=blob:none origin "$BASE"; then
+              base=$BASE
+            else
+              echo "::warning::Could not fetch $BASE; checking asset paths only"
+            fi
+          fi
+          node packages/assets/pipeline.mjs check --since "$base"
       - name: Wait for the independent na1 sync service
         env:
           ASSET_CDN_URL: ${{ vars.ASSET_CDN_URL }}
@@ -86,8 +113,10 @@ jobs:
           const manifest = JSON.parse(body);
           const tree = execFileSync('git', ['rev-parse', 'HEAD:packages/assets'], { encoding: 'utf8' }).trim();
           const base = `${process.env.ASSET_CDN_URL.replace(/\/$/, '')}/releases/${manifest.release}`;
-          const deadline = Date.now() + 115 * 60_000;
+          const started = Date.now();
+          const deadline = started + 115 * 60_000;
           while (Date.now() < deadline) {
+            let failure;
             try {
               const receipt = await fetch(`${base}/verified/${tree}.json`, { signal: AbortSignal.timeout(30_000) });
               if (receipt.ok && await receipt.text() === body) {
@@ -97,8 +126,18 @@ jobs:
                   process.exit(0);
                 }
               }
+              // na1 records consecutive failures for this tree and clears them on success.
+              const status = await fetch(`${base}/failed/${tree}.json?checked=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(30_000) });
+              if (status.ok) failure = await status.json();
             } catch (error) {
               console.log(`Publication check will retry: ${error.message}`);
+            }
+            if (failure) {
+              console.log(`na1 sync attempt failed (${failure.failures} in a row): ${failure.reason}`);
+              // Require a failure recorded after this job started, so a rerun after an
+              // infrastructure fix is not failed by an older status.
+              if (failure.failures >= 3 && Date.parse(failure.at) > started)
+                throw new Error(`na1 could not publish asset tree ${tree}: ${failure.reason}`);
             }
             console.log(`Waiting for na1 to publish ${manifest.release}`);
             await new Promise(resolve => setTimeout(resolve, 30_000));

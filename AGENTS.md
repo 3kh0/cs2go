@@ -9,7 +9,7 @@ Read the relevant implementation before editing. Preserve the user's changes and
 ## Toolchain
 
 - Package manager: Bun 1.4.5, pinned in `package.json`. Commit `bun.lock` when dependencies change; keep one package-manager lockfile.
-- Vite: 8.3.6. Import `defineConfig` from `vite` and unit-test helpers from `vitest`. Use standalone Oxlint 1.92.0 and Oxfmt 0.77.0. Keep TypeScript on v6 (currently 6.0.3); Playwright is 1.65.0.
+- Vite: 8.3.6. Import `defineConfig` from `vite` and unit-test helpers from `vitest`. Use standalone Oxlint 1.92.0 and Oxfmt 0.77.0. Keep TypeScript on v6 (currently 6.0.3); Playwright is 1.65.1.
 - `bunfig.toml` enables Bun for local JavaScript CLIs launched through `bun run`.
 - Install with `bun install --frozen-lockfile`. Use `bun add` / `bun remove` to update dependencies. Do not use npm, npx, or generate `package-lock.json`.
 
@@ -46,7 +46,7 @@ Install browser binaries when needed with `bun run --bun playwright install chro
 - `apps/game/src/soundscape.ts`: music, movement/UI cues, and master/music/effects volume buses.
 - `apps/game/src/style.css`: menu, settings, HUD, scope, and kill-feed styling.
 - `packages/assets/public/`: bundled models, audio, icons, and fonts.
-- `packages/assets/manifest.json`: checked-in SHA-256 release manifest; regenerate with `bun run assets:prepare` after asset changes.
+- `packages/assets/manifest.json`: checked-in SHA-256 release manifest; regenerate with `bun run assets:prepare` after any change under `packages/assets/public/` (READMEs included). `bun run check` fails while it is stale; see `packages/assets/README.md`.
 - `apps/game/`: Vite app workspace and Vercel project root.
 - `turbo.json`: task inputs, cache outputs, and environment configuration.
 - `scripts/`: only the active asset build plugin (`build-assets.mjs`), service worker (`service-worker.js`), container smoke check (`smoke-container.py`), asset server sync, and the map visibility baker (`bake-visibility.mjs`). Recover historical import/conversion and diagnostic tools with `git show 98ab4b7:scripts/<filename>`; their recorded generator names in asset provenance describe historical runs.
