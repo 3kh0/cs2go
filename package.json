@@ -22,7 +22,7 @@
     "format": "oxfmt ."
   },
   "devDependencies": {
-    "@types/node": "^26.6.6",
+    "@types/node": "^26.6.7",
     "meshoptimizer": "1.3.0",
     "oxfmt": "^0.80.0",
     "oxlint": "^1.95.0",
