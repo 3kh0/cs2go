@@ -1303,6 +1303,9 @@ export class Game {
     document.addEventListener("contextmenu", (e) => e.preventDefault());
     window.addEventListener("resize", () => {
       this.resizeRenderer();
+      // Resizing clears the drawing buffer. Render on the next frame instead of
+      // waiting for the menu's 30 Hz cap, which showed as a blank flash.
+      this.lastRender = 0;
     });
   }
   syncPointerLock() {

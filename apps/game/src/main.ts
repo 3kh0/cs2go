@@ -2,7 +2,6 @@ import "./home-popup.css";
 import "./fonts.css";
 
 const userAgent = navigator.userAgent;
-const firefox = /(?:Firefox|FxiOS)\//i.test(userAgent);
 const mobile =
   (navigator as Navigator & { userAgentData?: { mobile?: boolean } }).userAgentData?.mobile ===
     true ||
@@ -10,12 +9,10 @@ const mobile =
   // iPadOS can report a desktop Mac user agent.
   (/Macintosh/i.test(userAgent) && navigator.maxTouchPoints > 1);
 
-if (!firefox && !mobile) {
+if (!mobile) {
   void import("./app");
 } else {
-  const message = mobile
-    ? "Mobile browsers are not supported. Please use a desktop computer to play CS2GO."
-    : "Firefox is not supported. Please use another desktop browser, such as Chrome or Edge, to play CS2GO.";
+  const message = "Mobile browsers are not supported. Please use a desktop computer to play CS2GO.";
   document.body.style.cssText = 'margin:0;background:#000;font-family:"Stratum2",sans-serif';
   document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <section id="home-panel" role="dialog" aria-modal="true" aria-labelledby="home-panel-title">

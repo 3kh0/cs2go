@@ -138,18 +138,32 @@ export class SpatialAudio {
     this.forward.setFromMatrixColumn(camera.matrixWorld, 2).normalize().negate();
     this.up.set(0, 1, 0).applyQuaternion(camera.quaternion);
     const listener = context.listener;
-    for (const [parameter, value] of [
-      [listener.positionX, this.position.x],
-      [listener.positionY, this.position.y],
-      [listener.positionZ, this.position.z],
-      [listener.forwardX, this.forward.x],
-      [listener.forwardY, this.forward.y],
-      [listener.forwardZ, this.forward.z],
-      [listener.upX, this.up.x],
-      [listener.upY, this.up.y],
-      [listener.upZ, this.up.z],
-    ] as const)
-      parameter.value = value;
+    // Gecko exposes the listener through setPosition/setOrientation; its per-axis
+    // AudioParams are missing, and writing them threw every frame.
+    if (listener.positionX) {
+      for (const [parameter, value] of [
+        [listener.positionX, this.position.x],
+        [listener.positionY, this.position.y],
+        [listener.positionZ, this.position.z],
+        [listener.forwardX, this.forward.x],
+        [listener.forwardY, this.forward.y],
+        [listener.forwardZ, this.forward.z],
+        [listener.upX, this.up.x],
+        [listener.upY, this.up.y],
+        [listener.upZ, this.up.z],
+      ] as const)
+        parameter.value = value;
+    } else {
+      listener.setPosition(this.position.x, this.position.y, this.position.z);
+      listener.setOrientation(
+        this.forward.x,
+        this.forward.y,
+        this.forward.z,
+        this.up.x,
+        this.up.y,
+        this.up.z,
+      );
+    }
     this.updateRoom(context);
     // One room trace plus at most eleven voice/path traces per frame. Probe
     // sampling is spread over 360 ms, voice refreshes over 125 ms.
